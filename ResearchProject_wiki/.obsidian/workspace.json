@@ -1,14 +1,14 @@
 {
   "main": {
-    "id": "0c44f9187f433ea1",
+    "id": "090a1272da3bfe30",
     "type": "split",
     "children": [
       {
-        "id": "1c1e71829ac8e30d",
+        "id": "620b4a91ba242c79",
         "type": "tabs",
         "children": [
           {
-            "id": "1525adff43447a7d",
+            "id": "524bcf5aa15c1474",
             "type": "leaf",
             "state": {
               "type": "graph",
@@ -23,15 +23,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "c67d8d1fe1a01d6d",
+    "id": "582ac2878f1ec53a",
     "type": "split",
     "children": [
       {
-        "id": "d1a3c6316ebe63bd",
+        "id": "077273f319bb72a1",
         "type": "tabs",
         "children": [
           {
-            "id": "01d1133e1161f387",
+            "id": "02f369cf3bcac52f",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -44,7 +44,7 @@
             }
           },
           {
-            "id": "58246d7fb3b20250",
+            "id": "178d12cad12ab6fe",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -61,7 +61,7 @@
             }
           },
           {
-            "id": "e963012630e1a2f0",
+            "id": "21317ea121ea3fab",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -77,15 +77,15 @@
     "width": 300
   },
   "right": {
-    "id": "10bada85dbe4b260",
+    "id": "15e0c645ac8e4ccf",
     "type": "split",
     "children": [
       {
-        "id": "0369b8a0ec32af14",
+        "id": "564de79966ab8b42",
         "type": "tabs",
         "children": [
           {
-            "id": "e6ad076f32e6796e",
+            "id": "3307901c75321df2",
             "type": "leaf",
             "state": {
               "type": "backlink",
@@ -103,7 +103,7 @@
             }
           },
           {
-            "id": "71dee925aad17d13",
+            "id": "72d4fb2d520bb2ff",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
@@ -116,7 +116,7 @@
             }
           },
           {
-            "id": "d2e2e91c6023be4d",
+            "id": "a39180c3bfe68a03",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -131,7 +131,7 @@
             }
           },
           {
-            "id": "1cba6bede082bd97",
+            "id": "dfdd5b1b138ae8f0",
             "type": "leaf",
             "state": {
               "type": "all-properties",
@@ -145,17 +145,18 @@
             }
           },
           {
-            "id": "118dbdeff6b1cfe0",
+            "id": "da10dc6b6d384321",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
+                "file": "Welcome.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of Welcome"
             }
           }
         ]
@@ -176,29 +177,31 @@
       "bases:Create new base": false
     }
   },
-  "active": "1525adff43447a7d",
+  "active": "02f369cf3bcac52f",
   "lastOpenFiles": [
-    "raw/Zarrouk and Purnanto 2014.pdf",
-    "wiki/concepts/two-phase-flow-regime-vs-cfd-representation.md",
-    "wiki/entities/turbulence-rng-k-epsilon.md",
-    "wiki/entities/solver-pressure-based-simple-presto.md",
-    "Welcome.md",
+    "wiki/gaps/open-questions.md",
+    "wiki/model/validation.md",
+    "wiki/model/inlet-regimes.md",
+    "wiki/model/baseline-cfd.md",
+    "wiki/literature/matrix.md",
+    "wiki/technical/sources/purnanto-etal-2013.md",
+    "wiki/progress/blockers.md",
+    "wiki/progress/experiments.md",
+    "wiki/progress/current-status.md",
+    "wiki/project/objective-and-scope.md",
     "wiki/log.md",
     "wiki/index.md",
-    "wiki/entities/multiphase-dpm-particle-tracking.md",
-    "wiki/entities/geometry-vertical-boc-cyclone-separator.md",
-    "wiki/setups/geothermal-boc-separator-fluent-2013-baseline.md",
-    "wiki/sources/purnanto-2013-cfd-geothermal-separator.md",
+    "wiki/model",
     "wiki/synthesis",
-    "wiki/concepts",
-    "wiki/entities",
-    "wiki/setups",
-    "wiki/sources",
-    "raw/informit.366967552564856.pdf",
-    "informit.366967552564856.pdf",
+    "wiki/gaps",
+    "wiki/literature",
+    "wiki/technical/sources",
+    "wiki/technical/model-rebuild",
+    "wiki/technical",
+    "wiki/progress",
+    "wiki/project",
     "AGENTS.md",
-    "template",
-    "wiki",
-    "raw"
+    "raw/Zarrouk and Purnanto 2014.pdf",
+    "Welcome.md"
   ]
 }

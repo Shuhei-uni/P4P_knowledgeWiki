@@ -34,8 +34,14 @@ The study uses RANS with RNG k-epsilon turbulence modeling, incompressible/isoth
 ## D) Boundary and Initial Conditions
 - BC types: mass-flow inlet and pressure outlet in final simulation setup ([purnanto-2013], p.6).
 - Pressure settings: inlet 11.4 bar, outlet 11.2 bar ([purnanto-2013], p.6).
-- Initialization: Hybrid Initialization ([purnanto-2013], p.6).
+- Initialization method: Hybrid Initialization ([purnanto-2013], p.6).
+- Initialization rationale: authors say Hybrid Initialization was used because the user "did not need to provide additional inputs for initialization" and because it "might improve the convergence robustness for many cases" ([purnanto-2013], p.6).
+- Initialization values: Missing. The paper does not report initialized fields for pressure, velocity, turbulence variables, or volume fraction ([purnanto-2013], p.6).
 - Other assumptions: smooth wall, gravity in -y, fixed water level, gauge/absolute pressure equivalence assumption ([purnanto-2013], p.5).
+- Inlet-state assumptions adjacent to initialization but not equivalent to Fluent field initialization:
+  - two-phase inlet is assumed to be mist flow with gas as continuous primary phase and liquid as dispersed secondary phase ([purnanto-2013], p.5).
+  - liquid droplets are initially set uniform with average diameter 1e-5 m (10 um) ([purnanto-2013], p.5).
+  - steady-state focus, incompressible flow, no flashing, isothermal flow, and constant water level just above brine outlet ([purnanto-2013], p.5).
 
 ## E) Mesh and Numerics
 - Geometry build: CAD DesignModeler ([purnanto-2013], p.6).
@@ -57,6 +63,7 @@ The study uses RANS with RNG k-epsilon turbulence modeling, incompressible/isoth
 
 ## G) Reproducibility Risk
 ### Missing Parameter List
+- Initialized values for all solution variables are not reported.
 - Residual target values for convergence are not reported.
 - Monitor-based stopping criteria are not reported.
 - Under-relaxation factors are not reported.
@@ -74,11 +81,18 @@ The study uses RANS with RNG k-epsilon turbulence modeling, incompressible/isoth
 ### Minimal Sensitivity Tests
 1. Mesh refinement around inlet, vortex core, and outlet tube.
 2. Alternate pressure-velocity coupling/scheme checks (SIMPLE vs SIMPLEC; PRESTO retained).
-3. Particle tracking step limit and injection-distribution sensitivity.
+3. Hybrid Initialization sensitivity versus patched/standard initialization because no initialized field values are reported.
+4. Particle tracking step limit and injection-distribution sensitivity.
 
 ## H) Cross-Paper Linkage (Mandatory)
-- Closest related prior papers in this wiki: none yet (first ingest).
-- Reuse recommendation: use this source as baseline template for geothermal cyclone separator setup extraction.
+- Closest related papers in this wiki:
+  - [zarrouk-purnanto-2014-geothermal-separator-design-overview](zarrouk-purnanto-2014-geothermal-separator-design-overview.md)
+  - [rivas-cruz-2015-geothermal-separator-state-of-art-review](rivas-cruz-2015-geothermal-separator-state-of-art-review.md)
+  - [mubarok-2020-cfd-geothermal-flow-meters](mubarok-2020-cfd-geothermal-flow-meters.md)
+- Relations:
+  - `supported-by`: separator design logic and deployment context are expanded in the 2014/2015 reviews.
+  - `extends-to`: two-phase geothermal CFD is extended to metering components in 2020 flow-meter work.
+- Reuse recommendation: keep this as the baseline separator CFD extraction sheet and compare all separator variants against it first.
 
 ## Why Numerical Parameters Matter (Paper-Specific)
 This paper itself shows why numerics must be captured explicitly: incomplete particles in DPM tracking changed interpretation of separator efficiency, and authors note potential numerical artifacts requiring mesh refinement ([purnanto-2013], p.8). Without exact numerics, reproduction can match geometry but still miss reported trends.

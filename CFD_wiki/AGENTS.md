@@ -16,6 +16,7 @@ Long-term goal is synthesis: connect multiple papers into a network of reusable 
 ## Repository Contract
 - `raw/`: immutable source materials (papers, supplements, figures, external notes).
 - `wiki/`: maintained knowledge base pages.
+- `wiki/guidance/`: reusable click-by-click Fluent operation guidance distilled from documentation and prior reconstructions.
 - `template/`: reusable markdown templates.
 - `AGENTS.md`: operational schema for agent behavior (this file).
 
@@ -25,6 +26,8 @@ Maintain these files as the wiki grows:
 - `wiki/log.md`: append-only chronological activity log.
 - `wiki/sources/<paper-id>.md`: per-paper extraction record.
 - `wiki/setups/<case-id>.md`: actionable CFD reconstruction sheet.
+- `wiki/guidance/index.md`: catalog of reusable Fluent click-path guidance pages.
+- `wiki/guidance/<guide-id>.md`: GUI-first procedures for repeated setup operations.
 - `wiki/concepts/<concept>.md`: concept explainer pages when needed.
 - `wiki/entities/<entity>.md`: canonical pages for recurring items (geometry families, turbulence models, solvers, BC types, validation metrics).
 - `wiki/synthesis/<topic>.md`: cross-paper comparison and merged guidance pages.
@@ -45,12 +48,21 @@ For each new source:
 1. Read the source fully and identify the simulation objective, geometry, physics, and outputs.
 2. Extract parameters using the CFD Extraction Schema below.
 3. Create or update `wiki/sources/<paper-id>.md`.
-4. Create or update `wiki/setups/<case-id>.md` with beginner-oriented setup steps.
-5. Update or create entity pages for recurring CFD components and explicitly link to prior papers.
-6. Update or create concept pages when a concept is new, contradictory, or clarified.
-7. If two or more papers overlap on the same design topic, update `wiki/synthesis/<topic>.md`.
-8. Update `wiki/index.md`.
-9. Append one entry to `wiki/log.md`.
+4. If source is a case/paper, create or update `wiki/setups/<case-id>.md` with beginner-oriented setup steps.
+5. If source is a tool/manual (for example Fluent User's Guide), create or update `wiki/guidance/<guide-id>.md` with click-by-click paths and uncertainty labels.
+6. Update or create entity pages for recurring CFD components and explicitly link to prior papers.
+7. Update or create concept pages when a concept is new, contradictory, or clarified.
+8. If two or more papers overlap on the same design topic, update `wiki/synthesis/<topic>.md`.
+9. Update `wiki/index.md`.
+10. Append one entry to `wiki/log.md`.
+
+## Fluent Guidance Layer Rules
+- Treat `wiki/guidance/` as the first-stop reference for Fluent GUI setup questions.
+- Keep guidance pages procedural and click-by-click.
+- Distinguish:
+  - `Reported`: directly supported by documentation terminology/sections.
+  - `Inferred`: practical UI sequence assembled from multiple sections.
+- Do not place project-specific numerical defaults in guidance pages; link to `wiki/setups/` for case values.
 
 ## CFD Extraction Schema (Mandatory)
 Capture all fields below for each case:
@@ -143,10 +155,11 @@ Never present assumptions as paper-reported values.
 ## Query Workflow
 When answering questions:
 1. Read `wiki/index.md` first.
-2. Read only relevant source/setup/concept pages.
-3. Prefer synthesis over single-paper answers whenever multiple sources exist.
-4. Answer with citations and uncertainty labels.
-5. If the answer is generally useful, save it as a reusable wiki page and update index/log.
+2. If the question is "how to do this in Fluent", read `wiki/guidance/` pages first.
+3. Then read only relevant source/setup/concept pages.
+4. Prefer synthesis over single-paper answers whenever multiple sources exist.
+5. Answer with citations and uncertainty labels.
+6. If the answer is generally useful, save it as a reusable wiki page and update index/log.
 
 ## Synthesis Workflow
 When there are at least two relevant papers:

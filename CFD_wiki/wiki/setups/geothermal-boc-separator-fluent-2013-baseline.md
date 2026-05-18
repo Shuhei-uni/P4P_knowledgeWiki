@@ -43,9 +43,15 @@ Beginner-oriented baseline to recreate the 2013 geothermal cyclone separator CFD
 - Outlet BC: pressure outlet (`Reported`) ([purnanto-2013], p.6).
 - Inlet pressure: 11.4 bar (`Reported`) ([purnanto-2013], p.6).
 - Outlet pressure: 11.2 bar (`Reported`) ([purnanto-2013], p.6).
-- Initialization: Hybrid Initialization (`Reported`) ([purnanto-2013], p.6).
+- Initialization method: Hybrid Initialization (`Reported`) ([purnanto-2013], p.6).
+- Initialization rationale: chosen because it does not require additional user inputs and may improve convergence robustness (`Reported`) ([purnanto-2013], p.6).
+- Initialized field values: not reported for pressure, velocity, turbulence variables, or volume fraction (`Missing`) ([purnanto-2013], p.6).
 - Gravity: 9.81 m/s^2 downward in y (`Reported`) ([purnanto-2013], p.5).
 - Wall roughness: 0 (smooth) (`Reported`) ([purnanto-2013], p.5).
+- Closely related but separate from Fluent field initialization:
+  - inlet two-phase state is assumed mist flow with gas as continuous phase and liquid as dispersed phase (`Reported`) ([purnanto-2013], p.5).
+  - droplets are initially uniform with average diameter 1e-5 m (`Reported`) ([purnanto-2013], p.5).
+  - water level is assumed constant just above the brine outlet (`Reported`) ([purnanto-2013], p.5).
 
 ## E) Mesh and Numerics
 - Mesh: unstructured tetra volumes (`Reported`) ([purnanto-2013], p.6).
@@ -70,6 +76,7 @@ Beginner-oriented baseline to recreate the 2013 geothermal cyclone separator CFD
 - Outlet steam quality vs inlet velocity/enthalpy (`Reported`) ([purnanto-2013], p.9).
 
 ## Missing Info
+- No initialized field values are given.
 - Residual convergence criteria not given.
 - Iteration count / stopping rules not given.
 - Under-relaxation factors not given.
@@ -83,8 +90,9 @@ Beginner-oriented baseline to recreate the 2013 geothermal cyclone separator CFD
 
 ## Sensitivity Plan (Run First)
 1. Mesh refinement sensitivity near inlet transition and outlet tube.
-2. Residual/monitor stopping sensitivity.
-3. Particle tracking settings sensitivity (step cap and injection granularity).
+2. Hybrid Initialization versus patched/standard initialization sensitivity because initial field values are missing.
+3. Residual/monitor stopping sensitivity.
+4. Particle tracking settings sensitivity (step cap and injection granularity).
 
 ## Common Failure Modes
 - Large fraction of incomplete particles makes steam-quality interpretation unstable.
@@ -97,5 +105,12 @@ Beginner-oriented baseline to recreate the 2013 geothermal cyclone separator CFD
 - Compare trapped/escaped/incomplete particle ratios across meshes.
 
 ## Cross-Paper Linkage
-- Current related papers in wiki: none yet.
-- Reuse guidance: treat this setup as the first geothermal separator baseline and compare all future separator papers against it.
+- Current related papers in wiki:
+  - [zarrouk-purnanto-2014-geothermal-separator-design-overview](../sources/zarrouk-purnanto-2014-geothermal-separator-design-overview.md)
+  - [rivas-cruz-2015-geothermal-separator-state-of-art-review](../sources/rivas-cruz-2015-geothermal-separator-state-of-art-review.md)
+  - [mubarok-2020-cfd-geothermal-flow-meters](../sources/mubarok-2020-cfd-geothermal-flow-meters.md)
+- Reuse guidance: keep this as separator-vessel CFD baseline; use 2014/2015 reviews for high-level design screening and use 2020 flow-meter setup when pressure-differential metering performance is the target.
+- Reusable extension: for a project-driven non-uniform inlet adaptation that keeps the same baseline numerics but splits the inlet into wall-side liquid and core-side steam zones, see [geothermal-boc-separator-two-zone-split-inlet](geothermal-boc-separator-two-zone-split-inlet.md). Relation: `extends`.
+
+## Reuse Extensions
+- [geothermal-boc-separator-two-zone-split-inlet](geothermal-boc-separator-two-zone-split-inlet.md): keeps the baseline solver stack but replaces a uniform inlet representation with two separately named inlet zones for a segregated two-phase feed.
