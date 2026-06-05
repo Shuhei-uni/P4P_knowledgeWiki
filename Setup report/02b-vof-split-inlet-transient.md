@@ -1,6 +1,6 @@
 # VOF Split-Inlet Setup Report (Fluent 2024 R1)
 
-This report mirrors the structure of [tangential input setup report.md](tangential%20input%20setup%20report.md), but captures your current run configuration:
+This report mirrors the structure of [00-baseline-spiral-boc-reference.md](00-baseline-spiral-boc-reference.md), but captures your current run configuration:
 
 - Fluent `2024 R1`
 - `VOF` (instead of Mixture)

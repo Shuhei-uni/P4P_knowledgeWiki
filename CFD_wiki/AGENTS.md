@@ -1,10 +1,15 @@
-# AGENTS.md
+# CFD_wiki Guide (Local AGENTS.md)
 
 ## Mission
-This repository is a personal CFD reconstruction wiki.
-The goal is to convert complex research papers into a simple, reproducible knowledge base for CFD setup.
-Primary user is a complete beginner who needs clear, step-by-step guidance to recreate prior work.
-Long-term goal is synthesis: connect multiple papers into a network of reusable CFD design knowledge and combine prior approaches into stronger reconstruction playbooks.
+This directory is the local operating guide for `CFD_wiki`.
+
+The wiki is being transformed into a CFD research-paper lookup and reconstruction system. Its first job is to make dense papers fast to navigate without losing source detail: section dictionaries, keyword maps, figure/table maps, and method/data lookups should point the agent to the exact source-paper location to inspect next. Its second job is to convert verified source details into reusable CFD setup guidance, solver/model patterns, and cross-paper synthesis.
+
+Primary user is a complete beginner who needs both:
+- fast pinpoint guidance for where information lives in research papers; and
+- clear, step-by-step guidance to recreate prior CFD work.
+
+Long-term goal is synthesis: connect multiple papers into a network of reusable CFD design knowledge while keeping source-paper lookup precise enough that future agents can return to the raw paper quickly and avoid abstraction loss.
 
 ## Working Principles
 - Preserve source truth: never modify files in `raw/`.
@@ -15,10 +20,35 @@ Long-term goal is synthesis: connect multiple papers into a network of reusable 
 
 ## Repository Contract
 - `raw/`: immutable source materials (papers, supplements, figures, external notes).
+- `guide/`: external guide/manual PDFs used as documentation references, currently including the ANSYS Fluent user's guide. Do not edit original guide files; extract reusable GUI procedures into `wiki/guidance/`.
+- `paper_lookup/`: chunked research-paper lookup dictionaries organized by topic for fast source navigation.
 - `wiki/`: maintained knowledge base pages.
 - `wiki/guidance/`: reusable click-by-click Fluent operation guidance distilled from documentation and prior reconstructions.
+- `research_paper_dictionary_lookup.md`: short compatibility router to the chunked broad CFD/geothermal lookup files.
+- `geothermal_research_paper_dictionary (1).md`: short compatibility router to the chunked geothermal separator, steam purity, carryover, and field-troubleshooting lookup files.
 - `template/`: reusable markdown templates.
-- `AGENTS.md`: operational schema for agent behavior (this file).
+- `AGENTS.md`: local CFD_wiki operating guide for agent behavior (this file). The repository-level `../AGENTS.md` remains the root cross-wiki routing contract.
+
+## Lookup Dictionary Role
+The dictionary files are navigation accelerators, not replacements for the sources.
+
+Use them to:
+- choose which paper to inspect first;
+- identify relevant sections, pages, figures, tables, equations, and keywords;
+- understand whether a paper is best used for CFD setup, property modelling, separator design, steam purity, field troubleshooting, or report context;
+- reduce time spent scanning long PDFs.
+
+Do not use them to:
+- invent setup-critical values without checking the source page when precision matters;
+- replace citations to the original paper/source page;
+- duplicate full source pages.
+
+When answering or ingesting from a paper, prefer this order:
+1. Read `wiki/index.md` to understand existing extracted knowledge.
+2. Read the relevant dictionary entry to identify the likely source locations.
+3. Inspect the matching `wiki/sources/<paper-id>.md` if it already exists.
+4. Inspect the raw paper or guide file only at the pinpointed sections/pages needed.
+5. Update maintained wiki pages with citations, uncertainty labels, and links back to the dictionary/source page as useful.
 
 ## Required Wiki Files
 Maintain these files as the wiki grows:
@@ -31,6 +61,12 @@ Maintain these files as the wiki grows:
 - `wiki/concepts/<concept>.md`: concept explainer pages when needed.
 - `wiki/entities/<entity>.md`: canonical pages for recurring items (geometry families, turbulence models, solvers, BC types, validation metrics).
 - `wiki/synthesis/<topic>.md`: cross-paper comparison and merged guidance pages.
+
+Maintain these lookup files when their covered paper set or navigation logic changes:
+- `paper_lookup/index.md`
+- `paper_lookup/broad/*.md`
+- `paper_lookup/geothermal/*.md`
+- root router files: `research_paper_dictionary_lookup.md` and `geothermal_research_paper_dictionary (1).md`
 
 ## Network-Building Objective
 The wiki must evolve as a connected knowledge graph, not a pile of summaries.
@@ -45,16 +81,17 @@ When a relation is identified, update both pages so links are bidirectional.
 
 ## Ingest Workflow
 For each new source:
-1. Read the source fully and identify the simulation objective, geometry, physics, and outputs.
-2. Extract parameters using the CFD Extraction Schema below.
-3. Create or update `wiki/sources/<paper-id>.md`.
-4. If source is a case/paper, create or update `wiki/setups/<case-id>.md` with beginner-oriented setup steps.
-5. If source is a tool/manual (for example Fluent User's Guide), create or update `wiki/guidance/<guide-id>.md` with click-by-click paths and uncertainty labels.
-6. Update or create entity pages for recurring CFD components and explicitly link to prior papers.
-7. Update or create concept pages when a concept is new, contradictory, or clarified.
-8. If two or more papers overlap on the same design topic, update `wiki/synthesis/<topic>.md`.
-9. Update `wiki/index.md`.
-10. Append one entry to `wiki/log.md`.
+1. Build or update a lookup-map view first: paper purpose, section dictionary, keywords, figures/tables, methods/data locations, and best-use cautions.
+2. Use the lookup map to pinpoint where to read the source in detail.
+3. Extract parameters using the CFD Extraction Schema below, preserving `Reported`, `Inferred`, `Assumed`, `Missing`, and `Not Applicable` labels.
+4. Create or update `wiki/sources/<paper-id>.md`.
+5. If source is a case/paper with enough implementation detail, create or update `wiki/setups/<case-id>.md` with beginner-oriented setup steps. If the paper is not a CFD setup paper, explicitly mark setup fields as `Not Applicable` rather than forcing a reconstruction page.
+6. If source is a tool/manual (for example Fluent User's Guide), create or update `wiki/guidance/<guide-id>.md` with click-by-click paths and uncertainty labels.
+7. Update or create entity pages for recurring CFD components and explicitly link to prior papers.
+8. Update or create concept pages when a concept is new, contradictory, or clarified.
+9. If two or more papers overlap on the same design topic, update `wiki/synthesis/<topic>.md`.
+10. Update `wiki/index.md`.
+11. Append one entry to `wiki/log.md`.
 
 ## Fluent Guidance Layer Rules
 - Treat `wiki/guidance/` as the first-stop reference for Fluent GUI setup questions.
@@ -155,11 +192,12 @@ Never present assumptions as paper-reported values.
 ## Query Workflow
 When answering questions:
 1. Read `wiki/index.md` first.
-2. If the question is "how to do this in Fluent", read `wiki/guidance/` pages first.
-3. Then read only relevant source/setup/concept pages.
-4. Prefer synthesis over single-paper answers whenever multiple sources exist.
-5. Answer with citations and uncertainty labels.
-6. If the answer is generally useful, save it as a reusable wiki page and update index/log.
+2. If the question asks where to find information in papers, read `paper_lookup/index.md` first, then only the relevant chunk file before opening long source pages or raw PDFs.
+3. If the question is "how to do this in Fluent", read `wiki/guidance/` pages first, then use `guide/` or `wiki/sources/ansys-fluent-users-guide-2025r2.md` only for verification or missing detail.
+4. Then read only relevant source/setup/concept pages.
+5. Prefer synthesis over single-paper answers whenever multiple sources exist, but still point to the paper sections that support the synthesis.
+6. Answer with citations and uncertainty labels.
+7. If the answer is generally useful, save it as a reusable wiki page and update index/log.
 
 ## Synthesis Workflow
 When there are at least two relevant papers:

@@ -7,7 +7,7 @@ Convert the current baseline inlet setup into a more realistic two-zone inlet wh
 - the **outer-wall half** of the inlet carries **liquid water**,
 - the **inner half** of the inlet carries **steam**.
 
-The aim is to keep the Fluent setup as close as possible to [tangential input setup report.md](tangential%20input%20setup%20report.md), which you have clarified is the **spiral-inlet** baseline report, while changing only what is required to represent a segregated two-phase inlet.
+The aim is to keep the Fluent setup as close as possible to [00-baseline-spiral-boc-reference.md](00-baseline-spiral-boc-reference.md), which you have clarified is the **spiral-inlet** baseline report, while changing only what is required to represent a segregated two-phase inlet.
 
 ## 2. Direct answer to your main question
 

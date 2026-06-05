@@ -2,6 +2,18 @@
 
 ## Project Layer
 - `wiki/project/objective-and-scope.md`
+- `wiki/project/roadmap.md`
+
+## Templates
+- `../template/spiral-inlet-run-validation-template.md`
+
+## Setup Reports
+- `../../Setup report/order-dictionary.md`
+- `../../Setup report/00a-purnanto-setup-5000-live-audit.md`
+- `../../Setup report/04-mixed-wet-half-actual-area.md`
+- `../../Setup report/05-complete-two-phase-actual-area-no-brine-outlet.md`
+- `../../Setup report/06-pure-phase-split-fixed-velocity.md`
+- `../../Setup report/07-pure-phase-split-actual-area.md`
 
 ## Progress Layer
 - `wiki/progress/current-status.md`
@@ -12,7 +24,7 @@
 - `wiki/technical/sources/purnanto-etal-2013.md`
 
 ## Literature Layer
-- `wiki/literature/matrix.md`
+- `wiki/literature/matrix.md` - now includes linked cross-wiki anchors for Pointon et al. 2009 and Chen et al. 2025.
 
 ## Core Models
 - `wiki/model/baseline-cfd.md`

@@ -142,22 +142,36 @@ Solution methods:
 | Initialization | `Hybrid Initialization` |
 | Water pool patch | not used in first run |
 
-## 6. Flux report result and interpretation (2026-05-06)
+## 6. FFF-2 Result and Interpretation
 
-Reported Fluent mass-flow fluxes:
+Run identity:
+
+| Item | Value |
+|---|---|
+| Run ID | `FFF-2` (`Assumed` from user naming; no separate Fluent run ID found yet) |
+| Iteration count | `1020` steady iterations |
+| Case file | `FFF-2-2.cas.h5` |
+| Additional case/setup file | `FFF-2-Setup-Output.cas.h5` |
+| Data file | `FFF-2-2-01024.dat.h5` |
+| Residual status | still moving noticeably; not converged |
+| Inlet velocity check | liquid inlet and steam inlet area-weighted average velocity magnitude both `26.81 m/s` |
+
+Reported Fluent mass-flow fluxes after `1020` iterations:
 
 ```text
 Liquid phase:
-liquid inlet   =  109.8 kg/s
-liquid outlet  =   -5.66 kg/s
-steam inlet    =    0.0 kg/s
-steam outlet   =   -2.5622 kg/s
+liquid inlet   =  109.8065259020202 kg/s
+liquid outlet  = -161.0144320500405 kg/s
+steam inlet    =   -0.0 kg/s
+steam outlet   =   -0.00959419105001484 kg/s
+net            =  -51.2175 kg/s
 
 Steam phase:
-liquid inlet   =   37.53 kg/s
-liquid outlet  =  -13.84 kg/s
-steam inlet    =   37.83 kg/s
-steam outlet   =  -62.36 kg/s
+liquid inlet   =   37.53446178758816 kg/s
+liquid outlet  =  -19.41428612506385 kg/s
+steam inlet    =   37.82770891200012 kg/s
+steam outlet   =  -55.55540052237878 kg/s
+net            =    0.3924841 kg/s
 ```
 
 Interpretation of sign convention:
@@ -168,50 +182,51 @@ Interpretation of sign convention:
 Phase balance:
 
 ```text
-Liquid in  = 109.8 kg/s
-Liquid out = 5.66 + 2.5622 = 8.22 kg/s
-Liquid imbalance / retained liquid = 101.58 kg/s
+Liquid in  = 109.8065259020202 kg/s
+Liquid out = 161.0144320500405 + 0.00959419105001484 = 161.0240262410905 kg/s
+Liquid net = 109.8065259020202 - 161.0240262410905 = -51.2175003390703 kg/s
 
-Steam in  = 37.53 + 37.83 = 75.36 kg/s
-Steam out = 13.84 + 62.36 = 76.20 kg/s
-Steam imbalance = -0.84 kg/s
+Steam in  = 37.53446178758816 + 37.82770891200012 = 75.36217069958828 kg/s
+Steam out = 19.41428612506385 + 55.55540052237878 = 74.96968664744263 kg/s
+Steam net = 75.36217069958828 - 74.96968664744263 = 0.39248405214565 kg/s
 ```
 
-The steam phase is approximately balanced. The liquid phase is not balanced: most of the injected liquid is staying inside the separator rather than leaving through the brine outlet.
+The steam phase is approximately balanced. The liquid phase is not balanced: the outlets remove about `51.22 kg/s` more liquid than enters through the inlet during this report state.
 
 The brine outlet, labelled here as `liquid outlet`, is removing:
 
 ```text
-liquid out through brine outlet = 5.66 kg/s
-steam out through brine outlet  = 13.84 kg/s
+liquid out through brine outlet = 161.0144320500405 kg/s
+steam out through brine outlet  = 19.41428612506385 kg/s
 ```
 
-So the brine outlet is currently behaving more like a mixed/gas outlet than a liquid drain. This supports the interpretation that the brine outlet setup is not yet functioning physically.
+The brine outlet is now removing a large amount of liquid, unlike the earlier low-drainage result. However, the liquid phase balance is not yet physically acceptable because liquid outflow exceeds liquid inflow even though no water-pool patch was used.
 
 Likely causes:
 
 - no initialized water pool in the lower separator
-- brine outlet pressure is not driving liquid discharge strongly enough
+- residuals are still moving, so this may be an intermediate non-converged state
+- Fluent may still be draining or redistributing liquid from the initialized/hybrid field rather than reaching a steady operating balance
+- brine outlet pressure may be over-driving liquid discharge after more iterations
 - outlet backflow phase fractions may need correction
-- steady Mixture model may not form a realistic liquid inventory from a dry initial condition
-- lower geometry and outlet placement may need liquid already present before the solution develops
+- steady Mixture model may not form a realistic liquid inventory from a dry initial condition before residuals stabilize
+- lower geometry and outlet placement may still need liquid already present before the solution develops
 
 Recommended next variant:
 
-- keep the same wet-half velocity inlet
-- initialize/patch a liquid water pool in the lower separator
-- set brine outlet backflow liquid volume fraction near `1.0`
-- set steam outlet backflow liquid volume fraction near `0.0`
-- check whether liquid outlet flow rises toward the required order of `100 kg/s`
+- do not treat the `1020`-iteration fluxes as final validation data
+- first continue or inspect monitor history to see whether liquid net imbalance is trending toward zero or moving farther away
+- keep the matching `FFF-2-2-01024.dat.h5` data file linked with the `FFF-2-2.cas.h5` case file when reopening the run
+- confirm outlet backflow phase fractions before changing geometry or physics
+- if the same setup is continued, collect flux reports at multiple iteration counts to see whether brine outlet liquid flow is stabilizing
 
 ## 7. Current conclusion
 
 The inlet settings are producing a reasonable total inlet phase scale:
 
 ```text
-liquid inlet = 109.8 kg/s
-steam inlet total = 37.53 + 37.83 = 75.36 kg/s
+liquid inlet = 109.8065259020202 kg/s
+steam inlet total = 37.53446178758816 + 37.82770891200012 = 75.36217069958828 kg/s
 ```
 
-These are close enough to the target paper values to make the run diagnostically useful, but the outlet behavior is not yet valid because the brine outlet is removing far too little liquid.
-
+These are close enough to the target paper values to make the run diagnostically useful. The outlet behavior has changed from under-draining liquid to over-removing liquid, so the run should be treated as non-converged diagnostic evidence rather than validation evidence.

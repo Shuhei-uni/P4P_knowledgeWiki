@@ -43,6 +43,12 @@ The study uses RANS with RNG k-epsilon turbulence modeling, incompressible/isoth
   - liquid droplets are initially set uniform with average diameter 1e-5 m (10 um) ([purnanto-2013], p.5).
   - steady-state focus, incompressible flow, no flashing, isothermal flow, and constant water level just above brine outlet ([purnanto-2013], p.5).
 
+### Droplet-Size Extraction Note
+- Reported: the Harwell equation is used to estimate Sauter mean droplet diameter, and Purnanto states that predicting or measuring the upstream droplet-size distribution entering the separator is almost impossible in this study context ([purnanto-2013], p.3-4).
+- Reported: the volume-average/median diameter relation is `x_med = 1.42 x_sa`; the standard pipeline distribution states about `5%` of droplets are `<= 0.3 x_med` and all droplets are `< 2.9 x_med` ([purnanto-2013], p.3-4).
+- Inferred: if the reported `10 um` average setup value is treated as Harwell `x_sa`, then `x_med = 14.2 um`, the `5%` lower marker is `4.26 um`, and the upper distribution marker is `41.18 um`.
+- Missing: the text says outlet-quality prediction used nine injections with different Harwell-derived droplet diameters, but it does not list the exact nine diameters or their parcel-to-real-mass allocation ([purnanto-2013], p.8).
+
 ## E) Mesh and Numerics
 - Geometry build: CAD DesignModeler ([purnanto-2013], p.6).
 - Mesh: unstructured tetrahedral; "order of millions" nodes; avg element size 5 cm; local faces down to 1 cm ([purnanto-2013], p.6).

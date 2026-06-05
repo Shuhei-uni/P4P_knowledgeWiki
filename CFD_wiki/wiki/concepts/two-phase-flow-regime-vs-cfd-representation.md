@@ -25,3 +25,5 @@ In geothermal pipelines and separators, those phases can organize in different p
 - [purnanto-2013-cfd-geothermal-separator](../sources/purnanto-2013-cfd-geothermal-separator.md)
 - [geothermal-boc-separator-fluent-2013-baseline](../setups/geothermal-boc-separator-fluent-2013-baseline.md)
 - [multiphase-dpm-particle-tracking](../entities/multiphase-dpm-particle-tracking.md)
+- [governing-equations-and-modeling-levels](../physics-basis/governing-equations-and-modeling-levels.md)
+- [operating-pressure-enthalpy-and-phase-split](../physics-basis/operating-pressure-enthalpy-and-phase-split.md)

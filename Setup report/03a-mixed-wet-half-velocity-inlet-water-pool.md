@@ -4,7 +4,7 @@
 
 This is a child setup of:
 
-- [mixed wet-half velocity-inlet setup report.md](mixed%20wet-half%20velocity-inlet%20setup%20report.md)
+- [03-mixed-wet-half-velocity-inlet.md](03-mixed-wet-half-velocity-inlet.md)
 
 Keep all parent setup values the same unless explicitly changed in this report.
 

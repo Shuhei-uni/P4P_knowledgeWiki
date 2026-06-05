@@ -67,6 +67,8 @@ Beginner-oriented baseline to recreate the 2013 geothermal cyclone separator CFD
 ## F) Particle Tracking for Efficiency
 - Inject droplets after converged continuous solution (`Reported`) ([purnanto-2013], p.4).
 - Baseline droplet assumption: uniform average diameter 1e-5 m (`Reported`) ([purnanto-2013], p.5).
+- Harwell relation for sensitivity setup: `x_med = 1.42 x_sa`; if `10 um` is treated as the Harwell Sauter mean, then the inferred median is `14.2 um` and the standard distribution upper marker is about `41.18 um` (`Reported` relation, `Inferred` envelope) ([purnanto-2013], p.3-4).
+- Nine Harwell-derived DPM injections were used for outlet steam quality, but the exact nine diameters and parcel mass allocation are not listed (`Missing`) ([purnanto-2013], p.8).
 - Euler time step limit for tracking: 1e5 (tested to 1e6) (`Reported`) ([purnanto-2013], p.8).
 - Particle outcomes: trapped, escaped, incomplete (`Reported`) ([purnanto-2013], p.8).
 

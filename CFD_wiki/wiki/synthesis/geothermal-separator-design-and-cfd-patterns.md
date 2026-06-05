@@ -32,3 +32,8 @@
 1. Field steam quality/purity monitoring against design envelope.
 2. CFD vs empirical agreement on pressure/velocity trends.
 3. Drainage/scrubbing architecture adequacy in final layout decisions.
+
+## Related Physics Basis
+- [separator-flow-physics](../physics-basis/separator-flow-physics.md)
+- [separator-geometry-and-swirl-mechanisms](../physics-basis/separator-geometry-and-swirl-mechanisms.md)
+- [operating-pressure-enthalpy-and-phase-split](../physics-basis/operating-pressure-enthalpy-and-phase-split.md)

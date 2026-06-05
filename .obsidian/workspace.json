@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "4ce02b17a52dd268",
+        "id": "9cdc568fbee1097b",
         "type": "tabs",
         "children": [
           {
-            "id": "8bc1cb30c523c775",
+            "id": "6c4c297b8bf4a4c2",
             "type": "leaf",
             "state": {
               "type": "graph",
@@ -176,8 +176,10 @@
       "bases:Create new base": false
     }
   },
-  "active": "8bc1cb30c523c775",
+  "active": "6c4c297b8bf4a4c2",
   "lastOpenFiles": [
+    "CFD_wiki/wiki/sources/purnanto-2013-cfd-geothermal-separator.md",
+    "CFD_wiki/wiki/synthesis/geothermal-separator-inlet-droplets-and-carryover.md",
     "Setup report/mixed wet-half velocity-inlet initialized-water-pool setup report.md",
     "Setup report/mixed wet-half velocity-inlet setup report.md",
     "CFD_wiki/wiki/concepts/mesh-inflation-boundary-layer.md",
