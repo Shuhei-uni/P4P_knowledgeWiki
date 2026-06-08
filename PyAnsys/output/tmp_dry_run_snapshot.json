@@ -1137,6 +1137,9 @@
                 }
               ]
             },
+            "mesh_motion": {
+              "enable": false
+            },
             "porous_zone": {
               "porous": false
             },

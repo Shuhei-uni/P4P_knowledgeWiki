@@ -1,0 +1,6 @@
+.DS_Store
+CFD_wiki/raw/
+CFD_wiki/guide/Ansys_Fluent_Users_Guide.pdf
+PyAnsys/.venv/
+**/__pycache__/
+*.pyc

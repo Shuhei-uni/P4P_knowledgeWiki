@@ -1,0 +1,210 @@
+{
+  "main": {
+    "id": "bc019fb51c74c62b",
+    "type": "split",
+    "children": [
+      {
+        "id": "9cdc568fbee1097b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6c4c297b8bf4a4c2",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "69b83aaa402ae80a",
+    "type": "split",
+    "children": [
+      {
+        "id": "f3b1b5556326af4e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bdcfdccee15a2151",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "c978ca844f2d773f",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "60fb77b97f68a2db",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "1ec22ebf46efb694",
+    "type": "split",
+    "children": [
+      {
+        "id": "fbadb1276a1d98dd",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a3f9f554ab7cbf9f",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "53f3db90b3bc65dd",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "1ad623f57e62abc8",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "e2aec39644b1570b",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "572be94e0567fb3a",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "6c4c297b8bf4a4c2",
+  "lastOpenFiles": [
+    "CFD_wiki/wiki/sources/purnanto-2013-cfd-geothermal-separator.md",
+    "CFD_wiki/wiki/synthesis/geothermal-separator-inlet-droplets-and-carryover.md",
+    "Setup report/mixed wet-half velocity-inlet initialized-water-pool setup report.md",
+    "Setup report/mixed wet-half velocity-inlet setup report.md",
+    "CFD_wiki/wiki/concepts/mesh-inflation-boundary-layer.md",
+    "CFD_wiki/wiki/synthesis/mesh-quality-and-resolution-patterns.md",
+    "Setup report/split two-phase velocity-inlet with brine-outlet setup report.md",
+    "Setup report/vof split-inlet setup report.md",
+    "CFD_wiki/wiki/sources/ansys-fluent-users-guide-2025r2.md",
+    "CFD_wiki/wiki/guidance/fluent-general-click-by-click.md",
+    "CFD_wiki/wiki/guidance/index.md",
+    "CFD_wiki/wiki/guidance",
+    "CFD_wiki/raw/Ansys_Fluent_Users_Guide.pdf",
+    "CFD_wiki/wiki/synthesis/two-phase-geofluid-property-to-binary-plant-design.md",
+    "CFD_wiki/wiki/synthesis/annular-flow-three-field-cfd-patterns.md",
+    "CFD_wiki/wiki/synthesis/geothermal-separator-design-and-cfd-patterns.md",
+    "CFD_wiki/wiki/setups/geoprop-geofluid-properties-2025-workflow.md",
+    "CFD_wiki/wiki/setups/binary-orc-two-phase-geothermal-2026-system-model.md",
+    "CFD_wiki/wiki/setups/geothermal-separator-audit-lazalde-crabtree-2015-review-workflow.md",
+    "CFD_wiki/wiki/setups/geothermal-separator-design-screening-2014-overview.md",
+    "CFD_wiki/wiki/setups/annular-flow-three-field-fluent-2020-thesis-reproduction.md",
+    "CFD_wiki/wiki/setups/vertical-tube-annular-flow-fluent-dpm-ewf-2024.md",
+    "CFD_wiki/wiki/setups/geothermal-two-phase-flow-meter-fluent-sst-mixture-2020.md",
+    "CFD_wiki/wiki/sources/merbecks-2025-geoprop-geofluid-property-framework.md",
+    "CFD_wiki/wiki/sources/montesdeoca-martinez-2026-binary-power-plant-two-phase-geofluid.md",
+    "CFD_wiki/wiki/sources/skoog-2020-annular-flow-three-field-cfd-thesis.md",
+    "CFD_wiki/wiki/sources/mondal-sharma-2024-air-water-annular-flow-cfd.md",
+    "CFD_wiki/wiki/sources/rivas-cruz-2015-geothermal-separator-state-of-art-review.md"
+  ]
+}
