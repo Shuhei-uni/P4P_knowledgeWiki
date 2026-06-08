@@ -1,0 +1,3782 @@
+{
+  "boundary_conditions": {
+    "interior": {
+      "interior-fluid": {
+        "name": "interior-fluid",
+        "phase": {
+          "mixture": {
+            "interior": {}
+          },
+          "water-liquid": {
+            "interior": {}
+          },
+          "water-vapor": {
+            "interior": {}
+          }
+        }
+      }
+    },
+    "pressure_outlet": {
+      "steamoutlet": {
+        "name": "steamoutlet",
+        "phase": {
+          "mixture": {
+            "momentum": {
+              "gauge_pressure": {
+                "option": "value",
+                "value": 1120000
+              },
+              "pressure_profile_multiplier": 1,
+              "backflow_dir_spec_method": "Normal to Boundary",
+              "backflow_pressure_spec": "Total Pressure",
+              "radial_equ_pressure_distribution": false
+            },
+            "turbulence": {
+              "turbulence_specification": "Intensity and Hydraulic Diameter",
+              "backflow_turbulent_intensity": 0.02152499951888,
+              "backflow_hydraulic_diameter": 0.7240000000000001
+            },
+            "dpm": {
+              "discrete_phase_bc_type": "escape"
+            },
+            "multiphase": {}
+          },
+          "water-liquid": {
+            "momentum": {},
+            "turbulence": {},
+            "dpm": {},
+            "multiphase": {
+              "volume_frac_spec_method": "Backflow Volume Fraction",
+              "backflow_volume_fraction": {
+                "option": "value",
+                "value": 0
+              }
+            }
+          },
+          "water-vapor": {
+            "momentum": {},
+            "turbulence": {},
+            "dpm": {},
+            "multiphase": {}
+          }
+        }
+      }
+    },
+    "velocity_inlet": {
+      "liquidinlet": {
+        "name": "liquidinlet",
+        "phase": {
+          "mixture": {
+            "momentum": {
+              "initial_gauge_pressure": {
+                "option": "value",
+                "value": 1140000
+              }
+            },
+            "turbulence": {
+              "turbulence_specification": "Intensity and Hydraulic Diameter",
+              "turbulent_intensity": 0.02109999952838,
+              "hydraulic_diameter": 0.01338
+            },
+            "dpm": {
+              "discrete_phase_bc_type": "escape"
+            },
+            "multiphase": {}
+          },
+          "water-liquid": {
+            "momentum": {
+              "velocity_specification_method": "Magnitude, Normal to Boundary",
+              "reference_frame": "Absolute",
+              "velocity": {
+                "option": "value",
+                "value": 27.118
+              }
+            },
+            "turbulence": {},
+            "dpm": {},
+            "multiphase": {
+              "volume_fraction": {
+                "option": "value",
+                "value": 1
+              }
+            }
+          },
+          "water-vapor": {
+            "momentum": {
+              "velocity_specification_method": "Magnitude, Normal to Boundary",
+              "reference_frame": "Absolute",
+              "velocity": {
+                "option": "value",
+                "value": 27.118
+              }
+            },
+            "turbulence": {},
+            "dpm": {},
+            "multiphase": {}
+          }
+        }
+      },
+      "steaminlet": {
+        "name": "steaminlet",
+        "phase": {
+          "mixture": {
+            "momentum": {
+              "initial_gauge_pressure": {
+                "option": "value",
+                "value": 1140000
+              }
+            },
+            "turbulence": {
+              "turbulence_specification": "Intensity and Viscosity Ratio",
+              "turbulent_intensity": 0.02109999952838,
+              "turbulent_viscosity_ratio": 0.7206100000000001
+            },
+            "dpm": {
+              "discrete_phase_bc_type": "escape"
+            },
+            "multiphase": {}
+          },
+          "water-liquid": {
+            "momentum": {
+              "velocity_specification_method": "Magnitude, Normal to Boundary",
+              "reference_frame": "Absolute",
+              "velocity": {
+                "option": "value",
+                "value": 27.118
+              }
+            },
+            "turbulence": {},
+            "dpm": {},
+            "multiphase": {
+              "volume_fraction": {
+                "option": "value",
+                "value": 0
+              }
+            }
+          },
+          "water-vapor": {
+            "momentum": {
+              "velocity_specification_method": "Magnitude, Normal to Boundary",
+              "reference_frame": "Absolute",
+              "velocity": {
+                "option": "value",
+                "value": 27.118
+              }
+            },
+            "turbulence": {},
+            "dpm": {},
+            "multiphase": {}
+          }
+        }
+      }
+    },
+    "wall": {
+      "bottom": {
+        "name": "bottom",
+        "phase": {
+          "mixture": {
+            "momentum": {
+              "wall_motion": "Stationary Wall",
+              "shear_condition": "No Slip"
+            },
+            "turbulence": {
+              "roughness_height": {
+                "option": "value",
+                "value": 0
+              },
+              "roughness_const": {
+                "option": "value",
+                "value": 0.5
+              }
+            },
+            "dpm": {
+              "discrete_phase_bc_type": "trap"
+            },
+            "multiphase": {}
+          },
+          "water-liquid": {
+            "momentum": {},
+            "turbulence": {},
+            "dpm": {},
+            "multiphase": {}
+          },
+          "water-vapor": {
+            "momentum": {},
+            "turbulence": {},
+            "dpm": {},
+            "multiphase": {}
+          }
+        }
+      },
+      "wall-fluid": {
+        "name": "wall-fluid",
+        "phase": {
+          "mixture": {
+            "momentum": {
+              "wall_motion": "Stationary Wall",
+              "shear_condition": "No Slip"
+            },
+            "turbulence": {
+              "roughness_height": {
+                "option": "value",
+                "value": 0
+              },
+              "roughness_const": {
+                "option": "value",
+                "value": 0.5
+              }
+            },
+            "dpm": {
+              "discrete_phase_bc_type": "reflect",
+              "normal_coefficient": {
+                "option": "polynomial",
+                "function_of": "angle",
+                "polynomial": {
+                  "function_of": "angle",
+                  "coefficients": [
+                    1.0
+                  ]
+                }
+              },
+              "tangential_coefficient": {
+                "option": "polynomial",
+                "function_of": "angle",
+                "polynomial": {
+                  "function_of": "angle",
+                  "coefficients": [
+                    1.0
+                  ]
+                }
+              },
+              "dpm_bc_frictn_coeff": {
+                "option": "constant",
+                "value": 0.2
+              }
+            },
+            "multiphase": {}
+          },
+          "water-liquid": {
+            "momentum": {},
+            "turbulence": {},
+            "dpm": {},
+            "multiphase": {}
+          },
+          "water-vapor": {
+            "momentum": {},
+            "turbulence": {},
+            "dpm": {},
+            "multiphase": {}
+          }
+        }
+      }
+    },
+    "non_reflecting_bc": {
+      "general_nrbc": {
+        "sigma": 0.15,
+        "sigma2": 5.0
+      },
+      "turbo_sepcific_nrbc": {
+        "enable": false
+      }
+    },
+    "perforated_wall": {
+      "setup_method": "None",
+      "model_setup": {
+        "ninjections": 1,
+        "urf": 1,
+        "injection": [
+          {
+            "injection_thread": false,
+            "coupled": true,
+            "extraction_thread": false,
+            "uniform": true,
+            "static": false,
+            "formulation": 0,
+            "dynamic_setup": {
+              "method": -1
+            }
+          }
+        ]
+      }
+    },
+    "settings": {
+      "mass_flow": true,
+      "pressure_outlet": {
+        "blending_factor": 0.0,
+        "bin_count": 65,
+        "average_pressure": false
+      },
+      "target_mass_flow_rate_settings": {
+        "under_relaxation_factor": 0.05,
+        "verbosity": false
+      },
+      "advanced": {
+        "delay_model_change_update": false,
+        "batch_thread_update": false
+      }
+    }
+  },
+  "models": {
+    "multiphase": {
+      "models": "mixture",
+      "number_of_phases": 2
+    },
+    "energy": {
+      "enabled": false
+    },
+    "viscous": {
+      "model": "k-epsilon",
+      "k_epsilon_model": "rng",
+      "rng_options": {
+        "differential_viscosity_model": true,
+        "swirl_dominated_flow": true
+      },
+      "near_wall_treatment": {
+        "wall_treatment": "standard-wall-fn"
+      },
+      "options": {
+        "curvature_correction": false,
+        "production_kato_launder_enabled": false,
+        "production_limiter": {
+          "enabled": false
+        }
+      },
+      "multiphase_turbulence": {
+        "multiphase_options": {
+          "dispersion_in_relative_velocity": false
+        }
+      },
+      "turbulence_expert": {
+        "turbulence_damping": {
+          "enable_turb_damping": false
+        },
+        "turb_non_newtonian": false
+      },
+      "user_defined": {
+        "turb_visc_func": "none"
+      }
+    },
+    "radiation": {
+      "model": "none",
+      "solar_load": {
+        "solar_model": "none",
+        "sun_direction_vector_definition": {}
+      }
+    },
+    "species": {
+      "model": {
+        "option": "off",
+        "phase_material": {
+          "water-liquid": "water-liquid",
+          "water-vapor": "water-vapor"
+        },
+        "number_vol_spec": false
+      }
+    },
+    "discrete_phase": {
+      "general_settings": {
+        "interaction": {
+          "enabled": false
+        },
+        "contour_plotting": "none"
+      },
+      "physical_models": {
+        "pressure_gradient_force": {},
+        "saffman_lift_force_enabled": false,
+        "pressure_force_enabled": false,
+        "virtual_mass_force": {
+          "enabled": false
+        },
+        "erosion_accretion_enabled": false
+      },
+      "tracking": {
+        "max_num_steps": 50000,
+        "step_size_controls": {
+          "option": "step-length-factor",
+          "step_length_factor": 2
+        },
+        "expert": {
+          "randomize_every_iteration": true,
+          "randomize_every_timestep": true,
+          "tracking_statistics_format": "short",
+          "verbosity": 1,
+          "reference_frame": "relative"
+        }
+      },
+      "numerics": {
+        "tracking": {
+          "accuracy_control": {
+            "enabled": true,
+            "tolerance": 1e-05,
+            "max_num_refinements": 20,
+            "step_size_fraction": 1.0
+          },
+          "option": "automatic",
+          "low_order_scheme": "implicit",
+          "high_order_scheme": "trapezoidal"
+        },
+        "node_based_averaging": {
+          "enabled": false
+        },
+        "dynamic_interaction_range_enabled": false,
+        "high_res_tracking": {
+          "enabled": true,
+          "always_use_face_centroid_with_periodics": true,
+          "flow_interpolation": {
+            "specific_heat_enabled": false,
+            "density_enabled": true,
+            "gradients_enabled": true,
+            "viscosity_enabled": true,
+            "temperature_enabled": false,
+            "wall_zero_vel_enabled": false
+          },
+          "boundary_layer_tracking_enabled": true,
+          "subtet_validity_checking_enabled": false,
+          "auto_intersect_tol_enabled": true,
+          "barycentric_intersection_enabled": false,
+          "particle_relocation": {
+            "enhanced_method_enabled": false,
+            "support_for_std_track_data_read_enabled": false,
+            "overset_robustness_level": 1,
+            "legacy_method_enabled": false
+          },
+          "stuck_particle_removal_enabled": true,
+          "barycentric_sampling_enabled": false,
+          "quad_face_centroid_enabled": false
+        }
+      },
+      "parallel": {
+        "option": "hybrid",
+        "hybrid": {
+          "dpm_domain": {
+            "enabled": false
+          }
+        },
+        "expert": {
+          "parallel_verbosity_level": 0
+        }
+      },
+      "user_defined_functions": {
+        "body_force": "none",
+        "source_terms": "none",
+        "output": "none",
+        "scalar_update": "none",
+        "dpm_time_step_size": "none",
+        "flow_interpolation": "none",
+        "number_of_scalars": 0,
+        "max_num_udf_species": 50
+      },
+      "injections": {
+        "injection-1": {
+          "name": "injection-1",
+          "particle_type": "inert",
+          "material": "anthracite",
+          "injection_type": {
+            "option": "surface"
+          },
+          "initial_values": {
+            "reference_frame": "global",
+            "location": {
+              "injection_surfaces": [
+                "steaminlet"
+              ],
+              "randomized_positions_enabled": true,
+              "number_of_streams": 50
+            },
+            "mass_flow_rate": {
+              "total_flow_rate": 1e-20
+            },
+            "velocity": {
+              "use_face_normal_direction": false,
+              "x_velocity": 27.118,
+              "y_velocity": 0,
+              "z_velocity": 0
+            },
+            "angular_velocity": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "particle_size": {
+              "option": "uniform",
+              "diameter": 1.29e-06
+            }
+          },
+          "physical_models": {
+            "particle_drag": {
+              "option": "spherical"
+            },
+            "turbulent_dispersion": {
+              "enabled": true,
+              "random_eddy_lifetime": true,
+              "number_of_tries": 2,
+              "time_scale_constant": 0.15
+            },
+            "particle_rotation": {
+              "enabled": true,
+              "drag_law": "dennis-et-al",
+              "lift_law": "none"
+            },
+            "rough_wall_treatment_enabled": false,
+            "custom_laws": {
+              "law_1": "inert-heating",
+              "law_2": "inactive",
+              "law_3": "inactive",
+              "law_4": "inactive",
+              "law_5": "inactive",
+              "law_6": "inactive",
+              "law_7": "inactive",
+              "law_8": "inactive",
+              "law_9": "inactive",
+              "law_10": "inactive",
+              "switch": "Default"
+            }
+          }
+        },
+        "injection-2": {
+          "name": "injection-2",
+          "particle_type": "inert",
+          "material": "anthracite",
+          "injection_type": {
+            "option": "surface"
+          },
+          "initial_values": {
+            "reference_frame": "global",
+            "location": {
+              "injection_surfaces": [
+                "steaminlet"
+              ],
+              "randomized_positions_enabled": true,
+              "number_of_streams": 50
+            },
+            "mass_flow_rate": {
+              "total_flow_rate": 1e-20
+            },
+            "velocity": {
+              "use_face_normal_direction": false,
+              "x_velocity": 27.118,
+              "y_velocity": 0,
+              "z_velocity": 0
+            },
+            "angular_velocity": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "particle_size": {
+              "option": "uniform",
+              "diameter": 8e-06
+            }
+          },
+          "physical_models": {
+            "particle_drag": {
+              "option": "spherical"
+            },
+            "turbulent_dispersion": {
+              "enabled": true,
+              "random_eddy_lifetime": true,
+              "number_of_tries": 3,
+              "time_scale_constant": 0.15
+            },
+            "particle_rotation": {
+              "enabled": true,
+              "drag_law": "dennis-et-al",
+              "lift_law": "rubinow-keller"
+            },
+            "rough_wall_treatment_enabled": false,
+            "custom_laws": {
+              "law_1": "inert-heating",
+              "law_2": "inactive",
+              "law_3": "inactive",
+              "law_4": "inactive",
+              "law_5": "inactive",
+              "law_6": "inactive",
+              "law_7": "inactive",
+              "law_8": "inactive",
+              "law_9": "inactive",
+              "law_10": "inactive",
+              "switch": "Default"
+            }
+          }
+        },
+        "injection-41e-5": {
+          "name": "injection-41e-5",
+          "particle_type": "inert",
+          "material": "water-droplet",
+          "injection_type": {
+            "option": "surface"
+          },
+          "initial_values": {
+            "reference_frame": "global",
+            "location": {
+              "injection_surfaces": [
+                "steaminlet"
+              ],
+              "randomized_positions_enabled": true,
+              "number_of_streams": 200
+            },
+            "mass_flow_rate": {
+              "total_flow_rate": 1e-06
+            },
+            "velocity": {
+              "use_face_normal_direction": false,
+              "x_velocity": 27.118,
+              "y_velocity": 0,
+              "z_velocity": 0
+            },
+            "particle_size": {
+              "option": "uniform",
+              "diameter": 4.1e-05
+            }
+          },
+          "physical_models": {
+            "particle_drag": {
+              "option": "spherical"
+            },
+            "turbulent_dispersion": {
+              "enabled": false
+            },
+            "particle_rotation": {
+              "enabled": false
+            },
+            "rough_wall_treatment_enabled": false,
+            "custom_laws": {
+              "law_1": "inert-heating",
+              "law_2": "inactive",
+              "law_3": "inactive",
+              "law_4": "inactive",
+              "law_5": "inactive",
+              "law_6": "inactive",
+              "law_7": "inactive",
+              "law_8": "inactive",
+              "law_9": "inactive",
+              "law_10": "inactive",
+              "switch": "Default"
+            }
+          }
+        },
+        "injection-5e6": {
+          "name": "injection-5e6",
+          "particle_type": "inert",
+          "material": "water-droplet",
+          "injection_type": {
+            "option": "surface"
+          },
+          "initial_values": {
+            "reference_frame": "global",
+            "location": {
+              "injection_surfaces": [
+                "steaminlet"
+              ],
+              "randomized_positions_enabled": true,
+              "number_of_streams": 200
+            },
+            "mass_flow_rate": {
+              "total_flow_rate": 1e-06
+            },
+            "velocity": {
+              "use_face_normal_direction": false,
+              "x_velocity": 27.118,
+              "y_velocity": 0,
+              "z_velocity": 0
+            },
+            "particle_size": {
+              "option": "uniform",
+              "diameter": 5e-06
+            }
+          },
+          "physical_models": {
+            "particle_drag": {
+              "option": "spherical"
+            },
+            "turbulent_dispersion": {
+              "enabled": false
+            },
+            "particle_rotation": {
+              "enabled": false
+            },
+            "rough_wall_treatment_enabled": false,
+            "custom_laws": {
+              "law_1": "inert-heating",
+              "law_2": "inactive",
+              "law_3": "inactive",
+              "law_4": "inactive",
+              "law_5": "inactive",
+              "law_6": "inactive",
+              "law_7": "inactive",
+              "law_8": "inactive",
+              "law_9": "inactive",
+              "law_10": "inactive",
+              "switch": "Default"
+            }
+          }
+        },
+        "injection-5e6-drw": {
+          "name": "injection-5e6-drw",
+          "particle_type": "inert",
+          "material": "water-droplet",
+          "injection_type": {
+            "option": "surface"
+          },
+          "initial_values": {
+            "reference_frame": "global",
+            "location": {
+              "injection_surfaces": [
+                "steaminlet"
+              ],
+              "randomized_positions_enabled": true,
+              "number_of_streams": 200
+            },
+            "mass_flow_rate": {
+              "total_flow_rate": 1e-06
+            },
+            "velocity": {
+              "use_face_normal_direction": false,
+              "x_velocity": 27.118,
+              "y_velocity": 0,
+              "z_velocity": 0
+            },
+            "particle_size": {
+              "option": "uniform",
+              "diameter": 5e-06
+            }
+          },
+          "physical_models": {
+            "particle_drag": {
+              "option": "spherical"
+            },
+            "turbulent_dispersion": {
+              "enabled": true,
+              "random_eddy_lifetime": true,
+              "number_of_tries": 5,
+              "time_scale_constant": 0.15
+            },
+            "particle_rotation": {
+              "enabled": false
+            },
+            "rough_wall_treatment_enabled": false,
+            "custom_laws": {
+              "law_1": "inert-heating",
+              "law_2": "inactive",
+              "law_3": "inactive",
+              "law_4": "inactive",
+              "law_5": "inactive",
+              "law_6": "inactive",
+              "law_7": "inactive",
+              "law_8": "inactive",
+              "law_9": "inactive",
+              "law_10": "inactive",
+              "switch": "Default"
+            }
+          }
+        },
+        "injection-5e6-rotation": {
+          "name": "injection-5e6-rotation",
+          "particle_type": "inert",
+          "material": "water-droplet",
+          "injection_type": {
+            "option": "surface"
+          },
+          "initial_values": {
+            "reference_frame": "global",
+            "location": {
+              "injection_surfaces": [
+                "steaminlet"
+              ],
+              "randomized_positions_enabled": true,
+              "number_of_streams": 1000
+            },
+            "mass_flow_rate": {
+              "total_flow_rate": 1e-06
+            },
+            "velocity": {
+              "use_face_normal_direction": false,
+              "x_velocity": 27.118,
+              "y_velocity": 0,
+              "z_velocity": 0
+            },
+            "angular_velocity": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "particle_size": {
+              "option": "uniform",
+              "diameter": 5e-06
+            }
+          },
+          "physical_models": {
+            "particle_drag": {
+              "option": "spherical"
+            },
+            "turbulent_dispersion": {
+              "enabled": false
+            },
+            "particle_rotation": {
+              "enabled": true,
+              "drag_law": "dennis-et-al",
+              "lift_law": "oesterle-bui-dinh"
+            },
+            "rough_wall_treatment_enabled": false,
+            "custom_laws": {
+              "law_1": "inert-heating",
+              "law_2": "inactive",
+              "law_3": "inactive",
+              "law_4": "inactive",
+              "law_5": "inactive",
+              "law_6": "inactive",
+              "law_7": "inactive",
+              "law_8": "inactive",
+              "law_9": "inactive",
+              "law_10": "inactive",
+              "switch": "Default"
+            }
+          }
+        },
+        "injection-e4": {
+          "name": "injection-e4",
+          "particle_type": "inert",
+          "material": "water-droplet",
+          "injection_type": {
+            "option": "surface"
+          },
+          "initial_values": {
+            "reference_frame": "global",
+            "location": {
+              "injection_surfaces": [
+                "steaminlet"
+              ],
+              "randomized_positions_enabled": true,
+              "number_of_streams": 200
+            },
+            "mass_flow_rate": {
+              "total_flow_rate": 1e-06
+            },
+            "velocity": {
+              "use_face_normal_direction": false,
+              "x_velocity": 27.118,
+              "y_velocity": 0,
+              "z_velocity": 0
+            },
+            "particle_size": {
+              "option": "uniform",
+              "diameter": 0.0001
+            }
+          },
+          "physical_models": {
+            "particle_drag": {
+              "option": "spherical"
+            },
+            "turbulent_dispersion": {
+              "enabled": false
+            },
+            "particle_rotation": {
+              "enabled": false
+            },
+            "rough_wall_treatment_enabled": false,
+            "custom_laws": {
+              "law_1": "inert-heating",
+              "law_2": "inactive",
+              "law_3": "inactive",
+              "law_4": "inactive",
+              "law_5": "inactive",
+              "law_6": "inactive",
+              "law_7": "inactive",
+              "law_8": "inactive",
+              "law_9": "inactive",
+              "law_10": "inactive",
+              "switch": "Default"
+            }
+          }
+        },
+        "injection-e5": {
+          "name": "injection-e5",
+          "particle_type": "inert",
+          "material": "water-droplet",
+          "injection_type": {
+            "option": "surface"
+          },
+          "initial_values": {
+            "reference_frame": "global",
+            "location": {
+              "injection_surfaces": [
+                "steaminlet"
+              ],
+              "randomized_positions_enabled": true,
+              "number_of_streams": 200
+            },
+            "mass_flow_rate": {
+              "total_flow_rate": 1e-06
+            },
+            "velocity": {
+              "use_face_normal_direction": false,
+              "x_velocity": 27.118,
+              "y_velocity": 0,
+              "z_velocity": 0
+            },
+            "particle_size": {
+              "option": "uniform",
+              "diameter": 1e-05
+            }
+          },
+          "physical_models": {
+            "particle_drag": {
+              "option": "spherical"
+            },
+            "turbulent_dispersion": {
+              "enabled": false
+            },
+            "particle_rotation": {
+              "enabled": false
+            },
+            "rough_wall_treatment_enabled": false,
+            "custom_laws": {
+              "law_1": "inert-heating",
+              "law_2": "inactive",
+              "law_3": "inactive",
+              "law_4": "inactive",
+              "law_5": "inactive",
+              "law_6": "inactive",
+              "law_7": "inactive",
+              "law_8": "inactive",
+              "law_9": "inactive",
+              "law_10": "inactive",
+              "switch": "Default"
+            }
+          }
+        },
+        "injection-e6": {
+          "name": "injection-e6",
+          "particle_type": "inert",
+          "material": "water-droplet",
+          "injection_type": {
+            "option": "surface"
+          },
+          "initial_values": {
+            "reference_frame": "global",
+            "location": {
+              "injection_surfaces": [
+                "steaminlet"
+              ],
+              "randomized_positions_enabled": true,
+              "number_of_streams": 200
+            },
+            "mass_flow_rate": {
+              "total_flow_rate": 1e-06
+            },
+            "velocity": {
+              "use_face_normal_direction": false,
+              "x_velocity": 27.118,
+              "y_velocity": 0,
+              "z_velocity": 0
+            },
+            "particle_size": {
+              "option": "uniform",
+              "diameter": 1e-06
+            }
+          },
+          "physical_models": {
+            "particle_drag": {
+              "option": "spherical"
+            },
+            "turbulent_dispersion": {
+              "enabled": false
+            },
+            "particle_rotation": {
+              "enabled": false
+            },
+            "rough_wall_treatment_enabled": false,
+            "custom_laws": {
+              "law_1": "inert-heating",
+              "law_2": "inactive",
+              "law_3": "inactive",
+              "law_4": "inactive",
+              "law_5": "inactive",
+              "law_6": "inactive",
+              "law_7": "inactive",
+              "law_8": "inactive",
+              "law_9": "inactive",
+              "law_10": "inactive",
+              "switch": "Default"
+            }
+          }
+        }
+      }
+    },
+    "virtual_blade_model": {
+      "enable": false
+    },
+    "structure": {
+      "model": "off"
+    },
+    "echemistry": {
+      "potential": false
+    },
+    "battery": {
+      "enabled": false
+    },
+    "system_coupling": {
+      "user_defined_coupling_variables_via_udm": [],
+      "use_face_or_element_based_data_transfer": true
+    },
+    "sofc": {
+      "enabled": false
+    },
+    "pemfc": {
+      "enabled": false
+    }
+  },
+  "materials": {
+    "database": {
+      "database_type": "fluent-database"
+    },
+    "fluid": {
+      "air": {
+        "name": "air",
+        "chemical_formula": "",
+        "density": {
+          "option": "constant",
+          "value": 1.225
+        },
+        "viscosity": {
+          "option": "constant",
+          "value": 1.7894e-05
+        }
+      },
+      "water-liquid": {
+        "name": "water-liquid",
+        "chemical_formula": "",
+        "density": {
+          "option": "constant",
+          "value": 881.2109
+        },
+        "viscosity": {
+          "option": "constant",
+          "value": 0.00014554
+        }
+      },
+      "water-vapor": {
+        "name": "water-vapor",
+        "chemical_formula": "",
+        "density": {
+          "option": "constant",
+          "value": 5.797434
+        },
+        "viscosity": {
+          "option": "constant",
+          "value": 1.5206e-05
+        }
+      }
+    },
+    "solid": {
+      "aluminum": {
+        "name": "aluminum",
+        "chemical_formula": "al",
+        "density": {
+          "option": "constant",
+          "value": 2719
+        }
+      }
+    },
+    "inert_particle": {
+      "anthracite": {
+        "name": "anthracite",
+        "chemical_formula": "",
+        "density": {
+          "option": "constant",
+          "value": 1550
+        }
+      },
+      "water-droplet": {
+        "name": "water-droplet",
+        "chemical_formula": "",
+        "density": {
+          "option": "constant",
+          "value": 881.77
+        }
+      }
+    }
+  },
+  "cell_zone_conditions": {
+    "fluid": {
+      "fluid": {
+        "name": "fluid",
+        "phase": {
+          "mixture": {
+            "general": {
+              "laminar": false
+            },
+            "reference_frame": {
+              "frame_motion": false,
+              "reference_frame_axis_origin": [
+                {
+                  "option": "value",
+                  "value": 0
+                },
+                {
+                  "option": "value",
+                  "value": 0
+                },
+                {
+                  "option": "value",
+                  "value": 0
+                }
+              ],
+              "reference_frame_axis_direction": [
+                {
+                  "option": "value",
+                  "value": 0
+                },
+                {
+                  "option": "value",
+                  "value": 0
+                },
+                {
+                  "option": "value",
+                  "value": 1
+                }
+              ]
+            },
+            "mesh_motion": {
+              "enable": false
+            },
+            "porous_zone": {
+              "porous": false
+            },
+            "fan_zone": {
+              "fan_zone": false
+            },
+            "sources": {
+              "enable": false
+            },
+            "fixed_values": {
+              "enable": false
+            },
+            "multiphase": {}
+          },
+          "water-liquid": {
+            "general": {},
+            "reference_frame": {
+              "reference_frame_axis_origin": [
+                {
+                  "option": "value",
+                  "value": 0
+                },
+                {
+                  "option": "value",
+                  "value": 0
+                },
+                {
+                  "option": "value",
+                  "value": 0
+                }
+              ],
+              "reference_frame_axis_direction": [
+                {
+                  "option": "value",
+                  "value": 0
+                },
+                {
+                  "option": "value",
+                  "value": 0
+                },
+                {
+                  "option": "value",
+                  "value": 1
+                }
+              ]
+            },
+            "porous_zone": {},
+            "fan_zone": {
+              "fan_zone": false
+            },
+            "sources": {
+              "enable": false
+            },
+            "fixed_values": {
+              "enable": false
+            },
+            "multiphase": {}
+          },
+          "water-vapor": {
+            "general": {},
+            "reference_frame": {
+              "reference_frame_axis_origin": [
+                {
+                  "option": "value",
+                  "value": 0
+                },
+                {
+                  "option": "value",
+                  "value": 0
+                },
+                {
+                  "option": "value",
+                  "value": 0
+                }
+              ],
+              "reference_frame_axis_direction": [
+                {
+                  "option": "value",
+                  "value": 0
+                },
+                {
+                  "option": "value",
+                  "value": 0
+                },
+                {
+                  "option": "value",
+                  "value": 1
+                }
+              ]
+            },
+            "porous_zone": {},
+            "fan_zone": {
+              "fan_zone": false
+            },
+            "sources": {
+              "enable": false
+            },
+            "fixed_values": {
+              "enable": false
+            },
+            "multiphase": {}
+          }
+        }
+      }
+    }
+  },
+  "solution": {
+    "methods": {
+      "p_v_coupling": {
+        "flow_scheme": "Coupled",
+        "solve_n_phase": false
+      },
+      "discretization_scheme": {
+        "epsilon": "first-order-upwind",
+        "k": "first-order-upwind",
+        "mom": "first-order-upwind",
+        "mp": "first-order-upwind",
+        "pressure": "presto!"
+      },
+      "pseudo_time_method": {
+        "formulation": {
+          "coupled_solver": "off"
+        }
+      },
+      "expert": {
+        "numerics_pbns": {
+          "implicit_bodyforce_treatment": false,
+          "velocity_formulation": "absolute",
+          "physical_velocity_formulation": false,
+          "disable_rhie_chow_flux": false,
+          "presto_pressure_scheme": false,
+          "first_to_second_order_blending": 1.0
+        }
+      },
+      "gradient_scheme": "least-square-cell-based",
+      "high_order_term_relaxation": {
+        "enable": false
+      },
+      "multiphase_numerics": {
+        "compressible_flow": {
+          "enhanced_numerics": true,
+          "alternate_bc_formulation": false
+        },
+        "viscous_flow": {
+          "viscosity_averaging": false
+        },
+        "heat_mass_transfer": {
+          "cavitation": {
+            "schnerr_evap_coeff": 1.0,
+            "schnerr_cond_coeff": 0.2,
+            "max_vapor_pressure_ratio": 5.0,
+            "min_vapor_pressure": 1,
+            "display_clipped_pressure": true,
+            "p_limit_method": "local-pvap-min",
+            "turbulent_diffusion": true
+          },
+          "boiling": {
+            "heat_flux_relaxation_factor": 0.8,
+            "show_expert_options": false
+          },
+          "area_density": {
+            "vof_min_seeding": 1e-06,
+            "ia_grad_sym": false
+          }
+        },
+        "advanced_stability_controls": {
+          "p_v_coupling": {
+            "rhie_chow_flux": {
+              "low_order_rhie_chow": false
+            }
+          }
+        },
+        "default_controls": {
+          "recommended_defaults_for_existing_cases": false,
+          "revert_to_pre_r20_1_default_settings": {
+            "old_default_of_operating_density_method": false,
+            "old_default_of_volume_fraction_smoothing": false,
+            "old_variant_of_pesto_for_cases_using_structured_mesh": false
+          }
+        }
+      },
+      "vof_numerics": {
+        "high_order_rc": false,
+        "high_order_rc_hybrid_treatment": false,
+        "unstructured_var_presto_scheme": true
+      },
+      "warped_face_gradient_correction": {
+        "enable": false
+      }
+    },
+    "controls": {
+      "p_v_controls": {
+        "flow_courant_number": 200.0,
+        "explicit_pressure_under_relaxation": 0.5,
+        "explicit_momentum_under_relaxation": 0.5
+      },
+      "under_relaxation": {
+        "body-force": 1.0,
+        "density": 1,
+        "drift": 0.1,
+        "epsilon": 0.8,
+        "k": 0.8,
+        "mp": 0.5,
+        "turb-viscosity": 1
+      },
+      "equations": {
+        "drift": true,
+        "flow": true,
+        "ke": true,
+        "mp": true
+      },
+      "limits": {
+        "min_pressure": 1,
+        "max_pressure": 50000000000.0,
+        "min_tke": 1e-14,
+        "min_epsilon": 1e-20,
+        "max_turb_visc_ratio": 100000.0,
+        "min_vol_frac_for_matrix_sol": 1e-08
+      },
+      "advanced": {
+        "multi_grid": {
+          "mg_controls": {
+            "epsilon": {
+              "cycle_type": "flexible-cycle",
+              "termination_criteria": 0.1,
+              "residual_reduction_tolerance": 0.7
+            },
+            "k": {
+              "cycle_type": "flexible-cycle",
+              "termination_criteria": 0.1,
+              "residual_reduction_tolerance": 0.7
+            },
+            "mp": {
+              "cycle_type": "flexible-cycle",
+              "termination_criteria": 0.1,
+              "residual_reduction_tolerance": 0.7
+            },
+            "pressure-coupled": {
+              "cycle_type": "f-cycle",
+              "termination_criteria": 0.1,
+              "stabilization": "none"
+            }
+          },
+          "amg_controls": {
+            "scalar_parameters": {
+              "fixed_cycle_parameters": {
+                "pre_sweeps": 0,
+                "post_sweeps": 1,
+                "max_cycle": 30
+              },
+              "coarsening_parameters": {
+                "max_coarse_levels": 20,
+                "coarsen_by_interval": 2,
+                "conservative_coarsening": true,
+                "aggressive_coarsening": false,
+                "laplace_coarsening": false
+              },
+              "smoother_type": "Gauss-Seidel"
+            },
+            "coupled_parameters": {
+              "fixed_cycle_parameters": {
+                "pre_sweeps": 0,
+                "post_sweeps": 3,
+                "max_cycle": 10
+              },
+              "coarsening_parameters": {
+                "max_coarse_levels": 40,
+                "coarsen_by_interval": 6,
+                "conservative_coarsening": true,
+                "aggressive_coarsening": false,
+                "laplace_coarsening": false
+              },
+              "smoother_type": "Gauss-Seidel"
+            },
+            "flexible_cycle_parameters": {
+              "max_fine_relaxations": 30,
+              "max_coarse_relaxations": 50
+            },
+            "options": {
+              "verbosity": 0
+            }
+          }
+        },
+        "expert": {
+          "spatial_discretization_limiter": {
+            "limiter_type": "default",
+            "cell_to_limiting": "cell-to-face",
+            "limiter_filter": false
+          }
+        },
+        "relaxation_method": "gauss-seidel",
+        "anisotropic_solid_heat_transfer": {
+          "relaxation": 1,
+          "flux": "boundary-stabilized-implicit",
+          "gradient": "standard"
+        }
+      }
+    },
+    "report_definitions": {
+      "mesh": {},
+      "surface": {},
+      "volume": {},
+      "force": {},
+      "lift": {},
+      "drag": {},
+      "moment": {},
+      "time": {},
+      "flux": {},
+      "vbm": {},
+      "injection": {},
+      "user_defined": {},
+      "single_valued_expression": {}
+    },
+    "monitor": {
+      "residual": {
+        "equations": {
+          "continuity": {
+            "monitor": true,
+            "check_convergence": true,
+            "absolute_criteria": 0.001
+          },
+          "epsilon": {
+            "monitor": true,
+            "check_convergence": true,
+            "absolute_criteria": 0.001
+          },
+          "k": {
+            "monitor": true,
+            "check_convergence": true,
+            "absolute_criteria": 0.001
+          },
+          "vf-water-liquid": {
+            "monitor": true,
+            "check_convergence": true,
+            "absolute_criteria": 0.001
+          },
+          "x-velocity": {
+            "monitor": true,
+            "check_convergence": true,
+            "absolute_criteria": 0.001
+          },
+          "y-velocity": {
+            "monitor": true,
+            "check_convergence": true,
+            "absolute_criteria": 0.001
+          },
+          "z-velocity": {
+            "monitor": true,
+            "check_convergence": true,
+            "absolute_criteria": 0.001
+          }
+        },
+        "options": {
+          "criterion_type": "absolute",
+          "n_save": 10000,
+          "normalize": false,
+          "residual_values": {
+            "scale_residuals": true,
+            "compute_local_scale": false
+          },
+          "print": true,
+          "plot": true,
+          "n_display": 10000
+        },
+        "axes": {
+          "x": {
+            "label": "",
+            "number_format": {
+              "format_type": "float",
+              "precision": 0
+            },
+            "log_scale": false,
+            "auto_range": true,
+            "show_major_gridlines": false,
+            "show_minor_gridlines": false
+          },
+          "y": {
+            "label": "",
+            "number_format": {
+              "format_type": "exponential",
+              "precision": 0
+            },
+            "log_scale": true,
+            "auto_range": true,
+            "show_major_gridlines": false,
+            "show_minor_gridlines": false
+          },
+          "background_color": ""
+        },
+        "curves": [
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "monte carlo green"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "monte carlo green"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "monte carlo green"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "monte carlo green"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "lavender gray"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "lavender gray"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "lavender gray"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "lavender gray"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "scarlet red"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "scarlet red"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "scarlet red"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "scarlet red"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "grayish blue"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "grayish blue"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "grayish blue"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "grayish blue"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "flush orange"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "flush orange"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "flush orange"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "flush orange"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "lime green"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "lime green"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "lime green"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "lime green"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "classic pink"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "classic pink"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "classic pink"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "classic pink"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "red"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "red"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "red"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "red"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "green"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "green"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "green"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "green"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "blue"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "blue"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "blue"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "blue"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "cyan"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "cyan"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "cyan"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "cyan"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "magenta"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "magenta"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "magenta"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "magenta"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "yellow"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "yellow"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "yellow"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "yellow"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "orange"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "orange"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "orange"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "orange"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "pink"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "pink"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "pink"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "pink"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "brown"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "brown"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "brown"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "brown"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "copper"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "copper"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "copper"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "copper"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "maroon"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "maroon"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "maroon"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "maroon"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "tan"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "tan"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "tan"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "tan"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "teal"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "teal"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "teal"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "teal"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "silver"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "silver"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "silver"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "silver"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "salmon"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "salmon"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "salmon"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "salmon"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "light yellow"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "light yellow"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "light yellow"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "light yellow"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "light red"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "light red"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "light red"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "light red"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "light green"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "light green"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "light green"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "light green"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "light blue"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "light blue"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "light blue"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "light blue"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "light gray"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "light gray"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "light gray"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "light gray"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "dark gray"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "dark gray"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "dark gray"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "dark gray"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "dark red"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "dark red"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "dark red"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "dark red"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "dark green"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "dark green"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "dark green"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "dark green"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "dark blue"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "dark blue"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "dark blue"
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "dark blue"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          },
+          {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "line_in_file": {
+              "pattern": "",
+              "weight": 2,
+              "color": "foreground"
+            },
+            "marker": {
+              "symbol": "",
+              "size": 0.3,
+              "color": "foreground"
+            },
+            "marker_in_file": {
+              "symbol": "+",
+              "size": 0.3,
+              "color": "foreground"
+            }
+          }
+        ]
+      },
+      "report_files": {},
+      "report_plots": {},
+      "convergence_conditions": {
+        "convergence_reports": {},
+        "frequency": 1,
+        "condition": "all-conditions-are-met",
+        "check_for": "solution-convergence"
+      }
+    },
+    "cell_registers": {},
+    "initialization": {
+      "initialization_type": "hybrid",
+      "reference_frame": "relative",
+      "hybrid_init_options": {
+        "general_settings": {
+          "iter_count": 10,
+          "explicit_urf": [
+            1.0,
+            1.0
+          ],
+          "initial_pressure": false,
+          "external_aero": false,
+          "const_velocity": false
+        },
+        "turbulent_setting": {
+          "averaged_turbulent_parameters": true
+        }
+      },
+      "patch": {
+        "vof_smooth_options": {
+          "patch_reconstructed_interface": true,
+          "use_volumetric_smoothing": true,
+          "smoothing_relaxation_factor": 0.5
+        }
+      }
+    },
+    "calculation_activity": {
+      "execute_commands": {},
+      "solution_animations": {},
+      "case_modification": {
+        "enabled": false
+      },
+      "poor_mesh_numerics": {
+        "register_based": {}
+      }
+    },
+    "run_calculation": {
+      "iter_count": 2000,
+      "reporting_interval": 1,
+      "profile_update_interval": 1,
+      "data_sampling": {
+        "enabled": false
+      }
+    }
+  },
+  "derived": {
+    "velocity_inlets": [
+      "liquidinlet",
+      "steaminlet"
+    ],
+    "mass_flow_inlets": [],
+    "pressure_outlets": [
+      "steamoutlet"
+    ],
+    "walls": [
+      "bottom",
+      "wall-fluid"
+    ]
+  }
+}
