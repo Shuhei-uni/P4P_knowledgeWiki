@@ -1,0 +1,4 @@
+# Install this only if you want to experiment with meshing / DPF later.
+-r requirements-minimal.txt
+ansys-meshing-prime
+ansys-dpf-core
