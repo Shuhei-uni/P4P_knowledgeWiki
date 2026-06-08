@@ -57,71 +57,14 @@ For work that touches multiple knowledge systems:
 4. Update index/log files in any wiki that changed.
 5. If a setup report changed, update `Setup report/order-dictionary.md` whenever the change affects ordering, branch identity, or naming.
 
-## Subagent Operating Model
-This repository supports a lightweight subagent workflow without requiring separate worktrees.
-
-Use subagents as scoped workers, not as independent owners of truth.
-The main agent remains responsible for routing, cross-system consistency, and final write approval.
-
-### Main Agent Responsibilities
-- read the root routing contract first;
-- decide the primary target system before writing;
-- assign at most one primary subagent by default;
-- assign a secondary subagent only when the task genuinely spans systems;
-- reconcile overlaps, remove duplication, and ensure indexes/logs/order maps are updated;
-- treat repository files, not old chats, as the durable source of truth.
-
-### Available Subagents
-- `CFD subagent`
-  - lane: `CFD_wiki`
-  - purpose: paper lookup, source extraction, Fluent guidance, reusable setup logic, cross-paper synthesis
-- `Research subagent`
-  - lane: `ResearchProject_wiki`
-  - purpose: project decisions, progress, blockers, experiment interpretation, next actions
-- `Setup subagent`
-  - lane: `Setup report/`
-  - purpose: setup-instance records, branch naming, parent/child lineage, report-facing setup snapshots
-
-### Subagent Deployment Rule
-Use subagents when:
-- the task is multi-step and would benefit from scoped parallel thinking;
-- the task spans more than one knowledge role;
-- the task needs a reusable extraction or cleanup pass that should stay within one lane.
-
-Do not use subagents when:
-- the task is a small single-file update;
-- routing is obvious and the edit is short;
-- the task is mostly conversational and does not require durable file changes.
-
-### Subagent Authority Boundaries
-- Subagents may edit only within their assigned lane unless the main agent explicitly expands scope.
-- Subagents must not decide repository routing policy.
-- Subagents must not duplicate full content across systems.
-- Subagents must not archive chats.
-- Subagents must never edit any `raw/` directory.
-
-### Default Coordination Pattern
-1. Main agent classifies the task.
-2. Main agent selects the primary subagent.
-3. Primary subagent drafts or updates only its lane.
-4. If needed, a secondary subagent adds a short supporting update in its own lane.
-5. Main agent integrates, deduplicates, updates cross-links, and verifies logs/indexes/order references.
-
-### Quality Gate Before Accepting Subagent Output
-Before finalizing subagent work, verify:
-1. the correct primary wiki or setup system was chosen;
-2. citations and uncertainty labels follow the local contract;
-3. full-page duplication was avoided across systems;
-4. changed systems had their index/log files updated as required;
-5. `Setup report/order-dictionary.md` was updated if setup lineage changed;
-6. `ResearchProject_wiki/wiki/log.md` and `ResearchProject_wiki/wiki/progress/current-status.md` were updated when project state changed.
-
-### Prompt Source
-Reusable prompt briefs for each subagent live in:
+## Subagent Workflow
+For larger multi-step or cross-system tasks, use the lightweight subagent briefs in:
 - `subagents/README.md`
 - `subagents/cfd-subagent.md`
 - `subagents/research-subagent.md`
 - `subagents/setup-subagent.md`
+
+Keep the root routing rules in this file as the source of truth. Subagents are scoped helpers only; the main agent remains responsible for routing, deduplication, cross-links, index/log/order updates, and final consistency checks.
 
 ## Setup Report Ordering Rule
 When creating, renaming, or reorganizing files in `Setup report/`:
