@@ -40,6 +40,7 @@ Beginner-oriented baseline to recreate the 2013 geothermal cyclone separator CFD
 
 ## D) Boundary and Initial Conditions
 - Inlet BC: mass flow inlet (`Reported`) ([purnanto-2013], p.6).
+- Plain-language interpretation: this baseline uses one inlet boundary carrying both steam and water together, not two separately named inlet zones and not a full-face velocity-inlet reinterpretation (`Inferred`, based on the source BC family plus the live Fluent audit).
 - Outlet BC: pressure outlet (`Reported`) ([purnanto-2013], p.6).
 - Inlet pressure: 11.4 bar (`Reported`) ([purnanto-2013], p.6).
 - Outlet pressure: 11.2 bar (`Reported`) ([purnanto-2013], p.6).
@@ -115,4 +116,5 @@ Beginner-oriented baseline to recreate the 2013 geothermal cyclone separator CFD
 - Reusable extension: for a project-driven non-uniform inlet adaptation that keeps the same baseline numerics but splits the inlet into wall-side liquid and core-side steam zones, see [geothermal-boc-separator-two-zone-split-inlet](geothermal-boc-separator-two-zone-split-inlet.md). Relation: `extends`.
 
 ## Reuse Extensions
+- Direct rebuild reminder: if the goal is to recreate the Purnanto setup itself, keep one mixed steam-water inlet and preserve the `Mass-Flow Inlet` boundary family before testing any split-inlet alternatives. Relation to later split pages: `contrasts`.
 - [geothermal-boc-separator-two-zone-split-inlet](geothermal-boc-separator-two-zone-split-inlet.md): keeps the baseline solver stack but replaces a uniform inlet representation with two separately named inlet zones for a segregated two-phase feed.

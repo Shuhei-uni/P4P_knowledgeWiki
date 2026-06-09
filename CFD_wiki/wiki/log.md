@@ -1,5 +1,13 @@
 # CFD Wiki Log
 
+## [2026-06-09] query | Clarify that the Purnanto baseline is a one-inlet mixed feed
+- Files created/updated:
+  - `wiki/setups/geothermal-boc-separator-fluent-2013-baseline.md`
+  - `wiki/log.md`
+- Reason: support a project reset back to the direct Purnanto recreation by making the reusable baseline page explicit that the paper-style setup uses one inlet carrying both phases together.
+- Notable assumptions introduced or removed:
+  - Added a plain-language `Inferred` note that the baseline should not be confused with the later split-inlet or full-face velocity-inlet reinterpretations.
+
 ## [2026-06-04] refactor | Add separator physics-basis layer
 - Files created/updated:
   - `template/physics-basis-page.md`

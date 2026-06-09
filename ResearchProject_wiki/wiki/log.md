@@ -1,5 +1,19 @@
 # Work Log
 
+## [2026-06-09] model-update | Record PyFluent trial3 smoke-test troubleshooting report
+- files created/updated: `wiki/technical/pyfluent-trial3-one-inlet-reconstruction-smoke-test.md`, `wiki/index.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/progress/blockers.md`, `wiki/log.md`
+- reason: user asked for a durable markdown report of the PyFluent setup troubles, workarounds, successful steps, and next improvement points so the next automation pass starts from current evidence.
+- assumptions introduced/removed: introduced a narrow active automation blocker around the operating-pressure API path and the 2026 R1 numerics-setting object paths; removed the broader fear that local PyFluent setup might not work at all on the current mesh branch.
+- current status: the one-inlet `trial3.msh` reconstruction is now documented as a runnable local smoke-test workflow with manual water-property definition, hybrid initialization, and `10` completed steady iterations.
+- next action: fix operating-pressure control, map the correct solution-method API paths, and add automatic phase mass-flow reporting before attempting longer controlled runs.
+
+## [2026-06-09] model-update | Reset direct recreation target to one-inlet Purnanto branch
+- files created/updated: `../../Setup report/08-purnanto-one-inlet-massflow-recreation.md`, `../../Setup report/order-dictionary.md`, `wiki/model/inlet-regimes.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/index.md`, `wiki/log.md`
+- reason: user asked to recreate the Purnanto setup itself, meaning one inlet carrying both steam and water together rather than continuing the later split-inlet branches.
+- assumptions introduced/removed: removed the implied assumption that the split-inlet lineage was still the best direct recreation target; introduced setup `08` as a reset-to-baseline branch that reuses the live Purnanto audit and the reusable CFD baseline.
+- current status: the active rebuild target is now the one-inlet mixed steam-water `Mass-Flow Inlet` package from setup `08`; split-inlet branches remain comparison-only context.
+- next action: build the Fluent case for setup `08` and verify one-inlet phase mass flows plus baseline model parity before reviving split-inlet comparisons.
+
 ## [2026-06-05] query | Audit live Purnanto Fluent setup
 - files created/updated: `../../Setup report/00a-purnanto-setup-5000-live-audit.md`, `../../Setup report/order-dictionary.md`, `wiki/progress/experiments.md`, `wiki/progress/current-status.md`, `wiki/index.md`, `wiki/log.md`
 - reason: user asked for an extensive setup check of the Purnanto Fluent case/data pair in `Fluent Standalone Test 1\purnanto case`.

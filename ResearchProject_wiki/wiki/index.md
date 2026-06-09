@@ -14,6 +14,7 @@
 - `../../Setup report/05-complete-two-phase-actual-area-no-brine-outlet.md`
 - `../../Setup report/06-pure-phase-split-fixed-velocity.md`
 - `../../Setup report/07-pure-phase-split-actual-area.md`
+- `../../Setup report/08-purnanto-one-inlet-massflow-recreation.md`
 
 ## Progress Layer
 - `wiki/progress/current-status.md`
@@ -22,6 +23,7 @@
 
 ## Technical Layer
 - `wiki/technical/sources/purnanto-etal-2013.md`
+- `wiki/technical/pyfluent-trial3-one-inlet-reconstruction-smoke-test.md`
 
 ## Literature Layer
 - `wiki/literature/matrix.md` - now includes linked cross-wiki anchors for Pointon et al. 2009 and Chen et al. 2025.
