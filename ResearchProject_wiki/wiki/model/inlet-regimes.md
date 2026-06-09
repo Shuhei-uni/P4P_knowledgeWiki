@@ -5,16 +5,33 @@ Track how inlet representation evolves from simplified baseline toward realistic
 
 ## Current Baseline
 - Legacy recreation currently assumes mist-like inlet for two-phase feed (based on historical modelling approach).
+- Direct Purnanto recreation means one inlet carrying both phases together, not two separately named inlet faces.
 
 ## Selected Next Inlet Test
-- Replace the uniform/mist-like inlet assumption with a **two-zone split inlet**.
-- Project intent:
-  - outer-wall side of inlet = liquid water
-  - inner/core side of inlet = steam
-- Preferred implementation route:
-  - split the inlet face in geometry/meshing,
-  - import two named inlet zones into Fluent,
-  - keep the rest of the baseline solver stack unchanged for the first A/B comparison.
+- Selected immediate branch reset on 2026-06-09:
+  - return first to the direct Purnanto-style one-inlet recreation;
+  - keep one `Mass-Flow Inlet`;
+  - prescribe both phase mass flows on that same inlet;
+  - delay the split-inlet comparison until the one-inlet rebuild is checked again.
+
+Project intent for the immediate branch:
+
+- one inlet boundary only;
+- steam and water both enter through that inlet;
+- no pure-liquid / pure-steam face split;
+- no full-area velocity-inlet reinterpretation.
+
+Concrete branch record:
+
+- `../../../Setup report/08-purnanto-one-inlet-massflow-recreation.md`
+
+## Retained Alternate Path
+
+- The two-zone split inlet remains a deliberate comparison path, not the current direct-baseline target.
+- If reactivated later, the intended concept is still:
+  - outer-wall side of inlet = liquid water;
+  - inner/core side of inlet = steam;
+  - keep the rest of the solver stack unchanged for the first A/B comparison.
 
 ## Pure-Phase Equal-Velocity Split Calculation
 - Calculation date: 2026-05-28.

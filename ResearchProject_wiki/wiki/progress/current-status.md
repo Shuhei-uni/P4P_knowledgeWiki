@@ -1,15 +1,17 @@
 # Current Status
 
 ## Snapshot
-- Date: 2026-06-05
-- Phase: Professional-license setup `07` post-processing plus live Purnanto baseline audit
-- Focus: preserve setup `07` as the active scoped steam-carryover branch while using the live Purnanto case/data audit as a baseline-parity reference.
+- Date: 2026-06-09
+- Phase: direct Purnanto-recreation reset plus retained setup `07` archive context
+- Focus: rebuild the paper-style Purnanto setup on the current project path using one mixed steam-water inlet rather than the later split-inlet branches.
 - Current issue: setup `07` has promising apparent steam-line carryover; bottom truncation/no brine outlet/no water pool is now accepted as out of scope for this project branch.
 - Current mesh scale: professional setup `07` run reported at approximately `1.3M` nodes and `7.6M` cells; older project mesh scale was approximately `1.8M` nodes.
-- Current controlled setup change: professional setup `07` uses the pure liquid / pure steam actual-area split; older `FFF-2-OP0` pressure-reference parity work remains historical troubleshooting context.
+- Current controlled setup change: new setup `08` returns to the one-inlet Purnanto mass-flow package; older split-inlet and velocity-inlet branches remain comparison context only.
 - Latest diagnostic result: `PLS-PRO-2026-06-03-A` reports very low apparent liquid carryover at the steam outlet (`0.03663388722044243 kg/s`, `0.03135 %` of liquid inlet if interpreted as carryover magnitude). Treat this as a scoped steam-carryover diagnostic, not a full brine-drainage balance.
 - New baseline audit: `PURNANTO-LIVE-AUDIT-2026-06-05` loaded `purnanto-setup.cas.h5` and `purnanto-setup-5000.dat.h5`; the live case matches the core Purnanto baseline solver stack and records a `2,964,593`-cell tetra mesh with minimum orthogonal quality `0.277635`.
-- Active setup branch: `../../../Setup report/07-pure-phase-split-actual-area.md` has now been run as a professional-license baseline flux diagnostic; `../../../Setup report/06-pure-phase-split-fixed-velocity.md` is retained as an alternate only.
+- New direct-rebuild branch: setup `08` now records the paper-style one-inlet mixed steam-water `Mass-Flow Inlet` package so the project can return to the closest Purnanto recreation before judging split-inlet alternatives.
+- New PyFluent result: the local `trial3.msh` one-inlet reconstruction now launches, creates manual water vapor/liquid materials, hybrid-initializes, and completes a `10`-iteration smoke test through the script in `../../../PyAnsys/scripts/reconstruct_purnanto_trial3.py`.
+- Active setup branch: `../../../Setup report/08-purnanto-one-inlet-massflow-recreation.md` is now the selected direct baseline-rebuild branch; `../../../Setup report/07-pure-phase-split-actual-area.md` is retained as a comparison-only split-inlet branch.
 - Archive guard: do not archive chats that were active on or after `2026-05-25`; older chats can be archived only after their durable outcomes are confirmed in the wiki and setup-report files.
 
 ## What Is Done
@@ -35,10 +37,13 @@
 - New literature anchors are now linked into the project layer: Pointon et al. 2009 adds a geothermal HP-separator CFD scale/pressure-drop/scrolled-entry check, and Chen et al. 2025 adds an experiment-backed `RSM-DPM` separator-method benchmark for any later turbulence-model sensitivity decision.
 - Newest documented run: `PLS-PRO-2026-06-03-A`, based on `Setup report/07-pure-phase-split-actual-area.md`.
 - Newest baseline audit: `PURNANTO-LIVE-AUDIT-2026-06-05`, recorded in `../../../Setup report/00a-purnanto-setup-5000-live-audit.md`.
+- New direct-rebuild report: `../../../Setup report/08-purnanto-one-inlet-massflow-recreation.md`.
+- New local automation note: `../technical/pyfluent-trial3-one-inlet-reconstruction-smoke-test.md`.
 - Older water-pool run `MWH-WP-2026-05-07-A` showed more plausible swirl after 3500 steady iterations but is retained only as historical troubleshooting evidence.
 
 ## What Is In Progress
-- Confirming residual/monitor stability for professional setup `07` before treating the high apparent steam-carryover efficiency as report-ready.
+- Preparing the direct one-inlet rebuild from setup `08` so the project returns to the closest Purnanto boundary package.
+- Narrowing the remaining PyFluent caveats to the operating-pressure API path and the correct 2026 R1 solution-method setter paths.
 - Preparing quick DPM post-processing using `../../../CFD_wiki/wiki/synthesis/fluent-separator-efficiency-methods.md` and `../../../CFD_wiki/wiki/guidance/fluent-general-click-by-click.md`.
 - Historical convergence and physical-behavior notes for the parent mixed wet-half velocity-inlet/brine-outlet case are retained, but they are not active setup `07` blockers.
 - Verification of flow settings and numerical configuration.
@@ -51,6 +56,7 @@
 - Older `MWH-WP-2026-05-07-A` remains qualitative historical evidence only; `PLS-PRO-2026-06-03-A` is now the newest documented diagnostic.
 - Lower-iteration runs remain useful only for setup history and failure-mode hints, not for quantitative performance claims.
 - Deferred run branch: complete two-phase full spiral inlet with no active brine outlet remains an older inlet/mixing diagnostic option, not the immediate next action.
+- Split-inlet branches remain archived comparison options, not the immediate direct-baseline action.
 
 ## Chat Cleanup Readiness
 - Older chats should be treated as archive candidates only after the decision, evidence, blocker state, and next action are visible in repo files.
@@ -58,15 +64,10 @@
 - The main remaining archive-risk before removing reliance on older chats was the stale snapshot date on this page and ambiguous branch state in the setup-order dictionary; this cleanup pass addresses those two gaps.
 
 ## Immediate Next Actions
-1. Record residual/monitor stability for `PLS-PRO-2026-06-03-A` so the flux result can be classified beyond `Baseline Flux Diagnostic`.
-2. For `PURNANTO-LIVE-AUDIT-2026-06-05`, run phase mass-flow reports, locate turbulent-viscosity-limited cells, and visually confirm which Purnanto geometry variant this case represents.
-3. Use the currently applied baseline DPM settings: one-way deterministic tracking, step factor `2`, flow rate `1e-6 kg/s`, particle rotation off, and stochastic tracking off.
-4. Use the current project interpretation for setup `07`: treat incomplete DPM particles as trapped when they are assumed to be wall-stuck.
-5. Report scoped DPM removal efficiencies for the updated water-density runs as `63.0 %` at `5 um`, `88.5 %` at `1 um`, `93.0 %` at `10 um`, and `100 %` at `41 um` and `100 um`.
-6. Treat the deterministic `5 um` water-density case as the primary fine-droplet reference; DRW and rotation sensitivities still shift it only a few percentage points.
-7. Leave transient Eulerian Wall Film modelling as an exploratory follow-up until the basic DPM fate counts are stable.
-8. Optionally increase DPM max steps to `100,000` and rerun at least the `10 um` case to test whether the `93.0 %` result survives with fewer incomplete tracks.
-9. If the rough student-edition Setup 2 direction is still worth keeping, repeat it later as a controlled comparison without changing inlet boundary type at the same time.
+1. Fix the remaining PyFluent operating-pressure setter path so the scripted case reaches cleaner parity with the intended `0 Pa` baseline.
+2. Map the correct 2026 R1 PyFluent solution-method API paths for `SIMPLE`, `PRESTO!`, and the target discretization schemes.
+3. Add automatic inlet/outlet phase mass-flow reporting to the smoke-test script so each rebuild verifies the one-inlet package immediately.
+4. Treat setup `07` and its DPM evidence as comparison-only context until the direct Purnanto-recreation branch is cleaner and more repeatable.
 
 ## Roadmap Link
 - Run-efficiency roadmap: `../project/roadmap.md`
