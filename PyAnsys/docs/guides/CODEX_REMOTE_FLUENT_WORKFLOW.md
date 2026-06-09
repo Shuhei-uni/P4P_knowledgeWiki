@@ -59,8 +59,8 @@ scripts/inspect_fluent_session.py
 scripts/inspect_case.py
 scripts/probe_remote_paths.py
 scripts/load_case_data.py
-docs/PREPARE_NOW_ON_LAPTOP.md
-docs/ON_SITE_FLUENT_PC_CHECKLIST.md
+docs/guides/PREPARE_NOW_ON_LAPTOP.md
+docs/guides/ON_SITE_FLUENT_PC_CHECKLIST.md
 ```
 
 ## Suggested sequence

@@ -1,0 +1,185 @@
+{
+  "baseline_audit": {
+    "inventory": {
+      "boundary_zone_types": {
+        "pressure-outlet": [
+          "outlet"
+        ],
+        "velocity-inlet": [
+          "liquidinlet",
+          "steaminlet"
+        ],
+        "wall": [
+          "bottom",
+          "wall"
+        ]
+      },
+      "boundary_zones": [
+        "bottom",
+        "liquidinlet",
+        "outlet",
+        "steaminlet",
+        "wall"
+      ],
+      "cell_zones": [
+        "smooth_spiral_separator"
+      ]
+    },
+    "metrics": {
+      "bad_cell_fraction": 2.5613885217949934e-05,
+      "bad_cell_fraction_by_threshold": {
+        "0.05": 6.92267168052701e-07,
+        "0.10": 3.4613358402635045e-06,
+        "0.15": 2.5613885217949934e-05
+      },
+      "bad_cells_by_threshold": {
+        "0.05": 1,
+        "0.10": 5,
+        "0.15": 37
+      },
+      "cell_count": 1444529,
+      "face_count": 2915260,
+      "max_aspect_ratio": 42.227,
+      "max_equivolume_skewness": 0.968323,
+      "min_expansion_ratio": 0.242276,
+      "min_orthogonal_quality": 0.03167744882757173,
+      "node_count": 255163,
+      "notes": []
+    },
+    "required_zone_check": {
+      "all_present": false,
+      "missing_boundary_zones": [
+        "liquid-inlet",
+        "steam-inlet",
+        "wall-smooth_spiral_separator"
+      ],
+      "missing_cell_zones": [],
+      "wrong_boundary_type": {}
+    }
+  },
+  "inputs": {
+    "bad_quality_threshold": 0.15,
+    "baseline_mesh": "C:\\Users\\Shuhei Yokkaichi\\Documents\\CFD\\New folder\\meshing trial\\mesh-trial1.msh",
+    "cell_target": null,
+    "meshdat": "C:\\Users\\Shuhei Yokkaichi\\Documents\\CFD\\New folder\\meshing trial\\mesh-trial1.meshdat",
+    "required_zones": "C:\\Users\\Shuhei Yokkaichi\\Documents\\CFD\\P4P_knowledgeWiki\\PyAnsys\\input\\required-zones-mesh-trial1.txt"
+  },
+  "meshdat_audit": {
+    "inventory": {
+      "boundary_zone_types": {},
+      "boundary_zones": [],
+      "cell_zones": []
+    },
+    "metrics": {
+      "bad_cell_fraction": null,
+      "bad_cell_fraction_by_threshold": {},
+      "bad_cells_by_threshold": {
+        "0.05": 0,
+        "0.10": 0,
+        "0.15": 0
+      },
+      "cell_count": null,
+      "face_count": null,
+      "max_aspect_ratio": null,
+      "max_equivolume_skewness": null,
+      "min_expansion_ratio": null,
+      "min_orthogonal_quality": null,
+      "node_count": null,
+      "notes": [
+        "No cell zones found in meshing session; using transcript-only fallback where available.",
+        "Zone inventory unavailable in meshing mode: ValueError: menu not found"
+      ]
+    },
+    "required_zone_check": {
+      "all_present": false,
+      "missing_boundary_zones": [
+        "bottom",
+        "liquid-inlet",
+        "outlet",
+        "steam-inlet",
+        "wall",
+        "wall-smooth_spiral_separator"
+      ],
+      "missing_cell_zones": [
+        "smooth_spiral_separator"
+      ],
+      "wrong_boundary_type": {}
+    }
+  },
+  "planned_trials": [
+    {
+      "change_type": "global-size",
+      "intent": "Reduce unnecessary density without making cell count the primary target.",
+      "name": "trial-01-coarser-global-size",
+      "operator_changes": [
+        "Increase the global element size or relevance center by about 10 to 15 percent.",
+        "Do not touch named selections, body suppression, or topology cleanup settings.",
+        "Keep all method assignments identical to the baseline mesh branch."
+      ]
+    },
+    {
+      "change_type": "local-refinement",
+      "intent": "Recover quality near the inlet and spiral while still allowing a coarser global field.",
+      "name": "trial-02-local-inlet-spiral-refine",
+      "operator_changes": [
+        "Start from Trial 01 settings.",
+        "Apply inlet-region local sizing consistently to both `liquid-inlet` and `steam-inlet` unless deliberately testing something else later.",
+        "Add only local face or body sizing near the inlet split edge and spiral region at about 10 to 15 percent finer than the surrounding field.",
+        "Do not create new scoping selections; reuse only existing selectable entities."
+      ]
+    },
+    {
+      "change_type": "growth-rate",
+      "intent": "Reduce abrupt size jumps without materially changing the geometry definition.",
+      "name": "trial-03-adjust-growth-rate",
+      "operator_changes": [
+        "Start from Trial 02 settings.",
+        "Make the growth rate slightly smoother, for example one conservative notch lower than the baseline.",
+        "Leave proximity and curvature capture logic unchanged unless they were already active in the baseline branch."
+      ]
+    },
+    {
+      "change_type": "transition",
+      "intent": "Improve transition quality around refined zones while staying conservative on total-cell growth.",
+      "name": "trial-04-smoother-transition",
+      "operator_changes": [
+        "Start from Trial 03 settings.",
+        "Prefer slower or smoother transition behavior if that control is available in the active meshing method.",
+        "Do not switch mesh method families unless the baseline branch already uses multiple compatible methods."
+      ]
+    },
+    {
+      "change_type": "inflation",
+      "intent": "Try a mild wall treatment only after earlier trials reopen cleanly.",
+      "name": "trial-05-mild-inflation-if-stable",
+      "operator_changes": [
+        "Apply only if Trials 01 to 04 generate and export successfully.",
+        "Use a mild inflation setup such as a small number of layers and gentle growth.",
+        "Abort this trial if inflation introduces collapses, negative volume warnings, or worse reopen behavior."
+      ]
+    }
+  ],
+  "required_zone_contract": {
+    "boundary_zone_types": {
+      "bottom": "wall",
+      "liquid-inlet": "velocity-inlet",
+      "outlet": "pressure-outlet",
+      "steam-inlet": "velocity-inlet",
+      "wall": "wall",
+      "wall-smooth_spiral_separator": "wall"
+    },
+    "boundary_zones": [
+      "bottom",
+      "liquid-inlet",
+      "outlet",
+      "steam-inlet",
+      "wall",
+      "wall-smooth_spiral_separator"
+    ],
+    "cell_zones": [
+      "smooth_spiral_separator"
+    ],
+    "source_path": "C:\\Users\\Shuhei Yokkaichi\\Documents\\CFD\\P4P_knowledgeWiki\\PyAnsys\\input\\required-zones-mesh-trial1.txt"
+  },
+  "trial_results": []
+}

@@ -128,13 +128,13 @@ FLUENT_PASSWORD=...
 Add this file to your project:
 
 ```text
-docs/CODEX_REMOTE_FLUENT_WORKFLOW.md
+docs/guides/CODEX_REMOTE_FLUENT_WORKFLOW.md
 ```
 
 Then when you are ready, tell Codex:
 
 ```text
-Read docs/CODEX_REMOTE_FLUENT_WORKFLOW.md and docs/ON_SITE_FLUENT_PC_CHECKLIST.md. We are preparing to connect this laptop to a remote Ansys Fluent session using PyFluent gRPC. Do not use launch_fluent. Use connect_to_fluent. First run scripts/local_preflight.py and inspect the connection scripts.
+Read docs/guides/CODEX_REMOTE_FLUENT_WORKFLOW.md and docs/guides/ON_SITE_FLUENT_PC_CHECKLIST.md. We are preparing to connect this laptop to a remote Ansys Fluent session using PyFluent gRPC. Do not use launch_fluent. Use connect_to_fluent. First run scripts/local_preflight.py and inspect the connection scripts.
 ```
 
 ## 8. What you cannot test yet
