@@ -1,0 +1,51 @@
+Zone Information:
+
+      id                      name                      type     count
+  ______      ____________________      ____________________    ______
+       2   smooth_spiral_separator                     fluid   1444529
+       9                steaminlet            velocity-inlet       212
+       8               liquidinlet            velocity-inlet        20
+       7                      wall                      wall     50665
+       6                    outlet           pressure-outlet       171
+       5                    bottom                      wall      1336
+       1  interior-smooth_spiral_separator                  interior   2862856
+      10          boundary-node-10             boundary-node     26204
+       3                    node-3                      node    228959
+
+Entity Count:
+ 228959 interior nodes
+ 2862856 interior faces
+ 1444529 interior cells
+ 26204 boundary nodes
+ 52404 boundary faces
+
+Size extremes:
+Edge limits (min max avg): (0.0017074763 0.11626553 0.043826191)
+Face limits (min max avg): (2.6205644e-06 0.0044979374 0.0010493077).
+Cell limits (min max avg): (7.528193e-09 9.1751317e-05 1.7115832e-05 0 0).
+
+Angle deviation extremes:
+Face limits (min max avg): (1.1052757e-06 0.91263978 0.18779923 2915260)/
+Cell limits (min max avg): (1.9633866e-05 0.92133133 0.29603584 0 0).
+
+Angle deviation distributions:
+Faces: (2915260 (585586 1071073 872232 336650 48021 1534 52 40 36 36) (0 0)).
+Cells (1444529 (20448 222590 524822 469130 168011 34759 4443 260 31 35) (0 0)).
+
+Volume Change Extremes:
+Face limits (min max avg): (1.0000011 1000 982.04516 2915260)/
+Cell limits (min max avg): (1.0010844 10.94931 1.3922582 0 0).
+
+Volume Change Distributions:
+Faces: (52387 (0 52185 92 28 22 20 14 13 4 9) (0 2862873)).
+Cells (1444521 (0 1415886 28029 484 36 29 12 29 6 10) (0 8)).
+
+Edge Ratio Extremes:
+Face limits (min max avg): (1.0000013 10.945876 1.282546 2915260)/
+Cell limits (min max avg): (1.0000179 14.803955 1.4390354 0 0).
+
+Edge Ratio Distributions:
+Faces: (2915234 (0 2914024 1115 34 16 11 11 2 11 10) (0 26)).
+Cells (1444504 (0 1441858 2569 24 14 14 10 1 5 9) (0 25)).
+
+Successful mesh check.

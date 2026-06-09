@@ -2,6 +2,13 @@
 
 ## Active Blockers
 
+### BLK-007 | Fluent-exported split-inlet mesh does not yet preserve the exact required zone contract
+- Status: Active
+- First observed: 2026-06-10
+- Related run(s): `MESH-TRIAL1-SPLIT-CONTRACT-AUDIT-2026-06-10`
+- Symptom: the corrected `mesh-trial1.msh` now reopens with two separate velocity-inlet boundaries, but Fluent currently exposes them as `liquidinlet` and `steaminlet`, and the exported boundary list does not include `wall-smooth_spiral_separator`.
+- Current interpretation: this is a mesh-export / naming-preservation blocker for the semi-automated split-inlet workflow, not a geometry-change request. Conservative mesh-control trials should not be accepted until the exported baseline itself satisfies the exact required-zone contract.
+
 ### BLK-006 | PyFluent baseline script still has version-specific API gaps
 - Status: Active
 - First observed: 2026-06-09

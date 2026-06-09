@@ -377,3 +377,15 @@
 - purpose: correct the geometry record so the inner wall is described as straight and perpendicular to the inlet face, rather than as a tangent line plus curved vessel-following transition.
 - assumptions introduced/removed: removed the earlier inner-wall tangent-point construction from the `v2` record and replaced it with the user's stated simpler straight-wall assumption.
 - next immediate action: use the corrected `v2` page as the geometry reference and only add inner-wall curvature later if the actual CAD branch changes.
+
+## [2026-06-10] model-update | Record semi-automated `mesh-trial1` mesh-improvement workflow
+- files created/updated: `wiki/technical/mesh-trial1-semi-automated-workflow.md`, `wiki/index.md`, `wiki/log.md`
+- purpose: capture the project-facing workflow that uses the current `mesh-trial1.meshdat` plus baseline `mesh-trial1.msh` for conservative mesh-control trials with PyFluent reopen and comparison checks.
+- assumptions introduced/removed: introduced a provisional `1,000,000`-cell target for the first audit run because the user did not supply a final target; retained the observation that the `.meshdat` reopen is diagnostically weaker than the exported baseline `.msh`.
+- next immediate action: confirm the exact required-zone text contract, export conservative Workbench trial meshes, and rerun the workflow with `--trial-mesh` validation inputs.
+
+## [2026-06-10] model-update | Tighten split-inlet mesh workflow contract and rerun baseline audit
+- files created/updated: `wiki/technical/mesh-trial1-semi-automated-workflow.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/progress/blockers.md`, `wiki/log.md`, `../../../PyAnsys/input/required-zones-mesh-trial1.txt`, `../../../PyAnsys/output/meshdat-semi-automated/workflow-report.md`, `../../../PyAnsys/output/meshdat-semi-automated/workflow-report.json`
+- purpose: update the semi-automated split-inlet workflow so exact Fluent-exported zone names and boundary types are enforced, make cell count diagnostic-only, and rerun the overwritten `mesh-trial1` baseline audit with the corrected named selections.
+- assumptions introduced/removed: removed the provisional idea that cell target should be a main success rule; introduced the explicit split-inlet required-zone contract with `liquid-inlet` and `steam-inlet` kept separate; retained the observation that `.meshdat` remains a weaker diagnostic source than the exported baseline `.msh`.
+- next immediate action: fix the Meshing/export naming so the exported baseline preserves `liquid-inlet`, `steam-inlet`, and `wall-smooth_spiral_separator` exactly, then rerun the baseline audit before accepting any trial meshes.

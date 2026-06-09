@@ -17,6 +17,24 @@
 
 ## Runs
 
+### Run MESH-TRIAL1-SPLIT-CONTRACT-AUDIT-2026-06-10
+- Run ID: `MESH-TRIAL1-SPLIT-CONTRACT-AUDIT-2026-06-10`
+- Date: 2026-06-10
+- Objective: re-audit the overwritten `mesh-trial1` baseline after adding separate `liquid-inlet` and `steam-inlet` named selections, then check whether the exported Fluent mesh preserves the exact required split-inlet zone contract.
+- Geometry: current spiral-inlet separator meshing branch; geometry unchanged.
+- Mesh: reopened exported baseline `mesh-trial1.msh` with `255,163` nodes, `2,915,260` faces, and `1,444,529` cells.
+- Physics model: not a solve run; mesh reopen and quality audit only.
+- Solver settings: not applicable; PyFluent meshing-mode reopen plus mesh-statistics extraction.
+- Boundary and initial conditions: not applicable; audit checks only the exported Fluent mesh zone inventory and quality metrics.
+- Iteration budget: none.
+- Convergence monitors: not applicable.
+- Outcome: `Contract Failed / Audit Completed`.
+- Key audit result: Fluent reopened the mesh cleanly and detected `bottom`, `liquidinlet`, `outlet`, `steaminlet`, and `wall` as boundary zones plus `smooth_spiral_separator` as the fluid cell zone. The strict required-zone contract failed because the exported mesh did not preserve the exact names `liquid-inlet`, `steam-inlet`, and `wall-smooth_spiral_separator`.
+- Mesh quality summary: minimum orthogonal quality approximately `0.03168`; maximum equivolume skewness approximately `0.96832`; bad-cell fraction approximately `2.56e-05` at threshold `0.15`, `3.46e-06` at threshold `0.10`, and `6.92e-07` at threshold `0.05`.
+- Evidence-use label: valid for mesh-audit workflow decisions only; not a solver-performance result.
+- Hypothesized cause (if non-converged): not applicable. Current blocker is export/name preservation rather than solver convergence.
+- Next action: fix the Meshing/export path so the Fluent-exported mesh preserves the exact split-inlet and wall-zone names, then rerun the same baseline audit before scoring conservative Workbench trial meshes.
+
 ### Run PURNANTO-H5-AUDIT-2026-06-09
 - Run ID: `PURNANTO-H5-AUDIT-2026-06-09`
 - Date: 2026-06-09

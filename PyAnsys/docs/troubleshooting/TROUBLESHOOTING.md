@@ -50,7 +50,7 @@ If `ansys-fluent-visualization` imports fail, still continue with `ansys-fluent-
 The current local hardened smoke-test path is documented separately in:
 
 ```text
-docs/LOCAL_ONE_INLET_SMOKE_TEST.md
+docs/findings/LOCAL_ONE_INLET_SMOKE_TEST.md
 ```
 
 Use that note when the task is:
@@ -63,20 +63,71 @@ Use that note when the task is:
 - writing local case/data outputs
 ```
 
-## 9. Local one-inlet parity script behaves differently than older notes
+## 10. Mesh trial harness launches Fluent and then immediately dies
 
-The current local hardened smoke-test path is documented separately in:
-
-```text
-docs/LOCAL_ONE_INLET_SMOKE_TEST.md
-```
-
-Use that note when the task is:
+Common signs:
 
 ```text
-- local Fluent launch
-- local mesh-only setup
-- one mixed steam-water inlet reconstruction
-- short parity smoke test
-- writing local case/data outputs
+- LaunchFluentError
+- Stream removed / 10054
+- fluent-0-error.log or fluent-1-error.log shows Auto_Partition or segmentation fault
 ```
+
+Try:
+
+```text
+- rerun with --processor-count 1
+- kill stale fluent / cx2610 / ansyscl processes before relaunch
+- retry the harness after a clean process reset
+```
+
+This showed up during local Student-license meshing runs and was more of a
+launcher/process-stability issue than an input-mesh parsing issue.
+
+## 11. Mesh reopens, but save fails with a license error
+
+Common signs:
+
+```text
+- reopen succeeds
+- diagnostics succeed
+- write_case or write_mesh fails
+- transcript says the Student license only supports less than 1048576 cells
+```
+
+Interpretation:
+
+```text
+The mesh can still be useful for diagnostics in meshing mode, but Fluent will not
+let you save a result that remains over the Student limit.
+```
+
+Use:
+
+```text
+- the JSON trial report
+- the Fluent transcript
+- the baseline/trial comparison
+```
+
+as the main output when this happens.
+
+## 12. `.meshdat` opens but metrics or zones are missing
+
+Common signs:
+
+```text
+- transcript says the file was read
+- warning says no nodes read
+- get_cell_zones returns nothing
+- report.mesh_statistics is unavailable
+```
+
+Interpretation:
+
+```text
+Treat `.meshdat` as a partial diagnostic input on this setup, not as equivalent
+to `.msh`.
+```
+
+If possible, prefer the matching `.msh` for the first harness run.

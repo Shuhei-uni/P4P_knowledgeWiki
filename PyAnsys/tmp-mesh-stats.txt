@@ -1,0 +1,50 @@
+Zone Information:
+
+      id                      name                      type     count
+  ______      ____________________      ____________________    ______
+       2                     part1                     fluid    983001
+       8                      wall                      wall     53018
+       7                    bottom                      wall      1172
+       6                    outlet           pressure-outlet       150
+       5                     inlet            velocity-inlet       194
+       1            interior-part1                  interior   1938735
+       9           boundary-node-9             boundary-node     27269
+       3                    node-3                      node    150924
+
+Entity Count:
+ 150924 interior nodes
+ 1938735 interior faces
+ 983001 interior cells
+ 27269 boundary nodes
+ 54534 boundary faces
+
+Size extremes:
+Edge limits (min max avg): (0.0014555976 0.12941489 0.046571983)
+Face limits (min max avg): (1.285656e-06 0.0050808618 0.0013444418).
+Cell limits (min max avg): (8.1515281e-10 0.0001130801 2.5043621e-05 0 0).
+
+Angle deviation extremes:
+Face limits (min max avg): (1.9384244e-07 0.86817176 0.19298809 1993269)/
+Cell limits (min max avg): (2.6546798e-05 0.88128 0.30429933 0 0).
+
+Angle deviation distributions:
+Faces: (1993269 (388579 703937 596907 257894 43981 1902 44 13 12 0) (0 0)).
+Cells (983001 (13011 136055 335551 336380 130742 27135 3886 223 18 0) (0 0)).
+
+Volume Change Extremes:
+Face limits (min max avg): (1.0000001 1000 972.67466 1993269)/
+Cell limits (min max avg): (1.0040855 6.7494335 1.4358562 0 0).
+
+Volume Change Distributions:
+Faces: (54534 (0 54219 287 8 9 6 5 0 0 0) (0 1938735)).
+Cells (983001 (0 952643 29738 588 24 4 4 0 0 0) (0 0)).
+
+Edge Ratio Extremes:
+Face limits (min max avg): (1.0000003 6.5585828 1.291886 1993269)/
+Cell limits (min max avg): (1.0000463 6.5585828 1.4571931 0 0).
+
+Edge Ratio Distributions:
+Faces: (1993269 (0 1991792 1453 7 6 5 6 0 0 0) (0 0)).
+Cells (983001 (0 979334 3644 6 7 2 8 0 0 0) (0 0)).
+
+Successful mesh check.

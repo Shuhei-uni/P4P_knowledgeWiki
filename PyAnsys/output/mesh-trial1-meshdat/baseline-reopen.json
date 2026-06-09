@@ -1,0 +1,51 @@
+{
+  "assessment": {
+    "improved_metrics": [],
+    "success": false,
+    "under_cell_cap": false,
+    "zone_preservation_ok": true
+  },
+  "delta_vs_baseline": {
+    "bad_cell_fraction": 0.0,
+    "cell_count": 0,
+    "max_equivolume_skewness": 0.0,
+    "min_orthogonal_quality": 0.0
+  },
+  "input_artifact": "C:\\Users\\Shuhei Yokkaichi\\Documents\\CFD\\New folder\\meshing trial\\mesh-trial1.meshdat",
+  "input_artifact_type": "mesh",
+  "metrics": {
+    "bad_cell_count": 0,
+    "bad_cell_fraction": null,
+    "cell_count": null,
+    "max_aspect_ratio": null,
+    "max_equivolume_skewness": null,
+    "min_expansion_ratio": null,
+    "min_orthogonal_quality": null,
+    "notes": [
+      "No cell zones found in meshing session; using transcript-only fallback where available.",
+      "Zone inventory unavailable in meshing mode: ValueError: menu not found"
+    ],
+    "transcript_path": "C:\\Users\\Shuhei Yokkaichi\\Documents\\CFD\\P4P_knowledgeWiki\\PyAnsys\\output\\mesh-trial1-meshdat\\fluent-20260609-235147-5112.trn"
+  },
+  "mode": "artifact-reopen",
+  "name": "baseline-reopen",
+  "notes": [
+    "Baseline reopen only. No mesh changes applied."
+  ],
+  "output_case": null,
+  "output_mesh": null,
+  "status": "completed",
+  "zone_inventory": {
+    "boundary_by_type": {},
+    "boundary_flat": [],
+    "cell_zone_names": []
+  },
+  "zone_preservation": {
+    "added_boundaries": [],
+    "added_cell_zones": [],
+    "missing_boundaries": [],
+    "missing_cell_zones": [],
+    "mode": "exact",
+    "preserved": true
+  }
+}
