@@ -49,3 +49,17 @@ When you are at the Fluent PC:
 .venv/bin/python scripts/check_connection.py
 .venv/bin/python scripts/inspect_fluent_session.py
 ```
+
+## Extractor tracks
+
+Two separate extractor paths are now scaffolded:
+
+- `extractor_python/`: offline `.cas.h5` / `.dat.h5` inspection with `h5py`
+- `extractor_python/`: offline legacy `.cas` and `.dat` inspection, plus HDF5 support where available
+- `extractor_fluent/`: live Fluent/PyFluent export skeleton for on-site use
+
+Recommended order:
+
+1. use `extractor_python/` now on any HDF5 case/data files you already have;
+2. review the candidate strings and tree layout;
+3. use `extractor_fluent/` later on the Fluent machine to export the real active setup tree and reconcile gaps.

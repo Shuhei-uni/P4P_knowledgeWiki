@@ -1,15 +1,16 @@
 # Current Status
 
 ## Snapshot
-- Date: 2026-06-05
-- Phase: Professional-license setup `07` post-processing plus live Purnanto baseline audit
-- Focus: preserve setup `07` as the active scoped steam-carryover branch while using the live Purnanto case/data audit as a baseline-parity reference.
-- Current issue: setup `07` has promising apparent steam-line carryover; bottom truncation/no brine outlet/no water pool is now accepted as out of scope for this project branch.
+- Date: 2026-06-09
+- Phase: Setup `08` student-edition outlet-extension trial planning, with setup `07` retained as the parent baseline
+- Focus: preserve setup `07` as the active scoped steam-carryover baseline while testing whether downstream steam-outlet boundary placement reduces outlet backflow reversal in a student-edition geometry trial.
+- Current issue: setup `07` has promising apparent steam-line carryover, but user-observed steam-outlet backflow reversal and inconsistent mass-flux reports may be affected by placing the pressure-outlet boundary directly at the outlet-pipe entrance.
 - Current mesh scale: professional setup `07` run reported at approximately `1.3M` nodes and `7.6M` cells; older project mesh scale was approximately `1.8M` nodes.
 - Current controlled setup change: professional setup `07` uses the pure liquid / pure steam actual-area split; older `FFF-2-OP0` pressure-reference parity work remains historical troubleshooting context.
 - Latest diagnostic result: `PLS-PRO-2026-06-03-A` reports very low apparent liquid carryover at the steam outlet (`0.03663388722044243 kg/s`, `0.03135 %` of liquid inlet if interpreted as carryover magnitude). Treat this as a scoped steam-carryover diagnostic, not a full brine-drainage balance.
 - New baseline audit: `PURNANTO-LIVE-AUDIT-2026-06-05` loaded `purnanto-setup.cas.h5` and `purnanto-setup-5000.dat.h5`; the live case matches the core Purnanto baseline solver stack and records a `2,964,593`-cell tetra mesh with minimum orthogonal quality `0.277635`.
-- Active setup branch: `../../../Setup report/07-pure-phase-split-actual-area.md` has now been run as a professional-license baseline flux diagnostic; `../../../Setup report/06-pure-phase-split-fixed-velocity.md` is retained as an alternate only.
+- Fresh HDF5 extraction: the local `PyAnsys/data/4800-iterations-300412-1.cas.h5` and `PyAnsys/data/4800-iterations-300412-1-05000.dat.h5` pair was extracted successfully, confirming the same baseline stack in a portable audit-friendly form and giving a new friendly reference page for the live setup values.
+- Active setup branch: `../../../Setup report/08-steam-outlet-extension-student-trial.md` is the next planned student-edition diagnostic child of setup `07`; `../../../Setup report/07-pure-phase-split-actual-area.md` remains the professional-license parent baseline.
 - Archive guard: do not archive chats that were active on or after `2026-05-25`; older chats can be archived only after their durable outcomes are confirmed in the wiki and setup-report files.
 
 ## What Is Done
@@ -32,6 +33,7 @@
 - New active setup report created for the pure liquid / pure steam actual-area velocity-inlet case with turbulence intensity `2.10999999 %`, liquid hydraulic diameter `0.01338 m`, and steam hydraulic diameter `0.72061 m`.
 - Two rough student-edition pure-phase split diagnostics are now documented against that same inlet sizing. Setup 2 reduced steam-line liquid carryover from `10.67 kg/s` to `7.73 kg/s`, improving implied carryover-based efficiency from `90.87 %` to `93.39 %` and steam-outlet dryness from `88.39 %` to `91.33 %`, but both remain non-converged low-mesh diagnostics only.
 - Professional-license setup `07` flux diagnostic is now documented: mesh approximately `1.3M` nodes and `7.6M` cells; liquid inlet `116.8523 kg/s`; steam inlet `81.6395 kg/s`; steam outlet steam `86.2934 kg/s`; steam outlet liquid `0.03663 kg/s`.
+- New setup `08` is now defined as a student-edition geometry trial: keep Purnanto's spiral-inlet separator body and the setup `07` pure-phase split inlet, but extend the central steam outlet path so the `steam_outlet` pressure boundary is placed downstream of the outlet-pipe entrance.
 - New literature anchors are now linked into the project layer: Pointon et al. 2009 adds a geothermal HP-separator CFD scale/pressure-drop/scrolled-entry check, and Chen et al. 2025 adds an experiment-backed `RSM-DPM` separator-method benchmark for any later turbulence-model sensitivity decision.
 - Newest documented run: `PLS-PRO-2026-06-03-A`, based on `Setup report/07-pure-phase-split-actual-area.md`.
 - Newest baseline audit: `PURNANTO-LIVE-AUDIT-2026-06-05`, recorded in `../../../Setup report/00a-purnanto-setup-5000-live-audit.md`.
@@ -41,10 +43,12 @@
 - Confirming residual/monitor stability for professional setup `07` before treating the high apparent steam-carryover efficiency as report-ready.
 - Preparing quick DPM post-processing using `../../../CFD_wiki/wiki/synthesis/fluent-separator-efficiency-methods.md` and `../../../CFD_wiki/wiki/guidance/fluent-general-click-by-click.md`.
 - Historical convergence and physical-behavior notes for the parent mixed wet-half velocity-inlet/brine-outlet case are retained, but they are not active setup `07` blockers.
+- The Purnanto baseline assumptions that were still lingering in project pages are now being replaced by the audited live HDF5 setup reference so the setup stack does not need to be reconstructed from memory again.
 - Verification of flow settings and numerical configuration.
 - Review of whether mesh quality, worst-cell location, and mesh-independence evidence are sufficient for stable solution progression.
 - Building a result-interpretation workflow to connect contour outputs to separator performance decisions.
 - Post-processing the professional setup `07` case/data for residual/monitor stability and DPM particle fate counts.
+- Building the setup `08` geometry/mesh as a controlled outlet-boundary-placement diagnostic. The purpose is to test the user's hypothesis that the immediate top outlet boundary caused backflow reversal and unstable mass-flux reports.
 - Preparing the first geometry/mesh-level inlet modification so it changes only boundary representation, not the full solver stack.
 - Deciding whether the rough Setup 2 trend is real or mostly caused by the simultaneous switch from velocity inlet to mass-flow inlet.
 - Any future return to parent-case outlet behavior, solver/numerics, or water-pool depletion should be treated as a separate scope decision, not part of the setup `07` baseline.
@@ -66,7 +70,10 @@
 6. Treat the deterministic `5 um` water-density case as the primary fine-droplet reference; DRW and rotation sensitivities still shift it only a few percentage points.
 7. Leave transient Eulerian Wall Film modelling as an exploratory follow-up until the basic DPM fate counts are stable.
 8. Optionally increase DPM max steps to `100,000` and rerun at least the `10 um` case to test whether the `93.0 %` result survives with fewer incomplete tracks.
-9. If the rough student-edition Setup 2 direction is still worth keeping, repeat it later as a controlled comparison without changing inlet boundary type at the same time.
+9. Build setup `08` from `../../../Setup report/08-steam-outlet-extension-student-trial.md` in the student-edition environment, keeping setup `07` inlet and solver settings unchanged except for the steam outlet extension.
+10. For setup `08`, save geometry screenshots, boundary-zone screenshots, mesh statistics, residuals, inlet fluxes, steam-outlet fluxes, and outlet-intake velocity/vector evidence before interpreting any efficiency change.
+11. If the rough student-edition Setup 2 direction is still worth keeping, repeat it later as a controlled comparison without changing inlet boundary type at the same time.
+12. Fold the new HDF5 audit reference into the Purnanto setup pages so future runs can cite the extracted case instead of repeating the same setup assumptions.
 
 ## Roadmap Link
 - Run-efficiency roadmap: `../project/roadmap.md`

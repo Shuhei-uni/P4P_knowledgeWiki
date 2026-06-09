@@ -54,6 +54,7 @@ Rules:
 | `05` | full-inlet alternative branch | `05-complete-two-phase-actual-area-no-brine-outlet.md` | `05-complete-two-phase-actual-area-no-brine-outlet.md` | High | planned diagnostic branch | branch from `04`; one full inlet, no active brine outlet |
 | `06` | fixed-velocity pure-phase alternative | `06-pure-phase-split-fixed-velocity.md` | `06-pure-phase-split-fixed-velocity.md` | High | alternate retained | branch from later actual-area work; preserves `26.81 m/s` |
 | `07` | pure-phase actual-area branch | `07-pure-phase-split-actual-area.md` | `07-pure-phase-split-actual-area.md` | High | professional baseline flux diagnostic completed | selected next setup definition after `06` was kept as alternate; professional-license run now recorded with incomplete surface flux balance pending brine/liquid outlet report |
+| `08` | steam-outlet boundary-placement trial | `08-steam-outlet-extension-student-trial.md` | `08-steam-outlet-extension-student-trial.md` | High | planned student-edition diagnostic branch | child of `07`; keeps the Purnanto spiral-inlet body and setup `07` split two-phase inlet, but extends the central steam outlet path so the pressure-outlet boundary is downstream of the outlet-pipe entrance |
 
 ## Parent-Child Map
 
@@ -69,16 +70,17 @@ Rules:
              -> 05 complete two-phase actual-area no-brine-outlet
              -> 06 pure-phase split fixed velocity
              -> 07 pure-phase split actual-area
+                -> 08 steam outlet extension student-edition trial
 ```
 
 ## Working Interpretation
 
 - Main lineage:
-  `00 -> 01 -> 02 -> 03 -> 04 -> 07`
+  `00 -> 01 -> 02 -> 03 -> 04 -> 07 -> 08`
 - Child/side branches:
   `00a`, `02b`, `03a`, `05`, `06`
 
-This means `07-pure-phase-split-actual-area.md` is the latest named branch in the reconstructed chain, but the filename does not depend on it being "current".
+This means `08-steam-outlet-extension-student-trial.md` is the latest named branch in the reconstructed chain, but the filename does not depend on it being "current".
 
 ## Branch-State Reading Guide
 

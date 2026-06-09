@@ -72,6 +72,11 @@ Beginner-oriented baseline to recreate the 2013 geothermal cyclone separator CFD
 - Euler time step limit for tracking: 1e5 (tested to 1e6) (`Reported`) ([purnanto-2013], p.8).
 - Particle outcomes: trapped, escaped, incomplete (`Reported`) ([purnanto-2013], p.8).
 
+## Live Setup Cross-Check
+- The local HDF5 case audit in this repo confirms the saved baseline Fluent setup uses a mass-flow inlet, pressure outlet, pressure-based steady `Mixture`, `RNG k-epsilon`, SIMPLE, PRESTO!, second-order momentum/turbulence, QUICK volume fraction, gravity `(0, -9.81, 0) m/s2`, operating pressure `0 Pa`, and `5000` saved iterations (`Observed`).
+- The audit also confirms `2,964,593` cells, `572,556` nodes, minimum orthogonal quality `0.277635`, and maximum aspect ratio `12.8899` (`Observed`).
+- The live case carries DPM settings but no active injections; use it as a setup parity anchor, not as a completed particle-efficiency result (`Observed`).
+
 ## G) Expected Outputs
 - Velocity profiles by geometry and height slices (`Reported`) ([purnanto-2013], p.7).
 - Pressure distribution showing lower core pressure and higher wall pressure (`Reported`) ([purnanto-2013], p.8).
@@ -79,15 +84,13 @@ Beginner-oriented baseline to recreate the 2013 geothermal cyclone separator CFD
 
 ## Missing Info
 - No initialized field values are given.
-- Residual convergence criteria not given.
-- Iteration count / stopping rules not given.
-- Under-relaxation factors not given.
-- Exact mesh quality thresholds not given.
+- Residual convergence criteria are not given in the paper, but the live HDF5 audit now supplies them for the saved case.
 - Exact particle injection count and size-bin allocation details incomplete.
+- The exact paper text does not prove the geometry variant by itself, so the saved case still needs visual confirmation if geometry identity matters.
 
 ## Assumptions
 - Assume convergence when residuals stabilize and key monitors flatten (`Assumed`, `Medium Risk`).
-- Assume standard Fluent defaults for unreported under-relaxation factors (`Assumed`, `Medium Risk`).
+- For the paper-only reconstruction, use the live HDF5 audit values as the practical parity target when the paper does not report a number directly (`Assumed`, `Low Risk`).
 - Assume DPM only for post-convergence tracking phase (`Inferred`, `Medium Risk`).
 
 ## Sensitivity Plan (Run First)
@@ -111,6 +114,7 @@ Beginner-oriented baseline to recreate the 2013 geothermal cyclone separator CFD
   - [zarrouk-purnanto-2014-geothermal-separator-design-overview](../sources/zarrouk-purnanto-2014-geothermal-separator-design-overview.md)
   - [rivas-cruz-2015-geothermal-separator-state-of-art-review](../sources/rivas-cruz-2015-geothermal-separator-state-of-art-review.md)
   - [mubarok-2020-cfd-geothermal-flow-meters](../sources/mubarok-2020-cfd-geothermal-flow-meters.md)
+- Live setup reference: [purnanto-live-setup-reference](../../../ResearchProject_wiki/wiki/technical/purnanto-live-setup-reference.md)
 - Reuse guidance: keep this as separator-vessel CFD baseline; use 2014/2015 reviews for high-level design screening and use 2020 flow-meter setup when pressure-differential metering performance is the target.
 - Reusable extension: for a project-driven non-uniform inlet adaptation that keeps the same baseline numerics but splits the inlet into wall-side liquid and core-side steam zones, see [geothermal-boc-separator-two-zone-split-inlet](geothermal-boc-separator-two-zone-split-inlet.md). Relation: `extends`.
 

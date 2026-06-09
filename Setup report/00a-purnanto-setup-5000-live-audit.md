@@ -14,10 +14,12 @@ This report is a concrete setup-instance snapshot. It links back to the reusable
 - CFD source page: [purnanto-2013-cfd-geothermal-separator](../CFD_wiki/wiki/sources/purnanto-2013-cfd-geothermal-separator.md)
 - CFD setup page: [geothermal-boc-separator-fluent-2013-baseline](../CFD_wiki/wiki/setups/geothermal-boc-separator-fluent-2013-baseline.md)
 - Project technical note: [purnanto-etal-2013](../ResearchProject_wiki/wiki/technical/sources/purnanto-etal-2013.md)
+- Friendly live reference: [purnanto-live-setup-reference](../ResearchProject_wiki/wiki/technical/purnanto-live-setup-reference.md)
 
 Evidence labels:
 
 - `Observed`: read from the live Fluent 2024 R2 case/data through PyFluent on 2026-06-05.
+- `Observed`: cross-checked against the local extracted HDF5 pair in `PyAnsys/data/` on 2026-06-09.
 - `Reported`: inherited from Purnanto, Zarrouk, and Cater (2013) through the linked CFD source/setup pages.
 - `Inferred`: interpretation of parity, risk, or next action from comparing the live case to the reported baseline.
 
@@ -31,6 +33,8 @@ Evidence labels:
 | Solver launch | 3D, double precision, pressure-based (`Observed`) |
 | Case file | `purnanto-setup.cas.h5` (`Observed`) |
 | Data file | `purnanto-setup-5000.dat.h5` (`Observed`) |
+| Local extracted case file | `4800-iterations-300412-1.cas.h5` (`Observed`) |
+| Local extracted data file | `4800-iterations-300412-1-05000.dat.h5` (`Observed`) |
 | Iteration count in loaded data | `5000` from `number-of-iterations` Scheme variable (`Observed`) |
 | Evidence-use label | baseline setup parity audit; not final separator-efficiency evidence |
 
@@ -89,6 +93,7 @@ Baseline parity:
 - `Observed` model choices match the core Purnanto reconstruction: pressure-based, steady, Mixture multiphase, RNG `k-epsilon`, energy off.
 - `Observed` DPM settings exist, but `injections = {}` in the loaded case. This means the saved `5000` data is a continuous/multiphase field snapshot, not an active particle-efficiency setup.
 - `Reported`: the Purnanto workflow evaluates particle carryover after the converged continuous solution; the exact particle bins/mass allocation remain incomplete in the source extraction.
+- `Observed`: the local extracted HDF5 pair preserves the same audit state, so these values can now be cited from the repo-local files without reopening Fluent.
 
 ## 5. Operating Conditions and Reference Values
 
@@ -259,4 +264,3 @@ High-priority next checks:
 3. Locate turbulent-viscosity-limited cells and compare against inlet/vortex/outlet regions.
 4. Add or audit DPM injections separately only after the continuous field is accepted.
 5. Visually confirm whether this case is the spiral-inlet, Bangma, or Lazalde-Crabtree geometry variant.
-
