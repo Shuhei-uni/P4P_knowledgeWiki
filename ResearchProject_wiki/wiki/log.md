@@ -1,5 +1,19 @@
 # Work Log
 
+## [2026-06-09] model-update | Record 500-iteration one-inlet diagnostic and residual plot
+- files created/updated: `wiki/technical/pyfluent-trial3-one-inlet-reconstruction-smoke-test.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/progress/blockers.md`, `wiki/log.md`, `../../../PyAnsys/docs/LOCAL_ONE_INLET_SMOKE_TEST.md`
+- reason: user asked to make sure the longer `500`-iteration local diagnostic and the rough residual plot were recorded and the findings updated.
+- assumptions introduced/removed: added the explicit one-steam-outlet interpretation rule that mixture imbalance should not be treated as a failure for this branch without a liquid drain or transient accumulation model; retained the caution that the run is still diagnostic only and not convergence/validation evidence.
+- current status: the one-inlet `trial4` path now has a completed `500`-iteration controlled diagnostic with vapor recovery near `1`, liquid carryover effectively `0`, checkpoint outputs, and a rough scaled-residual artifact.
+- next action: keep this run as the current longer local baseline, then clean up pressure-outlet setting inactivity and direct residual export behavior if possible.
+
+## [2026-06-09] model-update | Harden local PyFluent one-inlet parity record and docs
+- files created/updated: `wiki/technical/pyfluent-trial3-one-inlet-reconstruction-smoke-test.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/progress/blockers.md`, `wiki/log.md`, `../../../PyAnsys/docs/LOCAL_ONE_INLET_SMOKE_TEST.md`, `../../../PyAnsys/docs/TROUBLESHOOTING.md`
+- reason: user asked to update the project smoke-test report and local docs after the hardened `trial4` parity pass.
+- assumptions introduced/removed: removed the earlier assumption that operating-pressure control and numerics-path discovery were still unresolved in the active local script; retained only the smaller uncertainty around pressure-outlet setting inactivity and cleaner balance reporting.
+- current status: the local one-inlet PyFluent path is now documented as a hardened `trial4` parity workflow with clean operating-pressure control, confirmed 2026 R1 numerics paths, mass-flow sanity output, and both case/data writes.
+- next action: test whether pressure-outlet setting order can be cleaned up, then improve the raw flux report into a more structured balance summary.
+
 ## [2026-06-09] model-update | Record PyFluent trial3 smoke-test troubleshooting report
 - files created/updated: `wiki/technical/pyfluent-trial3-one-inlet-reconstruction-smoke-test.md`, `wiki/index.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/progress/blockers.md`, `wiki/log.md`
 - reason: user asked for a durable markdown report of the PyFluent setup troubles, workarounds, successful steps, and next improvement points so the next automation pass starts from current evidence.
@@ -338,3 +352,13 @@
 - purpose: calculate zone-specific hydraulic diameters for the pure-liquid and pure-steam split velocity inlets and capture risks before applying them in Fluent.
 - assumptions introduced/removed: introduced a candidate sensitivity setup with liquid-zone `Dh = 0.01338 m` and steam-zone `Dh = 0.72061 m`; retained the warning that this is a turbulence-length-scale change in addition to the phase split.
 - next immediate action: if testing this, save a matching comparison case with `Dh = 0.724 m` on both zones, then compare inlet `k`, dissipation, turbulent viscosity ratio, residual behavior, and near-inlet phase/velocity fields.
+## [2026-06-09] query | Add no-brine-outlet spiral geometry record
+- files created/updated: `wiki/technical/v2-purnanto-spiral-inlet-geometry.md`, `wiki/index.md`, `wiki/log.md`
+- purpose: preserve the current no-brine-outlet spiral-inlet dimension record as a short project-technical page covering Purnanto-derived vessel dimensions plus the user's reconstructed dish-head and scroll-curvature calculations.
+- assumptions introduced/removed: introduced an explicit project-only reconstruction note that the recorded dish-head crown/knuckle radii and three-arc scroll-wall centres are assumed geometry-rebuild aids, not fully reported paper dimensions.
+- next immediate action: use this page as the geometry reference when rebuilding or checking the no-brine-outlet spiral-inlet CAD and keep any later curve changes traceable here.
+## [2026-06-09] query | Correct v2 spiral inlet inner-wall note
+- files created/updated: `wiki/technical/v2-purnanto-spiral-inlet-geometry.md`, `wiki/log.md`
+- purpose: correct the geometry record so the inner wall is described as straight and perpendicular to the inlet face, rather than as a tangent line plus curved vessel-following transition.
+- assumptions introduced/removed: removed the earlier inner-wall tangent-point construction from the `v2` record and replaced it with the user's stated simpler straight-wall assumption.
+- next immediate action: use the corrected `v2` page as the geometry reference and only add inner-wall curvature later if the actual CAD branch changes.

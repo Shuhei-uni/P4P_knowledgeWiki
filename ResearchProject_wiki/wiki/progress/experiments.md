@@ -17,6 +17,44 @@
 
 ## Runs
 
+### Run PYFLUENT-TRIAL4-500-2026-06-09
+- Run ID: `PYFLUENT-TRIAL4-500-2026-06-09`
+- Date: 2026-06-09
+- Objective: extend the current hardened one-inlet PyFluent setup into a controlled `500`-iteration diagnostic on `trial4.msh` without changing the working setup core, so the branch can be checked for longer-run stability and phase-flow behavior.
+- Geometry: current project spiral-inlet BOC separator geometry exported as `trial4.msh`, with one inlet, one outlet, walls including `bottom`, and no active liquid drain / sink branch in this diagnostic.
+- Mesh: `trial4.msh` loaded successfully; Fluent read approximately `983,001` tetrahedral cells with inlet `inlet`, outlet `outlet`, and wall zones including `bottom` and `wall`.
+- Physics model: steady pressure-based `Mixture` model with two phases; phase-1 assigned manual water vapor, phase-2 assigned manual liquid water; `RNG k-epsilon`; energy off; gravity on; one-steam-outlet interpretation retained.
+- Solver settings: same hardened baseline stack as the shorter `trial4` run: `Operating Pressure = 0 Pa`, gravity `(0, -9.81, 0)`, `SIMPLE`, Green-Gauss Node Based gradient, `PRESTO!`, second-order momentum / `k` / `epsilon`, and `QUICK` for the multiphase discretization path.
+- Boundary and initial conditions: one inlet converted to `Mass-Flow Inlet` with vapor `80.69 kg/s`, liquid `116.92 kg/s`, turbulence intensity `2.11 %`, hydraulic diameter `0.724 m`, and pressure-related value `1,140,000 Pa`; one `Pressure Outlet` at `1,120,000 Pa`; bottom treated as wall; no active brine outlet branch.
+- Iteration budget: hybrid initialization plus `500` steady iterations, executed in chunks of `50` with checkpoint interval `250`.
+- Convergence monitors: the script printed raw mixture / phase-1 / phase-2 mass flows plus interpreted vapor-recovery and liquid-carryover summaries every `50` iterations. A rough residual-history plot was later recovered from the Fluent transcript.
+- Outcome: `Controlled Diagnostic Completed`.
+- Residual trend: residuals dropped substantially from the start of the run; by iteration `500`, continuity was approximately `3.3731e-01`, `x` velocity `3.2375e-04`, `y` velocity `3.3763e-04`, `z` velocity `3.1935e-04`, `k` `2.1085e-03`, `epsilon` `3.8826e-03`, and `vf-phase-2` `2.2265e-03`.
+- Final interpreted phase-flow result: phase-1 inlet `80.69 kg/s`, phase-1 outlet `-81.43119629260137 kg/s`, phase-2 inlet `116.92 kg/s`, phase-2 outlet `-4.640062523254778e-23 kg/s`, vapor recovery ratio `1.009186`, and liquid carryover ratio `3.968579e-25`.
+- Interpretation rule: because this branch has only a steam outlet, the nonzero total mixture imbalance should not be treated as a failure. The key check is that vapor outlet flow stays close to vapor inlet flow while liquid outlet flow through the steam outlet remains near zero.
+- Output files: final case/data were written as `trial4-purnanto-recon-500.cas.h5` and `trial4-purnanto-recon-500.dat.h5`; checkpoint case/data were written at iteration `250`; rough residual artifacts were saved as `trial4-purnanto-recon-500-residuals.png` and `trial4-purnanto-recon-500-residuals.csv`.
+- Evidence-use label: valid as a controlled longer one-inlet diagnostic and as a stronger local stability/phase-flow check than the short smoke test; not valid as convergence proof, validation evidence, separator efficiency evidence, or paper parity proof.
+- Hypothesized cause (if non-converged): the remaining uncertainty is more about outlet-setting cleanup and residual-export tooling than about basic setup stability on this branch.
+- Next action: keep this `500`-iteration run as the current local longer-diagnostic baseline, then clean up pressure-outlet setting inactivity and direct residual export if possible.
+
+### Run PYFLUENT-TRIAL4-HARDENED-2026-06-09
+- Run ID: `PYFLUENT-TRIAL4-HARDENED-2026-06-09`
+- Date: 2026-06-09
+- Objective: harden the local one-inlet PyFluent reconstruction script without changing its working core, using `trial4.msh` to confirm clean operating-pressure control, correct 2026 R1 numerics paths, flux sanity reporting, and case/data output.
+- Geometry: current project spiral-inlet BOC separator geometry exported as `trial4.msh`, with one inlet, one outlet, walls including `bottom`, and no active brine-outlet branch in this parity pass.
+- Mesh: `trial4.msh` loaded successfully; Fluent read approximately `983,001` tetrahedral cells with inlet `inlet`, outlet `outlet`, and wall zones including `bottom` and `wall`.
+- Physics model: steady pressure-based `Mixture` model with two phases; phase-1 assigned manual water vapor, phase-2 assigned manual liquid water; `RNG k-epsilon`; energy off; gravity on.
+- Solver settings: `Operating Pressure = 0 Pa` set cleanly through `setup.general.operating_conditions`; `SIMPLE` set through `solution.methods.p_v_coupling.flow_scheme`; gradient set through `solution.methods.spatial_discretization.gradient_scheme`; pressure/momentum/volume-fraction/`k`/`epsilon` schemes set through `solution.methods.spatial_discretization.discretization_scheme`.
+- Boundary and initial conditions: one inlet converted to `Mass-Flow Inlet` with vapor `80.69 kg/s`, liquid `116.92 kg/s`, turbulence intensity `2.11 %`, hydraulic diameter `0.724 m`, and pressure-related value `1,140,000 Pa`; one `Pressure Outlet` at `1,120,000 Pa`; bottom treated as wall; no brine outlet branch active.
+- Iteration budget: hybrid initialization plus `10` steady iterations.
+- Convergence monitors: at iteration `10`, residuals were approximately continuity `4.43e-01`, `x` velocity `1.17e-03`, `y` velocity `8.98e-04`, `z` velocity `1.06e-03`, `k` `3.77e-02`, `epsilon` `1.61e-01`, and `vf-phase-2` `5.64e-02`.
+- Sanity report: mixture mass flow inlet `197.61`, outlet `-81.47756596537904`, net `116.13243403462097 kg/s`; phase-1 inlet `80.69`, outlet `-81.47756596537904`, net `-0.7875659653789882 kg/s`; phase-2 inlet `116.92`, outlet effectively `0`, net `116.92 kg/s`.
+- Output files: `trial4-purnanto-recon.cas.h5` and `trial4-purnanto-recon.dat.h5` written successfully.
+- Outcome: `Runnable Hardened Parity Pass Completed`.
+- Evidence-use label: valid as local PyFluent hardening evidence and as the current best reproducible one-inlet parity workflow; not yet valid as a final baseline convergence or separator-performance run.
+- Hypothesized cause (if non-converged): the main remaining ambiguity is pressure-outlet subsetting inactivity, not environment setup, operating-pressure control, or numerics-path discovery.
+- Next action: test whether pressure-outlet subsetting order can be cleaned up and convert the raw flux printout into a more structured balance summary.
+
 ### Run PYFLUENT-TRIAL3-SMOKE-2026-06-09
 - Run ID: `PYFLUENT-TRIAL3-SMOKE-2026-06-09`
 - Date: 2026-06-09

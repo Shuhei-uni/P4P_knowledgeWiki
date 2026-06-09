@@ -8,6 +8,8 @@
 - Related run(s): `PYFLUENT-TRIAL3-SMOKE-2026-06-09`
 - Symptom: the local one-inlet reconstruction can launch, initialize, and iterate, but the high-level operating-pressure setter still fails and several intended solution-method setters do not match the current Fluent 2026 R1 PyFluent object paths.
 - Current interpretation: this is now a narrow automation-parity blocker, not a full environment blocker. The important result is that the case is already runnable; the remaining task is to make the script cleaner and less ambiguous.
+- Update after `PYFLUENT-TRIAL4-HARDENED-2026-06-09`: operating-pressure control and numerics-path discovery are now resolved; the remaining issue is smaller and mostly limited to pressure-outlet subsetting inactivity cleanup.
+- Update after `PYFLUENT-TRIAL4-500-2026-06-09`: the longer controlled diagnostic run completed, so this is no longer a stability blocker for the one-inlet branch. The remaining issue is mostly tooling/polish: pressure-outlet subsetting inactivity and the empty direct residual-write export.
 
 ### BLK-001 | Baseline run not converging
 - Status: Downgraded to setup/debug history
@@ -51,11 +53,11 @@
 6. Steam outlet geometry/intake behavior may be entraining liquid and causing excessive carryover.
 7. The steady solver is depleting the initialized lower water pool in the child case, producing transient-like liquid drainage inside a steady calculation; this is now out of scope for setup `07`.
 8. The project still needs residual/monitor stability and DPM fate counts before setup `07` can become report-quality efficiency evidence.
-9. The direct PyFluent rebuild path is now proven runnable, but cleaner operating-pressure and numerics-path control is still needed before treating it as a polished baseline automation workflow.
+9. The direct PyFluent rebuild path is now proven runnable, significantly hardened, and stable enough for a controlled `500`-iteration diagnostic, but pressure-outlet setting inactivity and residual-export behavior still need cleanup before treating it as a polished baseline automation workflow.
 
 ## Recovery Plan
 1. For setup `07`, proceed with steam-carryover/DPM efficiency checks without reopening bottom/brine-outlet troubleshooting.
 2. Record residual/monitor stability for `PLS-PRO-2026-06-03-A`.
 3. Run DPM diameter checks at `5 um`, `10 um`, and `40-41 um`.
 4. Keep `FFF-2` and `MWH-WP-2026-05-07-A` as historical troubleshooting references only unless the project scope later returns to brine-drainage or water-pool modelling.
-5. For the new one-inlet PyFluent path, fix operating-pressure control first, then map the exact 2026 R1 numerics object paths before extending to longer runs.
+5. For the new one-inlet PyFluent path, keep `trial4` plus the completed `500`-iteration diagnostic as the active local baseline and clean up pressure-outlet setting order plus residual export before extending much further.
