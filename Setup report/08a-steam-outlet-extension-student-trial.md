@@ -18,7 +18,7 @@ This is a student-edition trial branch. Treat it as diagnostic until mesh qualit
 
 | Item | Value |
 |---|---|
-| Setup order | `08` |
+| Setup order | `08a` |
 | Parent setup | `07-pure-phase-split-actual-area.md` |
 | Geometry family | Purnanto rectangular 90-degree spiral-inlet BOC separator |
 | Main retained feature | same separator body and same spiral inlet as Purnanto baseline |
@@ -197,7 +197,7 @@ PLS-STUDENT-OUTLET-EXT-2026-06-08
 
 Use setup `07` as the comparison parent:
 
-| Metric | Setup `07` parent | Setup `08` trial |
+| Metric | Setup `07` parent | Setup `08a` trial |
 |---|---:|---:|
 | Liquid inlet mass flow | record from run | pending |
 | Steam inlet mass flow | record from run | pending |

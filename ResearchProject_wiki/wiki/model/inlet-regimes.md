@@ -4,22 +4,39 @@
 Track how inlet representation evolves from simplified baseline toward realistic regime-aware modelling.
 
 ## Current Baseline
-- Legacy recreation historically assumed a mist-like inlet for two-phase feed, but the audited live Purnanto setup now anchors the actual baseline inlet package.
+- Legacy recreation currently assumes mist-like inlet for two-phase feed (based on historical modelling approach).
+- Direct Purnanto recreation means one inlet carrying both phases together, not two separately named inlet faces.
 
 ## Audited Purnanto Reference Values
-- The live HDF5 setup audit confirms a `mass-flow inlet` with `80.69 kg/s` vapor and `116.92 kg/s` liquid, inlet pressure field `1,140,000 Pa`, turbulence intensity `2.11 %`, and hydraulic diameter `0.724 m`.
-- The outlet is a `pressure outlet` at `1,120,000 Pa`.
+- The live HDF5 setup audit confirms a `Mass-Flow Inlet` with `80.69 kg/s` vapor and `116.92 kg/s` liquid, inlet pressure field `1,140,000 Pa`, turbulence intensity `2.11 %`, and hydraulic diameter `0.724 m`.
+- The outlet is a `Pressure Outlet` at `1,120,000 Pa`.
 - Use those observed values as the current Purnanto setup reference when you need the exact loaded Fluent case rather than the paper narrative.
 
 ## Selected Next Inlet Test
-- Replace the uniform/mist-like inlet assumption with a **two-zone split inlet**.
-- Project intent:
-  - outer-wall side of inlet = liquid water
-  - inner/core side of inlet = steam
-- Preferred implementation route:
-  - split the inlet face in geometry/meshing,
-  - import two named inlet zones into Fluent,
-  - keep the rest of the baseline solver stack unchanged for the first A/B comparison.
+- Selected immediate branch reset on 2026-06-09:
+  - return first to the direct Purnanto-style one-inlet recreation;
+  - keep one `Mass-Flow Inlet`;
+  - prescribe both phase mass flows on that same inlet;
+  - delay the split-inlet comparison until the one-inlet rebuild is checked again.
+
+Project intent for the immediate branch:
+
+- one inlet boundary only;
+- steam and water both enter through that inlet;
+- no pure-liquid / pure-steam face split;
+- no full-area velocity-inlet reinterpretation.
+
+Concrete branch record:
+
+- `../../../Setup report/08-purnanto-one-inlet-massflow-recreation.md`
+
+## Retained Alternate Path
+
+- The two-zone split inlet remains a deliberate comparison path, not the current direct-baseline target.
+- If reactivated later, the intended concept is still:
+  - outer-wall side of inlet = liquid water;
+  - inner/core side of inlet = steam;
+  - keep the rest of the solver stack unchanged for the first A/B comparison.
 
 ## Pure-Phase Equal-Velocity Split Calculation
 - Calculation date: 2026-05-28.
@@ -40,7 +57,7 @@ Track how inlet representation evolves from simplified baseline toward realistic
 
 ## Fluent Velocity-Inlet Turbulence Inputs
 - Current project answer for the unsplit square inlet: use hydraulic diameter `0.724 m` because `Dh = 4A/P` and a square `0.724 m x 0.724 m` gives `Dh = 0.724 m` (`Inferred`, `Low Risk`).
-- Purnanto-style turbulence intensity value `2.109999 %` is now confirmed by the live HDF5 audit as the baseline reproduction value (`Observed`).
+- Purnanto-style turbulence intensity value `2.109999 %` is confirmed by the live HDF5 audit as the baseline reproduction value (`Observed`).
 - If the inlet is split into two Fluent velocity-inlet zones only to assign liquid/steam regions inside the same physical square inlet, keep `Dh = 0.724 m` on both zones for the first controlled comparison so the split does not also introduce a turbulence-length-scale change (`Assumed`, `Medium Risk`).
 - If the two zones are instead interpreted as physically separate rectangular ducts, their geometric hydraulic diameters would be approximately:
   - liquid strip `0.006754 m x 0.724 m`: `Dh = 0.01338 m`;
