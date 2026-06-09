@@ -62,3 +62,21 @@ Use that note when the task is:
 - short parity smoke test
 - writing local case/data outputs
 ```
+
+## 9. Local one-inlet parity script behaves differently than older notes
+
+The current local hardened smoke-test path is documented separately in:
+
+```text
+docs/LOCAL_ONE_INLET_SMOKE_TEST.md
+```
+
+Use that note when the task is:
+
+```text
+- local Fluent launch
+- local mesh-only setup
+- one mixed steam-water inlet reconstruction
+- short parity smoke test
+- writing local case/data outputs
+```

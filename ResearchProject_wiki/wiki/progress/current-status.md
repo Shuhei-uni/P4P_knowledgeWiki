@@ -10,10 +10,12 @@
 - Latest diagnostic result: `PLS-PRO-2026-06-03-A` reports very low apparent liquid carryover at the steam outlet (`0.03663388722044243 kg/s`, `0.03135 %` of liquid inlet if interpreted as carryover magnitude). Treat this as a scoped steam-carryover diagnostic, not a full brine-drainage balance.
 - New baseline audit: `PURNANTO-LIVE-AUDIT-2026-06-05` loaded `purnanto-setup.cas.h5` and `purnanto-setup-5000.dat.h5`; the live case matches the core Purnanto baseline solver stack and records a `2,964,593`-cell tetra mesh with minimum orthogonal quality `0.277635`.
 - New direct-rebuild branch: setup `08` now records the paper-style one-inlet mixed steam-water `Mass-Flow Inlet` package so the project can return to the closest Purnanto recreation before judging split-inlet alternatives.
+- Retained alternate branch: setup `08a` preserves the planned student-edition outlet-extension trial as a comparison path from setup `07`, not as the current primary rebuild target.
 - New PyFluent result: the local `trial3.msh` one-inlet reconstruction now launches, creates manual water vapor/liquid materials, hybrid-initializes, and completes a `10`-iteration smoke test through the script in `../../../PyAnsys/scripts/reconstruct_purnanto_trial3.py`.
 - New hardened PyFluent result: the same one-inlet reconstruction path now runs on `trial4.msh` with clean `Operating Pressure = 0 Pa`, confirmed 2026 R1 numerics paths, mass-flow sanity reporting, and both case/data writes.
 - New longer PyFluent result: a controlled `500`-iteration `trial4` diagnostic run has now completed on the one-steam-outlet branch with chunked reporting, checkpointing, vapor recovery approximately `1.0092`, liquid carryover approximately `3.97e-25`, and a rough residual-history plot recovered from the Fluent transcript.
 - Active setup branch: `../../../Setup report/08-purnanto-one-inlet-massflow-recreation.md` is now the selected direct baseline-rebuild branch; `../../../Setup report/07-pure-phase-split-actual-area.md` is retained as a comparison-only split-inlet branch.
+- Secondary comparison branch: `../../../Setup report/08a-steam-outlet-extension-student-trial.md` remains available for the downstream steam-outlet boundary-placement diagnostic if that question is revived.
 - Archive guard: do not archive chats that were active on or after `2026-05-25`; older chats can be archived only after their durable outcomes are confirmed in the wiki and setup-report files.
 
 ## What Is Done
@@ -40,6 +42,7 @@
 - Newest documented run: `PLS-PRO-2026-06-03-A`, based on `Setup report/07-pure-phase-split-actual-area.md`.
 - Newest baseline audit: `PURNANTO-LIVE-AUDIT-2026-06-05`, recorded in `../../../Setup report/00a-purnanto-setup-5000-live-audit.md`.
 - New direct-rebuild report: `../../../Setup report/08-purnanto-one-inlet-massflow-recreation.md`.
+- Retained comparison report: `../../../Setup report/08a-steam-outlet-extension-student-trial.md`.
 - New local automation note: `../technical/pyfluent-trial3-one-inlet-reconstruction-smoke-test.md`.
 - New local reusable doc: `../../../PyAnsys/docs/LOCAL_ONE_INLET_SMOKE_TEST.md`.
 - New residual artifact set: `trial4-purnanto-recon-500-residuals.png` and `trial4-purnanto-recon-500-residuals.csv` now exist beside the `500`-iteration case/data outputs.
@@ -63,6 +66,7 @@
 - Lower-iteration runs remain useful only for setup history and failure-mode hints, not for quantitative performance claims.
 - Deferred run branch: complete two-phase full spiral inlet with no active brine outlet remains an older inlet/mixing diagnostic option, not the immediate next action.
 - Split-inlet branches remain archived comparison options, not the immediate direct-baseline action.
+- The student-edition outlet-extension trial remains a parked comparison branch; if resumed, it should be treated as setup `08a`, not the primary setup `08`.
 
 ## Chat Cleanup Readiness
 - Older chats should be treated as archive candidates only after the decision, evidence, blocker state, and next action are visible in repo files.

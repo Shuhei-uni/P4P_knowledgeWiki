@@ -1,5 +1,20 @@
 # Work Log
 
+## [2026-06-09] model-update | Anchor Purnanto pages to extracted HDF5 setup
+- files created/updated: `wiki/technical/purnanto-live-setup-reference.md`, `wiki/technical/sources/purnanto-etal-2013.md`, `wiki/model/baseline-cfd.md`, `wiki/model/inlet-regimes.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/index.md`, `wiki/log.md`
+- reason: user asked to clean up the knowledge base so older Purnanto setup assumptions are replaced by the extracted Fluent HDF5 case/data pair and the setup is easier to reference later.
+- notable result: the live audited setup is now captured as a friendly reference page and the Purnanto baseline pages now point to observed HDF5 case values instead of leaving the same solver and inlet settings implicit.
+- assumptions introduced/removed: removed several paper-only setup guesses from the project-facing reference path by replacing them with observed HDF5 values; retained the paper source as the provenance record for what was originally reported.
+- next action: if a run-specific setup report needs the same cleanup, sync `00a-purnanto-setup-5000-live-audit.md` to the local extracted file pair and then use the new reference page as the default citation target.
+
+## [2026-06-08] model-update | Create setup 08a steam-outlet extension trial
+- files created/updated: `../../Setup report/08a-steam-outlet-extension-student-trial.md`, `../../Setup report/order-dictionary.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/index.md`, `wiki/log.md`
+- reason: user plans to redo the geometry from setup `07` using the same Purnanto spiral-inlet separator and split two-phase inlet, but with an extended steam outlet path for a student-edition diagnostic trial.
+- what changed since last update: setup `08a` is now recorded as a child of `07`; it keeps the setup `07` inlet/solver package and changes only the steam outlet geometry so the pressure-outlet boundary is downstream of the outlet-pipe entrance.
+- current status: setup `08a` is planned, not yet run. The working hypothesis is that direct pressure-outlet placement at the outlet-pipe entrance may contribute to backflow reversal and unstable steam-outlet mass-flux reports.
+- blockers: mesh quality, student-edition cell limit, residual/monitor stability, and outlet flux stability are all still pending.
+- next action: build the outlet-extension geometry, verify boundary zones and inlet fluxes, then save geometry, mesh, residual, flux, and outlet-vector evidence before comparing against setup `07`.
+
 ## [2026-06-09] model-update | Record 500-iteration one-inlet diagnostic and residual plot
 - files created/updated: `wiki/technical/pyfluent-trial3-one-inlet-reconstruction-smoke-test.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/progress/blockers.md`, `wiki/log.md`, `../../../PyAnsys/docs/LOCAL_ONE_INLET_SMOKE_TEST.md`
 - reason: user asked to make sure the longer `500`-iteration local diagnostic and the rough residual plot were recorded and the findings updated.

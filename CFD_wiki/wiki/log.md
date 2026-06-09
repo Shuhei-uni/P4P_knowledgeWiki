@@ -8,6 +8,18 @@
 - Notable assumptions introduced or removed:
   - Added a plain-language `Inferred` note that the baseline should not be confused with the later split-inlet or full-face velocity-inlet reinterpretations.
 
+## [2026-06-09] ingest | Cross-check Purnanto paper against live HDF5 setup
+- Files created/updated:
+  - `sources/purnanto-2013-cfd-geothermal-separator.md`
+  - `setups/geothermal-boc-separator-fluent-2013-baseline.md`
+  - `wiki/log.md`
+- Reason: the repo now contains an extracted Fluent HDF5 case/data pair that confirms the saved Purnanto baseline setup, so the paper extraction pages needed a live cross-check instead of leaving the same solver and inlet values as paper-only assumptions.
+- Notable result: the live HDF5 audit confirms the core baseline stack, mesh scale, inlet/outlet values, and convergence criteria; the setup page now points to a more direct project reference for the audited case.
+- Notable assumptions introduced or removed:
+  - removed the need to infer mesh counts, URFs, residual criteria, and inlet hydraulic diameter for the saved baseline case;
+  - retained the paper as the provenance source for what was originally reported.
+- Next action: keep future Purnanto-related setup notes anchored to the audited live case reference rather than restating paper-derived guesses.
+
 ## [2026-06-04] refactor | Add separator physics-basis layer
 - Files created/updated:
   - `template/physics-basis-page.md`
