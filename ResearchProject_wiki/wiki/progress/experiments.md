@@ -17,6 +17,21 @@
 
 ## Runs
 
+### Run PURNANTO-H5-AUDIT-2026-06-09
+- Run ID: `PURNANTO-H5-AUDIT-2026-06-09`
+- Date: 2026-06-09
+- Objective: Extract the local Fluent HDF5 case/data pair and turn the saved Purnanto setup into a portable reference rather than a paper-only reconstruction.
+- Geometry: Purnanto baseline separator case as saved in `PyAnsys/data/4800-iterations-300412-1.cas.h5`; exact paper inlet variant still requires visual confirmation if geometry identity matters.
+- Mesh: `2,964,593` cells, `572,556` nodes, `6,063,406` faces, minimum orthogonal quality `0.277635`, maximum aspect ratio `12.8899`.
+- Physics model: steady pressure-based `Mixture`; `phase-1 = water-vapor-at-psep`; `phase-2 = water-liquid-at-psep`; `RNG k-epsilon`; energy off.
+- Solver settings: `SIMPLE`, Green-Gauss Node Based gradient, `PRESTO!` pressure, second-order momentum/k/epsilon, `QUICK` volume fraction, gravity `(0, -9.81, 0) m/s2`, operating pressure `0 Pa`, hybrid initialization state present in the case.
+- Boundary and initial conditions: mass-flow inlet with vapor `80.69 kg/s`, liquid `116.92 kg/s`, inlet pressure field `1,140,000 Pa`, turbulence intensity `2.11 %`, hydraulic diameter `0.724 m`; pressure outlet at `1,120,000 Pa`; wall zones stationary no-slip; bottom wall present; DPM injections inactive in the saved case.
+- Iteration budget: `5000` saved iterations in the paired data file.
+- Convergence monitors: residual criteria continuity `1e-4`; velocity, `k`, `epsilon`, and volume fraction `1e-3`; residual histories themselves still need a separate export if report-level confirmation is required.
+- Outcome: `Audited / Extracted`.
+- Hypothesized cause (if non-converged): not applicable; this is a setup audit, not a solve failure.
+- Next action: use the new live setup reference page to retire paper-only assumptions and keep future Purnanto setup notes anchored to the extracted case.
+
 ### Run PYFLUENT-TRIAL4-500-2026-06-09
 - Run ID: `PYFLUENT-TRIAL4-500-2026-06-09`
 - Date: 2026-06-09
@@ -87,6 +102,22 @@
 - Evidence-use label: direct Purnanto-recreation branch definition only.
 - Hypothesized cause (if non-converged): not yet applicable; the point of this branch is to remove the split-inlet change and return to the simpler paper-style one-inlet package.
 - Next action: build the Fluent case from `../../../Setup report/08-purnanto-one-inlet-massflow-recreation.md` and verify the boundary/model stack before reviving any split-inlet comparison logic.
+
+### Run PLS-STUDENT-OUTLET-EXT-2026-06-08
+- Run ID: `PLS-STUDENT-OUTLET-EXT-2026-06-08` (`Assumed` setup label until the Fluent case filename is confirmed)
+- Date: 2026-06-08
+- Objective: Test whether moving the steam pressure-outlet boundary downstream of the central outlet-pipe entrance reduces outlet backflow reversal and stabilizes steam-outlet mass-flux reports.
+- Geometry: child of `../../../Setup report/07-pure-phase-split-actual-area.md`; keeps Purnanto's rectangular 90-degree spiral-inlet BOC separator body and setup `07` pure liquid / pure steam split inlet, but extends the central steam outlet pipe/path so `steam_outlet` is placed at the downstream end of the extension.
+- Mesh: pending student-edition rebuild; record nodes, cells, minimum orthogonal quality, maximum skewness, and outlet-extension local mesh quality before running.
+- Physics model: inherit setup `07` steady pressure-based `Mixture` model; primary phase steam/vapor, secondary phase liquid water; `RNG k-epsilon`; energy off unless the rebuilt Fluent case forces a documented change.
+- Solver settings: inherit setup `07` (`SIMPLE`, `PRESTO!`, second-order momentum/turbulence schemes, setup `07` volume-fraction scheme, hybrid initialization) unless explicitly recorded as changed.
+- Boundary and initial conditions: same setup `07` split inlet values: `inlet_liquid_outer` velocity inlet at `27.118 m/s`, liquid VF `1.0`, hydraulic diameter `0.01338 m`; `inlet_steam_inner` velocity inlet at `27.118 m/s`, liquid VF `0.0`, hydraulic diameter `0.72061 m`; `steam_outlet` pressure outlet moved to the end of the extended outlet path.
+- Iteration budget: pending; choose after mesh count and student-edition runtime limit are known.
+- Convergence monitors: residuals, inlet liquid/steam phase fluxes, steam-outlet phase fluxes, outlet-face backflow warnings, velocity vectors near the central outlet intake, velocity vectors inside the outlet extension, and liquid volume fraction near the outlet intake.
+- Outcome: `Planned`.
+- Evidence-use label: planned student-edition geometry diagnostic only. This branch can test boundary-placement sensitivity, but it is not final separator-performance evidence unless mesh quality, residual/monitor stability, and flux stability are documented.
+- Hypothesized cause (if non-converged): `Inferred` pressure-outlet boundary placement at the immediate outlet-pipe entrance may expose the boundary to local swirling/recirculating flow, causing backflow reversal and unstable outlet mass-flux reporting.
+- Next action: build the setup `08a` geometry from `../../../Setup report/08a-steam-outlet-extension-student-trial.md`, confirm the former outlet-pipe entrance is internal flow passage rather than a boundary face, then initialize and verify inlet fluxes before running.
 
 ### Run PURNANTO-LIVE-AUDIT-2026-06-05
 - Run ID: `PURNANTO-LIVE-AUDIT-2026-06-05`

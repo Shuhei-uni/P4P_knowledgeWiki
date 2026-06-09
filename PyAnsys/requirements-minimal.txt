@@ -4,5 +4,6 @@ pyvista
 matplotlib
 pandas
 numpy
+h5py
 python-dotenv
 PyYAML

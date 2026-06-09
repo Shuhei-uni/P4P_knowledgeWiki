@@ -8,6 +8,9 @@
 ## Why This Source Matters
 This is a key reconstruction reference for legacy Fluent setup choices, including multiphase assumptions, turbulence model selection, boundary-condition style, and particle-tracking method.
 
+For the current project, the paper should be read together with the audited live Fluent setup reference:
+- [purnanto-live-setup-reference](../purnanto-live-setup-reference.md)
+
 ## Extracted Technical Setup (Reported)
 - Turbulence model used: RNG `k-epsilon` for high-swirl separator flow (`Reported`, `purnanto-zarrouk-cater-2013`, p.1-3).
 - Boundary condition style: mass-flow inlet and pressure outlet (`Reported`, `purnanto-zarrouk-cater-2013`, p.5).
@@ -36,3 +39,6 @@ This is a key reconstruction reference for legacy Fluent setup choices, includin
 3. Confirm initialization method and any relaxation/stabilization settings are captured.
 4. Check mesh quality metrics and local refinement at high-gradient regions.
 5. Run a short controlled test matrix with one variable changed per run.
+
+## Live Setup Shortcut
+- Before rereading the paper, open [purnanto-live-setup-reference](../purnanto-live-setup-reference.md) for the exact saved Fluent case values extracted from the HDF5 pair in this repo.

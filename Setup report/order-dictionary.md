@@ -55,6 +55,7 @@ Rules:
 | `06` | fixed-velocity pure-phase alternative | `06-pure-phase-split-fixed-velocity.md` | `06-pure-phase-split-fixed-velocity.md` | High | alternate retained | branch from later actual-area work; preserves `26.81 m/s` |
 | `07` | pure-phase actual-area branch | `07-pure-phase-split-actual-area.md` | `07-pure-phase-split-actual-area.md` | High | professional baseline flux diagnostic completed | selected next setup definition after `06` was kept as alternate; professional-license run now recorded with incomplete surface flux balance pending brine/liquid outlet report |
 | `08` | direct Purnanto-recreation branch | `08-purnanto-one-inlet-massflow-recreation.md` | `08-purnanto-one-inlet-massflow-recreation.md` | High | selected direct baseline-rebuild branch | returns to the paper-style one-inlet mixed steam-water `Mass-Flow Inlet` package using the live Purnanto audit and reusable CFD baseline as the concrete rebuild target |
+| `08a` | steam-outlet boundary-placement trial | `08a-steam-outlet-extension-student-trial.md` | `08a-steam-outlet-extension-student-trial.md` | High | planned student-edition diagnostic branch | child of `07`; keeps the Purnanto spiral-inlet body and setup `07` split two-phase inlet, but extends the central steam outlet path so the pressure-outlet boundary is downstream of the outlet-pipe entrance |
 
 ## Parent-Child Map
 
@@ -71,6 +72,7 @@ Rules:
              -> 05 complete two-phase actual-area no-brine-outlet
              -> 06 pure-phase split fixed velocity
              -> 07 pure-phase split actual-area
+                -> 08a steam outlet extension student-edition trial
 ```
 
 ## Working Interpretation
@@ -78,14 +80,14 @@ Rules:
 - Main lineage:
   `00 -> 01 -> 02 -> 03 -> 04 -> 07`
 - Child/side branches:
-  `00a`, `02b`, `03a`, `05`, `06`, `08`
+  `00a`, `02b`, `03a`, `05`, `06`, `08`, `08a`
 
 Interpretation note:
 
 - `08` is intentionally a reset-to-baseline branch rather than the next pure-phase child of `07`.
 - Use `08` when the task is to recreate the Purnanto setup itself with one inlet carrying both phases, not when the task is to continue the split-inlet comparison lineage.
 
-This means `07-pure-phase-split-actual-area.md` is the latest named branch in the reconstructed chain, but the filename does not depend on it being "current".
+This means `07-pure-phase-split-actual-area.md` remains the latest named branch in the split-inlet comparison chain, while `08` is the active reset-to-baseline branch and `08a` is the retained outlet-extension child diagnostic.
 
 ## Branch-State Reading Guide
 

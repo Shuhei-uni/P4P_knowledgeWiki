@@ -2,6 +2,7 @@
 CFD_wiki/raw/
 CFD_wiki/guide/Ansys_Fluent_Users_Guide.pdf
 PyAnsys/.venv/
+PyAnsys/data/
 PyAnsys/*.trn
 PyAnsys/*-error.log
 fluent-*.trn

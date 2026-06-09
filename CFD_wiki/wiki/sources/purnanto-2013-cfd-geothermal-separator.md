@@ -67,6 +67,11 @@ The study uses RANS with RNG k-epsilon turbulence modeling, incompressible/isoth
 - Steam quality trends compared against empirical method/data are generally close in magnitude, with some pattern mismatch and unexplained behavior in one spiral-inlet case ([purnanto-2013], p.9).
 - Authors explicitly state that further experimental calibration/validation is needed ([purnanto-2013], p.7, p.9).
 
+## Live HDF5 Cross-Check
+- The local Fluent 24.2 HDF5 audit in this repo confirms a saved baseline setup with one mass-flow inlet (`80.69 kg/s` vapor, `116.92 kg/s` liquid), one pressure outlet (`1.12e6 Pa`), gravity `(0, -9.81, 0) m/s2`, operating pressure `0 Pa`, and `RNG k-epsilon` / pressure-based / `Mixture` solver settings (`Observed`; see [purnanto-live-setup-reference](../../../ResearchProject_wiki/wiki/technical/purnanto-live-setup-reference.md)).
+- The audited case records `2,964,593` cells, `572,556` nodes, minimum orthogonal quality `0.277635`, and maximum aspect ratio `12.8899` (`Observed`).
+- The audited case does not activate DPM injections, so it is best read as a continuous/multiphase baseline snapshot plus solution-warning state rather than a full particle-efficiency run (`Observed`).
+
 ## G) Reproducibility Risk
 ### Missing Parameter List
 - Initialized values for all solution variables are not reported.

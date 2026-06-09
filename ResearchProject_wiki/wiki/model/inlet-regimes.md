@@ -7,6 +7,11 @@ Track how inlet representation evolves from simplified baseline toward realistic
 - Legacy recreation currently assumes mist-like inlet for two-phase feed (based on historical modelling approach).
 - Direct Purnanto recreation means one inlet carrying both phases together, not two separately named inlet faces.
 
+## Audited Purnanto Reference Values
+- The live HDF5 setup audit confirms a `Mass-Flow Inlet` with `80.69 kg/s` vapor and `116.92 kg/s` liquid, inlet pressure field `1,140,000 Pa`, turbulence intensity `2.11 %`, and hydraulic diameter `0.724 m`.
+- The outlet is a `Pressure Outlet` at `1,120,000 Pa`.
+- Use those observed values as the current Purnanto setup reference when you need the exact loaded Fluent case rather than the paper narrative.
+
 ## Selected Next Inlet Test
 - Selected immediate branch reset on 2026-06-09:
   - return first to the direct Purnanto-style one-inlet recreation;
@@ -52,7 +57,7 @@ Concrete branch record:
 
 ## Fluent Velocity-Inlet Turbulence Inputs
 - Current project answer for the unsplit square inlet: use hydraulic diameter `0.724 m` because `Dh = 4A/P` and a square `0.724 m x 0.724 m` gives `Dh = 0.724 m` (`Inferred`, `Low Risk`).
-- Purnanto-style turbulence intensity value `2.109999 %` can be retained as the baseline reproduction value if no new inlet-turbulence evidence is being introduced (`Assumed`, `Medium Risk`).
+- Purnanto-style turbulence intensity value `2.109999 %` is confirmed by the live HDF5 audit as the baseline reproduction value (`Observed`).
 - If the inlet is split into two Fluent velocity-inlet zones only to assign liquid/steam regions inside the same physical square inlet, keep `Dh = 0.724 m` on both zones for the first controlled comparison so the split does not also introduce a turbulence-length-scale change (`Assumed`, `Medium Risk`).
 - If the two zones are instead interpreted as physically separate rectangular ducts, their geometric hydraulic diameters would be approximately:
   - liquid strip `0.006754 m x 0.724 m`: `Dh = 0.01338 m`;
