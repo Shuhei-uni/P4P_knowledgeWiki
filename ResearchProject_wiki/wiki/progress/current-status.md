@@ -11,6 +11,8 @@
 - New baseline audit: `PURNANTO-LIVE-AUDIT-2026-06-05` loaded `purnanto-setup.cas.h5` and `purnanto-setup-5000.dat.h5`; the live case matches the core Purnanto baseline solver stack and records a `2,964,593`-cell tetra mesh with minimum orthogonal quality `0.277635`.
 - New direct-rebuild branch: setup `08` now records the paper-style one-inlet mixed steam-water `Mass-Flow Inlet` package so the project can return to the closest Purnanto recreation before judging split-inlet alternatives.
 - New PyFluent result: the local `trial3.msh` one-inlet reconstruction now launches, creates manual water vapor/liquid materials, hybrid-initializes, and completes a `10`-iteration smoke test through the script in `../../../PyAnsys/scripts/reconstruct_purnanto_trial3.py`.
+- New hardened PyFluent result: the same one-inlet reconstruction path now runs on `trial4.msh` with clean `Operating Pressure = 0 Pa`, confirmed 2026 R1 numerics paths, mass-flow sanity reporting, and both case/data writes.
+- New longer PyFluent result: a controlled `500`-iteration `trial4` diagnostic run has now completed on the one-steam-outlet branch with chunked reporting, checkpointing, vapor recovery approximately `1.0092`, liquid carryover approximately `3.97e-25`, and a rough residual-history plot recovered from the Fluent transcript.
 - Active setup branch: `../../../Setup report/08-purnanto-one-inlet-massflow-recreation.md` is now the selected direct baseline-rebuild branch; `../../../Setup report/07-pure-phase-split-actual-area.md` is retained as a comparison-only split-inlet branch.
 - Archive guard: do not archive chats that were active on or after `2026-05-25`; older chats can be archived only after their durable outcomes are confirmed in the wiki and setup-report files.
 
@@ -39,11 +41,15 @@
 - Newest baseline audit: `PURNANTO-LIVE-AUDIT-2026-06-05`, recorded in `../../../Setup report/00a-purnanto-setup-5000-live-audit.md`.
 - New direct-rebuild report: `../../../Setup report/08-purnanto-one-inlet-massflow-recreation.md`.
 - New local automation note: `../technical/pyfluent-trial3-one-inlet-reconstruction-smoke-test.md`.
+- New local reusable doc: `../../../PyAnsys/docs/LOCAL_ONE_INLET_SMOKE_TEST.md`.
+- New residual artifact set: `trial4-purnanto-recon-500-residuals.png` and `trial4-purnanto-recon-500-residuals.csv` now exist beside the `500`-iteration case/data outputs.
 - Older water-pool run `MWH-WP-2026-05-07-A` showed more plausible swirl after 3500 steady iterations but is retained only as historical troubleshooting evidence.
 
 ## What Is In Progress
 - Preparing the direct one-inlet rebuild from setup `08` so the project returns to the closest Purnanto boundary package.
 - Narrowing the remaining PyFluent caveats to the operating-pressure API path and the correct 2026 R1 solution-method setter paths.
+- Narrowing the remaining PyFluent caveats further to pressure-outlet setting inactivity cleanup and cleaner balance reporting.
+- The direct one-inlet PyFluent path now has a longer controlled diagnostic result; remaining cleanup is mainly pressure-outlet setting inactivity, cleaner balance reporting, and a better direct residual export path.
 - Preparing quick DPM post-processing using `../../../CFD_wiki/wiki/synthesis/fluent-separator-efficiency-methods.md` and `../../../CFD_wiki/wiki/guidance/fluent-general-click-by-click.md`.
 - Historical convergence and physical-behavior notes for the parent mixed wet-half velocity-inlet/brine-outlet case are retained, but they are not active setup `07` blockers.
 - Verification of flow settings and numerical configuration.
@@ -64,9 +70,9 @@
 - The main remaining archive-risk before removing reliance on older chats was the stale snapshot date on this page and ambiguous branch state in the setup-order dictionary; this cleanup pass addresses those two gaps.
 
 ## Immediate Next Actions
-1. Fix the remaining PyFluent operating-pressure setter path so the scripted case reaches cleaner parity with the intended `0 Pa` baseline.
-2. Map the correct 2026 R1 PyFluent solution-method API paths for `SIMPLE`, `PRESTO!`, and the target discretization schemes.
-3. Add automatic inlet/outlet phase mass-flow reporting to the smoke-test script so each rebuild verifies the one-inlet package immediately.
+1. Check whether the remaining pressure-outlet subsetting inactivity needs a different setting order or can be treated as harmless for the current controlled diagnostic path.
+2. Keep the direct one-inlet `trial4` PyFluent path as the active local parity and longer-diagnostic baseline.
+3. If useful, improve the direct residual-export path so future plots do not depend on transcript parsing.
 4. Treat setup `07` and its DPM evidence as comparison-only context until the direct Purnanto-recreation branch is cleaner and more repeatable.
 
 ## Roadmap Link

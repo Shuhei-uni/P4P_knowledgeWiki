@@ -4,5 +4,7 @@ CFD_wiki/guide/Ansys_Fluent_Users_Guide.pdf
 PyAnsys/.venv/
 PyAnsys/*.trn
 PyAnsys/*-error.log
+fluent-*.trn
+cortexerror.log
 **/__pycache__/
 *.pyc

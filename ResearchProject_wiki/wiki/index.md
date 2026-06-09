@@ -23,6 +23,7 @@
 
 ## Technical Layer
 - `wiki/technical/sources/purnanto-etal-2013.md`
+- `wiki/technical/v2-purnanto-spiral-inlet-geometry.md`
 - `wiki/technical/pyfluent-trial3-one-inlet-reconstruction-smoke-test.md`
 
 ## Literature Layer

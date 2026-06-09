@@ -44,3 +44,21 @@ If `ansys-fluent-visualization` imports fail, still continue with `ansys-fluent-
 ## 8. Meshing not available
 
 `ansys-meshing-prime` requires access to Ansys Prime Server / meshing capability. Treat it as a later-stage feature.
+
+## 9. Local one-inlet parity script behaves differently than older notes
+
+The current local hardened smoke-test path is documented separately in:
+
+```text
+docs/LOCAL_ONE_INLET_SMOKE_TEST.md
+```
+
+Use that note when the task is:
+
+```text
+- local Fluent launch
+- local mesh-only setup
+- one mixed steam-water inlet reconstruction
+- short parity smoke test
+- writing local case/data outputs
+```
