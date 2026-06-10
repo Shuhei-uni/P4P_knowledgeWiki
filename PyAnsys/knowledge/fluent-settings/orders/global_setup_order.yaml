@@ -1,0 +1,84 @@
+name: global_fluent_setup_order
+principle: "Fluent is a GUI state machine: enable parent, refresh, inspect, set child, read back."
+stages:
+  - id: A
+    name: mesh_and_base_solver
+    steps:
+      - read mesh
+      - check mesh
+      - scale/check units
+      - set pressure-based or density-based solver
+      - set steady/transient
+      - set gravity and operating conditions
+      - save checkpoint
+  - id: B
+    name: materials
+    steps:
+      - create/import carrier phase materials
+      - create/import secondary phase materials
+      - defer DPM particle material until DPM is enabled if category is not visible
+      - read back material categories
+  - id: C
+    name: parent_models
+    steps:
+      - enable Energy first if heat/phase-change required
+      - enable Multiphase and set model family
+      - enable Viscous/turbulence model
+      - defer DPM until carrier setup is stable unless coupled source terms are required during solve
+      - defer Eulerian Wall Film until DPM/basic carrier case works
+  - id: D
+    name: phase_setup
+    steps:
+      - set number of phases
+      - refresh/reacquire phase tree
+      - assign primary and secondary phase materials
+      - refresh/reacquire phase interaction tree
+      - set phase interaction options
+  - id: E
+    name: cell_zones_and_boundaries
+    steps:
+      - set cell zone materials/phase domain if needed
+      - set boundary types first
+      - refresh/reacquire boundary objects
+      - set mixture/global boundary values
+      - set phase-specific boundary values
+      - set turbulence values
+      - set energy values if Energy is on
+      - set DPM/EWF wall interactions only after DPM/EWF are enabled
+  - id: F
+    name: solution_and_initialization
+    steps:
+      - set solution methods after equations exist
+      - set solution controls
+      - initialize
+      - patch volume fractions if required
+      - run carrier field
+      - save carrier checkpoint
+  - id: G
+    name: dpm
+    steps:
+      - enable DPM
+      - refresh/reacquire DPM tree
+      - set global DPM tracking/physical options
+      - create DPM materials if needed and visible
+      - create default injections first
+      - reacquire each injection
+      - modify particle type, material, injection type, location, point properties sequentially
+      - read back all injection properties
+      - save checkpoint
+  - id: H
+    name: optional_ewf
+    steps:
+      - enable EWF only after basic DPM works
+      - refresh/reacquire EWF and wall boundary objects
+      - set EWF global options
+      - set DPM-wall-film coupling
+      - set wall film boundary conditions
+      - read back and save
+  - id: I
+    name: final_run_and_exports
+    steps:
+      - run/list DPM tracks
+      - create particle fate reports
+      - export figures/reports
+      - save final case/data
