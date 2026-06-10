@@ -22,6 +22,15 @@
 - `wiki/progress/experiments.md`
 - `wiki/progress/blockers.md`
 
+## Verification And Validation Layer
+- `wiki/vnv/index.md`
+- `wiki/vnv/policy.md`
+- `wiki/vnv/claim-classes.md`
+- `wiki/vnv/signoff-log.md`
+- `wiki/vnv/targets/index.md`
+- `wiki/vnv/verification/index.md`
+- `wiki/vnv/validation/index.md`
+
 ## Technical Layer
 - `wiki/technical/sources/purnanto-etal-2013.md`
 - `wiki/technical/purnanto-live-setup-reference.md`
@@ -34,7 +43,7 @@
 ## Core Models
 - `wiki/model/baseline-cfd.md`
 - `wiki/model/inlet-regimes.md` - now tracks the planned two-zone split-inlet upgrade path.
-- `wiki/model/validation.md`
+- `wiki/model/validation.md` - project-facing validation summary; detailed project V&V reports now live in `wiki/vnv/`.
 - Cross-wiki mesh synthesis: `../../CFD_wiki/wiki/synthesis/mesh-quality-and-resolution-patterns.md`
 
 ## Gaps and Synthesis

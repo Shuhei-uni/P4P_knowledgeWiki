@@ -1,5 +1,33 @@
 # Work Log
 
+## [2026-06-11] model-update | Link setup-report system back to roadmap
+- files created/updated: `../../Setup report/order-dictionary.md`, `../../Setup report/07-pure-phase-split-actual-area.md`, `wiki/log.md`
+- reason: user asked to make the setup-report system aware that the project roadmap exists, because the roadmap had been forgotten and the active setup branch needed a durable backlink.
+- assumptions introduced/removed: introduced the explicit cross-system rule that setup lineage should be read together with the project roadmap; no setup identity or ordering assumptions were changed.
+- next action: when new setup branches are created from `07`, check the roadmap first so setup reports stay aligned with the active project path.
+
+## [2026-06-11] workflow-update | Refresh AGENTS guides for current repo structure
+- files created/updated: `../../AGENTS.md`, `../AGENTS.md`, `../../PyAnsys/AGENTS.md`, `../../CFD_wiki/AGENTS.md`, `../../CFD_wiki/wiki/log.md`, `wiki/log.md`
+- reason: user asked to update the active `AGENTS.md` files so they reflect the current split between reusable CFD knowledge, project V&V sign-off, setup lineage, and executable automation.
+- assumptions introduced/removed: clarified that `ResearchProject_wiki/wiki/vnv/` owns human-readable V&V records while `PyAnsys` owns machine-readable target and claim-gate logic; kept `Setup report/` separate as the setup-lineage authority.
+
+## [2026-06-11] workflow-update | Add dedicated project V&V layer and repo tree map
+- files created/updated: `AGENTS.md`, `wiki/index.md`, `wiki/model/validation.md`, `wiki/project/roadmap.md`, `wiki/vnv/index.md`, `wiki/vnv/policy.md`, `wiki/vnv/claim-classes.md`, `wiki/vnv/signoff-log.md`, `wiki/vnv/targets/index.md`, `wiki/vnv/verification/index.md`, `wiki/vnv/validation/index.md`, `../../PROJECT_TREE.md`, `wiki/log.md`
+- reason: user asked for a cleaner place to store project-owned verification and validation reports without mixing them into setup-lineage records, and also asked for a simple top-level tree of the repository structure after the refactor.
+- assumptions introduced/removed: kept `Setup report/` as a separate lineage system rather than moving it into `ResearchProject_wiki`; introduced `wiki/vnv/` as the project-owned layer for target records, verification reports, validation reports, and final human sign-off.
+- next action: start the first concrete reports under `wiki/vnv/verification/` and `wiki/vnv/validation/` for setup `07`, then link the matching machine-readable target manifests from `PyAnsys`.
+
+## [2026-06-11] model-update | Reset roadmap around setup 07 baseline path
+- files created/updated: `wiki/project/roadmap.md`, `wiki/log.md`
+- reason: user asked to replace the old brine-outlet and water-initialization roadmap with a new project sequence built from `07-pure-phase-split-actual-area.md`, while making it explicit that setup `07` is not yet verified or validated.
+- assumptions introduced/removed: removed the old assumption that `FFF-2`, brine-outlet recovery, and water-pool initialization remain the main project path; introduced the user-specified scope decision that these are parked future-work branches unless extra time remains after the main setup `07` path is complete.
+- next action: use the new roadmap to decide the setup `07` acceptance gate, then run mesh verification only after the baseline branch is numerically acceptable.
+
+## [2026-06-10] model-update | Link project validation page to reusable CFD-side V&V workflow
+- files created/updated: `wiki/model/validation.md`, `wiki/index.md`, `wiki/log.md`
+- reason: user asked for a more robust verification/validation method grounded in the existing CFD literature pages, so the project validation page now points to the reusable CFD-side workflow instead of trying to duplicate that method locally.
+- assumptions introduced/removed: added the rule that the CFD wiki holds the reusable separator V&V method authority, while the research wiki should only track which anchor and acceptance gate are active for the current project branch.
+
 ## [2026-06-09] model-update | Anchor Purnanto pages to extracted HDF5 setup
 - files created/updated: `wiki/technical/purnanto-live-setup-reference.md`, `wiki/technical/sources/purnanto-etal-2013.md`, `wiki/model/baseline-cfd.md`, `wiki/model/inlet-regimes.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/index.md`, `wiki/log.md`
 - reason: user asked to clean up the knowledge base so older Purnanto setup assumptions are replaced by the extracted Fluent HDF5 case/data pair and the setup is easier to reference later.

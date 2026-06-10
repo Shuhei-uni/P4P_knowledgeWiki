@@ -1,5 +1,41 @@
 # CFD Wiki Log
 
+## [2026-06-11] refactor | Refresh CFD_wiki operating contract for repo split
+- Files created/updated:
+  - `../AGENTS.md`
+  - `wiki/log.md`
+- Reason: align the local CFD wiki guide with the current repository structure so reusable CFD method pages stay distinct from project V&V sign-off, setup lineage, and automation-specific artifacts.
+- Notable assumptions introduced or removed:
+  - Added explicit cross-system boundaries showing that `ResearchProject_wiki/wiki/vnv/` owns project sign-off, `Setup report/` owns setup lineage, and `PyAnsys/` owns machine-readable target or claim-gate files.
+
+## [2026-06-11] query | Tighten separator V&V automation claim language
+- Files created/updated:
+  - `wiki/synthesis/separator-cfd-verification-and-validation-workflow.md`
+  - `wiki/log.md`
+- Reason: incorporate user review feedback that the main automation value is not automatic validation, but automatic enforcement of the maximum defensible claim level for a separator CFD run.
+- Notable assumptions introduced or removed:
+  - Added an explicit rule that validation comparison can be automated, but validation judgment remains human-reviewed because target appropriateness is not machine-decidable from numeric closeness alone.
+  - Added an explicit guardrail that without a predefined validation target file or equivalent manifest, automation must not emit `Externally validated`.
+
+## [2026-06-10] query | Add reusable separator CFD verification and validation workflow
+- Files created/updated:
+  - `wiki/synthesis/separator-cfd-verification-and-validation-workflow.md`
+  - `wiki/index.md`
+  - `wiki/log.md`
+- Reason: user asked for a general but robust separator CFD verification/validation method anchored to the papers already extracted in `CFD_wiki`, rather than continuing ad hoc test runs without a reusable V&V scaffold.
+- Notable assumptions introduced or removed:
+  - Added an explicit ladder separating setup verification, numerical verification, solution-acceptance gates, external validation hierarchy, and uncertainty-retirement steps.
+  - Clarified that Chen 2025 transfers validation discipline and benchmark structure, while Pointon 2009 remains the closest geothermal separator trend anchor and Mubarok 2020 remains the strongest geothermal field-validation exemplar in the current local source set.
+
+## [2026-06-10] query | Add annular-flow VOF tutorial transfer note for separator sensitivity work
+- Files created/updated:
+  - `wiki/sources/user-core-annular-flow-vof-tutorial.md`
+  - `wiki/index.md`
+  - `wiki/log.md`
+- Reason: support a new setup `09` separator branch by recording what the user-provided Fluent core-annular VOF tutorial does and does not justify for geothermal separator work.
+- Notable assumptions introduced or removed:
+  - Added an explicit transfer rule that the tutorial is useful for transient `VOF` workflow and initialization logic, but not as direct evidence for outlet type, timestep magnitude, contact angle, or separator validation.
+
 ## [2026-06-09] query | Clarify that the Purnanto baseline is a one-inlet mixed feed
 - Files created/updated:
   - `wiki/setups/geothermal-boc-separator-fluent-2013-baseline.md`

@@ -7,6 +7,21 @@ The main risk in this folder is not just wrong values. The main risk is writing 
 
 This file defines the strict local workflow for agents working in `PyAnsys/`.
 
+## Directory Purpose In The Repo
+`PyAnsys/` is the executable layer of the repository.
+
+It should own:
+- automation code and reusable helpers;
+- inspection and probe scripts;
+- setup rebuild and run orchestration;
+- extracted machine-readable setup knowledge;
+- machine-readable verification targets and claim-gate logic.
+
+It should not become the main place for:
+- reusable CFD literature interpretation, which belongs in `../CFD_wiki/`;
+- project sign-off decisions, which belong in `../ResearchProject_wiki/wiki/vnv/`;
+- setup lineage history, which belongs in `../Setup report/`.
+
 ## Core Mental Model
 - Treat Fluent as a live GUI state machine, not a static API.
 - Assume settings paths can change by Fluent version, solver mode, active models, phase count, boundary type, and object creation order.
@@ -171,7 +186,18 @@ If these disagree, do not silently pick one. State the conflict and implement th
 - `scripts/inspection/`: non-mutating discovery, snapshotting, and probes
 - `scripts/setup/`: case-specific orchestration only
 - `knowledge/fluent-settings/`: agent knowledge base, dependency order, fallback strategy, and discovery log
+- `knowledge/`: machine-readable or semi-structured local knowledge, including validation targets and claim-gate support files when present
+- `extractors/`: case/data extraction tools and extracted-structure helpers
+- `docs/`: operator notes, workflow docs, and environment procedures
+- `tests/`: automation checks that do not require burying validation logic in ad hoc scripts
+- `output/`: generated extracts and temporary automation outputs; do not treat as the authoritative knowledge layer
 - `cases/actual_setup_archives/`: archived real setup snapshots for comparison/fallback
+
+## Cross-System Sync Rules
+- If a script changes project claim-gating behavior, make sure the human-readable rule still matches `../ResearchProject_wiki/wiki/vnv/`.
+- If a script reveals a reusable CFD method lesson, summarize it in `../CFD_wiki/` rather than leaving it only in code comments.
+- If a script defines or changes a concrete setup branch, sync the setup identity into `../Setup report/`.
+- If a script emits target manifests or automated check summaries that a human must review, link them from the corresponding `ResearchProject_wiki/wiki/vnv/` page.
 
 Do not put case-specific orchestration logic into `src/` unless it is truly reusable across multiple setup scripts.
 
