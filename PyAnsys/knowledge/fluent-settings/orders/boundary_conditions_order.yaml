@@ -1,0 +1,35 @@
+name: boundary_conditions_order
+principle: "Set boundary type first. Boundary type changes can reset child values."
+order:
+  - confirm_named_zones_exist
+  - set_boundary_type:
+      examples: [velocity-inlet, mass-flow-inlet, pressure-outlet, wall]
+  - refresh_boundary_object
+  - set_mixture_or_global_values:
+      - velocity or mass flow
+      - pressure
+      - direction specification
+  - set_turbulence_values_after_viscous_model:
+      - intensity and hydraulic diameter
+      - k and epsilon
+      - viscosity ratio
+  - set_multiphase_values_after_phases_assigned:
+      - inlet phase volume fractions
+      - outlet backflow volume fractions
+      - phase-specific velocities if exposed
+  - set_energy_values_after_energy_enabled:
+      - inlet temperature
+      - outlet backflow temperature
+      - wall thermal condition
+  - set_DPM_wall_boundary_conditions_after_DPM_enabled:
+      - trap
+      - reflect
+      - escape
+      - wall-film
+  - set_wall_film_conditions_after_EWF_enabled
+hidden_dependencies:
+  - phase tabs appear after multiphase model + phases assigned
+  - turbulence fields appear after viscous model selected
+  - temperature fields appear after Energy enabled
+  - DPM BC tab appears after DPM enabled
+  - wall film tabs appear after EWF enabled
