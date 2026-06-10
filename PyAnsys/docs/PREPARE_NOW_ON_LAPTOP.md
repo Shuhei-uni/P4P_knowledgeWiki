@@ -16,7 +16,7 @@ Copy this kit into that folder.
 From inside `PyAnsys/`:
 
 ```bash
-python3 scripts/bootstrap_local_env.py
+python3 scripts/connection/bootstrap_local_env.py
 ```
 
 This does all of the following:
@@ -26,7 +26,7 @@ This does all of the following:
 - prefers Python 3.12
 - installs requirements-minimal.txt
 - creates .env from .env.example if needed
-- runs scripts/local_preflight.py
+- runs scripts/connection/local_preflight.py
 ```
 
 Why this matters:
@@ -89,7 +89,7 @@ python -m pip install -r requirements-extended.txt
 ## 5. Run local preflight
 
 ```bash
-python scripts/local_preflight.py
+python scripts/connection/local_preflight.py
 ```
 
 Expected:
@@ -134,7 +134,7 @@ docs/CODEX_REMOTE_FLUENT_WORKFLOW.md
 Then when you are ready, tell Codex:
 
 ```text
-Read docs/CODEX_REMOTE_FLUENT_WORKFLOW.md and docs/ON_SITE_FLUENT_PC_CHECKLIST.md. We are preparing to connect this laptop to a remote Ansys Fluent session using PyFluent gRPC. Do not use launch_fluent. Use connect_to_fluent. First run scripts/local_preflight.py and inspect the connection scripts.
+Read docs/CODEX_REMOTE_FLUENT_WORKFLOW.md and docs/ON_SITE_FLUENT_PC_CHECKLIST.md. We are preparing to connect this laptop to a remote Ansys Fluent session using PyFluent gRPC. Do not use launch_fluent. Use connect_to_fluent. First run scripts/connection/local_preflight.py and inspect the connection scripts.
 ```
 
 ## 8. What you cannot test yet

@@ -203,7 +203,7 @@ If the copied server-info file contains `127.0.0.1`, use Option A instead.
 Run:
 
 ```bash
-.venv/bin/python scripts/check_connection.py
+.venv/bin/python scripts/connection/check_connection.py
 ```
 
 Expected:
@@ -220,7 +220,7 @@ Done. This script did not close Fluent.
 Run:
 
 ```bash
-.venv/bin/python scripts/inspect_fluent_session.py
+.venv/bin/python scripts/inspection/inspect_fluent_session.py
 ```
 
 This should help Codex discover what Fluent can expose.

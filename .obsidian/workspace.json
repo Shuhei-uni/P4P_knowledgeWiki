@@ -11,10 +11,14 @@
             "id": "6c4c297b8bf4a4c2",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "CFD_wiki/wiki/physics-basis/droplets-carryover-and-re-entrainment.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "droplets-carryover-and-re-entrainment"
             }
           }
         ]
@@ -178,6 +182,8 @@
   },
   "active": "6c4c297b8bf4a4c2",
   "lastOpenFiles": [
+    "CFD_wiki/wiki/index.md",
+    "AGENTS.md",
     "CFD_wiki/wiki/sources/purnanto-2013-cfd-geothermal-separator.md",
     "CFD_wiki/wiki/synthesis/geothermal-separator-inlet-droplets-and-carryover.md",
     "Setup report/mixed wet-half velocity-inlet initialized-water-pool setup report.md",
@@ -203,8 +209,6 @@
     "CFD_wiki/wiki/setups/geothermal-two-phase-flow-meter-fluent-sst-mixture-2020.md",
     "CFD_wiki/wiki/sources/merbecks-2025-geoprop-geofluid-property-framework.md",
     "CFD_wiki/wiki/sources/montesdeoca-martinez-2026-binary-power-plant-two-phase-geofluid.md",
-    "CFD_wiki/wiki/sources/skoog-2020-annular-flow-three-field-cfd-thesis.md",
-    "CFD_wiki/wiki/sources/mondal-sharma-2024-air-water-annular-flow-cfd.md",
-    "CFD_wiki/wiki/sources/rivas-cruz-2015-geothermal-separator-state-of-art-review.md"
+    "CFD_wiki/wiki/sources/skoog-2020-annular-flow-three-field-cfd-thesis.md"
   ]
 }

@@ -52,13 +52,13 @@ solver = pyfluent.connect_to_fluent(
 requirements-minimal.txt
 requirements-extended.txt
 .env.example
-scripts/local_preflight.py
-scripts/check_connection.py
-scripts/parse_server_info.py
-scripts/inspect_fluent_session.py
-scripts/inspect_case.py
-scripts/probe_remote_paths.py
-scripts/load_case_data.py
+scripts/connection/local_preflight.py
+scripts/connection/check_connection.py
+scripts/connection/parse_server_info.py
+scripts/inspection/inspect_fluent_session.py
+scripts/inspection/inspect_case.py
+scripts/inspection/probe_remote_paths.py
+scripts/inspection/load_case_data.py
 docs/PREPARE_NOW_ON_LAPTOP.md
 docs/ON_SITE_FLUENT_PC_CHECKLIST.md
 ```
@@ -68,26 +68,26 @@ docs/ON_SITE_FLUENT_PC_CHECKLIST.md
 1. Run local preflight:
 
 ```bash
-.venv/bin/python scripts/local_preflight.py
+.venv/bin/python scripts/connection/local_preflight.py
 ```
 
 2. Once Fluent PC is available, fill `.env`.
 3. Run connection check:
 
 ```bash
-.venv/bin/python scripts/check_connection.py
+.venv/bin/python scripts/connection/check_connection.py
 ```
 
 4. Inspect Fluent session:
 
 ```bash
-.venv/bin/python scripts/inspect_fluent_session.py
+.venv/bin/python scripts/inspection/inspect_fluent_session.py
 ```
 
 5. Probe the Fluent-PC project folders:
 
 ```bash
-.venv/bin/python scripts/probe_remote_paths.py
+.venv/bin/python scripts/inspection/probe_remote_paths.py
 ```
 
 6. Build project-specific scripts only after connection works.
@@ -95,11 +95,11 @@ docs/ON_SITE_FLUENT_PC_CHECKLIST.md
 ## First useful project-specific scripts
 
 ```text
-scripts/inspect_case.py
-scripts/load_case_data.py
+scripts/inspection/inspect_case.py
+scripts/inspection/load_case_data.py
 scripts/list_boundaries.py
 scripts/list_models.py
-scripts/export_residuals.py
+scripts/inspection/export_residuals.py
 scripts/export_report_definitions.py
 scripts/run_iterations.py
 ```

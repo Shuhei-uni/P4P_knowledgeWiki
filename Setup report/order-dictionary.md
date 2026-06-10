@@ -15,7 +15,25 @@ Where the history is uncertain, the ordering below reflects the current best rec
 - `ResearchProject_wiki/wiki/log.md`
 - `ResearchProject_wiki/wiki/progress/current-status.md`
 - `ResearchProject_wiki/wiki/progress/experiments.md`
+- `ResearchProject_wiki/wiki/project/roadmap.md`
 - internal parent/child notes inside each setup report
+
+## Project Linkage
+
+Use this file together with:
+
+- `../ResearchProject_wiki/wiki/project/roadmap.md`
+
+Reason:
+
+- this dictionary tells you where a setup sits in the lineage;
+- the roadmap tells you which setup branch is the active project path and what the next simulation stages are.
+
+Current project-level interpretation:
+
+- setup `07` is the main split-inlet baseline candidate branch for the active roadmap;
+- setup-family branches grown from `07` should be checked against the roadmap before creating or reviving additional setup reports;
+- brine-outlet and water-initialization branches remain part of the historical lineage, but they are currently parked as future exploratory work rather than active roadmap steps.
 
 ## Naming Rule
 
@@ -56,6 +74,10 @@ Rules:
 | `07` | pure-phase actual-area branch | `07-pure-phase-split-actual-area.md` | `07-pure-phase-split-actual-area.md` | High | professional baseline flux diagnostic completed | selected next setup definition after `06` was kept as alternate; professional-license run now recorded with incomplete surface flux balance pending brine/liquid outlet report |
 | `08` | direct Purnanto-recreation branch | `08-purnanto-one-inlet-massflow-recreation.md` | `08-purnanto-one-inlet-massflow-recreation.md` | High | selected direct baseline-rebuild branch | returns to the paper-style one-inlet mixed steam-water `Mass-Flow Inlet` package using the live Purnanto audit and reusable CFD baseline as the concrete rebuild target |
 | `08a` | steam-outlet boundary-placement trial | `08a-steam-outlet-extension-student-trial.md` | `08a-steam-outlet-extension-student-trial.md` | High | planned student-edition diagnostic branch | child of `07`; keeps the Purnanto spiral-inlet body and setup `07` split two-phase inlet, but extends the central steam outlet path so the pressure-outlet boundary is downstream of the outlet-pipe entrance |
+| `09` | multiphase sensitivity family parent | `09-multiphase-separator-sensitivity-family.md` | `09-multiphase-separator-sensitivity-family.md` | High | active family container | child of `07`; replaces the retired VOF-only idea with a parent container for literature-backed `DPM`, `RSM-DPM`, and `DPM + EWF` child branches |
+| `09a` | split-inlet DPM carryover branch | `09a-dpm-split-inlet-carryover.md` | `09a-dpm-split-inlet-carryover.md` | High | planned first carryover branch | child of `09`; keeps the setup `07` continuous-field basis and adds `DPM` as the lowest-risk literature-backed next step for droplet escape sensitivity |
+| `09b` | split-inlet RSM-DPM accuracy branch | `09b-rsm-dpm-split-inlet-accuracy.md` | `09b-rsm-dpm-split-inlet-accuracy.md` | High | planned higher-accuracy branch | child of `09`; upgrades the carrier-field turbulence closure to `RSM` and adds `DPM`, following the stronger recent separator-method anchor from Chen 2025 |
+| `09c` | split-inlet DPM + EWF wall-film branch | `09c-dpm-ewf-wall-film-reentrainment.md` | `09c-dpm-ewf-wall-film-reentrainment.md` | High | planned wall-film mechanism branch | child of `09`; treats wall-film persistence and re-entrainment as the main unresolved mechanism rather than only droplet escape |
 
 ## Parent-Child Map
 
@@ -73,21 +95,26 @@ Rules:
              -> 06 pure-phase split fixed velocity
              -> 07 pure-phase split actual-area
                 -> 08a steam outlet extension student-edition trial
+                -> 09 multiphase sensitivity family
+                   -> 09a split-inlet DPM carryover
+                   -> 09b split-inlet RSM-DPM accuracy
+                   -> 09c split-inlet DPM + EWF wall-film
 ```
 
 ## Working Interpretation
 
 - Main lineage:
-  `00 -> 01 -> 02 -> 03 -> 04 -> 07`
+  `00 -> 01 -> 02 -> 03 -> 04 -> 07 -> 09`
 - Child/side branches:
-  `00a`, `02b`, `03a`, `05`, `06`, `08`, `08a`
+  `00a`, `02b`, `03a`, `05`, `06`, `08`, `08a`, `09a`, `09b`, `09c`
 
 Interpretation note:
 
 - `08` is intentionally a reset-to-baseline branch rather than the next pure-phase child of `07`.
+- `09` returns to the split-inlet comparison lineage as a family parent from `07`, not as a continuation of the one-inlet reset branch.
 - Use `08` when the task is to recreate the Purnanto setup itself with one inlet carrying both phases, not when the task is to continue the split-inlet comparison lineage.
 
-This means `07-pure-phase-split-actual-area.md` remains the latest named branch in the split-inlet comparison chain, while `08` is the active reset-to-baseline branch and `08a` is the retained outlet-extension child diagnostic.
+This means `09-multiphase-separator-sensitivity-family.md` is now the current parent in the split-inlet comparison chain, while `09a`, `09b`, and `09c` are the concrete planned child branches. `08` remains the active reset-to-baseline branch and `08a` is the retained outlet-extension child diagnostic.
 
 ## Branch-State Reading Guide
 

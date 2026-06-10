@@ -6,6 +6,7 @@ Define the next spiral-inlet setup built from:
 
 - [04-mixed-wet-half-actual-area.md](04-mixed-wet-half-actual-area.md)
 - [inlet-regimes.md](../ResearchProject_wiki/wiki/model/inlet-regimes.md)
+- [roadmap.md](../ResearchProject_wiki/wiki/project/roadmap.md)
 
 This setup replaces the mixed wet-half inlet with a pure-phase two-zone inlet:
 
@@ -14,6 +15,12 @@ This setup replaces the mixed wet-half inlet with a pure-phase two-zone inlet:
 - both velocity inlets use the current-area exact-mass velocity `27.118 m/s`.
 
 All other model settings should remain the same as the mixed wet-half actual-area setup unless explicitly stated in this report.
+
+Project linkage:
+
+- setup `07` is the active split-inlet baseline candidate referenced by `ResearchProject_wiki/wiki/project/roadmap.md`;
+- this setup report defines the concrete branch content;
+- the roadmap defines whether setup `07` is only diagnostic, accepted as a baseline candidate, numerically verified, or ready for higher-complexity child branches.
 
 ## 2. Setup Identity
 
@@ -220,6 +227,33 @@ Keep the same settings as the parent mixed wet-half actual-area setup:
 | Turbulence schemes | `Second Order Upwind` |
 | Volume fraction scheme | same as parent setup, `QUICK` if available |
 | Initialization | `Hybrid Initialization` |
+
+## 8A. Important Model-Family Clarification
+
+Setup `07` should be classified as:
+
+```text
+steady Mixture carrier-flow setup
+with post-convergence one-way DPM evaluation
+```
+
+It should **not** be classified as a primary `DPM` setup by itself.
+
+Reason:
+
+1. the main continuous-field solve for setup `07` is still `Mixture`, not a particle-coupled solve;
+2. the DPM injections were added after the continuous solution was already available;
+3. baseline DPM interpretation for setup `07` keeps `unsteady particle tracking` off, so particles move through a frozen steady carrier field rather than through a time-evolving transient field;
+4. baseline DPM interpretation for setup `07` also keeps continuous-phase source feedback off, so the injected particles do not modify the solved carrier flow.
+
+Practical interpretation:
+
+- setup `07` = `Mixture` baseline with one-way post-processing DPM carryover checks;
+- setup `07` is **not** a fully coupled `Mixture + DPM` solve;
+- setup `07` is **not** a transient particle-field simulation;
+- setup `07` is **not** an `RSM-DPM` or `DPM + Eulerian Wall Film` branch.
+
+This distinction matters because later setup-family branches such as `09a`, `09b`, and `09c` are intended to turn `DPM` or `DPM + EWF` into the deliberate primary next-step modeling direction, rather than treating DPM only as an after-the-fact diagnostic on top of the setup `07` carrier field.
 
 ## 9. Checks Before Running
 

@@ -4,7 +4,7 @@ This note is the local reusable workflow for the current one-inlet Purnanto-styl
 
 Use it with:
 
-- `scripts/reconstruct_purnanto_trial3.py`
+- `scripts/setup/reconstruct_purnanto_trial3.py`
 - local Fluent installation
 - local mesh export such as `trial4.msh`
 

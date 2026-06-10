@@ -1,0 +1,27 @@
+name: solution_order
+principle: "Set solution schemes after equations exist."
+order:
+  - enable_all_models_first
+  - refresh_solution_methods_tree
+  - set_pressure_velocity_coupling:
+      options: [SIMPLE, SIMPLEC, PISO, Coupled]
+  - set_spatial_discretization:
+      - gradient
+      - pressure
+      - momentum
+      - volume fraction if Multiphase enabled
+      - turbulent kinetic energy if turbulence enabled
+      - turbulent dissipation rate if turbulence enabled
+      - energy if Energy enabled
+      - wall film equations if EWF enabled
+  - set_transient_formulation_if_transient
+  - set_under_relaxation_factors
+  - set_residual_monitors
+  - initialize
+  - patch_if_needed
+  - run
+hidden_dependencies:
+  - volume fraction scheme appears only after Multiphase
+  - energy scheme appears only after Energy
+  - wall film equation schemes appear only after EWF
+  - DPM source controls appear only after DPM

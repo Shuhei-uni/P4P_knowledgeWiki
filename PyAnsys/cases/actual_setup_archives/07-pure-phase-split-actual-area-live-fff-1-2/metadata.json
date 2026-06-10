@@ -1,0 +1,13 @@
+{
+  "archive_name": "07-pure-phase-split-actual-area-live-fff-1-2",
+  "exported_at_utc": "2026-06-10T01:11:49+00:00",
+  "fluent_version": "Ansys Fluent 2024 R2",
+  "source_case": "C:\\Users\\syok443\\Documents\\Setup07extractor\\FFF.1-2.cas.h5",
+  "source_data": "C:\\Users\\syok443\\Documents\\Setup07extractor\\FFF.1-2-02541.dat.h5",
+  "report_ref": "Setup report/07-pure-phase-split-actual-area.md",
+  "notes_label": "Live export from loaded Setup07extractor case/data",
+  "mesh_and_runtime": {
+    "iterations": 2000,
+    "cwd": null
+  }
+}

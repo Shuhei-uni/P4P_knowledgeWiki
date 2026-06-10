@@ -455,6 +455,15 @@ def ensure_seed_injection_for_inert_materials(solver, seed_name: str = SEED_INJE
 
 def enable_dpm_model_best_effort(solver) -> bool:
     dpm = solver.settings.setup.models.discrete_phase
+    try:
+        # In this 2026 R1 Student path, the DPM branch is already live enough to
+        # create injections once the carrier setup exists.
+        dpm.injections.get_object_names()
+        print("enable_dpm_model_precheck: OK -> discrete_phase branch already active")
+        return True
+    except Exception:
+        pass
+
     ok = False
     ok |= try_action(
         "enable_dpm_model_attr_enabled",
@@ -651,17 +660,11 @@ def apply_dpm_model_settings(solver, args: argparse.Namespace) -> bool:
     )
     try_action(
         "set_dpm_unsteady_tracking_off_best_effort",
-        lambda: solver.scheme.exec(
-            ('(ti-menu-load-string "/define/models/dpm/options/unsteady-particle-tracking? no")',)
-        ),
+        lambda: setattr(dpm.particle_treatment, "unsteady_tracking", False),
     )
     try_action(
-        "set_dpm_update_sources_every_flow_iteration_off_best_effort",
-        lambda: setattr(dpm.general_settings.interaction, "update_dpm_sources_every_flow_iteration", False),
-    )
-    try_action(
-        "set_dpm_iteration_interval_best_effort",
-        lambda: setattr(dpm.general_settings.interaction, "dpm_iteration_interval", 10),
+        "set_dpm_interaction_iteration_interval_best_effort",
+        lambda: setattr(dpm.general_settings.interaction, "iteration_interval", 10),
     )
     return ok
 

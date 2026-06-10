@@ -6,6 +6,7 @@
 - [geothermal_research_paper_dictionary (1)](../geothermal_research_paper_dictionary%20(1).md): compatibility router for the geothermal separator and steam-purity lookup dictionary.
 
 ## Sources
+- [user-core-annular-flow-vof-tutorial](sources/user-core-annular-flow-vof-tutorial.md): user-provided Fluent annular/core-annular VOF tutorial used as a transient interface-workflow exemplar, with explicit transfer limits for geothermal separator work.
 - [user-cyclone-solidworks-flow-particle-study-report](sources/user-cyclone-solidworks-flow-particle-study-report.md): user-provided SolidWorks Flow Simulation cyclone setup with fan rotation and particle-diameter separation comparison.
 - [user-cyclone-workbench-rng-dpm-settings-report](sources/user-cyclone-workbench-rng-dpm-settings-report.md): user-provided Workbench/SpaceClaim cyclone setup with tetra mesh, Fluent RNG k-epsilon, energy, and DPM source updates.
 - [youtube-cyclone-separator-icem-fluent-exemplar](sources/youtube-cyclone-separator-icem-fluent-exemplar.md): tutorial-style cyclone separator workflow covering ICEM hexa blocking, Fluent RSM, and DPM particle efficiency.
@@ -68,6 +69,7 @@
 - [geothermal-separator-design-and-cfd-patterns](synthesis/geothermal-separator-design-and-cfd-patterns.md): merged design defaults and failure checks for geothermal separators.
 - [geothermal-separator-inlet-droplets-and-carryover](synthesis/geothermal-separator-inlet-droplets-and-carryover.md): external-web and local-wiki inventory of separator-inlet steam/brine/droplet/mineral evidence, reported sizes, calculated loads, and missing measured particle-size data.
 - [fluent-separator-efficiency-methods](synthesis/fluent-separator-efficiency-methods.md): Purnanto-style DPM separator-efficiency reconstruction plus improved Fluent phase-flux, mass-weighted DPM, wall-film, and field-validation workflows.
+- [separator-cfd-verification-and-validation-workflow](synthesis/separator-cfd-verification-and-validation-workflow.md): reusable separator CFD verification/validation ladder linking mesh checks, monitor gates, DPM checks, and external evidence hierarchy.
 - [annular-flow-three-field-cfd-patterns](synthesis/annular-flow-three-field-cfd-patterns.md): cross-source annular-flow three-field modeling defaults and sensitivities.
 - [two-phase-geofluid-property-to-binary-plant-design](synthesis/two-phase-geofluid-property-to-binary-plant-design.md): links geofluid property modeling to downstream binary-plant design choices.
 - [mesh-quality-and-resolution-patterns](synthesis/mesh-quality-and-resolution-patterns.md): compares reported mesh counts, refinement/independence evidence, and practical orthogonal-quality interpretation across CFD papers.
