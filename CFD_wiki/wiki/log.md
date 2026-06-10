@@ -388,3 +388,21 @@
 - Reason: answer a Fluent 24 setup question about `Intensity and Hydraulic Diameter` for a square separator inlet and preserve the reusable click-path guidance.
 - Notable assumptions introduced or removed:
   - Introduced guidance that hydraulic diameter should be recalculated from the active inlet face, and that artificial split zones should usually retain the physical upstream duct hydraulic diameter for the first controlled comparison.
+
+## [2026-06-10] query | Build semi-automated `.meshdat` mesh-improvement workflow
+- Files created/updated:
+  - `wiki/guidance/workbench-meshdat-semi-automated-improvement.md`
+  - `wiki/guidance/index.md`
+  - `wiki/index.md`
+  - `wiki/log.md`
+- Reason: preserve a reusable workflow for conservative Workbench mesh-control trials that uses PyFluent to audit the baseline Fluent mesh, validate exported trial meshes, and avoid geometry or Named Selection changes.
+- Notable assumptions introduced or removed:
+  - Introduced the workflow boundary that Workbench control edits remain operator-driven while PyFluent handles reopen, audit, comparison, and reporting; preserved uncertainty that the `.meshdat` reopen may expose less diagnostic detail than the exported baseline `.msh`.
+
+## [2026-06-10] query | Tighten split-inlet zone contract for semi-automated mesh workflow
+- Files created/updated:
+  - `wiki/guidance/workbench-meshdat-semi-automated-improvement.md`
+  - `wiki/log.md`
+- Reason: update the reusable guidance so split inlet zones must remain separate, exact Fluent-exported names and boundary types are enforced, bad-cell fractions are tracked at thresholds `0.15`, `0.10`, and `0.05`, and cell count is treated as diagnostic rather than the primary success rule.
+- Notable assumptions introduced or removed:
+  - Removed the earlier assumption that cell target should remain a main pass/fail rule for this workflow; introduced the stricter contract that `liquid-inlet` and `steam-inlet` must stay separate and that local region quality near the split edge and spiral blend still needs explicit review.

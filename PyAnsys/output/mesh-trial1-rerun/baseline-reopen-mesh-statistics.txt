@@ -1,0 +1,50 @@
+Zone Information:
+
+      id                      name                      type     count
+  ______      ____________________      ____________________    ______
+       3   smooth_spiral_separator                     fluid   1444509
+       8                      wall                      wall     50677
+       7                    outlet           pressure-outlet       171
+       6                    bottom                      wall      1336
+       2  interior-smooth_spiral_separator                  interior   2862826
+       1  wall-smooth_spiral_separator                      wall       200
+       9           boundary-node-9             boundary-node     26194
+       4                    node-4                      node    228994
+
+Entity Count:
+ 228994 interior nodes
+ 2862826 interior faces
+ 1444509 interior cells
+ 26194 boundary nodes
+ 52384 boundary faces
+
+Size extremes:
+Edge limits (min max avg): (0.0017074763 0.11626553 0.043796613)
+Face limits (min max avg): (2.6205644e-06 0.0045334242 0.0010486733).
+Cell limits (min max avg): (7.1207186e-09 9.3475071e-05 1.7116068e-05 0 0).
+
+Angle deviation extremes:
+Face limits (min max avg): (1.1052757e-06 0.90726822 0.18780053 2915210)/
+Cell limits (min max avg): (1.9296353e-05 0.90920234 0.29609119 0 0).
+
+Angle deviation distributions:
+Faces: (2915210 (585294 1071044 872244 336508 48500 1495 53 42 27 3) (0 0)).
+Cells (1444509 (20323 222842 524718 468057 169146 34653 4477 255 34 4) (0 0)).
+
+Volume Change Extremes:
+Face limits (min max avg): (1.0000011 1000 982.05158 2915210)/
+Cell limits (min max avg): (1.0023368 8.4120586 1.3925932 0 0).
+
+Volume Change Distributions:
+Faces: (52384 (0 52205 96 28 22 16 10 5 0 2) (0 2862826)).
+Cells (1444509 (0 1415578 28337 494 52 22 20 2 4 0) (0 0)).
+
+Edge Ratio Extremes:
+Face limits (min max avg): (1.0000014 10.313616 1.2824586 2915210)/
+Cell limits (min max avg): (1.00002 10.313616 1.4391022 0 0).
+
+Edge Ratio Distributions:
+Faces: (2915209 (0 2913992 1136 36 18 10 9 2 4 2) (0 1)).
+Cells (1444508 (0 1441806 2626 28 19 12 9 1 4 3) (0 1)).
+
+Successful mesh check.

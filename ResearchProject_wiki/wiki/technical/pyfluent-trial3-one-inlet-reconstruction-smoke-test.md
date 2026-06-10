@@ -11,7 +11,7 @@ Primary linked setup context:
 - `../../../Setup report/08-purnanto-one-inlet-massflow-recreation.md`
 - `../../../CFD_wiki/wiki/setups/geothermal-boc-separator-fluent-2013-baseline.md`
 - `../../../PyAnsys/scripts/reconstruct_purnanto_trial3.py`
-- `../../../PyAnsys/docs/LOCAL_ONE_INLET_SMOKE_TEST.md`
+- `../../../PyAnsys/docs/findings/LOCAL_ONE_INLET_SMOKE_TEST.md`
 
 ## Scope
 

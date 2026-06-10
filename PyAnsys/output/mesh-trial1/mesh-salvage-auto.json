@@ -1,0 +1,17 @@
+{
+  "assessment": null,
+  "delta_vs_baseline": null,
+  "input_artifact": "C:\\Users\\Shuhei Yokkaichi\\Documents\\CFD\\New folder\\meshing trial\\mesh-trial1.msh",
+  "input_artifact_type": "mesh",
+  "metrics": null,
+  "mode": "mesh-salvage",
+  "name": "mesh-salvage-auto",
+  "notes": [
+    "Mesh salvage failed: LaunchFluentError: \nFluent Launch command: \"C:\\Program Files\\ANSYS Inc\\ANSYS Student\\v261\\fluent\\ntbin\\win64\\fluent.exe\" 3ddp -py -t2 -hidden -meshing -sifile=C:\\Users\\SHUHEI~1\\AppData\\Local\\Temp\\serverinfo-gu5oend5.txt -nm"
+  ],
+  "output_case": null,
+  "output_mesh": null,
+  "status": "blocked",
+  "zone_inventory": null,
+  "zone_preservation": null
+}

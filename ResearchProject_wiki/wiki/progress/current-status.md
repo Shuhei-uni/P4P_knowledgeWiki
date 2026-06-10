@@ -1,7 +1,7 @@
 # Current Status
 
 ## Snapshot
-- Date: 2026-06-09
+- Date: 2026-06-10
 - Phase: direct Purnanto-recreation reset plus retained setup `07` archive context
 - Focus: rebuild the paper-style Purnanto setup on the current project path using one mixed steam-water inlet rather than the later split-inlet branches.
 - Current issue: setup `07` has promising apparent steam-line carryover; bottom truncation/no brine outlet/no water pool is now accepted as out of scope for this project branch.
@@ -44,9 +44,11 @@
 - New direct-rebuild report: `../../../Setup report/08-purnanto-one-inlet-massflow-recreation.md`.
 - Retained comparison report: `../../../Setup report/08a-steam-outlet-extension-student-trial.md`.
 - New local automation note: `../technical/pyfluent-trial3-one-inlet-reconstruction-smoke-test.md`.
-- New local reusable doc: `../../../PyAnsys/docs/LOCAL_ONE_INLET_SMOKE_TEST.md`.
+- New local reusable doc: `../../../PyAnsys/docs/findings/LOCAL_ONE_INLET_SMOKE_TEST.md`.
 - New residual artifact set: `trial4-purnanto-recon-500-residuals.png` and `trial4-purnanto-recon-500-residuals.csv` now exist beside the `500`-iteration case/data outputs.
 - Older water-pool run `MWH-WP-2026-05-07-A` showed more plausible swirl after 3500 steady iterations but is retained only as historical troubleshooting evidence.
+- New split-inlet mesh workflow result: the updated `mesh-trial1.msh` now reopens with two separate velocity-inlet zones, but the exported baseline still fails the strict required-zone contract because Fluent currently shows `liquidinlet`, `steaminlet`, and no separate `wall-smooth_spiral_separator` boundary in the reopen audit.
+- New active mesh workflow artifacts: `../../../PyAnsys/input/required-zones-mesh-trial1.txt` plus `../../../PyAnsys/output/meshdat-semi-automated/workflow-report.md`.
 
 ## What Is In Progress
 - Preparing the direct one-inlet rebuild from setup `08` so the project returns to the closest Purnanto boundary package.
@@ -78,6 +80,7 @@
 2. Keep the direct one-inlet `trial4` PyFluent path as the active local parity and longer-diagnostic baseline.
 3. If useful, improve the direct residual-export path so future plots do not depend on transcript parsing.
 4. Treat setup `07` and its DPM evidence as comparison-only context until the direct Purnanto-recreation branch is cleaner and more repeatable.
+5. Fix the split-inlet exported-zone naming in the `mesh-trial1` Meshing branch before accepting any trial meshes from the semi-automated workflow.
 
 ## Roadmap Link
 - Run-efficiency roadmap: `../project/roadmap.md`
