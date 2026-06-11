@@ -1,20 +1,26 @@
 # Current Status
 
 ## Snapshot
-- Date: 2026-06-10
-- Phase: direct Purnanto-recreation reset plus retained setup `07` archive context
-- Focus: rebuild the paper-style Purnanto setup on the current project path using one mixed steam-water inlet rather than the later split-inlet branches.
-- Current issue: setup `07` has promising apparent steam-line carryover; bottom truncation/no brine outlet/no water pool is now accepted as out of scope for this project branch.
+- Date: 2026-06-11
+- Phase: extraction-first Purnanto parity reset plus retained setup `07` archive context
+- Focus: use Python extraction to recover the actual Purnanto Fluent setup faithfully enough that manual reconstruction error stops driving the next branch decision.
+- Current issue: setup `07` has useful comparison evidence, but it is no longer trusted as the closest reconstruction of the original Purnanto setup.
 - Current mesh scale: professional setup `07` run reported at approximately `1.3M` nodes and `7.6M` cells; older project mesh scale was approximately `1.8M` nodes.
-- Current controlled setup change: new setup `08` returns to the one-inlet Purnanto mass-flow package; older split-inlet and velocity-inlet branches remain comparison context only.
+- Current controlled setup change: new setup `08b` will preserve the observed Purnanto setup first, then introduce only the project split-inlet change and later steam-side `DPM` injections.
 - Latest diagnostic result: `PLS-PRO-2026-06-03-A` reports very low apparent liquid carryover at the steam outlet (`0.03663388722044243 kg/s`, `0.03135 %` of liquid inlet if interpreted as carryover magnitude). Treat this as a scoped steam-carryover diagnostic, not a full brine-drainage balance.
 - New baseline audit: `PURNANTO-LIVE-AUDIT-2026-06-05` loaded `purnanto-setup.cas.h5` and `purnanto-setup-5000.dat.h5`; the live case matches the core Purnanto baseline solver stack and records a `2,964,593`-cell tetra mesh with minimum orthogonal quality `0.277635`.
-- New direct-rebuild branch: setup `08` now records the paper-style one-inlet mixed steam-water `Mass-Flow Inlet` package so the project can return to the closest Purnanto recreation before judging split-inlet alternatives.
+- New direct-rebuild branch: setup `08` now records the paper-style one-inlet mixed steam-water `Mass-Flow Inlet` package and remains the current automation/parity scaffold.
+- New active parity-reset branch: setup `08b` now records the extraction-first split-inlet rebuild that will replace setup `07` as the main V&V target.
 - Retained alternate branch: setup `08a` preserves the planned student-edition outlet-extension trial as a comparison path from setup `07`, not as the current primary rebuild target.
+- New geometry naming rule: use `purnanto` for the closer paper-parity geometry and `purnantov2` for the later cleaned geometry with downstream steam-outlet boundary placement plus local spiral-inlet / dish-head cleanup.
+- Geometry split clarification: setups `04`, `05`, `06`, and `07` use the `purnanto` geometry label; setup `08` and later geometry branches use `purnantov2` unless a branch explicitly says otherwise.
+- Geometry/BC separation rule: geometry naming is independent from inlet boundary-condition style, so a split inlet or a uniform one-inlet package does not by itself change a branch from `purnanto` to `purnantov2`.
 - New PyFluent result: the local `trial3.msh` one-inlet reconstruction now launches, creates manual water vapor/liquid materials, hybrid-initializes, and completes a `10`-iteration smoke test through the script in `../../../PyAnsys/scripts/reconstruct_purnanto_trial3.py`.
 - New hardened PyFluent result: the same one-inlet reconstruction path now runs on `trial4.msh` with clean `Operating Pressure = 0 Pa`, confirmed 2026 R1 numerics paths, mass-flow sanity reporting, and both case/data writes.
 - New longer PyFluent result: a controlled `500`-iteration `trial4` diagnostic run has now completed on the one-steam-outlet branch with chunked reporting, checkpointing, vapor recovery approximately `1.0092`, liquid carryover approximately `3.97e-25`, and a rough residual-history plot recovered from the Fluent transcript.
-- Active setup branch: `../../../Setup report/08-purnanto-one-inlet-massflow-recreation.md` is now the selected direct baseline-rebuild branch; `../../../Setup report/07-pure-phase-split-actual-area.md` is retained as a comparison-only split-inlet branch.
+- Active setup branch: `../../../Setup report/08b-purnanto-parity-split-inlet-rebuild.md` is now the selected parity-reset and V&V branch.
+- Retained scaffold branch: `../../../Setup report/08-purnanto-one-inlet-massflow-recreation.md` remains the one-inlet automation/parity scaffold.
+- Retained comparison branch: `../../../Setup report/07-pure-phase-split-actual-area.md` is now comparison-only split-inlet context, not the main V&V parent.
 - Secondary comparison branch: `../../../Setup report/08a-steam-outlet-extension-student-trial.md` remains available for the downstream steam-outlet boundary-placement diagnostic if that question is revived.
 - Archive guard: do not archive chats that were active on or after `2026-05-25`; older chats can be archived only after their durable outcomes are confirmed in the wiki and setup-report files.
 
@@ -43,6 +49,7 @@
 - Newest baseline audit: `PURNANTO-LIVE-AUDIT-2026-06-05`, recorded in `../../../Setup report/00a-purnanto-setup-5000-live-audit.md`.
 - New direct-rebuild report: `../../../Setup report/08-purnanto-one-inlet-massflow-recreation.md`.
 - Retained comparison report: `../../../Setup report/08a-steam-outlet-extension-student-trial.md`.
+- New geometry naming authority: `../technical/v2-purnanto-spiral-inlet-geometry.md` now records the `purnanto` versus `purnantov2` distinction for the project.
 - New local automation note: `../technical/pyfluent-trial3-one-inlet-reconstruction-smoke-test.md`.
 - New local reusable doc: `../../../PyAnsys/docs/findings/LOCAL_ONE_INLET_SMOKE_TEST.md`.
 - New residual artifact set: `trial4-purnanto-recon-500-residuals.png` and `trial4-purnanto-recon-500-residuals.csv` now exist beside the `500`-iteration case/data outputs.
@@ -51,23 +58,24 @@
 - New active mesh workflow artifacts: `../../../PyAnsys/input/required-zones-mesh-trial1.txt` plus `../../../PyAnsys/output/meshdat-semi-automated/workflow-report.md`.
 
 ## What Is In Progress
-- Preparing the direct one-inlet rebuild from setup `08` so the project returns to the closest Purnanto boundary package.
+- Preparing the extraction-first rebuild so the project can replay the real Purnanto settings before trusting another human-written setup branch.
+- Keeping the geometry naming split explicit so later setup reports do not mix `purnanto` and `purnantov2` without saying which geometry branch they use.
 - Narrowing the remaining PyFluent caveats to the operating-pressure API path and the correct 2026 R1 solution-method setter paths.
 - Narrowing the remaining PyFluent caveats further to pressure-outlet setting inactivity cleanup and cleaner balance reporting.
-- The direct one-inlet PyFluent path now has a longer controlled diagnostic result; remaining cleanup is mainly pressure-outlet setting inactivity, cleaner balance reporting, and a better direct residual export path.
+- The direct one-inlet PyFluent path now has a longer controlled diagnostic result; remaining cleanup is mainly turning that scaffold into a full live-case extractor plus clearer parity diff reporting.
 - Preparing quick DPM post-processing using `../../../CFD_wiki/wiki/synthesis/fluent-separator-efficiency-methods.md` and `../../../CFD_wiki/wiki/guidance/fluent-general-click-by-click.md`.
 - Historical convergence and physical-behavior notes for the parent mixed wet-half velocity-inlet/brine-outlet case are retained, but they are not active setup `07` blockers.
 - Verification of flow settings and numerical configuration.
 - Review of whether mesh quality, worst-cell location, and mesh-independence evidence are sufficient for stable solution progression.
 - Building a result-interpretation workflow to connect contour outputs to separator performance decisions.
-- Post-processing the professional setup `07` case/data for residual/monitor stability and DPM particle fate counts.
+- Auditing which setup `07` settings drifted away from the live Purnanto case so those errors are not carried into the next V&V branch.
 - Preparing the first geometry/mesh-level inlet modification so it changes only boundary representation, not the full solver stack.
 - Deciding whether the rough Setup 2 trend is real or mostly caused by the simultaneous switch from velocity inlet to mass-flow inlet.
 - Any future return to parent-case outlet behavior, solver/numerics, or water-pool depletion should be treated as a separate scope decision, not part of the setup `07` baseline.
 - Older `MWH-WP-2026-05-07-A` remains qualitative historical evidence only; `PLS-PRO-2026-06-03-A` is now the newest documented diagnostic.
 - Lower-iteration runs remain useful only for setup history and failure-mode hints, not for quantitative performance claims.
 - Deferred run branch: complete two-phase full spiral inlet with no active brine outlet remains an older inlet/mixing diagnostic option, not the immediate next action.
-- Split-inlet branches remain archived comparison options, not the immediate direct-baseline action.
+- Split-inlet work is active again, but only inside the new parity-reset branch `08b` rather than by continuing setup `07` unchanged.
 - The student-edition outlet-extension trial remains a parked comparison branch; if resumed, it should be treated as setup `08a`, not the primary setup `08`.
 
 ## Chat Cleanup Readiness
@@ -76,11 +84,11 @@
 - The main remaining archive-risk before removing reliance on older chats was the stale snapshot date on this page and ambiguous branch state in the setup-order dictionary; this cleanup pass addresses those two gaps.
 
 ## Immediate Next Actions
-1. Check whether the remaining pressure-outlet subsetting inactivity needs a different setting order or can be treated as harmless for the current controlled diagnostic path.
-2. Keep the direct one-inlet `trial4` PyFluent path as the active local parity and longer-diagnostic baseline.
-3. If useful, improve the direct residual-export path so future plots do not depend on transcript parsing.
-4. Treat setup `07` and its DPM evidence as comparison-only context until the direct Purnanto-recreation branch is cleaner and more repeatable.
-5. Fix the split-inlet exported-zone naming in the `mesh-trial1` Meshing branch before accepting any trial meshes from the semi-automated workflow.
+1. Build the robust `PyAnsys` extraction path for the live Purnanto case so every rebuild step is read from observed settings rather than from memory.
+2. Record the setup drift between the live audit and setup `07`.
+3. Use setup `08` as the one-inlet scaffold, then create setup `08b` as the split-inlet parity rebuild on `purnanto` geometry.
+4. Reconstruct `DPM` model settings first and add steam-side inlet injections only after the carrier setup is accepted.
+5. Fix the split-inlet exported-zone naming in the `mesh-trial1` Meshing branch before accepting any semi-automated trial meshes for setup `08b`.
 
 ## Roadmap Link
 - Run-efficiency roadmap: `../project/roadmap.md`

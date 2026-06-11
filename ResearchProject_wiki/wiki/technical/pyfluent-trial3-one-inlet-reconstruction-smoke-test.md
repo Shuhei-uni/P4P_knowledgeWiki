@@ -16,6 +16,7 @@ Primary linked setup context:
 ## Scope
 
 - Setup intent: practical one-inlet Purnanto-style recreation
+- Geometry naming status: the one-inlet intent follows setup `08`, which uses the `purnantov2` geometry label by current project rule; keep geometry naming separate from the one-inlet BC choice, and still confirm each local mesh export explicitly if exact provenance matters.
 - Goal of these passes: prove Python can launch Fluent locally, load the mesh, build a usable setup, hybrid initialize, advance a short steady run, and then harden the script toward cleaner setup parity
 - Out of scope: exact paper parity, DPM, polished convergence, final validation, final separator-efficiency claims
 
@@ -79,6 +80,7 @@ Primary linked setup context:
 
 - `Observed`: first runnable pass used `C:\Users\Shuhei Yokkaichi\Documents\CFD\Trial extended outlet pipe\Major Files\trial3.msh`
 - `Observed`: hardened parity pass used `C:\Users\Shuhei Yokkaichi\Documents\CFD\Trial extended outlet pipe\Major Files\trial4.msh`
+- `Inferred`: because these meshes came from the `Trial extended outlet pipe` workspace, treat them as likely closer to the `purnantov2` geometry line unless a later mesh audit proves they were exported from a closer `purnanto`-parity branch.
 
 ## What Worked
 

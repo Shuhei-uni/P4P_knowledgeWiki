@@ -22,11 +22,17 @@ Project linkage:
 - this setup report defines the concrete branch content;
 - the roadmap defines whether setup `07` is only diagnostic, accepted as a baseline candidate, numerically verified, or ready for higher-complexity child branches.
 
+Geometry naming note:
+
+- setup `07` uses the `purnanto` geometry label;
+- geometry naming is separate from inlet boundary-condition style, so the split two-phase inlet in setup `07` does not make the geometry `purnantov2`;
+- use `purnantov2` only for the later geometry branch with downstream outlet-boundary placement and local spiral-inlet / dish-head cleanup.
+
 ## 2. Setup Identity
 
 | Item | Value |
 |---|---:|
-| Geometry | spiral-inlet BOC separator |
+| Geometry | `purnanto` spiral-inlet BOC separator |
 | Parent setup | `04-mixed-wet-half-actual-area.md` |
 | Inlet representation | pure liquid / pure steam split inlet |
 | Boundary type | two `Velocity Inlet` zones |
@@ -253,7 +259,7 @@ Practical interpretation:
 - setup `07` is **not** a transient particle-field simulation;
 - setup `07` is **not** an `RSM-DPM` or `DPM + Eulerian Wall Film` branch.
 
-This distinction matters because later setup-family branches such as `09a`, `09b`, and `09c` are intended to turn `DPM` or `DPM + EWF` into the deliberate primary next-step modeling direction, rather than treating DPM only as an after-the-fact diagnostic on top of the setup `07` carrier field.
+This distinction matters because later setup-family branches such as `09a`, `09b`, and `09c` are intended to turn `DPM` into a deliberate next-step modeling direction through smaller staged branches, rather than treating DPM only as an after-the-fact diagnostic on top of the setup `07` carrier field. More complex wall-film and re-entrainment work is now deferred to a later family beyond `09`.
 
 ## 9. Checks Before Running
 

@@ -83,6 +83,7 @@ connect
 - `scripts/inspection/inspect_fluent_session.py`: non-mutating tree inspection
 - `src/pyansys_fluent/common.py`: shared remote/session/path helpers
 - `src/pyansys_fluent/dependency_workflow.py`: dependency-aware step runner and failure classifier
+- `src/pyansys_fluent/extraction.py`: shared read-mostly extraction helpers for live/offline setup capture
 - `src/pyansys_fluent/setup_common.py`: shared setup-name, boundary, and remap helpers
 - `scripts/setup/setup07_rebuild_run.py`: rebuild setup 07 on a target mesh
 - `scripts/setup/setup09a_dpm_split_inlet_carryover.py`: build setup 09a from the setup 07 carrier-field scaffold
@@ -95,7 +96,7 @@ Two separate extractor paths are now scaffolded:
 
 - `extractors/python/`: offline `.cas.h5` / `.dat.h5` inspection with `h5py`
 - `extractors/python/`: offline legacy `.cas` and `.dat` inspection, plus HDF5 support where available
-- `extractors/fluent/`: live Fluent/PyFluent export skeleton for on-site use
+- `extractors/fluent/`: live Fluent/PyFluent export tools, including a fuller hybrid live+offline bundle exporter
 
 Recommended order:
 

@@ -1,50 +1,59 @@
 # Project Roadmap
 
 ## Purpose
-Define the project run sequence from the current state of the separator work. This roadmap now treats `07-pure-phase-split-actual-area.md` as the main complexity-building branch, but it does **not** assume setup `07` is already verified or validated.
+Define the project run sequence from the current state of the separator work. This roadmap now treats `08b-purnanto-parity-split-inlet-rebuild.md` as the next verification and validation target because setup fidelity has become the main risk.
 
 The immediate job is:
 
-1. make setup `07` numerically trustworthy enough to use as a baseline candidate;
-2. verify it through solution-acceptance and mesh checks;
-3. validate it against the strongest available external anchors;
-4. only then add new physics or realism one branch at a time.
+1. extract the live Purnanto Fluent setup as completely as possible through `PyAnsys`;
+2. rebuild a parity-first carrier-field branch with only the intended split-inlet change active;
+3. verify and validate that rebuilt branch rather than forcing setup `07` to act as the main baseline;
+4. only then add new DPM sensitivities or higher-realism physics one branch at a time.
 
 ## Current Starting Point
 - Date: `2026-06-11`
-- Active setup branch: `../../Setup report/07-pure-phase-split-actual-area.md`
-- Branch role: pure liquid / pure steam split-inlet separator branch used as the current baseline candidate for steam-line carryover and separator-flow interpretation.
-- Current model-family classification for setup `07`:
+- Active setup branch: `../../Setup report/08b-purnanto-parity-split-inlet-rebuild.md`
+- Branch role: extraction-first parity-reset branch that preserves the observed Purnanto Fluent setup while introducing the project's split-inlet objective.
+- Current model-family classification for setup `08b`:
   - steady `Mixture` carrier-flow solve;
-  - one-way post-convergence `DPM` diagnostic;
-  - not a fully coupled `Mixture + DPM` solve;
-  - not a wall-film branch;
-  - not a transient branch.
-- Current status: `07` is **not yet verified** and **not yet validated**.
+  - observed Purnanto continuous-phase settings treated as primary authority;
+  - split inlet treated as the first deliberate project deviation;
+  - `DPM` model settings preserved from extraction where present;
+  - injection definition added only after extraction and carrier acceptance;
+  - not yet a fully coupled `Mixture + DPM` solve;
+  - not yet a wall-film branch;
+  - not yet a transient branch.
+- Current status: `08b` is **not yet built**, **not yet verified**, and **not yet validated**.
+- Retained comparison branches:
+  - `../../Setup report/07-pure-phase-split-actual-area.md` remains comparison-only split-inlet context;
+  - `../../Setup report/08-purnanto-one-inlet-massflow-recreation.md` remains a useful one-inlet automation/parity scaffold;
+  - `../../Setup report/09-multiphase-separator-sensitivity-family.md` is parked until a stronger parity-reset parent exists.
 - `User-specified`: brine-outlet reconstruction and lower-water initialization are no longer active roadmap items for the main project path.
-- `User-specified`: brine outlet, water-pool initialization, and related bottom-liquid handling may be revisited only as late-stage exploratory work if time remains after the main branch is complete.
+- `User-specified`: the main project risk is now human setup drift away from the real Purnanto case, so extraction-driven parity recovery takes priority over continuing setup `07` V&V.
 
 ## Scope Decision
 - In scope:
-  - setup `07` acceptance and cleanup;
-  - mesh verification on setup `07`;
-  - DPM diagnostic verification on setup `07`;
-  - validation/trend comparison using the strongest available anchors;
-  - controlled realism increases built from setup `07`.
+  - live-case extraction and parity checklist creation;
+  - setup `08b` continuous-phase rebuild and acceptance;
+  - mesh verification on setup `08b`;
+  - DPM model reconstruction and controlled injection definition on setup `08b`;
+  - validation/trend comparison using the strongest available external anchors.
 - Out of scope for the main path:
+  - forcing setup `07` through full V&V as if it were already a faithful reconstruction;
   - reviving `FFF-2` as the main roadmap driver;
   - brine-outlet optimization;
   - lower-vessel water initialization;
-  - interpreting full-vessel liquid inventory closure as the main success criterion for setup `07`.
-- `Inferred`: because setup `07` intentionally removes the lower liquid-handling path from the active branch scope, the acceptance gate should focus on whether the steam-path solution is stable and interpretable, not on whether the entire separator liquid inventory is fully represented.
+  - interpreting full-vessel liquid inventory closure as the main success criterion for the next baseline.
+- `Inferred`: because the current risk is setup-fidelity error, the acceptance gate must first ask whether the rebuilt branch actually matches the observed Purnanto setup except for the intentional inlet change.
 
 ## Operating Rules
-1. Do not launch a run unless it has one primary question, one planned comparison, and a written stop condition.
-2. Change one major feature at a time: mesh, DPM tracking controls, stochastic/turbulence treatment, coupling, wall fate, wall film, or transient behavior.
-3. Do not add higher-realism physics to a weak baseline. First make the simpler branch stable enough to interpret.
-4. Do not run mesh verification on a setup that still fails its basic solution-acceptance gate.
+1. Do not launch a new V&V run until the extracted-versus-rebuilt setup diff is reviewed.
+2. Change one major feature at a time: extraction/parity closure, inlet representation, DPM tracking controls, stochastic/turbulence treatment, coupling, wall fate, wall film, or transient behavior.
+3. Do not add higher-realism physics to a branch that still has uncertain baseline setup parity.
+4. Do not run mesh verification on a setup that still fails its basic parity and solution-acceptance gate.
 5. Save a minimum evidence package for every run:
    - case/data file name,
+   - extracted settings snapshot or parity checklist version,
    - residual history,
    - pressure-drop monitor or equivalent pressure summary,
    - phase mass-flow report at inlet and steam outlet,
@@ -53,10 +62,11 @@ The immediate job is:
    - short conclusion: `keep`, `reject`, or `needs follow-up`.
 6. Keep claim strength explicit:
    - `diagnostic only`,
+   - `parity-closed baseline`,
    - `numerically verified baseline`,
    - `trend supported`,
    - `externally validated`.
-7. Brine-outlet and water-initialization work must stay parked unless the main path is already complete enough that extra time can be spent on exploratory side branches.
+7. Brine-outlet and water-initialization work must stay parked unless the parity-reset branch is already complete enough that extra exploratory work is justified.
 
 ## Cross-Wiki Method Anchor
 - Reusable V&V method authority:
@@ -65,126 +75,108 @@ The immediate job is:
   - `../vnv/index.md`
 - Final project sign-off record:
   - `../vnv/signoff-log.md`
-- `Inferred`: this roadmap should name which gate is active for the project branch, while the reusable CFD wiki page remains the method source for verification, validation hierarchy, and uncertainty-retirement logic.
+- Automation/extraction authority:
+  - `../../PyAnsys/AGENTS.md`
+- `Inferred`: this roadmap should name which setup branch is currently trustworthy enough to enter V&V, while `PyAnsys` owns the machine-readable parity/extraction workflow and the CFD wiki owns the reusable V&V method.
 
-## Baseline Acceptance Gate For Setup 07
+## Baseline Acceptance Gate For Setup 08b
 
 ### Goal
-Before mesh verification or physics escalation, make setup `07` acceptable as a baseline candidate for steam-line carryover interpretation.
+Before mesh verification or DPM sensitivity work, make setup `08b` acceptable as a parity-reset baseline candidate.
 
 ### Required Acceptance Checks
-1. Inlet phase fluxes match the intended setup `07` targets closely enough to treat the inlet as correctly imposed.
-2. Steam-outlet phase fluxes flatten enough to support interpretation.
-3. Residuals flatten rather than showing uncontrolled drift.
-4. Pressure-drop behavior becomes stable enough to compare across future branches.
-5. Steam-outlet liquid carryover monitor becomes stable enough to compare across future branches.
-6. Steam-phase imbalance is either reduced to an acceptable level or explicitly bounded and explained.
-7. DPM incomplete tracks are not allowed to dominate an efficiency claim without being labeled as a limitation.
+1. The extracted live Purnanto settings tree is captured well enough to distinguish observed settings from guessed ones.
+2. The rebuilt continuous-phase branch matches the observed Purnanto setup everywhere except the explicitly documented split-inlet change.
+3. Inlet phase fluxes match the intended setup `08b` targets closely enough to treat the inlet as correctly imposed.
+4. Steam-outlet phase fluxes flatten enough to support interpretation.
+5. Residuals flatten rather than showing uncontrolled drift.
+6. Pressure-drop behavior becomes stable enough to compare across future branches.
+7. Any remaining unknown DPM injection detail is labeled as a controlled uncertainty rather than silently assumed.
 
 ### Acceptance Outcome Labels
-- `Accepted baseline candidate`:
-  - setup `07` is stable enough to enter mesh verification.
+- `Parity-closed baseline`:
+  - setup `08b` is trusted enough to enter mesh verification and project V&V.
 - `Diagnostic only`:
-  - setup `07` still provides useful trend information, but it is not strong enough for report-facing baseline claims.
+  - setup `08b` still provides useful parity clues, but the rebuild is not strong enough for report-facing baseline claims.
 - `Rejected baseline`:
-  - setup `07` cannot support stable steam-path interpretation and must be repaired before further branching.
+  - setup `08b` still differs too much from the observed Purnanto setup or fails basic solution acceptance.
 
 ## Validation Gate Before Physics Escalation
-- Do not escalate complexity until setup `07` has passed:
+- Do not activate family `09` until setup `08b` has passed:
+  - parity closure;
   - basic solution-acceptance checks;
   - mesh verification at the level needed for the report;
   - at least one external or literature/design comparison gate.
-- `Inferred`: a case can be numerically verified before it is externally validated, but it should not become the parent of higher-realism branches if even the numerical baseline is still weak.
+- `Inferred`: a case can be numerically verified before it is externally validated, but it should not become the parent of DPM sensitivity work if even the baseline setup parity is still weak.
 
-## Phase A | Baseline Repair And Acceptance
+## Phase A | Extraction And Parity Closure
 
 ### Primary Question
-Can setup `07` become a trustworthy steady `Mixture` carrier-flow baseline with one-way post-processing `DPM` checks?
+Can the live Purnanto Fluent setup be exported and replayed reliably enough that human reconstruction error is no longer the dominant uncertainty?
 
 ### Required Work
-- Reconfirm the active interpretation of setup `07`:
-  - steam-line carryover branch,
-  - not a brine-drainage branch,
-  - not a wall-film branch.
-- Re-run or record the missing baseline evidence:
-  - residual history,
-  - pressure-drop trend,
-  - phase fluxes,
-  - steam-outlet liquid carryover metric,
-  - DPM fate counts if DPM is included in the check.
-- Reduce the current steam-phase imbalance if practical, or explicitly classify it as a bounded limitation if it cannot be reduced without leaving the current branch scope.
-- Decide whether setup `07` is:
-  - acceptable baseline candidate,
-  - diagnostic only,
-  - or not yet usable.
+- Export the live settings tree through `PyAnsys`.
+- Build a machine-readable parity checklist for:
+  - models,
+  - materials,
+  - phases,
+  - boundary conditions,
+  - numerics,
+  - `DPM` model settings.
+- Compare setup `07`, setup `08`, and the live audit against that checklist.
+- Record which settings were missing or drifted in the older manual reconstruction.
 
 ### Deliverable
-- One accepted baseline statement for setup `07`, including:
-  - active limitations,
-  - what can be claimed,
-  - what cannot yet be claimed.
+- One parity-diff summary that states what setup `08b` must preserve and what setup `07` got wrong or left uncertain.
 
-## Phase B | Mesh Verification Of Setup 07
+## Phase B | Setup 08b Carrier Acceptance And Mesh Verification
 
 ### Primary Question
-Does the setup `07` conclusion survive mesh refinement?
-
-### Run Family
-- `07C` = coarse
-- `07M` = medium
-- `07F` = fine
+Can the parity-reset split-inlet branch run stably enough to become the project's verified baseline?
 
 ### Rules
-- Same geometry, BCs, solver family, and DPM settings across the mesh family.
-- Mesh is the only major variable.
-- Do not introduce new physics here.
+- Hold the extracted continuous-phase setup fixed.
+- Introduce only the split-inlet change required for the project question.
+- Keep mesh verification separate from DPM injection reconstruction.
 
 ### Comparison Metrics
 - pressure drop;
 - steam-outlet liquid carryover;
 - outlet dryness or steam quality proxy;
 - steam-phase mass imbalance;
-- DPM `escaped`, `trapped`, and `incomplete` fractions if DPM is part of the compared output;
 - any separator-flow metric judged important enough to report, such as vortex structure or tangential velocity pattern.
 
-### Decision
-- If `medium -> fine` changes are small enough, accept the production mesh.
-- If results reverse or move materially with refinement, downgrade the branch and repair the setup before stronger claims are made.
-
 ### Deliverable
-- A production-mesh decision and a mesh-verification summary for setup `07`.
+- One production-mesh decision and one accepted/rejected baseline statement for setup `08b`.
 
-## Phase C | Baseline DPM Verification
+## Phase C | DPM Injection Reconstruction On Setup 08b
 
 ### Primary Question
-Can one-way DPM on the accepted setup `07` carrier field produce bounded, interpretable carryover trends?
+Can the DPM layer be rebuilt from extracted evidence and then extended with a justified steam-inlet injection definition?
 
-### DPM Verification Priorities
-1. Reduce or bound incomplete tracks before using DPM as strong carryover evidence.
-2. Keep one-way DPM first; do not turn on source feedback yet.
-3. Use a justified droplet-size sweep rather than a single-size claim.
-
-### Baseline DPM Checks
-- test max steps increase such as `50,000 -> 100,000`;
-- test step-length tightening if incomplete fractions stay high;
-- increase particle count if needed for cleaner fate statistics;
-- keep injection location, particle density, and boundary fate rules fixed unless the sensitivity itself is the question.
+### DPM Priorities
+1. Preserve observed `DPM` model settings from the live case first.
+2. Do not pretend the original injection set is known, because the saved case has no active injections.
+3. Add steam-side inlet injections as a controlled project layer only after the carrier field is accepted.
+4. Use a justified droplet-size sweep rather than a single-size claim.
 
 ### Minimum Outputs
+- extracted `DPM` model-state summary;
+- injection location and definition used;
 - `escaped`;
 - `trapped`;
 - `incomplete`;
 - droplet size;
-- scoped efficiency or carryover interpretation, if still justified after incomplete-track review.
+- scoped carryover interpretation.
 
 ### Decision
-- If incomplete fractions remain high, keep DPM as a bounded diagnostic rather than final efficiency proof.
-- If DPM trends stabilize across reasonable tracking settings, promote DPM to stronger support for the setup `07` baseline.
+- If the branch still depends mainly on guessed injection details, keep `DPM` as bounded diagnostic evidence only.
+- If the `DPM` behavior stabilizes across reasonable settings, promote it to stronger support for the setup `08b` baseline.
 
 ## Phase D | Validation And Trend Comparison
 
 ### Primary Question
-How strong is the evidence for setup `07` once it is numerically acceptable?
+How strong is the evidence for setup `08b` once parity and numerical acceptance are established?
 
 ### Validation Hierarchy
 1. same-geometry or closest available operating/test data;
@@ -199,12 +191,13 @@ How strong is the evidence for setup `07` once it is numerically acceptable?
 - `../../CFD_wiki/wiki/setups/geothermal-separator-design-screening-2014-overview.md`
 
 ### Expected Outcome
-- likely claim classes for setup `07` are:
+- likely claim classes for setup `08b` are:
+  - `parity-closed baseline`,
   - `numerically verified baseline`, or
   - `trend supported`.
-- `Inferred`: setup `07` should not be called `externally validated` unless a stronger direct comparison target is actually available and matched.
+- `Inferred`: setup `08b` should not be called `externally validated` unless a stronger direct comparison target is actually available and matched.
 
-## Phase E | Controlled Physics Escalation From Setup 07
+## Phase E | Controlled Physics Escalation After Setup 08b
 
 ### Rule
 Add one realism feature at a time. Each new branch must answer one new physics question without changing several other things at once.
@@ -237,10 +230,10 @@ Add one realism feature at a time. Each new branch must answer one new physics q
 - Bottom-liquid pool or drainage behavior studies.
 - Full-vessel liquid inventory closure studies.
 
-`User-specified`: these are not abandoned forever, but they are explicitly parked until the main setup `07` path is complete enough that extra exploratory work is justified.
+`User-specified`: these are not abandoned forever, but they are explicitly parked until the main setup `08b` path is complete enough that extra exploratory work is justified.
 
 ## Immediate Priority
-1. Finish setup `07` baseline acceptance checks.
-2. Decide whether setup `07` is acceptable as the parent baseline candidate.
-3. Run mesh verification only after that acceptance gate is passed.
-4. Keep wall film, re-entrainment, and other higher-complexity branches off until the baseline is numerically defensible.
+1. Build the `PyAnsys` extraction-first parity workflow for the live Purnanto case.
+2. Record the settings drift between the live case and setup `07`.
+3. Rebuild setup `08b` with only the intended split-inlet change active.
+4. Run mesh verification and V&V only after that parity-reset branch is numerically defensible.

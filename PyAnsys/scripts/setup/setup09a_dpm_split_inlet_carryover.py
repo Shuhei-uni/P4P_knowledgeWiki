@@ -74,6 +74,11 @@ DEFAULT_PARTICLE_MASS_FLOW_RATE = 1e-6
 DEFAULT_STREAMS_PER_INJECTION = 200
 SEED_INJECTION_NAME = "__codex_seed_default_injection__"
 DEFAULT_CARRIER_ITERATIONS = 500
+DEFAULT_SERVER_ID = "3"
+DEFAULT_TARGET_MESH = (
+    r"C:\Users\syok443\Documents\TwoPhaseInletV2(PurnantoV2)\Major Files"
+    r"\PureTwoPhaseV2(PurnantoV2).msh"
+)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -97,14 +102,14 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--server-id",
-        default="2",
-        help="Configured Fluent server id to use. Default: 2. Use 1 for FLUENT_IP, 2 for FLUENT_IP2, 3 for FLUENT_IP3.",
+        default=DEFAULT_SERVER_ID,
+        help="Configured Fluent server id to use. Default: 3. Use 1 for FLUENT_IP, 2 for FLUENT_IP2, 3 for FLUENT_IP3.",
     )
 
     parser.add_argument(
         "--target-mesh",
-        default="",
-        help="Remote mesh path visible to the second Fluent session.",
+        default=DEFAULT_TARGET_MESH,
+        help="Remote mesh path visible to the target Fluent session.",
     )
     parser.add_argument(
         "--resume-case",
@@ -242,7 +247,7 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def connect_with_env_suffix(server_id: str | int = "2"):
+def connect_with_env_suffix(server_id: str | int = DEFAULT_SERVER_ID):
     load_dotenv()
     suffix = env_suffix(server_id)
     return connect(server_id=suffix or "1")

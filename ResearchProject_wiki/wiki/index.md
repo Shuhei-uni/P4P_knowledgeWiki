@@ -16,6 +16,7 @@
 - `../../Setup report/07-pure-phase-split-actual-area.md`
 - `../../Setup report/08a-steam-outlet-extension-student-trial.md`
 - `../../Setup report/08-purnanto-one-inlet-massflow-recreation.md`
+- `../../Setup report/08b-purnanto-parity-split-inlet-rebuild.md`
 
 ## Progress Layer
 - `wiki/progress/current-status.md`

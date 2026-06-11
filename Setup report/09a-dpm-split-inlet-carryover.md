@@ -1,134 +1,134 @@
-# DPM Split-Inlet Carryover Setup Report
+# DPM Tracking Cleanup Setup Report
 
 ## 1. Purpose
 
-Define setup `09a` as the first literature-backed extension of setup `07`.
+Define setup `09a` as the first controlled DPM branch after the accepted setup `08b` baseline.
 
-This branch keeps the stable continuous-field setup from [07-pure-phase-split-actual-area.md](07-pure-phase-split-actual-area.md) and adds `DPM` to answer the next most direct question:
+This branch answers:
 
 ```text
-which droplet sizes escape through the steam outlet under the current split-inlet flow field?
+can one-way DPM on the accepted carrier field produce
+bounded escaped / trapped / incomplete trends?
 ```
 
-## 2. Why This Is Better Than VOF For The Next Run
+This is the first `09` branch because it makes the smallest physics jump:
 
-This branch is better than the retired VOF `09` idea because:
+- keep the accepted carrier field;
+- keep one-way DPM;
+- change only the DPM tracking controls needed to reduce or bound incomplete tracks.
 
-1. the geothermal separator papers in this repo already use droplet tracking logic, not `VOF`, for separator-efficiency interpretation;
-2. your unresolved quantity is carryover by droplet fate, not just sharp-interface shape;
-3. `DPM` can answer the droplet-size question directly, while `VOF` cannot do that efficiently;
-4. this is the smallest paper-backed change from a setup you already know can run.
+## 2. Parent Authority
 
-Main paper support:
+Parent branch rule:
 
-- [purnanto-2013-cfd-geothermal-separator](../CFD_wiki/wiki/sources/purnanto-2013-cfd-geothermal-separator.md)
-- [pointon-2009-geothermal-separator-sizing-cfd-validation](../CFD_wiki/wiki/sources/pointon-2009-geothermal-separator-sizing-cfd-validation.md)
-- [fluent-separator-efficiency-methods](../CFD_wiki/wiki/synthesis/fluent-separator-efficiency-methods.md)
+- inherit from the latest accepted simpler branch;
+- at first use, that parent will normally be setup `08b`;
+- after later reruns, this branch must inherit any accepted updates to mesh, residual gate, pressure reporting, accepted droplet set, or accepted DPM defaults.
 
-## 3. Parent Setup Authority
+Do **not** blindly reuse every original setup `08b` setting if later verification work has already replaced it.
 
-Use setup `07` as the continuous-field authority:
+## 3. Dynamic Setting Rule
 
-- keep the geometry;
-- keep the actual-area pure liquid / pure steam split;
-- keep the `27.118 m/s` equal-velocity inlet package;
-- keep the same material properties and outlet roles;
-- keep the same scope that judges steam-side carryover rather than full brine-drain closure.
+Settings in `09a` must be changed dynamically to fit findings from the current accepted setup state.
+
+Examples:
+
+- if setup `08b` mesh verification selects a new production mesh, `09a` must use that mesh;
+- if setup `08b` acceptance work changes the accepted pressure-outlet treatment, `09a` inherits that;
+- if an earlier DPM check shows a certain step-length factor or particle count is unusable, `09a` should not keep it as a default just because it appeared in an older branch.
+
+Only one uncertainty should be tested intentionally in this branch:
+
+```text
+DPM tracking completeness and robustness
+```
 
 ## 4. Model Stack
 
 | Panel | Setting | Value |
 |---|---|---|
-| General | Solver | `Pressure-Based` |
-| General | Time | `Steady` |
-| Models > Multiphase | Model | `Mixture` |
-| Models > Viscous | Turbulence | `RNG k-epsilon` |
-| Models > Energy | Energy | `Off` |
-| Models > Discrete Phase | DPM | `On` after continuous-field convergence |
+| General | Solver | inherit accepted parent |
+| General | Time | inherit accepted parent |
+| Models > Multiphase | Model | inherit accepted parent |
+| Models > Viscous | Turbulence | inherit accepted parent |
+| Models > Energy | Energy | inherit accepted parent |
+| Models > Discrete Phase | DPM | `On` after accepted carrier-field state exists |
 
 Interpretation:
 
-- this is deliberately not an `RSM` branch;
-- it is deliberately not a wall-film branch;
-- it is the minimum carryover-focused child of setup `07`.
+- keep one-way DPM only;
+- do not turn on continuous-phase source feedback here;
+- do not add wall film here;
+- do not change turbulence model here unless the accepted parent already changed it before this branch begins.
 
-## 5. Inlet and Continuous-Field Boundary Conditions
+## 5. Core Inputs To Inherit
 
-Keep the setup `07` split-inlet package:
+Unless the accepted parent has changed them, inherit:
 
-| Boundary | Type | Velocity | Liquid VF | Steam VF |
-|---|---|---:|---:|---:|
-| `inlet_liquid_outer` | `Velocity Inlet` | `27.118 m/s` | `1.0` | `0.0` |
-| `inlet_steam_inner` | `Velocity Inlet` | `27.118 m/s` | `0.0` | `1.0` |
+- geometry;
+- split-inlet definition;
+- material values;
+- outlet role;
+- gravity direction;
+- accepted production mesh;
+- accepted continuous-phase numerics.
 
-Use the same outlet, wall, gravity, operating-pressure convention, and continuous-phase numerics as setup `07` unless a run-specific stabilization note is recorded separately.
+## 6. Primary DPM Controls To Test
 
-## 6. DPM Definition
+Test only the DPM robustness controls needed to interpret droplet fate:
 
-### 6.1 Injection Philosophy
+1. maximum tracking steps;
+2. step-length factor;
+3. particle count per injection;
+4. justified droplet-size set.
 
-Use post-convergence droplet tracking to measure carryover sensitivity by size.
+Keep these fixed unless this branch is explicitly testing them:
 
-Recommended first sweep:
+- injection location;
+- particle density;
+- outlet escape definition;
+- wall-fate interpretation.
 
-| Diameter | Reason |
-|---:|---|
-| `5 um` | fine-droplet lower marker already useful in the project |
-| `10 um` | Purnanto reported baseline |
-| `14.2 um` | Harwell-inferred median marker |
-| `40-41 um` | larger upper-envelope marker |
+## 7. Minimum Droplet Set
 
-If time is limited, start with:
+Use the latest accepted droplet set from the parent evidence.
 
-```text
-5 um, 10 um, 40-41 um
-```
+If no narrower set has yet been accepted, start with:
 
-### 6.2 DPM Boundary Fate
+- `5 um`
+- `10 um`
+- `40-41 um`
 
-| Boundary role | DPM fate |
-|---|---|
-| steam outlet | `escape` |
-| intended liquid collection region / bottom collection logic | `trap` where that interpretation is physically intended |
-| ordinary walls | do not silently set all walls to `trap`; use the branch-specific wall interpretation and document it |
+Add other sizes only if they answer a specific question.
 
-Interpretation rule:
+## 8. Outputs To Record
 
-- if a wall hit is being counted as permanent separation, say that explicitly;
-- do not hide wall-fate physics inside an unexamined default.
-
-## 7. Outputs To Record
-
-For each droplet size, record:
+For each tested size, record:
 
 1. `injected`
 2. `escaped`
 3. `trapped`
 4. `incomplete`
-5. scoped carryover efficiency based on the branch interpretation
+5. tracking settings used
+6. whether the result is strong enough for carryover interpretation
 
-Use the reporting logic already documented in:
+## 9. Success Signal
 
-- [fluent-separator-efficiency-methods](../CFD_wiki/wiki/synthesis/fluent-separator-efficiency-methods.md)
+`09a` is successful if:
 
-## 8. Why 09a May Be Enough
+- incomplete fractions reduce materially, or
+- incomplete fractions remain but are bounded well enough that DPM can still be used as a controlled diagnostic.
 
-`09a` may already answer the immediate project question if:
-
-- bulk setup `07` flow looks physically plausible;
-- the main unknown is just how droplet escape varies with size;
-- wall-film re-entrainment is still only a suspicion, not a demonstrated blocker.
-
-## 9. Failure Signal
+## 10. Failure Signal
 
 `09a` is not enough if:
 
-1. droplet fate depends too strongly on arbitrary wall-trap assumptions;
-2. swirl-field credibility itself is still doubtful;
-3. incomplete tracks remain too large to interpret cleanly;
-4. the likely missing mechanism is no longer droplet size, but wall-film return to the core.
+1. incomplete tracks remain too large to interpret;
+2. the droplet-fate result changes too much with reasonable tracking-control adjustments;
+3. deterministic one-way DPM still leaves turbulence-driven dispersion as the dominant unresolved question;
+4. physically meaningful droplet loading seems likely to affect the carrier flow itself.
 
 If that happens:
 
-- move to `09b` if the flow-field accuracy is the main concern;
-- move to `09c` if wall-film and re-entrainment are the main concern.
+- move to `09b` for stochastic / turbulence sensitivity;
+- move to `09c` only after one-way DPM settings are stable enough to justify coupling.

@@ -1,133 +1,119 @@
-# DPM + Eulerian Wall Film Wall-Film Re-Entrainment Setup Report
+# Two-Way DPM Coupling Setup Report
+
+Legacy filename note:
+
+- this file keeps the `09c-dpm-ewf-wall-film-reentrainment.md` filename for sequence continuity;
+- its current branch role is **not** the old wall-film / re-entrainment jump;
+- it is now the smaller two-way DPM coupling branch.
 
 ## 1. Purpose
 
-Define setup `09c` as the wall-film-aware child branch of setup `07`.
+Define setup `09c` as the third `09` branch after `09a` and `09b`.
 
-This branch is for the case where setup `07` or `09a`/`09b` suggests:
-
-```text
-bulk separation may already look acceptable,
-but remaining error or uncertainty may come from wall deposition,
-film persistence, and re-entrainment into the steam core.
-```
-
-The target model family is:
+This branch answers:
 
 ```text
-DPM + Eulerian Wall Film
+does physically meaningful droplet loading feed back strongly enough
+into the carrier flow that one-way DPM is no longer sufficient?
 ```
 
-## 2. Why This Is Better Than VOF For The Next Run
+This is the first branch in family `09` that allows DPM to influence the continuous phase.
 
-This branch is better than the retired VOF `09` idea if the missing mechanism is wall-film behavior, because:
+## 2. Parent Authority
 
-1. `VOF` mainly helps when one large continuous interface is the central unresolved feature;
-2. the annular-flow papers in this repo escalate instead to explicit droplet-plus-film separation, not to `VOF`;
-3. this branch can distinguish:
-   - droplets in the gas core,
-   - liquid attached to walls as film,
-   - exchange between them.
+Parent branch rule:
 
-Main paper support:
+- inherit from the latest accepted simpler branch;
+- for `09c`, that parent should normally be the accepted `09b` state, or `09a` if `09b` was judged unnecessary.
 
-- [mondal-sharma-2024-air-water-annular-flow-cfd](../CFD_wiki/wiki/sources/mondal-sharma-2024-air-water-annular-flow-cfd.md)
-- [skoog-2020-annular-flow-three-field-cfd-thesis](../CFD_wiki/wiki/sources/skoog-2020-annular-flow-three-field-cfd-thesis.md)
-- [droplets-carryover-and-re-entrainment](../CFD_wiki/wiki/physics-basis/droplets-carryover-and-re-entrainment.md)
-- [annular-flow-three-field-cfd-patterns](../CFD_wiki/wiki/synthesis/annular-flow-three-field-cfd-patterns.md)
+That means `09c` should inherit the accepted:
 
-## 3. Parent Setup Authority
+- mesh;
+- carrier-field model;
+- DPM droplet set;
+- step limits;
+- particle count;
+- wall-fate interpretation;
+- stochastic setting decision.
 
-Use setup `07` as the geometry and inlet-package authority:
+## 3. Dynamic Setting Rule
 
-- same spiral-inlet separator body;
-- same split pure liquid / pure steam inlet concept;
-- same `27.118 m/s` actual-area mass-preserving split;
-- same separator operating-condition base unless a dedicated sensitivity overrides it.
+Settings in `09c` must be changed dynamically to fit the latest accepted findings from `08b` and the current simpler branches.
 
-This branch changes the liquid-path representation, not the high-level case identity.
+Only one intentional uncertainty should be changed here:
+
+```text
+continuous-phase feedback from droplet loading
+```
+
+Do not mix this branch with:
+
+- turbulence-model upgrade;
+- Eulerian wall film;
+- re-entrainment modeling;
+- unrelated outlet or geometry changes.
 
 ## 4. Model Stack
 
 | Panel | Setting | Value |
 |---|---|---|
-| General | Solver | `Pressure-Based` |
-| General | Time | `Transient` |
-| Continuous-field multiphase | use the branch-specific carrier representation required by the Fluent EWF workflow and record it explicitly |
-| Models > Viscous | Turbulence | start from the branch-specific choice most compatible with available compute and stability; if accuracy pressure remains high, this branch can later inherit `RSM` logic |
-| Models > Discrete Phase | DPM | `On` |
-| Models > Wall Film | Eulerian Wall Film | `On` on relevant collection walls |
+| General | Solver | inherit accepted parent |
+| General | Time | inherit accepted parent unless coupling stability requires a documented change |
+| Models > Multiphase | Model | inherit accepted parent |
+| Models > Viscous | Turbulence | inherit accepted parent |
+| Models > Energy | Energy | inherit accepted parent |
+| Models > Discrete Phase | DPM | `On` with continuous-phase interaction enabled |
 
 Interpretation:
 
-- this is the most complex child in the `09` family;
-- only use it when wall-film fate is the real open question.
+- this branch is still a DPM branch, not a wall-film branch;
+- use coupling only after one-way DPM is already stable enough to compare against;
+- any time-mode change must be justified as a coupling-stability requirement, not added casually.
 
-## 5. Boundary and Mechanism Intent
+## 5. What Changes In This Branch
 
-This branch must distinguish three liquid pathways:
+Change only the DPM coupling state and the minimum supporting settings required to make that comparison meaningful.
 
-1. liquid entering as the outer-wall-side inlet stream;
-2. droplets moving in the steam-dominant core;
-3. liquid that reaches walls and forms a film.
-
-The point of the branch is to avoid the hidden assumption:
+The key requirement is:
 
 ```text
-every wall hit = permanent separation
+use a physically meaningful droplet mass loading
 ```
 
-## 6. DPM and Film Interaction Intent
+Do not use arbitrary tiny injection flow rates and then claim coupled realism.
 
-At minimum, the branch should be able to say:
+Required branch-specific inputs:
 
-- how much liquid stays in the wall film,
-- how much is deposited from droplets to film,
-- how much re-enters the core or reaches the steam outlet.
+1. droplet mass loading basis;
+2. droplet-size set used for the coupled comparison;
+3. coupling-related iteration or timestep plan if needed.
 
-Use DPM for:
+## 6. Outputs To Record
 
-- droplet tracking in the gas/steam-dominant region.
+Record at minimum:
 
-Use EWF for:
+1. `injected`
+2. `escaped`
+3. `trapped`
+4. `incomplete`
+5. coupled vs one-way carrier-field difference
+6. coupled vs one-way carryover interpretation difference
+7. any new monitor needed to judge coupling stability
 
-- wall film accumulation and transport on the relevant separator walls.
+## 7. Success Signal
 
-## 7. When 09c Is Worth Running
+`09c` is successful if it clearly shows one of these:
 
-Run `09c` when one or more of these is true:
+1. two-way coupling does not materially change the conclusion, so one-way DPM remains adequate for this project stage;
+2. two-way coupling does materially change the carrier field or carryover result, so later DPM-based claims must account for coupling.
 
-1. `09a` or `09b` says wall hits dominate the liquid fate;
-2. treating wall hits as `trap` feels too optimistic;
-3. bulk phase-flux efficiency looks good but fine carryover still seems physically unresolved;
-4. the question has shifted from droplet size to re-entrainment risk.
+## 8. Failure Signal
 
-## 8. Why 09c Is Harder Than 09a and 09b
+`09c` should not be treated as successful if:
 
-This branch is harder because:
+1. droplet loading was not physically justified;
+2. the coupling run becomes unstable before a meaningful comparison is possible;
+3. the branch accidentally mixes in other major changes;
+4. the real next uncertainty turns out to be wall-film persistence rather than coupling.
 
-1. it introduces more closures than plain `DPM`;
-2. annular-flow papers support the model family, but not direct geothermal separator calibration;
-3. it usually needs transient interpretation and monitoring of film inventory over time.
-
-So this is not the first child to run unless the wall-film mechanism is already the dominant unresolved issue.
-
-## 9. Outputs To Record
-
-Record at least:
-
-1. droplet escaped/trapped/incomplete counts,
-2. film mass inventory over time,
-3. deposition and entrainment or film-source trends where available,
-4. steam-outlet liquid contribution from all active liquid pathways,
-5. whether film mass reaches a quasi-steady range before interpreting results.
-
-## 10. Success Criterion
-
-`09c` is worthwhile only if it changes the interpretation that simpler branches would give.
-
-Examples:
-
-1. a branch that looked efficient under wall-trap DPM no longer looks so clean once film return is allowed;
-2. a large fraction of "separated" liquid is actually only temporarily wall-held;
-3. steam-line contamination is shown to depend on film re-entrainment rather than only inlet droplet size.
+If the unresolved issue after `09c` is wall persistence or liquid return from walls, move that work into the future `10` family rather than extending `09c`.

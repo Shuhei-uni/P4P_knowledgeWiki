@@ -455,24 +455,42 @@ def apply_intended_general(solver) -> bool:
 def apply_intended_models(solver) -> bool:
     models = solver.settings.setup.models
     ok = True
-    ok &= try_action("set_multiphase_model", lambda: setattr(models.multiphase, "model", "mixture"))
+    multiphase = models.multiphase
+    if hasattr(multiphase, "model"):
+        ok &= try_action(
+            "set_multiphase_model",
+            lambda: setattr(multiphase, "model", "mixture"),
+        )
+    else:
+        ok &= try_action(
+            "set_multiphase_models",
+            lambda: setattr(multiphase, "models", "mixture"),
+        )
 
-    multiphase_state = safe_get_state(models.multiphase, "multiphase_after_model")
+    multiphase_state = safe_get_state(multiphase, "multiphase_after_model")
     desired_phase_count_already_present = False
     if isinstance(multiphase_state, Mapping):
-        phase_count_state = multiphase_state.get("number_of_phases", {})
+        phase_count_state = multiphase_state.get("number_of_phases")
         if isinstance(phase_count_state, Mapping):
             desired_phase_count_already_present = (
                 phase_count_state.get("number_of_eulerian_phases") == 2
             )
+        elif phase_count_state == 2:
+            desired_phase_count_already_present = True
 
     if desired_phase_count_already_present:
         print("set_number_of_phases: SKIPPED -> model activation already exposed two phases")
     else:
-        ok &= try_action(
-            "set_number_of_phases",
-            lambda: setattr(models.multiphase.number_of_phases, "number_of_eulerian_phases", 2),
-        )
+        if hasattr(multiphase.number_of_phases, "number_of_eulerian_phases"):
+            ok &= try_action(
+                "set_number_of_phases",
+                lambda: setattr(multiphase.number_of_phases, "number_of_eulerian_phases", 2),
+            )
+        else:
+            ok &= try_action(
+                "set_number_of_phases_scalar",
+                lambda: setattr(multiphase, "number_of_phases", 2),
+            )
     ok &= try_action("set_energy_off", lambda: setattr(models.energy, "enabled", False))
     ok &= try_action("set_viscous_model", lambda: setattr(models.viscous, "model", "k-epsilon"))
     ok &= try_action("set_k_epsilon_rng", lambda: setattr(models.viscous, "k_epsilon_model", "rng"))

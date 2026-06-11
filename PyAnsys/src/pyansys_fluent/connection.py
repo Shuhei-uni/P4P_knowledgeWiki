@@ -21,6 +21,7 @@ except ModuleNotFoundError:  # pragma: no cover - local convenience fallback
 
 
 _LOCAL_FLUENT_PROCESSES: list[subprocess.Popen[str]] = []
+_ENV_FILE = Path(__file__).resolve().parents[2] / ".env"
 
 
 def _cleanup_local_fluent_processes() -> None:
@@ -137,7 +138,7 @@ def _launch_local_fluent(
 
 
 def connect(server_id: str | int | None = None):
-    load_dotenv()
+    load_dotenv(_ENV_FILE)
     import ansys.fluent.core as pyfluent
 
     suffix = env_suffix(server_id)

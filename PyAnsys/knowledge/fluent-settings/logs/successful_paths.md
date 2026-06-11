@@ -48,3 +48,34 @@ Readback:
   `dpm-5um`, `dpm-10um`, `dpm-14.2um`, `dpm-41um`
 Notes:
   After setting `models.multiphase.model = "mixture"`, this build already exposed two phases, so forcing `number_of_phases = 2` caused `ASSQ: invalid argument [2]: improper list`.
+
+Fluent: 2024 R2
+PyFluent: local `.venv` on repo laptop
+Case: `PureTwoPhaseV2(PurnantoV2)-setup09a-100iter.cas.h5`
+Goal: rebuild setup 07 carrier field on server `3` and bind 09a DPM surface injections to `steaminlet`
+Order:
+  1. connect with `check_connection.py --server-id 3`
+  2. verify remote mesh path
+  3. read mesh
+  4. set `models.multiphase.models = "mixture"`
+  5. skip explicit phase-count setter because readback already reports `number_of_phases = 2`
+  6. assign phase materials and run `100` carrier iterations
+  7. create inert-particle material `water-droplet`
+  8. create default DPM injections and set particle/material/type fields
+  9. isolate `initial_values.location.injection_surfaces` in a probe injection
+Working path or TUI:
+  On this build, the carrier-field multiphase path is `setup.models.multiphase.models`, not `setup.models.multiphase.model`.
+Readback:
+  After carrier setup, `models.multiphase.get_state()` returned `{'models': 'mixture', 'number_of_phases': 2}`.
+  `location` after `injection_type = surface` exposed active children `injection_surfaces`, `randomized_positions_enabled`, and `number_of_streams`.
+Notes:
+  `injection_surfaces` failed through all tested settings paths on server `3`:
+  - `StringList.set_state("steaminlet")`
+  - `SettingsBase.set_state(["steaminlet"])`
+  - `location.set_state({"injection_surfaces": ...})`
+  - direct Scheme `api-set-var` attempts with string lists, symbol lists, and alists
+  Failure signature stayed in the DPM surface-location category:
+  - `wta(1st) to string->symbol`
+  - `wta(1st) to symbol->string`
+  - `ASSQ: invalid argument [2]: improper list`
+  Current diagnosis: likely `PyFluent wrapper limitation` or `path/version issue` specific to the 2024 R2 DPM surface selector on this server build. Keep using the carrier-field rebuild path above, but isolate the injection-surface bind as a dedicated fallback problem rather than rerunning the full setup.
