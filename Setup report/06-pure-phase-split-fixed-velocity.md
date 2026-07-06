@@ -10,11 +10,16 @@ Define a new spiral-inlet setup where the inlet is split into:
 
 This is separate from the earlier actual-area correction that recalculated velocity to force exact Purnanto mass flow through the current measured inlet area.
 
+Geometry naming note:
+
+- this split-inlet branch still uses the `purnanto` geometry label;
+- the geometry label is separate from the inlet boundary-condition style, so a two-zone split inlet does not by itself make the geometry `purnantov2`.
+
 ## 2. Setup Identity
 
 | Item | Value |
 |---|---:|
-| Geometry | spiral-inlet BOC separator |
+| Geometry | `purnanto` spiral-inlet BOC separator |
 | Inlet representation | pure liquid / pure steam split inlet |
 | Boundary type | two `Velocity Inlet` zones |
 | Liquid-side phase state | liquid VF `1.0`, steam VF `0.0` |

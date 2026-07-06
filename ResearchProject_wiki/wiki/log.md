@@ -1,5 +1,93 @@
 # Work Log
 
+## [2026-07-02] model-update | Add setup 08b one-injection DPM sample attribution
+- files created/updated: `../../../PyAnsys/src/pyansys_fluent/postprocess_live.py`, `../../../PyAnsys/scripts/inspection/postprocess_live_case.py`, `../../../PyAnsys/tests/test_postprocess_live.py`, `../../../PyAnsys/output/live_postprocess/TwoPhaseInletV2(Purnanto)-25-05000-summary.json`, `../../../PyAnsys/output/live_postprocess/TwoPhaseInletV2(Purnanto)-25-05000-report.md`, `../../Setup report/08b-purnanto-parity-split-inlet-rebuild.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/progress/blockers.md`, `wiki/log.md`
+- reason: user asked to repeat the DPM check injection by injection, matching the manual Fluent `Discrete Phase > Sample` workflow, so the active 6-bin `08b` result can be attributed per injection rather than only through the aggregate summary.
+- what changed since last update: added reusable live-Fluent per-injection `dpm-sample` support to the `PyAnsys` post-processing toolchain, reran the loaded `08b` case injection by injection against `steamoutlet`, and recorded that the sampled aggregate remains `13012` incomplete / `8` escaped / `0` trapped, with the completed sampled escape confined to `injection-5-micron` in the current pass.
+- assumptions introduced/removed: introduced the explicit limitation that the new per-injection counts are still boundary-scoped `dpm-sample` diagnostics rather than full validated fate accounting; removed the earlier gap that the `08b` escaped-row attribution was only inferred indirectly from the aggregate summary text.
+- current status: setup `08b` now has both aggregate and one-injection sampled DPM attribution recorded, but the result still remains `Debug only` because incomplete tracks dominate every active sampled bin except for the small completed `5-micron` escape count.
+- next action: raise the DPM tracking budget or export stronger per-injection fate summaries before treating the per-bin result as stronger evidence.
+
+## [2026-07-02] model-update | Create setup 08c inlet-velocity sensitivity branch
+- files created/updated: `../../Setup report/08c-purnanto-parity-inlet-velocity-sensitivity.md`, `../../Setup report/order-dictionary.md`, `wiki/project/roadmap.md`, `wiki/index.md`, `wiki/log.md`
+- reason: user wants the next stage after setup `08b` recorded as setup `08c` after supervisor advice to test how different inlet velocities affect separator efficiency while keeping the inlet enthalpy basis fixed.
+- assumptions introduced/removed: introduced the working interpretation that setup `08c` should keep inlet **specific enthalpy** fixed and vary inlet **mass loading / resulting velocity** only; explicitly separated that from any later enthalpy-sensitivity branch so the next test does not mix two major changes at once.
+- current status: setup `08c` now exists as the planned child of `08b`, with the first recommended loading ladder recorded and the enthalpy-versus-flow-rate interpretation made explicit.
+- next action: calculate the actual split-zone mass-flow targets for the chosen `0.75x`, `1.00x`, `1.25x`, and `1.50x` loading points, then build and run the first `08c` carrier cases before deciding whether DPM or enthalpy sensitivity should follow.
+
+## [2026-07-02] model-update | Refine setup 08c to target 20 m/s and 32.14 m/s endpoints
+- files created/updated: `../../Setup report/08c-purnanto-parity-inlet-velocity-sensitivity.md`, `wiki/project/roadmap.md`, `wiki/log.md`
+- reason: user clarified that the next sensitivity branch should stay mass-flow-inlet based, but the actual endpoint cases should correspond to prescribed low/high inlet velocities rather than generic loading multipliers.
+- assumptions introduced/removed: replaced the provisional `0.75x` to `1.50x` ladder with endpoint velocity cases; kept `32.14 m/s` as the repo-backed upper reference from the live audit and labeled `20.00 m/s` as a user-specified low-end sensitivity point pending source confirmation.
+- current status: setup `08c` now records equivalent split-zone mass-flow targets for `20.00 m/s`, the current `08b`-adjacent reference condition, and `32.14 m/s` while keeping the branch as a split `Mass-Flow Inlet` study at fixed enthalpy basis.
+- next action: build the `20.00 m/s` and `32.14 m/s` carrier cases using the recorded equivalent mass-flow values, then compare steam-line carryover, pressure drop, and residual stability against the existing `08b` reference case.
+
+## [2026-07-02] model-update | Record setup 08b live post-processing and current DPM summary
+- files created/updated: `../../Setup report/08b-purnanto-parity-split-inlet-rebuild.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/progress/blockers.md`, `wiki/log.md`
+- reason: user finished the continuous-field `5000`-iteration run for setup `08b`, asked for the actual post-processing workflow on the loaded Fluent case/data, and then asked for the current DPM escaped/trapped/incomplete outcome for the active 6-injection set.
+- what changed since last update: recorded the live `08b` phase-flux result (`steamoutlet` liquid `0.082132007 kg/s`, vapor `81.464165 kg/s`), the scoped flux-based steam-line carryover efficiency (`99.93 %`), the large mixture imbalance (`116.063719 kg/s`), and the refreshed aggregate DPM summary (`13012` incomplete, `8` escaped, no trapped row printed) for the active 6-bin subset.
+- assumptions introduced/removed: kept the user-specified limitation that bins `562.70 um`, `844.06 um`, and `1631.84 um` remain intentionally omitted from this pass; introduced the explicit rule that the current `08b` DPM result stays `Debug only` because incomplete tracks dominate the updated summary.
+- current status: setup `08b` now has a live post-processing record and a current aggregate DPM-screening result, but neither the carrier flux result nor the DPM result is yet strong enough for report-quality validation language.
+- next action: increase DPM tracking budget and, if needed, export per-injection zone summaries before trying to interpret the active 6-bin DPM result more strongly.
+
+## [2026-06-11] model-update | Pivot V&V target from setup 07 to extraction-first setup 08b
+- files created/updated: `../../Setup report/08b-purnanto-parity-split-inlet-rebuild.md`, `../../Setup report/order-dictionary.md`, `../../Setup report/09-multiphase-separator-sensitivity-family.md`, `../../Setup report/09a-dpm-split-inlet-carryover.md`, `../../Setup report/09b-rsm-dpm-split-inlet-accuracy.md`, `../../Setup report/09c-dpm-ewf-wall-film-reentrainment.md`, `wiki/project/roadmap.md`, `wiki/model/inlet-regimes.md`, `wiki/progress/current-status.md`, `wiki/index.md`, `wiki/log.md`
+- reason: user realized setup `07` likely contains human reconstruction drift from the real Purnanto Fluent case and wants the next serious V&V branch to be rebuilt from extracted settings rather than from memory.
+- assumptions introduced/removed: removed the working assumption that setup `07` should stay the main V&V parent; introduced setup `08b` as the extraction-first parity-reset branch while keeping setup `08` as the one-inlet automation scaffold and keeping the existing `09` numbering stable instead of renumbering older setup reports again.
+- next action: build the robust `PyAnsys` extraction workflow, diff the live audit against setup `07`, then rebuild setup `08b` with only the intended split-inlet change and later steam-side `DPM` injection definition.
+
+## [2026-06-11] model-update | Correct geometry-to-setup mapping for purnanto naming
+- files created/updated: `../../Setup report/04-mixed-wet-half-actual-area.md`, `../../Setup report/05-complete-two-phase-actual-area-no-brine-outlet.md`, `../../Setup report/06-pure-phase-split-fixed-velocity.md`, `../../Setup report/07-pure-phase-split-actual-area.md`, `../../Setup report/08-purnanto-one-inlet-massflow-recreation.md`, `../../Setup report/order-dictionary.md`, `wiki/model/inlet-regimes.md`, `wiki/technical/v2-purnanto-spiral-inlet-geometry.md`, `wiki/technical/pyfluent-trial3-one-inlet-reconstruction-smoke-test.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/log.md`
+- reason: user clarified the actual geometry mapping: setups `04` to `07` are all `purnanto`, setup `08` is `purnantov2`, and geometry naming must stay separate from inlet boundary-condition style.
+- assumptions introduced/removed: removed the earlier mistaken assumption that split-inlet or no-brine-outlet branches were automatically `purnantov2`; introduced the corrected rule that inlet BC style does not determine geometry label.
+- next action: for future setup reports, state geometry label and inlet BC package as separate fields instead of letting one imply the other.
+
+## [2026-06-11] model-update | Sweep remaining geometry references for purnanto naming
+- files created/updated: `../../Setup report/04-mixed-wet-half-actual-area.md`, `../../Setup report/05-complete-two-phase-actual-area-no-brine-outlet.md`, `../../Setup report/06-pure-phase-split-fixed-velocity.md`, `../../Setup report/07-pure-phase-split-actual-area.md`, `../../Setup report/08a-steam-outlet-extension-student-trial.md`, `wiki/model/inlet-regimes.md`, `wiki/technical/pyfluent-trial3-one-inlet-reconstruction-smoke-test.md`, `wiki/progress/experiments.md`, `wiki/log.md`
+- reason: user asked for a sweep so remaining project/setup references stop using ambiguous geometry wording where `purnanto` versus `purnantov2` now matters.
+- assumptions introduced/removed: introduced the default interpretation that the current split-inlet / no-brine-outlet local geometry line is `purnantov2` unless a setup report explicitly overrides it; kept some local mesh exports marked as likely `purnantov2` rather than claiming certainty where the mesh provenance is still not fully audited.
+- next action: if a specific local mesh or case file becomes important for comparison, audit it explicitly and record whether it is `purnanto` or `purnantov2` instead of relying on folder names.
+
+## [2026-06-11] model-update | Define purnanto versus purnantov2 geometry naming
+- files created/updated: `wiki/technical/v2-purnanto-spiral-inlet-geometry.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `../../Setup report/08-purnanto-one-inlet-massflow-recreation.md`, `../../Setup report/08a-steam-outlet-extension-student-trial.md`, `../../Setup report/order-dictionary.md`, `wiki/log.md`
+- reason: user clarified that the project now has two related BOC separator geometries and wants them referred to consistently as `purnanto` and `purnantov2`.
+- assumptions introduced/removed: introduced the project naming rule that `purnanto` means the closer paper-parity geometry with the steam-outlet boundary at the outlet entrance, while `purnantov2` means the later cleaned geometry with a downstream steam-outlet boundary plus local spiral-inlet and dish-head cleanup; did not claim that either label fully proves the unpublished original CAD detail.
+- next action: when future setup reports are created, state explicitly whether they use `purnanto` or `purnantov2` instead of relying on informal memory.
+
+## [2026-06-11] model-update | Rewrite setup 09 family into smaller DPM-only stages
+- files created/updated: `../../Setup report/09-multiphase-separator-sensitivity-family.md`, `../../Setup report/09a-dpm-split-inlet-carryover.md`, `../../Setup report/09b-rsm-dpm-split-inlet-accuracy.md`, `../../Setup report/09c-dpm-ewf-wall-film-reentrainment.md`, `../../Setup report/order-dictionary.md`, `../../Setup report/07-pure-phase-split-actual-area.md`, `wiki/log.md`
+- reason: user asked to rewrite the `09` setup family after agreeing that the old version made too many testing jumps between settings and no longer matched the project roadmap.
+- assumptions introduced/removed: removed the old interpretation that family `09` should jump directly into `RSM-DPM` and `DPM + EWF`; introduced the rule that family `09` is now limited to smaller staged DPM escalation after setup `07`, with settings inherited dynamically from the latest accepted simpler branch rather than copied blindly from the original baseline.
+- next action: create the later `10` family only when wall-fate, Eulerian wall film, or re-entrainment becomes the next justified uncertainty after the smaller `09` branches.
+
+## [2026-06-11] model-update | Link setup-report system back to roadmap
+- files created/updated: `../../Setup report/order-dictionary.md`, `../../Setup report/07-pure-phase-split-actual-area.md`, `wiki/log.md`
+- reason: user asked to make the setup-report system aware that the project roadmap exists, because the roadmap had been forgotten and the active setup branch needed a durable backlink.
+- assumptions introduced/removed: introduced the explicit cross-system rule that setup lineage should be read together with the project roadmap; no setup identity or ordering assumptions were changed.
+- next action: when new setup branches are created from `07`, check the roadmap first so setup reports stay aligned with the active project path.
+
+## [2026-06-11] workflow-update | Refresh AGENTS guides for current repo structure
+- files created/updated: `../../AGENTS.md`, `../AGENTS.md`, `../../PyAnsys/AGENTS.md`, `../../CFD_wiki/AGENTS.md`, `../../CFD_wiki/wiki/log.md`, `wiki/log.md`
+- reason: user asked to update the active `AGENTS.md` files so they reflect the current split between reusable CFD knowledge, project V&V sign-off, setup lineage, and executable automation.
+- assumptions introduced/removed: clarified that `ResearchProject_wiki/wiki/vnv/` owns human-readable V&V records while `PyAnsys` owns machine-readable target and claim-gate logic; kept `Setup report/` separate as the setup-lineage authority.
+
+## [2026-06-11] workflow-update | Add dedicated project V&V layer and repo tree map
+- files created/updated: `AGENTS.md`, `wiki/index.md`, `wiki/model/validation.md`, `wiki/project/roadmap.md`, `wiki/vnv/index.md`, `wiki/vnv/policy.md`, `wiki/vnv/claim-classes.md`, `wiki/vnv/signoff-log.md`, `wiki/vnv/targets/index.md`, `wiki/vnv/verification/index.md`, `wiki/vnv/validation/index.md`, `../../PROJECT_TREE.md`, `wiki/log.md`
+- reason: user asked for a cleaner place to store project-owned verification and validation reports without mixing them into setup-lineage records, and also asked for a simple top-level tree of the repository structure after the refactor.
+- assumptions introduced/removed: kept `Setup report/` as a separate lineage system rather than moving it into `ResearchProject_wiki`; introduced `wiki/vnv/` as the project-owned layer for target records, verification reports, validation reports, and final human sign-off.
+- next action: start the first concrete reports under `wiki/vnv/verification/` and `wiki/vnv/validation/` for setup `07`, then link the matching machine-readable target manifests from `PyAnsys`.
+
+## [2026-06-11] model-update | Reset roadmap around setup 07 baseline path
+- files created/updated: `wiki/project/roadmap.md`, `wiki/log.md`
+- reason: user asked to replace the old brine-outlet and water-initialization roadmap with a new project sequence built from `07-pure-phase-split-actual-area.md`, while making it explicit that setup `07` is not yet verified or validated.
+- assumptions introduced/removed: removed the old assumption that `FFF-2`, brine-outlet recovery, and water-pool initialization remain the main project path; introduced the user-specified scope decision that these are parked future-work branches unless extra time remains after the main setup `07` path is complete.
+- next action: use the new roadmap to decide the setup `07` acceptance gate, then run mesh verification only after the baseline branch is numerically acceptable.
+
+## [2026-06-10] model-update | Link project validation page to reusable CFD-side V&V workflow
+- files created/updated: `wiki/model/validation.md`, `wiki/index.md`, `wiki/log.md`
+- reason: user asked for a more robust verification/validation method grounded in the existing CFD literature pages, so the project validation page now points to the reusable CFD-side workflow instead of trying to duplicate that method locally.
+- assumptions introduced/removed: added the rule that the CFD wiki holds the reusable separator V&V method authority, while the research wiki should only track which anchor and acceptance gate are active for the current project branch.
+
 ## [2026-06-09] model-update | Anchor Purnanto pages to extracted HDF5 setup
 - files created/updated: `wiki/technical/purnanto-live-setup-reference.md`, `wiki/technical/sources/purnanto-etal-2013.md`, `wiki/model/baseline-cfd.md`, `wiki/model/inlet-regimes.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/index.md`, `wiki/log.md`
 - reason: user asked to clean up the knowledge base so older Purnanto setup assumptions are replaced by the extracted Fluent HDF5 case/data pair and the setup is easier to reference later.

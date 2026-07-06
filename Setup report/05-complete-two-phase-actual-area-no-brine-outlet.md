@@ -13,11 +13,16 @@ This report starts from the actual-area calculation in:
 
 - [04-mixed-wet-half-actual-area.md](04-mixed-wet-half-actual-area.md)
 
+Geometry naming note:
+
+- this no-brine-outlet branch still uses the `purnanto` geometry label;
+- the geometry label is separate from the inlet boundary-condition style, so a uniform two-phase inlet does not make the geometry `purnantov2`.
+
 ## 2. Setup Identity
 
 | Item | Value |
 |---|---:|
-| Geometry | spiral-inlet BOC separator |
+| Geometry | `purnanto` spiral-inlet BOC separator |
 | Inlet representation | complete mixed two-phase inlet |
 | Boundary type | single full-area `Velocity Inlet` |
 | Brine outlet | not active / no brine outlet |

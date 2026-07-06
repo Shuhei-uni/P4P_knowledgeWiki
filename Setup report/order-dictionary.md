@@ -15,7 +15,27 @@ Where the history is uncertain, the ordering below reflects the current best rec
 - `ResearchProject_wiki/wiki/log.md`
 - `ResearchProject_wiki/wiki/progress/current-status.md`
 - `ResearchProject_wiki/wiki/progress/experiments.md`
+- `ResearchProject_wiki/wiki/project/roadmap.md`
 - internal parent/child notes inside each setup report
+
+## Project Linkage
+
+Use this file together with:
+
+- `../ResearchProject_wiki/wiki/project/roadmap.md`
+
+Reason:
+
+- this dictionary tells you where a setup sits in the lineage;
+- the roadmap tells you which setup branch is the active project path and what the next simulation stages are.
+
+Current project-level interpretation:
+
+- setup `08b` is the active parity-reset parent and V&V authority branch for the roadmap;
+- setup `08c` is the immediate next child branch for inlet-velocity/loading sensitivity while keeping the same enthalpy basis;
+- setup `07` is retained as comparison context rather than the primary next V&V parent;
+- setup-family branches grown from `08b` or later accepted parity-reset branches should be checked against the roadmap before creating or reviving additional setup reports;
+- brine-outlet and water-initialization branches remain part of the historical lineage, but they are currently parked as future exploratory work rather than active roadmap steps.
 
 ## Naming Rule
 
@@ -54,12 +74,14 @@ Rules:
 | `05` | full-inlet alternative branch | `05-complete-two-phase-actual-area-no-brine-outlet.md` | `05-complete-two-phase-actual-area-no-brine-outlet.md` | High | planned diagnostic branch | branch from `04`; one full inlet, no active brine outlet |
 | `06` | fixed-velocity pure-phase alternative | `06-pure-phase-split-fixed-velocity.md` | `06-pure-phase-split-fixed-velocity.md` | High | alternate retained | branch from later actual-area work; preserves `26.81 m/s` |
 | `07` | pure-phase actual-area branch | `07-pure-phase-split-actual-area.md` | `07-pure-phase-split-actual-area.md` | High | professional baseline flux diagnostic completed | selected next setup definition after `06` was kept as alternate; professional-license run now recorded with incomplete surface flux balance pending brine/liquid outlet report |
-| `08` | direct Purnanto-recreation branch | `08-purnanto-one-inlet-massflow-recreation.md` | `08-purnanto-one-inlet-massflow-recreation.md` | High | selected direct baseline-rebuild branch | returns to the paper-style one-inlet mixed steam-water `Mass-Flow Inlet` package using the live Purnanto audit and reusable CFD baseline as the concrete rebuild target |
-| `08a` | steam-outlet boundary-placement trial | `08a-steam-outlet-extension-student-trial.md` | `08a-steam-outlet-extension-student-trial.md` | High | planned student-edition diagnostic branch | child of `07`; keeps the Purnanto spiral-inlet body and setup `07` split two-phase inlet, but extends the central steam outlet path so the pressure-outlet boundary is downstream of the outlet-pipe entrance |
-| `09` | multiphase sensitivity family parent | `09-multiphase-separator-sensitivity-family.md` | `09-multiphase-separator-sensitivity-family.md` | High | active family container | child of `07`; replaces the retired VOF-only idea with a parent container for literature-backed `DPM`, `RSM-DPM`, and `DPM + EWF` child branches |
-| `09a` | split-inlet DPM carryover branch | `09a-dpm-split-inlet-carryover.md` | `09a-dpm-split-inlet-carryover.md` | High | planned first carryover branch | child of `09`; keeps the setup `07` continuous-field basis and adds `DPM` as the lowest-risk literature-backed next step for droplet escape sensitivity |
-| `09b` | split-inlet RSM-DPM accuracy branch | `09b-rsm-dpm-split-inlet-accuracy.md` | `09b-rsm-dpm-split-inlet-accuracy.md` | High | planned higher-accuracy branch | child of `09`; upgrades the carrier-field turbulence closure to `RSM` and adds `DPM`, following the stronger recent separator-method anchor from Chen 2025 |
-| `09c` | split-inlet DPM + EWF wall-film branch | `09c-dpm-ewf-wall-film-reentrainment.md` | `09c-dpm-ewf-wall-film-reentrainment.md` | High | planned wall-film mechanism branch | child of `09`; treats wall-film persistence and re-entrainment as the main unresolved mechanism rather than only droplet escape |
+| `08` | direct Purnanto-recreation branch on `purnantov2` geometry | `08-purnanto-one-inlet-massflow-recreation.md` | `08-purnanto-one-inlet-massflow-recreation.md` | High | retained automation parity scaffold | keeps the direct paper-style one-inlet mixed steam-water `Mass-Flow Inlet` package, but on the later `purnantov2` geometry line rather than on the earlier `purnanto` geometry line |
+| `08a` | `purnantov2` outlet-boundary-placement trial | `08a-steam-outlet-extension-student-trial.md` | `08a-steam-outlet-extension-student-trial.md` | High | planned student-edition diagnostic branch | child of `07`; uses the later `purnantov2` geometry label, including downstream steam-outlet boundary placement and later project cleanup to the spiral-inlet / dish-head reconstruction |
+| `08b` | extraction-first parity split-inlet rebuild | `08b-purnanto-parity-split-inlet-rebuild.md` | `08b-purnanto-parity-split-inlet-rebuild.md` | High | selected parity-reset and V&V candidate | starts from the live Purnanto audit, preserves observed Fluent settings as the primary authority, and changes only the inlet representation plus later project DPM injection definition |
+| `08c` | parity-child inlet-velocity sensitivity branch | `08c-purnanto-parity-inlet-velocity-sensitivity.md` | `08c-purnanto-parity-inlet-velocity-sensitivity.md` | High | planned next loading-sensitivity branch | child of `08b`; keeps the same split-inlet topology and enthalpy basis while varying inlet loading to test efficiency sensitivity |
+| `09` | post-parity DPM sensitivity family parent | `09-multiphase-separator-sensitivity-family.md` | `09-multiphase-separator-sensitivity-family.md` | High | parked future family container | reserved for later DPM sensitivity work after the parity-reset branch is accepted rather than immediately after setup `07` |
+| `09a` | one-way DPM tracking cleanup branch | `09a-dpm-split-inlet-carryover.md` | `09a-dpm-split-inlet-carryover.md` | High | planned first post-baseline branch | child of `09`; uses the accepted carrier field and tests only DPM tracking completeness and robustness |
+| `09b` | one-way DPM stochastic sensitivity branch | `09b-rsm-dpm-split-inlet-accuracy.md` | `09b-rsm-dpm-split-inlet-accuracy.md` | High | planned second post-baseline branch | child of `09`; legacy filename retained, but current role is stochastic / turbulence sensitivity within one-way DPM rather than an immediate `RSM-DPM` jump |
+| `09c` | two-way DPM coupling branch | `09c-dpm-ewf-wall-film-reentrainment.md` | `09c-dpm-ewf-wall-film-reentrainment.md` | High | planned third post-baseline branch | child of `09`; legacy filename retained, but current role is DPM coupling sensitivity, with wall-film and re-entrainment deferred to a later family |
 
 ## Parent-Child Map
 
@@ -67,6 +89,8 @@ Rules:
 00 baseline
  -> 00a Purnanto setup 5000 live audit
     -> 08 Purnanto one-inlet mass-flow recreation
+    -> 08b Purnanto parity split-inlet rebuild
+       -> 08c Purnanto parity inlet-velocity sensitivity
  -> 01 split two-zone mass-flow inlet
     -> 02 split two-zone velocity inlet with brine outlet
        -> 02b VOF split-inlet transient side branch
@@ -76,27 +100,51 @@ Rules:
              -> 05 complete two-phase actual-area no-brine-outlet
              -> 06 pure-phase split fixed velocity
              -> 07 pure-phase split actual-area
-                -> 08a steam outlet extension student-edition trial
+                -> 08a purnantov2 outlet-boundary-placement trial
                 -> 09 multiphase sensitivity family
-                   -> 09a split-inlet DPM carryover
-                   -> 09b split-inlet RSM-DPM accuracy
-                   -> 09c split-inlet DPM + EWF wall-film
+                   -> 09a one-way DPM tracking cleanup
+                   -> 09b one-way DPM stochastic sensitivity
+                   -> 09c two-way DPM coupling
 ```
 
 ## Working Interpretation
 
 - Main lineage:
-  `00 -> 01 -> 02 -> 03 -> 04 -> 07 -> 09`
+  `00 -> 00a -> 08b -> 08c`
 - Child/side branches:
-  `00a`, `02b`, `03a`, `05`, `06`, `08`, `08a`, `09a`, `09b`, `09c`
+  `01`, `02`, `02b`, `03`, `03a`, `04`, `05`, `06`, `07`, `08`, `08a`, `09`, `09a`, `09b`, `09c`
 
 Interpretation note:
 
 - `08` is intentionally a reset-to-baseline branch rather than the next pure-phase child of `07`.
-- `09` returns to the split-inlet comparison lineage as a family parent from `07`, not as a continuation of the one-inlet reset branch.
+- `08b` is the extraction-first reset branch for recovering setup fidelity before new V&V claims are made.
+- `08c` is the immediate child branch for supervisor-directed inlet-velocity sensitivity while keeping the same inlet enthalpy basis.
+- use `purnanto` for the closer paper-parity geometry label and `purnantov2` for the later cleaned geometry with downstream steam-outlet boundary placement.
+- setups `04`, `05`, `06`, `07`, `08b`, and `08c` use `purnanto` geometry; setup `08` and `08a` use `purnantov2` unless a setup report explicitly overrides that.
+- geometry naming is separate from inlet boundary-condition style.
+- `09` remains reserved for later DPM sensitivity work once the parity-reset branch is accepted.
 - Use `08` when the task is to recreate the Purnanto setup itself with one inlet carrying both phases, not when the task is to continue the split-inlet comparison lineage.
+- Use `08b` when the task is to preserve the observed Purnanto setup as closely as possible while introducing the project's split-inlet objective and extraction-driven DPM rebuild.
+- Use `08c` when the task is to test how changed inlet loading/velocity affects efficiency without mixing in a new enthalpy assumption.
 
-This means `09-multiphase-separator-sensitivity-family.md` is now the current parent in the split-inlet comparison chain, while `09a`, `09b`, and `09c` are the concrete planned child branches. `08` remains the active reset-to-baseline branch and `08a` is the retained outlet-extension child diagnostic.
+This means `08b-purnanto-parity-split-inlet-rebuild.md` remains the parity authority branch, `08c-purnanto-parity-inlet-velocity-sensitivity.md` is the next child branch for loading sensitivity, `08` remains the one-inlet automation/parity scaffold, `08a` remains the retained outlet-extension child diagnostic, and `09a` to `09c` stay parked until a stronger parent branch exists.
+
+Current roadmap alignment note:
+
+- setup `07` no longer carries the primary V&V burden;
+- setup `08b` remains the parity parent because setup fidelity now takes priority over continuing the older split-inlet chain;
+- setup `08c` is the next sensitivity branch because the current project question is inlet-loading/velocity effect at fixed enthalpy basis;
+- family `09` remains limited to smaller DPM-only escalation steps, but only after setup `08b` is accepted;
+- later wall-film and re-entrainment work should move into a future `10` family.
+
+## Technical Companions
+
+These files are companion reports, not new lineage entries in the strict numbering table:
+
+- [00-baseline-spiral-boc-reference-technical.md](00-baseline-spiral-boc-reference-technical.md)
+- [07-pure-phase-split-actual-area-technical.md](07-pure-phase-split-actual-area-technical.md)
+
+Use them when the live Fluent export needs to be separated from the human narrative report. They capture replay-relevant geometry/mesh context and report-versus-extraction drift without replacing the main branch order.
 
 ## Branch-State Reading Guide
 
