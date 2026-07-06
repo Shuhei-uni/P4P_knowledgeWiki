@@ -1,0 +1,16 @@
+{
+  "bundle_name": "purnanto-enthalpy1760-live-extract",
+  "exported_at_utc": "2026-06-11T05:40:47+00:00",
+  "report_ref": "",
+  "notes_label": "Purnanto exact setup at 1760J",
+  "remote_case": "C:\\Users\\syok443\\Documents\\Purnanto\\enthalpy1760.cas",
+  "remote_data": "C:\\Users\\syok443\\Documents\\Purnanto\\enthalpy1760.dat",
+  "offline_case_file": "",
+  "offline_data_file": "",
+  "live_export_enabled": true,
+  "offline_export_enabled": false,
+  "live_bundle": {
+    "fluent_version": "Ansys Fluent 2024 R2",
+    "captured_at_utc": "2026-06-11T05:44:11+00:00"
+  }
+}

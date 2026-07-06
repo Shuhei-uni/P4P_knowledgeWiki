@@ -1,0 +1,1027 @@
+{
+  "write": {
+    "settings_path": "C:\\Users\\syok443\\Documents\\Purnanto\\enthalpy1680-settings-transfer-20260616-093310.set",
+    "source_case_path": "C:\\Users\\syok443\\Documents\\Purnanto\\enthalpy1680.cas",
+    "source_data_path": null,
+    "diagnostics": {
+      "label": "source case before write-settings",
+      "fluent_version": "Ansys Fluent 2024 R2",
+      "configuration": "",
+      "boundary_conditions": {
+        "interior": {
+          "interior-fluid": {
+            "name": "interior-fluid",
+            "phase": {
+              "mixture": {
+                "interior": {}
+              },
+              "phase-1": {
+                "interior": {}
+              },
+              "phase-2": {
+                "interior": {}
+              }
+            }
+          }
+        },
+        "mass_flow_inlet": {
+          "inlet": {
+            "name": "inlet",
+            "phase": {
+              "mixture": {
+                "momentum": {
+                  "reference_frame": "Absolute",
+                  "supersonic_gauge_pressure": {
+                    "option": "value",
+                    "value": 1140000.0
+                  },
+                  "direction_specification": "Normal to Boundary"
+                },
+                "turbulence": {
+                  "turbulence_specification": "Intensity and Hydraulic Diameter",
+                  "turbulent_intensity": 0.02109999952837825,
+                  "hydraulic_diameter": 0.724
+                },
+                "multiphase": {}
+              },
+              "phase-1": {
+                "momentum": {
+                  "mass_flow_specification": "Mass Flow Rate",
+                  "mass_flow_rate": {
+                    "option": "value",
+                    "value": 88.61
+                  }
+                },
+                "turbulence": {},
+                "multiphase": {}
+              },
+              "phase-2": {
+                "momentum": {
+                  "mass_flow_specification": "Mass Flow Rate",
+                  "mass_flow_rate": {
+                    "option": "value",
+                    "value": 109.0
+                  }
+                },
+                "turbulence": {},
+                "multiphase": {}
+              }
+            }
+          }
+        },
+        "pressure_outlet": {
+          "outlet": {
+            "name": "outlet",
+            "phase": {
+              "mixture": {
+                "momentum": {
+                  "gauge_pressure": {
+                    "option": "value",
+                    "value": 1120000.0
+                  },
+                  "pressure_profile_multiplier": 1.0,
+                  "backflow_dir_spec_method": "Normal to Boundary",
+                  "backflow_pressure_spec": "Total Pressure",
+                  "radial_equ_pressure_distribution": false
+                },
+                "turbulence": {
+                  "turbulence_specification": "Intensity and Hydraulic Diameter",
+                  "backflow_turbulent_intensity": 0.02152499951887876,
+                  "backflow_hydraulic_diameter": 0.724
+                },
+                "multiphase": {}
+              },
+              "phase-1": {
+                "momentum": {},
+                "turbulence": {},
+                "multiphase": {}
+              },
+              "phase-2": {
+                "momentum": {},
+                "turbulence": {},
+                "multiphase": {
+                  "volume_frac_spec_method": "Backflow Volume Fraction",
+                  "backflow_volume_fraction": {
+                    "option": "value",
+                    "value": 0.0
+                  }
+                }
+              }
+            }
+          }
+        },
+        "wall": {
+          "bottom": {
+            "name": "bottom",
+            "phase": {
+              "mixture": {
+                "momentum": {
+                  "wall_motion": "Stationary Wall",
+                  "shear_condition": "No Slip"
+                },
+                "turbulence": {
+                  "roughness_height": {
+                    "option": "value",
+                    "value": 0
+                  },
+                  "roughness_const": {
+                    "option": "value",
+                    "value": 0.5
+                  }
+                },
+                "multiphase": {}
+              },
+              "phase-1": {
+                "momentum": {},
+                "turbulence": {},
+                "multiphase": {}
+              },
+              "phase-2": {
+                "momentum": {},
+                "turbulence": {},
+                "multiphase": {}
+              }
+            }
+          },
+          "wall-fluid": {
+            "name": "wall-fluid",
+            "phase": {
+              "mixture": {
+                "momentum": {
+                  "wall_motion": "Stationary Wall",
+                  "shear_condition": "No Slip"
+                },
+                "turbulence": {
+                  "roughness_height": {
+                    "option": "value",
+                    "value": 0.0
+                  },
+                  "roughness_const": {
+                    "option": "value",
+                    "value": 0.5
+                  }
+                },
+                "multiphase": {}
+              },
+              "phase-1": {
+                "momentum": {},
+                "turbulence": {},
+                "multiphase": {}
+              },
+              "phase-2": {
+                "momentum": {},
+                "turbulence": {},
+                "multiphase": {}
+              }
+            }
+          }
+        },
+        "non_reflecting_bc": {
+          "general_nrbc": {
+            "sigma": 0.15,
+            "sigma2": 5.0
+          },
+          "turbo_sepcific_nrbc": {
+            "enable": false
+          }
+        },
+        "perforated_wall": {
+          "setup_method": "None",
+          "model_setup": {
+            "ninjections": 1,
+            "urf": 1,
+            "injection": [
+              {
+                "injection_thread": false,
+                "coupled": true,
+                "extraction_thread": false,
+                "uniform": true,
+                "static": false,
+                "formulation": 0,
+                "dynamic_setup": {
+                  "method": -1
+                }
+              }
+            ]
+          }
+        },
+        "settings": {
+          "mass_flow": true,
+          "pressure_outlet": {
+            "blending_factor": 0.0,
+            "bin_count": 65,
+            "average_pressure": false
+          },
+          "target_mass_flow_rate_settings": {
+            "under_relaxation_factor": 0.05,
+            "verbosity": false
+          },
+          "advanced": {
+            "delay_model_change_update": false,
+            "batch_thread_update": false
+          }
+        }
+      },
+      "cell_zone_conditions": {
+        "fluid": {
+          "fluid": {
+            "name": "fluid",
+            "phase": {
+              "mixture": {
+                "general": {
+                  "laminar": false
+                },
+                "reference_frame": {
+                  "frame_motion": false,
+                  "reference_frame_axis_origin": [
+                    {
+                      "option": "value",
+                      "value": 0.0
+                    },
+                    {
+                      "option": "value",
+                      "value": 0.0
+                    },
+                    {
+                      "option": "value",
+                      "value": 0.0
+                    }
+                  ],
+                  "reference_frame_axis_direction": [
+                    {
+                      "option": "value",
+                      "value": 0.0
+                    },
+                    {
+                      "option": "value",
+                      "value": 0.0
+                    },
+                    {
+                      "option": "value",
+                      "value": 0.0
+                    }
+                  ]
+                },
+                "mesh_motion": {
+                  "enable": false
+                },
+                "porous_zone": {
+                  "porous": false
+                },
+                "fan_zone": {
+                  "fan_zone": false
+                },
+                "sources": {
+                  "enable": false
+                },
+                "fixed_values": {
+                  "enable": false
+                },
+                "multiphase": {}
+              },
+              "phase-1": {
+                "general": {},
+                "reference_frame": {
+                  "reference_frame_axis_origin": [
+                    {
+                      "option": "value",
+                      "value": 0.0
+                    },
+                    {
+                      "option": "value",
+                      "value": 0.0
+                    },
+                    {
+                      "option": "value",
+                      "value": 0.0
+                    }
+                  ],
+                  "reference_frame_axis_direction": [
+                    {
+                      "option": "value",
+                      "value": 0.0
+                    },
+                    {
+                      "option": "value",
+                      "value": 0.0
+                    },
+                    {
+                      "option": "value",
+                      "value": 0.0
+                    }
+                  ]
+                },
+                "porous_zone": {},
+                "fan_zone": {
+                  "fan_zone": false
+                },
+                "sources": {
+                  "enable": false
+                },
+                "fixed_values": {
+                  "enable": false
+                },
+                "multiphase": {}
+              },
+              "phase-2": {
+                "general": {},
+                "reference_frame": {
+                  "reference_frame_axis_origin": [
+                    {
+                      "option": "value",
+                      "value": 0.0
+                    },
+                    {
+                      "option": "value",
+                      "value": 0.0
+                    },
+                    {
+                      "option": "value",
+                      "value": 0.0
+                    }
+                  ],
+                  "reference_frame_axis_direction": [
+                    {
+                      "option": "value",
+                      "value": 0.0
+                    },
+                    {
+                      "option": "value",
+                      "value": 0.0
+                    },
+                    {
+                      "option": "value",
+                      "value": 0.0
+                    }
+                  ]
+                },
+                "porous_zone": {},
+                "fan_zone": {
+                  "fan_zone": false
+                },
+                "sources": {
+                  "enable": false
+                },
+                "fixed_values": {
+                  "enable": false
+                },
+                "multiphase": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "primary_error": null
+  },
+  "read": {
+    "mesh_path": "C:\\Users\\syok443\\Documents\\TwoPhaseInletV2(Purnanto)\\TwoPhaseInlet(PurnantoExtended).msh",
+    "settings_path": "C:\\Users\\syok443\\Documents\\Purnanto\\enthalpy1680-settings-transfer-20260616-093310.set",
+    "output_case_path": "C:\\Users\\syok443\\Documents\\TwoPhaseInletV2(Purnanto)\\TwoPhaseInlet(PurnantoExtended)-settings-transfer-20260616-093310.cas.h5",
+    "diagnostics": {
+      "after_mesh": {
+        "label": "target mesh before read-settings",
+        "fluent_version": "Ansys Fluent 2024 R2",
+        "configuration": "",
+        "boundary_conditions": {
+          "interior": {
+            "interior-fluid": {
+              "name": "interior-fluid",
+              "interior": {}
+            }
+          },
+          "pressure_outlet": {
+            "steamoutlet": {
+              "name": "steamoutlet",
+              "momentum": {
+                "backflow_reference_frame": "Absolute",
+                "gauge_pressure": {
+                  "option": "value",
+                  "value": 0
+                },
+                "pressure_profile_multiplier": 1.0,
+                "backflow_dir_spec_method": "Normal to Boundary",
+                "backflow_pressure_spec": "Total Pressure",
+                "prevent_reverse_flow": false,
+                "radial_equ_pressure_distribution": false,
+                "avg_pressure_spec": false,
+                "target_mass_flow_rate": false
+              },
+              "turbulence": {
+                "turbulence_specification": "Intensity and Viscosity Ratio",
+                "backflow_turbulent_intensity": 0.05,
+                "backflow_turbulent_viscosity_ratio": 10
+              }
+            }
+          },
+          "velocity_inlet": {
+            "liquidinlet": {
+              "name": "liquidinlet",
+              "momentum": {
+                "velocity_specification_method": "Magnitude, Normal to Boundary",
+                "reference_frame": "Absolute",
+                "velocity": {
+                  "option": "value",
+                  "value": 0
+                },
+                "initial_gauge_pressure": {
+                  "option": "value",
+                  "value": 0
+                }
+              },
+              "turbulence": {
+                "turbulence_specification": "Intensity and Viscosity Ratio",
+                "turbulent_intensity": 0.05,
+                "turbulent_viscosity_ratio": 10
+              }
+            },
+            "steaminlet": {
+              "name": "steaminlet",
+              "momentum": {
+                "velocity_specification_method": "Magnitude, Normal to Boundary",
+                "reference_frame": "Absolute",
+                "velocity": {
+                  "option": "value",
+                  "value": 0
+                },
+                "initial_gauge_pressure": {
+                  "option": "value",
+                  "value": 0
+                }
+              },
+              "turbulence": {
+                "turbulence_specification": "Intensity and Viscosity Ratio",
+                "turbulent_intensity": 0.05,
+                "turbulent_viscosity_ratio": 10
+              }
+            }
+          },
+          "wall": {
+            "bottom": {
+              "name": "bottom",
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_model": "Standard",
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              }
+            },
+            "wall": {
+              "name": "wall",
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_model": "Standard",
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              }
+            }
+          },
+          "non_reflecting_bc": {
+            "general_nrbc": {
+              "sigma": 0.15,
+              "sigma2": 5.0
+            },
+            "turbo_sepcific_nrbc": {
+              "enable": false
+            }
+          },
+          "perforated_wall": {
+            "setup_method": "None",
+            "model_setup": {
+              "ninjections": 1,
+              "urf": 1,
+              "injection": [
+                {
+                  "injection_thread": false,
+                  "coupled": true,
+                  "extraction_thread": false,
+                  "uniform": true,
+                  "static": false,
+                  "formulation": 0,
+                  "dynamic_setup": {
+                    "method": -1
+                  }
+                }
+              ]
+            }
+          },
+          "settings": {
+            "mass_flow": true,
+            "pressure_outlet": {
+              "blending_factor": 0.0,
+              "bin_count": 65,
+              "average_pressure": false
+            },
+            "target_mass_flow_rate_settings": {
+              "under_relaxation_factor": 0.05,
+              "verbosity": false
+            },
+            "advanced": {
+              "delay_model_change_update": false,
+              "batch_thread_update": false
+            }
+          }
+        },
+        "cell_zone_conditions": {
+          "fluid": {
+            "fluid": {
+              "name": "fluid",
+              "general": {
+                "material": "air",
+                "laminar": false
+              },
+              "reference_frame": {
+                "frame_motion": false,
+                "reference_frame_axis_origin": [
+                  {
+                    "option": "value",
+                    "value": 0
+                  },
+                  {
+                    "option": "value",
+                    "value": 0
+                  },
+                  {
+                    "option": "value",
+                    "value": 0
+                  }
+                ],
+                "reference_frame_axis_direction": [
+                  {
+                    "option": "value",
+                    "value": 0
+                  },
+                  {
+                    "option": "value",
+                    "value": 0
+                  },
+                  {
+                    "option": "value",
+                    "value": 1
+                  }
+                ]
+              },
+              "mesh_motion": {
+                "enable": false
+              },
+              "zonal_models": {},
+              "porous_zone": {
+                "porous": false
+              },
+              "fan_zone": {
+                "fan_zone": false
+              },
+              "sources": {
+                "enable": false
+              },
+              "fixed_values": {
+                "enable": false
+              }
+            }
+          }
+        }
+      },
+      "after_settings": {
+        "label": "target mesh after read-settings",
+        "fluent_version": "Ansys Fluent 2024 R2",
+        "configuration": "",
+        "boundary_conditions": {
+          "interior": {
+            "interior-fluid": {
+              "name": "interior-fluid",
+              "phase": {
+                "mixture": {
+                  "interior": {}
+                },
+                "phase-1": {
+                  "interior": {}
+                },
+                "phase-2": {
+                  "interior": {}
+                }
+              }
+            }
+          },
+          "pressure_outlet": {
+            "steamoutlet": {
+              "name": "steamoutlet",
+              "phase": {
+                "mixture": {
+                  "momentum": {
+                    "gauge_pressure": {
+                      "option": "value",
+                      "value": 0
+                    },
+                    "pressure_profile_multiplier": 1.0,
+                    "backflow_dir_spec_method": "Normal to Boundary",
+                    "backflow_pressure_spec": "Total Pressure",
+                    "radial_equ_pressure_distribution": false
+                  },
+                  "turbulence": {
+                    "turbulence_specification": "Intensity and Viscosity Ratio",
+                    "backflow_turbulent_intensity": 0.05,
+                    "backflow_turbulent_viscosity_ratio": 10
+                  },
+                  "multiphase": {}
+                },
+                "phase-1": {
+                  "momentum": {},
+                  "turbulence": {},
+                  "multiphase": {}
+                },
+                "phase-2": {
+                  "momentum": {},
+                  "turbulence": {},
+                  "multiphase": {
+                    "volume_frac_spec_method": "Backflow Volume Fraction",
+                    "backflow_volume_fraction": {
+                      "option": "value",
+                      "value": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "velocity_inlet": {
+            "liquidinlet": {
+              "name": "liquidinlet",
+              "phase": {
+                "mixture": {
+                  "momentum": {
+                    "initial_gauge_pressure": {
+                      "option": "value",
+                      "value": 0
+                    }
+                  },
+                  "turbulence": {
+                    "turbulence_specification": "Intensity and Viscosity Ratio",
+                    "turbulent_intensity": 0.05,
+                    "turbulent_viscosity_ratio": 10
+                  },
+                  "multiphase": {}
+                },
+                "phase-1": {
+                  "momentum": {
+                    "velocity_specification_method": "Magnitude, Normal to Boundary",
+                    "reference_frame": "Absolute",
+                    "velocity": {
+                      "option": "value",
+                      "value": 0
+                    }
+                  },
+                  "turbulence": {},
+                  "multiphase": {}
+                },
+                "phase-2": {
+                  "momentum": {
+                    "velocity_specification_method": "Magnitude, Normal to Boundary",
+                    "reference_frame": "Absolute",
+                    "velocity": {
+                      "option": "value",
+                      "value": 0
+                    }
+                  },
+                  "turbulence": {},
+                  "multiphase": {
+                    "volume_fraction": {
+                      "option": "value",
+                      "value": 0
+                    }
+                  }
+                }
+              }
+            },
+            "steaminlet": {
+              "name": "steaminlet",
+              "phase": {
+                "mixture": {
+                  "momentum": {
+                    "initial_gauge_pressure": {
+                      "option": "value",
+                      "value": 0
+                    }
+                  },
+                  "turbulence": {
+                    "turbulence_specification": "Intensity and Viscosity Ratio",
+                    "turbulent_intensity": 0.05,
+                    "turbulent_viscosity_ratio": 10
+                  },
+                  "multiphase": {}
+                },
+                "phase-1": {
+                  "momentum": {
+                    "velocity_specification_method": "Magnitude, Normal to Boundary",
+                    "reference_frame": "Absolute",
+                    "velocity": {
+                      "option": "value",
+                      "value": 0
+                    }
+                  },
+                  "turbulence": {},
+                  "multiphase": {}
+                },
+                "phase-2": {
+                  "momentum": {
+                    "velocity_specification_method": "Magnitude, Normal to Boundary",
+                    "reference_frame": "Absolute",
+                    "velocity": {
+                      "option": "value",
+                      "value": 0
+                    }
+                  },
+                  "turbulence": {},
+                  "multiphase": {
+                    "volume_fraction": {
+                      "option": "value",
+                      "value": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "wall": {
+            "bottom": {
+              "name": "bottom",
+              "phase": {
+                "mixture": {
+                  "momentum": {
+                    "wall_motion": "Stationary Wall",
+                    "shear_condition": "No Slip"
+                  },
+                  "turbulence": {
+                    "roughness_height": {
+                      "option": "value",
+                      "value": 0
+                    },
+                    "roughness_const": {
+                      "option": "value",
+                      "value": 0.5
+                    }
+                  },
+                  "multiphase": {}
+                },
+                "phase-1": {
+                  "momentum": {},
+                  "turbulence": {},
+                  "multiphase": {}
+                },
+                "phase-2": {
+                  "momentum": {},
+                  "turbulence": {},
+                  "multiphase": {}
+                }
+              }
+            },
+            "wall": {
+              "name": "wall",
+              "phase": {
+                "mixture": {
+                  "momentum": {
+                    "wall_motion": "Stationary Wall",
+                    "shear_condition": "No Slip"
+                  },
+                  "turbulence": {
+                    "roughness_height": {
+                      "option": "value",
+                      "value": 0
+                    },
+                    "roughness_const": {
+                      "option": "value",
+                      "value": 0.5
+                    }
+                  },
+                  "multiphase": {}
+                },
+                "phase-1": {
+                  "momentum": {},
+                  "turbulence": {},
+                  "multiphase": {}
+                },
+                "phase-2": {
+                  "momentum": {},
+                  "turbulence": {},
+                  "multiphase": {}
+                }
+              }
+            }
+          },
+          "non_reflecting_bc": {
+            "general_nrbc": {
+              "sigma": 0.15,
+              "sigma2": 5.0
+            },
+            "turbo_sepcific_nrbc": {
+              "enable": false
+            }
+          },
+          "perforated_wall": {
+            "setup_method": "None",
+            "model_setup": {
+              "ninjections": 1,
+              "urf": 1,
+              "injection": [
+                {
+                  "injection_thread": false,
+                  "coupled": true,
+                  "extraction_thread": false,
+                  "uniform": true,
+                  "static": false,
+                  "formulation": 0,
+                  "dynamic_setup": {
+                    "method": -1
+                  }
+                }
+              ]
+            }
+          },
+          "settings": {
+            "mass_flow": true,
+            "pressure_outlet": {
+              "blending_factor": 0.0,
+              "bin_count": 65,
+              "average_pressure": false
+            },
+            "target_mass_flow_rate_settings": {
+              "under_relaxation_factor": 0.05,
+              "verbosity": false
+            },
+            "advanced": {
+              "delay_model_change_update": false,
+              "batch_thread_update": false
+            }
+          }
+        },
+        "cell_zone_conditions": {
+          "fluid": {
+            "fluid": {
+              "name": "fluid",
+              "phase": {
+                "mixture": {
+                  "general": {
+                    "laminar": false
+                  },
+                  "reference_frame": {
+                    "frame_motion": false,
+                    "reference_frame_axis_origin": [
+                      {
+                        "option": "value",
+                        "value": 0.0
+                      },
+                      {
+                        "option": "value",
+                        "value": 0.0
+                      },
+                      {
+                        "option": "value",
+                        "value": 0.0
+                      }
+                    ],
+                    "reference_frame_axis_direction": [
+                      {
+                        "option": "value",
+                        "value": 0.0
+                      },
+                      {
+                        "option": "value",
+                        "value": 0.0
+                      },
+                      {
+                        "option": "value",
+                        "value": 0.0
+                      }
+                    ]
+                  },
+                  "mesh_motion": {
+                    "enable": false
+                  },
+                  "porous_zone": {
+                    "porous": false
+                  },
+                  "fan_zone": {
+                    "fan_zone": false
+                  },
+                  "sources": {
+                    "enable": false
+                  },
+                  "fixed_values": {
+                    "enable": false
+                  },
+                  "multiphase": {}
+                },
+                "phase-1": {
+                  "general": {},
+                  "reference_frame": {
+                    "reference_frame_axis_origin": [
+                      {
+                        "option": "value",
+                        "value": 0.0
+                      },
+                      {
+                        "option": "value",
+                        "value": 0.0
+                      },
+                      {
+                        "option": "value",
+                        "value": 0.0
+                      }
+                    ],
+                    "reference_frame_axis_direction": [
+                      {
+                        "option": "value",
+                        "value": 0.0
+                      },
+                      {
+                        "option": "value",
+                        "value": 0.0
+                      },
+                      {
+                        "option": "value",
+                        "value": 0.0
+                      }
+                    ]
+                  },
+                  "porous_zone": {},
+                  "fan_zone": {
+                    "fan_zone": false
+                  },
+                  "sources": {
+                    "enable": false
+                  },
+                  "fixed_values": {
+                    "enable": false
+                  },
+                  "multiphase": {}
+                },
+                "phase-2": {
+                  "general": {},
+                  "reference_frame": {
+                    "reference_frame_axis_origin": [
+                      {
+                        "option": "value",
+                        "value": 0.0
+                      },
+                      {
+                        "option": "value",
+                        "value": 0.0
+                      },
+                      {
+                        "option": "value",
+                        "value": 0.0
+                      }
+                    ],
+                    "reference_frame_axis_direction": [
+                      {
+                        "option": "value",
+                        "value": 0.0
+                      },
+                      {
+                        "option": "value",
+                        "value": 0.0
+                      },
+                      {
+                        "option": "value",
+                        "value": 0.0
+                      }
+                    ]
+                  },
+                  "porous_zone": {},
+                  "fan_zone": {
+                    "fan_zone": false
+                  },
+                  "sources": {
+                    "enable": false
+                  },
+                  "fixed_values": {
+                    "enable": false
+                  },
+                  "multiphase": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "primary_error": null
+  }
+}

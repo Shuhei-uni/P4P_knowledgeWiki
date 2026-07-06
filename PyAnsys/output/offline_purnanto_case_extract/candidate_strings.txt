@@ -1,0 +1,80 @@
+## /meshes/1/cells/zoneTopology/fields
+cellType;childZoneId;zoneType;name
+
+## /meshes/1/cells/zoneTopology/name
+fluid
+
+## /meshes/1/faces/zoneTopology/fields
+c0;c1;childZoneId;faceType;flags;shadowZoneId;zoneType;name
+
+## /meshes/1/faces/zoneTopology/name
+wall-fluid;interior-fluid;bottom;outlet;inlet
+
+## /settings/Cortex Variables
+(38 ((
+(reference-frames-display (((name . "global") (display-state . initial))))
+(reference-frames-definition (((name . "global") (origin point 0. 0. 0. (frame . parent)) (orientation two-axis (axis ((axis-from axis-label x (frame . global)) (axis-to vector 1. 0. 0. (frame . parent))) ((axis-from axis-label y (frame . global)) (axis-to vector 0. 1. 0. (frame . parent)))) (auto? . #t)) (transformations))))
+(reference-frames (((name . "global") (id . 1) (parent . 0) (current-state (origin 0. 0. 0
+...[truncated]
+
+## /settings/Domain Variables
+(64 (
+(2
+(pb-dqmom/max-iter (5))
+(pb-dqmom/residual-tolerance (0.0001))
+(pb-dqmom/iter-tolerance (0.05))
+(pb-dqmom/explicit-relax (1.))
+(pb-smm/max-iter (5 5))
+(pb-smm/residual-tolerance (0.0001 0.0001))
+(pb-smm/iter-tolerance (0.05 0.05))
+(pb-smm/explicit-relax (1 1))
+(pb-qbmm/min-dia 1e-08)
+(pb-qbmm/max-dia 100000000.)
+(pb-qbmm/kv 0.523598776)
+(pb-qbmm/pseudo-relax (0.75 0.75 0.75 0.75 0.75 0.75))
+(pb-qbmm/pseudo-cycle-type (3 3 3 3 3 3))
+(pb-qbmm/pseudo-time-scale-factor (1. 1. 1. 1. 1. 1.))
+
+...[truncated]
+
+## /settings/Origin
+ANSYS_FLUENT 24.2 Build 10192
+
+## /settings/Rampant Variables
+(37 (
+(recon/allow-node-grad-on-poly? #f)
+(cpld/aratio-cutoff 20.)
+(synthetic-turb-sas_des-adjust-modeled-turb-to-sgs-model 1)
+(vm-flux-algo 1)
+(nut-kappa 0.41)
+(partition/multi-constraint-partition 0)
+(nonconformal/plbc? #f)
+(nonconformal/pl/n-modes 10)
+(nonconformal/pl/method 1)
+(nonconformal/pl/n-init-cycles 1)
+(nonconformal/pl/relax 0.7)
+(nonconformal/pl/copy-grad? #t)
+(nonconformal/pl/ghost-cell-layer-count 2)
+(nonconformal/pl/ghost-cell-layer-type 2)
+(nonconformal/pl/n-signals 1)
+(nonconfo
+...[truncated]
+
+## /settings/Solver
+ANSYS_FLUENT
+
+## /settings/TGrid Variables
+(60 ())
+
+## /settings/Thread Variables
+(39 (40050 fluid fluid 1)(
+ (material . water-liquid-at-psep)
+ (sources? . #f)
+ (source-terms (x-momentum) (y-momentum) (z-momentum) (k) (epsilon) (energy))
+ (fixed? . #f)
+ (cylindrical-fixed-var? . #f)
+ (fixes (x-velocity (inactive . #f) (constant . 0) (profile "" "")) (y-velocity (inactive . #f) (constant . 0) (profile "" "")) (z-velocity (inactive . #f) (constant . 0) (profile "" "")) (k (inactive . #f) (constant . 0) (profile "" "")) (epsilon (inactive . #f) (constant . 0) (profile "" "")) (
+...[truncated]
+
+## /settings/Version
+24.2
