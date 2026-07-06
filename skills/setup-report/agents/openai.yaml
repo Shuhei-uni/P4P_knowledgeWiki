@@ -1,0 +1,4 @@
+interface:
+  display_name: "Setup Report"
+  short_description: "Search setup lineage and case reports."
+  default_prompt: "Use $setup-report to find or update a concrete simulation setup branch."

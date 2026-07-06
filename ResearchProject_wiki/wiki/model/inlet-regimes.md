@@ -6,6 +6,10 @@ Track how inlet representation evolves from simplified baseline toward realistic
 ## Current Baseline
 - Legacy recreation currently assumes mist-like inlet for two-phase feed (based on historical modelling approach).
 - Direct Purnanto recreation means one inlet carrying both phases together, not two separately named inlet faces.
+- Geometry naming rule:
+  - geometry naming is separate from inlet boundary-condition style;
+  - setups `04`, `05`, `06`, and `07` use the `purnanto` geometry label;
+  - setup `08` and later branches use the `purnantov2` geometry label unless a setup report explicitly says otherwise.
 
 ## Audited Purnanto Reference Values
 - The live HDF5 setup audit confirms a `Mass-Flow Inlet` with `80.69 kg/s` vapor and `116.92 kg/s` liquid, inlet pressure field `1,140,000 Pa`, turbulence intensity `2.11 %`, and hydraulic diameter `0.724 m`.
@@ -13,26 +17,28 @@ Track how inlet representation evolves from simplified baseline toward realistic
 - Use those observed values as the current Purnanto setup reference when you need the exact loaded Fluent case rather than the paper narrative.
 
 ## Selected Next Inlet Test
-- Selected immediate branch reset on 2026-06-09:
-  - return first to the direct Purnanto-style one-inlet recreation;
-  - keep one `Mass-Flow Inlet`;
-  - prescribe both phase mass flows on that same inlet;
-  - delay the split-inlet comparison until the one-inlet rebuild is checked again.
+- Selected immediate branch reset on 2026-06-11:
+  - keep the direct Purnanto-style one-inlet recreation as the automation scaffold;
+  - use extraction from the live Fluent case to close setup-fidelity gaps first;
+  - then create a parity-first split-inlet rebuild that changes only the inlet representation and later `DPM` injection definition;
+  - do not treat setup `07` as the main V&V parent unless the parity-reset branch fails.
 
 Project intent for the immediate branch:
 
-- one inlet boundary only;
-- steam and water both enter through that inlet;
-- no pure-liquid / pure-steam face split;
-- no full-area velocity-inlet reinterpretation.
+- preserve the observed Purnanto continuous-phase setup first;
+- keep the project split-inlet objective explicit rather than burying it inside setup `07`;
+- route any new `DPM` injections through the steam-side inlet only after extraction confirms which original `DPM` settings actually existed;
+- separate observed settings from project-added settings.
 
 Concrete branch record:
 
 - `../../../Setup report/08-purnanto-one-inlet-massflow-recreation.md`
+- `../../../Setup report/08b-purnanto-parity-split-inlet-rebuild.md`
 
 ## Retained Alternate Path
 
 - The two-zone split inlet remains a deliberate comparison path, not the current direct-baseline target.
+- the retained split-inlet comparison path can still sit on `purnanto` geometry; the fact that an inlet is split does not by itself change the geometry label.
 - If reactivated later, the intended concept is still:
   - outer-wall side of inlet = liquid water;
   - inner/core side of inlet = steam;

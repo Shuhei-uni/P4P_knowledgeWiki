@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research Project Wiki"
+  short_description: "Search project progress and V&V records."
+  default_prompt: "Use $research-project-wiki to update project progress or find research evidence."

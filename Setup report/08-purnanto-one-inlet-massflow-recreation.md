@@ -12,6 +12,13 @@ Define the current-project branch that most directly recreates the Purnanto sepa
 
 This report is the concrete setup-instance definition for rebuilding the paper-style inlet package on the current project geometry/mesh. It should be used when the goal is direct Purnanto-style setup parity, not the later split-inlet diagnostics.
 
+Geometry naming note:
+
+- this branch uses the `purnantov2` geometry label even though its inlet package is the direct one-inlet Purnanto-style recreation;
+- geometry naming and inlet boundary-condition style are separate, so a one-inlet uniform/two-phase recreation can still sit on `purnantov2` geometry;
+- use `purnanto` for setups `04` to `07`, and `purnantov2` for setup `08` and later branches unless a later note explicitly overrides that;
+- see `../ResearchProject_wiki/wiki/technical/v2-purnanto-spiral-inlet-geometry.md` for the current project naming rule.
+
 Primary reusable evidence:
 
 - [geothermal-boc-separator-fluent-2013-baseline](../CFD_wiki/wiki/setups/geothermal-boc-separator-fluent-2013-baseline.md)
@@ -22,7 +29,7 @@ Primary reusable evidence:
 
 | Item | Value |
 |---|---|
-| Geometry role | current-project recreation of the Purnanto one-inlet baseline |
+| Geometry role | current-project one-inlet recreation on `purnantov2` geometry |
 | Inlet representation | one mixed steam-water inlet |
 | Inlet boundary count | `1` |
 | Inlet boundary type | `Mass-Flow Inlet` |

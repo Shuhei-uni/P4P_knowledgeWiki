@@ -6,6 +6,11 @@ Start a report-facing record for the mixed wet-half velocity-inlet simulation us
 
 This report currently records the inlet mass-flow calculation. Later sections are placeholders for mass flux, separator efficiency, contour interpretation, velocity-field interpretation, and other useful post-processing values.
 
+Geometry naming note:
+
+- this actual-area branch uses the `purnanto` geometry label;
+- inlet boundary style is a separate choice from geometry naming, so this remains `purnanto` even though it is a split-inlet branch.
+
 Correction note:
 
 - Earlier calculation used the reported spiral-inlet velocity `26.81 m/s` directly with the measured actual inlet area, which gives `195.36 kg/s`.
@@ -16,7 +21,7 @@ Correction note:
 
 | Item | Value |
 |---|---:|
-| Geometry | spiral-inlet BOC separator |
+| Geometry | `purnanto` spiral-inlet BOC separator |
 | Inlet representation | mixed wet-half split inlet |
 | Boundary type | velocity inlet on both inlet halves |
 | Steam-only inlet velocity | `27.12 m/s` |

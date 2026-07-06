@@ -2,129 +2,140 @@
 
 ## 1. Purpose
 
-Replace the retired VOF-only `09` idea with a new setup-family parent that reflects the stronger research direction now established in `CFD_wiki`.
+Define setup family `09` as the first controlled physics-escalation layer after setup `08b`.
 
-This `09` family is built from:
+This family exists only after setup `08b` has become an accepted baseline candidate under the project roadmap:
 
-- [07-pure-phase-split-actual-area.md](07-pure-phase-split-actual-area.md)
-- [08-purnanto-one-inlet-massflow-recreation.md](08-purnanto-one-inlet-massflow-recreation.md)
-- the maintained paper extractions in `CFD_wiki`
+- [08b-purnanto-parity-split-inlet-rebuild.md](08b-purnanto-parity-split-inlet-rebuild.md)
+- [../ResearchProject_wiki/wiki/project/roadmap.md](../ResearchProject_wiki/wiki/project/roadmap.md)
 
 This parent report is **not** a run definition by itself.
 
-It exists to organize three concrete child branches:
+It exists to organize three smaller child branches that each retire one uncertainty at a time:
 
 - [09a-dpm-split-inlet-carryover.md](09a-dpm-split-inlet-carryover.md)
 - [09b-rsm-dpm-split-inlet-accuracy.md](09b-rsm-dpm-split-inlet-accuracy.md)
 - [09c-dpm-ewf-wall-film-reentrainment.md](09c-dpm-ewf-wall-film-reentrainment.md)
 
-## 2. Why VOF Was Dropped
+Sequence note:
 
-The current maintained paper set does not support `VOF` as the main production model for this separator problem.
+- the `09b` and `09c` filenames are legacy sequence holders;
+- their branch roles are redefined below to match the current roadmap;
+- later wall-film and re-entrainment work should move into a future `10` family rather than being forced back into `09`.
 
-Current evidence summary:
-
-- [purnanto-2013-cfd-geothermal-separator](../CFD_wiki/wiki/sources/purnanto-2013-cfd-geothermal-separator.md): `Mixture` plus later droplet logic, not `VOF`.
-- [pointon-2009-geothermal-separator-sizing-cfd-validation](../CFD_wiki/wiki/sources/pointon-2009-geothermal-separator-sizing-cfd-validation.md): `RNG k-epsilon + DPM`, not `VOF`.
-- [chen-2025-straight-through-cyclone-water-separator](../CFD_wiki/wiki/sources/chen-2025-straight-through-cyclone-water-separator.md): transient `RSM-DPM`, not `VOF`.
-- [mondal-sharma-2024-air-water-annular-flow-cfd](../CFD_wiki/wiki/sources/mondal-sharma-2024-air-water-annular-flow-cfd.md): `DPM + Eulerian Wall Film`, not `VOF`.
-- [skoog-2020-annular-flow-three-field-cfd-thesis](../CFD_wiki/wiki/sources/skoog-2020-annular-flow-three-field-cfd-thesis.md): three-field `EWF + DPM`, not `VOF`.
-
-Interpretation:
-
-- `VOF` remains a known model family, but not the best-supported next branch for this project.
-- the stronger paper-backed question is not "can one clean interface be resolved?"
-- the stronger paper-backed questions are:
-  - which droplets escape,
-  - whether stronger swirl changes droplet fate enough to justify a higher turbulence closure,
-  - whether wall-hit liquid stays removed or re-enters the steam path.
-
-## 3. Shared Inherited Inputs
-
-All `09` child branches inherit the same core setup identity unless the child report explicitly overrides it:
-
-| Item | Value |
-|---|---:|
-| Geometry family | spiral-inlet BOC separator |
-| Split-inlet basis | setup `07` actual-area pure liquid / pure steam split |
-| One-inlet baseline context | setup `08` |
-| Liquid target mass flow | `116.92 kg/s` |
-| Steam target mass flow | `80.69 kg/s` |
-| Total target mass flow | `197.61 kg/s` |
-| Liquid density | `881.77 kg/m3` |
-| Steam density | `5.73 kg/m3` |
-| Liquid viscosity | `145.96e-6 kg/m-s` |
-| Steam viscosity | `15.188e-6 kg/m-s` |
-| Shared split-inlet velocity | `27.118 m/s` |
-| Liquid strip width | `0.006754 m` |
-| Steam strip width | `0.717246 m` |
-
-Scope note:
-
-- bottom liquid drainage remains out of scope unless a child branch explicitly changes that;
-- these branches are still judged mainly by steam-side liquid carryover, internal flow plausibility, and mechanism clarity.
-
-## 4. Child Branch Logic
-
-### `09a` DPM
-
-Use [09a-dpm-split-inlet-carryover.md](09a-dpm-split-inlet-carryover.md) when the main question is:
-
-```text
-which droplet sizes escape under the currently resolved separator flow field?
-```
-
-Best match:
-
-- quickest literature-backed extension from setup `07`;
-- strongest continuity with Purnanto and Pointon;
-- lowest extra setup complexity.
-
-### `09b` RSM-DPM
-
-Use [09b-rsm-dpm-split-inlet-accuracy.md](09b-rsm-dpm-split-inlet-accuracy.md) when the main question is:
-
-```text
-is the present eddy-viscosity turbulence closure hiding important swirl anisotropy
-and therefore biasing separator accuracy?
-```
-
-Best match:
-
-- strongest recent separator-method validation anchor from Chen 2025;
-- better aligned with strong swirl than `RNG k-epsilon`;
-- higher cost than `09a`, but more defensible if flow-field accuracy is the concern.
-
-### `09c` DPM + Eulerian Wall Film
-
-Use [09c-dpm-ewf-wall-film-reentrainment.md](09c-dpm-ewf-wall-film-reentrainment.md) when the main question is:
-
-```text
-does wall-hit liquid stay separated, or does wall film and re-entrainment
-control the remaining carryover error?
-```
-
-Best match:
-
-- best mechanism match if setup `07` already looks good in bulk carryover but still may hide wall-film physics;
-- strongest link to the annular-flow literature in the repo;
-- highest implementation risk and highest closure dependence.
-
-## 5. Recommendation Order
-
-Recommended order of execution:
-
-1. `09a` first if you want the fastest paper-backed next run.
-2. `09b` first instead if you care more about separator accuracy than speed and have enough compute.
-3. `09c` only after `09a` or `09b` shows that wall re-entrainment is still the likely missing mechanism.
-
-## 6. Interpretation Rule
+## 2. Family Interpretation
 
 Treat this `09` parent as:
 
 ```text
-multiphase sensitivity family container only
+post-08b controlled DPM sensitivity family
 ```
 
 Do not run `09` directly.
 Run only `09a`, `09b`, or `09c`.
+
+## 3. Gate Before Using Family 09
+
+Do not activate any `09` child unless setup `08b` has already passed the current project gate for:
+
+1. baseline acceptance;
+2. minimum monitor stability;
+3. mesh verification at the needed claim level;
+4. enough baseline DPM evidence to justify physics escalation.
+
+If setup `08b` is still only `diagnostic`, stop and repair `08b` first.
+
+## 4. Dynamic Inheritance Rule
+
+All `09` child branches inherit from the **latest accepted simpler branch**, not blindly from the original setup `08b` text.
+
+This means:
+
+- geometry, mesh, numerics, and DPM controls must be updated to the latest accepted findings;
+- if a prior branch changes a production mesh, accepted timestep, accepted wall fate, accepted DPM step limit, or accepted particle count, the next branch should inherit that updated setting unless the new branch is explicitly testing that setting;
+- setup `08b` remains the branch origin, but it is not the frozen authority for every later setting.
+
+Practical rule:
+
+```text
+inherit the last accepted branch state,
+change only the one new uncertainty being tested,
+and record every inherited setting that was updated dynamically.
+```
+
+## 5. Shared Scope
+
+Unless a child branch explicitly changes the scope, all `09` branches remain focused on:
+
+- steam-side liquid carryover;
+- droplet-fate interpretation;
+- whether added DPM realism changes the project conclusion.
+
+Still out of scope here:
+
+- brine-outlet reconstruction;
+- lower-water initialization;
+- wall-film and re-entrainment as active model layers inside family `09`.
+
+## 6. Child Branch Logic
+
+### `09a` One-Way DPM Tracking Cleanup
+
+Use [09a-dpm-split-inlet-carryover.md](09a-dpm-split-inlet-carryover.md) when the main question is:
+
+```text
+can one-way DPM on the accepted carrier field produce bounded,
+interpretable escaped/trapped/incomplete trends?
+```
+
+Main purpose:
+
+- reduce or bound incomplete tracks;
+- clean up DPM tracking controls before stronger DPM claims are made.
+
+### `09b` One-Way DPM Stochastic / Turbulence Sensitivity
+
+Use [09b-rsm-dpm-split-inlet-accuracy.md](09b-rsm-dpm-split-inlet-accuracy.md) when the main question is:
+
+```text
+does one-way DPM carryover change materially when turbulence-driven
+particle dispersion is enabled or bounded?
+```
+
+Main purpose:
+
+- compare deterministic and stochastic particle-transport interpretations;
+- keep the same accepted carrier field while changing only particle-dispersion treatment.
+
+### `09c` Two-Way DPM Coupling
+
+Use [09c-dpm-ewf-wall-film-reentrainment.md](09c-dpm-ewf-wall-film-reentrainment.md) when the main question is:
+
+```text
+does physically meaningful droplet loading feed back strongly enough
+into the carrier flow that one-way DPM is no longer sufficient?
+```
+
+Main purpose:
+
+- turn on continuous-phase source feedback only after one-way DPM is stable;
+- test coupling as its own uncertainty, without wall film in the same branch.
+
+## 7. Recommendation Order
+
+Recommended order of execution:
+
+1. `09a` first.
+2. `09b` second if one-way DPM is stable enough to compare dispersion treatment.
+3. `09c` third only after one-way DPM settings and droplet loading are defensible.
+
+Do not skip straight to `09c` unless the project already has a strong reason to believe one-way DPM is insufficient.
+
+## 8. What Is Deferred Beyond Family 09
+
+Create a later `10` family for:
+
+1. wall-fate sensitivity before film;
+2. Eulerian wall film;
+3. re-entrainment or film stripping;
+4. any transient wall-film interpretation that needs its own acceptance gate.
