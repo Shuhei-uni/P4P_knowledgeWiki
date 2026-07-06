@@ -93,6 +93,9 @@ def try_child_names(label: str, obj: Any, notes: list[str]) -> list[str]:
 
 
 def capture_branch(label: str, obj: Any, notes: list[str], *, max_depth: int = 2, depth: int = 0) -> Any:
+    if not hasattr(obj, "get_state") or not hasattr(obj, "child_names"):
+        return {"_non_settings_object": True}
+
     snapshot: dict[str, Any] = {
         "_state": try_get_state(label, obj.get_state, notes),
     }

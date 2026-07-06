@@ -101,7 +101,7 @@ scripts/list_boundaries.py
 scripts/list_models.py
 scripts/inspection/export_residuals.py
 scripts/export_report_definitions.py
-scripts/run_iterations.py
+scripts/setup/save_data_after_iterations.py
 ```
 
 ## Notes
@@ -114,6 +114,8 @@ scripts/run_iterations.py
 - Store concrete active assets in `.env` using `FLUENT_REMOTE_CASE_FILE`,
   `FLUENT_REMOTE_DATA_FILE`, `FLUENT_REMOTE_GEOM_FILE`, and
   `FLUENT_REMOTE_MESH_FILE`.
-- Use timestamped output files.
+- Default setup deliverable: `.cas.h5` only.
+- Default run/save deliverable: derived `name_X.dat.h5` from `scripts/setup/save_data_after_iterations.py`.
+- Keep initialization, iteration, and data writing out of complex setup-building scripts unless the user explicitly requests a combined flow.
 - Keep `server_info.txt` and `.env` out of git.
 - If connection fails, check IP, port, password, firewall, VPN, and whether server_info contains 127.0.0.1.
