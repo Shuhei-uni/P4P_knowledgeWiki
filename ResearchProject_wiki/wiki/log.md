@@ -1,5 +1,35 @@
 # Work Log
 
+## [2026-07-02] model-update | Add setup 08b one-injection DPM sample attribution
+- files created/updated: `../../../PyAnsys/src/pyansys_fluent/postprocess_live.py`, `../../../PyAnsys/scripts/inspection/postprocess_live_case.py`, `../../../PyAnsys/tests/test_postprocess_live.py`, `../../../PyAnsys/output/live_postprocess/TwoPhaseInletV2(Purnanto)-25-05000-summary.json`, `../../../PyAnsys/output/live_postprocess/TwoPhaseInletV2(Purnanto)-25-05000-report.md`, `../../Setup report/08b-purnanto-parity-split-inlet-rebuild.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/progress/blockers.md`, `wiki/log.md`
+- reason: user asked to repeat the DPM check injection by injection, matching the manual Fluent `Discrete Phase > Sample` workflow, so the active 6-bin `08b` result can be attributed per injection rather than only through the aggregate summary.
+- what changed since last update: added reusable live-Fluent per-injection `dpm-sample` support to the `PyAnsys` post-processing toolchain, reran the loaded `08b` case injection by injection against `steamoutlet`, and recorded that the sampled aggregate remains `13012` incomplete / `8` escaped / `0` trapped, with the completed sampled escape confined to `injection-5-micron` in the current pass.
+- assumptions introduced/removed: introduced the explicit limitation that the new per-injection counts are still boundary-scoped `dpm-sample` diagnostics rather than full validated fate accounting; removed the earlier gap that the `08b` escaped-row attribution was only inferred indirectly from the aggregate summary text.
+- current status: setup `08b` now has both aggregate and one-injection sampled DPM attribution recorded, but the result still remains `Debug only` because incomplete tracks dominate every active sampled bin except for the small completed `5-micron` escape count.
+- next action: raise the DPM tracking budget or export stronger per-injection fate summaries before treating the per-bin result as stronger evidence.
+
+## [2026-07-02] model-update | Create setup 08c inlet-velocity sensitivity branch
+- files created/updated: `../../Setup report/08c-purnanto-parity-inlet-velocity-sensitivity.md`, `../../Setup report/order-dictionary.md`, `wiki/project/roadmap.md`, `wiki/index.md`, `wiki/log.md`
+- reason: user wants the next stage after setup `08b` recorded as setup `08c` after supervisor advice to test how different inlet velocities affect separator efficiency while keeping the inlet enthalpy basis fixed.
+- assumptions introduced/removed: introduced the working interpretation that setup `08c` should keep inlet **specific enthalpy** fixed and vary inlet **mass loading / resulting velocity** only; explicitly separated that from any later enthalpy-sensitivity branch so the next test does not mix two major changes at once.
+- current status: setup `08c` now exists as the planned child of `08b`, with the first recommended loading ladder recorded and the enthalpy-versus-flow-rate interpretation made explicit.
+- next action: calculate the actual split-zone mass-flow targets for the chosen `0.75x`, `1.00x`, `1.25x`, and `1.50x` loading points, then build and run the first `08c` carrier cases before deciding whether DPM or enthalpy sensitivity should follow.
+
+## [2026-07-02] model-update | Refine setup 08c to target 20 m/s and 32.14 m/s endpoints
+- files created/updated: `../../Setup report/08c-purnanto-parity-inlet-velocity-sensitivity.md`, `wiki/project/roadmap.md`, `wiki/log.md`
+- reason: user clarified that the next sensitivity branch should stay mass-flow-inlet based, but the actual endpoint cases should correspond to prescribed low/high inlet velocities rather than generic loading multipliers.
+- assumptions introduced/removed: replaced the provisional `0.75x` to `1.50x` ladder with endpoint velocity cases; kept `32.14 m/s` as the repo-backed upper reference from the live audit and labeled `20.00 m/s` as a user-specified low-end sensitivity point pending source confirmation.
+- current status: setup `08c` now records equivalent split-zone mass-flow targets for `20.00 m/s`, the current `08b`-adjacent reference condition, and `32.14 m/s` while keeping the branch as a split `Mass-Flow Inlet` study at fixed enthalpy basis.
+- next action: build the `20.00 m/s` and `32.14 m/s` carrier cases using the recorded equivalent mass-flow values, then compare steam-line carryover, pressure drop, and residual stability against the existing `08b` reference case.
+
+## [2026-07-02] model-update | Record setup 08b live post-processing and current DPM summary
+- files created/updated: `../../Setup report/08b-purnanto-parity-split-inlet-rebuild.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/progress/blockers.md`, `wiki/log.md`
+- reason: user finished the continuous-field `5000`-iteration run for setup `08b`, asked for the actual post-processing workflow on the loaded Fluent case/data, and then asked for the current DPM escaped/trapped/incomplete outcome for the active 6-injection set.
+- what changed since last update: recorded the live `08b` phase-flux result (`steamoutlet` liquid `0.082132007 kg/s`, vapor `81.464165 kg/s`), the scoped flux-based steam-line carryover efficiency (`99.93 %`), the large mixture imbalance (`116.063719 kg/s`), and the refreshed aggregate DPM summary (`13012` incomplete, `8` escaped, no trapped row printed) for the active 6-bin subset.
+- assumptions introduced/removed: kept the user-specified limitation that bins `562.70 um`, `844.06 um`, and `1631.84 um` remain intentionally omitted from this pass; introduced the explicit rule that the current `08b` DPM result stays `Debug only` because incomplete tracks dominate the updated summary.
+- current status: setup `08b` now has a live post-processing record and a current aggregate DPM-screening result, but neither the carrier flux result nor the DPM result is yet strong enough for report-quality validation language.
+- next action: increase DPM tracking budget and, if needed, export per-injection zone summaries before trying to interpret the active 6-bin DPM result more strongly.
+
 ## [2026-06-11] model-update | Pivot V&V target from setup 07 to extraction-first setup 08b
 - files created/updated: `../../Setup report/08b-purnanto-parity-split-inlet-rebuild.md`, `../../Setup report/order-dictionary.md`, `../../Setup report/09-multiphase-separator-sensitivity-family.md`, `../../Setup report/09a-dpm-split-inlet-carryover.md`, `../../Setup report/09b-rsm-dpm-split-inlet-accuracy.md`, `../../Setup report/09c-dpm-ewf-wall-film-reentrainment.md`, `wiki/project/roadmap.md`, `wiki/model/inlet-regimes.md`, `wiki/progress/current-status.md`, `wiki/index.md`, `wiki/log.md`
 - reason: user realized setup `07` likely contains human reconstruction drift from the real Purnanto Fluent case and wants the next serious V&V branch to be rebuilt from extracted settings rather than from memory.

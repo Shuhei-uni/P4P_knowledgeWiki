@@ -1,5 +1,11 @@
 ## A. Geometry, mesh, and modelling scope
 
+Technical companion:
+
+- [00-baseline-spiral-boc-reference-technical.md](00-baseline-spiral-boc-reference-technical.md)
+
+Use the technical companion when you need the exact Fluent export and a drift log against this narrative baseline. If the two disagree, treat the technical companion as the replay authority and record the mismatch explicitly.
+
 | Section | Item | Set this to | Where | Status / notes | Source |
 |---|---|---:|---|---|---|
 | Geometry | Separator design | **Spiral-inlet BOC design** | Geometry |  | The paper compares three designs and the spiral-inlet design is one of them.  [oai_citation:0‡informit.366967552564856.pdf](sediment://file_0000000006b0720b935da5499729cdc0) |

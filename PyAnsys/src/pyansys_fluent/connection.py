@@ -195,6 +195,6 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--server-id",
         default="1",
-        help="Configured Fluent server id to use. Use 1 for FLUENT_IP, 2 for FLUENT_IP2, 3 for FLUENT_IP3.",
+        help="Configured Fluent server id to use. Use 1 for FLUENT_IP, 2 for FLUENT_IP2, 3 for FLUENT_IP3, 4 for FLUENT_IP4.",
     )
     return parser

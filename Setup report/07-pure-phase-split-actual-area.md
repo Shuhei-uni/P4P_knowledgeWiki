@@ -28,6 +28,12 @@ Geometry naming note:
 - geometry naming is separate from inlet boundary-condition style, so the split two-phase inlet in setup `07` does not make the geometry `purnantov2`;
 - use `purnantov2` only for the later geometry branch with downstream outlet-boundary placement and local spiral-inlet / dish-head cleanup.
 
+Technical companion:
+
+- [07-pure-phase-split-actual-area-technical.md](07-pure-phase-split-actual-area-technical.md)
+
+Use the technical companion when you need the live Fluent export, the geometry/mesh replay context, and the intended-vs-actual drift log. If the live export and this narrative report disagree, treat the export as the replay authority and record the mismatch explicitly.
+
 ## 2. Setup Identity
 
 | Item | Value |

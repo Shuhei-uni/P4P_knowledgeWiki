@@ -17,6 +17,7 @@
 - `../../Setup report/08a-steam-outlet-extension-student-trial.md`
 - `../../Setup report/08-purnanto-one-inlet-massflow-recreation.md`
 - `../../Setup report/08b-purnanto-parity-split-inlet-rebuild.md`
+- `../../Setup report/08c-purnanto-parity-inlet-velocity-sensitivity.md`
 
 ## Progress Layer
 - `wiki/progress/current-status.md`

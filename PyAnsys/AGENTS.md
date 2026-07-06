@@ -3,9 +3,18 @@
 ## Mission
 `PyAnsys/` is a remote Fluent automation workspace for building, inspecting, rebuilding, and extending simulation setups through PyFluent, gRPC, TUI fallbacks, and case-specific orchestration scripts.
 
+From now on, the workflow is intentionally split into two separate responsibilities:
+- setup-building scripts produce or modify only `.cas.h5`
+- `scripts/setup/save_data_after_iterations.py` loads an existing `.cas.h5`, hybrid-initializes it, runs iterations, and writes only `.dat.h5`
+
+Do not collapse setup construction and run/save orchestration back into one monolithic script unless the user explicitly asks for that.
+
 The main risk in this folder is not just wrong values. The main risk is writing automation that assumes Fluent is a stable Python object tree when it actually behaves like a dependency-ordered GUI state machine.
 
 This file defines the strict local workflow for agents working in `PyAnsys/`.
+
+## Venv activation
+Use command `source /Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/.venv/bin/activate`
 
 ## Directory Purpose In The Repo
 `PyAnsys/` is the executable layer of the repository.
@@ -13,7 +22,8 @@ This file defines the strict local workflow for agents working in `PyAnsys/`.
 It should own:
 - automation code and reusable helpers;
 - inspection and probe scripts;
-- setup rebuild and run orchestration;
+- setup rebuild and case-only save orchestration;
+- focused run/save utilities that start from an existing `.cas.h5`;
 - extracted machine-readable setup knowledge;
 - machine-readable verification targets and claim-gate logic.
 
@@ -48,6 +58,22 @@ Before writing or changing any non-trivial setup script, read these files in ord
 9. `src/pyansys_fluent/dependency_workflow.py`
 10. `src/pyansys_fluent/setup_common.py`
 11. `docs/PYANSYS_OVERHAUL_BLUEPRINT.md`
+
+## Student Edition Remote Fallback
+When working against the Windows Student Edition host, treat remote Fluent startup as a special case:
+
+- If headless Fluent over SSH exits immediately after the gRPC server starts, assume stdin/EOF is the problem before assuming the setup script is broken.
+- Prefer the opt-in local manual-launch path in `src/pyansys_fluent/connection.py` when the remote Student session is unstable.
+- On the Windows host, set the launch environment explicitly if `.env` loading is unreliable in that Python environment:
+  - `FLUENT_LOCAL_EXE`
+  - `FLUENT_LOCAL_OUTPUT_DIR`
+  - `FLUENT_LOCAL_PROCESSOR_COUNT`
+  - `FLUENT_LOCAL_GUI`
+  - `FLUENT_ALLOW_REMOTE_HOST`
+  - `FLUENT_INSECURE_MODE`
+- Verify the live session with `scripts/connection/check_connection.py` before running a long setup script.
+- If `connect_to_fluent()` starts asking for TLS certificates or otherwise refuses the remote handoff, stop and switch to the local manual-launch path instead of iterating on shell quoting.
+- When invoking a Windows batch wrapper from SSH, use `call <script>.cmd` so `cmd.exe` executes the batch file instead of treating the path as a raw command token.
 
 If the task touches DPM, multiphase, Energy, or EWF, read that model's tree and order file before editing code.
 
@@ -164,6 +190,7 @@ You may skip the full workflow only for small tasks such as:
 - pure refactors with no Fluent behavior change
 - logging/output formatting changes
 - file path handling or environment bootstrapping
+- isolated run-from-case improvements inside `scripts/setup/save_data_after_iterations.py` or reusable helpers it calls
 
 ## Main-Agent Reconciliation Rule
 The main agent is responsible for resolving conflicts between:
@@ -202,11 +229,14 @@ If these disagree, do not silently pick one. State the conflict and implement th
 Do not put case-specific orchestration logic into `src/` unless it is truly reusable across multiple setup scripts.
 
 ## Non-Negotiable Script Workflow
-Every non-trivial setup script must follow this sequence:
+Treat setup building and simulation running as separate workflows.
+
+### A. Setup-building scripts
+Every non-trivial setup script that creates or modifies a setup must follow this sequence:
 
 1. connect to Fluent through `src/pyansys_fluent/connection.py`
 2. verify all required remote inputs exist before mutating anything
-3. load the target mesh or case/data explicitly
+3. load the target mesh or source case explicitly
 4. inspect current state when the script depends on named boundaries, phases, materials, or model activation
 5. enable parent model or create parent object first
 6. refresh and reacquire the affected object
@@ -215,7 +245,23 @@ Every non-trivial setup script must follow this sequence:
 9. refresh and reacquire again after any parent/type/object-creation change
 10. read back the applied value
 11. classify failure before choosing retry, TUI fallback, or manual cleanup
-12. save checkpoints around major milestones when the run is expensive or fragile
+12. write the resulting setup as `.cas.h5`
+
+Setup-building scripts should stop at a valid case-only artifact unless the user explicitly requests otherwise.
+
+### B. Run/save scripts
+The standard runner is `scripts/setup/save_data_after_iterations.py`.
+
+Its contract is:
+1. accept only a remote `.cas.h5` path plus an iteration count
+2. derive the output data path as `name_X.dat.h5`
+3. load the case with `src/pyansys_fluent/setup_io.py::load_case_only`
+4. hybrid-initialize
+5. run iterations through the Settings API with TUI fallback
+6. write only `.dat.h5`
+7. verify the written `.dat.h5` is visible to Fluent
+
+Do not add mesh loading, setup mutation, or case/data paired checkpoint logic to this focused runner.
 
 Do not skip inspection and readback just because a setter call did not raise an exception.
 
@@ -230,9 +276,16 @@ Preferred structure:
 - model enablement blocks
 - materials blocks
 - cell zone and boundary blocks
-- solution and initialization blocks
 - optional DPM or EWF blocks
-- solve/write/export blocks
+- final case-only write block
+
+For `scripts/setup/save_data_after_iterations.py`, keep the structure narrower:
+- parser and input validation
+- connection and remote path verification
+- case-only loading
+- initialization
+- iteration
+- data-only write with remote visibility verification
 
 Reusable logic belongs in `src/pyansys_fluent/`.
 
@@ -243,6 +296,7 @@ Examples of logic that should be shared instead of copied:
 - dependency-aware step execution
 - boundary-role detection and name remapping
 - JSON snapshot writing
+- case-only loading and other focused setup/run IO helpers
 
 ## Dependency and Reacquire Rules
 The following rules are mandatory:
@@ -345,6 +399,7 @@ When editing `PyAnsys/`:
 - move repeated mechanics into `src/pyansys_fluent/`
 - preserve existing CLI flags unless there is a strong reason to change them
 - avoid renaming scripts or moving files unless the new layout clearly improves the workflow contract
+- keep run execution separate from setup mutation; the default deliverables are `.cas.h5` from setup scripts and `.dat.h5` from the focused runner
 
 ## Completion Checklist
 Before finishing work in `PyAnsys/`, verify:
@@ -356,6 +411,7 @@ Before finishing work in `PyAnsys/`, verify:
 5. failure behavior is classified, not silent
 6. the relevant knowledge files were updated if new path/order knowledge was learned
 7. the script remains a thin orchestration layer rather than a new monolith
+8. setup scripts save `.cas.h5` only, and run/save behavior stays in `scripts/setup/save_data_after_iterations.py` unless explicitly waived
 
 ## Conflict Rule
 If a direct instruction from the user conflicts with this file, follow the user's instruction.

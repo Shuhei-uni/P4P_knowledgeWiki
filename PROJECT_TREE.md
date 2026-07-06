@@ -47,6 +47,11 @@ P4P_knowledgeWiki/
 │   ├── knowledge/
 │   ├── scripts/
 │   └── src/
+├── skills/
+│   ├── cfd-wiki/
+│   ├── research-project-wiki/
+│   ├── setup-report/
+│   └── pyansys-workflow/
 ├── subagents/
 └── template/
 ```
@@ -56,3 +61,4 @@ P4P_knowledgeWiki/
 - `ResearchProject_wiki/`: project decisions, progress, technical notes, V&V reports, and sign-off.
 - `Setup report/`: concrete setup definitions and lineage.
 - `PyAnsys/`: automation, machine-readable targets, and executable workflows.
+- `skills/`: repo-local Codex skills distilled from the folder-level agent instructions.

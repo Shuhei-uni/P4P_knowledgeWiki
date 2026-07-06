@@ -31,7 +31,8 @@ Reason:
 
 Current project-level interpretation:
 
-- setup `08b` is the active parity-reset and V&V candidate branch for the roadmap;
+- setup `08b` is the active parity-reset parent and V&V authority branch for the roadmap;
+- setup `08c` is the immediate next child branch for inlet-velocity/loading sensitivity while keeping the same enthalpy basis;
 - setup `07` is retained as comparison context rather than the primary next V&V parent;
 - setup-family branches grown from `08b` or later accepted parity-reset branches should be checked against the roadmap before creating or reviving additional setup reports;
 - brine-outlet and water-initialization branches remain part of the historical lineage, but they are currently parked as future exploratory work rather than active roadmap steps.
@@ -76,6 +77,7 @@ Rules:
 | `08` | direct Purnanto-recreation branch on `purnantov2` geometry | `08-purnanto-one-inlet-massflow-recreation.md` | `08-purnanto-one-inlet-massflow-recreation.md` | High | retained automation parity scaffold | keeps the direct paper-style one-inlet mixed steam-water `Mass-Flow Inlet` package, but on the later `purnantov2` geometry line rather than on the earlier `purnanto` geometry line |
 | `08a` | `purnantov2` outlet-boundary-placement trial | `08a-steam-outlet-extension-student-trial.md` | `08a-steam-outlet-extension-student-trial.md` | High | planned student-edition diagnostic branch | child of `07`; uses the later `purnantov2` geometry label, including downstream steam-outlet boundary placement and later project cleanup to the spiral-inlet / dish-head reconstruction |
 | `08b` | extraction-first parity split-inlet rebuild | `08b-purnanto-parity-split-inlet-rebuild.md` | `08b-purnanto-parity-split-inlet-rebuild.md` | High | selected parity-reset and V&V candidate | starts from the live Purnanto audit, preserves observed Fluent settings as the primary authority, and changes only the inlet representation plus later project DPM injection definition |
+| `08c` | parity-child inlet-velocity sensitivity branch | `08c-purnanto-parity-inlet-velocity-sensitivity.md` | `08c-purnanto-parity-inlet-velocity-sensitivity.md` | High | planned next loading-sensitivity branch | child of `08b`; keeps the same split-inlet topology and enthalpy basis while varying inlet loading to test efficiency sensitivity |
 | `09` | post-parity DPM sensitivity family parent | `09-multiphase-separator-sensitivity-family.md` | `09-multiphase-separator-sensitivity-family.md` | High | parked future family container | reserved for later DPM sensitivity work after the parity-reset branch is accepted rather than immediately after setup `07` |
 | `09a` | one-way DPM tracking cleanup branch | `09a-dpm-split-inlet-carryover.md` | `09a-dpm-split-inlet-carryover.md` | High | planned first post-baseline branch | child of `09`; uses the accepted carrier field and tests only DPM tracking completeness and robustness |
 | `09b` | one-way DPM stochastic sensitivity branch | `09b-rsm-dpm-split-inlet-accuracy.md` | `09b-rsm-dpm-split-inlet-accuracy.md` | High | planned second post-baseline branch | child of `09`; legacy filename retained, but current role is stochastic / turbulence sensitivity within one-way DPM rather than an immediate `RSM-DPM` jump |
@@ -88,6 +90,7 @@ Rules:
  -> 00a Purnanto setup 5000 live audit
     -> 08 Purnanto one-inlet mass-flow recreation
     -> 08b Purnanto parity split-inlet rebuild
+       -> 08c Purnanto parity inlet-velocity sensitivity
  -> 01 split two-zone mass-flow inlet
     -> 02 split two-zone velocity inlet with brine outlet
        -> 02b VOF split-inlet transient side branch
@@ -107,29 +110,41 @@ Rules:
 ## Working Interpretation
 
 - Main lineage:
-  `00 -> 00a -> 08b`
+  `00 -> 00a -> 08b -> 08c`
 - Child/side branches:
   `01`, `02`, `02b`, `03`, `03a`, `04`, `05`, `06`, `07`, `08`, `08a`, `09`, `09a`, `09b`, `09c`
 
 Interpretation note:
 
 - `08` is intentionally a reset-to-baseline branch rather than the next pure-phase child of `07`.
-- `08b` is the current extraction-first reset branch for recovering setup fidelity before new V&V claims are made.
+- `08b` is the extraction-first reset branch for recovering setup fidelity before new V&V claims are made.
+- `08c` is the immediate child branch for supervisor-directed inlet-velocity sensitivity while keeping the same inlet enthalpy basis.
 - use `purnanto` for the closer paper-parity geometry label and `purnantov2` for the later cleaned geometry with downstream steam-outlet boundary placement.
-- setups `04`, `05`, `06`, `07`, and `08b` use `purnanto` geometry; setup `08` and `08a` use `purnantov2` unless a setup report explicitly overrides that.
+- setups `04`, `05`, `06`, `07`, `08b`, and `08c` use `purnanto` geometry; setup `08` and `08a` use `purnantov2` unless a setup report explicitly overrides that.
 - geometry naming is separate from inlet boundary-condition style.
 - `09` remains reserved for later DPM sensitivity work once the parity-reset branch is accepted.
 - Use `08` when the task is to recreate the Purnanto setup itself with one inlet carrying both phases, not when the task is to continue the split-inlet comparison lineage.
 - Use `08b` when the task is to preserve the observed Purnanto setup as closely as possible while introducing the project's split-inlet objective and extraction-driven DPM rebuild.
+- Use `08c` when the task is to test how changed inlet loading/velocity affects efficiency without mixing in a new enthalpy assumption.
 
-This means `08b-purnanto-parity-split-inlet-rebuild.md` is now the active parity-reset branch, `08` remains the one-inlet automation/parity scaffold, `08a` remains the retained outlet-extension child diagnostic, and `09a` to `09c` stay parked until a stronger parent branch exists.
+This means `08b-purnanto-parity-split-inlet-rebuild.md` remains the parity authority branch, `08c-purnanto-parity-inlet-velocity-sensitivity.md` is the next child branch for loading sensitivity, `08` remains the one-inlet automation/parity scaffold, `08a` remains the retained outlet-extension child diagnostic, and `09a` to `09c` stay parked until a stronger parent branch exists.
 
 Current roadmap alignment note:
 
 - setup `07` no longer carries the primary V&V burden;
-- setup `08b` is the new V&V target because setup fidelity now takes priority over continuing the older split-inlet chain;
+- setup `08b` remains the parity parent because setup fidelity now takes priority over continuing the older split-inlet chain;
+- setup `08c` is the next sensitivity branch because the current project question is inlet-loading/velocity effect at fixed enthalpy basis;
 - family `09` remains limited to smaller DPM-only escalation steps, but only after setup `08b` is accepted;
 - later wall-film and re-entrainment work should move into a future `10` family.
+
+## Technical Companions
+
+These files are companion reports, not new lineage entries in the strict numbering table:
+
+- [00-baseline-spiral-boc-reference-technical.md](00-baseline-spiral-boc-reference-technical.md)
+- [07-pure-phase-split-actual-area-technical.md](07-pure-phase-split-actual-area-technical.md)
+
+Use them when the live Fluent export needs to be separated from the human narrative report. They capture replay-relevant geometry/mesh context and report-versus-extraction drift without replacing the main branch order.
 
 ## Branch-State Reading Guide
 

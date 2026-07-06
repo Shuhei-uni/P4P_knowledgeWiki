@@ -1,16 +1,18 @@
 # Current Status
 
 ## Snapshot
-- Date: 2026-06-11
+- Date: 2026-07-02
 - Phase: extraction-first Purnanto parity reset plus retained setup `07` archive context
 - Focus: use Python extraction to recover the actual Purnanto Fluent setup faithfully enough that manual reconstruction error stops driving the next branch decision.
 - Current issue: setup `07` has useful comparison evidence, but it is no longer trusted as the closest reconstruction of the original Purnanto setup.
 - Current mesh scale: professional setup `07` run reported at approximately `1.3M` nodes and `7.6M` cells; older project mesh scale was approximately `1.8M` nodes.
 - Current controlled setup change: new setup `08b` will preserve the observed Purnanto setup first, then introduce only the project split-inlet change and later steam-side `DPM` injections.
-- Latest diagnostic result: `PLS-PRO-2026-06-03-A` reports very low apparent liquid carryover at the steam outlet (`0.03663388722044243 kg/s`, `0.03135 %` of liquid inlet if interpreted as carryover magnitude). Treat this as a scoped steam-carryover diagnostic, not a full brine-drainage balance.
+- Latest diagnostic result: `PURNANTO-08B-POSTPROCESS-2026-07-02` post-processed the loaded `08b` `5000`-iteration case/data on Fluent server `2`. The live flux report gives steam-outlet liquid `0.082132007 kg/s`, steam-outlet vapor `81.464165 kg/s`, scoped steam-line carryover efficiency `99.93 %`, and steam-outlet dryness `99.90 %`, but the same report still shows a very large whole-domain mixture imbalance (`116.063719 kg/s`), so the result remains `Debug only`.
 - New baseline audit: `PURNANTO-LIVE-AUDIT-2026-06-05` loaded `purnanto-setup.cas.h5` and `purnanto-setup-5000.dat.h5`; the live case matches the core Purnanto baseline solver stack and records a `2,964,593`-cell tetra mesh with minimum orthogonal quality `0.277635`.
 - New direct-rebuild branch: setup `08` now records the paper-style one-inlet mixed steam-water `Mass-Flow Inlet` package and remains the current automation/parity scaffold.
 - New active parity-reset branch: setup `08b` now records the extraction-first split-inlet rebuild that will replace setup `07` as the main V&V target.
+- New `08b` DPM diagnostic: the refreshed live DPM summary on the current 6 active injections reports `13012` incomplete particles and `8` escaped particles, with no trapped row printed in the aggregate summary output.
+- New `08b` per-injection DPM sample: the one-injection-at-a-time `dpm-sample` pass to `steamoutlet` reproduces the same aggregate split (`13012` incomplete, `8` escaped, `0` trapped) and shows that the only completed sampled escape comes from `injection-5-micron`; the other active sampled bins remain fully incomplete in this pass.
 - Retained alternate branch: setup `08a` preserves the planned student-edition outlet-extension trial as a comparison path from setup `07`, not as the current primary rebuild target.
 - New geometry naming rule: use `purnanto` for the closer paper-parity geometry and `purnantov2` for the later cleaned geometry with downstream steam-outlet boundary placement plus local spiral-inlet / dish-head cleanup.
 - Geometry split clarification: setups `04`, `05`, `06`, and `07` use the `purnanto` geometry label; setup `08` and later geometry branches use `purnantov2` unless a branch explicitly says otherwise.
@@ -44,6 +46,7 @@
 - New active setup report created for the pure liquid / pure steam actual-area velocity-inlet case with turbulence intensity `2.10999999 %`, liquid hydraulic diameter `0.01338 m`, and steam hydraulic diameter `0.72061 m`.
 - Two rough student-edition pure-phase split diagnostics are now documented against that same inlet sizing. Setup 2 reduced steam-line liquid carryover from `10.67 kg/s` to `7.73 kg/s`, improving implied carryover-based efficiency from `90.87 %` to `93.39 %` and steam-outlet dryness from `88.39 %` to `91.33 %`, but both remain non-converged low-mesh diagnostics only.
 - Professional-license setup `07` flux diagnostic is now documented: mesh approximately `1.3M` nodes and `7.6M` cells; liquid inlet `116.8523 kg/s`; steam inlet `81.6395 kg/s`; steam outlet steam `86.2934 kg/s`; steam outlet liquid `0.03663 kg/s`.
+- Live `08b` post-processing is now documented: mesh `1,309,312` nodes and `7,601,261` cells; liquid inlet `116.92 kg/s`; steam inlet `80.69 kg/s`; steam outlet steam `81.464165 kg/s`; steam outlet liquid `0.082132007 kg/s`; DPM summary currently reports `13012` incomplete and `8` escaped across the active 6-bin set, and the one-injection-at-a-time sampled escape is confined to `injection-5-micron` in the current diagnostic pass.
 - New literature anchors are now linked into the project layer: Pointon et al. 2009 adds a geothermal HP-separator CFD scale/pressure-drop/scrolled-entry check, and Chen et al. 2025 adds an experiment-backed `RSM-DPM` separator-method benchmark for any later turbulence-model sensitivity decision.
 - Newest documented run: `PLS-PRO-2026-06-03-A`, based on `Setup report/07-pure-phase-split-actual-area.md`.
 - Newest baseline audit: `PURNANTO-LIVE-AUDIT-2026-06-05`, recorded in `../../../Setup report/00a-purnanto-setup-5000-live-audit.md`.
@@ -64,6 +67,7 @@
 - Narrowing the remaining PyFluent caveats further to pressure-outlet setting inactivity cleanup and cleaner balance reporting.
 - The direct one-inlet PyFluent path now has a longer controlled diagnostic result; remaining cleanup is mainly turning that scaffold into a full live-case extractor plus clearer parity diff reporting.
 - Preparing quick DPM post-processing using `../../../CFD_wiki/wiki/synthesis/fluent-separator-efficiency-methods.md` and `../../../CFD_wiki/wiki/guidance/fluent-general-click-by-click.md`.
+- Interpreting the new `08b` DPM result, where incomplete particles dominate the active 6-bin summary and prevent a strong removal-efficiency claim.
 - Historical convergence and physical-behavior notes for the parent mixed wet-half velocity-inlet/brine-outlet case are retained, but they are not active setup `07` blockers.
 - Verification of flow settings and numerical configuration.
 - Review of whether mesh quality, worst-cell location, and mesh-independence evidence are sufficient for stable solution progression.
@@ -84,11 +88,11 @@
 - The main remaining archive-risk before removing reliance on older chats was the stale snapshot date on this page and ambiguous branch state in the setup-order dictionary; this cleanup pass addresses those two gaps.
 
 ## Immediate Next Actions
-1. Build the robust `PyAnsys` extraction path for the live Purnanto case so every rebuild step is read from observed settings rather than from memory.
-2. Record the setup drift between the live audit and setup `07`.
-3. Use setup `08` as the one-inlet scaffold, then create setup `08b` as the split-inlet parity rebuild on `purnanto` geometry.
-4. Reconstruct `DPM` model settings first and add steam-side inlet injections only after the carrier setup is accepted.
-5. Fix the split-inlet exported-zone naming in the `mesh-trial1` Meshing branch before accepting any semi-automated trial meshes for setup `08b`.
+1. Decide whether setup `08b` should keep treating the current flux result as a scoped steam-line carryover diagnostic or whether a stronger whole-domain mass-balance closure is required before any efficiency claim is written.
+2. Rerun the current active 6-bin DPM subset with a higher tracking budget because both the aggregate summary and the one-injection-at-a-time sample are dominated by `13012` incomplete particles and only `8` escaped particles.
+3. Treat the current per-bin attribution as provisional: the one-injection sampled escape is currently limited to `injection-5-micron`, but stronger interpretation still requires better tracking completion.
+4. Keep the omitted `562.70 um`, `844.06 um`, and `1631.84 um` bins explicitly out of the current interpretation unless a later pass intentionally reactivates them.
+5. Continue cleaning the automated post-processing/export path so the `08b` live results can be regenerated reproducibly without manual Fluent read/load steps.
 
 ## Roadmap Link
 - Run-efficiency roadmap: `../project/roadmap.md`

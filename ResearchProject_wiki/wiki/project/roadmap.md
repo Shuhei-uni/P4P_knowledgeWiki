@@ -31,6 +31,23 @@ The immediate job is:
 - `User-specified`: brine-outlet reconstruction and lower-water initialization are no longer active roadmap items for the main project path.
 - `User-specified`: the main project risk is now human setup drift away from the real Purnanto case, so extraction-driven parity recovery takes priority over continuing setup `07` V&V.
 
+## Immediate Next Child Branch After Setup 08b
+
+- Planned child branch: `../../Setup report/08c-purnanto-parity-inlet-velocity-sensitivity.md`
+- Branch role: test how inlet loading / inlet velocity changes separator efficiency while keeping the same enthalpy basis used by setup `08b`.
+- Interpretation rule:
+  - keep inlet **specific enthalpy** fixed across the sweep;
+  - vary inlet **mass flow rate** on the same split-inlet areas;
+  - treat the resulting change in superficial inlet velocity as the controlled variable of interest.
+- Current working endpoint choices:
+  - low-end sensitivity point `20.00 m/s` (`User-specified` until source-confirmed);
+  - high-end sensitivity point `32.14 m/s` (`Observed` as the live-audit reference velocity).
+- Reason:
+  - supervisor direction is to test velocity effect next;
+  - this keeps the next branch to one main change instead of mixing loading sensitivity with a fresh inlet-state assumption.
+- Scope warning:
+  - if a later test recalculates phase state from a different inlet enthalpy for each loading point, that should be recorded as a separate enthalpy-sensitivity branch rather than folded silently into setup `08c`.
+
 ## Scope Decision
 - In scope:
   - live-case extraction and parity checklist creation;

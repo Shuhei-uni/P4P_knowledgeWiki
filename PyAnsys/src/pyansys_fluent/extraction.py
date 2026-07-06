@@ -122,6 +122,11 @@ def capture_object_tree(
 
     snapshot: dict[str, Any] = {"_meta": probe_meta(obj, label, notes)}
 
+    if not hasattr(obj, "get_state") or not hasattr(obj, "child_names"):
+        snapshot["_non_settings_object"] = True
+        snapshot["_truncated"] = True
+        return snapshot
+
     if include_state:
         state = try_call(f"{label}.get_state", obj.get_state, notes, default=None)
         snapshot["_state"] = state
