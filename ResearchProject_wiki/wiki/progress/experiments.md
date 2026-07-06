@@ -17,23 +17,43 @@
 
 ## Runs
 
-### Run MESH-TRIAL1-SPLIT-CONTRACT-AUDIT-2026-06-10
-- Run ID: `MESH-TRIAL1-SPLIT-CONTRACT-AUDIT-2026-06-10`
-- Date: 2026-06-10
-- Objective: re-audit the overwritten `mesh-trial1` baseline after adding separate `liquid-inlet` and `steam-inlet` named selections, then check whether the exported Fluent mesh preserves the exact required split-inlet zone contract.
-- Geometry: current spiral-inlet separator meshing branch; geometry unchanged.
-- Mesh: reopened exported baseline `mesh-trial1.msh` with `255,163` nodes, `2,915,260` faces, and `1,444,529` cells.
-- Physics model: not a solve run; mesh reopen and quality audit only.
-- Solver settings: not applicable; PyFluent meshing-mode reopen plus mesh-statistics extraction.
-- Boundary and initial conditions: not applicable; audit checks only the exported Fluent mesh zone inventory and quality metrics.
-- Iteration budget: none.
+### Run PURNANTO-08B-POSTPROCESS-2026-07-02
+- Run ID: `PURNANTO-08B-POSTPROCESS-2026-07-02`
+- Date: 2026-07-02
+- Objective: post-process the already-run setup `08b` `5000`-iteration case/data on the live Fluent server, record the current phase-flux result, and refresh the active 6-injection DPM summary without rebuilding the case.
+- Geometry: `purnanto` split-inlet parity-reset branch from `../../../Setup report/08b-purnanto-parity-split-inlet-rebuild.md`; two `mass-flow-inlet` zones (`liquidinlet`, `steaminlet`), one `pressure-outlet` zone (`steamoutlet`), walls `bottom` and `wall`.
+- Mesh: `1,309,312` nodes and `7,601,261` tetrahedral cells (`Observed` from the live case readback during the manual load and server-side post-processing session).
+- Physics model: steady pressure-based `Mixture` with `2` phases; `phase-1 = water-vapor-at-psep`; `phase-2 = water-liquid-at-psep`; `RNG k-epsilon`; energy off; one-way DPM active with `pressure force = on`, `virtual mass = on`, `max_num_steps = 10000`, and `step-length-factor = 5`.
+- Solver settings: carrier field already solved to the saved `5000`-iteration state before this post-processing pass; no rebuild, no new carrier iterations, and no new injections were created during this run.
+- Boundary and initial conditions: liquid inlet target `116.92 kg/s`; steam inlet target `80.69 kg/s`; steam outlet only for exported phase-flux result; active DPM subset contains `5.63`, `28.14`, `56.27`, `112.54`, `168.81`, and `348.88 um` steam-side surface injections. Larger `562.70`, `844.06`, and `1631.84 um` bins were intentionally omitted from this pass.
+- Iteration budget: carrier field already saved at `5000` iterations; one DPM refresh pass run through Fluent `/solve/dpm-update`.
+- Convergence monitors: live post-processing extracted phase-flux output and the refreshed aggregate `dpm-summary`; no new residual history was generated because the carrier solve was not rerun.
+- Outcome: `Post-processed / DPM Diagnostic Only`.
+- Flux result: liquid inlet `116.92 kg/s`; steam inlet `80.69 kg/s`; steam outlet vapor `81.464165 kg/s`; steam outlet liquid `0.082132007 kg/s`.
+- Calculated flux metrics: scoped steam-line liquid-removal efficiency `eta_phase = 99.92975367 %`; steam-outlet dryness `x_out = 99.89928175 %`.
+- Mass-balance caution: the same live report gives mixture inlet `197.61 kg/s`, mixture outlet `81.546281 kg/s`, and mixture imbalance `116.063719 kg/s`, so the carryover result is still a scoped steam-line diagnostic, not a closed whole-separator efficiency result.
+- DPM summary result: aggregate Fluent summary reports `13012` incomplete and `8` escaped particles, with no `trapped` row printed in the refreshed summary output; escaped represented mass flow is `7.005e-04 kg/s`, while incomplete represented mass is `29.22 kg/s`.
+- Per-injection sampled result: one-injection-at-a-time `dpm-sample` to `steamoutlet` gives `2170` tracked particles per active injection. `injection-5-micron` reports `8` escaped and `2162` incomplete; `injection-28-micron`, `injection-56-micron`, `injection-112-micron`, `injection-168-micron`, and `injection-348-micron` each report `2170` incomplete and `0` escaped / `0` trapped in this sampled pass.
+- DPM interpretation: the current active 6-bin DPM pass is dominated by incomplete tracks, so it should stay `Debug only` and should not yet be promoted to a report-facing removal-efficiency claim. The one-injection-at-a-time sample now supports the narrower statement that the observed completed sampled escape is confined to `injection-5-micron` in this pass, but the result is still not strong enough for full per-bin fate claims because tracking completion remains poor.
+- Evidence-use label: valid as a live post-processing record for setup `08b` and as a current DPM-screening result for the active 6-bin subset; not valid as a full validation result or a full 9-bin historical-parity DPM result.
+- Hypothesized cause (if non-converged): the dominant issue is DPM tracking completion, not obvious high escaped mass. The unresolved lower liquid inventory and lack of a separate drain/outlet closure also keep the carrier flux result from becoming a stronger whole-separator efficiency claim.
+- Next action: increase DPM tracking budget first, then rerun the same active 6-bin subset before interpreting DPM more strongly; if needed, export per-injection zone summaries instead of relying only on the aggregate Fluent `dpm-summary` output.
+
+### Run GEOM-NAMING-PURNANTOV2-2026-06-11
+- Run ID: `GEOM-NAMING-PURNANTOV2-2026-06-11`
+- Date: 2026-06-11
+- Objective: record the project geometry split between the closer paper-parity `purnanto` geometry and the later cleaned `purnantov2` geometry so future setup branches use the names consistently.
+- Geometry: `purnanto` = closer original Purnanto-style spiral-inlet separator geometry with the steam-outlet boundary at the outlet entrance; `purnantov2` = later project geometry with the steam outlet meshed downward so the outlet boundary is downstream near the bottom of the separator, plus local spiral-inlet and dish-head cleanup.
+- Mesh: not a solve; naming / geometry-definition update only.
+- Physics model: not a solve; this entry records setup-lineage geometry identity rather than a Fluent model change.
+- Solver settings: not applicable.
+- Boundary and initial conditions: key geometry-related BC distinction is that `purnanto` places the steam pressure-outlet boundary at the steam-outlet entrance, while `purnantov2` places the outlet boundary downstream after a longer meshed outlet passage.
+- Iteration budget: not applicable.
 - Convergence monitors: not applicable.
-- Outcome: `Contract Failed / Audit Completed`.
-- Key audit result: Fluent reopened the mesh cleanly and detected `bottom`, `liquidinlet`, `outlet`, `steaminlet`, and `wall` as boundary zones plus `smooth_spiral_separator` as the fluid cell zone. The strict required-zone contract failed because the exported mesh did not preserve the exact names `liquid-inlet`, `steam-inlet`, and `wall-smooth_spiral_separator`.
-- Mesh quality summary: minimum orthogonal quality approximately `0.03168`; maximum equivolume skewness approximately `0.96832`; bad-cell fraction approximately `2.56e-05` at threshold `0.15`, `3.46e-06` at threshold `0.10`, and `6.92e-07` at threshold `0.05`.
-- Evidence-use label: valid for mesh-audit workflow decisions only; not a solver-performance result.
-- Hypothesized cause (if non-converged): not applicable. Current blocker is export/name preservation rather than solver convergence.
-- Next action: fix the Meshing/export path so the Fluent-exported mesh preserves the exact split-inlet and wall-zone names, then rerun the same baseline audit before scoring conservative Workbench trial meshes.
+- Outcome: `Geometry Naming Defined`.
+- Evidence-use label: valid as the project naming authority for future setup reports; not a simulation result.
+- Hypothesized cause (if non-converged): not applicable.
+- Next action: treat setups `04` to `07` as `purnanto` geometry by default, and setup `08` plus later geometry branches as `purnantov2` unless a later setup report explicitly overrides that geometry identity.
 
 ### Run PURNANTO-H5-AUDIT-2026-06-09
 - Run ID: `PURNANTO-H5-AUDIT-2026-06-09`
@@ -54,7 +74,7 @@
 - Run ID: `PYFLUENT-TRIAL4-500-2026-06-09`
 - Date: 2026-06-09
 - Objective: extend the current hardened one-inlet PyFluent setup into a controlled `500`-iteration diagnostic on `trial4.msh` without changing the working setup core, so the branch can be checked for longer-run stability and phase-flow behavior.
-- Geometry: current project spiral-inlet BOC separator geometry exported as `trial4.msh`, with one inlet, one outlet, walls including `bottom`, and no active liquid drain / sink branch in this diagnostic.
+- Geometry: current project one-inlet geometry exported as `trial4.msh`, likely closer to the `purnantov2` line because it came from the extended-outlet mesh workspace, with one inlet, one outlet, walls including `bottom`, and no active liquid drain / sink branch in this diagnostic.
 - Mesh: `trial4.msh` loaded successfully; Fluent read approximately `983,001` tetrahedral cells with inlet `inlet`, outlet `outlet`, and wall zones including `bottom` and `wall`.
 - Physics model: steady pressure-based `Mixture` model with two phases; phase-1 assigned manual water vapor, phase-2 assigned manual liquid water; `RNG k-epsilon`; energy off; gravity on; one-steam-outlet interpretation retained.
 - Solver settings: same hardened baseline stack as the shorter `trial4` run: `Operating Pressure = 0 Pa`, gravity `(0, -9.81, 0)`, `SIMPLE`, Green-Gauss Node Based gradient, `PRESTO!`, second-order momentum / `k` / `epsilon`, and `QUICK` for the multiphase discretization path.
@@ -74,7 +94,7 @@
 - Run ID: `PYFLUENT-TRIAL4-HARDENED-2026-06-09`
 - Date: 2026-06-09
 - Objective: harden the local one-inlet PyFluent reconstruction script without changing its working core, using `trial4.msh` to confirm clean operating-pressure control, correct 2026 R1 numerics paths, flux sanity reporting, and case/data output.
-- Geometry: current project spiral-inlet BOC separator geometry exported as `trial4.msh`, with one inlet, one outlet, walls including `bottom`, and no active brine-outlet branch in this parity pass.
+- Geometry: current project one-inlet geometry exported as `trial4.msh`, likely closer to the `purnantov2` line because it came from the extended-outlet mesh workspace, with one inlet, one outlet, walls including `bottom`, and no active brine-outlet branch in this parity pass.
 - Mesh: `trial4.msh` loaded successfully; Fluent read approximately `983,001` tetrahedral cells with inlet `inlet`, outlet `outlet`, and wall zones including `bottom` and `wall`.
 - Physics model: steady pressure-based `Mixture` model with two phases; phase-1 assigned manual water vapor, phase-2 assigned manual liquid water; `RNG k-epsilon`; energy off; gravity on.
 - Solver settings: `Operating Pressure = 0 Pa` set cleanly through `setup.general.operating_conditions`; `SIMPLE` set through `solution.methods.p_v_coupling.flow_scheme`; gradient set through `solution.methods.spatial_discretization.gradient_scheme`; pressure/momentum/volume-fraction/`k`/`epsilon` schemes set through `solution.methods.spatial_discretization.discretization_scheme`.
@@ -92,7 +112,7 @@
 - Run ID: `PYFLUENT-TRIAL3-SMOKE-2026-06-09`
 - Date: 2026-06-09
 - Objective: prove the current project can be rebuilt through local PyFluent from `trial3.msh` using the one-inlet Purnanto-style package, then hybrid-initialize and advance a short steady smoke test.
-- Geometry: current project spiral-inlet BOC separator geometry exported as `trial3.msh`, with one inlet, one outlet, and wall boundaries including named `bottom`.
+- Geometry: current project one-inlet geometry exported as `trial3.msh`, likely closer to the `purnantov2` line because it came from the extended-outlet mesh workspace, with one inlet, one outlet, and wall boundaries including named `bottom`.
 - Mesh: `trial3.msh` loaded successfully; Fluent read approximately `983,001` tetrahedral cells, one velocity-inlet zone, one pressure-outlet zone, and wall zones including `bottom` and `wall-part1`.
 - Physics model: steady pressure-based `Mixture` model with two phases; phase-1 assigned manual water vapor, phase-2 assigned manual liquid water; `RNG k-epsilon`; energy off; gravity enabled through fallback.
 - Solver settings: boundary conversion to one `Mass-Flow Inlet` succeeded; hybrid initialization succeeded; some intended numerics setters were not accepted through the first attempted PyFluent API paths, so this run is a smoke-test reconstruction rather than a full parity proof.
@@ -109,7 +129,7 @@
 - Run ID: `PPMR-2026-06-09`
 - Date: 2026-06-09
 - Objective: define the direct current-project rebuild branch for the Purnanto one-inlet mixed steam-water setup rather than continuing from the later split-inlet variants.
-- Geometry: current project spiral-inlet BOC separator geometry, to be paired with one inlet boundary carrying both phases together.
+- Geometry: `purnantov2` one-inlet recreation branch by intent, to be paired with one inlet boundary carrying both phases together; keep geometry naming separate from the one-inlet BC choice.
 - Mesh: use the current project mesh family for the rebuild branch; exact chosen mesh/case filename still to be recorded when the case is built.
 - Physics model: steady pressure-based `Mixture` model with primary vapor and secondary liquid, `RNG k-epsilon`, gravity on, energy off.
 - Solver settings: retain the live-audited Purnanto baseline stack: `SIMPLE`, Green-Gauss Node Based gradient, `PRESTO!`, second-order momentum / `k` / `epsilon`, `QUICK` volume fraction, and `Hybrid Initialization`.
@@ -125,7 +145,7 @@
 - Run ID: `PLS-STUDENT-OUTLET-EXT-2026-06-08` (`Assumed` setup label until the Fluent case filename is confirmed)
 - Date: 2026-06-08
 - Objective: Test whether moving the steam pressure-outlet boundary downstream of the central outlet-pipe entrance reduces outlet backflow reversal and stabilizes steam-outlet mass-flux reports.
-- Geometry: child of `../../../Setup report/07-pure-phase-split-actual-area.md`; keeps Purnanto's rectangular 90-degree spiral-inlet BOC separator body and setup `07` pure liquid / pure steam split inlet, but extends the central steam outlet pipe/path so `steam_outlet` is placed at the downstream end of the extension.
+- Geometry: child of `../../../Setup report/07-pure-phase-split-actual-area.md`; uses the `purnantov2` geometry branch with setup `07` pure liquid / pure steam split inlet, plus the downstream steam-outlet extension so `steam_outlet` is placed at the end of the longer outlet path.
 - Mesh: pending student-edition rebuild; record nodes, cells, minimum orthogonal quality, maximum skewness, and outlet-extension local mesh quality before running.
 - Physics model: inherit setup `07` steady pressure-based `Mixture` model; primary phase steam/vapor, secondary phase liquid water; `RNG k-epsilon`; energy off unless the rebuilt Fluent case forces a documented change.
 - Solver settings: inherit setup `07` (`SIMPLE`, `PRESTO!`, second-order momentum/turbulence schemes, setup `07` volume-fraction scheme, hybrid initialization) unless explicitly recorded as changed.
@@ -158,7 +178,7 @@
 - Run ID: `PLS-PRO-2026-06-03-A` (`Assumed` report label until the Fluent case filename is confirmed)
 - Date: 2026-06-03
 - Objective: Record the professional-license baseline flux result for `../../../Setup report/07-pure-phase-split-actual-area.md` before running quick DPM droplet-size efficiency checks.
-- Geometry: spiral-inlet BOC separator with pure liquid / pure steam split inlet using the actual-area setup from `../../../Setup report/07-pure-phase-split-actual-area.md`.
+- Geometry: `purnanto` spiral-inlet BOC separator with pure liquid / pure steam split inlet using the actual-area setup from `../../../Setup report/07-pure-phase-split-actual-area.md`.
 - Mesh: `1.3M` nodes and `7.6M` cells (`User-reported`).
 - Physics model: inferred continuation of the steady pressure-based `Mixture` model; primary phase steam/vapor, secondary phase liquid water; `RNG k-epsilon`; energy off unless the saved Fluent case shows otherwise.
 - Solver settings: professional-license run; detailed residuals, discretization confirmation, and monitor history not yet captured in this log entry.
@@ -181,7 +201,7 @@
 - Run ID: `PLS-STUDENT-ROUGH-2026-06-01-A` (`Assumed` report label until the Fluent case filename is confirmed)
 - Date: 2026-06-01
 - Objective: Roughly check flux behavior for the pure liquid / pure steam actual-area split using a student-edition mesh and a `2 m` inlet extension before deciding which geometry direction looks more promising.
-- Geometry: spiral-inlet BOC separator with pure liquid / pure steam split inlet sized from `../../../Setup report/07-pure-phase-split-actual-area.md`; both inlet legs appear extended upstream in the rough report.
+- Geometry: likely `purnanto` spiral-inlet BOC separator with pure liquid / pure steam split inlet sized from `../../../Setup report/07-pure-phase-split-actual-area.md`; both inlet legs appear extended upstream in the rough report.
 - Mesh: `178k` nodes, `993k` cells, minimum orthogonal quality `0.194`.
 - Physics model: inferred continuation of the steady `Mixture`-model separator setup; exact case file settings not fully captured in the report.
 - Solver settings: not fully captured; residuals were reported as not converged enough for strong quantitative claims.
@@ -266,7 +286,7 @@
 - Run ID: `CTP-NBO-2026-05-27` (`Assumed` setup label until Fluent filename is confirmed)
 - Date: 2026-05-27
 - Objective: Prepare a complete two-phase full-inlet spiral case with no active brine outlet for a `5000`-iteration diagnostic run.
-- Geometry: spiral-inlet BOC separator with one full inlet boundary; brine outlet absent or closed as a wall for this branch.
+- Geometry: `purnanto` spiral-inlet BOC separator with one full inlet boundary; brine outlet absent or closed as a wall for this branch.
 - Mesh: same current project mesh family unless a new no-brine-outlet mesh export supersedes it; approximately 1.8M nodes from prior user-reported mesh scale remains the working assumption.
 - Physics model: steady pressure-based `Mixture` multiphase model; primary phase steam/vapor, secondary phase liquid water; `RNG k-epsilon`; energy off.
 - Solver settings: inherited from the mixed wet-half actual-area setup where applicable: `SIMPLE`, `PRESTO!`, second-order momentum/turbulence schemes, higher-order volume-fraction scheme where available, and hybrid initialization.

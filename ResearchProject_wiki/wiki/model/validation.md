@@ -1,5 +1,26 @@
 # Validation
 
+## Cross-Wiki Reusable Method Anchor
+- `Reported`: the reusable CFD-side verification and validation scaffold now lives in [separator-cfd-verification-and-validation-workflow](../../../CFD_wiki/wiki/synthesis/separator-cfd-verification-and-validation-workflow.md).
+- `Inferred`: use that page as the default method authority for:
+  - setup verification;
+  - mesh/numerics verification;
+  - solution-acceptance gates;
+  - external validation hierarchy;
+  - uncertainty-retirement sequencing.
+- `Inferred`: keep this project page focused on which validation anchor is active for the current separator branch, not on duplicating the full reusable workflow.
+- `Inferred`: detailed project-owned verification reports, validation reports, target records, and sign-off now live under `../vnv/`.
+
+## Project V&V Record Layer
+- Index:
+  - `../vnv/index.md`
+- Policy:
+  - `../vnv/policy.md`
+- Claim classes:
+  - `../vnv/claim-classes.md`
+- Final sign-off:
+  - `../vnv/signoff-log.md`
+
 ## Current Validation State
 - Not ready for final validation; baseline convergence and a stable comparison case are not yet achieved.
 - `Inferred`: the project still needs validation anchors before long design-comparison runs can be interpreted confidently.

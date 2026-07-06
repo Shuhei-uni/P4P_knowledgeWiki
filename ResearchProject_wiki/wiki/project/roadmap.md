@@ -1,247 +1,256 @@
 # Project Roadmap
 
 ## Purpose
-Create an efficient run sequence from the current project state. Because ANSYS setup is slow and each solve can take hours, every run must have a decision purpose before it is launched.
+Define the project run sequence from the current state of the separator work. This roadmap now treats `08b-purnanto-parity-split-inlet-rebuild.md` as the next verification and validation target because setup fidelity has become the main risk.
+
+The immediate job is:
+
+1. extract the live Purnanto Fluent setup as completely as possible through `PyAnsys`;
+2. rebuild a parity-first carrier-field branch with only the intended split-inlet change active;
+3. verify and validate that rebuilt branch rather than forcing setup `07` to act as the main baseline;
+4. only then add new DPM sensitivities or higher-realism physics one branch at a time.
 
 ## Current Starting Point
-- Date: 2026-05-21
-- Active case: `FFF-2`, with `MWH-WP-2026-05-07-A` retained as the downstream water-pool diagnostic.
-- Current phase: parent-case convergence recovery before split-inlet/brine-outlet interpretation.
-- Current problem: the mixed wet-half velocity-inlet parent case already has convergence and liquid mass-balance problems after approximately `1020` steady iterations, even without an initialized water pool. The initialized-water-pool case then adds a second failure mode: patched liquid inventory depletion and extreme steam-outlet liquid carryover.
-- Current controlled setup change: a `FFF-2` derivative has been prepared with `Operating Pressure = 0 Pa`, both pressure outlets set to `1120000 Pa`, and inlet pressure set to `1140000 Pa`, with all other settings kept the same as `FFF-2`. `Inferred`: this tests pressure-reference parity with Purnanto 2013, where gauge and absolute pressures were treated as equivalent.
-- Current controlled setup result: after just above 100 iterations, residuals were user-reported as smooth and flattening, but fluxes remained physically off because liquid inlet was approximately `109.8065 kg/s` while liquid outflow through the outlets was effectively zero. `Inferred`: pressure-reference parity may improve numerical residual behavior but does not yet provide a defensible liquid mass-balance path.
-- `Inferred`: the next work should first fix or classify the parent `FFF-2` convergence/mass-balance problem before changing geometry, pressure settings, inlet split, water-pool initialization, mesh, or physics model.
-- `Inferred`: because only `FFF-2` and `MWH-WP-2026-05-07-A` exceed `1000` iterations, older lower-iteration outputs should be excluded from quantitative future-scope decisions and kept only as setup/debug history.
+- Date: `2026-06-11`
+- Active setup branch: `../../Setup report/08b-purnanto-parity-split-inlet-rebuild.md`
+- Branch role: extraction-first parity-reset branch that preserves the observed Purnanto Fluent setup while introducing the project's split-inlet objective.
+- Current model-family classification for setup `08b`:
+  - steady `Mixture` carrier-flow solve;
+  - observed Purnanto continuous-phase settings treated as primary authority;
+  - split inlet treated as the first deliberate project deviation;
+  - `DPM` model settings preserved from extraction where present;
+  - injection definition added only after extraction and carrier acceptance;
+  - not yet a fully coupled `Mixture + DPM` solve;
+  - not yet a wall-film branch;
+  - not yet a transient branch.
+- Current status: `08b` is **not yet built**, **not yet verified**, and **not yet validated**.
+- Retained comparison branches:
+  - `../../Setup report/07-pure-phase-split-actual-area.md` remains comparison-only split-inlet context;
+  - `../../Setup report/08-purnanto-one-inlet-massflow-recreation.md` remains a useful one-inlet automation/parity scaffold;
+  - `../../Setup report/09-multiphase-separator-sensitivity-family.md` is parked until a stronger parity-reset parent exists.
+- `User-specified`: brine-outlet reconstruction and lower-water initialization are no longer active roadmap items for the main project path.
+- `User-specified`: the main project risk is now human setup drift away from the real Purnanto case, so extraction-driven parity recovery takes priority over continuing setup `07` V&V.
+
+## Immediate Next Child Branch After Setup 08b
+
+- Planned child branch: `../../Setup report/08c-purnanto-parity-inlet-velocity-sensitivity.md`
+- Branch role: test how inlet loading / inlet velocity changes separator efficiency while keeping the same enthalpy basis used by setup `08b`.
+- Interpretation rule:
+  - keep inlet **specific enthalpy** fixed across the sweep;
+  - vary inlet **mass flow rate** on the same split-inlet areas;
+  - treat the resulting change in superficial inlet velocity as the controlled variable of interest.
+- Current working endpoint choices:
+  - low-end sensitivity point `20.00 m/s` (`User-specified` until source-confirmed);
+  - high-end sensitivity point `32.14 m/s` (`Observed` as the live-audit reference velocity).
+- Reason:
+  - supervisor direction is to test velocity effect next;
+  - this keeps the next branch to one main change instead of mixing loading sensitivity with a fresh inlet-state assumption.
+- Scope warning:
+  - if a later test recalculates phase state from a different inlet enthalpy for each loading point, that should be recorded as a separate enthalpy-sensitivity branch rather than folded silently into setup `08c`.
+
+## Scope Decision
+- In scope:
+  - live-case extraction and parity checklist creation;
+  - setup `08b` continuous-phase rebuild and acceptance;
+  - mesh verification on setup `08b`;
+  - DPM model reconstruction and controlled injection definition on setup `08b`;
+  - validation/trend comparison using the strongest available external anchors.
+- Out of scope for the main path:
+  - forcing setup `07` through full V&V as if it were already a faithful reconstruction;
+  - reviving `FFF-2` as the main roadmap driver;
+  - brine-outlet optimization;
+  - lower-vessel water initialization;
+  - interpreting full-vessel liquid inventory closure as the main success criterion for the next baseline.
+- `Inferred`: because the current risk is setup-fidelity error, the acceptance gate must first ask whether the rebuilt branch actually matches the observed Purnanto setup except for the intentional inlet change.
 
 ## Operating Rules
-1. Do not launch a run unless it has one primary question, one planned comparison, and a written stop condition.
-2. Change one major feature at a time: initialization, outlet geometry, outlet pressure, inlet allocation, mesh, or physics model.
-3. Use short diagnostic runs before long production runs when the expected failure mode should appear early.
-4. Save a minimum evidence package for every run:
+1. Do not launch a new V&V run until the extracted-versus-rebuilt setup diff is reviewed.
+2. Change one major feature at a time: extraction/parity closure, inlet representation, DPM tracking controls, stochastic/turbulence treatment, coupling, wall fate, wall film, or transient behavior.
+3. Do not add higher-realism physics to a branch that still has uncertain baseline setup parity.
+4. Do not run mesh verification on a setup that still fails its basic parity and solution-acceptance gate.
+5. Save a minimum evidence package for every run:
    - case/data file name,
+   - extracted settings snapshot or parity checklist version,
    - residual history,
-   - mass-flow report by phase and outlet,
-   - liquid volume fraction near steam outlet and brine outlet,
-   - velocity vectors or streamlines near steam outlet intake,
-   - pressure drop estimate,
+   - pressure-drop monitor or equivalent pressure summary,
+   - phase mass-flow report at inlet and steam outlet,
+   - steam-outlet liquid carryover metric,
+   - DPM `escaped`, `trapped`, and `incomplete` counts if DPM is used,
    - short conclusion: `keep`, `reject`, or `needs follow-up`.
-5. Define the external or analytical comparison target before any long production run.
-6. Keep partner validation/parameter-sweep work separate until Shuhei has one physically stable case to compare, but use partner outputs early as validation target ranges.
-7. Do not use low-iteration runs as performance evidence. A short diagnostic run may identify an obvious failure mode, but report-facing results require a documented iteration budget, residual/monitor history, phase mass balance, and physical monitor stability.
+6. Keep claim strength explicit:
+   - `diagnostic only`,
+   - `parity-closed baseline`,
+   - `numerically verified baseline`,
+   - `trend supported`,
+   - `externally validated`.
+7. Brine-outlet and water-initialization work must stay parked unless the parity-reset branch is already complete enough that extra exploratory work is justified.
 
-## Validation Gate
-The roadmap is not complete unless it answers "what should the result be?" before "what should I change next?"
+## Cross-Wiki Method Anchor
+- Reusable V&V method authority:
+  - `../../CFD_wiki/wiki/synthesis/separator-cfd-verification-and-validation-workflow.md`
+- Project-owned V&V report layer:
+  - `../vnv/index.md`
+- Final project sign-off record:
+  - `../vnv/signoff-log.md`
+- Automation/extraction authority:
+  - `../../PyAnsys/AGENTS.md`
+- `Inferred`: this roadmap should name which setup branch is currently trustworthy enough to enter V&V, while `PyAnsys` owns the machine-readable parity/extraction workflow and the CFD wiki owns the reusable V&V method.
 
-### Required Target Table
-Create a small validation target table before R5/R6 production runs:
-- inlet mass flow and phase split used by the model,
-- expected pressure drop or acceptable pressure-drop range,
-- expected steam outlet quality or maximum liquid carryover range,
-- expected brine outlet liquid flow or qualitative drainage behavior,
-- expected separator efficiency or design benchmark,
-- source type: `real-world data`, `analytical estimate`, `design correlation`, `literature CFD`, or `trend-only`.
-
-### Current Benchmark Sources
-- `Reported`: spiral-inlet BOC design checks from `../../CFD_wiki/wiki/setups/geothermal-separator-design-screening-2014-overview.md`; Bangma/Lazalde-Crabtree evidence is used only where it is presented as general BOC or empirical separator-performance context.
-  - Inlet velocity sanity band: approximately `30-40 m/s`.
-  - Breakdown velocity warning: approximately `42 m/s`.
-  - Expected separator efficiency range: approximately `99.5-99.99%`.
-- `Reported`: Purnanto 2013 separator CFD validation pattern from `../../CFD_wiki/wiki/sources/purnanto-2013-cfd-geothermal-separator.md`.
-  - Compare outlet steam quality against Lazalde-Crabtree empirical calculation and Webre separator field-trend data.
-  - For this project, prioritize the spiral-inlet result and use other geometries only as method/context.
-  - The spiral-inlet case near `26.81 m/s` showed unexpected outlet-quality behavior, so this operating point is known to be sensitive.
-- `Reported`: Mubarok 2020 geothermal CFD validation structure from `../../CFD_wiki/wiki/sources/mubarok-2020-cfd-geothermal-flow-meters.md`.
-  - Use field/analytical comparison outputs, relative-error reporting, and mesh extrapolation style as the validation-reporting template.
-  - Mesh independence should be judged on output stability, not only cell count.
-- `Inferred`: DPM carryover check from `../../CFD_wiki/wiki/setups/geothermal-boc-separator-fluent-2013-baseline.md`.
-  - After a stable continuous/mixture field exists, inject droplets and classify `trapped`, `escaped`, and `incomplete` particles to estimate steam outlet carryover.
-  - Use this as a separate carryover sanity check, not as the first step while the continuous solution is still physically unstable.
-
-### Sanity-Check Equations
-- Separator efficiency from carryover:
-  - `eta_s = m_s / (m_s + m_b) * 100`
-  - `eta_s = (m_w - m_b) / m_w * 100`
-- Lazalde-Crabtree empirical efficiency structure, used only as a comparison method for the spiral-inlet case:
-  - `eta_eff = eta_m * eta_A`
-- Steam pressure-drop check:
-  - `Delta P = (NH * u^2 * rho_v) / 2`
-  - `NH = 16 * Ao / De^2`
-  - `u = QVS / Ao`
-- Dryness/phase split check from geothermal two-phase validation workflow:
-  - `x = (h - h_f) / h_fg`
-  - `m_g = x * m`
-  - `m_f = (1 - x) * m`
-
-### How To Use The Gate
-- If a metric has real-world or analytical backing, use it as a pass/fail sanity check.
-- If a metric has literature-only backing, use it as directional evidence.
-- If a metric has no external target, label it `trend-only` and do not use it as proof that the model is correct.
-- If the baseline-like case misses all target bands, pause design comparisons and fix baseline assumptions first.
-- If the run is below the expected breakdown velocity but still produces extreme steam-outlet liquid carryover, classify that as a setup/geometry/numerics red flag before treating it as physical separator failure.
-
-## Phase 0 | Parent Convergence Triage
+## Baseline Acceptance Gate For Setup 08b
 
 ### Goal
-Extract as much information as possible from `FFF-2` before spending solver time or interpreting the water-pool case. The immediate priority is to understand why the parent no-water-pool case remains non-converged and liquid-imbalanced after more than `1000` iterations.
+Before mesh verification or DPM sensitivity work, make setup `08b` acceptable as a parity-reset baseline candidate.
 
-### Tasks
-- Export `FFF-2` residual history and physical monitor history if available.
-- Export phase mass-flow reports at available iteration points, especially liquid inlet, brine outlet, steam outlet, and net liquid imbalance.
-- Check whether the `FFF-2` liquid imbalance is trending toward zero, staying flat, or worsening after iteration `1020`.
-- Confirm outlet backflow phase fractions and pressure settings in the parent case before any water-pool or geometry changes.
-- Run or post-process the `FFF-2` pressure-reference parity derivative where `Operating Pressure = 0 Pa`, steam/brine outlet gauge pressures are `1120000 Pa`, and inlet pressure is `1140000 Pa`; compare only against original `FFF-2`.
-- For `FFF-2-OP0`, inspect whether liquid volume fraction is moving toward the brine outlet before extending the run; do not accept the smoother residuals alone as convergence evidence.
-- Plot liquid volume fraction and velocity vectors near the brine outlet and steam outlet to see whether outlet behavior is numerically plausible before patched water is introduced.
-- Check mesh/worst-cell locations in inlet, brine outlet, steam outlet, and main swirl regions.
-- Collect partner/analytical target values for pressure drop, steam outlet quality/carryover, brine outlet liquid flow, and separator efficiency if available.
-- Calculate implied separator efficiency only if steam-outlet liquid carryover is physically meaningful for the case state; otherwise label it `not interpretable`.
-- Compare current inlet velocity against the reported `30-40 m/s` effective band and `~42 m/s` breakdown warning.
+### Required Acceptance Checks
+1. The extracted live Purnanto settings tree is captured well enough to distinguish observed settings from guessed ones.
+2. The rebuilt continuous-phase branch matches the observed Purnanto setup everywhere except the explicitly documented split-inlet change.
+3. Inlet phase fluxes match the intended setup `08b` targets closely enough to treat the inlet as correctly imposed.
+4. Steam-outlet phase fluxes flatten enough to support interpretation.
+5. Residuals flatten rather than showing uncontrolled drift.
+6. Pressure-drop behavior becomes stable enough to compare across future branches.
+7. Any remaining unknown DPM injection detail is labeled as a controlled uncertainty rather than silently assumed.
+
+### Acceptance Outcome Labels
+- `Parity-closed baseline`:
+  - setup `08b` is trusted enough to enter mesh verification and project V&V.
+- `Diagnostic only`:
+  - setup `08b` still provides useful parity clues, but the rebuild is not strong enough for report-facing baseline claims.
+- `Rejected baseline`:
+  - setup `08b` still differs too much from the observed Purnanto setup or fails basic solution acceptance.
+
+## Validation Gate Before Physics Escalation
+- Do not activate family `09` until setup `08b` has passed:
+  - parity closure;
+  - basic solution-acceptance checks;
+  - mesh verification at the level needed for the report;
+  - at least one external or literature/design comparison gate.
+- `Inferred`: a case can be numerically verified before it is externally validated, but it should not become the parent of DPM sensitivity work if even the baseline setup parity is still weak.
+
+## Phase A | Extraction And Parity Closure
+
+### Primary Question
+Can the live Purnanto Fluent setup be exported and replayed reliably enough that human reconstruction error is no longer the dominant uncertainty?
+
+### Required Work
+- Export the live settings tree through `PyAnsys`.
+- Build a machine-readable parity checklist for:
+  - models,
+  - materials,
+  - phases,
+  - boundary conditions,
+  - numerics,
+  - `DPM` model settings.
+- Compare setup `07`, setup `08`, and the live audit against that checklist.
+- Record which settings were missing or drifted in the older manual reconstruction.
+
+### Deliverable
+- One parity-diff summary that states what setup `08b` must preserve and what setup `07` got wrong or left uncertain.
+
+## Phase B | Setup 08b Carrier Acceptance And Mesh Verification
+
+### Primary Question
+Can the parity-reset split-inlet branch run stably enough to become the project's verified baseline?
+
+### Rules
+- Hold the extracted continuous-phase setup fixed.
+- Introduce only the split-inlet change required for the project question.
+- Keep mesh verification separate from DPM injection reconstruction.
+
+### Comparison Metrics
+- pressure drop;
+- steam-outlet liquid carryover;
+- outlet dryness or steam quality proxy;
+- steam-phase mass imbalance;
+- any separator-flow metric judged important enough to report, such as vortex structure or tangential velocity pattern.
+
+### Deliverable
+- One production-mesh decision and one accepted/rejected baseline statement for setup `08b`.
+
+## Phase C | DPM Injection Reconstruction On Setup 08b
+
+### Primary Question
+Can the DPM layer be rebuilt from extracted evidence and then extended with a justified steam-inlet injection definition?
+
+### DPM Priorities
+1. Preserve observed `DPM` model settings from the live case first.
+2. Do not pretend the original injection set is known, because the saved case has no active injections.
+3. Add steam-side inlet injections as a controlled project layer only after the carrier field is accepted.
+4. Use a justified droplet-size sweep rather than a single-size claim.
+
+### Minimum Outputs
+- extracted `DPM` model-state summary;
+- injection location and definition used;
+- `escaped`;
+- `trapped`;
+- `incomplete`;
+- droplet size;
+- scoped carryover interpretation.
 
 ### Decision
-- If `FFF-2` residuals and phase mass balance are still unstable, run a parent convergence-control case before any water-pool interpretation.
-- If `FFF-2` liquid imbalance is driven by brine outlet behavior, prioritize brine outlet pressure/backflow/outlet-type checks.
-- If `FFF-2` is stable except for localized steam-outlet or brine-outlet artifacts, use that finding to choose the first geometry/outlet sensitivity.
-- Only return to `MWH-WP-2026-05-07-A` after the parent no-water-pool case has a defensible convergence path or a clearly documented failure cause.
+- If the branch still depends mainly on guessed injection details, keep `DPM` as bounded diagnostic evidence only.
+- If the `DPM` behavior stabilizes across reasonable settings, promote it to stronger support for the setup `08b` baseline.
 
-## Phase 1 | Cheap Control Runs
+## Phase D | Validation And Trend Comparison
 
-### Run R1 | Parent Convergence Control
-- Primary question: why does `FFF-2` fail to converge or balance liquid even without an initialized water pool?
-- Change from current parent case: keep geometry, inlet split, no-water-pool initialization, mesh, physics, and outlet gauge values fixed while changing only the pressure reference to `Operating Pressure = 0 Pa`, using inlet pressure `1140000 Pa` and both outlet pressure boundaries at `1120000 Pa`.
-- Suggested budget: short steady diagnostic run first; extend only if early trends are physically plausible.
-- Sanity check: residuals and phase mass-flow imbalance should trend toward stable values before performance metrics are interpreted.
-- Success signal: liquid imbalance reduces toward a physically plausible steady balance and residual/monitor behavior becomes stable enough to justify continuing.
-- Failure signal: parent case remains unstable, liquid imbalance worsens, or residuals improve while liquid drainage remains physically blocked or absent.
-- Next branch:
-  - If success: use the stabilized parent setup as the reference path before revisiting water-pool or split-inlet claims.
-  - If failure: classify whether the failure is outlet boundary behavior, mesh/numerics, inlet allocation, or geometry.
+### Primary Question
+How strong is the evidence for setup `08b` once parity and numerical acceptance are established?
 
-### Run R2 | Outlet Boundary Sensitivity
-- Primary question: is the parent convergence problem caused by brine outlet or steam outlet boundary behavior?
-- Change from prior accepted control: adjust only outlet pressure/backflow/outlet treatment according to the Phase 0 diagnosis.
-- Suggested budget: short steady diagnostic run, focused on liquid volume fraction and streamlines near steam outlet.
-- Sanity check: outlet changes should improve monitor stability and phase mass balance without destroying the intended swirl structure.
-- Success signal: parent case trends toward stable phase balance and interpretable outlet behavior.
-- Failure signal: outlet behavior remains unstable or nonphysical after one controlled outlet change.
-- Next branch:
-  - If success: freeze outlet setup before retesting water-pool initialization.
-  - If failure: move to mesh/numerics or steam-outlet geometry/intake sensitivity.
+### Validation Hierarchy
+1. same-geometry or closest available operating/test data;
+2. design-correlation or analytical anchor;
+3. separator CFD literature trend;
+4. internal A/B comparison only.
 
-### Run R3 | Water-Pool Initialization Recheck
-- Primary question: after the parent case has a defensible convergence path, does initialized lower water improve brine outlet behavior or only introduce inventory-depletion artifacts?
-- Change from accepted parent control: add the lower water-pool initialization only.
-- Suggested budget: short-to-medium steady diagnostic run, or transient if Phase 0/R1 indicates steady inventory depletion is unavoidable.
-- Sanity check: water-pool initialization should not make liquid outflow exceed inlet liquid by orders of magnitude after the parent case has been stabilized.
-- Success signal: brine outlet liquid removal becomes more realistic without extreme steam-outlet carryover or inventory depletion.
-- Failure signal: patched water drains or is entrained into the steam outlet even after parent convergence controls.
-- Next branch:
-  - If success: continue toward baseline-like reference with documented initialization.
-  - If failure: keep water-pool initialization as a failed/uncertain approach and use a different controlled reference strategy.
+### Candidate Anchors
+- `../../CFD_wiki/wiki/sources/purnanto-2013-cfd-geothermal-separator.md`
+- `../../CFD_wiki/wiki/sources/pointon-2009-geothermal-separator-sizing-cfd-validation.md`
+- `../../CFD_wiki/wiki/sources/mubarok-2020-cfd-geothermal-flow-meters.md`
+- `../../CFD_wiki/wiki/setups/geothermal-separator-design-screening-2014-overview.md`
 
-### Run R4 | Brine Outlet Pressure/Boundary Control
-- Primary question: is brine outlet behavior forcing nonphysical liquid removal?
-- Change from prior accepted control: adjust only brine outlet pressure or outlet boundary treatment.
-- Suggested budget: short-to-medium steady run after R1/R2 classify the parent outlet behavior.
-- Sanity check: brine outlet flow should support mass balance and water-level realism; it should not drain an artificial inventory faster than inlet liquid supply can justify.
-- Success signal: brine outlet removes liquid without draining an initialized inventory or creating extreme mass imbalance.
-- Failure signal: liquid split remains dominated by outlet boundary artifact.
-- Next branch:
-  - If success: freeze outlet setup and proceed to inlet-allocation testing.
-  - If failure: document brine outlet as active limitation and use qualitative flow-field comparisons only.
+### Expected Outcome
+- likely claim classes for setup `08b` are:
+  - `parity-closed baseline`,
+  - `numerically verified baseline`, or
+  - `trend supported`.
+- `Inferred`: setup `08b` should not be called `externally validated` unless a stronger direct comparison target is actually available and matched.
 
-## Post-Triage Model Upgrade Gate
+## Phase E | Controlled Physics Escalation After Setup 08b
 
-### Purpose
-Use this gate only after Phase 0 and the cheap control runs have made the parent `FFF-2` failure mode clearer. The goal is to decide whether the project should keep using the Purnanto-style separator baseline as-is, borrow a newer geothermal Fluent workflow, or reserve more complex annular-flow modelling for future work.
+### Rule
+Add one realism feature at a time. Each new branch must answer one new physics question without changing several other things at once.
 
-### Evidence Snapshot From CFD Wiki
-| Source | How two-phase flow is modelled | Relevance to this project |
-| --- | --- | --- |
-| `Reported`: Purnanto, Zarrouk, and Cater 2013, `../../CFD_wiki/wiki/sources/purnanto-2013-cfd-geothermal-separator.md` | Legacy separator model: steady, incompressible, isothermal, no flashing; RNG `k-epsilon`; mixture/DPM wording is internally inconsistent, but the practical wiki interpretation is continuous-field solve followed by DPM carryover checking. | Closest separator-geometry reference, but reproducibility is limited by missing initialization fields, convergence targets, URFs, mesh quality metrics, and detailed DPM injection controls. |
-| `Reported`: Mubarok et al. 2020, `../../CFD_wiki/wiki/sources/mubarok-2020-cfd-geothermal-flow-meters.md` | Geothermal two-phase Fluent model using `Mixture` multiphase model, SST `k-omega`, energy equation, steady/transient benchmarking, field validation, and Richardson-style mesh refinement. | Best newer geothermal Fluent workflow in the CFD wiki. It is a flow-meter paper rather than a separator paper, so copy its validation, mesh, and solver-discipline patterns rather than its geometry. |
-| `Reported`: Skoog 2020, `../../CFD_wiki/wiki/sources/skoog-2020-annular-flow-three-field-cfd-thesis.md` | Three-field annular model with steam core, liquid wall film, and droplets using EWF + DPM + UDF entrainment/deposition coupling. | Useful if the inlet or wall region must be interpreted as annular film/droplet flow, but too complex and indirect to use before the parent separator case is stable. |
-| `Reported`: Mondal and Sharma 2024, `../../CFD_wiki/wiki/sources/mondal-sharma-2024-air-water-annular-flow-cfd.md` | Fluent 19.2 transient DPM + Eulerian Wall Film + SST `k-omega`, with UDF entrainment correlations and entrainment-fraction validation. | Strong modern example for gas-core/wall-film/droplet entrainment, but it is air-water vertical-tube CFD rather than geothermal steam-brine separator CFD. |
+### Recommended Escalation Order
+1. DPM tracking cleanup branch
+   - goal: reduce or bound incomplete tracks.
+2. DPM stochastic/turbulence sensitivity branch
+   - goal: check whether DRW or related turbulence dispersion materially changes carryover.
+3. Two-way DPM coupling branch
+   - goal: test whether droplet loading changes the carrier flow.
+   - gate: only after one-way DPM is stable and a physically meaningful droplet mass loading is defined.
+4. Wall-fate sensitivity branch
+   - goal: compare reflect/trap or other bounded wall assumptions before wall film is introduced.
+5. Eulerian wall-film branch
+   - goal: test whether wall deposition/drainage materially changes carryover.
+   - gate: only after the simpler DPM branches are understood.
+6. Re-entrainment or film-stripping branch
+   - goal: test whether deposited liquid can re-enter the steam path.
+   - gate: only after wall-film deposition/drainage is stable.
+7. Transient carrier-flow branch, if still needed
+   - goal: test whether steady assumptions are masking important separator behavior.
 
-### Project Interpretation
-- `Inferred`: the Purnanto 2013 paper should remain the separator geometry and legacy baseline reference, but not the only source for modern Fluent practice.
-- `Inferred`: if Phase 0/R1-R4 show that the current problem is mostly numerical, mesh, or steady-solver stability rather than inlet physics, the first physics/numerics upgrade should be a Mubarok-style `Mixture` + SST `k-omega` workflow with stronger mesh/output validation.
-- `Inferred`: DPM should remain a post-convergence carryover sanity check until the continuous/mixture field has stable mass balance and interpretable outlet behavior.
-- `Inferred`: EWF + DPM three-field modelling should be kept as future work for annular-film/droplet entrainment questions, not as the next fix for the current `FFF-2` instability.
+### Branching Principle
+- Every new branch must start from the last accepted simpler branch, not from an already uncertain or mixed-change case.
 
-### Decision Rules
-- If Phase 0/R1-R4 identify a boundary-condition, pressure-reference, initialization, or local mesh-quality cause, fix that first and keep the current model stack for the next controlled comparison.
-- If the parent case remains unstable after controlled boundary and mesh checks, consider one Mubarok-style model/numerics sensitivity before continuing split-inlet interpretation.
-- If the stable reference still produces report-critical carryover uncertainty, run DPM after convergence before upgrading to more complex multiphase models.
-- If report time is limited, present EWF/DPM three-field modelling as a justified future-work pathway rather than implementing it.
+## Parked Future Work
+- Brine outlet reconstruction.
+- Lower-water initialization.
+- Bottom-liquid pool or drainage behavior studies.
+- Full-vessel liquid inventory closure studies.
 
-## Phase 2 | Purposeful Inlet-Regime Comparison
+`User-specified`: these are not abandoned forever, but they are explicitly parked until the main setup `08b` path is complete enough that extra exploratory work is justified.
 
-### Run R5 | Baseline-Like Reference With Frozen Outlets
-- Primary question: what is the stable reference case for comparison?
-- Change from accepted control: use the simplest stable inlet representation and frozen outlet settings.
-- Validation target: compare against the best available analytical/real-world/literature target table before accepting the case.
-- Success signal: repeatable pressure drop, phase distribution, and mass balance trend, with key metrics inside target range or with a documented reason for mismatch.
-- Failure signal: no stable reference after outlet and initialization controls, or stable output that is clearly outside defensible target ranges.
-- Next branch:
-  - If success: compare split-inlet against this reference.
-  - If failure: return to baseline assumptions, solver numerics, mesh diagnostics, or boundary-condition definitions before further design claims.
-
-### Run R6 | Two-Zone Split-Inlet A/B Case
-- Primary question: does wall-side liquid and inner-side steam improve separator-relevant flow behavior in the spiral-inlet geometry compared with the stable reference?
-- Change from R5: inlet face split only; keep mesh family, solver settings, outlets, and initialization strategy as close as possible.
-- Validation target: the split-inlet result should not only beat the internal reference; it must remain within the accepted pressure-drop/carryover/efficiency target logic from R5.
-- Required comparison metrics:
-  - pressure drop,
-  - steam outlet liquid carryover proxy,
-  - brine outlet liquid removal,
-  - liquid volume fraction distribution,
-  - swirl/vortex structure,
-  - convergence stability.
-- Success signal: split-inlet gives physically interpretable changes without introducing new mass-balance or outlet artifacts.
-- Failure signal: phase allocation creates artificial jetting, blockage, outlet carryover, or target mismatch that cannot be separated from setup artifacts.
-
-### Run R6b | DPM Carryover Sanity Check
-- Primary question: does a droplet-tracking carryover estimate agree with the mixture-field carryover trend?
-- Gate: only run after R5 or R6 has a stable continuous/mixture field.
-- Change from selected stable case: add post-convergence DPM droplet injections using the Purnanto-style carryover workflow.
-- Required outputs:
-  - escaped particle fraction,
-  - trapped particle fraction,
-  - incomplete particle fraction,
-  - droplet-size assumptions,
-  - inferred outlet steam quality/carryover.
-- Success signal: DPM escaped/trapped trend supports the mixture-field interpretation and does not have excessive incomplete tracks.
-- Failure signal: many incomplete particles, strong sensitivity to droplet size, or DPM trend contradicts mixture carryover; treat carryover claim as uncertain.
-
-## Phase 3 | Evidence-Building Runs
-
-### Run R7 | Repeatability Check
-- Primary question: is the selected case repeatable?
-- Change from selected case: rerun with same setup and initialization.
-- Success signal: same qualitative flow structure and similar outlet/pressure metrics.
-- Failure signal: solution depends strongly on initialization noise or solver history.
-
-### Run R8 | Mesh/Quality Sensitivity
-- Primary question: are conclusions stable enough for report use?
-- Change from selected case: local mesh repair or refinement in inlet, swirl, steam-outlet, and brine-outlet regions only.
-- Validation target: follow the Mubarok-style structure by comparing output changes for pressure drop, carryover/efficiency proxy, mass imbalance, and phase distribution across mesh levels.
-- Success signal: pressure drop, outlet trends, and phase distribution do not reverse.
-- Failure signal: conclusion changes with mesh quality, so report claim must be downgraded.
-
-### Run R9 | Optional Physics Sensitivity
-- Primary question: does `Eulerian` materially change the conclusion after the `Mixture` case is stable?
-- Change from selected stable case: multiphase model only.
-- Gate: do this only after a stable `Mixture` case exists.
-- Success signal: model comparison supports or bounds the `Mixture` conclusion.
-- Failure signal: cost is too high or solution becomes unstable; keep `Eulerian` as future work.
-
-## Downtime Work While Runs Are Solving
-- Update `wiki/progress/experiments.md` immediately after each run finishes.
-- Prepare post-processing screenshots and a one-page result table while Fluent is unavailable.
-- Keep a run decision table with `run id`, `question`, `change`, `outcome`, and `next branch`.
-- Build and update the validation target table with partner analytical data or literature/design estimates.
-- Clean report figures only after the run has passed its decision gate.
-- Coordinate with partner only at gate points: stable reference case, accepted split-inlet comparison, and final sensitivity evidence.
-
-## Current Priority
-Do Phase 0 on `FFF-2` first. In parallel, obtain validation target values from partner/analytical work. Then run R1 parent convergence control before revisiting water-pool initialization, steam-outlet geometry, or inlet-regime comparisons.
+## Immediate Priority
+1. Build the `PyAnsys` extraction-first parity workflow for the live Purnanto case.
+2. Record the settings drift between the live case and setup `07`.
+3. Rebuild setup `08b` with only the intended split-inlet change active.
+4. Run mesh verification and V&V only after that parity-reset branch is numerically defensible.

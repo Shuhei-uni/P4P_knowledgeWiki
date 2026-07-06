@@ -1,0 +1,4 @@
+interface:
+  display_name: "PyAnsys Workflow"
+  short_description: "Use PyAnsys automation safely."
+  default_prompt: "Use $pyansys-workflow to inspect or edit PyFluent automation safely."

@@ -1,0 +1,120 @@
+[GROUP]   /meshes
+[GROUP]   /meshes/1
+          attrs={"cellCount": [2964593], "cellOffset": [0], "dimension": [3], "faceCount": [6063406], "faceOffset": [0], "nodeCount": [572556], "nodeOffset": [0], "version": [2]}
+[GROUP]   /meshes/1/cells
+[GROUP]   /meshes/1/cells/ctype
+          attrs={"nSections": [1]}
+[GROUP]   /meshes/1/cells/ctype/1
+          attrs={"elementType": [2], "maxId": [2964593], "minId": [1]}
+[GROUP]   /meshes/1/cells/partition
+          attrs={"nSections": [1]}
+[GROUP]   /meshes/1/cells/partition/1
+          attrs={"maxId": [2964593], "minId": [1], "numPartitions": [15]}
+[DATASET] /meshes/1/cells/partition/1/owner-cell-ids shape=(2964593,) dtype=uint64
+          attrs={"chunkDim": [2097152]}
+[DATASET] /meshes/1/cells/partition/1/partition-ids shape=(2964593,) dtype=int32
+          attrs={"chunkDim": [2964593]}
+[GROUP]   /meshes/1/cells/zoneTopology
+          attrs={"nZones": [1]}
+[DATASET] /meshes/1/cells/zoneTopology/cellType shape=(1,) dtype=int32
+          attrs={"chunkDim": [1]}
+[DATASET] /meshes/1/cells/zoneTopology/childZoneId shape=(1,) dtype=int32
+          attrs={"chunkDim": [1]}
+[DATASET] /meshes/1/cells/zoneTopology/dimension shape=(1,) dtype=uint64
+          attrs={"chunkDim": [1]}
+[DATASET] /meshes/1/cells/zoneTopology/fields shape=(1,) dtype=|S35
+          candidate_text=yes
+[DATASET] /meshes/1/cells/zoneTopology/id shape=(1,) dtype=int32
+          attrs={"chunkDim": [1]}
+[DATASET] /meshes/1/cells/zoneTopology/maxId shape=(1,) dtype=uint64
+          attrs={"chunkDim": [1]}
+[DATASET] /meshes/1/cells/zoneTopology/minId shape=(1,) dtype=uint64
+          attrs={"chunkDim": [1]}
+[DATASET] /meshes/1/cells/zoneTopology/name shape=(1,) dtype=|S6
+          candidate_text=yes
+[DATASET] /meshes/1/cells/zoneTopology/zoneType shape=(1,) dtype=int32
+          attrs={"chunkDim": [1]}
+[GROUP]   /meshes/1/faces
+[GROUP]   /meshes/1/faces/c0
+          attrs={"nSections": [1]}
+[DATASET] /meshes/1/faces/c0/1 shape=(6063406,) dtype=uint32
+          attrs={"chunkDim": [4194304], "maxId": [6063406], "minId": [1]}
+[GROUP]   /meshes/1/faces/c1
+          attrs={"nSections": [1]}
+[DATASET] /meshes/1/faces/c1/1 shape=(5794966,) dtype=uint32
+          attrs={"chunkDim": [4194304], "maxId": [5932371], "minId": [137406]}
+[GROUP]   /meshes/1/faces/nodes
+          attrs={"nSections": [1]}
+[GROUP]   /meshes/1/faces/nodes/1
+          attrs={"maxId": [6063406], "minId": [1]}
+[DATASET] /meshes/1/faces/nodes/1/nnodes shape=(6063406,) dtype=int16
+          attrs={"chunkDim": [6063406]}
+[DATASET] /meshes/1/faces/nodes/1/nodes shape=(18190218,) dtype=uint32
+          attrs={"chunkDim": [4194304]}
+[GROUP]   /meshes/1/faces/zoneTopology
+          attrs={"nZones": [5]}
+[DATASET] /meshes/1/faces/zoneTopology/c0 shape=(5,) dtype=int32
+          attrs={"chunkDim": [5]}
+[DATASET] /meshes/1/faces/zoneTopology/c1 shape=(5,) dtype=int32
+          attrs={"chunkDim": [5]}
+[DATASET] /meshes/1/faces/zoneTopology/childZoneId shape=(5,) dtype=int32
+          attrs={"chunkDim": [5]}
+[DATASET] /meshes/1/faces/zoneTopology/dimension shape=(5,) dtype=uint64
+          attrs={"chunkDim": [5]}
+[DATASET] /meshes/1/faces/zoneTopology/faceType shape=(5,) dtype=int32
+          attrs={"chunkDim": [5]}
+[DATASET] /meshes/1/faces/zoneTopology/fields shape=(1,) dtype=|S60
+          candidate_text=yes
+[DATASET] /meshes/1/faces/zoneTopology/flags shape=(5,) dtype=int32
+          attrs={"chunkDim": [5]}
+[DATASET] /meshes/1/faces/zoneTopology/id shape=(5,) dtype=int32
+          attrs={"chunkDim": [5]}
+[DATASET] /meshes/1/faces/zoneTopology/maxId shape=(5,) dtype=uint64
+          attrs={"chunkDim": [5]}
+[DATASET] /meshes/1/faces/zoneTopology/minId shape=(5,) dtype=uint64
+          attrs={"chunkDim": [5]}
+[DATASET] /meshes/1/faces/zoneTopology/name shape=(1,) dtype=|S46
+          candidate_text=yes
+[DATASET] /meshes/1/faces/zoneTopology/shadowZoneId shape=(5,) dtype=int32
+          attrs={"chunkDim": [5]}
+[DATASET] /meshes/1/faces/zoneTopology/zoneType shape=(5,) dtype=int32
+          attrs={"chunkDim": [5]}
+[GROUP]   /meshes/1/nodes
+[GROUP]   /meshes/1/nodes/coords
+[DATASET] /meshes/1/nodes/coords/1 shape=(572556, 3) dtype=float64
+          attrs={"chunkDim": [572556], "maxId": [572556], "minId": [1]}
+[GROUP]   /meshes/1/nodes/zoneTopology
+          attrs={"nZones": [1]}
+[DATASET] /meshes/1/nodes/zoneTopology/dimension shape=(1,) dtype=uint64
+          attrs={"chunkDim": [1]}
+[DATASET] /meshes/1/nodes/zoneTopology/id shape=(1,) dtype=int32
+          attrs={"chunkDim": [1]}
+[DATASET] /meshes/1/nodes/zoneTopology/maxId shape=(1,) dtype=uint64
+          attrs={"chunkDim": [1]}
+[DATASET] /meshes/1/nodes/zoneTopology/minId shape=(1,) dtype=uint64
+          attrs={"chunkDim": [1]}
+[GROUP]   /settings
+[DATASET] /settings/Cortex Variables shape=(1,) dtype=|S16550
+          attrs={"version": [2]}
+          candidate_text=yes
+[DATASET] /settings/Domain Variables shape=(1,) dtype=|S18381
+          attrs={"version": [2]}
+          candidate_text=yes
+[DATASET] /settings/Origin shape=(1,) dtype=|S30
+          attrs={"version": [2]}
+          candidate_text=yes
+[DATASET] /settings/Rampant Variables shape=(1,) dtype=|S366237
+          attrs={"version": [2]}
+          candidate_text=yes
+[DATASET] /settings/Solver shape=(1,) dtype=|S13
+          attrs={"version": [2]}
+          candidate_text=yes
+[DATASET] /settings/TGrid Variables shape=(1,) dtype=|S8
+          attrs={"version": [2]}
+          candidate_text=yes
+[DATASET] /settings/Thread Variables shape=(1,) dtype=|S133079
+          attrs={"version": [2]}
+          candidate_text=yes
+[DATASET] /settings/Version shape=(1,) dtype=|S5
+          attrs={"version": [2]}
+          candidate_text=yes

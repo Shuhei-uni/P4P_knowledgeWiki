@@ -22,9 +22,18 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 from pyansys_fluent.connection import build_parser, connect  # noqa: E402
 
 
+def _normalize_server_id(value: str) -> str:
+    normalized = value.strip().lower()
+    if normalized.startswith("ip"):
+        normalized = normalized[2:]
+    return normalized or "1"
+
+
 def main() -> int:
     args = build_parser().parse_args()
-    solver = connect(server_id=args.server_id)
+    server_id = _normalize_server_id(str(args.server_id))
+    print(f"Using Fluent server id: {server_id}")
+    solver = connect(server_id=server_id)
 
     print("\nConnected to Fluent.")
 

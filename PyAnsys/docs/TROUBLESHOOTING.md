@@ -37,33 +37,35 @@ Correct it:
 Use connect_to_fluent. Fluent is running remotely and is not installed on this laptop.
 ```
 
-## 7. Visualization import problems
+## 7. Student Edition exits under SSH
+
+If the Windows Student Edition host starts Fluent and then the gRPC server dies immediately under SSH, treat that as a launch/EOF problem first, not a setup-script problem.
+
+Use the local manual-launch fallback in `src/pyansys_fluent/connection.py`:
+
+```text
+- set FLUENT_LOCAL_EXE on the Windows host
+- keep stdin open by launching Fluent directly instead of through a short-lived SSH shell
+- verify the session with scripts/connection/check_connection.py
+```
+
+If `connect_to_fluent()` starts asking for TLS certificates or otherwise refuses the remote handoff, switch to the local manual-launch path instead of iterating on shell quoting.
+
+When launching a Windows batch wrapper over SSH, call it explicitly:
+
+```text
+call C:\path\to\run_setup08b_smoke.cmd
+```
+
+## 8. Visualization import problems
 
 If `ansys-fluent-visualization` imports fail, still continue with `ansys-fluent-core`, `pandas`, and `matplotlib`. Visualization can be fixed later.
 
-## 8. Meshing not available
+## 9. Meshing not available
 
 `ansys-meshing-prime` requires access to Ansys Prime Server / meshing capability. Treat it as a later-stage feature.
 
-## 9. Local one-inlet parity script behaves differently than older notes
-
-The current local hardened smoke-test path is documented separately in:
-
-```text
-docs/LOCAL_ONE_INLET_SMOKE_TEST.md
-```
-
-Use that note when the task is:
-
-```text
-- local Fluent launch
-- local mesh-only setup
-- one mixed steam-water inlet reconstruction
-- short parity smoke test
-- writing local case/data outputs
-```
-
-## 9. Local one-inlet parity script behaves differently than older notes
+## 10. Local one-inlet parity script behaves differently than older notes
 
 The current local hardened smoke-test path is documented separately in:
 

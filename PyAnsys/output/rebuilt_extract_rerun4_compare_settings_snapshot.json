@@ -1,0 +1,3137 @@
+{
+  "fluent_version": "Ansys Fluent 2026 R1",
+  "setup": {
+    "general": {
+      "solver": {
+        "type": "pressure-based",
+        "velocity_formulation": "absolute",
+        "time": "steady"
+      },
+      "operating_conditions": {
+        "gravity": {
+          "enable": true,
+          "components": [
+            0,
+            -9.81,
+            0
+          ]
+        },
+        "operating_pressure": 0,
+        "reference_pressure_location": [
+          0,
+          0,
+          0
+        ],
+        "reference_pressure_method": "Connected and disconnected fluid zones",
+        "operating_density": {
+          "method": "minimum-phase-averaged"
+        }
+      },
+      "units_settings": {
+        "units": {
+          "acceleration": {
+            "unit_name": "m/s^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "angle": {
+            "unit_name": "deg",
+            "scale_factor": 0.0174532925,
+            "offset": 0.0
+          },
+          "angular-velocity": {
+            "unit_name": "rad/s",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "area": {
+            "unit_name": "m^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "area-inverse": {
+            "unit_name": "m^-2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "area-per-time": {
+            "unit_name": "m^2/s",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "area-temperature": {
+            "unit_name": "m^2 K",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "collision-rate": {
+            "unit_name": "m^-3 s^-1",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "concentration": {
+            "unit_name": "kmol/m^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "contact-resistance": {
+            "unit_name": "(m^2 K)/W",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "contact-resistance-vol": {
+            "unit_name": "Ohm m^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "crank-angle": {
+            "unit_name": "deg",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "crank-angular-velocity": {
+            "unit_name": "rev/min",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "current": {
+            "unit_name": "A",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "current-density": {
+            "unit_name": "A/m^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "current-vol-density": {
+            "unit_name": "A/m^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "density": {
+            "unit_name": "kg/m^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "density*specific-energy": {
+            "unit_name": "J/m^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "density*specific-heat": {
+            "unit_name": "J/(m^3 K)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "density*time": {
+            "unit_name": "(kg s)/m^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "density*velocity": {
+            "unit_name": "kg/(m^2 s)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "density-gradient": {
+            "unit_name": "kg/m^4",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "density-inverse": {
+            "unit_name": "m^3/kg",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "depth": {
+            "unit_name": "m",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "elec-capacity": {
+            "unit_name": "Ah",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "elec-charge": {
+            "unit_name": "A h",
+            "scale_factor": 3600.0,
+            "offset": 0.0
+          },
+          "elec-charge-density": {
+            "unit_name": "(A s)/m^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "elec-charge-flux-density": {
+            "unit_name": "Ah/m^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "elec-concentration": {
+            "unit_name": "mol/m^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "elec-conductivity": {
+            "unit_name": "S/m",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "elec-contact-resistance": {
+            "unit_name": "Ohm m^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "elec-field": {
+            "unit_name": "V/m",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "elec-permittivity": {
+            "unit_name": "farad/m",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "elec-resistance": {
+            "unit_name": "Ohm",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "elec-resistivity": {
+            "unit_name": "Ohm m",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "energy": {
+            "unit_name": "J",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "energy-density": {
+            "unit_name": "J/m2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "force": {
+            "unit_name": "N",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "force*time-per-volume": {
+            "unit_name": "(N s)/m^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "force-per-area": {
+            "unit_name": "N/m^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "force-per-volume": {
+            "unit_name": "N/m^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "frequency": {
+            "unit_name": "Hz",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "gas-constant": {
+            "unit_name": "J/(kg K)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "heat-flux": {
+            "unit_name": "W/m^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "heat-flux-resolved": {
+            "unit_name": "(m K)/s",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "heat-generation-rate": {
+            "unit_name": "W/m^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "heat-transfer-coefficient": {
+            "unit_name": "W/(m^2 K)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "ignition-energy": {
+            "unit_name": "J/mol",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "kinematic-viscosity": {
+            "unit_name": "m^2/s",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "length": {
+            "unit_name": "m",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "length-inverse": {
+            "unit_name": "m^-1",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "length-temperature": {
+            "unit_name": "m K",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "length-time-inverse": {
+            "unit_name": "m^-1 s^-1",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "length4-per-time": {
+            "unit_name": "m^4/s",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "mag-permeability": {
+            "unit_name": "H/m",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "mass": {
+            "unit_name": "kg",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "mass-diffusivity": {
+            "unit_name": "m^2/s",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "mass-flow": {
+            "unit_name": "kg/s",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "mass-flow-per-depth": {
+            "unit_name": "kg/(m s)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "mass-flow-per-time": {
+            "unit_name": "kg/s^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "mass-flux": {
+            "unit_name": "kg/(m^2 s)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "mass-transfer-rate": {
+            "unit_name": "kg/(m^3 s)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "mole-con-henry-const": {
+            "unit_name": "(Pa m^3)/kgmol",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "mole-specific-energy": {
+            "unit_name": "J/kgmol",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "mole-specific-entropy": {
+            "unit_name": "J/(kgmol K)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "mole-transfer-rate": {
+            "unit_name": "kgmol/(m^3 s)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "molec-wt": {
+            "unit_name": "kg/kmol",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "moment": {
+            "unit_name": "N m",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "moment-of-inertia": {
+            "unit_name": "kg m^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "no-unit": {
+            "unit_name": "",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "nucleation-rate": {
+            "unit_name": "m^-3 s^-1",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "number-density": {
+            "unit_name": "m^-3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "particles-conc": {
+            "unit_name": "1.e15-particles/kg",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "particles-rate": {
+            "unit_name": "1.e15 m^-3 s^-1",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "percentage": {
+            "unit_name": "%",
+            "scale_factor": 0.01,
+            "offset": 0.0
+          },
+          "power": {
+            "unit_name": "W",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "power-per-time": {
+            "unit_name": "W/s",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "pressure": {
+            "unit_name": "Pa",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "pressure-2nd-time-derivative": {
+            "unit_name": "Pa/s^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "pressure-gradient": {
+            "unit_name": "Pa/m",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "pressure-time-deriv-sqr": {
+            "unit_name": "Pa^2/s^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "pressure-time-derivative": {
+            "unit_name": "Pa/s",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "resistance": {
+            "unit_name": "m^-1",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "site-density": {
+            "unit_name": "kgmol/m^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "soot-formation-constant-unit": {
+            "unit_name": "kg/(N m s)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "soot-limiting-nuclei-rate": {
+            "unit_name": "1e+15-particles/m3-s",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "soot-linear-termination": {
+            "unit_name": "m^3/s",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "soot-oxidation-constant": {
+            "unit_name": "kg m kgmol^-1 K^-0.5 s^-1",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "soot-pre-exponential-constant": {
+            "unit_name": "1.e15 kg^-1 s^-1",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "soot-sitespecies-concentration": {
+            "unit_name": "kmol/m^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "soot-surface-growth-scale-factor": {
+            "unit_name": "(kg m)/(kgmol s)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "source-elliptic-relaxation-function": {
+            "unit_name": "kg/(m^3 s^2)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "source-energy": {
+            "unit_name": "W/m^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "source-kinetic-energy": {
+            "unit_name": "kg/(m s^3)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "source-mass": {
+            "unit_name": "kg/(m^3 s)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "source-momentum": {
+            "unit_name": "N/m^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "source-specific-dissipation-rate": {
+            "unit_name": "kg/(m^3 s^2)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "source-temperature-variance": {
+            "unit_name": "K^2/(m^3 s)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "source-turbulent-dissipation-rate": {
+            "unit_name": "kg/(m s^4)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "source-turbulent-viscosity": {
+            "unit_name": "kg/(m s^2)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "specific-area": {
+            "unit_name": "m^2/kg",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "specific-energy": {
+            "unit_name": "J/kg",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "specific-heat": {
+            "unit_name": "J/(kg K)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "spring-constant": {
+            "unit_name": "N/m",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "spring-constant-angular": {
+            "unit_name": "(N m)/rad",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "stefan-boltzmann-constant": {
+            "unit_name": "W/(m^2 K^4)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "surface-density": {
+            "unit_name": "kg/m^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "surface-mole-transfer-rate": {
+            "unit_name": "kgmol/(m^2 s)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "surface-tension": {
+            "unit_name": "N/m",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "surface-tension-gradient": {
+            "unit_name": "N/(m K)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "temperature": {
+            "unit_name": "K",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "temperature-difference": {
+            "unit_name": "K",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "temperature-gradient": {
+            "unit_name": "K/m",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "temperature-inverse": {
+            "unit_name": "K^-1",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "temperature-variance": {
+            "unit_name": "K^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "thermal-conductivity": {
+            "unit_name": "W/(m K)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "thermal-resistance": {
+            "unit_name": "(m^2 K)/W",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "thermal-resistivity": {
+            "unit_name": "(m K)/W",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "thermophoretic-diffusivity": {
+            "unit_name": "(kg m^2)/s^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "time": {
+            "unit_name": "s",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "time-inverse": {
+            "unit_name": "s^-1",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "time-inverse-cubed": {
+            "unit_name": "s^-3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "time-inverse-squared": {
+            "unit_name": "s^-2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "turb-kinetic-energy-production": {
+            "unit_name": "kg/(m s^3)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "turbulent-energy-diss-rate": {
+            "unit_name": "m^2/s^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "turbulent-energy-diss-rate-gradient": {
+            "unit_name": "m/s^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "turbulent-kinetic-energy": {
+            "unit_name": "m^2/s^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "turbulent-kinetic-energy-gradient": {
+            "unit_name": "m/s^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "univ-gas-constant": {
+            "unit_name": "J/(K kgmol)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "velocity": {
+            "unit_name": "m/s",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "viscosity": {
+            "unit_name": "kg/(m s)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "viscosity-consistency-index": {
+            "unit_name": "kg s^n-2 m^-1",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "voltage": {
+            "unit_name": "V",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "volume": {
+            "unit_name": "m^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "volume-flow-rate": {
+            "unit_name": "m^3/s",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "volume-flow-rate-per-depth": {
+            "unit_name": "m^3/(s m)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "volume-inverse": {
+            "unit_name": "m^-3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "volume-temperature": {
+            "unit_name": "m^3/K",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "wave-length": {
+            "unit_name": "Angstrom",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "youngs-modulus": {
+            "unit_name": "N/m^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          }
+        }
+      }
+    },
+    "models": {
+      "multiphase": {
+        "model": "mixture",
+        "mixture_parameters": {
+          "slip_velocity_on": true
+        },
+        "number_of_phases": {
+          "number_of_eulerian_phases": 2
+        },
+        "vof_parameters": {
+          "vof_formulation": "implicit",
+          "interface_modeling_options": {
+            "interface_type": "dispersed"
+          }
+        },
+        "advanced_formulation": {
+          "implicit_body_force": false
+        },
+        "phases": {
+          "phase-1": {
+            "name": "phase-1",
+            "material": "air"
+          },
+          "phase-2": {
+            "name": "phase-2",
+            "material": "water-vapor-at-psep",
+            "diameter": "constant",
+            "constant_dia": 1e-05,
+            "granular": false,
+            "iac": false
+          }
+        },
+        "phase_interaction": {
+          "forces": {
+            "surface_tension_model": false,
+            "drag_mixture": [
+              {
+                "drag_method": "schiller-naumann",
+                "drag_mod": "none"
+              }
+            ],
+            "slip_velocity": [
+              {
+                "ppt_methods": "manninen-et-al"
+              }
+            ],
+            "surface_tension": [
+              {
+                "ppt_methods": "none"
+              }
+            ]
+          },
+          "mass_transfer_list": [],
+          "intf_area": [
+            {
+              "ppt_methods": "ia-symmetric"
+            }
+          ]
+        }
+      },
+      "energy": {
+        "enabled": false
+      },
+      "viscous": {
+        "model": "k-epsilon",
+        "k_epsilon_model": "rng",
+        "k_epsilon": {
+          "differential_viscosity_model": true,
+          "swirl_dominated_flow": true,
+          "coefficients": {}
+        },
+        "near_wall_treatment": {
+          "wall_treatment": "standard-wall-fn"
+        },
+        "options": {
+          "curvature_correction": {
+            "enabled": false
+          },
+          "production_kato_launder_enabled": false,
+          "production_limiter": {
+            "enabled": false
+          }
+        },
+        "multiphase_turbulence": {
+          "multiphase_options": {
+            "dispersion_in_relative_velocity": false
+          }
+        },
+        "turbulence_expert": {
+          "turbulence_damping": {
+            "enable_turb_damping": false
+          },
+          "turb_non_newtonian": false
+        },
+        "user_defined_functions": {
+          "turb_visc": "none"
+        }
+      },
+      "acoustics": {
+        "model": "off"
+      },
+      "radiation": {
+        "model": "none",
+        "solar_load": {
+          "solar_model": "none",
+          "sun_direction_vector_definition": {}
+        },
+        "solar_calculator": {
+          "longitude": -1.4770719,
+          "latitude": 0.23823741,
+          "timezone": -5.0,
+          "mesh_orientation": {
+            "north_direction": {
+              "north_x": 0.0,
+              "north_y": 1.0,
+              "north_z": 0.0
+            },
+            "east_direction": {
+              "east_x": 1.0,
+              "east_y": 0.0,
+              "east_z": 0.0
+            }
+          },
+          "date_and_time": {
+            "day": 21,
+            "month": 6,
+            "hour": 13,
+            "minute": 0
+          },
+          "calculator_method": "fair-weather-condition",
+          "sunshine_factor": 1.0
+        },
+        "solar_calculator_gui": {
+          "longitude": -1.4770719,
+          "latitude": 0.23823741,
+          "timezone": -5.0,
+          "mesh_orientation": {
+            "north_direction": {
+              "north_x": 0.0,
+              "north_y": 1.0,
+              "north_z": 0.0
+            },
+            "east_direction": {
+              "east_x": 1.0,
+              "east_y": 0.0,
+              "east_z": 0.0
+            }
+          },
+          "date_and_time": {
+            "day": 21,
+            "month": 6,
+            "hour": 13,
+            "minute": 0
+          },
+          "calculator_method": "fair-weather-condition",
+          "sunshine_factor": 1.0
+        }
+      },
+      "species": {
+        "model": {
+          "option": "off",
+          "phase_material": {
+            "phase-1": "air",
+            "phase-2": "water-vapor-at-psep"
+          },
+          "number_volumetric_species": false
+        },
+        "nox": {}
+      },
+      "discrete_phase": {
+        "general_settings": {
+          "interaction": {
+            "enabled": false
+          },
+          "cell_averaged_postprocessing": "none"
+        },
+        "physical_models": {
+          "particle_forces": {
+            "pressure_gradient_force": {},
+            "pressure_force_enabled": true,
+            "virtual_mass_force": {
+              "enabled": true,
+              "virtual_mass_factor": 0.5
+            },
+            "saffman_lift_force_enabled": false
+          },
+          "erosion_accretion_enabled": false,
+          "twoway_turb_coupl_enabled": false
+        },
+        "tracking": {
+          "max_num_steps": 10000,
+          "step_size_controls": {
+            "option": "step-length-factor",
+            "step_length_factor": 5
+          },
+          "advanced": {
+            "reference_frame": "relative",
+            "tracking_statistics_format": "short",
+            "verbosity": 1,
+            "randomize_every_iteration": true,
+            "randomize_every_timestep": true
+          }
+        },
+        "numerics": {
+          "tracking": {
+            "accuracy_control": {
+              "enabled": true,
+              "tolerance": 1e-05,
+              "max_num_refinements": 20,
+              "step_size_fraction": 1.0
+            },
+            "option": "automatic",
+            "low_order_scheme": "implicit",
+            "high_order_scheme": "trapezoidal"
+          },
+          "node_based_averaging": {
+            "enabled": false
+          },
+          "high_res_tracking": {
+            "enabled": false
+          }
+        },
+        "parallel": {
+          "option": "hybrid",
+          "hybrid": {
+            "dpm_domain": {
+              "enabled": false
+            }
+          },
+          "expert": {
+            "parallel_verbosity_level": 0,
+            "crossover_tolerance": 0.02
+          }
+        },
+        "user_defined_functions": {
+          "scalar_update": "none",
+          "body_force": "none",
+          "output": "none",
+          "source_terms": "none",
+          "dpm_time_step_size": "none",
+          "number_of_scalars": 0,
+          "max_num_udf_species": 50
+        },
+        "injections": {
+          "injection-112-micron": {
+            "name": "injection-112-micron",
+            "particle_type": "inert",
+            "material": "water-liquid",
+            "injection_type": {
+              "option": "surface"
+            },
+            "initial_values": {
+              "location": {
+                "injection_surfaces": [
+                  "steaminlet"
+                ],
+                "randomized_positions_enabled": false,
+                "spatial_staggering": {
+                  "enabled": false
+                }
+              },
+              "mass_flow_rate": {
+                "scale_by_area": false,
+                "total_flow_rate": 1.95
+              },
+              "velocity": {
+                "use_face_normal_direction": false,
+                "x_velocity": 0,
+                "y_velocity": 0,
+                "z_velocity": 0
+              },
+              "particle_size": {
+                "option": "uniform",
+                "diameter": 0.00011254
+              }
+            },
+            "physical_models": {
+              "particle_drag": {
+                "option": "spherical"
+              },
+              "turbulent_dispersion": {
+                "enabled": false
+              },
+              "particle_rotation": {
+                "enabled": false
+              },
+              "rough_wall_treatment_enabled": false,
+              "custom_laws": {
+                "enabled": false,
+                "law_1": "inert-heating",
+                "law_2": "inactive",
+                "law_3": "inactive",
+                "law_4": "inactive",
+                "law_5": "inactive",
+                "law_6": "inactive",
+                "law_7": "inactive",
+                "law_8": "inactive",
+                "law_9": "inactive",
+                "law_10": "inactive",
+                "switch": "Default"
+              }
+            },
+            "user_defined_functions": {
+              "injection_init": "none",
+              "heat_mass_transfer": "none"
+            }
+          },
+          "injection-1631-micron": {
+            "name": "injection-1631-micron",
+            "particle_type": "inert",
+            "material": "water-liquid",
+            "injection_type": {
+              "option": "surface"
+            },
+            "initial_values": {
+              "location": {
+                "injection_surfaces": [
+                  "steaminlet"
+                ],
+                "randomized_positions_enabled": false,
+                "spatial_staggering": {
+                  "enabled": false
+                }
+              },
+              "mass_flow_rate": {
+                "scale_by_area": false,
+                "total_flow_rate": 29.23
+              },
+              "velocity": {
+                "use_face_normal_direction": false,
+                "x_velocity": 0,
+                "y_velocity": 0,
+                "z_velocity": 0
+              },
+              "particle_size": {
+                "option": "uniform",
+                "diameter": 0.00163184
+              }
+            },
+            "physical_models": {
+              "particle_drag": {
+                "option": "spherical"
+              },
+              "turbulent_dispersion": {
+                "enabled": false
+              },
+              "particle_rotation": {
+                "enabled": false
+              },
+              "rough_wall_treatment_enabled": false,
+              "custom_laws": {
+                "enabled": false,
+                "law_1": "inert-heating",
+                "law_2": "inactive",
+                "law_3": "inactive",
+                "law_4": "inactive",
+                "law_5": "inactive",
+                "law_6": "inactive",
+                "law_7": "inactive",
+                "law_8": "inactive",
+                "law_9": "inactive",
+                "law_10": "inactive",
+                "switch": "Default"
+              }
+            },
+            "user_defined_functions": {
+              "injection_init": "none",
+              "heat_mass_transfer": "none"
+            }
+          },
+          "injection-168-micron": {
+            "name": "injection-168-micron",
+            "particle_type": "inert",
+            "material": "water-liquid",
+            "injection_type": {
+              "option": "surface"
+            },
+            "initial_values": {
+              "location": {
+                "injection_surfaces": [
+                  "steaminlet"
+                ],
+                "randomized_positions_enabled": false,
+                "spatial_staggering": {
+                  "enabled": false
+                }
+              },
+              "mass_flow_rate": {
+                "scale_by_area": false,
+                "total_flow_rate": 1.95
+              },
+              "velocity": {
+                "use_face_normal_direction": false,
+                "x_velocity": 0,
+                "y_velocity": 0,
+                "z_velocity": 0
+              },
+              "particle_size": {
+                "option": "uniform",
+                "diameter": 0.000168811
+              }
+            },
+            "physical_models": {
+              "particle_drag": {
+                "option": "spherical"
+              },
+              "turbulent_dispersion": {
+                "enabled": false
+              },
+              "particle_rotation": {
+                "enabled": false
+              },
+              "rough_wall_treatment_enabled": false,
+              "custom_laws": {
+                "enabled": false,
+                "law_1": "inert-heating",
+                "law_2": "inactive",
+                "law_3": "inactive",
+                "law_4": "inactive",
+                "law_5": "inactive",
+                "law_6": "inactive",
+                "law_7": "inactive",
+                "law_8": "inactive",
+                "law_9": "inactive",
+                "law_10": "inactive",
+                "switch": "Default"
+              }
+            },
+            "user_defined_functions": {
+              "injection_init": "none",
+              "heat_mass_transfer": "none"
+            }
+          },
+          "injection-28-micron": {
+            "name": "injection-28-micron",
+            "particle_type": "inert",
+            "material": "water-liquid",
+            "injection_type": {
+              "option": "surface"
+            },
+            "initial_values": {
+              "location": {
+                "injection_surfaces": [
+                  "steaminlet"
+                ],
+                "randomized_positions_enabled": false,
+                "spatial_staggering": {
+                  "enabled": false
+                }
+              },
+              "mass_flow_rate": {
+                "scale_by_area": false,
+                "total_flow_rate": 0.78
+              },
+              "velocity": {
+                "use_face_normal_direction": false,
+                "x_velocity": 0,
+                "y_velocity": 0,
+                "z_velocity": 0
+              },
+              "particle_size": {
+                "option": "uniform",
+                "diameter": 2.814e-05
+              }
+            },
+            "physical_models": {
+              "particle_drag": {
+                "option": "spherical"
+              },
+              "turbulent_dispersion": {
+                "enabled": false
+              },
+              "particle_rotation": {
+                "enabled": false
+              },
+              "rough_wall_treatment_enabled": false,
+              "custom_laws": {
+                "enabled": false,
+                "law_1": "inert-heating",
+                "law_2": "inactive",
+                "law_3": "inactive",
+                "law_4": "inactive",
+                "law_5": "inactive",
+                "law_6": "inactive",
+                "law_7": "inactive",
+                "law_8": "inactive",
+                "law_9": "inactive",
+                "law_10": "inactive",
+                "switch": "Default"
+              }
+            },
+            "user_defined_functions": {
+              "injection_init": "none",
+              "heat_mass_transfer": "none"
+            }
+          },
+          "injection-348-micron": {
+            "name": "injection-348-micron",
+            "particle_type": "inert",
+            "material": "water-liquid",
+            "injection_type": {
+              "option": "surface"
+            },
+            "initial_values": {
+              "location": {
+                "injection_surfaces": [
+                  "steaminlet"
+                ],
+                "randomized_positions_enabled": false,
+                "spatial_staggering": {
+                  "enabled": false
+                }
+              },
+              "mass_flow_rate": {
+                "scale_by_area": false,
+                "total_flow_rate": 23.38
+              },
+              "velocity": {
+                "use_face_normal_direction": false,
+                "x_velocity": 0,
+                "y_velocity": 0,
+                "z_velocity": 0
+              },
+              "particle_size": {
+                "option": "uniform",
+                "diameter": 0.00034888
+              }
+            },
+            "physical_models": {
+              "particle_drag": {
+                "option": "spherical"
+              },
+              "turbulent_dispersion": {
+                "enabled": false
+              },
+              "particle_rotation": {
+                "enabled": false
+              },
+              "rough_wall_treatment_enabled": false,
+              "custom_laws": {
+                "enabled": false,
+                "law_1": "inert-heating",
+                "law_2": "inactive",
+                "law_3": "inactive",
+                "law_4": "inactive",
+                "law_5": "inactive",
+                "law_6": "inactive",
+                "law_7": "inactive",
+                "law_8": "inactive",
+                "law_9": "inactive",
+                "law_10": "inactive",
+                "switch": "Default"
+              }
+            },
+            "user_defined_functions": {
+              "injection_init": "none",
+              "heat_mass_transfer": "none"
+            }
+          },
+          "injection-5-micron": {
+            "name": "injection-5-micron",
+            "particle_type": "inert",
+            "material": "water-liquid",
+            "injection_type": {
+              "option": "surface"
+            },
+            "initial_values": {
+              "location": {
+                "injection_surfaces": [
+                  "steaminlet"
+                ],
+                "randomized_positions_enabled": false,
+                "spatial_staggering": {
+                  "enabled": false
+                }
+              },
+              "mass_flow_rate": {
+                "scale_by_area": false,
+                "total_flow_rate": 0.19
+              },
+              "velocity": {
+                "use_face_normal_direction": false,
+                "x_velocity": 0,
+                "y_velocity": 0,
+                "z_velocity": 0
+              },
+              "particle_size": {
+                "option": "uniform",
+                "diameter": 5.63e-06
+              }
+            },
+            "physical_models": {
+              "particle_drag": {
+                "option": "spherical"
+              },
+              "turbulent_dispersion": {
+                "enabled": false
+              },
+              "particle_rotation": {
+                "enabled": false
+              },
+              "rough_wall_treatment_enabled": false,
+              "custom_laws": {
+                "enabled": false,
+                "law_1": "inert-heating",
+                "law_2": "inactive",
+                "law_3": "inactive",
+                "law_4": "inactive",
+                "law_5": "inactive",
+                "law_6": "inactive",
+                "law_7": "inactive",
+                "law_8": "inactive",
+                "law_9": "inactive",
+                "law_10": "inactive",
+                "switch": "Default"
+              }
+            },
+            "user_defined_functions": {
+              "injection_init": "none",
+              "heat_mass_transfer": "none"
+            }
+          },
+          "injection-56-micron": {
+            "name": "injection-56-micron",
+            "particle_type": "inert",
+            "material": "water-liquid",
+            "injection_type": {
+              "option": "surface"
+            },
+            "initial_values": {
+              "location": {
+                "injection_surfaces": [
+                  "steaminlet"
+                ],
+                "randomized_positions_enabled": false,
+                "spatial_staggering": {
+                  "enabled": false
+                }
+              },
+              "mass_flow_rate": {
+                "scale_by_area": false,
+                "total_flow_rate": 0.97
+              },
+              "velocity": {
+                "use_face_normal_direction": false,
+                "x_velocity": 0,
+                "y_velocity": 0,
+                "z_velocity": 0
+              },
+              "particle_size": {
+                "option": "uniform",
+                "diameter": 5.627e-05
+              }
+            },
+            "physical_models": {
+              "particle_drag": {
+                "option": "spherical"
+              },
+              "turbulent_dispersion": {
+                "enabled": false
+              },
+              "particle_rotation": {
+                "enabled": false
+              },
+              "rough_wall_treatment_enabled": false,
+              "custom_laws": {
+                "enabled": false,
+                "law_1": "inert-heating",
+                "law_2": "inactive",
+                "law_3": "inactive",
+                "law_4": "inactive",
+                "law_5": "inactive",
+                "law_6": "inactive",
+                "law_7": "inactive",
+                "law_8": "inactive",
+                "law_9": "inactive",
+                "law_10": "inactive",
+                "switch": "Default"
+              }
+            },
+            "user_defined_functions": {
+              "injection_init": "none",
+              "heat_mass_transfer": "none"
+            }
+          },
+          "injection-562-micron": {
+            "name": "injection-562-micron",
+            "particle_type": "inert",
+            "material": "water-liquid",
+            "injection_type": {
+              "option": "surface"
+            },
+            "initial_values": {
+              "location": {
+                "injection_surfaces": [
+                  "steaminlet"
+                ],
+                "randomized_positions_enabled": false,
+                "spatial_staggering": {
+                  "enabled": false
+                }
+              },
+              "mass_flow_rate": {
+                "scale_by_area": false,
+                "total_flow_rate": 29.23
+              },
+              "velocity": {
+                "use_face_normal_direction": false,
+                "x_velocity": 0,
+                "y_velocity": 0,
+                "z_velocity": 0
+              },
+              "particle_size": {
+                "option": "uniform",
+                "diameter": 0.0005627
+              }
+            },
+            "physical_models": {
+              "particle_drag": {
+                "option": "spherical"
+              },
+              "turbulent_dispersion": {
+                "enabled": false
+              },
+              "particle_rotation": {
+                "enabled": false
+              },
+              "rough_wall_treatment_enabled": false,
+              "custom_laws": {
+                "enabled": false,
+                "law_1": "inert-heating",
+                "law_2": "inactive",
+                "law_3": "inactive",
+                "law_4": "inactive",
+                "law_5": "inactive",
+                "law_6": "inactive",
+                "law_7": "inactive",
+                "law_8": "inactive",
+                "law_9": "inactive",
+                "law_10": "inactive",
+                "switch": "Default"
+              }
+            },
+            "user_defined_functions": {
+              "injection_init": "none",
+              "heat_mass_transfer": "none"
+            }
+          },
+          "injection-844-micron": {
+            "name": "injection-844-micron",
+            "particle_type": "inert",
+            "material": "water-liquid",
+            "injection_type": {
+              "option": "surface"
+            },
+            "initial_values": {
+              "location": {
+                "injection_surfaces": [
+                  "steaminlet"
+                ],
+                "randomized_positions_enabled": false,
+                "spatial_staggering": {
+                  "enabled": false
+                }
+              },
+              "mass_flow_rate": {
+                "scale_by_area": false,
+                "total_flow_rate": 29.23
+              },
+              "velocity": {
+                "use_face_normal_direction": false,
+                "x_velocity": 0,
+                "y_velocity": 0,
+                "z_velocity": 0
+              },
+              "particle_size": {
+                "option": "uniform",
+                "diameter": 0.00084406
+              }
+            },
+            "physical_models": {
+              "particle_drag": {
+                "option": "spherical"
+              },
+              "turbulent_dispersion": {
+                "enabled": false
+              },
+              "particle_rotation": {
+                "enabled": false
+              },
+              "rough_wall_treatment_enabled": false,
+              "custom_laws": {
+                "enabled": false,
+                "law_1": "inert-heating",
+                "law_2": "inactive",
+                "law_3": "inactive",
+                "law_4": "inactive",
+                "law_5": "inactive",
+                "law_6": "inactive",
+                "law_7": "inactive",
+                "law_8": "inactive",
+                "law_9": "inactive",
+                "law_10": "inactive",
+                "switch": "Default"
+              }
+            },
+            "user_defined_functions": {
+              "injection_init": "none",
+              "heat_mass_transfer": "none"
+            }
+          }
+        }
+      },
+      "virtual_blade_model": {
+        "enabled": false
+      },
+      "structure": {
+        "model": "off"
+      },
+      "echemistry": {
+        "enabled": false
+      },
+      "battery": {
+        "enabled": false
+      },
+      "system_coupling": {
+        "user_defined_coupling_variables_via_udm": [],
+        "use_face_or_element_based_data_transfer": true,
+        "flow_boundary_coupling": {
+          "activate_flow_boundary_coupling_model": false
+        }
+      },
+      "sofc": {
+        "enabled": false
+      },
+      "pemfc": {
+        "enabled": false
+      }
+    },
+    "models_multiphase_detail": {
+      "_state": {
+        "model": "mixture",
+        "mixture_parameters": {
+          "slip_velocity_on": true
+        },
+        "number_of_phases": {
+          "number_of_eulerian_phases": 2
+        },
+        "vof_parameters": {
+          "vof_formulation": "implicit",
+          "interface_modeling_options": {
+            "interface_type": "dispersed"
+          }
+        },
+        "advanced_formulation": {
+          "implicit_body_force": false
+        },
+        "phases": {
+          "phase-1": {
+            "name": "phase-1",
+            "material": "air"
+          },
+          "phase-2": {
+            "name": "phase-2",
+            "material": "water-vapor-at-psep",
+            "diameter": "constant",
+            "constant_dia": 1e-05,
+            "granular": false,
+            "iac": false
+          }
+        },
+        "phase_interaction": {
+          "forces": {
+            "surface_tension_model": false,
+            "drag_mixture": [
+              {
+                "drag_method": "schiller-naumann",
+                "drag_mod": "none"
+              }
+            ],
+            "slip_velocity": [
+              {
+                "ppt_methods": "manninen-et-al"
+              }
+            ],
+            "surface_tension": [
+              {
+                "ppt_methods": "none"
+              }
+            ]
+          },
+          "mass_transfer_list": [],
+          "intf_area": [
+            {
+              "ppt_methods": "ia-symmetric"
+            }
+          ]
+        }
+      },
+      "_child_names": [
+        "model",
+        "mixture_parameters",
+        "vaporization_pressure",
+        "non_condensable_gas",
+        "liquid_surface_tension",
+        "bubble_number_density",
+        "hybrid_models",
+        "number_of_phases",
+        "number_of_eulerian_discrete_phases",
+        "vof_sub_models",
+        "vof_parameters",
+        "advanced_formulation",
+        "phases",
+        "phase_interaction",
+        "wet_steam_settings",
+        "wet_steam_enabled"
+      ],
+      "_command_names": [],
+      "model": {
+        "_state": "mixture"
+      },
+      "mixture_parameters": {
+        "_state": {
+          "slip_velocity_on": true
+        },
+        "_child_names": [
+          "slip_velocity_on"
+        ],
+        "_command_names": [],
+        "slip_velocity_on": {
+          "_state": true
+        }
+      },
+      "vaporization_pressure": {
+        "_state": null
+      },
+      "non_condensable_gas": {
+        "_state": null
+      },
+      "liquid_surface_tension": {
+        "_state": null
+      },
+      "bubble_number_density": {
+        "_state": null
+      },
+      "hybrid_models": {
+        "_state": null,
+        "_child_names": [
+          "coupled_level_set",
+          "multi_fluid_vof"
+        ],
+        "_command_names": []
+      },
+      "number_of_phases": {
+        "_state": {
+          "number_of_eulerian_phases": 2
+        },
+        "_child_names": [
+          "number_of_eulerian_phases"
+        ],
+        "_command_names": [],
+        "number_of_eulerian_phases": {
+          "_state": 2
+        }
+      },
+      "number_of_eulerian_discrete_phases": {
+        "_state": null
+      },
+      "vof_sub_models": {
+        "_state": null,
+        "_child_names": [
+          "open_channel_flow",
+          "open_channel_flow_wave_bc"
+        ],
+        "_command_names": []
+      },
+      "vof_parameters": {
+        "_state": {
+          "vof_formulation": "implicit",
+          "interface_modeling_options": {
+            "interface_type": "dispersed"
+          }
+        },
+        "_child_names": [
+          "vof_formulation",
+          "vof_cutoff",
+          "vof_courant_number",
+          "interface_modeling_options"
+        ],
+        "_command_names": [],
+        "vof_formulation": {
+          "_state": "implicit"
+        },
+        "vof_cutoff": {
+          "_state": null
+        },
+        "vof_courant_number": {
+          "_state": null
+        },
+        "interface_modeling_options": {
+          "_state": {
+            "interface_type": "dispersed"
+          },
+          "_child_names": [
+            "interface_type",
+            "anti_diffusion",
+            "anti_diffusion_factor",
+            "zonal_discretization",
+            "phase_localized_discretization"
+          ],
+          "_command_names": []
+        }
+      },
+      "advanced_formulation": {
+        "_state": {
+          "implicit_body_force": false
+        },
+        "_child_names": [
+          "implicit_body_force",
+          "explicit_expert_options"
+        ],
+        "_command_names": [],
+        "implicit_body_force": {
+          "_state": false
+        },
+        "explicit_expert_options": {
+          "_state": null,
+          "_child_names": [
+            "sub_time_step_method",
+            "solve_vof_every_iter",
+            "vof_filtering"
+          ],
+          "_command_names": []
+        }
+      },
+      "phases": {
+        "_state": {
+          "phase-1": {
+            "name": "phase-1",
+            "material": "air"
+          },
+          "phase-2": {
+            "name": "phase-2",
+            "material": "water-vapor-at-psep",
+            "diameter": "constant",
+            "constant_dia": 1e-05,
+            "granular": false,
+            "iac": false
+          }
+        },
+        "_command_names": [
+          "create",
+          "delete",
+          "rename",
+          "list",
+          "list_properties",
+          "make_a_copy"
+        ]
+      },
+      "phase_interaction": {
+        "_state": {
+          "forces": {
+            "surface_tension_model": false,
+            "drag_mixture": [
+              {
+                "drag_method": "schiller-naumann",
+                "drag_mod": "none"
+              }
+            ],
+            "slip_velocity": [
+              {
+                "ppt_methods": "manninen-et-al"
+              }
+            ],
+            "surface_tension": [
+              {
+                "ppt_methods": "none"
+              }
+            ]
+          },
+          "mass_transfer_list": [],
+          "intf_area": [
+            {
+              "ppt_methods": "ia-symmetric"
+            }
+          ]
+        },
+        "_child_names": [
+          "forces",
+          "mass_transfer_list",
+          "intf_area",
+          "interfacial_discretization"
+        ],
+        "_command_names": [],
+        "forces": {
+          "_state": {
+            "surface_tension_model": false,
+            "drag_mixture": [
+              {
+                "drag_method": "schiller-naumann",
+                "drag_mod": "none"
+              }
+            ],
+            "slip_velocity": [
+              {
+                "ppt_methods": "manninen-et-al"
+              }
+            ],
+            "surface_tension": [
+              {
+                "ppt_methods": "none"
+              }
+            ]
+          },
+          "_child_names": [
+            "surface_tension_model",
+            "surface_tension_model_type",
+            "wall_adhesion",
+            "jump_adhesion",
+            "drag_mixture",
+            "drag_euler",
+            "lift_euler",
+            "wall_lub_euler",
+            "turb_disp_euler",
+            "slip_velocity",
+            "surface_tension",
+            "rest_coeff"
+          ],
+          "_command_names": []
+        },
+        "mass_transfer_list": {
+          "_state": [],
+          "_command_names": [
+            "list_properties",
+            "resize"
+          ]
+        },
+        "intf_area": {
+          "_state": [
+            {
+              "ppt_methods": "ia-symmetric"
+            }
+          ],
+          "_command_names": [
+            "list_properties",
+            "resize"
+          ]
+        },
+        "interfacial_discretization": {
+          "_state": null,
+          "_child_names": [
+            "phase_localized_compressive_scheme",
+            "slope_limiter"
+          ],
+          "_command_names": []
+        }
+      },
+      "wet_steam_settings": {
+        "_state": null,
+        "_child_names": [
+          "max_liquid_mass_fraction",
+          "virial_equation_of_state",
+          "droplet_growth_rate",
+          "stagnation_conditions",
+          "enhanced_source_linearization"
+        ],
+        "_command_names": []
+      },
+      "wet_steam_enabled": {
+        "_state": null
+      }
+    },
+    "materials": {
+      "database": {
+        "database_type": "fluent-database",
+        "list_by_type": "fluid"
+      },
+      "fluid": {
+        "air": {
+          "name": "air",
+          "chemical_formula": "",
+          "density": {
+            "option": "value",
+            "value": 1.093999981880188
+          },
+          "viscosity": {
+            "option": "value",
+            "value": 1.789400084817316e-05
+          }
+        },
+        "water-liquid-at-psep": {
+          "name": "water-liquid-at-psep",
+          "chemical_formula": "h2o-psep",
+          "density": {
+            "option": "value",
+            "value": 881.2108764648438
+          },
+          "viscosity": {
+            "option": "value",
+            "value": 0.0001455440069548786
+          }
+        },
+        "water-vapor-at-psep": {
+          "name": "water-vapor-at-psep",
+          "chemical_formula": "h2o-sep",
+          "density": {
+            "option": "value",
+            "value": 5.797433853149414
+          },
+          "viscosity": {
+            "option": "value",
+            "value": 1.520620025985409e-05
+          }
+        }
+      },
+      "solid": {
+        "aluminum": {
+          "name": "aluminum",
+          "chemical_formula": "al",
+          "density": {
+            "option": "value",
+            "value": 2719
+          }
+        },
+        "steel": {
+          "name": "steel",
+          "chemical_formula": "",
+          "density": {
+            "option": "value",
+            "value": 8030
+          }
+        }
+      },
+      "inert_particle": {
+        "anthracite": {
+          "name": "anthracite",
+          "chemical_formula": "",
+          "density": {
+            "option": "value",
+            "value": 1550
+          }
+        },
+        "water-liquid": {
+          "name": "water-liquid",
+          "chemical_formula": "h2o<l>",
+          "density": {
+            "option": "value",
+            "value": 998.2
+          }
+        }
+      }
+    },
+    "boundary_conditions": {
+      "pressure_outlet": {
+        "steamoutlet": {
+          "name": "steamoutlet",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "gauge_pressure": {
+                  "option": "value",
+                  "value": 1120000
+                },
+                "pressure_profile_multiplier": 1.0,
+                "backflow_dir_spec_method": "Normal to Boundary",
+                "backflow_pressure_spec": "Total Pressure",
+                "radial_equ_pressure_distribution": false
+              },
+              "turbulence": {
+                "turbulence_specification": "Intensity and Hydraulic Diameter",
+                "backflow_turbulent_intensity": 0.0215249995,
+                "backflow_hydraulic_diameter": 0.724
+              },
+              "discrete_phase": {
+                "bc_type": "escape"
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {
+                "volume_frac_spec_method": "Backflow Volume Fraction",
+                "backflow_volume_fraction": {
+                  "option": "value",
+                  "value": 0
+                }
+              }
+            }
+          }
+        }
+      },
+      "velocity_inlet": {
+        "liquidinlet": {
+          "name": "liquidinlet",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "initial_gauge_pressure": {
+                  "option": "value",
+                  "value": 1140000
+                }
+              },
+              "turbulence": {
+                "turbulence_specification": "Intensity and Hydraulic Diameter",
+                "turbulent_intensity": 0.0210999999,
+                "hydraulic_diameter": 0.01338
+              },
+              "discrete_phase": {
+                "bc_type": "escape"
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {
+                "velocity_specification_method": "Magnitude, Normal to Boundary",
+                "reference_frame": "Absolute",
+                "velocity_magnitude": {
+                  "option": "value",
+                  "value": 27.118
+                }
+              },
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {
+                "velocity_specification_method": "Magnitude, Normal to Boundary",
+                "reference_frame": "Absolute",
+                "velocity_magnitude": {
+                  "option": "value",
+                  "value": 27.118
+                }
+              },
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {
+                "volume_fraction": {
+                  "option": "value",
+                  "value": 1.0
+                }
+              }
+            }
+          }
+        },
+        "steaminlet": {
+          "name": "steaminlet",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "initial_gauge_pressure": {
+                  "option": "value",
+                  "value": 1140000
+                }
+              },
+              "turbulence": {
+                "turbulence_specification": "Intensity and Hydraulic Diameter",
+                "turbulent_intensity": 0.0210999999,
+                "hydraulic_diameter": 0.72061
+              },
+              "discrete_phase": {
+                "bc_type": "escape"
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {
+                "velocity_specification_method": "Magnitude, Normal to Boundary",
+                "reference_frame": "Absolute",
+                "velocity_magnitude": {
+                  "option": "value",
+                  "value": 27.118
+                }
+              },
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {
+                "velocity_specification_method": "Magnitude, Normal to Boundary",
+                "reference_frame": "Absolute",
+                "velocity_magnitude": {
+                  "option": "value",
+                  "value": 27.118
+                }
+              },
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {
+                "volume_fraction": {
+                  "option": "value",
+                  "value": 0
+                }
+              }
+            }
+          }
+        }
+      },
+      "wall": {
+        "bottom": {
+          "name": "bottom",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "discrete_phase": {
+                "bc_type": "reflect",
+                "reflection_coefficients": {
+                  "normal": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  },
+                  "tangential": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  }
+                }
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            }
+          }
+        },
+        "wall": {
+          "name": "wall",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "discrete_phase": {
+                "bc_type": "reflect",
+                "reflection_coefficients": {
+                  "normal": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  },
+                  "tangential": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  }
+                }
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            }
+          }
+        }
+      },
+      "non_reflecting_bc": {
+        "general_nrbc": {
+          "sigma": 0.15,
+          "sigma2": 5.0
+        },
+        "turbo_specific_nrbc": {
+          "enable": false
+        }
+      },
+      "perforated_wall": {
+        "setup_method": "None",
+        "model_setup": {
+          "ninjections": 1,
+          "urf": 1,
+          "injection": [
+            {
+              "injection_thread": false,
+              "coupled": true,
+              "extraction_thread": false,
+              "uniform": "Uniform",
+              "static": "Dynamic",
+              "formulation": "Incompressible",
+              "dynamic_setup": {
+                "method": ""
+              }
+            }
+          ]
+        }
+      },
+      "settings": {
+        "mass_flow": true,
+        "pressure_outlet": {
+          "blending_factor": 0.0,
+          "bin_count": 65,
+          "average_pressure": false
+        },
+        "target_mass_flow_rate_settings": {
+          "under_relaxation_factor": 0.05,
+          "verbosity": false
+        },
+        "advanced": {
+          "delay_model_change_update": false,
+          "batch_thread_update": false
+        }
+      }
+    },
+    "cell_zone_conditions": {
+      "fluid": {
+        "fluid": {
+          "name": "fluid",
+          "phase": {
+            "mixture": {
+              "general": {
+                "laminar": false
+              },
+              "reference_frame": {
+                "frame_motion": false,
+                "reference_frame_axis_origin": [
+                  {
+                    "option": "value",
+                    "value": 0
+                  },
+                  {
+                    "option": "value",
+                    "value": 0
+                  },
+                  {
+                    "option": "value",
+                    "value": 0
+                  }
+                ],
+                "reference_frame_axis_direction": [
+                  {
+                    "option": "value",
+                    "value": 0
+                  },
+                  {
+                    "option": "value",
+                    "value": 0
+                  },
+                  {
+                    "option": "value",
+                    "value": 1
+                  }
+                ]
+              },
+              "mesh_motion": {
+                "enable": false
+              },
+              "zonal_models": {},
+              "porous_zone": {
+                "porous": false
+              },
+              "fan_zone": {
+                "fan_zone": false
+              },
+              "sources": {
+                "enable": false
+              },
+              "fixed_values": {
+                "enable": false
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "general": {},
+              "reference_frame": {},
+              "mesh_motion": {},
+              "zonal_models": {},
+              "porous_zone": {},
+              "fan_zone": {
+                "fan_zone": false
+              },
+              "sources": {
+                "enable": false
+              },
+              "multiphase": {}
+            },
+            "phase-2": {
+              "general": {},
+              "reference_frame": {},
+              "mesh_motion": {},
+              "zonal_models": {},
+              "porous_zone": {},
+              "fan_zone": {
+                "fan_zone": false
+              },
+              "sources": {
+                "enable": false
+              },
+              "multiphase": {}
+            }
+          }
+        }
+      }
+    }
+  },
+  "solution": {
+    "methods": {
+      "p_v_coupling": {
+        "flow_scheme": "SIMPLE",
+        "solve_n_phase": false
+      },
+      "spatial_discretization": {
+        "gradient_scheme": "green-gauss-node-based",
+        "discretization_scheme": {
+          "epsilon": "second-order-upwind",
+          "k": "second-order-upwind",
+          "mom": "second-order-upwind",
+          "mp": "quick",
+          "pressure": "presto!"
+        }
+      },
+      "pseudo_time_method": {
+        "formulation": {
+          "segregated_solver": "off"
+        }
+      },
+      "expert": {
+        "implicit_bodyforce_treatment": false,
+        "velocity_formulation": "absolute",
+        "physical_velocity_formulation": false,
+        "disable_rhie_chow_flux": false,
+        "presto_pressure_scheme": false,
+        "first_to_second_order_blending": 1.0
+      },
+      "high_order_term_relaxation": {
+        "enable": false,
+        "relaxation_factor": 0.25,
+        "select_variables": "flow-variables",
+        "type": "standard"
+      },
+      "multiphase_numerics": {
+        "compressible_flow": {
+          "enhanced_numerics": true,
+          "alternate_bc_formulation": false
+        },
+        "viscous_flow": {
+          "viscosity_averaging": false
+        },
+        "heat_mass_transfer": {
+          "cavitation": {
+            "schnerr_evap_coeff": 1.0,
+            "schnerr_cond_coeff": 0.2,
+            "max_vapor_pressure_ratio": 5.0,
+            "min_vapor_pressure": 1,
+            "display_clipped_pressure": true,
+            "p_limit_method": "local-pvap-min",
+            "turbulent_diffusion": true
+          },
+          "boiling": {
+            "heat_flux_relaxation_factor": 0.8,
+            "show_expert_options": false
+          },
+          "area_density": {
+            "vof_min_seeding": 1e-06,
+            "ia_grad_sym": false
+          }
+        },
+        "interphase_interactions": {},
+        "advanced_stability_controls": {
+          "p_v_coupling": {
+            "rhie_chow_flux": {
+              "low_order_rhie_chow": false
+            }
+          }
+        },
+        "default_controls": {
+          "recommended_defaults_for_existing_cases": false,
+          "revert_to_pre_r20_1_default_settings": {
+            "old_default_of_operating_density_method": false,
+            "old_default_of_volume_fraction_smoothing": false,
+            "old_variant_of_presto_for_cases_using_structured_mesh": false
+          }
+        }
+      },
+      "nb_gradient_boundary_option": {
+        "nb_gradient": "modified-boundary-treatment"
+      },
+      "vof_numerics": {
+        "high_order_rc": false,
+        "high_order_rc_hybrid_treatment": false,
+        "unstructured_var_presto_scheme": false
+      },
+      "warped_face_gradient_correction": {
+        "enable": false
+      },
+      "poor_mesh_numerics": {
+        "cell_quality_based": false,
+        "turbulence_production_term": true,
+        "solution_and_quality_based": false,
+        "gradient_quality_based": false,
+        "reset_poor_elements": false
+      }
+    },
+    "controls": {
+      "under_relaxation": {
+        "body-force": 1.0,
+        "density": 1,
+        "drift": 0.1,
+        "epsilon": 0.8,
+        "k": 0.8,
+        "mom": 0.7,
+        "mp": 0.4000000059604645,
+        "pressure": 0.3,
+        "turb-viscosity": 1
+      },
+      "equations": {
+        "drift": true,
+        "flow": true,
+        "ke": true,
+        "mp": true
+      },
+      "limits": {
+        "min_pressure": 1,
+        "max_pressure": 50000000000.0,
+        "min_tke": 1e-14,
+        "min_epsilon": 1e-20,
+        "max_turb_visc_ratio": 100000.0,
+        "min_vol_frac_for_matrix_sol": 1e-08
+      },
+      "advanced": {
+        "multi_grid": {
+          "mg_controls": {
+            "epsilon": {
+              "cycle_type": "flexible-cycle",
+              "termination_criteria": 0.1,
+              "residual_reduction_tolerance": 0.7
+            },
+            "k": {
+              "cycle_type": "flexible-cycle",
+              "termination_criteria": 0.1,
+              "residual_reduction_tolerance": 0.7
+            },
+            "mp": {
+              "cycle_type": "flexible-cycle",
+              "termination_criteria": 0.1,
+              "residual_reduction_tolerance": 0.7
+            },
+            "pressure": {
+              "cycle_type": "v-cycle",
+              "termination_criteria": 0.1,
+              "stabilization": "none"
+            },
+            "x-mom": {
+              "cycle_type": "flexible-cycle",
+              "termination_criteria": 0.1,
+              "residual_reduction_tolerance": 0.7
+            },
+            "y-mom": {
+              "cycle_type": "flexible-cycle",
+              "termination_criteria": 0.1,
+              "residual_reduction_tolerance": 0.7
+            },
+            "z-mom": {
+              "cycle_type": "flexible-cycle",
+              "termination_criteria": 0.1,
+              "residual_reduction_tolerance": 0.7
+            }
+          },
+          "amg_controls": {
+            "scalar_parameters": {
+              "fixed_cycle_parameters": {
+                "pre_sweeps": 0,
+                "post_sweeps": 1,
+                "max_cycle": 30
+              },
+              "coarsening_parameters": {
+                "max_coarse_levels": 20,
+                "coarsen_by_interval": 2,
+                "conservative_coarsening": true,
+                "aggressive_coarsening": false,
+                "laplace_coarsening": false
+              },
+              "smoother_type": "Gauss-Seidel"
+            },
+            "flexible_cycle_parameters": {
+              "sweeps": 2,
+              "max_fine_relaxations": 30,
+              "max_coarse_relaxations": 50
+            },
+            "options": {
+              "verbosity": 0
+            }
+          }
+        },
+        "expert": {
+          "spatial_discretization_limiter": {
+            "limiter_type": "default",
+            "cell_to_limiting": "cell-to-face",
+            "limiter_filter": false
+          },
+          "linearized_mass_transfer_udf": true,
+          "singhal_cavitation_model": false,
+          "save_cell_residuals": false,
+          "keep_temporary_memory": false,
+          "allow_all_disc_schemes": false
+        },
+        "secondary_gradient_limiting": {
+          "energy": false,
+          "uds": false
+        },
+        "enhanced_skewness_correction": false,
+        "boundary_presto_treatment": false,
+        "relaxation_method": "gauss-seidel"
+      }
+    },
+    "report_definitions": {
+      "mesh": {},
+      "surface": {},
+      "volume": {},
+      "force": {},
+      "lift": {},
+      "drag": {},
+      "moment": {},
+      "time": {},
+      "flux": {},
+      "vbm": {},
+      "injection": {},
+      "user_defined": {},
+      "expression": {},
+      "single_valued_expression": {}
+    },
+    "monitor": {
+      "residual": {
+        "equations": {
+          "continuity": {
+            "monitor": true,
+            "check_convergence": true,
+            "absolute_criteria": 0.001
+          },
+          "epsilon": {
+            "monitor": true,
+            "check_convergence": true,
+            "absolute_criteria": 0.001
+          },
+          "k": {
+            "monitor": true,
+            "check_convergence": true,
+            "absolute_criteria": 0.001
+          },
+          "vf-phase-2": {
+            "monitor": true,
+            "check_convergence": true,
+            "absolute_criteria": 0.001
+          },
+          "x-velocity": {
+            "monitor": true,
+            "check_convergence": true,
+            "absolute_criteria": 0.001
+          },
+          "y-velocity": {
+            "monitor": true,
+            "check_convergence": true,
+            "absolute_criteria": 0.001
+          },
+          "z-velocity": {
+            "monitor": true,
+            "check_convergence": true,
+            "absolute_criteria": 0.001
+          }
+        },
+        "options": {
+          "criterion_type": "absolute",
+          "n_save": 1000,
+          "normalize": false,
+          "residual_values": {
+            "scale_residuals": true,
+            "compute_local_scale": false
+          },
+          "print": true,
+          "plot": true,
+          "n_display": 1000
+        },
+        "axes": {
+          "x": {
+            "label": "",
+            "log_scale": false,
+            "number_format": {
+              "format_type": "float",
+              "precision": 0
+            },
+            "auto_range": {
+              "min_auto": true,
+              "max_auto": true
+            },
+            "show_major_gridlines": false,
+            "show_minor_gridlines": false
+          },
+          "y": {
+            "label": "",
+            "log_scale": true,
+            "number_format": {
+              "format_type": "exponential",
+              "precision": 0
+            },
+            "auto_range": {
+              "min_auto": true,
+              "max_auto": true
+            },
+            "show_major_gridlines": false,
+            "show_minor_gridlines": false
+          }
+        },
+        "curves": {
+          "continuity": {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "monte carlo green"
+            },
+            "line_in_file": {
+              "pattern": ""
+            },
+            "marker": {
+              "symbol": ""
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "monte carlo green"
+            }
+          },
+          "epsilon": {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "lavender gray"
+            },
+            "line_in_file": {
+              "pattern": ""
+            },
+            "marker": {
+              "symbol": ""
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "lavender gray"
+            }
+          },
+          "k": {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "scarlet red"
+            },
+            "line_in_file": {
+              "pattern": ""
+            },
+            "marker": {
+              "symbol": ""
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "scarlet red"
+            }
+          },
+          "vf-phase-2": {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "grayish blue"
+            },
+            "line_in_file": {
+              "pattern": ""
+            },
+            "marker": {
+              "symbol": ""
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "grayish blue"
+            }
+          },
+          "x-velocity": {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "flush orange"
+            },
+            "line_in_file": {
+              "pattern": ""
+            },
+            "marker": {
+              "symbol": ""
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "flush orange"
+            }
+          },
+          "y-velocity": {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "lime green"
+            },
+            "line_in_file": {
+              "pattern": ""
+            },
+            "marker": {
+              "symbol": ""
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "lime green"
+            }
+          },
+          "z-velocity": {
+            "line": {
+              "pattern": "----",
+              "weight": 2,
+              "color": "classic pink"
+            },
+            "line_in_file": {
+              "pattern": ""
+            },
+            "marker": {
+              "symbol": ""
+            },
+            "marker_in_file": {
+              "symbol": "(*)",
+              "size": 0.3,
+              "color": "classic pink"
+            }
+          }
+        }
+      },
+      "report_files": {},
+      "report_plots": {},
+      "convergence_conditions": {
+        "convergence_reports": {},
+        "frequency": 1,
+        "condition": "all-conditions-are-met"
+      }
+    },
+    "cell_registers": {},
+    "initialization": {
+      "initialization_type": "hybrid",
+      "reference_frame": "relative",
+      "hybrid_init_options": {
+        "general_settings": {
+          "iter_count": 10,
+          "explicit_urf": [
+            1.0,
+            1.0
+          ],
+          "initialization_options": {
+            "initial_pressure": false,
+            "external_aero": false,
+            "const_velocity": false
+          }
+        },
+        "turbulent_setting": {
+          "averaged_turbulent_parameters": true
+        }
+      },
+      "patch": {
+        "vof_smooth_options": {
+          "patch_reconstructed_interface": true,
+          "use_volumetric_smoothing": true,
+          "smoothing_relaxation_factor": 0.5
+        }
+      },
+      "enable_profile_memory_flushing": false
+    },
+    "calculation_activity": {
+      "auto_save": {
+        "case_frequency": "if-case-is-modified",
+        "data_frequency": 0,
+        "root_name": "./purnanto-extended-rebuilt-rerun4",
+        "retain_most_recent_files": false,
+        "append_file_name_with": {
+          "file_suffix_type": "time-step",
+          "file_decimal_digit": 6
+        }
+      },
+      "execute_commands": {},
+      "solution_animations": {},
+      "case_modification": {
+        "enable_strategy": false
+      },
+      "poor_mesh_numerics": {
+        "register_based": {}
+      }
+    },
+    "run_calculation": {
+      "parameters": {
+        "iter_count": 5,
+        "reporting_interval": 1,
+        "profile_update_interval": 1
+      },
+      "transient_controls": {
+        "type": "Fixed",
+        "method": "User-Specified"
+      },
+      "options": {},
+      "data_sampling": {
+        "enabled": false
+      },
+      "compute_resources": {}
+    }
+  },
+  "solution_initialization_detail": {
+    "_state": {
+      "initialization_type": "hybrid",
+      "reference_frame": "relative",
+      "hybrid_init_options": {
+        "general_settings": {
+          "iter_count": 10,
+          "explicit_urf": [
+            1.0,
+            1.0
+          ],
+          "initialization_options": {
+            "initial_pressure": false,
+            "external_aero": false,
+            "const_velocity": false
+          }
+        },
+        "turbulent_setting": {
+          "averaged_turbulent_parameters": true
+        }
+      },
+      "patch": {
+        "vof_smooth_options": {
+          "patch_reconstructed_interface": true,
+          "use_volumetric_smoothing": true,
+          "smoothing_relaxation_factor": 0.5
+        }
+      },
+      "enable_profile_memory_flushing": false
+    },
+    "_child_names": [
+      "initialization_type",
+      "reference_frame",
+      "defaults",
+      "localized_turb_init",
+      "hybrid_init_options",
+      "patch",
+      "open_channel_auto_init",
+      "fmg",
+      "enable_profile_memory_flushing",
+      "species_selection"
+    ],
+    "_command_names": [
+      "initialize",
+      "compute_defaults",
+      "standard_initialize",
+      "hybrid_initialize",
+      "list_defaults",
+      "init_turb_vel_fluctuations",
+      "init_flow_statistics",
+      "show_iterations_sampled",
+      "show_time_sampled",
+      "dpm_reset",
+      "lwf_reset",
+      "init_lwf",
+      "init_acoustics_options",
+      "levelset_auto_init",
+      "reset_initialization"
+    ],
+    "initialization_type": {
+      "_state": "hybrid"
+    },
+    "reference_frame": {
+      "_state": "relative"
+    },
+    "defaults": {
+      "_state": null,
+      "_command_names": [
+        "create",
+        "delete",
+        "rename",
+        "list",
+        "list_properties",
+        "make_a_copy"
+      ]
+    },
+    "localized_turb_init": {
+      "_state": null,
+      "_child_names": [
+        "enabled",
+        "turbulent_intensity",
+        "turbulent_viscosity_ratio"
+      ],
+      "_command_names": []
+    },
+    "hybrid_init_options": {
+      "_state": {
+        "general_settings": {
+          "iter_count": 10,
+          "explicit_urf": [
+            1.0,
+            1.0
+          ],
+          "initialization_options": {
+            "initial_pressure": false,
+            "external_aero": false,
+            "const_velocity": false
+          }
+        },
+        "turbulent_setting": {
+          "averaged_turbulent_parameters": true
+        }
+      },
+      "_child_names": [
+        "general_settings",
+        "turbulent_setting",
+        "species_setting"
+      ],
+      "_command_names": [],
+      "general_settings": {
+        "_state": {
+          "iter_count": 10,
+          "explicit_urf": [
+            1.0,
+            1.0
+          ],
+          "initialization_options": {
+            "initial_pressure": false,
+            "external_aero": false,
+            "const_velocity": false
+          }
+        },
+        "_child_names": [
+          "iter_count",
+          "explicit_urf",
+          "initialization_options"
+        ],
+        "_command_names": []
+      },
+      "turbulent_setting": {
+        "_state": {
+          "averaged_turbulent_parameters": true
+        },
+        "_child_names": [
+          "averaged_turbulent_parameters",
+          "turbulent_intensity",
+          "viscosity_ratio"
+        ],
+        "_command_names": []
+      },
+      "species_setting": {
+        "_state": null,
+        "_child_names": [
+          "user_specified_species",
+          "species_fraction_mf",
+          "species_fraction"
+        ],
+        "_command_names": []
+      }
+    },
+    "patch": {
+      "_state": {
+        "vof_smooth_options": {
+          "patch_reconstructed_interface": true,
+          "use_volumetric_smoothing": true,
+          "smoothing_relaxation_factor": 0.5
+        }
+      },
+      "_child_names": [
+        "vof_smooth_options"
+      ],
+      "_command_names": [
+        "calculate_patch"
+      ],
+      "vof_smooth_options": {
+        "_state": {
+          "patch_reconstructed_interface": true,
+          "use_volumetric_smoothing": true,
+          "smoothing_relaxation_factor": 0.5
+        },
+        "_child_names": [
+          "patch_reconstructed_interface",
+          "use_volumetric_smoothing",
+          "smoothing_relaxation_factor"
+        ],
+        "_command_names": [
+          "execute_smoothing"
+        ]
+      }
+    },
+    "open_channel_auto_init": {
+      "_state": null,
+      "_child_names": [
+        "boundary_zone",
+        "open_channel_initialization_method",
+        "flat_init",
+        "wavy_surface_init"
+      ],
+      "_command_names": []
+    },
+    "fmg": {
+      "_state": null,
+      "_child_names": [
+        "fmg_courant_number",
+        "enable_fmg_verbose",
+        "viscous_terms",
+        "species_reactions",
+        "turbulent_viscosity_ratio"
+      ],
+      "_command_names": [
+        "fmg_initialize",
+        "customize",
+        "reset_to_defaults"
+      ]
+    },
+    "enable_profile_memory_flushing": {
+      "_state": false
+    },
+    "species_selection": {
+      "_state": null,
+      "_child_names": [
+        "selected_species"
+      ],
+      "_command_names": [
+        "add_boundary_species",
+        "remove_boundary_species"
+      ]
+    }
+  }
+}

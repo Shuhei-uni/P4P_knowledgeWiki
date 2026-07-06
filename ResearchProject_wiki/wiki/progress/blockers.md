@@ -2,6 +2,20 @@
 
 ## Active Blockers
 
+### BLK-008 | Setup 08b DPM result is dominated by incomplete tracks
+- Status: Active
+- First observed: 2026-07-02
+- Related run(s): `PURNANTO-08B-POSTPROCESS-2026-07-02`
+- Symptom: the refreshed live `08b` aggregate DPM summary reports `13012` incomplete particles and only `8` escaped particles for the current active 6-bin subset, with no trapped row printed in the summary output. The follow-up one-injection-at-a-time `dpm-sample` pass reproduces the same aggregate split and shows the completed sampled escape only in `injection-5-micron`, while the other active sampled bins remain fully incomplete.
+- Current interpretation: this is now the main DPM-quality blocker for setup `08b`. The current result suggests very low completed escaped mass and no sampled trapped mass, but tracking completion is still too poor to treat the DPM outcome as strong removal-efficiency evidence.
+
+### BLK-009 | Setup 08b steam-line carryover result is not backed by a closed whole-domain mass balance
+- Status: Active
+- First observed: 2026-07-02
+- Related run(s): `PURNANTO-08B-POSTPROCESS-2026-07-02`
+- Symptom: the live `08b` phase-flux post-processing gives steam-outlet liquid carryover `0.082132007 kg/s`, but the same report also shows a mixture imbalance of `116.063719 kg/s`, much larger than the steam-line carryover signal.
+- Current interpretation: this keeps the current `08b` flux result in the `scoped steam-line carryover diagnostic` category rather than allowing it to stand as a closed whole-separator efficiency result.
+
 ### BLK-007 | Fluent-exported split-inlet mesh does not yet preserve the exact required zone contract
 - Status: Active
 - First observed: 2026-06-10
@@ -59,12 +73,13 @@
 5. Inlet phase allocation may be too sharp or incorrectly oriented, creating an artificial steam jet or liquid blockage.
 6. Steam outlet geometry/intake behavior may be entraining liquid and causing excessive carryover.
 7. The steady solver is depleting the initialized lower water pool in the child case, producing transient-like liquid drainage inside a steady calculation; this is now out of scope for setup `07`.
-8. The project still needs residual/monitor stability and DPM fate counts before setup `07` can become report-quality efficiency evidence.
-9. The direct PyFluent rebuild path is now proven runnable, significantly hardened, and stable enough for a controlled `500`-iteration diagnostic, but pressure-outlet setting inactivity and residual-export behavior still need cleanup before treating it as a polished baseline automation workflow.
+8. Setup `08b` currently shows low steam-line liquid carryover on the saved field, but the whole-domain mixture imbalance is still much larger than the carryover signal.
+9. Setup `08b` DPM tracking currently finishes with overwhelmingly incomplete particles, so tracking completion rather than escaped mass is the main uncertainty.
+10. The direct PyFluent rebuild path is now proven runnable, significantly hardened, and stable enough for a controlled `500`-iteration diagnostic, but pressure-outlet setting inactivity and residual-export behavior still need cleanup before treating it as a polished baseline automation workflow.
 
 ## Recovery Plan
-1. For setup `07`, proceed with steam-carryover/DPM efficiency checks without reopening bottom/brine-outlet troubleshooting.
-2. Record residual/monitor stability for `PLS-PRO-2026-06-03-A`.
-3. Run DPM diameter checks at `5 um`, `10 um`, and `40-41 um`.
+1. For setup `08b`, keep the current flux result as a scoped steam-line carryover diagnostic unless a later pass closes the whole-domain mass balance more convincingly.
+2. Increase DPM tracking budget for the active 6-bin `08b` subset before trying to interpret DPM as stronger evidence.
+3. Keep the current one-injection sampled attribution as a diagnostic aid, but improve tracking completion or export stronger per-injection fate summaries before turning it into a report-facing claim.
 4. Keep `FFF-2` and `MWH-WP-2026-05-07-A` as historical troubleshooting references only unless the project scope later returns to brine-drainage or water-pool modelling.
 5. For the new one-inlet PyFluent path, keep `trial4` plus the completed `500`-iteration diagnostic as the active local baseline and clean up pressure-outlet setting order plus residual export before extending much further.

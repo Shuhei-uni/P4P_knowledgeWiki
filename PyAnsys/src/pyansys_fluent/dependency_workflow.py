@@ -21,6 +21,7 @@ FailureCategory = Literal[
 @dataclass
 class StepProbe:
     child_names: list[str] = field(default_factory=list)
+    object_names: list[str] = field(default_factory=list)
     command_names: list[str] = field(default_factory=list)
     allowed_values: list[str] = field(default_factory=list)
 
@@ -83,6 +84,16 @@ def safe_command_names(obj: Any) -> list[str]:
     return []
 
 
+def safe_object_names(obj: Any) -> list[str]:
+    for attr in ("object_names", "get_object_names"):
+        try:
+            value = getattr(obj, attr)
+            return _coerce_list(value() if callable(value) else value)
+        except Exception:
+            pass
+    return []
+
+
 def safe_allowed_values(obj: Any) -> list[str]:
     out: list[str] = []
     for attr in ("allowed_values", "allowed_values_list", "get_allowed_values"):
@@ -97,6 +108,7 @@ def safe_allowed_values(obj: Any) -> list[str]:
 def probe_object(obj: Any) -> StepProbe:
     return StepProbe(
         child_names=safe_child_names(obj),
+        object_names=safe_object_names(obj),
         command_names=safe_command_names(obj),
         allowed_values=safe_allowed_values(obj),
     )
@@ -159,4 +171,3 @@ def execute_step(root: Any, step: WorkflowStep) -> WorkflowStepResult:
 
 def execute_workflow(root: Any, steps: list[WorkflowStep]) -> list[WorkflowStepResult]:
     return [execute_step(root, step) for step in steps]
-

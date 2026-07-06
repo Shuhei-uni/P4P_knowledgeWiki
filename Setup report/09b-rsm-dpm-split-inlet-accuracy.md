@@ -1,129 +1,128 @@
-# RSM-DPM Split-Inlet Accuracy Setup Report
+# DPM Stochastic / Turbulence Sensitivity Setup Report
+
+Legacy filename note:
+
+- this file keeps the `09b-rsm-dpm-split-inlet-accuracy.md` filename for sequence continuity;
+- its current branch role is **not** the old `RSM-DPM` jump;
+- it is now the smaller one-way DPM stochastic / turbulence sensitivity branch.
 
 ## 1. Purpose
 
-Define setup `09b` as the stronger-accuracy child branch of setup `07`.
+Define setup `09b` as the second `09` branch after `09a`.
 
-This branch keeps the split-inlet phase package but upgrades the continuous-field and carryover workflow to:
-
-```text
-RSM + DPM
-```
-
-The target question is:
+This branch answers:
 
 ```text
-does stronger swirl-resolving turbulence closure materially improve separator accuracy
-and therefore droplet carryover prediction?
+does one-way DPM carryover interpretation change materially
+when turbulence-driven particle dispersion is enabled or bounded?
 ```
 
-## 2. Why This Is Better Than VOF For The Next Run
+This branch exists because deterministic one-way DPM may be too clean or too optimistic for fine droplets, but that uncertainty should be tested before changing the whole carrier-flow model.
 
-This branch is better than the retired VOF `09` idea because:
+## 2. Parent Authority
 
-1. the recent experiment-backed separator paper in this repo uses transient `RSM-DPM`, not `VOF`;
-2. your separator is strongly swirling, so turbulence anisotropy is a more defensible concern than sharp-interface transport alone;
-3. `DPM` still answers droplet fate directly;
-4. this branch can improve both the resolved flow field and the carryover interpretation at the same time.
+Parent branch rule:
 
-Main paper support:
+- inherit from the latest accepted simpler branch;
+- for `09b`, that parent should normally be the accepted `09a` state, not raw setup `08b`.
 
-- [chen-2025-straight-through-cyclone-water-separator](../CFD_wiki/wiki/sources/chen-2025-straight-through-cyclone-water-separator.md)
-- [pointon-2009-geothermal-separator-sizing-cfd-validation](../CFD_wiki/wiki/sources/pointon-2009-geothermal-separator-sizing-cfd-validation.md)
-- [separator-flow-physics](../CFD_wiki/wiki/physics-basis/separator-flow-physics.md)
+That means `09b` should inherit the accepted:
 
-## 3. Parent Setup Authority
+- mesh;
+- carrier-field state;
+- droplet set;
+- DPM step limits;
+- particle count;
+- wall-fate interpretation.
 
-Use setup `07` for:
+## 3. Dynamic Setting Rule
 
-- geometry;
-- inlet split;
-- phase mass-flow target;
-- outlet role;
-- project scope and reporting interpretation.
+Settings in `09b` must be changed dynamically to fit the latest accepted findings from `08b` and `09a`.
 
-Only the following core changes are intentional:
+Only one intentional uncertainty should be changed here:
 
-1. turbulence closure: `RNG k-epsilon` -> `RSM`
-2. time mode: steady baseline may be retained first or upgraded to transient if the chosen Fluent workflow requires it for stability and comparison discipline
-3. add `DPM` after continuous-field stabilization
+```text
+particle-dispersion treatment inside one-way DPM
+```
+
+Do not silently re-open other uncertainties in the same branch.
 
 ## 4. Model Stack
 
 | Panel | Setting | Value |
 |---|---|---|
-| General | Solver | `Pressure-Based` |
-| General | Time | start with the branch-specific continuous-field mode chosen for the available Fluent workflow; if you use transient, record the timestep explicitly |
-| Models > Multiphase | Model | `Mixture` |
-| Models > Viscous | Turbulence | `RSM` |
-| Models > Energy | Energy | `Off` |
-| Models > Discrete Phase | DPM | `On` after continuous-field stabilization |
+| General | Solver | inherit accepted parent |
+| General | Time | inherit accepted parent |
+| Models > Multiphase | Model | inherit accepted parent |
+| Models > Viscous | Turbulence | inherit accepted parent carrier model |
+| Models > Energy | Energy | inherit accepted parent |
+| Models > Discrete Phase | DPM | `On` |
 
-Practical note:
+Interpretation:
 
-- this branch is about improving the swirling carrier field first, not about jumping directly to wall-film modeling.
+- keep one-way DPM;
+- keep the accepted carrier-flow model unchanged;
+- do not upgrade to `RSM` in this branch unless `RSM` was already accepted earlier as part of the parent state;
+- do not add wall film here;
+- do not add coupling here.
 
-## 5. Inlet and Boundary Conditions
+## 5. What Changes In This Branch
 
-Keep the same split-inlet mass package as setup `07`:
+Change only the DPM particle-dispersion treatment needed for sensitivity testing.
 
-| Boundary | Type | Velocity | Liquid VF | Steam VF |
-|---|---|---:|---:|---:|
-| `inlet_liquid_outer` | `Velocity Inlet` | `27.118 m/s` | `1.0` | `0.0` |
-| `inlet_steam_inner` | `Velocity Inlet` | `27.118 m/s` | `0.0` | `1.0` |
+Typical comparisons:
 
-Keep:
+1. deterministic vs `DRW`;
+2. one accepted stochastic configuration vs another bounded alternative if needed.
 
-- the same pressure-outlet role;
-- the same gravity direction;
-- the same material values;
-- the same physical scope unless a separate child diagnostic is created.
+Keep fixed unless directly justified:
 
-## 6. DPM Definition
+- droplet sizes;
+- injection location;
+- particle density;
+- step limit;
+- step-length factor;
+- particle count;
+- wall-fate interpretation.
 
-Use the same first droplet-size sweep logic as `09a` unless a narrower validation comparison is preferred:
+## 6. Recommended Comparison Set
 
-| Diameter | Reason |
-|---:|---|
-| `5 um` | fine-droplet sensitivity |
-| `10 um` | Purnanto baseline |
-| `14.2 um` | Harwell-inferred median marker |
-| `40-41 um` | larger-droplet marker |
+Use the smallest set that answers the question.
 
-DPM boundary interpretation:
+Recommended start:
 
-| Boundary role | DPM fate |
-|---|---|
-| steam outlet | `escape` |
-| liquid collection region | `trap` where physically intended |
-| walls | explicitly document chosen wall behavior |
+- `5 um` deterministic vs `5 um` stochastic;
+- `10 um` deterministic vs `10 um` stochastic.
 
-## 7. Why 09b May Be Better Than 09a
+Add `40-41 um` only if you need to show whether larger droplets are insensitive to the same change.
 
-Choose `09b` over `09a` if you suspect the current issue is not just droplet size, but the resolved swirl field itself.
+## 7. Outputs To Record
 
-Signals that favor `09b`:
+For each compared case, record:
 
-1. separator core pressure or vortex structure still looks suspicious under `RNG k-epsilon`;
-2. small droplet escape seems too sensitive to the underlying resolved flow field;
-3. you want the strongest recent separator-method anchor available in the repo.
+1. `injected`
+2. `escaped`
+3. `trapped`
+4. `incomplete`
+5. particle-dispersion setting
+6. carryover interpretation difference relative to deterministic one-way DPM
 
-## 8. Main Risk
+## 8. Success Signal
 
-`09b` costs more and converges harder than `09a`.
+`09b` is successful if it shows one of these clearly:
 
-It is not the right first run if:
+1. stochastic dispersion does not materially change the branch conclusion, so deterministic one-way DPM is adequate;
+2. stochastic dispersion does change the conclusion enough that the uncertainty must be carried forward explicitly.
 
-- you only need a quick carryover ranking;
-- the current flow field already looks acceptable;
-- the real missing mechanism is likely wall-film re-entrainment rather than turbulence anisotropy.
+## 9. Failure Signal
 
-In that case, use `09a` or go directly to `09c`.
+`09b` is not enough if:
 
-## 9. Success Criterion
+1. the result is still dominated by uncertain droplet loading rather than dispersion treatment;
+2. one-way DPM still appears structurally insufficient because particles should feed back into the carrier flow;
+3. wall behavior, not dispersion, now looks like the dominant unresolved mechanism.
 
-`09b` is worthwhile only if it improves at least one of these materially over `09a`/`07`:
+If that happens:
 
-1. internal swirl/core-pressure plausibility,
-2. stability of steam-outlet liquid carryover interpretation,
-3. droplet-fate credibility across the tested size range.
+- move to `09c` if coupling is the next real uncertainty;
+- defer wall-film and re-entrainment questions to the later `10` family.

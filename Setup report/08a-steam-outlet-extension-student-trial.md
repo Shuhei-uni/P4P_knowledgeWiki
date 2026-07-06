@@ -6,7 +6,7 @@ Define a trial geometry branch from:
 
 - [07-pure-phase-split-actual-area.md](07-pure-phase-split-actual-area.md)
 
-This setup keeps the same Purnanto spiral-inlet separator geometry and the same pure liquid / pure steam split-inlet setup from `07`, except for a targeted steam-outlet geometry change:
+This setup keeps the same broad separator concept and the same pure liquid / pure steam split-inlet setup from `07`, but uses the later `purnantov2` geometry branch with a targeted steam-outlet geometry change:
 
 - extend the central steam outlet pipe so the `steam_outlet` pressure-outlet boundary is placed farther downstream, near the bottom end of the extended outlet path;
 - require flow that enters the central outlet pipe to travel along the outlet extension before reaching the boundary condition;
@@ -14,14 +14,20 @@ This setup keeps the same Purnanto spiral-inlet separator geometry and the same 
 
 This is a student-edition trial branch. Treat it as diagnostic until mesh quality, convergence, and flux stability are recorded.
 
+Geometry naming note:
+
+- use `purnanto` for the closer paper-style geometry where the steam-outlet boundary sits at the outlet entrance;
+- use `purnantov2` for this later project geometry branch, where the outlet passage extends downward and the boundary is placed downstream;
+- `purnantov2` also includes the later project cleanup to the inlet spiral and dish-head reconstruction recorded in `../ResearchProject_wiki/wiki/technical/v2-purnanto-spiral-inlet-geometry.md`.
+
 ## 2. Setup Identity
 
 | Item | Value |
 |---|---|
 | Setup order | `08a` |
 | Parent setup | `07-pure-phase-split-actual-area.md` |
-| Geometry family | Purnanto rectangular 90-degree spiral-inlet BOC separator |
-| Main retained feature | same separator body and same spiral inlet as Purnanto baseline |
+| Geometry family | `purnantov2` rectangular 90-degree spiral-inlet BOC separator |
+| Main retained feature | same broad separator body and spiral-inlet concept as the Purnanto baseline, but with later project geometry cleanup |
 | Inlet representation | same pure liquid / pure steam split inlet as setup `07` |
 | New geometry change | extended central steam outlet pipe / outlet path |
 | Outlet-boundary intent | place `steam_outlet` boundary downstream of the outlet-pipe entrance, not directly at the top intake opening |
@@ -30,9 +36,10 @@ This is a student-edition trial branch. Treat it as diagnostic until mesh qualit
 
 Evidence labels:
 
-- `User-specified`: same setup as Purnanto's spiral inlet, with a split two-phase inlet.
+- `User-specified`: same setup intent as Purnanto's spiral inlet, with a split two-phase inlet.
 - `User-specified`: actual separator geometry remains the same except earlier test setups with extended inlet pipe.
 - `User-specified`: current trial extends the steam outlet so the pressure-outlet boundary is not located at the immediate entrance of the outlet pipe.
+- `User-specified`: this later geometry branch also adjusts the inlet spiral and dish-head reconstruction compared with the closer paper-parity geometry label now called `purnanto`.
 - `Inferred`: this branch tests outlet-boundary placement sensitivity, not a new separator design claim.
 - `Assumed`: all setup `07` solver, inlet, material, and DPM settings remain unchanged unless this report explicitly says otherwise.
 
@@ -40,10 +47,11 @@ Evidence labels:
 
 Change only the steam outlet geometry and boundary placement:
 
-1. Keep the separator vessel, spiral inlet, and two-zone split inlet from setup `07`.
+1. Keep the setup `07` split-inlet boundary package.
 2. Add or extend the central steam outlet pipe so the pressure-outlet boundary face is farther downstream from the point where flow first enters the outlet pipe.
 3. Place the named `steam_outlet` pressure-outlet boundary at the end of the extended outlet path.
 4. Keep the opening from the separator core into the central outlet pipe as internal flow passage geometry, not as the external boundary-condition face.
+5. Use the later `purnantov2` geometry interpretation for the spiral inlet and dish-head region rather than assuming strict point-for-point parity with the earlier `purnanto` label.
 
 Do not change the inlet split, phase velocities, phase volume fractions, turbulence model, mixture model, material properties, gravity, discretization schemes, or DPM interpretation rules in the same trial. If another setting must change because of student-edition limits, record it as a limitation before using the result for comparison.
 
@@ -111,7 +119,7 @@ Lookup context:
 ## 7. Geometry-Build Checklist
 
 1. Start from the setup `07` geometry definition.
-2. Preserve the Purnanto spiral inlet and main separator vessel dimensions.
+2. Preserve the project-approved `purnantov2` separator body dimensions and spiral-inlet concept.
 3. Preserve the two separate inlet faces:
    - `inlet_liquid_outer`;
    - `inlet_steam_inner`.
