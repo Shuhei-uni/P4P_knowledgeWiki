@@ -4,6 +4,10 @@ Use this kit to prepare your laptop now, before you have access to the PC with A
 
 The folder has been reorganized around one rule: Fluent automation is a dependency-ordered state machine, not a flat Python API. If syntax, nesting, or call-order problems appear, start with the execution contract below rather than editing the case scripts ad hoc.
 
+The current operating split is strict:
+- setup scripts create or modify only `.cas.h5`
+- `scripts/setup/save_data_after_iterations.py` is the standard path for loading that case, hybrid-initializing it, running iterations, and writing only `.dat.h5`
+
 Recommended local target:
 
 ```text
@@ -67,7 +71,7 @@ Execution sequence:
 ```text
 connect
 -> verify remote inputs
--> load mesh/case/data
+-> load mesh or source case
 -> enable parent model
 -> reacquire object
 -> inspect children/options
@@ -75,6 +79,19 @@ connect
 -> read back value
 -> classify failure
 -> choose settings API / TUI / manual fallback
+-> write `.cas.h5`
+```
+
+Run sequence after setup creation:
+
+```text
+connect
+-> verify remote `.cas.h5`
+-> load case only
+-> hybrid initialize
+-> iterate
+-> write derived `name_X.dat.h5`
+-> verify Fluent can see the written data file
 ```
 
 ## Current script layout
@@ -83,7 +100,10 @@ connect
 - `scripts/inspection/inspect_fluent_session.py`: non-mutating tree inspection
 - `src/pyansys_fluent/common.py`: shared remote/session/path helpers
 - `src/pyansys_fluent/dependency_workflow.py`: dependency-aware step runner and failure classifier
+- `src/pyansys_fluent/extraction.py`: shared read-mostly extraction helpers for live/offline setup capture
 - `src/pyansys_fluent/setup_common.py`: shared setup-name, boundary, and remap helpers
+- `src/pyansys_fluent/setup_io.py`: shared setup/run file IO helpers including case-only loading
+- `scripts/setup/save_data_after_iterations.py`: focused runner from `.cas.h5` to `name_X.dat.h5`
 - `scripts/setup/setup07_rebuild_run.py`: rebuild setup 07 on a target mesh
 - `scripts/setup/setup09a_dpm_split_inlet_carryover.py`: build setup 09a from the setup 07 carrier-field scaffold
 - `scripts/setup/setup_vof_ewf_from_existing_case.py`: derive a VOF + EWF case from an existing case/data pair
@@ -95,7 +115,7 @@ Two separate extractor paths are now scaffolded:
 
 - `extractors/python/`: offline `.cas.h5` / `.dat.h5` inspection with `h5py`
 - `extractors/python/`: offline legacy `.cas` and `.dat` inspection, plus HDF5 support where available
-- `extractors/fluent/`: live Fluent/PyFluent export skeleton for on-site use
+- `extractors/fluent/`: live Fluent/PyFluent export tools, including a fuller hybrid live+offline bundle exporter
 
 Recommended order:
 

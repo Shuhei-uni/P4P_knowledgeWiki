@@ -13,7 +13,10 @@
     "indices/failure_mode_index.json",
     "indices/path_dependency_index.json",
     "docs/documentation_map.md",
-    "templates/dependency_aware_setter_pseudocode.py"
+    "templates/dependency_aware_setter_pseudocode.py",
+    "purnanto_enthalpy1680_from_mesh.yaml",
+    "purnanto_enthalpy1520_from_mesh.yaml",
+    "purnanto_enthalpy1760_from_mesh.yaml"
   ],
   "model_files": {
     "multiphase": {
