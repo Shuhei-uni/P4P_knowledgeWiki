@@ -44,10 +44,10 @@ def safe_get_state(obj: Any, label: str) -> Any:
 def try_action(label: str, func: Callable[[], Any], *, critical: bool = False) -> bool:
     try:
         func()
-        print(f"{label}: OK")
+        print(f"{label}: OK", flush=True)
         return True
     except Exception as exc:
-        print(f"{label}: FAILED -> {exc}")
+        print(f"{label}: FAILED -> {exc}", flush=True)
         if critical:
             raise RuntimeError(f"{label} failed") from exc
         return False
@@ -59,5 +59,4 @@ def write_json_snapshot(path_text: str, payload: Mapping[str, Any]) -> None:
     path = Path(path_text).expanduser().resolve()
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, indent=2, default=str), encoding="utf-8")
-    print(f"snapshot_json: {path}")
-
+    print(f"snapshot_json: {path}", flush=True)

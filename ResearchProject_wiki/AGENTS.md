@@ -47,6 +47,14 @@ Treat `CFD_wiki/raw/informit.366967552564856.pdf` as the key baseline reconstruc
 - `template/`: reusable markdown templates.
 - `AGENTS.md`: operational protocol (this file).
 
+## Cross-System Boundaries
+- `ResearchProject_wiki` owns project interpretation, run progress, technical notes, and human-readable V&V sign-off.
+- `CFD_wiki` owns reusable CFD methods, literature extraction, and generic Fluent guidance.
+- `Setup report/` owns concrete setup-branch identity, ordered lineage, and report-facing setup snapshots.
+- `PyAnsys/` owns executable automation, machine-readable validation targets, and claim-gate logic.
+
+Do not duplicate full setup lineage in this wiki. Link to `Setup report/` and summarize only what the project needs to remember.
+
 ## Knowledge Separation Architecture (Mandatory)
 To avoid data dilution, separate information into dedicated layers.
 
@@ -77,7 +85,17 @@ Use for execution tracking:
 - blockers and recovery actions,
 - milestone checkpoint status.
 
-### D. Literature Layer (`wiki/sources/`, `wiki/literature/`, `wiki/synthesis/`)
+### D. Verification And Validation Layer (`wiki/vnv/`)
+Use for project-owned verification and validation records:
+- claim policy and claim classes;
+- machine-target interpretation and target selection notes;
+- numerical verification reports;
+- external validation reports;
+- final human sign-off of allowable claim strength.
+
+Do not use this layer for generic CFD method explanations that belong in `CFD_wiki`, and do not use it as a replacement for setup-branch lineage in `Setup report/`.
+
+### E. Literature Layer (`wiki/sources/`, `wiki/literature/`, `wiki/synthesis/`)
 Use for source extraction and cross-paper synthesis.
 
 ## Required Wiki Files
@@ -94,6 +112,9 @@ Maintain these as the wiki grows:
 - `wiki/model/baseline-cfd.md`
 - `wiki/model/inlet-regimes.md`
 - `wiki/model/validation.md`
+- `wiki/vnv/index.md`
+- `wiki/vnv/policy.md`
+- `wiki/vnv/signoff-log.md`
 - `wiki/gaps/open-questions.md`
 - `wiki/synthesis/<topic>.md`
 
@@ -109,7 +130,9 @@ When any modelling work is performed:
 2. Add one run entry to `wiki/progress/experiments.md`.
 3. If blocked, update `wiki/progress/blockers.md` with ranked hypotheses.
 4. Link the run to technical pages containing settings and evidence.
-5. Append one entry in `wiki/log.md`.
+5. If the run affects claim strength, update or create the matching record under `wiki/vnv/`.
+6. If automation produced machine-readable targets or claim-gate outputs, link to the relevant `PyAnsys` path from the human-readable V&V record.
+7. Append one entry in `wiki/log.md`.
 
 ## Experiment Log Schema (Mandatory)
 Each run entry in `wiki/progress/experiments.md` must include:

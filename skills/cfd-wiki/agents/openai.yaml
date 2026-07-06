@@ -1,0 +1,4 @@
+interface:
+  display_name: "CFD Wiki"
+  short_description: "Search reusable CFD wiki knowledge."
+  default_prompt: "Use $cfd-wiki to answer a Fluent setup or CFD literature lookup question."

@@ -38,10 +38,18 @@ For this project, be especially careful with:
 - Energy-dependent fields
 - EWF wall/DPM coupling paths
 
-Canonical execution loop:
+Canonical execution loop for setup construction:
 
 ```text
 connect -> verify inputs -> enable parent -> reacquire object -> inspect children/options -> set -> read back -> classify failure -> choose fallback
 ```
+
+Case-building scripts should end by writing `.cas.h5` only.
+
+For actual initialization, iteration, and data writing, use the focused runner:
+- `../../scripts/setup/save_data_after_iterations.py`
+- input: remote `.cas.h5` path and iteration count
+- output: derived `name_X.dat.h5`
+- loader helper: `../../src/pyansys_fluent/setup_io.py::load_case_only`
 
 Do not keep rerunning the full setup just because a non-critical deep child path fails. Isolate the failure in a minimal sandbox when possible, log it, use TUI fallback if available, and save a manual-fix checklist if needed.

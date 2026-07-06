@@ -2,12 +2,17 @@
 
 ## Purpose
 
-Record the working geometry dimensions and reconstruction assumptions for the current no-brine-outlet spiral-inlet branch.
+Record the working geometry dimensions, naming, and reconstruction assumptions for the current `purnantov2` no-brine-outlet spiral-inlet branch.
 
 This page is a compact project-specific geometry note. It keeps the main Purnanto-derived dimensions together with the later reconstruction calculations used for:
 
 - the spiral-inlet scroll curvature; and
 - the top vessel head / dish head approximation.
+
+It also records the project naming rule now used for the two related geometry variants:
+
+- `purnanto`
+- `purnantov2`
 
 It is not a CAD procedure and it does not replace the reusable source extraction in `CFD_wiki`.
 
@@ -19,9 +24,46 @@ Primary linked context:
 
 ## Scope
 
-- Geometry branch: no-brine-outlet spiral-inlet separator
-- Main use: preserve the dimensions, simple construction logic, and calculation trail behind the current reconstruction
+- Geometry branch: `purnantov2` no-brine-outlet spiral-inlet separator
+- Main use: preserve the dimensions, naming, simple construction logic, and calculation trail behind the current reconstruction
 - Out of scope: CAD click-paths, meshing steps, Fluent settings, or claims that every reconstructed curve is explicitly reported in the paper
+
+## Geometry Naming Rule
+
+From this point in the project, use:
+
+- `purnanto`
+  - the geometry intended to match the original Purnanto spiral-inlet separator more directly;
+  - steam-outlet boundary condition placed at the entrance of the steam outlet in the original paper-style interpretation.
+- `purnantov2`
+  - the later project geometry recorded on this page;
+  - steam-outlet pipe meshed farther downward so the outlet boundary condition is placed downstream near the bottom of the separator rather than at the immediate steam-outlet entrance;
+  - local inlet spiral and vessel dish-head reconstruction adjusted to make the project geometry more robust than the earlier spline-style version.
+
+Interpretation note:
+
+- `purnanto` is the closer paper-parity geometry label.
+- `purnantov2` is the later cleaned and extended project geometry label.
+- current project branch mapping:
+  - setups `04`, `05`, `06`, and `07` use `purnanto` geometry;
+  - setup `08` and later geometry branches use `purnantov2` unless a setup report explicitly overrides that mapping.
+- inlet boundary-condition style is tracked separately from geometry naming.
+
+## High-Level Difference Between `purnanto` and `purnantov2`
+
+The current project distinction is:
+
+1. steam outlet boundary placement
+   - `purnanto`: outlet boundary at the steam-outlet entrance;
+   - `purnantov2`: outlet boundary placed downstream after a longer meshed outlet passage.
+2. steam outlet meshing extent
+   - `purnanto`: no extra downstream outlet-pipe passage beyond the direct boundary placement interpretation;
+   - `purnantov2`: outlet pipe meshed down toward the bottom of the separator before the boundary.
+3. local reconstruction detail
+   - `purnanto`: earlier direct paper-style geometry label;
+   - `purnantov2`: spiral inlet and dish-head region adjusted into a more robust project geometry.
+
+`Assumed`: both names are project geometry labels. They should not be treated as proof that the exact original Purnanto CAD definition is fully known.
 
 ## Evidence Labels
 
@@ -155,6 +197,8 @@ KR = 369.18 mm
 
 `Assumed`: the current project reconstruction therefore uses a simple tangent-continuous `3`-arc approximation for the outer wall, while the inner wall is kept straight and perpendicular to the inlet face with no added curvature.
 
+`User-specified`: this cleaned reconstruction is now part of the `purnantov2` geometry identity rather than an unnamed local variation.
+
 ### Coordinate system and main assumptions
 
 Top-view construction plane:
@@ -230,6 +274,7 @@ Practical interpretation:
 - `Assumed`: this is a geometry-rebuild aid, not a proof of the paper's exact original scroll profile.
 - `Inferred`: the approximation is still consistent with the paper's qualitative claim that the spiral inlet creates a smoother transition into rotation than the tangential alternatives.
 - `Assumed`: if later CFD sensitivity shows strong dependence on the inner-wall treatment or local curvature near merge point `M`, this page should be revised with the updated curve definition rather than editing the values silently.
+- `User-specified`: compared with the `purnanto` geometry label, `purnantov2` keeps the same broad separator concept but uses a more deliberate local reconstruction for the inlet spiral and dish-head region.
 
 ## Compact Construction Summary
 
@@ -259,7 +304,8 @@ Practical interpretation:
 
 Use this page when the project needs:
 
-- one place to look up the current no-brine-outlet spiral-inlet dimensions;
+- one place to look up the current `purnantov2` no-brine-outlet spiral-inlet dimensions;
+- the naming rule for `purnanto` versus `purnantov2`;
 - the centre points and radii behind the current scroll reconstruction; or
 - the logic behind the current top-head approximation.
 
