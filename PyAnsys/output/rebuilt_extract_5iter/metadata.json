@@ -1,0 +1,13 @@
+{
+  "archive_name": "rebuilt_extract_5iter",
+  "exported_at_utc": "2026-06-11T09:57:50+00:00",
+  "fluent_version": "Ansys Fluent 2026 R1",
+  "source_case": "C:\\Users\\Shuhei Yokkaichi\\Documents\\CFD\\Test case\\purnanto-extended-rebuilt.cas.h5",
+  "source_data": "C:\\Users\\Shuhei Yokkaichi\\Documents\\CFD\\Test case\\purnanto-extended-rebuilt.dat.h5",
+  "report_ref": "",
+  "notes_label": "",
+  "mesh_and_runtime": {
+    "iterations": 5,
+    "cwd": null
+  }
+}

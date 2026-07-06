@@ -1,0 +1,285 @@
+[
+  {
+    "source_file": "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/data/Enthalpy_1600/112_micron.sum",
+    "fate_rows": [
+      {
+        "fate": "Trapped - Zone 50059",
+        "number": 4422,
+        "elapsed_time": {
+          "min": 1.331,
+          "max": 2.323,
+          "avg": 1.596,
+          "std_dev": 0.1673
+        },
+        "injection_index": {
+          "min": "injection-112-micron 7107",
+          "max": "injection-112-micron 921"
+        }
+      }
+    ],
+    "mass_transfer_rows": [
+      {
+        "fate": "Trapped - Zone 50059",
+        "mass_flow": {
+          "initial": 0.5992,
+          "final": 0.5992,
+          "change": 0.0
+        }
+      }
+    ]
+  },
+  {
+    "source_file": "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/data/Enthalpy_1600/1631_micron.sum",
+    "fate_rows": [
+      {
+        "fate": "Trapped - Zone 50059",
+        "number": 5329,
+        "elapsed_time": {
+          "min": 1.034,
+          "max": 2.443,
+          "avg": 1.365,
+          "std_dev": 0.2111
+        },
+        "injection_index": {
+          "min": "injection-1631-micron 1388",
+          "max": "injection-1631-micron 10971"
+        }
+      }
+    ],
+    "mass_transfer_rows": [
+      {
+        "fate": "Trapped - Zone 50059",
+        "mass_flow": {
+          "initial": 10.82,
+          "final": 10.82,
+          "change": 0.0
+        }
+      }
+    ]
+  },
+  {
+    "source_file": "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/data/Enthalpy_1600/168_micron.sum",
+    "fate_rows": [
+      {
+        "fate": "Trapped - Zone 50059",
+        "number": 4435,
+        "elapsed_time": {
+          "min": 1.334,
+          "max": 2.221,
+          "avg": 1.558,
+          "std_dev": 0.1619
+        },
+        "injection_index": {
+          "min": "injection-168-micron 1056",
+          "max": "injection-168-micron 10952"
+        }
+      }
+    ],
+    "mass_transfer_rows": [
+      {
+        "fate": "Trapped - Zone 50059",
+        "mass_flow": {
+          "initial": 0.601,
+          "final": 0.601,
+          "change": 0.0
+        }
+      }
+    ]
+  },
+  {
+    "source_file": "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/data/Enthalpy_1600/28_micron.sum",
+    "fate_rows": [
+      {
+        "fate": "Trapped - Zone 50059",
+        "number": 4462,
+        "elapsed_time": {
+          "min": 1.144,
+          "max": 2.386,
+          "avg": 1.617,
+          "std_dev": 0.24
+        },
+        "injection_index": {
+          "min": "injection-0 3141",
+          "max": "injection-0 2216"
+        }
+      }
+    ],
+    "mass_transfer_rows": [
+      {
+        "fate": "Trapped - Zone 50059",
+        "mass_flow": {
+          "initial": 0.2419,
+          "final": 0.2419,
+          "change": 0.0
+        }
+      }
+    ]
+  },
+  {
+    "source_file": "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/data/Enthalpy_1600/348_micron.sum",
+    "fate_rows": [
+      {
+        "fate": "Trapped - Zone 50059",
+        "number": 4549,
+        "elapsed_time": {
+          "min": 1.277,
+          "max": 2.208,
+          "avg": 1.498,
+          "std_dev": 0.1696
+        },
+        "injection_index": {
+          "min": "injection-348-micron 2194",
+          "max": "injection-348-micron 2519"
+        }
+      }
+    ],
+    "mass_transfer_rows": [
+      {
+        "fate": "Trapped - Zone 50059",
+        "mass_flow": {
+          "initial": 7.391,
+          "final": 7.391,
+          "change": 0.0
+        }
+      }
+    ]
+  },
+  {
+    "source_file": "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/data/Enthalpy_1600/562_micron.sum",
+    "fate_rows": [
+      {
+        "fate": "Trapped - Zone 50059",
+        "number": 4727,
+        "elapsed_time": {
+          "min": 1.163,
+          "max": 2.406,
+          "avg": 1.465,
+          "std_dev": 0.1849
+        },
+        "injection_index": {
+          "min": "injection-562-micron 3535",
+          "max": "injection-562-micron 9285"
+        }
+      }
+    ],
+    "mass_transfer_rows": [
+      {
+        "fate": "Trapped - Zone 50059",
+        "mass_flow": {
+          "initial": 9.602,
+          "final": 9.602,
+          "change": 0.0
+        }
+      }
+    ]
+  },
+  {
+    "source_file": "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/data/Enthalpy_1600/56_micron.sum",
+    "fate_rows": [
+      {
+        "fate": "Trapped - Zone 50059",
+        "number": 4438,
+        "elapsed_time": {
+          "min": 1.092,
+          "max": 2.632,
+          "avg": 1.609,
+          "std_dev": 0.215
+        },
+        "injection_index": {
+          "min": "injection-56-micron 10050",
+          "max": "injection-56-micron 12220"
+        }
+      }
+    ],
+    "mass_transfer_rows": [
+      {
+        "fate": "Trapped - Zone 50059",
+        "mass_flow": {
+          "initial": 0.3004,
+          "final": 0.3004,
+          "change": 0.0
+        }
+      }
+    ]
+  },
+  {
+    "source_file": "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/data/Enthalpy_1600/5_micron.sum",
+    "fate_rows": [
+      {
+        "fate": "Trapped - Zone 50059",
+        "number": 4382,
+        "elapsed_time": {
+          "min": 1.117,
+          "max": 2.309,
+          "avg": 1.583,
+          "std_dev": 0.2619
+        },
+        "injection_index": {
+          "min": "injection-5-micron 3991",
+          "max": "injection-5-micron 740"
+        }
+      },
+      {
+        "fate": "Escaped - Zone 30048",
+        "number": 10008,
+        "elapsed_time": {
+          "min": 6.687,
+          "max": 8.067,
+          "avg": 7.132,
+          "std_dev": 0.1557
+        },
+        "injection_index": {
+          "min": "injection-5-micron 5966",
+          "max": "injection-5-micron 921"
+        }
+      }
+    ],
+    "mass_transfer_rows": [
+      {
+        "fate": "Trapped - Zone 50059",
+        "mass_flow": {
+          "initial": 0.05786,
+          "final": 0.05786,
+          "change": 0.0
+        }
+      },
+      {
+        "fate": "Escaped - Zone 30048",
+        "mass_flow": {
+          "initial": 0.1321,
+          "final": 0.1321,
+          "change": 0.0
+        }
+      }
+    ]
+  },
+  {
+    "source_file": "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/data/Enthalpy_1600/844_micron.sum",
+    "fate_rows": [
+      {
+        "fate": "Trapped - Zone 50059",
+        "number": 4913,
+        "elapsed_time": {
+          "min": 1.084,
+          "max": 2.715,
+          "avg": 1.422,
+          "std_dev": 0.1971
+        },
+        "injection_index": {
+          "min": "injection-844-micron 1064",
+          "max": "injection-844-micron 9071"
+        }
+      }
+    ],
+    "mass_transfer_rows": [
+      {
+        "fate": "Trapped - Zone 50059",
+        "mass_flow": {
+          "initial": 9.98,
+          "final": 9.98,
+          "change": 0.0
+        }
+      }
+    ]
+  }
+]

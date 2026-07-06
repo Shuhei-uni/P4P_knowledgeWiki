@@ -1,0 +1,191 @@
+project: purnanto_enthalpy1760_from_mesh
+goal: "Rebuild Purnanto's enthalpy 1760 Fluent setup from the mesh using server id 1."
+status: "mesh-rebuild blueprint"
+
+inputs:
+  server_id: "1"
+  target_mesh: 'C:\Users\syok443\Documents\Purnanto\Mesh 3326002 Nodes.msh'
+  reference_case: 'C:\Users\syok443\Documents\Purnanto\enthalpy1760.cas'
+  reference_data: 'C:\Users\syok443\Documents\Purnanto\enthalpy1760.dat'
+  live_archive: 'PyAnsys/cases/actual_setup_archives/purnanto-enthalpy1760-live-extract'
+  dpm_source_dir: 'C:\Users\syok443\Documents\Purnanto\Particle tracking enthalpy1600\Injection_Files'
+  dpm_source_notes:
+    - "The 1760 live export did not fully resolve the injection subtree."
+    - "Use the enthalpy 1600 particle-tracking folder to recover or import the per-injection settings if those injections are shared across branches."
+
+exact_carrier_setup:
+  solver:
+    dimension: "3d"
+    formulation: "pressure-based"
+    turbulence_model: "RNG k-epsilon"
+    multiphase_model: "mixture"
+    number_of_phases: 2
+    energy_enabled: false
+    species_model: "off"
+  phase_materials:
+    phase-1: "water-vapor-at-psep"
+    phase-2: "water-liquid-at-psep"
+  materials:
+    fluid:
+      air:
+        density: 1.093999981880188
+        viscosity: 1.789400084817316e-05
+      water-liquid-at-psep:
+        density: 881.2108764648438
+        viscosity: 0.0001455440069548786
+      water-vapor-at-psep:
+        density: 5.797433853149414
+        viscosity: 1.520620025985409e-05
+  boundary_inventory:
+    interior:
+      - interior-fluid
+    mass_flow_inlet:
+      - inlet
+    pressure_outlet:
+      - outlet
+    wall:
+      - bottom
+      - wall-fluid
+    non_reflecting_bc:
+      - general_nrbc
+      - turbo_sepcific_nrbc
+    perforated_wall:
+      - setup_method
+      - model_setup
+  cell_zones:
+    fluid:
+      - fluid
+
+exact_dpm_global_state:
+  general_settings:
+    interaction_enabled: false
+    contour_plotting: "none"
+  physical_models:
+    pressure_gradient_force: {}
+    saffman_lift_force_enabled: false
+    pressure_force_enabled: true
+    virtual_mass_force:
+      enabled: true
+      virtual_mass_factor: 0.5
+    erosion_accretion_enabled: false
+  tracking:
+    max_num_steps: 10000
+    step_size_controls:
+      option: "step-length-factor"
+      step_length_factor: 5
+    expert:
+      randomize_every_iteration: true
+      randomize_every_timestep: true
+      verbosity: 1
+      reference_frame: "relative"
+  numerics:
+    tracking:
+      option: "automatic"
+      low_order_scheme: "implicit"
+      high_order_scheme: "trapezoidal"
+      accuracy_control:
+        enabled: true
+        tolerance: 1.0e-05
+        max_num_refinements: 20
+        step_size_fraction: 1.0
+    node_based_averaging:
+      enabled: false
+    high_res_tracking:
+      enabled: false
+  parallel:
+    option: "hybrid"
+    hybrid:
+      dpm_domain:
+        enabled: false
+    expert:
+      parallel_verbosity_level: 0
+      crossover_tolerance: 0.02
+  user_defined_functions:
+    body_force: "none"
+    source_terms: "none"
+    output: "none"
+    scalar_update: "none"
+    dpm_time_step_size: "none"
+    number_of_scalars: 0
+    max_num_udf_species: 50
+  injections: {}
+
+rebuild_order:
+  - connect to Fluent through `src/pyansys_fluent/connection.py`
+  - verify the remote mesh and source files exist on server 1
+  - load `Mesh 3326002 Nodes.msh`
+  - inspect boundary and zone names before mutating anything
+  - set the carrier solver to pressure-based / mixture / RNG k-epsilon
+  - assign phase materials to `phase-1` and `phase-2`
+  - apply boundary condition types and values
+  - apply the DPM global settings exactly as captured in the live archive
+  - recover injection definitions from `Particle tracking enthalpy1600/Injection_Files`
+  - create default injections first, then fill their fields one by one
+  - read back after every parent/type/surface change
+  - save a case/data checkpoint and export a reproducible archive
+
+injection_recovery_plan:
+  import_goal: "Recover the per-injection properties from the enthalpy 1600 source files, then recreate them in the enthalpy 1760 mesh rebuild."
+  fields_to_capture:
+    - name
+    - particle_type
+    - material
+    - injection_type
+    - injection_surfaces
+    - reference_frame
+    - randomized_positions_enabled
+    - mass_flow_rate.total_flow_rate
+    - velocity.use_face_normal_direction
+    - velocity.x_velocity
+    - velocity.y_velocity
+    - velocity.z_velocity
+    - particle_size.option
+    - particle_size.diameter
+    - physical_models.particle_drag.option
+    - physical_models.turbulent_dispersion.enabled
+    - physical_models.turbulent_dispersion.random_eddy_lifetime
+    - physical_models.turbulent_dispersion.number_of_tries
+    - physical_models.turbulent_dispersion.time_scale_constant
+    - physical_models.particle_rotation.enabled
+    - physical_models.rough_wall_treatment_enabled
+    - physical_models.custom_laws
+  known_rebuild_pattern:
+    - create default injection
+    - set `particle_type = inert`
+    - reacquire the injection object
+    - set `injection_type = surface`
+    - reacquire again
+    - bind the injection surface
+    - set point properties
+    - set physical-model toggles
+    - read back the complete injection state
+  unresolved:
+    - exact enthalpy 1600 injection names
+    - exact diameter list and flow split per injection
+    - exact source-file format inside `Injection_Files`
+
+implementation_helpers:
+  reusable_modules:
+    - "PyAnsys/src/pyansys_fluent/setup_io.py"
+    - "PyAnsys/src/pyansys_fluent/setup_carrier.py"
+    - "PyAnsys/src/pyansys_fluent/setup_dpm.py"
+    - "PyAnsys/src/pyansys_fluent/setup_recipes.py"
+  recommended_entrypoints:
+    - "load_target_mesh"
+    - "apply_setup07_carrier_from_mesh"
+    - "apply_dpm_model_settings"
+    - "apply_dpm_injections"
+    - "write_case_data_pair"
+
+acceptance_checks:
+  - "models.multiphase.get_state() reports mixture with 2 phases"
+  - "models.viscous.get_state() reports k-epsilon / rng with swirl-dominated options"
+  - "materials.fluid contains water-vapor-at-psep and water-liquid-at-psep"
+  - "boundary roles are mapped to inlet / outlet / wall / bottom / interior-fluid"
+  - "DPM global settings match the live archive"
+  - "each recreated injection reads back after every type/surface/property change"
+
+notes:
+  - "This file is a build blueprint, not the final case archive."
+  - "The 1760 live export was partial; keep the carrier and DPM blocks aligned to the verified 1680 baseline until the 1760 tree is re-captured."
+  - "Do not invent injection values that are not recoverable from the enthalpy 1600 source files."

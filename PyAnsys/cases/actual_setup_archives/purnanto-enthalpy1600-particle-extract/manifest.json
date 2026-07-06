@@ -1,0 +1,40 @@
+{
+  "bundle_name": "purnanto-enthalpy1600-particle-extract",
+  "metadata": {
+    "extracted_at_utc": "2026-06-11T08:47:58+00:00",
+    "source_dir": "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/data/Enthalpy_1600",
+    "archive_dir": "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/cases/actual_setup_archives/purnanto-enthalpy1600-particle-extract",
+    "injection_file_count": 9,
+    "summary_file_count": 9
+  },
+  "source": {
+    "injection_files": [
+      "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/data/Enthalpy_1600/Injection_Files/112_micron",
+      "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/data/Enthalpy_1600/Injection_Files/1631_micron",
+      "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/data/Enthalpy_1600/Injection_Files/168_micron",
+      "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/data/Enthalpy_1600/Injection_Files/28_micron",
+      "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/data/Enthalpy_1600/Injection_Files/348_micron",
+      "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/data/Enthalpy_1600/Injection_Files/562_micron",
+      "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/data/Enthalpy_1600/Injection_Files/56_micron",
+      "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/data/Enthalpy_1600/Injection_Files/5_micron",
+      "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/data/Enthalpy_1600/Injection_Files/844_micron"
+    ],
+    "summary_files": [
+      "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/data/Enthalpy_1600/112_micron.sum",
+      "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/data/Enthalpy_1600/1631_micron.sum",
+      "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/data/Enthalpy_1600/168_micron.sum",
+      "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/data/Enthalpy_1600/28_micron.sum",
+      "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/data/Enthalpy_1600/348_micron.sum",
+      "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/data/Enthalpy_1600/562_micron.sum",
+      "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/data/Enthalpy_1600/56_micron.sum",
+      "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/data/Enthalpy_1600/5_micron.sum",
+      "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/data/Enthalpy_1600/844_micron.sum"
+    ]
+  },
+  "generated_files": [
+    "README.md",
+    "manifest.json",
+    "injections.json",
+    "summaries.json"
+  ]
+}

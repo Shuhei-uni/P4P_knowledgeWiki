@@ -1,0 +1,16 @@
+{
+  "bundle_name": "purnanto-enthalpy1680-live-extract",
+  "exported_at_utc": "2026-06-11T04:57:39+00:00",
+  "report_ref": "",
+  "notes_label": "Purnanto exact setup at 1680J",
+  "remote_case": "C:\\Users\\syok443\\Documents\\Purnanto\\enthalpy1680.cas",
+  "remote_data": "C:\\Users\\syok443\\Documents\\Purnanto\\enthalpy1680.dat",
+  "offline_case_file": "",
+  "offline_data_file": "",
+  "live_export_enabled": true,
+  "offline_export_enabled": false,
+  "live_bundle": {
+    "fluent_version": "Ansys Fluent 2024 R2",
+    "captured_at_utc": "2026-06-11T05:01:39+00:00"
+  }
+}
