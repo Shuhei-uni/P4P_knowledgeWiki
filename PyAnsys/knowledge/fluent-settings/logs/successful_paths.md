@@ -174,6 +174,49 @@ Notes:
   The script intentionally hybrid-initializes after loading the `.cas.h5` because a case-only file does not provide field data for data-file output. It avoids the repo's checkpoint persistence helpers so remote Windows output paths do not create local `C:\...run-state.json` artifacts on the laptop.
 
 Fluent: 2024 R2
+PyFluent: `.venv` on repo laptop
+Case: `C:\Users\syok443\Documents\Purnanto\enthalpy1680.cas.h5`
+Goal: run the lightweight case-to-data script with TUI commands only on server `4`
+Order:
+  1. connect with `check_connection.py --server-id 4`
+  2. verify remote case path exists
+  3. run `/file/read-case "<case>"`
+  4. run `/solve/initialize/hyb-initialization`
+  5. run `/solve/iterate <step>` in chunked calls
+  6. run `/file/write-data "<output>"`
+  7. verify the output `.dat.h5` is visible to Fluent
+Working path or TUI:
+  `scripts/setup/save_data_after_iterations.py '<case>.cas.h5' <iterations> --server-id 4 --report-interval 1`
+Readback:
+  Test command completed for `iterations = 2` and wrote:
+  `C:\Users\syok443\Documents\Purnanto\enthalpy1680_2.dat.h5`
+Notes:
+  The script now uses literal TUI strings through `ti-menu-load-string`, so the solver work is driven by `/file/*` and `/solve/*` commands rather than the Settings API wrappers.
+
+Fluent: 2024 R2
+PyFluent: local `.venv` on repo laptop
+Case: `C:\Users\syok443\Documents\TwoPhaseInletV2(Purnanto)\TwoPhaseInletV2(Purnanto).cas.h5`
+Goal: derive setup `09c` as a case-only two-way DPM coupling branch on server `3`
+Order:
+  1. connect with `check_connection.py --server-id 3`
+  2. read the source case with `solver.settings.file.read_case(file_name=...)`
+  3. inspect `setup.models.discrete_phase.general_settings.interaction`
+  4. set `interaction.enabled = true`
+  5. set `interaction.update_sources_every_iteration = true`
+  6. set `interaction.iteration_interval = 1`
+  7. read back the interaction state
+  8. write only `.cas.h5`
+Working path or TUI:
+  On Fluent 2024 R2 server `3`, the writable branch is:
+  `setup.models.discrete_phase.general_settings.interaction`
+Readback:
+  Before mutation: `{'enabled': false}`
+  After mutation: `{'enabled': true, 'iteration_interval': 1, 'update_sources_every_iteration': true}`
+  The inherited case already carried 6 active `surface` injections on `steaminlet` with `29.22 kg/s` represented total injected loading.
+Notes:
+  This path did not require rebuilding injections or changing boundary DPM fates. It is a clean derivative of the accepted split-inlet case with only the two-way coupling controls changed.
+
+Fluent: 2024 R2
 PyFluent: local `.venv` on repo laptop
 Case: `C:\Users\syok443\Documents\TwoPhaseInletV2(Purnanto)\TwoPhaseInletV2(Purnanto).cas.h5`
 Goal: create setup `08c` case-only inlet-velocity sensitivity endpoints from the accepted `08b` split mass-flow inlet case

@@ -1,5 +1,77 @@
 # CFD Wiki Log
 
+## [2026-07-17] guidance-update | Add direct-from-09c workflow for setup 10b-1 and 10b-2
+
+- files updated: `wiki/guidance/fluent-general-click-by-click.md`
+- reason: the project is beginning the `10b-1` built-in wall-return and `10b-2` user-defined wall-return variants as controlled children of `09c`.
+- notable guidance: create a fresh copy for each child, hold the global DPM coupling state fixed, keep EWF off, change only selected wall DPM boundary conditions, use `wall-jet` first when available, and reserve `DEFINE_DPM_BC` for `10b-2`.
+- uncertainty: exact Fluent wall-zone names and availability of the `wall-jet` boundary option require live-case readback.
+- next action: verify the `09c` wall DPM conditions and build `10b-1` before preparing the UDF-based `10b-2` child.
+
+## [2026-07-17] guidance | Add first-pass Eulerian Wall Film settings checklist
+- files created/updated:
+  - `wiki/guidance/fluent-general-click-by-click.md`
+  - `wiki/log.md`
+- reason: provide a controlled EWF setup path for the geothermal separator `10a` wall-film deposition/drainage test.
+- notable result: the first-pass checklist keeps DPM coupling on, solves film momentum with gravity and surface shear, leaves phase change, scalar, VOF, splashing, edge separation, and particle stripping off, and delays film-to-flow momentum feedback until the combined `11a` case.
+- uncertainty: exact panel labels and available options can vary in Fluent 2024 R2 versus the current 2025 R1/R2 documentation; settings must be read back after model activation.
+- next action: confirm the actual EWF wall zones and read back the active `10a` child settings in Fluent before initialization.
+
+## [2026-07-17] guidance | Add nested DPM wall-return settings for setup 10b
+- files created/updated:
+  - `wiki/guidance/fluent-general-click-by-click.md`
+  - `wiki/log.md`
+  - `../Setups/future/10-wall-film-reentrainment-and-dpm-interaction-plan.md`
+- reason: define the software-level child settings for the setup `10b` wall-return/re-entrainment surrogate.
+- notable result: separated `10b-0` readback reference, `10b-1` built-in `wall-jet`/restitution sensitivity, and `10b-2` user-defined `DEFINE_DPM_BC`; explicitly excluded `reinject` from the first internal-wall test because it is a domain-boundary recirculation condition.
+- uncertainty: `wall-jet` availability and exact DPM panel labels may differ in Fluent 2024 R2; read back the active boundary type before running.
+- next action: verify the current `09c` wall DPM boundary types and select the available `10b-1` built-in path before writing a UDF.
+
+## [2026-07-16] refactor | Rename setup-lineage system to Setups
+- Files created/updated:
+  - `../Setups/`
+  - `AGENTS.md`
+  - `wiki/index.md`
+- Reason: align CFD_wiki cross-system links with the new lifecycle-organized setup and numerical-report directory.
+- Notable assumptions introduced or removed:
+  - `Setups/` remains the authority for concrete setup lineage; reusable CFD guidance remains in `CFD_wiki`.
+
+## [2026-06-11] refactor | Refresh CFD_wiki operating contract for repo split
+- Files created/updated:
+  - `../AGENTS.md`
+  - `wiki/log.md`
+- Reason: align the local CFD wiki guide with the current repository structure so reusable CFD method pages stay distinct from project V&V sign-off, setup lineage, and automation-specific artifacts.
+- Notable assumptions introduced or removed:
+  - Added explicit cross-system boundaries showing that `ResearchProject_wiki/wiki/vnv/` owns project sign-off, `Setups/` owns setup lineage, and `PyAnsys/` owns machine-readable target or claim-gate files.
+
+## [2026-06-11] query | Tighten separator V&V automation claim language
+- Files created/updated:
+  - `wiki/synthesis/separator-cfd-verification-and-validation-workflow.md`
+  - `wiki/log.md`
+- Reason: incorporate user review feedback that the main automation value is not automatic validation, but automatic enforcement of the maximum defensible claim level for a separator CFD run.
+- Notable assumptions introduced or removed:
+  - Added an explicit rule that validation comparison can be automated, but validation judgment remains human-reviewed because target appropriateness is not machine-decidable from numeric closeness alone.
+  - Added an explicit guardrail that without a predefined validation target file or equivalent manifest, automation must not emit `Externally validated`.
+
+## [2026-06-10] query | Add reusable separator CFD verification and validation workflow
+- Files created/updated:
+  - `wiki/synthesis/separator-cfd-verification-and-validation-workflow.md`
+  - `wiki/index.md`
+  - `wiki/log.md`
+- Reason: user asked for a general but robust separator CFD verification/validation method anchored to the papers already extracted in `CFD_wiki`, rather than continuing ad hoc test runs without a reusable V&V scaffold.
+- Notable assumptions introduced or removed:
+  - Added an explicit ladder separating setup verification, numerical verification, solution-acceptance gates, external validation hierarchy, and uncertainty-retirement steps.
+  - Clarified that Chen 2025 transfers validation discipline and benchmark structure, while Pointon 2009 remains the closest geothermal separator trend anchor and Mubarok 2020 remains the strongest geothermal field-validation exemplar in the current local source set.
+
+## [2026-06-10] query | Add annular-flow VOF tutorial transfer note for separator sensitivity work
+- Files created/updated:
+  - `wiki/sources/user-core-annular-flow-vof-tutorial.md`
+  - `wiki/index.md`
+  - `wiki/log.md`
+- Reason: support a new setup `09` separator branch by recording what the user-provided Fluent core-annular VOF tutorial does and does not justify for geothermal separator work.
+- Notable assumptions introduced or removed:
+  - Added an explicit transfer rule that the tutorial is useful for transient `VOF` workflow and initialization logic, but not as direct evidence for outlet type, timestep magnitude, contact angle, or separator validation.
+
 ## [2026-06-09] query | Clarify that the Purnanto baseline is a one-inlet mixed feed
 - Files created/updated:
   - `wiki/setups/geothermal-boc-separator-fluent-2013-baseline.md`
@@ -370,3 +442,10 @@
 - Reason: update the reusable guidance so split inlet zones must remain separate, exact Fluent-exported names and boundary types are enforced, bad-cell fractions are tracked at thresholds `0.15`, `0.10`, and `0.05`, and cell count is treated as diagnostic rather than the primary success rule.
 - Notable assumptions introduced or removed:
   - Removed the earlier assumption that cell target should remain a main pass/fail rule for this workflow; introduced the stricter contract that `liquid-inlet` and `steam-inlet` must stay separate and that local region quality near the split edge and spiral blend still needs explicit review.
+## [2026-07-17] guidance-update | Add direct-from-09c workflow for setup 10b-1 and 10b-2
+
+- files updated: `wiki/guidance/fluent-general-click-by-click.md`
+- reason: the project is beginning the `10b-1` built-in wall-return and `10b-2` user-defined wall-return variants as controlled children of `09c`.
+- notable guidance: create a fresh copy for each child, hold the global DPM coupling state fixed, keep EWF off, change only selected wall DPM boundary conditions, use `wall-jet` first when available, and reserve `DEFINE_DPM_BC` for `10b-2`.
+- uncertainty: exact Fluent wall-zone names and availability of the `wall-jet` boundary option require live-case readback.
+- next action: verify the `09c` wall DPM conditions and build `10b-1` before preparing the UDF-based `10b-2` child.

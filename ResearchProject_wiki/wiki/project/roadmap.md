@@ -1,7 +1,7 @@
 # Project Roadmap
 
 ## Purpose
-Define the project run sequence from the current state of the separator work. This roadmap now treats `08b-purnanto-parity-split-inlet-rebuild.md` as the next verification and validation target because setup fidelity has become the main risk.
+Define the project run sequence from the current state of the separator work. This roadmap treats setup `08b` as the past reported parity parent, with active work continuing in `08c` inlet-loading sensitivity and `09c` two-way DPM coupling.
 
 The immediate job is:
 
@@ -12,7 +12,7 @@ The immediate job is:
 
 ## Current Starting Point
 - Date: `2026-06-11`
-- Active setup branch: `../../Setup report/08b-purnanto-parity-split-inlet-rebuild.md`
+- Active setup branch: `../../Setups/active/08c-purnanto-parity-inlet-velocity-sensitivity.md`
 - Branch role: extraction-first parity-reset branch that preserves the observed Purnanto Fluent setup while introducing the project's split-inlet objective.
 - Current model-family classification for setup `08b`:
   - steady `Mixture` carrier-flow solve;
@@ -23,17 +23,17 @@ The immediate job is:
   - not yet a fully coupled `Mixture + DPM` solve;
   - not yet a wall-film branch;
   - not yet a transient branch.
-- Current status: `08b` is **not yet built**, **not yet verified**, and **not yet validated**.
+- Current status: setup `08b` has reported numerical screening results but is not externally validated; active branches are `08c` and `09c`.
 - Retained comparison branches:
-  - `../../Setup report/07-pure-phase-split-actual-area.md` remains comparison-only split-inlet context;
-  - `../../Setup report/08-purnanto-one-inlet-massflow-recreation.md` remains a useful one-inlet automation/parity scaffold;
-  - `../../Setup report/09-multiphase-separator-sensitivity-family.md` is parked until a stronger parity-reset parent exists.
+  - `../../Setups/past/reported/07-pure-phase-split-actual-area.md` remains comparison-only split-inlet context;
+  - `../../Setups/past/archived/08-purnanto-one-inlet-massflow-recreation.md` remains a useful one-inlet automation/parity scaffold;
+  - `../../Setups/past/archived/09-multiphase-separator-sensitivity-family.md` is parked until a stronger parity-reset parent exists.
 - `User-specified`: brine-outlet reconstruction and lower-water initialization are no longer active roadmap items for the main project path.
 - `User-specified`: the main project risk is now human setup drift away from the real Purnanto case, so extraction-driven parity recovery takes priority over continuing setup `07` V&V.
 
 ## Immediate Next Child Branch After Setup 08b
 
-- Planned child branch: `../../Setup report/08c-purnanto-parity-inlet-velocity-sensitivity.md`
+- Active child branch: `../../Setups/active/08c-purnanto-parity-inlet-velocity-sensitivity.md`
 - Branch role: test how inlet loading / inlet velocity changes separator efficiency while keeping the same enthalpy basis used by setup `08b`.
 - Interpretation rule:
   - keep inlet **specific enthalpy** fixed across the sweep;
@@ -240,6 +240,20 @@ Add one realism feature at a time. Each new branch must answer one new physics q
 
 ### Branching Principle
 - Every new branch must start from the last accepted simpler branch, not from an already uncertain or mixed-change case.
+
+### Future Setup 10/11 Direction
+
+The next wall-film work is recorded in [setup 10](../../Setups/future/10-wall-film-reentrainment-and-dpm-interaction-plan.md) as independently runnable children rather than a single combined jump. [Setup 11](../../Setups/future/11-combined-wallfilm-dpm-plan.md) is reserved for combinations after the individual mechanisms are readable.
+
+Recommended order:
+
+1. complete the `08c` low/reference/high inlet-loading cases;
+2. prepare and run `09c` as a DPM-only two-way coupling comparison;
+3. launch `10a` EWF deposition/drainage, `10b` wall-return sensitivity, and `10c` custom DPM/material sensitivity independently when the long-run window is available, even if their interpretation gate remains open;
+4. combine selected stable mechanisms in `11a` EWF + re-entrainment;
+5. add the selected `10c` change in `11b` only after `11a` is stable.
+
+`Inferred` from Rizaldy et al. 2016 and the annular-flow EWF-DPM literature: inlet loading/velocity is the lower-cost experiment that should establish whether the wall-film mechanism is likely to matter, while EWF and custom interaction laws require transient balances and additional closure assumptions. The air-water annular-flow correlations are transferable as modelling patterns, not as geothermal validation. Because the long runs are time-limited, diagnostic `10` runs may proceed before all parent evidence is closed, but combined `11` cases require bounded film inventory and conserved returned mass.
 
 ## Parked Future Work
 - Brine outlet reconstruction.

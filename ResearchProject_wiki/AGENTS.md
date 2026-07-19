@@ -50,10 +50,10 @@ Treat `CFD_wiki/raw/informit.366967552564856.pdf` as the key baseline reconstruc
 ## Cross-System Boundaries
 - `ResearchProject_wiki` owns project interpretation, run progress, technical notes, and human-readable V&V sign-off.
 - `CFD_wiki` owns reusable CFD methods, literature extraction, and generic Fluent guidance.
-- `Setup report/` owns concrete setup-branch identity, ordered lineage, and report-facing setup snapshots.
+- `Setups/` owns concrete setup-branch identity, ordered lineage, and report-facing setup snapshots.
 - `PyAnsys/` owns executable automation, machine-readable validation targets, and claim-gate logic.
 
-Do not duplicate full setup lineage in this wiki. Link to `Setup report/` and summarize only what the project needs to remember.
+Do not duplicate full setup lineage in this wiki. Link to `Setups/` and summarize only what the project needs to remember.
 
 ## Knowledge Separation Architecture (Mandatory)
 To avoid data dilution, separate information into dedicated layers.
@@ -93,7 +93,7 @@ Use for project-owned verification and validation records:
 - external validation reports;
 - final human sign-off of allowable claim strength.
 
-Do not use this layer for generic CFD method explanations that belong in `CFD_wiki`, and do not use it as a replacement for setup-branch lineage in `Setup report/`.
+Do not use this layer for generic CFD method explanations that belong in `CFD_wiki`, and do not use it as a replacement for setup-branch lineage in `Setups/`.
 
 ### E. Literature Layer (`wiki/sources/`, `wiki/literature/`, `wiki/synthesis/`)
 Use for source extraction and cross-paper synthesis.

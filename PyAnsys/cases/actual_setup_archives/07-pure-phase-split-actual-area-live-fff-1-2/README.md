@@ -17,7 +17,7 @@ Use this folder when you need:
 
 Related report-facing branch:
 
-- [07-pure-phase-split-actual-area.md](../../../Setup%20report/07-pure-phase-split-actual-area.md)
+- [07-pure-phase-split-actual-area.md](../../../../Setups/past/reported/07-pure-phase-split-actual-area.md)
 
 Related difference report:
 

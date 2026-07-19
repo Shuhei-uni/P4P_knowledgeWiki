@@ -24,5 +24,5 @@ Example naming:
 - `00a-purnanto-live-baseline-5000`
 
 Relationship to the main wiki:
-- `Setup report/` remains the human-authored, report-facing setup lineage.
+- `Setups/` remains the human-authored, report-facing setup lineage.
 - `PyAnsys/cases/actual_setup_archives/` holds the machine-exported source of truth for what Fluent actually contained.

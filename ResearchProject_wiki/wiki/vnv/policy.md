@@ -8,7 +8,7 @@ Define where project verification and validation records live, what they are all
   - reusable verification/validation method, external literature hierarchy, and cross-paper claim discipline.
 - `ResearchProject_wiki/wiki/vnv/`:
   - project-specific verification reports, validation reports, target selection notes, and final claim sign-off.
-- `Setup report/`:
+- `Setups/`:
   - concrete setup-instance definition, branch lineage, and report-facing setup snapshots.
 - `PyAnsys`:
   - machine-readable target files, claim-gate rules, and automated verification outputs.
@@ -19,7 +19,7 @@ Define where project verification and validation records live, what they are all
 
 ## Required Inputs For A V&V Record
 Each verification or validation record should link:
-1. the setup branch in `Setup report/`;
+1. the setup branch in `Setups/`;
 2. the relevant run or run family;
 3. the target definition or external anchor used;
 4. the specific metrics compared;

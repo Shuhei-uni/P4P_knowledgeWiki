@@ -7,7 +7,7 @@ description: "Use when working with ResearchProject_wiki project-specific knowle
 
 ## Core Rule
 
-Use `ResearchProject_wiki/` for project-specific interpretation, decisions, progress, technical notes, blockers, modelling records, and human-readable V&V sign-off. Do not duplicate reusable CFD methods from `CFD_wiki/` or concrete setup lineage from `Setup report/`; link and summarize instead.
+Use `ResearchProject_wiki/` for project-specific interpretation, decisions, progress, technical notes, blockers, modelling records, and human-readable V&V sign-off. Do not duplicate reusable CFD methods from `CFD_wiki/` or concrete setup lineage from `Setups/`; link and summarize instead.
 
 Before editing, read:
 

@@ -39,7 +39,7 @@ For "how do I do this in Fluent" requests:
 
 1. Read `CFD_wiki/wiki/guidance/index.md`.
 2. Open the relevant guidance page, especially `CFD_wiki/wiki/guidance/fluent-general-click-by-click.md` for broad GUI navigation.
-3. Pull case-specific numbers from `CFD_wiki/wiki/setups/`, `ResearchProject_wiki/`, or `Setup report/` only after the generic click path is established.
+3. Pull case-specific numbers from `CFD_wiki/wiki/setups/`, `ResearchProject_wiki/`, or `Setups/` only after the generic click path is established.
 4. Keep guidance pages procedural and GUI-first. Do not put project-specific numerical defaults in reusable guidance pages.
 
 ## Update Workflow

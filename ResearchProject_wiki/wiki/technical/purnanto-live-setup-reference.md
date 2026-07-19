@@ -10,7 +10,7 @@ Use this page when you need the saved Fluent settings rather than the paper narr
 - Data: `PyAnsys/data/4800-iterations-300412-1-05000.dat.h5`
 
 Related report:
-- [00a-purnanto-setup-5000-live-audit.md](<../../../Setup report/00a-purnanto-setup-5000-live-audit.md>)
+- [00a-purnanto-setup-5000-live-audit.md](<../../../Setups/past/archived/00a-purnanto-setup-5000-live-audit.md>)
 
 Related source pages:
 - [purnanto-etal-2013](sources/purnanto-etal-2013.md)

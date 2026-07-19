@@ -29,7 +29,7 @@ They are meant to reduce duplication and context sprawl, not to replace the main
 
 ### 3. Setup subagent
 - prompt file: `setup-subagent.md`
-- lane: `Setup report/`
+- lane: `Setups/`
 - use for: setup definitions, numbering, branch lineage, report-facing case records
 
 ## Main-Agent Rule
