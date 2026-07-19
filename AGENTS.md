@@ -4,7 +4,7 @@
 This repository has four linked systems with different jobs:
 - `CFD_wiki`
 - `ResearchProject_wiki`
-- `Setup report`
+- `Setups`
 - `PyAnsys`
 
 Use them together without mixing their roles, so shared CFD knowledge stays reusable, project execution stays traceable, setup-branch lineage stays easy to follow, and automation artifacts stay machine-usable.
@@ -12,7 +12,7 @@ Use them together without mixing their roles, so shared CFD knowledge stays reus
 ## Knowledge Roles (Separated Knowledge)
 - `CFD_wiki`: reusable CFD reconstruction knowledge, paper extraction, solver/model setup patterns, cross-paper synthesis.
 - `ResearchProject_wiki`: project-specific decisions, experiment progress, blockers, milestones, report-facing evidence trail, and project-owned verification/validation records.
-- `Setup report`: ordered case-definition records for concrete setup branches, parent/child variants, and report-ready setup snapshots.
+- `Setups`: ordered case-definition records for concrete setup branches, parent/child variants, and report-ready setup snapshots.
 - `PyAnsys`: executable automation workspace for Fluent setup, inspection, rebuild, run orchestration, and machine-readable target/claim-gate artifacts.
 
 Do not duplicate full pages across these systems. Link and summarize instead.
@@ -20,53 +20,53 @@ Do not duplicate full pages across these systems. Link and summarize instead.
 ## Top-Level Directory Map
 - `CFD_wiki/`: reusable literature, method, and Fluent-guidance knowledge.
 - `ResearchProject_wiki/`: project-facing interpretation, progress, technical notes, and `wiki/vnv/` sign-off records.
-- `Setup report/`: setup lineage and concrete case-definition history, controlled by `Setup report/order-dictionary.md`.
+- `Setups/`: setup lifecycle views, lineage, and concrete case-definition history, controlled by `Setups/order-dictionary.md`.
 - `PyAnsys/`: automation code, inspection tools, setup scripts, extracted case knowledge, and machine-readable V&V target logic.
 - `PROJECT_TREE.md`: quick orientation tree for the repo layout.
 
 ## Setup Report Role
-Use `Setup report/` for setup-instance documents, not for generic CFD knowledge and not for day-to-day progress logging.
+Use `Setups/` for setup-instance documents, not for generic CFD knowledge and not for day-to-day progress logging.
 
-Put these in `Setup report/`:
+Put these in `Setups/`:
 - named case/setup definitions;
 - parent/child setup variants;
 - strict sequence/history of how one setup branch led to another;
 - report-facing setup snapshots with concrete boundary conditions, assumptions, and calculation notes.
 
-Do not use `Setup report/` for:
+Do not use `Setups/` for:
 - reusable cross-project CFD guidance;
 - literature extraction or paper synthesis;
 - general project status, blockers, or milestone tracking.
 
 The controlling map for setup-report lineage is:
-- `Setup report/order-dictionary.md`
+- `Setups/order-dictionary.md`
 
 ## Routing Rules
 When handling a request, route content first, then write:
 1. If the request is generic CFD method/literature/setup knowledge, update `CFD_wiki` first.
 2. If the request is specific to the geothermal separator research project, update `ResearchProject_wiki`.
-3. If the request is about a specific simulation setup/report branch, active case definition, setup naming, or setup lineage, update `Setup report/`.
+3. If the request is about a specific simulation setup/report branch, active case definition, setup naming, or setup lineage, update `Setups/`.
 4. If the request is about executable automation, PyFluent path discovery, machine-readable validation targets, or claim-gate scripts, update `PyAnsys` first and then sync any needed human-readable summary into the relevant wiki.
 5. If both apply, write core technical extraction in `CFD_wiki`, then add a project-impact summary in `ResearchProject_wiki` with links to the CFD page.
-6. If the work defines or changes a concrete setup branch, keep the technical/project context in the appropriate wiki and store the actual setup-instance record in `Setup report/`.
+6. If the work defines or changes a concrete setup branch, keep the technical/project context in the appropriate wiki and store the actual setup-instance record in `Setups/`.
 
 ## Fluent Guidance Priority Rule
 For setup/how-to questions in Fluent:
 1. Check `CFD_wiki/wiki/guidance/` first and answer with click-by-click steps.
 2. Then pull case-specific numerical values from `CFD_wiki/wiki/setups/` and/or project pages as needed.
-3. If the question is project-specific, still keep the generic click paths in `CFD_wiki/wiki/guidance/`, use `ResearchProject_wiki` for project impact, and use `Setup report/` only if a concrete setup report must be created or revised.
+3. If the question is project-specific, still keep the generic click paths in `CFD_wiki/wiki/guidance/`, use `ResearchProject_wiki` for project impact, and use `Setups/` only if a concrete setup report must be created or revised.
 
 ## Cross-System Orchestration Workflow
 For work that touches multiple knowledge systems:
 1. Read indexes first:
    - `CFD_wiki/wiki/index.md`
    - `ResearchProject_wiki/wiki/index.md`
-   - `Setup report/order-dictionary.md` if setup lineage or naming is involved
+   - `Setups/order-dictionary.md` if setup lineage or naming is involved
    - `PyAnsys/AGENTS.md` and relevant `PyAnsys/knowledge/` paths if automation or machine-readable targets are involved
 2. Update the primary target based on routing rules.
 3. Add a short cross-reference note in the secondary system(s) when needed (no large duplication).
 4. Update index/log files in any wiki that changed.
-5. If a setup report changed, update `Setup report/order-dictionary.md` whenever the change affects ordering, branch identity, or naming.
+5. If a setup report changed, update `Setups/order-dictionary.md` whenever the change affects ordering, branch identity, or naming.
 6. If automation behavior or target manifests changed, keep the human-readable claim logic aligned with `ResearchProject_wiki/wiki/vnv/`.
 
 ## Subagent Workflow
@@ -79,15 +79,15 @@ For larger multi-step or cross-system tasks, use the lightweight subagent briefs
 Keep the root routing rules in this file as the source of truth. Subagents are scoped helpers only; the main agent remains responsible for routing, deduplication, cross-links, index/log/order updates, and final consistency checks.
 
 ## Setup Report Ordering Rule
-When creating, renaming, or reorganizing files in `Setup report/`:
-1. Check `Setup report/order-dictionary.md` first.
+When creating, renaming, or reorganizing files in `Setups/`:
+1. Check `Setups/order-dictionary.md` first.
 2. Preserve the existing numbered sequence once assigned.
 3. Prefer adding a new number or branch suffix such as `08`, `08a`, or `08b` over renaming older reports again.
 4. Avoid status words like `current`, `latest`, or `final` in setup-report filenames.
 5. Update cross-links and any wiki references that point to the renamed or newly added setup report.
 
 ## Setup Report Creation Rule
-Create or update a `Setup report/` file when the request involves any of:
+Create or update a `Setups/` file when the request involves any of:
 - a new setup branch or variant;
 - a concrete Fluent boundary-condition package for a named case;
 - a report-facing setup record for a run or planned run;

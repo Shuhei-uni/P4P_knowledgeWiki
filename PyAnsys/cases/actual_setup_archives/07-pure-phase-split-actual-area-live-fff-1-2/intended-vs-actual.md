@@ -9,10 +9,10 @@ This report compares:
 
 Inheritance chain used for intended setup:
 
-1. [00-baseline-spiral-boc-reference.md](../../../Setup%20report/00-baseline-spiral-boc-reference.md)
-2. [03-mixed-wet-half-velocity-inlet.md](../../../Setup%20report/03-mixed-wet-half-velocity-inlet.md)
-3. [04-mixed-wet-half-actual-area.md](../../../Setup%20report/04-mixed-wet-half-actual-area.md)
-4. [07-pure-phase-split-actual-area.md](../../../Setup%20report/07-pure-phase-split-actual-area.md)
+1. [00-baseline-spiral-boc-reference.md](../../../../Setups/past/archived/00-baseline-spiral-boc-reference.md)
+2. [03-mixed-wet-half-velocity-inlet.md](../../../../Setups/past/archived/03-mixed-wet-half-velocity-inlet.md)
+3. [04-mixed-wet-half-actual-area.md](../../../../Setups/past/reported/04-mixed-wet-half-actual-area.md)
+4. [07-pure-phase-split-actual-area.md](../../../../Setups/past/reported/07-pure-phase-split-actual-area.md)
 
 Interpretation rule:
 

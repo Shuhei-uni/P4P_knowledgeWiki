@@ -8,7 +8,7 @@ This page is project-specific technical evidence for the local rebuild path, not
 
 Primary linked setup context:
 
-- `../../../Setup report/08-purnanto-one-inlet-massflow-recreation.md`
+- `../../../Setups/past/archived/08-purnanto-one-inlet-massflow-recreation.md`
 - `../../../CFD_wiki/wiki/setups/geothermal-boc-separator-fluent-2013-baseline.md`
 - `../../../PyAnsys/scripts/reconstruct_purnanto_trial3.py`
 - `../../../PyAnsys/docs/findings/LOCAL_ONE_INLET_SMOKE_TEST.md`
@@ -345,4 +345,4 @@ So the next pass should focus narrowly on:
 - 500-iteration diagnostic log: `C:\Users\Shuhei Yokkaichi\Documents\CFD\Trial extended outlet pipe\Major Files\trial4-purnanto-recon-500-log.txt`
 - Residual plot: `C:\Users\Shuhei Yokkaichi\Documents\CFD\Trial extended outlet pipe\Major Files\trial4-purnanto-recon-500-residuals.png`
 - Residual CSV: `C:\Users\Shuhei Yokkaichi\Documents\CFD\Trial extended outlet pipe\Major Files\trial4-purnanto-recon-500-residuals.csv`
-- Setup branch definition: `../../../Setup report/08-purnanto-one-inlet-massflow-recreation.md`
+- Setup branch definition: `../../../Setups/past/archived/08-purnanto-one-inlet-massflow-recreation.md`

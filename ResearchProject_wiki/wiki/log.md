@@ -1,5 +1,13 @@
 # Work Log
 
+## [2026-07-16] reorganization | Reorganize setup records and numerical reports
+- files created/updated: `../../Setups/`, `../../Setups/index.md`, `../../Setups/order-dictionary.md`, `../../Setups/reports/`, `wiki/index.md`, `wiki/project/roadmap.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/log.md`
+- reason: reorganize the setup-report system around concrete setup definitions, lifecycle views, and linked numerical result reports so experiment findings are easier to locate.
+- what changed since last update: renamed `Setup report/` to `Setups/`; grouped setup definitions into active, future, past/reported, and past/archived folders; created linked reports for setups `04`, `07`, `08b`, `09a`, and `09b`; added setup/report templates and a numerical-evidence rule.
+- assumptions introduced/removed: `reported` requires actual flux-efficiency/carryover numerics and/or numerical DPM trajectory/fate counts; lifecycle and evidence-use labels remain separate, so diagnostic or incomplete results can be reported without being treated as validated.
+- current status: `08c` and `09c` are active; `04`, `07`, `08b`, `09a`, and `09b` are past reported; remaining existing setup definitions are archived until stronger numerical evidence is recorded.
+- next action: update a setup's lifecycle and linked report when new run evidence changes its role, without renumbering the lineage.
+
 ## [2026-07-02] model-update | Add setup 08b one-injection DPM sample attribution
 - files created/updated: `../../../PyAnsys/src/pyansys_fluent/postprocess_live.py`, `../../../PyAnsys/scripts/inspection/postprocess_live_case.py`, `../../../PyAnsys/tests/test_postprocess_live.py`, `../../../PyAnsys/output/live_postprocess/TwoPhaseInletV2(Purnanto)-25-05000-summary.json`, `../../../PyAnsys/output/live_postprocess/TwoPhaseInletV2(Purnanto)-25-05000-report.md`, `../../Setup report/08b-purnanto-parity-split-inlet-rebuild.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/progress/blockers.md`, `wiki/log.md`
 - reason: user asked to repeat the DPM check injection by injection, matching the manual Fluent `Discrete Phase > Sample` workflow, so the active 6-bin `08b` result can be attributed per injection rather than only through the aggregate summary.
@@ -477,3 +485,19 @@
 - purpose: update the semi-automated split-inlet workflow so exact Fluent-exported zone names and boundary types are enforced, make cell count diagnostic-only, and rerun the overwritten `mesh-trial1` baseline audit with the corrected named selections.
 - assumptions introduced/removed: removed the provisional idea that cell target should be a main success rule; introduced the explicit split-inlet required-zone contract with `liquid-inlet` and `steam-inlet` kept separate; retained the observation that `.meshdat` remains a weaker diagnostic source than the exported baseline `.msh`.
 - next immediate action: fix the Meshing/export naming so the exported baseline preserves `liquid-inlet`, `steam-inlet`, and `wall-smooth_spiral_separator` exactly, then rerun the baseline audit before accepting any trial meshes.
+## [2026-07-17] model-update | Define future setup 10 wall-film escalation family
+- files created/updated: `../../Setups/future/10-wall-film-reentrainment-and-dpm-interaction-plan.md`, `../../Setups/future/index.md`, `../../Setups/order-dictionary.md`, `wiki/project/roadmap.md`, `wiki/log.md`
+- reason: user requested a forward plan covering inlet-velocity sensitivity, Eulerian wall film, re-entrainment, custom DPM wall-impact trajectories, and non-water injection materials.
+- what changed since last update: recorded that `09c` is currently two-way DPM coupling only; defined a future `10` family that separates EWF deposition/drainage, re-entrainment/impingement, and custom DPM/material sensitivity rather than combining them.
+- assumptions introduced/removed: retained fixed-enthalpy inlet loading as the immediate `08c` question; treated air-water EWF literature as a method-pattern source with geothermal transfer uncertainty; required active material-property or species/energy changes before calling a new injection material physically meaningful.
+- current status: `08c` remains the immediate carrier-loading experiment, `09c` remains the active DPM-coupling comparison, and setup `10` is future/planned.
+- blockers: no initialized/iterated `08c` endpoint results, no completed `09c` two-way comparison, no calibrated geothermal wall-film or re-entrainment closure.
+- next action: run the three-point `08c` carrier matrix, select the stable reference point, then finish `09c` before building `10a`.
+## [2026-07-17] model-update | Split setup 10 into independent runs and reserve setup 11 for combinations
+- files created/updated: `../../Setups/future/10-wall-film-reentrainment-and-dpm-interaction-plan.md`, `../../Setups/future/11-combined-wallfilm-dpm-plan.md`, `../../Setups/future/index.md`, `../../Setups/order-dictionary.md`, `wiki/project/roadmap.md`, `wiki/log.md`
+- reason: user needs long-running wall-film and DPM cases ready for execution tomorrow, even if parent interpretation gates are not yet closed.
+- what changed since last update: defined `10a` EWF-only deposition/drainage, `10b` DPM wall-return sensitivity without EWF, and `10c` custom trajectory/material sensitivity without EWF or re-entrainment; reserved `11a` for EWF plus selected re-entrainment and `11b` for the full selected combination.
+- assumptions introduced/removed: separated execution readiness from report-quality interpretation; diagnostic `10` runs may proceed when the parent case and changed model read back, while combined `11` cases require bounded film inventory and conserved returned mass.
+- current status: future setup families `10` and `11` are now concretely defined; active branches remain `08c` and `09c`.
+- blockers: `08c` and `09c` results are still pending; EWF wall-zone selection, timestep, and re-entrainment closure still require Fluent-side confirmation.
+- next action: prepare the parent `09c` case and launch independent `10a`, `10b`, and `10c` cases with the same loading and injection payload.

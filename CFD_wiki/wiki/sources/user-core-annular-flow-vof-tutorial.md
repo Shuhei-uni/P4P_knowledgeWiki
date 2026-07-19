@@ -52,4 +52,4 @@
 - Synthesis:
   - [annular-flow-three-field-cfd-patterns](../synthesis/annular-flow-three-field-cfd-patterns.md)
 - Setup lineage using this source:
-  - [../../../Setup report/02b-vof-split-inlet-transient.md](../../../Setup%20report/02b-vof-split-inlet-transient.md)
+  - [../../../Setups/past/archived/02b-vof-split-inlet-transient.md](../../../Setups/past/archived/02b-vof-split-inlet-transient.md)

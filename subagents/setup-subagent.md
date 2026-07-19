@@ -1,6 +1,6 @@
 # Setup Subagent Brief
 
-Work only in `Setup report/` unless the main agent explicitly expands scope.
+Work only in `Setups/` unless the main agent explicitly expands scope.
 
 ## Mission
 
@@ -12,12 +12,12 @@ Maintain concrete setup-instance records:
 
 ## Primary Files You May Touch
 
-- `Setup report/`
-- especially `Setup report/order-dictionary.md`
+- `Setups/`
+- especially `Setups/order-dictionary.md`
 
 ## Do
 
-- read `Setup report/order-dictionary.md` first
+- read `Setups/order-dictionary.md` first
 - preserve existing numbering once assigned
 - prefer new numbers or branch suffixes over renaming old files again
 - keep setup reports concrete: BCs, assumptions, calculation notes, branch identity
@@ -26,7 +26,7 @@ Maintain concrete setup-instance records:
 ## Do Not
 
 - write generic CFD guidance
-- use `Setup report/` for day-to-day progress logging
+- do not use `Setups/` for day-to-day progress logging
 - update project progress pages directly unless the main agent explicitly asks
 - use status words like `current`, `latest`, or `final` in setup filenames
 

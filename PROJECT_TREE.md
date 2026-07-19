@@ -37,9 +37,13 @@ P4P_knowledgeWiki/
 │           ├── targets/
 │           ├── validation/
 │           └── verification/
-├── Setup report/
-│   ├── order-dictionary.md
-│   └── *.md setup branch records
+├── Setups/
+│   ├── active/
+│   ├── future/
+│   ├── past/
+│   ├── reports/
+│   ├── templates/
+│   └── order-dictionary.md
 ├── PyAnsys/
 │   ├── cases/
 │   ├── docs/
@@ -59,6 +63,6 @@ P4P_knowledgeWiki/
 ## What Goes Where
 - `CFD_wiki/`: reusable CFD knowledge, literature extraction, external method logic.
 - `ResearchProject_wiki/`: project decisions, progress, technical notes, V&V reports, and sign-off.
-- `Setup report/`: concrete setup definitions and lineage.
+- `Setups/`: lifecycle-organized setup definitions, lineage, and numerical reports.
 - `PyAnsys/`: automation, machine-readable targets, and executable workflows.
 - `skills/`: repo-local Codex skills distilled from the folder-level agent instructions.

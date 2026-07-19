@@ -30,7 +30,7 @@ It should own:
 It should not become the main place for:
 - reusable CFD literature interpretation, which belongs in `../CFD_wiki/`;
 - project sign-off decisions, which belong in `../ResearchProject_wiki/wiki/vnv/`;
-- setup lineage history, which belongs in `../Setup report/`.
+- setup lineage history, which belongs in `../Setups/`.
 
 ## Core Mental Model
 - Treat Fluent as a live GUI state machine, not a static API.
@@ -109,7 +109,7 @@ Default agent roles:
 
 3. `context agent`
    Scope:
-   - `Setup report/`
+   - `Setups/`
    - `CFD_wiki/`
    - `ResearchProject_wiki/` when the task is project-specific
    Responsibility:
@@ -223,7 +223,7 @@ If these disagree, do not silently pick one. State the conflict and implement th
 ## Cross-System Sync Rules
 - If a script changes project claim-gating behavior, make sure the human-readable rule still matches `../ResearchProject_wiki/wiki/vnv/`.
 - If a script reveals a reusable CFD method lesson, summarize it in `../CFD_wiki/` rather than leaving it only in code comments.
-- If a script defines or changes a concrete setup branch, sync the setup identity into `../Setup report/`.
+- If a script defines or changes a concrete setup branch, sync the setup identity into `../Setups/`.
 - If a script emits target manifests or automated check summaries that a human must review, link them from the corresponding `ResearchProject_wiki/wiki/vnv/` page.
 
 Do not put case-specific orchestration logic into `src/` unless it is truly reusable across multiple setup scripts.

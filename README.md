@@ -4,13 +4,13 @@ This repository stores the working knowledge base for the P4P geothermal separat
 
 - `CFD_wiki/`: reusable CFD knowledge, paper extraction, Fluent guidance, setup patterns, and cross-paper synthesis.
 - `ResearchProject_wiki/`: project-specific decisions, progress, blockers, validation notes, and report-facing research trace.
-- `Setup report/`: ordered setup/case records for named Fluent branches and parent/child setup lineage.
+- `Setups/`: lifecycle-organized setup/case records for named Fluent branches, parent/child lineage, and numerical reports.
 
 Start with:
 - `AGENTS.md` for routing rules and repository operating instructions.
 - `CFD_wiki/wiki/index.md` for reusable CFD knowledge.
 - `ResearchProject_wiki/wiki/index.md` for project state.
-- `Setup report/order-dictionary.md` for setup-report ordering and lineage.
+- `Setups/order-dictionary.md` for setup ordering and lineage.
 
 ## What Is Not In The Remote Repo
 
@@ -98,6 +98,6 @@ They support the project-specific extraction and audit trail under:
 3. Read `AGENTS.md` before editing so content goes to the correct knowledge system.
 4. Use `CFD_wiki/paper_lookup/index.md` as the first stop for paper navigation.
 5. Use `ResearchProject_wiki/wiki/index.md` and `ResearchProject_wiki/wiki/progress/current-status.md` for project state.
-6. Use `Setup report/order-dictionary.md` before creating or renaming setup reports.
+6. Use `Setups/order-dictionary.md` before creating or renaming setup records.
 
 Do not commit `CFD_wiki/raw/`, the large Fluent guide PDF, local virtual environments, or generated cache files unless the storage strategy is changed deliberately.

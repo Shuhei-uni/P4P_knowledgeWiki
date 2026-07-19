@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "CFD_wiki/wiki/sources/mubarok-2020-cfd-geothermal-flow-meters.md",
+                "file": "CFD_wiki/wiki/entities/multiphase-dpm-particle-tracking.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "mubarok-2020-cfd-geothermal-flow-meters"
+              "title": "multiphase-dpm-particle-tracking"
             }
           }
         ]
@@ -182,6 +182,7 @@
   },
   "active": "6c4c297b8bf4a4c2",
   "lastOpenFiles": [
+    "CFD_wiki/wiki/sources/mubarok-2020-cfd-geothermal-flow-meters.md",
     "CFD_wiki/wiki/synthesis/mesh-quality-and-resolution-patterns.md",
     "CFD_wiki/wiki/concepts/mesh-inflation-boundary-layer.md",
     "CFD_wiki/wiki/physics-basis/droplets-carryover-and-re-entrainment.md",
@@ -208,7 +209,6 @@
     "CFD_wiki/wiki/setups/annular-flow-three-field-fluent-2020-thesis-reproduction.md",
     "CFD_wiki/wiki/setups/vertical-tube-annular-flow-fluent-dpm-ewf-2024.md",
     "CFD_wiki/wiki/setups/geothermal-two-phase-flow-meter-fluent-sst-mixture-2020.md",
-    "CFD_wiki/wiki/sources/merbecks-2025-geoprop-geofluid-property-framework.md",
-    "CFD_wiki/wiki/sources/montesdeoca-martinez-2026-binary-power-plant-two-phase-geofluid.md"
+    "CFD_wiki/wiki/sources/merbecks-2025-geoprop-geofluid-property-framework.md"
   ]
 }

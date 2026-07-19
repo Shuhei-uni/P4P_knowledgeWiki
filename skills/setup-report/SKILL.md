@@ -1,26 +1,26 @@
 ---
 name: setup-report
-description: "Use when working with Setup report setup-instance records: searching setup lineage, creating or updating concrete Fluent case definitions, parent/child variants, ordered setup history, setup naming, report-facing boundary-condition snapshots, or Setup report/order-dictionary.md."
+description: "Use when working with Setups setup-instance records: searching setup lineage, creating or updating concrete Fluent case definitions, parent/child variants, ordered setup history, setup naming, report-facing boundary-condition snapshots, or Setups/order-dictionary.md."
 ---
 
 # Setup Report
 
 ## Core Rule
 
-Use `Setup report/` for concrete setup-instance documents: named case definitions, parent/child setup variants, ordered case history, and report-facing snapshots with boundary conditions, assumptions, and calculations.
+Use `Setups/` for concrete setup-instance documents: named case definitions, parent/child setup variants, ordered case history, and report-facing snapshots with boundary conditions, assumptions, and calculations.
 
-Do not use `Setup report/` for reusable CFD methods, generic Fluent guidance, literature extraction, day-to-day project status, or PyAnsys implementation code.
+Do not use `Setups/` for reusable CFD methods, generic Fluent guidance, literature extraction, day-to-day project status, or PyAnsys implementation code.
 
 Before editing setup reports, read:
 
 1. `AGENTS.md` at the repository root for cross-system routing.
-2. `Setup report/order-dictionary.md` for ordering, naming, and current lineage.
+2. `Setups/order-dictionary.md` for ordering, naming, and current lineage.
 3. The parent and child setup reports directly related to the requested branch.
 4. `ResearchProject_wiki/wiki/project/roadmap.md` when active project direction matters.
 
 ## Search Workflow
 
-Start with `Setup report/order-dictionary.md`. Use it to identify:
+Start with `Setups/order-dictionary.md`. Use it to identify:
 
 - the active branch;
 - parent and child reports;
@@ -30,16 +30,22 @@ Start with `Setup report/order-dictionary.md`. Use it to identify:
 Then open only the relevant setup reports. Use `rg` for branch-specific searches:
 
 ```bash
-rg -n "08b|DPM|velocity inlet|mass-flow|brine outlet|parent|child" "Setup report"
+rg -n "08b|DPM|velocity inlet|mass-flow|brine outlet|parent|child" "Setups"
 ```
 
 Current high-level interpretation from the dictionary:
 
-- `08b-purnanto-parity-split-inlet-rebuild.md` is the active parity-reset and V&V candidate branch.
-- `07-pure-phase-split-actual-area.md` is retained as comparison context rather than the primary V&V parent.
-- `09*` branches remain parked until the accepted parity-reset branch exists.
+- `08c-purnanto-parity-inlet-velocity-sensitivity.md` and `09c-dpm-ewf-wall-film-reentrainment.md` are the active branches.
+- `04`, `07`, `08b`, `09a`, and `09b` are past reported because they contain actual flux-efficiency and/or DPM trajectory/fate numerics.
+- `08a` and the remaining older definitions are archived until numerical evidence is recorded.
 
-Always verify this against `Setup report/order-dictionary.md` before answering because the dictionary is the controlling map.
+Reported-status rule:
+
+- classify a setup as `reported` only when actual numerical flux-efficiency/carryover values or numerical DPM fate/trajectory counts exist;
+- planned values, setup targets, and placeholder result tables do not qualify;
+- keep the evidence-use label explicit because reported does not imply validated.
+
+Always verify this against `Setups/order-dictionary.md` before answering because the dictionary is the controlling map.
 
 ## Creation And Naming Workflow
 
@@ -56,7 +62,7 @@ When creating or renaming:
 2. Add a new number or branch suffix such as `08`, `08a`, or `08b` rather than renaming old reports.
 3. Avoid filename status words like `current`, `latest`, or `final`.
 4. Use pattern `NN[-branch]-short-description.md`.
-5. Update `Setup report/order-dictionary.md` if ordering, branch identity, or naming changed.
+5. Update `Setups/order-dictionary.md` if ordering, branch identity, or naming changed.
 6. Update cross-links in setup reports and relevant wiki indexes.
 
 ## Content Workflow

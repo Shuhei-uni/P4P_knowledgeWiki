@@ -21,7 +21,7 @@
 - Run ID: `PURNANTO-08B-POSTPROCESS-2026-07-02`
 - Date: 2026-07-02
 - Objective: post-process the already-run setup `08b` `5000`-iteration case/data on the live Fluent server, record the current phase-flux result, and refresh the active 6-injection DPM summary without rebuilding the case.
-- Geometry: `purnanto` split-inlet parity-reset branch from `../../../Setup report/08b-purnanto-parity-split-inlet-rebuild.md`; two `mass-flow-inlet` zones (`liquidinlet`, `steaminlet`), one `pressure-outlet` zone (`steamoutlet`), walls `bottom` and `wall`.
+- Geometry: `purnanto` split-inlet parity-reset branch from `../../../Setups/past/reported/08b-purnanto-parity-split-inlet-rebuild.md`; two `mass-flow-inlet` zones (`liquidinlet`, `steaminlet`), one `pressure-outlet` zone (`steamoutlet`), walls `bottom` and `wall`.
 - Mesh: `1,309,312` nodes and `7,601,261` tetrahedral cells (`Observed` from the live case readback during the manual load and server-side post-processing session).
 - Physics model: steady pressure-based `Mixture` with `2` phases; `phase-1 = water-vapor-at-psep`; `phase-2 = water-liquid-at-psep`; `RNG k-epsilon`; energy off; one-way DPM active with `pressure force = on`, `virtual mass = on`, `max_num_steps = 10000`, and `step-length-factor = 5`.
 - Solver settings: carrier field already solved to the saved `5000`-iteration state before this post-processing pass; no rebuild, no new carrier iterations, and no new injections were created during this run.
@@ -139,13 +139,13 @@
 - Outcome: `Setup Defined`.
 - Evidence-use label: direct Purnanto-recreation branch definition only.
 - Hypothesized cause (if non-converged): not yet applicable; the point of this branch is to remove the split-inlet change and return to the simpler paper-style one-inlet package.
-- Next action: build the Fluent case from `../../../Setup report/08-purnanto-one-inlet-massflow-recreation.md` and verify the boundary/model stack before reviving any split-inlet comparison logic.
+- Next action: build the Fluent case from `../../../Setups/past/archived/08-purnanto-one-inlet-massflow-recreation.md` and verify the boundary/model stack before reviving any split-inlet comparison logic.
 
 ### Run PLS-STUDENT-OUTLET-EXT-2026-06-08
 - Run ID: `PLS-STUDENT-OUTLET-EXT-2026-06-08` (`Assumed` setup label until the Fluent case filename is confirmed)
 - Date: 2026-06-08
 - Objective: Test whether moving the steam pressure-outlet boundary downstream of the central outlet-pipe entrance reduces outlet backflow reversal and stabilizes steam-outlet mass-flux reports.
-- Geometry: child of `../../../Setup report/07-pure-phase-split-actual-area.md`; uses the `purnantov2` geometry branch with setup `07` pure liquid / pure steam split inlet, plus the downstream steam-outlet extension so `steam_outlet` is placed at the end of the longer outlet path.
+- Geometry: child of `../../../Setups/past/reported/07-pure-phase-split-actual-area.md`; uses the `purnantov2` geometry branch with setup `07` pure liquid / pure steam split inlet, plus the downstream steam-outlet extension so `steam_outlet` is placed at the end of the longer outlet path.
 - Mesh: pending student-edition rebuild; record nodes, cells, minimum orthogonal quality, maximum skewness, and outlet-extension local mesh quality before running.
 - Physics model: inherit setup `07` steady pressure-based `Mixture` model; primary phase steam/vapor, secondary phase liquid water; `RNG k-epsilon`; energy off unless the rebuilt Fluent case forces a documented change.
 - Solver settings: inherit setup `07` (`SIMPLE`, `PRESTO!`, second-order momentum/turbulence schemes, setup `07` volume-fraction scheme, hybrid initialization) unless explicitly recorded as changed.
@@ -155,7 +155,7 @@
 - Outcome: `Planned`.
 - Evidence-use label: planned student-edition geometry diagnostic only. This branch can test boundary-placement sensitivity, but it is not final separator-performance evidence unless mesh quality, residual/monitor stability, and flux stability are documented.
 - Hypothesized cause (if non-converged): `Inferred` pressure-outlet boundary placement at the immediate outlet-pipe entrance may expose the boundary to local swirling/recirculating flow, causing backflow reversal and unstable outlet mass-flux reporting.
-- Next action: build the setup `08a` geometry from `../../../Setup report/08a-steam-outlet-extension-student-trial.md`, confirm the former outlet-pipe entrance is internal flow passage rather than a boundary face, then initialize and verify inlet fluxes before running.
+- Next action: build the setup `08a` geometry from `../../../Setups/past/archived/08a-steam-outlet-extension-student-trial.md`, confirm the former outlet-pipe entrance is internal flow passage rather than a boundary face, then initialize and verify inlet fluxes before running.
 
 ### Run PURNANTO-LIVE-AUDIT-2026-06-05
 - Run ID: `PURNANTO-LIVE-AUDIT-2026-06-05`
@@ -177,8 +177,8 @@
 ### Run PLS-PRO-2026-06-03-A
 - Run ID: `PLS-PRO-2026-06-03-A` (`Assumed` report label until the Fluent case filename is confirmed)
 - Date: 2026-06-03
-- Objective: Record the professional-license baseline flux result for `../../../Setup report/07-pure-phase-split-actual-area.md` before running quick DPM droplet-size efficiency checks.
-- Geometry: `purnanto` spiral-inlet BOC separator with pure liquid / pure steam split inlet using the actual-area setup from `../../../Setup report/07-pure-phase-split-actual-area.md`.
+- Objective: Record the professional-license baseline flux result for `../../../Setups/past/reported/07-pure-phase-split-actual-area.md` before running quick DPM droplet-size efficiency checks.
+- Geometry: `purnanto` spiral-inlet BOC separator with pure liquid / pure steam split inlet using the actual-area setup from `../../../Setups/past/reported/07-pure-phase-split-actual-area.md`.
 - Mesh: `1.3M` nodes and `7.6M` cells (`User-reported`).
 - Physics model: inferred continuation of the steady pressure-based `Mixture` model; primary phase steam/vapor, secondary phase liquid water; `RNG k-epsilon`; energy off unless the saved Fluent case shows otherwise.
 - Solver settings: professional-license run; detailed residuals, discretization confirmation, and monitor history not yet captured in this log entry.
@@ -201,7 +201,7 @@
 - Run ID: `PLS-STUDENT-ROUGH-2026-06-01-A` (`Assumed` report label until the Fluent case filename is confirmed)
 - Date: 2026-06-01
 - Objective: Roughly check flux behavior for the pure liquid / pure steam actual-area split using a student-edition mesh and a `2 m` inlet extension before deciding which geometry direction looks more promising.
-- Geometry: likely `purnanto` spiral-inlet BOC separator with pure liquid / pure steam split inlet sized from `../../../Setup report/07-pure-phase-split-actual-area.md`; both inlet legs appear extended upstream in the rough report.
+- Geometry: likely `purnanto` spiral-inlet BOC separator with pure liquid / pure steam split inlet sized from `../../../Setups/past/reported/07-pure-phase-split-actual-area.md`; both inlet legs appear extended upstream in the rough report.
 - Mesh: `178k` nodes, `993k` cells, minimum orthogonal quality `0.194`.
 - Physics model: inferred continuation of the steady `Mixture`-model separator setup; exact case file settings not fully captured in the report.
 - Solver settings: not fully captured; residuals were reported as not converged enough for strong quantitative claims.
@@ -219,7 +219,7 @@
 - Run ID: `PLS-STUDENT-ROUGH-2026-06-01-B` (`Assumed` report label until the Fluent case filename is confirmed)
 - Date: 2026-06-01
 - Objective: Roughly test whether changing the upstream extension arrangement improves the pure-phase split inlet behavior seen in the first student-edition diagnostic case.
-- Geometry: spiral-inlet BOC separator with the same pure liquid / pure steam split sizing from `../../../Setup report/07-pure-phase-split-actual-area.md`; rough report notes that only the steam inlet kept the upstream extension while the liquid inlet was moved closer to the vessel.
+- Geometry: spiral-inlet BOC separator with the same pure liquid / pure steam split sizing from `../../../Setups/past/reported/07-pure-phase-split-actual-area.md`; rough report notes that only the steam inlet kept the upstream extension while the liquid inlet was moved closer to the vessel.
 - Mesh: `168k` nodes, `937k` cells, minimum orthogonal quality `0.194`.
 - Physics model: inferred continuation of the steady `Mixture`-model separator setup; exact case file settings not fully captured in the report.
 - Solver settings: rough report notes that the inlet condition was changed from velocity inlet to mass-flow inlet, making this a two-factor comparison rather than a clean one-factor control.
@@ -240,7 +240,7 @@
 - Geometry: spiral-inlet BOC separator with rectangular `0.724 m x 0.724 m` inlet split into liquid-side width `0.006754 m` and steam-side width `0.717246 m`.
 - Mesh: same current project mesh family unless superseded; key pre-run check is resolving the `6.754 mm` liquid strip.
 - Physics model: steady pressure-based `Mixture` model; primary phase steam/vapor, secondary phase liquid water; `RNG k-epsilon`; energy off.
-- Solver settings: inherit from `../../../Setup report/04-mixed-wet-half-actual-area.md` unless separately changed.
+- Solver settings: inherit from `../../../Setups/past/reported/04-mixed-wet-half-actual-area.md` unless separately changed.
 - Boundary and initial conditions: `inlet_liquid_outer` velocity inlet at `27.118 m/s`, liquid VF `1.0`, turbulence intensity `2.10999999 %`, hydraulic diameter `0.01338 m`; `inlet_steam_inner` velocity inlet at `27.118 m/s`, liquid VF `0.0`, turbulence intensity `2.10999999 %`, hydraulic diameter `0.72061 m`.
 - Iteration budget: pending Fluent run plan.
 - Convergence monitors: residuals, inlet phase fluxes, outlet phase fluxes, liquid-volume-fraction contours, velocity vectors, and near-inlet turbulence quantities if available.
@@ -263,7 +263,7 @@
 - Outcome: `Setup Calculation Only`.
 - Evidence-use label: valid for boundary setup. Expected inlet flows are liquid `115.59 kg/s`, steam `79.77 kg/s`, total `195.37 kg/s`, which is `1.14 %` below Purnanto's `197.61 kg/s` target because the current inlet area is smaller than the area implied by `26.81 m/s`.
 - Hypothesized cause (if non-converged): not applicable; main pre-run risks are wrong physical side mapping and under-resolved narrow liquid strip.
-- Next action: create the two named inlet faces from `../../../Setup report/06-pure-phase-split-fixed-velocity.md`, then verify Fluent flux reports before interpreting outlet behavior.
+- Next action: create the two named inlet faces from `../../../Setups/past/archived/06-pure-phase-split-fixed-velocity.md`, then verify Fluent flux reports before interpreting outlet behavior.
 
 ### Run PTS-AREA-2026-05-28
 - Run ID: `PTS-AREA-2026-05-28` (`Assumed` setup-calculation label; not a Fluent solve)
@@ -296,7 +296,7 @@
 - Outcome: `Planned`.
 - Evidence-use label: setup calculation only until `5000`-iteration residuals, mass balance, and outlet phase fluxes are checked.
 - Hypothesized cause (if non-converged): not yet applicable; main risk is that no active brine outlet may accumulate or carry liquid to the steam outlet, making the run unsuitable for liquid-removal efficiency.
-- Next action: create the Fluent case from `../../../Setup report/05-complete-two-phase-actual-area-no-brine-outlet.md`, confirm the brine outlet is not active, and run the planned checkpoint sequence.
+- Next action: create the Fluent case from `../../../Setups/past/archived/05-complete-two-phase-actual-area-no-brine-outlet.md`, confirm the brine outlet is not active, and run the planned checkpoint sequence.
 
 ### Run MWH-ACTUAL-AREA-2026-05-27
 - Run ID: `MWH-ACTUAL-AREA-2026-05-27` (`Assumed` report label until Fluent filename is confirmed)
@@ -312,7 +312,7 @@
 - Outcome: `Setup Calculation Only`.
 - Evidence-use label: inlet boundary-condition documentation only; not yet usable for separator efficiency or final performance claims.
 - Hypothesized cause (if non-converged): pending actual solve/post-processing evidence.
-- Next action: add mass flux interpretation, outlet phase fluxes, separator efficiency, and key contour/vector findings to `../../../Setup report/04-mixed-wet-half-actual-area.md`.
+- Next action: add mass flux interpretation, outlet phase fluxes, separator efficiency, and key contour/vector findings to `../../../Setups/past/reported/04-mixed-wet-half-actual-area.md` and its linked results report.
 
 ### Run FFF-2-OP0
 - Run ID: `FFF-2-OP0` (`Assumed` temporary label until Fluent filename is confirmed)

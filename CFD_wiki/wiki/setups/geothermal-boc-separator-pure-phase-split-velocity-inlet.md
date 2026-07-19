@@ -13,9 +13,9 @@ This page merges the stable baseline solver stack from the 2013 reconstruction w
 - Baseline reconstruction: [geothermal-boc-separator-fluent-2013-baseline](geothermal-boc-separator-fluent-2013-baseline.md)
 - Reusable split-inlet rule: [geothermal-boc-separator-two-zone-split-inlet](geothermal-boc-separator-two-zone-split-inlet.md)
 - Setup lineage used for the velocity-inlet variants:
-  - `../../../Setup report/04-mixed-wet-half-actual-area.md`
-  - `../../../Setup report/06-pure-phase-split-fixed-velocity.md`
-  - `../../../Setup report/07-pure-phase-split-actual-area.md`
+  - `../../../Setups/past/reported/04-mixed-wet-half-actual-area.md`
+  - `../../../Setups/past/archived/06-pure-phase-split-fixed-velocity.md`
+  - `../../../Setups/past/reported/07-pure-phase-split-actual-area.md`
 
 ## Evidence Labels
 - `Reported`: directly stated in the 2013 paper.

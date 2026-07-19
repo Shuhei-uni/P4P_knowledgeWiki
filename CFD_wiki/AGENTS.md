@@ -32,7 +32,7 @@ Long-term goal is synthesis: connect multiple papers into a network of reusable 
 ## Cross-System Boundaries
 - `CFD_wiki` owns reusable method and evidence logic.
 - `ResearchProject_wiki/wiki/vnv/` owns project-specific verification reports, validation reports, and final sign-off.
-- `Setup report/` owns concrete setup lineage and report-facing case definitions.
+- `Setups/` owns concrete setup lineage and report-facing case definitions.
 - `PyAnsys/` owns executable automation, inspection scripts, and machine-readable target or claim-gate files.
 
 Do not move project-run judgments, setup lineage, or automation-specific implementation detail into this wiki unless the point is to extract a reusable CFD lesson.

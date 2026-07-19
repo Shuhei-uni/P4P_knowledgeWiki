@@ -20,10 +20,10 @@
 - New PyFluent result: the local `trial3.msh` one-inlet reconstruction now launches, creates manual water vapor/liquid materials, hybrid-initializes, and completes a `10`-iteration smoke test through the script in `../../../PyAnsys/scripts/reconstruct_purnanto_trial3.py`.
 - New hardened PyFluent result: the same one-inlet reconstruction path now runs on `trial4.msh` with clean `Operating Pressure = 0 Pa`, confirmed 2026 R1 numerics paths, mass-flow sanity reporting, and both case/data writes.
 - New longer PyFluent result: a controlled `500`-iteration `trial4` diagnostic run has now completed on the one-steam-outlet branch with chunked reporting, checkpointing, vapor recovery approximately `1.0092`, liquid carryover approximately `3.97e-25`, and a rough residual-history plot recovered from the Fluent transcript.
-- Active setup branch: `../../../Setup report/08b-purnanto-parity-split-inlet-rebuild.md` is now the selected parity-reset and V&V branch.
-- Retained scaffold branch: `../../../Setup report/08-purnanto-one-inlet-massflow-recreation.md` remains the one-inlet automation/parity scaffold.
-- Retained comparison branch: `../../../Setup report/07-pure-phase-split-actual-area.md` is now comparison-only split-inlet context, not the main V&V parent.
-- Secondary comparison branch: `../../../Setup report/08a-steam-outlet-extension-student-trial.md` remains available for the downstream steam-outlet boundary-placement diagnostic if that question is revived.
+- Active setup branches: `../../../Setups/active/08c-purnanto-parity-inlet-velocity-sensitivity.md` and `../../../Setups/active/09c-dpm-ewf-wall-film-reentrainment.md`.
+- Retained scaffold branch: `../../../Setups/past/archived/08-purnanto-one-inlet-massflow-recreation.md` remains the one-inlet automation/parity scaffold.
+- Retained comparison branch: `../../../Setups/past/reported/07-pure-phase-split-actual-area.md` is comparison-only split-inlet context, not the main V&V parent.
+- Secondary comparison branch: `../../../Setups/past/archived/08a-steam-outlet-extension-student-trial.md` remains available if the downstream steam-outlet boundary-placement diagnostic is revived.
 - Archive guard: do not archive chats that were active on or after `2026-05-25`; older chats can be archived only after their durable outcomes are confirmed in the wiki and setup-report files.
 
 ## What Is Done
@@ -48,10 +48,10 @@
 - Professional-license setup `07` flux diagnostic is now documented: mesh approximately `1.3M` nodes and `7.6M` cells; liquid inlet `116.8523 kg/s`; steam inlet `81.6395 kg/s`; steam outlet steam `86.2934 kg/s`; steam outlet liquid `0.03663 kg/s`.
 - Live `08b` post-processing is now documented: mesh `1,309,312` nodes and `7,601,261` cells; liquid inlet `116.92 kg/s`; steam inlet `80.69 kg/s`; steam outlet steam `81.464165 kg/s`; steam outlet liquid `0.082132007 kg/s`; DPM summary currently reports `13012` incomplete and `8` escaped across the active 6-bin set, and the one-injection-at-a-time sampled escape is confined to `injection-5-micron` in the current diagnostic pass.
 - New literature anchors are now linked into the project layer: Pointon et al. 2009 adds a geothermal HP-separator CFD scale/pressure-drop/scrolled-entry check, and Chen et al. 2025 adds an experiment-backed `RSM-DPM` separator-method benchmark for any later turbulence-model sensitivity decision.
-- Newest documented run: `PLS-PRO-2026-06-03-A`, based on `Setup report/07-pure-phase-split-actual-area.md`.
-- Newest baseline audit: `PURNANTO-LIVE-AUDIT-2026-06-05`, recorded in `../../../Setup report/00a-purnanto-setup-5000-live-audit.md`.
-- New direct-rebuild report: `../../../Setup report/08-purnanto-one-inlet-massflow-recreation.md`.
-- Retained comparison report: `../../../Setup report/08a-steam-outlet-extension-student-trial.md`.
+- Newest documented run: `PLS-PRO-2026-06-03-A`, based on `../../../Setups/past/reported/07-pure-phase-split-actual-area.md`.
+- Newest baseline audit: `PURNANTO-LIVE-AUDIT-2026-06-05`, recorded in `../../../Setups/past/archived/00a-purnanto-setup-5000-live-audit.md`.
+- New direct-rebuild report: `../../../Setups/past/archived/08-purnanto-one-inlet-massflow-recreation.md`.
+- Retained comparison report: `../../../Setups/past/archived/08a-steam-outlet-extension-student-trial.md`.
 - New geometry naming authority: `../technical/v2-purnanto-spiral-inlet-geometry.md` now records the `purnanto` versus `purnantov2` distinction for the project.
 - New local automation note: `../technical/pyfluent-trial3-one-inlet-reconstruction-smoke-test.md`.
 - New local reusable doc: `../../../PyAnsys/docs/findings/LOCAL_ONE_INLET_SMOKE_TEST.md`.

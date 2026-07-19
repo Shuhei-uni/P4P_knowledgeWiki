@@ -29,7 +29,7 @@ Maintain the project-specific evidence trail:
 ## Do Not
 
 - write generic CFD tutorial material that belongs in `CFD_wiki`
-- create or rename setup lineage records in `Setup report/`
+- create or rename setup lineage records in `Setups/`
 - present assumptions as reported facts
 
 ## Mandatory Reminder

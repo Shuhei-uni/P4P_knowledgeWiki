@@ -107,7 +107,7 @@ After PyAnsys work:
 
 - If claim-gating behavior changed, align the human-readable rule in `ResearchProject_wiki/wiki/vnv/`.
 - If reusable CFD method knowledge was discovered, summarize it in `CFD_wiki/`.
-- If a concrete setup branch changed, sync the setup identity into `Setup report/`.
+- If a concrete setup branch changed, sync the setup identity into `Setups/`.
 - If target manifests or automated checks need human review, link them from the matching project V&V page.
 
 Append new working paths, required orders, TUI workarounds, or repeatable failures to the relevant `PyAnsys/knowledge/fluent-settings/` files, at minimum `logs/successful_paths.md` for successful live discoveries.
