@@ -8,16 +8,19 @@
 - `../template/spiral-inlet-run-validation-template.md`
 
 ## Setup Reports
-- `../../Setup report/order-dictionary.md`
-- `../../Setup report/00a-purnanto-setup-5000-live-audit.md`
-- `../../Setup report/04-mixed-wet-half-actual-area.md`
-- `../../Setup report/05-complete-two-phase-actual-area-no-brine-outlet.md`
-- `../../Setup report/06-pure-phase-split-fixed-velocity.md`
-- `../../Setup report/07-pure-phase-split-actual-area.md`
-- `../../Setup report/08a-steam-outlet-extension-student-trial.md`
-- `../../Setup report/08-purnanto-one-inlet-massflow-recreation.md`
-- `../../Setup report/08b-purnanto-parity-split-inlet-rebuild.md`
-- `../../Setup report/08c-purnanto-parity-inlet-velocity-sensitivity.md`
+- `../../Setups/index.md`
+- `../../Setups/order-dictionary.md`
+- `../../Setups/past/archived/00a-purnanto-setup-5000-live-audit.md`
+- `../../Setups/past/reported/04-mixed-wet-half-actual-area.md`
+- `../../Setups/past/archived/05-complete-two-phase-actual-area-no-brine-outlet.md`
+- `../../Setups/past/archived/06-pure-phase-split-fixed-velocity.md`
+- `../../Setups/past/reported/07-pure-phase-split-actual-area.md`
+- `../../Setups/past/archived/08a-steam-outlet-extension-student-trial.md`
+- `../../Setups/past/archived/08-purnanto-one-inlet-massflow-recreation.md`
+- `../../Setups/past/reported/08b-purnanto-parity-split-inlet-rebuild.md`
+- `../../Setups/active/08c-purnanto-parity-inlet-velocity-sensitivity.md`
+- `../../Setups/active/09c-dpm-ewf-wall-film-reentrainment.md`
+- `../../Setups/reports/index.md`
 
 ## Progress Layer
 - `wiki/progress/current-status.md`

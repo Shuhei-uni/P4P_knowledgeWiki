@@ -579,18 +579,57 @@ def parse_dpm_sample_output(output: str) -> dict[str, Any]:
     }
 
 
+def build_dpm_sample_tui_command(
+    *,
+    injection_name: str,
+    boundary_names: Sequence[str],
+    plane_names: Sequence[str] = (),
+    sample_file_name: str = "",
+    prompt_order: str = "injections-first",
+) -> str:
+    """Build one Fluent ``/report/dpm-sample`` command for a single injection.
+
+    The GUI journal records list selections, but the TUI prompt order is:
+    release injection, sample boundaries, planes, then sample file. Supplying an
+    explicit file avoids Fluent falling back to ``<boundary>.dpm`` in an
+    unknown or unwritable working directory.
+    """
+    if prompt_order == "injections-first":
+        selections = (
+            _format_tui_list([injection_name]),
+            _format_tui_list(boundary_names),
+            _format_tui_list(plane_names),
+        )
+    elif prompt_order == "sample-surfaces-first":
+        selections = (
+            _format_tui_list(boundary_names),
+            _format_tui_list(plane_names),
+            _format_tui_list([injection_name]),
+        )
+    else:
+        raise ValueError(f"Unknown DPM sample prompt order: {prompt_order}")
+
+    if sample_file_name:
+        selections = (*selections, sample_file_name)
+
+    return "/report/dpm-sample\n" + "\n".join(selections) + "\n"
+
+
 def run_dpm_sample_for_injection(
     solver: Any,
     *,
     injection_name: str,
     boundary_names: Sequence[str],
     plane_names: Sequence[str] = (),
+    sample_file_name: str = "",
+    prompt_order: str = "injections-first",
 ) -> dict[str, Any]:
-    command = (
-        "/report/dpm-sample\n"
-        f"{_format_tui_list([injection_name])}\n"
-        f"{_format_tui_list(boundary_names)}\n"
-        f"{_format_tui_list(plane_names)}\n"
+    command = build_dpm_sample_tui_command(
+        injection_name=injection_name,
+        boundary_names=boundary_names,
+        plane_names=plane_names,
+        sample_file_name=sample_file_name,
+        prompt_order=prompt_order,
     )
 
     buffer = io.StringIO()
@@ -617,6 +656,9 @@ def run_dpm_sample_for_injection(
     return {
         "name": injection_name,
         "command_ok": bool(result),
+        "prompt_order": prompt_order,
+        "tui_command": command,
+        "sample_file_name": sample_file_name,
         "selected_boundaries": list(boundary_names),
         "selected_planes": list(plane_names),
         "counts": counts,
@@ -635,6 +677,9 @@ def run_dpm_sample_per_injection(
     injection_names: Sequence[str],
     boundary_names: Sequence[str],
     plane_names: Sequence[str] = (),
+    sample_file_names: Mapping[str, str] | None = None,
+    prompt_order: str = "injections-first",
+    fallback_prompt_order: str | None = None,
 ) -> dict[str, Any]:
     warnings: list[str] = []
     samples: list[dict[str, Any]] = []
@@ -646,13 +691,35 @@ def run_dpm_sample_per_injection(
     }
 
     for injection_name in injection_names:
+        sample_file_name = ""
+        if sample_file_names:
+            sample_file_name = str(sample_file_names.get(injection_name, ""))
         try:
             sample = run_dpm_sample_for_injection(
                 solver,
                 injection_name=injection_name,
                 boundary_names=boundary_names,
                 plane_names=plane_names,
+                sample_file_name=sample_file_name,
+                prompt_order=prompt_order,
             )
+            if (
+                fallback_prompt_order
+                and sample["counts"].get("tracked") is None
+                and sample.get("warnings")
+            ):
+                warnings.append(
+                    f"dpm-sample using prompt order {prompt_order} did not return counts for {injection_name}; "
+                    f"retrying with {fallback_prompt_order}."
+                )
+                sample = run_dpm_sample_for_injection(
+                    solver,
+                    injection_name=injection_name,
+                    boundary_names=boundary_names,
+                    plane_names=plane_names,
+                    sample_file_name=sample_file_name,
+                    prompt_order=fallback_prompt_order,
+                )
         except Exception as exc:
             warnings.append(
                 f"dpm-sample failed for {injection_name}: {type(exc).__name__}: {exc}"
@@ -660,6 +727,15 @@ def run_dpm_sample_per_injection(
             sample = {
                 "name": injection_name,
                 "command_ok": False,
+                "prompt_order": prompt_order,
+                "tui_command": build_dpm_sample_tui_command(
+                    injection_name=injection_name,
+                    boundary_names=boundary_names,
+                    plane_names=plane_names,
+                    sample_file_name=sample_file_name,
+                    prompt_order=prompt_order,
+                ),
+                "sample_file_name": sample_file_name,
                 "selected_boundaries": list(boundary_names),
                 "selected_planes": list(plane_names),
                 "counts": {
@@ -698,10 +774,17 @@ def run_dpm_sample_per_injection(
     return {
         "available": bool(samples),
         "mode": "dpm-sample-per-injection",
+        "prompt_order": prompt_order,
+        "fallback_prompt_order": fallback_prompt_order,
         "selected_boundaries": list(boundary_names),
         "selected_planes": list(plane_names),
         "samples": samples,
         "aggregate_counts": aggregate_counts,
+        "aggregate_rates": {
+            "escaped": escaped_fraction,
+            "trapped": trapped_fraction,
+            "incomplete": incomplete_fraction,
+        },
         "escaped_fraction": escaped_fraction,
         "trapped_fraction": trapped_fraction,
         "incomplete_fraction": incomplete_fraction,
@@ -886,11 +969,16 @@ def render_markdown_report(result: Mapping[str, Any]) -> str:
                 "",
                 "## Per-Injection DPM Sample",
                 f"- Sample mode: `{dpm_sampling.get('mode', 'unknown')}`",
+                f"- Prompt order: `{dpm_sampling.get('prompt_order', 'unknown')}`",
                 f"- Selected boundaries: `{', '.join(dpm_sampling.get('selected_boundaries', [])) or 'none'}`",
+                f"- Selected planes: `{', '.join(dpm_sampling.get('selected_planes', [])) or 'none'}`",
                 f"- Aggregate tracked: `{aggregate_counts.get('tracked', 'unavailable')}`",
                 f"- Aggregate escaped: `{aggregate_counts.get('escaped', 'unavailable')}`",
                 f"- Aggregate trapped: `{aggregate_counts.get('trapped', 'unavailable')}`",
                 f"- Aggregate incomplete: `{aggregate_counts.get('incomplete', 'unavailable')}`",
+                f"- Aggregate escaped fraction: `{_format_optional(dpm_sampling.get('escaped_fraction'))}`",
+                f"- Aggregate trapped fraction: `{_format_optional(dpm_sampling.get('trapped_fraction'))}`",
+                f"- Aggregate incomplete fraction: `{_format_optional(dpm_sampling.get('incomplete_fraction'))}`",
                 "",
             ]
         )
@@ -902,7 +990,10 @@ def render_markdown_report(result: Mapping[str, Any]) -> str:
                 f"tracked `{counts.get('tracked', 'unavailable')}`, "
                 f"escaped `{counts.get('escaped', 'unavailable')}`, "
                 f"trapped `{counts.get('trapped', 'unavailable')}`, "
-                f"incomplete `{counts.get('incomplete', 'unavailable')}`"
+                f"incomplete `{counts.get('incomplete', 'unavailable')}`, "
+                f"escaped fraction `{_format_optional(sample.get('escaped_fraction'))}`, "
+                f"trapped fraction `{_format_optional(sample.get('trapped_fraction'))}`, "
+                f"incomplete fraction `{_format_optional(sample.get('incomplete_fraction'))}`"
             )
 
     lines.extend(

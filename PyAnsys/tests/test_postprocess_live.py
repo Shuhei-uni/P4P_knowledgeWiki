@@ -3,11 +3,13 @@ from __future__ import annotations
 import unittest
 
 from pyansys_fluent.postprocess_live import (
+    build_dpm_sample_tui_command,
     calculate_carrier_metrics,
     compile_postprocess_result,
     infer_phase_domain_map,
     parse_dpm_sample_output,
     render_markdown_report,
+    run_dpm_sample_per_injection,
 )
 
 
@@ -132,7 +134,8 @@ class PostprocessLiveTests(unittest.TestCase):
                 "per_injection_sample": {
                     "available": True,
                     "mode": "dpm-sample-per-injection",
-                    "selected_boundaries": ["steamoutlet"],
+                    "prompt_order": "injections-first",
+                    "selected_boundaries": ["steaminlet"],
                     "selected_planes": [],
                     "aggregate_counts": {
                         "tracked": 6510,
@@ -140,6 +143,9 @@ class PostprocessLiveTests(unittest.TestCase):
                         "trapped": 0,
                         "incomplete": 6502,
                     },
+                    "escaped_fraction": 8 / 6510,
+                    "trapped_fraction": 0.0,
+                    "incomplete_fraction": 6502 / 6510,
                     "samples": [
                         {
                             "name": "injection-5-micron",
@@ -148,7 +154,10 @@ class PostprocessLiveTests(unittest.TestCase):
                                 "escaped": 8,
                                 "trapped": 0,
                                 "incomplete": 2162,
-                            }
+                            },
+                            "escaped_fraction": 8 / 2170,
+                            "trapped_fraction": 0.0,
+                            "incomplete_fraction": 2162 / 2170,
                         }
                     ],
                     "warnings": [],
@@ -162,6 +171,8 @@ class PostprocessLiveTests(unittest.TestCase):
         self.assertIn("562 um, 844 um, 1631 um", "\n".join(result["limitations"]))
         self.assertIn("## Carrier Flux Metrics", markdown)
         self.assertIn("## Per-Injection DPM Sample", markdown)
+        self.assertIn("Prompt order: `injections-first`", markdown)
+        self.assertIn("Selected boundaries: `steaminlet`", markdown)
         self.assertIn("injection-5-micron: tracked `2170`, escaped `8`, trapped `0`, incomplete `2162`", markdown)
         self.assertIn("Claim class ceiling: `Numerically verified`", markdown)
         self.assertIn("Stored DPM result fields available: `False`", markdown)
@@ -183,6 +194,57 @@ class PostprocessLiveTests(unittest.TestCase):
             payload["summary_line"],
             "number tracked = 2170, escaped = 8, incomplete = 2162",
         )
+
+    def test_build_dpm_sample_tui_command_matches_fluent_tui_order(self) -> None:
+        command = build_dpm_sample_tui_command(
+            injection_name="injection-112-micron",
+            boundary_names=["steaminlet"],
+            plane_names=[],
+            sample_file_name=r"C:\Users\syok443\Documents\sample.dpm",
+        )
+
+        self.assertEqual(
+            command,
+            "/report/dpm-sample\n"
+            "(injection-112-micron)\n"
+            "(steaminlet)\n"
+            "()\n"
+            r"C:\Users\syok443\Documents\sample.dpm" "\n",
+        )
+
+    def test_run_dpm_sample_per_injection_can_fall_back_to_injection_first(self) -> None:
+        class FakeScheme:
+            def __init__(self) -> None:
+                self.commands: list[str] = []
+
+            def eval(self, command: str) -> bool:
+                self.commands.append(command)
+                if "(steaminlet)\\n()\\n(injection-5-micron)" in command:
+                    print("Invalid report/dpm-sample input")
+                else:
+                    print("number tracked = 2170, escaped = 8, trapped = 0, incomplete = 2162")
+                return True
+
+        class FakeSolver:
+            def __init__(self) -> None:
+                self.scheme = FakeScheme()
+
+        solver = FakeSolver()
+
+        payload = run_dpm_sample_per_injection(
+            solver,
+            injection_names=["injection-5-micron"],
+            boundary_names=["steaminlet"],
+            plane_names=[],
+            prompt_order="sample-surfaces-first",
+            fallback_prompt_order="injections-first",
+        )
+
+        self.assertEqual(payload["aggregate_counts"]["tracked"], 2170)
+        self.assertEqual(payload["aggregate_counts"]["escaped"], 8)
+        self.assertAlmostEqual(payload["escaped_fraction"], 8 / 2170)
+        self.assertEqual(payload["samples"][0]["prompt_order"], "injections-first")
+        self.assertEqual(len(solver.scheme.commands), 2)
 
 
 if __name__ == "__main__":

@@ -30,7 +30,7 @@ Produce reusable CFD knowledge:
 
 - write project-progress narration
 - update `ResearchProject_wiki` directly unless the main agent explicitly asks
-- create setup-instance lineage records in `Setup report/`
+- create setup-instance lineage records in `Setups/`
 - duplicate full project-specific explanations that belong elsewhere
 
 ## Handoff Back to Main Agent

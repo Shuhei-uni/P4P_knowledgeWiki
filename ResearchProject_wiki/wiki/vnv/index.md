@@ -11,7 +11,7 @@ Use this layer for:
 
 Do not use this layer for:
 - reusable CFD method explanations that belong in `CFD_wiki`;
-- setup-branch lineage, parent/child naming, or setup snapshots that belong in `Setup report/`;
+- setup-branch lineage, parent/child naming, or setup snapshots that belong in `Setups/`;
 - raw Python automation artifacts that should stay in `PyAnsys`.
 
 ## Core Pages
@@ -32,7 +32,7 @@ Do not use this layer for:
 - Reusable method authority:
   - `../../../CFD_wiki/wiki/synthesis/separator-cfd-verification-and-validation-workflow.md`
 - Setup lineage authority:
-  - `../../../Setup report/order-dictionary.md`
+  - `../../../Setups/order-dictionary.md`
 - Active project roadmap:
   - `../project/roadmap.md`
 - Current model-facing summary:

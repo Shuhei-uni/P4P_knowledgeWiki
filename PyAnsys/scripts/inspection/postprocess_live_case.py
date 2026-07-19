@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import argparse
 import sys
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 
 try:
     from dotenv import load_dotenv
@@ -106,14 +106,36 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--dpm-sample-boundaries",
         nargs="*",
-        default=["steamoutlet"],
-        help="Boundary names to pass into Fluent report/dpm-sample. Default: steamoutlet.",
+        default=["steaminlet"],
+        help="Boundary names to pass into Fluent report/dpm-sample. Default: steaminlet.",
     )
     parser.add_argument(
         "--dpm-sample-planes",
         nargs="*",
         default=[],
         help="Optional plane names to pass into Fluent report/dpm-sample. Default: none.",
+    )
+    parser.add_argument(
+        "--dpm-sample-prompt-order",
+        choices=("sample-surfaces-first", "injections-first"),
+        default="injections-first",
+        help=(
+            "Prompt order for report/dpm-sample. Default is Fluent TUI order: "
+            "one release injection, sample boundaries, then planes."
+        ),
+    )
+    parser.add_argument(
+        "--dpm-sample-remote-dir",
+        default="",
+        help=(
+            "Remote directory for per-injection .dpm sample files. "
+            "Default: the remote case-file directory."
+        ),
+    )
+    parser.add_argument(
+        "--no-dpm-sample-fallback",
+        action="store_true",
+        help="Disable retry with the alternate dpm-sample prompt order when the first command does not parse counts.",
     )
     return parser
 
@@ -125,6 +147,28 @@ def derive_run_label(case_file: str, explicit_label: str) -> str:
     if name.endswith(".cas.h5"):
         return name[:-7]
     return Path(name).stem
+
+
+def build_dpm_sample_file_names(
+    *,
+    case_file: str,
+    remote_dir: str,
+    run_label: str,
+    boundary_names: list[str],
+    injection_names: list[str],
+) -> dict[str, str]:
+    base_dir = PureWindowsPath(remote_dir) if remote_dir.strip() else PureWindowsPath(case_file).parent
+    boundary_label = "-".join(boundary_names) if boundary_names else "no-boundary"
+    safe_run_label = "".join(char if char.isalnum() or char in "._-" else "_" for char in run_label)
+    safe_boundary_label = "".join(char if char.isalnum() or char in "._-" else "_" for char in boundary_label)
+
+    sample_files: dict[str, str] = {}
+    for injection_name in injection_names:
+        safe_injection = "".join(char if char.isalnum() or char in "._-" else "_" for char in injection_name)
+        sample_files[injection_name] = str(
+            base_dir / f"{safe_run_label}-{safe_boundary_label}-{safe_injection}.dpm"
+        )
+    return sample_files
 
 
 def main() -> int:
@@ -184,15 +228,26 @@ def main() -> int:
         omitted_diameters_um=DEFAULT_OMITTED_DIAMETERS_UM,
     )
     if args.dpm_sample_per_injection:
+        sample_injection_names = [
+            str(item.get("name"))
+            for item in dpm_inventory.get("injections", [])
+            if item.get("name")
+        ]
+        sample_file_names = build_dpm_sample_file_names(
+            case_file=args.case_file,
+            remote_dir=args.dpm_sample_remote_dir,
+            run_label=run_label,
+            boundary_names=args.dpm_sample_boundaries,
+            injection_names=sample_injection_names,
+        )
         sample_payload = run_dpm_sample_per_injection(
             solver,
-            injection_names=[
-                str(item.get("name"))
-                for item in dpm_inventory.get("injections", [])
-                if item.get("name")
-            ],
+            injection_names=sample_injection_names,
             boundary_names=args.dpm_sample_boundaries,
             plane_names=args.dpm_sample_planes,
+            sample_file_names=sample_file_names,
+            prompt_order=args.dpm_sample_prompt_order,
+            fallback_prompt_order=None if args.no_dpm_sample_fallback else "sample-surfaces-first",
         )
         dpm_metrics["per_injection_sample"] = sample_payload
 
