@@ -215,7 +215,7 @@ def main() -> int:
     carrier_fluxes = extract_mass_flow_report(
         solver,
         zones=zones_for_flux,
-        domains=("mixture", phase_domain_map["vapor_domain"], phase_domain_map["liquid_domain"]),
+        domains=(phase_domain_map["vapor_domain"], phase_domain_map["liquid_domain"]),
     )
     carrier_metrics = calculate_carrier_metrics(
         carrier_fluxes,

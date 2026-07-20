@@ -1,0 +1,110 @@
+{
+  "server_id": "1",
+  "case_file": "C:\\Users\\syok443\\Documents\\TwoPhaseInletV2(Purnanto)\\08c different speeds\\TwoPhaseInletV2(Purnanto)-08c-v20p00.cas.h5",
+  "data_file": "C:\\Users\\syok443\\Documents\\TwoPhaseInletV2(Purnanto)\\08c different speeds\\TwoPhaseInletV2(Purnanto)-08c-v20p00-25-03088.dat.h5",
+  "run_label": "08c-v20p00-5um-retry5",
+  "reference_injections_um": {
+    "injection-5-micron": 5.63,
+    "injection-28-micron": 28.14,
+    "injection-56-micron": 56.27,
+    "injection-112-micron": 112.54,
+    "injection-168-micron": 168.811,
+    "injection-348-micron": 348.88
+  },
+  "selected_injections": [
+    "injection-5-micron"
+  ],
+  "report_controls": {
+    "report_type": "summary",
+    "report_to": "screen",
+    "display": false
+  },
+  "injections": {
+    "injection-5-micron": {
+      "name": "injection-5-micron",
+      "expected_diameter_um": 5.63,
+      "diameter_um": 5.629999999999999,
+      "diameter_error_um": -8.881784197001252e-16,
+      "diameter_matches_reference": true,
+      "state": {
+        "name": "injection-5-micron",
+        "particle_type": "inert",
+        "material": "water-liquid",
+        "injection_type": {
+          "option": "surface"
+        },
+        "initial_values": {
+          "reference_frame": "global",
+          "location": {
+            "injection_surfaces": [
+              "steaminlet"
+            ],
+            "randomized_positions_enabled": false
+          },
+          "mass_flow_rate": {
+            "total_flow_rate": 0.19
+          },
+          "velocity": {
+            "use_face_normal_direction": false,
+            "x_velocity": 27.118,
+            "y_velocity": 0,
+            "z_velocity": 0
+          },
+          "particle_size": {
+            "option": "uniform",
+            "diameter": 5.629999999999999e-06
+          }
+        },
+        "physical_models": {
+          "particle_drag": {
+            "option": "spherical"
+          },
+          "turbulent_dispersion": {
+            "enabled": false
+          },
+          "particle_rotation": {
+            "enabled": false
+          },
+          "rough_wall_treatment_enabled": false,
+          "custom_laws": {
+            "law_1": "inert-heating",
+            "law_2": "inactive",
+            "law_3": "inactive",
+            "law_4": "inactive",
+            "law_5": "inactive",
+            "law_6": "inactive",
+            "law_7": "inactive",
+            "law_8": "inactive",
+            "law_9": "inactive",
+            "law_10": "inactive",
+            "switch": "Default"
+          }
+        }
+      }
+    }
+  },
+  "results": [
+    {
+      "name": "injection-5-micron",
+      "status": "failed",
+      "failure_category": "path/version issue",
+      "error": "Particle Tracks returned without a parseable Summary count.",
+      "raw_output": "/display/particle-tracks particle-tracks particle-diameter \nError: invalid command\nError Object: \"particle-diameter\"\n",
+      "counts": {
+        "tracked": null,
+        "escaped": null,
+        "aborted": null,
+        "trapped": null,
+        "incomplete": null,
+        "evaporated": null,
+        "injected": null,
+        "inserted": null
+      },
+      "returned": "False"
+    }
+  ],
+  "fluent_version": "Ansys Fluent 2024 R2",
+  "load": {
+    "mode": "already-loaded-session"
+  }
+}

@@ -240,3 +240,37 @@ Readback:
   `C:\Users\syok443\Documents\TwoPhaseInletV2(Purnanto)\TwoPhaseInletV2(Purnanto)-08c-v32p14.cas.h5`
 Notes:
   This path deliberately avoids initialization, iteration, and data writes. The local summary JSON is `PyAnsys/output/setup08c_velocity_sensitivity_cases_summary.json`.
+
+Fluent: 2024 R2
+PyFluent: local `.venv` on repo laptop
+Case/data: `C:\Users\syok443\Documents\TwoPhaseInletV2(Purnanto)\08c different speeds\TwoPhaseInletV2(Purnanto)-08c-v20p00.cas.h5` with `TwoPhaseInletV2(Purnanto)-08c-v20p00-25-03088.dat.h5`
+Goal: verify the six reference DPM injections before running legacy Particle Tracks Summary reports
+Order:
+  1. connect with `run_dpm_particle_tracks.py --server-id 1`
+  2. load the explicit case/data pair, or use `--already-loaded` after a large case read
+  3. inspect `setup.models.discrete_phase.injections`
+  4. read back each injection diameter and require the reference values
+  5. configure `/display/set/particle-tracks` with Summary, screen, and display off
+  6. invoke the legacy `/display/particle-tracks` command through Scheme
+Readback:
+  All six names were present and matched: `5.63`, `28.14`, `56.27`, `112.54`, `168.811`, and `348.88` um.
+Notes:
+  Fluent 2024 R2 accepts `screen` rather than `console` for the report destination. The generated nested PyFluent `particle_tracks` wrapper was classified as `PyFluent wrapper limitation` after an empty probe terminated the parallel Fluent session; do not call that wrapper. The safe runner uses the direct Scheme/TUI command and keeps the command signature isolated for live validation after Server 1 is restarted.
+
+Fluent: 2024 R2
+PyFluent: local `.venv` on repo laptop
+Case/data: active Server 1 session with `TwoPhaseInletV2(Purnanto)-08c-v20p00.cas.h5` and `TwoPhaseInletV2(Purnanto)-08c-v20p00-25-03088.dat.h5`
+Goal: dynamically discover and track every live DPM injection with Particle Tracks Summary
+Order:
+  1. connect with `run_dpm_particle_tracks.py --server-id 1`
+  2. assume the target case/data are already loaded unless `--load-case-data` is explicitly supplied
+  3. inspect `setup.models.discrete_phase.injections` and record live index, name, diameter, material, particle type, and surface
+  4. configure `/display/set/particle-tracks` with Summary, screen, and display off
+  5. invoke `/display/particle-tracks particle-tracks mixture particle-resid-time "<injection-name>" () 0 0` through Scheme/TUI
+  6. parse the Summary counts; omitted zero-valued fate rows are recorded as zero
+Readback:
+  All six live injections were discovered and tracked successfully in diameter order: `injection-5-micron` (2170 tracked, 851 trapped, 1318 incomplete), `injection-28-micron` (2170, 1010 trapped, 1160 incomplete), `injection-56-micron` (2170, 1160 trapped, 1010 incomplete), `injection-112-micron` (2170, 1301 trapped, 869 incomplete), `injection-168-micron` (2170, 1415 trapped, 755 incomplete), and `injection-348-micron` (2170, 1621 trapped, 549 incomplete).
+Working path or TUI:
+  `scripts/inspection/run_dpm_particle_tracks.py --server-id 1 --order diameter-ascending --keep-going`
+Notes:
+  Injection names are the stable audit identity. Indices are discovered from the current live session and are only a selection convenience. The runner does not require hardcoded names or diameters, does not mutate the case, and does not write case/data files.

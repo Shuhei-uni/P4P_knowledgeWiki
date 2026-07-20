@@ -1,0 +1,7 @@
+===== injection-5-micron =====
+/display/particle-tracks particle-tracks mixture particle-resid-time injection-5-micron () 0 0
+
+DPM Iteration ....
+number tracked = 2170, escaped = 1, trapped = 851, incomplete = 1318
+
+One of multiple injections has been selected -- producing a DPM summary for only that injection.
