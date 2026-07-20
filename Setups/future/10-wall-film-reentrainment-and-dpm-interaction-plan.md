@@ -98,9 +98,11 @@ Find out:
 - steam-outlet liquid phase flux plus escaped DPM mass;
 - whether film inventory is bounded or grows indefinitely.
 
-#### Optional child `10a-splash` — deposition with particle splashing
+#### `10a-splash` — deposition with particle splashing
 
-Use this child if splash is an intentional mechanism to investigate. Preserve the no-splash `10a` case as the clean reference, then change only:
+This child is the splash-enabled variation. The saved run currently labelled `10a` was read back with this state, so it is treated as a `10a-splash`-type diagnostic. The no-splash `10a` configuration below remains the intended control and still needs a separate clean case.
+
+From a fresh `10a` case, change only:
 
 - Eulerian Wall Film `Particle Splashing`: `Off -> On`;
 - on each selected film wall, enable `DPM Wall Splash`;

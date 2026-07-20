@@ -8,9 +8,9 @@
 | Lifecycle | `active` |
 | Role | inlet-loading sensitivity branch |
 | Parent setup | [08b](../past/reported/08b-purnanto-parity-split-inlet-rebuild.md) |
-| Evidence-use label | running sensitivity; results pending |
+| Evidence-use label | preliminary diagnostic comparison; acceptance pending |
 | Outcome | needs follow-up |
-| Linked report | none yet |
+| Linked report | [08 family comparison](../reports/08/velocity-family-comparison.md) |
 
 ## 1. Purpose
 

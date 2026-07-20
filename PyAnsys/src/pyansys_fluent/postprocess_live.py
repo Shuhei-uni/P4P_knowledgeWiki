@@ -21,6 +21,7 @@ import io
 import json
 import math
 import re
+import time
 from collections.abc import Mapping, Sequence
 from pathlib import Path, PureWindowsPath
 from typing import Any
@@ -234,6 +235,10 @@ def _run_mass_flow_command_capture(fluxes: Any, *, domain: str, zones: Sequence[
     buffer = io.StringIO()
     with contextlib.redirect_stdout(buffer):
         command(domain=domain, zones=list(zones))
+        # Fluent's TUI report output can arrive slightly after the command
+        # returns.  Allow the report stream to settle before parsing it; this
+        # prevents the next phase query from inheriting delayed lines.
+        time.sleep(0.5)
     return _parse_mass_flow_stdout(buffer.getvalue())
 
 
@@ -241,7 +246,7 @@ def extract_mass_flow_report(
     solver: Any,
     *,
     zones: Sequence[str],
-    domains: Sequence[str] = ("mixture", "phase-1", "phase-2"),
+    domains: Sequence[str] = ("phase-1", "phase-2"),
 ) -> dict[str, Any]:
     fluxes = _get_results_fluxes_branch(solver)
     if fluxes is None:
@@ -340,6 +345,15 @@ def calculate_carrier_metrics(
     m_mix_in = _sum_abs(mixture, inlet_zones)
     m_mix_out = _sum_abs(mixture, outlet_zones)
 
+    # In Fluent 2024 R2 multiphase sessions, the mixture mass-flow command can
+    # be inactive even though phase-1/phase-2 reports are valid.  Use the
+    # phase-specific reports as a transparent fallback instead of leaving the
+    # balance unavailable or accidentally parsing delayed mixture output.
+    if m_mix_in is None and m_liq_in is not None and m_vap_in is not None:
+        m_mix_in = m_liq_in + m_vap_in
+    if m_mix_out is None and m_liq_steam_out is not None and m_vap_steam_out is not None:
+        m_mix_out = m_liq_steam_out + m_vap_steam_out
+
     eta_phase = None
     if m_liq_in not in (None, 0.0) and m_liq_steam_out is not None:
         eta_phase = 1.0 - (m_liq_steam_out / m_liq_in)
@@ -367,9 +381,13 @@ def calculate_carrier_metrics(
         "x_out": x_out,
         "mass_imbalance_kg_s": mass_imbalance_kg_s,
         "mass_imbalance_ratio": mass_imbalance_ratio,
-        "mass_imbalance_note": _relative_balance_note(
-            mass_imbalance_kg_s=mass_imbalance_kg_s,
-            carryover_kg_s=m_liq_steam_out,
+        "mass_imbalance_note": (
+            "Derived from phase-specific fluxes because the mixture mass-flow report was unavailable."
+            if not mixture and mass_imbalance_kg_s is not None
+            else _relative_balance_note(
+                mass_imbalance_kg_s=mass_imbalance_kg_s,
+                carryover_kg_s=m_liq_steam_out,
+            )
         ),
     }
 

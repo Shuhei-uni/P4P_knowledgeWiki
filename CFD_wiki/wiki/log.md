@@ -1,5 +1,19 @@
 # CFD Wiki Log
 
+## [2026-07-20] correction | Classify the saved 10a result as splash-enabled
+
+- files updated:
+  - `wiki/guidance/fluent-general-click-by-click.md`
+  - `../Setups/active/10a-ewf-deposition.md`
+  - `../Setups/active/10a-splash-ewf-deposition.md`
+  - `../Setups/future/10-wall-film-reentrainment-and-dpm-interaction-plan.md`
+  - `../Setups/order-dictionary.md`
+- reason: the saved case labelled `10a` was read back with Particle Splashing and DPM Wall Splash enabled, which contradicted the documented no-splash control.
+- correction: retain no-splash `10a` as the intended clean control, classify the available artifact as a `10a-splash`-type partial diagnostic, and require a fresh splash-off case for the clean comparison.
+- evidence: `10a-25-02000.cas.h5` with `10a-25-02805.dat.h5`; the preliminary report records `4` splashed particles and the `stanton-rutland` model.
+- uncertainty: EWF DPM coupling and film-edge drainage still require confirmation when the case is revisited; the run is not converged or validated.
+- next action: compare the splash-enabled result against a clearly stated baseline, then create the corrected no-splash `10a` control if that comparison is needed.
+
 ## [2026-07-17] guidance-update | Add direct-from-09c workflow for setup 10b-1 and 10b-2
 
 - files updated: `wiki/guidance/fluent-general-click-by-click.md`

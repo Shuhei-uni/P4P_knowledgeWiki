@@ -9,7 +9,7 @@
 | Role | EWF deposition/drainage diagnostic with particle splashing |
 | Parent setup | [09c](09c-dpm-ewf-wall-film-reentrainment.md) |
 | Fallback parent interpretation | `09c` case with DPM interaction with the continuous phase disabled after the coupled calculation failed |
-| Evidence-use label | initialized diagnostic; results pending |
+| Evidence-use label | partial splash-sensitive diagnostic; preliminary result available |
 | Outcome | needs follow-up |
 | Linked family plan | [Setup 10 family plan](../future/10-wall-film-reentrainment-and-dpm-interaction-plan.md) |
 
@@ -17,7 +17,7 @@
 
 Test whether the injected liquid DPM payload deposits on designated separator walls, forms/drains an Eulerian wall film, and produces secondary splashed DPM parcels under the current separator conditions.
 
-This is a splash-sensitive diagnostic. It is not yet a validated wall-film or re-entrainment model, and it is not the same as the original no-splash `10a` baseline.
+This is a splash-sensitive diagnostic. It is not yet a validated wall-film or re-entrainment model. It currently represents the saved run labelled `10a`; a separate no-splash `10a` control has not yet been completed.
 
 ## 2. Parent-to-child change record
 
@@ -68,24 +68,24 @@ The `09c` parent reference had `wall = reflect`, `bottom = trap`, and inlet/outl
 
 | Item | Status |
 |---|---|
-| EWF model enabled | `User-reported: yes` |
-| Film wall designation | `User-reported: completed; exact zone names pending readback` |
+| EWF model enabled | `Case audit: yes` |
+| Film wall designation | `Case audit: wall = EWF wall; bottom = not an EWF wall` |
 | Hybrid initialization | `User-reported: completed after correcting the no-film-wall warning` |
-| Dedicated EWF initialization | confirm/read back before the production run |
-| Flow iterations after initialization | not yet run |
-| Transient film solution | planned for the production diagnostic |
-| Case/data result files | not yet available |
+| Film initial state | `Case audit: zero height and zero velocity` |
+| Flow momentum coupling | `Case audit: off` |
+| Impingement model | `Case audit: stanton-rutland` |
+| Particle splashing | `Case audit: on; DPM Wall Splash on; 4 splashed particles` |
+| Flow iterations after initialization | approximately `2805` iterations available |
+| Case/data result files | `10a-25-02000.cas.h5` and `10a-25-02805.dat.h5` |
+| Preliminary report | [10a results](../reports/10a/results.md) |
 
-## 5. Required readback before running
+## 5. Readback status and remaining checks
 
-1. Record the exact wall zones marked `Eulerian Film Wall`.
-2. Confirm each selected wall uses `Initial Condition` with zero film height and velocity.
-3. Confirm `EWF DPM Coupling = On`.
-4. Confirm `DPM Interaction with Continuous Phase = Off`.
-5. Confirm `Particle Splashing = On`, `DPM Wall Splash = On`, `Number of Splashed Particles = 4`, and `stanton-rutland`.
-6. Confirm `Flow Momentum Coupling = Off` on every selected film wall.
-7. Confirm film-wall edges do not create unintended film outlets.
-8. Save a case checkpoint before the first production iterations.
+The case audit has confirmed the wall-film, zero-film, flow-momentum, impingement, and splash settings listed above. Retain the following checks when the case is revisited:
+
+1. Confirm `EWF DPM Coupling = On` and `DPM Interaction with Continuous Phase = Off`.
+2. Confirm film-wall edges do not create unintended film outlets.
+3. Preserve the case/data checkpoint and the audit output with the report.
 
 ## 6. Required result record
 
@@ -109,5 +109,4 @@ Promote this beyond diagnostic status only if:
 - the DPM-to-film and splash mass balance closes sufficiently for the run;
 - film inventory is bounded or its growth has a defensible physical interpretation;
 - splashed mass is distinguishable from direct DPM escape and film outflow;
-- the result is compared against the no-splash `10a` reference or a clearly stated baseline.
-
+- the result is compared against a corrected no-splash `10a` reference or a clearly stated `09c`/base carrier baseline; no clean no-splash `10a` result currently exists.

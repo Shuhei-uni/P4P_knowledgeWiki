@@ -1,0 +1,160 @@
+===== index=0 injection=injection-5-micron =====
+> /display/particle-tracks particle-tracks mixture particle-resid-time "injection-5-micron" () 0 0 
+DPM Iteration ....
+number tracked = 2170, escaped = 1, trapped = 851, incomplete = 1318
+
+One of multiple injections has been selected -- producing a DPM summary for only that injection.
+Note: Per-injection zone (escaped) summaries are not available;
+      to see per-zone summaries either pick all injections or
+      activate /report/dpm-zone-summaries-per-injection?
+      and redo all the particle tracking.
+
+(dpm-print-summary): no DPM per-injection summaries allocated on individual zones.
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+
+===== index=1 injection=injection-28-micron =====
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                1318  1.398e+00  2.973e+00  1.782e+00  2.893e-01 injection-5-micron 1715 injection-5-micron 1014
+ Escaped                                      1  1.145e+00  1.145e+00  1.145e+00  0.000e+00 injection-5-micron 1912 injection-5-micron 1912
+ Trapped                                    851  1.401e+00  2.916e+00  1.860e+00  2.228e-01 injection-5-micron 1958 injection-5-micron  640
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                               1.154e-01  1.154e-01  0.000e+00
+ Escaped                                  8.756e-05  8.756e-05  0.000e+00
+ Trapped                                  7.451e-02  7.451e-02  0.000e+00
+ -----------                             ---------- ---------- ----------
+ Net                                      1.900e-01  1.900e-01  0.000e+00
+
+
+> /display/particle-tracks particle-tracks mixture particle-resid-time "injection-28-micron" () 0 0 
+DPM Iteration ....
+number tracked = 2170, trapped = 1010, incomplete = 1160
+
+One of multiple injections has been selected -- producing a DPM summary for only that injection.
+Note: Per-injection zone (escaped) summaries are not available;
+
+===== index=2 injection=injection-56-micron =====
+      to see per-zone summaries either pick all injections or
+      activate /report/dpm-zone-summaries-per-injection?
+      and redo all the particle tracking.
+
+(dpm-print-summary): no DPM per-injection summaries allocated on individual zones.
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                1160  2.444e+00  3.223e+00  2.551e+00  1.014e-01 injection-28-micron  141 injection-28-micron 1580
+ Trapped                                   1010  1.346e+00  3.186e+00  1.813e+00  2.385e-01 injection-28-micron  187 injection-28-micron 1528
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                               4.170e-01  4.170e-01  0.000e+00
+ Trapped                                  3.630e-01  3.630e-01  0.000e+00
+ -----------                             ---------- ---------- ----------
+ Net                                      7.800e-01  7.800e-01  0.000e+00
+
+
+> /display/particle-tracks particle-tracks mixture particle-resid-time "injection-56-micron" () 0 0 
+DPM Iteration ....
+number tracked = 2170, trapped = 1160, incomplete = 1010
+
+One of multiple injections has been selected -- producing a DPM summary for only that injection.
+Note: Per-injection zone (escaped) summaries are not available;
+      to see per-zone summaries either pick all injections or
+      activate /report/dpm-zone-summaries-per-injection?
+      and redo all the particle tracking.
+
+(dpm-print-summary): no DPM per-injection summaries allocated on individual zones.
+
+
+===== index=3 injection=injection-112-micron =====
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                1010  2.856e+00  2.991e+00  2.915e+00  2.633e-02 injection-56-micron  886 injection-56-micron  621
+ Trapped                                   1160  1.295e+00  2.661e+00  1.732e+00  2.036e-01 injection-56-micron  900 injection-56-micron   85
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                               4.515e-01  4.515e-01  0.000e+00
+ Trapped                                  5.185e-01  5.185e-01  0.000e+00
+ -----------                             ---------- ---------- ----------
+ Net                                      9.700e-01  9.700e-01  0.000e+00
+
+
+> /display/particle-tracks particle-tracks mixture particle-resid-time "injection-112-micron" () 0 0 
+DPM Iteration ....
+number tracked = 2170, trapped = 1301, incomplete = 869
+
+
+===== index=4 injection=injection-168-micron =====
+One of multiple injections has been selected -- producing a DPM summary for only that injection.
+Note: Per-injection zone (escaped) summaries are not available;
+      to see per-zone summaries either pick all injections or
+      activate /report/dpm-zone-summaries-per-injection?
+      and redo all the particle tracking.
+
+(dpm-print-summary): no DPM per-injection summaries allocated on individual zones.
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                 869  3.022e+00  3.180e+00  3.096e+00  2.520e-02 injection-112-micron 1615 injection-112-micron  784
+ Trapped                                   1301  1.200e+00  2.596e+00  1.607e+00  2.025e-01 injection-112-micron 1929 injection-112-micron  994
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                               7.809e-01  7.809e-01  0.000e+00
+ Trapped                                  1.169e+00  1.169e+00  0.000e+00
+ -----------                             ---------- ---------- ----------
+ Net                                      1.950e+00  1.950e+00  0.000e+00
+
+
+> /display/particle-tracks particle-tracks mixture particle-resid-time "injection-168-micron" () 0 0 
+DPM Iteration ....
+number tracked = 2170, trapped = 1415, incomplete = 755
+
+One of multiple injections has been selected -- producing a DPM summary for only that injection.
+Note: Per-injection zone (escaped) summaries are not available;
+
+===== index=5 injection=injection-348-micron =====
+      to see per-zone summaries either pick all injections or
+      activate /report/dpm-zone-summaries-per-injection?
+      and redo all the particle tracking.
+
+(dpm-print-summary): no DPM per-injection summaries allocated on individual zones.
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                 755  3.116e+00  3.245e+00  3.181e+00  2.174e-02 injection-168-micron  121 injection-168-micron 2023
+ Trapped                                   1415  1.014e+00  2.476e+00  1.454e+00  2.098e-01 injection-168-micron  586 injection-168-micron  863
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                               6.785e-01  6.785e-01  0.000e+00
+ Trapped                                  1.272e+00  1.272e+00  0.000e+00
+ -----------                             ---------- ---------- ----------
+ Net                                      1.950e+00  1.950e+00  0.000e+00
+
+
+> /display/particle-tracks particle-tracks mixture particle-resid-time "injection-348-micron" () 0 0 
+DPM Iteration ....
+number tracked = 2170, trapped = 1621, incomplete = 549
