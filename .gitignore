@@ -1,11 +1,36 @@
 .DS_Store
-CFD_wiki/raw/
-CFD_wiki/guide/Ansys_Fluent_Users_Guide.pdf
+
+# Local environment and secrets
+*.env
 PyAnsys/.venv/
+
+# Large/reference PDFs
+*.pdf
+
+# PyAnsys generated output and extracted data
+PyAnsys/output/
 PyAnsys/data/
-PyAnsys/*.trn
-PyAnsys/*-error.log
-fluent-*.trn
+
+# Fluent runtime and case files
+*.trn
+*.dat
+*.cas
+*.cas.h5
+*.dat.h5
+*.msh
+*.msh.h5
+*.h5
+*-error.log
 cortexerror.log
+fluent-*.log
+
+# Generated Python files
 **/__pycache__/
 *.pyc
+
+# Temporary/export files
+*.tmp
+*.bak
+*.swp
+
+CFD_wiki/raw/
