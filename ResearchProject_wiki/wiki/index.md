@@ -49,6 +49,7 @@
 ## Core Models
 - `wiki/model/baseline-cfd.md`
 - `wiki/model/inlet-regimes.md` - now tracks the planned two-zone split-inlet upgrade path.
+- `wiki/model/skoog-application-guardrails.md` - project rules for applying Skoog's three-field injection and film-coupling findings.
 - `wiki/model/validation.md` - project-facing validation summary; detailed project V&V reports now live in `wiki/vnv/`.
 - Cross-wiki mesh synthesis: `../../CFD_wiki/wiki/synthesis/mesh-quality-and-resolution-patterns.md`
 

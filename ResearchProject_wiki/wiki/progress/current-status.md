@@ -1,7 +1,7 @@
 # Current Status
 
 ## Snapshot
-- Date: 2026-07-02
+- Date: 2026-07-21
 - Phase: extraction-first Purnanto parity reset plus retained setup `07` archive context
 - Focus: use Python extraction to recover the actual Purnanto Fluent setup faithfully enough that manual reconstruction error stops driving the next branch decision.
 - Current issue: setup `07` has useful comparison evidence, but it is no longer trusted as the closest reconstruction of the original Purnanto setup.

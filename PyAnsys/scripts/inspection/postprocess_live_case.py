@@ -110,6 +110,28 @@ def derive_run_label(case_file: str, explicit_label: str) -> str:
     return Path(name).stem
 
 
+def build_dpm_sample_file_names(
+    *,
+    case_file: str,
+    remote_dir: str,
+    run_label: str,
+    boundary_names: list[str],
+    injection_names: list[str],
+) -> dict[str, str]:
+    base_dir = PureWindowsPath(remote_dir) if remote_dir.strip() else PureWindowsPath(case_file).parent
+    boundary_label = "-".join(boundary_names) if boundary_names else "no-boundary"
+    safe_run_label = "".join(char if char.isalnum() or char in "._-" else "_" for char in run_label)
+    safe_boundary_label = "".join(char if char.isalnum() or char in "._-" else "_" for char in boundary_label)
+
+    sample_files: dict[str, str] = {}
+    for injection_name in injection_names:
+        safe_injection = "".join(char if char.isalnum() or char in "._-" else "_" for char in injection_name)
+        sample_files[injection_name] = str(
+            base_dir / f"{safe_run_label}-{safe_boundary_label}-{safe_injection}.dpm"
+        )
+    return sample_files
+
+
 def main() -> int:
     args = build_parser().parse_args()
     load_dotenv()
