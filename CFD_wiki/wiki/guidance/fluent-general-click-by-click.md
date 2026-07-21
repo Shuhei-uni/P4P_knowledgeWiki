@@ -249,6 +249,10 @@ Do not enable for the first `10a` run:
 
 Those are appropriate later sensitivities, especially `11a`, but would make the first film result difficult to attribute.
 
+#### Splash-state readback note
+
+When reviewing an existing EWF case, read back both the global `Particle Splashing` setting and the wall-level `DPM Wall Splash` setting. If either is enabled, classify the case as splash-sensitive rather than as a clean deposition/drainage baseline. Record the splashed-parcel count and impingement model with the case snapshot.
+
 ### Solution Method and Control
 
 For the first transient film run:

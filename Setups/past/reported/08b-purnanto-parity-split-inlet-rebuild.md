@@ -52,6 +52,43 @@ Evidence labels used in this report:
 - `Assumed`: temporary placeholder until the extraction workflow proves the value.
 - `Uncertain`: known unresolved item that must not be treated as settled parity.
 
+### 2.1 Base geometry and mesh for `08b` onward
+
+The following mesh is the shared base for setup `08b` and later setup/simulation branches unless a later setup record explicitly documents a mesh change:
+
+| Item | Value | Evidence label |
+|---|---:|---|
+| Geometry | `Purnanto` | `User-reported` |
+| Base mesh file/target | `purnanto-extended.msh` | `Existing 08b automation target` |
+| Nodes | `1,309,312` | `User-reported` |
+| Cells | `7,601,261` | `User-reported` |
+| Minimum orthogonal quality | `0.2` | `User-reported` |
+| Maximum aspect ratio | `18.4` | `User-reported` |
+
+Mesh inheritance rule:
+
+- `08b` and later descendants inherit this geometry/mesh as their base.
+- The controlled differences between those branches are Fluent settings, such as boundary conditions, models, numerics, DPM, coupling, or wall-film options.
+- A later mesh replacement, remesh, or geometry change must be recorded explicitly in the child setup report and in `Setups/order-dictionary.md`.
+
+The mesh statistics are recorded as user-provided setup metadata; they are not by themselves a mesh-independence or solution-acceptance result.
+
+### 2.2 Purnanto reference mesh
+
+The Purnanto source/live-audit mesh uses the same `Purnanto` geometry but a different mesh from the `08b`-onward project base mesh:
+
+| Item | Value | Evidence label |
+|---|---:|---|
+| Geometry | `Purnanto` | `Observed` |
+| Nodes | `572,556` | `Observed` in the existing Purnanto live audit |
+| Cells | `2,964,593` | `Observed` / `User-reported` |
+| Minimum orthogonal quality | `0.2776` | `User-reported`, rounded from the audit value `0.277635` |
+| Maximum aspect ratio | `12.889` | `User-reported`, rounded from the audit value `12.8899` |
+
+This is the Purnanto reference mesh for parity comparison. It is not the inherited base mesh for `08b` and later project descendants unless a setup explicitly records that mesh switch.
+
+Node-count clarification: the latest user message supplied `5722556` without separators. This record interprets that as `572,556` because it matches the existing Purnanto live-audit record and the associated `2,964,593`-cell mesh. Confirm and revise if `5,722,556` was intended.
+
 ## 3. Deliberate Change Budget
 
 This branch is allowed to change only two setup ideas at first:

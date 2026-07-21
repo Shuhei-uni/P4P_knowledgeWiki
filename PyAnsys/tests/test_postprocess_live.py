@@ -5,6 +5,7 @@ import unittest
 from pyansys_fluent.postprocess_live import (
     build_dpm_sample_tui_command,
     calculate_carrier_metrics,
+    capture_residual_history,
     compile_postprocess_result,
     infer_phase_domain_map,
     parse_dpm_sample_output,
@@ -14,6 +15,43 @@ from pyansys_fluent.postprocess_live import (
 
 
 class PostprocessLiveTests(unittest.TestCase):
+    def test_capture_residual_history_uses_and_stops_monitor_stream(self) -> None:
+        class FakeMonitors:
+            def __init__(self) -> None:
+                self.started = False
+                self.stopped = False
+
+            def start(self) -> None:
+                self.started = True
+
+            def stop(self) -> None:
+                self.stopped = True
+
+            def get_monitor_set_names(self) -> list[str]:
+                return ["residual"]
+
+            def get_monitor_set_data(self, _name: str):
+                return [10, 11], {"continuity": [1.0e-2, 1.0e-3]}
+
+        class FakeSolver:
+            def __init__(self) -> None:
+                self.monitors = FakeMonitors()
+
+        solver = FakeSolver()
+        payload = capture_residual_history(
+            solver,
+            monitor_set="residual",
+            timeout=0.1,
+            interval=0.0,
+            settle_seconds=0.0,
+        )
+
+        self.assertEqual(payload["point_count"], 2)
+        self.assertEqual(payload["curve_count"], 1)
+        self.assertEqual(payload["iterations"], [10, 11])
+        self.assertTrue(solver.monitors.started)
+        self.assertTrue(solver.monitors.stopped)
+
     def test_infer_phase_domain_map_from_material_names(self) -> None:
         models_state = {
             "multiphase": {

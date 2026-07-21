@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Post-process an existing live Fluent case/data pair without mutating setup state.
+"""Legacy combined post-processing wrapper.
 
-This script is the operator entrypoint for reusable `08b`-style post-processing.
-It connects to a configured gRPC server, loads an existing case/data pair, reads
-carrier-field flux metrics plus DPM inventory, and writes JSON + Markdown output.
+Use ``post_simulation_analysis.py --check flux`` and
+``post_simulation_analysis.py --check dpm`` for new work.  This compatibility
+entrypoint retains the older combined JSON/Markdown format but no longer runs
+the obsolete ``report/dpm-sample`` workflow.
 """
 
 from __future__ import annotations
@@ -31,7 +32,6 @@ from pyansys_fluent.postprocess_live import (  # noqa: E402
     inspect_dpm_inventory,
     load_case_data_pair,
     render_markdown_report,
-    run_dpm_sample_per_injection,
     write_json,
     write_markdown,
 )
@@ -98,45 +98,6 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Assume the target case/data are already loaded in the active Fluent session and skip any load commands.",
     )
-    parser.add_argument(
-        "--dpm-sample-per-injection",
-        action="store_true",
-        help="Run Fluent report/dpm-sample one injection at a time on the active injections and capture parsed counts.",
-    )
-    parser.add_argument(
-        "--dpm-sample-boundaries",
-        nargs="*",
-        default=["steaminlet"],
-        help="Boundary names to pass into Fluent report/dpm-sample. Default: steaminlet.",
-    )
-    parser.add_argument(
-        "--dpm-sample-planes",
-        nargs="*",
-        default=[],
-        help="Optional plane names to pass into Fluent report/dpm-sample. Default: none.",
-    )
-    parser.add_argument(
-        "--dpm-sample-prompt-order",
-        choices=("sample-surfaces-first", "injections-first"),
-        default="injections-first",
-        help=(
-            "Prompt order for report/dpm-sample. Default is Fluent TUI order: "
-            "one release injection, sample boundaries, then planes."
-        ),
-    )
-    parser.add_argument(
-        "--dpm-sample-remote-dir",
-        default="",
-        help=(
-            "Remote directory for per-injection .dpm sample files. "
-            "Default: the remote case-file directory."
-        ),
-    )
-    parser.add_argument(
-        "--no-dpm-sample-fallback",
-        action="store_true",
-        help="Disable retry with the alternate dpm-sample prompt order when the first command does not parse counts.",
-    )
     return parser
 
 
@@ -147,28 +108,6 @@ def derive_run_label(case_file: str, explicit_label: str) -> str:
     if name.endswith(".cas.h5"):
         return name[:-7]
     return Path(name).stem
-
-
-def build_dpm_sample_file_names(
-    *,
-    case_file: str,
-    remote_dir: str,
-    run_label: str,
-    boundary_names: list[str],
-    injection_names: list[str],
-) -> dict[str, str]:
-    base_dir = PureWindowsPath(remote_dir) if remote_dir.strip() else PureWindowsPath(case_file).parent
-    boundary_label = "-".join(boundary_names) if boundary_names else "no-boundary"
-    safe_run_label = "".join(char if char.isalnum() or char in "._-" else "_" for char in run_label)
-    safe_boundary_label = "".join(char if char.isalnum() or char in "._-" else "_" for char in boundary_label)
-
-    sample_files: dict[str, str] = {}
-    for injection_name in injection_names:
-        safe_injection = "".join(char if char.isalnum() or char in "._-" else "_" for char in injection_name)
-        sample_files[injection_name] = str(
-            base_dir / f"{safe_run_label}-{safe_boundary_label}-{safe_injection}.dpm"
-        )
-    return sample_files
 
 
 def main() -> int:
@@ -215,7 +154,7 @@ def main() -> int:
     carrier_fluxes = extract_mass_flow_report(
         solver,
         zones=zones_for_flux,
-        domains=("mixture", phase_domain_map["vapor_domain"], phase_domain_map["liquid_domain"]),
+        domains=(phase_domain_map["vapor_domain"], phase_domain_map["liquid_domain"]),
     )
     carrier_metrics = calculate_carrier_metrics(
         carrier_fluxes,
@@ -227,30 +166,6 @@ def main() -> int:
         solver,
         omitted_diameters_um=DEFAULT_OMITTED_DIAMETERS_UM,
     )
-    if args.dpm_sample_per_injection:
-        sample_injection_names = [
-            str(item.get("name"))
-            for item in dpm_inventory.get("injections", [])
-            if item.get("name")
-        ]
-        sample_file_names = build_dpm_sample_file_names(
-            case_file=args.case_file,
-            remote_dir=args.dpm_sample_remote_dir,
-            run_label=run_label,
-            boundary_names=args.dpm_sample_boundaries,
-            injection_names=sample_injection_names,
-        )
-        sample_payload = run_dpm_sample_per_injection(
-            solver,
-            injection_names=sample_injection_names,
-            boundary_names=args.dpm_sample_boundaries,
-            plane_names=args.dpm_sample_planes,
-            sample_file_names=sample_file_names,
-            prompt_order=args.dpm_sample_prompt_order,
-            fallback_prompt_order=None if args.no_dpm_sample_fallback else "sample-surfaces-first",
-        )
-        dpm_metrics["per_injection_sample"] = sample_payload
-
     result = compile_postprocess_result(
         server_id=str(args.server_id),
         run_label=run_label,

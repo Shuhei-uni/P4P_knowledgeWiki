@@ -21,6 +21,7 @@ import io
 import json
 import math
 import re
+import time
 from collections.abc import Mapping, Sequence
 from pathlib import Path, PureWindowsPath
 from typing import Any
@@ -84,6 +85,98 @@ def write_json(path: Path, payload: Mapping[str, Any]) -> None:
 def write_markdown(path: Path, content: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(content, encoding="utf-8")
+
+
+def wait_for_monitor_data(
+    solver: Any,
+    monitor_set: str,
+    *,
+    timeout: float,
+    interval: float,
+) -> tuple[list[Any], dict[str, list[Any]]]:
+    """Wait for one Fluent monitor set and return its history."""
+    deadline = time.time() + timeout
+    while time.time() < deadline:
+        monitor_names = solver.monitors.get_monitor_set_names()
+        if monitor_set in monitor_names:
+            x_values, series = solver.monitors.get_monitor_set_data(monitor_set)
+            if len(x_values):
+                return list(x_values), {str(name): list(values) for name, values in series.items()}
+        time.sleep(interval)
+    raise TimeoutError(
+        f"Timed out waiting for monitor set '{monitor_set}' to populate after {timeout:.1f} seconds."
+    )
+
+
+def capture_residual_history(
+    solver: Any,
+    *,
+    monitor_set: str = "residual",
+    timeout: float = 10.0,
+    interval: float = 0.5,
+    settle_seconds: float = 0.5,
+) -> dict[str, Any]:
+    """Capture an existing Fluent residual monitor without changing solver state."""
+    solver.monitors.start()
+    try:
+        time.sleep(max(settle_seconds, 0.0))
+        x_values, series = wait_for_monitor_data(
+            solver,
+            monitor_set,
+            timeout=timeout,
+            interval=interval,
+        )
+    finally:
+        try:
+            solver.monitors.stop()
+        except Exception:
+            pass
+
+    return {
+        "monitor_set": monitor_set,
+        "iterations": x_values,
+        "series": series,
+        "point_count": len(x_values),
+        "curve_count": len(series),
+    }
+
+
+def plot_residual_history(
+    residual_payload: Mapping[str, Any],
+    output_path: Path,
+    *,
+    title: str = "Scaled Residual History",
+) -> None:
+    """Write a log-scaled residual plot from ``capture_residual_history`` output."""
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    x_values = residual_payload.get("iterations", [])
+    series = residual_payload.get("series", {})
+    fig, ax = plt.subplots(figsize=(12, 7), constrained_layout=True)
+    for name, values in series.items():
+        ax.plot(x_values, values, linewidth=1.5, label=name)
+
+    ax.set_yscale("log")
+    ax.set_xlabel("Iteration")
+    ax.set_ylabel("Scaled residual")
+    ax.set_title(title)
+    ax.grid(True, which="major", linestyle="-", alpha=0.25)
+    ax.grid(True, which="minor", linestyle=":", alpha=0.18)
+    if series:
+        ax.legend(
+            loc="upper center",
+            bbox_to_anchor=(0.5, -0.12),
+            ncol=2,
+            frameon=False,
+            fontsize=9,
+        )
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(output_path, dpi=220, bbox_inches="tight")
+    plt.close(fig)
 
 
 def safe_float(value: Any) -> float | None:
@@ -234,6 +327,10 @@ def _run_mass_flow_command_capture(fluxes: Any, *, domain: str, zones: Sequence[
     buffer = io.StringIO()
     with contextlib.redirect_stdout(buffer):
         command(domain=domain, zones=list(zones))
+        # Fluent's TUI report output can arrive slightly after the command
+        # returns.  Allow the report stream to settle before parsing it; this
+        # prevents the next phase query from inheriting delayed lines.
+        time.sleep(0.5)
     return _parse_mass_flow_stdout(buffer.getvalue())
 
 
@@ -241,7 +338,7 @@ def extract_mass_flow_report(
     solver: Any,
     *,
     zones: Sequence[str],
-    domains: Sequence[str] = ("mixture", "phase-1", "phase-2"),
+    domains: Sequence[str] = ("phase-1", "phase-2"),
 ) -> dict[str, Any]:
     fluxes = _get_results_fluxes_branch(solver)
     if fluxes is None:
@@ -340,6 +437,15 @@ def calculate_carrier_metrics(
     m_mix_in = _sum_abs(mixture, inlet_zones)
     m_mix_out = _sum_abs(mixture, outlet_zones)
 
+    # In Fluent 2024 R2 multiphase sessions, the mixture mass-flow command can
+    # be inactive even though phase-1/phase-2 reports are valid.  Use the
+    # phase-specific reports as a transparent fallback instead of leaving the
+    # balance unavailable or accidentally parsing delayed mixture output.
+    if m_mix_in is None and m_liq_in is not None and m_vap_in is not None:
+        m_mix_in = m_liq_in + m_vap_in
+    if m_mix_out is None and m_liq_steam_out is not None and m_vap_steam_out is not None:
+        m_mix_out = m_liq_steam_out + m_vap_steam_out
+
     eta_phase = None
     if m_liq_in not in (None, 0.0) and m_liq_steam_out is not None:
         eta_phase = 1.0 - (m_liq_steam_out / m_liq_in)
@@ -367,9 +473,13 @@ def calculate_carrier_metrics(
         "x_out": x_out,
         "mass_imbalance_kg_s": mass_imbalance_kg_s,
         "mass_imbalance_ratio": mass_imbalance_ratio,
-        "mass_imbalance_note": _relative_balance_note(
-            mass_imbalance_kg_s=mass_imbalance_kg_s,
-            carryover_kg_s=m_liq_steam_out,
+        "mass_imbalance_note": (
+            "Derived from phase-specific fluxes because the mixture mass-flow report was unavailable."
+            if not mixture and mass_imbalance_kg_s is not None
+            else _relative_balance_note(
+                mass_imbalance_kg_s=mass_imbalance_kg_s,
+                carryover_kg_s=m_liq_steam_out,
+            )
         ),
     }
 

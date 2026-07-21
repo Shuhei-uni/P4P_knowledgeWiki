@@ -11,24 +11,27 @@ from __future__ import annotations
 import argparse
 from datetime import datetime
 import sys
-import time
 from pathlib import Path
-
-import matplotlib
-
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
-import pandas as pd
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from pyansys_fluent.connection import connect  # noqa: E402
+from pyansys_fluent.postprocess_live import (  # noqa: E402
+    capture_residual_history,
+    plot_residual_history,
+    write_json,
+)
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Export a scaled residual plot from the current Fluent session."
+    )
+    parser.add_argument(
+        "--server-id",
+        default="1",
+        help="Configured Fluent server id. Default: 1.",
     )
     parser.add_argument(
         "--monitor-set",
@@ -71,47 +74,6 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def wait_for_monitor_data(solver, monitor_set: str, timeout: float, interval: float):
-    deadline = time.time() + timeout
-    while time.time() < deadline:
-        monitor_names = solver.monitors.get_monitor_set_names()
-        if monitor_set in monitor_names:
-            x_values, series = solver.monitors.get_monitor_set_data(monitor_set)
-            if len(x_values):
-                return x_values, series
-        time.sleep(interval)
-    raise TimeoutError(
-        f"Timed out waiting for monitor set '{monitor_set}' to populate "
-        f"after {timeout:.1f} seconds."
-    )
-
-
-def plot_residuals(x_values, series: dict[str, object], title: str, output_path: Path) -> None:
-    df = pd.DataFrame(series, index=x_values)
-    df.index.name = "iteration"
-
-    fig, ax = plt.subplots(figsize=(12, 7), constrained_layout=True)
-    for column in df.columns:
-        ax.plot(df.index, df[column], linewidth=1.5, label=column)
-
-    ax.set_yscale("log")
-    ax.set_xlabel("Iteration")
-    ax.set_ylabel("Scaled residual")
-    ax.set_title(title)
-    ax.grid(True, which="major", linestyle="-", alpha=0.25)
-    ax.grid(True, which="minor", linestyle=":", alpha=0.18)
-    ax.legend(
-        loc="upper center",
-        bbox_to_anchor=(0.5, -0.12),
-        ncol=2,
-        frameon=False,
-        fontsize=9,
-    )
-
-    fig.savefig(output_path, dpi=220, bbox_inches="tight")
-    plt.close(fig)
-
-
 def main() -> int:
     args = build_parser().parse_args()
     output_dir = Path(args.output_dir).expanduser().resolve()
@@ -120,29 +82,23 @@ def main() -> int:
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     output_path = output_dir / f"{args.filename_prefix}_{timestamp}.png"
 
-    solver = connect()
+    solver = connect(server_id=args.server_id)
     print("\nConnected. Starting residual monitor stream...")
-    solver.monitors.start()
-
-    try:
-        time.sleep(max(args.settle_seconds, 0.0))
-        x_values, series = wait_for_monitor_data(
-            solver,
-            args.monitor_set,
-            timeout=args.timeout_seconds,
-            interval=args.poll_interval_seconds,
-        )
-        print(
-            f"Captured {len(x_values)} points for '{args.monitor_set}' "
-            f"across {len(series)} residual curves."
-        )
-        plot_residuals(x_values, series, args.title, output_path)
-        print(f"Saved scaled residual plot to: {output_path}")
-    finally:
-        try:
-            solver.monitors.stop()
-        except Exception as exc:
-            print(f"Monitor stream stop warning: {exc}")
+    payload = capture_residual_history(
+        solver,
+        monitor_set=args.monitor_set,
+        timeout=args.timeout_seconds,
+        interval=args.poll_interval_seconds,
+        settle_seconds=args.settle_seconds,
+    )
+    print(
+        f"Captured {payload['point_count']} points for '{args.monitor_set}' "
+        f"across {payload['curve_count']} residual curves."
+    )
+    plot_residual_history(payload, output_path, title=args.title)
+    write_json(output_path.with_suffix(".json"), payload)
+    print(f"Saved scaled residual plot to: {output_path}")
+    print(f"Saved residual data to: {output_path.with_suffix('.json')}")
 
     return 0
 

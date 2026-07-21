@@ -92,6 +92,10 @@ Concrete branch record:
 3. Compare internal flow structure, phase distribution, pressure drop, and outlet behavior against the original inlet representation.
 4. Only if needed, move later to smoother non-uniform inlet profiles or a UDF/profile approach.
 
+## Skoog Application Guardrail
+
+For future EWF/DPM branches, use the project-specific [Skoog application guardrails](skoog-application-guardrails.md). The important routing rule is that Skoog's film/droplet split and developed-injection logic may guide the project model structure, but the BWR values and correlations are not geothermal defaults.
+
 ## Current Uncertainties
 - The exact physical meaning of `left` and `right` must be confirmed on the actual inlet-face orientation before the two zones are named.
 - A 50/50 inlet-area split is now superseded for the pure-phase equal-velocity setup. The new concern is whether the very narrow `6.754 mm` liquid-side strip is physically appropriate and sufficiently mesh-resolved.
