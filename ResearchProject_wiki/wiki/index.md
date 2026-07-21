@@ -19,7 +19,15 @@
 - `../../Setups/past/archived/08-purnanto-one-inlet-massflow-recreation.md`
 - `../../Setups/past/reported/08b-purnanto-parity-split-inlet-rebuild.md`
 - `../../Setups/active/08c-purnanto-parity-inlet-velocity-sensitivity.md`
-- `../../Setups/active/09c-dpm-ewf-wall-film-reentrainment.md`
+- `../../Setups/past/archived/09c-dpm-ewf-wall-film-reentrainment.md`
+- `../../Setups/past/archived/10a-ewf-deposition.md`
+- `../../Setups/past/archived/10a-splash-ewf-deposition.md`
+- `../../Setups/active/09cV2-skoog-partition-injection-control.md`
+- `../../Setups/active/010V2-ewf-deposition-film-inventory.md`
+- `../../Setups/active/010V2a-ewf-splash.md`
+- `../../Setups/active/010V2b-ewf-edge-separation.md`
+- `../../Setups/active/010V2c-ewf-particle-stripping.md`
+- `../../Setups/active/010V2d-ewf-combined-interaction.md`
 - `../../Setups/reports/index.md`
 
 ## Progress Layer
@@ -49,6 +57,7 @@
 ## Core Models
 - `wiki/model/baseline-cfd.md`
 - `wiki/model/inlet-regimes.md` - now tracks the planned two-zone split-inlet upgrade path.
+- `wiki/model/skoog-application-guardrails.md` - project rules for applying Skoog's three-field injection and film-coupling findings.
 - `wiki/model/validation.md` - project-facing validation summary; detailed project V&V reports now live in `wiki/vnv/`.
 - Cross-wiki mesh synthesis: `../../CFD_wiki/wiki/synthesis/mesh-quality-and-resolution-patterns.md`
 

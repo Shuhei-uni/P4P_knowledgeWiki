@@ -2,7 +2,7 @@
 
 ## Setup link and evidence
 
-- Setup definition: [10a-ewf-deposition.md](../../active/10a-ewf-deposition.md)
+- Setup definition: [10a-ewf-deposition.md](../../past/archived/10a-ewf-deposition.md)
 - Run case: `10a-25-02000.cas.h5`
 - Highest data checkpoint: `10a-25-02805.dat.h5`
 - Fluent server: `1`

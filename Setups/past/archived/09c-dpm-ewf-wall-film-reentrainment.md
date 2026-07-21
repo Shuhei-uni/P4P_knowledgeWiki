@@ -5,12 +5,12 @@
 | Field | Value |
 |---|---|
 | Setup ID | `09c` |
-| Lifecycle | `active` |
+| Lifecycle | `archived` |
 | Role | two-way DPM coupling branch |
-| Parent setup | [09b](../past/reported/09b-rsm-dpm-split-inlet-accuracy.md) |
-| Evidence-use label | active coupling experiment; results pending |
+| Parent setup | [09b](../reported/09b-rsm-dpm-split-inlet-accuracy.md) |
+| Evidence-use label | preliminary two-way-coupling diagnostic; not converged |
 | Outcome | needs follow-up |
-| Linked report | none yet |
+| Linked report | [09c post-simulation analysis](../../reports/09c/results.md) |
 
 Legacy filename note:
 

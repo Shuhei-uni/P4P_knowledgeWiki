@@ -5,13 +5,13 @@
 | Field | Value |
 |---|---|
 | Setup ID | `10a-splash` |
-| Lifecycle | `active` |
+| Lifecycle | `archived` |
 | Role | EWF deposition/drainage diagnostic with particle splashing |
 | Parent setup | [09c](09c-dpm-ewf-wall-film-reentrainment.md) |
 | Fallback parent interpretation | `09c` case with DPM interaction with the continuous phase disabled after the coupled calculation failed |
 | Evidence-use label | partial splash-sensitive diagnostic; preliminary result available |
 | Outcome | needs follow-up |
-| Linked family plan | [Setup 10 family plan](../future/10-wall-film-reentrainment-and-dpm-interaction-plan.md) |
+| Linked family plan | [Setup 10 family plan](../../future/10-wall-film-reentrainment-and-dpm-interaction-plan.md) |
 
 ## 1. Purpose
 
