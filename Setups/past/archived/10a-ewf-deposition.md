@@ -5,13 +5,13 @@
 | Field | Value |
 |---|---|
 | Setup ID | `10a` |
-| Lifecycle | `active` |
+| Lifecycle | `archived` |
 | Role | intended no-splash EWF deposition/drainage control; recorded artifact is splash-enabled |
 | Parent setup | [09c](09c-dpm-ewf-wall-film-reentrainment.md) |
 | Evidence-use label | active diagnostic; preliminary result available, but not a clean no-splash control |
 | Outcome | needs follow-up |
 | Related child | [10a-splash](10a-splash-ewf-deposition.md) |
-| Family plan | [Setup 10 family plan](../future/10-wall-film-reentrainment-and-dpm-interaction-plan.md) |
+| Family plan | [Setup 10 family plan](../../future/10-wall-film-reentrainment-and-dpm-interaction-plan.md) |
 
 ## 1. Purpose
 

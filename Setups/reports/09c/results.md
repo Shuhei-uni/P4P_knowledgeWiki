@@ -2,7 +2,7 @@
 
 ## Setup link and evidence
 
-- Setup definition: [09c-dpm-ewf-wall-film-reentrainment.md](../../active/09c-dpm-ewf-wall-film-reentrainment.md)
+- Setup definition: [09c-dpm-ewf-wall-film-reentrainment.md](../../past/archived/09c-dpm-ewf-wall-film-reentrainment.md)
 - Case: `TwoPhaseInletV2(Purnanto)-09c-two-way-dpm-coupled.cas.h5`
 - Data checkpoint: `TwoPhaseInletV2(Purnanto)-09c-two-way-dpm-coupled-25-921.dat.h5`
 - Fluent server: `1`
