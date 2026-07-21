@@ -4,8 +4,8 @@
 
 - files updated:
   - `wiki/guidance/fluent-general-click-by-click.md`
-  - `../Setups/active/10a-ewf-deposition.md`
-  - `../Setups/active/10a-splash-ewf-deposition.md`
+  - `../Setups/past/archived/10a-ewf-deposition.md`
+  - `../Setups/past/archived/10a-splash-ewf-deposition.md`
   - `../Setups/future/10-wall-film-reentrainment-and-dpm-interaction-plan.md`
   - `../Setups/order-dictionary.md`
 - reason: the saved case labelled `10a` was read back with Particle Splashing and DPM Wall Splash enabled, which contradicted the documented no-splash control.

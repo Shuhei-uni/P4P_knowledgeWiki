@@ -35,7 +35,7 @@ rg -n "08b|DPM|velocity inlet|mass-flow|brine outlet|parent|child" "Setups"
 
 Current high-level interpretation from the dictionary:
 
-- `08c-purnanto-parity-inlet-velocity-sensitivity.md` and `09c-dpm-ewf-wall-film-reentrainment.md` are the active branches.
+- `08c-purnanto-parity-inlet-velocity-sensitivity.md` and the `09cV2` through `010V2d` Skoog/EWF family are the active branches; the original `09c` is archived comparison history.
 - `04`, `07`, `08b`, `09a`, and `09b` are past reported because they contain actual flux-efficiency and/or DPM trajectory/fate numerics.
 - `08a` and the remaining older definitions are archived until numerical evidence is recorded.
 
