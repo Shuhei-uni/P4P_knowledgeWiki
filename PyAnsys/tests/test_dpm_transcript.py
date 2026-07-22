@@ -130,6 +130,32 @@ class TranscriptCaptureTests(unittest.TestCase):
         self.assertFalse(result["completion"]["confirmed"])
         self.assertFalse(result["completion"]["safe_to_submit_next"])
 
+    def test_client_error_blocks_next_even_when_summary_arrives(self) -> None:
+        solver = FakeSolver()
+        item = {"index": 2, "name": "injection-56", "diameter_um": 56.0}
+
+        def submit_then_fail(_solver, _command):
+            for line in DPM_SAMPLE.splitlines(keepends=True):
+                solver.transcript.emit(line)
+            raise RuntimeError("client disconnected")
+
+        with SessionTranscriptCapture(solver) as collector:
+            with patch(
+                "pyansys_fluent.dpm_transcript.execute_tui",
+                side_effect=submit_then_fail,
+            ):
+                result = track_one_injection_streamed(
+                    solver,
+                    item,
+                    collector,
+                    timeout_seconds=1.0,
+                    quiet_seconds=0.01,
+                )
+        self.assertTrue(result["completion"]["confirmed"])
+        self.assertEqual(result["status"], "failed")
+        self.assertFalse(result["completion"]["safe_to_submit_next"])
+        self.assertIn("client disconnected", result["error"])
+
 
 if __name__ == "__main__":
     unittest.main()
