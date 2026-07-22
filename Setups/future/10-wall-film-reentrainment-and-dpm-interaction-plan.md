@@ -7,7 +7,7 @@
 | Setup ID | `10` family plan |
 | Lifecycle | `future` |
 | Role | independently runnable wall-film / re-entrainment / custom-DPM tests |
-| Parent setup | [09c](../past/archived/09c-dpm-ewf-wall-film-reentrainment.md) case definition |
+| Parent setup | [09c](09c-dpm-ewf-wall-film-reentrainment.md) case definition |
 | Fallback parent | Same `09c` source case with two-way DPM disabled, or [09a](../past/reported/09a-dpm-split-inlet-carryover.md) |
 | Child plans | `10a`, `10b`, `10c` |
 | Evidence-use label | diagnostic until interpretation gates pass |
@@ -98,11 +98,9 @@ Find out:
 - steam-outlet liquid phase flux plus escaped DPM mass;
 - whether film inventory is bounded or grows indefinitely.
 
-#### `10a-splash` — deposition with particle splashing
+#### Optional child `10a-splash` — deposition with particle splashing
 
-This child is the splash-enabled variation. The saved run currently labelled `10a` was read back with this state, so it is treated as a `10a-splash`-type diagnostic. The no-splash `10a` configuration below remains the intended control and still needs a separate clean case.
-
-From a fresh `10a` case, change only:
+Use this child if splash is an intentional mechanism to investigate. Preserve the no-splash `10a` case as the clean reference, then change only:
 
 - Eulerian Wall Film `Particle Splashing`: `Off -> On`;
 - on each selected film wall, enable `DPM Wall Splash`;
@@ -281,6 +279,6 @@ The annular-flow evidence is air-water in a tube, not geothermal steam-brine in 
 ## 9. Links
 
 - [08c inlet-velocity sensitivity](../active/08c-purnanto-parity-inlet-velocity-sensitivity.md)
-- [09c two-way DPM coupling](../past/archived/09c-dpm-ewf-wall-film-reentrainment.md)
+- [09c two-way DPM coupling](09c-dpm-ewf-wall-film-reentrainment.md)
 - [11 combined wall-film and DPM plan](11-combined-wallfilm-dpm-plan.md)
 - [separator efficiency methods](../../CFD_wiki/wiki/synthesis/fluent-separator-efficiency-methods.md)

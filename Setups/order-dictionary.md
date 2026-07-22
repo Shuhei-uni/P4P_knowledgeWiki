@@ -32,36 +32,13 @@ Reason:
 Current project-level interpretation:
 
 - setup `08c` is the active child branch for inlet-velocity/loading sensitivity while keeping the same enthalpy basis;
-- setup `09c` is the archived predecessor of the current Skoog/EWF V2 branch;
+- setup `09c` is the active two-way DPM coupling branch;
 - setup `08b` is the past reported parity-reset parent and numerical reference for the `09` DPM family;
 - setup `07` is retained as comparison context rather than the primary next V&V parent;
 - setups `04`, `07`, `08b`, `09a`, and `09b` are past reported because they contain actual efficiency and/or DPM trajectory/fate numerics;
 - setup `08a` and the remaining older setup definitions are archived until stronger numerical evidence is recorded;
 - setup-family branches grown from `08b` or later accepted parity-reset branches should be checked against the roadmap before creating or reviving additional setup reports;
 - lifecycle state is a filing decision, not a permanent judgment: update the setup's lifecycle and linked report when new evidence changes its role.
-
-## Base Mesh Inheritance From Setup `08b`
-
-Setup `08b` establishes the shared base mesh for the later setup/simulation lineage:
-
-- Geometry: `Purnanto`
-- Nodes: `1,309,312`
-- Cells: `7,601,261`
-- Minimum orthogonal quality: `0.2`
-- Maximum aspect ratio: `18.4`
-
-Unless a child setup explicitly records a mesh or geometry change, setups and simulations from `08b` onward inherit this mesh and differ through Fluent settings only. These statistics are `User-reported` setup metadata and are not, by themselves, mesh-independence or solution-acceptance evidence.
-
-## Purnanto Reference Mesh
-
-The Purnanto source/live-audit mesh uses the same `Purnanto` geometry but a separate reference mesh:
-
-- Nodes: `572,556`
-- Cells: `2,964,593`
-- Minimum orthogonal quality: `0.2776` (`0.277635` in the existing audit)
-- Maximum aspect ratio: `12.889` (`12.8899` in the existing audit)
-
-This reference mesh is used for Purnanto parity comparison. It is not the `08b`-onward inherited project mesh unless a child setup explicitly records the switch. The latest user-supplied node string was `5722556`; this dictionary follows the existing audit value of `572,556` pending confirmation.
 
 ## Lifecycle Classification Rule
 
@@ -122,17 +99,10 @@ Rules:
 | `09` | post-parity DPM sensitivity family parent | `09-multiphase-separator-sensitivity-family.md` | `09-multiphase-separator-sensitivity-family.md` | High | archived family definition | child reports carry the numerical DPM evidence |
 | `09a` | one-way DPM tracking cleanup branch | `09a-dpm-split-inlet-carryover.md` | `09a-dpm-split-inlet-carryover.md` | High | past reported DPM branch | contains deterministic DPM fate numerics, including inherited parent evidence |
 | `09b` | one-way DPM stochastic sensitivity branch | `09b-rsm-dpm-split-inlet-accuracy.md` | `09b-rsm-dpm-split-inlet-accuracy.md` | High | past reported DPM branch | contains stochastic fate numerics and escape-fraction comparisons |
-| `09c` | two-way DPM coupling branch | `past/archived/09c-dpm-ewf-wall-film-reentrainment.md` | `09c-dpm-ewf-wall-film-reentrainment.md` | High | archived coupling branch | child of `09`; retained as the predecessor and comparison case for `09cV2` |
-| `09cV2` | Skoog partition and injection-control branch | `active/09cV2-skoog-partition-injection-control.md` | `09cV2-skoog-partition-injection-control.md` | Medium | active provisional branch | child of `09c`; parameterizes DPM as a declared liquid fraction, retains 5% only as sensitivity, and prepares EWF-compatible injection identity |
-| `010V2` | clean EWF deposition and film-inventory control | `active/010V2-ewf-deposition-film-inventory.md` | `010V2-ewf-deposition-film-inventory.md` | Medium | active EWF control branch | child of `09cV2`; EWF-DPM control with global DPM interaction off |
-| `010V2a` | EWF splash sensitivity | `active/010V2a-ewf-splash.md` | `010V2a-ewf-splash.md` | Medium | active provisional child | child of `010V2`; particle splashing only |
-| `010V2b` | EWF edge-separation sensitivity | `active/010V2b-ewf-edge-separation.md` | `010V2b-ewf-edge-separation.md` | Medium | active provisional child | child of `010V2`; edge separation only |
-| `010V2c` | EWF particle-stripping sensitivity | `active/010V2c-ewf-particle-stripping.md` | `010V2c-ewf-particle-stripping.md` | Medium | active provisional child | child of `010V2`; particle stripping only |
-| `010V2d` | combined EWF interaction confirmation | `active/010V2d-ewf-combined-interaction.md` | `010V2d-ewf-combined-interaction.md` | Low | active provisional child | combined accepted mechanisms with global DPM interaction off |
-| `010V2d-2` | combined EWF with global DPM interaction | `future/010V2d-2-ewf-combined-global-dpm.md` | `010V2d-2-ewf-combined-global-dpm.md` | Low | future provisional child | follows `010V2d`; same accepted mechanisms with global DPM interaction on |
+| `09c` | two-way DPM coupling branch | `future/09c-dpm-ewf-wall-film-reentrainment.md` | `09c-dpm-ewf-wall-film-reentrainment.md` | High | future coupling branch | child of `09`; retained as a planned comparison branch |
 | `10` | wall-film / re-entrainment / custom-DPM escalation family | `10-wall-film-reentrainment-and-dpm-interaction-plan.md` | `10-wall-film-reentrainment-and-dpm-interaction-plan.md` | Medium | future staged family | child plans `10a`, `10b`, and `10c` may be executed once the parent case/change readback is ready; report-quality interpretation still requires the evidence gate |
-| `10a` | EWF deposition/drainage child | `past/archived/10a-ewf-deposition.md` | `10a-ewf-deposition.md` | High | archived intended control; clean case pending | parent `09c`; no-splash EWF control definition, but the available artifact was read back with wall splash enabled and is reported as a `10a-splash`-type diagnostic |
-| `10a-splash` | initialized EWF splash child | `past/archived/10a-splash-ewf-deposition.md` | `10a-splash-ewf-deposition.md` | High | archived partial diagnostic; preliminary results available | child of `09c` fallback; EWF DPM coupling and Stanton–Rutland particle splashing enabled; available artifact is labelled `10a` and has `4` splashed particles |
+| `10a` | EWF deposition/drainage child | `future/10a-ewf-deposition.md` | `10a-ewf-deposition.md` | High | future control branch | parent `09c`; EWF deposition/drainage reference with bulk DPM coupling disabled for the current stability fallback |
+| `10a-splash` | initialized EWF splash child | `future/10a-splash-ewf-deposition.md` | `10a-splash-ewf-deposition.md` | High | future initialized diagnostic | child of `09c` fallback; EWF DPM coupling and Stanton–Rutland particle splashing enabled; results pending |
 | `10b` | DPM wall-return/re-entrainment surrogate child | `10-wall-film-reentrainment-and-dpm-interaction-plan.md` | `10-wall-film-reentrainment-and-dpm-interaction-plan.md` | Medium | future child | parent `09c`; EWF off, controlled wall-return sensitivity |
 | `10c` | custom DPM trajectory/material child | `10-wall-film-reentrainment-and-dpm-interaction-plan.md` | `10-wall-film-reentrainment-and-dpm-interaction-plan.md` | Medium | future child | parent `09c`; EWF and wall-return off, one custom law/material change at a time |
 | `11` | combined wall-film and DPM physics family | `11-combined-wallfilm-dpm-plan.md` | `11-combined-wallfilm-dpm-plan.md` | Medium | future staged family | combines selected stable `10` mechanisms |
@@ -161,13 +131,6 @@ Rules:
                    -> 09a one-way DPM tracking cleanup
                    -> 09b one-way DPM stochastic sensitivity
                    -> 09c two-way DPM coupling
-                      -> 09cV2 Skoog partition and injection control
-                         -> 010V2 EWF deposition and film inventory
-                            -> 010V2a splash
-                            -> 010V2b edge separation
-                            -> 010V2c particle stripping
-                            -> 010V2d accepted-mechanism combination
-                               -> 010V2d-2 combined case with global DPM interaction
                       -> 10 wall-film / re-entrainment / custom-DPM escalation family
                          -> 10a EWF deposition/drainage
                             -> 10a-splash EWF deposition with particle splashing
@@ -198,22 +161,20 @@ Interpretation note:
 - Use `08b` when the task is to preserve the observed Purnanto setup as closely as possible while introducing the project's split-inlet objective and extraction-driven DPM rebuild.
 - Use `08c` when the task is to test how changed inlet loading/velocity affects efficiency without mixing in a new enthalpy assumption.
 
-This means `08b-purnanto-parity-split-inlet-rebuild.md` remains the past reported parity reference, `08c-purnanto-parity-inlet-velocity-sensitivity.md` is the active loading-sensitivity branch, `09c-dpm-ewf-wall-film-reentrainment.md` is the archived coupling predecessor, and `09cV2` through `010V2d` are the active Skoog/EWF branch family; `08` remains the archived one-inlet automation/parity scaffold, and `09a` / `09b` are past reported DPM branches.
+This means `08b-purnanto-parity-split-inlet-rebuild.md` remains the past reported parity reference, `08c-purnanto-parity-inlet-velocity-sensitivity.md` is the active loading-sensitivity branch, `09c-dpm-ewf-wall-film-reentrainment.md` is the active coupling branch, `08` remains the archived one-inlet automation/parity scaffold, and `09a` / `09b` are past reported DPM branches.
 
 Current roadmap alignment note:
 
 - setup `07` no longer carries the primary V&V burden;
 - setup `08b` remains the parity parent because setup fidelity took priority over continuing the older split-inlet chain;
 - setup `08c` is the active sensitivity branch because the current project question is inlet-loading/velocity effect at fixed enthalpy basis;
-- `09a` and `09b` are past reported DPM-output branches, while `09c` is archived coupling history and `09cV2` through `010V2d` are active provisional work;
+- `09a` and `09b` are past reported DPM-output branches, while `09c` is active coupling work;
 - setup `09a` should be used first for deterministic one-way DPM fate counts on the accepted `08b` carrier field;
 - setup `09b` should be used second for one-way DPM turbulent-dispersion sensitivity after `09a` fate counts are recorded;
 - PyFluent automation for the injection calculations is treated as a convenience path only; manual Fluent runs are acceptable if the DPM setup values and fate-count outputs are reported in the corresponding setup reports;
 - later wall-film and re-entrainment work should move into a future `10` family.
 - future `10` work is now recorded as a staged family: first EWF deposition/drainage, then re-entrainment/impingement, then custom DPM trajectory and material sensitivity.
 - future `11` work is reserved for combinations: `11a` combines EWF with the selected re-entrainment closure, and `11b` adds only the selected stable custom DPM/material change.
-- provisional Skoog-derived work is now separated from the older `10` family: `09cV2` is the allocation/injection-control parent, `010V2` is the clean EWF control, and `010V2a`/`b`/`c` isolate splash, edge separation, and stripping before `010V2d` combines any accepted mechanisms.
-- `010V2` uses the user-requested provisional numbering; do not renumber it or merge it into the existing `10a` artifact until a later branch review explicitly decides that the two lineages should be reconciled.
 
 ## Technical Companions
 
