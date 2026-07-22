@@ -1,7 +1,8 @@
 # Current Status
 
 ## Snapshot
-- Date: 2026-07-21
+- Date: 2026-07-22
+- New EWF diagnostic: `010V2a` reached iteration `1963` in the loaded Fluent session, but the carrier report has a `110.3422 kg/s` (`57.54 %`) lower-liquid/whole-domain imbalance because no lower liquid drain appears in the extracted report. Continuity remains about `2.29e-3` and final `k`/epsilon residuals are strongly bouncy, so the branch remains diagnostic only. The project accepts retained liquid for this no-brine-outlet EWF check, but does not treat it as a closed separator balance. The retried six-injection DPM summary now has displayed fates, but those rows do not close to the tracked counts for the larger bins and no EWF splash-mass count exists; incomplete and unclassified populations remain explicit unresolved categories.
 - Phase: extraction-first Purnanto parity reset plus retained setup `07` archive context
 - Focus: use Python extraction to recover the actual Purnanto Fluent setup faithfully enough that manual reconstruction error stops driving the next branch decision.
 - Current issue: setup `07` has useful comparison evidence, but it is no longer trusted as the closest reconstruction of the original Purnanto setup.
@@ -20,8 +21,7 @@
 - New PyFluent result: the local `trial3.msh` one-inlet reconstruction now launches, creates manual water vapor/liquid materials, hybrid-initializes, and completes a `10`-iteration smoke test through the script in `../../../PyAnsys/scripts/reconstruct_purnanto_trial3.py`.
 - New hardened PyFluent result: the same one-inlet reconstruction path now runs on `trial4.msh` with clean `Operating Pressure = 0 Pa`, confirmed 2026 R1 numerics paths, mass-flow sanity reporting, and both case/data writes.
 - New longer PyFluent result: a controlled `500`-iteration `trial4` diagnostic run has now completed on the one-steam-outlet branch with chunked reporting, checkpointing, vapor recovery approximately `1.0092`, liquid carryover approximately `3.97e-25`, and a rough residual-history plot recovered from the Fluent transcript.
-- Active setup branches: `../../../Setups/active/08c-purnanto-parity-inlet-velocity-sensitivity.md`, `../../../Setups/active/09cV2-skoog-partition-injection-control.md`, and `../../../Setups/active/010V2-ewf-deposition-film-inventory.md` through `../../../Setups/active/010V2d-ewf-combined-interaction.md`.
-- Archived setup branches: `../../../Setups/past/archived/09c-dpm-ewf-wall-film-reentrainment.md`, `../../../Setups/past/archived/10a-ewf-deposition.md`, and `../../../Setups/past/archived/10a-splash-ewf-deposition.md`.
+- Active setup branches: `../../../Setups/active/08c-purnanto-parity-inlet-velocity-sensitivity.md` and `../../../Setups/active/09c-dpm-ewf-wall-film-reentrainment.md`.
 - Retained scaffold branch: `../../../Setups/past/archived/08-purnanto-one-inlet-massflow-recreation.md` remains the one-inlet automation/parity scaffold.
 - Retained comparison branch: `../../../Setups/past/reported/07-pure-phase-split-actual-area.md` is comparison-only split-inlet context, not the main V&V parent.
 - Secondary comparison branch: `../../../Setups/past/archived/08a-steam-outlet-extension-student-trial.md` remains available if the downstream steam-outlet boundary-placement diagnostic is revived.

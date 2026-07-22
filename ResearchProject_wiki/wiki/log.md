@@ -1,11 +1,22 @@
 # Work Log
 
-## [2026-07-21] lifecycle-update | Promote the Skoog/EWF V2 family and archive superseded branches
-- files created/updated: `../../Setups/active/`, `../../Setups/past/archived/`, `../../Setups/future/index.md`, `../../Setups/active/index.md`, `../../Setups/past/archived/index.md`, `../../Setups/order-dictionary.md`, `wiki/index.md`, `wiki/progress/current-status.md`, `wiki/log.md`
-- reason: user directed that setup `08c` remain active, the original `09c` and both `10a` records be archived, and `09cV2` through `010V2d` become the active setup family.
-- what changed since last update: moved `09c`, `10a`, and `10a-splash` to `Setups/past/archived/`; moved `09cV2`, `010V2`, `010V2a`, `010V2b`, `010V2c`, and `010V2d` to `Setups/active/`; left `010V2d-2` in `Setups/future/`.
-- current status: the active setup path is `08c` plus the Skoog/EWF V2 family through `010V2d`; the original `09c` and `10a` artifacts remain available as archived comparison history.
-- next action: manually create/read back the active V2 cases in Fluent and record evidence against each setup's stability and mass-closure gates.
+## [2026-07-22] model-update | File 010V2a EWF splash post-simulation diagnostic
+
+- files created/updated: `../../Setups/reports/010V2a/results.md`, `../../Setups/reports/index.md`, `../../Setups/active/010V2a-ewf-splash.md`, `wiki/progress/experiments.md`, `wiki/progress/current-status.md`, `wiki/log.md`
+- reason: post-simulation analysis of the already-loaded `010V2a` EWF splash session on Fluent server `1` captured flux and residual artifacts through iteration `1963`.
+- assumptions introduced/removed: records the user-specified no-brine-outlet diagnostic assumption that retained liquid may remain in the separator; this does not close the liquid balance. Records incomplete DPM tracks as an unresolved long-residence population that may later escape by entrainment, not as completed escape or collection.
+- current status: the phase extraction reports liquid inlet `111.074 kg/s`, vapour inlet `80.690 kg/s`, steam-outlet vapour `81.4218 kg/s`, and a derived `110.3422 kg/s` (`57.54 %`) imbalance. Continuity is about `2.29e-3` and final `k`/epsilon residuals are oscillatory. DPM fate and splash-mass counts were not produced because the live summary did not return a completed artifact.
+- blockers: EWF film CFL, inventory, thickness, source/outflow, splashed represented mass, and original DPM fates are not captured by the current post-analysis skill; the present result cannot support separator efficiency or splash-performance claims.
+- next action: add/export the EWF monitors, establish bounded film and residual histories, and then compare this child only against a stable `010V2` no-splash control.
+
+## [2026-07-22] postprocess-update | Complete 010V2a DPM Particle Tracks Summary
+
+- files created/updated: `../../Setups/reports/010V2a/results.md`, `wiki/progress/experiments.md`, `wiki/progress/current-status.md`, `wiki/log.md`
+- reason: the first three minutes after initiating the Fluent DPM track were allowed to elapse before inspecting the result, as required by the updated post-simulation-analysis workflow.
+- what changed since last update: the six-injection Particle Tracks Summary completed and was retained at `../../../PyAnsys/output/post_simulation_analysis/010V2a-ewf-splash-1963-retry-dpm-summary.txt`; displayed escaped counts decrease from `2162` at `5.63 um` to `435` at `348.88 um`.
+- assumptions introduced/removed: incomplete and the new tracked-minus-displayed-fates difference remain unresolved categories. Neither is silently converted to escaped, trapped, absorbed, or splashed mass.
+- current status: original-particle fates are now partly observed, but the compact Summary does not close for the larger injections and no represented escape/splash mass is available. The result remains diagnostic only.
+- next action: export a fate accounting that identifies the unclassified category and collect EWF film/source/outflow/splash-mass monitors before interpreting an EWF splash mechanism.
 
 ## [2026-07-16] reorganization | Reorganize setup records and numerical reports
 - files created/updated: `../../Setups/`, `../../Setups/index.md`, `../../Setups/order-dictionary.md`, `../../Setups/reports/`, `wiki/index.md`, `wiki/project/roadmap.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/log.md`
@@ -508,60 +519,3 @@
 - current status: future setup families `10` and `11` are now concretely defined; active branches remain `08c` and `09c`.
 - blockers: `08c` and `09c` results are still pending; EWF wall-zone selection, timestep, and re-entrainment closure still require Fluent-side confirmation.
 - next action: prepare the parent `09c` case and launch independent `10a`, `10b`, and `10c` cases with the same loading and injection payload.
-
-## [2026-07-21] query | Skoog application guardrail
-
-- Added a project-specific guardrail for applying Skoog's three-field vapor/film/droplet findings to the geothermal separator.
-- Defined the liquid mass-accounting rule, injection-role separation, staged EWF interaction order, claim limits, and provisional `09cV2` / `010V2` branch identities.
-- Linked the guardrail from the project index, inlet-regime model page, and literature matrix.
-- No setup report or `Setups/order-dictionary.md` entry was created yet; those will follow after the guardrail is accepted.
-
-## [2026-07-21] query | Skoog-derived provisional setup branches
-
-- Created future setup definitions and click-by-click build instructions for `09cV2`, `010V2`, `010V2a`, `010V2b`, `010V2c`, and `010V2d`.
-- The initial draft of `09cV2` used a provisional `5%` DPM allocation (`5.846 kg/s`) with the Eulerian liquid inlet reduced to `111.074 kg/s`; this was subsequently downgraded to a sensitivity point rather than a physical default.
-- `010V2` is the clean EWF deposition/film-inventory control; splash, edge separation, stripping, and combined interaction are isolated as separate children.
-- Current status: future/provisional setup plans only; no new Fluent case/data files or numerical results were created.
-- Next action: build `09cV2` from the `09c` case/data pair, read back every changed value, and record whether the mass allocation and carrier balance are stable before creating `010V2`.
-
-## [2026-07-21] query | Remove fixed DPM fraction from `09cV2`
-
-- Updated `Setups/future/09cV2-skoog-partition-injection-control.md` to state that `5%` is not literature-derived and is not a physical project default.
-- Recorded the evidence distinction between total liquid feed, size-distribution fractions, capture-size thresholds, and the missing geothermal inlet DPM concentration/PSD.
-- Added a pre-simulation `0%`, `1%`, `5%`, `10%`, and `25%` fraction matrix, plus the Skoog/1-D deposition-entrainment balance as the preferred route for an inferred point.
-- Current status: `09cV2` remains a future setup plan; no Fluent case/data files or numerical results were changed.
-- Next action: build and read back the fraction matrix from the `09c` case/data pair, then select any Skoog-calculated point only after its inputs and balance are documented.
-
-## [2026-07-21] query | Revise provisional `V2` branches after server-2 `10a` failure analysis
-
-- Updated `09cV2` to prohibit reuse of the failed `10a` checkpoint and to require a fresh `09c` carrier checkpoint, explicit material matching, and early DPM-source/mass-balance stop checks.
-- Revised `010V2` into a staged EWF stability control: EWF-DPM coupling on, global DPM interaction off for the first film-formation run, first-order transient controls, and a recorded `1.0e-5 s` starting film timestep.
-- Propagated the same clean-parent, finite-film, timestep, CFL/source-monitor, and failure-return rules into `010V2a`, `010V2b`, `010V2c`, and `010V2d`.
-- Evidence basis: the server-2 `10a` live readback was `Debug only`, with full `116.920 kg/s` Eulerian liquid plus `1.940 kg/s` DPM and approximately `2.61 × 10^65 kg/s` derived mass imbalance; the referenced failure analysis additionally reported a film CFL of approximately `679` at the second film step.
-- Current status: all provisional `V2` plans are revised; no Fluent case/data files were changed.
-- Next action: build only the clean `09cV2` fraction point first, then run the `010V2` EWF stability baseline before enabling any splash, edge-separation, or stripping mechanism.
-
-## [2026-07-21] query | Parameterize downstream `V2` flow readback
-
-- Corrected `010V2` so its six-injection flow check uses the selected `09cV2` DPM total rather than implicitly requiring the earlier `5.846 kg/s` sensitivity point.
-- Implementation remains paused pending a server-3-visible source `09c` case path and explicit `f_DPM` selection.
-
-## [2026-07-21] query | Build 5-percent V2 case chain on server 3
-
-- Built and saved `09cV2-fDPM-05pct.cas.h5` from the loaded `09c` case on Fluent server 3, with `5.846 kg/s` DPM, `111.074 kg/s` Eulerian liquid, and six rescaled/renamed injections.
-- No initialization, iterations, solver advance, data read, or `.dat.h5` write was performed.
-- Downstream `010V2`–`010V2d` creation stopped at an unknown EWF activation path: the 09cV2-loaded session does not expose the required EWF TUI commands. The added 10a reference case loads successfully and exposes EWF, but its wall DPM allowed values do not include the planned `wall-film` fate.
-- Current status: one case file built; downstream cases remain unbuilt pending a decision on using 10a as an EWF-enabled scaffold or activating EWF manually on 09cV2 first.
-
-## [2026-07-21] query | Update V2 setup intent after server-4 readback
-
-- Updated `010V2` and child setup reports to preserve the intentional live-case choices: global DPM interaction on, fixed transient controls, current material identities/properties, and the current ordinary-wall `reflect` fate.
-- Recorded the three DPM tracking values as the only correction items before execution: disable unsteady particle tracking, remove the `0.001 s` particle-time-step override, and restore maximum particle steps to `10000`.
-- No Fluent settings or case/data files were changed.
-
-## [2026-07-21] query | Split global DPM interaction branch
-
-- Updated `010V2` and `010V2a`–`010V2d` to use global DPM interaction `Off`.
-- Added provisional `010V2d-2` as the combined EWF follow-up with global DPM interaction `On` and no other intended setup change.
-- The server-3 `010V2` gate passed the current DPM correction and mass-allocation checks, but derived-case creation remains paused because the EWF splash/separation/stripping controls are inactive settings paths until the Fluent EWF DPM option menu activates them.
-- No Fluent case/data files were written.
