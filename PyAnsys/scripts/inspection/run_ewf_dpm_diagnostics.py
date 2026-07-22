@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 """Audit and post-process Eulerian Wall Film plus DPM behavior in live Fluent.
 
-Default mode is ``audit`` and does not intentionally mutate the case.  Snapshot
+Default mode is ``audit`` and does not intentionally mutate the case. Snapshot
 modes create only namespaced report definitions; they never enable or disable
 EWF, splash, stripping, separation, wall-film boundaries, or DPM interaction.
+
+DPM mode captures Fluent's session transcript directly. Each injection must
+produce a complete Summary block before the next command is submitted, and its
+raw transcript plus partial CSV/JSON outputs are flushed immediately.
 """
 
 from __future__ import annotations
@@ -11,6 +15,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import re
 import sys
 import traceback
 from datetime import datetime, timezone
@@ -25,7 +30,10 @@ from pyansys_fluent.dpm_reports import (  # noqa: E402
     configure_particle_track_summary,
     discover_live_injections,
     select_injections,
-    track_one_injection,
+)
+from pyansys_fluent.dpm_transcript import (  # noqa: E402
+    SessionTranscriptCapture,
+    track_one_injection_streamed,
 )
 from pyansys_fluent.ewf_diagnostics import (  # noqa: E402
     audit_ewf_dpm_settings,
@@ -110,6 +118,23 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--tui-version", default="24.2")
     parser.add_argument("--keep-going", action="store_true")
     parser.add_argument(
+        "--dpm-timeout-seconds",
+        type=float,
+        default=600.0,
+        help="Maximum wait for one complete DPM Summary transcript block.",
+    )
+    parser.add_argument(
+        "--transcript-quiet-seconds",
+        type=float,
+        default=1.0,
+        help="Required no-output interval after the parsed Summary before continuing.",
+    )
+    parser.add_argument(
+        "--echo-dpm-transcript",
+        action="store_true",
+        help="Echo the registered transcript callback to this Python terminal.",
+    )
+    parser.add_argument(
         "--output-dir",
         default=str(PROJECT_ROOT / "output" / "ewf_dpm_diagnostics"),
     )
@@ -126,7 +151,11 @@ def write_json(path: Path, payload: Any) -> None:
     path.write_text(json.dumps(payload, indent=2, default=str) + "\n", encoding="utf-8")
 
 
-def write_csv(path: Path, rows: list[dict[str, Any]], fieldnames: list[str] | None = None) -> None:
+def write_csv(
+    path: Path,
+    rows: list[dict[str, Any]],
+    fieldnames: list[str] | None = None,
+) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     if fieldnames is None:
         fieldnames = []
@@ -151,7 +180,10 @@ def resolve_run_label(args: argparse.Namespace) -> str:
     return datetime.now().strftime("ewf-dpm-%Y%m%d-%H%M%S")
 
 
-def resolve_film_walls(args: argparse.Namespace, audit: dict[str, Any]) -> tuple[list[str], list[str]]:
+def resolve_film_walls(
+    args: argparse.Namespace,
+    audit: dict[str, Any],
+) -> tuple[list[str], list[str]]:
     warnings: list[str] = []
     if args.film_walls:
         return list(dict.fromkeys(args.film_walls)), warnings
@@ -185,12 +217,15 @@ def dpm_summary_rows(results: list[dict[str, Any]]) -> list[dict[str, Any]]:
         counts = parsed.get("counts", {})
         events = parsed.get("ewf_events", {})
         closure = result.get("closure", {})
+        completion = result.get("completion", {})
         rows.append(
             {
                 "index": result.get("index"),
                 "injection": result.get("name"),
                 "diameter_um": result.get("diameter_um"),
                 "status": result.get("status"),
+                "transcript_complete": completion.get("confirmed"),
+                "completion_wait_seconds": completion.get("wait_seconds"),
                 "tracked": counts.get("tracked"),
                 "escaped": counts.get("escaped"),
                 "trapped": counts.get("trapped"),
@@ -202,6 +237,7 @@ def dpm_summary_rows(results: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "terminal_sum_kg_s": closure.get("terminal_sum_kg_s"),
                 "closure_residual_kg_s": closure.get("residual_kg_s"),
                 "closure_relative_residual": closure.get("relative_residual"),
+                "raw_output_path": result.get("raw_output_path"),
                 "error": result.get("error"),
             }
         )
@@ -225,6 +261,7 @@ def dpm_zone_rows(results: list[dict[str, Any]]) -> list[dict[str, Any]]:
                     "elapsed_max_s": elapsed.get("max"),
                     "elapsed_avg_s": elapsed.get("avg"),
                     "elapsed_std_dev_s": elapsed.get("std_dev"),
+                    "row_type": "fate",
                 }
             )
         for mass in result.get("parsed", {}).get("mass_transfer_rows", []):
@@ -259,10 +296,83 @@ def film_flux_rows(film_flux: dict[str, Any]) -> list[dict[str, Any]]:
     return rows
 
 
+def safe_filename(value: str) -> str:
+    cleaned = re.sub(r"[^A-Za-z0-9_.-]+", "-", value).strip("-.")
+    return cleaned or "injection"
+
+
+def refresh_dpm_bookkeeping(payload: dict[str, Any]) -> None:
+    payload["bookkeeping"]["dpm"] = [
+        {"injection": result.get("name"), **result.get("closure", {})}
+        for result in payload["dpm"]["results"]
+    ]
+
+
+def write_dpm_progress(output_root: Path, payload: dict[str, Any]) -> None:
+    refresh_dpm_bookkeeping(payload)
+    results = payload["dpm"]["results"]
+    write_json(output_root / "dpm_progress.json", payload["dpm"])
+    write_json(output_root / "bookkeeping.partial.json", payload["bookkeeping"])
+    write_csv(output_root / "dpm_injection_summary.partial.csv", dpm_summary_rows(results))
+    write_csv(output_root / "dpm_zone_summary.partial.csv", dpm_zone_rows(results))
+
+
+def write_final_outputs(
+    output_root: Path,
+    payload: dict[str, Any],
+    audit: dict[str, Any],
+) -> None:
+    write_json(
+        output_root / "run_manifest.json",
+        {
+            key: payload.get(key)
+            for key in (
+                "created_at_utc",
+                "mode",
+                "server_id",
+                "fluent_version",
+                "case_file",
+                "data_file",
+                "load",
+                "report_prefix",
+                "resolved_film_walls",
+                "resolved_flux_boundaries",
+                "warnings",
+            )
+        },
+    )
+    write_json(output_root / "model_audit.json", audit)
+    write_json(output_root / "raw_results.json", payload)
+
+    if payload.get("snapshot"):
+        write_csv(
+            output_root / "final_reports.csv",
+            flatten_snapshot_reports(payload["snapshot"]),
+        )
+    if payload.get("film_flux"):
+        write_csv(output_root / "film_flux.csv", film_flux_rows(payload["film_flux"]))
+    if payload["dpm"]["results"]:
+        results = payload["dpm"]["results"]
+        write_csv(output_root / "dpm_injection_summary.csv", dpm_summary_rows(results))
+        write_csv(output_root / "dpm_zone_summary.csv", dpm_zone_rows(results))
+        transcript_parts: list[str] = []
+        for result in results:
+            transcript_parts.append(f"===== {result.get('name')} =====")
+            transcript_parts.append(str(result.get("raw_output", "")))
+        (output_root / "dpm_particle_track_transcript.txt").write_text(
+            "\n".join(transcript_parts), encoding="utf-8"
+        )
+    write_json(output_root / "bookkeeping.json", payload["bookkeeping"])
+
+
 def main() -> int:
     args = build_parser().parse_args()
     if args.report_frequency < 1:
         raise ValueError("--report-frequency must be at least 1")
+    if args.dpm_timeout_seconds <= 0:
+        raise ValueError("--dpm-timeout-seconds must be positive")
+    if args.transcript_quiet_seconds < 0:
+        raise ValueError("--transcript-quiet-seconds cannot be negative")
     if args.load_case_data and not (args.case_file and args.data_file):
         raise ValueError("--load-case-data requires both --case-file and --data-file")
 
@@ -282,7 +392,16 @@ def main() -> int:
         "audit": {},
         "snapshot": {},
         "film_flux": {},
-        "dpm": {"injections": [], "selected": [], "results": []},
+        "dpm": {
+            "injections": [],
+            "selected": [],
+            "results": [],
+            "transcript": {
+                "capture": "solver.transcript.register_callback",
+                "timeout_seconds": args.dpm_timeout_seconds,
+                "quiet_seconds": args.transcript_quiet_seconds,
+            },
+        },
         "bookkeeping": {},
     }
 
@@ -336,7 +455,9 @@ def main() -> int:
             domain="mixture",
         )
         payload["film_flux"] = film_flux
-        payload["bookkeeping"]["ewf"] = build_ewf_bookkeeping_target(snapshot, film_flux)
+        payload["bookkeeping"]["ewf"] = build_ewf_bookkeeping_target(
+            snapshot, film_flux
+        )
 
     if args.mode in {"dpm", "all"}:
         print_header("Discover Live DPM Injections")
@@ -352,69 +473,68 @@ def main() -> int:
             {"index": item["index"], "name": item["name"]} for item in selected
         ]
 
-        print_header("Configure DPM Summary")
-        payload["dpm"]["configuration_commands"] = configure_particle_track_summary(
+        live_transcript_path = output_root / "dpm_live_transcript.txt"
+        raw_dir = output_root / "dpm_raw"
+        with SessionTranscriptCapture(
             solver,
-            tui_version=args.tui_version,
-        )
-
-        print_header("Track DPM Injections")
-        for item in selected:
-            print(
-                f"Tracking index={item['index']} name={item['name']} diameter_um={item.get('diameter_um')}",
-                flush=True,
+            stream_path=live_transcript_path,
+            echo=args.echo_dpm_transcript,
+        ) as collector:
+            print_header("Configure DPM Summary")
+            payload["dpm"]["configuration_commands"] = configure_particle_track_summary(
+                solver,
+                tui_version=args.tui_version,
             )
-            result = track_one_injection(solver, item)
-            payload["dpm"]["results"].append(result)
-            if result["status"] != "ok" and not args.keep_going:
-                break
-        payload["bookkeeping"]["dpm"] = [
-            {
-                "injection": result.get("name"),
-                **result.get("closure", {}),
-            }
-            for result in payload["dpm"]["results"]
-        ]
+            collector.wait_until_quiet(quiet_seconds=0.25, timeout_seconds=5.0)
+
+            print_header("Track DPM Injections")
+            for item in selected:
+                print(
+                    f"Tracking index={item['index']} name={item['name']} "
+                    f"diameter_um={item.get('diameter_um')}",
+                    flush=True,
+                )
+                raw_path = raw_dir / (
+                    f"{int(item['index']):02d}-{safe_filename(str(item['name']))}.txt"
+                )
+                result = track_one_injection_streamed(
+                    solver,
+                    item,
+                    collector,
+                    timeout_seconds=args.dpm_timeout_seconds,
+                    quiet_seconds=args.transcript_quiet_seconds,
+                    raw_output_path=raw_path,
+                )
+                payload["dpm"]["results"].append(result)
+                write_dpm_progress(output_root, payload)
+                print(
+                    f"Completed name={item['name']} status={result['status']} "
+                    f"confirmed={result.get('completion', {}).get('confirmed')} "
+                    f"counts={result.get('parsed', {}).get('counts')}",
+                    flush=True,
+                )
+
+                completion = result.get("completion", {})
+                if not completion.get("safe_to_submit_next", False):
+                    warning = (
+                        f"Stopped after {item['name']}: command completion was not confirmed; "
+                        "no further TUI command was submitted."
+                    )
+                    payload["warnings"].append(warning)
+                    print(warning, flush=True)
+                    break
+                if result["status"] != "ok" and not args.keep_going:
+                    break
+
+        refresh_dpm_bookkeeping(payload)
 
     print_header("Write Outputs")
-    write_json(output_root / "run_manifest.json", {
-        key: payload.get(key)
-        for key in (
-            "created_at_utc",
-            "mode",
-            "server_id",
-            "fluent_version",
-            "case_file",
-            "data_file",
-            "load",
-            "report_prefix",
-            "resolved_film_walls",
-            "resolved_flux_boundaries",
-            "warnings",
-        )
-    })
-    write_json(output_root / "model_audit.json", audit)
-    write_json(output_root / "raw_results.json", payload)
-
-    if payload.get("snapshot"):
-        write_csv(output_root / "final_reports.csv", flatten_snapshot_reports(payload["snapshot"]))
-    if payload.get("film_flux"):
-        write_csv(output_root / "film_flux.csv", film_flux_rows(payload["film_flux"]))
-    if payload["dpm"]["results"]:
-        write_csv(output_root / "dpm_injection_summary.csv", dpm_summary_rows(payload["dpm"]["results"]))
-        write_csv(output_root / "dpm_zone_summary.csv", dpm_zone_rows(payload["dpm"]["results"]))
-        transcript_parts: list[str] = []
-        for result in payload["dpm"]["results"]:
-            transcript_parts.append(f"===== {result.get('name')} =====")
-            transcript_parts.append(str(result.get("raw_output", "")))
-        (output_root / "dpm_particle_track_transcript.txt").write_text(
-            "\n".join(transcript_parts), encoding="utf-8"
-        )
-    write_json(output_root / "bookkeeping.json", payload["bookkeeping"])
-
+    write_final_outputs(output_root, payload, audit)
     print(f"output_dir: {output_root}", flush=True)
+
     failed_reports = [
-        report for report in payload.get("snapshot", {}).get("reports", [])
+        report
+        for report in payload.get("snapshot", {}).get("reports", [])
         if report.get("status") == "failed"
     ]
     failed_dpm = [
