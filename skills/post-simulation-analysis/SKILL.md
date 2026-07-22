@@ -1,196 +1,166 @@
 ---
 name: post-simulation-analysis
-description: "Use for read-only post-simulation checks on an existing Ansys Fluent case/data session: carrier flux balance, residual history, and dynamic DPM Particle Tracks Summary analysis. Do not use for rebuilding Fluent setups or changing solver models."
+description: "Use for evidence-led post-simulation analysis and reporting of existing Ansys Fluent case/data results, including carrier-field checks, DPM particle-track fate and mass-flow closure, Eulerian Wall Film (EWF) configuration/final-state diagnostics, transcript capture, and setup-linked reports in Setups/reports/. Use when deciding which analyses apply to a concrete Fluent setup; do not use to rebuild a setup or enable/change solver physics."
 ---
 
 # Post-Simulation Analysis
 
-## Scope
+## Purpose and boundary
 
-Use this skill after a Fluent case has been solved and the result needs a
-repeatable, read-only check. The checks are independent and may be run one at
-a time or together:
+Analyse an already-built Fluent case/data state without rebuilding the setup or changing its physics. Use the resulting evidence to create or extend the report for that exact setup branch.
 
-- `flux`: carrier mass-flow extraction and balance metrics;
-- `residual`: residual-monitor history capture and log-scaled plot;
-- `dpm`: live DPM injection discovery and Particle Tracks Summary fate counts.
+Keep roles separate:
 
-The modular entrypoint is:
+- `PyAnsys/` owns executable inspection and generated artifacts.
+- `Setups/reports/<setup-id>/` owns the concise, report-facing interpretation of one concrete setup.
+- `Setups/` setup definitions own case identity and lineage; do not alter them merely because analysis was run.
+- `ResearchProject_wiki` owns project-level conclusions and sign-off.
 
-`/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/scripts/inspection/post_simulation_analysis.py`
+`snapshot` creates or reuses only namespaced `ewfdiag-*` report definitions. It must never enable EWF, splashing, stripping, edge separation, coupling, or any other physics merely to expose an output.
 
-It uses one Fluent connection for all selected checks. It assumes the intended
-case/data pair is already loaded; loading is explicit and opt-in.
+## Route the analysis from the setup
 
-## Quick start
+Before running anything, read in order:
 
-Activate the project environment:
+1. Repository `AGENTS.md` and `Setups/order-dictionary.md`.
+2. The target setup definition and its immediate parent/comparison setup when relevant.
+3. The target setup's existing `Setups/reports/<setup-id>/` report, if present.
+4. `PyAnsys/AGENTS.md` and the current diagnostic documentation:
+   - `PyAnsys/docs/EWF_DPM_DIAGNOSTICS.md`
+   - `PyAnsys/docs/EWF_DPM_TRANSCRIPT_CAPTURE.md` when DPM tracking is needed.
+
+Make an applicability table before execution. Treat a model as applicable only when the setup definition and live audit support it.
+
+| Setup evidence | Run | Do not infer |
+|---|---|---|
+| Any solved carrier case | carrier residual/flux/stability checks already supported by the case workflow | full separator validation from a scoped outlet metric alone |
+| Active DPM injections | `dpm` mode for selected or all named injections | DPM analysis for a case without an active injection branch |
+| Active EWF film wall | `audit`, then `snapshot` on only the confirmed film walls | EWF on ordinary walls, or film analysis on `bottom` unless it is actually a film wall |
+| EWF plus wall/global splash enabled | preserve absorbed and splashed event counts in DPM reporting | splash events as an extra terminal mass sink |
+| Edge separation or particle stripping enabled | include the corresponding separated/stripped report terms | those mechanisms from a field-menu item alone |
+| No EWF | carrier and/or DPM analysis only | film inventory, film drainage, EWF source, or EWF closure |
+| No DPM | carrier and, when applicable, EWF analysis only | injection fate, splash parcel, or DPM mass-flow claims |
+
+Record every omitted analysis as `Not applicable`, `Not available`, or `Deferred`, with the reason. Do not turn an omitted mechanism into a zero-valued result.
+
+## Preflight and safe execution
+
+Use the already-open Fluent session unless explicit case/data loading is required and authorised. Confirm the loaded case/data pair, setup ID, Fluent version, and server before interpreting any output.
 
 ```bash
 source /Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/.venv/bin/activate
+python PyAnsys/scripts/connection/check_connection.py --server-id 1
 ```
 
-Run one check:
+Use the modular runner:
 
 ```bash
-python /Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/scripts/inspection/post_simulation_analysis.py \
-  --server-id 1 \
-  --check flux \
-  --run-label my-case
+python PyAnsys/scripts/inspection/run_ewf_dpm_diagnostics.py --server-id 1 --mode audit
 ```
 
-Use `--check residual` or `--check dpm` in the same position. Repeat the
-option for selected checks, or use `--check all`:
+Start with `audit`. It is read-only and establishes live injection names, wall-film assignments, UDF overrides, and diagnostic limitations. Treat a missing Settings API path as a version/adapter finding, not proof that a model is disabled.
+
+Run `snapshot` only for confirmed EWF cases. Supply the actual film walls and flux boundaries rather than assuming generic names:
 
 ```bash
-python /Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/scripts/inspection/post_simulation_analysis.py \
-  --server-id 1 \
-  --check flux \
-  --check residual \
-  --check dpm \
-  --run-label my-case
+python PyAnsys/scripts/inspection/run_ewf_dpm_diagnostics.py \
+  --server-id 1 --mode snapshot --film-wall <film-wall> \
+  --flux-boundary <boundary> --object-policy reuse
 ```
 
-If the script must load files, pass all three options explicitly:
+Run `dpm` only for active DPM cases. Prefer stable injection names when narrowing a test; omit them for the complete diameter-ordered sweep:
 
 ```bash
-python /Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/scripts/inspection/post_simulation_analysis.py \
-  --server-id 1 \
-  --load-case-data \
-  --case-file 'C:\\path\\case.cas.h5' \
-  --data-file 'C:\\path\\case.dat.h5' \
-  --check flux
+python PyAnsys/scripts/inspection/run_ewf_dpm_diagnostics.py \
+  --server-id 1 --mode dpm --order diameter-ascending --keep-going \
+  --dpm-timeout-seconds 600 --transcript-quiet-seconds 1.0
 ```
 
-Outputs are written to `PyAnsys/output/post_simulation_analysis/` unless
-`--output-dir` is supplied.
+Use `all` only after separate `audit`, `snapshot`, and `dpm` runs have each been validated for the specific Fluent version and case.
 
-## Report filing by setup number
+## DPM completion gate and wait rules
 
-Analysis is not complete when artifacts exist only under `PyAnsys/output/`.
-Every analysis must also be interpreted and filed under the corresponding
-setup-number report directory:
+For every injection, require all of the following before submitting the next command:
 
-`/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/Setups/reports/<setup-id>/`
+1. A `number tracked = ...` line.
+2. A `Mass Transfer Summary` section.
+3. At least one parsed mass-transfer row.
+4. A quiet transcript interval of at least `1.0 s`.
+5. Immediate write of that injection's raw transcript and partial CSV/JSON state.
 
-Use the setup ID tied to the case branch, such as `08c`, `09c`, or `10a`.
-Before writing, check `Setups/order-dictionary.md` and
-`Setups/reports/index.md`; do not infer a new number or silently file results
-under a different setup. The normal report entrypoint is:
+Use `--dpm-timeout-seconds 600` unless a documented case-specific limit is justified. A timeout, parser failure, or client error is a hard stop; do not queue the next injection merely because `--keep-going` was supplied.
 
-`Setups/reports/<setup-id>/results.md`
+Run a complete DPM sweep in a persistent terminal session. **Once a non-inspection
+Particle Tracks command has been sent, do not terminate, detach, or regard the
+controlling analysis shell as complete before 180 seconds have elapsed.** This
+minimum applies even if Fluent writes a partial or final-looking output bundle
+earlier. Poll the attached process at approximately 60-second intervals; do
+not reconnect, launch another tracker, or use another server while that
+minimum wait is in effect. After 180 seconds, continue one-minute polling
+until the required completion artifacts exist or Fluent/the analysis process
+emits an explicit failure. If the process itself ends before 180 seconds,
+record an incomplete DPM execution rather than inferring missing fates as zero.
 
-Each appended analysis section should identify:
+Capture through `solver.transcript`, not Python `redirect_stdout`. Preserve:
 
-- setup ID and setup-report link;
-- case/data filenames and iteration state;
-- checks run (`flux`, `residual`, `dpm`);
-- key numerical results and units;
-- links to the machine-readable JSON/CSV/PNG/transcript artifacts;
-- limitations, warnings, convergence status, and claim level.
+- `dpm_live_transcript.txt`;
+- one `dpm_raw/<index>-<injection>.txt` file per completed injection;
+- partial outputs during the sweep;
+- final `dpm_injection_summary.csv`, `dpm_zone_summary.csv`, `bookkeeping.json`, and `raw_results.json`.
 
-If the analysis is a large technical extraction or validation comparison,
-create a clearly named companion file inside the same numbered report folder,
-then link it from `results.md`. Keep the generated raw artifacts in
-`PyAnsys/output/`, but never leave the human interpretation there as the only
-record.
+## Interpret each analysis correctly
 
-## Individual checks
+### Audit
 
-### Flux
-
-`--check flux` discovers phase domains and inlet/outlet roles from the live
-session, extracts mass flow for the detected zones, and writes:
-
-`<run-label>-flux-check.json`
-
-The output contains raw per-domain/per-zone values and derived metrics such as
-phase efficiency, outlet dryness, mass imbalance, and the carryover comparison
-note. Treat inferred zone roles and fallback phase mappings as warnings that
-need review.
-
-### Residual
-
-`--check residual` captures the existing `residual` monitor set without running
-iterations and writes:
-
-- `<run-label>-residual-check.json`
-- `<run-label>-residual-check.png`
-
-Use `--monitor-set NAME` for a different Fluent monitor set and adjust
-`--residual-timeout-seconds` or `--residual-poll-interval-seconds` when the
-history is slow to arrive. A residual plot is evidence of solver-history
-behavior, not proof that the physical solution is validated.
-
-The standalone compatibility wrapper remains available at:
-
-`/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/scripts/inspection/export_residuals.py`
+Use `model_audit.json` to answer what Fluent was configured to do: active film walls, wall impingement/splash settings, optional EWF mechanisms, UDF overrides, and injection identity. It establishes scope; it does not prove the physical outcome.
 
 ### DPM
 
-`--check dpm` uses the current dynamic runner:
+For each named injection, retain counts, fate-by-zone rows, elapsed-time statistics, mass-transfer rows, and the DPM closure:
 
-`/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/scripts/inspection/run_dpm_particle_tracks.py`
-
-It discovers the live DPM injection list, records index/name/diameter/material
-metadata, configures Summary reporting, and tracks by injection name. Select a
-subset with repeated options:
-
-```bash
-python /Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/scripts/inspection/post_simulation_analysis.py \
-  --server-id 1 \
-  --check dpm \
-  --dpm-index 0 \
-  --dpm-order live
+```text
+net injected mass flow
+≈ escaped + trapped + absorbed + incomplete + other terminal fates
 ```
 
-Use `--dpm-injection NAME` when the name is known. Use `--dpm-inspect-only` to
-discover the inventory without tracking. DPM outputs are JSON, CSV, and a raw
-transcript with `-dpm-particle-track-*` filenames.
+`splashed = ...` is a secondary-parcel/event diagnostic. If final fate totals include the generated secondary parcels, do not add their splash mass again to the terminal closure. Keep the EWF absorbed-event counter separate from the final `Absorbed` fate row; they can differ.
 
-The legacy `report/dpm-sample` options in the older combined post-processing
-script are not the supported DPM check. Do not use them for new analysis; they
-can sample selected boundaries rather than report complete particle fates and
-are more sensitive to Fluent prompt order. The current check uses the verified
-2024 R2 Particle Tracks Summary TUI workflow.
+### EWF final-state snapshot
 
-## Assumptions and pitfalls
+On confirmed film walls only, capture the final values and units for:
 
-- Case/data loading is not performed unless `--load-case-data` is supplied.
-- The residual check reads an existing monitor history; it does not initialize,
-  iterate, or modify the solution.
-- Flux role detection currently recognizes common names such as
-  `liquidinlet`, `steaminlet`, and `steamoutlet`; inspect warnings when a case
-  uses different names.
-- Phase-domain inference uses live phase/material state and falls back to
-  `phase-1` as vapor and `phase-2` as liquid when mapping is unavailable.
-- DPM indices are only valid for the current live injection list. Use injection
-  names and recorded metadata as audit identity across cases.
-- DPM Summary parsing treats fate rows omitted by Fluent as zero; a missing
-  tracked count is a failed/unparsed result, not zero particles.
-- The DPM TUI command is version-sensitive. The current known-good prompt is
-  Fluent 2024 R2 with `screen`, `mixture`, and `particle-resid-time`.
-- These checks do not create or repair injections, change models, initialize,
-  run iterations, or write case/data files.
-- Raw reports and warnings must be preserved. Do not silently replace an
-  unavailable value with a guessed value.
+- maximum film Courant number;
+- total film mass/inventory;
+- maximum and area-weighted film thickness;
+- Film DPM Mass Source;
+- Film Outflow Mass and boundary Film Mass Flow Rate;
+- average/maximum film velocity and velocity components;
+- Film Stripped Mass only if stripping is active;
+- Film Separated Mass only if edge separation is active.
 
-## Interpretation rules
+Distinguish inventory/cumulative quantities in `kg` from source or flux rates in `kg/s`. A single final `.dat.h5` supports a snapshot, not a time-integrated EWF mass closure.
 
-1. Confirm the case/data pair and iteration state before comparing results.
-2. Run `flux`, `residual`, and `dpm` independently when diagnosing a failure so
-   one unavailable branch does not hide the others.
-3. Treat flux imbalance as a conservation diagnostic, not automatically as a
-   DPM capture or carryover measurement.
-4. Keep final DPM particle fates separate from EWF wall-film event counts;
-   absorption or splashing events are not automatically equal to original
-   injected-particle counts.
-5. Preserve the JSON/CSV/PNG/transcript artifacts and label unsupported or
-   partially parsed results as uncertain.
+### EWF histories and closure
 
-## Validation status
+Create report-history files before continuing or rerunning the calculation. A defensible EWF closure needs a defined interval, initial/final inventory, and time-integrated source/inflow/outflow terms. Label a final-state-only result `bookkeeping-only`; do not claim conservation from mixed `kg` and `kg/s` values.
 
-The modular interface, parser behavior, residual capture helper, and DPM
-selection logic are covered by offline/static tests. No live Fluent server was
-available for this revision, so a live test of the new combined entrypoint is
-still required before relying on it for a production run.
+## Report the result
+
+When a report is requested or analysis supplies new result evidence:
+
+1. Use `Setups/reports/<setup-id>/results.md` unless the evidence genuinely needs a separate focused companion.
+2. Link the report to exactly one setup definition. A comparison companion may name its parent/child scope explicitly, but must not replace individual setup reports.
+3. Link to raw PyAnsys outputs; do not paste complete transcripts into the report.
+4. Update `Setups/reports/index.md` when creating a new report file.
+5. Preserve prior findings; append or add a dated evidence subsection instead of silently replacing a result from a different case/data checkpoint.
+
+Read [the report structure reference](references/report-structure.md) before drafting or revising a report.
+
+## Completion checklist
+
+- Analysis scope follows the setup's actual active physics.
+- Case/data identity, Fluent version, surfaces, and injection scope are recorded.
+- DPM raw transcripts and final output bundle exist for every reported injection.
+- EWF fields are reported only for active EWF mechanisms and with units/time-basis labels.
+- Claims distinguish measured, derived, unresolved, and not-applicable items.
+- The setup-linked report and reports index are updated only when report-facing evidence changed.

@@ -109,6 +109,11 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Record a failed injection and continue with the remaining selections.",
     )
+    parser.add_argument(
+        "--detailed-output",
+        action="store_true",
+        help="Also write JSON, CSV, and raw transcript artifacts. The default is a simple text summary only.",
+    )
     return parser
 
 
@@ -345,6 +350,14 @@ def track_one_injection(solver: Any, item: Mapping[str, Any]) -> dict[str, Any]:
 
     raw_output = buffer.getvalue()
     counts = parse_summary_report(raw_output)
+    summary_line = next(
+        (
+            line.strip()
+            for line in raw_output.splitlines()
+            if "number tracked" in line.lower()
+        ),
+        "",
+    )
     if counts["tracked"] is None:
         return {
             "index": int(item["index"]),
@@ -354,6 +367,7 @@ def track_one_injection(solver: Any, item: Mapping[str, Any]) -> dict[str, Any]:
             "error": "Particle Tracks returned without a parseable Summary count.",
             "command": command,
             "raw_output": raw_output,
+            "summary_line": summary_line,
             "counts": counts,
             "returned": repr(returned),
         }
@@ -365,9 +379,70 @@ def track_one_injection(solver: Any, item: Mapping[str, Any]) -> dict[str, Any]:
         "error": None,
         "command": command,
         "raw_output": raw_output,
+        "summary_line": summary_line,
         "counts": counts,
         "returned": repr(returned),
     }
+
+
+def format_dpm_console_report(payload: Mapping[str, Any]) -> str:
+    """Return the compact report a user can paste into a setup report."""
+    lines = [
+        "DPM Particle Tracks Summary",
+        f"Run: {payload.get('run_label', 'unnamed')}",
+        "",
+    ]
+    results = payload.get("results", [])
+    if not results:
+        lines.append("No Particle Tracks computations were run.")
+        lines.append("")
+        for item in payload.get("selected_injections", []) or payload.get("injections", []):
+            lines.append(
+                f"index={item.get('index')} injection={item.get('name')}"
+            )
+        return "\n".join(lines) + "\n"
+
+    metadata_by_name = {
+        str(item.get("name")): item for item in payload.get("injections", [])
+    }
+    for result in results:
+        name = str(result.get("name", "unknown"))
+        metadata = metadata_by_name.get(name, {})
+        diameter = metadata.get("diameter_um")
+        diameter_text = f", diameter = {float(diameter):g} um" if diameter is not None else ""
+        lines.append(f"Injection: {name}{diameter_text}")
+        if result.get("status") != "ok":
+            lines.append(
+                f"status = {result.get('status', 'failed')}, "
+                f"error = {result.get('error', 'unknown error')}"
+            )
+            lines.append("")
+            continue
+
+        summary_line = str(result.get("summary_line", "")).strip()
+        if not summary_line:
+            counts = result.get("counts", {})
+            summary_line = (
+                f"number tracked = {counts.get('tracked')}, "
+                f"escaped = {counts.get('escaped', 0)}, "
+                f"trapped = {counts.get('trapped', 0)}, "
+                f"incomplete = {counts.get('incomplete', 0)}"
+            )
+        lines.extend(["DPM Iteration ....", summary_line, ""])
+
+    return "\n".join(lines)
+
+
+def write_console_report(
+    output_dir: Path,
+    run_label: str,
+    payload: Mapping[str, Any],
+) -> Path:
+    """Write the compact DPM report; detailed artifacts are opt-in."""
+    output_dir.mkdir(parents=True, exist_ok=True)
+    path = output_dir / f"{run_label}-summary.txt"
+    path.write_text(format_dpm_console_report(payload), encoding="utf-8")
+    return path
 
 
 def write_outputs(
@@ -553,10 +628,14 @@ def main() -> int:
         run_label=run_label,
     )
 
-    json_path, csv_path, transcript_path = write_outputs(output_dir, run_label, payload)
-    print(f"json: {json_path}")
-    print(f"csv: {csv_path}")
-    print(f"transcript: {transcript_path}")
+    report_path = write_console_report(output_dir, run_label, payload)
+    print(format_dpm_console_report(payload), end="", flush=True)
+    print(f"report: {report_path}")
+    if args.detailed_output:
+        json_path, csv_path, transcript_path = write_outputs(output_dir, run_label, payload)
+        print(f"json: {json_path}")
+        print(f"csv: {csv_path}")
+        print(f"transcript: {transcript_path}")
     return 0 if args.inspect_only or all(
         item["status"] == "ok" for item in payload["results"]
     ) else 1

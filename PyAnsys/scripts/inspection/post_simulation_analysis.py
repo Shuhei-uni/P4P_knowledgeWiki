@@ -35,7 +35,9 @@ from pyansys_fluent.postprocess_live import (  # noqa: E402
     write_json,
 )
 from run_dpm_particle_tracks import (  # noqa: E402
+    format_dpm_console_report,
     run_dpm_particle_track_check,
+    write_console_report,
     write_outputs as write_dpm_outputs,
 )
 from pyansys_fluent.setup_common import print_header, require_remote_input  # noqa: E402
@@ -118,6 +120,11 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--dpm-inspect-only", action="store_true")
     parser.add_argument("--dpm-keep-going", action="store_true")
+    parser.add_argument(
+        "--dpm-detailed-output",
+        action="store_true",
+        help="Also write DPM JSON, CSV, and raw transcript artifacts; default is text summary only.",
+    )
     return parser
 
 
@@ -254,14 +261,18 @@ def main() -> int:
                 # preserve that provenance in the DPM artifact.
                 payload["load"] = load_summary
                 payload["load_requested"] = args.load_case_data
-                json_path, csv_path, transcript_path = write_dpm_outputs(
-                    output_dir,
-                    f"{run_label}-dpm",
-                    payload,
-                )
-                print(f"dpm_json: {json_path}", flush=True)
-                print(f"dpm_csv: {csv_path}", flush=True)
-                print(f"dpm_transcript: {transcript_path}", flush=True)
+                report_path = write_console_report(output_dir, f"{run_label}-dpm", payload)
+                print(format_dpm_console_report(payload), end="", flush=True)
+                print(f"dpm_report: {report_path}", flush=True)
+                if args.dpm_detailed_output:
+                    json_path, csv_path, transcript_path = write_dpm_outputs(
+                        output_dir,
+                        f"{run_label}-dpm",
+                        payload,
+                    )
+                    print(f"dpm_json: {json_path}", flush=True)
+                    print(f"dpm_csv: {csv_path}", flush=True)
+                    print(f"dpm_transcript: {transcript_path}", flush=True)
                 if not args.dpm_inspect_only and any(
                     item.get("status") != "ok" for item in payload.get("results", [])
                 ):

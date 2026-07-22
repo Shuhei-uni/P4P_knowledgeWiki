@@ -1,7 +1,8 @@
 # Current Status
 
 ## Snapshot
-- Date: 2026-07-21
+- Date: 2026-07-22
+- New EWF diagnostic: `010V2a` reached iteration `1963` in the loaded Fluent session, but the carrier report has a `110.3422 kg/s` (`57.54 %`) lower-liquid/whole-domain imbalance because no lower liquid drain appears in the extracted report. Continuity remains about `2.29e-3` and final `k`/epsilon residuals are strongly bouncy, so the branch remains diagnostic only. The project accepts retained liquid for this no-brine-outlet EWF check, but does not treat it as a closed separator balance. The retried six-injection DPM summary now has displayed fates, but those rows do not close to the tracked counts for the larger bins and no EWF splash-mass count exists; incomplete and unclassified populations remain explicit unresolved categories.
 - Phase: extraction-first Purnanto parity reset plus retained setup `07` archive context
 - Focus: use Python extraction to recover the actual Purnanto Fluent setup faithfully enough that manual reconstruction error stops driving the next branch decision.
 - Current issue: setup `07` has useful comparison evidence, but it is no longer trusted as the closest reconstruction of the original Purnanto setup.

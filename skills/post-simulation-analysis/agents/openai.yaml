@@ -1,4 +1,4 @@
 interface:
   display_name: "Post-Simulation Analysis"
-  short_description: "Run modular Fluent flux, residual, and DPM checks"
-  default_prompt: "Use $post-simulation-analysis to run one or more read-only Fluent post-simulation checks: flux, residual, or DPM."
+  short_description: "Analyse Fluent results and setup reports"
+  default_prompt: "Use $post-simulation-analysis to choose setup-appropriate Fluent analyses and update its report safely."
