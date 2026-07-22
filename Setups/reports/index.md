@@ -13,6 +13,7 @@ Reports are numerical findings tied to one concrete setup. Keep the setup defini
 - [09b — Stochastic DPM sensitivity results](09b/results.md)
 - [09c — Preliminary two-way coupling results](09c/results.md)
 - [10a — Preliminary EWF/splash-sensitive results](10a/results.md)
+- [010V2a — Preliminary EWF splash diagnostic](010V2a/results.md)
 
 ## Report naming rule
 

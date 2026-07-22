@@ -34,15 +34,6 @@ from pyansys_fluent.postprocess_live import load_case_data_pair  # noqa: E402
 from pyansys_fluent.setup_common import print_header, require_remote_input  # noqa: E402
 
 
-DEFAULT_CASE_FILE = (
-    "C:\\Users\\syok443\\Documents\\TwoPhaseInletV2(Purnanto)\\08c different speeds\\"
-    "TwoPhaseInletV2(Purnanto)-08c-v20p00.cas.h5"
-)
-DEFAULT_DATA_FILE = (
-    "C:\\Users\\syok443\\Documents\\TwoPhaseInletV2(Purnanto)\\08c different speeds\\"
-    "TwoPhaseInletV2(Purnanto)-08c-v20p00-25-03088.dat.h5"
-)
-
 _COUNT_RE = re.compile(
     r"(?P<key>tracked|escaped|aborted|trapped|incomplete|evaporated|injected|inserted)"
     r"\s*=\s*(?P<value>[+-]?\d+(?:\.\d+)?)",
@@ -58,8 +49,16 @@ def build_parser() -> argparse.ArgumentParser:
         )
     )
     parser.add_argument("--server-id", default="1")
-    parser.add_argument("--case-file", default=DEFAULT_CASE_FILE)
-    parser.add_argument("--data-file", default=DEFAULT_DATA_FILE)
+    parser.add_argument(
+        "--case-file",
+        default="",
+        help="Remote Fluent case path; required only with --load-case-data.",
+    )
+    parser.add_argument(
+        "--data-file",
+        default="",
+        help="Remote Fluent data path; required only with --load-case-data.",
+    )
     parser.add_argument(
         "--load-case-data",
         action="store_true",
@@ -109,6 +108,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--keep-going",
         action="store_true",
         help="Record a failed injection and continue with the remaining selections.",
+    )
+    parser.add_argument(
+        "--detailed-output",
+        action="store_true",
+        help="Also write JSON, CSV, and raw transcript artifacts. The default is a simple text summary only.",
     )
     return parser
 
@@ -346,6 +350,14 @@ def track_one_injection(solver: Any, item: Mapping[str, Any]) -> dict[str, Any]:
 
     raw_output = buffer.getvalue()
     counts = parse_summary_report(raw_output)
+    summary_line = next(
+        (
+            line.strip()
+            for line in raw_output.splitlines()
+            if "number tracked" in line.lower()
+        ),
+        "",
+    )
     if counts["tracked"] is None:
         return {
             "index": int(item["index"]),
@@ -355,6 +367,7 @@ def track_one_injection(solver: Any, item: Mapping[str, Any]) -> dict[str, Any]:
             "error": "Particle Tracks returned without a parseable Summary count.",
             "command": command,
             "raw_output": raw_output,
+            "summary_line": summary_line,
             "counts": counts,
             "returned": repr(returned),
         }
@@ -366,9 +379,70 @@ def track_one_injection(solver: Any, item: Mapping[str, Any]) -> dict[str, Any]:
         "error": None,
         "command": command,
         "raw_output": raw_output,
+        "summary_line": summary_line,
         "counts": counts,
         "returned": repr(returned),
     }
+
+
+def format_dpm_console_report(payload: Mapping[str, Any]) -> str:
+    """Return the compact report a user can paste into a setup report."""
+    lines = [
+        "DPM Particle Tracks Summary",
+        f"Run: {payload.get('run_label', 'unnamed')}",
+        "",
+    ]
+    results = payload.get("results", [])
+    if not results:
+        lines.append("No Particle Tracks computations were run.")
+        lines.append("")
+        for item in payload.get("selected_injections", []) or payload.get("injections", []):
+            lines.append(
+                f"index={item.get('index')} injection={item.get('name')}"
+            )
+        return "\n".join(lines) + "\n"
+
+    metadata_by_name = {
+        str(item.get("name")): item for item in payload.get("injections", [])
+    }
+    for result in results:
+        name = str(result.get("name", "unknown"))
+        metadata = metadata_by_name.get(name, {})
+        diameter = metadata.get("diameter_um")
+        diameter_text = f", diameter = {float(diameter):g} um" if diameter is not None else ""
+        lines.append(f"Injection: {name}{diameter_text}")
+        if result.get("status") != "ok":
+            lines.append(
+                f"status = {result.get('status', 'failed')}, "
+                f"error = {result.get('error', 'unknown error')}"
+            )
+            lines.append("")
+            continue
+
+        summary_line = str(result.get("summary_line", "")).strip()
+        if not summary_line:
+            counts = result.get("counts", {})
+            summary_line = (
+                f"number tracked = {counts.get('tracked')}, "
+                f"escaped = {counts.get('escaped', 0)}, "
+                f"trapped = {counts.get('trapped', 0)}, "
+                f"incomplete = {counts.get('incomplete', 0)}"
+            )
+        lines.extend(["DPM Iteration ....", summary_line, ""])
+
+    return "\n".join(lines)
+
+
+def write_console_report(
+    output_dir: Path,
+    run_label: str,
+    payload: Mapping[str, Any],
+) -> Path:
+    """Write the compact DPM report; detailed artifacts are opt-in."""
+    output_dir.mkdir(parents=True, exist_ok=True)
+    path = output_dir / f"{run_label}-summary.txt"
+    path.write_text(format_dpm_console_report(payload), encoding="utf-8")
+    return path
 
 
 def write_outputs(
@@ -437,23 +511,30 @@ def write_outputs(
     return json_path, csv_path, transcript_path
 
 
-def main() -> int:
-    args = build_parser().parse_args()
-    if args.load_case_data and args.already_loaded:
-        raise ValueError("Use either --load-case-data or --already-loaded, not both.")
-
-    run_label = args.run_label.strip() or PureWindowsPath(args.data_file).stem
-    output_dir = Path(args.output_dir).expanduser().resolve()
+def run_dpm_particle_track_check(
+    solver: Any,
+    *,
+    case_file: str = "",
+    data_file: str = "",
+    load_case_data: bool = False,
+    load_mode: str = "explicit",
+    injection_names: Sequence[str] = (),
+    injection_indices: Sequence[int] = (),
+    order: str = "diameter-ascending",
+    inspect_only: bool = False,
+    keep_going: bool = False,
+    run_label: str = "active-session",
+) -> dict[str, Any]:
+    """Run the current dynamic DPM check on an existing solver session."""
     payload: dict[str, Any] = {
-        "server_id": str(args.server_id),
-        "case_file": args.case_file,
-        "data_file": args.data_file,
+        "case_file": case_file,
+        "data_file": data_file,
         "run_label": run_label,
-        "load_requested": bool(args.load_case_data),
+        "load_requested": bool(load_case_data),
         "selection": {
-            "names": list(args.injection_names or []),
-            "indices": list(args.injection_indices or []),
-            "order": args.order,
+            "names": list(injection_names),
+            "indices": list(injection_indices),
+            "order": order,
         },
         "report_controls": {},
         "injections": [],
@@ -461,20 +542,19 @@ def main() -> int:
         "results": [],
     }
 
-    print_header("Connect")
-    solver = connect(server_id=args.server_id)
     payload["fluent_version"] = solver.get_fluent_version()
-    print(f"Connected to {payload['fluent_version']}", flush=True)
 
-    if args.load_case_data:
+    if load_case_data:
+        if not case_file.strip() or not data_file.strip():
+            raise ValueError("--load-case-data requires both --case-file and --data-file.")
         print_header("Load Case/Data")
-        require_remote_input(solver, args.case_file, "case file")
-        require_remote_input(solver, args.data_file, "data file")
+        require_remote_input(solver, case_file, "case file")
+        require_remote_input(solver, data_file, "data file")
         payload["load"] = load_case_data_pair(
             solver,
-            case_file=args.case_file,
-            data_file=args.data_file,
-            load_strategy=args.load_mode,
+            case_file=case_file,
+            data_file=data_file,
+            load_strategy=load_mode,
         )
     else:
         payload["load"] = {"mode": "already-loaded-session"}
@@ -485,9 +565,9 @@ def main() -> int:
     discovered = discover_live_injections(solver)
     selected = select_injections(
         discovered,
-        requested_names=args.injection_names,
-        requested_indices=args.injection_indices,
-        order=args.order,
+        requested_names=injection_names,
+        requested_indices=injection_indices,
+        order=order,
     )
     payload["injections"] = discovered
     payload["selected_injections"] = [
@@ -501,7 +581,7 @@ def main() -> int:
             flush=True,
         )
 
-    if not args.inspect_only:
+    if not inspect_only:
         print_header("Configure Summary Particle Tracks")
         payload["report_controls"] = configure_particle_track_summary(solver)
 
@@ -515,13 +595,47 @@ def main() -> int:
                 f"category={result['failure_category']}",
                 flush=True,
             )
-            if result["status"] != "ok" and not args.keep_going:
+            if result["status"] != "ok" and not keep_going:
                 break
 
-    json_path, csv_path, transcript_path = write_outputs(output_dir, run_label, payload)
-    print(f"json: {json_path}")
-    print(f"csv: {csv_path}")
-    print(f"transcript: {transcript_path}")
+    return payload
+
+
+def main() -> int:
+    args = build_parser().parse_args()
+    if args.load_case_data and args.already_loaded:
+        raise ValueError("Use either --load-case-data or --already-loaded, not both.")
+
+    run_label = args.run_label.strip()
+    if not run_label:
+        run_label = PureWindowsPath(args.data_file).stem if args.data_file else "active-session"
+    output_dir = Path(args.output_dir).expanduser().resolve()
+
+    print_header("Connect")
+    solver = connect(server_id=args.server_id)
+    print(f"Connected to {solver.get_fluent_version()}", flush=True)
+    payload = run_dpm_particle_track_check(
+        solver,
+        case_file=args.case_file,
+        data_file=args.data_file,
+        load_case_data=args.load_case_data,
+        load_mode=args.load_mode,
+        injection_names=args.injection_names or (),
+        injection_indices=args.injection_indices or (),
+        order=args.order,
+        inspect_only=args.inspect_only,
+        keep_going=args.keep_going,
+        run_label=run_label,
+    )
+
+    report_path = write_console_report(output_dir, run_label, payload)
+    print(format_dpm_console_report(payload), end="", flush=True)
+    print(f"report: {report_path}")
+    if args.detailed_output:
+        json_path, csv_path, transcript_path = write_outputs(output_dir, run_label, payload)
+        print(f"json: {json_path}")
+        print(f"csv: {csv_path}")
+        print(f"transcript: {transcript_path}")
     return 0 if args.inspect_only or all(
         item["status"] == "ok" for item in payload["results"]
     ) else 1
