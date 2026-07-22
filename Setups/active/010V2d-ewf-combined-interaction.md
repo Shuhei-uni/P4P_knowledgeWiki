@@ -11,7 +11,7 @@
 | Controlled changes | only individually accepted EWF mechanisms |
 | Evidence-use label | future combination diagnostic; not validated by default |
 | Outcome | needs follow-up |
-| Linked report | none |
+| Linked report | [010V2d diagnostic results](../reports/010V2d/results.md) |
 
 ## Objective
 

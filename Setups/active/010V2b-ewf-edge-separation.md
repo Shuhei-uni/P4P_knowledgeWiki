@@ -11,7 +11,7 @@
 | Controlled change | edge separation only |
 | Evidence-use label | diagnostic until generated-particle mass is reported |
 | Outcome | needs follow-up |
-| Linked report | none |
+| Linked report | [010V2b partial diagnostic results](../reports/010V2b/results.md) |
 
 ## Objective
 

@@ -13,8 +13,23 @@ The main risk in this folder is not just wrong values. The main risk is writing 
 
 This file defines the strict local workflow for agents working in `PyAnsys/`.
 
-## Venv activation
-Use command `source /Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/.venv/bin/activate`
+## Python runtime
+For every non-interactive PyAnsys command, invoke the repository's interpreter
+directly:
+
+```bash
+/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/.venv/bin/python
+```
+
+Before a live Fluent command, verify the interpreter in that same shell with:
+
+```bash
+/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/.venv/bin/python -c 'import sys; print(sys.executable)'
+```
+
+Do not rely on `source .venv/bin/activate` from a previous command or tool
+invocation; its shell state does not persist. Interactive activation is optional
+only when it occurs in the same terminal session as the command.
 
 ## Directory Purpose In The Repo
 `PyAnsys/` is the executable layer of the repository.

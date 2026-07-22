@@ -1,5 +1,55 @@
 # Work Log
 
+## [2026-07-22] model-update | Strengthen 010V2d global-DPM-plus-EWF comparison
+- files created/updated: `observations/05-010v2d-global-dpm-interaction.md`, `wiki/log.md`
+- reason: make the combined-EWF global-DPM interaction evidence more transparent without expanding its claim strength.
+- what changed: added comparison-integrity, film-localisation, full six-bin terminal-fate, coarse secondary-event, residual-ratio, and causal-evidence-chain comparisons.
+- assumptions introduced/removed: retained direct interaction as the intended primary change; did not attribute unmatched snapshot differences or event counts to a closed mass/momentum mechanism.
+- current status: the coupled checkpoint has stronger local film/fate/event signals but no validated bulk-throughput change.
+- blockers: slight payload and checkpoint mismatch, open carrier balance, and absent DPM-to-carrier/film source histories.
+- next action: rerun an exact common-checkpoint pair with identical payload and interval histories.
+
+## [2026-07-22] model-update | Expand 010V2 EWF mechanism comparison
+- files created/updated: `observations/04-010v2-ewf-mechanism-comparison.md`, `wiki/log.md`
+- reason: compare reported clean, splash, edge-separation, stripping, and combined EWF branch results more completely while retaining their diagnostic limits.
+- what changed: added run-comparability, film-morphology, size-resolved absorbed-mass, mechanism-activation, and EWF bookkeeping comparisons; incorporated the stripping branch's completed console fate/film results rather than treating the branch response as absent.
+- assumptions introduced/removed: retained snapshots and event signals as diagnostic evidence only; did not infer generated-particle mass or a separate stripping mass where Fluent did not report it.
+- current status: size-selective DPM-to-film absorption is consistent across branches; optional mechanisms show activation/event signals but not closed mass effects.
+- blockers: open carrier flux scope, unmatched checkpoints, no defined EWF history, and unreconciled generated-particle mass.
+- next action: rerun isolated mechanisms from one accepted control checkpoint with corrected EWF-history/report tokens, then combine only mass-bounded mechanisms.
+
+## [2026-07-22] model-update | Convert global-DPM observation to three-way evidence sequence
+- files created/updated: `observations/03-08b-09c-global-dpm-interaction.md`, `wiki/log.md`
+- reason: compare the branch chain `08b` → `09c` → `09cV2` while preserving the absent original-`09c` particle-fate result as an explicit future evidence slot.
+- what changed: replaced the direct endpoint table with three-way DPM accounting, setting, checkpoint, and fate fields; added the `09c` six-injection tracking placeholder; and made completion of that record a next-run gate.
+- assumptions introduced/removed: removed the direct `08b`/`09cV2` framing; no `09c` fate values were inferred.
+- next action: add the original `09c` DPM Particle Tracks Summary to the placeholder, then distinguish interaction and allocation effects.
+
+## [2026-07-22] model-update | Add exploratory 08b/09cV2 DPM tracking contrast
+- files created/updated: `observations/03-08b-09c-global-dpm-interaction.md`, `wiki/log.md`
+- reason: retain the useful DPM-fate contrast between the one-way `08b` sample and the later mass-partitioned `09cV2` coupled diagnostic without misrepresenting it as a controlled interaction result.
+- what changed: added parcel, fate, and represented-mass-flow comparisons; identified the fine-bin escape and coarse-bin trapping pattern in `09cV2`; and listed the co-changing allocation, material, solver/version, carrier maturity, and tracking-report factors.
+- assumptions introduced/removed: retained the comparison as exploratory; did not attribute its fate difference to DPM interaction alone.
+- next action: reproduce the fate comparison from a common carrier state with one controlled change at a time.
+
+## [2026-07-22] model-update | Strengthen 08b/09c global-DPM-interaction observation evidence chain
+- files created/updated: `observations/03-08b-09c-global-dpm-interaction.md`, `wiki/log.md`
+- reason: make the global DPM comparison traceable to its coupling readback, carrier flux artifacts, and DPM mass-accounting boundary.
+- what changed: documented the verified interaction controls, the additional `29.22 kg/s` DPM payload (approximately `25%` of the Eulerian liquid inlet), the unmatched flux deltas, missing source/fate evidence, and exclusion of the differently partitioned `09cV2` branch.
+- assumptions introduced/removed: removed any implication that the 921-iteration `09c` checkpoint measures a physical two-way-DPM effect or that `09cV2` is a direct comparator; retained global DPM interaction as an isolated diagnostic variable.
+- current status: setting isolation is verified; physical coupling impact remains unresolved.
+- blockers: unmatched carrier maturity, open flux scope, unpartitioned DPM loading, no integrated DPM-source history, and no matched terminal-fate records.
+- next action: run a common-window, mass-accounted one-way/two-way pair with source, flux, residual, and fate outputs.
+
+## [2026-07-22] model-update | Strengthen 08b/08c inlet-loading observation evidence chain
+- files created/updated: `observations/01-08b-08c-inlet-loading.md`, `wiki/log.md`
+- reason: distinguish the carrier phase-flux loading trend from the separate one-way DPM tracking evidence and preserve the limits of each.
+- what changed: added a low/reference/high carrier-flux and DPM-fate comparison, documented the fixed DPM probe basis and non-additivity, linked the raw 08c carrier/DPM artifacts, and set a matched carrier/DPM rerun gate.
+- assumptions introduced/removed: retained the directional carrier-flow interpretation; removed any implication that DPM escaped mass can be added to Eulerian steam-outlet liquid flow or that incomplete DPM tracks show collection.
+- current status: inlet loading remains a directional carrier-flow observation only; DPM fate versus loading is unresolved.
+- blockers: open carrier phase balances, unmatched iteration checkpoints, and incomplete DPM trajectories.
+- next action: obtain common accepted carrier states with a closed flux scope, then repeat matched DPM tracking with per-injection zone summaries.
+
 ## [2026-07-16] reorganization | Reorganize setup records and numerical reports
 - files created/updated: `../../Setups/`, `../../Setups/index.md`, `../../Setups/order-dictionary.md`, `../../Setups/reports/`, `wiki/index.md`, `wiki/project/roadmap.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/log.md`
 - reason: reorganize the setup-report system around concrete setup definitions, lifecycle views, and linked numerical result reports so experiment findings are easier to locate.

@@ -27,11 +27,18 @@ Before non-trivial edits, read:
 8. Relevant model-specific `trees/*.md` and `orders/*.yaml`.
 9. Core helpers: `src/pyansys_fluent/common.py`, `connection.py`, `dependency_workflow.py`, `setup_common.py`, and `setup_io.py`.
 
-Activate the local environment with:
+For non-interactive work, invoke the repository interpreter directly rather
+than relying on activation state from an earlier shell or tool invocation:
 
 ```bash
-source /Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/.venv/bin/activate
+/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/.venv/bin/python -c 'import sys; print(sys.executable)'
 ```
+
+The expected path is
+`/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/.venv/bin/python`.
+Use that executable for every PyAnsys script. Interactive `source
+.../.venv/bin/activate` is optional only within the same terminal session as
+the following command.
 
 ## Search Workflow
 

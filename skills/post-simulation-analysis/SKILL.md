@@ -34,7 +34,7 @@ Make an applicability table before execution. Treat a model as applicable only w
 | Setup evidence | Run | Do not infer |
 |---|---|---|
 | Any solved carrier case | carrier residual/flux/stability checks already supported by the case workflow | full separator validation from a scoped outlet metric alone |
-| Active DPM injections | `dpm` mode for selected or all named injections | DPM analysis for a case without an active injection branch |
+| Active DPM injections | complete Particle Tracks Summary sweep for every live injection | DPM analysis for a case without an active injection branch |
 | Active EWF film wall | `audit`, then `snapshot` on only the confirmed film walls | EWF on ordinary walls, or film analysis on `bottom` unless it is actually a film wall |
 | EWF plus wall/global splash enabled | preserve absorbed and splashed event counts in DPM reporting | splash events as an extra terminal mass sink |
 | Edge separation or particle stripping enabled | include the corresponding separated/stripped report terms | those mechanisms from a field-menu item alone |
@@ -43,19 +43,55 @@ Make an applicability table before execution. Treat a model as applicable only w
 
 Record every omitted analysis as `Not applicable`, `Not available`, or `Deferred`, with the reason. Do not turn an omitted mechanism into a zero-valued result.
 
+### Mandatory DPM coverage
+
+When the live audit discovers one or more DPM injections, run a complete DPM
+Particle Tracks Summary for every discovered injection by default. Do not omit
+DPM merely because carrier or EWF checks are incomplete. The only exceptions
+are when the user explicitly excludes DPM or explicitly limits the injection
+selection; record that instruction and every omitted injection in the report.
+
+If a DPM sweep fails its completion gate, preserve its partial artifacts and
+report the sweep as incomplete. Never substitute missing fates or mass terms
+with zero.
+
 ## Preflight and safe execution
 
 Use the already-open Fluent session unless explicit case/data loading is required and authorised. Confirm the loaded case/data pair, setup ID, Fluent version, and server before interpreting any output.
 
+### Mandatory live-analysis supervision rule
+
+For **every** live Fluent analysis command or script (`audit`, `snapshot`,
+`dpm`, `all`, carrier extraction, residual export, or another diagnostic
+runner), retain the controlling shell and supervise its output for a minimum
+of **320 seconds** from launch. Poll the console and expected output artifacts
+at approximately 60-second intervals. Silence, a partial console return, or a
+client-side return is not a completion signal: Fluent can continue reporting
+or calculating after the Python client appears quiet.
+
+The only permitted early exit is after verifying that the command has produced
+its complete expected output set and has emitted no unresolved error. For
+example, a snapshot requires its raw results plus snapshot, film-flux, and
+bookkeeping payloads; a DPM sweep requires its full transcript and final
+JSON/CSV bundle for every selected injection. If the client returns without
+those artifacts, keep the supervising shell alive for the full 320 seconds.
+After 320 seconds, continue one-minute polling until completion or an explicit
+Fluent/client failure. Never start a second analysis command while the first
+command remains incomplete.
+
 ```bash
-source /Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/.venv/bin/activate
-python PyAnsys/scripts/connection/check_connection.py --server-id 1
+/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/.venv/bin/python -c 'import sys; print(sys.executable)'
+/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/.venv/bin/python PyAnsys/scripts/connection/check_connection.py --server-id 1
 ```
+
+Use this explicit interpreter for every non-interactive command below. Do not
+rely on a prior `source .venv/bin/activate`, because its shell state may not
+survive a separate tool invocation.
 
 Use the modular runner:
 
 ```bash
-python PyAnsys/scripts/inspection/run_ewf_dpm_diagnostics.py --server-id 1 --mode audit
+/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/.venv/bin/python PyAnsys/scripts/inspection/run_ewf_dpm_diagnostics.py --server-id 1 --mode audit
 ```
 
 Start with `audit`. It is read-only and establishes live injection names, wall-film assignments, UDF overrides, and diagnostic limitations. Treat a missing Settings API path as a version/adapter finding, not proof that a model is disabled.
@@ -63,15 +99,18 @@ Start with `audit`. It is read-only and establishes live injection names, wall-f
 Run `snapshot` only for confirmed EWF cases. Supply the actual film walls and flux boundaries rather than assuming generic names:
 
 ```bash
-python PyAnsys/scripts/inspection/run_ewf_dpm_diagnostics.py \
+/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/.venv/bin/python PyAnsys/scripts/inspection/run_ewf_dpm_diagnostics.py \
   --server-id 1 --mode snapshot --film-wall <film-wall> \
   --flux-boundary <boundary> --object-policy reuse
 ```
 
-Run `dpm` only for active DPM cases. Prefer stable injection names when narrowing a test; omit them for the complete diameter-ordered sweep:
+When the audit finds active DPM injections, this sweep is mandatory unless the
+user explicitly excludes DPM or limits the injection set. Prefer stable
+injection names only for an explicitly narrowed request; otherwise omit them
+to track every live injection in diameter order:
 
 ```bash
-python PyAnsys/scripts/inspection/run_ewf_dpm_diagnostics.py \
+/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/.venv/bin/python PyAnsys/scripts/inspection/run_ewf_dpm_diagnostics.py \
   --server-id 1 --mode dpm --order diameter-ascending --keep-going \
   --dpm-timeout-seconds 600 --transcript-quiet-seconds 1.0
 ```
@@ -90,16 +129,13 @@ For every injection, require all of the following before submitting the next com
 
 Use `--dpm-timeout-seconds 600` unless a documented case-specific limit is justified. A timeout, parser failure, or client error is a hard stop; do not queue the next injection merely because `--keep-going` was supplied.
 
-Run a complete DPM sweep in a persistent terminal session. **Once a non-inspection
-Particle Tracks command has been sent, do not terminate, detach, or regard the
-controlling analysis shell as complete before 180 seconds have elapsed.** This
-minimum applies even if Fluent writes a partial or final-looking output bundle
-earlier. Poll the attached process at approximately 60-second intervals; do
-not reconnect, launch another tracker, or use another server while that
-minimum wait is in effect. After 180 seconds, continue one-minute polling
-until the required completion artifacts exist or Fluent/the analysis process
-emits an explicit failure. If the process itself ends before 180 seconds,
-record an incomplete DPM execution rather than inferring missing fates as zero.
+Run a complete DPM sweep in a persistent terminal session. The universal
+320-second live-analysis supervision rule applies in full to every sweep. Do
+not reconnect, launch another tracker, or use another server while the
+existing sweep remains incomplete. If the process itself ends before the final
+transcript and output bundle exist, keep supervising for the 320-second
+minimum and record an incomplete DPM execution rather than inferring missing
+fates as zero.
 
 Capture through `solver.transcript`, not Python `redirect_stdout`. Preserve:
 

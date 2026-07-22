@@ -11,7 +11,7 @@
 | Controlled change | particle splashing only |
 | Evidence-use label | diagnostic until splashed-mass balance closes |
 | Outcome | needs follow-up |
-| Linked report | none |
+| Linked report | [010V2a diagnostic results](../reports/010V2a/results.md) |
 
 ## Objective
 

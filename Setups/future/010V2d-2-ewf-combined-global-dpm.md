@@ -11,7 +11,7 @@
 | Controlled change | global `DPM Interaction with Continuous Phase` only |
 | Evidence-use label | diagnostic until carrier-source and film mass balances close |
 | Outcome | needs follow-up |
-| Linked report | none |
+| Linked report | [diagnostic results](../reports/010V2d-2/results.md) |
 
 ## Objective
 

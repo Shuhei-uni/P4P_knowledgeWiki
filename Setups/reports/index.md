@@ -12,7 +12,14 @@ Reports are numerical findings tied to one concrete setup. Keep the setup defini
 - [09a — Deterministic DPM carryover results](09a/results.md)
 - [09b — Stochastic DPM sensitivity results](09b/results.md)
 - [09c — Preliminary two-way coupling results](09c/results.md)
+- [09cV2 — Skoog partition and injection-control diagnostic results](09cV2/results.md)
 - [10a — Preliminary EWF/splash-sensitive results](10a/results.md)
+- [010V2 — EWF deposition and film-inventory diagnostic results](010V2/results.md)
+- [010V2a — EWF splash diagnostic results](010V2a/results.md)
+- [010V2b — Partial EWF edge-separation diagnostic results](010V2b/results.md)
+- [010V2c — EWF particle-stripping diagnostic results](010V2c/results.md)
+- [010V2d — Combined EWF-interaction diagnostic results](010V2d/results.md)
+- [010V2d-2 — Combined EWF/global-DPM diagnostic results](010V2d-2/results.md)
 
 ## Report naming rule
 
