@@ -235,6 +235,7 @@ def track_one_injection_streamed(
     parsed = parse_particle_track_summary(raw_output)
     parsed_ok = parsed.get("counts", {}).get("tracked") is not None
     status = "ok" if transcript_complete and parsed_ok and command_error is None else "failed"
+    safe_to_submit_next = transcript_complete and parsed_ok and command_error is None
     error_parts: list[str] = []
     if command_error:
         error_parts.append(command_error)
@@ -259,7 +260,7 @@ def track_one_injection_streamed(
         "closure": dpm_flow_closure(parsed),
         "completion": {
             "confirmed": transcript_complete,
-            "safe_to_submit_next": transcript_complete,
+            "safe_to_submit_next": safe_to_submit_next,
             "wait_seconds": wait_seconds,
             "timeout_seconds": timeout_seconds,
             "quiet_seconds": quiet_seconds,
