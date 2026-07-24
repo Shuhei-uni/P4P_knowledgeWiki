@@ -14,10 +14,13 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from pyansys_fluent.host_worker import (  # noqa: E402
     ExclusiveHostLock,
-    FluentHostWorker,
     HostWorkerConfig,
     HostWorkerAlreadyRunning,
     RestartLimitExceeded,
+)
+from pyansys_fluent.phase1_hardening import (  # noqa: E402
+    ControlledFluentHostWorker,
+    build_hardened_job_processor,
 )
 
 
@@ -26,7 +29,8 @@ def build_parser() -> argparse.ArgumentParser:
         description=(
             "Run a persistent Fluent-host supervisor. It launches Fluent, waits "
             "for a fresh server-info file, verifies gRPC health, publishes a "
-            "heartbeat, and relaunches Fluent after bounded failures."
+            "heartbeat, accepts worker-owned generation-control requests, and "
+            "relaunches Fluent after bounded failures."
         )
     )
     parser.add_argument(
@@ -120,7 +124,10 @@ def main() -> int:
         print(f"Invalid host-worker configuration: {exc}", file=sys.stderr)
         return 2
 
-    worker = FluentHostWorker(config)
+    worker = ControlledFluentHostWorker(
+        config,
+        job_processor=build_hardened_job_processor(config.work_dir),
+    )
 
     def request_stop(_signum, _frame) -> None:
         worker.request_stop()
@@ -136,6 +143,10 @@ def main() -> int:
     )
     print(
         f"Incoming job spool: {config.work_dir / 'jobs' / 'incoming'}",
+        flush=True,
+    )
+    print(
+        f"Generation control spool: {config.work_dir / 'control' / 'incoming'}",
         flush=True,
     )
     try:
