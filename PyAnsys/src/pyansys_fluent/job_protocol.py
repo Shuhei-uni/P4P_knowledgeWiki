@@ -1,9 +1,9 @@
 """Filesystem-backed jobs and stage receipts for the Fluent host worker.
 
-The protocol deliberately starts with one read-only stage: ``health_check``.
-Job files are claimed with an atomic rename, stage receipts are committed
-atomically, and a successful job is moved to ``completed`` only after its
-receipt has been validated and committed.
+The protocol supports two read-only stages: ``health_check`` and
+``case_identity_probe``. Job files are claimed with an atomic rename, stage
+receipts are committed atomically, and a successful job is moved to
+``completed`` only after its receipt has been validated and committed.
 """
 
 from __future__ import annotations
@@ -29,10 +29,11 @@ from .host_worker import (
 )
 
 
-JOB_SCHEMA_VERSION = 1
+JOB_SCHEMA_VERSION = 2
 JOB_STATE_SCHEMA_VERSION = 1
-STAGE_RECEIPT_SCHEMA_VERSION = 1
-SUPPORTED_STAGE_TYPES = frozenset({"health_check"})
+STAGE_RECEIPT_SCHEMA_VERSION = 2
+SUPPORTED_STAGE_TYPES = frozenset({"health_check", "case_identity_probe"})
+SUPPORTED_CASE_EXTENSIONS = (".cas.h5", ".cas.gz", ".cas")
 JOB_STATUSES = frozenset({"incoming", "running", "completed", "failed"})
 RECEIPT_STATUSES = frozenset({"success", "failed"})
 _JOB_ID_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$")
@@ -159,7 +160,15 @@ class JobSpec:
     timeout_seconds: float = 30.0
     expected_worker_boot_id: str | None = None
     expected_fluent_generation: int | None = None
+    case_path: str | None = None
+    expected_file_size_bytes: int | None = None
+    expected_sha256: str | None = None
+    compute_sha256: bool = False
     schema_version: int = JOB_SCHEMA_VERSION
+
+    def __post_init__(self) -> None:
+        if isinstance(self.expected_sha256, str):
+            object.__setattr__(self, "expected_sha256", self.expected_sha256.lower())
 
     def validate(self) -> None:
         _validate_schema_version(self.schema_version, JOB_SCHEMA_VERSION, "JobSpec")
@@ -190,6 +199,60 @@ class JobSpec:
             self.expected_fluent_generation,
             "expected_fluent_generation",
         )
+        if self.case_path is not None and (
+            not isinstance(self.case_path, str) or not self.case_path.strip()
+        ):
+            raise ProtocolValidationError("case_path must be a non-empty string or null")
+        _validate_optional_positive_int(
+            self.expected_file_size_bytes,
+            "expected_file_size_bytes",
+        )
+        if self.expected_sha256 is not None:
+            if (
+                not isinstance(self.expected_sha256, str)
+                or not re.fullmatch(r"[0-9a-fA-F]{64}", self.expected_sha256)
+            ):
+                raise ProtocolValidationError(
+                    "expected_sha256 must contain exactly 64 hexadecimal characters"
+                )
+        if not isinstance(self.compute_sha256, bool):
+            raise ProtocolValidationError("compute_sha256 must be a boolean")
+
+        if self.stage_type == "health_check":
+            if any(
+                value is not None
+                for value in (
+                    self.case_path,
+                    self.expected_file_size_bytes,
+                    self.expected_sha256,
+                )
+            ) or self.compute_sha256:
+                raise ProtocolValidationError(
+                    "health_check jobs cannot contain case input fields"
+                )
+        elif self.stage_type == "case_identity_probe":
+            if self.case_path is None:
+                raise ProtocolValidationError(
+                    "case_identity_probe requires case_path"
+                )
+            case_path = Path(self.case_path)
+            if not case_path.is_absolute():
+                raise ProtocolValidationError(
+                    "case_identity_probe case_path must be absolute"
+                )
+            if not self.case_path.lower().endswith(SUPPORTED_CASE_EXTENSIONS):
+                raise ProtocolValidationError(
+                    "case_identity_probe case_path must end with one of "
+                    f"{SUPPORTED_CASE_EXTENSIONS}"
+                )
+            if self.expected_worker_boot_id is None:
+                raise ProtocolValidationError(
+                    "case_identity_probe requires expected_worker_boot_id"
+                )
+            if self.expected_fluent_generation is None:
+                raise ProtocolValidationError(
+                    "case_identity_probe requires expected_fluent_generation"
+                )
 
     def to_dict(self) -> dict[str, Any]:
         self.validate()
@@ -201,6 +264,14 @@ class JobSpec:
             "timeout_seconds": float(self.timeout_seconds),
             "expected_worker_boot_id": self.expected_worker_boot_id,
             "expected_fluent_generation": self.expected_fluent_generation,
+            "case_path": self.case_path,
+            "expected_file_size_bytes": self.expected_file_size_bytes,
+            "expected_sha256": (
+                self.expected_sha256.lower()
+                if self.expected_sha256 is not None
+                else None
+            ),
+            "compute_sha256": self.compute_sha256,
         }
 
     @classmethod
@@ -215,6 +286,10 @@ class JobSpec:
             "timeout_seconds",
             "expected_worker_boot_id",
             "expected_fluent_generation",
+            "case_path",
+            "expected_file_size_bytes",
+            "expected_sha256",
+            "compute_sha256",
         }
         _reject_unknown_fields(payload, allowed, "JobSpec")
         try:
@@ -228,6 +303,12 @@ class JobSpec:
                 expected_fluent_generation=payload.get(
                     "expected_fluent_generation"
                 ),
+                case_path=payload.get("case_path"),
+                expected_file_size_bytes=payload.get(
+                    "expected_file_size_bytes"
+                ),
+                expected_sha256=payload.get("expected_sha256"),
+                compute_sha256=payload.get("compute_sha256", False),
             )
         except KeyError as exc:
             raise ProtocolValidationError(
@@ -359,8 +440,20 @@ class StageReceipt:
     observed_health_result: bool | None
     client_detached: bool
     fluent_process_alive_after_detach: bool
+    requested_case_path: str | None = None
+    resolved_case_path: str | None = None
+    disposable_case_path: str | None = None
+    source_file_size_bytes: int | None = None
+    source_sha256: str | None = None
+    fluent_accepted_case: bool | None = None
+    case_identity: dict[str, Any] | None = None
+    data_loaded: bool | None = None
     error: dict[str, Any] | None = None
     schema_version: int = STAGE_RECEIPT_SCHEMA_VERSION
+
+    def __post_init__(self) -> None:
+        if isinstance(self.source_sha256, str):
+            object.__setattr__(self, "source_sha256", self.source_sha256.lower())
 
     def validate(self) -> None:
         _validate_schema_version(
@@ -398,6 +491,42 @@ class StageReceipt:
             raise ProtocolValidationError(
                 "fluent_process_alive_after_detach must be a boolean"
             )
+        for value, field_name in (
+            (self.requested_case_path, "requested_case_path"),
+            (self.resolved_case_path, "resolved_case_path"),
+            (self.disposable_case_path, "disposable_case_path"),
+        ):
+            if value is not None and (
+                not isinstance(value, str) or not value.strip()
+            ):
+                raise ProtocolValidationError(
+                    f"{field_name} must be a non-empty string or null"
+                )
+        _validate_optional_positive_int(
+            self.source_file_size_bytes,
+            "source_file_size_bytes",
+        )
+        if self.source_sha256 is not None and (
+            not isinstance(self.source_sha256, str)
+            or not re.fullmatch(r"[0-9a-fA-F]{64}", self.source_sha256)
+        ):
+            raise ProtocolValidationError(
+                "source_sha256 must contain exactly 64 hexadecimal characters"
+            )
+        if self.fluent_accepted_case is not None and not isinstance(
+            self.fluent_accepted_case,
+            bool,
+        ):
+            raise ProtocolValidationError(
+                "fluent_accepted_case must be a boolean or null"
+            )
+        if self.case_identity is not None and not isinstance(
+            self.case_identity,
+            Mapping,
+        ):
+            raise ProtocolValidationError("case_identity must be an object or null")
+        if self.data_loaded is not None and not isinstance(self.data_loaded, bool):
+            raise ProtocolValidationError("data_loaded must be a boolean or null")
         validated_error = _validate_error(self.error)
         if self.status == "success":
             if validated_error is not None:
@@ -418,6 +547,46 @@ class StageReceipt:
                 raise ProtocolValidationError(
                     "successful receipt requires Fluent and PyFluent versions"
                 )
+            if self.stage_type == "case_identity_probe":
+                if self.fluent_accepted_case is not True:
+                    raise ProtocolValidationError(
+                        "successful case probe requires fluent_accepted_case=true"
+                    )
+                if self.data_loaded is not False:
+                    raise ProtocolValidationError(
+                        "successful case probe requires data_loaded=false"
+                    )
+                if not all(
+                    (
+                        self.requested_case_path,
+                        self.resolved_case_path,
+                        self.disposable_case_path,
+                    )
+                ):
+                    raise ProtocolValidationError(
+                        "successful case probe requires all case paths"
+                    )
+                case_paths = (
+                    Path(self.requested_case_path),
+                    Path(self.resolved_case_path),
+                    Path(self.disposable_case_path),
+                )
+                if not all(path.is_absolute() for path in case_paths):
+                    raise ProtocolValidationError(
+                        "successful case probe requires absolute case paths"
+                    )
+                if case_paths[1] == case_paths[2]:
+                    raise ProtocolValidationError(
+                        "disposable_case_path must differ from resolved_case_path"
+                    )
+                if self.source_file_size_bytes is None:
+                    raise ProtocolValidationError(
+                        "successful case probe requires source_file_size_bytes"
+                    )
+                if self.case_identity is None:
+                    raise ProtocolValidationError(
+                        "successful case probe requires case_identity"
+                    )
         elif validated_error is None:
             raise ProtocolValidationError("failed receipt requires structured error")
 
@@ -440,6 +609,22 @@ class StageReceipt:
             "fluent_process_alive_after_detach": (
                 self.fluent_process_alive_after_detach
             ),
+            "requested_case_path": self.requested_case_path,
+            "resolved_case_path": self.resolved_case_path,
+            "disposable_case_path": self.disposable_case_path,
+            "source_file_size_bytes": self.source_file_size_bytes,
+            "source_sha256": (
+                self.source_sha256.lower()
+                if self.source_sha256 is not None
+                else None
+            ),
+            "fluent_accepted_case": self.fluent_accepted_case,
+            "case_identity": (
+                dict(self.case_identity)
+                if self.case_identity is not None
+                else None
+            ),
+            "data_loaded": self.data_loaded,
             "error": _validate_error(self.error),
         }
 
@@ -464,6 +649,14 @@ class StageReceipt:
                 "observed_health_result",
                 "client_detached",
                 "fluent_process_alive_after_detach",
+                "requested_case_path",
+                "resolved_case_path",
+                "disposable_case_path",
+                "source_file_size_bytes",
+                "source_sha256",
+                "fluent_accepted_case",
+                "case_identity",
+                "data_loaded",
                 "error",
             },
             "StageReceipt",
@@ -486,6 +679,14 @@ class StageReceipt:
                 fluent_process_alive_after_detach=payload[
                     "fluent_process_alive_after_detach"
                 ],
+                requested_case_path=payload.get("requested_case_path"),
+                resolved_case_path=payload.get("resolved_case_path"),
+                disposable_case_path=payload.get("disposable_case_path"),
+                source_file_size_bytes=payload.get("source_file_size_bytes"),
+                source_sha256=payload.get("source_sha256"),
+                fluent_accepted_case=payload.get("fluent_accepted_case"),
+                case_identity=payload.get("case_identity"),
+                data_loaded=payload.get("data_loaded"),
                 error=payload.get("error"),
             )
         except KeyError as exc:
@@ -834,10 +1035,16 @@ class JobStageProcessor:
         spool: FilesystemJobSpool,
         *,
         health_client: HealthCheckStageClient | None = None,
+        case_probe_client: Any | None = None,
         timestamp_factory: Callable[[], str] = utc_timestamp,
     ):
         self.spool = spool
         self.health_client = health_client or HealthCheckStageClient()
+        if case_probe_client is None:
+            from .case_probe import CaseIdentityProbeClient
+
+            case_probe_client = CaseIdentityProbeClient()
+        self.case_probe_client = case_probe_client
         self._timestamp_factory = timestamp_factory
 
     @staticmethod
@@ -876,9 +1083,16 @@ class JobStageProcessor:
                     "retryable": False,
                 },
             )
-        else:
+        elif claim.spec.stage_type == "health_check":
             spec = claim.spec
             receipt = self.health_client.execute(spec, context)
+        elif claim.spec.stage_type == "case_identity_probe":
+            spec = claim.spec
+            receipt = self.case_probe_client.execute(spec, context)
+        else:
+            raise ProtocolValidationError(
+                f"No stage client for {claim.spec.stage_type!r}"
+            )
 
         receipt_path = self.spool.commit_receipt(receipt)
         terminal_status = "completed" if receipt.status == "success" else "failed"
