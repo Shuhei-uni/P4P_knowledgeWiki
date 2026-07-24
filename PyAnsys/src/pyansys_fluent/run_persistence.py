@@ -70,6 +70,30 @@ def _candidate_history_pairs(case_path: str, data_path: str) -> list[tuple[int, 
     return candidates
 
 
+def prune_checkpoint_history(
+    output_case: str,
+    output_data: str,
+    *,
+    keep_pairs: int = 2,
+) -> None:
+    """Delete old numbered case/data checkpoints after a verified save.
+
+    The default policy retains the newest pair and its immediate predecessor.
+    The final output pair is managed separately by :class:`RunPersistence`.
+    """
+
+    if keep_pairs < 0:
+        raise ValueError("keep_pairs must be non-negative")
+    candidates = sorted(
+        _candidate_history_pairs(output_case, output_data),
+        key=lambda item: (item[0], item[1]),
+        reverse=True,
+    )
+    for _iteration, _mtime, case_path_text, data_path_text in candidates[keep_pairs:]:
+        Path(case_path_text).unlink(missing_ok=True)
+        Path(data_path_text).unlink(missing_ok=True)
+
+
 def discover_latest_resume_source(
     output_case: str,
     output_data: str,
@@ -173,15 +197,15 @@ class RunPersistence:
     checkpoint_interval: int = 0
     report_interval: int = 100
     state_json: str = ""
-    keep_history: bool = True
+    # False means rolling retention: newest checkpoint plus one predecessor.
+    # True is retained as an explicit opt-in for long historical archives.
+    keep_history: bool = False
 
     def state_path(self) -> str:
         return self.state_json.strip() or build_run_state_path(self.output_case)
 
     def checkpoint_pair(self, completed_iterations: int) -> tuple[str, str]:
-        if self.keep_history:
-            return build_checkpoint_paths(self.output_case, self.output_data, completed_iterations)
-        return build_autosave_paths(self.output_case, self.output_data)
+        return build_checkpoint_paths(self.output_case, self.output_data, completed_iterations)
 
     def autosave_pair(self) -> tuple[str, str]:
         return build_autosave_paths(self.output_case, self.output_data)
@@ -244,42 +268,29 @@ class RunPersistence:
         notes: list[str] = []
         saved_case = ""
         saved_data = ""
-        history_case = ""
-        history_data = ""
-
-        autosave_case, autosave_data = self.autosave_pair()
         checkpoint_case, checkpoint_data = self.checkpoint_pair(completed_iterations)
-
-        if self.keep_history:
-            try:
-                write_case_data_pair(
-                    solver,
-                    checkpoint_case,
-                    checkpoint_data,
-                    f"write_checkpoint_{completed_iterations}",
-                )
-                history_case = checkpoint_case
-                history_data = checkpoint_data
-                saved_case = checkpoint_case
-                saved_data = checkpoint_data
-            except Exception as exc:
-                notes.append(f"history checkpoint failed: {type(exc).__name__}: {exc}")
 
         try:
             write_case_data_pair(
                 solver,
-                autosave_case,
-                autosave_data,
-                f"write_autosave_{completed_iterations}",
+                checkpoint_case,
+                checkpoint_data,
+                f"write_checkpoint_{completed_iterations}",
             )
-            saved_case = autosave_case
-            saved_data = autosave_data
+            saved_case = checkpoint_case
+            saved_data = checkpoint_data
+            if not self.keep_history:
+                prune_checkpoint_history(
+                    self.output_case,
+                    self.output_data,
+                    keep_pairs=2,
+                )
         except Exception as exc:
-            notes.append(f"rolling autosave failed: {type(exc).__name__}: {exc}")
+            notes.append(f"rolling checkpoint failed: {type(exc).__name__}: {exc}")
 
         if not saved_case or not saved_data:
             raise RuntimeError(
-                f"Failed to write checkpoint autosave at iteration {completed_iterations}: {'; '.join(notes) or 'unknown error'}"
+                f"Failed to write checkpoint at iteration {completed_iterations}: {'; '.join(notes) or 'unknown error'}"
             )
 
         self._write_state(
@@ -309,6 +320,12 @@ class RunPersistence:
             "write_final_case_data",
             allow_case_only=allow_case_only,
         )
+        if not self.keep_history:
+            prune_checkpoint_history(
+                self.output_case,
+                self.output_data,
+                keep_pairs=1,
+            )
         self._write_state(
             status="completed",
             completed_iterations=completed_iterations if completed_iterations is not None else 0,
@@ -330,6 +347,12 @@ class RunPersistence:
         total_iterations: int | None = None,
     ) -> None:
         write_case_only(solver, self.output_case, "write_final_case_only")
+        if not self.keep_history:
+            prune_checkpoint_history(
+                self.output_case,
+                self.output_data,
+                keep_pairs=1,
+            )
         self._write_state(
             status="completed",
             completed_iterations=completed_iterations if completed_iterations is not None else 0,
@@ -357,6 +380,12 @@ class RunPersistence:
             "write_interrupt_case_data",
             allow_case_only=allow_case_only,
         )
+        if not self.keep_history:
+            prune_checkpoint_history(
+                self.output_case,
+                self.output_data,
+                keep_pairs=1,
+            )
         self._write_state(
             status="interrupted",
             completed_iterations=completed_iterations,

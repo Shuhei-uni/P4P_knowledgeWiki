@@ -1,6 +1,7 @@
-# PyAnsys / PyFluent Remote Fluent Ready Kit
+# PyAnsys / PyFluent Laptop-Controlled Fluent Kit
 
-Use this kit to prepare your laptop now, before you have access to the PC with Ansys Fluent.
+The laptop agent is the controller and researcher. The licensed Fluent computer
+is a self-healing Fluent host with one optional, narrow run worker.
 
 The folder has been reorganized around one rule: Fluent automation is a dependency-ordered state machine, not a flat Python API. If syntax, nesting, or call-order problems appear, start with the execution contract below rather than editing the case scripts ad hoc.
 
@@ -16,23 +17,27 @@ Recommended local target:
 - connect_to_fluent workflow only
 ```
 
-Your target workflow:
+Target workflow:
 
 ```text
 Laptop:
 - Codex
 - Python
 - PyFluent / PyAnsys packages
-- scripts in this repo
+- setup plan, scientific decisions, and step ledger
+- direct inspection, Settings API, and TUI commands
 
       connects over gRPC
 
 Fluent PC:
 - Ansys Fluent installed and licensed
-- Fluent running
-- Fluent gRPC server started
-- server_info.txt generated
+- watchdog launches and restarts Fluent
+- latest connection generation is published out of band
+- narrow worker can load/run/checkpoint/save when explicitly requested
 ```
+
+The watchdog never builds a case or chooses a checkpoint. The run worker never
+restarts Fluent or automatically resumes an interrupted request.
 
 What you can do now:
 
@@ -43,18 +48,24 @@ python3 scripts/connection/bootstrap_local_env.py
 This script prefers Python 3.12. If `python3.12` is not already installed, it can
 also use `uv` to create a local 3.12 environment automatically.
 
-When you are at the Fluent PC:
+For the self-healing workflow:
 
-1. Start Fluent.
-2. Start the gRPC server.
-3. Copy IP/port/password or `server_info.txt`.
-4. Fill `.env`.
-5. Run:
+1. Configure a private shared `FLUENT_BRIDGE_DIR` on both computers.
+2. Set `FLUENT_ADVERTISED_HOST` on the Fluent PC.
+3. Start `scripts/orchestration/fluent_watchdog.py` on the Fluent PC.
+4. Optionally start `scripts/orchestration/fluent_run_worker.py`.
+5. Connect from the laptop; the helper rereads `latest_connection.json`.
 
 ```bash
 .venv/bin/python scripts/connection/check_connection.py
 .venv/bin/python scripts/inspection/inspect_fluent_session.py
 ```
+
+See [`docs/LAPTOP_CONTROLLED_FLUENT.md`](./docs/LAPTOP_CONTROLLED_FLUENT.md)
+for deployment, request schemas, recovery, and forced-crash validation.
+See [`docs/SETUP_TO_RESULTS_WORKFLOW.md`](./docs/SETUP_TO_RESULTS_WORKFLOW.md)
+for the complete setup Markdown → direct agent build → run → recovery →
+analysis → result-package workflow.
 
 ## Canonical workflow
 
@@ -85,19 +96,28 @@ connect
 Run sequence after setup creation:
 
 ```text
-connect
--> verify remote `.cas.h5`
--> load case only
--> hybrid initialize
--> iterate
--> write derived `name_X.dat.h5`
--> verify Fluent can see the written data file
+laptop saves verified `.cas.h5`
+-> laptop submits strict run request
+-> worker validates the expected Fluent generation
+-> initialize once, or load an explicit laptop-selected resume pair
+-> iterate in chunks and write recovery pairs
+-> retain only the newest recovery pair and its predecessor
+-> save final `.dat.h5`
+-> return a secret-free receipt
 ```
 
 ## Current script layout
 
 - `scripts/connection/check_connection.py`: connection health check only
+- `scripts/orchestration/fluent_watchdog.py`: Fluent lifecycle, health, restart, and connection publication only
+- `scripts/orchestration/fluent_run_worker.py`: narrow load/run/checkpoint/save worker only
+- `scripts/orchestration/submit_run_request.py`: laptop-side strict run-request submission
+- `scripts/orchestration/laptop_workflow.py`: laptop-owned setup-plan, ledger, run handoff, recovery, analysis, and result-package state
 - `scripts/inspection/inspect_fluent_session.py`: non-mutating tree inspection
+- `src/pyansys_fluent/agent_ledger.py`: laptop-owned build/recovery state
+- `src/pyansys_fluent/laptop_workflow.py`: verified phase transitions from setup Markdown to result manifest
+- `src/pyansys_fluent/bridge.py`: private connection/status bridge contracts
+- `src/pyansys_fluent/run_worker.py`: strict request, receipt, and checkpoint mechanics
 - `src/pyansys_fluent/common.py`: shared remote/session/path helpers
 - `src/pyansys_fluent/dependency_workflow.py`: dependency-aware step runner and failure classifier
 - `src/pyansys_fluent/extraction.py`: shared read-mostly extraction helpers for live/offline setup capture

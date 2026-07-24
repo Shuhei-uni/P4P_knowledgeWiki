@@ -3,11 +3,35 @@
 ## Mission
 `PyAnsys/` is a remote Fluent automation workspace for building, inspecting, rebuilding, and extending simulation setups through PyFluent, gRPC, TUI fallbacks, and case-specific orchestration scripts.
 
+The runtime authority split is strict:
+- the laptop agent owns setup research, live inspection, PyFluent/TUI mutations,
+  readbacks, checkpoint selection, recovery decisions, analysis, and scientific
+  interpretation;
+- the Fluent-PC watchdog owns only Fluent process availability, health,
+  bounded restart, and connection publication;
+- the Fluent-PC run worker owns only explicit load/run/checkpoint/save requests
+  submitted by the laptop.
+
+Do not add setup compilation, capability research, analysis selection,
+checkpoint selection, automatic resume, or next-experiment decisions to either
+Fluent-PC process.
+
+Use `src/pyansys_fluent/laptop_workflow.py` and
+`scripts/orchestration/laptop_workflow.py` for durable laptop-side phase
+tracking. The coordinator may register and hash a setup Markdown file, but must
+not parse it into Fluent operations. The agent still performs every setup
+mutation and readback directly.
+
 From now on, the workflow is intentionally split into two separate responsibilities:
 - setup-building scripts produce or modify only `.cas.h5`
 - `scripts/setup/save_data_after_iterations.py` loads an existing `.cas.h5`, hybrid-initializes it, runs iterations, and writes only `.dat.h5`
 
 Do not collapse setup construction and run/save orchestration back into one monolithic script unless the user explicitly asks for that.
+
+Paired `.cas.h5`/`.dat.h5` files written by the narrow run worker are recovery
+artifacts, not setup definitions. They must live in a new run-output directory,
+must not overwrite the setup parent, and must not create a new `Setups/` branch
+by themselves.
 
 The main risk in this folder is not just wrong values. The main risk is writing automation that assumes Fluent is a stable Python object tree when it actually behaves like a dependency-ordered GUI state machine.
 

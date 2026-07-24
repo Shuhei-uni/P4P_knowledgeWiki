@@ -551,3 +551,11 @@
 - current status: future setup families `10` and `11` are now concretely defined; active branches remain `08c` and `09c`.
 - blockers: `08c` and `09c` results are still pending; EWF wall-zone selection, timestep, and re-entrainment closure still require Fluent-side confirmation.
 - next action: prepare the parent `09c` case and launch independent `10a`, `10b`, and `10c` cases with the same loading and injection payload.
+
+## [2026-07-24] automation-update | Restore laptop-controlled Fluent architecture
+- files created/updated: `wiki/technical/laptop-controlled-fluent-recovery.md`, `wiki/index.md`, `wiki/log.md`, `../../../PyAnsys/docs/LAPTOP_CONTROLLED_FLUENT.md`, `../../../PyAnsys/docs/SETUP_TO_RESULTS_WORKFLOW.md`
+- purpose: preserve the decision that the laptop agent remains the setup, recovery-selection, analysis, and scientific controller while the licensed computer provides only process recovery and a narrow load/run/checkpoint/save worker.
+- assumptions introduced/removed: removed the assumption that the Fluent computer should host setup compilation or automatic scientific recovery; assumed a private shared directory is available for connection status and strict run requests.
+- current status: the offline implementation now covers setup-plan registration, direct-agent build ledger, setup-crash recovery, strict run handoff, forced-crash interruption, explicit verified resume, human-review fallback, resumable analysis, and hashed result finalization; all 68 PyAnsys tests pass, but no claim is made that the Windows forced-crash path has passed.
+- blockers: shared-folder mapping, VPN reachability, Windows process-tree behavior, and live Fluent restart credentials still require on-host testing.
+- next action: run the documented Windows/laptop acceptance sequence, including forced Fluent termination and explicit laptop-authorized resume without reinitialization.

@@ -1,5 +1,15 @@
 # Codex Remote Fluent Workflow Reference
 
+For the current self-healing architecture and complete operating procedure,
+read these first:
+
+- [`LAPTOP_CONTROLLED_FLUENT.md`](./LAPTOP_CONTROLLED_FLUENT.md)
+- [`SETUP_TO_RESULTS_WORKFLOW.md`](./SETUP_TO_RESULTS_WORKFLOW.md)
+
+The laptop remains the controller. The Fluent computer supplies a watchdog and
+an optional narrow run worker; it does not compile setup Markdown or select
+scientific recovery state.
+
 This project uses the PyAnsys ecosystem focused on:
 
 ```text

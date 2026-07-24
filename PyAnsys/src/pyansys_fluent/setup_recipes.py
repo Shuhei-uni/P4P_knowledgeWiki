@@ -56,7 +56,9 @@ class CheckpointConfig:
     checkpoint_interval: int = 1000
     report_interval: int = 100
     state_json: str = ""
-    keep_history: bool = True
+    # Keep only the newest checkpoint and its immediate predecessor unless a
+    # caller explicitly opts into a full numbered history archive.
+    keep_history: bool = False
 
 
 @dataclass(frozen=True)

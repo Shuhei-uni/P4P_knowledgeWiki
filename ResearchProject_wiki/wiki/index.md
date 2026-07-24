@@ -42,6 +42,7 @@
 - `wiki/technical/v2-purnanto-spiral-inlet-geometry.md`
 - `wiki/technical/pyfluent-trial3-one-inlet-reconstruction-smoke-test.md`
 - `wiki/technical/mesh-trial1-semi-automated-workflow.md`
+- `wiki/technical/laptop-controlled-fluent-recovery.md`
 
 ## Literature Layer
 - `wiki/literature/matrix.md` - now includes linked cross-wiki anchors for Pointon et al. 2009 and Chen et al. 2025.

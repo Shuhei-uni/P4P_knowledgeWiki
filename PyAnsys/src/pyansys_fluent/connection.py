@@ -5,12 +5,15 @@ from __future__ import annotations
 
 import argparse
 import atexit
+import json
 import os
 from pathlib import Path
 import subprocess
 import tempfile
 import time
+from typing import Any
 
+from pyansys_fluent.bridge import ConnectionDocumentError, read_latest_connection
 from pyansys_fluent.common import bool_env
 
 try:
@@ -22,6 +25,7 @@ except ModuleNotFoundError:  # pragma: no cover - local convenience fallback
 
 _LOCAL_FLUENT_PROCESSES: list[subprocess.Popen[str]] = []
 _ENV_FILE = Path(__file__).resolve().parents[2] / ".env"
+_DEFAULT_BRIDGE_MAX_AGE_SECONDS = 45.0
 
 
 def _cleanup_local_fluent_processes() -> None:
@@ -123,7 +127,7 @@ def _launch_local_fluent(
             setattr(session, "_codex_local_fluent_server_info", str(server_info))
             setattr(session, "_codex_local_fluent_stdout_log", str(stdout_log))
             setattr(session, "_codex_local_fluent_stderr_log", str(stderr_log))
-            return session
+            return _verify_fluent_session(session)
         if process.poll() is not None:
             raise RuntimeError(
                 f"Local Fluent exited early with code {process.returncode}. "
@@ -137,12 +141,96 @@ def _launch_local_fluent(
     )
 
 
-def connect(server_id: str | int | None = None):
+def _health_result_is_unhealthy(result: Any) -> bool:
+    if result is None or result is False:
+        return True
+    normalized = str(result).strip().lower().replace("-", "_").replace(" ", "_")
+    if not normalized:
+        return True
+    return any(
+        marker in normalized
+        for marker in ("not_serving", "unhealthy", "unavailable", "failed", "error")
+    )
+
+
+def _verify_fluent_session(session: Any) -> Any:
+    """Require a responsive gRPC health service and readable Fluent version."""
+
+    health_check = getattr(session, "health_check", None)
+    attempts: list[str] = []
+    healthy = False
+    for method_name in ("is_serving", "check_health", "status"):
+        method = getattr(health_check, method_name, None)
+        if not callable(method):
+            continue
+        try:
+            result = method()
+        except Exception as exc:
+            attempts.append(f"{method_name}: {type(exc).__name__}")
+            continue
+        if _health_result_is_unhealthy(result):
+            attempts.append(f"{method_name}: unhealthy")
+            continue
+        healthy = True
+        break
+    if not healthy:
+        detail = ", ".join(attempts) or "health API unavailable"
+        raise RuntimeError(f"Connected Fluent session failed health verification ({detail})")
+
+    get_version = getattr(session, "get_fluent_version", None)
+    if not callable(get_version):
+        raise RuntimeError("Connected Fluent session does not expose get_fluent_version()")
+    try:
+        version = get_version()
+    except Exception as exc:
+        raise RuntimeError("Connected Fluent session failed version verification") from exc
+    if version is None or not str(version).strip():
+        raise RuntimeError("Connected Fluent session returned an empty Fluent version")
+    setattr(session, "_codex_fluent_version", str(version))
+    return session
+
+
+def _bridge_dir_for_suffix(suffix: str) -> str:
+    return os.getenv(
+        f"FLUENT_BRIDGE_DIR{suffix}",
+        os.getenv("FLUENT_BRIDGE_DIR", ""),
+    ).strip()
+
+
+def _bridge_max_age_for_suffix(suffix: str) -> float:
+    text = os.getenv(
+        f"FLUENT_CONNECTION_MAX_AGE_SECONDS{suffix}",
+        os.getenv(
+            "FLUENT_CONNECTION_MAX_AGE_SECONDS",
+            str(_DEFAULT_BRIDGE_MAX_AGE_SECONDS),
+        ),
+    ).strip()
+    try:
+        value = float(text)
+    except ValueError as exc:
+        raise ValueError("FLUENT_CONNECTION_MAX_AGE_SECONDS must be numeric") from exc
+    if value <= 0:
+        raise ValueError("FLUENT_CONNECTION_MAX_AGE_SECONDS must be positive")
+    return value
+
+
+def connect(
+    server_id: str | int | None = None,
+    *,
+    minimum_generation: int | None = None,
+):
+    """Connect and verify Fluent using the current configured connection source.
+
+    When ``FLUENT_BRIDGE_DIR`` is configured, ``latest_connection.json`` is
+    reread on every call.  No endpoint or password is cached in this process.
+    """
+
     load_dotenv(_ENV_FILE)
     import ansys.fluent.core as pyfluent
 
     suffix = env_suffix(server_id)
 
+    bridge_dir = _bridge_dir_for_suffix(suffix)
     server_info = os.getenv(f"FLUENT_SERVER_INFO_FILE{suffix}", "").strip()
     ip = os.getenv(f"FLUENT_IP{suffix}", "").strip()
     port = os.getenv(f"FLUENT_PORT{suffix}", "").strip()
@@ -159,12 +247,49 @@ def connect(server_id: str | int | None = None):
         "insecure_mode": insecure_mode,
     }
 
+    if bridge_dir:
+        path = Path(bridge_dir).expanduser()
+        if not path.is_absolute():
+            raise ValueError(f"FLUENT_BRIDGE_DIR{suffix} must be an absolute path")
+        try:
+            document = read_latest_connection(
+                path,
+                max_age_seconds=_bridge_max_age_for_suffix(suffix),
+                min_generation=minimum_generation,
+            )
+        except (OSError, json.JSONDecodeError, ConnectionDocumentError) as exc:
+            raise RuntimeError(
+                f"No usable current Fluent connection is published in {path}"
+            ) from exc
+        generation = int(document["generation"])
+        host = str(document["host"])
+        port_number = int(document["port"])
+        print(
+            f"Connecting to published Fluent generation {generation} "
+            f"at {host}:{port_number}"
+        )
+        session = pyfluent.connect_to_fluent(
+            ip=host,
+            port=port_number,
+            password=document["password"],
+            allow_remote_host=True,
+            cleanup_on_exit=False,
+            start_transcript=True,
+            insecure_mode=insecure_mode,
+        )
+        session = _verify_fluent_session(session)
+        setattr(session, "_codex_connection_generation", generation)
+        setattr(session, "_codex_connection_source", str(path / "latest_connection.json"))
+        return session
+
     if server_info:
         path = Path(server_info).expanduser()
         if not path.exists():
             raise FileNotFoundError(f"FLUENT_SERVER_INFO_FILE{suffix} does not exist: {path}")
         print(f"Connecting to Fluent server {label} using server-info file: {path}")
-        return pyfluent.connect_to_fluent(server_info_file_name=str(path), **common)
+        return _verify_fluent_session(
+            pyfluent.connect_to_fluent(server_info_file_name=str(path), **common)
+        )
 
     if not (ip and port and password):
         if local_exe:
@@ -180,11 +305,13 @@ def connect(server_id: str | int | None = None):
         )
 
     print(f"Connecting to Fluent server {label} using IP/port: {ip}:{port}")
-    return pyfluent.connect_to_fluent(
-        ip=ip,
-        port=int(port),
-        password=password,
-        **common,
+    return _verify_fluent_session(
+        pyfluent.connect_to_fluent(
+            ip=ip,
+            port=int(port),
+            password=password,
+            **common,
+        )
     )
 
 

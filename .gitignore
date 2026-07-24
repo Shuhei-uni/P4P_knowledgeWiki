@@ -22,6 +22,8 @@ PyAnsys/.venv/
 # PyAnsys generated output and extracted data
 PyAnsys/output/
 PyAnsys/data/
+PyAnsys/fluent_bridge/
+latest_connection.json
 
 # Fluent runtime and case files
 *.trn
