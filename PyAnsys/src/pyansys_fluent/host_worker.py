@@ -56,7 +56,6 @@ class HostWorkerConfig:
     precision: str = "double"
     processor_count: int = 2
     gui: bool = False
-    insecure_mode: bool = False
     startup_timeout_seconds: float = 180.0
     connect_timeout_seconds: float = 60.0
     health_timeout_seconds: float = 10.0
@@ -401,7 +400,6 @@ def connect_from_server_info(server_info_path: Path, config: HostWorkerConfig) -
         allow_remote_host=False,
         cleanup_on_exit=False,
         start_transcript=True,
-        insecure_mode=config.insecure_mode,
         start_watchdog=False,
     )
 

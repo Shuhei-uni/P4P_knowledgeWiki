@@ -60,7 +60,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--server-id",
         default=DEFAULT_SERVER_ID,
-        help="Configured Fluent server id to use. Default: 3. Use 1 for FLUENT_IP, 2 for FLUENT_IP2, 3 for FLUENT_IP3.",
+        help="Configured local Fluent server id. Default: 3. Use FLUENT_SERVER_INFO_FILE3 or FLUENT_LOCAL_EXE3.",
     )
     parser.add_argument("--target-mesh", default=DEFAULT_TARGET_MESH, help="Remote mesh path visible to the target Fluent session.")
     parser.add_argument("--resume-case", default="", help="Optional remote converged setup 07 case file to resume from instead of rebuilding from mesh.")

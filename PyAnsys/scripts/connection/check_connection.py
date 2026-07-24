@@ -4,11 +4,8 @@
 This is the script to run when you are at/near the Fluent PC and have started
 Fluent's gRPC server.
 
-It uses either:
-- FLUENT_SERVER_INFO_FILE{N}, or
-- FLUENT_IP{N} + FLUENT_PORT{N} + FLUENT_PASSWORD{N}
-
-from a .env file or shell environment.
+It uses a local `FLUENT_SERVER_INFO_FILE{N}` or launches local Fluent through
+`FLUENT_LOCAL_EXE{N}`. Run it on the same Windows computer as Fluent.
 """
 
 from __future__ import annotations

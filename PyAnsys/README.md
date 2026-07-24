@@ -1,6 +1,6 @@
-# PyAnsys / PyFluent Remote Fluent Ready Kit
+# PyAnsys / PyFluent Local Fluent Kit
 
-Use this kit to prepare your laptop now, before you have access to the PC with Ansys Fluent.
+Use this kit on the Windows computer where Ansys Fluent is installed.
 
 The folder has been reorganized around one rule: Fluent automation is a dependency-ordered state machine, not a flat Python API. If syntax, nesting, or call-order problems appear, start with the execution contract below rather than editing the case scripts ad hoc.
 
@@ -8,30 +8,22 @@ The current operating split is strict:
 - setup scripts create or modify only `.cas.h5`
 - `scripts/setup/save_data_after_iterations.py` is the standard path for loading that case, hybrid-initializing it, running iterations, and writing only `.dat.h5`
 
-Recommended local target:
+Required execution target:
 
 ```text
 - CPython 3.12 virtual environment in PyAnsys/.venv
-- PyFluent core + visualization installed locally
-- connect_to_fluent workflow only
+- PyFluent core + visualization installed in that Windows checkout
+- local gRPC through a server-info file or a worker-owned Fluent process
 ```
 
-Your target workflow:
+The only supported connection workflow:
 
 ```text
-Laptop:
-- Codex
-- Python
-- PyFluent / PyAnsys packages
-- scripts in this repo
-
-      connects over gRPC
-
 Fluent PC:
 - Ansys Fluent installed and licensed
-- Fluent running
-- Fluent gRPC server started
-- server_info.txt generated
+- Python/PyFluent scripts in this repo
+- Fluent running with a local gRPC server
+- a private server-info file generated on the same computer
 ```
 
 What you can do now:
@@ -43,12 +35,13 @@ python3 scripts/connection/bootstrap_local_env.py
 This script prefers Python 3.12. If `python3.12` is not already installed, it can
 also use `uv` to create a local 3.12 environment automatically.
 
-When you are at the Fluent PC:
+On the Fluent PC:
 
 1. Start Fluent.
 2. Start the gRPC server.
-3. Copy IP/port/password or `server_info.txt`.
-4. Fill `.env`.
+3. Set `FLUENT_SERVER_INFO_FILE` to the local server-info path, or set
+   `FLUENT_LOCAL_EXE` for a script-owned Fluent launch.
+4. Keep the server-info file private; do not copy or print it.
 5. Run:
 
 ```bash
@@ -72,7 +65,7 @@ Execution sequence:
 
 ```text
 connect
--> verify remote inputs
+-> verify Fluent-visible inputs
 -> load mesh or source case
 -> enable parent model
 -> reacquire object
@@ -88,7 +81,7 @@ Run sequence after setup creation:
 
 ```text
 connect
--> verify remote `.cas.h5`
+-> verify local `.cas.h5`
 -> load case only
 -> hybrid initialize
 -> iterate
@@ -102,7 +95,7 @@ connect
 - `scripts/orchestration/fluent_host_worker.py`: Windows-host Fluent process ownership, heartbeat, bounded relaunch, and filesystem job polling
 - `scripts/orchestration/submit_fluent_job.py`: submit generation-pinned `health_check`, `case_identity_probe`, or `resumable_run` jobs to the local host-worker spool
 - `scripts/inspection/inspect_fluent_session.py`: non-mutating tree inspection
-- `src/pyansys_fluent/common.py`: shared remote/session/path helpers
+- `src/pyansys_fluent/common.py`: shared Fluent-session/path helpers
 - `src/pyansys_fluent/host_worker.py`: reusable host-worker process, gRPC health, restart-budget, and atomic-status mechanics
 - `src/pyansys_fluent/job_protocol.py`: versioned job/state/receipt models, atomic spool transitions, and stage dispatch
 - `src/pyansys_fluent/case_probe.py`: validated disposable-copy loading and conservative read-only case identity evidence
@@ -122,6 +115,7 @@ connect
 Host-worker trial instructions:
 
 - [`docs/FLUENT_HOST_WORKER.md`](./docs/FLUENT_HOST_WORKER.md)
+- [`docs/LOCAL_FLUENT_PC_WORKFLOW.md`](./docs/LOCAL_FLUENT_PC_WORKFLOW.md)
 
 ## Extractor tracks
 

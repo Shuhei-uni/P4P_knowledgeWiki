@@ -18,16 +18,16 @@ from pyansys_fluent.setup_common import print_header  # noqa: E402
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
-            "Load a remote .cas.h5, hybrid-initialize it, run X iterations, "
+            "Load a Fluent-visible .cas.h5, hybrid-initialize it, run X iterations, "
             "and save only name_X.dat.h5 next to the input case."
         )
     )
-    parser.add_argument("case_path", help="Remote .cas.h5 file visible to Fluent.")
+    parser.add_argument("case_path", help="Local .cas.h5 path visible to Fluent.")
     parser.add_argument("iterations", type=int, help="Iterations to run after initialization.")
     parser.add_argument(
         "--server-id",
         default="1",
-        help="Configured Fluent server id to use. Example: 2 for FLUENT_IP2/PORT2/PASSWORD2.",
+        help="Configured local Fluent server id. Example: 2 for FLUENT_SERVER_INFO_FILE2.",
     )
     parser.add_argument(
         "--report-interval",

@@ -37,7 +37,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--server-id",
         default="1",
-        help="Configured Fluent server id to use. Use 1 for FLUENT_IP, 2 for FLUENT_IP2, 3 for FLUENT_IP3.",
+        help="Configured local Fluent server id. Use 1 for FLUENT_SERVER_INFO_FILE, 2 for FLUENT_SERVER_INFO_FILE2, and so on.",
     )
     parser.add_argument("--target-mesh", default="", help="Remote target mesh file.")
     parser.add_argument("--output-case", required=True, help="Remote final case file.")

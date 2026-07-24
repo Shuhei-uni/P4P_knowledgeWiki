@@ -54,11 +54,6 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Launch Fluent with its GUI. Headless mode is the default.",
     )
-    parser.add_argument(
-        "--insecure-mode",
-        action="store_true",
-        help="Pass insecure_mode=True when attaching through PyFluent.",
-    )
     parser.add_argument("--startup-timeout", type=float, default=180.0)
     parser.add_argument("--connect-timeout", type=float, default=60.0)
     parser.add_argument("--health-timeout", type=float, default=10.0)
@@ -100,7 +95,6 @@ def main() -> int:
         precision=args.precision,
         processor_count=args.processor_count,
         gui=args.gui,
-        insecure_mode=args.insecure_mode,
         startup_timeout_seconds=args.startup_timeout,
         connect_timeout_seconds=args.connect_timeout,
         health_timeout_seconds=args.health_timeout,

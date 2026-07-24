@@ -46,7 +46,6 @@ def env_suffix(server_id: str | int | None) -> str:
 def _launch_local_fluent(
     *,
     suffix: str,
-    insecure_mode: bool,
 ):
     import ansys.fluent.core as pyfluent
 
@@ -56,6 +55,10 @@ def _launch_local_fluent(
 
     dimension = os.getenv(f"FLUENT_LOCAL_DIMENSION{suffix}", os.getenv("FLUENT_LOCAL_DIMENSION", "3")).strip() or "3"
     precision = os.getenv(f"FLUENT_LOCAL_PRECISION{suffix}", os.getenv("FLUENT_LOCAL_PRECISION", "double")).strip() or "double"
+    if dimension not in {"2", "3"}:
+        raise ValueError("FLUENT_LOCAL_DIMENSION must be 2 or 3")
+    if precision not in {"single", "double"}:
+        raise ValueError("FLUENT_LOCAL_PRECISION must be single or double")
     processor_count = int(
         os.getenv(
             f"FLUENT_LOCAL_PROCESSOR_COUNT{suffix}",
@@ -88,7 +91,7 @@ def _launch_local_fluent(
 
     launch_args = [
         exe,
-        f"{dimension}ddp",
+        f"{dimension}{'ddp' if precision == 'double' else 'd'}",
         f"-t{processor_count}",
     ]
     if not gui:
@@ -117,7 +120,6 @@ def _launch_local_fluent(
                 allow_remote_host=False,
                 cleanup_on_exit=False,
                 start_transcript=True,
-                insecure_mode=insecure_mode,
             )
             setattr(session, "_codex_local_fluent_process", process)
             setattr(session, "_codex_local_fluent_server_info", str(server_info))
@@ -138,25 +140,24 @@ def _launch_local_fluent(
 
 
 def connect(server_id: str | int | None = None):
+    """Attach locally through a server-info file or launch a local process.
+
+    This module intentionally does not accept an IP address, port, or password.
+    Run it on the Windows computer that owns the Fluent process.
+    """
     load_dotenv(_ENV_FILE)
     import ansys.fluent.core as pyfluent
 
     suffix = env_suffix(server_id)
 
     server_info = os.getenv(f"FLUENT_SERVER_INFO_FILE{suffix}", "").strip()
-    ip = os.getenv(f"FLUENT_IP{suffix}", "").strip()
-    port = os.getenv(f"FLUENT_PORT{suffix}", "").strip()
-    password = os.getenv(f"FLUENT_PASSWORD{suffix}", "").strip()
     local_exe = os.getenv(f"FLUENT_LOCAL_EXE{suffix}", "").strip()
-    allow_remote_host = bool_env(f"FLUENT_ALLOW_REMOTE_HOST{suffix}", bool_env("FLUENT_ALLOW_REMOTE_HOST", True))
-    insecure_mode = bool_env(f"FLUENT_INSECURE_MODE{suffix}", bool_env("FLUENT_INSECURE_MODE", False))
     label = suffix or "1"
 
     common = {
-        "allow_remote_host": allow_remote_host,
+        "allow_remote_host": False,
         "cleanup_on_exit": False,
         "start_transcript": True,
-        "insecure_mode": insecure_mode,
     }
 
     if server_info:
@@ -166,25 +167,13 @@ def connect(server_id: str | int | None = None):
         print(f"Connecting to Fluent server {label} using server-info file: {path}")
         return pyfluent.connect_to_fluent(server_info_file_name=str(path), **common)
 
-    if not (ip and port and password):
-        if local_exe:
-            return _launch_local_fluent(
-                suffix=suffix,
-                insecure_mode=insecure_mode,
-            )
-        raise RuntimeError(
-            f"Missing connection details for Fluent server {label}. Set either "
-            f"FLUENT_SERVER_INFO_FILE{suffix} or FLUENT_IP{suffix}, "
-            f"FLUENT_PORT{suffix}, and FLUENT_PASSWORD{suffix} in .env. "
-            f"Or set FLUENT_LOCAL_EXE{suffix} for local manual launch."
-        )
-
-    print(f"Connecting to Fluent server {label} using IP/port: {ip}:{port}")
-    return pyfluent.connect_to_fluent(
-        ip=ip,
-        port=int(port),
-        password=password,
-        **common,
+    if local_exe:
+        return _launch_local_fluent(suffix=suffix)
+    raise RuntimeError(
+        f"Missing local Fluent connection details for server {label}. "
+        f"Set FLUENT_SERVER_INFO_FILE{suffix} to a server-info file on "
+        f"this computer, or set FLUENT_LOCAL_EXE{suffix} to launch Fluent "
+        f"locally."
     )
 
 
@@ -195,6 +184,6 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--server-id",
         default="1",
-        help="Configured Fluent server id to use. Use 1 for FLUENT_IP, 2 for FLUENT_IP2, 3 for FLUENT_IP3, 4 for FLUENT_IP4.",
+        help="Configured local Fluent server id. Use 1 for FLUENT_SERVER_INFO_FILE, 2 for FLUENT_SERVER_INFO_FILE2, and so on.",
     )
     return parser

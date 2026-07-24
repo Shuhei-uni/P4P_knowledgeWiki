@@ -560,7 +560,7 @@ The current executable rebuild path for this branch is implemented in:
 
 Validation note:
 
-- tested on the Student Edition Windows target over SSH;
+- tested on the Student Edition Windows target;
 - target mesh: `purnanto-extended.msh`;
 - short run validated at `5` iterations;
 - output case written successfully as `purnanto-extended-rebuilt-rerun5.cas.h5`;

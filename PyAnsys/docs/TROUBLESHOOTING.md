@@ -1,21 +1,20 @@
 # Likely Issues and Quick Fixes
 
-## 1. Connection timeout
+## 1. Local connection timeout
 
 Check:
 
 ```text
-- Is Fluent open?
-- Did you start the gRPC server?
-- Is the port correct?
-- Did the port change after restarting Fluent?
-- Did Windows Firewall block the port?
-- Are laptop and Fluent PC on the same network/VPN?
+- Is the local Fluent process open?
+- Did it create the expected server-info file?
+- Is `FLUENT_SERVER_INFO_FILE` pointing to that local file?
+- Did the worker restart Fluent and create a new generation-specific server-info file?
 ```
 
 ## 2. server_info.txt says 127.0.0.1
 
-Use the Fluent PC's real IPv4 address from `ipconfig`.
+That is expected for this local-only workflow. Run the Python client on the
+same Fluent computer and use the server-info file directly.
 
 ## 3. Password/authentication failure
 
@@ -34,24 +33,25 @@ Laptop path and Fluent PC path are different. Use Fluent PC paths for Fluent fil
 Correct it:
 
 ```text
-Use connect_to_fluent. Fluent is running remotely and is not installed on this laptop.
+Use the local host worker or `connect_to_fluent()` with a server-info file on
+the Fluent computer.
 ```
 
-## 7. Student Edition exits under SSH
+## 7. Student Edition exits after startup
 
-If the Windows Student Edition host starts Fluent and then the gRPC server dies immediately under SSH, treat that as a launch/EOF problem first, not a setup-script problem.
+If the Windows Student Edition host starts Fluent and then the gRPC server dies immediately, treat that as a launch/EOF problem first, not a setup-script problem.
 
 Use the local manual-launch fallback in `src/pyansys_fluent/connection.py`:
 
 ```text
 - set FLUENT_LOCAL_EXE on the Windows host
-- keep stdin open by launching Fluent directly instead of through a short-lived SSH shell
+- keep stdin open by launching Fluent directly from the local Windows process
 - verify the session with scripts/connection/check_connection.py
 ```
 
-If `connect_to_fluent()` starts asking for TLS certificates or otherwise refuses the remote handoff, switch to the local manual-launch path instead of iterating on shell quoting.
+If `connect_to_fluent()` cannot attach through the local server-info file, switch to the local manual-launch path instead of trying a network connection.
 
-When launching a Windows batch wrapper over SSH, call it explicitly:
+When launching a Windows batch wrapper, call it explicitly:
 
 ```text
 call C:\path\to\run_setup08b_smoke.cmd

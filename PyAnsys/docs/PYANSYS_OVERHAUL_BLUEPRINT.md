@@ -2,7 +2,7 @@
 
 This folder now has one canonical mental model:
 
-1. connection and remote-file mechanics live in `src/pyansys_fluent/common.py` and `src/pyansys_fluent/connection.py`
+1. local connection and Fluent-visible file mechanics live in `src/pyansys_fluent/common.py` and `src/pyansys_fluent/connection.py`
 2. dependency-aware execution logic lives in `src/pyansys_fluent/dependency_workflow.py`
 3. shared setup-specific helpers live under focused modules in `src/pyansys_fluent/`
 4. case-specific scripts should be thin orchestration layers on top of those shared modules

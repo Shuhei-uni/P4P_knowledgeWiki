@@ -79,11 +79,6 @@ meshing = pyfluent.launch_fluent(mode=pyfluent.FluentMode.MESHING)
 solver = pyfluent.connect_to_fluent(server_info_file_name="server.txt")
 ```
 
-```python
-# [official cheat-sheet pattern] Connect by IP/port/password when available.
-solver = pyfluent.Solver.from_connection(ip, port, password)
-```
-
 **Start the gRPC server in an already-open Fluent session**  
 **[official-docs pattern]**
 

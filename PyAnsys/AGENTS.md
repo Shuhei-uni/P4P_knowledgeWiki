@@ -74,21 +74,19 @@ Before writing or changing any non-trivial setup script, read these files in ord
 10. `src/pyansys_fluent/setup_common.py`
 11. `docs/PYANSYS_OVERHAUL_BLUEPRINT.md`
 
-## Student Edition Remote Fallback
-When working against the Windows Student Edition host, treat remote Fluent startup as a special case:
+## Student Edition Local Fallback
+When working against the Windows Student Edition host, treat local Fluent startup as a special case:
 
-- If headless Fluent over SSH exits immediately after the gRPC server starts, assume stdin/EOF is the problem before assuming the setup script is broken.
-- Prefer the opt-in local manual-launch path in `src/pyansys_fluent/connection.py` when the remote Student session is unstable.
+- If headless Fluent exits immediately after the gRPC server starts, assume stdin/EOF is the problem before assuming the setup script is broken.
+- Prefer the opt-in local manual-launch path in `src/pyansys_fluent/connection.py` when the Student session is unstable.
 - On the Windows host, set the launch environment explicitly if `.env` loading is unreliable in that Python environment:
   - `FLUENT_LOCAL_EXE`
   - `FLUENT_LOCAL_OUTPUT_DIR`
   - `FLUENT_LOCAL_PROCESSOR_COUNT`
   - `FLUENT_LOCAL_GUI`
-  - `FLUENT_ALLOW_REMOTE_HOST`
-  - `FLUENT_INSECURE_MODE`
 - Verify the live session with `scripts/connection/check_connection.py` before running a long setup script.
-- If `connect_to_fluent()` starts asking for TLS certificates or otherwise refuses the remote handoff, stop and switch to the local manual-launch path instead of iterating on shell quoting.
-- When invoking a Windows batch wrapper from SSH, use `call <script>.cmd` so `cmd.exe` executes the batch file instead of treating the path as a raw command token.
+- If `connect_to_fluent()` cannot attach through the local server-info file, stop and switch to the local manual-launch path instead of trying a network connection.
+- When invoking a Windows batch wrapper, use `call <script>.cmd` so `cmd.exe` executes the batch file instead of treating the path as a raw command token.
 
 If the task touches DPM, multiphase, Energy, or EWF, read that model's tree and order file before editing code.
 

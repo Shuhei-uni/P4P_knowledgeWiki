@@ -41,7 +41,7 @@ Order:
   8. create DPM injections and set particle/material/location/size/mass-flow values
   9. write final case/data
 Working path or TUI:
-  Local manual launch is more reliable than `launch_fluent()` / `Solver.from_install()` for this Student-edition SSH-driven path because Fluent otherwise halts on stdin EOF after starting the server.
+  Local manual launch is more reliable than `launch_fluent()` / `Solver.from_install()` for this Student-edition path because Fluent otherwise halts on stdin EOF after starting the server.
 Readback:
   `check_connection.py --server-id 2` reached `Health check: Status.SERVING`
   `setup09a_dpm_split_inlet_carryover.py --apply --server-id 2` completed with created injections:
@@ -91,7 +91,7 @@ Update 2026-06-12:
   `scripts/setup/simple_dpm_test.py --server-id 3 --snapshot-json output/simple_dpm_test_summary.json` reproduced the same surface-selector failure on Fluent 2024 R2 without crashing. The live branch reported `initial_values.location.injection_surfaces` active with allowed values `['bottom', 'wall', 'liquidinlet', 'steaminlet', 'steamoutlet']`, but all Settings API write strategies still failed with `wta(1st) to string->symbol` or `value`; the helper now classifies this non-strict path as `PyFluent wrapper limitation`, marks DPM injection setup unsuccessful, and still writes the case for inspection.
 
 Fluent: 2026 R1 Student
-PyFluent: `.venv` on Windows SSH target
+PyFluent: `.venv` on Windows Student target
 Case: `purnanto-extended.msh`
 Goal: probe carrier multiphase + global DPM activation before any injection setup
 Order:
@@ -114,7 +114,7 @@ Notes:
   The archived `07` seed exposes many inactive multiphase and DPM branches that this Student build does not activate. That mismatch is useful: it tells us which paths are build-sensitive before we attempt any injection-level writes.
 
 Fluent: 2026 R1 Student
-PyFluent: `.venv` on Windows SSH target
+PyFluent: `.venv` on Windows Student target
 Case: `purnanto-extended.msh`
 Goal: adaptive recursive exploration of a live Fluent settings branch
 Order:
