@@ -58,6 +58,7 @@ class HostWorkerConfig:
     health_timeout_seconds: float = 10.0
     health_interval_seconds: float = 10.0
     heartbeat_interval_seconds: float = 5.0
+    job_poll_interval_seconds: float = 1.0
     poll_interval_seconds: float = 0.5
     restart_delay_seconds: float = 5.0
     max_restarts: int = 3
@@ -81,6 +82,8 @@ class HostWorkerConfig:
             raise ValueError("health_interval_seconds must be positive")
         if self.heartbeat_interval_seconds <= 0:
             raise ValueError("heartbeat_interval_seconds must be positive")
+        if self.job_poll_interval_seconds <= 0:
+            raise ValueError("job_poll_interval_seconds must be positive")
         if self.poll_interval_seconds <= 0:
             raise ValueError("poll_interval_seconds must be positive")
         if self.restart_delay_seconds < 0:
@@ -720,6 +723,7 @@ class FluentHostWorker:
         process_manager: FluentProcessManager | None = None,
         connect_factory: Callable[[Path, HostWorkerConfig], Any] = connect_from_server_info,
         status_store: AtomicJsonStatusStore | None = None,
+        job_processor: Any | None = None,
         stop_event: threading.Event | None = None,
         sleep: Callable[[float], None] = time.sleep,
         monotonic: Callable[[], float] = time.monotonic,
@@ -734,6 +738,13 @@ class FluentHostWorker:
         )
         self.connect_factory = connect_factory
         self.status_store = status_store or AtomicJsonStatusStore(config.status_path)
+        if job_processor is None:
+            # Local import avoids making the protocol module part of Fluent's
+            # low-level process-launch dependency graph.
+            from .job_protocol import FilesystemJobSpool, JobStageProcessor
+
+            job_processor = JobStageProcessor(FilesystemJobSpool(config.work_dir))
+        self.job_processor = job_processor
         self.stop_event = stop_event or threading.Event()
         self._sleep = sleep
         self._monotonic = monotonic
@@ -845,6 +856,7 @@ class FluentHostWorker:
     ) -> None:
         next_health = self._monotonic()
         next_heartbeat = self._monotonic()
+        next_job_poll = self._monotonic()
 
         while not self.stop_event.is_set():
             now = self._monotonic()
@@ -878,6 +890,28 @@ class FluentHostWorker:
                     recent_restart_count=recent_restart_count,
                 )
                 next_heartbeat = now + self.config.heartbeat_interval_seconds
+
+            if now >= next_job_poll:
+                try:
+                    from .job_protocol import HealthStageContext
+
+                    self.job_processor.process_next(
+                        HealthStageContext(
+                            worker_boot_id=self._boot_id,
+                            fluent_generation=managed.generation,
+                            fluent_pid=managed.pid,
+                            server_info_path=managed.server_info_path,
+                            config=self.config,
+                            process_is_alive=lambda: managed.is_alive,
+                        )
+                    )
+                except Exception as exc:
+                    # A spool/receipt failure must be visible, but it must not
+                    # restart an otherwise healthy Fluent generation.
+                    self._last_error = (
+                        f"Job protocol {type(exc).__name__}: {exc}"
+                    )
+                next_job_poll = now + self.config.job_poll_interval_seconds
 
             self._sleep(self.config.poll_interval_seconds)
 

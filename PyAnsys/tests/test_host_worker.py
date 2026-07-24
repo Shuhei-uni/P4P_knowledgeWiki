@@ -341,6 +341,56 @@ class DiesAfterVersionSession(SequenceSession):
 
 
 class WorkerRestartTests(unittest.TestCase):
+    def test_worker_polls_jobs_against_current_owned_generation(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            executable = root / "fluent.exe"
+            executable.write_text("", encoding="utf-8")
+            config = HostWorkerConfig(
+                fluent_exe=executable,
+                work_dir=root,
+                health_interval_seconds=0.001,
+                heartbeat_interval_seconds=0.001,
+                job_poll_interval_seconds=0.001,
+                poll_interval_seconds=0.001,
+                restart_delay_seconds=0,
+                max_restarts=1,
+            )
+            stop_event = threading.Event()
+            manager = FakeProcessManager(root)
+
+            class RecordingJobProcessor:
+                def __init__(self) -> None:
+                    self.contexts = []
+                    self.alive_at_poll = []
+
+                def process_next(self, context) -> None:
+                    self.contexts.append(context)
+                    self.alive_at_poll.append(context.process_is_alive())
+                    stop_event.set()
+
+            processor = RecordingJobProcessor()
+            session = SequenceSession([True])
+            worker = FluentHostWorker(
+                config,
+                process_manager=manager,
+                connect_factory=lambda _path, _config: session,
+                job_processor=processor,
+                stop_event=stop_event,
+            )
+
+            worker.run()
+
+            self.assertEqual(len(processor.contexts), 1)
+            context = processor.contexts[0]
+            self.assertEqual(context.fluent_generation, 1)
+            self.assertEqual(context.fluent_pid, 1001)
+            self.assertEqual(processor.alive_at_poll, [True])
+            self.assertEqual(
+                context.server_info_path,
+                manager.launched[0].server_info_path,
+            )
+
     def test_worker_relaunches_after_grpc_health_failure(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

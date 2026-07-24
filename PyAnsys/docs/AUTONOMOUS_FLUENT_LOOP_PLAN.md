@@ -3,15 +3,18 @@
 ## Status
 
 - Date: `2026-07-24`
-- State: architecture skeleton plus an offline-tested Phase 1 host-worker foundation; no live Fluent session has been tested from this branch
+- State: Phase 1 lifecycle validated on Windows 11 with Fluent 2025 R2 and PyFluent 0.40.2; filesystem-backed `health_check` job protocol implemented for the next live test
 - Primary implementation boundary: `PyAnsys/`
 - First delivery target: one recoverable, verified vertical slice on one Fluent version and one accepted parent case
 
 Initial Phase 1 files:
 
 - `src/pyansys_fluent/host_worker.py`
+- `src/pyansys_fluent/job_protocol.py`
 - `scripts/orchestration/fluent_host_worker.py`
+- `scripts/orchestration/submit_fluent_job.py`
 - `tests/test_host_worker.py`
+- `tests/test_job_protocol.py`
 - `docs/FLUENT_HOST_WORKER.md`
 
 ## Repository Boundary Decision

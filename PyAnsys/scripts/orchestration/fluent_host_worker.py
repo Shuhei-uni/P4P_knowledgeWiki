@@ -64,6 +64,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--health-timeout", type=float, default=10.0)
     parser.add_argument("--health-interval", type=float, default=10.0)
     parser.add_argument("--heartbeat-interval", type=float, default=5.0)
+    parser.add_argument("--job-poll-interval", type=float, default=1.0)
     parser.add_argument("--poll-interval", type=float, default=0.5)
     parser.add_argument("--restart-delay", type=float, default=5.0)
     parser.add_argument("--max-restarts", type=int, default=3)
@@ -105,6 +106,7 @@ def main() -> int:
         health_timeout_seconds=args.health_timeout,
         health_interval_seconds=args.health_interval,
         heartbeat_interval_seconds=args.heartbeat_interval,
+        job_poll_interval_seconds=args.job_poll_interval,
         poll_interval_seconds=args.poll_interval,
         restart_delay_seconds=args.restart_delay,
         max_restarts=args.max_restarts,
@@ -130,6 +132,10 @@ def main() -> int:
     print(f"Host worker status: {config.status_path}", flush=True)
     print(
         f"Fluent server-info generations: {config.work_dir / 'fluent-server-info-NNN.txt'}",
+        flush=True,
+    )
+    print(
+        f"Incoming job spool: {config.work_dir / 'jobs' / 'incoming'}",
         flush=True,
     )
     try:

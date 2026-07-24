@@ -98,10 +98,12 @@ connect
 ## Current script layout
 
 - `scripts/connection/check_connection.py`: connection health check only
-- `scripts/orchestration/fluent_host_worker.py`: Windows-host Fluent process ownership, heartbeat, and bounded relaunch smoke-test worker
+- `scripts/orchestration/fluent_host_worker.py`: Windows-host Fluent process ownership, heartbeat, bounded relaunch, and filesystem job polling
+- `scripts/orchestration/submit_fluent_job.py`: submit a generation-pinned `health_check` job to the local host-worker spool
 - `scripts/inspection/inspect_fluent_session.py`: non-mutating tree inspection
 - `src/pyansys_fluent/common.py`: shared remote/session/path helpers
 - `src/pyansys_fluent/host_worker.py`: reusable host-worker process, gRPC health, restart-budget, and atomic-status mechanics
+- `src/pyansys_fluent/job_protocol.py`: versioned job/state/receipt models, atomic spool transitions, and the short-lived health stage client
 - `src/pyansys_fluent/dependency_workflow.py`: dependency-aware step runner and failure classifier
 - `src/pyansys_fluent/extraction.py`: shared read-mostly extraction helpers for live/offline setup capture
 - `src/pyansys_fluent/setup_common.py`: shared setup-name, boundary, and remap helpers
