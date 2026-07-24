@@ -1,7 +1,7 @@
 """Filesystem-backed jobs and stage receipts for the Fluent host worker.
 
-The protocol supports two read-only stages: ``health_check`` and
-``case_identity_probe``. Job files are claimed with an atomic rename, stage
+The protocol supports read-only health/case probes plus a narrowly scoped
+``resumable_run`` stage. Job files are claimed with an atomic rename, stage
 receipts are committed atomically, and a successful job is moved to
 ``completed`` only after its receipt has been validated and committed.
 """
@@ -29,10 +29,12 @@ from .host_worker import (
 )
 
 
-JOB_SCHEMA_VERSION = 2
+JOB_SCHEMA_VERSION = 3
 JOB_STATE_SCHEMA_VERSION = 1
-STAGE_RECEIPT_SCHEMA_VERSION = 2
-SUPPORTED_STAGE_TYPES = frozenset({"health_check", "case_identity_probe"})
+STAGE_RECEIPT_SCHEMA_VERSION = 3
+SUPPORTED_STAGE_TYPES = frozenset(
+    {"health_check", "case_identity_probe", "resumable_run"}
+)
 SUPPORTED_CASE_EXTENSIONS = (".cas.h5", ".cas.gz", ".cas")
 JOB_STATUSES = frozenset({"incoming", "running", "completed", "failed"})
 RECEIPT_STATUSES = frozenset({"success", "failed"})
@@ -164,6 +166,10 @@ class JobSpec:
     expected_file_size_bytes: int | None = None
     expected_sha256: str | None = None
     compute_sha256: bool = False
+    total_iterations: int | None = None
+    chunk_iterations: int | None = None
+    command_timeout_seconds: float | None = None
+    max_resume_attempts: int | None = None
     schema_version: int = JOB_SCHEMA_VERSION
 
     def __post_init__(self) -> None:
@@ -217,6 +223,26 @@ class JobSpec:
                 )
         if not isinstance(self.compute_sha256, bool):
             raise ProtocolValidationError("compute_sha256 must be a boolean")
+        _validate_optional_positive_int(
+            self.total_iterations,
+            "total_iterations",
+        )
+        _validate_optional_positive_int(
+            self.chunk_iterations,
+            "chunk_iterations",
+        )
+        if self.command_timeout_seconds is not None and (
+            isinstance(self.command_timeout_seconds, bool)
+            or not isinstance(self.command_timeout_seconds, (int, float))
+            or not 0 < float(self.command_timeout_seconds) <= 3600
+        ):
+            raise ProtocolValidationError(
+                "command_timeout_seconds must be greater than 0 and at most 3600"
+            )
+        _validate_optional_positive_int(
+            self.max_resume_attempts,
+            "max_resume_attempts",
+        )
 
         if self.stage_type == "health_check":
             if any(
@@ -225,10 +251,14 @@ class JobSpec:
                     self.case_path,
                     self.expected_file_size_bytes,
                     self.expected_sha256,
+                    self.total_iterations,
+                    self.chunk_iterations,
+                    self.command_timeout_seconds,
+                    self.max_resume_attempts,
                 )
             ) or self.compute_sha256:
                 raise ProtocolValidationError(
-                    "health_check jobs cannot contain case input fields"
+                    "health_check jobs cannot contain case or run input fields"
                 )
         elif self.stage_type == "case_identity_probe":
             if self.case_path is None:
@@ -253,6 +283,59 @@ class JobSpec:
                 raise ProtocolValidationError(
                     "case_identity_probe requires expected_fluent_generation"
                 )
+            if any(
+                value is not None
+                for value in (
+                    self.total_iterations,
+                    self.chunk_iterations,
+                    self.command_timeout_seconds,
+                    self.max_resume_attempts,
+                )
+            ):
+                raise ProtocolValidationError(
+                    "case_identity_probe jobs cannot contain run input fields"
+                )
+        elif self.stage_type == "resumable_run":
+            if self.case_path is None:
+                raise ProtocolValidationError("resumable_run requires case_path")
+            case_path = Path(self.case_path)
+            if not case_path.is_absolute():
+                raise ProtocolValidationError(
+                    "resumable_run case_path must be absolute"
+                )
+            if not self.case_path.lower().endswith(SUPPORTED_CASE_EXTENSIONS):
+                raise ProtocolValidationError(
+                    "resumable_run case_path must end with one of "
+                    f"{SUPPORTED_CASE_EXTENSIONS}"
+                )
+            if self.expected_worker_boot_id is None:
+                raise ProtocolValidationError(
+                    "resumable_run requires expected_worker_boot_id"
+                )
+            if self.expected_fluent_generation is None:
+                raise ProtocolValidationError(
+                    "resumable_run requires expected_fluent_generation"
+                )
+            if self.total_iterations is None:
+                raise ProtocolValidationError(
+                    "resumable_run requires total_iterations"
+                )
+            if self.chunk_iterations is None:
+                raise ProtocolValidationError(
+                    "resumable_run requires chunk_iterations"
+                )
+            if self.chunk_iterations > self.total_iterations:
+                raise ProtocolValidationError(
+                    "chunk_iterations cannot exceed total_iterations"
+                )
+            if self.command_timeout_seconds is None:
+                raise ProtocolValidationError(
+                    "resumable_run requires command_timeout_seconds"
+                )
+            if self.max_resume_attempts is None:
+                raise ProtocolValidationError(
+                    "resumable_run requires max_resume_attempts"
+                )
 
     def to_dict(self) -> dict[str, Any]:
         self.validate()
@@ -272,6 +355,14 @@ class JobSpec:
                 else None
             ),
             "compute_sha256": self.compute_sha256,
+            "total_iterations": self.total_iterations,
+            "chunk_iterations": self.chunk_iterations,
+            "command_timeout_seconds": (
+                float(self.command_timeout_seconds)
+                if self.command_timeout_seconds is not None
+                else None
+            ),
+            "max_resume_attempts": self.max_resume_attempts,
         }
 
     @classmethod
@@ -290,6 +381,10 @@ class JobSpec:
             "expected_file_size_bytes",
             "expected_sha256",
             "compute_sha256",
+            "total_iterations",
+            "chunk_iterations",
+            "command_timeout_seconds",
+            "max_resume_attempts",
         }
         _reject_unknown_fields(payload, allowed, "JobSpec")
         try:
@@ -309,6 +404,12 @@ class JobSpec:
                 ),
                 expected_sha256=payload.get("expected_sha256"),
                 compute_sha256=payload.get("compute_sha256", False),
+                total_iterations=payload.get("total_iterations"),
+                chunk_iterations=payload.get("chunk_iterations"),
+                command_timeout_seconds=payload.get(
+                    "command_timeout_seconds"
+                ),
+                max_resume_attempts=payload.get("max_resume_attempts"),
             )
         except KeyError as exc:
             raise ProtocolValidationError(
@@ -448,6 +549,14 @@ class StageReceipt:
     fluent_accepted_case: bool | None = None
     case_identity: dict[str, Any] | None = None
     data_loaded: bool | None = None
+    run_state_path: str | None = None
+    requested_iterations: int | None = None
+    completed_iterations: int | None = None
+    checkpoint_case_path: str | None = None
+    checkpoint_data_path: str | None = None
+    initialization_count: int | None = None
+    resume_count: int | None = None
+    generation_history: tuple[int, ...] | None = None
     error: dict[str, Any] | None = None
     schema_version: int = STAGE_RECEIPT_SCHEMA_VERSION
 
@@ -527,6 +636,55 @@ class StageReceipt:
             raise ProtocolValidationError("case_identity must be an object or null")
         if self.data_loaded is not None and not isinstance(self.data_loaded, bool):
             raise ProtocolValidationError("data_loaded must be a boolean or null")
+        for value, field_name in (
+            (self.run_state_path, "run_state_path"),
+            (self.checkpoint_case_path, "checkpoint_case_path"),
+            (self.checkpoint_data_path, "checkpoint_data_path"),
+        ):
+            if value is not None and (
+                not isinstance(value, str) or not value.strip()
+            ):
+                raise ProtocolValidationError(
+                    f"{field_name} must be a non-empty string or null"
+                )
+        _validate_optional_positive_int(
+            self.requested_iterations,
+            "requested_iterations",
+        )
+        if self.completed_iterations is not None and (
+            isinstance(self.completed_iterations, bool)
+            or not isinstance(self.completed_iterations, int)
+            or self.completed_iterations < 0
+        ):
+            raise ProtocolValidationError(
+                "completed_iterations must be a non-negative integer or null"
+            )
+        if self.initialization_count is not None and (
+            isinstance(self.initialization_count, bool)
+            or not isinstance(self.initialization_count, int)
+            or self.initialization_count < 0
+        ):
+            raise ProtocolValidationError(
+                "initialization_count must be a non-negative integer or null"
+            )
+        if self.resume_count is not None and (
+            isinstance(self.resume_count, bool)
+            or not isinstance(self.resume_count, int)
+            or self.resume_count < 0
+        ):
+            raise ProtocolValidationError(
+                "resume_count must be a non-negative integer or null"
+            )
+        if self.generation_history is not None:
+            if not isinstance(self.generation_history, tuple):
+                raise ProtocolValidationError(
+                    "generation_history must be a tuple or null"
+                )
+            for index, generation in enumerate(self.generation_history):
+                _validate_positive_int(
+                    generation,
+                    f"generation_history[{index}]",
+                )
         validated_error = _validate_error(self.error)
         if self.status == "success":
             if validated_error is not None:
@@ -587,6 +745,45 @@ class StageReceipt:
                     raise ProtocolValidationError(
                         "successful case probe requires case_identity"
                     )
+            elif self.stage_type == "resumable_run":
+                if not all(
+                    (
+                        self.run_state_path,
+                        self.checkpoint_case_path,
+                        self.checkpoint_data_path,
+                    )
+                ):
+                    raise ProtocolValidationError(
+                        "successful resumable run requires state and checkpoint paths"
+                    )
+                run_paths = (
+                    Path(self.run_state_path),
+                    Path(self.checkpoint_case_path),
+                    Path(self.checkpoint_data_path),
+                )
+                if not all(path.is_absolute() for path in run_paths):
+                    raise ProtocolValidationError(
+                        "successful resumable run requires absolute artifact paths"
+                    )
+                if (
+                    self.requested_iterations is None
+                    or self.completed_iterations != self.requested_iterations
+                ):
+                    raise ProtocolValidationError(
+                        "successful resumable run must complete requested iterations"
+                    )
+                if self.initialization_count is None or self.initialization_count < 1:
+                    raise ProtocolValidationError(
+                        "successful resumable run requires initialization evidence"
+                    )
+                if self.resume_count is None:
+                    raise ProtocolValidationError(
+                        "successful resumable run requires resume_count"
+                    )
+                if not self.generation_history:
+                    raise ProtocolValidationError(
+                        "successful resumable run requires generation history"
+                    )
         elif validated_error is None:
             raise ProtocolValidationError("failed receipt requires structured error")
 
@@ -625,6 +822,18 @@ class StageReceipt:
                 else None
             ),
             "data_loaded": self.data_loaded,
+            "run_state_path": self.run_state_path,
+            "requested_iterations": self.requested_iterations,
+            "completed_iterations": self.completed_iterations,
+            "checkpoint_case_path": self.checkpoint_case_path,
+            "checkpoint_data_path": self.checkpoint_data_path,
+            "initialization_count": self.initialization_count,
+            "resume_count": self.resume_count,
+            "generation_history": (
+                list(self.generation_history)
+                if self.generation_history is not None
+                else None
+            ),
             "error": _validate_error(self.error),
         }
 
@@ -657,6 +866,14 @@ class StageReceipt:
                 "fluent_accepted_case",
                 "case_identity",
                 "data_loaded",
+                "run_state_path",
+                "requested_iterations",
+                "completed_iterations",
+                "checkpoint_case_path",
+                "checkpoint_data_path",
+                "initialization_count",
+                "resume_count",
+                "generation_history",
                 "error",
             },
             "StageReceipt",
@@ -687,6 +904,18 @@ class StageReceipt:
                 fluent_accepted_case=payload.get("fluent_accepted_case"),
                 case_identity=payload.get("case_identity"),
                 data_loaded=payload.get("data_loaded"),
+                run_state_path=payload.get("run_state_path"),
+                requested_iterations=payload.get("requested_iterations"),
+                completed_iterations=payload.get("completed_iterations"),
+                checkpoint_case_path=payload.get("checkpoint_case_path"),
+                checkpoint_data_path=payload.get("checkpoint_data_path"),
+                initialization_count=payload.get("initialization_count"),
+                resume_count=payload.get("resume_count"),
+                generation_history=(
+                    tuple(payload["generation_history"])
+                    if payload.get("generation_history") is not None
+                    else None
+                ),
                 error=payload.get("error"),
             )
         except KeyError as exc:
@@ -789,6 +1018,37 @@ class FilesystemJobSpool:
             return ClaimedJob(
                 path=destination,
                 original_name=source.name,
+                spec=spec,
+            )
+        return None
+
+    def resumable_running_job(self, worker_boot_id: str) -> ClaimedJob | None:
+        """Return the worker's already-claimed resumable job, if any.
+
+        A Fluent-generation restart must not move the job back through
+        ``incoming`` because that would create a second claim window. The
+        exclusive host lock guarantees that only the current worker boot can
+        execute the returned running record.
+        """
+
+        if not worker_boot_id.strip():
+            raise ValueError("worker_boot_id must be non-empty")
+        self.ensure_layout()
+        marker = f".{worker_boot_id}."
+        for path in sorted(self.running_dir.glob("*.json")):
+            if marker not in path.name:
+                continue
+            try:
+                spec = JobSpec.from_dict(
+                    json.loads(path.read_text(encoding="utf-8"))
+                )
+            except Exception:
+                continue
+            if spec.stage_type != "resumable_run":
+                continue
+            return ClaimedJob(
+                path=path,
+                original_name=f"{spec.job_id}.json",
                 spec=spec,
             )
         return None
@@ -1036,6 +1296,7 @@ class JobStageProcessor:
         *,
         health_client: HealthCheckStageClient | None = None,
         case_probe_client: Any | None = None,
+        resumable_run_client: Any | None = None,
         timestamp_factory: Callable[[], str] = utc_timestamp,
     ):
         self.spool = spool
@@ -1045,6 +1306,11 @@ class JobStageProcessor:
 
             case_probe_client = CaseIdentityProbeClient()
         self.case_probe_client = case_probe_client
+        if resumable_run_client is None:
+            from .resumable_run import ResumableRunStageClient
+
+            resumable_run_client = ResumableRunStageClient()
+        self.resumable_run_client = resumable_run_client
         self._timestamp_factory = timestamp_factory
 
     @staticmethod
@@ -1055,7 +1321,9 @@ class JobStageProcessor:
         return f"invalid-{uuid.uuid4().hex}"
 
     def process_next(self, context: HealthStageContext) -> JobState | None:
-        claim = self.spool.claim_next(context.worker_boot_id)
+        claim = self.spool.resumable_running_job(context.worker_boot_id)
+        if claim is None:
+            claim = self.spool.claim_next(context.worker_boot_id)
         if claim is None:
             return None
 
@@ -1089,6 +1357,9 @@ class JobStageProcessor:
         elif claim.spec.stage_type == "case_identity_probe":
             spec = claim.spec
             receipt = self.case_probe_client.execute(spec, context)
+        elif claim.spec.stage_type == "resumable_run":
+            spec = claim.spec
+            receipt = self.resumable_run_client.execute(spec, context)
         else:
             raise ProtocolValidationError(
                 f"No stage client for {claim.spec.stage_type!r}"

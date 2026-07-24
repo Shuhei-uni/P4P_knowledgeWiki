@@ -3,7 +3,7 @@
 ## Status
 
 - Date: `2026-07-24`
-- State: Phase 1 lifecycle and filesystem `health_check` protocol validated on Windows 11 with Fluent 2025 R2 and PyFluent 0.40.2; transactional read-only case identity probe implemented for the next live test
+- State: Phase 1 lifecycle, filesystem health protocol, and transactional case probe validated on Windows 11 with Fluent 2025 R2 and PyFluent 0.40.2; checkpointed `resumable_run` interruption/recovery is implemented and offline-tested for the next live forced-kill test
 - Primary implementation boundary: `PyAnsys/`
 - First delivery target: one recoverable, verified vertical slice on one Fluent version and one accepted parent case
 
@@ -12,11 +12,13 @@ Initial Phase 1 files:
 - `src/pyansys_fluent/host_worker.py`
 - `src/pyansys_fluent/job_protocol.py`
 - `src/pyansys_fluent/case_probe.py`
+- `src/pyansys_fluent/resumable_run.py`
 - `scripts/orchestration/fluent_host_worker.py`
 - `scripts/orchestration/submit_fluent_job.py`
 - `tests/test_host_worker.py`
 - `tests/test_job_protocol.py`
 - `tests/test_case_probe.py`
+- `tests/test_resumable_run.py`
 - `docs/FLUENT_HOST_WORKER.md`
 
 ## Repository Boundary Decision

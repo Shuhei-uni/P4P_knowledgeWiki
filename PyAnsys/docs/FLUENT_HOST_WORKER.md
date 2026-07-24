@@ -5,21 +5,25 @@
 Run this worker on the Windows computer where Fluent is installed. The worker owns one Fluent process, connects to its local gRPC server, publishes a heartbeat, and relaunches Fluent after a bounded process or connection failure.
 
 The worker includes a narrow local filesystem job protocol with two read-only
-stages:
+stages and one run stage:
 
 - `health_check` opens a separate short-lived PyFluent connection, checks gRPC
   health, records version evidence, and detaches;
 - `case_identity_probe` validates an absolute source case, makes a disposable
   worker-owned copy, asks Fluent to read only that copy, captures conservative
   identity evidence, and detaches.
+- `resumable_run` makes a disposable source copy, hybrid-initializes once,
+  iterates in fixed chunks, commits a verified case/data pair after every
+  chunk, and resumes the same claimed job on a fresh Fluent generation after a
+  process or gRPC loss.
 
-Both stage connections use `cleanup_on_exit=False`.
+All stage connections use `cleanup_on_exit=False`.
 
 It does not yet:
 
-- mutate a case or load a data file;
-- submit setup, run, or analysis stages;
-- checkpoint or resume a simulation;
+- mutate setup models, materials, boundaries, numerics, or injections;
+- submit setup-build or analysis stages;
+- verify a checkpoint by reopening it in an additional disposable session;
 - adopt a Fluent process left behind by a previously killed worker;
 - prove that Student or professional licensing will recover after every failure;
 - install itself as a Windows service.
@@ -31,10 +35,11 @@ Use only an empty disposable Fluent session for the first forced-crash test.
 - library: `src/pyansys_fluent/host_worker.py`
 - job protocol: `src/pyansys_fluent/job_protocol.py`
 - case probe: `src/pyansys_fluent/case_probe.py`
+- resumable run stage: `src/pyansys_fluent/resumable_run.py`
 - Windows-facing CLI: `scripts/orchestration/fluent_host_worker.py`
 - job submission CLI: `scripts/orchestration/submit_fluent_job.py`
-- offline tests: `tests/test_host_worker.py`, `tests/test_job_protocol.py`, and
-  `tests/test_case_probe.py`
+- offline tests: `tests/test_host_worker.py`, `tests/test_job_protocol.py`,
+  `tests/test_case_probe.py`, and `tests/test_resumable_run.py`
 - runtime state: `output/fluent_host_worker/`
 
 The runtime directory contains:
@@ -46,6 +51,8 @@ The runtime directory contains:
 - `jobs/incoming`, `jobs/running`, `jobs/completed`, and `jobs/failed`;
 - atomic stage receipts under `receipts`.
 - disposable case copies under `stage_artifacts/case_identity_probe`.
+- atomic run state and case/data checkpoints under
+  `stage_artifacts/resumable_run/<job-id>/`.
 
 Server-info files contain connection credentials. Keep the runtime directory private and do not commit or paste those files into logs or chat.
 
@@ -95,6 +102,8 @@ The current live baseline is:
   generation 1, or Fluent PID 9700;
 - live `health-wrong-generation` receipt failing as retryable, moving only to
   `jobs/failed`, and leaving Fluent alive on PID 9700.
+- the transactional `case_identity_probe` and its offline/live assertions
+  passing on the same university Fluent host.
 
 Do not replace these values with a different workstation's paths or versions
 when recording the job-protocol live test.
@@ -243,7 +252,7 @@ $Receipt
 The receipt must show:
 
 ```text
-schema_version: 2
+schema_version: 3
 stage_type: health_check
 status: success
 worker_boot_id: same value as $Before.worker_boot_id
@@ -417,7 +426,7 @@ $Receipt | ConvertTo-Json -Depth 20
 Required success evidence:
 
 ```text
-schema_version: 2
+schema_version: 3
 stage_type: case_identity_probe
 status: success
 worker_boot_id: same value as $Before.worker_boot_id
@@ -474,6 +483,206 @@ Now return to terminal 1 and press `Ctrl+C`. This stop is mandatory because the
 worker-owned Fluent session now contains the probed case in memory. Confirm
 `host-worker-status.json` reaches `state: stopped` before using that runtime
 directory for inspection or cleanup.
+
+## Forced Interruption And Resume Test
+
+This is a destructive test only for the worker-owned Fluent process in a new
+runtime directory. It does not modify the selected source case: the stage makes
+its own copy and writes all checkpoints below the runtime directory. Use a
+case-only `.cas.h5` that is known to hybrid-initialize and iterate successfully.
+Do not use a production worker or a runtime directory containing another job.
+
+The current checkpoint contract is deliberately conservative:
+
+1. Fluent writes a uniquely named `.cas.h5`.
+2. Fluent writes the matching `.dat.h5`.
+3. The worker confirms both files are non-empty and size-stable.
+4. Only then does an atomic `run-state.json` commit that pair.
+5. A new Fluent generation ignores every uncommitted or partial pair.
+
+In PowerShell terminal 1:
+
+```powershell
+Set-Location "C:\Users\Shuhei Yokkaichi\Documents\CFD\P4P_knowledgeWiki\PyAnsys"
+
+$FluentExe = "C:\Program Files\ANSYS Inc\v252\fluent\ntbin\win64\fluent.exe"
+$WorkDir = Join-Path (Get-Location) "output\fluent_host_worker_resume_test_001"
+if (Test-Path -LiteralPath $WorkDir) {
+  throw "Choose a new resume-test runtime directory; this one already exists."
+}
+New-Item -ItemType Directory -Path $WorkDir | Out-Null
+
+& ".\.venv\Scripts\python.exe" `
+  ".\scripts\orchestration\fluent_host_worker.py" `
+  --fluent-exe $FluentExe `
+  --work-dir $WorkDir `
+  --dimension 3 `
+  --precision double `
+  --processor-count 2 `
+  --health-timeout 15 `
+  --job-poll-interval 1 `
+  --max-restarts 3 `
+  --restart-window 3600
+```
+
+Wait for `host-worker-status.json` to report `state: running`. In PowerShell
+terminal 2, create a source copy and submit the run:
+
+```powershell
+Set-Location "C:\Users\Shuhei Yokkaichi\Documents\CFD\P4P_knowledgeWiki\PyAnsys"
+
+$WorkDir = Join-Path (Get-Location) "output\fluent_host_worker_resume_test_001"
+$StatusPath = Join-Path $WorkDir "host-worker-status.json"
+$OriginalCase = "C:\REPLACE\WITH\A\KNOWN\RUNNABLE\CASE.cas.h5"
+$JobId = "resumable-run-live-001"
+$TargetIterations = 500
+
+if (-not (Test-Path -LiteralPath $OriginalCase -PathType Leaf)) {
+  throw "Original case does not exist: $OriginalCase"
+}
+if (-not $OriginalCase.ToLowerInvariant().EndsWith(".cas.h5")) {
+  throw "This live test requires a .cas.h5 source."
+}
+
+$InputDir = Join-Path (Get-Location) "output\resumable_run_inputs"
+New-Item -ItemType Directory -Force -Path $InputDir | Out-Null
+$Stamp = Get-Date -Format "yyyyMMdd-HHmmss"
+$RunSource = Join-Path $InputDir "resumable-run-source-$Stamp.cas.h5"
+Copy-Item -LiteralPath $OriginalCase -Destination $RunSource
+$RunSource = (Resolve-Path -LiteralPath $RunSource).Path
+$SourceDigest = (Get-FileHash -LiteralPath $RunSource -Algorithm SHA256).Hash.ToLowerInvariant()
+$SourceSize = (Get-Item -LiteralPath $RunSource).Length
+
+$Before = Get-Content $StatusPath -Raw | ConvertFrom-Json
+if ($Before.state -ne "running") {
+  throw "Host worker is not running."
+}
+
+& ".\.venv\Scripts\python.exe" `
+  ".\scripts\orchestration\submit_fluent_job.py" `
+  --work-dir $WorkDir `
+  --stage resumable_run `
+  --job-id $JobId `
+  --case-path $RunSource `
+  --expected-file-size $SourceSize `
+  --expected-sha256 $SourceDigest `
+  --compute-sha256 `
+  --total-iterations $TargetIterations `
+  --chunk-iterations 25 `
+  --command-timeout 600 `
+  --max-resume-attempts 3 `
+  --timeout 3600
+```
+
+Wait until at least one nonzero checkpoint has been committed, but do not let
+the run finish. Then terminate only the Fluent PID owned by this test worker:
+
+```powershell
+$RunStatePath = Join-Path $WorkDir "stage_artifacts\resumable_run\$JobId\run-state.json"
+$CheckpointDeadline = (Get-Date).AddMinutes(20)
+$CheckpointBeforeKill = $null
+
+while ($true) {
+  if ((Get-Date) -ge $CheckpointDeadline) {
+    throw "Timed out waiting for a committed run checkpoint."
+  }
+  if (Test-Path -LiteralPath $RunStatePath -PathType Leaf) {
+    try {
+      $RunState = Get-Content $RunStatePath -Raw | ConvertFrom-Json
+      if ($RunState.status -eq "completed") {
+        throw "Run completed before interruption. Repeat with a larger iteration target."
+      }
+      if ($RunState.completed_iterations -ge 25) {
+        $CheckpointBeforeKill = $RunState.completed_iterations
+        break
+      }
+    } catch {
+      if ($_.Exception.Message -like "Run completed before interruption*") {
+        throw
+      }
+      # Atomic replacement can briefly race this read; retry.
+    }
+  }
+  Start-Sleep -Milliseconds 100
+}
+
+"Killing Fluent generation $($Before.generation), PID $($Before.fluent_pid), after committed checkpoint $CheckpointBeforeKill"
+Stop-Process -Id $Before.fluent_pid -Force
+```
+
+The stage client must record a retryable attempt, the supervisor must launch a
+new Fluent generation, and the same file must remain in `jobs\running` until
+the resumed calculation finishes. Wait for the terminal receipt:
+
+```powershell
+$ReceiptPath = Join-Path $WorkDir "receipts\$JobId.json"
+$CompletionDeadline = (Get-Date).AddHours(2)
+while (-not (Test-Path -LiteralPath $ReceiptPath -PathType Leaf)) {
+  if ((Get-Date) -ge $CompletionDeadline) {
+    throw "Timed out waiting for the resumable-run receipt."
+  }
+  Start-Sleep -Seconds 1
+}
+
+$Receipt = Get-Content $ReceiptPath -Raw | ConvertFrom-Json
+$FinalState = Get-Content $RunStatePath -Raw | ConvertFrom-Json
+$StatusDeadline = (Get-Date).AddSeconds(30)
+do {
+  $After = Get-Content $StatusPath -Raw | ConvertFrom-Json
+  if ($After.state -eq "running" -and $After.generation -ge $Receipt.fluent_generation) {
+    break
+  }
+  if ((Get-Date) -ge $StatusDeadline) {
+    throw "Host-worker status did not catch up with the completed receipt."
+  }
+  Start-Sleep -Milliseconds 250
+} while ($true)
+$Receipt | ConvertTo-Json -Depth 20
+$FinalState | ConvertTo-Json -Depth 20
+```
+
+Run the required assertions:
+
+```powershell
+$CompletedPath = Join-Path $WorkDir "jobs\completed\$JobId.json"
+$FailedPath = Join-Path $WorkDir "jobs\failed\$JobId.json"
+$SourceDigestAfter = (Get-FileHash -LiteralPath $RunSource -Algorithm SHA256).Hash.ToLowerInvariant()
+
+if ($Receipt.schema_version -ne 3) { throw "Unexpected receipt schema." }
+if ($Receipt.stage_type -ne "resumable_run") { throw "Wrong stage type." }
+if ($Receipt.status -ne "success") { throw "Resumable run failed." }
+if ($Receipt.completed_iterations -ne $TargetIterations) { throw "Iteration target was not reached." }
+if ($Receipt.initialization_count -ne 1) { throw "The resumed checkpoint was reinitialized." }
+if ($Receipt.resume_count -lt 1) { throw "No resume attempt was recorded." }
+if ($Receipt.generation_history.Count -lt 2) { throw "No generation transition was recorded." }
+if ($Receipt.generation_history[0] -ne $Before.generation) { throw "Initial generation mismatch." }
+if ($Receipt.generation_history[-1] -le $Before.generation) { throw "Fluent did not advance generation." }
+if (-not $Receipt.client_detached) { throw "Final stage client did not detach." }
+if (-not $Receipt.fluent_process_alive_after_detach) { throw "Final Fluent generation is not alive." }
+if ($FinalState.status -ne "completed") { throw "Run state is not completed." }
+if ($FinalState.completed_iterations -ne $TargetIterations) { throw "Run-state iteration count is wrong." }
+if ($FinalState.attempts.Count -lt 2) { throw "Run state has no interrupted/resumed attempts." }
+if ($FinalState.attempts[0].status -ne "retryable") { throw "First attempt was not classified retryable." }
+if ($FinalState.attempts[-1].status -ne "completed") { throw "Last attempt did not complete." }
+if ($FinalState.attempts[-1].resumed_from_iteration -le 0) { throw "Resume did not start from a committed checkpoint." }
+if (-not (Test-Path -LiteralPath $Receipt.checkpoint_case_path -PathType Leaf)) { throw "Final case checkpoint is missing." }
+if (-not (Test-Path -LiteralPath $Receipt.checkpoint_data_path -PathType Leaf)) { throw "Final data checkpoint is missing." }
+if ((Get-Item -LiteralPath $Receipt.checkpoint_case_path).Length -le 0) { throw "Final case checkpoint is empty." }
+if ((Get-Item -LiteralPath $Receipt.checkpoint_data_path).Length -le 0) { throw "Final data checkpoint is empty." }
+if (-not (Test-Path -LiteralPath $CompletedPath -PathType Leaf)) { throw "Completed job is missing." }
+if (Test-Path -LiteralPath $FailedPath) { throw "A failed terminal job was also produced." }
+if ($SourceDigestAfter -ne $SourceDigest) { throw "Source case was modified." }
+if ($After.worker_boot_id -ne $Before.worker_boot_id) { throw "Worker boot changed." }
+if ($After.generation -le $Before.generation) { throw "Worker status did not advance generation." }
+if ($After.fluent_pid -eq $Before.fluent_pid) { throw "Fluent PID did not change." }
+
+"PASS: Fluent was killed, relaunched, and resumed without reinitializing."
+```
+
+Return to terminal 1 and press `Ctrl+C`. Stopping this isolated worker is
+mandatory because its Fluent session contains the final resumed solution. Keep
+the runtime directory until the receipt, run state, generation logs, and final
+case/data pair have been reviewed.
 
 ## Forced Relaunch Test
 

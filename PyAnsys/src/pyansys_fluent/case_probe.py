@@ -73,9 +73,9 @@ def prepare_disposable_case_copy(
     """Validate a source case and create a separate worker-owned copy."""
 
     spec.validate()
-    if spec.stage_type != "case_identity_probe":
+    if spec.stage_type not in {"case_identity_probe", "resumable_run"}:
         raise CaseInputValidationError(
-            "prepare_disposable_case_copy requires case_identity_probe"
+            "prepare_disposable_case_copy requires a case-consuming stage"
         )
     assert spec.case_path is not None
 
@@ -127,7 +127,7 @@ def prepare_disposable_case_copy(
     artifact_dir = (
         Path(runtime_dir)
         / "stage_artifacts"
-        / "case_identity_probe"
+        / spec.stage_type
         / spec.job_id
         / uuid.uuid4().hex
     )

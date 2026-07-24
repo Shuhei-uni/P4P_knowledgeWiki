@@ -1,7 +1,7 @@
 # Current Status
 
 ## Snapshot
-- Date: 2026-07-22
+- Date: 2026-07-24
 - New EWF diagnostic: `010V2a` reached iteration `1963` in the loaded Fluent session, but the carrier report has a `110.3422 kg/s` (`57.54 %`) lower-liquid/whole-domain imbalance because no lower liquid drain appears in the extracted report. Continuity remains about `2.29e-3` and final `k`/epsilon residuals are strongly bouncy, so the branch remains diagnostic only. The project accepts retained liquid for this no-brine-outlet EWF check, but does not treat it as a closed separator balance. The retried six-injection DPM summary now has displayed fates, but those rows do not close to the tracked counts for the larger bins and no EWF splash-mass count exists; incomplete and unclassified populations remain explicit unresolved categories.
 - Phase: extraction-first Purnanto parity reset plus retained setup `07` archive context
 - Focus: use Python extraction to recover the actual Purnanto Fluent setup faithfully enough that manual reconstruction error stops driving the next branch decision.
@@ -26,6 +26,16 @@
 - Retained comparison branch: `../../../Setups/past/reported/07-pure-phase-split-actual-area.md` is comparison-only split-inlet context, not the main V&V parent.
 - Secondary comparison branch: `../../../Setups/past/archived/08a-steam-outlet-extension-student-trial.md` remains available if the downstream steam-outlet boundary-placement diagnostic is revived.
 - Archive guard: do not archive chats that were active on or after `2026-05-25`; older chats can be archived only after their durable outcomes are confirmed in the wiki and setup-report files.
+
+## Fluent Autonomy Implementation Status
+- Current architecture position: transition from Phase 1 host recovery into early Phase 2 capability probing.
+- Phase 1 core lifecycle evidence is live-validated on the university Windows Fluent host: the worker launched Fluent 2025 R2 headlessly, maintained gRPC connectivity, recovered from a forced process termination from generation `1` to generation `2`, and required no physical restart.
+- The filesystem-backed job/stage protocol is also live-validated for `health_check`: atomic job claiming, durable receipts, generation mismatch failure handling, cleanup-disabled client detachment, and survival of the worker-owned Fluent process all behaved as intended.
+- The transactional `case_identity_probe` and its full test procedure have now been reported as passing on the university Fluent host.
+- The next Phase 1 milestone, `resumable_run`, is implemented and offline-tested. It hybrid-initializes a disposable case once, commits a verified case/data pair after each iteration chunk, leaves an interrupted job nonterminal, requests a fresh Fluent generation, and resumes from only the last atomically committed pair without reinitialization.
+- Phase 1 is not yet live-complete against the original end-to-end acceptance test because the new forced interruption/resume procedure still needs to pass on the university Fluent host.
+- Phase 2 proper remains incomplete: recursive active Settings API discovery, case/model capability fingerprints, and a cache of verified version-specific setting paths still need to be built after the live case probe passes.
+- Phases 3–6 remain future work. The job schemas, spool, and receipts are foundations for the staged executor, but there is not yet a `SetupSpec`, controlled case mutation/readback/reopen flow, autonomous simulation runner, integrated analysis contract, or automatic next-experiment planner.
 
 ## What Is Done
 - Rough literature overview completed.
@@ -89,11 +99,14 @@
 - The main remaining archive-risk before removing reliance on older chats was the stale snapshot date on this page and ambiguous branch state in the setup-order dictionary; this cleanup pass addresses those two gaps.
 
 ## Immediate Next Actions
-1. Decide whether setup `08b` should keep treating the current flux result as a scoped steam-line carryover diagnostic or whether a stronger whole-domain mass-balance closure is required before any efficiency claim is written.
-2. Rerun the current active 6-bin DPM subset with a higher tracking budget because both the aggregate summary and the one-injection-at-a-time sample are dominated by `13012` incomplete particles and only `8` escaped particles.
-3. Treat the current per-bin attribution as provisional: the one-injection sampled escape is currently limited to `injection-5-micron`, but stronger interpretation still requires better tracking completion.
-4. Keep the omitted `562.70 um`, `844.06 um`, and `1631.84 um` bins explicitly out of the current interpretation unless a later pass intentionally reactivates them.
-5. Continue cleaning the automated post-processing/export path so the `08b` live results can be regenerated reproducibly without manual Fluent read/load steps.
+1. Run the documented `resumable_run` forced-kill test against a disposable copy of a known runnable `.cas.h5` on the university Fluent host, then stop that isolated worker after reviewing the receipt, run state, generation logs, and final checkpoint pair.
+2. Confirm that the live receipt records at least two Fluent generations, exactly one initialization, at least one resume, and the requested final iteration count.
+3. If the live forced-kill test passes, close the Phase 1 recovery gate and implement Phase 2's recursive, read-only capability snapshot with active children, commands, object names, allowed values, active/read-only state, version data, and a case/model fingerprint.
+4. Decide whether setup `08b` should keep treating the current flux result as a scoped steam-line carryover diagnostic or whether a stronger whole-domain mass-balance closure is required before any efficiency claim is written.
+5. Rerun the current active 6-bin DPM subset with a higher tracking budget because both the aggregate summary and the one-injection-at-a-time sample are dominated by `13012` incomplete particles and only `8` escaped particles.
+6. Treat the current per-bin attribution as provisional: the one-injection sampled escape is currently limited to `injection-5-micron`, but stronger interpretation still requires better tracking completion.
+7. Keep the omitted `562.70 um`, `844.06 um`, and `1631.84 um` bins explicitly out of the current interpretation unless a later pass intentionally reactivates them.
+8. Continue cleaning the automated post-processing/export path so the `08b` live results can be regenerated reproducibly without manual Fluent read/load steps.
 
 ## Roadmap Link
 - Run-efficiency roadmap: `../project/roadmap.md`

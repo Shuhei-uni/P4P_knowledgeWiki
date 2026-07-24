@@ -557,3 +557,21 @@
 - purpose: keep the executable autonomy architecture in `PyAnsys` while adding one project-roadmap pointer to its staged contracts, host recovery, transactional build, resumable run, analysis, and decision-gate plan.
 - assumptions introduced/removed: introduced the implementation choice to use setup `08b` to setup `08c` carrier-only loading as the first automation/reproducibility slice; no new CFD result or setup lineage was created.
 - next immediate action: implement the offline contracts/state-store test harness, then confirm the exact Fluent build, PyFluent version, parent artifact, and controlled inlet delta before any live mutation.
+
+## [2026-07-24] progress-update | Locate Fluent autonomy work between Phases 1 and 2
+- files created/updated: `wiki/progress/current-status.md`, `wiki/log.md`
+- purpose: map the validated Fluent host lifecycle, live health-job protocol, and implemented case-identity probe against the six-phase autonomous-loop plan.
+- what changed since last update: recorded the successful Fluent 2025 R2 forced-relaunch test and live filesystem health-stage tests; recorded that the transactional `case_identity_probe` is implemented and offline-tested but still awaits its university-host live test.
+- assumptions introduced/removed: removed any implication that process relaunch alone completes Phase 1; full Phase 1 completion still requires checkpointed iteration, forced interruption, resume, and a verified final run manifest.
+- current status: the project is transitioning from the validated core of Phase 1 into early Phase 2; the job protocol is operational, while capability-tree discovery and all mutation/run/analysis/planning phases remain incomplete.
+- blockers: no live `case_identity_probe` result has yet been reported, and checkpoint/resume has deliberately not been implemented.
+- next immediate action: run the documented disposable-copy case probe on the university Fluent host and stop that worker afterward; if it passes, implement the recursive read-only capability snapshot.
+
+## [2026-07-24] progress-update | Implement checkpointed Fluent interruption and resume
+- files created/updated: `../../PyAnsys/src/pyansys_fluent/resumable_run.py`, `../../PyAnsys/src/pyansys_fluent/job_protocol.py`, `../../PyAnsys/src/pyansys_fluent/host_worker.py`, `../../PyAnsys/src/pyansys_fluent/case_probe.py`, `../../PyAnsys/scripts/orchestration/submit_fluent_job.py`, `../../PyAnsys/tests/test_resumable_run.py`, `../../PyAnsys/tests/test_host_worker.py`, `../../PyAnsys/docs/FLUENT_HOST_WORKER.md`, `../../PyAnsys/docs/AUTONOMOUS_FLUENT_LOOP_PLAN.md`, `../../PyAnsys/README.md`, `wiki/progress/current-status.md`, `wiki/log.md`
+- purpose: record the passed live case-probe gate and add the first transactional run stage that can recover the same claimed job after a Fluent-generation loss.
+- what changed since last update: added fixed-chunk iteration, verified case/data checkpoint pairs, atomic run state, nonterminal retry classification, worker relaunch signalling, resume from the latest committed pair, monotonic iteration accounting, and a final receipt gate; the offline suite now covers the forced interruption/resume path.
+- assumptions introduced/removed: retired the earlier blocker that checkpoint/resume was unimplemented; retained Phase 1 as open until the documented forced-kill test passes on Fluent 2025 R2. The current checkpoint verification proves local existence, nonzero size, and size stability, but does not yet use a separate fresh session to reopen every pair.
+- current status: the live case probe is reported passing, and interruption/resume is ready for the university-host live test.
+- blockers: the forced-kill run has not yet been executed against real Fluent, and fresh-session checkpoint reopen verification remains deferred.
+- next immediate action: run `resumable-run-live-001`, kill the worker-owned Fluent PID after a committed nonzero checkpoint, and verify generation transition, one initialization, resumed iteration completion, source immutability, and terminal receipt commitment.

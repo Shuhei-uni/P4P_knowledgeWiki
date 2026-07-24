@@ -22,9 +22,9 @@ from pyansys_fluent.job_protocol import (  # noqa: E402
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
-            "Submit a read-only job to a running local Fluent host worker. The "
-            "current worker boot ID and Fluent generation are captured by "
-            "default to prevent execution against a different process."
+            "Submit a job to a running local Fluent host worker. The current "
+            "worker boot ID and Fluent generation are captured by default to "
+            "prevent execution against an unintended process."
         )
     )
     parser.add_argument(
@@ -34,9 +34,9 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--stage",
-        choices=("health_check", "case_identity_probe"),
+        choices=("health_check", "case_identity_probe", "resumable_run"),
         default="health_check",
-        help="Read-only stage to execute. Default: health_check.",
+        help="Stage to execute. Default: health_check.",
     )
     parser.add_argument(
         "--job-id",
@@ -86,6 +86,30 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Record a SHA-256 digest even when no expected digest is supplied.",
     )
+    parser.add_argument(
+        "--total-iterations",
+        type=int,
+        default=None,
+        help="Total iteration target for resumable_run.",
+    )
+    parser.add_argument(
+        "--chunk-iterations",
+        type=int,
+        default=None,
+        help="Iterations per committed checkpoint for resumable_run.",
+    )
+    parser.add_argument(
+        "--command-timeout",
+        type=float,
+        default=None,
+        help="Maximum seconds for one Fluent command in resumable_run.",
+    )
+    parser.add_argument(
+        "--max-resume-attempts",
+        type=int,
+        default=None,
+        help="Maximum fresh-generation retries after the initial run attempt.",
+    )
     return parser
 
 
@@ -124,28 +148,71 @@ def main() -> int:
             file=sys.stderr,
         )
         return 2
-    if args.stage == "case_identity_probe" and args.allow_any_generation:
+    if (
+        args.stage in {"case_identity_probe", "resumable_run"}
+        and args.allow_any_generation
+    ):
         print(
-            "case_identity_probe must be pinned to a worker boot and generation.",
+            f"{args.stage} must be pinned to a worker boot and generation.",
             file=sys.stderr,
         )
         return 2
-    if args.stage == "case_identity_probe" and not args.case_path.strip():
-        print("case_identity_probe requires --case-path.", file=sys.stderr)
+    if (
+        args.stage in {"case_identity_probe", "resumable_run"}
+        and not args.case_path.strip()
+    ):
+        print(f"{args.stage} requires --case-path.", file=sys.stderr)
         return 2
     if args.stage == "health_check" and (
         args.case_path.strip()
         or args.expected_file_size is not None
         or args.expected_sha256.strip()
         or args.compute_sha256
+        or args.total_iterations is not None
+        or args.chunk_iterations is not None
+        or args.command_timeout is not None
+        or args.max_resume_attempts is not None
     ):
         print(
-            "Case input arguments are valid only for case_identity_probe.",
+            "Case and run input arguments are not valid for health_check.",
+            file=sys.stderr,
+        )
+        return 2
+    if args.stage == "case_identity_probe" and any(
+        value is not None
+        for value in (
+            args.total_iterations,
+            args.chunk_iterations,
+            args.command_timeout,
+            args.max_resume_attempts,
+        )
+    ):
+        print(
+            "Run input arguments are valid only for resumable_run.",
+            file=sys.stderr,
+        )
+        return 2
+    if args.stage == "resumable_run" and any(
+        value is None
+        for value in (
+            args.total_iterations,
+            args.chunk_iterations,
+            args.command_timeout,
+            args.max_resume_attempts,
+        )
+    ):
+        print(
+            "resumable_run requires --total-iterations, --chunk-iterations, "
+            "--command-timeout, and --max-resume-attempts.",
             file=sys.stderr,
         )
         return 2
 
-    prefix = "health" if args.stage == "health_check" else "case-probe"
+    prefix = {
+        "health_check": "health",
+        "case_identity_probe": "case-probe",
+        "resumable_run": "run",
+    }[args.stage]
     job_id = args.job_id.strip() or f"{prefix}-{uuid.uuid4().hex}"
     expected_boot_id = args.expected_worker_boot_id.strip() or boot_id
     expected_generation = (
@@ -167,6 +234,10 @@ def main() -> int:
         expected_file_size_bytes=args.expected_file_size,
         expected_sha256=args.expected_sha256.strip() or None,
         compute_sha256=args.compute_sha256,
+        total_iterations=args.total_iterations,
+        chunk_iterations=args.chunk_iterations,
+        command_timeout_seconds=args.command_timeout,
+        max_resume_attempts=args.max_resume_attempts,
     )
     try:
         path = FilesystemJobSpool(work_dir).submit(spec)
@@ -180,6 +251,9 @@ def main() -> int:
     print(f"Expected Fluent generation: {spec.expected_fluent_generation}")
     if spec.case_path is not None:
         print(f"Requested case path: {spec.case_path}")
+    if spec.stage_type == "resumable_run":
+        print(f"Iteration target: {spec.total_iterations}")
+        print(f"Checkpoint chunk: {spec.chunk_iterations}")
     return 0
 
 

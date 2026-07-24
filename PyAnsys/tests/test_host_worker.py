@@ -13,6 +13,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 from pyansys_fluent.host_worker import (  # noqa: E402
     AtomicJsonStatusStore,
     ExclusiveHostLock,
+    FluentGenerationRetryRequested,
     FluentHostWorker,
     FluentProcessManager,
     HostWorkerConfig,
@@ -341,6 +342,52 @@ class DiesAfterVersionSession(SequenceSession):
 
 
 class WorkerRestartTests(unittest.TestCase):
+    def test_retryable_run_signal_relaunches_before_resuming_job(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            executable = root / "fluent.exe"
+            executable.write_text("", encoding="utf-8")
+            config = HostWorkerConfig(
+                fluent_exe=executable,
+                work_dir=root,
+                health_interval_seconds=0.001,
+                heartbeat_interval_seconds=0.001,
+                job_poll_interval_seconds=0.001,
+                poll_interval_seconds=0.001,
+                restart_delay_seconds=0,
+                max_restarts=2,
+            )
+            stop_event = threading.Event()
+            manager = FakeProcessManager(root)
+
+            class RetryThenCompleteProcessor:
+                def __init__(self) -> None:
+                    self.generations: list[int] = []
+
+                def process_next(self, context) -> None:
+                    self.generations.append(context.fluent_generation)
+                    if len(self.generations) == 1:
+                        raise FluentGenerationRetryRequested(
+                            "durable retryable run state committed"
+                        )
+                    stop_event.set()
+
+            processor = RetryThenCompleteProcessor()
+            sessions = [SequenceSession([True]), SequenceSession([True])]
+            worker = FluentHostWorker(
+                config,
+                process_manager=manager,
+                connect_factory=lambda _path, _config: sessions.pop(0),
+                job_processor=processor,
+                stop_event=stop_event,
+            )
+
+            worker.run()
+
+            self.assertEqual(processor.generations, [1, 2])
+            self.assertEqual([item.generation for item in manager.launched], [1, 2])
+            self.assertEqual(manager.stopped, [1, 2])
+
     def test_worker_polls_jobs_against_current_owned_generation(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

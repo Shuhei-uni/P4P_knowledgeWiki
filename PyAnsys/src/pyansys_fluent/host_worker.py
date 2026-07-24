@@ -42,6 +42,10 @@ class HostWorkerAlreadyRunning(RuntimeError):
     """Raised when another worker owns the host lock."""
 
 
+class FluentGenerationRetryRequested(RuntimeError):
+    """Raised after durable run state requests a fresh Fluent generation."""
+
+
 @dataclass(frozen=True)
 class HostWorkerConfig:
     """Validated launch and monitoring configuration for one Fluent host."""
@@ -905,6 +909,12 @@ class FluentHostWorker:
                             process_is_alive=lambda: managed.is_alive,
                         )
                     )
+                except FluentGenerationRetryRequested:
+                    # The run stage has already committed its retryable attempt
+                    # state. Propagate to the outer lifecycle so this
+                    # generation is stopped and the same running job can resume
+                    # against the next server-info file.
+                    raise
                 except Exception as exc:
                     # A spool/receipt failure must be visible, but it must not
                     # restart an otherwise healthy Fluent generation.
