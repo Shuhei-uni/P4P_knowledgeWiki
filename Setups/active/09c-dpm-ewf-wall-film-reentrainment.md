@@ -2,15 +2,15 @@
 
 ## Setup metadata
 
-| Field | Value |
-|---|---|
-| Setup ID | `09c` |
-| Lifecycle | `active` |
-| Role | two-way DPM coupling branch |
-| Parent setup | [09b](../past/reported/09b-rsm-dpm-split-inlet-accuracy.md) |
-| Evidence-use label | active coupling experiment; results pending |
-| Outcome | needs follow-up |
-| Linked report | none yet |
+| Field              | Value                                                       |
+| ------------------ | ----------------------------------------------------------- |
+| Setup ID           | `09c`                                                       |
+| Lifecycle          | `active`                                                    |
+| Role               | two-way DPM coupling branch                                 |
+| Parent setup       | [09b](../past/reported/09b-rsm-dpm-split-inlet-accuracy.md) |
+| Evidence-use label | active coupling experiment; results pending                 |
+| Outcome            | needs follow-up                                             |
+| Linked report      | none yet                                                    |
 
 Legacy filename note:
 

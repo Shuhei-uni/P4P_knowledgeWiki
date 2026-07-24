@@ -551,3 +551,9 @@
 - current status: future setup families `10` and `11` are now concretely defined; active branches remain `08c` and `09c`.
 - blockers: `08c` and `09c` results are still pending; EWF wall-zone selection, timestep, and re-entrainment closure still require Fluent-side confirmation.
 - next action: prepare the parent `09c` case and launch independent `10a`, `10b`, and `10c` cases with the same loading and injection payload.
+
+## [2026-07-24] refactor | Link autonomous Fluent loop implementation plan
+- files created/updated: `../../PyAnsys/docs/AUTONOMOUS_FLUENT_LOOP_PLAN.md`, `../../PyAnsys/README.md`, `wiki/project/roadmap.md`, `wiki/log.md`
+- purpose: keep the executable autonomy architecture in `PyAnsys` while adding one project-roadmap pointer to its staged contracts, host recovery, transactional build, resumable run, analysis, and decision-gate plan.
+- assumptions introduced/removed: introduced the implementation choice to use setup `08b` to setup `08c` carrier-only loading as the first automation/reproducibility slice; no new CFD result or setup lineage was created.
+- next immediate action: implement the offline contracts/state-store test harness, then confirm the exact Fluent build, PyFluent version, parent artifact, and controlled inlet delta before any live mutation.

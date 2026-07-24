@@ -94,6 +94,8 @@ The immediate job is:
   - `../vnv/signoff-log.md`
 - Automation/extraction authority:
   - `../../PyAnsys/AGENTS.md`
+- Autonomous Fluent loop implementation plan:
+  - `../../../PyAnsys/docs/AUTONOMOUS_FLUENT_LOOP_PLAN.md`
 - `Inferred`: this roadmap should name which setup branch is currently trustworthy enough to enter V&V, while `PyAnsys` owns the machine-readable parity/extraction workflow and the CFD wiki owns the reusable V&V method.
 
 ## Baseline Acceptance Gate For Setup 08b

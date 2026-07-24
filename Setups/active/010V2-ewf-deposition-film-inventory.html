@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Setup 010V2 — EWF deposition and film-inventory control">
+  <title>010V2 · EWF Deposition and Film-Inventory Control</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #16231f;
+      --muted: #5c6b65;
+      --paper: #f3f0e8;
+      --panel: #fffdf8;
+      --panel-2: #edf3ef;
+      --line: #d2d9d4;
+      --green: #226b52;
+      --green-2: #174b3a;
+      --green-soft: #e1f0e8;
+      --amber: #9b5a16;
+      --amber-soft: #fff0d8;
+      --red: #963a33;
+      --red-soft: #fbe7e4;
+      --blue: #2f6376;
+      --blue-soft: #e2f0f4;
+      --shadow: 0 18px 55px rgba(24, 51, 42, .10);
+      --radius: 16px;
+    }
+
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --ink: #e8eee9;
+      --muted: #afbbb5;
+      --paper: #111714;
+      --panel: #19211d;
+      --panel-2: #202c26;
+      --line: #35433c;
+      --green: #74c7a2;
+      --green-2: #91dbb9;
+      --green-soft: #213c30;
+      --amber: #efb46d;
+      --amber-soft: #3b2b18;
+      --red: #ee9c94;
+      --red-soft: #3f2422;
+      --blue: #87c8dc;
+      --blue-soft: #1e333b;
+      --shadow: 0 18px 55px rgba(0, 0, 0, .25);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+    a { color: var(--green); text-underline-offset: .2em; }
+    code {
+      padding: .12rem .34rem;
+      border-radius: .35rem;
+      background: var(--panel-2);
+      color: var(--green-2);
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-size: .88em;
+    }
+    h1, h2, h3 { line-height: 1.2; letter-spacing: -.025em; }
+    h2 {
+      margin: 3.2rem 0 1.1rem;
+      padding-bottom: .55rem;
+      border-bottom: 1px solid var(--line);
+      font-size: clamp(1.45rem, 3vw, 2rem);
+    }
+    h3 { margin-top: 1.6rem; }
+    button {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: .58rem .9rem;
+      background: var(--panel);
+      color: var(--ink);
+      font: inherit;
+      font-size: .84rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    button:hover { border-color: var(--green); color: var(--green); }
+    button:focus-visible, a:focus-visible, summary:focus-visible, input:focus-visible {
+      outline: 3px solid color-mix(in srgb, var(--green) 55%, transparent);
+      outline-offset: 3px;
+    }
+
+    .topbar {
+      position: sticky;
+      z-index: 20;
+      top: 0;
+      display: flex;
+      gap: .7rem;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 58px;
+      padding: .55rem clamp(1rem, 4vw, 2.4rem);
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--paper) 88%, transparent);
+      backdrop-filter: blur(14px);
+    }
+    .brand {
+      display: flex;
+      gap: .65rem;
+      align-items: center;
+      font-weight: 850;
+      letter-spacing: -.02em;
+    }
+    .brand-mark {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border-radius: 10px;
+      background: var(--green);
+      color: var(--paper);
+      font-size: .72rem;
+      letter-spacing: .04em;
+    }
+    .actions { display: flex; flex-wrap: wrap; gap: .45rem; justify-content: flex-end; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 240px minmax(0, 960px);
+      gap: clamp(1.5rem, 4vw, 3.5rem);
+      justify-content: center;
+      padding: 2rem clamp(1rem, 4vw, 3rem) 5rem;
+    }
+    .toc {
+      position: sticky;
+      top: 82px;
+      align-self: start;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: 0 8px 30px rgba(24, 51, 42, .05);
+    }
+    .toc strong {
+      display: block;
+      margin-bottom: .65rem;
+      color: var(--muted);
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .toc a {
+      display: block;
+      margin: .18rem 0;
+      padding: .4rem .55rem;
+      border-radius: .45rem;
+      color: var(--muted);
+      font-size: .86rem;
+      text-decoration: none;
+    }
+    .toc a:hover { background: var(--panel-2); color: var(--green); }
+    .toc-progress { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+    .progress-track {
+      overflow: hidden;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--panel-2);
+    }
+    .progress-bar {
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--green);
+      transition: width .25s ease;
+    }
+    .progress-label { margin: .45rem 0 0; color: var(--muted); font-size: .78rem; }
+
+    main { min-width: 0; }
+    .hero {
+      overflow: hidden;
+      position: relative;
+      padding: clamp(1.55rem, 5vw, 3.8rem);
+      border: 1px solid color-mix(in srgb, var(--green) 35%, var(--line));
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 92% 8%, color-mix(in srgb, var(--green) 20%, transparent), transparent 34%),
+        linear-gradient(145deg, var(--panel) 0%, var(--green-soft) 150%);
+      box-shadow: var(--shadow);
+    }
+    .eyebrow {
+      margin: 0 0 .65rem;
+      color: var(--green);
+      font-size: .76rem;
+      font-weight: 850;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(2.15rem, 6vw, 4.6rem);
+    }
+    .lede {
+      max-width: 760px;
+      margin: 1.15rem 0 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.16rem);
+    }
+    .badges {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+      gap: .75rem;
+      margin-top: 1.65rem;
+    }
+    .badge {
+      padding: .8rem .9rem;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: color-mix(in srgb, var(--panel) 80%, transparent);
+    }
+    .badge small {
+      display: block;
+      color: var(--muted);
+      font-size: .66rem;
+      font-weight: 800;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+    .badge strong { display: block; margin-top: .1rem; font-size: .9rem; }
+
+    .lineage {
+      display: grid;
+      grid-template-columns: 1fr auto 1.7fr;
+      gap: .8rem;
+      align-items: center;
+      margin: 1.1rem 0;
+    }
+    .node, .card {
+      padding: 1rem 1.1rem;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: var(--panel);
+    }
+    .node small {
+      display: block;
+      color: var(--muted);
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .arrow { color: var(--green); font-size: 1.35rem; font-weight: 900; }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: .8rem;
+      margin: 1rem 0;
+    }
+    .card h3 { margin: .1rem 0 .45rem; font-size: 1rem; }
+    .card p, .card ul { margin-bottom: .2rem; }
+
+    .callout {
+      margin: 1.25rem 0;
+      padding: 1rem 1.15rem;
+      border: 1px solid;
+      border-left-width: 6px;
+      border-radius: 12px;
+    }
+    .callout strong {
+      display: block;
+      margin-bottom: .25rem;
+      font-size: .93rem;
+      letter-spacing: .01em;
+    }
+    .callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+    .info { border-color: color-mix(in srgb, var(--blue) 55%, var(--line)); background: var(--blue-soft); }
+    .caution { border-color: color-mix(in srgb, var(--amber) 55%, var(--line)); background: var(--amber-soft); }
+    .stop { border-color: color-mix(in srgb, var(--red) 55%, var(--line)); background: var(--red-soft); }
+    .success { border-color: color-mix(in srgb, var(--green) 55%, var(--line)); background: var(--green-soft); }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 1rem 0;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel);
+    }
+    table { width: 100%; border-collapse: collapse; font-size: .91rem; }
+    th {
+      position: sticky;
+      top: 57px;
+      z-index: 2;
+      background: var(--panel-2);
+      color: var(--green-2);
+      text-align: left;
+    }
+    th, td { padding: .7rem .8rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+    tr:last-child td { border-bottom: 0; }
+    tbody tr:hover { background: color-mix(in srgb, var(--green-soft) 55%, transparent); }
+
+    .step-tools { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0; }
+    details.step {
+      overflow: hidden;
+      margin: .82rem 0;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel);
+    }
+    details.step summary {
+      display: flex;
+      gap: .8rem;
+      align-items: center;
+      padding: 1rem 1.15rem;
+      background: var(--panel-2);
+      color: var(--green-2);
+      cursor: pointer;
+      font-weight: 850;
+      list-style: none;
+    }
+    details.step summary::-webkit-details-marker { display: none; }
+    details.step summary::before {
+      content: "+";
+      display: grid;
+      flex: 0 0 1.6rem;
+      height: 1.6rem;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--green);
+      color: var(--paper);
+      font-size: 1rem;
+    }
+    details.step[open] summary::before { content: "−"; }
+    .step-body { padding: .45rem 1.35rem 1rem; }
+    .step-body li { margin: .42rem 0; }
+
+    .gate-list { display: grid; gap: .68rem; margin: 1rem 0; }
+    .gate {
+      display: grid;
+      grid-template-columns: 1.25rem 1fr;
+      gap: .7rem;
+      align-items: start;
+      padding: .82rem .9rem;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background: var(--panel);
+      cursor: pointer;
+    }
+    .gate:hover { border-color: var(--green); }
+    .gate:has(input:checked) { background: var(--green-soft); }
+    .gate input {
+      width: 1.05rem;
+      height: 1.05rem;
+      margin-top: .28rem;
+      accent-color: var(--green);
+    }
+    .gate input:checked + span { text-decoration: line-through; text-decoration-color: var(--green); }
+
+    .evidence {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: .65rem;
+      padding: 0;
+      list-style: none;
+    }
+    .evidence a {
+      display: block;
+      height: 100%;
+      padding: .9rem 1rem;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background: var(--panel);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .evidence a:hover { border-color: var(--green); transform: translateY(-1px); }
+    .footer-note {
+      margin-top: 3rem;
+      padding: 1rem 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .86rem;
+    }
+
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; padding-top: 1rem; }
+      .toc { position: static; max-height: none; }
+      .toc nav { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+      .toc-progress { display: none; }
+    }
+    @media (max-width: 620px) {
+      .topbar { align-items: flex-start; }
+      .brand span:last-child { display: none; }
+      .actions button:nth-child(2), .actions button:nth-child(3) { display: none; }
+      .lineage { grid-template-columns: 1fr; }
+      .arrow { justify-self: center; transform: rotate(90deg); }
+      .hero { border-radius: 18px; }
+      th { top: 57px; }
+    }
+    @media print {
+      :root {
+        --paper: #fff;
+        --panel: #fff;
+        --panel-2: #f2f5f3;
+        --ink: #111;
+        --muted: #444;
+        --line: #bbb;
+      }
+      .topbar, .toc, .step-tools { display: none !important; }
+      .layout { display: block; max-width: none; padding: 0; }
+      .hero { box-shadow: none; break-after: avoid; }
+      details.step > .step-body { display: block !important; }
+      details.step { break-inside: avoid; }
+      h2 { break-after: avoid; }
+      a { color: #111; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">EWF</span>
+      <span>Setup 010V2</span>
+    </div>
+    <div class="actions" aria-label="Document actions">
+      <button type="button" id="theme-button" title="Switch light/dark theme">Theme</button>
+      <button type="button" id="expand-button">Open all steps</button>
+      <button type="button" id="print-button">Print / PDF</button>
+      <button type="button" id="reset-button">Reset checks</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="toc" aria-label="Table of contents">
+      <strong>On this page</strong>
+      <nav>
+        <a href="#overview">Overview</a>
+        <a href="#objective">1 · Objective</a>
+        <a href="#inheritance">2 · Inherited setup</a>
+        <a href="#settings">3 · EWF settings</a>
+        <a href="#procedure">4 · Build procedure</a>
+        <a href="#monitors">5 · Monitors</a>
+        <a href="#gate">6 · Acceptance gate</a>
+        <a href="#evidence">Linked evidence</a>
+      </nav>
+      <div class="toc-progress">
+        <strong>Acceptance progress</strong>
+        <div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progress-bar"></div></div>
+        <p class="progress-label" id="progress-label">0 of 8 gates checked</p>
+      </div>
+    </aside>
+
+    <main>
+      <section class="hero" id="overview">
+        <p class="eyebrow">Fluent setup control · 010V2</p>
+        <h1>EWF Deposition and Film-Inventory Control</h1>
+        <p class="lede">
+          Determine whether the Skoog-style allocated DPM population deposits into a
+          bounded Eulerian wall film and drains without splash, edge separation, or
+          particle stripping.
+        </p>
+        <div class="badges">
+          <div class="badge"><small>Lifecycle</small><strong>Active</strong></div>
+          <div class="badge"><small>Role</small><strong>Clean EWF stability control</strong></div>
+          <div class="badge"><small>Evidence</small><strong>Diagnostic until gates pass</strong></div>
+          <div class="badge"><small>Outcome</small><strong>Needs follow-up</strong></div>
+        </div>
+      </section>
+
+      <section aria-labelledby="overview-title">
+        <h2 id="overview-title">Setup at a glance</h2>
+        <div class="lineage">
+          <div class="node">
+            <small>Parent</small>
+            <a href="09cV2-skoog-partition-injection-control.md">09cV2 · Skoog allocation control</a>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+          <div class="node">
+            <small>Controlled changes</small>
+            EWF model and wall coupling, transient film solution, wall-film boundary
+            condition, and staged global-DPM source coupling.
+          </div>
+        </div>
+
+        <div class="card-grid">
+          <article class="card">
+            <h3>Mechanisms on</h3>
+            <p>EWF momentum, gravity, surface shear, verified film material, and EWF–DPM coupling.</p>
+          </article>
+          <article class="card">
+            <h3>Mechanisms isolated</h3>
+            <p>Splash, sharp-edge treatment, separation, stripping, phase/VOF coupling, and initial wall momentum coupling stay off.</p>
+          </article>
+          <article class="card">
+            <h3>Branch rule</h3>
+            <p>Global DPM interaction stays <code>Off</code> through <code>010V2d</code>. Only <code>010V2d-2</code> turns it <code>On</code>.</p>
+          </article>
+        </div>
+
+        <h3>Child mechanism branches</h3>
+        <ul>
+          <li><a href="010V2a-ewf-splash.md">010V2a · splash</a></li>
+          <li><a href="010V2b-ewf-edge-separation.md">010V2b · edge separation</a></li>
+          <li><a href="010V2c-ewf-particle-stripping.md">010V2c · stripping</a></li>
+          <li><a href="010V2d-ewf-combined-interaction.md">010V2d · combined interaction</a></li>
+          <li><a href="../future/010V2d-2-ewf-combined-global-dpm.md">010V2d-2 · coupled combined</a></li>
+        </ul>
+      </section>
+
+      <section id="objective" aria-labelledby="objective-title">
+        <h2 id="objective-title">1 · Objective</h2>
+        <p>
+          Determine whether the Skoog-style allocated DPM population deposits into a
+          bounded Eulerian wall film and drains without enabling splash, edge
+          separation, or particle stripping. This is the clean control for all later
+          <code>010V2</code> interaction branches.
+        </p>
+        <p>
+          The first execution is an EWF stability baseline: EWF–DPM coupling is
+          enabled so injected droplets can deposit into the film, while global
+          <code>DPM Interaction with Continuous Phase</code> is disabled. The resulting
+          film behavior is the uncoupled global-DPM control; <code>010V2d-2</code> is
+          reserved for the corresponding combined case with global DPM interaction
+          enabled.
+        </p>
+        <aside class="callout success">
+          <strong>Interpretation target</strong>
+          Observe deposition, storage, and drainage in isolation before attributing
+          behavior to splash, edge separation, stripping, or two-way global DPM feedback.
+        </aside>
+      </section>
+
+      <section id="inheritance" aria-labelledby="inheritance-title">
+        <h2 id="inheritance-title">2 · Inherited setup</h2>
+        <p>
+          Start from a saved, read-back-verified <code>09cV2</code> case/data pair.
+          Do not start from the existing <code>10a</code> artifact because it is
+          splash-enabled and uses the old branch identity.
+        </p>
+
+        <h3>Keep unchanged</h3>
+        <ul>
+          <li>Geometry, mesh, split inlet topology, outlet boundaries, gravity, and operating pressure.</li>
+          <li><code>Mixture</code>, phase definitions, carrier materials, <code>RNG k-epsilon</code>, and Energy off.</li>
+          <li>The <code>09cV2</code> liquid/DPM allocation and EWF-compatible DPM material names.</li>
+          <li>Injection diameters, flows, velocities, particle count, drag, rotation, and stochastic settings.</li>
+          <li>DPM outlet and ordinary-wall fates unless the wall must change to <code>wall-film</code> for coupling.</li>
+        </ul>
+
+        <aside class="callout stop">
+          <strong>Do not inherit</strong>
+          The failed <code>10a</code> data field, its <code>water-liquid</code> DPM
+          material, or its splash/stripping state.
+        </aside>
+
+        <h3>Intentional live-case controls and the single DPM correction</h3>
+        <p>
+          The server-4 readback confirmed that the other deviations from the provisional
+          plan are intentional for this execution. Preserve the configured EWF options,
+          fixed transient controls, <code>water-liquid-at-psep</code> /
+          <code>water-liquid-at-psep-dpm</code> material identities and properties,
+          global-DPM state, and <code>reflect</code> wall fate as currently set.
+        </p>
+        <aside class="callout caution">
+          <strong>Only DPM tracking corrections required before execution</strong>
+          <ul>
+            <li>Disable <code>Unsteady Particle Tracking</code>.</li>
+            <li>Remove the <code>0.001 s</code> particle-time-step override and return to inherited parent tracking.</li>
+            <li>Restore <code>Maximum Number of Steps</code> from <code>500</code> to <code>10000</code>.</li>
+          </ul>
+          <p>These three corrections are inherited by <code>010V2a</code>–<code>010V2d</code>.</p>
+        </aside>
+      </section>
+
+      <section id="settings" aria-labelledby="settings-title">
+        <h2 id="settings-title">3 · EWF model settings</h2>
+        <div class="table-wrap" role="region" aria-label="EWF settings table" tabindex="0">
+          <table>
+            <thead>
+              <tr><th scope="col">Fluent setting</th><th scope="col">First 010V2 value</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Eulerian Wall Film</td><td><code>On</code></td></tr>
+              <tr><td>Solve Momentum</td><td><code>On</code></td></tr>
+              <tr><td>Momentum method</td><td><code>Momentum Equation</code></td></tr>
+              <tr><td>Gravity Force</td><td><code>On</code></td></tr>
+              <tr><td>Surface Shear Force</td><td><code>On</code></td></tr>
+              <tr><td>Pressure Gradient</td><td><code>On</code> if available; record readback</td></tr>
+              <tr><td>Spreading Term</td><td><code>Off</code></td></tr>
+              <tr><td>Surface Tension</td><td><code>Off</code> initially</td></tr>
+              <tr><td>Solve Energy / Solve Scalar</td><td><code>Off</code> / <code>Off</code></td></tr>
+              <tr><td>Film Material</td><td>Existing <code>water-liquid-at-psep</code> or verified project film material</td></tr>
+              <tr><td>DPM Coupling</td><td><code>On</code></td></tr>
+              <tr><td>Global DPM Interaction with Continuous Phase</td><td><code>Off</code> for <code>010V2</code> and <code>010V2a</code>–<code>010V2d</code></td></tr>
+              <tr><td>Phase Coupling / VOF Coupling</td><td><code>Off</code> for this first control</td></tr>
+              <tr><td>Treat Sharp Edge</td><td><code>Off</code></td></tr>
+              <tr><td>Particle Splashing / Edge Separation / Particle Stripping</td><td><code>Off</code> / <code>Off</code> / <code>Off</code></td></tr>
+              <tr><td>Flow Momentum Coupling at wall</td><td><code>Off</code> initially</td></tr>
+              <tr><td>EWF time stepping</td><td>Retain the intentional fixed transient control</td></tr>
+              <tr><td>Flow time-step control</td><td><code>1.0e-5 s</code>, <code>40</code> configured steps, <code>1</code> iteration per step</td></tr>
+              <tr><td>Max Courant Number</td><td><code>0.5</code> (<strong>Assumed</strong> conservative starting value if exposed; record readback)</td></tr>
+              <tr><td>Film step increase/decrease factors</td><td>Fluent defaults; record readback and confirm both exceed <code>1</code></td></tr>
+              <tr><td>Per Flow Iterations</td><td><code>1</code> in the intentional live-case configuration</td></tr>
+              <tr><td>DPM per Film Steps</td><td><code>20</code> initial readback; retain for the first control</td></tr>
+              <tr><td>EWF DPM Relaxation Factor</td><td><code>0.5</code> (<strong>Assumed</strong> conservative starting value)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <aside class="callout caution">
+          <strong>Failure-history guardrail</strong>
+          The server-2 <code>10a</code> analysis reported film CFL ≈ <code>679</code>
+          at the second film step with a <code>0.01 s</code> film time step. That run
+          does not calibrate a required physical film timestep. Retain the fixed
+          <code>1.0e-5 s</code> flow timestep and monitor film CFL/source spikes.
+          A divergence does not authorize changing global DPM interaction or
+          increasing the flow timestep without a separately documented sensitivity.
+        </aside>
+      </section>
+
+      <section id="procedure" aria-labelledby="procedure-title">
+        <h2 id="procedure-title">4 · Click-by-click build procedure</h2>
+        <div class="step-tools">
+          <button type="button" id="open-local">Open all</button>
+          <button type="button" id="close-local">Collapse all</button>
+        </div>
+
+        <details class="step" open>
+          <summary>A · Save the 09cV2 parent</summary>
+          <div class="step-body">
+            <ol>
+              <li>Open the read-back-verified <code>09cV2</code> case/data pair.</li>
+              <li>Go to <code>File &gt; Save Case/Data As</code>.</li>
+              <li>Save as <code>010V2-ewf-deposition-control.cas.h5</code> and <code>010V2-ewf-deposition-control.dat.h5</code>.</li>
+              <li>Preserve the <code>09cV2</code> case/data pair separately.</li>
+            </ol>
+          </div>
+        </details>
+
+        <details class="step" open>
+          <summary>B · Enable and configure EWF</summary>
+          <div class="step-body">
+            <ol>
+              <li>Go to <code>Models &gt; Eulerian Wall Film &gt; Edit</code>.</li>
+              <li>Enable <code>Eulerian Wall Film</code>.</li>
+              <li>Set <code>Solve Momentum = On</code> and select <code>Momentum Equation</code>.</li>
+              <li>Enable <code>Gravity Force</code> and <code>Surface Shear Force</code>.</li>
+              <li>Enable <code>Pressure Gradient</code> if exposed; record whether it was available.</li>
+              <li>Leave <code>Spreading Term</code>, <code>Surface Tension</code>, <code>Solve Energy</code>, and <code>Solve Scalar</code> off.</li>
+              <li>Select the verified project film material and enable <code>DPM Coupling</code>.</li>
+              <li>Leave <code>Phase Coupling</code>, <code>VOF Coupling</code>, and <code>Treat Sharp Edge</code> off.</li>
+              <li>Confirm <code>Particle Splashing</code>, <code>Edge Separation</code>, and <code>Particle Stripping</code> are off.</li>
+              <li>Click <code>Apply</code>/<code>OK</code>.</li>
+            </ol>
+          </div>
+        </details>
+
+        <details class="step">
+          <summary>C · Assign the EWF wall</summary>
+          <div class="step-body">
+            <ol>
+              <li>Go to <code>Boundary Conditions</code>.</li>
+              <li>Select the confirmed physical liquid-impact wall zone, initially <code>wall</code> only.</li>
+              <li>Open the <code>Wall Film</code> tab and select the Eulerian wall-film condition.</li>
+              <li>Set initial film height to <code>0 m</code>.</li>
+              <li>Set initial film velocity to <code>0 m/s</code> in every component.</li>
+              <li>Set <code>Flow Momentum Coupling = Off</code>.</li>
+              <li>Set DPM wall interaction to the standard <code>wall-film</code>/impingement path, not <code>trap</code> or ordinary <code>reflect</code>.</li>
+              <li>Leave wall splash off.</li>
+              <li>Confirm <code>bottom</code> is not accidentally assigned as an EWF wall unless intentionally part of the film path.</li>
+              <li>Inspect every film-wall edge; confirm it connects to another film wall or an intentional drain/outflow edge.</li>
+              <li>Click <code>Apply</code>, then reopen the wall panel and verify the readback.</li>
+            </ol>
+          </div>
+        </details>
+
+        <details class="step">
+          <summary>D · Check material and injection compatibility</summary>
+          <div class="step-body">
+            <ol>
+              <li>In <code>Models &gt; Eulerian Wall Film</code>, record the exact film-material name.</li>
+              <li>Go to <code>Models &gt; Discrete Phase &gt; Injections</code>.</li>
+              <li>Confirm every EWF-coupled injection material has the same relevant properties as the film material.</li>
+              <li>Confirm injection names contain the film-material name.</li>
+              <li>Confirm all six flows sum to the selected <code>09cV2</code> DPM total. Do not assume <code>5.846 kg/s</code> unless the selected fraction is explicitly <code>5%</code>.</li>
+              <li>If a material/name check fails, stop before initialization, correct the material identity, and record the change.</li>
+            </ol>
+          </div>
+        </details>
+
+        <details class="step">
+          <summary>E · Set transient film solution controls</summary>
+          <div class="step-body">
+            <ol>
+              <li>In <code>General</code>, change <code>Time</code> from <code>Steady</code> to <code>Transient</code>.</li>
+              <li>In <code>Solution Methods</code>, set transient time discretization to <code>First Order Implicit</code>.</li>
+              <li>Keep carrier equations at the accepted parent schemes.</li>
+              <li>In EWF <code>Solution Method and Control</code>, set wall-film continuity and momentum schemes to the most conservative first-order option exposed.</li>
+              <li>Keep <code>Coupled Solution</code> off.</li>
+              <li>Retain fixed control: <code>1.0e-5 s</code>, <code>40</code> steps, and <code>1</code> iteration per step.</li>
+              <li>Do not enable adaptive time stepping unless it is a separate sensitivity.</li>
+              <li>If exposed, set <code>Max Courant Number = 0.5</code> as the <strong>Assumed</strong> conservative starting value. Keep film-step increase/decrease factors at Fluent defaults, confirm both exceed <code>1</code>, and record readbacks.</li>
+              <li>Retain <code>Per Flow Iterations = 1</code>, <code>Reporting Interval = 1</code>, <code>Sub-Iteration Stop = 1e-8</code>, <code>Sub-Iterations = 10</code>, and sub-iteration <code>Reporting Interval = 1</code>, unless a separate numerical sensitivity is documented.</li>
+              <li>In <code>DPM Control</code>, set <code>Relaxation Factor = 0.5</code> as the <strong>Assumed</strong> conservative starting value and retain <code>DPM per Film Steps = 20</code>.</li>
+              <li>The film-specific relaxation factor belongs in EWF <code>Solution Method and Control</code>, not general <code>Solution Controls</code>.</li>
+              <li>Keep global <code>DPM Interaction with Continuous Phase = Off</code> through <code>010V2d</code>; enable it only in <code>010V2d-2</code>.</li>
+              <li>Do not copy Skoog's BWR time step as a project default. Preserve the checkpoint before changing the fixed timestep after a film-CFL or source spike.</li>
+            </ol>
+          </div>
+        </details>
+
+        <details class="step">
+          <summary>F · Initialize the film and run</summary>
+          <div class="step-body">
+            <ol>
+              <li>Save the case before initialization.</li>
+              <li>Go to <code>Solution &gt; Initialization</code>.</li>
+              <li>Initialize the carrier field with inherited parent data if valid; otherwise use <code>Hybrid Initialization</code> and record the fallback.</li>
+              <li>In <code>Models &gt; Eulerian Wall Film</code>, click <code>Initialize</code> for wall-film variables.</li>
+              <li>Confirm film height and velocity are zero on the selected wall.</li>
+              <li>Run <code>5–10</code> transient time steps as the first smoke test.</li>
+              <li>After every step, monitor continuity, phase fraction, <code>k</code>, epsilon, film Courant number, film mass, film source terms, and DPM-to-film mass transfer.</li>
+              <li>If film CFL or source terms spike, stop and preserve the checkpoint before changing the fixed timestep. Do not interpret a floating-point exception as a mechanism result.</li>
+              <li>If stable, continue to <code>20–50</code> transient steps, then a documented averaging window after film inventory develops.</li>
+              <li>Save case/data checkpoints without overwriting <code>09cV2</code>.</li>
+            </ol>
+          </div>
+        </details>
+      </section>
+
+      <section id="monitors" aria-labelledby="monitors-title">
+        <h2 id="monitors-title">5 · Required monitors and reports</h2>
+        <div class="card-grid">
+          <article class="card">
+            <h3>Film state</h3>
+            <ul>
+              <li>Area-weighted film thickness on each EWF wall</li>
+              <li>Film mass/inventory versus time</li>
+              <li>Film velocity and drainage direction</li>
+              <li>Maximum film thickness</li>
+              <li>Film CFL history</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Film mass pathways</h3>
+            <ul>
+              <li><code>Film DPM Mass Source</code></li>
+              <li><code>Film Outflow Mass</code></li>
+              <li><code>Film Stripped Mass</code> = zero</li>
+              <li><code>Film Separated Mass</code> = zero</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Carrier and DPM evidence</h3>
+            <ul>
+              <li>Steam-outlet liquid phase flux</li>
+              <li>Actual global DPM and EWF–DPM coupling states</li>
+              <li>DPM escaped, trapped, and incomplete counts</li>
+              <li>Residual history and complete phase-flux imbalance</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="gate" aria-labelledby="gate-title">
+        <h2 id="gate-title">6 · Acceptance gate</h2>
+        <p><code>010V2</code> is interpretable only when every item below is satisfied. Checks are saved in this browser.</p>
+        <div class="gate-list" id="gate-list">
+          <label class="gate"><input type="checkbox" data-gate="film-forms"><span>The film forms on the intended wall.</span></label>
+          <label class="gate"><input type="checkbox" data-gate="edge-loss"><span>No unintended film-edge outlet removes unexplained mass.</span></label>
+          <label class="gate"><input type="checkbox" data-gate="bounded-inventory"><span>Film inventory is bounded, or growth is explicitly explained by inlet allocation.</span></label>
+          <label class="gate"><input type="checkbox" data-gate="mass-pathways"><span>DPM-to-film transfer, film outflow, storage, and remaining particle fates are reported together.</span></label>
+          <label class="gate"><input type="checkbox" data-gate="mechanisms-off"><span>Splash, edge separation, and stripping remain off.</span></label>
+          <label class="gate"><input type="checkbox" data-gate="numerical-stability"><span>No floating-point exception or unbounded film-CFL/source spike occurs during the smoke test.</span></label>
+          <label class="gate"><input type="checkbox" data-gate="global-dpm"><span>Global DPM interaction is recorded as <code>Off</code> through <code>010V2d</code>, with <code>On</code> reserved for <code>010V2d-2</code>.</span></label>
+          <label class="gate"><input type="checkbox" data-gate="carrier-balance"><span>Carrier phase balance and continuity limitations remain visible in the report.</span></label>
+        </div>
+        <aside class="callout stop">
+          <strong>Claim boundary</strong>
+          Until all eight gates pass, use this setup diagnostically. A floating-point
+          exception, unexplained film loss, or incomplete mass accounting is a
+          numerical or evidence failure—not evidence for a physical mechanism.
+        </aside>
+      </section>
+
+      <section id="evidence" aria-labelledby="evidence-title">
+        <h2 id="evidence-title">Linked evidence</h2>
+        <ul class="evidence">
+          <li><a href="09cV2-skoog-partition-injection-control.md">09cV2 parent</a></li>
+          <li><a href="../../ResearchProject_wiki/wiki/model/skoog-application-guardrails.md">Project Skoog guardrails</a></li>
+          <li><a href="../../CFD_wiki/wiki/guidance/fluent-general-click-by-click.md">Fluent EWF guidance</a></li>
+          <li><a href="../../PyAnsys/output/live_postprocess_20260721/10a-server2-stripping-live-report.md">10a server-2 live failure readback</a></li>
+          <li><a href="../past/archived/10a-ewf-deposition.md">Existing 10a diagnostic</a></li>
+        </ul>
+      </section>
+
+      <footer class="footer-note">
+        Experimental standalone presentation of
+        <a href="010V2-ewf-deposition-film-inventory.md">the canonical Markdown setup record</a>.
+        It carries the same setup identity and does not create a new lineage branch.
+        No external styles, scripts, fonts, or network connection are required.
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    (() => {
+      const storageKey = "setup-010V2-html-state-v1";
+      const root = document.documentElement;
+      const gates = [...document.querySelectorAll("[data-gate]")];
+      const steps = [...document.querySelectorAll("details.step")];
+      const progressBar = document.getElementById("progress-bar");
+      const progressLabel = document.getElementById("progress-label");
+      const themeButton = document.getElementById("theme-button");
+      const expandButton = document.getElementById("expand-button");
+
+      const readState = () => {
+        try { return JSON.parse(localStorage.getItem(storageKey)) || {}; }
+        catch { return {}; }
+      };
+
+      const writeState = () => {
+        const state = {
+          theme: root.dataset.theme || "light",
+          gates: Object.fromEntries(gates.map(input => [input.dataset.gate, input.checked]))
+        };
+        try { localStorage.setItem(storageKey, JSON.stringify(state)); } catch {}
+      };
+
+      const updateProgress = () => {
+        const complete = gates.filter(input => input.checked).length;
+        const percent = gates.length ? (complete / gates.length) * 100 : 0;
+        progressBar.style.width = `${percent}%`;
+        progressLabel.textContent = `${complete} of ${gates.length} gates checked`;
+        writeState();
+      };
+
+      const saved = readState();
+      const preferredDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      root.dataset.theme = saved.theme || (preferredDark ? "dark" : "light");
+      gates.forEach(input => {
+        input.checked = Boolean(saved.gates && saved.gates[input.dataset.gate]);
+        input.addEventListener("change", updateProgress);
+      });
+      updateProgress();
+
+      themeButton.addEventListener("click", () => {
+        root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
+        writeState();
+      });
+
+      const setSteps = open => {
+        steps.forEach(step => { step.open = open; });
+        expandButton.textContent = open ? "Collapse all steps" : "Open all steps";
+      };
+      expandButton.addEventListener("click", () => setSteps(!steps.every(step => step.open)));
+      document.getElementById("open-local").addEventListener("click", () => setSteps(true));
+      document.getElementById("close-local").addEventListener("click", () => setSteps(false));
+      document.getElementById("print-button").addEventListener("click", () => window.print());
+      document.getElementById("reset-button").addEventListener("click", () => {
+        gates.forEach(input => { input.checked = false; });
+        updateProgress();
+      });
+    })();
+  </script>
+</body>
+</html>

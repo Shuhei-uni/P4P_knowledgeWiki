@@ -62,9 +62,10 @@ Read these in order before changing any setup script:
 
 1. [`knowledge/fluent-settings/agent_start_prompt.md`](./knowledge/fluent-settings/agent_start_prompt.md)
 2. [`docs/PYANSYS_OVERHAUL_BLUEPRINT.md`](./docs/PYANSYS_OVERHAUL_BLUEPRINT.md)
-3. [`src/pyansys_fluent/common.py`](./src/pyansys_fluent/common.py)
-4. [`src/pyansys_fluent/dependency_workflow.py`](./src/pyansys_fluent/dependency_workflow.py)
-5. [`src/pyansys_fluent/setup_common.py`](./src/pyansys_fluent/setup_common.py)
+3. [`docs/AUTONOMOUS_FLUENT_LOOP_PLAN.md`](./docs/AUTONOMOUS_FLUENT_LOOP_PLAN.md) for the staged path from the current tools to a recoverable agent-operated loop
+4. [`src/pyansys_fluent/common.py`](./src/pyansys_fluent/common.py)
+5. [`src/pyansys_fluent/dependency_workflow.py`](./src/pyansys_fluent/dependency_workflow.py)
+6. [`src/pyansys_fluent/setup_common.py`](./src/pyansys_fluent/setup_common.py)
 
 Execution sequence:
 
@@ -97,8 +98,10 @@ connect
 ## Current script layout
 
 - `scripts/connection/check_connection.py`: connection health check only
+- `scripts/orchestration/fluent_host_worker.py`: Windows-host Fluent process ownership, heartbeat, and bounded relaunch smoke-test worker
 - `scripts/inspection/inspect_fluent_session.py`: non-mutating tree inspection
 - `src/pyansys_fluent/common.py`: shared remote/session/path helpers
+- `src/pyansys_fluent/host_worker.py`: reusable host-worker process, gRPC health, restart-budget, and atomic-status mechanics
 - `src/pyansys_fluent/dependency_workflow.py`: dependency-aware step runner and failure classifier
 - `src/pyansys_fluent/extraction.py`: shared read-mostly extraction helpers for live/offline setup capture
 - `src/pyansys_fluent/setup_common.py`: shared setup-name, boundary, and remap helpers
@@ -108,6 +111,10 @@ connect
 - `scripts/setup/setup09a_dpm_split_inlet_carryover.py`: build setup 09a from the setup 07 carrier-field scaffold
 - `scripts/setup/setup_vof_ewf_from_existing_case.py`: derive a VOF + EWF case from an existing case/data pair
 - `scripts/setup/rebuild_setup_from_reference_case.py`: clone a reference setup onto another mesh
+
+Host-worker trial instructions:
+
+- [`docs/FLUENT_HOST_WORKER.md`](./docs/FLUENT_HOST_WORKER.md)
 
 ## Extractor tracks
 

@@ -1,0 +1,523 @@
+export const setup = {
+  id: "010V2",
+  lifecycle: "active",
+  role: "Clean EWF deposition/drainage stability control",
+  evidence: "Diagnostic until film mass balance and carrier gates pass",
+  outcome: "Needs follow-up",
+}
+
+export const palette = {
+  ink: "#16231f",
+  muted: "#5c6b65",
+  paper: "#f7f4ec",
+  panel: "#fffdf8",
+  line: "#d7ddd8",
+  green: "#226b52",
+  greenSoft: "#e1f0e8",
+  amber: "#a35e16",
+  amberSoft: "#fff0d8",
+  red: "#a13d35",
+  redSoft: "#fbe7e4",
+  blue: "#2f6376",
+  blueSoft: "#e2f0f4",
+}
+
+export const DocStyles = () => (
+  <style>{`
+    :root {
+      color-scheme: light;
+      --doc-ink: ${palette.ink};
+      --doc-muted: ${palette.muted};
+      --doc-paper: ${palette.paper};
+      --doc-panel: ${palette.panel};
+      --doc-line: ${palette.line};
+      --doc-green: ${palette.green};
+      --doc-green-soft: ${palette.greenSoft};
+      --doc-amber: ${palette.amber};
+      --doc-amber-soft: ${palette.amberSoft};
+      --doc-red: ${palette.red};
+      --doc-red-soft: ${palette.redSoft};
+      --doc-blue: ${palette.blue};
+      --doc-blue-soft: ${palette.blueSoft};
+    }
+    .setup-doc {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1rem;
+      color: var(--doc-ink);
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      line-height: 1.65;
+    }
+    .setup-doc h1, .setup-doc h2, .setup-doc h3 {
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+    }
+    .setup-doc h2 {
+      margin-top: 3rem;
+      padding-bottom: .55rem;
+      border-bottom: 1px solid var(--doc-line);
+    }
+    .setup-doc a { color: var(--doc-green); }
+    .setup-doc code {
+      padding: .12rem .35rem;
+      border-radius: .35rem;
+      background: #edf0ec;
+      color: #23493c;
+    }
+    .hero {
+      padding: clamp(1.5rem, 5vw, 3.4rem);
+      border: 1px solid #c8d8d0;
+      border-radius: 1.4rem;
+      background:
+        radial-gradient(circle at 90% 10%, rgba(34, 107, 82, .16), transparent 32%),
+        linear-gradient(145deg, #fffdf8 0%, #edf6f1 100%);
+      box-shadow: 0 20px 55px rgba(30, 57, 47, .08);
+    }
+    .eyebrow {
+      margin: 0 0 .6rem;
+      color: var(--doc-green);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      max-width: 780px;
+      margin: 0;
+      font-size: clamp(2rem, 6vw, 4.1rem);
+    }
+    .lede {
+      max-width: 760px;
+      margin: 1.1rem 0 0;
+      color: var(--doc-muted);
+      font-size: 1.08rem;
+    }
+    .badge-row, .card-grid, .metric-grid, .lineage {
+      display: grid;
+      gap: .8rem;
+    }
+    .badge-row {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      margin-top: 1.6rem;
+    }
+    .badge {
+      padding: .85rem 1rem;
+      border: 1px solid var(--doc-line);
+      border-radius: .8rem;
+      background: rgba(255,255,255,.72);
+    }
+    .badge small {
+      display: block;
+      color: var(--doc-muted);
+      font-size: .68rem;
+      font-weight: 750;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .badge strong { display: block; margin-top: .12rem; }
+    .lineage {
+      grid-template-columns: 1fr auto 1.6fr;
+      align-items: center;
+      margin: 1.25rem 0;
+    }
+    .node {
+      padding: 1rem;
+      border: 1px solid var(--doc-line);
+      border-radius: .8rem;
+      background: var(--doc-panel);
+    }
+    .arrow { color: var(--doc-green); font-size: 1.35rem; font-weight: 900; }
+    .card-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .card {
+      padding: 1rem 1.1rem;
+      border: 1px solid var(--doc-line);
+      border-radius: .85rem;
+      background: var(--doc-panel);
+    }
+    .card h3 { margin-top: .1rem; }
+    .callout {
+      margin: 1.2rem 0;
+      padding: 1rem 1.15rem;
+      border: 1px solid;
+      border-left-width: .4rem;
+      border-radius: .7rem;
+    }
+    .callout strong {
+      display: block;
+      margin-bottom: .25rem;
+      letter-spacing: .01em;
+    }
+    .callout.info { border-color: #a9cad4; background: var(--doc-blue-soft); }
+    .callout.caution { border-color: #e3bc86; background: var(--doc-amber-soft); }
+    .callout.stop { border-color: #ddb1ac; background: var(--doc-red-soft); }
+    .callout.success { border-color: #a8cdbb; background: var(--doc-green-soft); }
+    .table-wrap {
+      overflow-x: auto;
+      margin: 1rem 0;
+      border: 1px solid var(--doc-line);
+      border-radius: .85rem;
+      background: var(--doc-panel);
+    }
+    .table-wrap table { width: 100%; margin: 0; border-collapse: collapse; }
+    .table-wrap th {
+      background: #edf3ef;
+      color: #315347;
+      text-align: left;
+    }
+    .table-wrap th, .table-wrap td {
+      padding: .65rem .8rem;
+      border-bottom: 1px solid var(--doc-line);
+      vertical-align: top;
+    }
+    details.step-group {
+      margin: .85rem 0;
+      border: 1px solid var(--doc-line);
+      border-radius: .85rem;
+      background: var(--doc-panel);
+      overflow: hidden;
+    }
+    details.step-group summary {
+      padding: 1rem 1.15rem;
+      background: #edf3ef;
+      color: #23493c;
+      cursor: pointer;
+      font-weight: 800;
+    }
+    details.step-group > div { padding: .3rem 1.2rem 1rem; }
+    .check-item {
+      display: grid;
+      grid-template-columns: 1.2rem 1fr;
+      gap: .65rem;
+      align-items: start;
+      margin: .65rem 0;
+      padding: .75rem;
+      border: 1px solid var(--doc-line);
+      border-radius: .65rem;
+      background: var(--doc-panel);
+    }
+    .check-item input { margin-top: .32rem; accent-color: var(--doc-green); }
+    .source-note {
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--doc-line);
+      color: var(--doc-muted);
+      font-size: .88rem;
+    }
+    @media (max-width: 680px) {
+      .lineage { grid-template-columns: 1fr; }
+      .arrow { transform: rotate(90deg); justify-self: center; }
+    }
+    @media print {
+      .setup-doc { max-width: none; font-size: 10.5pt; }
+      .hero { box-shadow: none; }
+      details.step-group > div { display: block !important; }
+    }
+  `}</style>
+)
+
+export const Badge = ({ label, children }) => (
+  <div className="badge"><small>{label}</small><strong>{children}</strong></div>
+)
+
+export const Callout = ({ tone = "info", title, children }) => (
+  <aside className={`callout ${tone}`}><strong>{title}</strong><div>{children}</div></aside>
+)
+
+export const TableWrap = ({ children }) => <div className="table-wrap">{children}</div>
+
+export const StepGroup = ({ title, children }) => (
+  <details className="step-group" open><summary>{title}</summary><div>{children}</div></details>
+)
+
+export const CheckItem = ({ children }) => (
+  <label className="check-item"><input type="checkbox" /><span>{children}</span></label>
+)
+
+<DocStyles />
+
+<article className="setup-doc">
+
+<header className="hero">
+  <p className="eyebrow">Fluent setup control · {setup.id}</p>
+  <h1>EWF Deposition and Film-Inventory Control</h1>
+  <p className="lede">
+    A clean control for determining whether the Skoog-style allocated DPM population
+    deposits into a bounded Eulerian wall film and drains without splash, edge
+    separation, or particle stripping.
+  </p>
+  <div className="badge-row">
+    <Badge label="Lifecycle">{setup.lifecycle}</Badge>
+    <Badge label="Evidence">{setup.evidence}</Badge>
+    <Badge label="Outcome">{setup.outcome}</Badge>
+    <Badge label="Linked report">None</Badge>
+  </div>
+</header>
+
+## Setup at a glance
+
+<div className="lineage">
+  <div className="node"><strong>Parent</strong><br /><a href="./09cV2-skoog-partition-injection-control.md">09cV2 · Skoog allocation control</a></div>
+  <div className="arrow">→</div>
+  <div className="node"><strong>010V2 control</strong><br />EWF model, EWF wall coupling, transient film solution, wall-film boundary condition, and staged global-DPM source coupling.</div>
+</div>
+
+<div className="card-grid">
+  <div className="card">
+    <h3>Mechanisms on</h3>
+    <p>EWF momentum, gravity, surface shear, verified film material, and EWF–DPM coupling.</p>
+  </div>
+  <div className="card">
+    <h3>Mechanisms isolated</h3>
+    <p>Splash, sharp-edge treatment, edge separation, particle stripping, phase/VOF coupling, and initial flow-momentum wall coupling remain off.</p>
+  </div>
+  <div className="card">
+    <h3>Branch rule</h3>
+    <p>Global DPM interaction stays <code>Off</code> through <code>010V2d</code>. Only <code>010V2d-2</code> turns it <code>On</code>.</p>
+  </div>
+</div>
+
+### Child mechanism branches
+
+- [010V2a · splash](010V2a-ewf-splash.md)
+- [010V2b · edge separation](010V2b-ewf-edge-separation.md)
+- [010V2c · stripping](010V2c-ewf-particle-stripping.md)
+- [010V2d · combined interaction](010V2d-ewf-combined-interaction.md)
+- [010V2d-2 · coupled combined](../future/010V2d-2-ewf-combined-global-dpm.md)
+
+## 1. Objective
+
+Determine whether the Skoog-style allocated DPM population deposits into a bounded Eulerian wall film and drains without enabling splash, edge separation, or particle stripping.
+
+This is the clean control for all later `010V2` interaction branches.
+
+The first execution is an EWF stability baseline: EWF–DPM coupling is enabled so injected droplets can deposit into the film, while global `DPM Interaction with Continuous Phase` is disabled. The resulting film behavior is the uncoupled global-DPM control; `010V2d-2` is reserved for the corresponding combined case with global DPM interaction enabled.
+
+<Callout tone="success" title="Interpretation target">
+  Observe deposition, storage, and drainage in isolation before attributing behavior
+  to splash, edge separation, stripping, or two-way global DPM feedback.
+</Callout>
+
+## 2. Inherited setup
+
+Start from a saved, read-back-verified `09cV2` case/data pair. Do not start from the existing `10a` artifact because it is splash-enabled and uses the old branch identity.
+
+### Keep unchanged
+
+- Geometry, mesh, split inlet topology, outlet boundaries, gravity, and operating pressure.
+- `Mixture`, phase definitions, carrier materials, `RNG k-epsilon`, and Energy off.
+- The `09cV2` liquid/DPM allocation and EWF-compatible DPM material names.
+- Injection diameters, flows, velocities, particle count, drag, rotation, and stochastic settings.
+- DPM outlet and ordinary-wall fates unless the wall must be changed to `wall-film` for coupling.
+
+<Callout tone="stop" title="Do not inherit">
+  The failed <code>10a</code> data field, its <code>water-liquid</code> DPM material,
+  or its splash/stripping state.
+</Callout>
+
+### Intentional live-case controls and the single DPM correction
+
+The server-4 readback confirmed that the other deviations from the provisional plan are intentional for this execution. Preserve the configured EWF options, fixed transient controls, `water-liquid-at-psep` / `water-liquid-at-psep-dpm` material identities and properties, global-DPM state, and `reflect` wall fate as currently set.
+
+<Callout tone="caution" title="Only DPM tracking corrections required before execution">
+  <ul>
+    <li>Disable <code>Unsteady Particle Tracking</code>.</li>
+    <li>Remove the <code>0.001 s</code> particle-time-step override and return to the inherited parent tracking mode.</li>
+    <li>Restore <code>Maximum Number of Steps</code> from <code>500</code> to <code>10000</code>.</li>
+  </ul>
+  These three corrections are inherited by <code>010V2a</code>–<code>010V2d</code>.
+</Callout>
+
+## 3. EWF model settings
+
+<TableWrap>
+
+| Fluent setting | First `010V2` value |
+|---|---|
+| Eulerian Wall Film | `On` |
+| Solve Momentum | `On` |
+| Momentum method | `Momentum Equation` |
+| Gravity Force | `On` |
+| Surface Shear Force | `On` |
+| Pressure Gradient | `On` if available; record readback |
+| Spreading Term | `Off` |
+| Surface Tension | `Off` initially |
+| Solve Energy / Solve Scalar | `Off` / `Off` |
+| Film Material | existing `water-liquid-at-psep` or verified project film material |
+| DPM Coupling | `On` |
+| Global DPM Interaction with Continuous Phase | `Off` for `010V2` and `010V2a`–`010V2d` |
+| Phase Coupling / VOF Coupling | `Off` for this first control |
+| Treat Sharp Edge | `Off` |
+| Particle Splashing / Edge Separation / Particle Stripping | `Off` / `Off` / `Off` |
+| Flow Momentum Coupling at wall | `Off` initially |
+| EWF time stepping | retain the intentional fixed transient control |
+| Flow time-step control | `1.0e-5 s`, `40` configured steps, `1` iteration per step |
+| Max Courant Number | `0.5` (`Assumed` conservative starting value if exposed; record readback) |
+| Film step increase/decrease factors | Fluent defaults; record readback and confirm both are greater than `1` |
+| Per Flow Iterations | `1` in the intentional live-case configuration |
+| DPM per Film Steps | `20` initial readback; retain for the first control |
+| EWF DPM Relaxation Factor | `0.5` (`Assumed` conservative starting value) |
+
+</TableWrap>
+
+<Callout tone="caution" title="Failure-history guardrail">
+  The server-2 <code>10a</code> failure analysis reported film CFL ≈ <code>679</code>
+  at the second film step with a <code>0.01 s</code> film time step. That run does
+  not calibrate a required physical film timestep. Retain the fixed
+  <code>1.0e-5 s</code> flow timestep and monitor film CFL/source spikes. A
+  divergence does not authorize changing global DPM interaction or increasing the
+  flow timestep without a separately documented sensitivity.
+</Callout>
+
+## 4. Click-by-click build procedure
+
+<StepGroup title="A · Save the 09cV2 parent">
+
+1. Open the read-back-verified `09cV2` case/data pair.
+2. Go to `File > Save Case/Data As`.
+3. Save as `010V2-ewf-deposition-control.cas.h5` and `010V2-ewf-deposition-control.dat.h5`.
+4. Preserve the `09cV2` case/data pair separately.
+
+</StepGroup>
+
+<StepGroup title="B · Enable and configure EWF">
+
+1. Go to `Models > Eulerian Wall Film > Edit`.
+2. Enable `Eulerian Wall Film`.
+3. Set `Solve Momentum = On` and select `Momentum Equation`.
+4. Enable `Gravity Force` and `Surface Shear Force`.
+5. Enable `Pressure Gradient` if exposed; record whether it was available.
+6. Leave `Spreading Term`, `Surface Tension`, `Solve Energy`, and `Solve Scalar` off.
+7. Select the verified project film material and enable `DPM Coupling`.
+8. Leave `Phase Coupling`, `VOF Coupling`, and `Treat Sharp Edge` off.
+9. Confirm `Particle Splashing`, `Edge Separation`, and `Particle Stripping` are off.
+10. Click `Apply`/`OK`.
+
+</StepGroup>
+
+<StepGroup title="C · Assign the EWF wall">
+
+1. Go to `Boundary Conditions`.
+2. Select the confirmed physical liquid-impact wall zone, initially `wall` only.
+3. Open the `Wall Film` tab and select the Eulerian wall-film condition.
+4. Set initial film height to `0 m`.
+5. Set initial film velocity to `0 m/s` in every component.
+6. Set `Flow Momentum Coupling = Off`.
+7. Set the DPM wall interaction to the standard `wall-film`/impingement path, not `trap` or ordinary `reflect`.
+8. Leave wall splash off.
+9. Confirm `bottom` is not accidentally assigned as an EWF wall unless intentionally part of the film path.
+10. Inspect every film-wall edge; confirm it connects to another film wall or an intentional drain/outflow edge.
+11. Click `Apply`, then reopen the wall panel and verify the readback.
+
+</StepGroup>
+
+<StepGroup title="D · Check material and injection compatibility">
+
+1. In `Models > Eulerian Wall Film`, record the exact film-material name.
+2. Go to `Models > Discrete Phase > Injections`.
+3. Confirm every EWF-coupled injection material has the same relevant properties as the film material.
+4. Confirm injection names contain the film-material name.
+5. Confirm all six flows sum to the selected `09cV2` DPM total. Do not assume `5.846 kg/s` unless the selected fraction is explicitly `5%`.
+6. If any material/name check fails, stop before initialization, correct the material identity, and record the change.
+
+</StepGroup>
+
+<StepGroup title="E · Set transient film solution controls">
+
+1. In `General`, change `Time` from `Steady` to `Transient`.
+2. In `Solution Methods`, set transient time discretization to `First Order Implicit`.
+3. Keep carrier equations at the accepted parent schemes.
+4. In EWF `Solution Method and Control`, set wall-film continuity and momentum schemes to the most conservative first-order option exposed.
+5. Keep `Coupled Solution` off.
+6. Retain fixed control: `1.0e-5 s`, `40` steps, and `1` iteration per step.
+7. Do not enable adaptive time stepping unless it is a separate sensitivity.
+8. If exposed, set `Max Courant Number = 0.5` as the `Assumed` conservative starting value. Keep film-step increase/decrease factors at Fluent defaults, confirm both exceed `1`, and record all readbacks.
+9. Retain `Per Flow Iterations = 1`, `Reporting Interval = 1`, `Sub-Iteration Stop = 1e-8`, `Sub-Iterations = 10`, and sub-iteration `Reporting Interval = 1`, unless a separate sensitivity is documented.
+10. In `DPM Control`, set `Relaxation Factor = 0.5` as the `Assumed` conservative starting value and retain `DPM per Film Steps = 20`.
+11. The film-specific relaxation factor belongs in EWF `Solution Method and Control`, not general `Solution Controls`.
+12. Keep global `DPM Interaction with Continuous Phase = Off` through `010V2d`; enable it only in `010V2d-2`.
+13. Do not copy Skoog's BWR time step as a project default. Preserve the checkpoint before changing the fixed timestep after a film-CFL or source spike.
+
+</StepGroup>
+
+<StepGroup title="F · Initialize the film and run">
+
+1. Save the case before initialization.
+2. Go to `Solution > Initialization`.
+3. Initialize the carrier field with inherited parent data if valid; otherwise use `Hybrid Initialization` and record the fallback.
+4. In `Models > Eulerian Wall Film`, click `Initialize` for wall-film variables.
+5. Confirm film height and velocity are zero on the selected wall.
+6. Run `5–10` transient time steps as the first smoke test.
+7. After every step, monitor continuity, phase fraction, `k`, epsilon, film Courant number, film mass, film source terms, and DPM-to-film mass transfer.
+8. If film CFL or source terms spike, stop and preserve the checkpoint before changing the fixed timestep. Do not interpret a floating-point exception as a mechanism result.
+9. If stable, continue to `20–50` transient steps, then a documented averaging window after film inventory develops.
+10. Save case/data checkpoints without overwriting `09cV2`.
+
+</StepGroup>
+
+## 5. Required monitors and reports
+
+<div className="card-grid">
+  <div className="card">
+    <h3>Film state</h3>
+    <ul>
+      <li>Area-weighted film thickness on each EWF wall</li>
+      <li>Film mass/inventory versus time</li>
+      <li>Film velocity and drainage direction</li>
+      <li>Maximum film thickness</li>
+      <li>Film CFL history</li>
+    </ul>
+  </div>
+  <div className="card">
+    <h3>Film mass pathways</h3>
+    <ul>
+      <li><code>Film DPM Mass Source</code></li>
+      <li><code>Film Outflow Mass</code></li>
+      <li><code>Film Stripped Mass</code> = zero</li>
+      <li><code>Film Separated Mass</code> = zero</li>
+    </ul>
+  </div>
+  <div className="card">
+    <h3>Carrier and DPM evidence</h3>
+    <ul>
+      <li>Steam-outlet liquid phase flux</li>
+      <li>Actual global DPM and EWF–DPM coupling states</li>
+      <li>DPM escaped, trapped, and incomplete counts</li>
+      <li>Residual history and complete phase-flux imbalance</li>
+    </ul>
+  </div>
+</div>
+
+## 6. Acceptance gate
+
+`010V2` is interpretable only when every item below is satisfied:
+
+<CheckItem>The film forms on the intended wall.</CheckItem>
+<CheckItem>No unintended film-edge outlet removes unexplained mass.</CheckItem>
+<CheckItem>Film inventory is bounded, or its growth is explicitly explained by inlet allocation.</CheckItem>
+<CheckItem>DPM-to-film transfer, film outflow, storage, and remaining particle fates are reported together.</CheckItem>
+<CheckItem>Splash, edge separation, and stripping remain off.</CheckItem>
+<CheckItem>No floating-point exception or unbounded film-CFL/source spike occurs during the smoke test.</CheckItem>
+<CheckItem>Global DPM interaction is recorded as <code>Off</code> through <code>010V2d</code>, with <code>On</code> reserved for <code>010V2d-2</code>.</CheckItem>
+<CheckItem>Carrier phase balance and continuity limitations remain visible in the report.</CheckItem>
+
+<Callout tone="stop" title="Claim boundary">
+  Until all eight gates pass, use this setup diagnostically. A floating-point
+  exception, unexplained film loss, or incomplete mass accounting is a numerical
+  or evidence failure—not evidence for a physical mechanism.
+</Callout>
+
+## Linked evidence
+
+- [09cV2 parent](09cV2-skoog-partition-injection-control.md)
+- [Project Skoog guardrails](../../ResearchProject_wiki/wiki/model/skoog-application-guardrails.md)
+- [Fluent EWF guidance](../../CFD_wiki/wiki/guidance/fluent-general-click-by-click.md)
+- [10a server-2 live failure readback](../../PyAnsys/output/live_postprocess_20260721/10a-server2-stripping-live-report.md)
+- [Existing 10a diagnostic](../past/archived/10a-ewf-deposition.md)
+
+<p className="source-note">
+  Experimental presentation variant of
+  <a href="./010V2-ewf-deposition-film-inventory.md"> the canonical Markdown setup record</a>.
+  It carries the same setup identity and does not create a new lineage branch.
+</p>
+
+</article>
