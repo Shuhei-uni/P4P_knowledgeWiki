@@ -21,6 +21,16 @@ Initial Phase 1 files:
 - `tests/test_resumable_run.py`
 - `docs/FLUENT_HOST_WORKER.md`
 
+Offline Phase 2–6 scaffold:
+
+- `src/pyansys_fluent/autonomy/`
+- `contracts/examples/08c-carrier-autonomy-scaffold.json`
+- `tests/test_autonomy_scaffold.py`
+- `docs/AUTONOMY_PHASES_2_TO_6_SCAFFOLD.md`
+
+The scaffold is deliberately disconnected from the live host job dispatcher.
+It validates and compiles contracts but cannot contact Fluent.
+
 ## Repository Boundary Decision
 
 Keep the automation system in `PyAnsys/`. It is the correct owner for executable orchestration, live Fluent discovery, machine-readable contracts, checkpoints, analysis artifacts, and claim-gate outputs.

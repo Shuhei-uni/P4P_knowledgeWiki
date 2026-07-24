@@ -63,9 +63,10 @@ Read these in order before changing any setup script:
 1. [`knowledge/fluent-settings/agent_start_prompt.md`](./knowledge/fluent-settings/agent_start_prompt.md)
 2. [`docs/PYANSYS_OVERHAUL_BLUEPRINT.md`](./docs/PYANSYS_OVERHAUL_BLUEPRINT.md)
 3. [`docs/AUTONOMOUS_FLUENT_LOOP_PLAN.md`](./docs/AUTONOMOUS_FLUENT_LOOP_PLAN.md) for the staged path from the current tools to a recoverable agent-operated loop
-4. [`src/pyansys_fluent/common.py`](./src/pyansys_fluent/common.py)
-5. [`src/pyansys_fluent/dependency_workflow.py`](./src/pyansys_fluent/dependency_workflow.py)
-6. [`src/pyansys_fluent/setup_common.py`](./src/pyansys_fluent/setup_common.py)
+4. [`docs/AUTONOMY_PHASES_2_TO_6_SCAFFOLD.md`](./docs/AUTONOMY_PHASES_2_TO_6_SCAFFOLD.md) for the offline-only future contracts and integration gates
+5. [`src/pyansys_fluent/common.py`](./src/pyansys_fluent/common.py)
+6. [`src/pyansys_fluent/dependency_workflow.py`](./src/pyansys_fluent/dependency_workflow.py)
+7. [`src/pyansys_fluent/setup_common.py`](./src/pyansys_fluent/setup_common.py)
 
 Execution sequence:
 
@@ -106,6 +107,8 @@ connect
 - `src/pyansys_fluent/job_protocol.py`: versioned job/state/receipt models, atomic spool transitions, and stage dispatch
 - `src/pyansys_fluent/case_probe.py`: validated disposable-copy loading and conservative read-only case identity evidence
 - `src/pyansys_fluent/resumable_run.py`: atomic run state, per-chunk case/data checkpoints, generation-loss retry, and resume-without-reinitialization
+- `src/pyansys_fluent/autonomy/`: offline Phase 2–6 capability, setup, run-policy, analysis, and bounded-decision contracts; this package has no live Fluent adapter
+- `contracts/examples/08c-carrier-autonomy-scaffold.json`: explicitly non-executable cross-contract example for the first carrier-only vertical slice
 - `src/pyansys_fluent/dependency_workflow.py`: dependency-aware step runner and failure classifier
 - `src/pyansys_fluent/extraction.py`: shared read-mostly extraction helpers for live/offline setup capture
 - `src/pyansys_fluent/setup_common.py`: shared setup-name, boundary, and remap helpers

@@ -1,0 +1,101 @@
+{
+  "example_only": true,
+  "capability_fingerprint": {
+    "schema_version": 1,
+    "fluent_version": "25.2.0",
+    "pyfluent_version": "0.40.2",
+    "solver_mode": "solution",
+    "dimension": 3,
+    "precision": "double",
+    "active_models": [
+      "energy",
+      "mixture"
+    ],
+    "phase_count": 2,
+    "boundary_types": {
+      "liquidinlet": "velocity-inlet",
+      "steaminlet": "velocity-inlet",
+      "steamoutlet": "pressure-outlet"
+    },
+    "source_case_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "capability_recipes": [
+    {
+      "schema_version": 1,
+      "recipe_id": "example-steam-velocity",
+      "semantic_id": "boundaries.steaminlet.velocity",
+      "strategy": "settings_api",
+      "target": "UNVERIFIED_LIVE_PATH_REQUIRED",
+      "readback_target": "UNVERIFIED_LIVE_PATH_REQUIRED",
+      "fingerprint_digest": "a9b7c42c068f09729d428092159bb301188d3542f343b4678d2c1226cb6f37e4",
+      "verified": false,
+      "invalidation_reason": "Example only; no live path has been verified."
+    }
+  ],
+  "setup_spec": {
+    "schema_version": 1,
+    "setup_id": "08c-example-only",
+    "experiment_id": "08c-carrier-loading",
+    "parent_case_path": "C:\\cases\\REPLACE_WITH_VERIFIED_08B_PARENT.cas.h5",
+    "parent_case_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "required_fingerprint_digest": "a9b7c42c068f09729d428092159bb301188d3542f343b4678d2c1226cb6f37e4",
+    "controlled_changes": [
+      {
+        "semantic_id": "boundaries.steaminlet.velocity",
+        "stage": "boundaries",
+        "requested_value": 20.0,
+        "expected_parent_value": 27.118
+      }
+    ],
+    "preserve_semantic_ids": [
+      "models.multiphase",
+      "materials.water_liquid",
+      "numerics.pressure_velocity_coupling"
+    ],
+    "run_policy": {
+      "total_iterations": 500,
+      "chunk_iterations": 25,
+      "checkpoint_interval": 25,
+      "initialization": "hybrid",
+      "resume_enabled": true,
+      "checkpoint_reopen_required": true
+    },
+    "analysis_contract_id": "carrier-loading-v1"
+  },
+  "analysis_contract": {
+    "schema_version": 1,
+    "contract_id": "carrier-loading-v1",
+    "experiment_question": "Does the controlled inlet-loading change alter carrier separation behavior?",
+    "requirements": [
+      {
+        "analysis_id": "carrier_mass_balance",
+        "applicability": "required",
+        "completion_predicates": [
+          "inlet_total",
+          "outlet_total"
+        ],
+        "reason": null
+      },
+      {
+        "analysis_id": "residual_history",
+        "applicability": "required",
+        "completion_predicates": [
+          "final_residuals"
+        ],
+        "reason": null
+      },
+      {
+        "analysis_id": "dpm_summary",
+        "applicability": "not_applicable",
+        "completion_predicates": [],
+        "reason": "Carrier-only first vertical slice."
+      },
+      {
+        "analysis_id": "ewf_snapshot",
+        "applicability": "not_applicable",
+        "completion_predicates": [],
+        "reason": "EWF is outside the first vertical slice."
+      }
+    ]
+  }
+}

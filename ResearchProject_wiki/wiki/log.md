@@ -575,3 +575,12 @@
 - current status: the live case probe is reported passing, and interruption/resume is ready for the university-host live test.
 - blockers: the forced-kill run has not yet been executed against real Fluent, and fresh-session checkpoint reopen verification remains deferred.
 - next immediate action: run `resumable-run-live-001`, kill the worker-owned Fluent PID after a committed nonzero checkpoint, and verify generation transition, one initialization, resumed iteration completion, source immutability, and terminal receipt commitment.
+
+## [2026-07-24] progress-update | Scaffold offline autonomy Phases 2 through 6
+- files created/updated: `../../PyAnsys/src/pyansys_fluent/autonomy/`, `../../PyAnsys/contracts/README.md`, `../../PyAnsys/contracts/examples/08c-carrier-autonomy-scaffold.json`, `../../PyAnsys/tests/test_autonomy_scaffold.py`, `../../PyAnsys/docs/AUTONOMY_PHASES_2_TO_6_SCAFFOLD.md`, `../../PyAnsys/docs/AUTONOMOUS_FLUENT_LOOP_PLAN.md`, `../../PyAnsys/README.md`, `wiki/progress/current-status.md`, `wiki/log.md`
+- purpose: establish testable contracts and safety gates for capability discovery, controlled setup compilation, run policy, analysis completeness, and bounded next-action decisions while the live Phase 1 interruption test runs independently.
+- what changed since last update: added exact capability fingerprints, verified-recipe resolution/invalidation, controlled-versus-preserved setup checks, deterministic setup stage ordering, explicit checkpoint-reopen intent, analysis applicability and completion predicates, interpretation blocking, and a bounded dry-run decision gate.
+- assumptions introduced/removed: introduced an offline-only `08c` carrier example whose Fluent path and parent artifact remain explicit placeholders; its recipe is deliberately unverified and unusable. Retained human approval for every `NEXT_EXPERIMENT` proposal.
+- current status: Phase 2–6 contract scaffolding is implemented and unit-tested but deliberately disconnected from Fluent and the host-worker dispatcher.
+- blockers: no real Fluent 2025 R2 capability fingerprint or readback-verified setting recipe has yet populated the scaffold; no setup executor or analysis plugin registry exists.
+- next immediate action: finish the live Phase 1 forced-kill test, then build a read-only Phase 2 adapter that records one real fingerprint and targeted setting observation before any controlled mutation is attempted.

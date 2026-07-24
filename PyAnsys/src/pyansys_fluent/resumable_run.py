@@ -476,9 +476,16 @@ class ResumableRunStageClient:
                     lambda: self.checkpoint_verifier(
                         checkpoint_case,
                         checkpoint_data,
-                        timeout_seconds=min(
-                            float(spec.command_timeout_seconds),
-                            max(1.0, context.config.health_timeout_seconds),
+                        timeout_seconds=max(
+                            0.001,
+                            min(
+                                float(spec.command_timeout_seconds),
+                                max(
+                                    1.0,
+                                    context.config.health_timeout_seconds,
+                                ),
+                            )
+                            * 0.8,
                         ),
                     ),
                 )
@@ -771,9 +778,13 @@ class ResumableRunStageClient:
             lambda: self.checkpoint_verifier(
                 case_path,
                 data_path,
-                timeout_seconds=min(
-                    float(spec.command_timeout_seconds),
-                    max(1.0, context.config.health_timeout_seconds),
+                timeout_seconds=max(
+                    0.001,
+                    min(
+                        float(spec.command_timeout_seconds),
+                        max(1.0, context.config.health_timeout_seconds),
+                    )
+                    * 0.8,
                 ),
             ),
         )

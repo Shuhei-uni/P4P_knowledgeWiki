@@ -35,7 +35,8 @@
 - The next Phase 1 milestone, `resumable_run`, is implemented and offline-tested. It hybrid-initializes a disposable case once, commits a verified case/data pair after each iteration chunk, leaves an interrupted job nonterminal, requests a fresh Fluent generation, and resumes from only the last atomically committed pair without reinitialization.
 - Phase 1 is not yet live-complete against the original end-to-end acceptance test because the new forced interruption/resume procedure still needs to pass on the university Fluent host.
 - Phase 2 proper remains incomplete: recursive active Settings API discovery, case/model capability fingerprints, and a cache of verified version-specific setting paths still need to be built after the live case probe passes.
-- Phases 3–6 remain future work. The job schemas, spool, and receipts are foundations for the staged executor, but there is not yet a `SetupSpec`, controlled case mutation/readback/reopen flow, autonomous simulation runner, integrated analysis contract, or automatic next-experiment planner.
+- An offline-only Phase 2–6 scaffold now defines versioned capability fingerprints and recipes, `SetupSpec` controlled/preserved changes, `RunPolicy`, analysis applicability/completeness manifests, and a bounded next-action gate. It cannot connect to Fluent, execute mutations, invoke analysis plugins, or schedule another experiment.
+- Phase 2 live discovery and Phases 3–6 execution remain future work. The new compiler refuses unverified or fingerprint-mismatched recipes, every compiled change requires readback and fresh-session reopen, incomplete required analysis blocks interpretation, and `NEXT_EXPERIMENT` remains an approval-required proposal.
 
 ## What Is Done
 - Rough literature overview completed.
@@ -102,11 +103,12 @@
 1. Run the documented `resumable_run` forced-kill test against a disposable copy of a known runnable `.cas.h5` on the university Fluent host, then stop that isolated worker after reviewing the receipt, run state, generation logs, and final checkpoint pair.
 2. Confirm that the live receipt records at least two Fluent generations, exactly one initialization, at least one resume, and the requested final iteration count.
 3. If the live forced-kill test passes, close the Phase 1 recovery gate and implement Phase 2's recursive, read-only capability snapshot with active children, commands, object names, allowed values, active/read-only state, version data, and a case/model fingerprint.
-4. Decide whether setup `08b` should keep treating the current flux result as a scoped steam-line carryover diagnostic or whether a stronger whole-domain mass-balance closure is required before any efficiency claim is written.
-5. Rerun the current active 6-bin DPM subset with a higher tracking budget because both the aggregate summary and the one-injection-at-a-time sample are dominated by `13012` incomplete particles and only `8` escaped particles.
-6. Treat the current per-bin attribution as provisional: the one-injection sampled escape is currently limited to `injection-5-micron`, but stronger interpretation still requires better tracking completion.
-7. Keep the omitted `562.70 um`, `844.06 um`, and `1631.84 um` bins explicitly out of the current interpretation unless a later pass intentionally reactivates them.
-8. Continue cleaning the automated post-processing/export path so the `08b` live results can be regenerated reproducibly without manual Fluent read/load steps.
+4. Feed one live Fluent 2025 R2 fingerprint and one targeted, readback-verified setting recipe into the offline scaffold before connecting any Phase 3 executor to the host worker.
+5. Decide whether setup `08b` should keep treating the current flux result as a scoped steam-line carryover diagnostic or whether a stronger whole-domain mass-balance closure is required before any efficiency claim is written.
+6. Rerun the current active 6-bin DPM subset with a higher tracking budget because both the aggregate summary and the one-injection-at-a-time sample are dominated by `13012` incomplete particles and only `8` escaped particles.
+7. Treat the current per-bin attribution as provisional: the one-injection sampled escape is currently limited to `injection-5-micron`, but stronger interpretation still requires better tracking completion.
+8. Keep the omitted `562.70 um`, `844.06 um`, and `1631.84 um` bins explicitly out of the current interpretation unless a later pass intentionally reactivates them.
+9. Continue cleaning the automated post-processing/export path so the `08b` live results can be regenerated reproducibly without manual Fluent read/load steps.
 
 ## Roadmap Link
 - Run-efficiency roadmap: `../project/roadmap.md`
