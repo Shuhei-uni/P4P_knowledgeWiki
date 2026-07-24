@@ -27,7 +27,7 @@ It exists to organize three smaller child branches that each retire one uncertai
 
 - [09a-dpm-split-inlet-carryover.md](../reported/09a-dpm-split-inlet-carryover.md)
 - [09b-rsm-dpm-split-inlet-accuracy.md](../reported/09b-rsm-dpm-split-inlet-accuracy.md)
-- [09c-dpm-ewf-wall-film-reentrainment.md](../../active/09c-dpm-ewf-wall-film-reentrainment.md)
+- [09c-dpm-ewf-wall-film-reentrainment.md](../reported/09c-dpm-ewf-wall-film-reentrainment.md)
 
 Sequence note:
 
@@ -132,7 +132,7 @@ Main purpose:
 
 ### `09c` Two-Way DPM Coupling
 
-Use [09c-dpm-ewf-wall-film-reentrainment.md](../../active/09c-dpm-ewf-wall-film-reentrainment.md) when the main question is:
+Use [09c-dpm-ewf-wall-film-reentrainment.md](../reported/09c-dpm-ewf-wall-film-reentrainment.md) when the main question is:
 
 ```text
 does physically meaningful droplet loading feed back strongly enough

@@ -7,12 +7,12 @@
 | Setup ID | `09cV2` |
 | Lifecycle | `active` |
 | Role | Skoog-aligned allocation and injection-control experiment |
-| Parent setup | [09c — two-way DPM coupling](../past/archived/09c-dpm-ewf-wall-film-reentrainment.md) |
+| Parent setup | [09c — two-way DPM coupling](../past/reported/09c-dpm-ewf-wall-film-reentrainment.md) |
 | Child setups | [010V2](010V2-ewf-deposition-film-inventory.md) |
 | Controlled changes | liquid/DPM mass partition, EWF-ready DPM material identity, scaled DPM loading, failure-informed source-balance checks |
 | Evidence-use label | setup calculation only until carrier and liquid balance gates pass |
 | Outcome | needs follow-up |
-| Linked report | none |
+| Linked report | [09cV2 diagnostic results](../reports/09cV2/results.md) |
 
 ## 1. Objective
 
@@ -222,4 +222,4 @@ Use the accepted `09cV2` case/data pair and its selected fraction point to creat
 - [Skoog source extraction](../../CFD_wiki/wiki/sources/skoog-2020-annular-flow-three-field-cfd-thesis.md)
 - [Fluent click-by-click guidance](../../CFD_wiki/wiki/guidance/fluent-general-click-by-click.md)
 - [10a server-2 live failure readback](../../PyAnsys/output/live_postprocess_20260721/10a-server2-stripping-live-report.md)
-- [09c parent setup](../past/archived/09c-dpm-ewf-wall-film-reentrainment.md)
+- [09c parent setup](../past/reported/09c-dpm-ewf-wall-film-reentrainment.md)

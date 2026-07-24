@@ -14,3 +14,4 @@ These setup definitions remain available for lineage, failed approaches, or hist
 - [08 — Purnanto one-inlet mass-flow recreation](08-purnanto-one-inlet-massflow-recreation.md)
 - [08a — Steam-outlet extension student trial](08a-steam-outlet-extension-student-trial.md) — currently planned with result fields pending.
 - [09 — Multiphase separator sensitivity family](09-multiphase-separator-sensitivity-family.md)
+- [10a — Intended no-splash EWF deposition control](10a-ewf-deposition.md) — no qualifying clean no-splash result; the recorded artifact was splash-enabled.

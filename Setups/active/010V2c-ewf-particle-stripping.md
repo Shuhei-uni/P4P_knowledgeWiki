@@ -11,7 +11,7 @@
 | Controlled change | particle stripping only |
 | Evidence-use label | diagnostic until stripped-mass balance closes |
 | Outcome | needs follow-up |
-| Linked report | none |
+| Linked report | [010V2c diagnostic results](../reports/010V2c/results.md) |
 
 ## Objective
 

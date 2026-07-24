@@ -6,25 +6,25 @@ Starting from the clean Eulerian Wall Film (EWF) deposition control, what change
 
 ## Comparison scope and evidence quality
 
-All five branches retain the `09cV2` `5%` liquid/DPM accounting basis, EWF DPM-to-film coupling, the `wall` film wall, six original surface injections, and global DPM interaction `Off`. They are a useful mechanism-screening family, but not a matched performance study: the captured states come from different servers, Fluent versions, and iteration windows, and each reported carrier flux scope remains open.
+All five branches retain the `09cV2` `5%` liquid/DPM accounting basis, EWF DPM-to-film coupling, the `wall` film wall, six original surface injections, and global DPM interaction `Off`. The update below uses the new 5,000-iteration evidence where it exists. It is still not a matched performance study: the branches use different servers/releases, `010V2b` has no completed 5,000-iteration analysis, and each reported carrier flux scope remains open.
 
 | Case | Intended change from `010V2` | Captured session / checkpoint | Evidence available now | Comparison use |
 |---|---|---|---|---|
-| `010V2` | clean deposition/drainage control | server `3`; Fluent `2025 R2`; residual monitor to `1884` | carrier/residual, six complete DPM summaries, final film snapshot | control state |
-| `010V2a` | particle splash only | server `2`; Fluent `2024 R2`; monitor to `1963` | carrier/residual, six complete DPM summaries, wall splash readback, final film snapshot | splash activation and snapshot sensitivity |
-| `010V2b` | edge separation only | Fluent `2025 R2.03`; console checkpoint `1498`; server not recorded | complete console DPM/final-film checkpoint; no residual history for that exact checkpoint | edge-separation activation and snapshot sensitivity |
-| `010V2c` | particle stripping only | server `4`; Fluent `2025 R2`; monitor to `1446` | carrier/residual, six complete DPM summaries, final film snapshot | reported stripping-branch fate and film response |
-| `010V2d` | combined optional mechanisms; global DPM still off | server `3`; Fluent `2024 R2`; monitor to `1520` | carrier/residual, six complete DPM summaries, wall splash/separation evidence, final film snapshot | combined-configuration diagnostic |
+| `010V2` | clean deposition/drainage control | server `1`; Fluent `2025 R2`; requested 5,000 checkpoint; residual monitor to `4996` | carrier/residual, six complete DPM summaries, final film snapshot | 5,000-iteration control state |
+| `010V2a` | particle splash only | server `2`; Fluent `2025 R2`; 5,000 iterations | carrier/residual, six complete DPM summaries, wall splash readback, final film snapshot | 5,000-iteration splash diagnostic |
+| `010V2b` | edge separation only | Fluent `2025 R2.03`; console checkpoint `1498`; server not recorded | complete console DPM/final-film checkpoint; 5,000 server-3 connection attempt failed before Fluent access | last completed edge-separation diagnostic |
+| `010V2c` | particle stripping only | server `2`; Fluent `2025 R2`; user-reported 5,000 checkpoint | complete six-injection DPM/final-film analysis; carrier residual/flux bundle not captured | 5,000-iteration stripping diagnostic with carrier gap |
+| `010V2d` | combined optional mechanisms; global DPM still off | server `1`; Fluent `2024 R2`; 5,000 iterations | carrier/residual, six complete DPM summaries, wall splash/separation/stripping event evidence, final film snapshot | 5,000-iteration combined diagnostic |
 
 Every captured carrier state has a selected-surface phase-flow imbalance of about `57.54%` of inlet mixture flow. Therefore, steam-outlet liquid flow, apparent phase efficiency, and dryness are not used below as separator-performance measures.
 
 ## Common clean-EWF baseline
 
-`010V2` is the clean deposition/drainage control: EWF and DPM-to-film coupling are on; splash, edge separation, and stripping are intended off. It establishes a finite, localized film and a reproducible size-selective DPM fate pattern:
+`010V2` is the clean deposition/drainage control: EWF and DPM-to-film coupling are on; splash, edge separation, and stripping are intended off. At the new checkpoint it has a larger but still finite final film and a stronger size-selective DPM fate pattern:
 
 - fine droplets predominantly escape through `steamoutlet`;
 - absorption overtakes direct escape at `168.81 µm` and remains dominant for `348.88 µm`;
-- the film is localized: its `0.152 mm` maximum thickness is much larger than its `1.211 µm` area average.
+- the film is localized: its `0.471 mm` maximum thickness is much larger than its `3.464 µm` area average.
 
 This is a DPM/EWF mechanism baseline, not a validated separator baseline.
 
@@ -34,13 +34,15 @@ All values are final snapshots on the confirmed `wall` film wall. `Δ inventory`
 
 | Case | Film inventory | Δ inventory vs `010V2` | Maximum / area-average thickness | Derived area-average speed | Final CFL | Reported steam-outlet film flow |
 |---|---:|---:|---:|---:|---:|---:|
-| `010V2` control | `0.07150 kg` | baseline | `0.152 mm` / `1.211 µm` | `0.0630 m/s` | `0.00327` | `-1.76e-6 kg/s` |
-| `010V2a` splash | `0.07431 kg` | `+3.9%` | `0.164 mm` / `1.259 µm` | `0.0665 m/s` | `0.01063` | `-6.59e-6 kg/s` |
-| `010V2b` edge separation | `0.05639 kg` | `-21.1%` | `0.123 mm` / `0.955 µm` | `0.0530 m/s` | `0.00323` | `0 kg/s` |
-| `010V2c` stripping branch | `0.05440 kg` | `-23.9%` | `0.121 mm` / `0.921 µm` | `0.0516 m/s` | `0.00285` | `-2.22e-6 kg/s` |
-| `010V2d` combined | `0.05668 kg` | `-20.7%` | `0.125 mm` / `0.960 µm` | `0.0533 m/s` | `0.00321` | `0 kg/s` |
+| `010V2` control, 5,000 | `0.20449 kg` | baseline | `0.471 mm` / `3.464 µm` | `0.1496 m/s`* | `0.00552` | `-1.53e-6 kg/s` |
+| `010V2a` splash, 5,000 | `0.20656 kg` | `+1.0%` | `0.399 mm` / `3.499 µm` | `0.1801 m/s` | `0.01076` | `-2.98e-6 kg/s` |
+| `010V2b` edge separation, last completed `1498` | `0.05639 kg` | `-72.4%`† | `0.123 mm` / `0.955 µm` | `0.0530 m/s` | `0.00323` | `0 kg/s` |
+| `010V2c` stripping branch, 5,000 | `0.20107 kg` | `-1.7%` | `0.410 mm` / `3.406 µm` | `0.1340 m/s` | `0.00493` | `-1.78e-6 kg/s` |
+| `010V2d` combined, 5,000 | `0.20221 kg` | `-1.1%` | `0.457 mm` / `3.425 µm` | `0.1331 m/s` | `0.00507` | `0 kg/s` |
 
-The splash snapshot has the largest stored film, thickness, and final CFL in this family, although its CFL remains small. The edge-separation, stripping, and combined snapshots all contain roughly one-fifth less film inventory than the clean control and have lower derived film speed. This is a useful directional film-state contrast, but the different checkpoint maturity and versions prevent attributing those differences to a mechanism alone.
+\* Derived from the reported area-weighted velocity components; the Fluent magnitude reduction was unavailable. † Not a same-checkpoint comparison: `010V2b` has no completed 5,000-iteration result.
+
+At 5,000 iterations, the splash snapshot has the largest stored film, area-average thickness, derived speed, and final CFL among the completed branches, but its inventory is only about `1%` above the clean control. The stripping and combined snapshots are within about `2%` below the control; `010V2b` remains an earlier, non-comparable checkpoint. This is a snapshot contrast, not a mechanism-only effect, because checkpoint maturity, software release, and history/closure evidence differ.
 
 ## Size-resolved DPM fate comparison
 
@@ -48,13 +50,13 @@ The original-particle terminal mass-transfer rows close to normal printed precis
 
 | Diameter | `010V2` clean | `010V2a` splash | `010V2b` edge separation | `010V2c` stripping branch | `010V2d` combined |
 |---:|---:|---:|---:|---:|---:|
-| `56.27 µm` absorbed mass | `0.01959 kg/s` | `0.01413 kg/s` | `0.01324 kg/s` | `0.009659 kg/s` | `0.01189 kg/s` |
-| `112.54 µm` absorbed mass | `0.1192 kg/s` | `0.1152 kg/s` | `0.1156 kg/s` | `0.1116 kg/s` | `0.1120 kg/s` |
-| `168.81 µm` absorbed mass | `0.2077 kg/s` | `0.2032 kg/s` | `0.1988 kg/s` | `0.1952 kg/s` | `0.1960 kg/s` |
-| `348.88 µm` absorbed mass | `3.619 kg/s` | `3.624 kg/s` | `3.610 kg/s` | `3.567 kg/s` | `3.601 kg/s` |
+| `56.27 µm` absorbed mass | `0.02558 kg/s` | `0.02531 kg/s` | `0.01324 kg/s` | `0.02549 kg/s` | `0.03649 kg/s` |
+| `112.54 µm` absorbed mass | `0.1392 kg/s` | `0.1638 kg/s` | `0.1156 kg/s` | `0.1402 kg/s` | `0.1763 kg/s` |
+| `168.81 µm` absorbed mass | `0.2172 kg/s` | `0.2304 kg/s` | `0.1988 kg/s` | `0.2039 kg/s` | `0.2463 kg/s` |
+| `348.88 µm` absorbed mass | `4.210 kg/s` | `4.276 kg/s` | `3.610 kg/s` | `4.236 kg/s` | `4.310 kg/s` |
 | Absorption-over-escape crossover | `168.81 µm` | `168.81 µm` | `168.81 µm` | `168.81 µm` | `168.81 µm` |
 
-The shared crossover is the strongest family-wide DPM observation: optional EWF mechanisms do not remove the baseline size-selective deposition behaviour at these diagnostic checkpoints. The stripping branch has complete console-reported terminal fates and follows the same progression: `1655` of `2170` tracked `348.88 µm` parcels are absorbed, compared with `474` escapes and `41` traps. Its lower absorbed mass than the clean control is a reported branch response, not a quantified stripping loss.
+The shared crossover is the strongest family-wide DPM observation: optional EWF mechanisms do not remove the baseline size-selective deposition behaviour at these diagnostic checkpoints. At 5,000, the completed branches report `4.210–4.310 kg/s` absorbed for `348.88 µm`; the earlier `010V2b` checkpoint reports `3.610 kg/s` but is not a same-iteration comparison. These are reported branch responses, not quantified mechanism-specific mass losses.
 
 ## Optional-mechanism activation and reported outputs
 
@@ -63,10 +65,10 @@ Event counters, original-particle fates, and generated particles are different a
 | Mechanism / branch | Confirmed or reported activation signal | Reported DPM/film response | Narrowest supported conclusion |
 |---|---|---|---|
 | Clean control — `010V2` | no optional-mechanism event is reported | finite film and six complete original-particle fate summaries | establishes clean EWF deposition pattern |
-| Splash — `010V2a` | wall splash readback on; `12` splash events: four each at `56.27`, `112.54`, and `168.81 µm` | film inventory is `3.9%` above control; original-particle absorption remains size-selective | splash pathway is active for middle-size impacts; event mass is not yet reconciled |
-| Edge separation — `010V2b` | film-boundary separation permitted; `120` separated particles reported for `348.88 µm` | film inventory is `21.1%` below control; coarse class remains absorption-dominant | edge separation activates for the coarse class; its count is not a terminal mass sink |
-| Stripping branch — `010V2c` | stripping-only configuration; complete console fate and film results reported | lower film inventory and absorbed mass than control while retaining the same `168.81 µm` crossover | the stripping branch has a coherent reported response; it does not yet quantify stripped-particle mass separately |
-| Combined — `010V2d` | wall splash/separation active; `20` splash events and `120` separation events for `348.88 µm` | film inventory is `20.7%` below control; coarse absorption remains dominant | combined configuration is operable and repeats coarse optional-mechanism signals; no synergy claim is justified |
+| Splash — `010V2a` | wall splash readback on; splash events printed at `112.54`, `168.81`, and `348.88 µm` (`4`, `8`, and `104` events) | 5,000-iteration film inventory is `1.0%` above the control; original-particle absorption remains size-selective | splash pathway is active; event mass is not yet reconciled |
+| Edge separation — `010V2b` | film-boundary separation permitted; `120` separated particles reported for `348.88 µm` at the last completed `1498` checkpoint | no completed 5,000-iteration result; last film inventory is `72.4%` below the 5,000 control | edge-separation activity is reported, but its 5,000-iteration response is unavailable |
+| Stripping branch — `010V2c` | 5,000-iteration adapter pass did not provide root stripping readback or stripped mass | film inventory is `1.7%` below the 5,000 control; coarse absorbed flow is `4.236 kg/s` | the later state changes the film/fate snapshot, but stripping-specific activity and mass remain unquantified |
+| Combined — `010V2d` | wall splash/separation active; `256` splash and `179` separation events for `348.88 µm`; `11` stripping events also printed | 5,000-iteration film inventory is `1.1%` below the control; coarse absorption remains dominant | combined configuration is operable and repeats coarse optional-mechanism signals; no synergy claim is justified |
 
 `010V2b` requires a specific count caution: the `348.88 µm` console checkpoint reports `2290` tracked and `120` separated particles, while its displayed terminal fate counts sum to `2410`. Preserve the count as an activation signal, but do not use it in a particle or mass closure until Fluent's separated-particle definition is clarified.
 
@@ -86,9 +88,9 @@ The completed original-particle fate rows and final film snapshots provide usefu
 
 ## Working interpretation
 
-**Reported:** every branch retains a finite, localized low-CFL wall film and the same size-selective transition from fine-droplet escape to coarse-droplet absorption. Splash and edge-separation event signals appear only where their related mechanism branches or the combined branch are configured. The stripping branch has complete reported fates and a smaller final film snapshot than the clean control.
+**Reported:** every completed checkpoint retains a finite, localized wall film and the same size-selective transition from fine-droplet escape to coarse-droplet absorption. Splash and edge-separation event signals appear where their related mechanism branches or the combined branch are configured. The 5,000-iteration control, splash, stripping, and combined snapshots have similar final film inventories (within about `2%`), but their DPM absorption values differ materially at the larger diameters.
 
-**Inferred:** the optional mechanisms alter the captured film state and can generate secondary-event signals without overturning the primary size-selective deposition pattern. The lower final inventory in the edge-separation, stripping, and combined branches is a useful hypothesis that optional film-removal pathways may reduce stored wall liquid.
+**Inferred:** the optional mechanisms can alter the captured DPM fate and generate secondary-event signals without overturning the primary size-selective deposition pattern. The earlier apparent inventory reduction in the edge-separation, stripping, and combined branches is not reproduced as a large difference at 5,000 for the completed branches; checkpoint maturity and Fluent-version differences remain confounded.
 
 **Unresolved:** whether any optional mechanism changes time-integrated liquid carryover, film inventory, or deposition efficiency; whether the lower final inventory is a mechanism effect rather than checkpoint maturity; and how event counts map to represented secondary-particle mass.
 
@@ -99,7 +101,7 @@ The combined branch is a configuration diagnostic, not evidence of mechanism syn
 Use one accepted `010V2` case/data checkpoint and one defined physical-time interval for all isolated reruns.
 
 1. Correct the Fluent `2025 R2` diagnostic field tokens and record histories for film inventory, coverage, CFL, `film-dpm-mass-src`, film outflow, `film-stripped-mass`, `film-separated-mass`, and generated injection flow.
-2. Run clean EWF, splash-only, edge-separation-only, and stripping-only cases over the identical interval, preserving the six original injection settings and global DPM interaction state.
+2. Complete the missing `010V2b` 5,000-iteration analysis, then run clean EWF, splash-only, edge-separation-only, and stripping-only cases over the identical interval, preserving the six original injection settings and global DPM interaction state.
 3. Report original-particle fates and generated-particle fates separately, with a mass closure for each mechanism rather than event counts alone.
 4. Include the lower liquid path and mixture/phase fluxes so carrier and film bookkeeping can be closed over the same interval.
 5. Combine only mechanisms that first show bounded film inventory and a reportable generated-particle mass; compare the combination against the same clean-control window.
@@ -111,6 +113,7 @@ Use one accepted `010V2` case/data checkpoint and one defined physical-time inte
 - [010V2b edge-separation result](../../Setups/reports/010V2b/results.md)
 - [010V2c stripping result](../../Setups/reports/010V2c/results.md)
 - [010V2d combined result](../../Setups/reports/010V2d/results.md)
-- [010V2 control DPM fate rows](../../PyAnsys/output/ewf_dpm_diagnostics/010V2-20260722-dpm/dpm_zone_summary.csv)
-- [010V2c stripping-branch DPM fate rows](../../PyAnsys/output/ewf_dpm_diagnostics/010V2c-server4-20260722-dpm/dpm_zone_summary.csv)
-- [010V2d combined DPM fate rows](../../PyAnsys/output/ewf_dpm_diagnostics/010V2d-server3-20260722-dpm/dpm_zone_summary.csv)
+- [010V2 5,000-iteration DPM fate rows](../../PyAnsys/output/ewf_dpm_diagnostics/010V2-5000it-20260723-dpm/dpm_zone_summary.csv)
+- [010V2a 5,000-iteration DPM fate rows](../../PyAnsys/output/ewf_dpm_diagnostics/010V2a-server2-20260724-5000-dpm/dpm_zone_summary.csv)
+- [010V2c 5,000-iteration DPM fate rows](../../PyAnsys/output/ewf_dpm_diagnostics/010V2c-server2-20260723-5000it-dpm/dpm_zone_summary.csv)
+- [010V2d 5,000-iteration DPM fate rows](../../PyAnsys/output/ewf_dpm_diagnostics/010V2d-server1-20260723-5000-dpm/dpm_zone_summary.csv)

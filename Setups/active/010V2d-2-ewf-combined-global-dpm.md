@@ -5,9 +5,9 @@
 | Field | Value |
 |---|---|
 | Setup ID | `010V2d-2` |
-| Lifecycle | `future` |
+| Lifecycle | `active` |
 | Role | global-DPM coupling sensitivity after combined EWF mechanisms |
-| Parent setup | accepted [010V2d](../active/010V2d-ewf-combined-interaction.md) |
+| Parent setup | accepted [010V2d](010V2d-ewf-combined-interaction.md) |
 | Controlled change | global `DPM Interaction with Continuous Phase` only |
 | Evidence-use label | diagnostic until carrier-source and film mass balances close |
 | Outcome | needs follow-up |

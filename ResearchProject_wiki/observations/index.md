@@ -11,6 +11,7 @@ These are working engineering observations, not validation records. Every observ
 3. [03 — 08b/09c global DPM interaction](03-08b-09c-global-dpm-interaction.md)
 4. [04 — 010V2 isolated and combined EWF mechanisms](04-010v2-ewf-mechanism-comparison.md)
 5. [05 — 010V2d/010V2d-2 global DPM interaction with EWF](05-010v2d-global-dpm-interaction.md)
+6. [06 — 010V2a–010V2d iteration continuation](06-010v2-iteration-continuation.md)
 
 See the [observation order dictionary](order-dictionary.md) for the intended controlled comparison and the next decision each observation supports.
 

@@ -80,7 +80,7 @@ This three-way view is useful for tracking branch evolution. It does **not** iso
 | Carrier phase fluxes | Saved `5000`-iteration flux extract | Saved `921`-iteration flux extract | Diagnostic only; checkpoints are unmatched and the lower liquid path is outside the reported scope. |
 | DPM payload and settings | Six-bin, one-way screening payload | Same six-bin `29.22 kg/s` payload; interaction readback on, update every iteration, interval `1` | Confirms the coupling switch was isolated, but the payload is unpartitioned. |
 | Integrated DPM mass/momentum sources | Not applicable to one-way tracking | Not reported | Required before quantifying the carrier forcing introduced by coupling. |
-| DPM terminal fates | Partial six-bin sample, dominated by incomplete tracks | No fate analysis captured; placeholder retained above | Await the `09c` sweep before separating interaction effects from later allocation effects. |
+| DPM terminal fates | Partial six-bin sample with observed escape plus raw incomplete categories | No fate analysis captured; placeholder retained above | Keep incomplete categories out of blocker logic; await the `09c` sweep for interaction effects. |
 | Residual/monitor history | Parent screening reference at `5000` iterations | `921` iterations; continuity around `10^-1` | Insufficient to identify a coupling effect independently of solution maturity. |
 
 The current evidence therefore supports a **setting-isolation result**, not a physics result: the global interaction controls were enabled without intentionally mixing EWF or turbulence changes, but the actual carrier-source history and matched terminal DPM fates are absent.
@@ -118,7 +118,7 @@ That experiment will determine whether global DPM feedback actually changes the 
 - [08b result](../../Setups/reports/08b/results.md)
 - [09c result](../../Setups/reports/09c/results.md)
 - [08b phase-flux extract](../../Setups/reports/08b/phase-flux-result.md)
-- [current 09c setup definition](../../Setups/active/09c-dpm-ewf-wall-film-reentrainment.md)
+- [past reported 09c setup definition](../../Setups/past/reported/09c-dpm-ewf-wall-film-reentrainment.md)
 - [09c coupling build/readback](../../PyAnsys/output/setup09c_two_way_dpm_coupling_summary.json)
 - [09c carrier summary](../../PyAnsys/output/live_postprocess_20260720/09c-summary.json) and [residual history](../../PyAnsys/output/live_postprocess_20260720/09c-residuals_20260720_132009.png)
 - [09cV2 result — third comparison state](../../Setups/reports/09cV2/results.md), [injection summary](../../PyAnsys/output/live_postprocess_20260722/09cV2-server2-dpm/dpm_injection_summary.csv), and [zone/fate rows](../../PyAnsys/output/live_postprocess_20260722/09cV2-server2-dpm/dpm_zone_summary.csv)

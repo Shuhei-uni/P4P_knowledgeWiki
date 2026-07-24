@@ -9,7 +9,7 @@
 | Role | combined wall-film interaction confirmation |
 | Parent setup | accepted subset of [010V2a](010V2a-ewf-splash.md), [010V2b](010V2b-ewf-edge-separation.md), and [010V2c](010V2c-ewf-particle-stripping.md) |
 | Controlled changes | only individually accepted EWF mechanisms |
-| Evidence-use label | future combination diagnostic; not validated by default |
+| Evidence-use label | active combination diagnostic; not validated by default |
 | Outcome | needs follow-up |
 | Linked report | [010V2d diagnostic results](../reports/010V2d/results.md) |
 

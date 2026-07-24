@@ -7,3 +7,5 @@ These setups have numerical efficiency and/or DPM trajectory/fate evidence recor
 - [08b — Purnanto parity split-inlet rebuild](08b-purnanto-parity-split-inlet-rebuild.md) — scoped flux efficiency and DPM fate results.
 - [09a — DPM split-inlet carryover](09a-dpm-split-inlet-carryover.md) — deterministic DPM fate counts, including inherited parent evidence.
 - [09b — DPM stochastic/turbulence sensitivity](09b-rsm-dpm-split-inlet-accuracy.md) — stochastic DPM fate counts and escape-fraction comparisons.
+- [09c — Two-way DPM coupling](09c-dpm-ewf-wall-film-reentrainment.md) — partial coupled carrier-flux diagnostic; not converged.
+- [10a-splash — Eulerian wall film with particle splashing](10a-splash-ewf-deposition.md) — splash-enabled EWF diagnostic recorded under the preliminary `10a` result.

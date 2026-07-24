@@ -62,7 +62,7 @@ The `348.88 µm` count summary was emitted, but Fluent did not complete its mass
 - [v20p00 DPM JSON](../../../PyAnsys/output/dpm_particle_tracks/20260720-dpm-analysis/08c-v20p00-20260720-dpm-particle-track-summary.json), [CSV](../../../PyAnsys/output/dpm_particle_tracks/20260720-dpm-analysis/08c-v20p00-20260720-dpm-particle-track-summary.csv), [transcript](../../../PyAnsys/output/dpm_particle_tracks/20260720-dpm-analysis/08c-v20p00-20260720-dpm-particle-track-transcript.txt)
 - [v32p14 DPM JSON](../../../PyAnsys/output/dpm_particle_tracks/20260720-dpm-analysis/08c-v32p14-20260720-dpm-particle-track-summary.json), [CSV](../../../PyAnsys/output/dpm_particle_tracks/20260720-dpm-analysis/08c-v32p14-20260720-dpm-particle-track-summary.csv), [transcript](../../../PyAnsys/output/dpm_particle_tracks/20260720-dpm-analysis/08c-v32p14-20260720-dpm-particle-track-transcript.txt)
 
-Across the six injections, `v20p00` produced `7358` trapped, `5661` incomplete, and `1` escaped parcel out of `13020` tracked. `v32p14` produced `13007` incomplete and `13` escaped parcels, with no trapped parcels in the captured checkpoint. The higher-loading case is therefore not a resolved increase in carryover; it is dominated by incomplete tracks because the saved carrier field is not sufficiently mature for the larger particles to finish tracking.
+Across the six injections, the sampled records contain observed escapes at `steamoutlet` alongside raw Fluent `trapped`/`incomplete` categories. Under the simplified Purnanto scope, only observed steam-outlet escape is report-facing; the other categories remain raw bookkeeping and are not blockers. The comparison is still diagnostic because the saved carrier field is not sufficiently mature for a strong loading claim.
 
 ## 4. Interpretation
 
@@ -70,4 +70,4 @@ The higher-loading case has higher reported steam-outlet liquid carryover and sl
 
 ## 5. Next action
 
-Continue both cases or save additional checkpoints only after confirming that continuity, phase fraction, whole-domain phase balance, and DPM track completion improve. Do not interpret incomplete tracks as trapped or escaped liquid.
+Continue both cases or save additional checkpoints only after confirming that continuity, residual/monitor stability, iteration maturity, and mesh/convergence evidence improve. Do not relabel incomplete tracks as trapped or escaped liquid; report observed `steamoutlet` escape only.

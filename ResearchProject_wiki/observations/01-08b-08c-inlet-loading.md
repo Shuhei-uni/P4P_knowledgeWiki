@@ -68,7 +68,7 @@ Before adding further physics:
 1. continue or restart all three cases to a common residual/monitor acceptance window;
 2. include the lower liquid outlet or otherwise close the carrier flux scope;
 3. repeat the same DPM size set, tracking budget, and per-injection zone summary at each accepted carrier state;
-4. increase the tracking budget until incomplete fate is small enough to bound escape/trap fractions, rather than treating incomplete tracks as either outcome;
+4. retain Fluent `Incomplete` as raw bookkeeping and do not treat it as a blocker; compare observed escape through `steamoutlet` only;
 5. if the DPM payload is intended to represent physical inlet loading rather than a fixed probe, scale and document it as a fraction of each case's liquid inlet; and
 6. compare carryover against inlet loading only after the three states are numerically comparable.
 

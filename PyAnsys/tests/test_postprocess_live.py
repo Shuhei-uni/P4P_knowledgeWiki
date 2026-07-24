@@ -211,7 +211,8 @@ class PostprocessLiveTests(unittest.TestCase):
         self.assertIn("## Per-Injection DPM Sample", markdown)
         self.assertIn("Prompt order: `injections-first`", markdown)
         self.assertIn("Selected boundaries: `steaminlet`", markdown)
-        self.assertIn("injection-5-micron: tracked `2170`, escaped `8`, trapped `0`, incomplete `2162`", markdown)
+        self.assertIn("injection-5-micron: tracked `2170`, observed escaped `8`", markdown)
+        self.assertIn("raw fate bookkeeping retained in JSON", markdown)
         self.assertIn("Claim class ceiling: `Numerically verified`", markdown)
         self.assertIn("Stored DPM result fields available: `False`", markdown)
 

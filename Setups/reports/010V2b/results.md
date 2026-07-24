@@ -188,3 +188,116 @@ The large positive mixture net is dominated by phase-2 liquid inflow with no pha
 **Unresolved:** time-integrated EWF closure, Film DPM Mass Source, Fluent magnitude reductions, residual history for this exact checkpoint, the `348 µm` separated-count inconsistency, and the mixture mass imbalance. No claim is made that separated particles are an additional terminal mass sink.
 
 **Needs follow-up.** Keep `010V2b` diagnostic. Correct the Fluent 2025 R2 field identifiers, capture report histories before a rerun, clarify the separated-particle count definition, and resolve the large carrier-phase imbalance before using the result for separator-performance or EWF-conservation claims.
+
+## 7. Requested 5000-iteration checkpoint — server 3 connection attempt (2026-07-23)
+
+The operator identified the already-loaded Fluent state as having completed `5000` iterations and requested the same post-simulation analysis against **server `3` only**. This is a requested checkpoint label, not a live readback: the local PyFluent client could not establish a TCP connection to the configured server-3 endpoint before it reached Fluent.
+
+### Commands attempted
+
+| Analysis | Run label | Result |
+|---|---|---|
+| Connection preflight | — | Failed before authentication or session attachment. |
+| EWF/DPM audit | `010V2b-5000-audit-20260723` | Failed at the same TCP preflight; no audit bundle was created. |
+| EWF final-state snapshot | `010V2b-5000-snapshot-20260723` | Failed at the same TCP preflight; no report definition or result was created. |
+| Full DPM sweep, diameter ascending | `010V2b-5000-dpm-20260723` | Failed at the same TCP preflight; no particle tracking or transcript was created. |
+
+All commands used `--server-id 3`. The configured address was `10.104.145.174:64162`; PyFluent raised `InvalidIpPort: Provide a valid 'ip' and 'port'.` Its underlying local socket test reports this error when the configured IP/port cannot be opened. The address and port fields themselves were present and parseable, so this records a reachability failure, not evidence of an invalid Fluent case or analysis setting.
+
+### Analysis applicability at this checkpoint
+
+| Analysis | Status | Evidence / reason |
+|---|---|---|
+| Carrier residual/flux checks | Not available | Server 3 was not reached, so no 5000-iteration carrier values could be read. |
+| DPM fate analysis | Not available | The DPM runner stopped before it could discover injections or submit a track command. |
+| EWF audit/snapshot | Not available | The snapshot runner stopped before it could inspect the loaded wall-film state or create its namespaced reports. |
+| EWF history/closure | Deferred | No live checkpoint or history payload was available. |
+| Edge separation comparison to `010V2-b-1498` | Deferred | No new measured count, separated mass, film inventory, or flux was obtained. |
+
+**Measured:** the three server-3 diagnostic commands were launched and each failed before Fluent access. No state-changing command reached the loaded case/data session.
+
+**Derived:** none. The `010V2-b-1498` results in the preceding section remain the last completed quantitative checkpoint; they must not be presented as 5000-iteration values.
+
+**Unresolved:** 5000-iteration carrier residuals and phase fluxes; EWF film mass, thickness, CFL, source/outflow, and separated mass; all DPM fates and mass closures; and the requested change from the 1498-iteration checkpoint.
+
+**Next action:** refresh or expose the active Fluent gRPC address/port for server `3`, then rerun this same audit → snapshot → complete DPM sweep sequence. If the terminal connected to Fluent can supply its console output or fresh server-info details, attach/paste them so this report can be completed without reusing another server.
+
+## 8. Completed 5000-iteration checkpoint — server 3 (2026-07-23)
+
+This supersedes the unavailable-data status in section 7. The operator identified the loaded state as the `5000`-iteration checkpoint; the exported residual monitor ends at index `4999` (the monitor's stored indexing). All analysis commands used **server `3` only** and the already-loaded case/data pair. Fluent reported `Ansys Fluent 2025 R2`; case/data filenames were not exposed by the read-only workflow.
+
+Execution was sequential: audit → final-state EWF snapshot → full diameter-ascending DPM sweep → carrier flux → residual export. Each completed command was observed for `360 s` after launch/completion, with its expected output files checked at one-minute intervals before the next command started.
+
+### Analysis applicability
+
+| Analysis | Status | Evidence / limitation |
+|---|---|---|
+| Carrier flux and residual checks | Completed | Phase flux and seven residual curves captured; mixture mass-flow report remains unavailable. |
+| DPM fate analysis | Completed | All six discovered injections met the transcript completion gate and have raw per-injection reports. |
+| EWF audit and final-state snapshot | Completed with adapter limitations | `wall` is the active film wall and permits film-boundary separation; DPM source and velocity-magnitude field aliases were rejected by the 2025 R2 adapter. |
+| EWF history / closure | Deferred | One final state supports bookkeeping only, not a time-integrated closure. |
+| Edge separation | Active by runtime evidence | The `348.88 µm` raw DPM transcript reports `171` separated events/particles. Its represented separated mass was not captured. |
+| Splash / stripping | Not available / not applicable | No splash count was printed; stripping is not enabled by this branch and is not reported as zero. |
+
+### Carrier field and numerical state
+
+| Quantity | 1498 checkpoint | 5000 checkpoint | Interpretation |
+|---|---:|---:|---|
+| Liquid inlet flow | `111.074 kg/s` | `111.074 kg/s` | phase-2 inlet flow |
+| Steam-outlet vapor flow | `81.420448 kg/s` | `81.417704 kg/s` | phase-1 outlet flow |
+| Phase-derived mixture imbalance | `110.343552 kg/s` (`57.54%`) | `110.346296 kg/s` (`57.54%`) | effectively unchanged; prevents a global conservation claim |
+| Final continuity residual | `1.917e-3` | `7.405e-3` | `3.86×` higher |
+| Final `k` residual | `5.306e-3` | `6.318e-2` | `11.91×` higher |
+| Final epsilon residual | `7.746e-3` | `1.592e-1` | `20.56×` higher |
+| Final liquid-volume-fraction residual | `1.342e-3` | `1.398e-3` | `1.04×` higher |
+
+The residual export contains `999` points over indices `256`–`4999`. The residual state has worsened relative to the 1498 checkpoint, while the large phase-derived flow imbalance persists. These fields are therefore numerical-state diagnostics, not evidence of carrier convergence or separator validation.
+
+### EWF final-state comparison
+
+| Quantity | 1498 checkpoint | 5000 checkpoint | Change / limit |
+|---|---:|---:|---|
+| Maximum film Courant number | `0.00323162` | `0.0109636` | `3.39×` higher; still a final-state numerical diagnostic |
+| Total film mass | `0.0563906 kg` | `0.2054263 kg` | `+0.149036 kg` (`3.64×`) current inventory |
+| Maximum film thickness | `122.825 µm` | `450.151 µm` | `3.67×` higher local maximum |
+| Area-weighted film thickness | `0.955184 µm` | `3.479654 µm` | `3.64×` higher distributed average |
+| Film outflow mass | `0 kg` | `0 kg` | Fluent-reported final-state quantity, not a rate or interval balance |
+| Boundary film mass flow | `0 kg/s` at all three boundaries | `0 kg/s` at all three boundaries | `liquidinlet`, `steaminlet`, `steamoutlet`; not a closure |
+| Area-average film velocity components | `x=0.05092`, `y=0.000651`, `z=0.01472 m/s` | `x=0.14821`, `y=-0.001623`, `z=0.05674 m/s` | components only; magnitude report was unavailable |
+
+The snapshot did not obtain `Film DPM Mass Source`, velocity-magnitude reductions, or `Film Separated Mass`. The live allowed-value list identifies the valid Fluent 2025 R2 aliases as `film-dpm-mass-src` and `film-velocity-mag`; the current runner still requested unsupported aliases. In addition, its global EWF adapter marked the optional separation field inactive despite the wall-level readback and the raw DPM separation event. Consequently, no separated mass is inferred from the event count, and the snapshot remains `bookkeeping-only`.
+
+### DPM Particle Tracks Summary — complete sweep
+
+All terminal mass-flow rows close within Fluent's printed precision (absolute relative residual at most `2.16e-4`). `Absorbed` is a terminal fate; the EWF absorbed-event count is retained separately. The `171` separated value below is a secondary event/parcel diagnostic from the raw `348.88 µm` transcript, not an additional terminal mass sink.
+
+| Diameter (µm) | Net flow (kg/s) | Tracked | Escaped | Trapped | Incomplete | Final absorbed | EWF absorbed events | Separated events | Closure relative residual |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| `5.63` | `0.03801` | 2170 | 2163 | 0 | 7 | not printed | not printed | not printed | `-6.84e-5` |
+| `28.14` | `0.15610` | 2170 | 2151 | 5 | 4 | 10 | 10 | not printed | `2.15e-4` |
+| `56.27` | `0.19410` | 2170 | 1930 | 48 | 1 | 191 | 191 | not printed | `1.94e-4` |
+| `112.54` | `0.39010` | 2170 | 1295 | 66 | 0 | 809 | 809 | not printed | `7.69e-5` |
+| `168.81` | `0.39010` | 2170 | 854 | 43 | 0 | 1273 | 1273 | not printed | `-7.95e-5` |
+| `348.88` | `4.70200` | 2341 | 236 | 79 | 2 | 2024 | 2024 | 171 | `8.44e-5` |
+
+Escaped terminal particles exit at `steamoutlet`; trapped particles are at `bottom`. At `348.88 µm`, the new terminal counts sum exactly to the tracked count (`236 + 79 + 2 + 2024 = 2341`), while separation remains separately reported. The dominant `348.88 µm` mass-flow fates are `4.264 kg/s` absorbed, `0.2952 kg/s` escaped, `0.1424 kg/s` trapped, and `3.211e-6 kg/s` incomplete, against `4.702 kg/s` net injection.
+
+Relative to the 1498 checkpoint, escape counts fell and absorbed/trapped counts rose across the coarse classes. The `348 µm` result changed from `542` escaped / `1705` absorbed / `43` trapped / `120` separated to `236` escaped / `2024` absorbed / `79` trapped / `171` separated. Its absorbed flow rose from `3.610` to `4.264 kg/s`, while escaped flow fell from `0.9849` to `0.2952 kg/s`. This supports increased wall-film interception at this later checkpoint, but not a separated-particle mass balance.
+
+### Interpretation and next action
+
+**Measured:** the 5000-iteration checkpoint has a substantially larger film inventory and thickness, a complete six-injection DPM sweep, and `171` raw-transcript separation events for the largest diameter. Coarse DPM parcels are more absorption-dominant than at the 1498 checkpoint.
+
+**Derived:** film inventory, maximum thickness, and area-average thickness are each approximately `3.64×` their 1498 values. The DPM terminal flow closures are within output precision; separated events are deliberately excluded from those closures.
+
+**Unresolved:** time-integrated EWF conservation; generated separation-parcel mass and eventual fate; Film DPM Mass Source; velocity magnitudes; confirmed global splash/edge/stripping API readback; and carrier convergence/mass balance. The elevated residuals and persistent `57.54%` phase-derived imbalance keep this result diagnostic.
+
+**Next action:** repair the Fluent 2025 R2 report-field aliases, then create EWF history files before continuing the solve so the next checkpoint can distinguish film storage, DPM source, outflow, and separated mass over a defined interval. Do not use this checkpoint for separator-performance validation until the carrier balance is resolved.
+
+### Machine-readable evidence — 5000 checkpoint
+
+- [Server-3 EWF/DPM audit](../../../PyAnsys/output/ewf_dpm_diagnostics/010V2b-5000-audit-20260723-r2/model_audit.json)
+- [EWF final reports](../../../PyAnsys/output/ewf_dpm_diagnostics/010V2b-5000-snapshot-20260723-r2/final_reports.csv), [film-boundary fluxes](../../../PyAnsys/output/ewf_dpm_diagnostics/010V2b-5000-snapshot-20260723-r2/film_flux.csv), and [snapshot raw results](../../../PyAnsys/output/ewf_dpm_diagnostics/010V2b-5000-snapshot-20260723-r2/raw_results.json)
+- [DPM injection summary](../../../PyAnsys/output/ewf_dpm_diagnostics/010V2b-5000-dpm-20260723-r2/dpm_injection_summary.csv), [zone/mass-flow summary](../../../PyAnsys/output/ewf_dpm_diagnostics/010V2b-5000-dpm-20260723-r2/dpm_zone_summary.csv), and [complete DPM transcript](../../../PyAnsys/output/ewf_dpm_diagnostics/010V2b-5000-dpm-20260723-r2/dpm_particle_track_transcript.txt)
+- [348.88 µm raw DPM report](../../../PyAnsys/output/ewf_dpm_diagnostics/010V2b-5000-dpm-20260723-r2/dpm_raw/03-water-liquid-at-psep-348um.txt)
+- [Carrier flux check](../../../PyAnsys/output/post_simulation_analysis/010V2b-5000-20260723-flux-check.json), [residual check](../../../PyAnsys/output/post_simulation_analysis/010V2b-5000-20260723-residual-check.json), and [residual plot](../../../PyAnsys/output/post_simulation_analysis/010V2b-5000-20260723-residual-check.png)

@@ -11,6 +11,7 @@ This dictionary gives the project reasoning sequence for comparisons. It does no
 | `03` | global DPM interaction | `08b` vs `09c` | Does DPM source feedback change the carrier field? | early coupling-screening observation | make a matched one-way/two-way comparison only after the carrier field is mature |
 | `04` | isolated/combined EWF mechanisms | `010V2` vs `010V2a/b/c/d` | Which wall-film mechanism changes the clean deposition control? | EWF mechanism-screening observation | quantify mechanisms separately before treating the combined branch as physical |
 | `05` | global DPM + EWF | `010V2d` vs `010V2d-2` | What does global DPM source feedback add to the combined EWF state? | conditional local film/fate observation | restart from one matched parent checkpoint with only global interaction toggled |
+| `06` | EWF iteration continuation | each of `010V2a/b/c/d`, earlier checkpoint vs `5000` | Has the film/fate state become stationary as the solve continues? | diagnostic continuation observation | add interval histories and restart one matched branch before drawing a convergence conclusion |
 
 ## Relationship map
 
@@ -20,6 +21,7 @@ inlet loading (01)
     -> one-way/two-way DPM feedback (03)
     -> EWF deposition and isolated mechanisms (04)
     -> combined EWF plus global DPM feedback (05)
+    -> within-branch iteration continuation (06)
 ```
 
 The map is a reasoning path, not a claim that every earlier numerical gate has already passed. A later observation may be exploratory while an earlier one remains unresolved.

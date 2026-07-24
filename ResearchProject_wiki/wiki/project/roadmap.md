@@ -1,7 +1,7 @@
 # Project Roadmap
 
 ## Purpose
-Define the project run sequence from the current state of the separator work. This roadmap treats setup `08b` as the past reported parity parent, with active work continuing in `08c` inlet-loading sensitivity and `09c` two-way DPM coupling.
+Define the project run sequence from the current state of the separator work. This roadmap treats setup `08b` as the past reported parity parent and `09c` as a past reported two-way-DPM diagnostic. Active work now comprises `08c` inlet-loading sensitivity, `09cV2` allocation control, and the complete `010V2` EWF family.
 
 The immediate job is:
 
@@ -11,9 +11,9 @@ The immediate job is:
 4. only then add new DPM sensitivities or higher-realism physics one branch at a time.
 
 ## Current Starting Point
-- Date: `2026-06-11`
-- Active setup branch: `../../Setups/active/08c-purnanto-parity-inlet-velocity-sensitivity.md`
-- Branch role: extraction-first parity-reset branch that preserves the observed Purnanto Fluent setup while introducing the project's split-inlet objective.
+- Date: `2026-07-24`
+- Active setup authority: `../../../Setups/active/index.md`
+- Active branch roles: `08c` retains the inlet-loading sensitivity, `09cV2` controls Skoog-style allocation and injection bookkeeping, and the `010V2` family isolates EWF deposition, splash, edge separation, stripping, and combined/global-DPM interaction.
 - Current model-family classification for setup `08b`:
   - steady `Mixture` carrier-flow solve;
   - observed Purnanto continuous-phase settings treated as primary authority;
@@ -23,17 +23,17 @@ The immediate job is:
   - not yet a fully coupled `Mixture + DPM` solve;
   - not yet a wall-film branch;
   - not yet a transient branch.
-- Current status: setup `08b` has reported numerical screening results but is not externally validated; active branches are `08c` and `09c`.
+- Current status: setup `08b` has reported numerical screening results but is not externally validated; active branches are `08c`, `09cV2`, and all `010V2` records listed in the active index.
 - Retained comparison branches:
-  - `../../Setups/past/reported/07-pure-phase-split-actual-area.md` remains comparison-only split-inlet context;
-  - `../../Setups/past/archived/08-purnanto-one-inlet-massflow-recreation.md` remains a useful one-inlet automation/parity scaffold;
-  - `../../Setups/past/archived/09-multiphase-separator-sensitivity-family.md` is parked until a stronger parity-reset parent exists.
+  - `../../../Setups/past/reported/07-pure-phase-split-actual-area.md` remains comparison-only split-inlet context;
+  - `../../../Setups/past/archived/08-purnanto-one-inlet-massflow-recreation.md` remains a useful one-inlet automation/parity scaffold;
+  - `../../../Setups/past/archived/09-multiphase-separator-sensitivity-family.md` is parked until a stronger parity-reset parent exists.
 - `User-specified`: brine-outlet reconstruction and lower-water initialization are no longer active roadmap items for the main project path.
 - `User-specified`: the main project risk is now human setup drift away from the real Purnanto case, so extraction-driven parity recovery takes priority over continuing setup `07` V&V.
 
 ## Immediate Next Child Branch After Setup 08b
 
-- Active child branch: `../../Setups/active/08c-purnanto-parity-inlet-velocity-sensitivity.md`
+- Active child branch: `../../../Setups/active/08c-purnanto-parity-inlet-velocity-sensitivity.md`
 - Branch role: test how inlet loading / inlet velocity changes separator efficiency while keeping the same enthalpy basis used by setup `08b`.
 - Interpretation rule:
   - keep inlet **specific enthalpy** fixed across the sweep;
@@ -62,6 +62,7 @@ The immediate job is:
   - lower-vessel water initialization;
   - interpreting full-vessel liquid inventory closure as the main success criterion for the next baseline.
 - `Inferred`: because the current risk is setup-fidelity error, the acceptance gate must first ask whether the rebuilt branch actually matches the observed Purnanto setup except for the intentional inlet change.
+- Whole-domain liquid or mixture imbalance is an accepted consequence of the simplified Purnanto geometry, which has no modelled lower-liquid discharge path; it is not a blocker or acceptance metric for this phase.
 
 ## Operating Rules
 1. Do not launch a new V&V run until the extracted-versus-rebuilt setup diff is reviewed.
@@ -75,7 +76,7 @@ The immediate job is:
    - pressure-drop monitor or equivalent pressure summary,
    - phase mass-flow report at inlet and steam outlet,
    - steam-outlet liquid carryover metric,
-   - DPM `escaped`, `trapped`, and `incomplete` counts if DPM is used,
+   - DPM escaped count and represented escaped mass at `steamoutlet` if DPM is used,
    - short conclusion: `keep`, `reject`, or `needs follow-up`.
 6. Keep claim strength explicit:
    - `diagnostic only`,
@@ -160,7 +161,6 @@ Can the parity-reset split-inlet branch run stably enough to become the project'
 - pressure drop;
 - steam-outlet liquid carryover;
 - outlet dryness or steam quality proxy;
-- steam-phase mass imbalance;
 - any separator-flow metric judged important enough to report, such as vortex structure or tangential velocity pattern.
 
 ### Deliverable
@@ -181,8 +181,7 @@ Can the DPM layer be rebuilt from extracted evidence and then extended with a ju
 - extracted `DPM` model-state summary;
 - injection location and definition used;
 - `escaped`;
-- `trapped`;
-- `incomplete`;
+- observed escaped count/mass at `steamoutlet`;
 - droplet size;
 - scoped carryover interpretation.
 
@@ -220,11 +219,9 @@ How strong is the evidence for setup `08b` once parity and numerical acceptance 
 Add one realism feature at a time. Each new branch must answer one new physics question without changing several other things at once.
 
 ### Recommended Escalation Order
-1. DPM tracking cleanup branch
-   - goal: reduce or bound incomplete tracks.
-2. DPM stochastic/turbulence sensitivity branch
+1. DPM stochastic/turbulence sensitivity branch
    - goal: check whether DRW or related turbulence dispersion materially changes carryover.
-3. Two-way DPM coupling branch
+2. Two-way DPM coupling branch
    - goal: test whether droplet loading changes the carrier flow.
    - gate: only after one-way DPM is stable and a physically meaningful droplet mass loading is defined.
 4. Wall-fate sensitivity branch
@@ -243,7 +240,7 @@ Add one realism feature at a time. Each new branch must answer one new physics q
 
 ### Future Setup 10/11 Direction
 
-The next wall-film work is recorded in [setup 10](../../Setups/future/10-wall-film-reentrainment-and-dpm-interaction-plan.md) as independently runnable children rather than a single combined jump. [Setup 11](../../Setups/future/11-combined-wallfilm-dpm-plan.md) is reserved for combinations after the individual mechanisms are readable.
+The next wall-film work is recorded in [setup 10](../../../Setups/future/10-wall-film-reentrainment-and-dpm-interaction-plan.md) as independently runnable children rather than a single combined jump. [Setup 11](../../../Setups/future/11-combined-wallfilm-dpm-plan.md) is reserved for combinations after the individual mechanisms are readable.
 
 Recommended order:
 

@@ -18,11 +18,11 @@ Record actual inlet/outlet values, units, equations, and scoped interpretation.
 
 ### DPM injection trajectory/fate
 
-Record injection name, diameter, represented flow, injected count, escaped, trapped, and incomplete counts.
+Record injection name, diameter, represented flow, injected count, and observed escaped count/represented mass at `steamoutlet`. Keep other Fluent fate categories in linked raw artifacts unless they directly answer the setup question.
 
 ## 3. Residuals and solution state
 
-Record iteration count, residual behavior, monitors, mass imbalance, and convergence limitations.
+Record iteration count, residual behavior, monitor stability, mesh status, and convergence limitations. Whole-domain liquid/mixture imbalance is informational only for the simplified Purnanto geometry.
 
 ## 4. Visual findings
 
@@ -30,7 +30,7 @@ Record contour, vector, streamline, pathline, or geometry observations with evid
 
 ## 5. Interpretation and limitations
 
-Separate observed numerical results from inferred physical meaning. Keep unresolved or incomplete categories visible.
+Separate observed numerical results from inferred physical meaning. Keep raw unresolved categories traceable without presenting them as blockers.
 
 ## 6. Conclusion
 

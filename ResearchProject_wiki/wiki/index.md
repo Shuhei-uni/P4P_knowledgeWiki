@@ -19,13 +19,19 @@
 - `../../Setups/past/archived/08-purnanto-one-inlet-massflow-recreation.md`
 - `../../Setups/past/reported/08b-purnanto-parity-split-inlet-rebuild.md`
 - `../../Setups/active/08c-purnanto-parity-inlet-velocity-sensitivity.md`
-- `../../Setups/active/09c-dpm-ewf-wall-film-reentrainment.md`
+- `../../Setups/past/reported/09c-dpm-ewf-wall-film-reentrainment.md`
+- `../../Setups/active/09cV2-skoog-partition-injection-control.md`
+- `../../Setups/active/index.md` — canonical list for the complete active `010V2` family.
 - `../../Setups/reports/index.md`
 
 ## Progress Layer
 - `wiki/progress/current-status.md`
 - `wiki/progress/experiments.md`
 - `wiki/progress/blockers.md`
+
+## Simulation Observations
+- `../observations/index.md`
+- `../observations/06-010v2-iteration-continuation.md` — later 5,000-iteration diagnostic comparison for `010V2a`–`010V2d`.
 
 ## Verification And Validation Layer
 - `wiki/vnv/index.md`

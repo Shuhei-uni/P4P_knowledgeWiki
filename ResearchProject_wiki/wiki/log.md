@@ -1,5 +1,39 @@
 # Work Log
 
+## [2026-07-24] progress-update | Reclassify Purnanto scope limitations
+- files created/updated: `wiki/model/baseline-cfd.md`, `wiki/progress/blockers.md`, `wiki/project/roadmap.md`, `../../CFD_wiki/wiki/physics-basis/uncertainties-and-assumption-register.md`, `../../Setups/index.md`, `../../Setups/templates/results-report-template.md`, `../../PyAnsys/src/pyansys_fluent/postprocess_live.py`, `../../PyAnsys/tests/test_postprocess_live.py`, `../../skills/post-simulation-analysis/SKILL.md`, `../../skills/post-simulation-analysis/references/report-structure.md`, `wiki/log.md`
+- reason: align project interpretation with the simplified Purnanto geometry and stop treating missing lower-liquid closure or Fluent `Incomplete` DPM trajectories as active blockers.
+- what changed since last update: added the governing scope boundary, downgraded BLK-008/BLK-009 to accepted scope limitations, refocused active blocker language on residuals, iteration maturity, monitors, mesh quality/convergence, and made generated reports retain raw diagnostics without using them as gates.
+- assumptions introduced/retired: introduced the explicit `purnanto_simplified_no_liquid_outlet` policy; retired whole-domain imbalance and incomplete DPM completion as current acceptance criteria.
+- current status: residuals, iteration maturity, mesh convergence, and setup parity remain the active numerical concerns.
+- blockers: no new blocker introduced by this interpretation change; automated pytest verification is unavailable in the current environment.
+- next immediate action: run the post-processing test suite where pytest is available and review generated report wording for active setup outputs.
+
+## [2026-07-24] model-update | Refresh EWF observations with 5,000-iteration checkpoints
+- files created/updated: `observations/04-010v2-ewf-mechanism-comparison.md`, `observations/05-010v2d-global-dpm-interaction.md`, `wiki/log.md`
+- reason: synchronize the cross-branch EWF and global-DPM observations with the newly populated 5,000-iteration setup reports.
+- what changed: replaced the stale lower-iteration film, DPM-fate, event, and residual values with the latest completed checkpoints; retained `010V2b` as unavailable at 5,000 and `010V2d-2` at its latest completed 4,189 checkpoint.
+- assumptions introduced/retired: no mechanism or global-DPM causal claim was strengthened; unmatched checkpoints, open carrier balance, missing EWF histories, and unavailable generated-particle mass remain explicit.
+- next immediate action: obtain a completed `010V2b` 5,000 checkpoint and a matched `010V2d`/`010V2d-2` interval before interpreting mechanism or global-interaction effects physically.
+
+## [2026-07-24] synthesis | Deepen 010V2 5,000-iteration continuation analysis
+- files created/updated: `observations/06-010v2-iteration-continuation.md`, `wiki/log.md`
+- purpose: replace the endpoint-only continuation screen with a checkpoint-comparability audit, normalized coarse-DPM fate shifts, film localisation/transport analysis, residual-tail variability screen, and an evidence-ranked next-run decision.
+- assumptions introduced or retired: retained continued net film storage as an inference rather than a closed balance; retired the implicit idea that low final 5,000-iteration film CFL or a lower final turbulence residual alone demonstrates a settled state.
+- next immediate action: instrument one verified restart interval with film source/flux/CFL histories and full carrier coverage before any further end-only continuation checkpoint.
+
+## [2026-07-24] model-update | Record 010V2 5,000-iteration continuation observation
+- files created/updated: `observations/06-010v2-iteration-continuation.md`, `observations/index.md`, `observations/order-dictionary.md`, `wiki/index.md`, `wiki/progress/current-status.md`, `wiki/log.md`
+- purpose: compare the new 5,000-iteration evidence for the splash, edge-separation, stripping, and combined EWF branches against their earlier lower-iteration checkpoints without conflating it with the existing cross-mechanism observation.
+- assumptions introduced or retired: retained final-state film and terminal-fate changes as diagnostic trends only; did not infer convergence, EWF closure, mechanism causality, or separator performance from the open carrier scope, missing histories, and unmatched session metadata.
+- next immediate action: repair the EWF report aliases and record interval histories plus complete carrier boundary fluxes before continuing one branch from a verified shared checkpoint.
+
+## [2026-07-24] refactor | Reconcile active setup lifecycle
+- files created/updated: `../../Setups/active/`, `../../Setups/past/reported/`, `../../Setups/past/archived/`, `../../Setups/order-dictionary.md`, `../../Setups/reports/`, `observations/03-08b-09c-global-dpm-interaction.md`, `wiki/index.md`, `wiki/project/roadmap.md`, `wiki/progress/current-status.md`, `wiki/log.md`
+- purpose: make `08c`, `09cV2`, and the complete `010V2` family the sole active setup set and remove the experimental HTML/MDX presentation copies.
+- assumptions introduced or retired: classified the splash-enabled recorded artifact as `10a-splash` evidence rather than a clean no-splash `10a` result; retained future `10` and `11` family plans as future rather than treating them as displaced active setups.
+- next immediate action: use `Setups/active/index.md` as the canonical execution list and keep new numerical findings in the linked setup reports.
+
 ## [2026-07-22] model-update | Strengthen 010V2d global-DPM-plus-EWF comparison
 - files created/updated: `observations/05-010v2d-global-dpm-interaction.md`, `wiki/log.md`
 - reason: make the combined-EWF global-DPM interaction evidence more transparent without expanding its claim strength.

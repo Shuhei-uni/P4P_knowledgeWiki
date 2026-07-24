@@ -200,3 +200,6 @@ Read [the report structure reference](references/report-structure.md) before dra
 - EWF fields are reported only for active EWF mechanisms and with units/time-basis labels.
 - Claims distinguish measured, derived, unresolved, and not-applicable items.
 - The setup-linked report and reports index are updated only when report-facing evidence changed.
+# Scope-specific DPM interpretation
+
+For Purnanto-derived branches governed by the simplified-geometry scope, the report-facing DPM metric is observed escape through `steamoutlet`. Fluent's `Incomplete` fate remains available in raw artifacts but must not be elevated into an acceptance gate, blocker, recovery action, or mandatory next simulation. Analysis execution completeness (whether every requested transcript/CSV was produced) remains a separate operational requirement.

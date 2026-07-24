@@ -34,14 +34,14 @@ Include this when carrier results or convergence evidence exist:
 
 - inlet/outlet phase fluxes and the exact scope of any efficiency/dryness metric;
 - residual/monitor status;
-- mass-balance limitation or convergence limitation;
+- geometry/output scope and numerical convergence limitation;
 - a clear distinction between a scoped diagnostic and full separator validation.
 
 ## 4. DPM results (only for active DPM)
 
 Summarise one row per injection:
 
-| Diameter | Injection | Net flow | Escaped | Trapped | Incomplete | Final absorbed | EWF absorbed events | Splash events | Closure residual |
+| Diameter | Injection | Net flow | Observed escaped | Final absorbed | EWF absorbed events | Splash events | Closure residual |
 |---:|---|---:|---:|---:|---:|---:|---:|---:|---:|
 
 Then state:
@@ -49,7 +49,7 @@ Then state:
 - terminal zones, especially escaped outlets and trapped walls;
 - whether the final fate totals include generated secondary splash parcels;
 - whether the mass-flow closure is within printed/reporting precision;
-- limitations such as unresolved/incomplete particles.
+- raw fate bookkeeping may include Fluent `Incomplete` values, but these are not automatically report blockers.
 
 Do not add splash events or represented secondary mass as a second sink when their later final fates are already included.
 
@@ -93,6 +93,6 @@ Separate these three elements:
 
 - **Measured:** direct values and files produced by Fluent.
 - **Derived:** equations, ratios, or comparisons made from those values.
-- **Unresolved:** incomplete trajectories, unclosed balance, missing history, inactive/unknown mechanism, or version-adapter limitation.
+- **Unresolved:** missing history, inactive/unknown mechanism, or version-adapter limitation. For the simplified Purnanto scope, open liquid balance and Fluent `Incomplete` trajectories are recorded as scope metadata rather than active blockers.
 
 End with the smallest justified next action. Examples: continue the carrier solve, create histories before a rerun, compare to the named parent, repair a confirmed model mismatch, or keep the result diagnostic.

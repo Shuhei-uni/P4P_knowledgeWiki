@@ -12,7 +12,7 @@
 | Controlled changes | EWF model, EWF wall coupling, transient film solution, wall-film boundary condition, staged global-DPM source coupling |
 | Evidence-use label | diagnostic until film mass balance and carrier gates pass |
 | Outcome | needs follow-up |
-| Linked report | none |
+| Linked report | [010V2 diagnostic results](../reports/010V2/results.md) |
 
 ## 1. Objective
 

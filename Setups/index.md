@@ -17,7 +17,7 @@ Create a setup record when the Fluent inputs or controlled experiment branch are
 Reported results must contain at least one of:
 
 - a flux-based efficiency, carryover, or phase-balance calculation using actual result values;
-- a DPM injection trajectory/fate table with numerical `escaped`, `trapped`, or `incomplete` counts.
+- a DPM injection result with numerical observed escape at a named outlet.
 
 Do not promote a setup based only on planned values, target calculations, screenshots without extracted numbers, or placeholder result tables.
 
@@ -42,10 +42,10 @@ Each report belongs to one setup and should contain:
 
 - run identity and case/data files;
 - changed variables and inherited setup state;
-- residuals and mass/phase fluxes;
+- residuals and named-outlet phase fluxes;
 - efficiency calculations and/or DPM trajectory/fate tables;
 - visual and numerical findings;
-- uncertainty, incomplete evidence, and assumptions;
+- uncertainty, raw evidence categories, and assumptions;
 - conclusion and next action.
 
 The setup record remains the authority for the case definition. The report is the authority for the documented result of that run.

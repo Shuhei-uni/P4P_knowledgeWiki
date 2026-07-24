@@ -7,10 +7,11 @@
 | Setup ID | `10a` |
 | Lifecycle | `archived` |
 | Role | intended no-splash EWF deposition/drainage control; recorded artifact is splash-enabled |
-| Parent setup | [09c](09c-dpm-ewf-wall-film-reentrainment.md) |
-| Evidence-use label | active diagnostic; preliminary result available, but not a clean no-splash control |
+| Parent setup | [09c](../reported/09c-dpm-ewf-wall-film-reentrainment.md) |
+| Evidence-use label | archived setup-only control; the preliminary splash-enabled result belongs to `10a-splash` |
 | Outcome | needs follow-up |
-| Related child | [10a-splash](10a-splash-ewf-deposition.md) |
+| Linked report | none — the splash-enabled saved artifact is filed under `10a-splash` |
+| Related child | [10a-splash](../reported/10a-splash-ewf-deposition.md) |
 | Family plan | [Setup 10 family plan](../../future/10-wall-film-reentrainment-and-dpm-interaction-plan.md) |
 
 ## 1. Purpose
@@ -40,4 +41,4 @@ All geometry, mesh, carrier model, inlet/outlet package, six-injection payload, 
 
 ## 3. Current status
 
-`10a` remains the intended no-splash branch, but it is not yet an executed no-splash reference. The available case/data checkpoint is documented in the [preliminary 10a report](../reports/10a/results.md) and has `wall` as an EWF wall, `bottom` without EWF, and splash enabled. Use that result as a splash-sensitive diagnostic, not as the clean control. Create a fresh case with both global and wall-level splash disabled before making a no-splash comparison.
+`10a` remains the intended no-splash branch, but it is not yet an executed no-splash reference. The available case/data checkpoint is documented in the [preliminary 10a report](../../reports/10a/results.md) and has `wall` as an EWF wall, `bottom` without EWF, and splash enabled. Use that result as a splash-sensitive diagnostic, not as the clean control. Create a fresh case with both global and wall-level splash disabled before making a no-splash comparison.

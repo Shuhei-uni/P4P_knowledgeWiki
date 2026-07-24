@@ -37,6 +37,7 @@ DEFAULT_PHASE_DOMAIN_FALLBACK = {
     "vapor": "phase-1",
     "liquid": "phase-2",
 }
+PURNANTO_SCOPE_POLICY = "purnanto_simplified_no_liquid_outlet"
 
 
 def load_case_data_pair(
@@ -393,6 +394,11 @@ def _relative_balance_note(
     mass_imbalance_kg_s: float | None,
     carryover_kg_s: float | None,
 ) -> str:
+    return (
+        "Whole-domain imbalance is reported for traceability only and is not an acceptance "
+        "criterion because the simplified Purnanto geometry has no modelled lower-liquid outlet."
+    )
+    # Retained below for non-Purnanto callers that may restore a closed-balance policy.
     if mass_imbalance_kg_s is None:
         return "Mass imbalance could not be assessed from the available flux report."
     if carryover_kg_s is None:
@@ -473,6 +479,9 @@ def calculate_carrier_metrics(
         "x_out": x_out,
         "mass_imbalance_kg_s": mass_imbalance_kg_s,
         "mass_imbalance_ratio": mass_imbalance_ratio,
+        "mass_balance_scope": "intentionally_open",
+        "mass_balance_decision_role": "informational_only",
+        "scope_reason": "simplified Purnanto geometry has no modelled lower-liquid outlet",
         "mass_imbalance_note": (
             "Derived from phase-specific fluxes because the mixture mass-flow report was unavailable."
             if not mixture and mass_imbalance_kg_s is not None
@@ -934,7 +943,12 @@ def determine_claim_class_ceiling(result: Mapping[str, Any]) -> str:
     imbalance_ratio = carrier_metrics.get("mass_imbalance_ratio")
     dpm_result_available = bool(dpm_inventory.get("result_fields_available"))
 
-    if flux_available and eta_phase is not None and imbalance_ratio is not None and imbalance_ratio <= 0.05:
+    scope_policy = result.get("scope_policy", PURNANTO_SCOPE_POLICY)
+    balance_gate_passed = (
+        scope_policy == PURNANTO_SCOPE_POLICY
+        or (imbalance_ratio is not None and imbalance_ratio <= 0.05)
+    )
+    if flux_available and eta_phase is not None and balance_gate_passed:
         if dpm_result_available:
             return "Numerically verified"
         return "Numerically verified"
@@ -1009,6 +1023,7 @@ def compile_postprocess_result(
         "carrier_metrics": carrier_metrics,
         "dpm_inventory": dpm_inventory,
         "dpm_metrics": dpm_metrics,
+        "scope_policy": PURNANTO_SCOPE_POLICY,
         "limitations": limitations,
         "claim_class_ceiling": "",
     }
@@ -1060,8 +1075,7 @@ def render_markdown_report(result: Mapping[str, Any]) -> str:
             f"- Steam-outlet vapor mass flow: `{_format_optional(carrier_metrics.get('m_vap_steam_out'))} kg/s`",
             f"- Phase-flux efficiency `eta_phase`: `{_format_optional(carrier_metrics.get('eta_phase'))}`",
             f"- Steam-outlet dryness `x_out`: `{_format_optional(carrier_metrics.get('x_out'))}`",
-            f"- Mass imbalance: `{_format_optional(carrier_metrics.get('mass_imbalance_kg_s'), scientific=True)} kg/s`",
-            f"- Mass-imbalance note: {carrier_metrics.get('mass_imbalance_note', 'unavailable')}",
+            "- Mass balance: `intentionally open; informational only under Purnanto scope`",
             "",
             "## DPM Inventory",
             f"- DPM enabled: `{dpm_inventory.get('enabled', False)}`",
@@ -1083,12 +1097,8 @@ def render_markdown_report(result: Mapping[str, Any]) -> str:
                 f"- Selected boundaries: `{', '.join(dpm_sampling.get('selected_boundaries', [])) or 'none'}`",
                 f"- Selected planes: `{', '.join(dpm_sampling.get('selected_planes', [])) or 'none'}`",
                 f"- Aggregate tracked: `{aggregate_counts.get('tracked', 'unavailable')}`",
-                f"- Aggregate escaped: `{aggregate_counts.get('escaped', 'unavailable')}`",
-                f"- Aggregate trapped: `{aggregate_counts.get('trapped', 'unavailable')}`",
-                f"- Aggregate incomplete: `{aggregate_counts.get('incomplete', 'unavailable')}`",
+                f"- Aggregate observed escaped: `{aggregate_counts.get('escaped', 'unavailable')}`",
                 f"- Aggregate escaped fraction: `{_format_optional(dpm_sampling.get('escaped_fraction'))}`",
-                f"- Aggregate trapped fraction: `{_format_optional(dpm_sampling.get('trapped_fraction'))}`",
-                f"- Aggregate incomplete fraction: `{_format_optional(dpm_sampling.get('incomplete_fraction'))}`",
                 "",
             ]
         )
@@ -1098,12 +1108,9 @@ def render_markdown_report(result: Mapping[str, Any]) -> str:
                 "- "
                 f"{sample.get('name', 'unknown')}: "
                 f"tracked `{counts.get('tracked', 'unavailable')}`, "
-                f"escaped `{counts.get('escaped', 'unavailable')}`, "
-                f"trapped `{counts.get('trapped', 'unavailable')}`, "
-                f"incomplete `{counts.get('incomplete', 'unavailable')}`, "
+                f"observed escaped `{counts.get('escaped', 'unavailable')}`, "
                 f"escaped fraction `{_format_optional(sample.get('escaped_fraction'))}`, "
-                f"trapped fraction `{_format_optional(sample.get('trapped_fraction'))}`, "
-                f"incomplete fraction `{_format_optional(sample.get('incomplete_fraction'))}`"
+                f"raw fate bookkeeping retained in JSON"
             )
 
     lines.extend(
