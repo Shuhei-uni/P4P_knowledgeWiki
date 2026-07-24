@@ -25,14 +25,12 @@ from pyansys_fluent.setup_common import print_header  # noqa: E402
 from pyansys_fluent.setup_io import load_case_only, write_case_only  # noqa: E402
 
 
-DEFAULT_SERVER_ID = "3"
+DEFAULT_SERVER_ID = "1"
 DEFAULT_SOURCE_CASE = (
-    r"C:\Users\syok443\Documents\TwoPhaseInletV2(Purnanto)"
-    r"\TwoPhaseInletV2(Purnanto).cas.h5"
+    r"C:\Users\syok443\P4P simulation\TwoPhaseInletV2(Purnanto).cas.h5"
 )
 DEFAULT_OUTPUT_CASE = (
-    r"C:\Users\syok443\Documents\TwoPhaseInletV2(Purnanto)"
-    r"\TwoPhaseInletV2(Purnanto)-09c-two-way-dpm-coupled.cas.h5"
+    r"C:\Users\syok443\P4P simulation\scratch\TwoPhaseInletV2(Purnanto)-09c-two-way-dpm.cas.h5"
 )
 DEFAULT_SUMMARY_JSON = PROJECT_ROOT / "output" / "setup09c_two_way_dpm_coupling_summary.json"
 
@@ -40,9 +38,8 @@ DEFAULT_SUMMARY_JSON = PROJECT_ROOT / "output" / "setup09c_two_way_dpm_coupling_
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
-            "Load the accepted 08b Purnanto split-inlet case, enable two-way DPM "
-            "continuous-phase interaction for setup 09c, and write a case-only "
-            ".cas.h5 artifact."
+            "Case-specific 09c Fluent build script. Load the accepted 08b Purnanto "
+            "case, apply its explicit coupling steps, and write a case-only .cas.h5 artifact."
         )
     )
     parser.add_argument("--server-id", default=DEFAULT_SERVER_ID, help="Configured Fluent server id. Default: 3.")

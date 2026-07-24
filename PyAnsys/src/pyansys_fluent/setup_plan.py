@@ -1,14 +1,21 @@
-"""Markdown setup-plan contracts and the first local Fluent execution recipe.
+"""Contracts for Git-synchronised, agent-authored Fluent build scripts.
 
-Plans are exchanged through Git, but Fluent execution stays on the Windows
-computer that owns the case files and the local gRPC server.  This module
-deliberately supports named recipes only; Markdown can never contain arbitrary
-Python, a TUI command, or a generated Fluent path.
+Markdown is a request and an audit record.  It is intentionally *not* a DSL
+that attempts to recreate a Fluent case.  For every plan, the planning agent
+commits a case-specific Python build script.  That script contains the
+ordered, live-validated PyFluent/TUI operations needed for the one case.
+
+The local Fluent-PC runner pins the source case and script hashes, invokes the
+script locally, and commits a small evidence record.  Fluent credentials and
+case/data artifacts never leave that PC.
 """
 
 from __future__ import annotations
 
 import hashlib
+import subprocess
+import sys
+import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -18,20 +25,14 @@ from pyansys_fluent.autonomy.common import (
     canonical_digest,
     reject_unknown,
     require_absolute_path,
-    require_bool,
     require_mapping,
-    require_positive_int,
     require_schema_version,
     require_sha256,
     require_string,
 )
-from pyansys_fluent.common import remote_file_exists, safe_get_state, try_action
-from pyansys_fluent.setup_io import load_case_only, write_case_only
 
 
-SETUP_PLAN_SCHEMA_VERSION = 1
-TWO_WAY_DPM_INTERACTION = "dpm_two_way_interaction"
-SUPPORTED_RECIPES = frozenset({TWO_WAY_DPM_INTERACTION})
+SETUP_PLAN_SCHEMA_VERSION = 2
 
 
 def _sha256(path: Path) -> str:
@@ -50,7 +51,8 @@ def _front_matter(markdown: str) -> dict[str, Any]:
         )
     try:
         closing = next(
-            index for index, line in enumerate(lines[1:], start=1)
+            index
+            for index, line in enumerate(lines[1:], start=1)
             if line.strip() == "---"
         )
     except StopIteration as exc:
@@ -67,16 +69,14 @@ def _front_matter(markdown: str) -> dict[str, Any]:
 
 @dataclass(frozen=True)
 class MarkdownSetupPlan:
-    """A pinned, named recipe request authored in Markdown front matter."""
+    """Pinned inputs for one agent-authored Fluent build script."""
 
     plan_id: str
-    recipe_id: str
     parent_case_path: str
     parent_case_sha256: str
     output_case_path: str
-    expected_parent_interaction: dict[str, Any]
-    update_sources_every_iteration: bool
-    iteration_interval: int
+    build_script_path: str
+    build_script_sha256: str
     schema_version: int = SETUP_PLAN_SCHEMA_VERSION
 
     def validate(self) -> None:
@@ -86,13 +86,18 @@ class MarkdownSetupPlan:
             "MarkdownSetupPlan",
         )
         require_string(self.plan_id, "plan_id")
-        if self.recipe_id not in SUPPORTED_RECIPES:
-            raise ContractValidationError(
-                f"Unsupported setup recipe: {self.recipe_id!r}"
-            )
         require_absolute_path(self.parent_case_path, "parent_case_path")
         require_sha256(self.parent_case_sha256, "parent_case_sha256")
         require_absolute_path(self.output_case_path, "output_case_path")
+        require_string(self.build_script_path, "build_script_path")
+        require_sha256(self.build_script_sha256, "build_script_sha256")
+        script_path = Path(self.build_script_path)
+        if script_path.is_absolute() or ".." in script_path.parts:
+            raise ContractValidationError(
+                "build_script_path must be a repository-relative path without '..'"
+            )
+        if script_path.suffix != ".py":
+            raise ContractValidationError("build_script_path must name a .py file")
         if not self.parent_case_path.lower().endswith(".cas.h5"):
             raise ContractValidationError("parent_case_path must end with .cas.h5")
         if not self.output_case_path.lower().endswith(".cas.h5"):
@@ -101,33 +106,6 @@ class MarkdownSetupPlan:
             raise ContractValidationError(
                 "output_case_path must differ from parent_case_path"
             )
-        expected = require_mapping(
-            self.expected_parent_interaction,
-            "expected_parent_interaction",
-        )
-        reject_unknown(
-            expected,
-            {
-                "enabled",
-                "update_sources_every_iteration",
-                "iteration_interval",
-            },
-            "expected_parent_interaction",
-        )
-        if not expected:
-            raise ContractValidationError(
-                "expected_parent_interaction must declare at least one precondition"
-            )
-        for field_name, value in expected.items():
-            if field_name == "iteration_interval":
-                require_positive_int(value, field_name)
-            else:
-                require_bool(value, field_name)
-        require_bool(
-            self.update_sources_every_iteration,
-            "update_sources_every_iteration",
-        )
-        require_positive_int(self.iteration_interval, "iteration_interval")
 
     @property
     def digest(self) -> str:
@@ -138,13 +116,11 @@ class MarkdownSetupPlan:
         return {
             "schema_version": self.schema_version,
             "plan_id": self.plan_id,
-            "recipe_id": self.recipe_id,
             "parent_case_path": self.parent_case_path,
             "parent_case_sha256": self.parent_case_sha256,
             "output_case_path": self.output_case_path,
-            "expected_parent_interaction": dict(self.expected_parent_interaction),
-            "update_sources_every_iteration": self.update_sources_every_iteration,
-            "iteration_interval": self.iteration_interval,
+            "build_script_path": self.build_script_path,
+            "build_script_sha256": self.build_script_sha256,
         }
 
     @classmethod
@@ -155,28 +131,22 @@ class MarkdownSetupPlan:
             {
                 "schema_version",
                 "plan_id",
-                "recipe_id",
                 "parent_case_path",
                 "parent_case_sha256",
                 "output_case_path",
-                "expected_parent_interaction",
-                "update_sources_every_iteration",
-                "iteration_interval",
+                "build_script_path",
+                "build_script_sha256",
             },
             "MarkdownSetupPlan",
         )
         plan = cls(
             schema_version=data.get("schema_version"),
             plan_id=data.get("plan_id"),
-            recipe_id=data.get("recipe_id"),
             parent_case_path=data.get("parent_case_path"),
             parent_case_sha256=data.get("parent_case_sha256"),
             output_case_path=data.get("output_case_path"),
-            expected_parent_interaction=data.get("expected_parent_interaction"),
-            update_sources_every_iteration=data.get(
-                "update_sources_every_iteration"
-            ),
-            iteration_interval=data.get("iteration_interval"),
+            build_script_path=data.get("build_script_path"),
+            build_script_sha256=data.get("build_script_sha256"),
         )
         plan.validate()
         return plan
@@ -187,7 +157,7 @@ class MarkdownSetupPlan:
 
 
 def capture_parent_identity(case_path: str) -> dict[str, Any]:
-    """Return local source identity before an agent pins it into a plan."""
+    """Return local source identity before the agent pins it into a plan."""
 
     path = Path(case_path)
     if not path.is_absolute() or not path.is_file():
@@ -199,124 +169,107 @@ def capture_parent_identity(case_path: str) -> dict[str, Any]:
     }
 
 
-def _injection_names(branch: Any) -> list[str]:
+def _tracked_build_script(plan: MarkdownSetupPlan, project_root: Path) -> Path:
+    script = (project_root / plan.build_script_path).resolve()
     try:
-        names = branch.get_object_names()
-    except Exception as exc:
-        raise RuntimeError("Could not inspect inherited DPM injections") from exc
-    return sorted(str(name) for name in names)
-
-
-def _require_interaction_preconditions(
-    actual: Any,
-    expected: dict[str, Any],
-) -> None:
-    if not isinstance(actual, dict):
-        raise RuntimeError(f"Could not capture DPM interaction state: {actual}")
-    mismatches = {
-        key: {"expected": value, "actual": actual.get(key)}
-        for key, value in expected.items()
-        if actual.get(key) != value
-    }
-    if mismatches:
+        script.relative_to(project_root.resolve())
+    except ValueError as exc:  # Defense in depth after plan validation.
+        raise RuntimeError("Build script resolves outside the repository") from exc
+    if not script.is_file():
+        raise FileNotFoundError(f"Pinned build script is missing: {script}")
+    observed_sha = _sha256(script)
+    if observed_sha != plan.build_script_sha256:
         raise RuntimeError(
-            "Parent DPM interaction precondition mismatch: "
-            f"{mismatches}"
+            "Build script SHA-256 mismatch: plan is pinned to "
+            f"{plan.build_script_sha256}, observed {observed_sha}"
         )
+    return script
 
 
-def execute_markdown_setup_plan(
-    solver: Any,
+def _compact_process_output(text: str, limit: int = 4000) -> str:
+    return text if len(text) <= limit else text[-limit:] + "\n[truncated]"
+
+
+def execute_pinned_build_script(
     plan: MarkdownSetupPlan,
+    *,
+    project_root: Path,
+    server_id: str,
 ) -> dict[str, Any]:
-    """Apply the plan's named recipe and return evidence for the Git outbox."""
+    """Invoke the plan's case-specific build script on the Fluent PC.
+
+    Build scripts have one stable CLI contract: ``--server-id``,
+    ``--source-case``, ``--output-case``, and ``--summary-json``.  The script,
+    not Markdown, contains the step-by-step Fluent TUI/PyFluent sequence.
+    """
 
     plan.validate()
-    parent_identity = capture_parent_identity(plan.parent_case_path)
-    if parent_identity["sha256"] != plan.parent_case_sha256:
+    parent_identity_before = capture_parent_identity(plan.parent_case_path)
+    if parent_identity_before["sha256"] != plan.parent_case_sha256:
         raise RuntimeError(
             "Parent case SHA-256 mismatch: plan is pinned to "
-            f"{plan.parent_case_sha256}, observed {parent_identity['sha256']}"
-        )
-
-    if not remote_file_exists(solver, plan.parent_case_path):
-        raise FileNotFoundError(
-            f"Fluent cannot see parent case: {plan.parent_case_path}"
+            f"{plan.parent_case_sha256}, observed {parent_identity_before['sha256']}"
         )
     output_path = Path(plan.output_case_path)
     if output_path.exists():
         raise FileExistsError(
             f"Refusing to overwrite an existing output case: {output_path}"
         )
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    load_case_only(solver, plan.parent_case_path, label="Load Markdown Plan Parent")
+    script = _tracked_build_script(plan, project_root)
 
-    dpm = solver.settings.setup.models.discrete_phase
-    interaction = dpm.general_settings.interaction
-    before_interaction = safe_get_state(interaction, "plan.parent.interaction")
-    before_injections = _injection_names(dpm.injections)
-    if not before_injections:
-        raise RuntimeError("Parent case has no active DPM injections")
-    _require_interaction_preconditions(
-        before_interaction,
-        plan.expected_parent_interaction,
-    )
-
-    if plan.recipe_id != TWO_WAY_DPM_INTERACTION:  # validate() guards this.
-        raise ContractValidationError(f"Unsupported recipe: {plan.recipe_id}")
-    if not try_action(
-        "set_dpm_interaction_enabled_true",
-        lambda: setattr(interaction, "enabled", True),
-    ):
-        raise RuntimeError("Could not enable DPM continuous-phase interaction")
-    if not try_action(
-        "set_dpm_update_sources_every_iteration",
-        lambda: setattr(
-            interaction,
-            "update_sources_every_iteration",
-            plan.update_sources_every_iteration,
-        ),
-    ):
-        raise RuntimeError("Could not set DPM source-update mode")
-    if not try_action(
-        "set_dpm_iteration_interval",
-        lambda: setattr(interaction, "iteration_interval", plan.iteration_interval),
-    ):
-        raise RuntimeError("Could not set DPM iteration interval")
-
-    after_interaction = safe_get_state(interaction, "plan.output.interaction")
-    after_injections = _injection_names(dpm.injections)
-    _require_interaction_preconditions(
-        after_interaction,
-        {
-            "enabled": True,
-            "update_sources_every_iteration": plan.update_sources_every_iteration,
-            "iteration_interval": plan.iteration_interval,
-        },
-    )
-    if after_injections != before_injections:
-        raise RuntimeError(
-            "Inherited DPM injection inventory changed unexpectedly: "
-            f"before={before_injections}, after={after_injections}"
+    with tempfile.TemporaryDirectory(prefix="fluent-build-") as temporary:
+        detail_path = Path(temporary) / "build-script-evidence.json"
+        completed = subprocess.run(
+            [
+                sys.executable,
+                str(script),
+                "--server-id",
+                str(server_id),
+                "--source-case",
+                plan.parent_case_path,
+                "--output-case",
+                plan.output_case_path,
+                "--summary-json",
+                str(detail_path),
+            ],
+            cwd=project_root,
+            text=True,
+            capture_output=True,
+            check=False,
         )
+        detail: Any = None
+        if detail_path.is_file():
+            try:
+                import json
 
-    write_case_only(solver, plan.output_case_path, "markdown_setup_plan")
-    if not remote_file_exists(solver, plan.output_case_path):
+                detail = json.loads(detail_path.read_text(encoding="utf-8"))
+            except Exception as exc:
+                detail = {"_evidence_read_error": f"{type(exc).__name__}: {exc}"}
+
+    parent_identity_after = capture_parent_identity(plan.parent_case_path)
+    if parent_identity_after["sha256"] != plan.parent_case_sha256:
+        raise RuntimeError("Parent case changed during build-script execution")
+    if completed.returncode != 0:
         raise RuntimeError(
-            f"Fluent wrote no visible output case: {plan.output_case_path}"
+            "Build script failed with exit code "
+            f"{completed.returncode}: {_compact_process_output(completed.stderr)}"
         )
-    if _sha256(Path(plan.parent_case_path)) != plan.parent_case_sha256:
-        raise RuntimeError("Parent case changed during setup-plan execution")
-
+    if not output_path.is_file():
+        raise RuntimeError(
+            "Build script reported success but the expected output case is missing: "
+            f"{output_path}"
+        )
     return {
         "status": "success",
         "plan_id": plan.plan_id,
         "plan_digest": plan.digest,
-        "recipe_id": plan.recipe_id,
-        "parent_identity": parent_identity,
+        "build_script": {
+            "path": plan.build_script_path,
+            "sha256": plan.build_script_sha256,
+        },
+        "parent_identity_before": parent_identity_before,
+        "parent_identity_after": parent_identity_after,
         "output_case_path": plan.output_case_path,
-        "fluent_version": solver.get_fluent_version(),
-        "before_interaction": before_interaction,
-        "after_interaction": after_interaction,
-        "injection_names": after_injections,
+        "build_script_evidence": detail,
+        "build_script_stdout": _compact_process_output(completed.stdout),
     }

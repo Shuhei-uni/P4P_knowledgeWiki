@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run one Git-synchronized Markdown setup plan on the Fluent PC."""
+"""Run a pinned, agent-authored Fluent build script on the Fluent PC."""
 
 from __future__ import annotations
 
@@ -12,11 +12,10 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
-from pyansys_fluent.connection import connect  # noqa: E402
 from pyansys_fluent.setup_plan import (  # noqa: E402
     MarkdownSetupPlan,
     capture_parent_identity,
-    execute_markdown_setup_plan,
+    execute_pinned_build_script,
 )
 
 
@@ -29,8 +28,8 @@ def _write_result(path: Path, payload: dict[str, object]) -> None:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
-            "Execute one pinned Markdown setup plan locally on the Fluent PC. "
-            "The plan must arrive through Git; Fluent credentials stay local."
+            "Execute one pinned agent-authored Fluent build script locally on the "
+            "Fluent PC. Markdown supplies provenance, not Fluent commands."
         )
     )
     parser.add_argument("--plan", required=True, help="Tracked Markdown plan path.")
@@ -43,7 +42,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--capture-parent-identity",
         action="store_true",
-        help="Write the parent case size/SHA-256 only; do not connect to Fluent.",
+        help="Write the parent case size/SHA-256 only; do not run the build script.",
     )
     return parser
 
@@ -60,13 +59,23 @@ def main() -> int:
         "plan_digest": plan.digest,
     }
     if args.capture_parent_identity:
-        base.update({"status": "identity_captured", "parent_identity": capture_parent_identity(plan.parent_case_path)})
+        base.update(
+            {
+                "status": "identity_captured",
+                "parent_identity": capture_parent_identity(plan.parent_case_path),
+            }
+        )
         _write_result(result_path, base)
         return 0
 
     try:
-        solver = connect(server_id=args.server_id)
-        base.update(execute_markdown_setup_plan(solver, plan))
+        base.update(
+            execute_pinned_build_script(
+                plan,
+                project_root=PROJECT_ROOT,
+                server_id=args.server_id,
+            )
+        )
     except Exception as exc:
         base.update(
             {

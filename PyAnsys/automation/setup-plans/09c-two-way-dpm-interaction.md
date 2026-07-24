@@ -1,21 +1,28 @@
 ---
-schema_version: 1
+schema_version: 2
 plan_id: 09c-two-way-dpm-interaction
-recipe_id: dpm_two_way_interaction
 parent_case_path: 'C:\Users\syok443\P4P simulation\TwoPhaseInletV2(Purnanto).cas.h5'
 parent_case_sha256: '0000000000000000000000000000000000000000000000000000000000000000'
 output_case_path: 'C:\Users\syok443\P4P simulation\scratch\TwoPhaseInletV2(Purnanto)-09c-two-way-dpm.cas.h5'
-expected_parent_interaction:
-  enabled: false
-  update_sources_every_iteration: false
-  iteration_interval: 1
-update_sources_every_iteration: true
-iteration_interval: 1
+build_script_path: scripts/setup/setup09c_two_way_dpm_coupling_case.py
+build_script_sha256: '2acac34e7726a834dcdc4db71e930587f70fd77b4bc64aed3c3907064075cea0'
 ---
 
-# 09c — two-way DPM interaction
+# 09c — two-way DPM interaction build request
 
-Build a case-only `09c` derivative from the pinned `08b` parent. The only
-permitted mutation is the named DPM continuous-phase interaction recipe. The
-runner must prove the parent identity, interaction preconditions, unchanged
-injection inventory, Fluent write visibility, and unchanged parent hash.
+The agent must author and commit the referenced Python build script before this
+plan can execute. The script is the executable case definition: it contains
+the ordered Fluent TUI/PyFluent calls, live readbacks, and failure checks for
+this one build. Markdown records intent and provenance only; it is never a
+Fluent command language.
+
+For this controlled 09c derivative, the script must make only these changes:
+
+1. Enable global **DPM Interaction with Continuous Phase**.
+2. Enable **Update DPM Sources Every Flow Iteration**.
+3. Set the source update interval to `1`.
+
+It must then read those values back, preserve the inherited injection
+inventory, and write the new case to the declared scratch path. No
+initialisation, iteration, data write, EWF change, boundary change, or other
+model mutation is authorised.
