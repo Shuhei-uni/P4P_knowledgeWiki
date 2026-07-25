@@ -79,6 +79,15 @@ def build_parser() -> argparse.ArgumentParser:
         default=bool_env("FLUENT_LOCAL_GUI", False),
     )
     parser.add_argument(
+        "--allow-remote-host",
+        action=argparse.BooleanOptionalAction,
+        default=bool_env("FLUENT_ALLOW_REMOTE_HOST", False),
+        help=(
+            "Pass Fluent's -grpc-allow-remote-host launch option. Required "
+            "for direct PyFluent connections from another computer."
+        ),
+    )
+    parser.add_argument(
         "--insecure-mode",
         action=argparse.BooleanOptionalAction,
         default=bool_env("FLUENT_INSECURE_MODE", False),
@@ -162,6 +171,7 @@ def main() -> int:
         precision=args.precision,
         processor_count=args.processor_count,
         gui=args.gui,
+        allow_remote_host=args.allow_remote_host,
         insecure_mode=args.insecure_mode,
         startup_timeout_seconds=args.startup_timeout,
         connect_timeout_seconds=args.connect_timeout,

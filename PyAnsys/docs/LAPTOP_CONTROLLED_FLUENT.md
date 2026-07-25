@@ -50,10 +50,20 @@ From PowerShell in `PyAnsys`:
 $env:FLUENT_BRIDGE_DIR = "C:\Private\FluentBridge"
 $env:FLUENT_ADVERTISED_HOST = "10.0.0.5"
 $env:FLUENT_LOCAL_EXE = "C:\Program Files\ANSYS Inc\v252\fluent\ntbin\win64\fluent.exe"
+$env:FLUENT_ALLOW_REMOTE_HOST = "true"
+$env:FLUENT_INSECURE_MODE = "true" # private, trusted-network trial only
 
 & ".\.venv\Scripts\python.exe" `
   ".\scripts\orchestration\fluent_watchdog.py"
 ```
+
+Fluent 2025 R2 applies remote gRPC access at process startup. The watchdog
+therefore passes `-grpc-allow-remote-host` when
+`FLUENT_ALLOW_REMOTE_HOST=true`, and passes `-grpc-insecure-mode` when
+`FLUENT_INSECURE_MODE=true`. For a production or university deployment, use
+`-grpc-certs-folder=<path>` and TLS rather than insecure mode. Merely replacing
+`localhost` with a LAN address in `latest_connection.json` does not expose a
+loopback-only Fluent listener.
 
 Start the run worker separately:
 

@@ -250,6 +250,24 @@ class BridgeTests(unittest.TestCase):
 
 
 class WatchdogPolicyTests(unittest.TestCase):
+    def test_remote_grpc_options_are_launch_time_configuration(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            config = watchdog_config(
+                root,
+                allow_remote_host=True,
+                insecure_mode=True,
+            )
+            self.assertEqual(
+                config.grpc_launch_args(),
+                ("-grpc-allow-remote-host", "-grpc-insecure-mode"),
+            )
+
+    def test_secure_local_launch_has_no_remote_grpc_options(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.assertEqual(watchdog_config(root).grpc_launch_args(), ())
+
     def test_production_defaults_match_recovery_policy(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

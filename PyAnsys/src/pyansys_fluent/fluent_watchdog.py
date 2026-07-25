@@ -64,6 +64,7 @@ class WatchdogConfig:
     precision: str = "double"
     processor_count: int = 2
     gui: bool = False
+    allow_remote_host: bool = False
     insecure_mode: bool = False
     startup_timeout_seconds: float = 180.0
     connect_timeout_seconds: float = 60.0
@@ -122,6 +123,21 @@ class WatchdogConfig:
         if generation <= 0:
             raise ValueError("generation must be positive")
         return self.runtime_dir / f"fluent-server-info-{generation:03d}.txt"
+
+    def grpc_launch_args(self) -> tuple[str, ...]:
+        """Return the launch-time gRPC exposure settings for this generation.
+
+        Fluent 2025 R2 decides whether remote gRPC clients are permitted when
+        the process starts.  Rewriting ``localhost`` in the published
+        server-info document cannot change a loopback-only listener.
+        """
+
+        args: list[str] = []
+        if self.allow_remote_host:
+            args.append("-grpc-allow-remote-host")
+        if self.insecure_mode:
+            args.append("-grpc-insecure-mode")
+        return tuple(args)
 
     @property
     def lock_path(self) -> Path:
@@ -512,6 +528,7 @@ class FluentProcessManager:
         ]
         if not self.config.gui:
             command.append("-g")
+        command.extend(self.config.grpc_launch_args())
         command.extend(self.config.extra_fluent_args)
         command.append(f"-sifile={server_info}")
 
