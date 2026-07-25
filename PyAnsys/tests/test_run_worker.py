@@ -34,8 +34,9 @@ class FakeOperations:
     def read_data(self, session, path):
         self.calls.append(("read_data", str(path)))
 
-    def initialize(self, session):
-        self.calls.append(("initialize",))
+    def execute_tui(self, session, command):
+        self.calls.append(("execute_tui", command))
+        return f"executed: {command}"
 
     def iterate(self, session, iterations):
         self.iteration += iterations
@@ -55,12 +56,16 @@ class FakeOperations:
 
 def request_payload(root: Path, **updates):
     payload = {
-        "schema_version": 1,
+        "schema_version": 2,
         "job_id": "test-run",
         "expected_generation": 4,
         "mode": "initialize",
         "source_case": str(root / "source.cas.h5"),
         "source_data": None,
+        "initialization_tui": [
+            "/solve/initialize/hyb-initialization",
+            "/report/system/proc-stats",
+        ],
         "target_total_iterations": 600,
         "completed_iterations": 0,
         "checkpoint_interval": 250,
@@ -69,6 +74,8 @@ def request_payload(root: Path, **updates):
         "overwrite": False,
     }
     payload.update(updates)
+    if payload["mode"] == "resume" and "initialization_tui" not in updates:
+        payload["initialization_tui"] = None
     return payload
 
 
@@ -91,6 +98,32 @@ class RunRequestTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp:
             payload = request_payload(Path(temp), completed_iterations=1)
             with self.assertRaises(RunRequestError):
+                RunRequest.from_dict(payload)
+
+    def test_initialize_requires_nonempty_tui_sequence(self):
+        with tempfile.TemporaryDirectory() as temp:
+            payload = request_payload(Path(temp), initialization_tui=[])
+            with self.assertRaisesRegex(RunRequestError, "non-empty"):
+                RunRequest.from_dict(payload)
+
+    def test_initialize_rejects_non_string_tui_entry(self):
+        with tempfile.TemporaryDirectory() as temp:
+            payload = request_payload(
+                Path(temp), initialization_tui=["/solve/initialize/foo", 3]
+            )
+            with self.assertRaisesRegex(RunRequestError, "index 1"):
+                RunRequest.from_dict(payload)
+
+    def test_resume_rejects_initialization_tui(self):
+        with tempfile.TemporaryDirectory() as temp:
+            payload = request_payload(
+                Path(temp),
+                mode="resume",
+                source_data=str(Path(temp) / "resume.dat.h5"),
+                completed_iterations=250,
+                initialization_tui=["/solve/initialize/hyb-initialization"],
+            )
+            with self.assertRaisesRegex(RunRequestError, "resume mode"):
                 RunRequest.from_dict(payload)
 
     def test_overwrite_true_is_rejected(self):
@@ -156,7 +189,22 @@ class RunExecutionTests(unittest.TestCase):
         self.assertEqual("completed", receipt["status"])
         self.assertEqual(600, receipt["completed_iterations"])
         self.assertEqual(
-            1, sum(call[0] == "initialize" for call in operations.calls)
+            [
+                (
+                    "execute_tui",
+                    "/solve/initialize/hyb-initialization",
+                ),
+                ("execute_tui", "/report/system/proc-stats"),
+            ],
+            [call for call in operations.calls if call[0] == "execute_tui"],
+        )
+        self.assertEqual(
+            ["completed", "completed"],
+            [entry["status"] for entry in receipt["initialization_log"]],
+        )
+        self.assertEqual(
+            "/report/system/proc-stats",
+            receipt["initialization_log"][1]["command"],
         )
         self.assertTrue(receipt["final_data_path"].endswith("_600.dat.h5"))
         written_cases = [
@@ -193,9 +241,36 @@ class RunExecutionTests(unittest.TestCase):
             pair_verifier=self.verifier,
         )
         self.assertEqual("completed", receipt["status"])
-        self.assertNotIn(("initialize",), operations.calls)
+        self.assertFalse(
+            any(call[0] == "execute_tui" for call in operations.calls)
+        )
+        self.assertEqual([], receipt["initialization_log"])
         self.assertTrue(any(call[0] == "read_data" for call in operations.calls))
         self.assertEqual(350, operations.iteration)
+
+    def test_tui_failure_stops_sequence_before_iterations(self):
+        request = RunRequest.from_dict(request_payload(self.root))
+        operations = FakeOperations()
+
+        def fail_second_command(session, command):
+            operations.calls.append(("execute_tui", command))
+            if command.endswith("proc-stats"):
+                raise RuntimeError("verified command failed in production")
+            return "ok"
+
+        operations.execute_tui = fail_second_command
+        receipt = execute_run_request(
+            request,
+            latest_connection_path=self.connection_path,
+            operations=operations,
+            pair_verifier=self.verifier,
+        )
+        self.assertEqual("failed", receipt["status"])
+        self.assertEqual(
+            ["completed", "failed"],
+            [entry["status"] for entry in receipt["initialization_log"]],
+        )
+        self.assertFalse(any(call[0] == "iterate" for call in operations.calls))
 
     def test_generation_change_interrupts_without_retry(self):
         request = RunRequest.from_dict(request_payload(self.root))
@@ -330,7 +405,7 @@ class RunExecutionTests(unittest.TestCase):
         incoming = bridge / "run_requests" / "incoming"
         incoming.mkdir(parents=True)
         (incoming / "bad-request.json").write_text(
-            json.dumps({"schema_version": 1, "job_id": "bad-request"}),
+            json.dumps({"schema_version": 2, "job_id": "bad-request"}),
             encoding="utf-8",
         )
         operations = FakeOperations()

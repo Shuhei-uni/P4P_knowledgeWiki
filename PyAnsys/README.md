@@ -99,7 +99,8 @@ Run sequence after setup creation:
 laptop saves verified `.cas.h5`
 -> laptop submits strict run request
 -> worker validates the expected Fluent generation
--> initialize once, or load an explicit laptop-selected resume pair
+-> replay the agent-verified initialization TUI sequence once,
+   or load an explicit laptop-selected resume pair with no initialization
 -> iterate in chunks and write recovery pairs
 -> retain only the newest recovery pair and its predecessor
 -> save final `.dat.h5`

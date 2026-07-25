@@ -27,8 +27,8 @@ from pyansys_fluent.bridge import (
 from pyansys_fluent.common import bool_env
 
 
-RUN_REQUEST_SCHEMA_VERSION = 1
-RUN_RECEIPT_SCHEMA_VERSION = 1
+RUN_REQUEST_SCHEMA_VERSION = 2
+RUN_RECEIPT_SCHEMA_VERSION = 2
 _JOB_ID = re.compile(r"^[A-Za-z0-9._-]{1,128}$")
 _WORKER_CHECKPOINT = re.compile(
     r"^(?P<job>.+)-checkpoint-(?P<iteration>\d+)\.cas\.h5$",
@@ -41,6 +41,7 @@ _REQUEST_FIELDS = {
     "mode",
     "source_case",
     "source_data",
+    "initialization_tui",
     "target_total_iterations",
     "completed_iterations",
     "checkpoint_interval",
@@ -97,6 +98,7 @@ class RunRequest:
     mode: str
     source_case: str
     source_data: str | None
+    initialization_tui: tuple[str, ...]
     target_total_iterations: int
     completed_iterations: int
     output_directory: str
@@ -135,6 +137,30 @@ class RunRequest:
             if source_data_value is not None:
                 raise RunRequestError("initialize mode requires source_data=null")
             source_data = None
+        initialization_tui_value = payload.get("initialization_tui")
+        if mode == "initialize":
+            if (
+                not isinstance(initialization_tui_value, list)
+                or not initialization_tui_value
+            ):
+                raise RunRequestError(
+                    "initialize mode requires a non-empty initialization_tui list"
+                )
+            initialization_tui: tuple[str, ...] = tuple(
+                initialization_tui_value
+            )
+            for index, command in enumerate(initialization_tui):
+                if not isinstance(command, str) or not command.strip():
+                    raise RunRequestError(
+                        "initialization_tui entries must be non-empty strings; "
+                        f"invalid entry at index {index}"
+                    )
+        else:
+            if initialization_tui_value not in (None, []):
+                raise RunRequestError(
+                    "resume mode requires initialization_tui=null or []"
+                )
+            initialization_tui = ()
         target = _integer(
             payload.get("target_total_iterations"),
             "target_total_iterations",
@@ -177,6 +203,7 @@ class RunRequest:
             mode=mode,
             source_case=source_case,
             source_data=source_data,
+            initialization_tui=initialization_tui,
             target_total_iterations=target,
             completed_iterations=completed,
             checkpoint_interval=checkpoint_interval,
@@ -200,6 +227,7 @@ class RunRequest:
             "mode": self.mode,
             "source_case": self.source_case,
             "source_data": self.source_data,
+            "initialization_tui": list(self.initialization_tui),
             "target_total_iterations": self.target_total_iterations,
             "completed_iterations": self.completed_iterations,
             "checkpoint_interval": self.checkpoint_interval,
@@ -275,15 +303,23 @@ def _prune_worker_checkpoints(
         data_path.unlink(missing_ok=True)
 
 
-def _redacted_error(
-    exc: BaseException,
+def _redacted_text(
+    value: Any,
     connection: Mapping[str, Any] | None,
-) -> dict[str, str]:
-    message = str(exc)
+) -> str:
+    message = str(value)
     if connection is not None:
         password = connection.get("password")
         if isinstance(password, str) and password:
             message = message.replace(password, "<redacted>")
+    return message
+
+
+def _redacted_error(
+    exc: BaseException,
+    connection: Mapping[str, Any] | None,
+) -> dict[str, str]:
+    message = _redacted_text(exc, connection)
     return {"type": type(exc).__name__, "message": message}
 
 
@@ -362,8 +398,8 @@ class FluentRunOperations:
     def read_data(self, session: Any, path: Path) -> None:
         session.settings.file.read_data(file_name=str(path))
 
-    def initialize(self, session: Any) -> None:
-        session.settings.solution.initialization.hybrid_initialize()
+    def execute_tui(self, session: Any, command: str) -> Any:
+        return session.execute_tui(command)
 
     def iterate(self, session: Any, iterations: int) -> None:
         session.settings.solution.run_calculation.iterate(iter_count=iterations)
@@ -406,6 +442,7 @@ def execute_run_request(
     status = "failed"
     error: dict[str, str] | None = None
     final_data_path: str | None = None
+    initialization_log: list[dict[str, Any]] = []
 
     def ensure_generation() -> None:
         _read_connection(latest_connection_path, request.expected_generation)
@@ -463,7 +500,29 @@ def execute_run_request(
             raise GenerationChanged("Fluent gRPC health is unavailable")
         if request.mode == "initialize":
             ops.read_case(session, Path(request.source_case))
-            ops.initialize(session)
+            for index, command in enumerate(request.initialization_tui, start=1):
+                ensure_generation()
+                entry: dict[str, Any] = {
+                    "index": index,
+                    "command": _redacted_text(command, connection),
+                    "status": "running",
+                    "output": None,
+                    "error": None,
+                }
+                initialization_log.append(entry)
+                try:
+                    output = ops.execute_tui(session, command)
+                except Exception as exc:
+                    entry["status"] = "failed"
+                    entry["error"] = _redacted_error(exc, connection)
+                    raise
+                entry["status"] = "completed"
+                entry["output"] = (
+                    None
+                    if output is None
+                    else _redacted_text(output, connection)
+                )
+                ensure_generation()
         else:
             assert request.source_data is not None
             ops.read_case(session, Path(request.source_case))
@@ -520,6 +579,7 @@ def execute_run_request(
         "completed_iterations": completed,
         "last_checkpoint": last_checkpoint,
         "final_data_path": final_data_path,
+        "initialization_log": initialization_log,
         "error": error,
     }
 
@@ -631,6 +691,7 @@ class FluentRunWorker:
                 "completed_iterations": 0,
                 "last_checkpoint": None,
                 "final_data_path": None,
+                "initialization_log": [],
                 "error": validation_error,
             }
             receipt_path = self.spool.receipts / f"{job_id}.json"

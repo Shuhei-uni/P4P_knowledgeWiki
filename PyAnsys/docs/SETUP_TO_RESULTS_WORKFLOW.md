@@ -112,12 +112,15 @@ Create a strict request:
 
 ```json
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "job_id": "010v2-run-1500",
   "expected_generation": 14,
   "mode": "initialize",
   "source_case": "C:\\CFD\\cases\\010v2-verified.cas.h5",
   "source_data": null,
+  "initialization_tui": [
+    "/solve/initialize/hyb-initialization"
+  ],
   "target_total_iterations": 1500,
   "completed_iterations": 0,
   "checkpoint_interval": 250,
@@ -137,9 +140,14 @@ checked against both the ledger and a fresh `latest_connection.json`:
   --bridge-dir /private/path/to/FluentBridge
 ```
 
-The Fluent-PC run worker loads the explicit case, initializes exactly once,
-runs in chunks, writes verified recovery pairs, and produces a secret-free
-receipt. It does not decide what to run next.
+The Fluent-PC run worker loads the explicit case, replays the agent-verified
+`initialization_tui` strings exactly once and in order, runs in chunks, writes
+verified recovery pairs, and produces a secret-free receipt containing the
+command/output log. It does not interpret the initialization sequence or
+decide what to run next. If PyFluent raises while replaying a command, the
+worker stops before iteration. Fluent can also return a TUI error as ordinary
+text, so the verified sequence should include any required readback/report
+command and that output must be reviewed in the receipt.
 
 ## 4. Ingest and verify a completed run
 
@@ -178,12 +186,13 @@ For an interrupted generation `14`, verification must occur on generation
 
 ```json
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "job_id": "010v2-run-1500-resume-1",
   "expected_generation": 15,
   "mode": "resume",
   "source_case": "C:\\CFD\\runs\\010v2-run-1500\\checkpoint-00001000.cas.h5",
   "source_data": "C:\\CFD\\runs\\010v2-run-1500\\checkpoint-00001000.dat.h5",
+  "initialization_tui": null,
   "target_total_iterations": 1500,
   "completed_iterations": 1000,
   "checkpoint_interval": 250,

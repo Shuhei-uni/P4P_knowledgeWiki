@@ -144,8 +144,9 @@ class _RunOperations:
     def read_data(self, _session, path: Path) -> None:
         self.calls.append(("read_data", str(path)))
 
-    def initialize(self, _session) -> None:
-        self.calls.append(("initialize",))
+    def execute_tui(self, _session, command: str) -> str:
+        self.calls.append(("execute_tui", command))
+        return f"executed: {command}"
 
     def iterate(self, _session, iterations: int) -> None:
         self.iteration += iterations
@@ -183,13 +184,18 @@ def _request(
 ) -> RunRequest:
     return RunRequest.from_dict(
         {
-            "schema_version": 1,
+            "schema_version": 2,
             "job_id": job_id,
             "expected_generation": generation,
             "mode": mode,
             "source_case": str(source_case),
             "source_data": (
                 str(source_data) if source_data is not None else None
+            ),
+            "initialization_tui": (
+                ["/solve/initialize/hyb-initialization"]
+                if mode == "initialize"
+                else None
             ),
             "target_total_iterations": 500,
             "completed_iterations": completed_iterations,

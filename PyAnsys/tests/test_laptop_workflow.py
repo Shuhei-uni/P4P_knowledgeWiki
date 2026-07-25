@@ -25,12 +25,17 @@ def _request(
 ) -> RunRequest:
     return RunRequest.from_dict(
         {
-            "schema_version": 1,
+            "schema_version": 2,
             "job_id": job_id,
             "expected_generation": generation,
             "mode": mode,
             "source_case": source_case,
             "source_data": source_data,
+            "initialization_tui": (
+                ["/solve/initialize/hyb-initialization"]
+                if mode == "initialize"
+                else None
+            ),
             "target_total_iterations": 600,
             "completed_iterations": completed,
             "checkpoint_interval": 250,
@@ -52,7 +57,7 @@ def _receipt(
     data_path: str,
 ) -> Path:
     payload = {
-        "schema_version": 1,
+        "schema_version": 2,
         "job_id": job_id,
         "status": status,
         "generation": generation,
@@ -70,6 +75,7 @@ def _receipt(
             "file_verified": True,
         },
         "final_data_path": data_path if status == "completed" else None,
+        "initialization_log": [],
         "error": None,
     }
     path.write_text(json.dumps(payload), encoding="utf-8")

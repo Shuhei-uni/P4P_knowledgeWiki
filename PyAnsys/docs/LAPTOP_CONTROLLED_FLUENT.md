@@ -100,12 +100,15 @@ Example fresh-run request:
 
 ```json
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "job_id": "010v2-run-1500",
   "expected_generation": 14,
   "mode": "initialize",
   "source_case": "C:\\cases\\010V2.cas.h5",
   "source_data": null,
+  "initialization_tui": [
+    "/solve/initialize/hyb-initialization"
+  ],
   "target_total_iterations": 1500,
   "completed_iterations": 0,
   "checkpoint_interval": 250,
@@ -126,12 +129,13 @@ submits a new request:
 
 ```json
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "job_id": "010v2-run-1500-resume-1",
   "expected_generation": 15,
   "mode": "resume",
   "source_case": "C:\\cases\\runs\\010V2-run-1500\\010v2-run-1500-checkpoint-00001000.cas.h5",
   "source_data": "C:\\cases\\runs\\010V2-run-1500\\010v2-run-1500-checkpoint-00001000.dat.h5",
+  "initialization_tui": null,
   "target_total_iterations": 1500,
   "completed_iterations": 1000,
   "checkpoint_interval": 250,
@@ -143,6 +147,17 @@ submits a new request:
 
 Resume never initializes. Because the target is absolute, this request runs
 only the remaining `500` iterations.
+
+For a fresh run, `initialization_tui` is a required non-empty ordered list of
+exact Fluent TUI command strings. The worker does not interpret initialization
+methods or options. It loads the explicit case, executes each command through
+PyFluent's raw `execute_tui()` interface, records the command and returned
+output in the receipt, and stops before iteration if PyFluent raises an
+exception. The laptop agent is responsible for discovering and proving the
+sequence in a disposable Fluent session before submission. Because some Fluent
+TUI failures are returned as text instead of Python exceptions, include any
+needed readback/report command in the verified sequence. Resume requests must
+set `initialization_tui` to `null` or `[]`.
 
 Checkpoint retention is rolling to avoid filling the Fluent computer's disk.
 During a run, the worker keeps only the newest two verified numbered pairs:
