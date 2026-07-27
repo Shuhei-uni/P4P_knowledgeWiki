@@ -301,3 +301,62 @@ Relative to the 1498 checkpoint, escape counts fell and absorbed/trapped counts 
 - [DPM injection summary](../../../PyAnsys/output/ewf_dpm_diagnostics/010V2b-5000-dpm-20260723-r2/dpm_injection_summary.csv), [zone/mass-flow summary](../../../PyAnsys/output/ewf_dpm_diagnostics/010V2b-5000-dpm-20260723-r2/dpm_zone_summary.csv), and [complete DPM transcript](../../../PyAnsys/output/ewf_dpm_diagnostics/010V2b-5000-dpm-20260723-r2/dpm_particle_track_transcript.txt)
 - [348.88 µm raw DPM report](../../../PyAnsys/output/ewf_dpm_diagnostics/010V2b-5000-dpm-20260723-r2/dpm_raw/03-water-liquid-at-psep-348um.txt)
 - [Carrier flux check](../../../PyAnsys/output/post_simulation_analysis/010V2b-5000-20260723-flux-check.json), [residual check](../../../PyAnsys/output/post_simulation_analysis/010V2b-5000-20260723-residual-check.json), and [residual plot](../../../PyAnsys/output/post_simulation_analysis/010V2b-5000-20260723-residual-check.png)
+
+## 9. Fresh requested 5,000-iteration capture — operator-reported iteration 4,999 (2026-07-27)
+
+The operator identified the already-loaded server-3 state as iteration `4999`, requested as the 5,000-iteration checkpoint. All successful live commands used **server `3` only**. Fluent reports `Ansys Fluent 2024 R2`, whereas the prior completed 5,000-checkpoint section records 2025 R2. Case/data filenames remain unavailable, so the two records are not a version-controlled identity comparison.
+
+### Analysis applicability and evidence
+
+| Analysis | Status | Evidence / limitation |
+|---|---|---|
+| EWF/DPM audit | Completed | `wall` is the confirmed film wall; six original liquid-DPM injections were discovered. |
+| EWF final-state snapshot | Completed with adapter limitations | Film inventory, thickness, CFL, components, flux, and bookkeeping payload exist. DPM-source and velocity-magnitude aliases remain unsupported. |
+| DPM fate analysis | Completed | All six injections passed the transcript completion gate; each has a raw report and final CSV/JSON output. |
+| Edge separation | Runtime evidence for largest class | The `348.88 µm` raw DPM transcript reports `171` separated events/particles. No represented separated mass was captured. |
+| Carrier flux and residual history | Not available | The server-3 extractor client returned after connecting but did not write either expected artifact during more than 320 seconds of supervision. No earlier carrier/residual values are substituted. |
+| EWF history / closure | Deferred | One final state supports bookkeeping only, not time-integrated closure. |
+
+**Raw evidence:** [audit](../../../PyAnsys/output/ewf_dpm_diagnostics/010V2b-server3-20260727-4999-audit/), [EWF final-state snapshot](../../../PyAnsys/output/ewf_dpm_diagnostics/010V2b-server3-20260727-4999-snapshot/), and [completed six-injection DPM sweep](../../../PyAnsys/output/ewf_dpm_diagnostics/010V2b-server3-20260727-4999-dpm/). The audit confirms global DPM interaction `Off`, unsteady tracking `Off`, and maximum DPM steps `10000`. The 2024 R2 Settings API does not expose the top-level EWF branch or a readable wall separation flag; this is an adapter limitation, not proof that edge separation is disabled.
+
+### DPM Particle Tracks Summary
+
+All flow values are terminal fate flows in kg/s. `Incomplete` remains in the raw diagnostic record but is not elevated into the simplified-geometry acceptance criterion; observed `steamoutlet` escape is the report-facing DPM metric. Separation is a secondary event/parcel diagnostic and is not added as an extra terminal mass sink.
+
+| Diameter (µm) | Net flow | Escaped | Trapped | Incomplete | Final absorbed | EWF absorbed events | Separated events | Closure relative residual |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 5.63 | 0.038010 | 0.037890 | 0 | 1.226e-4 | not printed | not printed | not printed | -6.84e-5 |
+| 28.14 | 0.156100 | 0.154700 | 3.596e-4 | 2.877e-4 | 7.191e-4 | 10 | not printed | 2.15e-4 |
+| 56.27 | 0.194100 | 0.172600 | 4.293e-3 | 8.943e-5 | 1.708e-2 | 191 | not printed | 1.94e-4 |
+| 112.54 | 0.390100 | 0.232800 | 1.187e-2 | 0 | 0.145400 | 809 | not printed | 7.69e-5 |
+| 168.81 | 0.390100 | 0.153500 | 7.731e-3 | 0 | 0.228900 | 1273 | not printed | -7.95e-5 |
+| 348.88 | 4.702000 | 0.295200 | 0.142400 | 3.211e-6 | 4.264000 | 2024 | 171 | 8.44e-5 |
+
+Escaped terminal particles exit at `steamoutlet`, while trapped particles terminate at `bottom`. The largest printed relative flow-closure residual is `2.15e-4`, consistent with report precision. At 348.88 µm, the terminal fate counts sum to the tracked count (`236 + 79 + 2 + 2024 = 2341`); the 171 separation events are retained separately.
+
+### EWF final-state snapshot
+
+Confirmed scope is `wall` only. This is a one-checkpoint result and not an interval mass balance.
+
+| Quantity | Reduction / scope | Value | Unit | Interpretation limit |
+|---|---|---:|---|---|
+| Film Courant Number | facet maximum, `wall` | 1.0963624e-2 | dimensionless | final-state numerical diagnostic only |
+| Film Mass | sum, `wall` | 2.0542629e-1 | kg | current inventory |
+| Film Thickness | facet maximum, `wall` | 4.5015113e-4 | m | local maximum |
+| Film Thickness | area-weighted average, `wall` | 3.479654e-6 | m | distributed-film measure |
+| Film Outflow Mass | sum, `wall` | 0 | kg | Fluent final-state field; not a rate |
+| Film Mass Flow Rate | selected boundaries / net | 0 | kg/s | `liquidinlet`, `steaminlet`, and `steamoutlet` all read -0.0 kg/s |
+| Film velocity components | area-weighted, `wall` | x 1.4820767e-1; y -1.623268e-3; z 5.6735414e-2 | m/s | direct component measurements |
+| Film velocity magnitude | derived from measured components | 1.5870430e-1 | m/s | not an independently extracted Fluent magnitude |
+| Film DPM Mass Source | sum, `wall` | unavailable | kg/s | runner requested an unsupported alias; Fluent advertises `film-dpm-mass-src` |
+| Film Separated Mass | sum, `wall` | unavailable | kg | 171 DPM events exist, but no represented film-mass quantity was extracted |
+
+**Bookkeeping status: bookkeeping-only.** Missing terms are initial inventory, time-integrated DPM-to-film source, film inflow/outflow, represented separation mass, and an explicit residual over a defined interval. Do not combine the 0.20542629 kg inventory directly with the kg/s boundary-flux read.
+
+### Interpretation
+
+- **Measured:** complete DPM fate evidence exists for all six injections, and the 348.88 µm transcript reports 171 separation events. The largest class is absorption-dominant by terminal flow, while smaller classes remain escape-dominant.
+- **Derived:** terminal flow rows close within printed precision; the component-derived film speed is 0.15870430 m/s.
+- **Unresolved:** carrier fluxes/residuals for this fresh capture, represented separation mass and ultimate generated-parcel fate, Film DPM Mass Source, time-integrated EWF closure, and root-level EWF/separation readback. None is reported as zero.
+
+**Conclusion — diagnostic only.** The requested 4,999-iteration capture supplies fresh EWF and DPM evidence but not a carrier-state update. It supports observed separation events for the largest injection, not an edge-separation mass balance or separator-performance claim. At printed precision, its EWF and DPM values reproduce the earlier completed 5,000-checkpoint record; the Fluent-version difference and unavailable case/data identity prevent treating that agreement as proof of identical solver state.

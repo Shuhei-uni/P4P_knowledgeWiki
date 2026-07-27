@@ -6,7 +6,7 @@ When each isolated/combined EWF branch is inspected again at its reported 5,000-
 
 ## Comparison boundary
 
-This observation compares **each branch with itself**, not one optional mechanism against another. The reports are final-state snapshots from already loaded Fluent sessions; they do not supply a shared restart, case/data filename, defined physical-time interval, or integrated EWF histories. `010V2a` also changed from Fluent `2024 R2` to `2025 R2` between checkpoints. Thus the table is a diagnostic continuation trend, not a formal convergence study or a causal mechanism comparison.
+This observation compares **each branch with itself**, not one optional mechanism against another. The reports are final-state snapshots from already loaded Fluent sessions; they do not supply a shared restart, case/data filename, defined physical-time interval, or integrated EWF histories. `010V2a` changed from Fluent `2024 R2` to `2025 R2` between checkpoints. The completed `010V2b` 5,000-iteration checkpoint is now included; a fresh 2026-07-27 `010V2b` capture reproduces its EWF/DPM endpoint values but did not produce a new carrier residual/flux bundle. Thus the table is a diagnostic continuation trend, not a formal convergence study or a causal mechanism comparison.
 
 `010V2d` also has a 10,000-iteration follow-up. It is not folded into the four-branch 5,000-iteration table, but it is used below as an important guardrail against assuming that simply continuing iterations will settle the EWF state.
 
@@ -100,5 +100,6 @@ The paper lookup was checked for applicable EWF guidance. It identifies film thi
 
 - [010V2a splash report](../../Setups/reports/010V2a/results.md)
 - [010V2b edge-separation report](../../Setups/reports/010V2b/results.md)
+- [010V2b completed 5,000-iteration DPM rows](../../PyAnsys/output/ewf_dpm_diagnostics/010V2b-5000-dpm-20260723-r2/dpm_zone_summary.csv) and [fresh 2026-07-27 DPM rows](../../PyAnsys/output/ewf_dpm_diagnostics/010V2b-server3-20260727-4999-dpm/dpm_zone_summary.csv)
 - [010V2c stripping report](../../Setups/reports/010V2c/results.md)
 - [010V2d combined report](../../Setups/reports/010V2d/results.md)

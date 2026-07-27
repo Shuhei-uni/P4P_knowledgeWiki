@@ -1,5 +1,12 @@
 # Work Log
 
+## [2026-07-27] model-update | Add 010V2b 5,000-iteration observation evidence
+- files created/updated: `observations/04-010v2-ewf-mechanism-comparison.md`, `observations/06-010v2-iteration-continuation.md`, `wiki/log.md`
+- reason: synchronize all project observations that use the `010V2b` edge-separation branch with its completed 5,000-iteration result.
+- what changed: replaced the stale 1,498-iteration branch values with the 5,000-iteration film, DPM-fate, carrier/residual, and separation-event results; linked the fresh 2026-07-27 recapture as corroborating EWF/DPM evidence with no new carrier bundle.
+- assumptions introduced/retired: separated events remain a secondary event/parcel count and are not added to terminal mass closure; no edge-separation mass balance, EWF closure, convergence, or separator-performance claim was added.
+- next immediate action: repair EWF field aliases and instrument a defined continuation interval with film source, outflow, CFL, and separated-mass histories.
+
 ## [2026-07-24] progress-update | Reclassify Purnanto scope limitations
 - files created/updated: `wiki/model/baseline-cfd.md`, `wiki/progress/blockers.md`, `wiki/project/roadmap.md`, `../../CFD_wiki/wiki/physics-basis/uncertainties-and-assumption-register.md`, `../../Setups/index.md`, `../../Setups/templates/results-report-template.md`, `../../PyAnsys/src/pyansys_fluent/postprocess_live.py`, `../../PyAnsys/tests/test_postprocess_live.py`, `../../skills/post-simulation-analysis/SKILL.md`, `../../skills/post-simulation-analysis/references/report-structure.md`, `wiki/log.md`
 - reason: align project interpretation with the simplified Purnanto geometry and stop treating missing lower-liquid closure or Fluent `Incomplete` DPM trajectories as active blockers.
