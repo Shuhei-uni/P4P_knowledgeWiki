@@ -8,6 +8,7 @@ Reports are numerical findings tied to one concrete setup. Keep the setup defini
 - [04 — Mixed wet-half actual-area results](04/results.md)
 - [07 — Pure-phase split actual-area results](07/results.md)
 - [08b — Purnanto parity split-inlet results](08b/results.md)
+- [08b — Mesh-convergence checkpoint, 2026-08-03](08b/mesh-convergence-checkpoint-20260803.md)
 - [08c — Preliminary inlet-loading sensitivity results](08c/results.md)
 - [09a — Deterministic DPM carryover results](09a/results.md)
 - [09b — Stochastic DPM sensitivity results](09b/results.md)
