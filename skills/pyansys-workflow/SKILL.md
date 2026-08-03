@@ -9,6 +9,15 @@ description: "Use when working with PyAnsys executable automation for Fluent/PyF
 
 Use `PyAnsys/` as the executable automation layer for Fluent setup, inspection, rebuild, focused run orchestration, machine-readable target manifests, and claim-gate logic. Treat Fluent as a dependency-ordered GUI state machine, not a stable static Python object tree.
 
+For live end-to-end operations, route to the two non-skill workflow documents:
+
+- `workflows/fluent-build-and-run.md`
+- `workflows/fluent-analyze-and-report.md`
+
+They orchestrate the four focused operational skills. Keep this
+`pyansys-workflow` skill for PyAnsys code, tooling, environment, and knowledge
+maintenance rather than using it as a fifth operational phase.
+
 From now on, keep the workflow split:
 - setup-building scripts create or modify only `.cas.h5`
 - `PyAnsys/scripts/setup/save_data_after_iterations.py` is the standard runner for loading an existing `.cas.h5`, hybrid-initializing it, running iterations, and writing only `.dat.h5`

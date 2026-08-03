@@ -1,0 +1,4 @@
+interface:
+  display_name: "Fluent Build Case"
+  short_description: "Build and verify a Fluent case from setup Markdown"
+  default_prompt: "Use $fluent-build-case to turn this setup Markdown into a verified Fluent case."

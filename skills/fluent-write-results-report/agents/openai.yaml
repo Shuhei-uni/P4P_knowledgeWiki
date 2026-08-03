@@ -1,0 +1,4 @@
+interface:
+  display_name: "Fluent Write Results Report"
+  short_description: "Turn verified Fluent evidence into a results report"
+  default_prompt: "Use $fluent-write-results-report to create a results report from these verified analysis artifacts."

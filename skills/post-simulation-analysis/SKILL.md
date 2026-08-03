@@ -9,6 +9,11 @@ description: "Use for evidence-led post-simulation analysis and reporting of exi
 
 Analyse an already-built Fluent case/data state without rebuilding the setup or changing its physics. Use the resulting evidence to create or extend the report for that exact setup branch.
 
+Within the no-hash operational hierarchy, treat this skill as the detailed
+diagnostic-semantics reference used by `$fluent-analyze-results`. The
+`workflows/fluent-analyze-and-report.md` workflow keeps analysis execution and
+scientific report writing as separate blocks; do not collapse them here.
+
 Keep roles separate:
 
 - `PyAnsys/` owns executable inspection and generated artifacts.

@@ -22,7 +22,17 @@ Do not duplicate full pages across these systems. Link and summarize instead.
 - `ResearchProject_wiki/`: project-facing interpretation, progress, technical notes, and `wiki/vnv/` sign-off records.
 - `Setups/`: setup lifecycle views, lineage, and concrete case-definition history, controlled by `Setups/order-dictionary.md`.
 - `PyAnsys/`: automation code, inspection tools, setup scripts, extracted case knowledge, and machine-readable V&V target logic.
+- `skills/`: focused repo-local Codex operating skills.
+- `workflows/`: non-skill orchestration documents that call the focused skills.
 - `PROJECT_TREE.md`: quick orientation tree for the repo layout.
+
+For the laptop-controlled Fluent loop, use:
+- `workflows/fluent-build-and-run.md`
+- `workflows/fluent-analyze-and-report.md`
+
+These workflows call exactly four focused skills under `skills/`: case build,
+initialization/run, result analysis, and results-report writing. They read setup
+Markdown directly and do not hash it.
 
 ## Setup Report Role
 Use `Setups/` for setup-instance documents, not for generic CFD knowledge and not for day-to-day progress logging.

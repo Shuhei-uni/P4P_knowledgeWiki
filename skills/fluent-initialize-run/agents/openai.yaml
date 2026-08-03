@@ -1,0 +1,4 @@
+interface:
+  display_name: "Fluent Initialize and Run"
+  short_description: "Verify initialization and run a Fluent case safely"
+  default_prompt: "Use $fluent-initialize-run to verify initialization and run this Fluent case."

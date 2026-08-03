@@ -16,11 +16,26 @@ Do not add setup compilation, capability research, analysis selection,
 checkpoint selection, automatic resume, or next-experiment decisions to either
 Fluent-PC process.
 
-Use `src/pyansys_fluent/laptop_workflow.py` and
-`scripts/orchestration/laptop_workflow.py` for durable laptop-side phase
-tracking. The coordinator may register and hash a setup Markdown file, but must
-not parse it into Fluent operations. The agent still performs every setup
-mutation and readback directly.
+For the repository's agent-operated end-to-end loops, use:
+- `../workflows/fluent-build-and-run.md`
+- `../workflows/fluent-analyze-and-report.md`
+
+Those two workflow documents orchestrate exactly four operational skills:
+- `../skills/fluent-build-case/`
+- `../skills/fluent-initialize-run/`
+- `../skills/fluent-analyze-results/`
+- `../skills/fluent-write-results-report/`
+
+These workflows read setup Markdown directly and do not hash, compile, or
+rewrite it. They keep setup mutation, initialization discovery, recovery
+verification, analysis selection, and scientific interpretation on the laptop
+agent.
+
+`src/pyansys_fluent/laptop_workflow.py` and
+`scripts/orchestration/laptop_workflow.py` remain available as the existing
+durable phase-state implementation. Their `init` path hashes the setup plan, so
+do not invoke that path from the two no-hash workflows above. The agent still
+performs every scientific verification before recording a state transition.
 
 From now on, the workflow is intentionally split into two separate responsibilities:
 - setup-building scripts produce or modify only `.cas.h5`

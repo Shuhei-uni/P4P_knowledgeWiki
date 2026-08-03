@@ -53,10 +53,18 @@ P4P_knowledgeWiki/
 │   └── src/
 ├── skills/
 │   ├── cfd-wiki/
+│   ├── fluent-analyze-results/
+│   ├── fluent-build-case/
+│   ├── fluent-initialize-run/
+│   ├── fluent-write-results-report/
+│   ├── post-simulation-analysis/
+│   ├── pyansys-workflow/
 │   ├── research-project-wiki/
-│   ├── setup-report/
-│   └── pyansys-workflow/
+│   └── setup-report/
 ├── subagents/
+├── workflows/
+│   ├── fluent-analyze-and-report.md
+│   └── fluent-build-and-run.md
 └── template/
 ```
 
@@ -66,3 +74,4 @@ P4P_knowledgeWiki/
 - `Setups/`: lifecycle-organized setup definitions, lineage, and numerical reports.
 - `PyAnsys/`: automation, machine-readable targets, and executable workflows.
 - `skills/`: repo-local Codex skills distilled from the folder-level agent instructions.
+- `workflows/`: non-skill orchestration documents that call focused repo-local skills.

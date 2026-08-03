@@ -67,6 +67,21 @@ See [`docs/SETUP_TO_RESULTS_WORKFLOW.md`](./docs/SETUP_TO_RESULTS_WORKFLOW.md)
 for the complete setup Markdown → direct agent build → run → recovery →
 analysis → result-package workflow.
 
+## Agent-operated workflows
+
+The current no-hash operational hierarchy is:
+
+- [`../workflows/fluent-build-and-run.md`](../workflows/fluent-build-and-run.md)
+  calls `$fluent-build-case`, then `$fluent-initialize-run`.
+- [`../workflows/fluent-analyze-and-report.md`](../workflows/fluent-analyze-and-report.md)
+  calls `$fluent-analyze-results`, then `$fluent-write-results-report`.
+
+The workflows read setup Markdown directly. Dynamic Settings API/TUI
+experimentation, recovery verification, analysis selection, and interpretation
+remain laptop-agent responsibilities. The Fluent-PC worker only replays a
+verified initialization sequence and executes the narrow run/checkpoint/save
+request.
+
 ## Canonical workflow
 
 Read these in order before changing any setup script:

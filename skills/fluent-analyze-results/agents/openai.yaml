@@ -1,0 +1,4 @@
+interface:
+  display_name: "Fluent Analyze Results"
+  short_description: "Analyze Fluent results through agent-controlled gRPC"
+  default_prompt: "Use $fluent-analyze-results to inspect and analyze this Fluent case and data pair."
