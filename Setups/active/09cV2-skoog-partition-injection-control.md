@@ -10,6 +10,7 @@
 | Parent setup | [09c — two-way DPM coupling](../past/reported/09c-dpm-ewf-wall-film-reentrainment.md) |
 | Child setups | [010V2](010V2-ewf-deposition-film-inventory.md) |
 | Controlled changes | liquid/DPM mass partition, EWF-ready DPM material identity, scaled DPM loading, failure-informed source-balance checks |
+| Droplet-size basis | historical six-bin distribution for completed cases; future PSD reruns use the [project fine-mist baseline](../../ResearchProject_wiki/wiki/model/fine-mist-dpm-size-and-mass-distribution.md) |
 | Evidence-use label | setup calculation only until carrier and liquid balance gates pass |
 | Outcome | needs follow-up |
 | Linked report | [09cV2 diagnostic results](../reports/09cV2/results.md) |
@@ -36,7 +37,7 @@ Inherit unchanged:
 - `Update DPM Sources Every Flow Iteration = On`;
 - `DPM Iteration Interval = 1`;
 - deterministic tracking, spherical drag, rotation off, stochastic dispersion off;
-- the six existing diameter classes as a controlled comparison basis.
+- the six existing diameter classes as the historical controlled-comparison basis.
 
 The `09c` parent is not a converged reference. Preserve that limitation in the case name and run notes.
 
@@ -73,7 +74,8 @@ The earlier `5%` value is not a project default and is not literature-derived. I
 
 2. If a Skoog/1-D calculation is available, scan the candidate droplet/film split, calculate deposition and entrainment for each point, and select the point where the two rates are acceptably balanced. Label the resulting fraction `Inferred`, record the inputs/correlation, and still retain a nearby sensitivity case.
 3. If the Skoog/1-D calculation cannot be closed because onset, film, or property inputs are missing, run the sensitivity matrix below. The matrix is a bracketing experiment, not a claim that any row is physically correct.
-4. Keep the six-bin relative weights from `09c` unchanged during this first fraction study so that fraction and size-distribution effects are not changed simultaneously.
+4. Keep the six-bin relative weights from `09c` unchanged during the historical fraction study so that fraction and size-distribution effects are not changed simultaneously.
+5. For the next PSD comparison, keep the chosen `f_DPM`, total DPM mass, complementary Eulerian-liquid flow, mesh, carrier checkpoint, coupling, and numerics fixed; change only the injection diameters and relative mass weights according to the [fine-mist DPM decision](../../ResearchProject_wiki/wiki/model/fine-mist-dpm-size-and-mass-distribution.md).
 
 ### Pre-simulation fraction matrix
 
@@ -87,7 +89,7 @@ The earlier `5%` value is not a project default and is not literature-derived. I
 
 The first recommended execution set is `0%`, `1%`, `5%`, `10%`, and `25%`. A Skoog-calculated point can be added after the one-dimensional balance is closed. These are parameter points under `09cV2`, not new stable setup IDs.
 
-### Illustrative 5% sensitivity point
+### Historical 5% sensitivity point
 
 For traceability, the earlier 5% point is retained below. It is an `Assumed`, medium-risk sensitivity case only:
 
@@ -99,7 +101,7 @@ m_Eulerian_liquid = 116.92 − 5.846 = 111.074 kg/s
 
 Scale the six active `09c` injections while preserving their existing relative weights:
 
-| Diameter | `09c` flow | `09cV2` provisional flow |
+| Diameter | `09c` flow | `09cV2` historical 5% flow |
 |---:|---:|---:|
 | `5.63 µm` | `0.19 kg/s` | `0.038013 kg/s` |
 | `28.14 µm` | `0.78 kg/s` | `0.156053 kg/s` |
@@ -109,7 +111,35 @@ Scale the six active `09c` injections while preserving their existing relative w
 | `348.88 µm` | `23.38 kg/s` | `4.677600 kg/s` |
 | **Total** | **`29.22 kg/s`** | **`5.846000 kg/s`** |
 
-Do not call the six-bin distribution measured. This branch tests the mass-allocation correction while retaining the parent size basis.
+Do not call the six-bin distribution measured. This branch tested the mass-allocation correction while retaining the parent size basis.
+
+### Droplet-size distribution status and future rerun
+
+The completed `09cV2` and downstream EWF cases use the historical table above. Those results remain valid only as **legacy-distribution diagnostics**.
+
+The recommended project baseline now represents steam-carried fine mist with seven classes from `5-100 µm`:
+
+```text
+7.07, 14.14, 24.49, 34.64, 48.99, 69.28, 89.44 µm
+```
+
+At the same `5%` total DPM loading, the recommended flows are:
+
+| Diameter [µm] | Recommended 5% DPM flow [kg/s] |
+|---:|---:|
+| `7.07` | `0.409128` |
+| `14.14` | `1.165149` |
+| `24.49` | `1.267410` |
+| `34.64` | `1.092501` |
+| `48.99` | `1.329262` |
+| `69.28` | `0.468606` |
+| `89.44` | `0.113944` |
+| **Total** | **`5.846000`** |
+
+Do not silently modify an existing historical case. Create a new child/rerun, keep `m_DPM = 5.846 kg/s` and `m_Eulerian_liquid = 111.074 kg/s`, and change only the PSD for the first direct comparison. See:
+
+- [Project fine-mist DPM size and mass distribution](../../ResearchProject_wiki/wiki/model/fine-mist-dpm-size-and-mass-distribution.md)
+- [Detailed geothermal fine-mist cutoff evidence](../../CFD_wiki/wiki/synthesis/geothermal-fine-mist-size-cutoff-evidence.md)
 
 ## 4. Click-by-click build procedure
 
@@ -141,7 +171,9 @@ Do not call the six-bin distribution measured. This branch tests the mass-alloca
 
 This step prevents the DPM loading from being added to a full duplicate `116.92 kg/s` Eulerian liquid feed.
 
-### D. Rebuild the DPM injection payload
+### D. Rebuild the historical DPM injection payload
+
+The following procedure documents the existing six-injection case. Use the project fine-mist decision when creating a new PSD child case.
 
 Repeat the following for each of the six existing injections:
 
@@ -150,11 +182,11 @@ Repeat the following for each of the six existing injections:
 3. Keep the injection type `Surface` and the `steaminlet` surface for this first allocation-control branch.
 4. Keep the diameter unchanged.
 5. Keep the velocity direction and magnitude unchanged from `09c` so that mass allocation is the isolated change.
-6. Change `Total Flow Rate` to the selected fraction's DPM total multiplied by the existing `09c` relative weight. For the illustrative 5% point, use the six values in the table above.
+6. Change `Total Flow Rate` to the selected fraction's DPM total multiplied by the existing `09c` relative weight. For the historical 5% point, use the six values in the table above.
 7. Keep particle count/streams, deterministic tracking, spherical drag, and stochastic settings unchanged.
 8. Click `Change`/`Apply`, then reopen the injection and read the value back.
 9. Repeat for all six injections.
-10. Sum the read-back flow rates and confirm the DPM total for the selected fraction. For the illustrative 5% point, confirm `5.846 kg/s`.
+10. Sum the read-back flow rates and confirm the DPM total for the selected fraction. For the historical 5% point, confirm `5.846 kg/s`.
 
 ### E. Prepare EWF-compatible material identity
 
@@ -203,9 +235,10 @@ Do not promote `09cV2` unless:
 - actual Eulerian liquid plus the selected DPM flow is approximately `116.92 kg/s` at the inlet accounting level;
 - vapor flow remains approximately `80.69 kg/s`;
 - the selected `f_DPM` is recorded in the case name, setup notes, and run log;
+- the active PSD identity is recorded as either `legacy-six-bin` or `fine-mist-5-100um`;
 - DPM source terms do not create a new unexplained mass imbalance;
 - continuity and phase-fraction residuals are reported;
-- all six injection settings read back correctly;
+- every active injection setting reads back correctly;
 - the DPM material and selected fraction read back correctly and are not inherited from the failed `10a` material/loading state;
 - escaped, trapped, and incomplete counts are recorded per injection;
 - the result is labelled diagnostic if the carrier phase balance remains open.
@@ -214,8 +247,12 @@ Do not promote `09cV2` unless:
 
 Use the accepted `09cV2` case/data pair and its selected fraction point to create [010V2 — EWF deposition and film inventory](010V2-ewf-deposition-film-inventory.md). Do not promote the 5% point to a physical default without a closed Skoog/1-D balance or new measurement evidence.
 
+Create a separate child case for the fine-mist PSD comparison rather than overwriting the historical `09cV2` artifacts.
+
 ## Linked evidence
 
+- [Project fine-mist DPM size and mass distribution](../../ResearchProject_wiki/wiki/model/fine-mist-dpm-size-and-mass-distribution.md)
+- [Detailed geothermal fine-mist cutoff evidence](../../CFD_wiki/wiki/synthesis/geothermal-fine-mist-size-cutoff-evidence.md)
 - [Project Skoog guardrails](../../ResearchProject_wiki/wiki/model/skoog-application-guardrails.md)
 - [Droplets, carryover, and re-entrainment evidence](../../CFD_wiki/wiki/physics-basis/droplets-carryover-and-re-entrainment.md)
 - [Geothermal separator inlet droplet synthesis](../../CFD_wiki/wiki/synthesis/geothermal-separator-inlet-droplets-and-carryover.md)
