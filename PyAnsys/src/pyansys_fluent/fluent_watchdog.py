@@ -348,7 +348,7 @@ def connect_from_server_info(path: Path, config: WatchdogConfig) -> Any:
         pass
     return pyfluent.connect_to_fluent(
         server_info_file_name=str(path),
-        allow_remote_host=False,
+        allow_remote_host=config.allow_remote_host,
         cleanup_on_exit=False,
         start_transcript=False,
         start_watchdog=False,
@@ -562,8 +562,6 @@ class FluentProcessManager:
             try:
                 process_tree_token = _assign_windows_kill_on_close_job(process)
             except Exception:
-                # Some managed Windows environments already assign the child
-                # to a job.  taskkill /T remains the bounded fallback.
                 process_tree_token = None
         return ManagedFluentProcess(
             process=process,
@@ -618,346 +616,250 @@ class FluentProcessManager:
         if managed is None:
             return
         process = managed.process
-        try:
-            if managed.process_tree_token is not None:
-                managed.process_tree_token.close()
-                try:
-                    process.wait(timeout=20)
-                except subprocess.TimeoutExpired:
-                    if process.poll() is None:
-                        process.kill()
-                        process.wait(timeout=10)
-            elif os.name == "nt":
-                subprocess.run(
-                    ["taskkill", "/PID", str(process.pid), "/T", "/F"],
-                    check=False,
-                    capture_output=True,
-                    text=True,
-                    timeout=30,
-                )
-                if process.poll() is None:
-                    try:
-                        process.kill()
-                    finally:
-                        process.wait(timeout=10)
-            else:
-                try:
-                    os.killpg(process.pid, signal.SIGTERM)
-                except ProcessLookupError:
-                    pass
-                if process.poll() is None:
-                    try:
-                        process.wait(timeout=20)
-                    except subprocess.TimeoutExpired:
-                        try:
-                            os.killpg(process.pid, signal.SIGKILL)
-                        except ProcessLookupError:
-                            pass
-                        process.wait(timeout=10)
-                # The launcher may exit before MPI descendants.  A final
-                # group kill is scoped to the new session created at launch.
-                try:
-                    os.killpg(process.pid, signal.SIGKILL)
-                except ProcessLookupError:
-                    pass
-        finally:
+        if process.poll() is None:
             try:
-                if process.stdin is not None:
-                    process.stdin.close()
+                if os.name == "nt":
+                    subprocess.run(
+                        ["taskkill", "/PID", str(process.pid), "/T", "/F"],
+                        check=False,
+                        stdout=subprocess.DEVNULL,
+                        stderr=subprocess.DEVNULL,
+                    )
+                else:
+                    os.killpg(process.pid, signal.SIGTERM)
+            except Exception:
+                try:
+                    process.kill()
+                except Exception:
+                    pass
+        try:
+            process.wait(timeout=10)
+        except Exception:
+            pass
+        try:
+            managed.stdout_handle.close()
+        except Exception:
+            pass
+        try:
+            managed.stderr_handle.close()
+        except Exception:
+            pass
+        if managed.process_tree_token is not None:
+            try:
+                managed.process_tree_token.close()
             except Exception:
                 pass
-            managed.stdout_handle.close()
-            managed.stderr_handle.close()
-            try:
-                managed.server_info_path.unlink(missing_ok=True)
-            except OSError:
-                pass
-
-
-def _safe_error(exc: BaseException, endpoint: FluentEndpoint | None) -> str:
-    text = str(exc).replace("\r", " ").replace("\n", " ").strip()
-    if endpoint is not None and endpoint.password:
-        text = text.replace(endpoint.password, "<redacted>")
-    if len(text) > 500:
-        text = text[:497] + "..."
-    return f"{type(exc).__name__}: {text}" if text else type(exc).__name__
 
 
 class FluentWatchdog:
-    """Own, monitor, and relaunch one Fluent process."""
+    """Own and monitor one replaceable Fluent generation at a time."""
 
-    def __init__(
-        self,
-        config: WatchdogConfig,
-        *,
-        process_manager: FluentProcessManager | None = None,
-        connect_factory: Callable[[Path, WatchdogConfig], Any] = (
-            connect_from_server_info
-        ),
-        publisher: ConnectionPublisher | None = None,
-        stop_event: threading.Event | None = None,
-        sleep: Callable[[float], None] = time.sleep,
-        monotonic: Callable[[], float] = time.monotonic,
-        wall_time: Callable[[], float] = time.time,
-    ):
-        config.validate(require_executable=process_manager is None)
+    def __init__(self, config: WatchdogConfig):
+        config.validate(require_executable=True)
         self.config = config
-        self.process_manager = process_manager or FluentProcessManager(
-            config,
-            sleep=sleep,
-            monotonic=monotonic,
-            wall_time=wall_time,
+        self.paths = BridgePaths(config.bridge_dir)
+        self.publisher = ConnectionPublisher(self.paths)
+        self.process_manager = FluentProcessManager(config)
+        self.restart_budget = RestartBudget(
+            config.max_restarts,
+            config.restart_window_seconds,
         )
-        self.connect_factory = connect_factory
-        self.publisher = publisher or ConnectionPublisher(
-            BridgePaths(config.bridge_dir)
-        )
-        self.stop_event = stop_event or threading.Event()
-        self._sleep = sleep
-        self._monotonic = monotonic
-        self._wall_time = wall_time
-        self._boot_id = uuid.uuid4().hex
-        self._heartbeat_sequence = 0
-        self._generation = 0
-        self._restart_count = 0
-        self._fluent_version: str | None = None
-        self._started_at: str | None = None
-        self._restart_reason: str | None = None
-        self._last_health_at: str | None = None
+        self.watchdog_boot_id = uuid.uuid4().hex
+        self._stop_requested = threading.Event()
 
     def request_stop(self) -> None:
-        self.stop_event.set()
+        self._stop_requested.set()
 
-    def _publish(
-        self,
-        status: str,
-        *,
-        endpoint: FluentEndpoint | None = None,
-        managed: ManagedFluentProcess | None = None,
-        recent_restart_count: int = 0,
-        consecutive_health_failures: int = 0,
-    ) -> None:
-        self._heartbeat_sequence += 1
-        self.publisher.publish(
-            status,
-            generation=self._generation,
-            previous_generation=(
-                self._generation - 1 if self._generation > 1 else None
-            ),
-            heartbeat_sequence=self._heartbeat_sequence,
-            endpoint=endpoint,
-            fluent_pid=managed.pid if managed is not None else None,
-            fluent_version=self._fluent_version,
-            started_at=self._started_at,
-            restart_reason=self._restart_reason,
-            updated_at=utc_timestamp(self._wall_time()),
-            extra={
-                "watchdog_boot_id": self._boot_id,
-                "watchdog_pid": os.getpid(),
-                "restart_count_total": self._restart_count,
-                "restart_count_in_window": recent_restart_count,
-                "consecutive_health_failures": (
-                    consecutive_health_failures
-                ),
-                "last_health_at": self._last_health_at,
-            },
-        )
-
-    def _connect(self, server_info_path: Path) -> Any:
-        session = call_with_timeout(
-            lambda: self.connect_factory(server_info_path, self.config),
-            self.config.connect_timeout_seconds,
-            label="connect",
-        )
-        try:
-            active = call_with_timeout(
-                lambda: session_is_active(session),
-                self.config.health_timeout_seconds,
-                label="initial-health",
-            )
-            if not active:
-                raise RuntimeError(
-                    "PyFluent connected but health is not serving"
-                )
-            self._last_health_at = utc_timestamp(self._wall_time())
-            get_version = getattr(session, "get_fluent_version", None)
-            if callable(get_version):
-                try:
-                    self._fluent_version = str(
-                        call_with_timeout(
-                            get_version,
-                            self.config.health_timeout_seconds,
-                            label="fluent-version",
-                        )
-                    )
-                except Exception:
-                    self._fluent_version = "<unavailable>"
-            else:
-                self._fluent_version = "<unavailable>"
-        except Exception:
-            close_monitor_session_best_effort(
-                session,
-                timeout_seconds=self.config.health_timeout_seconds,
-            )
-            raise
-        return session
-
-    def _monitor(
-        self,
-        managed: ManagedFluentProcess,
-        session: Any,
-        endpoint: FluentEndpoint,
-        *,
-        deadline: float | None,
-        recent_restart_count: int,
-    ) -> None:
-        next_health = self._monotonic() + self.config.health_interval_seconds
-        next_heartbeat = self._monotonic()
-        failures = 0
-        while not self.stop_event.is_set():
-            now = self._monotonic()
-            if deadline is not None and now >= deadline:
-                self.request_stop()
-                break
-            return_code = managed.process.poll()
-            if return_code is not None:
-                raise ProcessExited(
-                    f"Fluent generation {managed.generation} exited with "
-                    f"return code {return_code}"
-                )
-            if now >= next_health:
-                try:
-                    active = call_with_timeout(
-                        lambda: session_is_active(session),
-                        self.config.health_timeout_seconds,
-                        label="health",
-                    )
-                    if not active:
-                        raise RuntimeError("Fluent gRPC health is not serving")
-                except Exception as exc:
-                    failures += 1
-                    if failures >= self.config.consecutive_health_failures:
-                        raise HealthFailureThresholdExceeded(
-                            f"{failures} consecutive Fluent gRPC health "
-                            f"failures; latest was {type(exc).__name__}"
-                        ) from exc
-                else:
-                    failures = 0
-                    self._last_health_at = utc_timestamp(self._wall_time())
-                next_health = now + self.config.health_interval_seconds
-            if now >= next_heartbeat:
-                self._publish(
-                    "running",
-                    endpoint=endpoint,
-                    managed=managed,
-                    recent_restart_count=recent_restart_count,
-                    consecutive_health_failures=failures,
-                )
-                next_heartbeat = now + self.config.heartbeat_interval_seconds
-            self._sleep(self.config.poll_interval_seconds)
+    def _next_generation(self) -> tuple[int, int | None]:
+        previous = read_published_generation(self.paths.connection_file)
+        generation = 1 if previous is None else previous + 1
+        return generation, previous
 
     def run(self, *, max_runtime_seconds: float = 0.0) -> None:
-        """Run until stopped, replacing Fluent only within the restart budget."""
-
-        if max_runtime_seconds < 0:
-            raise ValueError("max_runtime_seconds must be non-negative")
-        deadline = (
-            self._monotonic() + max_runtime_seconds
-            if max_runtime_seconds
-            else None
-        )
-        budget = RestartBudget(
-            self.config.max_restarts,
-            self.config.restart_window_seconds,
-        )
-        try:
-            durable_generation = read_published_generation(
-                self.config.bridge_dir
-            )
-        except FileNotFoundError:
-            durable_generation = 0
-        self._generation = max(self._generation, durable_generation)
+        started_monotonic = time.monotonic()
         managed: ManagedFluentProcess | None = None
-        session: Any | None = None
-        endpoint: FluentEndpoint | None = None
-        recent_restarts = 0
-        terminal_failure = False
+        monitor_session: Any | None = None
+        total_restarts = 0
+        current_generation: int | None = None
+        previous_generation: int | None = None
+        restart_reason: str | None = "watchdog_start"
+        consecutive_failures = 0
+        heartbeat_sequence = 0
+        last_health_at: str | None = None
+        next_health_due = 0.0
+        next_heartbeat_due = 0.0
+
         try:
-            while not self.stop_event.is_set():
-                if deadline is not None and self._monotonic() >= deadline:
-                    self.request_stop()
+            while not self._stop_requested.is_set():
+                now = time.monotonic()
+                if max_runtime_seconds > 0 and (
+                    now - started_monotonic >= max_runtime_seconds
+                ):
                     break
-                self._generation += 1
-                self._fluent_version = None
-                self._started_at = None
-                endpoint = None
-                self._publish(
-                    "starting",
-                    recent_restart_count=recent_restarts,
-                )
-                try:
-                    managed = self.process_manager.launch(self._generation)
-                    self._started_at = utc_timestamp(
-                        managed.launched_unix_seconds
+
+                if managed is None:
+                    current_generation, previous_generation = self._next_generation()
+                    restart_count_in_window = self.restart_budget.record(time.time())
+                    total_restarts += 1
+                    heartbeat_sequence += 1
+                    self.publisher.publish_state(
+                        generation=current_generation,
+                        previous_generation=previous_generation,
+                        status="starting",
+                        watchdog_boot_id=self.watchdog_boot_id,
+                        watchdog_pid=os.getpid(),
+                        restart_count_total=total_restarts,
+                        restart_count_in_window=restart_count_in_window,
+                        restart_reason=restart_reason,
+                        heartbeat_sequence=heartbeat_sequence,
+                        consecutive_health_failures=0,
+                        last_health_at=None,
                     )
-                    server_info_path = (
+                    try:
+                        managed = self.process_manager.launch(current_generation)
                         self.process_manager.wait_for_server_info(managed)
+                        monitor_session = call_with_timeout(
+                            lambda: connect_from_server_info(
+                                managed.server_info_path,
+                                self.config,
+                            ),
+                            self.config.connect_timeout_seconds,
+                            label="monitor-connect",
+                        )
+                        if not call_with_timeout(
+                            lambda: session_is_active(monitor_session),
+                            self.config.health_timeout_seconds,
+                            label="initial-health-check",
+                        ):
+                            raise RuntimeError(
+                                "Initial Fluent gRPC health check did not report serving"
+                            )
+                        endpoint = read_server_info(managed.server_info_path)
+                        heartbeat_sequence += 1
+                        last_health_at = utc_timestamp()
+                        self.publisher.publish_running(
+                            generation=current_generation,
+                            previous_generation=previous_generation,
+                            endpoint=FluentEndpoint(
+                                host=self.config.advertised_host,
+                                port=endpoint.port,
+                                password=endpoint.password,
+                            ),
+                            fluent_pid=managed.pid,
+                            fluent_version=endpoint.fluent_version,
+                            watchdog_boot_id=self.watchdog_boot_id,
+                            watchdog_pid=os.getpid(),
+                            restart_count_total=total_restarts,
+                            restart_count_in_window=restart_count_in_window,
+                            restart_reason=restart_reason,
+                            heartbeat_sequence=heartbeat_sequence,
+                            consecutive_health_failures=0,
+                            last_health_at=last_health_at,
+                        )
+                        restart_reason = None
+                        consecutive_failures = 0
+                        next_health_due = now + self.config.health_interval_seconds
+                        next_heartbeat_due = now + self.config.heartbeat_interval_seconds
+                    except Exception as exc:
+                        restart_reason = f"{type(exc).__name__}: {exc}"
+                        close_monitor_session_best_effort(
+                            monitor_session,
+                            timeout_seconds=self.config.health_timeout_seconds,
+                        )
+                        monitor_session = None
+                        self.process_manager.stop(managed)
+                        managed = None
+                        heartbeat_sequence += 1
+                        self.publisher.publish_state(
+                            generation=current_generation,
+                            previous_generation=previous_generation,
+                            status="failed",
+                            watchdog_boot_id=self.watchdog_boot_id,
+                            watchdog_pid=os.getpid(),
+                            restart_count_total=total_restarts,
+                            restart_count_in_window=restart_count_in_window,
+                            restart_reason=restart_reason,
+                            heartbeat_sequence=heartbeat_sequence,
+                            consecutive_health_failures=consecutive_failures,
+                            last_health_at=last_health_at,
+                        )
+                        if self._stop_requested.wait(
+                            self.config.restart_delay_seconds
+                        ):
+                            break
+                    continue
+
+                if managed.process.poll() is not None:
+                    restart_reason = (
+                        f"ProcessExited: Fluent generation {managed.generation} "
+                        f"returned {managed.process.returncode}"
                     )
-                    endpoint = read_server_info(
-                        server_info_path,
-                        advertised_host=self.config.advertised_host,
-                    )
-                    session = self._connect(server_info_path)
-                    self._publish(
-                        "running",
-                        endpoint=endpoint,
-                        managed=managed,
-                        recent_restart_count=recent_restarts,
-                    )
-                    self._monitor(
-                        managed,
-                        session,
-                        endpoint,
-                        deadline=deadline,
-                        recent_restart_count=recent_restarts,
-                    )
-                    break
-                except Exception as exc:
-                    self._restart_reason = _safe_error(exc, endpoint)
                     close_monitor_session_best_effort(
-                        session,
+                        monitor_session,
                         timeout_seconds=self.config.health_timeout_seconds,
                     )
-                    session = None
+                    monitor_session = None
                     self.process_manager.stop(managed)
                     managed = None
-                    endpoint = None
-                    self._restart_count += 1
+                    continue
+
+                now = time.monotonic()
+                if now >= next_health_due:
                     try:
-                        recent_restarts = budget.record(self._monotonic())
-                    except RestartLimitExceeded:
-                        terminal_failure = True
-                        self._publish(
-                            "failed",
-                            recent_restart_count=self.config.max_restarts + 1,
+                        serving = call_with_timeout(
+                            lambda: session_is_active(monitor_session),
+                            self.config.health_timeout_seconds,
+                            label="health-check",
                         )
-                        raise
-                    self._publish(
-                        "restarting",
-                        recent_restart_count=recent_restarts,
+                        if not serving:
+                            raise RuntimeError("Fluent health did not report serving")
+                        consecutive_failures = 0
+                        last_health_at = utc_timestamp()
+                    except Exception as exc:
+                        consecutive_failures += 1
+                        restart_reason = f"{type(exc).__name__}: {exc}"
+                        if (
+                            consecutive_failures
+                            >= self.config.consecutive_health_failures
+                        ):
+                            close_monitor_session_best_effort(
+                                monitor_session,
+                                timeout_seconds=self.config.health_timeout_seconds,
+                            )
+                            monitor_session = None
+                            self.process_manager.stop(managed)
+                            managed = None
+                            continue
+                    next_health_due = now + self.config.health_interval_seconds
+
+                if now >= next_heartbeat_due:
+                    endpoint = read_server_info(managed.server_info_path)
+                    heartbeat_sequence += 1
+                    self.publisher.publish_running(
+                        generation=managed.generation,
+                        previous_generation=previous_generation,
+                        endpoint=FluentEndpoint(
+                            host=self.config.advertised_host,
+                            port=endpoint.port,
+                            password=endpoint.password,
+                        ),
+                        fluent_pid=managed.pid,
+                        fluent_version=endpoint.fluent_version,
+                        watchdog_boot_id=self.watchdog_boot_id,
+                        watchdog_pid=os.getpid(),
+                        restart_count_total=total_restarts,
+                        restart_count_in_window=restart_count_in_window,
+                        restart_reason=restart_reason,
+                        heartbeat_sequence=heartbeat_sequence,
+                        consecutive_health_failures=consecutive_failures,
+                        last_health_at=last_health_at,
                     )
-                    if self.stop_event.is_set():
-                        break
-                    self._sleep(self.config.restart_delay_seconds)
+                    next_heartbeat_due = now + self.config.heartbeat_interval_seconds
+
+                self._stop_requested.wait(self.config.poll_interval_seconds)
         finally:
             close_monitor_session_best_effort(
-                session,
+                monitor_session,
                 timeout_seconds=self.config.health_timeout_seconds,
             )
-            session = None
             self.process_manager.stop(managed)
-            if not terminal_failure:
-                self._publish(
-                    "stopped",
-                    recent_restart_count=recent_restarts,
-                )
