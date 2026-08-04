@@ -1,0 +1,31 @@
+waiting_for_manifest: /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/case_2_1440_1500iter_recovered_from_1375_manifest.json
+watched_pid: 24460
+requirements: {"case": "Case 2", "condition": "1440", "verified_completed_iterations": 1500, "additional_iterations_completed": 125}
+waiting: Case 1 is still running
+waiting: Case 1 is still running
+waiting: Case 1 is still running
+waiting: Case 1 is still running
+waiting: Case 1 is still running
+waiting: Case 1 is still running
+waiting: Case 1 is still running
+waiting: Case 1 is still running
+waiting: Case 1 is still running
+waiting: Case 1 is still running
+waiting: Case 1 is still running
+waiting: Case 1 is still running
+manifest requirements verified
+results CSV verified: 9 rows, injected_total=132.76 kg/s
+launching: .venv/bin/python -u scripts/connection/run_guarded.py --idle-timeout-seconds 7200 --wall-timeout-seconds 108000 --log-file output/enthalpy_sweep_verified_20260721_v2/logs/cases_3_to_6.log --quiet --heartbeat-seconds 300 -- .venv/bin/python -u scripts/setup/run_purnanto_enthalpy_sweep.py --apply --base-case C:\Users\qtra338\Documents\baseline.cas.h5 --remote-output-dir C:\Users\qtra338\Documents\enthalpy_sweep_verified_20260721_v2 --local-output-dir output/enthalpy_sweep_verified_20260721_v2 --seed-results-csv output/enthalpy_sweep_verified_20260721_v2/case_1_1600_25pct_1500iter_recovered_from_925_injection_results.csv --seed-results-csv output/enthalpy_sweep_verified_20260721_v2/case_2_1440_1500iter_recovered_from_1375_injection_results.csv --seed-case-summary-csv output/enthalpy_sweep_verified_20260721_v2/case_1_1600_25pct_1500iter_recovered_from_925_case_summary.csv --seed-case-summary-csv output/enthalpy_sweep_verified_20260721_v2/case_2_1440_1500iter_recovered_from_1375_case_summary.csv --iterations 1500 --iteration-mode chunked --report-interval 25 --checkpoint-interval 500 --initialize hybrid --dpm-velocity-mode face-normal --case-filter 3 --case-filter 4 --case-filter 5 --case-filter 6
+guarded_log: /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/cases_3_to_6.log
+run_guarded: started pid=37558 mode=quiet
+run_guarded: running elapsed=5m00s idle=6s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/cases_3_to_6.log
+run_guarded: running elapsed=10m00s idle=3s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/cases_3_to_6.log
+run_guarded: running elapsed=15m00s idle=3s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/cases_3_to_6.log
+run_guarded: running elapsed=20m01s idle=3s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/cases_3_to_6.log
+run_guarded: running elapsed=25m01s idle=4s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/cases_3_to_6.log
+run_guarded: running elapsed=30m01s idle=3s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/cases_3_to_6.log
+run_guarded: running elapsed=35m02s idle=3s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/cases_3_to_6.log
+run_guarded: running elapsed=40m02s idle=3s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/cases_3_to_6.log
+run_guarded: running elapsed=45m02s idle=3s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/cases_3_to_6.log
+run_guarded: running elapsed=50m03s idle=3s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/cases_3_to_6.log
+run_guarded: exited code=1 elapsed=52m39s

@@ -1,6 +1,31 @@
 # Current Status
 
-## Snapshot
+## Split-Inlet Carrier Mesh Study Preflight (2026-07-29)
+- Status: `Planned / blocked at preflight`.
+- Authoritative actual case record: `C:\Users\syok443\Documents\Setup07extractor\FFF.1-2.cas.h5` with `FFF.1-2-02541.dat.h5`, archived under `../../../PyAnsys/cases/actual_setup_archives/07-pure-phase-split-actual-area-live-fff-1-2/`.
+- Selected branch: setup `07a`, a carrier-only mesh-convergence child of the setup `07` split-inlet model. Setup `08c` remains the one-mixed-inlet replication branch and is not the split-inlet mesh-study baseline.
+- Reference condition: `1600 kJ/kg`, liquid `116.92 kg/s`, steam `80.69 kg/s`; setup-07 split velocity is `27.118 m/s`.
+- Frozen core physics: steady pressure-based Mixture, vapor primary/liquid secondary, RNG k-epsilon, gravity on, Energy off. DPM and EWF are excluded from the primary study.
+- Preflight conflict: the actual archive contains active DPM, `Coupled`, and first-order schemes, while intended setup `07` specifies carrier-first, `SIMPLE`, and second-order/`QUICK`. A single numerics authority must be qualified and read back before all mesh runs.
+- Mesh status: no systematic coarse/medium/fine mesh binaries are present locally. Historical `mesh-trial1` metadata describe only diagnostic exports with inconsistent zone preservation.
+- Remote status: the read-only connection check to `10.104.145.85:54904` timed out on `2026-07-29`; active processor count remains unverified (historical intent was 15).
+- Study definition: `../../../Setup report/07a-split-inlet-carrier-mesh-convergence.md`.
+- Next action: restore the Fluent/VPN path, inspect the authoritative case and processor count, verify outer-liquid/inner-steam geometry, then create or locate the systematic mesh ladder before any long solve.
+
+## July 2026 Purnanto Replication Campaign
+- Date: 2026-07-29.
+- Objective: replicate six Purnanto enthalpy conditions for the available baseline/Bangma-target model and the spiral-inlet model, using 1500 evidenced carrier-flow iterations and nine-bin Harwell DPM tracking.
+- Completed baseline branch: all six setup `08b` cases contain injection-level DPM exports and passing fate-mass audits. Provisional qualities are `99.7746%`, `99.6718%`, `99.7304%`, `99.7753%`, `99.8144%`, and `99.8507%`.
+- Completed spiral branch: all six setup `08c` cases contain residual histories from iteration `1` to `1500`, full pre/post injection readbacks, and passing fate-mass audits. Provisional qualities are `99.9679%`, `99.9678%`, `99.9668%`, `99.9795%`, `99.9786%`, and `99.9724%`.
+- Evidence qualification: Cases 2-6 of setup `08b` preserve standalone 1500-point residual CSVs. Case 1 preserves block-by-block advancement to 1500 in its manifest but lacks a mirrored standalone residual CSV.
+- Scientific blockers: fixed iteration completion is not convergence proof; baseline incomplete DPM mass remains large; the exact geometry lineage, inherited DPM tracking controls, one-way interaction state for historical baseline results, and steam-quality convention remain unresolved.
+- Automation correction: future sweeps now verify phase materials and one-way DPM before mutation, fail on DPM update/report failure, parse Fluent's `Final` DPM mass-flow column, and disable particle-count mass fallback by default.
+- Operational blocker: remote PyFluent control still depends on an awake Mac and continuous VPN/Wi-Fi connectivity.
+- Handoff: the full operator workflow, recovery contract, result snapshot, and mesh-convergence starting protocol are consolidated in `../../../PyAnsys/docs/PURNANTO_ENTHALPY_DPM_AUTOMATION_RUNBOOK.md`.
+- Technical records: `../technical/purnanto-enthalpy-dpm-replication.md` and `../technical/purnanto-spiral-inlet-enthalpy-dpm-replication.md`.
+- Setup records: `../../../Setup report/08b-purnanto-baseline-enthalpy-dpm-sweep.md` and `../../../Setup report/08c-purnanto-spiral-inlet-enthalpy-dpm-sweep.md`.
+
+## Prior Snapshot (2026-06-10)
 - Date: 2026-06-10
 - Phase: direct Purnanto-recreation reset plus retained setup `07` archive context
 - Focus: rebuild the paper-style Purnanto setup on the current project path using one mixed steam-water inlet rather than the later split-inlet branches.
@@ -51,25 +76,11 @@
 - New active mesh workflow artifacts: `../../../PyAnsys/input/required-zones-mesh-trial1.txt` plus `../../../PyAnsys/output/meshdat-semi-automated/workflow-report.md`.
 
 ## What Is In Progress
-- Preparing the direct one-inlet rebuild from setup `08` so the project returns to the closest Purnanto boundary package.
-- Narrowing the remaining PyFluent caveats to the operating-pressure API path and the correct 2026 R1 solution-method setter paths.
-- Narrowing the remaining PyFluent caveats further to pressure-outlet setting inactivity cleanup and cleaner balance reporting.
-- The direct one-inlet PyFluent path now has a longer controlled diagnostic result; remaining cleanup is mainly pressure-outlet setting inactivity, cleaner balance reporting, and a better direct residual export path.
-- Preparing quick DPM post-processing using `../../../CFD_wiki/wiki/synthesis/fluent-separator-efficiency-methods.md` and `../../../CFD_wiki/wiki/guidance/fluent-general-click-by-click.md`.
-- Historical convergence and physical-behavior notes for the parent mixed wet-half velocity-inlet/brine-outlet case are retained, but they are not active setup `07` blockers.
-- Verification of flow settings and numerical configuration.
-- Review of whether mesh quality, worst-cell location, and mesh-independence evidence are sufficient for stable solution progression.
-- Building a result-interpretation workflow to connect contour outputs to separator performance decisions.
-- Post-processing the professional setup `07` case/data for residual/monitor stability and DPM particle fate counts.
-- Preparing the first geometry/mesh-level inlet modification so it changes only boundary representation, not the full solver stack.
-- Deciding whether the rough Setup 2 trend is real or mostly caused by the simultaneous switch from velocity inlet to mass-flow inlet.
-- Any future return to parent-case outlet behavior, solver/numerics, or water-pool depletion should be treated as a separate scope decision, not part of the setup `07` baseline.
-- Older `MWH-WP-2026-05-07-A` remains qualitative historical evidence only; `PLS-PRO-2026-06-03-A` is now the newest documented diagnostic.
-- Lower-iteration runs remain useful only for setup history and failure-mode hints, not for quantitative performance claims.
-- Deferred run branch: complete two-phase full spiral inlet with no active brine outlet remains an older inlet/mixing diagnostic option, not the immediate next action.
-- Split-inlet branches remain archived comparison options, not the immediate direct-baseline action.
-- The student-edition outlet-extension trial remains a parked comparison branch; if resumed, it should be treated as setup `08a`, not the primary setup `08`.
-- Preparing the corrected split-inlet mesh-improvement workflow so future Workbench trials are judged first on Fluent reopenability, exact zone preservation, and mesh quality rather than Student-license cell-count limits.
+- Transitioning from the completed provisional replication sweeps to a single-geometry, representative-case mesh-convergence study.
+- Auditing the exact baseline mesh identity before defining coarse, medium, and fine meshes.
+- Capturing incomplete-particle locations near the cylinder-to-dome transition.
+- Preserving the full DPM interaction, tracking, wall-fate, and face-normal setup in future manifests.
+- Keeping older setup `07`, split-inlet, and outlet-extension branches as comparison history rather than active replication work.
 
 ## Chat Cleanup Readiness
 - Older chats should be treated as archive candidates only after the decision, evidence, blocker state, and next action are visible in repo files.
@@ -77,11 +88,10 @@
 - The main remaining archive-risk before removing reliance on older chats was the stale snapshot date on this page and ambiguous branch state in the setup-order dictionary; this cleanup pass addresses those two gaps.
 
 ## Immediate Next Actions
-1. Check whether the remaining pressure-outlet subsetting inactivity needs a different setting order or can be treated as harmless for the current controlled diagnostic path.
-2. Keep the direct one-inlet `trial4` PyFluent path as the active local parity and longer-diagnostic baseline.
-3. If useful, improve the direct residual-export path so future plots do not depend on transcript parsing.
-4. Treat setup `07` and its DPM evidence as comparison-only context until the direct Purnanto-recreation branch is cleaner and more repeatable.
-5. Fix the split-inlet exported-zone naming in the `mesh-trial1` Meshing branch before accepting any trial meshes from the semi-automated workflow.
+1. Start a new task from the consolidated runbook and choose one geometry for the first mesh study.
+2. Resolve the historical `2.96M` versus `5.58M` baseline cell-count discrepancy before defining the mesh ladder.
+3. Define carrier residual, phase mass-balance, pressure-drop, outlet-flow, and velocity/swirl convergence metrics for Case 4.
+4. Keep the completed 12-case results labelled provisional until carrier convergence and mesh independence are demonstrated.
 
 ## Roadmap Link
 - Run-efficiency roadmap: `../project/roadmap.md`

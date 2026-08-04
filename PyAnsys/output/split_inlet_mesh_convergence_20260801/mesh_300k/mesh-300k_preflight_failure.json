@@ -1,0 +1,8 @@
+{
+  "study_id": "split_inlet_mesh_convergence_20260801",
+  "mesh_name": "mesh-300k",
+  "status": "unresolved",
+  "failure_category": "requires manual GUI cleanup",
+  "error": "RuntimeError: requires manual GUI cleanup: could not remove scratch report C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_300k\\_phase_1_density_scratch.txt",
+  "completed_epoch": 1785537455.851212
+}

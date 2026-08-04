@@ -1,0 +1,4412 @@
+{
+  "case": "Case 4",
+  "condition": "1600",
+  "prefix": "case_4_1600_top_ring_pulse_retry",
+  "source_case": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_1500.cas.h5",
+  "source_data": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_1500.dat.h5",
+  "injections": [
+    "injection-5",
+    "injection-6",
+    "injection-7",
+    "injection-8"
+  ],
+  "mesh_surfaces": [
+    "fluid_outlet",
+    "wall-fluid"
+  ],
+  "remote_output_dir": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep",
+  "local_output_dir": "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/ring_diagnostic",
+  "probe": {
+    "create_actions": [],
+    "boundary_conditions": {
+      "interior": {
+        "interior-fluid": {
+          "name": "interior-fluid",
+          "phase": {
+            "mixture": {
+              "interior": {}
+            },
+            "phase-1": {
+              "interior": {}
+            },
+            "phase-2": {
+              "interior": {}
+            }
+          }
+        }
+      },
+      "mass_flow_inlet": {
+        "inlet": {
+          "name": "inlet",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "reference_frame": "Absolute",
+                "supersonic_gauge_pressure": {
+                  "option": "value",
+                  "value": 1140000
+                },
+                "direction_specification": "Normal to Boundary"
+              },
+              "turbulence": {
+                "turbulence_specification": "Intensity and Hydraulic Diameter",
+                "turbulent_intensity": 0.02152499951888,
+                "hydraulic_diameter": 0.7240000000000001
+              },
+              "dpm": {
+                "discrete_phase_bc_type": "escape"
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {
+                "mass_flow_specification": "Mass Flow Rate",
+                "mass_flow_rate": {
+                  "option": "value",
+                  "value": 80.69
+                }
+              },
+              "turbulence": {},
+              "dpm": {},
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {
+                "mass_flow_specification": "Mass Flow Rate",
+                "mass_flow_rate": {
+                  "option": "value",
+                  "value": 116.92
+                }
+              },
+              "turbulence": {},
+              "dpm": {},
+              "multiphase": {}
+            }
+          }
+        }
+      },
+      "pressure_outlet": {
+        "steam_outlet": {
+          "name": "steam_outlet",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "gauge_pressure": {
+                  "option": "value",
+                  "value": 1120000
+                },
+                "pressure_profile_multiplier": 1,
+                "backflow_dir_spec_method": "Normal to Boundary",
+                "backflow_pressure_spec": "Total Pressure",
+                "radial_equ_pressure_distribution": false
+              },
+              "turbulence": {
+                "turbulence_specification": "Intensity and Hydraulic Diameter",
+                "backflow_turbulent_intensity": 0.02152499951888,
+                "backflow_hydraulic_diameter": 0.7240000000000001
+              },
+              "dpm": {
+                "discrete_phase_bc_type": "escape"
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "dpm": {},
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "dpm": {},
+              "multiphase": {
+                "volume_frac_spec_method": "Backflow Volume Fraction",
+                "backflow_volume_fraction": {
+                  "option": "value",
+                  "value": 0
+                }
+              }
+            }
+          }
+        }
+      },
+      "wall": {
+        "fluid_outlet": {
+          "name": "fluid_outlet",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "dpm": {
+                "discrete_phase_bc_type": "trap"
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "dpm": {},
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "dpm": {},
+              "multiphase": {}
+            }
+          }
+        },
+        "wall-fluid": {
+          "name": "wall-fluid",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "dpm": {
+                "discrete_phase_bc_type": "reflect",
+                "normal_coefficient": {
+                  "option": "constant",
+                  "value": 0.3
+                },
+                "tangential_coefficient": {
+                  "option": "constant",
+                  "value": 0.8
+                }
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "dpm": {},
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "dpm": {},
+              "multiphase": {}
+            }
+          }
+        }
+      },
+      "non_reflecting_bc": {
+        "general_nrbc": {
+          "sigma": 0.15,
+          "sigma2": 5.0
+        },
+        "turbo_sepcific_nrbc": {
+          "enable": false
+        }
+      },
+      "perforated_wall": {
+        "setup_method": "None",
+        "model_setup": {
+          "ninjections": 1,
+          "urf": 1,
+          "injection": [
+            {
+              "injection_thread": false,
+              "coupled": true,
+              "extraction_thread": false,
+              "uniform": true,
+              "static": false,
+              "formulation": 0,
+              "dynamic_setup": {
+                "method": -1
+              }
+            }
+          ]
+        }
+      },
+      "settings": {
+        "mass_flow": true,
+        "pressure_outlet": {
+          "blending_factor": 0.0,
+          "bin_count": 65,
+          "average_pressure": false
+        },
+        "target_mass_flow_rate_settings": {
+          "under_relaxation_factor": 0.05,
+          "verbosity": false
+        },
+        "advanced": {
+          "delay_model_change_update": false,
+          "batch_thread_update": false
+        }
+      }
+    },
+    "mesh_object_names": [
+      "top_ring_wall_mesh"
+    ],
+    "particle_track_object_names": [
+      "top_ring_high_time_dpm_tracks",
+      "top_ring_dpm_tracks",
+      "top_ring_dpm_tracks_probe",
+      "particle-tracks-1"
+    ],
+    "particle_track_state": {
+      "name": "top_ring_dpm_tracks_probe",
+      "uid": "uid-2",
+      "options": {
+        "node_values": true
+      },
+      "filter_settings": {
+        "field": "",
+        "options": {
+          "option": "inside",
+          "inside": false
+        },
+        "enabled": false,
+        "filter_minimum": 0.0,
+        "filter_maximum": 0.0
+      },
+      "range": {
+        "option": "auto-range",
+        "auto_range": {}
+      },
+      "style_attribute": {
+        "style": "line",
+        "line_width": 1,
+        "arrow_space": 1,
+        "arrow_scale": 1,
+        "marker_size": 0.1,
+        "sphere_size": 0.020634,
+        "sphere_lod": 8,
+        "radius": 0.020634,
+        "ribbon_settings": {
+          "field": "pressure",
+          "scalefactor": 0.1
+        },
+        "sphere_settings": {
+          "scale": 1,
+          "sphere_lod": 8,
+          "options": {
+            "option": "variable",
+            "variable": {
+              "size_by": "Particle Diameter",
+              "range": {
+                "option": "auto-range",
+                "auto_range": {}
+              }
+            }
+          }
+        }
+      },
+      "vector_settings": {
+        "style": "none",
+        "vector_length": {
+          "option": "variable-length",
+          "variable_length": "Particle Velocity Magnitude"
+        },
+        "constant_color": {
+          "enabled": false,
+          "color": ""
+        },
+        "vector_of": "particle-x-velocity",
+        "scale": 1,
+        "length_to_head_ratio": 20
+      },
+      "plot": {
+        "x_axis_function": "Time",
+        "enabled": false
+      },
+      "track_single_particle_stream": {
+        "enabled": false,
+        "stream_id": 0
+      },
+      "skip": 0,
+      "coarsen": 1,
+      "field": "Particle Residence Time",
+      "injections_list": null,
+      "free_stream_particles": true,
+      "wall_film_particles": true,
+      "track_pdf_particles": false,
+      "color_map": {
+        "visible": true,
+        "size": 100,
+        "color": "field-velocity",
+        "log_scale": false,
+        "format": "%0.2e",
+        "user_skip": 9,
+        "show_all": true,
+        "position": 1,
+        "font_name": "Helvetica",
+        "font_automatic": true,
+        "font_size": 0.032,
+        "length": 0.54,
+        "width": 6.0,
+        "bground_transparent": true,
+        "bground_color": "#CCD3E2",
+        "title_elements": "Variable and Object Name"
+      },
+      "display_state_name": "None",
+      "axes": {
+        "numbers": {
+          "x_format": "general",
+          "x_axis_precision": 3,
+          "y_format": "exponential",
+          "y_axis_precision": 2
+        },
+        "rules": {
+          "x_axis": {
+            "draw_major_rules": false,
+            "draw_minor_rules": false
+          },
+          "y_axis": {
+            "draw_major_rules": false,
+            "draw_minor_rules": false
+          }
+        },
+        "log_scale": {
+          "x_axis": false,
+          "y_axis": false
+        },
+        "auto_scale": {
+          "x_axis": true,
+          "x_axis_min": 0,
+          "x_axis_max": 0,
+          "y_axis": true,
+          "y_axis_min": 0,
+          "y_axis_max": 0
+        },
+        "labels": {
+          "x_axis": "",
+          "y_axis": ""
+        }
+      },
+      "curves": {
+        "lines": [
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "monte carlo green"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "lavender gray"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "scarlet red"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "grayish blue"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "flush orange"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "lime green"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "classic pink"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "red"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "green"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "blue"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "cyan"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "magenta"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "yellow"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "orange"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "pink"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "brown"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "copper"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "maroon"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "tan"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "teal"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "silver"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "salmon"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "light yellow"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "light red"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "light green"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "light blue"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "light gray"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "dark gray"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "dark red"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "dark green"
+          },
+          {
+            "pattern": "----",
+            "weight": 2,
+            "color": "dark blue"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          },
+          {
+            "pattern": "",
+            "weight": 2,
+            "color": "foreground"
+          }
+        ],
+        "markers": [
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "monte carlo green"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "lavender gray"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "scarlet red"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "grayish blue"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "flush orange"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "lime green"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "classic pink"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "red"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "green"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "blue"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "cyan"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "magenta"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "yellow"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "orange"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "pink"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "brown"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "copper"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "maroon"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "tan"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "teal"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "silver"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "salmon"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "light yellow"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "light red"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "light green"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "light blue"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "light gray"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "dark gray"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "dark red"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "dark green"
+          },
+          {
+            "symbol": "",
+            "size": 0.3,
+            "color": "dark blue"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          },
+          {
+            "symbol": "+",
+            "size": 0.3,
+            "color": "foreground"
+          }
+        ]
+      }
+    },
+    "particle_field_allowed_values": [
+      "particle-resid-time",
+      "particle-id",
+      "surface-id",
+      "particle-x-position",
+      "particle-y-position",
+      "particle-radial-position",
+      "particle-z-position",
+      "particle-theta-position",
+      "particle-x-velocity",
+      "particle-y-velocity",
+      "particle-radial-velocity",
+      "particle-z-velocity",
+      "particle-swirl-velocity",
+      "particle-velocity-mag",
+      "particle-diameter",
+      "particle-density",
+      "particle-Cp",
+      "particle-binary-diffusivity",
+      "particle-mass",
+      "particle-temperature",
+      "particle-law-index",
+      "particle-on-wall",
+      "particle-reynolds-number",
+      "particle-time-step",
+      "particle-nusselt-number",
+      "tracking-scheme",
+      "number-of-refinements",
+      "pressure",
+      "pressure-coefficient",
+      "dynamic-pressure",
+      "absolute-pressure",
+      "total-pressure",
+      "rel-total-pressure",
+      "density",
+      "density-all",
+      "velocity-magnitude",
+      "x-velocity",
+      "y-velocity",
+      "z-velocity",
+      "axial-velocity",
+      "radial-velocity",
+      "tangential-velocity",
+      "rel-velocity-magnitude",
+      "relative-x-velocity",
+      "relative-y-velocity",
+      "relative-z-velocity",
+      "rel-axial-velocity",
+      "rel-radial-velocity",
+      "rel-tangential-velocity",
+      "mesh-x-velocity",
+      "mesh-y-velocity",
+      "mesh-z-velocity",
+      "velocity-angle",
+      "relative-velocity-angle",
+      "vorticity-mag",
+      "helicity",
+      "x-vorticity",
+      "y-vorticity",
+      "z-vorticity",
+      "cell-reynolds-number",
+      "q-criterion",
+      "raw-q-criterion",
+      "lambda2-criterion",
+      "turb-kinetic-energy",
+      "turb-intensity",
+      "turb-diss-rate",
+      "production-of-k",
+      "viscosity-turb",
+      "viscosity-eff",
+      "viscosity-ratio",
+      "y-star",
+      "y-plus",
+      "iad-phase-pair-1",
+      "dpm-wall-x-force",
+      "dpm-wall-y-force",
+      "dpm-wall-z-force",
+      "dpm-wall-normal-pressure",
+      "viscosity-lam",
+      "wall-shear",
+      "x-wall-shear",
+      "y-wall-shear",
+      "z-wall-shear",
+      "skin-friction-coef",
+      "cell-partition-active",
+      "cell-partition-stored",
+      "cell-id",
+      "cell-element-type",
+      "cell-type",
+      "cell-zone",
+      "partition-neighbors",
+      "cell-weight",
+      "x-coordinate",
+      "y-coordinate",
+      "z-coordinate",
+      "axial-coordinate",
+      "angular-coordinate",
+      "abs-angular-coordinate",
+      "radial-coordinate",
+      "face-area-magnitude",
+      "x-face-area",
+      "y-face-area",
+      "z-face-area",
+      "cell-volume",
+      "orthogonal-quality",
+      "cell-equiangle-skew",
+      "cell-equivolume-skew",
+      "face-handedness",
+      "mark-poor-elements",
+      "interface-overlap-fraction",
+      "cell-wall-distance",
+      "aspect-ratio",
+      "cell-refine-level",
+      "smoothed-cell-refine-level",
+      "cell-parent-index",
+      "anisotropic-adaption-cells",
+      "boundary-layer-cells",
+      "boundary-cell-dist",
+      "boundary-normal-dist",
+      "boundary-volume-dist",
+      "cell-volume-change",
+      "mass-imbalance",
+      "strain-rate-mag",
+      "dx-velocity-dx",
+      "dy-velocity-dx",
+      "dz-velocity-dx",
+      "dx-velocity-dy",
+      "dy-velocity-dy",
+      "dz-velocity-dy",
+      "dx-velocity-dz",
+      "dy-velocity-dz",
+      "dz-velocity-dz",
+      "dp-dx",
+      "dp-dy",
+      "dp-dz",
+      "pressure-hessian-indicator",
+      "phase-1-density",
+      "phase-1-density-all",
+      "phase-1-velocity-magnitude",
+      "phase-1-x-velocity",
+      "phase-1-y-velocity",
+      "phase-1-z-velocity",
+      "phase-1-rel-velocity-magnitude",
+      "phase-1-relative-x-velocity",
+      "phase-1-relative-y-velocity",
+      "phase-1-relative-z-velocity",
+      "phase-1-q-criterion",
+      "phase-1-raw-q-criterion",
+      "phase-1-lambda2-criterion",
+      "phase-1-vof",
+      "phase-1-sm-vof-grad-dx",
+      "phase-1-sm-vof-grad-dy",
+      "phase-1-sm-vof-grad-dz",
+      "phase-1-sm-vof-grad-mag",
+      "phase-1-viscosity-lam",
+      "phase-2-density",
+      "phase-2-density-all",
+      "phase-2-velocity-magnitude",
+      "phase-2-x-velocity",
+      "phase-2-y-velocity",
+      "phase-2-z-velocity",
+      "phase-2-rel-velocity-magnitude",
+      "phase-2-relative-x-velocity",
+      "phase-2-relative-y-velocity",
+      "phase-2-relative-z-velocity",
+      "phase-2-q-criterion",
+      "phase-2-raw-q-criterion",
+      "phase-2-lambda2-criterion",
+      "phase-2-vof",
+      "phase-2-sm-vof-grad-dx",
+      "phase-2-sm-vof-grad-dy",
+      "phase-2-sm-vof-grad-dz",
+      "phase-2-sm-vof-grad-mag",
+      "phase-2-viscosity-lam",
+      "phase-2-diameter"
+    ],
+    "injections_allowed_values": [
+      "injection-0",
+      "injection-1",
+      "injection-2",
+      "injection-3",
+      "injection-4",
+      "injection-5",
+      "injection-6",
+      "injection-7",
+      "injection-8"
+    ],
+    "mesh_object_allowed_values": [],
+    "filter_branch_name": "filter_settings",
+    "filter_field_allowed_values": [
+      "particle-resid-time",
+      "particle-id",
+      "surface-id",
+      "particle-x-position",
+      "particle-y-position",
+      "particle-radial-position",
+      "particle-z-position",
+      "particle-theta-position",
+      "particle-x-velocity",
+      "particle-y-velocity",
+      "particle-radial-velocity",
+      "particle-z-velocity",
+      "particle-swirl-velocity",
+      "particle-velocity-mag",
+      "particle-diameter",
+      "particle-density",
+      "particle-Cp",
+      "particle-binary-diffusivity",
+      "particle-mass",
+      "particle-temperature",
+      "particle-law-index",
+      "particle-on-wall",
+      "particle-reynolds-number",
+      "particle-time-step",
+      "particle-nusselt-number",
+      "tracking-scheme",
+      "number-of-refinements",
+      "pressure",
+      "pressure-coefficient",
+      "dynamic-pressure",
+      "absolute-pressure",
+      "total-pressure",
+      "rel-total-pressure",
+      "density",
+      "density-all",
+      "velocity-magnitude",
+      "x-velocity",
+      "y-velocity",
+      "z-velocity",
+      "axial-velocity",
+      "radial-velocity",
+      "tangential-velocity",
+      "rel-velocity-magnitude",
+      "relative-x-velocity",
+      "relative-y-velocity",
+      "relative-z-velocity",
+      "rel-axial-velocity",
+      "rel-radial-velocity",
+      "rel-tangential-velocity",
+      "mesh-x-velocity",
+      "mesh-y-velocity",
+      "mesh-z-velocity",
+      "velocity-angle",
+      "relative-velocity-angle",
+      "vorticity-mag",
+      "helicity",
+      "x-vorticity",
+      "y-vorticity",
+      "z-vorticity",
+      "cell-reynolds-number",
+      "q-criterion",
+      "raw-q-criterion",
+      "lambda2-criterion",
+      "turb-kinetic-energy",
+      "turb-intensity",
+      "turb-diss-rate",
+      "production-of-k",
+      "viscosity-turb",
+      "viscosity-eff",
+      "viscosity-ratio",
+      "y-star",
+      "y-plus",
+      "iad-phase-pair-1",
+      "dpm-wall-x-force",
+      "dpm-wall-y-force",
+      "dpm-wall-z-force",
+      "dpm-wall-normal-pressure",
+      "viscosity-lam",
+      "wall-shear",
+      "x-wall-shear",
+      "y-wall-shear",
+      "z-wall-shear",
+      "skin-friction-coef",
+      "cell-partition-active",
+      "cell-partition-stored",
+      "cell-id",
+      "cell-element-type",
+      "cell-type",
+      "cell-zone",
+      "partition-neighbors",
+      "cell-weight",
+      "x-coordinate",
+      "y-coordinate",
+      "z-coordinate",
+      "axial-coordinate",
+      "angular-coordinate",
+      "abs-angular-coordinate",
+      "radial-coordinate",
+      "face-area-magnitude",
+      "x-face-area",
+      "y-face-area",
+      "z-face-area",
+      "cell-volume",
+      "orthogonal-quality",
+      "cell-equiangle-skew",
+      "cell-equivolume-skew",
+      "face-handedness",
+      "mark-poor-elements",
+      "interface-overlap-fraction",
+      "cell-wall-distance",
+      "aspect-ratio",
+      "cell-refine-level",
+      "smoothed-cell-refine-level",
+      "cell-parent-index",
+      "anisotropic-adaption-cells",
+      "boundary-layer-cells",
+      "boundary-cell-dist",
+      "boundary-normal-dist",
+      "boundary-volume-dist",
+      "cell-volume-change",
+      "mass-imbalance",
+      "strain-rate-mag",
+      "dx-velocity-dx",
+      "dy-velocity-dx",
+      "dz-velocity-dx",
+      "dx-velocity-dy",
+      "dy-velocity-dy",
+      "dz-velocity-dy",
+      "dx-velocity-dz",
+      "dy-velocity-dz",
+      "dz-velocity-dz",
+      "dp-dx",
+      "dp-dy",
+      "dp-dz",
+      "pressure-hessian-indicator",
+      "phase-1-density",
+      "phase-1-density-all",
+      "phase-1-velocity-magnitude",
+      "phase-1-x-velocity",
+      "phase-1-y-velocity",
+      "phase-1-z-velocity",
+      "phase-1-rel-velocity-magnitude",
+      "phase-1-relative-x-velocity",
+      "phase-1-relative-y-velocity",
+      "phase-1-relative-z-velocity",
+      "phase-1-q-criterion",
+      "phase-1-raw-q-criterion",
+      "phase-1-lambda2-criterion",
+      "phase-1-vof",
+      "phase-1-sm-vof-grad-dx",
+      "phase-1-sm-vof-grad-dy",
+      "phase-1-sm-vof-grad-dz",
+      "phase-1-sm-vof-grad-mag",
+      "phase-1-viscosity-lam",
+      "phase-2-density",
+      "phase-2-density-all",
+      "phase-2-velocity-magnitude",
+      "phase-2-x-velocity",
+      "phase-2-y-velocity",
+      "phase-2-z-velocity",
+      "phase-2-rel-velocity-magnitude",
+      "phase-2-relative-x-velocity",
+      "phase-2-relative-y-velocity",
+      "phase-2-relative-z-velocity",
+      "phase-2-q-criterion",
+      "phase-2-raw-q-criterion",
+      "phase-2-lambda2-criterion",
+      "phase-2-vof",
+      "phase-2-sm-vof-grad-dx",
+      "phase-2-sm-vof-grad-dy",
+      "phase-2-sm-vof-grad-dz",
+      "phase-2-sm-vof-grad-mag",
+      "phase-2-viscosity-lam",
+      "phase-2-diameter"
+    ],
+    "style_allowed_values": [],
+    "hardcopy_format_allowed_values": [
+      "ppm",
+      "eps",
+      "postscript",
+      "vrml"
+    ],
+    "pulse_state": {
+      "_capture_error": "graphics.pulse: RuntimeError: api-get-var: the object is not active\nError Object: results/graphics/pulse"
+    },
+    "pulse_mode_allowed_values": [],
+    "pulse_write_format_allowed_values": []
+  },
+  "actions": {
+    "mesh": [
+      {
+        "ok": true,
+        "result": null
+      },
+      {
+        "ok": true,
+        "result": {
+          "name": "top_ring_wall_mesh",
+          "options": {
+            "nodes": false,
+            "edges": false,
+            "faces": true,
+            "partitions": false,
+            "overset": false
+          },
+          "edge_type": {
+            "option": "all",
+            "all": false
+          },
+          "shrink_factor": 0,
+          "surfaces_list": [
+            "fluid_outlet",
+            "wall-fluid"
+          ],
+          "coloring": {
+            "option": "automatic",
+            "automatic": {
+              "option": "type",
+              "type": {}
+            }
+          },
+          "display_state_name": "None"
+        }
+      }
+    ],
+    "track": [
+      {
+        "ok": true,
+        "result": null
+      },
+      {
+        "ok": true,
+        "result": null
+      },
+      {
+        "ok": false,
+        "error": "RuntimeError: api-set-var: the object is not active\nError Object: results/graphics/particle-track/top_ring_dpm_tracks/draw-mesh?"
+      },
+      {
+        "ok": true,
+        "result": null
+      },
+      {
+        "ok": true,
+        "result": null
+      },
+      {
+        "ok": true,
+        "result": null
+      },
+      {
+        "ok": true,
+        "result": null
+      },
+      {
+        "ok": true,
+        "result": null
+      },
+      {
+        "ok": true,
+        "result": null
+      },
+      {
+        "ok": true,
+        "result": null
+      },
+      {
+        "ok": true,
+        "result": null
+      },
+      {
+        "ok": true,
+        "result": {
+          "name": "top_ring_dpm_tracks",
+          "uid": "uid-3",
+          "options": {
+            "node_values": true
+          },
+          "filter_settings": {
+            "field": "",
+            "options": {
+              "option": "inside",
+              "inside": false
+            },
+            "enabled": false,
+            "filter_minimum": 0.0,
+            "filter_maximum": 0.0
+          },
+          "range": {
+            "option": "auto-range",
+            "auto_range": {}
+          },
+          "style_attribute": {
+            "style": "line",
+            "line_width": 2.0,
+            "arrow_space": 1,
+            "arrow_scale": 1,
+            "marker_size": 0.03,
+            "sphere_size": 0.020634,
+            "sphere_lod": 8,
+            "radius": 0.020634,
+            "ribbon_settings": {
+              "field": "pressure",
+              "scalefactor": 0.1
+            },
+            "sphere_settings": {
+              "scale": 1,
+              "sphere_lod": 8,
+              "options": {
+                "option": "variable",
+                "variable": {
+                  "size_by": "Particle Diameter",
+                  "range": {
+                    "option": "auto-range",
+                    "auto_range": {}
+                  }
+                }
+              }
+            }
+          },
+          "vector_settings": {
+            "style": "none",
+            "vector_length": {
+              "option": "variable-length",
+              "variable_length": "Particle Velocity Magnitude"
+            },
+            "constant_color": {
+              "enabled": false,
+              "color": ""
+            },
+            "vector_of": "particle-x-velocity",
+            "scale": 1,
+            "length_to_head_ratio": 20
+          },
+          "plot": {
+            "x_axis_function": "Time",
+            "enabled": false
+          },
+          "track_single_particle_stream": {
+            "enabled": false,
+            "stream_id": 0
+          },
+          "skip": 0,
+          "coarsen": 4,
+          "field": "particle-resid-time",
+          "injections_list": [
+            "injection-5",
+            "injection-6",
+            "injection-7",
+            "injection-8"
+          ],
+          "free_stream_particles": true,
+          "wall_film_particles": true,
+          "track_pdf_particles": false,
+          "color_map": {
+            "visible": true,
+            "size": 12,
+            "color": "field-velocity",
+            "log_scale": false,
+            "format": "%0.2e",
+            "user_skip": 9,
+            "show_all": false,
+            "position": 1,
+            "font_name": "Helvetica",
+            "font_automatic": true,
+            "font_size": 0.032,
+            "length": 0.54,
+            "width": 6.0,
+            "bground_transparent": true,
+            "bground_color": "#CCD3E2",
+            "title_elements": "Variable and Object Name"
+          },
+          "display_state_name": "None",
+          "axes": {
+            "numbers": {
+              "x_format": "general",
+              "x_axis_precision": 3,
+              "y_format": "exponential",
+              "y_axis_precision": 2
+            },
+            "rules": {
+              "x_axis": {
+                "draw_major_rules": false,
+                "draw_minor_rules": false
+              },
+              "y_axis": {
+                "draw_major_rules": false,
+                "draw_minor_rules": false
+              }
+            },
+            "log_scale": {
+              "x_axis": false,
+              "y_axis": false
+            },
+            "auto_scale": {
+              "x_axis": true,
+              "x_axis_min": 0,
+              "x_axis_max": 0,
+              "y_axis": true,
+              "y_axis_min": 0,
+              "y_axis_max": 0
+            },
+            "labels": {
+              "x_axis": "",
+              "y_axis": ""
+            }
+          },
+          "curves": {
+            "lines": [
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "monte carlo green"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "lavender gray"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "scarlet red"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "grayish blue"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "flush orange"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "lime green"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "classic pink"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "red"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "green"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "blue"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "cyan"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "magenta"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "yellow"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "orange"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "pink"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "brown"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "copper"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "maroon"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "tan"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "teal"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "silver"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "salmon"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "light yellow"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "light red"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "light green"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "light blue"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "light gray"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "dark gray"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "dark red"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "dark green"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "dark blue"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              }
+            ],
+            "markers": [
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "monte carlo green"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "lavender gray"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "scarlet red"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "grayish blue"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "flush orange"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "lime green"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "classic pink"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "red"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "green"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "blue"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "cyan"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "magenta"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "yellow"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "orange"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "pink"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "brown"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "copper"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "maroon"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "tan"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "teal"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "silver"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "salmon"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "light yellow"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "light red"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "light green"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "light blue"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "light gray"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "dark gray"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "dark red"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "dark green"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "dark blue"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "history_setup": [
+      {
+        "ok": true,
+        "result": null
+      },
+      {
+        "ok": true,
+        "result": false
+      },
+      {
+        "ok": true,
+        "result": ""
+      },
+      {
+        "ok": true,
+        "result": ""
+      },
+      {
+        "ok": true,
+        "result": ""
+      },
+      {
+        "ok": true,
+        "result": ""
+      }
+    ],
+    "picture_setup": [
+      {
+        "ok": false,
+        "error": "RuntimeError: api-set-var: the object is not active\nError Object: results/graphics/picture/use-window-resolution?"
+      },
+      {
+        "ok": true,
+        "result": null
+      },
+      {
+        "ok": true,
+        "result": null
+      },
+      {
+        "ok": false,
+        "error": "RuntimeError: api-set-var: the object is not active\nError Object: results/graphics/picture/dpi"
+      },
+      {
+        "ok": true,
+        "result": null
+      },
+      {
+        "ok": true,
+        "result": null
+      }
+    ],
+    "display_unfiltered": [
+      {
+        "ok": true,
+        "result": null
+      },
+      {
+        "ok": true,
+        "result": null
+      }
+    ],
+    "save_unfiltered_png": {
+      "ok": false,
+      "attempts": [
+        {
+          "ok": false,
+          "error": "InactiveObjectError: '<session>.results.graphics.picture.save_picture' is currently inactive."
+        },
+        {
+          "ok": false,
+          "error": "RuntimeError: menu not found"
+        },
+        {
+          "ok": false,
+          "error": "AttributeError: 'picture' object has no attribute 'save_picture'"
+        }
+      ]
+    },
+    "pulse_unfiltered": {
+      "ok": false,
+      "exports": {
+        "hsf": {
+          "ok": false,
+          "error": "RuntimeError: api-execute-cmd: the object is not active\nError Object: results/graphics/pulse",
+          "remote_path": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_top_ring_pulse_retry_top_ring_dpm_tracks_pulse.hsf"
+        },
+        "glb": {
+          "ok": false,
+          "error": "RuntimeError: api-execute-cmd: the object is not active\nError Object: results/graphics/pulse",
+          "remote_path": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_top_ring_pulse_retry_top_ring_dpm_tracks_pulse.glb"
+        },
+        "avz": {
+          "ok": false,
+          "error": "RuntimeError: api-execute-cmd: the object is not active\nError Object: results/graphics/pulse",
+          "remote_path": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_top_ring_pulse_retry_top_ring_dpm_tracks_pulse.avz"
+        },
+        "usd": {
+          "ok": false,
+          "error": "RuntimeError: api-execute-cmd: the object is not active\nError Object: results/graphics/pulse",
+          "remote_path": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_top_ring_pulse_retry_top_ring_dpm_tracks_pulse.usd"
+        }
+      }
+    },
+    "filtered_track": [
+      {
+        "ok": true,
+        "result": null
+      },
+      {
+        "ok": true,
+        "result": null
+      },
+      {
+        "ok": false,
+        "error": "RuntimeError: api-set-var: the object is not active\nError Object: results/graphics/particle-track/top_ring_high_time_dpm_tracks/draw-mesh?"
+      },
+      {
+        "ok": true,
+        "result": null
+      },
+      {
+        "ok": true,
+        "result": null
+      },
+      {
+        "ok": true,
+        "result": null
+      },
+      {
+        "ok": true,
+        "result": null
+      },
+      {
+        "ok": true,
+        "result": null
+      },
+      {
+        "ok": true,
+        "result": null
+      },
+      {
+        "ok": true,
+        "result": null
+      },
+      {
+        "ok": true,
+        "result": null
+      },
+      {
+        "ok": true,
+        "result": null,
+        "branch": "filter_settings"
+      },
+      {
+        "ok": true,
+        "result": {
+          "name": "top_ring_high_time_dpm_tracks",
+          "uid": "uid-4",
+          "options": {
+            "node_values": true
+          },
+          "filter_settings": {
+            "field": "particle-resid-time",
+            "options": {
+              "option": "inside",
+              "inside": true
+            },
+            "enabled": true,
+            "filter_minimum": 60.0,
+            "filter_maximum": 1000000000.0
+          },
+          "range": {
+            "option": "auto-range",
+            "auto_range": {}
+          },
+          "style_attribute": {
+            "style": "line",
+            "line_width": 2.0,
+            "arrow_space": 1,
+            "arrow_scale": 1,
+            "marker_size": 0.03,
+            "sphere_size": 0.020634,
+            "sphere_lod": 8,
+            "radius": 0.020634,
+            "ribbon_settings": {
+              "field": "pressure",
+              "scalefactor": 0.1
+            },
+            "sphere_settings": {
+              "scale": 1,
+              "sphere_lod": 8,
+              "options": {
+                "option": "variable",
+                "variable": {
+                  "size_by": "Particle Diameter",
+                  "range": {
+                    "option": "auto-range",
+                    "auto_range": {}
+                  }
+                }
+              }
+            }
+          },
+          "vector_settings": {
+            "style": "none",
+            "vector_length": {
+              "option": "variable-length",
+              "variable_length": "Particle Velocity Magnitude"
+            },
+            "constant_color": {
+              "enabled": false,
+              "color": ""
+            },
+            "vector_of": "particle-x-velocity",
+            "scale": 1,
+            "length_to_head_ratio": 20
+          },
+          "plot": {
+            "x_axis_function": "Time",
+            "enabled": false
+          },
+          "track_single_particle_stream": {
+            "enabled": false,
+            "stream_id": 0
+          },
+          "skip": 0,
+          "coarsen": 4,
+          "field": "particle-resid-time",
+          "injections_list": [
+            "injection-5",
+            "injection-6",
+            "injection-7",
+            "injection-8"
+          ],
+          "free_stream_particles": true,
+          "wall_film_particles": true,
+          "track_pdf_particles": false,
+          "color_map": {
+            "visible": true,
+            "size": 12,
+            "color": "field-velocity",
+            "log_scale": false,
+            "format": "%0.2e",
+            "user_skip": 9,
+            "show_all": false,
+            "position": 1,
+            "font_name": "Helvetica",
+            "font_automatic": true,
+            "font_size": 0.032,
+            "length": 0.54,
+            "width": 6.0,
+            "bground_transparent": true,
+            "bground_color": "#CCD3E2",
+            "title_elements": "Variable and Object Name"
+          },
+          "display_state_name": "None",
+          "axes": {
+            "numbers": {
+              "x_format": "general",
+              "x_axis_precision": 3,
+              "y_format": "exponential",
+              "y_axis_precision": 2
+            },
+            "rules": {
+              "x_axis": {
+                "draw_major_rules": false,
+                "draw_minor_rules": false
+              },
+              "y_axis": {
+                "draw_major_rules": false,
+                "draw_minor_rules": false
+              }
+            },
+            "log_scale": {
+              "x_axis": false,
+              "y_axis": false
+            },
+            "auto_scale": {
+              "x_axis": true,
+              "x_axis_min": 0,
+              "x_axis_max": 0,
+              "y_axis": true,
+              "y_axis_min": 0,
+              "y_axis_max": 0
+            },
+            "labels": {
+              "x_axis": "",
+              "y_axis": ""
+            }
+          },
+          "curves": {
+            "lines": [
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "monte carlo green"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "lavender gray"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "scarlet red"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "grayish blue"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "flush orange"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "lime green"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "classic pink"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "red"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "green"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "blue"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "cyan"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "magenta"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "yellow"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "orange"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "pink"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "brown"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "copper"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "maroon"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "tan"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "teal"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "silver"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "salmon"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "light yellow"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "light red"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "light green"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "light blue"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "light gray"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "dark gray"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "dark red"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "dark green"
+              },
+              {
+                "pattern": "----",
+                "weight": 2,
+                "color": "dark blue"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              },
+              {
+                "pattern": "",
+                "weight": 2,
+                "color": "foreground"
+              }
+            ],
+            "markers": [
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "monte carlo green"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "lavender gray"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "scarlet red"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "grayish blue"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "flush orange"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "lime green"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "classic pink"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "red"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "green"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "blue"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "cyan"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "magenta"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "yellow"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "orange"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "pink"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "brown"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "copper"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "maroon"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "tan"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "teal"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "silver"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "salmon"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "light yellow"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "light red"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "light green"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "light blue"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "light gray"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "dark gray"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "dark red"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "dark green"
+              },
+              {
+                "symbol": "",
+                "size": 0.3,
+                "color": "dark blue"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              },
+              {
+                "symbol": "+",
+                "size": 0.3,
+                "color": "foreground"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "display_filtered": [
+      {
+        "ok": true,
+        "result": null
+      },
+      {
+        "ok": true,
+        "result": null
+      }
+    ],
+    "save_filtered_png": {
+      "ok": false,
+      "attempts": [
+        {
+          "ok": false,
+          "error": "InactiveObjectError: '<session>.results.graphics.picture.save_picture' is currently inactive."
+        },
+        {
+          "ok": false,
+          "error": "RuntimeError: menu not found"
+        },
+        {
+          "ok": false,
+          "error": "AttributeError: 'picture' object has no attribute 'save_picture'"
+        }
+      ]
+    },
+    "pulse_filtered": {
+      "ok": false,
+      "exports": {
+        "hsf": {
+          "ok": false,
+          "error": "RuntimeError: api-execute-cmd: the object is not active\nError Object: results/graphics/pulse",
+          "remote_path": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_top_ring_pulse_retry_top_ring_high_time_dpm_tracks_pulse.hsf"
+        },
+        "glb": {
+          "ok": false,
+          "error": "RuntimeError: api-execute-cmd: the object is not active\nError Object: results/graphics/pulse",
+          "remote_path": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_top_ring_pulse_retry_top_ring_high_time_dpm_tracks_pulse.glb"
+        },
+        "avz": {
+          "ok": false,
+          "error": "RuntimeError: api-execute-cmd: the object is not active\nError Object: results/graphics/pulse",
+          "remote_path": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_top_ring_pulse_retry_top_ring_high_time_dpm_tracks_pulse.avz"
+        },
+        "usd": {
+          "ok": false,
+          "error": "RuntimeError: api-execute-cmd: the object is not active\nError Object: results/graphics/pulse",
+          "remote_path": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_top_ring_pulse_retry_top_ring_high_time_dpm_tracks_pulse.usd"
+        }
+      }
+    }
+  },
+  "artifacts": {
+    "remote_png": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_top_ring_pulse_retry.png",
+    "remote_filtered_png": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_top_ring_pulse_retry_high_time.png",
+    "local_dpm_report": "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/ring_diagnostic/case_4_1600_top_ring_pulse_retry_dpm_report.txt",
+    "copy_results": {
+      "png": {
+        "ok": false,
+        "remote_path": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_top_ring_pulse_retry.png",
+        "local_path": "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/ring_diagnostic/case_4_1600_top_ring_pulse_retry.png",
+        "error": "remote file missing"
+      },
+      "filtered_png": {
+        "ok": false,
+        "remote_path": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_top_ring_pulse_retry_high_time.png",
+        "local_path": "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/ring_diagnostic/case_4_1600_top_ring_pulse_retry_high_time.png",
+        "error": "remote file missing"
+      },
+      "history": {
+        "ok": true,
+        "remote_path": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_top_ring_pulse_retry_particle_history.txt",
+        "local_path": "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/ring_diagnostic/case_4_1600_top_ring_pulse_retry_particle_history.txt",
+        "size_bytes": 1487
+      },
+      "pulse_unfiltered_hsf": {
+        "ok": false,
+        "remote_path": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_top_ring_pulse_retry_top_ring_dpm_tracks_pulse.hsf",
+        "local_path": "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/ring_diagnostic/case_4_1600_top_ring_pulse_retry_top_ring_dpm_tracks_pulse.hsf",
+        "error": "remote file missing"
+      },
+      "pulse_unfiltered_glb": {
+        "ok": false,
+        "remote_path": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_top_ring_pulse_retry_top_ring_dpm_tracks_pulse.glb",
+        "local_path": "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/ring_diagnostic/case_4_1600_top_ring_pulse_retry_top_ring_dpm_tracks_pulse.glb",
+        "error": "remote file missing"
+      },
+      "pulse_unfiltered_avz": {
+        "ok": false,
+        "remote_path": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_top_ring_pulse_retry_top_ring_dpm_tracks_pulse.avz",
+        "local_path": "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/ring_diagnostic/case_4_1600_top_ring_pulse_retry_top_ring_dpm_tracks_pulse.avz",
+        "error": "remote file missing"
+      },
+      "pulse_unfiltered_usd": {
+        "ok": false,
+        "remote_path": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_top_ring_pulse_retry_top_ring_dpm_tracks_pulse.usd",
+        "local_path": "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/ring_diagnostic/case_4_1600_top_ring_pulse_retry_top_ring_dpm_tracks_pulse.usd",
+        "error": "remote file missing"
+      },
+      "pulse_filtered_hsf": {
+        "ok": false,
+        "remote_path": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_top_ring_pulse_retry_top_ring_high_time_dpm_tracks_pulse.hsf",
+        "local_path": "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/ring_diagnostic/case_4_1600_top_ring_pulse_retry_top_ring_high_time_dpm_tracks_pulse.hsf",
+        "error": "remote file missing"
+      },
+      "pulse_filtered_glb": {
+        "ok": false,
+        "remote_path": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_top_ring_pulse_retry_top_ring_high_time_dpm_tracks_pulse.glb",
+        "local_path": "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/ring_diagnostic/case_4_1600_top_ring_pulse_retry_top_ring_high_time_dpm_tracks_pulse.glb",
+        "error": "remote file missing"
+      },
+      "pulse_filtered_avz": {
+        "ok": false,
+        "remote_path": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_top_ring_pulse_retry_top_ring_high_time_dpm_tracks_pulse.avz",
+        "local_path": "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/ring_diagnostic/case_4_1600_top_ring_pulse_retry_top_ring_high_time_dpm_tracks_pulse.avz",
+        "error": "remote file missing"
+      },
+      "pulse_filtered_usd": {
+        "ok": false,
+        "remote_path": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_top_ring_pulse_retry_top_ring_high_time_dpm_tracks_pulse.usd",
+        "local_path": "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/ring_diagnostic/case_4_1600_top_ring_pulse_retry_top_ring_high_time_dpm_tracks_pulse.usd",
+        "error": "remote file missing"
+      }
+    }
+  }
+}

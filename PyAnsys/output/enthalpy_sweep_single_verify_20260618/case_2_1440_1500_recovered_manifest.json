@@ -1,0 +1,39 @@
+{
+  "case": "Case 2",
+  "condition": "1440",
+  "mode": "continue_current_case",
+  "remote_output_paths": {
+    "case": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_single_verify_20260618\\case_2_1440_1500_recovered.cas.h5",
+    "data": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_single_verify_20260618\\case_2_1440_1500_recovered.dat.h5",
+    "dpm_report": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_single_verify_20260618\\case_2_1440_1500_recovered_dpm_report.txt",
+    "injection_results": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_single_verify_20260618\\case_2_1440_1500_recovered_injection_results.csv",
+    "case_summary": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_single_verify_20260618\\case_2_1440_1500_recovered_case_summary.csv"
+  },
+  "starting_iteration_count": 1500,
+  "additional_iterations_requested": 0,
+  "additional_iterations_completed": 0,
+  "ending_iteration_count": 1500,
+  "dpm_velocity_mode": "face-normal",
+  "inlet_readback": null,
+  "injection_readback_names": [],
+  "case_summary": {
+    "case": "Case 2",
+    "enthalpy_kJkg": "1440",
+    "iterations_completed": 1500,
+    "liquid_mass_flow_kgs": "132.76",
+    "gas_mass_flow_kgs": "64.85",
+    "dpm_injected_mass_flow_kgs": "132.76",
+    "escaped_kgs": "90.85",
+    "trapped_kgs": "41.88",
+    "incomplete_kgs": "0.02919",
+    "escaped_zone_names": "steam_outlet",
+    "trapped_zone_names": "fluid_outlet",
+    "incomplete_zone_names": "",
+    "escaped_zone_breakdown": "[{\"fate\":\"escaped\",\"zone_name\":\"steam_outlet\",\"zone_id\":\"7\",\"count\":66590.0,\"mass_flow_kgs\":90.85}]",
+    "trapped_zone_breakdown": "[{\"fate\":\"trapped\",\"zone_name\":\"fluid_outlet\",\"zone_id\":\"8\",\"count\":11535.0,\"mass_flow_kgs\":41.88}]",
+    "incomplete_zone_breakdown": "[{\"fate\":\"incomplete\",\"zone_name\":\"\",\"zone_id\":\"\",\"count\":175.0,\"mass_flow_kgs\":0.02919}]",
+    "escaped_count": "66590",
+    "trapped_count": "11535",
+    "incomplete_count": "175"
+  }
+}

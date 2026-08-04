@@ -1,0 +1,104 @@
+{
+  "study_id": "split_inlet_mesh_convergence_20260801",
+  "mesh_name": "mesh-2000k",
+  "classification": "unresolved",
+  "mesh_metrics": {
+    "cells": 11959759,
+    "faces": 24047528,
+    "nodes": 2052088,
+    "partitions": 16,
+    "minimum_cell_volume_m3": 2.695387e-09,
+    "maximum_cell_volume_m3": 5.606856e-06,
+    "domain_volume_m3": 22.65888,
+    "minimum_face_area_m2": 3.908583e-06,
+    "maximum_face_area_m2": 0.0007043617,
+    "negative_volume_reported": false,
+    "raw_check_contains_error": false,
+    "minimum_orthogonal_quality": 0.198112,
+    "maximum_aspect_ratio": 17.8078,
+    "characteristic_size_m": 0.012373863960638923
+  },
+  "final_metrics": {
+    "iteration": 3000,
+    "mixture_liquidinlet_kgs": 116.92,
+    "mixture_steaminlet_kgs": 80.69,
+    "mixture_steamoutlet_kgs": -81.46249,
+    "mixture_net_kgs": 116.14751,
+    "mixture_imbalance_percent": 58.77612975051869,
+    "vapor_liquidinlet_kgs": -0.0,
+    "vapor_steaminlet_kgs": 80.69,
+    "vapor_steamoutlet_kgs": -81.462457,
+    "vapor_net_kgs": -0.77245678,
+    "vapor_imbalance_percent": 0.9573141405378609,
+    "liquid_liquidinlet_kgs": 116.92,
+    "liquid_steaminlet_kgs": -0.0,
+    "liquid_steamoutlet_kgs": -3.3556236e-05,
+    "liquid_net_kgs": 116.91997,
+    "liquid_imbalance_percent": 99.99997434143005,
+    "carrier_outlet_quality_percent_trend_only": 99.99995880774603,
+    "inlet_mass_weighted_pressure_pa": 1144091.1,
+    "outlet_mass_weighted_pressure_pa": 1119955.6,
+    "pressure_drop_pa": 24135.5,
+    "outlet_area_weighted_velocity_ms": 42.5582,
+    "domain_volume_avg_velocity_ms": 26.48653,
+    "domain_volume_avg_vorticity_s-1": 86.890456
+  },
+  "monitor_stability_2500_3000": {
+    "pressure_drop_pa": {
+      "samples": 3,
+      "minimum": 23549.299999999814,
+      "maximum": 24135.5,
+      "mean": 23864.066666666575,
+      "drift_percent": 2.4564128494452824
+    },
+    "vapor_steamoutlet_kgs": {
+      "samples": 3,
+      "minimum": -81.466852,
+      "maximum": -81.451108,
+      "mean": -81.46013900000001,
+      "drift_percent": 0.01932724421204091
+    },
+    "liquid_steamoutlet_kgs": {
+      "samples": 3,
+      "minimum": -3.3556236e-05,
+      "maximum": -2.0058347e-07,
+      "mean": -1.3166087223333334e-05,
+      "drift_percent": 253.34521915429903
+    },
+    "carrier_outlet_quality_percent_trend_only": {
+      "samples": 3,
+      "minimum": 99.99995880774603,
+      "maximum": 99.99999975378516,
+      "mean": 99.99998383752956,
+      "drift_percent": 4.094604575318481e-05
+    },
+    "outlet_area_weighted_velocity_ms": {
+      "samples": 3,
+      "minimum": 42.347798,
+      "maximum": 42.5582,
+      "mean": 42.44931233333333,
+      "drift_percent": 0.4956546724427942
+    },
+    "domain_volume_avg_velocity_ms": {
+      "samples": 3,
+      "minimum": 24.16176,
+      "maximum": 26.48653,
+      "mean": 25.341701333333333,
+      "drift_percent": 9.173693468410109
+    },
+    "domain_volume_avg_vorticity_s-1": {
+      "samples": 3,
+      "minimum": 85.666187,
+      "maximum": 87.254485,
+      "mean": 86.60370933333333,
+      "drift_percent": 1.833983800724666
+    }
+  },
+  "acceptance": {
+    "phase_and_mixture_balance_pass": false,
+    "primary_monitor_stability_pass": false,
+    "secondary_monitor_stability_pass": false
+  },
+  "quality_metric_text_file": "mesh-2000k_mesh_quality.txt",
+  "carrier_quality_scope": "trend-only; bottom is a wall and steamoutlet is the only carrier outlet"
+}

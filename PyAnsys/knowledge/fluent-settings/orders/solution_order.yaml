@@ -17,6 +17,7 @@ order:
   - set_transient_formulation_if_transient
   - set_under_relaxation_factors
   - set_residual_monitors
+  - set_residual_history_capacity_before_run
   - initialize
   - patch_if_needed
   - run
@@ -25,3 +26,10 @@ hidden_dependencies:
   - energy scheme appears only after Energy
   - wall film equation schemes appear only after EWF
   - DPM source controls appear only after DPM
+  - n_save and n_display limit stored/plotted residual history and do not prove the solved iteration count
+  - number-of-iterations is a run setting, not completion evidence
+verification:
+  - record residual monitor x-axis advancement for each submitted iteration block
+  - export residual-history CSV when available
+  - preserve block evidence in a manifest when a standalone history export is unavailable
+  - do not describe a fixed iteration budget as convergence

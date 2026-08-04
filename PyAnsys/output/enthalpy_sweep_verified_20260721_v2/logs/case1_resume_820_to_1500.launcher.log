@@ -1,0 +1,3 @@
+guarded_log: /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/case1_resume_820_to_1500.log
+run_guarded: started pid=47164 mode=quiet
+run_guarded: exited code=1 elapsed=2m02s

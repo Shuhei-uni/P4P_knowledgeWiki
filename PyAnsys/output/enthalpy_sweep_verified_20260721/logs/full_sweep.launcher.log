@@ -1,0 +1,4 @@
+guarded_log: /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721/logs/full_sweep.log
+run_guarded: started pid=20935 mode=quiet
+run_guarded: running elapsed=10m00s idle=5s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721/logs/full_sweep.log
+run_guarded: exited code=1 elapsed=16m28s

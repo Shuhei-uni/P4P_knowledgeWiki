@@ -1,4 +1,5 @@
 .venv/
 .env
 server_info.txt
+.matplotlib-cache/
 __pycache__/

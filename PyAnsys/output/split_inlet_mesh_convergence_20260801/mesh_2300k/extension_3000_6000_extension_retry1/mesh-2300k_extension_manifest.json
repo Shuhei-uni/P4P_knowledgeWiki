@@ -1,0 +1,19 @@
+{
+  "study_id": "split_inlet_mesh_convergence_20260801",
+  "mesh_name": "mesh-2300k",
+  "status": "waiting_for_connection",
+  "classification": "diagnostic",
+  "starting_iterations": 3000,
+  "target_iterations": 6000,
+  "block_size": 250,
+  "checkpoint_interval": 500,
+  "run_label": "extension_retry1",
+  "checkpoints": {},
+  "iteration_evidence": [],
+  "queued_epoch": 1785804068.493761,
+  "wait_for_pid": null,
+  "no_reinitialization": true,
+  "dpm": "off; no injections run",
+  "last_connection_error": "TimeoutError: TCP preflight failed for 10.104.145.85:51299 after 5.0s. Check that Fluent is still running, the gRPC port is current, and the Windows firewall allows inbound TCP on that port.",
+  "queue_heartbeat_epoch": 1785806740.0812569
+}

@@ -1,0 +1,222 @@
+{
+  "study_id": "split_inlet_mesh_convergence_20260801",
+  "mesh_name": "mesh-2000k",
+  "mesh_file": "C:\\Users\\qtra338\\Documents\\Mesh study\\Meshes\\mesh-2000k.msh",
+  "settings_file": "C:\\Users\\qtra338\\Documents\\Mesh study\\Source\\mesh_study_settings.set",
+  "status": "accepted",
+  "started_epoch": 1785537887.706889,
+  "completed_epoch": 1785538109.134474,
+  "fluent_version": "Ansys Fluent 2024 R2",
+  "mesh_metrics": {
+    "cells": 11959759,
+    "faces": 24047528,
+    "nodes": 2052088,
+    "partitions": 16,
+    "minimum_cell_volume_m3": 2.695387e-09,
+    "maximum_cell_volume_m3": 5.606856e-06,
+    "domain_volume_m3": 22.65888,
+    "minimum_face_area_m2": 3.908583e-06,
+    "maximum_face_area_m2": 0.0007043617,
+    "negative_volume_reported": false,
+    "raw_check_contains_error": false,
+    "minimum_orthogonal_quality": 0.198112,
+    "maximum_aspect_ratio": 17.8078,
+    "characteristic_size_m": 0.012373863960638923
+  },
+  "geometry_signature": {
+    "areas_m2": {
+      "liquidinlet": 0.004889896,
+      "steaminlet": 0.5192861,
+      "steamoutlet": 0.60234283,
+      "bottom": 3.1649861,
+      "wall-fluid": 66.99631,
+      "Net": 71.287815
+    },
+    "centroid_x_m": {
+      "liquidinlet": -3.1108417,
+      "steaminlet": -3.1108417,
+      "steamoutlet": -1.067,
+      "Net": -2.0180119
+    },
+    "centroid_y_m": {
+      "liquidinlet": -4.395,
+      "steaminlet": -4.395,
+      "steamoutlet": -0.2,
+      "Net": -2.1519588
+    },
+    "centroid_z_m": {
+      "liquidinlet": -1.4575183,
+      "steaminlet": -1.0955183,
+      "steamoutlet": -3.4559524e-17,
+      "Net": -0.5113226
+    }
+  },
+  "zone_mapping_before_settings": {
+    "face_roles": {
+      "liquidinlet": {
+        "name": "liquidinlet",
+        "category": "velocity_inlet"
+      },
+      "steaminlet": {
+        "name": "steaminlet",
+        "category": "velocity_inlet"
+      },
+      "steamoutlet": {
+        "name": "steamoutlet",
+        "category": "pressure_outlet"
+      },
+      "bottom": {
+        "name": "bottom",
+        "category": "wall"
+      },
+      "wall-fluid": {
+        "name": "wall-fluid",
+        "category": "wall"
+      }
+    },
+    "cell_roles": {
+      "fluid": {
+        "name": "fluid",
+        "category": "fluid"
+      }
+    },
+    "renames": [],
+    "available_face_zones": {
+      "interior-fluid": "interior",
+      "steamoutlet": "pressure_outlet",
+      "liquidinlet": "velocity_inlet",
+      "steaminlet": "velocity_inlet",
+      "bottom": "wall",
+      "wall-fluid": "wall",
+      "general_nrbc": "non_reflecting_bc",
+      "turbo_sepcific_nrbc": "non_reflecting_bc",
+      "setup_method": "perforated_wall",
+      "model_setup": "perforated_wall",
+      "mass_flow": "settings",
+      "pressure_outlet": "settings",
+      "target_mass_flow_rate_settings": "settings",
+      "advanced": "settings"
+    },
+    "available_cell_zones": {
+      "fluid": "fluid"
+    }
+  },
+  "zone_mapping_after_template_replace": {
+    "face_roles": {
+      "liquidinlet": {
+        "name": "liquidinlet",
+        "category": "mass_flow_inlet"
+      },
+      "steaminlet": {
+        "name": "steaminlet",
+        "category": "mass_flow_inlet"
+      },
+      "steamoutlet": {
+        "name": "steamoutlet",
+        "category": "pressure_outlet"
+      },
+      "bottom": {
+        "name": "bottom",
+        "category": "wall"
+      },
+      "wall-fluid": {
+        "name": "wall-fluid",
+        "category": "wall"
+      }
+    },
+    "cell_roles": {
+      "fluid": {
+        "name": "fluid",
+        "category": "fluid"
+      }
+    },
+    "renames": [],
+    "available_face_zones": {
+      "interior-fluid": "interior",
+      "liquidinlet": "mass_flow_inlet",
+      "steaminlet": "mass_flow_inlet",
+      "steamoutlet": "pressure_outlet",
+      "bottom": "wall",
+      "wall-fluid": "wall",
+      "general_nrbc": "non_reflecting_bc",
+      "turbo_sepcific_nrbc": "non_reflecting_bc",
+      "setup_method": "perforated_wall",
+      "model_setup": "perforated_wall",
+      "mass_flow": "settings",
+      "pressure_outlet": "settings",
+      "target_mass_flow_rate_settings": "settings",
+      "advanced": "settings"
+    },
+    "available_cell_zones": {
+      "fluid": "fluid"
+    }
+  },
+  "zone_mapping_after_settings": {
+    "face_roles": {
+      "liquidinlet": {
+        "name": "liquidinlet",
+        "category": "mass_flow_inlet"
+      },
+      "steaminlet": {
+        "name": "steaminlet",
+        "category": "mass_flow_inlet"
+      },
+      "steamoutlet": {
+        "name": "steamoutlet",
+        "category": "pressure_outlet"
+      },
+      "bottom": {
+        "name": "bottom",
+        "category": "wall"
+      },
+      "wall-fluid": {
+        "name": "wall-fluid",
+        "category": "wall"
+      }
+    },
+    "cell_roles": {
+      "fluid": {
+        "name": "fluid",
+        "category": "fluid"
+      }
+    },
+    "renames": [],
+    "available_face_zones": {
+      "interior-fluid": "interior",
+      "liquidinlet": "mass_flow_inlet",
+      "steaminlet": "mass_flow_inlet",
+      "steamoutlet": "pressure_outlet",
+      "bottom": "wall",
+      "wall-fluid": "wall",
+      "general_nrbc": "non_reflecting_bc",
+      "turbo_sepcific_nrbc": "non_reflecting_bc",
+      "setup_method": "perforated_wall",
+      "model_setup": "perforated_wall",
+      "mass_flow": "settings",
+      "pressure_outlet": "settings",
+      "target_mass_flow_rate_settings": "settings",
+      "advanced": "settings"
+    },
+    "available_cell_zones": {
+      "fluid": "fluid"
+    }
+  },
+  "settings_import_no_zone_warnings": [
+    "wall",
+    "wall",
+    "wall",
+    "wall",
+    "wall",
+    "wall"
+  ],
+  "settings_import_text": "\n\n===== read_settings_file_name =====\n\nAdjusting the following settings:\nChanging Discretization Scheme for Turbulent Kinetic Energy:   from: First Order Upwind   to: Second Order Upwind\nChanging Discretization Scheme for Specific Dissipation Rate:  from: First Order Upwind   to: Second Order Upwind\n\nAdjusting the following setting:\nChanging Discretization Scheme for Specific Dissipation Rate:  from: Second Order Upwind   to: First Order Upwind\n Setting zone id of fluid to 40050.\n Setting zone id of liquidinlet to 50062.\n Setting zone id of steaminlet to 50063.\n Setting zone id of interior-fluid to 40055.\n Setting zone id of bottom to 50059.\n Setting zone id of steamoutlet to 50065.\nDone.\n\nSetting fluid (mixture) ... Done.\nSetting liquidinlet (mixture) ... Done.\nSetting steaminlet (mixture) ... Done.\nSetting interior-fluid (mixture) ... Done.\nSetting bottom (mixture) ... Done.\nSetting steamoutlet (mixture) ... Done.\nNo zone with name wall (type wall) (mixture), skipped.\nSetting liquidinlet (phase-2) ... Done.\nSetting liquidinlet (phase-1) ... Done.\nSetting steaminlet (phase-2) ... Done.\nSetting steaminlet (phase-1) ... Done.\nNo zone with name wall (type wall) (phase-2), skipped.\nSetting steamoutlet (phase-2) ... Done.\nSetting bottom (phase-2) ... Done.\nSetting interior-fluid (phase-2) ... Done.\nSetting fluid (phase-2) ... Done.\nNo zone with name wall (type wall) (phase-1), skipped.\nSetting steamoutlet (phase-1) ... Done.\nSetting bottom (phase-1) ... Done.\nSetting interior-fluid (phase-1) ... Done.\nSetting fluid (phase-1) ... Done.\n\nChecking newly created zones for preferred zone IDs...\nNo zone with name wall (type wall) (mixture), skipped.\nNo zone with name wall (type wall) (phase-2), skipped.\nNo zone with name wall (type wall) (phase-1), skipped.\n\nFound new zone. Assigning default settings to wall-fluid (type wall).\n\n",
+  "template_replace_text": "\n\n===== read_template_case =====\nNote: Rank = 0: Process affinity not being set (6).\nNote: Rank = 1: Process affinity not being set (6).\nNote: Rank = 2: Process affinity not being set (6).\nNote: Rank = 3: Process affinity not being set (6).\nNote: Rank = 4: Process affinity not being set (6).\nNote: Rank = 5: Process affinity not being set (6).\nNote: Rank = 6: Process affinity not being set (6).\nNote: Rank = 7: Process affinity not being set (6).\nNote: Rank = 8: Process affinity not being set (6).\nNote: Rank = 9: Process affinity not being set (6).\nNote: Rank = 10: Process affinity not being set (6).\nNote: Rank = 11: Process affinity not being set (6).\nNote: Rank = 12: Process affinity not being set (6).\nNote: Rank = 13: Process affinity not being set (6).\nNote: Rank = 14: Process affinity not being set (6).\nNote: Rank = 15: Process affinity not being set (6).\n\n       Clearing partially read grid.\n\nReading from EN439159:\"C:\\Users\\qtra338\\Documents\\Mesh study\\partial_solution_diagnostic_20260801.cas.h5\" in NODE0 mode ...\n  Reading mesh ...\n     3609102 cells,     1 cell zone  ...\n        3609102 tetrahedral cells,  zone id: 40050\n     7273531 faces,     6 face zones ...\n         104455 triangular wall faces,  zone id: 50068\n        7162877 triangular interior faces,  zone id: 40055\n             72 triangular mass-flow-inlet faces,  zone id: 50062\n           1332 triangular mass-flow-inlet faces,  zone id: 50063\n           4020 triangular wall faces,  zone id: 50059\n            775 triangular pressure-outlet faces,  zone id: 50065\n      627514 nodes,     1 node zone  ...\n  Done.\n\n\nBuilding...\n     mesh\n\tdistributing mesh\n\t\tparts................,\n\t\tfaces................,\n\t\tnodes................,\n\t\tcells................,\n        bandwidth reduction using Reverse Cuthill-McKee: 225375/3640 = 61.9162\n     materials,\n     interface,\n     domains,\n\tmixture\n\tphase-1\n\tphase-2\n\tinteraction\n     zones,\n\tfluid  (phase-1)\n\twall-fluid  (phase-1)\n\tinterior-fluid  (phase-1)\n\tbottom  (phase-1)\n\tsteamoutlet  (phase-1)\n\tfluid  (phase-2)\n\twall-fluid  (phase-2)\n\tinterior-fluid  (phase-2)\n\tbottom  (phase-2)\n\tsteamoutlet  (phase-2)\n\tliquidinlet  (phase-1)\n\tliquidinlet  (phase-2)\n\tsteaminlet  (phase-1)\n\tsteaminlet  (phase-2)\n\tsteamoutlet\n\tbottom\n\tinterior-fluid\n\twall-fluid\n\tliquidinlet\n\tsteaminlet\n\tfluid\n     parallel,\nDone.\n\n\n===== replace_mesh =====\n\nNote: Setting mesh/replace/zones? is not set as it is inactive\n\nWriting Settings to string...\n\twriting rp variables ... Done.\n\twriting domain variables ... Done.\n\twriting fluid (type fluid) (mixture) ... Done.\n\twriting steaminlet (type mass-flow-inlet) (mixture) ... Done.\n\twriting liquidinlet (type mass-flow-inlet) (mixture) ... Done.\n\twriting wall-fluid (type wall) (mixture) ... Done.\n\twriting interior-fluid (type interior) (mixture) ... Done.\n\twriting bottom (type wall) (mixture) ... Done.\n\twriting steamoutlet (type pressure-outlet) (mixture) ... Done.\n\twriting steaminlet (type mass-flow-inlet) (phase-2) ... Done.\n\twriting steaminlet (type mass-flow-inlet) (phase-1) ... Done.\n\twriting liquidinlet (type mass-flow-inlet) (phase-2) ... Done.\n\twriting liquidinlet (type mass-flow-inlet) (phase-1) ... Done.\n\twriting steamoutlet (type pressure-outlet) (phase-2) ... Done.\n\twriting bottom (type wall) (phase-2) ... Done.\n\twriting interior-fluid (type interior) (phase-2) ... Done.\n\twriting wall-fluid (type wall) (phase-2) ... Done.\n\twriting fluid (type fluid) (phase-2) ... Done.\n\twriting steamoutlet (type pressure-outlet) (phase-1) ... Done.\n\twriting bottom (type wall) (phase-1) ... Done.\n\twriting interior-fluid (type interior) (phase-1) ... Done.\n\twriting wall-fluid (type wall) (phase-1) ... Done.\n\twriting fluid (type fluid) (phase-1) ... Done.\n\twriting zones map name-id ... Done.\nReading \"C:\\Users\\qtra338\\Documents\\Mesh study\\Meshes\\mesh-2000k.msh\"...\nBuffering for file scan...\n\n 1924076 nodes, binary.\n  128012 nodes, binary.\n  242393 triangular wall faces, zone  1, binary.\n23791508 triangular interior faces, zone  2, binary.\n      72 triangular velocity-inlet faces, zone  6, binary.\n    1952 triangular velocity-inlet faces, zone  7, binary.\n    9715 triangular wall faces, zone  8, binary.\n    1888 triangular pressure-outlet faces, zone  9, binary.\n11959759 tetrahedral cells, zone  3, binary.\n\nParallel variables...\nBuilding...\n     mesh\n\tdistributing mesh\n\t\tparts................,\n\t\tfaces................,\n\t\tnodes................,\n\t\tcells................,\n        bandwidth reduction using Reverse Cuthill-McKee: 887152/6970 = 127.281\n     materials,\n     zones,\n\tsteamoutlet\n\tbottom\n\tsteaminlet\n\tliquidinlet\n\tfluid\n\tinterior-fluid\n\twall-fluid\nDone.\n Setting zone id of fluid to 40050.\n Setting zone id of wall-fluid to 50068.\n Setting zone id of interior-fluid to 40055.\n Setting zone id of liquidinlet to 50062.\n Setting zone id of steaminlet to 50063.\n Setting zone id of bottom to 50059.\n Setting zone id of steamoutlet to 50065.\nDone.\n\nSetting fluid (mixture) ... Done.\nSetting steaminlet (mixture) (zone type changed to mass-flow-inlet) ... Done.\nSetting liquidinlet (mixture) (zone type changed to mass-flow-inlet) ... Done.\nSetting wall-fluid (mixture) ... Done.\nSetting interior-fluid (mixture) ... Done.\nSetting bottom (mixture) ... Done.\nSetting steamoutlet (mixture) ... Done.\nSetting steaminlet (phase-2) ... Done.\nSetting steaminlet (phase-1) ... Done.\nSetting liquidinlet (phase-2) ... Done.\nSetting liquidinlet (phase-1) ... Done.\nSetting steamoutlet (phase-2) ... Done.\nSetting bottom (phase-2) ... Done.\nSetting interior-fluid (phase-2) ... Done.\nSetting wall-fluid (phase-2) ... Done.\nSetting fluid (phase-2) ... Done.\nSetting steamoutlet (phase-1) ... Done.\nSetting bottom (phase-1) ... Done.\nSetting interior-fluid (phase-1) ... Done.\nSetting wall-fluid (phase-1) ... Done.\nSetting fluid (phase-1) ... Done.\n\nFound new zone. Assigning default settings to steaminlet-to-be-deleted (type mass-flow-inlet).\nFound new zone. Assigning default settings to liquidinlet-to-be-deleted (type mass-flow-inlet).\nFound new zone. Assigning default settings to wall-fluid-to-be-deleted (type wall).\nFound new zone. Assigning default settings to interior-fluid-to-be-deleted (type interior).\nFound new zone. Assigning default settings to bottom-to-be-deleted (type wall).\nFound new zone. Assigning default settings to steamoutlet-to-be-deleted (type pressure-outlet).\n\n\nDeleting cell zone 50070.\nRepartitioning the domain because of load imbalance of 69.91%.\n>> Dividing domain into 16 partitions using Metis.\n   Time = 2.01 seconds.\n   Done.\n\n>> 16 Stored Partitions:\n   ----------------------------------------------------------------------\n   Collective Partition Statistics:        Minimum   Maximum   Total     \n   ----------------------------------------------------------------------\n   Cell count                              739524    748962    11959759  \n   Mean cell count deviation               -1.1%     0.2%      \n   Partition boundary cell count           10547     23623     268863    \n   Partition boundary cell count ratio     1.4%      3.2%      2.2%      \n\n   Face count                              1495689   1517809   24047528  \n   Mean face count deviation               -1.1%     0.4%      \n   Partition boundary face count           11942     26311     149761    \n   Partition boundary face count ratio     0.8%      1.7%      0.6%      \n\n   Cell weights                            7e+06     7e+06     1e+08     \n   Mean cell weight deviation              -1.1%     0.2%      \n\n   Partition neighbor count                3         8         \n   ----------------------------------------------------------------------\n   Partition Method                        Metis                                \n   Stored Partition Count                  16                                   \nDone.\n\n   Smoothing partition boundaries...\nMigrating partitions to compute-nodes.\n>> 16 Active Partitions:\n    P   Cells I-Cells Cell Ratio   Faces I-Faces Face Ratio Neighbors Load  Ext Cells\n    0  747640   20682      0.028 1513963   22981      0.015         8    1      20675\n    1  748859   18004      0.024 1515248   20003      0.013         6    1      18047\n    2  748882   16852      0.023 1515313   18786      0.012         4    1      16946\n    3  747766   18871      0.025 1513503   21150      0.014         7    1      19004\n    4  747160   18671      0.025 1512605   20787      0.014         6    1      18711\n    5  748692   23623      0.032 1517809   26311      0.017         6    1      23676\n    6  748503   18543      0.025 1514916   20772      0.014         5    1      18773\n    7  747092   13878      0.019 1510760   15364      0.010         3    1      13842\n    8  739524   10547      0.014 1495689   11942      0.008         4    1      10905\n    9  747094   16648      0.022 1511845   18595      0.012         5    1      16801\n   10  745987   13021      0.017 1508437   14569      0.010         4    1      13186\n   11  748962   13891      0.019 1513792   15372      0.010         3    1      13895\n   12  748744   16558      0.022 1514697   18196      0.012         5    1      16354\n   13  748609   17212      0.023 1514417   19273      0.013         6    1      17297\n   14  747728   12814      0.017 1509261   14263      0.009         5    1      12871\n   15  748517   19048      0.025 1515034   21158      0.014         7    1      18990\n\n   ----------------------------------------------------------------------\n   Collective Partition Statistics:        Minimum   Maximum   Total     \n   ----------------------------------------------------------------------\n   Cell count                              739524    748962    11959759  \n   Mean cell count deviation               -1.1%     0.2%      \n   Partition boundary cell count           10547     23623     268863    \n   Partition boundary cell count ratio     1.4%      3.2%      2.2%      \n\n   Face count                              1495689   1517809   24047528  \n   Mean face count deviation               -1.1%     0.4%      \n   Partition boundary face count           11942     26311     149761    \n   Partition boundary face count ratio     0.8%      1.7%      0.6%      \n\n   Partition neighbor count                3         8         \n   ----------------------------------------------------------------------\n   Partition Method                        Metis                                \n   Stored Partition Count                  16                                   \nDone.\n",
+  "template_case": "C:\\Users\\qtra338\\Documents\\Mesh study\\partial_solution_diagnostic_20260801.cas.h5",
+  "critical_fingerprint_sha256": "424a9bf02bbd78060dee3a2874103e5149aa4aa555a09e2add69da4d2a0158c5",
+  "validation_errors": [],
+  "limitations": [
+    "bottom is a wall and steamoutlet is the only carrier outlet",
+    "carrier quality/liquid carryover is trend-only, not validated separator efficiency",
+    "settings file is the 07a execution authority and differs from archived FFF.1-2 numerics/BC family"
+  ]
+}

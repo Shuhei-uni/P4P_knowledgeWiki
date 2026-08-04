@@ -1,0 +1,102 @@
+{
+  "case": "Case 1",
+  "condition": "1600 -25%",
+  "case_file": "C:\\Users\\qtra338\\Documents\\baseline_spiral_inlet.cas.h5",
+  "data_file": "C:\\Users\\qtra338\\Documents\\baseline_spiral_inlet.dat.h5",
+  "iteration_after_case_only": 2161,
+  "iteration_after_data": 2161,
+  "reported_number_of_iterations_is_completion_proof": false,
+  "residual_monitor_history": {
+    "residual": {
+      "points": 0,
+      "first_iteration": null,
+      "last_iteration": null,
+      "series": []
+    }
+  },
+  "injection_names_after_case_only": [
+    "injection-112-micron",
+    "injection-1631-micron",
+    "injection-168-micron",
+    "injection-28-micron",
+    "injection-348-micron",
+    "injection-5-micron",
+    "injection-56-micron",
+    "injection-562-micron",
+    "injection-844-micron"
+  ],
+  "injection_names_after_data": [
+    "injection-112-micron",
+    "injection-1631-micron",
+    "injection-168-micron",
+    "injection-28-micron",
+    "injection-348-micron",
+    "injection-5-micron",
+    "injection-56-micron",
+    "injection-562-micron",
+    "injection-844-micron"
+  ],
+  "materials": {
+    "fluid": [
+      "air",
+      "water-liquid-at-psep",
+      "water-vapor-at-psep"
+    ],
+    "inert_particle": [
+      "liquid-water"
+    ]
+  },
+  "dpm_general_settings": {
+    "interaction": {
+      "enabled": false
+    },
+    "contour_plotting": "none"
+  },
+  "injections": [
+    {
+      "injection_name": "injection-0",
+      "error": "KeyError: \"'injections' has no attribute 'injection-0'.\\nThe most similar names are: injection-5-micron, injection-56-micron, injection-28-micron, injection-844-micron, injection-562-micron\"",
+      "state": {}
+    },
+    {
+      "injection_name": "injection-1",
+      "error": "KeyError: \"'injections' has no attribute 'injection-1'.\\nThe most similar names are: injection-168-micron, injection-112-micron, injection-5-micron, injection-1631-micron, injection-56-micron\"",
+      "state": {}
+    },
+    {
+      "injection_name": "injection-2",
+      "error": "KeyError: \"'injections' has no attribute 'injection-2'.\\nThe most similar names are: injection-28-micron, injection-562-micron, injection-112-micron, injection-5-micron, injection-56-micron\"",
+      "state": {}
+    },
+    {
+      "injection_name": "injection-3",
+      "error": "KeyError: \"'injections' has no attribute 'injection-3'.\\nThe most similar names are: injection-348-micron, injection-5-micron, injection-1631-micron, injection-56-micron, injection-28-micron\"",
+      "state": {}
+    },
+    {
+      "injection_name": "injection-4",
+      "error": "KeyError: \"'injections' has no attribute 'injection-4'.\\nThe most similar names are: injection-844-micron, injection-348-micron, injection-5-micron, injection-56-micron, injection-28-micron\"",
+      "state": {}
+    },
+    {
+      "injection_name": "injection-5",
+      "error": "KeyError: \"'injections' has no attribute 'injection-5'.\\nThe most similar names are: injection-5-micron, injection-56-micron, injection-562-micron, injection-28-micron, injection-844-micron\"",
+      "state": {}
+    },
+    {
+      "injection_name": "injection-6",
+      "error": "KeyError: \"'injections' has no attribute 'injection-6'.\\nThe most similar names are: injection-56-micron, injection-562-micron, injection-168-micron, injection-5-micron, injection-1631-micron\"",
+      "state": {}
+    },
+    {
+      "injection_name": "injection-7",
+      "error": "KeyError: \"'injections' has no attribute 'injection-7'.\\nThe most similar names are: injection-5-micron, injection-56-micron, injection-28-micron, injection-844-micron, injection-562-micron\"",
+      "state": {}
+    },
+    {
+      "injection_name": "injection-8",
+      "error": "KeyError: \"'injections' has no attribute 'injection-8'.\\nThe most similar names are: injection-28-micron, injection-844-micron, injection-348-micron, injection-168-micron, injection-5-micron\"",
+      "state": {}
+    }
+  ]
+}

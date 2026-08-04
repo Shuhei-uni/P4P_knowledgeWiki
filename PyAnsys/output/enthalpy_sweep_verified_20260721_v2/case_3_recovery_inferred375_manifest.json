@@ -1,0 +1,14 @@
+{
+  "case_file": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_verified_20260721_v2\\case_3_1520_recovery_inferred375.cas.h5",
+  "data_file": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_verified_20260721_v2\\case_3_1520_recovery_inferred375.dat.h5",
+  "label": "recovery_inferred375",
+  "reported_number_of_iterations": 25,
+  "reported_number_of_iterations_is_completion_proof": false,
+  "verified_completed_iterations": null,
+  "expected_completed_iterations": null,
+  "status": "unverified",
+  "notes": [
+    "Manual recovery save. Treat as complete only if verified_completed_iterations is set.",
+    "Do not infer completed iterations from reported_number_of_iterations."
+  ]
+}

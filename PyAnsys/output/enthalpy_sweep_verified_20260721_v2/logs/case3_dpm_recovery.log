@@ -1,0 +1,351 @@
+Connecting to Fluent server 1 using IP/port: 10.104.145.85:57540
+/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/.venv/lib/python3.12/site-packages/ansys/fluent/core/fluent_connection.py:306: InsecureGrpcWarning: The Fluent session will be connected in insecure gRPC mode. This mode is not recommended. For more details on the implications and usage of insecure mode, refer to the Fluent documentation.
+  warnings.warn(
+/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/.venv/lib/python3.12/site-packages/ansys/tools/common/cyberchannel.py:188: UserWarning: Starting gRPC client without TLS on 10.104.145.85:57540. This is INSECURE. Consider using a secure connection.
+  warn(f"Starting gRPC client without TLS on {target}. This is INSECURE. Consider using a secure connection.")
+
+Connected to Fluent Ansys Fluent 2024 R2
+
+=== Continue Case 3 / 1520 ===
+
+=== Load Resume Case/Data ===
+Fast-loading "C:\PROGRA~1\ANSYSI~1\v242\fluent\fluent24.2.0\\addons\afd\lib\hdfio.bin"
+Done.
+Note: Rank = 0: Process affinity not being set (6).
+
+Reading from EN439159:"C:\Users\qtra338\Documents\enthalpy_sweep_verified_20260721_v2\case_3_1520_1500iter_recovered_from_375_flow.cas.h5" in NODE0 mode ...
+  Reading mesh ...
+     5578299 cells,     1 cell zone  ...
+        5578299 tetrahedral cells,  zone id: 3
+    11355491 faces,     5 face zones ...
+         374376 triangular wall faces,  zone id: 1
+       10957705 triangular interior faces,  zone id: 2
+           8700 triangular mass-flow-inlet faces,  zone id: 6
+           5435 triangular pressure-outlet faces,  zone id: 7
+           9275 triangular wall faces,  zone id: 8
+     1026091 nodes,     1 node zone  ...
+Warning: reading 10 partition grid onto 1 compute node machine.
+         Combining every 10 partitions.
+  Done.
+
+
+Building...
+     mesh
+     materials,
+     interface,
+     domains,
+	mixture
+	phase-1
+	phase-2
+	interaction
+     zones,
+	fluid  (phase-2)
+	interior-fluid  (phase-2)
+	fluid  (phase-1)
+	interior-fluid  (phase-1)
+	wall-fluid  (phase-1)
+	wall-fluid  (phase-2)
+	inlet  (phase-1)
+	inlet  (phase-2)
+	steam_outlet  (phase-1)
+	steam_outlet  (phase-2)
+	fluid_outlet  (phase-1)
+	fluid_outlet  (phase-2)
+	interior-fluid
+	wall-fluid
+	inlet
+	steam_outlet
+	fluid_outlet
+	fluid
+     parallel,
+Done.
+read_resume_case: OK
+
+Reading from EN439159:"C:\Users\qtra338\Documents\enthalpy_sweep_verified_20260721_v2\case_3_1520_1500iter_recovered_from_375_flow.dat.h5" in NODE0 mode ...
+
+
+  Reading results.
+Parallel variables...
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 796 cells 
+Done.
+read_resume_data: OK
+reported_starting_number_of_iterations: 1500
+reported_number_of_iterations_note: this is Fluent's current iteration/run setting; it is not proof that a disconnected controller completed that many iterations
+fluent_internal_autosave: VERIFIED disabled -> {"before": {"autosave/frequency/data": 0, "autosave/frequency/case": 0, "mmp/autosave/frequency/data": 0, "mmp/autosave/frequency/case": 0, "autosave/filename": "C:/Users/qtra338/Documents/enthalpy_sweep_verified_20260721_v2/case_3_1520_1500iter_recovered_from_375_internal_autosave_disabled", "mmp/autosave/filename": "C:/Users/qtra338/Documents/enthalpy_sweep_verified_20260721_v2/case_3_1520_1500iter_recovered_from_375_internal_autosave_disabled"}, "after": {"autosave/frequency/data": 0, "autosave/frequency/case": 0, "mmp/autosave/frequency/data": 0, "mmp/autosave/frequency/case": 0, "autosave/filename": "C:/Users/qtra338/Documents/enthalpy_sweep_verified_20260721_v2/case_3_1520_1500iter_dpm_recovery_internal_autosave_disabled", "mmp/autosave/filename": "C:/Users/qtra338/Documents/enthalpy_sweep_verified_20260721_v2/case_3_1520_1500iter_dpm_recovery_internal_autosave_disabled"}, "python_checkpoints_enabled": true}
+
+=== Set Inlet Phase Mass Flows ===
+set_inlet_phase_mass_flows: OK
+{
+  "mixture": {
+    "momentum": {
+      "reference_frame": "Absolute",
+      "supersonic_gauge_pressure": {
+        "option": "value",
+        "value": 1140000
+      },
+      "direction_specification": "Normal to Boundary"
+    },
+    "turbulence": {
+      "turbulence_specification": "Intensity and Hydraulic Diameter",
+      "turbulent_intensity": 0.02152499951888,
+      "hydraulic_diameter": 0.7240000000000001
+    },
+    "dpm": {
+      "discrete_phase_bc_type": "escape"
+    },
+    "multiphase": {}
+  },
+  "phase-1": {
+    "momentum": {
+      "mass_flow_specification": "Mass Flow Rate",
+      "mass_flow_rate": {
+        "option": "value",
+        "value": 72.77
+      }
+    },
+    "turbulence": {},
+    "dpm": {},
+    "multiphase": {}
+  },
+  "phase-2": {
+    "momentum": {
+      "mass_flow_specification": "Mass Flow Rate",
+      "mass_flow_rate": {
+        "option": "value",
+        "value": 124.84
+      }
+    },
+    "turbulence": {},
+    "dpm": {},
+    "multiphase": {}
+  }
+}
+
+=== Set DPM Injections ===
+DPM velocity mode: face-normal
+injection-0_particle_type: OK
+injection-0_material: OK
+injection-0_injection_type_surface: OK
+injection-0_location: OK
+injection-0_mass_flow_rate: OK
+injection-0_use_face_normal_direction: OK
+injection-0_velocity_magnitude: OK
+injection-0_particle_size: OK
+injection-0_readback: VERIFIED
+injection-1_particle_type: OK
+injection-1_material: OK
+injection-1_injection_type_surface: OK
+injection-1_location: OK
+injection-1_mass_flow_rate: OK
+injection-1_use_face_normal_direction: OK
+injection-1_velocity_magnitude: OK
+injection-1_particle_size: OK
+injection-1_readback: VERIFIED
+injection-2_particle_type: OK
+injection-2_material: OK
+injection-2_injection_type_surface: OK
+injection-2_location: OK
+injection-2_mass_flow_rate: OK
+injection-2_use_face_normal_direction: OK
+injection-2_velocity_magnitude: OK
+injection-2_particle_size: OK
+injection-2_readback: VERIFIED
+injection-3_particle_type: OK
+injection-3_material: OK
+injection-3_injection_type_surface: OK
+injection-3_location: OK
+injection-3_mass_flow_rate: OK
+injection-3_use_face_normal_direction: OK
+injection-3_velocity_magnitude: OK
+injection-3_particle_size: OK
+injection-3_readback: VERIFIED
+injection-4_particle_type: OK
+injection-4_material: OK
+injection-4_injection_type_surface: OK
+injection-4_location: OK
+injection-4_mass_flow_rate: OK
+injection-4_use_face_normal_direction: OK
+injection-4_velocity_magnitude: OK
+injection-4_particle_size: OK
+injection-4_readback: VERIFIED
+injection-5_particle_type: OK
+injection-5_material: OK
+injection-5_injection_type_surface: OK
+injection-5_location: OK
+injection-5_mass_flow_rate: OK
+injection-5_use_face_normal_direction: OK
+injection-5_velocity_magnitude: OK
+injection-5_particle_size: OK
+injection-5_readback: VERIFIED
+injection-6_particle_type: OK
+injection-6_material: OK
+injection-6_injection_type_surface: OK
+injection-6_location: OK
+injection-6_mass_flow_rate: OK
+injection-6_use_face_normal_direction: OK
+injection-6_velocity_magnitude: OK
+injection-6_particle_size: OK
+injection-6_readback: VERIFIED
+injection-7_particle_type: OK
+injection-7_material: OK
+injection-7_injection_type_surface: OK
+injection-7_location: OK
+injection-7_mass_flow_rate: OK
+injection-7_use_face_normal_direction: OK
+injection-7_velocity_magnitude: OK
+injection-7_particle_size: OK
+injection-7_readback: VERIFIED
+injection-8_particle_type: OK
+injection-8_material: OK
+injection-8_injection_type_surface: OK
+injection-8_location: OK
+injection-8_mass_flow_rate: OK
+injection-8_use_face_normal_direction: OK
+injection-8_velocity_magnitude: OK
+injection-8_particle_size: OK
+injection-8_readback: VERIFIED
+
+=== Run Iterations ===
+iterate: SKIPPED
+reported_ending_number_of_iterations: 1500
+verified_iteration_label: 1500
+
+=== continued_flow_pre_dpm ===
+
+Writing to EN439159:"C:\Users\qtra338\Documents\enthalpy_sweep_verified_20260721_v2\case_3_1520_1500iter_dpm_recovery_flow.cas.h5" in NODE0 mode and compression level 1 ...
+Grouping cells for Laplace smoothing ...
+     5578299 cells,     1 zone  ...
+    11355491 faces,     5 zones ...
+     1026091 nodes,     1 zone  ...
+  Done.
+Done.
+write_case_continued_flow_pre_dpm: OK
+
+Writing to EN439159:"C:\Users\qtra338\Documents\enthalpy_sweep_verified_20260721_v2\case_3_1520_1500iter_dpm_recovery_flow.dat.h5" in NODE0 mode and compression level 1 ...
+  Writing results.
+Done.
+write_data_continued_flow_pre_dpm: OK
+saved_pair_continued_flow_pre_dpm: VERIFIED
+
+=== Run DPM Reports ===
+report_call: settings_zone_summaries_per_injection_enable
+settings_zone_summaries_per_injection_enable: no captured text
+report_call: solve_dpm_update
+/solve/dpm-update
+
+DPM Iteration ....
+
+/solve/dpm-update
+
+DPM Iteration ....
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 796 cells 
+number tracked = 78300, escaped = 8359, trapped = 36995, incomplete = 32946
+
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 796 cells 
+number tracked = 78300, escaped = 8359, trapped = 36995, incomplete = 32946
+report_call: settings_dpm_summary
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+
+report_call: tui_dpm_summary
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                               32946  9.141e+00  4.894e+01  2.501e+01  1.208e+01     injection-0  193     injection-8 1774
+ Escaped             steam_outlet      7   8359  5.934e-01  1.309e+01  2.626e+00  1.417e+00     injection-0 2114     injection-0 3792
+ Trapped             fluid_outlet      8  36995  1.660e-01  1.327e+01  5.407e-01  5.731e-01     injection-4 1333     injection-1 7799
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                          
+report_call: tui_particle_summary
+(injection-0 injection-1 injection-2 injection-3 injection-4 injection-5 injection-6 injection-7 injection-8)
+The following solver settings object method could also be used to execute the above command:
+<solver_session>.results.report.particle_summary(injection_names = ["injection-0", "injection-1", "injection-2", "injection-3", "injection-4", "injection-5", "injection-6", "injection-7", "injection-8"])
+
+report_call: settings_dpm_extended_summary
+
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                               32946  9.141e+00  4.894e+01  2.501e+01  1.208e+01     injection-0  193     injection-8 1774
+ Escaped             steam_outlet      7   8359  5.934e-01  1.309e+01  2.626e+00  1.417e+00     injection-0 2114     injection-0 3792
+ Trapped             fluid_outlet      8  36995  1.660e-01  1.327e+01  5.407e-01  5.731e-01     injection-4 1333     injection-1 7799
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                               5.509e+01  5.509e+01  0.000e+00
+ Escaped             steam_outlet      7  1.967e-01  1.967e-01  0.000e+00
+ Trapped             fluid_outlet      8  6.955e+01  6.955e+01  0.000e+00
+ -----------                             ---------- ---------- ----------
+ Net                                      1.248e+02  1.248e+02  0.000e+00
+report_call: dpm_extended_summary_injection-0
+
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_verified_20260721_v2\\case_3_1520_1500iter_dpm_recovery_injection-0_extended_scratch.txt
+report_call: dpm_extended_summary_injection-1
+
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_verified_20260721_v2\\case_3_1520_1500iter_dpm_recovery_injection-1_extended_scratch.txt
+report_call: dpm_extended_summary_injection-2
+
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_verified_20260721_v2\\case_3_1520_1500iter_dpm_recovery_injection-2_extended_scratch.txt
+report_call: dpm_extended_summary_injection-3
+
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_verified_20260721_v2\\case_3_1520_1500iter_dpm_recovery_injection-3_extended_scratch.txt
+report_call: dpm_extended_summary_injection-4
+
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_verified_20260721_v2\\case_3_1520_1500iter_dpm_recovery_injection-4_extended_scratch.txt
+report_call: dpm_extended_summary_injection-5
+
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_verified_20260721_v2\\case_3_1520_1500iter_dpm_recovery_injection-5_extended_scratch.txt
+report_call: dpm_extended_summary_injection-6
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_verified_20260721_v2\\case_3_1520_1500iter_dpm_recovery_injection-6_extended_scratch.txt
+
+report_call: dpm_extended_summary_injection-7
+
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_verified_20260721_v2\\case_3_1520_1500iter_dpm_recovery_injection-7_extended_scratch.txt
+report_call: dpm_extended_summary_injection-8
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_verified_20260721_v2\\case_3_1520_1500iter_dpm_recovery_injection-8_extended_scratch.txt
+
+
+=== continued_post_dpm ===
+
+Writing to EN439159:"C:\Users\qtra338\Documents\enthalpy_sweep_verified_20260721_v2\case_3_1520_1500iter_dpm_recovery_post_dpm.cas.h5" in NODE0 mode and compression level 1 ...
+Grouping cells for Laplace smoothing ...
+     5578299 cells,     1 zone  ...
+    11355491 faces,     5 zones ...
+     1026091 nodes,     1 zone  ...
+  Done.
+Done.
+write_case_continued_post_dpm: OK
+
+Writing to EN439159:"C:\Users\qtra338\Documents\enthalpy_sweep_verified_20260721_v2\case_3_1520_1500iter_dpm_recovery_post_dpm.dat.h5" in NODE0 mode and compression level 1 ...
+  Writing results.
+Done.
+write_data_continued_post_dpm: OK
+saved_pair_continued_post_dpm: VERIFIED
+
+=== Continuation Complete ===
+local_case_summary: /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/case_3_1520_1500iter_dpm_recovery_case_summary.csv
+local_injection_results: /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/case_3_1520_1500iter_dpm_recovery_injection_results.csv
+local_report: /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/case_3_1520_1500iter_dpm_recovery_dpm_report.txt
+remote_case: C:\Users\qtra338\Documents\enthalpy_sweep_verified_20260721_v2\case_3_1520_1500iter_dpm_recovery_post_dpm.cas.h5
+remote_data: C:\Users\qtra338\Documents\enthalpy_sweep_verified_20260721_v2\case_3_1520_1500iter_dpm_recovery_post_dpm.dat.h5
+rows: 9

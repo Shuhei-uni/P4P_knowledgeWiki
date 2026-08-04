@@ -1,0 +1,310 @@
+
+
+===== settings_zone_summaries_per_injection_enable =====
+
+
+===== settings_zone_summaries_per_injection_reset =====
+skipped: non-essential reset can block for a long time on remote Fluent sessions
+
+
+
+===== solve_dpm_update =====
+/solve/dpm-update
+DPM Iteration ....
+number tracked = 98388, escaped = 1489, trapped = 71654, incomplete = 25245
+
+
+
+===== settings_dpm_summary =====
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                               25245  1.525e+00  7.423e+01  6.752e+00  5.892e+00 injection-5-micron 9046 injection-844-micron 2911
+ Trapped                   bottom  50059  71654  3.345e-01  2.279e+01  1.158e+00  5.727e-01 injection-28-mi 9662 injection-562-m 3105
+ Escaped                   outlet  30048   1489  1.009e+00  2.818e+00  1.763e+00  2.412e-01 injection-5-mic 1873 injection-5-mic 9531
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                               2.068e+00  2.068e+00  0.000e+00
+ Trapped                   bottom  50059  8.560e+01  8.560e+01  0.000e+00
+ Escaped                   outlet  30048  1.941e-02  1.941e-02  0.000e+00
+ -----------                             ---------- ---------- ----------
+ Net                                      8.769e+01  8.769e+01  0.000e+00
+
+
+
+===== tui_dpm_summary =====
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                               25245  1.525e+00  7.423e+01  6.752e+00  5.892e+00 injection-5-micron 9046 injection-844-micron 2911
+ Trapped                   bottom  50059  71654  3.345e-01  2.279e+01  1.158e+00  5.727e-01 injection-28-mi 9662 injection-562-m 3105
+ Escaped                   outlet  30048   1489  1.009e+00  2.818e+00  1.763e+00  2.412e-01 injection-5-mic 1873 injection-5-mic 9531
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                               2.068e+00  2.068e+00  0.000e+00
+ Trapped                   bottom  50059  8.560e+01  8.560e+01  0.000e+00
+ Escaped                   outlet  30048  1.941e-02  1.941e-02  0.000e+00
+ -----------                             ---------- ---------- ----------
+ Net                                      8.769e+01  8.769e+01  0.000e+00
+The following solver settings object method could also be used to execute the above command:
+<solver_session>.results.report.discrete_phase.summary()
+
+
+
+===== tui_particle_summary =====
+(injection-112-micron injection-1631-micron injection-168-micron injection-28-micron injection-348-micron injection-5-micron injection-56-micron injection-562-micron injection-844-micron)
+The following solver settings object method could also be used to execute the above command:
+<solver_session>.results.report.particle_summary(injection_names = ["injection-112-micron", "injection-1631-micron", "injection-168-micron", "injection-28-micron", "injection-348-micron", "injection-5-micron", "injection-56-micron", "injection-562-micron", "injection-844-micron"])
+
+
+
+===== settings_dpm_extended_summary =====
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                               25245  1.525e+00  7.423e+01  6.752e+00  5.892e+00 injection-5-micron 9046 injection-844-micron 2911
+ Trapped                   bottom  50059  71654  3.345e-01  2.279e+01  1.158e+00  5.727e-01 injection-28-mi 9662 injection-562-m 3105
+ Escaped                   outlet  30048   1489  1.009e+00  2.818e+00  1.763e+00  2.412e-01 injection-5-mic 1873 injection-5-mic 9531
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+
+
+
+===== dpm_extended_summary_injection-5-micron =====
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\spiral_enthalpy_sweep_20260725\\case_1_1600_25pct_injection-5-micron_extended_scratch.txt
+
+
+===== dpm_extended_summary_injection-5-micron_file_contents =====
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                7656  1.525e+00  4.634e+00  2.174e+00  4.909e-01 injection-5-micron 9046 injection-5-micron 10798
+ Trapped                   bottom  50059   1787  4.581e-01  2.824e+00  8.663e-01  2.901e-01 injection-5-mic  826 injection-5-mic 9240
+ Escaped                   outlet  30048   1489  1.009e+00  2.818e+00  1.763e+00  2.412e-01 injection-5-mic 1873 injection-5-mic 9531
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                               9.979e-02  9.979e-02  0.000e+00
+ Trapped                   bottom  50059  2.329e-02  2.329e-02  0.000e+00
+ Escaped                   outlet  30048  1.941e-02  1.941e-02  0.000e+00
+ -----------                             ---------- ---------- ----------
+ Net                                      1.425e-01  1.425e-01  0.000e+00
+
+
+
+===== dpm_extended_summary_injection-28-micron =====
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\spiral_enthalpy_sweep_20260725\\case_1_1600_25pct_injection-28-micron_extended_scratch.txt
+
+
+===== dpm_extended_summary_injection-28-micron_file_contents =====
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                5792  4.181e+00  4.633e+00  4.313e+00  6.320e-02 injection-28-micron 2014 injection-28-micron  685
+ Trapped                   bottom  50059   5140  3.345e-01  2.125e+00  8.568e-01  2.864e-01 injection-28-mi 9662 injection-28-mi 8688
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                               3.101e-01  3.101e-01  0.000e+00
+ Trapped                   bottom  50059  2.752e-01  2.752e-01  0.000e+00
+ -----------                             ---------- ---------- ----------
+ Net                                      5.853e-01  5.853e-01  0.000e+00
+
+
+
+===== dpm_extended_summary_injection-56-micron =====
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\spiral_enthalpy_sweep_20260725\\case_1_1600_25pct_injection-56-micron_extended_scratch.txt
+
+
+===== dpm_extended_summary_injection-56-micron_file_contents =====
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                5447  6.614e+00  7.055e+00  6.795e+00  9.205e-02 injection-56-micron 7239 injection-56-micron 9338
+ Trapped                   bottom  50059   5485  4.617e-01  4.113e+00  9.682e-01  4.861e-01 injection-56-mi 3889 injection-56-mi 10102
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                               3.626e-01  3.626e-01  0.000e+00
+ Trapped                   bottom  50059  3.652e-01  3.652e-01  0.000e+00
+ -----------                             ---------- ---------- ----------
+ Net                                      7.278e-01  7.278e-01  0.000e+00
+
+
+
+===== dpm_extended_summary_injection-112-micron =====
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\spiral_enthalpy_sweep_20260725\\case_1_1600_25pct_injection-112-micron_extended_scratch.txt
+
+
+===== dpm_extended_summary_injection-112-micron_file_contents =====
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                4074  1.153e+01  1.211e+01  1.187e+01  9.262e-02 injection-112-micron 4202 injection-112-micron 8159
+ Trapped                   bottom  50059   6858  5.996e-01  7.007e+00  1.471e+00  7.172e-01 injection-112-m 1366 injection-112-m 6463
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                               5.457e-01  5.457e-01  0.000e+00
+ Trapped                   bottom  50059  9.187e-01  9.187e-01  0.000e+00
+ -----------                             ---------- ---------- ----------
+ Net                                      1.464e+00  1.464e+00  0.000e+00
+
+
+
+===== dpm_extended_summary_injection-168-micron =====
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\spiral_enthalpy_sweep_20260725\\case_1_1600_25pct_injection-168-micron_extended_scratch.txt
+
+
+===== dpm_extended_summary_injection-168-micron_file_contents =====
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                2032  1.504e+01  1.619e+01  1.576e+01  1.358e-01 injection-168-micron  461 injection-168-micron 1863
+ Trapped                   bottom  50059   8900  6.446e-01  8.483e+00  1.867e+00  8.490e-01 injection-168-m 9788 injection-168-m 8049
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                               2.722e-01  2.722e-01  0.000e+00
+ Trapped                   bottom  50059  1.192e+00  1.192e+00  0.000e+00
+ -----------                             ---------- ---------- ----------
+ Net                                      1.464e+00  1.464e+00  0.000e+00
+
+
+
+===== dpm_extended_summary_injection-348-micron =====
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\spiral_enthalpy_sweep_20260725\\case_1_1600_25pct_injection-348-micron_extended_scratch.txt
+
+
+===== dpm_extended_summary_injection-348-micron_file_contents =====
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                  30  3.194e+01  6.149e+01  4.903e+01  9.517e+00 injection-348-micron  385 injection-348-micron 5291
+ Trapped                   bottom  50059  10902  7.230e-01  6.483e+00  1.398e+00  4.473e-01 injection-348-m 9861 injection-348-m  877
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                               4.813e-02  4.813e-02  0.000e+00
+ Trapped                   bottom  50059  1.749e+01  1.749e+01  0.000e+00
+ -----------                             ---------- ---------- ----------
+ Net                                      1.754e+01  1.754e+01  0.000e+00
+
+
+
+===== dpm_extended_summary_injection-562-micron =====
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\spiral_enthalpy_sweep_20260725\\case_1_1600_25pct_injection-562-micron_extended_scratch.txt
+
+
+===== dpm_extended_summary_injection-562-micron_file_contents =====
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                  71  3.325e+01  6.750e+01  4.681e+01  7.932e+00 injection-562-micron 9380 injection-562-micron  877
+ Trapped                   bottom  50059  10861  6.703e-01  2.279e+01  9.896e-01  2.509e-01 injection-562-m 1381 injection-562-m 3105
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                               1.424e-01  1.424e-01  0.000e+00
+ Trapped                   bottom  50059  2.178e+01  2.178e+01  0.000e+00
+ -----------                             ---------- ---------- ----------
+ Net                                      2.192e+01  2.192e+01  0.000e+00
+
+
+
+===== dpm_extended_summary_injection-844-micron =====
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\spiral_enthalpy_sweep_20260725\\case_1_1600_25pct_injection-844-micron_extended_scratch.txt
+
+
+===== dpm_extended_summary_injection-844-micron_file_contents =====
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                  72  3.152e+01  7.423e+01  4.668e+01  7.515e+00 injection-844-micron 3083 injection-844-micron 2911
+ Trapped                   bottom  50059  10860  6.243e-01  7.113e+00  8.926e-01  1.047e-01 injection-844-m 1381 injection-844-m 9380
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                               1.444e-01  1.444e-01  0.000e+00
+ Trapped                   bottom  50059  2.178e+01  2.178e+01  0.000e+00
+ -----------                             ---------- ---------- ----------
+ Net                                      2.192e+01  2.192e+01  0.000e+00
+
+
+
+===== dpm_extended_summary_injection-1631-micron =====
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\spiral_enthalpy_sweep_20260725\\case_1_1600_25pct_injection-1631-micron_extended_scratch.txt
+
+
+===== dpm_extended_summary_injection-1631-micron_file_contents =====
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                  71  3.023e+01  6.140e+01  4.650e+01  5.960e+00 injection-1631-micron 5295 injection-1631-micron 9382
+ Trapped                   bottom  50059  10861  6.264e-01  3.812e+00  8.573e-01  7.394e-02 injection-1631- 1409 injection-1631- 7278
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                               1.424e-01  1.424e-01  0.000e+00
+ Trapped                   bottom  50059  2.178e+01  2.178e+01  0.000e+00
+ -----------                             ---------- ---------- ----------
+ Net                                      2.192e+01  2.192e+01  0.000e+00

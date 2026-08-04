@@ -1,0 +1,3355 @@
+{
+  "case": "Case 3",
+  "condition": "1520",
+  "base_case": "C:\\Users\\qtra338\\Documents\\baseline_spiral_inlet.cas.h5",
+  "remote_output_paths": {
+    "flow_case": "C:\\Users\\qtra338\\Documents\\spiral_enthalpy_sweep_20260725\\case_3_1520_1500_flow.cas.h5",
+    "flow_data": "C:\\Users\\qtra338\\Documents\\spiral_enthalpy_sweep_20260725\\case_3_1520_1500_flow.dat.h5",
+    "case": "C:\\Users\\qtra338\\Documents\\spiral_enthalpy_sweep_20260725\\case_3_1520_1500.cas.h5",
+    "data": "C:\\Users\\qtra338\\Documents\\spiral_enthalpy_sweep_20260725\\case_3_1520_1500.dat.h5",
+    "dpm_report": "C:\\Users\\qtra338\\Documents\\spiral_enthalpy_sweep_20260725\\case_3_1520_dpm_report.txt",
+    "injection_results": "C:\\Users\\qtra338\\Documents\\spiral_enthalpy_sweep_20260725\\case_3_1520_injection_results.csv",
+    "case_summary": "C:\\Users\\qtra338\\Documents\\spiral_enthalpy_sweep_20260725\\case_3_1520_case_summary.csv",
+    "residual_history": "C:\\Users\\qtra338\\Documents\\spiral_enthalpy_sweep_20260725\\case_3_1520_1500_residual_history.csv",
+    "manifest": "C:\\Users\\qtra338\\Documents\\spiral_enthalpy_sweep_20260725\\case_3_1520_manifest.json",
+    "flow_manifest": "C:\\Users\\qtra338\\Documents\\spiral_enthalpy_sweep_20260725\\case_3_1520_flow_manifest.json"
+  },
+  "iterations_requested": 1500,
+  "iterations_completed": 1500,
+  "iterations_verified": 1500,
+  "iteration_verification_source": "PyFluent residual monitor x-axis advancement",
+  "iteration_evidence": [
+    {
+      "block_end": 25,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 0,
+          "first_iteration": null,
+          "last_iteration": null,
+          "series": []
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 25,
+          "first_iteration": 1.0,
+          "last_iteration": 25.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 50,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 25,
+          "first_iteration": 1.0,
+          "last_iteration": 25.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 51,
+          "first_iteration": 1.0,
+          "last_iteration": 50.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 75,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 51,
+          "first_iteration": 1.0,
+          "last_iteration": 50.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 77,
+          "first_iteration": 1.0,
+          "last_iteration": 75.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 100,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 77,
+          "first_iteration": 1.0,
+          "last_iteration": 75.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 103,
+          "first_iteration": 1.0,
+          "last_iteration": 100.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 125,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 103,
+          "first_iteration": 1.0,
+          "last_iteration": 100.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 129,
+          "first_iteration": 1.0,
+          "last_iteration": 125.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 150,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 129,
+          "first_iteration": 1.0,
+          "last_iteration": 125.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 155,
+          "first_iteration": 1.0,
+          "last_iteration": 150.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 175,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 155,
+          "first_iteration": 1.0,
+          "last_iteration": 150.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 181,
+          "first_iteration": 1.0,
+          "last_iteration": 175.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 200,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 181,
+          "first_iteration": 1.0,
+          "last_iteration": 175.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 207,
+          "first_iteration": 1.0,
+          "last_iteration": 200.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 225,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 207,
+          "first_iteration": 1.0,
+          "last_iteration": 200.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 233,
+          "first_iteration": 1.0,
+          "last_iteration": 225.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 250,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 233,
+          "first_iteration": 1.0,
+          "last_iteration": 225.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 259,
+          "first_iteration": 1.0,
+          "last_iteration": 250.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 275,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 259,
+          "first_iteration": 1.0,
+          "last_iteration": 250.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 285,
+          "first_iteration": 1.0,
+          "last_iteration": 275.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 300,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 285,
+          "first_iteration": 1.0,
+          "last_iteration": 275.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 311,
+          "first_iteration": 1.0,
+          "last_iteration": 300.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 325,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 311,
+          "first_iteration": 1.0,
+          "last_iteration": 300.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 337,
+          "first_iteration": 1.0,
+          "last_iteration": 325.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 350,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 337,
+          "first_iteration": 1.0,
+          "last_iteration": 325.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 363,
+          "first_iteration": 1.0,
+          "last_iteration": 350.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 375,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 363,
+          "first_iteration": 1.0,
+          "last_iteration": 350.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 389,
+          "first_iteration": 1.0,
+          "last_iteration": 375.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 400,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 389,
+          "first_iteration": 1.0,
+          "last_iteration": 375.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 415,
+          "first_iteration": 1.0,
+          "last_iteration": 400.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 425,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 415,
+          "first_iteration": 1.0,
+          "last_iteration": 400.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 441,
+          "first_iteration": 1.0,
+          "last_iteration": 425.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 450,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 441,
+          "first_iteration": 1.0,
+          "last_iteration": 425.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 467,
+          "first_iteration": 1.0,
+          "last_iteration": 450.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 475,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 467,
+          "first_iteration": 1.0,
+          "last_iteration": 450.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 493,
+          "first_iteration": 1.0,
+          "last_iteration": 475.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 500,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 493,
+          "first_iteration": 1.0,
+          "last_iteration": 475.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 519,
+          "first_iteration": 1.0,
+          "last_iteration": 500.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 525,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 519,
+          "first_iteration": 1.0,
+          "last_iteration": 500.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 545,
+          "first_iteration": 1.0,
+          "last_iteration": 525.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 550,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 545,
+          "first_iteration": 1.0,
+          "last_iteration": 525.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 571,
+          "first_iteration": 1.0,
+          "last_iteration": 550.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 575,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 571,
+          "first_iteration": 1.0,
+          "last_iteration": 550.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 597,
+          "first_iteration": 1.0,
+          "last_iteration": 575.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 600,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 597,
+          "first_iteration": 1.0,
+          "last_iteration": 575.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 623,
+          "first_iteration": 1.0,
+          "last_iteration": 600.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 625,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 623,
+          "first_iteration": 1.0,
+          "last_iteration": 600.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 649,
+          "first_iteration": 1.0,
+          "last_iteration": 625.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 650,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 649,
+          "first_iteration": 1.0,
+          "last_iteration": 625.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 675,
+          "first_iteration": 1.0,
+          "last_iteration": 650.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 675,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 675,
+          "first_iteration": 1.0,
+          "last_iteration": 650.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 701,
+          "first_iteration": 1.0,
+          "last_iteration": 675.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 700,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 701,
+          "first_iteration": 1.0,
+          "last_iteration": 675.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 727,
+          "first_iteration": 1.0,
+          "last_iteration": 700.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 725,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 727,
+          "first_iteration": 1.0,
+          "last_iteration": 700.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 753,
+          "first_iteration": 1.0,
+          "last_iteration": 725.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 750,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 753,
+          "first_iteration": 1.0,
+          "last_iteration": 725.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 779,
+          "first_iteration": 1.0,
+          "last_iteration": 750.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 775,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 779,
+          "first_iteration": 1.0,
+          "last_iteration": 750.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 805,
+          "first_iteration": 1.0,
+          "last_iteration": 775.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 800,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 805,
+          "first_iteration": 1.0,
+          "last_iteration": 775.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 831,
+          "first_iteration": 1.0,
+          "last_iteration": 800.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 825,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 831,
+          "first_iteration": 1.0,
+          "last_iteration": 800.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 857,
+          "first_iteration": 1.0,
+          "last_iteration": 825.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 850,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 857,
+          "first_iteration": 1.0,
+          "last_iteration": 825.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 883,
+          "first_iteration": 1.0,
+          "last_iteration": 850.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 875,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 883,
+          "first_iteration": 1.0,
+          "last_iteration": 850.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 909,
+          "first_iteration": 1.0,
+          "last_iteration": 875.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 900,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 909,
+          "first_iteration": 1.0,
+          "last_iteration": 875.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 935,
+          "first_iteration": 1.0,
+          "last_iteration": 900.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 925,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 935,
+          "first_iteration": 1.0,
+          "last_iteration": 900.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 961,
+          "first_iteration": 1.0,
+          "last_iteration": 925.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 950,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 961,
+          "first_iteration": 1.0,
+          "last_iteration": 925.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 987,
+          "first_iteration": 1.0,
+          "last_iteration": 950.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 975,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 987,
+          "first_iteration": 1.0,
+          "last_iteration": 950.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1013,
+          "first_iteration": 1.0,
+          "last_iteration": 975.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 1000,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1013,
+          "first_iteration": 1.0,
+          "last_iteration": 975.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1039,
+          "first_iteration": 1.0,
+          "last_iteration": 1000.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 1025,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1039,
+          "first_iteration": 1.0,
+          "last_iteration": 1000.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1065,
+          "first_iteration": 1.0,
+          "last_iteration": 1025.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 1050,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1065,
+          "first_iteration": 1.0,
+          "last_iteration": 1025.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1091,
+          "first_iteration": 1.0,
+          "last_iteration": 1050.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 1075,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1091,
+          "first_iteration": 1.0,
+          "last_iteration": 1050.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1117,
+          "first_iteration": 1.0,
+          "last_iteration": 1075.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 1100,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1117,
+          "first_iteration": 1.0,
+          "last_iteration": 1075.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1143,
+          "first_iteration": 1.0,
+          "last_iteration": 1100.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 1125,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1143,
+          "first_iteration": 1.0,
+          "last_iteration": 1100.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1169,
+          "first_iteration": 1.0,
+          "last_iteration": 1125.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 1150,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1169,
+          "first_iteration": 1.0,
+          "last_iteration": 1125.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1195,
+          "first_iteration": 1.0,
+          "last_iteration": 1150.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 1175,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1195,
+          "first_iteration": 1.0,
+          "last_iteration": 1150.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1221,
+          "first_iteration": 1.0,
+          "last_iteration": 1175.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 1200,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1221,
+          "first_iteration": 1.0,
+          "last_iteration": 1175.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1247,
+          "first_iteration": 1.0,
+          "last_iteration": 1200.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 1225,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1247,
+          "first_iteration": 1.0,
+          "last_iteration": 1200.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1273,
+          "first_iteration": 1.0,
+          "last_iteration": 1225.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 1250,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1273,
+          "first_iteration": 1.0,
+          "last_iteration": 1225.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1299,
+          "first_iteration": 1.0,
+          "last_iteration": 1250.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 1275,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1299,
+          "first_iteration": 1.0,
+          "last_iteration": 1250.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1325,
+          "first_iteration": 1.0,
+          "last_iteration": 1275.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 1300,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1325,
+          "first_iteration": 1.0,
+          "last_iteration": 1275.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1351,
+          "first_iteration": 1.0,
+          "last_iteration": 1300.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 1325,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1351,
+          "first_iteration": 1.0,
+          "last_iteration": 1300.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1377,
+          "first_iteration": 1.0,
+          "last_iteration": 1325.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 1350,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1377,
+          "first_iteration": 1.0,
+          "last_iteration": 1325.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1403,
+          "first_iteration": 1.0,
+          "last_iteration": 1350.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 1375,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1403,
+          "first_iteration": 1.0,
+          "last_iteration": 1350.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1429,
+          "first_iteration": 1.0,
+          "last_iteration": 1375.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 1400,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1429,
+          "first_iteration": 1.0,
+          "last_iteration": 1375.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1455,
+          "first_iteration": 1.0,
+          "last_iteration": 1400.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 1425,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1455,
+          "first_iteration": 1.0,
+          "last_iteration": 1400.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1481,
+          "first_iteration": 1.0,
+          "last_iteration": 1425.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 1450,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1481,
+          "first_iteration": 1.0,
+          "last_iteration": 1425.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1507,
+          "first_iteration": 1.0,
+          "last_iteration": 1450.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 1475,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1507,
+          "first_iteration": 1.0,
+          "last_iteration": 1450.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1533,
+          "first_iteration": 1.0,
+          "last_iteration": 1475.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 1500,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1533,
+          "first_iteration": 1.0,
+          "last_iteration": 1475.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1559,
+          "first_iteration": 1.0,
+          "last_iteration": 1500.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    }
+  ],
+  "verified_iteration_label": 1500,
+  "residual_history_rows": 1500,
+  "iteration_mode": "chunked",
+  "residual_history_points": 2000,
+  "residual_convergence_stop_flags": {
+    "continuity": false,
+    "x-velocity": false,
+    "y-velocity": false,
+    "z-velocity": false,
+    "k": false,
+    "epsilon": false,
+    "vf-phase-2": false
+  },
+  "fluent_internal_autosave": {
+    "before": {
+      "autosave/frequency/data": 100,
+      "autosave/frequency/case": 0,
+      "mmp/autosave/frequency/data": 1,
+      "mmp/autosave/frequency/case": 1,
+      "autosave/filename": "D:\\Punanto_injections\\h1600_files\\dp0\\FFF\\Fluent\\4800-iterations-300412",
+      "mmp/autosave/filename": ""
+    },
+    "after": {
+      "autosave/frequency/data": 0,
+      "autosave/frequency/case": 0,
+      "mmp/autosave/frequency/data": 0,
+      "mmp/autosave/frequency/case": 0,
+      "autosave/filename": "C:/Users/qtra338/Documents/spiral_enthalpy_sweep_20260725/case_3_1520_internal_autosave_disabled",
+      "mmp/autosave/filename": "C:/Users/qtra338/Documents/spiral_enthalpy_sweep_20260725/case_3_1520_internal_autosave_disabled"
+    },
+    "python_checkpoints_enabled": true
+  },
+  "liquid_mass_flow_kgs": 124.84,
+  "gas_mass_flow_kgs": 72.77,
+  "dpm_total_mass_flow_kgs": 124.84,
+  "dpm_velocity_mode": "face-normal",
+  "dpm_velocity_definition": "Fluent face-normal direction with magnitude=abs(z_velocity_ms)",
+  "inlet_readback": {
+    "name": "inlet",
+    "phase": {
+      "mixture": {
+        "momentum": {
+          "reference_frame": "Absolute",
+          "supersonic_gauge_pressure": {
+            "option": "value",
+            "value": 1140000.0
+          },
+          "direction_specification": "Normal to Boundary"
+        },
+        "turbulence": {
+          "turbulence_specification": "Intensity and Hydraulic Diameter",
+          "turbulent_intensity": 0.02109999952837825,
+          "hydraulic_diameter": 0.724
+        },
+        "dpm": {
+          "discrete_phase_bc_type": "escape"
+        },
+        "multiphase": {}
+      },
+      "phase-1": {
+        "momentum": {
+          "mass_flow_specification": "Mass Flow Rate",
+          "mass_flow_rate": {
+            "option": "value",
+            "value": 72.77
+          }
+        },
+        "turbulence": {},
+        "dpm": {},
+        "multiphase": {}
+      },
+      "phase-2": {
+        "momentum": {
+          "mass_flow_specification": "Mass Flow Rate",
+          "mass_flow_rate": {
+            "option": "value",
+            "value": 124.84
+          }
+        },
+        "turbulence": {},
+        "dpm": {},
+        "multiphase": {}
+      }
+    }
+  },
+  "injection_readback_names": [
+    "injection-112-micron",
+    "injection-1631-micron",
+    "injection-168-micron",
+    "injection-28-micron",
+    "injection-348-micron",
+    "injection-5-micron",
+    "injection-56-micron",
+    "injection-562-micron",
+    "injection-844-micron"
+  ],
+  "injection_readbacks": {
+    "injection-5-micron": {
+      "name": "injection-5-micron",
+      "particle_type": "inert",
+      "material": "liquid-water",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 0.202865
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 24.22817
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 6.297898e-06
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "stokes-cunningham",
+          "cunningham_factor": 1.0
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-28-micron": {
+      "name": "injection-28-micron",
+      "particle_type": "inert",
+      "material": "liquid-water",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 0.833307
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 24.22817
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 3.148949e-05
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "stokes-cunningham",
+          "cunningham_factor": 1.0
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-56-micron": {
+      "name": "injection-56-micron",
+      "particle_type": "inert",
+      "material": "liquid-water",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 1.036172
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 24.22817
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 6.297898e-05
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "stokes-cunningham",
+          "cunningham_factor": 1.0
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-112-micron": {
+      "name": "injection-112-micron",
+      "particle_type": "inert",
+      "material": "liquid-water",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 2.084828
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 24.22817
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 0.000125958
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "stokes-cunningham",
+          "cunningham_factor": 1.0
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-168-micron": {
+      "name": "injection-168-micron",
+      "particle_type": "inert",
+      "material": "liquid-water",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 2.084828
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 24.22817
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 0.0001889369
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "stokes-cunningham",
+          "cunningham_factor": 1.0
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-348-micron": {
+      "name": "injection-348-micron",
+      "particle_type": "inert",
+      "material": "liquid-water",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 24.968
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 24.22817
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 0.0003904697
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "stokes-cunningham",
+          "cunningham_factor": 1.0
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-562-micron": {
+      "name": "injection-562-micron",
+      "particle_type": "inert",
+      "material": "liquid-water",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 31.21
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 24.22817
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 0.0006297898
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "stokes-cunningham",
+          "cunningham_factor": 1.0
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-844-micron": {
+      "name": "injection-844-micron",
+      "particle_type": "inert",
+      "material": "liquid-water",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 31.21
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 24.22817
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 0.0009446847
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "stokes-cunningham",
+          "cunningham_factor": 1.0
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-1631-micron": {
+      "name": "injection-1631-micron",
+      "particle_type": "inert",
+      "material": "liquid-water",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 31.21
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 24.22817
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 0.00182639
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "stokes-cunningham",
+          "cunningham_factor": 1.0
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    }
+  },
+  "post_dpm_injection_readbacks": {
+    "injection-5-micron": {
+      "name": "injection-5-micron",
+      "particle_type": "inert",
+      "material": "liquid-water",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 0.202865
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 24.22817
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 6.297898e-06
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "stokes-cunningham",
+          "cunningham_factor": 1.0
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-28-micron": {
+      "name": "injection-28-micron",
+      "particle_type": "inert",
+      "material": "liquid-water",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 0.833307
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 24.22817
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 3.148949e-05
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "stokes-cunningham",
+          "cunningham_factor": 1.0
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-56-micron": {
+      "name": "injection-56-micron",
+      "particle_type": "inert",
+      "material": "liquid-water",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 1.036172
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 24.22817
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 6.297898e-05
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "stokes-cunningham",
+          "cunningham_factor": 1.0
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-112-micron": {
+      "name": "injection-112-micron",
+      "particle_type": "inert",
+      "material": "liquid-water",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 2.084828
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 24.22817
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 0.000125958
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "stokes-cunningham",
+          "cunningham_factor": 1.0
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-168-micron": {
+      "name": "injection-168-micron",
+      "particle_type": "inert",
+      "material": "liquid-water",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 2.084828
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 24.22817
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 0.0001889369
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "stokes-cunningham",
+          "cunningham_factor": 1.0
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-348-micron": {
+      "name": "injection-348-micron",
+      "particle_type": "inert",
+      "material": "liquid-water",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 24.968
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 24.22817
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 0.0003904697
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "stokes-cunningham",
+          "cunningham_factor": 1.0
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-562-micron": {
+      "name": "injection-562-micron",
+      "particle_type": "inert",
+      "material": "liquid-water",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 31.21
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 24.22817
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 0.0006297898
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "stokes-cunningham",
+          "cunningham_factor": 1.0
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-844-micron": {
+      "name": "injection-844-micron",
+      "particle_type": "inert",
+      "material": "liquid-water",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 31.21
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 24.22817
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 0.0009446847
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "stokes-cunningham",
+          "cunningham_factor": 1.0
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-1631-micron": {
+      "name": "injection-1631-micron",
+      "particle_type": "inert",
+      "material": "liquid-water",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 31.21
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 24.22817
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 0.00182639
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "stokes-cunningham",
+          "cunningham_factor": 1.0
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    }
+  },
+  "escaped_kgs_missing_count": 0,
+  "dpm_mass_balance": {
+    "passed": true,
+    "failed_injections": [],
+    "rows": [
+      {
+        "injection_name": "injection-5-micron",
+        "injected_kgs": 0.202865,
+        "fate_total_kgs": 0.20284,
+        "error_kgs": -2.4999999999997247e-05,
+        "tolerance_kgs": 0.00040573,
+        "missing_fields": [],
+        "passed": true
+      },
+      {
+        "injection_name": "injection-28-micron",
+        "injected_kgs": 0.833307,
+        "fate_total_kgs": 0.8333,
+        "error_kgs": -6.999999999979245e-06,
+        "tolerance_kgs": 0.001666614,
+        "missing_fields": [],
+        "passed": true
+      },
+      {
+        "injection_name": "injection-56-micron",
+        "injected_kgs": 1.036172,
+        "fate_total_kgs": 1.0361,
+        "error_kgs": -7.2000000000072e-05,
+        "tolerance_kgs": 0.0020723440000000003,
+        "missing_fields": [],
+        "passed": true
+      },
+      {
+        "injection_name": "injection-112-micron",
+        "injected_kgs": 2.084828,
+        "fate_total_kgs": 2.0844,
+        "error_kgs": -0.0004279999999998729,
+        "tolerance_kgs": 0.004169656,
+        "missing_fields": [],
+        "passed": true
+      },
+      {
+        "injection_name": "injection-168-micron",
+        "injected_kgs": 2.084828,
+        "fate_total_kgs": 2.0852,
+        "error_kgs": 0.00037200000000003897,
+        "tolerance_kgs": 0.004169656,
+        "missing_fields": [],
+        "passed": true
+      },
+      {
+        "injection_name": "injection-348-micron",
+        "injected_kgs": 24.968,
+        "fate_total_kgs": 24.97056,
+        "error_kgs": 0.0025599999999990075,
+        "tolerance_kgs": 0.049936,
+        "missing_fields": [],
+        "passed": true
+      },
+      {
+        "injection_name": "injection-562-micron",
+        "injected_kgs": 31.21,
+        "fate_total_kgs": 31.207069999999998,
+        "error_kgs": -0.0029300000000027637,
+        "tolerance_kgs": 0.06242,
+        "missing_fields": [],
+        "passed": true
+      },
+      {
+        "injection_name": "injection-844-micron",
+        "injected_kgs": 31.21,
+        "fate_total_kgs": 31.2085,
+        "error_kgs": -0.0015000000000000568,
+        "tolerance_kgs": 0.06242,
+        "missing_fields": [],
+        "passed": true
+      },
+      {
+        "injection_name": "injection-1631-micron",
+        "injected_kgs": 31.21,
+        "fate_total_kgs": 31.2113,
+        "error_kgs": 0.001300000000000523,
+        "tolerance_kgs": 0.06242,
+        "missing_fields": [],
+        "passed": true
+      }
+    ]
+  },
+  "case_summary": {
+    "case": "Case 3",
+    "enthalpy_kJkg": "1520",
+    "iterations_completed": 1500,
+    "liquid_mass_flow_kgs": "124.84",
+    "gas_mass_flow_kgs": "72.77",
+    "dpm_injected_mass_flow_kgs": "124.84",
+    "escaped_kgs": "0.02416",
+    "trapped_kgs": "121.7",
+    "incomplete_kgs": "3.12",
+    "escaped_zone_names": "outlet",
+    "trapped_zone_names": "bottom",
+    "incomplete_zone_names": "",
+    "escaped_zone_breakdown": "[{\"fate\":\"escaped\",\"zone_name\":\"outlet\",\"zone_id\":\"30048\",\"count\":1302.0,\"mass_flow_kgs\":0.02416}]",
+    "trapped_zone_breakdown": "[{\"fate\":\"trapped\",\"zone_name\":\"bottom\",\"zone_id\":\"50059\",\"count\":69185.0,\"mass_flow_kgs\":121.7}]",
+    "incomplete_zone_breakdown": "[{\"fate\":\"incomplete\",\"zone_name\":\"\",\"zone_id\":\"\",\"count\":27901.0,\"mass_flow_kgs\":3.12}]",
+    "escaped_count": "1302",
+    "trapped_count": "69185",
+    "incomplete_count": "27901"
+  }
+}

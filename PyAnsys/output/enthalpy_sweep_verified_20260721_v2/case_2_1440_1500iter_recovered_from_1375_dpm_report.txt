@@ -1,0 +1,311 @@
+
+
+===== settings_zone_summaries_per_injection_enable =====
+
+
+===== settings_zone_summaries_per_injection_reset =====
+skipped: non-essential reset can block for a long time on remote Fluent sessions
+
+
+
+===== solve_dpm_update =====
+/solve/dpm-update
+
+DPM Iteration ....
+number tracked = 78300, escaped = 8514, trapped = 36808, incomplete = 32978
+
+
+
+===== settings_dpm_summary =====
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                               32978  1.165e+01  6.560e+01  3.322e+01  1.640e+01     injection-0 1220     injection-8 4015
+ Escaped             steam_outlet      7   8514  7.009e-01  1.697e+01  2.864e+00  1.740e+00     injection-0 1215     injection-0 4277
+ Trapped             fluid_outlet      8  36808  1.787e-01  1.110e+01  5.772e-01  4.061e-01     injection-4 1420     injection-1   54
+
+
+
+===== tui_dpm_summary =====
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                               5.801e+01  5.801e+01  0.000e+00
+ Escaped             steam_outlet      7  2.136e-01  2.136e-01  0.000e+00
+ Trapped             fluid_outlet      8  7.453e+01  7.453e+01  0.000e+00
+ -----------                             ---------- ---------- ----------
+ Net                                      1.328e+02  1.328e+02  0.000e+00
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                               32978  1.165e+01  6.560e+01  3.322e+01  1.640e+01     injection-0 1220     injection-8 4015
+ Escaped             steam_outlet      7   8514  7.009e-01  1.697e+01  2.864e+00  1.740e+00     injection-0 1215     injection-0 4277
+ Trapped             fluid_outlet      8  36808  1.787e-01  1.110e+01  5.772e-01  4.061e-01     injection-4 1420     injection-1   54
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                               5.801e+01  5.801e+01  0.000e+00
+ Escaped             steam_outlet      7  2.136e-01  2.136e-01  0.000e+00
+ Trapped             fluid_outlet      8  7.453e+01  7.453e+01  0.000e+00
+ -----------                             ---------- ---------- ----------
+ Net                                      1.328e+02  1.328e+02  0.000e+00
+The following solver settings object method could also be used to execute the above command:
+<solver_session>.results.report.discrete_phase.summary()
+
+
+
+===== tui_particle_summary =====
+(injection-0 injection-1 injection-2 injection-3 injection-4 injection-5 injection-6 injection-7 injection-8)
+The following solver settings object method could also be used to execute the above command:
+<solver_session>.results.report.particle_summary(injection_names = ["injection-0", "injection-1", "injection-2", "injection-3", "injection-4", "injection-5", "injection-6", "injection-7", "injection-8"])
+
+
+
+===== settings_dpm_extended_summary =====
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                               32978  1.165e+01  6.560e+01  3.322e+01  1.640e+01     injection-0 1220     injection-8 4015
+ Escaped             steam_outlet      7   8514  7.009e-01  1.697e+01  2.864e+00  1.740e+00     injection-0 1215     injection-0 4277
+ Trapped             fluid_outlet      8  36808  1.787e-01  1.110e+01  5.772e-01  4.061e-01     injection-4 1420     injection-1   54
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+
+
+
+===== dpm_extended_summary_injection-0 =====
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_verified_20260721_v2\\case_2_1440_1500iter_recovered_from_1375_injection-0_extended_scratch.txt
+
+
+===== dpm_extended_summary_injection-0_file_contents =====
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                  62  1.165e+01  2.661e+01  1.208e+01  1.889e+00     injection-0 1220     injection-0 5306
+ Escaped             steam_outlet      7   8482  7.009e-01  1.697e+01  2.868e+00  1.742e+00     injection-0 1215     injection-0 4277
+ Trapped             fluid_outlet      8    156  1.994e-01  3.693e+00  4.413e-01  4.398e-01     injection-0 8206     injection-0  781
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                               1.537e-03  1.537e-03  0.000e+00
+ Escaped             steam_outlet      7  2.103e-01  2.103e-01  0.000e+00
+ Trapped             fluid_outlet      8  3.868e-03  3.868e-03  0.000e+00
+ -----------                             ---------- ---------- ----------
+ Net                                      2.157e-01  2.157e-01  0.000e+00
+
+
+
+===== dpm_extended_summary_injection-1 =====
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_verified_20260721_v2\\case_2_1440_1500iter_recovered_from_1375_injection-1_extended_scratch.txt
+
+
+===== dpm_extended_summary_injection-1_file_contents =====
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                4610  1.281e+01  3.656e+01  1.350e+01  7.338e-01     injection-1 7990     injection-1  482
+ Escaped             steam_outlet      7     32  1.495e+00  3.210e+00  1.869e+00  3.817e-01     injection-1 6918     injection-1 1140
+ Trapped             fluid_outlet      8   4058  1.882e-01  1.110e+01  9.768e-01  8.243e-01     injection-1 4976     injection-1   54
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                               4.696e-01  4.696e-01  0.000e+00
+ Escaped             steam_outlet      7  3.259e-03  3.259e-03  0.000e+00
+ Trapped             fluid_outlet      8  4.133e-01  4.133e-01  0.000e+00
+ -----------                             ---------- ---------- ----------
+ Net                                      8.862e-01  8.862e-01  0.000e+00
+
+
+
+===== dpm_extended_summary_injection-2 =====
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_verified_20260721_v2\\case_2_1440_1500iter_recovered_from_1375_injection-2_extended_scratch.txt
+
+
+===== dpm_extended_summary_injection-2_file_contents =====
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                4522  1.709e+01  1.763e+01  1.730e+01  8.967e-02     injection-2  153     injection-2 8347
+ Trapped             fluid_outlet      8   4178  1.882e-01  4.110e+00  4.937e-01  3.326e-01     injection-2 8220     injection-2 8085
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                               5.727e-01  5.727e-01  0.000e+00
+ Trapped             fluid_outlet      8  5.292e-01  5.292e-01  0.000e+00
+ -----------                             ---------- ---------- ----------
+ Net                                      1.102e+00  1.102e+00  0.000e+00
+
+
+
+===== dpm_extended_summary_injection-3 =====
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_verified_20260721_v2\\case_2_1440_1500iter_recovered_from_1375_injection-3_extended_scratch.txt
+
+
+===== dpm_extended_summary_injection-3_file_contents =====
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                4362  2.234e+01  2.292e+01  2.261e+01  1.026e-01     injection-3   32     injection-3  950
+ Trapped             fluid_outlet      8   4338  1.799e-01  1.378e+00  4.182e-01  1.849e-01     injection-3 7067     injection-3 5041
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                               1.112e+00  1.112e+00  0.000e+00
+ Trapped             fluid_outlet      8  1.105e+00  1.105e+00  0.000e+00
+ -----------                             ---------- ---------- ----------
+ Net                                      2.217e+00  2.217e+00  0.000e+00
+
+
+
+===== dpm_extended_summary_injection-4 =====
+
+
+
+===== dpm_extended_summary_injection-4_file_contents =====
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                4253  2.735e+01  2.785e+01  2.755e+01  9.891e-02     injection-4  211     injection-4 3822
+ Trapped             fluid_outlet      8   4447  1.787e-01  1.468e+00  4.337e-01  2.021e-01     injection-4 1420     injection-4 4455
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                               1.084e+00  1.084e+00  0.000e+00
+ Trapped             fluid_outlet      8  1.133e+00  1.133e+00  0.000e+00
+ -----------                             ---------- ---------- ----------
+ Net                                      2.217e+00  2.217e+00  0.000e+00
+
+
+
+===== dpm_extended_summary_injection-5 =====
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_verified_20260721_v2\\case_2_1440_1500iter_recovered_from_1375_injection-5_extended_scratch.txt
+
+
+===== dpm_extended_summary_injection-5_file_contents =====
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                4054  3.606e+01  3.689e+01  3.645e+01  1.319e-01     injection-5  192     injection-5 1291
+ Trapped             fluid_outlet      8   4646  1.885e-01  1.403e+00  4.862e-01  2.352e-01     injection-5 7060     injection-5 4558
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                               1.237e+01  1.237e+01  0.000e+00
+ Trapped             fluid_outlet      8  1.418e+01  1.418e+01  0.000e+00
+ -----------                             ---------- ---------- ----------
+ Net                                      2.655e+01  2.655e+01  0.000e+00
+
+
+
+===== dpm_extended_summary_injection-6 =====
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_verified_20260721_v2\\case_2_1440_1500iter_recovered_from_1375_injection-6_extended_scratch.txt
+
+
+===== dpm_extended_summary_injection-6_file_contents =====
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                3911  4.349e+01  4.447e+01  4.396e+01  1.662e-01     injection-6 6486     injection-6 5632
+ Trapped             fluid_outlet      8   4789  2.105e-01  1.548e+00  5.357e-01  2.577e-01     injection-6 1420     injection-6 3311
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                               1.492e+01  1.492e+01  0.000e+00
+ Trapped             fluid_outlet      8  1.827e+01  1.827e+01  0.000e+00
+ -----------                             ---------- ---------- ----------
+ Net                                      3.319e+01  3.319e+01  0.000e+00
+
+
+
+===== dpm_extended_summary_injection-7 =====
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_verified_20260721_v2\\case_2_1440_1500iter_recovered_from_1375_injection-7_extended_scratch.txt
+
+
+===== dpm_extended_summary_injection-7_file_contents =====
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                3753  5.114e+01  5.240e+01  5.182e+01  1.763e-01     injection-7   13     injection-7 2441
+ Trapped             fluid_outlet      8   4947  2.155e-01  1.686e+00  5.909e-01  2.811e-01     injection-7 1420     injection-7  829
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                               1.432e+01  1.432e+01  0.000e+00
+ Trapped             fluid_outlet      8  1.887e+01  1.887e+01  0.000e+00
+ -----------                             ---------- ---------- ----------
+ Net                                      3.319e+01  3.319e+01  0.000e+00
+
+
+
+===== dpm_extended_summary_injection-8 =====
+
+
+
+===== dpm_extended_summary_injection-8_file_contents =====
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                3451  6.408e+01  6.560e+01  6.500e+01  2.117e-01     injection-8 2617     injection-8 4015
+ Trapped             fluid_outlet      8   5249  2.268e-01  1.893e+00  6.973e-01  3.152e-01     injection-8 2420     injection-8 2718
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                               1.317e+01  1.317e+01  0.000e+00
+ Trapped             fluid_outlet      8  2.002e+01  2.002e+01  0.000e+00
+ -----------                             ---------- ---------- ----------
+ Net                                      3.319e+01  3.319e+01  0.000e+00

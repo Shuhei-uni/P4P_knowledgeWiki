@@ -1,0 +1,37 @@
+
+
+===== mesh_size_info =====
+
+Mesh Size
+
+Level    Cells    Faces    Nodes   Partitions
+    0 13370267 26878044  2291164           16
+
+ 1 cell zone, 6 face zones.
+
+
+===== mesh_check =====
+
+ Domain Extents:
+   x-coordinate: min (m) = -3.110842e+00, max (m) = 0.000000e+00
+   y-coordinate: min (m) = -6.441000e+00, max (m) = 5.335000e-01
+   z-coordinate: min (m) = -1.460895e+00, max (m) = 1.067000e+00
+ Volume statistics:
+   minimum volume (m3): 3.256849e-09
+   maximum volume (m3): 5.354541e-06
+     total volume (m3): 2.265891e+01
+ Face area statistics:
+   minimum face area (m2): 4.032757e-06
+   maximum face area (m2): 6.391923e-04
+ Checking mesh.....................................
+Done.
+
+
+===== mesh_quality =====
+ 
+Mesh Quality:
+
+Minimum Orthogonal Quality =  2.00535e-01 cell 219750 on zone 40050 (ID: 9081538 on partition: 11) at location (-9.88675e-01,  5.19592e-01, -2.01536e-01)
+
+
+Maximum Aspect Ratio =  1.89096e+01 cell 387740 on zone 40050 (ID: 12210949 on partition: 14) at location (-4.45462e-01, -4.05015e+00, -1.32227e-01)

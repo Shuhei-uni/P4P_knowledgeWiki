@@ -1,0 +1,19 @@
+{
+  "study_id": "split_inlet_mesh_convergence_20260801",
+  "mesh_name": "mesh-2300k",
+  "status": "waiting_for_connection",
+  "classification": "diagnostic",
+  "starting_iterations": 3000,
+  "target_iterations": 6000,
+  "block_size": 250,
+  "checkpoint_interval": 500,
+  "run_label": "extension_retry4",
+  "checkpoints": {},
+  "iteration_evidence": [],
+  "queued_epoch": 1785807723.207176,
+  "wait_for_pid": null,
+  "no_reinitialization": true,
+  "dpm": "off; no injections run",
+  "last_connection_error": "_MultiThreadedRendezvous: <_MultiThreadedRendezvous of RPC that terminated with:\n\tstatus = StatusCode.UNAVAILABLE\n\tdetails = \"Stream removed (Received RST_STREAM with error code 7 (RST_STREAM))\"\n\tdebug_error_string = \"UNAVAILABLE:Stream removed (Received RST_STREAM with error code 7 (RST_STREAM))\"\n>",
+  "queue_heartbeat_epoch": 1785807904.470551
+}

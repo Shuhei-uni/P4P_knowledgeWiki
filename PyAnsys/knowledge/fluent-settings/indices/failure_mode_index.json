@@ -29,6 +29,21 @@
       "symptom": "Boundary condition fields disappear/reset",
       "likely_causes": ["boundary type changed after setting values", "model enabled after BC setup", "phase count/material changed"],
       "response": ["set boundary type first", "enable all relevant models before BCs", "set BC values late", "read back after phase/model changes"]
+    },
+    {
+      "symptom": "DPM update or per-injection report fails but an older report is still parseable",
+      "likely_causes": ["DPM update command failed", "prior scratch file was not removed", "per-injection summaries were enabled after tracking", "report wrapper returned without new output"],
+      "response": ["treat DPM update failure as fatal", "delete the prior scratch report", "require a newly readable report for every injection", "reconcile fate mass against current injected mass"]
+    },
+    {
+      "symptom": "Fluent GUI injection panel raises ASSQ improper list",
+      "likely_causes": ["saved injection list contains a wrapper-generated structure the GUI cannot render", "surface binding is stale after reporting", "version-specific Scheme/list serialization issue"],
+      "response": ["reload the matching case/data pair", "inspect injection state through PyFluent", "reapply each injection sequentially and read back", "save a new post-DPM case/data pair", "classify as requires manual GUI cleanup if the error persists"]
+    },
+    {
+      "symptom": "Residual plot shows fewer points than the requested iteration budget",
+      "likely_causes": ["n_display limit", "n_save limit", "history compaction", "data file not loaded with the case"],
+      "response": ["load the matching data file", "inspect residual n_save and n_display", "check exported monitor x-axis evidence", "do not infer completed iterations from plot length alone"]
     }
   ]
 }

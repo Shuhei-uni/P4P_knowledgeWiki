@@ -1,0 +1,91 @@
+{
+  "study_id": "split_inlet_mesh_convergence_20260801",
+  "mesh_name": "mesh-2300k",
+  "status": "stopped",
+  "classification": "diagnostic",
+  "stop_reason": "User selected the smaller mesh-900k for the iteration-stability diagnostic; no extension checkpoint was written and the formal 3000 case/data pair is unchanged.",
+  "starting_iterations": 3000,
+  "target_iterations": 6000,
+  "block_size": 250,
+  "checkpoint_interval": 500,
+  "run_label": "extension_retry5",
+  "checkpoints": {},
+  "iteration_evidence": [],
+  "queued_epoch": 1785807946.099044,
+  "wait_for_pid": null,
+  "no_reinitialization": true,
+  "dpm": "off; no injections run",
+  "started_epoch": 1785808040.6440902,
+  "resume_case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_iter3000_final.cas.h5",
+  "resume_data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_iter3000_final.dat.h5",
+  "zones": {
+    "face_roles": {
+      "liquidinlet": {
+        "name": "liquidinlet",
+        "category": "mass_flow_inlet"
+      },
+      "steaminlet": {
+        "name": "steaminlet",
+        "category": "mass_flow_inlet"
+      },
+      "steamoutlet": {
+        "name": "steamoutlet",
+        "category": "pressure_outlet"
+      },
+      "bottom": {
+        "name": "bottom",
+        "category": "wall"
+      },
+      "wall-fluid": {
+        "name": "wall-fluid",
+        "category": "wall"
+      }
+    },
+    "cell_roles": {
+      "fluid": {
+        "name": "fluid",
+        "category": "fluid"
+      }
+    },
+    "renames": [],
+    "available_face_zones": {
+      "interior-fluid": "interior",
+      "liquidinlet": "mass_flow_inlet",
+      "steaminlet": "mass_flow_inlet",
+      "steamoutlet": "pressure_outlet",
+      "bottom": "wall",
+      "wall-fluid": "wall",
+      "general_nrbc": "non_reflecting_bc",
+      "turbo_sepcific_nrbc": "non_reflecting_bc",
+      "setup_method": "perforated_wall",
+      "model_setup": "perforated_wall",
+      "mass_flow": "settings",
+      "pressure_outlet": "settings",
+      "target_mass_flow_rate_settings": "settings",
+      "advanced": "settings"
+    },
+    "available_cell_zones": {
+      "fluid": "fluid"
+    }
+  },
+  "mesh_metrics": {
+    "cells": 13370267,
+    "faces": 26878044,
+    "nodes": 2291164,
+    "partitions": 16,
+    "minimum_cell_volume_m3": 3.256849e-09,
+    "maximum_cell_volume_m3": 5.354541e-06,
+    "domain_volume_m3": 22.65891,
+    "minimum_face_area_m2": 4.032757e-06,
+    "maximum_face_area_m2": 0.0006391923,
+    "negative_volume_reported": false,
+    "raw_check_contains_error": false,
+    "minimum_orthogonal_quality": 0.200535,
+    "maximum_aspect_ratio": 18.9096,
+    "characteristic_size_m": 0.011922472007888738
+  },
+  "settings_readback": "accepted",
+  "dpm_interaction": {
+    "enabled": false
+  }
+}

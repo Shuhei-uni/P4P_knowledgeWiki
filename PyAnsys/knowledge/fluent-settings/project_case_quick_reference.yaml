@@ -20,6 +20,30 @@ recommended_staging:
   - DPM injection modifications after default creation and reacquire
   - EWF only after basic DPM works
   - Energy only if thermal/phase-change model is genuinely required
+purnanto_replication_sweeps:
+  shared_contract:
+    phase_1_material: water-vapor-at-psep
+    phase_1_role: steam
+    phase_2_material: water-liquid-at-psep
+    phase_2_role: liquid water
+    inlet: inlet
+    outlet: outlet
+    injection_count: 9
+    injection_type: surface
+    injection_direction: Normal to Face with positive magnitude
+    carrier_iterations: 1500
+    dpm_mass_report_column: Final
+    count_based_mass_fallback: disabled
+  baseline_branch:
+    case_file: "C:\\Users\\qtra338\\Documents\\baseline.cas.h5"
+    particle_material: water-liquid-dpm
+    injection_csv: Code/harwell_results.csv
+    evidence_limit: historical manifests do not preserve all DPM controls or exact geometry identity
+  spiral_branch:
+    case_file: "C:\\Users\\qtra338\\Documents\\baseline_spiral_inlet.cas.h5"
+    particle_material: liquid-water
+    injection_csv: Code/spiral_harwell_results.csv
+    evidence_limit: exact CAD and mesh lineage remains unconfirmed
 injections:
   - name: dpm-5um
     diameter_m: 5.0e-6

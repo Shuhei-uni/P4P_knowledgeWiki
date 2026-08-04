@@ -14,8 +14,11 @@
 - `../../Setup report/05-complete-two-phase-actual-area-no-brine-outlet.md`
 - `../../Setup report/06-pure-phase-split-fixed-velocity.md`
 - `../../Setup report/07-pure-phase-split-actual-area.md`
+- `../../Setup report/07a-split-inlet-carrier-mesh-convergence.md`
 - `../../Setup report/08a-steam-outlet-extension-student-trial.md`
 - `../../Setup report/08-purnanto-one-inlet-massflow-recreation.md`
+- `../../Setup report/08b-purnanto-baseline-enthalpy-dpm-sweep.md`
+- `../../Setup report/08c-purnanto-spiral-inlet-enthalpy-dpm-sweep.md`
 
 ## Progress Layer
 - `wiki/progress/current-status.md`
@@ -23,8 +26,11 @@
 - `wiki/progress/blockers.md`
 
 ## Technical Layer
+- `../../PyAnsys/docs/PURNANTO_ENTHALPY_DPM_AUTOMATION_RUNBOOK.md`
 - `wiki/technical/sources/purnanto-etal-2013.md`
 - `wiki/technical/purnanto-live-setup-reference.md`
+- `wiki/technical/purnanto-enthalpy-dpm-replication.md`
+- `wiki/technical/purnanto-spiral-inlet-enthalpy-dpm-replication.md`
 - `wiki/technical/v2-purnanto-spiral-inlet-geometry.md`
 - `wiki/technical/pyfluent-trial3-one-inlet-reconstruction-smoke-test.md`
 - `wiki/technical/mesh-trial1-semi-automated-workflow.md`

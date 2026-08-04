@@ -1,0 +1,100 @@
+Connecting to Fluent server 1 using IP/port: 10.104.145.85:61169
+/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/.venv/lib/python3.12/site-packages/ansys/fluent/core/fluent_connection.py:306: InsecureGrpcWarning: The Fluent session will be connected in insecure gRPC mode. This mode is not recommended. For more details on the implications and usage of insecure mode, refer to the Fluent documentation.
+  warnings.warn(
+/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/.venv/lib/python3.12/site-packages/ansys/tools/common/cyberchannel.py:188: UserWarning: Starting gRPC client without TLS on 10.104.145.85:61169. This is INSECURE. Consider using a secure connection.
+  warn(f"Starting gRPC client without TLS on {target}. This is INSECURE. Consider using a secure connection.")
+
+Connected to Fluent Ansys Fluent 2024 R2
+
+=== Load Saved Case/Data ===
+Note: Rank = 0: Process affinity not being set (6).
+Note: Rank = 1: Process affinity not being set (6).
+Note: Rank = 2: Process affinity not being set (6).
+Note: Rank = 3: Process affinity not being set (6).
+Note: Rank = 4: Process affinity not being set (6).
+Note: Rank = 5: Process affinity not being set (6).
+Note: Rank = 6: Process affinity not being set (6).
+Note: Rank = 7: Process affinity not being set (6).
+Note: Rank = 8: Process affinity not being set (6).
+Note: Rank = 9: Process affinity not being set (6).
+
+       Clearing partially read grid.
+
+Reading from EN439159:"C:\Users\qtra338\Documents\enthalpy_sweep\case_4_1600_1500.cas.h5" in NODE0 mode ...
+  Reading mesh ...
+     5578299 cells,     1 cell zone  ...
+        5578299 tetrahedral cells,  zone id: 3
+    11355491 faces,     5 face zones ...
+         374376 triangular wall faces,  zone id: 1
+       10957705 triangular interior faces,  zone id: 2
+           8700 triangular mass-flow-inlet faces,  zone id: 6
+           5435 triangular pressure-outlet faces,  zone id: 7
+           9275 triangular wall faces,  zone id: 8
+     1026091 nodes,     1 node zone  ...
+  Done.
+
+
+Building...
+     mesh
+	distributing mesh
+		parts..........,
+		faces..........,
+		nodes..........,
+		cells..........,
+        bandwidth reduction using Reverse Cuthill-McKee: 558580/15010 = 37.2139
+     materials,
+     interface,
+     domains,
+	mixture
+	phase-1
+	phase-2
+	interaction
+     zones,
+	fluid  (phase-2)
+	interior-fluid  (phase-2)
+	fluid  (phase-1)
+	interior-fluid  (phase-1)
+	wall-fluid  (phase-1)
+	wall-fluid  (phase-2)
+	inlet  (phase-1)
+	inlet  (phase-2)
+	steam_outlet  (phase-1)
+	steam_outlet  (phase-2)
+	fluid_outlet  (phase-1)
+	fluid_outlet  (phase-2)
+	interior-fluid
+	wall-fluid
+	inlet
+	steam_outlet
+	fluid_outlet
+	fluid
+     parallel,
+Done.
+read_resume_case: OK
+
+Reading from EN439159:"C:\Users\qtra338\Documents\enthalpy_sweep\case_4_1600_1500.dat.h5" in NODE0 mode ...
+
+
+  Reading results.
+Parallel variables...
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 1969 cells 
+Done.
+read_resume_data: OK
+create_top_ring_dpm_tracks_probe: starting
+create_top_ring_dpm_tracks_probe: OK
+Traceback (most recent call last):
+  File "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/scripts/inspection/export_dpm_ring_diagnostic.py", line 685, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/scripts/inspection/export_dpm_ring_diagnostic.py", line 565, in main
+    "probe": probe_settings(solver, f"{args.track_object_name}_probe"),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/scripts/inspection/export_dpm_ring_diagnostic.py", line 504, in probe_settings
+    "filter_field_allowed_values": allowed_values_best_effort(track.filter_setting.field),
+                                                              ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/.venv/lib/python3.12/site-packages/ansys/fluent/core/solver/flobject.py", line 1276, in __getattribute__
+    return super().__getattribute__(name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'particle_track_child' object has no attribute 'filter_setting'.
+The most similar names are: filter_settings, vector_settings. Did you mean: 'filter_settings'?

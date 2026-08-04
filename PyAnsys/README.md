@@ -30,6 +30,10 @@ Fluent PC:
 - server_info.txt generated
 ```
 
+For the complete Purnanto enthalpy/DPM workflow, recovery procedure, output
+contract, and mesh-convergence handoff, use
+[`docs/PURNANTO_ENTHALPY_DPM_AUTOMATION_RUNBOOK.md`](./docs/PURNANTO_ENTHALPY_DPM_AUTOMATION_RUNBOOK.md).
+
 What you can do now:
 
 ```bash
@@ -51,6 +55,52 @@ When you are at the Fluent PC:
 .venv/bin/python scripts/connection/check_connection.py
 .venv/bin/python scripts/inspection/inspect_fluent_session.py
 ```
+
+### Guarded remote runs
+
+Remote Fluent can fail in two different ways:
+
+- the TCP port is closed/refused, which the connection preflight catches quickly;
+- the TCP port stays open but Fluent gRPC stops answering, which can make a local
+  PyFluent client hang.
+
+Use the guarded runner for remote checks and long runs so a stuck client is
+terminated locally instead of waiting indefinitely:
+
+```bash
+.venv/bin/python scripts/connection/run_guarded.py --idle-timeout-seconds 90 -- \
+  .venv/bin/python -u scripts/connection/check_connection.py \
+    --connect-timeout-seconds 60 \
+    --health-timeout-seconds 15
+```
+
+For a one-case smoke run, keep the idle timeout short enough to catch a wedged
+RPC but long enough for case loading:
+
+```bash
+.venv/bin/python scripts/connection/run_guarded.py --idle-timeout-seconds 600 -- \
+  .venv/bin/python -u scripts/setup/run_purnanto_enthalpy_sweep.py \
+    --apply \
+    --case-filter 1600 \
+    --iterations 1 \
+    --report-interval 1 \
+    --checkpoint-interval 0
+```
+
+For overnight sweeps, use `caffeinate` and a larger idle timeout:
+
+```bash
+caffeinate -dimsu .venv/bin/python scripts/connection/run_guarded.py --idle-timeout-seconds 1800 -- \
+  .venv/bin/python -u scripts/setup/run_purnanto_enthalpy_sweep.py \
+    --apply \
+    --iterations 1500 \
+    --report-interval 100 \
+    --checkpoint-interval 500
+```
+
+If the TCP check succeeds but `check_connection.py` times out, the Mac can reach
+the port but the Fluent gRPC session is likely wedged. Restart Fluent or the
+Fluent gRPC server on the Windows PC before starting a sweep.
 
 ## Canonical workflow
 

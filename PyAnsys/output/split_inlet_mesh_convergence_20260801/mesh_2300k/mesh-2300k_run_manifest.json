@@ -1,0 +1,722 @@
+{
+  "mesh_name": "mesh-2300k",
+  "status": "completed",
+  "iterations_requested": 3000,
+  "block_size": 250,
+  "checkpoints": {
+    "initialized": {
+      "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_initialized.cas.h5",
+      "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_initialized.dat.h5"
+    },
+    "1000": {
+      "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_checkpoint_1000.cas.h5",
+      "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_checkpoint_1000.dat.h5"
+    },
+    "2000": {
+      "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_checkpoint_2000.cas.h5",
+      "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_checkpoint_2000.dat.h5",
+      "classification": "recovery"
+    },
+    "2500": {
+      "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_checkpoint_2500.cas.h5",
+      "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_checkpoint_2500.dat.h5",
+      "classification": "recovery"
+    },
+    "3000": {
+      "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_iter3000_final.cas.h5",
+      "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_iter3000_final.dat.h5"
+    }
+  },
+  "iteration_evidence": [
+    {
+      "block_end": 250,
+      "requested": 250,
+      "before": {
+        "residual": {
+          "points": 0,
+          "first_iteration": null,
+          "last_iteration": null,
+          "series": []
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 250,
+          "first_iteration": 1.0,
+          "last_iteration": 250.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 500,
+      "requested": 250,
+      "before": {
+        "residual": {
+          "points": 250,
+          "first_iteration": 1.0,
+          "last_iteration": 250.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 501,
+          "first_iteration": 1.0,
+          "last_iteration": 500.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 750,
+      "requested": 250,
+      "before": {
+        "residual": {
+          "points": 501,
+          "first_iteration": 1.0,
+          "last_iteration": 500.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 752,
+          "first_iteration": 1.0,
+          "last_iteration": 750.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 1000,
+      "requested": 250,
+      "before": {
+        "residual": {
+          "points": 752,
+          "first_iteration": 1.0,
+          "last_iteration": 750.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1003,
+          "first_iteration": 1.0,
+          "last_iteration": 1000.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 1250,
+      "requested": 250,
+      "before": {
+        "residual": {
+          "points": 1003,
+          "first_iteration": 1.0,
+          "last_iteration": 1000.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1254,
+          "first_iteration": 1.0,
+          "last_iteration": 1250.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 1500,
+      "requested": 250,
+      "before": {
+        "residual": {
+          "points": 1254,
+          "first_iteration": 1.0,
+          "last_iteration": 1250.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1505,
+          "first_iteration": 1.0,
+          "last_iteration": 1500.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 1750,
+      "requested": 250,
+      "before": {
+        "residual": {
+          "points": 1505,
+          "first_iteration": 1.0,
+          "last_iteration": 1500.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1756,
+          "first_iteration": 1.0,
+          "last_iteration": 1750.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 2000,
+      "requested": 250,
+      "before": {
+        "residual": {
+          "points": 1756,
+          "first_iteration": 1.0,
+          "last_iteration": 1750.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 2007,
+          "first_iteration": 1.0,
+          "last_iteration": 2000.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 2250,
+      "requested": 250,
+      "before": {
+        "residual": {
+          "points": 0,
+          "first_iteration": null,
+          "last_iteration": null,
+          "series": []
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 2251,
+          "first_iteration": 1.0,
+          "last_iteration": 2250.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "continuation": true
+    },
+    {
+      "block_end": 2500,
+      "requested": 250,
+      "before": {
+        "residual": {
+          "points": 2251,
+          "first_iteration": 1.0,
+          "last_iteration": 2250.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 2502,
+          "first_iteration": 1.0,
+          "last_iteration": 2500.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "continuation": true
+    },
+    {
+      "block_end": 2250,
+      "requested": 250,
+      "before": {
+        "residual": {
+          "points": 0,
+          "first_iteration": null,
+          "last_iteration": null,
+          "series": []
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 2251,
+          "first_iteration": 1.0,
+          "last_iteration": 2250.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "continuation": true
+    },
+    {
+      "block_end": 2500,
+      "requested": 250,
+      "before": {
+        "residual": {
+          "points": 2251,
+          "first_iteration": 1.0,
+          "last_iteration": 2250.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 2502,
+          "first_iteration": 1.0,
+          "last_iteration": 2500.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "continuation": true
+    },
+    {
+      "block_end": 2750,
+      "requested": 250,
+      "before": {
+        "residual": {
+          "points": 2502,
+          "first_iteration": 1.0,
+          "last_iteration": 2500.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 2753,
+          "first_iteration": 1.0,
+          "last_iteration": 2750.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "continuation": true
+    },
+    {
+      "block_end": 3000,
+      "requested": 250,
+      "before": {
+        "residual": {
+          "points": 2753,
+          "first_iteration": 1.0,
+          "last_iteration": 2750.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 3004,
+          "first_iteration": 1.0,
+          "last_iteration": 3000.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "continuation": true
+    }
+  ],
+  "started_epoch": 1785690219.52582,
+  "initial_monitor_snapshot": {
+    "residual": {
+      "points": 0,
+      "first_iteration": null,
+      "last_iteration": null,
+      "series": []
+    }
+  },
+  "iterations_completed": 3000,
+  "classification": "unresolved",
+  "resumed_epoch": 1785756852.859735,
+  "resume": {
+    "starting_iterations": 2000,
+    "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_checkpoint_2000.cas.h5",
+    "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_checkpoint_2000.dat.h5",
+    "reason": "gRPC stream removed during the 500-750 block"
+  },
+  "resume_validation": {
+    "zones": {
+      "face_roles": {
+        "liquidinlet": {
+          "name": "liquidinlet",
+          "category": "mass_flow_inlet"
+        },
+        "steaminlet": {
+          "name": "steaminlet",
+          "category": "mass_flow_inlet"
+        },
+        "steamoutlet": {
+          "name": "steamoutlet",
+          "category": "pressure_outlet"
+        },
+        "bottom": {
+          "name": "bottom",
+          "category": "wall"
+        },
+        "wall-fluid": {
+          "name": "wall-fluid",
+          "category": "wall"
+        }
+      },
+      "cell_roles": {
+        "fluid": {
+          "name": "fluid",
+          "category": "fluid"
+        }
+      },
+      "renames": [],
+      "available_face_zones": {
+        "interior-fluid": "interior",
+        "liquidinlet": "mass_flow_inlet",
+        "steaminlet": "mass_flow_inlet",
+        "steamoutlet": "pressure_outlet",
+        "bottom": "wall",
+        "wall-fluid": "wall",
+        "general_nrbc": "non_reflecting_bc",
+        "turbo_sepcific_nrbc": "non_reflecting_bc",
+        "setup_method": "perforated_wall",
+        "model_setup": "perforated_wall",
+        "mass_flow": "settings",
+        "pressure_outlet": "settings",
+        "target_mass_flow_rate_settings": "settings",
+        "advanced": "settings"
+      },
+      "available_cell_zones": {
+        "fluid": "fluid"
+      }
+    },
+    "mesh_metrics": {
+      "cells": 13370267,
+      "faces": 26878044,
+      "nodes": 2291164,
+      "partitions": 16,
+      "minimum_cell_volume_m3": 3.256849e-09,
+      "maximum_cell_volume_m3": 5.354541e-06,
+      "domain_volume_m3": 22.65891,
+      "minimum_face_area_m2": 4.032757e-06,
+      "maximum_face_area_m2": 0.0006391923,
+      "negative_volume_reported": false,
+      "raw_check_contains_error": false,
+      "minimum_orthogonal_quality": 0.200535,
+      "maximum_aspect_ratio": 18.9096,
+      "characteristic_size_m": 0.011922472007888738
+    },
+    "settings": "accepted",
+    "dpm_interaction": {
+      "enabled": false
+    }
+  },
+  "failure_category": "unknown",
+  "error": "FileNotFoundError: Fluent cannot see resume case: C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_checkpoint_2500.cas.h5",
+  "completed_epoch": 1785778344.131163,
+  "final_checkpoint_is_3000_checkpoint": true,
+  "metrics": {
+    "study_id": "split_inlet_mesh_convergence_20260801",
+    "mesh_name": "mesh-2300k",
+    "classification": "unresolved",
+    "mesh_metrics": {
+      "cells": 13370267,
+      "faces": 26878044,
+      "nodes": 2291164,
+      "partitions": 16,
+      "minimum_cell_volume_m3": 3.256849e-09,
+      "maximum_cell_volume_m3": 5.354541e-06,
+      "domain_volume_m3": 22.65891,
+      "minimum_face_area_m2": 4.032757e-06,
+      "maximum_face_area_m2": 0.0006391923,
+      "negative_volume_reported": false,
+      "raw_check_contains_error": false,
+      "minimum_orthogonal_quality": 0.200535,
+      "maximum_aspect_ratio": 18.9096,
+      "characteristic_size_m": 0.011922472007888738
+    },
+    "final_metrics": {
+      "iteration": 3000,
+      "mixture_liquidinlet_kgs": 116.92,
+      "mixture_steaminlet_kgs": 80.69,
+      "mixture_steamoutlet_kgs": -81.446565,
+      "mixture_net_kgs": 116.16343,
+      "mixture_imbalance_percent": 58.78418602297455,
+      "vapor_liquidinlet_kgs": -0.0,
+      "vapor_steaminlet_kgs": 80.69,
+      "vapor_steamoutlet_kgs": -81.446474,
+      "vapor_net_kgs": -0.75647353,
+      "vapor_imbalance_percent": 0.9375059239063079,
+      "liquid_liquidinlet_kgs": 116.92,
+      "liquid_steaminlet_kgs": -0.0,
+      "liquid_steamoutlet_kgs": -9.1755305e-05,
+      "liquid_net_kgs": 116.91991,
+      "liquid_imbalance_percent": 99.99992302429011,
+      "carrier_outlet_quality_percent_trend_only": 99.99988734294179,
+      "inlet_mass_weighted_pressure_pa": 1143656.9,
+      "outlet_mass_weighted_pressure_pa": 1119947.7,
+      "pressure_drop_pa": 23709.199999999953,
+      "outlet_area_weighted_velocity_ms": 42.551732,
+      "domain_volume_avg_velocity_ms": 25.57102,
+      "domain_volume_avg_vorticity_s-1": 87.616472
+    },
+    "monitor_stability_2500_3000": {
+      "pressure_drop_pa": {
+        "samples": 3,
+        "minimum": 23089.399999999907,
+        "maximum": 23709.199999999953,
+        "mean": 23302.699999999953,
+        "drift_percent": 2.6597776223358145
+      },
+      "vapor_steamoutlet_kgs": {
+        "samples": 3,
+        "minimum": -81.462356,
+        "maximum": -81.446474,
+        "mean": -81.456329,
+        "drift_percent": 0.019497564148765946
+      },
+      "liquid_steamoutlet_kgs": {
+        "samples": 3,
+        "minimum": -9.1755305e-05,
+        "maximum": -3.4368714e-08,
+        "mean": -3.1322145238e-05,
+        "drift_percent": 292.83095263450934
+      },
+      "carrier_outlet_quality_percent_trend_only": {
+        "samples": 3,
+        "minimum": 99.99988734294179,
+        "maximum": 99.99999995781032,
+        "mean": 99.9999615428574,
+        "drift_percent": 0.00011261491183579372
+      },
+      "outlet_area_weighted_velocity_ms": {
+        "samples": 3,
+        "minimum": 42.281727,
+        "maximum": 42.551732,
+        "mean": 42.39504133333333,
+        "drift_percent": 0.6368787280499991
+      },
+      "domain_volume_avg_velocity_ms": {
+        "samples": 3,
+        "minimum": 23.33658,
+        "maximum": 25.57102,
+        "mean": 24.465558,
+        "drift_percent": 9.133002402806424
+      },
+      "domain_volume_avg_vorticity_s-1": {
+        "samples": 3,
+        "minimum": 85.699089,
+        "maximum": 87.616472,
+        "mean": 86.71080533333334,
+        "drift_percent": 2.211238833071847
+      }
+    },
+    "acceptance": {
+      "phase_and_mixture_balance_pass": false,
+      "primary_monitor_stability_pass": false,
+      "secondary_monitor_stability_pass": false
+    },
+    "quality_metric_text_file": "mesh-2300k_mesh_quality.txt",
+    "carrier_quality_scope": "trend-only; bottom is a wall and steamoutlet is the only carrier outlet",
+    "continuation": {
+      "resumed": true,
+      "starting_iterations": 2000,
+      "recovery_case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_checkpoint_2000.cas.h5",
+      "recovery_data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_checkpoint_2000.dat.h5"
+    }
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "study_id": "split_inlet_mesh_convergence_20260801",
+  "mesh_name": "mesh-900k",
+  "status": "running",
+  "classification": "diagnostic",
+  "starting_iterations": 4000,
+  "target_iterations": 6000,
+  "block_size": 250,
+  "checkpoint_interval": 250,
+  "run_label": "iteration_diagnostic3",
+  "checkpoints": {
+    "4250": {
+      "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_900k\\mesh-900k_iter4250_iteration_diagnostic3.cas.h5",
+      "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_900k\\mesh-900k_iter4250_iteration_diagnostic3.dat.h5"
+    }
+  },
+  "iteration_evidence": [
+    {
+      "block_end": 4250,
+      "requested": 250,
+      "before": {
+        "residual": {
+          "points": 0,
+          "first_iteration": null,
+          "last_iteration": null,
+          "series": []
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 4251,
+          "first_iteration": 1.0,
+          "last_iteration": 4250.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "extension": true
+    }
+  ],
+  "queued_epoch": 1785838664.172308,
+  "wait_for_pid": null,
+  "no_reinitialization": true,
+  "dpm": "off; no injections run",
+  "started_epoch": 1785838709.204003,
+  "resume_case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_900k\\mesh-900k_iter4000_iteration_diagnostic1.cas.h5",
+  "resume_data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_900k\\mesh-900k_iter4000_iteration_diagnostic1.dat.h5",
+  "zones": {
+    "face_roles": {
+      "liquidinlet": {
+        "name": "liquidinlet",
+        "category": "mass_flow_inlet"
+      },
+      "steaminlet": {
+        "name": "steaminlet",
+        "category": "mass_flow_inlet"
+      },
+      "steamoutlet": {
+        "name": "steamoutlet",
+        "category": "pressure_outlet"
+      },
+      "bottom": {
+        "name": "bottom",
+        "category": "wall"
+      },
+      "wall-fluid": {
+        "name": "wall-fluid",
+        "category": "wall"
+      }
+    },
+    "cell_roles": {
+      "fluid": {
+        "name": "fluid",
+        "category": "fluid"
+      }
+    },
+    "renames": [],
+    "available_face_zones": {
+      "interior-fluid": "interior",
+      "liquidinlet": "mass_flow_inlet",
+      "steaminlet": "mass_flow_inlet",
+      "steamoutlet": "pressure_outlet",
+      "bottom": "wall",
+      "wall-fluid": "wall",
+      "general_nrbc": "non_reflecting_bc",
+      "turbo_sepcific_nrbc": "non_reflecting_bc",
+      "setup_method": "perforated_wall",
+      "model_setup": "perforated_wall",
+      "mass_flow": "settings",
+      "pressure_outlet": "settings",
+      "target_mass_flow_rate_settings": "settings",
+      "advanced": "settings"
+    },
+    "available_cell_zones": {
+      "fluid": "fluid"
+    }
+  },
+  "mesh_metrics": {
+    "cells": 5335623,
+    "faces": 10743466,
+    "nodes": 923066,
+    "partitions": 16,
+    "minimum_cell_volume_m3": 3.343321e-09,
+    "maximum_cell_volume_m3": 1.374732e-05,
+    "domain_volume_m3": 22.65842,
+    "minimum_face_area_m2": 3.078478e-06,
+    "maximum_face_area_m2": 0.001217861,
+    "negative_volume_reported": false,
+    "raw_check_contains_error": false,
+    "minimum_orthogonal_quality": 0.202194,
+    "maximum_aspect_ratio": 20.1267,
+    "characteristic_size_m": 0.016193777290986103
+  },
+  "settings_readback": "accepted",
+  "dpm_interaction": {
+    "enabled": false
+  },
+  "iterations_completed": 4250,
+  "queue_heartbeat_epoch": 1785840150.282423
+}

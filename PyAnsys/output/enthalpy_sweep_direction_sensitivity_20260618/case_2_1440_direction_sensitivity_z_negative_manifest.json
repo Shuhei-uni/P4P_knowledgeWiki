@@ -1,0 +1,138 @@
+{
+  "case": "Case 2",
+  "condition": "1440",
+  "variant": "z_negative",
+  "source_case": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_single_verify_20260618\\case_2_1440_1500_recovered.cas.h5",
+  "source_data": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_single_verify_20260618\\case_2_1440_1500_recovered.dat.h5",
+  "velocity_mode": "components",
+  "velocity_definition": "Explicit components x=0, y=0, z=-27.503345",
+  "dpm_max_steps": 500000,
+  "step_length_factor": "unchanged",
+  "tracking": {
+    "before": {
+      "max_num_steps": 100000,
+      "step_size_controls": {
+        "option": "step-length-factor",
+        "step_length_factor": 5
+      },
+      "expert": {
+        "randomize_every_iteration": true,
+        "randomize_every_timestep": true,
+        "tracking_statistics_format": "short",
+        "verbosity": 1,
+        "reference_frame": "relative"
+      }
+    },
+    "after": {
+      "max_num_steps": 500000,
+      "step_size_controls": {
+        "option": "step-length-factor",
+        "step_length_factor": 5
+      },
+      "expert": {
+        "randomize_every_iteration": true,
+        "randomize_every_timestep": true,
+        "tracking_statistics_format": "short",
+        "verbosity": 1,
+        "reference_frame": "relative"
+      }
+    },
+    "actions": {
+      "set_dpm_max_num_steps": true,
+      "set_dpm_high_res_tracking_best_effort": false,
+      "set_dpm_interaction_off_best_effort": true,
+      "set_dpm_sources_every_iteration_off_best_effort": false
+    }
+  },
+  "inlet_readback": {
+    "name": "inlet",
+    "phase": {
+      "mixture": {
+        "momentum": {
+          "reference_frame": "Absolute",
+          "supersonic_gauge_pressure": {
+            "option": "value",
+            "value": 1140000
+          },
+          "direction_specification": "Normal to Boundary"
+        },
+        "turbulence": {
+          "turbulence_specification": "Intensity and Hydraulic Diameter",
+          "turbulent_intensity": 0.02152499951888,
+          "hydraulic_diameter": 0.7240000000000001
+        },
+        "dpm": {
+          "discrete_phase_bc_type": "escape"
+        },
+        "multiphase": {}
+      },
+      "phase-1": {
+        "momentum": {
+          "mass_flow_specification": "Mass Flow Rate",
+          "mass_flow_rate": {
+            "option": "value",
+            "value": 64.85
+          }
+        },
+        "turbulence": {},
+        "dpm": {},
+        "multiphase": {}
+      },
+      "phase-2": {
+        "momentum": {
+          "mass_flow_specification": "Mass Flow Rate",
+          "mass_flow_rate": {
+            "option": "value",
+            "value": 132.76
+          }
+        },
+        "turbulence": {},
+        "dpm": {},
+        "multiphase": {}
+      }
+    }
+  },
+  "injection_readback_names": [
+    "injection-0",
+    "injection-1",
+    "injection-2",
+    "injection-3",
+    "injection-4",
+    "injection-5",
+    "injection-6",
+    "injection-7",
+    "injection-8"
+  ],
+  "case_summary": {
+    "case": "Case 2",
+    "enthalpy_kJkg": "1440",
+    "iterations_completed": 1500,
+    "liquid_mass_flow_kgs": "132.76",
+    "gas_mass_flow_kgs": "64.85",
+    "dpm_injected_mass_flow_kgs": "132.76",
+    "escaped_kgs": "93.96",
+    "trapped_kgs": "38.77",
+    "incomplete_kgs": "0.02972",
+    "escaped_zone_names": "steam_outlet",
+    "trapped_zone_names": "fluid_outlet",
+    "incomplete_zone_names": "",
+    "escaped_zone_breakdown": "[{\"fate\":\"escaped\",\"zone_name\":\"steam_outlet\",\"zone_id\":\"7\",\"count\":67436.0,\"mass_flow_kgs\":93.96}]",
+    "trapped_zone_breakdown": "[{\"fate\":\"trapped\",\"zone_name\":\"fluid_outlet\",\"zone_id\":\"8\",\"count\":10683.0,\"mass_flow_kgs\":38.77}]",
+    "incomplete_zone_breakdown": "[{\"fate\":\"incomplete\",\"zone_name\":\"\",\"zone_id\":\"\",\"count\":181.0,\"mass_flow_kgs\":0.02972}]",
+    "escaped_count": "67436",
+    "trapped_count": "10683",
+    "incomplete_count": "181"
+  },
+  "local_output_paths": {
+    "dpm_report": "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_direction_sensitivity_20260618/case_2_1440_direction_sensitivity_z_negative_dpm_report.txt",
+    "injection_results": "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_direction_sensitivity_20260618/case_2_1440_direction_sensitivity_z_negative_injection_results.csv",
+    "case_summary": "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_direction_sensitivity_20260618/case_2_1440_direction_sensitivity_z_negative_case_summary.csv"
+  },
+  "remote_output_paths": {
+    "case": "",
+    "data": "",
+    "dpm_report": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_z_negative_dpm_report.txt",
+    "injection_results": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_z_negative_injection_results.csv",
+    "case_summary": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_z_negative_case_summary.csv"
+  }
+}

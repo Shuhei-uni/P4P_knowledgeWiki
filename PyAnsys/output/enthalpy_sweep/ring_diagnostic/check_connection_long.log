@@ -1,0 +1,25 @@
+Connecting to Fluent server 1 using IP/port: 10.104.145.85:61169
+Traceback (most recent call last):
+  File "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/src/pyansys_fluent/connection.py", line 37, in tcp_preflight
+    with socket.create_connection((ip, port), timeout=timeout_seconds):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andy/miniconda3/lib/python3.12/socket.py", line 865, in create_connection
+    raise exceptions[0]
+  File "/Users/andy/miniconda3/lib/python3.12/socket.py", line 850, in create_connection
+    sock.connect(sa)
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/scripts/connection/check_connection.py", line 108, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/scripts/connection/check_connection.py", line 85, in main
+    solver = connect(server_id=args.server_id, tcp_timeout_seconds=args.tcp_timeout_seconds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/src/pyansys_fluent/connection.py", line 88, in connect
+    tcp_preflight(ip, int(port), tcp_timeout_seconds)
+  File "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/src/pyansys_fluent/connection.py", line 40, in tcp_preflight
+    raise TimeoutError(
+TimeoutError: TCP preflight failed for 10.104.145.85:61169 after 30.0s. Check that Fluent is still running, the gRPC port is current, and the Windows firewall allows inbound TCP on that port.

@@ -17,6 +17,42 @@
 
 ## Runs
 
+### Run PURNANTO-ENTHALPY-DPM-SWEEP-2026-07
+- Run ID: `PURNANTO-ENTHALPY-DPM-SWEEP-2026-07`
+- Date: 2026-07-21 to 2026-07-24; evidence re-audited 2026-07-29.
+- Objective: reproduce the six Purnanto paper-table enthalpy conditions using the current one-inlet Fluent baseline, 1500 carrier-flow iterations per condition, and nine Harwell-derived DPM injections for outlet steam-quality prediction.
+- Geometry: `baseline.cas.h5`; a Purnanto baseline / Bangma-target operating reconstruction. Exact paper geometry identity remains unconfirmed.
+- Mesh: loaded baseline reports approximately 5.58 million cells, 1.03 million nodes, and 11.36 million faces during case writes (`Observed`). Mesh quality statistics have not yet been added to this run record.
+- Physics model: inherited steady pressure-based Mixture carrier field, primary vapor and secondary liquid, RNG k-epsilon, gravity enabled, energy off; DPM after the carrier solve. The historical manifests did not preserve a direct one-way interaction readback.
+- Solver settings: fresh base-case load and Hybrid Initialization per paper condition; inherited early convergence stops disabled; iterations issued in verified chunks; residual x-axis used as completion evidence.
+- Boundary and initial conditions: one phase-specific mass-flow inlet using the six paper-table steam/liquid splits; pressure outlet inherited from baseline; nine face-normal surface injections on `inlet` using CSV diameters, mass allocation, and speed; DPM material `water-liquid-dpm`.
+- Iteration budget: 1500 carrier-flow iterations per case, followed by DPM tracking; checkpoints and separate pre-DPM/post-DPM saves enabled.
+- Convergence monitors: Cases 2-6 preserve residual CSVs through iteration 1500, with final continuity residuals approximately `0.342`, `0.343`, `0.223`, `0.193`, and `0.206`. Case 1 has manifest evidence for block-by-block advancement through 1500 but no mirrored standalone residual CSV; its final continuity residual was recorded at approximately `0.283`. Iteration completion is evidenced, residual convergence is not.
+- Outcome: `Completed / Scientifically Provisional`. All six flow solves, DPM tracks, case/data saves, 54 injection rows, and per-injection fate-mass checks completed.
+- Results: escaped liquid is `0.1367`, `0.213559`, `0.196699`, `0.1817`, `0.1648`, and `0.1443 kg/s`; provisional steam quality is `99.7746%`, `99.6718%`, `99.7304%`, `99.7753%`, `99.8144%`, and `99.8507%` for Cases 1-6.
+- Evidence-use label: valid for automation/readback, DPM fate accounting, and provisional comparison. Not valid as converged paper replication because carrier residuals remain high, inherited DPM controls are incompletely preserved, and exact geometry/convention parity is unresolved.
+- Hypothesized cause if trends disagree with Purnanto: carrier field not converged, geometry mismatch, inferred nine-bin mass allocation, face-normal injection interpretation, tracking-control sensitivity, or high incomplete-particle fraction.
+- Next action: freeze this run as provisional evidence, then run a controlled convergence extension and capture the full inherited DPM state before using the quality values as validation evidence.
+- Mid-year technical-report evidence brief: `../technical/purnanto-enthalpy-dpm-replication.md`.
+
+### Run PURNANTO-SPIRAL-ENTHALPY-DPM-SWEEP-2026-07
+- Run ID: `PURNANTO-SPIRAL-ENTHALPY-DPM-SWEEP-2026-07`
+- Date: 2026-07-25 to 2026-07-28; evidence re-audited 2026-07-29.
+- Objective: apply the same six Purnanto enthalpy conditions and nine-bin DPM method to the available spiral-inlet separator baseline.
+- Geometry: `baseline_spiral_inlet.cas.h5`; its exact lineage to the documented v2 spiral CAD/mesh remains unconfirmed.
+- Mesh: inherited spiral baseline; exact mesh-quality and identity evidence must be captured in a future case audit.
+- Physics model: inherited steady pressure-based Mixture carrier field with vapor primary and liquid secondary phases, RNG k-epsilon, gravity enabled, energy off, and one-way DPM confirmed in the inspected baseline.
+- Solver settings: fresh baseline load, case-specific phase flows and injections, Hybrid Initialization, 1500 carrier iterations, then DPM update/reporting and post-DPM save.
+- Boundary and initial conditions: one mixed mass-flow inlet; Purnanto paper gas/liquid splits; nine positive-magnitude Normal to Face surface injections using `spiral_harwell_results.csv`; inert `liquid-water` particles.
+- Iteration budget: 1500 carrier-flow iterations per case followed by DPM tracking.
+- Convergence monitors: all six residual CSVs span iterations 1-1500. Final continuity residuals are approximately `0.185`, `0.229`, `0.204`, `0.200`, `0.162`, and `0.145`; completion is verified, convergence is not.
+- Outcome: `Completed / Scientifically Provisional`. All six case/data pairs, DPM reports, residual histories, 54 injection rows, and per-injection fate-mass checks completed.
+- Results: escaped liquid is `0.01941`, `0.02088`, `0.02416`, `0.01655`, `0.01896`, and `0.02667 kg/s`; provisional steam quality is `99.9679%`, `99.9678%`, `99.9668%`, `99.9795%`, `99.9786%`, and `99.9724%`.
+- Evidence-use label: valid for controlled branch comparison and provisional DPM fate accounting. Not a pure geometry sensitivity because inlet area, Harwell diameter, and injection speed also differ.
+- Hypothesized cause if trends disagree with Purnanto: non-converged carrier flow, unconfirmed geometry/mesh lineage, changed inlet and droplet scaling, or inherited DPM controls not captured by the historical manifests.
+- Next action: preserve the completed branch, capture full DPM/mesh readbacks, and compare only after the baseline convergence and methodology uncertainties are resolved.
+- Technical-report evidence brief: `../technical/purnanto-spiral-inlet-enthalpy-dpm-replication.md`.
+
 ### Run MESH-TRIAL1-SPLIT-CONTRACT-AUDIT-2026-06-10
 - Run ID: `MESH-TRIAL1-SPLIT-CONTRACT-AUDIT-2026-06-10`
 - Date: 2026-06-10
@@ -360,3 +396,19 @@
 - Evidence-use label: setup/debug history only. Because this run reached `1000` iterations but did not exceed the current usable-evidence threshold and did not converge, it should not be used for performance interpretation.
 - Hypothesized cause (if non-converged): mesh may be under-resolved, flow/BC settings may be incomplete or inconsistent.
 - Next action: perform full solver/BC audit against `purnanto-zarrouk-cater-2013` technical notes, then rerun with controlled setting changes.
+
+### Run SPLIT-MESH-PREFLIGHT-2026-07-29
+- Run ID: `SPLIT-MESH-PREFLIGHT-2026-07-29`
+- Date: 2026-07-29
+- Objective: establish the authoritative post-replication spiral/split-inlet baseline and gate a carrier-only coarse/medium/fine mesh-convergence study.
+- Geometry: intended spiral BOC with `0.724 m x 0.724 m` inlet, `0.006754 m` outer liquid strip, and `0.717246 m` inner steam region; live orientation remains unverified.
+- Mesh: no accepted ladder. Historical split mesh metadata include about `1.4445M` cells and minimum orthogonal quality about `0.03168`, but exports have inconsistent zone preservation and are not systematic refinements.
+- Physics model: planned frozen carrier field is steady pressure-based Mixture, vapor primary/liquid secondary, RNG k-epsilon, gravity on, Energy off; no DPM/EWF.
+- Solver settings: unresolved authority conflict between intended setup-07 `SIMPLE`/second-order/`QUICK` and actual archive `Coupled`/first-order.
+- Boundary and initial conditions: target `1600 kJ/kg`; liquid `116.92 kg/s`, steam `80.69 kg/s`; two pure-phase velocity inlets at `27.118 m/s`; hybrid initialization intended.
+- Iteration budget: none launched; stopping is to be based on residual plus physical-monitor stability rather than a fixed iteration count.
+- Convergence indicators: not available. Required outputs and acceptance criteria are defined in setup `07a`.
+- Outcome: `Stalled`.
+- Evidence-use label: `Diagnostic / preflight only`.
+- Hypothesized cause: remote endpoint unavailable; processor count unknown; no systematic mesh ladder; unresolved geometry-orientation and numerics-authority conflicts.
+- Next action: reconnect and run read-only live inspection, freeze/read back the carrier setup, then generate and audit the three meshes before long calculations.

@@ -1,0 +1,26 @@
+guarded_log: /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/case1_resume_925_to_1500.log
+run_guarded: started pid=51379 mode=quiet
+run_guarded: running elapsed=5m00s idle=5s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/case1_resume_925_to_1500.log
+run_guarded: running elapsed=10m01s idle=4s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/case1_resume_925_to_1500.log
+run_guarded: running elapsed=15m01s idle=1s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/case1_resume_925_to_1500.log
+run_guarded: running elapsed=20m02s idle=1s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/case1_resume_925_to_1500.log
+run_guarded: running elapsed=25m02s idle=8s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/case1_resume_925_to_1500.log
+run_guarded: running elapsed=30m02s idle=4s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/case1_resume_925_to_1500.log
+run_guarded: running elapsed=35m03s idle=2s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/case1_resume_925_to_1500.log
+run_guarded: running elapsed=40m03s idle=3s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/case1_resume_925_to_1500.log
+run_guarded: running elapsed=45m03s idle=5s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/case1_resume_925_to_1500.log
+run_guarded: running elapsed=50m04s idle=3s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/case1_resume_925_to_1500.log
+run_guarded: running elapsed=55m05s idle=1s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/case1_resume_925_to_1500.log
+run_guarded: running elapsed=1h00m06s idle=6s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/case1_resume_925_to_1500.log
+run_guarded: running elapsed=1h05m06s idle=4s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/case1_resume_925_to_1500.log
+run_guarded: running elapsed=1h10m06s idle=2s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/case1_resume_925_to_1500.log
+run_guarded: running elapsed=1h15m07s idle=7s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/case1_resume_925_to_1500.log
+run_guarded: running elapsed=1h20m07s idle=5s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/case1_resume_925_to_1500.log
+run_guarded: running elapsed=1h25m07s idle=1m42s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/case1_resume_925_to_1500.log
+run_guarded: running elapsed=1h30m08s idle=6m42s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/case1_resume_925_to_1500.log
+run_guarded: running elapsed=1h35m08s idle=11m42s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/case1_resume_925_to_1500.log
+run_guarded: running elapsed=1h40m08s idle=16m42s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/case1_resume_925_to_1500.log
+run_guarded: running elapsed=1h45m09s idle=21m43s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/case1_resume_925_to_1500.log
+run_guarded: running elapsed=1h50m09s idle=26m43s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/case1_resume_925_to_1500.log
+run_guarded: running elapsed=1h55m09s idle=31m43s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/case1_resume_925_to_1500.log
+run_guarded: exited code=0 elapsed=1h58m33s

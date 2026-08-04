@@ -1,0 +1,4227 @@
+{
+  "study_id": "split_inlet_mesh_convergence_20260801",
+  "status": "completed",
+  "baseline_settings_fingerprint": "424a9bf02bbd78060dee3a2874103e5149aa4aa555a09e2add69da4d2a0158c5",
+  "runs": [
+    {
+      "mesh_name": "mesh-300k",
+      "status": "completed",
+      "iterations_requested": 3000,
+      "block_size": 250,
+      "checkpoints": {
+        "initialized": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_300k\\mesh-300k_initialized.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_300k\\mesh-300k_initialized.dat.h5"
+        },
+        "1000": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_300k\\mesh-300k_checkpoint_1000.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_300k\\mesh-300k_checkpoint_1000.dat.h5"
+        },
+        "2000": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_300k\\mesh-300k_checkpoint_2000.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_300k\\mesh-300k_checkpoint_2000.dat.h5"
+        },
+        "3000": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_300k\\mesh-300k_iter3000_final.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_300k\\mesh-300k_iter3000_final.dat.h5"
+        }
+      },
+      "iteration_evidence": [
+        {
+          "block_end": 250,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 0,
+              "first_iteration": null,
+              "last_iteration": null,
+              "series": []
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 250,
+              "first_iteration": 1.0,
+              "last_iteration": 250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 500,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 250,
+              "first_iteration": 1.0,
+              "last_iteration": 250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 501,
+              "first_iteration": 1.0,
+              "last_iteration": 500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 750,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 501,
+              "first_iteration": 1.0,
+              "last_iteration": 500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 752,
+              "first_iteration": 1.0,
+              "last_iteration": 750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 1000,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 752,
+              "first_iteration": 1.0,
+              "last_iteration": 750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 1003,
+              "first_iteration": 1.0,
+              "last_iteration": 1000.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 1250,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 1003,
+              "first_iteration": 1.0,
+              "last_iteration": 1000.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 1254,
+              "first_iteration": 1.0,
+              "last_iteration": 1250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 1500,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 1254,
+              "first_iteration": 1.0,
+              "last_iteration": 1250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 1505,
+              "first_iteration": 1.0,
+              "last_iteration": 1500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 1750,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 1505,
+              "first_iteration": 1.0,
+              "last_iteration": 1500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 1756,
+              "first_iteration": 1.0,
+              "last_iteration": 1750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 2000,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 1756,
+              "first_iteration": 1.0,
+              "last_iteration": 1750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2007,
+              "first_iteration": 1.0,
+              "last_iteration": 2000.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 2250,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 2007,
+              "first_iteration": 1.0,
+              "last_iteration": 2000.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2258,
+              "first_iteration": 1.0,
+              "last_iteration": 2250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 2500,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 2258,
+              "first_iteration": 1.0,
+              "last_iteration": 2250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2509,
+              "first_iteration": 1.0,
+              "last_iteration": 2500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 2750,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 2509,
+              "first_iteration": 1.0,
+              "last_iteration": 2500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2760,
+              "first_iteration": 1.0,
+              "last_iteration": 2750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 3000,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 2760,
+              "first_iteration": 1.0,
+              "last_iteration": 2750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 3011,
+              "first_iteration": 1.0,
+              "last_iteration": 3000.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        }
+      ],
+      "started_epoch": 1785539128.1005068,
+      "initial_monitor_snapshot": {
+        "residual": {
+          "points": 0,
+          "first_iteration": null,
+          "last_iteration": null,
+          "series": []
+        }
+      },
+      "iterations_completed": 3000,
+      "classification": "unresolved",
+      "final_checkpoint_is_3000_checkpoint": true,
+      "metrics": {
+        "study_id": "split_inlet_mesh_convergence_20260801",
+        "mesh_name": "mesh-300k",
+        "classification": "unresolved",
+        "mesh_metrics": {
+          "cells": 1688678,
+          "faces": 3407153,
+          "nodes": 295481,
+          "partitions": 16,
+          "minimum_cell_volume_m3": 3.007068e-09,
+          "maximum_cell_volume_m3": 6.471875e-05,
+          "domain_volume_m3": 22.6567,
+          "minimum_face_area_m2": 3.971816e-06,
+          "maximum_face_area_m2": 0.003459825,
+          "negative_volume_reported": false,
+          "raw_check_contains_error": false,
+          "minimum_orthogonal_quality": 0.200732,
+          "maximum_aspect_ratio": 20.3226,
+          "characteristic_size_m": 0.023762015211663164
+        },
+        "final_metrics": {
+          "iteration": 3000,
+          "mixture_liquidinlet_kgs": 116.92,
+          "mixture_steaminlet_kgs": 80.69,
+          "mixture_steamoutlet_kgs": -82.336121,
+          "mixture_net_kgs": 115.27388,
+          "mixture_imbalance_percent": 58.33403167855877,
+          "vapor_liquidinlet_kgs": -0.0,
+          "vapor_steaminlet_kgs": 80.69,
+          "vapor_steamoutlet_kgs": -81.488642,
+          "vapor_net_kgs": -0.79864172,
+          "vapor_imbalance_percent": 0.9897654232246872,
+          "liquid_liquidinlet_kgs": 116.92,
+          "liquid_steaminlet_kgs": -0.0,
+          "liquid_steamoutlet_kgs": -0.84725781,
+          "liquid_net_kgs": 116.07274,
+          "liquid_imbalance_percent": 99.27535066712282,
+          "carrier_outlet_quality_percent_trend_only": 98.97097400774734,
+          "inlet_mass_weighted_pressure_pa": 1150965.8,
+          "outlet_mass_weighted_pressure_pa": 1119914.8,
+          "pressure_drop_pa": 31051.0,
+          "outlet_area_weighted_velocity_ms": 51.08266,
+          "domain_volume_avg_velocity_ms": 32.85721,
+          "domain_volume_avg_vorticity_s-1": 68.882935
+        },
+        "monitor_stability_2500_3000": {
+          "pressure_drop_pa": {
+            "samples": 3,
+            "minimum": 29720.700000000186,
+            "maximum": 31051.0,
+            "mean": 30390.966666666714,
+            "drift_percent": 4.37728754926018
+          },
+          "vapor_steamoutlet_kgs": {
+            "samples": 3,
+            "minimum": -81.488642,
+            "maximum": -81.411663,
+            "mean": -81.44279066666667,
+            "drift_percent": 0.09451910889824251
+          },
+          "liquid_steamoutlet_kgs": {
+            "samples": 3,
+            "minimum": -0.84725781,
+            "maximum": -0.22167505,
+            "mean": -0.5083021866666667,
+            "drift_percent": 123.07300192872144
+          },
+          "carrier_outlet_quality_percent_trend_only": {
+            "samples": 3,
+            "minimum": 98.97097400774734,
+            "maximum": 99.72850489856508,
+            "mean": 99.38083812461024,
+            "drift_percent": 0.7622504550302658
+          },
+          "outlet_area_weighted_velocity_ms": {
+            "samples": 3,
+            "minimum": 50.265593,
+            "maximum": 51.148902,
+            "mean": 50.832384999999995,
+            "drift_percent": 1.7376894670592322
+          },
+          "domain_volume_avg_velocity_ms": {
+            "samples": 3,
+            "minimum": 32.590748,
+            "maximum": 32.85721,
+            "mean": 32.75088466666667,
+            "drift_percent": 0.8136024498636062
+          },
+          "domain_volume_avg_vorticity_s-1": {
+            "samples": 3,
+            "minimum": 68.308089,
+            "maximum": 69.005051,
+            "mean": 68.73202500000001,
+            "drift_percent": 1.0140280313289172
+          }
+        },
+        "acceptance": {
+          "phase_and_mixture_balance_pass": false,
+          "primary_monitor_stability_pass": false,
+          "secondary_monitor_stability_pass": false
+        },
+        "quality_metric_text_file": "mesh-300k_mesh_quality.txt",
+        "carrier_quality_scope": "trend-only; bottom is a wall and steamoutlet is the only carrier outlet"
+      },
+      "completed_epoch": 1785544356.310293
+    },
+    {
+      "mesh_name": "mesh-600k",
+      "status": "completed",
+      "iterations_requested": 3000,
+      "block_size": 250,
+      "checkpoints": {
+        "initialized": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_600k\\mesh-600k_initialized.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_600k\\mesh-600k_initialized.dat.h5"
+        },
+        "1000": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_600k\\mesh-600k_checkpoint_1000.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_600k\\mesh-600k_checkpoint_1000.dat.h5"
+        },
+        "2000": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_600k\\mesh-600k_checkpoint_2000.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_600k\\mesh-600k_checkpoint_2000.dat.h5"
+        },
+        "3000": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_600k\\mesh-600k_iter3000_final.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_600k\\mesh-600k_iter3000_final.dat.h5"
+        }
+      },
+      "iteration_evidence": [
+        {
+          "block_end": 250,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 0,
+              "first_iteration": null,
+              "last_iteration": null,
+              "series": []
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 250,
+              "first_iteration": 1.0,
+              "last_iteration": 250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 500,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 250,
+              "first_iteration": 1.0,
+              "last_iteration": 250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 501,
+              "first_iteration": 1.0,
+              "last_iteration": 500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 750,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 501,
+              "first_iteration": 1.0,
+              "last_iteration": 500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 752,
+              "first_iteration": 1.0,
+              "last_iteration": 750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 1000,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 752,
+              "first_iteration": 1.0,
+              "last_iteration": 750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 1003,
+              "first_iteration": 1.0,
+              "last_iteration": 1000.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 1250,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 1003,
+              "first_iteration": 1.0,
+              "last_iteration": 1000.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 1254,
+              "first_iteration": 1.0,
+              "last_iteration": 1250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 1500,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 1254,
+              "first_iteration": 1.0,
+              "last_iteration": 1250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 1505,
+              "first_iteration": 1.0,
+              "last_iteration": 1500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 1750,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 1505,
+              "first_iteration": 1.0,
+              "last_iteration": 1500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 1756,
+              "first_iteration": 1.0,
+              "last_iteration": 1750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 2000,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 1756,
+              "first_iteration": 1.0,
+              "last_iteration": 1750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2007,
+              "first_iteration": 1.0,
+              "last_iteration": 2000.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 2250,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 2007,
+              "first_iteration": 1.0,
+              "last_iteration": 2000.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2258,
+              "first_iteration": 1.0,
+              "last_iteration": 2250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 2500,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 2258,
+              "first_iteration": 1.0,
+              "last_iteration": 2250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2509,
+              "first_iteration": 1.0,
+              "last_iteration": 2500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 2750,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 2509,
+              "first_iteration": 1.0,
+              "last_iteration": 2500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2760,
+              "first_iteration": 1.0,
+              "last_iteration": 2750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 3000,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 2760,
+              "first_iteration": 1.0,
+              "last_iteration": 2750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 3011,
+              "first_iteration": 1.0,
+              "last_iteration": 3000.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        }
+      ],
+      "started_epoch": 1785544356.3975942,
+      "initial_monitor_snapshot": {
+        "residual": {
+          "points": 0,
+          "first_iteration": null,
+          "last_iteration": null,
+          "series": []
+        }
+      },
+      "iterations_completed": 3000,
+      "classification": "unresolved",
+      "final_checkpoint_is_3000_checkpoint": true,
+      "metrics": {
+        "study_id": "split_inlet_mesh_convergence_20260801",
+        "mesh_name": "mesh-600k",
+        "classification": "unresolved",
+        "mesh_metrics": {
+          "cells": 3609102,
+          "faces": 7273531,
+          "nodes": 627514,
+          "partitions": 16,
+          "minimum_cell_volume_m3": 3.499136e-09,
+          "maximum_cell_volume_m3": 1.983998e-05,
+          "domain_volume_m3": 22.65799,
+          "minimum_face_area_m2": 2.990916e-06,
+          "maximum_face_area_m2": 0.001723463,
+          "negative_volume_reported": false,
+          "raw_check_contains_error": false,
+          "minimum_orthogonal_quality": 0.191653,
+          "maximum_aspect_ratio": 18.4352,
+          "characteristic_size_m": 0.01844763688279676
+        },
+        "final_metrics": {
+          "iteration": 3000,
+          "mixture_liquidinlet_kgs": 116.92,
+          "mixture_steaminlet_kgs": 80.69,
+          "mixture_steamoutlet_kgs": -81.457948,
+          "mixture_net_kgs": 116.15205,
+          "mixture_imbalance_percent": 58.77842720510096,
+          "vapor_liquidinlet_kgs": -0.0,
+          "vapor_steaminlet_kgs": 80.69,
+          "vapor_steamoutlet_kgs": -81.445409,
+          "vapor_net_kgs": -0.75540942,
+          "vapor_imbalance_percent": 0.9361871607386293,
+          "liquid_liquidinlet_kgs": 116.92,
+          "liquid_steaminlet_kgs": -0.0,
+          "liquid_steamoutlet_kgs": -0.012505558,
+          "liquid_net_kgs": 116.90749,
+          "liquid_imbalance_percent": 99.98930037632569,
+          "carrier_outlet_quality_percent_trend_only": 99.98464782941245,
+          "inlet_mass_weighted_pressure_pa": 1148928.7,
+          "outlet_mass_weighted_pressure_pa": 1119928.2,
+          "pressure_drop_pa": 29000.5,
+          "outlet_area_weighted_velocity_ms": 47.780579,
+          "domain_volume_avg_velocity_ms": 32.12963,
+          "domain_volume_avg_vorticity_s-1": 77.798915
+        },
+        "monitor_stability_2500_3000": {
+          "pressure_drop_pa": {
+            "samples": 3,
+            "minimum": 27469.0,
+            "maximum": 29000.5,
+            "mean": 28311.76666666668,
+            "drift_percent": 5.409411634502966
+          },
+          "vapor_steamoutlet_kgs": {
+            "samples": 3,
+            "minimum": -81.485922,
+            "maximum": -81.445409,
+            "mean": -81.470191,
+            "drift_percent": 0.049727390475866495
+          },
+          "liquid_steamoutlet_kgs": {
+            "samples": 3,
+            "minimum": -0.012505558,
+            "maximum": -0.00024266409,
+            "mean": -0.004657992296666667,
+            "drift_percent": 263.2656545777356
+          },
+          "carrier_outlet_quality_percent_trend_only": {
+            "samples": 3,
+            "minimum": 99.98464782941245,
+            "maximum": 99.9997021776819,
+            "mean": 99.99428192542105,
+            "drift_percent": 0.015055209137531018
+          },
+          "outlet_area_weighted_velocity_ms": {
+            "samples": 3,
+            "minimum": 47.466711,
+            "maximum": 47.780579,
+            "mean": 47.66743133333333,
+            "drift_percent": 0.6584537727765538
+          },
+          "domain_volume_avg_velocity_ms": {
+            "samples": 3,
+            "minimum": 30.75234,
+            "maximum": 32.12963,
+            "mean": 31.492589666666664,
+            "drift_percent": 4.373378037747691
+          },
+          "domain_volume_avg_vorticity_s-1": {
+            "samples": 3,
+            "minimum": 77.798915,
+            "maximum": 78.209313,
+            "mean": 78.01985233333333,
+            "drift_percent": 0.5260174016308174
+          }
+        },
+        "acceptance": {
+          "phase_and_mixture_balance_pass": false,
+          "primary_monitor_stability_pass": false,
+          "secondary_monitor_stability_pass": false
+        },
+        "quality_metric_text_file": "mesh-600k_mesh_quality.txt",
+        "carrier_quality_scope": "trend-only; bottom is a wall and steamoutlet is the only carrier outlet"
+      },
+      "completed_epoch": 1785555467.7670348
+    },
+    {
+      "mesh_name": "mesh-900k",
+      "status": "completed",
+      "iterations_requested": 3000,
+      "block_size": 250,
+      "checkpoints": {
+        "initialized": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_900k\\mesh-900k_initialized.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_900k\\mesh-900k_initialized.dat.h5"
+        },
+        "1000": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_900k\\mesh-900k_checkpoint_1000.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_900k\\mesh-900k_checkpoint_1000.dat.h5"
+        },
+        "2000": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_900k\\mesh-900k_checkpoint_2000.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_900k\\mesh-900k_checkpoint_2000.dat.h5"
+        },
+        "3000": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_900k\\mesh-900k_iter3000_final.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_900k\\mesh-900k_iter3000_final.dat.h5"
+        }
+      },
+      "iteration_evidence": [
+        {
+          "block_end": 250,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 0,
+              "first_iteration": null,
+              "last_iteration": null,
+              "series": []
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 250,
+              "first_iteration": 1.0,
+              "last_iteration": 250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 500,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 250,
+              "first_iteration": 1.0,
+              "last_iteration": 250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 501,
+              "first_iteration": 1.0,
+              "last_iteration": 500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 750,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 501,
+              "first_iteration": 1.0,
+              "last_iteration": 500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 752,
+              "first_iteration": 1.0,
+              "last_iteration": 750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 1000,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 752,
+              "first_iteration": 1.0,
+              "last_iteration": 750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 1003,
+              "first_iteration": 1.0,
+              "last_iteration": 1000.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 1250,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 1003,
+              "first_iteration": 1.0,
+              "last_iteration": 1000.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 1254,
+              "first_iteration": 1.0,
+              "last_iteration": 1250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 1500,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 1254,
+              "first_iteration": 1.0,
+              "last_iteration": 1250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 1505,
+              "first_iteration": 1.0,
+              "last_iteration": 1500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 1750,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 1505,
+              "first_iteration": 1.0,
+              "last_iteration": 1500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 1756,
+              "first_iteration": 1.0,
+              "last_iteration": 1750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 2000,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 1756,
+              "first_iteration": 1.0,
+              "last_iteration": 1750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2007,
+              "first_iteration": 1.0,
+              "last_iteration": 2000.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 2250,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 2007,
+              "first_iteration": 1.0,
+              "last_iteration": 2000.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2258,
+              "first_iteration": 1.0,
+              "last_iteration": 2250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 2500,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 2258,
+              "first_iteration": 1.0,
+              "last_iteration": 2250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2509,
+              "first_iteration": 1.0,
+              "last_iteration": 2500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 2750,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 2509,
+              "first_iteration": 1.0,
+              "last_iteration": 2500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2760,
+              "first_iteration": 1.0,
+              "last_iteration": 2750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 3000,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 2760,
+              "first_iteration": 1.0,
+              "last_iteration": 2750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 3011,
+              "first_iteration": 1.0,
+              "last_iteration": 3000.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        }
+      ],
+      "started_epoch": 1785598554.8246841,
+      "initial_monitor_snapshot": {
+        "residual": {
+          "points": 0,
+          "first_iteration": null,
+          "last_iteration": null,
+          "series": []
+        }
+      },
+      "iterations_completed": 3000,
+      "classification": "unresolved",
+      "final_checkpoint_is_3000_checkpoint": true,
+      "metrics": {
+        "study_id": "split_inlet_mesh_convergence_20260801",
+        "mesh_name": "mesh-900k",
+        "classification": "unresolved",
+        "mesh_metrics": {
+          "cells": 5335623,
+          "faces": 10743466,
+          "nodes": 923066,
+          "partitions": 16,
+          "minimum_cell_volume_m3": 3.343321e-09,
+          "maximum_cell_volume_m3": 1.374732e-05,
+          "domain_volume_m3": 22.65842,
+          "minimum_face_area_m2": 3.078478e-06,
+          "maximum_face_area_m2": 0.001217861,
+          "negative_volume_reported": false,
+          "raw_check_contains_error": false,
+          "minimum_orthogonal_quality": 0.202194,
+          "maximum_aspect_ratio": 20.1267,
+          "characteristic_size_m": 0.016193777290986103
+        },
+        "final_metrics": {
+          "iteration": 3000,
+          "mixture_liquidinlet_kgs": 116.92,
+          "mixture_steaminlet_kgs": 80.69,
+          "mixture_steamoutlet_kgs": -81.447445,
+          "mixture_net_kgs": 116.16256,
+          "mixture_imbalance_percent": 58.783745761854156,
+          "vapor_liquidinlet_kgs": -0.0,
+          "vapor_steaminlet_kgs": 80.69,
+          "vapor_steamoutlet_kgs": -81.447366,
+          "vapor_net_kgs": -0.75736557,
+          "vapor_imbalance_percent": 0.9386114388400051,
+          "liquid_liquidinlet_kgs": 116.92,
+          "liquid_steaminlet_kgs": -0.0,
+          "liquid_steamoutlet_kgs": -7.9523657e-05,
+          "liquid_net_kgs": 116.91992,
+          "liquid_imbalance_percent": 99.99993157714677,
+          "carrier_outlet_quality_percent_trend_only": 99.99990236199982,
+          "inlet_mass_weighted_pressure_pa": 1147571.2,
+          "outlet_mass_weighted_pressure_pa": 1119911.9,
+          "pressure_drop_pa": 27659.300000000047,
+          "outlet_area_weighted_velocity_ms": 46.235079,
+          "domain_volume_avg_velocity_ms": 30.812358,
+          "domain_volume_avg_vorticity_s-1": 82.390877
+        },
+        "monitor_stability_2500_3000": {
+          "pressure_drop_pa": {
+            "samples": 3,
+            "minimum": 25117.700000000186,
+            "maximum": 27659.300000000047,
+            "mean": 26337.166666666744,
+            "drift_percent": 9.650240787732873
+          },
+          "vapor_steamoutlet_kgs": {
+            "samples": 3,
+            "minimum": -81.471645,
+            "maximum": -81.441877,
+            "mean": -81.45362933333332,
+            "drift_percent": 0.03654594674740668
+          },
+          "liquid_steamoutlet_kgs": {
+            "samples": 3,
+            "minimum": -0.0010788518,
+            "maximum": -7.9523657e-05,
+            "mean": -0.0004808763323333333,
+            "drift_percent": 207.81395876794517
+          },
+          "carrier_outlet_quality_percent_trend_only": {
+            "samples": 3,
+            "minimum": 99.99867532828503,
+            "maximum": 99.99990236199982,
+            "mean": 99.99940959758855,
+            "drift_percent": 0.0012270409592633556
+          },
+          "outlet_area_weighted_velocity_ms": {
+            "samples": 3,
+            "minimum": 44.090155,
+            "maximum": 46.235079,
+            "mean": 45.266954999999996,
+            "drift_percent": 4.738388080223192
+          },
+          "domain_volume_avg_velocity_ms": {
+            "samples": 3,
+            "minimum": 28.789757,
+            "maximum": 30.812358,
+            "mean": 29.839776666666666,
+            "drift_percent": 6.778204215782216
+          },
+          "domain_volume_avg_vorticity_s-1": {
+            "samples": 3,
+            "minimum": 81.179005,
+            "maximum": 82.390877,
+            "mean": 81.75231966666666,
+            "drift_percent": 1.4823701699734435
+          }
+        },
+        "acceptance": {
+          "phase_and_mixture_balance_pass": false,
+          "primary_monitor_stability_pass": false,
+          "secondary_monitor_stability_pass": false
+        },
+        "quality_metric_text_file": "mesh-900k_mesh_quality.txt",
+        "carrier_quality_scope": "trend-only; bottom is a wall and steamoutlet is the only carrier outlet"
+      },
+      "completed_epoch": 1785614758.138552
+    },
+    {
+      "mesh_name": "mesh-1600k",
+      "status": "completed",
+      "iterations_requested": 3000,
+      "block_size": 250,
+      "checkpoints": {
+        "initialized": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_1600k\\mesh-1600k_initialized.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_1600k\\mesh-1600k_initialized.dat.h5"
+        },
+        "663": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_1600k\\mesh-1600k_recovered_iter663.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_1600k\\mesh-1600k_recovered_iter663.dat.h5",
+          "classification": "recovery"
+        },
+        "1000": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_1600k\\mesh-1600k_checkpoint_1000.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_1600k\\mesh-1600k_checkpoint_1000.dat.h5"
+        },
+        "2000": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_1600k\\mesh-1600k_checkpoint_2000.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_1600k\\mesh-1600k_checkpoint_2000.dat.h5"
+        },
+        "3000": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_1600k\\mesh-1600k_iter3000_final.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_1600k\\mesh-1600k_iter3000_final.dat.h5"
+        }
+      },
+      "iteration_evidence": [
+        {
+          "block_end": 250,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 0,
+              "first_iteration": null,
+              "last_iteration": null,
+              "series": []
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 250,
+              "first_iteration": 1.0,
+              "last_iteration": 250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 500,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 250,
+              "first_iteration": 1.0,
+              "last_iteration": 250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 501,
+              "first_iteration": 1.0,
+              "last_iteration": 500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 750,
+          "requested": 87,
+          "before": {
+            "residual": {
+              "points": 0,
+              "first_iteration": null,
+              "last_iteration": null,
+              "series": []
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 838,
+              "first_iteration": 1.0,
+              "last_iteration": 837.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "continuation": true
+        },
+        {
+          "block_end": 1000,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 838,
+              "first_iteration": 1.0,
+              "last_iteration": 837.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 1089,
+              "first_iteration": 1.0,
+              "last_iteration": 1087.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "continuation": true
+        },
+        {
+          "block_end": 1250,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 1089,
+              "first_iteration": 1.0,
+              "last_iteration": 1087.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 1340,
+              "first_iteration": 1.0,
+              "last_iteration": 1337.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "continuation": true
+        },
+        {
+          "block_end": 1500,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 1340,
+              "first_iteration": 1.0,
+              "last_iteration": 1337.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 1591,
+              "first_iteration": 1.0,
+              "last_iteration": 1587.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "continuation": true
+        },
+        {
+          "block_end": 1750,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 1591,
+              "first_iteration": 1.0,
+              "last_iteration": 1587.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 1842,
+              "first_iteration": 1.0,
+              "last_iteration": 1837.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "continuation": true
+        },
+        {
+          "block_end": 2000,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 1842,
+              "first_iteration": 1.0,
+              "last_iteration": 1837.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2093,
+              "first_iteration": 1.0,
+              "last_iteration": 2087.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "continuation": true
+        },
+        {
+          "block_end": 2250,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 2093,
+              "first_iteration": 1.0,
+              "last_iteration": 2087.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2344,
+              "first_iteration": 1.0,
+              "last_iteration": 2337.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "continuation": true
+        },
+        {
+          "block_end": 2500,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 2344,
+              "first_iteration": 1.0,
+              "last_iteration": 2337.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2595,
+              "first_iteration": 1.0,
+              "last_iteration": 2587.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "continuation": true
+        },
+        {
+          "block_end": 2750,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 2595,
+              "first_iteration": 1.0,
+              "last_iteration": 2587.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2846,
+              "first_iteration": 1.0,
+              "last_iteration": 2837.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "continuation": true
+        },
+        {
+          "block_end": 3000,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 2846,
+              "first_iteration": 1.0,
+              "last_iteration": 2837.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 3097,
+              "first_iteration": 1.0,
+              "last_iteration": 3087.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "continuation": true
+        }
+      ],
+      "started_epoch": 1785555467.8461592,
+      "initial_monitor_snapshot": {
+        "residual": {
+          "points": 0,
+          "first_iteration": null,
+          "last_iteration": null,
+          "series": []
+        }
+      },
+      "iterations_completed": 3000,
+      "classification": "unresolved",
+      "failure_category": "unknown",
+      "error": "RuntimeError: Stream removed (recvmsg:Can't assign requested address)",
+      "completed_epoch": 1785598554.709718,
+      "resumed_epoch": 1785573237.2023418,
+      "resume": {
+        "starting_iterations": 663,
+        "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_1600k\\mesh-1600k_recovered_iter663.cas.h5",
+        "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_1600k\\mesh-1600k_recovered_iter663.dat.h5",
+        "reason": "gRPC stream removed during the 500-750 block"
+      },
+      "resume_validation": {
+        "zones": {
+          "face_roles": {
+            "liquidinlet": {
+              "name": "liquidinlet",
+              "category": "mass_flow_inlet"
+            },
+            "steaminlet": {
+              "name": "steaminlet",
+              "category": "mass_flow_inlet"
+            },
+            "steamoutlet": {
+              "name": "steamoutlet",
+              "category": "pressure_outlet"
+            },
+            "bottom": {
+              "name": "bottom",
+              "category": "wall"
+            },
+            "wall-fluid": {
+              "name": "wall-fluid",
+              "category": "wall"
+            }
+          },
+          "cell_roles": {
+            "fluid": {
+              "name": "fluid",
+              "category": "fluid"
+            }
+          },
+          "renames": [],
+          "available_face_zones": {
+            "interior-fluid": "interior",
+            "liquidinlet": "mass_flow_inlet",
+            "steaminlet": "mass_flow_inlet",
+            "steamoutlet": "pressure_outlet",
+            "bottom": "wall",
+            "wall-fluid": "wall",
+            "general_nrbc": "non_reflecting_bc",
+            "turbo_sepcific_nrbc": "non_reflecting_bc",
+            "setup_method": "perforated_wall",
+            "model_setup": "perforated_wall",
+            "mass_flow": "settings",
+            "pressure_outlet": "settings",
+            "target_mass_flow_rate_settings": "settings",
+            "advanced": "settings"
+          },
+          "available_cell_zones": {
+            "fluid": "fluid"
+          }
+        },
+        "mesh_metrics": {
+          "cells": 9720194,
+          "faces": 19551598,
+          "nodes": 1671365,
+          "partitions": 16,
+          "minimum_cell_volume_m3": 2.856506e-09,
+          "maximum_cell_volume_m3": 6.806459e-06,
+          "domain_volume_m3": 22.65877,
+          "minimum_face_area_m2": 3.477119e-06,
+          "maximum_face_area_m2": 0.0007675724,
+          "negative_volume_reported": false,
+          "raw_check_contains_error": false,
+          "minimum_orthogonal_quality": 0.200348,
+          "maximum_aspect_ratio": 19.5466,
+          "characteristic_size_m": 0.013259296005702805
+        },
+        "settings": "accepted",
+        "dpm_interaction": {
+          "enabled": false
+        }
+      },
+      "final_checkpoint_is_3000_checkpoint": true,
+      "metrics": {
+        "study_id": "split_inlet_mesh_convergence_20260801",
+        "mesh_name": "mesh-1600k",
+        "classification": "unresolved",
+        "mesh_metrics": {
+          "cells": 9720194,
+          "faces": 19551598,
+          "nodes": 1671365,
+          "partitions": 16,
+          "minimum_cell_volume_m3": 2.856506e-09,
+          "maximum_cell_volume_m3": 6.806459e-06,
+          "domain_volume_m3": 22.65877,
+          "minimum_face_area_m2": 3.477119e-06,
+          "maximum_face_area_m2": 0.0007675724,
+          "negative_volume_reported": false,
+          "raw_check_contains_error": false,
+          "minimum_orthogonal_quality": 0.200348,
+          "maximum_aspect_ratio": 19.5466,
+          "characteristic_size_m": 0.013259296005702805
+        },
+        "final_metrics": {
+          "iteration": 3000,
+          "mixture_liquidinlet_kgs": 116.92,
+          "mixture_steaminlet_kgs": 80.69,
+          "mixture_steamoutlet_kgs": -81.46131,
+          "mixture_net_kgs": 116.14869,
+          "mixture_imbalance_percent": 58.77672688629117,
+          "vapor_liquidinlet_kgs": -0.0,
+          "vapor_steaminlet_kgs": 80.69,
+          "vapor_steamoutlet_kgs": -81.461226,
+          "vapor_net_kgs": -0.7712262,
+          "vapor_imbalance_percent": 0.9557890692774818,
+          "liquid_liquidinlet_kgs": 116.92,
+          "liquid_steaminlet_kgs": -0.0,
+          "liquid_steamoutlet_kgs": -8.3918856e-05,
+          "liquid_net_kgs": 116.91992,
+          "liquid_imbalance_percent": 99.99993157714677,
+          "carrier_outlet_quality_percent_trend_only": 99.99989698317387,
+          "inlet_mass_weighted_pressure_pa": 1145197.4,
+          "outlet_mass_weighted_pressure_pa": 1119936.4,
+          "pressure_drop_pa": 25261.0,
+          "outlet_area_weighted_velocity_ms": 43.046864,
+          "domain_volume_avg_velocity_ms": 28.140247,
+          "domain_volume_avg_vorticity_s-1": 85.849516
+        },
+        "monitor_stability_2500_3000": {
+          "pressure_drop_pa": {
+            "samples": 3,
+            "minimum": 23281.199999999953,
+            "maximum": 25261.0,
+            "mean": 24249.833333333332,
+            "drift_percent": 8.164179822541929
+          },
+          "vapor_steamoutlet_kgs": {
+            "samples": 3,
+            "minimum": -81.467178,
+            "maximum": -81.461226,
+            "mean": -81.464728,
+            "drift_percent": 0.007306229513229001
+          },
+          "liquid_steamoutlet_kgs": {
+            "samples": 3,
+            "minimum": -8.3918856e-05,
+            "maximum": -5.8258632e-07,
+            "mean": -2.928606687333333e-05,
+            "drift_percent": 284.5594461026193
+          },
+          "carrier_outlet_quality_percent_trend_only": {
+            "samples": 3,
+            "minimum": 99.99989698317387,
+            "maximum": 99.99999928486989,
+            "mean": 99.9999640492209,
+            "drift_percent": 0.0001023017327958182
+          },
+          "outlet_area_weighted_velocity_ms": {
+            "samples": 3,
+            "minimum": 42.799856,
+            "maximum": 43.609886,
+            "mean": 43.152201999999996,
+            "drift_percent": 1.8771463852528425
+          },
+          "domain_volume_avg_velocity_ms": {
+            "samples": 3,
+            "minimum": 25.795635,
+            "maximum": 28.140247,
+            "mean": 26.982762666666662,
+            "drift_percent": 8.689295566077933
+          },
+          "domain_volume_avg_vorticity_s-1": {
+            "samples": 3,
+            "minimum": 85.300303,
+            "maximum": 85.849516,
+            "mean": 85.54116433333333,
+            "drift_percent": 0.642045270578553
+          }
+        },
+        "acceptance": {
+          "phase_and_mixture_balance_pass": false,
+          "primary_monitor_stability_pass": false,
+          "secondary_monitor_stability_pass": false
+        },
+        "quality_metric_text_file": "mesh-1600k_mesh_quality.txt",
+        "carrier_quality_scope": "trend-only; bottom is a wall and steamoutlet is the only carrier outlet",
+        "continuation": {
+          "resumed": true,
+          "starting_iterations": 663,
+          "recovery_case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_1600k\\mesh-1600k_recovered_iter663.cas.h5",
+          "recovery_data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_1600k\\mesh-1600k_recovered_iter663.dat.h5"
+        }
+      }
+    },
+    {
+      "mesh_name": "mesh-1900k",
+      "status": "completed",
+      "iterations_requested": 3000,
+      "block_size": 250,
+      "checkpoints": {
+        "initialized": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_1900k\\mesh-1900k_initialized.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_1900k\\mesh-1900k_initialized.dat.h5"
+        },
+        "1000": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_1900k\\mesh-1900k_checkpoint_1000.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_1900k\\mesh-1900k_checkpoint_1000.dat.h5"
+        },
+        "2000": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_1900k\\mesh-1900k_checkpoint_2000.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_1900k\\mesh-1900k_checkpoint_2000.dat.h5"
+        },
+        "3000": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_1900k\\mesh-1900k_iter3000_final.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_1900k\\mesh-1900k_iter3000_final.dat.h5"
+        }
+      },
+      "iteration_evidence": [
+        {
+          "block_end": 250,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 0,
+              "first_iteration": null,
+              "last_iteration": null,
+              "series": []
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 250,
+              "first_iteration": 1.0,
+              "last_iteration": 250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 500,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 250,
+              "first_iteration": 1.0,
+              "last_iteration": 250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 501,
+              "first_iteration": 1.0,
+              "last_iteration": 500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 750,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 501,
+              "first_iteration": 1.0,
+              "last_iteration": 500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 752,
+              "first_iteration": 1.0,
+              "last_iteration": 750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 1000,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 752,
+              "first_iteration": 1.0,
+              "last_iteration": 750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 1003,
+              "first_iteration": 1.0,
+              "last_iteration": 1000.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 1250,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 1003,
+              "first_iteration": 1.0,
+              "last_iteration": 1000.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 1254,
+              "first_iteration": 1.0,
+              "last_iteration": 1250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 1500,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 1254,
+              "first_iteration": 1.0,
+              "last_iteration": 1250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 1505,
+              "first_iteration": 1.0,
+              "last_iteration": 1500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 1750,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 1505,
+              "first_iteration": 1.0,
+              "last_iteration": 1500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 1756,
+              "first_iteration": 1.0,
+              "last_iteration": 1750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 2000,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 1756,
+              "first_iteration": 1.0,
+              "last_iteration": 1750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2007,
+              "first_iteration": 1.0,
+              "last_iteration": 2000.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 2250,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 2007,
+              "first_iteration": 1.0,
+              "last_iteration": 2000.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2258,
+              "first_iteration": 1.0,
+              "last_iteration": 2250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 2500,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 2258,
+              "first_iteration": 1.0,
+              "last_iteration": 2250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2509,
+              "first_iteration": 1.0,
+              "last_iteration": 2500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 2750,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 2509,
+              "first_iteration": 1.0,
+              "last_iteration": 2500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2760,
+              "first_iteration": 1.0,
+              "last_iteration": 2750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 3000,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 2760,
+              "first_iteration": 1.0,
+              "last_iteration": 2750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 3011,
+              "first_iteration": 1.0,
+              "last_iteration": 3000.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        }
+      ],
+      "started_epoch": 1785614758.225003,
+      "initial_monitor_snapshot": {
+        "residual": {
+          "points": 0,
+          "first_iteration": null,
+          "last_iteration": null,
+          "series": []
+        }
+      },
+      "iterations_completed": 3000,
+      "classification": "unresolved",
+      "final_checkpoint_is_3000_checkpoint": true,
+      "metrics": {
+        "study_id": "split_inlet_mesh_convergence_20260801",
+        "mesh_name": "mesh-1900k",
+        "classification": "unresolved",
+        "mesh_metrics": {
+          "cells": 10756635,
+          "faces": 21632380,
+          "nodes": 1847485,
+          "partitions": 16,
+          "minimum_cell_volume_m3": 2.01281e-09,
+          "maximum_cell_volume_m3": 6.035957e-06,
+          "domain_volume_m3": 22.65884,
+          "minimum_face_area_m2": 3.258331e-06,
+          "maximum_face_area_m2": 0.0007730135,
+          "negative_volume_reported": false,
+          "raw_check_contains_error": false,
+          "minimum_orthogonal_quality": 0.200177,
+          "maximum_aspect_ratio": 18.7413,
+          "characteristic_size_m": 0.0128189881735126
+        },
+        "final_metrics": {
+          "iteration": 3000,
+          "mixture_liquidinlet_kgs": 116.92,
+          "mixture_steaminlet_kgs": 80.69,
+          "mixture_steamoutlet_kgs": -81.466436,
+          "mixture_net_kgs": 116.14356,
+          "mixture_imbalance_percent": 58.77413086382267,
+          "vapor_liquidinlet_kgs": -0.0,
+          "vapor_steaminlet_kgs": 80.69,
+          "vapor_steamoutlet_kgs": -81.466425,
+          "vapor_net_kgs": -0.77642473,
+          "vapor_imbalance_percent": 0.9622316643945966,
+          "liquid_liquidinlet_kgs": 116.92,
+          "liquid_steaminlet_kgs": -0.0,
+          "liquid_steamoutlet_kgs": -1.1137203e-05,
+          "liquid_net_kgs": 116.91999,
+          "liquid_imbalance_percent": 99.99999144714334,
+          "carrier_outlet_quality_percent_trend_only": 99.99998632909019,
+          "inlet_mass_weighted_pressure_pa": 1143954.2,
+          "outlet_mass_weighted_pressure_pa": 1119940.1,
+          "pressure_drop_pa": 24014.09999999986,
+          "outlet_area_weighted_velocity_ms": 44.147081,
+          "domain_volume_avg_velocity_ms": 26.915994,
+          "domain_volume_avg_vorticity_s-1": 86.006853
+        },
+        "monitor_stability_2500_3000": {
+          "pressure_drop_pa": {
+            "samples": 3,
+            "minimum": 23377.59999999986,
+            "maximum": 24014.09999999986,
+            "mean": 23632.699999999953,
+            "drift_percent": 2.693302077206588
+          },
+          "vapor_steamoutlet_kgs": {
+            "samples": 3,
+            "minimum": -81.467663,
+            "maximum": -81.45661,
+            "mean": -81.463566,
+            "drift_percent": 0.01356802868168572
+          },
+          "liquid_steamoutlet_kgs": {
+            "samples": 3,
+            "minimum": -1.1137203e-05,
+            "maximum": -2.352729e-08,
+            "mean": -4.860706030000001e-06,
+            "drift_percent": 228.64323909751027
+          },
+          "carrier_outlet_quality_percent_trend_only": {
+            "samples": 3,
+            "minimum": 99.99998632909019,
+            "maximum": 99.9999999711207,
+            "mean": 99.99999403331769,
+            "drift_percent": 1.3642031323662935e-05
+          },
+          "outlet_area_weighted_velocity_ms": {
+            "samples": 3,
+            "minimum": 42.51817,
+            "maximum": 44.147081,
+            "mean": 43.25236066666667,
+            "drift_percent": 3.766062649281838
+          },
+          "domain_volume_avg_velocity_ms": {
+            "samples": 3,
+            "minimum": 24.548884,
+            "maximum": 26.915994,
+            "mean": 25.742624000000003,
+            "drift_percent": 9.195294154939294
+          },
+          "domain_volume_avg_vorticity_s-1": {
+            "samples": 3,
+            "minimum": 85.601653,
+            "maximum": 86.006853,
+            "mean": 85.77910833333334,
+            "drift_percent": 0.47237609235272154
+          }
+        },
+        "acceptance": {
+          "phase_and_mixture_balance_pass": false,
+          "primary_monitor_stability_pass": false,
+          "secondary_monitor_stability_pass": false
+        },
+        "quality_metric_text_file": "mesh-1900k_mesh_quality.txt",
+        "carrier_quality_scope": "trend-only; bottom is a wall and steamoutlet is the only carrier outlet"
+      },
+      "completed_epoch": 1785650020.908145
+    },
+    {
+      "mesh_name": "mesh-2000k",
+      "status": "completed",
+      "iterations_requested": 3000,
+      "block_size": 250,
+      "checkpoints": {
+        "initialized": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2000k\\mesh-2000k_initialized.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2000k\\mesh-2000k_initialized.dat.h5"
+        },
+        "1000": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2000k\\mesh-2000k_checkpoint_1000.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2000k\\mesh-2000k_checkpoint_1000.dat.h5"
+        },
+        "2000": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2000k\\mesh-2000k_checkpoint_2000.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2000k\\mesh-2000k_checkpoint_2000.dat.h5"
+        },
+        "3000": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2000k\\mesh-2000k_iter3000_final.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2000k\\mesh-2000k_iter3000_final.dat.h5"
+        }
+      },
+      "iteration_evidence": [
+        {
+          "block_end": 250,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 0,
+              "first_iteration": null,
+              "last_iteration": null,
+              "series": []
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 250,
+              "first_iteration": 1.0,
+              "last_iteration": 250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 500,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 250,
+              "first_iteration": 1.0,
+              "last_iteration": 250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 501,
+              "first_iteration": 1.0,
+              "last_iteration": 500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 750,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 501,
+              "first_iteration": 1.0,
+              "last_iteration": 500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 752,
+              "first_iteration": 1.0,
+              "last_iteration": 750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 1000,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 752,
+              "first_iteration": 1.0,
+              "last_iteration": 750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 1003,
+              "first_iteration": 1.0,
+              "last_iteration": 1000.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 1250,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 1003,
+              "first_iteration": 1.0,
+              "last_iteration": 1000.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 1254,
+              "first_iteration": 1.0,
+              "last_iteration": 1250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 1500,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 1254,
+              "first_iteration": 1.0,
+              "last_iteration": 1250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 1505,
+              "first_iteration": 1.0,
+              "last_iteration": 1500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 1750,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 1505,
+              "first_iteration": 1.0,
+              "last_iteration": 1500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 1756,
+              "first_iteration": 1.0,
+              "last_iteration": 1750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 2000,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 1756,
+              "first_iteration": 1.0,
+              "last_iteration": 1750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2007,
+              "first_iteration": 1.0,
+              "last_iteration": 2000.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 2250,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 2007,
+              "first_iteration": 1.0,
+              "last_iteration": 2000.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2258,
+              "first_iteration": 1.0,
+              "last_iteration": 2250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 2500,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 2258,
+              "first_iteration": 1.0,
+              "last_iteration": 2250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2509,
+              "first_iteration": 1.0,
+              "last_iteration": 2500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 2750,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 2509,
+              "first_iteration": 1.0,
+              "last_iteration": 2500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2760,
+              "first_iteration": 1.0,
+              "last_iteration": 2750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 3000,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 2760,
+              "first_iteration": 1.0,
+              "last_iteration": 2750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 3011,
+              "first_iteration": 1.0,
+              "last_iteration": 3000.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        }
+      ],
+      "started_epoch": 1785650021.339156,
+      "initial_monitor_snapshot": {
+        "residual": {
+          "points": 0,
+          "first_iteration": null,
+          "last_iteration": null,
+          "series": []
+        }
+      },
+      "iterations_completed": 3000,
+      "classification": "unresolved",
+      "final_checkpoint_is_3000_checkpoint": true,
+      "metrics": {
+        "study_id": "split_inlet_mesh_convergence_20260801",
+        "mesh_name": "mesh-2000k",
+        "classification": "unresolved",
+        "mesh_metrics": {
+          "cells": 11959759,
+          "faces": 24047528,
+          "nodes": 2052088,
+          "partitions": 16,
+          "minimum_cell_volume_m3": 2.695387e-09,
+          "maximum_cell_volume_m3": 5.606856e-06,
+          "domain_volume_m3": 22.65888,
+          "minimum_face_area_m2": 3.908583e-06,
+          "maximum_face_area_m2": 0.0007043617,
+          "negative_volume_reported": false,
+          "raw_check_contains_error": false,
+          "minimum_orthogonal_quality": 0.198112,
+          "maximum_aspect_ratio": 17.8078,
+          "characteristic_size_m": 0.012373863960638923
+        },
+        "final_metrics": {
+          "iteration": 3000,
+          "mixture_liquidinlet_kgs": 116.92,
+          "mixture_steaminlet_kgs": 80.69,
+          "mixture_steamoutlet_kgs": -81.46249,
+          "mixture_net_kgs": 116.14751,
+          "mixture_imbalance_percent": 58.77612975051869,
+          "vapor_liquidinlet_kgs": -0.0,
+          "vapor_steaminlet_kgs": 80.69,
+          "vapor_steamoutlet_kgs": -81.462457,
+          "vapor_net_kgs": -0.77245678,
+          "vapor_imbalance_percent": 0.9573141405378609,
+          "liquid_liquidinlet_kgs": 116.92,
+          "liquid_steaminlet_kgs": -0.0,
+          "liquid_steamoutlet_kgs": -3.3556236e-05,
+          "liquid_net_kgs": 116.91997,
+          "liquid_imbalance_percent": 99.99997434143005,
+          "carrier_outlet_quality_percent_trend_only": 99.99995880774603,
+          "inlet_mass_weighted_pressure_pa": 1144091.1,
+          "outlet_mass_weighted_pressure_pa": 1119955.6,
+          "pressure_drop_pa": 24135.5,
+          "outlet_area_weighted_velocity_ms": 42.5582,
+          "domain_volume_avg_velocity_ms": 26.48653,
+          "domain_volume_avg_vorticity_s-1": 86.890456
+        },
+        "monitor_stability_2500_3000": {
+          "pressure_drop_pa": {
+            "samples": 3,
+            "minimum": 23549.299999999814,
+            "maximum": 24135.5,
+            "mean": 23864.066666666575,
+            "drift_percent": 2.4564128494452824
+          },
+          "vapor_steamoutlet_kgs": {
+            "samples": 3,
+            "minimum": -81.466852,
+            "maximum": -81.451108,
+            "mean": -81.46013900000001,
+            "drift_percent": 0.01932724421204091
+          },
+          "liquid_steamoutlet_kgs": {
+            "samples": 3,
+            "minimum": -3.3556236e-05,
+            "maximum": -2.0058347e-07,
+            "mean": -1.3166087223333334e-05,
+            "drift_percent": 253.34521915429903
+          },
+          "carrier_outlet_quality_percent_trend_only": {
+            "samples": 3,
+            "minimum": 99.99995880774603,
+            "maximum": 99.99999975378516,
+            "mean": 99.99998383752956,
+            "drift_percent": 4.094604575318481e-05
+          },
+          "outlet_area_weighted_velocity_ms": {
+            "samples": 3,
+            "minimum": 42.347798,
+            "maximum": 42.5582,
+            "mean": 42.44931233333333,
+            "drift_percent": 0.4956546724427942
+          },
+          "domain_volume_avg_velocity_ms": {
+            "samples": 3,
+            "minimum": 24.16176,
+            "maximum": 26.48653,
+            "mean": 25.341701333333333,
+            "drift_percent": 9.173693468410109
+          },
+          "domain_volume_avg_vorticity_s-1": {
+            "samples": 3,
+            "minimum": 85.666187,
+            "maximum": 87.254485,
+            "mean": 86.60370933333333,
+            "drift_percent": 1.833983800724666
+          }
+        },
+        "acceptance": {
+          "phase_and_mixture_balance_pass": false,
+          "primary_monitor_stability_pass": false,
+          "secondary_monitor_stability_pass": false
+        },
+        "quality_metric_text_file": "mesh-2000k_mesh_quality.txt",
+        "carrier_quality_scope": "trend-only; bottom is a wall and steamoutlet is the only carrier outlet"
+      },
+      "completed_epoch": 1785690219.418473
+    },
+    {
+      "mesh_name": "mesh-2300k",
+      "status": "completed",
+      "iterations_requested": 3000,
+      "block_size": 250,
+      "checkpoints": {
+        "initialized": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_initialized.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_initialized.dat.h5"
+        },
+        "1000": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_checkpoint_1000.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_checkpoint_1000.dat.h5"
+        },
+        "2000": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_checkpoint_2000.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_checkpoint_2000.dat.h5",
+          "classification": "recovery"
+        },
+        "2500": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_checkpoint_2500.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_checkpoint_2500.dat.h5",
+          "classification": "recovery"
+        },
+        "3000": {
+          "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_iter3000_final.cas.h5",
+          "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_iter3000_final.dat.h5"
+        }
+      },
+      "iteration_evidence": [
+        {
+          "block_end": 250,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 0,
+              "first_iteration": null,
+              "last_iteration": null,
+              "series": []
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 250,
+              "first_iteration": 1.0,
+              "last_iteration": 250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 500,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 250,
+              "first_iteration": 1.0,
+              "last_iteration": 250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 501,
+              "first_iteration": 1.0,
+              "last_iteration": 500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 750,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 501,
+              "first_iteration": 1.0,
+              "last_iteration": 500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 752,
+              "first_iteration": 1.0,
+              "last_iteration": 750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 1000,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 752,
+              "first_iteration": 1.0,
+              "last_iteration": 750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 1003,
+              "first_iteration": 1.0,
+              "last_iteration": 1000.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 1250,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 1003,
+              "first_iteration": 1.0,
+              "last_iteration": 1000.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 1254,
+              "first_iteration": 1.0,
+              "last_iteration": 1250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 1500,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 1254,
+              "first_iteration": 1.0,
+              "last_iteration": 1250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 1505,
+              "first_iteration": 1.0,
+              "last_iteration": 1500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 1750,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 1505,
+              "first_iteration": 1.0,
+              "last_iteration": 1500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 1756,
+              "first_iteration": 1.0,
+              "last_iteration": 1750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 2000,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 1756,
+              "first_iteration": 1.0,
+              "last_iteration": 1750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2007,
+              "first_iteration": 1.0,
+              "last_iteration": 2000.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          }
+        },
+        {
+          "block_end": 2250,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 0,
+              "first_iteration": null,
+              "last_iteration": null,
+              "series": []
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2251,
+              "first_iteration": 1.0,
+              "last_iteration": 2250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "continuation": true
+        },
+        {
+          "block_end": 2500,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 2251,
+              "first_iteration": 1.0,
+              "last_iteration": 2250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2502,
+              "first_iteration": 1.0,
+              "last_iteration": 2500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "continuation": true
+        },
+        {
+          "block_end": 2250,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 0,
+              "first_iteration": null,
+              "last_iteration": null,
+              "series": []
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2251,
+              "first_iteration": 1.0,
+              "last_iteration": 2250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "continuation": true
+        },
+        {
+          "block_end": 2500,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 2251,
+              "first_iteration": 1.0,
+              "last_iteration": 2250.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2502,
+              "first_iteration": 1.0,
+              "last_iteration": 2500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "continuation": true
+        },
+        {
+          "block_end": 2750,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 2502,
+              "first_iteration": 1.0,
+              "last_iteration": 2500.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 2753,
+              "first_iteration": 1.0,
+              "last_iteration": 2750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "continuation": true
+        },
+        {
+          "block_end": 3000,
+          "requested": 250,
+          "before": {
+            "residual": {
+              "points": 2753,
+              "first_iteration": 1.0,
+              "last_iteration": 2750.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "after": {
+            "residual": {
+              "points": 3004,
+              "first_iteration": 1.0,
+              "last_iteration": 3000.0,
+              "series": [
+                "continuity",
+                "epsilon",
+                "k",
+                "vf-phase-2",
+                "x-velocity",
+                "y-velocity",
+                "z-velocity"
+              ]
+            }
+          },
+          "continuation": true
+        }
+      ],
+      "started_epoch": 1785690219.52582,
+      "initial_monitor_snapshot": {
+        "residual": {
+          "points": 0,
+          "first_iteration": null,
+          "last_iteration": null,
+          "series": []
+        }
+      },
+      "iterations_completed": 3000,
+      "classification": "unresolved",
+      "resumed_epoch": 1785756852.859735,
+      "resume": {
+        "starting_iterations": 2000,
+        "case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_checkpoint_2000.cas.h5",
+        "data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_checkpoint_2000.dat.h5",
+        "reason": "gRPC stream removed during the 500-750 block"
+      },
+      "resume_validation": {
+        "zones": {
+          "face_roles": {
+            "liquidinlet": {
+              "name": "liquidinlet",
+              "category": "mass_flow_inlet"
+            },
+            "steaminlet": {
+              "name": "steaminlet",
+              "category": "mass_flow_inlet"
+            },
+            "steamoutlet": {
+              "name": "steamoutlet",
+              "category": "pressure_outlet"
+            },
+            "bottom": {
+              "name": "bottom",
+              "category": "wall"
+            },
+            "wall-fluid": {
+              "name": "wall-fluid",
+              "category": "wall"
+            }
+          },
+          "cell_roles": {
+            "fluid": {
+              "name": "fluid",
+              "category": "fluid"
+            }
+          },
+          "renames": [],
+          "available_face_zones": {
+            "interior-fluid": "interior",
+            "liquidinlet": "mass_flow_inlet",
+            "steaminlet": "mass_flow_inlet",
+            "steamoutlet": "pressure_outlet",
+            "bottom": "wall",
+            "wall-fluid": "wall",
+            "general_nrbc": "non_reflecting_bc",
+            "turbo_sepcific_nrbc": "non_reflecting_bc",
+            "setup_method": "perforated_wall",
+            "model_setup": "perforated_wall",
+            "mass_flow": "settings",
+            "pressure_outlet": "settings",
+            "target_mass_flow_rate_settings": "settings",
+            "advanced": "settings"
+          },
+          "available_cell_zones": {
+            "fluid": "fluid"
+          }
+        },
+        "mesh_metrics": {
+          "cells": 13370267,
+          "faces": 26878044,
+          "nodes": 2291164,
+          "partitions": 16,
+          "minimum_cell_volume_m3": 3.256849e-09,
+          "maximum_cell_volume_m3": 5.354541e-06,
+          "domain_volume_m3": 22.65891,
+          "minimum_face_area_m2": 4.032757e-06,
+          "maximum_face_area_m2": 0.0006391923,
+          "negative_volume_reported": false,
+          "raw_check_contains_error": false,
+          "minimum_orthogonal_quality": 0.200535,
+          "maximum_aspect_ratio": 18.9096,
+          "characteristic_size_m": 0.011922472007888738
+        },
+        "settings": "accepted",
+        "dpm_interaction": {
+          "enabled": false
+        }
+      },
+      "failure_category": "unknown",
+      "error": "FileNotFoundError: Fluent cannot see resume case: C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_checkpoint_2500.cas.h5",
+      "completed_epoch": 1785778344.131163,
+      "final_checkpoint_is_3000_checkpoint": true,
+      "metrics": {
+        "study_id": "split_inlet_mesh_convergence_20260801",
+        "mesh_name": "mesh-2300k",
+        "classification": "unresolved",
+        "mesh_metrics": {
+          "cells": 13370267,
+          "faces": 26878044,
+          "nodes": 2291164,
+          "partitions": 16,
+          "minimum_cell_volume_m3": 3.256849e-09,
+          "maximum_cell_volume_m3": 5.354541e-06,
+          "domain_volume_m3": 22.65891,
+          "minimum_face_area_m2": 4.032757e-06,
+          "maximum_face_area_m2": 0.0006391923,
+          "negative_volume_reported": false,
+          "raw_check_contains_error": false,
+          "minimum_orthogonal_quality": 0.200535,
+          "maximum_aspect_ratio": 18.9096,
+          "characteristic_size_m": 0.011922472007888738
+        },
+        "final_metrics": {
+          "iteration": 3000,
+          "mixture_liquidinlet_kgs": 116.92,
+          "mixture_steaminlet_kgs": 80.69,
+          "mixture_steamoutlet_kgs": -81.446565,
+          "mixture_net_kgs": 116.16343,
+          "mixture_imbalance_percent": 58.78418602297455,
+          "vapor_liquidinlet_kgs": -0.0,
+          "vapor_steaminlet_kgs": 80.69,
+          "vapor_steamoutlet_kgs": -81.446474,
+          "vapor_net_kgs": -0.75647353,
+          "vapor_imbalance_percent": 0.9375059239063079,
+          "liquid_liquidinlet_kgs": 116.92,
+          "liquid_steaminlet_kgs": -0.0,
+          "liquid_steamoutlet_kgs": -9.1755305e-05,
+          "liquid_net_kgs": 116.91991,
+          "liquid_imbalance_percent": 99.99992302429011,
+          "carrier_outlet_quality_percent_trend_only": 99.99988734294179,
+          "inlet_mass_weighted_pressure_pa": 1143656.9,
+          "outlet_mass_weighted_pressure_pa": 1119947.7,
+          "pressure_drop_pa": 23709.199999999953,
+          "outlet_area_weighted_velocity_ms": 42.551732,
+          "domain_volume_avg_velocity_ms": 25.57102,
+          "domain_volume_avg_vorticity_s-1": 87.616472
+        },
+        "monitor_stability_2500_3000": {
+          "pressure_drop_pa": {
+            "samples": 3,
+            "minimum": 23089.399999999907,
+            "maximum": 23709.199999999953,
+            "mean": 23302.699999999953,
+            "drift_percent": 2.6597776223358145
+          },
+          "vapor_steamoutlet_kgs": {
+            "samples": 3,
+            "minimum": -81.462356,
+            "maximum": -81.446474,
+            "mean": -81.456329,
+            "drift_percent": 0.019497564148765946
+          },
+          "liquid_steamoutlet_kgs": {
+            "samples": 3,
+            "minimum": -9.1755305e-05,
+            "maximum": -3.4368714e-08,
+            "mean": -3.1322145238e-05,
+            "drift_percent": 292.83095263450934
+          },
+          "carrier_outlet_quality_percent_trend_only": {
+            "samples": 3,
+            "minimum": 99.99988734294179,
+            "maximum": 99.99999995781032,
+            "mean": 99.9999615428574,
+            "drift_percent": 0.00011261491183579372
+          },
+          "outlet_area_weighted_velocity_ms": {
+            "samples": 3,
+            "minimum": 42.281727,
+            "maximum": 42.551732,
+            "mean": 42.39504133333333,
+            "drift_percent": 0.6368787280499991
+          },
+          "domain_volume_avg_velocity_ms": {
+            "samples": 3,
+            "minimum": 23.33658,
+            "maximum": 25.57102,
+            "mean": 24.465558,
+            "drift_percent": 9.133002402806424
+          },
+          "domain_volume_avg_vorticity_s-1": {
+            "samples": 3,
+            "minimum": 85.699089,
+            "maximum": 87.616472,
+            "mean": 86.71080533333334,
+            "drift_percent": 2.211238833071847
+          }
+        },
+        "acceptance": {
+          "phase_and_mixture_balance_pass": false,
+          "primary_monitor_stability_pass": false,
+          "secondary_monitor_stability_pass": false
+        },
+        "quality_metric_text_file": "mesh-2300k_mesh_quality.txt",
+        "carrier_quality_scope": "trend-only; bottom is a wall and steamoutlet is the only carrier outlet",
+        "continuation": {
+          "resumed": true,
+          "starting_iterations": 2000,
+          "recovery_case": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_checkpoint_2000.cas.h5",
+          "recovery_data": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_2300k\\mesh-2300k_checkpoint_2000.dat.h5"
+        }
+      }
+    }
+  ],
+  "resumed_from": "mesh-2300k",
+  "completed_epoch": 1785778344.236768
+}

@@ -1,0 +1,171 @@
+{
+  "input": "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/MidYear_Report/MidYearTechnicalReport_Revised.docx",
+  "fonts_by_char_count": {
+    "Times New Roman": 9607,
+    "Cambria Math": 159
+  },
+  "direct_run_formatting_runs": 182,
+  "direct_paragraph_formatting_paragraphs": 168,
+  "heading_like_paragraphs_not_heading_style": [
+    {
+      "para_index": 45,
+      "text": "Item",
+      "style": "Normal"
+    },
+    {
+      "para_index": 46,
+      "text": "Spiral-inlet replication",
+      "style": "Normal"
+    },
+    {
+      "para_index": 47,
+      "text": "Split-inlet / EWF family",
+      "style": "Normal"
+    },
+    {
+      "para_index": 69,
+      "text": "Case",
+      "style": "Normal"
+    },
+    {
+      "para_index": 70,
+      "text": "Condition",
+      "style": "Normal"
+    },
+    {
+      "para_index": 71,
+      "text": "v (m/s)",
+      "style": "Normal"
+    },
+    {
+      "para_index": 72,
+      "text": "Escaped\n(kg/s)",
+      "style": "Normal"
+    },
+    {
+      "para_index": 73,
+      "text": "Incomplete\n(kg/s)",
+      "style": "Normal"
+    },
+    {
+      "para_index": 74,
+      "text": "Quality\n(%)",
+      "style": "Normal"
+    },
+    {
+      "para_index": 75,
+      "text": "\u0394 vs ref.\n(pp)",
+      "style": "Normal"
+    },
+    {
+      "para_index": 118,
+      "text": "Nominal class\n(\u00b5m)",
+      "style": "Normal"
+    },
+    {
+      "para_index": 119,
+      "text": "Actual d\n(\u00b5m)",
+      "style": "Normal"
+    },
+    {
+      "para_index": 120,
+      "text": "Injected\n(kg/s)",
+      "style": "Normal"
+    },
+    {
+      "para_index": 121,
+      "text": "Escaped\n(kg/s)",
+      "style": "Normal"
+    },
+    {
+      "para_index": 122,
+      "text": "Trapped\n(kg/s)",
+      "style": "Normal"
+    },
+    {
+      "para_index": 123,
+      "text": "Incomplete\n(kg/s)",
+      "style": "Normal"
+    },
+    {
+      "para_index": 124,
+      "text": "Incomplete\n(%)",
+      "style": "Normal"
+    },
+    {
+      "para_index": 146,
+      "text": "EWF branch",
+      "style": "Normal"
+    },
+    {
+      "para_index": 147,
+      "text": "Inventory\n(kg)",
+      "style": "Normal"
+    },
+    {
+      "para_index": 148,
+      "text": "Maximum\n(mm)",
+      "style": "Normal"
+    }
+  ],
+  "examples": {
+    "direct_run_formatting": [
+      {
+        "para_index": 1,
+        "run_text": "CFD Analysis of a Geothermal Steam-Water Separator:\nSpiral-Inlet Replication, DP",
+        "style": "MidYear Title"
+      },
+      {
+        "para_index": 2,
+        "run_text": "Technical results from controlled ANSYS Fluent simulations and automated PyFluen",
+        "style": "Body Text"
+      },
+      {
+        "para_index": 4,
+        "run_text": "The study used staged CFD comparisons to quantify liquid carryover in a vertical",
+        "style": "Body Text"
+      },
+      {
+        "para_index": 5,
+        "run_text": "Table 1. Principal numerical settings and controlled model differences.",
+        "style": "Caption"
+      },
+      {
+        "para_index": 7,
+        "run_text": "Each enthalpy label selected the steam-liquid mass split reported by Purnanto; e",
+        "style": "Body Text"
+      }
+    ],
+    "direct_paragraph_formatting": [
+      {
+        "para_index": 2,
+        "text": "Technical results from controlled ANSYS Fluent simulations and automated PyFluent post-processing",
+        "style": "Body Text"
+      },
+      {
+        "para_index": 5,
+        "text": "Table 1. Principal numerical settings and controlled model differences.",
+        "style": "Caption"
+      },
+      {
+        "para_index": 8,
+        "text": "x\u209b\u2090 = 1.91 D\u209c (Re\u2070\u00b7\u00b9 / We\u2070\u00b7\u2076)(\u03c1g / \u03c1l)\u2070\u00b7\u2076,     x\u2098\u2091d = 1.42 x\u209b\u2090",
+        "style": "Normal"
+      },
+      {
+        "para_index": 10,
+        "text": "m\u0307inj \u2248 m\u0307escaped + m\u0307trapped + m\u0307incomplete,     quality = m\u0307steam /(m\u0307steam + m\u0307escaped) \u00d7 100%",
+        "style": "Normal"
+      },
+      {
+        "para_index": 14,
+        "text": "",
+        "style": "Normal"
+      }
+    ]
+  },
+  "notes": [
+    "Direct formatting is not always wrong, but it often causes inconsistent output when templates change.",
+    "Heading-like paragraphs not using Heading styles can break TOC and accessibility."
+  ]
+}

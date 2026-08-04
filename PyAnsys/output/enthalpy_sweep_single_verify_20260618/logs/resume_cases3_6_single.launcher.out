@@ -1,0 +1,8 @@
+guarded_log: /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_single_verify_20260618/logs/resume_cases3_6_single.log
+run_guarded: started pid=77587 mode=quiet
+run_guarded: running elapsed=5m00s idle=52s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_single_verify_20260618/logs/resume_cases3_6_single.log
+run_guarded: running elapsed=10m00s idle=48s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_single_verify_20260618/logs/resume_cases3_6_single.log
+run_guarded: running elapsed=15m00s idle=44s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_single_verify_20260618/logs/resume_cases3_6_single.log
+run_guarded: running elapsed=20m00s idle=37s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_single_verify_20260618/logs/resume_cases3_6_single.log
+run_guarded: running elapsed=25m01s idle=33s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_single_verify_20260618/logs/resume_cases3_6_single.log
+run_guarded: running elapsed=30m02s idle=29s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_single_verify_20260618/logs/resume_cases3_6_single.log

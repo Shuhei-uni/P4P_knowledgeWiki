@@ -1,0 +1,21 @@
+guarded_log: /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/full_sweep.log
+run_guarded: started pid=29829 mode=quiet
+run_guarded: running elapsed=10m00s idle=4s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/full_sweep.log
+run_guarded: running elapsed=20m01s idle=5s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/full_sweep.log
+run_guarded: running elapsed=30m01s idle=6s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/full_sweep.log
+run_guarded: running elapsed=40m01s idle=5s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/full_sweep.log
+run_guarded: running elapsed=50m02s idle=4s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/full_sweep.log
+run_guarded: running elapsed=1h00m02s idle=4s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/full_sweep.log
+run_guarded: running elapsed=1h10m03s idle=5s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/full_sweep.log
+run_guarded: running elapsed=1h20m03s idle=7s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/full_sweep.log
+run_guarded: running elapsed=1h30m04s idle=7s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/full_sweep.log
+run_guarded: running elapsed=1h40m04s idle=7s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/full_sweep.log
+run_guarded: running elapsed=1h50m04s idle=8s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/full_sweep.log
+run_guarded: running elapsed=2h00m05s idle=4m34s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/full_sweep.log
+run_guarded: running elapsed=2h10m05s idle=14m34s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/full_sweep.log
+run_guarded: running elapsed=2h20m05s idle=24m34s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/full_sweep.log
+run_guarded: running elapsed=2h30m05s idle=34m34s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/full_sweep.log
+run_guarded: running elapsed=2h40m05s idle=44m34s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/full_sweep.log
+run_guarded: running elapsed=2h50m05s idle=54m34s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/full_sweep.log
+
+run_guarded: TIMEOUT -> idle timeout 3600.0s exceeded

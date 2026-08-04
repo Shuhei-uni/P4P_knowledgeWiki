@@ -1,0 +1,10 @@
+case,enthalpy_kJkg,injection_name,injection_number,diameter_m,diameter_mm,injected_mass_flow_kgs,velocity_mode,normal_speed_ms,z_velocity_ms_source,escaped_kgs,trapped_kgs,incomplete_kgs,escaped_zone_names,trapped_zone_names,incomplete_zone_names,escaped_zone_ids,trapped_zone_ids,incomplete_zone_ids,escaped_zone_breakdown,trapped_zone_breakdown,incomplete_zone_breakdown,escaped_count,trapped_count,incomplete_count,escaped_fraction,notes
+Case 4,1600,injection-0,1,4.307482e-06,0.004307,0.189995,face-normal,34.221202,-34.221202,,,,,,,,,,,,,,,,,no per-injection report block parsed
+Case 4,1600,injection-1,2,2.153741e-05,0.021537,0.780441,face-normal,34.221202,-34.221202,,,,,,,,,,,,,,,,,no per-injection report block parsed
+Case 4,1600,injection-2,3,4.307482e-05,0.043075,0.970436,face-normal,34.221202,-34.221202,,,,,,,,,,,,,,,,,no per-injection report block parsed
+Case 4,1600,injection-3,4,8.614965e-05,0.08615,1.952564,face-normal,34.221202,-34.221202,,,,,,,,,,,,,,,,,no per-injection report block parsed
+Case 4,1600,injection-4,5,0.0001292245,0.129224,1.952564,face-normal,34.221202,-34.221202,,,,,,,,,,,,,,,,,no per-injection report block parsed
+Case 4,1600,injection-5,6,0.0002670639,0.267064,23.384,face-normal,34.221202,-34.221202,,,,,,,,,,,,,,,,,no per-injection report block parsed
+Case 4,1600,injection-6,7,0.0004307482,0.430748,29.23,face-normal,34.221202,-34.221202,,,,,,,,,,,,,,,,,no per-injection report block parsed
+Case 4,1600,injection-7,8,0.0006461224,0.646122,29.23,face-normal,34.221202,-34.221202,,,,,,,,,,,,,,,,,no per-injection report block parsed
+Case 4,1600,injection-8,9,0.00124917,1.24917,29.23,face-normal,34.221202,-34.221202,,,,,,,,,,,,,,,,,no per-injection report block parsed

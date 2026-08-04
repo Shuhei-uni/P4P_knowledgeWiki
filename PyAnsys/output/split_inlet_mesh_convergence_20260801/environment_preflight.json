@@ -1,0 +1,14 @@
+{
+  "study_id": "split_inlet_mesh_convergence_20260801",
+  "fluent_version": "Ansys Fluent 2024 R2",
+  "remote_free_bytes": 197319442432,
+  "remote_free_gb_decimal": 197.319442432,
+  "minimum_free_gb_required": 80.0,
+  "mesh_stage2_sha256": "0fd7a11174663306c7e79539a37683019f3b1643ec32d378b57c9b4a59a64b34",
+  "mesh_600k_sha256": "0fd7a11174663306c7e79539a37683019f3b1643ec32d378b57c9b4a59a64b34",
+  "mesh_stage2_matches_mesh_600k": true,
+  "selected_meshes": [
+    "mesh-900k",
+    "mesh-1900k"
+  ]
+}

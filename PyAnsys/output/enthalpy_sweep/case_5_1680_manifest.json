@@ -1,0 +1,100 @@
+{
+  "case": "Case 5",
+  "condition": "1680",
+  "base_case": "C:\\Users\\qtra338\\Documents\\baseline.cas.h5",
+  "remote_output_paths": {
+    "case": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_5_1680_1500.cas.h5",
+    "data": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_5_1680_1500.dat.h5",
+    "dpm_report": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_5_1680_dpm_report.txt",
+    "injection_results": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_5_1680_injection_results.csv",
+    "case_summary": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_5_1680_case_summary.csv",
+    "manifest": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_5_1680_manifest.json"
+  },
+  "iterations_requested": 1500,
+  "iterations_completed": 1500,
+  "liquid_mass_flow_kgs": 109.0,
+  "gas_mass_flow_kgs": 88.61,
+  "dpm_total_mass_flow_kgs": 109.0,
+  "dpm_velocity_mode": "face-normal",
+  "dpm_velocity_definition": "Fluent face-normal direction with magnitude=abs(z_velocity_ms)",
+  "inlet_readback": {
+    "name": "inlet",
+    "phase": {
+      "mixture": {
+        "momentum": {
+          "reference_frame": "Absolute",
+          "supersonic_gauge_pressure": {
+            "option": "value",
+            "value": 1140000
+          },
+          "direction_specification": "Normal to Boundary"
+        },
+        "turbulence": {
+          "turbulence_specification": "Intensity and Hydraulic Diameter",
+          "turbulent_intensity": 0.02152499951888,
+          "hydraulic_diameter": 0.7240000000000001
+        },
+        "dpm": {
+          "discrete_phase_bc_type": "escape"
+        },
+        "multiphase": {}
+      },
+      "phase-1": {
+        "momentum": {
+          "mass_flow_specification": "Mass Flow Rate",
+          "mass_flow_rate": {
+            "option": "value",
+            "value": 88.61
+          }
+        },
+        "turbulence": {},
+        "dpm": {},
+        "multiphase": {}
+      },
+      "phase-2": {
+        "momentum": {
+          "mass_flow_specification": "Mass Flow Rate",
+          "mass_flow_rate": {
+            "option": "value",
+            "value": 109.0
+          }
+        },
+        "turbulence": {},
+        "dpm": {},
+        "multiphase": {}
+      }
+    }
+  },
+  "injection_readback_names": [
+    "injection-0",
+    "injection-1",
+    "injection-2",
+    "injection-3",
+    "injection-4",
+    "injection-5",
+    "injection-6",
+    "injection-7",
+    "injection-8"
+  ],
+  "escaped_kgs_missing_count": 0,
+  "case_summary": {
+    "case": "Case 5",
+    "enthalpy_kJkg": "1680",
+    "iterations_completed": 1500,
+    "liquid_mass_flow_kgs": "109",
+    "gas_mass_flow_kgs": "88.61",
+    "dpm_injected_mass_flow_kgs": "109",
+    "escaped_kgs": "1.905",
+    "trapped_kgs": "28.99",
+    "incomplete_kgs": "78.11",
+    "escaped_zone_names": "steam_outlet",
+    "trapped_zone_names": "fluid_outlet",
+    "incomplete_zone_names": "",
+    "escaped_zone_breakdown": "[{\"fate\":\"escaped\",\"zone_name\":\"steam_outlet\",\"zone_id\":\"7\",\"count\":25520.0,\"mass_flow_kgs\":1.905}]",
+    "trapped_zone_breakdown": "[{\"fate\":\"trapped\",\"zone_name\":\"fluid_outlet\",\"zone_id\":\"8\",\"count\":16062.0,\"mass_flow_kgs\":28.99}]",
+    "incomplete_zone_breakdown": "[{\"fate\":\"incomplete\",\"zone_name\":\"\",\"zone_id\":\"\",\"count\":36718.0,\"mass_flow_kgs\":78.11}]",
+    "escaped_count": "25520",
+    "trapped_count": "16062",
+    "incomplete_count": "36718"
+  }
+}

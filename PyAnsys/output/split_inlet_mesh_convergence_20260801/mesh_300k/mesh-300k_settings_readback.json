@@ -1,0 +1,3080 @@
+{
+  "general": {
+    "solver": {
+      "type": "pressure-based",
+      "velocity_formulation": "absolute",
+      "time": "steady"
+    },
+    "operating_conditions": {
+      "gravity": {
+        "enable": true,
+        "components": [
+          0,
+          -9.81,
+          0
+        ]
+      },
+      "operating_pressure": 0.0,
+      "reference_pressure_location": [
+        0,
+        0,
+        0
+      ],
+      "reference_pressure_method": "Connected and disconnected fluid zones",
+      "operating_density": {
+        "method": "minimum-phase-averaged"
+      },
+      "operating_temperature": 298.15
+    },
+    "units": {}
+  },
+  "energy": {
+    "enabled": false
+  },
+  "multiphase": {
+    "models": "mixture",
+    "number_of_phases": 2
+  },
+  "viscous": {
+    "model": "k-epsilon",
+    "k_epsilon_model": "rng",
+    "rng_options": {
+      "differential_viscosity_model": true,
+      "swirl_dominated_flow": true
+    },
+    "near_wall_treatment": {
+      "wall_treatment": "standard-wall-fn"
+    },
+    "options": {
+      "curvature_correction": false,
+      "production_kato_launder_enabled": false,
+      "production_limiter": {
+        "enabled": false
+      }
+    },
+    "multiphase_turbulence": {
+      "multiphase_options": {
+        "dispersion_in_relative_velocity": false
+      }
+    },
+    "turbulence_expert": {
+      "turbulence_damping": {
+        "enable_turb_damping": false
+      },
+      "turb_non_newtonian": false
+    },
+    "user_defined": {
+      "turb_visc_func": "none"
+    }
+  },
+  "dpm_interaction": {
+    "enabled": false
+  },
+  "materials": {
+    "database": {
+      "database_type": "fluent-database"
+    },
+    "fluid": {
+      "air": {
+        "name": "air",
+        "chemical_formula": "",
+        "density": {
+          "option": "constant",
+          "value": 1.093999981880188
+        },
+        "viscosity": {
+          "option": "constant",
+          "value": 1.789400084817316e-05
+        }
+      },
+      "water-liquid-at-psep": {
+        "name": "water-liquid-at-psep",
+        "chemical_formula": "h2o-psep",
+        "density": {
+          "option": "constant",
+          "value": 881.2108764648438
+        },
+        "viscosity": {
+          "option": "constant",
+          "value": 0.0001455440069548786
+        }
+      },
+      "water-vapor-at-psep": {
+        "name": "water-vapor-at-psep",
+        "chemical_formula": "h2o-sep",
+        "density": {
+          "option": "constant",
+          "value": 5.797433853149414
+        },
+        "viscosity": {
+          "option": "constant",
+          "value": 1.520620025985409e-05
+        }
+      }
+    },
+    "solid": {
+      "aluminum": {
+        "name": "aluminum",
+        "chemical_formula": "al",
+        "density": {
+          "option": "constant",
+          "value": 2719
+        }
+      },
+      "steel": {
+        "name": "steel",
+        "chemical_formula": "",
+        "density": {
+          "option": "constant",
+          "value": 8030
+        }
+      }
+    },
+    "inert_particle": {
+      "water-liquid": {
+        "name": "water-liquid",
+        "chemical_formula": "h2o<l>",
+        "density": {
+          "option": "constant",
+          "value": 881.77
+        }
+      }
+    }
+  },
+  "boundary_conditions": {
+    "interior": {
+      "interior-fluid": {
+        "name": "interior-fluid",
+        "phase": {
+          "mixture": {
+            "interior": {}
+          },
+          "phase-1": {
+            "interior": {}
+          },
+          "phase-2": {
+            "interior": {}
+          }
+        }
+      }
+    },
+    "mass_flow_inlet": {
+      "liquidinlet": {
+        "name": "liquidinlet",
+        "phase": {
+          "mixture": {
+            "momentum": {
+              "reference_frame": "Absolute",
+              "supersonic_gauge_pressure": {
+                "option": "value",
+                "value": 1140000
+              },
+              "direction_specification": "Normal to Boundary"
+            },
+            "turbulence": {
+              "turbulence_specification": "Intensity and Hydraulic Diameter",
+              "turbulent_intensity": 0.021099999,
+              "hydraulic_diameter": 0.01338
+            },
+            "dpm": {
+              "discrete_phase_bc_type": "escape"
+            },
+            "multiphase": {}
+          },
+          "phase-1": {
+            "momentum": {
+              "mass_flow_specification": "Mass Flow Rate",
+              "mass_flow_rate": {
+                "option": "value",
+                "value": 0
+              }
+            },
+            "turbulence": {},
+            "dpm": {},
+            "multiphase": {}
+          },
+          "phase-2": {
+            "momentum": {
+              "mass_flow_specification": "Mass Flow Rate",
+              "mass_flow_rate": {
+                "option": "value",
+                "value": 116.92
+              }
+            },
+            "turbulence": {},
+            "dpm": {},
+            "multiphase": {}
+          }
+        }
+      },
+      "steaminlet": {
+        "name": "steaminlet",
+        "phase": {
+          "mixture": {
+            "momentum": {
+              "reference_frame": "Absolute",
+              "supersonic_gauge_pressure": {
+                "option": "value",
+                "value": 1140000
+              },
+              "direction_specification": "Normal to Boundary"
+            },
+            "turbulence": {
+              "turbulence_specification": "Intensity and Hydraulic Diameter",
+              "turbulent_intensity": 0.021099999,
+              "hydraulic_diameter": 0.7206100000000001
+            },
+            "dpm": {
+              "discrete_phase_bc_type": "escape"
+            },
+            "multiphase": {}
+          },
+          "phase-1": {
+            "momentum": {
+              "mass_flow_specification": "Mass Flow Rate",
+              "mass_flow_rate": {
+                "option": "value",
+                "value": 80.69
+              }
+            },
+            "turbulence": {},
+            "dpm": {},
+            "multiphase": {}
+          },
+          "phase-2": {
+            "momentum": {
+              "mass_flow_specification": "Mass Flow Rate",
+              "mass_flow_rate": {
+                "option": "value",
+                "value": 0
+              }
+            },
+            "turbulence": {},
+            "dpm": {},
+            "multiphase": {}
+          }
+        }
+      }
+    },
+    "pressure_outlet": {
+      "steamoutlet": {
+        "name": "steamoutlet",
+        "phase": {
+          "mixture": {
+            "momentum": {
+              "gauge_pressure": {
+                "option": "value",
+                "value": 1120000
+              },
+              "pressure_profile_multiplier": 1,
+              "backflow_dir_spec_method": "Normal to Boundary",
+              "backflow_pressure_spec": "Total Pressure",
+              "radial_equ_pressure_distribution": false
+            },
+            "turbulence": {
+              "turbulence_specification": "Intensity and Hydraulic Diameter",
+              "backflow_turbulent_intensity": 0.021099999,
+              "backflow_hydraulic_diameter": 0.8760000000000001
+            },
+            "dpm": {
+              "discrete_phase_bc_type": "escape"
+            },
+            "multiphase": {}
+          },
+          "phase-1": {
+            "momentum": {},
+            "turbulence": {},
+            "dpm": {},
+            "multiphase": {}
+          },
+          "phase-2": {
+            "momentum": {},
+            "turbulence": {},
+            "dpm": {},
+            "multiphase": {
+              "volume_frac_spec_method": "Backflow Volume Fraction",
+              "backflow_volume_fraction": {
+                "option": "value",
+                "value": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    "wall": {
+      "bottom": {
+        "name": "bottom",
+        "phase": {
+          "mixture": {
+            "momentum": {
+              "wall_motion": "Stationary Wall",
+              "shear_condition": "No Slip"
+            },
+            "turbulence": {
+              "roughness_height": {
+                "option": "value",
+                "value": 0
+              },
+              "roughness_const": {
+                "option": "value",
+                "value": 0.5
+              }
+            },
+            "dpm": {
+              "discrete_phase_bc_type": "trap"
+            },
+            "multiphase": {}
+          },
+          "phase-1": {
+            "momentum": {},
+            "turbulence": {},
+            "dpm": {},
+            "multiphase": {}
+          },
+          "phase-2": {
+            "momentum": {},
+            "turbulence": {},
+            "dpm": {},
+            "multiphase": {}
+          }
+        }
+      },
+      "wall-fluid": {
+        "name": "wall-fluid",
+        "phase": {
+          "mixture": {
+            "momentum": {
+              "wall_motion": "Stationary Wall",
+              "shear_condition": "No Slip"
+            },
+            "turbulence": {
+              "roughness_height": {
+                "option": "value",
+                "value": 0
+              },
+              "roughness_const": {
+                "option": "value",
+                "value": 0.5
+              }
+            },
+            "dpm": {
+              "discrete_phase_bc_type": "reflect",
+              "normal_coefficient": {
+                "option": "polynomial",
+                "function_of": "angle",
+                "polynomial": {
+                  "function_of": "angle",
+                  "coefficients": [
+                    1
+                  ]
+                }
+              },
+              "tangential_coefficient": {
+                "option": "polynomial",
+                "function_of": "angle",
+                "polynomial": {
+                  "function_of": "angle",
+                  "coefficients": [
+                    1
+                  ]
+                }
+              }
+            },
+            "multiphase": {}
+          },
+          "phase-1": {
+            "momentum": {},
+            "turbulence": {},
+            "dpm": {},
+            "multiphase": {}
+          },
+          "phase-2": {
+            "momentum": {},
+            "turbulence": {},
+            "dpm": {},
+            "multiphase": {}
+          }
+        }
+      }
+    },
+    "non_reflecting_bc": {
+      "general_nrbc": {
+        "sigma": 0.15,
+        "sigma2": 5.0
+      },
+      "turbo_sepcific_nrbc": {
+        "enable": false
+      }
+    },
+    "perforated_wall": {
+      "setup_method": "None",
+      "model_setup": {
+        "ninjections": 1,
+        "urf": 1,
+        "injection": [
+          {
+            "injection_thread": false,
+            "coupled": true,
+            "extraction_thread": false,
+            "uniform": true,
+            "static": false,
+            "formulation": 0,
+            "dynamic_setup": {
+              "method": -1
+            }
+          }
+        ]
+      }
+    },
+    "settings": {
+      "mass_flow": true,
+      "pressure_outlet": {
+        "blending_factor": 0.0,
+        "bin_count": 65,
+        "average_pressure": false
+      },
+      "target_mass_flow_rate_settings": {
+        "under_relaxation_factor": 0.05,
+        "verbosity": false
+      },
+      "advanced": {
+        "delay_model_change_update": false,
+        "batch_thread_update": false
+      }
+    }
+  },
+  "cell_zone_conditions": {
+    "fluid": {
+      "fluid": {
+        "name": "fluid",
+        "phase": {
+          "mixture": {
+            "general": {
+              "laminar": false
+            },
+            "reference_frame": {
+              "frame_motion": false,
+              "reference_frame_axis_origin": [
+                {
+                  "option": "value",
+                  "value": 0.0
+                },
+                {
+                  "option": "value",
+                  "value": 0.0
+                },
+                {
+                  "option": "value",
+                  "value": 0.0
+                }
+              ],
+              "reference_frame_axis_direction": [
+                {
+                  "option": "value",
+                  "value": 0.0
+                },
+                {
+                  "option": "value",
+                  "value": 0.0
+                },
+                {
+                  "option": "value",
+                  "value": 0.0
+                }
+              ]
+            },
+            "porous_zone": {
+              "porous": false
+            },
+            "fan_zone": {
+              "fan_zone": false
+            },
+            "sources": {
+              "enable": false
+            },
+            "fixed_values": {
+              "enable": false
+            },
+            "multiphase": {}
+          },
+          "phase-1": {
+            "general": {},
+            "reference_frame": {
+              "reference_frame_axis_origin": [
+                {
+                  "option": "value",
+                  "value": 0.0
+                },
+                {
+                  "option": "value",
+                  "value": 0.0
+                },
+                {
+                  "option": "value",
+                  "value": 0.0
+                }
+              ],
+              "reference_frame_axis_direction": [
+                {
+                  "option": "value",
+                  "value": 0.0
+                },
+                {
+                  "option": "value",
+                  "value": 0.0
+                },
+                {
+                  "option": "value",
+                  "value": 0.0
+                }
+              ]
+            },
+            "porous_zone": {},
+            "fan_zone": {
+              "fan_zone": false
+            },
+            "sources": {
+              "enable": false
+            },
+            "fixed_values": {
+              "enable": false
+            },
+            "multiphase": {}
+          },
+          "phase-2": {
+            "general": {},
+            "reference_frame": {
+              "reference_frame_axis_origin": [
+                {
+                  "option": "value",
+                  "value": 0.0
+                },
+                {
+                  "option": "value",
+                  "value": 0.0
+                },
+                {
+                  "option": "value",
+                  "value": 0.0
+                }
+              ],
+              "reference_frame_axis_direction": [
+                {
+                  "option": "value",
+                  "value": 0.0
+                },
+                {
+                  "option": "value",
+                  "value": 0.0
+                },
+                {
+                  "option": "value",
+                  "value": 0.0
+                }
+              ]
+            },
+            "porous_zone": {},
+            "fan_zone": {
+              "fan_zone": false
+            },
+            "sources": {
+              "enable": false
+            },
+            "fixed_values": {
+              "enable": false
+            },
+            "multiphase": {}
+          }
+        }
+      }
+    }
+  },
+  "methods": {
+    "p_v_coupling": {
+      "flow_scheme": "SIMPLE",
+      "solve_n_phase": false
+    },
+    "discretization_scheme": {
+      "epsilon": "second-order-upwind",
+      "k": "first-order-upwind",
+      "mom": "second-order-upwind",
+      "mp": "quick",
+      "pressure": "presto!"
+    },
+    "pseudo_time_method": {
+      "formulation": {
+        "segregated_solver": "off"
+      }
+    },
+    "expert": {
+      "numerics_pbns": {
+        "implicit_bodyforce_treatment": false,
+        "velocity_formulation": "absolute",
+        "physical_velocity_formulation": false,
+        "disable_rhie_chow_flux": false,
+        "presto_pressure_scheme": false,
+        "first_to_second_order_blending": 1.0
+      }
+    },
+    "gradient_scheme": "green-gauss-node-based",
+    "high_order_term_relaxation": {
+      "enable": false
+    },
+    "multiphase_numerics": {
+      "compressible_flow": {
+        "enhanced_numerics": true,
+        "alternate_bc_formulation": false
+      },
+      "viscous_flow": {
+        "viscosity_averaging": false
+      },
+      "heat_mass_transfer": {
+        "cavitation": {
+          "schnerr_evap_coeff": 1.0,
+          "schnerr_cond_coeff": 0.2,
+          "max_vapor_pressure_ratio": 5.0,
+          "min_vapor_pressure": 1,
+          "display_clipped_pressure": true,
+          "p_limit_method": "local-pvap-min",
+          "turbulent_diffusion": true
+        },
+        "boiling": {
+          "heat_flux_relaxation_factor": 0.8,
+          "show_expert_options": false
+        },
+        "area_density": {
+          "vof_min_seeding": 1e-06,
+          "ia_grad_sym": false
+        }
+      },
+      "advanced_stability_controls": {
+        "p_v_coupling": {
+          "rhie_chow_flux": {
+            "low_order_rhie_chow": false
+          }
+        }
+      },
+      "default_controls": {
+        "recommended_defaults_for_existing_cases": false,
+        "revert_to_pre_r20_1_default_settings": {
+          "old_default_of_operating_density_method": false,
+          "old_default_of_volume_fraction_smoothing": false,
+          "old_variant_of_pesto_for_cases_using_structured_mesh": false
+        }
+      }
+    },
+    "nb_gradient_boundary_option": {
+      "nb_gradient": "modified-boundary-treatment"
+    },
+    "vof_numerics": {
+      "high_order_rc": false,
+      "high_order_rc_hybrid_treatment": false,
+      "unstructured_var_presto_scheme": false
+    },
+    "warped_face_gradient_correction": {
+      "enable": false
+    }
+  },
+  "controls": {
+    "under_relaxation": {
+      "body-force": 1.0,
+      "density": 1,
+      "drift": 0.1,
+      "epsilon": 0.8,
+      "k": 0.8,
+      "mom": 0.7,
+      "mp": 0.4000000059604645,
+      "pressure": 0.3,
+      "turb-viscosity": 1
+    },
+    "equations": {
+      "drift": true,
+      "flow": true,
+      "ke": true,
+      "mp": true
+    },
+    "limits": {
+      "min_pressure": 1,
+      "max_pressure": 50000000000.0,
+      "min_tke": 1e-14,
+      "min_epsilon": 1e-20,
+      "max_turb_visc_ratio": 100000.0,
+      "min_vol_frac_for_matrix_sol": 1e-08
+    },
+    "advanced": {
+      "multi_grid": {
+        "mg_controls": {
+          "epsilon": {
+            "cycle_type": "flexible-cycle",
+            "termination_criteria": 0.1,
+            "residual_reduction_tolerance": 0.7
+          },
+          "k": {
+            "cycle_type": "flexible-cycle",
+            "termination_criteria": 0.1,
+            "residual_reduction_tolerance": 0.7
+          },
+          "mp": {
+            "cycle_type": "flexible-cycle",
+            "termination_criteria": 0.1,
+            "residual_reduction_tolerance": 0.7
+          },
+          "pressure": {
+            "cycle_type": "v-cycle",
+            "termination_criteria": 0.1,
+            "stabilization": "none"
+          },
+          "x-mom": {
+            "cycle_type": "flexible-cycle",
+            "termination_criteria": 0.1,
+            "residual_reduction_tolerance": 0.7
+          },
+          "y-mom": {
+            "cycle_type": "flexible-cycle",
+            "termination_criteria": 0.1,
+            "residual_reduction_tolerance": 0.7
+          },
+          "z-mom": {
+            "cycle_type": "flexible-cycle",
+            "termination_criteria": 0.1,
+            "residual_reduction_tolerance": 0.7
+          }
+        },
+        "amg_controls": {
+          "scalar_parameters": {
+            "fixed_cycle_parameters": {
+              "pre_sweeps": 0,
+              "post_sweeps": 1,
+              "max_cycle": 30
+            },
+            "coarsening_parameters": {
+              "max_coarse_levels": 20,
+              "coarsen_by_interval": 2,
+              "conservative_coarsening": true,
+              "aggressive_coarsening": false,
+              "laplace_coarsening": false
+            },
+            "smoother_type": "Gauss-Seidel"
+          },
+          "flexible_cycle_parameters": {
+            "max_fine_relaxations": 30,
+            "max_coarse_relaxations": 50
+          },
+          "options": {
+            "verbosity": 0
+          }
+        }
+      },
+      "expert": {
+        "spatial_discretization_limiter": {
+          "limiter_type": "default",
+          "cell_to_limiting": "cell-to-face",
+          "limiter_filter": false
+        }
+      },
+      "relaxation_method": "gauss-seidel",
+      "anisotropic_solid_heat_transfer": {
+        "relaxation": 1,
+        "flux": "standard",
+        "gradient": "standard"
+      }
+    }
+  },
+  "initialization": {
+    "initialization_type": "hybrid",
+    "reference_frame": "relative",
+    "hybrid_init_options": {
+      "general_settings": {
+        "iter_count": 10,
+        "explicit_urf": [
+          1.0,
+          1.0
+        ],
+        "initial_pressure": false,
+        "external_aero": false,
+        "const_velocity": false
+      },
+      "turbulent_setting": {
+        "averaged_turbulent_parameters": true
+      }
+    }
+  },
+  "residual": {
+    "equations": {
+      "continuity": {
+        "monitor": true,
+        "check_convergence": true,
+        "absolute_criteria": 0.0001
+      },
+      "epsilon": {
+        "monitor": true,
+        "check_convergence": true,
+        "absolute_criteria": 0.001
+      },
+      "k": {
+        "monitor": true,
+        "check_convergence": true,
+        "absolute_criteria": 0.001
+      },
+      "vf-phase-2": {
+        "monitor": true,
+        "check_convergence": true,
+        "absolute_criteria": 0.001
+      },
+      "x-velocity": {
+        "monitor": true,
+        "check_convergence": true,
+        "absolute_criteria": 0.001
+      },
+      "y-velocity": {
+        "monitor": true,
+        "check_convergence": true,
+        "absolute_criteria": 0.001
+      },
+      "z-velocity": {
+        "monitor": true,
+        "check_convergence": true,
+        "absolute_criteria": 0.001
+      }
+    },
+    "options": {
+      "criterion_type": "absolute",
+      "n_save": 1000,
+      "normalize": false,
+      "residual_values": {
+        "scale_residuals": true,
+        "compute_local_scale": false
+      },
+      "print": true,
+      "plot": true,
+      "n_display": 1000
+    },
+    "axes": {
+      "x": {
+        "label": "",
+        "number_format": {
+          "format_type": "float",
+          "precision": 0
+        },
+        "log_scale": false,
+        "auto_range": true,
+        "show_major_gridlines": true,
+        "major_gridlines": {
+          "color": "dark blue",
+          "weight": 1
+        },
+        "show_minor_gridlines": true,
+        "minor_gridlines": {
+          "color": "dark green",
+          "weight": 1
+        }
+      },
+      "y": {
+        "label": "",
+        "number_format": {
+          "format_type": "exponential",
+          "precision": 0
+        },
+        "log_scale": true,
+        "auto_range": true,
+        "show_major_gridlines": false,
+        "show_minor_gridlines": false
+      },
+      "background_color": ""
+    },
+    "curves": [
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "monte carlo green"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "monte carlo green"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "monte carlo green"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "monte carlo green"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "lavender gray"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "lavender gray"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "lavender gray"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "lavender gray"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "scarlet red"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "scarlet red"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "scarlet red"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "scarlet red"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "grayish blue"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "grayish blue"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "grayish blue"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "grayish blue"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "flush orange"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "flush orange"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "flush orange"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "flush orange"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "lime green"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "lime green"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "lime green"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "lime green"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "classic pink"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "classic pink"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "classic pink"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "classic pink"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "red"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "red"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "red"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "red"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "green"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "green"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "green"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "green"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "blue"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "blue"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "blue"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "blue"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "cyan"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "cyan"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "cyan"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "cyan"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "magenta"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "magenta"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "magenta"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "magenta"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "yellow"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "yellow"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "yellow"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "yellow"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "orange"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "orange"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "orange"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "orange"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "pink"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "pink"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "pink"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "pink"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "brown"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "brown"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "brown"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "brown"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "copper"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "copper"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "copper"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "copper"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "maroon"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "maroon"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "maroon"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "maroon"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "tan"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "tan"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "tan"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "tan"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "teal"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "teal"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "teal"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "teal"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "silver"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "silver"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "silver"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "silver"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "salmon"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "salmon"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "salmon"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "salmon"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "light yellow"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "light yellow"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "light yellow"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "light yellow"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "light red"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "light red"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "light red"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "light red"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "light green"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "light green"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "light green"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "light green"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "light blue"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "light blue"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "light blue"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "light blue"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "light gray"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "light gray"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "light gray"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "light gray"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "dark gray"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "dark gray"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "dark gray"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "dark gray"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "dark red"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "dark red"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "dark red"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "dark red"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "dark green"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "dark green"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "dark green"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "dark green"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "dark blue"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "dark blue"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "dark blue"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "dark blue"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      }
+    ]
+  },
+  "phase_names": [
+    "phase-1",
+    "phase-2"
+  ],
+  "phase_materials": {
+    "phase-1": "water-vapor-at-psep",
+    "phase-2": "water-liquid-at-psep"
+  },
+  "phase_densities_kg_m3": {
+    "phase-1": 5.7974339,
+    "phase-2": 881.21088
+  },
+  "phase_identity_method": "initialized density fields matched to material database"
+}

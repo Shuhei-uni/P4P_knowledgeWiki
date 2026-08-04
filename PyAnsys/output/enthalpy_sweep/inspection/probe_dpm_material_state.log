@@ -1,0 +1,106 @@
+Connecting to Fluent server 1 using IP/port: 10.104.145.85:52508
+/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/.venv/lib/python3.12/site-packages/ansys/fluent/core/fluent_connection.py:306: InsecureGrpcWarning: The Fluent session will be connected in insecure gRPC mode. This mode is not recommended. For more details on the implications and usage of insecure mode, refer to the Fluent documentation.
+  warnings.warn(
+/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/.venv/lib/python3.12/site-packages/ansys/tools/common/cyberchannel.py:188: UserWarning: Starting gRPC client without TLS on 10.104.145.85:52508. This is INSECURE. Consider using a secure connection.
+  warn(f"Starting gRPC client without TLS on {target}. This is INSECURE. Consider using a secure connection.")
+{
+  "fluid_names": {
+    "label": "fluid_names",
+    "value": [
+      "steam",
+      "water-liquid",
+      "water-liquid-new"
+    ]
+  },
+  "inert_particle_names": {
+    "label": "inert_particle_names",
+    "value": [
+      "water-liquid-dpm"
+    ]
+  },
+  "water_liquid_dpm_state": {
+    "label": "water-liquid-dpm",
+    "value": {
+      "name": "water-liquid-dpm",
+      "chemical_formula": "",
+      "density": {
+        "option": "constant",
+        "value": 881.77
+      }
+    }
+  },
+  "injection_materials": {
+    "injection-0": {
+      "particle_type": "inert",
+      "material": "water-liquid-dpm",
+      "velocity": {
+        "use_face_normal_direction": true,
+        "magnitude": 34.221202
+      }
+    },
+    "injection-1": {
+      "particle_type": "inert",
+      "material": "water-liquid-dpm",
+      "velocity": {
+        "use_face_normal_direction": true,
+        "magnitude": 34.221202
+      }
+    },
+    "injection-2": {
+      "particle_type": "inert",
+      "material": "water-liquid-dpm",
+      "velocity": {
+        "use_face_normal_direction": true,
+        "magnitude": 34.221202
+      }
+    },
+    "injection-3": {
+      "particle_type": "inert",
+      "material": "water-liquid-dpm",
+      "velocity": {
+        "use_face_normal_direction": true,
+        "magnitude": 34.221202
+      }
+    },
+    "injection-4": {
+      "particle_type": "inert",
+      "material": "water-liquid-dpm",
+      "velocity": {
+        "use_face_normal_direction": true,
+        "magnitude": 34.221202
+      }
+    },
+    "injection-5": {
+      "particle_type": "inert",
+      "material": "water-liquid-dpm",
+      "velocity": {
+        "use_face_normal_direction": true,
+        "magnitude": 34.221202
+      }
+    },
+    "injection-6": {
+      "particle_type": "inert",
+      "material": "water-liquid-dpm",
+      "velocity": {
+        "use_face_normal_direction": true,
+        "magnitude": 34.221202
+      }
+    },
+    "injection-7": {
+      "particle_type": "inert",
+      "material": "water-liquid-dpm",
+      "velocity": {
+        "use_face_normal_direction": true,
+        "magnitude": 34.221202
+      }
+    },
+    "injection-8": {
+      "particle_type": "inert",
+      "material": "water-liquid-dpm",
+      "velocity": {
+        "use_face_normal_direction": true,
+        "magnitude": 34.221202
+      }
+    }
+  }
+}

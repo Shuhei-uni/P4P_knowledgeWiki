@@ -1,0 +1,1082 @@
+Connecting to Fluent server 1 using IP/port: 10.104.145.85:60012
+/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/.venv/lib/python3.12/site-packages/ansys/fluent/core/fluent_connection.py:306: InsecureGrpcWarning: The Fluent session will be connected in insecure gRPC mode. This mode is not recommended. For more details on the implications and usage of insecure mode, refer to the Fluent documentation.
+  warnings.warn(
+/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/.venv/lib/python3.12/site-packages/ansys/tools/common/cyberchannel.py:188: UserWarning: Starting gRPC client without TLS on 10.104.145.85:60012. This is INSECURE. Consider using a secure connection.
+  warn(f"Starting gRPC client without TLS on {target}. This is INSECURE. Consider using a secure connection.")
+
+Connected to Fluent Ansys Fluent 2024 R2
+
+Error: eval: unbound variable
+Error Object: make-directory
+remote_output_dir attempt failed: (make-directory "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618") -> An error occurred in the server while evaluating the Scheme expression
+
+remote_output_dir attempt failed: (mkdir "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618") -> An error occurred in the server while evaluating the Scheme expression
+Error: eval: unbound variable
+Error Object: mkdir
+remote_output_dir: created C:\Users\qtra338\Documents\enthalpy_sweep_direction_sensitivity_20260618
+
+=== Variant face_normal ===
+
+=== Load Saved Case/Data ===
+Note: Rank = 0: Process affinity not being set (6).
+
+       Clearing partially read grid.
+
+Reading from EN439159:"C:\Users\qtra338\Documents\enthalpy_sweep_single_verify_20260618\case_2_1440_1500_recovered.cas.h5" in NODE0 mode ...
+  Reading mesh ...
+     5578299 cells,     1 cell zone  ...
+        5578299 tetrahedral cells,  zone id: 3
+    11355491 faces,     5 face zones ...
+         374376 triangular wall faces,  zone id: 1
+       10957705 triangular interior faces,  zone id: 2
+           8700 triangular mass-flow-inlet faces,  zone id: 6
+           5435 triangular pressure-outlet faces,  zone id: 7
+           9275 triangular wall faces,  zone id: 8
+     1026091 nodes,     1 node zone  ...
+  Done.
+
+
+Building...
+     mesh
+     materials,
+     interface,
+     domains,
+	mixture
+	phase-1
+	phase-2
+	interaction
+     zones,
+	fluid  (phase-2)
+	interior-fluid  (phase-2)
+	fluid  (phase-1)
+	interior-fluid  (phase-1)
+	wall-fluid  (phase-1)
+	wall-fluid  (phase-2)
+	inlet  (phase-1)
+	inlet  (phase-2)
+	steam_outlet  (phase-1)
+	steam_outlet  (phase-2)
+	fluid_outlet  (phase-1)
+	fluid_outlet  (phase-2)
+	interior-fluid
+	wall-fluid
+	inlet
+	steam_outlet
+	fluid_outlet
+	fluid
+     parallel,
+Done.
+read_resume_case: OK
+
+Reading from EN439159:"C:\Users\qtra338\Documents\enthalpy_sweep_single_verify_20260618\case_2_1440_1500_recovered.dat.h5" in NODE0 mode ...
+
+
+  Reading results.
+Parallel variables...
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 12159 cells 
+Done.
+read_resume_data: OK
+
+=== Set Inlet Phase Mass Flows ===
+set_inlet_phase_mass_flows: OK
+{
+  "mixture": {
+    "momentum": {
+      "reference_frame": "Absolute",
+      "supersonic_gauge_pressure": {
+        "option": "value",
+        "value": 1140000
+      },
+      "direction_specification": "Normal to Boundary"
+    },
+    "turbulence": {
+      "turbulence_specification": "Intensity and Hydraulic Diameter",
+      "turbulent_intensity": 0.02152499951888,
+      "hydraulic_diameter": 0.7240000000000001
+    },
+    "dpm": {
+      "discrete_phase_bc_type": "escape"
+    },
+    "multiphase": {}
+  },
+  "phase-1": {
+    "momentum": {
+      "mass_flow_specification": "Mass Flow Rate",
+      "mass_flow_rate": {
+        "option": "value",
+        "value": 64.85
+      }
+    },
+    "turbulence": {},
+    "dpm": {},
+    "multiphase": {}
+  },
+  "phase-2": {
+    "momentum": {
+      "mass_flow_specification": "Mass Flow Rate",
+      "mass_flow_rate": {
+        "option": "value",
+        "value": 132.76
+      }
+    },
+    "turbulence": {},
+    "dpm": {},
+    "multiphase": {}
+  }
+}
+
+=== Set DPM Injections ===
+DPM velocity mode: face-normal
+injection-0_particle_type: OK
+injection-0_material: OK
+injection-0_injection_type_surface: OK
+injection-0_location: OK
+injection-0_mass_flow_rate: OK
+injection-0_use_face_normal_direction: OK
+injection-0_velocity_magnitude: OK
+injection-0_particle_size: OK
+injection-1_particle_type: OK
+injection-1_material: OK
+injection-1_injection_type_surface: OK
+injection-1_location: OK
+injection-1_mass_flow_rate: OK
+injection-1_use_face_normal_direction: OK
+injection-1_velocity_magnitude: OK
+injection-1_particle_size: OK
+injection-2_particle_type: OK
+injection-2_material: OK
+injection-2_injection_type_surface: OK
+injection-2_location: OK
+injection-2_mass_flow_rate: OK
+injection-2_use_face_normal_direction: OK
+injection-2_velocity_magnitude: OK
+injection-2_particle_size: OK
+injection-3_particle_type: OK
+injection-3_material: OK
+injection-3_injection_type_surface: OK
+injection-3_location: OK
+injection-3_mass_flow_rate: OK
+injection-3_use_face_normal_direction: OK
+injection-3_velocity_magnitude: OK
+injection-3_particle_size: OK
+injection-4_particle_type: OK
+injection-4_material: OK
+injection-4_injection_type_surface: OK
+injection-4_location: OK
+injection-4_mass_flow_rate: OK
+injection-4_use_face_normal_direction: OK
+injection-4_velocity_magnitude: OK
+injection-4_particle_size: OK
+injection-5_particle_type: OK
+injection-5_material: OK
+injection-5_injection_type_surface: OK
+injection-5_location: OK
+injection-5_mass_flow_rate: OK
+injection-5_use_face_normal_direction: OK
+injection-5_velocity_magnitude: OK
+injection-5_particle_size: OK
+injection-6_particle_type: OK
+injection-6_material: OK
+injection-6_injection_type_surface: OK
+injection-6_location: OK
+injection-6_mass_flow_rate: OK
+injection-6_use_face_normal_direction: OK
+injection-6_velocity_magnitude: OK
+injection-6_particle_size: OK
+injection-7_particle_type: OK
+injection-7_material: OK
+injection-7_injection_type_surface: OK
+injection-7_location: OK
+injection-7_mass_flow_rate: OK
+injection-7_use_face_normal_direction: OK
+injection-7_velocity_magnitude: OK
+injection-7_particle_size: OK
+injection-8_particle_type: OK
+injection-8_material: OK
+injection-8_injection_type_surface: OK
+injection-8_location: OK
+injection-8_mass_flow_rate: OK
+injection-8_use_face_normal_direction: OK
+injection-8_velocity_magnitude: OK
+injection-8_particle_size: OK
+
+=== Apply DPM Tracking Sensitivity ===
+tracking_state_before: {
+  "max_num_steps": 100000,
+  "step_size_controls": {
+    "option": "step-length-factor",
+    "step_length_factor": 5
+  },
+  "expert": {
+    "randomize_every_iteration": true,
+    "randomize_every_timestep": true,
+    "tracking_statistics_format": "short",
+    "verbosity": 1,
+    "reference_frame": "relative"
+  }
+}
+set_dpm_max_num_steps: OK
+
+Error: ASSQ: invalid argument [2]: improper list
+Error Object: #t
+set_dpm_high_res_tracking_best_effort: FAILED -> ASSQ: invalid argument [2]: improper list
+Error Object: #t
+set_dpm_interaction_off_best_effort: OK
+
+Error: api-set-var: the object is not active
+Error Object: "setup/models/discrete-phase/general-settings/interaction/update-sources-every-iteration?"
+set_dpm_sources_every_iteration_off_best_effort: FAILED -> api-set-var: the object is not active
+Error Object: setup/models/discrete-phase/general-settings/interaction/update-sources-every-iteration?
+tracking_state_after: {
+  "max_num_steps": 500000,
+  "step_size_controls": {
+    "option": "step-length-factor",
+    "step_length_factor": 5
+  },
+  "expert": {
+    "randomize_every_iteration": true,
+    "randomize_every_timestep": true,
+    "tracking_statistics_format": "short",
+    "verbosity": 1,
+    "reference_frame": "relative"
+  }
+}
+
+=== Run DPM Reports ===
+report_call: settings_zone_summaries_per_injection_enable
+settings_zone_summaries_per_injection_enable: no captured text
+report_call: solve_dpm_update
+/solve/dpm-update
+
+DPM Iteration ....
+
+/solve/dpm-update
+
+DPM Iteration ....
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 12159 cells 
+number tracked = 78300, escaped = 66585, trapped = 11537, incomplete = 178
+
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 12159 cells 
+number tracked = 78300, escaped = 66585, trapped = 11537, incomplete = 178
+report_call: settings_dpm_summary
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                 178  3.312e+02  7.633e+02  4.855e+02  1.433e+02     injection-1 3172     injection-4 5696
+ Escaped             steam_outlet      7  66585  3.362e-01  4.310e+01  6.268e+00  4.747e+00     injection-0  246     injection-3 2403
+ Trapped             fluid_outlet      8  11537  2.092e-01  1.318e+02  2.298e+00  5.162e+00     injection-6  691     injection-8 5384
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initi
+report_call: tui_dpm_summary
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                 178  3.312e+02  7.633e+02  4.855e+02  1.433e+02     injection-1 3172     injection-4 5696
+ Escaped             steam_outlet      7  66585  3.362e-01  4.310e+01  6.268e+00  4.747e+00     injection-0  246     injection-3 2403
+ Trapped             fluid_outlet      8  11537  2.092e-01  1.318e+02  2.298e+00  5.162e+00     injection-6  691     injection-8 5384
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initi
+report_call: tui_particle_summary
+(injection-0 injection-1 injection-2 injection-3 injection-4 injection-5 injection-6 injection-7 injection-8)
+The following solver settings object method could also be used to execute the above command:
+<solver_session>.results.report.particle_summary(injection_names = ["injection-0", "injection-1", "injection-2", "injection-3", "injection-4", "injection-5", "injection-6", "injection-7", "injection-8"])
+
+report_call: settings_dpm_extended_summary
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                 178  3.312e+02  7.633e+02  4.855e+02  1.433e+02     injection-1 3172     injection-4 5696
+ Escaped             steam_outlet      7  66585  3.362e-01  4.310e+01  6.268e+00  4.747e+00     injection-0  246     injection-3 2403
+ Trapped             fluid_outlet      8  11537  2.092e-01  1.318e+02  2.298e+00  5.162e+00     injection-6  691     injection-8 5384
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initi
+report_call: dpm_extended_summary_injection-0
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_face_normal_injection-0_extended_scratch.txt
+
+report_call: dpm_extended_summary_injection-1
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_face_normal_injection-1_extended_scratch.txt
+
+report_call: dpm_extended_summary_injection-2
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_face_normal_injection-2_extended_scratch.txt
+
+report_call: dpm_extended_summary_injection-3
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_face_normal_injection-3_extended_scratch.txt
+
+report_call: dpm_extended_summary_injection-4
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_face_normal_injection-4_extended_scratch.txt
+
+report_call: dpm_extended_summary_injection-5
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_face_normal_injection-5_extended_scratch.txt
+
+report_call: dpm_extended_summary_injection-6
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_face_normal_injection-6_extended_scratch.txt
+
+report_call: dpm_extended_summary_injection-7
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_face_normal_injection-7_extended_scratch.txt
+
+report_call: dpm_extended_summary_injection-8
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_face_normal_injection-8_extended_scratch.txt
+
+variant_summary: {
+  "variant": "face_normal",
+  "case": "Case 2",
+  "enthalpy_kJkg": "1440",
+  "gas_mass_flow_kgs": 64.85,
+  "liquid_mass_flow_kgs": "132.76",
+  "dpm_injected_mass_flow_kgs": 132.76,
+  "escaped_kgs": 90.84,
+  "trapped_kgs": 41.89,
+  "incomplete_kgs": 0.02955,
+  "escaped_fraction": 0.684242241639048,
+  "trapped_fraction": 0.3155317866827358,
+  "incomplete_fraction": 0.00022258210304308527,
+  "steam_quality_percent_from_escaped": 41.65328537478322,
+  "escaped_count": "66585",
+  "trapped_count": "11537",
+  "incomplete_count": "178",
+  "local_case_summary": "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_direction_sensitivity_20260618/case_2_1440_direction_sensitivity_face_normal_case_summary.csv",
+  "local_injection_results": "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_direction_sensitivity_20260618/case_2_1440_direction_sensitivity_face_normal_injection_results.csv",
+  "local_report": "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_direction_sensitivity_20260618/case_2_1440_direction_sensitivity_face_normal_dpm_report.txt"
+}
+
+=== Variant z_negative ===
+
+=== Load Saved Case/Data ===
+Note: Rank = 0: Process affinity not being set (6).
+
+       Clearing partially read grid.
+
+Reading from EN439159:"C:\Users\qtra338\Documents\enthalpy_sweep_single_verify_20260618\case_2_1440_1500_recovered.cas.h5" in NODE0 mode ...
+  Reading mesh ...
+     5578299 cells,     1 cell zone  ...
+        5578299 tetrahedral cells,  zone id: 3
+    11355491 faces,     5 face zones ...
+         374376 triangular wall faces,  zone id: 1
+       10957705 triangular interior faces,  zone id: 2
+           8700 triangular mass-flow-inlet faces,  zone id: 6
+           5435 triangular pressure-outlet faces,  zone id: 7
+           9275 triangular wall faces,  zone id: 8
+     1026091 nodes,     1 node zone  ...
+  Done.
+
+
+Building...
+     mesh
+     materials,
+     interface,
+     domains,
+	mixture
+	phase-1
+	phase-2
+	interaction
+     zones,
+	fluid  (phase-2)
+	interior-fluid  (phase-2)
+	fluid  (phase-1)
+	interior-fluid  (phase-1)
+	wall-fluid  (phase-1)
+	wall-fluid  (phase-2)
+	inlet  (phase-1)
+	inlet  (phase-2)
+	steam_outlet  (phase-1)
+	steam_outlet  (phase-2)
+	fluid_outlet  (phase-1)
+	fluid_outlet  (phase-2)
+	interior-fluid
+	wall-fluid
+	inlet
+	steam_outlet
+	fluid_outlet
+	fluid
+     parallel,
+Done.
+read_resume_case: OK
+
+Reading from EN439159:"C:\Users\qtra338\Documents\enthalpy_sweep_single_verify_20260618\case_2_1440_1500_recovered.dat.h5" in NODE0 mode ...
+
+
+  Reading results.
+Parallel variables...
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 12159 cells 
+Done.
+read_resume_data: OK
+
+=== Set Inlet Phase Mass Flows ===
+set_inlet_phase_mass_flows: OK
+{
+  "mixture": {
+    "momentum": {
+      "reference_frame": "Absolute",
+      "supersonic_gauge_pressure": {
+        "option": "value",
+        "value": 1140000
+      },
+      "direction_specification": "Normal to Boundary"
+    },
+    "turbulence": {
+      "turbulence_specification": "Intensity and Hydraulic Diameter",
+      "turbulent_intensity": 0.02152499951888,
+      "hydraulic_diameter": 0.7240000000000001
+    },
+    "dpm": {
+      "discrete_phase_bc_type": "escape"
+    },
+    "multiphase": {}
+  },
+  "phase-1": {
+    "momentum": {
+      "mass_flow_specification": "Mass Flow Rate",
+      "mass_flow_rate": {
+        "option": "value",
+        "value": 64.85
+      }
+    },
+    "turbulence": {},
+    "dpm": {},
+    "multiphase": {}
+  },
+  "phase-2": {
+    "momentum": {
+      "mass_flow_specification": "Mass Flow Rate",
+      "mass_flow_rate": {
+        "option": "value",
+        "value": 132.76
+      }
+    },
+    "turbulence": {},
+    "dpm": {},
+    "multiphase": {}
+  }
+}
+
+=== Set DPM Injections ===
+DPM velocity mode: components
+injection-0_particle_type: OK
+injection-0_material: OK
+injection-0_injection_type_surface: OK
+injection-0_location: OK
+injection-0_mass_flow_rate: OK
+
+Note: Setting setup/models/discrete-phase/injections/injection-0/initial-values/velocity/z-velocity is not set as it is inactive
+injection-0_velocity: OK
+injection-0_particle_size: OK
+injection-1_particle_type: OK
+injection-1_material: OK
+injection-1_injection_type_surface: OK
+injection-1_location: OK
+injection-1_mass_flow_rate: OK
+
+Note: Setting setup/models/discrete-phase/injections/injection-1/initial-values/velocity/z-velocity is not set as it is inactive
+injection-1_velocity: OK
+injection-1_particle_size: OK
+injection-2_particle_type: OK
+injection-2_material: OK
+injection-2_injection_type_surface: OK
+injection-2_location: OK
+injection-2_mass_flow_rate: OK
+
+Note: Setting setup/models/discrete-phase/injections/injection-2/initial-values/velocity/z-velocity is not set as it is inactive
+injection-2_velocity: OK
+injection-2_particle_size: OK
+injection-3_particle_type: OK
+injection-3_material: OK
+injection-3_injection_type_surface: OK
+injection-3_location: OK
+injection-3_mass_flow_rate: OK
+
+Note: Setting setup/models/discrete-phase/injections/injection-3/initial-values/velocity/z-velocity is not set as it is inactive
+injection-3_velocity: OK
+injection-3_particle_size: OK
+injection-4_particle_type: OK
+injection-4_material: OK
+injection-4_injection_type_surface: OK
+injection-4_location: OK
+injection-4_mass_flow_rate: OK
+
+Note: Setting setup/models/discrete-phase/injections/injection-4/initial-values/velocity/z-velocity is not set as it is inactive
+injection-4_velocity: OK
+injection-4_particle_size: OK
+injection-5_particle_type: OK
+injection-5_material: OK
+injection-5_injection_type_surface: OK
+injection-5_location: OK
+injection-5_mass_flow_rate: OK
+
+Note: Setting setup/models/discrete-phase/injections/injection-5/initial-values/velocity/z-velocity is not set as it is inactive
+injection-5_velocity: OK
+injection-5_particle_size: OK
+injection-6_particle_type: OK
+injection-6_material: OK
+injection-6_injection_type_surface: OK
+injection-6_location: OK
+injection-6_mass_flow_rate: OK
+
+Note: Setting setup/models/discrete-phase/injections/injection-6/initial-values/velocity/z-velocity is not set as it is inactive
+injection-6_velocity: OK
+injection-6_particle_size: OK
+injection-7_particle_type: OK
+injection-7_material: OK
+injection-7_injection_type_surface: OK
+injection-7_location: OK
+injection-7_mass_flow_rate: OK
+
+Note: Setting setup/models/discrete-phase/injections/injection-7/initial-values/velocity/z-velocity is not set as it is inactive
+injection-7_velocity: OK
+injection-7_particle_size: OK
+injection-8_particle_type: OK
+injection-8_material: OK
+injection-8_injection_type_surface: OK
+injection-8_location: OK
+injection-8_mass_flow_rate: OK
+
+Note: Setting setup/models/discrete-phase/injections/injection-8/initial-values/velocity/z-velocity is not set as it is inactive
+injection-8_velocity: OK
+injection-8_particle_size: OK
+
+=== Apply DPM Tracking Sensitivity ===
+tracking_state_before: {
+  "max_num_steps": 100000,
+  "step_size_controls": {
+    "option": "step-length-factor",
+    "step_length_factor": 5
+  },
+  "expert": {
+    "randomize_every_iteration": true,
+    "randomize_every_timestep": true,
+    "tracking_statistics_format": "short",
+    "verbosity": 1,
+    "reference_frame": "relative"
+  }
+}
+set_dpm_max_num_steps: OK
+
+Error: ASSQ: invalid argument [2]: improper listset_dpm_high_res_tracking_best_effort: FAILED -> ASSQ: invalid argument [2]: improper list
+Error Object: #t
+
+Error Object: #t
+set_dpm_interaction_off_best_effort: OK
+
+Error: api-set-var: the object is not active
+set_dpm_sources_every_iteration_off_best_effort: FAILED -> api-set-var: the object is not active
+Error Object: setup/models/discrete-phase/general-settings/interaction/update-sources-every-iteration?
+Error Object: "setup/models/discrete-phase/general-settings/interaction/update-sources-every-iteration?"
+tracking_state_after: {
+  "max_num_steps": 500000,
+  "step_size_controls": {
+    "option": "step-length-factor",
+    "step_length_factor": 5
+  },
+  "expert": {
+    "randomize_every_iteration": true,
+    "randomize_every_timestep": true,
+    "tracking_statistics_format": "short",
+    "verbosity": 1,
+    "reference_frame": "relative"
+  }
+}
+
+=== Run DPM Reports ===
+report_call: settings_zone_summaries_per_injection_enable
+settings_zone_summaries_per_injection_enable: no captured text
+report_call: solve_dpm_update
+/solve/dpm-update
+
+DPM Iteration ....
+
+/solve/dpm-update
+
+DPM Iteration ....
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 12159 cells 
+number tracked = 78300, escaped = 67436, trapped = 10683, incomplete = 181
+
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 12159 cells 
+number tracked = 78300, escaped = 67436, trapped = 10683, incomplete = 181
+report_call: settings_dpm_summary
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                 181  3.432e+02  7.632e+02  4.873e+02  1.407e+02     injection-2 4455     injection-4 1843
+ Escaped             steam_outlet      7  67436  3.362e-01  4.519e+01  6.297e+00  4.766e+00     injection-0  246     injection-2 7129
+ Trapped             fluid_outlet      8  10683  2.017e-01  1.722e+02  2.518e+00  6.336e+00     injection-6  771     injection-8 8015
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initi
+report_call: tui_dpm_summary
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                 181  3.432e+02  7.632e+02  4.873e+02  1.407e+02     injection-2 4455     injection-4 1843
+ Escaped             steam_outlet      7  67436  3.362e-01  4.519e+01  6.297e+00  4.766e+00     injection-0  246     injection-2 7129
+ Trapped             fluid_outlet      8  10683  2.017e-01  1.722e+02  2.518e+00  6.336e+00     injection-6  771     injection-8 8015
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initi
+report_call: tui_particle_summary
+(injection-0 injection-1 injection-2 injection-3 injection-4 injection-5 injection-6 injection-7 injection-8)
+The following solver settings object method could also be used to execute the above command:
+<solver_session>.results.report.particle_summary(injection_names = ["injection-0", "injection-1", "injection-2", "injection-3", "injection-4", "injection-5", "injection-6", "injection-7", "injection-8"])
+
+report_call: settings_dpm_extended_summary
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                 181  3.432e+02  7.632e+02  4.873e+02  1.407e+02     injection-2 4455     injection-4 1843
+ Escaped             steam_outlet      7  67436  3.362e-01  4.519e+01  6.297e+00  4.766e+00     injection-0  246     injection-2 7129
+ Trapped             fluid_outlet      8  10683  2.017e-01  1.722e+02  2.518e+00  6.336e+00     injection-6  771     injection-8 8015
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initi
+report_call: dpm_extended_summary_injection-0
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_z_negative_injection-0_extended_scratch.txt
+
+report_call: dpm_extended_summary_injection-1
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_z_negative_injection-1_extended_scratch.txt
+
+report_call: dpm_extended_summary_injection-2
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_z_negative_injection-2_extended_scratch.txt
+
+report_call: dpm_extended_summary_injection-3
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_z_negative_injection-3_extended_scratch.txt
+
+report_call: dpm_extended_summary_injection-4
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_z_negative_injection-4_extended_scratch.txt
+
+report_call: dpm_extended_summary_injection-5
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_z_negative_injection-5_extended_scratch.txt
+
+report_call: dpm_extended_summary_injection-6
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_z_negative_injection-6_extended_scratch.txt
+
+report_call: dpm_extended_summary_injection-7
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_z_negative_injection-7_extended_scratch.txt
+
+report_call: dpm_extended_summary_injection-8
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_z_negative_injection-8_extended_scratch.txt
+
+variant_summary: {
+  "variant": "z_negative",
+  "case": "Case 2",
+  "enthalpy_kJkg": "1440",
+  "gas_mass_flow_kgs": 64.85,
+  "liquid_mass_flow_kgs": "132.76",
+  "dpm_injected_mass_flow_kgs": 132.76,
+  "escaped_kgs": 93.96,
+  "trapped_kgs": 38.77,
+  "incomplete_kgs": 0.02972,
+  "escaped_fraction": 0.7077432961735463,
+  "trapped_fraction": 0.29203073214823744,
+  "incomplete_fraction": 0.00022386260921964448,
+  "steam_quality_percent_from_escaped": 40.834960015112394,
+  "escaped_count": "67436",
+  "trapped_count": "10683",
+  "incomplete_count": "181",
+  "local_case_summary": "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_direction_sensitivity_20260618/case_2_1440_direction_sensitivity_z_negative_case_summary.csv",
+  "local_injection_results": "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_direction_sensitivity_20260618/case_2_1440_direction_sensitivity_z_negative_injection_results.csv",
+  "local_report": "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_direction_sensitivity_20260618/case_2_1440_direction_sensitivity_z_negative_dpm_report.txt"
+}
+
+=== Variant z_positive ===
+
+=== Load Saved Case/Data ===
+Note: Rank = 0: Process affinity not being set (6).
+
+       Clearing partially read grid.
+
+Reading from EN439159:"C:\Users\qtra338\Documents\enthalpy_sweep_single_verify_20260618\case_2_1440_1500_recovered.cas.h5" in NODE0 mode ...
+  Reading mesh ...
+     5578299 cells,     1 cell zone  ...
+        5578299 tetrahedral cells,  zone id: 3
+    11355491 faces,     5 face zones ...
+         374376 triangular wall faces,  zone id: 1
+       10957705 triangular interior faces,  zone id: 2
+           8700 triangular mass-flow-inlet faces,  zone id: 6
+           5435 triangular pressure-outlet faces,  zone id: 7
+           9275 triangular wall faces,  zone id: 8
+     1026091 nodes,     1 node zone  ...
+  Done.
+
+
+Building...
+     mesh
+     materials,
+     interface,
+     domains,
+	mixture
+	phase-1
+	phase-2
+	interaction
+     zones,
+	fluid  (phase-2)
+	interior-fluid  (phase-2)
+	fluid  (phase-1)
+	interior-fluid  (phase-1)
+	wall-fluid  (phase-1)
+	wall-fluid  (phase-2)
+	inlet  (phase-1)
+	inlet  (phase-2)
+	steam_outlet  (phase-1)
+	steam_outlet  (phase-2)
+	fluid_outlet  (phase-1)
+	fluid_outlet  (phase-2)
+	interior-fluid
+	wall-fluid
+	inlet
+	steam_outlet
+	fluid_outlet
+	fluid
+     parallel,
+Done.
+read_resume_case: OK
+
+Reading from EN439159:"C:\Users\qtra338\Documents\enthalpy_sweep_single_verify_20260618\case_2_1440_1500_recovered.dat.h5" in NODE0 mode ...
+
+
+  Reading results.
+Parallel variables...
+
+read_resume_data: OK
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 12159 cells 
+Done.
+
+=== Set Inlet Phase Mass Flows ===
+set_inlet_phase_mass_flows: OK
+{
+  "mixture": {
+    "momentum": {
+      "reference_frame": "Absolute",
+      "supersonic_gauge_pressure": {
+        "option": "value",
+        "value": 1140000
+      },
+      "direction_specification": "Normal to Boundary"
+    },
+    "turbulence": {
+      "turbulence_specification": "Intensity and Hydraulic Diameter",
+      "turbulent_intensity": 0.02152499951888,
+      "hydraulic_diameter": 0.7240000000000001
+    },
+    "dpm": {
+      "discrete_phase_bc_type": "escape"
+    },
+    "multiphase": {}
+  },
+  "phase-1": {
+    "momentum": {
+      "mass_flow_specification": "Mass Flow Rate",
+      "mass_flow_rate": {
+        "option": "value",
+        "value": 64.85
+      }
+    },
+    "turbulence": {},
+    "dpm": {},
+    "multiphase": {}
+  },
+  "phase-2": {
+    "momentum": {
+      "mass_flow_specification": "Mass Flow Rate",
+      "mass_flow_rate": {
+        "option": "value",
+        "value": 132.76
+      }
+    },
+    "turbulence": {},
+    "dpm": {},
+    "multiphase": {}
+  }
+}
+
+=== Set DPM Injections ===
+DPM velocity mode: components
+injection-0_particle_type: OK
+injection-0_material: OK
+injection-0_injection_type_surface: OK
+injection-0_location: OK
+injection-0_mass_flow_rate: OK
+
+Note: Setting setup/models/discrete-phase/injections/injection-0/initial-values/velocity/z-velocity is not set as it is inactive
+injection-0_velocity: OK
+injection-0_particle_size: OK
+injection-1_particle_type: OK
+injection-1_material: OK
+injection-1_injection_type_surface: OK
+injection-1_location: OK
+injection-1_mass_flow_rate: OK
+
+Note: Setting setup/models/discrete-phase/injections/injection-1/initial-values/velocity/z-velocity is not set as it is inactive
+injection-1_velocity: OK
+injection-1_particle_size: OK
+injection-2_particle_type: OK
+injection-2_material: OK
+injection-2_injection_type_surface: OK
+injection-2_location: OK
+injection-2_mass_flow_rate: OK
+
+Note: Setting setup/models/discrete-phase/injections/injection-2/initial-values/velocity/z-velocity is not set as it is inactive
+injection-2_velocity: OK
+injection-2_particle_size: OK
+injection-3_particle_type: OK
+injection-3_material: OK
+injection-3_injection_type_surface: OK
+injection-3_location: OK
+injection-3_mass_flow_rate: OK
+
+Note: Setting setup/models/discrete-phase/injections/injection-3/initial-values/velocity/z-velocity is not set as it is inactive
+injection-3_velocity: OK
+injection-3_particle_size: OK
+injection-4_particle_type: OK
+injection-4_material: OK
+injection-4_injection_type_surface: OK
+injection-4_location: OK
+injection-4_mass_flow_rate: OK
+
+Note: Setting setup/models/discrete-phase/injections/injection-4/initial-values/velocity/z-velocity is not set as it is inactive
+injection-4_velocity: OK
+injection-4_particle_size: OK
+injection-5_particle_type: OK
+injection-5_material: OK
+injection-5_injection_type_surface: OK
+injection-5_location: OK
+injection-5_mass_flow_rate: OK
+
+Note: Setting setup/models/discrete-phase/injections/injection-5/initial-values/velocity/z-velocity is not set as it is inactive
+injection-5_velocity: OK
+injection-5_particle_size: OK
+injection-6_particle_type: OK
+injection-6_material: OK
+injection-6_injection_type_surface: OK
+injection-6_location: OK
+injection-6_mass_flow_rate: OK
+
+Note: Setting setup/models/discrete-phase/injections/injection-6/initial-values/velocity/z-velocity is not set as it is inactive
+injection-6_velocity: OK
+injection-6_particle_size: OK
+injection-7_particle_type: OK
+injection-7_material: OK
+injection-7_injection_type_surface: OK
+injection-7_location: OK
+injection-7_mass_flow_rate: OK
+
+Note: Setting setup/models/discrete-phase/injections/injection-7/initial-values/velocity/z-velocity is not set as it is inactive
+injection-7_velocity: OK
+injection-7_particle_size: OK
+injection-8_particle_type: OK
+injection-8_material: OK
+injection-8_injection_type_surface: OK
+injection-8_location: OK
+injection-8_mass_flow_rate: OK
+
+Note: Setting setup/models/discrete-phase/injections/injection-8/initial-values/velocity/z-velocity is not set as it is inactive
+injection-8_velocity: OK
+injection-8_particle_size: OK
+
+=== Apply DPM Tracking Sensitivity ===
+tracking_state_before: {
+  "max_num_steps": 100000,
+  "step_size_controls": {
+    "option": "step-length-factor",
+    "step_length_factor": 5
+  },
+  "expert": {
+    "randomize_every_iteration": true,
+    "randomize_every_timestep": true,
+    "tracking_statistics_format": "short",
+    "verbosity": 1,
+    "reference_frame": "relative"
+  }
+}
+set_dpm_max_num_steps: OK
+
+set_dpm_high_res_tracking_best_effort: FAILED -> ASSQ: invalid argument [2]: improper list
+Error Object: #t
+Error: ASSQ: invalid argument [2]: improper list
+Error Object: #t
+set_dpm_interaction_off_best_effort: OK
+
+set_dpm_sources_every_iteration_off_best_effort: FAILED -> api-set-var: the object is not active
+Error Object: setup/models/discrete-phase/general-settings/interaction/update-sources-every-iteration?
+Error: api-set-var: the object is not active
+Error Object: "setup/models/discrete-phase/general-settings/interaction/update-sources-every-iteration?"
+tracking_state_after: {
+  "max_num_steps": 500000,
+  "step_size_controls": {
+    "option": "step-length-factor",
+    "step_length_factor": 5
+  },
+  "expert": {
+    "randomize_every_iteration": true,
+    "randomize_every_timestep": true,
+    "tracking_statistics_format": "short",
+    "verbosity": 1,
+    "reference_frame": "relative"
+  }
+}
+
+=== Run DPM Reports ===
+report_call: settings_zone_summaries_per_injection_enable
+settings_zone_summaries_per_injection_enable: no captured text
+report_call: solve_dpm_update
+/solve/dpm-update
+
+DPM Iteration ....
+
+/solve/dpm-update
+
+DPM Iteration ....
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 12159 cells 
+number tracked = 78300, escaped = 67436, trapped = 10683, incomplete = 181
+
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 12159 cells 
+number tracked = 78300, escaped = 67436, trapped = 10683, incomplete = 181
+report_call: settings_dpm_summary
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                 181  3.432e+02  7.632e+02  4.873e+02  1.407e+02     injection-2 4455     injection-4 1843
+ Escaped             steam_outlet      7  67436  3.362e-01  4.519e+01  6.297e+00  4.766e+00     injection-0  246     injection-2 7129
+ Trapped             fluid_outlet      8  10683  2.017e-01  1.722e+02  2.518e+00  6.336e+00     injection-6  771     injection-8 8015
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initi
+report_call: tui_dpm_summary
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                 181  3.432e+02  7.632e+02  4.873e+02  1.407e+02     injection-2 4455     injection-4 1843
+ Escaped             steam_outlet      7  67436  3.362e-01  4.519e+01  6.297e+00  4.766e+00     injection-0  246     injection-2 7129
+ Trapped             fluid_outlet      8  10683  2.017e-01  1.722e+02  2.518e+00  6.336e+00     injection-6  771     injection-8 8015
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initi
+report_call: tui_particle_summary
+(injection-0 injection-1 injection-2 injection-3 injection-4 injection-5 injection-6 injection-7 injection-8)
+The following solver settings object method could also be used to execute the above command:
+<solver_session>.results.report.particle_summary(injection_names = ["injection-0", "injection-1", "injection-2", "injection-3", "injection-4", "injection-5", "injection-6", "injection-7", "injection-8"])
+
+report_call: settings_dpm_extended_summary
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                                 181  3.432e+02  7.632e+02  4.873e+02  1.407e+02     injection-2 4455     injection-4 1843
+ Escaped             steam_outlet      7  67436  3.362e-01  4.519e+01  6.297e+00  4.766e+00     injection-0  246     injection-2 7129
+ Trapped             fluid_outlet      8  10683  2.017e-01  1.722e+02  2.518e+00  6.336e+00     injection-6  771     injection-8 8015
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initi
+report_call: dpm_extended_summary_injection-0
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_z_positive_injection-0_extended_scratch.txt
+
+report_call: dpm_extended_summary_injection-1
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_z_positive_injection-1_extended_scratch.txt
+
+report_call: dpm_extended_summary_injection-2
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_z_positive_injection-2_extended_scratch.txt
+
+report_call: dpm_extended_summary_injection-3
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_z_positive_injection-3_extended_scratch.txt
+
+report_call: dpm_extended_summary_injection-4
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_z_positive_injection-4_extended_scratch.txt
+
+report_call: dpm_extended_summary_injection-5
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_z_positive_injection-5_extended_scratch.txt
+
+report_call: dpm_extended_summary_injection-6
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_z_positive_injection-6_extended_scratch.txt
+
+report_call: dpm_extended_summary_injection-7
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_z_positive_injection-7_extended_scratch.txt
+
+report_call: dpm_extended_summary_injection-8
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep_direction_sensitivity_20260618\\case_2_1440_direction_sensitivity_z_positive_injection-8_extended_scratch.txt
+
+variant_summary: {
+  "variant": "z_positive",
+  "case": "Case 2",
+  "enthalpy_kJkg": "1440",
+  "gas_mass_flow_kgs": 64.85,
+  "liquid_mass_flow_kgs": "132.76",
+  "dpm_injected_mass_flow_kgs": 132.76,
+  "escaped_kgs": 93.96,
+  "trapped_kgs": 38.77,
+  "incomplete_kgs": 0.02972,
+  "escaped_fraction": 0.7077432961735463,
+  "trapped_fraction": 0.29203073214823744,
+  "incomplete_fraction": 0.00022386260921964448,
+  "steam_quality_percent_from_escaped": 40.834960015112394,
+  "escaped_count": "67436",
+  "trapped_count": "10683",
+  "incomplete_count": "181",
+  "local_case_summary": "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_direction_sensitivity_20260618/case_2_1440_direction_sensitivity_z_positive_case_summary.csv",
+  "local_injection_results": "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_direction_sensitivity_20260618/case_2_1440_direction_sensitivity_z_positive_injection_results.csv",
+  "local_report": "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_direction_sensitivity_20260618/case_2_1440_direction_sensitivity_z_positive_dpm_report.txt"
+}
+
+=== Direction Sensitivity Complete ===
+variant_summary_csv: /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_direction_sensitivity_20260618/case_2_1440_direction_sensitivity_variant_summary.csv
+combined_injection_csv: /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_direction_sensitivity_20260618/case_2_1440_direction_sensitivity_all_variants_injection_results.csv

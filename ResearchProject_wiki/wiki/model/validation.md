@@ -1,5 +1,14 @@
 # Validation
 
+## Split-Inlet Mesh-Convergence Gate (2026-07-29)
+- Evidence status: `Planned / unresolved`; no mesh-independence claim is currently permitted.
+- Baseline identity: use the actual setup-07 split-inlet archive based on `FFF.1-2.cas.h5`, not setup `08c`'s one-inlet replication case.
+- Before solving: verify identical geometry, phase assignment, boundary areas/orientation, materials, models, numerics, initialization, monitors, and processor count across all grids; exclude DPM and EWF.
+- Per-grid acceptance: complete mixture and phase imbalance `<= 0.5%` of total inlet (prefer `<= 0.2%`), primary monitor drift `<= 0.5%`, secondary flow-structure monitor drift `<= 1%`, and no unresolved inventory or outlet-flow drift.
+- Mesh acceptance: medium-to-fine change `<= 1%` for pressure drop, steam-outlet phase flows/carryover, and the primary velocity/swirl metric; `<= 2%` for secondary recirculation metrics; no qualitative topology reversal.
+- Richardson extrapolation/GCI may be reported only for a monotonic, systematic three-grid sequence with usable observed order. Otherwise report percentage changes and label the result `mesh sensitivity unresolved`.
+- Full study contract: `../../../Setup report/07a-split-inlet-carrier-mesh-convergence.md`.
+
 ## Current Validation State
 - Not ready for final validation; baseline convergence and a stable comparison case are not yet achieved.
 - `Inferred`: the project still needs validation anchors before long design-comparison runs can be interpreted confidently.

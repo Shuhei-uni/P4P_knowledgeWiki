@@ -1,0 +1,1141 @@
+{
+  "case": "Case 4",
+  "condition": "1600",
+  "base_case": "C:\\Users\\qtra338\\Documents\\baseline.cas.h5",
+  "remote_output_paths": {
+    "flow_case": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_qualification_20260721\\case_4_1600_2iter_flow.cas.h5",
+    "flow_data": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_qualification_20260721\\case_4_1600_2iter_flow.dat.h5",
+    "case": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_qualification_20260721\\case_4_1600_2iter.cas.h5",
+    "data": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_qualification_20260721\\case_4_1600_2iter.dat.h5",
+    "dpm_report": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_qualification_20260721\\case_4_1600_dpm_report.txt",
+    "injection_results": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_qualification_20260721\\case_4_1600_injection_results.csv",
+    "case_summary": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_qualification_20260721\\case_4_1600_case_summary.csv",
+    "manifest": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_qualification_20260721\\case_4_1600_manifest.json",
+    "flow_manifest": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_qualification_20260721\\case_4_1600_flow_manifest.json"
+  },
+  "iterations_requested": 2,
+  "iterations_completed": 2,
+  "iterations_verified": 2,
+  "iteration_verification_source": "PyFluent residual monitor x-axis advancement",
+  "iteration_evidence": [
+    {
+      "block_end": 1,
+      "requested": 1,
+      "before": {
+        "residual": {
+          "points": 0,
+          "first_iteration": null,
+          "last_iteration": null,
+          "series": []
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1,
+          "first_iteration": 1.0,
+          "last_iteration": 1.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 2,
+      "requested": 1,
+      "before": {
+        "residual": {
+          "points": 1,
+          "first_iteration": 1.0,
+          "last_iteration": 1.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 3,
+          "first_iteration": 1.0,
+          "last_iteration": 2.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    }
+  ],
+  "iteration_mode": "chunked",
+  "residual_history_points": 2000,
+  "residual_convergence_stop_flags": {
+    "continuity": false,
+    "x-velocity": false,
+    "y-velocity": false,
+    "z-velocity": false,
+    "k": false,
+    "epsilon": false,
+    "vf-phase-2": false
+  },
+  "liquid_mass_flow_kgs": 116.92,
+  "gas_mass_flow_kgs": 80.69,
+  "dpm_total_mass_flow_kgs": 116.92,
+  "dpm_velocity_mode": "face-normal",
+  "dpm_velocity_definition": "Fluent face-normal direction with magnitude=abs(z_velocity_ms)",
+  "inlet_readback": {
+    "name": "inlet",
+    "phase": {
+      "mixture": {
+        "momentum": {
+          "reference_frame": "Absolute",
+          "supersonic_gauge_pressure": {
+            "option": "value",
+            "value": 1140000
+          },
+          "direction_specification": "Normal to Boundary"
+        },
+        "turbulence": {
+          "turbulence_specification": "Intensity and Hydraulic Diameter",
+          "turbulent_intensity": 0.02152499951888,
+          "hydraulic_diameter": 0.7240000000000001
+        },
+        "dpm": {
+          "discrete_phase_bc_type": "escape"
+        },
+        "multiphase": {}
+      },
+      "phase-1": {
+        "momentum": {
+          "mass_flow_specification": "Mass Flow Rate",
+          "mass_flow_rate": {
+            "option": "value",
+            "value": 80.69
+          }
+        },
+        "turbulence": {},
+        "dpm": {},
+        "multiphase": {}
+      },
+      "phase-2": {
+        "momentum": {
+          "mass_flow_specification": "Mass Flow Rate",
+          "mass_flow_rate": {
+            "option": "value",
+            "value": 116.92
+          }
+        },
+        "turbulence": {},
+        "dpm": {},
+        "multiphase": {}
+      }
+    }
+  },
+  "injection_readback_names": [
+    "injection-0",
+    "injection-1",
+    "injection-2",
+    "injection-3",
+    "injection-4",
+    "injection-5",
+    "injection-6",
+    "injection-7",
+    "injection-8"
+  ],
+  "injection_readbacks": {
+    "injection-0": {
+      "name": "injection-0",
+      "particle_type": "inert",
+      "material": "water-liquid-dpm",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 0.189995
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 34.221202
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 4.307482e-06
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "spherical"
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-1": {
+      "name": "injection-1",
+      "particle_type": "inert",
+      "material": "water-liquid-dpm",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 0.780441
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 34.221202
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 2.153741e-05
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "spherical"
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-2": {
+      "name": "injection-2",
+      "particle_type": "inert",
+      "material": "water-liquid-dpm",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 0.970436
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 34.221202
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 4.307482e-05
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "spherical"
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-3": {
+      "name": "injection-3",
+      "particle_type": "inert",
+      "material": "water-liquid-dpm",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 1.952564
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 34.221202
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 8.614965e-05
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "spherical"
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-4": {
+      "name": "injection-4",
+      "particle_type": "inert",
+      "material": "water-liquid-dpm",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 1.952564
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 34.221202
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 0.0001292245
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "spherical"
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-5": {
+      "name": "injection-5",
+      "particle_type": "inert",
+      "material": "water-liquid-dpm",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 23.384
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 34.221202
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 0.0002670639
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "spherical"
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-6": {
+      "name": "injection-6",
+      "particle_type": "inert",
+      "material": "water-liquid-dpm",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 29.23
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 34.221202
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 0.0004307482
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "spherical"
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-7": {
+      "name": "injection-7",
+      "particle_type": "inert",
+      "material": "water-liquid-dpm",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 29.23
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 34.221202
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 0.0006461224
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "spherical"
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-8": {
+      "name": "injection-8",
+      "particle_type": "inert",
+      "material": "water-liquid-dpm",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 29.23
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 34.221202
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 0.00124917
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "spherical"
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    }
+  },
+  "post_dpm_injection_readbacks": {
+    "injection-0": {
+      "name": "injection-0",
+      "particle_type": "inert",
+      "material": "water-liquid-dpm",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 0.189995
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 34.221202
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 4.307482e-06
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "spherical"
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-1": {
+      "name": "injection-1",
+      "particle_type": "inert",
+      "material": "water-liquid-dpm",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 0.780441
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 34.221202
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 2.153741e-05
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "spherical"
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-2": {
+      "name": "injection-2",
+      "particle_type": "inert",
+      "material": "water-liquid-dpm",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 0.970436
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 34.221202
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 4.307482e-05
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "spherical"
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-3": {
+      "name": "injection-3",
+      "particle_type": "inert",
+      "material": "water-liquid-dpm",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 1.952564
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 34.221202
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 8.614965e-05
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "spherical"
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-4": {
+      "name": "injection-4",
+      "particle_type": "inert",
+      "material": "water-liquid-dpm",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 1.952564
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 34.221202
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 0.0001292245
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "spherical"
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-5": {
+      "name": "injection-5",
+      "particle_type": "inert",
+      "material": "water-liquid-dpm",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 23.384
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 34.221202
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 0.0002670639
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "spherical"
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-6": {
+      "name": "injection-6",
+      "particle_type": "inert",
+      "material": "water-liquid-dpm",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 29.23
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 34.221202
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 0.0004307482
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "spherical"
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-7": {
+      "name": "injection-7",
+      "particle_type": "inert",
+      "material": "water-liquid-dpm",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 29.23
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 34.221202
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 0.0006461224
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "spherical"
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    },
+    "injection-8": {
+      "name": "injection-8",
+      "particle_type": "inert",
+      "material": "water-liquid-dpm",
+      "injection_type": {
+        "option": "surface"
+      },
+      "initial_values": {
+        "reference_frame": "global",
+        "location": {
+          "injection_surfaces": [
+            "inlet"
+          ],
+          "randomized_positions_enabled": false
+        },
+        "mass_flow_rate": {
+          "total_flow_rate": 29.23
+        },
+        "velocity": {
+          "use_face_normal_direction": true,
+          "magnitude": 34.221202
+        },
+        "particle_size": {
+          "option": "uniform",
+          "diameter": 0.00124917
+        }
+      },
+      "physical_models": {
+        "particle_drag": {
+          "option": "spherical"
+        },
+        "turbulent_dispersion": {
+          "enabled": false
+        },
+        "particle_rotation": {
+          "enabled": false
+        },
+        "rough_wall_treatment_enabled": false,
+        "custom_laws": {
+          "law_1": "inert-heating",
+          "law_2": "inactive",
+          "law_3": "inactive",
+          "law_4": "inactive",
+          "law_5": "inactive",
+          "law_6": "inactive",
+          "law_7": "inactive",
+          "law_8": "inactive",
+          "law_9": "inactive",
+          "law_10": "inactive",
+          "switch": "Default"
+        }
+      }
+    }
+  },
+  "escaped_kgs_missing_count": 9,
+  "dpm_mass_balance": null,
+  "case_summary": {
+    "case": "Case 4",
+    "enthalpy_kJkg": "1600",
+    "iterations_completed": 2,
+    "liquid_mass_flow_kgs": "116.92",
+    "gas_mass_flow_kgs": "80.69",
+    "dpm_injected_mass_flow_kgs": "116.92",
+    "escaped_kgs": "",
+    "trapped_kgs": "",
+    "incomplete_kgs": "",
+    "escaped_zone_names": "",
+    "trapped_zone_names": "",
+    "incomplete_zone_names": "",
+    "escaped_zone_breakdown": "",
+    "trapped_zone_breakdown": "",
+    "incomplete_zone_breakdown": "",
+    "escaped_count": "",
+    "trapped_count": "",
+    "incomplete_count": ""
+  }
+}

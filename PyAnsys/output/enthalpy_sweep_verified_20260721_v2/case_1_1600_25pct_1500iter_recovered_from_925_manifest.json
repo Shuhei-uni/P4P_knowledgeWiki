@@ -1,0 +1,951 @@
+{
+  "case": "Case 1",
+  "condition": "1600 -25%",
+  "mode": "continue_current_case",
+  "remote_output_paths": {
+    "flow_case_pre_dpm": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_verified_20260721_v2\\case_1_1600_25pct_1500iter_recovered_from_925_flow.cas.h5",
+    "flow_data_pre_dpm": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_verified_20260721_v2\\case_1_1600_25pct_1500iter_recovered_from_925_flow.dat.h5",
+    "case": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_verified_20260721_v2\\case_1_1600_25pct_1500iter_recovered_from_925_post_dpm.cas.h5",
+    "data": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_verified_20260721_v2\\case_1_1600_25pct_1500iter_recovered_from_925_post_dpm.dat.h5",
+    "dpm_report": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_verified_20260721_v2\\case_1_1600_25pct_1500iter_recovered_from_925_dpm_report.txt",
+    "injection_results": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_verified_20260721_v2\\case_1_1600_25pct_1500iter_recovered_from_925_injection_results.csv",
+    "case_summary": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep_verified_20260721_v2\\case_1_1600_25pct_1500iter_recovered_from_925_case_summary.csv"
+  },
+  "reported_starting_number_of_iterations": 25,
+  "reported_ending_number_of_iterations": 25,
+  "reported_number_of_iterations_is_completion_proof": false,
+  "verified_starting_iterations": 925,
+  "verified_completed_iterations": 1500,
+  "additional_iterations_requested": 575,
+  "additional_iterations_completed": 575,
+  "iteration_evidence": [
+    {
+      "block_end": 25,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 925,
+          "first_iteration": 1.0,
+          "last_iteration": 925.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 951,
+          "first_iteration": 1.0,
+          "last_iteration": 950.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 50,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 951,
+          "first_iteration": 1.0,
+          "last_iteration": 950.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 977,
+          "first_iteration": 1.0,
+          "last_iteration": 975.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 75,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 977,
+          "first_iteration": 1.0,
+          "last_iteration": 975.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1003,
+          "first_iteration": 1.0,
+          "last_iteration": 1000.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 100,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1003,
+          "first_iteration": 1.0,
+          "last_iteration": 1000.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1029,
+          "first_iteration": 1.0,
+          "last_iteration": 1025.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 125,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1029,
+          "first_iteration": 1.0,
+          "last_iteration": 1025.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1055,
+          "first_iteration": 1.0,
+          "last_iteration": 1050.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 150,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1055,
+          "first_iteration": 1.0,
+          "last_iteration": 1050.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1081,
+          "first_iteration": 1.0,
+          "last_iteration": 1075.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 175,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1081,
+          "first_iteration": 1.0,
+          "last_iteration": 1075.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1107,
+          "first_iteration": 1.0,
+          "last_iteration": 1100.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 200,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1107,
+          "first_iteration": 1.0,
+          "last_iteration": 1100.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1133,
+          "first_iteration": 1.0,
+          "last_iteration": 1125.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 225,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1133,
+          "first_iteration": 1.0,
+          "last_iteration": 1125.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1159,
+          "first_iteration": 1.0,
+          "last_iteration": 1150.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 250,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1159,
+          "first_iteration": 1.0,
+          "last_iteration": 1150.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1185,
+          "first_iteration": 1.0,
+          "last_iteration": 1175.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 275,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1185,
+          "first_iteration": 1.0,
+          "last_iteration": 1175.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1211,
+          "first_iteration": 1.0,
+          "last_iteration": 1200.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 300,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1211,
+          "first_iteration": 1.0,
+          "last_iteration": 1200.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1237,
+          "first_iteration": 1.0,
+          "last_iteration": 1225.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 325,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1237,
+          "first_iteration": 1.0,
+          "last_iteration": 1225.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1263,
+          "first_iteration": 1.0,
+          "last_iteration": 1250.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 350,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1263,
+          "first_iteration": 1.0,
+          "last_iteration": 1250.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1289,
+          "first_iteration": 1.0,
+          "last_iteration": 1275.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 375,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1289,
+          "first_iteration": 1.0,
+          "last_iteration": 1275.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1315,
+          "first_iteration": 1.0,
+          "last_iteration": 1300.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 400,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1315,
+          "first_iteration": 1.0,
+          "last_iteration": 1300.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1341,
+          "first_iteration": 1.0,
+          "last_iteration": 1325.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 425,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1341,
+          "first_iteration": 1.0,
+          "last_iteration": 1325.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1367,
+          "first_iteration": 1.0,
+          "last_iteration": 1350.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 450,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1367,
+          "first_iteration": 1.0,
+          "last_iteration": 1350.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1393,
+          "first_iteration": 1.0,
+          "last_iteration": 1375.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 475,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1393,
+          "first_iteration": 1.0,
+          "last_iteration": 1375.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1419,
+          "first_iteration": 1.0,
+          "last_iteration": 1400.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 500,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1419,
+          "first_iteration": 1.0,
+          "last_iteration": 1400.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1445,
+          "first_iteration": 1.0,
+          "last_iteration": 1425.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 525,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1445,
+          "first_iteration": 1.0,
+          "last_iteration": 1425.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1471,
+          "first_iteration": 1.0,
+          "last_iteration": 1450.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 550,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1471,
+          "first_iteration": 1.0,
+          "last_iteration": 1450.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1497,
+          "first_iteration": 1.0,
+          "last_iteration": 1475.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    },
+    {
+      "block_end": 575,
+      "requested": 25,
+      "before": {
+        "residual": {
+          "points": 1497,
+          "first_iteration": 1.0,
+          "last_iteration": 1475.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      },
+      "after": {
+        "residual": {
+          "points": 1523,
+          "first_iteration": 1.0,
+          "last_iteration": 1500.0,
+          "series": [
+            "continuity",
+            "epsilon",
+            "k",
+            "vf-phase-2",
+            "x-velocity",
+            "y-velocity",
+            "z-velocity"
+          ]
+        }
+      }
+    }
+  ],
+  "summary_iterations": 1500,
+  "fluent_internal_autosave": {
+    "before": {
+      "autosave/frequency/data": 0,
+      "autosave/frequency/case": 0,
+      "mmp/autosave/frequency/data": 0,
+      "mmp/autosave/frequency/case": 0,
+      "autosave/filename": "C:/Users/qtra338/Documents/enthalpy_sweep_verified_20260721_v2/case_1_1600_25pct_1500iter_recovered_from_observed820_internal_autosave_disabled",
+      "mmp/autosave/filename": "C:/Users/qtra338/Documents/enthalpy_sweep_verified_20260721_v2/case_1_1600_25pct_1500iter_recovered_from_observed820_internal_autosave_disabled"
+    },
+    "after": {
+      "autosave/frequency/data": 0,
+      "autosave/frequency/case": 0,
+      "mmp/autosave/frequency/data": 0,
+      "mmp/autosave/frequency/case": 0,
+      "autosave/filename": "C:/Users/qtra338/Documents/enthalpy_sweep_verified_20260721_v2/case_1_1600_25pct_1500iter_recovered_from_925_internal_autosave_disabled",
+      "mmp/autosave/filename": "C:/Users/qtra338/Documents/enthalpy_sweep_verified_20260721_v2/case_1_1600_25pct_1500iter_recovered_from_925_internal_autosave_disabled"
+    },
+    "python_checkpoints_enabled": true
+  },
+  "dpm_velocity_mode": "face-normal",
+  "inlet_readback": {
+    "name": "inlet",
+    "phase": {
+      "mixture": {
+        "momentum": {
+          "reference_frame": "Absolute",
+          "supersonic_gauge_pressure": {
+            "option": "value",
+            "value": 1140000
+          },
+          "direction_specification": "Normal to Boundary"
+        },
+        "turbulence": {
+          "turbulence_specification": "Intensity and Hydraulic Diameter",
+          "turbulent_intensity": 0.02152499951888,
+          "hydraulic_diameter": 0.7240000000000001
+        },
+        "dpm": {
+          "discrete_phase_bc_type": "escape"
+        },
+        "multiphase": {}
+      },
+      "phase-1": {
+        "momentum": {
+          "mass_flow_specification": "Mass Flow Rate",
+          "mass_flow_rate": {
+            "option": "value",
+            "value": 60.52
+          }
+        },
+        "turbulence": {},
+        "dpm": {},
+        "multiphase": {}
+      },
+      "phase-2": {
+        "momentum": {
+          "mass_flow_specification": "Mass Flow Rate",
+          "mass_flow_rate": {
+            "option": "value",
+            "value": 87.69
+          }
+        },
+        "turbulence": {},
+        "dpm": {},
+        "multiphase": {}
+      }
+    }
+  },
+  "injection_readback_names": [
+    "injection-0",
+    "injection-1",
+    "injection-2",
+    "injection-3",
+    "injection-4",
+    "injection-5",
+    "injection-6",
+    "injection-7",
+    "injection-8"
+  ],
+  "case_summary": {
+    "case": "Case 1",
+    "enthalpy_kJkg": "1600 -25%",
+    "iterations_completed": 1500,
+    "liquid_mass_flow_kgs": "87.69",
+    "gas_mass_flow_kgs": "60.52",
+    "dpm_injected_mass_flow_kgs": "87.69",
+    "escaped_kgs": "0.1367",
+    "trapped_kgs": "51.49",
+    "incomplete_kgs": "36.06",
+    "escaped_zone_names": "steam_outlet",
+    "trapped_zone_names": "fluid_outlet",
+    "incomplete_zone_names": "",
+    "escaped_zone_breakdown": "[{\"fate\":\"escaped\",\"zone_name\":\"steam_outlet\",\"zone_id\":\"7\",\"count\":8346.0}]",
+    "trapped_zone_breakdown": "[{\"fate\":\"trapped\",\"zone_name\":\"fluid_outlet\",\"zone_id\":\"8\",\"count\":38562.0}]",
+    "incomplete_zone_breakdown": "[{\"fate\":\"incomplete\",\"zone_name\":\"\",\"zone_id\":\"\",\"count\":31392.0}]",
+    "escaped_count": "8346",
+    "trapped_count": "38562",
+    "incomplete_count": "31392"
+  }
+}

@@ -1,0 +1,36 @@
+
+
+===== settings_dpm_summary_existing =====
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_top_ring_pulse_retry_particle_history.txt
+
+
+
+===== settings_dpm_extended_summary_existing =====
+/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/.venv/lib/python3.12/site-packages/ansys/fluent/core/solver/flobject.py:1889: PyFluentUserWarning: Unknown keyword 'include_in_domain_particles' for command '<session>.results.report.discrete_phase.extended_summary'. It will be ignored.
+  warnings.warn(
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                               36303  6.040e+01  2.608e+02  1.462e+02  6.647e+01     injection-3  231     injection-8 8629
+ Escaped             steam_outlet      7  25260  4.218e-01  4.490e+01  2.578e+00  1.850e+00     injection-0 5684     injection-2 5409
+ Trapped             fluid_outlet      8  16737  1.450e-01  2.069e+00  3.978e-01  2.858e-01     injection-2 3221     injection-8  789
+
+                                               (*)- Mass Transfer Summary -(*) 
+
+ Fate                        Zone   Zone      Mass Flow (kg/s)
+                             Name     Id    Initial      Final     Change
+ ----------- -------------------- ------ ---------- ---------- ----------
+ Incomplete                               8.268e+01  8.268e+01  0.000e+00
+ Escaped             steam_outlet      7  2.004e+00  2.004e+00  0.000e+00
+ Trapped             fluid_outlet      8  3.223e+01  3.223e+01  0.000e+00
+ -----------                             ---------- ---------- ----------
+ Net                                      1.169e+02  1.169e+02  0.000e+00
+
+
+
+===== tui_particle_summary_existing =====
+(injection-0 injection-1 injection-2 injection-3 injection-4 injection-5 injection-6 injection-7 injection-8)
+The following solver settings object method could also be used to execute the above command:
+<solver_session>.results.report.particle_summary(injection_names = ["injection-0", "injection-1", "injection-2", "injection-3", "injection-4", "injection-5", "injection-6", "injection-7", "injection-8"])

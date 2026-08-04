@@ -1,0 +1,82 @@
+{
+  "case": "Case 4",
+  "condition": "1600",
+  "mode": "dpm_tracking_sensitivity",
+  "source_case": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_1500.cas.h5",
+  "source_data": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_1500.dat.h5",
+  "dpm_max_steps": 100000,
+  "step_length_factor": 10.0,
+  "tracking": {
+    "before": {
+      "max_num_steps": 100000,
+      "step_size_controls": {
+        "option": "step-length-factor",
+        "step_length_factor": 5
+      },
+      "expert": {
+        "randomize_every_iteration": true,
+        "randomize_every_timestep": true,
+        "tracking_statistics_format": "short",
+        "verbosity": 1,
+        "reference_frame": "relative"
+      }
+    },
+    "after": {
+      "max_num_steps": 100000,
+      "step_size_controls": {
+        "option": "step-length-factor",
+        "step_length_factor": 10.0
+      },
+      "expert": {
+        "randomize_every_iteration": true,
+        "randomize_every_timestep": true,
+        "tracking_statistics_format": "short",
+        "verbosity": 1,
+        "reference_frame": "relative"
+      }
+    },
+    "actions": {
+      "set_dpm_max_num_steps": true,
+      "set_dpm_high_res_tracking_best_effort": false,
+      "set_dpm_interaction_off_best_effort": true,
+      "set_dpm_sources_every_iteration_off_best_effort": false,
+      "set_dpm_step_length_factor": true
+    }
+  },
+  "remote_output_paths": {
+    "case": "",
+    "data": "",
+    "dpm_report": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_dpm_maxsteps_100000_stepfactor_10_dpm_report.txt",
+    "injection_results": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_dpm_maxsteps_100000_stepfactor_10_injection_results.csv",
+    "case_summary": "C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_dpm_maxsteps_100000_stepfactor_10_case_summary.csv"
+  },
+  "local_output_paths": {
+    "dpm_report": "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/case_4_1600_dpm_maxsteps_100000_stepfactor_10_dpm_report.txt",
+    "injection_results": "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/case_4_1600_dpm_maxsteps_100000_stepfactor_10_injection_results.csv",
+    "case_summary": "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/case_4_1600_dpm_maxsteps_100000_stepfactor_10_case_summary.csv"
+  },
+  "iterations_completed": 100,
+  "dpm_velocity_mode": "face-normal",
+  "inlet_readback": null,
+  "injection_readback_names": [],
+  "case_summary": {
+    "case": "Case 4",
+    "enthalpy_kJkg": "1600",
+    "iterations_completed": 100,
+    "liquid_mass_flow_kgs": "116.92",
+    "gas_mass_flow_kgs": "80.69",
+    "dpm_injected_mass_flow_kgs": "116.92",
+    "escaped_kgs": "2.004",
+    "trapped_kgs": "32.23",
+    "incomplete_kgs": "82.68",
+    "escaped_zone_names": "steam_outlet",
+    "trapped_zone_names": "fluid_outlet",
+    "incomplete_zone_names": "",
+    "escaped_zone_breakdown": "[{\"fate\":\"escaped\",\"zone_name\":\"steam_outlet\",\"zone_id\":\"7\",\"count\":25262.0,\"mass_flow_kgs\":2.004}]",
+    "trapped_zone_breakdown": "[{\"fate\":\"trapped\",\"zone_name\":\"fluid_outlet\",\"zone_id\":\"8\",\"count\":16736.0,\"mass_flow_kgs\":32.23}]",
+    "incomplete_zone_breakdown": "[{\"fate\":\"incomplete\",\"zone_name\":\"\",\"zone_id\":\"\",\"count\":36302.0,\"mass_flow_kgs\":82.68}]",
+    "escaped_count": "25262",
+    "trapped_count": "16736",
+    "incomplete_count": "36302"
+  }
+}

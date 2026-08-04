@@ -4,6 +4,9 @@ order:
   - ensure_carrier_field_exists_or_is_initialized
   - enable_discrete_phase_model
   - refresh_dpm_tree
+  - verify_interaction_state_before_carrier_solve:
+      replication_default: one-way / interaction disabled
+      rule: fail unless coupled DPM is an explicitly documented sensitivity
   - set_global_interaction:
       examples:
         - interaction with continuous phase
@@ -62,12 +65,30 @@ order:
       - set_turbulent_dispersion
       - set_parcel_options
       - readback_all_properties
+  - before_tracking:
+      - enable per-injection and per-zone summaries
+      - verify the report command succeeded
+  - run_dpm_update:
+      - treat update failure as fatal
+      - do not parse a prior report after a failed update
+  - export_per_injection_extended_summaries:
+      - remove prior scratch report first
+      - require a newly readable report for every injection
+      - parse the labeled Final mass-flow column
+      - retain escaped, trapped, and incomplete separately
+      - reconcile fate mass against injected mass
+  - preserve_post_tracking_state:
+      - read and validate injection definitions without reapplying them
+      - save post-DPM case and data only after report and fate-mass checks pass
 hidden_dependencies:
   - DPM material categories may not appear until DPM is enabled
   - inert material list may not be valid until Particle Type = Inert and injection object is reacquired
   - Injection Surfaces are meaningful only after Injection Type = surface
   - droplet/evaporation laws require Particle Type = Droplet and usually Energy/species support
   - wallfilm injection options require EWF/DPM coupling
+  - per-injection zone reporting must be enabled before particle tracking
+  - particle counts are not generally valid mass fractions
+  - face-normal direction uses a positive magnitude; the surface normal supplies direction
 known_project_case:
   injections:
     dpm-5um: {diameter_m: 5.0e-6, total_flow_rate_kg_s: 1.0e-6, target_surface: steaminlet}

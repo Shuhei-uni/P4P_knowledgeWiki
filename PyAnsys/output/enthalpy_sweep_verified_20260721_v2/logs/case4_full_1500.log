@@ -1,0 +1,687 @@
+Connecting to Fluent server 1 using IP/port: 10.104.145.85:57540
+/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/.venv/lib/python3.12/site-packages/ansys/fluent/core/fluent_connection.py:306: InsecureGrpcWarning: The Fluent session will be connected in insecure gRPC mode. This mode is not recommended. For more details on the implications and usage of insecure mode, refer to the Fluent documentation.
+  warnings.warn(
+/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/.venv/lib/python3.12/site-packages/ansys/tools/common/cyberchannel.py:188: UserWarning: Starting gRPC client without TLS on 10.104.145.85:57540. This is INSECURE. Consider using a secure connection.
+  warn(f"Starting gRPC client without TLS on {target}. This is INSECURE. Consider using a secure connection.")
+
+Connected to Fluent Ansys Fluent 2024 R2
+seed_results_csv: loaded 9 rows from /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/case_1_1600_25pct_1500iter_recovered_from_925_injection_results.csv
+seed_results_csv: loaded 9 rows from /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/case_2_1440_1500iter_recovered_from_1375_injection_results.csv
+seed_results_csv: loaded 9 rows from /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/case_3_1520_1500iter_dpm_recovery_injection_results.csv
+seed_case_summary_csv: loaded 1 rows from /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/case_1_1600_25pct_1500iter_recovered_from_925_case_summary.csv
+seed_case_summary_csv: loaded 1 rows from /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/case_2_1440_1500iter_recovered_from_1375_case_summary.csv
+seed_case_summary_csv: loaded 1 rows from /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/case_3_1520_1500iter_dpm_recovery_case_summary.csv
+
+=== Run Case 4 / 1600 ===
+
+=== Load Base Case ===
+Note: Rank = 0: Process affinity not being set (6).
+
+       Clearing partially read grid.
+
+Reading from EN439159:"C:\Users\qtra338\Documents\baseline.cas.h5" in NODE0 mode ...
+  Reading mesh ...
+     5578299 cells,     1 cell zone  ...
+        5578299 tetrahedral cells,  zone id: 3
+    11355491 faces,     5 face zones ...
+         374376 triangular wall faces,  zone id: 1
+       10957705 triangular interior faces,  zone id: 2
+           8700 triangular mass-flow-inlet faces,  zone id: 6
+           5435 triangular pressure-outlet faces,  zone id: 7
+           9275 triangular wall faces,  zone id: 8
+     1026091 nodes,     1 node zone  ...
+Warning: reading 10 partition grid onto 1 compute node machine.
+         Combining every 10 partitions.
+  Done.
+
+
+Building...
+     mesh
+     materials,
+     interface,
+     domains,
+	mixture
+	phase-1
+	phase-2
+	interaction
+     zones,
+	fluid  (phase-2)
+	interior-fluid  (phase-2)
+	fluid  (phase-1)
+	interior-fluid  (phase-1)
+	wall-fluid  (phase-1)
+	wall-fluid  (phase-2)
+	inlet  (phase-1)
+	inlet  (phase-2)
+	steam_outlet  (phase-1)
+	steam_outlet  (phase-2)
+	fluid_outlet  (phase-1)
+	fluid_outlet  (phase-2)
+	interior-fluid
+	wall-fluid
+	inlet
+	steam_outlet
+	fluid_outlet
+	fluid
+     parallel,
+Done.
+read_base_case: OK
+fluent_internal_autosave: VERIFIED disabled -> {"before": {"autosave/frequency/data": 100, "autosave/frequency/case": 0, "mmp/autosave/frequency/data": 1, "mmp/autosave/frequency/case": 1, "autosave/filename": "C:\\Users\\qtra338\\Documents\\Bangma Design (swirl 0.15)\\Bangma_separator_files\\dp0\\FFF\\Fluent\\FFF-6", "mmp/autosave/filename": ""}, "after": {"autosave/frequency/data": 0, "autosave/frequency/case": 0, "mmp/autosave/frequency/data": 0, "mmp/autosave/frequency/case": 0, "autosave/filename": "C:/Users/qtra338/Documents/enthalpy_sweep_verified_20260721_v2/case_4_1600_internal_autosave_disabled", "mmp/autosave/filename": "C:/Users/qtra338/Documents/enthalpy_sweep_verified_20260721_v2/case_4_1600_internal_autosave_disabled"}, "python_checkpoints_enabled": true}
+
+=== Set Inlet Phase Mass Flows ===
+set_inlet_phase_mass_flows: OK
+{
+  "mixture": {
+    "momentum": {
+      "reference_frame": "Absolute",
+      "supersonic_gauge_pressure": {
+        "option": "value",
+        "value": 1140000
+      },
+      "direction_specification": "Normal to Boundary"
+    },
+    "turbulence": {
+      "turbulence_specification": "Intensity and Hydraulic Diameter",
+      "turbulent_intensity": 0.02152499951888,
+      "hydraulic_diameter": 0.7240000000000001
+    },
+    "dpm": {
+      "discrete_phase_bc_type": "escape"
+    },
+    "multiphase": {}
+  },
+  "phase-1": {
+    "momentum": {
+      "mass_flow_specification": "Mass Flow Rate",
+      "mass_flow_rate": {
+        "option": "value",
+        "value": 80.69
+      }
+    },
+    "turbulence": {},
+    "dpm": {},
+    "multiphase": {}
+  },
+  "phase-2": {
+    "momentum": {
+      "mass_flow_specification": "Mass Flow Rate",
+      "mass_flow_rate": {
+        "option": "value",
+        "value": 116.92
+      }
+    },
+    "turbulence": {},
+    "dpm": {},
+    "multiphase": {}
+  }
+}
+
+=== Set DPM Injections ===
+DPM velocity mode: face-normal
+injection-0_particle_type: OK
+injection-0_material: OK
+injection-0_injection_type_surface: OK
+injection-0_location: OK
+injection-0_mass_flow_rate: OK
+injection-0_use_face_normal_direction: OK
+injection-0_velocity_magnitude: OK
+injection-0_particle_size: OK
+injection-0_readback: VERIFIED
+injection-1_particle_type: OK
+injection-1_material: OK
+injection-1_injection_type_surface: OK
+injection-1_location: OK
+injection-1_mass_flow_rate: OK
+injection-1_use_face_normal_direction: OK
+injection-1_velocity_magnitude: OK
+injection-1_particle_size: OK
+injection-1_readback: VERIFIED
+injection-2_particle_type: OK
+injection-2_material: OK
+injection-2_injection_type_surface: OK
+injection-2_location: OK
+injection-2_mass_flow_rate: OK
+injection-2_use_face_normal_direction: OK
+injection-2_velocity_magnitude: OK
+injection-2_particle_size: OK
+injection-2_readback: VERIFIED
+injection-3_particle_type: OK
+injection-3_material: OK
+injection-3_injection_type_surface: OK
+injection-3_location: OK
+injection-3_mass_flow_rate: OK
+injection-3_use_face_normal_direction: OK
+injection-3_velocity_magnitude: OK
+injection-3_particle_size: OK
+injection-3_readback: VERIFIED
+injection-4_particle_type: OK
+injection-4_material: OK
+injection-4_injection_type_surface: OK
+injection-4_location: OK
+injection-4_mass_flow_rate: OK
+injection-4_use_face_normal_direction: OK
+injection-4_velocity_magnitude: OK
+injection-4_particle_size: OK
+injection-4_readback: VERIFIED
+injection-5_particle_type: OK
+injection-5_material: OK
+injection-5_injection_type_surface: OK
+injection-5_location: OK
+injection-5_mass_flow_rate: OK
+injection-5_use_face_normal_direction: OK
+injection-5_velocity_magnitude: OK
+injection-5_particle_size: OK
+injection-5_readback: VERIFIED
+injection-6_particle_type: OK
+injection-6_material: OK
+injection-6_injection_type_surface: OK
+injection-6_location: OK
+injection-6_mass_flow_rate: OK
+injection-6_use_face_normal_direction: OK
+injection-6_velocity_magnitude: OK
+injection-6_particle_size: OK
+injection-6_readback: VERIFIED
+injection-7_particle_type: OK
+injection-7_material: OK
+injection-7_injection_type_surface: OK
+injection-7_location: OK
+injection-7_mass_flow_rate: OK
+injection-7_use_face_normal_direction: OK
+injection-7_velocity_magnitude: OK
+injection-7_particle_size: OK
+injection-7_readback: VERIFIED
+injection-8_particle_type: OK
+injection-8_material: OK
+injection-8_injection_type_surface: OK
+injection-8_location: OK
+injection-8_mass_flow_rate: OK
+injection-8_use_face_normal_direction: OK
+injection-8_velocity_magnitude: OK
+injection-8_particle_size: OK
+injection-8_readback: VERIFIED
+
+=== Hybrid Initialization ===
+
+Initialize using the hybrid initialization method.
+
+Checking case topology... 
+-This case has both inlets & outlets 
+-Pressure information is not available at the boundaries.
+ Case will be initialized with constant pressure
+
+	iter		scalar-0
+
+	1		1.000000e+00
+	2		2.880549e-04
+	3		5.297122e-05
+	4		1.970158e-05
+	5		5.511941e-06
+	6		1.910198e-06
+	7		6.338767e-07
+	8		2.211538e-07
+	9		7.717434e-08
+	10		2.768739e-08
+
+Hybrid initialization is done.
+hybrid_initialize_settings_api: OK
+
+=== Configure Residual History ===
+set_residual_n_save: OK
+set_residual_n_display: OK
+enable_residual_print: OK
+enable_residual_plot: OK
+residual_convergence_stop_flags: {"continuity": false, "epsilon": false, "k": false, "vf-phase-2": false, "x-velocity": false, "y-velocity": false, "z-velocity": false}
+
+=== Run Iterations ===
+iteration_monitor_sets: ['residual']
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 470 cells 
+     1  1.0000e+00  1.0457e-02  1.4521e-02  1.1211e-02  8.8187e+01  3.0264e+06  1.3260e-01  0:45:36   24
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 1810 cells 
+     2  1.0000e+00  7.1786e-03  9.4845e-03  7.4138e-03  1.5868e-01  2.8614e-01  6.0091e-01  0:40:47   23
+
+ Reversed flow on 41 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 1756 cells 
+     3  6.4965e-01  4.0956e-03  5.7040e-03  4.2280e-03  1.4390e-01  4.9626e-01  3.0044e-01  0:36:56   22
+
+ Reversed flow on 178 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 1250 cells 
+     4  9.8588e-01  4.0574e-03  5.5946e-03  4.1351e-03  1.2299e-01  1.2438e+00  2.0028e-01  0:33:31   21
+
+ Reversed flow on 294 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 777 cells 
+     5  6.7961e-01  3.3872e-03  4.7953e-03  3.4908e-03  1.1199e-01  4.2805e-01  1.5021e-01  0:30:44   20
+
+ Reversed flow on 416 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 468 cells 
+     6  9.3018e-01  3.6688e-03  4.5229e-03  3.8290e-03  9.7485e-02  3.5507e-01  1.2017e-01  0:28:07   19
+
+ Reversed flow on 522 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 300 cells 
+     7  6.2653e-01  2.8736e-03  3.6257e-03  3.0584e-03  8.1724e-02  2.1941e+00  1.0014e-01  0:25:56   18
+
+ Reversed flow on 618 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 246 cells 
+     8  8.7355e-01  2.9661e-03  3.4044e-03  3.1451e-03  7.4293e-02  7.2504e-01  8.5838e-02  0:23:54   17
+
+ Reversed flow on 643 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 228 cells 
+     9  5.6387e-01  2.4800e-03  2.8452e-03  2.6878e-03  6.4635e-02  3.2884e-01  7.5110e-02  0:22:06   16
+
+ Reversed flow on 653 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 249 cells 
+    10  6.8977e-01  2.6066e-03  2.6489e-03  2.8391e-03  5.8698e-02  3.6320e-01  6.6766e-02  0:20:22   15
+
+ Reversed flow on 666 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 257 cells 
+    11  4.8065e-01  2.2676e-03  2.2720e-03  2.5166e-03  4.8065e-02  3.0706e-01  6.0094e-02  0:18:46   14
+
+ Reversed flow on 655 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 291 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+    12  4.8295e-01  2.2781e-03  2.1157e-03  2.5266e-03  3.9274e-02  2.4172e-01  5.4633e-02  0:17:14   13
+
+ Reversed flow on 647 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 330 cells 
+    13  3.5805e-01  2.0907e-03  1.8788e-03  2.3586e-03  3.2841e-02  1.9137e-01  5.0081e-02  0:15:51   12
+
+ Reversed flow on 622 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 399 cells 
+    14  3.7411e-01  2.0710e-03  1.7829e-03  2.3530e-03  2.7877e-02  1.4644e-01  4.6229e-02  0:14:22   11
+
+ Reversed flow on 625 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 478 cells 
+    15  3.1382e-01  1.9746e-03  1.6637e-03  2.2743e-03  2.4420e-02  1.1852e-01  4.2928e-02  0:13:01   10
+
+ Reversed flow on 636 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 578 cells 
+    16  3.0779e-01  1.9350e-03  1.6212e-03  2.2449e-03  2.1478e-02  1.1786e-01  4.0068e-02  0:11:41    9
+
+ Reversed flow on 645 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 726 cells 
+    17  3.5867e-01  1.9619e-03  1.6516e-03  2.3548e-03  1.9382e-02  1.1500e-01  3.7566e-02  0:10:18    8
+
+ Reversed flow on 653 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 896 cells 
+    18  3.1247e-01  1.8795e-03  1.5529e-03  2.3049e-03  1.7796e-02  1.1365e-01  3.5357e-02  0:09:01    7
+
+ Reversed flow on 658 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 1060 cells 
+    19  4.0547e-01  1.9575e-03  1.6413e-03  2.3094e-03  1.6322e-02  8.1852e-02  3.3394e-02  0:07:42    6
+
+ Reversed flow on 670 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 1229 cells 
+    20  3.4334e-01  1.8681e-03  1.5292e-03  2.2561e-03  1.5084e-02  6.4120e-02  3.1638e-02  0:06:25    5
+
+ Reversed flow on 679 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 1482 cells 
+    21  4.1362e-01  1.9637e-03  1.6578e-03  2.4325e-03  1.4240e-02  6.0745e-02  3.0057e-02  0:05:07    4
+
+ Reversed flow on 691 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 1768 cells 
+    22  3.5187e-01  1.8744e-03  1.5506e-03  2.3818e-03  1.3380e-02  5.3728e-02  2.8628e-02  0:03:50    3
+
+ Reversed flow on 704 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 2056 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+    23  3.8231e-01  1.9260e-03  1.6169e-03  2.4303e-03  1.2625e-02  4.8813e-02  2.7328e-02  0:02:33    2
+
+ Reversed flow on 716 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 2327 cells 
+    24  3.5987e-01  1.9091e-03  1.5884e-03  2.4343e-03  1.2012e-02  4.3173e-02  2.6141e-02  0:01:17    1
+
+iterate_25: RPC returned
+progress: 25/1500
+ Reversed flow on 708 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 2650 cells 
+    25  4.4241e-01  2.0102e-03  1.7270e-03  2.5635e-03  1.1450e-02  4.0309e-02  2.5053e-02  0:00:00    0
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+    25  4.4241e-01  2.0102e-03  1.7270e-03  2.5635e-03  1.1450e-02  4.0309e-02  2.5053e-02  0:31:47   25
+
+ Reversed flow on 699 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 2975 cells 
+    26  3.8645e-01  1.9687e-03  1.6679e-03  2.5648e-03  1.0934e-02  3.6755e-02  2.4052e-02  0:30:53   24
+
+ Reversed flow on 709 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 3309 cells 
+    27  3.9735e-01  2.0189e-03  1.7315e-03  2.6458e-03  1.0526e-02  3.3682e-02  2.3128e-02  0:29:31   23
+
+ Reversed flow on 711 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 3627 cells 
+    28  4.3849e-01  2.0459e-03  1.7863e-03  2.7403e-03  1.0103e-02  3.2520e-02  2.2273e-02  0:28:09   22
+
+ Reversed flow on 718 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 3987 cells 
+    29  4.0301e-01  2.0234e-03  1.7531e-03  2.7540e-03  9.7835e-03  2.9322e-02  2.1478e-02  0:26:53   21
+
+ Reversed flow on 722 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 4333 cells 
+    30  4.4785e-01  2.0705e-03  1.8397e-03  2.8348e-03  9.4958e-03  2.8563e-02  2.0739e-02  0:25:29   20
+
+ Reversed flow on 714 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 4691 cells 
+    31  4.2428e-01  2.0425e-03  1.8144e-03  2.8535e-03  9.2099e-03  2.6828e-02  2.0049e-02  0:24:15   19
+
+ Reversed flow on 721 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 5037 cells 
+    32  4.8843e-01  2.0838e-03  1.9120e-03  2.9343e-03  8.9510e-03  2.6151e-02  1.9403e-02  0:22:56   18
+
+ Reversed flow on 726 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 5416 cells 
+    33  4.5215e-01  2.0362e-03  1.8773e-03  2.9109e-03  8.6903e-03  2.4573e-02  1.8798e-02  0:21:38   17
+
+ Reversed flow on 712 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 5764 cells 
+    34  4.7502e-01  2.0278e-03  1.9282e-03  2.9292e-03  8.4532e-03  2.3491e-02  1.8229e-02  0:20:24   16
+
+ Reversed flow on 716 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 6108 cells 
+    35  4.8097e-01  1.9949e-03  1.9457e-03  2.8961e-03  8.2218e-03  2.2270e-02  1.7694e-02  0:19:06   15
+
+ Reversed flow on 720 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 6438 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+    36  4.7912e-01  1.9589e-03  1.9550e-03  2.8667e-03  7.9909e-03  2.0839e-02  1.7189e-02  0:17:48   14
+
+ Reversed flow on 709 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 6766 cells 
+    37  4.8039e-01  1.9252e-03  1.9705e-03  2.8291e-03  7.8131e-03  2.0155e-02  1.6713e-02  0:16:31   13
+
+ Reversed flow on 706 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 7086 cells 
+    38  4.8310e-01  1.8849e-03  1.9799e-03  2.7773e-03  7.6441e-03  1.9572e-02  1.6262e-02  0:15:14   12
+
+ Reversed flow on 714 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 7405 cells 
+    39  4.8260e-01  1.8441e-03  1.9784e-03  2.7262e-03  7.5108e-03  1.9111e-02  1.5835e-02  0:14:00   11
+
+ Reversed flow on 724 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 7742 cells 
+    40  4.8345e-01  1.8031e-03  1.9729e-03  2.6808e-03  7.3982e-03  1.8472e-02  1.5429e-02  0:12:43   10
+
+ Reversed flow on 723 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 8074 cells 
+    41  4.7765e-01  1.7590e-03  1.9634e-03  2.6318e-03  7.3059e-03  1.8188e-02  1.5044e-02  0:11:26    9
+
+ Reversed flow on 728 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 8469 cells 
+    42  4.7608e-01  1.7129e-03  1.9472e-03  2.5848e-03  7.2363e-03  1.7901e-02  1.4678e-02  0:10:09    8
+
+ Reversed flow on 722 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 8832 cells 
+    43  4.7475e-01  1.6716e-03  1.9381e-03  2.5396e-03  7.1942e-03  1.8193e-02  1.4329e-02  0:08:53    7
+
+ Reversed flow on 720 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 9183 cells 
+    44  4.7566e-01  1.6319e-03  1.9251e-03  2.4855e-03  7.1724e-03  1.8234e-02  1.3996e-02  0:07:37    6
+
+ Reversed flow on 707 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 9518 cells 
+    45  4.7829e-01  1.5934e-03  1.9118e-03  2.4314e-03  7.1723e-03  1.8476e-02  1.3679e-02  0:06:20    5
+
+ Reversed flow on 717 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 9843 cells 
+    46  4.7384e-01  1.5582e-03  1.9000e-03  2.3821e-03  7.1660e-03  1.8561e-02  1.3375e-02  0:05:04    4
+
+ Reversed flow on 715 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 10175 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+    47  4.8002e-01  1.5295e-03  1.8911e-03  2.3306e-03  7.1679e-03  1.8623e-02  1.3085e-02  0:03:48    3
+
+ Reversed flow on 714 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 10491 cells 
+    48  4.7750e-01  1.5024e-03  1.8818e-03  2.2864e-03  7.1883e-03  1.9286e-02  1.2807e-02  0:02:32    2
+
+ Reversed flow on 705 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 10787 cells 
+    49  4.7868e-01  1.4803e-03  1.8728e-03  2.2430e-03  7.2054e-03  1.9438e-02  1.2541e-02  0:01:16    1
+
+ Reversed flow on 710 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 11102 cells 
+    50  4.8091e-01  1.4640e-03  1.8699e-03  2.2027e-03  7.2210e-03  1.9718e-02  1.2285e-02  0:00:00    0
+iterate_50: RPC returned
+progress: 50/1500
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+    50  4.8091e-01  1.4640e-03  1.8699e-03  2.2027e-03  7.2210e-03  1.9718e-02  1.2285e-02  0:31:39   25
+
+ Reversed flow on 709 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 11416 cells 
+    51  4.7800e-01  1.4465e-03  1.8572e-03  2.1726e-03  7.2289e-03  2.0007e-02  1.2040e-02  0:30:47   24
+
+ Reversed flow on 718 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 11756 cells 
+    52  5.0306e-01  1.4498e-03  1.8673e-03  2.1353e-03  7.2318e-03  2.0000e-02  1.1804e-02  0:29:26   23
+
+ Reversed flow on 711 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 12030 cells 
+    53  4.9050e-01  1.4312e-03  1.8530e-03  2.1114e-03  7.2172e-03  1.9064e-02  1.1577e-02  0:28:06   22
+
+ Reversed flow on 721 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 12289 cells 
+    54  5.1199e-01  1.4371e-03  1.8607e-03  2.0730e-03  7.2097e-03  1.8875e-02  1.1359e-02  0:26:46   21
+
+ Reversed flow on 705 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 12551 cells 
+    55  5.0403e-01  1.4241e-03  1.8493e-03  2.0533e-03  7.1949e-03  1.8481e-02  1.1149e-02  0:25:28   20
+
+ Reversed flow on 709 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 12839 cells 
+    56  5.2700e-01  1.4367e-03  1.8596e-03  2.0166e-03  7.1820e-03  1.8819e-02  1.0947e-02  0:24:10   19
+
+ Reversed flow on 713 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 13114 cells 
+    57  5.1992e-01  1.4250e-03  1.8477e-03  2.0034e-03  7.1651e-03  1.7877e-02  1.0751e-02  0:22:53   18
+
+ Reversed flow on 715 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 13327 cells 
+    58  5.4415e-01  1.4374e-03  1.8600e-03  1.9744e-03  7.1467e-03  1.7204e-02  1.0563e-02  0:21:35   17
+
+ Reversed flow on 720 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 13552 cells 
+    59  5.3862e-01  1.4292e-03  1.8485e-03  1.9629e-03  7.1344e-03  1.6707e-02  1.0381e-02  0:20:19   16
+
+ Reversed flow on 719 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 13735 cells 
+    60  5.6310e-01  1.4446e-03  1.8589e-03  1.9372e-03  7.1083e-03  1.5997e-02  1.0205e-02  0:19:02   15
+
+ Reversed flow on 720 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 13944 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+    61  5.5810e-01  1.4376e-03  1.8463e-03  1.9306e-03  7.1008e-03  1.5821e-02  1.0035e-02  0:17:45   14
+
+ Reversed flow on 721 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 14170 cells 
+    62  5.8725e-01  1.4512e-03  1.8522e-03  1.9045e-03  7.0914e-03  1.5226e-02  9.8711e-03  0:16:29   13
+
+ Reversed flow on 720 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 14324 cells 
+    63  5.7822e-01  1.4475e-03  1.8384e-03  1.8984e-03  7.0861e-03  1.4583e-02  9.7120e-03  0:15:13   12
+
+ Reversed flow on 720 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 14443 cells 
+    64  6.0492e-01  1.4637e-03  1.8444e-03  1.8796e-03  7.0960e-03  1.4615e-02  9.5580e-03  0:13:57   11
+
+ Reversed flow on 707 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 14567 cells 
+    65  5.9803e-01  1.4642e-03  1.8321e-03  1.8748e-03  7.1070e-03  1.3956e-02  9.4088e-03  0:12:40   10
+
+ Reversed flow on 714 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 14694 cells 
+    66  6.2245e-01  1.4796e-03  1.8375e-03  1.8556e-03  7.1285e-03  1.3878e-02  9.2642e-03  0:11:24    9
+
+ Reversed flow on 716 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 14777 cells 
+    67  6.1890e-01  1.4803e-03  1.8246e-03  1.8516e-03  7.1581e-03  1.4074e-02  9.1240e-03  0:10:08    8
+
+ Reversed flow on 718 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 14878 cells 
+    68  6.4199e-01  1.4970e-03  1.8313e-03  1.8371e-03  7.1866e-03  1.4506e-02  8.9880e-03  0:08:52    7
+
+ Reversed flow on 737 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 14854 cells 
+    69  6.3562e-01  1.4990e-03  1.8190e-03  1.8333e-03  7.2240e-03  1.4502e-02  8.8560e-03  0:07:36    6
+
+ Reversed flow on 731 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 14895 cells 
+    70  6.6003e-01  1.5175e-03  1.8272e-03  1.8186e-03  7.2627e-03  1.4776e-02  8.7278e-03  0:06:20    5
+
+ Reversed flow on 713 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 14957 cells 
+    71  6.5494e-01  1.5194e-03  1.8167e-03  1.8159e-03  7.2894e-03  1.4752e-02  8.6032e-03  0:05:04    4
+
+ Reversed flow on 710 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 14976 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+    72  6.7824e-01  1.5369e-03  1.8261e-03  1.8046e-03  7.3253e-03  1.5076e-02  8.4822e-03  0:03:48    3
+
+ Reversed flow on 725 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 15007 cells 
+    73  6.7433e-01  1.5396e-03  1.8161e-03  1.8030e-03  7.3526e-03  1.5322e-02  8.3645e-03  0:02:32    2
+
+ Reversed flow on 716 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 15057 cells 
+    74  6.9438e-01  1.5562e-03  1.8246e-03  1.7924e-03  7.3851e-03  1.5816e-02  8.2501e-03  0:01:16    1
+
+ Reversed flow on 727 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 15062 cells 
+    75  6.8940e-01  1.5581e-03  1.8150e-03  1.7911e-03  7.4084e-03  1.5939e-02  8.1387e-03  0:00:00    0
+iterate_75: RPC returned
+progress: 75/1500
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+    75  6.8940e-01  1.5581e-03  1.8150e-03  1.7911e-03  7.4084e-03  1.5939e-02  8.1387e-03  0:31:40   25
+
+ Reversed flow on 723 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 15058 cells 
+    76  7.0808e-01  1.5739e-03  1.8231e-03  1.7853e-03  7.4377e-03  1.6105e-02  8.0303e-03  0:30:53   24
+
+ Reversed flow on 717 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 15020 cells 
+    77  7.0228e-01  1.5742e-03  1.8137e-03  1.7822e-03  7.4597e-03  1.6289e-02  7.9248e-03  0:29:35   23
+
+ Reversed flow on 712 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 14999 cells 
+    78  7.2039e-01  1.5874e-03  1.8211e-03  1.7780e-03  7.4905e-03  1.6564e-02  7.8220e-03  0:28:12   22
+
+The application is busy.
+Please wait a moment.
+
+ Reversed flow on 713 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 14942 cells 
+    79  7.1516e-01  1.5867e-03  1.8122e-03  1.7756e-03  7.5216e-03  1.7177e-02  7.7218e-03  0:26:56   21
+Done.
+
+Operation stopped.
+iterate_100: RPC returned
+
+Error: An error or interrupt occurred in the previous operation.
+       Details have been printed to the text console transcript.
+Error Object: #f
+
+Posting ANSYS Product Improvement Program performance data 
+Done.
+Shutting down Server...
+Traceback (most recent call last):
+  File "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/scripts/setup/run_purnanto_enthalpy_sweep.py", line 1683, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/scripts/setup/run_purnanto_enthalpy_sweep.py", line 1642, in main
+    rows, case_summary_row = run_one_case(solver, item, args, local_output_dir)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/scripts/setup/run_purnanto_enthalpy_sweep.py", line 1473, in run_one_case
+    completed = iterate_case(
+                ^^^^^^^^^^^^^
+  File "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/scripts/setup/run_purnanto_enthalpy_sweep.py", line 909, in iterate_case
+    after = require_monitor_advance(solver, before, step)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/scripts/setup/run_purnanto_enthalpy_sweep.py", line 845, in require_monitor_advance
+    raise RuntimeError(
+RuntimeError: Fluent did not provide evidence for the requested iteration block: before=75.0, requested=25, expected_at_least=100.0, observed=79.0, monitor_snapshot={'residual': {'points': 82, 'first_iteration': 1.0, 'last_iteration': 79.0, 'series': ['continuity', 'epsilon', 'k', 'vf-phase-2', 'x-velocity', 'y-velocity', 'z-velocity']}}

@@ -30,6 +30,28 @@
       "failure_symptoms": ["anthracite only", "water-droplet not found under inert_particle", "material setter ignored"]
     },
     {
+      "setting_family": "purnanto_phase_mass_flow_mapping",
+      "parents_required": ["Mixture model enabled", "phase-1 material readback is water-vapor-at-psep", "phase-2 material readback is water-liquid-at-psep", "inlet type = mass-flow-inlet"],
+      "must_happen_before": ["case-specific phase mass-flow mutation", "initialization", "carrier iterations"],
+      "failure_symptoms": ["gas/liquid flow applied to the wrong phase", "plausible total flow with physically inverted phase split"],
+      "warning": "Do not infer phase identity from phase number alone; require material readback."
+    },
+    {
+      "setting_family": "dpm_face_normal_velocity",
+      "parents_required": ["injection type = surface", "injection surface bound", "inlet face-normal direction verified from geometry"],
+      "must_happen_before": ["DPM update", "particle tracking"],
+      "children_unlocked": ["use_face_normal_direction", "positive velocity magnitude"],
+      "failure_symptoms": ["particles immediately escape at inlet", "normal-direction magnitude produces outward launch", "component velocity sign disagrees with face normal"],
+      "warning": "Normal to Face uses a positive magnitude; direction comes from the selected surface normal and must be verified independently."
+    },
+    {
+      "setting_family": "dpm_per_injection_reporting",
+      "parents_required": ["per-injection reporting enabled", "DPM update completed successfully", "fresh scratch report path created"],
+      "must_happen_before": ["escaped kg/s parsing", "combined CSV acceptance"],
+      "failure_symptoms": ["stale report reused", "missing injection block", "count-only fallback mistaken for mass flow"],
+      "warning": "Accept mass only from a report with explicit Initial, Final, and Change columns; use the Final column and reject count weighting by default."
+    },
+    {
       "setting_family": "energy_temperature_fields",
       "parents_required": ["Energy enabled", "boundary type set", "object reacquired"],
       "children_unlocked": ["inlet temperature", "wall thermal BC", "outlet backflow temperature", "DPM particle temperature"]

@@ -1,0 +1,17 @@
+Connecting to Fluent server 1 using IP/port: 10.104.145.85:60012
+/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/.venv/lib/python3.12/site-packages/ansys/fluent/core/fluent_connection.py:306: InsecureGrpcWarning: The Fluent session will be connected in insecure gRPC mode. This mode is not recommended. For more details on the implications and usage of insecure mode, refer to the Fluent documentation.
+  warnings.warn(
+/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/.venv/lib/python3.12/site-packages/ansys/tools/common/cyberchannel.py:188: UserWarning: Starting gRPC client without TLS on 10.104.145.85:60012. This is INSECURE. Consider using a secure connection.
+  warn(f"Starting gRPC client without TLS on {target}. This is INSECURE. Consider using a secure connection.")
+
+Connected to Fluent.
+ Reversed flow on 721 faces of pressure-outlet 7.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 13181 cells 
+
+Health status: Status.SERVING
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+Health check: Status.SERVING
+Fluent version: Ansys Fluent 2024 R2
+
+Done. This script did not close Fluent.

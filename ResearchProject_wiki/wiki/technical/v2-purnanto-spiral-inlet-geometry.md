@@ -16,6 +16,18 @@ Primary linked context:
 - `../../../CFD_wiki/wiki/sources/purnanto-2013-cfd-geothermal-separator.md`
 - `../../../CFD_wiki/wiki/setups/geothermal-boc-separator-fluent-2013-baseline.md`
 - `../../../Setup report/05-complete-two-phase-actual-area-no-brine-outlet.md`
+- `../../../Setup report/08c-purnanto-spiral-inlet-enthalpy-dpm-sweep.md`
+
+## Completed-Sweep Relationship
+
+The completed setup `08c` sweep used
+`C:\Users\qtra338\Documents\baseline_spiral_inlet.cas.h5` and the same
+`0.724 m x 0.724 m` inlet-area interpretation recorded on this page.
+
+`Missing`: the repository does not contain enough CAD/mesh provenance to prove
+that this exact reconstruction file produced the completed Fluent baseline.
+Accordingly, this page supports the dimensional interpretation of setup `08c`
+but must not be cited as confirmed mesh lineage.
 
 ## Scope
 

@@ -1,0 +1,10 @@
+injection_name,particle_type,material,injection_type,surface,mass_flow_kgs,expected_mass_flow_kgs,velocity_use_face_normal,velocity_magnitude,expected_z_velocity_ms,velocity_z,diameter_m,expected_diameter_m,particle_size_option,error
+injection-0,inert,water-liquid-dpm,surface,['inlet'],5.85,0.189995,False,,-34.221202,-34.53,0.000128,4.307482e-06,uniform,
+injection-1,inert,water-liquid-dpm,surface,['inlet'],11.69,0.780441,False,,-34.221202,-34.53,0.000213,2.153741e-05,uniform,
+injection-2,inert,water-liquid-dpm,surface,['inlet'],17.54,0.970436,False,,-34.221202,-34.53,0.000298,4.307482e-05,uniform,
+injection-3,inert,water-liquid-dpm,surface,['inlet'],17.54,1.952564,False,,-34.221202,-34.53,0.000383,8.614965e-05,uniform,
+injection-4,inert,water-liquid-dpm,surface,['inlet'],11.69,1.952564,False,,-34.221202,-34.53,0.000426,0.0001292245,uniform,
+injection-5,inert,water-liquid-dpm,surface,['inlet'],17.54,23.384,False,,-34.221202,-34.53,0.000554,0.0002670639,uniform,
+injection-6,inert,water-liquid-dpm,surface,['inlet'],11.69,29.23,False,,-34.221202,-34.53,0.000724,0.0004307482,uniform,
+injection-7,inert,water-liquid-dpm,surface,['inlet'],11.69,29.23,False,,-34.221202,-34.53,0.0009800000000000002,0.0006461224,uniform,
+injection-8,inert,water-liquid-dpm,surface,['inlet'],11.69,29.23,False,,-34.221202,-34.53,0.001235,0.00124917,uniform,

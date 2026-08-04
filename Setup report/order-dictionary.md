@@ -54,8 +54,11 @@ Rules:
 | `05` | full-inlet alternative branch | `05-complete-two-phase-actual-area-no-brine-outlet.md` | `05-complete-two-phase-actual-area-no-brine-outlet.md` | High | planned diagnostic branch | branch from `04`; one full inlet, no active brine outlet |
 | `06` | fixed-velocity pure-phase alternative | `06-pure-phase-split-fixed-velocity.md` | `06-pure-phase-split-fixed-velocity.md` | High | alternate retained | branch from later actual-area work; preserves `26.81 m/s` |
 | `07` | pure-phase actual-area branch | `07-pure-phase-split-actual-area.md` | `07-pure-phase-split-actual-area.md` | High | professional baseline flux diagnostic completed | selected next setup definition after `06` was kept as alternate; professional-license run now recorded with incomplete surface flux balance pending brine/liquid outlet report |
+| `07a` | split-inlet carrier mesh-convergence branch | `07a-split-inlet-carrier-mesh-convergence.md` | `07a-split-inlet-carrier-mesh-convergence.md` | High | planned / blocked at preflight | child of `07`; freezes the carrier physics and varies only systematic mesh resolution; remote connection, geometry orientation, numerics authority, and mesh ladder remain unresolved |
 | `08` | direct Purnanto-recreation branch | `08-purnanto-one-inlet-massflow-recreation.md` | `08-purnanto-one-inlet-massflow-recreation.md` | High | selected direct baseline-rebuild branch | returns to the paper-style one-inlet mixed steam-water `Mass-Flow Inlet` package using the live Purnanto audit and reusable CFD baseline as the concrete rebuild target |
 | `08a` | steam-outlet boundary-placement trial | `08a-steam-outlet-extension-student-trial.md` | `08a-steam-outlet-extension-student-trial.md` | High | planned student-edition diagnostic branch | child of `07`; keeps the Purnanto spiral-inlet body and setup `07` split two-phase inlet, but extends the central steam outlet path so the pressure-outlet boundary is downstream of the outlet-pipe entrance |
+| `08b` | Purnanto baseline enthalpy and DPM sweep | `08b-purnanto-baseline-enthalpy-dpm-sweep.md` | `08b-purnanto-baseline-enthalpy-dpm-sweep.md` | High | completed six-condition calculation branch | child of `08`; uses `baseline.cas.h5`, Bangma-target Harwell inputs, 1500 evidenced iterations per case, and injection-level DPM fate exports; geometry identity and convergence remain unresolved |
+| `08c` | Purnanto spiral-inlet enthalpy and DPM sweep | `08c-purnanto-spiral-inlet-enthalpy-dpm-sweep.md` | `08c-purnanto-spiral-inlet-enthalpy-dpm-sweep.md` | High | completed six-condition calculation branch | sibling of `08b` under `08`; uses the spiral baseline, spiral-area Harwell inputs, 1500 evidenced iterations per case, and injection-level DPM fate exports |
 | `09` | multiphase sensitivity family parent | `09-multiphase-separator-sensitivity-family.md` | `09-multiphase-separator-sensitivity-family.md` | High | active family container | child of `07`; replaces the retired VOF-only idea with a parent container for literature-backed `DPM`, `RSM-DPM`, and `DPM + EWF` child branches |
 | `09a` | split-inlet DPM carryover branch | `09a-dpm-split-inlet-carryover.md` | `09a-dpm-split-inlet-carryover.md` | High | planned first carryover branch | child of `09`; keeps the setup `07` continuous-field basis and adds `DPM` as the lowest-risk literature-backed next step for droplet escape sensitivity |
 | `09b` | split-inlet RSM-DPM accuracy branch | `09b-rsm-dpm-split-inlet-accuracy.md` | `09b-rsm-dpm-split-inlet-accuracy.md` | High | planned higher-accuracy branch | child of `09`; upgrades the carrier-field turbulence closure to `RSM` and adds `DPM`, following the stronger recent separator-method anchor from Chen 2025 |
@@ -67,6 +70,8 @@ Rules:
 00 baseline
  -> 00a Purnanto setup 5000 live audit
     -> 08 Purnanto one-inlet mass-flow recreation
+       -> 08b Purnanto baseline enthalpy and DPM sweep
+       -> 08c Purnanto spiral-inlet enthalpy and DPM sweep
  -> 01 split two-zone mass-flow inlet
     -> 02 split two-zone velocity inlet with brine outlet
        -> 02b VOF split-inlet transient side branch
@@ -76,6 +81,7 @@ Rules:
              -> 05 complete two-phase actual-area no-brine-outlet
              -> 06 pure-phase split fixed velocity
              -> 07 pure-phase split actual-area
+                -> 07a split-inlet carrier mesh convergence
                 -> 08a steam outlet extension student-edition trial
                 -> 09 multiphase sensitivity family
                    -> 09a split-inlet DPM carryover
@@ -88,11 +94,14 @@ Rules:
 - Main lineage:
   `00 -> 01 -> 02 -> 03 -> 04 -> 07 -> 09`
 - Child/side branches:
-  `00a`, `02b`, `03a`, `05`, `06`, `08`, `08a`, `09a`, `09b`, `09c`
+  `00a`, `02b`, `03a`, `05`, `06`, `07a`, `08`, `08a`, `08b`, `08c`, `09a`, `09b`, `09c`
 
 Interpretation note:
 
 - `08` is intentionally a reset-to-baseline branch rather than the next pure-phase child of `07`.
+- `08b` and `08c` are completed sibling sweeps under `08`; neither is the parent of the other.
+- `08b` is Bangma-targeted but must not be called an exact Bangma geometry until the baseline geometry is visually verified.
+- `08c` changes geometry, inlet area, velocity, and Harwell diameters together, so it is not a geometry-only sensitivity.
 - `09` returns to the split-inlet comparison lineage as a family parent from `07`, not as a continuation of the one-inlet reset branch.
 - Use `08` when the task is to recreate the Purnanto setup itself with one inlet carrying both phases, not when the task is to continue the split-inlet comparison lineage.
 

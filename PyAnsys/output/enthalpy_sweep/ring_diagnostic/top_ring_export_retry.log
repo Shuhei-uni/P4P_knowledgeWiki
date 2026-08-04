@@ -1,0 +1,192 @@
+Connecting to Fluent server 1 using IP/port: 10.104.145.85:61169
+/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/.venv/lib/python3.12/site-packages/ansys/fluent/core/fluent_connection.py:306: InsecureGrpcWarning: The Fluent session will be connected in insecure gRPC mode. This mode is not recommended. For more details on the implications and usage of insecure mode, refer to the Fluent documentation.
+  warnings.warn(
+/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/.venv/lib/python3.12/site-packages/ansys/tools/common/cyberchannel.py:188: UserWarning: Starting gRPC client without TLS on 10.104.145.85:61169. This is INSECURE. Consider using a secure connection.
+  warn(f"Starting gRPC client without TLS on {target}. This is INSECURE. Consider using a secure connection.")
+
+Connected to Fluent Ansys Fluent 2024 R2
+load_case_data: SKIPPED; using current Fluent state
+dpm_update: SKIPPED
+
+=== Configure Graphics ===
+create_top_ring_wall_mesh: starting
+create_top_ring_wall_mesh: OK
+mesh_surfaces_list: starting
+mesh_surfaces_list: OK
+mesh_state: starting
+mesh_state: OK
+create_top_ring_dpm_tracks: starting
+create_top_ring_dpm_tracks: OK
+top_ring_dpm_tracks_injections: starting
+top_ring_dpm_tracks_injections: OK
+top_ring_dpm_tracks_field: starting
+
+Error: Value is not allowed
+Error Object: ("particle-time" is_not_in ("particle-resid-time" "particle-id" "surface-id" "particle-x-position" "particle-y-position" "particle-radial-position" "particle-z-position" "particle-theta-position" "particle-x-velocity" "particle-y-velocity" "particle-radial-velocity" "particle-z-velocity" "particle-swirl-velocity" "particle-velocity-mag" "particle-diameter" "particle-density" "particle-Cp" "particle-binary-diffusivity" "particle-mass" "particle-temperature" "particle-law-index" "particle-on-wall" "particle-reynolds-number" "particle-time-step" "particle-nusselt-number" "tracking-scheme" "number-of-refinements" "pressure" "pressure-coefficient" "dynamic-pressure" "absolute-pressure" "total-pressure" "rel-total-pressure" "density" "density-all" "velocity-magnitude" "x-velocity" "y-velocity" "z-velocity" "axial-velocity" "radial-velocity" "tangential-velocity" "rel-velocity-magnitude" "relative-x-velocity" "relative-y-velocity" "relative-z-velocity" "rel-axial-velocity" "rel-radial-velocity" "rel-tangential-velocity" "mesh-x-velocity" "mesh-y-velocity" "mesh-z-velocity" "velocity-angle" "relative-velocity-angle" "vorticity-mag" "helicity" "x-vorticity" "y-vorticity" "z-vorticity" "cell-reynolds-number" "q-criterion" "raw-q-criterion" "lambda2-criterion" "turb-kinetic-energy" "turb-intensity" "turb-diss-rate" "production-of-k" "viscosity-turb" "viscosity-eff" "viscosity-ratio" "y-star" "y-plus" "iad-phase-pair-1" "dpm-wall-x-force" "dpm-wall-y-force" "dpm-wall-z-force" "dpm-wall-normal-pressure" "viscosity-lam" "wall-shear" "x-wall-shear" "y-wall-shear" "z-wall-shear" "skin-friction-coef" "cell-partition-active" "cell-partition-stored" "cell-id" "cell-element-type" "cell-type" "cell-zone" "partition-neighbors" "cell-weight" "x-coordinate" "y-coordinate" "z-coordinate" "axial-coordinate" "angular-coordinate" "abs-angular-coordinate" "radial-coordinate" "face-area-magnitude" "x-face-area" "y-face-area" "z-face-area" "cell-volume" "orthogonal-quality" "cell-equiangle-skew" "cell-equivolume-skew" "face-handedness" "mark-poor-elements" "interface-overlap-fraction" "cell-wall-distance" "aspect-ratio" "cell-refine-level" "smoothed-cell-refine-level" "cell-parent-index" "anisotropic-adaption-cells" "boundary-layer-cells" "boundary-cell-dist" "boundary-normal-dist" "boundary-volume-dist" "cell-volume-change" "mass-imbalance" "strain-rate-mag" "dx-velocity-dx" "dy-velocity-dx" "dz-velocity-dx" "dx-velocity-dy" "dy-velocity-dy" "dz-velocity-dy" "dx-velocity-dz" "dy-velocity-dz" "dz-velocity-dz" "dp-dx" "dp-dy" "dp-dz" "pressure-hessian-indicator" "phase-1-density" "phase-1-density-all" "phase-1-velocity-magnitude" "phase-1-x-velocity" "phase-1-y-velocity" "phase-1-z-velocity" "phase-1-rel-velocity-magnitude" "phase-1-relative-x-velocity" "phase-1-relative-y-velocity" "phase-1-relative-z-velocity" "phase-1-q-criterion" "phase-1-raw-q-criterion" "phase-1-lambda2-criterion" "phase-1-vof" "phase-1-sm-vof-grad-dx" "phase-1-sm-vof-grad-dy" "phase-1-sm-vof-grad-dz" "phase-1-sm-vof-grad-mag" "phase-1-viscosity-lam" "phase-2-density" "phase-2-density-all" "phase-2-velocity-magnitude" "phase-2-x-velocity" "phase-2-y-velocity" "phase-2-z-velocity" "phase-2-rel-velocity-magnitude" "phase-2-relative-x-velocity" "phase-2-relative-y-velocity" "phase-2-relative-z-velocity" "phase-2-q-criterion" "phase-2-raw-q-criterion" "phase-2-lambda2-criterion" "phase-2-vof" "phase-2-sm-vof-grad-dx" "phase-2-sm-vof-grad-dy" "phase-2-sm-vof-grad-dz" "phase-2-sm-vof-grad-mag" "phase-2-viscosity-lam" "phase-2-diameter"))
+top_ring_dpm_tracks_field: FAILED -> ValueError: 'field' has no attribute 'particle-time'.
+The most similar names are: particle-time-step, particle-id, particle-resid-time, particle-diameter, particle-mass
+top_ring_dpm_tracks_draw_mesh: starting
+
+top_ring_dpm_tracks_draw_mesh: FAILED -> RuntimeError: api-set-var: the object is not active
+Error Object: results/graphics/particle-track/top_ring_dpm_tracks/draw-mesh?
+top_ring_dpm_tracks_mesh_object: starting
+Error: api-set-var: the object is not active
+Error Object: "results/graphics/particle-track/top_ring_dpm_tracks/draw-mesh?"
+
+Error: api-set-var: the object is not active
+Error Object: "results/graphics/particle-track/top_ring_dpm_tracks/mesh-object"
+top_ring_dpm_tracks_mesh_object: OK
+top_ring_dpm_tracks_free_stream_particles: starting
+top_ring_dpm_tracks_free_stream_particles: OK
+top_ring_dpm_tracks_wall_film_particles: starting
+top_ring_dpm_tracks_wall_film_particles: OK
+top_ring_dpm_tracks_track_pdf_particles_false: starting
+top_ring_dpm_tracks_track_pdf_particles_false: OK
+top_ring_dpm_tracks_skip: starting
+top_ring_dpm_tracks_skip: OK
+top_ring_dpm_tracks_coarsen: starting
+top_ring_dpm_tracks_coarsen: OK
+top_ring_dpm_tracks_style_attribute: starting
+top_ring_dpm_tracks_style_attribute: OK
+top_ring_dpm_tracks_color_map: starting
+top_ring_dpm_tracks_color_map: OK
+top_ring_dpm_tracks_state: starting
+top_ring_dpm_tracks_state: OK
+history_filename: starting
+history_filename: OK
+history_report_default_variables: starting
+history_report_default_variables: OK
+tui_history_filename: starting
+tui_history_filename: OK
+tui_report_to_file: starting
+(none file screen)
+tui_report_to_file: OK
+tui_report_type_step: starting
+(none summary step)
+tui_report_type_step: OK
+tui_report_default_variables: starting
+
+
+ERROR: Invalid string/symbol.
+Error object: ("Particle X Position" "Particle Y Position" "Particle Z Position" "Particle X Velocity" "Particle Y Velocity" "Particle Z Velocity" "Particle Diameter" "Particle Temperature" "Particle Density" "Particle Mass" "Particle Number in Parcel" "Color by")
+
+
+
+
+Error: An error or interrupt occurred in the previous operation.
+       Details have been printed to the text console transcript.
+Error Object: #f
+The following solver settings object method could also be used to execute the above command:
+<solver_session>.results.graphics.particle_tracks.report_default_variables = False
+tui_report_default_variables: OK
+picture_use_window_resolution_false: starting
+
+Error: api-set-var: the object is not active
+picture_use_window_resolution_false: FAILED -> RuntimeError: api-set-var: the object is not active
+Error Object: results/graphics/picture/use-window-resolution?
+picture_x_resolution: starting
+Error Object: "results/graphics/picture/use-window-resolution?"
+picture_x_resolution: OK
+picture_y_resolution: starting
+picture_y_resolution: OK
+picture_dpi: starting
+
+picture_dpi: FAILED -> RuntimeError: api-set-var: the object is not active
+Error Object: results/graphics/picture/dpi
+picture_invert_background_false: starting
+Error: api-set-var: the object is not active
+Error Object: "results/graphics/picture/dpi"
+picture_invert_background_false: OK
+picture_hardcopy_format_png: starting
+picture_hardcopy_format_png: OK
+
+=== Display And Save Unfiltered Tracks ===
+display_mesh_object: starting
+display_mesh_object: OK
+add_track_to_graphics: starting
+add_track_to_graphics: OK
+save_picture: starting
+save_picture: FAILED -> InactiveObjectError: '<session>.results.graphics.picture.save_picture' is currently inactive.
+
+=== Display And Save High-Time Tracks ===
+create_top_ring_high_time_dpm_tracks: starting
+create_top_ring_high_time_dpm_tracks: OK
+top_ring_high_time_dpm_tracks_injections: starting
+top_ring_high_time_dpm_tracks_injections: OK
+top_ring_high_time_dpm_tracks_field: starting
+
+Error: Value is not allowed
+Error Object: ("particle-time" is_not_in ("particle-resid-time" "particle-id" "surface-id" "particle-x-position" "particle-y-position" "particle-radial-position" "particle-z-position" "particle-theta-position" "particle-x-velocity" "particle-y-velocity" "particle-radial-velocity" "particle-z-velocity" "particle-swirl-velocity" "particle-velocity-mag" "particle-diameter" "particle-density" "particle-Cp" "particle-binary-diffusivity" "particle-mass" "particle-temperature" "particle-law-index" "particle-on-wall" "particle-reynolds-number" "particle-time-step" "particle-nusselt-number" "tracking-scheme" "number-of-refinements" "pressure" "pressure-coefficient" "dynamic-pressure" "absolute-pressure" "total-pressure" "rel-total-pressure" "density" "density-all" "velocity-magnitude" "x-velocity" "y-velocity" "z-velocity" "axial-velocity" "radial-velocity" "tangential-velocity" "rel-velocity-magnitude" "relative-x-velocity" "relative-y-velocity" "relative-z-velocity" "rel-axial-velocity" "rel-radial-velocity" "rel-tangential-velocity" "mesh-x-velocity" "mesh-y-velocity" "mesh-z-velocity" "velocity-angle" "relative-velocity-angle" "vorticity-mag" "helicity" "x-vorticity" "y-vorticity" "z-vorticity" "cell-reynolds-number" "q-criterion" "raw-q-criterion" "lambda2-criterion" "turb-kinetic-energy" "turb-intensity" "turb-diss-rate" "production-of-k" "viscosity-turb" "viscosity-eff" "viscosity-ratio" "y-star" "y-plus" "iad-phase-pair-1" "dpm-wall-x-force" "dpm-wall-y-force" "dpm-wall-z-force" "dpm-wall-normal-pressure" "viscosity-lam" "wall-shear" "x-wall-shear" "y-wall-shear" "z-wall-shear" "skin-friction-coef" "cell-partition-active" "cell-partition-stored" "cell-id" "cell-element-type" "cell-type" "cell-zone" "partition-neighbors" "cell-weight" "x-coordinate" "y-coordinate" "z-coordinate" "axial-coordinate" "angular-coordinate" "abs-angular-coordinate" "radial-coordinate" "face-area-magnitude" "x-face-area" "y-face-area" "z-face-area" "cell-volume" "orthogonal-quality" "cell-equiangle-skew" "cell-equivolume-skew" "face-handedness" "mark-poor-elements" "interface-overlap-fraction" "cell-wall-distance" "aspect-ratio" "cell-refine-level" "smoothed-cell-refine-level" "cell-parent-index" "anisotropic-adaption-cells" "boundary-layer-cells" "boundary-cell-dist" "boundary-normal-dist" "boundary-volume-dist" "cell-volume-change" "mass-imbalance" "strain-rate-mag" "dx-velocity-dx" "dy-velocity-dx" "dz-velocity-dx" "dx-velocity-dy" "dy-velocity-dy" "dz-velocity-dy" "dx-velocity-dz" "dy-velocity-dz" "dz-velocity-dz" "dp-dx" "dp-dy" "dp-dz" "pressure-hessian-indicator" "phase-1-density" "phase-1-density-all" "phase-1-velocity-magnitude" "phase-1-x-velocity" "phase-1-y-velocity" "phase-1-z-velocity" "phase-1-rel-velocity-magnitude" "phase-1-relative-x-velocity" "phase-1-relative-y-velocity" "phase-1-relative-z-velocity" "phase-1-q-criterion" "phase-1-raw-q-criterion" "phase-1-lambda2-criterion" "phase-1-vof" "phase-1-sm-vof-grad-dx" "phase-1-sm-vof-grad-dy" "phase-1-sm-vof-grad-dz" "phase-1-sm-vof-grad-mag" "phase-1-viscosity-lam" "phase-2-density" "phase-2-density-all" "phase-2-velocity-magnitude" "phase-2-x-velocity" "phase-2-y-velocity" "phase-2-z-velocity" "phase-2-rel-velocity-magnitude" "phase-2-relative-x-velocity" "phase-2-relative-y-velocity" "phase-2-relative-z-velocity" "phase-2-q-criterion" "phase-2-raw-q-criterion" "phase-2-lambda2-criterion" "phase-2-vof" "phase-2-sm-vof-grad-dx" "phase-2-sm-vof-grad-dy" "phase-2-sm-vof-grad-dz" "phase-2-sm-vof-grad-mag" "phase-2-viscosity-lam" "phase-2-diameter"))
+top_ring_high_time_dpm_tracks_field: FAILED -> ValueError: 'field' has no attribute 'particle-time'.
+The most similar names are: particle-time-step, particle-id, particle-resid-time, particle-diameter, particle-mass
+top_ring_high_time_dpm_tracks_draw_mesh: starting
+
+top_ring_high_time_dpm_tracks_draw_mesh: FAILED -> RuntimeError: api-set-var: the object is not active
+Error Object: results/graphics/particle-track/top_ring_high_time_dpm_tracks/draw-mesh?
+top_ring_high_time_dpm_tracks_mesh_object: starting
+Error: api-set-var: the object is not active
+Error Object: "results/graphics/particle-track/top_ring_high_time_dpm_tracks/draw-mesh?"
+
+Error: api-set-var: the object is not active
+Error Object: "results/graphics/particle-track/top_ring_high_time_dpm_tracks/mesh-object"
+top_ring_high_time_dpm_tracks_mesh_object: OK
+top_ring_high_time_dpm_tracks_free_stream_particles: starting
+top_ring_high_time_dpm_tracks_free_stream_particles: OK
+top_ring_high_time_dpm_tracks_wall_film_particles: starting
+top_ring_high_time_dpm_tracks_wall_film_particles: OK
+top_ring_high_time_dpm_tracks_track_pdf_particles_false: starting
+top_ring_high_time_dpm_tracks_track_pdf_particles_false: OK
+top_ring_high_time_dpm_tracks_skip: starting
+top_ring_high_time_dpm_tracks_skip: OK
+top_ring_high_time_dpm_tracks_coarsen: starting
+top_ring_high_time_dpm_tracks_coarsen: OK
+top_ring_high_time_dpm_tracks_style_attribute: starting
+top_ring_high_time_dpm_tracks_style_attribute: OK
+top_ring_high_time_dpm_tracks_color_map: starting
+top_ring_high_time_dpm_tracks_color_map: OK
+top_ring_high_time_dpm_tracks_filter_setting: starting
+
+Error: Value is not allowed
+Error Object: ("particle-time" is_not_in ("particle-resid-time" "particle-id" "surface-id" "particle-x-position" "particle-y-position" "particle-radial-position" "particle-z-position" "particle-theta-position" "particle-x-velocity" "particle-y-velocity" "particle-radial-velocity" "particle-z-velocity" "particle-swirl-velocity" "particle-velocity-mag" "particle-diameter" "particle-density" "particle-Cp" "particle-binary-diffusivity" "particle-mass" "particle-temperature" "particle-law-index" "particle-on-wall" "particle-reynolds-number" "particle-time-step" "particle-nusselt-number" "tracking-scheme" "number-of-refinements" "pressure" "pressure-coefficient" "dynamic-pressure" "absolute-pressure" "total-pressure" "rel-total-pressure" "density" "density-all" "velocity-magnitude" "x-velocity" "y-velocity" "z-velocity" "axial-velocity" "radial-velocity" "tangential-velocity" "rel-velocity-magnitude" "relative-x-velocity" "relative-y-velocity" "relative-z-velocity" "rel-axial-velocity" "rel-radial-velocity" "rel-tangential-velocity" "mesh-x-velocity" "mesh-y-velocity" "mesh-z-velocity" "velocity-angle" "relative-velocity-angle" "vorticity-mag" "helicity" "x-vorticity" "y-vorticity" "z-vorticity" "cell-reynolds-number" "q-criterion" "raw-q-criterion" "lambda2-criterion" "turb-kinetic-energy" "turb-intensity" "turb-diss-rate" "production-of-k" "viscosity-turb" "viscosity-eff" "viscosity-ratio" "y-star" "y-plus" "iad-phase-pair-1" "dpm-wall-x-force" "dpm-wall-y-force" "dpm-wall-z-force" "dpm-wall-normal-pressure" "viscosity-lam" "wall-shear" "x-wall-shear" "y-wall-shear" "z-wall-shear" "skin-friction-coef" "cell-partition-active" "cell-partition-stored" "cell-id" "cell-element-type" "cell-type" "cell-zone" "partition-neighbors" "cell-weight" "x-coordinate" "y-coordinate" "z-coordinate" "axial-coordinate" "angular-coordinate" "abs-angular-coordinate" "radial-coordinate" "face-area-magnitude" "x-face-area" "y-face-area" "z-face-area" "cell-volume" "orthogonal-quality" "cell-equiangle-skew" "cell-equivolume-skew" "face-handedness" "mark-poor-elements" "interface-overlap-fraction" "cell-wall-distance" "aspect-ratio" "cell-refine-level" "smoothed-cell-refine-level" "cell-parent-index" "anisotropic-adaption-cells" "boundary-layer-cells" "boundary-cell-dist" "boundary-normal-dist" "boundary-volume-dist" "cell-volume-change" "mass-imbalance" "strain-rate-mag" "dx-velocity-dx" "dy-velocity-dx" "dz-velocity-dx" "dx-velocity-dy" "dy-velocity-dy" "dz-velocity-dy" "dx-velocity-dz" "dy-velocity-dz" "dz-velocity-dz" "dp-dx" "dp-dy" "dp-dz" "pressure-hessian-indicator" "phase-1-density" "phase-1-density-all" "phase-1-velocity-magnitude" "phase-1-x-velocity" "phase-1-y-velocity" "phase-1-z-velocity" "phase-1-rel-velocity-magnitude" "phase-1-relative-x-velocity" "phase-1-relative-y-velocity" "phase-1-relative-z-velocity" "phase-1-q-criterion" "phase-1-raw-q-criterion" "phase-1-lambda2-criterion" "phase-1-vof" "phase-1-sm-vof-grad-dx" "phase-1-sm-vof-grad-dy" "phase-1-sm-vof-grad-dz" "phase-1-sm-vof-grad-mag" "phase-1-viscosity-lam" "phase-2-density" "phase-2-density-all" "phase-2-velocity-magnitude" "phase-2-x-velocity" "phase-2-y-velocity" "phase-2-z-velocity" "phase-2-rel-velocity-magnitude" "phase-2-relative-x-velocity" "phase-2-relative-y-velocity" "phase-2-relative-z-velocity" "phase-2-q-criterion" "phase-2-raw-q-criterion" "phase-2-lambda2-criterion" "phase-2-vof" "phase-2-sm-vof-grad-dx" "phase-2-sm-vof-grad-dy" "phase-2-sm-vof-grad-dz" "phase-2-sm-vof-grad-mag" "phase-2-viscosity-lam" "phase-2-diameter"))
+top_ring_high_time_dpm_tracks_filter_setting: FAILED -> RuntimeError: Value is not allowed
+Error Object: (particle-time is_not_in (particle-resid-time particle-id surface-id particle-x-position particle-y-position particle-radial-position particle-z-position particle-theta-position particle-x-velocity particle-y-velocity particle-radial-velocity particle-z-velocity particle-swirl-velocity particle-velocity-mag particle-diameter particle-density particle-Cp particle-binary-diffusivity particle-mass particle-temperature particle-law-index particle-on-wall particle-reynolds-number particle-time-step particle-nusselt-number tracking-scheme number-of-refinements pressure pressure-coefficient dynamic-pressure absolute-pressure total-pressure rel-total-pressure density density-all velocity-magnitude x-velocity y-velocity z-velocity axial-velocity radial-velocity tangential-velocity rel-velocity-magnitude relative-x-velocity relative-y-velocity relative-z-velocity rel-axial-velocity rel-radial-velocity rel-tangential-velocity mesh-x-velocity mesh-y-velocity mesh-z-velocity velocity-angle relative-velocity-angle vorticity-mag helicity x-vorticity y-vorticity z-vorticity cell-reynolds-number q-criterion raw-q-criterion lambda2-criterion turb-kinetic-energy turb-intensity turb-diss-rate production-of-k viscosity-turb viscosity-eff viscosity-ratio y-star y-plus iad-phase-pair-1 dpm-wall-x-force dpm-wall-y-force dpm-wall-z-force dpm-wall-normal-pressure viscosity-lam wall-shear x-wall-shear y-wall-shear z-wall-shear skin-friction-coef cell-partition-active cell-partition-stored cell-id cell-element-type cell-type cell-zone partition-neighbors cell-weight x-coordinate y-coordinate z-coordinate axial-coordinate angular-coordinate abs-angular-coordinate radial-coordinate face-area-magnitude x-face-area y-face-area z-face-area cell-volume orthogonal-quality cell-equiangle-skew cell-equivolume-skew face-handedness mark-poor-elements interface-overlap-fraction cell-wall-distance aspect-ratio cell-refine-level smoothed-cell-refine-level cell-parent-index anisotropic-adaption-cells boundary-layer-cells boundary-cell-dist boundary-normal-dist boundary-volume-dist cell-volume-change mass-imbalance strain-rate-mag dx-velocity-dx dy-velocity-dx dz-velocity-dx dx-velocity-dy dy-velocity-dy dz-velocity-dy dx-velocity-dz dy-velocity-dz dz-velocity-dz dp-dx dp-dy dp-dz pressure-hessian-indicator phase-1-density phase-1-density-all phase-1-velocity-magnitude phase-1-x-velocity phase-1-y-velocity phase-1-z-velocity phase-1-rel-velocity-magnitude phase-1-relative-x-velocity phase-1-relative-y-velocity phase-1-relative-z-velocity phase-1-q-criterion phase-1-raw-q-criterion phase-1-lambda2-criterion phase-1-vof phase-1-sm-vof-grad-dx phase-1-sm-vof-grad-dy phase-1-sm-vof-grad-dz phase-1-sm-vof-grad-mag phase-1-viscosity-lam phase-2-density phase-2-density-all phase-2-velocity-magnitude phase-2-x-velocity phase-2-y-velocity phase-2-z-velocity phase-2-rel-velocity-magnitude phase-2-relative-x-velocity phase-2-relative-y-velocity phase-2-relative-z-velocity phase-2-q-criterion phase-2-raw-q-criterion phase-2-lambda2-criterion phase-2-vof phase-2-sm-vof-grad-dx phase-2-sm-vof-grad-dy phase-2-sm-vof-grad-dz phase-2-sm-vof-grad-mag phase-2-viscosity-lam phase-2-diameter))
+top_ring_high_time_dpm_tracks_state: starting
+top_ring_high_time_dpm_tracks_state: OK
+display_mesh_object: starting
+display_mesh_object: OK
+add_track_to_graphics: starting
+add_track_to_graphics: OK
+save_picture: starting
+save_picture: FAILED -> InactiveObjectError: '<session>.results.graphics.picture.save_picture' is currently inactive.
+
+=== Report DPM Summary ===
+report_call: settings_dpm_summary_existing
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_top_ring_diagnostic_particle_history.txt
+
+
+Stored DPM summary report data are out-dated, need to be updated.
+
+report_call: settings_dpm_extended_summary_existing
+To do so, please issue the TUI command: /solve/dpm-update
+
+/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/.venv/lib/python3.12/site-packages/ansys/fluent/core/solver/flobject.py:1889: PyFluentUserWarning: Unknown keyword 'include_in_domain_particles' for command '<session>.results.report.discrete_phase.extended_summary'. It will be ignored.
+  warnings.warn(
+
+
+Stored DPM summary report data are out-dated, need to be updated.
+To do so, please issue the TUI command: /solve/dpm-update
+
+
+report_call: tui_particle_summary_existing
+(injection-0 injection-1 injection-2 injection-3 injection-4 injection-5 injection-6 injection-7 injection-8)
+The following solver settings object method could also be used to execute the above command:
+<solver_session>.results.report.particle_summary(injection_names = ["injection-0", "injection-1", "injection-2", "injection-3", "injection-4", "injection-5", "injection-6", "injection-7", "injection-8"])
+
+
+=== DPM Ring Diagnostic Complete ===
+local_manifest: /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/ring_diagnostic/case_4_1600_top_ring_diagnostic_manifest.json
+local_report: /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/ring_diagnostic/case_4_1600_top_ring_diagnostic_dpm_report.txt
+png: FAILED -> /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/ring_diagnostic/case_4_1600_top_ring_diagnostic.png
+filtered_png: FAILED -> /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/ring_diagnostic/case_4_1600_top_ring_diagnostic_high_time.png
+history: OK -> /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/ring_diagnostic/case_4_1600_top_ring_diagnostic_particle_history.txt

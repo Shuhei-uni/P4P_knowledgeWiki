@@ -1,0 +1,14 @@
+{
+  "case_file": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_1600k\\mesh-1600k_recovered_iter663.cas.h5",
+  "data_file": "C:\\Users\\qtra338\\Documents\\Mesh study\\split_inlet_mesh_convergence_20260801\\mesh_1600k\\mesh-1600k_recovered_iter663.dat.h5",
+  "label": "mesh-1600k_recovered_iter663",
+  "reported_number_of_iterations": 250,
+  "reported_number_of_iterations_is_completion_proof": false,
+  "verified_completed_iterations": 663,
+  "expected_completed_iterations": 663,
+  "status": "verified",
+  "notes": [
+    "Manual recovery save. Treat as complete only if verified_completed_iterations is set.",
+    "Do not infer completed iterations from reported_number_of_iterations."
+  ]
+}

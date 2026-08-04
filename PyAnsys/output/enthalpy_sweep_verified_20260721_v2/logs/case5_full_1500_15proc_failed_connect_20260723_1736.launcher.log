@@ -1,0 +1,3 @@
+guarded_log: /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/case5_full_1500_15proc.log
+run_guarded: started pid=99045 mode=quiet
+run_guarded: running elapsed=5m00s idle=5m00s log=/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep_verified_20260721_v2/logs/case5_full_1500_15proc.log

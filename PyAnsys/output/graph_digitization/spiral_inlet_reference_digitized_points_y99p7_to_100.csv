@@ -1,0 +1,18 @@
+series,color,x_mps,steam_quality_pct,pixel_x,pixel_y,component_area_px
+Calculation,blue,20.0550,99.9536,887.71,1019.34,1205
+Calculation,blue,21.5423,99.9515,930.67,1017.20,1212
+Calculation,blue,24.1632,99.9537,1006.36,1019.42,1235
+Calculation,blue,26.8151,99.9518,1082.95,1017.48,1273
+Calculation,blue,29.4712,99.9291,1159.67,993.65,1286
+Calculation,blue,32.1174,99.8638,1236.09,925.26,1268
+Lazalde-Crabtree Correlation,green,7.9636,99.9881,538.50,1055.50,680
+Lazalde-Crabtree Correlation,green,15.9273,100.0000,768.50,1068.50,671
+Lazalde-Crabtree Correlation,green,23.9602,100.0000,1000.50,1069.00,381
+Lazalde-Crabtree Correlation,green,37.0483,99.9928,1378.50,1060.50,662
+Lazalde-Crabtree Correlation,green,55.0530,99.9251,1898.50,989.50,664
+Simulation,red,20.1365,99.9880,890.07,1055.44,1383
+Simulation,red,21.5509,99.9880,930.92,1055.44,1379
+Simulation,red,24.2149,99.9876,1007.86,1055.02,1347
+Simulation,red,26.8537,99.8297,1084.07,889.51,1379
+Simulation,red,29.5179,99.9929,1161.01,1060.52,1374
+Simulation,red,32.1611,99.9977,1237.35,1065.63,1370

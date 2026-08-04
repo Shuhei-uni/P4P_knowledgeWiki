@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import os
+import socket
 from pathlib import Path
 
 from pyansys_fluent.common import bool_env
@@ -22,7 +23,28 @@ def env_suffix(server_id: str | int | None) -> str:
     return str(server_id).strip()
 
 
-def connect(server_id: str | int | None = None):
+def float_env(name: str, default: float) -> float:
+    value = os.getenv(name)
+    if value is None or value.strip() == "":
+        return default
+    return float(value)
+
+
+def tcp_preflight(ip: str, port: int, timeout_seconds: float) -> None:
+    if timeout_seconds <= 0:
+        return
+    try:
+        with socket.create_connection((ip, port), timeout=timeout_seconds):
+            return
+    except OSError as exc:
+        raise TimeoutError(
+            f"TCP preflight failed for {ip}:{port} after {timeout_seconds:.1f}s. "
+            "Check that Fluent is still running, the gRPC port is current, and the "
+            "Windows firewall allows inbound TCP on that port."
+        ) from exc
+
+
+def connect(server_id: str | int | None = None, *, tcp_timeout_seconds: float | None = None):
     load_dotenv()
     import ansys.fluent.core as pyfluent
 
@@ -34,6 +56,11 @@ def connect(server_id: str | int | None = None):
     password = os.getenv(f"FLUENT_PASSWORD{suffix}", "").strip()
     allow_remote_host = bool_env(f"FLUENT_ALLOW_REMOTE_HOST{suffix}", bool_env("FLUENT_ALLOW_REMOTE_HOST", True))
     insecure_mode = bool_env(f"FLUENT_INSECURE_MODE{suffix}", bool_env("FLUENT_INSECURE_MODE", False))
+    if tcp_timeout_seconds is None:
+        tcp_timeout_seconds = float_env(
+            f"FLUENT_TCP_PREFLIGHT_TIMEOUT_SECONDS{suffix}",
+            float_env("FLUENT_TCP_PREFLIGHT_TIMEOUT_SECONDS", 5.0),
+        )
     label = suffix or "1"
 
     common = {
@@ -58,6 +85,7 @@ def connect(server_id: str | int | None = None):
         )
 
     print(f"Connecting to Fluent server {label} using IP/port: {ip}:{port}")
+    tcp_preflight(ip, int(port), tcp_timeout_seconds)
     return pyfluent.connect_to_fluent(
         ip=ip,
         port=int(port),
@@ -74,5 +102,14 @@ def build_parser() -> argparse.ArgumentParser:
         "--server-id",
         default="1",
         help="Configured Fluent server id to use. Use 1 for FLUENT_IP, 2 for FLUENT_IP2, 3 for FLUENT_IP3.",
+    )
+    parser.add_argument(
+        "--tcp-timeout-seconds",
+        type=float,
+        default=None,
+        help=(
+            "TCP preflight timeout before connecting. Default reads "
+            "FLUENT_TCP_PREFLIGHT_TIMEOUT_SECONDS or uses 5 seconds. Use 0 to disable."
+        ),
     )
     return parser

@@ -1,0 +1,28 @@
+
+
+===== settings_dpm_summary_existing =====
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_top_ring_diagnostic_retry2_particle_history.txt
+
+
+Stored DPM summary report data are out-dated, need to be updated.
+To do so, please issue the TUI command: /solve/dpm-update
+
+
+
+===== settings_dpm_extended_summary_existing =====
+
+/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/.venv/lib/python3.12/site-packages/ansys/fluent/core/solver/flobject.py:1889: PyFluentUserWarning: Unknown keyword 'include_in_domain_particles' for command '<session>.results.report.discrete_phase.extended_summary'. It will be ignored.
+  warnings.warn(
+
+
+Stored DPM summary report data are out-dated, need to be updated.
+To do so, please issue the TUI command: /solve/dpm-update
+
+
+
+===== tui_particle_summary_existing =====
+
+(injection-0 injection-1 injection-2 injection-3 injection-4 injection-5 injection-6 injection-7 injection-8)
+The following solver settings object method could also be used to execute the above command:
+<solver_session>.results.report.particle_summary(injection_names = ["injection-0", "injection-1", "injection-2", "injection-3", "injection-4", "injection-5", "injection-6", "injection-7", "injection-8"])

@@ -1,0 +1,405 @@
+Connecting to Fluent server 1 using IP/port: 10.104.145.85:61169
+/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/.venv/lib/python3.12/site-packages/ansys/fluent/core/fluent_connection.py:306: InsecureGrpcWarning: The Fluent session will be connected in insecure gRPC mode. This mode is not recommended. For more details on the implications and usage of insecure mode, refer to the Fluent documentation.
+  warnings.warn(
+/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/.venv/lib/python3.12/site-packages/ansys/tools/common/cyberchannel.py:188: UserWarning: Starting gRPC client without TLS on 10.104.145.85:61169. This is INSECURE. Consider using a secure connection.
+  warn(f"Starting gRPC client without TLS on {target}. This is INSECURE. Consider using a secure connection.")
+
+Connected to Fluent Ansys Fluent 2024 R2
+load_case_data: SKIPPED; using current Fluent state
+
+Error: api-get-var: the object is not active
+Error Object: "results/graphics/pulse"
+
+=== Configure Graphics ===
+mesh_surfaces_list: starting
+mesh_surfaces_list: OK
+mesh_state: starting
+mesh_state: OK
+top_ring_dpm_tracks_injections: starting
+top_ring_dpm_tracks_injections: OK
+top_ring_dpm_tracks_field: starting
+top_ring_dpm_tracks_field: OK
+top_ring_dpm_tracks_draw_mesh: starting
+
+top_ring_dpm_tracks_draw_mesh: FAILED -> RuntimeError: api-set-var: the object is not active
+Error Object: results/graphics/particle-track/top_ring_dpm_tracks/draw-mesh?
+top_ring_dpm_tracks_mesh_object: starting
+Error: api-set-var: the object is not active
+Error Object: "results/graphics/particle-track/top_ring_dpm_tracks/draw-mesh?"
+
+Error: api-set-var: the object is not active
+Error Object: "results/graphics/particle-track/top_ring_dpm_tracks/mesh-object"
+top_ring_dpm_tracks_mesh_object: OK
+top_ring_dpm_tracks_free_stream_particles: starting
+top_ring_dpm_tracks_free_stream_particles: OK
+top_ring_dpm_tracks_wall_film_particles: starting
+top_ring_dpm_tracks_wall_film_particles: OK
+top_ring_dpm_tracks_track_pdf_particles_false: starting
+top_ring_dpm_tracks_track_pdf_particles_false: OK
+top_ring_dpm_tracks_skip: starting
+top_ring_dpm_tracks_skip: OK
+top_ring_dpm_tracks_coarsen: starting
+top_ring_dpm_tracks_coarsen: OK
+top_ring_dpm_tracks_style_attribute: starting
+top_ring_dpm_tracks_style_attribute: OK
+top_ring_dpm_tracks_color_map: starting
+top_ring_dpm_tracks_color_map: OK
+top_ring_dpm_tracks_state: starting
+top_ring_dpm_tracks_state: OK
+history_filename: starting
+history_filename: OK
+history_report_default_variables: starting
+history_report_default_variables: OK
+tui_history_filename: starting
+tui_history_filename: OK
+tui_report_to_file: starting
+(none file screen)
+tui_report_to_file: OK
+tui_report_type_step: starting
+(none summary step)
+tui_report_type_step: OK
+tui_report_default_variables: starting
+
+
+ERROR: Invalid string/symbol.
+Error object: #f
+
+
+
+
+Error: An error or interrupt occurred in the previous operation.
+       Details have been printed to the text console transcript.
+Error Object: #f
+tui_report_default_variables: OK
+dpm_update: SKIPPED
+picture_use_window_resolution_false: starting
+
+picture_use_window_resolution_false: FAILED -> RuntimeError: api-set-var: the object is not active
+Error Object: results/graphics/picture/use-window-resolution?
+picture_x_resolution: starting
+Error: api-set-var: the object is not active
+Error Object: "results/graphics/picture/use-window-resolution?"
+picture_x_resolution: OK
+picture_y_resolution: starting
+picture_y_resolution: OK
+picture_dpi: starting
+
+picture_dpi: FAILED -> RuntimeError: api-set-var: the object is not active
+Error Object: results/graphics/picture/dpi
+picture_invert_background_false: starting
+Error: api-set-var: the object is not active
+Error Object: "results/graphics/picture/dpi"
+picture_invert_background_false: OK
+picture_hardcopy_format_png: starting
+picture_hardcopy_format_png: OK
+
+=== Display And Save Unfiltered Tracks ===
+display_mesh_object: starting
+display_mesh_object: OK
+add_track_to_graphics: starting
+add_track_to_graphics: OK
+save_picture_settings_api: starting
+save_picture_settings_api: FAILED -> InactiveObjectError: '<session>.results.graphics.picture.save_picture' is currently inactive.
+save_picture_tui_display: starting
+save_picture_tui_display: FAILED -> RuntimeError: menu not found
+save_picture_tui_set_picture: starting
+save_picture_tui_set_picture: FAILED -> AttributeError: 'picture' object has no attribute 'save_picture'
+
+=== Display And Save High-Time Tracks ===
+top_ring_high_time_dpm_tracks_injections: starting
+top_ring_high_time_dpm_tracks_injections: OK
+top_ring_high_time_dpm_tracks_field: starting
+top_ring_high_time_dpm_tracks_field: OK
+top_ring_high_time_dpm_tracks_draw_mesh: starting
+
+Error: api-set-var: the object is not active
+Error Object: "results/graphics/particle-track/top_ring_high_time_dpm_tracks/draw-mesh?"
+top_ring_high_time_dpm_tracks_draw_mesh: FAILED -> RuntimeError: api-set-var: the object is not active
+Error Object: results/graphics/particle-track/top_ring_high_time_dpm_tracks/draw-mesh?
+top_ring_high_time_dpm_tracks_mesh_object: starting
+
+Error: api-set-var: the object is not active
+Error Object: "results/graphics/particle-track/top_ring_high_time_dpm_tracks/mesh-object"
+top_ring_high_time_dpm_tracks_mesh_object: OK
+top_ring_high_time_dpm_tracks_free_stream_particles: starting
+top_ring_high_time_dpm_tracks_free_stream_particles: OK
+top_ring_high_time_dpm_tracks_wall_film_particles: starting
+top_ring_high_time_dpm_tracks_wall_film_particles: OK
+top_ring_high_time_dpm_tracks_track_pdf_particles_false: starting
+top_ring_high_time_dpm_tracks_track_pdf_particles_false: OK
+top_ring_high_time_dpm_tracks_skip: starting
+top_ring_high_time_dpm_tracks_skip: OK
+top_ring_high_time_dpm_tracks_coarsen: starting
+top_ring_high_time_dpm_tracks_coarsen: OK
+top_ring_high_time_dpm_tracks_style_attribute: starting
+top_ring_high_time_dpm_tracks_style_attribute: OK
+top_ring_high_time_dpm_tracks_color_map: starting
+top_ring_high_time_dpm_tracks_color_map: OK
+top_ring_high_time_dpm_tracks_filter_setting: starting
+top_ring_high_time_dpm_tracks_filter_setting: OK
+top_ring_high_time_dpm_tracks_state: starting
+top_ring_high_time_dpm_tracks_state: OK
+display_mesh_object: starting
+display_mesh_object: OK
+add_track_to_graphics: starting
+add_track_to_graphics: OK
+save_picture_settings_api: starting
+save_picture_settings_api: FAILED -> InactiveObjectError: '<session>.results.graphics.picture.save_picture' is currently inactive.
+save_picture_tui_display: starting
+save_picture_tui_display: FAILED -> RuntimeError: menu not found
+save_picture_tui_set_picture: starting
+save_picture_tui_set_picture: FAILED -> AttributeError: 'picture' object has no attribute 'save_picture'
+
+=== Write Filtered XY Plot Data ===
+create_top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position: starting
+create_top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_injections: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_injections: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_field: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_field: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_draw_mesh: starting
+
+Error: api-set-var: the object is not active
+Error Object: "results/graphics/particle-track/top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position/draw-mesh?"
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_draw_mesh: FAILED -> RuntimeError: api-set-var: the object is not active
+Error Object: results/graphics/particle-track/top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position/draw-mesh?
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_mesh_object: starting
+
+Error: api-set-var: the object is not active
+Error Object: "results/graphics/particle-track/top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position/mesh-object"
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_mesh_object: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_free_stream_particles: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_free_stream_particles: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_wall_film_particles: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_wall_film_particles: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_track_pdf_particles_false: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_track_pdf_particles_false: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_skip: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_skip: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_coarsen: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_coarsen: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_style_attribute: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_style_attribute: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_color_map: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_color_map: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_filter_setting: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_filter_setting: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_state: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_state: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_field_particle-z-position: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_field_particle-z-position: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_plot_enabled: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_plot_enabled: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_plot_x_axis_particle-radial-position: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_plot_x_axis_particle-radial-position: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_plot_to_file_enabled: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_plot_to_file_enabled: FAILED -> AttributeError: 'plot_5' object has no attribute 'to_file_enabled'.
+The most similar names are: enabled.
+The most similar names are: enabled
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_plot_file_name: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_plot_file_name: FAILED -> AttributeError: 'plot_5' object has no attribute 'file_name'.
+The most similar names are: enabled.
+The most similar names are: enabled
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_plot_state: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_plot_state: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_display: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_display: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_display_child: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position_display_child: OK
+create_top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position: starting
+create_top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_injections: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_injections: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_field: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_field: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_draw_mesh: starting
+
+Error: api-set-var: the object is not active
+Error Object: "results/graphics/particle-track/top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position/draw-mesh?"
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_draw_mesh: FAILED -> RuntimeError: api-set-var: the object is not active
+Error Object: results/graphics/particle-track/top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position/draw-mesh?
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_mesh_object: starting
+
+Error: api-set-var: the object is not active
+Error Object: "results/graphics/particle-track/top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position/mesh-object"
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_mesh_object: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_free_stream_particles: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_free_stream_particles: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_wall_film_particles: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_wall_film_particles: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_track_pdf_particles_false: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_track_pdf_particles_false: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_skip: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_skip: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_coarsen: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_coarsen: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_style_attribute: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_style_attribute: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_color_map: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_color_map: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_filter_setting: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_filter_setting: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_state: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_state: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_field_particle-z-position: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_field_particle-z-position: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_plot_enabled: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_plot_enabled: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_plot_x_axis_particle-x-position: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_plot_x_axis_particle-x-position: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_plot_to_file_enabled: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_plot_to_file_enabled: FAILED -> AttributeError: 'plot_5' object has no attribute 'to_file_enabled'.
+The most similar names are: enabled.
+The most similar names are: enabled
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_plot_file_name: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_plot_file_name: FAILED -> AttributeError: 'plot_5' object has no attribute 'file_name'.
+The most similar names are: enabled.
+The most similar names are: enabled
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_plot_state: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_plot_state: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_display: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_display: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_display_child: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position_display_child: OK
+create_top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position: starting
+create_top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_injections: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_injections: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_field: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_field: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_draw_mesh: starting
+
+Error: api-set-var: the object is not active
+Error Object: "results/graphics/particle-track/top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position/draw-mesh?"
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_draw_mesh: FAILED -> RuntimeError: api-set-var: the object is not active
+Error Object: results/graphics/particle-track/top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position/draw-mesh?
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_mesh_object: starting
+
+Error: api-set-var: the object is not active
+Error Object: "results/graphics/particle-track/top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position/mesh-object"
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_mesh_object: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_free_stream_particles: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_free_stream_particles: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_wall_film_particles: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_wall_film_particles: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_track_pdf_particles_false: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_track_pdf_particles_false: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_skip: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_skip: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_coarsen: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_coarsen: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_style_attribute: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_style_attribute: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_color_map: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_color_map: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_filter_setting: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_filter_setting: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_state: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_state: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_field_particle-z-position: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_field_particle-z-position: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_plot_enabled: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_plot_enabled: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_plot_x_axis_particle-y-position: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_plot_x_axis_particle-y-position: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_plot_to_file_enabled: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_plot_to_file_enabled: FAILED -> AttributeError: 'plot_5' object has no attribute 'to_file_enabled'.
+The most similar names are: enabled.
+The most similar names are: enabled
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_plot_file_name: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_plot_file_name: FAILED -> AttributeError: 'plot_5' object has no attribute 'file_name'.
+The most similar names are: enabled.
+The most similar names are: enabled
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_plot_state: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_plot_state: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_display: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_display: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_display_child: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position_display_child: OK
+create_top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time: starting
+create_top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_injections: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_injections: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_field: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_field: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_draw_mesh: starting
+
+Error: api-set-var: the object is not active
+Error Object: "results/graphics/particle-track/top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time/draw-mesh?"
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_draw_mesh: FAILED -> RuntimeError: api-set-var: the object is not active
+Error Object: results/graphics/particle-track/top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time/draw-mesh?
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_mesh_object: starting
+
+Error: api-set-var: the object is not active
+Error Object: "results/graphics/particle-track/top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time/mesh-object"
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_mesh_object: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_free_stream_particles: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_free_stream_particles: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_wall_film_particles: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_wall_film_particles: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_track_pdf_particles_false: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_track_pdf_particles_false: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_skip: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_skip: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_coarsen: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_coarsen: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_style_attribute: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_style_attribute: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_color_map: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_color_map: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_filter_setting: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_filter_setting: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_state: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_state: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_field_particle-z-position: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_field_particle-z-position: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_plot_enabled: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_plot_enabled: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_plot_x_axis_particle-resid-time: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_plot_x_axis_particle-resid-time: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_plot_to_file_enabled: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_plot_to_file_enabled: FAILED -> AttributeError: 'plot_5' object has no attribute 'to_file_enabled'.
+The most similar names are: enabled.
+The most similar names are: enabled
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_plot_file_name: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_plot_file_name: FAILED -> AttributeError: 'plot_5' object has no attribute 'file_name'.
+The most similar names are: enabled.
+The most similar names are: enabled
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_plot_state: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_plot_state: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_display: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_display: OK
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_display_child: starting
+top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time_display_child: OK
+
+=== Report DPM Summary ===
+report_call: settings_dpm_summary_existing
+
+Saving summary report to file: C:\\Users\\qtra338\\Documents\\enthalpy_sweep\\case_4_1600_top_ring_xy_retry_particle_history.txt
+
+report_call: settings_dpm_extended_summary_existing
+/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/.venv/lib/python3.12/site-packages/ansys/fluent/core/solver/flobject.py:1889: PyFluentUserWarning: Unknown keyword 'include_in_domain_particles' for command '<session>.results.report.discrete_phase.extended_summary'. It will be ignored.
+  warnings.warn(
+
+ Fate                        Zone   Zone Number                  Elapsed Time (s)               Injection, Index      Injection, Index
+                             Name     Id               Min        Max        Avg    Std Dev                  Min                  Max
+ ----------- -------------------- ------ ------ ---------- ---------- ---------- ---------- --------------- ---- --------------- ----
+ Incomplete                               36303  6.040e+01  2.608e+02  1.462e+02  6.647e+01     injection-3  231     injection-8 8629
+ Escaped             steam_outlet      7  25260  4.218e-01  4.490e+01  2.578e+00  1.850e+00     injection-0 5684     injection-2 5409
+ Trapped             flu
+report_call: tui_particle_summary_existing
+(injection-0 injection-1 injection-2 injection-3 injection-4 injection-5 injection-6 injection-7 injection-8)
+The following solver settings object method could also be used to execute the above command:
+<solver_session>.results.report.particle_summary(injection_names = ["injection-0", "injection-1", "injection-2", "injection-3", "injection-4", "injection-5", "injection-6", "injection-7", "injection-8"])
+
+
+=== DPM Ring Diagnostic Complete ===
+local_manifest: /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/ring_diagnostic/case_4_1600_top_ring_xy_retry_manifest.json
+local_report: /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/ring_diagnostic/case_4_1600_top_ring_xy_retry_dpm_report.txt
+png: FAILED -> /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/ring_diagnostic/case_4_1600_top_ring_xy_retry.png
+filtered_png: FAILED -> /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/ring_diagnostic/case_4_1600_top_ring_xy_retry_high_time.png
+history: OK -> /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/ring_diagnostic/case_4_1600_top_ring_xy_retry_particle_history.txt
+filtered_xy_particle_radial_position: FAILED -> /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/ring_diagnostic/case_4_1600_top_ring_xy_retry_top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_radial_position.xy
+filtered_xy_particle_x_position: FAILED -> /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/ring_diagnostic/case_4_1600_top_ring_xy_retry_top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_x_position.xy
+filtered_xy_particle_y_position: FAILED -> /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/ring_diagnostic/case_4_1600_top_ring_xy_retry_top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_y_position.xy
+filtered_xy_particle_resid_time: FAILED -> /Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/enthalpy_sweep/ring_diagnostic/case_4_1600_top_ring_xy_retry_top_ring_high_time_dpm_tracks_xy_particle_z_position_vs_particle_resid_time.xy
