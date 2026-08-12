@@ -1,5 +1,52 @@
 # Work Log
 
+## [2026-08-12] analysis-update | Analyse setup 02c Case C higher-pressure screen
+
+- purpose: analyse the user-confirmed retained Case C `iter500` Fluent session without changing model physics.
+- what changed: carrier flux/residual extraction, EWF/DPM audit, and all six inherited DPM particle-track summaries completed. EWF was inactive; DPM coupling was off and the inherited release surfaces were `steam-outlet`.
+- measured result: liquid brine outflow was `136.604543 kg/s` from a `116.847094 kg/s` liquid inlet; vapour brine and steam outflows were `26.743944` and `54.827687 kg/s` from `81.639506 kg/s` inlet. Final continuity was `1.194315e-1`.
+- derived interpretation: Case C has the lowest observed vapour wrong-outlet fraction of the three early screens, but its liquid phase is unclosed. No pressure ranking is justified.
+- current status: all A/B/C early checkpoints now have carrier, residual, audit, and DPM evidence bundles.
+- next immediate action: introduce common stability/liquid-inventory monitoring and continue or rerun all three cases to a shared stable window before pressure selection.
+
+## [2026-08-12] run-update | Execute setup 02c Case C higher-pressure TUI screen
+
+- purpose: execute the higher-brine-pressure (`1.125 MPa`) point from the frozen parent using Fluent-native TUI initialization and iteration commands.
+- what changed: the parent was explicitly loaded, only brine-outlet pressure was changed, the Case C pre-initialization child was saved, and Fluent completed Hybrid Initialization plus `solve/iterate 500`. The paired endpoint checkpoint was written and verified.
+- current status: Case C is ready for explicit-reload carrier/residual/audit/DPM analysis; no numerical separation or pressure-ranking statement has been made.
+- next immediate action: post-process the verified Case C `iter500` pair using the same workflow as Cases A and B.
+
+## [2026-08-12] run-update | Execute setup 02c Case A lower-pressure unprimed screen
+
+- files created/updated: `../../Setups/active/02c-mixture-brine-outlet-pressure-sensitivity-unprimed.md`, `../../Setups/reports/02c/future-runs.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/progress/blockers.md`, `wiki/log.md`
+- purpose: execute the lower-brine-pressure (`1.115 MPa`) point of the unprimed 02c sensitivity matrix from the frozen Case B pre-initialization parent.
+- what changed since the previous update: Case A was built with only brine-outlet gauge pressure changed, Hybrid Initialized without a liquid patch, and allowed to pass the requested 500-iteration milestone. A recovery continuation overlapped the still-advancing native solve; it was allowed to complete rather than interrupted, and the resulting paired 649-iteration case/data checkpoint was verified on the remote store.
+- assumptions introduced or retired: none. The Case A result is explicitly a preliminary screening state; no claim is made that 649 iterations produce convergence, and no pressure ranking is inferred.
+- current status: Case A exists as a verified final pair pending explicit reload and analysis. The separately written file with an `iter500` suffix is an approximately 351-iteration intermediate state and is excluded from analysis.
+- blockers: residual plateau, steam-outlet reverse flow, and turbulence limiting remain visible in live monitoring. Carrier/phase-flux, DPM, and residual artifact extraction are still required before comparison with Case B.
+- next immediate action: run the Case A analysis suite against the verified `iter649` pair, then assess whether Case C is warranted under the same controlled protocol.
+
+## [2026-08-12] analysis-update | Analyse setup 02c Case A lower-pressure unprimed screen
+
+- files created/updated: `../../Setups/reports/02c/results.md`, `../../Setups/reports/02c/future-runs.md`, `../../Setups/reports/index.md`, `../../PyAnsys/output/post_simulation_analysis/02c-A-brine-p1115kpa-unprimed-iter649-*`, `../../PyAnsys/output/ewf_dpm_diagnostics/02c-A-iter649-*`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/progress/blockers.md`, `wiki/log.md`
+- purpose: analyse the explicitly identified 649-iteration Case A case/data checkpoint without changing its physics.
+- what changed since the previous update: carrier flux and residual extraction, EWF/DPM audit, and all six inherited DPM particle-track summaries completed. EWF was inactive; the complete DPM bundle was retained but its injection surfaces were `steam-outlet`.
+- measured result: liquid brine outflow was `45.799051 kg/s` from `116.847094 kg/s` inlet and vapour brine outflow was `49.294436 kg/s` from `81.639506 kg/s` inlet. Final continuity was `1.265345e-1` after a `7.966281e-2` minimum.
+- derived interpretation: Case A's early screen has higher observed liquid brine recovery than Case B but also a higher vapour wrong-outlet fraction. These are not pressure-selection results because neither checkpoint is converged or sampled at a common stable window.
+- current status: Case A and Case B now have complete checkpoint-linked analysis bundles; Case C remains unbuilt/unanalysed.
+- blockers: persistent non-convergence, open liquid closure, and inherited steam-outlet DPM release surfaces prevent any separator-performance or pressure-ranking claim.
+- next immediate action: build Case C using the same frozen parent and a controlled common stopping/convergence rule, then compare all three points as screening evidence only unless convergence is achieved.
+
+## [2026-08-12] progress-update | Analyse setup 02c Case B unprimed brine-outlet pressure screen
+
+- files created/updated: `../../Setups/active/02c-mixture-brine-outlet-pressure-sensitivity-unprimed.md`, `../../Setups/reports/02c/results.md`, `../../Setups/reports/02c/future-runs.md`, `../../PyAnsys/output/post_simulation_analysis/02c-B-brine-p1120kpa-unprimed-iter500-*`, `../../PyAnsys/output/ewf_dpm_diagnostics/02c-B-iter500-*`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/progress/blockers.md`, `wiki/log.md`
+- purpose: run and analyse the first `02c` three-pressure-matrix screening point without liquid initialization, then preserve the evidence and reserve the remaining matrix points without manufacturing results.
+- what changed since the previous update: Case B at `1.120 MPa` brine pressure was hybrid-initialized, reached a saved 500-iteration checkpoint, and was explicitly reloaded for carrier flux/residual analysis and the full inherited DPM sweep. Carrier fluxes show low liquid brine recovery (`6.921014 kg/s` of `116.847094 kg/s` liquid inlet) and substantial vapour flow to the brine outlet (`42.547417 kg/s` of `81.639506 kg/s` vapour inlet). All six active DPM injection sweeps completed; EWF was inactive.
+- assumptions introduced or retired: no pressure-performance ranking was introduced. The result is retained as an early unprimed diagnostic because continuity remains `1.239373e-1`, phase closure is open, and the required liquid-inventory/pressure-history and visual diagnostics were not yet instrumented.
+- current status: Case B evidence is complete and linked to setup `02c`; Cases A (`1.115 MPa`) and C (`1.125 MPa`) remain not built/not run placeholders.
+- blockers: the Case B field is not converged and its two-outlet mass split is unsuitable for a design claim; whether a brine-pressure change improves this remains untested.
+- next immediate action: build Case A from the frozen pre-initialization parent and repeat the same 500-iteration protocol before comparing pressure points.
+
 ## [2026-08-04] model-update | Stop 09cV3 run at saved iteration-50 checkpoint
 
 - files created/updated: `../../PyAnsys/scripts/setup/run_09cV3_student_50_then_100.py`, `../../PyAnsys/output/09cV3_student_50_then_100_run_20260804.json`, `../../PyAnsys/output/09cV3_student_50_then_100_run_state_20260804.json`, `../../Setups/active/09cV3-fine-mist-5pct-psd-rerun.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `../../PyAnsys/knowledge/fluent-settings/logs/successful_paths.md`, `wiki/log.md`

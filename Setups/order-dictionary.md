@@ -87,6 +87,7 @@ Rules:
 | `01` | first split-inlet branch | `01-split-two-zone-massflow-inlet.md` | `01-split-two-zone-massflow-inlet.md` | High | superseded concept branch | first explicit two-zone split concept; keeps `Mass-Flow Inlet` |
 | `02` | velocity-inlet full-geometry branch | `02-split-two-zone-velocity-inlet-brine-outlet.md` | `02-split-two-zone-velocity-inlet-brine-outlet.md` | Medium | superseded diagnostic parent | appears to be the next branch after `01` |
 | `02b` | side experiment branch | `02b-vof-split-inlet-transient.md` | `02b-vof-split-inlet-transient.md` | Medium | retired invalid side branch | experimental branch; later marked invalid and not continued |
+| `02c` | unprimed Mixture brine-outlet pressure sensitivity | `active/02c-mixture-brine-outlet-pressure-sensitivity-unprimed.md` | `02c-mixture-brine-outlet-pressure-sensitivity-unprimed.md` | High | active setup-definition branch | child of archived `02`; fixed velocity-inlet parent and 1.115/1.120/1.125 MPa brine-pressure matrix; no result evidence yet |
 | `03` | mixed wet-half main branch | `03-mixed-wet-half-velocity-inlet.md` | `03-mixed-wet-half-velocity-inlet.md` | High | stalled diagnostic parent | replaces pure split with equal-velocity wet-half concept |
 | `03a` | child of `03` | `03a-mixed-wet-half-velocity-inlet-water-pool.md` | `03a-mixed-wet-half-velocity-inlet-water-pool.md` | High | diagnostic child run only | explicit child case of `03` |
 | `04` | actual-area recalculation branch | `04-mixed-wet-half-actual-area.md` | `04-mixed-wet-half-actual-area.md` | High | past reported diagnostic | contains flux-efficiency and DPM tracking numerics; incomplete tracks remain dominant |
@@ -130,6 +131,7 @@ Rules:
  -> 01 split two-zone mass-flow inlet
     -> 02 split two-zone velocity inlet with brine outlet
        -> 02b VOF split-inlet transient side branch
+       -> 02c unprimed Mixture brine-outlet pressure sensitivity
        -> 03 mixed wet-half velocity inlet
           -> 03a mixed wet-half with initialized water pool
           -> 04 mixed wet-half actual-area

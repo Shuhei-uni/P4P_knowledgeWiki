@@ -1,6 +1,12 @@
 # Current Status
 
 ## Snapshot
+- Date: 2026-08-12
+- Setup `02c` Case C (`1.125 MPa` brine outlet; `1.120 MPa` steam outlet) now has complete direct-session carrier/residual/audit/DPM analysis. Its vapour wrong-outlet fraction is `32.76%` and vapour steam-outlet fraction `67.16%`, but liquid brine outflow exceeds liquid inlet (`116.91%` recovery-equivalent) and continuity remains `1.194e-1`; this is not a valid pressure ranking or separator-performance claim. See [02c results](../../../Setups/reports/02c/results.md).
+- Date: 2026-08-12
+- Setup `02c` Case A (`1.115 MPa` brine outlet; `1.120 MPa` steam outlet) has a verified paired 649-iteration checkpoint and completed carrier/residual/DPM analysis. Its preliminary liquid brine-recovery fraction is `39.20%` versus Case B's `5.92%`, while its vapour wrong-outlet fraction is `60.38%` versus Case B's `52.12%`; liquid closure remains open (`60.80%`) and continuity finishes at `1.265e-1`. This is not a pressure ranking or separator-performance claim. See [02c results](../../../Setups/reports/02c/results.md).
+- Date: 2026-08-12
+- New brine-outlet pressure diagnostic: setup `02c` Case B (`1.120 MPa` brine and steam pressure outlets) reached a saved 500-iteration unprimed checkpoint. The carrier field is not converged (continuity `1.239e-1`); liquid brine recovery is `5.92%`, liquid closure error is `94.08%`, and vapour wrong-outlet fraction is `52.12%`. This is an early screening result, not a pressure-selection or separator-performance claim. See [02c results](../../../Setups/reports/02c/results.md).
 - Date: 2026-08-04
 - New EWF continuation observation: the reported 5,000-iteration checkpoints for `010V2a`–`010V2d` have about `2.8–3.7×` the earlier final film inventory and higher coarse-droplet absorption, but they do not demonstrate a stationary or closed EWF state. Available carrier comparisons retain an approximately `57.54%` selected-surface imbalance and higher continuity residuals; `010V2c` lacks the later carrier/residual artifact. The `010V2a` checkpoint also uses a different Fluent release. See `../../observations/06-010v2-iteration-continuation.md`.
 - Phase: extraction-first Purnanto parity reset plus retained setup `07` archive context

@@ -5,6 +5,8 @@ Reports are numerical findings tied to one concrete setup. Keep the setup defini
 ## Current reports
 
 - [08 family — Inlet-loading comparison](08/velocity-family-comparison.md)
+- [02c — Unprimed brine-outlet pressure sensitivity: Cases A and B early diagnostics](02c/results.md)
+- [02c — Future brine-pressure point placeholders](02c/future-runs.md)
 - [04 — Mixed wet-half actual-area results](04/results.md)
 - [07 — Pure-phase split actual-area results](07/results.md)
 - [08b — Purnanto parity split-inlet results](08b/results.md)

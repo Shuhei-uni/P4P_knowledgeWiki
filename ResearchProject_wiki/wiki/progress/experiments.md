@@ -17,6 +17,52 @@
 
 ## Runs
 
+### Run 02c-C-ITER500-2026-08-12
+- Run ID: `02c-C-ITER500-2026-08-12`
+- Date: 2026-08-12
+- Objective: Screen the unprimed Mixture-model tangential brine outlet at `1.125 MPa` while holding the steam outlet at `1.120 MPa`.
+- Geometry: split velocity-inlet separator geometry with named `brine-outlet` and `steam-outlet` pressure-outlet faces; full tangential brine-pipe geometry retained.
+- Controls: frozen Case B pre-initialization parent explicitly loaded; only brine-outlet pressure changed to `1.125 MPa`; liquid backflow volume fraction `1.0`; Hybrid Initialization without liquid patch.
+- Solver settings: native Fluent TUI `solve/initialize/hyb-initialization`, followed by `solve/iterate 500`.
+- Artifact: verified paired checkpoint `02c-C-brine-p1125kpa-unprimed-iter500-20260812T055550Z.cas.h5/.dat.h5`.
+- Post-processing: direct retained-session carrier/residual extraction, audit, and complete six-injection DPM sweep completed. EWF was inactive/no film wall; carrier coupling was off; all inherited DPM releases were on `steam-outlet` and do not represent brine-drainage evidence.
+- Outcome: `Partially Converged / early screening only`.
+- Carrier result: liquid inlet `116.847094 kg/s`; liquid brine outlet `136.604543 kg/s`; liquid steam outlet `8.928871e-6 kg/s`; vapour inlet `81.639506 kg/s`; vapour brine outlet `26.743944 kg/s`; vapour steam outlet `54.827687 kg/s` (outlets expressed as positive outward magnitudes).
+- Derived screen: liquid closure error `16.91%`; apparent liquid brine recovery `116.91%` (not physically valid due to the open liquid balance); vapour wrong-outlet fraction `32.76%`; vapour phase closure error `0.083%`.
+- Convergence caution: final continuity `1.194315e-1` after a `1.120839e-1` minimum; velocity residuals finished at `5.868121e-5`, `5.996074e-5`, and `6.325916e-5` in x/y/z. No pressure-ranking conclusion is recorded.
+- Next action: define common physical/stability monitors and continue or rerun A/B/C to the same stable window before comparing pressure points. See [02c results](../../../Setups/reports/02c/results.md).
+
+### Run 02c-A-ITER649-2026-08-12
+- Run ID: `02c-A-ITER649-2026-08-12`
+- Date: 2026-08-12
+- Objective: Screen the unprimed Mixture-model tangential brine outlet at the lower `1.115 MPa` brine pressure while holding the steam outlet at `1.120 MPa`.
+- Geometry: split velocity-inlet separator geometry with named `brine-outlet` and `steam-outlet` pressure-outlet faces; full tangential brine-pipe geometry retained.
+- Controls: Case B pre-initialization parent explicitly loaded; both inlets retained as velocity inlets at `27.118 m/s`; inlet gauge pressure `1.140 MPa`; liquid-inlet phase-2 volume fraction `1`; steam-inlet phase-2 volume fraction `0`; no liquid patch after Hybrid Initialization.
+- Execution: native solve passed the requested 500-iteration milestone. A recovery continuation overlapped the active native solve and was allowed to finish, producing a 649-iteration endpoint rather than interrupting the solver.
+- Artifact: verified paired checkpoint `02c-A-brine-p1115kpa-unprimed-iter649-20260812T051900Z.cas.h5/.dat.h5` in the remote brine-outlet results directory.
+- Post-processing: explicit reload of the verified pair produced carrier flux/residual artifacts, a model audit, and a complete six-injection DPM bundle. EWF was inactive/no film wall; DPM coupling was off. All inherited DPM releases were on `steam-outlet`, so their fates are not brine-drainage evidence.
+- Outcome: `Partially Converged / early screening only`.
+- Carrier result: liquid inlet `116.847094 kg/s`; liquid brine outlet `45.799051 kg/s`; liquid steam outlet `2.008474e-5 kg/s`; vapour inlet `81.639506 kg/s`; vapour brine outlet `49.294436 kg/s`; vapour steam outlet `32.793685 kg/s` (outlets expressed as positive outward magnitudes).
+- Derived screen: liquid closure error `60.80%`; liquid brine-recovery `39.20%`; vapour wrong-outlet fraction `60.38%`; vapour phase closure error `0.55%`.
+- Convergence caution: final continuity `1.265345e-1` after a minimum `7.966281e-2`; velocity residuals finished at `4.771068e-5`, `6.136807e-5`, and `5.589449e-5` in x/y/z. Persistent steam-outlet reverse flow and occasional turbulent-viscosity limiting were seen during execution. No pressure-ranking conclusion is recorded.
+- Next action: build and analyse Case C from the same frozen parent with a common convergence/stopping gate before comparing the pressure points. See [02c results](../../../Setups/reports/02c/results.md).
+
+### Run 02c-B-ITER500-2026-08-12
+- Run ID: `02c-B-ITER500-2026-08-12`
+- Date: 2026-08-12
+- Objective: Screen the unprimed Mixture-model tangential brine outlet at the matching `1.120 MPa` brine/steam pressure-outlet condition.
+- Geometry: split velocity-inlet separator geometry with named `brine-outlet` and `steam-outlet` pressure-outlet faces; full tangential brine-pipe geometry retained.
+- Mesh: `1,770,229` nodes and `620,431` mixed cells, as read while the saved checkpoint was reloaded.
+- Physics model: steady pressure-based Mixture model; RNG k-epsilon; gravity on; Energy off; EWF inactive. Six inherited DPM injections were active with coupling off.
+- Solver settings: Hybrid Initialization without phase patch; 500 steady iterations.
+- Boundary and initial conditions: both split velocity inlets at `27.118 m/s` and `1.140 MPa` initial gauge pressure; liquid-inlet liquid volume fraction `1.0`; steam-inlet liquid volume fraction `0.0`; steam and brine outlets each `1.120 MPa`; brine liquid backflow fraction `1.0`, steam liquid backflow fraction `0.0`.
+- Iteration budget: completed `500`.
+- Convergence monitors: continuity `1.239373e-1`; x/y/z velocity residuals `2.575407e-5 / 2.688511e-5 / 2.499069e-5`; k `1.167529e-3`; epsilon `5.747842e-3`; liquid volume fraction `1.795970e-3`.
+- Outcome: `Partially Converged / early screening only`.
+- Flux result: liquid inlet `116.847094 kg/s`; liquid brine outlet `6.921014 kg/s`; liquid steam outlet `7.779685e-7 kg/s`; vapour inlet `81.639506 kg/s`; vapour brine outlet `42.547417 kg/s`; vapour steam outlet `39.823439 kg/s` (outlets expressed as positive outward magnitudes).
+- Hypothesized cause (if non-converged): the unprimed field has not established a stable liquid-drainage/vapour-core split by iteration 500; brine pressure sensitivity remains an unresolved test, not a diagnosed mechanism.
+- Next action: build Case A from the frozen pre-initialization parent at `1.115 MPa` brine pressure and run the same 500-iteration screen before making a pressure-ranking decision. See [02c results](../../../Setups/reports/02c/results.md).
+
 ### Run 09cV3-RUN-STUDENT-2026-08-04
 - Run ID: `09cV3-RUN-STUDENT-2026-08-04`
 - Date: 2026-08-04

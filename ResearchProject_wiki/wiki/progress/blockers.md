@@ -74,16 +74,17 @@ DPM incomplete counts are retained in raw outputs but are not an acceptance gate
 - Current interpretation: retain as a warning from the older water-pool branch only. The professional setup `07` run currently shows low apparent steam-line carryover, so this should not block the baseline DPM sweep.
 
 ## Ranked Hypotheses
-1. Parent `FFF-2` has an unresolved convergence/mass-balance problem even without initialized water, but this is historical context rather than an active setup `07` blocker.
-2. Brine outlet pressure, backflow settings, or outlet type may be over-driving liquid removal in older parent cases; this is not part of the setup `07` acceptance scope.
-3. Missing stabilization tuning in numerics may be preventing the mixed wet-half velocity-inlet case from settling.
-4. Mesh quality may still be insufficient in the inlet, swirl, steam-outlet, or brine-outlet regions.
-5. Inlet phase allocation may be too sharp or incorrectly oriented, creating an artificial steam jet or liquid blockage.
-6. Steam outlet geometry/intake behavior may be entraining liquid and causing excessive carryover.
-7. The steady solver is depleting the initialized lower water pool in the child case, producing transient-like liquid drainage inside a steady calculation; this is now out of scope for setup `07`.
-8. Setup `08b` residual and monitor histories may still be insufficiently mature for a strong numerical claim.
-9. Mesh quality and mesh convergence remain unresolved in the inlet, swirl, and steam-outlet regions.
-10. The direct PyFluent rebuild path still has narrow pressure-outlet and residual-export cleanup work.
+1. Setup `02c` has complete A/B/C early screens but no stable two-outlet carrier state. Higher-pressure Case C has lower observed vapour wrong-outlet fraction (`32.76%`) than A (`60.38%`) and B (`52.12%`), yet its liquid brine outflow exceeds liquid inlet (`116.91%`) and continuity remains `1.194e-1`. Define and attain a common stable window, with liquid-inventory and outlet-flow monitoring, before attributing behaviour or selecting brine pressure.
+2. Parent `FFF-2` has an unresolved convergence/mass-balance problem even without initialized water, but this is historical context rather than an active setup `07` blocker.
+3. Brine outlet pressure, backflow settings, or outlet type may be over-driving liquid removal in older parent cases; this is not part of the setup `07` acceptance scope.
+4. Missing stabilization tuning in numerics may be preventing the mixed wet-half velocity-inlet case from settling.
+5. Mesh quality may still be insufficient in the inlet, swirl, steam-outlet, or brine-outlet regions.
+6. Inlet phase allocation may be too sharp or incorrectly oriented, creating an artificial steam jet or liquid blockage.
+7. Steam outlet geometry/intake behavior may be entraining liquid and causing excessive carryover.
+8. The steady solver is depleting the initialized lower water pool in the child case, producing transient-like liquid drainage inside a steady calculation; this is now out of scope for setup `07`.
+9. Setup `08b` residual and monitor histories may still be insufficiently mature for a strong numerical claim.
+10. Mesh quality and mesh convergence remain unresolved in the inlet, swirl, and steam-outlet regions.
+11. The direct PyFluent rebuild path still has narrow pressure-outlet and residual-export cleanup work.
 
 ## Recovery Plan
 1. For setup `08b`, assess residuals, iteration maturity, monitor stability, and mesh convergence before strengthening the carrier interpretation.
