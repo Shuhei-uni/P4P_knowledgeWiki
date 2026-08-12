@@ -15,7 +15,7 @@ Evidence class: **preliminary comparison**. This is not yet an apples-to-apples 
 ## Setup links
 
 - Parent setup: [08b — Purnanto parity split-inlet rebuild](../../past/reported/08b-purnanto-parity-split-inlet-rebuild.md)
-- Sensitivity setup: [08c — Purnanto parity inlet-velocity sensitivity](../../active/08c-purnanto-parity-inlet-velocity-sensitivity.md)
+- Sensitivity setup: [08c — Purnanto parity inlet-velocity sensitivity](../../past/reported/08c-purnanto-parity-inlet-velocity-sensitivity.md)
 - Parent result detail: [08b results](../08b/results.md)
 - Sensitivity result detail: [08c results](../08c/results.md)
 

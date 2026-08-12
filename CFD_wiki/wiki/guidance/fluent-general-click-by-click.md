@@ -110,20 +110,33 @@ Evidence:
 - `Reported`: initialization workflow is explicitly covered in Fluent documentation.
 - `Inferred`: exact ordering with methods/controls is practical best-order usage.
 
-## 8) Monitors and Run
+## 8) Monitors, Native Autosave, and Run
 1. Open `Monitors` and define residual plus physical monitors.
-2. Open `Run Calculation`.
-3. Set iteration count (or timestep controls for transient runs).
-4. Click `Calculate`.
-5. Watch residual trend and key physical monitors together.
+2. Open `Calculation Activities` or the equivalent `Autosave` controls.
+3. For a steady-state run, set `Save Data File Every` to the desired interval, such as `500` iterations.
+4. Set a hard-coded output root on the Fluent computer and retain at least the two most recent files.
+5. Choose `Only if Modified` for the associated case when the mesh/setup remains unchanged, or `Each Time` when paired case/data files are required at every checkpoint.
+6. Verify the autosave root, interval, file retention, and current working directory before solving.
+7. Open `Run Calculation`.
+8. Set iteration count (or timestep controls for transient runs).
+9. Click `Calculate`.
+10. Watch residual trend and key physical monitors together.
+11. If the remote client disconnects, leave Fluent running; reconnect later rather than restarting or reloading a checkpoint while Fluent is still solving.
 
 Evidence:
 - `Inferred`: standard run-control path and monitoring order.
+- `Reported`: Fluent supports iteration-based autosave for steady solutions, associated-case policies, and retention of only the most recent files ([Fluent 2025 R2 User's Guide](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_CaseDataFiles.html)).
+- `Inferred`: native Fluent autosave is the appropriate recovery mechanism when the laptop-side Python client may disconnect; verify the live settings before a long run.
 
 ## 9) Save and Export
 1. Save working state via `File > Write > Case...` and `File > Write > Data...`.
 2. Use clear run IDs in filenames.
 3. Export plots/reports as needed for validation records.
+
+For a long run, prefer Fluent's native autosave during the calculation. It
+appends the steady-state iteration to autosave filenames and can retain only a
+small recent set. Do not depend on a Python loop to issue a save after every
+iteration block.
 
 Evidence:
 - `Reported`: read/write case-data actions are documented in file operation sections.

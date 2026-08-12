@@ -46,14 +46,14 @@ stages:
       - set energy values if Energy is on
       - set DPM/EWF wall interactions only after DPM/EWF are enabled
   - id: F
-    name: solution_and_initialization
+    name: solution_and_native_run_preparation
     steps:
       - set solution methods after equations exist
       - set solution controls
-      - initialize
-      - patch volume fractions if required
-      - run carrier field
-      - save carrier checkpoint
+      - set residual and physical monitors
+      - configure Fluent-native calculation activity autosave
+      - verify remote autosave root and retention settings
+      - leave the native run controls ready for the completed setup
   - id: G
     name: dpm
     steps:
@@ -78,7 +78,13 @@ stages:
   - id: I
     name: final_run_and_exports
     steps:
+      - patch volume fractions if required
+      - initialize in Fluent
+      - start the run from Fluent or a Fluent-native journal
+      - let Fluent own iteration and autosave without a Python polling loop
+      - reconnect later for monitoring or recovery
       - run/list DPM tracks
       - create particle fate reports
       - export figures/reports
-      - save final case/data
+      - verify the final Fluent-native case/data checkpoint
+      - save final case/data from Fluent when required

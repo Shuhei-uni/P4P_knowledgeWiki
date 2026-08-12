@@ -2,6 +2,11 @@
 
 Add working paths/orders here as the agent discovers them in the live Fluent session.
 
+Run-policy note: the client-loop and Python-checkpoint entries retained below are historical
+evidence only. They are superseded and must not be used for current long runs. Current runs
+must use Fluent-native initialization, iteration, and Calculation Activities / Autosave; see
+`../native_run_and_autosave.md`.
+
 ## Example format
 
 ```text
@@ -155,43 +160,44 @@ Notes:
 Fluent: 2024 R2
 PyFluent: `.venv` on repo laptop
 Case: `C:\Users\syok443\Documents\Purnanto\enthalpy1680.cas.h5`
-Goal: load a case-only `.cas.h5`, initialize, run `X` iterations, and save only `name_X.dat.h5`
+Status: historical path, superseded by Fluent-native run/autosave
+Goal: load a case-only `.cas.h5` and produce a data file for a one-off diagnostic
 Order:
   1. connect with `check_connection.py --server-id 2`
   2. verify remote case path exists
   3. read case with `solver.settings.file.read_case(file_name=...)`
-  4. hybrid-initialize through `solution.initialization.hybrid_initialize()`
-  5. run iterations through `solution.run_calculation.iterate(iter_count=...)`
-  6. fall back to `solver.tui.solve.iterate(...)` only if the Settings API iterate call fails
-  7. write data with `solver.settings.file.write_data(file_name=...)`
-  8. verify the written `.dat.h5` is visible to Fluent
+  4. hybrid-initialize and run a one-off diagnostic from the connected client
+  5. write data and verify the output
 Working path or TUI:
-  `scripts/setup/save_data_after_iterations.py '<case>.cas.h5' <iterations> --server-id 2`
+  Retired `save_data_after_iterations.py` client workflow; do not use.
 Readback:
   Test command completed for `iterations = 1` and wrote:
   `C:\Users\syok443\Documents\Purnanto\enthalpy1680_1.dat.h5`
 Notes:
-  The script intentionally hybrid-initializes after loading the `.cas.h5` because a case-only file does not provide field data for data-file output. It avoids the repo's checkpoint persistence helpers so remote Windows output paths do not create local `C:\...run-state.json` artifacts on the laptop.
+  This was a one-off historical diagnostic. It is retained to explain the old artifact, not as
+  a reusable run procedure. Current workflows configure native autosave and disconnect safely.
 
 Fluent: 2024 R2
 PyFluent: `.venv` on repo laptop
 Case: `C:\Users\syok443\Documents\Purnanto\enthalpy1680.cas.h5`
-Goal: run the lightweight case-to-data script with TUI commands only on server `4`
+Status: historical path, superseded by Fluent-native run/autosave
+Goal: run the lightweight case-to-data diagnostic with TUI commands only on server `4`
 Order:
   1. connect with `check_connection.py --server-id 4`
   2. verify remote case path exists
   3. run `/file/read-case "<case>"`
   4. run `/solve/initialize/hyb-initialization`
-  5. run `/solve/iterate <step>` in chunked calls
+  5. run the short diagnostic from the connected client
   6. run `/file/write-data "<output>"`
   7. verify the output `.dat.h5` is visible to Fluent
 Working path or TUI:
-  `scripts/setup/save_data_after_iterations.py '<case>.cas.h5' <iterations> --server-id 4 --report-interval 1`
+  Retired `save_data_after_iterations.py` client workflow; do not use.
 Readback:
   Test command completed for `iterations = 2` and wrote:
   `C:\Users\syok443\Documents\Purnanto\enthalpy1680_2.dat.h5`
 Notes:
-  The script now uses literal TUI strings through `ti-menu-load-string`, so the solver work is driven by `/file/*` and `/solve/*` commands rather than the Settings API wrappers.
+  This was a one-off historical diagnostic. Native Fluent run/autosave is the current recovery
+  path; do not recreate the old Python chunking wrapper.
 
 Fluent: 2024 R2
 PyFluent: local `.venv` on repo laptop
@@ -274,3 +280,99 @@ Working path or TUI:
   `scripts/inspection/run_dpm_particle_tracks.py --server-id 1 --order diameter-ascending --keep-going`
 Notes:
   Injection names are the stable audit identity. Indices are discovered from the current live session and are only a selection convenience. The runner does not require hardcoded names or diameters, does not mutate the case, and does not write case/data files.
+
+Fluent: 2025 R2
+PyFluent: local `.venv` on repo laptop
+Case/data: unavailable; only a non-mutating connection health check was performed
+Goal: verify the named Windows Student Edition pool endpoint
+Order:
+  1. configure `STUDENT_IP`, `STUDENT_PORT`, and `STUDENT_PASSWORD` in `.env`
+  2. run `scripts/connection/check_connection.py --server-id student`
+  3. read `health_check.status()`, `health_check.check_health()`, and the Fluent version
+Working path or TUI:
+  `scripts/connection/check_connection.py --server-id student`
+Readback:
+  Both health calls returned `Status.SERVING`; the connected server reported `Ansys Fluent 2025 R2`.
+Notes:
+  `student` is only a transport-routing alias and does not establish the active case identity. The current Student endpoint uses insecure gRPC, so PyFluent emits its insecure-connection warning; keep its configuration scoped to a trusted network or supply a TLS-capable server configuration.
+
+Fluent: 2025 R2 Student
+PyFluent: 0.39.0
+Case: `C:\Users\Shuhei Yokkaichi\Documents\CFD\base files\09cV2-fDPM-05pct-velocity-inlet-adaptation.cas.h5`
+Goal: build the documented 5% `09cV2` allocation as a velocity-inlet adaptation from the already-loaded Student case
+Order:
+  1. connect with `build_09cV2_student_velocity_adaptation.py --server-id student`
+  2. read back `velocity_inlet` topology and confirm `mass_flow_inlet` is inactive
+  3. write a full-path pre-build recovery case before mutation
+  4. scale `liquidinlet` water-liquid velocity from `27.118` to `25.7621 m/s`
+  5. copy `water-liquid` to fallback fluid material `water-liquid-at-psep`
+  6. create inert-particle material `water-liquid-at-psep-dpm` with the copied density
+  7. enable DPM interaction, source update every flow iteration, and interval `1`
+  8. set `bottom = trap`, keep `wall-fluid = reflect`, and verify inlet/outlet `escape`
+  9. create six surface injections, then set particle type/material/type/location/flow/diameter/velocity/physical models sequentially
+  10. remove the two anthracite placeholders and read back the exact six-injection total `5.846 kg/s`
+  11. write only the case, reload it by full Windows path, and repeat the strict audit
+Working path or TUI:
+  Settings paths confirmed on Student 2025 R2:
+  `setup.models.discrete_phase.general_settings.interaction`
+  `setup.models.discrete_phase.injections.<name>`
+  `setup.boundary_conditions.velocity_inlet.liquidinlet.phase.water-liquid.momentum.velocity_magnitude`
+Readback:
+  liquid velocity `25.7621 m/s`; steam velocity `27.118 m/s`; DPM interaction/source update/interval `True/True/1`; six injections on `steaminlet`; DPM total `5.846 kg/s`; fallback materials present; wall fates `bottom=trap`, `wall-fluid=reflect`, inlets/outlet=`escape`.
+Notes:
+  This is a diagnostic velocity-inlet derivative, not an exact historical mass-flow-parent recreation. The five-percent fraction is assumed, the exact mass-flow closure was unavailable, and the EWF material pair is a fallback copy. Full Windows paths are required for post-save reloads; bare relative names can fail after Fluent changes its working directory.
+
+Fluent: 2025 R2 Student
+PyFluent: 0.39.0
+Case: `C:\Users\Shuhei Yokkaichi\Documents\CFD\base files\09cV3-fDPM-05pct-finemist-5to100um-velocity-inlet-adaptation.cas.h5`
+Goal: build the `09cV3` fine-mist PSD child from the read-back-verified Student `09cV2` velocity-inlet adaptation
+Order:
+  1. load the parent by its full Windows path and confirm split velocity-inlet topology, six legacy injections, inherited DPM material, wall fates, and `True/True/1` DPM interaction/source-update/interval settings
+  2. write a full-path recovery case before mutation
+  3. create seven surface injections on `steaminlet`, reacquiring the injection object after each dependency-sensitive setter
+  4. inherit velocity, location, particle material, drag, deterministic tracking, rotation, and turbulent-dispersion settings from the parent exemplar while changing only representative diameter, name, and flow
+  5. remove the six legacy injections from the copied child branch and require exactly seven remaining active injections with a `5.846000 kg/s` read-back sum
+  6. write only the child case, reload it by full Windows path, and repeat the strict audit
+Working path or TUI:
+  `scripts/setup/build_09cV3_student_finemist_from_09cV2.py --server-id student`
+Readback:
+  Seven active fine-mist surface injections on `steaminlet`; Fluent 2025 R2 serializes the requested `09cV3` identities as lowercase `09cv3-finemist-*`; flows are `0.409128`, `1.165149`, `1.267410`, `1.092501`, `1.329262`, `0.468606`, and `0.113944 kg/s`, totaling `5.846000 kg/s`.
+Notes:
+  The output is a case-only diagnostic child; no initialization, flow iterations, data read, or `.dat.h5` write was performed. The parent remains untouched. The child preserves the parent velocity-inlet adaptation caveat: `111.074000 kg/s` is an input allocation reference, not an independently verified live mass-flow report. The provisional seven-bin PSD is an assumed engineering prior, not measured inlet data. Full Windows paths are required for strict post-save reloads.
+
+Fluent: 2025 R2 Student
+PyFluent: 0.39.0
+Case/data: `C:\Users\Shuhei Yokkaichi\Documents\CFD\base files\09cV3-fDPM-05pct-finemist-5to100um-velocity-inlet-adaptation-iter50.cas.h5` + matching `.dat.h5` checkpoint
+Status: historical client-orchestration test, superseded by Fluent-native run/autosave
+Goal: test a 09cV3 fine-mist child with paired case/data checkpoints
+Order:
+  1. load the explicit 09cV3 child and independently audit it against the explicit 09cV2 Student parent lineage
+  2. hybrid-initialize and run a short connected-client diagnostic
+  3. save a paired case/data checkpoint and verify both remote files
+  4. reload the checkpoint and inspect the resumed state
+Working path or TUI:
+  Retired `run_09cV3_student_50_then_100.py` client worker; do not use.
+Readback:
+  First stage completed at 50 iterations. At the saved checkpoint, continuity was `6.4197e-1`; x/y/z velocity residuals were `7.1907e-4 / 6.6254e-4 / 6.6994e-4`; `k = 7.5132e-3`; epsilon `1.5149e-2`; water-liquid-VF residual `1.2477e-2`. DPM monitor output showed `21,581` tracked, `20,928` escaped, `650` trapped, and `3` incomplete; reversed flow was reported on 35 pressure-outlet faces.
+Notes:
+  The user stopped the resumed stage during the 51–60 chunk after the transcript reached 51–59. No iteration-100 case/data pair was written. The live session was explicitly restored from the saved iteration-50 pair. Iteration-50 monitor counts are diagnostic flow-iteration output, not a completed per-injection fate report or convergence claim. This entry is retained as a failure-mode record; current long runs use Fluent-native autosave so a client disconnect does not stop checkpoint ownership.
+
+Fluent: 2025 R2
+PyFluent: local `.venv` on repo laptop
+Case: `C:\Users\syok443\P4P simulation\09cV3-fDPM-05pct-finemist-5to100um.cas.h5`
+Goal: build the `09cV3` fine-mist PSD child from the explicitly named server-1 mass-flow `09cV2` case
+Order:
+  1. connect with `build_09cV3_mass_flow_from_09cV2.py --server-id 1`
+  2. explicitly load `C:\Users\syok443\P4P simulation\09cV2-fDPM-05pct-10678.cas.h5`
+  3. read back `mass_flow_inlet` topology, `111.074 kg/s` Eulerian liquid, `80.690 kg/s` vapor, six legacy injections, inherited materials, DPM `True/True/1`, and `bottom=trap` / `wall=reflect`
+  4. write the full-path pre-build recovery case before mutation
+  5. create seven `steaminlet` surface injections, reacquiring the injection object after each dependency-sensitive setter and inheriting velocity/location/physical-model state from the parent exemplar
+  6. remove the six legacy injections from the copied child branch and require exactly seven remaining injections with a `5.846000 kg/s` read-back sum
+  7. require unchanged carrier boundaries, materials, phase model, mass-flow topology, wall fates, and liquid-accounting closure
+  8. write only the child case, reload it by full Windows path, and repeat the strict audit
+Working path or TUI:
+  `scripts/setup/build_09cV3_mass_flow_from_09cV2.py --server-id 1`
+Readback:
+  Seven active fine-mist surface injections on `steaminlet`; flows `0.409128`, `1.165149`, `1.267410`, `1.092501`, `1.329262`, `0.468606`, and `0.113944 kg/s`, totaling `5.846000 kg/s`; mass-flow inlets and wall names remained `liquidinlet`, `steaminlet`, `bottom`, and `wall`.
+Notes:
+  This is the mass-flow-topology child and must not be conflated with the separate Student velocity-inlet adaptation. The source case was not overwritten. The build is case-only: no initialization, flow iterations, data read, or `.dat.h5` write. The seven-bin PSD remains an assumed engineering prior, not measured inlet data. Fluent 2025 R2 serializes the saved injection names as lowercase `09cv3-finemist-*`; verification is case-insensitive.

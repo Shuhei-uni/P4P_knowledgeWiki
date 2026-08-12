@@ -6,7 +6,9 @@ The folder has been reorganized around one rule: Fluent automation is a dependen
 
 The current operating split is strict:
 - setup scripts create or modify only `.cas.h5`
-- `scripts/setup/save_data_after_iterations.py` is the standard path for loading that case, hybrid-initializing it, running iterations, and writing only `.dat.h5`
+- Fluent owns initialization, iteration, and native autosave; Python never owns a long iteration loop
+
+Read [`knowledge/fluent-settings/native_run_and_autosave.md`](./knowledge/fluent-settings/native_run_and_autosave.md) before planning a long run. Python can prepare the case and reconnect later, but it must not be required to stay connected for Fluent to reach its next checkpoint.
 
 Recommended local target:
 
@@ -88,22 +90,25 @@ Run sequence after setup creation:
 connect
 -> verify remote `.cas.h5`
 -> load case only
--> hybrid initialize
--> iterate
--> write derived `name_X.dat.h5`
--> verify Fluent can see the written data file
+-> configure Fluent-native monitors and autosave
+-> initialize and start from Fluent or a Fluent-native journal
+-> disconnect the Python client if needed without shutting down Fluent
+-> reconnect later for monitoring or recovery
+-> verify the native case/data checkpoint
 ```
 
 ## Current script layout
 
 - `scripts/connection/check_connection.py`: connection health check only
+- `scripts/inspection/monitor_native_run.py`: read-only reconnecting monitor for Fluent-native runs
+- `scripts/setup/generate_native_run_journal.py`: generate a Fluent-owned steady run with native transcript and post-run residual-history export
 - `scripts/inspection/inspect_fluent_session.py`: non-mutating tree inspection
 - `src/pyansys_fluent/common.py`: shared remote/session/path helpers
 - `src/pyansys_fluent/dependency_workflow.py`: dependency-aware step runner and failure classifier
 - `src/pyansys_fluent/extraction.py`: shared read-mostly extraction helpers for live/offline setup capture
 - `src/pyansys_fluent/setup_common.py`: shared setup-name, boundary, and remap helpers
 - `src/pyansys_fluent/setup_io.py`: shared setup/run file IO helpers including case-only loading
-- `scripts/setup/save_data_after_iterations.py`: focused runner from `.cas.h5` to `name_X.dat.h5`
+- `knowledge/fluent-settings/native_run_and_autosave.md`: authoritative long-run and reconnection policy
 - `scripts/setup/setup07_rebuild_run.py`: rebuild setup 07 on a target mesh
 - `scripts/setup/setup09a_dpm_split_inlet_carryover.py`: build setup 09a from the setup 07 carrier-field scaffold
 - `scripts/setup/setup_vof_ewf_from_existing_case.py`: derive a VOF + EWF case from an existing case/data pair

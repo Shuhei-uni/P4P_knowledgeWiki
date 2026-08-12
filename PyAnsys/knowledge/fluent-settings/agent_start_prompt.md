@@ -46,10 +46,15 @@ connect -> verify inputs -> enable parent -> reacquire object -> inspect childre
 
 Case-building scripts should end by writing `.cas.h5` only.
 
-For actual initialization, iteration, and data writing, use the focused runner:
-- `../../scripts/setup/save_data_after_iterations.py`
-- input: remote `.cas.h5` path and iteration count
-- output: derived `name_X.dat.h5`
-- loader helper: `../../src/pyansys_fluent/setup_io.py::load_case_only`
+For actual initialization, iteration, and data writing, use Fluent's native
+calculation and autosave controls. Read `native_run_and_autosave.md` first.
+Python may configure and verify those controls, but it must not remain the
+owner of a long iteration loop or of periodic checkpoints. Start the run from
+Fluent's Run Calculation/Calculate control or from a Fluent-native journal,
+then reconnect later for monitoring or recovery.
+
+Keep at least two recent remote case/data recovery points when disk space
+permits. A local Python log or JSON state file is supporting evidence only; it
+is not the authoritative checkpoint.
 
 Do not keep rerunning the full setup just because a non-critical deep child path fails. Isolate the failure in a minimal sandbox when possible, log it, use TUI fallback if available, and save a manual-fix checklist if needed.

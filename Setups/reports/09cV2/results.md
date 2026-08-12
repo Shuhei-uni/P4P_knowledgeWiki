@@ -2,7 +2,7 @@
 
 ## Setup link and evidence
 
-- Setup definition: [09cV2 — Skoog partition and injection-control](../../active/09cV2-skoog-partition-injection-control.md)
+- Setup definition: [09cV2 — Skoog partition and injection-control](../../past/reported/09cV2-skoog-partition-injection-control.md)
 - Parent/comparison scope: `09c` two-way-DPM branch. This live state uses the `5%` allocation point: `111.074 kg/s` Eulerian liquid plus `5.846 kg/s` represented DPM liquid.
 - Fluent session: server `2`, `Ansys Fluent 2025 R2`, case/data already loaded. The audit did not receive source filenames, so exact checkpoint filenames are **not available** in the captured evidence.
 - Evidence class: `diagnostic; not converged`. These results do not validate separator efficiency, steam purity, or a physical geothermal inlet-droplet fraction.

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Fluent Case Build and Run"
+  short_description: "Build and run verified Fluent child cases"
+  default_prompt: "Use $fluent-case-build-and-run to build a verified Fluent child case and start its native run."

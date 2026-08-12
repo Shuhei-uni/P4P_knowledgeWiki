@@ -1,7 +1,7 @@
 # Current Status
 
 ## Snapshot
-- Date: 2026-07-24
+- Date: 2026-08-04
 - New EWF continuation observation: the reported 5,000-iteration checkpoints for `010V2a`–`010V2d` have about `2.8–3.7×` the earlier final film inventory and higher coarse-droplet absorption, but they do not demonstrate a stationary or closed EWF state. Available carrier comparisons retain an approximately `57.54%` selected-surface imbalance and higher continuity residuals; `010V2c` lacks the later carrier/residual artifact. The `010V2a` checkpoint also uses a different Fluent release. See `../../observations/06-010v2-iteration-continuation.md`.
 - Phase: extraction-first Purnanto parity reset plus retained setup `07` archive context
 - Focus: use Python extraction to recover the actual Purnanto Fluent setup faithfully enough that manual reconstruction error stops driving the next branch decision.
@@ -21,7 +21,9 @@
 - New PyFluent result: the local `trial3.msh` one-inlet reconstruction now launches, creates manual water vapor/liquid materials, hybrid-initializes, and completes a `10`-iteration smoke test through the script in `../../../PyAnsys/scripts/reconstruct_purnanto_trial3.py`.
 - New hardened PyFluent result: the same one-inlet reconstruction path now runs on `trial4.msh` with clean `Operating Pressure = 0 Pa`, confirmed 2026 R1 numerics paths, mass-flow sanity reporting, and both case/data writes.
 - New longer PyFluent result: a controlled `500`-iteration `trial4` diagnostic run has now completed on the one-steam-outlet branch with chunked reporting, checkpointing, vapor recovery approximately `1.0092`, liquid carryover approximately `3.97e-25`, and a rough residual-history plot recovered from the Fluent transcript.
-- Active setup branches: `../../../Setups/active/08c-purnanto-parity-inlet-velocity-sensitivity.md`, `../../../Setups/active/09cV2-skoog-partition-injection-control.md`, and every `010V2` branch listed in `../../../Setups/active/index.md`. Setup `09c` is now retained under `../../../Setups/past/reported/`.
+- Active setup branch: `../../../Setups/active/09cV3-fine-mist-5pct-psd-rerun.md` (the diagnostic 5% fine-mist PSD child). Setups `08c`, `09c`, `09cV2`, and all `010V2` branches are retained under `../../../Setups/past/reported/` as diagnostic results, not validated cases.
+- New case-only build: `09cV3` has been created from the explicitly loaded Student `09cV2` velocity-inlet adaptation and passed strict full-path reload verification. The child has exactly seven active lowercase-canonicalized fine-mist surface injections on `steaminlet`, totaling `5.846000 kg/s`; no iterations or data-file write were performed. It remains diagnostic because the inherited `111.074000 kg/s` Eulerian-liquid allocation is a velocity-scaling reference rather than an independently verified live mass-flow report.
+- New stopped run: the Student `09cV3` child was hybrid-initialized, run to `50` iterations, saved as a paired case/data checkpoint, explicitly resumed, and then stopped by the user during the `51–60` chunk after the transcript reached `51–59`. The live session was restored to the saved iteration-50 pair; no iteration-100 pair exists. At iteration 50, continuity was `6.4197e-1`, with outlet reverse flow on `35` faces, so this remains diagnostic only.
 - Retained scaffold branch: `../../../Setups/past/archived/08-purnanto-one-inlet-massflow-recreation.md` remains the one-inlet automation/parity scaffold.
 - Retained comparison branch: `../../../Setups/past/reported/07-pure-phase-split-actual-area.md` is comparison-only split-inlet context, not the main V&V parent.
 - Secondary comparison branch: `../../../Setups/past/archived/08a-steam-outlet-extension-student-trial.md` remains available if the downstream steam-outlet boundary-placement diagnostic is revived.
@@ -62,6 +64,7 @@
 - New active mesh workflow artifacts: `../../../PyAnsys/input/required-zones-mesh-trial1.txt` plus `../../../PyAnsys/output/meshdat-semi-automated/workflow-report.md`.
 
 ## What Is In Progress
+- A controlled carrier-field mesh-convergence family is now planned: approximately `400k`, `900k`, the observed `1,309,312`-node / `7,601,261`-cell reference, and `1.6M` nodes. The same frozen baseline and output definitions must be used; no mesh result exists yet.
 - Preparing the extraction-first rebuild so the project can replay the real Purnanto settings before trusting another human-written setup branch.
 - Keeping the geometry naming split explicit so later setup reports do not mix `purnanto` and `purnantov2` without saying which geometry branch they use.
 - Narrowing the remaining PyFluent caveats to the operating-pressure API path and the correct 2026 R1 solution-method setter paths.
@@ -89,11 +92,13 @@
 - The main remaining archive-risk before removing reliance on older chats was the stale snapshot date on this page and ambiguous branch state in the setup-order dictionary; this cleanup pass addresses those two gaps.
 
 ## Immediate Next Actions
-1. Decide whether setup `08b` should keep treating the current flux result as a scoped steam-line carryover diagnostic or whether a stronger whole-domain mass-balance closure is required before any efficiency claim is written.
-2. Rerun the current active 6-bin DPM subset with a higher tracking budget because both the aggregate summary and the one-injection-at-a-time sample are dominated by `13012` incomplete particles and only `8` escaped particles.
-3. Treat the current per-bin attribution as provisional: the one-injection sampled escape is currently limited to `injection-5-micron`, but stronger interpretation still requires better tracking completion.
-4. Keep the omitted `562.70 um`, `844.06 um`, and `1631.84 um` bins explicitly out of the current interpretation unless a later pass intentionally reactivates them.
-5. Continue cleaning the automated post-processing/export path so the `08b` live results can be regenerated reproducibly without manual Fluent read/load steps.
+1. Freeze and read back the exact carrier baseline for setup `12`, then create and Fluent-reopen the approximately `400k`-node mesh while preserving the zone contract and local-refinement pattern.
+2. Before solving M0, freeze the pressure-drop, phase-flux/carryover, and vortex-monitor report definitions that will be identical across all mesh levels.
+3. Decide whether setup `08b` should keep treating the current flux result as a scoped steam-line carryover diagnostic or whether a stronger whole-domain mass-balance closure is required before any efficiency claim is written.
+4. Rerun the current active 6-bin DPM subset with a higher tracking budget because both the aggregate summary and the one-injection-at-a-time sample are dominated by `13012` incomplete particles and only `8` escaped particles.
+5. Treat the current per-bin attribution as provisional: the one-injection sampled escape is currently limited to `injection-5-micron`, but stronger interpretation still requires better tracking completion.
+6. Keep the omitted `562.70 um`, `844.06 um`, and `1631.84 um` bins explicitly out of the current interpretation unless a later pass intentionally reactivates them.
+7. Continue cleaning the automated post-processing/export path so the `08b` live results can be regenerated reproducibly without manual Fluent read/load steps.
 
 ## Roadmap Link
 - Run-efficiency roadmap: `../project/roadmap.md`

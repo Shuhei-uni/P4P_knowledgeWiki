@@ -136,7 +136,13 @@ def main() -> int:
     args = build_parser().parse_args()
     load_dotenv()
 
-    run_label = derive_run_label(args.case_file, args.run_label)
+    run_label = (
+        args.run_label.strip()
+        if args.already_loaded and args.run_label.strip()
+        else "active-session"
+        if args.already_loaded
+        else derive_run_label(args.case_file, args.run_label)
+    )
     output_dir = Path(args.output_dir).expanduser().resolve()
     output_dir.mkdir(parents=True, exist_ok=True)
     summary_json = output_dir / f"{run_label}-summary.json"
@@ -147,12 +153,9 @@ def main() -> int:
 
     if args.already_loaded:
         load_summary = {
-            "case_file": args.case_file,
-            "data_file": args.data_file,
+            "case_file": None,
+            "data_file": None,
             "load_mode": "already-loaded-session",
-            "case_name": Path(args.case_file.replace("\\", "/")).name,
-            "data_name": Path(args.data_file.replace("\\", "/")).name,
-            "case_data_name_match": True,
         }
     else:
         load_summary = load_case_data_pair(
@@ -189,7 +192,6 @@ def main() -> int:
         omitted_diameters_um=DEFAULT_OMITTED_DIAMETERS_UM,
     )
     result = compile_postprocess_result(
-        server_id=str(args.server_id),
         run_label=run_label,
         load_summary=load_summary,
         session_summary=session_summary,

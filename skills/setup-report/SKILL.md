@@ -134,6 +134,8 @@ For an approved new report, start from `Setups/templates/results-report-template
 Keep setup records concrete. Include:
 
 - setup identity and parent/child lineage;
+- case identity from explicit or independently observed case evidence; never
+  infer it from a Fluent connection/server ID;
 - geometry and mesh context;
 - boundary conditions and values with units;
 - material, physics, solver, initialization, and convergence assumptions;

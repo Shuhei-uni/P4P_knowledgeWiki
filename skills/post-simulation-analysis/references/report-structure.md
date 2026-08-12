@@ -8,9 +8,13 @@ State:
 
 - setup definition link, setup ID, parent/comparison scope where relevant;
 - case and data checkpoint names;
-- Fluent version, server/session identity, analysis script revision or run label;
+- Fluent version, case-identity status/evidence basis, analysis script revision
+  or run label;
 - evidence class: `diagnostic`, `partial`, `reported`, `not converged`, or another precise scope label;
 - links to the output bundle and raw transcript/CSV files.
+
+Never include a Fluent `server_id` in the report. It is connection-routing
+metadata, not case or setup identity.
 
 Do not call a run validated merely because an output exists.
 

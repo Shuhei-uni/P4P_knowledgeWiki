@@ -168,7 +168,6 @@ def main() -> int:
 
     summary = {
         "setup_id": "09c",
-        "server_id": str(args.server_id),
         "fluent_version": solver.get_fluent_version(),
         "source_case": args.source_case,
         "output_case": args.output_case,

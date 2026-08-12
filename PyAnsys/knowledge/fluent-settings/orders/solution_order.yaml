@@ -17,11 +17,20 @@ order:
   - set_transient_formulation_if_transient
   - set_under_relaxation_factors
   - set_residual_monitors
-  - initialize
+  - configure_native_autosave
+  - initialize_in_fluent
   - patch_if_needed
-  - run
+  - run_from_fluent_or_native_journal
+  - reconnect_for_monitoring_or_recovery
 hidden_dependencies:
   - volume fraction scheme appears only after Multiphase
   - energy scheme appears only after Energy
   - wall film equation schemes appear only after EWF
   - DPM source controls appear only after DPM
+run_policy:
+  prohibited:
+    - client-side Python iteration loops
+    - client-side periodic checkpoint loops
+  required:
+    - Fluent-owned iteration and autosave
+    - at least one verified remote case/data recovery point

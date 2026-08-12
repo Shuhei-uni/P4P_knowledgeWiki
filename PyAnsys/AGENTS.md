@@ -5,7 +5,12 @@
 
 From now on, the workflow is intentionally split into two separate responsibilities:
 - setup-building scripts produce or modify only `.cas.h5`
-- `scripts/setup/save_data_after_iterations.py` loads an existing `.cas.h5`, hybrid-initializes it, runs iterations, and writes only `.dat.h5`
+- Fluent itself owns initialization, iteration, and native autosave; Python may prepare the run and reconnect later for inspection or recovery
+
+Never make a long simulation depend on a laptop-side Python/gRPC loop. Do not
+poll iterations from Python, write periodic checkpoints from Python, or treat a
+local run-state JSON as the authoritative recovery record. See
+`knowledge/fluent-settings/native_run_and_autosave.md`.
 
 Do not collapse setup construction and run/save orchestration back into one monolithic script unless the user explicitly asks for that.
 
@@ -37,8 +42,10 @@ only when it occurs in the same terminal session as the command.
 It should own:
 - automation code and reusable helpers;
 - inspection and probe scripts;
+- read-only reconnecting monitors for Fluent-native runs;
 - setup rebuild and case-only save orchestration;
-- focused run/save utilities that start from an existing `.cas.h5`;
+- native-run preparation notes and Fluent-native journal guidance;
+- post-run inspection and offline case/data analysis;
 - extracted machine-readable setup knowledge;
 - machine-readable verification targets and claim-gate logic.
 
@@ -58,6 +65,32 @@ Canonical rule:
 ```text
 enable parent -> refresh/reacquire -> inspect children/options -> set child -> read back -> classify failure
 ```
+
+## Fluent connection ID is not case identity
+
+`server_id` is only a connection-routing alias. It selects which configured
+Fluent endpoint PyFluent should contact; it does not identify the case, data
+file, setup branch, checkpoint, or simulation lineage. The same configured
+endpoint can host different cases over time, and different endpoints can host
+the same case or continuation.
+
+For every live Fluent workflow:
+
+1. connect using the requested `server_id` only as transport configuration;
+2. inspect the state loaded in that Fluent session before interpreting results;
+3. use explicitly loaded or independently observed case/data filenames as case
+   identity when available;
+4. if Fluent does not expose the active filenames, mark case identity as
+   `unavailable` and do not infer it from the server ID, Fluent version,
+   iteration count, monitor shape, hostname, port, or an older record;
+5. attach a setup ID only when the setup is explicitly supplied or independently
+   established by the loaded case evidence.
+
+The statement “server 3 means setup X” is invalid. Never persist `server_id` in
+setup reports, result JSON, Markdown reports, manifests, filenames, or other
+report-facing evidence. It may remain in CLI arguments, `.env` routing, and
+transient connection diagnostics because those are transport details, not case
+provenance.
 
 ## Required Reading Order
 Before writing or changing any non-trivial setup script, read these files in order:
@@ -205,7 +238,7 @@ You may skip the full workflow only for small tasks such as:
 - pure refactors with no Fluent behavior change
 - logging/output formatting changes
 - file path handling or environment bootstrapping
-- isolated run-from-case improvements inside `scripts/setup/save_data_after_iterations.py` or reusable helpers it calls
+- native Fluent autosave configuration or reconnection monitoring that does not own the iteration loop
 
 ## Main-Agent Reconciliation Rule
 The main agent is responsible for resolving conflicts between:
@@ -264,21 +297,26 @@ Every non-trivial setup script that creates or modifies a setup must follow this
 
 Setup-building scripts should stop at a valid case-only artifact unless the user explicitly requests otherwise.
 
-### B. Run/save scripts
-The standard runner is `scripts/setup/save_data_after_iterations.py`.
+### B. Native Fluent run/save workflow
 
-Its contract is:
-1. accept only a remote `.cas.h5` path plus an iteration count
-2. derive the output data path as `name_X.dat.h5`
-3. load the case with `src/pyansys_fluent/setup_io.py::load_case_only`
-4. hybrid-initialize
-5. run iterations through the Settings API with TUI fallback
-6. write only `.dat.h5`
-7. verify the written `.dat.h5` is visible to Fluent
+There is no repository-standard Python iteration runner. The approved workflow
+is documented in `knowledge/fluent-settings/native_run_and_autosave.md`:
 
-Do not add mesh loading, setup mutation, or case/data paired checkpoint logic to this focused runner.
+1. use Python for connection, input verification, setup mutation, and readback;
+2. save a case-only setup artifact;
+3. configure Fluent's native calculation activity and autosave controls;
+4. initialize and start the calculation from Fluent or a Fluent-native journal;
+5. let Fluent own iteration and checkpoint timing;
+6. reconnect with Python later for live monitoring, recovery, or post-run inspection.
 
-Do not skip inspection and readback just because a setter call did not raise an exception.
+The standard read-only monitor is `scripts/inspection/monitor_native_run.py`.
+It may reconnect with bounded backoff and persist observations, but it must not
+issue solver commands or infer case identity from a connection alias.
+
+Do not add Python loops around `solver.tui.solve.iterate(...)` or
+`solver.settings.solution.run_calculation.iterate(...)`. Do not make a
+checkpoint depend on a Python call returning successfully after each iteration
+block.
 
 ## Script Architecture Rules
 Case scripts in `scripts/setup/` must stay thin orchestration layers.
@@ -293,14 +331,6 @@ Preferred structure:
 - cell zone and boundary blocks
 - optional DPM or EWF blocks
 - final case-only write block
-
-For `scripts/setup/save_data_after_iterations.py`, keep the structure narrower:
-- parser and input validation
-- connection and remote path verification
-- case-only loading
-- initialization
-- iteration
-- data-only write with remote visibility verification
 
 Reusable logic belongs in `src/pyansys_fluent/`.
 
@@ -414,7 +444,7 @@ When editing `PyAnsys/`:
 - move repeated mechanics into `src/pyansys_fluent/`
 - preserve existing CLI flags unless there is a strong reason to change them
 - avoid renaming scripts or moving files unless the new layout clearly improves the workflow contract
-- keep run execution separate from setup mutation; the default deliverables are `.cas.h5` from setup scripts and `.dat.h5` from the focused runner
+- keep long-run execution inside Fluent; setup deliverables are `.cas.h5`, while Python is limited to preparation, reconnection, inspection, and post-processing
 
 ## Completion Checklist
 Before finishing work in `PyAnsys/`, verify:
@@ -426,7 +456,7 @@ Before finishing work in `PyAnsys/`, verify:
 5. failure behavior is classified, not silent
 6. the relevant knowledge files were updated if new path/order knowledge was learned
 7. the script remains a thin orchestration layer rather than a new monolith
-8. setup scripts save `.cas.h5` only, and run/save behavior stays in `scripts/setup/save_data_after_iterations.py` unless explicitly waived
+8. setup scripts save `.cas.h5` only; long-run iteration and autosave stay inside Fluent, while Python is limited to preparation, reconnection, inspection, and post-processing
 
 ## Conflict Rule
 If a direct instruction from the user conflicts with this file, follow the user's instruction.

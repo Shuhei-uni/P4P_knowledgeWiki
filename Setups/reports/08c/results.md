@@ -2,13 +2,13 @@
 
 ## Setup link and evidence
 
-- Setup definition: [08c-purnanto-parity-inlet-velocity-sensitivity.md](../../active/08c-purnanto-parity-inlet-velocity-sensitivity.md)
-- Fluent server: `1`
+- Setup definition: [08c-purnanto-parity-inlet-velocity-sensitivity.md](../../past/reported/08c-purnanto-parity-inlet-velocity-sensitivity.md)
+- Historical checkpoints: Fluent server `1`; the 20,000-iteration continuation below was analysed on Fluent server `3`.
 - Fluent version: `Ansys Fluent 2024 R2`
-- Evidence class: partial diagnostic; neither run has a closed carrier mass balance or converged residual history.
-- DPM: six-injection Particle Tracks Summary analysis completed for both checkpoints; the runs remain partial/nonconverged.
+- Evidence class: partial diagnostic; the reported states do not have a closed carrier mass balance or converged residual history.
+- DPM: six-injection Particle Tracks Summary analysis completed for the historical checkpoints and the continuation; the runs remain partial/nonconverged.
 
-## 1. Highest-iteration carrier results
+## 1. Earlier family carrier results
 
 | Case | Data checkpoint | Liquid inlet | Vapor inlet | Steam-outlet liquid | Steam-outlet vapor | Scoped steam-line liquid removal | Steam-outlet dryness | Derived phase imbalance |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -71,3 +71,67 @@ The higher-loading case has higher reported steam-outlet liquid carryover and sl
 ## 5. Next action
 
 Continue both cases or save additional checkpoints only after confirming that continuity, residual/monitor stability, iteration maturity, and mesh/convergence evidence improve. Do not relabel incomplete tracks as trapped or escaped liquid; report observed `steamoutlet` escape only.
+
+## 6. 20,000-iteration continuation — `08c-v20p00`
+
+### Scope and case identity
+
+- The already-loaded Fluent case/data on server `3` was analysed read-only; no case or data file was loaded by the analysis script.
+- The live inlet pair (`86.18 kg/s` liquid and `60.21 kg/s` vapor) identifies the loaded case as `08c-v20p00`, not `08b`.
+- EWF was not analysed, as requested.
+- The residual artifact contains a retained window from iterations `15012`–`20000` with `1000` points and `7` monitored curves; it is not a complete residual-history export.
+
+### Carrier flux diagnostic
+
+| Metric | 20,000-iteration value |
+|---|---:|
+| Liquid inlet | `86.18 kg/s` |
+| Vapor inlet | `60.21 kg/s` |
+| Steam-outlet liquid | `3.2192137 kg/s` |
+| Steam-outlet vapor | `60.681912 kg/s` |
+| Scoped steam-line liquid removal | `96.26455%` |
+| Steam-outlet dryness | `94.96220%` |
+| Derived phase imbalance | `82.4889 kg/s` (`56.3487%`) |
+
+These are scoped steam-outlet diagnostics, not a closed separator mass balance. Relative to the earlier `3088`-iteration checkpoint, the reported steam-outlet liquid is higher (`0.00132696` to `3.2192137 kg/s`) and the scoped removal/dryness are lower (`99.99846%`/`99.99782%` to `96.26455%`/`94.96220%`).
+
+### Residual diagnostic
+
+| Residual | Final value at iteration `20000` |
+|---|---:|
+| Continuity | `1.1682755` |
+| X-velocity | `4.3493e-05` |
+| Y-velocity | `5.2734e-05` |
+| Z-velocity | `4.2661e-05` |
+| `k` | `1.2828e-03` |
+| `epsilon` | `4.9524e-03` |
+| `vf-phase-2` | `1.8213e-03` |
+
+Continuity remains large at the final retained point, so the 20,000-iteration state is not converged for quantitative acceptance.
+
+### DPM particle-fate diagnostic
+
+Each injection had `2170` tracked parcels. The continuation recorded fate counts only; no per-injection mass-transfer rows were available in the captured Fluent output.
+
+| Diameter | Tracked | Escaped | Trapped | Incomplete |
+|---:|---:|---:|---:|---:|
+| `5.63 µm` | `2170` | `25` | `0` | `2145` |
+| `28.14 µm` | `2170` | `0` | `0` | `2170` |
+| `56.27 µm` | `2170` | `0` | `0` | `2170` |
+| `112.54 µm` | `2170` | `0` | `0` | `2170` |
+| `168.81 µm` | `2170` | `0` | `0` | `2170` |
+| `348.88 µm` | `2170` | `0` | `0` | `2170` |
+
+Thus, `25` of `13020` tracked parcels were recorded as escaped and `12995` remained incomplete. This is a count-only diagnostic and must not be converted into a DPM mass-removal or separation-efficiency claim.
+
+### Audit artifacts
+
+The files retain the original analysis run label `08b-20000it-20260727`; the live inlet evidence and this report identify the analysed case as `08c-v20p00`.
+
+- [20,000-iteration carrier flux JSON](../../../PyAnsys/output/post_simulation_analysis/08b-20000it-20260727-flux-check.json)
+- [20,000-iteration residual JSON](../../../PyAnsys/output/post_simulation_analysis/08b-20000it-20260727-residual-check.json)
+- [20,000-iteration residual plot](../../../PyAnsys/output/post_simulation_analysis/08b-20000it-20260727-residual-check.png)
+- [20,000-iteration DPM summary](../../../PyAnsys/output/post_simulation_analysis/08b-20000it-20260727-dpm-summary.txt)
+- [20,000-iteration DPM JSON](../../../PyAnsys/output/post_simulation_analysis/08b-20000it-20260727-dpm-particle-track-summary.json)
+- [20,000-iteration DPM CSV](../../../PyAnsys/output/post_simulation_analysis/08b-20000it-20260727-dpm-particle-track-summary.csv)
+- [20,000-iteration DPM transcript](../../../PyAnsys/output/post_simulation_analysis/08b-20000it-20260727-dpm-particle-track-transcript.txt)

@@ -157,28 +157,17 @@ solver.settings.file.write_case_data(file_name=str(OUT_CASE))
 solver.settings.file.write(file_type="case-data", file_name=str(OUT_CASE))
 ```
 
-### Checkpoint pattern
+### Native Fluent checkpoint pattern
 
-```python
-# [confirmed in my current script] Write paired checkpoint files during long diagnostic runs.
-def checkpoint_write(solver, output_case: str, output_data: str, iteration_count: int) -> None:
-    case_path = Path(output_case)
-    data_path = Path(output_data)
-    checkpoint_case = case_path.with_name(f"{case_path.stem}-iter{iteration_count}{case_path.suffix}")
-    checkpoint_data = data_path.with_name(f"{data_path.stem}-iter{iteration_count}{data_path.suffix}")
-    solver.settings.file.write_case(file_name=str(checkpoint_case))
-    solver.settings.file.write_data(file_name=str(checkpoint_data))
-```
+Long-run checkpointing is configured in Fluent's Calculation Activities / Autosave controls,
+not in a Python callback. For a steady run, set `Save Data File Every` to the desired
+iteration interval (for example, `500`), choose a remote root name, enable paired case/data
+saves as appropriate, and retain at least two recent files. Fluent appends the iteration to
+the autosave name and can overwrite older slots through its retention settings.
 
-**Recommended project pattern**
-
-```text
-trial4-purnanto-recon-500.cas.h5
-trial4-purnanto-recon-500.dat.h5
-trial4-purnanto-recon-500-log.txt
-trial4-purnanto-recon-500.cas-iter250.h5  # adjust naming if pathlib suffix handling is awkward
-trial4-purnanto-recon-500.dat-iter250.h5
-```
+The Python setup builder may write the initial case-only artifact before the run. After that,
+Fluent owns initialization, iteration, autosave, and the final case/data save. See
+`knowledge/fluent-settings/native_run_and_autosave.md` for the reconnect and recovery procedure.
 
 **Windows path rules**
 
@@ -702,42 +691,33 @@ init.initialization_type = "standard"
 init.standard_initialize()
 ```
 
-### Run iterations
+### Run from Fluent, not from a Python loop
 
-```python
-# [confirmed in my current script, fallback only TUI path] Run n iterations.
-solver.tui.solve.iterate(100)
+Do the one-time initialization and the long solve from Fluent's GUI, Fluent console, or a
+Fluent-native journal. Configure Calculation Activities / Autosave before starting. A
+Python client may disconnect after setup or reconnect later for read-only monitoring, but it
+must not own the iteration loop, checkpoint timing, interrupt handling, or final save.
+
+For a native Fluent journal, the run-side commands are conceptually:
+
+```text
+/solve/initialize/hyb-initialization
+/solve/iterate 5000
 ```
 
-```python
-# [official-docs pattern] Settings API iteration.
-solver.settings.solution.run_calculation.iterate(iter_count=100)
-```
-
-### Chunked diagnostic run with compact reporting
-
-```python
-# [confirmed in my current script] Run in chunks and print only compact summaries between chunks.
-completed = 0
-while completed < 500:
-    step = min(50, 500 - completed)
-    solver.tui.solve.iterate(step)
-    completed += step
-    report_flux_sanity(solver, inlet_name, outlet_name, iteration_count=completed, log_file=str(LOG_FILE))
-    if completed % 250 == 0:
-        checkpoint_write(solver, str(OUT_CASE), str(OUT_DATA), completed)
-```
+Use the Fluent-native autosave settings for the 500-iteration recovery interval; do not wrap
+these commands in Python chunking or a Python checkpoint callback.
 
 ### Avoid flooding Codex/agent context with Fluent logs
 
 ```bash
-# [needs local verification] Run from terminal and redirect logs to file.
-python reconstruct_purnanto_trial3.py > trial4-purnanto-run.out 2>&1
+# [needs local verification] Run the case-only setup builder and redirect its setup log.
+python reconstruct_purnanto_trial3.py > trial4-purnanto-setup.out 2>&1
 ```
 
 ```python
-# [confirmed in my current script] Write compact custom summaries to a separate log file.
-append_log_line(str(LOG_FILE), "iteration=50 | vapor_recovery_ratio=... | liquid_carryover_ratio=...")
+# [confirmed in my current script] Write compact setup summaries to a separate log file.
+append_log_line(str(LOG_FILE), "case_only_setup=ready | native_autosave=configure_in_fluent")
 ```
 
 **Agent rule:** do not paste full Fluent iteration logs into Codex. Paste final compact summary, residual trend comments, and the first/last ~30 lines only if there is a failure.
@@ -844,7 +824,7 @@ solver.settings.setup.models.multiphase.model = "mixture"
 Use TUI when:
 
 - a Fluent workflow command is easier in TUI;
-- initialization/iterate commands are stable and already proven;
+- native Fluent initialization/run commands are stable and already proven;
 - Python journaling shows a TUI path but not a settings path.
 
 ```python
@@ -852,10 +832,8 @@ Use TUI when:
 solver.tui.solve.initialize.hyb_initialization()
 ```
 
-```python
-# [confirmed in my current script, fallback only] Iterate through TUI.
-solver.tui.solve.iterate(500)
-```
+For the long solve, enter the initialization and iteration commands in Fluent's own
+console or native journal. Do not issue them from a Python client that must remain connected.
 
 ```python
 # [confirmed in my current script, fallback only] Dump Fluent configuration.
@@ -1159,25 +1137,9 @@ try:
     })
     print("methods_state_after:", methods.get_state())
 
-    # 12) Hybrid initialize.
-    solver.tui.solve.initialize.hyb_initialization()
-
-    # 13) Run 500 iterations in chunks.
-    completed = 0
-    while completed < 500:
-        step = min(50, 500 - completed)
-        solver.tui.solve.iterate(step)
-        completed += step
-        print(f"\n--- after {completed} iterations ---")
-        report_flux_sanity(solver, inlet_name, outlet_name)
-        if completed == 250:
-            solver.settings.file.write_case(file_name=str(OUT_CASE.with_name("trial4-purnanto-recon-iter250.cas.h5")))
-            solver.settings.file.write_data(file_name=str(OUT_DATA.with_name("trial4-purnanto-recon-iter250.dat.h5")))
-
-    # 14) Save final .cas.h5 and .dat.h5.
+    # 12) Save the case-only setup. Configure native autosave and run from Fluent.
     solver.settings.file.write_case(file_name=str(OUT_CASE))
-    solver.settings.file.write_data(file_name=str(OUT_DATA))
-    print("SAVE_OK:", OUT_CASE, OUT_DATA)
+    print("CASE_ONLY_SETUP_READY:", OUT_CASE)
 
 finally:
     if solver is not None:

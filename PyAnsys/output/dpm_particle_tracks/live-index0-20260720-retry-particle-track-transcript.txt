@@ -1,4 +1,0 @@
-===== index=0 injection=injection-5-micron =====
-screen/display/set/particle-tracks/display? no/display/particle-tracks/particle-tracks particle-id 
-Error: invalid command
-Error Object: "particle-id"

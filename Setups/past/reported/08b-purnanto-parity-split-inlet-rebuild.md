@@ -8,7 +8,7 @@
 | Lifecycle | `reported` |
 | Role | parity-reset split-inlet rebuild |
 | Parent setup | [00a](../archived/00a-purnanto-setup-5000-live-audit.md) |
-| Child setups | [08c](../../active/08c-purnanto-parity-inlet-velocity-sensitivity.md), [09a](09a-dpm-split-inlet-carryover.md) |
+| Child setups | [08c](08c-purnanto-parity-inlet-velocity-sensitivity.md), [09a](09a-dpm-split-inlet-carryover.md) |
 | Evidence-use label | scoped steam-carryover screening; DPM debug evidence |
 | Outcome | needs follow-up |
 | Linked report | [08b results](../../reports/08b/results.md) |

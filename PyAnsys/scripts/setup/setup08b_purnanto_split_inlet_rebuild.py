@@ -7,8 +7,8 @@ This script combines three archived sources of truth:
 - the 07 split-inlet boundary pattern;
 - the 1600 particle extraction payload.
 
-It can optionally run a short initialization/iteration pass and write
-matching `.dat.h5` output.
+It writes a case-only artifact. Initialization, iteration, and autosave are
+started from Fluent after the build using the native Fluent controls.
 """
 
 from __future__ import annotations
@@ -29,7 +29,6 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from pyansys_fluent.common import safe_get_state, try_action, write_json_snapshot  # noqa: E402
 from pyansys_fluent.connection import connect  # noqa: E402
-from pyansys_fluent.run_persistence import RunPersistence, discover_latest_resume_source  # noqa: E402
 from pyansys_fluent.setup_common import load_json, print_header, summarize_boundary_state  # noqa: E402
 from pyansys_fluent.setup_discovery import build_compact_boundary_summary, build_target_role_map, convert_target_boundaries_to_intended  # noqa: E402
 from pyansys_fluent.setup_dpm import SEED_INJECTION_NAME  # noqa: E402
@@ -52,14 +51,12 @@ from pyansys_fluent.setup_carrier import (  # noqa: E402
     apply_material_states,
     build_intended_boundary_state,
 )
-from pyansys_fluent.setup_io import load_resume_case_data, load_target_mesh  # noqa: E402
-from pyansys_fluent.setup_run import RunInterrupted, initialize_case, iterate_case  # noqa: E402
+from pyansys_fluent.setup_io import load_case_only, load_target_mesh, write_case_only  # noqa: E402
 
 
 DEFAULT_SERVER_ID = "4"
 DEFAULT_TARGET_MESH = r"C:\Users\syok443\Documents\TwoPhaseInletV2(PurnantoV2)\Major Files\PureTwoPhaseV2(PurnantoV2).msh"
 DEFAULT_OUTPUT_CASE = r"C:\Users\syok443\Documents\TwoPhaseInletV2(PurnantoV2)\Major Files\output\PureTwoPhaseV2(PurnantoV2)-rebuilt.cas.h5"
-DEFAULT_OUTPUT_DATA = r"C:\Users\syok443\Documents\TwoPhaseInletV2(PurnantoV2)\Major Files\output\PureTwoPhaseV2(PurnantoV2)-rebuilt.dat.h5"
 
 LIVE_ARCHIVE_DIR = (
     PROJECT_ROOT
@@ -96,7 +93,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--dry-run", action="store_true", help="Print the planned merge payload without connecting to Fluent.")
-    mode.add_argument("--apply", action="store_true", help="Connect to Fluent, apply the merged setup, and write the case file.")
+    mode.add_argument("--apply", action="store_true", help="Connect to Fluent, apply the merged setup, and write the case-only file.")
     parser.add_argument(
         "--server-id",
         default=DEFAULT_SERVER_ID,
@@ -113,17 +110,6 @@ def build_parser() -> argparse.ArgumentParser:
         help="Remote output case path on Computer 2. A .cas.h5 file is written here.",
     )
     parser.add_argument(
-        "--output-data",
-        default=DEFAULT_OUTPUT_DATA,
-        help="Remote output data path on Computer 2. A .dat.h5 file is written when iterations are requested.",
-    )
-    parser.add_argument(
-        "--iterations",
-        type=int,
-        default=0,
-        help="Optional number of iterations to run after initialization. Default: 0.",
-    )
-    parser.add_argument(
         "--snapshot-json",
         default="",
         help="Optional local JSON path for the merge summary and resolved zone map.",
@@ -131,22 +117,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--resume-case",
         default="",
-        help="Optional remote case file to resume from instead of rebuilding from mesh.",
-    )
-    parser.add_argument(
-        "--resume-data",
-        default="",
-        help="Optional remote data file to resume from instead of rebuilding from mesh.",
-    )
-    parser.add_argument(
-        "--resume-state-json",
-        default="",
-        help="Optional run-state JSON to resume from when no explicit resume pair is provided.",
-    )
-    parser.add_argument(
-        "--resume-latest",
-        action="store_true",
-        help="Resume from the latest autosave or numbered checkpoint matching the output paths.",
+        help="Optional existing case to load and extend with the archived setup instead of rebuilding from mesh.",
     )
     parser.add_argument(
         "--particle-material",
@@ -283,8 +254,6 @@ def summarize_run_plan(
     *,
     target_mesh: str,
     output_case: str,
-    output_data: str,
-    iterations: int,
     role_map: dict[str, str] | None,
     injection_names: list[str],
     archived_particle_material: str,
@@ -293,8 +262,6 @@ def summarize_run_plan(
     return {
         "target_mesh": target_mesh,
         "output_case": output_case,
-        "output_data": output_data,
-        "iterations": iterations,
         "resolved_role_map": role_map or {},
         "injection_count": len(injection_names),
         "injection_names": injection_names,
@@ -306,7 +273,7 @@ def summarize_run_plan(
             "particle_injections": str(PARTICLE_INJECTIONS),
         },
         "assumptions": [
-            "Case rebuild with optional short run.",
+            "Case-only rebuild; initialize, iterate, and autosave from Fluent after this script returns.",
             "1680 live archive supplies the carrier and solution authority.",
             "07 archive supplies the split-inlet boundary topology.",
             "1600 particle extract supplies the DPM injection payloads.",
@@ -467,15 +434,11 @@ def apply_archived_dpm_state(
     return sorted(injection_state.keys()), bool(dpm_model_ok and material_ok and injections_ok)
 
 
-def write_rebuilt_case_only(persistence: RunPersistence, solver, *, strict: bool) -> bool:
+def write_rebuilt_case_only(solver, output_case: str, *, strict: bool) -> bool:
     print_header("Write Rebuilt Case")
     return safe_step(
-        "record_case_only",
-        lambda: persistence.record_case_only(
-            solver,
-            completed_iterations=0,
-            total_iterations=0,
-        ),
+        "write_case_only",
+        lambda: write_case_only(solver, output_case, "write_rebuilt_case_only"),
         strict=strict,
     )
 
@@ -498,8 +461,6 @@ def main() -> int:
     plan_summary = summarize_run_plan(
         target_mesh=args.target_mesh,
         output_case=args.output_case,
-        output_data=args.output_data,
-        iterations=args.iterations,
         role_map=None,
         injection_names=[str(entry["injection_name"]) for entry in particle_entries],
         archived_particle_material=archived_particle_material,
@@ -513,30 +474,13 @@ def main() -> int:
 
     solver = connect(server_id=args.server_id)
     print(f"\nConnected to Fluent {solver.get_fluent_version()}")
-    persistence = RunPersistence(
-        output_case=args.output_case,
-        output_data=args.output_data,
-        checkpoint_interval=0,
-        report_interval=min(10, max(1, args.iterations or 1)),
-    )
-    resume_mode = bool(args.resume_case or args.resume_data or args.resume_state_json or args.resume_latest)
+    resume_mode = bool(args.resume_case)
 
     try:
         if resume_mode:
-            resume_source = discover_latest_resume_source(
-                args.output_case,
-                args.output_data,
-                resume_case=args.resume_case,
-                resume_data=args.resume_data,
-                resume_state_json=args.resume_state_json,
-            )
-            if not resume_source.is_available:
-                raise RuntimeError("Resume mode was requested but no usable case/data pair was found.")
-            print_header("Resume Existing Case/Data")
-            load_resume_case_data(solver, resume_source.case_path, resume_source.data_path)
-            completed_before_this_run = resume_source.completed_iterations
+            print_header("Load Existing Setup Case")
+            load_case_only(solver, args.resume_case, label="Load Existing Setup Case")
         else:
-            completed_before_this_run = 0
             load_target_mesh(solver, args.target_mesh)
 
             target_boundary_state = safe_get_state(solver.settings.setup.boundary_conditions, "target_boundary_conditions")
@@ -577,37 +521,7 @@ def main() -> int:
             if not dpm_ok:
                 print("dpm_setup: WARNING -> continuing to case write")
 
-            if args.iterations > 0:
-                print_header("Initialize And Run")
-                safe_step("initialize_case", lambda: initialize_case(solver), strict=args.strict)
-                safe_step(
-                    "iterate_case",
-                    lambda: iterate_case(
-                        solver,
-                        args.iterations,
-                        report_interval=min(10, max(1, args.iterations)),
-                        checkpoint_interval=0,
-                        output_case=args.output_case,
-                        output_data=args.output_data,
-                        persistence=persistence,
-                    ),
-                    strict=args.strict,
-                )
-
-            if args.iterations <= 0:
-                write_rebuilt_case_only(persistence, solver, strict=args.strict)
-            else:
-                print_header("Write Rebuilt Case/Data")
-                safe_step(
-                    "record_final",
-                    lambda: persistence.record_final(
-                        solver,
-                        completed_iterations=args.iterations,
-                        total_iterations=args.iterations,
-                        allow_case_only=False,
-                    ),
-                    strict=args.strict,
-                )
+            write_rebuilt_case_only(solver, args.output_case, strict=args.strict)
 
         if resume_mode:
             target_boundary_state = safe_get_state(solver.settings.setup.boundary_conditions, "target_boundary_conditions")
@@ -615,39 +529,11 @@ def main() -> int:
                 raise RuntimeError("Could not inspect target boundary conditions after resume load")
             role_map = build_target_role_map(target_boundary_state)
             created_injections = sorted(particle["injection_name"] for particle in particle_entries)
-            if args.iterations > 0:
-                print_header("Resume Run")
-                safe_step(
-                    "resume_iterate_case",
-                    lambda: iterate_case(
-                        solver,
-                        args.iterations,
-                        report_interval=min(10, max(1, args.iterations)),
-                        checkpoint_interval=0,
-                        output_case=args.output_case,
-                        output_data=args.output_data,
-                        starting_completed_iterations=completed_before_this_run,
-                        persistence=persistence,
-                    ),
-                    strict=args.strict,
-                )
-            print_header("Write Rebuilt Case/Data")
-            safe_step(
-                "resume_record_final",
-                lambda: persistence.record_final(
-                    solver,
-                    completed_iterations=completed_before_this_run + args.iterations,
-                    total_iterations=completed_before_this_run + args.iterations,
-                    allow_case_only=False,
-                ),
-                strict=args.strict,
-            )
+            write_rebuilt_case_only(solver, args.output_case, strict=args.strict)
 
         final_summary = summarize_run_plan(
             target_mesh=args.target_mesh,
             output_case=args.output_case,
-            output_data=args.output_data,
-            iterations=args.iterations,
             role_map=role_map,
             injection_names=created_injections,
             archived_particle_material=archived_particle_material,
@@ -655,20 +541,13 @@ def main() -> int:
         )
         final_summary["boundary_summary"] = build_compact_boundary_summary(target_boundary_state)
         final_summary["resume_mode"] = resume_mode
-        final_summary["completed_before_this_run"] = completed_before_this_run
         write_json_snapshot(args.snapshot_json, final_summary)
 
         print("\nPurnanto 1680/1600J rebuild complete.")
         return 0
-    except RunInterrupted as exc:
-        print_header("Interrupt Save")
-        persistence.record_interrupt(
-            solver,
-            completed_iterations=exc.completed_iterations,
-            allow_case_only=False,
-        )
-        print(f"\nPaused run saved after approximately {exc.completed_iterations} completed iterations.")
-        return 130
+    except Exception as exc:
+        print(f"\nPurnanto rebuild failed: {type(exc).__name__}: {exc}")
+        return 1
 
 
 if __name__ == "__main__":

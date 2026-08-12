@@ -234,7 +234,6 @@ def main() -> int:
 
     summary: dict[str, Any] = {
         "source_case": args.source_case,
-        "server_id": str(args.server_id),
         "cases": [],
     }
 

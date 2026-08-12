@@ -78,6 +78,38 @@ def load_case_data_pair(
     }
 
 
+def build_case_identity(load_summary: Mapping[str, Any]) -> dict[str, Any]:
+    """Describe case identity without using connection metadata as a fallback."""
+    load_mode = str(load_summary.get("load_mode", "")).strip()
+    case_file = str(load_summary.get("case_file") or "").strip()
+    data_file = str(load_summary.get("data_file") or "").strip()
+    explicit_load_modes = {
+        "paired-read_case_data",
+        "explicit-read_case-then-read_data",
+    }
+
+    if load_mode in explicit_load_modes and case_file and data_file:
+        return {
+            "status": "verified",
+            "basis": "explicit case/data load performed by this workflow",
+            "case_file": case_file,
+            "data_file": data_file,
+            "load_mode": load_mode,
+            "warnings": [],
+        }
+
+    return {
+        "status": "unavailable",
+        "basis": "Fluent did not expose verified active case/data filenames",
+        "case_file": None,
+        "data_file": None,
+        "load_mode": load_mode or None,
+        "warnings": [
+            "Case/data identity is unavailable; no server-id or previous-record fallback is permitted."
+        ],
+    }
+
+
 def write_json(path: Path, payload: Mapping[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, indent=2, default=str) + "\n", encoding="utf-8")
@@ -934,6 +966,11 @@ def capture_session_summary(solver: Any) -> dict[str, Any]:
 
 
 def determine_claim_class_ceiling(result: Mapping[str, Any]) -> str:
+    source = result.get("source", {})
+    case_identity = source.get("case_identity", {}) if isinstance(source, Mapping) else {}
+    if not isinstance(case_identity, Mapping) or case_identity.get("status") != "verified":
+        return "Debug only"
+
     carrier_fluxes = result.get("carrier_fluxes", {})
     carrier_metrics = result.get("carrier_metrics", {})
     dpm_inventory = result.get("dpm_inventory", {})
@@ -996,7 +1033,6 @@ def build_limitations(
 
 def compile_postprocess_result(
     *,
-    server_id: str,
     run_label: str,
     load_summary: Mapping[str, Any],
     session_summary: Mapping[str, Any],
@@ -1006,17 +1042,19 @@ def compile_postprocess_result(
     dpm_metrics: Mapping[str, Any],
     omitted_diameters_um: Sequence[float] = DEFAULT_OMITTED_DIAMETERS_UM,
 ) -> dict[str, Any]:
+    case_identity = build_case_identity(load_summary)
     limitations = build_limitations(
         session_summary=session_summary,
         dpm_inventory=dpm_inventory,
         dpm_metrics=dpm_metrics,
         omitted_diameters_um=omitted_diameters_um,
     )
+    limitations = list(limitations)
+    limitations.extend(case_identity.get("warnings", []))
     result = {
         "source": {
-            "server_id": str(server_id),
             "run_label": run_label,
-            **dict(load_summary),
+            "case_identity": case_identity,
         },
         "session": session_summary,
         "carrier_fluxes": carrier_fluxes,
@@ -1051,10 +1089,10 @@ def render_markdown_report(result: Mapping[str, Any]) -> str:
         f"# Live Fluent Post-Processing Report: {source.get('run_label', 'unnamed-run')}",
         "",
         "## Source Case/Data",
-        f"- Server id: `{source.get('server_id', 'unknown')}`",
-        f"- Case file: `{source.get('case_file', 'unknown')}`",
-        f"- Data file: `{source.get('data_file', 'unknown')}`",
-        f"- Load mode: `{source.get('load_mode', 'unknown')}`",
+        f"- Identity status: `{source.get('case_identity', {}).get('status', 'unavailable')}`",
+        f"- Case file: `{source.get('case_identity', {}).get('case_file') or 'unavailable'}`",
+        f"- Data file: `{source.get('case_identity', {}).get('data_file') or 'unavailable'}`",
+        f"- Identity basis: `{source.get('case_identity', {}).get('basis', 'unavailable')}`",
         "",
         "## Boundary/Model Sanity",
         f"- Fluent version: `{session.get('fluent_version', 'unknown')}`",

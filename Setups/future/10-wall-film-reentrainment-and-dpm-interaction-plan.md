@@ -278,7 +278,7 @@ The annular-flow evidence is air-water in a tube, not geothermal steam-brine in 
 
 ## 9. Links
 
-- [08c inlet-velocity sensitivity](../active/08c-purnanto-parity-inlet-velocity-sensitivity.md)
+- [08c inlet-velocity sensitivity](../past/reported/08c-purnanto-parity-inlet-velocity-sensitivity.md)
 - [09c two-way DPM coupling](../past/reported/09c-dpm-ewf-wall-film-reentrainment.md)
 - [11 combined wall-film and DPM plan](11-combined-wallfilm-dpm-plan.md)
 - [separator efficiency methods](../../CFD_wiki/wiki/synthesis/fluent-separator-efficiency-methods.md)

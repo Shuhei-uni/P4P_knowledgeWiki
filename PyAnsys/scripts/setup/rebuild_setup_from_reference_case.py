@@ -7,7 +7,10 @@ This script is intended for the geothermal separator workflow in this repo:
 2. Load a reference case/data pair that already contains the desired setup.
 3. Snapshot the reproducible setup state from that reference session.
 4. Load a target mesh that exposes the same logical named selections.
-5. Reapply the setup, hybrid-initialize, iterate, and save case/data outputs.
+5. Reapply the setup and save a case-only output.
+
+Initialization, iteration, and autosave are started from Fluent after this
+script returns; Python does not own the long solve.
 
 It assumes the target mesh uses the same logical boundary roles as setup `07`:
 `liquid inlet`, `steam inlet`, `wall`, `bottom`, and `outlet` / `steamoutlet`.
@@ -86,8 +89,8 @@ BOUNDARY_TYPE_ORDER = (
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
-            "Clone a reference Fluent setup from case/data onto a new mesh, "
-            "then initialize, iterate, and save it."
+            "Clone a reference Fluent setup from case/data onto a new mesh and "
+            "save a case-only artifact."
         )
     )
     parser.add_argument("--source-case", required=True, help="Remote reference case file.")
@@ -100,42 +103,11 @@ def build_parser() -> argparse.ArgumentParser:
         ),
     )
     parser.add_argument("--target-mesh", required=True, help="Remote target mesh file.")
-    parser.add_argument("--output-case", required=True, help="Remote output case file.")
-    parser.add_argument("--output-data", required=True, help="Remote output data file.")
+    parser.add_argument("--output-case", required=True, help="Remote output case-only file.")
     parser.add_argument(
         "--snapshot-json",
         default="",
         help="Optional local JSON file for the captured reference snapshot.",
-    )
-    parser.add_argument(
-        "--iterations",
-        type=int,
-        default=None,
-        help=(
-            "Iterations to run after initialization. Default: reuse the iteration "
-            "count stored in the reference data if available, otherwise 0."
-        ),
-    )
-    parser.add_argument(
-        "--report-interval",
-        type=int,
-        default=250,
-        help="Progress print interval during the target run. Default: 250.",
-    )
-    parser.add_argument(
-        "--initialized-case",
-        default="",
-        help="Optional remote case file written immediately after initialization.",
-    )
-    parser.add_argument(
-        "--initialized-data",
-        default="",
-        help="Optional remote data file written immediately after initialization.",
-    )
-    parser.add_argument(
-        "--skip-run",
-        action="store_true",
-        help="Rebuild and initialize the target case, but do not iterate.",
     )
     return parser
 
@@ -415,48 +387,10 @@ def read_target_mesh(solver, mesh_file: str) -> None:
     try_action("read_target_mesh", lambda: solver.settings.file.read_mesh(file_name=mesh_file), critical=True)
 
 
-def initialize_target_case(solver) -> None:
-    print_header("Initialize Target Case")
-    if try_action(
-        "hybrid_initialize_settings_api",
-        lambda: solver.settings.solution.initialization.hybrid_initialize(),
-    ):
-        return
-    try_action(
-        "hybrid_initialize_tui",
-        lambda: solver.tui.solve.initialize.hyb_initialization(),
-        critical=True,
-    )
-
-
-def iterate_target_case(solver, iterations: int, report_interval: int) -> None:
-    print_header("Run Target Case")
-    if iterations <= 0:
-        print("iterate: SKIPPED")
-        return
-
-    chunk = max(1, report_interval)
-    completed = 0
-    while completed < iterations:
-        step = min(chunk, iterations - completed)
-        if not try_action(
-            f"iterate_{completed + step}",
-            lambda step=step: solver.settings.solution.run_calculation.iterate(iter_count=step),
-        ):
-            try_action(
-                f"iterate_tui_{completed + step}",
-                lambda step=step: solver.tui.solve.iterate(step),
-                critical=True,
-            )
-        completed += step
-        print(f"progress: {completed}/{iterations}")
-
-
-def write_case_data_pair(solver, case_file: str, data_file: str, label: str) -> None:
+def write_case_only(solver, case_file: str, label: str) -> None:
     print_header(label)
     remote_chdir(solver, str(PureWindowsPath(case_file).parent))
     try_action(f"write_case_{label}", lambda: solver.settings.file.write_case(file_name=case_file), critical=True)
-    try_action(f"write_data_{label}", lambda: solver.settings.file.write_data(file_name=data_file), critical=True)
 
 
 def main() -> int:
@@ -469,16 +403,6 @@ def main() -> int:
     read_reference_case_data(solver, args.source_case, args.source_data)
     reference_snapshot = capture_reference_snapshot(solver)
     write_json_snapshot(args.snapshot_json, reference_snapshot)
-
-    source_iterations = reference_snapshot.get("runtime", {}).get("iteration_count")
-    if isinstance(source_iterations, (int, float)):
-        source_iterations = int(source_iterations)
-    else:
-        source_iterations = 0
-    target_iterations = args.iterations if args.iterations is not None else source_iterations
-    if args.skip_run:
-        target_iterations = 0
-    print(f"target_iterations: {target_iterations}")
 
     read_target_mesh(solver, args.target_mesh)
 
@@ -519,19 +443,9 @@ def main() -> int:
     apply_boundary_states(solver, remapped_snapshot["boundary_conditions"])
     apply_solution_state(solver, remapped_snapshot["solution"])
 
-    initialize_target_case(solver)
-    if args.initialized_case and args.initialized_data:
-        write_case_data_pair(
-            solver,
-            args.initialized_case,
-            args.initialized_data,
-            "write_initialized_case_data",
-        )
+    write_case_only(solver, args.output_case, "write_rebuilt_case_only")
 
-    iterate_target_case(solver, target_iterations, args.report_interval)
-    write_case_data_pair(solver, args.output_case, args.output_data, "write_final_case_data")
-
-    print("\nRebuild finished.")
+    print("\nCase-only rebuild finished. Start initialization and the long run from Fluent with native autosave.")
     return 0
 
 

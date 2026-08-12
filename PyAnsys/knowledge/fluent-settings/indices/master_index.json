@@ -5,10 +5,13 @@
     "Model enable order",
     "Hidden setting dependencies",
     "PyFluent/gRPC path failure debugging",
-    "TUI/documentation fallback strategy"
+    "TUI/documentation fallback strategy",
+    "Fluent-native run and autosave resilience",
+    "Read-only reconnecting progress monitoring"
   ],
   "priority_files": [
     "README.md",
+    "native_run_and_autosave.md",
     "orders/global_setup_order.yaml",
     "indices/failure_mode_index.json",
     "indices/path_dependency_index.json",

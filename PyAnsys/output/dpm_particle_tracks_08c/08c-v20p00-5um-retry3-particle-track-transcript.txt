@@ -1,4 +1,0 @@
-===== injection-5-micron =====
-
-Error: invalid command
-Error Object: "particle-tracks"

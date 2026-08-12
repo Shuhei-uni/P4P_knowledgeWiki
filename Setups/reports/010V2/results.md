@@ -2,8 +2,8 @@
 
 ## Setup link and evidence
 
-- Setup definition: [010V2 — EWF Deposition and Film-Inventory Control](../../active/010V2-ewf-deposition-film-inventory.md)
-- Parent: [09cV2 — Skoog Partition and Injection-Control Branch](../../active/09cV2-skoog-partition-injection-control.md)
+- Setup definition: [010V2 — EWF Deposition and Film-Inventory Control](../../past/reported/010V2-ewf-deposition-film-inventory.md)
+- Parent: [09cV2 — Skoog Partition and Injection-Control Branch](../../past/reported/09cV2-skoog-partition-injection-control.md)
 - Fluent session: server `3`, `Ansys Fluent 2025 R2`; analysis date `2026-07-22`.
 - Case/data checkpoint: already loaded in Fluent; filenames were not exposed by the read-only diagnostics.
 - Evidence class: **diagnostic**. The checks did not change solver physics, iterations, or case/data; the snapshot only created/reused `ewfdiag-*` report definitions.

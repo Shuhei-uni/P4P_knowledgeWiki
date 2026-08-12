@@ -14,6 +14,8 @@ Reports are numerical findings tied to one concrete setup. Keep the setup defini
 - [09b — Stochastic DPM sensitivity results](09b/results.md)
 - [09c — Preliminary two-way coupling results](09c/results.md)
 - [09cV2 — Skoog partition and injection-control diagnostic results](09cV2/results.md)
+- [09cV3 — Fine-mist allocation diagnostic results](09cV3/results.md)
+- [09cV3 — DPM-mass allocation quick results](09cV3/dpm-mass-allocation-quick-report.md)
 - [10a-splash — Preliminary EWF/splash-sensitive results](10a/results.md)
 - [010V2 — EWF deposition and film-inventory diagnostic results](010V2/results.md)
 - [010V2a — EWF splash diagnostic results](010V2a/results.md)

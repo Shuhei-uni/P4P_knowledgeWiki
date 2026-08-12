@@ -989,37 +989,33 @@ for eq in resid_eqns.get_object_names():
 
 ---
 
-# 14. Initialization, running, checkpointing
+# 14. Initialization, running, and checkpointing
 
-## 14.1 TUI initialization/run pattern
+## 14.1 Case-only setup boundary
 
-```python
-# [confirmed in current script] / [fallback only]
-solver.tui.solve.initialize.hyb_initialization()
-solver.tui.solve.iterate(50)
+PyFluent may configure the models, boundary conditions, solution methods, monitors, and
+native autosave settings, then write a case-only artifact. It must stop before initialization
+and long-run iteration. This keeps the solver independent of the Python client's lifetime.
+
+## 14.2 Fluent-native initialization and run
+
+Start the solve from Fluent's GUI, Fluent console, or a Fluent-native journal. For example:
+
+```text
+/solve/initialize/hyb-initialization
+/solve/iterate 5000
 ```
 
-## 14.2 Settings API initialization/run pattern
+Set the Calculation Activities / Autosave interval in Fluent before the run (for example,
+every 500 steady iterations), use a remote root name, and retain at least two recent paired
+case/data checkpoints. Reconnect with a fresh client only to inspect progress or recover from
+the newest complete native checkpoint.
 
-Official cavitation example uses:
+## 14.3 Prohibited client-side run pattern
 
-```python
-# [official-docs pattern]
-initialization = solver.settings.solution.initialization
-initialization.initialization_type = "hybrid"
-initialization.hybrid_init_options.general_settings.initial_pressure = True
-initialization.hybrid_initialize()
-solver.settings.solution.run_calculation.iterate(iter_count=500)
-```
-
-## 14.3 Chunked run pattern for Codex/agents
-
-```python
-# [confirmed in current script style]
-for completed in range(0, 500, 50):
-    solver.tui.solve.iterate(50)
-    # call compact flux report here, not full transcript dumps
-```
+Do not wrap Fluent iteration commands in a Python `for`/`while` loop, and do not use Python to
+decide when to write checkpoints or the final data file. The old examples in earlier versions
+of this atlas are historical patterns and are not approved for current runs.
 
 ---
 

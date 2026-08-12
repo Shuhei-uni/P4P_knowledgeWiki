@@ -1,7 +1,7 @@
 # Project Roadmap
 
 ## Purpose
-Define the project run sequence from the current state of the separator work. This roadmap treats setup `08b` as the past reported parity parent and `09c` as a past reported two-way-DPM diagnostic. Active work now comprises `08c` inlet-loading sensitivity, `09cV2` allocation control, and the complete `010V2` EWF family.
+Define the project run sequence from the current state of the separator work. This roadmap treats setup `08b` as the past reported parity parent; `08c`, `09c`, `09cV2`, and the complete `010V2` EWF family are past reported diagnostics. Active work is the `09cV3` fine-mist PSD rerun.
 
 The immediate job is:
 
@@ -13,7 +13,7 @@ The immediate job is:
 ## Current Starting Point
 - Date: `2026-07-24`
 - Active setup authority: `../../../Setups/active/index.md`
-- Active branch roles: `08c` retains the inlet-loading sensitivity, `09cV2` controls Skoog-style allocation and injection bookkeeping, and the `010V2` family isolates EWF deposition, splash, edge separation, stripping, and combined/global-DPM interaction.
+- Active branch role: `09cV3` is the fine-mist PSD rerun. The reported diagnostic records `08c`, `09cV2`, and the `010V2` family retain the inlet-loading, allocation-control, and isolated EWF-mechanism evidence respectively.
 - Current model-family classification for setup `08b`:
   - steady `Mixture` carrier-flow solve;
   - observed Purnanto continuous-phase settings treated as primary authority;
@@ -23,7 +23,7 @@ The immediate job is:
   - not yet a fully coupled `Mixture + DPM` solve;
   - not yet a wall-film branch;
   - not yet a transient branch.
-- Current status: setup `08b` has reported numerical screening results but is not externally validated; active branches are `08c`, `09cV2`, and all `010V2` records listed in the active index.
+- Current status: setup `08b` has reported numerical screening results but is not externally validated; `08c`, `09cV2`, and all `010V2` records are past reported diagnostics, while `09cV3` remains active.
 - Retained comparison branches:
   - `../../../Setups/past/reported/07-pure-phase-split-actual-area.md` remains comparison-only split-inlet context;
   - `../../../Setups/past/archived/08-purnanto-one-inlet-massflow-recreation.md` remains a useful one-inlet automation/parity scaffold;
@@ -33,7 +33,7 @@ The immediate job is:
 
 ## Immediate Next Child Branch After Setup 08b
 
-- Active child branch: `../../../Setups/active/08c-purnanto-parity-inlet-velocity-sensitivity.md`
+- Past reported child branch: `../../../Setups/past/reported/08c-purnanto-parity-inlet-velocity-sensitivity.md`
 - Branch role: test how inlet loading / inlet velocity changes separator efficiency while keeping the same enthalpy basis used by setup `08b`.
 - Interpretation rule:
   - keep inlet **specific enthalpy** fixed across the sweep;

@@ -37,7 +37,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -178,6 +180,7 @@
   },
   "active": "6c4c297b8bf4a4c2",
   "lastOpenFiles": [
+    "Meeting report/~$eting report.docx",
     "PyAnsys/output/ewf_dpm_diagnostics/010V2d-2-server3-4189it-20260723-dpm/bookkeeping.json",
     "PyAnsys/output/ewf_dpm_diagnostics/010V2d-2-server3-4189it-20260723-dpm/dpm_particle_track_transcript.txt",
     "PyAnsys/output/ewf_dpm_diagnostics/010V2d-2-server3-4189it-20260723-dpm/dpm_zone_summary.csv",
@@ -188,7 +191,6 @@
     "PyAnsys/output/ewf_dpm_diagnostics/010V2d-2-server3-4189it-20260723-dpm/dpm_raw/05-water-liquid-at-psep-348um.txt",
     "PyAnsys/output/ewf_dpm_diagnostics/010V2d-2-server3-4189it-20260723-dpm/dpm_raw/04-water-liquid-at-psep-168um.txt",
     "PyAnsys/output/ewf_dpm_diagnostics/010V2d-2-server3-4189it-20260723-dpm/dpm_raw/03-water-liquid-at-psep-112um.txt",
-    "PyAnsys/output/ewf_dpm_diagnostics/010V2d-2-server3-4189it-20260723-dpm/dpm_raw/02-water-liquid-at-psep-56um.txt",
     "PyAnsys/output/post_simulation_analysis/010V2d-2-server3-4189it-20260723-residual-check.png",
     "PyAnsys/output/post_simulation_analysis/010V2d-server1-20260723-5000-residual-check.png",
     "PyAnsys/output/post_simulation_analysis/010V2d-2-4189it-20260723-residual-check.png",

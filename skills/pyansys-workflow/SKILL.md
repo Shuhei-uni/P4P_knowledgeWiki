@@ -15,6 +15,12 @@ From now on, keep the workflow split:
 
 Do not merge setup mutation and run/save back into one large script unless the user explicitly asks for it.
 
+Connection routing is not case provenance: `server_id` only selects the Fluent
+endpoint. After connecting, inspect what is loaded. Use observed case/data
+identity when available; otherwise mark it unavailable and never infer a case or
+setup from the server ID or a previous session. Do not persist `server_id` in
+report-facing artifacts.
+
 Before non-trivial edits, read:
 
 1. `AGENTS.md` at the repository root for cross-system routing.

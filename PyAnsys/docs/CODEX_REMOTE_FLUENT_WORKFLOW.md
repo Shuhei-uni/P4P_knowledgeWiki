@@ -100,8 +100,9 @@ scripts/inspection/load_case_data.py
 scripts/list_boundaries.py
 scripts/list_models.py
 scripts/inspection/export_residuals.py
+scripts/inspection/monitor_native_run.py
 scripts/export_report_definitions.py
-scripts/setup/save_data_after_iterations.py
+knowledge/fluent-settings/native_run_and_autosave.md
 ```
 
 ## Notes
@@ -115,7 +116,7 @@ scripts/setup/save_data_after_iterations.py
   `FLUENT_REMOTE_DATA_FILE`, `FLUENT_REMOTE_GEOM_FILE`, and
   `FLUENT_REMOTE_MESH_FILE`.
 - Default setup deliverable: `.cas.h5` only.
-- Default run/save deliverable: derived `name_X.dat.h5` from `scripts/setup/save_data_after_iterations.py`.
-- Keep initialization, iteration, and data writing out of complex setup-building scripts unless the user explicitly requests a combined flow.
+- Default run/save deliverable: Fluent-native autosave case/data files with a remote root and a small retained set.
+- Keep initialization, iteration, and periodic checkpoint writes out of laptop-side Python loops. Start from Fluent or a Fluent-native journal and reconnect later for monitoring or recovery.
 - Keep `server_info.txt` and `.env` out of git.
 - If connection fails, check IP, port, password, firewall, VPN, and whether server_info contains 127.0.0.1.

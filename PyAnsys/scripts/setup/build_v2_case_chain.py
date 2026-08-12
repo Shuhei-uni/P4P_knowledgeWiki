@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the provisional 09cV2 -> 010V2d case-only chain on Fluent server 3.
+"""Build the provisional 09cV2 -> 010V2d case-only chain through Fluent.
 
 This script intentionally does not initialize, iterate, read data, or write data.
 It uses the already-loaded 09c case in the live Fluent session and saves only
@@ -32,7 +32,7 @@ DPM_TOTAL = LIQUID_TOTAL * DPM_FRACTION
 EULERIAN_LIQUID = LIQUID_TOTAL - DPM_TOTAL
 FILM_MATERIAL = "water-liquid-at-psep"
 DPM_MATERIAL = "water-liquid-at-psep-dpm"
-SERVER_ID = "3"
+CONNECTION_ID = "3"
 
 CASE_NAMES = {
     "09cV2": "09cV2-fDPM-05pct.cas.h5",
@@ -330,7 +330,7 @@ def set_wall_feature(solver: Any, feature: str, value: Any) -> dict[str, Any]:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--server-id", default=SERVER_ID)
+    parser.add_argument("--server-id", default=CONNECTION_ID)
     parser.add_argument("--summary-json", default="PyAnsys/output/v2_case_build_20260721.json")
     parser.add_argument(
         "--resume-09cV2",
@@ -338,18 +338,29 @@ def main() -> int:
         help="Reuse the already-written 09cV2 case and continue with the downstream branches.",
     )
     args = parser.parse_args()
-    require(str(args.server_id) == SERVER_ID, "This build script is restricted to Fluent server 3")
+    require(str(args.server_id) == CONNECTION_ID, "This build script is restricted to connection alias 3")
 
-    solver = connect(server_id=SERVER_ID)
-    summary: dict[str, Any] = {"server_id": SERVER_ID, "fluent_version": solver.get_fluent_version(), "cases": {}}
+    solver = connect(server_id=CONNECTION_ID)
+    summary: dict[str, Any] = {"fluent_version": solver.get_fluent_version(), "cases": {}}
 
     check_targets_absent(solver, allow_existing_09cV2=args.resume_09cV2)
     if args.resume_09cV2:
         require(remote_file_exists(solver, CASE_NAMES["09cV2"]), "--resume-09cV2 requested but the case is unavailable")
         load_branch(solver, CASE_NAMES["09cV2"])
+        summary["loaded_state_assessment"] = {
+            "case_identity_status": "verified",
+            "case_file": CASE_NAMES["09cV2"],
+            "basis": "explicit load_branch call",
+        }
         summary["cases"]["09cV2"] = {"existing_case_reused": True}
     else:
         source = read_source_state(solver)
+        summary["loaded_state_assessment"] = {
+            "case_identity_status": "unavailable",
+            "case_file": None,
+            "basis": "already-loaded session; active case filename was not exposed",
+            "configuration_check": "matches expected 09c source constraints",
+        }
         summary["source_readback"] = source
 
         v2 = rename_injections_and_scale(solver, source)
@@ -387,7 +398,7 @@ def main() -> int:
 
     summary["notes"] = [
         "Case-only build: no initialization, iterations, solver advance, or .dat.h5 writes.",
-        "The source was the already-loaded 09c case on server 3.",
+        "Connection routing was kept separate from case identity; the source filename was unavailable for the already-loaded session.",
         "The five-percent DPM allocation was selected explicitly by the user.",
     ]
     output = Path(args.summary_json).expanduser().resolve()

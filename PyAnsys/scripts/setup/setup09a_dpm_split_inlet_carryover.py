@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Build setup 09a from the setup 07 split-inlet carrier-field scaffold."""
+"""Build setup 09a as a case-only DPM artifact.
+
+This script does not initialize, iterate, or write client-side checkpoints.
+Run the prepared case from Fluent with native calculation-activity autosave.
+"""
 
 from __future__ import annotations
 
@@ -17,9 +21,9 @@ except ModuleNotFoundError:  # pragma: no cover - local convenience fallback
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
 from pyansys_fluent.connection import connect, env_suffix  # noqa: E402
-from pyansys_fluent.run_persistence import RunPersistence  # noqa: E402
 from pyansys_fluent.setup_dpm import um_to_microns_text  # noqa: E402
 from pyansys_fluent.setup_io import dump_json_if_requested  # noqa: E402
+from pyansys_fluent.setup_common import print_header  # noqa: E402
 from pyansys_fluent.setup_recipes import (  # noqa: E402
     CarrierRunConfig,
     CheckpointConfig,
@@ -27,8 +31,6 @@ from pyansys_fluent.setup_recipes import (  # noqa: E402
     require_setup09a_paths,
     run_setup09a_dpm_extension_recipe,
 )
-from pyansys_fluent.setup_run import RunInterrupted  # noqa: E402
-from pyansys_fluent.setup_common import print_header  # noqa: E402
 
 
 DEFAULT_DROPLET_DIAMETERS_UM = (5.0, 10.0, 14.2, 41.0)
@@ -38,7 +40,7 @@ DEFAULT_BOTTOM_DPM_MODE = "trap"
 DEFAULT_OUTLET_DPM_MODE = "escape"
 DEFAULT_PARTICLE_MASS_FLOW_RATE = 1e-6
 DEFAULT_STREAMS_PER_INJECTION = 200
-DEFAULT_CARRIER_ITERATIONS = 500
+DEFAULT_CARRIER_ITERATIONS = 0
 DEFAULT_SERVER_ID = "3"
 DEFAULT_TARGET_MESH = (
     r"C:\Users\syok443\Documents\TwoPhaseInletV2(PurnantoV2)\Major Files"
@@ -49,39 +51,33 @@ DEFAULT_TARGET_MESH = (
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
-            "Prepare setup 09a as a setup 07 carrier-field rebuild plus one-way "
-            "DPM carryover injections on a second Fluent gRPC session."
+            "Prepare setup 09a as a case-only setup 07 carrier-field rebuild plus "
+            "one-way DPM carryover injections."
         )
     )
 
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--dry-run", action="store_true", help="Print the planned 09a payload without connecting to Fluent.")
-    mode.add_argument("--apply", action="store_true", help="Connect to Fluent, stage a converged carrier field, then apply the 09a DPM extension.")
+    mode.add_argument("--apply", action="store_true", help="Connect to Fluent, build the case-only carrier/DPM setup, and save it for a later Fluent-native run.")
     parser.add_argument(
         "--server-id",
         default=DEFAULT_SERVER_ID,
         help="Configured Fluent server id to use. Default: 3. Use 1 for FLUENT_IP, 2 for FLUENT_IP2, 3 for FLUENT_IP3.",
     )
     parser.add_argument("--target-mesh", default=DEFAULT_TARGET_MESH, help="Remote mesh path visible to the target Fluent session.")
-    parser.add_argument("--resume-case", default="", help="Optional remote converged setup 07 case file to resume from instead of rebuilding from mesh.")
-    parser.add_argument("--resume-data", default="", help="Optional remote converged data file to resume from instead of rebuilding from mesh.")
-    parser.add_argument("--resume-state-json", default="", help="Optional run-state JSON to resume from when no explicit resume pair is supplied.")
-    parser.add_argument("--resume-latest", action="store_true", help="Resume from the latest autosave or numbered checkpoint matching the output paths.")
+    parser.add_argument("--resume-case", default="", help="Optional remote case to load and extend instead of rebuilding from mesh. Fluent data/restart handling occurs outside this builder.")
     parser.add_argument(
         "--carrier-iterations",
         type=int,
         default=DEFAULT_CARRIER_ITERATIONS,
-        help="Iterations to run the setup 07 carrier field before enabling DPM when rebuilding from mesh. Default: 500.",
+        help="Retired client-side carrier iterations; must remain 0. Run the carrier field from Fluent with native autosave.",
     )
     parser.add_argument(
         "--setup-only",
         action="store_true",
         help="Build the mesh-based carrier setup and apply the 09a DPM/material/injection settings without initialization or any carrier iterations.",
     )
-    parser.add_argument("--output-case", default="", help="Optional remote final 09a case path to write after DPM setup and any later iterations.")
-    parser.add_argument("--output-data", default="", help="Optional remote final 09a data path to write with the output case.")
-    parser.add_argument("--initialized-case", default="", help="Optional remote case path to write immediately after initialization.")
-    parser.add_argument("--initialized-data", default="", help="Optional remote data path to write immediately after initialization.")
+    parser.add_argument("--output-case", default="", help="Remote case path to write after the case-only DPM setup.")
     parser.add_argument(
         "--injection-surface-role",
         choices=("steam_inlet", "liquid_inlet"),
@@ -106,9 +102,6 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--bottom-dpm-mode", choices=("trap", "reflect"), default=DEFAULT_BOTTOM_DPM_MODE, help="DPM fate on bottom collection wall. Default: trap.")
     parser.add_argument("--outlet-dpm-mode", choices=("escape", "trap"), default=DEFAULT_OUTLET_DPM_MODE, help="DPM fate on the steam outlet. Default: escape.")
     parser.add_argument("--snapshot-json", default="", help="Optional local JSON path to dump the planned 09a payload.")
-    parser.add_argument("--iterations", type=int, default=0, help="Optional iterations to run after the 09a DPM extension is applied. Default: 0.")
-    parser.add_argument("--report-interval", type=int, default=100, help="Console progress interval during iterations. Default: 100.")
-    parser.add_argument("--checkpoint-interval", type=int, default=1000, help="Overwrite a rolling autosave case/data checkpoint every N iterations. Default: 1000.")
     return parser
 
 
@@ -135,30 +128,18 @@ def build_dpm_plan(args: argparse.Namespace) -> dict[str, object]:
         "Main separator walls are treated as reflect by default to avoid silently counting all wall hits as separation.",
         "DPM is one-way only. Continuous-phase feedback stays disabled.",
         (
-            "When rebuilding from mesh, the setup 07 carrier field is iterated before DPM is applied."
-            if args.carrier_iterations > 0
-            else (
-                "When rebuilding from mesh in setup-only mode, DPM is applied before initialization and before any carrier iterations."
-                if args.setup_only
-                else "A converged setup 07 case/data pair should be supplied before applying DPM."
-            )
+            "When rebuilding from mesh, the case-only carrier and DPM setup is written before any Fluent-native initialization or iterations."
         ),
-        "No post-DPM iterations are planned." if args.iterations <= 0 else "Additional iterations are requested after the 09a DPM extension is applied.",
+        "No Python post-DPM iterations are planned; start any solve from Fluent with native autosave.",
     ]
     return {
         "setup_id": "09a",
         "lineage_parent": "07-pure-phase-split-actual-area",
         "target_mesh": args.target_mesh,
         "resume_case": args.resume_case,
-        "resume_data": args.resume_data,
         "carrier_iterations": args.carrier_iterations,
         "output_case": args.output_case,
-        "output_data": args.output_data,
-        "initialized_case": args.initialized_case,
-        "initialized_data": args.initialized_data,
-        "iterations": args.iterations,
-        "report_interval": args.report_interval,
-        "checkpoint_interval": args.checkpoint_interval,
+        "run_policy": "Fluent-native initialization, iteration, and autosave; no client-side Python loop",
         "carrier_field": {
             "solver": "pressure-based",
             "time": "steady",
@@ -187,8 +168,8 @@ def build_dpm_plan(args: argparse.Namespace) -> dict[str, object]:
         },
         "assumptions": assumptions,
         "user_inputs_still_needed": [
-            "Converged setup 07 case/data pair, or a remote .msh path plus carrier iterations",
-            "Final case/data output path(s)",
+            "A remote .msh path or an existing case-only setup case",
+            "A remote case output path",
             "Confirmation that droplets should be injected from the steam-side inlet",
             "Any alternative wall-fate interpretation for carryover accounting",
         ],
@@ -208,19 +189,11 @@ def main() -> int:
     run_config = CarrierRunConfig(
         target_mesh=args.target_mesh,
         resume_case=args.resume_case,
-        resume_data=args.resume_data,
-        resume_state_json=args.resume_state_json,
-        resume_latest=args.resume_latest,
         setup_only=args.setup_only,
         carrier_iterations=args.carrier_iterations,
     )
     checkpoint_config = CheckpointConfig(
         output_case=args.output_case,
-        output_data=args.output_data,
-        initialized_case=args.initialized_case,
-        initialized_data=args.initialized_data,
-        checkpoint_interval=args.checkpoint_interval,
-        report_interval=args.report_interval,
     )
     dpm_config = DpmConfig(
         particle_material=args.particle_material,
@@ -237,38 +210,18 @@ def main() -> int:
         outlet_dpm_mode=args.outlet_dpm_mode,
         one_way_coupling=True,
     )
-    require_setup09a_paths(run_config, checkpoint_config, args.iterations)
+    require_setup09a_paths(run_config, checkpoint_config, 0)
 
     solver = connect_with_env_suffix(args.server_id)
     print(f"\nConnected to Fluent {solver.get_fluent_version()}")
 
-    try:
-        result = run_setup09a_dpm_extension_recipe(
-            solver,
-            run_config,
-            checkpoint_config,
-            dpm_config,
-            post_dpm_iterations=args.iterations,
-        )
-    except RunInterrupted as exc:
-        print_header("Interrupt Save")
-        print(
-            "Keyboard interrupt received. Saving current solver state so it can be resumed "
-            f"from {args.output_case} and {args.output_data}."
-        )
-        persistence = RunPersistence(
-            output_case=args.output_case,
-            output_data=args.output_data,
-            checkpoint_interval=args.checkpoint_interval,
-            report_interval=args.report_interval,
-        )
-        persistence.record_interrupt(
-            solver,
-            completed_iterations=exc.completed_iterations,
-            allow_case_only=False,
-        )
-        print(f"\nPaused run saved after approximately {exc.completed_iterations} completed iterations.")
-        return 130
+    result = run_setup09a_dpm_extension_recipe(
+        solver,
+        run_config,
+        checkpoint_config,
+        dpm_config,
+        post_dpm_iterations=0,
+    )
 
     payload = {
         "plan": plan,

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Shared file IO and persistence helpers for Fluent setup scripts."""
+"""Shared file IO helpers for Fluent setup and offline recovery scripts."""
 
 from __future__ import annotations
 
@@ -44,22 +44,6 @@ def load_resume_case_data(solver, case_path: str, data_path: str) -> None:
         raise RuntimeError("Could not read resume case")
     if not try_action("read_resume_data", lambda: solver.settings.file.read_data(file_name=data_path)):
         raise RuntimeError("Could not read resume data")
-
-
-def checkpoint_paths(path_text: str, iteration: int) -> str:
-    if path_text.endswith(".cas.h5"):
-        return path_text[:-7] + f"-iter{iteration}.cas.h5"
-    if path_text.endswith(".dat.h5"):
-        return path_text[:-7] + f"-iter{iteration}.dat.h5"
-    return path_text + f"-iter{iteration}"
-
-
-def rolling_autosave_path(path_text: str) -> str:
-    if path_text.endswith(".cas.h5"):
-        return path_text[:-7] + "-autosave.cas.h5"
-    if path_text.endswith(".dat.h5"):
-        return path_text[:-7] + "-autosave.dat.h5"
-    return path_text + "-autosave"
 
 
 def write_case_only(solver, case_file: str, label: str) -> None:

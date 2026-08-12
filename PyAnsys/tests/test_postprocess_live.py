@@ -1,12 +1,15 @@
 from __future__ import annotations
 
+import json
 import unittest
 
 from pyansys_fluent.postprocess_live import (
+    build_case_identity,
     build_dpm_sample_tui_command,
     calculate_carrier_metrics,
     capture_residual_history,
     compile_postprocess_result,
+    determine_claim_class_ceiling,
     infer_phase_domain_map,
     parse_dpm_sample_output,
     render_markdown_report,
@@ -51,6 +54,44 @@ class PostprocessLiveTests(unittest.TestCase):
         self.assertEqual(payload["iterations"], [10, 11])
         self.assertTrue(solver.monitors.started)
         self.assertTrue(solver.monitors.stopped)
+
+    def test_case_identity_does_not_fall_back_to_connection_metadata(self) -> None:
+        identity = build_case_identity(
+            {
+                "load_mode": "already-loaded-session",
+                "server_id": "3",
+                "case_file": r"C:\\wrong-default.cas.h5",
+                "data_file": r"C:\\wrong-default.dat.h5",
+            }
+        )
+
+        self.assertEqual(identity["status"], "unavailable")
+        self.assertIsNone(identity["case_file"])
+        self.assertIsNone(identity["data_file"])
+        self.assertIn("no server-id", identity["warnings"][0])
+
+    def test_explicit_case_data_load_is_verified_identity(self) -> None:
+        identity = build_case_identity(
+            {
+                "load_mode": "paired-read_case_data",
+                "case_file": r"C:\\case.cas.h5",
+                "data_file": r"C:\\case.dat.h5",
+            }
+        )
+
+        self.assertEqual(identity["status"], "verified")
+        self.assertEqual(identity["case_file"], r"C:\\case.cas.h5")
+        self.assertEqual(identity["data_file"], r"C:\\case.dat.h5")
+
+    def test_unavailable_case_identity_caps_claims_at_debug_only(self) -> None:
+        result = {
+            "source": {"case_identity": {"status": "unavailable"}},
+            "carrier_fluxes": {"available": True},
+            "carrier_metrics": {"eta_phase": 0.99, "mass_imbalance_ratio": 0.0},
+            "dpm_inventory": {"result_fields_available": True},
+        }
+
+        self.assertEqual(determine_claim_class_ceiling(result), "Debug only")
 
     def test_infer_phase_domain_map_from_material_names(self) -> None:
         models_state = {
@@ -113,7 +154,6 @@ class PostprocessLiveTests(unittest.TestCase):
 
     def test_compile_and_render_report(self) -> None:
         result = compile_postprocess_result(
-            server_id="2",
             run_label="TwoPhaseInletV2(Purnanto)-25-05000",
             load_summary={
                 "case_file": r"C:\case.cas.h5",
@@ -206,6 +246,9 @@ class PostprocessLiveTests(unittest.TestCase):
         markdown = render_markdown_report(result)
 
         self.assertEqual(result["claim_class_ceiling"], "Numerically verified")
+        self.assertEqual(result["source"]["case_identity"]["status"], "verified")
+        self.assertNotIn("server_id", json.dumps(result, default=str))
+        self.assertNotIn("Server id", markdown)
         self.assertIn("562 um, 844 um, 1631 um", "\n".join(result["limitations"]))
         self.assertIn("## Carrier Flux Metrics", markdown)
         self.assertIn("## Per-Injection DPM Sample", markdown)

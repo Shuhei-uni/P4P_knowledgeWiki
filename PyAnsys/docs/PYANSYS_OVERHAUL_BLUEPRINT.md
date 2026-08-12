@@ -49,7 +49,7 @@ Every non-trivial Fluent mutation should follow this sequence:
 - `src/pyansys_fluent/setup_io.py`
   Purpose: mesh/case/data loading and case/data write behavior
 - `src/pyansys_fluent/setup_run.py`
-  Purpose: initialization, iteration, checkpointing, and interrupt-aware run control
+  Purpose: setup-side initialization helper only; long iteration and checkpoint control are owned by Fluent
 - `src/pyansys_fluent/setup_discovery.py`
   Purpose: boundary-role detection, conversion, and compact boundary summaries
 - `src/pyansys_fluent/setup_carrier.py`
@@ -59,7 +59,15 @@ Every non-trivial Fluent mutation should follow this sequence:
 - `src/pyansys_fluent/setup_recipes.py`
   Purpose: ordered setup07/setup09a orchestration recipes and small config dataclasses
 - `scripts/setup/setup07_rebuild_run.py`, `scripts/setup/setup09a_dpm_split_inlet_carryover.py`, `scripts/setup/setup_vof_ewf_from_existing_case.py`, `scripts/setup/rebuild_setup_from_reference_case.py`
-  Purpose: case-specific orchestration only
+  Purpose: case-specific setup orchestration only; no client-owned iteration loops
+
+## Native run boundary
+
+Long simulation execution is intentionally outside the Python orchestration
+layer. Fluent's own calculation activity, autosave, and retained-file controls
+must be configured before a run is started. Python may prepare those settings
+and later reconnect for read-only monitoring or recovery, but it must not be
+required to send the next iteration block or checkpoint.
 
 ## Failure routing
 

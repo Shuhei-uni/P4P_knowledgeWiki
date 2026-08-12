@@ -2,8 +2,8 @@
 
 ## Setup link and run identity
 
-- Setup definition: [010V2b — EWF Edge-Separation Sensitivity](../../active/010V2b-ewf-edge-separation.md)
-- Parent setup: [010V2 — EWF deposition and film-inventory control](../../active/010V2-ewf-deposition-film-inventory.md)
+- Setup definition: [010V2b — EWF Edge-Separation Sensitivity](../../past/reported/010V2b-ewf-edge-separation.md)
+- Parent setup: [010V2 — EWF deposition and film-inventory control](../../past/reported/010V2-ewf-deposition-film-inventory.md)
 - Fluent server and version: server `1`, `Ansys Fluent 2025 R2`
 - Analysis date: `2026-07-22`
 - Case/data state: analysis used the already-loaded session. The read-only workflow did not expose the case/data filenames.

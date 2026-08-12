@@ -2,8 +2,8 @@
 
 ## Setup link and run identity
 
-- Setup definition: [010V2a — EWF Splash Sensitivity](../../active/010V2a-ewf-splash.md)
-- Parent setup: [010V2 — EWF deposition and film-inventory control](../../active/010V2-ewf-deposition-film-inventory.md)
+- Setup definition: [010V2a — EWF Splash Sensitivity](../../past/reported/010V2a-ewf-splash.md)
+- Parent setup: [010V2 — EWF deposition and film-inventory control](../../past/reported/010V2-ewf-deposition-film-inventory.md)
 - Fluent server and version: server `2`, `Ansys Fluent 2024 R2`
 - Analysis date: `2026-07-22`
 - Case/data state: the analysis used the already-loaded session; Fluent did not expose case/data filenames through this read-only workflow. The residual history spans monitor iterations `4`–`1963`.

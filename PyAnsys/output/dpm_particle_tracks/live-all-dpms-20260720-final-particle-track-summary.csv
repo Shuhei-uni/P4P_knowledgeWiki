@@ -1,7 +1,0 @@
-index,diameter_um,injection,material,particle_type,status,tracked,escaped,aborted,trapped,incomplete,evaporated,injected,inserted,failure_category,error
-0,5.629999999999999,injection-5-micron,water-liquid,inert,ok,2170,1,0,851,1318,0,0,0,,
-1,28.14,injection-28-micron,water-liquid,inert,ok,2170,0,0,1010,1160,0,0,0,,
-2,56.26999999999999,injection-56-micron,water-liquid,inert,ok,2170,0,0,1160,1010,0,0,0,,
-3,112.54,injection-112-micron,water-liquid,inert,ok,2170,0,0,1301,869,0,0,0,,
-4,168.811,injection-168-micron,water-liquid,inert,ok,2170,0,0,1415,755,0,0,0,,
-5,348.88,injection-348-micron,water-liquid,inert,ok,2170,0,0,1621,549,0,0,0,,

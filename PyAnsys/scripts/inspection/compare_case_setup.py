@@ -109,7 +109,6 @@ def render_markdown(payload: dict[str, Any]) -> str:
     lines = [
         "# Read-Only Fluent Setup Difference Audit",
         "",
-        f"- Server id: `{payload['server_id']}`",
         f"- Base case: `{payload['base_case']}`",
         f"- Candidate case: `{payload['candidate_case']}`",
         "- Data files: none loaded; this is a case-setup comparison only.",
@@ -155,7 +154,6 @@ def main() -> int:
             differences.append(row)
 
     payload = {
-        "server_id": str(args.server_id),
         "base_case": args.base_case,
         "candidate_case": args.candidate_case,
         "base_snapshot": base,

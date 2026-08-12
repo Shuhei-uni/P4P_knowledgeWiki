@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""Temporary PyFluent reconstruction of a Purnanto-style one-inlet setup.
+"""Build a case-only PyFluent reconstruction of a Purnanto-style setup.
 
 This script aims for a practical near-baseline recreation on the user's local
-mesh, not a claim of exact paper parity.
+mesh, not a claim of exact paper parity. It prepares the Fluent setup and then
+stops at a case write; initialization, iteration, and autosave belong to
+Fluent's native controls after this script returns.
 """
 
 from __future__ import annotations
@@ -21,11 +23,7 @@ DEFAULT_MESH = (
 )
 DEFAULT_OUTPUT_CASE = (
     r"C:\Users\Shuhei Yokkaichi\Documents\CFD\Trial extended outlet pipe"
-    r"\Major Files\trial4-purnanto-recon-500.cas.h5"
-)
-DEFAULT_OUTPUT_DATA = (
-    r"C:\Users\Shuhei Yokkaichi\Documents\CFD\Trial extended outlet pipe"
-    r"\Major Files\trial4-purnanto-recon-500.dat.h5"
+    r"\Major Files\trial4-purnanto-recon.cas.h5"
 )
 DEFAULT_LOG_FILE = (
     r"C:\Users\Shuhei Yokkaichi\Documents\CFD\Trial extended outlet pipe"
@@ -47,12 +45,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--output-case",
         default=DEFAULT_OUTPUT_CASE,
-        help="Local case path to write after setup. Use empty string to skip write.",
-    )
-    parser.add_argument(
-        "--output-data",
-        default=DEFAULT_OUTPUT_DATA,
-        help="Local data path to write after setup. Use empty string to skip write.",
+        help="Local case-only path to write after setup.",
     )
     parser.add_argument(
         "--log-file",
@@ -64,24 +57,6 @@ def build_parser() -> argparse.ArgumentParser:
         type=int,
         default=2,
         help="Requested Fluent processor count. Default: 2.",
-    )
-    parser.add_argument(
-        "--iterations",
-        type=int,
-        default=500,
-        help="Controlled diagnostic iteration count after hybrid initialization. Default: 500.",
-    )
-    parser.add_argument(
-        "--report-interval",
-        type=int,
-        default=50,
-        help="Chunk size between diagnostic reports. Default: 50.",
-    )
-    parser.add_argument(
-        "--checkpoint-interval",
-        type=int,
-        default=250,
-        help="Checkpoint interval for intermediate case/data writes. Default: 250.",
     )
     return parser
 
@@ -360,128 +335,7 @@ def set_solution_methods(solver) -> None:
     print("methods_state_after:", methods.get_state())
 
 
-def report_flux_sanity(
-    solver,
-    inlet_name: str | None,
-    outlet_name: str | None,
-    *,
-    iteration_count: int | None = None,
-    log_file: str = "",
-) -> dict[str, dict[str, float]] | None:
-    title = "Flux Sanity Checks" if iteration_count is None else f"Flux Sanity Checks @ {iteration_count} Iterations"
-    print_header(title)
-    if inlet_name is None or outlet_name is None:
-        print("flux_sanity: SKIPPED -> inlet or outlet boundary missing")
-        return None
-
-    fluxes = solver.settings.results.report.fluxes
-    if not fluxes.is_active():
-        print("flux_sanity: SKIPPED -> report.fluxes not active")
-        return None
-
-    zones = [inlet_name, outlet_name]
-    results: dict[str, dict[str, float]] = {}
-    for domain in ("mixture", "phase-1", "phase-2"):
-        try:
-            result = fluxes.get_mass_flow(domain=domain, zones=zones)
-            print(f"{domain}_mass_flow: {result}")
-            results[domain] = {key: float(value) for key, value in result.items()}
-        except Exception as exc:
-            print(f"{domain}_mass_flow: FAILED -> {exc}")
-            return None
-
-    phase1_inlet = results["phase-1"].get(inlet_name, 0.0)
-    phase1_outlet = results["phase-1"].get(outlet_name, 0.0)
-    phase2_inlet = results["phase-2"].get(inlet_name, 0.0)
-    phase2_outlet = results["phase-2"].get(outlet_name, 0.0)
-    vapor_recovery_ratio = abs(phase1_outlet) / phase1_inlet if phase1_inlet else float("nan")
-    liquid_carryover_ratio = abs(phase2_outlet) / phase2_inlet if phase2_inlet else float("nan")
-    interpreted = {
-        "iteration": float(iteration_count) if iteration_count is not None else float("nan"),
-        "mixture_net": results["mixture"].get("Net", float("nan")),
-        "phase1_inlet": phase1_inlet,
-        "phase1_outlet": phase1_outlet,
-        "phase2_inlet": phase2_inlet,
-        "phase2_outlet": phase2_outlet,
-        "vapor_recovery_ratio": vapor_recovery_ratio,
-        "liquid_carryover_ratio": liquid_carryover_ratio,
-    }
-    interpreted_line = (
-        f"iteration={iteration_count if iteration_count is not None else 'final'} | "
-        f"mixture_net={interpreted['mixture_net']:.6f} | "
-        f"phase1_in={phase1_inlet:.6f} | phase1_out={phase1_outlet:.6f} | "
-        f"phase2_in={phase2_inlet:.6f} | phase2_out={phase2_outlet:.6e} | "
-        f"vapor_recovery_ratio={vapor_recovery_ratio:.6f} | "
-        f"liquid_carryover_ratio={liquid_carryover_ratio:.6e}"
-    )
-    print("interpreted_summary:", interpreted_line)
-    append_log_line(log_file, interpreted_line)
-    return results
-
-
-def checkpoint_write(solver, output_case: str, output_data: str, iteration_count: int) -> None:
-    if not output_case.strip() or not output_data.strip():
-        return
-    case_path = Path(output_case)
-    data_path = Path(output_data)
-    checkpoint_case = case_path.with_name(f"{case_path.stem}-iter{iteration_count}{case_path.suffix}")
-    checkpoint_data = data_path.with_name(f"{data_path.stem}-iter{iteration_count}{data_path.suffix}")
-    try_settings_call(
-        f"write_checkpoint_case_{iteration_count}",
-        lambda: solver.settings.file.write_case(file_name=str(checkpoint_case)),
-    )
-    try_settings_call(
-        f"write_checkpoint_data_{iteration_count}",
-        lambda: solver.settings.file.write_data(file_name=str(checkpoint_data)),
-    )
-
-
-def run_hybrid_init_and_diagnostic_iterations(
-    solver,
-    iterations: int,
-    report_interval: int,
-    checkpoint_interval: int,
-    inlet_name: str | None,
-    outlet_name: str | None,
-    output_case: str,
-    output_data: str,
-    log_file: str,
-) -> dict[str, dict[str, float]] | None:
-    print_header("Initialization And Diagnostic Run")
-    try_settings_call(
-        "hybrid_initialize",
-        lambda: solver.tui.solve.initialize.hyb_initialization(),
-        critical=True,
-    )
-    if iterations <= 0:
-        print("iterate: SKIPPED")
-        return report_flux_sanity(solver, inlet_name, outlet_name, iteration_count=0, log_file=log_file)
-
-    completed = 0
-    latest_report: dict[str, dict[str, float]] | None = None
-    chunk_size = max(1, report_interval)
-    checkpoint_step = max(0, checkpoint_interval)
-    while completed < iterations:
-        step = min(chunk_size, iterations - completed)
-        try_settings_call(
-            f"iterate_chunk_{completed + step}",
-            lambda step=step: solver.tui.solve.iterate(step),
-            critical=True,
-        )
-        completed += step
-        latest_report = report_flux_sanity(
-            solver,
-            inlet_name,
-            outlet_name,
-            iteration_count=completed,
-            log_file=log_file,
-        )
-        if checkpoint_step > 0 and completed < iterations and completed % checkpoint_step == 0:
-            checkpoint_write(solver, output_case, output_data, completed)
-    return latest_report
-
-
-def write_outputs_if_requested(solver, output_case: str, output_data: str) -> None:
+def write_case_only(solver, output_case: str) -> None:
     if output_case.strip():
         output_case_path = Path(output_case)
         output_case_path.parent.mkdir(parents=True, exist_ok=True)
@@ -492,17 +346,6 @@ def write_outputs_if_requested(solver, output_case: str, output_data: str) -> No
         )
     else:
         raise RuntimeError("write_case path missing")
-
-    if output_data.strip():
-        output_data_path = Path(output_data)
-        output_data_path.parent.mkdir(parents=True, exist_ok=True)
-        try_settings_call(
-            "write_data",
-            lambda: solver.settings.file.write_data(file_name=str(output_data_path)),
-            critical=True,
-        )
-    else:
-        raise RuntimeError("write_data path missing")
 
 
 def main() -> int:
@@ -554,26 +397,13 @@ def main() -> int:
         set_operating_conditions(solver)
         configure_inlet_and_outlet(solver, inlet_name, outlet_name)
         set_solution_methods(solver)
-        final_flux_report = run_hybrid_init_and_diagnostic_iterations(
-            solver,
-            args.iterations,
-            args.report_interval,
-            args.checkpoint_interval,
-            inlet_name,
-            outlet_name,
-            args.output_case,
-            args.output_data,
-            args.log_file,
-        )
 
         print_header("Configuration Snapshot")
         print(solver.tui.file.show_configuration())
 
-        write_outputs_if_requested(solver, args.output_case, args.output_data)
-        if final_flux_report is not None:
-            append_log_line(args.log_file, f"final_output_case={args.output_case}")
-            append_log_line(args.log_file, f"final_output_data={args.output_data}")
-        print("\nRECONSTRUCTION_SCRIPT_FINISHED")
+        write_case_only(solver, args.output_case)
+        append_log_line(args.log_file, f"case_only_output={args.output_case}")
+        print("\nCASE_ONLY_RECONSTRUCTION_FINISHED")
         return 0
     except Exception as exc:
         print(f"RECONSTRUCTION_SCRIPT_FAILED: {type(exc).__name__}: {exc}")

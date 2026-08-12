@@ -1,4 +1,0 @@
-===== injection-5-micron =====
-/display/particle-tracks particle-tracks particle-diameter 
-Error: invalid command
-Error Object: "particle-diameter"

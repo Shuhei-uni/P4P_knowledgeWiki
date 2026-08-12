@@ -18,10 +18,12 @@
 - `../../Setups/past/archived/08a-steam-outlet-extension-student-trial.md`
 - `../../Setups/past/archived/08-purnanto-one-inlet-massflow-recreation.md`
 - `../../Setups/past/reported/08b-purnanto-parity-split-inlet-rebuild.md`
-- `../../Setups/active/08c-purnanto-parity-inlet-velocity-sensitivity.md`
+- `../../Setups/past/reported/08c-purnanto-parity-inlet-velocity-sensitivity.md`
 - `../../Setups/past/reported/09c-dpm-ewf-wall-film-reentrainment.md`
-- `../../Setups/active/09cV2-skoog-partition-injection-control.md`
-- `../../Setups/active/index.md` — canonical list for the complete active `010V2` family.
+- `../../Setups/past/reported/09cV2-skoog-partition-injection-control.md`
+- `../../Setups/active/09cV3-fine-mist-5pct-psd-rerun.md`
+- `../../Setups/past/reported/index.md` — canonical list for reported `010V2` diagnostic records.
+- `../../Setups/future/12-carrier-mesh-convergence-plan.md` — controlled `0.4M` / `0.9M` / `1.309M` / `1.6M`-node carrier-field verification plan.
 - `../../Setups/reports/index.md`
 
 ## Progress Layer

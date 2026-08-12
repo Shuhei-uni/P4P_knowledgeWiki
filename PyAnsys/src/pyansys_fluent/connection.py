@@ -43,6 +43,21 @@ def env_suffix(server_id: str | int | None) -> str:
     return str(server_id).strip()
 
 
+def endpoint_env_namespace(server_id: str | int | None) -> tuple[str, str, str]:
+    """Return display label, environment prefix, and numeric suffix for an endpoint.
+
+    ``student`` is a named routing alias for the Windows Student Edition pool.
+    It reads ``STUDENT_*`` variables directly, while all existing numeric aliases
+    retain their ``FLUENT_*`` variable names and suffixes.
+    """
+
+    normalized = str(server_id or "1").strip().lower()
+    if normalized == "student":
+        return "student", "STUDENT", ""
+    suffix = env_suffix(server_id)
+    return suffix or "1", "FLUENT", suffix
+
+
 def _launch_local_fluent(
     *,
     suffix: str,
@@ -141,16 +156,28 @@ def connect(server_id: str | int | None = None):
     load_dotenv(_ENV_FILE)
     import ansys.fluent.core as pyfluent
 
-    suffix = env_suffix(server_id)
+    label, env_prefix, suffix = endpoint_env_namespace(server_id)
+    server_info_key = f"{env_prefix}_SERVER_INFO_FILE{suffix}"
+    ip_key = f"{env_prefix}_IP{suffix}"
+    port_key = f"{env_prefix}_PORT{suffix}"
+    password_key = f"{env_prefix}_PASSWORD{suffix}"
+    local_exe_key = f"{env_prefix}_LOCAL_EXE{suffix}"
+    allow_remote_host_key = f"{env_prefix}_ALLOW_REMOTE_HOST{suffix}"
+    insecure_mode_key = f"{env_prefix}_INSECURE_MODE{suffix}"
 
-    server_info = os.getenv(f"FLUENT_SERVER_INFO_FILE{suffix}", "").strip()
-    ip = os.getenv(f"FLUENT_IP{suffix}", "").strip()
-    port = os.getenv(f"FLUENT_PORT{suffix}", "").strip()
-    password = os.getenv(f"FLUENT_PASSWORD{suffix}", "").strip()
-    local_exe = os.getenv(f"FLUENT_LOCAL_EXE{suffix}", "").strip()
-    allow_remote_host = bool_env(f"FLUENT_ALLOW_REMOTE_HOST{suffix}", bool_env("FLUENT_ALLOW_REMOTE_HOST", True))
-    insecure_mode = bool_env(f"FLUENT_INSECURE_MODE{suffix}", bool_env("FLUENT_INSECURE_MODE", False))
-    label = suffix or "1"
+    server_info = os.getenv(server_info_key, "").strip()
+    ip = os.getenv(ip_key, "").strip()
+    port = os.getenv(port_key, "").strip()
+    password = os.getenv(password_key, "").strip()
+    local_exe = os.getenv(local_exe_key, "").strip()
+    allow_remote_host = bool_env(
+        allow_remote_host_key,
+        bool_env("FLUENT_ALLOW_REMOTE_HOST", True),
+    )
+    insecure_mode = bool_env(
+        insecure_mode_key,
+        bool_env("FLUENT_INSECURE_MODE", False),
+    )
 
     common = {
         "allow_remote_host": allow_remote_host,
@@ -168,15 +195,24 @@ def connect(server_id: str | int | None = None):
 
     if not (ip and port and password):
         if local_exe:
+            if env_prefix != "FLUENT":
+                raise RuntimeError(
+                    f"Local launch is not supported for the named {label!r} endpoint. "
+                    "Use a numbered FLUENT_* endpoint for FLUENT_LOCAL_EXE."
+                )
             return _launch_local_fluent(
                 suffix=suffix,
                 insecure_mode=insecure_mode,
             )
+        local_launch_note = (
+            f" Or set {local_exe_key} for local manual launch."
+            if env_prefix == "FLUENT"
+            else ""
+        )
         raise RuntimeError(
             f"Missing connection details for Fluent server {label}. Set either "
-            f"FLUENT_SERVER_INFO_FILE{suffix} or FLUENT_IP{suffix}, "
-            f"FLUENT_PORT{suffix}, and FLUENT_PASSWORD{suffix} in .env. "
-            f"Or set FLUENT_LOCAL_EXE{suffix} for local manual launch."
+            f"{server_info_key} or {ip_key}, {port_key}, and {password_key} in .env."
+            f"{local_launch_note}"
         )
 
     print(f"Connecting to Fluent server {label} using IP/port: {ip}:{port}")
@@ -195,6 +231,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--server-id",
         default="1",
-        help="Configured Fluent server id to use. Use 1 for FLUENT_IP, 2 for FLUENT_IP2, 3 for FLUENT_IP3, 4 for FLUENT_IP4.",
+        help=(
+            "Connection alias selecting the configured Fluent endpoint. "
+            "It does not identify the case loaded in that session. "
+            "Use 1 for FLUENT_IP, 2 for FLUENT_IP2, 3 for FLUENT_IP3, "
+            "4 for FLUENT_IP4, or student for STUDENT_IP."
+        ),
     )
     return parser

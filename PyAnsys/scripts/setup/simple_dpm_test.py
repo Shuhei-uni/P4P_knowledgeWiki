@@ -85,7 +85,6 @@ def main() -> int:
     load_dotenv()
     strict = args.fail_fast
     summary: dict[str, object] = {
-        "server_id": args.server_id,
         "target_mesh": args.target_mesh,
         "output_case": args.output_case,
         "strict": strict,

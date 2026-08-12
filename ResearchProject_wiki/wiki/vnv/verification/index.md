@@ -14,3 +14,4 @@ Typical contents:
 ## Planned Reports
 - `07-verification-baseline.md`
 - `07-verification-mesh-family.md`
+- [12 carrier-field mesh-convergence plan](../../../../Setups/future/12-carrier-mesh-convergence-plan.md): planned four-level comparison; create the numerical report only after the mesh statistics and common output pack are captured.

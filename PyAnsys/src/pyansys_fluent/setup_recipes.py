@@ -8,10 +8,8 @@ from collections.abc import Mapping
 from typing import Any
 
 from pyansys_fluent.common import safe_get_state, try_action
-from pyansys_fluent.run_persistence import RunPersistence, discover_latest_resume_source
 from pyansys_fluent.setup_common import print_header, summarize_boundary_state
-from pyansys_fluent.setup_io import load_resume_case_data, load_target_mesh, write_case_data_pair
-from pyansys_fluent.setup_run import RunInterrupted, initialize_case, iterate_case
+from pyansys_fluent.setup_io import load_case_only, load_target_mesh, write_case_only
 from pyansys_fluent.setup_discovery import (
     build_compact_boundary_summary,
     build_target_role_map,
@@ -50,22 +48,12 @@ from pyansys_fluent.setup_dpm import (
 @dataclass(frozen=True)
 class CheckpointConfig:
     output_case: str
-    output_data: str = ""
-    initialized_case: str = ""
-    initialized_data: str = ""
-    checkpoint_interval: int = 1000
-    report_interval: int = 100
-    state_json: str = ""
-    keep_history: bool = True
 
 
 @dataclass(frozen=True)
 class CarrierRunConfig:
     target_mesh: str = ""
     resume_case: str = ""
-    resume_data: str = ""
-    resume_state_json: str = ""
-    resume_latest: bool = False
     setup_only: bool = False
     carrier_iterations: int = 0
 
@@ -88,12 +76,8 @@ class DpmConfig:
 
 
 def require_setup07_paths(run_config: CarrierRunConfig) -> None:
-    has_resume = bool(run_config.resume_case or run_config.resume_data or run_config.resume_state_json or run_config.resume_latest)
-    if has_resume and not (run_config.resume_case and run_config.resume_data):
-        if not (run_config.resume_state_json or run_config.resume_latest):
-            raise ValueError("Both --resume-case and --resume-data are required for resume mode")
-    if not has_resume and not run_config.target_mesh:
-        raise ValueError("--target-mesh is required unless --resume-case/--resume-data are provided")
+    if not run_config.target_mesh:
+        raise ValueError("--target-mesh is required for a case-only setup 07 build")
 
 
 def require_setup09a_paths(
@@ -101,32 +85,21 @@ def require_setup09a_paths(
     checkpoint_config: CheckpointConfig,
     post_dpm_iterations: int,
 ) -> None:
-    has_resume = bool(run_config.resume_case or run_config.resume_data or run_config.resume_state_json or run_config.resume_latest)
-    if has_resume and not (run_config.resume_case and run_config.resume_data):
-        if not (run_config.resume_state_json or run_config.resume_latest):
-            raise RuntimeError("Both --resume-case and --resume-data are required for resume mode.")
-    if not has_resume and not run_config.target_mesh:
-        raise RuntimeError("--target-mesh is required with --apply unless resume files are provided.")
-    if not has_resume and not run_config.setup_only and run_config.carrier_iterations <= 0:
+    if post_dpm_iterations > 0:
         raise RuntimeError(
-            "09a is defined as a post-convergence DPM extension of setup 07. "
-            "Provide --resume-case/--resume-data, a positive --carrier-iterations value, or use --setup-only."
+            "Client-side Python iteration has been removed. Start the simulation from Fluent "
+            "or a Fluent-native journal after the case-only setup is written."
         )
-    if bool(checkpoint_config.output_case) ^ bool(checkpoint_config.output_data):
-        raise RuntimeError("--output-case and --output-data must be provided together.")
-    if bool(checkpoint_config.initialized_case) ^ bool(checkpoint_config.initialized_data):
-        raise RuntimeError("--initialized-case and --initialized-data must be provided together.")
-    if not has_resume and (run_config.setup_only or run_config.carrier_iterations > 0) and not (
-        checkpoint_config.output_case and checkpoint_config.output_data
-    ):
+    if run_config.carrier_iterations > 0:
         raise RuntimeError(
-            "--output-case and --output-data are required when rebuilding from mesh so "
-            "mesh-based checkpoints and the final 09a case have a destination."
+            "Client-side Python carrier iteration has been removed. Build the case-only setup "
+            "and run the carrier field from Fluent with native autosave."
         )
-    if post_dpm_iterations > 0 and not (checkpoint_config.output_case and checkpoint_config.output_data):
+    if not run_config.resume_case and not run_config.target_mesh:
+        raise RuntimeError("--target-mesh is required with --apply unless --resume-case is provided.")
+    if not checkpoint_config.output_case:
         raise RuntimeError(
-            "--output-case and --output-data are required when --iterations > 0 "
-            "so interrupt/final saves have a destination."
+            "--output-case is required so the case-only setup has a destination."
         )
 
 
@@ -218,66 +191,30 @@ def run_setup07_carrier_recipe(
     iterations: int,
     skip_run: bool,
 ) -> dict[str, Any]:
+    """Build and save setup 07 as a case-only Fluent artifact.
+
+    The historical function name is retained for CLI compatibility. It no
+    longer initializes, iterates, resumes data, or writes client-side
+    checkpoints. Long runs are started from Fluent after this function returns.
+    """
+
     require_setup07_paths(run_config)
-    role_map: dict[str, str] | None = None
-    persistence = RunPersistence(
-        output_case=checkpoint_config.output_case,
-        output_data=checkpoint_config.output_data,
-        checkpoint_interval=checkpoint_config.checkpoint_interval,
-        report_interval=checkpoint_config.report_interval,
-        state_json=checkpoint_config.state_json,
-        keep_history=checkpoint_config.keep_history,
-    )
-
-    resume_mode = bool(
-        run_config.resume_case
-        or run_config.resume_data
-        or run_config.resume_state_json
-        or run_config.resume_latest
-    )
-    if resume_mode:
-        resume_source = discover_latest_resume_source(
-            checkpoint_config.output_case,
-            checkpoint_config.output_data,
-            resume_case=run_config.resume_case,
-            resume_data=run_config.resume_data,
-            resume_state_json=run_config.resume_state_json or checkpoint_config.state_json,
+    if iterations > 0:
+        raise RuntimeError(
+            "Python iteration has been removed from setup recipes. Use Fluent-native "
+            "initialization, Run Calculation, and autosave after the case-only build."
         )
-        if not resume_source.is_available:
-            raise RuntimeError("Resume mode was requested but no usable case/data pair was found.")
-        load_resume_case_data(solver, resume_source.case_path, resume_source.data_path)
-        completed_before_this_run = resume_source.completed_iterations
-    else:
-        completed_before_this_run = 0
-        load_target_mesh(solver, run_config.target_mesh)
-        role_map = apply_setup07_carrier_from_mesh(solver)
-        initialize_case(solver)
-        if checkpoint_config.initialized_case and checkpoint_config.initialized_data:
-            write_case_data_pair(
-                solver,
-                checkpoint_config.initialized_case,
-                checkpoint_config.initialized_data,
-                "write_initialized_case_data",
-            )
-
-    run_iterations = 0 if skip_run else iterations
-    iterate_case(
-        solver,
-        run_iterations,
-        checkpoint_config.report_interval,
-        checkpoint_config.checkpoint_interval,
-        checkpoint_config.output_case,
-        checkpoint_config.output_data,
-        starting_completed_iterations=completed_before_this_run,
-        persistence=persistence,
-    )
-    persistence.record_final(
-        solver,
-        completed_iterations=completed_before_this_run + run_iterations,
-        total_iterations=completed_before_this_run + iterations,
-        allow_case_only=False,
-    )
-    return {"role_map": role_map or {}}
+    if run_config.resume_case:
+        raise RuntimeError(
+            "Python resume orchestration has been removed. Load the case/data checkpoint "
+            "from Fluent and resume with Fluent-native autosave."
+        )
+    load_target_mesh(solver, run_config.target_mesh)
+    role_map = apply_setup07_carrier_from_mesh(solver)
+    if not checkpoint_config.output_case:
+        raise RuntimeError("An output case path is required for a case-only setup build.")
+    write_case_only(solver, checkpoint_config.output_case, "write_setup07_case_only")
+    return {"role_map": role_map}
 
 
 def apply_09a_dpm_extension_recipe(
@@ -336,35 +273,15 @@ def run_setup09a_dpm_extension_recipe(
     *,
     post_dpm_iterations: int,
 ) -> dict[str, Any]:
+    """Build setup 09a as a case-only artifact; never run iterations."""
+
     require_setup09a_paths(run_config, checkpoint_config, post_dpm_iterations)
     injections: Mapping[str, Any] = {}
-    persistence = RunPersistence(
-        output_case=checkpoint_config.output_case,
-        output_data=checkpoint_config.output_data,
-        checkpoint_interval=checkpoint_config.checkpoint_interval,
-        report_interval=checkpoint_config.report_interval,
-        state_json=checkpoint_config.state_json,
-        keep_history=checkpoint_config.keep_history,
-    )
-
-    resume_mode = bool(
-        run_config.resume_case
-        or run_config.resume_data
-        or run_config.resume_state_json
-        or run_config.resume_latest
-    )
+    resume_mode = bool(run_config.resume_case)
     if resume_mode:
-        resume_source = discover_latest_resume_source(
-            checkpoint_config.output_case,
-            checkpoint_config.output_data,
-            resume_case=run_config.resume_case,
-            resume_data=run_config.resume_data,
-            resume_state_json=run_config.resume_state_json or checkpoint_config.state_json,
-        )
-        if not resume_source.is_available:
-            raise RuntimeError("Resume mode was requested but no usable case/data pair was found.")
-        load_resume_case_data(solver, resume_source.case_path, resume_source.data_path)
-        completed_before_this_run = resume_source.completed_iterations
+        if not run_config.resume_case:
+            raise RuntimeError("A case path is required when preparing from an existing setup.")
+        load_case_only(solver, run_config.resume_case, label="Load Existing Setup Case")
         boundary_state = safe_get_state(solver.settings.setup.boundary_conditions, "resume_boundary_conditions")
         if not isinstance(boundary_state, Mapping):
             raise RuntimeError("Could not inspect resumed boundary state")
@@ -373,60 +290,13 @@ def run_setup09a_dpm_extension_recipe(
         role_map = build_target_role_map(boundary_state)
         injections = apply_09a_dpm_extension_recipe(solver, role_map, dpm_config)
     else:
-        completed_before_this_run = 0
         load_target_mesh(solver, run_config.target_mesh)
         role_map = apply_setup07_carrier_from_mesh(solver)
-        if run_config.setup_only:
-            print_header("Skip Initialization And Carrier Iterations")
-            print("setup_only: carrier field will not be initialized or iterated before DPM.", flush=True)
-        else:
-            initialize_case(solver)
-            if checkpoint_config.initialized_case and checkpoint_config.initialized_data:
-                write_case_data_pair(
-                    solver,
-                    checkpoint_config.initialized_case,
-                    checkpoint_config.initialized_data,
-                    "write_initialized_case_data",
-                )
-            if run_config.carrier_iterations > 0:
-                iterate_case(
-                    solver,
-                    run_config.carrier_iterations,
-                    checkpoint_config.report_interval,
-                    checkpoint_config.checkpoint_interval,
-                    checkpoint_config.output_case,
-                    checkpoint_config.output_data,
-                    starting_completed_iterations=completed_before_this_run,
-                    persistence=persistence,
-                )
         injections = apply_09a_dpm_extension_recipe(solver, role_map, dpm_config)
 
-    if post_dpm_iterations > 0:
-        iterate_case(
-            solver,
-            post_dpm_iterations,
-            checkpoint_config.report_interval,
-            checkpoint_config.checkpoint_interval,
-            checkpoint_config.output_case,
-            checkpoint_config.output_data,
-            starting_completed_iterations=completed_before_this_run,
-            persistence=persistence,
-        )
-
-    if checkpoint_config.output_case and checkpoint_config.output_data:
-        if run_config.setup_only:
-            persistence.record_case_only(
-                solver,
-                completed_iterations=completed_before_this_run + post_dpm_iterations,
-                total_iterations=completed_before_this_run + post_dpm_iterations,
-            )
-        else:
-            persistence.record_final(
-                solver,
-                completed_iterations=completed_before_this_run + post_dpm_iterations,
-                total_iterations=completed_before_this_run + post_dpm_iterations,
-                allow_case_only=False,
-            )
+    if not checkpoint_config.output_case:
+        raise RuntimeError("An output case path is required for the case-only DPM setup.")
+    write_case_only(solver, checkpoint_config.output_case, "write_setup09a_case_only")
 
     final_boundary_state = safe_get_state(solver.settings.setup.boundary_conditions, "final_boundary_conditions")
     return {

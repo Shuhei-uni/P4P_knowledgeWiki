@@ -57,7 +57,27 @@ with zero.
 
 ## Preflight and safe execution
 
-Use the already-open Fluent session unless explicit case/data loading is required and authorised. Confirm the loaded case/data pair, setup ID, Fluent version, and server before interpreting any output.
+Use the already-open Fluent session unless explicit case/data loading is required and authorised. Confirm the observed case/data identity, setup scope, and Fluent version before interpreting any output. Treat `--server-id` only as the connection selector; it is never case or setup identity and must not be persisted in report evidence.
+
+### Mandatory case-identity gate
+
+Before interpreting any live result:
+
+1. inspect the loaded Fluent state after connecting;
+2. when the workflow explicitly loads a case/data pair, retain those observed
+   filenames as the identity basis;
+3. when the session was already loaded and Fluent does not expose its filenames,
+   set the case identity to `unavailable`;
+4. do not map a server ID, Fluent version, iteration count, monitor history,
+   hostname, port, or previous report to a setup or case;
+5. do not create setup-linked claims from an `unavailable` identity. Report the
+   result only as an unlinked diagnostic unless the user supplies independent
+   case evidence.
+
+Persist case/data identity and its evidence basis when available. Do not persist
+`server_id` in JSON, Markdown, manifests, filenames, or setup reports. Keeping
+the ID in the command used to connect or in transient troubleshooting output is
+allowed because it is operational routing metadata only.
 
 ### Mandatory live-analysis supervision rule
 
@@ -196,6 +216,7 @@ Read [the report structure reference](references/report-structure.md) before dra
 
 - Analysis scope follows the setup's actual active physics.
 - Case/data identity, Fluent version, surfaces, and injection scope are recorded.
+- No server ID is persisted as case or setup provenance.
 - DPM raw transcripts and final output bundle exist for every reported injection.
 - EWF fields are reported only for active EWF mechanisms and with units/time-basis labels.
 - Claims distinguish measured, derived, unresolved, and not-applicable items.

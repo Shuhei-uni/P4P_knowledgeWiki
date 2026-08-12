@@ -43,7 +43,10 @@ from pyansys_fluent.ewf_diagnostics import (  # noqa: E402
     flatten_snapshot_reports,
     report_specs_as_dicts,
 )
-from pyansys_fluent.postprocess_live import load_case_data_pair  # noqa: E402
+from pyansys_fluent.postprocess_live import (  # noqa: E402
+    build_case_identity,
+    load_case_data_pair,
+)
 from pyansys_fluent.setup_common import print_header, require_remote_input  # noqa: E402
 
 
@@ -175,7 +178,7 @@ def write_csv(
 def resolve_run_label(args: argparse.Namespace) -> str:
     if args.run_label.strip():
         return args.run_label.strip()
-    if args.data_file:
+    if args.load_case_data and args.data_file:
         return PureWindowsPath(args.data_file).stem
     return datetime.now().strftime("ewf-dpm-%Y%m%d-%H%M%S")
 
@@ -329,10 +332,8 @@ def write_final_outputs(
             for key in (
                 "created_at_utc",
                 "mode",
-                "server_id",
                 "fluent_version",
-                "case_file",
-                "data_file",
+                "case_identity",
                 "load",
                 "report_prefix",
                 "resolved_film_walls",
@@ -382,9 +383,6 @@ def main() -> int:
     payload: dict[str, Any] = {
         "created_at_utc": iso_now(),
         "mode": args.mode,
-        "server_id": str(args.server_id),
-        "case_file": args.case_file or None,
-        "data_file": args.data_file or None,
         "load_requested": bool(args.load_case_data),
         "report_prefix": args.prefix,
         "report_specs": report_specs_as_dicts(),
@@ -422,6 +420,8 @@ def main() -> int:
         )
     else:
         payload["load"] = {"mode": "already-loaded-session"}
+    payload["case_identity"] = build_case_identity(payload["load"])
+    payload["warnings"].extend(payload["case_identity"].get("warnings", []))
 
     print_header("Audit EWF/DPM Settings")
     audit = audit_ewf_dpm_settings(solver)

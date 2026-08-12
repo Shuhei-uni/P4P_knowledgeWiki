@@ -1,5 +1,52 @@
 # Work Log
 
+## [2026-08-04] model-update | Stop 09cV3 run at saved iteration-50 checkpoint
+
+- files created/updated: `../../PyAnsys/scripts/setup/run_09cV3_student_50_then_100.py`, `../../PyAnsys/output/09cV3_student_50_then_100_run_20260804.json`, `../../PyAnsys/output/09cV3_student_50_then_100_run_state_20260804.json`, `../../Setups/active/09cV3-fine-mist-5pct-psd-rerun.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `../../PyAnsys/knowledge/fluent-settings/logs/successful_paths.md`, `wiki/log.md`
+- purpose: execute the user-requested 50-iteration run, save a resumable checkpoint, begin the resumed continuation, and stop cleanly when the user changed the instruction.
+- what changed since the previous update: hybrid-initialized and completed the first 50 iterations; wrote and verified paired iteration-50 case/data files; explicitly loaded that pair and began the resumed stage. The user stopped the run during the chunk covering iterations 51–60 after the transcript reached 51–59. The live session was restored from the saved iteration-50 pair.
+- assumptions introduced or retired: no convergence or performance claim was introduced. Iteration-50 residuals and DPM counts are retained as diagnostic monitor output only; the exact in-memory state at the interrupted second-stage chunk is not treated as a saved checkpoint.
+- current status: iteration-50 case/data checkpoint is complete and verified; iteration-100 case/data checkpoint does not exist; the original case-only 09cV3 child is untouched; the live session is restored to iteration 50.
+- blockers: no new construction blocker; the run remains numerically diagnostic with high continuity residual and outlet reverse-flow warnings, and the inherited velocity-inlet mass-flow closure remains unverified.
+- next immediate action: do not resume unless explicitly requested; if resumed later, start from the saved iteration-50 case/data pair.
+
+## [2026-08-04] model-update | Build 09cV3 fine-mist child case
+
+- files created/updated: `../../Setups/active/09cV3-fine-mist-5pct-psd-rerun.md`, `../../PyAnsys/scripts/setup/build_09cV3_student_finemist_from_09cV2.py`, `../../PyAnsys/output/09cV3_student_finemist_verification_20260804.json`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `../../PyAnsys/knowledge/fluent-settings/logs/successful_paths.md`, `wiki/log.md`
+- purpose: build the direct `09cV2` child case with the documented seven-bin `5–100 µm` fine-mist PSD while retaining the parent 5% DPM allocation and all non-PSD settings.
+- what changed since the previous update: loaded the explicit Student `09cV2-fDPM-05pct-velocity-inlet-adaptation.cas.h5`, wrote a recovery copy, replaced the six legacy active injections with seven `09cV3` fine-mist injections on `steaminlet`, saved `09cV3-fDPM-05pct-finemist-5to100um-velocity-inlet-adaptation.cas.h5`, and reloaded it by full path for strict verification. Fluent 2025 R2 serialized the requested injection identities as lowercase `09cv3-finemist-*` names; all seven are active and sum to `5.846000 kg/s`.
+- assumptions introduced or retired: retained the parent velocity-inlet adaptation caveat; `111.074000 kg/s` remains an input allocation reference without an independent live mass-flow report. Retained the seven-bin PSD as an `Assumed`, medium-risk engineering prior; no run-facing result or convergence claim was introduced.
+- current status: `09cV3` case-only build is complete and reload-verified; the live Student session is left on the saved child; no flow iterations, data read, or `.dat.h5` write occurred.
+- blockers: no new blocker from setup construction; the inherited mass-flow closure remains unverified at the live flux-report level, and DPM/phase behavior has not been smoke-tested.
+- next immediate action: if execution is authorized, run a bounded `20–50`-iteration smoke test from the saved child and capture residual, phase-flux, DPM-source, and per-injection fate diagnostics before any interpretation.
+
+## [2026-08-04] model-update | Define 09cV3 fine-mist 5% DPM rerun
+
+- files created/updated: `../../Setups/active/09cV3-fine-mist-5pct-psd-rerun.md`, `../../Setups/active/09cV2-skoog-partition-injection-control.md`, `../../Setups/active/index.md`, `../../Setups/order-dictionary.md`, `wiki/model/fine-mist-dpm-size-and-mass-distribution.md`, `wiki/index.md`, `wiki/progress/current-status.md`, `wiki/log.md`
+- purpose: create the direct `09cV2` child that recreates the 5% DPM allocation using the seven-bin `5–100 µm` fine-mist injection sizes and mass distribution recorded after the meeting.
+- assumptions introduced or retired: the seven-bin PSD and its mass shares remain an `Assumed`, medium-risk engineering prior rather than a measured geothermal inlet PSD; retained the parent `5.846000 kg/s` DPM and `111.074000 kg/s` Eulerian-liquid allocations so the PSD is the only intentional physics-input change.
+- next immediate action: copy a read-back-verified `09cV2` 5% checkpoint, deactivate the six legacy injections, create the seven `09cV3` injections, verify the active-flow sum and DPM interaction settings, then run a short diagnostic smoke test.
+
+## [2026-07-30] model-update | Define carrier-field mesh-convergence family
+
+- files created/updated: `../../Setups/future/12-carrier-mesh-convergence-plan.md`, `../../Setups/future/index.md`, `../../Setups/order-dictionary.md`, `wiki/vnv/verification/index.md`, `wiki/progress/current-status.md`, `wiki/index.md`, `wiki/log.md`
+- reason: user requested a practical mesh-convergence start from the current approximately `1.3M`-node case, with trial meshes near `500k`, `700k`, and `1.0M` nodes.
+- what changed since last update: recorded the observed `1,309,312`-node / `7,601,261`-cell live checkpoint as an additional fine reference; created a planned M0–M3 carrier-only comparison with fixed report definitions, mesh-quality/zone checks, and common solution-acceptance requirements.
+- assumptions introduced/removed: treats the `08b`-compatible carrier case as the default parent unless an operator explicitly freezes a different baseline; treats the `~1.12` refinement ratios as practical sensitivity evidence rather than sufficient by themselves for a formal Richardson/GCI uncertainty claim.
+- current status: mesh-convergence setup plan is ready; no new mesh has been generated or solved.
+- blockers: exact frozen parent case/data, the common report definitions, and per-mesh quality statistics remain to be read back in Fluent.
+- next action: export and Fluent-reopen the approximately `500k`-node M0 mesh, verify its zone/quality contract, then solve it to the same monitor gate used for all levels.
+
+## [2026-07-30] model-update | Revise mesh-convergence ladder around the live reference
+
+- files created/updated: `../../Setups/future/12-carrier-mesh-convergence-plan.md`, `../../Setups/future/index.md`, `../../Setups/order-dictionary.md`, `wiki/progress/current-status.md`, `wiki/index.md`, `wiki/log.md`
+- reason: user refined the requested mesh ladder to approximately `400k`, `900k`, `1.3M`, and `1.6M` nodes.
+- what changed since last update: the observed `1,309,312`-node mesh is now M2 rather than an after-the-fact reference; the planned M0 and M1 meshes are `400k` and `900k`, and M3 is a planned `1.6M`-node fine comparison.
+- assumptions introduced/removed: M0-to-M1 has an estimated linear refinement ratio of `1.31`, but M1-to-M2 and M2-to-M3 remain tighter; the study is still a practical mesh-sensitivity test unless the completed output sequence supports a formal uncertainty estimate.
+- current status: plan revised; no meshes have been generated or solved for setup `12`.
+- blockers: exact frozen parent case/data, the common report definitions, and per-mesh quality statistics remain to be read back in Fluent.
+- next action: export and Fluent-reopen the approximately `400k`-node M0 mesh, verify its zone/quality contract, then solve it to the same monitor gate used for all levels.
+
 ## [2026-07-27] model-update | Add 010V2b 5,000-iteration observation evidence
 - files created/updated: `observations/04-010v2-ewf-mechanism-comparison.md`, `observations/06-010v2-iteration-continuation.md`, `wiki/log.md`
 - reason: synchronize all project observations that use the `010V2b` edge-separation branch with its completed 5,000-iteration result.

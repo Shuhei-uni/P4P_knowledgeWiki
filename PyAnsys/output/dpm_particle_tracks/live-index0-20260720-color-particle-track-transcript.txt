@@ -1,4 +1,0 @@
-===== index=0 injection=injection-5-micron =====
-> /display/particle-tracks/particle-tracks particle-resid-time 
-Error: invalid command
-Error Object: "particle-resid-time"

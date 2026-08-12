@@ -1,9 +1,0 @@
-{
-  "flow_time": 0,
-  "time_step": 0,
-  "physical_time_step": 100.0,
-  "number_of_iterations": 3003,
-  "cwd": null,
-  "operating_pressure": 0.0,
-  "gravity_vector": null
-}

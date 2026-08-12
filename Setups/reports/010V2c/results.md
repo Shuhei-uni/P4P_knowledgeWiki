@@ -2,7 +2,7 @@
 
 ## 1. Setup link and evidence
 
-- **Setup:** [010V2c EWF particle-stripping sensitivity](../../active/010V2c-ewf-particle-stripping.md); parent comparison scope: [010V2 clean deposition control](../../active/010V2-ewf-deposition-film-inventory.md).
+- **Setup:** [010V2c EWF particle-stripping sensitivity](../../past/reported/010V2c-ewf-particle-stripping.md); parent comparison scope: [010V2 clean deposition control](../../past/reported/010V2-ewf-deposition-film-inventory.md).
 - **Evidence class:** `partial diagnostic`. The supplied, already-loaded server-4 session was analysed without loading, solving, or changing physics. The live client did not expose case/data filenames, so the checkpoint identity is not independently recoverable from these artifacts.
 - **Session:** server ID `4`, Ansys Fluent `2025 R2`; captured 2026-07-22 UTC.
 - **Raw evidence:** [audit bundle](../../../PyAnsys/output/ewf_dpm_diagnostics/010V2c-server4-20260722-audit/), [EWF final-state snapshot](../../../PyAnsys/output/ewf_dpm_diagnostics/010V2c-server4-20260722-snapshot/), [DPM sweep bundle](../../../PyAnsys/output/ewf_dpm_diagnostics/010V2c-server4-20260722-dpm/), [carrier flux check](../../../PyAnsys/output/post_simulation_analysis/010V2c-server4-20260722-flux-check.json), and [residual history](../../../PyAnsys/output/post_simulation_analysis/010V2c-server4-20260722-residual-check.json) ([plot](../../../PyAnsys/output/post_simulation_analysis/010V2c-server4-20260722-residual-check.png)).
