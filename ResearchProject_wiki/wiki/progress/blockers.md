@@ -2,6 +2,14 @@
 
 ## Active Blockers
 
+### BLK-010 | IC1 brine-pipe VOF patch has no unambiguous cell-volume selection
+- Status: Active — human selection required
+- First observed: 2026-08-14
+- Related run(s): `VOF-IC1-PATCH-PLATFORM-2026-08-14`
+- Symptom: the coarse patch-test mesh has one combined fluid cell zone (`simple-spiral-separator--brine-outlet-`) and no pre-existing brine-pipe-only cell register. `brine-outlet` is a pressure-outlet face zone, so it cannot itself serve as a volume-fraction patch target for the complete pipe volume.
+- Current interpretation: IC1 and independent IC2 plane-pool checkpoints at `+0.00 m` and visually approved `+0.30 m` have been patched and saved as coarse platform artifacts. IC2 now has a reproducible planned height matrix (`+0.00`, `+0.15`, `+0.30`, `+0.45`, `+0.60 m`). The unbuilt sensitivity levels still require marked-volume and initialized-liquid-mass recording before any transient interpretation.
+- Recovery action: create each planned global-coordinate register, report its marked volume/cell count and corresponding initial liquid mass, then preserve the same timestep/monitor/averaging gates as IC0 before authorizing a solve.
+
 ### BLK-008 | Setup 08b DPM result is dominated by incomplete tracks
 - Status: Accepted scope limitation; not blocking
 - First observed: 2026-07-02
@@ -74,7 +82,7 @@ DPM incomplete counts are retained in raw outputs but are not an acceptance gate
 - Current interpretation: retain as a warning from the older water-pool branch only. The professional setup `07` run currently shows low apparent steam-line carryover, so this should not block the baseline DPM sweep.
 
 ## Ranked Hypotheses
-1. Setup `02c` has complete A/B/C early screens but no stable two-outlet carrier state. Higher-pressure Case C has lower observed vapour wrong-outlet fraction (`32.76%`) than A (`60.38%`) and B (`52.12%`), yet its liquid brine outflow exceeds liquid inlet (`116.91%`) and continuity remains `1.194e-1`. Define and attain a common stable window, with liquid-inventory and outlet-flow monitoring, before attributing behaviour or selecting brine pressure.
+1. Setup `02c` has complete A/B/C early screens but no stable two-outlet carrier state. Higher-pressure Case C has lower observed vapour wrong-outlet fraction (`32.76%`) than A (`60.38%`) and B (`52.12%`), yet its liquid brine outflow exceeds liquid inlet (`116.91%`) and continuity remains `1.194e-1`. Positive-backpressure case-only children D/E/F/G are ready; run the common Fluent-native screens with liquid-inventory and outlet-flow monitoring before attributing steady behaviour or selecting pressure.
 2. Parent `FFF-2` has an unresolved convergence/mass-balance problem even without initialized water, but this is historical context rather than an active setup `07` blocker.
 3. Brine outlet pressure, backflow settings, or outlet type may be over-driving liquid removal in older parent cases; this is not part of the setup `07` acceptance scope.
 4. Missing stabilization tuning in numerics may be preventing the mixed wet-half velocity-inlet case from settling.

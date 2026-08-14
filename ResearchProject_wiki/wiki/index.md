@@ -24,6 +24,7 @@
 - `../../Setups/active/09cV3-fine-mist-5pct-psd-rerun.md`
 - `../../Setups/past/reported/index.md` — canonical list for reported `010V2` diagnostic records.
 - `../../Setups/future/12-carrier-mesh-convergence-plan.md` — controlled `0.4M` / `0.9M` / `1.309M` / `1.6M`-node carrier-field verification plan.
+- `../../Setups/future/02d-transient-vof-brine-outlet-model-form-sensitivity.md` — planned transient VOF model-form sensitivity against the `02c` Mixture brine-outlet control; patch geometry and production execution remain explicitly gated.
 - `../../Setups/reports/index.md`
 
 ## Progress Layer

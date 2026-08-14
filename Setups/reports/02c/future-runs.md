@@ -65,3 +65,25 @@ Do not rank the three pressures by a single outlet quantity. Compare only a comm
 5. visual evidence near the lower vessel, brine-pipe entrance, brine pipe, steam core, and steam outlet.
 
 Case B supplies only an early-screening reference; it is not a steady benchmark for selecting A or C.
+
+## Positive-backpressure extension — Cases D/E/F/G
+
+The observed A/B/C early-screen vapour routing is sufficiently promising to extend the test domain above the fixed `1.120 MPa` steam outlet. This is an intentional amendment to setup `02c`, not a claim that Case C selected an operating pressure.
+
+| Case | Brine gauge pressure | ΔP versus steam outlet | Pre-initialization remote case | Status |
+|---|---:|---:|---|---|
+| `02c-D` | `1.1225 MPa` | `+2.5 kPa` | `02c-D-brine-p1122p5kpa-unprimed-preinit-20260812T102345Z.cas.h5` | case-only prepared |
+| `02c-E` | `1.1275 MPa` | `+7.5 kPa` | `02c-E-brine-p1127p5kpa-unprimed-preinit-20260812T102546Z.cas.h5` | case-only prepared |
+| `02c-F` | `1.1300 MPa` | `+10.0 kPa` | `02c-F-brine-p1130kpa-unprimed-preinit-20260812T102700Z.cas.h5` | case-only prepared |
+| `02c-G` | `1.1350 MPa` | `+15.0 kPa` | `02c-G-brine-p1135kpa-unprimed-preinit-20260812T102800Z.cas.h5` | case-only prepared |
+
+For each point: load its own pre-initialization child, Hybrid Initialize without a liquid patch, run one native `500`-iteration screen, and write a paired case/data endpoint before loading the next child. Do not use a preceding pressure point's case/data as an initial condition. The queue's first native-autosave configuration attempt stopped at an interactive-menu argument mismatch before Case D started, so the launched fallback queue uses the verified explicit paired end-of-screen write; it still preserves every *completed* screen before advancing. Capture outlet phase flows and total continuous-liquid inventory at consistent intervals when the monitor definitions are available; the latter determines whether Case C-like high liquid drainage is settling or simply depleting initial inventory.
+
+### Native sequential queue launch — 2026-08-14 (NZST)
+
+- Queue order: `02c-D` → paired endpoint save → `02c-E` → paired endpoint save → `02c-F` → paired endpoint save → `02c-G` → paired endpoint save.
+- Fluent-native journal: `C:\Users\syok443\P4P simulation\brine outlet\02c-positive-backpressure-queue-20260813T205605Z.jou`.
+- Queue transcript: `C:\Users\syok443\P4P simulation\brine outlet\02c-positive-backpressure-queue-20260813T205605Z.trn`.
+- Launch evidence: Fluent accepted the quoted journal path, started the transcript, accepted the residual-monitor setup, and began loading Case D's independent pre-initialization case.
+- Initial queue status: `RUNNING / completion unverified`. Two later bounded read-only reconnect attempts found the TCP endpoint reachable but did not regain the PyFluent handoff while Fluent was busy. No additional solver command, reload, interruption, exit, or new Fluent process was issued.
+- Limitation: the present queue records residual history and a final paired checkpoint per case. Existing liquid-inventory monitor definitions were not present in the frozen children, so inventory-versus-iteration remains a required follow-up measurement rather than an artifact manufactured by this queue.

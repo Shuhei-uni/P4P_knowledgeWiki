@@ -31,6 +31,27 @@ Notes:
   <notes>
 ```
 
+Fluent: 2025 R2
+PyFluent: 0.39.0 local `.venv`
+Case: `C:\Users\syok443\P4P simulation\VOF-IC0-P1120-preinit-20260814T000000Z.cas.h5`
+Goal: build and reload-verify a no-patch explicit-VOF case from `brine-outlet-620kcells.msh.h5`
+Order:
+  1. load the mesh by the current-working-directory-relative name after Fluent confirms it exists;
+  2. set pressure-based `unsteady-1st-order` (not the invalid literal `transient`), gravity, and `0 Pa` operating pressure;
+  3. create constant `water-vapor` / `water-liquid` materials, then set `models.multiphase.model = "vof"`;
+  4. assign phase-1 / phase-2 materials with the documented phase-domain TUI commands;
+  5. set the VOF boundary phase fractions/backflow fractions only after VOF phases exist;
+  6. set `pressure = presto!` and `mp = geo-reconstruct`, write only a case, reload it, and audit the contract.
+Working path or TUI:
+  `setup.general.solver.time = "unsteady-1st-order"`
+  `setup.models.multiphase.model = "vof"`
+  `setup.models.multiphase.vof_parameters` readback gives `vof_formulation = explicit`, `interface_type = sharp`, and `vof_courant_number = 0.25`.
+  Phase material TUI: `/define/phases/set-domain-properties/phase-domains/phase-1/material yes water-vapor` then the equivalent phase-2 `water-liquid` command.
+Readback:
+  Fluent found the mesh under `C:\Users\syok443\P4P simulation`; it has `620431` cells and named `liquid-inlet`, `steam-inlet`, `brine-outlet`, and `steam-outlet` zones. The reloaded child preserved explicit/sharp VOF, Geo-Reconstruct, PRESTO!, RNG k-epsilon, the equal `1120000 Pa` outlet pressures, and the specified phase fractions.
+Notes:
+  Explicit VOF with the Fluent 2025 R2 unsteady first-order setting exposes a default `1 s` transient-control value. It is not a valid production timestep and must remain unset pending mesh/Courant assessment. This build did not initialize, patch, iterate, write data, or enable DPM interaction/EWF.
+
 Fluent: 2026 R1 Student
 PyFluent: 0.39.0
 Case: purnanto-extended.msh -> setup09a student smoke
@@ -376,3 +397,34 @@ Readback:
   Seven active fine-mist surface injections on `steaminlet`; flows `0.409128`, `1.165149`, `1.267410`, `1.092501`, `1.329262`, `0.468606`, and `0.113944 kg/s`, totaling `5.846000 kg/s`; mass-flow inlets and wall names remained `liquidinlet`, `steaminlet`, `bottom`, and `wall`.
 Notes:
   This is the mass-flow-topology child and must not be conflated with the separate Student velocity-inlet adaptation. The source case was not overwritten. The build is case-only: no initialization, flow iterations, data read, or `.dat.h5` write. The seven-bin PSD remains an assumed engineering prior, not measured inlet data. Fluent 2025 R2 serializes the saved injection names as lowercase `09cv3-finemist-*`; verification is case-insensitive.
+
+Fluent: 2025 R2
+PyFluent: local `.venv` on repo laptop
+Goal: Fluent-native sequential queue smoke test
+Order:
+  1. create the complete `.jou` on the Fluent host with one literal Scheme `display` and `newline` call per journal line
+  2. start it with `settings.file.read_journal(file_name_list=[<absolute Windows path>])`
+  3. for each independent job, read the source case, Hybrid Initialize, call `/solve/iterate <N>`, then `/file/write-case-data <output.cas.h5>`
+  4. verify each expected `.cas.h5` and `.dat.h5` endpoint after Fluent completes the relevant job
+Working path or TUI:
+  `scripts/setup/run_vof_queue_smoke_test.py`
+Readback:
+  Three independent jobs each completed `75` Fluent iterations and wrote paired endpoints. The first two endpoint pairs appeared before Fluent reloaded and began the next job; all three pairs existed after completion.
+Notes:
+  In this 2025 R2 wrapper, `file.read_journal` expects `file_name_list`, not `file_name`. A Scheme string containing literal `\\n` writes backslash-n text to the remote journal and does not execute as separate TUI lines; write every record with an explicit Scheme `(newline)` instead. The journal itself, not Python, owns the iteration loop and checkpoint order.
+
+Fluent: 2025 R2
+PyFluent: local `.venv` on repo laptop
+Goal: transient VOF queued numerical-stability screen with saved initialized fields
+Order:
+  1. read the explicit source case
+  2. if the field is initialized/patched, read its paired data file
+  3. set `/solve/set/transient-controls/time-step-size <dt>` **after** the data read
+  4. start a transcript, run each native iteration block, and write paired case/data checkpoints
+  5. stop the transcript before submitting a replacement journal after any interruption
+Working path or TUI:
+  `scripts/setup/run_02d_vof_stability_screen.py`
+Readback:
+  `solver.settings.solution.run_calculation.transient_controls.time_step_size` read back as `1e-05` during the corrected IC1/IC2 screen. IC0, IC1, and IC2 each reached paired 1,000/2,000-iteration endpoints.
+Notes:
+  Reading a `.dat.h5` restores transient run controls and overwrote a previously set timestep with `1.0`; setting the timestep before the data read is therefore invalid for a saved-field restart. An interrupted journal can leave a native transcript open, causing a later `/file/start-transcript` to fail; close the stale transcript while Fluent is idle, use a new uniquely named journal, and retain—but explicitly exclude—the large-step artifacts from the corrected test conclusion.

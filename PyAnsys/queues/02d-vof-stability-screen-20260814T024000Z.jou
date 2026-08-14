@@ -1,0 +1,33 @@
+; Fluent-native numerical-stability screen: 02d-vof-stability-screen-20260814T024000Z
+; NOT a qualified transient result: no mesh/Courant timestep qualification or physical monitors.
+; Fluent owns all initialization, iterations, checkpoints, and transcripts.
+/file/confirm-overwrite? no
+; BEGIN VOF-IC1-P1120
+/file/read-case "C:/Users/Shuhei Yokkaichi/Documents/CFD/Brine outlet/VOF-IC1-P1120-coarse-patch-platform-20260814T000000Z.cas.h5"
+/file/read-data "C:/Users/Shuhei Yokkaichi/Documents/CFD/Brine outlet/VOF-IC1-P1120-coarse-patch-platform-20260814T000000Z.dat.h5"
+; Apply after any data read because the data file restores run controls.
+; Conservative numerical smoke-test timestep; not a mesh/Courant-qualified production value.
+/solve/set/transient-controls/time-step-size 1e-05
+/file/start-transcript "C:/Users/Shuhei Yokkaichi/Documents/CFD/Brine outlet/VOF-IC1-P1120-coarse-stability-20260814T024000Z.trn"
+/solve/monitors/residual/print? yes
+/solve/iterate 1000
+/file/write-case-data "C:/Users/Shuhei Yokkaichi/Documents/CFD/Brine outlet/VOF-IC1-P1120-coarse-stability-iter1000-20260814T024000Z.cas.h5"
+/solve/iterate 1000
+/file/write-case-data "C:/Users/Shuhei Yokkaichi/Documents/CFD/Brine outlet/VOF-IC1-P1120-coarse-stability-iter2000-20260814T024000Z.cas.h5"
+/file/stop-transcript
+; END VOF-IC1-P1120
+; BEGIN VOF-IC2-Y030-P1120
+/file/read-case "C:/Users/Shuhei Yokkaichi/Documents/CFD/Brine outlet/VOF-IC2-Y030-P1120-coarse-patch-platform-20260814T000000Z.cas.h5"
+/file/read-data "C:/Users/Shuhei Yokkaichi/Documents/CFD/Brine outlet/VOF-IC2-Y030-P1120-coarse-patch-platform-20260814T000000Z.dat.h5"
+; Apply after any data read because the data file restores run controls.
+; Conservative numerical smoke-test timestep; not a mesh/Courant-qualified production value.
+/solve/set/transient-controls/time-step-size 1e-05
+/file/start-transcript "C:/Users/Shuhei Yokkaichi/Documents/CFD/Brine outlet/VOF-IC2-Y030-P1120-coarse-stability-20260814T024000Z.trn"
+/solve/monitors/residual/print? yes
+/solve/iterate 1000
+/file/write-case-data "C:/Users/Shuhei Yokkaichi/Documents/CFD/Brine outlet/VOF-IC2-Y030-P1120-coarse-stability-iter1000-20260814T024000Z.cas.h5"
+/solve/iterate 1000
+/file/write-case-data "C:/Users/Shuhei Yokkaichi/Documents/CFD/Brine outlet/VOF-IC2-Y030-P1120-coarse-stability-iter2000-20260814T024000Z.cas.h5"
+/file/stop-transcript
+; END VOF-IC2-Y030-P1120
+; Queue complete; Fluent remains open.

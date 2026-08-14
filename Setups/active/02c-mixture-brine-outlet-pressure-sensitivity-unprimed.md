@@ -6,11 +6,11 @@
 |---|---|
 | Setup ID | `02c` |
 | Lifecycle | `active` |
-| Role | three-case brine-outlet-pressure sensitivity and drainage control |
+| Role | positive-backpressure brine-outlet-pressure sensitivity and drainage control |
 | Parent setup | [02 — Split two-zone velocity-inlet brine-outlet](../past/archived/02-split-two-zone-velocity-inlet-brine-outlet.md) |
 | Controlled variable | brine-outlet gauge pressure only |
 | Evidence-use label | `User-specified` definition with early screening evidence for Cases B and A; no pressure-performance ranking |
-| Outcome | Case B has a 500-iteration diagnostic; Case A has a 649-iteration unprimed screening checkpoint; Case C remains pending |
+| Outcome | A/B/C have early screens; D/E/F/G positive-backpressure case-only children are prepared for Fluent-native screens |
 | Linked report | [02c Cases A/B early diagnostics](../reports/02c/results.md) |
 
 ## 1. Objective
@@ -96,15 +96,21 @@ If any item is ambiguous, stop the build and request an operator decision. Do no
 
 ## 5. Case matrix
 
-Create three case-only artifacts from the same verified parent. Their only intentional setup difference is the brine-outlet gauge pressure.
+The original A/B/C screen established a useful directional signal: at their recorded early checkpoints, increasing brine pressure from `1.115 MPa` to `1.125 MPa` coincided with vapour discharge through the brine outlet decreasing from `60.38%` to `32.76%`, while vapour discharge through the steam outlet increased from `40.17%` to `67.16%`. This is **not** a converged performance result, but it is sufficiently strong to extend the screening matrix above the steam-outlet pressure.
+
+Create every case-only artifact from the same verified parent. Its only intentional setup difference is the brine-outlet gauge pressure.
 
 | Case ID | Suggested artifact suffix | Brine gauge pressure | Interpretation |
 |---|---|---:|---|
 | `02c-A` | `brine-p1115kpa-unprimed` | `1.115 MPa` (`1,115,000 Pa`) | encourages drainage; may increase vapour short-circuit risk |
 | `02c-B` | `brine-p1120kpa-unprimed` | `1.120 MPa` (`1,120,000 Pa`) | matches the steam-outlet pressure |
 | `02c-C` | `brine-p1125kpa-unprimed` | `1.125 MPa` (`1,125,000 Pa`) | resists vapour escape; tests whether liquid pressure is sufficient for drainage |
+| `02c-D` | `brine-p1122p5kpa-unprimed` | `1.1225 MPa` (`1,122,500 Pa`) | +2.5 kPa bracket point between matching pressure and Case C |
+| `02c-E` | `brine-p1127p5kpa-unprimed` | `1.1275 MPa` (`1,127,500 Pa`) | +7.5 kPa positive-backpressure screen |
+| `02c-F` | `brine-p1130kpa-unprimed` | `1.130 MPa` (`1,130,000 Pa`) | +10 kPa positive-backpressure screen |
+| `02c-G` | `brine-p1135kpa-unprimed` | `1.135 MPa` (`1,135,000 Pa`) | +15 kPa upper-bracket screen |
 
-Keep the steam outlet at `1.120 MPa` gauge for all three cases. Do not use pressures outside `1.115–1.125 MPa` unless the operator explicitly changes the matrix.
+Keep the steam outlet at `1.120 MPa` gauge for every case. Do not add lower-pressure points: Case A already shows the adverse directional signal of increased brine-outlet vapour. The positive matrix ends at `1.135 MPa` unless a later screening result justifies a further explicit amendment.
 
 ## 6. Build procedure and readback requirements
 
@@ -204,7 +210,38 @@ Stop a case and record the failure if it has any of the following without a clea
 - sustained vapour short-circuiting through the brine outlet; or
 - liquid inventory that continues to drift without a stable operating trend.
 
-Do not alter another control variable to rescue one pressure point. Any approved stability deviation creates a separately identified branch rather than a silent modification of the A/B/C comparison.
+Do not alter another control variable to rescue one pressure point. Any approved stability deviation creates a separately identified branch rather than a silent modification of the matrix comparison.
+
+## 10a. Positive-backpressure screen interpretation
+
+The `500`-iteration endpoint is a **directional screen**, intended to find the transition between suppressed brine-outlet vapour with continuing liquid drainage and drainage restriction at excessive backpressure. It is not an accuracy study, convergence gate, efficiency result, or operating-pressure selection.
+
+Classify each point after its common monitor package is available:
+
+- `candidate positive-backpressure behaviour`: brine vapour decreases and steam-outlet vapour increases while liquid drainage remains material and liquid inventory begins to flatten;
+- `inventory-draining / unresolved`: liquid brine flow exceeds liquid inlet or inventory declines without a plateau;
+- `drainage-restricted upper limit`: liquid brine flow tends toward zero while inventory rises; or
+- `unstable / indeterminate`: divergent or non-interpretable monitor behaviour.
+
+Case C remains `inventory-draining / unresolved` until its missing liquid-inventory history is supplied: its recorded `136.60 kg/s` liquid brine flow exceeds the `116.85 kg/s` liquid inlet. That limitation does not erase the measured vapour-routing signal; it limits only a steady drainage/efficiency conclusion.
+
+## 10b. Positive-backpressure case-only preparation — 2026-08-12
+
+`Observed` through the existing Fluent 2025 R2 gRPC session:
+
+- the frozen parent `C:\Users\syok443\P4P simulation\brine outlet\02c-B-brine-p1120kpa-unprimed-preinit-20260812T043007Z.cas.h5` was visible on the Fluent host;
+- the live pressure path was inspected as `pressure_outlet["brine-outlet"].phase["mixture"].momentum.gauge_pressure` and read back in Pa;
+- steam outlet remained at `1,120,000 Pa` during the preparation checks; and
+- each listed child was written as a unique case-only remote artifact and its remote path was confirmed by Fluent-host file existence checks.
+
+| Case | Verified brine setting before save | Remote pre-initialization case |
+|---|---:|---|
+| D | `1,122,500 Pa` | `C:\Users\syok443\P4P simulation\brine outlet\02c-D-brine-p1122p5kpa-unprimed-preinit-20260812T102345Z.cas.h5` |
+| E | `1,127,500 Pa` | `C:\Users\syok443\P4P simulation\brine outlet\02c-E-brine-p1127p5kpa-unprimed-preinit-20260812T102546Z.cas.h5` |
+| F | `1,130,000 Pa` | `C:\Users\syok443\P4P simulation\brine outlet\02c-F-brine-p1130kpa-unprimed-preinit-20260812T102700Z.cas.h5` |
+| G | `1,135,000 Pa` | `C:\Users\syok443\P4P simulation\brine outlet\02c-G-brine-p1135kpa-unprimed-preinit-20260812T102800Z.cas.h5` |
+
+These are setup artifacts only: no child was initialized, iterated, or written with data during this preparation step. The executable case-only builder and native-run queue specification are [`build_02c_positive_backpressure_cases.py`](../../PyAnsys/scripts/setup/build_02c_positive_backpressure_cases.py) and [`02c-positive-backpressure-screen.yaml`](../../PyAnsys/queues/02c-positive-backpressure-screen.yaml).
 
 ## 11. Live Case B build and launch — 2026-08-12
 

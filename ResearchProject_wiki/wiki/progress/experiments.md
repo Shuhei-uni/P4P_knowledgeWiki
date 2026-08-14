@@ -17,6 +17,96 @@
 
 ## Runs
 
+### Run VOF-IC0-IC1-IC2-Y030-COARSE-STABILITY-2026-08-14
+- Run ID: `VOF-IC0-IC1-IC2-Y030-COARSE-STABILITY-2026-08-14`
+- Date: 2026-08-14
+- Objective: Screen the three user-selected initialized VOF fields for immediate floating-point failure under a deliberately conservative common timestep.
+- Geometry: existing coarse separator mesh; IC0 is unpatched, IC1 retains the approved five-cell `brine-outlet` distance-register pipe patch, and IC2 retains the approved full-width `y <= +0.30 m` pool plus IC1 patch.
+- Mesh: `275,448` mixed cells and `815,716` nodes; one fluid zone; previously observed minimum orthogonal quality `0.250006` and maximum aspect ratio `65.1632`. No new local size survey.
+- Physics model: explicit/sharp VOF with vapour primary and liquid secondary, RNG k-epsilon, gravity `[0, -9.81, 0] m/s²`; Energy, DPM, and EWF off.
+- Solver settings: Fluent-native queue. IC0 was Hybrid Initialized in the journal; IC1/IC2 loaded their paired initialized fields. Fixed `1.0e-5 s` was set after every case/data load, with two native 1,000-iteration blocks and explicit paired case/data writes after each block.
+- Boundary and initial conditions: unchanged VOF baseline: both inlets `27.118 m/s`, both pressure outlets `1.120 MPa` gauge, and the approved patch fields above.
+- Iteration or timestep budget: requested `2,000` transient steps per case in two nominal `1,000`-step blocks; actual early-stop terminal counts were IC0 `69`, IC1 `69`, and IC2 Y030 `67`.
+- Convergence indicators: each transcript stated `solution is converged` once residual continuity crossed the enabled `1e-3` criterion. Reverse-flow notices persisted at pressure outlets; required physical phase-flow, inventory, and pressure monitors were not defined.
+- Outcome: `Invalid as a 2,000-step screen / early convergence stop`; its nominal filenames are not iteration-count evidence.
+- Hypothesized cause if not converged: residual convergence checking was left enabled after the data reads. The earlier `1.0 s` IC1/IC2 queue outputs are separately excluded because those data reads also reset the intended timestep.
+- Next action: the fresh convergence-disabled 2,000-step native screen is running from readback-verified restart sources; verify each final transcript reaches flow time `0.0200 s` before any interpretation.
+
+### Run VOF-IC1-IC2-FINE-QUEUE-PREP-2026-08-14
+- Run ID: `VOF-IC1-IC2-FINE-QUEUE-PREP-2026-08-14`
+- Date: 2026-08-14
+- Objective: Create the fine-mesh brine-pipe and plane-pool initialization artifacts, plus a dormant Fluent-native sequential 500/1000-iteration queue; do not start calculations.
+- Geometry: fine mesh with one fluid zone and domain extents `x = [-2.068679, 1.066749] m`, `y = [-1.484584, 6.994597] m`, `z = [-1.461048, 1.066830] m`. IC1 uses five cell-distance layers from `brine-outlet`; IC2 uses full-width global-coordinate pool planes at `y_cut = 0.00/0.15/0.30/0.45/0.60 m`.
+- Mesh: `620,431` cells, `1,770,229` nodes; no mesh modification.
+- Physics model: inherited explicit/sharp VOF, vapour primary/liquid secondary, RNG k-epsilon, gravity `[0, -9.81, 0] m/s²`, Energy/DPM/EWF off.
+- Solver settings: IC1 and each IC2 field was Hybrid Initialized then patched and saved as paired case/data input. The dormant journal will use two native `500`-iteration blocks per job with explicit paired saves after each block; it has not been submitted to Fluent.
+- Boundary and initial conditions: inherited IC0 BC contract. IC1 phase-2 `mp = 1.0` uses the approved five-cell brine-outlet register. Every IC2 case loads the IC1 field and adds phase-2 `mp = 1.0` below its independent global `y_cut` plane.
+- Iteration or timestep budget: planned only: seven jobs × `1,000` iterations, with checkpoints at `500` and `1,000`; completed flow iterations `0`.
+- Convergence indicators: N/A — all inputs and journal are prepared but unstarted.
+- Outcome: `Queue prepared / not started`.
+- Hypothesized cause if not converged: not applicable. The main readiness risk remains unqualified transient timestep and unconfigured monitor/averaging package.
+- Next action: define/review timestep and monitor evidence, then obtain explicit authorization before reading the remote journal.
+
+### Run VOF-IC2-Y000-PATCH-PLATFORM-2026-08-14
+- Run ID: `VOF-IC2-Y000-PATCH-PLATFORM-2026-08-14`
+- Date: 2026-08-14
+- Objective: Add the `y = 0` global-coordinate lower-pool initialization as the lowest bracket in the IC2 sensitivity family.
+- Geometry: one combined fluid zone. `vof_ic2_pool_below_y_0p00m` is an inside-hexahedron over the full horizontal mesh extent and from `y = -1.484584 m` to `y = +0.000000 m`.
+- Mesh: `275,448` mixed cells; `815,716` nodes after case write/read. The register marks `33,200` cells; minimum orthogonal quality `0.250006`; maximum aspect ratio `65.1632`.
+- Physics model: inherited explicit/sharp VOF; primary `water-vapor`, secondary `water-liquid`; RNG k-epsilon; gravity `[0, -9.81, 0] m/s²`; operating pressure `0 Pa`; energy/DPM/EWF off.
+- Solver settings: read the saved IC1 pipe-patch case/data, created the Y000 register, patched phase-2 `mp = 1.0`, and saved a separate case/data endpoint. No timestep, coupling/URF change, or flow iteration.
+- Boundary and initial conditions: unchanged VOF baseline plus retained IC1 pipe patch; IC2 liquid field set to `mp = 1.0` for `y <= 0`.
+- Iteration or timestep budget: `0` flow timesteps/iterations.
+- Convergence indicators: N/A — initialization/patch artifact.
+- Outcome: `Case/data patch-platform checkpoint saved`; not a physical transient result.
+- Hypothesized cause if not converged: not applicable. This is the lower global-coordinate bracket for the initial-pool sensitivity.
+- Next action: build the planned Y015, Y045, and Y060 siblings from the same IC1 pipe-patch parent, record each selected volume/mass, and run only after the 02d qualification gates are closed.
+
+### Run VOF-IC2-Y030-PATCH-PLATFORM-2026-08-14
+- Run ID: `VOF-IC2-Y030-PATCH-PLATFORM-2026-08-14`
+- Date: 2026-08-14
+- Objective: Create and persist a global-coordinate lower-liquid-pool initialization after visual approval of its shape in the coarse VOF patch platform.
+- Geometry: one combined fluid zone. The pool register `vof_ic2_pool_below_y_0p30m` is an inside-hexahedron extending over the full mesh horizontal extents and from `y = -1.484584 m` to the approved horizontal plane `y = +0.300000 m`.
+- Mesh: `275,448` mixed cells; `815,716` nodes after case write/read; the region register marks `39,127` cells. Minimum orthogonal quality `0.250006`; maximum aspect ratio `65.1632`.
+- Physics model: inherited explicit/sharp VOF; primary `water-vapor`, secondary `water-liquid`; RNG k-epsilon; gravity `[0, -9.81, 0] m/s²`; operating pressure `0 Pa`; energy/DPM/EWF off.
+- Solver settings: Hybrid Initialization followed by the existing IC1 pipe patch and IC2 phase-2 liquid patch. No production timestep, coupling/URF change, or flow iteration.
+- Boundary and initial conditions: unchanged VOF baseline; inlets `27.118 m/s` and `1.140 MPa` initial gauge pressure; both pressure outlets `1.120 MPa` gauge. IC2 adds phase-2 `mp = 1.0` in the approved `y <= +0.30 m` register.
+- Iteration or timestep budget: `0` flow timesteps/iterations; paired case/data checkpoint only.
+- Convergence indicators: N/A — initialization/patch artifact.
+- Outcome: `Case/data patch-platform checkpoint saved`; not a physical transient result.
+- Hypothesized cause if not converged: not applicable. Initial liquid level is a deliberate sensitivity parameter, not an inferred steady state.
+- Next action: prepare `y_cut = +0.15`, `+0.45`, and `+0.60 m` siblings with identical controls, report their marked volumes and initialized liquid masses, then run only after the 02d timestep and monitoring gates are closed.
+
+### Run VOF-IC1-PATCH-PLATFORM-2026-08-14
+- Run ID: `VOF-IC1-PATCH-PLATFORM-2026-08-14`
+- Date: 2026-08-14
+- Objective: Recreate the verified no-liquid-patch VOF configuration on the coarse patch-test mesh, create a reproducible brine-pipe patch register, and begin a distinct lower-pool selection trial.
+- Geometry: named split inlets and two pressure outlets; the mesh has one combined fluid cell zone, `simple-spiral-separator--brine-outlet-`. User-approved IC1 register `vof_ic1_brine_outlet_5cells` is seeded from the `brine-outlet` face zone at five-cell distance. The distinct unpatched IC2 candidate is a global-coordinate inside-hexahedron register, `vof_ic2_pool_below_y_0p30m`, spanning all horizontal mesh extents and below `y = +0.30 m`.
+- Mesh: `275,448` mixed cells; `815,716` nodes after case write/read; minimum orthogonal quality `0.250006`; maximum aspect ratio `65.1632`. Local VOF-relevant sizes and visual lower-pipe connectivity remain unmeasured.
+- Physics model: pressure-based `unsteady-1st-order`, explicit/sharp VOF; primary `water-vapor`, secondary `water-liquid`; RNG k-epsilon; gravity `[0, -9.81, 0] m/s²`; operating pressure `0 Pa`; energy/DPM/EWF off.
+- Solver settings: PRESTO! pressure and Geo-Reconstruct volume-fraction schemes. Hybrid Initialization completed using Fluent's `10` internal initialization passes. No production timestep, coupling change, URF change, or flow iteration was made.
+- Boundary and initial conditions: both inlets `27.118 m/s` with `1.140 MPa` initial gauge pressure; liquid fraction `1.0` at `liquid-inlet` and `0.0` at `steam-inlet`; both pressure outlets `1.120 MPa` gauge; liquid backflow fraction `1.0` at brine and `0.0` at steam.
+- Iteration or timestep budget: `0` flow timesteps/iterations. Hybrid Initialization was followed by the user-approved IC1 patch and a paired case/data checkpoint; no solve.
+- Convergence indicators: N/A — case-only configuration and register audit.
+- Outcome: `IC1 patch-platform checkpoint saved`; IC1 phase-2 `mp = 1.0` was patched in the approved five-cell register (`1,499` cells) and saved to a paired case/data endpoint. The approved `y = +0.30 m` IC2 pool has its own separate paired checkpoint.
+- Hypothesized cause if not converged: not applicable. The IC1 pipe selection deliberately includes a small user-approved vessel spill.
+- Next action: maintain the distinct IC2 height-sensitivity matrix and do not run it until the 02d timestep, monitor, and stationarity gates are closed.
+
+### Run VOF-IC0-P1120-BUILD-2026-08-14
+- Run ID: `VOF-IC0-P1120-BUILD-2026-08-14`
+- Date: 2026-08-14
+- Objective: Create and reload-verify the Stage-1, no-liquid-patch transient VOF case from the supplied tangential-brine-outlet mesh; do not perform a transient solve.
+- Geometry: mesh-based reconstruction using named `liquid-inlet`, `steam-inlet`, `brine-outlet`, and `steam-outlet` zones. The mesh contains one fluid cell zone labelled `simple-spiral-separator--brine-outlet-`; lower-pipe connectivity remains to be visually confirmed before execution.
+- Mesh: `C:\Users\syok443\P4P simulation\brine-outlet-620kcells.msh.h5`; `620,431` mixed cells, `1,770,229` nodes, 7 face zones. No quality or local-cell-size survey was performed.
+- Physics model: pressure-based explicit VOF; phase 1/primary `water-vapor` (`5.73 kg/m³`), phase 2/secondary `water-liquid` (`881.77 kg/m³`); sharp interface; RNG k-epsilon; gravity `[0, -9.81, 0] m/s²`; Energy off; surface tension unconfigured because no confirmed project/reference value was available; no phase change, DPM injection, EWF, or contact-angle assumption.
+- Solver settings: Fluent `unsteady-1st-order` transient formulation (the compatible explicit-VOF choice), pressure interpolation `PRESTO!`, volume-fraction discretization `Geo-Reconstruct`; pressure–velocity coupling read back as `SIMPLE` and is retained as a setting to review before any execution.
+- Boundary and initial conditions: both velocity inlets `27.118 m/s` with `1.140 MPa` initial gauge pressure; liquid volume fraction `1.0` at `liquid-inlet` and `0.0` at `steam-inlet`; steam and brine pressure outlets each `1.120 MPa` gauge; liquid backflow fractions respectively `0.0` and `1.0`; operating pressure `0 Pa`.
+- Iteration or timestep budget: `0`; no timestep is approved. Fluent's default `1 s` transient-control value is not a production recommendation.
+- Convergence monitors: not configured in this case-only build; the required physical-time monitor package and statistical averaging window remain pending.
+- Outcome: `Case-only build verified / mesh-based reconstruction only`.
+- Hypothesized cause if not converged: not applicable. The main pre-run risk is insufficient local interface resolution or an unjustified timestep, followed by unverified lower-pipe connectivity and unresolved surface-tension evidence.
+- Next action: assess local VOF-relevant cell size/quality and define `VOF-DT1` and `VOF-DT2`; visually verify the brine-pipe/lower-vessel connection and configure the required transient monitor package before authorizing Hybrid Initialization of `VOF-IC0-P1120`.
+
 ### Run 02c-C-ITER500-2026-08-12
 - Run ID: `02c-C-ITER500-2026-08-12`
 - Date: 2026-08-12
@@ -62,6 +152,36 @@
 - Flux result: liquid inlet `116.847094 kg/s`; liquid brine outlet `6.921014 kg/s`; liquid steam outlet `7.779685e-7 kg/s`; vapour inlet `81.639506 kg/s`; vapour brine outlet `42.547417 kg/s`; vapour steam outlet `39.823439 kg/s` (outlets expressed as positive outward magnitudes).
 - Hypothesized cause (if non-converged): the unprimed field has not established a stable liquid-drainage/vapour-core split by iteration 500; brine pressure sensitivity remains an unresolved test, not a diagnosed mechanism.
 - Next action: build Case A from the frozen pre-initialization parent at `1.115 MPa` brine pressure and run the same 500-iteration screen before making a pressure-ranking decision. See [02c results](../../../Setups/reports/02c/results.md).
+
+### Run 02c-POSITIVE-BACKPRESSURE-NATIVE-QUEUE-2026-08-14
+- Run ID: `02c-POSITIVE-BACKPRESSURE-NATIVE-QUEUE-2026-08-14`
+- Date: 2026-08-14
+- Objective: Execute the prepared D/E/F/G positive-brine-backpressure cases unattended through one already-running Fluent instance, with an independent parent-derived field for each point.
+- Geometry: inherited 02c split velocity-inlet separator and physical tangential brine-pipe geometry; each queue member loads its own case-only child.
+- Mesh: inherited frozen-parent `620,431` mixed cells and `1,770,229` nodes; no mesh change is authorized in the queue.
+- Physics model: inherited steady pressure-based Mixture / RNG k-epsilon model, gravity on, Energy off; no model setting changes between queue points.
+- Solver settings: Fluent-native journal applies Hybrid Initialization then `500` steady iterations per case. Python neither loops iteration calls nor owns checkpoint timing.
+- Boundary and initial conditions: brine pressure is already frozen in each child: D `1.1225 MPa`, E `1.1275 MPa`, F `1.1300 MPa`, G `1.1350 MPa`; steam outlet remains `1.120 MPa`. No liquid patch is applied.
+- Iteration or timestep budget: `4 × 500` steady iterations, sequentially.
+- Convergence indicators: completion unverified at this record time. The journal started Case D's load, but two bounded read-only reconnect attempts could reach TCP without completing a busy Fluent gRPC handoff.
+- Outcome: `Launched / completion unverified`.
+- Hypothesized cause if not converged: not applicable until per-case endpoint evidence is retrieved. Existing case children do not yet supply the required continuous-liquid-inventory history.
+- Next action: wait for Fluent to return control; verify each expected remote `.cas.h5` / `.dat.h5` endpoint, then post-process each case independently and update this record with actual residual/phase-flux evidence.
+
+### Run 02c-POSITIVE-BACKPRESSURE-BUILD-2026-08-12
+- Run ID: `02c-POSITIVE-BACKPRESSURE-BUILD-2026-08-12`
+- Date: 2026-08-12
+- Objective: Prepare independent positive-brine-backpressure children to bracket the promising Case C vapour-routing direction without changing the unprimed 02c carrier setup.
+- Geometry: the frozen split velocity-inlet separator with the physical lower tangential brine pipe; `liquid-inlet`, `steam-inlet`, `brine-outlet`, and `steam-outlet` were retained.
+- Mesh: inherited frozen parent mesh, `1,770,229` nodes and `620,431` mixed cells; no mesh operation was performed.
+- Physics model: inherited steady pressure-based Mixture / RNG k-epsilon carrier model with gravity on and Energy off; no model activation or material change was made.
+- Solver settings: case-only preparation; no initialization, data load, iteration, or checkpoint data write was issued. Fluent-native autosave and run controls remain required for the later screens.
+- Boundary and initial conditions: steam outlet remains `1,120,000 Pa` gauge. Only brine-outlet mixture-phase gauge pressure was changed, independently from the frozen parent, to D `1,122,500 Pa`, E `1,127,500 Pa`, F `1,130,000 Pa`, and G `1,135,000 Pa`; the live Fluent 2025 R2 pressure path was inspected and each value read back before saving.
+- Iteration or timestep budget: `0` completed flow iterations in this preparation entry; each child is assigned a future Fluent-native `500`-iteration directional screen.
+- Convergence indicators: not applicable to case-only artifacts.
+- Outcome: `Case-only build verified / directional-screen preparation`.
+- Hypothesized cause if not converged: not applicable. The target uncertainty is physical interpretation of liquid inventory after Hybrid Initialization, especially whether Case C-style high liquid brine flow settles or depletes inventory.
+- Next action: independently Hybrid Initialize each child without a liquid patch; use native autosave and collect outlet phase flows plus continuous-liquid inventory across the common screen. See [02c future runs](../../../Setups/reports/02c/future-runs.md).
 
 ### Run 09cV3-RUN-STUDENT-2026-08-04
 - Run ID: `09cV3-RUN-STUDENT-2026-08-04`

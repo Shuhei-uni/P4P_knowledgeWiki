@@ -1,5 +1,69 @@
 # Work Log
 
+## [2026-08-14] run-correction | Retract nominal 2,000-step claim and launch enforced-step rerun
+
+- files created/updated: `../../PyAnsys/scripts/setup/run_02d_vof_stability_screen.py`, `../../PyAnsys/scripts/setup/submit_02d_vof_enforced_step_screen.py`, `../../PyAnsys/queues/02d-vof-enforced-step-screen-20260814T026000Z.jou`, `../../Setups/future/02d-transient-vof-brine-outlet-model-form-sensitivity.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/log.md`
+- purpose: audit the claimed 2,000-step coarse VOF stability screen and prevent residual-convergence termination from invalidating the requested rerun.
+- what changed: transcript audit proved the nominal outputs stopped at IC0 `69`, IC1 `69`, and IC2 Y030 `67` steps, each with Fluent's `solution is converged` message. The claimed completion is retracted. New restart sources were saved and reload-verified after every data read with `1.0e-5 s`, `2,000` steps, maximum `20` inner iterations, all residual convergence checks disabled, no physical convergence reports, and retained residual history `40,000`. A new Fluent-native queue is running; its first transcript passed step 54 below the former threshold without stopping.
+- assumptions introduced or retired: filenames are no longer used as iteration proof. Completion now requires transcript and flow-time evidence (`0.0200 s` per case). The run remains a conservative numerical smoke test only.
+- next immediate action: inspect the native transcripts at the 1,000- and 2,000-step boundaries and record any genuine solver failure or verified terminal flow time.
+
+## [2026-08-14] run-update | Complete coarse VOF IC0/IC1/IC2 numerical-stability screen
+
+- files created/updated: `../../PyAnsys/scripts/setup/run_02d_vof_stability_screen.py`, `../../PyAnsys/queues/02d-vof-stability-screen-20260814T023000Z.jou`, `../../PyAnsys/queues/02d-vof-stability-screen-20260814T024000Z.jou`, `../../Setups/future/02d-transient-vof-brine-outlet-model-form-sensitivity.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/log.md`
+- purpose: screen the user-selected coarse VOF IC0, IC1, and IC2 Y030 fields for a floating-point failure before any fine-mesh execution.
+- what changed: IC0 completed natively at `1.0e-5 s` through 1,000 and 2,000 iterations. The first IC1/IC2 journal applied the step before loading data, and the data reads restored `1.0 s`; those outputs were retained but excluded. A corrected journal loaded data first, set `1.0e-5 s` afterward, and completed IC1 and IC2 Y030 to the same paired 1,000/2,000 checkpoints. No corrected job ended with a floating-point exception.
+- assumptions introduced or retired: `1.0e-5 s` is a conservative numerical smoke-test setting only, not a Courant-qualified production timestep. No physical monitor, liquid inventory, stationarity, convergence, or separator-performance conclusion was introduced.
+- next immediate action: establish mesh/Courant timestep evidence and the physical-monitor package before any result-bearing transient run.
+
+## [2026-08-14] model-update | Prepare fine-mesh VOF IC1/IC2 patch family and dormant queue
+
+- files created/updated: `../../PyAnsys/scripts/setup/prepare_02d_fine_patch_cases_and_queue.py`, `../../PyAnsys/queues/02d-fine-vof-ic0-ic1-ic2-queue-20260814T000000Z.jou`, `../../Setups/future/02d-transient-vof-brine-outlet-model-form-sensitivity.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/log.md`
+- purpose: move the tested coarse-mesh IC1/IC2 patch definitions onto the fine VOF mesh and prepare the requested seven-case Fluent-native 500/1000-iteration queue without starting it.
+- what changed: wrote paired fine-mesh IC1 and independent IC2 Y000/Y015/Y030/Y045/Y060 patch inputs, then wrote a dormant journal with IC0, IC1, and all five pool heights. IC0 initializes in the journal; patched fields reload their saved data without resetting the patches. Every job has explicit paired save commands after 500 and 1,000 iterations.
+- assumptions introduced or retired: retained the user-approved five-cell pipe spill and the global-coordinate pool-height matrix. No production timestep, monitor definition, initialized-liquid volume/mass record, calculation, or numerical result was introduced.
+- next immediate action: review/define transient timestep and physical monitor package, then explicitly authorize journal execution.
+
+## [2026-08-14] model-update | Rebuild coarse VOF patch platform and hold IC1 selection
+
+- files created/updated: `../../Setups/future/02d-transient-vof-brine-outlet-model-form-sensitivity.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/progress/blockers.md`, `wiki/log.md`
+- purpose: recreate the no-liquid-patch Stage-1 VOF configuration on the loaded coarse mesh and attempt the IC1 brine-pipe patch only where Fluent supplied an unambiguous cell-volume selection.
+- what changed: Fluent wrote/reloaded `VOF-IC0-P1120-coarse-patch-platform-preinit-20260814T000000Z.cas.h5`, with the readback-verified explicit/sharp VOF contract. The mesh has `275,448` cells, one combined fluid cell zone, and minimum orthogonal quality `0.250006`. The live test session was Hybrid Initialized (10 internal initialization passes). At the user's direction, `vof_ic1_brine_outlet_5cells` was created from `brine-outlet` with cell-distance `5` and `1,499` marked cells, then patched as phase-2 `mp = 1.0` and saved as a paired case/data checkpoint. The global-coordinate IC2 register `vof_ic2_pool_below_y_0p30m` (`39,127` cells below `y = +0.30 m`) was inspected, approved, patched as phase-2 `mp = 1.0`, and saved as a separate paired checkpoint. The Y000 sibling was independently rebuilt from the IC1 checkpoint, patched below `y = +0.00 m` (`33,200` cells), and saved. A `+0.00/+0.15/+0.30/+0.45/+0.60 m` plane-based initial-pool sensitivity matrix is now defined. No flow timestep or solve was made.
+- assumptions introduced or retired: no geometric assumption was introduced. The requested IC1 target remains the full pipe fluid volume only; a boundary face does not prove or provide that volume.
+- next immediate action: build the planned `+0.15`, `+0.45`, and `+0.60 m` IC2 initialization siblings only when needed, recording each marked volume and initialized liquid mass before any transient run.
+
+## [2026-08-14] model-update | Build setup 02d VOF-IC0 no-patch case from brine-outlet mesh
+
+- files created/updated: `../../PyAnsys/scripts/setup/build_02d_vof_ic0_from_mesh.py`, `../../PyAnsys/output/02d_vof_ic0_mesh_inspection.json`, `../../PyAnsys/output/02d_vof_ic0_vof_probe.json`, `../../PyAnsys/output/02d_vof_ic0_build_verification.json`, `../../Setups/future/02d-transient-vof-brine-outlet-model-form-sensitivity.md`, `wiki/progress/experiments.md`, `wiki/progress/current-status.md`, `../../PyAnsys/knowledge/fluent-settings/logs/successful_paths.md`, `wiki/log.md`
+- purpose: create the requested no-liquid-patch Stage-1 VOF case as a case-only artifact from the supplied `brine-outlet-620kcells.msh.h5` mesh and verify it by explicit reload.
+- what changed: Fluent found the mesh at `C:\Users\syok443\P4P simulation\brine-outlet-620kcells.msh.h5`, read its required split-inlet/two-pressure-outlet zone topology, and wrote/reloaded `VOF-IC0-P1120-preinit-20260814T000000Z.cas.h5`. Readback confirmed explicit/sharp VOF, Geo-Reconstruct, PRESTO!, RNG k-epsilon, controlled pressures/velocities/volume fractions, and no active DPM interaction or injection.
+- assumptions introduced or retired: this is explicitly a mesh-based reconstruction rather than a verified `02c` parent clone. Gravity direction follows the prior project coordinate convention; surface tension/contact angle, local VOF mesh size/quality, pipe-connectivity visualization, monitors, and a Courant-justified timestep remain unresolved. No initialization, phase patch, solve, data write, or production claim was introduced.
+- next immediate action: inspect local cell sizes and quality in all interface-sensitive regions, define `VOF-DT1`/`VOF-DT2` plus monitor surfaces, and visually verify the lower tangential-pipe connection before authorizing a Hybrid Initialization.
+
+## [2026-08-14] model-update | Define setup 02d transient VOF brine-outlet model-form sensitivity
+
+- files created/updated: `../../Setups/future/02d-transient-vof-brine-outlet-model-form-sensitivity.md`, `../../Setups/future/index.md`, `../../Setups/order-dictionary.md`, `wiki/index.md`, `wiki/log.md`
+- purpose: preserve the user-specified Stage-1 transient explicit-VOF comparison as a distinct future setup branch from the active steady Mixture `02c` brine-outlet sensitivity.
+- what changed: defined the inherited operating basis, explicit VOF controls, `VOF-IC0/IC1/IC2-P1120` initialization study, Courant-based timestep and `DT1`/`DT2` sensitivity gates, required transient monitors/diagnostics, staged DPM/EWF plan, and the later `1.115/1.120/1.125 MPa` VOF pressure sweep.
+- assumptions introduced or retired: parent artifact identity, VOF-relevant mesh size, surface-tension/contact-angle evidence, and IC1/IC2 patch geometry remain explicit missing information; no Fluent setting, patch, mesh change, case artifact, or numerical result was created.
+- next immediate action: read back a verified `02c`-comparable parent in Fluent, inspect local mesh sizes and available regions, then request the user's manual patch selection only if IC1 or IC2 is to be built.
+
+## [2026-08-14] run-update | Launch setup 02c native positive-backpressure queue
+
+- files created/updated: `../../PyAnsys/src/pyansys_fluent/positive_backpressure_queue.py`, `../../PyAnsys/scripts/setup/generate_02c_positive_backpressure_queue.py`, `../../PyAnsys/queues/02c-positive-backpressure-screen.yaml`, `../../Setups/reports/02c/future-runs.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/log.md`
+- purpose: launch the prepared D/E/F/G 02c positive-backpressure cases serially through the one existing Fluent session, so each case is saved before the next independent child begins.
+- what changed: Fluent accepted the native quoted journal and began loading Case D. The first autosave-menu configuration attempt failed safely before Case D was loaded because the live 2025 R2 command is interactive/prompt-sensitive; the final launched journal instead performs the known explicit paired case/data save after each completed 500-iteration screen.
+- current status: launched / completion unverified. TCP remains reachable but bounded read-only gRPC reconnection attempts did not complete while Fluent was busy; no additional solver action was issued.
+- next immediate action: verify remote endpoint pairs after Fluent returns control, then conduct the same carrier/residual analysis for D/E/F/G.
+
+## [2026-08-12] setup-update | Prepare setup 02c positive-backpressure screen
+
+- files created/updated: `../../Setups/active/02c-mixture-brine-outlet-pressure-sensitivity-unprimed.md`, `../../Setups/reports/02c/future-runs.md`, `../../PyAnsys/scripts/setup/build_02c_positive_backpressure_cases.py`, `../../PyAnsys/queues/02c-positive-backpressure-screen.yaml`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/progress/blockers.md`, `wiki/log.md`
+- purpose: extend the unprimed 02c brine-outlet pressure screen above the fixed steam-outlet pressure after the A/B/C early results showed a strong vapour-routing direction.
+- what changed: prepared independent case-only children D (`1.1225 MPa`), E (`1.1275 MPa`), F (`1.1300 MPa`), and G (`1.1350 MPa`) from the same frozen pre-initialization parent. The live Fluent 2025 R2 brine-pressure path was inspected and each requested pressure read back before its remote case-only save.
+- assumptions introduced/removed: no new physical model assumption. The positive-backpressure behaviour remains an `Inferred` screening hypothesis; Case C's initial-inventory ambiguity remains unresolved.
+- next action: run each prepared child in Fluent with native autosave and a common liquid-inventory/phase-flux monitor package, then classify drainage as settling, inventory depletion, restricted, or indeterminate.
+
 ## [2026-08-12] analysis-update | Analyse setup 02c Case C higher-pressure screen
 
 - purpose: analyse the user-confirmed retained Case C `iter500` Fluent session without changing model physics.

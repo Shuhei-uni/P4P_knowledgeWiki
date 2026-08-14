@@ -1,0 +1,34 @@
+queue:
+  id: 02c-positive-backpressure-screen
+  execution_owner: Fluent-native sequential run; no Python iteration loop
+  parent_case: C:\Users\syok443\P4P simulation\brine outlet\02c-B-brine-p1120kpa-unprimed-preinit-20260812T043007Z.cas.h5
+  steam_outlet_gauge_pressure_pa: 1120000
+  initialization: hybrid
+  liquid_patch: prohibited
+  screen_iterations: 500
+  checkpoint_policy:
+    write_paired_case_data_after_each_completed_screen: true
+    note: >-
+      The native autosave menu is release/prompt sensitive in the live 2025 R2
+      session. The initial queue journal therefore uses its verified explicit
+      end-of-screen paired write before loading the next independent case.
+  note: >-
+    Each job is independently loaded from the frozen parent. The 500-iteration
+    screen is directional evidence only, not a convergence or pressure-selection test.
+jobs:
+  - id: 02c-D
+    brine_pressure_pa: 1122500
+    delta_vs_steam_pa: 2500
+    suffix: brine-p1122p5kpa-unprimed
+  - id: 02c-E
+    brine_pressure_pa: 1127500
+    delta_vs_steam_pa: 7500
+    suffix: brine-p1127p5kpa-unprimed
+  - id: 02c-F
+    brine_pressure_pa: 1130000
+    delta_vs_steam_pa: 10000
+    suffix: brine-p1130kpa-unprimed
+  - id: 02c-G
+    brine_pressure_pa: 1135000
+    delta_vs_steam_pa: 15000
+    suffix: brine-p1135kpa-unprimed

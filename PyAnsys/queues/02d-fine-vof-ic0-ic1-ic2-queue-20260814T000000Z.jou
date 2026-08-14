@@ -1,0 +1,63 @@
+; Dormant Fluent-native 02d fine-mesh queue: 02d-fine-vof-ic0-ic1-ic2-queue-20260814T000000Z
+; Do not execute until timestep, monitoring, and transient-readiness gates are approved.
+; IC0 is initialized in the journal. IC1/IC2 load their independently patched case/data fields.
+/file/confirm-overwrite? no
+/file/start-transcript "C:/Users/syok443/P4P simulation/02d-fine-vof-ic0-ic1-ic2-queue-20260814T000000Z.trn"
+; BEGIN VOF-IC0-P1120
+/file/read-case "C:/Users/syok443/P4P simulation/VOF-IC0-P1120-preinit-20260814T000000Z.cas.h5"
+/solve/initialize/hyb-initialization
+/solve/iterate 500
+/file/write-case-data "C:/Users/syok443/P4P simulation/VOF-IC0-P1120-fine-iter500.cas.h5"
+/solve/iterate 500
+/file/write-case-data "C:/Users/syok443/P4P simulation/VOF-IC0-P1120-fine-iter1000.cas.h5"
+; END VOF-IC0-P1120
+; BEGIN VOF-IC1-P1120
+/file/read-case "C:/Users/syok443/P4P simulation/VOF-IC1-P1120-fine-patch-platform-20260814T000000Z.cas.h5"
+/file/read-data "C:/Users/syok443/P4P simulation/VOF-IC1-P1120-fine-patch-platform-20260814T000000Z.dat.h5"
+/solve/iterate 500
+/file/write-case-data "C:/Users/syok443/P4P simulation/VOF-IC1-P1120-fine-iter500.cas.h5"
+/solve/iterate 500
+/file/write-case-data "C:/Users/syok443/P4P simulation/VOF-IC1-P1120-fine-iter1000.cas.h5"
+; END VOF-IC1-P1120
+; BEGIN VOF-IC2-Y000-P1120
+/file/read-case "C:/Users/syok443/P4P simulation/VOF-IC2-Y000-P1120-fine-patch-platform-20260814T000000Z.cas.h5"
+/file/read-data "C:/Users/syok443/P4P simulation/VOF-IC2-Y000-P1120-fine-patch-platform-20260814T000000Z.dat.h5"
+/solve/iterate 500
+/file/write-case-data "C:/Users/syok443/P4P simulation/VOF-IC2-Y000-P1120-fine-iter500.cas.h5"
+/solve/iterate 500
+/file/write-case-data "C:/Users/syok443/P4P simulation/VOF-IC2-Y000-P1120-fine-iter1000.cas.h5"
+; END VOF-IC2-Y000-P1120
+; BEGIN VOF-IC2-Y015-P1120
+/file/read-case "C:/Users/syok443/P4P simulation/VOF-IC2-Y015-P1120-fine-patch-platform-20260814T000000Z.cas.h5"
+/file/read-data "C:/Users/syok443/P4P simulation/VOF-IC2-Y015-P1120-fine-patch-platform-20260814T000000Z.dat.h5"
+/solve/iterate 500
+/file/write-case-data "C:/Users/syok443/P4P simulation/VOF-IC2-Y015-P1120-fine-iter500.cas.h5"
+/solve/iterate 500
+/file/write-case-data "C:/Users/syok443/P4P simulation/VOF-IC2-Y015-P1120-fine-iter1000.cas.h5"
+; END VOF-IC2-Y015-P1120
+; BEGIN VOF-IC2-Y030-P1120
+/file/read-case "C:/Users/syok443/P4P simulation/VOF-IC2-Y030-P1120-fine-patch-platform-20260814T000000Z.cas.h5"
+/file/read-data "C:/Users/syok443/P4P simulation/VOF-IC2-Y030-P1120-fine-patch-platform-20260814T000000Z.dat.h5"
+/solve/iterate 500
+/file/write-case-data "C:/Users/syok443/P4P simulation/VOF-IC2-Y030-P1120-fine-iter500.cas.h5"
+/solve/iterate 500
+/file/write-case-data "C:/Users/syok443/P4P simulation/VOF-IC2-Y030-P1120-fine-iter1000.cas.h5"
+; END VOF-IC2-Y030-P1120
+; BEGIN VOF-IC2-Y045-P1120
+/file/read-case "C:/Users/syok443/P4P simulation/VOF-IC2-Y045-P1120-fine-patch-platform-20260814T000000Z.cas.h5"
+/file/read-data "C:/Users/syok443/P4P simulation/VOF-IC2-Y045-P1120-fine-patch-platform-20260814T000000Z.dat.h5"
+/solve/iterate 500
+/file/write-case-data "C:/Users/syok443/P4P simulation/VOF-IC2-Y045-P1120-fine-iter500.cas.h5"
+/solve/iterate 500
+/file/write-case-data "C:/Users/syok443/P4P simulation/VOF-IC2-Y045-P1120-fine-iter1000.cas.h5"
+; END VOF-IC2-Y045-P1120
+; BEGIN VOF-IC2-Y060-P1120
+/file/read-case "C:/Users/syok443/P4P simulation/VOF-IC2-Y060-P1120-fine-patch-platform-20260814T000000Z.cas.h5"
+/file/read-data "C:/Users/syok443/P4P simulation/VOF-IC2-Y060-P1120-fine-patch-platform-20260814T000000Z.dat.h5"
+/solve/iterate 500
+/file/write-case-data "C:/Users/syok443/P4P simulation/VOF-IC2-Y060-P1120-fine-iter500.cas.h5"
+/solve/iterate 500
+/file/write-case-data "C:/Users/syok443/P4P simulation/VOF-IC2-Y060-P1120-fine-iter1000.cas.h5"
+; END VOF-IC2-Y060-P1120
+/file/stop-transcript
+; Queue complete; Fluent remains open.
