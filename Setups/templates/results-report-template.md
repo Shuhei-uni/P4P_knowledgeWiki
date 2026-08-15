@@ -1,37 +1,109 @@
 # Results Report — Setup <ID>
 
-## Setup link
+> Default behavior: this report presents the evidence clearly and leaves scientific interpretation to the user unless an interpretation framework was supplied in advance or the user explicitly asks the agent to interpret.
+
+## 1. What this run was trying to investigate
 
 - Setup definition: `<link>`
-- Parent setup: `<link or none>`
-- Run identity: `<run ID, date, case/data files>`
+- Investigation mode: `<exploratory / diagnostic / sensitivity / verification / validation / ...>`
+- Primary question: `<copied or faithfully summarized from setup>`
+- Controlled change(s): `<what differed from reference>`
+- Reference/comparison case: `<link or none>`
+- Interpretation owner: `user-led` / `joint` / `agent-led`
+- Interpretation status: `pending user direction` / `criteria supplied in setup` / `interpreted on user request`
 
-## 1. Run scope
+Keep this short. Do not rewrite the entire setup definition.
 
-State what was actually run and which controlled change was tested.
+## 2. What was actually run
 
-## 2. Numerical results
+| Item | Observed value / evidence |
+|---|---|
+| Case/data identity | `<files or unavailable>` |
+| Fluent version | `<...>` |
+| Initialization/restart state | `<...>` |
+| Iterations / physical time | `<...>` |
+| Relevant model state | `<only what matters to this run>` |
+| Deviations from intended setup | `<none or exact deviation>` |
 
-### Phase flux and efficiency
+Link raw setup/readback evidence where available.
 
-Record actual inlet/outlet values, units, equations, and scoped interpretation.
+## 3. Evidence collected and why
 
-### DPM injection trajectory/fate
+List the analyses actually performed. Do not force carrier, DPM, EWF, VOF, or another analysis category into the report when it is irrelevant.
 
-Record injection name, diameter, represented flow, injected count, and observed escaped count/represented mass at `steamoutlet`. Keep other Fluent fate categories in linked raw artifacts unless they directly answer the setup question.
+| Analysis / evidence | Status | Why it matters to this setup question | Source |
+|---|---|---|---|
+| `<...>` | `completed / partial / unavailable / not applicable / deferred` | `<relevance>` | `<artifact link>` |
 
-## 3. Residuals and solution state
+If a useful analysis was not captured, explain what is missing and whether it can be recovered from the existing case/data or requires a rerun.
 
-Record iteration count, residual behavior, monitor stability, mesh status, and convergence limitations. Whole-domain liquid/mixture imbalance is informational only for the simplified Purnanto geometry.
+## 4. Results
 
-## 4. Visual findings
+Organize this section around the setup question rather than around a fixed script taxonomy.
 
-Record contour, vector, streamline, pathline, or geometry observations with evidence links.
+### <Result group relevant to the setup>
 
-## 5. Interpretation and limitations
+Present direct Fluent measurements first. Use compact tables and preserve units, sign conventions, time/iteration scope, and surface/zone definitions.
 
-Separate observed numerical results from inferred physical meaning. Keep raw unresolved categories traceable without presenting them as blockers.
+### Derived quantities — when useful
 
-## 6. Conclusion
+Show equations or transformations used to turn measured values into derived metrics. Keep measured and derived values distinguishable.
 
-State `keep`, `reject`, or `needs follow-up`, then identify the next setup or report action.
+### Visual / spatial evidence — when useful
+
+Record contour, vector, streamline, pathline, interface, particle, film, or geometry observations with evidence links. Describe what is visible without assigning physical meaning that the user has not requested.
+
+## 5. Numerical state and evidence quality
+
+Record only limitations that affect how the evidence can be used:
+
+- residual/monitor behavior;
+- time-window or iteration-window stability;
+- mass/phase closure where relevant;
+- timestep/mesh independence where relevant to the investigation mode;
+- incomplete or missing outputs;
+- inherited configuration caveats;
+- differences between intended and observed setup state.
+
+For exploratory or diagnostic runs, numerical imperfection may be part of the evidence. Do not automatically turn every imperfection into a failed run. For verification/validation, apply the pre-agreed criteria explicitly.
+
+## 6. Observations without interpretation
+
+Summarize the most important evidence as neutral statements.
+
+Use labels where helpful:
+
+- **Measured:** direct Fluent/export value.
+- **Derived:** calculated from measured values.
+- **Observed pattern:** visible trend or comparison supported by the evidence.
+- **Unresolved:** data or comparison still missing.
+
+Avoid causal claims, model selection, operating-point selection, `keep/reject`, or recommendations here unless they follow a decision rule the user supplied before interpretation.
+
+## 7. Interpretation handoff
+
+**Interpretation status:** `pending user direction` by default.
+
+State the decisions that the evidence could inform, then ask focused questions rather than choosing for the user. Examples:
+
+- Should this be treated only as an exploratory signal, or do you want to compare it against a specific acceptance/validation criterion?
+- Which comparison should control the interpretation: the parent case, another pressure/model, literature/experimental data, or an engineering target?
+- Which metric matters most for the decision?
+- Do you want the agent to propose possible explanations, or keep the report evidence-only?
+- Is another analysis needed before interpreting the run?
+
+Do not ask generic questions when the setup already contains the user's interpretation criteria. In that case, evaluate only those criteria and leave broader meaning open.
+
+## 8. Interpretation — optional, only after direction
+
+Add this section only when the user explicitly interprets the result, asks for joint interpretation, asks the agent to interpret, or supplied a decision framework in advance.
+
+Record:
+
+- interpretation owner: `user-provided` / `joint` / `agent-proposed`;
+- evidence used;
+- interpretation and confidence/scope;
+- alternatives or unresolved explanations when material;
+- any user-approved next action.
+
+Do not silently rewrite evidence sections to match a later interpretation. Preserve the evidence and append/update this section transparently.
