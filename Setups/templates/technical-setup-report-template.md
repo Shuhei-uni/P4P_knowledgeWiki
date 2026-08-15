@@ -1,90 +1,103 @@
-# Technical Setup Report Template
+# Technical Setup Evidence Template
 
-Use this template for setup-instance companion reports that focus on the actual Fluent export, geometry/mesh handling, and report-vs-extraction drift.
+Use this companion when a machine-extracted Fluent state needs to be compared with the intended setup definition. This is an implementation/readback record, not a scientific interpretation report.
 
 ## 1. Purpose
 
-- Record the machine-extracted Fluent state for one concrete setup.
-- Separate actual Fluent export values from the human-facing narrative report.
-- Capture human-error candidates explicitly when the report and the export disagree.
-- Keep geometry, meshing, setup, and run-control details in one place without duplicating the whole lineage story.
+- Record what Fluent actually exposes for one concrete case/checkpoint.
+- Compare observed state with the intended setup contract.
+- Identify replay-critical drift or uncertain extraction without deciding what the simulation result means.
+- Provide evidence the implementation agent can use to correct or verify the case.
 
-Rule:
+Authority rule:
 
-- if the Fluent export and the human report disagree, treat the export as the replay authority and record the report text as the intended or narrative interpretation.
+- the **setup definition** records what the experiment intended;
+- the **Fluent extraction** records what was actually observed in the loaded case;
+- when they disagree, record the drift. Do not silently rewrite either source to make them agree.
+- if the drift changes experimental meaning, hand the decision to the user or setup workflow.
 
 ## 2. Sources
 
-| Item | Path | Notes |
+| Item | Path | Role |
 |---|---|---|
-| Fluent export archive | `...` | Primary machine-readable source |
-| Narrative setup report | `...` | Human-facing companion report |
-| Related intended-vs-actual note | `...` | Optional drift companion |
-| Supporting notes | `...` | Optional scratch or extraction note |
+| Setup definition | `...` | Intended experiment/build contract |
+| Fluent export / readback | `...` | Observed case state |
+| Case/data checkpoint | `...` | Artifact identity |
+| Supporting extraction | `...` | Optional raw evidence |
 
-## 3. Setup Identity
+## 3. Case identity
 
-| Field | Value | Status | Notes |
+| Field | Intended / recorded | Observed | Status / notes |
 |---|---|---|---|
-| Setup label | `...` |  |  |
-| Fluent version | `...` |  |  |
-| Geometry label | `...` |  |  |
-| Boundary topology | `...` |  |  |
-| Multiphase model | `...` |  |  |
-| Solver family | `...` |  |  |
-| DPM state | `...` |  |  |
+| Setup ID | `...` | `...` |  |
+| Case/data filename | `...` | `...` |  |
+| Fluent version | `...` | `...` |  |
+| Geometry / mesh identity | `...` | `...` |  |
+| Investigation mode | `...` | `n/a unless encoded` | context only |
 
-## 4. Geometry And Mesh
+Never infer case identity from a Fluent connection/server ID.
 
-| Topic | Human report says | Extracted Fluent state | Status | Notes |
+## 4. Geometry and mesh readback
+
+| Topic | Intended setup | Observed Fluent state | Status | Notes |
 |---|---|---|---|---|
-| CAD / physical geometry | `...` | `...` |  |  |
-| Mesh type | `...` | `...` |  |  |
-| Mesh control settings | `...` | `...` |  |  |
-| Mesh quality or count | `...` | `...` |  |  |
+| Boundary topology | `...` | `...` | `match / drift / uncertain / not serialized` |  |
+| Mesh source/count | `...` | `...` |  |  |
+| Relevant mesh controls | `...` | `...` |  |  |
 
-If the archive does not serialize a geometry or mesh detail, say so explicitly rather than inferring it.
+If a detail is not serialized or observable, say so rather than inferring it.
 
-## 5. Fluent Setup
+## 5. Physics and solver readback
 
-| Topic | Human report says | Extracted Fluent state | Status | Notes |
+| Topic | Intended setup | Observed Fluent state | Status | Notes |
 |---|---|---|---|---|
-| Solver / time | `...` | `...` |  |  |
+| Solver / steady-transient | `...` | `...` |  |  |
 | Operating conditions | `...` | `...` |  |  |
 | Models | `...` | `...` |  |  |
-| Materials | `...` | `...` |  |  |
+| Materials / phases | `...` | `...` |  |  |
 | Cell zones | `...` | `...` |  |  |
 
-## 6. Boundary Conditions
+## 6. Boundary conditions
 
-| Boundary | Human report says | Extracted Fluent state | Status | Notes |
+| Boundary | Intended state | Observed state | Status | Notes |
 |---|---|---|---|---|
-| Inlet | `...` | `...` |  |  |
-| Outlet | `...` | `...` |  |  |
-| Walls | `...` | `...` |  |  |
+| `<zone>` | `...` | `...` |  |  |
 
-## 7. Solution, Initialization, And Run Control
+Preserve units, phase-specific values, backflow settings, profiles/UDFs, and any ambiguity that affects the experiment.
 
-| Topic | Human report says | Extracted Fluent state | Status | Notes |
+## 7. Initialization, numerics and run control
+
+| Topic | Intended setup | Observed state | Status | Notes |
 |---|---|---|---|---|
-| Pressure-velocity coupling | `...` | `...` |  |  |
-| Discretization schemes | `...` | `...` |  |  |
-| Under-relaxation | `...` | `...` |  |  |
-| Initialization | `...` | `...` |  |  |
-| Iteration count | `...` | `...` |  |  |
-| Residual criteria | `...` | `...` |  |  |
+| Coupling / schemes | `...` | `...` |  |  |
+| Under-relaxation / controls | `...` | `...` |  |  |
+| Initialization / patching | `...` | `...` |  |  |
+| Timestep / iteration controls | `...` | `...` |  |  |
+| Monitor/report definitions | `...` | `...` |  |  |
 
-## 8. Drift Log
+## 8. Drift log
 
-List only the differences that matter for replay, validation, or interpretation.
+List only differences that matter for replay, controlled comparison, evidence collection, verification, or validation scope.
 
-| Topic | Reported | Extracted | Drift type | Action |
-|---|---|---|---|---|
-| `...` | `...` | `...` | `match` / `rounded` / `intentional` / `human-error-candidate` / `not-serialized` | `...` |
+| Topic | Intended | Observed | Drift class | Why it matters | Action owner |
+|---|---|---|---|---|---|
+| `...` | `...` | `...` | `match / rounded / intentional / likely error / uncertain / not serialized` | `<effect on setup meaning>` | `agent / user decision / follow-up inspection` |
 
-## 9. Open Items
+Do not label a drift as scientifically acceptable/unacceptable unless the setup already contains that criterion.
 
-- Items that remain unresolved after the extraction.
-- Items that require a user decision.
-- Items that need a follow-up Fluent inspection.
+## 9. Evidence-collection readiness
 
+When the setup names measurements that must exist before/during the solve, verify them here.
+
+| Required evidence instrumentation | Observed state | Ready? | Notes |
+|---|---|---|---|
+| `<monitor/report/probe/history>` | `<...>` | `yes / no / uncertain` | `<...>` |
+
+## 10. Open implementation decisions
+
+- unresolved intended-vs-observed differences;
+- items the implementation agent can repair without changing experimental meaning;
+- items that require user direction because they would change the setup question or controlled comparison;
+- follow-up readbacks needed before the case is considered build-verified.
+
+Do not include scientific outcome interpretation here. That belongs in the setup-linked results report after evidence is collected and interpretation direction is established.
