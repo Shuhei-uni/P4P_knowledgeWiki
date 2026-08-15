@@ -1,226 +1,335 @@
 ---
 name: post-simulation-analysis
-description: "Use for evidence-led post-simulation analysis and reporting of existing Ansys Fluent case/data results, including carrier-field checks, DPM particle-track fate and mass-flow closure, Eulerian Wall Film (EWF) configuration/final-state diagnostics, transcript capture, and setup-linked reports in Setups/reports/. Use when deciding which analyses apply to a concrete Fluent setup; do not use to rebuild a setup or enable/change solver physics."
+description: "Plan and perform setup-specific post-simulation analysis for existing Ansys Fluent case/data results. Start from the setup's scientific question, discover what evidence is available, propose analyses with an explicit relevance rationale, ask the user to choose or refine the analysis when the choice is material, reuse existing carrier/DPM/EWF scripts where they fit, and create custom read-only extraction when they do not. Reports are evidence-first and user-interpreted by default."
 ---
 
-# Post-Simulation Analysis
+# Adaptive Post-Simulation Analysis
 
-## Purpose and boundary
+## Purpose
 
-Analyse an already-built Fluent case/data state without rebuilding the setup or changing its physics. Use the resulting evidence to create or extend the report for that exact setup branch.
+Analyse an already-built Fluent case/data state in a way that answers the **specific setup question**.
 
-Keep roles separate:
+Existing scripts are analysis tools, not the analysis plan.
 
-- `PyAnsys/` owns executable inspection and generated artifacts.
-- `Setups/reports/<setup-id>/` owns the concise, report-facing interpretation of one concrete setup.
-- `Setups/` setup definitions own case identity and lineage; do not alter them merely because analysis was run.
-- `ResearchProject_wiki` owns project-level conclusions and sign-off.
+The workflow should be able to handle:
 
-`snapshot` creates or reuses only namespaced `ewfdiag-*` report definitions. It must never enable EWF, splashing, stripping, edge separation, coupling, or any other physics merely to expose an output.
+- a case that fits the existing carrier/DPM/EWF diagnostic scripts exactly;
+- a VOF, transient, pressure-sensitivity, local-drainage, mesh/timestep, or other setup where those scripts cover only part of the question;
+- a case where the most relevant evidence has not yet been extracted and must be discovered or gathered with a one-off read-only PyFluent calculation;
+- a case where the available checkpoint cannot answer the intended question and the correct result is a clear evidence gap rather than a forced interpretation.
 
-## Route the analysis from the setup
+Do not rebuild setup physics in this skill. If answering the question requires changing physics, initialization, mesh, boundary conditions, or rerunning with new monitors, describe that requirement and hand it back to setup/run planning.
 
-Before running anything, read in order:
+## Core principle
 
-1. Repository `AGENTS.md` and `Setups/order-dictionary.md`.
-2. The target setup definition and its immediate parent/comparison setup when relevant.
-3. The target setup's existing `Setups/reports/<setup-id>/` report, if present.
-4. `PyAnsys/AGENTS.md` and the current diagnostic documentation:
-   - `PyAnsys/docs/EWF_DPM_DIAGNOSTICS.md`
-   - `PyAnsys/docs/EWF_DPM_TRANSCRIPT_CAPTURE.md` when DPM tracking is needed.
-
-Make an applicability table before execution. Treat a model as applicable only when the setup definition and live audit support it.
-
-| Setup evidence | Run | Do not infer |
-|---|---|---|
-| Any solved carrier case | carrier residual/flux/stability checks already supported by the case workflow | full separator validation from a scoped outlet metric alone |
-| Active DPM injections | complete Particle Tracks Summary sweep for every live injection | DPM analysis for a case without an active injection branch |
-| Active EWF film wall | `audit`, then `snapshot` on only the confirmed film walls | EWF on ordinary walls, or film analysis on `bottom` unless it is actually a film wall |
-| EWF plus wall/global splash enabled | preserve absorbed and splashed event counts in DPM reporting | splash events as an extra terminal mass sink |
-| Edge separation or particle stripping enabled | include the corresponding separated/stripped report terms | those mechanisms from a field-menu item alone |
-| No EWF | carrier and/or DPM analysis only | film inventory, film drainage, EWF source, or EWF closure |
-| No DPM | carrier and, when applicable, EWF analysis only | injection fate, splash parcel, or DPM mass-flow claims |
-
-Record every omitted analysis as `Not applicable`, `Not available`, or `Deferred`, with the reason. Do not turn an omitted mechanism into a zero-valued result.
-
-### Mandatory DPM coverage
-
-When the live audit discovers one or more DPM injections, run a complete DPM
-Particle Tracks Summary for every discovered injection by default. Do not omit
-DPM merely because carrier or EWF checks are incomplete. The only exceptions
-are when the user explicitly excludes DPM or explicitly limits the injection
-selection; record that instruction and every omitted injection in the report.
-
-If a DPM sweep fails its completion gate, preserve its partial artifacts and
-report the sweep as incomplete. Never substitute missing fates or mass terms
-with zero.
-
-## Preflight and safe execution
-
-Use the already-open Fluent session unless explicit case/data loading is required and authorised. Confirm the observed case/data identity, setup scope, and Fluent version before interpreting any output. Treat `--server-id` only as the connection selector; it is never case or setup identity and must not be persisted in report evidence.
-
-### Mandatory case-identity gate
-
-Before interpreting any live result:
-
-1. inspect the loaded Fluent state after connecting;
-2. when the workflow explicitly loads a case/data pair, retain those observed
-   filenames as the identity basis;
-3. when the session was already loaded and Fluent does not expose its filenames,
-   set the case identity to `unavailable`;
-4. do not map a server ID, Fluent version, iteration count, monitor history,
-   hostname, port, or previous report to a setup or case;
-5. do not create setup-linked claims from an `unavailable` identity. Report the
-   result only as an unlinked diagnostic unless the user supplies independent
-   case evidence.
-
-Persist case/data identity and its evidence basis when available. Do not persist
-`server_id` in JSON, Markdown, manifests, filenames, or setup reports. Keeping
-the ID in the command used to connect or in transient troubleshooting output is
-allowed because it is operational routing metadata only.
-
-### Mandatory live-analysis supervision rule
-
-For **every** live Fluent analysis command or script (`audit`, `snapshot`,
-`dpm`, `all`, carrier extraction, residual export, or another diagnostic
-runner), retain the controlling shell and supervise its output for a minimum
-of **320 seconds** from launch. Poll the console and expected output artifacts
-at approximately 60-second intervals. Silence, a partial console return, or a
-client-side return is not a completion signal: Fluent can continue reporting
-or calculating after the Python client appears quiet.
-
-The only permitted early exit is after verifying that the command has produced
-its complete expected output set and has emitted no unresolved error. For
-example, a snapshot requires its raw results plus snapshot, film-flux, and
-bookkeeping payloads; a DPM sweep requires its full transcript and final
-JSON/CSV bundle for every selected injection. If the client returns without
-those artifacts, keep the supervising shell alive for the full 320 seconds.
-After 320 seconds, continue one-minute polling until completion or an explicit
-Fluent/client failure. Never start a second analysis command while the first
-command remains incomplete.
-
-```bash
-/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/.venv/bin/python -c 'import sys; print(sys.executable)'
-/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/.venv/bin/python PyAnsys/scripts/connection/check_connection.py --server-id 1
-```
-
-Use this explicit interpreter for every non-interactive command below. Do not
-rely on a prior `source .venv/bin/activate`, because its shell state may not
-survive a separate tool invocation.
-
-Use the modular runner:
-
-```bash
-/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/.venv/bin/python PyAnsys/scripts/inspection/run_ewf_dpm_diagnostics.py --server-id 1 --mode audit
-```
-
-Start with `audit`. It is read-only and establishes live injection names, wall-film assignments, UDF overrides, and diagnostic limitations. Treat a missing Settings API path as a version/adapter finding, not proof that a model is disabled.
-
-Run `snapshot` only for confirmed EWF cases. Supply the actual film walls and flux boundaries rather than assuming generic names:
-
-```bash
-/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/.venv/bin/python PyAnsys/scripts/inspection/run_ewf_dpm_diagnostics.py \
-  --server-id 1 --mode snapshot --film-wall <film-wall> \
-  --flux-boundary <boundary> --object-policy reuse
-```
-
-When the audit finds active DPM injections, this sweep is mandatory unless the
-user explicitly excludes DPM or limits the injection set. Prefer stable
-injection names only for an explicitly narrowed request; otherwise omit them
-to track every live injection in diameter order:
-
-```bash
-/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/.venv/bin/python PyAnsys/scripts/inspection/run_ewf_dpm_diagnostics.py \
-  --server-id 1 --mode dpm --order diameter-ascending --keep-going \
-  --dpm-timeout-seconds 600 --transcript-quiet-seconds 1.0
-```
-
-Use `all` only after separate `audit`, `snapshot`, and `dpm` runs have each been validated for the specific Fluent version and case.
-
-## DPM completion gate and wait rules
-
-For every injection, require all of the following before submitting the next command:
-
-1. A `number tracked = ...` line.
-2. A `Mass Transfer Summary` section.
-3. At least one parsed mass-transfer row.
-4. A quiet transcript interval of at least `1.0 s`.
-5. Immediate write of that injection's raw transcript and partial CSV/JSON state.
-
-Use `--dpm-timeout-seconds 600` unless a documented case-specific limit is justified. A timeout, parser failure, or client error is a hard stop; do not queue the next injection merely because `--keep-going` was supplied.
-
-Run a complete DPM sweep in a persistent terminal session. The universal
-320-second live-analysis supervision rule applies in full to every sweep. Do
-not reconnect, launch another tracker, or use another server while the
-existing sweep remains incomplete. If the process itself ends before the final
-transcript and output bundle exist, keep supervising for the 320-second
-minimum and record an incomplete DPM execution rather than inferring missing
-fates as zero.
-
-Capture through `solver.transcript`, not Python `redirect_stdout`. Preserve:
-
-- `dpm_live_transcript.txt`;
-- one `dpm_raw/<index>-<injection>.txt` file per completed injection;
-- partial outputs during the sweep;
-- final `dpm_injection_summary.csv`, `dpm_zone_summary.csv`, `bookkeeping.json`, and `raw_results.json`.
-
-## Interpret each analysis correctly
-
-### Audit
-
-Use `model_audit.json` to answer what Fluent was configured to do: active film walls, wall impingement/splash settings, optional EWF mechanisms, UDF overrides, and injection identity. It establishes scope; it does not prove the physical outcome.
-
-### DPM
-
-For each named injection, retain counts, fate-by-zone rows, elapsed-time statistics, mass-transfer rows, and the DPM closure:
+The analysis sequence is:
 
 ```text
-net injected mass flow
-≈ escaped + trapped + absorbed + incomplete + other terminal fates
+setup intent
+-> live/file evidence discovery
+-> candidate analyses + relevance
+-> user analysis choice when material
+-> deterministic/custom extraction
+-> evidence quality check
+-> evidence-first report
+-> user interpretation handoff
+-> optional interpretation after direction
 ```
 
-`splashed = ...` is a secondary-parcel/event diagnostic. If final fate totals include the generated secondary parcels, do not add their splash mass again to the terminal closure. Keep the EWF absorbed-event counter separate from the final `Absorbed` fate row; they can differ.
+Do not reverse this into `available script -> run script -> invent a conclusion`.
 
-### EWF final-state snapshot
+## 1. Recover the investigation intent
 
-On confirmed film walls only, capture the final values and units for:
+Before choosing analyses, read:
 
-- maximum film Courant number;
-- total film mass/inventory;
-- maximum and area-weighted film thickness;
-- Film DPM Mass Source;
-- Film Outflow Mass and boundary Film Mass Flow Rate;
-- average/maximum film velocity and velocity components;
-- Film Stripped Mass only if stripping is active;
-- Film Separated Mass only if edge separation is active.
+1. repository `AGENTS.md` and `Setups/order-dictionary.md`;
+2. the target setup definition;
+3. the relevant parent/reference/comparison setup when the question is comparative;
+4. the target setup's existing results report, if present;
+5. `PyAnsys/AGENTS.md` and only the diagnostic documentation relevant to candidate tools.
 
-Distinguish inventory/cumulative quantities in `kg` from source or flux rates in `kg/s`. A single final `.dat.h5` supports a snapshot, not a time-integrated EWF mass closure.
+Extract or infer only what the sources support:
 
-### EWF histories and closure
+- setup ID and case/data identity basis;
+- investigation mode: exploratory, diagnostic, sensitivity, verification, validation, production/decision, or user-defined equivalent;
+- primary question;
+- controlled changes and frozen comparison context;
+- evidence already requested in the setup;
+- pre-agreed decision/validation criteria, if any;
+- interpretation owner, defaulting to `user-led`.
 
-Create report-history files before continuing or rerunning the calculation. A defensible EWF closure needs a defined interval, initial/final inventory, and time-integrated source/inflow/outflow terms. Label a final-state-only result `bookkeeping-only`; do not claim conservation from mixed `kg` and `kg/s` values.
+If the setup predates the intent-first format, reconstruct the likely question from the setup and report, but label uncertain intent. Ask the user when that uncertainty would materially change what data should be gathered.
 
-## Report the result
+Do not assume an exploratory setup is a validation exercise. Do not invent acceptance criteria from normal CFD conventions unless the user asks for a proposed criterion.
 
-When a report is requested or analysis supplies new result evidence:
+## 2. Discover available evidence before committing to an analysis
 
-1. Use `Setups/reports/<setup-id>/results.md` unless the evidence genuinely needs a separate focused companion.
-2. Link the report to exactly one setup definition. A comparison companion may name its parent/child scope explicitly, but must not replace individual setup reports.
-3. Link to raw PyAnsys outputs; do not paste complete transcripts into the report.
-4. Update `Setups/reports/index.md` when creating a new report file.
-5. Preserve prior findings; append or add a dated evidence subsection instead of silently replacing a result from a different case/data checkpoint.
+Perform cheap, read-only discovery first. This discovery does not require the user to pre-select analyses because its purpose is to make the analysis choice informed.
 
-Read [the report structure reference](references/report-structure.md) before drafting or revising a report.
+Discover as applicable:
 
-## Completion checklist
+- observed case/data filenames or whether identity is unavailable;
+- Fluent and PyFluent version;
+- steady/transient state, iteration count or physical time;
+- active multiphase/turbulence/energy/DPM/EWF models;
+- phase names;
+- boundary/cell-zone names and types;
+- active DPM injections and their source surfaces;
+- confirmed EWF film walls and enabled mechanisms;
+- existing report definitions, monitor histories and autosave/checkpoint data;
+- available field variables and surfaces needed for likely metrics;
+- existing PyAnsys output bundles for this case;
+- comparison checkpoints named by the setup.
 
-- Analysis scope follows the setup's actual active physics.
-- Case/data identity, Fluent version, surfaces, and injection scope are recorded.
-- No server ID is persisted as case or setup provenance.
-- DPM raw transcripts and final output bundle exist for every reported injection.
-- EWF fields are reported only for active EWF mechanisms and with units/time-basis labels.
-- Claims distinguish measured, derived, unresolved, and not-applicable items.
-- The setup-linked report and reports index are updated only when report-facing evidence changed.
-# Scope-specific DPM interpretation
+Use Settings API/live audits/file manifests where appropriate. A missing Settings API path is a version/adapter finding, not proof that a model is disabled.
 
-For Purnanto-derived branches governed by the simplified-geometry scope, the report-facing DPM metric is observed escape through `steamoutlet`. Fluent's `Incomplete` fate remains available in raw artifacts but must not be elevated into an acceptance gate, blocker, recovery action, or mandatory next simulation. Analysis execution completeness (whether every requested transcript/CSV was produced) remains a separate operational requirement.
+### Case identity gate
+
+Treat connection metadata only as routing information.
+
+- A Fluent `server_id`, hostname, port, iteration count, or version is never case/setup identity.
+- When the workflow explicitly loads a case/data pair, retain those filenames as the identity basis.
+- When an already-open session does not expose filenames, record identity as `unavailable` unless independent evidence maps the session to a setup.
+- Do not create setup-linked scientific claims from an unidentified live session. You may still report an unlinked diagnostic.
+- Never persist `server_id` as report provenance.
+
+## 3. Build an analysis menu around the question
+
+After discovery, create a compact **analysis plan**. Each proposed analysis must state why it is relevant.
+
+Use this shape:
+
+| Candidate analysis | Question it helps answer | Data/source | Method | Cost/risk | Recommendation |
+|---|---|---|---|---|---|
+| `<metric or diagnostic>` | `<specific connection to setup question>` | `<existing history / final data / live report / comparison case>` | `<existing script / custom read-only extraction / offline calculation>` | `<low / moderate / requires rerun>` | `core / useful / optional / not recommended` |
+
+Candidate categories may include, but are not limited to:
+
+- numerical state and convergence/monitor stability;
+- total or phase mass-flow closure;
+- outlet flow split, recovery, carryover, leakage or backflow;
+- pressure drop or local pressure distribution;
+- liquid/vapour inventory and its transient trend;
+- VOF interface position, topology, oscillation or time-averaged occupancy;
+- local volume fraction, velocity, pressure, turbulence or residence behavior;
+- DPM fate, trajectory, diameter dependence and represented mass flow;
+- EWF inventory, thickness, velocity, source, drainage and mechanism-specific terms;
+- mesh sensitivity, timestep sensitivity, initialization sensitivity or cross-case response surfaces;
+- geometry-specific local probes;
+- a setup-specific derived metric defined from relevant Fluent quantities;
+- comparison with experimental/literature/reference data when the setup is explicitly verification/validation-oriented.
+
+Do not include an analysis just because a reusable script exists.
+
+### User analysis-choice gate
+
+When the user has already named the analyses they want, execute those and add only clearly necessary supporting checks.
+
+When the user asks generically to "analyse the case/results" and more than one materially different analysis path is reasonable:
+
+1. perform discovery;
+2. show the candidate analysis menu and the rationale;
+3. identify the smallest core pack you recommend;
+4. ask the user which analyses they want, whether any metric matters most, and whether they want evidence-only or interpretive help.
+
+Do not ask a generic question such as "what analysis do you want?" before discovery. Give the user an informed choice.
+
+If a cheap supporting extraction is necessary to make an approved analysis meaningful, the agent may include it without another approval. If a proposed analysis requires a rerun, new monitor history, model/setup change, or substantial new computation, flag that before proceeding.
+
+## 4. Choose the best extraction method, not just the existing script
+
+### Reuse existing tools when they fit
+
+Current reusable tools include carrier/post-simulation extraction and the EWF/DPM diagnostics under `PyAnsys/scripts/inspection/` and `PyAnsys/src/pyansys_fluent/`.
+
+Use them when their outputs answer an approved analysis question. Preserve their raw JSON/CSV/transcript artifacts and link them from the report.
+
+### Extend beyond existing scripts when needed
+
+If no existing script exposes the needed evidence:
+
+1. inspect the live/file state to identify the relevant Fluent quantity, zone, surface, report definition, monitor, or field variable;
+2. search the repository for an existing accessor or extraction pattern;
+3. when Fluent/PyFluent API behavior is uncertain, consult the version-relevant official Fluent/PyFluent documentation;
+4. prefer a read-only Settings API query, Fluent report/surface/volume integral, field-data extraction, transcript command, or offline calculation from saved data;
+5. create a small one-off analysis script or command when that is safer and more reproducible than manual console interaction;
+6. record exactly how the quantity was obtained, its units, zone/surface scope, sign convention, reduction, and time/iteration basis;
+7. if the extraction is likely reusable, place it in the appropriate PyAnsys analysis module rather than embedding opaque logic only in the report.
+
+Custom analysis must not silently enable or change physical models. Namespaced post-processing/report objects may be created when necessary and safe; record them and avoid overwriting user objects.
+
+If the desired evidence cannot be reconstructed from the existing checkpoint, say so. Do not substitute a vaguely related metric merely because it is available.
+
+## 5. Analysis-specific safeguards
+
+The following are **module safeguards**, not universal reasons to run the module.
+
+### Carrier / phase-flow analysis
+
+When phase fluxes or balance metrics are relevant:
+
+- preserve Fluent sign convention and show any outward-positive conversion explicitly;
+- state the exact inlet/outlet zones and phase scope;
+- distinguish scoped outlet metrics from full-domain conservation or separator validation;
+- use monitor histories when the question concerns stability over time/iterations rather than a single checkpoint.
+
+### DPM analysis
+
+Run DPM only when it is relevant to the setup question or explicitly requested.
+
+When a DPM Particle Tracks Summary is run, for every selected injection require:
+
+1. `number tracked = ...`;
+2. a `Mass Transfer Summary` section;
+3. at least one parsed mass-transfer row;
+4. a completed transcript/quiet interval appropriate to the command;
+5. immediate preservation of raw transcript and partial structured output.
+
+Preserve counts, zone/fate rows, represented/net mass flow, elapsed-time statistics where available, and closure bookkeeping. Do not replace missing fates with zero.
+
+Splash events and EWF absorbed-event counters are mechanism/event diagnostics, not automatically additional terminal mass sinks. Avoid double-counting secondary parcels whose later terminal fates are already included.
+
+An active inherited DPM branch does **not** make a full DPM sweep mandatory when DPM is irrelevant to the setup question. If its configuration could materially contaminate interpretation, audit and report that fact even if detailed fate analysis is skipped.
+
+### EWF analysis
+
+Run EWF analysis only for confirmed active film walls/mechanisms and when it helps answer the approved question.
+
+For final-state snapshots, preserve exact units and distinguish:
+
+- inventory/cumulative quantities in `kg`;
+- rates/sources in `kg/s`;
+- local/maximum/area-weighted reductions;
+- active versus inactive stripping, separation, splash or other mechanisms.
+
+A single final `.dat.h5` is a snapshot. It cannot establish a time-integrated EWF closure unless the required histories exist.
+
+### VOF / transient analysis
+
+For VOF or other unsteady interface questions, do not reduce the result automatically to final residuals and outlet fluxes. Consider whether the setup question needs:
+
+- physical-time histories;
+- time-window averages and variation;
+- liquid inventory versus time;
+- interface/volume-fraction surfaces or occupancy;
+- periodicity/oscillation behavior;
+- timestep and initialization comparison;
+- local outlet/interface behavior.
+
+A final-state contour alone cannot establish a statistically stable transient behavior.
+
+### Sensitivity / comparison analysis
+
+For a controlled matrix, compare like with like:
+
+- same metric definition, units, surfaces and sign conventions;
+- comparable physical-time or convergence/stability windows;
+- explicit note when cases stop at different iteration counts or states;
+- distinguish directional screening from a converged ranking.
+
+Do not select a winning case unless the user supplied or later chooses a decision rule.
+
+### Verification / validation analysis
+
+For verification, analyse the numerical claim actually being tested: e.g. mesh/timestep independence, iterative convergence, implementation consistency, or conservation.
+
+For validation, require an independent reference and declared comparison metric/scope. Include uncertainty/tolerance treatment appropriate to the user's validation plan. If those ingredients are absent, report `validation claim unresolved`; do not invent a validation verdict.
+
+## 6. Completion must be evidence-based, not time-based
+
+Do not use a fixed wall-clock supervision duration as the primary completion rule.
+
+For each analysis command, define completion predicates such as:
+
+- process/client completion;
+- Fluent health/liveness when live;
+- expected transcript marker(s);
+- required JSON/CSV/image/artifact existence;
+- parser completion;
+- file size/content stability when Fluent may flush asynchronously;
+- command-specific timeout and explicit error state.
+
+Do not start a conflicting Fluent analysis while a prior command is still producing output.
+
+If an analysis fails its completion gate, preserve partial artifacts and report it as incomplete. Do not infer missing values.
+
+## 7. Evaluate evidence quality before interpretation
+
+Classify the result of each approved analysis as:
+
+- `complete` — required evidence for that analysis was captured;
+- `partial` — useful but incomplete evidence exists;
+- `unavailable` — the quantity cannot be recovered from the current checkpoint/session;
+- `not applicable` — the model/quantity does not apply to this setup;
+- `requires rerun` — the evidence needed a monitor/history/state that was not captured;
+- `blocked` — a technical failure prevented extraction.
+
+Separate **analysis execution completeness** from **scientific adequacy**. A perfectly complete DPM transcript can still be irrelevant to the setup question; a partial transient history can still provide exploratory evidence without supporting a final claim.
+
+## 8. Report evidence before meaning
+
+When report-facing evidence changed, write or update `Setups/reports/<setup-id>/results.md` using `Setups/templates/results-report-template.md` and `references/report-structure.md`.
+
+The default report must:
+
+- restate the setup's primary question and investigation mode;
+- state what was actually run;
+- list analyses performed and why each was relevant;
+- present measured values before derived metrics;
+- record numerical/evidence limitations;
+- summarize neutral observations;
+- set `Interpretation status: pending user direction` unless interpretation was already delegated or criteria were pre-agreed;
+- end with focused interpretation questions when a decision remains open.
+
+Do not paste full transcripts into the report. Link raw PyAnsys artifacts.
+
+Preserve earlier checkpoint evidence rather than silently replacing it. Add a dated/checkpoint subsection or explicitly supersede a prior item with provenance.
+
+## 9. Interpretation handoff
+
+By default, the agent does **not** decide:
+
+- whether a case is physically good or bad;
+- whether a pressure/model is preferred;
+- whether a setup should be kept or rejected;
+- the causal explanation for an observed pattern;
+- the next experiment;
+- whether evidence constitutes validation.
+
+Instead, after presenting the evidence, ask focused questions based on what was found. Examples:
+
+- Which metric should control the comparison?
+- Should this checkpoint be treated as an exploratory signal or evaluated against a specific criterion?
+- Do you want possible physical explanations for this trend, or should the report remain evidence-only?
+- Should we compare against the parent, another case in the matrix, or literature/experimental data?
+- Is the current numerical state sufficient for the decision you want to make?
+- Which additional analysis would resolve the most important remaining uncertainty?
+
+When the user supplies an interpretation or asks the agent to interpret, add a clearly separated optional interpretation section. Mark it `user-provided`, `joint`, or `agent-proposed` and tie each claim to the evidence used.
+
+## 10. Relationship to setup/run planning
+
+When post-analysis discovers that decisive evidence is missing because it needed to be instrumented before solving, return a concrete request to the setup/run workflow, for example:
+
+- create a liquid-inventory time-history monitor;
+- freeze named pressure probe surfaces across a sensitivity matrix;
+- export interface statistics every timestep;
+- rerun a comparison case to a common physical-time window;
+- add a report definition before the next solve.
+
+Explain why the new evidence is relevant to the setup question. Do not automatically modify and rerun the case from this skill.
+
+## Completion check
+
+- The analysis plan starts from the setup question, not from the script inventory.
+- Cheap discovery was performed before asking the user to choose among materially different analyses.
+- Every executed analysis has a stated relevance to the setup question.
+- Existing scripts were reused where appropriate but were not treated as mandatory.
+- Custom evidence gathering was attempted when a relevant quantity was not covered by existing scripts.
+- No physics/setup state was silently changed to expose a result.
+- Case/data identity is traceable or explicitly unavailable.
+- Analysis completion is based on output predicates, not a universal wait time.
+- Measured, derived, observed-pattern and unresolved evidence are distinguishable.
+- Validation claims are made only under an explicit validation contract.
+- Interpretation ownership is explicit and defaults to the user.
+- The report hands decisions back to the user unless interpretation was explicitly delegated.
