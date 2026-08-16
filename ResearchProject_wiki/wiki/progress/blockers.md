@@ -2,6 +2,15 @@
 
 ## Active Blockers
 
+### BLK-011 | Frozen 02c parent is not visible from the currently idle Fluent endpoint
+- Status: Active — case-only build blocked
+- First observed: 2026-08-16
+- Related run(s): `02c-I20-I160-PREPARATION-2026-08-16`
+- Symptom: the active 02c I20–I160 builder correctly refused to proceed because the required frozen `02c-B` pre-initialization parent path was not visible to the accessible idle Fluent session.
+- Current interpretation: this is a remote-file/session-availability constraint, not evidence that the documented parent, H artifacts, or the intended I settings are invalid. The build was stopped before any case mutation, initialization, iteration, data write, or journal submission.
+- Recovery action: reconnect to an idle Fluent session with access to the documented frozen parent; verify the parent boundary/model contract; then build and reload-verify every independent I child before submitting the separate native journal.
+- Scope note (2026-08-16): a Student-only I20/I40/I60 50-iteration surrogate smoke completed successfully at the execution-integrity level. It does not clear this blocker because its saved source, mesh, and DPM state are not the verified server-2 frozen-parent lineage.
+
 ### BLK-010 | IC1 brine-pipe VOF patch has no unambiguous cell-volume selection
 - Status: Active — human selection required
 - First observed: 2026-08-14
@@ -82,7 +91,7 @@ DPM incomplete counts are retained in raw outputs but are not an acceptance gate
 - Current interpretation: retain as a warning from the older water-pool branch only. The professional setup `07` run currently shows low apparent steam-line carryover, so this should not block the baseline DPM sweep.
 
 ## Ranked Hypotheses
-1. Setup `02c` has complete A/B/C early screens but no stable two-outlet carrier state. Higher-pressure Case C has lower observed vapour wrong-outlet fraction (`32.76%`) than A (`60.38%`) and B (`52.12%`), yet its liquid brine outflow exceeds liquid inlet (`116.91%`) and continuity remains `1.194e-1`. Positive-backpressure case-only children D/E/F/G are ready; run the common Fluent-native screens with liquid-inventory and outlet-flow monitoring before attributing steady behaviour or selecting pressure.
+1. Setup `02c` now has complete A–G early screens but no stable two-outlet carrier state. D–G confirm the directional vapour-routing signal as brine pressure rises (brine-outlet vapour `46.70%` → `11.28%` of vapour inlet), while E–G liquid brine outflow exceeds inlet and all four continuity endpoints remain `8.24e-2`–`1.12e-1`. The active blocker is evidence maturity: add total liquid-inventory and local pressure/visual monitors before attributing steady behaviour, calling a drainage limit, or selecting pressure.
 2. Parent `FFF-2` has an unresolved convergence/mass-balance problem even without initialized water, but this is historical context rather than an active setup `07` blocker.
 3. Brine outlet pressure, backflow settings, or outlet type may be over-driving liquid removal in older parent cases; this is not part of the setup `07` acceptance scope.
 4. Missing stabilization tuning in numerics may be preventing the mixed wet-half velocity-inlet case from settling.

@@ -72,10 +72,10 @@ The observed A/B/C early-screen vapour routing is sufficiently promising to exte
 
 | Case | Brine gauge pressure | ΔP versus steam outlet | Pre-initialization remote case | Status |
 |---|---:|---:|---|---|
-| `02c-D` | `1.1225 MPa` | `+2.5 kPa` | `02c-D-brine-p1122p5kpa-unprimed-preinit-20260812T102345Z.cas.h5` | case-only prepared |
-| `02c-E` | `1.1275 MPa` | `+7.5 kPa` | `02c-E-brine-p1127p5kpa-unprimed-preinit-20260812T102546Z.cas.h5` | case-only prepared |
-| `02c-F` | `1.1300 MPa` | `+10.0 kPa` | `02c-F-brine-p1130kpa-unprimed-preinit-20260812T102700Z.cas.h5` | case-only prepared |
-| `02c-G` | `1.1350 MPa` | `+15.0 kPa` | `02c-G-brine-p1135kpa-unprimed-preinit-20260812T102800Z.cas.h5` | case-only prepared |
+| `02c-D` | `1.1225 MPa` | `+2.5 kPa` | `02c-D-brine-p1122p5kpa-unprimed-preinit-20260812T102345Z.cas.h5` | paired 500-iteration endpoint verified and post-processed; directional candidate, unresolved liquid state |
+| `02c-E` | `1.1275 MPa` | `+7.5 kPa` | `02c-E-brine-p1127p5kpa-unprimed-preinit-20260812T102546Z.cas.h5` | paired 500-iteration endpoint verified and post-processed; inventory-draining / unresolved |
+| `02c-F` | `1.1300 MPa` | `+10.0 kPa` | `02c-F-brine-p1130kpa-unprimed-preinit-20260812T102700Z.cas.h5` | paired 500-iteration endpoint verified and post-processed; inventory-draining / unresolved |
+| `02c-G` | `1.1350 MPa` | `+15.0 kPa` | `02c-G-brine-p1135kpa-unprimed-preinit-20260812T102800Z.cas.h5` | paired 500-iteration endpoint verified and post-processed; inventory-draining / unresolved |
 
 For each point: load its own pre-initialization child, Hybrid Initialize without a liquid patch, run one native `500`-iteration screen, and write a paired case/data endpoint before loading the next child. Do not use a preceding pressure point's case/data as an initial condition. The queue's first native-autosave configuration attempt stopped at an interactive-menu argument mismatch before Case D started, so the launched fallback queue uses the verified explicit paired end-of-screen write; it still preserves every *completed* screen before advancing. Capture outlet phase flows and total continuous-liquid inventory at consistent intervals when the monitor definitions are available; the latter determines whether Case C-like high liquid drainage is settling or simply depleting initial inventory.
 
@@ -85,5 +85,70 @@ For each point: load its own pre-initialization child, Hybrid Initialize without
 - Fluent-native journal: `C:\Users\syok443\P4P simulation\brine outlet\02c-positive-backpressure-queue-20260813T205605Z.jou`.
 - Queue transcript: `C:\Users\syok443\P4P simulation\brine outlet\02c-positive-backpressure-queue-20260813T205605Z.trn`.
 - Launch evidence: Fluent accepted the quoted journal path, started the transcript, accepted the residual-monitor setup, and began loading Case D's independent pre-initialization case.
-- Initial queue status: `RUNNING / completion unverified`. Two later bounded read-only reconnect attempts found the TCP endpoint reachable but did not regain the PyFluent handoff while Fluent was busy. No additional solver command, reload, interruption, exit, or new Fluent process was issued.
+- Initial queue status: `RUNNING / completion unverified` while Fluent was busy. Subsequent read-only remote file checks verified all four paired endpoint case/data files, and explicit reloads confirmed Fluent 2025 R2 could read each endpoint for post-processing. No endpoint was inferred from the queue transcript alone.
 - Limitation: the present queue records residual history and a final paired checkpoint per case. Existing liquid-inventory monitor definitions were not present in the frozen children, so inventory-versus-iteration remains a required follow-up measurement rather than an artifact manufactured by this queue.
+- Post-processing record: [02c results](results.md) contains the comparison dashboard, per-case D–G endpoint metrics, residual links, model audits, and complete inherited-DPM bundles. The vapour-routing direction strengthens across D–G, but D–G remain early numerical diagnostics without liquid-inventory histories or a common stable window.
+- Next action: instrument total continuous-liquid inventory, lower-vessel/pipe-entry pressure diagnostics, and the agreed visual outputs; then continue only bracket-adjacent points from the frozen parent under a common stability gate. Do not treat E–G liquid outflow above inlet as demonstrated recovery or as proof of a drainage limit.
+
+## Coarse above-inlet-reference sweep — H20 to H50
+
+This is an explicit 02c amendment following the D–G result. Here `+20` through `+50 kPa` means above the nominal `1.140 MPa` inlet reference/initial gauge pressure, not above the `1.120 MPa` steam outlet. The resulting brine-outlet pressures are `1.160` through `1.190 MPa`; the steam outlet remains fixed at `1.120 MPa`. The sweep is intended to locate the broad response direction and any obvious reverse-flow/liquid-accumulation regime before finer tuning.
+
+| Case | Brine pressure | Above inlet reference | Above steam outlet | Pre-initialization artifact | Planned endpoint |
+|---|---:|---:|---:|---|---|
+| `02c-H20` | `1.160 MPa` | `+20 kPa` | `+40 kPa` | `brine-p1160kpa-unprimed-preinit-<build-stamp>.cas.h5` | 500 iterations |
+| `02c-H25` | `1.165 MPa` | `+25 kPa` | `+45 kPa` | `brine-p1165kpa-unprimed-preinit-<build-stamp>.cas.h5` | 500 iterations |
+| `02c-H30` | `1.170 MPa` | `+30 kPa` | `+50 kPa` | `brine-p1170kpa-unprimed-preinit-<build-stamp>.cas.h5` | 500 iterations |
+| `02c-H35` | `1.175 MPa` | `+35 kPa` | `+55 kPa` | `brine-p1175kpa-unprimed-preinit-<build-stamp>.cas.h5` | 500 iterations |
+| `02c-H40` | `1.180 MPa` | `+40 kPa` | `+60 kPa` | `brine-p1180kpa-unprimed-preinit-<build-stamp>.cas.h5` | 500 iterations |
+| `02c-H45` | `1.185 MPa` | `+45 kPa` | `+65 kPa` | `brine-p1185kpa-unprimed-preinit-<build-stamp>.cas.h5` | 500 iterations |
+| `02c-H50` | `1.190 MPa` | `+50 kPa` | `+70 kPa` | `brine-p1190kpa-unprimed-preinit-<build-stamp>.cas.h5` | 500 iterations |
+
+Controls remain frozen to the same 02c parent. Only the brine-outlet mixture-phase gauge pressure changes. The queue must reload each independent pre-initialization child, Hybrid Initialize without a liquid patch, run 500 Fluent-native iterations, save a paired endpoint, then advance to the next child. No Python iteration loop is permitted.
+
+This coarse sweep requires a common monitor package before interpretation: brine/steam liquid and vapour flows, total continuous-liquid inventory, lower-vessel and brine-pipe-entry pressure diagnostics, reverse-flow warnings, residuals, and the agreed field visuals. A pressure above the nominal inlet reference is a testable hypothesis, not proof that the local static pressure should be higher; the inlet reference is not a fixed pressure boundary because both inlets remain velocity inlets.
+
+### H20–H50 native queue launch — 2026-08-16 (UTC)
+
+- Build manifest: `PyAnsys/output/02c-above-inlet-20-to-50-build-20260816T002025Z.json`.
+- Every H20–H50 pre-initialization child was written and reload-verified against the frozen parent before queue submission.
+- Local journal: `PyAnsys/output/02c-above-inlet-20-to-50-queue-20260816T003500Z.jou`.
+- Remote journal: `C:\Users\syok443\P4P simulation\brine outlet\02c-above-inlet-20-to-50-queue-20260816T003500Z.jou`.
+- Remote transcript: `C:\Users\syok443\P4P simulation\brine outlet\02c-above-inlet-20-to-50-queue-20260816T003500Z.trn`.
+- Queue order: `02c-H20` → `H25` → `H30` → `H35` → `H40` → `H45` → `H50`; each member uses Hybrid Initialization, 500 native steady iterations, paired case/data write, and then advances.
+- Current launch state: `RUNNING / H20 active; completion unverified`. Early H20 iterations show reverse flow on both pressure outlets and turbulent-viscosity limiting; this is recorded as a diagnostic signal, not yet as a failed endpoint.
+- No Python iteration loop, pressure rescue, numerical tuning, or queue interruption was issued. If Fluent becomes unavailable, stop the queue and record the affected case rather than launching a replacement solver.
+
+## Broader above-inlet-reference sweep — I20 to I160
+
+This separate, intentionally coarser amendment retains the same frozen 02c-B pre-initialization parent and changes only the brine-outlet mixture-phase gauge pressure. It uses `20 kPa` increments above the `1.140 MPa` inlet reference to test up to `1.300 MPa`. The inlet reference is not a fixed pressure boundary because both inlets remain velocity inlets; this is therefore a broad diagnostic screen, not a pressure-selection or drainage-limit claim.
+
+| Case | Brine pressure | Above inlet reference | Above steam outlet | Planned case-only suffix |
+|---|---:|---:|---:|---|
+| `02c-I20` | `1.160 MPa` | `+20 kPa` | `+40 kPa` | `brine-p1160kpa-unprimed-coarse130` |
+| `02c-I40` | `1.180 MPa` | `+40 kPa` | `+60 kPa` | `brine-p1180kpa-unprimed-coarse130` |
+| `02c-I60` | `1.200 MPa` | `+60 kPa` | `+80 kPa` | `brine-p1200kpa-unprimed-coarse130` |
+| `02c-I80` | `1.220 MPa` | `+80 kPa` | `+100 kPa` | `brine-p1220kpa-unprimed-coarse130` |
+| `02c-I100` | `1.240 MPa` | `+100 kPa` | `+120 kPa` | `brine-p1240kpa-unprimed-coarse130` |
+| `02c-I120` | `1.260 MPa` | `+120 kPa` | `+140 kPa` | `brine-p1260kpa-unprimed-coarse130` |
+| `02c-I140` | `1.280 MPa` | `+140 kPa` | `+160 kPa` | `brine-p1280kpa-unprimed-coarse130` |
+| `02c-I160` | `1.300 MPa` | `+160 kPa` | `+180 kPa` | `brine-p1300kpa-unprimed-coarse130` |
+
+### Preparation state — 2026-08-16 (UTC)
+
+- The case-only builder and a separate local native journal were prepared for I20 → I40 → I60 → I80 → I100 → I120 → I140 → I160. The journal is [02c-above-inlet-20-to-130-coarse-queue-20260816T014600Z.jou](../../PyAnsys/output/02c-above-inlet-20-to-130-coarse-queue-20260816T014600Z.jou).
+- The journal is **not submitted**. It would later load each independently parent-derived child, Hybrid Initialize, run `500` native steady iterations, write a unique paired endpoint, and then advance.
+- `Observed`: the currently accessible idle Fluent session did not expose the exact frozen 02c-B parent path. The case-only build therefore stopped before any new child, initialization, iteration, data write, or journal submission. No I pre-initialization case exists yet.
+- The next build must reconnect to an idle Fluent session that can read the documented frozen parent, then verify each I child by reload/readback before any journal is authorized.
+
+### Student-only I20/I40/I60 50-iteration smoke — 2026-08-16 (UTC)
+
+The requested first three I members were also exercised on the Student endpoint as an automation diagnostic, after the user authorized replacing the current Student state. This does **not** resolve the production-parent blocker above. Each child was built independently from the saved Student surrogate `02c-C-brine-p1125kpa-unprimed-preinit-20260815T231711Z.cas.h5`, then the submitted native journal loaded that child, Hybrid Initialized, iterated `50`, and wrote a paired endpoint.
+
+| Case | Brine gauge pressure | Reload verification |
+|---|---:|---|
+| `02c-I20` | `1.160 MPa` | paired case/data visible and reopened; 50 residual points through iteration 50 |
+| `02c-I40` | `1.180 MPa` | paired case/data visible and reopened; 50 residual points through iteration 50 |
+| `02c-I60` | `1.200 MPa` | paired case/data visible and reopened; 50 residual points through iteration 50 |
+
+The local journal is `PyAnsys/output/02c-student-I20-I60-iter50-20260816T020800Z.jou`; the Student-host transcript is `C:\\Users\\Shuhei Yokkaichi\\Documents\\CFD\\Test case\\02c-student-I20-I60-iter50-20260816T020800Z.trn`. Each reloaded endpoint retained steady Mixture/RNG k-epsilon and steam outlet `1.120 MPa`. The execution emitted reverse-flow and turbulent-viscosity-limit diagnostics, so it passes the execution-integrity smoke criterion only—not convergence, mesh parity, DPM parity, or 02c pressure-performance interpretation.

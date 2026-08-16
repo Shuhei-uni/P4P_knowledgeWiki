@@ -17,6 +17,33 @@
 
 ## Runs
 
+### Run 02c-STUDENT-I20-I60-SMOKE-2026-08-16
+- Run ID: `02c-STUDENT-I20-I60-SMOKE-2026-08-16`
+- Date: 2026-08-16
+- Objective: verify that the revised first three coarse I-series pressure cases can be independently built, Hybrid Initialized, and executed through a native Fluent 50-iteration journal.
+- Geometry and mesh: Student-only mesh-derived surrogate; reload reported `661,558` cells and `1,648,866` nodes. It is not certified identical to the production 02c/server-2 mesh.
+- Physics model: steady Mixture with RNG k-epsilon after each endpoint reload; the source is a saved Student 02c-C-like pre-initialization surrogate, not frozen 02c-B.
+- Boundary and initial conditions: only brine gauge pressure varied: I20 `1.160 MPa`, I40 `1.180 MPa`, I60 `1.200 MPa`; steam outlet read back at `1.120 MPa` for all endpoints.
+- Iteration budget and verification: three independent native `50`-iteration blocks. Every paired `.cas.h5`/`.dat.h5` endpoint was visible, reopened, and showed 50 residual-history points ending at iteration 50.
+- Outcome: `Execution-integrity smoke passed; not converged / not comparable`.
+- Diagnostics: reverse flow at pressure outlets and turbulent-viscosity limiting were observed; no physical pressure-ranking or convergence conclusion is permitted.
+- Next action: retain this as a Student automation proof only. Rebuild the production I-series from a verified server-2 frozen parent when that parent is available.
+
+### Run 02c-I20-I160-PREPARATION-2026-08-16
+- Run ID: `02c-I20-I160-PREPARATION-2026-08-16`
+- Date: 2026-08-16
+- Objective: Prepare a separate, broader 02c brine-outlet pressure screen at `1.160 / 1.180 / 1.200 / 1.220 / 1.240 / 1.260 / 1.280 / 1.300 MPa`, while preserving all verified 02c parent settings and leaving the native queue unstarted.
+- Geometry: intended inherited split-velocity-inlet separator with the physical tangential brine pipe; no mesh or zone change was attempted.
+- Mesh: intended frozen-parent mesh; not loaded because the required parent was unavailable from the accessible idle Fluent session.
+- Physics model: intended inherited steady pressure-based Mixture / RNG k-epsilon configuration with gravity on and Energy/DPM/EWF state preserved; no live model change occurred.
+- Solver settings: the local journal is configured only for a later native sequence of independent parent-derived cases: Hybrid Initialization, `500` steady iterations, explicit paired endpoint write, then advance. The journal was not submitted.
+- Boundary and initial conditions: intended sole delta is brine-outlet mixture-phase gauge pressure; steam outlet remains `1.120 MPa`, both velocity inlets remain `27.118 m/s` with `1.140 MPa` reference/initial gauge pressure, and no liquid patch is permitted.
+- Iteration or timestep budget: planned only: `8 × 500` steady iterations; completed flow iterations `0`.
+- Convergence indicators: N/A — no I case was loaded, initialized, or solved.
+- Outcome: `Blocked before case-only build`; the builder refused to mutate because the frozen parent was not visible to the accessible idle session.
+- Hypothesized cause if not converged: not applicable; this is a remote parent/session availability issue, not a numerical outcome.
+- Next action: use an idle Fluent session that can see the documented frozen parent, build/reload-verify each I child, then await explicit authorization before submitting the journal.
+
 ### Run VOF-IC0-IC1-IC2-Y030-COARSE-STABILITY-2026-08-14
 - Run ID: `VOF-IC0-IC1-IC2-Y030-COARSE-STABILITY-2026-08-14`
 - Date: 2026-08-14
@@ -167,6 +194,23 @@
 - Outcome: `Launched / completion unverified`.
 - Hypothesized cause if not converged: not applicable until per-case endpoint evidence is retrieved. Existing case children do not yet supply the required continuous-liquid-inventory history.
 - Next action: wait for Fluent to return control; verify each expected remote `.cas.h5` / `.dat.h5` endpoint, then post-process each case independently and update this record with actual residual/phase-flux evidence.
+
+### Run 02c-POSITIVE-BACKPRESSURE-POSTPROCESS-2026-08-16
+
+- Run ID: `02c-POSITIVE-BACKPRESSURE-POSTPROCESS-2026-08-16`
+- Date: 2026-08-16
+- Objective: Explicitly reload and compare the verified D/E/F/G 500-iteration positive-brine-backpressure endpoints using the common carrier-flux, residual, EWF/DPM-audit, and six-injection DPM transcript workflow.
+- Geometry: inherited 02c split velocity-inlet separator with the physical tangential brine-pipe geometry; no mesh or zone changes between cases.
+- Mesh: `1,770,229` nodes and `620,431` mixed cells, confirmed during endpoint reloads.
+- Physics model assumptions: steady pressure-based Mixture carrier; RNG k-epsilon; gravity on; Energy off; EWF disabled; six inherited inert DPM surface injections with carrier coupling off; no UDF body-force or scalar-update match.
+- Solver settings: endpoints were produced by the prior Fluent-native queue after Hybrid Initialization and 500 steady iterations per independent pre-initialization child. This post-processing pass made no carrier iterations or setup mutations.
+- Boundary/initial conditions: steam outlet fixed at `1.120 MPa`; brine outlet D/E/F/G at `1.1225 / 1.1275 / 1.1300 / 1.1350 MPa`; split velocity inlets and backflow states inherited unchanged; no liquid patch.
+- Iteration or timestep budget: D/E/F/G each `500` steady iterations; six DPM injections tracked per endpoint in diameter-ascending order.
+- Convergence indicators: final continuity D/E/F/G = `1.021e-1 / 8.959e-2 / 1.117e-1 / 8.243e-2`; minima = `9.563e-2 / 8.934e-2 / 1.116e-1 / 8.241e-2`. None meets the configured `1e-4` residual criterion, and no common stable physical-monitor window or liquid-inventory history exists.
+- Outcome: `Partially Converged / directional early screening only`. Vapour brine-outlet flow decreases D→G from `38.127` to `9.211 kg/s` (`46.70%` to `11.28%` of vapour inlet), while vapour steam-outlet flow increases from `44.084` to `71.647 kg/s` (`54.00%` to `87.76%`). D liquid brine flow is `25.966 kg/s`; E/F/G liquid brine outflows are `258.323 / 440.922 / 228.106 kg/s`, all above the `116.847 kg/s` liquid inlet.
+- Hypothesized cause if not converged: the positive backpressure shifts vapour routing as expected, but the unprimed liquid field remains inventory-dominated/open. E–G liquid outflow excess may reflect transient drainage of initial liquid inventory; without `M_l(N)` it cannot be classified as a hydraulic drainage restriction or sustained recovery.
+- Evidence: [02c comparison report](../../../Setups/reports/02c/results.md), [D flux](../../../PyAnsys/output/post_simulation_analysis/02c-D-brine-p1122p5kpa-unprimed-iter500-flux-check.json), [E flux](../../../PyAnsys/output/post_simulation_analysis/02c-E-brine-p1127p5kpa-unprimed-iter500-flux-check.json), [F flux](../../../PyAnsys/output/post_simulation_analysis/02c-F-brine-p1130kpa-unprimed-iter500-flux-check.json), [G flux](../../../PyAnsys/output/post_simulation_analysis/02c-G-brine-p1135kpa-unprimed-iter500-flux-check.json), and the corresponding residual/audit/DPM links in the report.
+- Next action: add total continuous-liquid inventory, lower-vessel/pipe-entry pressure diagnostics, and common visual evidence; then continue only D-adjacent or otherwise bracket-selected points from the frozen parent under a common stability gate. Preserve E–G as unresolved diagnostic evidence.
 
 ### Run 02c-POSITIVE-BACKPRESSURE-BUILD-2026-08-12
 - Run ID: `02c-POSITIVE-BACKPRESSURE-BUILD-2026-08-12`
@@ -595,3 +639,19 @@
 - Evidence-use label: setup/debug history only. Because this run reached `1000` iterations but did not exceed the current usable-evidence threshold and did not converge, it should not be used for performance interpretation.
 - Hypothesized cause (if non-converged): mesh may be under-resolved, flow/BC settings may be incomplete or inconsistent.
 - Next action: perform full solver/BC audit against `purnanto-zarrouk-cater-2013` technical notes, then rerun with controlled setting changes.
+
+### Run 02c-ABOVE-INLET-COARSE-QUEUE-2026-08-16
+- Run ID: `02c-ABOVE-INLET-COARSE-QUEUE-2026-08-16`
+- Date: 2026-08-16
+- Objective: Run a broad pressure-only screen at `+20` to `+50 kPa` above the nominal `1.140 MPa` inlet reference in `+5 kPa` increments to identify the rough upper-pressure response before finer tuning.
+- Geometry: inherited 02c split velocity-inlet separator with physical tangential lower brine pipe; each child was built from the same frozen 02c-B pre-initialization parent.
+- Mesh: inherited `1,770,229` nodes and `620,431` mixed cells; no mesh changes.
+- Physics model assumptions: steady pressure-based Mixture, RNG k-epsilon, gravity on, Energy off; DPM/EWF and all parent controls preserved.
+- Solver settings: Fluent-native journal owns Hybrid Initialization, 500 steady iterations, paired case/data write, and sequential advancement. Python prepared/submitted the journal and does not loop iterations.
+- Boundary and initial conditions: steam outlet fixed at `1.120 MPa`; H20/H25/H30/H35/H40/H45/H50 brine outlets at `1.160 / 1.165 / 1.170 / 1.175 / 1.180 / 1.185 / 1.190 MPa`; both inlets remain velocity inlets with nominal `1.140 MPa` reference/initial gauge value.
+- Iteration budget: seven independent 500-iteration steady screens, sequential queue.
+- Convergence monitors: not yet available for completed endpoints. H20 is active; its early transcript shows reverse flow on both pressure outlets and turbulent-viscosity limiting.
+- Outcome: `Running / completion unverified` at record time; no pressure conclusion is drawn from the early H20 iterations.
+- Hypothesized cause if not converged: above-inlet brine backpressure may be approaching or exceeding the local hydraulic pressure needed for liquid discharge, causing reverse flow, liquid accumulation, or an unstable mixed field. This remains a hypothesis until endpoint fluxes and liquid-inventory evidence are captured.
+- Evidence: [02c future-run queue record](../../../Setups/reports/02c/future-runs.md), [H20–H50 build manifest](../../../PyAnsys/output/02c-above-inlet-20-to-50-build-20260816T002025Z.json), and [local native journal](../../../PyAnsys/output/02c-above-inlet-20-to-50-queue-20260816T003500Z.jou).
+- Next action: allow Fluent to complete or stop safely if unavailable; verify every paired remote endpoint before post-processing. Interpret the broad sweep only with outlet phase fluxes, reverse-flow diagnostics, residuals, and total liquid-inventory history.

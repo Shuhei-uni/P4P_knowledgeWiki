@@ -64,7 +64,7 @@ def render_native_sequential_queue(config: NativeSequentialQueue) -> str:
     autosave_root = _fluent_path(config.autosave_root, label="autosave_root")
     lines = [
         f"; Fluent-native queue: {config.queue_id}",
-        "; D/E/F/G are independent pre-initialization cases; no solved field is reused.",
+        "; Matrix members are independent pre-initialization cases; no solved field is reused.",
         "; Python does not own iterations or checkpoint timing.",
         "/file/confirm-overwrite? no",
         f'/file/start-transcript "{transcript}"',

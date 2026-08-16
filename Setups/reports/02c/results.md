@@ -1,4 +1,57 @@
-# Results Report — Setup 02c, Unprimed Brine-Pressure Screens (Cases A and B)
+# Results Report — Setup 02c, Unprimed Brine-Outlet Pressure Sweep (Cases A–G)
+
+## Comparison dashboard (early screening)
+
+This report is arranged for side-by-side comparison first, with the detailed per-case evidence retained below. The sweep is a directional numerical screen, not a converged separator-performance study. Values are the recorded endpoint after Hybrid Initialization plus the stated steady-iteration budget; outlet flows are shown as outward-positive magnitudes. Because this simplified geometry intentionally omits the lower-liquid outlet, phase closure and liquid-routing values are diagnostic only.
+
+### Sweep definition
+
+| Case | Brine-outlet gauge pressure [MPa] | Steam-outlet gauge pressure [MPa] | ΔP(brine − steam) [kPa] | Endpoint |
+|---|---:|---:|---:|---:|
+| A | 1.1150 | 1.1200 | −5.0 | iter 649 |
+| B | 1.1200 | 1.1200 | 0.0 | iter 500 |
+| D | 1.1225 | 1.1200 | +2.5 | iter 500 |
+| C | 1.1250 | 1.1200 | +5.0 | iter 500 |
+| E | 1.1275 | 1.1200 | +7.5 | iter 500 |
+| F | 1.1300 | 1.1200 | +10.0 | iter 500 |
+| G | 1.1350 | 1.1200 | +15.0 | iter 500 |
+
+### Primary phase-routing comparison
+
+| Case | P_brine [MPa] | ΔP [kPa] | Liquid → brine [kg/s] | Liquid → steam [kg/s] | Liquid brine / liquid inlet | Vapour → brine [kg/s] | Vapour → steam [kg/s] | Vapour wrong-outlet fraction (of vapour inlet) | Screening classification |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| A | 1.1150 | −5.0 | 45.799 | 0.000020 | 39.20% | 49.294 | 32.794 | 60.38% | early diagnostic |
+| B | 1.1200 | 0.0 | 6.921 | 0.000001 | 5.92% | 42.547 | 39.823 | 52.12% | early diagnostic |
+| D | 1.1225 | +2.5 | 25.966 | 0.000001 | 22.22% | 38.127 | 44.084 | 46.70% | positive-backpressure direction; unresolved |
+| C | 1.1250 | +5.0 | 136.605 | 0.000009 | 116.91%* | 26.744 | 54.828 | 32.76% | inventory-draining / unresolved* |
+| E | 1.1275 | +7.5 | 258.323 | 0.000005 | 221.08%* | 19.821 | 60.957 | 24.28% | inventory-draining / unresolved* |
+| F | 1.1300 | +10.0 | 440.922 | 0.000391 | 377.35%* | 13.346 | 66.192 | 16.35% | inventory-draining / unresolved* |
+| G | 1.1350 | +15.0 | 228.106 | 0.032864 | 195.22%* | 9.211 | 71.647 | 11.28% | inventory-draining / unresolved* |
+
+*Cases C, E, F, and G have liquid outflow above the liquid inlet at the recorded endpoint; this is an open transient/inventory signal, not recovery above 100%.
+
+The vapour fractions in this dashboard use the fixed incoming vapour flow (`81.639506 kg/s`) as the denominator, so the two outlet fractions need not sum to exactly 100% while the phase balance is open.
+
+### Numerical-health comparison
+
+| Case | Iterations | Final continuity | Minimum continuity | Residual-history points | Common-window / convergence status |
+|---|---:|---:|---:|---:|---|
+| A | 649 | 1.265e−1 | 7.966e−2 | 649 | not converged |
+| B | 500 | 1.239e−1 | 1.135e−1 | 500 | not converged |
+| D | 500 | 1.021e−1 | 9.563e−2 | 500 | not converged |
+| C | 500 | 1.194e−1 | 1.121e−1 | 500 | not converged |
+| E | 500 | 8.959e−2 | 8.934e−2 | 500 | not converged |
+| F | 500 | 1.117e−1 | 1.116e−1 | 500 | not converged |
+| G | 500 | 8.243e−2 | 8.241e−2 | 500 | not converged |
+
+### Reading the sweep
+
+- **Measured direction:** A → C already shows a strong shift in the recorded endpoint routing: higher brine backpressure coincides with less vapour through the brine outlet and more vapour through the steam outlet.
+- **Screening hypothesis:** a small positive brine-over-steam pressure difference is therefore worth testing as a control variable for phase routing and possible liquid drainage.
+- **What D–G add:** the +2.5 to +15 kPa points locate whether that directional shift continues, flattens, or crosses into restricted liquid drainage.
+- **Interpretation boundary:** no point is a selected operating pressure or efficiency result until a common stable/converged window, liquid-inventory history, and the agreed visual/pressure diagnostics are available.
+
+Detailed per-case evidence and artifact links follow below. The D–G rows above are populated from the verified endpoint post-processing.
 
 ## 1. Setup link and evidence
 
@@ -272,10 +325,57 @@ For the three small injections, Fluent printed only a single escaped mass-transf
 
 ## 9. Matrix interpretation and next action
 
-**Measured:** direct Case C live-session carrier/residual extraction, model audit, and full six-injection DPM output; complete A/B/C phase-flux screens now exist.
+**Measured:** direct Case C live-session carrier/residual extraction, model audit, and full six-injection DPM output; complete A/B/C/D/E/F/G phase-flux screens now exist.
 
 **Derived:** at their respective early checkpoints, the brine-pressure increase from A to C coincides with lower observed vapour wrong-outlet fraction (`60.38%` → `32.76%`) and higher observed vapour steam-outlet fraction (`40.17%` → `67.16%`). The liquid metrics are not comparable recovery outcomes because all fields remain open and Case C liquid outflow exceeds inlet.
 
 **Unresolved:** none of the three checkpoints supplies a common converged/stable window, liquid-inventory history, tangential-pipe pressure diagnostics, or visual field evidence. Case A also has a different final iteration count. The active inherited DPM branch releases from the steam outlet, not an intended inlet.
 
-Smallest justified next action: define a common convergence/stability gate (including outlet-flow and liquid-inventory monitors), rerun or continue all three pressure points to that same gate from their frozen pre-initialization parent, and only then evaluate brine-pressure selection.
+Smallest justified next action: define a common convergence/stability gate with total liquid-inventory and outlet-flow monitors, then continue only the bracket-adjacent points (starting with D) from their frozen pre-initialization parents. Use the full A–G matrix as directional evidence only until a common stable window is obtained.
+
+## 10. Cases D–G higher-pressure post-processing
+
+Cases D–G were explicitly reloaded from their paired remote `.cas.h5`/`.dat.h5` endpoints and processed with the same carrier-flux, residual-history, EWF/DPM audit, and six-injection DPM transcript workflow used for A–C. Each has 500 residual-history points. The inherited DPM branch is unchanged across the sweep: six inert surface injections, carrier coupling off, and every injection source reported as `steam-outlet`. These trajectories are therefore configuration diagnostics, not pressure-selection evidence.
+
+### Case D — 1.1225 MPa brine outlet, +2.5 kPa relative to steam
+
+Measured endpoint phase flows: liquid brine `25.965839 kg/s`, liquid steam `1.072079e-6 kg/s`, vapour brine `38.126893 kg/s`, and vapour steam `44.084141 kg/s`. Relative to the liquid inlet, the observed brine liquid fraction is `22.22%`; relative to the vapour inlet, the observed brine-outlet vapour fraction is `46.70%` and steam-outlet vapour fraction is `54.00%`. Continuity finished at `1.021147e-1` (minimum `9.563220e-2`), so the field is not converged. D is the first positive-backpressure point and shows the expected directional shift versus B, but the liquid-routing state remains unresolved.
+
+Post-processing artifacts: [flux JSON](../../../PyAnsys/output/post_simulation_analysis/02c-D-brine-p1122p5kpa-unprimed-iter500-flux-check.json), [residual JSON](../../../PyAnsys/output/post_simulation_analysis/02c-D-brine-p1122p5kpa-unprimed-iter500-residual-check.json), [residual plot](../../../PyAnsys/output/post_simulation_analysis/02c-D-brine-p1122p5kpa-unprimed-iter500-residual-check.png), [model audit](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-D-iter500-dpm/model_audit.json), and [DPM bundle](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-D-iter500-dpm/raw_results.json) with [injection summary](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-D-iter500-dpm/dpm_injection_summary.csv) and [zone summary](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-D-iter500-dpm/dpm_zone_summary.csv).
+
+### Case E — 1.1275 MPa brine outlet, +7.5 kPa relative to steam
+
+Measured endpoint phase flows: liquid brine `258.322717 kg/s`, liquid steam `4.557397e-6 kg/s`, vapour brine `19.821113 kg/s`, and vapour steam `60.957303 kg/s`. The liquid brine flow is `221.08%` of the liquid inlet, which is an open inventory signal rather than recovery. Vapour routing is `24.28%` to the brine outlet and `74.67%` to the steam outlet relative to the vapour inlet. Continuity finished at `8.959052e-2` (minimum `8.933988e-2`), still far above the configured convergence criterion. Classify E as inventory-draining / unresolved; do not call it liquid-drainage restriction without liquid-inventory history.
+
+Post-processing artifacts: [flux JSON](../../../PyAnsys/output/post_simulation_analysis/02c-E-brine-p1127p5kpa-unprimed-iter500-flux-check.json), [residual JSON](../../../PyAnsys/output/post_simulation_analysis/02c-E-brine-p1127p5kpa-unprimed-iter500-residual-check.json), [residual plot](../../../PyAnsys/output/post_simulation_analysis/02c-E-brine-p1127p5kpa-unprimed-iter500-residual-check.png), [model audit](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-E-iter500-dpm/model_audit.json), and [DPM bundle](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-E-iter500-dpm/raw_results.json) with [injection summary](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-E-iter500-dpm/dpm_injection_summary.csv) and [zone summary](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-E-iter500-dpm/dpm_zone_summary.csv).
+
+### Case F — 1.1300 MPa brine outlet, +10.0 kPa relative to steam
+
+Measured endpoint phase flows: liquid brine `440.922326 kg/s`, liquid steam `3.911503e-4 kg/s`, vapour brine `13.346016 kg/s`, and vapour steam `66.191977 kg/s`. The liquid brine flow is `377.35%` of the liquid inlet and therefore indicates a strongly open, inventory-dominated endpoint. Vapour routing is `16.35%` to the brine outlet and `81.08%` to the steam outlet relative to the vapour inlet. Continuity finished at `1.117432e-1` (minimum `1.115639e-1`), not converged; Fluent also reported turbulent-viscosity limiting in `1115` cells during reload. Classify F as inventory-draining / unresolved and retain the reload warning as a numerical-health caveat.
+
+Post-processing artifacts: [flux JSON](../../../PyAnsys/output/post_simulation_analysis/02c-F-brine-p1130kpa-unprimed-iter500-flux-check.json), [residual JSON](../../../PyAnsys/output/post_simulation_analysis/02c-F-brine-p1130kpa-unprimed-iter500-residual-check.json), [residual plot](../../../PyAnsys/output/post_simulation_analysis/02c-F-brine-p1130kpa-unprimed-iter500-residual-check.png), [model audit](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-F-iter500-dpm/model_audit.json), and [DPM bundle](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-F-iter500-dpm/raw_results.json) with [injection summary](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-F-iter500-dpm/dpm_injection_summary.csv) and [zone summary](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-F-iter500-dpm/dpm_zone_summary.csv).
+
+### Case G — 1.1350 MPa brine outlet, +15.0 kPa relative to steam
+
+Measured endpoint phase flows: liquid brine `228.105695 kg/s`, liquid steam `3.286418e-2 kg/s`, vapour brine `9.211118 kg/s`, and vapour steam `71.646923 kg/s`. The liquid brine flow is `195.22%` of the liquid inlet. Vapour routing is `11.28%` to the brine outlet and `87.76%` to the steam outlet relative to the vapour inlet. Continuity finished at `8.242718e-2` (minimum `8.240676e-2`), not converged; Fluent reported turbulent-viscosity limiting in `53` cells during reload. Classify G as inventory-draining / unresolved. The vapour-routing direction continues to strengthen, but no claim about a useful operating point follows from this open endpoint.
+
+Post-processing artifacts: [flux JSON](../../../PyAnsys/output/post_simulation_analysis/02c-G-brine-p1135kpa-unprimed-iter500-flux-check.json), [residual JSON](../../../PyAnsys/output/post_simulation_analysis/02c-G-brine-p1135kpa-unprimed-iter500-residual-check.json), [residual plot](../../../PyAnsys/output/post_simulation_analysis/02c-G-brine-p1135kpa-unprimed-iter500-residual-check.png), [model audit](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-G-iter500-dpm/model_audit.json), and [DPM bundle](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-G-iter500-dpm/raw_results.json) with [injection summary](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-G-iter500-dpm/dpm_injection_summary.csv) and [zone summary](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-G-iter500-dpm/dpm_zone_summary.csv).
+
+### D–G matrix interpretation
+
+**Measured:** increasing brine backpressure from `+2.5` to `+15 kPa` reduces the recorded vapour flow through the brine outlet (`38.127` → `9.211 kg/s`, `46.70%` → `11.28%` of vapour inlet) and increases the recorded vapour flow through the steam outlet (`44.084` → `71.647 kg/s`, `54.00%` → `87.76%`). This is a clear directional screening signal.
+
+**Derived:** the positive-backpressure hypothesis is supported directionally across D–G for vapour routing. D is the most useful bracket-adjacent candidate because it shows the shift while its liquid brine flow remains below the liquid inlet. E–G show increasingly large liquid-outlet excesses at the recorded endpoint, so they are inventory-draining / unresolved rather than demonstrated drainage-restricted equilibria.
+
+**Unresolved:** no D–G case has a common stable/converged window, total liquid-inventory history, lower-vessel/pipe-entry pressure history, or the agreed contour/vector evidence. The pressure scan locates a promising routing direction and suggests that the liquid-drainage limit lies somewhere between D and the higher points, but it does not identify the limit numerically.
+
+### Artifact index
+
+| Case | Remote endpoint | Carrier flux | Residual history | EWF/DPM audit | DPM bundle |
+|---|---|---|---|---|---|
+| D | `02c-D-...-iter500-20260813T205605Z.cas.h5/.dat.h5` | [JSON](../../../PyAnsys/output/post_simulation_analysis/02c-D-brine-p1122p5kpa-unprimed-iter500-flux-check.json) | [JSON](../../../PyAnsys/output/post_simulation_analysis/02c-D-brine-p1122p5kpa-unprimed-iter500-residual-check.json) | [audit](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-D-iter500-dpm/model_audit.json) | [raw](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-D-iter500-dpm/raw_results.json) |
+| E | `02c-E-...-iter500-20260813T205605Z.cas.h5/.dat.h5` | [JSON](../../../PyAnsys/output/post_simulation_analysis/02c-E-brine-p1127p5kpa-unprimed-iter500-flux-check.json) | [JSON](../../../PyAnsys/output/post_simulation_analysis/02c-E-brine-p1127p5kpa-unprimed-iter500-residual-check.json) | [audit](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-E-iter500-dpm/model_audit.json) | [raw](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-E-iter500-dpm/raw_results.json) |
+| F | `02c-F-...-iter500-20260813T205605Z.cas.h5/.dat.h5` | [JSON](../../../PyAnsys/output/post_simulation_analysis/02c-F-brine-p1130kpa-unprimed-iter500-flux-check.json) | [JSON](../../../PyAnsys/output/post_simulation_analysis/02c-F-brine-p1130kpa-unprimed-iter500-residual-check.json) | [audit](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-F-iter500-dpm/model_audit.json) | [raw](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-F-iter500-dpm/raw_results.json) |
+| G | `02c-G-...-iter500-20260813T205605Z.cas.h5/.dat.h5` | [JSON](../../../PyAnsys/output/post_simulation_analysis/02c-G-brine-p1135kpa-unprimed-iter500-flux-check.json) | [JSON](../../../PyAnsys/output/post_simulation_analysis/02c-G-brine-p1135kpa-unprimed-iter500-residual-check.json) | [audit](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-G-iter500-dpm/model_audit.json) | [raw](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-G-iter500-dpm/raw_results.json) |
+
+For all four cases, the audit reports EWF disabled, no active film wall, and no UDF body-force/scalar-update match. DPM transcripts completed for all six inherited injections per case. These inherited particle results are kept for reproducibility but excluded from the primary pressure comparison.

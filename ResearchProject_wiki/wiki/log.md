@@ -750,3 +750,40 @@
 - current status: future setup families `10` and `11` are now concretely defined; active branches remain `08c` and `09c`.
 - blockers: `08c` and `09c` results are still pending; EWF wall-zone selection, timestep, and re-entrainment closure still require Fluent-side confirmation.
 - next action: prepare the parent `09c` case and launch independent `10a`, `10b`, and `10c` cases with the same loading and injection payload.
+
+## [2026-08-16] model-update | Complete 02c positive-backpressure D–G post-processing
+
+- files created/updated: `../../Setups/reports/02c/results.md`, `../../Setups/reports/02c/future-runs.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/log.md`, plus the generated D–G carrier/residual and EWF/DPM diagnostic bundles under `../../../PyAnsys/output/`.
+- purpose: verify and interpret the queued 02c D/E/F/G endpoints and reformat the results report so pressure points can be compared directly.
+- what changed since last update: all four paired remote 500-iteration endpoints were independently reloaded and post-processed. The report now has a sweep definition, primary phase-routing table, numerical-health table, compact D–G evidence blocks, and an artifact index.
+- measured direction: from D to G, vapour brine-outlet flow fell `38.127` → `9.211 kg/s` (`46.70%` → `11.28%` of vapour inlet), while vapour steam-outlet flow rose `44.084` → `71.647 kg/s` (`54.00%` → `87.76%`).
+- evidence boundary: continuity remained `8.24e-2` to `1.12e-1`; no case is converged. D is a promising bracket-adjacent directional candidate, while E–G have liquid brine outflow above inlet and remain inventory-draining / unresolved. No pressure-selection or separator-efficiency claim is made.
+- inherited diagnostics: EWF audit reports disabled/no active film wall; six DPM transcripts completed per case, but all injections originate at `steam-outlet`, so DPM is excluded from primary pressure interpretation.
+- next immediate action: instrument total continuous-liquid inventory, lower-vessel/pipe-entry pressure diagnostics, and visual phase/velocity evidence before continuing a common-window pressure screen.
+
+## [2026-08-16] model-update | Launch coarse above-inlet 02c pressure sweep
+
+- files created/updated: `../../Setups/active/02c-mixture-brine-outlet-pressure-sensitivity-unprimed.md`, `../../Setups/reports/02c/future-runs.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/log.md`, `../../../PyAnsys/scripts/setup/build_02c_positive_backpressure_cases.py`, `../../../PyAnsys/scripts/setup/generate_02c_positive_backpressure_queue.py`, `../../../PyAnsys/scripts/setup/run_02c_above_inlet_20_to_50.py`, and `../../../PyAnsys/src/pyansys_fluent/positive_backpressure_queue.py`.
+- purpose: test the user-proposed possibility that the brine outlet may require pressure above the nominal inlet reference because of lower-vessel hydrostatic and swirl pressure.
+- what changed: added H20–H50 at `1.160`–`1.190 MPa`, representing `+20` to `+50 kPa` above the nominal `1.140 MPa` inlet reference in `+5 kPa` steps; steam outlet remains `1.120 MPa`.
+- execution state: all seven case-only children were built/reload-verified from the frozen 02c-B pre-initialization parent. Fluent accepted the native H20 → H25 → H30 → H35 → H40 → H45 → H50 queue; H20 is active and endpoint completion is unverified.
+- early diagnostic: H20 immediately shows reverse flow on both pressure outlets and turbulent-viscosity limiting. This is retained as a diagnostic signal; no case is marked failed until the queued endpoint or a defined hard-stop condition is recorded.
+- next immediate action: verify paired endpoints after Fluent returns control, then post-process fluxes/residuals/reverse-flow evidence and liquid inventory before drawing any upper-pressure conclusion.
+
+## [2026-08-16] model-update | Prepare blocked 02c I20–I160 coarse extension
+
+- files created/updated: `../../Setups/active/02c-mixture-brine-outlet-pressure-sensitivity-unprimed.md`, `../../Setups/reports/02c/future-runs.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/progress/blockers.md`, `wiki/log.md`, `../../../PyAnsys/scripts/setup/build_02c_positive_backpressure_cases.py`, `../../../PyAnsys/scripts/setup/generate_02c_positive_backpressure_queue.py`, and `../../../PyAnsys/output/02c-above-inlet-20-to-130-coarse-queue-20260816T014600Z.jou`.
+- purpose: prepare the user-requested broad brine-outlet pressure screen from `1.160` to `1.300 MPa` in `20 kPa` steps above the nominal inlet reference, with an independently parent-derived case-only child per point and a dormant Fluent-native journal.
+- what changed since last update: added distinct I20–I160 case identifiers and `coarse130` artifact suffixes, enhanced the builder to compare every audited boundary/model value after child reload except the requested brine pressure, and rendered the eight-case native journal without submitting it.
+- assumptions introduced/removed: preserves the frozen 02c-B parent, `1.120 MPa` steam outlet, velocity-inlet contract, unprimed Hybrid Initialization procedure, and `500` native-iteration screen; no pressure-selection, drainage-limit, or convergence claim is introduced.
+- current status: no I child was created because the accessible idle Fluent session could not see the required frozen parent; no initialization, iteration, data write, or journal execution occurred.
+- blockers: parent availability from an idle Fluent session is required before this identical-settings case-only build can proceed.
+- next immediate action: reconnect to an idle Fluent session with the documented frozen parent visible, build/reload-verify all eight I children, and keep the generated journal unsubmitted until separately authorized.
+
+## [2026-08-16] model-update | Verify Student 02c I20/I40/I60 native smoke queue
+
+- files created/updated: `../../Setups/active/02c-mixture-brine-outlet-pressure-sensitivity-unprimed.md`, `../../Setups/reports/02c/future-runs.md`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/progress/blockers.md`, `wiki/log.md`, and `../../../PyAnsys/scripts/setup/run_02c_student_i_smoke_test.py`.
+- purpose: confirm the first three coarse I-series cases can run independently through Fluent-native initialization/iteration/write sequencing before any later server-2 production work.
+- what changed since last update: Student built I20/I40/I60 from the same saved Student Mixture pre-initialization surrogate and ran the submitted journal for 50 iterations per member. All three paired endpoints were visible and explicitly reopened; each retained the requested brine pressure, `1.120 MPa` steam outlet, Mixture/RNG k-epsilon, and 50-point residual history ending at iteration 50.
+- evidence boundary: this is Student mesh-derived surrogate evidence only. Reverse-flow and turbulent-viscosity-limit diagnostics occurred; no member is called converged, scientifically comparable to 02c, or suitable for server-2 pressure interpretation.
+- next immediate action: do not promote or extend the Student endpoints. Recover the exact frozen parent on server 2, then rebuild the production I matrix independently from that parent.
