@@ -7,11 +7,11 @@ This is the canonical navigation layer for the historical Purnanto/reference set
 - [09c — DPM/EWF wall-film re-entrainment setup](../past/reported/09c-dpm-ewf-wall-film-reentrainment.md)
 - [09cV2 — Skoog partition and injection control](../past/reported/09cV2-skoog-partition-injection-control.md)
 - [09cV3 — Fine-mist 5% DPM PSD rerun](09cV3-fine-mist-5pct-psd-rerun.md) — active record now stored physically in this programme.
-- [09c-family numerical reports](../reports/purnanto-reference/09c/index.md)
-- [09cV2 numerical reports](../reports/purnanto-reference/09cV2/results.md)
-- [09cV3 numerical reports](../reports/purnanto-reference/09cV3/results.md)
+- [09c numerical report](../reports/purnanto-reference/09c/results.md)
+- [09cV2 numerical report](../reports/purnanto-reference/09cV2/results.md)
+- [09cV3 numerical report](../reports/purnanto-reference/09cV3/results.md)
 
-The older `09c` and `09cV2` setup definitions remain in the reported numbered store for link compatibility; `09cV3`, which was the remaining active member, has been moved out of the global `active/` namespace into this programme.
+The older `09c` and `09cV2` setup definitions remain in the reported numbered store for link compatibility; `09cV3`, which was the remaining active member, has been moved out of the global `active/` namespace into this programme. Compatibility report redirects are retained at the old `Setups/reports/09c*` paths so the existing setup records continue to resolve their evidence links.
 
 ## Legacy numbered views
 
