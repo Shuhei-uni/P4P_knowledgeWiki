@@ -1,168 +1,178 @@
 ---
 name: setup-report
-description: "Create and manage concrete Fluent setup records and setup-linked result reports. Start from the scientific intent of the setup, distinguish exploratory/diagnostic/sensitivity work from verification or validation, make the Fluent build contract explicit, and keep interpretation user-led by default. Use for new setup branches, setup definitions, lifecycle/lineage work, result-report creation, or setup/report cleanup."
+description: "Create and manage concrete Fluent setup records and setup-linked evidence. Route by geometry first, organize current Full-geomV2 work by physics family and scientific campaign, preserve the historical numbered/reference corpus, make the Fluent build contract explicit, and keep interpretation user-led by default."
 ---
 
 # Setup Report
 
 ## Purpose
 
-`Setups/` documents concrete simulation instances. A setup record has two jobs:
+`Setups/` documents concrete simulation experiments. A setup record has two jobs:
 
 1. make the intended Fluent case reproducible enough for an implementation agent to build or verify it; and
 2. make the scientific reason for the case obvious enough that later analysis can collect relevant evidence.
 
-A setup record is **not** a place for the agent to decide what the result means before the run exists.
+A setup record is not where the agent decides what a future result means.
 
 Keep reusable CFD methods in `CFD_wiki`, project-level conclusions in `ResearchProject_wiki`, and executable automation in `PyAnsys/`.
 
 Before working on a setup, read:
 
 1. repository `AGENTS.md`;
-2. `Setups/order-dictionary.md`;
-3. the relevant parent/comparison setup and linked results;
-4. the project roadmap when current research direction matters.
+2. `Setups/index.md`;
+3. the relevant geometry-programme index;
+4. the parent/comparison setup and linked evidence;
+5. the project roadmap when current research direction matters.
+
+Read `Setups/order-dictionary.md` when working on the historical numbered corpus. It is not the naming authority for new full-geometry campaigns.
+
+## Geometry first
+
+Determine geometry from explicit mesh/case provenance before choosing a path.
+
+### Current full geometry
+
+New `Full-geomV2` work belongs under:
+
+```text
+Setups/full-geometry/<physics-family>/<scientific-campaign>/
+```
+
+Examples:
+
+```text
+Setups/full-geometry/mixture/steady-liquid-outlet/
+Setups/full-geometry/mixture/transient-liquid-outlet/
+Setups/full-geometry/vof/transient-liquid-outlet/
+```
+
+The campaign folder is the primary human-facing identity. A stable machine/reference ID such as `FG-MIX-T01` may be used in metadata and Fluent artifact names.
+
+Do not create `02f`, `02g`, or another global number merely because the campaign comes later in time.
+
+### Historical numbered/reference programme
+
+The older `active/`, `future/`, `past/`, and `reports/` paths remain as a compatibility layer because many records cross-link to them. Navigate them through `Setups/purnanto-reference/index.md`.
+
+When editing a legacy numbered record:
+
+- preserve its assigned ID;
+- preserve existing link topology unless intentionally migrating it;
+- use `Setups/order-dictionary.md` for historical lineage;
+- do not silently relabel it as current full geometry.
+
+### Geometry identity gate
+
+Never infer geometry from a setup number, branch suffix, or phrase such as “full geometry.” Require an exact mesh filename, verified case identity, or equivalent geometry-provenance evidence.
+
+A methodological predecessor may inform a new campaign without being a case/geometry parent.
 
 ## Core principle: intent first, interpretation later
 
-Before creating or materially revising a setup record, establish the **intent contract**. Use information already supplied by the user or repository; do not ask again for facts that are already clear.
+Establish the intent contract from information already supplied by the user/repository. Do not ask again when it is already clear.
 
 Record:
 
-- **Primary question** — what this case is trying to learn, test, reproduce, verify, or validate.
-- **Investigation mode** — one of the following, or a clearer user-defined label:
-  - `exploratory`: learn what the model does; unexpected behavior is useful evidence;
-  - `diagnostic`: isolate why an existing case behaves a certain way;
-  - `sensitivity`: vary one or more declared factors and compare responses;
-  - `verification`: test numerical/model implementation consistency, convergence, or independence;
-  - `validation`: compare against independent physical/experimental evidence and support a stated validity claim;
-  - `production/decision`: use an already-qualified model to support an engineering decision.
-- **Controlled changes** — what is intentionally different from the reference.
-- **Frozen context** — what should remain unchanged for the comparison to remain meaningful.
-- **Evidence sought** — what measurements would help answer the primary question. These are analysis targets, not automatic conclusions.
-- **Interpretation owner** — default `user-led`. Use `joint` or `agent-led` only when the user explicitly requests it.
+- **Primary question** — what the case is trying to learn, diagnose, reproduce, verify, validate, or decide.
+- **Investigation mode** — `exploratory`, `diagnostic`, `sensitivity`, `verification`, `validation`, `production/decision`, or a clearer user-defined label.
+- **Controlled changes** — what is intentionally different.
+- **Frozen context** — what must remain unchanged for the comparison to remain meaningful.
+- **Evidence sought** — measurements/histories that help answer the question.
+- **Interpretation owner** — default `user-led`; use `joint` or `agent-led` only when the user explicitly requests it.
 
-If the investigation mode or primary question is genuinely ambiguous and would change the case definition, ask the user before finalising the setup. If the user has already made the intent clear, proceed without a redundant approval loop.
+If ambiguity would materially change the case or analysis, ask. Otherwise proceed.
 
-### Claim-strength rule
+Exploratory/diagnostic/sensitivity work should not receive invented pass/fail criteria. Verification/validation may use explicit criteria only when tied to the stated claim.
 
-The investigation mode determines how strong later claims may be:
+## Full-geometry campaign structure
 
-- exploratory/diagnostic/sensitivity setups may produce useful directional or mechanistic evidence without satisfying validation-grade criteria;
-- verification setups require explicit numerical checks relevant to the verification question;
-- validation setups must name the independent reference, comparison quantity, tolerances/uncertainty treatment, and validity scope before a validation claim can be made;
-- never upgrade an exploratory result into a validated result merely because the numbers look good.
+Prefer:
+
+```text
+<campaign>/
+├── index.md
+├── setup.md
+├── results.md                # simple campaign
+└── <stage-or-study>/         # multi-stage campaign
+    ├── plan.md
+    └── results.md
+```
+
+Keep setup and evidence together. Do not create a new global `Setups/reports/<id>/` for full-geometry work.
+
+A campaign index should explain:
+
+- scientific role;
+- status and current branch;
+- predecessors/comparisons;
+- links to setup and evidence;
+- what belongs in the campaign next.
 
 ## Setup record structure
 
-Use `Setups/templates/setup-record-template.md` as a flexible guide, not a mandatory form. Omit sections that add no value and add sections when the experiment needs them.
+Use `Setups/templates/setup-record-template.md` as a flexible guide, not a mandatory form.
 
-A useful setup record normally contains:
+A useful setup normally contains:
 
-1. **Intent and question** — concise statement of why this case exists and its investigation mode.
-2. **Reference and controlled changes** — parent/baseline, intentional differences, frozen settings.
-3. **Fluent build contract** — exact geometry/mesh identity, models, materials, phases, boundary conditions, initialization, numerics, and run controls needed by the implementation agent.
-4. **Build/readback gates** — only the checks needed to prove the intended case was actually created.
-5. **Evidence to collect** — setup-specific measurements or histories that should exist before/during the run because they may be impossible to reconstruct afterwards.
-6. **Interpretation contract** — who will interpret the result and what decisions are intentionally deferred until evidence exists.
-7. **Lineage/provenance** — setup ID, lifecycle, linked artifacts, parent/comparison cases.
+1. intent and question;
+2. geometry/mesh or verified parent identity;
+3. reference and controlled changes;
+4. frozen comparison context;
+5. Fluent build contract;
+6. build/readback gates;
+7. evidence to instrument before/during the run;
+8. interpretation contract;
+9. lineage/provenance and optional stable ID.
 
-Do not pad a setup record with generic CFD explanations. Prefer a short, exact build instruction over a long narrative.
+Prefer a controlled delta over restating every inherited value. Read back critical inherited settings before relying on them.
 
-## Experimental setup behavior
+Case identity must come from explicit file/case evidence or an independently verified mapping. Never infer a case from a Fluent server/connection ID.
 
-For exploratory, diagnostic, and sensitivity work:
+## Evidence planning
 
-- describe hypotheses as hypotheses, not expected truths;
-- avoid success/failure language unless the user has supplied a genuine criterion;
-- prefer `observations to collect`, `comparison questions`, or `screening signals` over rigid acceptance gates;
-- a surprising or numerically imperfect result may still answer the experimental question;
-- do not silently stop or reject a case merely because it fails a criterion that was invented by the agent.
+A setup may request pre-run instrumentation because some evidence cannot be reconstructed later. Examples include report definitions, time histories, phase fluxes, local probes, liquid inventory, VOF interface measures, DPM injection results, or EWF bookkeeping.
 
-For verification/validation work:
+For each requested measurement, state why it is relevant to the primary question.
 
-- explicit criteria are appropriate, but they must be tied to the stated verification/validation objective;
-- record the evidence basis and uncertainty/limitations required for the intended claim;
-- if a required criterion is missing, mark the claim as unresolved rather than inventing one.
+Do not require carrier/DPM/EWF analyses simply because a reusable script exists. Post-analysis should inspect the actual case and choose analyses relevant to the campaign question.
 
-## Fluent implementation contract
+## Results behavior
 
-The setup record should be directly useful to the Fluent implementation agent. Clearly separate:
+The default result is an **evidence packet**, not an agent verdict. It should:
 
-- **required state**: exact settings that define the experiment;
-- **preserved state**: settings inherited from the parent and not intended to change;
-- **operator-assisted items**: geometry, patching, zone identification, or other tasks where the user wants the agent to stop and request help;
-- **implementation freedom**: safe choices that do not alter experimental meaning.
+- restate the question;
+- identify exactly what ran;
+- explain what analyses were performed and why;
+- present measured/derived values;
+- identify missing evidence and numerical limitations;
+- separate observations from interpretations;
+- set `Interpretation status: pending user direction` unless interpretation was supplied/delegated.
 
-When a parent case exists, prefer a controlled delta over restating every inherited value. Read back critical inherited settings before relying on them.
+Do not automatically end with `keep`, `reject`, a preferred pressure/model, or the next simulation. If the user asks for interpretation, add a clearly separated interpretation section and identify whether it is user-provided, joint, or agent-proposed.
 
-Case identity must come from explicit file/case evidence or an independently verified setup mapping. Never infer a case from a Fluent server/connection ID.
+## Lifecycle
 
-## Evidence planning, not interpretation
+Lifecycle is metadata, not a required directory for new full-geometry work:
 
-A setup may suggest analyses because some evidence must be instrumented before solving. Examples include report definitions, time histories, phase fluxes, local probes, liquid inventory, VOF interface measures, DPM injection results, or EWF bookkeeping.
-
-For each requested measurement, state **why it is relevant to the primary question**.
-
-Do not require carrier/DPM/EWF analyses simply because a script exists. The post-simulation analysis skill will inspect the actual case, propose applicable analyses, and ask the user how broad the analysis should be when the choice is material.
-
-## Results report behavior
-
-When actual numerical evidence exists, use `Setups/templates/results-report-template.md`.
-
-The default result report is an **evidence packet**, not an agent verdict. It should:
-
-- remind the reader what question the setup was intended to investigate;
-- state exactly what was run and which evidence was collected;
-- present measured and derived values clearly;
-- identify missing evidence, numerical limitations, and comparison caveats;
-- distinguish observations from interpretations;
-- set `Interpretation status: pending user direction` unless the user already supplied an interpretation framework or explicitly delegated interpretation;
-- end with focused questions or decision options for the user when interpretation is still open.
-
-Do not automatically end every report with `keep`, `reject`, `needs follow-up`, a preferred pressure/model, or a next simulation. Those are decisions for the user unless a decision rule was supplied in advance.
-
-If the user asks for interpretation, add it as a clearly separated section and state whether it is user-provided, jointly developed, or agent-proposed.
-
-## Lifecycle and lineage
-
-Lifecycle management remains separate from scientific interpretation.
-
-Use:
-
-- `active` — currently being built, run, or actively analysed;
+- `active` — currently being built/run/analysed;
 - `future` — intentionally planned but not started;
-- `reported` — no longer active and has useful setup-linked numerical evidence;
+- `reported` — no longer active and has useful numerical evidence;
 - `archived` — historical, superseded, invalid, parked, or setup-only.
 
-A report may be preliminary while a setup remains active. `reported` does not mean validated.
-
-When creating or renaming setup records:
-
-1. preserve assigned setup numbers;
-2. use a new number/branch suffix instead of rewriting history;
-3. avoid `current`, `latest`, and `final` in filenames;
-4. use `NN[-branch]-short-description.md`;
-5. update `Setups/order-dictionary.md` and affected links when lineage or paths change.
-
-For lifecycle-only mutations where the desired state is not already explicit, present the proposed change and obtain the user's final call before moving/archiving/renaming records. Do not add an approval gate to ordinary setup drafting when the user has already asked for the setup to be created.
-
-## Technical extraction and drift
-
-Use `Setups/templates/technical-setup-report-template.md` when a machine-extracted Fluent state needs to be compared with the intended setup record.
-
-Treat extracted Fluent state as evidence of what was actually loaded/configured; treat the setup record as evidence of intended experiment definition. When they disagree, record the drift and ask for a decision when it changes experimental meaning. Do not silently reinterpret the setup to match the export.
+`reported` does not mean verified or validated.
 
 ## Completion check
 
 Before finishing setup/report work, confirm:
 
-- the primary question and investigation mode are visible near the top;
-- the controlled changes and frozen comparison context are unambiguous;
-- the Fluent implementation agent can identify what must be built/read back;
-- pre-run monitors required for the intended evidence are identified;
+- geometry programme is supported by explicit provenance;
+- path follows geometry → physics → campaign for new full-geometry work;
+- primary question and investigation mode are visible;
+- controlled changes and frozen context are unambiguous;
+- Fluent implementation/readback requirements are sufficient;
+- pre-run evidence is identified;
 - hypotheses are not written as conclusions;
-- validation language appears only when a validation contract exists;
+- validation language appears only with a validation contract;
 - interpretation ownership is explicit and defaults to the user;
-- result reports preserve measured/derived evidence without forcing an agent verdict;
-- lineage, setup identity, and artifact links remain traceable.
+- results preserve evidence without forcing a verdict;
+- legacy IDs/links remain traceable when historical records are involved.

@@ -1,56 +1,64 @@
 # Setups
 
-This is the primary index for concrete Fluent experiments, setup branches, and numerical findings.
+`Setups/` stores concrete Fluent experiment definitions and their setup-linked evidence. The primary navigation is now **geometry-first**, because the current `Full-geomV2` programme is a different experimental generation from the older numbered Purnanto/reference work.
 
-## Lifecycle views
+## Primary programmes
 
-- [Active setups](active/index.md): cases currently being run or actively changed.
-- [Future setups](future/index.md): planned branches not yet started.
-- [Past reported setups](past/reported/index.md): setups with numerical efficiency or DPM trajectory/fate evidence.
-- [Past archived setups](past/archived/index.md): setup definitions retained for lineage, failed approaches, or historical context without a complete numerical report.
-- [Reports](reports/index.md): detailed numerical findings linked to a setup.
+- [Full geometry](full-geometry/index.md) — canonical home for `Full-geomV2` and its descendants. New production work belongs here.
+- [Purnanto/reference programme](purnanto-reference/index.md) — navigation layer for the historical numbered/reference corpus and its DPM/EWF development branches.
 
-## Rule of thumb
+## Shared resources
 
-Create a setup record when the Fluent inputs or controlled experiment branch are defined. Create a report when numerical results are available.
+- [Setup order dictionary](order-dictionary.md) — historical numbered-lineage reference. Continue using it when editing legacy numbered records; it is **not** the naming authority for new full-geometry campaigns.
+- [Templates](templates/) — flexible setup/result templates shared by both programmes.
 
-Reported results must contain at least one of:
+## Legacy compatibility views
 
-- a flux-based efficiency, carryover, or phase-balance calculation using actual result values;
-- a DPM injection result with numerical observed escape at a named outlet.
+The following directories are retained because many existing Markdown files cross-link to them:
 
-Do not promote a setup based only on planned values, target calculations, screenshots without extracted numbers, or placeholder result tables.
+- [active](active/index.md)
+- [future](future/index.md)
+- [past](past/)
+- [reports](reports/index.md)
 
-## Setup record contract
+These paths are now a **compatibility layer for the numbered corpus**. Do not create new `Full-geomV2` campaigns there. Current full-geometry records that still physically reside in those paths are linked from the canonical full-geometry campaign pages until a future link-safe physical migration is justified.
 
-Every setup record should identify:
+## New full-geometry filing rule
 
-| Field | Meaning |
-|---|---|
-| Setup ID | Stable sequence/branch identifier such as `08b`; never change it after assignment. |
-| Lifecycle | `active`, `future`, `reported`, or `archived`. |
-| Role | Reference, experiment, sensitivity branch, audit, or other concrete purpose. |
-| Parent / children | Direct lineage links. |
-| Controlled changes | What differs from the parent setup. |
-| Evidence-use label | Diagnostic, setup calculation only, report-quality, parity-closed baseline, etc. |
-| Outcome | Keep, reject, or needs follow-up. |
-| Linked report | Report path, or `none` when numerical findings do not yet exist. |
+Use:
 
-## Report contract
+```text
+Setups/full-geometry/
+└── <physics-family>/
+    └── <scientific-campaign>/
+        ├── index.md
+        ├── setup.md
+        ├── results.md            # when one report is enough
+        └── <stage-or-study>/      # when the campaign has multiple stages
+            ├── plan.md
+            └── results.md
+```
 
-Each report belongs to one setup and should contain:
+The folder name should communicate the scientific question. Do not make a new top-level numbered folder simply because the next integer is available.
 
-- run identity and case/data files;
-- changed variables and inherited setup state;
-- residuals and named-outlet phase fluxes;
-- efficiency calculations and/or DPM trajectory/fate tables;
-- visual and numerical findings;
-- uncertainty, raw evidence categories, and assumptions;
-- conclusion and next action.
+Stable IDs may still exist in metadata and Fluent artifact names, for example `FG-MIX-T01`, but the ID is secondary to the geometry/physics/campaign path.
 
-The setup record remains the authority for the case definition. The report is the authority for the documented result of that run.
+## Setup/report contract
 
-## Lineage authority
+A setup record should make clear:
 
-- [Setup order dictionary](order-dictionary.md)
-- [Technical setup report template](templates/technical-setup-report-template.md)
+- geometry and mesh identity;
+- scientific question and investigation mode;
+- reference/predecessor and controlled changes;
+- frozen comparison context;
+- exact Fluent build/readback requirements;
+- pre-run evidence that must be instrumented;
+- interpretation ownership, defaulting to user-led.
+
+Results should normally live with the scientific campaign and remain an evidence packet until interpretation is explicitly supplied or delegated.
+
+## Geometry-lineage rule
+
+Do not infer geometry from a setup number or a title such as “full geometry.” A historical file can describe a full-domain vessel while still using the older `purnanto` geometry label. Geometry classification must come from explicit case/mesh provenance.
+
+For the current programme, `Full-geomV2-231kcells.msh.h5` is an explicit full-geometry production-mesh identity used by the active Mixture liquid-outlet work.

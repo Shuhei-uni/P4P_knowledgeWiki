@@ -1,16 +1,20 @@
 # P4P Knowledge Wiki
 
-This repository stores the working knowledge base for the P4P geothermal separator CFD project. It is split into three linked systems:
+This repository stores the working knowledge base for the P4P geothermal separator CFD project. It is split into four linked systems:
 
 - `CFD_wiki/`: reusable CFD knowledge, paper extraction, Fluent guidance, setup patterns, and cross-paper synthesis.
 - `ResearchProject_wiki/`: project-specific decisions, progress, blockers, validation notes, and report-facing research trace.
-- `Setups/`: lifecycle-organized setup/case records for named Fluent branches, parent/child lineage, and numerical reports.
+- `Setups/`: concrete simulation experiments. New work is routed **geometry first**; the current production programme lives under `Setups/full-geometry/`, while the historical numbered/reference corpus is navigated through `Setups/purnanto-reference/`.
+- `PyAnsys/`: executable Fluent automation, case inspection, run orchestration, and machine-readable checks.
 
 Start with:
+
 - `AGENTS.md` for routing rules and repository operating instructions.
 - `CFD_wiki/wiki/index.md` for reusable CFD knowledge.
 - `ResearchProject_wiki/wiki/index.md` for project state.
-- `Setups/order-dictionary.md` for setup ordering and lineage.
+- `Setups/index.md` for simulation-programme navigation.
+- `Setups/full-geometry/index.md` for the current `Full-geomV2` programme.
+- `Setups/order-dictionary.md` only when working with the historical numbered lineage.
 
 ## What Is Not In The Remote Repo
 
@@ -98,6 +102,7 @@ They support the project-specific extraction and audit trail under:
 3. Read `AGENTS.md` before editing so content goes to the correct knowledge system.
 4. Use `CFD_wiki/paper_lookup/index.md` as the first stop for paper navigation.
 5. Use `ResearchProject_wiki/wiki/index.md` and `ResearchProject_wiki/wiki/progress/current-status.md` for project state.
-6. Use `Setups/order-dictionary.md` before creating or renaming setup records.
+6. Use `Setups/index.md` to select the geometry programme before creating setup records.
+7. Use `Setups/order-dictionary.md` only for historical numbered-lineage work.
 
 Do not commit `CFD_wiki/raw/`, the large Fluent guide PDF, local virtual environments, or generated cache files unless the storage strategy is changed deliberately.
