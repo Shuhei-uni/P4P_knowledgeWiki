@@ -6,16 +6,16 @@
 |---|---|
 | Setup ID | `02e` |
 | Lifecycle | `active` |
-| Role | coarse adaptive Mixture-model characterization of built-in Fluent brine-outlet formulations with fixed Y010 liquid initialization |
+| Role | coarse Mixture-model characterization of built-in Fluent brine-outlet formulations with fixed Y010 liquid initialization, followed by a targeted four-case refinement |
 | Parent setup | [02c — Mixture brine-outlet pressure sensitivity, unprimed](02c-mixture-brine-outlet-pressure-sensitivity-unprimed.md) |
 | Execution parent | dedicated `02e-Y010` initialized parent rebuilt from `Full-geomV2-231kcells.msh.h5` |
 | Controlled changes | brine-outlet formulation and that formulation's primary control parameter only |
 | Fixed initialization | all fluid cells selected by the approved production-mesh Y010 region satisfying `y <= +0.10 m` patched as liquid |
-| Stage 1 | three 500-iteration pilot cases per runnable outlet family |
-| Stage 2 | up to four automatically generated cases per family, selected from the three-point liquid-balance response |
-| Maximum planned runs | `28` = 12 Stage-1 pilots + up to 16 adaptive Stage-2 children |
+| Stage 1 | 12 requested pilot cases: 3 per outlet family; complete |
+| Stage 2 | fixed four-case targeted follow-up: 2 Pressure Outlet + 2 Outlet Vent cases |
+| Maximum planned runs | `16` = 12 Stage-1 pilots + 4 targeted Stage-2 cases |
 | Evidence-use label | experimental / coarse screening only; no convergence, validation, optimum, or physical-correctness claim |
-| Linked report | create after Stage 1 and update after Stage 2 |
+| Linked Stage-1 report | [stage1-results-20260816.md](../reports/02e/stage1-results-20260816.md) |
 
 ---
 
@@ -23,15 +23,15 @@
 
 Characterize how different built-in Fluent outlet formulations affect brine drainage, vapour leakage, lower-vessel liquid inventory, and local brine-pipe pressure in the existing steady Mixture-model separator when every case starts from the same initialized lower liquid inventory.
 
-The experiment deliberately fixes the Y010 initialization so that the intended differences between children are limited to the brine-outlet formulation and its primary control parameter.
+The experiment fixes the Y010 initialization so that intended differences between children are limited to the brine-outlet formulation and its primary control parameter.
 
-The principal question is:
+The principal Stage-1 question was:
 
 > How does each Fluent outlet formulation respond over a coarse control-parameter range when applied to the same separator, same Y010 initial liquid inventory, same steam outlet, same inlet conditions, and same numerical model?
 
-This setup does **not** attempt to select the physically correct outlet boundary in advance.
+Stage 1 is now complete. The original automatic adaptive Stage-2 plan has been retired because no outlet family produced three complete 500-iteration pilot histories. Instead, Stage 1 is used as a coarse screening result and Stage 2 is a **user-selected four-case targeted refinement** of the two families that produced the most useful evidence: Pressure Outlet (`PO`) and Outlet Vent (`OV`).
 
-The campaign structure is:
+The revised campaign structure is:
 
 ```text
 same production mesh
@@ -40,20 +40,22 @@ same steady Mixture model
         ↓
 same saved Y010 initialized parent
         ↓
-3 pilot points / outlet family
+Stage 1: 3 pilot points / outlet family
         ↓
-measure final-100-iteration phase flux behaviour
+record survivability + liquid inventory + phase flux behaviour
         ↓
-classify the three-point liquid-balance response
+user interpretation of Stage-1 evidence
         ↓
-refine a crossing / extend a supported trend / densify a non-monotonic range
+retain PO and OV for targeted refinement
         ↓
-up to 4 Stage-2 children / family
+Stage 2: 2 PO cases + 2 OV cases
+        ↓
+compare against Stage-1 anchors and numerical-failure boundaries
         ↓
 plots + observations for user interpretation
 ```
 
-The campaign is intentionally coarse and aggressive. Detailed refinement belongs to a later setup.
+This remains a coarse experimental characterization. Stage 2 is not an optimisation and does not assert that either retained outlet family is physically correct.
 
 ---
 
@@ -66,6 +68,8 @@ The campaign is intentionally coarse and aggressive. Detailed refinement belongs
 The transient VOF branch remains separate under `02d`. Do not enable or inherit VOF behaviour in `02e`.
 
 Y010 is an **initial-condition control**, not a claim that the true operating liquid level is `y = +0.10 m`.
+
+Stage 2 remains within the same steady Mixture-model branch and does not change turbulence, discretization, material properties, inlet conditions, or steam-outlet conditions.
 
 ---
 
@@ -105,17 +109,15 @@ Preserve the following for every case.
 | Materials | preserve current water-vapour / water-liquid pair |
 | Liquid density | `881.77 kg/m³` |
 
-Do not modify turbulence, discretization, relaxation factors, material properties, inlet conditions, or steam-outlet conditions between cases.
+Do not modify turbulence, discretization, relaxation factors, material properties, inlet conditions, steam-outlet conditions, or mesh between Stage-2 cases.
 
 ---
 
 ## 4. Dedicated Y010 execution parent
 
-Before building any outlet-family child, create one reusable initialized Y010 parent from the exact production mesh.
+Every Stage-1 and Stage-2 child must start from the same saved initialized Y010 parent.
 
 ### 4.1 Initialization sequence
-
-Use:
 
 ```text
 load/rebuild frozen Mixture production state
@@ -152,27 +154,21 @@ Actual post-patch liquid inventory = 4.790652590 m³
 Initial liquid mass = 4224.253734 kg
 ```
 
-The official initialization reference is therefore:
+The official initialization reference is:
 
 \[
 \boxed{V_{l,0}=4.790652590\ \mathrm{m^3}}
 \]
 
-rather than the geometric register volume.
-
-Every Stage-1 and Stage-2 case must begin from this same saved initialized parent.
-
 Do not:
 
-- initialize and patch each child independently with a slightly different procedure;
+- initialize and patch each child independently with a different procedure;
 - seed one outlet case from another solved outlet case; or
 - seed a Stage-2 case from a Stage-1 endpoint.
 
 ---
 
-## 5. Outlet formulations in scope
-
-Run four outlet families when the exact Fluent version/case state exposes them and their build/readback gate passes.
+## 5. Outlet formulations
 
 ### 5.1 Pressure Outlet — `PO`
 
@@ -181,6 +177,8 @@ Primary parameter:
 \[
 P_{brine}
 \]
+
+This family remains active for Stage 2.
 
 ### 5.2 Outlet Vent — `OV`
 
@@ -199,53 +197,25 @@ Primary parameter:
 K
 \]
 
+This family remains active for Stage 2.
+
 ### 5.3 Mass-Flow Outlet — `MF`
 
-Prescribed phase mass-flow outlet.
-
-Primary parameter:
-
-\[
-\dot m_{l,target}
-\]
-
-The phase-1 vapour target remains:
-
-\[
-\dot m_{v,target}=0
-\]
+Stage-1 diagnostic family only. All three Stage-1 pilots terminated before 500 iterations. Do not generate Stage-2 MF cases in this setup.
 
 ### 5.4 Exhaust Fan — `EF`
 
-Diagnostic pressure-jump formulation.
-
-Primary parameter:
-
-\[
-\Delta P_{fan}
-\]
-
-`EF` is included for behavioural characterization only. Do not interpret it as a physically preferred brine-pipe model.
+Stage-1 diagnostic family only. `EF` was included for behavioural characterization and is not treated as a physically preferred brine-pipe model. Do not generate Stage-2 EF cases in this setup.
 
 ### 5.5 Outflow exclusion
 
-`Outflow` is excluded from the production matrix because it does not provide the downstream-pressure/resistance control needed for this experiment and can conflict with the frozen pressure-outlet architecture.
-
-Record:
-
-```text
-capability = available if confirmed live
-campaign status = excluded
-reason = unsuitable control structure / incompatible frozen outlet architecture
-```
-
-Do not change the steam-outlet architecture solely to accommodate Outflow.
+`Outflow` remains excluded because it does not provide the downstream-pressure/resistance control required by this experiment and can conflict with the frozen pressure-outlet architecture.
 
 ---
 
 ## 6. Fixed run budget
 
-Every Stage-1 and Stage-2 child receives:
+Every child receives:
 
 \[
 \boxed{500\ \text{steady iterations}}
@@ -261,13 +231,13 @@ If a case encounters a hard numerical failure before iteration 500:
 2. preserve transcript/log evidence;
 3. mark the case `RUN-FAILED`;
 4. do not tune relaxation factors or solver schemes to rescue that one case; and
-5. continue independent families where possible.
+5. continue the remaining independent cases.
 
 ---
 
 ## 7. Common monitor package
 
-Create the monitor package before running children and reuse exactly the same definitions throughout the campaign.
+Use the same monitor definitions for all Stage-2 cases.
 
 ### 7.1 Phase mass flows
 
@@ -285,64 +255,39 @@ Record phase mass flow for:
 - brine outlet;
 - steam outlet.
 
-Store both:
-
-- Fluent-native signed value; and
-- outward-positive converted value.
-
-Define outward-positive:
-
-\[
-\dot m_{l,b}
-\]
-
-as liquid flow through the brine outlet and:
-
-\[
-\dot m_{v,b}
-\]
-
-as vapour flow through the brine outlet.
+Store both Fluent-native signed values and outward-positive converted values.
 
 ### 7.2 Y010 liquid inventory
-
-Monitor:
 
 \[
 V_{l,Y010}=\int_{Y010}\alpha_l\,dV
 \]
 
-This measures how much liquid remains inside the originally initialized Y010 region.
+### 7.3 Y030 lower-region inventory
 
-### 7.3 Larger lower-region inventory
-
-Create a monitoring-only region:
+Create/retain the monitoring-only region:
 
 \[
 y\le+0.30\ \mathrm{m}
 \]
 
-named:
-
-```text
-lower-monitor-y030
-```
-
-Monitor:
+and monitor:
 
 \[
-V_{l,Y030}=\int_{y\le0.30}\alpha_l\,dV
+V_{l,Y030}=\int_{y\le0.30}\alpha_l\,dV.
 \]
 
-Y030 is **not patched** in this setup. It is a monitoring region only, intended to distinguish liquid leaving the lower vessel from liquid moving slightly above the original Y010 cutoff.
+Y030 is not patched.
 
-### 7.4 Total liquid inventory
+### 7.4 Total-domain liquid inventory — required for Stage 2
 
-Monitor:
+Stage 1 did not preserve this history. Stage 2 must add and retain:
 
 \[
-V_{l,total}=\int_V\alpha_l\,dV
+\boxed{V_{l,total}=\int_V\alpha_l\,dV}
 \]
+
+This is required so lower-region depletion can be distinguished from redistribution elsewhere in the computational domain.
 
 ### 7.5 Brine-pipe-entry pressure
 
@@ -352,17 +297,9 @@ Preferred diagnostic location:
 brine-pipe-entry-section
 ```
 
-an internal cross-sectional surface slightly inside the brine pipe from the lower-vessel/pipe junction.
+When reproducibly available, record area-weighted average, minimum, and maximum static pressure. A nearby cell region may also be used for volume-averaged static pressure.
 
-If created reproducibly, record:
-
-- area-weighted average static pressure;
-- minimum static pressure;
-- maximum static pressure.
-
-A nearby cell region may also be used for volume-averaged static pressure.
-
-**This is not a campaign gate.** If the surface cannot be created robustly through gRPC/PyFluent without guessing geometry, record the monitor as unavailable and continue the experiment. Do not invent the section location.
+This remains a diagnostic rather than a run gate.
 
 ### 7.6 Outlet behaviour
 
@@ -370,36 +307,100 @@ Where available, record:
 
 - area-averaged normal velocity at the brine outlet;
 - mixture density at the brine outlet;
-- reverse-flow area fraction;
+- reverse-flow area fraction; and
 - total brine mass flow.
-
-For Outlet Vent, retain the quantities needed to interpret the resistance response.
 
 ### 7.7 Residuals
 
-Store all residual histories and plot them for each case.
-
-Do not use a terminal residual threshold as a Stage-2 gate and do not replace residual histories with a large terminal-number table.
+Store and plot residual histories. Do not impose a terminal residual threshold as a Stage-2 pass/fail criterion.
 
 ---
 
-## 8. Stage 1 — three-point pilot characterization
+## 8. Stage 1 — completed pilot characterization
 
-A single baseline cannot establish the response direction of an outlet control. Therefore every runnable family receives three independent pilot points from the same saved Y010 parent.
-
-The middle point is the nominal reference; it is not automatically preferred.
+Stage 1 requested three independent pilot points for each of four outlet families from the same saved Y010 parent.
 
 ### 8.1 Pressure Outlet pilots
 
-Keep the steam outlet fixed at `1.120 MPa` gauge.
-
-| Case | Brine pressure |
-|---|---:|
-| `02e-PO-P1` | `1.160 MPa` gauge |
-| `02e-PO-P2` | `1.200 MPa` gauge |
-| `02e-PO-P3` | `1.240 MPa` gauge |
+| Case | Brine pressure | Stage-1 outcome |
+|---|---:|---|
+| `02e-PO-P1` | `1.160 MPa` gauge | completed 500 |
+| `02e-PO-P2` | `1.200 MPa` gauge | FPE at 335 |
+| `02e-PO-P3` | `1.240 MPa` gauge | FPE at 226 |
 
 ### 8.2 Outlet Vent pilots
+
+Keep discharge pressure at `1.200 MPa` gauge.
+
+| Case | `K` | Stage-1 outcome |
+|---|---:|---|
+| `02e-OV-P1` | `0` | completed 500 |
+| `02e-OV-P2` | `10` | FPE at 448 |
+| `02e-OV-P3` | `100` | FPE at 457 |
+
+### 8.3 Mass-Flow Outlet pilots
+
+| Case | Liquid target | Stage-1 outcome |
+|---|---:|---|
+| `02e-MF-P1` | `58.4235 kg/s` | FPE at 33 |
+| `02e-MF-P2` | `116.847 kg/s` | FPE at 9 |
+| `02e-MF-P3` | `233.694 kg/s` | FPE at 254 |
+
+### 8.4 Exhaust Fan pilots
+
+Keep discharge pressure at `1.200 MPa` gauge.
+
+| Case | Pressure jump | Stage-1 outcome |
+|---|---:|---|
+| `02e-EF-P1` | `-50 kPa` | FPE at 254 |
+| `02e-EF-P2` | `0 kPa` | completed 500 |
+| `02e-EF-P3` | `+50 kPa` | completed 500 |
+
+The detailed Stage-1 evidence and limitations are retained in the linked results report.
+
+---
+
+## 9. Stage-1 interpretation used to select Stage 2
+
+The original automatic Stage-2 gate required three complete finite pilot histories per family. No family satisfied that rule, so no automatic Stage-2 controls were generated.
+
+The user has instead chosen a **manual targeted refinement** based on the coarse Stage-1 observations.
+
+The selection is intentionally limited to `PO` and `OV` because:
+
+- `PO-P1` completed 500 iterations and provides a stable lower-pressure anchor;
+- the higher PO cases failed, creating a useful transition interval between the stable `1.160 MPa` anchor and the first failed `1.200 MPa` point;
+- `OV-P1` completed 500 iterations and provides a stable zero-added-resistance anchor;
+- `OV-P2` failed relatively late at `K=10`, creating a useful transition interval between `K=0` and `K=10`;
+- all three `MF` cases failed and therefore do not justify further Stage-2 allocation here; and
+- `EF` remains diagnostic, and the completed `+50 kPa` case did not provide enough benefit to justify prioritising this family over PO/OV.
+
+The completed finite cases also showed strongly negative liquid balance and declining lower-region liquid inventory. This indicates that the current stable anchor cases are still highly permissive with respect to the initialized liquid inventory. The Stage-2 question is therefore not “which case is already correct?” but:
+
+> Can moderate additional backpressure or outlet resistance reduce excessive liquid drainage while retaining numerical survivability and without causing unacceptable vapour leakage or liquid carryover?
+
+Comparisons involving failed Stage-1 cases must respect their different stopping iterations. Their last-valid inventories are contextual evidence only, not equivalent endpoints.
+
+---
+
+## 10. Stage 2 — fixed four-case targeted refinement
+
+There is **no automatic branching algorithm** in the revised Stage 2.
+
+Run exactly the following four cases from the unchanged saved Y010 parent.
+
+### 10.1 Pressure Outlet follow-up
+
+Keep the steam outlet fixed at `1.120 MPa` gauge.
+
+| Case | Brine pressure | Purpose |
+|---|---:|---|
+| `02e-PO-S2-A` | `1.175 MPa` gauge | moderate step above the stable `1.160 MPa` anchor |
+| `02e-PO-S2-B` | `1.190 MPa` gauge | probe nearer the `1.200 MPa` Stage-1 failure boundary |
+
+These cases test whether increased backpressure reduces brine liquid drainage and improves lower-region liquid retention before the numerical instability observed at `1.200 MPa` is reached.
+
+### 10.2 Outlet Vent follow-up
 
 Keep:
 
@@ -409,76 +410,22 @@ P_{discharge}=1.200\ \mathrm{MPa\ gauge}
 
 and vary only constant `K`.
 
-| Case | `K` |
-|---|---:|
-| `02e-OV-P1` | `0` |
-| `02e-OV-P2` | `10` |
-| `02e-OV-P3` | `100` |
+| Case | `K` | Purpose |
+|---|---:|---|
+| `02e-OV-S2-A` | `3` | modest added resistance above the stable `K=0` anchor |
+| `02e-OV-S2-B` | `7` | stronger resistance while remaining below the `K=10` Stage-1 failure point |
 
-### 8.3 Mass-Flow Outlet pilots
+These cases test whether added resistance reduces excessive brine liquid drainage and improves liquid retention without reproducing the late numerical failure observed at `K=10`.
 
-Define:
+### 10.3 No Stage-2 MF or EF cases
 
-\[
-\dot m_{l,ref}=116.847\ \mathrm{kg/s}
-\]
-
-and keep:
-
-\[
-\dot m_{v,target}=0
-\]
-
-for every `MF` case.
-
-| Case | Liquid target |
-|---|---:|
-| `02e-MF-P1` | `0.5 × ref = 58.4235 kg/s` |
-| `02e-MF-P2` | `1.0 × ref = 116.847 kg/s` |
-| `02e-MF-P3` | `2.0 × ref = 233.694 kg/s` |
-
-### 8.4 Exhaust Fan pilots
-
-Keep discharge pressure at `1.200 MPa` gauge and use Stage 1 to establish Fluent's effective pressure-jump response direction.
-
-| Case | Pressure jump |
-|---|---:|
-| `02e-EF-P1` | `-50 kPa` |
-| `02e-EF-P2` | `0 kPa` |
-| `02e-EF-P3` | `+50 kPa` |
-
-The pressure-jump signs are Fluent-native inputs. Do not attach a physical interpretation to the sign before observing the response.
+Do not create additional `MF` or `EF` children under this setup unless the user explicitly revises the experiment again.
 
 ---
 
-## 9. Stage-2 data-quality gate
+## 11. Stage-2 analysis quantities
 
-Stage 2 is allowed only when the family has a complete and usable three-point pilot set.
-
-For a family to enter automatic Stage 2:
-
-1. all three requested Stage-1 control values must pass build/readback;
-2. all three cases must provide usable monitor histories through their last valid iteration;
-3. final-100-iteration phase-flux averages must exist for all three cases;
-4. branching values must be finite; and
-5. the outward-positive sign convention must be applied consistently.
-
-There is **no** residual threshold, liquid-level threshold, vapour-leakage threshold, or automatic physical-success gate.
-
-If one or more pilot cases are unusable, record:
-
-```text
-STAGE2_NOT_GENERATED
-reason = incomplete three-point pilot set
-```
-
-Do not infer a full response direction from only one or two points.
-
----
-
-## 10. Branching quantities
-
-Use arithmetic means over iterations `401–500` for a complete run. If a run fails before 500, it is not eligible for the normal three-point Stage-2 gate.
+For complete runs, use arithmetic means over iterations `401–500` for phase-flow reporting. For failed runs, preserve last-valid histories but do not treat them as equivalent complete endpoints.
 
 Define the outward-positive liquid balance:
 
@@ -488,21 +435,9 @@ L=\bar{\dot m}_{l,in}-\bar{\dot m}_{l,brine}-\bar{\dot m}_{l,steam}
 }
 \]
 
-Interpretation for **branch navigation only**:
+Use `L` as a descriptive mass-balance quantity, not an automatic branching gate.
 
-- `L > 0`: measured liquid outlets remove less liquid than enters; fluxes imply liquid accumulation.
-- `L < 0`: measured liquid outlets remove more liquid than enters; fluxes imply liquid depletion.
-- `L = 0`: measured liquid inlet and outlets balance at the stored numerical precision.
-
-The previous total-brine quantity
-
-\[
-B=\bar{\dot m}_{l,b}+\bar{\dot m}_{v,b}
-\]
-
-must **not** be used to select Stage 2. Liquid outflow and vapour flow are physically different behaviours and can cancel in `B`.
-
-Also calculate, for reporting only:
+Also calculate:
 
 \[
 R_{v,b}=\frac{\bar{\dot m}_{v,brine}}{\bar{\dot m}_{v,in}}
@@ -511,360 +446,85 @@ R_{v,b}=\frac{\bar{\dot m}_{v,brine}}{\bar{\dot m}_{v,in}}
 and:
 
 \[
-R_{l,s}=\frac{\bar{\dot m}_{l,steam}}{\bar{\dot m}_{l,in}}
+R_{l,s}=\frac{\bar{\dot m}_{l,steam}}{\bar{\dot m}_{l,in}}.
 \]
 
-These describe vapour leakage to the brine outlet and liquid carryover to the steam outlet. They are **not** Stage-2 branch criteria.
+The primary Stage-2 comparison is the joint behaviour of:
 
-Do not compare raw vapour kg/s directly with raw liquid kg/s to classify a case.
+- liquid flow to the brine outlet;
+- vapour leakage to the brine outlet;
+- liquid carryover to the steam outlet;
+- Y010 inventory history;
+- Y030 inventory history;
+- total-domain liquid inventory history;
+- brine-pipe-entry pressure where available;
+- reverse flow where available; and
+- numerical survivability over 500 iterations.
+
+No automatic physical-success threshold is defined. The user interprets the result.
 
 ---
 
-## 11. Generic automatic Stage-2 rule
+## 12. Comparison anchors
 
-For each family, sort the Stage-1 controls as:
+Use the following Stage-1 cases as the primary anchors for Stage-2 plots and tables:
 
-\[
-x_1<x_2<x_3
-\]
+```text
+PO anchor: 02e-PO-P1, 1.160 MPa, completed 500
+OV anchor: 02e-OV-P1, K=0, completed 500
+```
 
-with corresponding liquid balances:
+Use the following only as numerical transition/failure context:
 
-\[
-L_1,L_2,L_3.
-\]
+```text
+PO failure boundary context: 02e-PO-P2, 1.200 MPa, FPE at 335
+OV failure boundary context: 02e-OV-P2, K=10, FPE at 448
+```
 
-Use the stored full-precision values. Do not invent an arbitrary numerical tolerance solely to force a branch.
-
-### 11.1 Exactly one adjacent sign crossing
-
-If exactly one adjacent pair satisfies:
-
-\[
-L_iL_{i+1}<0,
-\]
-
-then the pilot sweep has bracketed a liquid-balance sign change.
-
-Do **not** extrapolate.
-
-Generate four equally spaced interior control values in that interval:
-
-\[
-x_j=x_{low}+\frac{j}{5}(x_{high}-x_{low}),\qquad j=1,2,3,4.
-\]
-
-A sign crossing is an information-rich region; it is **not** automatically an optimum or physically correct operating point.
-
-### 11.2 Two sign crossings or non-monotonic response
-
-If both pilot intervals contain sign changes, or the response reverses direction such that extrapolation is not justified, classify the family as `NON_MONOTONIC`.
-
-Do not extrapolate.
-
-Generate two points inside each pilot interval at one-third and two-thirds of the gap:
-
-\[
-x_{1a}=x_1+\frac13(x_2-x_1),\quad
-x_{1b}=x_1+\frac23(x_2-x_1)
-\]
-
-\[
-x_{2a}=x_2+\frac13(x_3-x_2),\quad
-x_{2b}=x_2+\frac23(x_3-x_2).
-\]
-
-This creates four Stage-2 cases that densify the observed range rather than guessing beyond it.
-
-### 11.3 No crossing — supported endpoint trend
-
-If there is no sign crossing, compare:
-
-\[
-|L_1|,|L_2|,|L_3|.
-\]
-
-- If `|L3|` is the unique minimum and the high-side response is moving toward zero, use the family's predefined **high-side extension bank**.
-- If `|L1|` is the unique minimum and the low-side response is moving toward zero, use the family's predefined **low-side extension bank**, where that direction is physically/definitionally available.
-- If `|L2|` is the minimum, the sequence reverses trend, or the evidence otherwise does not support endpoint extrapolation, classify as `NON_MONOTONIC` and use Section 11.2.
-
-If values tie at stored precision, prefer densification rather than extrapolation.
-
-### 11.4 Exact zero at a pilot
-
-If a pilot has `L = 0` exactly at stored precision, do not declare success.
-
-- If the zero is the middle pilot, use Section 11.2 to densify both adjacent intervals.
-- If the zero is an endpoint, generate four interior points in the adjacent pilot interval using the one-fifth spacing rule from Section 11.1.
-
-The purpose is to characterize sensitivity around the observed zero rather than rank the case.
+Do not compare a failed-case endpoint directly with iteration 500 as though the calculation lengths were equivalent.
 
 ---
 
-## 12. Family-specific Stage-2 extension banks
+## 13. Build and readback procedure
 
-The generic rules above decide **whether to refine, densify, extend high, or extend low**. Only an endpoint-supported extrapolation uses the following preset banks.
-
-### 12.1 Pressure Outlet
-
-Stage-1 controls:
-
-```text
-1.160, 1.200, 1.240 MPa
-```
-
-High-side extension:
-
-```text
-1.280 MPa
-1.320 MPa
-1.360 MPa
-1.400 MPa
-```
-
-Low-side extension:
-
-```text
-1.120 MPa
-1.130 MPa
-1.140 MPa
-1.150 MPa
-```
-
-Do not automatically go below the frozen `1.120 MPa` steam-outlet pressure in this campaign.
-
-Important sign logic:
-
-> If the observed pressure trend shows that increasing `P_brine` moves `L` toward zero, Stage 2 explores **higher** backpressure. In particular, `L < 0` means the measured liquid outlets are removing more liquid than enters; that is not a reason to reduce brine pressure automatically.
-
-### 12.2 Outlet Vent
-
-Stage-1 controls:
-
-```text
-K = 0, 10, 100
-```
-
-High-side extension:
-
-```text
-K = 250
-K = 500
-K = 1000
-K = 2000
-```
-
-There is no negative-resistance low-side extension.
-
-If `K = 0` is the supported lower-bound endpoint closest to `L = 0` and increasing `K` moves the response away from zero, do not invent negative `K` and do not spend four runs increasing resistance anyway. Record:
-
-```text
-STAGE2_NOT_GENERATED
-reason = useful direction lies below physical K lower bound
-```
-
-The Stage-2 count is therefore **up to** four cases per family rather than an unconditional four.
-
-### 12.3 Mass-Flow Outlet
-
-Use multiplier `r` relative to:
-
-\[
-\dot m_{l,ref}=116.847\ \mathrm{kg/s}.
-\]
-
-Stage-1 controls:
-
-```text
-r = 0.5, 1.0, 2.0
-```
-
-High-side extension:
-
-```text
-r = 2.5
-r = 3.0
-r = 4.0
-r = 5.0
-```
-
-Low-side extension:
-
-```text
-r = 0.1
-r = 0.2
-r = 0.3
-r = 0.4
-```
-
-The vapour target remains `0 kg/s` for every Mass-Flow Outlet child.
-
-### 12.4 Exhaust Fan
-
-Stage-1 controls:
-
-```text
--50 kPa, 0 kPa, +50 kPa
-```
-
-Positive-side extension:
-
-```text
-+100 kPa
-+150 kPa
-+200 kPa
-+250 kPa
-```
-
-Negative-side extension:
-
-```text
--100 kPa
--150 kPa
--200 kPa
--250 kPa
-```
-
-The three pilots establish the response direction. Do not assume in advance that positive or negative jump is the physically restrictive direction.
-
----
-
-## 13. Inventory slopes are supporting evidence, not branch gates
-
-For each case, estimate the final-100-iteration trend of:
-
-\[
-V_{l,Y010},\qquad V_{l,Y030},\qquad V_{l,total}.
-\]
-
-These trends should be used as a consistency check on the flux story.
-
-For example:
-
-```text
-L > 0
-+
-lower-region liquid inventory increasing
-```
-
-is mutually consistent with liquid accumulation, while:
-
-```text
-L < 0
-+
-lower-region liquid inventory falling
-```
-
-is consistent with liquid depletion.
-
-Do **not** create another branching tree from inventory slope. Flux chooses the Stage-2 control values; inventory shows what those fluxes did to the initialized liquid.
-
-If flux and inventory trends strongly disagree, flag the case for user interpretation rather than automatically changing the branching rule.
-
----
-
-## 14. Automatic Stage-2 execution
-
-After all available Stage-1 pilots finish:
-
-```text
-read Stage-1 monitor histories
-→ calculate final-100-iteration averages
-→ apply the Stage-2 data-quality gate
-→ calculate L1, L2, L3
-→ classify each valid family:
-      CROSSING
-      HIGH_EXTENSION
-      LOW_EXTENSION
-      NON_MONOTONIC
-      NO_USEFUL_EXTENSION
-→ generate up to 4 Stage-2 controls from Sections 11–12
-→ write generated matrix and classification to manifest
-→ build every child independently from frozen Y010 parent
-→ run each child for 500 iterations
-→ save endpoint case/data and monitor histories
-```
-
-No user approval is required between valid Stage 1 and Stage 2.
-
-The agent must record **why** each branch fired.
-
-Example:
-
-```text
-Outlet family: PO
-Stage-1 controls: 1.160, 1.200, 1.240 MPa
-L1 = ...
-L2 = ...
-L3 = ...
-Classification = CROSSING between P2 and P3
-Generated controls = four interior one-fifth points
-```
-
-Do not invent values outside the rules in this setup.
-
----
-
-## 15. Build and readback procedure
-
-For every child:
+For every Stage-2 child:
 
 1. reload the exact saved Y010 execution parent;
 2. verify Mixture, RNG k-epsilon, gravity, inlet types/velocities, steam pressure, materials, DPM off, EWF off, and preserved numerical methods;
 3. convert only `brineoutlet` / `brine-outlet` to the intended outlet type using the verified live zone name;
-4. apply only the case-specific primary parameter;
+4. apply only the case-specific control value;
 5. apply/read back a liquid-dominant brine backflow state where that boundary formulation exposes a relevant phase backflow control;
-6. verify no unintended inlet, steam-outlet, model, material, or numerical changes;
-7. save a uniquely named pre-run child;
-8. run 500 iterations;
-9. save paired endpoint case/data;
-10. export monitor histories; and
+6. verify the Y010, Y030, **total-domain liquid**, phase-flux, residual, and available pressure/outlet monitors are active before solving;
+7. verify no unintended inlet, steam-outlet, model, material, or numerical changes;
+8. save a uniquely named pre-run child;
+9. run 500 iterations;
+10. save paired endpoint case/data and monitor histories; and
 11. reload the unchanged Y010 parent before building the next child.
 
 Never seed one Stage-2 child from another solution.
 
-If a requested outlet formulation is unavailable or cannot pass readback in the exact Fluent version/state, mark that family `BUILD-UNAVAILABLE` and continue other independent families. Do not improvise a different boundary formulation under the same case ID.
+---
+
+## 14. Artifact naming
+
+Stage-1 names remain unchanged.
+
+Recommended Stage-2 patterns:
+
+```text
+02e-PO-S2-A-y010-p1175
+02e-PO-S2-B-y010-p1190
+02e-OV-S2-A-y010-p1200-k3
+02e-OV-S2-B-y010-p1200-k7
+```
+
+Every artifact name must include the actual control value.
 
 ---
 
-## 16. Artifact naming
+## 15. Required visual outputs
 
-Recommended Stage-1 patterns:
-
-```text
-02e-PO-P1-y010-p1160
-02e-PO-P2-y010-p1200
-02e-PO-P3-y010-p1240
-
-02e-OV-P1-y010-p1200-k0
-02e-OV-P2-y010-p1200-k10
-02e-OV-P3-y010-p1200-k100
-
-02e-MF-P1-y010-liquid58p4235-vapour0
-02e-MF-P2-y010-liquid116p847-vapour0
-02e-MF-P3-y010-liquid233p694-vapour0
-
-02e-EF-P1-y010-p1200-jumpm50kpa
-02e-EF-P2-y010-p1200-jump0
-02e-EF-P3-y010-p1200-jumpp50kpa
-```
-
-Stage-2 patterns:
-
-```text
-02e-PO-S2-1-...
-02e-OV-S2-1-...
-02e-MF-S2-1-...
-02e-EF-S2-1-...
-```
-
-Every artifact name must include the actual generated control value.
-
----
-
-## 17. Required visual outputs
-
-For every run create consistent plots of:
+For every Stage-2 run create consistent plots of:
 
 1. Y010 liquid inventory vs iteration;
 2. Y030 lower-region liquid inventory vs iteration;
@@ -875,41 +535,17 @@ For every run create consistent plots of:
 7. pipe-entry average pressure vs iteration, when available; and
 8. residual histories vs iteration.
 
-Also save consistent iteration-500 field images where the case reaches iteration 500:
-
-- lower-vessel liquid volume fraction;
-- brine-pipe liquid volume fraction;
-- lower-vessel static pressure;
-- brine-pipe velocity; and
-- one full-vessel liquid-volume-fraction view.
-
-Do not replace plots with endpoint number dumps.
+Where a case reaches iteration 500, also save consistent field images for lower-vessel liquid volume fraction, brine-pipe liquid volume fraction, lower-vessel static pressure, brine-pipe velocity, and one full-vessel liquid-volume-fraction view.
 
 ---
 
-## 18. Reporting
+## 16. Reporting and interpretation
 
-After Stage 1, create an intermediate pilot summary used by the Stage-2 generator.
+Update the existing Stage-1 report after Stage 2 rather than replacing the Stage-1 historical record.
 
-After Stage 2, create/update the comparison report.
+The Stage-2 comparison should show the four new cases alongside their Stage-1 family anchors and clearly distinguish complete from failed calculations.
 
-Minimum final comparison fields:
-
-| Case | Outlet family | Control value | `L` | Mean liquid → brine | Vapour → brine / vapour inlet | Liquid → steam / liquid inlet | Y010 trend | Y030 trend | Total-liquid trend | Pipe-entry pressure behaviour | Reverse flow observed? |
-|---|---|---:|---:|---:|---:|---:|---|---|---|---|---|
-
-Use final-100-iteration means for the mass-flow quantities.
-
-For each outlet family, also report:
-
-- the three Stage-1 pilot values;
-- `L1`, `L2`, `L3`;
-- the Stage-2 classification;
-- the four generated Stage-2 values, or the reason Stage 2 was not generated.
-
-Do not rank cases automatically.
-
-Do not label a case:
+Do not rank cases automatically and do not label a case:
 
 - correct;
 - optimal;
@@ -918,50 +554,32 @@ Do not label a case:
 - converged; or
 - best.
 
-Report what happened and leave physical selection to the user.
-
----
-
-## 19. Interpretation rule
-
-This is an **experimental characterization campaign**.
-
-There are deliberately:
-
-- no numerical success thresholds;
-- no required terminal residual values;
-- no automatic "pool maintained" criterion;
-- no automatic final outlet-family selection; and
-- no assumption that `L = 0` is sufficient evidence of a physically correct separator state.
-
-The agent may describe observations such as:
+The report may describe observations such as:
 
 ```text
-liquid inventory increased
-liquid inventory decreased
-vapour brine leakage increased
-liquid carryover to steam outlet increased
+liquid drainage decreased
+lower-region liquid was retained for longer
+vapour brine leakage increased/decreased
+liquid carryover to steam outlet increased/decreased
 reverse flow appeared
 pressure oscillated
-liquid outlet flux exceeded liquid inlet flux
+case remained numerically finite for 500 iterations
+case failed before 500 iterations
 ```
 
-but should leave physical interpretation and next-stage selection to the user.
-
-Residuals are contextual numerical evidence, not the primary adaptive variable.
+but physical interpretation and the next experiment remain user decisions.
 
 ---
 
-## 20. What this setup is allowed to conclude
+## 17. What this setup is allowed to conclude
 
 `02e` may establish:
 
-- how each tested Fluent outlet formulation responds under a common initialized Mixture state;
-- whether pressure, resistance, prescribed liquid mass flow, or pressure jump produces a strong directional response;
-- whether the liquid-balance response contains a sign crossing within the tested range;
-- whether the response is monotonic enough to justify coarse extrapolation;
-- which parameter ranges produce substantially different flux/inventory behaviour;
-- which outlet families are numerically unavailable or unusable in the frozen Fluent architecture; and
+- how the tested Fluent outlet formulations respond under a common initialized Mixture state;
+- which Stage-1 families were numerically usable enough to justify targeted follow-up;
+- whether moderate PO backpressure between `1.160` and `1.200 MPa` changes liquid drainage/retention before the observed failure boundary;
+- whether moderate OV resistance between `K=0` and `K=10` changes liquid drainage/retention before the observed failure boundary;
+- whether the four Stage-2 controls provide a more useful numerical operating region for later refinement; and
 - where a later detailed sensitivity should concentrate.
 
 It may **not** establish:
@@ -973,6 +591,6 @@ It may **not** establish:
 - a converged production separator operating point; or
 - the physically preferred outlet family without subsequent user interpretation and later validation work.
 
-The central design rule of this setup is therefore:
+The revised design rule is:
 
-> **Three pilot points establish the response. Flux-based liquid balance chooses where to probe next. Vapour leakage and liquid inventory explain the consequence. The user decides what the behaviour means physically.**
+> **Stage 1 screens outlet families and reveals useful numerical transition regions. Stage 2 deliberately probes two points inside the stable-to-failure intervals for PO and OV. Liquid inventory and phase routing explain the consequence; the user decides what the behaviour means physically.**
