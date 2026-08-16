@@ -1,4 +1,4 @@
-# FG-MIX-T01 Stage 3 — Initialization Comparison
+# FG-MIX-T01 Stage 3 — No-patch transient control and timestep decision
 
 ## Intent
 
@@ -6,133 +6,200 @@
 |---|---|
 | Stage ID | `FG-MIX-T01-S3` |
 | Investigation mode | diagnostic / numerical sensitivity |
-| Primary question | Does starting transient Mixture from the developed steady parent materially change the early transient trajectory compared with Fluent Hybrid Initialization when both receive the same Y010 patch? |
+| Primary question | Can the current transient Mixture formulation run from the developed steady parent when the Y010 patch is removed, and if not, does reducing only the timestep materially delay or remove the failure? |
 | Interpretation owner | user-led |
 | Parent | [Stages 1–2 — Steady Parent and Transient Start States](stage-01-02-steady-parent-and-transient-start.md) |
-| Comparison case | `T-PO-1`, Pressure Outlet at `1.200 MPa` gauge |
+| Recovery basis | [Stage-3 failed initialization sweep report](../../../reports/full-geometry/mixture/transient-liquid-outlet/stage-03-initialization-comparison-20260816.md) |
+| Brine/steam comparison pressure | `1.120 MPa` gauge for both pressure outlets |
 
 ## Why this stage exists
 
-The six-case campaign should not inherit an arbitrary initialization choice. This stage tests whether the developed steady flow field gives a cleaner or materially different transient startup than Fluent Hybrid Initialization.
+The previous Stage-3 sweep did not produce a usable initialization comparison:
+the Y010-patched `INIT-H` branch failed with a floating-point exception at
+transient step `53`, after residual growth, full-domain turbulent-viscosity
+limiting, reversed flow at both pressure outlets, and AMG divergence. The
+`INIT-S` branch was not started, so no initialization ranking can be inferred
+from that attempt. See the [failed-run report](../../../reports/full-geometry/mixture/transient-liquid-outlet/stage-03-initialization-comparison-20260816.md)
+for the retained transcript and audit artifacts.
 
-The experiment is **not** patched versus unpatched. Both branches use the identical Y010 liquid patch. The only intended difference is the pre-patch flow field.
+The next experiment is deliberately narrower. Use the developed steady parent
+and remove only the Y010 liquid patch from the transient startup. Keep the
+current transient formulation, turbulence model, spatial discretization, PISO
+settings, mesh, inlets, and `20`-iteration timestep budget unchanged. Set both
+the steam and brine pressure outlets to the common `1.120 MPa` gauge condition.
 
-## Case matrix
+This is no longer an immediate `INIT-S` versus `INIT-H` comparison. It is a
+no-patch control followed, only if needed, by one-variable timestep sensitivity.
+There is no initial liquid pool in these controls, so do not spend the first
+diagnostic pass on a Y010/Y030 inventory comparison.
 
-| Case | Starting flow field | Brine outlet | Y010 patch | Purpose |
-|---|---|---|---|---|
-| `INIT-S` | accepted unpatched steady parent | Pressure Outlet `1.200 MPa` gauge | yes, once at `t=0` | developed-flow start |
-| `INIT-H` | Fluent Hybrid Initialization | Pressure Outlet `1.200 MPa` gauge | yes, once at `t=0` | Fluent initialization control |
+## Current failed-sweep record
 
-## Provisional transient method
+The failed sweep remains part of the evidence trail and must not be rewritten
+as a completed comparison:
 
-Use one deliberately common method for both branches. This stage is not the final timestep qualification.
+| Item | Reported state |
+|---|---|
+| Starting branch | `INIT-H` entered the solve; `INIT-S` did not start |
+| Brine outlet in failed sweep | Pressure Outlet, `1.200 MPa` gauge |
+| Y010 patch | applied once before the failed transient run |
+| Timestep | `2.5e-4 s` |
+| Failure point | transient step `53`, physical time `0.01325 s` |
+| Failure signature | severe residual growth, all-cell turbulent-viscosity limiting, reverse flow at both outlets, AMG divergence, floating-point exception |
+| Comparison result | none; no paired Stage-3 endpoint exists |
 
-Suggested provisional controls:
+The recovery controls below use the baseline `1.120 MPa` gauge pressure at both
+pressure outlets as specified for the next test. Do not resume from the failed
+partial state and do not use the failed branch as a new parent.
 
-- pressure-velocity coupling: `PISO` with neighbor correction;
-- Mixture volume-fraction formulation: implicit;
-- temporal discretization: bounded second-order implicit where startup remains stable;
-- provisional timestep: `2.5e-4 s`;
-- maximum iterations per timestep: `15–20`;
-- fixed timestep for both branches.
+## Sequential case matrix
 
-If bounded second-order cannot run one branch but can run the other, record that as part of the initialization result rather than silently changing only one case.
+Run these cases sequentially. Start with `NP-DT1` only. Prepare or run the next
+case only when the decision rule below authorizes it. Each timestep trial must
+be loaded independently from the same steady parent; do not seed a finer trial
+from a coarser-trial endpoint.
 
-## Physical-time budget
+| Test | Initial field | Y010 patch | Brine pressure | Timestep | Purpose |
+|---|---|---|---:|---:|---|
+| `NP-DT1` | steady parent | none | `1.120 MPa` gauge | `2.5e-4 s` | exact current-method control without the patch |
+| `NP-DT2` | steady parent | none | `1.120 MPa` gauge | `1.25e-4 s` | run only if `NP-DT1` fails or shows useful improvement is needed |
+| `NP-DT3` | steady parent | none | `1.120 MPa` gauge | `6.25e-5 s` | run only if `NP-DT1`/`NP-DT2` still fail or the finer bracket is scientifically useful |
 
-Run both branches through the same physical-time window.
+The nominal initial horizon is `0.05 s`: `200` timesteps for `NP-DT1`, `400`
+for `NP-DT2`, and `800` for `NP-DT3` if activated. A run that remains clean
+through this window is sufficient to establish the immediate diagnostic result;
+do not automatically extend every case to `0.10 s` or execute the complete
+three-case matrix.
 
-Initial comparison horizon:
+## Frozen controls
+
+Keep the failed Stage-3 transient formulation unchanged wherever it is not
+the explicit timestep variable in the table above:
+
+- pressure-based transient solver;
+- bounded second-order transient discretization;
+- current PISO settings, including the existing neighbor-correction choice;
+- implicit Mixture volume-fraction formulation;
+- current turbulence model and spatial discretization;
+- `20` maximum iterations per timestep;
+- same `Full-geomV2-231kcells.msh.h5` mesh;
+- same velocity inlets and inlet phase conditions;
+- steam Pressure Outlet at `1.120 MPa` gauge;
+- brine Pressure Outlet at `1.120 MPa` gauge;
+- DPM and EWF disabled;
+- no Hybrid Initialization after loading the steady data;
+- no Y010 patch or any other patch.
+
+Do not change first-order/second-order treatment, PISO controls, relaxation
+factors, iteration limits, turbulence, mesh, outlet family, or inlet settings
+as part of `NP-DT1`. If `NP-DT2` or `NP-DT3` is authorized, change only the
+timestep from the preceding control and retain every other setting.
+
+## Required startup sequence
+
+For each authorized test:
 
 ```text
-0.05 s
+load steady parent case+data
+→ switch to transient
+→ retain/set P_brine = 1.120 MPa gauge
+→ verify P_steam = 1.120 MPa gauge
+→ verify current transient formulation and test timestep
+→ do not initialize
+→ do not patch
+→ set/confirm flow time = 0 s
+→ save the no-patch start state if required by the execution workflow
+→ run the authorized physical-time window
 ```
 
-If the trajectories are still rapidly separating or have not passed the obvious startup adjustment, extend both identically toward:
-
-```text
-0.10 s
-```
-
-Do not compare by equal iteration count; compare at equal physical time.
+The no-patch start state must remain traceable to the exact steady-parent
+case/data pair. If any unintended initialization, patch, boundary change, or
+numerical-control change occurs, stop and record the case as setup-invalid
+rather than comparing it with the control.
 
 ## Required evidence
 
-Record the same histories for both branches:
+The primary evidence package for each run is:
 
-- `V_l,Y010(t)`;
-- `V_l,Y030(t)`;
-- total continuous-liquid inventory `V_l,total(t)`;
-- liquid mass flux at the brine outlet;
-- vapour mass flux at the brine outlet;
-- liquid mass flux at the steam outlet;
-- vapour mass flux at the steam outlet;
+- native residual histories;
+- iterations required within each timestep, including repeated reaches of the
+  `20`-iteration cap;
+- liquid and vapour mass fluxes at the brine outlet;
+- liquid and vapour mass fluxes at the steam outlet;
 - brine-pipe-entry pressure;
-- residuals and iterations required within each timestep;
-- any reverse-flow or numerical warning events.
+- reverse-flow events at either pressure outlet;
+- turbulent-viscosity-limit warnings and affected-cell counts when reported;
+- AMG divergence, floating-point, and other numerical warning events;
+- exact transient step and physical time at which residual growth or
+  divergence begins;
+- final solver state and paired case/data path, or the last valid checkpoint
+  when the run fails.
 
-Preserve at least the initial state and the final comparison state for both branches.
+Y010/Y030 inventory histories are not required as primary decision outputs for
+these no-patch tests because no initial pool is imposed. They may be retained
+if already present in the monitor package, but their absence must not trigger
+additional inventory-analysis work before the no-patch control is decided.
 
-## What to compare
+Compare runs at equal physical time, not equal iteration count. For a failed
+run, retain the last valid evidence and record the failure time rather than
+describing the case as converged or complete.
 
-The important question is not whether the first few timesteps are identical. A changed brine pressure plus the Y010 patch will create a startup readjustment.
-
-Compare:
-
-1. magnitude and duration of the initial adjustment;
-2. whether either branch repeatedly exhausts the per-timestep iteration cap;
-3. whether liquid-inventory trajectories move toward the same trend after startup;
-4. whether outlet phase-flux histories move toward the same trend;
-5. whether brine-pipe-entry pressure settles toward the same range;
-6. whether one initialization produces numerical corruption that the other avoids.
-
-## Decision gate
-
-No automatic numerical threshold is imposed. The user selects the initialization rule from the observed histories.
-
-Possible outcomes:
-
-### A. Trajectories become similar and steady-start is cleaner
-
-Use the developed steady parent as the production initialization basis.
-
-### B. Trajectories become similar and neither has a meaningful advantage
-
-Either method is technically usable; prefer the developed steady parent for consistency with the reusable-parent architecture unless the user chooses otherwise.
-
-### C. Hybrid Initialization is clearly more robust
-
-Use Hybrid Initialization as the common production method and record why the steady parent is retained only as diagnostic evidence.
-
-### D. The branches remain materially different through the comparison horizon
-
-Initialization sensitivity is unresolved. Do **not** immediately launch the six-case screen. Extend/diagnose the comparison or explicitly promote initialization method to an experimental factor.
-
-## Create the final common `t = 0` parent
-
-After the user selects the initialization method, create one immutable common transient parent for the production mesh.
-
-The common parent should use the baseline common case definition, not any partially evolved T-PO-1 result:
+## Decision tree
 
 ```text
-selected initialization method
-→ common physical/model state
-→ baseline brine Pressure Outlet at 1.120 MPa gauge
-→ patch Y010 once
-→ flow time = 0 s
-→ save paired case/data transient parent
+No patch, dt = 2.5e-4 s  (`NP-DT1`)
+        │
+        ├── survives a clean 0.05 s window
+        │      ↓
+        │   transient conversion itself is viable at the existing timestep
+        │      ↓
+        │   next experiment: restore Y010 and use dt = 1.25e-4 s
+        │   to investigate patch/timestep interaction
+        │
+        └── fails or shows a clearly useful marginal improvement
+               ↓
+         No patch, dt = 1.25e-4 s  (`NP-DT2`)
+               │
+               ├── improves substantially or survives
+               │      ↓
+               │   temporal resolution is implicated; record the comparison
+               │
+               └── still fails similarly
+                       ↓
+                 No patch, dt = 6.25e-5 s  (`NP-DT3`)
 ```
 
-Later children may change the brine outlet type/value after loading this parent and before timestep 1. They must not reinitialize or repatch.
+Use “survives” to mean that the run reaches the planned `0.05 s` window
+without the failure signature described above and without an unresolved
+runaway in residuals or physical monitors. This is a diagnostic gate, not a
+formal convergence or validation criterion.
 
-Conceptual artifact names:
+## Interpretation and follow-on
 
-```text
-FG-MIX-T01-transient-t0-parent-<mesh-id>.cas.h5
-FG-MIX-T01-transient-t0-parent-<mesh-id>.dat.h5
-```
+Interpretation remains user-led. The immediate conclusions permitted by this
+stage are limited to:
+
+1. whether transient conversion from the steady parent is viable without the
+   Y010 patch at `2.5e-4 s`;
+2. whether halving the timestep materially changes the no-patch failure
+   timing or stability; and
+3. whether a further halving is justified by the observed evidence.
+
+If `NP-DT1` survives, do not launch `NP-DT2`/`NP-DT3` automatically. The next
+useful experiment is the Y010 patch restored with `dt = 1.25e-4 s`, while
+holding the two `1.120 MPa` outlet pressures and every other control fixed.
+
+If the no-patch controls fail, use the recorded residual, warning, flux,
+pressure, reverse-flow, viscosity-limit, and exact-failure-time evidence to
+decide whether timestep resolution is the dominant issue. Do not change
+first-order schemes, PISO controls, relaxation factors, or other numerical
+variables in this stage.
 
 ## Handoff
 
-Proceed to [Stage 4 — Transient Numerical Qualification](stage-04-transient-numerical-qualification.md).
+Do not automatically proceed to the six-case outlet screen. After the
+authorized no-patch result is recorded, update the common transient-parent
+decision and authorize the next patch/timestep experiment or a revised Stage 4
+qualification plan. Any final common `t = 0` parent must still be created from
+the exact accepted steady parent, with its initialization, patch state, outlet
+pressures, timestep, and paired case/data artifacts explicitly recorded.

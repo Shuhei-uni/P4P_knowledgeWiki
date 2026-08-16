@@ -24,6 +24,37 @@ The transient campaign should not depend on Hybrid Initialization if a well-deve
 
 Create **one parent per exact mesh + frozen common physics configuration**. If the mesh changes, repeat this stage; do not reuse the old parent across meshes.
 
+## Stage-1 quick pressure-candidate screen — 2026-08-16
+
+For the first Student-server pass, use the exact production mesh and the
+02c Mixture boundary/model contract to create one fresh **unpatched** parent,
+then create three independent pressure-only children from that parent. The
+only intentional child difference is the tangential brine-outlet gauge
+pressure; keep the steam outlet at `1.120 MPa` gauge.
+
+| Candidate | Brine-outlet gauge pressure | Difference above steam outlet | Native steady budget |
+|---|---:|---:|---:|
+| `FG-MIX-T01-S1-C136` | `1.1360 MPa` (`1,136,000 Pa`) | `+16.0 kPa` | `1,000` iterations |
+| `FG-MIX-T01-S1-C1375` | `1.1375 MPa` (`1,137,500 Pa`) | `+17.5 kPa` | `1,000` iterations |
+| `FG-MIX-T01-S1-C139` | `1.1390 MPa` (`1,139,000 Pa`) | `+19.0 kPa` | `1,000` iterations |
+
+These are quick diagnostic candidates, not three independent production
+parents and not a pressure-performance ranking. Choose the candidate parent
+only after comparing common-window numerical stability and physical-monitor
+behaviour. The selection remains `user-led`; do not infer a final operating
+pressure from this screen alone.
+
+The mesh input is locked to:
+
+```text
+Full-geomV2-231kcells.msh.h5
+```
+
+Do not remesh, adapt, substitute the Student mesh, or alter the mesh file as
+part of this screen. Each candidate must be initialized independently from
+its case-only child, run natively for `1,000` steady iterations, and saved as
+a paired case/data endpoint before comparison.
+
 ## Current production target
 
 Use the current production mesh lineage:
@@ -105,6 +136,8 @@ FG-MIX-T01-steady-parent-<mesh-id>.dat.h5
 
 Once accepted, all later transient qualification cases for that mesh must trace back to this exact parent unless a documented parent revision is created.
 
+The executed quick candidate screen is documented in the [Stage-1 candidate report](../../../reports/full-geometry/mixture/transient-liquid-outlet/stage-01-candidate-screen-20260816.md). It provisionally selects the `1.1375 MPa` endpoint as the candidate parent for the next setup-construction stage; this selection is diagnostic and conditional on the Stage-2 readback gate because the 1,000-iteration field is not converged.
+
 ---
 
 # Stage 2 — Construct the two transient startup branches
@@ -172,6 +205,39 @@ Initial liquid mass = 4224.253734 kg
 ```
 
 Read the inventory back again for both new startup branches. Do not assume the historical values prove the new artifacts are identical.
+
+## Stage-2 case-construction record — 2026-08-16
+
+The user-selected `FG-MIX-T01-S1-C1375` paired endpoint was used to create the
+two matched `T-PO-1` startup-state pairs below. Both use the unchanged
+`Full-geomV2-231kcells.msh.h5` mesh and the same provisional transient method;
+neither case has advanced a transient timestep.
+
+| Branch | Starting field | Brine outlet | Y010 patch | Paired case/data artifact |
+|---|---|---:|---|---|
+| `FG-MIX-T01-S2-INIT-S` | developed C1375 field | `1.200 MPa` gauge | once at `t = 0 s` | `FG-MIX-T01-S2-INIT-S-TPO1-p1200kpa-y010-start-20260816T112833Z.cas.h5/.dat.h5` |
+| `FG-MIX-T01-S2-INIT-H` | Fluent Hybrid Initialization | `1.200 MPa` gauge | once at `t = 0 s` | `FG-MIX-T01-S2-INIT-H-TPO1-p1200kpa-y010-start-20260816T112833Z.cas.h5/.dat.h5` |
+
+The exact remote artifact directory is:
+
+```text
+C:\Users\Shuhei Yokkaichi\Documents\CFD\Brine outlet\
+```
+
+The common transient settings were read back as Fluent 2025 R2
+`unsteady-2nd-order-bounded`, PISO with one neighbor-correction iteration,
+`2.5e-4 s` fixed timestep, `20` maximum iterations per timestep, and flow time
+`0 s`. The Y010 register readback was `33,315` cells with the approved bounds.
+The `INIT-H` post-patch liquid volume was `4.790652590 m³` (`4,224.253734 kg`);
+`INIT-S` read `4.793078931 m³` (`4,226.393209 kg`). The same patch command was
+applied once to both branches, but this small `0.05065%` difference means the
+equivalence gate is not yet closed. Do not start Stage 3 until the difference is
+resolved or explicitly accepted by the user.
+
+The cases contain the Stage-2 phase-flux, Y010/Y030, and total-liquid-volume
+report definitions. Fluent 2025 R2 exposed some optional volume-report fields
+as read-only during creation, so the saved report package must be inspected or
+repaired before treating every history-file toggle as active.
 
 ## Stage-2 equivalence gate
 

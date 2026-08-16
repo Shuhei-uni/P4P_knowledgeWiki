@@ -2,6 +2,18 @@
 
 This page contains no unverified numerical performance claims. It fixes the remaining experimental matrix and records the execution provenance/evidence required for a valid comparison with [Case B](results.md).
 
+## Scope amendment — 2026-08-16
+
+At the user's request, the former upper-pressure H20–H50 and I20–I160 sweeps are cancelled and are no longer future work. The only current upper-pressure point is `02c-H` at `1.140 MPa`; it was built and run on the Student endpoint from the explicit Student pre-initialization surrogate, and its verified 500-iteration endpoint is recorded in [02c results](results.md). The historical H/I preparation notes below are retained only as an evidence trail for artifacts that had already been prepared or smoke-tested; do not submit those queues or create additional members under those former IDs. This scope amendment did not contact or modify the separate server-1 Fluent session that had previously accepted the H20–H50 queue.
+
+### Current single H point — completed
+
+| Case | Brine pressure | Steam pressure | Status |
+|---|---:|---:|---|
+| `02c-H` | `1.140 MPa` | `1.120 MPa` | Student-native 500-iteration endpoint verified and post-processed; unstable / indeterminate, not converged |
+
+Student endpoint: `C:\Users\Shuhei Yokkaichi\Documents\CFD\Test case\02c-H-brine-p1140kpa-unprimed-student-iter500-20260816T091812Z.cas.h5` with matching `.dat.h5`. The endpoint has zero vapour flux through the brine outlet by the selected absolute-flow extraction, but the raw liquid brine flux is positive (`+616.795 kg/s`), indicating reverse flow into the domain; continuity ends at `2.288839e-1` and turbulent-viscosity limiting is present. This is execution and diagnostic evidence only, not a pressure-selection result.
+
 ## Frozen common protocol
 
 For every future point, rebuild from the Case B pre-initialization parent snapshot, not from a solved Case B field:
@@ -90,7 +102,7 @@ For each point: load its own pre-initialization child, Hybrid Initialize without
 - Post-processing record: [02c results](results.md) contains the comparison dashboard, per-case D–G endpoint metrics, residual links, model audits, and complete inherited-DPM bundles. The vapour-routing direction strengthens across D–G, but D–G remain early numerical diagnostics without liquid-inventory histories or a common stable window.
 - Next action: instrument total continuous-liquid inventory, lower-vessel/pipe-entry pressure diagnostics, and the agreed visual outputs; then continue only bracket-adjacent points from the frozen parent under a common stability gate. Do not treat E–G liquid outflow above inlet as demonstrated recovery or as proof of a drainage limit.
 
-## Coarse above-inlet-reference sweep — H20 to H50
+## Historical cancelled preparation — former H20 to H50 sweep
 
 This is an explicit 02c amendment following the D–G result. Here `+20` through `+50 kPa` means above the nominal `1.140 MPa` inlet reference/initial gauge pressure, not above the `1.120 MPa` steam outlet. The resulting brine-outlet pressures are `1.160` through `1.190 MPa`; the steam outlet remains fixed at `1.120 MPa`. The sweep is intended to locate the broad response direction and any obvious reverse-flow/liquid-accumulation regime before finer tuning.
 
@@ -119,7 +131,7 @@ This coarse sweep requires a common monitor package before interpretation: brine
 - Current launch state: `RUNNING / H20 active; completion unverified`. Early H20 iterations show reverse flow on both pressure outlets and turbulent-viscosity limiting; this is recorded as a diagnostic signal, not yet as a failed endpoint.
 - No Python iteration loop, pressure rescue, numerical tuning, or queue interruption was issued. If Fluent becomes unavailable, stop the queue and record the affected case rather than launching a replacement solver.
 
-## Broader above-inlet-reference sweep — I20 to I160
+## Historical cancelled preparation — former I20 to I160 sweep
 
 This separate, intentionally coarser amendment retains the same frozen 02c-B pre-initialization parent and changes only the brine-outlet mixture-phase gauge pressure. It uses `20 kPa` increments above the `1.140 MPa` inlet reference to test up to `1.300 MPa`. The inlet reference is not a fixed pressure boundary because both inlets remain velocity inlets; this is therefore a broad diagnostic screen, not a pressure-selection or drainage-limit claim.
 

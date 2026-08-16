@@ -10,8 +10,8 @@
 | Parent setup | [02 — Split two-zone velocity-inlet brine-outlet](../past/archived/02-split-two-zone-velocity-inlet-brine-outlet.md) |
 | Controlled variable | brine-outlet gauge pressure only |
 | Evidence-use label | `User-specified` definition with early screening evidence for Cases B and A; no pressure-performance ranking |
-| Outcome | A/B/C have early screens; D/E/F/G positive-backpressure case-only children are prepared for Fluent-native screens |
-| Linked report | [02c Cases A/B early diagnostics](../reports/02c/results.md) |
+| Outcome | A/B/C have early screens; D/E/F/G positive-backpressure screens are recorded; the current upper-pressure scope is one Student H case at `1.140 MPa` |
+| Linked report | [02c full-geometry results](../reports/full-geometry/mixture/steady-liquid-outlet/02c/results.md) |
 
 ## 1. Objective
 
@@ -109,37 +109,13 @@ Create every case-only artifact from the same verified parent. Its only intentio
 | `02c-E` | `brine-p1127p5kpa-unprimed` | `1.1275 MPa` (`1,127,500 Pa`) | +7.5 kPa positive-backpressure screen |
 | `02c-F` | `brine-p1130kpa-unprimed` | `1.130 MPa` (`1,130,000 Pa`) | +10 kPa positive-backpressure screen |
 | `02c-G` | `brine-p1135kpa-unprimed` | `1.135 MPa` (`1,135,000 Pa`) | +15 kPa upper-bracket screen |
-| `02c-H20` | `brine-p1160kpa-unprimed` | `1.160 MPa` (`1,160,000 Pa`) | +20 kPa above the nominal `1.140 MPa` inlet reference |
-| `02c-H25` | `brine-p1165kpa-unprimed` | `1.165 MPa` (`1,165,000 Pa`) | +25 kPa above the nominal inlet reference |
-| `02c-H30` | `brine-p1170kpa-unprimed` | `1.170 MPa` (`1,170,000 Pa`) | +30 kPa above the nominal inlet reference |
-| `02c-H35` | `brine-p1175kpa-unprimed` | `1.175 MPa` (`1,175,000 Pa`) | +35 kPa above the nominal inlet reference |
-| `02c-H40` | `brine-p1180kpa-unprimed` | `1.180 MPa` (`1,180,000 Pa`) | +40 kPa above the nominal inlet reference |
-| `02c-H45` | `brine-p1185kpa-unprimed` | `1.185 MPa` (`1,185,000 Pa`) | +45 kPa above the nominal inlet reference |
-| `02c-H50` | `brine-p1190kpa-unprimed` | `1.190 MPa` (`1,190,000 Pa`) | +50 kPa above the nominal inlet reference |
-| `02c-I20` | `brine-p1160kpa-unprimed-coarse130` | `1.160 MPa` (`1,160,000 Pa`) | independent coarse-screen repeat of H20 pressure; `+20 kPa` above the nominal inlet reference |
-| `02c-I40` | `brine-p1180kpa-unprimed-coarse130` | `1.180 MPa` (`1,180,000 Pa`) | independent coarse-screen repeat of H40 pressure; `+40 kPa` above the nominal inlet reference |
-| `02c-I60` | `brine-p1200kpa-unprimed-coarse130` | `1.200 MPa` (`1,200,000 Pa`) | `+60 kPa` above the nominal inlet reference |
-| `02c-I80` | `brine-p1220kpa-unprimed-coarse130` | `1.220 MPa` (`1,220,000 Pa`) | `+80 kPa` above the nominal inlet reference |
-| `02c-I100` | `brine-p1240kpa-unprimed-coarse130` | `1.240 MPa` (`1,240,000 Pa`) | `+100 kPa` above the nominal inlet reference |
-| `02c-I120` | `brine-p1260kpa-unprimed-coarse130` | `1.260 MPa` (`1,260,000 Pa`) | `+120 kPa` above the nominal inlet reference |
-| `02c-I140` | `brine-p1280kpa-unprimed-coarse130` | `1.280 MPa` (`1,280,000 Pa`) | `+140 kPa` above the nominal inlet reference |
-| `02c-I160` | `brine-p1300kpa-unprimed-coarse130` | `1.300 MPa` (`1,300,000 Pa`) | `+160 kPa` above the nominal inlet reference |
+| `02c-H` | `brine-p1140kpa-unprimed-student` | `1.140 MPa` (`1,140,000 Pa`) | nominal inlet-reference test on the Student surrogate |
 
-Keep the steam outlet at `1.120 MPa` gauge for every case. Do not add lower-pressure points: Case A already shows the adverse directional signal of increased brine-outlet vapour. The coarse upper sweep H20–H50 is an explicit amendment intended to locate whether the positive-backpressure direction persists above the nominal inlet reference; it is not a pressure-selection claim.
+Keep the steam outlet at `1.120 MPa` gauge for every case. Do not add lower-pressure points: Case A already shows the adverse directional signal of increased brine-outlet vapour. The former upper-pressure H20–H50 and I20–I160 sweeps are superseded by the user-requested single H point at `1.140 MPa`; no additional H/I pressure sweep is currently planned. The H artifact is explicitly Student-surrogate evidence and is not certified as server-2 mesh parity.
 
-The separate I20–I160 amendment is an intentionally broader `20 kPa`-step screen to `1.300 MPa`. I20 and I40 must be rebuilt as new parent-derived children even though their pressures coincide with H20 and H40; their distinct case IDs and `coarse130` suffix prevent an H artifact from being reused or overwritten. The production I matrix remains `Planned / case-only build pending` until Fluent can load the frozen parent and verify every new child.
+### Historical Student smoke note — 2026-08-16 (UTC)
 
-### Student surrogate smoke — 2026-08-16 (UTC)
-
-`Observed`, separately from the production lineage: three first-matrix members were built from the same saved Student Mixture pre-initialization surrogate, then run as independent native Fluent jobs. The source was `C:\\Users\\Shuhei Yokkaichi\\Documents\\CFD\\Test case\\02c-C-brine-p1125kpa-unprimed-preinit-20260815T231711Z.cas.h5`, not the documented frozen 02c-B parent. The Student mesh read `661,558` cells and `1,648,866` nodes; it is therefore not certified as server-2/02c mesh parity.
-
-| Case | Saved brine / steam pressure | Verified run state | Endpoint artifact stem |
-|---|---:|---|---|
-| `02c-I20` | `1.160 / 1.120 MPa` | re-opened case/data; residual history ends at iteration `50` | `02c-I20-brine-p1160kpa-unprimed-coarse130-student-smoke-iter50-20260816T020800Z` |
-| `02c-I40` | `1.180 / 1.120 MPa` | re-opened case/data; residual history ends at iteration `50` | `02c-I40-brine-p1180kpa-unprimed-coarse130-student-smoke-iter50-20260816T020800Z` |
-| `02c-I60` | `1.200 / 1.120 MPa` | re-opened case/data; residual history ends at iteration `50` | `02c-I60-brine-p1200kpa-unprimed-coarse130-student-smoke-iter50-20260816T020800Z` |
-
-All three retained Mixture/RNG k-epsilon and the stated outlet pressures after explicit reload. Reverse-flow and turbulent-viscosity-limit diagnostics occurred, so this verifies build/journal mechanics only; it is neither convergence evidence nor a scientifically comparable 02c result. Rebuild these cases from the verified server-2 parent before any production interpretation.
+`Observed`, separately from the production lineage: earlier Student smoke artifacts from the superseded upper-pressure sweep remain on the Student host and in the execution history. They were built from the saved Student Mixture pre-initialization surrogate at `C:\\Users\\Shuhei Yokkaichi\\Documents\\CFD\\Test case\\02c-C-brine-p1125kpa-unprimed-preinit-20260815T231711Z.cas.h5`, not the documented frozen 02c-B parent. The Student mesh read `661,558` cells and `1,648,866` nodes, so those historical artifacts are not certified as server-2/02c mesh parity. They are retained only for traceability and are not part of the active matrix or current run authorization.
 
 ## 6. Build procedure and readback requirements
 
@@ -301,11 +277,9 @@ The requested 500-iteration endpoint has since been reached, saved, and analysed
 
 Case A was subsequently rebuilt from the recorded Case B pre-initialization snapshot with only `brine-outlet` gauge pressure changed to `1.115 MPa`, Hybrid Initialized without a liquid patch, and run through the requested 500-iteration milestone. A queued continuation was allowed to finish rather than interrupting Fluent, yielding a final 649-iteration checkpoint. Its evidence and limitations are recorded in the [future-run report](../reports/02c/future-runs.md); it has not yet been post-processed or used for a pressure ranking.
 
-### 10c. Coarse above-inlet-reference sweep launch — 2026-08-16
+### 10c. Current single-point H screen — 2026-08-16
 
-The explicit H20–H50 amendment is now case-only built and reload-verified from the frozen 02c-B pre-initialization parent. The seven pressures are `1.160 / 1.165 / 1.170 / 1.175 / 1.180 / 1.185 / 1.190 MPa`, corresponding to `+20 / +25 / +30 / +35 / +40 / +45 / +50 kPa` above the nominal `1.140 MPa` inlet reference. The steam outlet remains `1.120 MPa` and no other control changes are authorized.
-
-Fluent accepted the native queue in the order H20 → H25 → H30 → H35 → H40 → H45 → H50. H20 is currently running its 500-iteration screen; completion and endpoint validity remain unverified until the paired remote artifacts are checked. See [02c future runs](../reports/02c/future-runs.md) for the build manifest, journal, transcript, and interpretation gates.
+The former H20–H50 and I20–I160 upper-pressure sweeps are superseded. The only current upper-pressure case is `02c-H`, with the Student-saved brine boundary at `1.140 MPa`, the steam outlet held at `1.120 MPa`, and the split velocity-inlet contract unchanged. The case is built from the explicit Student pre-initialization surrogate `C:\\Users\\Shuhei Yokkaichi\\Documents\\CFD\\Test case\\02c-C-brine-p1125kpa-unprimed-preinit-20260815T231711Z.cas.h5`; it is not certified as server-2 exact mesh parity. See the mirrored [02c H result report](../reports/full-geometry/mixture/steady-liquid-outlet/02c/results.md).
 
 ### 10d. Student mesh identity check — 2026-08-16
 

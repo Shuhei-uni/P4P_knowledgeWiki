@@ -1,8 +1,8 @@
-# Results Report — Setup 02c, Unprimed Brine-Outlet Pressure Sweep (Cases A–G)
+# Results Report — Setup 02c, Unprimed Brine-Outlet Pressure Screen (Cases A–H)
 
 ## Comparison dashboard (early screening)
 
-This report is arranged for side-by-side comparison first, with the detailed per-case evidence retained below. The sweep is a directional numerical screen, not a converged separator-performance study. Values are the recorded endpoint after Hybrid Initialization plus the stated steady-iteration budget; outlet flows are shown as outward-positive magnitudes. Because this simplified geometry intentionally omits the lower-liquid outlet, phase closure and liquid-routing values are diagnostic only.
+This report is arranged for side-by-side comparison first, with the detailed per-case evidence retained below. The A–G points are the earlier directional screen; current scope adds only the single H point at `1.140 MPa`. The former upper-pressure H20–H50 and I20–I160 sweeps are superseded and are not part of the active matrix. Results are not a converged separator-performance study. Values are the recorded endpoint after Hybrid Initialization plus the stated steady-iteration budget; outlet flows are shown as outward-positive magnitudes. Because this simplified geometry intentionally omits the lower-liquid outlet, phase closure and liquid-routing values are diagnostic only.
 
 ### Sweep definition
 
@@ -15,6 +15,7 @@ This report is arranged for side-by-side comparison first, with the detailed per
 | E | 1.1275 | 1.1200 | +7.5 | iter 500 |
 | F | 1.1300 | 1.1200 | +10.0 | iter 500 |
 | G | 1.1350 | 1.1200 | +15.0 | iter 500 |
+| H | 1.1400 | 1.1200 | +20.0 | iter 500 |
 
 ### Primary phase-routing comparison
 
@@ -27,8 +28,11 @@ This report is arranged for side-by-side comparison first, with the detailed per
 | E | 1.1275 | +7.5 | 258.323 | 0.000005 | 221.08%* | 19.821 | 60.957 | 24.28% | inventory-draining / unresolved* |
 | F | 1.1300 | +10.0 | 440.922 | 0.000391 | 377.35%* | 13.346 | 66.192 | 16.35% | inventory-draining / unresolved* |
 | G | 1.1350 | +15.0 | 228.106 | 0.032864 | 195.22%* | 9.211 | 71.647 | 11.28% | inventory-draining / unresolved* |
+| H | 1.1400 | +20.0 | 616.795† | 0.281021 | 527.87%† | 0.000 | 86.299 | 0.00% | unstable / indeterminate† |
 
 *Cases C, E, F, and G have liquid outflow above the liquid inlet at the recorded endpoint; this is an open transient/inventory signal, not recovery above 100%.
+
+†For H, Fluent's positive raw brine-outlet liquid flow means reverse flow into the domain. The table shows the absolute magnitude for side-by-side screening, not a positive liquid-recovery result; the endpoint is classified as unstable/indeterminate.
 
 The vapour fractions in this dashboard use the fixed incoming vapour flow (`81.639506 kg/s`) as the denominator, so the two outlet fractions need not sum to exactly 100% while the phase balance is open.
 
@@ -43,15 +47,17 @@ The vapour fractions in this dashboard use the fixed incoming vapour flow (`81.6
 | E | 500 | 8.959e−2 | 8.934e−2 | 500 | not converged |
 | F | 500 | 1.117e−1 | 1.116e−1 | 500 | not converged |
 | G | 500 | 8.243e−2 | 8.241e−2 | 500 | not converged |
+| H | 500 | 2.289e−1 | 1.333e−1 | 500 | unstable / indeterminate; severe reverse-flow/viscosity-limit diagnostics |
 
 ### Reading the sweep
 
 - **Measured direction:** A → C already shows a strong shift in the recorded endpoint routing: higher brine backpressure coincides with less vapour through the brine outlet and more vapour through the steam outlet.
 - **Screening hypothesis:** a small positive brine-over-steam pressure difference is therefore worth testing as a control variable for phase routing and possible liquid drainage.
 - **What D–G add:** the +2.5 to +15 kPa points locate whether that directional shift continues, flattens, or crosses into restricted liquid drainage.
+- **What H adds:** at `1.140 MPa` (`+20 kPa` relative to the fixed `1.120 MPa` steam outlet), the Student-surrogate endpoint reports zero vapour through the brine outlet but strong reverse liquid flow at that outlet; this is a diagnostic boundary case, not evidence of a usable pressure.
 - **Interpretation boundary:** no point is a selected operating pressure or efficiency result until a common stable/converged window, liquid-inventory history, and the agreed visual/pressure diagnostics are available.
 
-Detailed per-case evidence and artifact links follow below. The D–G rows above are populated from the verified endpoint post-processing.
+Detailed per-case evidence and artifact links follow below. The D–G and H rows above are populated from verified endpoint post-processing; H uses the separate Student-surrogate lineage explicitly identified below.
 
 ## 1. Setup link and evidence
 
@@ -369,6 +375,69 @@ Post-processing artifacts: [flux JSON](../../../PyAnsys/output/post_simulation_a
 
 **Unresolved:** no D–G case has a common stable/converged window, total liquid-inventory history, lower-vessel/pipe-entry pressure history, or the agreed contour/vector evidence. The pressure scan locates a promising routing direction and suggests that the liquid-drainage limit lies somewhere between D and the higher points, but it does not identify the limit numerically.
 
+## 11. Case H — 1.1400 MPa brine outlet, Student surrogate (iteration 500)
+
+### Setup and execution evidence
+
+- Setup link: [02c active setup](../../../../../active/02c-mixture-brine-outlet-pressure-sensitivity-unprimed.md).
+- Case ID: `02c-H`.
+- Brine outlet gauge pressure: `1.140 MPa` (`1,140,000 Pa`).
+- Steam outlet gauge pressure: `1.120 MPa` (`1,120,000 Pa`).
+- Explicit Student parent: `C:\Users\Shuhei Yokkaichi\Documents\CFD\Test case\02c-C-brine-p1125kpa-unprimed-preinit-20260815T231711Z.cas.h5`.
+- Verified pre-initialization child: `C:\Users\Shuhei Yokkaichi\Documents\CFD\Test case\02c-H-brine-p1140kpa-unprimed-student-preinit-20260816T091723Z.cas.h5`.
+- Verified endpoint pair: `C:\Users\Shuhei Yokkaichi\Documents\CFD\Test case\02c-H-brine-p1140kpa-unprimed-student-iter500-20260816T091812Z.cas.h5` and matching `.dat.h5`.
+- Fluent version: Ansys Fluent 2025 R2 Student.
+- Mesh readback: `661,558` mixed cells and `1,648,866` nodes.
+- Boundary/model readback: split velocity inlets at `27.118 m/s` with `1.140 MPa` initial gauge reference; Mixture; RNG k-epsilon; Energy off; steam outlet pressure outlet at `1.120 MPa`; brine outlet pressure outlet at `1.140 MPa`; liquid backflow volume fraction `1.0`.
+- Run protocol: Fluent-native Hybrid Initialization without a liquid patch, followed by one native `500`-iteration solve and paired case/data write. No Python iteration loop was used.
+- Evidence class: Student mesh-derived surrogate diagnostic. The Student mesh is not certified as exact server-2/production 02c mesh parity, so this result must not be merged into a professional/server-2 pressure ranking.
+
+### Measured phase mass flows
+
+The read-only endpoint extraction used Fluent phase-1 as vapour and phase-2 as liquid, with outward-positive magnitudes at outlets.
+
+| Quantity | Raw Fluent flow [kg/s] | Outward-positive / inlet value [kg/s] |
+|---|---:|---:|
+| Liquid at liquid inlet | `116.846776` | `116.846776` in |
+| Liquid at brine outlet | `+616.795402` | `-616.795402` outward-positive signed flow (reverse flow into domain) |
+| Liquid at steam outlet | `-0.281021` | `0.281021` out |
+| Vapour at steam inlet | `81.639504` | `81.639504` in |
+| Vapour at brine outlet | `-0.000000` | `0.000000` out |
+| Vapour at steam outlet | `-86.298717` | `86.298717` out |
+
+The positive Fluent brine-outlet liquid value is reverse flow into the domain, not liquid leaving through the brine outlet. The absolute magnitude is retained for comparison only; it is not a physical recovery fraction. The reported phase-specific net values also show a whole-domain mixture imbalance of `111.906543 kg/s` (`56.38%` of the extracted mixture inlet basis), retained as informational only because this simplified geometry has no modelled lower-liquid outlet.
+
+### Derived screening metrics
+
+| Metric | H endpoint value | Interpretation limit |
+|---|---:|---|
+| Absolute brine liquid flux / liquid inlet | `527.87%` | reverse-flow magnitude; not recovery above 100% |
+| Liquid closure error | `428.11%` | phase closure is not acceptable for a steady result |
+| Vapour wrong-outlet fraction | `0.00%` | endpoint routing signal only; not a converged separation result |
+| Vapour leaving steam outlet / vapour inlet | `105.71%` | open vapour balance; not recovery |
+| Final continuity residual | `2.288839e-1` | not converged; configured criterion is `1e-4` |
+| Minimum continuity residual | `1.332997e-1` at iteration `37` | no stable low-residual window |
+
+### Residual and numerical-health evidence
+
+The endpoint residual history contains exactly `500` points, iterations `1–500`.
+
+| Equation | Initial | Final | Minimum over run |
+|---|---:|---:|---:|
+| Continuity | `1.000000` | `2.288839e-1` | `1.332997e-1` |
+| x velocity | `3.566766e-3` | `1.079818e-3` | `6.085548e-4` |
+| y velocity | `3.712990e-3` | `1.212693e-3` | `5.317855e-4` |
+| z velocity | `4.148917e-3` | `1.117975e-3` | `5.339696e-4` |
+| k | `5.966393e-1` | `1.129812e-2` | `7.865774e-3` |
+| epsilon | `1.609200e3` | `2.851939e-1` | `1.731018e-2` |
+| liquid volume fraction | `1.325980e-1` | `1.489275e-2` | `5.815662e-3` |
+
+The native transcript recorded persistent reverse flow on both pressure outlets and turbulent-viscosity limiting, reaching approximately `27,030` limited cells on explicit endpoint reload. Classify H as **unstable / indeterminate and numerically unhealthy**, not converged and not a pressure-selection result.
+
+Post-processing artifacts: [Student build manifest](../../../../../../PyAnsys/output/02c-student-h1140-build-20260816T091723Z.json), [carrier flux JSON](../../../../../../PyAnsys/output/post_simulation_analysis/02c-H-brine-p1140kpa-unprimed-student-iter500-20260816T091812Z-flux-check.json), [residual JSON](../../../../../../PyAnsys/output/post_simulation_analysis/02c-H-brine-p1140kpa-unprimed-student-iter500-20260816T091812Z-residual-check.json), [residual plot](../../../../../../PyAnsys/output/post_simulation_analysis/02c-H-brine-p1140kpa-unprimed-student-iter500-20260816T091812Z-residual-check.png), [native journal](../../../../../../PyAnsys/output/02c-student-h1140-run-20260816T091812Z.jou).
+
+**Interpretation status: pending user direction.**
+
 ### Artifact index
 
 | Case | Remote endpoint | Carrier flux | Residual history | EWF/DPM audit | DPM bundle |
@@ -377,5 +446,6 @@ Post-processing artifacts: [flux JSON](../../../PyAnsys/output/post_simulation_a
 | E | `02c-E-...-iter500-20260813T205605Z.cas.h5/.dat.h5` | [JSON](../../../PyAnsys/output/post_simulation_analysis/02c-E-brine-p1127p5kpa-unprimed-iter500-flux-check.json) | [JSON](../../../PyAnsys/output/post_simulation_analysis/02c-E-brine-p1127p5kpa-unprimed-iter500-residual-check.json) | [audit](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-E-iter500-dpm/model_audit.json) | [raw](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-E-iter500-dpm/raw_results.json) |
 | F | `02c-F-...-iter500-20260813T205605Z.cas.h5/.dat.h5` | [JSON](../../../PyAnsys/output/post_simulation_analysis/02c-F-brine-p1130kpa-unprimed-iter500-flux-check.json) | [JSON](../../../PyAnsys/output/post_simulation_analysis/02c-F-brine-p1130kpa-unprimed-iter500-residual-check.json) | [audit](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-F-iter500-dpm/model_audit.json) | [raw](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-F-iter500-dpm/raw_results.json) |
 | G | `02c-G-...-iter500-20260813T205605Z.cas.h5/.dat.h5` | [JSON](../../../PyAnsys/output/post_simulation_analysis/02c-G-brine-p1135kpa-unprimed-iter500-flux-check.json) | [JSON](../../../PyAnsys/output/post_simulation_analysis/02c-G-brine-p1135kpa-unprimed-iter500-residual-check.json) | [audit](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-G-iter500-dpm/model_audit.json) | [raw](../../../PyAnsys/output/ewf_dpm_diagnostics/02c-G-iter500-dpm/raw_results.json) |
+| H | `02c-H-brine-p1140kpa-unprimed-student-iter500-20260816T091812Z.cas.h5/.dat.h5` | [JSON](../../../../../../PyAnsys/output/post_simulation_analysis/02c-H-brine-p1140kpa-unprimed-student-iter500-20260816T091812Z-flux-check.json) | [JSON](../../../../../../PyAnsys/output/post_simulation_analysis/02c-H-brine-p1140kpa-unprimed-student-iter500-20260816T091812Z-residual-check.json) | Student endpoint reload: viscosity limiting; no DPM/EWF claim | — |
 
 For all four cases, the audit reports EWF disabled, no active film wall, and no UDF body-force/scalar-update match. DPM transcripts completed for all six inherited injections per case. These inherited particle results are kept for reproducibility but excluded from the primary pressure comparison.

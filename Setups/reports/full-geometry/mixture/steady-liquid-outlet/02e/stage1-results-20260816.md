@@ -120,7 +120,30 @@ Liquid volumes below are derived from recovered liquid mass using the frozen liq
 | `EF-P2` | 401–500 | 1.032552 | −78.45% | 1.103924 | −76.96% | still decreasing |
 | `EF-P3` | 401–500 | 0.492739 | −89.71% | 0.521181 | −89.12% | still decreasing |
 
-The failed-case inventories are useful only as pre-FPE context because each case stops at a different iteration. They must not be interpreted as comparable steady or converged states.
+The recovered inventory histories are shown below in both derived liquid
+volume and liquid mass form. Solid lines are complete 500-iteration cases;
+dashed lines are pre-FPE histories. Circle and square markers identify the
+last Y010 and Y030 values, respectively. The horizontal line is the common
+Y010 parent baseline.
+
+![Recovered Setup 02e Stage-1 Y010 and Y030 liquid inventory histories](02e_stage1_inventory_histories_20260816.png)
+
+![Recovered Setup 02e Stage-1 Y010 and Y030 liquid mass histories](02e_stage1_mass_inventory_histories_20260816.png)
+
+Native Fluent scaled residual histories are also included as one panel per
+case. Each panel uses its own logarithmic y-scale so that the complete cases
+remain readable while the many-orders-of-magnitude residual blow-up before
+several FPEs remains visible. The plotted values are the scaled residuals as
+printed by Fluent; no additional normalization has been applied. Residual
+transcripts were available for 10 of 12 cases. `PO-P2` and `EF-P1` are marked
+unavailable because their original transcripts were not preserved in the
+recovered local bundle.
+
+![Setup 02e Stage-1 native Fluent scaled residual histories](02e_stage1_scaled_residuals_20260816.png)
+
+The failed-case inventories are useful only as pre-FPE context because each
+case stops at a different iteration. They must not be interpreted as
+comparable steady or converged states.
 
 ---
 

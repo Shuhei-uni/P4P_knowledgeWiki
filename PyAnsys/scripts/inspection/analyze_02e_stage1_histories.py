@@ -21,9 +21,20 @@ import numpy as np
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 INPUT_DIR = PROJECT_ROOT / "output" / "02e_stage1_recovered_reports_20260816"
 OUTPUT_DIR = INPUT_DIR
+REPORT_DIR = PROJECT_ROOT.parent / "Setups" / "reports" / "02e"
+TRANSCRIPT_DIR = INPUT_DIR / "transcripts"
 LIQUID_DENSITY = 881.77
 INITIAL_Y010_MASS = 4224.25373425353
 INITIAL_Y010_VOLUME = 4.790652589965104
+RESIDUAL_COLUMNS = [
+    "continuity",
+    "x-velocity",
+    "y-velocity",
+    "z-velocity",
+    "k",
+    "epsilon",
+    "vf-phase-2",
+]
 
 
 RUNS: dict[str, dict[str, Any]] = {
@@ -139,8 +150,118 @@ def outward_positive(values: np.ndarray, role: str) -> np.ndarray:
     return values if role.endswith("_in") else -values
 
 
+def read_residual_history(case_id: str) -> tuple[np.ndarray, np.ndarray] | None:
+    """Read Fluent's printed scaled-residual rows from a native transcript.
+
+    Fluent prints the iteration number followed by seven scaled residuals,
+    then the time/iteration column.  The parser deliberately ignores warning
+    lines, headers, and non-numeric rows.  Missing transcripts remain missing;
+    no residual history is inferred from another case.
+    """
+    candidates = sorted(TRANSCRIPT_DIR.glob(f"02e-{case_id}-*.trn"))
+    if not candidates:
+        return None
+    iterations: list[float] = []
+    residuals: list[list[float]] = []
+    for line in candidates[0].read_text(encoding="utf-8", errors="replace").splitlines():
+        parts = line.split()
+        if len(parts) < 9:
+            continue
+        try:
+            iteration = float(parts[0])
+            values = [float(value) for value in parts[1:8]]
+        except ValueError:
+            continue
+        if not np.isfinite(iteration) or len(values) != len(RESIDUAL_COLUMNS):
+            continue
+        if not all(np.isfinite(value) and value >= 0.0 for value in values):
+            continue
+        iterations.append(iteration)
+        residuals.append(values)
+    if not iterations:
+        return None
+    return np.asarray(iterations), np.asarray(residuals)
+
+
+def save_inventory_figure(
+    histories: dict[str, dict[str, tuple[np.ndarray, np.ndarray]]],
+    quantity: str,
+    ylabel: str,
+    title: str,
+    filename: str,
+) -> None:
+    """Save a four-family inventory figure in the recovery and report folders."""
+    fig, axes = plt.subplots(2, 2, figsize=(13, 9), constrained_layout=True)
+    families = ["PO", "OV", "MF", "EF"]
+    divisor = LIQUID_DENSITY if quantity == "volume" else 1.0
+    baseline = INITIAL_Y010_VOLUME if quantity == "volume" else INITIAL_Y010_MASS
+    for ax, family in zip(axes.flat, families):
+        for case_id, meta in RUNS.items():
+            if meta["family"] != family:
+                continue
+            h = histories[case_id]
+            if "y010_mass" not in h or "y030_mass" not in h:
+                ax.plot([], [], "--", label=f"{case_id}: history unavailable")
+                continue
+            x, y010 = h["y010_mass"]
+            _, y030 = h["y030_mass"]
+            line_style = "-" if meta["status"] == "COMPLETE_500" else "--"
+            ax.plot(x, y010 / divisor, line_style, linewidth=1.2, label=f"{case_id} Y010")
+            ax.plot(x, y030 / divisor, line_style, linewidth=1.2, alpha=0.65, label=f"{case_id} Y030")
+            ax.plot(x[-1], y010[-1] / divisor, "o", markersize=4)
+            ax.plot(x[-1], y030[-1] / divisor, "s", markersize=4, alpha=0.65)
+        ax.axhline(baseline, color="black", linewidth=0.8, alpha=0.45, label="Y010 parent baseline")
+        ax.set_title(f"{family} — recovered liquid inventories")
+        ax.set_xlabel("Iteration")
+        ax.set_ylabel(ylabel)
+        ax.grid(True, alpha=0.25)
+        ax.legend(fontsize=7, ncol=2)
+    fig.suptitle(title)
+    for destination in (OUTPUT_DIR / filename, REPORT_DIR / filename):
+        fig.savefig(destination, dpi=180)
+    plt.close(fig)
+
+
+def save_scaled_residual_figure(
+    residual_histories: dict[str, tuple[np.ndarray, np.ndarray] | None],
+    filename: str,
+) -> None:
+    """Save native Fluent scaled residuals as one panel per Stage-1 case."""
+    fig, axes = plt.subplots(3, 4, figsize=(16, 11), sharey=False, constrained_layout=False)
+    colors = plt.rcParams["axes.prop_cycle"].by_key()["color"]
+    for ax, case_id in zip(axes.flat, RUNS):
+        history = residual_histories[case_id]
+        meta = RUNS[case_id]
+        status = meta["status"].replace("_", " ")
+        if history is None:
+            ax.text(0.5, 0.5, "Residual history\nunavailable", ha="center", va="center", transform=ax.transAxes)
+            ax.set_title(f"{case_id} — {status}, run n={meta['n']}\ntranscript unavailable")
+            ax.set_ylabel("Fluent scaled residual")
+            ax.grid(True, alpha=0.25)
+            continue
+        iterations, values = history
+        for index, label in enumerate(RESIDUAL_COLUMNS):
+            ax.semilogy(iterations, np.maximum(values[:, index], np.finfo(float).tiny), label=label, color=colors[index])
+        ax.set_title(f"{case_id} — {status}, n={int(iterations[-1])}")
+        ax.set_xlabel("Iteration")
+        ax.set_ylabel("Fluent scaled residual")
+        ax.grid(True, which="both", alpha=0.25)
+    handles, labels = axes[0, 0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="lower center", ncol=4, fontsize=9, bbox_to_anchor=(0.5, 0.015))
+    fig.suptitle(
+        "Setup 02e Stage 1: native Fluent scaled residual histories\n"
+        "Log scale; residuals are plotted as printed by Fluent",
+        y=0.985,
+    )
+    fig.subplots_adjust(left=0.055, right=0.985, top=0.90, bottom=0.12, wspace=0.28, hspace=0.55)
+    for destination in (OUTPUT_DIR / filename, REPORT_DIR / filename):
+        fig.savefig(destination, dpi=180, bbox_inches="tight")
+    plt.close(fig)
+
+
 def main() -> None:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    REPORT_DIR.mkdir(parents=True, exist_ok=True)
     summary: dict[str, Any] = {
         "source": str(INPUT_DIR),
         "analysis": "offline native Fluent report-history extraction",
@@ -153,12 +274,21 @@ def main() -> None:
 
     csv_rows: list[dict[str, Any]] = []
     histories: dict[str, dict[str, tuple[np.ndarray, np.ndarray]]] = {}
+    residual_histories = {case_id: read_residual_history(case_id) for case_id in RUNS}
 
     for case_id, meta in RUNS.items():
         case: dict[str, Any] = dict(meta)
         case["histories_available"] = {}
         case["inventory"] = {}
         case["fluxes"] = {}
+        residual_history = residual_histories[case_id]
+        case["residual_history_available"] = residual_history is not None
+        if residual_history is not None:
+            case["residual_first_iteration"] = int(residual_history[0][0])
+            case["residual_last_iteration"] = int(residual_history[0][-1])
+        else:
+            case["residual_first_iteration"] = None
+            case["residual_last_iteration"] = None
         case_histories: dict[str, tuple[np.ndarray, np.ndarray]] = {}
         for key, stem in REPORT_STEMS.items():
             history = read_history(stem, meta["suffix"])
@@ -266,38 +396,31 @@ def main() -> None:
         writer.writeheader()
         writer.writerows(csv_rows)
 
-    # Four compact family panels: Y010 and Y030 liquid volumes, with terminal
-    # markers for failed runs and a distinct legend for missing EF-P1 history.
-    fig, axes = plt.subplots(2, 2, figsize=(13, 9), constrained_layout=True)
-    families = ["PO", "OV", "MF", "EF"]
-    for ax, family in zip(axes.flat, families):
-        for case_id, meta in RUNS.items():
-            if meta["family"] != family:
-                continue
-            h = histories[case_id]
-            if "y010_mass" not in h or "y030_mass" not in h:
-                ax.plot([], [], "--", label=f"{case_id}: history unavailable")
-                continue
-            x, y010 = h["y010_mass"]
-            _, y030 = h["y030_mass"]
-            line_style = "-" if meta["status"] == "COMPLETE_500" else "--"
-            ax.plot(x, y010 / LIQUID_DENSITY, line_style, linewidth=1.2, label=f"{case_id} Y010")
-            ax.plot(x, y030 / LIQUID_DENSITY, line_style, linewidth=1.2, alpha=0.65, label=f"{case_id} Y030")
-            ax.plot(x[-1], y010[-1] / LIQUID_DENSITY, "o", markersize=4)
-            ax.plot(x[-1], y030[-1] / LIQUID_DENSITY, "s", markersize=4, alpha=0.65)
-        ax.axhline(INITIAL_Y010_VOLUME, color="black", linewidth=0.8, alpha=0.45, label="Y010 parent baseline")
-        ax.set_title(f"{family} — recovered liquid inventories")
-        ax.set_xlabel("Iteration")
-        ax.set_ylabel("Liquid inventory (m³, mass / 881.77 kg·m⁻³)")
-        ax.grid(True, alpha=0.25)
-        ax.legend(fontsize=7, ncol=2)
-    fig.suptitle("Setup 02e Stage 1: Y010 and Y030 liquid inventory histories")
-    fig.savefig(OUTPUT_DIR / "02e_stage1_inventory_histories_20260816.png", dpi=180)
-    plt.close(fig)
+    save_inventory_figure(
+        histories,
+        quantity="volume",
+        ylabel="Liquid inventory (m³, mass / 881.77 kg·m⁻³)",
+        title="Setup 02e Stage 1: Y010 and Y030 liquid inventory histories",
+        filename="02e_stage1_inventory_histories_20260816.png",
+    )
+    save_inventory_figure(
+        histories,
+        quantity="mass",
+        ylabel="Liquid inventory (kg)",
+        title="Setup 02e Stage 1: Y010 and Y030 liquid mass histories",
+        filename="02e_stage1_mass_inventory_histories_20260816.png",
+    )
+    save_scaled_residual_figure(
+        residual_histories,
+        filename="02e_stage1_scaled_residuals_20260816.png",
+    )
 
     print(f"Wrote {OUTPUT_DIR / '02e_stage1_inventory_flux_summary_20260816.json'}")
     print(f"Wrote {OUTPUT_DIR / '02e_stage1_inventory_flux_summary_20260816.csv'}")
     print(f"Wrote {OUTPUT_DIR / '02e_stage1_inventory_histories_20260816.png'}")
+    print(f"Wrote {REPORT_DIR / '02e_stage1_inventory_histories_20260816.png'}")
+    print(f"Wrote {REPORT_DIR / '02e_stage1_mass_inventory_histories_20260816.png'}")
+    print(f"Wrote {REPORT_DIR / '02e_stage1_scaled_residuals_20260816.png'}")
     print("case,status,n,y010_last_m3,y030_last_m3,L_kg_s,y010_trend,y030_trend")
     for row in csv_rows:
         print(
