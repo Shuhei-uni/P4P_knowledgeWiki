@@ -1,102 +1,145 @@
 # Setup-linked post-simulation report structure
 
-Use this structure for `Setups/reports/<setup-id>/results.md`. Keep it concise: link to generated CSV, JSON, and transcript files instead of duplicating them.
+Use this as guidance for `Setups/reports/<setup-id>/results.md`. The structure is intentionally adaptive: organize the central results around the setup question, not around a mandatory carrier/DPM/EWF sequence.
 
-## 1. Setup link and evidence
+## 1. Investigation context
 
-State:
+State briefly:
 
-- setup definition link, setup ID, parent/comparison scope where relevant;
-- case and data checkpoint names;
-- Fluent version, case-identity status/evidence basis, analysis script revision
-  or run label;
-- evidence class: `diagnostic`, `partial`, `reported`, `not converged`, or another precise scope label;
-- links to the output bundle and raw transcript/CSV files.
+- setup definition and setup ID;
+- investigation mode;
+- primary question;
+- controlled change and reference/comparison scope;
+- interpretation owner and current interpretation status.
 
-Never include a Fluent `server_id` in the report. It is connection-routing
-metadata, not case or setup identity.
-
-Do not call a run validated merely because an output exists.
-
-## 2. Analysis applicability
-
-Use a compact table to show what was actually applicable to this setup.
-
-| Analysis | Status | Evidence/reason |
-|---|---|---|
-| Carrier residual/flux checks | completed / deferred / not available | checkpoint and monitor scope |
-| DPM fate analysis | completed / not applicable | active injection branch and output link |
-| EWF audit/snapshot | completed / not applicable | confirmed active film wall(s) |
-| EWF history/closure | deferred / completed | interval and monitor availability |
-| Splash / stripping / separation | active / inactive / not applicable | readback, not assumption |
-
-Use `Not applicable` for physics absent from the setup. Use `Deferred` when the physics exists but its evidence has not yet been captured.
-
-## 3. Carrier-field and numerical state
-
-Include this when carrier results or convergence evidence exist:
-
-- inlet/outlet phase fluxes and the exact scope of any efficiency/dryness metric;
-- residual/monitor status;
-- geometry/output scope and numerical convergence limitation;
-- a clear distinction between a scoped diagnostic and full separator validation.
-
-## 4. DPM results (only for active DPM)
-
-Summarise one row per injection:
-
-| Diameter | Injection | Net flow | Observed escaped | Final absorbed | EWF absorbed events | Splash events | Closure residual |
-|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|
-
-Then state:
-
-- terminal zones, especially escaped outlets and trapped walls;
-- whether the final fate totals include generated secondary splash parcels;
-- whether the mass-flow closure is within printed/reporting precision;
-- raw fate bookkeeping may include Fluent `Incomplete` values, but these are not automatically report blockers.
-
-Do not add splash events or represented secondary mass as a second sink when their later final fates are already included.
-
-## 5. EWF final-state results (only for active EWF)
-
-Report confirmed film walls and a table with exact Fluent units:
-
-| Quantity | Reduction/scope | Value | Unit | Interpretation limit |
-|---|---|---:|---|---|
-| Film Courant Number | facet maximum | | | final-state numerical diagnostic only |
-| Film Mass | sum of film walls | | kg | current inventory |
-| Film Thickness | maximum / area-weighted average | | m | local versus distributed film |
-| Film DPM Mass Source | sum | | kg/s | instantaneous/source basis |
-| Film Outflow Mass | sum | | kg or Fluent-reported unit | identify whether cumulative |
-| Film Mass Flow Rate | named boundary | | kg/s | preserve Fluent sign |
-| Film Velocity | average / maximum / components | | m/s | direction needs spatial context |
-
-Include stripped and separated quantities only when their models were active. Do not include an empty EWF section for a non-EWF case.
-
-## 6. EWF history and bookkeeping (only when applicable)
-
-If only one final checkpoint exists, state `bookkeeping-only` and name the missing terms. Do not combine inventory in `kg` directly with rates in `kg/s`.
-
-For a defined interval, report:
+Default to:
 
 ```text
-initial film inventory
-+ integrated DPM-to-film source
-+ integrated film inflow
-= final film inventory
-+ integrated film outflow
-+ integrated stripping/separation when active
-+ explicit unresolved residual
+Interpretation owner: user-led
+Interpretation status: pending user direction
 ```
 
-State the interval, monitor frequency, integration method, and the time basis used by Fluent.
+unless the user has already supplied criteria or delegated interpretation.
 
-## 7. Interpretation, limitations, and next action
+## 2. Run identity and observed state
 
-Separate these three elements:
+Record:
 
-- **Measured:** direct values and files produced by Fluent.
-- **Derived:** equations, ratios, or comparisons made from those values.
-- **Unresolved:** missing history, inactive/unknown mechanism, or version-adapter limitation. For the simplified Purnanto scope, open liquid balance and Fluent `Incomplete` trajectories are recorded as scope metadata rather than active blockers.
+- case/data checkpoint names when available;
+- Fluent version;
+- iteration count or physical-time window;
+- initialization/restart status where relevant;
+- relevant active model state;
+- deviations from the intended setup;
+- links to setup/readback and raw output bundles.
 
-End with the smallest justified next action. Examples: continue the carrier solve, create histories before a rerun, compare to the named parent, repair a confirmed model mismatch, or keep the result diagnostic.
+Never use a Fluent `server_id` as case or setup identity.
+
+## 3. Analysis plan and applicability
+
+Show what evidence was collected **and why**.
+
+| Analysis / evidence | Status | Relevance to primary question | Source/method |
+|---|---|---|---|
+| `<...>` | `complete / partial / unavailable / not applicable / requires rerun / blocked` | `<...>` | `<artifact or method>` |
+
+Do not create empty DPM/EWF/VOF sections merely because the template knows those models exist.
+
+If an existing script was not suitable, record the custom read-only extraction or derived calculation used instead.
+
+## 4. Results organized around the setup question
+
+Choose headings that match the experiment. Examples:
+
+- brine-outlet liquid/vapour split;
+- pressure response across the sensitivity matrix;
+- liquid inventory evolution;
+- VOF interface behavior;
+- timestep/mesh/initialization sensitivity;
+- DPM diameter response;
+- EWF drainage behavior;
+- local pressure/velocity structure;
+- numerical verification comparison.
+
+Within each result group:
+
+1. show direct measured values first;
+2. show derived quantities separately;
+3. preserve units, zone/surface definitions, signs, reductions, and time/iteration scope;
+4. link raw evidence rather than duplicating full transcripts.
+
+## 5. Module-specific content when relevant
+
+These are optional modules, not mandatory report sections.
+
+### Carrier / phase flow
+
+Report inlet/outlet phase fluxes, balance metrics, monitor trends, and scoped efficiency/recovery metrics when they answer the setup question. Distinguish a local/scoped diagnostic from full separator validation.
+
+### DPM
+
+For selected relevant injections, retain injection identity, size, source surface, tracked counts, zone/fate output, represented/net mass flow and closure bookkeeping. State whether secondary splash parcels/events are already represented in final fates. Do not substitute missing categories with zero.
+
+### EWF
+
+For confirmed film walls, preserve exact Fluent units and distinguish final inventory (`kg`) from source/flux rates (`kg/s`). Include stripping/separation/splash terms only when active and relevant. A single final checkpoint is not a time-integrated film closure.
+
+### VOF / transient
+
+When interface dynamics matter, report physical-time histories, time-window statistics, liquid inventory, interface/volume-fraction behavior, or timestep/initialization comparisons as required. Do not infer stable transient behavior from a final contour alone.
+
+### Verification / validation
+
+For verification, report the numerical comparison the setup defined. For validation, name the independent reference, comparison metric, tolerance/uncertainty basis and validity scope. Without those ingredients, use `validation claim unresolved`.
+
+## 6. Evidence quality and limitations
+
+Record limitations only insofar as they affect use of the evidence:
+
+- residual/monitor behavior;
+- common-window comparability;
+- mass/phase closure where relevant;
+- timestep/mesh independence where relevant;
+- unavailable histories;
+- inherited setup caveats;
+- intended-vs-observed setup drift;
+- incomplete analysis artifacts.
+
+An exploratory run can remain scientifically useful even when it is not validation-grade. Avoid turning generic CFD quality checks into automatic rejection rules for every experiment.
+
+## 7. Neutral observations
+
+Separate:
+
+- **Measured** — direct Fluent/export quantities;
+- **Derived** — calculations from measured values;
+- **Observed pattern** — trends/comparisons directly supported by the evidence;
+- **Unresolved** — missing evidence or ambiguous comparison.
+
+This section should be readable without requiring the reader to accept the agent's physical interpretation.
+
+## 8. Interpretation handoff
+
+Unless interpretation was already delegated, end the evidence portion with focused questions for the user. Examples:
+
+- Which metric should control the decision?
+- Should this be treated as a screening signal, a numerical verification result, or compared against a specific validation target?
+- Which case/reference should be the main comparison?
+- Do you want possible physical explanations for the observed pattern?
+- Is another analysis needed before choosing a next experiment?
+
+Do not automatically conclude `keep`, `reject`, choose a preferred operating point/model, or prescribe the next setup.
+
+## 9. Optional interpretation
+
+Add only after the user provides direction or when criteria were explicitly defined in advance.
+
+Record:
+
+- interpretation owner: `user-provided`, `joint`, or `agent-proposed`;
+- evidence used;
+- interpretation and scope/confidence;
+- alternative explanations where material;
+- user-approved decision or next action.
+
+Preserve the original evidence when interpretation changes later.
