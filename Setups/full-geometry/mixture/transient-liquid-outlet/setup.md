@@ -13,6 +13,7 @@
 | Geometry basis | same verified full-geometry production mesh used by the current Y010 Mixture work |
 | Steady predecessor | [`02e` Y010 outlet characterization](../../../active/02e-mixture-y010-brine-outlet-boundary-characterization.md) |
 | Key predecessor evidence | [`02e` Stage-1 results](../../../reports/02e/stage1-results-20260816.md) |
+| Report home | [mirrored transient report folder](../../../reports/full-geometry/mixture/transient-liquid-outlet/index.md) |
 
 ## Primary question
 
@@ -24,6 +25,16 @@ This campaign deliberately separates two questions:
 2. **Outlet comparison:** with that method locked, how do the selected Pressure Outlet, Outlet Vent, and Mass-Flow Outlet cases evolve in physical time?
 
 Do not change both the transient method and the outlet formulation case-by-case unless a deviation is explicitly recorded.
+
+## Report filing rule
+
+This file and the stage documents in this campaign are setup/build plans only. When a stage is run, its completed-run evidence must be written under:
+
+```text
+Setups/reports/full-geometry/mixture/transient-liquid-outlet/
+```
+
+Do not create result reports beside this setup file.
 
 ## Production screen matrix
 

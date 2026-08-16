@@ -1,11 +1,49 @@
 # Setups
 
-`Setups/` stores concrete Fluent experiment definitions and their setup-linked evidence. The primary navigation is now **geometry-first**, because the current `Full-geomV2` programme is a different experimental generation from the older numbered Purnanto/reference work.
+`Setups/` stores concrete Fluent experiment definitions and their setup-linked evidence, but **setup definitions and result reports are intentionally kept in separate trees**.
+
+The primary navigation is geometry-first because the current `Full-geomV2` programme is a different experimental generation from the older numbered Purnanto/reference work.
 
 ## Primary programmes
 
-- [Full geometry](full-geometry/index.md) — canonical home for `Full-geomV2` and its descendants. New production work belongs here.
-- [Purnanto/reference programme](purnanto-reference/index.md) — navigation layer for the historical numbered/reference corpus and its DPM/EWF development branches.
+- [Full-geometry setup definitions](full-geometry/index.md) — canonical home for `Full-geomV2` setup plans, build contracts, stage plans, and controlled experiment definitions.
+- [Setup reports](reports/index.md) — canonical home for numerical result reports and evidence packets.
+- [Purnanto/reference programme](purnanto-reference/index.md) — navigation layer for the historical numbered/reference setup corpus and its DPM/EWF development branches.
+
+## Separation rule
+
+For new full-geometry work, the setup and report trees mirror one another:
+
+```text
+Setups/full-geometry/<physics>/<campaign>/
+Setups/reports/full-geometry/<physics>/<campaign>/
+```
+
+Use the first path for **what is intended to be built/run** and the second for **what actually happened**.
+
+Do not place `results.md`, execution-result reports, post-analysis reports, or interpretation reports inside `Setups/full-geometry/...`.
+
+Do not place setup plans, stage plans, or Fluent build contracts inside `Setups/reports/...`.
+
+Example:
+
+```text
+Setups/
+├── full-geometry/
+│   └── mixture/
+│       └── transient-liquid-outlet/
+│           ├── index.md
+│           ├── setup.md
+│           ├── stage-03-initialization-comparison.md
+│           └── stage-06-six-case-screen.md
+└── reports/
+    └── full-geometry/
+        └── mixture/
+            └── transient-liquid-outlet/
+                ├── index.md
+                ├── stage-03-initialization-comparison-results.md
+                └── stage-06-six-case-screen-results.md
+```
 
 ## Shared resources
 
@@ -19,43 +57,9 @@ The following directories are retained because many existing Markdown files cros
 - [active](active/index.md)
 - [future](future/index.md)
 - [past](past/)
-- [reports](reports/index.md)
+- numbered report folders directly under [reports](reports/index.md)
 
-These paths are now a **compatibility layer for the numbered corpus**. Do not create new `Full-geomV2` campaigns there. Current full-geometry records that still physically reside in those paths are linked from the canonical full-geometry campaign pages until a future link-safe physical migration is justified.
-
-## New full-geometry filing rule
-
-Use:
-
-```text
-Setups/full-geometry/
-└── <physics-family>/
-    └── <scientific-campaign>/
-        ├── index.md
-        ├── setup.md
-        ├── results.md            # when one report is enough
-        └── <stage-or-study>/      # when the campaign has multiple stages
-            ├── plan.md
-            └── results.md
-```
-
-The folder name should communicate the scientific question. Do not make a new top-level numbered folder simply because the next integer is available.
-
-Stable IDs may still exist in metadata and Fluent artifact names, for example `FG-MIX-T01`, but the ID is secondary to the geometry/physics/campaign path.
-
-## Setup/report contract
-
-A setup record should make clear:
-
-- geometry and mesh identity;
-- scientific question and investigation mode;
-- reference/predecessor and controlled changes;
-- frozen comparison context;
-- exact Fluent build/readback requirements;
-- pre-run evidence that must be instrumented;
-- interpretation ownership, defaulting to user-led.
-
-Results should normally live with the scientific campaign and remain an evidence packet until interpretation is explicitly supplied or delegated.
+These paths are a compatibility layer for the numbered corpus. Do not create new `Full-geomV2` campaigns there.
 
 ## Geometry-lineage rule
 

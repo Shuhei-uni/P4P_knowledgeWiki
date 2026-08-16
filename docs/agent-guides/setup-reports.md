@@ -15,25 +15,52 @@ Before creating a setup, identify the geometry programme from explicit mesh/case
 
 ### Current full geometry
 
-New `Full-geomV2` work belongs under:
+New `Full-geomV2` setup work belongs under:
 
 ```text
 Setups/full-geometry/<physics-family>/<scientific-campaign>/
 ```
 
+Result reports for the same campaign belong under the mirrored path:
+
+```text
+Setups/reports/full-geometry/<physics-family>/<scientific-campaign>/
+```
+
 Use descriptive campaign names such as `mixture/transient-liquid-outlet`. Stable IDs such as `FG-MIX-T01` may be recorded in metadata and artifact filenames, but do not organize new work as one global numbered sequence.
 
-Results should normally live beside the campaign setup, using `results.md` or stage/study subfolders.
+### Strict setup/report separation
+
+The setup tree answers **what should be run**. The report tree answers **what actually happened**.
+
+Keep in `Setups/full-geometry/...`:
+
+- setup/build contracts;
+- stage plans;
+- case matrices;
+- initialization plans;
+- monitor requirements;
+- planned numerical qualification.
+
+Keep in `Setups/reports/full-geometry/...`:
+
+- completed-run reports;
+- execution evidence summaries;
+- post-analysis evidence packets;
+- numerical findings;
+- later interpretation sections based on completed evidence.
+
+Do not create `results.md` beside `setup.md` for new full-geometry work. Do not put setup/stage plans in the report tree.
 
 ### Historical numbered/reference work
 
-The old `active/`, `future/`, `past/`, and `reports/` folders are retained as a compatibility layer for the numbered corpus. Navigate them through `Setups/purnanto-reference/index.md`.
+The old `active/`, `future/`, `past/`, and numbered `reports/` folders are retained as a compatibility layer for the numbered corpus. Navigate them through `Setups/purnanto-reference/index.md` and `Setups/reports/purnanto-reference/index.md`.
 
 When editing a legacy numbered record, preserve its assigned ID and use `Setups/order-dictionary.md`. Do not renumber historical records merely to fit the new structure.
 
 ### Geometry identity rule
 
-Never infer geometry from setup number or title alone. Historical notes can say “full geometry” while still using the older `purnanto` geometry label. Require an exact mesh/case identity or equivalent provenance before filing work in the full-geometry programme.
+Never infer geometry from setup number or title alone. Require an exact mesh/case identity or equivalent provenance before filing work in the full-geometry programme.
 
 A methodological predecessor is not automatically a geometry parent.
 
@@ -64,10 +91,11 @@ Prefer a concise controlled-delta definition:
 
 Do not duplicate generic CFD theory or every inherited setting when a parent link and critical readbacks are enough.
 
-## Campaign-local results are evidence packets
+## Result reports are evidence packets
 
-A setup-linked result should be readable before anyone agrees on an interpretation. It should state:
+A result report should be readable before anyone agrees on an interpretation. It should state:
 
+- the exact setup/stage link;
 - what the setup was trying to investigate;
 - what was actually run;
 - what analyses were performed and why they were relevant;
@@ -89,8 +117,9 @@ For new full-geometry work:
 1. choose the geometry programme;
 2. choose the physics family;
 3. choose a descriptive scientific campaign;
-4. record an optional stable machine/reference ID in metadata;
-5. keep setup and results together inside that campaign.
+4. place setup/stage plans in `Setups/full-geometry/...`;
+5. place completed-run reports in the exactly mirrored `Setups/reports/full-geometry/...` path;
+6. record an optional stable machine/reference ID in metadata.
 
 For legacy numbered work:
 

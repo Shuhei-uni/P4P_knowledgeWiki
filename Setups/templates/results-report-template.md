@@ -1,10 +1,12 @@
-# Results Report — Setup <ID>
+# Results Report — <campaign / setup / stage>
 
+> **Filing rule:** for new full-geometry work, save this report under `Setups/reports/full-geometry/<physics>/<campaign>/`. Do not save completed-run reports beside `setup.md` under `Setups/full-geometry/...`.
+>
 > Default behavior: this report presents the evidence clearly and leaves scientific interpretation to the user unless an interpretation framework was supplied in advance or the user explicitly asks the agent to interpret.
 
 ## 1. What this run was trying to investigate
 
-- Setup definition: `<link>`
+- Setup/stage definition: `<link to Setups/full-geometry/... or legacy setup>`
 - Investigation mode: `<exploratory / diagnostic / sensitivity / verification / validation / ...>`
 - Primary question: `<copied or faithfully summarized from setup>`
 - Controlled change(s): `<what differed from reference>`
@@ -84,15 +86,7 @@ Avoid causal claims, model selection, operating-point selection, `keep/reject`, 
 
 **Interpretation status:** `pending user direction` by default.
 
-State the decisions that the evidence could inform, then ask focused questions rather than choosing for the user. Examples:
-
-- Should this be treated only as an exploratory signal, or do you want to compare it against a specific acceptance/validation criterion?
-- Which comparison should control the interpretation: the parent case, another pressure/model, literature/experimental data, or an engineering target?
-- Which metric matters most for the decision?
-- Do you want the agent to propose possible explanations, or keep the report evidence-only?
-- Is another analysis needed before interpreting the run?
-
-Do not ask generic questions when the setup already contains the user's interpretation criteria. In that case, evaluate only those criteria and leave broader meaning open.
+State the decisions that the evidence could inform, then ask focused questions rather than choosing for the user. Do not ask generic questions when the setup already contains the user's interpretation criteria.
 
 ## 8. Interpretation — optional, only after direction
 

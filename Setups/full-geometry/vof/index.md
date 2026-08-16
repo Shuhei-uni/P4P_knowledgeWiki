@@ -1,9 +1,11 @@
-# Full Geometry — VOF
+# Full Geometry — VOF Setup Campaigns
 
-This area owns VOF/free-surface model-form work on the current full geometry.
+This area owns **VOF setup definitions and plans** on the current full geometry.
 
-## Current branch
+Numerical reports are kept separately under [Setups/reports/full-geometry/vof](../../reports/full-geometry/vof/index.md).
+
+## Campaigns
 
 - [Transient liquid-outlet model-form branch](transient-liquid-outlet/index.md)
 
-VOF work should remain separate from Mixture numerical qualification. A change from Mixture to VOF is a model-form change, not merely another outlet sensitivity point.
+Do not place VOF result reports in this setup tree.

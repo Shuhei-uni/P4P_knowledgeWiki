@@ -1,32 +1,40 @@
-# Legacy Numbered Setup Reports
+# Setup Reports
 
-This directory is the compatibility report store for the historical numbered setup system. It remains in place so existing setup/report links continue to resolve.
+`Setups/reports/` is the dedicated home for **numerical result reports, execution evidence, post-analysis reports, and interpretation sections based on completed simulations**.
 
-**New Full-geomV2 campaigns should not create `Setups/reports/<new-id>/`.** Their results should live with the scientific campaign under `Setups/full-geometry/<physics>/<campaign>/`.
+Setup definitions and plans are kept separately under the corresponding setup tree.
 
-## Full-geometry compatibility reports currently stored here
+## Current full-geometry reports
 
-- [02c — unprimed brine-outlet pressure sensitivity early diagnostics](02c/results.md)
-- [02c — future brine-pressure point notes](02c/future-runs.md)
-- [02e — Stage-1 outlet-family results](02e/stage1-results-20260816.md)
-- [02e — Stage-1 execution record](02e/stage1-execution-20260816.md)
+New `Full-geomV2` reports use the mirrored geometry-first hierarchy:
 
-Canonical semantic view: [Full-geometry Mixture steady liquid-outlet campaign](../full-geometry/mixture/steady-liquid-outlet/index.md).
+- [Full-geometry reports](full-geometry/index.md)
+  - [Mixture reports](full-geometry/mixture/index.md)
+  - [VOF reports](full-geometry/vof/index.md)
 
-## Legacy/reference reports
+The path rule is:
 
-- [08 family — inlet-loading comparison](08/velocity-family-comparison.md)
-- [04 — mixed wet-half actual-area results](04/results.md)
-- [07 — pure-phase split actual-area results](07/results.md)
-- [08b — Purnanto parity split-inlet results](08b/results.md)
-- [08b — mesh-convergence checkpoint](08b/mesh-convergence-checkpoint-20260803.md)
-- [08c — inlet-loading sensitivity results](08c/results.md)
-- [09a — deterministic DPM carryover results](09a/results.md)
-- [09b — stochastic DPM sensitivity results](09b/results.md)
-- [09c — two-way coupling results](09c/results.md)
-- [09cV2 — Skoog partition/injection-control results](09cV2/results.md)
-- [09cV3 — fine-mist allocation results](09cV3/results.md)
-- [10a — EWF/splash-sensitive results](10a/results.md)
-- [010V2 family](010V2/results.md)
+```text
+setup:  Setups/full-geometry/<physics>/<campaign>/
+report: Setups/reports/full-geometry/<physics>/<campaign>/
+```
 
-For the complete historical numbered inventory, use [Purnanto/reference programme](../purnanto-reference/index.md) and the individual report directories retained here.
+The campaign path should match exactly between the setup side and report side.
+
+## Historical numbered/reference reports
+
+- [Purnanto/reference report navigation](purnanto-reference/index.md)
+
+Existing numbered folders such as `02c/`, `02e/`, `08b/`, `09c/`, and `010V2/` remain directly under `Setups/reports/` for compatibility with established links. Do not use a new numbered folder for a new full-geometry campaign.
+
+## Full-geometry compatibility reports still in numbered locations
+
+The steady full-geometry campaign predates the new mirrored report structure. Its existing reports remain in `02c/` and `02e/` to avoid breaking links, but they are canonically navigated through:
+
+- [Full-geometry Mixture steady liquid-outlet reports](full-geometry/mixture/steady-liquid-outlet/index.md)
+
+New reports for that campaign should use the mirrored full-geometry report folder.
+
+## Report-only rule
+
+Keep setup plans out of this tree. A result report should link back to the exact setup/stage plan that defined the run.

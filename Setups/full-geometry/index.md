@@ -1,13 +1,13 @@
-# Full-Geometry Programme
+# Full-Geometry Setup Programme
 
-This is the canonical setup area for the current production separator geometry (`Full-geomV2` and verified descendants).
+This is the canonical **setup-definition tree** for the current production separator geometry (`Full-geomV2` and verified descendants).
 
-The purpose of this split is to prevent the new production-geometry work from being treated as one more numbered child of the older Purnanto/reference development sequence.
+Numerical result reports do **not** live in this tree. The mirrored report tree is [Setups/reports/full-geometry](../reports/full-geometry/index.md).
 
 ## Current programme map
 
 ```text
-Full geometry
+Full-geometry setups
 ├── Mixture
 │   ├── steady liquid-outlet characterization
 │   └── transient liquid-outlet characterization   ← next major campaign
@@ -15,28 +15,49 @@ Full geometry
     └── transient liquid-outlet model-form branch
 ```
 
-- [Mixture](mixture/index.md)
-- [VOF](vof/index.md)
+- [Mixture setup campaigns](mixture/index.md)
+- [VOF setup campaigns](vof/index.md)
+- [Full-geometry result reports](../reports/full-geometry/index.md)
 
 ## Authoring rule
 
-New work should be organized as:
+New setup work is organized as:
 
 ```text
-geometry → physics family → scientific campaign → setup/evidence
+geometry → physics family → scientific campaign → setup/stage plans
 ```
 
-rather than:
+The matching numerical evidence is organized separately as:
 
 ```text
-next number → next number → global reports folder
+reports → geometry → physics family → scientific campaign → result reports
 ```
 
 A campaign may use a stable machine/reference ID such as `FG-MIX-T01`, but the descriptive campaign path is the primary human-facing identity.
 
+## What belongs here
+
+Keep here:
+
+- `index.md` campaign navigation;
+- `setup.md` experiment/build contract;
+- stage plans;
+- initialization plans;
+- numerical-qualification plans;
+- planned case matrices and monitor requirements.
+
+Do not keep here:
+
+- result reports;
+- execution-result summaries;
+- post-analysis evidence packets;
+- interpretation reports based on completed simulations.
+
+Those belong in the mirrored [full-geometry reports tree](../reports/full-geometry/index.md).
+
 ## Relationship to the numbered corpus
 
-The current steady Mixture work was originally recorded as numbered Setup `02c` and `02e`. Those source files and their report folders remain at their historical paths for link stability, but their **scientific ownership is now this full-geometry programme**.
+The current steady Mixture work was originally recorded as numbered Setup `02c` and `02e`. Those source setup files and their old numbered report folders remain at their historical paths for link stability, but their scientific ownership is now the full-geometry programme.
 
 The older numbered corpus remains accessible through [Purnanto/reference programme](../purnanto-reference/index.md). A legacy setup can be a methodological predecessor without being a geometry parent. Do not claim case/mesh inheritance unless the artifact lineage is explicitly verified.
 
@@ -47,5 +68,3 @@ Before adding a campaign here, record the exact geometry/mesh evidence. A name c
 - exact mesh filename and readback;
 - exact parent `.cas.h5` with verified mesh identity;
 - explicit geometry revision/provenance record.
-
-If that evidence is missing, keep the setup in the legacy/reference programme until the geometry is resolved.
