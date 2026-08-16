@@ -10,9 +10,11 @@ Numerical result reports do **not** live in this tree. The mirrored report tree 
 Full-geometry setups
 ├── Mixture
 │   ├── steady liquid-outlet characterization
-│   └── transient liquid-outlet characterization   ← next major campaign
+│   │   ├── 02c unprimed pressure sensitivity
+│   │   └── 02e Y010 outlet-family characterization
+│   └── transient liquid-outlet characterization
 └── VOF
-    └── transient liquid-outlet model-form branch
+    └── transient liquid-outlet branch (02d plan archived)
 ```
 
 - [Mixture setup campaigns](mixture/index.md)
@@ -35,36 +37,12 @@ reports → geometry → physics family → scientific campaign → result repor
 
 A campaign may use a stable machine/reference ID such as `FG-MIX-T01`, but the descriptive campaign path is the primary human-facing identity.
 
-## What belongs here
-
-Keep here:
-
-- `index.md` campaign navigation;
-- `setup.md` experiment/build contract;
-- stage plans;
-- initialization plans;
-- numerical-qualification plans;
-- planned case matrices and monitor requirements.
-
-Do not keep here:
-
-- result reports;
-- execution-result summaries;
-- post-analysis evidence packets;
-- interpretation reports based on completed simulations.
-
-Those belong in the mirrored [full-geometry reports tree](../reports/full-geometry/index.md).
-
 ## Relationship to the numbered corpus
 
-The current steady Mixture work was originally recorded as numbered Setup `02c` and `02e`. Those source setup files and their old numbered report folders remain at their historical paths for link stability, but their scientific ownership is now the full-geometry programme.
+The steady Mixture records originally known as `02c` and `02e` now live canonically under [Mixture steady liquid outlet](mixture/steady-liquid-outlet/index.md). Their pre-migration detailed records are retained as compatibility snapshots, while the old `Setups/active/02c` and `02e` paths are redirect stubs only.
 
-The older numbered corpus remains accessible through [Purnanto/reference programme](../purnanto-reference/index.md). A legacy setup can be a methodological predecessor without being a geometry parent. Do not claim case/mesh inheritance unless the artifact lineage is explicitly verified.
+The older numbered corpus remains accessible through [Purnanto/reference programme](../purnanto-reference/index.md). A legacy setup can be a methodological predecessor without being a geometry parent. Do not claim case/mesh inheritance unless artifact lineage is explicitly verified.
 
 ## Geometry identity gate
 
-Before adding a campaign here, record the exact geometry/mesh evidence. A name containing “full geometry” is not sufficient. At minimum capture one of:
-
-- exact mesh filename and readback;
-- exact parent `.cas.h5` with verified mesh identity;
-- explicit geometry revision/provenance record.
+Before adding a campaign here, record the exact geometry/mesh evidence. A name containing “full geometry” is not sufficient. At minimum capture an exact mesh filename/readback, an exact parent `.cas.h5` with verified mesh identity, or an explicit geometry revision/provenance record.

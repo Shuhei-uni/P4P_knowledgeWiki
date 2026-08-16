@@ -1,68 +1,40 @@
 # Setups
 
-`Setups/` stores concrete Fluent experiment definitions and their setup-linked evidence, but **setup definitions and result reports are intentionally kept in separate trees**.
+`Setups/` stores concrete Fluent experiment definitions and their setup-linked evidence, with setup definitions and result reports intentionally kept in separate trees.
 
-The primary navigation is geometry-first because the current `Full-geomV2` programme is a different experimental generation from the older numbered Purnanto/reference work.
+The primary navigation is geometry-first because the current `Full-geomV2` programme is a different experimental generation from the older Purnanto/reference work.
 
-## Primary programmes
+## Primary programme entry points
 
-- [Full-geometry setup definitions](full-geometry/index.md) — canonical home for `Full-geomV2` setup plans, build contracts, stage plans, and controlled experiment definitions.
-- [Setup reports](reports/index.md) — canonical home for numerical result reports and evidence packets.
-- [Purnanto/reference programme](purnanto-reference/index.md) — navigation layer for the historical numbered/reference setup corpus and its DPM/EWF development branches.
+- [Full-geometry setup definitions](full-geometry/index.md)
+- [Purnanto/reference programme](purnanto-reference/index.md)
+- [Setup reports](reports/index.md)
+- [Archived setup plans](archived/index.md)
 
-## Separation rule
+## Full-geometry separation rule
 
-For new full-geometry work, the setup and report trees mirror one another:
+For current production work, mirror setup and result ownership:
 
 ```text
 Setups/full-geometry/<physics>/<campaign>/
 Setups/reports/full-geometry/<physics>/<campaign>/
 ```
 
-Use the first path for **what is intended to be built/run** and the second for **what actually happened**.
+Use the first path for what is intended to be built/run and the second for what actually happened.
 
-Do not place `results.md`, execution-result reports, post-analysis reports, or interpretation reports inside `Setups/full-geometry/...`.
+## Compatibility paths
 
-Do not place setup plans, stage plans, or Fluent build contracts inside `Setups/reports/...`.
+- [active](active/index.md) now contains redirect stubs only for records that were moved to programme-owned locations;
+- [future](future/index.md) contains redirect stubs only — all previously planned setups there were archived on 2026-08-17;
+- [past](past/) retains the historical numbered setup corpus;
+- [compatibility snapshots](compatibility-snapshots/index.md) preserve detailed pre-migration records whose relative links depended on their old directory depth.
 
-Example:
+Do not create new setup definitions in `Setups/active/` or `Setups/future/`.
 
-```text
-Setups/
-├── full-geometry/
-│   └── mixture/
-│       └── transient-liquid-outlet/
-│           ├── index.md
-│           ├── setup.md
-│           ├── stage-03-initialization-comparison.md
-│           └── stage-06-six-case-screen.md
-└── reports/
-    └── full-geometry/
-        └── mixture/
-            └── transient-liquid-outlet/
-                ├── index.md
-                ├── stage-03-initialization-comparison-results.md
-                └── stage-06-six-case-screen-results.md
-```
+## Historical ordering
 
-## Shared resources
+- [Setup order dictionary](order-dictionary.md) remains the historical numbered-lineage reference. It is not the naming authority for new full-geometry campaigns.
 
-- [Setup order dictionary](order-dictionary.md) — historical numbered-lineage reference. Continue using it when editing legacy numbered records; it is **not** the naming authority for new full-geometry campaigns.
-- [Templates](templates/) — flexible setup/result templates shared by both programmes.
+## Geometry identity rule
 
-## Legacy compatibility views
-
-The following directories are retained because many existing Markdown files cross-link to them:
-
-- [active](active/index.md)
-- [future](future/index.md)
-- [past](past/)
-- numbered report folders directly under [reports](reports/index.md)
-
-These paths are a compatibility layer for the numbered corpus. Do not create new `Full-geomV2` campaigns there.
-
-## Geometry-lineage rule
-
-Do not infer geometry from a setup number or a title such as “full geometry.” A historical file can describe a full-domain vessel while still using the older `purnanto` geometry label. Geometry classification must come from explicit case/mesh provenance.
-
-For the current programme, `Full-geomV2-231kcells.msh.h5` is an explicit full-geometry production-mesh identity used by the active Mixture liquid-outlet work.
+Do not infer geometry from a setup number or a phrase such as “full geometry.” Require explicit mesh/case provenance. `Full-geomV2-231kcells.msh.h5` is an explicit full-geometry production-mesh identity used by the 02e steady Mixture work.

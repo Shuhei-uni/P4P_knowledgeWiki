@@ -1,16 +1,14 @@
-# Legacy Future Setup Compatibility View
+# Future Setup Compatibility View
 
-New Full-geomV2 planning belongs under [Setups/full-geometry](../full-geometry/index.md). This directory remains for the numbered/reference programme and compatibility links.
+There are currently **no live setup definitions in this directory**.
 
-## Legacy/reference future plans
+All setup plans that were previously filed here were archived on 2026-08-17:
 
-- [10 — wall-film, re-entrainment, and DPM interaction plan](10-wall-film-reentrainment-and-dpm-interaction-plan.md)
-- [11 — combined wall-film and DPM physics plan](11-combined-wallfilm-dpm-plan.md)
-- [12 — carrier-field mesh-convergence plan](12-carrier-mesh-convergence-plan.md)
+- [02d](../archived/02d-transient-vof-brine-outlet-model-form-sensitivity.md)
+- [10](../archived/10-wall-film-reentrainment-and-dpm-interaction-plan.md)
+- [11](../archived/11-combined-wallfilm-dpm-plan.md)
+- [12](../archived/12-carrier-mesh-convergence-plan.md)
 
-## Full-geometry compatibility record still stored here
+The same filenames remaining under `Setups/future/` are compatibility redirects only, so older wiki links continue to resolve. They are not future setup records.
 
-- [02d — transient VOF brine-outlet model-form sensitivity](02d-transient-vof-brine-outlet-model-form-sensitivity.md)
-  - canonical semantic entry point: [Full-geometry VOF transient liquid-outlet branch](../full-geometry/vof/transient-liquid-outlet/index.md)
-
-The new Mixture transient campaign is authored natively at [full-geometry/mixture/transient-liquid-outlet](../full-geometry/mixture/transient-liquid-outlet/index.md).
+New work should be created under the appropriate geometry/physics programme only when it is genuinely planned for execution.

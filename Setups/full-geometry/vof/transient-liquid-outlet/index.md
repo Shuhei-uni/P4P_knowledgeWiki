@@ -1,21 +1,19 @@
-# Full Geometry — VOF Transient Liquid-Outlet Setup Branch
+# Full Geometry — VOF Transient Liquid-Outlet Branch
 
-The existing planned VOF setup remains stored at its historical compatibility path:
+There is currently no live VOF setup in this branch.
 
-- [`02d` — transient VOF brine-outlet model-form sensitivity](../../../future/02d-transient-vof-brine-outlet-model-form-sensitivity.md)
+The earlier planned `02d` model-form sensitivity was archived on 2026-08-17:
 
-This page is the canonical setup-side entry point for that branch.
+- [02d archived setup plan](../../../archived/02d-transient-vof-brine-outlet-model-form-sensitivity.md)
 
-## Role
+## Historical role
 
-Use VOF to test whether explicitly resolved bulk-liquid/free-surface behavior changes the brine-outlet result relative to Mixture.
+`02d` proposed using VOF to test whether explicitly resolved bulk-liquid/free-surface behavior changes the brine-outlet result relative to Mixture. It also identified initialization, timestep/interface Courant behavior, and local interface resolution as qualification questions before any production comparison.
 
-Before production comparisons, VOF requires its own qualification of initialization, timestep/interface Courant behavior, and local interface resolution. Do not treat a VOF result as another point in the Mixture outlet-family screen.
+Archiving `02d` does not reject VOF as a model. It only removes that specific planned setup from the active/future queue. Any revived VOF study should be authored natively in this full-geometry branch with a current intent contract.
 
 ## Results
 
-VOF numerical evidence belongs in the separate mirrored report folder:
+Any VOF numerical evidence belongs in the mirrored report folder:
 
 - [VOF transient liquid-outlet reports](../../../reports/full-geometry/vof/transient-liquid-outlet/index.md)
-
-Future VOF setup/stage plans belong here. Future VOF result reports do not.
