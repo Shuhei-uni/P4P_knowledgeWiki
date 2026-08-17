@@ -1,8 +1,9 @@
-# Setup 03 — Mixture Steady-Solution Qualification
+# Setup 03 — Unpatched Steady Mixture Baseline Qualification
 
-> **Lifecycle:** `draft`  
-> **Execution status:** `DO NOT RUN — detail audit still open`  
-> **Purpose of this draft:** define the next steady Mixture experiment before execution details such as inlet/outlet turbulence specification, wall treatment, relaxation/Courant controls, and exact equation-control procedure are frozen.
+> **Lifecycle:** `draft — substantially specified`  
+> **Execution status:** `DO NOT RUN until final readback/preflight is complete`  
+> **Primary objective:** obtain a reproducible steady full-geometry Mixture solution from Hybrid Initialization with **no liquid patching** and no staged equation activation.  
+> **Interpretation:** numerical/physical baseline qualification; not yet a separator-efficiency validation.
 
 ## Canonical metadata
 
@@ -12,687 +13,700 @@
 | Physics family | `mixture` |
 | Campaign | `steady-liquid-outlet` |
 | Setup ID | `03` |
-| Lifecycle | `draft` |
-| Investigation mode | numerical qualification / steady-branch continuation |
-| Parent | [02e — Y010 outlet-boundary characterization](02e-mixture-y010-brine-outlet-boundary-characterization.md) |
-| Primary outlet family | Pressure Outlet |
-| Initial brine pressure | `1.160 MPa gauge` |
-| Initial liquid condition | Y010 lower-region liquid patch |
-| Primary objective | obtain one genuinely steady full-Mixture solution before returning to transient work |
-| Primary decision variables | staged equation activation, pressure-velocity coupling, conservative startup numerics, then brine-pressure continuation |
-| Evidence-use label | numerical-method qualification first; physical interpretation only after a steady branch is established |
-
----
-
-## 1. Why this setup exists
-
-The previous full-geometry Mixture work established that brine-outlet pressure strongly affects phase routing, but it did **not** produce a convincing steady liquid-inventory state.
-
-The key distinction is:
-
-- a case can complete `500` or `1000` iterations without an FPE;
-- yet still discharge several times more liquid than enters the separator;
-- therefore numerical survivability alone is not a steady-solution criterion.
-
-The transient branch is paused for this experiment. Before asking transient Mixture to resolve liquid accumulation/drainage, this setup attempts to establish at least one genuinely steady Mixture state using a deliberately staged solution procedure.
-
-The experiment asks:
-
-> **Can the existing full-geometry Mixture model be brought to a steady state in which phase fluxes and liquid inventory are no longer systematically drifting, when the cyclone flow field and multiphase equations are introduced progressively rather than solved aggressively from the first iteration?**
-
-If such a state can be obtained, it becomes the numerical anchor for a controlled brine-pressure continuation toward stronger retained-liquid behaviour.
-
----
-
-## 2. Relationship to 02c and 02e
-
-### 2.1 What is retained from 02e
-
-The first qualification case intentionally preserves the `02e` Y010 Pressure Outlet physical configuration as far as possible:
-
-- same production mesh;
-- same water-vapour / water-liquid material pair;
-- same Mixture model;
-- same RNG `k-epsilon` turbulence family;
-- same gravity;
-- same split velocity inlets;
-- same steam outlet;
-- same Y010 lower-region initialization;
-- same Pressure Outlet brine boundary family;
-- same liquid-dominant brine backflow composition;
-- DPM off;
-- EWF off.
-
-The intended experiment is therefore **not another broad physical-parameter screen**. The first task is to change the *solution strategy* while holding the physical problem fixed.
-
-### 2.2 Why `1.160 MPa` is the initial anchor
-
-`02e-PO-P1` at:
-
-\[
-P_{brine}=1.160\ \mathrm{MPa\ gauge}
-\]
-
-completed the requested 500 steady iterations, whereas higher-pressure pressure-outlet pilots encountered numerical failure.
-
-This does **not** make `1.160 MPa` a physically correct operating pressure. The case drained the initialized liquid too aggressively. It is selected only because it is the most conservative known pressure-outlet anchor from which to attempt a genuine steady convergence procedure.
-
----
-
-## 3. Frozen physical model for the first qualification case
-
-Use the production mesh:
-
-```text
-Full-geomV2-231kcells.msh.h5
-```
-
-Known production-mesh state:
-
-```text
-Total cells = 231,376
-Fluid zones = 1 combined fluid cell zone
-```
-
-Preserve the following unless the detail audit below explicitly resolves a currently missing field.
-
-| Category | Required state |
-|---|---|
-| Solver | pressure-based, steady |
-| Multiphase | Mixture |
-| Turbulence | RNG `k-epsilon` |
-| Gravity | `[0, -9.81, 0] m/s²` |
-| Operating pressure | `0 Pa` |
-| Energy | preserve current verified production/02e state; **exact state to be frozen before execution** |
+| Parent evidence | `02c` unpatched pressure-sensitivity + `02e` boundary-characterization results |
+| Geometric reference lineage | Purnanto, Zarrouk & Cater (2013), Spiral-Inlet Design, Table 3 / Figure 8 |
+| Inlet representation | split rectangular spiral inlet face with two pure-phase velocity-inlet zones |
+| Initialization | Hybrid Initialization only; **no Y010/Y030/other phase patch** |
+| Brine boundary family | Pressure Outlet |
+| Baseline brine pressure | `1.1375 MPa gauge` |
+| Steam outlet pressure | `1.120 MPa gauge` |
+| Inlet reference / initial gauge pressure | `1.140 MPa` |
+| Baseline inlet speed | `27.118 m/s` on both split inlet zones |
+| Primary decision question | can the explicitly specified full Mixture model settle to a steady solution without an artificial initial liquid pool? |
 | DPM | off |
 | EWF | off |
-| Liquid inlet | Velocity Inlet, `27.118 m/s` |
-| Steam inlet | Velocity Inlet, `27.118 m/s` |
-| Inlet reference / initial gauge pressure | `1.140 MPa` |
-| Steam outlet | Pressure Outlet, `1.120 MPa gauge` |
-| Brine outlet | Pressure Outlet, initially `1.160 MPa gauge` |
-| Steam-outlet liquid backflow VF | `0.0` |
-| Brine-outlet liquid backflow VF | `1.0` |
-| Brine-outlet vapour backflow VF | `0.0` |
-| Liquid density | `881.77 kg/m³` |
-| Materials | preserve verified water-vapour / water-liquid production pair |
-
-### 3.1 Fields that are intentionally not yet frozen in this draft
-
-The following must be audited against the actual Fluent case/setup lineage before this document becomes executable:
-
-- turbulence specification method and values at **both velocity inlets**;
-- turbulence backflow specification and values at **steam and brine pressure outlets**;
-- phase-specific inlet volume fractions / phase assignment details;
-- wall roughness and turbulence wall treatment;
-- exact material viscosity and vapour density treatment;
-- Mixture slip / drag-law settings;
-- volume-fraction formulation details;
-- exact spatial discretization schemes;
-- exact pressure-velocity coupling settings;
-- relaxation factors and/or Coupled Courant number;
-- gradient scheme;
-- initialization settings beyond the Y010 patch;
-- residual normalization and convergence-criteria state;
-- exact Fluent controls used to disable/enable Volume Fraction and Slip Velocity equations.
-
-Until these are resolved, this setup remains `DO NOT RUN`.
 
 ---
 
-## 4. Y010 initialization
+## 1. Purpose and change from the previous draft
 
-Use the same approved Y010 definition as 02e.
+The purpose of Setup 03 is now deliberately simple:
 
-### 4.1 Initialization sequence
+> **Build the best explicitly specified steady Mixture representation of the current full-geometry separator, initialize it normally, do not patch liquid anywhere, and determine whether a genuine steady solution exists.**
+
+The earlier draft proposed using a Y010 liquid patch followed by staged activation of Volume Fraction and Slip Velocity equations. That is no longer the baseline experiment.
+
+For this setup:
+
+- no Y010 patch is applied;
+- no liquid level is prescribed inside the vessel;
+- no Mixture equation is temporarily disabled;
+- no first-order startup stage is used in the baseline;
+- no Coupled pressure-velocity method is introduced in the baseline;
+- the solver starts with the complete intended Mixture model active;
+- the numerical method follows the simple Purnanto-style steady formulation as closely as practical on the current full geometry.
+
+If this baseline fails, more intrusive numerical stabilization methods can be tested later as controlled fallback experiments. They are not part of the baseline definition.
+
+---
+
+## 2. Geometry context
+
+### 2.1 Spiral-Inlet reference design
+
+The current full-geometry separator is geometrically descended from the **Spiral-Inlet Design** described by Purnanto, Zarrouk & Cater (2013). Table 3 gives the following reference dimensions:
+
+| Parameter | Spiral-Inlet reference |
+|---|---:|
+| Vessel diameter `D` | `2.134 m` |
+| Inlet dimension `De` | `0.724 m` |
+| Steam-tube diameter `Db` | `0.508 m` |
+| `alpha` | `0.200 m` |
+| `beta` | `2.320 m` |
+| `Z` | `4.195 m` |
+| `LT` | `4.929 m` |
+| `LB` | `3.579 m` |
+| Two-phase inlet area `Ao` | `0.5242 m²` |
+
+The paper describes a rectangular 90-degree spiral inlet intended to provide a smooth transition from approximately linear inlet motion into vessel rotation. The spiral geometry is therefore important to the development of the cyclone velocity field.
+
+These values are **design-lineage context**, not permission to silently overwrite the current production CAD/mesh. The production mesh remains the execution geometry. Before execution, the agent must report the actual mesh face areas and key geometric dimensions that can be measured directly and identify any material differences from the reference design.
+
+### 2.2 Split-inlet representation used in this project
+
+Unlike the Purnanto paper's mist-form two-phase inlet, the present carrier-flow model uses a **split inlet face** consisting of two independent pure-phase velocity-inlet zones:
+
+- `liquidinlet`: pure water-liquid;
+- `steaminlet`: pure water-vapour.
+
+Both inlet zones use the same normal velocity:
+
+\[
+U_{in}=27.118\ \mathrm{m/s}.
+\]
+
+Using the Purnanto 1600-kJ/kg reference phase flow rates and the selected constant densities,
+
+\[
+\dot m_l=116.92\ \mathrm{kg/s},\qquad
+\dot m_v=80.69\ \mathrm{kg/s},
+\]
+
+implies the required split areas
+
+\[
+A_l=\frac{116.92}{881.77\times27.118}\approx0.004890\ \mathrm{m^2},
+\]
+
+\[
+A_v=\frac{80.69}{5.73\times27.118}\approx0.519287\ \mathrm{m^2}.
+\]
+
+Therefore
+
+\[
+A_l+A_v\approx0.524177\ \mathrm{m^2},
+\]
+
+which is effectively the `0.5242 m²` Spiral-Inlet area reported in Table 3.
+
+This is an important modelling statement: the split is not intended to represent two separate upstream pipes. It is an **idealized phase segregation across the single spiral inlet cross-section** while preserving the reference total area, phase mass flows, and common inlet velocity.
+
+### 2.3 Consequence of the idealized split
+
+The split inlet deliberately removes upstream phase mixing from this baseline. It therefore represents a more perfectly pre-separated inlet than a real geothermal two-phase feed.
+
+Expected consequence:
+
+- carrier-phase separation may be cleaner than in reality;
+- later separator-efficiency predictions should therefore not be interpreted as final real-plant efficiency;
+- future DPM work will reintroduce dispersed droplets/mist into the steam-side inlet when the continuous solution is sufficiently trustworthy.
+
+Setup 03 is concerned with obtaining and understanding the steady continuous-phase solution first.
+
+---
+
+## 3. Fluid properties and thermodynamic assumptions
+
+Use the Purnanto 1600-kJ/kg, `11.2 bara` reference properties unless a later project-level thermodynamic revision explicitly supersedes them.
+
+| Property | Water vapour | Water liquid |
+|---|---:|---:|
+| Density | `5.73 kg/m³` | `881.77 kg/m³` |
+| Dynamic viscosity | `15.188e-6 Pa·s` | `145.96e-6 Pa·s` |
+
+Required assumptions:
+
+- incompressible phase properties;
+- constant density;
+- constant viscosity;
+- isothermal separation;
+- Energy equation **off**;
+- no flashing / evaporation / condensation;
+- gravity `[0, -9.81, 0] m/s²`;
+- operating pressure `0 Pa`;
+- all entered pressure values are therefore gauge values relative to zero operating pressure and numerically correspond to the absolute-pressure level used by the project convention.
+
+The Purnanto paper lists a surface tension of `0.0411 N/m` as a fluid property, but **surface-tension force modelling is intentionally disabled in Setup 03**.
+
+---
+
+## 4. Solver and multiphase model
+
+### 4.1 General solver
+
+| Setting | Required state |
+|---|---|
+| Solver type | Pressure-Based |
+| Time | Steady |
+| Velocity formulation | Absolute |
+| Gravity | enabled, `[0, -9.81, 0] m/s²` |
+| Operating pressure | `0 Pa` |
+| Energy | off |
+
+### 4.2 Mixture model
+
+| Setting | Required state |
+|---|---|
+| Multiphase model | Mixture |
+| Number of phases | `2` |
+| Primary phase | water-vapour |
+| Secondary phase | water-liquid |
+| Secondary-phase diameter | **constant `1.0e-5 m`** |
+| Slip velocity | enabled |
+| Slip formulation | **Manninen et al.** |
+| Flow-regime modelling | off |
+| Surface-tension force modelling | off |
+| Surface-tension coefficient | not used / unset |
+| Mass transfer | none |
+
+The `1e-5 m` secondary-phase diameter is not an arbitrary Fluent default in this setup. It is explicitly adopted because the Purnanto reference study defines the dispersed liquid phase with a uniform average diameter of `10^-5 m` for the Mixture carrier-flow model.
+
+This value should be revisited in a later model-form sensitivity if the Mixture model is used to make quantitative claims about phase slip or bulk-liquid behaviour. It is nevertheless the most defensible current baseline value because it has direct literature lineage.
+
+---
+
+## 5. Turbulence model
+
+Use:
 
 ```text
-load/rebuild frozen production Mixture state
+RNG k-epsilon
+Near-wall treatment = Standard Wall Functions
+```
+
+The Purnanto study selected RNG `k-epsilon` as a computationally economical first model for the highly turbulent swirling separator flow.
+
+### 5.1 RNG options
+
+Use the **basic/default RNG configuration**, explicitly avoiding additional low-Re or strongly-swirl tuning for the baseline:
+
+| RNG option | Required state |
+|---|---|
+| Differential Viscosity Model | **off** |
+| Swirl Dominated Flow option | **off** |
+| Default RNG swirl modification | retained automatically |
+| Default mild/moderate swirl constant | Fluent default (`0.07`) |
+| Curvature correction | off |
+| Kato-Launder production | off |
+| Production limiter | off unless Fluent requires its model default; read back and record |
+| Turbulence damping | off |
+
+Important distinction: disabling **Swirl Dominated Flow** does not remove RNG's normal swirl response. Fluent applies the RNG swirl modification by default in 3-D flows; the extra option is used to change the model for strongly swirl-dominated flow. Setup 03 does not add that extra tuning.
+
+### 5.2 Wall treatment
+
+All stationary solid walls:
+
+- no slip;
+- Standard Wall Functions;
+- roughness height `0 m`;
+- smooth-wall assumption;
+- if Fluent exposes a roughness constant despite zero roughness height, retain/read back its default but it has no physical effect while the roughness height is zero.
+
+---
+
+## 6. Turbulence boundary specification
+
+Use **Intensity and Viscosity Ratio** at every flow boundary so the setup is consistent and explicit.
+
+The `08b`/split-inlet archive is useful for the turbulence **intensity** values, but it contains a known historical boundary-setting mismatch: `0.72061` appears in a live case as a viscosity ratio even though the reconstruction audit identifies it as the intended hydraulic diameter in metres. **Do not use `0.72061` as a turbulent viscosity ratio.**
+
+### 6.1 Baseline turbulence values
+
+| Boundary | Specification | Intensity | Viscosity ratio | Basis |
+|---|---|---:|---:|---|
+| `liquidinlet` | Intensity + Viscosity Ratio | `2.11%` | `10` | retain 08b inlet intensity; moderate explicit internal-flow viscosity-ratio assumption |
+| `steaminlet` | Intensity + Viscosity Ratio | `2.11%` | `10` | retain 08b inlet intensity; replace known 08b field mismatch with explicit value |
+| `steamoutlet` backflow | Intensity + Viscosity Ratio | `2.1525%` | `10` | retain 08b steam-outlet backflow intensity; explicit moderate ratio |
+| `brineoutlet` backflow | Intensity + Viscosity Ratio | `2.11%` | `10` | liquid-dominant reverse-flow assumption, aligned with liquid-inlet intensity |
+
+The viscosity ratio `10` is a documented modelling assumption, not claimed measured data. It is selected because the project has no measured turbulence length scale or dissipation rate at these boundaries, the split inlet is itself an idealization rather than a developed upstream pipe, and a single moderate explicit value is preferable to inheriting inconsistent Fluent defaults.
+
+If later experimental/upstream-pipe information becomes available, turbulence boundary values should be recalculated rather than tuned for convergence.
+
+---
+
+## 7. Boundary conditions
+
+### 7.1 Liquid inlet — `liquidinlet`
+
+| Field | Value |
+|---|---|
+| Type | Velocity Inlet |
+| Velocity specification | Magnitude, Normal to Boundary |
+| Reference frame | Absolute |
+| Velocity magnitude | `27.118 m/s` |
+| Initial gauge pressure | `1.140 MPa` |
+| Liquid volume fraction | `1.0` |
+| Vapour volume fraction | `0.0` |
+| Turbulence | Intensity and Viscosity Ratio |
+| Turbulent intensity | `2.11%` |
+| Turbulent viscosity ratio | `10` |
+
+Expected reference mass flow from the intended split area:
+
+\[
+\dot m_l\approx116.92\ \mathrm{kg/s}.
+\]
+
+The actual mesh-area-based mass flow must be reported before the run; do not silently force the reference mass flow if the actual split area differs.
+
+### 7.2 Steam inlet — `steaminlet`
+
+| Field | Value |
+|---|---|
+| Type | Velocity Inlet |
+| Velocity specification | Magnitude, Normal to Boundary |
+| Reference frame | Absolute |
+| Velocity magnitude | `27.118 m/s` |
+| Initial gauge pressure | `1.140 MPa` |
+| Liquid volume fraction | `0.0` |
+| Vapour volume fraction | `1.0` |
+| Turbulence | Intensity and Viscosity Ratio |
+| Turbulent intensity | `2.11%` |
+| Turbulent viscosity ratio | `10` |
+
+Expected reference mass flow:
+
+\[
+\dot m_v\approx80.69\ \mathrm{kg/s}.
+\]
+
+### 7.3 Steam outlet — `steamoutlet`
+
+| Field | Value |
+|---|---|
+| Type | Pressure Outlet |
+| Gauge pressure | `1.120 MPa` |
+| Backflow direction | **Normal to Boundary** |
+| Backflow pressure specification | **Total Pressure** |
+| Backflow liquid volume fraction | `0.0` |
+| Backflow vapour volume fraction | `1.0` |
+| Backflow turbulence | Intensity and Viscosity Ratio |
+| Backflow turbulent intensity | `2.1525%` |
+| Backflow turbulent viscosity ratio | `10` |
+
+### 7.4 Brine outlet — `brineoutlet`
+
+Baseline:
+
+\[
+\boxed{P_{brine}=1.1375\ \mathrm{MPa\ gauge}}
+\]
+
+This pressure is selected from the earlier unpatched `02c` evidence because it produced the most promising phase-routing tendency in the unprimed pressure sweep. It is **not** claimed to be the physically correct downstream brine-system pressure.
+
+| Field | Value |
+|---|---|
+| Type | Pressure Outlet |
+| Gauge pressure | `1.1375 MPa` baseline |
+| Backflow direction | **Normal to Boundary** |
+| Backflow pressure specification | **Total Pressure** |
+| Backflow liquid volume fraction | `1.0` |
+| Backflow vapour volume fraction | `0.0` |
+| Backflow turbulence | Intensity and Viscosity Ratio |
+| Backflow turbulent intensity | `2.11%` |
+| Backflow turbulent viscosity ratio | `10` |
+
+The brine pressure remains a model parameter that may require later continuation once a steady baseline exists.
+
+---
+
+## 8. Numerical methods
+
+Use a simple Purnanto-style steady formulation rather than introducing stabilization changes in the first run.
+
+| Setting | Baseline |
+|---|---|
+| Pressure-velocity coupling | **SIMPLE** |
+| Gradient | **Green-Gauss Node Based** |
+| Pressure | **PRESTO!** |
+| Momentum | **Second-Order Upwind** |
+| Turbulent kinetic energy `k` | **Second-Order Upwind** |
+| Turbulent dissipation `epsilon` | **Second-Order Upwind** |
+| Volume fraction | **QUICK** |
+
+The rationale is straightforward:
+
+- SIMPLE is the method used in the reference study;
+- PRESTO! is appropriate for strong rotation/swirl and is also used in the reference study;
+- the reference study used second-order momentum/turbulence and QUICK for volume fraction;
+- therefore the baseline does not need a special first-order rescue stage unless the direct solve proves numerically impossible.
+
+### 8.1 Under-relaxation factors
+
+Set explicitly rather than relying on version-dependent inheritance:
+
+| Quantity | URF |
+|---|---:|
+| Pressure | `0.3` |
+| Momentum | `0.7` |
+| `k` | `0.8` |
+| `epsilon` | `0.8` |
+| Volume fraction / multiphase | `0.5` |
+| Drift / slip | `0.1` |
+| Density | `1.0` |
+| Body force | `1.0` |
+| Turbulent viscosity | `1.0` |
+
+These are numerical controls, not physical calibration parameters. They are frozen for reproducibility during the first baseline attempt.
+
+---
+
+## 9. Initialization — explicitly no patch
+
+The complete initialization sequence is:
+
+```text
+load production mesh
+→ build/read back the complete Setup 03 specification
 → Hybrid Initialize
-→ create approved Y010 register
-→ patch phase-2 water-liquid volume fraction = 1.0
-→ verify integrated Y010 liquid inventory
-→ save pre-solve case/data checkpoint
+→ DO NOT patch liquid volume fraction
+→ DO NOT create a Y010/Y030 initialization region
+→ DO NOT seed a water pool
+→ save the post-Hybrid pre-solve case/data checkpoint
+→ begin the full steady Mixture solve
 ```
 
-Approved Y010 region:
+Y010 and Y030 may still be created later as **monitoring regions only** if useful, but they must not modify the phase field.
 
-```text
-x = [-2.067034, 1.066098] m
-y = [-1.484584, 0.100000] m
-z = [-1.469893, 2.000000] m
-inside = True
-```
-
-Coordinate interpretation:
-
-> `y = 0` is the level at which the brine pipe is exactly submerged. Y010 extends the initialized lower liquid region to `y = +0.10 m`.
-
-Observed 02e production-mesh reference:
-
-```text
-Selected cells = 33,315
-Geometric selected-cell volume = 4.829410214 m³
-Actual post-patch liquid inventory = 4.790652590 m³
-Initial liquid mass = 4224.253734 kg
-```
-
-Reference value:
-
-\[
-V_{l,Y010,0}=4.790652590\ \mathrm{m^3}.
-\]
-
-The setup must verify the actual post-patch inventory before solving. If the value differs materially from the reference, stop and investigate rather than silently continuing.
+The initial field is whatever Fluent's Hybrid Initialization produces from the explicitly defined boundaries and model. The pre-solve phase inventory must be measured and recorded so that later changes can be interpreted.
 
 ---
 
-## 5. Definition of success
+## 10. Monitoring package
 
-This setup is explicitly different from the previous fixed-iteration screens.
+Residuals are necessary but are not the primary physical diagnostic.
 
-A case is **not** considered steady merely because it reaches a requested iteration count.
+### 10.1 Phase-specific fluxes — highest-priority diagnostic
 
-The primary steady-state evidence is:
-
-### 5.1 Liquid phase flux balance
-
-Using outward-positive outlet conventions:
-
-\[
-L=\dot m_{l,in}-\dot m_{l,brine}-\dot m_{l,steam}.
-\]
-
-Qualification target:
-
-\[
-\boxed{|L|/\dot m_{l,in}<5\%}
-\]
-
-for the initial numerical qualification, with a preferred later target below `2%`.
-
-### 5.2 Vapour phase flux balance
-
-Using the corresponding vapour inlet and outlet fluxes, target an imbalance below `5%` for qualification.
-
-### 5.3 Liquid inventory stationarity
-
-Monitor:
-
-\[
-V_{l,Y010},\qquad V_{l,Y030},\qquad V_{l,total}.
-\]
-
-Over the final accepted convergence window, total and lower-region liquid inventories must no longer show a systematic filling or draining trend.
-
-Initial practical target:
-
-- less than approximately `1–2%` change over the final `200` iterations;
-- no monotonic inventory trend that is large compared with short-period numerical variation.
-
-### 5.4 Flux stationarity
-
-Over the same final convergence window, phase fluxes at each inlet/outlet should be approximately stationary.
-
-Initial practical target:
-
-- less than approximately `1–2%` change in the relevant final-window mean/trend;
-- no large systematic drift.
-
-### 5.5 Numerical survivability
-
-The run must contain no:
-
-- floating-point exception;
-- unrecoverable AMG divergence;
-- solver termination;
-- equivalent numerical breakdown.
-
-### 5.6 Residual role
-
-Residuals remain required diagnostics, but there is no single residual threshold that can override obviously non-steady phase fluxes or inventory.
-
-A candidate cannot qualify if the residuals show sustained growth or severe oscillatory breakdown even when the flux window happens to appear temporarily balanced.
-
-### 5.7 Physical quality is a separate decision
-
-Wrong-outlet vapour, liquid carryover and retained-liquid amount remain important, but they are **not used to reject the first mathematical steady anchor solely because the separation behaviour is poor**.
-
-The immediate objective is first to prove that a steady branch exists. Physical quality is assessed after that anchor exists.
-
----
-
-## 6. Proposed staged solution procedure
-
-The central numerical hypothesis is that the full cyclone field should be developed progressively before all Mixture transport equations are solved simultaneously.
-
-### Stage S0 — carrier/cyclone flow-field development
-
-Start from the frozen initialized physical setup but temporarily disable the Mixture equations for:
-
-- Volume Fraction;
-- Slip Velocity.
-
-Solve the remaining pressure, momentum and turbulence field using conservative steady numerics.
-
-Purpose:
-
-> establish a stable pressure/velocity/turbulence cyclone field before allowing the multiphase distribution and slip response to evolve.
-
-**S0 exit rule — draft:** do not use a fixed iteration count alone. Continue until pressure, velocity/flux monitors and residual trends are substantially settled. Exact quantitative S0 gate remains to be frozen after the detail audit.
-
-Save:
-
-```text
-S0-flow-field.cas.h5
-S0-flow-field.dat.h5
-```
-
-### Stage S1 — enable Volume Fraction
-
-Enable the Mixture Volume Fraction equation while retaining the conservative startup numerics.
-
-Purpose:
-
-> allow the phase distribution and Y010 inventory to adjust on top of an already-developed cyclone flow field.
-
-Monitor the complete phase-flux and liquid-inventory package during this stage.
-
-Do not yet change brine pressure.
-
-Save the first stable checkpoint as:
-
-```text
-S1-volume-fraction.cas.h5
-S1-volume-fraction.dat.h5
-```
-
-### Stage S2 — enable Slip Velocity
-
-Enable the Mixture Slip Velocity equation so the complete intended Mixture phase-relative-motion model is restored.
-
-Again, keep:
-
-\[
-P_{brine}=1.160\ \mathrm{MPa\ gauge}.
-\]
-
-Continue with conservative numerics until the complete Mixture field becomes stable or a numerical failure is reached.
-
-Save:
-
-```text
-S2-full-mixture-start.cas.h5
-S2-full-mixture-start.dat.h5
-```
-
-### Stage S3 — full-Mixture steady qualification
-
-With all intended Mixture equations active, continue solving until the steady-state criteria in Section 5 can be assessed over a sufficiently long final window.
-
-The initial analysis window is proposed as the most recent `200` iterations, but the run may need substantially more than `500` iterations.
-
-There is deliberately **no fixed total iteration ceiling** in the scientific definition of success. Execution can still use checkpoint budgets, but the solution should not be labelled steady because a budget expired.
-
-If S3 satisfies the qualification criteria, save:
-
-```text
-STEADY-BASE-1p160.cas.h5
-STEADY-BASE-1p160.dat.h5
-```
-
-This becomes the first steady anchor.
-
-### Stage S4 — higher-order confirmation
-
-After a steady baseline is obtained with conservative startup numerics, change only the intended higher-order spatial discretization settings and re-converge.
-
-Purpose:
-
-> demonstrate that the steady branch is not merely a first-order numerical artefact.
-
-The exact schemes and transition procedure remain to be frozen in the detail audit.
-
-If the higher-order solution satisfies the same steady criteria, save:
-
-```text
-STEADY-BASE-HO-1p160.cas.h5
-STEADY-BASE-HO-1p160.dat.h5
-```
-
-This is the preferred parent for pressure continuation.
-
----
-
-## 7. Pressure-velocity coupling strategy
-
-The preferred first test is:
-
-```text
-Coupled pressure-velocity
-+ segregated volume-fraction solution
-```
-
-Do **not** initially enable a formulation that directly couples volume fractions into the pressure-velocity block unless later evidence specifically justifies it.
-
-The rationale is to strengthen the steady pressure/velocity coupling while avoiding an unnecessary increase in the aggressiveness of the volume-fraction solve during startup.
-
-### 7.1 Conservative startup controls
-
-The draft intends to use:
-
-- conservative initial Coupled Courant number;
-- first-order spatial discretization for the earliest stabilization stages where appropriate;
-- no case-specific ad-hoc tuning simply to force an unstable candidate through;
-- staged promotion to higher-order schemes only after the field is settled.
-
-**Exact numerical values are intentionally TBD until the actual parent case and Fluent recommendations are audited.**
-
-### 7.2 Pseudo-time
-
-Pseudo-time may be considered as a stabilization aid during development, but it must **not** be allowed to obscure the final phase mass balance.
-
-If pseudo-time is used to approach a solution, the final candidate must be re-solved with the chosen final steady formulation and demonstrate the Section 5 balance/stationarity criteria before qualification.
-
-Pseudo-time is therefore a numerical aid, not part of the physical definition of the final steady state.
-
----
-
-## 8. Pressure continuation after STEADY-BASE
-
-Do not begin this stage unless `STEADY-BASE` has qualified.
-
-The purpose is to follow one converged solution branch gradually toward greater retained-liquid behaviour rather than launching independent large pressure jumps from the original Y010 parent.
-
-### 8.1 Continuation principle
-
-Starting from the converged pressure-outlet state at:
-
-\[
-P_{brine}=1.160\ \mathrm{MPa\ gauge},
-\]
-
-increase brine pressure in small increments.
-
-Initial proposed sequence:
-
-\[
-1.1600
-\rightarrow1.1625
-\rightarrow1.1650
-\rightarrow1.1675
-\rightarrow1.1700\ \mathrm{MPa\ gauge}
-\]
-
-and continue only while each preceding case produces a usable converged parent.
-
-The `2.5 kPa` increment is a **draft continuation step**, not yet a validated pressure resolution.
-
-### 8.2 Parent rule
-
-Each pressure child must start from the **fully converged immediately preceding pressure state**.
-
-Do not:
-
-- restart every continuation pressure from the original Y010 parent;
-- re-Hybrid-Initialize each pressure child;
-- re-patch Y010 between continuation points;
-- jump directly to the old `1.175`, `1.190`, `1.200 MPa` cases unless the continuation branch reaches them naturally.
-
-This stage deliberately follows a numerical branch rather than conducting an independent pressure sensitivity.
-
-### 8.3 Continuation target
-
-The scientifically interesting region is where:
-
-\[
-\dot m_{l,brine}+\dot m_{l,steam}
-\approx
-\dot m_{l,in}
-\]
-
-while the liquid inventory remains bounded and the solution remains numerically steady.
-
-At every continuation point record:
-
-- phase-specific inlet/outlet fluxes;
-- Y010, Y030 and total liquid inventory;
-- wrong-outlet vapour;
-- liquid carryover to steam outlet;
-- brine-pipe-entry pressure;
-- reverse-flow diagnostics;
-- convergence window statistics.
-
-### 8.4 Stop conditions
-
-Stop continuation and preserve the last converged state if any of the following occurs:
-
-- FPE / unrecoverable numerical breakdown;
-- no stationary inventory can be obtained despite adequate continuation iterations;
-- persistent reverse-flow regime makes the pressure boundary qualitatively different from the preceding converged branch;
-- the next pressure step cannot be made to converge without changing additional physical/numerical controls;
-- user review determines that the branch has already become physically uninformative.
-
-Do not silently reduce pressure increments, relaxation values or change schemes after a failed child without recording that as a new numerical experiment.
-
----
-
-## 9. Common monitor and evidence package
-
-The following must exist before S0/S1/S2 execution so that the complete history is recoverable.
-
-### 9.1 Phase-specific mass flows
-
-Record signed Fluent-native and outward-positive values for:
+Record every iteration where practical:
 
 **Liquid**
 
-- liquid inlet;
-- brine outlet;
-- steam outlet.
+- liquid through `liquidinlet`;
+- liquid through `steaminlet`;
+- liquid through `brineoutlet`;
+- liquid through `steamoutlet`.
 
 **Vapour**
 
-- steam inlet;
-- brine outlet;
-- steam outlet.
+- vapour through `liquidinlet`;
+- vapour through `steaminlet`;
+- vapour through `brineoutlet`;
+- vapour through `steamoutlet`.
 
-### 9.2 Liquid inventory
+Store Fluent-native signed fluxes and an outward-positive interpretation table.
 
-Record:
+### 10.2 Overall mass/phase balance
+
+Compute:
 
 \[
-V_{l,Y010}=\int_{Y010}\alpha_l\,dV,
+B_l=\dot m_{l,in}-\dot m_{l,brine}-\dot m_{l,steam},
 \]
 
 \[
-V_{l,Y030}=\int_{Y030}\alpha_l\,dV,
+B_v=\dot m_{v,in}-\dot m_{v,brine}-\dot m_{v,steam}.
 \]
 
-and
+For this split-inlet case, cross-phase inlet flux should be essentially zero by construction.
+
+### 10.3 Liquid inventory
+
+Even though there is no patch, monitor:
 
 \[
-\boxed{V_{l,total}=\int_V\alpha_l\,dV}.
+V_{l,total}=\int_V\alpha_l\,dV.
 \]
 
-Where convenient, also store corresponding liquid masses.
+Also retain Y010/Y030 volume-integral monitors as lower-vessel diagnostics if they can be created without affecting initialization:
 
-### 9.3 Brine-pipe diagnostics
+\[
+V_{l,Y010},\qquad V_{l,Y030}.
+\]
 
-At a reproducible `brine-pipe-entry-section`, record where available:
+These are monitoring regions only.
+
+### 10.4 Outlet diagnostics
+
+At both outlets record where available:
+
+- mixture mass flow;
+- phase-specific mass flow;
+- area-weighted static pressure;
+- area-weighted total pressure;
+- area-averaged normal velocity;
+- reverse-flow area fraction;
+- mixture density.
+
+At the brine pipe entry record:
 
 - area-weighted static pressure;
-- minimum and maximum static pressure;
-- area-averaged normal velocity;
-- mixture density;
-- reverse-flow area fraction.
+- minimum/maximum static pressure;
+- phase volume fraction;
+- normal/axial velocity where meaningful.
 
-### 9.4 Outlet diagnostics
+### 10.5 Residuals and numerical warnings
 
 Record:
 
-- total brine mass flow;
-- total steam-outlet mass flow;
-- phase-resolved brine and steam-outlet fluxes;
-- reverse-flow warnings/events and their duration.
+- continuity;
+- x/y/z momentum;
+- `k`;
+- `epsilon`;
+- volume fraction / multiphase residuals;
+- turbulent-viscosity limiting warnings;
+- reverse-flow warnings;
+- AMG divergence;
+- FPE or equivalent hard failure.
 
-### 9.5 Residuals
-
-Store all relevant residual histories from the beginning of S0 through final qualification.
-
-Equation activation/deactivation points must be marked in the resulting plots/logs so residual changes are not misinterpreted as one continuous numerical regime.
-
-### 9.6 Solver event log
-
-Record at minimum:
-
-- initialization complete;
-- Y010 inventory verification;
-- S0 start/end;
-- Volume Fraction enabled;
-- S1 start/end;
-- Slip Velocity enabled;
-- S2 start/end;
-- numerical-scheme changes;
-- pressure continuation changes;
-- reversed-flow warnings;
-- turbulent-viscosity limiting counts where available;
-- AMG warnings/divergence;
-- FPE or solver termination.
+A solver FPE or equivalent unrecoverable error is classified as `RUN-FAILED`.
 
 ---
 
-## 10. Optional fallback experiments — not active by default
+## 11. Baseline run plan
 
-These are retained only as explicit next diagnostics if the primary staged procedure fails. Do not combine them silently with the baseline.
+### Case `03-U-P1375`
 
-### 10.1 Solve N-phase Volume Fraction Equations
-
-If the full-Mixture state becomes numerically stable but persistent phase mass imbalance remains, test Fluent's option to solve the complete set of phase volume-fraction equations rather than obtaining one phase purely by complement.
-
-This is a separate numerical experiment and must be labelled accordingly.
-
-### 10.2 Alternative pressure-velocity coupling
-
-If Coupled cannot be made stable using a reasonable conservative startup, create a controlled comparison against the verified previous steady pressure-velocity coupling method.
-
-Do not mix multiple coupling-method changes into the pressure continuation.
-
-### 10.3 Smaller continuation pressure step
-
-If a converged continuation parent fails only after a pressure increment, a smaller pressure step may be tested as a branch-following diagnostic.
-
-Record the failed larger step first; do not erase it from the evidence chain.
-
----
-
-## 11. Decision tree
+`U` = unpatched.
 
 ```text
-build frozen 02e-like Y010 + PO 1.160 MPa case
-        ↓
-S0: develop pressure/velocity/turbulence field
-VF + slip equations temporarily disabled
-        ↓
-S1: enable Volume Fraction
-        ↓
-S2: enable Slip Velocity
-        ↓
-S3: full Mixture steady qualification
-        │
-        ├── fails → diagnose numerical method / parent details
-        │          do NOT return directly to transient
-        │
-        └── passes
-             ↓
-S4: higher-order re-convergence
-             │
-             ├── fails → quantify discretization sensitivity
-             │
-             └── passes
-                  ↓
-             save STEADY-BASE
-                  ↓
-       small-step brine-pressure continuation
-                  ↓
-       search for stationary liquid-inventory branch
+Hybrid Initialize
+no patch
+all Mixture equations active
+Pbrine = 1.1375 MPa gauge
+Psteam = 1.120 MPa gauge
+SIMPLE
+Green-Gauss Node Based
+PRESTO!
+Second-Order Upwind momentum/k/epsilon
+QUICK volume fraction
 ```
 
----
+### Execution budget
 
-## 12. Interpretation contract
-
-This setup has two distinct phases of interpretation.
-
-### Phase A — numerical qualification
-
-The user is asked to decide whether the evidence is sufficient to call a state genuinely steady based primarily on:
-
-- phase flux balance;
-- liquid-inventory stationarity;
-- flux stationarity;
-- numerical stability;
-- residual behaviour.
-
-A mathematically steady but physically poor phase-routing solution may still be retained as a useful numerical anchor.
-
-### Phase B — physical continuation
-
-Only after a steady anchor exists should the user interpret:
-
-- retained-liquid level/inventory;
-- brine liquid flow;
-- vapour short-circuit to the brine outlet;
-- liquid carryover to steam outlet;
-- brine-pipe pressure and reverse flow;
-- whether the continuation is moving toward a believable separator state.
-
-No automatic statement such as “optimum pressure” or “validated operating condition” is permitted from this setup alone.
-
----
-
-## 13. Pre-execution detail audit — mandatory
-
-Before this draft can become `active`, the exact Fluent state must be reconstructed and frozen for the details that earlier reports often left implicit.
-
-At minimum answer and record:
-
-1. What turbulence **specification method** is used at each velocity inlet?
-2. What exact turbulence values are applied at each inlet?
-3. What turbulence **backflow** specification is used at each pressure outlet?
-4. What exact outlet backflow turbulence values are applied?
-5. What phase volume fractions are imposed at the liquid and steam inlets?
-6. Are phase velocities shared or phase-specific at the inlets under the current Mixture setup?
-7. What are the exact wall roughness and wall-treatment settings?
-8. What are the exact water-liquid viscosity and water-vapour density/viscosity models/values?
-9. What Mixture slip/drag model is active?
-10. What exact spatial discretization schemes are currently inherited from 02e?
-11. What gradient scheme is active?
-12. What exact pressure-velocity coupling and controls were used in the previous steady parent?
-13. What under-relaxation factors are currently stored?
-14. If Coupled is used here, what initial Courant number and coupled controls will be frozen?
-15. Is pseudo-time currently enabled anywhere in the parent state?
-16. What residual convergence criteria/normalization settings are active?
-17. What exact Hybrid Initialization options are active?
-18. What is the executable Fluent/PyFluent path for temporarily disabling and re-enabling Volume Fraction and Slip Velocity equations, and can each state be read back reliably?
-19. Are all monitor definitions evaluated from the intended phase/domain and signed consistently?
-20. What exact checkpoint/save cadence should be used so every equation-activation stage can be reopened and audited?
-
-This file remains a draft until these questions are resolved or explicitly accepted as intentional assumptions.
-
----
-
-## 14. Immediate next action
-
-Do **not** execute Stage S0 yet.
-
-First audit the existing full-geometry Mixture setup lineage, Fluent boundary definitions, scripts and result records to reconstruct all missing detailed settings. Update this file with explicit values rather than inherited phrases such as “preserve verified parent state” wherever the value can be established.
-
-Only then change:
+Run in checkpoints rather than assuming a single iteration count defines convergence:
 
 ```text
-Lifecycle: draft
-Execution status: DO NOT RUN
+0 → 500 iterations
+500 → 1000 if finite/stable
+1000 → 2000 if still evolving but improving
+2000 → 3000 only if there is credible movement toward a stationary solution
 ```
 
-to an active executable setup.
+At each checkpoint save case/data and evaluate flux trends.
+
+Do not stop automatically simply because Fluent's residual convergence criteria fire. Conversely, do not continue thousands of iterations through clearly divergent or physically runaway behaviour merely to reach a nominal budget.
+
+---
+
+## 12. Qualification criteria
+
+A solution is not accepted merely because it survived the requested iteration count.
+
+### 12.1 Numerical requirement
+
+No:
+
+- FPE;
+- unrecoverable AMG divergence;
+- NaN/Inf field;
+- solver termination;
+- persistent explosive residual growth.
+
+### 12.2 Flux stationarity
+
+Over the final `200`-iteration evaluation window:
+
+- inlet and outlet phase fluxes should no longer show a strong monotonic drift;
+- moving-window means should be approximately stationary;
+- the liquid and vapour balances should be trending toward zero rather than systematically worsening.
+
+Initial numerical qualification target:
+
+\[
+\frac{|B_l|}{\dot m_{l,in}}<5\%,\qquad
+\frac{|B_v|}{\dot m_{v,in}}<5\%.
+\]
+
+A preferred later target is below `2%` once a steady branch exists.
+
+### 12.3 Inventory stationarity
+
+Total-domain liquid inventory must not show persistent filling or draining.
+
+Practical initial target:
+
+- less than approximately `1–2%` systematic change over the final `200` iterations;
+- no large monotonic lower-vessel inventory trend.
+
+### 12.4 Routing sanity check
+
+The expected qualitative direction is:
+
+- most liquid leaves through the brine outlet;
+- most vapour leaves through the steam outlet;
+- wrong-outlet phase fluxes remain finite and interpretable.
+
+Poor separator routing does not automatically invalidate the mathematical existence of a steady state, but it must be reported clearly and prevents the case from being treated as a validated physical separator solution.
+
+---
+
+## 13. What happens if the direct baseline fails
+
+Do **not** immediately perform another large pressure sweep and do **not** immediately patch a pool.
+
+The fallback hierarchy is one change at a time:
+
+1. **Numerical order fallback:** repeat the exact same physical case using first-order momentum/`k`/`epsilon`/volume-fraction startup, then promote back to the baseline schemes if a stable field is obtained.
+2. **Pressure-velocity fallback:** test Coupled only after the SIMPLE case has provided clear failure evidence.
+3. **Equation-staging fallback:** only then test temporarily disabling/re-enabling Volume Fraction or Slip Velocity.
+4. **Pressure continuation:** only after one numerically steady unpatched baseline exists.
+5. **Model-form change:** reconsider Mixture assumptions/diameter/VOF only after the controlled numerical fallbacks have been assessed.
+
+Every fallback becomes its own named child experiment. Do not silently modify the baseline case until it runs.
+
+---
+
+## 14. Required preflight before removing `DO NOT RUN`
+
+The agent must produce a machine-readable and human-readable readback confirming every item below.
+
+### Geometry / zones
+
+- production mesh filename and hash/size if available;
+- cell count;
+- boundary zone names and types;
+- actual `liquidinlet` area;
+- actual `steaminlet` area;
+- total inlet area and comparison with `0.5242 m²`;
+- steam-outlet area;
+- brine-outlet area;
+- key brine-pipe and inlet characteristic dimensions available from the mesh.
+
+### Physics
+
+- phase names and ordering;
+- both material densities and viscosities;
+- Mixture model active;
+- phase-2 diameter exactly `1e-5 m`;
+- Manninen slip formulation active;
+- flow-regime modelling off;
+- surface-tension force modelling off;
+- Energy off;
+- gravity and operating pressure exact.
+
+### Turbulence
+
+- RNG `k-epsilon`;
+- Standard Wall Functions;
+- Differential Viscosity Model off;
+- Swirl Dominated Flow option off;
+- boundary turbulence specification = Intensity and Viscosity Ratio on all four flow boundaries;
+- exact values match Section 6.
+
+### Boundaries
+
+- both inlet velocities = `27.118 m/s` normal to boundary;
+- pure-phase inlet volume fractions correct;
+- inlet initial gauge pressure = `1.140 MPa`;
+- steam outlet = `1.120 MPa`;
+- brine outlet = `1.1375 MPa`;
+- pressure-outlet backflow direction = Normal to Boundary;
+- pressure-outlet backflow pressure specification = Total Pressure;
+- steam backflow liquid VF = `0`;
+- brine backflow liquid VF = `1`.
+
+### Numerics
+
+- SIMPLE;
+- Green-Gauss Node Based;
+- PRESTO!;
+- second-order momentum/`k`/`epsilon`;
+- QUICK volume fraction;
+- URFs match Section 8.1;
+- all intended Mixture equations active before iteration 1.
+
+### Initialization
+
+- Hybrid Initialization completed;
+- no patch command issued;
+- no Y010/Y030 initialization operation issued;
+- pre-solve total liquid inventory reported;
+- pre-solve case/data checkpoint written and reload verified.
+
+If any item differs, stop and report the mismatch instead of silently substituting a Fluent default.
+
+---
+
+## 15. Source and interpretation notes
+
+### Purnanto, Zarrouk & Cater (2013)
+
+The paper provides the reference Spiral-Inlet geometry, 1600-kJ/kg phase properties/flows, RNG `k-epsilon` selection, `10^-5 m` liquid secondary-phase diameter, smooth-wall/isothermal/no-flashing assumptions, and SIMPLE/PRESTO!/second-order/QUICK numerical approach used as the modelling lineage for this setup.
+
+### 08b / split-inlet archive
+
+The archive supports the split pure-phase inlet construction and the approximately `2.11%` inlet turbulence intensity. It must **not** be copied blindly: the archive audit identifies a historical field mismatch in which an intended hydraulic diameter (`0.72061 m`) appeared in a live case as turbulent viscosity ratio `0.72061`.
+
+### Earlier full-geometry runs
+
+`02c` and `02e` are evidence about pressure sensitivity, routing and numerical failure boundaries. They do not define the new initialization. Setup 03 deliberately returns to an unpatched baseline and rebuilds the physical/numerical specification explicitly.
+
+---
+
+## 16. Summary of the experiment
+
+```text
+Purnanto Spiral-Inlet geometric/physical lineage
+        +
+current production full geometry
+        +
+split pure-liquid / pure-steam inlet face
+        +
+explicit constant properties
+        +
+Mixture, 10 µm secondary liquid, Manninen slip
+        +
+RNG k-epsilon, Standard Wall Functions
+        +
+explicit turbulence BCs
+        +
+pressure outlets with explicit backflow composition/direction
+        +
+SIMPLE + PRESTO! + second-order + QUICK
+        +
+Hybrid Initialization only
+        +
+NO LIQUID PATCH
+        ↓
+03-U-P1375
+        ↓
+phase flux + inventory + residual diagnostics
+        ↓
+Does a real steady branch exist?
+```
+
+The baseline should remain boring and explicit. If it fails, complexity is introduced only through separately identified fallback cases so that the cause of any improvement or failure remains interpretable.
