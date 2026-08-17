@@ -466,12 +466,19 @@ def calculate_carrier_metrics(
 
     inlet_zones = [zone for zone in (zone_roles.get("liquid_inlet"), zone_roles.get("steam_inlet")) if zone]
     steam_outlet = zone_roles.get("steam_outlet")
+    brine_outlet = zone_roles.get("brine_outlet")
     outlet_zones = [name for name in carrier_fluxes.get("zones", []) if name not in inlet_zones]
+    non_steam_outlets = [name for name in outlet_zones if name != steam_outlet]
+    has_physical_liquid_outlet = bool(
+        (brine_outlet and brine_outlet in outlet_zones) or non_steam_outlets
+    )
 
     m_liq_in = _sum_abs(liquid, inlet_zones)
     m_vap_in = _sum_abs(vapor, inlet_zones)
     m_liq_steam_out = _sum_abs(liquid, [steam_outlet] if steam_outlet else [])
     m_vap_steam_out = _sum_abs(vapor, [steam_outlet] if steam_outlet else [])
+    m_liq_out = _sum_abs(liquid, outlet_zones)
+    m_vap_out = _sum_abs(vapor, outlet_zones)
     m_mix_in = _sum_abs(mixture, inlet_zones)
     m_mix_out = _sum_abs(mixture, outlet_zones)
 
@@ -481,8 +488,8 @@ def calculate_carrier_metrics(
     # balance unavailable or accidentally parsing delayed mixture output.
     if m_mix_in is None and m_liq_in is not None and m_vap_in is not None:
         m_mix_in = m_liq_in + m_vap_in
-    if m_mix_out is None and m_liq_steam_out is not None and m_vap_steam_out is not None:
-        m_mix_out = m_liq_steam_out + m_vap_steam_out
+    if m_mix_out is None and m_liq_out is not None and m_vap_out is not None:
+        m_mix_out = m_liq_out + m_vap_out
 
     eta_phase = None
     if m_liq_in not in (None, 0.0) and m_liq_steam_out is not None:
@@ -500,28 +507,49 @@ def calculate_carrier_metrics(
         mass_imbalance_kg_s = abs(m_mix_in - m_mix_out)
         mass_imbalance_ratio = mass_imbalance_kg_s / m_mix_in
 
-    return {
-        "m_liq_in": m_liq_in,
-        "m_vap_in": m_vap_in,
-        "m_liq_steam_out": m_liq_steam_out,
-        "m_vap_steam_out": m_vap_steam_out,
-        "m_mix_in": m_mix_in,
-        "m_mix_out": m_mix_out,
-        "eta_phase": eta_phase,
-        "x_out": x_out,
-        "mass_imbalance_kg_s": mass_imbalance_kg_s,
-        "mass_imbalance_ratio": mass_imbalance_ratio,
-        "mass_balance_scope": "intentionally_open",
-        "mass_balance_decision_role": "informational_only",
-        "scope_reason": "simplified Purnanto geometry has no modelled lower-liquid outlet",
-        "mass_imbalance_note": (
+    if has_physical_liquid_outlet:
+        mass_balance_scope = "all_discovered_pressure_outlets"
+        mass_balance_decision_role = "diagnostic_only"
+        scope_reason = (
+            "Computed from both discovered pressure outlets, including the physical brine outlet; "
+            "use as a diagnostic balance check, not as the sole convergence criterion."
+        )
+        mass_imbalance_note = (
+            "Derived from phase-specific fluxes across both pressure outlets because the mixture "
+            "mass-flow report was unavailable."
+            if not mixture and mass_imbalance_kg_s is not None
+            else "Whole-domain inlet/outlet balance is available for diagnostic review."
+        )
+    else:
+        mass_balance_scope = "intentionally_open"
+        mass_balance_decision_role = "informational_only"
+        scope_reason = "simplified Purnanto geometry has no modelled lower-liquid outlet"
+        mass_imbalance_note = (
             "Derived from phase-specific fluxes because the mixture mass-flow report was unavailable."
             if not mixture and mass_imbalance_kg_s is not None
             else _relative_balance_note(
                 mass_imbalance_kg_s=mass_imbalance_kg_s,
                 carryover_kg_s=m_liq_steam_out,
             )
-        ),
+        )
+
+    return {
+        "m_liq_in": m_liq_in,
+        "m_vap_in": m_vap_in,
+        "m_liq_steam_out": m_liq_steam_out,
+        "m_vap_steam_out": m_vap_steam_out,
+        "m_liq_out": m_liq_out,
+        "m_vap_out": m_vap_out,
+        "m_mix_in": m_mix_in,
+        "m_mix_out": m_mix_out,
+        "eta_phase": eta_phase,
+        "x_out": x_out,
+        "mass_imbalance_kg_s": mass_imbalance_kg_s,
+        "mass_imbalance_ratio": mass_imbalance_ratio,
+        "mass_balance_scope": mass_balance_scope,
+        "mass_balance_decision_role": mass_balance_decision_role,
+        "scope_reason": scope_reason,
+        "mass_imbalance_note": mass_imbalance_note,
     }
 
 

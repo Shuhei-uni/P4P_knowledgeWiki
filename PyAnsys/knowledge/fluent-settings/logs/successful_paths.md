@@ -33,6 +33,41 @@ Notes:
 
 Fluent: 2025 R2
 PyFluent: 0.39.0 local `.venv`
+Case: `C:\Users\Shuhei Yokkaichi\Documents\CFD\Brine outlet\03A-08b-parity-full-geometry-steady-preinit-20260817T103746Z.cas.h5`
+Goal: materialize and full-path reload-verify the 03A 08b-parity full-geometry steady carrier case without initialization or solving
+Order:
+  1. connect to the reachable `student` server through Fluent gRPC and verify Fluent 2025 R2 is active;
+  2. verify and load `Full-geomV2-231kcells.msh.h5`, then read back the five required boundary zones;
+  3. set pressure-based steady operation, gravity, `0 Pa` operating pressure, psep materials, Mixture carrier, RNG k-epsilon, differential viscosity, swirl, and standard wall functions;
+  4. assign the automatically exposed phase-1 vapour / phase-2 liquid pair without forcing the inactive phase-count setter;
+  5. activate inlet/outlet turbulence specification before reacquiring the boundary objects, then set the split pure-phase velocity inlets and two pressure outlets;
+  6. set the target SIMPLE, PRESTO!, second-order/QUICK, under-relaxation, residual, initialization, and DPM-guard controls;
+  7. write only the case, reload it by full remote path, and compare the normalized contract.
+Working path or TUI:
+  Mixture activation automatically exposed `phase-1` and `phase-2`; setting the inactive `number_of_phases` branch is not valid on this Student build. Boundary turbulence specification had to be selected before turbulent intensity/hydraulic-diameter fields became writable. Reloaded solution methods were under `spatial_discretization`.
+Readback:
+  The case contract matched after full-path reload. A gRPC `remote_file_exists` readback confirmed the case exists and the matching `.dat.h5` does not. Fluent read back `231376` cells, inlet areas `0.0048896664` and `0.51928634 m2`, outlet areas `0.60094806` and `0.20143996 m2`, minimum orthogonal quality `0.200006`, and maximum aspect ratio `82.6482`. No initialization, iteration, or DPM injection was created.
+Notes:
+  The Student operating-temperature and Mixture phase-interaction branches were inactive, so no value was guessed. Outlet wetted perimeters/hydraulic diameters remain a native preflight item; the provisional Dh values were used only to materialize the case. Do not use this entry as evidence that the setup is run-ready.
+
+Fluent: 2025 R2
+PyFluent: 0.39.0 local `.venv`
+Case: `C:\Users\Shuhei Yokkaichi\Documents\CFD\Brine outlet\03A-08b-parity-full-geometry-steady-preinit-20260817T103746Z.cas.h5`
+Goal: run the requested 03A native 1,000-iteration diagnostic checkpoint and verify the paired endpoint over gRPC
+Order:
+  1. connect to `student` through Fluent gRPC and verify the case-only input exists;
+  2. write a run-specific native journal through the Fluent Scheme channel;
+  3. submit the journal with `solver.settings.file.read_journal`, leaving Fluent responsible for Hybrid Initialization, `/solve/iterate 1000`, transcript, residual export, and paired case/data write;
+  4. reconnect through gRPC, verify the endpoint case/data/transcript/residual/journal files, reload the endpoint, and run read-only flux/residual checks.
+Working path or TUI:
+  Native journal sequence: `/file/read-case` → `/solve/initialize/hyb-initialization` → `/solve/iterate 1000` → `/file/write-case-data` → residual export → `/file/stop-transcript`. Python did not loop over iterations or perform checkpoint timing.
+Readback:
+  Exactly `1,000` residual points were recovered. Final residuals were continuity `1.6043e-1`, `vf-phase-2 = 6.5142e-3`, velocity components approximately `1.5–1.7e-4`, `k = 5.2127e-3`, and epsilon `2.2262e-1`. The paired endpoint was visible and reloadable; phase-flux extraction included both pressure outlets and reported a `34.0758 kg/s` (`17.17%`) diagnostic full-domain balance residual.
+Notes:
+  The run completed without a floating-point exception but is not converged or qualified: reverse flow persisted on `334` outlet faces and turbulent-viscosity limiting occurred. Do not continue to 03B from this endpoint. All Student interaction for this run used Fluent gRPC; no SSH was used.
+
+Fluent: 2025 R2
+PyFluent: 0.39.0 local `.venv`
 Case: `C:\Users\syok443\P4P simulation\VOF-IC0-P1120-preinit-20260814T000000Z.cas.h5`
 Goal: build and reload-verify a no-patch explicit-VOF case from `brine-outlet-620kcells.msh.h5`
 Order:
