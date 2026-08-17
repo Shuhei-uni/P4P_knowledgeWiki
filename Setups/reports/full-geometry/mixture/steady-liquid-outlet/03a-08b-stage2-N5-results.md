@@ -25,9 +25,9 @@ The local reporting record does not yet contain an N5 `plus700` residual-check o
 
 ## Scaled residual history
 
-![N5 available recorded scaled residual history](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N5/N5-full-scaled-residuals.png)
+![N5 available recorded scaled residual history](plots/N5/N5-full-scaled-residuals.png)
 
-[Open the N5 available scaled-residual figure](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N5/N5-full-scaled-residuals.png)
+[Open the N5 available scaled-residual figure](plots/N5/N5-full-scaled-residuals.png)
 
 The figure contains the Stage-1 history, the standard bootstrap, and the restored RNG return. The requested +700 RNG continuation is not plotted because its local residual history is not yet available. No missing +700 interval has been interpolated.
 
@@ -92,7 +92,7 @@ N5 currently demonstrates the value of the bootstrap as a diagnostic experiment,
 ## Source artifacts
 
 - [N5 branch summary JSON](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N5/N5-summary.json)
-- [N5 available scaled-residual figure](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N5/N5-full-scaled-residuals.png)
+- [N5 available scaled-residual figure](plots/N5/N5-full-scaled-residuals.png)
 - [N5 standard-bootstrap residual history](../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/post_simulation_analysis/N5-standard-bootstrap-residual-check.json)
 - [N5 restored-RNG residual history](../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/post_simulation_analysis/N5-rng-return-residual-check.json)
 - [N5 standard-bootstrap flux evidence](../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/post_simulation_analysis/N5-standard-bootstrap-flux-check.json)

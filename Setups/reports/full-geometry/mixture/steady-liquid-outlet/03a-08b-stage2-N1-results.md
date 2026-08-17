@@ -31,9 +31,9 @@ No Fluent numerical exception or transport failure was recorded for the N1 exten
 
 ## Scaled residual history
 
-![N1 full recorded scaled residual history](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N1/N1-full-scaled-residuals.png)
+![N1 full recorded scaled residual history](plots/N1/N1-full-scaled-residuals.png)
 
-[Open the N1 full scaled-residual figure](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N1/N1-full-scaled-residuals.png)
+[Open the N1 full scaled-residual figure](plots/N1/N1-full-scaled-residuals.png)
 
 The plot uses the direct Fluent scaled-residual monitor values. The histories were stitched using the recorded native iteration coordinates. Retained monitor points from earlier phases were not treated as new iterations, and no missing intervals were interpolated.
 
@@ -100,7 +100,7 @@ This classification is a Stage-2 screening result, not a claim that the N1 endpo
 ## Source artifacts
 
 - [N1 branch summary JSON](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N1/N1-summary.json)
-- [N1 full scaled-residual figure](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N1/N1-full-scaled-residuals.png)
+- [N1 full scaled-residual figure](plots/N1/N1-full-scaled-residuals.png)
 - [N1 initial residual history](../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/post_simulation_analysis/N1-initial-screen-residual-check.json)
 - [N1 extension residual history](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/post_simulation_analysis/N1-extension-700-residual-check.json)
 - [N1 extension monitor history](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/post_simulation_analysis/N1-extension-700-monitor-history.json)

@@ -31,9 +31,9 @@ This is classified as a Fluent gRPC/host transport failure, not as a confirmed F
 
 ## Scaled residual history
 
-![N4 available recorded scaled residual history](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N4/N4-full-scaled-residuals.png)
+![N4 available recorded scaled residual history](plots/N4/N4-full-scaled-residuals.png)
 
-[Open the N4 available scaled-residual figure](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N4/N4-full-scaled-residuals.png)
+[Open the N4 available scaled-residual figure](plots/N4/N4-full-scaled-residuals.png)
 
 The local N4 residual artifact does **not** contain a complete +700 continuation history. Its recorded iteration coordinate ends at `1300`, even though the local endpoint flux artifact loads the `plus700` case/data stem. The figure therefore shows the complete Stage-1 history and the N4 initial +300 history only; it must not be interpreted as a verified N4 iteration-2000 residual history.
 
@@ -103,7 +103,7 @@ The N4 initial +300 result remains useful as evidence that first-order momentum/
 ## Source artifacts
 
 - [N4 branch summary JSON](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N4/N4-summary.json)
-- [N4 available scaled-residual figure](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N4/N4-full-scaled-residuals.png)
+- [N4 available scaled-residual figure](plots/N4/N4-full-scaled-residuals.png)
 - [N4 initial residual history](../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/post_simulation_analysis/N4-initial-screen-residual-check.json)
 - [N4 extension residual artifact](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/post_simulation_analysis/N4-extension-700-residual-check.json)
 - [N4 extension monitor history](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/post_simulation_analysis/N4-extension-700-monitor-history.json)

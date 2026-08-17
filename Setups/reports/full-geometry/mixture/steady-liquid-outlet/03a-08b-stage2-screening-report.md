@@ -54,25 +54,25 @@ The N4 failure is recorded as a transport event: `RuntimeError: Stream removed (
 
 ### Figure 1 — Direct Fluent scaled residual histories
 
-![Four-branch direct scaled residual overview](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/overview/stage2-full-scaled-residual-overview.png)
+![Four-branch direct scaled residual overview](plots/overview/stage2-full-scaled-residual-overview.png)
 
-[Open the four-branch scaled-residual overview](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/overview/stage2-full-scaled-residual-overview.png)
+[Open the four-branch scaled-residual overview](plots/overview/stage2-full-scaled-residual-overview.png)
 
 N1 and N3 contain complete +700 residual histories. N4’s local residual artifact stops at iteration 1300, and N5’s +700 residual artifact is not locally available; both limitations are marked directly on the figure.
 
 ### Figure 2 — Endpoint phase fluxes
 
-![Compact phase-flux comparison](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/overview/stage2-phase-flux-overview.png)
+![Compact phase-flux comparison](plots/overview/stage2-phase-flux-overview.png)
 
-[Open the phase-flux overview](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/overview/stage2-phase-flux-overview.png)
+[Open the phase-flux overview](plots/overview/stage2-phase-flux-overview.png)
 
 The comparison uses the last available endpoint for each branch. The N4 bar is a provisional `plus700` endpoint snapshot. The N5 bar is the restored RNG +300 endpoint, not the pending +700 endpoint.
 
 ### Figure 3 — Diagnostic mass balance
 
-![Compact mass-balance comparison](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/overview/stage2-mass-balance-overview.png)
+![Compact mass-balance comparison](plots/overview/stage2-mass-balance-overview.png)
 
-[Open the mass-balance overview](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/overview/stage2-mass-balance-overview.png)
+[Open the mass-balance overview](plots/overview/stage2-mass-balance-overview.png)
 
 The Stage-1 reference line is `17.17%`. The balance is a diagnostic all-discovered-pressure-outlet metric and should not be used as the sole convergence criterion.
 
