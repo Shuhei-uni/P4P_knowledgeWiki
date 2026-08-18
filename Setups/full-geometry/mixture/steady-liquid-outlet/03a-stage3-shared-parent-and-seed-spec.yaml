@@ -1,0 +1,587 @@
+# 03A Stage-3 Shared Fluent Parent / Seed Specification
+# Purpose:
+#   Define the immutable OneDrive parent case and the minimal reusable seed
+#   cases used to construct the F01-F12 Stage-3 convergence sweep.
+#
+# Scientific identity MUST come from the case/branch definition, never from
+# Fluent server_id. Server assignment is execution metadata only.
+
+schema_version: "1.0"
+
+campaign:
+  id: "03A-stage3"
+  setup_family: "03A"
+  title: "Fluent-recommended convergence sweep"
+  status: "draft execution specification"
+  fluent_version: "2025 R2"
+  intent: >
+    Test Fluent-recommended Mixture equation staging, progressive inlet/inertial
+    loading, and momentum under-relaxation on the unchanged 03A full-geometry
+    steady Mixture physical case.
+  authoritative_repo_setup:
+    path: "Setups/full-geometry/mixture/steady-liquid-outlet/03a-stage3-fluent-recommended-convergence-sweep-draft.md"
+
+# ---------------------------------------------------------------------------
+# 1. STORAGE / PROVENANCE POLICY
+# ---------------------------------------------------------------------------
+
+storage:
+  shared_root_example: "OneDrive/CFD/03A-stage3"
+  directories:
+    authority_parent: "parents/"
+    reusable_seeds: "seeds/"
+    run_inputs: "run-inputs/"
+    completed_results: "completed/"
+    manifests: "manifests/"
+  authority_parent_filename: "03A-stage3-P0-monitor-ready-preinit.cas.h5"
+  authority_parent_role: >
+    Immutable, monitor-ready, pre-initialization scientific parent for every
+    Stage-3 branch.
+  live_run_policy:
+    run_directly_from_onedrive: false
+    rule: >
+      Copy the required immutable parent/seed to local machine storage before a
+      Fluent run. Fluent-native checkpoints are written locally first and only
+      complete/verified artifacts are synchronized back to OneDrive.
+  naming_policy:
+    include_server_id_in_scientific_filename: false
+    include_server_id_in_case_identity: false
+    server_id_usage: "transport/execution metadata only"
+
+# ---------------------------------------------------------------------------
+# 2. ACCEPTABLE SOURCES FOR BUILDING P0
+# ---------------------------------------------------------------------------
+
+construction_sources:
+
+  preferred:
+    type: "existing verified pre-initialization case"
+    artifact: "03A-08b-parity-full-geometry-steady-preinit-20260817T103746Z.cas.h5"
+    role: >
+      Best current starting artifact because it is already a reload-verified,
+      case-only 03A reconstruction on the exact full-geometry mesh and contains
+      no initialization or solution field.
+    required_promotion_steps:
+      - "Load case in Fluent 2025 R2."
+      - "Verify exact mesh identity and boundary topology."
+      - "Verify/freeze every Stage-3 physical and numerical field listed below."
+      - "Verify Mixture interaction settings that were not fully exposed during the original Student build."
+      - "Add every Stage-3 report definition and monitor."
+      - "Smoke-test monitors on a disposable copy only."
+      - "Return to/rebuild an untouched pre-initialization P0 after smoke testing."
+      - "Save P0 and perform fresh-session reload verification."
+      - "Write fingerprint/readback/SHA256 metadata."
+
+  fallback:
+    type: "deterministic rebuild from mesh + audited lineage"
+    mesh: "Full-geomV2-231kcells.msh.h5"
+    builder: "PyAnsys/scripts/setup/build_03a_08b_parity_full_geometry.py"
+    source_authorities:
+      - "Setups/full-geometry/mixture/steady-liquid-outlet/03a-08b-parity-full-geometry-baseline.md"
+      - "Setups/past/archived/00a-purnanto-setup-5000-live-audit.md"
+      - "Setups/past/reported/08b-purnanto-parity-split-inlet-rebuild.md"
+      - "Setups/past/archived/08a-steam-outlet-extension-student-trial.md"
+    role: >
+      Use when the existing preinit artifact is unavailable, corrupted, or fails
+      Stage-3 fingerprint verification. This is slower but reconstructs the
+      physical authority deterministically.
+
+  reference_only:
+    - artifact: "03A-08b-parity-full-geometry-steady-preinit-20260817T103746Z-iter1000-20260817T110345Z.cas.h5/.dat.h5"
+      use_as_parent: false
+      reason: >
+        Contains a developed 1000-iteration solution field. Stage 3 explicitly
+        requires a pre-initialization parent and this endpoint is not converged
+        or qualified.
+    - artifact: "FG-MIX-T01-S1-C1375"
+      use_as_parent: false
+      reason: >
+        Explicitly excluded from 03A authority; it belongs to the transient
+        liquid-outlet lineage and is not a Stage-3 parent.
+
+# ---------------------------------------------------------------------------
+# 3. P0 IMMUTABLE BASE CASE
+# ---------------------------------------------------------------------------
+
+parent_case:
+  id: "P0"
+  filename: "03A-stage3-P0-monitor-ready-preinit.cas.h5"
+
+  lifecycle:
+    initialized: false
+    solution_data_present: false
+    liquid_patch_present: false
+    dpm_enabled: false
+    ewf_enabled: false
+    immutable_after_verification: true
+
+  mesh:
+    filename: "Full-geomV2-231kcells.msh.h5"
+    cells: 231376
+    nodes: 697078
+    required_boundary_roles:
+      - "liquid inlet"
+      - "steam inlet"
+      - "steam outlet"
+      - "brine outlet"
+      - "physical wall zone(s)"
+    reference_quality_readback:
+      minimum_orthogonal_quality: 0.200006
+      maximum_aspect_ratio: 82.6482
+    rule: >
+      Fingerprint actual zone names from the loaded case. Do not assume a case
+      identity from server, path, or display name alone.
+
+  solver:
+    dimension: "3D"
+    precision: "Double"
+    solver_type: "Pressure-Based"
+    time_model: "Steady"
+    velocity_formulation: "Absolute"
+    operating_pressure_pa: 0.0
+    operating_density_method: "mixture-averaged"
+    gravity:
+      enabled: true
+      components_m_s2: [0.0, -9.81, 0.0]
+    energy:
+      enabled: false
+    pseudo_time:
+      enabled: false
+    implicit_body_force:
+      enabled: false
+
+  materials:
+    water_vapour:
+      fluent_name: "water-vapor-at-psep"
+      density_model: "constant"
+      density_kg_m3: 5.7974339
+      viscosity_model: "constant"
+      viscosity_pa_s: 1.52062e-5
+    water_liquid:
+      fluent_name: "water-liquid-at-psep"
+      density_model: "constant"
+      density_kg_m3: 881.21088
+      viscosity_model: "constant"
+      viscosity_pa_s: 1.45544e-4
+
+  multiphase:
+    model: "Mixture"
+    number_of_phases: 2
+    primary_phase:
+      name: "phase-1"
+      material: "water-vapor-at-psep"
+    secondary_phase:
+      name: "phase-2"
+      material: "water-liquid-at-psep"
+
+    interaction:
+      secondary_phase_diameter:
+        model: "constant"
+        value_m: 1.0e-5
+      slip_velocity_model: "Manninen-et-al"
+      drag_coefficient: "Schiller-Naumann"
+      drag_modification: "None"
+      surface_tension:
+        model: "Continuum Surface Force"
+        coefficient_N_m: 0.04041
+      wall_adhesion:
+        enabled: false
+      verification_requirement: >
+        These settings are part of the frozen Stage-3 fingerprint. If an API
+        branch is not exposed, preserve the verified parent state and obtain
+        the strongest available Fluent readback rather than silently assuming
+        defaults.
+
+  turbulence:
+    model: "k-epsilon"
+    variant: "RNG"
+    near_wall_treatment: "Standard Wall Functions"
+    differential_viscosity_model: true
+    swirl_dominated_flow: true
+    note: >
+      Standard k-epsilon -> RNG remains a separate later follow-up motivated by
+      Stage-2 N5. It is NOT part of F01-F12 and must not be baked into P0.
+
+  boundaries:
+
+    liquid_inlet:
+      type: "Velocity Inlet"
+      final_velocity_m_s: 27.118
+      initial_gauge_reference_pressure_pa: 1140000.0
+      phase_2_liquid_volume_fraction: 1.0
+      turbulence:
+        specification: "Intensity and Hydraulic Diameter"
+        turbulent_intensity: 0.0211
+        hydraulic_diameter_m: 0.01338
+      rule: >
+        Pure-phase liquid split inlet. During S1 branches only the velocity
+        magnitude is changed; composition/turbulence definitions remain frozen.
+
+    steam_inlet:
+      type: "Velocity Inlet"
+      final_velocity_m_s: 27.118
+      initial_gauge_reference_pressure_pa: 1140000.0
+      phase_2_liquid_volume_fraction: 0.0
+      turbulence:
+        specification: "Intensity and Hydraulic Diameter"
+        turbulent_intensity: 0.0211
+        hydraulic_diameter_m: 0.72061
+      rule: >
+        Pure-phase steam split inlet. During S1 branches only the velocity
+        magnitude is changed; composition/turbulence definitions remain frozen.
+
+    steam_outlet:
+      type: "Pressure Outlet"
+      gauge_pressure_pa: 1120000.0
+      phase_2_liquid_backflow_volume_fraction: 0.0
+      turbulence:
+        backflow_turbulent_intensity: 0.021525
+        backflow_hydraulic_diameter_m: 0.724
+
+    brine_outlet:
+      type: "Pressure Outlet"
+      gauge_pressure_pa: 1120000.0
+      phase_2_liquid_backflow_volume_fraction: 1.0
+      turbulence:
+        backflow_turbulent_intensity: 0.0261
+        backflow_hydraulic_diameter_m: 0.508
+
+    walls:
+      wall_motion: "Stationary Wall"
+      shear_condition: "No Slip"
+      roughness_height_m: 0.0
+      roughness_constant: 0.5
+
+  solution_methods:
+    pressure_velocity_coupling: "SIMPLE"
+    gradient: "Green-Gauss Node Based"
+    pressure: "PRESTO!"
+    momentum: "Second Order Upwind"
+    volume_fraction: "QUICK"
+    turbulent_kinetic_energy: "Second Order Upwind"
+    turbulent_dissipation_rate: "Second Order Upwind"
+    rhie_chow_high_order_term_relaxation:
+      enabled: false
+
+  under_relaxation:
+    pressure: 0.3
+    density: 1.0
+    body_force: 1.0
+    volume_fraction: 0.4
+    turbulent_kinetic_energy: 0.8
+    turbulent_dissipation_rate: 0.8
+    slip_or_drift: 0.1
+    turbulent_viscosity: 1.0
+    momentum:
+      parent_value: 0.7
+      note: >
+        P0 stores canonical 03A momentum URF 0.7. U1/U2 are applied only to
+        derived seed/branch copies.
+
+  initialization_policy:
+    parent_must_be_preinitialized: false
+    branch_initialization: "Hybrid Initialization"
+    initialize_exactly_once_per_branch: true
+    reinitialize_after_equation_transition: false
+    reinitialize_after_inlet_velocity_change: false
+    local_turbulence_override: false
+    liquid_patch: "None"
+
+# ---------------------------------------------------------------------------
+# 4. MONITOR-READY REQUIREMENTS
+# ---------------------------------------------------------------------------
+
+monitoring:
+  requirement: >
+    P0 must already contain the complete Stage-3 report/monitor definitions so
+    every branch and every server inherits the same evidence system.
+
+  solver_histories:
+    - "continuity residual"
+    - "x-velocity residual"
+    - "y-velocity residual"
+    - "z-velocity residual"
+    - "k residual"
+    - "epsilon residual"
+    - "phase-2 volume-fraction residual when active"
+
+  project_core_flow_pressure:
+    - logical_id: "total_mixture_inlet_flow"
+      required: true
+    - logical_id: "total_mixture_outlet_flow"
+      required: true
+    - logical_id: "steam_outlet_total_flow"
+      required: true
+    - logical_id: "brine_outlet_total_flow"
+      required: true
+    - logical_id: "full_domain_mass_imbalance"
+      required: true
+    - logical_id: "full_domain_relative_mass_imbalance"
+      required: true
+    - logical_id: "brine_pipe_entry_static_pressure"
+      required: true
+    - logical_id: "brine_pipe_entry_total_pressure"
+      required: true
+
+  phase_routing:
+    - logical_id: "liquid_to_brine_outlet"
+      required_when_full_mixture_active: true
+    - logical_id: "liquid_to_steam_outlet"
+      required_when_full_mixture_active: true
+    - logical_id: "vapour_to_brine_outlet"
+      required_when_full_mixture_active: true
+    - logical_id: "vapour_to_steam_outlet"
+      required_when_full_mixture_active: true
+
+  liquid_inventory:
+    - logical_id: "total_domain_liquid_inventory"
+      required_when_full_mixture_active: true
+    - logical_id: "Y010_liquid_inventory"
+      role: "diagnostic only"
+    - logical_id: "Y030_liquid_inventory"
+      role: "diagnostic only"
+
+  smoke_test:
+    required: true
+    use_disposable_copy: true
+    initialize_disposable_copy: true
+    suggested_iterations: "20-50"
+    pass_conditions:
+      - "every required monitor records non-empty history"
+      - "values are finite"
+      - "monitor definitions survive case save/reload where applicable"
+      - "phase monitors become meaningful when full Mixture equations are active"
+    rule: >
+      Never turn the smoke-test solution into P0. P0 remains untouched and
+      pre-initialization.
+
+# ---------------------------------------------------------------------------
+# 5. P0 VERIFICATION / RELEASE GATE
+# ---------------------------------------------------------------------------
+
+verification:
+  fresh_session_reload_required: true
+  fingerprint_required: true
+  sha256_required: true
+  recommended_companion_files:
+    - "03A-stage3-P0-monitor-ready-preinit.fingerprint.json"
+    - "03A-stage3-P0-monitor-ready-preinit.readback.json"
+    - "03A-stage3-P0-monitor-ready-preinit.sha256.txt"
+
+  must_verify:
+    - "Fluent version = 2025 R2"
+    - "3D / Double / Pressure-Based / Steady"
+    - "exact mesh identity and cell count"
+    - "required boundary topology"
+    - "two-phase Mixture model"
+    - "vapour primary / liquid secondary materials"
+    - "RNG k-epsilon + Standard Wall Functions"
+    - "Differential Viscosity Model ON"
+    - "Swirl Dominated Flow ON"
+    - "gravity [0,-9.81,0]"
+    - "Energy OFF"
+    - "DPM OFF"
+    - "EWF OFF"
+    - "no liquid patch / no solution field"
+    - "both outlet pressures = 1.120 MPa gauge"
+    - "both final inlet velocities = 27.118 m/s"
+    - "split inlet phase compositions correct"
+    - "PRESTO! / SIMPLE / common spatial discretization"
+    - "all common URFs"
+    - "Mixture interaction fingerprint"
+    - "all required report/monitor definitions"
+
+# ---------------------------------------------------------------------------
+# 6. FOUR REUSABLE EXECUTION SEEDS
+# ---------------------------------------------------------------------------
+#
+# These are NOT separate scientific parents.
+# They are deterministic pre-initialization children of P0 created only to
+# reduce repeated Fluent setup work across three independent machines.
+#
+# All four seeds must remain UNINITIALIZED.
+
+derived_execution_seeds:
+
+  A_M0_S0:
+    filename: "03A-stage3-SEED-A-M0-S0-preinit.cas.h5"
+    parent: "P0"
+    mixture_startup:
+      volume_fraction_equation: "active"
+      slip_velocity_equation: "active"
+    inlet_startup:
+      liquid_inlet_velocity_m_s: 27.118
+      steam_inlet_velocity_m_s: 27.118
+    purpose: "Full Mixture + full-speed startup"
+    final_branches:
+      U0_0p7: "F01"
+      U1_0p5: "F03"
+      U2_0p3: "F05"
+
+  B_M1_S0:
+    filename: "03A-stage3-SEED-B-M1-S0-preinit.cas.h5"
+    parent: "P0"
+    mixture_startup:
+      volume_fraction_equation: "temporarily inactive"
+      slip_velocity_equation: "temporarily inactive"
+    inlet_startup:
+      liquid_inlet_velocity_m_s: 27.118
+      steam_inlet_velocity_m_s: 27.118
+    purpose: "Carrier-first Mixture staging + full-speed startup"
+    transition:
+      restore_volume_fraction_equation: true
+      restore_slip_velocity_equation: true
+      reinitialize: false
+    final_branches:
+      U0_0p7: "F02"
+      U1_0p5: "F04"
+      U2_0p3: "F06"
+
+  C_M0_S1:
+    filename: "03A-stage3-SEED-C-M0-S1-preinit.cas.h5"
+    parent: "P0"
+    mixture_startup:
+      volume_fraction_equation: "active"
+      slip_velocity_equation: "active"
+    inlet_startup:
+      liquid_inlet_velocity_m_s: 2.7118
+      steam_inlet_velocity_m_s: 2.7118
+    velocity_ramp_percent: [10, 20, 40, 80, 100]
+    velocity_ramp_m_s: [2.7118, 5.4236, 10.8472, 21.6944, 27.1180]
+    purpose: "Full Mixture + progressive inlet/inertial loading"
+    final_branches:
+      U0_0p7: "F07"
+      U1_0p5: "F09"
+      U2_0p3: "F11"
+
+  D_M1_S1:
+    filename: "03A-stage3-SEED-D-M1-S1-preinit.cas.h5"
+    parent: "P0"
+    mixture_startup:
+      volume_fraction_equation: "temporarily inactive"
+      slip_velocity_equation: "temporarily inactive"
+    inlet_startup:
+      liquid_inlet_velocity_m_s: 2.7118
+      steam_inlet_velocity_m_s: 2.7118
+    velocity_ramp_percent: [10, 20, 40, 80, 100]
+    velocity_ramp_m_s: [2.7118, 5.4236, 10.8472, 21.6944, 27.1180]
+    purpose: "Carrier-first Mixture staging + progressive inlet/inertial loading"
+    transition:
+      restore_volume_fraction_equation: true
+      restore_slip_velocity_equation: true
+      reinitialize: false
+    final_branches:
+      U0_0p7: "F08"
+      U1_0p5: "F10"
+      U2_0p3: "F12"
+
+# ---------------------------------------------------------------------------
+# 7. FINAL 12-BRANCH MATRIX
+# ---------------------------------------------------------------------------
+
+branch_matrix:
+  F01: {seed: "A_M0_S0", momentum_urf: 0.7, role: "long-run canonical control"}
+  F02: {seed: "B_M1_S0", momentum_urf: 0.7, role: "isolate direct Fluent Mixture staging"}
+  F03: {seed: "A_M0_S0", momentum_urf: 0.5, role: "isolate moderate momentum damping"}
+  F04: {seed: "B_M1_S0", momentum_urf: 0.5, role: "Mixture staging + moderate damping"}
+  F05: {seed: "A_M0_S0", momentum_urf: 0.3, role: "isolate strong momentum damping"}
+  F06: {seed: "B_M1_S0", momentum_urf: 0.3, role: "Mixture staging + strong damping"}
+
+  F07: {seed: "C_M0_S1", momentum_urf: 0.7, role: "isolate progressive inlet/inertial loading"}
+  F08: {seed: "D_M1_S1", momentum_urf: 0.7, role: "combine two principal Fluent-guided staging strategies"}
+  F09: {seed: "C_M0_S1", momentum_urf: 0.5, role: "loading ramp + moderate damping"}
+  F10: {seed: "D_M1_S1", momentum_urf: 0.5, role: "combined recommendations + moderate damping"}
+  F11: {seed: "C_M0_S1", momentum_urf: 0.3, role: "loading ramp + strong damping"}
+  F12: {seed: "D_M1_S1", momentum_urf: 0.3, role: "most conservative combined strategy"}
+
+# ---------------------------------------------------------------------------
+# 8. BRANCH CREATION CONTRACT
+# ---------------------------------------------------------------------------
+
+branch_creation:
+  procedure:
+    - "Copy the required seed to a branch-specific local working directory."
+    - "Verify seed fingerprint before mutation."
+    - "Set only the branch momentum URF delta (0.7 / 0.5 / 0.3)."
+    - "Read back momentum URF."
+    - "Save branch preinit case if a persistent branch input is desired."
+    - "Fresh-session reload check before production."
+    - "Hybrid Initialize exactly once."
+    - "Run the schedule defined by the Stage-3 setup."
+  forbidden:
+    - "rebuild unchanged physical settings per branch without need"
+    - "initialize the shared P0 or any shared seed"
+    - "derive a branch from another branch's developed solution field"
+    - "use server_id as case identity"
+    - "reinitialize after M1 equation activation"
+    - "reinitialize between S1 velocity levels"
+    - "change outlet pressure"
+    - "add a liquid patch"
+    - "enable DPM or EWF"
+    - "switch turbulence model within F01-F12"
+
+# ---------------------------------------------------------------------------
+# 9. EXECUTION SCHEDULE LOGIC
+# ---------------------------------------------------------------------------
+
+execution_policy:
+  transition_evaluation:
+    initial_window_iterations: 750
+    reevaluation_increment_iterations: 250
+    forced_advance_at_iterations_in_stage: 3000
+  final_condition:
+    minimum_iterations: 5000
+    rule: >
+      If the final 100% operating-condition field remains finite and is still
+      materially improving at 5000 iterations, continue beyond 5000. Do not stop
+      early solely because residuals look poor; stop early only for hard
+      numerical failure.
+  hard_failure_examples:
+    - "Fluent floating-point exception"
+    - "unrecoverable AMG divergence / solver termination"
+    - "non-finite solution or monitor values"
+    - "loss of a valid checkpoint needed for continuation"
+
+# ---------------------------------------------------------------------------
+# 10. MULTI-SERVER EXECUTION METADATA
+# ---------------------------------------------------------------------------
+
+multi_server:
+  rule: >
+    server_id is NOT stored as scientific case identity. It may be recorded in
+    an execution manifest for traceability only.
+  example_runtime_manifest:
+    branch_id: "F08"
+    source_seed: "D_M1_S1"
+    fluent_server_id: 1
+    local_work_root: "C:/FluentRuns/03A-stage3/F08"
+    scientific_filename_prefix: "F08"
+  recommended_initial_distribution:
+    fluent_1_supervised: ["F08", "F10", "F12"]
+    fluent_2: ["F01", "F07", "F03", "F09"]
+    fluent_3: ["F02", "F04", "F11", "F06", "F05"]
+
+# ---------------------------------------------------------------------------
+# 11. RELEASE CHECKLIST
+# ---------------------------------------------------------------------------
+
+release_checklist:
+  P0:
+    - "pre-initialization only"
+    - "all frozen physical/numerical settings verified"
+    - "all Stage-3 monitors present"
+    - "monitor smoke test passed on disposable copy"
+    - "fresh-session reload verified"
+    - "fingerprint + readback + SHA256 written"
+    - "marked immutable/read-only in OneDrive if practical"
+  seeds:
+    - "derived only from verified P0"
+    - "uninitialized"
+    - "only M/S startup deltas applied"
+    - "fresh-session reload verified"
+    - "fingerprint recorded"
+  branches:
+    - "derived from correct seed"
+    - "only U delta applied before initialization"
+    - "readback verified"
+    - "case identity independent of server assignment"
