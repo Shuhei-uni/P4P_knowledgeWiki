@@ -12,6 +12,8 @@ poll iterations from Python, write periodic checkpoints from Python, or treat a
 local run-state JSON as the authoritative recovery record. See
 `knowledge/fluent-settings/native_run_and_autosave.md`.
 
+The explicitly documented `03A-stage3` F01–F12 adaptive blocking workflow is a narrow user-approved exception to the normal long-run rule. It is defined below and in `knowledge/fluent-settings/native_run_and_autosave.md`; do not generalize it to other campaigns.
+
 Do not collapse setup construction and run/save orchestration back into one monolithic script unless the user explicitly asks for that.
 
 The main risk in this folder is not just wrong values. The main risk is writing automation that assumes Fluent is a stable Python object tree when it actually behaves like a dependency-ordered GUI state machine.
@@ -318,6 +320,32 @@ Do not add Python loops around `solver.tui.solve.iterate(...)` or
 checkpoint depend on a Python call returning successfully after each iteration
 block.
 
+### C. Explicit 03A Stage-3 adaptive checkpoint exception
+
+The user has explicitly approved a narrow exception for:
+
+`Setups/full-geometry/mixture/steady-liquid-outlet/03a-stage3-fluent-recommended-convergence-sweep.md`
+
+and only its F01–F12 production branches.
+
+The Stage-3 experiment requires the execution agent to evaluate a whole-field gate at discrete checkpoints before deciding whether to remain at the current state or advance. For these branches, the execution agent may therefore remain attached to Fluent and issue **one synchronous blocking solve call per scientific decision block**:
+
+- first intermediate-state block: `750` iterations;
+- later intermediate-state reassessment blocks: `250` iterations;
+- final-condition blocks: as specified by the Stage-3 authority.
+
+The blocking call returning is the intended agent wake-up mechanism. After return, the agent inspects the histories, evaluates the frozen Stage-3 gate, records the decision, performs any prescribed checkpoint/transition, and only then issues the next solve block.
+
+This exception does **not** authorize a generic Python iteration runner:
+
+- no Python `for`/`while` loop around solve calls;
+- no one-iteration or fine-grained client loop;
+- no automatic repetition of an uncertain block after connection loss;
+- Fluent-native local autosave remains mandatory for recovery;
+- reconnect to the same Fluent process first after transport failure and establish actual stage/iteration state before taking further solver action;
+- gRPC/client/transport failure is not `NUMERICAL_FAILURE` unless Fluent itself has numerically failed;
+- the exception does not apply outside F01–F12 unless the user explicitly extends it.
+
 ## Script Architecture Rules
 Case scripts in `scripts/setup/` must stay thin orchestration layers.
 
@@ -444,7 +472,7 @@ When editing `PyAnsys/`:
 - move repeated mechanics into `src/pyansys_fluent/`
 - preserve existing CLI flags unless there is a strong reason to change them
 - avoid renaming scripts or moving files unless the new layout clearly improves the workflow contract
-- keep long-run execution inside Fluent; setup deliverables are `.cas.h5`, while Python is limited to preparation, reconnection, inspection, and post-processing
+- keep long-run execution inside Fluent, except for the explicit F01–F12 Stage-3 adaptive blocking decision workflow above; setup deliverables remain `.cas.h5`, and all other Python use stays limited to preparation, reconnection, inspection, and post-processing
 
 ## Completion Checklist
 Before finishing work in `PyAnsys/`, verify:
@@ -456,7 +484,7 @@ Before finishing work in `PyAnsys/`, verify:
 5. failure behavior is classified, not silent
 6. the relevant knowledge files were updated if new path/order knowledge was learned
 7. the script remains a thin orchestration layer rather than a new monolith
-8. setup scripts save `.cas.h5` only; long-run iteration and autosave stay inside Fluent, while Python is limited to preparation, reconnection, inspection, and post-processing
+8. setup scripts save `.cas.h5` only; long-run iteration and autosave stay inside Fluent except for the explicit F01–F12 Stage-3 adaptive blocking decision workflow, while Python otherwise remains limited to preparation, reconnection, inspection, and post-processing
 
 ## Conflict Rule
 If a direct instruction from the user conflicts with this file, follow the user's instruction.
