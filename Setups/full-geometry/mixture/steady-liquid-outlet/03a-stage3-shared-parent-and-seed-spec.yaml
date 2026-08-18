@@ -12,14 +12,14 @@ campaign:
   id: "03A-stage3"
   setup_family: "03A"
   title: "Fluent-recommended convergence sweep"
-  status: "draft execution specification"
+  status: "active execution specification"
   fluent_version: "2025 R2"
   intent: >
     Test Fluent-recommended Mixture equation staging, progressive inlet/inertial
     loading, and momentum under-relaxation on the unchanged 03A full-geometry
     steady Mixture physical case.
   authoritative_repo_setup:
-    path: "Setups/full-geometry/mixture/steady-liquid-outlet/03a-stage3-fluent-recommended-convergence-sweep-draft.md"
+    path: "Setups/full-geometry/mixture/steady-liquid-outlet/03a-stage3-fluent-recommended-convergence-sweep.md"
 
 # ---------------------------------------------------------------------------
 # 1. STORAGE / PROVENANCE POLICY

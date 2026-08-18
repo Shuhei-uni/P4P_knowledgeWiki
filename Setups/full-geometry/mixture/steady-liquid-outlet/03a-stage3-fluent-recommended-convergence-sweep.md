@@ -1,6 +1,6 @@
-# 03A Stage 3 — Fluent-Recommended Convergence Sweep (Draft)
+# 03A Stage 3 — Fluent-Recommended Convergence Sweep
 
-> **Status:** draft — scientific design substantially resolved; execution implementation still requires smoke-test verification  
+> **Status:** active plan — scientific design substantially resolved; execution implementation still requires smoke-test verification  
 > **Setup family:** `03A` full-geometry steady Mixture baseline  
 > **Purpose:** perform a broad, long-duration numerical convergence sweep based directly on Ansys Fluent guidance for difficult Mixture/cyclone and strongly swirling flows before narrowing onto any one turbulence-model or solver-rescue strategy.  
 > **Physical case:** unchanged from 03A — same geometry, materials, phase definitions, split inlet, outlet pressures, gravity, and no liquid patch.  
@@ -1342,7 +1342,7 @@ Use the full Stage-3 evidence to choose targeted follow-up numerical tests that 
 
 ## 21. Remaining execution-implementation checks
 
-The scientific decisions in this draft are now mostly resolved. Before production execution, verify only the implementation details needed to make the plan reproducible:
+The scientific decisions in this plan are now mostly resolved. Before production execution, verify only the implementation details needed to make the plan reproducible:
 
 - exact Fluent/PyFluent commands for toggling `Volume Fraction` and `Slip Velocity` independently in the active 2025 R2 Mixture case;
 - whether the current gRPC execution layer can modify both split-inlet velocities safely between continuation stages without reinitialization;
