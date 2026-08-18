@@ -5,7 +5,8 @@
 > **Purpose:** perform a broad, long-duration numerical convergence sweep based directly on Ansys Fluent guidance for difficult Mixture/cyclone and strongly swirling flows before narrowing onto any one turbulence-model or solver-rescue strategy.  
 > **Physical case:** unchanged from 03A — same geometry, materials, phase definitions, split inlet, outlet pressures, gravity, and no liquid patch.  
 > **Parent authority:** a verified 03A pre-initialization case with the frozen Stage-3 fingerprint defined below. Branches must not begin from an already-developed Stage-1/Stage-2 solution field unless a later setup explicitly defines that as a separate experiment.  
-> **Execution model:** three independent Fluent sessions may execute Stage-3 branches in parallel. Session/server assignment is operational execution metadata only and must not define case identity, scientific lineage, filenames, or report structure.
+> **Execution model:** three independent Fluent sessions may execute Stage-3 branches in parallel. Session/server assignment is operational execution metadata only and must not define case identity, scientific lineage, filenames, or report structure.  
+> **Execution specification:** [`03a-stage3-shared-parent-and-seed-spec.yaml`](./03a-stage3-shared-parent-and-seed-spec.yaml) is the machine-readable authority for shared P0 construction, reusable schedule seeds, branch derivation, OneDrive/local-run handling, and server-independent execution metadata.
 
 ---
 
@@ -433,41 +434,57 @@ For each branch:
 
 This avoids unnecessary reconstruction of settings already carried correctly by the parent while still preventing hidden differences between branches.
 
-### 8.1 Shared parent and branch seeds for parallel execution
+### 8.1 Shared P0 and reusable schedule seeds for parallel execution
 
-For the three-session production campaign, setup preparation should be centralized before long runs begin.
+For the three-session production campaign, setup preparation should be centralized before long runs begin. The detailed machine-readable construction and release contract is maintained in [`03a-stage3-shared-parent-and-seed-spec.yaml`](./03a-stage3-shared-parent-and-seed-spec.yaml). Where execution-preparation details are repeated here, they should remain consistent with that YAML.
 
-Create one authoritative monitor-ready, pre-initialization Stage-3 parent, conceptually:
+Create one authoritative monitor-ready, pre-initialization Stage-3 parent:
 
 ```text
 03A-stage3-P0-monitor-ready-preinit.cas.h5
 ```
 
-The exact filename may differ, but the artifact must remain immutable once verified. Its companion fingerprint/readback should prove that it satisfies the frozen Stage-3 state and that all required Stage-3 monitor/report definitions are present.
+P0 is the common scientific authority. It must remain immutable, uninitialized and solution-free once its frozen Stage-3 fingerprint and monitor definitions have been verified.
 
-Use this same parent to generate verified branch-specific **execution seeds**:
+To reduce repeated setup work across the three independent Fluent computers, derive only four reusable **pre-initialization schedule seeds** from P0:
 
 ```text
-F01-preinit
-F02-preinit
-...
-F12-preinit
+SEED-A-M0-S0  full Mixture + 100% inlet
+SEED-B-M1-S0  carrier-first + 100% inlet
+SEED-C-M0-S1  full Mixture + 10% inlet
+SEED-D-M1-S1  carrier-first + 10% inlet
 ```
 
-Each execution seed is simply:
+These four seeds encode only the M/S startup state. They remain uninitialized and are operational conveniences rather than new scientific parents.
+
+The 12 experiment branches are then produced by copying the appropriate reusable seed and applying only the branch momentum-URF delta:
+
+```text
+SEED-A + U0/U1/U2 → F01 / F03 / F05
+SEED-B + U0/U1/U2 → F02 / F04 / F06
+SEED-C + U0/U1/U2 → F07 / F09 / F11
+SEED-D + U0/U1/U2 → F08 / F10 / F12
+```
+
+with:
+
+```text
+U0 = 0.7
+U1 = 0.5
+U2 = 0.3
+```
+
+A persistent `F##-preinit` case may still be saved after the U delta is applied and read back if operationally useful, but it is not necessary to pre-build twelve elaborate independent seeds. Every branch remains scientifically:
 
 ```text
 P0
-+ branch-specific starting delta
-+ positive readback
-+ pre-initialization save/reload verification
++ documented M/S schedule seed
++ documented U delta
 ```
 
-These seeds are operational conveniences only. They do not create new scientific parents or change the branch lineage; every branch still derives scientifically from the same Stage-3 parent authority plus its documented controlled delta.
+The shared OneDrive location is the common artifact exchange so all three independent Fluent computers can access P0 and the same four verified schedule seeds. For production solving, each agent copies the selected seed into that computer's local run directory, applies and verifies the branch U delta, and allows Fluent-native autosave/checkpointing to operate locally. Completed stage/checkpoint artifacts can then be synchronized back to the shared location. Avoid simultaneous Fluent writes from several computers to the same shared file path.
 
-The shared OneDrive location may be used as the common artifact exchange so all three independent Fluent computers can access the same verified parent and branch seeds. For production solving, each agent should copy the selected seed into that computer's local run directory and allow Fluent-native autosave/checkpointing to operate there. Completed stage/checkpoint artifacts can then be synchronized back to the shared location. Avoid making simultaneous Fluent writes from several computers to the same shared file path.
-
-Before generating the production seeds, use a disposable copy of P0 for a short monitor smoke test. Verify that every required residual, flow, pressure and liquid-inventory history records non-empty temporal data and behaves correctly across save/reload. The authoritative P0 used for branch generation must remain pre-initialization and solution-free.
+Before releasing P0/seeds for production, use a disposable copy of P0 for a short monitor smoke test. Verify that every required residual, flow, pressure and liquid-inventory history records non-empty temporal data and behaves correctly across save/reload. Never turn the smoke-test solution into P0 or one of the shared seeds.
 
 ---
 
@@ -1206,10 +1223,10 @@ Each execution agent owns exactly one Fluent endpoint/session during its assigne
 
 For every queued branch, the agent must:
 
-1. obtain the verified branch pre-initialization seed or reproduce it from the verified P0 parent using the documented controlled delta;
-2. establish branch identity from the explicitly loaded artifact, never from `server_id`;
-3. verify the Stage-3 frozen fingerprint and branch-specific starting settings before initialization;
-4. copy the selected seed to a local run directory on that Fluent computer before production solving;
+1. obtain the correct verified reusable schedule seed (`A/B/C/D`) and apply the documented branch momentum-URF delta, or reproduce the same starting state from verified P0 if the seed is unavailable;
+2. establish branch identity from the explicitly loaded artifact and branch definition, never from `server_id`;
+3. verify the Stage-3 frozen fingerprint, seed M/S state and branch-specific U value before initialization;
+4. copy the selected seed/branch input to a local run directory on that Fluent computer before production solving;
 5. Hybrid Initialize exactly once;
 6. verify Fluent-native autosave/checkpoint configuration before the long run;
 7. execute the branch schedule and evidence gates defined in Sections 9–11;
@@ -1330,7 +1347,7 @@ The scientific decisions in this draft are now mostly resolved. Before productio
 - exact Fluent/PyFluent commands for toggling `Volume Fraction` and `Slip Velocity` independently in the active 2025 R2 Mixture case;
 - whether the current gRPC execution layer can modify both split-inlet velocities safely between continuation stages without reinitialization;
 - that inlet turbulence intensity/hydraulic-diameter values remain unchanged when velocity is ramped;
-- creation and verification of the shared monitor-ready P0 parent and F01–F12 pre-initialization execution seeds;
+- creation and verification of the shared monitor-ready P0 parent and four reusable `A/B/C/D` pre-initialization schedule seeds, including branch-specific U readback before initialization;
 - branch/checkpoint naming convention;
 - persistence and reload behaviour for residual, liquid-inventory, phase-flux and brine-entry-pressure histories;
 - calculation of the automated 750-iteration turbulence/carrier/flow-pressure gate metrics;
