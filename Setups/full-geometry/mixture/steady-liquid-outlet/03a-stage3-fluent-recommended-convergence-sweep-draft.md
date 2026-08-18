@@ -4,7 +4,8 @@
 > **Setup family:** `03A` full-geometry steady Mixture baseline  
 > **Purpose:** perform a broad, long-duration numerical convergence sweep based directly on Ansys Fluent guidance for difficult Mixture/cyclone and strongly swirling flows before narrowing onto any one turbulence-model or solver-rescue strategy.  
 > **Physical case:** unchanged from 03A — same geometry, materials, phase definitions, split inlet, outlet pressures, gravity, and no liquid patch.  
-> **Parent authority:** a verified 03A pre-initialization case with the frozen Stage-3 fingerprint defined below. Branches must not begin from an already-developed Stage-1/Stage-2 solution field unless a later setup explicitly defines that as a separate experiment.
+> **Parent authority:** a verified 03A pre-initialization case with the frozen Stage-3 fingerprint defined below. Branches must not begin from an already-developed Stage-1/Stage-2 solution field unless a later setup explicitly defines that as a separate experiment.  
+> **Execution model:** three independent Fluent sessions may execute Stage-3 branches in parallel. Session/server assignment is operational execution metadata only and must not define case identity, scientific lineage, filenames, or report structure.
 
 ---
 
@@ -431,6 +432,42 @@ For each branch:
 12. save a paired case/data checkpoint at every stage transition.
 
 This avoids unnecessary reconstruction of settings already carried correctly by the parent while still preventing hidden differences between branches.
+
+### 8.1 Shared parent and branch seeds for parallel execution
+
+For the three-session production campaign, setup preparation should be centralized before long runs begin.
+
+Create one authoritative monitor-ready, pre-initialization Stage-3 parent, conceptually:
+
+```text
+03A-stage3-P0-monitor-ready-preinit.cas.h5
+```
+
+The exact filename may differ, but the artifact must remain immutable once verified. Its companion fingerprint/readback should prove that it satisfies the frozen Stage-3 state and that all required Stage-3 monitor/report definitions are present.
+
+Use this same parent to generate verified branch-specific **execution seeds**:
+
+```text
+F01-preinit
+F02-preinit
+...
+F12-preinit
+```
+
+Each execution seed is simply:
+
+```text
+P0
++ branch-specific starting delta
++ positive readback
++ pre-initialization save/reload verification
+```
+
+These seeds are operational conveniences only. They do not create new scientific parents or change the branch lineage; every branch still derives scientifically from the same Stage-3 parent authority plus its documented controlled delta.
+
+The shared OneDrive location may be used as the common artifact exchange so all three independent Fluent computers can access the same verified parent and branch seeds. For production solving, each agent should copy the selected seed into that computer's local run directory and allow Fluent-native autosave/checkpointing to operate there. Completed stage/checkpoint artifacts can then be synchronized back to the shared location. Avoid making simultaneous Fluent writes from several computers to the same shared file path.
+
+Before generating the production seeds, use a disposable copy of P0 for a short monitor smoke test. Verify that every required residual, flow, pressure and liquid-inventory history records non-empty temporal data and behaves correctly across save/reload. The authoritative P0 used for branch generation must remain pre-initialization and solution-free.
 
 ---
 
@@ -1133,22 +1170,112 @@ This makes later instability traceable to the exact equation/loading change that
 
 ---
 
-## 19. Draft execution order
+## 19. Three-session execution distribution
 
-The full matrix is intended to be run, but a practical submission order is:
+Stage 3 is intended to use **three independent Fluent sessions in parallel**. The distribution below is an execution plan only; it does not change the scientific meaning or lineage of F01–F12.
+
+The governing rule is:
+
+> **Agents own Fluent sessions; Fluent sessions do not own scientific cases.**
+
+`server_id` / session number is only a connection-routing detail. It may appear in transient operational diagnostics or agent instructions, but it must not be used as the branch identity and should not be embedded in scientific case names, report filenames, setup lineage, result JSON, or interpretation.
+
+### 19.1 Initial agent/session queues
+
+Use the following initial queues:
+
+| Fluent session | Assigned queue | Reason for grouping |
+|---|---|---|
+| **Session 1 — actively monitored by the user** | `F08 → F10 → F12` | all Schedule-D `M1 + S1` branches; highest number of equation/loading transitions and therefore the most useful branches to supervise interactively |
+| **Session 2** | `F01 → F07 → F03 → F09` | starts with the canonical long control, then covers ramp-only and moderate-damping branches |
+| **Session 3** | `F02 → F04 → F11 → F06 → F05` | starts with the direct Fluent Mixture-staging branch, then covers complementary staged and strong-damping branches |
+
+This gives the first parallel launch:
 
 ```text
+Session 1: F08   combined Mixture staging + progressive loading
+Session 2: F01   canonical long control
+Session 3: F02   direct Fluent Mixture-staging comparison
+```
+
+The first batch therefore gives early visibility on the central `F01 ↔ F02` comparison while the user-supervised session exercises the most transition-heavy combined strategy.
+
+### 19.2 Agent ownership rule
+
+Each execution agent owns exactly one Fluent endpoint/session during its assigned work. Apart from the endpoint and queue, the agents should follow the same Stage-3 execution contract.
+
+For every queued branch, the agent must:
+
+1. obtain the verified branch pre-initialization seed or reproduce it from the verified P0 parent using the documented controlled delta;
+2. establish branch identity from the explicitly loaded artifact, never from `server_id`;
+3. verify the Stage-3 frozen fingerprint and branch-specific starting settings before initialization;
+4. copy the selected seed to a local run directory on that Fluent computer before production solving;
+5. Hybrid Initialize exactly once;
+6. verify Fluent-native autosave/checkpoint configuration before the long run;
+7. execute the branch schedule and evidence gates defined in Sections 9–11;
+8. save/checkpoint before every equation/loading transition;
+9. record `PREFERRED_PASS_ADVANCE`, `STAGE_STALLED`, `FORCED_ADVANCE_AT_3000`, or hard numerical failure as applicable;
+10. complete the minimum 5,000 final-condition iterations unless a hard numerical failure prevents it;
+11. return the complete branch artifact set defined in Section 18;
+12. then move to the next unstarted branch in that session's queue.
+
+An agent must not reinterpret its queue as a new setup grouping. For example, `F08` remains `F08` regardless of whether it happens to run on Session 1, Session 2, or a replacement endpoint after recovery.
+
+### 19.3 Queue flexibility
+
+The queue above is the preferred starting distribution, not a permanent case/server binding.
+
+Before the full production matrix, it is acceptable to perform a short **non-scientific hardware throughput smoke test** from disposable copies of the same verified seed on all three computers. Those runs must be clearly labelled as execution benchmarks and must not be included as F01–F12 scientific results.
+
+If one machine is materially faster or a session becomes unavailable, any **unstarted** branch may be moved to another session to improve throughput. Moving a branch changes only operational ownership; its parent, branch definition, settings, evidence requirements and scientific identity remain unchanged.
+
+Do not casually move an already-running branch between live sessions. If recovery on another computer is required, resume only from a verified complete case/data checkpoint and preserve the exact branch/stage/iteration provenance.
+
+### 19.4 Parallel-execution reporting boundary
+
+A lightweight operational board may record information such as:
+
+```text
+Session 1 — F08 — full Mixture 10% — current stage iteration 1450
+Session 2 — F01 — final 100% — current stage iteration 3200
+Session 3 — F02 — carrier-only — current stage iteration 2250
+```
+
+That board is execution state only.
+
+The scientific branch artifacts and reports should remain organized by:
+
+```text
+F##
+parent artifact
+controlled delta
+stage history
+case/data checkpoints
+monitor evidence
+final classification
+```
+
+not by the computer or server that happened to run them.
+
+### 19.5 Overall execution priority
+
+The full matrix is still intended to be completed. If early visibility is needed beyond the first three parallel branches, retain the original scientific priority inside the available queues:
+
+```text
+highest early-value branches:
 F01  canonical long control
 F02  direct Fluent Mixture staging only
 F07  inlet/inertial ramp only
 F08  both principal Fluent-guided staging recommendations
+
+then:
 F03/F04/F09/F10  moderate momentum damping variants
+
+then:
 F05/F06/F11/F12  strongest damping variants
 ```
 
-This ordering is for early visibility only. It does **not** authorize stopping the matrix after a promising early branch unless a later decision explicitly changes the campaign objective.
-
-The current intention is to run the complete 12-case sweep and obtain a final-condition history for every branch that can reach it without hard numerical failure.
+The three-session allocation is intended to reduce wall-clock experiment time without changing that interpretation hierarchy or authorizing early termination of the 12-case sweep.
 
 ---
 
@@ -1203,11 +1330,13 @@ The scientific decisions in this draft are now mostly resolved. Before productio
 - exact Fluent/PyFluent commands for toggling `Volume Fraction` and `Slip Velocity` independently in the active 2025 R2 Mixture case;
 - whether the current gRPC execution layer can modify both split-inlet velocities safely between continuation stages without reinitialization;
 - that inlet turbulence intensity/hydraulic-diameter values remain unchanged when velocity is ramped;
+- creation and verification of the shared monitor-ready P0 parent and F01–F12 pre-initialization execution seeds;
 - branch/checkpoint naming convention;
 - persistence and reload behaviour for residual, liquid-inventory, phase-flux and brine-entry-pressure histories;
 - calculation of the automated 750-iteration turbulence/carrier/flow-pressure gate metrics;
 - checkpoint/save behaviour before every transition;
 - explicit recording of `PREFERRED_PASS_ADVANCE`, `STAGE_STALLED`, `FORCED_ADVANCE_AT_3000`, and hard numerical failure;
-- confirmation that the forced-progression scheduler never skips the final 5,000-iteration operating-condition phase unless Fluent genuinely fails numerically.
+- confirmation that the forced-progression scheduler never skips the final 5,000-iteration operating-condition phase unless Fluent genuinely fails numerically;
+- verification that each of the three agents can independently connect to its assigned endpoint, load the same shared seed lineage, and write only to its own local run workspace.
 
 No scientific conclusion should be attached to Stage 3 until the full-condition histories have been analysed.
