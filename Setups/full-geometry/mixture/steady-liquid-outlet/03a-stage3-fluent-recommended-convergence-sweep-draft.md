@@ -46,33 +46,39 @@ However, the improvement did not remain bounded when the authoritative RNG `k-ep
 
 The working principle is:
 
-> Before changing the physical model or committing to a different turbulence model, test whether a difficult cyclone/Mixture field becomes substantially more stable when Fluent's own staged-solution recommendations are applied over a sufficiently long, evidence-driven iteration history.
+> Before changing the physical model or committing to a different turbulence model, test whether the difficult cyclone/Mixture field can be made substantially more numerically useful by applying Fluent's own staged-solution recommendations over a long enough history to distinguish short-term improvement from genuine settling.
 
-The important Stage-3 change from the earlier screening work is that staged branches are **not advanced according to a fixed iteration count**. The field must demonstrate improving or stabilising `k` and `epsilon` behaviour before additional equations or inlet loading are introduced.
+Stage 3 is deliberately broader than Stage 2. It is not trying to find the quickest rescue. It is trying to map which parts of Fluent's recommended continuation strategy actually help this specific full-geometry separator.
+
+A second important principle is that the carrier field is not judged by turbulence residuals alone. For this project, the central physical quantities are the **total flow split, phase flow split, full-domain balance, and pressure behaviour around the brine outlet**. A numerically quieter `k`/`epsilon` field is useful only if the corresponding pressure/flow field is also becoming developed and interpretable.
+
+The staged branches therefore use an evidence-driven transition rule, but that rule is intentionally **non-terminal**. If a preconditioning stage does not satisfy the preferred gate, the branch is still allowed to progress after a sufficiently long attempt. This is important because the project objective is to complete at least one full end-to-end realization of every planned Fluent-guided strategy rather than abandoning branches before the final operating condition is ever tested.
 
 ---
 
 ## 2. Fluent guidance being tested
 
-Stage 3 is built from two official Ansys Fluent guidance sources for Fluent 2025 R2.
+Stage 3 is built primarily from two official Ansys Fluent guidance sources for Fluent 2025 R2, with one additional turbulence-convergence recommendation retained as an explicitly later follow-up.
 
-### 2.1 Mixture-model solution strategy
+### 2.1 Mixture-model solution strategy — highest-priority/direct cyclone guidance
 
 Fluent's multiphase solution guidance states that, for some Mixture-model cases **including cyclone separation**, an initial solution can be obtained more easily by temporarily disabling the:
 
 - `Volume Fraction` equation;
 - `Slip Velocity` equation;
 
-then converging the remaining flow field, restoring those equations, and continuing the full Mixture solution.
+then computing the initial flow field, restoring those equations once a converged flow field has been obtained, and continuing the full Mixture solution.
 
 The same guidance recommends beginning a Mixture calculation with a **slip-velocity under-relaxation factor of `0.2` or lower** and only increasing it if convergence is good.
+
+This is the most directly applicable Fluent recommendation in Stage 3 because Fluent explicitly names cyclone separation.
 
 Official source:
 
 - Ansys Fluent 2025 R2 User's Guide — *Solution Strategies for Multiphase Modeling*, §27.8.2.2 Mixture Model:  
   <https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_sec_multiphase_solution.html>
 
-### 2.2 Strong swirl / rotating-flow solution strategy
+### 2.2 Strong swirl / rotating-flow solution strategy — strong 3D continuation guidance
 
 Fluent's swirl/rotation guidance recommends, for difficult pressure-based segregated calculations:
 
@@ -82,35 +88,67 @@ Fluent's swirl/rotation guidance recommends, for difficult pressure-based segreg
 
 The guide gives approximately `10%` of the final operating condition as a possible initial level and suggests increasing the rotational/swirl speed progressively, for example by roughly doubling between stages.
 
+For the current fixed 3D spiral inlet, reducing the inlet velocity is not a pure swirl-only control: it changes phase mass flow, Reynolds number, inertial loading and centrifugal forcing together. Stage 3 therefore treats the inlet-velocity ramp as a **numerical continuation/homotopy strategy adapted from Fluent's gradual-swirl recommendation**, not as a literal reproduction of an axisymmetric or moving-reference-frame procedure.
+
 Official sources:
 
-- Ansys Fluent 2025 R2 User's Guide — *Swirling and Rotating Flows* / related solution guidance:  
-  <https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug.html>
+- Ansys Fluent 2025 R2 User's Guide — *Swirling and Rotating Flows* / related solution guidance;  
 - Ansys Fluent 2025 R2 User's Guide — *Flow in Single Moving Reference Frames*, gradual rotational-speed strategy:  
   <https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_th_sec_srf_fjk.html>
 
-### 2.3 Important scope distinction
+### 2.3 Scope distinction for the 3D separator
 
 The detailed equation-by-equation procedure in the Fluent swirl chapter that separately establishes swirl momentum, freezes selected equations, and then restores all equations is written for **axisymmetric swirl**. The present separator is fully 3D, so that exact 2D procedure is **not** copied into this Stage-3 matrix as though it were directly prescribed for the current geometry.
 
-The Stage-3 sweep uses only recommendations that can be defensibly adapted to the present 3D case:
+The Stage-3 sweep uses only recommendations that can be defensibly applied or adapted to the present 3D case:
 
 1. Mixture equation staging;
 2. gradual flow/inertial loading as a numerical continuation strategy;
 3. conservative momentum under-relaxation;
 4. retention of `PRESTO!` and low slip under-relaxation.
 
-The production mesh is intentionally **not** an experimental variable or qualification question in Stage 3. Mesh refinement/mesh sensitivity remains outside this numerical-strategy sweep.
+The emphasis is intentionally not equal across those factors:
+
+```text
+M — Mixture equation staging
+    strongest/direct cyclone recommendation
+
+S — progressive inlet/inertial loading
+    strong 3D continuation strategy adapted from Fluent swirl guidance
+
+U — momentum under-relaxation
+    secondary Fluent-guided stabilization sensitivity
+```
+
+The 12-case factorial is retained because the project currently wants a broad sweep, but interpretation should respect that hierarchy.
+
+### 2.4 Standard k-epsilon → RNG k-epsilon is a separate Fluent-supported follow-up
+
+Fluent's turbulence convergence guidance also states that, when using RNG `k-epsilon`, convergence may improve if a solution is first obtained with standard `k-epsilon` and then used as the starting point for RNG. Fluent notes that RNG introduces additional nonlinearities.
+
+That recommendation is directly relevant to the promising Stage-2 `N5` observation. It strengthens the case for revisiting N5 later, but it does **not** become another factor in F01–F12. Stage 3 first asks whether the authoritative RNG/Mixture setup can be made useful through the cyclone/swirl startup strategies without changing turbulence-model form.
+
+Official source:
+
+- Ansys Fluent 2025 R2 User's Guide — *Solution Strategies for Turbulent Flow Simulations*, §16.19.3 Convergence:  
+  <https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_sec_turb_solution.html>
 
 ---
 
 ## 3. Experimental question
 
-> **Which combination of Fluent-recommended Mixture staging, gradual inlet/inertial loading, and momentum damping most effectively reduces the long-window residual oscillation and full-domain imbalance of the 03A full-geometry steady field without changing the physical boundary condition?**
+Primary question:
+
+> **Which combination of Fluent-recommended Mixture staging, gradual inlet/inertial loading, and momentum damping most effectively produces a developed, numerically useful full-geometry steady field without changing the physical boundary condition?**
+
+For this project, a developed field means more than low residuals. The main evidence is split into two equally important classes:
+
+1. **solver behaviour** — especially `k`, `epsilon`, continuity and momentum residual envelopes;
+2. **project-core flow behaviour** — total inlet/outlet flow, phase routing once active, full-domain mass balance, and pressure behaviour at the brine-pipe entry.
 
 A secondary question is:
 
-> **After several thousand full-operating-condition iterations, do the `k` and `epsilon` residuals continue to diverge/expand, become bounded but oscillatory, or approach a progressively smaller stationary envelope?**
+> **After several thousand full-operating-condition iterations, do the `k` and `epsilon` residuals continue to diverge/expand, become bounded but oscillatory, or approach a progressively smaller stationary envelope while the pressure/flow histories also become stationary?**
 
 This is more important than the value of a single final residual point.
 
@@ -195,7 +233,7 @@ Implicit Body Force formulation = OFF
 
 **Implicit Body Force remains OFF for F01–F12.**
 
-Fluent guidance makes Implicit Body Force a relevant possible later numerical test for multiphase calculations with body forces, but enabling it throughout Stage 3 would change the canonical 03A baseline. If Stage 3 does not produce a useful branch, Implicit Body Force can be tested later as a small companion experiment from the best Stage-3 strategy rather than being added to the 12-case factorial.
+It may be a useful later numerical test, but enabling it throughout Stage 3 would add another uncontrolled solver factor to a campaign that is specifically intended to isolate the Fluent cyclone/swirl startup recommendations.
 
 ### 5.4 Initialization
 
@@ -245,7 +283,7 @@ Any exposed solution limits or expert controls not listed numerically above rema
 
 The existing slip/drift URF of `0.1` already satisfies Fluent's recommendation to begin at `0.2` or lower, so slip URF is **not** a Stage-3 factorial variable.
 
-`PRESTO!` is retained in every branch because Fluent recommends it for strong rotational/swirl pressure gradients. It is therefore treated as a fixed best-practice setting rather than another matrix factor.
+`PRESTO!` is retained in every branch because Fluent recommends it for steep rotational/swirl pressure gradients. It is therefore treated as a fixed best-practice setting rather than another matrix factor.
 
 ---
 
@@ -273,7 +311,9 @@ Slip Velocity   = temporarily inactive
 
 Solve the remaining steady carrier-flow/turbulence field first. Then reactivate both equations **without reinitialization** and continue the full Mixture calculation.
 
-This is the recommendation Fluent explicitly associates with difficult Mixture cases such as cyclone separation.
+This is the highest-priority Stage-3 factor because Fluent explicitly associates this method with difficult Mixture cases such as cyclone separation.
+
+The M1 transition must not be judged from `k` and `epsilon` alone. Fluent's wording is to obtain a converged initial **flow field**. For this project, M1 therefore places heavy weight on the total-flow and pressure monitors as well as the carrier residuals before the preferred transition gate is considered satisfied.
 
 ### Factor S — progressive inlet/inertial loading
 
@@ -299,7 +339,7 @@ Use the project implementation of Fluent's approximate `10%` start / progressive
 
 The exact intermediate percentages are a **project adaptation**, not values prescribed verbatim by Fluent.
 
-For this 3D spiral inlet, reducing inlet velocity is not a pure independent swirl control. It simultaneously changes both phase mass flows, Reynolds/inertial loading and centrifugal forcing. S1 is therefore interpreted as a **numerical continuation/homotopy strategy adapted from Fluent's gradual-swirl recommendation**, not as a claim that Fluent directly prescribed this exact 3D inlet-velocity sequence.
+For this 3D spiral inlet, reducing inlet velocity is not a pure independent swirl control. It simultaneously changes both phase mass flows, Reynolds/inertial loading and centrifugal forcing. S1 is therefore interpreted as a **numerical continuation/homotopy strategy adapted from Fluent's gradual-swirl recommendation**.
 
 Both split inlet faces must always use the same percentage of their authoritative final velocity so the intended phase-flow ratio and inlet geometry remain unchanged.
 
@@ -324,6 +364,8 @@ U2 = 0.3   strong damping
 
 The `0.3–0.5` levels are adapted from Fluent guidance for difficult strongly swirling/rotating flows. Because the current calculation is fully 3D, they are applied as the available global momentum URF rather than as separate axial/radial/swirl-specific values.
 
+U is retained as a broad stabilization sensitivity, but it is interpreted as secondary to M and S.
+
 For the initial Stage-3 matrix, the selected momentum URF remains active throughout the entire branch, including its final 100% operating-condition phase. Therefore U1/U2 are **alternative branch numerical controls**, not merely temporary startup values.
 
 If the best Stage-3 branch uses `U1` or `U2`, it must later undergo a **return-to-authority continuation** with momentum URF restored to `0.7` before that field can become the canonical 03A parent for 03B. This return is a post-Stage-3 qualification test and is not another factor in F01–F12.
@@ -344,7 +386,7 @@ The full matrix is:
 | Case | Mixture startup | Inlet/inertial startup | Momentum URF | Primary comparison role |
 |---|---|---|---:|---|
 | `F01` | Full immediately | 100% immediately | `0.7` | long-run canonical control |
-| `F02` | Carrier-first staged | 100% immediately | `0.7` | isolate Fluent Mixture staging |
+| `F02` | Carrier-first staged | 100% immediately | `0.7` | isolate direct Fluent Mixture staging |
 | `F03` | Full immediately | 100% immediately | `0.5` | isolate moderate momentum damping |
 | `F04` | Carrier-first staged | 100% immediately | `0.5` | Mixture staging + moderate damping |
 | `F05` | Full immediately | 100% immediately | `0.3` | isolate strong momentum damping |
@@ -356,7 +398,7 @@ The full matrix is:
 | `F11` | Full immediately | 10→20→40→80→100% | `0.3` | loading ramp + strong damping |
 | `F12` | Carrier-first staged | 10→20→40→80→100% | `0.3` | most conservative combined strategy |
 
-No Stage-2 result is used to remove branches from this matrix. In particular, the promising standard-`k-epsilon` behaviour in N5 is retained as context only.
+No Stage-2 result is used to remove branches from this matrix. In particular, the promising standard-`k-epsilon` behaviour in N5 is retained as an important clue only.
 
 ---
 
@@ -384,7 +426,7 @@ For each branch:
 7. apply M0 or M1 equation state;
 8. positively read back every changed setting and all critical fingerprint fields;
 9. Hybrid Initialize once using Fluent's default Hybrid Initialization settings;
-10. execute the evidence-gated branch schedule below;
+10. execute the evidence-gated / forced-progression branch schedule below;
 11. never reinitialize between stages of the same branch;
 12. save a paired case/data checkpoint at every stage transition.
 
@@ -394,30 +436,32 @@ This avoids unnecessary reconstruction of settings already carried correctly by 
 
 ## 9. Evidence-driven stage-transition rule
 
-### 9.1 Core rule
+### 9.1 Intent of the transition gate
 
-Intermediate staged branches do **not** advance because they have reached a fixed iteration count.
+The transition gate is a **preferred progression rule**, not a termination rule.
 
-The active field must demonstrate improving or stabilising turbulence behaviour over the **most recent 750 iterations** before additional Mixture equations or inlet loading are introduced.
+The purpose is to follow Fluent's recommendation to develop the simplified field before introducing more difficult equations/loading. However, Stage 3 is also an experiment. If a simplified stage refuses to satisfy the preferred gate, that itself is useful evidence, but the project still wants to discover what happens when the next part of the Fluent strategy is applied.
 
-The gate is based primarily on the direct Fluent scaled residual histories of:
+Therefore:
 
 ```text
-k
-epsilon
+preferred behaviour:
+    advance when the field demonstrates development/stabilisation
+
+fallback behaviour:
+    if no preferred pass is obtained by 3,000 iterations,
+    save the evidence and advance anyway unless a hard numerical failure occurred
 ```
 
-Both residuals must independently pass the gate. `epsilon` therefore has effective veto power: a branch cannot advance because `k` looks good while `epsilon` is still becoming more intermittent or unstable.
+This ensures that every non-crashed branch gets at least one complete path to the final 100% operating condition.
 
-The first gate evaluation cannot occur before at least `750` iterations have been accumulated in the current stage.
+### 9.2 Evaluation windows
 
-After the first 750 iterations, evaluate the rolling gate every `250` additional iterations using the latest 750-iteration window.
+The first transition-gate evaluation cannot occur before at least `750` iterations have accumulated in the current stage.
 
-### 9.2 Quantifying decreasing level and reduced jumping
+After iteration 750, evaluate every `250` additional iterations using the most recent `750`-iteration window.
 
-For each of `k` and `epsilon`, analyse the most recent 750 iterations in `log10(residual)` space.
-
-Split that window into:
+Split each 750-iteration window into:
 
 ```text
 first comparison block = first 250 iterations
@@ -425,7 +469,21 @@ middle block           = middle 250 iterations
 final comparison block = final 250 iterations
 ```
 
-For each residual calculate at minimum:
+The gate contains three evidence groups:
+
+```text
+A. turbulence behaviour
+B. carrier residual behaviour
+C. project-core flow / pressure behaviour
+```
+
+M1 in particular is not allowed to claim a preferred `PASS` based only on turbulence residuals.
+
+### 9.3 A — turbulence gate: k and epsilon
+
+For each of `k` and `epsilon`, analyse the most recent 750 iterations in `log10(residual)` space.
+
+Calculate at minimum:
 
 ```text
 median
@@ -435,12 +493,12 @@ maximum
 log-envelope width = log10(P95 / P05)
 ```
 
-A residual passes the transition gate when **at least one** of the following is true:
+A turbulence residual is considered improving/stabilising when **at least one** of the following is true:
 
-1. **decreasing residual level** — the final-250 median is at least approximately `10%` lower than the first-250 median; or
-2. **reduced jumping/variability** — the final-250 log-envelope width is at least approximately `15%` smaller than the first-250 log-envelope width.
+1. **decreasing level** — final-250 median is at least approximately `10%` lower than first-250 median; or
+2. **reduced jumping/variability** — final-250 log-envelope width is at least approximately `15%` smaller than first-250 log-envelope width.
 
-In addition, a pass is rejected if the same residual shows material simultaneous deterioration, defined for this campaign as either:
+A preferred pass is rejected if the same residual simultaneously deteriorates materially:
 
 ```text
 final-250 median > first-250 median by more than 20%
@@ -448,54 +506,162 @@ OR
 final-250 P95    > first-250 P95 by more than 20%
 ```
 
-These percentages are **project transition criteria**, not Fluent convergence criteria. Their role is to make the staged continuation decision reproducible rather than subjective.
+Both `k` and `epsilon` must independently satisfy this gate for a preferred transition. `epsilon` therefore still has effective veto power within the turbulence group.
 
-### 9.3 Gate decision
+These percentages are **project transition criteria**, not Fluent convergence criteria. Their purpose is to make the staged decision reproducible.
 
-The stage can advance only when:
+### 9.4 B — carrier residual gate: continuity and momentum
+
+The simplified field should also look like a developing carrier solution rather than a turbulence-only improvement sitting on top of an unstable pressure/velocity field.
+
+Track:
 
 ```text
-k gate       = PASS
-AND
-epsilon gate = PASS
-AND
-no safety veto is active
+continuity
+x-momentum
+y-momentum
+z-momentum
 ```
 
-If either turbulence residual fails, the stage continues at the same equation/loading state.
+The preferred carrier-residual gate does not demand that all four reach final convergence thresholds during preconditioning. Instead it asks that they are **bounded and non-expanding**, with no repeated evidence that the pressure/velocity field is becoming progressively less stable.
 
-### 9.4 Safety veto
+At minimum, over the same 750-iteration window:
 
-Continuity, phase fluxes, liquid inventory and warnings are **not** the normal transition metric, because Stage 3 deliberately focuses the stage-loading decision on the problematic turbulence equations.
+- continuity final-250 median and P95 must not both worsen by more than approximately `20%` relative to the first-250 block;
+- each momentum residual must remain finite and bounded rather than entering an expanding envelope;
+- a clear downward trend is favourable but is not mandatory if the residuals have already entered a stable bounded band.
 
-However, they can veto progression if the field is clearly becoming corrupted.
+This deliberately keeps the gate less strict than a final convergence test. The objective is to decide whether the carrier field is developed enough to justify the next continuation step.
 
-A transition is blocked by any of the following:
+### 9.5 C — project-core flow / pressure gate
 
-- Fluent FPE or unrecoverable AMG divergence;
-- clearly expanding continuity over repeated windows;
-- full-domain mass imbalance becoming explosively worse rather than merely unsettled;
-- unbounded/nonphysical liquid-inventory behaviour inconsistent with the flux histories;
-- reverse flow or turbulent-viscosity limiting spreading in a manner consistent with numerical breakdown;
-- corrupted/non-finite phase flux or monitor values.
+For this project, this group is as important as the residual gate.
 
-### 9.5 Stalled stage
+The key monitors are:
 
-There is no fixed scientific iteration ceiling for an intermediate stage.
+```text
+total mixture inlet flow
+total mixture outlet flow
+steam-outlet total flow
+brine-outlet total flow
+full-domain mass imbalance and relative imbalance
+brine-pipe-entry static pressure
+brine-pipe-entry total pressure
+```
 
-If a stage repeatedly fails the gate, continue evaluating it in rolling windows. If **three consecutive gate evaluations** show no meaningful improvement in either residual, or show progressive deterioration, classify the stage as:
+When the full Mixture equations are active, also include:
+
+```text
+liquid → brine outlet
+liquid → steam outlet
+vapour → brine outlet
+vapour → steam outlet
+total domain liquid inventory
+Y010 / Y030 liquid inventory diagnostics
+```
+
+During an M1 carrier-only interval, phase-specific outlet fluxes and liquid-inventory behaviour are recorded where Fluent exposes them but are **not required positive gate variables**, because Volume Fraction and Slip Velocity are intentionally inactive. The carrier-only preferred gate therefore concentrates on total flow, balance and pressure.
+
+At each fixed equation/loading state, the flow/pressure field is considered developed enough for a preferred transition when the recent histories are becoming stationary or clearly approaching stationarity. The gate should look for:
+
+- outlet-flow medians changing less between the first and final 250-iteration blocks;
+- pressure medians at the brine-pipe entry changing less between those blocks;
+- shrinking variability/envelope of those signals;
+- relative mass imbalance improving or at minimum not entering a progressively expanding regime;
+- no non-finite/corrupted monitor values.
+
+For automated screening, use the following initial project rules:
+
+```text
+flow/pressure stationarity signal:
+    |final-250 median - first-250 median| / representative magnitude <= ~5%
+    OR variability/envelope reduces by >= ~15%
+
+mass-balance non-deterioration:
+    final-250 relative-imbalance median is not > first-250 median by > ~20%
+```
+
+These are **transition heuristics**, not physical acceptance criteria. They may be tuned after the monitor smoke test if they prove too sensitive to normal cyclone oscillation.
+
+For S1 ramp stages, absolute flow and pressure values at 10%, 20%, 40% and 80% are not compared with the final 100% operating targets. Each stage is judged only for stationarity/development at its own imposed loading.
+
+### 9.6 Preferred transition decision
+
+A stage receives a preferred `PASS` when:
+
+```text
+k gate                  = PASS
+epsilon gate            = PASS
+carrier residual gate   = PASS
+flow / pressure gate    = PASS
+hard numerical failure  = NO
+```
+
+For full-Mixture stages, phase-flow and liquid-inventory histories are included in the qualitative supporting evidence and can prevent a preferred pass if they are clearly unbounded/corrupted.
+
+The intent is not to create an impossibly strict mini-convergence test at every ramp point. The intent is to avoid introducing the next difficulty while the current pressure/flow field is obviously still developing violently.
+
+### 9.7 Hard failure versus soft warning
+
+Only a **hard numerical failure** prevents the forced full-sequence experiment from continuing:
+
+- Fluent FPE;
+- unrecoverable AMG divergence / solver termination;
+- non-finite solution/monitor values that make the state unusable;
+- loss of a valid case/data checkpoint from which continuation is possible.
+
+The following are important warnings but are not automatically terminal before the 3,000-iteration forced-progression point:
+
+- expanding continuity that remains finite;
+- poor or worsening mass imbalance;
+- persistent reverse flow;
+- turbulent-viscosity limiting;
+- drifting outlet flows;
+- drifting brine-entry pressure;
+- poor `k`/`epsilon` gate behaviour.
+
+Those warnings are recorded in the branch evidence. The deliberate reason for not terminating immediately is that Stage 3 wants to learn whether the **next continuation step can rescue or reorganise the field**.
+
+### 9.8 STAGE_STALLED and forced progression
+
+A stage must not be labelled stalled before at least `2,000` iterations have been attempted at the current state.
+
+From `2,000` onward, if repeated 750-iteration windows show no meaningful improvement or show deterioration, mark the stage provisionally:
 
 ```text
 STAGE_STALLED
 ```
 
-A `STAGE_STALLED` branch must not automatically advance to the next equation/loading state. It can be stopped and retained as evidence rather than spending iterations indefinitely.
+However, `STAGE_STALLED` is a diagnostic label, **not a branch-stop command**.
+
+Continue the same state until either:
+
+1. the preferred transition gate passes; or
+2. the stage reaches `3,000` iterations without a preferred pass.
+
+At `3,000` iterations, if there is still no preferred pass but no hard numerical failure has occurred:
+
+```text
+save checkpoint
+record final failed gate statistics
+classify transition = FORCED_ADVANCE_AT_3000
+advance to the next planned equation/loading state
+```
+
+This is a deliberate experimental choice. It sacrifices some purity of the Fluent "converge first, then advance" recommendation in order to ensure that every viable branch receives a full end-to-end test. The report must therefore distinguish clearly between:
+
+```text
+PREFERRED_PASS_ADVANCE
+FORCED_ADVANCE_AT_3000
+```
+
+A branch that required forced progression is not interpreted as equivalent to one that passed naturally.
 
 ---
 
-## 10. Evidence-gated branch schedules
+## 10. Evidence-gated / forced-progression branch schedules
 
-Every branch must accumulate at least `5,000` iterations at the final physical operating condition.
+Every branch must accumulate at least `5,000` iterations at the final physical operating condition unless a hard numerical failure prevents it.
 
 Low-speed or carrier-only preconditioning iterations do **not** count toward that final 5,000-iteration minimum.
 
@@ -524,18 +690,20 @@ Hybrid Initialize
 → Slip Velocity OFF
 → inlet = 27.118 m/s
 → carrier-only stage
-→ minimum 750 iterations
-→ evaluate rolling k/epsilon gate every 250 iterations
-→ PASS: save checkpoint
-→ Volume Fraction ON
-→ Slip Velocity ON
+→ evaluate preferred whole-field gate from iteration 750 onward
+→ preferred PASS at any evaluation:
+     checkpoint and enable Volume Fraction + Slip Velocity
+→ otherwise continue carrier-only through iteration 3,000
+→ if still no PASS at 3,000 and no hard failure:
+     checkpoint + FORCED_ADVANCE_AT_3000
+     enable Volume Fraction + Slip Velocity
 → no reinitialization
 → final 100% full-Mixture phase
 → minimum 5,000 iterations
 → continue according to final-stage rule
 ```
 
-The former fixed `2,000` carrier-only transition has been removed. The field determines when the Mixture equations are restored.
+The carrier-only stage is therefore long enough to test Fluent's intended preconditioning properly, but it cannot prevent the branch from ever reaching the full Mixture operating condition.
 
 ### Schedule C — M0 + S1
 
@@ -544,16 +712,16 @@ Applies to `F07`, `F09`, `F11`.
 ```text
 Hybrid Initialize at 10%
 → full Mixture at 10%
-→ pass 750-window k/epsilon gate
+→ preferred whole-field gate PASS OR forced advance at 3,000
 → checkpoint
 → 20%
-→ pass gate
+→ preferred gate PASS OR forced advance at 3,000
 → checkpoint
 → 40%
-→ pass gate
+→ preferred gate PASS OR forced advance at 3,000
 → checkpoint
 → 80%
-→ pass gate
+→ preferred gate PASS OR forced advance at 3,000
 → checkpoint
 → 100%
 → minimum 5,000 final-condition iterations
@@ -562,7 +730,7 @@ Hybrid Initialize at 10%
 
 The full Mixture equations remain active throughout.
 
-There is no predetermined `1,000`-iteration duration for a ramp level. Each level remains active until the evidence gate passes or the stage is classified `STAGE_STALLED`/failed.
+There is no predetermined short duration for a ramp level. A stage advances as soon as it demonstrates development, but a non-crashed stage is forced forward after 3,000 iterations so the entire homotopy path is tested.
 
 ### Schedule D — M1 + S1
 
@@ -574,21 +742,21 @@ Project synthesis of the two Fluent recommendations:
 Hybrid Initialize at 10%
 → Volume Fraction OFF + Slip Velocity OFF
 → carrier-only at 10%
-→ pass 750-window k/epsilon gate
+→ preferred whole-field gate PASS OR forced advance at 3,000
 → checkpoint
 → Volume Fraction ON + Slip Velocity ON
 → no reinitialization
 → full Mixture at 10%
-→ pass gate
+→ preferred gate PASS OR forced advance at 3,000
 → checkpoint
 → 20%
-→ pass gate
+→ preferred gate PASS OR forced advance at 3,000
 → checkpoint
 → 40%
-→ pass gate
+→ preferred gate PASS OR forced advance at 3,000
 → checkpoint
 → 80%
-→ pass gate
+→ preferred gate PASS OR forced advance at 3,000
 → checkpoint
 → 100%
 → minimum 5,000 final-condition iterations
@@ -603,17 +771,18 @@ This exact combined ordering is a **project experimental synthesis** of the two 
 
 `5,000` final-condition iterations are a **minimum observation window**, not an automatic stopping definition.
 
-The final stage is different from an intermediate stage because there is no next loading/equation state to unlock.
+Unlike an intermediate preconditioning stage, the final stage has no next state to unlock. Every branch that reaches 100% without hard numerical failure should therefore be allowed to complete the full 5,000-iteration minimum even if the field looks poor early in that interval.
 
 At and beyond 5,000 final-condition iterations:
 
-1. evaluate the same rolling 750-iteration `k`/`epsilon` metrics every 250 iterations;
-2. if either residual is still showing meaningful improvement in level or variability, **continue the calculation beyond 5,000**;
+1. evaluate the rolling 750-iteration turbulence, carrier-residual and flow/pressure metrics every 250 iterations;
+2. if the field is still showing meaningful improvement in residual level, residual variability, flow balance or monitor stationarity, **continue beyond 5,000**;
 3. do not stop merely because iteration 5,000 has been reached;
-4. if the residuals become bounded and no longer materially improve over three consecutive evaluations, classify the final field according to its stationary behaviour rather than forcing more iterations indefinitely;
-5. if the residual envelope is progressively expanding or a safety veto occurs, terminate/classify the branch accordingly.
+4. if the field becomes bounded and no longer materially improves over repeated windows, classify the final state according to its stationary behaviour rather than forcing iterations indefinitely;
+5. if the field is poor but finite, retain the complete 5,000-iteration evidence and classify it accordingly;
+6. terminate before 5,000 only for a hard numerical failure.
 
-A branch can therefore finish at 5,000, 6,500, 8,000, 10,000+ final-condition iterations depending on what the actual turbulence histories show.
+A branch can therefore finish at 5,000, 6,500, 8,000, 10,000+ final-condition iterations depending on what the actual histories show.
 
 No branch is considered better merely because it produces one unusually low endpoint residual.
 
@@ -628,10 +797,11 @@ BOUNDED_OSCILLATORY
 SLOW_DRIFT
 EXPANDING_OSCILLATION
 STAGE_STALLED
+FORCED_ADVANCE_AT_3000
 NUMERICAL_FAILURE
 ```
 
-A bounded oscillatory field may still be useful if the physical histories are stationary enough to support a steady-RANS interpretation.
+A bounded oscillatory field may still be useful if the pressure/flow and inventory histories are stationary enough to support a steady-RANS interpretation.
 
 ---
 
@@ -653,23 +823,31 @@ Record:
 
 When Volume Fraction / Slip Velocity are disabled, the report must clearly mark the corresponding interval rather than plot it as missing or zero convergence data.
 
-### Physical histories
+### Project-core flow and pressure histories
+
+These are not secondary diagnostics. They are a core part of the Stage-3 convergence judgement.
 
 Record throughout:
 
 - liquid inlet mass flux;
 - vapour inlet mass flux;
+- total mixture inlet mass flux;
+- total steam-outlet mass flux;
+- total brine-outlet mass flux;
+- total mixture outlet mass flux;
+- full-domain mass imbalance and relative imbalance;
+- brine-pipe-entry static pressure;
+- brine-pipe-entry total pressure.
+
+When full Mixture equations are active, also record:
+
 - liquid → brine outlet;
 - liquid → steam outlet;
 - vapour → brine outlet;
 - vapour → steam outlet;
-- total mixture inlet/outlet;
-- full-domain mass imbalance and relative imbalance;
 - total domain liquid inventory;
 - Y010 liquid inventory as a diagnostic only;
-- Y030 liquid inventory as a diagnostic only;
-- brine-pipe-entry static pressure;
-- brine-pipe-entry total pressure.
+- Y030 liquid inventory as a diagnostic only.
 
 The Stage-2 reporting gap where temporal liquid-inventory monitor arrays were empty must not be repeated in Stage 3.
 
@@ -677,18 +855,24 @@ Before production submission, run a short monitor smoke test and verify that eve
 
 ---
 
-## 13. Analysis windows and gate artifacts
+## 13. Analysis windows and transition artifacts
 
 For each branch, preserve stage boundaries and evaluate at least:
 
-- every 750-iteration transition-gate window;
+- every 750-iteration preferred-gate window;
+- iteration 2,000 stall-assessment point where reached;
+- iteration 3,000 forced-transition point where reached;
 - each preconditioning/ramp stage endpoint;
 - first `100` iterations after every major equation/inlet-speed transition;
 - final `1,000` iterations of the 100% operating-condition phase;
 - final `2,000` iterations where available;
 - full final-condition history.
 
-For every transition-gate evaluation, store for both `k` and `epsilon`:
+For every transition-gate evaluation, store:
+
+### Turbulence metrics
+
+For both `k` and `epsilon`:
 
 ```text
 iteration range
@@ -700,6 +884,35 @@ log-envelope width
 first-250 vs final-250 median change
 first-250 vs final-250 envelope-width change
 first-250 vs final-250 P95 change
+PASS / FAIL
+reason
+```
+
+### Carrier residual metrics
+
+For continuity and x/y/z momentum:
+
+```text
+first-250 median / P95
+final-250 median / P95
+trend classification
+bounded / expanding classification
+PASS / FAIL
+reason
+```
+
+### Flow / pressure metrics
+
+For the applicable total-flow, balance and brine-entry-pressure monitors:
+
+```text
+first-250 median
+final-250 median
+first-250 variability
+final-250 variability
+relative median change
+variability change
+stationary / improving / drifting / expanding classification
 PASS / FAIL
 reason
 ```
@@ -718,13 +931,21 @@ expanding/diverging envelope
 numerical failure
 ```
 
+Every stage transition must record whether it occurred because of:
+
+```text
+PREFERRED_PASS_ADVANCE
+or
+FORCED_ADVANCE_AT_3000
+```
+
 ---
 
 ## 14. Primary comparison logic
 
 The 12-case matrix allows direct estimates of:
 
-### Mixture staging effect
+### Mixture staging effect — primary/direct Fluent cyclone comparison
 
 Compare:
 
@@ -737,7 +958,20 @@ F09 vs F10
 F11 vs F12
 ```
 
-### Momentum damping effect
+### Progressive inlet/inertial-loading effect — strong continuation comparison
+
+Compare:
+
+```text
+F01 vs F07
+F02 vs F08
+F03 vs F09
+F04 vs F10
+F05 vs F11
+F06 vs F12
+```
+
+### Momentum damping effect — secondary numerical sensitivity
 
 Within a common startup strategy compare:
 
@@ -754,24 +988,13 @@ F07 vs F09 vs F11
 F08 vs F10 vs F12
 ```
 
-### Progressive inlet/inertial-loading effect
-
-Compare:
-
-```text
-F01 vs F07
-F02 vs F08
-F03 vs F09
-F04 vs F10
-F05 vs F11
-F06 vs F12
-```
-
 ### Interaction effects
 
 Determine whether the recommendations act independently or whether, for example, Mixture staging is only useful when combined with gradual loading and/or lower momentum URF.
 
 Because staged branches may require different numbers of preconditioning iterations, comparisons must be made primarily over the **100% final-condition histories**, not by comparing the same absolute global iteration number.
+
+Also compare how often each strategy reaches later stages by preferred passes versus forced 3,000-iteration transitions. A method that reaches 100% only through repeated forced advances is qualitatively different from one whose intermediate fields naturally settle.
 
 ---
 
@@ -782,11 +1005,13 @@ Stage 3 is not required to produce a perfectly textbook residual curve.
 A branch is **numerically promising** if, over the long final-condition window:
 
 - `k` and `epsilon` residual envelopes are substantially smaller and more bounded than the Stage-1 reference;
-- continuity does not display an expanding envelope;
-- full-domain imbalance trends materially downward or becomes acceptably bounded;
-- phase-flux histories approach a stationary mean or bounded repeatable regime;
+- continuity and momentum residuals are bounded rather than progressively expanding;
+- total inlet/outlet flow histories approach stationary means;
+- full-domain imbalance trends materially downward or becomes bounded;
+- brine-pipe-entry static and total pressure histories approach stationary means or bounded repeatable regimes;
+- phase-flux histories, when active, approach stationary means or bounded repeatable regimes;
 - liquid inventory does not exhibit an unbounded secular drift inconsistent with the outlet fluxes;
-- turbulent-viscosity limiting and reverse-flow behaviour do not progressively spread through the domain;
+- turbulent-viscosity limiting and reverse-flow behaviour do not progressively spread in a manner consistent with numerical breakdown;
 - there is no FPE/AMG numerical breakdown.
 
 A branch can be useful even if residuals remain oscillatory, provided the oscillation is bounded and the physical monitor histories are stationary enough to justify a steady-RANS interpretation.
@@ -796,11 +1021,12 @@ A branch is **not** qualified solely because:
 - it survives the requested iteration count;
 - one residual reaches the nominal criterion once;
 - an endpoint flux snapshot looks favourable;
+- `k`/`epsilon` look quieter while total flow, balance or pressure continues to drift;
 - it has lower residuals while equations or operating conditions are still intentionally simplified.
 
 ---
 
-## 16. Relationship to N1/N3/N4/N5
+## 16. Relationship to N1/N3/N4/N5 and the intended Stage-3B follow-up
 
 Stage 3 does not discard Stage 2.
 
@@ -811,15 +1037,31 @@ Stage-2 evidence currently suggests:
 - `N4` broader first-order startup did not provide convincing available endpoint behaviour;
 - `N5` standard `k-epsilon` bootstrap gave the clearest short-window numerical improvement, but the improvement did not survive the available return to RNG.
 
-These results remain important but do not narrow the next experiment prematurely because:
+The N5 observation is now considered especially important because Fluent independently recommends standard `k-epsilon` → RNG `k-epsilon` as a possible RNG convergence strategy.
 
-1. the Stage-2 interventions were not the complete Fluent-recommended cyclone/swirl startup sweep;
-2. the Stage-2 continuation windows were shorter than the Stage-3 convergence horizon;
-3. N5 changes the turbulence model, while Stage 3 first asks whether the canonical RNG model can be made numerically useful through startup strategy alone.
+Nevertheless, F01–F12 remain the immediate campaign because:
 
-After Stage 3, the N5 observation should be revisited explicitly.
+1. Mixture equation staging is directly recommended for cyclone separation;
+2. the Stage-2 interventions were not the complete Fluent cyclone/swirl startup sweep;
+3. Stage-2 continuation windows were shorter than the Stage-3 convergence horizon;
+4. Stage 3 first asks whether the canonical RNG model can be made useful without changing turbulence-model form.
 
-If none of the Fluent-guided Stage-3 branches produces a sufficiently settled RNG field, the next targeted campaign can compare longer turbulence-model bootstraps or alternative turbulence closures from the best Stage-3 startup strategy rather than from the original unstable baseline.
+The intended hierarchy is therefore:
+
+```text
+Stage 3A
+    F01–F12 Fluent cyclone/swirl startup sweep with RNG retained
+
+then, if needed:
+
+Stage 3B
+    take the best Stage-3A startup strategy
+    → longer standard k-epsilon bootstrap
+    → controlled return to RNG k-epsilon
+    → long final-condition qualification
+```
+
+If RNG remains fundamentally troublesome even after that, turbulence-model suitability becomes the next explicit scientific question rather than another ad-hoc numerical tweak.
 
 ---
 
@@ -831,7 +1073,7 @@ Do not add the following as extra factors during the initial Stage-3 matrix:
 - steam-outlet pressure;
 - liquid patching;
 - transient formulation;
-- standard `k-epsilon` as a final model;
+- standard `k-epsilon` as the final model;
 - RSM;
 - first-order momentum/turbulence discretization;
 - altered `k` or `epsilon` URFs;
@@ -840,7 +1082,6 @@ Do not add the following as extra factors during the initial Stage-3 matrix:
 - pseudo-time;
 - Implicit Body Force changes;
 - localised-turbulence-initialization changes;
-- mesh refinement or mesh-sensitivity study;
 - DPM;
 - EWF.
 
@@ -867,19 +1108,22 @@ residual history
 phase-flux history
 mass-balance history
 liquid-inventory history
+brine-entry pressure history
 warning/event log
 branch summary JSON/Markdown
 ```
 
 The branch summary must record the actual number of iterations completed at every stage rather than infer lineage from filenames.
 
-At every successful transition, save:
+At every transition, save:
 
 ```text
 checkpoint before transition
 750-iteration gate statistics
-PASS reason for k
-PASS reason for epsilon
+turbulence gate result
+carrier residual gate result
+flow / pressure gate result
+transition type: PREFERRED_PASS_ADVANCE or FORCED_ADVANCE_AT_3000
 settings before transition
 settings after transition
 new stage start iteration
@@ -895,7 +1139,7 @@ The full matrix is intended to be run, but a practical submission order is:
 
 ```text
 F01  canonical long control
-F02  Mixture staging only
+F02  direct Fluent Mixture staging only
 F07  inlet/inertial ramp only
 F08  both principal Fluent-guided staging recommendations
 F03/F04/F09/F10  moderate momentum damping variants
@@ -904,7 +1148,7 @@ F05/F06/F11/F12  strongest damping variants
 
 This ordering is for early visibility only. It does **not** authorize stopping the matrix after a promising early branch unless a later decision explicitly changes the campaign objective.
 
-The current intention is to run the complete 12-case sweep.
+The current intention is to run the complete 12-case sweep and obtain a final-condition history for every branch that can reach it without hard numerical failure.
 
 ---
 
@@ -922,26 +1166,33 @@ If that candidate uses momentum URF `0.5` or `0.3`, first restore:
 Momentum URF = 0.7
 ```
 
-without reinitialization and evaluate the continuation using the same 750-iteration `k`/`epsilon` logic before declaring it a canonical 03A parent.
+without reinitialization and evaluate the continuation using the same long-window residual and flow/pressure evidence before declaring it a canonical 03A parent.
 
 ### B — RNG remains bounded but persistently oscillatory while physical monitors are stationary
 
 Assess whether the steady-RANS solution should be interpreted statistically/boundedly rather than demanding monotonic residual collapse, and determine whether a transient/RANS comparison is required.
 
-### C — no RNG branch becomes numerically useful, but the N5 standard bootstrap remains markedly better
+### C — no RNG branch becomes sufficiently useful, but the N5 standard bootstrap remains markedly better
 
-Launch a dedicated turbulence-model campaign from the best Stage-3 startup strategy, including longer standard-`k-epsilon` behaviour and controlled transitions to the intended higher-swirl turbulence closure.
+Launch the predeclared Stage-3B turbulence-bootstrap campaign from the best Stage-3A startup strategy:
+
+```text
+best Stage-3A startup method
+→ standard k-epsilon bootstrap
+→ controlled RNG return
+→ long final-condition qualification
+```
+
+This directly tests the separate Fluent RNG convergence recommendation rather than treating N5 as an isolated anomaly.
 
 ### D — all F01–F12 branches remain numerically unusable
 
-Before repeating the same solver-only tuning, use the best available Stage-3 branch as the basis for targeted follow-up numerical tests that were deliberately excluded from the factorial, especially:
+Use the full Stage-3 evidence to choose targeted follow-up numerical tests that were deliberately excluded from the factorial, especially:
 
 - Implicit Body Force formulation;
 - localised turbulence initialization;
-- turbulence-model suitability / N5 follow-up;
+- turbulence-model suitability / Stage-3B N5 follow-up;
 - whether a steady solution exists for the current model.
-
-Mesh investigation remains outside the present Stage-3 scope and is not an execution gate for this sweep.
 
 ---
 
@@ -953,9 +1204,10 @@ The scientific decisions in this draft are now mostly resolved. Before productio
 - whether the current gRPC execution layer can modify both split-inlet velocities safely between continuation stages without reinitialization;
 - that inlet turbulence intensity/hydraulic-diameter values remain unchanged when velocity is ramped;
 - branch/checkpoint naming convention;
-- persistence and reload behaviour for residual, liquid-inventory and phase-flux histories;
-- calculation of the automated 750-iteration `k`/`epsilon` gate metrics;
+- persistence and reload behaviour for residual, liquid-inventory, phase-flux and brine-entry-pressure histories;
+- calculation of the automated 750-iteration turbulence/carrier/flow-pressure gate metrics;
 - checkpoint/save behaviour before every transition;
-- ability to distinguish `STAGE_STALLED` from numerical failure in the branch summary.
+- explicit recording of `PREFERRED_PASS_ADVANCE`, `STAGE_STALLED`, `FORCED_ADVANCE_AT_3000`, and hard numerical failure;
+- confirmation that the forced-progression scheduler never skips the final 5,000-iteration operating-condition phase unless Fluent genuinely fails numerically.
 
 No scientific conclusion should be attached to Stage 3 until the full-condition histories have been analysed.
