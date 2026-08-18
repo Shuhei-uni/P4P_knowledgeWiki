@@ -138,9 +138,37 @@ autosave filenames. Pass each retained case/data pair explicitly with repeated
 `--checkpoint-pair` options. A `complete` pair is evidence that both remote files
 are visible; a `partial` pair must not be used for recovery.
 
+## Explicit 03A Stage-3 adaptive blocking exception
+
+The `03A-stage3` F01–F12 convergence sweep is a narrow, user-approved exception to the normal detached/native-run preference because its next solver state depends on an evidence gate evaluated at discrete iteration checkpoints. The authoritative scientific workflow is:
+
+`Setups/full-geometry/mixture/steady-liquid-outlet/03a-stage3-fluent-recommended-convergence-sweep.md`.
+
+For **F01–F12 only**, an execution agent may keep its client attached and issue one synchronous blocking Fluent solve command for the current decision block:
+
+- `750` iterations for the first assessment at an intermediate state;
+- `250` iterations for each subsequent reassessment;
+- final-condition blocks as defined by the Stage-3 authority.
+
+The return of that blocking Fluent command is intentionally the wake-up point for the agent. The agent may then inspect histories, evaluate the frozen Stage-3 gate, save the prescribed transition checkpoint, apply only the prescribed next state, and issue the next blocking solve command.
+
+This exception has strict limits:
+
+- do **not** implement a Python `for`/`while` loop around iteration calls;
+- do **not** issue one-iteration or other fine-grained client loops;
+- every new solve block must follow an explicit Stage-3 decision point;
+- configure Fluent-native autosave locally so recovery does not depend solely on the client call returning;
+- do not silently repeat a block after a transport failure when completion is uncertain;
+- first reconnect to the same Fluent process and establish the actual completed iteration/stage state;
+- classify gRPC/client/transport loss separately from a Fluent numerical failure;
+- keep all run-specific autosaves/checkpoints on the Fluent computer's local storage;
+- this exception does not authorize the same client-owned adaptive pattern for other campaigns unless the user explicitly approves it.
+
+The purpose of the exception is orchestration wake-up at scientifically required checkpoints, not moving solver ownership back into a generic Python iteration runner.
+
 ## Prohibited Python run patterns
 
-Do not add or use Python code that:
+Except for the explicit `03A-stage3` blocking exception above, do not add or use Python code that:
 
 - loops over `solver.settings.solution.run_calculation.iterate(...)`;
 - loops over `solver.tui.solve.iterate(...)`;
