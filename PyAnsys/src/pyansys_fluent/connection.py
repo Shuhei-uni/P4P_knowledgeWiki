@@ -62,6 +62,7 @@ def _launch_local_fluent(
     *,
     suffix: str,
     insecure_mode: bool,
+    start_transcript: bool = True,
 ):
     import ansys.fluent.core as pyfluent
 
@@ -131,7 +132,7 @@ def _launch_local_fluent(
                 server_info_file_name=str(server_info),
                 allow_remote_host=False,
                 cleanup_on_exit=False,
-                start_transcript=True,
+                start_transcript=start_transcript,
                 insecure_mode=insecure_mode,
             )
             setattr(session, "_codex_local_fluent_process", process)
@@ -152,7 +153,17 @@ def _launch_local_fluent(
     )
 
 
-def connect(server_id: str | int | None = None):
+def connect(
+    server_id: str | int | None = None,
+    *,
+    start_transcript: bool = True,
+):
+    """Connect to a configured Fluent endpoint.
+
+    ``start_transcript`` defaults to ``True`` to preserve existing callers. A
+    quiet status client can disable transcript streaming and opt in later when
+    it explicitly wants console output.
+    """
     load_dotenv(_ENV_FILE)
     import ansys.fluent.core as pyfluent
 
@@ -182,7 +193,7 @@ def connect(server_id: str | int | None = None):
     common = {
         "allow_remote_host": allow_remote_host,
         "cleanup_on_exit": False,
-        "start_transcript": True,
+        "start_transcript": start_transcript,
         "insecure_mode": insecure_mode,
     }
 
@@ -203,6 +214,7 @@ def connect(server_id: str | int | None = None):
             return _launch_local_fluent(
                 suffix=suffix,
                 insecure_mode=insecure_mode,
+                start_transcript=start_transcript,
             )
         local_launch_note = (
             f" Or set {local_exe_key} for local manual launch."

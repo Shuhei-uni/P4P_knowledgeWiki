@@ -19,140 +19,91 @@ check_connection = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(check_connection)
 
 
+def snapshot(
+    iteration: int | None,
+    *,
+    flow_time: float | None = None,
+    continuity: float = 1e-4,
+) -> dict:
+    return {
+        "progress": {"iteration": iteration},
+        "runtime": {"flow_time": flow_time},
+        "monitors": {
+            "residual": {
+                "last_values": {"continuity": continuity} if iteration is not None else {},
+            }
+        },
+        "fluent_version": "25.2.0",
+    }
+
+
 class CheckConnectionStatusTests(unittest.TestCase):
-    def test_status_prints_iteration_and_latest_residuals(self) -> None:
-        snapshot = {
-            "progress": {"iteration": 1250},
-            "monitors": {
-                "residual": {
-                    "last_values": {"continuity": 1.2e-4, "x-velocity": 3.4e-5},
-                }
-            },
-            "runtime": {"flow_time": 0.75},
-            "read_errors": [],
-        }
+    def test_activity_is_running_when_iteration_advances(self) -> None:
+        activity, reason = check_connection.classify_activity(snapshot(100), snapshot(106))
+        self.assertEqual(activity, "RUNNING")
+        self.assertEqual(reason, "iteration advanced")
+
+    def test_activity_is_running_when_flow_time_advances_without_iteration_monitor(self) -> None:
+        activity, reason = check_connection.classify_activity(
+            snapshot(None, flow_time=0.10),
+            snapshot(None, flow_time=0.12),
+        )
+        self.assertEqual(activity, "RUNNING")
+        self.assertEqual(reason, "flow time advanced")
+
+    def test_unchanged_progress_is_quiescent_not_idle(self) -> None:
+        activity, reason = check_connection.classify_activity(snapshot(100), snapshot(100))
+        self.assertEqual(activity, "QUIESCENT")
+        self.assertIn("no progress detected", reason)
+
         output = io.StringIO()
-
-        with patch.object(check_connection, "collect_snapshot", return_value=snapshot):
-            with redirect_stdout(output):
-                check_connection.print_server_status(object())
-
-        self.assertEqual(
-            output.getvalue(),
-            "Current iteration: 1250\n"
-            "Latest residuals:\n"
-            "  continuity: 0.00012\n"
-            "  x-velocity: 3.4e-05\n"
-            "Flow time: 0.75\n",
-        )
-
-    def test_status_reports_missing_monitor_iteration_without_failing(self) -> None:
-        snapshot = {
-            "progress": {"iteration": None},
-            "monitors": {"residual": {"error": "monitor set is not exposed by Fluent"}},
-            "runtime": {},
-            "read_errors": ["monitor residual: unavailable"],
-        }
-        output = io.StringIO()
-
-        with patch.object(check_connection, "collect_snapshot", return_value=snapshot):
-            with redirect_stdout(output):
-                check_connection.print_server_status(object())
-
-        self.assertIn("Current iteration: unavailable", output.getvalue())
-        self.assertIn("Latest residuals: unavailable", output.getvalue())
-        self.assertIn("Status notes:", output.getvalue())
-
-    def test_configuration_state_reads_calculation_and_dpm_branches(self) -> None:
-        run_calculation = SimpleNamespace(
-            get_active_child_names=lambda: ["number_of_iterations"],
-            get_state=lambda: {"number_of_iterations": 500},
-        )
-        tracking = SimpleNamespace(get_state=lambda: {"enabled": True})
-        interaction = SimpleNamespace(get_state=lambda: {"coupled": False})
-        general_settings = SimpleNamespace(
-            interaction=interaction,
-            get_state=lambda: {"tracking": True},
-        )
-        dpm = SimpleNamespace(tracking=tracking, general_settings=general_settings)
-        solver = SimpleNamespace(
-            settings=SimpleNamespace(
-                solution=SimpleNamespace(run_calculation=run_calculation),
-                setup=SimpleNamespace(models=SimpleNamespace(discrete_phase=dpm)),
+        with redirect_stdout(output):
+            check_connection.print_activity_summary(
+                snapshot(100),
+                snapshot(100),
+                activity_window_seconds=2,
             )
-        )
+        self.assertIn("QUIESCENT", output.getvalue())
+        self.assertIn("not proof of idle", output.getvalue())
+        self.assertNotIn("Activity : IDLE", output.getvalue())
+
+    def test_status_summary_prints_delta_version_and_latest_residuals(self) -> None:
+        first = snapshot(1250, flow_time=0.75, continuity=1.2e-4)
+        second = snapshot(1255, flow_time=0.76, continuity=9.0e-5)
         output = io.StringIO()
 
         with redirect_stdout(output):
-            check_connection.print_configuration_state(solver)
+            activity = check_connection.print_activity_summary(
+                first,
+                second,
+                activity_window_seconds=2,
+            )
 
         text = output.getvalue()
-        self.assertIn('run_calculation_active_children: [\n  "number_of_iterations"\n]', text)
-        self.assertIn('dpm_tracking_state: {\n  "enabled": true\n}', text)
-        self.assertIn('dpm_interaction_state: {\n  "coupled": false\n}', text)
+        self.assertEqual(activity, "RUNNING")
+        self.assertIn("Activity : RUNNING", text)
+        self.assertIn("Iteration: 1250 -> 1255 (+5 in 2 s)", text)
+        self.assertIn("Flow time: 0.75 -> 0.76 (+0.01 s)", text)
+        self.assertIn("Fluent   : 25.2.0", text)
+        self.assertIn("continuity", text)
+        self.assertIn("9e-05", text)
 
-    def test_wait_polls_the_full_window_and_reports_the_highest_iteration(self) -> None:
-        unavailable = {
-            "progress": {"iteration": None},
-            "monitors": {"residual": {}},
-            "runtime": {},
-            "read_errors": [],
-        }
-        lower = {
-            "progress": {"iteration": 42},
-            "monitors": {"residual": {"last_values": {"continuity": 1e-4}}},
-            "runtime": {},
-            "read_errors": [],
-        }
-        higher = {
-            "progress": {"iteration": 57},
-            "monitors": {"residual": {"last_values": {"continuity": 2e-4}}},
-            "runtime": {},
-            "read_errors": [],
-        }
-        output = io.StringIO()
-        clock = [0.0]
-
-        def sleep(seconds: float) -> None:
-            clock[0] += seconds
-
-        with patch.object(check_connection, "collect_snapshot", side_effect=[unavailable, lower, higher]):
-            with redirect_stdout(output):
-                received = check_connection.wait_for_live_server_status(
-                    object(),
-                    timeout_seconds=3,
-                    poll_interval_seconds=1,
-                    monotonic_fn=lambda: clock[0],
-                    sleep_fn=sleep,
-                )
-
-        self.assertTrue(received)
-        self.assertIn("Completed 3 seconds of polling (2 successful monitor snapshots).", output.getvalue())
-        self.assertIn("Highest iteration observed: 57", output.getvalue())
-        self.assertNotIn("Highest iteration observed: 42", output.getvalue())
-
-    def test_wait_times_out_when_no_progress_is_exposed(self) -> None:
-        unavailable = {
-            "progress": {"iteration": None},
-            "monitors": {"residual": {"error": "monitor unavailable"}},
-            "runtime": {},
-            "read_errors": [],
-        }
-        times = iter([0.0, 0.0, 1.0])
-        output = io.StringIO()
-
-        with patch.object(check_connection, "collect_snapshot", return_value=unavailable):
-            with redirect_stdout(output):
-                received = check_connection.wait_for_live_server_status(
-                    object(),
-                    timeout_seconds=1,
-                    poll_interval_seconds=1,
-                    monotonic_fn=lambda: next(times),
-                    sleep_fn=lambda _seconds: None,
-                )
-
-        self.assertFalse(received)
-        self.assertIn("Timed out after 1 seconds", output.getvalue())
+    def test_snapshot_passes_previous_state_to_monitor(self) -> None:
+        first = snapshot(42)
+        second = snapshot(43)
+        with patch.object(check_connection, "collect_snapshot", return_value=second) as collect:
+            value, error = check_connection._collect_snapshot_with_timeout(
+                object(),
+                timeout_seconds=1,
+                previous_state=first,
+            )
+        self.assertIsNone(error)
+        self.assertEqual(value, second)
+        collect.assert_called_once_with(
+            unittest.mock.ANY,
+            previous_state=first,
+            monitor_sets=("residual",),
+        )
 
     def test_blocking_fluent_call_is_bounded_by_timeout(self) -> None:
         release = Event()
@@ -160,16 +111,13 @@ class CheckConnectionStatusTests(unittest.TestCase):
             lambda: release.wait(timeout=1),
             timeout_seconds=0.001,
         )
-
         self.assertIsNone(value)
         self.assertIsInstance(error, TimeoutError)
         release.set()
 
-    def test_endpoint_probe_reports_a_reachable_configured_tcp_target(self) -> None:
+    def test_endpoint_probe_reports_reachable_target(self) -> None:
         connection = MagicMock()
         connection.__enter__.return_value = connection
-        output = io.StringIO()
-
         with (
             patch.dict(
                 check_connection.os.environ,
@@ -178,17 +126,14 @@ class CheckConnectionStatusTests(unittest.TestCase):
             ),
             patch.object(check_connection, "load_dotenv"),
             patch.object(check_connection.socket, "create_connection", return_value=connection) as create_connection,
-            redirect_stdout(output),
         ):
-            verdict = check_connection.print_endpoint_reachability("1", timeout_seconds=3)
+            probe = check_connection.probe_endpoint("1", timeout_seconds=2)
 
-        create_connection.assert_called_once_with(("192.0.2.10", 50000), timeout=3)
-        self.assertEqual(verdict, "reachable")
-        self.assertIn("Target TCP reachability: reachable (192.0.2.10:50000", output.getvalue())
+        create_connection.assert_called_once_with(("192.0.2.10", 50000), timeout=2)
+        self.assertEqual(probe["status"], "reachable")
+        self.assertEqual(probe["target"], "192.0.2.10:50000")
 
-    def test_endpoint_probe_reports_a_refused_tcp_target(self) -> None:
-        output = io.StringIO()
-
+    def test_endpoint_probe_reports_refused_target(self) -> None:
         with (
             patch.dict(
                 check_connection.os.environ,
@@ -201,12 +146,28 @@ class CheckConnectionStatusTests(unittest.TestCase):
                 "create_connection",
                 side_effect=ConnectionRefusedError("Connection refused"),
             ),
-            redirect_stdout(output),
         ):
-            check_connection.print_endpoint_reachability("1", timeout_seconds=3)
+            probe = check_connection.probe_endpoint("1", timeout_seconds=2)
 
-        self.assertIn("Target TCP reachability: unreachable", output.getvalue())
-        self.assertIn("Connection refused", output.getvalue())
+        self.assertEqual(probe["status"], "unreachable")
+        self.assertIn("Connection refused", probe["detail"])
+
+    def test_console_stream_is_opt_in_and_prints_new_fluent_output(self) -> None:
+        transcript = SimpleNamespace(
+            is_streaming=True,
+            stop=MagicMock(),
+            start=MagicMock(),
+        )
+        solver = SimpleNamespace(transcript=transcript)
+        output = io.StringIO()
+
+        with redirect_stdout(output):
+            returned = check_connection.start_console_stream(solver)
+
+        self.assertIs(returned, transcript)
+        transcript.stop.assert_called_once_with()
+        transcript.start.assert_called_once_with(write_to_stdout=True)
+        self.assertIn("Console  : STREAMING", output.getvalue())
 
 
 if __name__ == "__main__":
