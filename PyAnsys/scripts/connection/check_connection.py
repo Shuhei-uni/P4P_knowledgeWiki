@@ -7,8 +7,9 @@ The default command answers three separate questions without mutating Fluent:
 2. Can PyFluent complete the gRPC handoff?
 3. Does observable solver progress change during a short activity window?
 
-Use ``--print-console`` to also stream new Fluent console output while the
-activity samples are collected. Console streaming is intentionally opt-in.
+Use ``--print-console [SECONDS]`` to also stream new Fluent console output for
+a fixed duration after the activity check. Console streaming is intentionally
+opt-in; omitting SECONDS uses a 10-second sample.
 """
 
 from __future__ import annotations
@@ -302,7 +303,6 @@ def start_console_stream(solver: Any) -> Any | None:
         print(f"Console  : UNAVAILABLE ({type(exc).__name__}: {exc})")
         return None
 
-    print("Console  : STREAMING (new Fluent output during activity check)")
     return transcript
 
 
@@ -313,6 +313,27 @@ def stop_console_stream(transcript: Any | None) -> None:
         transcript.stop()
     except Exception:
         pass
+
+
+def stream_console_for(
+    solver: Any,
+    duration_seconds: float,
+    *,
+    sleep_fn: Any = time.sleep,
+) -> bool:
+    """Stream new Fluent transcript output for exactly one operator-selected window."""
+    transcript = start_console_stream(solver)
+    if transcript is None:
+        return False
+
+    print(f"Console  : STREAMING for {_format_value(duration_seconds)} s")
+    print("--- Fluent console sample ---")
+    try:
+        sleep_fn(duration_seconds)
+    finally:
+        stop_console_stream(transcript)
+    print("--- end Fluent console sample ---")
+    return True
 
 
 def main() -> int:
@@ -344,8 +365,15 @@ def main() -> int:
     )
     parser.add_argument(
         "--print-console",
-        action="store_true",
-        help="Also stream new Fluent console output while activity is sampled. Off by default.",
+        nargs="?",
+        type=float,
+        const=10.0,
+        default=None,
+        metavar="SECONDS",
+        help=(
+            "After the status check, stream new Fluent console output for SECONDS. "
+            "Use the flag without a value for 10 seconds. Off by default."
+        ),
     )
     args = parser.parse_args()
 
@@ -357,6 +385,8 @@ def main() -> int:
     ):
         if getattr(args, name) <= 0:
             parser.error(f"--{name.replace('_', '-')} must be greater than zero")
+    if args.print_console is not None and args.print_console <= 0:
+        parser.error("--print-console SECONDS must be greater than zero")
 
     server_id = _normalize_server_id(str(args.server_id))
     suppress_repeated_insecure_transport_warnings()
@@ -382,7 +412,6 @@ def main() -> int:
         return 2
 
     print("gRPC     : CONNECTED")
-    console_stream = start_console_stream(solver) if args.print_console else None
 
     first, first_error = _collect_snapshot_with_timeout(
         solver,
@@ -395,10 +424,6 @@ def main() -> int:
         previous_state=first,
     )
 
-    if args.print_console:
-        stop_console_stream(console_stream)
-        print("--- end Fluent console sample ---")
-
     print()
     print_activity_summary(
         first,
@@ -407,6 +432,10 @@ def main() -> int:
         first_error=first_error,
         second_error=second_error,
     )
+
+    if args.print_console is not None:
+        print()
+        stream_console_for(solver, args.print_console)
 
     print("\nRead-only check complete; no solver command was issued and Fluent was not closed.")
     return 0
