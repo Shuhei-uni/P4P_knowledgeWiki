@@ -152,22 +152,43 @@ class CheckConnectionStatusTests(unittest.TestCase):
         self.assertEqual(probe["status"], "unreachable")
         self.assertIn("Connection refused", probe["detail"])
 
-    def test_console_stream_is_opt_in_and_prints_new_fluent_output(self) -> None:
+    def test_console_stream_starts_new_fluent_output(self) -> None:
         transcript = SimpleNamespace(
             is_streaming=True,
             stop=MagicMock(),
             start=MagicMock(),
         )
         solver = SimpleNamespace(transcript=transcript)
-        output = io.StringIO()
 
-        with redirect_stdout(output):
-            returned = check_connection.start_console_stream(solver)
+        returned = check_connection.start_console_stream(solver)
 
         self.assertIs(returned, transcript)
         transcript.stop.assert_called_once_with()
         transcript.start.assert_called_once_with(write_to_stdout=True)
-        self.assertIn("Console  : STREAMING", output.getvalue())
+
+    def test_console_timer_streams_for_requested_duration(self) -> None:
+        transcript = SimpleNamespace(
+            is_streaming=False,
+            stop=MagicMock(),
+            start=MagicMock(),
+        )
+        solver = SimpleNamespace(transcript=transcript)
+        sleep = MagicMock()
+        output = io.StringIO()
+
+        with redirect_stdout(output):
+            streamed = check_connection.stream_console_for(
+                solver,
+                37.5,
+                sleep_fn=sleep,
+            )
+
+        self.assertTrue(streamed)
+        transcript.start.assert_called_once_with(write_to_stdout=True)
+        sleep.assert_called_once_with(37.5)
+        transcript.stop.assert_called_once_with()
+        self.assertIn("Console  : STREAMING for 37.5 s", output.getvalue())
+        self.assertIn("--- end Fluent console sample ---", output.getvalue())
 
 
 if __name__ == "__main__":
