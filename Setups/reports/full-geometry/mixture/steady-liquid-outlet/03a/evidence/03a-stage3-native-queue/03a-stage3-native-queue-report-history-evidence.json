@@ -1,0 +1,8 @@
+{
+  "kind": "03a_stage3_report_history_evidence_status",
+  "local_stage3_out_files": [],
+  "method": "PyAnsys/scripts/inspection/extract_report_plot_histories.py",
+  "reason": "No Stage-3 native .out report histories are present in the local evidence bundle. The current read-only Fluent reachability check timed out, so the extractor could not inspect or recover the remote report files. Existing endpoint readbacks establish report-definition names and scalar values, not continuous history arrays.",
+  "requires": "remote Fluent/report-file access; no rerun is implied",
+  "status": "unavailable"
+}
