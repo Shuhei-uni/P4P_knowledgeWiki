@@ -8,7 +8,7 @@
 
 This report is an evidence packet. It records execution validity, checkpoint lineage, physical readback, and residual-window evidence. It does not select a best branch, claim physical settlement, or call a branch converged.
 
-> **Final-report note (2026-08-21):** preserve this file as the checkpoint/provenance evidence packet. The final Stage-3 scientific report should be rebuilt from continuous stitched residual histories plus recovered Fluent report-file histories using [`03a-stage3-results-analysis-and-plotting-plan.md`](./03a-stage3-results-analysis-and-plotting-plan.md) and [`03a-stage3-final-results-template.md`](./03a-stage3-final-results-template.md). Endpoint checkpoint values remain validation anchors; they are not sufficient by themselves to establish steady state.
+> **Final-report handoff (2026-08-21):** keep this document as the Stage-3 checkpoint/provenance evidence layer. Build the final scientific results report from the continuous stitched residual histories and recovered Fluent Report File histories using [`03a-stage3-results-analysis-and-plotting-plan.md`](./03a-stage3-results-analysis-and-plotting-plan.md) and [`03a-stage3-final-results-template.md`](./03a-stage3-final-results-template.md). Checkpoint values remain cross-check anchors and must not be treated as sufficient evidence of steady state on their own.
 
 ## 1. Evidence conventions
 
@@ -168,20 +168,21 @@ Only branches with full Mixture active, 100% inlet velocity, and a valid `.dat.h
 | 80% | 15,000 | −11.966% | −20.203% | 4,919.994 | +1.232 kPa |
 | 100% | 18,000 | −11.107% | −18.664% | 4,681.935 | +1.367 kPa |
 
-## 5. Current limitations and final-report requirements
+## 5. Final-report requirements added after continuous-history recovery work
 
-This evidence packet is checkpoint-heavy. The final report must integrate the continuous report histories that P0 was configured to record.
+The final Stage-3 report should not be a longer version of this checkpoint packet. It should use the continuous histories to answer the experiment question directly.
 
-Before making a Stage-3 scientific comparison:
+Required changes for the final report:
 
-- stitch and plot **all** available residual equations;
-- recover native report-file (`.out`) histories for the valid branches;
-- use total inlet/outlet flow, relative mass imbalance, and total liquid inventory as the main physical convergence evidence;
-- show inlet-loading transitions explicitly for ramped branches;
-- use phase routing, Y010/Y030 inventories, and brine-entry static/total pressure to explain the main behaviour;
-- reduce duplicate phase/boundary flux histories to one canonical plotted quantity plus consistency checks;
+- plot **all** available residual equations, not only continuity/`k`/`epsilon`;
+- recover and use native Report File `.out` histories;
+- make total inlet/outlet mass flow, relative mass imbalance, and total liquid inventory the main physical convergence evidence;
+- explicitly show inlet-loading transitions for ramped branches;
+- use phase routing, Y010/Y030 inventories, and brine-entry static/total pressure as diagnostic evidence;
+- collapse duplicate/alias report histories into canonical plotted quantities with duplicate consistency checks;
 - compare branches at like-for-like full-Mixture 100% conditions where possible;
-- preserve failure/transport gaps rather than interpolating them;
-- distinguish solver-iteration association from physical-time causality.
+- use checkpoints from this packet only as validation/provenance anchors;
+- preserve transport/failure gaps rather than interpolating them;
+- distinguish associations across steady iterations from physical-time causality.
 
-The final report should be filled from [`03a-stage3-final-results-template.md`](./03a-stage3-final-results-template.md), while this file and [03a-stage3-results-20260821-checkpoints.csv](./03a-stage3-results-20260821-checkpoints.csv) remain the evidence/provenance layer.
+The fillable target structure is [`03a-stage3-final-results-template.md`](./03a-stage3-final-results-template.md).
