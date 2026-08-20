@@ -18,8 +18,8 @@ This branch was continued independently from the immutable Stage-1 iteration-1,0
 
 | Phase | Native continuation | Local endpoint evidence | Verification status | Evidence |
 |---|---:|---|---|---|
-| Initial screen | +300, ending at Fluent iteration 1300 | Paired case/data endpoint present | `RUN_COMPLETED_ENDPOINT_VERIFIED` | [initial journal](../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/03A-S2-N4-from-i1000-plus300-20260817T125355Z.jou), [initial residual history](../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/post_simulation_analysis/N4-initial-screen-residual-check.json) |
-| Extension | Requested +700 from the N4 +300 endpoint | Paired `plus700` case/data was loaded for the local flux snapshot | `ENDPOINT_PRESENT_AFTER_NATIVE_EXCEPTION` | [extension journal](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/03A-S2-N4-from-initial-screen-plus700-20260817T132736Z.jou), [run record](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/N4-extension-700-run.json) |
+| Initial screen | +300, ending at Fluent iteration 1300 | Paired case/data endpoint present | `RUN_COMPLETED_ENDPOINT_VERIFIED` | [initial journal](../../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/03A-S2-N4-from-i1000-plus300-20260817T125355Z.jou), [initial residual history](../../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/post_simulation_analysis/N4-initial-screen-residual-check.json) |
+| Extension | Requested +700 from the N4 +300 endpoint | Paired `plus700` case/data was loaded for the local flux snapshot | `ENDPOINT_PRESENT_AFTER_NATIVE_EXCEPTION` | [extension journal](../../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/03A-S2-N4-from-initial-screen-plus700-20260817T132736Z.jou), [run record](../../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/N4-extension-700-run.json) |
 
 The recorded extension failure was:
 
@@ -78,7 +78,7 @@ x_out              =   0.6152
 
 This is a severe physical-behaviour change relative to Stage 1. Liquid flow to the steam outlet increases from `0.1425 kg/s` to `37.8178 kg/s`, while the diagnostic outlet vapour quality falls from `0.9968` to `0.6152`.
 
-The endpoint flux snapshot is in [N4 extension flux-check.json](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/post_simulation_analysis/N4-extension-700-flux-check.json). Its load record reports `paired-read_case_data` and matching case/data names, but the final gRPC readback status remains pending.
+The endpoint flux snapshot is in [N4 extension flux-check.json](../../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/post_simulation_analysis/N4-extension-700-flux-check.json). Its load record reports `paired-read_case_data` and matching case/data names, but the final gRPC readback status remains pending.
 
 ## Liquid inventory evidence
 
@@ -102,12 +102,12 @@ The N4 initial +300 result remains useful as evidence that first-order momentum/
 
 ## Source artifacts
 
-- [N4 branch summary JSON](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N4/N4-summary.json)
+- [N4 branch summary JSON](../../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N4/N4-summary.json)
 - [N4 available scaled-residual figure](plots/N4/N4-full-scaled-residuals.png)
-- [N4 initial residual history](../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/post_simulation_analysis/N4-initial-screen-residual-check.json)
-- [N4 extension residual artifact](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/post_simulation_analysis/N4-extension-700-residual-check.json)
-- [N4 extension monitor history](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/post_simulation_analysis/N4-extension-700-monitor-history.json)
-- [N4 extension flux evidence](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/post_simulation_analysis/N4-extension-700-flux-check.json)
-- [N4 extension run record](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/N4-extension-700-run.json)
-- [Stage-1 reference residual history](../../../../../PyAnsys/output/post_simulation_analysis/03a_08b_parity_full_geometry_iter1000_20260817T110345Z-residual-check.json)
-- [Stage-1 reference flux evidence](../../../../../PyAnsys/output/post_simulation_analysis/03a_08b_parity_full_geometry_iter1000_20260817T110345Z-flux-check.json)
+- [N4 initial residual history](../../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/post_simulation_analysis/N4-initial-screen-residual-check.json)
+- [N4 extension residual artifact](../../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/post_simulation_analysis/N4-extension-700-residual-check.json)
+- [N4 extension monitor history](../../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/post_simulation_analysis/N4-extension-700-monitor-history.json)
+- [N4 extension flux evidence](../../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/post_simulation_analysis/N4-extension-700-flux-check.json)
+- [N4 extension run record](../../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/N4-extension-700-run.json)
+- [Stage-1 reference residual history](../../../../../../PyAnsys/output/post_simulation_analysis/03a_08b_parity_full_geometry_iter1000_20260817T110345Z-residual-check.json)
+- [Stage-1 reference flux evidence](../../../../../../PyAnsys/output/post_simulation_analysis/03a_08b_parity_full_geometry_iter1000_20260817T110345Z-flux-check.json)

@@ -17,9 +17,9 @@ The standard-model phase is only a bootstrap. A solution that is stable only whi
 
 | Phase | Native continuation | Endpoint | Verification | Evidence |
 |---|---:|---|---|---|
-| Standard bootstrap | +500, ending at Fluent iteration 1500 | Case/data pair present | `RUN_COMPLETED_ENDPOINT_VERIFIED` | [standard journal](../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/03A-S2-N5-standard-from-i1000-plus500-20260817T125355Z.jou), [standard residual history](../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/post_simulation_analysis/N5-standard-bootstrap-residual-check.json) |
-| Restored RNG return | +300, ending at Fluent iteration 1800 | Case/data pair present | `RUN_COMPLETED_ENDPOINT_VERIFIED` | [RNG return journal](../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/03A-S2-N5-rng-return-plus300-20260817T125355Z.jou), [RNG return residual history](../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/post_simulation_analysis/N5-rng-return-residual-check.json) |
-| RNG +700 continuation | Requested +700 from iteration 1800, expected endpoint 2500 | Local +700 post-processing record not present | `SUBMITTED_NATIVE_RUN` in the last persisted campaign record | [extension journal](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/03A-S2-N5-from-rng-return-plus700-20260817T132736Z.jou), [campaign record](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/campaign-live.json) |
+| Standard bootstrap | +500, ending at Fluent iteration 1500 | Case/data pair present | `RUN_COMPLETED_ENDPOINT_VERIFIED` | [standard journal](../../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/03A-S2-N5-standard-from-i1000-plus500-20260817T125355Z.jou), [standard residual history](../../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/post_simulation_analysis/N5-standard-bootstrap-residual-check.json) |
+| Restored RNG return | +300, ending at Fluent iteration 1800 | Case/data pair present | `RUN_COMPLETED_ENDPOINT_VERIFIED` | [RNG return journal](../../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/03A-S2-N5-rng-return-plus300-20260817T125355Z.jou), [RNG return residual history](../../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/post_simulation_analysis/N5-rng-return-residual-check.json) |
+| RNG +700 continuation | Requested +700 from iteration 1800, expected endpoint 2500 | Local +700 post-processing record not present | `SUBMITTED_NATIVE_RUN` in the last persisted campaign record | [extension journal](../../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/03A-S2-N5-from-rng-return-plus700-20260817T132736Z.jou), [campaign record](../../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/campaign-live.json) |
 
 The local reporting record does not yet contain an N5 `plus700` residual-check or flux-check JSON. The visible remote `.dat.h5` is therefore retained as a pending endpoint clue, not used as proof of a verified final result in this report.
 
@@ -91,13 +91,13 @@ N5 currently demonstrates the value of the bootstrap as a diagnostic experiment,
 
 ## Source artifacts
 
-- [N5 branch summary JSON](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N5/N5-summary.json)
+- [N5 branch summary JSON](../../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N5/N5-summary.json)
 - [N5 available scaled-residual figure](plots/N5/N5-full-scaled-residuals.png)
-- [N5 standard-bootstrap residual history](../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/post_simulation_analysis/N5-standard-bootstrap-residual-check.json)
-- [N5 restored-RNG residual history](../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/post_simulation_analysis/N5-rng-return-residual-check.json)
-- [N5 standard-bootstrap flux evidence](../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/post_simulation_analysis/N5-standard-bootstrap-flux-check.json)
-- [N5 restored-RNG flux evidence](../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/post_simulation_analysis/N5-rng-return-flux-check.json)
-- [N5 extension journal](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/03A-S2-N5-from-rng-return-plus700-20260817T132736Z.jou)
-- [N5 extension campaign record](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/campaign-live.json)
-- [Stage-1 reference residual history](../../../../../PyAnsys/output/post_simulation_analysis/03a_08b_parity_full_geometry_iter1000_20260817T110345Z-residual-check.json)
-- [Stage-1 reference flux evidence](../../../../../PyAnsys/output/post_simulation_analysis/03a_08b_parity_full_geometry_iter1000_20260817T110345Z-flux-check.json)
+- [N5 standard-bootstrap residual history](../../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/post_simulation_analysis/N5-standard-bootstrap-residual-check.json)
+- [N5 restored-RNG residual history](../../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/post_simulation_analysis/N5-rng-return-residual-check.json)
+- [N5 standard-bootstrap flux evidence](../../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/post_simulation_analysis/N5-standard-bootstrap-flux-check.json)
+- [N5 restored-RNG flux evidence](../../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/post_simulation_analysis/N5-rng-return-flux-check.json)
+- [N5 extension journal](../../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/03A-S2-N5-from-rng-return-plus700-20260817T132736Z.jou)
+- [N5 extension campaign record](../../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/campaign-live.json)
+- [Stage-1 reference residual history](../../../../../../PyAnsys/output/post_simulation_analysis/03a_08b_parity_full_geometry_iter1000_20260817T110345Z-residual-check.json)
+- [Stage-1 reference flux evidence](../../../../../../PyAnsys/output/post_simulation_analysis/03a_08b_parity_full_geometry_iter1000_20260817T110345Z-flux-check.json)

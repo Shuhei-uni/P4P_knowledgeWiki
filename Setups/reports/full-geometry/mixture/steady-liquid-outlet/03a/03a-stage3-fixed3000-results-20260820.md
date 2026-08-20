@@ -42,7 +42,7 @@ Therefore:
 
 ### F02 — carrier-first, 100%
 
-**Intent.** Test a carrier-first start at full velocity using the F02 under-relaxation setup from the [Stage 3 sweep plan](../../../../full-geometry/mixture/steady-liquid-outlet/03a-stage3-fluent-recommended-convergence-sweep.md).
+**Intent.** Test a carrier-first start at full velocity using the F02 under-relaxation setup from the [Stage 3 sweep plan](../../../../../full-geometry/mixture/steady-liquid-outlet/03a-stage3-fluent-recommended-convergence-sweep.md).
 
 **Execution record.** The carrier 100% stage was submitted after hybrid initialization. Fluent returned a terminal native-stage error before the planned named endpoint pair was written. The ledger records `numerical_failure: false`; this is retained as a terminal execution error, not relabelled as an FPE/numerical failure.
 
@@ -55,7 +55,7 @@ No full-mixture transition was applied. The native residual export is unavailabl
 
 ### F04 — carrier-first, 100%
 
-**Intent.** Test a carrier-first start at full velocity using the F04 under-relaxation setup from the [Stage 3 sweep plan](../../../../full-geometry/mixture/steady-liquid-outlet/03a-stage3-fluent-recommended-convergence-sweep.md).
+**Intent.** Test a carrier-first start at full velocity using the F04 under-relaxation setup from the [Stage 3 sweep plan](../../../../../full-geometry/mixture/steady-liquid-outlet/03a-stage3-fluent-recommended-convergence-sweep.md).
 
 **Execution record.** The carrier 100% stage was submitted after hybrid initialization and ended with the same terminal Fluent-native error form as F02, before the named endpoint pair was written. The ledger records `numerical_failure: false`.
 
@@ -195,7 +195,7 @@ Local orchestration evidence:
 - Event log: `native-fixed-3000-events.jsonl` in the local campaign artifact directory for run stamp `20260820T013223Z`
 - Resume-state ledger: `native-fixed-3000-resume-state.json` in the same campaign artifact directory
 - Endpoint readback records: one `*-readback.json` per extracted full-mixture endpoint in the campaign post-processing artifact directory
-- [Stage 3 sweep plan](../../../../full-geometry/mixture/steady-liquid-outlet/03a-stage3-fluent-recommended-convergence-sweep.md)
+- [Stage 3 sweep plan](../../../../../full-geometry/mixture/steady-liquid-outlet/03a-stage3-fluent-recommended-convergence-sweep.md)
 
 ## 7. Required next analysis
 

@@ -106,6 +106,38 @@ Do not create `results.md` beside `setup.md`. Do not place a stage plan in the r
 
 Each report must link back to the exact setup/stage plan that defined the run.
 
+## Canonical campaign structure
+
+Treat one campaign folder as the smallest canonical unit. Use the matching setup/report paths and only the file roles the campaign needs:
+
+```text
+Setups/full-geometry/<physics>/<campaign>/
+├── index.md
+├── setup.md                         # shared campaign contract, if needed
+├── setup-<id>-<slug>.md             # independent setup, if needed
+└── stage-<nn>-<slug>.md             # ordered stage plan, if needed
+
+Setups/reports/full-geometry/<physics>/<campaign>/
+├── index.md
+└── <experiment-id>/                 # one setup/stage/experiment
+    ├── index.md
+    ├── result reports
+    ├── plots/                       # local figures for this experiment
+    └── evidence/                    # companion artifacts only
+```
+
+Use `Setups/templates/campaign-index-template.md` for new campaign indexes. Every campaign has one index and every reportable setup/stage/experiment has one report folder; indexes link to records instead of repeating them. New paths and filenames use lowercase kebab-case. Do not add a status folder, a second ID-based copy, a campaign-level `plots/` directory, or a new global number sequence.
+
+For new records, include `record_type`, `programme`, `geometry`, `physics_family`, `campaign`, `record_id` (or `none`), and `lifecycle` in front matter. The descriptive campaign path is the human-facing identity; the stable ID is metadata and a link key.
+
+Keep all plots and companion evidence under the experiment folder that produced them, using `plots/` and `evidence/` as needed. Do not create unexplained numeric folders or a shared campaign-level plot folder. Keep executable outputs in `PyAnsys/` or their source-data owner and link to them.
+
+## Compatibility and migration rule
+
+`active/`, `future/`, `past/`, `archived/`, `compatibility-snapshots/`, and old numbered report directories are frozen compatibility surfaces. New full-geometry work never starts there. Do not copy a canonical record into them.
+
+If an old record is relocated, leave a redirect stub where possible. Use a detailed compatibility snapshot only when old relative links or historical provenance require the old directory depth, and link it to the canonical record. Edit the canonical record only; preserve legacy names and IDs unless an intentional migration includes link updates.
+
 ## Core principle: intent first, interpretation later
 
 Establish the intent contract from information already supplied by the user/repository. Do not ask again when it is already clear.
@@ -137,7 +169,7 @@ A useful setup normally contains:
 6. build/readback gates;
 7. evidence to instrument before/during the run;
 8. interpretation contract;
-9. lineage/provenance, optional stable ID, and the mirrored report-home link.
+9. filing metadata, lineage/provenance, optional stable ID, and the mirrored report-home link.
 
 Prefer a controlled delta over restating every inherited value. Read back critical inherited settings before relying on them.
 
@@ -179,6 +211,8 @@ Lifecycle is metadata, not a required directory for new full-geometry work:
 
 `reported` does not mean verified or validated.
 
+Do not use `current`, `latest`, `final`, `new`, or an unqualified `results.md` for new records. Use role-based names such as `setup-<id>-<slug>.md`, `stage-<nn>-<slug>.md`, and `stage-<nn>-<slug>-results.md`.
+
 ## Completion check
 
 Before finishing setup/report work, confirm:
@@ -186,6 +220,10 @@ Before finishing setup/report work, confirm:
 - geometry programme is supported by explicit provenance;
 - setup path follows geometry → physics → campaign for new full-geometry work;
 - report path exactly mirrors that campaign under `Setups/reports/full-geometry/`;
+- campaign has one index and each record has one canonical path;
+- new record names use a role plus a descriptive lowercase slug;
+- lifecycle is metadata rather than a new top-level status folder;
+- compatibility copies are redirect stubs or explicitly labelled snapshots, not second authorities;
 - no result report was placed inside the setup tree;
 - no setup/stage plan was placed inside the report tree;
 - primary question and investigation mode are visible;

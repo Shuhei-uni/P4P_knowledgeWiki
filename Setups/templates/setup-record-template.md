@@ -1,17 +1,38 @@
-# Setup <ID> — <short setup name>
+---
+record_type: "setup-record"
+programme: "full-geometry"
+geometry: "<exact geometry / mesh / case programme>"
+physics_family: "<mixture / vof / dpm-ewf / other>"
+campaign: "<lowercase-kebab-case-campaign>"
+record_id: "<campaign-scoped ID or none>"
+stage: "<none or campaign stage label>"
+lifecycle: "active | future | reported | archived"
+canonical_path: "Setups/full-geometry/<physics>/<campaign>/<filename>.md"
+report_home: "Setups/reports/full-geometry/<physics>/<campaign>/"
+---
+
+# Setup Record — <campaign / stage / setup name>
 
 > This is a flexible setup record, not a form that must be filled completely. Keep only sections that help define, build, run, or later analyse this specific case.
+>
+> Store one canonical copy under the campaign setup path. Use a redirect or an explicitly labelled compatibility snapshot for old links; do not maintain duplicate authorities.
 
 ## Intent
 
 | Field | Value |
 |---|---|
-| Setup ID | `<ID>` |
+| Record ID | `<campaign-scoped ID or none>` |
+| Record role | `campaign-contract` / `setup` / `stage-plan` |
+| Programme | `full-geometry` / `purnanto-reference` / `<other>` |
+| Geometry identity | `<exact mesh/case evidence or link>` |
+| Campaign | `<lowercase-kebab-case campaign path>` |
 | Investigation mode | `exploratory` / `diagnostic` / `sensitivity` / `verification` / `validation` / `production-decision` / `<other>` |
 | Primary question | `<what are we trying to learn or establish?>` |
 | Interpretation owner | `user-led` by default / `joint` / `agent-led if explicitly requested` |
 | Parent / reference | `<link or none>` |
 | Lifecycle | `active` / `future` / `reported` / `archived` |
+| Canonical setup path | `Setups/full-geometry/<physics>/<campaign>/<filename>.md` |
+| Mirrored report home | `Setups/reports/full-geometry/<physics>/<campaign>/` |
 | Linked results | `<link or none>` |
 
 ### Why this setup exists

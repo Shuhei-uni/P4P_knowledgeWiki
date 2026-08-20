@@ -2,39 +2,16 @@
 
 Corresponding setup campaign: [Mixture steady liquid-outlet setups](../../../../full-geometry/mixture/steady-liquid-outlet/index.md).
 
-## Existing compatibility reports
+## Experiment folders
 
-These reports predate the geometry-first report hierarchy, so their source files remain in the numbered report folders to preserve existing links:
+Each setup/experiment owns its reports and local plots. There is no campaign-level `plots/` directory.
 
-### 02c — unprimed pressure sensitivity
+- [02c — unprimed pressure sensitivity](02c/index.md)
+- [02e — Y010 outlet-boundary characterization](02e/index.md)
+- [03A — 08b-parity steady Mixture branch](03a/index.md)
 
-- [Early diagnostics](../../../02c/results.md)
-- [Future-run notes retained in the old report folder](../../../02c/future-runs.md)
+The `02c` and `02e` folders preserve their existing report groupings. The `03a` folder contains the Stage-2 and Stage-3 report packets, with all associated figures under `03a/plots/`.
 
-### 02e — Y010 outlet-boundary characterization
+## Filing rule
 
-- [Stage-1 results](../../../02e/stage1-results-20260816.md)
-- [Stage-1 execution record](../../../02e/stage1-execution-20260816.md)
-- [275k retry notes](../../../02e/mesh-275k-retry-20260816.md)
-- [275k retry results](../../../02e/stage1-results-275k-retry-20260816.md)
-
-## Filing rule from now on
-
-Any new steady full-geometry result report belongs directly in this folder with a descriptive filename. Do not create another numbered report directory for it.
-
-## 03A Stage 2 — numerical-stabilisation screen
-
-The branch-level records are written independently so that each case retains its own evidence and can be reviewed without waiting for the remaining branches:
-
-- [N1 — reduced turbulence under-relaxation](03a-08b-stage2-N1-results.md)
-- [N3 — first-order turbulence transport](03a-08b-stage2-N3-results.md)
-- [N4 — first-order momentum and turbulence startup](03a-08b-stage2-N4-results.md)
-- [N5 — standard-`k-epsilon` bootstrap and RNG return](03a-08b-stage2-N5-results.md)
-- [Compact Stage-2 screening report](03a-08b-stage2-screening-report.md)
-
-The consolidated report is currently provisional until the pending N4 endpoint readback and N5 +700 endpoint evidence are reconciled.
-
-## 03A Stage 3 — F08/F10/F12 queue
-
-- [Stage-3 execution results and stop decision](03a-stage3-results-20260818.md)
-- [Stage-3 F01–F12 evidence report](03a-stage3-results-20260821.md)
+New evidence belongs in the folder for the setup or experiment that produced it. Use `plots/` and `evidence/` inside that experiment folder when companion artifacts are needed. Do not place result files or plots directly in this campaign directory.

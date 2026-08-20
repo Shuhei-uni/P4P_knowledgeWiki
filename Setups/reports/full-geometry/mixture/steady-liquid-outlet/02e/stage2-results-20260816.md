@@ -116,13 +116,13 @@ The corresponding complete-run final-100 means are:
 
 The increase in the final-window regional inventories for `OV K=3` should not be over-interpreted as convergence. The total-domain liquid volume is still changing, the measured phase balances remain strongly negative, and the residuals remain finite but non-negligible. The figures show the complete and failed histories with solid and dashed lines, respectively.
 
-![Recovered Setup 02e Stage-2 Y010 and Y030 liquid inventory histories](02e_stage2_inventory_histories_20260816.png)
+![Recovered Setup 02e Stage-2 Y010 and Y030 liquid inventory histories](plots/02e_stage2_inventory_histories_20260816.png)
 
-![Recovered Setup 02e Stage-2 Y010 and Y030 liquid mass histories](02e_stage2_mass_inventory_histories_20260816.png)
+![Recovered Setup 02e Stage-2 Y010 and Y030 liquid mass histories](plots/02e_stage2_mass_inventory_histories_20260816.png)
 
 Native Fluent scaled residual histories are included below. The values are the scaled residuals as printed by Fluent; no additional normalization has been applied. The PO transcripts show residual blow-up immediately before their FPEs. Both OV transcripts reach 500, but their residual histories do not provide a convergence claim by themselves.
 
-![Setup 02e Stage-2 native Fluent scaled residual histories](02e_stage2_scaled_residuals_20260816.png)
+![Setup 02e Stage-2 native Fluent scaled residual histories](plots/02e_stage2_scaled_residuals_20260816.png)
 
 ---
 
@@ -206,15 +206,15 @@ Those objectives are not interchangeable, and the present evidence does not sele
 
 ## 9. Evidence and lineage
 
-- Governing setup: [`02e-mixture-y010-brine-outlet-boundary-characterization.md`](../../active/02e-mixture-y010-brine-outlet-boundary-characterization.md)
+- Governing setup: [`02e-mixture-y010-brine-outlet-boundary-characterization.md`](../../../../../full-geometry/mixture/steady-liquid-outlet/02e-mixture-y010-brine-outlet-boundary-characterization.md)
 - Stage-1 comparison report: [`stage1-results-20260816.md`](stage1-results-20260816.md)
-- Stage-2 build snapshot: [`02e_stage2_build_20260816.json`](../../../PyAnsys/output/02e_stage2_build_20260816.json)
-- Native Stage-2 journals: [`PO-S2-A journal`](../../../PyAnsys/output/02e_stage2_native_po_s2_a_20260816T171000Z.jou), [`PO-S2-B journal`](../../../PyAnsys/output/02e_stage2_native_po_s2_b_20260816T172000Z.jou), [`OV-S2-A journal`](../../../PyAnsys/output/02e_stage2_native_ov_s2_a_20260816T173000Z.jou), [`OV-S2-B journal`](../../../PyAnsys/output/02e_stage2_native_ov_s2_b_20260816T174500Z.jou)
-- Native run manifests: [`PO-S2-A manifest`](../../../PyAnsys/output/02e_stage2_native_po_s2_a_20260816T171000Z.json), [`PO-S2-B manifest`](../../../PyAnsys/output/02e_stage2_native_po_s2_b_20260816T172000Z.json), [`OV-S2-A manifest`](../../../PyAnsys/output/02e_stage2_native_ov_s2_a_20260816T173000Z.json), [`OV-S2-B manifest`](../../../PyAnsys/output/02e_stage2_native_ov_s2_b_20260816T174500Z.json)
-- Recovered native histories, transcripts, and generated summary: [`02e_stage2_recovered_20260816`](../../../PyAnsys/output/02e_stage2_recovered_20260816/)
-- Machine-readable summary: [`02e_stage2_inventory_flux_summary_20260816.json`](../../../PyAnsys/output/02e_stage2_recovered_20260816/02e_stage2_inventory_flux_summary_20260816.json)
-- Compact summary CSV: [`02e_stage2_inventory_flux_summary_20260816.csv`](../../../PyAnsys/output/02e_stage2_recovered_20260816/02e_stage2_inventory_flux_summary_20260816.csv)
-- Offline extraction script: [`analyze_02e_stage2_histories.py`](../../../PyAnsys/scripts/inspection/analyze_02e_stage2_histories.py)
+- Stage-2 build snapshot: [`02e_stage2_build_20260816.json`](../../../../../../PyAnsys/output/02e_stage2_build_20260816.json)
+- Native Stage-2 journals: [`PO-S2-A journal`](../../../../../../PyAnsys/output/02e_stage2_native_po_s2_a_20260816T171000Z.jou), [`PO-S2-B journal`](../../../../../../PyAnsys/output/02e_stage2_native_po_s2_b_20260816T172000Z.jou), [`OV-S2-A journal`](../../../../../../PyAnsys/output/02e_stage2_native_ov_s2_a_20260816T173000Z.jou), [`OV-S2-B journal`](../../../../../../PyAnsys/output/02e_stage2_native_ov_s2_b_20260816T174500Z.jou)
+- Native run manifests: [`PO-S2-A manifest`](../../../../../../PyAnsys/output/02e_stage2_native_po_s2_a_20260816T171000Z.json), [`PO-S2-B manifest`](../../../../../../PyAnsys/output/02e_stage2_native_po_s2_b_20260816T172000Z.json), [`OV-S2-A manifest`](../../../../../../PyAnsys/output/02e_stage2_native_ov_s2_a_20260816T173000Z.json), [`OV-S2-B manifest`](../../../../../../PyAnsys/output/02e_stage2_native_ov_s2_b_20260816T174500Z.json)
+- Recovered native histories, transcripts, and generated summary: [`02e_stage2_recovered_20260816`](../../../../../../PyAnsys/output/02e_stage2_recovered_20260816/)
+- Machine-readable summary: [`02e_stage2_inventory_flux_summary_20260816.json`](../../../../../../PyAnsys/output/02e_stage2_recovered_20260816/02e_stage2_inventory_flux_summary_20260816.json)
+- Compact summary CSV: [`02e_stage2_inventory_flux_summary_20260816.csv`](../../../../../../PyAnsys/output/02e_stage2_recovered_20260816/02e_stage2_inventory_flux_summary_20260816.csv)
+- Offline extraction script: [`analyze_02e_stage2_histories.py`](../../../../../../PyAnsys/scripts/inspection/analyze_02e_stage2_histories.py)
 
 The recovered `.out` histories and native transcripts are copied artifacts from the remote Fluent execution and were not regenerated by offline analysis. The failed PO endpoint case/data pairs were not written after their floating-point exceptions; the two completed OV endpoint pairs remain on the remote execution host and are identified in the corresponding manifests.
 

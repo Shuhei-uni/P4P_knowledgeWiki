@@ -12,7 +12,7 @@
 | Controlled changes | replace the active legacy six-bin DPM injection diameters and relative mass weights with the seven-bin `5–100 µm` fine-mist PSD; retain the total 5% DPM allocation |
 | Evidence-use label | setup calculation / diagnostic only until the inherited carrier state, DPM source terms, and run monitors are read back and assessed |
 | Outcome | case-only child built and read-back verified; diagnostic 2%/3% run post-processing is recorded separately |
-| Linked report | [09cV3 fine-mist allocation diagnostic results](../reports/09cV3/results.md) |
+| Linked report | [09cV3 fine-mist allocation diagnostic results](../reports/purnanto-reference/09cV3/results.md) |
 
 ## 1. Objective
 
@@ -103,7 +103,7 @@ Before interpreting a `09cV3` result:
 - [Fine-mist DPM size and mass-distribution decision](../../ResearchProject_wiki/wiki/model/fine-mist-dpm-size-and-mass-distribution.md)
 - [Mesh, droplet-loading, and wall-film meeting report](../../Meeting%20report/mesh-conversion-and-dpm-mass-sensitivity-meeting-report.md)
 - [Detailed geothermal fine-mist cutoff evidence](../../CFD_wiki/wiki/synthesis/geothermal-fine-mist-size-cutoff-evidence.md)
-- [09cV2 diagnostic results](../reports/09cV2/results.md)
+- [09cV2 diagnostic results](../reports/purnanto-reference/09cV2/results.md)
 
 ## 8a. Server-2 10% fine-mist loading sensitivity — 2026-08-07
 
@@ -140,7 +140,7 @@ This is a controlled **Assumed, medium-risk** tracked-liquid DPM-allocation sens
 | Calculation request | Fluent Run Calculation configured for `5,000` additional iterations; launch observed through first coupled DPM tracking output |
 | Verification | [strict explicit-reload readback](../../PyAnsys/output/09cV3_mass_flow_02pct_from_05pct_20260807.json) |
 
-The seven surface injections remain on `steaminlet`, retain the documented diameters and all inherited non-loading settings, and use the tabulated 2% flow scaling in the [fine-mist allocation sweep](../../ResearchProject_wiki/wiki/model/fine-mist-dpm-size-and-mass-distribution.md#8-scaling-across-the-dpm-fraction-sweep). A later explicit reload of the paired `...-iter5000.cas.h5`/`.dat.h5` checkpoint established an available 5,000-iteration result checkpoint and produced the scoped phase-flux and DPM terminal-fate reports in the [09cV3 results record](../reports/09cV3/results.md). The result remains diagnostic because carrier closure, residual maturity, and the substantial incomplete-DPM fraction are unresolved.
+The seven surface injections remain on `steaminlet`, retain the documented diameters and all inherited non-loading settings, and use the tabulated 2% flow scaling in the [fine-mist allocation sweep](../../ResearchProject_wiki/wiki/model/fine-mist-dpm-size-and-mass-distribution.md#8-scaling-across-the-dpm-fraction-sweep). A later explicit reload of the paired `...-iter5000.cas.h5`/`.dat.h5` checkpoint established an available 5,000-iteration result checkpoint and produced the scoped phase-flux and DPM terminal-fate reports in the [09cV3 results record](../reports/purnanto-reference/09cV3/results.md). The result remains diagnostic because carrier closure, residual maturity, and the substantial incomplete-DPM fraction are unresolved.
 
 ## 8c. Server-1 3% fine-mist loading sensitivity — 2026-08-10
 

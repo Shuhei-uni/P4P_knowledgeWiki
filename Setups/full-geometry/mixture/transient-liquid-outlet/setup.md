@@ -12,7 +12,7 @@
 | Interpretation owner | user-led |
 | Geometry basis | exact verified full-geometry production mesh used by the current Y010 Mixture work; repeat the parent-build stage for any new mesh |
 | Steady predecessor | [`02e` Y010 outlet characterization](../../../active/02e-mixture-y010-brine-outlet-boundary-characterization.md) |
-| Key predecessor evidence | [`02e` Stage-1 results](../../../reports/02e/stage1-results-20260816.md) |
+| Key predecessor evidence | [`02e` Stage-1 results](../../../reports/full-geometry/mixture/steady-liquid-outlet/02e/stage1-results-20260816.md) |
 | Report home | [mirrored transient report folder](../../../reports/full-geometry/mixture/transient-liquid-outlet/index.md) |
 
 ## Campaign question

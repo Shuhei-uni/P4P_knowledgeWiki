@@ -463,3 +463,20 @@ Readback:
   `solver.settings.solution.run_calculation.transient_controls.time_step_size` read back as `1e-05` during the corrected IC1/IC2 screen. IC0, IC1, and IC2 each reached paired 1,000/2,000-iteration endpoints.
 Notes:
   Reading a `.dat.h5` restores transient run controls and overwrote a previously set timestep with `1.0`; setting the timestep before the data read is therefore invalid for a saved-field restart. An interrupted journal can leave a native transcript open, causing a later `/file/start-transcript` to fail; close the stale transcript while Fluent is idle, use a new uniquely named journal, and retain—but explicitly exclude—the large-step artifacts from the corrected test conclusion.
+
+Fluent: 2025 R2
+PyFluent: 0.39.0 local `.venv`
+Case/data: unavailable; active filenames were not exposed by the existing session
+Goal: recover configured Report Plot histories when live PyFluent monitor buffers are empty
+Order:
+  1. inspect `solution.monitor.report_files` without loading case/data or changing the session;
+  2. read each configured relative Report File through Fluent Scheme after resolving it against an explicitly supplied remote report directory;
+  3. parse the Fluent Lisp-style header and iteration/value pairs;
+  4. write local JSON/PNG artifacts and preserve missing-file or parser errors.
+Working path or TUI:
+  `PyAnsys/scripts/inspection/extract_report_plot_histories.py --report-dir <remote report directory>`
+  Relative names such as `.\\03a_stage3_*_rfile_4_1.out` may fail from the current Fluent working directory even when the absolute file exists elsewhere. The read-only `file-exists?` check and Scheme reader work with an explicit path such as `C:\Users\syok443\P4P simulation\brine outlet\<report-file>.out`.
+Readback:
+  The live session exposed 30 active Report Files. All 30 absolute report files were found in `C:\Users\syok443\P4P simulation\brine outlet`, and each yielded 18,000 iteration/value points through iteration 18,000.
+Notes:
+  Report File location is independent of case/data location. Do not infer case identity from the report directory or server routing alias. If the report files are absent, the history is unavailable from that checkpoint and must be instrumented before a rerun.

@@ -52,6 +52,42 @@ Keep in `Setups/reports/full-geometry/...`:
 
 Do not create `results.md` beside `setup.md` for new full-geometry work. Do not put setup/stage plans in the report tree.
 
+### Canonical campaign unit
+
+For new work, one campaign directory is the smallest canonical unit. Keep its shape predictable:
+
+```text
+Setups/full-geometry/<physics-family>/<campaign>/
+├── index.md                         # campaign map and status
+├── setup.md                         # optional shared campaign contract
+├── setup-<id>-<slug>.md             # independent setup definition, when needed
+└── stage-<nn>-<slug>.md             # ordered stage plan, when needed
+
+Setups/reports/full-geometry/<physics-family>/<campaign>/
+├── index.md                         # campaign report map
+└── <experiment-id>/                  # one setup/stage/experiment
+    ├── index.md
+    ├── result reports
+    ├── plots/                        # local figures for this experiment
+    └── evidence/                     # optional companion artifacts
+```
+
+Use only the branches that the campaign needs. A campaign with one setup may use `setup.md`; a staged campaign may use `setup.md` plus stage plans. Every reportable setup/stage/experiment gets one report folder, and any plots or evidence belong inside that folder. If an experiment has multiple run packets, keep those files together under the experiment folder rather than creating a campaign-level plot directory.
+
+Every new campaign directory has one `index.md`, and every setup or result record has a single canonical path. Indexes should link to records and report their lifecycle; they should not become second copies of the records. New paths and filenames use lowercase kebab-case. Stable IDs belong in metadata and links, not in a new global numbering sequence.
+
+Use `Setups/templates/campaign-index-template.md` for the index shape rather than inventing a new navigation format for each campaign.
+
+For new records, include machine-readable filing metadata for at least `record_type`, `programme`, `geometry`, `physics_family`, `campaign`, `record_id` (or `none`), and `lifecycle`. The human-facing campaign path remains the primary identity.
+
+### Compatibility is not a second source of truth
+
+`active/`, `future/`, `past/`, `archived/`, `compatibility-snapshots/`, and old numbered report directories are compatibility surfaces only. Do not add new full-geometry work there. Do not copy a canonical setup or report into one of those locations merely to make navigation easier.
+
+When an existing record is moved, prefer a small redirect stub at the old path. Keep a detailed compatibility snapshot only when old relative links or historical provenance require the original directory depth, and label it as a snapshot with a link to the canonical record. One location must be authoritative; later edits belong there.
+
+Keep plots and small evidence attachments inside the matching experiment folder under `plots/` or `evidence/`. Keep executable outputs and source artifacts in their owning `PyAnsys/` or raw-data location and link to them. Do not put result evidence in the setup tree or create a shared campaign-level `plots/` directory.
+
 ### Historical numbered/reference work
 
 The old `active/`, `future/`, `past/`, and numbered `reports/` folders are retained as a compatibility layer for the numbered corpus. Navigate them through `Setups/purnanto-reference/index.md` and `Setups/reports/purnanto-reference/index.md`.
@@ -119,7 +155,8 @@ For new full-geometry work:
 3. choose a descriptive scientific campaign;
 4. place setup/stage plans in `Setups/full-geometry/...`;
 5. place completed-run reports in the exactly mirrored `Setups/reports/full-geometry/...` path;
-6. record an optional stable machine/reference ID in metadata.
+6. name new records with their role (`setup`, `stage-<nn>`, or `run-<id>`) and a descriptive lowercase slug;
+7. record an optional stable machine/reference ID in metadata.
 
 For legacy numbered work:
 
@@ -128,3 +165,5 @@ For legacy numbered work:
 3. update `Setups/order-dictionary.md` and affected links after a rename or lineage change.
 
 Lifecycle (`active`, `future`, `reported`, `archived`) is metadata, not a required top-level folder for new full-geometry work and not a statement of scientific claim strength.
+
+Do not use `current`, `latest`, `final`, `new`, or an unqualified `results.md` as a new record name. Preserve legacy names and IDs when editing historical records; the naming rule is for new additions and intentional migrations only.

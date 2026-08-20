@@ -136,7 +136,7 @@ FG-MIX-T01-steady-parent-<mesh-id>.dat.h5
 
 Once accepted, all later transient qualification cases for that mesh must trace back to this exact parent unless a documented parent revision is created.
 
-The executed quick candidate screen is documented in the [Stage-1 candidate report](../../../reports/full-geometry/mixture/transient-liquid-outlet/stage-01-candidate-screen-20260816.md). It provisionally selects the `1.1375 MPa` endpoint as the candidate parent for the next setup-construction stage; this selection is diagnostic and conditional on the Stage-2 readback gate because the 1,000-iteration field is not converged.
+The executed quick candidate screen is documented in the [Stage-1 candidate report](../../../reports/full-geometry/mixture/transient-liquid-outlet/stage-01/stage-01-candidate-screen-20260816.md). It provisionally selects the `1.1375 MPa` endpoint as the candidate parent for the next setup-construction stage; this selection is diagnostic and conditional on the Stage-2 readback gate because the 1,000-iteration field is not converged.
 
 ---
 

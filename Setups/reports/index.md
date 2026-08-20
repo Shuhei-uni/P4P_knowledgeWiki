@@ -19,6 +19,8 @@ setup:  Setups/full-geometry/<physics>/<campaign>/
 report: Setups/reports/full-geometry/<physics>/<campaign>/
 ```
 
+Within each report campaign, give every reportable setup/stage/experiment its own `<experiment-id>/` folder. Keep that folder's `plots/` and `evidence/` beneath it; do not create a shared campaign-level plot folder.
+
 The campaign path should match exactly between the setup side and report side.
 
 ## Historical numbered/reference reports

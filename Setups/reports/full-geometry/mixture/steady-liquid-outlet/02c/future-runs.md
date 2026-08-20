@@ -148,7 +148,7 @@ This separate, intentionally coarser amendment retains the same frozen 02c-B pre
 
 ### Preparation state — 2026-08-16 (UTC)
 
-- The case-only builder and a separate local native journal were prepared for I20 → I40 → I60 → I80 → I100 → I120 → I140 → I160. The journal is [02c-above-inlet-20-to-130-coarse-queue-20260816T014600Z.jou](../../PyAnsys/output/02c-above-inlet-20-to-130-coarse-queue-20260816T014600Z.jou).
+- The case-only builder and a separate local native journal were prepared for I20 → I40 → I60 → I80 → I100 → I120 → I140 → I160. The journal is [02c-above-inlet-20-to-130-coarse-queue-20260816T014600Z.jou](../../../../../../PyAnsys/output/02c-above-inlet-20-to-130-coarse-queue-20260816T014600Z.jou).
 - The journal is **not submitted**. It would later load each independently parent-derived child, Hybrid Initialize, run `500` native steady iterations, write a unique paired endpoint, and then advance.
 - `Observed`: the currently accessible idle Fluent session did not expose the exact frozen 02c-B parent path. The case-only build therefore stopped before any new child, initialization, iteration, data write, or journal submission. No I pre-initialization case exists yet.
 - The next build must reconnect to an idle Fluent session that can read the documented frozen parent, then verify each I child by reload/readback before any journal is authorized.

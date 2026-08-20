@@ -17,8 +17,8 @@ This branch was continued independently from the immutable Stage-1 iteration-1,0
 
 | Phase | Native continuation | Endpoint | Verification | Evidence |
 |---|---:|---:|---|---|
-| Initial screen | +300, ending at Fluent iteration 1300 | Case/data pair present | `RUN_COMPLETED_ENDPOINT_VERIFIED` | [initial journal](../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/03A-S2-N3-from-i1000-plus300-20260817T125355Z.jou), [initial residual history](../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/post_simulation_analysis/N3-initial-screen-residual-check.json) |
-| Extension | +700, ending at Fluent iteration 2000 | Case/data pair present | `RUN_COMPLETED_ENDPOINT_VERIFIED` | [extension journal](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/03A-S2-N3-from-initial-screen-plus700-20260817T132736Z.jou), [extension summary](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N3/N3-summary.json) |
+| Initial screen | +300, ending at Fluent iteration 1300 | Case/data pair present | `RUN_COMPLETED_ENDPOINT_VERIFIED` | [initial journal](../../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/03A-S2-N3-from-i1000-plus300-20260817T125355Z.jou), [initial residual history](../../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/post_simulation_analysis/N3-initial-screen-residual-check.json) |
+| Extension | +700, ending at Fluent iteration 2000 | Case/data pair present | `RUN_COMPLETED_ENDPOINT_VERIFIED` | [extension journal](../../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/03A-S2-N3-from-initial-screen-plus700-20260817T132736Z.jou), [extension summary](../../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N3/N3-summary.json) |
 
 The extension endpoint is the paired remote case/data stem:
 
@@ -76,7 +76,7 @@ x_out              =   0.9189
 
 The N3 +700 endpoint improves the diagnostic mass imbalance relative to Stage 1, from `17.17%` to `15.10%`. However, the improvement is accompanied by a large change in phase routing: liquid flow to the steam outlet increases from `0.1425 kg/s` to `4.1626 kg/s`, total liquid outlet flow increases from `82.7549 kg/s` to `147.5250 kg/s`, and the diagnostic outlet vapour quality decreases from `0.9968` to `0.9189`.
 
-The endpoint flux evidence is in [N3 extension flux-check.json](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/post_simulation_analysis/N3-extension-700-flux-check.json).
+The endpoint flux evidence is in [N3 extension flux-check.json](../../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/post_simulation_analysis/N3-extension-700-flux-check.json).
 
 ## Liquid inventory evidence
 
@@ -99,11 +99,11 @@ N3 is therefore not currently selected for the canonical-return test. The endpoi
 
 ## Source artifacts
 
-- [N3 branch summary JSON](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N3/N3-summary.json)
+- [N3 branch summary JSON](../../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N3/N3-summary.json)
 - [N3 full scaled-residual figure](plots/N3/N3-full-scaled-residuals.png)
-- [N3 initial residual history](../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/post_simulation_analysis/N3-initial-screen-residual-check.json)
-- [N3 extension residual history](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/post_simulation_analysis/N3-extension-700-residual-check.json)
-- [N3 extension monitor history](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/post_simulation_analysis/N3-extension-700-monitor-history.json)
-- [N3 extension flux evidence](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/post_simulation_analysis/N3-extension-700-flux-check.json)
-- [Stage-1 reference residual history](../../../../../PyAnsys/output/post_simulation_analysis/03a_08b_parity_full_geometry_iter1000_20260817T110345Z-residual-check.json)
-- [Stage-1 reference flux evidence](../../../../../PyAnsys/output/post_simulation_analysis/03a_08b_parity_full_geometry_iter1000_20260817T110345Z-flux-check.json)
+- [N3 initial residual history](../../../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/post_simulation_analysis/N3-initial-screen-residual-check.json)
+- [N3 extension residual history](../../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/post_simulation_analysis/N3-extension-700-residual-check.json)
+- [N3 extension monitor history](../../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/post_simulation_analysis/N3-extension-700-monitor-history.json)
+- [N3 extension flux evidence](../../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/post_simulation_analysis/N3-extension-700-flux-check.json)
+- [Stage-1 reference residual history](../../../../../../PyAnsys/output/post_simulation_analysis/03a_08b_parity_full_geometry_iter1000_20260817T110345Z-residual-check.json)
+- [Stage-1 reference flux evidence](../../../../../../PyAnsys/output/post_simulation_analysis/03a_08b_parity_full_geometry_iter1000_20260817T110345Z-flux-check.json)

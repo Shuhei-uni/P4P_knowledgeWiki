@@ -107,9 +107,9 @@ DECISION: DO NOT PROCEED
 
 ## Source artifacts
 
-- [Overnight execution manifest](../../../../../PyAnsys/output/03a_stage3/overnight/20260818T103253Z/overnight-events.jsonl)
-- [Second fixed-block attempt manifest](../../../../../PyAnsys/output/03a_stage3/overnight/20260819T061715Z/overnight-events.jsonl)
-- [Combined residual data](../../../../../PyAnsys/output/03a_stage3/residual-plots/03A-stage3-F08-F10-F12-scaled-residuals.json)
-- [Combined residual plot source](../../../../../PyAnsys/output/03a_stage3/residual-plots/03A-stage3-F08-F10-F12-scaled-residuals-combined.png)
-- [Stage-3 convergence sweep](../../../../full-geometry/mixture/steady-liquid-outlet/03a-stage3-fluent-recommended-convergence-sweep.md)
-- [Stage-3 shared parent and seed specification](../../../../full-geometry/mixture/steady-liquid-outlet/03a-stage3-shared-parent-and-seed-spec.yaml)
+- [Overnight execution manifest](../../../../../../PyAnsys/output/03a_stage3/overnight/20260818T103253Z/overnight-events.jsonl)
+- [Second fixed-block attempt manifest](../../../../../../PyAnsys/output/03a_stage3/overnight/20260819T061715Z/overnight-events.jsonl)
+- [Combined residual data](../../../../../../PyAnsys/output/03a_stage3/residual-plots/03A-stage3-F08-F10-F12-scaled-residuals.json)
+- [Combined residual plot source](../../../../../../PyAnsys/output/03a_stage3/residual-plots/03A-stage3-F08-F10-F12-scaled-residuals-combined.png)
+- [Stage-3 convergence sweep](../../../../../full-geometry/mixture/steady-liquid-outlet/03a-stage3-fluent-recommended-convergence-sweep.md)
+- [Stage-3 shared parent and seed specification](../../../../../full-geometry/mixture/steady-liquid-outlet/03a-stage3-shared-parent-and-seed-spec.yaml)

@@ -9,7 +9,7 @@
 | Primary question | Can the current transient Mixture formulation run from the developed steady parent when the Y010 patch is removed, and if not, does reducing only the timestep materially delay or remove the failure? |
 | Interpretation owner | user-led |
 | Parent | [Stages 1–2 — Steady Parent and Transient Start States](stage-01-02-steady-parent-and-transient-start.md) |
-| Recovery basis | [Stage-3 failed initialization sweep report](../../../reports/full-geometry/mixture/transient-liquid-outlet/stage-03-initialization-comparison-20260816.md) |
+| Recovery basis | [Stage-3 failed initialization sweep report](../../../reports/full-geometry/mixture/transient-liquid-outlet/stage-03/stage-03-initialization-comparison-20260816.md) |
 | Brine/steam comparison pressure | `1.120 MPa` gauge for both pressure outlets |
 
 ## Why this stage exists
@@ -19,7 +19,7 @@ the Y010-patched `INIT-H` branch failed with a floating-point exception at
 transient step `53`, after residual growth, full-domain turbulent-viscosity
 limiting, reversed flow at both pressure outlets, and AMG divergence. The
 `INIT-S` branch was not started, so no initialization ranking can be inferred
-from that attempt. See the [failed-run report](../../../reports/full-geometry/mixture/transient-liquid-outlet/stage-03-initialization-comparison-20260816.md)
+from that attempt. See the [failed-run report](../../../reports/full-geometry/mixture/transient-liquid-outlet/stage-03/stage-03-initialization-comparison-20260816.md)
 for the retained transcript and audit artifacts.
 
 The next experiment is deliberately narrower. Use the developed steady parent

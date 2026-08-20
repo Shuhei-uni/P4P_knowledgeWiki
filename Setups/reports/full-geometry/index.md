@@ -29,4 +29,6 @@ Setups/reports/full-geometry/<physics>/<campaign>/
 
 The setup side defines what should be run. The report side records what actually happened.
 
+Within the mirrored report campaign, use one folder per reportable setup/stage/experiment. Keep local plots and evidence inside that experiment folder.
+
 Do not place setup plans in this report tree.

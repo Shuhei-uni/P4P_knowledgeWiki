@@ -141,8 +141,8 @@ No new iterations are authorised by this report-writing step. The pending verifi
 
 ## Analysis artifacts
 
-- [overview JSON](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/overview/stage2-overview.json)
-- [N1 summary JSON](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N1/N1-summary.json)
-- [N3 summary JSON](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N3/N3-summary.json)
-- [N4 summary JSON](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N4/N4-summary.json)
-- [N5 summary JSON](../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N5/N5-summary.json)
+- [overview JSON](../../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/overview/stage2-overview.json)
+- [N1 summary JSON](../../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N1/N1-summary.json)
+- [N3 summary JSON](../../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N3/N3-summary.json)
+- [N4 summary JSON](../../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N4/N4-summary.json)
+- [N5 summary JSON](../../../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N5/N5-summary.json)

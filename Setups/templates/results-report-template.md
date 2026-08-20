@@ -1,12 +1,31 @@
-# Results Report — <campaign / setup / stage>
+---
+record_type: "result-report"
+programme: "full-geometry"
+geometry: "<exact geometry / mesh / case programme>"
+physics_family: "<mixture / vof / dpm-ewf / other>"
+campaign: "<lowercase-kebab-case-campaign>"
+record_id: "<setup/stage/run ID or none>"
+experiment_id: "<setup/stage/experiment folder ID>"
+run_id: "<run/checkpoint ID or none>"
+lifecycle: "active | reported | archived"
+canonical_path: "Setups/reports/full-geometry/<physics>/<campaign>/<experiment-id>/<filename>.md"
+setup_path: "Setups/full-geometry/<physics>/<campaign>/<setup-or-stage>.md"
+---
 
-> **Filing rule:** for new full-geometry work, save this report under `Setups/reports/full-geometry/<physics>/<campaign>/`. Do not save completed-run reports beside `setup.md` under `Setups/full-geometry/...`.
+# Results Report — <campaign / setup / stage / run>
+
+> **Filing rule:** for new full-geometry work, save this report under `Setups/reports/full-geometry/<physics>/<campaign>/<experiment-id>/`. Do not save completed-run reports beside `setup.md` under `Setups/full-geometry/...`.
 >
 > Default behavior: this report presents the evidence clearly and leaves scientific interpretation to the user unless an interpretation framework was supplied in advance or the user explicitly asks the agent to interpret.
+>
+> Use one report file per completed run, checkpoint, or evidence packet. Keep companion plots/evidence under this experiment folder, never in a shared campaign-level `plots/` directory.
 
 ## 1. What this run was trying to investigate
 
 - Setup/stage definition: `<link to Setups/full-geometry/... or legacy setup>`
+- Experiment folder: `Setups/reports/full-geometry/<physics>/<campaign>/<experiment-id>/`
+- Report path: `Setups/reports/full-geometry/<physics>/<campaign>/<experiment-id>/<filename>.md`
+- Run/checkpoint ID: `<stable ID, date-qualified ID, or none>`
 - Investigation mode: `<exploratory / diagnostic / sensitivity / verification / validation / ...>`
 - Primary question: `<copied or faithfully summarized from setup>`
 - Controlled change(s): `<what differed from reference>`

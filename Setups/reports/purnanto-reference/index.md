@@ -2,21 +2,21 @@
 
 This page is the report-side navigation for the historical numbered/reference programme.
 
-The actual historical report files remain in their existing numbered directories directly under `Setups/reports/` so old cross-links continue to work.
+Historical reports are grouped by setup/experiment folder under this programme. The old top-level numbered folders remain as compatibility redirects where existing links still use them.
 
 Examples include:
 
-- [`04`](../04/results.md)
-- [`07`](../07/results.md)
-- [`08b`](../08b/results.md)
-- [`08c`](../08c/results.md)
-- [`09a`](../09a/results.md)
-- [`09b`](../09b/results.md)
-- [`09c`](../09c/results.md)
-- [`09cV2`](../09cV2/results.md)
-- [`09cV3`](../09cV3/results.md)
-- [`010V2`](../010V2/results.md)
-- [`010V2d-2`](../010V2d-2/results.md)
+- [`04`](04/results.md)
+- [`07`](07/results.md)
+- [`08b`](08b/results.md)
+- [`08c`](08c/results.md)
+- [`09a`](09a/results.md)
+- [`09b`](09b/results.md)
+- [`09c`](09c/results.md)
+- [`09cV2`](09cV2/results.md)
+- [`09cV3`](09cV3/results.md)
+- [`010V2`](010V2/results.md)
+- [`010V2d-2`](010V2d-2/results.md)
 
 Use [Setups/purnanto-reference](../../purnanto-reference/index.md) for the corresponding historical setup/navigation context.
 

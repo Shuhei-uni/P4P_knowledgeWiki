@@ -160,6 +160,40 @@ Custom analysis must not silently enable or change physical models. Namespaced p
 
 If the desired evidence cannot be reconstructed from the existing checkpoint, say so. Do not substitute a vaguely related metric merely because it is available.
 
+### Reconstructing residual histories from batched runs
+
+Use `PyAnsys/scripts/report/build_03a_stage3_stitched_scaled_residuals.py` as the reference implementation:
+
+- `parse_native_stream()` reads Fluent residual rows from each transcript.
+- `merge_series()` joins chunks by native iteration and removes verified duplicate iterations.
+- `build_data()` preserves source segments, gaps, stage boundaries, and failure tails.
+- `plot()` creates the log-scaled branch plot; display-only clipping must be annotated.
+
+Run it with `PyAnsys/.venv/bin/python -u PyAnsys/scripts/report/build_03a_stage3_stitched_scaled_residuals.py`. Keep missing iterations missing—do not interpolate—and save the JSON plus PNG beside the report.
+
+### Recovering report-plot histories from native `.out` files
+
+Use `PyAnsys/scripts/inspection/extract_report_plot_histories.py` when Fluent's `Solution -> Monitors -> Report Plots` are configured but the live PyFluent monitor buffers are empty, or when report-file paths are relative and their directory is uncertain. Fluent Report Files are separate post-processing artifacts; they do not have to be beside the `.cas/.dat` pair. A relative name such as `./metric-rfile.out` only works when it resolves from Fluent's current working directory.
+
+The read-only procedure is:
+
+1. inspect the existing session and its `solution.monitor.report_files` state;
+2. pass the remote Windows directory containing the `.out` files with `--report-dir` rather than changing Fluent's working directory;
+3. let the extractor check each file, read Fluent's Lisp-style history forms through Scheme, reconstruct iteration/value pairs, and write a local JSON manifest plus overview PNG;
+4. use repeated `--report-name` filters for a focused analysis, or omit them to recover every configured active report file;
+5. preserve the raw paths, point counts, report-definition names, and any read errors in the report's evidence links.
+
+Example:
+
+```bash
+PyAnsys/.venv/bin/python -u PyAnsys/scripts/inspection/extract_report_plot_histories.py \
+  --server-id 1 \
+  --report-dir 'C:\path\to\report-directory' \
+  --output-dir PyAnsys/output/report_plot_histories
+```
+
+Adapt `--report-dir` to the case's remote layout and use `--report-name` for the relevant phase, zone, pressure, inventory, routing, or balance histories. The extractor does not assume a particular setup family, number of phases, steady/transient mode, unit system, sign convention, or report-definition naming scheme. If a Fluent version serializes report files with a different header/data shape, update `parse_report_forms()` and retain the explicit failure rather than treating an empty or unreadable file as zero history. If the files are absent from the saved checkpoint, classify the evidence as `requires rerun` and instrument the report files before the next solve.
+
 ## 5. Analysis-specific safeguards
 
 The following are **module safeguards**, not universal reasons to run the module.
@@ -326,6 +360,7 @@ Explain why the new evidence is relevant to the setup question. Do not automatic
 - Every executed analysis has a stated relevance to the setup question.
 - Existing scripts were reused where appropriate but were not treated as mandatory.
 - Custom evidence gathering was attempted when a relevant quantity was not covered by existing scripts.
+- Relative Report File paths were resolved and checked before declaring report-plot history unavailable.
 - No physics/setup state was silently changed to expose a result.
 - Case/data identity is traceable or explicitly unavailable.
 - Analysis completion is based on output predicates, not a universal wait time.
