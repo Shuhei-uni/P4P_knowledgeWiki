@@ -1,26 +1,18 @@
 # Codex Remote Fluent Workflow Reference
 
-This project uses the PyAnsys ecosystem focused on:
-
-```text
-- PyFluent / ansys-fluent-core for Fluent CFD control
-- PyFluent-Visualization / PyVista / Matplotlib for post-processing
-- PyPrimeMesh only later if meshing automation is needed and available
-```
-
-The target architecture is:
+This project uses PyFluent from the laptop to control Fluent running on a licensed workstation.
 
 ```text
 Codex + Python on laptop
-        connects via gRPC
-Ansys Fluent running on licensed workstation
+        |
+        | gRPC
+        v
+Ansys Fluent on workstation
 ```
 
-## Use connect_to_fluent, not launch_fluent
+## Connection
 
-The laptop may not have Fluent installed. Fluent runs remotely.
-
-Use:
+Use `connect_to_fluent`, not `launch_fluent`, when Fluent is running remotely.
 
 ```python
 import ansys.fluent.core as pyfluent
@@ -35,88 +27,44 @@ solver = pyfluent.connect_to_fluent(
 )
 ```
 
-or:
+or connect with a `server_info.txt` file.
 
-```python
-solver = pyfluent.connect_to_fluent(
-    server_info_file_name="server_info.txt",
-    allow_remote_host=True,
-    cleanup_on_exit=False,
-    start_transcript=True,
-)
-```
+Paths passed to Fluent are normally interpreted on the Fluent computer. Keep `.env` and `server_info.txt` out of git.
 
-## Current setup files
-
-```text
-requirements-minimal.txt
-requirements-extended.txt
-.env.example
-scripts/connection/local_preflight.py
-scripts/connection/check_connection.py
-scripts/connection/parse_server_info.py
-scripts/inspection/inspect_fluent_session.py
-scripts/inspection/inspect_case.py
-scripts/inspection/probe_remote_paths.py
-scripts/inspection/load_case_data.py
-docs/PREPARE_NOW_ON_LAPTOP.md
-docs/ON_SITE_FLUENT_PC_CHECKLIST.md
-```
-
-## Suggested sequence
-
-1. Run local preflight:
+## Basic sequence
 
 ```bash
 .venv/bin/python scripts/connection/local_preflight.py
-```
-
-2. Once Fluent PC is available, fill `.env`.
-3. Run connection check:
-
-```bash
 .venv/bin/python scripts/connection/check_connection.py
-```
-
-4. Inspect Fluent session:
-
-```bash
 .venv/bin/python scripts/inspection/inspect_fluent_session.py
 ```
 
-5. Probe the Fluent-PC project folders:
+Build project-specific mutation code only after the connection and live state are understood.
 
-```bash
-.venv/bin/python scripts/inspection/probe_remote_paths.py
-```
+## Setup versus run
 
-6. Build project-specific scripts only after connection works.
+The default setup deliverable is a verified `.cas.h5`.
 
-## First useful project-specific scripts
+After setup creation, make a separate run plan and choose one of three modes:
 
-```text
-scripts/inspection/inspect_case.py
-scripts/inspection/load_case_data.py
-scripts/list_boundaries.py
-scripts/list_models.py
-scripts/inspection/export_residuals.py
-scripts/inspection/monitor_native_run.py
-scripts/export_report_definitions.py
-knowledge/fluent-settings/native_run_and_autosave.md
-```
+1. **Simple TUI** — one prepared case and one uninterrupted run.
+2. **Fluent journal** — multiple independent cases or a predetermined sequence.
+3. **Agent-owned Python** — staged/adaptive runs where intermediate evidence determines the next action.
 
-## Notes
+Use Fluent-native autosave/checkpoints whenever losing progress would be costly, regardless of mode.
 
-- Keep the laptop-side Python pinned to the local `PyAnsys/.venv`, preferably on Python 3.12.
-- File paths in Fluent commands are usually interpreted on the Fluent PC, not on the laptop.
-- Store Fluent-PC paths in `.env` using `FLUENT_REMOTE_PROJECT_DIR`,
-  `FLUENT_REMOTE_CASE_DATA_DIR`, `FLUENT_REMOTE_GEOM_DIR`, and
-  `FLUENT_REMOTE_MESH_DIR`.
-- Store concrete active assets in `.env` using `FLUENT_REMOTE_CASE_FILE`,
-  `FLUENT_REMOTE_DATA_FILE`, `FLUENT_REMOTE_GEOM_FILE`, and
-  `FLUENT_REMOTE_MESH_FILE`.
-- Default setup deliverable: `.cas.h5` only.
-- Default run/save deliverable: Fluent-native autosave case/data files with a remote root and a small retained set.
-- Keep initialization, iteration, and periodic checkpoint writes out of laptop-side Python loops. Start from Fluent or a Fluent-native journal and reconnect later for monitoring or recovery.
-- Keep `server_info.txt` and `.env` out of git.
-- If connection fails, check IP, port, password, firewall, VPN, and whether server_info contains 127.0.0.1.
+For Python-supervised runs, provide the exact launch command and a supervisor/resume guide rather than expecting another agent to infer the state machine from source code.
+
+Detailed policy: `knowledge/fluent-settings/native_run_and_autosave.md`.
+
+## Useful tools
+
+- `scripts/connection/check_connection.py` — connection health/preflight
+- `scripts/inspection/inspect_fluent_session.py` — non-mutating live inspection
+- `scripts/inspection/monitor_native_run.py` — optional read-only monitoring
+- `knowledge/fluent-settings/` — live-tree/dependency/run guidance
+- `src/pyansys_fluent/` — reusable Fluent automation helpers
+
+## Storage
+
+Treat `PyAnsys/output/` as temporary/generated evidence. Keep only artifacts that still support checks, analysis, reports, plots, reproducibility or active debugging. Remove stale snapshots, duplicate exports and other regenerable bulk after handoff.
