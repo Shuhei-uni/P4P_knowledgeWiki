@@ -4,33 +4,27 @@
 > **Branches:** F01–F12  
 > **Physical case:** unchanged 03A full-geometry steady Mixture case  
 > **Evidence model:** residual histories plus discrete physical measurements from paired `.cas.h5`/`.dat.h5` checkpoints  
-> **Role of this file:** preserve execution validity, checkpoint lineage, endpoint readback, residual-window evidence, and unresolved evidence conflicts from the 2026-08-21 extraction pass.  
-> **Not the final Stage-3 scientific results report.** The final report should be rebuilt from continuous stitched residual histories plus recovered Fluent report-file histories according to [`03a-stage3-results-analysis-and-plotting-plan.md`](./03a-stage3-results-analysis-and-plotting-plan.md) and the fillable template [`03a-stage3-final-results-template.md`](./03a-stage3-final-results-template.md).  
+> **Role of this file:** preserve the 2026-08-21 execution/checkpoint evidence packet. It is **not** the final Stage-3 scientific results report.  
+> **Final-report handoff:** rebuild the scientific report from continuous stitched residual histories plus recovered Fluent report-file histories using [`03a-stage3-results-analysis-and-plotting-plan.md`](./03a-stage3-results-analysis-and-plotting-plan.md) and [`03a-stage3-final-results-template.md`](./03a-stage3-final-results-template.md).  
 > **Interpretation status:** pending user direction
 
-## How to use this evidence packet
+## Final-report usage note
 
-Keep this file as the provenance/evidence layer rather than rewriting it into the final narrative report.
+Use this packet for branch/run identity, terminal status, checkpoint lineage, endpoint readback, residual-window evidence, evidence conflicts, and cross-checking reconstructed histories. Do **not** use endpoint checkpoint values alone to decide whether a branch reached steady state.
 
-Use it for:
+The final Stage-3 report should centre on:
 
-- branch/run-stamp identity and terminal status;
-- valid checkpoint lineage;
-- endpoint `.cas.h5`/`.dat.h5` measurements;
-- residual-window reductions already recovered;
-- evidence conflicts, missing stages, transport failures, and numerical failures;
-- cross-checking continuous monitor histories against saved checkpoints.
+1. all available residual histories;
+2. total inlet versus total outlet mass-flow history and relative mass imbalance;
+3. total liquid-inventory history and whether it becomes stationary;
+4. inlet-loading history/stage boundaries for ramped branches;
+5. phase routing, lower-vessel inventory, and brine-entry pressure as diagnostic evidence explaining changes in the main convergence quantities.
 
-Do **not** use checkpoint endpoint values alone to decide whether a branch reached a steady state. Stage 3 is ultimately judged from the continuous history of:
-
-1. all available residuals;
-2. total inlet versus total outlet mass flow and relative mass imbalance;
-3. total liquid inventory and its stationarity;
-4. supporting phase-routing, lower-vessel inventory, inlet-loading, and brine-entry pressure histories where they help explain the main behaviour.
-
-The Stage-3 objective is numerical stabilisation of the unchanged physical case: determine whether the Fluent-recommended startup strategies calm the problematic residual behaviour and allow the solution to approach a steady total mass balance. There is no Stage-3 requirement for a prescribed liquid/vapour outlet split; phase routing is diagnostic in this experiment.
+There is no Stage-3 requirement for a prescribed phase split between outlets. Phase-routing quantities are diagnostic in this convergence/stabilisation experiment.
 
 ---
+
+# Preserved 2026-08-21 evidence report
 
 ## 1. Evidence conventions
 
@@ -190,53 +184,52 @@ Only branches with full Mixture active, 100% inlet velocity, and a valid `.dat.h
 | 80% | 15,000 | −11.966% | −20.203% | 4,919.994 | +1.232 kPa |
 | 100% | 18,000 | −11.107% | −18.664% | 4,681.935 | +1.367 kPa |
 
-These checkpoint values are evidence anchors only. The final report must use the continuous histories to determine whether apparent endpoint improvements are persistent, transient, or part of a wider oscillation/drift.
+These checkpoint values are retained exactly as endpoint evidence; they are not sufficient by themselves to establish persistent settling.
 
-## 5. Residual evidence already recovered
+## 5. Residual evidence status
 
-The stitched/full histories and final-window statistics remain useful for reconstructing branch progression. Where a final 500-point window is available, treat its trend as a local diagnostic rather than a convergence verdict.
+- F01: full residual history through the last valid 5,500 iterations is available; a later failure tail exists in the transcript.
+- F03: a retained 500-point endpoint residual history exists over iterations 2,312–5,000.
+- F05/F06: native residual exports exist and require common stitched reduction.
+- F07/F08/F09/F11/F12: stage-wise residual evidence exists to varying completeness and should be reconstructed with explicit stage boundaries.
+- Missing iterations must remain missing; do not interpolate across transport gaps or unconfirmed stages.
 
-Key existing observations include:
+The final report should plot **all available residual equations together** on log scale. `k` and `epsilon` remain especially important because their intermittency motivated Stage 3, but the visual evidence should include continuity, all momentum equations, volume fraction when active, and every other available residual.
 
-- F01 reached a locally calmer residual window before subsequent catastrophic numerical failure.
-- F03 completed 5,000 iterations but retained adverse continuity/`k` behaviour and very poor endpoint mass balance.
-- F08 failed during progressive loading before reaching 100%; its last valid 40% state had worsening continuity/epsilon behaviour.
-- F09 reached 100% but combined high continuity residual levels with a very large endpoint imbalance.
-- F12 reached 100% with decreasing final-window continuity, `k`, epsilon, and volume-fraction trends, but checkpoint closure remained about `−11%`; continuous report histories are required before judging whether this was still improving or had settled away from zero.
+## 6. Continuous monitor evidence still to integrate
 
-Residual evidence must be replotted in the final report using **all available residual equations together**, with stage boundaries shown explicitly for staged branches.
+P0 was monitor-ready and configured to write Fluent Report Files/Report Plots. Recover the available `.out` histories before producing the final scientific report.
 
-## 6. Evidence still to integrate before a final Stage-3 report
-
-The final scientific report should not be completed until the available native report-file histories have been recovered and reduced consistently across branches.
-
-Priority histories are:
+Core histories:
 
 - total mixture inlet flow;
 - total mixture outlet flow;
 - relative/full-domain mass imbalance;
-- total liquid inventory;
-- inlet loading/stage progression for ramped branches;
-- liquid/vapour routing to both outlets;
-- Y010/Y030 liquid inventory where available;
-- brine-entry static pressure;
-- brine-entry total pressure.
+- total liquid mass/volume inventory;
+- inlet loading/stage progression for ramped branches.
 
-The P0 also contains lower-level phase/boundary flux histories that overlap with dedicated routing/inlet/outlet reports. These should be used for consistency checks and supplementary evidence rather than plotted redundantly where two histories represent the same physical quantity.
+Diagnostic histories:
+
+- liquid → brine outlet;
+- liquid → steam outlet;
+- vapour → brine outlet;
+- vapour → steam outlet;
+- Y010 liquid inventory;
+- Y030 liquid inventory;
+- brine-entry static pressure;
+- brine-entry total pressure;
+- lower-level phase/boundary flux histories for validation/consistency checks.
+
+Where generic phase/boundary flux reports duplicate dedicated routing reports, select one canonical history for presentation and retain the duplicate only as a consistency check.
 
 ## 7. Final-report handoff
 
-The final report should be created from [`03a-stage3-final-results-template.md`](./03a-stage3-final-results-template.md).
+The final report is intentionally separate from this evidence packet.
 
-The analysis agent filling that template should:
+Use:
 
-1. reconstruct all stitched residual histories;
-2. recover all available native `.out` report histories;
-3. map duplicate/alias report definitions to canonical physical quantities;
-4. preserve missing data as missing rather than interpolating it;
-5. mark carrier-only/full-Mixture and inlet-load transition boundaries;
-6. derive the composite figures defined in the plotting plan;
-7. compare branches at like-for-like full-Mixture 100% conditions where possible;
-8. use checkpoints in this packet to validate the reconstructed histories;
-9. keep measured evidence separate from causal interpretation;
-10. leave the final branch/next-step decision to the user unless explicitly delegated.
+- [`03a-stage3-results-analysis-and-plotting-plan.md`](./03a-stage3-results-analysis-and-plotting-plan.md) for the scientific reduction/plot strategy;
+- [`03a-stage3-final-results-template.md`](./03a-stage3-final-results-template.md) for the final report structure;
+- [03a-stage3-results-20260821-checkpoints.csv](./03a-stage3-results-20260821-checkpoints.csv) and this packet for checkpoint validation/provenance.
+
+The analysis agent should recover histories first, build the composite figures, cross-check against checkpoint values, then fill the final template. Do not convert missing histories into zero and do not make causal claims from steady-iteration ordering alone.
