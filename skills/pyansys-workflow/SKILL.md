@@ -1,126 +1,62 @@
 ---
 name: pyansys-workflow
-description: "Use when working with PyAnsys executable automation for Fluent/PyFluent: connection checks, inspection scripts, setup rebuild scripts, remote Student Edition fallback, machine-readable validation targets, claim gates, dependency-ordered Fluent settings, or PyAnsys knowledge updates."
+description: "Use for executable PyAnsys/Fluent work: connection and inspection, dependency-ordered setup changes, selecting a run mode, writing run orchestration, and maintaining compact machine-readable evidence."
 ---
 
 # PyAnsys Workflow
 
-## Core Rule
+Use `PyAnsys/` for executable Fluent automation. Keep setup construction, run planning, and run execution distinct.
 
-Use `PyAnsys/` as the executable automation layer for Fluent setup, inspection, rebuild, focused run orchestration, machine-readable target manifests, and claim-gate logic. Treat Fluent as a dependency-ordered GUI state machine, not a stable static Python object tree.
+## 1. Inspect before changing Fluent
 
-From now on, keep the workflow split:
-- setup-building scripts create or modify only `.cas.h5`
-- `PyAnsys/scripts/setup/save_data_after_iterations.py` is the standard runner for loading an existing `.cas.h5`, hybrid-initializing it, running iterations, and writing only `.dat.h5`
+For non-trivial settings work:
 
-Do not merge setup mutation and run/save back into one large script unless the user explicitly asks for it.
+1. read `PyAnsys/AGENTS.md` and the relevant `knowledge/fluent-settings/` order/tree;
+2. connect through the repository helpers;
+3. inspect the loaded case and active Fluent tree;
+4. mutate in dependency order;
+5. read back critical values.
 
-Connection routing is not case provenance: `server_id` only selects the Fluent
-endpoint. After connecting, inspect what is loaded. Use observed case/data
-identity when available; otherwise mark it unavailable and never infer a case or
-setup from the server ID or a previous session. Do not persist `server_id` in
-report-facing artifacts.
-
-Before non-trivial edits, read:
-
-1. `AGENTS.md` at the repository root for cross-system routing.
-2. `PyAnsys/AGENTS.md` for the local automation contract.
-3. `PyAnsys/knowledge/fluent-settings/README.md`.
-4. `PyAnsys/knowledge/fluent-settings/agent_start_prompt.md`.
-5. `PyAnsys/knowledge/fluent-settings/indices/master_index.json`.
-6. `PyAnsys/knowledge/fluent-settings/orders/global_setup_order.yaml`.
-7. `PyAnsys/knowledge/fluent-settings/indices/path_dependency_index.json`.
-8. Relevant model-specific `trees/*.md` and `orders/*.yaml`.
-9. Core helpers: `src/pyansys_fluent/common.py`, `connection.py`, `dependency_workflow.py`, `setup_common.py`, and `setup_io.py`.
-
-For non-interactive work, invoke the repository interpreter directly rather
-than relying on activation state from an earlier shell or tool invocation:
-
-```bash
-/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/.venv/bin/python -c 'import sys; print(sys.executable)'
-```
-
-The expected path is
-`/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/.venv/bin/python`.
-Use that executable for every PyAnsys script. Interactive `source
-.../.venv/bin/activate` is optional only within the same terminal session as
-the following command.
-
-## Search Workflow
-
-Use `rg` to find existing helpers and prior discoveries before writing new code:
-
-```bash
-rg -n "target setting|boundary role|DPM|reacquire|readback|TUI|claim" PyAnsys/src PyAnsys/scripts PyAnsys/knowledge PyAnsys/docs
-```
-
-For setup intent or lineage, use `$setup-report` style lookup. For reusable CFD method logic, use `$cfd-wiki` style lookup. For project claim interpretation, use `$research-project-wiki` style lookup.
-
-## Fluent Settings Rule
-
-Follow this canonical order for non-trivial setting changes:
+Canonical pattern:
 
 ```text
-enable parent -> refresh/reacquire -> inspect children/options -> set child -> read back -> classify failure
+enable/create parent -> reacquire -> inspect -> set -> read back
 ```
 
-Mandatory habits:
+Never infer case identity from `server_id`; it is routing only.
 
-- Reacquire objects after enabling models, creating objects, changing types, loading a case/data file, changing phase count, or switching boundary/model families.
-- Inspect live child names, commands, and allowed values before setting deep paths.
-- Treat readback mismatch as failure even when no exception was raised.
-- Classify failures as `order/dependency issue`, `path/version issue`, `invalid value/format issue`, `PyFluent wrapper limitation`, `requires TUI fallback`, or `requires manual GUI cleanup`.
+## 2. Keep setup building separate
 
-## Inspection-First Workflow
+A setup builder should normally produce a verified `.cas.h5` and stop. Preserve an explicit case/data recovery pair first when modifying a developed solution whose field state matters.
 
-Before writing a setup script for a new Fluent branch:
+Keep case-specific scripts thin and reuse `src/pyansys_fluent/` for shared mechanics.
 
-1. Run `scripts/connection/check_connection.py`.
-2. Run `scripts/inspection/inspect_fluent_session.py`.
-3. Add a targeted non-mutating probe if paths or object names are unclear.
-4. Only then edit or create mutation-heavy setup code.
+## 3. Choose the run mode
 
-Use the full multi-agent workflow described in `PyAnsys/AGENTS.md` when the task touches DPM, multiphase, Energy, EWF, nested path discovery, model activation order, setup derivation, TUI fallback, or physics assumptions.
+| Mode | Use when | Agent involvement |
+|---|---|---|
+| **Simple TUI** | one prepared case, one uninterrupted run | submit one solve command |
+| **Fluent journal** | several independent/fixed cases or stages | generate/submit robust journal; no need to supervise every case |
+| **Agent-owned Python** | staged/adaptive run where later actions depend on intermediate evidence | supervise checkpoints and decisions through a recoverable state machine |
 
-## Code Placement
+For journals, use explicit paths, unique outputs, transcripts and recovery/autosave as appropriate.
 
-Keep file roles strict:
+For agent-owned Python, reconcile actual Fluent state after reconnects before continuing. Provide the exact launch command plus supervisor instructions: what to watch, checkpoint locations, stage identification, stop conditions, and resume procedure.
 
-- `src/pyansys_fluent/`: reusable library code.
-- `scripts/connection/`: bootstrap and preflight.
-- `scripts/inspection/`: non-mutating discovery and probes.
-- `scripts/setup/`: case-specific orchestration.
-- `knowledge/fluent-settings/`: dependency order, settings trees, successful paths, and failures.
-- `knowledge/`: machine-readable targets and claim-gate support.
-- `output/`: generated extracts only; do not treat as authoritative knowledge.
+Detailed policy: `PyAnsys/knowledge/fluent-settings/native_run_and_autosave.md`.
 
-Setup scripts should remain thin: parse inputs, connect, verify remote files, load case/mesh, inspect state, enable models, set materials/zones/boundaries/solution, read back, then write `.cas.h5`.
+## 4. Keep `output/` small
 
-For initialization, iteration, and data writing, use the focused runner:
+`PyAnsys/output/` is temporary/generated evidence storage. Retain only artifacts still needed for checks, result reports, plots, reproducibility, or active debugging. Remove duplicate snapshots, superseded plots, temporary field dumps, and other regenerable bulk once they are no longer useful.
 
-```text
-PyAnsys/scripts/setup/save_data_after_iterations.py
-input: remote .cas.h5 path + iteration count
-output: derived name_X.dat.h5
-loader helper: PyAnsys/src/pyansys_fluent/setup_io.py::load_case_only
-```
+Do not use `output/` as the authoritative home for Fluent case/data archives.
 
-Runner contract:
-- load only the remote `.cas.h5`
-- hybrid-initialize
-- run iterations through the Settings API with TUI fallback
-- write only `.dat.h5`
-- verify the written `.dat.h5` is visible to Fluent
+## Failure rule
 
-Do not add mesh loading, setup mutation, or case/data paired checkpoint persistence to this runner by default.
+If a deep Fluent path fails, first check dependency order, reacquire the object, inspect active children/options, then classify the failure. Use a TUI fallback only after inspecting the Settings API path. Record reusable discoveries in `PyAnsys/knowledge/fluent-settings/`.
 
-## Cross-System Sync
+## Examples
 
-After PyAnsys work:
+**Simple case:** load a verified case, configure autosave if needed, then issue one TUI iteration command. Do not build an orchestration framework around it.
 
-- If claim-gating behavior changed, align the human-readable rule in `ResearchProject_wiki/wiki/vnv/`.
-- If reusable CFD method knowledge was discovered, summarize it in `CFD_wiki/`.
-- If a concrete setup branch changed, sync the setup identity into `Setups/`.
-- If target manifests or automated checks need human review, link them from the matching project V&V page.
-
-Append new working paths, required orders, TUI workarounds, or repeatable failures to the relevant `PyAnsys/knowledge/fluent-settings/` files, at minimum `logs/successful_paths.md` for successful live discoveries.
+**Staged convergence ramp:** write a Python state-machine script that runs to the next checkpoint, inspects monitors, decides whether to change the solver state, records the checkpoint, and continues. Give the overseeing agent the exact command and recovery procedure.
