@@ -1,113 +1,56 @@
 # PyAnsys Overhaul Blueprint
 
-This folder now has one canonical mental model:
+This file records the intended architecture, not a second copy of `PyAnsys/AGENTS.md`.
 
-1. connection and remote-file mechanics live in `src/pyansys_fluent/common.py` and `src/pyansys_fluent/connection.py`
-2. dependency-aware execution logic lives in `src/pyansys_fluent/dependency_workflow.py`
-3. shared setup-specific helpers live under focused modules in `src/pyansys_fluent/`
-4. case-specific scripts should be thin orchestration layers on top of those shared modules
+## Core structure
 
-## Why this overhaul exists
+- `src/pyansys_fluent/` contains reusable mechanics.
+- `scripts/connection/` contains bootstrap/preflight work.
+- `scripts/inspection/` contains read-only discovery/analysis.
+- `scripts/setup/` contains thin case-specific setup/run orchestration.
+- `knowledge/fluent-settings/` contains dependency/path/run knowledge.
 
-The recurring failures were not random:
+Case-specific scripts should stay thin; repeated mechanics belong in `src/`.
 
-- syntax drift between one-off scripts
-- deep nesting without a clear execution contract
-- setting children before parent models were enabled
-- using stale object handles after model/type changes
-- inconsistent fallback decisions between Settings API, TUI, and manual GUI cleanup
+## Fluent mutation rule
 
-The fix is to stop treating each setup script as a standalone experiment.
+Most setup failures come from wrong dependency order, stale handles, or version-specific paths.
 
-## Canonical call order
+Use:
 
-Every non-trivial Fluent mutation should follow this sequence:
+```text
+connect -> verify input -> load -> enable/create parent -> reacquire -> inspect -> set -> read back
+```
 
-1. connect
-2. verify remote inputs exist
-3. load case or mesh
-4. enable parent model or create parent object
-5. refresh and reacquire the live object
-6. inspect child names, command names, and allowed values
-7. set the child value
-8. refresh and reacquire again if the parent changed
-9. read back the value
-10. classify any failure before deciding the fallback
+If a setting fails, isolate the smallest branch and classify the failure before choosing a Settings API, TUI, or manual fallback.
 
-## Script layering
+## Three workflow responsibilities
 
-- `check_connection.py`
-  Purpose: connectivity only
-- `inspect_fluent_session.py`
-  Purpose: non-mutating live discovery
-- `src/pyansys_fluent/common.py`
-  Purpose: shared remote/session mechanics
-- `src/pyansys_fluent/dependency_workflow.py`
-  Purpose: reusable step runner and failure classifier
-- `src/pyansys_fluent/setup_common.py`
-  Purpose: reusable boundary naming, remapping, and setup-state helpers
-- `src/pyansys_fluent/setup_io.py`
-  Purpose: mesh/case/data loading and case/data write behavior
-- `src/pyansys_fluent/setup_run.py`
-  Purpose: setup-side initialization helper only; long iteration and checkpoint control are owned by Fluent
-- `src/pyansys_fluent/setup_discovery.py`
-  Purpose: boundary-role detection, conversion, and compact boundary summaries
-- `src/pyansys_fluent/setup_carrier.py`
-  Purpose: shared carrier-field setup blocks, fallback wiring, and setup07 reusable intents
-- `src/pyansys_fluent/setup_dpm.py`
-  Purpose: DPM material/model/injection helpers with explicit strategy-based surface binding
-- `src/pyansys_fluent/setup_recipes.py`
-  Purpose: ordered setup07/setup09a orchestration recipes and small config dataclasses
-- `scripts/setup/setup07_rebuild_run.py`, `scripts/setup/setup09a_dpm_split_inlet_carryover.py`, `scripts/setup/setup_vof_ewf_from_existing_case.py`, `scripts/setup/rebuild_setup_from_reference_case.py`
-  Purpose: case-specific setup orchestration only; no client-owned iteration loops
+Keep these separate:
 
-## Native run boundary
+1. **Setup building** — produce and verify the Fluent case.
+2. **Run planning** — choose the execution mode and recovery strategy.
+3. **Run execution** — execute and hand off status/evidence.
 
-Long simulation execution is intentionally outside the Python orchestration
-layer. Fluent's own calculation activity, autosave, and retained-file controls
-must be configured before a run is started. Python may prepare those settings
-and later reconnect for read-only monitoring or recovery, but it must not be
-required to send the next iteration block or checkpoint.
+Run-mode choice:
 
-## Failure routing
+- **Simple TUI** for one uninterrupted prepared case.
+- **Fluent journal** for independent/fixed batches.
+- **Agent-owned Python** for staged/adaptive workflows where intermediate evidence controls the next step.
 
-Use these buckets consistently:
+Complex Python runs should be recoverable state machines and must include an exact launch command plus supervisor/resume guidance.
 
-- `order/dependency issue`
-- `path/version issue`
-- `invalid value/format issue`
-- `PyFluent wrapper limitation`
-- `requires TUI fallback`
-- `requires manual GUI cleanup`
+Detailed run guidance lives in `../knowledge/fluent-settings/native_run_and_autosave.md`.
 
-If a step fails, do not restart the whole setup immediately. Isolate the failing parent/child branch first.
+## Visibility rule
 
-## What to refactor next
+Shared helpers must not hide known Fluent-state uncertainty. For version-sensitive or unstable paths:
 
-The current overhaul centralizes shared helpers, but the large case scripts still contain long procedural sections. The next cleanup pass should split those scripts into:
+- preserve the intended physics;
+- inspect/read back the live state;
+- expose failure clearly;
+- record verified paths/order dependencies when discovered.
 
-- input collection
-- case loading and role mapping
-- model enablement blocks
-- boundary application blocks
-- solve/write blocks
+## Storage rule
 
-That should be done without changing the dependency-order contract above.
-
-## Critical visibility rule
-
-Refactors must not hide known Fluent-state failures inside generic shared setters.
-
-When a path is known to be unstable, version-sensitive, or currently failing:
-
-- keep the physics intent intact
-- isolate the path behind a dedicated helper
-- label the helper as best-effort or probe-required
-- log the attempted strategies and readback
-- allow scripts to continue only when the failure mode is explicitly understood
-
-Current examples:
-
-- `setup-only` final writing may need case-only degradation when data writing is inactive
-- DPM injection surface binding may fail on some Fluent 2024 R2 paths and must remain strategy-based with readback verification
-- DPM global options may be inactive or exposed differently across Fluent versions and should stay best-effort rather than assumed-stable
+`PyAnsys/output/` is generated evidence/scratch space, not an archive. Keep outputs that support checks, analysis, result reports, plots or reproducibility; prune temporary and superseded bulk once it is no longer needed.
