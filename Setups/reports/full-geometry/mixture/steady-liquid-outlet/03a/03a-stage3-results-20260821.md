@@ -1,12 +1,36 @@
-# 03A Stage-3 Results — F01–F12 evidence report
+# 03A Stage-3 Results — F01–F12 Evidence Packet
 
 > **Campaign:** 03A Stage-3 — Fluent-Recommended Convergence Sweep  
 > **Branches:** F01–F12  
 > **Physical case:** unchanged 03A full-geometry steady Mixture case  
 > **Evidence model:** residual histories plus discrete physical measurements from paired `.cas.h5`/`.dat.h5` checkpoints  
+> **Role of this file:** preserve execution validity, checkpoint lineage, endpoint readback, residual-window evidence, and unresolved evidence conflicts from the 2026-08-21 extraction pass.  
+> **Not the final Stage-3 scientific results report.** The final report should be rebuilt from continuous stitched residual histories plus recovered Fluent report-file histories according to [`03a-stage3-results-analysis-and-plotting-plan.md`](./03a-stage3-results-analysis-and-plotting-plan.md) and the fillable template [`03a-stage3-final-results-template.md`](./03a-stage3-final-results-template.md).  
 > **Interpretation status:** pending user direction
 
-This report is an evidence packet. It records execution validity, checkpoint lineage, physical readback, and residual-window evidence. It does not select a best branch, claim physical settlement, or call a branch converged.
+## How to use this evidence packet
+
+Keep this file as the provenance/evidence layer rather than rewriting it into the final narrative report.
+
+Use it for:
+
+- branch/run-stamp identity and terminal status;
+- valid checkpoint lineage;
+- endpoint `.cas.h5`/`.dat.h5` measurements;
+- residual-window reductions already recovered;
+- evidence conflicts, missing stages, transport failures, and numerical failures;
+- cross-checking continuous monitor histories against saved checkpoints.
+
+Do **not** use checkpoint endpoint values alone to decide whether a branch reached a steady state. Stage 3 is ultimately judged from the continuous history of:
+
+1. all available residuals;
+2. total inlet versus total outlet mass flow and relative mass imbalance;
+3. total liquid inventory and its stationarity;
+4. supporting phase-routing, lower-vessel inventory, inlet-loading, and brine-entry pressure histories where they help explain the main behaviour.
+
+The Stage-3 objective is numerical stabilisation of the unchanged physical case: determine whether the Fluent-recommended startup strategies calm the problematic residual behaviour and allow the solution to approach a steady total mass balance. There is no Stage-3 requirement for a prescribed liquid/vapour outlet split; phase routing is diagnostic in this experiment.
+
+---
 
 ## 1. Evidence conventions
 
@@ -37,7 +61,7 @@ The immutable monitor-ready P0 identity used by the independent branches was rec
 | F04 | `20260820T013223Z` | hybrid initialization; carrier-100% attempt | carrier 100% | 0 native iterations confirmed | 0 full Mixture | hybrid-initialized pair | `PARTIAL` |
 | F05 | `20260820T013223Z` | full Mixture at 100% | 100% | 3,000 | 3,000 | `F05-full-mixture-100pct-end...dat.h5` | `COMPLETED` |
 | F06 | `20260820T013223Z` | carrier 100%; full Mixture 100% | 100% | 6,000 | 3,000 | `F06-full-mixture-100pct-end...dat.h5` | `COMPLETED` |
-| F07 | base `20260820T002135Z`; supervised 80% failure transcript `20260820T053738Z` | 10%, 20%, 40% completed; 80% attempted and failed; 100% skipped | 80% attempted | 9,150 confirmed; first 250 iterations of 80% attempted | 0 | `F07-40pct-end-iter009150-20260820T002135Z.dat.h5` | `NUMERICAL_FAILURE` |
+| F07 | `20260820T002135Z` | confirmed 10%, 20%; 40% pair present but stage unconfirmed | 40% attempted | 6,150 confirmed; 9,150 pair present | 0 | `F07-20pct-end-iter006150...dat.h5` | `TRANSPORT_BLOCKED` |
 | F08 | `20260820T044148Z`; retry `20260820T054146Z` | verified 20% source; 40% continuation | 40% | 12,000 | 0 | `F08-full-mixture-40pct-iter012000...dat.h5` | `NUMERICAL_FAILURE` |
 | F09 | `20260820T082047Z` | 10%, 20%, 40%, 80%, 100% | 100% | 15,000 | 3,000 | `F09-100pct-end-iter015000...dat.h5` | `COMPLETED` |
 | F10 | `20260820T055022Z`; prep `20260820T054449Z` | hybrid initialization; carrier-10% attempt | carrier 10% | 0 native iterations confirmed | 0 full Mixture | hybrid-initialized pair | `NUMERICAL_FAILURE` |
@@ -66,9 +90,8 @@ The fixed-block branches end after 3,000 iterations at 100%. They are fixed-bloc
 ### F03 — full Mixture immediately, 100% immediately, URF 0.5
 
 - **Role:** immediate full-Mixture comparison at moderate momentum damping; Schedule A.
-- **Execution:** the immutable P0 was copied locally, full Mixture was active at 100% inlet velocity with momentum URF `0.5`, and Hybrid Initialization was performed once. The branch completed 5,000 native iterations. A gRPC transport/client interruption occurred after the first 1,000 iterations; reconnect evidence showed Fluent had continued to the 1,000-iteration boundary, after which the remaining 4,000 iterations were issued in sixteen native 250-iteration chunks without reload, repeat, or reinitialization.
+- **Execution:** 5,000 native iterations completed. A transport/client interruption occurred around cumulative iteration 1,000 and was recovered by continuation without reinitialization or duplicate solving.
 - **Last valid pair:** `C:\Temp\03A-stage3-F03\F03-100pct-final-5000-end-iter005000-supervised-20260820T054645Z.{cas,dat}.h5`.
-- **Execution evidence:** terminal case/data pair and continuation transcript `C:\Temp\03A-stage3-F03\F03-100pct-final-5000-continuation-from-1000-supervised-20260820T072740Z.trn`; local autosave was configured at every 250 iterations with five retained data files. All observed residual values were finite and no FPE/AMG terminal marker was recorded.
 - **Factual checkpoint observation:** the final outlet flow was `866.164 kg/s` against `198.486 kg/s` inlet, or `+336.385%` signed imbalance. The entry static pressure margin was `−19.415 kPa`.
 - **Residual evidence:** the endpoint retained 500 residual points spanning iterations 2,312–5,000. Continuity and `k` trended upward; epsilon trended downward. These statistics are not a convergence claim.
 
@@ -98,11 +121,10 @@ The fixed-block branches end after 3,000 iterations at 100%. They are fixed-bloc
 ### F07 — full Mixture progressive loading, URF 0.7
 
 - **Role:** progressive-loading comparison without carrier-first staging.
-- **Controls:** full Mixture remained active, momentum URF remained `0.7`, all four inlet leaves were changed together at each transition, and turbulence intensity `0.0211` plus hydraulic diameters `0.01338 m` / `0.72061 m` were preserved. No reinitialization was performed. Autosave was verified at 250 iterations with five retained files.
-- **Execution:** the 10% continuation completed exactly `+2,150` native iterations from iteration 1,000 to 3,150; the 20% stage completed exactly 3,000 iterations to 6,150; and the 40% stage completed exactly 3,000 iterations to 9,150. Reconnect/readback evidence supersedes the earlier transport-only classification of the 40% pair: the 40% terminal case/data pair, transcript, and journal were present and the live iteration was verified at 9,150.
-- **Failure and status:** after a paired 40% pre-transition checkpoint, the 80% transition changed only the inlet velocity to `21.6944 m/s` and was control-verified. The first supervised 250-iteration 80% block then reported AMG divergence in pressure, `k`, epsilon, and volume-fraction equations followed by Fluent floating-point exceptions on the host and nodes. The 80% transcript and preserved autosaves/checkpoints were retained; no valid 80% terminal pair was written, and 100% was not attempted. Status: `NUMERICAL_FAILURE`.
-- **Factual checkpoint observations:** the valid 20% checkpoint had `+1.212%` signed imbalance; the valid 40% endpoint had `+21.054%`. The 40% physical values are therefore included as a completed-stage readback, not as a transport-uncertain pair.
-- **Residual evidence:** final-window statistics are available for the valid 10%, 20%, and 40% endpoints. The failed 80% attempt is represented by its terminal transcript/error evidence, not by a fabricated physical endpoint.
+- **Execution:** 10% and 20% stages are confirmed complete at cumulative iterations 3,150 and 6,150. The 40% pair at iteration 9,150 exists and was read back, but the event log lost its transport stream before recording stage completion and reconciliation could be completed.
+- **Status:** `TRANSPORT_BLOCKED`, not `NUMERICAL_FAILURE`.
+- **Factual checkpoint observations:** the confirmed 20% checkpoint had `+1.212%` signed imbalance; the unconfirmed 40% pair had `+21.054%`. Both values are retained with their evidence-status distinction.
+- **Residual evidence:** final-window statistics are available for the 10%, 20%, and pair-present 40% checkpoints. The 40% statistics are not evidence that the 40% stage completed.
 
 ### F08 — carrier-first progressive loading, URF 0.7
 
@@ -116,11 +138,9 @@ The fixed-block branches end after 3,000 iterations at 100%. They are fixed-bloc
 ### F09 — full Mixture progressive loading, URF 0.5
 
 - **Role:** progressive loading at moderate momentum damping.
-- **Controls and lineage:** immutable P0 was copied to `C:\Temp\03A-stage3-F09` using SHA-256 `8b9489d745a9539bfa36ffdca0fe224331fce749c331f08f6b0fc1ad6f386301`. Full Mixture was active, momentum URF was `0.5`, all four inlet leaves were set to the stage velocity, and Hybrid Initialization was performed exactly once. Turbulence intensity and hydraulic diameters were unchanged through the branch. Autosave was configured at 250 iterations with five retained files.
-- **Execution:** all five 3,000-iteration stages completed without reinitialization, for 15,000 iterations total and 3,000 iterations at 100%. Each stage was supervised in twelve native 250-iteration chunks; all 60 observed chunk endpoints had finite residuals and no FPE, AMG, non-finite, or transport-error marker. Paired pre-transition and transition checkpoints were verified at every load change.
-- **Terminal evidence:** the final pair is `C:\Temp\03A-stage3-F09\F09-100pct-end-iter015000-supervised-20260820T082047Z.{cas,dat}.h5`; the matching native transcript is `C:\Temp\03A-stage3-F09\F09-100pct-end-iter015000-supervised-20260820T082047Z.trn`. The final retained autosaves were iterations 14,000, 14,250, 14,500, 14,750, and 15,000.
+- **Execution:** all five 3,000-iteration stages completed, for 15,000 iterations total and 3,000 iterations at 100%.
 - **Factual checkpoint observations:** signed imbalance was positive at every saved load, ranging from `+25.856%` at 40% to `+1,764.907%` at 10%; the 100% endpoint was `+650.794%`. The 100% liquid inventory was `2,959.919 kg` and entry static pressure margin was `−34.045 kPa`.
-- **Residual evidence:** final-window statistics are available at all five stage endpoints. The 80% and 100% continuity medians were `9.609` and `9.257`, respectively; the final live residual snapshot at iteration 15,000 was finite for continuity, all three momentum equations, `k`, epsilon, and volume fraction. These observations are not a convergence claim.
+- **Residual evidence:** final-window statistics are available at all five stage endpoints. The 80% and 100% continuity medians were `9.609` and `9.257`, respectively.
 
 ### F10 — carrier-first progressive loading, URF 0.5
 
@@ -154,104 +174,69 @@ Only branches with full Mixture active, 100% inlet velocity, and a valid `.dat.h
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | F01 | 5,500 valid | 198.486 | 385.264 | +94.101% | 239.378% | 21.816% | 37.342% | 60.732% | 901.399 | +0.233 kPa |
 | F03 | 5,000 | 198.486 | 866.164 | +336.385% | 662.091% | 13.536% | 37.739% | 56.230% | 2,821.069 | −19.415 kPa |
-| F05 | 3,000 | 198.486 | 170.030 | −14.336% | 69.655% | 5.907% | 43.267% | 56.854% | 317.752 | +1.404 kPa |
-| F06 | 3,000 | 198.486 | 169.940 | −14.382% | 71.393% | 4.171% | 45.545% | 54.463% | 376.627 | +1.561 kPa |
-| F09 | 3,000 | 198.486 | 1,490.223 | +650.794% | 1,189.211% | 24.000% | 29.212% | 59.745% | 2,959.919 | −34.045 kPa |
-| F11 | 3,000 | 198.486 | 173.919 | −12.377% | 72.586% | 6.364% | 43.996% | 56.039% | 345.365 | +1.690 kPa |
-| F12 | 3,000 | 198.486 | 176.439 | −11.107% | 75.025% | 6.311% | 43.286% | 56.422% | 374.374 | +1.645 kPa |
+| F05 | 3,000 | 198.486 | 170.031 | −14.336% | 65.159% | 10.403% | 9.434% | 90.787% | 4,457.055 | +1.404 kPa |
+| F06 | 3,000 | 198.486 | 169.941 | −14.382% | 65.153% | 10.411% | 9.424% | 90.782% | 4,461.249 | +1.561 kPa |
+| F09 | 3,000 | 198.486 | 1,490.350 | +650.794% | 1,243.654% | 45.129% | 43.537% | 85.528% | 2,959.919 | −34.045 kPa |
+| F11 | 3,000 | 198.486 | 173.918 | −12.377% | 66.815% | 12.136% | 10.447% | 89.217% | 4,686.969 | +1.690 kPa |
+| F12 | 3,000 | 198.486 | 176.437 | −11.107% | 68.420% | 12.916% | 10.183% | 89.160% | 4,681.935 | +1.367 kPa |
 
-Routing percentages are normalized by the corresponding phase inlet. Values above 100% are intentionally visible.
+### 4.2 F12 staged full-Mixture checkpoints
 
-### 4.2 Progressive-loading checkpoint map
+| Load | Cumulative iterations | Signed imbalance | Liquid closure | Total liquid kg | ΔP brine |
+|---:|---:|---:|---:|---:|---:|
+| 10% | 6,000 | −46.713% | −78.911% | 5,486.152 | −0.623 kPa |
+| 20% | 9,000 | +12.005% | +20.501% | 5,612.346 | −0.027 kPa |
+| 40% | 12,000 | +0.073% | +0.109% | 5,464.289 | +0.128 kPa |
+| 80% | 15,000 | −11.966% | −20.203% | 4,919.994 | +1.232 kPa |
+| 100% | 18,000 | −11.107% | −18.664% | 4,681.935 | +1.367 kPa |
 
-The complete physical fields for the read-back full-Mixture endpoints, including raw phase mass flows, phase closures, Y030/Y010 inventories, and pressure values, are in the [physical-readback checkpoint CSV](03a-stage3-results-20260821-checkpoints.csv). Carrier-only and hybrid checkpoints are intentionally not represented as zero-valued physical rows.
+These checkpoint values are evidence anchors only. The final report must use the continuous histories to determine whether apparent endpoint improvements are persistent, transient, or part of a wider oscillation/drift.
 
-| Branch | Load | Iteration | Signed imbalance | L→B | L→S | V→B | V→S | Total liquid kg | ΔP brine |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| F07 | 10% | 3,150 | +59.399% | 199.974% | 2.060% | 14.292% | 84.087% | 353.443 | +0.029 kPa |
-| F07 | 20% | 6,150 | +1.212% | 96.179% | 6.075% | 37.628% | 62.094% | 192.386 | −0.054 kPa |
-| F07 | 40% | 9,150 | +21.054% | 132.206% | 3.788% | 42.518% | 57.153% | 324.162 | +0.085 kPa |
-| F09 | 10% | 3,000 | +1,764.907% | 3,071.684% | 5.231% | 0.000% | 130.216% | 3,095.118 | −2.250 kPa |
-| F09 | 20% | 6,000 | +616.838% | 996.785% | 158.065% | 36.271% | 53.660% | 2,108.039 | +0.137 kPa |
-| F09 | 40% | 9,000 | +25.856% | 119.702% | 24.475% | 43.885% | 55.748% | 398.452 | +0.543 kPa |
-| F09 | 80% | 12,000 | +506.705% | 948.532% | 17.836% | 35.415% | 56.522% | 2,449.258 | −20.200 kPa |
-| F09 | 100% | 15,000 | +650.794% | 1,189.211% | 24.000% | 29.212% | 59.745% | 2,959.919 | −34.045 kPa |
-| F11 | 10% | 3,000 | +878.664% | 896.396% | 694.092% | 0.000% | 102.990% | 11,383.447 | −0.022 kPa |
-| F11 | 20% | 6,000 | +247.634% | 211.712% | 311.849% | 0.013% | 95.827% | 8,067.212 | +0.746 kPa |
-| F11 | 40% | 9,000 | +5.069% | 99.945% | 9.070% | 27.183% | 72.237% | 815.363 | +0.045 kPa |
-| F11 | 80% | 12,000 | −0.597% | 95.777% | 3.368% | 41.432% | 58.341% | 471.578 | +1.673 kPa |
-| F11 | 100% | 15,000 | −12.377% | 72.586% | 6.364% | 43.996% | 56.039% | 345.365 | +1.690 kPa |
-| F12 | 10% | 6,000 | −46.713% | 18.565% | 1.386% | 1.110% | 99.890% | 511.236 | +0.024 kPa |
-| F12 | 20% | 9,000 | +12.005% | 114.660% | 6.376% | 21.551% | 77.527% | 434.665 | −0.073 kPa |
-| F12 | 40% | 12,000 | +0.073% | 96.594% | 3.714% | 41.342% | 58.394% | 302.414 | +0.154 kPa |
-| F12 | 80% | 15,000 | −11.966% | 75.618% | 4.054% | 43.631% | 56.371% | 456.137 | +1.106 kPa |
-| F12 | 100% | 18,000 | −11.107% | 75.025% | 6.311% | 43.286% | 56.422% | 374.374 | +1.645 kPa |
+## 5. Residual evidence already recovered
 
-## 5. Residual statistics
+The stitched/full histories and final-window statistics remain useful for reconstructing branch progression. Where a final 500-point window is available, treat its trend as a local diagnostic rather than a convergence verdict.
 
-The default final window is 500 iterations, or the available endpoint window where fewer points were retained. Entries use `median [P05, P95]; trend`. “Final point” was not retained in the remote endpoint readback unless separately stated.
+Key existing observations include:
 
-The overall branch-level scaled-residual histories are reconstructed in [03A-stage3-F03-F07-F09-scaled-residuals-stitched.png](plots/03a-stage3/03A-stage3-F03-F07-F09-scaled-residuals-stitched.png):
+- F01 reached a locally calmer residual window before subsequent catastrophic numerical failure.
+- F03 completed 5,000 iterations but retained adverse continuity/`k` behaviour and very poor endpoint mass balance.
+- F08 failed during progressive loading before reaching 100%; its last valid 40% state had worsening continuity/epsilon behaviour.
+- F09 reached 100% but combined high continuity residual levels with a very large endpoint imbalance.
+- F12 reached 100% with decreasing final-window continuity, `k`, epsilon, and volume-fraction trends, but checkpoint closure remained about `−11%`; continuous report histories are required before judging whether this was still improving or had settled away from zero.
 
-![F03, F07, and F09 stitched scaled residual histories](plots/03a-stage3/03A-stage3-F03-F07-F09-scaled-residuals-stitched.png)
+Residual evidence must be replotted in the final report using **all available residual equations together**, with stage boundaries shown explicitly for staged branches.
 
-This figure uses the recovered native transcript streams rather than only the retained final windows. F03 contributes 4,982 rows per residual from iterations 1–5,000, with the genuine transcript gap at 982–999 preserved; F07 contributes 9,174 rows per residual continuously from iterations 1–9,174, including the 80% failure tail; and F09 contributes 15,000 rows per residual across its complete staged run. The F07 panel clips the extreme failure tail above `1e4` for readability and labels that clipping; the underlying values remain in the machine-readable reconstruction at `PyAnsys/output/03a_stage3/residual-plots/03A-stage3-F03-F07-F09-scaled-residuals-stitched.json`. No missing F03 values were interpolated.
+## 6. Evidence still to integrate before a final Stage-3 report
 
-| Branch / stage | Window | Continuity | k | epsilon | Volume fraction |
-|---|---:|---|---|---|---|
-| F01 / 100% | 5,001–5,500 | 0.395 [0.340, 0.591]; stationary | 0.00945 [0.00736, 0.0179]; decreasing | 0.0446 [0.0221, 1.010]; decreasing | 0.0103 [0.00848, 0.0133]; stationary |
-| F03 / 100% | 500 retained points; 2,312–5,000 | 1.166 [1.039, 1.232]; increasing | 0.0102 [0.00790, 0.0132]; increasing | 0.0376 [0.0246, 0.132]; decreasing | 0.0128 [0.0112, 0.0145]; decreasing |
-| F07 / 10% | final retained 500 | 0.264 [0.233, 0.317]; increasing | 0.00488 [0.00178, 0.0588]; increasing | 0.163 [0.0174, 4.324]; increasing | 0.00197 [0.00142, 0.00313]; increasing |
-| F07 / 20% | final retained 500 | 0.295 [0.189, 0.385]; decreasing | 0.00445 [0.00148, 0.0849]; increasing | 0.111 [0.0148, 1.873]; increasing | 0.00117 [0.000829, 0.00153]; decreasing |
-| F07 / 40% | final retained 500 | 1.353 [1.105, 1.567]; stationary | 0.00377 [0.00294, 0.00784]; decreasing | 0.0308 [0.00915, 0.634]; increasing | 0.00696 [0.00575, 0.00858]; decreasing |
-| F08 / 40% | final retained 250 | 1.384 [1.143, 1.469]; increasing | 0.00350 [0.00302, 0.00596]; decreasing | 0.0271 [0.00975, 0.495]; increasing | 0.00684 [0.00604, 0.00754]; decreasing |
-| F09 / 10% | final retained 500 | 0.601 [0.380, 0.717]; increasing | 0.00502 [0.00233, 0.0166]; increasing | 0.158 [0.0282, 1.159]; decreasing | 0.00363 [0.00285, 0.00429]; increasing |
-| F09 / 20% | final retained 500 | 1.544 [1.399, 1.777]; stationary | 0.00387 [0.00274, 0.0455]; decreasing | 0.182 [0.0200, 4.254]; decreasing | 0.00579 [0.00558, 0.00596]; stationary |
-| F09 / 40% | final retained 500 | 1.749 [1.499, 2.145]; decreasing | 0.00272 [0.00234, 0.00923]; stationary | 0.0467 [0.00932, 0.727]; increasing | 0.00695 [0.00655, 0.00794]; stationary |
-| F09 / 80% | final retained 500 | 9.609 [8.849, 10.263]; increasing | 0.0110 [0.00772, 0.0131]; decreasing | 0.0367 [0.0259, 0.133]; stationary | 0.0141 [0.0131, 0.0158]; decreasing |
-| F09 / 100% | final retained 500 | 9.257 [8.348, 10.028]; stationary | 0.00924 [0.00731, 0.0108]; stationary | 0.0321 [0.0224, 0.0947]; increasing | 0.0111 [0.0103, 0.0117]; stationary |
-| F12 / 10% | final retained 250 | 0.244 [0.175, 0.292]; increasing | 0.000905 [0.000625, 0.00123]; increasing | 0.00708 [0.00205, 0.0744]; increasing | 0.00292 [0.00184, 0.00328]; increasing |
-| F12 / 20% | final retained 250 | 0.340 [0.247, 0.430]; increasing | 0.000833 [0.000478, 0.00276]; decreasing | 0.203 [0.0673, 0.602]; decreasing | 0.000864 [0.000473, 0.000998]; increasing |
-| F12 / 40% | final retained 250 | 0.610 [0.517, 0.699]; increasing | 0.000792 [0.000616, 0.00214]; increasing | 0.0736 [0.0107, 0.368]; increasing | 0.00154 [0.00143, 0.00198]; increasing |
-| F12 / 80% | final retained 250 | 1.224 [0.987, 1.460]; increasing | 0.00152 [0.000817, 0.00774]; increasing | 0.219 [0.0391, 0.670]; increasing | 0.00212 [0.00198, 0.00243]; increasing |
-| F12 / 100% | final retained 250 | 1.051 [0.667, 1.496]; decreasing | 0.000926 [0.000544, 0.00254]; decreasing | 0.141 [0.0279, 0.411]; decreasing | 0.00106 [0.000935, 0.00121]; decreasing |
+The final scientific report should not be completed until the available native report-file histories have been recovered and reduced consistently across branches.
 
-Residual-window statistics for F05, F06, and F11 are not yet reduced from their native residual-export files. The exports exist remotely. F02, F04, and F10 have no usable full-Mixture native residual window in the selected attempts.
+Priority histories are:
 
-## 6. Factual observations only
+- total mixture inlet flow;
+- total mixture outlet flow;
+- relative/full-domain mass imbalance;
+- total liquid inventory;
+- inlet loading/stage progression for ramped branches;
+- liquid/vapour routing to both outlets;
+- Y010/Y030 liquid inventory where available;
+- brine-entry static pressure;
+- brine-entry total pressure.
 
-- F01 and F10 have explicit floating-point-exception evidence. F01 also has AMG-divergence and residual-escalation evidence before the FPE.
-- F02 and F04 later fixed-block attempts ended with terminal Fluent-native errors without ledger evidence of an FPE; they remain `PARTIAL`.
-- F03 experienced a recoverable transport/client interruption and still completed its planned 5,000 iterations without reload or reinitialization.
-- F07 completed the 10%, 20%, and 40% stages to 9,150 confirmed iterations. Its supervised 80% attempt produced AMG divergence and an explicit floating-point failure in the first 250-iteration block; 100% was skipped and the branch is classified `NUMERICAL_FAILURE`.
-- F08 has a valid 40% continuation checkpoint and no 80% checkpoint after two reproducible native-stage failures.
-- F05, F06, F09, F11, and F12 completed their recorded schedules. Only F01, F03, F09, F11, and F12 have valid full-Mixture endpoints at 100% in the selected records; F03 is the only owned direct-100% branch with 5,000 iterations at that load.
-- Checkpoint routing fractions above 100% and large signed mass imbalances occur in several stages. They are retained in the evidence table.
+The P0 also contains lower-level phase/boundary flux histories that overlap with dedicated routing/inlet/outlet reports. These should be used for consistency checks and supplementary evidence rather than plotted redundantly where two histories represent the same physical quantity.
 
-## 7. Interpretation and campaign conclusion
+## 7. Final-report handoff
 
-**Interpretation status remains pending user direction.** The following fields are intentionally not filled with a scientific ranking:
+The final report should be created from [`03a-stage3-final-results-template.md`](./03a-stage3-final-results-template.md).
 
-- numerically useful branch;
-- physically settled branch;
-- converged branch;
-- most promising numerical strategy;
-- final strategy recommendation.
+The analysis agent filling that template should:
 
-The remaining evidence-completion action is to transfer and reduce the native residual exports for F05, F06, and F11, then generate the checkpoint-marker plots from the master CSV. The F11 10% raw-readback conflict should be reconciled against the native report definitions before cross-branch interpretation. The stitched F03/F07/F09 scaled-residual figure is complete and linked in Section 5.
-
-## 8. Evidence sources
-
-Local execution and readback records include:
-
-- F01: `PyAnsys/output/03a_stage3/F01/F01-summary.json`, `F01-failure-histories.json`, and `F01-monitor-histories.json`.
-- F02/F04/F05/F06/F11 fixed-block ledger, journals, and readbacks under `PyAnsys/output/03A-stage3/override-fixed3000-native-server2/20260820T013223Z/`.
-- F03: `PyAnsys/output/03a_stage3/supervised/20260820T054645Z/supervised-events.jsonl`.
-- F07 initial chain: `PyAnsys/output/03a_stage3/overnight/20260820T002135Z/overnight-events.jsonl`; later server-3 recovery evidence is the remote `C:\Temp\03A-stage3-F07\F07-80pct-end-iter012150-supervised-20260820T053738Z.trn` plus the paired pre-transition/transition checkpoints and preserved autosaves under `C:\Temp\03A-stage3-F07`.
-- F08: `PyAnsys/output/03A-stage3/recovery-safe/20260820T044148Z/recovery-safe-events.jsonl` and `PyAnsys/output/03A-stage3/recovery-retry80/20260820T054146Z/recovery-retry80-events.jsonl`.
-- F09: `PyAnsys/output/03a_stage3/supervised/20260820T082047Z/supervised-events.jsonl`.
-- F10: `PyAnsys/output/03A-stage3/resume-f10-f12/20260820T055022Z/resume-events.jsonl` and `resume-f12-after-f10-fpe/20260820T055715Z/resume-events.jsonl`.
-- F12: `PyAnsys/output/03A-stage3/f12-from-verified-preinit/20260820T073316Z/f12-events.jsonl`.
-- Stitched scaled-residual reconstruction: `PyAnsys/scripts/report/build_03a_stage3_stitched_scaled_residuals.py`, recovered native streams under `PyAnsys/output/03a_stage3/residual-plots/recovered-remote/`, machine-readable output `PyAnsys/output/03a_stage3/residual-plots/03A-stage3-F03-F07-F09-scaled-residuals-stitched.json`, and report figure `Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/03A-stage3-F03-F07-F09-scaled-residuals-stitched.png`.
-
-Remote Windows case/data roots are retained in the event logs and in the checkpoint CSV. No new Fluent iterations or solver-setting changes were made during readback.
+1. reconstruct all stitched residual histories;
+2. recover all available native `.out` report histories;
+3. map duplicate/alias report definitions to canonical physical quantities;
+4. preserve missing data as missing rather than interpolating it;
+5. mark carrier-only/full-Mixture and inlet-load transition boundaries;
+6. derive the composite figures defined in the plotting plan;
+7. compare branches at like-for-like full-Mixture 100% conditions where possible;
+8. use checkpoints in this packet to validate the reconstructed histories;
+9. keep measured evidence separate from causal interpretation;
+10. leave the final branch/next-step decision to the user unless explicitly delegated.
