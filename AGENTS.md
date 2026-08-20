@@ -4,7 +4,6 @@ This repository connects reusable CFD knowledge, geothermal-separator project re
 
 ## Always
 
-- Never edit files in any `raw/` directory.
 - Before changing a subsystem, read its local guide: [`CFD_wiki/AGENTS.md`](CFD_wiki/AGENTS.md), [`ResearchProject_wiki/AGENTS.md`](ResearchProject_wiki/AGENTS.md), or [`PyAnsys/AGENTS.md`](PyAnsys/AGENTS.md).
 - Keep source citations and uncertainty labels required by the applicable local guide.
 
@@ -18,3 +17,4 @@ This repository connects reusable CFD knowledge, geothermal-separator project re
 - [Progress reporting](docs/agent-guides/progress-reporting.md) — mandatory handling of progress requests.
 - [Wiki change discipline](docs/agent-guides/wiki-change-discipline.md) — scoped, evidence-led edits and completion checks.
 - [Delegation](docs/agent-guides/delegation.md) — briefs and main-agent responsibilities for larger cross-system tasks.
+- [Repository maintenance skill](skills/repo-maintenance/SKILL.md) — cleanup, generated files, raw-source protection, moves, and storage discipline.
