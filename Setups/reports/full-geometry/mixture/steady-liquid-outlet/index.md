@@ -33,3 +33,8 @@ The branch-level records are written independently so that each case retains its
 - [Compact Stage-2 screening report](03a-08b-stage2-screening-report.md)
 
 The consolidated report is currently provisional until the pending N4 endpoint readback and N5 +700 endpoint evidence are reconciled.
+
+## 03A Stage 3 — F08/F10/F12 queue
+
+- [Stage-3 execution results and stop decision](03a-stage3-results-20260818.md)
+- [Stage-3 F01–F12 evidence report](03a-stage3-results-20260821.md)

@@ -864,3 +864,26 @@
 - failure: residuals grew through `2.2440e+2`, `8.4960e+6`, `6.6879e+16`, and `3.2426e+51`; viscosity limiting reached all `231,376` cells; reverse flow appeared at both pressure outlets; AMG divergence and a floating-point exception terminated the journal.
 - evidence boundary: no paired endpoint or residual export was written. The exact transient-step/physical-time failure coordinate is not claimed because the available monitor retained a global residual label rather than a trustworthy transient-step coordinate.
 - next immediate action: do not start NP-DT2 automatically; obtain explicit direction before testing `1.25e-4 s` with the same no-patch setup.
+## [2026-08-20] progress-update | Reconcile 03A Stage-3 F01/F07/F03/F09 and Fluent server 3
+
+- what changed: a read-only connection to Fluent server 3 completed successfully. Fluent reported `SERVING`; a short activity check showed no progress, and no residual monitor history or active case filename was exposed. The live case identity is therefore recorded as unavailable, not inferred from the endpoint.
+- completed/verified: the remote F07 `10%` iteration-1,000 case/data pair and F01 iteration-5,500 autosave pair both exist. The earlier persistent F01/F07/F03/F09 supervisor has no surviving local process and its event log confirms all 40 transport retries finished on 2026-08-18 without a solve handoff.
+- current status: F01 remains a preserved numerical failure after iteration 5,704 (last valid checkpoint 5,500). F07 is only confirmed through iteration 1,000; F03 and F09 have no valid completed solve block. The recovered gRPC connection does not establish what case is currently loaded.
+- blocker/risk: another operator or run may own the healthy session; do not reload or solve until ownership/no-competing-run is confirmed. A prior intermittent gRPC timeout is retained as transport evidence, not a numerical-failure classification.
+- next action: when authorized to resume execution, confirm session ownership and start only the corrected server-3 supervisor so it restores F07 from its canonical 1,000-iteration pair before the remaining fixed-block queue.
+
+## [2026-08-20] progress-update | Reconcile the ambiguous F03 server-3 handoff
+
+- what changed: a separate execution agent performed a read-only reconciliation of the prior F03 handoff. Fluent was active, `SERVING`, and quiescent; no solver control, file, or run state was changed.
+- completed/verified: the old F03 initialized case/data pair and unexecuted journal exist under `C:\Temp\03A-stage3\F03`. The expected F03 5,000-iteration transcript and terminal case/data pair are absent; residual history has zero points and no iteration is exposed. Existing F03 autosave configuration remains at 250 iterations with five retained files, but no autosave evidence was confirmed.
+- current status: F03 is **unrun/incomplete**, not a numerical failure. It may therefore be prepared afresh from immutable P0 in the corrected canonical F03 local root when execution resumes; it must not be treated as a continuation of the incomplete old path.
+- supervisor safety change: the corrected server-3 supervisor now distinguishes Fluent-returned terminal journal failures from gRPC transport loss. A transport-loss/uncertain-endpoint state blocks the queue rather than skipping or repeating a branch; only an explicit terminal Fluent journal failure can allow the independent next branch after reconnect.
+- next action: permit the execution agent to conduct the non-solving preflight of root writability, P0/restart controls, autosave, and native-journal path, then launch the corrected queue only if every gate passes.
+
+## [2026-08-20] progress-update | Start the safeguarded 03A Stage-3 server-3 queue
+
+- what changed: the separate execution agent launched the planner-reviewed server-3 supervisor after read-only state reconciliation and local-root preflight. F01 remains explicitly skipped as the preserved numerical failure.
+- execution status: F07’s verified iteration-1,000 case/data pair was loaded and read back as full Mixture (`mp`/`drift` true), momentum URF `0.7`, and all four inlet phase/zone velocity leaves `2.7118 m/s`, with preserved turbulence/hydraulic-diameter invariants. Fluent then received exactly one native `+2,150`-iteration journal targeting iteration `3,150`.
+- recovery controls: local F07 autosave is active at 250 iterations with five retained files. The supervisor now blocks rather than skips on an uncertain transport/end-point state; it must not reload or repeat the native block unless its actual completion is established.
+- current status: F07’s native solve is in progress. The execution agent owns the Fluent session; the planner reviews only stage-boundary/error evidence in [the fresh event log](../../../PyAnsys/output/03a_stage3/overnight/20260820T002135Z/overnight-events.jsonl).
+- next action: wait for the F07 terminal paired checkpoint or a safely classified error, then decide the next authorized transition from that evidence.

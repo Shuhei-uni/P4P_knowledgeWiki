@@ -166,6 +166,29 @@ This exception has strict limits:
 
 The purpose of the exception is orchestration wake-up at scientifically required checkpoints, not moving solver ownership back into a generic Python iteration runner.
 
+### Fixed-3,000 Stage-3 supervisor override
+
+The user additionally approved a narrow operational override for the assigned
+fixed-block queue `F02 -> F04 -> F11 -> F06 -> F05`. Its supervisor is
+`scripts/setup/run_03a_stage3_override_native_queue_server2.py`. Python may
+remain active across the queue so it can reconcile a completed Fluent-native
+stage, restore its named case/data endpoint, apply the prescribed transition,
+and submit the next native stage.
+
+This remains safe only under these limits:
+
+- Fluent owns every 3,000-iteration solve, native autosave, transcript, and
+  endpoint write; Python never polls individual iterations or writes periodic
+  checkpoints.
+- The local resume ledger is intent/audit evidence, not recovery authority. A
+  resumed supervisor must verify and reload the named Fluent case/data pair;
+  it must never repeat a stage recorded as submitted but not yet reconciled.
+- A `PAUSE` file in the local campaign directory stops the supervisor at the
+  next stage boundary. A mid-stage pause must be issued through Fluent's Pause
+  control, not Interrupt/Ctrl+C, because Interrupt exits a journal.
+- A process-level Fluent crash, missing endpoint, or transport uncertainty
+  blocks the queue for recovery; it cannot be safely skipped unattended.
+
 ## Prohibited Python run patterns
 
 Except for the explicit `03A-stage3` blocking exception above, do not add or use Python code that:

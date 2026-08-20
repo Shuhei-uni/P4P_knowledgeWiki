@@ -258,15 +258,34 @@ def compute_report_definition(
     raw_output = buffer.getvalue()
     parsed = parse_report_compute_output(raw_output, report_name)
     returned_value = None
+    returned_unit = None
+
+    def returned_report_value(candidate: Any) -> tuple[float | None, str | None]:
+        """Normalize Fluent's scalar or ``[value, unit]`` report result."""
+        if isinstance(candidate, (list, tuple)) and candidate:
+            value = safe_float(candidate[0])
+            unit = str(candidate[1]) if len(candidate) > 1 and candidate[1] is not None else None
+            return value, unit
+        return safe_float(candidate), None
+
+    returned_items: list[tuple[Any, Any]] = []
     if isinstance(returned, Mapping):
-        for key, value in returned.items():
-            if normalize_token(key) == normalize_token(report_name):
-                returned_value = safe_float(value)
-                break
+        returned_items.extend(returned.items())
+    elif isinstance(returned, (list, tuple)):
+        for item in returned:
+            if isinstance(item, Mapping):
+                returned_items.extend(item.items())
     elif isinstance(returned, (int, float)):
         returned_value = safe_float(returned)
+
+    for key, value in returned_items:
+        if normalize_token(key) == normalize_token(report_name):
+            returned_value, returned_unit = returned_report_value(value)
+            break
     if parsed.get("value") is None and returned_value is not None:
         parsed["value"] = returned_value
+        if parsed.get("unit") is None:
+            parsed["unit"] = returned_unit
 
     return {
         "status": "ok" if ok and parsed.get("value") is not None else "unparsed",
