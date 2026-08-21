@@ -1,32 +1,40 @@
-# 03A Stage 3 — Final Results
+# 03A Stage 3 — Iteration-Led Results
 
-> **Campaign:** 03A Stage 3 — Fluent-Recommended Convergence Sweep
-> **Purpose:** canonical entry point for the independently produced Stage-3 result packages.
-> **Interpretation status:** pending user direction. No branch is selected here.
+> **Campaign:** Fluent-recommended convergence sweep  
+> **Interpretation status:** pending user direction  
+> **Plotting rule:** every figure uses native cumulative Fluent iteration on the x-axis.
 
-## What was reconciled
+## Evidence-qualified result map
 
-The prior collision was editorial, not a contradiction in the underlying data: three agents analysed disjoint branch sets but two wrote to the same shared report path. The detailed evidence is now retained in separate scope-owned reports. This page is the only cross-scope summary and avoids combining unequal evidence types into one convergence plot or ranking.
+| Branch | Available presentation | Native range / qualification |
+|---|---|---|
+| F01 | residual figure only; physical endpoint table | residuals 1–5,500; numerical failure followed at 5,704 |
+| F02 | unavailable statement | no valid native endpoint or branch-linked history |
+| F03 | five figures | physical 1–5,000; residual gap 982–999 preserved |
+| F04 | unavailable statement | no valid native endpoint or branch-linked history |
+| F05 | five figures | continuous residual and physical histories 1–3,000 |
+| F06 | five figures | continuous joined histories 1–6,000; phase-fraction residual absent during carrier stage |
+| F07 | five figures | continuous 1–9,174; 9,151–9,174 is a numerical-failure tail |
+| F08 | five qualified partial figures | physical history 9,000–12,000; residuals are sampled windows; next-stage tail excluded |
+| F09 | five figures | continuous residual and physical histories 1–15,000 |
+| F10 | unavailable statement | initialized case evidence only; no valid solve history |
+| F11 | five figures | continuous joined histories 1–15,000 |
+| F12 | five figures | physical history 1–18,000; residuals are sampled windows, shown as unconnected markers |
 
-| Result package | Branches | Evidence position | Detailed report |
-|---|---|---|---|
-| Native queue | F02, F04, F05, F06, F11 | checkpoint-backed endpoints; discovered local histories are present but not yet mapped to the queue lineage | [`native-queue final results`](./03a-stage3-native-queue-final-results.md) |
-| Owned native-history branches | F03, F07, F09 | 30 native Report Files per branch; checkpoint-validated continuous histories | [`F03/F07/F09 detailed results`](./03a-stage3-f03-f07-f09-detailed-results.md) |
-| Schedule D | F08, F10, F12 | F12 complete through 100%; F08 partial; F10 no valid solve checkpoint | [`F08/F10/F12 Schedule-D results`](./03a-stage3-schedule-d-final-results.md) |
+No figure fabricates continuity. Continuous series are lines, sampled residual exports are unconnected markers at their native iterations, and unavailable evidence has no placeholder plot.
 
-F01 is not represented by the three delegated packages. Its pre-failure checkpoint remains in the shared [`2026-08-21 checkpoint table`](./03a-stage3-results-20260821-checkpoints.csv); this canonical report makes no new claim about F01.
+## Result packages
 
-## Cross-package evidence boundary
+- [F01 residual evidence](./plots/03a-stage3/iteration-led/central/f01/figure-01-residuals-vs-iteration.png) · [manifest](../../../../../../PyAnsys/output/03a_stage3/iteration-led/central/f01/f01-iteration-led-manifest.json)
+- [F03/F07/F09 iteration-led figures](./03a-stage3-f03-f07-f09-detailed-results.md)
+- [F05/F06/F11 iteration-led figures](./03a-stage3-native-queue-final-results.md)
+- [F08/F10/F12 iteration-led figures](./03a-stage3-schedule-d-final-results.md)
 
-- Checkpoint endpoints and continuous histories are not interchangeable. The native-queue report therefore does not state late-window convergence metrics.
-- F03/F07/F09 and F12 retain branch-first figures and their own late-window descriptions. Do not merge their history lines just because their branch identifiers share the Stage-3 campaign.
-- F08's partial history and F10's unavailable solve evidence remain explicit. They are not omitted to make the campaign look more complete.
-- Source and setup context are linked from the [`Stage-3 evidence packet`](./03a-stage3-results-20260821.md) and [`analysis/plotting plan`](./03a-stage3-results-analysis-and-plotting-plan.md).
+## Source and validation records
 
-## Reading order
+- [Server-1 manifest](../../../../../../PyAnsys/output/03a_stage3/iteration-led/server1/server1-iteration-led-manifest.json)
+- [Server-2 provenance manifest](../../../../../../PyAnsys/output/03a_stage3/iteration-led/server2/server2-provenance-manifest.json)
+- [Server-3 manifest](../../../../../../PyAnsys/output/03a_stage3/iteration-led/server3/server3-iteration-led-manifest.json)
+- [Stage-3 checkpoint evidence](./03a-stage3-results-20260821-checkpoints.csv)
 
-1. Read the detailed report for the branch set relevant to the question.
-2. Check that report's evidence-quality and provenance section before comparing values across packages.
-3. Use the source checkpoint table only as a cross-check anchor where the detailed report says continuous history is available.
-
-This separation resolves the write conflict without discarding any package or inventing a unified convergence conclusion.
+The prior cross-plots, cross-diagnostics, and load-axis ramp-response figures have been retired from this report. Their underlying evidence remains in the machine-readable packages above.

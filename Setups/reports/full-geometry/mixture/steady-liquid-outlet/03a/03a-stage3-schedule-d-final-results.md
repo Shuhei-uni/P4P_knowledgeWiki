@@ -1,77 +1,32 @@
-# 03A Stage 3 — Schedule-D Results: F08/F10/F12
+# 03A Stage 3 — F08, F10, and F12 Iteration-Led Results
 
-> **Scope:** F08, F10, and F12 only.
-> **Evidence quality:** mixed — F12 has continuous native Report File histories through 18,000 iterations; F08 has partial residual and checkpoint evidence; F10 has no valid solve checkpoint or residual history.
-> **Setup authority:** [`03a-stage3-fluent-recommended-convergence-sweep.md`](../../../../../full-geometry/mixture/steady-liquid-outlet/03a-stage3-fluent-recommended-convergence-sweep.md)
-> **Checkpoint evidence:** [`03a-stage3-results-20260821-checkpoints.csv`](./03a-stage3-results-20260821-checkpoints.csv)
-> **Interpretation status:** pending user direction; this report makes no branch-selection claim.
+> **Setup authority:** [`03a-stage3-fluent-recommended-convergence-sweep.md`](../../../../../full-geometry/mixture/steady-liquid-outlet/03a-stage3-fluent-recommended-convergence-sweep.md)  
+> **Evidence:** [server-1 iteration-led manifest](../../../../../../PyAnsys/output/03a_stage3/iteration-led/server1/server1-iteration-led-manifest.json)
 
-## 1. Evidence and provenance
+Branch case/data, journals, transcripts, and sampled residual exports are stored beneath `Documents\FluentRuns\03A-stage3`. The F12 physical histories are stored separately in `P4P simulation\brine outlet`; those two locations are complementary evidence sources.
 
-The Schedule-D analysis is reproduced from the read-only offline builder and its generated evidence: [`analysis JSON`](../../../../../../PyAnsys/output/03A-stage3/session1-final-analysis/03A-stage3-session1-analysis.json), [`late-window summary`](../../../../../../PyAnsys/output/03A-stage3/session1-final-analysis/03A-stage3-session1-cross-branch-late-window-summary.csv), [`checkpoint validation`](../../../../../../PyAnsys/output/03A-stage3/session1-final-analysis/03A-stage3-session1-checkpoint-validation.csv), and [`remote artifact audit`](../../../../../../PyAnsys/output/03A-stage3/session1-final-analysis/server1-artifact-provenance.json).
+## F08 — qualified partial evidence
 
-The connected Fluent host audit found all 30 configured Report Files (18,000 points each) and recorded the case/data provenance without loading or changing any case. The physical-history checkpoint comparisons give 70 matches, zero mismatches, and one unavailable comparison set: F08 has no branch-specific continuous physical history for comparison. The audit records F08's missing 80% retry pair and F10's missing failed-carrier-stage pair as expected gaps, rather than silently treating them as successful runs.
+The branch-linked physical reports are continuous from 9,000–12,045. Figures plot the validated interval 9,000–12,000; 12,001–12,045 is excluded as the failed next-stage tail. Residual points are sampled stage windows and remain unconnected. The older 3,939–4,898 residual fragment is excluded as unjoinable.
 
-## 2. Branch packages
+1. [Sampled scaled residuals](./plots/03a-stage3/iteration-led/server1/F08/01-scaled-residuals-vs-iteration.png)
+2. [Mass convergence, 9,000–12,000](./plots/03a-stage3/iteration-led/server1/F08/02-mass-convergence-vs-iteration.png)
+3. [Phase routing, 9,000–12,000](./plots/03a-stage3/iteration-led/server1/F08/03-phase-routing-vs-iteration.png)
+4. [Liquid distribution, 9,000–12,000](./plots/03a-stage3/iteration-led/server1/F08/04-liquid-distribution-vs-iteration.png)
+5. [Brine hydraulics, 9,000–12,000](./plots/03a-stage3/iteration-led/server1/F08/05-brine-hydraulics-vs-iteration.png)
 
-Each branch has the same seven figure slots. A panel marked unavailable is an evidence statement, not a zero-valued result.
+## F10 — unavailable
 
-### F08 — carrier-first ramp, URF 0.7
+No valid solve endpoint, residual history, or physical history was recovered. The branch remains a status record, not a figure package: [F10 evidence status](../../../../../../PyAnsys/output/03a_stage3/iteration-led/server1/f10-status.json).
 
-F08 has a valid 40% full-Mixture checkpoint at iteration 12,000 and a partial residual stream (iterations 3,939–4,898). The subsequent 80% retry has no paired endpoint. The continuous physical Report File series cannot be associated with F08 alone, so no late physical-window values are asserted.
+## F12 — completed six-stage sequence
 
-- [Residuals](./plots/03a-stage3/session1/branches/F08/residuals.png)
-- [Mass, imbalance, inventory](./plots/03a-stage3/session1/branches/F08/mass-imbalance-inventory.png)
-- [Phase routing](./plots/03a-stage3/session1/branches/F08/phase-routing.png)
-- [Liquid distribution](./plots/03a-stage3/session1/branches/F08/liquid-distribution.png)
-- [Brine pressure and flow](./plots/03a-stage3/session1/branches/F08/brine-pressure-flow.png)
-- [Ramp response](./plots/03a-stage3/session1/branches/F08/ramp-response.png)
-- [Branch-only cross diagnostics](./plots/03a-stage3/session1/branches/F08/cross-diagnostics.png)
+Physical histories are continuous from 1–18,000. The six retained residual exports each contain 250 sampled points; they are shown as unconnected markers at native iterations, with no inferred values between samples.
 
-| Last valid checkpoint | Inlet (kg/s) | Path outlet (kg/s) | Absolute imbalance | Total liquid (kg) |
-|---|---:|---:|---:|---:|
-| 40% / iteration 12,000 | 79.395 | 108.833 | 37.079% | 323.419 |
+1. [Sampled scaled residuals](./plots/03a-stage3/iteration-led/server1/F12/01-scaled-residuals-vs-iteration.png)
+2. [Mass convergence](./plots/03a-stage3/iteration-led/server1/F12/02-mass-convergence-vs-iteration.png)
+3. [Phase routing](./plots/03a-stage3/iteration-led/server1/F12/03-phase-routing-vs-iteration.png)
+4. [Liquid distribution](./plots/03a-stage3/iteration-led/server1/F12/04-liquid-distribution-vs-iteration.png)
+5. [Brine hydraulics](./plots/03a-stage3/iteration-led/server1/F12/05-brine-hydraulics-vs-iteration.png)
 
-### F10 — carrier-first ramp, URF 0.5
-
-F10 failed during the carrier stage before a valid solve checkpoint or residual export. The available case/data evidence is an initialized state, not a completed solve. The figure package deliberately displays unavailable evidence rather than extrapolating from F08 or F12.
-
-- [Residual evidence](./plots/03a-stage3/session1/branches/F10/residuals.png)
-- [Physical evidence](./plots/03a-stage3/session1/branches/F10/mass-imbalance-inventory.png)
-- [Phase-routing evidence](./plots/03a-stage3/session1/branches/F10/phase-routing.png)
-- [Liquid-distribution evidence](./plots/03a-stage3/session1/branches/F10/liquid-distribution.png)
-- [Brine-hydraulic evidence](./plots/03a-stage3/session1/branches/F10/brine-pressure-flow.png)
-- [Ramp-response evidence](./plots/03a-stage3/session1/branches/F10/ramp-response.png)
-- [Branch-only cross diagnostics](./plots/03a-stage3/session1/branches/F10/cross-diagnostics.png)
-
-### F12 — carrier-first ramp, URF 0.3
-
-F12 has paired checkpoints at 10%, 20%, 40%, 80%, and 100%, plus continuous native histories through iteration 18,000. Its individual figure package is therefore the strongest Schedule-D evidence set.
-
-- [Residuals](./plots/03a-stage3/session1/branches/F12/residuals.png)
-- [Mass, imbalance, inventory](./plots/03a-stage3/session1/branches/F12/mass-imbalance-inventory.png)
-- [Phase routing](./plots/03a-stage3/session1/branches/F12/phase-routing.png)
-- [Liquid distribution](./plots/03a-stage3/session1/branches/F12/liquid-distribution.png)
-- [Brine pressure and flow](./plots/03a-stage3/session1/branches/F12/brine-pressure-flow.png)
-- [Ramp response](./plots/03a-stage3/session1/branches/F12/ramp-response.png)
-- [Branch-only cross diagnostics](./plots/03a-stage3/session1/branches/F12/cross-diagnostics.png)
-
-| Load | Iteration | Absolute imbalance | Total liquid (kg) | Static pressure margin (kPa) |
-|---:|---:|---:|---:|---:|
-| 10% | 6,000 | 46.713% | 511.236 | +0.024 |
-| 20% | 9,000 | 12.005% | 434.665 | −0.073 |
-| 40% | 12,000 | 0.073% | 302.414 | +0.154 |
-| 80% | 15,000 | 11.966% | 456.137 | +1.106 |
-| 100% | 18,000 | 11.107% | 374.374 | +1.645 |
-
-The final 500-point F12 window (iterations 17,501–18,000) has an absolute path-imbalance median of 12.044% (P95 14.805%) and liquid inventory median of 361.692 kg. Those are descriptive late-window metrics, not proof of a steady operating point.
-
-## 3. Compact Schedule-D summary
-
-| Branch | Residual evidence | Continuous physical history | Last validated state | Main limitation |
-|---|---|---|---|---|
-| F08 | partial, 212 late points | unavailable by branch | 40% / 12,000 | no 80% paired endpoint; no branch-specific physical history |
-| F10 | unavailable | unavailable | none | failed before a valid solve checkpoint |
-| F12 | 250 late points | 500-point final window | 100% / 18,000 | full-load late imbalance remains about 12% |
-
-No cross-branch ranking follows from this mixed evidence. The figures and source files preserve the proper branch-level distinction.
+See the [server-1 history validation](../../../../../../PyAnsys/output/03a_stage3/iteration-led/server1/history-validation.csv) for exact ranges, source paths, and exclusions.

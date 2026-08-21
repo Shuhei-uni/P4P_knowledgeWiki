@@ -55,11 +55,12 @@ scientific case identity. The overnight run used the user-authorized fixed
 iteration journal override, so the adaptive `stage3-gate-v1` decision history
 was not completed for this run.
 
-## Combined scaled residual history
+## Historical residual evidence
 
-![03A Stage-3 F08 combined scaled residual history](plots/03a-stage3/03A-stage3-F08-F10-F12-scaled-residuals-combined.png)
-
-[Open the combined Fluent-style scaled residual plot](plots/03a-stage3/03A-stage3-F08-F10-F12-scaled-residuals-combined.png)
+The earlier combined display was retired because it mixed branch evidence and
+did not preserve the native iteration progression. The evidence is retained in
+this historical report; the evidence-qualified replacement is the
+[F08 sampled-residual figure](./plots/03a-stage3/iteration-led/server1/F08/01-scaled-residuals-vs-iteration.png).
 
 The figure overlays the seven residual curves available in the saved F08
 export: continuity, the three momentum residuals, `k`, `epsilon`, and the
@@ -110,6 +111,6 @@ DECISION: DO NOT PROCEED
 - [Overnight execution manifest](../../../../../../PyAnsys/output/03a_stage3/overnight/20260818T103253Z/overnight-events.jsonl)
 - [Second fixed-block attempt manifest](../../../../../../PyAnsys/output/03a_stage3/overnight/20260819T061715Z/overnight-events.jsonl)
 - [Combined residual data](../../../../../../PyAnsys/output/03a_stage3/residual-plots/03A-stage3-F08-F10-F12-scaled-residuals.json)
-- [Combined residual plot source](../../../../../../PyAnsys/output/03a_stage3/residual-plots/03A-stage3-F08-F10-F12-scaled-residuals-combined.png)
+- [Current iteration-led F08 evidence](./plots/03a-stage3/iteration-led/server1/F08/01-scaled-residuals-vs-iteration.png)
 - [Stage-3 convergence sweep](../../../../../full-geometry/mixture/steady-liquid-outlet/03a-stage3-fluent-recommended-convergence-sweep.md)
 - [Stage-3 shared parent and seed specification](../../../../../full-geometry/mixture/steady-liquid-outlet/03a-stage3-shared-parent-and-seed-spec.yaml)
