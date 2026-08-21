@@ -1,0 +1,119 @@
+{
+  "kind": "03a_stage3_owned_remote_artifact_provenance",
+  "scope": {
+    "branches": ["F03", "F07", "F09"],
+    "description": "Read-only artifact discovery for the owned Stage-3 branches. No case/data load, solve, report-definition change, or remote write was performed."
+  },
+  "search_method": [
+    "recursive local search for .cas, .dat, and .out artifacts",
+    "read-only Fluent file-exists? probes on exact remote case/data paths",
+    "read-only parsing of the exposed native Report File histories"
+  ],
+  "case_data_pairs": {
+    "F03": [
+      {
+        "load": "100%",
+        "iteration": 5000,
+        "case": "C:\\Temp\\03A-stage3-F03\\F03-100pct-final-5000-end-iter005000-supervised-20260820T054645Z.cas.h5",
+        "data": "C:\\Temp\\03A-stage3-F03\\F03-100pct-final-5000-end-iter005000-supervised-20260820T054645Z.dat.h5",
+        "case_exists": true,
+        "data_exists": true
+      }
+    ],
+    "F07": [
+      {
+        "load": "10%",
+        "iteration": 3150,
+        "case": "C:\\Temp\\03A-stage3-F07\\F07-10pct-resume-plus-2150-end-iter003150-20260820T002135Z.cas.h5",
+        "data": "C:\\Temp\\03A-stage3-F07\\F07-10pct-resume-plus-2150-end-iter003150-20260820T002135Z.dat.h5",
+        "case_exists": true,
+        "data_exists": true
+      },
+      {
+        "load": "20%",
+        "iteration": 6150,
+        "case": "C:\\Temp\\03A-stage3-F07\\F07-20pct-end-iter006150-20260820T002135Z.cas.h5",
+        "data": "C:\\Temp\\03A-stage3-F07\\F07-20pct-end-iter006150-20260820T002135Z.dat.h5",
+        "case_exists": true,
+        "data_exists": true
+      },
+      {
+        "load": "40%",
+        "iteration": 9150,
+        "case": "C:\\Temp\\03A-stage3-F07\\F07-40pct-end-iter009150-20260820T002135Z.cas.h5",
+        "data": "C:\\Temp\\03A-stage3-F07\\F07-40pct-end-iter009150-20260820T002135Z.dat.h5",
+        "case_exists": true,
+        "data_exists": true
+      }
+    ],
+    "F09": [
+      {
+        "load": "10%",
+        "iteration": 3000,
+        "case": "C:\\Temp\\03A-stage3-F09\\F09-10pct-end-iter003000-supervised-20260820T082047Z.cas.h5",
+        "data": "C:\\Temp\\03A-stage3-F09\\F09-10pct-end-iter003000-supervised-20260820T082047Z.dat.h5",
+        "case_exists": true,
+        "data_exists": true
+      },
+      {
+        "load": "20%",
+        "iteration": 6000,
+        "case": "C:\\Temp\\03A-stage3-F09\\F09-20pct-end-iter006000-supervised-20260820T082047Z.cas.h5",
+        "data": "C:\\Temp\\03A-stage3-F09\\F09-20pct-end-iter006000-supervised-20260820T082047Z.dat.h5",
+        "case_exists": true,
+        "data_exists": true
+      },
+      {
+        "load": "40%",
+        "iteration": 9000,
+        "case": "C:\\Temp\\03A-stage3-F09\\F09-40pct-end-iter009000-supervised-20260820T082047Z.cas.h5",
+        "data": "C:\\Temp\\03A-stage3-F09\\F09-40pct-end-iter009000-supervised-20260820T082047Z.dat.h5",
+        "case_exists": true,
+        "data_exists": true
+      },
+      {
+        "load": "80%",
+        "iteration": 12000,
+        "case": "C:\\Temp\\03A-stage3-F09\\F09-80pct-end-iter012000-supervised-20260820T082047Z.cas.h5",
+        "data": "C:\\Temp\\03A-stage3-F09\\F09-80pct-end-iter012000-supervised-20260820T082047Z.dat.h5",
+        "case_exists": true,
+        "data_exists": true
+      },
+      {
+        "load": "100%",
+        "iteration": 15000,
+        "case": "C:\\Temp\\03A-stage3-F09\\F09-100pct-end-iter015000-supervised-20260820T082047Z.cas.h5",
+        "data": "C:\\Temp\\03A-stage3-F09\\F09-100pct-end-iter015000-supervised-20260820T082047Z.dat.h5",
+        "case_exists": true,
+        "data_exists": true
+      }
+    ]
+  },
+  "native_report_histories": {
+    "F03": {
+      "remote_report_dir": "C:\\Users\\syok443\\P4P simulation",
+      "filename_suffix": "_1_1.out",
+      "configured_reports": 30,
+      "recovered_reports": 30,
+      "points_per_report": 5000,
+      "iteration_range": [1, 5000]
+    },
+    "F07": {
+      "remote_report_dir": "C:\\Temp\\03A-stage3-F07",
+      "filename_suffix": ".out",
+      "configured_reports": 30,
+      "recovered_reports": 30,
+      "points_per_report": 9174,
+      "iteration_range": [1, 9174],
+      "failure_tail_iteration_range": [9151, 9174]
+    },
+    "F09": {
+      "remote_report_dir": "C:\\Users\\syok443\\P4P simulation",
+      "filename_suffix": "_2_1.out",
+      "configured_reports": 30,
+      "recovered_reports": 30,
+      "points_per_report": 15000,
+      "iteration_range": [1, 15000]
+    }
+  }
+}

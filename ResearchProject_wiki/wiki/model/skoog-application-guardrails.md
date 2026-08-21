@@ -130,5 +130,5 @@ They must not yet support a geothermal separator efficiency, steam-purity, or va
 
 - Current inlet-regime context: [inlet-regimes](inlet-regimes.md)
 - Current EWF diagnostic: [10a results](../../../Setups/reports/10a/results.md)
-- Current two-way DPM diagnostic: [09c results](../../../Setups/reports/09c/results.md)
+- Current two-way DPM diagnostic: [09c results](../../../Setups/reports/purnanto-reference/09c/results.md)
 - Project V&V policy: [vnv/policy](../vnv/policy.md)

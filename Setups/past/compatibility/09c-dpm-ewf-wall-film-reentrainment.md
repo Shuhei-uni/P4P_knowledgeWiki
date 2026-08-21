@@ -10,7 +10,7 @@
 | Parent setup | [09b](09b-rsm-dpm-split-inlet-accuracy.md) |
 | Evidence-use label | preliminary two-way-coupling diagnostic; not converged |
 | Outcome | needs follow-up |
-| Linked report | [09c post-simulation analysis](../../reports/09c/results.md) |
+| Linked report | [09c post-simulation analysis](../../reports/purnanto-reference/09c/results.md) |
 
 Legacy filename note:
 

@@ -13,7 +13,7 @@
 | Droplet-size basis | historical six-bin distribution for completed cases; future PSD reruns use the [project fine-mist baseline](../../../ResearchProject_wiki/wiki/model/fine-mist-dpm-size-and-mass-distribution.md) |
 | Evidence-use label | setup calculation only until carrier and liquid balance gates pass |
 | Outcome | needs follow-up |
-| Linked report | [09cV2 diagnostic results](../../reports/09cV2/results.md) |
+| Linked report | [09cV2 diagnostic results](../../reports/purnanto-reference/09cV2/results.md) |
 
 ## 1. Objective
 

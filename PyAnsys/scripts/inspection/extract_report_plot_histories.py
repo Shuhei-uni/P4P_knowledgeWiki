@@ -20,6 +20,7 @@ from datetime import datetime
 import json
 import math
 from pathlib import Path, PureWindowsPath
+import re
 import sys
 from typing import Any
 
@@ -48,6 +49,16 @@ def build_parser() -> argparse.ArgumentParser:
         help=(
             "Remote Windows directory used to resolve relative Report File "
             "names. Fluent's working directory is not changed."
+        ),
+    )
+    parser.add_argument(
+        "--filename-suffix",
+        default="",
+        help=(
+            "Optional replacement suffix for Fluent's generated report-file names. "
+            "For example, '.out' reads an unsuffixed file and '_1_1.out' reads "
+            "the corresponding numbered variant while retaining the configured "
+            "report definition mapping."
         ),
     )
     parser.add_argument(
@@ -88,9 +99,23 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def resolve_remote_report_path(file_name: str, report_dir: str) -> str:
+def resolve_remote_report_path(
+    file_name: str,
+    report_dir: str,
+    filename_suffix: str = "",
+) -> str:
     """Resolve a Fluent Report File name without changing the Fluent session."""
     configured = PureWindowsPath(str(file_name).strip())
+    if filename_suffix.strip():
+        suffix = filename_suffix.strip()
+        if not suffix.startswith("_") and not suffix.startswith("."):
+            suffix = f".{suffix}"
+        basename = configured.name
+        if re.search(r"_\d+_\d+\.out$", basename, flags=re.IGNORECASE):
+            replaced = re.sub(r"_\d+_\d+\.out$", suffix, basename, flags=re.IGNORECASE)
+        else:
+            replaced = re.sub(r"\.out$", suffix, basename, flags=re.IGNORECASE)
+        configured = configured.with_name(replaced)
     if configured.is_absolute() or not report_dir.strip():
         return str(configured)
     return str(PureWindowsPath(report_dir.strip()) / configured)
@@ -278,7 +303,11 @@ def main() -> int:
         if not configured_name:
             errors.append({"monitor_name": str(monitor_name), "error": "missing file_name"})
             continue
-        resolved_name = resolve_remote_report_path(configured_name, args.report_dir)
+        resolved_name = resolve_remote_report_path(
+            configured_name,
+            args.report_dir,
+            args.filename_suffix,
+        )
         print(f"Reading {monitor_name}: {resolved_name}", flush=True)
         try:
             if not remote_file_exists(solver, resolved_name):
@@ -312,6 +341,7 @@ def main() -> int:
             "basis": "read-only extraction from an existing session; this script does not load case/data",
         },
         "remote_report_dir": args.report_dir or None,
+        "report_filename_suffix": args.filename_suffix or None,
         "configured_report_file_count": len(report_files),
         "selected_report_file_count": considered,
         "recovered_report_file_count": len(records),

@@ -2,7 +2,7 @@
 
 This page is the report-side navigation for the historical numbered/reference programme.
 
-Historical reports are grouped by setup/experiment folder under this programme. The old top-level numbered folders remain as compatibility redirects where existing links still use them.
+Historical reports are grouped by setup/experiment folder under this programme. The `09c` family is canonical here under `09c/`, `09cV2/`, and `09cV3/`.
 
 Examples include:
 

@@ -60,7 +60,7 @@ m_continuum liquid = (1 − f_droplet) × 116.920 kg/s
 | Current diagnostic | `5%` | `5.846` | `111.074` | Existing reference point; not yet converged |
 | Upper sensitivity | `10%` | `11.692` | `105.228` | Planned upper/extreme sensitivity point |
 
-For this first sweep, keep the mesh, geometry, solver settings, injection material and surface, DPM controls, and droplet-size distribution fixed. Change only the tracked-droplet total and the complementary continuum-liquid flow. The current `5%` case has approximately `57.55%` carrier imbalance and continuity of approximately `2.86e-1`, so it should be treated as a diagnostic rather than a converged physical baseline. The earlier unpartitioned additional-load case is not a physically comparable sweep point. ([partitioned droplet-loading setup](../Setups/active/09cV2-skoog-partition-injection-control.md), [diagnostic results](../Setups/reports/09cV2/results.md), [global-interaction comparison](../ResearchProject_wiki/observations/03-08b-09c-global-dpm-interaction.md))
+For this first sweep, keep the mesh, geometry, solver settings, injection material and surface, DPM controls, and droplet-size distribution fixed. Change only the tracked-droplet total and the complementary continuum-liquid flow. The current `5%` case has approximately `57.55%` carrier imbalance and continuity of approximately `2.86e-1`, so it should be treated as a diagnostic rather than a converged physical baseline. The earlier unpartitioned additional-load case is not a physically comparable sweep point. ([partitioned droplet-loading setup](../Setups/active/09cV2-skoog-partition-injection-control.md), [diagnostic results](../Setups/reports/purnanto-reference/09cV2/results.md), [global-interaction comparison](../ResearchProject_wiki/observations/03-08b-09c-global-dpm-interaction.md))
 
 ## 3. Droplet-size and mass-distribution basis
 
@@ -125,7 +125,7 @@ The following project record IDs are retained only so the analysis can be reprod
 
 - [Mesh-refinement checkpoint](../Setups/reports/08b/mesh-convergence-checkpoint-20260803.md)
 - [Partitioned droplet-loading setup](../Setups/active/09cV2-skoog-partition-injection-control.md)
-- [Partitioned droplet-loading diagnostic results](../Setups/reports/09cV2/results.md)
+- [Partitioned droplet-loading diagnostic results](../Setups/reports/purnanto-reference/09cV2/results.md)
 - [Fine-mist droplet-size and mass-distribution record](../ResearchProject_wiki/wiki/model/fine-mist-dpm-size-and-mass-distribution.md)
 - [Purnanto technical source extraction](../ResearchProject_wiki/wiki/technical/sources/purnanto-etal-2013.md)
 - [Droplet carryover and re-entrainment physics basis](../CFD_wiki/wiki/physics-basis/droplets-carryover-and-re-entrainment.md)

@@ -502,11 +502,17 @@ This is particularly relevant to the Stage-3 objective because solver residual i
 
 # 6. Cross-branch comparison strategy
 
-The report should not become twelve isolated mini-reports.
+The final-results report is branch-first. Every owned branch receives the same complete package before any cross-branch comparison is made:
 
-Use branch-specific figures only where a branch has a unique event or where the full trajectory itself is scientifically important.
+1. all residual equations and any failure tail;
+2. total inlet/outlet, relative imbalance, and total liquid inventory;
+3. phase routing;
+4. Y010/Y030/total liquid distribution;
+5. brine-entry pressure and brine flow;
+6. inlet-loading/ramp response where applicable; and
+7. branch-specific cross-variable diagnostics.
 
-Prefer cross-branch comparisons whenever the operating condition is matched.
+Only then should the report add a compact cross-branch table based on derived late-window metrics. Branch-local history figures are the default. Large multi-branch history overlays are excluded unless a specific matched-state question makes one materially more informative than the branch packages.
 
 ## 6.1 Compare like with like
 
@@ -521,17 +527,18 @@ Do not compare a carrier-only 100% state directly with a full-Mixture 100% state
 
 Do not treat an 80% ramp stage as directly equivalent to the final 100% operating condition.
 
-## 6.2 Useful matched-condition cross-branch figures
+## 6.2 Preferred compact cross-branch summary
 
-Potential summary plots include:
+The default cross-branch output is a compact table, not a multi-branch history overlay. It should report, for each owned branch:
 
-- relative mass imbalance histories at the 100% stage overlaid across valid branches;
-- total liquid inventory histories at the 100% stage overlaid across valid branches;
-- final-window residual-envelope summaries by branch;
-- late-window mass-imbalance median/spread by branch;
-- late-window liquid-inventory slope/spread by branch;
-- brine-entry pressure margin by branch;
-- paired summary plot of numerical residual activity vs physical mass imbalance.
+- last completed loading stage and native iteration window;
+- late-window residual medians/P95 values;
+- path-magnitude relative mass-imbalance median/P95;
+- liquid-inventory median, spread, and slope;
+- brine-entry pressure margin; and
+- brine-flow readback.
+
+A matched-condition history overlay is optional and must be justified in the report text. It must not replace the complete branch packages.
 
 ## 6.3 Do not hide run-length differences
 
@@ -615,21 +622,21 @@ Even there, the conclusion is primarily about **numerical response to the contro
 
 # 9. Recommended final Stage-3 report visual structure
 
-The main report should be detailed without becoming an archive dump.
+The final report should repeat one consistent package for each owned branch, then close with the compact table described above.
 
-A strong structure is:
+For each branch, use this order:
 
 ## Figure 1 — complete scaled residual history
 
-All active residual equations, with stage transitions and failures annotated.
+All active residual equations, with stage transitions and numerical-failure tails annotated.
 
 ## Figure 2 — mass-flow convergence + relative imbalance + total liquid inventory
 
-The primary physical steady-state figure.
+Native inlet/outlet histories, the path-magnitude imbalance transform, the native Report File imbalance, and liquid inventory, with checkpoint markers for validation.
 
 ## Figure 3 — phase routing
 
-Liquid/vapour routing through brine and steam outlets, used to explain total-flow behaviour.
+Liquid/vapour routing through brine and steam outlets.
 
 ## Figure 4 — lower-vessel liquid distribution
 
@@ -637,26 +644,17 @@ Total/Y030/Y010 inventory or normalised lower-region fractions.
 
 ## Figure 5 — brine-entry pressure / brine-flow response
 
-Static/total pressure margin associated with lower-outlet flow and, where useful, inventory.
+Static/total pressure margin associated with lower-outlet flow and inventory.
 
-## Figure 6 — matched 100% cross-branch comparison
+## Figure 6 — inlet-loading response where applicable
 
-Compact comparison of the valid full-Mixture 100% branches using consistent late-window metrics.
+For progressive-loading branches, show how the key metrics change through the completed loading stages and identify any failure tail.
 
-## Figure 7 — inlet-loading response
+## Figure 7 — branch-specific mechanism cross-plots
 
-For progressive-loading branches, show how key metrics changed through 10/20/40/80/100% loading.
+Include only the branch's own associations, such as imbalance vs inventory, pressure margin vs brine flow, inventory vs liquid-to-brine flow, and late residual vs endpoint imbalance.
 
-### Optional mechanism cross-plots
-
-Include only the cross-plots that materially improve interpretation, for example:
-
-- imbalance vs liquid inventory;
-- brine pressure margin vs brine flow;
-- inventory vs liquid-to-brine flow;
-- residual activity vs mass imbalance.
-
-Not every branch needs every figure individually.
+After all branch packages, add the compact late-window table. Do not create a default multi-branch history overlay.
 
 ---
 
@@ -690,11 +688,9 @@ raw residual transcripts
         ↓
 canonicalised time-series dataset
         ↓
-derived metrics + stage labels + duplicate map
         ↓
-composite branch figures
-+ cross-branch figures
-+ compact summary tables
+branch-specific package figures
++ compact late-window cross-branch table
         ↓
 final Stage-3 results report
 ```

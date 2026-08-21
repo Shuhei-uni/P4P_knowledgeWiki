@@ -27,7 +27,7 @@ The campaign path should match exactly between the setup side and report side.
 
 - [Purnanto/reference report navigation](purnanto-reference/index.md)
 
-Existing numbered folders such as `02c/`, `02e/`, `08b/`, `09c/`, and `010V2/` remain directly under `Setups/reports/` for compatibility with established links. Do not use a new numbered folder for a new full-geometry campaign.
+Historical numbered/reference reports are grouped under their programme folders, including the `09c` family under `purnanto-reference/`. Do not use a new numbered folder for a new full-geometry campaign.
 
 ## Full-geometry compatibility reports still in numbered locations
 

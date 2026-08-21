@@ -1,0 +1,979 @@
+{
+  "kind": "03a_stage3_owned_branch_analysis_index",
+  "scope": {
+    "branches": [
+      "F03",
+      "F07",
+      "F09"
+    ],
+    "branch_selection": "fixed F03/F07/F09 evidence set",
+    "plot_structure": "branch-by-branch packages; no multi-branch history overlays"
+  },
+  "sources": {
+    "checkpoint_csv": {
+      "path": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/03a-stage3-results-20260821-checkpoints.csv",
+      "sha256": "b1db2c2ccf7c443c3c0dd2e80c2d6e37e6ef477b7aee9a13052fd22423a4b01b"
+    },
+    "stitched_residual_json": {
+      "path": "PyAnsys/output/03a_stage3/residual-plots/03A-stage3-F03-F07-F09-scaled-residuals-stitched.json",
+      "sha256": "4c0aae00e434a4ee9339c569e575ecb8e1e225c8732899b6581b682355452193"
+    },
+    "remote_artifact_provenance": {
+      "path": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-owned/remote-artifact-provenance.json",
+      "sha256": "a6edcdfcbe2d421e82764a6c479e94bd475665523061a8c0ffab1307e4662c1b"
+    }
+  },
+  "native_report_history_status": "complete_for_all_owned_branches",
+  "checkpoint_count": 9,
+  "residual_order": [
+    "continuity",
+    "x-velocity",
+    "y-velocity",
+    "z-velocity",
+    "k",
+    "epsilon",
+    "vf-phase-2"
+  ],
+  "branch_packages": {
+    "F03": {
+      "analysis_json": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-owned/f03/analysis.json",
+      "checkpoints_csv": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-owned/f03/checkpoints.csv",
+      "native_history_validation_csv": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-owned/f03/native-history-validation.csv",
+      "native_report_history_json": "PyAnsys/output/03a_stage3/owned-report-history/03a-stage3-f03-report-histories_20260821_121211.json",
+      "figures": [
+        "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/branches/f03/figure-01-residuals.png",
+        "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/branches/f03/figure-02-physical-convergence.png",
+        "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/branches/f03/figure-03-phase-routing.png",
+        "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/branches/f03/figure-04-liquid-distribution.png",
+        "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/branches/f03/figure-05-brine-pressure-flow.png",
+        "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/branches/f03/figure-07-cross-plots.png"
+      ],
+      "terminal_late_window": {
+        "branch": "F03",
+        "terminal_load": "100%",
+        "terminal_iteration": 5000,
+        "late_window_stage": "100%",
+        "late_window_iterations": [
+          4501,
+          5000
+        ],
+        "late_window_points": 500,
+        "late_abs_imbalance_median_pct": 495.493210605562,
+        "late_abs_imbalance_p95_pct": 678.8727812229623,
+        "late_liquid_inventory_median_kg": 2697.1674724559143,
+        "late_liquid_inventory_std_kg": 96.97197313117476,
+        "late_liquid_inventory_slope_kg_per_iteration": 0.6449713286448288,
+        "late_static_margin_median_kpa": -16825.772814971046,
+        "late_brine_flow_median_kg_s": 1116.3026177777901,
+        "endpoint_abs_imbalance_pct": 336.385044,
+        "endpoint_total_liquid_kg": 2821.068548,
+        "endpoint_static_margin_kpa": -19.41516800000006,
+        "continuity_median": 1.1838,
+        "continuity_p95": 1.241215,
+        "k_median": 0.010799,
+        "epsilon_median": 0.037804500000000005,
+        "vf_median": 0.012736,
+        "failure_at_terminal": false,
+        "history_metrics": {
+          "status": "derived_late_window",
+          "window_basis": "last 500 native Report File points of the last completed load stage",
+          "stage": "100%",
+          "iteration_window": [
+            4501,
+            5000
+          ],
+          "history_points": 500,
+          "metrics": {
+            "mass_imbalance_abs_pct": {
+              "points": 500,
+              "median": 495.493210605562,
+              "p05": 336.3322480760549,
+              "p95": 678.8727812229623,
+              "std": 112.84532650518389,
+              "slope_per_iteration": 0.1481241230649735
+            },
+            "total_outlet_kg_s": {
+              "points": 500,
+              "median": 1181.9723336908442,
+              "p05": 866.0596566643877,
+              "p95": 1545.9556254792749,
+              "std": 223.98249306621346,
+              "slope_per_iteration": 0.29400606471562896
+            },
+            "brine_outlet_total_kg_s": {
+              "points": 500,
+              "median": 1116.3026177777901,
+              "p05": 804.3755498127092,
+              "p95": 1480.3834018935395,
+              "std": 222.77570561818757,
+              "slope_per_iteration": 0.3199136252483109
+            },
+            "liquid_to_brine_kg_s": {
+              "points": 500,
+              "median": 1087.6772536429517,
+              "p05": 773.5476140802663,
+              "p95": 1454.2849458306882,
+              "std": 224.02653691223034,
+              "slope_per_iteration": 0.32246810687575095
+            },
+            "liquid_inventory_total_kg": {
+              "points": 500,
+              "median": 2697.1674724559143,
+              "p05": 2516.3213876438904,
+              "p95": 2800.708906280526,
+              "std": 96.97197313117476,
+              "slope_per_iteration": 0.6449713286448288
+            },
+            "liquid_inventory_y030_kg": {
+              "points": 500,
+              "median": 716.6101000635747,
+              "p05": 667.1535042948396,
+              "p95": 761.5624299420813,
+              "std": 27.718115825041625,
+              "slope_per_iteration": 0.09508363246863265
+            },
+            "liquid_inventory_y010_kg": {
+              "points": 500,
+              "median": 663.4192582846674,
+              "p05": 617.9117529089106,
+              "p95": 709.8370897159118,
+              "std": 28.055464847727812,
+              "slope_per_iteration": 0.08051568907767044
+            },
+            "brine_entry_static_margin_kpa": {
+              "points": 500,
+              "median": -16825.772814971046,
+              "p05": -21918.79962363023,
+              "p95": -12575.255115027097,
+              "std": 2794.232488587456,
+              "slope_per_iteration": -7.227879797138248
+            },
+            "brine_entry_total_margin_kpa": {
+              "points": 500,
+              "median": 109253.32407886407,
+              "p05": 65410.078912665704,
+              "p95": 144536.4057928498,
+              "std": 22675.208077794265,
+              "slope_per_iteration": 19.217962264033407
+            }
+          },
+          "residuals": {
+            "continuity": {
+              "median": 1.1838,
+              "p95": 1.241215,
+              "log10_slope_per_1000_iterations": -0.021417319724124122
+            },
+            "x-velocity": {
+              "median": 0.00019191,
+              "p95": 0.00021163,
+              "log10_slope_per_1000_iterations": -0.10296394625103382
+            },
+            "y-velocity": {
+              "median": 0.00021496,
+              "p95": 0.000229061,
+              "log10_slope_per_1000_iterations": -0.0924056455223402
+            },
+            "z-velocity": {
+              "median": 0.0002072,
+              "p95": 0.00024070099999999998,
+              "log10_slope_per_1000_iterations": -0.13879588784710076
+            },
+            "k": {
+              "median": 0.010799,
+              "p95": 0.01333525,
+              "log10_slope_per_1000_iterations": -0.1328358854798474
+            },
+            "epsilon": {
+              "median": 0.037804500000000005,
+              "p95": 0.11500199999999988,
+              "log10_slope_per_1000_iterations": -0.2838639457866478
+            },
+            "vf-phase-2": {
+              "median": 0.012736,
+              "p95": 0.0134931,
+              "log10_slope_per_1000_iterations": -0.14673885153191774
+            }
+          },
+          "failure_tail_retained_separately": false
+        }
+      }
+    },
+    "F07": {
+      "analysis_json": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-owned/f07/analysis.json",
+      "checkpoints_csv": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-owned/f07/checkpoints.csv",
+      "native_history_validation_csv": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-owned/f07/native-history-validation.csv",
+      "native_report_history_json": "PyAnsys/output/03a_stage3/owned-report-history/03a-stage3-f07-report-histories_20260821_121211.json",
+      "figures": [
+        "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/branches/f07/figure-01-residuals.png",
+        "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/branches/f07/figure-02-physical-convergence.png",
+        "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/branches/f07/figure-03-phase-routing.png",
+        "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/branches/f07/figure-04-liquid-distribution.png",
+        "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/branches/f07/figure-05-brine-pressure-flow.png",
+        "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/branches/f07/figure-06-ramp-response.png",
+        "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/branches/f07/figure-07-cross-plots.png"
+      ],
+      "terminal_late_window": {
+        "branch": "F07",
+        "terminal_load": "40%",
+        "terminal_iteration": 9150,
+        "late_window_stage": "40%",
+        "late_window_iterations": [
+          8651,
+          9150
+        ],
+        "late_window_points": 500,
+        "late_abs_imbalance_median_pct": 36.27994914667778,
+        "late_abs_imbalance_p95_pct": 52.473339111093786,
+        "late_liquid_inventory_median_kg": 318.3441798320207,
+        "late_liquid_inventory_std_kg": 3.5562207096061567,
+        "late_liquid_inventory_slope_kg_per_iteration": 0.022432830180303964,
+        "late_static_margin_median_kpa": -130.08112211397383,
+        "late_brine_flow_median_kg_s": 87.52598902712128,
+        "endpoint_abs_imbalance_pct": 21.05379,
+        "endpoint_total_liquid_kg": 324.161621,
+        "endpoint_static_margin_kpa": 0.08459199999994599,
+        "continuity_median": 1.35345,
+        "continuity_p95": 1.5673249999999999,
+        "k_median": 0.0037745,
+        "epsilon_median": 0.030757,
+        "vf_median": 0.0069639,
+        "failure_at_terminal": false,
+        "history_metrics": {
+          "status": "derived_late_window",
+          "window_basis": "last 500 native Report File points of the last completed load stage",
+          "stage": "40%",
+          "iteration_window": [
+            8651,
+            9150
+          ],
+          "history_points": 500,
+          "metrics": {
+            "mass_imbalance_abs_pct": {
+              "points": 500,
+              "median": 36.27994914667778,
+              "p05": 15.217968085174245,
+              "p95": 52.473339111093786,
+              "std": 10.964554771732368,
+              "slope_per_iteration": -0.043818333097949434
+            },
+            "total_outlet_kg_s": {
+              "points": 500,
+              "median": 108.19880170547398,
+              "p05": 91.47674445004225,
+              "p95": 121.05546477784915,
+              "std": 8.705254844633172,
+              "slope_per_iteration": -0.034789352091895875
+            },
+            "brine_outlet_total_kg_s": {
+              "points": 500,
+              "median": 87.52598902712128,
+              "p05": 70.87534574044012,
+              "p95": 100.27947147238365,
+              "std": 8.7511234613383,
+              "slope_per_iteration": -0.03333279706079857
+            },
+            "liquid_to_brine_kg_s": {
+              "points": 500,
+              "median": 73.981021793664,
+              "p05": 57.15387558267603,
+              "p95": 86.96732402749366,
+              "std": 8.751114132486055,
+              "slope_per_iteration": -0.034626171672379906
+            },
+            "liquid_inventory_total_kg": {
+              "points": 500,
+              "median": 318.3441798320207,
+              "p05": 310.5527717968816,
+              "p95": 322.7944709170201,
+              "std": 3.5562207096061567,
+              "slope_per_iteration": 0.022432830180303964
+            },
+            "liquid_inventory_y030_kg": {
+              "points": 500,
+              "median": 246.11730711052166,
+              "p05": 238.72069197304072,
+              "p95": 251.00098199667076,
+              "std": 3.60165837390352,
+              "slope_per_iteration": 0.022968266286944417
+            },
+            "liquid_inventory_y010_kg": {
+              "points": 500,
+              "median": 241.75437783074494,
+              "p05": 234.06849018579712,
+              "p95": 246.58530863450247,
+              "std": 3.7017688725208275,
+              "slope_per_iteration": 0.023719697480588463
+            },
+            "brine_entry_static_margin_kpa": {
+              "points": 500,
+              "median": -130.08112211397383,
+              "p05": -304.9659262885339,
+              "p95": 154.71735988451388,
+              "std": 146.79806603667822,
+              "slope_per_iteration": 0.2527288219654359
+            },
+            "brine_entry_total_margin_kpa": {
+              "points": 500,
+              "median": 2438.6271474915557,
+              "p05": 1802.5943290898927,
+              "p95": 3301.220074666302,
+              "std": 510.52674280337584,
+              "slope_per_iteration": -0.27970030602617546
+            }
+          },
+          "residuals": {
+            "continuity": {
+              "median": 1.35345,
+              "p95": 1.5673249999999999,
+              "log10_slope_per_1000_iterations": -0.2130368514259564
+            },
+            "x-velocity": {
+              "median": 7.8427e-05,
+              "p95": 0.0001024705,
+              "log10_slope_per_1000_iterations": -0.3072118874681643
+            },
+            "y-velocity": {
+              "median": 7.2061e-05,
+              "p95": 9.350335e-05,
+              "log10_slope_per_1000_iterations": -0.3741640693926485
+            },
+            "z-velocity": {
+              "median": 8.600200000000001e-05,
+              "p95": 0.000109772,
+              "log10_slope_per_1000_iterations": -0.3154884072590591
+            },
+            "k": {
+              "median": 0.0037745,
+              "p95": 0.00783674,
+              "log10_slope_per_1000_iterations": -0.42721880376284305
+            },
+            "epsilon": {
+              "median": 0.030757,
+              "p95": 0.6339984999999997,
+              "log10_slope_per_1000_iterations": -0.760202278544106
+            },
+            "vf-phase-2": {
+              "median": 0.0069639,
+              "p95": 0.00857908,
+              "log10_slope_per_1000_iterations": -0.2871106658012986
+            }
+          },
+          "failure_tail_retained_separately": true
+        }
+      }
+    },
+    "F09": {
+      "analysis_json": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-owned/f09/analysis.json",
+      "checkpoints_csv": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-owned/f09/checkpoints.csv",
+      "native_history_validation_csv": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-owned/f09/native-history-validation.csv",
+      "native_report_history_json": "PyAnsys/output/03a_stage3/owned-report-history/03a-stage3-f09-report-histories_20260821_121211.json",
+      "figures": [
+        "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/branches/f09/figure-01-residuals.png",
+        "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/branches/f09/figure-02-physical-convergence.png",
+        "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/branches/f09/figure-03-phase-routing.png",
+        "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/branches/f09/figure-04-liquid-distribution.png",
+        "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/branches/f09/figure-05-brine-pressure-flow.png",
+        "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/branches/f09/figure-06-ramp-response.png",
+        "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/branches/f09/figure-07-cross-plots.png"
+      ],
+      "terminal_late_window": {
+        "branch": "F09",
+        "terminal_load": "100%",
+        "terminal_iteration": 15000,
+        "late_window_stage": "100%",
+        "late_window_iterations": [
+          14501,
+          15000
+        ],
+        "late_window_points": 500,
+        "late_abs_imbalance_median_pct": 559.5688819213497,
+        "late_abs_imbalance_p95_pct": 761.3291624895411,
+        "late_liquid_inventory_median_kg": 3011.785088962957,
+        "late_liquid_inventory_std_kg": 73.17433288860687,
+        "late_liquid_inventory_slope_kg_per_iteration": -0.48256950098923135,
+        "late_static_margin_median_kpa": -18649.157418373972,
+        "late_brine_flow_median_kg_s": 1237.9794000308589,
+        "endpoint_abs_imbalance_pct": 650.793748,
+        "endpoint_total_liquid_kg": 2959.918598,
+        "endpoint_static_margin_kpa": -34.04477600000007,
+        "continuity_median": 9.164100000000001,
+        "continuity_p95": 10.00405,
+        "k_median": 0.00925875,
+        "epsilon_median": 0.030598,
+        "vf_median": 0.010946000000000001,
+        "failure_at_terminal": false,
+        "history_metrics": {
+          "status": "derived_late_window",
+          "window_basis": "last 500 native Report File points of the last completed load stage",
+          "stage": "100%",
+          "iteration_window": [
+            14501,
+            15000
+          ],
+          "history_points": 500,
+          "metrics": {
+            "mass_imbalance_abs_pct": {
+              "points": 500,
+              "median": 559.5688819213497,
+              "p05": 353.94273807296645,
+              "p95": 761.3291624895411,
+              "std": 123.73460779679283,
+              "slope_per_iteration": 0.460732677166535
+            },
+            "total_outlet_kg_s": {
+              "points": 500,
+              "median": 1309.1537513948556,
+              "p05": 901.0140635129927,
+              "p95": 1709.6202309820833,
+              "std": 245.59622264571715,
+              "slope_per_iteration": 0.914491161174413
+            },
+            "brine_outlet_total_kg_s": {
+              "points": 500,
+              "median": 1237.9794000308589,
+              "p05": 819.8230083753275,
+              "p95": 1641.4761793337955,
+              "std": 247.08852067235927,
+              "slope_per_iteration": 0.9356035173832292
+            },
+            "liquid_to_brine_kg_s": {
+              "points": 500,
+              "median": 1213.219642249261,
+              "p05": 792.5816690838041,
+              "p95": 1618.7038820197222,
+              "std": 248.47193297979683,
+              "slope_per_iteration": 0.9397918074350711
+            },
+            "liquid_inventory_total_kg": {
+              "points": 500,
+              "median": 3011.785088962957,
+              "p05": 2934.6750779338463,
+              "p95": 3152.2147052435957,
+              "std": 73.17433288860687,
+              "slope_per_iteration": -0.48256950098923135
+            },
+            "liquid_inventory_y030_kg": {
+              "points": 500,
+              "median": 813.0896141168605,
+              "p05": 762.6118283709468,
+              "p95": 877.4136419759483,
+              "std": 33.89359239173781,
+              "slope_per_iteration": 0.14344732845508917
+            },
+            "liquid_inventory_y010_kg": {
+              "points": 500,
+              "median": 763.1468732866555,
+              "p05": 708.5701937030803,
+              "p95": 824.6325163482929,
+              "std": 33.59087527777847,
+              "slope_per_iteration": 0.13414786367596063
+            },
+            "brine_entry_static_margin_kpa": {
+              "points": 500,
+              "median": -18649.157418373972,
+              "p05": -29130.989489267544,
+              "p95": -9201.687378756178,
+              "std": 6384.278399274447,
+              "slope_per_iteration": -26.470265161870184
+            },
+            "brine_entry_total_margin_kpa": {
+              "points": 500,
+              "median": 98867.89619492542,
+              "p05": 65396.50874854192,
+              "p95": 150657.37731350926,
+              "std": 24840.95341028361,
+              "slope_per_iteration": 61.83967913987245
+            }
+          },
+          "residuals": {
+            "continuity": {
+              "median": 9.164100000000001,
+              "p95": 10.00405,
+              "log10_slope_per_1000_iterations": 0.06285285023190844
+            },
+            "x-velocity": {
+              "median": 0.00016861,
+              "p95": 0.000181792,
+              "log10_slope_per_1000_iterations": 0.04273422363621937
+            },
+            "y-velocity": {
+              "median": 0.00019302000000000002,
+              "p95": 0.00020574249999999998,
+              "log10_slope_per_1000_iterations": -0.011835337435961707
+            },
+            "z-velocity": {
+              "median": 0.000189415,
+              "p95": 0.0002092215,
+              "log10_slope_per_1000_iterations": 0.0772040646948029
+            },
+            "k": {
+              "median": 0.00925875,
+              "p95": 0.0107632,
+              "log10_slope_per_1000_iterations": 0.06026001015100574
+            },
+            "epsilon": {
+              "median": 0.030598,
+              "p95": 0.08132019999999984,
+              "log10_slope_per_1000_iterations": 0.4734403453920663
+            },
+            "vf-phase-2": {
+              "median": 0.010946000000000001,
+              "p95": 0.0116691,
+              "log10_slope_per_1000_iterations": 0.08802553188865742
+            }
+          },
+          "failure_tail_retained_separately": false
+        }
+      }
+    }
+  },
+  "compact_cross_branch_summary": [
+    {
+      "branch": "F03",
+      "terminal_load": "100%",
+      "terminal_iteration": 5000,
+      "late_window_stage": "100%",
+      "late_window_iterations": [
+        4501,
+        5000
+      ],
+      "late_window_points": 500,
+      "late_abs_imbalance_median_pct": 495.493210605562,
+      "late_abs_imbalance_p95_pct": 678.8727812229623,
+      "late_liquid_inventory_median_kg": 2697.1674724559143,
+      "late_liquid_inventory_std_kg": 96.97197313117476,
+      "late_liquid_inventory_slope_kg_per_iteration": 0.6449713286448288,
+      "late_static_margin_median_kpa": -16825.772814971046,
+      "late_brine_flow_median_kg_s": 1116.3026177777901,
+      "endpoint_abs_imbalance_pct": 336.385044,
+      "endpoint_total_liquid_kg": 2821.068548,
+      "endpoint_static_margin_kpa": -19.41516800000006,
+      "continuity_median": 1.1838,
+      "continuity_p95": 1.241215,
+      "k_median": 0.010799,
+      "epsilon_median": 0.037804500000000005,
+      "vf_median": 0.012736,
+      "failure_at_terminal": false,
+      "history_metrics": {
+        "status": "derived_late_window",
+        "window_basis": "last 500 native Report File points of the last completed load stage",
+        "stage": "100%",
+        "iteration_window": [
+          4501,
+          5000
+        ],
+        "history_points": 500,
+        "metrics": {
+          "mass_imbalance_abs_pct": {
+            "points": 500,
+            "median": 495.493210605562,
+            "p05": 336.3322480760549,
+            "p95": 678.8727812229623,
+            "std": 112.84532650518389,
+            "slope_per_iteration": 0.1481241230649735
+          },
+          "total_outlet_kg_s": {
+            "points": 500,
+            "median": 1181.9723336908442,
+            "p05": 866.0596566643877,
+            "p95": 1545.9556254792749,
+            "std": 223.98249306621346,
+            "slope_per_iteration": 0.29400606471562896
+          },
+          "brine_outlet_total_kg_s": {
+            "points": 500,
+            "median": 1116.3026177777901,
+            "p05": 804.3755498127092,
+            "p95": 1480.3834018935395,
+            "std": 222.77570561818757,
+            "slope_per_iteration": 0.3199136252483109
+          },
+          "liquid_to_brine_kg_s": {
+            "points": 500,
+            "median": 1087.6772536429517,
+            "p05": 773.5476140802663,
+            "p95": 1454.2849458306882,
+            "std": 224.02653691223034,
+            "slope_per_iteration": 0.32246810687575095
+          },
+          "liquid_inventory_total_kg": {
+            "points": 500,
+            "median": 2697.1674724559143,
+            "p05": 2516.3213876438904,
+            "p95": 2800.708906280526,
+            "std": 96.97197313117476,
+            "slope_per_iteration": 0.6449713286448288
+          },
+          "liquid_inventory_y030_kg": {
+            "points": 500,
+            "median": 716.6101000635747,
+            "p05": 667.1535042948396,
+            "p95": 761.5624299420813,
+            "std": 27.718115825041625,
+            "slope_per_iteration": 0.09508363246863265
+          },
+          "liquid_inventory_y010_kg": {
+            "points": 500,
+            "median": 663.4192582846674,
+            "p05": 617.9117529089106,
+            "p95": 709.8370897159118,
+            "std": 28.055464847727812,
+            "slope_per_iteration": 0.08051568907767044
+          },
+          "brine_entry_static_margin_kpa": {
+            "points": 500,
+            "median": -16825.772814971046,
+            "p05": -21918.79962363023,
+            "p95": -12575.255115027097,
+            "std": 2794.232488587456,
+            "slope_per_iteration": -7.227879797138248
+          },
+          "brine_entry_total_margin_kpa": {
+            "points": 500,
+            "median": 109253.32407886407,
+            "p05": 65410.078912665704,
+            "p95": 144536.4057928498,
+            "std": 22675.208077794265,
+            "slope_per_iteration": 19.217962264033407
+          }
+        },
+        "residuals": {
+          "continuity": {
+            "median": 1.1838,
+            "p95": 1.241215,
+            "log10_slope_per_1000_iterations": -0.021417319724124122
+          },
+          "x-velocity": {
+            "median": 0.00019191,
+            "p95": 0.00021163,
+            "log10_slope_per_1000_iterations": -0.10296394625103382
+          },
+          "y-velocity": {
+            "median": 0.00021496,
+            "p95": 0.000229061,
+            "log10_slope_per_1000_iterations": -0.0924056455223402
+          },
+          "z-velocity": {
+            "median": 0.0002072,
+            "p95": 0.00024070099999999998,
+            "log10_slope_per_1000_iterations": -0.13879588784710076
+          },
+          "k": {
+            "median": 0.010799,
+            "p95": 0.01333525,
+            "log10_slope_per_1000_iterations": -0.1328358854798474
+          },
+          "epsilon": {
+            "median": 0.037804500000000005,
+            "p95": 0.11500199999999988,
+            "log10_slope_per_1000_iterations": -0.2838639457866478
+          },
+          "vf-phase-2": {
+            "median": 0.012736,
+            "p95": 0.0134931,
+            "log10_slope_per_1000_iterations": -0.14673885153191774
+          }
+        },
+        "failure_tail_retained_separately": false
+      }
+    },
+    {
+      "branch": "F07",
+      "terminal_load": "40%",
+      "terminal_iteration": 9150,
+      "late_window_stage": "40%",
+      "late_window_iterations": [
+        8651,
+        9150
+      ],
+      "late_window_points": 500,
+      "late_abs_imbalance_median_pct": 36.27994914667778,
+      "late_abs_imbalance_p95_pct": 52.473339111093786,
+      "late_liquid_inventory_median_kg": 318.3441798320207,
+      "late_liquid_inventory_std_kg": 3.5562207096061567,
+      "late_liquid_inventory_slope_kg_per_iteration": 0.022432830180303964,
+      "late_static_margin_median_kpa": -130.08112211397383,
+      "late_brine_flow_median_kg_s": 87.52598902712128,
+      "endpoint_abs_imbalance_pct": 21.05379,
+      "endpoint_total_liquid_kg": 324.161621,
+      "endpoint_static_margin_kpa": 0.08459199999994599,
+      "continuity_median": 1.35345,
+      "continuity_p95": 1.5673249999999999,
+      "k_median": 0.0037745,
+      "epsilon_median": 0.030757,
+      "vf_median": 0.0069639,
+      "failure_at_terminal": false,
+      "history_metrics": {
+        "status": "derived_late_window",
+        "window_basis": "last 500 native Report File points of the last completed load stage",
+        "stage": "40%",
+        "iteration_window": [
+          8651,
+          9150
+        ],
+        "history_points": 500,
+        "metrics": {
+          "mass_imbalance_abs_pct": {
+            "points": 500,
+            "median": 36.27994914667778,
+            "p05": 15.217968085174245,
+            "p95": 52.473339111093786,
+            "std": 10.964554771732368,
+            "slope_per_iteration": -0.043818333097949434
+          },
+          "total_outlet_kg_s": {
+            "points": 500,
+            "median": 108.19880170547398,
+            "p05": 91.47674445004225,
+            "p95": 121.05546477784915,
+            "std": 8.705254844633172,
+            "slope_per_iteration": -0.034789352091895875
+          },
+          "brine_outlet_total_kg_s": {
+            "points": 500,
+            "median": 87.52598902712128,
+            "p05": 70.87534574044012,
+            "p95": 100.27947147238365,
+            "std": 8.7511234613383,
+            "slope_per_iteration": -0.03333279706079857
+          },
+          "liquid_to_brine_kg_s": {
+            "points": 500,
+            "median": 73.981021793664,
+            "p05": 57.15387558267603,
+            "p95": 86.96732402749366,
+            "std": 8.751114132486055,
+            "slope_per_iteration": -0.034626171672379906
+          },
+          "liquid_inventory_total_kg": {
+            "points": 500,
+            "median": 318.3441798320207,
+            "p05": 310.5527717968816,
+            "p95": 322.7944709170201,
+            "std": 3.5562207096061567,
+            "slope_per_iteration": 0.022432830180303964
+          },
+          "liquid_inventory_y030_kg": {
+            "points": 500,
+            "median": 246.11730711052166,
+            "p05": 238.72069197304072,
+            "p95": 251.00098199667076,
+            "std": 3.60165837390352,
+            "slope_per_iteration": 0.022968266286944417
+          },
+          "liquid_inventory_y010_kg": {
+            "points": 500,
+            "median": 241.75437783074494,
+            "p05": 234.06849018579712,
+            "p95": 246.58530863450247,
+            "std": 3.7017688725208275,
+            "slope_per_iteration": 0.023719697480588463
+          },
+          "brine_entry_static_margin_kpa": {
+            "points": 500,
+            "median": -130.08112211397383,
+            "p05": -304.9659262885339,
+            "p95": 154.71735988451388,
+            "std": 146.79806603667822,
+            "slope_per_iteration": 0.2527288219654359
+          },
+          "brine_entry_total_margin_kpa": {
+            "points": 500,
+            "median": 2438.6271474915557,
+            "p05": 1802.5943290898927,
+            "p95": 3301.220074666302,
+            "std": 510.52674280337584,
+            "slope_per_iteration": -0.27970030602617546
+          }
+        },
+        "residuals": {
+          "continuity": {
+            "median": 1.35345,
+            "p95": 1.5673249999999999,
+            "log10_slope_per_1000_iterations": -0.2130368514259564
+          },
+          "x-velocity": {
+            "median": 7.8427e-05,
+            "p95": 0.0001024705,
+            "log10_slope_per_1000_iterations": -0.3072118874681643
+          },
+          "y-velocity": {
+            "median": 7.2061e-05,
+            "p95": 9.350335e-05,
+            "log10_slope_per_1000_iterations": -0.3741640693926485
+          },
+          "z-velocity": {
+            "median": 8.600200000000001e-05,
+            "p95": 0.000109772,
+            "log10_slope_per_1000_iterations": -0.3154884072590591
+          },
+          "k": {
+            "median": 0.0037745,
+            "p95": 0.00783674,
+            "log10_slope_per_1000_iterations": -0.42721880376284305
+          },
+          "epsilon": {
+            "median": 0.030757,
+            "p95": 0.6339984999999997,
+            "log10_slope_per_1000_iterations": -0.760202278544106
+          },
+          "vf-phase-2": {
+            "median": 0.0069639,
+            "p95": 0.00857908,
+            "log10_slope_per_1000_iterations": -0.2871106658012986
+          }
+        },
+        "failure_tail_retained_separately": true
+      }
+    },
+    {
+      "branch": "F09",
+      "terminal_load": "100%",
+      "terminal_iteration": 15000,
+      "late_window_stage": "100%",
+      "late_window_iterations": [
+        14501,
+        15000
+      ],
+      "late_window_points": 500,
+      "late_abs_imbalance_median_pct": 559.5688819213497,
+      "late_abs_imbalance_p95_pct": 761.3291624895411,
+      "late_liquid_inventory_median_kg": 3011.785088962957,
+      "late_liquid_inventory_std_kg": 73.17433288860687,
+      "late_liquid_inventory_slope_kg_per_iteration": -0.48256950098923135,
+      "late_static_margin_median_kpa": -18649.157418373972,
+      "late_brine_flow_median_kg_s": 1237.9794000308589,
+      "endpoint_abs_imbalance_pct": 650.793748,
+      "endpoint_total_liquid_kg": 2959.918598,
+      "endpoint_static_margin_kpa": -34.04477600000007,
+      "continuity_median": 9.164100000000001,
+      "continuity_p95": 10.00405,
+      "k_median": 0.00925875,
+      "epsilon_median": 0.030598,
+      "vf_median": 0.010946000000000001,
+      "failure_at_terminal": false,
+      "history_metrics": {
+        "status": "derived_late_window",
+        "window_basis": "last 500 native Report File points of the last completed load stage",
+        "stage": "100%",
+        "iteration_window": [
+          14501,
+          15000
+        ],
+        "history_points": 500,
+        "metrics": {
+          "mass_imbalance_abs_pct": {
+            "points": 500,
+            "median": 559.5688819213497,
+            "p05": 353.94273807296645,
+            "p95": 761.3291624895411,
+            "std": 123.73460779679283,
+            "slope_per_iteration": 0.460732677166535
+          },
+          "total_outlet_kg_s": {
+            "points": 500,
+            "median": 1309.1537513948556,
+            "p05": 901.0140635129927,
+            "p95": 1709.6202309820833,
+            "std": 245.59622264571715,
+            "slope_per_iteration": 0.914491161174413
+          },
+          "brine_outlet_total_kg_s": {
+            "points": 500,
+            "median": 1237.9794000308589,
+            "p05": 819.8230083753275,
+            "p95": 1641.4761793337955,
+            "std": 247.08852067235927,
+            "slope_per_iteration": 0.9356035173832292
+          },
+          "liquid_to_brine_kg_s": {
+            "points": 500,
+            "median": 1213.219642249261,
+            "p05": 792.5816690838041,
+            "p95": 1618.7038820197222,
+            "std": 248.47193297979683,
+            "slope_per_iteration": 0.9397918074350711
+          },
+          "liquid_inventory_total_kg": {
+            "points": 500,
+            "median": 3011.785088962957,
+            "p05": 2934.6750779338463,
+            "p95": 3152.2147052435957,
+            "std": 73.17433288860687,
+            "slope_per_iteration": -0.48256950098923135
+          },
+          "liquid_inventory_y030_kg": {
+            "points": 500,
+            "median": 813.0896141168605,
+            "p05": 762.6118283709468,
+            "p95": 877.4136419759483,
+            "std": 33.89359239173781,
+            "slope_per_iteration": 0.14344732845508917
+          },
+          "liquid_inventory_y010_kg": {
+            "points": 500,
+            "median": 763.1468732866555,
+            "p05": 708.5701937030803,
+            "p95": 824.6325163482929,
+            "std": 33.59087527777847,
+            "slope_per_iteration": 0.13414786367596063
+          },
+          "brine_entry_static_margin_kpa": {
+            "points": 500,
+            "median": -18649.157418373972,
+            "p05": -29130.989489267544,
+            "p95": -9201.687378756178,
+            "std": 6384.278399274447,
+            "slope_per_iteration": -26.470265161870184
+          },
+          "brine_entry_total_margin_kpa": {
+            "points": 500,
+            "median": 98867.89619492542,
+            "p05": 65396.50874854192,
+            "p95": 150657.37731350926,
+            "std": 24840.95341028361,
+            "slope_per_iteration": 61.83967913987245
+          }
+        },
+        "residuals": {
+          "continuity": {
+            "median": 9.164100000000001,
+            "p95": 10.00405,
+            "log10_slope_per_1000_iterations": 0.06285285023190844
+          },
+          "x-velocity": {
+            "median": 0.00016861,
+            "p95": 0.000181792,
+            "log10_slope_per_1000_iterations": 0.04273422363621937
+          },
+          "y-velocity": {
+            "median": 0.00019302000000000002,
+            "p95": 0.00020574249999999998,
+            "log10_slope_per_1000_iterations": -0.011835337435961707
+          },
+          "z-velocity": {
+            "median": 0.000189415,
+            "p95": 0.0002092215,
+            "log10_slope_per_1000_iterations": 0.0772040646948029
+          },
+          "k": {
+            "median": 0.00925875,
+            "p95": 0.0107632,
+            "log10_slope_per_1000_iterations": 0.06026001015100574
+          },
+          "epsilon": {
+            "median": 0.030598,
+            "p95": 0.08132019999999984,
+            "log10_slope_per_1000_iterations": 0.4734403453920663
+          },
+          "vf-phase-2": {
+            "median": 0.010946000000000001,
+            "p95": 0.0116691,
+            "log10_slope_per_1000_iterations": 0.08802553188865742
+          }
+        },
+        "failure_tail_retained_separately": false
+      }
+    }
+  ]
+}

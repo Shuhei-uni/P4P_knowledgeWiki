@@ -116,9 +116,9 @@ That experiment will determine whether global DPM feedback actually changes the 
 ## Evidence
 
 - [08b result](../../Setups/reports/08b/results.md)
-- [09c result](../../Setups/reports/09c/results.md)
+- [09c result](../../Setups/reports/purnanto-reference/09c/results.md)
 - [08b phase-flux extract](../../Setups/reports/08b/phase-flux-result.md)
 - [past reported 09c setup definition](../../Setups/past/reported/09c-dpm-ewf-wall-film-reentrainment.md)
 - [09c coupling build/readback](../../PyAnsys/output/setup09c_two_way_dpm_coupling_summary.json)
 - [09c carrier summary](../../PyAnsys/output/live_postprocess_20260720/09c-summary.json) and [residual history](../../PyAnsys/output/live_postprocess_20260720/09c-residuals_20260720_132009.png)
-- [09cV2 result — third comparison state](../../Setups/reports/09cV2/results.md), [injection summary](../../PyAnsys/output/live_postprocess_20260722/09cV2-server2-dpm/dpm_injection_summary.csv), and [zone/fate rows](../../PyAnsys/output/live_postprocess_20260722/09cV2-server2-dpm/dpm_zone_summary.csv)
+- [09cV2 result — third comparison state](../../Setups/reports/purnanto-reference/09cV2/results.md), [injection summary](../../PyAnsys/output/live_postprocess_20260722/09cV2-server2-dpm/dpm_injection_summary.csv), and [zone/fate rows](../../PyAnsys/output/live_postprocess_20260722/09cV2-server2-dpm/dpm_zone_summary.csv)

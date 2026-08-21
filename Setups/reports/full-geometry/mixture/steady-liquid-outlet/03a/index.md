@@ -15,7 +15,11 @@ Corresponding setup campaign: [03A setup campaign](../../../../../full-geometry/
 - [Fixed-3000 results](03a-stage3-fixed3000-results-20260820.md)
 - [Stage-3 results — 2026-08-18](03a-stage3-results-20260818.md)
 - [Stage-3 results — 2026-08-21](03a-stage3-results-20260821.md)
+- [Canonical final results — scope-aware entry point](03a-stage3-final-results.md)
+- [F03/F07/F09 detailed results — native-history branch-first package](03a-stage3-f03-f07-f09-detailed-results.md)
+- [F08/F10/F12 Schedule-D detailed results](03a-stage3-schedule-d-final-results.md)
 - [Checkpoint table](03a-stage3-results-20260821-checkpoints.csv)
 - [Native queue final results — F02/F04/F05/F06/F11](03a-stage3-native-queue-final-results.md)
+- [Native queue branch-by-branch results template](03a-stage3-native-queue-results-template.md)
 
 All figures associated with this setup are under [`plots/`](plots/).
