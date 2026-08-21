@@ -1,0 +1,8 @@
+branch,stage,equation,value
+F05,full-mixture-100pct,continuity,0.07880965835227616
+F05,full-mixture-100pct,epsilon,0.003274444904401666
+F05,full-mixture-100pct,k,0.0005961017596141338
+F05,full-mixture-100pct,vf-phase-2,0.001396876174705525
+F05,full-mixture-100pct,x-velocity,1.61021335195866e-05
+F05,full-mixture-100pct,y-velocity,1.764114673038315e-05
+F05,full-mixture-100pct,z-velocity,1.766177319562787e-05

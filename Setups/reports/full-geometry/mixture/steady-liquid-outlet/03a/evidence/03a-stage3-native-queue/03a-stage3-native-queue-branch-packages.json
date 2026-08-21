@@ -1,0 +1,305 @@
+{
+  "artifact_discovery_manifest": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-native-queue/03a-stage3-local-artifact-discovery.json",
+  "artifact_discovery_status": "found_unmapped_local_artifacts",
+  "branches": [
+    {
+      "artifacts": {
+        "checkpoints_csv": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-native-queue/branches/F02/branch-checkpoints.csv",
+        "late_window_metrics_json": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-native-queue/branches/F02/branch-late-window-metrics.json",
+        "plots": {
+          "brine_hydraulics": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F02/05-brine-pressure-flow.png",
+          "cross_plots": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F02/06-cross-plots.png",
+          "liquid_distribution": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F02/04-liquid-distribution.png",
+          "phase_routing": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F02/03-phase-routing.png",
+          "physical": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F02/02-mass-imbalance-inventory.png",
+          "ramp_response": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F02/07-ramp-response.png",
+          "residuals": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F02/01-residuals.png"
+        },
+        "report_history_json": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-native-queue/branches/F02/branch-report-history-evidence.json",
+        "residual_evidence_json": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-native-queue/branches/F02/branch-residual-evidence.json",
+        "residual_points_csv": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-native-queue/branches/F02/branch-residual-points.csv"
+      },
+      "branch": "F02",
+      "branch_metadata": {
+        "full_mixture_100pct_iterations": 0,
+        "inlet_schedule": "100% immediately",
+        "mixture_startup": "carrier-first",
+        "momentum_urf": 0.7,
+        "native_iterations": 0,
+        "status": "PARTIAL",
+        "terminal_note": "Carrier 100% native stage ended before its named endpoint pair."
+      },
+      "checkpoint_count": 0,
+      "endpoint_metrics": {
+        "basis": "no valid full-Mixture endpoint row in the selected evidence bundle",
+        "status": "unavailable"
+      },
+      "kind": "03a_stage3_branch_analysis_package",
+      "late_window_metrics": {
+        "branch": "F02",
+        "metrics": {
+          "inventory_slope_kg_per_iteration": null,
+          "inventory_std_kg": null,
+          "mass_imbalance_median_abs_pct": null,
+          "mass_imbalance_p95_abs_pct": null,
+          "residual_median": null,
+          "residual_p95": null
+        },
+        "reason": "Local Stage-3-named report files were found, but their run/branch lineage does not map to this server-2 queue; endpoint points cannot be promoted to late-window statistics. Continuous residual history is also unavailable.",
+        "report_history_status": "found_unmapped_local_artifacts",
+        "residual_history_status": "unavailable",
+        "status": "unavailable"
+      },
+      "report_history_status": "found_unmapped_local_artifacts",
+      "residual_history_status": "unavailable",
+      "residual_point_count": 0,
+      "residual_stage_count": 1
+    },
+    {
+      "artifacts": {
+        "checkpoints_csv": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-native-queue/branches/F04/branch-checkpoints.csv",
+        "late_window_metrics_json": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-native-queue/branches/F04/branch-late-window-metrics.json",
+        "plots": {
+          "brine_hydraulics": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F04/05-brine-pressure-flow.png",
+          "cross_plots": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F04/06-cross-plots.png",
+          "liquid_distribution": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F04/04-liquid-distribution.png",
+          "phase_routing": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F04/03-phase-routing.png",
+          "physical": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F04/02-mass-imbalance-inventory.png",
+          "ramp_response": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F04/07-ramp-response.png",
+          "residuals": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F04/01-residuals.png"
+        },
+        "report_history_json": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-native-queue/branches/F04/branch-report-history-evidence.json",
+        "residual_evidence_json": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-native-queue/branches/F04/branch-residual-evidence.json",
+        "residual_points_csv": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-native-queue/branches/F04/branch-residual-points.csv"
+      },
+      "branch": "F04",
+      "branch_metadata": {
+        "full_mixture_100pct_iterations": 0,
+        "inlet_schedule": "100% immediately",
+        "mixture_startup": "carrier-first",
+        "momentum_urf": 0.5,
+        "native_iterations": 0,
+        "status": "PARTIAL",
+        "terminal_note": "Carrier 100% native stage ended before its named endpoint pair."
+      },
+      "checkpoint_count": 0,
+      "endpoint_metrics": {
+        "basis": "no valid full-Mixture endpoint row in the selected evidence bundle",
+        "status": "unavailable"
+      },
+      "kind": "03a_stage3_branch_analysis_package",
+      "late_window_metrics": {
+        "branch": "F04",
+        "metrics": {
+          "inventory_slope_kg_per_iteration": null,
+          "inventory_std_kg": null,
+          "mass_imbalance_median_abs_pct": null,
+          "mass_imbalance_p95_abs_pct": null,
+          "residual_median": null,
+          "residual_p95": null
+        },
+        "reason": "Local Stage-3-named report files were found, but their run/branch lineage does not map to this server-2 queue; endpoint points cannot be promoted to late-window statistics. Continuous residual history is also unavailable.",
+        "report_history_status": "found_unmapped_local_artifacts",
+        "residual_history_status": "unavailable",
+        "status": "unavailable"
+      },
+      "report_history_status": "found_unmapped_local_artifacts",
+      "residual_history_status": "unavailable",
+      "residual_point_count": 0,
+      "residual_stage_count": 1
+    },
+    {
+      "artifacts": {
+        "checkpoints_csv": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-native-queue/branches/F05/branch-checkpoints.csv",
+        "late_window_metrics_json": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-native-queue/branches/F05/branch-late-window-metrics.json",
+        "plots": {
+          "brine_hydraulics": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F05/05-brine-pressure-flow.png",
+          "cross_plots": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F05/06-cross-plots.png",
+          "liquid_distribution": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F05/04-liquid-distribution.png",
+          "phase_routing": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F05/03-phase-routing.png",
+          "physical": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F05/02-mass-imbalance-inventory.png",
+          "ramp_response": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F05/07-ramp-response.png",
+          "residuals": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F05/01-residuals.png"
+        },
+        "report_history_json": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-native-queue/branches/F05/branch-report-history-evidence.json",
+        "residual_evidence_json": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-native-queue/branches/F05/branch-residual-evidence.json",
+        "residual_points_csv": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-native-queue/branches/F05/branch-residual-points.csv"
+      },
+      "branch": "F05",
+      "branch_metadata": {
+        "full_mixture_100pct_iterations": 3000,
+        "inlet_schedule": "100% immediately",
+        "mixture_startup": "full Mixture immediately",
+        "momentum_urf": 0.3,
+        "native_iterations": 3000,
+        "status": "COMPLETED",
+        "terminal_note": "One full-Mixture 100% native stage completed."
+      },
+      "checkpoint_count": 1,
+      "endpoint_metrics": {
+        "basis": "last available endpoint row; not a late-window metric",
+        "brine_entry_static_pressure_margin_kpa": 1.403541,
+        "iteration": 3000,
+        "liquid_inventory_total_kg": 317.751712,
+        "load_percent": 100,
+        "mass_imbalance_abs_pct": 14.336444,
+        "mass_imbalance_signed_pct": -14.336444,
+        "status": "endpoint_only"
+      },
+      "kind": "03a_stage3_branch_analysis_package",
+      "late_window_metrics": {
+        "branch": "F05",
+        "metrics": {
+          "inventory_slope_kg_per_iteration": null,
+          "inventory_std_kg": null,
+          "mass_imbalance_median_abs_pct": null,
+          "mass_imbalance_p95_abs_pct": null,
+          "residual_median": null,
+          "residual_p95": null
+        },
+        "reason": "Local Stage-3-named report files were found, but their run/branch lineage does not map to this server-2 queue; endpoint points cannot be promoted to late-window statistics. Continuous residual history is also unavailable.",
+        "report_history_status": "found_unmapped_local_artifacts",
+        "residual_history_status": "unavailable",
+        "status": "unavailable"
+      },
+      "report_history_status": "found_unmapped_local_artifacts",
+      "residual_history_status": "unavailable",
+      "residual_point_count": 1,
+      "residual_stage_count": 1
+    },
+    {
+      "artifacts": {
+        "checkpoints_csv": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-native-queue/branches/F06/branch-checkpoints.csv",
+        "late_window_metrics_json": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-native-queue/branches/F06/branch-late-window-metrics.json",
+        "plots": {
+          "brine_hydraulics": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F06/05-brine-pressure-flow.png",
+          "cross_plots": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F06/06-cross-plots.png",
+          "liquid_distribution": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F06/04-liquid-distribution.png",
+          "phase_routing": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F06/03-phase-routing.png",
+          "physical": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F06/02-mass-imbalance-inventory.png",
+          "ramp_response": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F06/07-ramp-response.png",
+          "residuals": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F06/01-residuals.png"
+        },
+        "report_history_json": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-native-queue/branches/F06/branch-report-history-evidence.json",
+        "residual_evidence_json": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-native-queue/branches/F06/branch-residual-evidence.json",
+        "residual_points_csv": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-native-queue/branches/F06/branch-residual-points.csv"
+      },
+      "branch": "F06",
+      "branch_metadata": {
+        "full_mixture_100pct_iterations": 3000,
+        "inlet_schedule": "100% immediately",
+        "mixture_startup": "carrier-first, then full Mixture",
+        "momentum_urf": 0.3,
+        "native_iterations": 6000,
+        "status": "COMPLETED",
+        "terminal_note": "Carrier 100% stage and no-reinitialization full-Mixture 100% stage completed."
+      },
+      "checkpoint_count": 1,
+      "endpoint_metrics": {
+        "basis": "last available endpoint row; not a late-window metric",
+        "brine_entry_static_pressure_margin_kpa": 1.561185,
+        "iteration": 6000,
+        "liquid_inventory_total_kg": 376.626583,
+        "load_percent": 100,
+        "mass_imbalance_abs_pct": 14.382137,
+        "mass_imbalance_signed_pct": -14.382137,
+        "status": "endpoint_only"
+      },
+      "kind": "03a_stage3_branch_analysis_package",
+      "late_window_metrics": {
+        "branch": "F06",
+        "metrics": {
+          "inventory_slope_kg_per_iteration": null,
+          "inventory_std_kg": null,
+          "mass_imbalance_median_abs_pct": null,
+          "mass_imbalance_p95_abs_pct": null,
+          "residual_median": null,
+          "residual_p95": null
+        },
+        "reason": "Local Stage-3-named report files were found, but their run/branch lineage does not map to this server-2 queue; endpoint points cannot be promoted to late-window statistics. Continuous residual history is also unavailable.",
+        "report_history_status": "found_unmapped_local_artifacts",
+        "residual_history_status": "unavailable",
+        "status": "unavailable"
+      },
+      "report_history_status": "found_unmapped_local_artifacts",
+      "residual_history_status": "unavailable",
+      "residual_point_count": 0,
+      "residual_stage_count": 2
+    },
+    {
+      "artifacts": {
+        "checkpoints_csv": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-native-queue/branches/F11/branch-checkpoints.csv",
+        "late_window_metrics_json": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-native-queue/branches/F11/branch-late-window-metrics.json",
+        "plots": {
+          "brine_hydraulics": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F11/05-brine-pressure-flow.png",
+          "cross_plots": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F11/06-cross-plots.png",
+          "liquid_distribution": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F11/04-liquid-distribution.png",
+          "phase_routing": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F11/03-phase-routing.png",
+          "physical": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F11/02-mass-imbalance-inventory.png",
+          "ramp_response": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F11/07-ramp-response.png",
+          "residuals": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage3/native-queue/F11/01-residuals.png"
+        },
+        "report_history_json": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-native-queue/branches/F11/branch-report-history-evidence.json",
+        "residual_evidence_json": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-native-queue/branches/F11/branch-residual-evidence.json",
+        "residual_points_csv": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-native-queue/branches/F11/branch-residual-points.csv"
+      },
+      "branch": "F11",
+      "branch_metadata": {
+        "full_mixture_100pct_iterations": 3000,
+        "inlet_schedule": "10 \u2192 20 \u2192 40 \u2192 80 \u2192 100%",
+        "mixture_startup": "full Mixture immediately",
+        "momentum_urf": 0.3,
+        "native_iterations": 15000,
+        "status": "COMPLETED",
+        "terminal_note": "Five 3,000-iteration full-Mixture loading stages completed."
+      },
+      "checkpoint_count": 5,
+      "endpoint_metrics": {
+        "basis": "last available endpoint row; not a late-window metric",
+        "brine_entry_static_pressure_margin_kpa": 1.690391,
+        "iteration": 15000,
+        "liquid_inventory_total_kg": 345.365472,
+        "load_percent": 100,
+        "mass_imbalance_abs_pct": 12.377303,
+        "mass_imbalance_signed_pct": -12.377303,
+        "status": "endpoint_only"
+      },
+      "kind": "03a_stage3_branch_analysis_package",
+      "late_window_metrics": {
+        "branch": "F11",
+        "metrics": {
+          "inventory_slope_kg_per_iteration": null,
+          "inventory_std_kg": null,
+          "mass_imbalance_median_abs_pct": null,
+          "mass_imbalance_p95_abs_pct": null,
+          "residual_median": null,
+          "residual_p95": null
+        },
+        "reason": "Local Stage-3-named report files were found, but their run/branch lineage does not map to this server-2 queue; endpoint points cannot be promoted to late-window statistics. Continuous residual history is also unavailable.",
+        "report_history_status": "found_unmapped_local_artifacts",
+        "residual_history_status": "unavailable",
+        "status": "unavailable"
+      },
+      "report_history_status": "found_unmapped_local_artifacts",
+      "residual_history_status": "unavailable",
+      "residual_point_count": 0,
+      "residual_stage_count": 5
+    }
+  ],
+  "cross_branch_summary_csv": "Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/evidence/03a-stage3-native-queue/03a-stage3-native-queue-cross-branch-summary.csv",
+  "discovered_stage3_out_file_count": 90,
+  "kind": "03a_stage3_native_queue_branch_package_index",
+  "late_window_summary_reason": "No continuous residual history is available, and the locally discovered Stage-3-named report files cannot be mapped to the server-2 queue; the cross-branch table exposes null late-window metrics and retains endpoint values separately as endpoint-only context.",
+  "late_window_summary_status": "unavailable",
+  "scope": {
+    "analysis_mode": "offline read-only branch-by-branch endpoint analysis",
+    "branches": [
+      "F02",
+      "F04",
+      "F05",
+      "F06",
+      "F11"
+    ],
+    "interpretation_status": "pending user direction"
+  }
+}

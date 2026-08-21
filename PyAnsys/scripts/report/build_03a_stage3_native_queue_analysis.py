@@ -42,6 +42,7 @@ DEFAULT_RUN_DIR = (
 DEFAULT_READBACK_DIR = DEFAULT_RUN_DIR / "post_simulation_analysis"
 DEFAULT_EVIDENCE_DIR = REPORT_ROOT / "evidence" / "03a-stage3-native-queue"
 DEFAULT_PLOT_DIR = REPORT_ROOT / "plots" / "03a-stage3" / "native-queue"
+DEFAULT_ARTIFACT_MANIFEST = DEFAULT_EVIDENCE_DIR / "03a-stage3-local-artifact-discovery.json"
 
 BRANCH_ORDER = ("F02", "F04", "F05", "F06", "F11")
 EXPECTED_RESIDUALS = (
@@ -151,6 +152,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--readback-dir", type=Path, default=DEFAULT_READBACK_DIR)
     parser.add_argument("--evidence-dir", type=Path, default=DEFAULT_EVIDENCE_DIR)
     parser.add_argument("--plot-dir", type=Path, default=DEFAULT_PLOT_DIR)
+    parser.add_argument("--artifact-manifest", type=Path, default=DEFAULT_ARTIFACT_MANIFEST)
     parser.add_argument("--no-plots", action="store_true")
     return parser
 
@@ -472,16 +474,51 @@ def load_residual_status(run_dir: Path) -> dict[str, Any]:
     }
 
 
-def report_history_status(run_dir: Path) -> dict[str, Any]:
+def report_history_status(run_dir: Path, artifact_manifest_path: Path | None = None) -> dict[str, Any]:
     """Describe the report-file history evidence without inventing history."""
     local_out_files = sorted(
         path.name
         for path in run_dir.rglob("*.out")
         if path.is_file()
     ) if run_dir.exists() else []
+    manifest: dict[str, Any] | None = None
+    if artifact_manifest_path is not None and artifact_manifest_path.exists():
+        try:
+            manifest = json.loads(artifact_manifest_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            manifest = None
+
+    if manifest is not None:
+        observations = manifest.get("observations", {})
+        stage3_count = observations.get("stage3_report_file_count", 0)
+        stage3_unique = observations.get("stage3_report_canonical_name_count", 0)
+        return {
+            "kind": "03a_stage3_report_history_evidence_status",
+            "status": "found_unmapped_local_artifacts",
+            "continuous_history_status": "unavailable",
+            "method": "PyAnsys/scripts/report/discover_03a_stage3_artifacts.py",
+            "local_stage3_out_files": local_out_files,
+            "discovered_stage3_out_file_count": stage3_count,
+            "discovered_stage3_out_canonical_name_count": stage3_unique,
+            "artifact_discovery_manifest": relative_path(artifact_manifest_path),
+            "artifact_discovery_status": manifest.get("artifact_status"),
+            "server2_fixed_queue_history_usable": bool(
+                manifest.get("server2_fixed_queue_history_usable", False)
+            ),
+            "reason": (
+                f"The recursive local artifact discovery found {stage3_count} Stage-3-named "
+                f".out files ({stage3_unique} canonical report names), but their filenames "
+                "do not carry the server-2 fixed-queue run stamp or branch token. They are "
+                "discovery evidence only; no late-window history is attributed to F02/F04/"
+                "F05/F06/F11."
+            ),
+            "requires": "positive run/branch lineage or read-only remote Fluent/report-file access; no rerun is implied",
+        }
+
     return {
         "kind": "03a_stage3_report_history_evidence_status",
         "status": "unavailable",
+        "continuous_history_status": "unavailable",
         "method": "PyAnsys/scripts/inspection/extract_report_plot_histories.py",
         "local_stage3_out_files": local_out_files,
         "reason": (
@@ -883,6 +920,7 @@ def main() -> int:
     readback_dir = args.readback_dir.expanduser().resolve()
     evidence_dir = args.evidence_dir.expanduser().resolve()
     plot_dir = args.plot_dir.expanduser().resolve()
+    artifact_manifest = args.artifact_manifest.expanduser().resolve()
 
     rows = load_checkpoint_rows(checkpoint_csv)
     readbacks = load_readbacks(readback_dir)
@@ -897,7 +935,7 @@ def main() -> int:
     write_derived_csv(derived_csv, rows)
     write_cross_validation_csv(validation_csv, validation_rows)
     write_json(residual_json, residual_status)
-    report_history = report_history_status(run_dir)
+    report_history = report_history_status(run_dir, artifact_manifest)
     write_json(report_history_json, report_history)
 
     figures = [] if args.no_plots else build_figures(rows, residual_status, plot_dir)

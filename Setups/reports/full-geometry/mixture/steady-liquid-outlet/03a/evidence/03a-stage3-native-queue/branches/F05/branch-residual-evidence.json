@@ -1,0 +1,38 @@
+{
+  "branch": "F05",
+  "points": [
+    {
+      "equations": {
+        "continuity": 0.07880965835227616,
+        "epsilon": 0.003274444904401666,
+        "k": 0.0005961017596141338,
+        "vf-phase-2": 0.001396876174705525,
+        "x-velocity": 1.61021335195866e-05,
+        "y-velocity": 1.764114673038315e-05,
+        "z-velocity": 1.766177319562787e-05
+      },
+      "stage": "full-mixture-100pct"
+    }
+  ],
+  "stages": [
+    {
+      "branch": "F05",
+      "endpoint_residual_point": {
+        "continuity": 0.07880965835227616,
+        "epsilon": 0.003274444904401666,
+        "k": 0.0005961017596141338,
+        "vf-phase-2": 0.001396876174705525,
+        "x-velocity": 1.61021335195866e-05,
+        "y-velocity": 1.764114673038315e-05,
+        "z-velocity": 1.766177319562787e-05
+      },
+      "endpoint_residual_point_available": true,
+      "native_export_exists": false,
+      "native_export_status": "missing",
+      "probe_file": "F05-full-mixture-100pct-end-residual-probe.json",
+      "retained_residual_monitor_available": false,
+      "retained_residual_monitor_note": "residual monitor is absent from this checkpoint.",
+      "stage": "full-mixture-100pct"
+    }
+  ]
+}

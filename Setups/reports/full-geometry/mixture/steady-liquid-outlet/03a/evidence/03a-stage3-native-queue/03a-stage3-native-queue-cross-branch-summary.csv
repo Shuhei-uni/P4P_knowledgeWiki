@@ -1,0 +1,6 @@
+branch,terminal_status,full_mixture_100pct_iterations,residual_history_status,report_history_status,late_window_metrics_status,late_window_mass_imbalance_median_abs_pct,late_window_mass_imbalance_p95_abs_pct,late_window_inventory_slope_kg_per_iteration,endpoint_abs_imbalance_pct,endpoint_liquid_inventory_kg,endpoint_basis,evidence_strength
+F02,PARTIAL,0,unavailable,found_unmapped_local_artifacts,unavailable,,,,,,no valid full-Mixture endpoint row in the selected evidence bundle,partial
+F04,PARTIAL,0,unavailable,found_unmapped_local_artifacts,unavailable,,,,,,no valid full-Mixture endpoint row in the selected evidence bundle,partial
+F05,COMPLETED,3000,unavailable,found_unmapped_local_artifacts,unavailable,,,,14.336444,317.751712,last available endpoint row; not a late-window metric,partial
+F06,COMPLETED,3000,unavailable,found_unmapped_local_artifacts,unavailable,,,,14.382137,376.626583,last available endpoint row; not a late-window metric,partial
+F11,COMPLETED,3000,unavailable,found_unmapped_local_artifacts,unavailable,,,,12.377303,345.365472,last available endpoint row; not a late-window metric,partial
