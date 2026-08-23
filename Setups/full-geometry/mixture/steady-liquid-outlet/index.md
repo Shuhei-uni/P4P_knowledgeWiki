@@ -7,6 +7,7 @@ This is the canonical setup-side home for the full-geometry steady Mixture inves
 - [`02c` — unprimed brine-outlet pressure sensitivity](02c-mixture-brine-outlet-pressure-sensitivity-unprimed.md)
 - [`02e` — Y010 outlet-boundary characterization](02e-mixture-y010-brine-outlet-boundary-characterization.md)
 - [`03A` — 08b-parity full-geometry steady Mixture baseline](03a-08b-parity-full-geometry-baseline.md) — **draft / parity preflight required before run**
+- [`03A Stage 4` — promising-state development](03a-stage4-promising-state-development.md) — **active long-continuation/model-form comparison**
 - [`03B` — same-field brine-pressure continuation](03b-brine-pressure-continuation.md) — **draft / starts only from a usable 03A endpoint**
 
 Their original detailed records are retained as [compatibility snapshots](../../../compatibility-snapshots/index.md) so no execution history is lost during the structural migration.

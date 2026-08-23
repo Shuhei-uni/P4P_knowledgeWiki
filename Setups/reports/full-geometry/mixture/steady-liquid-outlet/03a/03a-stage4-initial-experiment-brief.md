@@ -1,5 +1,48 @@
 # 03A Stage 4 — Initial Experiment Brief
 
+## Execution status — S4-03 recovery interrupted
+
+The first authoritative native queue was submitted at `2026-08-22T12:30:11Z`
+under the non-overwriting label
+`03A-stage4-S4-01-through-S4-04-native-20260822T123011Z`.  It was designed to
+cold-load the exact F05, F06, and F11 Stage-3 case/data parents for S4-01
+through S4-04 and run them sequentially for `+30,000` Fluent iterations each.
+S4-04 changes only RNG to standard `k-epsilon`; the preparation readback found
+no scientific delta for S4-01 through S4-03.
+
+At submission, the selected friend host was healthy on Fluent 2025 R2 with 18
+contiguous solver ranks and approximately 694 GB free.  Fluent owns the solve,
+5,000-iteration paired autosaves, transcripts, residual history, physical
+monitor histories, and final case/data writes.
+
+A client transport failure at `2026-08-22T20:35:52Z` ended the original local
+owner after S4-01 had completed and while S4-02 was running.  Fluent's native
+journal continued to the exact S4-02 target at cumulative iteration `36,000`,
+then reported a journal-read error before writing the named endpoint, exporting
+residuals or transitioning to S4-03.  The only complete native S4-02 autosave is
+at cumulative iteration `35,000` (`+29,000`).  A later uniquely named live-field
+save is preserved only as forensic evidence because its RP iteration readback
+cannot be reconciled with the native-console count.
+
+Recovery attempt `20260823T125548Z` independently cold-prepared S4-03 and S4-04
+from the exact same checksum-verified F11 iteration-15,000 case/data pair.
+S4-03 retained RNG `k-epsilon`; S4-04 changed only to standard `k-epsilon` and
+was prepared to cold-load the F11 parent rather than the S4-03 result.  S4-03
+reached cumulative iteration 42,547 (`+27,547`) before a transport timeout
+stopped the owner.  Complete paired autosaves exist through cumulative
+iteration 40,000 (`+25,000`), but the 45,000 target and named endpoint are
+absent.  S4-04 was not submitted.  No numerical fatal signature was recorded,
+and no block was replayed.  Every current result remains diagnostic/unresolved
+pending checksum, cold-readback and physical-history analysis.  See the
+[execution evidence report](03a-stage4-native-queue-execution-2026-08-23.md).
+
+The exact execution contract and parent-gating rules are recorded in the
+[canonical Stage-4 setup plan](../../../../../full-geometry/mixture/steady-liquid-outlet/03a-stage4-promising-state-development.md).
+
+S4-05 and S4-06 remain gated because the exact F09 40% pair has not yet been
+proved accessible on an authenticated available host.  They were not part of
+the stopped S4-01-through-S4-04 or recovery queues.
+
 ## Overall objective
 
 Develop the most promising **Stage-3 states** rather than restarting the search.

@@ -23,3 +23,16 @@ Corresponding setup campaign: [03A setup campaign](../../../../../full-geometry/
 - [Native queue branch-by-branch results template](03a-stage3-native-queue-results-template.md)
 
 All figures associated with this setup are under [`plots/`](plots/).
+
+## Stage 4 — promising-state development
+
+- [Initial experiment brief and interrupted execution status](03a-stage4-initial-experiment-brief.md)
+- [Native-queue execution and transport-recovery evidence](03a-stage4-native-queue-execution-2026-08-23.md)
+- [Canonical Stage-4 setup plan](../../../../../full-geometry/mixture/steady-liquid-outlet/03a-stage4-promising-state-development.md)
+
+The original S4-01-through-S4-04 queue stopped after completing S4-02's
+iteration budget but before its endpoint write.  A non-overwriting recovery
+queue preserved that field as unresolved forensic evidence.  Its independent
+S4-03 branch stopped at `+27,547` with complete paired autosaves through
+`+25,000`; S4-04 was prepared but not submitted.  S4-05/S4-06 remain gated on
+exact F09-parent access.
