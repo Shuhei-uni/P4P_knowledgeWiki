@@ -1,126 +1,58 @@
 ---
 name: cfd-numerical-analysis
-description: "Assess whether a CFD simulation is numerically trustworthy enough to answer its experiment question. Use for residual/monitor behaviour, conservation, stationarity, mesh/timestep/iteration sensitivity, solver instability, reversed flow, Courant behaviour, and separating numerical failure from physical conclusions."
+description: "Turn CFD histories and question-specific numerical outputs into plots, tables, and bounded numerical evidence. Use after a run to understand residuals, mass balance, physical monitors, and other simulation behaviour over iteration/time before physical interpretation."
 ---
 
 # CFD Numerical Analysis
 
-Answer one question:
+Understand how the simulation behaved over the run before trying to explain why.
 
-> Is this CFD evidence numerically adequate for the claim we want to make?
+The default evidence is not one final number. Prefer iteration- or time-based histories that show how important quantities evolved.
 
-Do not equate solver completion with physical validity, and do not equate imperfect residual convergence with automatic failure.
+## Start from the experiment question
 
-## Start from the intended claim
+Read the setup and the evidence plan that was designed with it. Focus on the numerical behaviour that matters for that hypothesis.
 
-Read the experiment question and analysis plan. Numerical adequacy is claim-specific.
+At minimum, inspect the basics when available: scaled residual histories, mass balance or imbalance, and important physical monitors. Add question-specific quantities only when they help answer the experiment.
 
-Examples:
+## Show the history
 
-- a diagnostic run may only need to demonstrate that one method crashes later than another;
-- a ranking of separator efficiency needs much stronger stationarity and conservation evidence;
-- a mesh-independence claim requires a mesh study, not merely low residuals.
+Plots should usually place iteration or physical time on the x-axis.
 
-## Evidence categories
+A final snapshot can be useful as a summary, but it should not replace the history when the quantity is noisy, drifting, oscillatory, or still changing. One endpoint can hide behaviour that completely changes the interpretation.
 
-Assess as applicable:
+Preserve raw structure. Do not silently remove divergent tails, smooth away oscillations, interpolate missing sections, or choose a convenient window simply because it looks cleaner.
 
-### Iterative / nonlinear behaviour
+Use concise tables alongside plots when exact values or cross-case comparisons are useful.
 
-- scaled residual histories;
-- monotonic, oscillatory, plateaued, diverging, or cyclic behaviour;
-- physical monitor drift;
-- convergence within each transient timestep;
-- whether additional iterations materially change the quantity of interest.
+## Describe before diagnosing
 
-### Conservation and routing
+Focus first on observations that the data clearly support: whether a quantity falls, rises, drifts, oscillates, plateaus, changes regime, or remains broadly bounded.
 
-- total mass balance;
-- phase-specific balance when meaningful;
-- inlet/outlet sign convention;
-- inventory accumulation for transient cases;
-- whether apparent imbalance is expected storage or genuine closure failure.
+Be cautious about sophisticated convergence diagnoses. Noisy CFD histories can be difficult to interpret reliably, and an apparent pattern does not by itself establish its cause.
 
-### Stability and solver health
+Do not jump from an oscillating residual to a physics conclusion or from solver completion to numerical credibility. Describe the observed behaviour and keep stronger explanations as hypotheses unless additional evidence supports them.
 
-- FPEs;
-- AMG divergence;
-- turbulent-viscosity limiting;
-- reversed-flow events;
-- Courant/interface-Courant behaviour;
-- clipping/limiting;
-- nonphysical values;
-- stalled or repeatedly recovering solver state.
+## Compare cases carefully
 
-### Independence / verification
+For linked experiments, compare like with like: same metric definitions, zones, units, sign conventions, and meaningful iteration/time bases.
 
-- iteration-window independence;
-- timestep sensitivity;
-- mesh sensitivity;
-- initialization sensitivity;
-- discretization sensitivity;
-- repeated/restarted consistency where appropriate.
+Show the individual histories when overlaying cases would hide important behaviour. The campaign should tell a numerical story, not collapse everything into one endpoint ranking.
 
-## Distinguish steady from transient logic
+## Use lightweight statistical help when useful
 
-For steady simulations, ask whether monitored quantities approach a stable fixed or bounded state appropriate to the question.
+When raw histories are too noisy to see a broad tendency, call `statistical-analysis` for simple visual aids such as moving averages, rough fitted trends, percentile envelopes, or variability bands.
 
-For transient simulations, do not demand constant instantaneous values. Ask instead whether:
+Keep the raw data visible and treat these transforms as aids to seeing the data, not as replacement evidence.
 
-- the startup transient has passed;
-- the required physical horizon is long enough;
-- statistics/time averages are stable over the chosen window;
-- periodic or broadband unsteadiness is resolved rather than numerical noise;
-- timestep and inner-iteration treatment are adequate.
+## Visualise the simulation
 
-## Do not overuse universal thresholds
-
-Residual targets and mass-balance tolerances depend on the problem, quantity of interest, solver formulation, and project criteria. Use declared project criteria when available.
-
-If no criterion exists, report numerical evidence and uncertainty rather than silently inventing a pass/fail threshold. You may propose a sensitivity test that would resolve the uncertainty.
-
-## Diagnose failure mode
-
-When a case is unusable, classify why:
-
-- **implementation/setup mismatch**;
-- **numerical instability**;
-- **insufficient iterations/physical time**;
-- **insufficient timestep resolution**;
-- **insufficient mesh resolution**;
-- **non-stationary physical solution under a steady formulation**;
-- **missing evidence**;
-- **unknown / requires targeted diagnostic**.
-
-Do not jump from "residual oscillates" directly to "physics model wrong".
-
-## Use comparisons carefully
-
-Compare like with like:
-
-- same metric definition and zones;
-- comparable iteration or physical-time windows;
-- same sign convention and normalization;
-- explicit note when one run failed early;
-- no interpolation across missing failure segments unless scientifically justified and declared.
-
-## Delegate adversarial checks
-
-For consequential numerical conclusions, use a subagent or `interrogate` to challenge:
-
-- whether the selected window is cherry-picked;
-- whether the balance definition is correct;
-- whether an apparent improvement is just longer runtime;
-- whether two cases differ in more than the claimed numerical variable.
+Use contours and other field visualisations planned by the experiment when they help reveal the behaviour being tested. Numerical histories and spatial visualisations should complement each other when both are relevant.
 
 ## Output
 
-Return:
+Return the important plots, supporting tables, exact source data and transformations, and a concise set of neutral numerical observations.
 
-1. numerical status: `adequate`, `adequate_for_limited_claim`, `insufficient`, or `failed`;
-2. strongest evidence supporting that status;
-3. the exact claims that are safe/unsafe;
-4. numerical limitations;
-5. the smallest next numerical test needed, if unresolved.
+Make clear what the histories genuinely show, what remains uncertain, and what numerical limitations matter for `interpret-experiment`.
 
-Keep physics interpretation separate. Hand the bounded numerical status to `interpret-experiment` and `next-action`.
+Physical meaning belongs downstream.
