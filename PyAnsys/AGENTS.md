@@ -30,13 +30,15 @@ from another shell, and do not hard-code a different clone's absolute path.
 - `src/pyansys_fluent/`: reusable library and extraction logic.
 - `scripts/connection/`: connection and bootstrap checks.
 - `scripts/inspection/`: non-mutating discovery, snapshots, and probes.
-- `scripts/setup/`: thin case-specific setup orchestration.
+- `scripts/setup/`: thin case-specific setup/run orchestration.
+- `server-profiles/`: non-secret per-server remote directory knowledge; routing
+  and filesystem context only, never case identity.
 - Report/post-processing helpers that were tied to retired campaign trees are
   not kept as a second active layer; current read-only checks live in
   `scripts/inspection/` and reusable modules under `src/`.
-- `knowledge/fluent-settings/native_run_and_autosave.md`: the durable
-  native-run and reconnection policy. Keep other cross-case rules in focused
-  skills or source modules rather than rebuilding a large settings tree.
+- `knowledge/fluent-settings/native_run_and_autosave.md`: the durable current
+  run-supervision, recovery, and autosave policy. The legacy filename is kept
+  for stable links; Python-supervised execution is now the default.
 - `output/`: generated extracts and diagnostics; never the scientific authority.
 
 Prefer an existing helper or proven script before writing campaign-specific
@@ -69,24 +71,36 @@ old path is valid or that the model is disabled.
 Readback mismatch is a failure even when the setter returned without an
 exception. Use these failure labels: `order/dependency issue`,
 `path/version issue`, `invalid value/format issue`, `PyFluent wrapper
-limitation`, `requires TUI fallback`, or `requires manual GUI cleanup`.
+limitation`, `requires human-approved TUI/journal fallback`, or `requires
+manual GUI cleanup`.
 
 ## CASE → INITIALISE / RUN
 
-Setup construction and long-run ownership are separate.
+Setup construction and long-run supervision are separate responsibilities.
 
 - A setup script loads an explicit parent, verifies remote inputs, inspects the
   current state, applies only the selected delta, verifies critical invariants,
-  and writes a case-only `.cas.h5` artifact.
-- Choose the simplest robust run mechanism for the experiment: direct Fluent
-  commands, a Fluent-native journal/batch, or bounded Python-supervised blocks
-  when a genuine decision is required between blocks.
-- Fluent should own long iteration and native autosave. Do not add a blanket
-  laptop-side Python iteration/checkpoint loop. The documented 03A Stage-3
-  F01–F12 adaptive blocking workflow is a narrow exception, not a general
-  runner; follow `knowledge/fluent-settings/native_run_and_autosave.md`.
+  and writes the required case artifact.
+- For autonomous work inside `scientific-phase-loop`, the default run mechanism
+  is a Python/PyFluent runner supervised by an agent using `supervise-fluent-run`.
+- The supervising agent stays with the runner terminal for the planned horizon,
+  remains mostly read-only while Fluent is advancing, wakes on meaningful
+  events/errors, and verifies the final data before handoff.
+- Prefer one clear Python-issued run for the planned horizon over fine-grained
+  one-iteration polling loops. Periodic recovery artifacts may still be
+  configured when the experiment requires them, but the agent should not
+  micromanage normal solver progress.
+- TUI-driven iteration, Fluent journal/batch submission, or GUI-owned execution
+  are exceptions that require explicit human approval for that run. Do not use
+  them automatically as a fallback when the Python/PyFluent path fails.
+- A floating-point error, initialization failure, Fluent crash, unreconciled
+  connection/run state, or final-save failure is a blocker: preserve the last
+  verified state and return the execution evidence for a rethink. Poor
+  residuals or scientifically unpromising behaviour are not execution stop
+  conditions when Fluent can still continue.
 - Record the actual parent identity, controlled change, readback, case artifact,
-  run method, requested budget, observed state, and unresolved uncertainty.
+  Python runner, requested budget, observed final state, remote artifact paths,
+  and unresolved execution uncertainty.
 
 ## High-risk model guardrails
 
@@ -114,9 +128,10 @@ project log inside this folder.
 ## Troubleshooting and delegation
 
 When a deep path fails, inspect the live branch and allowed values, check the
-relevant local knowledge, isolate the smallest failing operation, and use a TUI
-fallback only after classifying the Settings/API failure. Do not rerun a whole
-setup blindly.
+relevant local knowledge, and isolate the smallest failing operation. If the
+Python/PyFluent path cannot perform the required operation, classify that
+failure and return it. TUI or journal fallback requires explicit human approval;
+do not silently take that route.
 
 Use a bounded specialist review or probe only when it answers a concrete
 uncertainty. There is no mandatory multi-agent ceremony; the main agent owns
