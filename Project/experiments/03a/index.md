@@ -16,6 +16,7 @@ This is the Project-layer tracer for the full-geometry Mixture `03A` campaign. I
 - [Stage-3 results](stage-03/results.md)
 - [Stage-4 setup](stage-04/setup.md)
 - [Stage-4 results](stage-04/results.md)
+- [Historical Stage-2 screening report](stage-02/source-screening-report.md)
 
 ## Source and artifact authorities
 

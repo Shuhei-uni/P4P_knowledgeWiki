@@ -1,6 +1,6 @@
 # Project
 
-This is the default entry point for the project's current scientific truth. It is intentionally short: detailed setup lineage remains in `Setups/`, reusable methods remain in `CFD_wiki/`, executable work and machine evidence remain in `PyAnsys/`, and chronological work history remains in Git and the retained compatibility records.
+This is the default entry point for the project's current scientific truth. It is intentionally short: detailed setup lineage remains in `Setups/`, reusable methods remain in `CFD_wiki/`, executable work and machine evidence remain in `PyAnsys/`, and the retained written historical corpus is grouped below without replacing its legacy sources.
 
 ## What are we trying to answer now?
 
@@ -25,6 +25,22 @@ The original 03A setup/report records remain frozen source and provenance record
 Stage 4 produced completed diagnostic continuation evidence for S4-01 and S4-03, completed-budget but endpoint-incomplete evidence for S4-02, and prepared-only evidence for S4-04. The available records do not yet establish physical convergence, a report-ready baseline, or eligibility for a new parent branch.
 
 The broader evidence boundary is unchanged: the documented longer runs are diagnostic, and low-iteration or incomplete runs are setup/debug history. Separator efficiency, liquid carryover, pressure drop, and inlet-regime improvement must not be presented as validated performance until the numerical and comparison gates in [V&V limits](vnv.md) are met.
+
+## Historical written memory
+
+The Project layer now exposes the substantive written experiment record that
+was previously scattered across setup, report, observation, meeting, and
+technical-note locations. The copies preserve legacy IDs, wording, evidence
+status, and uncertainty labels; the original records remain available as
+frozen sources, while raw Fluent and machine-generated artifacts stay with
+their existing owners.
+
+- [historical experiment corpus](experiments/README.md)
+- [cross-experiment observations](observations/index.md)
+- [mesh, DPM, and wall-film meeting record](technical/mesh-conversion-dpm-mass-sensitivity-meeting-report.md)
+- [spiral-inlet geometry record](technical/purnanto-spiral-inlet-geometry.md)
+- [Skoog application guardrails](technical/skoog-application-guardrails.md)
+- [mesh-trial technical audit](technical/mesh-trial1-mesh-audit.md)
 
 ## What remains unresolved?
 

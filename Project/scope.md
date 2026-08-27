@@ -27,7 +27,7 @@ Lower-water initialization and bottom-pool studies remain parked. A physical bri
 - full downstream steam-network modelling;
 - plant-wide operations beyond separator-relevant conditions;
 - non-separator hardware redesign that is not tied to the research objective;
-- reusable CFD methods, raw Fluent transcripts/settings dumps, and executable automation, which belong to [CFD_wiki](../CFD_wiki/) and [PyAnsys](../PyAnsys/) respectively.
+- reusable CFD methods, raw Fluent transcripts/settings dumps, and executable automation, which belong to [CFD_wiki](../CFD_wiki) and [PyAnsys](../PyAnsys) respectively.
 
 ## Ownership rule
 
