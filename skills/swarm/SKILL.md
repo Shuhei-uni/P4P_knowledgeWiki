@@ -1,77 +1,30 @@
 ---
 name: swarm
-description: "Split a broad read-only investigation into parallel subagent tasks and synthesize the results without bloating the main context. Use for repository audits, literature/evidence review, experiment-history reconstruction, or any task with separable discovery work."
+description: "Use parallel read-only subagents for broad literature, documentation, and research discovery, then synthesize the evidence into a compact scientific picture. Use when one research question can be split into several independent searches."
 ---
 
 # Swarm
 
-Use parallel subagents for breadth, not for duplicated bureaucracy.
+Use Swarm primarily to widen research coverage without filling the main context with every source read.
 
-## Suitable tasks
+It is especially useful for literature review, Fluent/documentation research, prior published modelling approaches, known numerical issues, physical mechanisms, and other broad evidence discovery that can be investigated independently.
 
-Use Swarm when a task can be decomposed into independent discovery questions, for example:
+## Split by useful research question
 
-- audit separate experiment families;
-- inspect setup, results, and observation sources in parallel;
-- compare several branches/cases;
-- review literature by topic;
-- inspect numerical, physical, and implementation evidence separately.
+Give each worker a narrow, non-overlapping question or search angle. Different workers might investigate different mechanisms, modelling approaches, solver guidance, or bodies of literature relevant to the same uncertainty.
 
-Do not use Swarm when multiple agents would mutate the same files/state or when one sequential dependency dominates the task.
+Keep workers read-only. They gather evidence; they do not decide the scientific direction or mutate the experiment.
 
-## Main-agent responsibilities
+## Ask for distilled evidence
 
-The main agent must:
+Each worker should return the important finding, the supporting source or repository path, important limitations or disagreement, and why the evidence matters to the question being investigated.
 
-- define the decomposition;
-- give each subagent a narrow scope and output format;
-- avoid overlapping write ownership;
-- synthesize findings;
-- resolve contradictions;
-- make final decisions;
-- perform final mutations/edits unless ownership is explicitly partitioned safely.
+Do not return full source dumps when a concise evidence summary and pointer will do.
 
-## Subagent brief
+## Synthesize centrally
 
-Each subagent should receive:
+The main agent combines the findings, resolves obvious duplication, preserves meaningful contradictions, and decides what the literature actually changes about the current hypothesis or experiment design.
 
-- the exact question;
-- paths/sources to inspect;
-- what not to do;
-- required evidence/path citations;
-- concise output schema.
+Literature can justify hypotheses and help choose informative simulations. Unless it is genuinely equivalent evidence, it does not substitute for running the project simulation and observing its data.
 
-Prefer outputs such as:
-
-```text
-Finding
-Evidence/path
-Confidence/uncertainty
-Why it matters
-```
-
-Do not ask subagents to create permanent coordination documents unless the task genuinely requires one.
-
-## Context protection
-
-Have subagents return distilled findings rather than full file dumps. The main context should retain conclusions and evidence pointers, not every intermediate read.
-
-## Synthesis
-
-Group findings into:
-
-- agreement;
-- unique evidence;
-- contradictions;
-- gaps;
-- required follow-up.
-
-When two agents disagree, inspect the underlying evidence or launch a targeted tie-breaker subagent. Do not average contradictory claims.
-
-## Write safety
-
-Default Swarm work to read-only. If parallel writes are needed, partition paths so no two agents edit the same file and require the main agent to review the combined diff.
-
-## Output
-
-Return one synthesized result that is smaller and more useful than the combined subagent outputs, with clear evidence pointers and unresolved gaps.
+Use another specialist when the work is no longer broad research discovery.
