@@ -1,136 +1,19 @@
-# Project experiment corpus
+# Project experiments
 
-This directory is the default home for the current experiment tracer and for lean, descriptive groupings of the retained historical written experiment record. A historical grouping is not a new claim or a new execution decision: it preserves the original setup, report, observation, figure, and uncertainty trail under a stable descriptive name.
+The retained Project experiment record is grouped by scientific phase. The
+phase folders contain executed evidence, including failed, rejected,
+non-converged, partial, and inconclusive runs. Setup-only plans and scaffolds
+that never produced a solve or substantive executed observation were removed;
+their exact history remains recoverable from Git.
 
-## Current tracer
+- [Phase 1 — Purnanto baseline and inlet exploration](phase-01-purnanto-baseline-and-inlet-exploration/index.md)
+- [Phase 2 — parity reset and pre-V2 qualification](phase-02-parity-reset-and-pre-v2-qualification/index.md)
+- [Phase 3 — DPM carryover and coupling](phase-03-dpm-carryover-and-coupling/index.md)
+- [Phase 4 — EWF wall-film mechanisms](phase-04-ewf-wall-film-mechanisms/index.md)
+- [Phase 5 — Full Geometry V2](phase-05-full-geometry-v2/index.md)
+- [Legacy reconstruction](legacy/legacy-bangma-reconstruction/historical-run.md)
 
-- [03A Stage-3/Stage-4 tracer](03a/index.md) — the pilot record for the two-file-per-stage contract and the first Project authority cutover.
-
-## Historical reference lineage
-
-These groups preserve the numbered and named Purnanto/reference branches. The
-legacy IDs remain in each record; similar-looking branches are intentionally
-kept separate when their geometry, inlet representation, model form, or
-evidence status differs.
-
-- [00 — paper/reference spiral BOC](purnanto-00-reference-spiral-boc/setup.md)
-- [00a — live setup audit](purnanto-00a-live-setup-audit/setup.md)
-- [01 — split mass-flow inlet](purnanto-01-split-massflow-inlet/setup.md)
-- [02 — split velocity inlet / brine outlet](purnanto-02-split-velocity-inlet-brine-outlet/setup.md)
-- [02b — split-inlet VOF transient](purnanto-02b-vof-split-inlet-transient/setup.md)
-- [03 — mixed wet-half velocity inlet](purnanto-03-mixed-wet-half-velocity-inlet/setup.md)
-- [03a — mixed wet-half water pool](purnanto-03a-mixed-wet-half-water-pool/setup.md)
-- [04 — mixed wet-half actual area](purnanto-04-mixed-wet-half-actual-area/setup.md)
-- [05 — complete two-phase, no brine outlet](purnanto-05-complete-two-phase-no-brine-outlet/setup.md)
-- [06 — pure-phase fixed velocity](purnanto-06-pure-phase-fixed-velocity/setup.md)
-- [07 — pure-phase actual area](purnanto-07-pure-phase-actual-area/setup.md)
-- [Purnantov2 08 — one-inlet mass-flow recreation](purnantov2-08-one-inlet-massflow-recreation/setup.md)
-- [Purnantov2 08a — steam-outlet placement](purnantov2-08a-steam-outlet-placement/setup.md)
-- [08b — parity split inlet](purnanto-08b-parity-split-inlet/setup.md)
-- [08c — inlet-loading sensitivity](purnanto-08c-inlet-loading-sensitivity/setup.md)
-- [09 — DPM sensitivity family](purnanto-09-dpm-sensitivity-family/setup.md)
-- [09a — deterministic DPM carryover](purnanto-09a-dpm-deterministic-carryover/setup.md)
-- [09b — stochastic DPM dispersion](purnanto-09b-dpm-stochastic-dispersion/setup.md)
-- [09c — two-way DPM coupling](purnanto-09c-two-way-dpm-coupling/setup.md)
-- [09cV2 — DPM partition control](purnanto-09cV2-dpm-partition-control/setup.md)
-- [09cV3 — fine-mist PSD](purnanto-09cV3-fine-mist-psd/setup.md)
-- [010V2 — clean EWF deposition control](purnanto-010V2-clean-ewf-deposition/setup.md)
-- [010V2a — EWF splash](purnanto-010V2a-ewf-splash/setup.md)
-- [010V2b — EWF edge separation](purnanto-010V2b-ewf-edge-separation/setup.md)
-- [010V2c — EWF particle stripping](purnanto-010V2c-ewf-particle-stripping/setup.md)
-- [010V2d — combined EWF mechanisms](purnanto-010V2d-ewf-combined-mechanisms/setup.md)
-- [010V2d-2 — combined EWF with global DPM](purnanto-010V2d-2-ewf-global-dpm/setup.md)
-- [10 — wall-film/DPM sensitivity family](purnanto-10-wallfilm-dpm-sensitivity/setup.md)
-- [10a — intended clean deposition control](purnanto-10a-ewf-clean-deposition-control/setup.md)
-- [10a — recorded splash-enabled preliminary run](purnanto-10a-splash-ewf-preliminary/setup.md)
-- [11 — combined wall-film/DPM plan](purnanto-11-combined-wallfilm-dpm/setup.md)
-- [12 — carrier-mesh sensitivity plan](purnanto-12-carrier-mesh-sensitivity/setup.md)
-
-## Full-geometry and model-form campaigns
-
-- [02c — Mixture pressure sensitivity](full-geometry-02c-mixture-pressure-sensitivity/setup.md)
-- [02d — VOF model-form sensitivity](full-geometry-vof-02d-model-form-sensitivity/setup.md)
-- [02e — Mixture outlet characterization](full-geometry-02e-mixture-outlet-characterization/setup.md)
-- [03A — current full-geometry Mixture tracer](03a/index.md)
-- [03b — brine-pressure continuation](full-geometry-03b-brine-pressure-continuation/setup.md)
-- [FG-MIX-T01 — transient liquid-outlet campaign](full-geometry-fg-mix-t01-transient-liquid-outlet/setup.md)
-
-## Other retained reconstruction
-
-- [BGM — legacy Bangma reconstruction](legacy-bangma-reconstruction/historical-run.md)
-
-## Cross-experiment observations
-
-Cross-case interpretations are kept separately so that an observation cannot
-silently become a global findings or progress database. Start with the
-[observation index](../observations/index.md).
-
-## Default record
-
-A selected experiment normally has only:
-
-```text
-Project/experiments/<campaign>/<experiment>/
-├── setup.md
-└── results.md
-```
-
-The experiment folder owns the scientific question, the controlled delta, the
-evidence packet, and the interpretation. Detailed setup lineage for retained
-source cases is preserved in the corresponding Project record; raw transcripts,
-case/data files, plots generated by automation, and machine-readable audits
-remain with their owning PyAnsys output or external Fluent location and are
-linked from the record when the artifact is available and intentionally
-tracked. Ignored or unavailable machine artifacts remain as explicit inline
-provenance instead of becoming broken links.
-
-## `setup.md` contract
-
-Keep only the information needed by the implementation and review loop:
-
-- question;
-- why this experiment was selected;
-- exact parent and start state;
-- controlled change(s);
-- what must remain unchanged;
-- run budget and execution strategy;
-- evidence and monitors required before interpretation.
-
-Prefer a concise delta from a known parent. Do not restate the full Fluent setup when a verified parent and a precise link are enough.
-
-## `results.md` contract
-
-Use one result file with clear sections:
-
-1. `What ran`
-2. `Evidence / plots / measurements`
-3. `Numerical state and limitations`
-4. `Observations`
-5. `Findings / interpretation`
-6. `What this implies for the next review`
-
-Measured evidence must remain distinguishable from interpretation. A separate `decision.md`, execution YAML, archive tree, or additional global index is not required by default; add one only when an actual workflow problem demonstrates the need.
-
-The read-only `post_simulation_analysis.py` workflow may append a bounded
-machine-evidence block with `--results-md path/to/results.md`. It owns only the
-`CODEX GENERATED EVIDENCE: post-simulation-analysis` marker block: rerunning it
-replaces that block and preserves human-authored setup, observations, findings,
-and interpretation text outside the markers. The generated block reports
-extraction status, native coordinates, units, scope, artifact references, and
-missing evidence; it does not choose a case, declare convergence or validation,
-or select the next experiment. Large JSON/CSV/plot/transcript artifacts remain
-with their PyAnsys output directory and are linked rather than copied into the
-Project record when they are portable; ignored output paths are rendered as
-inline historical-artifact provenance.
-
-When an excluded machine artifact is not present in this checkout, its legacy
-path is retained as inline text marked `historical machine artifact; not
-migrated` rather than as a broken active link. This keeps the evidence trail
-auditable without making generated output part of the Project authority.
-
-## Selection and handoff rules
-
-- A record is selected only after the project question, parent, controlled change, and evidence request are explicit.
-- `setup.md` is the handoff from scientific selection to implementation.
-- `results.md` is the handoff from execution/analysis back to scientific review.
-- The default interpretation owner is human-led unless the user explicitly requests another arrangement.
+Each retained experiment keeps its historical descriptive folder name and
+internal stage structure. Its setup, results, observations, figures, and
+uncertainty labels remain with that experiment; raw Fluent/PyAnsys artifacts
+remain with their owning system and are linked where available.

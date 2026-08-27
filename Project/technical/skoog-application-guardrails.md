@@ -135,7 +135,7 @@ They must not yet support a geothermal separator efficiency, steam-purity, or va
 
 ## Linked project records
 
-- Current inlet-regime context: [inlet-regimes](../experiments/purnanto-08c-inlet-loading-sensitivity/inlet-regimes-interpretation.md)
-- Current EWF diagnostic: [10a results](../experiments/purnanto-10a-splash-ewf-preliminary/results.md)
-- Current two-way DPM diagnostic: [09c results](../experiments/purnanto-09c-two-way-dpm-coupling/results.md)
+- Current inlet-regime context: [inlet-regimes](../experiments/phase-02-parity-reset-and-pre-v2-qualification/purnanto-08c-inlet-loading-sensitivity/inlet-regimes-interpretation.md)
+- Current EWF diagnostic: [10a results](../experiments/phase-04-ewf-wall-film-mechanisms/purnanto-10a-splash-ewf-preliminary/results.md)
+- Current two-way DPM diagnostic: [09c results](../experiments/phase-03-dpm-carryover-and-coupling/purnanto-09c-two-way-dpm-coupling/results.md)
 - Project V&V policy: [V&V and claim limits](../vnv.md)

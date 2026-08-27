@@ -149,9 +149,9 @@ If the thicker-film and lower-direct-escape pattern persists in that matched pai
 
 ## Evidence
 
-- [010V2 control result](../experiments/purnanto-010V2-clean-ewf-deposition/results.md)
-- [010V2d combined-EWF result](../experiments/purnanto-010V2d-ewf-combined-mechanisms/results.md)
-- [010V2d-2 global-DPM result](../experiments/purnanto-010V2d-2-ewf-global-dpm/results.md)
+- [010V2 control result](../experiments/phase-04-ewf-wall-film-mechanisms/purnanto-010V2-clean-ewf-deposition/results.md)
+- [010V2d combined-EWF result](../experiments/phase-04-ewf-wall-film-mechanisms/purnanto-010V2d-ewf-combined-mechanisms/results.md)
+- [010V2d-2 global-DPM result](../experiments/phase-04-ewf-wall-film-mechanisms/purnanto-010V2d-2-ewf-global-dpm/results.md)
 - 010V2d 5,000-iteration original-particle fate rows (historical machine artifact path: `../../PyAnsys/output/ewf_dpm_diagnostics/010V2d-server1-20260723-5000-dpm/dpm_zone_summary.csv`; not migrated)
 - 010V2d-2 4,189-iteration original-particle fate rows (historical machine artifact path: `../../PyAnsys/output/ewf_dpm_diagnostics/010V2d-2-server3-4189it-20260723-dpm/dpm_zone_summary.csv`; not migrated)
 - 010V2d-2 4,189-iteration interaction audit (historical machine artifact path: `../../PyAnsys/output/ewf_dpm_diagnostics/010V2d-2-server3-4189it-20260723-audit/model_audit.json`; not migrated)

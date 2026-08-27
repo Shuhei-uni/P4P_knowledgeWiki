@@ -77,9 +77,9 @@ transcript, residual history, physical histories, hashes, and limitations. This
 is historical execution evidence, not the default execution mechanism for new
 autonomous-loop runs.
 
-- [`03A-Q01 setup`](Project/experiments/full-geometry-03a-mixture-08b-parity-baseline/q01-s4-01-50-iteration-qualification/setup.md)
-- [`03A-Q01 results`](Project/experiments/full-geometry-03a-mixture-08b-parity-baseline/q01-s4-01-50-iteration-qualification/results.md)
-- [`03A tracer index`](Project/experiments/full-geometry-03a-mixture-08b-parity-baseline/index.md)
+- [`03A-Q01 setup`](Project/experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/q01-s4-01-50-iteration-qualification/setup.md)
+- [`03A-Q01 results`](Project/experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/q01-s4-01-50-iteration-qualification/results.md)
+- [`03A tracer index`](Project/experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/index.md)
 - [`Q01 runner`](PyAnsys/scripts/setup/run_03a_q01_s4_01_50.py)
 
 ## Source and generated files

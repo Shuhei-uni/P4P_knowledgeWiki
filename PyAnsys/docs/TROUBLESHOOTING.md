@@ -68,7 +68,7 @@ If `ansys-fluent-visualization` imports fail, still continue with `ansys-fluent-
 ## 10. Local one-inlet parity script behaves differently than older notes
 
 The current project-facing smoke-test evidence is documented in
-Project/experiments/purnantov2-08-one-inlet-massflow-recreation/technical-reconstruction-smoke-test.md.
+Project/experiments/phase-02-parity-reset-and-pre-v2-qualification/purnantov2-08-one-inlet-massflow-recreation/technical-reconstruction-smoke-test.md.
 
 Use that note when the task is:
 

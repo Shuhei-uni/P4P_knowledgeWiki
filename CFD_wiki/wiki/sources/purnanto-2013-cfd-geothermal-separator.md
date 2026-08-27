@@ -68,7 +68,7 @@ The study uses RANS with RNG k-epsilon turbulence modeling, incompressible/isoth
 - Authors explicitly state that further experimental calibration/validation is needed ([purnanto-2013], p.7, p.9).
 
 ## Live HDF5 Cross-Check
-- The local Fluent 24.2 HDF5 audit in this repo confirms a saved baseline setup with one mass-flow inlet (`80.69 kg/s` vapor, `116.92 kg/s` liquid), one pressure outlet (`1.12e6 Pa`), gravity `(0, -9.81, 0) m/s2`, operating pressure `0 Pa`, and `RNG k-epsilon` / pressure-based / `Mixture` solver settings (`Observed`; see [Purnanto live setup audit](../../../Project/experiments/purnanto-00a-live-setup-audit/technical-live-setup-reference.md)).
+- The local Fluent 24.2 HDF5 audit in this repo confirms a saved baseline setup with one mass-flow inlet (`80.69 kg/s` vapor, `116.92 kg/s` liquid), one pressure outlet (`1.12e6 Pa`), gravity `(0, -9.81, 0) m/s2`, operating pressure `0 Pa`, and `RNG k-epsilon` / pressure-based / `Mixture` solver settings (`Observed`; see [Purnanto live setup audit](../../../Project/experiments/phase-01-purnanto-baseline-and-inlet-exploration/purnanto-00a-live-setup-audit/technical-live-setup-reference.md)).
 - The audited case records `2,964,593` cells, `572,556` nodes, minimum orthogonal quality `0.277635`, and maximum aspect ratio `12.8899` (`Observed`).
 - The audited case does not activate DPM injections, so it is best read as a continuous/multiphase baseline snapshot plus solution-warning state rather than a full particle-efficiency run (`Observed`).
 

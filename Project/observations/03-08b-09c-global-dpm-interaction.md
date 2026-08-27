@@ -118,10 +118,10 @@ That experiment will determine whether global DPM feedback actually changes the 
 
 ## Evidence
 
-- [08b result](../experiments/purnanto-08b-parity-split-inlet/results.md)
-- [09c result](../experiments/purnanto-09c-two-way-dpm-coupling/results.md)
-- [08b phase-flux extract](../experiments/purnanto-08b-parity-split-inlet/phase-flux-result.md)
-- [past reported 09c setup definition](../experiments/purnanto-09c-two-way-dpm-coupling/setup.md)
+- [08b result](../experiments/phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/results.md)
+- [09c result](../experiments/phase-03-dpm-carryover-and-coupling/purnanto-09c-two-way-dpm-coupling/results.md)
+- [08b phase-flux extract](../experiments/phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/phase-flux-result.md)
+- [past reported 09c setup definition](../experiments/phase-03-dpm-carryover-and-coupling/purnanto-09c-two-way-dpm-coupling/setup.md)
 - 09c coupling build/readback (historical machine artifact path: `../../PyAnsys/output/setup09c_two_way_dpm_coupling_summary.json`; not migrated)
 - 09c carrier summary (historical machine artifact path: `../../PyAnsys/output/live_postprocess_20260720/09c-summary.json`; not migrated) and residual history (historical machine artifact path: `../../PyAnsys/output/live_postprocess_20260720/09c-residuals_20260720_132009.png`; not migrated)
-- [09cV2 result — third comparison state](../experiments/purnanto-09cV2-dpm-partition-control/results.md), injection summary (historical machine artifact path: `../../PyAnsys/output/live_postprocess_20260722/09cV2-server2-dpm/dpm_injection_summary.csv`; not migrated), and zone/fate rows (historical machine artifact path: `../../PyAnsys/output/live_postprocess_20260722/09cV2-server2-dpm/dpm_zone_summary.csv`; not migrated)
+- [09cV2 result — third comparison state](../experiments/phase-03-dpm-carryover-and-coupling/purnanto-09cV2-dpm-partition-control/results.md), injection summary (historical machine artifact path: `../../PyAnsys/output/live_postprocess_20260722/09cV2-server2-dpm/dpm_injection_summary.csv`; not migrated), and zone/fate rows (historical machine artifact path: `../../PyAnsys/output/live_postprocess_20260722/09cV2-server2-dpm/dpm_zone_summary.csv`; not migrated)

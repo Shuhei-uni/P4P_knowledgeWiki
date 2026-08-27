@@ -43,7 +43,7 @@ Only after that comparison is bounded should a difference be attributed to inlet
 
 ## Evidence
 
-- [09a result](../experiments/purnanto-09a-dpm-deterministic-carryover/results.md)
-- [09b result](../experiments/purnanto-09b-dpm-stochastic-dispersion/results.md)
-- [09a setup definition](../experiments/purnanto-09a-dpm-deterministic-carryover/setup.md)
-- [09b setup definition](../experiments/purnanto-09b-dpm-stochastic-dispersion/setup.md)
+- [09a result](../experiments/phase-03-dpm-carryover-and-coupling/purnanto-09a-dpm-deterministic-carryover/results.md)
+- [09b result](../experiments/phase-03-dpm-carryover-and-coupling/purnanto-09b-dpm-stochastic-dispersion/results.md)
+- [09a setup definition](../experiments/phase-03-dpm-carryover-and-coupling/purnanto-09a-dpm-deterministic-carryover/setup.md)
+- [09b setup definition](../experiments/phase-03-dpm-carryover-and-coupling/purnanto-09b-dpm-stochastic-dispersion/setup.md)

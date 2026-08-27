@@ -77,10 +77,10 @@ Before adding further physics:
 
 ## Evidence
 
-- [08 family comparison](../experiments/purnanto-08c-inlet-loading-sensitivity/velocity-family-comparison.md)
-- [08b result](../experiments/purnanto-08b-parity-split-inlet/results.md)
-- [08c result](../experiments/purnanto-08c-inlet-loading-sensitivity/results.md)
-- [08b phase-flux extract](../experiments/purnanto-08b-parity-split-inlet/phase-flux-result.md)
+- [08 family comparison](../experiments/phase-02-parity-reset-and-pre-v2-qualification/purnanto-08c-inlet-loading-sensitivity/velocity-family-comparison.md)
+- [08b result](../experiments/phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/results.md)
+- [08c result](../experiments/phase-02-parity-reset-and-pre-v2-qualification/purnanto-08c-inlet-loading-sensitivity/results.md)
+- [08b phase-flux extract](../experiments/phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/phase-flux-result.md)
 - 08c-v20p00 carrier summary (historical machine artifact path: `../../PyAnsys/output/live_postprocess_20260720/08c-v20p00-summary.json`; not migrated) and DPM particle-track summary (historical machine artifact path: `../../PyAnsys/output/dpm_particle_tracks/20260720-dpm-analysis/08c-v20p00-20260720-dpm-particle-track-summary.json`; not migrated)
 - 08c-v32p14 carrier summary (historical machine artifact path: `../../PyAnsys/output/live_postprocess_20260720/08c-v32p14-summary.json`; not migrated) and DPM particle-track summary (historical machine artifact path: `../../PyAnsys/output/dpm_particle_tracks/20260720-dpm-analysis/08c-v32p14-20260720-dpm-particle-track-summary.json`; not migrated)
 

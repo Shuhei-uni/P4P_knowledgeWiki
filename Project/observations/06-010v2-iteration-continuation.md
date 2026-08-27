@@ -101,8 +101,8 @@ The paper lookup was checked for applicable EWF guidance. It identifies film thi
 
 ## Evidence
 
-- [010V2a splash report](../experiments/purnanto-010V2a-ewf-splash/results.md)
-- [010V2b edge-separation report](../experiments/purnanto-010V2b-ewf-edge-separation/results.md)
+- [010V2a splash report](../experiments/phase-04-ewf-wall-film-mechanisms/purnanto-010V2a-ewf-splash/results.md)
+- [010V2b edge-separation report](../experiments/phase-04-ewf-wall-film-mechanisms/purnanto-010V2b-ewf-edge-separation/results.md)
 - 010V2b completed 5,000-iteration DPM rows (historical machine artifact path: `../../PyAnsys/output/ewf_dpm_diagnostics/010V2b-5000-dpm-20260723-r2/dpm_zone_summary.csv`; not migrated) and fresh 2026-07-27 DPM rows (historical machine artifact path: `../../PyAnsys/output/ewf_dpm_diagnostics/010V2b-server3-20260727-4999-dpm/dpm_zone_summary.csv`; not migrated)
-- [010V2c stripping report](../experiments/purnanto-010V2c-ewf-particle-stripping/results.md)
-- [010V2d combined report](../experiments/purnanto-010V2d-ewf-combined-mechanisms/results.md)
+- [010V2c stripping report](../experiments/phase-04-ewf-wall-film-mechanisms/purnanto-010V2c-ewf-particle-stripping/results.md)
+- [010V2d combined report](../experiments/phase-04-ewf-wall-film-mechanisms/purnanto-010V2d-ewf-combined-mechanisms/results.md)

@@ -13,9 +13,9 @@ This page merges the stable baseline solver stack from the 2013 reconstruction w
 - Baseline reconstruction: [geothermal-boc-separator-fluent-2013-baseline](geothermal-boc-separator-fluent-2013-baseline.md)
 - Reusable split-inlet rule: [geothermal-boc-separator-two-zone-split-inlet](geothermal-boc-separator-two-zone-split-inlet.md)
 - Project experiment records used for the velocity-inlet variants:
-  - [mixed wet-half actual-area record](../../../Project/experiments/purnanto-04-mixed-wet-half-actual-area/setup.md)
-  - [pure-phase fixed-velocity record](../../../Project/experiments/purnanto-06-pure-phase-fixed-velocity/setup.md)
-  - [pure-phase actual-area record](../../../Project/experiments/purnanto-07-pure-phase-actual-area/setup.md)
+  - [mixed wet-half actual-area record](../../../Project/experiments/phase-01-purnanto-baseline-and-inlet-exploration/purnanto-04-mixed-wet-half-actual-area/setup.md)
+  - [pure-phase actual-area record](../../../Project/experiments/phase-01-purnanto-baseline-and-inlet-exploration/purnanto-07-pure-phase-actual-area/setup.md)
+  - [pure-phase actual-area record](../../../Project/experiments/phase-01-purnanto-baseline-and-inlet-exploration/purnanto-07-pure-phase-actual-area/setup.md)
 
 ## Evidence Labels
 - `Reported`: directly stated in the 2013 paper.
@@ -265,4 +265,4 @@ total inlet  ~= 195.37 kg/s
 - `extends` [geothermal-boc-separator-two-zone-split-inlet](geothermal-boc-separator-two-zone-split-inlet.md) by turning the general split rule into a full pure-phase velocity-inlet package.
 - `reuses` [geothermal-boc-separator-fluent-2013-baseline](geothermal-boc-separator-fluent-2013-baseline.md) for the solver, numerics, gravity, and material basis.
 - Project-facing trace is maintained in [the Project inlet-regimes
-  interpretation](../../../Project/experiments/purnanto-08c-inlet-loading-sensitivity/inlet-regimes-interpretation.md).
+  interpretation](../../../Project/experiments/phase-02-parity-reset-and-pre-v2-qualification/purnanto-08c-inlet-loading-sensitivity/inlet-regimes-interpretation.md).

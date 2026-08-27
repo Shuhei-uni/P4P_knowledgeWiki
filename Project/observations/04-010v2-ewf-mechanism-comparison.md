@@ -111,11 +111,11 @@ Use one accepted `010V2` case/data checkpoint and one defined physical-time inte
 
 ## Evidence
 
-- [010V2 control result](../experiments/purnanto-010V2-clean-ewf-deposition/results.md)
-- [010V2a splash result](../experiments/purnanto-010V2a-ewf-splash/results.md)
-- [010V2b edge-separation result](../experiments/purnanto-010V2b-ewf-edge-separation/results.md)
-- [010V2c stripping result](../experiments/purnanto-010V2c-ewf-particle-stripping/results.md)
-- [010V2d combined result](../experiments/purnanto-010V2d-ewf-combined-mechanisms/results.md)
+- [010V2 control result](../experiments/phase-04-ewf-wall-film-mechanisms/purnanto-010V2-clean-ewf-deposition/results.md)
+- [010V2a splash result](../experiments/phase-04-ewf-wall-film-mechanisms/purnanto-010V2a-ewf-splash/results.md)
+- [010V2b edge-separation result](../experiments/phase-04-ewf-wall-film-mechanisms/purnanto-010V2b-ewf-edge-separation/results.md)
+- [010V2c stripping result](../experiments/phase-04-ewf-wall-film-mechanisms/purnanto-010V2c-ewf-particle-stripping/results.md)
+- [010V2d combined result](../experiments/phase-04-ewf-wall-film-mechanisms/purnanto-010V2d-ewf-combined-mechanisms/results.md)
 - 010V2 5,000-iteration DPM fate rows (historical machine artifact path: `../../PyAnsys/output/ewf_dpm_diagnostics/010V2-5000it-20260723-dpm/dpm_zone_summary.csv`; not migrated)
 - 010V2a 5,000-iteration DPM fate rows (historical machine artifact path: `../../PyAnsys/output/ewf_dpm_diagnostics/010V2a-server2-20260724-5000-dpm/dpm_zone_summary.csv`; not migrated)
 - 010V2c 5,000-iteration DPM fate rows (historical machine artifact path: `../../PyAnsys/output/ewf_dpm_diagnostics/010V2c-server2-20260723-5000it-dpm/dpm_zone_summary.csv`; not migrated)

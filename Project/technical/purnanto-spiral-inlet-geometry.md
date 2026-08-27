@@ -23,7 +23,7 @@ Primary linked context:
 
 - `../../../CFD_wiki/wiki/sources/purnanto-2013-cfd-geothermal-separator.md`
 - [CFD Wiki baseline setup](../../CFD_wiki/wiki/setups/geothermal-boc-separator-fluent-2013-baseline.md)
-- [Purnanto no-brine-outlet experiment](../experiments/purnanto-05-complete-two-phase-no-brine-outlet/setup.md)
+- [Phase 1 inlet-exploration index](../experiments/phase-01-purnanto-baseline-and-inlet-exploration/index.md)
 
 ## Scope
 
@@ -96,7 +96,7 @@ Source trail:
 
 - `CFD_wiki/wiki/sources/purnanto-2013-cfd-geothermal-separator.md`
 - [CFD Wiki baseline setup](../../CFD_wiki/wiki/setups/geothermal-boc-separator-fluent-2013-baseline.md)
-- [Project Purnanto reference](../experiments/purnanto-00-reference-spiral-boc/setup.md)
+- [Project Purnanto reference](../experiments/phase-01-purnanto-baseline-and-inlet-exploration/purnanto-00-reference-spiral-boc/setup.md)
 
 ## Rectangular Inlet Face Used In The Current Reconstruction
 

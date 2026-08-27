@@ -17,19 +17,19 @@ Use this folder when you need:
 
 Related Project record:
 
-- [07 pure-phase actual-area setup](../../../../Project/experiments/purnanto-07-pure-phase-actual-area/setup.md)
+- [07 pure-phase actual-area setup](../../../../Project/experiments/phase-01-purnanto-baseline-and-inlet-exploration/purnanto-07-pure-phase-actual-area/setup.md)
 
 Related difference report:
 
-- [intended-vs-actual.md](./intended-vs-actual.md)
+- [intended-vs-actual.md](intended-vs-actual.md)
 
 ## Archive Contents
 
-- [metadata.json](./metadata.json): source paths, export time, archive label
-- [settings_snapshot.json](./settings_snapshot.json): broad PyFluent-reachable setup and solution state
-- [scheme_snapshot.json](./scheme_snapshot.json): Scheme-side runtime values
-- [models_tree_detailed.json](./models_tree_detailed.json): deep enumeration of `setup.models`, including inactive-but-available children
-- [notes.txt](./notes.txt): exporter access gaps and inactive-branch warnings
+- [metadata.json](metadata.json): source paths, export time, archive label
+- [settings_snapshot.json](settings_snapshot.json): broad PyFluent-reachable setup and solution state
+- [scheme_snapshot.json](scheme_snapshot.json): Scheme-side runtime values
+- [models_tree_detailed.json](models_tree_detailed.json): deep enumeration of `setup.models`, including inactive-but-available children
+- [notes.txt](notes.txt): exporter access gaps and inactive-branch warnings
 
 ## Key Live Findings
 
@@ -81,4 +81,4 @@ Do not assume it is identical to the intended inherited setup. Reconcile it
 against the Project records for the Purnanto reference, mixed wet-half
 variants, and pure-phase actual-area branch before using it to rebuild a case.
 
-That intended-vs-actual reconciliation is tracked separately in [intended-vs-actual.md](./intended-vs-actual.md).
+That intended-vs-actual reconciliation is tracked separately in [intended-vs-actual.md](intended-vs-actual.md).

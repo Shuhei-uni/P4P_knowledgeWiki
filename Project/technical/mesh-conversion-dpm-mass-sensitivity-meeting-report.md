@@ -42,7 +42,7 @@ The table reports the available endpoint values at a common `3,000`-iteration ch
 | Fine 3 | 11,959,759 | 0.0123739 | 24.1355 | 81.462457 | 0.00003356 | 42.55820 | 26.48653 | 86.89046 | Completed endpoint |
 | Finest in progress | 13,370,267 | 0.0119225 | — | — | — | — | — | — | In progress at checkpoint |
 
-**Interpretation.** Vapor outlet flow is stable at approximately `81.45 kg/s` (less than approximately `0.06%` variation), but pressure drop decreases from `31.05` to approximately `24.0 kPa`, domain velocity decreases from `32.86` to `26.49 m/s`, and vorticity increases from `68.88` to `86.89 1/s`. The larger meshes require more iterations to reach a comparable state. At the common endpoint, domain-velocity drift is approximately `9.2%` for the two finest completed meshes, while pressure drift remains approximately `2.5–2.7%`. The endpoint differences therefore combine mesh-resolution effects with iteration effects; mesh independence has not been demonstrated. ([mesh-refinement checkpoint](../experiments/purnanto-08b-parity-split-inlet/mesh-convergence-checkpoint-20260803.md))
+**Interpretation.** Vapor outlet flow is stable at approximately `81.45 kg/s` (less than approximately `0.06%` variation), but pressure drop decreases from `31.05` to approximately `24.0 kPa`, domain velocity decreases from `32.86` to `26.49 m/s`, and vorticity increases from `68.88` to `86.89 1/s`. The larger meshes require more iterations to reach a comparable state. At the common endpoint, domain-velocity drift is approximately `9.2%` for the two finest completed meshes, while pressure drift remains approximately `2.5–2.7%`. The endpoint differences therefore combine mesh-resolution effects with iteration effects; mesh independence has not been demonstrated. ([mesh-refinement checkpoint](../experiments/phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/mesh-convergence-checkpoint-20260803.md))
 
 ## 2. Droplet-loading sensitivity analysis
 
@@ -63,11 +63,11 @@ m_continuum liquid = (1 − f_droplet) × 116.920 kg/s
 | Current diagnostic | `5%` | `5.846` | `111.074` | Existing reference point; not yet converged |
 | Upper sensitivity | `10%` | `11.692` | `105.228` | Planned upper/extreme sensitivity point |
 
-For this first sweep, keep the mesh, geometry, solver settings, injection material and surface, DPM controls, and droplet-size distribution fixed. Change only the tracked-droplet total and the complementary continuum-liquid flow. The current `5%` case has approximately `57.55%` carrier imbalance and continuity of approximately `2.86e-1`, so it should be treated as a diagnostic rather than a converged physical baseline. The earlier unpartitioned additional-load case is not a physically comparable sweep point. ([partitioned droplet-loading setup](../experiments/purnanto-09cV2-dpm-partition-control/setup.md), [diagnostic results](../experiments/purnanto-09cV2-dpm-partition-control/results.md), [global-interaction comparison](../observations/03-08b-09c-global-dpm-interaction.md))
+For this first sweep, keep the mesh, geometry, solver settings, injection material and surface, DPM controls, and droplet-size distribution fixed. Change only the tracked-droplet total and the complementary continuum-liquid flow. The current `5%` case has approximately `57.55%` carrier imbalance and continuity of approximately `2.86e-1`, so it should be treated as a diagnostic rather than a converged physical baseline. The earlier unpartitioned additional-load case is not a physically comparable sweep point. ([partitioned droplet-loading setup](../experiments/phase-03-dpm-carryover-and-coupling/purnanto-09cV2-dpm-partition-control/setup.md), [diagnostic results](../experiments/phase-03-dpm-carryover-and-coupling/purnanto-09cV2-dpm-partition-control/results.md), [global-interaction comparison](../observations/03-08b-09c-global-dpm-interaction.md))
 
 ## 3. Droplet-size and mass-distribution basis
 
-The historical droplet sizes were based on Purnanto's Harwell-based estimate, not on a measured geothermal-inlet particle-size distribution. The reported basis uses an approximately `10 µm` average/Sauter-scale input, the relation `x_med = 1.42 × x_sa`, and approximate distribution markers at `0.3 × x_med` and `2.9 × x_med`. Treating `10 µm` as `x_sa` gives an inferred median of approximately `14.2 µm` and an approximate range of `4.26–41.18 µm`. The exact project injection diameters and original mass allocation are not listed in the source, so the inherited mapping is a **modelling reconstruction**, not a measured PSD. ([Purnanto source extraction](../../CFD_wiki/wiki/sources/purnanto-2013-cfd-geothermal-separator.md), [fine-mist distribution record](../experiments/purnanto-09cV3-fine-mist-psd/fine-mist-interpretation.md))
+The historical droplet sizes were based on Purnanto's Harwell-based estimate, not on a measured geothermal-inlet particle-size distribution. The reported basis uses an approximately `10 µm` average/Sauter-scale input, the relation `x_med = 1.42 × x_sa`, and approximate distribution markers at `0.3 × x_med` and `2.9 × x_med`. Treating `10 µm` as `x_sa` gives an inferred median of approximately `14.2 µm` and an approximate range of `4.26–41.18 µm`. The exact project injection diameters and original mass allocation are not listed in the source, so the inherited mapping is a **modelling reconstruction**, not a measured PSD. ([Purnanto source extraction](../../CFD_wiki/wiki/sources/purnanto-2013-cfd-geothermal-separator.md), [fine-mist distribution record](../experiments/phase-03-dpm-carryover-and-coupling/purnanto-09cV3-fine-mist-psd/fine-mist-interpretation.md))
 
 The new distribution is being changed because global DPM interaction is now enabled. Tracked droplets can feed source terms back into the carrier flow, so the DPM population should represent only the fine mist plausibly transported from the steam inlet. Bulk brine, films, slugs, and other large liquid mass are assumed to belong to the continuum liquid entering through the liquid inlet. This avoids allowing a coarse droplet class to dominate the coupled DPM source, and it preserves the total liquid feed rather than deleting or double-counting the excluded mass.
 
@@ -103,7 +103,7 @@ The available continuation results show a substantial iteration dependence:
 | `5,000` | `0.2022` | `0.457` | `5.07e-3` |
 | `10,000` | `0.2884` | `0.614` | `3.03` |
 
-Between these snapshots, film inventory increases by `42.6%` and maximum thickness by `34.2%`; continuity also worsens. There is therefore no defensible stopping iteration yet. The next run should record film inventory, maximum and area-average thickness, film CFL, DPM-to-film source, film outflow, and residuals at fixed intervals. Use a CFL guard of less than `1` and select a stable interval—or explicitly report an accumulating/quasi-steady state—rather than stopping on iteration count alone. ([wall-film continuation results](../experiments/purnanto-010V2d-ewf-combined-mechanisms/results.md), [iteration-continuation observation](../observations/06-010v2-iteration-continuation.md))
+Between these snapshots, film inventory increases by `42.6%` and maximum thickness by `34.2%`; continuity also worsens. There is therefore no defensible stopping iteration yet. The next run should record film inventory, maximum and area-average thickness, film CFL, DPM-to-film source, film outflow, and residuals at fixed intervals. Use a CFL guard of less than `1` and select a stable interval—or explicitly report an accumulating/quasi-steady state—rather than stopping on iteration count alone. ([wall-film continuation results](../experiments/phase-04-ewf-wall-film-mechanisms/purnanto-010V2d-ewf-combined-mechanisms/results.md), [iteration-continuation observation](../observations/06-010v2-iteration-continuation.md))
 
 > **Figure placeholder — wall-film thickness contour**
 >
@@ -126,15 +126,15 @@ Next, continue the running finest mesh and mature the carrier-flow state, rerun 
 
 The following project record IDs are retained only so the analysis can be reproduced; they are not required to understand the main discussion.
 
-- [Mesh-refinement checkpoint](../experiments/purnanto-08b-parity-split-inlet/mesh-convergence-checkpoint-20260803.md)
-- [Partitioned droplet-loading setup](../experiments/purnanto-09cV2-dpm-partition-control/setup.md)
-- [Partitioned droplet-loading diagnostic results](../experiments/purnanto-09cV2-dpm-partition-control/results.md)
-- [Fine-mist droplet-size and mass-distribution record](../experiments/purnanto-09cV3-fine-mist-psd/fine-mist-interpretation.md)
+- [Mesh-refinement checkpoint](../experiments/phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/mesh-convergence-checkpoint-20260803.md)
+- [Partitioned droplet-loading setup](../experiments/phase-03-dpm-carryover-and-coupling/purnanto-09cV2-dpm-partition-control/setup.md)
+- [Partitioned droplet-loading diagnostic results](../experiments/phase-03-dpm-carryover-and-coupling/purnanto-09cV2-dpm-partition-control/results.md)
+- [Fine-mist droplet-size and mass-distribution record](../experiments/phase-03-dpm-carryover-and-coupling/purnanto-09cV3-fine-mist-psd/fine-mist-interpretation.md)
 - [Purnanto technical source extraction](../../CFD_wiki/wiki/sources/purnanto-2013-cfd-geothermal-separator.md)
 - [Droplet carryover and re-entrainment physics basis](../../CFD_wiki/wiki/physics-basis/droplets-carryover-and-re-entrainment.md)
 - [Fine-mist size-cutoff evidence](../../CFD_wiki/wiki/synthesis/geothermal-fine-mist-size-cutoff-evidence.md)
-- [Wall-film continuation results](../experiments/purnanto-010V2d-ewf-combined-mechanisms/results.md)
-- [Global-DPM wall-film results](../experiments/purnanto-010V2d-2-ewf-global-dpm/results.md)
+- [Wall-film continuation results](../experiments/phase-04-ewf-wall-film-mechanisms/purnanto-010V2d-ewf-combined-mechanisms/results.md)
+- [Global-DPM wall-film results](../experiments/phase-04-ewf-wall-film-mechanisms/purnanto-010V2d-2-ewf-global-dpm/results.md)
 - [Wall-film iteration-continuation observation](../observations/06-010v2-iteration-continuation.md)
 
 ## Appendix B — Fluent settings for the relevant cases
@@ -143,7 +143,7 @@ This appendix records the Fluent settings that matter for interpreting the three
 
 ### B.1 08b — carrier-field mesh refinement and parity-rebuild context
 
-The mesh-refinement checkpoint associated with **08b** is a carrier-field comparison. DPM tracking and Eulerian Wall Film (EWF) were excluded from the mesh-selection runs, and the formal mesh ladder used a nominal `3,000` iterations per mesh. Equal iteration count is not treated as equal convergence. The DPM settings below describe the associated parity-rebuild context, not an active DPM model in the mesh-convergence calculation. ([mesh-refinement checkpoint](../experiments/purnanto-08b-parity-split-inlet/mesh-convergence-checkpoint-20260803.md), [08b parity-rebuild record](../experiments/purnanto-08b-parity-split-inlet/setup.md))
+The mesh-refinement checkpoint associated with **08b** is a carrier-field comparison. DPM tracking and Eulerian Wall Film (EWF) were excluded from the mesh-selection runs, and the formal mesh ladder used a nominal `3,000` iterations per mesh. Equal iteration count is not treated as equal convergence. The DPM settings below describe the associated parity-rebuild context, not an active DPM model in the mesh-convergence calculation. ([mesh-refinement checkpoint](../experiments/phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/mesh-convergence-checkpoint-20260803.md), [08b parity-rebuild record](../experiments/phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/setup.md))
 
 #### Carrier-field settings
 
@@ -199,7 +199,7 @@ The associated mesh result should therefore be read as: **a pressure-based, two-
 
 ### B.2 010V2d — combined wall-film interaction, global DPM interaction off
 
-**010V2d** is the combined wall-film branch used as the control for the global-DPM comparison. It inherits the fixed transient and film controls from the clean `010V2` wall-film setup, then combines only the EWF mechanisms that were accepted from the isolated branches. The historical diagnostic checkpoint was captured on Fluent `2024 R2`, server `1`, at `5,000` iterations. ([010V2d setup definition](../experiments/purnanto-010V2d-ewf-combined-mechanisms/setup.md), [010V2d results](../experiments/purnanto-010V2d-ewf-combined-mechanisms/results.md))
+**010V2d** is the combined wall-film branch used as the control for the global-DPM comparison. It inherits the fixed transient and film controls from the clean `010V2` wall-film setup, then combines only the EWF mechanisms that were accepted from the isolated branches. The historical diagnostic checkpoint was captured on Fluent `2024 R2`, server `1`, at `5,000` iterations. ([010V2d setup definition](../experiments/phase-04-ewf-wall-film-mechanisms/purnanto-010V2d-ewf-combined-mechanisms/setup.md), [010V2d results](../experiments/phase-04-ewf-wall-film-mechanisms/purnanto-010V2d-ewf-combined-mechanisms/results.md))
 
 #### Inherited carrier and DPM controls
 
@@ -241,7 +241,7 @@ The `10,000`-iteration continuation reached approximately `0.2884 kg` film inven
 
 ### B.3 010V2d-2 — same combined wall film with global DPM interaction on
 
-**010V2d-2** is intended to inherit the accepted 010V2d state and change one physics switch: `DPM Interaction with Continuous Phase = On`. The branch also retains source updates every flow iteration with a DPM iteration interval of `1`. This is the relevant coupling sensitivity, but the available checkpoints are not a strict same-iteration restart pair. ([010V2d-2 setup definition](../experiments/purnanto-010V2d-2-ewf-global-dpm/setup.md), [010V2d-2 results](../experiments/purnanto-010V2d-2-ewf-global-dpm/results.md), [global-interaction comparison](../observations/05-010v2d-global-dpm-interaction.md))
+**010V2d-2** is intended to inherit the accepted 010V2d state and change one physics switch: `DPM Interaction with Continuous Phase = On`. The branch also retains source updates every flow iteration with a DPM iteration interval of `1`. This is the relevant coupling sensitivity, but the available checkpoints are not a strict same-iteration restart pair. ([010V2d-2 setup definition](../experiments/phase-04-ewf-wall-film-mechanisms/purnanto-010V2d-2-ewf-global-dpm/setup.md), [010V2d-2 results](../experiments/phase-04-ewf-wall-film-mechanisms/purnanto-010V2d-2-ewf-global-dpm/results.md), [global-interaction comparison](../observations/05-010v2d-global-dpm-interaction.md))
 
 #### Controlled settings
 

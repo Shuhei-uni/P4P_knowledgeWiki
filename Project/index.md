@@ -23,12 +23,12 @@ The current execution lane is the canonical full-geometry Mixture `03A`
 Stage-4 promising-state development campaign. Its Project tracer is the
 shortest route through the selected record:
 
-- [03A tracer index](experiments/full-geometry-03a-mixture-08b-parity-baseline/index.md)
-- [03A-Q01 setup — S4-01 50-iteration qualification](experiments/full-geometry-03a-mixture-08b-parity-baseline/q01-s4-01-50-iteration-qualification/setup.md)
-- [03A-Q01 results — S4-01 50-iteration qualification](experiments/full-geometry-03a-mixture-08b-parity-baseline/q01-s4-01-50-iteration-qualification/results.md)
-- [Stage-4 setup contract](experiments/full-geometry-03a-mixture-08b-parity-baseline/stage-04/setup.md)
-- [Stage-4 execution evidence](experiments/full-geometry-03a-mixture-08b-parity-baseline/stage-04/results.md)
-- [Stage-3 results](experiments/full-geometry-03a-mixture-08b-parity-baseline/stage-03/results.md)
+- [03A tracer index](experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/index.md)
+- [03A-Q01 setup — S4-01 50-iteration qualification](experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/q01-s4-01-50-iteration-qualification/setup.md)
+- [03A-Q01 results — S4-01 50-iteration qualification](experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/q01-s4-01-50-iteration-qualification/results.md)
+- [Stage-4 setup contract](experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/stage-04/setup.md)
+- [Stage-4 execution evidence](experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/stage-04/results.md)
+- [Stage-3 results](experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/stage-03/results.md)
 
 The earlier Project experiment records preserve the migrated setup and result
 memory for the Purnanto, full-geometry, DPM, EWF, VOF, and reconstruction
@@ -75,12 +75,13 @@ explicit.
 
 ## Project map
 
+- [experiment phase structure](experiments/README.md)
 - [scope](scope.md)
 - [stable model assumptions](model.md)
 - [V&V and claim limits](vnv.md)
 - [selected-experiment contract](experiments/README.md)
 - [cross-experiment observations](observations/index.md)
-- [technical project records](technical/)
+- [technical project records](technical)
 
 ## Supporting source input
 

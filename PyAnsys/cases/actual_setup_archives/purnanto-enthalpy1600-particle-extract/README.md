@@ -11,7 +11,7 @@
 - Injection files parsed: `9`
 - Summary files parsed: `9`
 - Ignored non-settings file: `Injection_Files/cortexerror.log`
-- Particle table: [particle_settings_table.md](./particle_settings_table.md)
+- Particle table: [particle_settings_table.md](particle_settings_table.md)
 
 ## Injections
 

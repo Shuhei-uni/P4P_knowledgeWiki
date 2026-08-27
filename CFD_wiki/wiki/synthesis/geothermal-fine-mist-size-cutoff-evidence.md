@@ -6,7 +6,7 @@ This page collects the physical and literature evidence used to decide which liq
 
 It does **not** define the final project mass distribution. The project-specific decision, fitted distribution, and Fluent allocation are maintained separately in:
 
-- [Fine-mist DPM size and mass distribution](../../../Project/experiments/purnanto-09cV3-fine-mist-psd/fine-mist-interpretation.md)
+- [Fine-mist DPM size and mass distribution](../../../Project/experiments/phase-03-dpm-carryover-and-coupling/purnanto-09cV3-fine-mist-psd/fine-mist-interpretation.md)
 
 The practical question is:
 
@@ -240,5 +240,5 @@ with `100-150 um` retained as a separate coarse-tail sensitivity.
 - [Geothermal separator inlet droplets and carryover inventory](geothermal-separator-inlet-droplets-and-carryover.md)
 - [Droplets, carryover, and re-entrainment](../physics-basis/droplets-carryover-and-re-entrainment.md)
 - [Purnanto source extraction](../sources/purnanto-2013-cfd-geothermal-separator.md)
-- [Project fine-mist DPM decision](../../../Project/experiments/purnanto-09cV3-fine-mist-psd/fine-mist-interpretation.md)
+- [Project fine-mist DPM decision](../../../Project/experiments/phase-03-dpm-carryover-and-coupling/purnanto-09cV3-fine-mist-psd/fine-mist-interpretation.md)
 - [Archived Purnanto injection settings](../../../PyAnsys/cases/actual_setup_archives/purnanto-enthalpy1600-particle-extract/README.md)

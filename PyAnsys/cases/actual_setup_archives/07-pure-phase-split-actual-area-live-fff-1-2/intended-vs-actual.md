@@ -9,10 +9,10 @@ This report compares:
 
 Project records used for the intended setup:
 
-1. [Purnanto reference](../../../../Project/experiments/purnanto-00-reference-spiral-boc/setup.md)
-2. [Mixed wet-half velocity-inlet record](../../../../Project/experiments/purnanto-03-mixed-wet-half-velocity-inlet/setup.md)
-3. [Mixed wet-half actual-area record](../../../../Project/experiments/purnanto-04-mixed-wet-half-actual-area/setup.md)
-4. [Pure-phase actual-area record](../../../../Project/experiments/purnanto-07-pure-phase-actual-area/setup.md)
+1. [Purnanto reference](../../../../Project/experiments/phase-01-purnanto-baseline-and-inlet-exploration/purnanto-00-reference-spiral-boc/setup.md)
+2. [Mixed wet-half velocity-inlet record](../../../../Project/experiments/phase-01-purnanto-baseline-and-inlet-exploration/purnanto-03-mixed-wet-half-velocity-inlet/setup.md)
+3. [Mixed wet-half actual-area record](../../../../Project/experiments/phase-01-purnanto-baseline-and-inlet-exploration/purnanto-04-mixed-wet-half-actual-area/setup.md)
+4. [Pure-phase actual-area record](../../../../Project/experiments/phase-01-purnanto-baseline-and-inlet-exploration/purnanto-07-pure-phase-actual-area/setup.md)
 
 Interpretation rule:
 
