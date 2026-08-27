@@ -1,109 +1,83 @@
 ---
 name: design-experiment
-description: "Design high-information simulation experiments from a research question, prior evidence, and constraints. Use to propose controlled CFD experiments, sensitivities, diagnostic runs, or discriminating comparisons before creating setup.md."
+description: "Turn an important scientific uncertainty into a small number of high-information simulation experiments. Use when new simulation evidence is needed and the agent must choose what is worth the compute cost, what behavior would be informative, and what data must be captured before the run."
 ---
 
 # Design Experiment
 
-Design experiments to answer a question, not to generate more cases.
+Design simulations to learn something important, not to generate more cases.
 
-## Start with the decision problem
+A simulation is expensive evidence. It should earn its compute cost by reducing an important uncertainty, distinguishing between plausible explanations, or revealing behavior that materially changes the direction of the phase.
 
-State:
+## Start from the uncertainty
 
-- the primary scientific question;
-- what is currently known;
-- the competing explanations or uncertainty;
-- what evidence would materially change the conclusion;
-- relevant compute/time constraints.
+Begin with the question the phase still cannot answer.
 
-If no plausible result would change the next decision, do not propose the experiment.
+Understand what is known, what is only suspected, what competing explanations are plausible, and what observation would actually change the current understanding.
 
-## Candidate structure
+Do not begin from an available parameter list and ask what can be swept. Begin from the uncertainty and ask what experiment could resolve it.
 
-Each candidate should contain:
+Reasoning, literature, previous experience, and prior simulations can shape the hypothesis. Unless there is genuinely equivalent prior evidence, they do not establish what this new simulation will do.
 
-- **Question** — one sentence;
-- **Hypothesis / competing explanations** — when appropriate;
-- **Parent/reference** — the case or evidence being compared;
-- **Controlled change** — the variable(s) deliberately changed;
-- **Frozen context** — what must remain identical;
-- **Required evidence** — metrics, histories, plots, fields, comparisons;
-- **Numerical requirements** — enough to make the result interpretable;
-- **Possible outcomes** — what each outcome would imply;
-- **Cost/risk** — rough compute and implementation risk;
-- **Information value** — why this is worth running now.
+## Make the simulation earn its cost
 
-## Experimental discipline
+Prefer a small number of high-information simulations over broad brute-force sweeps.
 
-Prefer the smallest experiment that separates explanations.
+For each candidate, ask:
 
-Use one-variable-at-a-time when isolating causality is important and interactions are not the main question. Use small factorial/matrix designs when interaction effects are themselves important and the compute budget supports them.
+- What uncertainty does this run reduce?
+- What would we learn if it behaves as expected?
+- What would we learn if it behaves differently?
+- What useful behavior might appear between those extremes?
+- Can this run distinguish between competing explanations?
+- Is there a cheaper or clearer way to obtain the same information?
 
-Distinguish clearly between:
+A failed hypothesis can still make an experiment valuable if the result meaningfully narrows the landscape.
 
-- physics experiments;
-- numerical-method experiments;
-- sensitivity screening;
-- verification studies;
-- validation studies;
-- diagnostic/recovery runs.
+Avoid running many nearby cases merely to search blindly for a good result. Use coarse exploration only when the shape of the response itself is the question.
 
-Do not mix these labels. A timestep study is not evidence for a physics mechanism unless the numerical dependence is first resolved.
+## Design for interpretation
 
-## Control confounding
+The experiment should make its own result as interpretable as possible.
 
-For each proposed comparison ask:
+Identify the reference or parent state, the intentional change, and the important conditions that should remain comparable. Change one important thing at a time when causal isolation matters. Change several things together only when the combination itself is the object of study or when the experiment is deliberately testing an interaction.
 
-- Are multiple meaningful variables changing at once?
-- Are cases compared at equivalent iteration/physical-time or statistical states?
-- Did initialization change as well as the intended variable?
-- Did numerical schemes, mesh, or monitor definitions change?
-- Would the result distinguish the proposed mechanisms?
+Think about possible confounders before paying for the run. Initialization, run length, mesh, timestep, numerical scheme, boundary conditions, monitor definitions, and comparison windows can all change the meaning of the result.
 
-If not, redesign the comparison or state the limitation explicitly.
+Do not demand artificial purity when the science requires a larger formulation change. Instead make the comparison and its limitations explicit.
 
-## Plan evidence before running
+## Plan the evidence before the run
 
-Call `plan-analysis` conceptually while designing the experiment. If the decisive evidence requires a monitor/history that must exist during the run, put that requirement into the setup before implementation.
+A simulation only answers the question if the relevant behavior is observable.
 
-Do not depend on a final `.dat.h5` to answer a question that requires a time history.
+Before implementation, decide what evidence would make the outcome interpretable. This may include residual histories, mass and phase balances, monitor stability, inventories, fluxes, local fields, contours, time histories, comparisons, or derived quantities.
 
-## Generate alternatives with subagents
+Call `plan-analysis` when the analysis requirements are non-trivial. If decisive evidence must be recorded during the run, make that part of the experiment before the case is launched.
 
-For an important or expensive next step, use `arena` or a small `swarm`:
+Do not discover after a long simulation that the only quantity capable of answering the question was never monitored.
 
-- ask independent subagents for alternative experiment designs;
-- require each to identify confounders and expected information gain;
-- synthesize rather than voting blindly.
+## Explore alternatives when the choice matters
 
-Use `interrogate` on the leading design before execution if a mistaken setup would waste substantial compute.
+When several genuinely different experiments could attack the same uncertainty, use independent subagents, `arena`, or `interrogate` to widen and challenge the design space.
 
-## Rank candidates
+Ask for different ways of learning the same thing, not cosmetic variations of one setup.
 
-Rank primarily by:
-
-1. ability to answer the current question;
-2. ability to discriminate competing explanations;
-3. numerical/implementation feasibility;
-4. compute cost;
-5. reversibility and reuse of results.
-
-Do not rank primarily by novelty or sophistication.
+The main agent synthesises the alternatives and chooses based on expected information, interpretability, feasibility, and compute cost. Do not select by majority vote or sophistication.
 
 ## Output
 
-Return a small set of genuinely different candidates, usually 3–6 when human selection is expected. Recommend one and explain why.
+Return only the experiments that genuinely earn consideration.
 
-Once selected, convert the chosen design into `setup.md` with:
+For each one, make clear:
 
-- question;
-- rationale;
-- parent/reference;
-- controlled changes;
-- preserved settings;
-- run plan;
-- evidence/analysis requirements;
-- known limitations.
+- the question it is testing;
+- the hypothesis or competing explanations;
+- the intended change and comparison basis;
+- the behavior or evidence that would be informative;
+- what different outcomes would teach us;
+- the important numerical or implementation requirements;
+- the rough cost and why the run is worth it now.
 
-Do not write results or conclusions into the setup.
+When human selection is expected, provide a small set of meaningfully different options and recommend the one with the strongest expected information value.
+
+Once an experiment is selected, turn it into `setup.md`. The setup should define the experiment, not predict its result.
