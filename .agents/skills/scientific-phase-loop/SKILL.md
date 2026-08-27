@@ -1,13 +1,13 @@
 ---
 name: scientific-phase-loop
-description: "Navigate a scientific phase from a human-defined phase goal toward a defensible conclusion. Use when the phase direction and boundaries are agreed but the route is not known in advance, and the agent should autonomously learn from evidence, choose between discovery and hypothesis-test experiments, run simulations, interpret results, revise hypotheses, and keep testing until the phase is answered or a genuine human boundary is reached."
+description: "Navigate a scientific phase from a human-defined phase goal toward a defensible conclusion. Use when the phase direction and boundaries are agreed but the route is not known in advance, and the agent should autonomously learn from evidence, choose between discovery and hypothesis-test experiments, run simulations, interpret results, revise hypotheses and working assumptions, and keep testing until the phase is answered or a genuine human boundary is reached."
 ---
 
 # Scientific Phase Loop
 
 You are navigating a scientific phase toward a conclusion.
 
-Keep the phase question in view, but do not assume the route to it is known in advance. The purpose of the loop is not to execute a predetermined sequence of simulations. It is to reduce meaningful uncertainty about the phase question until the evidence supports a useful conclusion.
+Keep the phase question in view, but do not assume the route to it is known in advance. The purpose of the loop is not to execute a predetermined sequence of simulations. It is to reduce meaningful uncertainty about the phase question until there is sufficient evidence for the decision or scientific statement the phase was created to make.
 
 ## Enter with a phase handoff
 
@@ -28,9 +28,9 @@ Within those boundaries, you own the scientific reasoning needed to move the pha
 
 ## Simulation evidence is the anchor
 
-Reasoning, literature, prior experience, and specialist opinions are useful for forming hypotheses and deciding what to test. Unless genuinely equivalent evidence already exists, they do not tell you what this simulation will do.
+Reasoning, literature, prior experience, and specialist opinions are useful for forming hypotheses, identifying working assumptions, and deciding what to test. Unless genuinely equivalent evidence already exists, they do not tell you what this simulation will do.
 
-Treat untested expectations as hypotheses.
+Treat untested expectations as hypotheses. Treat assumptions as assumptions: useful working conditions that may bound the interpretation, not hidden facts and not automatic experiment targets.
 
 When the uncertainty concerns the behaviour of the current CFD model, the strongest way to resolve it is normally to run the relevant simulation properly and inspect the resulting data.
 
@@ -48,7 +48,7 @@ Simulation output is not automatically truth. Its scientific weight depends on w
 
 Begin by forming a clear picture of where the investigation stands.
 
-Understand the phase goal, the current model and assumptions, the experiments already attempted, the evidence they produced, what appears established, what has failed, and what remains unresolved.
+Understand the phase goal, the current model, the important working assumptions, the experiments already attempted, the evidence they produced, what appears established, what has failed, and what remains unresolved.
 
 Previous work is evidence, not a prescribed trajectory. Do not simply continue from the last setup because it is the most recent. Reconsider the problem from the phase question itself.
 
@@ -57,6 +57,8 @@ Ask:
 - Where are we now?
 - What is genuinely supported by simulation evidence?
 - What is still only a hypothesis or interpretation?
+- Which working assumptions matter to the current conclusion?
+- Is any assumption now questioned or materially challenged by evidence?
 - What uncertainty matters most to the phase goal?
 - What observation would materially change our understanding?
 
@@ -70,7 +72,9 @@ There may be several plausible lines of investigation. Some may involve conserva
 
 Do not force the phase into a fixed experiment matrix by default. When the important direction is genuinely unclear and breadth itself would reduce uncertainty, deliberately enter discovery mode and use a bounded matrix instead.
 
-Sketch the branches that are visible now. Leave the rest in the fog. As evidence arrives, new branches may become visible, old branches may collapse, and the most useful direction may change completely.
+Sketch the branches that are visible now. Leave the rest in the fog. As evidence arrives, new branches may become visible, old branches may collapse, hypotheses may strengthen or weaken, and an assumption may become important enough to challenge.
+
+Do not become fixated on assumptions merely because they exist. Challenge them when evidence gives a concrete reason and when they could materially affect the phase conclusion.
 
 ## Choose the experiment-design mode
 
@@ -96,7 +100,7 @@ Call `design-experiment` in hypothesis-test mode. Prefer one focused experiment 
 
 A run around 10,000 iterations may be an appropriate ballpark for the current project when that duration is deliberately chosen to expose the required behaviour. Do not treat 10,000 as a universal criterion; justify the run length from the model, question, and evidence required.
 
-Before spending the compute, be able to say what observations would support or weaken the hypothesis and what data must exist to make that judgement.
+Before spending the compute, be able to say what observations would support or weaken the hypothesis, what working assumptions materially bound the interpretation, and what data must exist to make that judgement.
 
 The two modes are not fixed stages. Discovery can produce a focused hypothesis worth testing deeply. A long hypothesis test can expose an unexpected broad uncertainty that sends the loop back into discovery.
 
@@ -127,6 +131,10 @@ What did the simulation or analysis actually show?
         ↓
 What changed in our understanding?
         ↓
+What happened to the current hypothesis?
+        ↓
+Did any important working assumption change state?
+        ↓
 What remains uncertain?
         ↓
 Is the uncertainty broad or focused now?
@@ -138,7 +146,9 @@ Sometimes the answer is another experiment. Sometimes it is more analysis of the
 
 The loop should remain responsive to evidence rather than loyal to its original plan.
 
-When another experiment is justified, form or revise the hypothesis, choose discovery or hypothesis-test mode, design the experiment or campaign, run it, analyse the resulting evidence, interpret it, and update the phase understanding before choosing again.
+When another experiment is justified, form or revise the hypothesis, carry forward the relevant working assumptions, choose discovery or hypothesis-test mode, design the experiment or campaign, run it, analyse the resulting evidence, interpret it, and update the phase understanding before choosing again.
+
+After each meaningful experiment or analysis cycle, call `check-phase-closure` before starting another cycle.
 
 ## Use specialists to deepen the investigation
 
@@ -146,7 +156,7 @@ The orchestrator owns the scientific direction, not every specialist discipline 
 
 Reach for specialist skills and subagents when they can sharpen the picture. They may investigate previous experiments, design candidate tests, assess CFD numerics, analyse data, apply statistics, search literature, implement a Fluent case, or challenge an interpretation.
 
-Use parallel or independent viewpoints when the problem benefits from diversity of thought. Use adversarial review when a consequential conclusion, experiment design, or interpretation deserves to be challenged.
+Use parallel or independent viewpoints when the problem benefits from diversity of thought. Use adversarial review when a consequential conclusion, experiment design, assumption, or interpretation deserves to be challenged.
 
 Subagents investigate. The orchestrator synthesises and decides.
 
@@ -181,25 +191,36 @@ Return to the human when the investigation reaches a genuine judgement boundary:
 
 If the phase has been handed over for autonomous work, keep moving while there are credible, useful ways to reduce uncertainty within the agreed boundaries.
 
-## Know when to return control
+## Use the closure gate
 
 The output of this loop is not a collection of simulations. It is a defensible phase-level conclusion and the evidence that supports it.
 
-Return control when one of three things is true:
+After every meaningful cycle, use `check-phase-closure` and act on one of three outcomes:
 
-1. the phase question is sufficiently answered to the level justified by the evidence;
-2. useful progress now requires a genuine human phase-level judgement outside the agreed boundaries;
-3. the human explicitly or manually stops the loop.
+1. **CONTINUE** — an important unresolved hypothesis or materially challenged assumption remains and a useful, feasible investigation could materially strengthen or change the phase answer;
+2. **CONCLUDE PHASE** — there is sufficient evidence for the decision or scientific statement the phase was created to make, and further feasible work is unlikely to change that statement enough to matter;
+3. **RETURN TO HUMAN / PHASE-PLANNER** — useful progress now requires a phase-level judgement outside the agreed autonomous boundaries.
 
-A phase can finish because the desired behaviour has been demonstrated, because a route has been shown not to work, because the remaining uncertainty is no longer important to the phase goal, or because the evidence reveals that a different assumption or phase must come next.
+Do not use complete understanding as the finish line. CFD investigation can nearly always expose another uncertainty. The relevant question is whether the remaining uncertainty materially threatens the statement this phase needs to make.
 
-Do not plan the next phase on your own at this boundary. Produce a concise phase-state handoff that `phase-planner` and the human can use to decide what comes next.
+### Anti-loop safeguard
+
+If two consecutive experiment or analysis cycles fail to materially change the current understanding, reduce an important uncertainty, strengthen the phase-level statement, or materially update an assumption, treat the current route as stagnant.
+
+Do not generate a third minor variation simply to keep the loop alive.
+
+Instead, substantially rethink the route — including the experiment-design mode, analysis, modelling assumption, or branch — or return control to `phase-planner` when that rethink crosses a genuine phase-level boundary.
+
+Stagnation is evidence about the route, not a reason to lower the evidentiary standard.
+
+When the outcome is `CONCLUDE PHASE` or `RETURN TO HUMAN / PHASE-PLANNER`, do not plan the next phase on your own. Produce a concise phase-state handoff that `phase-planner` and the human can use to decide what comes next.
 
 A good ending should make clear:
 
 - what the phase set out to understand;
 - what the simulations and analyses actually established;
 - what remains hypothesis rather than evidence;
+- which important assumptions remain accepted-for-now, questioned, or materially challenged;
 - what numerical or modelling limitations bound the conclusion;
 - why the loop stopped or returned control.
 
@@ -209,6 +230,6 @@ Do not manufacture certainty. A well-supported negative or conditional conclusio
 
 Long-running research should survive the death of any individual agent context.
 
-Use the repository to preserve the scientific thread through setup definitions, results, observations, figures, and the current phase understanding. A fresh agent should be able to recover where the phase stands and continue reasoning without needing the previous chat transcript.
+Use the repository to preserve the scientific thread through setup definitions, results, observations, figures, hypotheses, working assumptions, and the current phase understanding. A fresh agent should be able to recover where the phase stands and continue reasoning without needing the previous chat transcript.
 
 Keep that durable state concise enough to be useful. The repository is the memory of the investigation, not a transcript of the agent's thought process.
