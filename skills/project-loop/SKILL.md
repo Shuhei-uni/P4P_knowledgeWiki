@@ -1,6 +1,6 @@
 ---
 name: project-loop
-description: Review current P4P scientific state, propose experiments, create the selected experiment setup, or interpret results and update the next research direction.
+description: Review current P4P scientific state, propose experiments, create the selected experiment setup, interpret results, report project status, and update the next research direction.
 ---
 
 # Project loop
@@ -60,6 +60,21 @@ selects it.
 Update `Project/index.md` only when current scientific state changes. Do not
 maintain a second chronological work log or duplicate the same truth across
 systems.
+
+## Progress and status requests
+
+When asked for project progress, read `Project/index.md` first, then only the
+selected/latest experiment needed to verify the answer. Report:
+
+- what materially changed;
+- the current selected experiment or implementation state;
+- concrete blockers or missing evidence;
+- the next safe action.
+
+Generated JSON, transcripts, raw plots and machine outputs are evidence inputs;
+they become Project findings only after their identity, scope, completeness and
+uncertainty are reconciled. Do not create a progress diary or duplicate run
+chronology just to answer a status request.
 
 ## Ownership
 
