@@ -1,6 +1,6 @@
 ---
 name: scientific-phase-loop
-description: "Navigate a scientific phase from a human-defined phase goal toward a defensible conclusion. Use when the route is not known in advance and the agent should learn from existing evidence, choose high-information simulations and analyses, call specialist skills and subagents, and let new simulation evidence reshape what happens next."
+description: "Navigate a scientific phase from a human-defined phase goal toward a defensible conclusion. Use when the phase direction and boundaries are agreed but the route is not known in advance, and the agent should autonomously learn from evidence, design and run high-information simulations, interpret results, revise hypotheses, and keep testing until the phase is answered or a genuine human boundary is reached."
 ---
 
 # Scientific Phase Loop
@@ -8,6 +8,23 @@ description: "Navigate a scientific phase from a human-defined phase goal toward
 You are navigating a scientific phase toward a conclusion.
 
 Keep the phase question in view, but do not assume the route to it is known in advance. The purpose of the loop is not to execute a predetermined sequence of simulations. It is to reduce meaningful uncertainty about the phase question until the evidence supports a useful conclusion.
+
+## Enter with a phase handoff
+
+Start from the agreed phase goal or question and any boundaries supplied by the human or `phase-planner`.
+
+The handoff may include:
+
+- the phase goal or question;
+- current evidence that matters;
+- important unresolved uncertainty;
+- human constraints or compute/resource boundaries;
+- what would count as a useful phase-level conclusion;
+- conditions that should return control to the human.
+
+Treat this as the destination and boundaries, not the route. Do not turn the phase handoff into a fixed experiment checklist.
+
+Within those boundaries, you own the scientific reasoning needed to move the phase forward.
 
 ## Simulation evidence is the anchor
 
@@ -87,6 +104,8 @@ Sometimes the answer is another experiment. Sometimes it is more analysis of the
 
 The loop should remain responsive to evidence rather than loyal to its original plan.
 
+When another experiment is justified, form or revise the hypothesis, design the smallest high-information experiment or campaign that can test it, run it, analyse the resulting evidence, interpret it, and update the phase understanding before choosing again.
+
 ## Use specialists to deepen the investigation
 
 The orchestrator owns the scientific direction, not every specialist discipline beneath it.
@@ -128,13 +147,19 @@ Return to the human when the investigation reaches a genuine judgement boundary:
 
 If the phase has been handed over for autonomous work, keep moving while there are credible, useful ways to reduce uncertainty within the agreed boundaries.
 
-## Know when the phase is finished
+## Know when to return control
 
 The output of this loop is not a collection of simulations. It is a defensible phase-level conclusion and the evidence that supports it.
 
+Return control when one of three things is true:
+
+1. the phase question is sufficiently answered to the level justified by the evidence;
+2. useful progress now requires a genuine human phase-level judgement outside the agreed boundaries;
+3. the human explicitly or manually stops the loop.
+
 A phase can finish because the desired behaviour has been demonstrated, because a route has been shown not to work, because the remaining uncertainty is no longer important to the phase goal, or because the evidence reveals that a different assumption or phase must come next.
 
-Stop when you can answer the phase question to the level justified by the evidence, when further work is unlikely to change that answer enough to matter, or when useful progress now depends on a human judgement outside the phase.
+Do not plan the next phase on your own at this boundary. Produce a concise phase-state handoff that `phase-planner` and the human can use to decide what comes next.
 
 A good ending should make clear:
 
@@ -142,7 +167,7 @@ A good ending should make clear:
 - what the simulations and analyses actually established;
 - what remains hypothesis rather than evidence;
 - what numerical or modelling limitations bound the conclusion;
-- what this means for the next phase of the project.
+- why the loop stopped or returned control.
 
 Do not manufacture certainty. A well-supported negative or conditional conclusion is a successful phase conclusion.
 
