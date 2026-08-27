@@ -1,122 +1,38 @@
 ---
 name: statistical-analysis
-description: "Apply statistical reasoning to simulation data only when the experiment supports it. Use for transient/repeated/stochastic data, parameter sweeps, regression/response surfaces, uncertainty summaries, effect sizes, and sensitivity ranking; avoid fake inferential certainty from deterministic single-run CFD endpoints."
+description: "Add lightweight statistical summaries to noisy CFD histories when they make trends easier to see. Use for moving averages, rough trend fits, percentile envelopes, variability bands, and similar visual aids; do not manufacture certainty from solver data."
 ---
 
 # Statistical Analysis
 
-First decide whether statistics are scientifically appropriate.
+Use statistics to make noisy simulation behaviour easier to see, not to create stronger claims than the data support.
 
-## Applicability gate
+This skill is usually a helper for `cfd-numerical-analysis`.
 
-Statistical analysis is useful when the data contain meaningful sampling or variation, for example:
+## Keep the raw signal visible
 
-- transient time windows after startup;
-- periodic/unsteady signals;
-- repeated stochastic particle or simulation realizations;
-- parameter sweeps / DOE;
-- regression or response-surface work;
-- uncertainty propagation;
-- repeated experiments or validation measurements.
+Start from the original iteration/time history. Any fitted or smoothed quantity is a visual aid layered on top of the raw evidence.
 
-Be cautious with:
+Never present a moving average, fitted line, percentile band, or variance estimate as though it were the solver output itself.
 
-- one deterministic steady endpoint per case;
-- pseudo-replication created by treating highly autocorrelated iterations as independent samples;
-- p-values attached to arbitrary solver histories;
-- confidence intervals that ignore numerical/model-form error.
+## Prefer simple descriptive tools
 
-If formal statistics are not appropriate, use descriptive numerical analysis instead.
+Use the simplest method that improves interpretation. Useful examples include moving or windowed averages, median trends, rough fitted trend lines, percentile envelopes such as a 95th-percentile line or band, rolling spread, variance or standard-deviation bands, and simple slope estimates over a declared window.
 
-## Define the statistical unit
+The goal is often to expose a broad tendency in data that are too jumpy to judge by eye.
 
-State what constitutes an observation/sample and why it can be treated as such.
+## Do not overstate the result
 
-For time series, assess correlation and effective sample size before treating points as independent. For repeated runs, distinguish within-run temporal variation from between-run variation.
+A trend line does not prove convergence. A narrow band does not prove numerical accuracy. Thousands of solver iterations are not automatically thousands of independent statistical samples.
 
-## Choose the method from the question
+Avoid formal hypothesis testing, p-values, elaborate uncertainty claims, or complex models unless the experiment genuinely requires them and the data structure supports them.
 
-Possible tools include:
+## Make transformations explicit
 
-- mean/median and spread;
-- quantiles;
-- confidence/credible intervals when assumptions support them;
-- effect sizes and relative changes;
-- bootstrap/resampling where appropriate;
-- correlation and regression;
-- response surfaces;
-- ANOVA/factor effects for designed matrices;
-- sensitivity ranking;
-- uncertainty propagation;
-- outlier diagnostics;
-- equivalence/practical-difference reasoning when a meaningful tolerance exists.
-
-Do not use a more complex method when a direct effect size and uncertainty band answers the question.
-
-## Time-series safeguards
-
-Before computing time averages:
-
-- identify/remove startup only with evidence;
-- choose a physically meaningful averaging window;
-- assess autocorrelation or periodicity;
-- report the physical duration represented;
-- test sensitivity to nearby windows;
-- avoid presenting thousands of correlated timesteps as thousands of independent observations.
-
-## Assumptions
-
-State assumptions that materially affect the result, such as:
-
-- independence;
-- stationarity;
-- distributional form;
-- linearity;
-- homoscedasticity;
-- adequate sample size;
-- chosen prior/tolerance if relevant.
-
-If assumptions are weak, use robust/descriptive alternatives and lower the strength of the claim.
-
-## Statistical vs numerical uncertainty
-
-Keep separate:
-
-- temporal/stochastic variability;
-- discretization/timestep error;
-- iterative convergence error;
-- parameter uncertainty;
-- model-form uncertainty;
-- experimental/reference uncertainty.
-
-A tight statistical interval does not prove the CFD model is accurate.
-
-## Cross-case inference
-
-Before comparing cases, confirm that the experiment design supports the comparison and that numerical adequacy is not the dominant uncertainty.
-
-Report practical effect size alongside any inferential statistic. A statistically detectable difference may be physically irrelevant, and a physically important difference may be unresolved with the available samples.
-
-## Delegate/check
-
-For consequential analysis, use `interrogate` or an independent subagent to check:
-
-- sample definition;
-- independence/autocorrelation;
-- window selection;
-- regression assumptions;
-- whether the statistical conclusion exceeds the experiment design.
+State what transformation was applied, the window or fitting range, and why it helps. If the apparent trend changes materially with a reasonable alternative window, show or report that sensitivity rather than hiding it.
 
 ## Output
 
-Return:
+Return the statistical overlay or summary together with the raw plot, a short description of the method, and a bounded statement of what visual tendency it helps reveal.
 
-1. why statistical analysis is or is not appropriate;
-2. sample/unit definition;
-3. method and assumptions;
-4. effect estimates and uncertainty;
-5. robustness/diagnostic checks;
-6. limitations;
-7. neutral statements safe to use in `results.md`.
-
-Leave numerical CFD adequacy to `cfd-numerical-analysis` and physical causality to `interpret-experiment`.
+Leave the scientific conclusion to `interpret-experiment`.
