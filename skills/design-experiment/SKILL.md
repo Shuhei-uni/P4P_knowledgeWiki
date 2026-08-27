@@ -19,7 +19,15 @@ Do not begin from an available parameter list and ask what can be swept. Begin f
 
 Reasoning, literature, previous experience, and prior simulations can shape the hypothesis. Unless there is genuinely equivalent prior evidence, they do not establish what this new simulation will do.
 
-## Make the simulation earn its cost
+## Generate meaningful alternatives
+
+When more than one useful route is visible, create a small set of genuinely different experiments that attack the uncertainty in different ways.
+
+Do not produce cosmetic variations just to create options. Alternatives should represent different ways of learning something important.
+
+Use independent subagents or `arena` when widening the design space would improve the choice.
+
+## Make each simulation earn its cost
 
 Prefer a small number of high-information simulations over broad brute-force sweeps.
 
@@ -56,13 +64,31 @@ Call `plan-analysis` when the analysis requirements are non-trivial. If decisive
 
 Do not discover after a long simulation that the only quantity capable of answering the question was never monitored.
 
-## Explore alternatives when the choice matters
+## Question the experiments before selecting one
 
-When several genuinely different experiments could attack the same uncertainty, use independent subagents, `arena`, or `interrogate` to widen and challenge the design space.
+Do not select the first plausible candidate by momentum.
 
-Ask for different ways of learning the same thing, not cosmetic variations of one setup.
+Once serious candidates exist, call `question-experiment` to challenge them against:
 
-The main agent synthesises the alternatives and chooses based on expected information, interpretability, feasibility, and compute cost. Do not select by majority vote or sophistication.
+- past simulation results and observations;
+- relevant literature or Fluent guidance;
+- whether the uncertainty has already been partly answered;
+- confounding and numerical risk;
+- expected information gain;
+- likely scientific impact;
+- compute and implementation cost.
+
+The critic may reject, merge, reshape, or reprioritize candidates. If existing evidence can answer the question without another simulation, do that instead.
+
+The selected experiment should be the best justified use of compute now, not necessarily the safest, easiest, or most likely to confirm the current hypothesis.
+
+## Create the setup only after selection
+
+Once an experiment survives questioning and is selected, call `create-setup`.
+
+`design-experiment` owns what is worth testing. `create-setup` owns turning that choice into a precise `setup.md` contract for implementation.
+
+Do not mix setup formatting, repository routing, or detailed Fluent implementation mechanics into the experiment-design reasoning.
 
 ## Output
 
@@ -78,6 +104,6 @@ For each one, make clear:
 - the important numerical or implementation requirements;
 - the rough cost and why the run is worth it now.
 
-When human selection is expected, provide a small set of meaningfully different options and recommend the one with the strongest expected information value.
+After `question-experiment`, identify the strongest justified experiment and why it earned selection.
 
-Once an experiment is selected, turn it into `setup.md`. The setup should define the experiment, not predict its result.
+After selection, hand it to `create-setup`. The setup should define the experiment, not predict its result.
