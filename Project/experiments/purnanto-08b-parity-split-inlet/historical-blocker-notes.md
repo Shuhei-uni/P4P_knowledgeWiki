@@ -1,9 +1,9 @@
-> **Legacy source:** ResearchProject_wiki/wiki/progress/blockers.md  
-> **Migration note:** These excerpts preserve the historical blocker record; no blocker status or interpretation has been rewritten. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** ResearchProject_wiki/wiki/progress/blockers.md
+> **Migration note:** These excerpts preserve the historical blocker record; no blocker status or interpretation has been rewritten. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Historical blocker notes
 
-> **Legacy source:** ResearchProject_wiki/wiki/progress/blockers.md
+> **Retired source:** ResearchProject_wiki/wiki/progress/blockers.md
 > **Migration note:** Selected historical limitations are preserved without changing their status or interpretation.
 
 ### BLK-008 | Setup 08b DPM result is dominated by incomplete tracks

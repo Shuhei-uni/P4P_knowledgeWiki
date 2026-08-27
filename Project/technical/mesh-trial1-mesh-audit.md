@@ -1,5 +1,5 @@
-> **Legacy source:** ResearchProject_wiki/wiki/technical/mesh-trial1-semi-automated-workflow.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** ResearchProject_wiki/wiki/technical/mesh-trial1-semi-automated-workflow.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # `mesh-trial1` Semi-Automated Mesh Improvement Workflow
 
@@ -7,17 +7,18 @@
 
 Record the project-facing workflow and first audit artifact for improving the current `mesh-trial1` meshing branch without changing geometry or Named Selections.
 
-Primary reusable guidance:
-
-- `../../../CFD_wiki/wiki/guidance/workbench-meshdat-semi-automated-improvement.md`
-- `../../../PyAnsys/docs/findings/MESHDAT_SEMI_AUTOMATED_WORKFLOW.md`
-- `../../../PyAnsys/scripts/run_mesh_improvement_workflow.py`
+Primary reusable guidance is the maintained
+[Workbench `.meshdat` workflow](../../CFD_wiki/wiki/guidance/workbench-meshdat-semi-automated-improvement.md).
+No direct Workbench GUI runner is retained in `PyAnsys`; after an operator
+exports a candidate mesh, use the read-only
+[`inspect_case.py`](../../PyAnsys/scripts/inspection/inspect_case.py) workflow
+to inspect the loaded Fluent case.
 
 ## Inputs used on 2026-06-10
 
 - `.meshdat`: `C:\Users\Shuhei Yokkaichi\Documents\CFD\New folder\meshing trial\mesh-trial1.meshdat`
 - baseline Fluent mesh: `C:\Users\Shuhei Yokkaichi\Documents\CFD\New folder\meshing trial\mesh-trial1.msh`
-- required-zones file: `../../../PyAnsys/input/required-zones-mesh-trial1.txt`
+- required-zones file: historical machine artifact path `../../PyAnsys/input/required-zones-mesh-trial1.txt` (not migrated)
 - cell target: diagnostic only for now; not used as the primary acceptance rule
 
 ## Active required-zone contract
@@ -68,9 +69,9 @@ Cell zones expected:
 
 ## Generated artifacts
 
-- Workflow report: `../../../PyAnsys/output/meshdat-semi-automated/workflow-report.md`
-- Machine-readable report: `../../../PyAnsys/output/meshdat-semi-automated/workflow-report.json`
-- Required-zones contract: `../../../PyAnsys/input/required-zones-mesh-trial1.txt`
+- Workflow report: historical machine artifact path `../../PyAnsys/output/meshdat-semi-automated/workflow-report.md` (not migrated)
+- Machine-readable report: historical machine artifact path `../../PyAnsys/output/meshdat-semi-automated/workflow-report.json` (not migrated)
+- Required-zones contract: historical machine artifact path `../../PyAnsys/input/required-zones-mesh-trial1.txt` (not migrated)
 
 ## Next action
 

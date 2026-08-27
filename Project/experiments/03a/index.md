@@ -24,13 +24,16 @@ This is the Project-layer tracer for the full-geometry Mixture `03A` campaign. I
 
 The original setup and report records remain available as frozen provenance:
 
-- [Stage-3 setup authority](../../../Setups/full-geometry/mixture/steady-liquid-outlet/03a-stage3-fluent-recommended-convergence-sweep.md)
-- [Stage-3 checkpoint evidence](../../../Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/03a-stage3-results-20260821.md)
-- [Stage-3 interpretation report](../../../Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/03a-stage3-final-results.md)
-- [Stage-4 setup authority](../../../Setups/full-geometry/mixture/steady-liquid-outlet/03a-stage4-promising-state-development.md)
-- [Stage-4 execution evidence](../../../Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/03a-stage4-native-queue-execution-2026-08-23.md)
+- [Stage-3 setup authority](stage-03/setup-source.md)
+- [Stage-3 checkpoint evidence](stage-03/source-results-20260821.md)
+- [Stage-3 interpretation report](stage-03/source-final-results.md)
+- [Stage-4 setup authority](stage-04/setup-source.md)
+- [Stage-4 execution evidence](stage-04/source-native-queue-execution-2026-08-23.md)
 
-The detailed Fluent artifacts, histories, plots, case/data files, and machine-readable manifests remain in their existing `Setups/reports/` and `PyAnsys/` locations. This tracer links to them through the source reports rather than copying them.
+The detailed Fluent artifacts, histories, plots, case/data files, and
+machine-readable manifests remain in their original external or generated
+locations. This tracer links to the migrated source reports and Project
+evidence rather than copying binary run output.
 
 ## Current status
 
@@ -51,4 +54,7 @@ The Project tracer becomes the canonical current interpretation authority for 03
 4. the Project index points to this tracer as the shortest current route;
 5. the fresh-agent test can explain Stage 3, the Stage-4 rationale, the Stage-4 experiment, and the unresolved gate from the Project records alone.
 
-After this gate passes, new 03A scientific updates go to these Project records only. The old 03A setup/report records remain available as frozen historical/provenance sources; `Setups/` and `PyAnsys/` retain concrete lineage and machine artifacts, respectively. There is no dual-write period after cutover.
+After this gate passes, new 03A scientific updates go to these Project records
+only. The old 03A setup/report records are recoverable from Git history; the
+current Project packet owns the scientific interpretation and PyAnsys owns
+machine evidence. There is no dual-write period after cutover.

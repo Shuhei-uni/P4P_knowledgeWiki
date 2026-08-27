@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/03a-stage4-native-queue-execution-2026-08-23.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/03a-stage4-native-queue-execution-2026-08-23.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 ---
 record_type: result-report
@@ -158,10 +158,12 @@ row is at iteration `1`, so no artificial iteration-0 residual is inserted.
   `PyAnsys/output/03a_stage4/native_queue_recovery/20260823T125548Z/`
 - Recovery implementation:
   `PyAnsys/scripts/setup/recover_resume_03a_stage4.py`
-- Server 2 extraction implementation:
-  `PyAnsys/scripts/report/extract_03a_stage4_server2_evidence.py`
-- Offline plotting implementation:
-  `PyAnsys/scripts/report/plot_03a_stage4_server2.py`
+- Server 2 extraction implementation: historical machine/report helper path
+  `PyAnsys/scripts/report/extract_03a_stage4_server2_evidence.py` (not
+  retained; recoverable from Git history)
+- Offline plotting implementation: historical machine/report helper path
+  `PyAnsys/scripts/report/plot_03a_stage4_server2.py` (not retained;
+  recoverable from Git history)
 
 Interpretation status: completed diagnostic evidence recovered for S4-01 and
 S4-03, completed-budget but endpoint-incomplete evidence for S4-02, and

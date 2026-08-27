@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/03a-stage3-results-20260821.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/03a-stage3-results-20260821.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # 03A Stage-3 Results — F01–F12 evidence report
 
@@ -9,9 +9,13 @@
 > **Evidence model:** residual histories plus discrete physical measurements from paired `.cas.h5`/`.dat.h5` checkpoints  
 > **Interpretation status:** pending user direction
 
-This file remains the Stage-3 **checkpoint/provenance evidence packet**, not the final scientific report. The final report should be rebuilt from continuous stitched residual histories plus recovered Fluent Report File histories using [`03a-stage3-results-analysis-and-plotting-plan.md`](source-analysis-and-plotting-plan.md) and [`03a-stage3-final-results-template.md`](../../../../Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/03a-stage3-final-results-template.md).
+This file remains the Stage-3 **checkpoint/provenance evidence packet**, not the
+final scientific report. The final report should be rebuilt from continuous
+stitched residual histories plus recovered Fluent Report File histories using
+the [migrated analysis and plotting plan](source-analysis-and-plotting-plan.md).
 
-The existing checkpoint CSV remains the structured endpoint authority: [`03a-stage3-results-20260821-checkpoints.csv`](../../../../Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/03a-stage3-results-20260821-checkpoints.csv).
+The existing checkpoint CSV was the structured endpoint authority for the
+source run; its interpreted contents are retained in this Project packet.
 
 ## 1. Evidence conventions
 

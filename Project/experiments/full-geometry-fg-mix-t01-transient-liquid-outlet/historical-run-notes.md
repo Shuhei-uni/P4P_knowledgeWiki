@@ -1,9 +1,9 @@
-> **Legacy source:** ResearchProject_wiki/wiki/progress/experiments.md  
-> **Migration note:** These excerpts preserve the historical run-note record; no status or interpretation has been rewritten. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** ResearchProject_wiki/wiki/progress/experiments.md
+> **Migration note:** These excerpts preserve the historical run-note record; no status or interpretation has been rewritten. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Historical run notes
 
-> **Legacy source:** ResearchProject_wiki/wiki/progress/experiments.md
+> **Retired source:** ResearchProject_wiki/wiki/progress/experiments.md
 > **Migration note:** Selected run entries are preserved verbatim as historical project memory; they are not a new status or findings system.
 
 ### Run FG-MIX-T01-S1-CANDIDATES-2026-08-16
@@ -21,7 +21,7 @@
 - Convergence indicators: endpoint residual extraction retained `400` points over reported iterations `4–1,000`. Final continuity was `2.4976e-1` (`C136`), `2.2536e-1` (`C1375`), and `1.7239e-1` (`C139`). Reverse-flow warnings and turbulent-viscosity limiting persisted in all three runs.
 - Outcome: `Partially Converged` as an execution screen only; numerically non-converged/open for scientific interpretation. Provisional candidate parent: `C1375` at `1.1375 MPa`, selected for the balance of retained residual smoothness and phase-routing behaviour, not for a final pressure claim.
 - Hypothesized limitation: the simplified/open liquid-routing field remains inventory-draining, with liquid-brine outflow above liquid inlet at all recorded endpoints; missing total-inventory and lower-vessel pressure monitors prevent a stronger stability claim.
-- Evidence: [Stage-1 candidate report](../../../Setups/reports/full-geometry/mixture/transient-liquid-outlet/stage-01-candidate-screen-20260816.md), build snapshot (historical machine artifact path: `../../../PyAnsys/output/fg_mix_t01_stage1_candidates_20260816T102830Z.json`; not migrated), and the three linked residual/flux artifacts in that report.
+- Evidence: Stage-1 candidate report (retired source, details retained in this Project packet), build snapshot (historical machine artifact path: `../../../PyAnsys/output/fg_mix_t01_stage1_candidates_20260816T102830Z.json`; not migrated), and the three linked residual/flux artifacts in that report.
 - Next action: before Stage 2, explicitly reload the `C1375` paired endpoint, verify mesh/model/boundary/case-data identity, then construct the controlled transient startup branches without adding a Y010 patch to the steady endpoint.
 
 ### Run FG-MIX-T01-S2-START-STATES-2026-08-16
@@ -34,7 +34,7 @@
 - Transient controls: Fluent `unsteady-2nd-order-bounded`; PISO with one neighbor-correction iteration; fixed `2.5e-4 s` timestep; maximum `20` iterations per timestep; flow time `0 s`; zero transient timesteps run.
 - Readback: both paired case/data artifacts were written and independently reloaded. Y010 selected `33,315` cells; post-patch liquid volume was `4.793078931 m³` (`INIT-S`) and `4.790652590 m³` (`INIT-H`).
 - Outcome: `Case construction complete; user-accepted scope limitation`. The two post-patch Y010 volumes differ by approximately `0.05065%`; the user accepted this physical difference for comparison. Several optional volume-report history toggles were read-only in the Fluent 2025 R2 Settings API. Direct total-liquid-mass monitoring was prepared separately before any replacement Stage-3 run.
-- Evidence: [Stage-2 startup-state report](../../../Setups/reports/full-geometry/mixture/transient-liquid-outlet/stage-02-start-states-20260816.md), build manifest (historical machine artifact path: `../../../PyAnsys/output/fg_mix_t01_stage2_start_states_20260816.json`; not migrated), and the four remote paired artifacts named in the report.
+- Evidence: Stage-2 startup-state report (retired source, details retained in this Project packet), build manifest (historical machine artifact path: `../../../PyAnsys/output/fg_mix_t01_stage2_start_states_20260816.json`; not migrated), and the four remote paired artifacts named in the report.
 - Next action: use the monitor-ready copies for the equal-physical-time INIT-S versus INIT-H comparison when explicitly authorized; preserve the accepted Y010 difference as a scope limitation.
 
 ### Run FG-MIX-T01-S3-INIT-CANCELLED-2026-08-16
@@ -46,7 +46,7 @@
 - Endpoint status: neither branch wrote a paired Stage-3 case/data endpoint. The partial attempt is excluded from physical comparison and provides no complete liquid-mass history.
 - Monitoring recovery: the saved Stage-2 pairs were reloaded without reinitialization, repatching, or advancing. Fresh monitor-ready copies now contain direct full-domain phase-2 `volume-mass` report `fg_mix_t01_s3_total_liquid_mass`, with report-file output true after reload verification.
 - Outcome: `Canceled / no comparison result; monitor-ready restart inputs prepared`.
-- Evidence: [Stage-3 cancellation and mass-monitor report](../../../Setups/reports/full-geometry/mixture/transient-liquid-outlet/stage-03-initialization-comparison-20260816.md), canceled submission manifest (historical machine artifact path: `../../../PyAnsys/output/fg_mix_t01_stage3_initialization_comparison_20260816T120500Z.json`; not migrated), and monitor-preparation manifest (historical machine artifact path: `../../../PyAnsys/output/fg_mix_t01_stage3_total_mass_monitor_20260816T124000Z.json`; not migrated).
+- Evidence: Stage-3 cancellation and mass-monitor report (retired source, details retained in this Project packet), canceled submission manifest (historical machine artifact path: `../../../PyAnsys/output/fg_mix_t01_stage3_initialization_comparison_20260816T120500Z.json`; not migrated), and monitor-preparation manifest (historical machine artifact path: `../../../PyAnsys/output/fg_mix_t01_stage3_total_mass_monitor_20260816T124000Z.json`; not migrated).
 - Next action: wait for explicit restart direction; if restarted, use the monitor-ready pairs and preserve the `1,000`-step / `0.25 s` budget.
 
 ### Run FG-MIX-T01-S3-INIT-FAILED-FPE-2026-08-16
@@ -58,7 +58,7 @@
 - Failure: `INIT-H` failed at transient step `53` after continuity reached `3.1443e+57`; Fluent reported turbulent-viscosity limiting in all `231,376` cells, reversed flow at both pressure outlets, AMG divergence across the solved variables, and a floating-point exception.
 - Endpoint and mass-history status: no paired endpoint was written for either branch. The direct liquid-mass report was loaded, but the failed partial attempt does not provide a complete or scientifically usable mass trajectory.
 - Outcome: `Failed / floating-point exception; no Stage-3 comparison result`.
-- Evidence: [Stage-3 initialization comparison report](../../../Setups/reports/full-geometry/mixture/transient-liquid-outlet/stage-03-initialization-comparison-20260816.md), failed-run manifest (historical machine artifact path: `../../../PyAnsys/output/fg_mix_t01_stage3_initialization_comparison_20260816T115435Z.json`; not migrated), failed-run journal (historical machine artifact path: `../../../PyAnsys/output/fg_mix_t01_stage3_initialization_comparison_20260816T115435Z.jou`; not migrated), and the partial remote INIT-H transcript recorded in the manifest.
+- Evidence: Stage-3 initialization comparison report (retired source, details retained in this Project packet), failed-run manifest (historical machine artifact path: `../../../PyAnsys/output/fg_mix_t01_stage3_initialization_comparison_20260816T115435Z.json`; not migrated), failed-run journal (historical machine artifact path: `../../../PyAnsys/output/fg_mix_t01_stage3_initialization_comparison_20260816T115435Z.jou`; not migrated), and the partial remote INIT-H transcript recorded in the manifest.
 - Next action: hold automatic retries. A new user decision is required on timestep/initialization/outlet stabilization before another native run.
 
 ### Run FG-MIX-T01-S3-NP-DT1-2026-08-17
@@ -74,5 +74,5 @@
 - Convergence indicators: continuity grew from `2.2536e-1` through `2.2440e+2`, `8.4960e+6`, `6.6879e+16`, and `3.2426e+51`; turbulent-viscosity limiting reached all `231,376` cells; reverse flow occurred at both pressure outlets; AMG divergence was reported for pressure correction, `k`, `epsilon`, and `vof-1`; terminal floating-point exception.
 - Outcome: `Failed / floating-point exception; no-patch transient control did not survive`.
 - Hypothesized cause if not converged: timestep resolution, the inherited unpatched parent field, outlet-driven phase redistribution, or another coupled numerical mechanism remains unresolved. The exact transient-step/physical-time failure coordinate is not claimed because the live monitor retained a global residual label rather than a reliable transient-step coordinate.
-- Evidence: [NP-DT1 report](../../../Setups/reports/full-geometry/mixture/transient-liquid-outlet/stage-03-no-patch-NP-DT1-20260817.md), result manifest (historical machine artifact path: `../../../PyAnsys/output/fg_mix_t01_stage3_NP-DT1_200step_20260817.json`; not migrated), native journal (historical machine artifact path: `../../../PyAnsys/output/fg_mix_t01_stage3_NP-DT1_200step.jou`; not migrated), and the remote transcript named in the report.
+- Evidence: NP-DT1 report (retired source, details retained in this Project packet), result manifest (historical machine artifact path: `../../../PyAnsys/output/fg_mix_t01_stage3_NP-DT1_200step_20260817.json`; not migrated), native journal (historical machine artifact path: `../../../PyAnsys/output/fg_mix_t01_stage3_NP-DT1_200step.jou`; not migrated), and the remote transcript named in the report.
 - Next action: do not launch the six-case screen or alter multiple numerical controls. Decide whether to authorize NP-DT2 at `1.25e-4 s` with every other control frozen.

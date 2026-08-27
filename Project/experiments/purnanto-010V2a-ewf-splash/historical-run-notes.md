@@ -1,9 +1,9 @@
-> **Legacy source:** ResearchProject_wiki/wiki/progress/experiments.md  
-> **Migration note:** These excerpts preserve the historical run-note record; no status or interpretation has been rewritten. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** ResearchProject_wiki/wiki/progress/experiments.md
+> **Migration note:** These excerpts preserve the historical run-note record; no status or interpretation has been rewritten. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Historical run notes
 
-> **Legacy source:** ResearchProject_wiki/wiki/progress/experiments.md
+> **Retired source:** ResearchProject_wiki/wiki/progress/experiments.md
 > **Migration note:** Selected run entries are preserved verbatim as historical project memory; they are not a new status or findings system.
 
 ### Run EWF-010V2A-POST-2026-07-22

@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/past/archived/10a-ewf-deposition.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/past/archived/10a-ewf-deposition.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Setup 10a — Eulerian Wall Film Deposition and Drainage
 
@@ -10,12 +10,12 @@
 | Setup ID | `10a` |
 | Lifecycle | `archived` |
 | Role | intended no-splash EWF deposition/drainage control; recorded artifact is splash-enabled |
-| Parent setup | [09c](../../../Setups/past/reported/09c-dpm-ewf-wall-film-reentrainment.md) |
+| Parent setup | [09c](../purnanto-09c-two-way-dpm-coupling/setup.md) |
 | Evidence-use label | archived setup-only control; the preliminary splash-enabled result belongs to `10a-splash` |
 | Outcome | needs follow-up |
 | Linked report | none — the splash-enabled saved artifact is filed under `10a-splash` |
 | Related child | [10a-splash](../purnanto-10a-splash-ewf-preliminary/setup.md) |
-| Family plan | [Setup 10 family plan](../../../Setups/future/10-wall-film-reentrainment-and-dpm-interaction-plan.md) |
+| Family plan | [Setup 10 family plan](../purnanto-10-wallfilm-dpm-sensitivity/setup.md) |
 
 ## 1. Purpose
 

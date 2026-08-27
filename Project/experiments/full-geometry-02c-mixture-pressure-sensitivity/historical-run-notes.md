@@ -1,9 +1,9 @@
-> **Legacy source:** ResearchProject_wiki/wiki/progress/experiments.md  
-> **Migration note:** These excerpts preserve the historical run-note record; no status or interpretation has been rewritten. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** ResearchProject_wiki/wiki/progress/experiments.md
+> **Migration note:** These excerpts preserve the historical run-note record; no status or interpretation has been rewritten. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Historical run notes
 
-> **Legacy source:** ResearchProject_wiki/wiki/progress/experiments.md
+> **Retired source:** ResearchProject_wiki/wiki/progress/experiments.md
 > **Migration note:** Selected run entries are preserved verbatim as historical project memory; they are not a new status or findings system.
 
 ### Run 02c-STUDENT-I20-I60-SMOKE-2026-08-16
@@ -155,5 +155,5 @@
 - Convergence indicators: 500 residual points; final continuity `2.288839e-1`, minimum continuity `1.332997e-1` at iteration 37; final x/y/z velocity residuals `1.079818e-3 / 1.212693e-3 / 1.117975e-3`; persistent reverse flow on both pressure outlets and viscosity limiting.
 - Outcome: `Unstable / Indeterminate; completed requested screen but not converged`.
 - Hypothesized cause if not converged: the `1.140 MPa` brine pressure is associated with strong reverse liquid flow at the brine boundary in this Student surrogate, while the simplified geometry has no modelled lower-liquid outlet; the resulting field is open and numerically unhealthy. This is a hypothesis, not a validated pressure-limit claim.
-- Evidence: [02c H results](../../../Setups/reports/full-geometry/mixture/steady-liquid-outlet/02c/results.md), build manifest (historical machine artifact path: `../../../PyAnsys/output/02c-student-h1140-build-20260816T091723Z.json`; not migrated), flux extraction (historical machine artifact path: `../../../PyAnsys/output/post_simulation_analysis/02c-H-brine-p1140kpa-unprimed-student-iter500-20260816T091812Z-flux-check.json`; not migrated), residual extraction (historical machine artifact path: `../../../PyAnsys/output/post_simulation_analysis/02c-H-brine-p1140kpa-unprimed-student-iter500-20260816T091812Z-residual-check.json`; not migrated), and residual plot (historical machine artifact path: `../../../PyAnsys/output/post_simulation_analysis/02c-H-brine-p1140kpa-unprimed-student-iter500-20260816T091812Z-residual-check.png`; not migrated).
+- Evidence: 02c H results (retired source; details retained in this Project packet), build manifest (historical machine artifact path: `../../../PyAnsys/output/02c-student-h1140-build-20260816T091723Z.json`; not migrated), flux extraction (historical machine artifact path: `../../../PyAnsys/output/post_simulation_analysis/02c-H-brine-p1140kpa-unprimed-student-iter500-20260816T091812Z-flux-check.json`; not migrated), residual extraction (historical machine artifact path: `../../../PyAnsys/output/post_simulation_analysis/02c-H-brine-p1140kpa-unprimed-student-iter500-20260816T091812Z-residual-check.json`; not migrated), and residual plot (historical machine artifact path: `../../../PyAnsys/output/post_simulation_analysis/02c-H-brine-p1140kpa-unprimed-student-iter500-20260816T091812Z-residual-check.png`; not migrated).
 - Next action: retain H as diagnostic evidence only; do not revive the cancelled H20–H50 or I20–I160 sweeps without a new user scope decision and a mesh/lineage decision. Interpretation status remains pending user direction.

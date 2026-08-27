@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/reports/full-geometry/mixture/transient-liquid-outlet/stage-02/stage-02-start-states-20260816.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/reports/full-geometry/mixture/transient-liquid-outlet/stage-02/stage-02-start-states-20260816.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Stage-2 Startup-State Construction — FG-MIX-T01
 

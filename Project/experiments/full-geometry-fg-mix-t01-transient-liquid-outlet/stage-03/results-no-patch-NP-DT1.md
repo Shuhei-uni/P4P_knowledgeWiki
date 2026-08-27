@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/reports/full-geometry/mixture/transient-liquid-outlet/stage-03/stage-03-no-patch-NP-DT1-20260817.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/reports/full-geometry/mixture/transient-liquid-outlet/stage-03/stage-03-no-patch-NP-DT1-20260817.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # FG-MIX-T01 Stage 3 — NP-DT1 No-patch transient control
 

@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/past/archived/00a-purnanto-setup-5000-live-audit.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/past/archived/00a-purnanto-setup-5000-live-audit.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Purnanto Setup 5000 Live Fluent Audit
 
@@ -28,8 +28,8 @@ This report is a concrete setup-instance snapshot. It links back to the reusable
 
 - CFD source page: [purnanto-2013-cfd-geothermal-separator](../../../CFD_wiki/wiki/sources/purnanto-2013-cfd-geothermal-separator.md)
 - CFD setup page: [geothermal-boc-separator-fluent-2013-baseline](../../../CFD_wiki/wiki/setups/geothermal-boc-separator-fluent-2013-baseline.md)
-- Project technical note: [purnanto-etal-2013](../../../ResearchProject_wiki/wiki/technical/sources/purnanto-etal-2013.md)
-- Friendly live reference: [purnanto-live-setup-reference](../../../ResearchProject_wiki/wiki/technical/purnanto-live-setup-reference.md)
+- Project technical note: [Purnanto CFD source](../../../CFD_wiki/wiki/sources/purnanto-2013-cfd-geothermal-separator.md)
+- Friendly live reference: [live setup reference](technical-live-setup-reference.md)
 
 Evidence labels:
 

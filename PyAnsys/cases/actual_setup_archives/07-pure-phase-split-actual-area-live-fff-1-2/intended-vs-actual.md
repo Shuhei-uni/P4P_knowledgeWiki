@@ -7,12 +7,12 @@ This report compares:
 - the `intended inherited setup` defined by the setup-report chain
 - the `actual live Fluent setup` exported from `FFF.1-2.cas.h5` and `FFF.1-2-02541.dat.h5`
 
-Inheritance chain used for intended setup:
+Project records used for the intended setup:
 
-1. [00-baseline-spiral-boc-reference.md](../../../../Setups/past/archived/00-baseline-spiral-boc-reference.md)
-2. [03-mixed-wet-half-velocity-inlet.md](../../../../Setups/past/archived/03-mixed-wet-half-velocity-inlet.md)
-3. [04-mixed-wet-half-actual-area.md](../../../../Setups/past/reported/04-mixed-wet-half-actual-area.md)
-4. [07-pure-phase-split-actual-area.md](../../../../Setups/past/reported/07-pure-phase-split-actual-area.md)
+1. [Purnanto reference](../../../../Project/experiments/purnanto-00-reference-spiral-boc/setup.md)
+2. [Mixed wet-half velocity-inlet record](../../../../Project/experiments/purnanto-03-mixed-wet-half-velocity-inlet/setup.md)
+3. [Mixed wet-half actual-area record](../../../../Project/experiments/purnanto-04-mixed-wet-half-actual-area/setup.md)
+4. [Pure-phase actual-area record](../../../../Project/experiments/purnanto-07-pure-phase-actual-area/setup.md)
 
 Interpretation rule:
 

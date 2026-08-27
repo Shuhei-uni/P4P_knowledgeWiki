@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/past/archived/09-multiphase-separator-sensitivity-family.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/past/archived/09-multiphase-separator-sensitivity-family.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Multiphase Separator Sensitivity Family
 
@@ -22,7 +22,7 @@ Define setup family `09` as the first controlled physics-escalation layer after 
 This family exists only after setup `08b` has become an accepted baseline candidate under the project roadmap:
 
 - [08b-purnanto-parity-split-inlet-rebuild.md](../purnanto-08b-parity-split-inlet/setup.md)
-- [ResearchProject roadmap](../../../ResearchProject_wiki/wiki/project/roadmap.md)
+- [Project state and next decision](../../index.md)
 
 This parent report is **not** a run definition by itself.
 
@@ -30,7 +30,7 @@ It exists to organize three smaller child branches that each retire one uncertai
 
 - [09a-dpm-split-inlet-carryover.md](../purnanto-09a-dpm-deterministic-carryover/setup.md)
 - [09b-rsm-dpm-split-inlet-accuracy.md](../purnanto-09b-dpm-stochastic-dispersion/setup.md)
-- [09c-dpm-ewf-wall-film-reentrainment.md](../../../Setups/past/reported/09c-dpm-ewf-wall-film-reentrainment.md)
+- [09c two-way DPM coupling](../purnanto-09c-two-way-dpm-coupling/setup.md)
 
 Sequence note:
 
@@ -135,7 +135,7 @@ Main purpose:
 
 ### `09c` Two-Way DPM Coupling
 
-Use [09c-dpm-ewf-wall-film-reentrainment.md](../../../Setups/past/reported/09c-dpm-ewf-wall-film-reentrainment.md) when the main question is:
+Use the [09c two-way DPM coupling setup](../purnanto-09c-two-way-dpm-coupling/setup.md) when the main question is:
 
 ```text
 does physically meaningful droplet loading feed back strongly enough

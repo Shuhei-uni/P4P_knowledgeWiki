@@ -95,7 +95,7 @@ stationarity, convergence, separator performance, or parent eligibility.
 
 ## 5. Source and handoff
 
-- Scientific parent authority: [03A Stage-4 setup authority](../../../../Setups/full-geometry/mixture/steady-liquid-outlet/03a-stage4-promising-state-development.md)
+- Scientific parent authority: [03A Stage-4 setup authority](../stage-04/setup.md)
 - Selected experiment contract: [Project experiment contract](../../README.md)
 - Implementation: [Q01 native runner](../../../../PyAnsys/scripts/setup/run_03a_q01_s4_01_50.py)
 - Results packet: [Q01 results](results.md)

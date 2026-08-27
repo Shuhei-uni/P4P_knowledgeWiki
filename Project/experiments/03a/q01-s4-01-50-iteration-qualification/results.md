@@ -36,11 +36,12 @@ Data: C:\Users\syok443\Documents\FluentRuns\03A-stage4\S4-01\run-q01-50iter-2026
 
 ## Evidence / plots / measurements
 
-The local reconciliation directory is
-[the Q01 run packet](../../../../PyAnsys/output/03a_q01/s4-01-50iter-20260827T121534Z/).
-The machine-readable [completion manifest](../../../../PyAnsys/output/03a_q01/s4-01-50iter-20260827T121534Z/completed_50_iteration_native_run.json)
-records the exact paths, hashes, readbacks, native return, and endpoint
-reconciliation.
+The local reconciliation directory is the historical machine artifact path
+`PyAnsys/output/03a_q01/s4-01-50iter-20260827T121534Z/` (not migrated). The
+machine-readable completion manifest is the historical machine artifact path
+`PyAnsys/output/03a_q01/s4-01-50iter-20260827T121534Z/completed_50_iteration_native_run.json`
+(not migrated); it records the exact paths, hashes, readbacks, native return,
+and endpoint reconciliation while the local execution packet is available.
 
 | Evidence | Result |
 |---|---|
@@ -49,9 +50,9 @@ reconciliation.
 | Endpoint case/data | Both present and reloaded; case SHA-256 `74b1f6746860df7182591c77cc8856dc92da3a28dea0624ecaaed3392522a962`, data SHA-256 `0775e2e40fc4547f4012a80d84b6d8c82ccf57bedd36336d97fed18fd38c0d93` |
 | Native transcript | Present; residual table contains 51 rows spanning `33,000` to `33,050` |
 | Native residual export | Present; seven equation series with 600 retained points each, spanning `31,902` to `33,050`; the Q01 tail is the 50-point `33,001`–`33,050` window |
-| Physical report histories | `30/30` configured report files recovered, each with 51 points at `33,000`–`33,050`; [JSON history packet](../../../../PyAnsys/output/03a_q01/s4-01-50iter-20260827T121534Z/report-histories/q01-report-history_20260828_001920.json) and [overview plot](../../../../PyAnsys/output/03a_q01/s4-01-50iter-20260827T121534Z/report-histories/q01-report-history_20260828_001920.png) |
+| Physical report histories | `30/30` configured report files recovered, each with 51 points at `33,000`–`33,050`; JSON history packet (historical machine artifact path: `PyAnsys/output/03a_q01/s4-01-50iter-20260827T121534Z/report-histories/q01-report-history_20260828_001920.json`; not migrated) and overview plot (historical machine artifact path: `PyAnsys/output/03a_q01/s4-01-50iter-20260827T121534Z/report-histories/q01-report-history_20260828_001920.png`; not migrated) |
 | Native autosave | No paired `checkpoint-*` case/data pair was found in the post-run remote directory listing, despite the configured 50-iteration data frequency; the endpoint pair is the retained run output |
-| Endpoint flux extraction | [Flux check](../../../../PyAnsys/output/03a_q01/s4-01-50iter-20260827T121534Z/analysis/q01-s4-01-50iter-flux-check.json) explicitly reloaded the endpoint case/data and recorded verified identity. It is still a single diagnostic snapshot, not a time-window check; the physical-history extractor was the separate read-only pass that did not load case/data. |
+| Endpoint flux extraction | Flux check (historical machine artifact path: `PyAnsys/output/03a_q01/s4-01-50iter-20260827T121534Z/analysis/q01-s4-01-50iter-flux-check.json`; not migrated) explicitly reloaded the endpoint case/data and recorded verified identity. It is still a single diagnostic snapshot, not a time-window check; the physical-history extractor was the separate read-only pass that did not load case/data. |
 
 The endpoint scientific readback matched the parent and prepared-case
 readbacks: steady pressure-based Mixture, RNG `k-epsilon`, SIMPLE, momentum
@@ -199,7 +200,7 @@ paired-endpoint evidence requirements.
 ### Plots and measured values
 | Check | Extraction status | Scope / coordinate | Measured values | Artifacts |
 |---|---|---|---|---|
-| `flux` | `partial` | zones liquidinlet, steaminlet, steamoutlet, brineoutlet; domains phase-1, phase-2; single live snapshot; Fluent iteration/time unavailable | liquid inlet mass flow=116.847 kg/s; vapor inlet mass flow=81.6395 kg/s; steam-outlet liquid mass flow=8.52902 kg/s; steam-outlet vapor mass flow=46.4841 kg/s; phase-flux efficiency=0.927007 dimensionless; steam-outlet vapor fraction=0.844964 dimensionless; mass imbalance=13.9373 kg/s; mass imbalance ratio=0.0702177 dimensionless; signed Fluent fluxes: phase-1/Net=0.205708 kg/s, phase-1/brineoutlet=-34.9497 kg/s, phase-1/liquidinlet=-0 kg/s, phase-1/steaminlet=81.6395 kg/s, phase-1/steamoutlet=-46.4841 kg/s, phase-2/Net=13.7315 kg/s, phase-2/brineoutlet=-94.5862 kg/s, phase-2/liquidinlet=116.847 kg/s, phase-2/steaminlet=-0 kg/s, phase-2/steamoutlet=-8.52902 kg/s | [q01-s4-01-50iter-flux-check.json](../../../../PyAnsys/output/03a_q01/s4-01-50iter-20260827T121534Z/analysis/q01-s4-01-50iter-flux-check.json) |
+| `flux` | `partial` | zones liquidinlet, steaminlet, steamoutlet, brineoutlet; domains phase-1, phase-2; single live snapshot; Fluent iteration/time unavailable | liquid inlet mass flow=116.847 kg/s; vapor inlet mass flow=81.6395 kg/s; steam-outlet liquid mass flow=8.52902 kg/s; steam-outlet vapor mass flow=46.4841 kg/s; phase-flux efficiency=0.927007 dimensionless; steam-outlet vapor fraction=0.844964 dimensionless; mass imbalance=13.9373 kg/s; mass imbalance ratio=0.0702177 dimensionless; signed Fluent fluxes: phase-1/Net=0.205708 kg/s, phase-1/brineoutlet=-34.9497 kg/s, phase-1/liquidinlet=-0 kg/s, phase-1/steaminlet=81.6395 kg/s, phase-1/steamoutlet=-46.4841 kg/s, phase-2/Net=13.7315 kg/s, phase-2/brineoutlet=-94.5862 kg/s, phase-2/liquidinlet=116.847 kg/s, phase-2/steaminlet=-0 kg/s, phase-2/steamoutlet=-8.52902 kg/s | Flux check (historical machine artifact path: `PyAnsys/output/03a_q01/s4-01-50iter-20260827T121534Z/analysis/q01-s4-01-50iter-flux-check.json`; not migrated) explicitly reloaded the endpoint case/data and recorded verified identity. It is still a single diagnostic snapshot, not a time-window check; the physical-history extractor was the separate read-only pass that did not load case/data. |
 - `flux` evidence note: The by-domain values retain Fluent's signed zone orientation; carrier metrics above use absolute mass-flow magnitudes.
 - `flux` evidence note: Mass-balance scope recorded by the extractor: all_discovered_pressure_outlets; Computed from both discovered pressure outlets, including the physical brine outlet; use as a diagnostic balance check, not as the sole convergence criterion..
 - `flux` evidence note: Mass-balance note: Derived from phase-specific fluxes across both pressure outlets because the mixture mass-flow report was unavailable.

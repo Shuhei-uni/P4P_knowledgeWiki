@@ -1,9 +1,9 @@
-> **Legacy source:** ResearchProject_wiki/wiki/progress/experiments.md  
-> **Migration note:** These excerpts preserve the historical run-note record; no status or interpretation has been rewritten. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** ResearchProject_wiki/wiki/progress/experiments.md
+> **Migration note:** These excerpts preserve the historical run-note record; no status or interpretation has been rewritten. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Historical run notes
 
-> **Legacy source:** ResearchProject_wiki/wiki/progress/experiments.md
+> **Retired source:** ResearchProject_wiki/wiki/progress/experiments.md
 > **Migration note:** Selected run entries are preserved verbatim as historical project memory; they are not a new status or findings system.
 
 ### Run CTP-NBO-2026-05-27
@@ -20,4 +20,4 @@
 - Outcome: `Planned`.
 - Evidence-use label: setup calculation only until `5000`-iteration residuals, mass balance, and outlet phase fluxes are checked.
 - Hypothesized cause (if non-converged): not yet applicable; main risk is that no active brine outlet may accumulate or carry liquid to the steam outlet, making the run unsuitable for liquid-removal efficiency.
-- Next action: create the Fluent case from `../../../Setups/past/archived/05-complete-two-phase-actual-area-no-brine-outlet.md`, confirm the brine outlet is not active, and run the planned checkpoint sequence.
+- Next action: create the Fluent case from `setup.md`, confirm the brine outlet is not active, and run the planned checkpoint sequence.

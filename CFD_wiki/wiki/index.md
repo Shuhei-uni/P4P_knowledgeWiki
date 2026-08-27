@@ -3,7 +3,7 @@
 ## Lookup Dictionaries
 - [paper_lookup/index](../paper_lookup/index.md): first-stop index for chunked CFD/geothermal research-paper lookup files.
 - [research_paper_dictionary_lookup](../research_paper_dictionary_lookup.md): compatibility router for the broad CFD/geothermal lookup dictionary.
-- [geothermal_research_paper_dictionary (1)](../geothermal_research_paper_dictionary%20(1).md): compatibility router for the geothermal separator and steam-purity lookup dictionary.
+- [geothermal_research_paper_dictionary (1)](../geothermal_research_paper_dictionary%20%281%29.md): compatibility router for the geothermal separator and steam-purity lookup dictionary.
 
 ## Sources
 - [user-core-annular-flow-vof-tutorial](sources/user-core-annular-flow-vof-tutorial.md): user-provided Fluent annular/core-annular VOF tutorial used as a transient interface-workflow exemplar, with explicit transfer limits for geothermal separator work.

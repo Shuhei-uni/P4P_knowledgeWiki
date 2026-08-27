@@ -5,7 +5,8 @@ Stage-4 execution package. They are copied unchanged from the legacy report
 plot directory; raw histories, manifests, transcripts, and case/data files
 remain at their existing `PyAnsys/` or retained-report paths.
 
-Source: `Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/plots/03a-stage4/`.
+Source: migrated from the retired Stage-4 report tree; the retained figures
+are local evidence for the Project Stage-4 record.
 
 ## Cross-branch comparison
 

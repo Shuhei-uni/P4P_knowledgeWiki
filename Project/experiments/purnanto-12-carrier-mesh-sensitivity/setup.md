@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/archived/12-carrier-mesh-convergence-plan.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/archived/12-carrier-mesh-convergence-plan.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Setup 12 — Carrier-Field Mesh-Convergence Plan
 
@@ -84,7 +84,7 @@ The selected mesh is valid only for this geometry, operating point, phase-model 
 
 ## Evidence and cross-references
 
-- Project V&V index: [verification reports](../../../ResearchProject_wiki/wiki/vnv/verification/index.md)
+- Project V&V index: [verification and validation limits](../../vnv.md)
 - Reusable method: [separator CFD verification and validation workflow](../../../CFD_wiki/wiki/synthesis/separator-cfd-verification-and-validation-workflow.md)
 - Mesh-quality interpretation: [mesh quality and resolution patterns](../../../CFD_wiki/wiki/synthesis/mesh-quality-and-resolution-patterns.md)
 - Reopen/quality procedure: [Workbench meshdat semi-automated improvement](../../../CFD_wiki/wiki/guidance/workbench-meshdat-semi-automated-improvement.md)

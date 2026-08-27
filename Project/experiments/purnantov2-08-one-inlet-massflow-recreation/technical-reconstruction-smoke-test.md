@@ -1,5 +1,5 @@
-> **Legacy source:** ResearchProject_wiki/wiki/technical/pyfluent-trial3-one-inlet-reconstruction-smoke-test.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** ResearchProject_wiki/wiki/technical/pyfluent-trial3-one-inlet-reconstruction-smoke-test.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # PyFluent One-Inlet Reconstruction Smoke Test
 
@@ -11,10 +11,11 @@ This page is project-specific technical evidence for the local rebuild path, not
 
 Primary linked setup context:
 
-- `../../../Setups/past/archived/08-purnanto-one-inlet-massflow-recreation.md`
-- `../../../CFD_wiki/wiki/setups/geothermal-boc-separator-fluent-2013-baseline.md`
-- `../../../PyAnsys/scripts/reconstruct_purnanto_trial3.py`
-- `../../../PyAnsys/docs/findings/LOCAL_ONE_INLET_SMOKE_TEST.md`
+- [Project one-inlet setup](setup.md)
+- [CFD Wiki baseline setup](../../../CFD_wiki/wiki/setups/geothermal-boc-separator-fluent-2013-baseline.md)
+- `../../../PyAnsys/scripts/setup/reconstruct_purnanto_trial3.py`
+- The former PyAnsys local smoke note is recoverable from Git history; this
+  Project record is the current readable smoke-test evidence.
 
 ## Scope
 
@@ -338,7 +339,7 @@ So the next pass should focus narrowly on:
 
 ## Linked Artifacts
 
-- Script: `../../../PyAnsys/scripts/reconstruct_purnanto_trial3.py`
+- Script: `../../../PyAnsys/scripts/setup/reconstruct_purnanto_trial3.py`
 - First runnable mesh: `C:\Users\Shuhei Yokkaichi\Documents\CFD\Trial extended outlet pipe\Major Files\trial3.msh`
 - Hardened parity mesh: `C:\Users\Shuhei Yokkaichi\Documents\CFD\Trial extended outlet pipe\Major Files\trial4.msh`
 - Hardened output case: `C:\Users\Shuhei Yokkaichi\Documents\CFD\Trial extended outlet pipe\Major Files\trial4-purnanto-recon.cas.h5`
@@ -348,4 +349,4 @@ So the next pass should focus narrowly on:
 - 500-iteration diagnostic log: `C:\Users\Shuhei Yokkaichi\Documents\CFD\Trial extended outlet pipe\Major Files\trial4-purnanto-recon-500-log.txt`
 - Residual plot: `C:\Users\Shuhei Yokkaichi\Documents\CFD\Trial extended outlet pipe\Major Files\trial4-purnanto-recon-500-residuals.png`
 - Residual CSV: `C:\Users\Shuhei Yokkaichi\Documents\CFD\Trial extended outlet pipe\Major Files\trial4-purnanto-recon-500-residuals.csv`
-- Setup branch definition: `../../../Setups/past/archived/08-purnanto-one-inlet-massflow-recreation.md`
+- Setup branch definition: `setup.md`

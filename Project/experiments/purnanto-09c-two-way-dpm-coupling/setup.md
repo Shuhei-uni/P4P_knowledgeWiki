@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/past/compatibility/09c-dpm-ewf-wall-film-reentrainment.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/past/compatibility/09c-dpm-ewf-wall-film-reentrainment.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Two-Way DPM Coupling Setup Report
 
@@ -15,10 +15,9 @@
 | Outcome | needs follow-up |
 | Linked report | [09c post-simulation analysis](results.md) |
 
-The short `Setups/purnanto-reference/09c-dpm-ewf-wall-film-reentrainment.md`
-record is a legacy navigation wrapper for this detailed setup and its
-corresponding result report. Its programme/ID/intent metadata is represented
-here; the detailed compatibility source remains identified above.
+The former numbered navigation wrapper is recoverable from Git history. Its
+programme, ID, and intent metadata are represented here; this Project record is
+the current readable setup source.
 
 Legacy filename note:
 

@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/full-geometry/mixture/transient-liquid-outlet/stage-01-02-steady-parent-and-transient-start.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/full-geometry/mixture/transient-liquid-outlet/stage-01-02-steady-parent-and-transient-start.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # FG-MIX-T01 Stages 1–2 — Steady Parent and Transient Start States
 
@@ -12,7 +12,7 @@
 | Investigation mode | numerical-method preparation / diagnostic |
 | Primary question | Can one healthy unpatched steady Mixture field be created for the exact production mesh and then reused to construct controlled transient `t = 0` states? |
 | Interpretation owner | user-led |
-| Parent/reference | [steady Mixture predecessor](../../../Setups/full-geometry/mixture/steady-liquid-outlet/index.md) and historical [`02e`](../../../Setups/active/02e-mixture-y010-brine-outlet-boundary-characterization.md) |
+| Parent/reference | [02e steady Mixture predecessor](../full-geometry-02e-mixture-outlet-characterization/setup.md) |
 | Lifecycle | active planning |
 
 These two small stages are combined because Stage 2 exists only to turn the accepted steady parent into the two controlled startup states required by the initialization comparison.

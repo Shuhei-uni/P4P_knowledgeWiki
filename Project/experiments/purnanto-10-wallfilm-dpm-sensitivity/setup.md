@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/archived/10-wall-film-reentrainment-and-dpm-interaction-plan.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/archived/10-wall-film-reentrainment-and-dpm-interaction-plan.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Setup 10 — Independent Wall-Film and DPM Interaction Tests
 
@@ -10,7 +10,7 @@
 | Setup ID | `10` family plan |
 | Lifecycle | `future` |
 | Role | independently runnable wall-film / re-entrainment / custom-DPM tests |
-| Parent setup | [09c](../../../Setups/past/reported/09c-dpm-ewf-wall-film-reentrainment.md) case definition |
+| Parent setup | [09c](../purnanto-09c-two-way-dpm-coupling/setup.md) case definition |
 | Fallback parent | Same `09c` source case with two-way DPM disabled, or [09a](../purnanto-09a-dpm-deterministic-carryover/setup.md) |
 | Child plans | `10a`, `10b`, `10c` |
 | Evidence-use label | diagnostic until interpretation gates pass |
@@ -282,6 +282,6 @@ The annular-flow evidence is air-water in a tube, not geothermal steam-brine in 
 ## 9. Links
 
 - [08c inlet-velocity sensitivity](../purnanto-08c-inlet-loading-sensitivity/setup.md)
-- [09c two-way DPM coupling](../../../Setups/past/reported/09c-dpm-ewf-wall-film-reentrainment.md)
+- [09c two-way DPM coupling](../purnanto-09c-two-way-dpm-coupling/setup.md)
 - [11 combined wall-film and DPM plan](../purnanto-11-combined-wallfilm-dpm/setup.md)
 - [separator efficiency methods](../../../CFD_wiki/wiki/synthesis/fluent-separator-efficiency-methods.md)

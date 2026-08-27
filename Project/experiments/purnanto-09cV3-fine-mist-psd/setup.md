@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/purnanto-reference/09cV3-fine-mist-5pct-psd-rerun.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/purnanto-reference/09cV3-fine-mist-5pct-psd-rerun.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Setup 09cV3 — Fine-Mist 5% DPM PSD Rerun
 
@@ -10,7 +10,7 @@
 | Setup ID | `09cV3` |
 | Lifecycle | `active` |
 | Role | controlled fine-mist particle-size-distribution (PSD) rerun |
-| Parent setup | [09cV2 — Skoog partition and injection control](../../../Setups/past/reported/09cV2-skoog-partition-injection-control.md) |
+| Parent setup | [09cV2 — Skoog partition and injection control](../purnanto-09cV2-dpm-partition-control/setup.md) |
 | Child setups | none yet |
 | Controlled changes | replace the active legacy six-bin DPM injection diameters and relative mass weights with the seven-bin `5–100 µm` fine-mist PSD; retain the total 5% DPM allocation |
 | Evidence-use label | setup calculation / diagnostic only until the inherited carrier state, DPM source terms, and run monitors are read back and assessed |
@@ -34,9 +34,9 @@ Copy the selected, read-back-verified `09cV2` **5% partitioned** case/data check
 Inherit without intentional change:
 
 - geometry, mesh, split `liquidinlet` / `steaminlet` topology, outlets, walls, phase materials, and carrier solver settings;
-- liquid accounting at the parent 5% point: total liquid `116.920 kg/s`, DPM allocation `5.846000 kg/s`, and Eulerian-liquid allocation `111.074000 kg/s` (**Reported** project accounting; [09cV2](../../../Setups/past/reported/09cV2-skoog-partition-injection-control.md), §3; [fine-mist decision](fine-mist-interpretation.md), §7);
+- liquid accounting at the parent 5% point: total liquid `116.920 kg/s`, DPM allocation `5.846000 kg/s`, and Eulerian-liquid allocation `111.074000 kg/s` (**Reported** project accounting; [09cV2](../purnanto-09cV2-dpm-partition-control/setup.md), §3; [fine-mist decision](fine-mist-interpretation.md), §7);
 - vapor inlet flow, DPM injection surface (`steaminlet`), injection velocity, particle material, parcel/stream settings, deterministic tracking, drag law, and DPM source-update controls;
-- global `DPM Interaction with Continuous Phase = On`, source update every flow iteration, and DPM iteration interval `1` ([09cV2](../../../Setups/past/reported/09cV2-skoog-partition-injection-control.md), §§2 and 4F);
+- global `DPM Interaction with Continuous Phase = On`, source update every flow iteration, and DPM iteration interval `1` ([09cV2](../purnanto-09cV2-dpm-partition-control/setup.md), §§2 and 4F);
 - EWF and its splash, edge-separation, stripping, custom-law, and phase-change mechanisms **Off**, as in the parent allocation-control branch.
 
 Do not inherit a failed `10a` checkpoint or any unpartitioned DPM payload. `09cV3` must begin from a case whose readback confirms the complementary Eulerian-liquid allocation and a total active DPM flow of `5.846000 kg/s`.
@@ -81,7 +81,7 @@ Use the same geometry and selected mesh checkpoint as the copied `09cV2` parent.
 
 | Boundary / setting | `09cV3` value | Evidence / label |
 |---|---|---|
-| Total inlet liquid reference | `116.920 kg/s` | **Reported** project accounting ([09cV2](../../../Setups/past/reported/09cV2-skoog-partition-injection-control.md), §3) |
+| Total inlet liquid reference | `116.920 kg/s` | **Reported** project accounting ([09cV2](../purnanto-09cV2-dpm-partition-control/setup.md), §3) |
 | Eulerian liquid at `liquidinlet` | `111.074000 kg/s` | **Assumed** 5% allocation point retained from parent ([fine-mist decision](fine-mist-interpretation.md), §7) |
 | DPM injection surface | `steaminlet` | **Inherited** from `09cV2`; read back before run |
 | Total DPM flow | `5.846000 kg/s` | **Assumed** 5% allocation point; seven-bin sum in Section 3 |
@@ -102,7 +102,7 @@ Before interpreting a `09cV3` result:
 
 ## 8. Linked evidence
 
-- [09cV2 parent setup](../../../Setups/past/reported/09cV2-skoog-partition-injection-control.md)
+- [09cV2 parent setup](../purnanto-09cV2-dpm-partition-control/setup.md)
 - [Fine-mist DPM size and mass-distribution decision](fine-mist-interpretation.md)
 - [Mesh, droplet-loading, and wall-film meeting report](../../technical/mesh-conversion-dpm-mass-sensitivity-meeting-report.md)
 - [Detailed geothermal fine-mist cutoff evidence](../../../CFD_wiki/wiki/synthesis/geothermal-fine-mist-size-cutoff-evidence.md)

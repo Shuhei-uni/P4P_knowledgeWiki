@@ -1,5 +1,5 @@
-> **Legacy source:** ResearchProject_wiki/observations/01-08b-08c-inlet-loading.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** ResearchProject_wiki/observations/01-08b-08c-inlet-loading.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Observation 01 — 08b/08c Inlet-Loading Family
 

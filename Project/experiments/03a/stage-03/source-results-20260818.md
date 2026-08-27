@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/03a-stage3-results-20260818.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/03a-stage3-results-20260818.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # 03A Stage 3 — F08/F10/F12 execution results
 
@@ -116,4 +116,6 @@ DECISION: DO NOT PROCEED
 - Combined residual data (historical machine artifact path: `../../../../PyAnsys/output/03a_stage3/residual-figures/03A-stage3-F08-F10-F12-scaled-residuals.json`; not migrated)
 - [Current iteration-led F08 evidence](./figures/03a-stage3/iteration-led/server1/F08/01-scaled-residuals-vs-iteration.png)
 - [Stage-3 convergence sweep](setup-source.md)
-- [Stage-3 shared parent and seed specification](../../../../Setups/full-geometry/mixture/steady-liquid-outlet/03a-stage3-shared-parent-and-seed-spec.yaml)
+- Stage-3 shared parent and seed specification: the historical machine
+  specification is recoverable from Git history; this migrated record retains
+  the resulting setup and evidence context.

@@ -1,9 +1,9 @@
-> **Legacy source:** ResearchProject_wiki/wiki/progress/experiments.md  
-> **Migration note:** These excerpts preserve the historical run-note record; no status or interpretation has been rewritten. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** ResearchProject_wiki/wiki/progress/experiments.md
+> **Migration note:** These excerpts preserve the historical run-note record; no status or interpretation has been rewritten. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Historical run notes
 
-> **Legacy source:** ResearchProject_wiki/wiki/progress/experiments.md
+> **Retired source:** ResearchProject_wiki/wiki/progress/experiments.md
 > **Migration note:** Selected run entries are preserved verbatim as historical project memory; they are not a new status or findings system.
 
 ### Run MWH-ACTUAL-AREA-2026-05-27
@@ -20,7 +20,7 @@
 - Outcome: `Setup Calculation Only`.
 - Evidence-use label: inlet boundary-condition documentation only; not yet usable for separator efficiency or final performance claims.
 - Hypothesized cause (if non-converged): pending actual solve/post-processing evidence.
-- Next action: add mass flux interpretation, outlet phase fluxes, separator efficiency, and key contour/vector findings to `../../../Setups/past/reported/04-mixed-wet-half-actual-area.md` and its linked results report.
+- Next action: add mass flux interpretation, outlet phase fluxes, separator efficiency, and key contour/vector findings to `../purnanto-04-mixed-wet-half-actual-area/setup.md` and its linked results report.
 
 ### Run FFF-2-OP0
 - Run ID: `FFF-2-OP0` (`Assumed` temporary label until Fluent filename is confirmed)

@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/past/archived/01-split-two-zone-massflow-inlet.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/past/archived/01-split-two-zone-massflow-inlet.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Two-Zone Split Two-Phase Inlet Setup Report
 

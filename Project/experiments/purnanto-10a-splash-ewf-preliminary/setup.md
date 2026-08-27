@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/past/reported/10a-splash-ewf-deposition.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/past/reported/10a-splash-ewf-deposition.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Setup 10a-splash — Eulerian Wall Film With Particle Splashing
 
@@ -10,12 +10,12 @@
 | Setup ID | `10a-splash` |
 | Lifecycle | `reported` |
 | Role | EWF deposition/drainage diagnostic with particle splashing |
-| Parent setup | [09c](../../../Setups/past/reported/09c-dpm-ewf-wall-film-reentrainment.md) |
+| Parent setup | [09c](../purnanto-09c-two-way-dpm-coupling/setup.md) |
 | Fallback parent interpretation | `09c` case with DPM interaction with the continuous phase disabled after the coupled calculation failed |
 | Evidence-use label | partial splash-sensitive diagnostic; preliminary result available |
 | Outcome | needs follow-up |
 | Linked report | [10a splash-enabled diagnostic](results.md) |
-| Linked family plan | [Setup 10 family plan](../../../Setups/future/10-wall-film-reentrainment-and-dpm-interaction-plan.md) |
+| Linked family plan | [Setup 10 family plan](../purnanto-10-wallfilm-dpm-sensitivity/setup.md) |
 
 ## 1. Purpose
 

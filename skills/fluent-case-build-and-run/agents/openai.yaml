@@ -1,6 +1,0 @@
-interface:
-  display_name: "Legacy Fluent Case Build and Run"
-  short_description: "Compatibility reference for retained Fluent workflows"
-  default_prompt: "Use $fluent-case-build-and-run only for explicitly authorized compatibility reference."
-policy:
-  allow_implicit_invocation: false

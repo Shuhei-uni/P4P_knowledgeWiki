@@ -14,7 +14,12 @@ The recovered execution evidence distinguishes the native queue from its later r
 
 ## Evidence / plots / measurements
 
-The [source execution report](../../../../Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/03a-stage4-native-queue-execution-2026-08-23.md) records the portable Server-2 evidence package, including residual CSV/JSON histories, 30 physical report histories per executed branch, checkpoint relocation manifests, plots, and the authoritative remote case/data locations. The locally retained report-facing PNGs are indexed in the [Stage-4 figure index](figures/README.md).
+The [migrated source execution report](source-native-queue-execution-2026-08-23.md)
+records the portable Server-2 evidence package, including residual CSV/JSON
+histories, 30 physical report histories per executed branch, checkpoint
+relocation manifests, plots, and the authoritative remote case/data locations.
+The locally retained report-facing PNGs are indexed in the [Stage-4 figure
+index](figures/README.md).
 
 The recovered endpoint residuals illustrate why the continuation is still diagnostic:
 
@@ -50,6 +55,6 @@ Review the portable histories against the remote case/data identity, compute the
 
 ## Source
 
-[Original Stage-4 execution authority](../../../../Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/03a-stage4-native-queue-execution-2026-08-23.md)
+[Migrated Stage-4 execution authority](source-native-queue-execution-2026-08-23.md)
 
 The linked execution report is the superseding status source for the retained Stage-4 setup plan; its recovered S4-03 `45,000` endpoint supersedes the earlier `42,547` execution snapshot in that setup-plan file.

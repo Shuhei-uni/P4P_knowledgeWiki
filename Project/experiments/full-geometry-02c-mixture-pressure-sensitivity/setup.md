@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/compatibility-snapshots/02c-mixture-brine-outlet-pressure-sensitivity-unprimed.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/compatibility-snapshots/02c-mixture-brine-outlet-pressure-sensitivity-unprimed.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Setup 02c — Mixture Brine-Outlet Pressure Sensitivity, Unprimed
 
@@ -291,6 +291,6 @@ Read-only inspection was performed against the Student endpoint only; server 1 w
 ## Cross-references
 
 - Historical parent: [02 — Split two-zone velocity inlet with brine outlet](../purnanto-02-split-velocity-inlet-brine-outlet/setup.md)
-- Setup ordering: [Setups order dictionary](../../../Setups/order-dictionary.md)
-- Boundary-setting order: [PyAnsys boundary-condition order](../../../PyAnsys/knowledge/fluent-settings/orders/boundary_conditions_order.yaml)
+- Historical setup ordering is recoverable from Git history.
+- Boundary-setting order: [PyAnsys dependency-ordered workflow](../../../PyAnsys/AGENTS.md)
 - Parent inlet context: [08b parity split-inlet rebuild](../purnanto-08b-parity-split-inlet/setup.md)

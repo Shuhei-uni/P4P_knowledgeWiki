@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/past/archived/08a-steam-outlet-extension-student-trial.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/past/archived/08a-steam-outlet-extension-student-trial.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Steam Outlet Extension Student-Edition Trial Setup Report
 
@@ -33,7 +33,7 @@ Geometry naming note:
 
 - use `purnanto` for the closer paper-style geometry where the steam-outlet boundary sits at the outlet entrance;
 - use `purnantov2` for this later project geometry branch, where the outlet passage extends downward and the boundary is placed downstream;
-- `purnantov2` also includes the later project cleanup to the inlet spiral and dish-head reconstruction recorded in `../ResearchProject_wiki/wiki/technical/v2-purnanto-spiral-inlet-geometry.md`.
+- `purnantov2` also includes the later project cleanup to the inlet spiral and dish-head reconstruction recorded in `../../technical/purnanto-spiral-inlet-geometry.md`.
 
 ## 2. Setup Identity
 

@@ -12,8 +12,9 @@ and given exactly one Stage-2 numerical delta:
 
 This script never initializes, patches, iterates, or owns a run loop.  Fluent
 case/data writes are the only solver-side mutations after each branch is
-prepared.  The resulting paired files are the independent inputs for the
-native run journals produced by ``run_03a_stage2_stabilization.py``.
+prepared.  The resulting paired files are independent inputs for a separately
+selected Fluent-native continuation; the former campaign-specific runner is
+retired and recoverable from Git history.
 """
 
 from __future__ import annotations

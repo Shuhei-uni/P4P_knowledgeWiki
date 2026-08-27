@@ -28,9 +28,7 @@ Prefer reusable code, then a generic script, then a campaign pattern; live
 Fluent evidence wins over prose/API memory.
 
 - `PyAnsys/scripts/inspection/export_residuals.py` for direct residual export.
-- `PyAnsys/scripts/report/build_03a_stage3_stitched_scaled_residuals.py` for
-  proven staged/batched parsing and merge concepts.
-
-The Stage-3 script is campaign-specific. Reuse its parser/merge/plot concepts,
-not its 03A names, paths, or branch assumptions. Extract reusable behaviour
-only when current experiments need it.
+- The former Stage-3 stitched-residual builder was campaign-specific and is
+  retired. Recover its parser/merge/plot implementation from Git history only
+  when a future experiment demonstrates the need; do not treat that historical
+  script as a current workflow authority.

@@ -1,9 +1,9 @@
-> **Legacy source:** ResearchProject_wiki/wiki/progress/experiments.md  
-> **Migration note:** These excerpts preserve the historical run-note record; no status or interpretation has been rewritten. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** ResearchProject_wiki/wiki/progress/experiments.md
+> **Migration note:** These excerpts preserve the historical run-note record; no status or interpretation has been rewritten. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Historical run notes
 
-> **Legacy source:** ResearchProject_wiki/wiki/progress/experiments.md
+> **Retired source:** ResearchProject_wiki/wiki/progress/experiments.md
 > **Migration note:** Selected run entries are preserved verbatim as historical project memory; they are not a new status or findings system.
 
 ### Run PYFLUENT-TRIAL4-500-2026-06-09
@@ -75,4 +75,4 @@
 - Outcome: `Setup Defined`.
 - Evidence-use label: direct Purnanto-recreation branch definition only.
 - Hypothesized cause (if non-converged): not yet applicable; the point of this branch is to remove the split-inlet change and return to the simpler paper-style one-inlet package.
-- Next action: build the Fluent case from `../../../Setups/past/archived/08-purnanto-one-inlet-massflow-recreation.md` and verify the boundary/model stack before reviving any split-inlet comparison logic.
+- Next action: build the Fluent case from `setup.md` and verify the boundary/model stack before reviving any split-inlet comparison logic.

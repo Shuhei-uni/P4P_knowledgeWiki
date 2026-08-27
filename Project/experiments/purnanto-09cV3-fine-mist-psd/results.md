@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/reports/purnanto-reference/09cV3/results.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/reports/purnanto-reference/09cV3/results.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Post-Simulation Results — Setup 09cV3
 

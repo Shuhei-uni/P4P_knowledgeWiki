@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/full-geometry/mixture/transient-liquid-outlet/stage-06-six-case-screen.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/full-geometry/mixture/transient-liquid-outlet/stage-06-six-case-screen.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # FG-MIX-T01 Stage 6 — Six-Case Aggressive Retention Screen
 

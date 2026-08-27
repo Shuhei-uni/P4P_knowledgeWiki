@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/past/reported/07-pure-phase-split-actual-area.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/past/reported/07-pure-phase-split-actual-area.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Pure Liquid / Steam Actual-Area Velocity-Inlet Setup Report
 
@@ -20,8 +20,8 @@
 Define the next spiral-inlet setup built from:
 
 - [04-mixed-wet-half-actual-area.md](../purnanto-04-mixed-wet-half-actual-area/setup.md)
-- [inlet-regimes.md](../../../ResearchProject_wiki/wiki/model/inlet-regimes.md)
-- [roadmap.md](../../../ResearchProject_wiki/wiki/project/roadmap.md)
+- [inlet-regimes interpretation](../purnanto-08c-inlet-loading-sensitivity/inlet-regimes-interpretation.md)
+- [Project state and next decision](../../index.md)
 
 This setup replaces the mixed wet-half inlet with a pure-phase two-zone inlet:
 
@@ -33,7 +33,8 @@ All other model settings should remain the same as the mixed wet-half actual-are
 
 Project linkage:
 
-- setup `07` is the active split-inlet baseline candidate referenced by `ResearchProject_wiki/wiki/project/roadmap.md`;
+- setup `07` is the historical split-inlet baseline candidate carried into the
+  Project experiment record;
 - this setup report defines the concrete branch content;
 - the roadmap defines whether setup `07` is only diagnostic, accepted as a baseline candidate, numerically verified, or ready for higher-complexity child branches.
 

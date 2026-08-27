@@ -1,6 +1,0 @@
-interface:
-  display_name: "Legacy Research Project Wiki"
-  short_description: "Compatibility reference for retained project records"
-  default_prompt: "Use $research-project-wiki only for explicitly authorized historical repair of retained project records."
-policy:
-  allow_implicit_invocation: false

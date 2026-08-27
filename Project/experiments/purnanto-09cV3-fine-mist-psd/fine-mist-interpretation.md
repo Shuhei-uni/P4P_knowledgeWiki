@@ -1,5 +1,5 @@
-> **Legacy source:** ResearchProject_wiki/wiki/model/fine-mist-dpm-size-and-mass-distribution.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** ResearchProject_wiki/wiki/model/fine-mist-dpm-size-and-mass-distribution.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Fine-Mist DPM Size and Mass Distribution
 
@@ -9,7 +9,7 @@
 |---|---|
 | Status | `Recommended provisional project baseline` |
 | Date | `2026-08-04` |
-| Applies to | [09cV3](../../../Setups/active/09cV3-fine-mist-5pct-psd-rerun.md) and future DPM/EWF reruns based on the `09cV2` branch |
+| Applies to | [09cV3](setup.md) and future DPM/EWF reruns based on the `09cV2` branch |
 | Total-liquid reference | `116.920 kg/s` |
 | Baseline DPM diameter range | `5-100 um` |
 | Coarse-tail sensitivity | `100-150 um` |
@@ -273,7 +273,7 @@ The existing `09cV2` and `010V2d-2` results used the legacy six-bin distribution
 3. retain `m_DPM = 5.846 kg/s` and `m_Eulerian,liquid = 111.074 kg/s`;
 4. retain DPM interaction, tracking, EWF, wall, material, and numerical settings;
 5. replace only the injection diameters and relative mass weights;
-6. record the rerun as the [09cV3 child case](../../../Setups/active/09cV3-fine-mist-5pct-psd-rerun.md), rather than overwriting the historical setup.
+6. record the rerun as the [09cV3 child case](setup.md), rather than overwriting the historical setup.
 
 This comparison answers:
 
@@ -316,6 +316,6 @@ It is not a measured geothermal inlet distribution. Revisit the decision if any 
 
 - [Detailed CFD evidence for the cutoff](../../../CFD_wiki/wiki/synthesis/geothermal-fine-mist-size-cutoff-evidence.md)
 - [Broader geothermal inlet-droplet inventory](../../../CFD_wiki/wiki/synthesis/geothermal-separator-inlet-droplets-and-carryover.md)
-- [09cV2 DPM partition setup](../../../Setups/past/reported/09cV2-skoog-partition-injection-control.md)
-- [09cV3 fine-mist 5% DPM PSD rerun](../../../Setups/active/09cV3-fine-mist-5pct-psd-rerun.md)
-- [010V2d-2 global-DPM/EWF setup](../../../Setups/past/reported/010V2d-2-ewf-combined-global-dpm.md)
+- [09cV2 DPM partition setup](../purnanto-09cV2-dpm-partition-control/setup.md)
+- [09cV3 fine-mist 5% DPM PSD rerun](setup.md)
+- [010V2d-2 global-DPM/EWF setup](../purnanto-010V2d-2-ewf-global-dpm/setup.md)

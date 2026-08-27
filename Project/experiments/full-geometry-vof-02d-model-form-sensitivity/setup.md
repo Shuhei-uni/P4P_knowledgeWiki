@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/archived/02d-transient-vof-brine-outlet-model-form-sensitivity.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/archived/02d-transient-vof-brine-outlet-model-form-sensitivity.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Setup 02d — Transient VOF Brine-Outlet Model-Form Sensitivity
 
@@ -10,7 +10,7 @@
 | Setup ID | `02d` |
 | Lifecycle | `future` |
 | Role | transient multiphase model-form sensitivity / setup definition |
-| Parent setup | [02c — Mixture brine-outlet pressure sensitivity](../../../Setups/active/02c-mixture-brine-outlet-pressure-sensitivity-unprimed.md) |
+| Parent setup | [02c — Mixture brine-outlet pressure sensitivity](../full-geometry-02c-mixture-pressure-sensitivity/setup.md) |
 | Child cases | `VOF-IC0-P1120`, `VOF-IC1-P1120`, `VOF-IC2-P1120`; later, only after qualification: `VOF-P1115`, `VOF-P1120`, `VOF-P1125` |
 | Controlled change | Replace the parent steady Mixture formulation with transient explicit VOF; preserve the parent geometry, mesh, physical operating basis, inlet topology, and baseline outlet pressure. |
 | Evidence-use label | `User-specified` setup definition plus observed, case-only VOF rebuild evidence; no numerical result. |
@@ -318,7 +318,7 @@ No final production simulation is authorized by this setup report.
 
 ## Cross-references
 
-- Parent/control: [02c — Mixture brine-outlet pressure sensitivity](../../../Setups/active/02c-mixture-brine-outlet-pressure-sensitivity-unprimed.md)
+- Parent/control: [02c — Mixture brine-outlet pressure sensitivity](../full-geometry-02c-mixture-pressure-sensitivity/setup.md)
 - Historical invalid VOF context: [02b — VOF split-inlet transient](../purnanto-02b-vof-split-inlet-transient/setup.md)
-- Setup lineage: [Setups order dictionary](../../../Setups/order-dictionary.md)
-- Project progress: [current status](../../../ResearchProject_wiki/wiki/progress/current-status.md)
+- Setup lineage: historical ordering is recoverable from Git history.
+- Project state: [current Project state](../../index.md)

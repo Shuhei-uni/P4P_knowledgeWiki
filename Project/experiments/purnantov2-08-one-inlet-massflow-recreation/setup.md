@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/past/archived/08-purnanto-one-inlet-massflow-recreation.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/past/archived/08-purnanto-one-inlet-massflow-recreation.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Purnanto One-Inlet Mass-Flow Recreation
 
@@ -32,7 +32,7 @@ Geometry naming note:
 - this branch uses the `purnantov2` geometry label even though its inlet package is the direct one-inlet Purnanto-style recreation;
 - geometry naming and inlet boundary-condition style are separate, so a one-inlet uniform/two-phase recreation can still sit on `purnantov2` geometry;
 - use `purnanto` for setups `04` to `07`, and `purnantov2` for setup `08` and later branches unless a later note explicitly overrides that;
-- see `../ResearchProject_wiki/wiki/technical/v2-purnanto-spiral-inlet-geometry.md` for the current project naming rule.
+- see `../../technical/purnanto-spiral-inlet-geometry.md` for the current project naming rule.
 
 Primary reusable evidence:
 

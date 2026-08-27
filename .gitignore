@@ -1,13 +1,10 @@
 .DS_Store
 
-# Explicit local-only files removed from repository history
+# Explicit local-only files removed from the working tree
 /.DS_Store
 /CFD_wiki/.DS_Store
 /CFD_wiki/wiki/.DS_Store
 /PyAnsys/.DS_Store
-/ResearchProject_wiki/.DS_Store
-/Setup report/.DS_Store
-/Setups/.DS_Store
 /PyAnsys/.env
 /CFD_wiki/guide/Ansys_Fluent_Users_Guide.pdf
 /CFD_wiki/raw/informit.366967552564856.pdf

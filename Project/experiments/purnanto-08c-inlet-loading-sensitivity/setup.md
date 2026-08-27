@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/past/reported/08c-purnanto-parity-inlet-velocity-sensitivity.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/past/reported/08c-purnanto-parity-inlet-velocity-sensitivity.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Purnanto Parity Inlet-Velocity Sensitivity
 
@@ -34,8 +34,8 @@ Setup `08c` must stay tightly controlled:
 Primary authority:
 
 - [08b-purnanto-parity-split-inlet-rebuild.md](../purnanto-08b-parity-split-inlet/setup.md)
-- [order-dictionary.md](../../../Setups/order-dictionary.md)
-- [ResearchProject roadmap](../../../ResearchProject_wiki/wiki/project/roadmap.md)
+- Historical setup ordering is recoverable from Git history.
+- [Project state and next decision](../../index.md)
 
 ## 2. Setup Identity
 
@@ -196,8 +196,8 @@ Interpretation rule:
 Build notes:
 
 - source parent case: `C:\Users\syok443\Documents\TwoPhaseInletV2(Purnanto)\TwoPhaseInletV2(Purnanto).cas.h5`;
-- script: `../PyAnsys/scripts/setup/setup08c_purnanto_velocity_sensitivity_cases.py`;
-- local readback summary: `../PyAnsys/output/setup08c_velocity_sensitivity_cases_summary.json`;
+- script: `../../../PyAnsys/scripts/setup/setup08c_purnanto_velocity_sensitivity_cases.py`;
+- local readback summary: `../../../PyAnsys/output/setup08c_velocity_sensitivity_cases_summary.json`;
 - opposite split-inlet phase mass-flow readbacks were `0.0 kg/s` for both generated cases.
 
 ### 7.3 Reference-Case Caution

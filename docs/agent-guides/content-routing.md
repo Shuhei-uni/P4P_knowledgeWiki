@@ -2,30 +2,46 @@
 
 Route content before writing it.
 
-1. Generic CFD methods, literature, or setup knowledge belong in `CFD_wiki/`.
-2. Current geothermal-separator scientific truth, selected experiments, evidence interpretation, and claim limits belong in `Project/`.
-3. Detailed retained progress, technical, source, and existing V&V records remain in `ResearchProject_wiki/` until a deliberate cutover.
-4. A new selected experiment setup and result packet belongs together in `Project/experiments/`; retained concrete setup definitions, result packets, naming decisions, and lineage remain in `Setups/`.
-5. Executable automation, PyFluent path discovery, machine-readable validation targets, and claim-gate scripts belong in `PyAnsys/` first; add any needed human-readable summary to the relevant project record.
-6. When reusable CFD knowledge also has project impact, write the technical extraction in `CFD_wiki/` and a concise linked impact summary in `Project/`.
+1. Generic CFD methods, literature extraction, paper lookup, and reusable
+   Fluent click paths belong in `CFD_wiki/`.
+2. Current geothermal-separator questions, selected experiment contracts,
+   findings, evidence interpretation, and claim limits belong in `Project/`.
+3. Executable automation, PyFluent discovery, native-run orchestration,
+   machine-readable checks, and durable implementation rules belong in
+   `PyAnsys/`.
+4. A repeatable task procedure belongs in the smallest applicable skill under
+   `skills/`.
+5. The tracked files under `ResearchProject_wiki/raw/` are immutable source
+   inputs only; do not add prose beside them as a new active wiki.
 
-## Setup routing
+## Selected experiments
 
-For new selected experiments, use the Project experiment contract:
+Create a selected experiment only after the user or project decision gate
+chooses it. Keep the setup and result packet together:
 
-- new selected experiment → `Project/experiments/<campaign>/<experiment>/{setup.md,results.md}`;
-- retained `Full-geomV2` setup/report source → existing `Setups/full-geometry/` and `Setups/reports/full-geometry/` paths;
-- historical numbered/reference work → existing compatibility paths, navigated through `Setups/purnanto-reference/index.md`.
+```text
+Project/experiments/<campaign>/<experiment>/
+  setup.md
+  results.md
+```
 
-Do not create a new setup or report under `Setups/`, including `Setups/full-geometry/` or `Setups/reports/`, for a selected experiment.
+The setup records the exact parent, controlled delta, mesh/case identity,
+physics, numerics, run contract, and expected evidence. The results record the
+observed endpoint, residual/physical histories, completeness, limitations, and
+next decision. Do not infer geometry or lineage from a setup number alone.
 
-Do not infer geometry from the setup number/title. Require explicit mesh/case provenance.
+## Cross-system handoff
 
-## Cross-system work
+1. Read `Project/index.md` and the selected experiment first.
+2. Read the applicable `CFD_wiki` source/guidance or paper lookup only when the
+   scientific question needs reusable evidence.
+3. Read `PyAnsys/AGENTS.md`, the focused skill, and the relevant implementation
+   path for automation work.
+4. Keep case-specific execution facts in the Project packet and machine
+   evidence in PyAnsys output or named external artifacts.
+5. Add links from the owner to the minimum supporting evidence; do not mirror
+   a full page across systems.
 
-1. Read `Project/index.md` first, then `CFD_wiki/wiki/index.md` and `ResearchProject_wiki/wiki/index.md` when their owned context is needed.
-2. When reviewing or explicitly repairing retained setup records, read `Setups/index.md` and the relevant programme index.
-3. Read `Setups/order-dictionary.md` only when numbered legacy lineage is involved; it is not current routing.
-4. For automation, also read `PyAnsys/AGENTS.md` and the relevant `PyAnsys/knowledge/` paths.
-5. Update the primary owner and add short cross-references to secondary systems; do not duplicate full content.
-6. When automation behavior or target manifests change, keep corresponding human-readable claim logic aligned with `Project/vnv.md` and the detailed records in `ResearchProject_wiki/wiki/vnv/`.
+When an old path appears in a historical Project record, either map it to the
+local migrated record or mark it explicitly as retired provenance. Active links
+must resolve; immutable chronology does not need cosmetic rewriting.

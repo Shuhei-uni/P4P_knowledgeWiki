@@ -18,7 +18,8 @@ selected Project setup/results
 
 Do not preload the entire `knowledge/` tree, old logs, or every setup script.
 When a task changes DPM, multiphase, Energy, EWF, or another version-sensitive
-model, read only the relevant local tree/order reference and code path.
+model, read only the relevant focused skill, the selected Project setup, and
+the proven code path.
 
 ## Runtime and folder roles
 
@@ -30,8 +31,12 @@ from another shell, and do not hard-code a different clone's absolute path.
 - `scripts/connection/`: connection and bootstrap checks.
 - `scripts/inspection/`: non-mutating discovery, snapshots, and probes.
 - `scripts/setup/`: thin case-specific setup orchestration.
-- `scripts/report/`: focused report/post-processing workflows.
-- `knowledge/`: durable dependency/order and implementation knowledge.
+- Report/post-processing helpers that were tied to retired campaign trees are
+  not kept as a second active layer; current read-only checks live in
+  `scripts/inspection/` and reusable modules under `src/`.
+- `knowledge/fluent-settings/native_run_and_autosave.md`: the durable
+  native-run and reconnection policy. Keep other cross-case rules in focused
+  skills or source modules rather than rebuilding a large settings tree.
 - `output/`: generated extracts and diagnostics; never the scientific authority.
 
 Prefer an existing helper or proven script before writing campaign-specific

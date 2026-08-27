@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/past/reported/010V2d-2-ewf-combined-global-dpm.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/past/reported/010V2d-2-ewf-combined-global-dpm.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Setup 010V2d-2 — Combined EWF with Global DPM Interaction
 
@@ -13,7 +13,7 @@
 | Parent setup | accepted [010V2d](../purnanto-010V2d-ewf-combined-mechanisms/setup.md) |
 | Controlled change | global `DPM Interaction with Continuous Phase` only |
 | DPM allocation | historical `5%` total DPM mass with the inherited six-bin PSD |
-| Future PSD basis | [project fine-mist DPM size and mass distribution](../../../ResearchProject_wiki/wiki/model/fine-mist-dpm-size-and-mass-distribution.md) |
+| Future PSD basis | [project fine-mist DPM size and mass distribution](../purnanto-09cV3-fine-mist-psd/fine-mist-interpretation.md) |
 | Evidence-use label | diagnostic until carrier-source and film mass balances close |
 | Outcome | needs follow-up |
 | Linked report | [diagnostic results](results.md) |
@@ -70,9 +70,9 @@ The resulting comparison isolates whether the historical film loading and remova
 
 See:
 
-- [Project fine-mist DPM size and mass distribution](../../../ResearchProject_wiki/wiki/model/fine-mist-dpm-size-and-mass-distribution.md)
+- [Project fine-mist DPM size and mass distribution](../purnanto-09cV3-fine-mist-psd/fine-mist-interpretation.md)
 - [Detailed geothermal fine-mist cutoff evidence](../../../CFD_wiki/wiki/synthesis/geothermal-fine-mist-size-cutoff-evidence.md)
-- [09cV2 partition and historical PSD definition](../../../Setups/past/reported/09cV2-skoog-partition-injection-control.md)
+- [09cV2 partition and historical PSD definition](../purnanto-09cV2-dpm-partition-control/setup.md)
 
 ## Click-by-click procedure
 
@@ -104,8 +104,8 @@ Do not combine conclusions from a future fine-mist child case with the historica
 
 ## Linked evidence
 
-- [Project fine-mist DPM size and mass distribution](../../../ResearchProject_wiki/wiki/model/fine-mist-dpm-size-and-mass-distribution.md)
+- [Project fine-mist DPM size and mass distribution](../purnanto-09cV3-fine-mist-psd/fine-mist-interpretation.md)
 - [Detailed geothermal fine-mist cutoff evidence](../../../CFD_wiki/wiki/synthesis/geothermal-fine-mist-size-cutoff-evidence.md)
-- [09cV2 partition setup](../../../Setups/past/reported/09cV2-skoog-partition-injection-control.md)
+- [09cV2 partition setup](../purnanto-09cV2-dpm-partition-control/setup.md)
 - [010V2d parent](../purnanto-010V2d-ewf-combined-mechanisms/setup.md)
 - [010V2 control](../purnanto-010V2-clean-ewf-deposition/setup.md)

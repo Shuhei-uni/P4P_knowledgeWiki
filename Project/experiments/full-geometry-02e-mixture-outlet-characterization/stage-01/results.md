@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/reports/full-geometry/mixture/steady-liquid-outlet/02e/stage1-results-20260816.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/reports/full-geometry/mixture/steady-liquid-outlet/02e/stage1-results-20260816.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Setup 02e Stage-1 results — 2026-08-16
 
@@ -318,7 +318,7 @@ The separate 275k recovery record is not present in this repository; the retaine
 
 ## 11. Evidence and lineage
 
-- Governing setup: [`02e-mixture-y010-brine-outlet-boundary-characterization.md`](../../../../Setups/full-geometry/mixture/steady-liquid-outlet/02e-mixture-y010-brine-outlet-boundary-characterization.md)
+- Governing setup: [02e setup](../setup.md)
 - Initialized parent: `02e_y010_parent_20260816T063000Z.json` (historical machine artifact path: `../../../../PyAnsys/output/02e_y010_parent_20260816T063000Z.json`; not migrated)
 - Complete child-build snapshot: `02e_stage1_all_build_20260816T064500Z.json` (historical machine artifact path: `../../../../PyAnsys/output/02e_stage1_all_build_20260816T064500Z.json`; not migrated)
 - Stage-1 monitor snapshot: `02e_stage1_monitor_state.json` (historical machine artifact path: `../../../../PyAnsys/output/02e_stage1_monitor_state.json`; not migrated)

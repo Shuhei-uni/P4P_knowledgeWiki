@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/reports/full-geometry/mixture/transient-liquid-outlet/stage-01/stage-01-candidate-screen-20260816.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/reports/full-geometry/mixture/transient-liquid-outlet/stage-01/stage-01-candidate-screen-20260816.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Stage-1 Candidate Screen — FG-MIX-T01
 
@@ -30,7 +30,7 @@ strength remains diagnostic only.
 ## Governing setup and exact mesh
 
 - Setup/stage: [FG-MIX-T01 Stages 1–2](../stages-01-02-setup.md)
-- Parent contract: [02c Mixture brine-outlet pressure sensitivity, unprimed](../../../../Setups/full-geometry/mixture/steady-liquid-outlet/02c-mixture-brine-outlet-pressure-sensitivity-unprimed.md)
+- Parent contract: [02c Mixture brine-outlet pressure sensitivity, unprimed](../../full-geometry-02c-mixture-pressure-sensitivity/setup.md)
 - Fluent: Ansys Fluent 2025 R2 Student
 - Mesh input: `C:\Users\Shuhei Yokkaichi\Documents\CFD\Brine outlet\Full-geomV2-231kcells.msh.h5`
 - Mesh readback on every case reload: `231,376` mixed cells and `697,078` nodes

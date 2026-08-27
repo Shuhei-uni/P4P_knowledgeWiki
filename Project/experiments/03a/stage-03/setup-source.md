@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/full-geometry/mixture/steady-liquid-outlet/03a-stage3-fluent-recommended-convergence-sweep.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/full-geometry/mixture/steady-liquid-outlet/03a-stage3-fluent-recommended-convergence-sweep.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # 03A Stage 3 — Fluent-Recommended Convergence Sweep
 
@@ -9,7 +9,10 @@
 > **Physical case:** unchanged from 03A — same geometry, materials, phase definitions, split inlet, outlet pressures, gravity, and no liquid patch.  
 > **Parent authority:** one verified 03A pre-initialization parent with the frozen Stage-3 fingerprint defined below. Branches must not begin from an already-developed Stage-1/Stage-2 solution field.  
 > **Execution model:** three independent Fluent sessions may execute Stage-3 branches in parallel. Session/server assignment is operational metadata only and must not define case identity, scientific lineage, filenames, or report structure.  
-> **Execution specification:** [`03a-stage3-shared-parent-and-seed-spec.yaml`](../../../../Setups/full-geometry/mixture/steady-liquid-outlet/03a-stage3-shared-parent-and-seed-spec.yaml) is the machine-readable authority for P0 construction, local schedule-seed derivation, branch creation, storage, gate version, and adaptive execution.
+> **Execution specification:** the historical `03a-stage3-shared-parent-and-seed-spec.yaml`
+> defined P0 construction, local schedule-seed derivation, branch creation,
+> storage, gate version, and adaptive execution. It is recoverable from Git
+> history; this migrated record is the current Project-readable context.
 
 ---
 

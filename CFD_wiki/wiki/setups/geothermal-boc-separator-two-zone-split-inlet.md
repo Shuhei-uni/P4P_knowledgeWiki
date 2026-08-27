@@ -159,5 +159,6 @@ This is `1.14 %` below the Purnanto `1600 kJ/kg` total mass-flow target because 
 ## Cross-Linkage
 - Reuses baseline values from [geothermal-boc-separator-fluent-2013-baseline](geothermal-boc-separator-fluent-2013-baseline.md).
 - Extended by [geothermal-boc-separator-pure-phase-split-velocity-inlet](geothermal-boc-separator-pure-phase-split-velocity-inlet.md) for the fully specified pure-liquid/pure-steam velocity-inlet branch.
-- Project-facing summary should live in `ResearchProject_wiki` rather than be duplicated here.
-- Project fixed-velocity report: `../../../Setups/past/archived/06-pure-phase-split-fixed-velocity.md`.
+- Project-facing summary should live in Project/ rather than be duplicated
+  here.
+- Project fixed-velocity record: [purnanto-06 setup](../../../Project/experiments/purnanto-06-pure-phase-fixed-velocity/setup.md).

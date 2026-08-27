@@ -1,5 +1,14 @@
 # Progress reporting
 
-Whenever a user asks for “progress” (including “show progress”, “update progress”, or “what's the progress”), read `Project/index.md` first and record current project truth there or in the relevant selected experiment under `Project/experiments/`. Include what changed since the previous update, current status, blockers if any, and the next action.
+When a user asks for progress, read `Project/index.md` first. Report:
 
-The legacy `ResearchProject_wiki/wiki/log.md` and `ResearchProject_wiki/wiki/progress/` surfaces are frozen compatibility records. Do not append ordinary project updates there; touch them only when a task explicitly repairs or annotates historical/provenance content.
+- what changed since the previous update;
+- the current selected experiment or implementation state;
+- concrete blockers and missing evidence;
+- the next safe action.
+
+Update `Project/index.md` or the relevant selected experiment only when the
+scientific state has changed. Do not create a chat log, progress diary, or
+duplicate run chronology in the repository. Generated JSON, transcripts, and
+plots are evidence inputs; they become a Project finding only after
+reconciliation with their identity, scope, completeness, and uncertainty.

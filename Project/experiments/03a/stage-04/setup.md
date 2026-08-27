@@ -50,4 +50,4 @@ The setup defines intent and required evidence only. Live execution status belon
 
 ## Source
 
-[Original Stage-4 setup authority](../../../../Setups/full-geometry/mixture/steady-liquid-outlet/03a-stage4-promising-state-development.md)
+[Migrated Stage-4 setup authority](setup-source.md)

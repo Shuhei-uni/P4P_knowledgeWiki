@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/past/reported/04-mixed-wet-half-actual-area.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/past/reported/04-mixed-wet-half-actual-area.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Mixed Wet-Half Actual-Area Simulation Report
 

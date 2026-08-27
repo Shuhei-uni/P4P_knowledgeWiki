@@ -1,5 +1,5 @@
-> **Legacy source:** ResearchProject_wiki/wiki/technical/v2-purnanto-spiral-inlet-geometry.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** ResearchProject_wiki/wiki/technical/v2-purnanto-spiral-inlet-geometry.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # V2 Purnanto Spiral Inlet Geometry
 
@@ -22,8 +22,8 @@ It is not a CAD procedure and it does not replace the reusable source extraction
 Primary linked context:
 
 - `../../../CFD_wiki/wiki/sources/purnanto-2013-cfd-geothermal-separator.md`
-- `../../../CFD_wiki/wiki/setups/geothermal-boc-separator-fluent-2013-baseline.md`
-- `../../../Setups/past/archived/05-complete-two-phase-actual-area-no-brine-outlet.md`
+- [CFD Wiki baseline setup](../../CFD_wiki/wiki/setups/geothermal-boc-separator-fluent-2013-baseline.md)
+- [Purnanto no-brine-outlet experiment](../experiments/purnanto-05-complete-two-phase-no-brine-outlet/setup.md)
 
 ## Scope
 
@@ -95,8 +95,8 @@ These are the main dimensions already reused elsewhere in the project.
 Source trail:
 
 - `CFD_wiki/wiki/sources/purnanto-2013-cfd-geothermal-separator.md`
-- `CFD_wiki/wiki/setups/geothermal-boc-separator-fluent-2013-baseline.md`
-- `Setups/past/archived/00-baseline-spiral-boc-reference.md`
+- [CFD Wiki baseline setup](../../CFD_wiki/wiki/setups/geothermal-boc-separator-fluent-2013-baseline.md)
+- [Project Purnanto reference](../experiments/purnanto-00-reference-spiral-boc/setup.md)
 
 ## Rectangular Inlet Face Used In The Current Reconstruction
 

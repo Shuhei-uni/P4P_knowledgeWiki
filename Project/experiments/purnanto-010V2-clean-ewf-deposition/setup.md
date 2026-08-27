@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/past/reported/010V2-ewf-deposition-film-inventory.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/past/reported/010V2-ewf-deposition-film-inventory.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Setup 010V2 — EWF Deposition and Film-Inventory Control
 
@@ -10,7 +10,7 @@
 | Setup ID | `010V2` |
 | Lifecycle | `reported` |
 | Role | clean EWF deposition/drainage stability control |
-| Parent setup | [09cV2](../../../Setups/past/reported/09cV2-skoog-partition-injection-control.md) |
+| Parent setup | [09cV2](../purnanto-09cV2-dpm-partition-control/setup.md) |
 | Child setups | [010V2a splash](../purnanto-010V2a-ewf-splash/setup.md), [010V2b edge separation](../purnanto-010V2b-ewf-edge-separation/setup.md), [010V2c stripping](../purnanto-010V2c-ewf-particle-stripping/setup.md), [010V2d combined](../purnanto-010V2d-ewf-combined-mechanisms/setup.md), [010V2d-2 coupled combined](../purnanto-010V2d-2-ewf-global-dpm/setup.md) |
 | Controlled changes | EWF model, EWF wall coupling, transient film solution, wall-film boundary condition, staged global-DPM source coupling |
 | Evidence-use label | diagnostic until film mass balance and carrier gates pass |
@@ -192,8 +192,8 @@ Create or record, where available:
 
 ## Linked evidence
 
-- [09cV2 parent](../../../Setups/past/reported/09cV2-skoog-partition-injection-control.md)
-- [Project Skoog guardrails](../../../ResearchProject_wiki/wiki/model/skoog-application-guardrails.md)
+- [09cV2 parent](../purnanto-09cV2-dpm-partition-control/setup.md)
+- [Project Skoog guardrails](../../technical/skoog-application-guardrails.md)
 - [Fluent EWF guidance](../../../CFD_wiki/wiki/guidance/fluent-general-click-by-click.md)
 - 10a server-2 live failure readback (historical machine artifact path: `../../../PyAnsys/output/live_postprocess_20260721/10a-server2-stripping-live-report.md`; not migrated)
 - [Existing 10a diagnostic](../purnanto-10a-ewf-clean-deposition-control/setup.md)

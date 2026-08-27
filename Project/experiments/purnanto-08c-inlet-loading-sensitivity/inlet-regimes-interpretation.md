@@ -1,5 +1,5 @@
-> **Legacy source:** ResearchProject_wiki/wiki/model/inlet-regimes.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** ResearchProject_wiki/wiki/model/inlet-regimes.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Inlet Regimes
 
@@ -35,8 +35,8 @@ Project intent for the immediate branch:
 
 Concrete branch record:
 
-- `../../../Setups/past/archived/08-purnanto-one-inlet-massflow-recreation.md`
-- `../../../Setups/past/reported/08b-purnanto-parity-split-inlet-rebuild.md`
+- [08 one-inlet reconstruction](../purnantov2-08-one-inlet-massflow-recreation/setup.md)
+- [08b parity split-inlet rebuild](../purnanto-08b-parity-split-inlet/setup.md)
 
 ## Retained Alternate Path
 
@@ -62,7 +62,8 @@ Concrete branch record:
 - Exact Purnanto mass flow at `26.81 m/s` would require total inlet area `0.5301985 m2`, equivalent to a `0.732318 m` width if height stays `0.724 m`.
 - Project interpretation: a center split is not valid for a pure liquid/pure steam velocity-inlet model because it would over-allocate area to liquid and under-allocate area to steam relative to the Purnanto phase mass-flow targets.
 - Reusable derivation: `../../../CFD_wiki/wiki/setups/geothermal-boc-separator-two-zone-split-inlet.md`.
-- Fixed-velocity setup report retained as an alternate/reference: `../../../Setups/past/archived/06-pure-phase-split-fixed-velocity.md`.
+- Fixed-velocity setup report retained as an alternate/reference:
+  [purnanto-06 setup](../purnanto-06-pure-phase-fixed-velocity/setup.md).
 
 ## Fluent Velocity-Inlet Turbulence Inputs
 - Current project answer for the unsplit square inlet: use hydraulic diameter `0.724 m` because `Dh = 4A/P` and a square `0.724 m x 0.724 m` gives `Dh = 0.724 m` (`Inferred`, `Low Risk`).
@@ -113,7 +114,7 @@ Before further geometry or physics upgrades, isolate the failure mode with one-c
 
 ## Newest Run Interpretation
 - Run reference: `MWH-WP-2026-05-07-A`.
-- Setup report: `../../../Setups/past/archived/03a-mixed-wet-half-velocity-inlet-water-pool.md`.
+- Setup report: [mixed wet-half water-pool setup](../purnanto-03a-mixed-wet-half-water-pool/setup.md).
 - The lower water-pool initialization improved qualitative swirl development and made the brine outlet active.
 - The result is not quantitatively usable because the steady solve drained the initialized water inventory: liquid outflow was much larger than liquid inflow.
 - The steam outlet carried excessive liquid, making the guessed steam outlet intake geometry a likely sensitivity source.
@@ -127,4 +128,4 @@ Before further geometry or physics upgrades, isolate the failure mode with one-c
 - Project objective: `wiki/project/objective-and-scope.md`
 - Reusable CFD setup: `../../../CFD_wiki/wiki/setups/geothermal-boc-separator-two-zone-split-inlet.md`
 - Consolidated pure-phase settings sheet: `../../../CFD_wiki/wiki/setups/geothermal-boc-separator-pure-phase-split-velocity-inlet.md`
-- Practical project report: `../../../Setups/past/archived/01-split-two-zone-massflow-inlet.md`
+- Practical project report: [purnanto-01 setup](../purnanto-01-split-massflow-inlet/setup.md)

@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/past/reported/08b-purnanto-parity-split-inlet-rebuild.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/past/reported/08b-purnanto-parity-split-inlet-rebuild.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Purnanto Parity Split-Inlet Rebuild
 
@@ -31,8 +31,8 @@ Primary authority:
 
 - [00a-purnanto-setup-5000-live-audit.md](../purnanto-00a-live-setup-audit/setup.md)
 - [08-purnanto-one-inlet-massflow-recreation.md](../purnantov2-08-one-inlet-massflow-recreation/setup.md)
-- [ResearchProject live setup reference](../../../ResearchProject_wiki/wiki/technical/purnanto-live-setup-reference.md)
-- [ResearchProject roadmap](../../../ResearchProject_wiki/wiki/project/roadmap.md)
+- [live setup reference](../purnanto-00a-live-setup-audit/technical-live-setup-reference.md)
+- [Project state and next decision](../../index.md)
 
 ## 2. Setup Identity
 
@@ -72,7 +72,8 @@ Mesh inheritance rule:
 
 - `08b` and later descendants inherit this geometry/mesh as their base.
 - The controlled differences between those branches are Fluent settings, such as boundary conditions, models, numerics, DPM, coupling, or wall-film options.
-- A later mesh replacement, remesh, or geometry change must be recorded explicitly in the child setup report and in `Setups/order-dictionary.md`.
+- A later mesh replacement, remesh, or geometry change must be recorded
+  explicitly in the child Project setup record.
 
 The mesh statistics are recorded as user-provided setup metadata; they are not by themselves a mesh-independence or solution-acceptance result.
 

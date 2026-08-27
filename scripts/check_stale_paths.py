@@ -24,26 +24,6 @@ EXCLUDED_PREFIXES = (
     "PyAnsys/cases",
     "PyAnsys/output",
     "PyAnsys/queues",
-    "ResearchProject_wiki/observations",
-    "ResearchProject_wiki/wiki/log.md",
-    "Setups/archived",
-    "Setups/compatibility-snapshots",
-    "Setups/past",
-    "Setups/reports/purnanto-reference",
-)
-
-# Existing files in these paths are compatibility/reference surfaces. A missing
-# target under one of them is historical provenance, not an active-link failure.
-COMPATIBILITY_PREFIXES = (
-    "Setups/active",
-    "Setups/archived",
-    "Setups/compatibility-snapshots",
-    "Setups/future",
-    "Setups/past",
-    "Setups/reports/purnanto-reference",
-)
-DIRECT_NUMBERED_REPORT = re.compile(
-    r"(?:^|/)Setups/reports/(?:\d{2}|\d+[A-Za-z][^/]*)(?:/|$)"
 )
 
 HISTORICAL_PREFIXES = (
@@ -51,8 +31,6 @@ HISTORICAL_PREFIXES = (
     "PyAnsys/cases",
     "PyAnsys/output",
     "PyAnsys/queues",
-    "ResearchProject_wiki/observations",
-    "ResearchProject_wiki/wiki/log.md",
 )
 
 
@@ -95,9 +73,8 @@ def markdown_files() -> list[Path]:
         ROOT / "README.md",
         ROOT / "AGENTS.md",
         ROOT / "Project",
+        ROOT / "CFD_wiki",
         ROOT / "docs",
-        ROOT / "ResearchProject_wiki" / "wiki",
-        ROOT / "Setups",
         ROOT / "PyAnsys" / "docs",
         ROOT / "skills",
     )
@@ -134,13 +111,7 @@ def target_path(source: Path, target: str) -> Path:
 
 
 def historical_path(path: str) -> bool:
-    return under_prefix(path, HISTORICAL_PREFIXES) or under_prefix(path, COMPATIBILITY_PREFIXES)
-
-
-def compatibility_path(path: str) -> bool:
-    return under_prefix(path, COMPATIBILITY_PREFIXES) or bool(
-        DIRECT_NUMBERED_REPORT.search(path)
-    )
+    return under_prefix(path, HISTORICAL_PREFIXES)
 
 
 def redirect_note(path: Path) -> bool:
@@ -171,15 +142,18 @@ def classify(source: Path, target: str) -> LinkResult:
         candidates.append(candidate.with_suffix(".md"))
     resolved = next((item for item in candidates if item.exists()), None)
     resolved_rel = repo_relative(resolved) if resolved else repo_relative(candidate)
-    compatibility_target = compatibility_path(resolved_rel)
-    historical_target = historical_path(resolved_rel) or compatibility_target
+    # A missing Markdown link is active regardless of whether its intended
+    # destination is an artifact/provenance surface.  Only an existing
+    # destination can be classified as a historical artifact reference.  This
+    # keeps inline historical path text (which is excluded before link parsing)
+    # distinct from a broken active link.
+    historical_intent = historical_path(resolved_rel)
+    historical_target = resolved is not None and historical_intent
     literal_target = Path(raw_path).suffix.lower() in PATH_LITERAL_SUFFIXES
 
     if resolved is None:
-        if compatibility_target:
-            status = "MISSING_COMPATIBILITY_REFERENCE"
-        elif historical_target:
-            status = "HISTORICAL_ARTIFACT_REFERENCE"
+        if historical_intent:
+            status = "MISSING_ACTIVE_ARTIFACT_LINK"
         elif literal_target:
             status = "MISSING_ACTIVE_PATH_LITERAL"
         else:
@@ -187,11 +161,7 @@ def classify(source: Path, target: str) -> LinkResult:
         return LinkResult(source, 0, target, status, None)
 
     if historical_target:
-        status = (
-            "EXISTS_COMPATIBILITY_REDIRECT"
-            if compatibility_target or redirect_note(resolved)
-            else "HISTORICAL_ARTIFACT_REFERENCE"
-        )
+        status = "HISTORICAL_ARTIFACT_REFERENCE"
     elif literal_target:
         status = "PATH_LITERAL_PROVENANCE"
     elif redirect_note(resolved):
@@ -280,7 +250,11 @@ def main() -> int:
         print(f"{status}: {counts[status]}")
 
     if args.fail_on_missing and any(
-        result.status in {"MISSING_ACTIVE_NOTE_LINK", "MISSING_ACTIVE_PATH_LITERAL"}
+        result.status in {
+            "MISSING_ACTIVE_ARTIFACT_LINK",
+            "MISSING_ACTIVE_NOTE_LINK",
+            "MISSING_ACTIVE_PATH_LITERAL",
+        }
         for result in results
     ):
         return 1

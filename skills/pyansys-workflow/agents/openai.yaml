@@ -1,6 +1,0 @@
-interface:
-  display_name: "Legacy PyAnsys Workflow"
-  short_description: "Compatibility reference for broad PyAnsys guidance"
-  default_prompt: "Use $pyansys-workflow only for explicitly authorized compatibility reference."
-policy:
-  allow_implicit_invocation: false

@@ -118,7 +118,7 @@ Beginner-oriented baseline to recreate the 2013 geothermal cyclone separator CFD
   - [zarrouk-purnanto-2014-geothermal-separator-design-overview](../sources/zarrouk-purnanto-2014-geothermal-separator-design-overview.md)
   - [rivas-cruz-2015-geothermal-separator-state-of-art-review](../sources/rivas-cruz-2015-geothermal-separator-state-of-art-review.md)
   - [mubarok-2020-cfd-geothermal-flow-meters](../sources/mubarok-2020-cfd-geothermal-flow-meters.md)
-- Live setup reference: [purnanto-live-setup-reference](../../../ResearchProject_wiki/wiki/technical/purnanto-live-setup-reference.md)
+- Live setup reference: [Purnanto live setup audit](../../../Project/experiments/purnanto-00a-live-setup-audit/technical-live-setup-reference.md)
 - Reuse guidance: keep this as separator-vessel CFD baseline; use 2014/2015 reviews for high-level design screening and use 2020 flow-meter setup when pressure-differential metering performance is the target.
 - Reusable extension: for a project-driven non-uniform inlet adaptation that keeps the same baseline numerics but splits the inlet into wall-side liquid and core-side steam zones, see [geothermal-boc-separator-two-zone-split-inlet](geothermal-boc-separator-two-zone-split-inlet.md). Relation: `extends`.
 

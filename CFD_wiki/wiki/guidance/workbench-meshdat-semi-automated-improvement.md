@@ -116,9 +116,10 @@ A trial is successful only if:
 
 ## Repo implementation
 
-- Runner: `../../../PyAnsys/scripts/run_mesh_improvement_workflow.py`
-- Local operator guide: `../../../PyAnsys/docs/findings/MESHDAT_SEMI_AUTOMATED_WORKFLOW.md`
-- Existing lower-level reopen helpers: `../../../PyAnsys/scripts/mesh_trial_harness_lib.py`
+- Project evidence note: [mesh-trial technical audit](../../../Project/technical/mesh-trial1-mesh-audit.md)
+- Read-only Fluent inspection after export: [inspect_case.py](../../../PyAnsys/scripts/inspection/inspect_case.py)
+- No direct Workbench GUI runner or lower-level mesh-trial harness is retained;
+  the former implementation is recoverable from Git history.
 
 ## Example local evidence
 

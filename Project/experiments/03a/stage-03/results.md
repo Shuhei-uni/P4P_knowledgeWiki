@@ -23,10 +23,10 @@ The twelve-branch Fluent-recommended sweep used independent branches from the sh
 
 The full source package contains native residual histories and per-iteration physical histories for the qualified branches, plus checkpoint measurements for all branches where a paired state exists:
 
-- [final iteration-led interpretation and branch plots](../../../../Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/03a-stage3-final-results.md);
-- [checkpoint evidence packet](../../../../Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/03a-stage3-results-20260821.md);
-- [F05/F06/F11 native-history package](../../../../Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/03a-stage3-native-queue-final-results.md);
-- [F03/F07/F09 native-history package](../../../../Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/03a-stage3-f03-f07-f09-detailed-results.md).
+- [final iteration-led interpretation and branch plots](source-final-results.md);
+- [checkpoint evidence packet](source-results-20260821.md);
+- [F05/F06/F11 native-history package](source-native-queue-final-results.md);
+- [F03/F07/F09 native-history package](source-f03-f07-f09-detailed-results.md).
 
 At the matched 100% checkpoint, the best-developed mass-balance compromises were still open:
 
@@ -68,4 +68,4 @@ Stage 4 is needed to distinguish temporary checkpoint improvement from a sustain
 
 ## Source
 
-[Original Stage-3 results authority](../../../../Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/03a-stage3-final-results.md)
+[Migrated Stage-3 results authority](source-final-results.md)

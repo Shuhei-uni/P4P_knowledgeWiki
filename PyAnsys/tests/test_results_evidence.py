@@ -74,7 +74,11 @@ class ResultsEvidenceTests(unittest.TestCase):
         self.assertIn("`complete`", markdown)
         self.assertIn("`partial`", markdown)
         self.assertIn("does not choose a preferred case or model", markdown)
-        self.assertIn("../../../PyAnsys/output/demo.json", markdown)
+        self.assertIn(
+            "`historical machine artifact path: ../../../PyAnsys/output/demo.json (not migrated)`",
+            markdown,
+        )
+        self.assertNotIn("[demo.json](", markdown)
 
     def test_render_reports_explicit_load_mode(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

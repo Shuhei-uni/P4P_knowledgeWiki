@@ -1,9 +1,25 @@
 # Fluent guidance
 
-For Fluent setup or how-to questions:
+For a Fluent setup or how-to question:
 
-1. Read `CFD_wiki/wiki/guidance/` first and provide click-by-click steps.
-2. Retrieve case-specific numerical values from `CFD_wiki/wiki/setups/` and, when needed, project pages.
-3. Keep generic GUI click paths in `CFD_wiki/wiki/guidance/`. For current project-specific work, store the project impact in `Project/`; create the selected experiment's setup and results together under `Project/experiments/`. Use `ResearchProject_wiki/` and `Setups/` only for retained detail, provenance, or explicitly authorized historical repair.
+1. Read the relevant reusable procedure in `CFD_wiki/wiki/guidance/`.
+2. Read the selected Project setup when the question is case-specific.
+3. Read the applicable focused skill and proven PyAnsys implementation when
+   the task involves automation or a live session.
+4. Inspect the live Fluent tree and read back critical values before relying on
+   a version-sensitive Settings path.
 
-Keep beginner-facing guidance practical and procedural. Explain theory only when it directly helps the setup decision.
+Keep generic click paths and model explanations in `CFD_wiki/`. Keep current
+project-specific numerical choices, parent identity, controlled changes, and
+claim boundaries in `Project/`. Keep executable logic and machine evidence in
+`PyAnsys/`.
+
+For a long run, follow
+[PyAnsys native run and autosave policy](../../PyAnsys/knowledge/fluent-settings/native_run_and_autosave.md):
+Fluent owns initialization, iteration, and native autosave; Python may prepare,
+reconnect, inspect, and analyse. Any narrow exception must be explicitly
+documented by the selected experiment.
+
+Do not infer geometry from a setup number, treat a filename as proof of
+completion, or promote a diagnostic run to a validation claim without the
+Project V&V gate.

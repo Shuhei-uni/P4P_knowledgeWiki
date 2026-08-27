@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/past/compatibility/09cV2-skoog-partition-injection-control.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/past/compatibility/09cV2-skoog-partition-injection-control.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Setup 09cV2 — Skoog Partition and Injection-Control Branch
 
@@ -11,17 +11,16 @@
 | Lifecycle | `reported` |
 | Role | Skoog-aligned allocation and injection-control experiment |
 | Parent setup | [09c — two-way DPM coupling](../purnanto-09c-two-way-dpm-coupling/setup.md) |
-| Child setups | [09cV3 — fine-mist 5% DPM PSD rerun](../../../Setups/active/09cV3-fine-mist-5pct-psd-rerun.md); [010V2](../purnanto-010V2-clean-ewf-deposition/setup.md) |
+| Child setups | [09cV3 — fine-mist 5% DPM PSD rerun](../purnanto-09cV3-fine-mist-psd/setup.md); [010V2](../purnanto-010V2-clean-ewf-deposition/setup.md) |
 | Controlled changes | liquid/DPM mass partition, EWF-ready DPM material identity, scaled DPM loading, failure-informed source-balance checks |
-| Droplet-size basis | historical six-bin distribution for completed cases; future PSD reruns use the [project fine-mist baseline](../../../ResearchProject_wiki/wiki/model/fine-mist-dpm-size-and-mass-distribution.md) |
+| Droplet-size basis | historical six-bin distribution for completed cases; future PSD reruns use the [project fine-mist baseline](../purnanto-09cV3-fine-mist-psd/fine-mist-interpretation.md) |
 | Evidence-use label | setup calculation only until carrier and liquid balance gates pass |
 | Outcome | needs follow-up |
 | Linked report | [09cV2 diagnostic results](results.md) |
 
-The short `Setups/purnanto-reference/09cV2-skoog-partition-injection-control.md`
-record is a legacy navigation wrapper for this detailed setup and its
-corresponding result report. Its programme/ID/intent metadata is represented
-here; the detailed compatibility source remains identified above.
+The former numbered navigation wrapper is recoverable from Git history. Its
+programme, ID, and intent metadata are represented here; this Project record is
+the current readable setup source.
 
 ## 1. Objective
 
@@ -83,7 +82,7 @@ The earlier `5%` value is not a project default and is not literature-derived. I
 2. If a Skoog/1-D calculation is available, scan the candidate droplet/film split, calculate deposition and entrainment for each point, and select the point where the two rates are acceptably balanced. Label the resulting fraction `Inferred`, record the inputs/correlation, and still retain a nearby sensitivity case.
 3. If the Skoog/1-D calculation cannot be closed because onset, film, or property inputs are missing, run the sensitivity matrix below. The matrix is a bracketing experiment, not a claim that any row is physically correct.
 4. Keep the six-bin relative weights from `09c` unchanged during the historical fraction study so that fraction and size-distribution effects are not changed simultaneously.
-5. For the next PSD comparison, keep the chosen `f_DPM`, total DPM mass, complementary Eulerian-liquid flow, mesh, carrier checkpoint, coupling, and numerics fixed; change only the injection diameters and relative mass weights according to the [fine-mist DPM decision](../../../ResearchProject_wiki/wiki/model/fine-mist-dpm-size-and-mass-distribution.md).
+5. For the next PSD comparison, keep the chosen `f_DPM`, total DPM mass, complementary Eulerian-liquid flow, mesh, carrier checkpoint, coupling, and numerics fixed; change only the injection diameters and relative mass weights according to the [fine-mist DPM decision](../purnanto-09cV3-fine-mist-psd/fine-mist-interpretation.md).
 
 ### Pre-simulation fraction matrix
 
@@ -146,7 +145,7 @@ At the same `5%` total DPM loading, the recommended flows are:
 
 Do not silently modify an existing historical case. Create a new child/rerun, keep `m_DPM = 5.846 kg/s` and `m_Eulerian_liquid = 111.074 kg/s`, and change only the PSD for the first direct comparison. See:
 
-- [Project fine-mist DPM size and mass distribution](../../../ResearchProject_wiki/wiki/model/fine-mist-dpm-size-and-mass-distribution.md)
+- [Project fine-mist DPM size and mass distribution](../purnanto-09cV3-fine-mist-psd/fine-mist-interpretation.md)
 - [Detailed geothermal fine-mist cutoff evidence](../../../CFD_wiki/wiki/synthesis/geothermal-fine-mist-size-cutoff-evidence.md)
 
 ## 4. Click-by-click build procedure
@@ -284,9 +283,9 @@ The six-bin relative weights were normalized to close exactly to `5.846 kg/s`; t
 
 ## Linked evidence
 
-- [Project fine-mist DPM size and mass distribution](../../../ResearchProject_wiki/wiki/model/fine-mist-dpm-size-and-mass-distribution.md)
+- [Project fine-mist DPM size and mass distribution](../purnanto-09cV3-fine-mist-psd/fine-mist-interpretation.md)
 - [Detailed geothermal fine-mist cutoff evidence](../../../CFD_wiki/wiki/synthesis/geothermal-fine-mist-size-cutoff-evidence.md)
-- [Project Skoog guardrails](../../../ResearchProject_wiki/wiki/model/skoog-application-guardrails.md)
+- [Project Skoog guardrails](../../technical/skoog-application-guardrails.md)
 - [Droplets, carryover, and re-entrainment evidence](../../../CFD_wiki/wiki/physics-basis/droplets-carryover-and-re-entrainment.md)
 - [Geothermal separator inlet droplet synthesis](../../../CFD_wiki/wiki/synthesis/geothermal-separator-inlet-droplets-and-carryover.md)
 - [Skoog source extraction](../../../CFD_wiki/wiki/sources/skoog-2020-annular-flow-three-field-cfd-thesis.md)

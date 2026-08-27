@@ -1,5 +1,5 @@
-> **Legacy source:** Meeting report/mesh-conversion-and-dpm-mass-sensitivity-meeting-report.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** the former root meeting-report file is recoverable from Git history.
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners.
 
 # Meeting Report — Mesh Refinement, Droplet Loading, and Wall Film
 
@@ -67,7 +67,7 @@ For this first sweep, keep the mesh, geometry, solver settings, injection materi
 
 ## 3. Droplet-size and mass-distribution basis
 
-The historical droplet sizes were based on Purnanto's Harwell-based estimate, not on a measured geothermal-inlet particle-size distribution. The reported basis uses an approximately `10 µm` average/Sauter-scale input, the relation `x_med = 1.42 × x_sa`, and approximate distribution markers at `0.3 × x_med` and `2.9 × x_med`. Treating `10 µm` as `x_sa` gives an inferred median of approximately `14.2 µm` and an approximate range of `4.26–41.18 µm`. The exact project injection diameters and original mass allocation are not listed in the source, so the inherited mapping is a **modelling reconstruction**, not a measured PSD. ([Purnanto source extraction](../../ResearchProject_wiki/wiki/technical/sources/purnanto-etal-2013.md), [fine-mist distribution record](../experiments/purnanto-09cV3-fine-mist-psd/fine-mist-interpretation.md))
+The historical droplet sizes were based on Purnanto's Harwell-based estimate, not on a measured geothermal-inlet particle-size distribution. The reported basis uses an approximately `10 µm` average/Sauter-scale input, the relation `x_med = 1.42 × x_sa`, and approximate distribution markers at `0.3 × x_med` and `2.9 × x_med`. Treating `10 µm` as `x_sa` gives an inferred median of approximately `14.2 µm` and an approximate range of `4.26–41.18 µm`. The exact project injection diameters and original mass allocation are not listed in the source, so the inherited mapping is a **modelling reconstruction**, not a measured PSD. ([Purnanto source extraction](../../CFD_wiki/wiki/sources/purnanto-2013-cfd-geothermal-separator.md), [fine-mist distribution record](../experiments/purnanto-09cV3-fine-mist-psd/fine-mist-interpretation.md))
 
 The new distribution is being changed because global DPM interaction is now enabled. Tracked droplets can feed source terms back into the carrier flow, so the DPM population should represent only the fine mist plausibly transported from the steam inlet. Bulk brine, films, slugs, and other large liquid mass are assumed to belong to the continuum liquid entering through the liquid inlet. This avoids allowing a coarse droplet class to dominate the coupled DPM source, and it preserves the total liquid feed rather than deleting or double-counting the excluded mass.
 
@@ -130,7 +130,7 @@ The following project record IDs are retained only so the analysis can be reprod
 - [Partitioned droplet-loading setup](../experiments/purnanto-09cV2-dpm-partition-control/setup.md)
 - [Partitioned droplet-loading diagnostic results](../experiments/purnanto-09cV2-dpm-partition-control/results.md)
 - [Fine-mist droplet-size and mass-distribution record](../experiments/purnanto-09cV3-fine-mist-psd/fine-mist-interpretation.md)
-- [Purnanto technical source extraction](../../ResearchProject_wiki/wiki/technical/sources/purnanto-etal-2013.md)
+- [Purnanto technical source extraction](../../CFD_wiki/wiki/sources/purnanto-2013-cfd-geothermal-separator.md)
 - [Droplet carryover and re-entrainment physics basis](../../CFD_wiki/wiki/physics-basis/droplets-carryover-and-re-entrainment.md)
 - [Fine-mist size-cutoff evidence](../../CFD_wiki/wiki/synthesis/geothermal-fine-mist-size-cutoff-evidence.md)
 - [Wall-film continuation results](../experiments/purnanto-010V2d-ewf-combined-mechanisms/results.md)

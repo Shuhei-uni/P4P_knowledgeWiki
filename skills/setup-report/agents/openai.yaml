@@ -1,6 +1,0 @@
-interface:
-  display_name: "Legacy Setup Report"
-  short_description: "Compatibility reference for retained setup records"
-  default_prompt: "Use $setup-report only for explicitly authorized historical repair of retained Setups records."
-policy:
-  allow_implicit_invocation: false

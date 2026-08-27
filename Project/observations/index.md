@@ -12,7 +12,7 @@ findings, decision, history, or progress database.
 - [05 — 010V2d/010V2d-2 global DPM interaction with EWF](05-010v2d-global-dpm-interaction.md)
 - [06 — 010V2 iteration-continuation checkpoints](06-010v2-iteration-continuation.md)
 
-The source observation pages remain in `ResearchProject_wiki/observations/` as
-frozen legacy records. Machine-readable diagnostics, raw monitor dumps, and
-unavailable plots are not recreated by this written-memory copy; each
-observation retains its source/evidence boundary.
+The former source observation pages are recoverable from Git history. The
+Project copies retain the source/evidence boundary; machine-readable
+diagnostics, raw monitor dumps, and unavailable plots are not recreated by this
+written-memory layer.

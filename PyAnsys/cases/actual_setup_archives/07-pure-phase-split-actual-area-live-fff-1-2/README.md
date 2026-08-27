@@ -13,11 +13,11 @@ Use this folder when you need:
 
 - what Fluent actually contained at export time;
 - a lower-human-error source for rebuild automation;
-- a conflict check against the inherited setup-report chain.
+- a conflict check against the inherited Project experiment chain.
 
-Related report-facing branch:
+Related Project record:
 
-- [07-pure-phase-split-actual-area.md](../../../../Setups/past/reported/07-pure-phase-split-actual-area.md)
+- [07 pure-phase actual-area setup](../../../../Project/experiments/purnanto-07-pure-phase-actual-area/setup.md)
 
 Related difference report:
 
@@ -77,11 +77,8 @@ Related difference report:
 
 Treat this folder as the best record of what the loaded Fluent case actually contained.
 
-Do not assume it is identical to the intended inherited setup from:
-
-1. `00-baseline-spiral-boc-reference.md`
-2. `03-mixed-wet-half-velocity-inlet.md`
-3. `04-mixed-wet-half-actual-area.md`
-4. `07-pure-phase-split-actual-area.md`
+Do not assume it is identical to the intended inherited setup. Reconcile it
+against the Project records for the Purnanto reference, mixed wet-half
+variants, and pure-phase actual-area branch before using it to rebuild a case.
 
 That intended-vs-actual reconciliation is tracked separately in [intended-vs-actual.md](./intended-vs-actual.md).

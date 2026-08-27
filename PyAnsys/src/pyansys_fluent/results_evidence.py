@@ -27,6 +27,7 @@ _ALLOWED_STATUSES = frozenset(
         "blocked",
     }
 )
+_IGNORED_ARTIFACT_PREFIX = ("PyAnsys", "output")
 
 
 def _inline(value: Any) -> str:
@@ -50,6 +51,16 @@ def _relative_artifact_link(results_path: Path, artifact: Any) -> str:
     return Path(relative).as_posix()
 
 
+def _is_ignored_generated_output(target: Path) -> bool:
+    """Return whether ``target`` belongs to the ignored generated-output tree."""
+
+    parts = target.parts
+    return any(
+        parts[index : index + len(_IGNORED_ARTIFACT_PREFIX)] == _IGNORED_ARTIFACT_PREFIX
+        for index in range(len(parts) - len(_IGNORED_ARTIFACT_PREFIX) + 1)
+    )
+
+
 def _artifact_links(results_path: Path, artifacts: Any) -> str:
     if not isinstance(artifacts, Sequence) or isinstance(artifacts, (str, bytes)):
         return "unavailable"
@@ -60,9 +71,13 @@ def _artifact_links(results_path: Path, artifacts: Any) -> str:
             continue
         target = Path(str(artifact))
         label = target.name or str(target)
-        links.append(
-            f"[{_table_value(label)}]({_relative_artifact_link(results_path, artifact)})"
-        )
+        relative = _relative_artifact_link(results_path, artifact)
+        if _is_ignored_generated_output(target):
+            links.append(
+                f"`historical machine artifact path: {_inline(relative)} (not migrated)`"
+            )
+        else:
+            links.append(f"[{_table_value(label)}]({relative})")
     return ", ".join(links) or "unavailable"
 
 

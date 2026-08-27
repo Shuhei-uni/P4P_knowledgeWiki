@@ -69,10 +69,10 @@ new gRPC client, generate a Fluent-native steady-run journal with
   `plot/residuals-set/plot-to-file` after the iteration command returns; and
 - stops the transcript but deliberately leaves Fluent open.
 
-Example:
+From the repository root, for example:
 
 ```bash
-/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/.venv/bin/python \
+PyAnsys/.venv/bin/python \
   PyAnsys/scripts/setup/generate_native_run_journal.py \
   --iterations 5000 \
   --transcript-file 'C:\FluentRuns\09cV3\run.trn' \
@@ -142,7 +142,8 @@ are visible; a `partial` pair must not be used for recovery.
 
 The `03A-stage3` F01–F12 convergence sweep is a narrow, user-approved exception to the normal detached/native-run preference because its next solver state depends on an evidence gate evaluated at discrete iteration checkpoints. The authoritative scientific workflow is:
 
-`Setups/full-geometry/mixture/steady-liquid-outlet/03a-stage3-fluent-recommended-convergence-sweep.md`.
+Project/experiments/03a/stage-03/setup-source.md is the migrated authority for
+the Stage-3 execution specification.
 
 For **F01–F12 only**, an execution agent may keep its client attached and issue one synchronous blocking Fluent solve command for the current decision block:
 

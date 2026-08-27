@@ -1,5 +1,5 @@
-> **Legacy source:** ResearchProject_wiki/wiki/technical/purnanto-live-setup-reference.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** ResearchProject_wiki/wiki/technical/purnanto-live-setup-reference.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Purnanto Live Setup Reference
 
@@ -13,10 +13,10 @@ Use this page when you need the saved Fluent settings rather than the paper narr
 - Data: `PyAnsys/data/4800-iterations-300412-1-05000.dat.h5`
 
 Related report:
-- [00a-purnanto-setup-5000-live-audit.md](<../../../Setups/past/archived/00a-purnanto-setup-5000-live-audit.md>)
+- [00a live setup audit](setup.md)
 
 Related source pages:
-- [purnanto-etal-2013](../../../ResearchProject_wiki/wiki/technical/sources/purnanto-etal-2013.md)
+- [Purnanto source extraction](../../../CFD_wiki/wiki/sources/purnanto-2013-cfd-geothermal-separator.md)
 - [purnanto-2013-cfd-geothermal-separator](../../../CFD_wiki/wiki/sources/purnanto-2013-cfd-geothermal-separator.md)
 
 ## Audited Snapshot

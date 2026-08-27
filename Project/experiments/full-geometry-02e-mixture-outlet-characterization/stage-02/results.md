@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/reports/full-geometry/mixture/steady-liquid-outlet/02e/stage2-results-20260816.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/reports/full-geometry/mixture/steady-liquid-outlet/02e/stage2-results-20260816.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Setup 02e Stage-2 results — 2026-08-16
 
@@ -209,7 +209,7 @@ Those objectives are not interchangeable, and the present evidence does not sele
 
 ## 9. Evidence and lineage
 
-- Governing setup: [`02e-mixture-y010-brine-outlet-boundary-characterization.md`](../../../../Setups/full-geometry/mixture/steady-liquid-outlet/02e-mixture-y010-brine-outlet-boundary-characterization.md)
+- Governing setup: [02e setup](../setup.md)
 - Stage-1 comparison report: [`stage1-results-20260816.md`](../stage-01/results.md)
 - Stage-2 build snapshot: `02e_stage2_build_20260816.json` (historical machine artifact path: `../../../../PyAnsys/output/02e_stage2_build_20260816.json`; not migrated)
 - Native Stage-2 journals: `PO-S2-A journal` (historical machine artifact path: `../../../../PyAnsys/output/02e_stage2_native_po_s2_a_20260816T171000Z.jou`; not migrated), `PO-S2-B journal` (historical machine artifact path: `../../../../PyAnsys/output/02e_stage2_native_po_s2_b_20260816T172000Z.jou`; not migrated), `OV-S2-A journal` (historical machine artifact path: `../../../../PyAnsys/output/02e_stage2_native_ov_s2_a_20260816T173000Z.jou`; not migrated), `OV-S2-B journal` (historical machine artifact path: `../../../../PyAnsys/output/02e_stage2_native_ov_s2_b_20260816T174500Z.jou`; not migrated)

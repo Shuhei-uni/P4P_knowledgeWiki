@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/03a-stage3-final-results.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/03a-stage3-final-results.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # 03A Stage 3 — Iteration-Led Results
 
@@ -118,6 +118,6 @@ A broader Stage-3 lesson is that the most useful branches do not necessarily sho
 - Server-1 manifest (historical machine artifact path: `../../../../PyAnsys/output/03a_stage3/iteration-led/server1/server1-iteration-led-manifest.json`; not migrated)
 - Server-2 provenance manifest (historical machine artifact path: `../../../../PyAnsys/output/03a_stage3/iteration-led/server2/server2-provenance-manifest.json`; not migrated)
 - Server-3 manifest (historical machine artifact path: `../../../../PyAnsys/output/03a_stage3/iteration-led/server3/server3-iteration-led-manifest.json`; not migrated)
-- [Stage-3 checkpoint evidence](../../../../Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/03a-stage3-results-20260821-checkpoints.csv)
+- [Stage-3 checkpoint evidence](source-results-20260821.md)
 
 The prior cross-plots, cross-diagnostics, and load-axis ramp-response figures have been retired from this report. Their underlying evidence remains in the machine-readable packages above.

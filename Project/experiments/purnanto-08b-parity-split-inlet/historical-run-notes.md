@@ -1,16 +1,16 @@
-> **Legacy source:** ResearchProject_wiki/wiki/progress/experiments.md  
-> **Migration note:** These excerpts preserve the historical run-note record; no status or interpretation has been rewritten. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** ResearchProject_wiki/wiki/progress/experiments.md
+> **Migration note:** These excerpts preserve the historical run-note record; no status or interpretation has been rewritten. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Historical run notes
 
-> **Legacy source:** ResearchProject_wiki/wiki/progress/experiments.md
+> **Retired source:** ResearchProject_wiki/wiki/progress/experiments.md
 > **Migration note:** Selected run entries are preserved verbatim as historical project memory; they are not a new status or findings system.
 
 ### Run PURNANTO-08B-POSTPROCESS-2026-07-02
 - Run ID: `PURNANTO-08B-POSTPROCESS-2026-07-02`
 - Date: 2026-07-02
 - Objective: post-process the already-run setup `08b` `5000`-iteration case/data on the live Fluent server, record the current phase-flux result, and refresh the active 6-injection DPM summary without rebuilding the case.
-- Geometry: `purnanto` split-inlet parity-reset branch from `../../../Setups/past/reported/08b-purnanto-parity-split-inlet-rebuild.md`; two `mass-flow-inlet` zones (`liquidinlet`, `steaminlet`), one `pressure-outlet` zone (`steamoutlet`), walls `bottom` and `wall`.
+- Geometry: `purnanto` split-inlet parity-reset branch from `setup.md`; two `mass-flow-inlet` zones (`liquidinlet`, `steaminlet`), one `pressure-outlet` zone (`steamoutlet`), walls `bottom` and `wall`.
 - Mesh: `1,309,312` nodes and `7,601,261` tetrahedral cells (`Observed` from the live case readback during the manual load and server-side post-processing session).
 - Physics model: steady pressure-based `Mixture` with `2` phases; `phase-1 = water-vapor-at-psep`; `phase-2 = water-liquid-at-psep`; `RNG k-epsilon`; energy off; one-way DPM active with `pressure force = on`, `virtual mass = on`, `max_num_steps = 10000`, and `step-length-factor = 5`.
 - Solver settings: carrier field already solved to the saved `5000`-iteration state before this post-processing pass; no rebuild, no new carrier iterations, and no new injections were created during this run.

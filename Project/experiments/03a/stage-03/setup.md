@@ -66,4 +66,4 @@ Compare complete histories and common final-condition windows. Endpoint values a
 
 ## Source
 
-[Original Stage-3 setup authority](../../../../Setups/full-geometry/mixture/steady-liquid-outlet/03a-stage3-fluent-recommended-convergence-sweep.md)
+[Migrated Stage-3 setup authority](setup-source.md)

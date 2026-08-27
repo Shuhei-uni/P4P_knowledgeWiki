@@ -1,5 +1,5 @@
-> **Legacy source:** ResearchProject_wiki/observations/06-010v2-iteration-continuation.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** ResearchProject_wiki/observations/06-010v2-iteration-continuation.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Observation 06 — `010V2a`–`010V2d` Iteration-Continuation Checkpoints
 

@@ -31,8 +31,10 @@ Long-term goal is synthesis: connect multiple papers into a network of reusable 
 
 ## Cross-System Boundaries
 - `CFD_wiki` owns reusable method and evidence logic.
-- `ResearchProject_wiki/wiki/vnv/` owns project-specific verification reports, validation reports, and final sign-off.
-- `Setups/` owns concrete setup lineage and report-facing case definitions.
+- `Project/` owns project-specific verification reports, validation boundaries,
+  selected experiment interpretation, and final sign-off decisions.
+- `Project/experiments/` owns concrete selected setup contracts and branch
+  lineage; `PyAnsys/` owns executable setup implementation and machine evidence.
 - `PyAnsys/` owns executable automation, inspection scripts, and machine-readable target or claim-gate files.
 
 Do not move project-run judgments, setup lineage, or automation-specific implementation detail into this wiki unless the point is to extract a reusable CFD lesson.
@@ -111,7 +113,8 @@ For each new source:
 
 ## V&V Scope Rule
 - Keep reusable verification/validation ladders, evidence hierarchies, and claim-discipline logic in `wiki/synthesis/`.
-- Do not store project sign-off decisions here; link to `ResearchProject_wiki/wiki/vnv/` when a project branch needs a human-reviewed verdict.
+- Do not store project sign-off decisions here; link to `Project/vnv.md` when a
+  project branch needs a human-reviewed verdict.
 - If automation artifacts or target manifests are discussed, point to `PyAnsys` rather than embedding machine-readable payloads in this wiki.
 
 ## CFD Extraction Schema (Mandatory)

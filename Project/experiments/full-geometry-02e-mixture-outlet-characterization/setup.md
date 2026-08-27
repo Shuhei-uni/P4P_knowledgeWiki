@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/compatibility-snapshots/02e-mixture-y010-brine-outlet-boundary-characterization.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/compatibility-snapshots/02e-mixture-y010-brine-outlet-boundary-characterization.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Setup 02e — Mixture Y010 Brine-Outlet Boundary Characterization
 

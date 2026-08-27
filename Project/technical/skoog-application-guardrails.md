@@ -1,5 +1,5 @@
-> **Legacy source:** ResearchProject_wiki/wiki/model/skoog-application-guardrails.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** the former ResearchProject written record is recoverable from Git history.
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners.
 
 # Skoog Application Guardrails
 
@@ -80,7 +80,10 @@ The project must not use one injection family to represent all four roles.
 
 ## Provisional branch sequence
 
-These remain provisional planning labels, but their setup files and lineage are now recorded under `Setups/` and in `Setups/order-dictionary.md`. They should not be treated as accepted or report-quality cases until their gates pass.
+These remain provisional planning labels, but their setup files and lineage are
+now recorded under the corresponding `Project/experiments/` records. They
+should not be treated as accepted or report-quality cases until their gates
+pass.
 
 ### `09cV2` — Skoog partition and injection-formation control
 
@@ -117,7 +120,8 @@ Only after the `010V2` control is interpretable:
 - `010V2c`: particle stripping;
 - `010V2d`: combined wall-film interaction, only if each isolated mechanism is stable.
 
-The final naming and ordering will be checked against `Setups/order-dictionary.md` when the setup plans are created.
+The final naming and ordering must be checked against the selected Project
+experiment contract when new plans are created.
 
 ## Claim discipline
 
@@ -134,4 +138,4 @@ They must not yet support a geothermal separator efficiency, steam-purity, or va
 - Current inlet-regime context: [inlet-regimes](../experiments/purnanto-08c-inlet-loading-sensitivity/inlet-regimes-interpretation.md)
 - Current EWF diagnostic: [10a results](../experiments/purnanto-10a-splash-ewf-preliminary/results.md)
 - Current two-way DPM diagnostic: [09c results](../experiments/purnanto-09c-two-way-dpm-coupling/results.md)
-- Project V&V policy: [vnv/policy](../../ResearchProject_wiki/wiki/vnv/policy.md)
+- Project V&V policy: [V&V and claim limits](../vnv.md)

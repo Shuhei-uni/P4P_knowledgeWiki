@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/full-geometry/mixture/transient-liquid-outlet/setup.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/full-geometry/mixture/transient-liquid-outlet/setup.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Mixture Transient Liquid-Outlet Setup
 
@@ -14,9 +14,9 @@
 | Investigation mode | exploratory / sensitivity with staged numerical-method qualification |
 | Interpretation owner | user-led |
 | Geometry basis | exact verified full-geometry production mesh used by the current Y010 Mixture work; repeat the parent-build stage for any new mesh |
-| Steady predecessor | [`02e` Y010 outlet characterization](../../../Setups/active/02e-mixture-y010-brine-outlet-boundary-characterization.md) |
+| Steady predecessor | [02e Y010 outlet characterization](../full-geometry-02e-mixture-outlet-characterization/setup.md) |
 | Key predecessor evidence | [`02e` Stage-1 results](../full-geometry-02e-mixture-outlet-characterization/stage-01/results.md) |
-| Report home | [mirrored transient report folder](../../../Setups/reports/full-geometry/mixture/transient-liquid-outlet/index.md) |
+| Report home | [migrated transient stage records](stage-01/results.md) |
 
 ## Campaign question
 
@@ -277,10 +277,6 @@ Useful behavior descriptions for the final production screen may include, only w
 
 This folder contains setup definitions and stage plans only.
 
-All completed-run evidence belongs under:
-
-```text
-Setups/reports/full-geometry/mixture/transient-liquid-outlet/
-```
-
-Use the mirrored [report index](../../../Setups/reports/full-geometry/mixture/transient-liquid-outlet/index.md) for the stage-report sequence. Do not create completed-run `results.md` files beside these setup records.
+Completed-run evidence belongs beside the selected setup in this Project
+experiment folder when the experiment contract requires a paired `results.md`.
+The former report tree is retired and recoverable from Git history.

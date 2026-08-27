@@ -1,5 +1,5 @@
-> **Legacy source:** Meeting report/meeting report.docx  
-> **Migration note:** This short historical Word report and its embedded figures are preserved as an archival record. The values and evidence status are transcribed or extracted for navigation only; no result has been reinterpreted. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Meeting report/meeting report.docx
+> **Migration note:** This short historical Word report and its embedded figures are preserved as an archival record. The values and evidence status are transcribed or extracted for navigation only; no result has been reinterpreted. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Legacy meeting report — mixed wet-half inlet and DPM figures
 

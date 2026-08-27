@@ -52,4 +52,4 @@
 - Synthesis:
   - [annular-flow-three-field-cfd-patterns](../synthesis/annular-flow-three-field-cfd-patterns.md)
 - Setup lineage using this source:
-  - [../../../Setups/past/archived/02b-vof-split-inlet-transient.md](../../../Setups/past/archived/02b-vof-split-inlet-transient.md)
+  - [Project VOF model-form sensitivity](../../../Project/experiments/full-geometry-vof-02d-model-form-sensitivity/setup.md)

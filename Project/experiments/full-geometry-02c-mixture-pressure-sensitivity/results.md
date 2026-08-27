@@ -1,5 +1,5 @@
-> **Legacy source:** Setups/reports/full-geometry/mixture/steady-liquid-outlet/02c/results.md  
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Raw and machine-generated artifacts remain at their legacy paths.
+> **Retired source:** Setups/reports/full-geometry/mixture/steady-liquid-outlet/02c/results.md
+> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
 
 # Results Report — Setup 02c, Unprimed Brine-Outlet Pressure Screen (Cases A–H)
 
@@ -64,7 +64,7 @@ Detailed per-case evidence and artifact links follow below. The D–G and H rows
 
 ## 1. Setup link and evidence
 
-- Setup definition: [02c — Mixture brine-outlet pressure sensitivity, unprimed](../../../Setups/full-geometry/mixture/steady-liquid-outlet/02c-mixture-brine-outlet-pressure-sensitivity-unprimed.md)
+- Setup definition: [02c — Mixture brine-outlet pressure sensitivity, unprimed](setup.md)
 - Case: `02c-B`, brine-outlet gauge pressure `1.120 MPa`
 - Verified checkpoint: `02c-B-brine-p1120kpa-unprimed-iter500-20260812T045447Z.cas.h5` with matching `.dat.h5`
 - Fluent version: Ansys Fluent 2025 R2
@@ -382,7 +382,7 @@ Post-processing artifacts: flux JSON (historical machine artifact path: `../../.
 
 ### Setup and execution evidence
 
-- Setup link: [02c active setup](../../../Setups/full-geometry/mixture/steady-liquid-outlet/02c-mixture-brine-outlet-pressure-sensitivity-unprimed.md).
+- Setup link: [02c setup](setup.md).
 - Case ID: `02c-H`.
 - Brine outlet gauge pressure: `1.140 MPa` (`1,140,000 Pa`).
 - Steam outlet gauge pressure: `1.120 MPa` (`1,120,000 Pa`).
