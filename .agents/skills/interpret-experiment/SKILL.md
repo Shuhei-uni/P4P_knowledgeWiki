@@ -1,6 +1,6 @@
 ---
 name: interpret-experiment
-description: "Turn simulation evidence into a bounded scientific interpretation. Use after the required analysis exists and numerical adequacy has been assessed, to separate hypothesis from observation, interpretation, and conclusion, and to state only what the simulation evidence actually supports."
+description: "Turn simulation evidence into a bounded scientific interpretation. Use after the required analysis exists and numerical adequacy has been assessed, to separate hypothesis from observation, interpretation, and conclusion, revisit relevant working assumptions, and state only what the simulation evidence actually supports."
 ---
 
 # Interpret Experiment
@@ -13,7 +13,7 @@ Literature, prior experience, and physical intuition may help explain a result. 
 
 ## Start from the evidence
 
-Read the experiment question, the controlled changes, the analysis plan, the measured and derived data, the plots, the comparison cases, and the numerical-quality assessment.
+Read the experiment question, the controlled changes, the working assumptions, the analysis plan, the measured and derived data, the plots, the comparison cases, and the numerical-quality assessment.
 
 If decisive evidence is missing, say what cannot be concluded. If the simulation is numerically inadequate, interpret the numerical behavior that was actually observed without turning it into a physics claim.
 
@@ -43,9 +43,25 @@ Interpretation can connect multiple observations and use scientific reasoning, b
 
 What the experiment actually allows us to say about its question.
 
-The conclusion should be no stronger than the evidence, controls, and numerical quality permit.
+The conclusion should be no stronger than the evidence, controls, working assumptions, and numerical quality permit.
 
 Do not collapse these four levels into one narrative.
+
+## Revisit working assumptions without chasing all of them
+
+After interpreting the direct experiment evidence, ask whether any working assumption became more or less credible because of what was observed.
+
+Do not treat assumptions as hidden truths or as automatic experiment targets. Use them to bound the conclusion.
+
+When useful, update each relevant assumption as:
+
+- `accepted-for-now`: no observed evidence makes it important enough to challenge;
+- `questioned`: the evidence makes it worth watching or acknowledging, but it does not yet threaten the current conclusion;
+- `materially-challenged`: there is a credible reason it could change the experiment or phase-level conclusion.
+
+Only elevate an assumption into a major uncertainty when the evidence gives a concrete reason to do so. Do not create an endless verification chain by attacking assumptions merely because they are assumptions.
+
+If an assumption remains uncertain but does not materially affect the statement being made, preserve it as a limitation rather than manufacturing another experiment.
 
 ## Anchor claims to behavior
 
@@ -56,6 +72,7 @@ For every important claim, be able to answer:
 - What comparison makes the claim meaningful?
 - Is the simulation numerically trustworthy enough for this claim?
 - What else could plausibly explain the same observation?
+- Does any materially challenged assumption weaken the claim?
 
 Prefer specific evidence over labels such as `better`, `stable`, `improved`, or `physical` unless those terms are tied to explicit behavior or metrics.
 
@@ -109,6 +126,7 @@ Make clear:
 - the bounded interpretation;
 - alternative explanations where they matter;
 - the conclusion the experiment supports;
+- any working assumption that became questioned or materially challenged;
 - what remains unresolved.
 
 Significant claims should be traceable to the evidence that carries them.
@@ -122,6 +140,7 @@ Return the experiment to the scientific phase with a concise account of:
 - what the simulation established;
 - what it did not establish;
 - what changed in the current understanding;
+- whether any relevant working assumption changed state;
 - what uncertainty remains.
 
-The next step should emerge from that updated understanding rather than from loyalty to the original hypothesis or experiment plan.
+The next step should emerge from that updated understanding rather than from loyalty to the original hypothesis, assumptions, or experiment plan.
