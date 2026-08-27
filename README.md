@@ -5,7 +5,7 @@ This repository stores the working knowledge base for the P4P geothermal separat
 - `CFD_wiki/`: reusable CFD knowledge, paper extraction, Fluent guidance, setup patterns, and cross-paper synthesis.
 - `Project/`: the compact current authority for project-specific scientific truth, selected experiments, evidence interpretation, and claim boundaries.
 - `ResearchProject_wiki/`: the retained project corpus—detailed progress, blockers, technical notes, and existing V&V records—until each area is deliberately cut over.
-- `Setups/`: concrete simulation experiments. Current production work is routed geometry-first, with **setup definitions under `Setups/full-geometry/` and completed-run reports under the mirrored `Setups/reports/full-geometry/` tree**. Historical numbered/reference work is navigated separately.
+- `Setups/`: retained concrete simulation setup/report sources and historical lineage. Existing `Full-geomV2` records remain geometry-first for provenance and implementation readback; new selected experiments are co-located under `Project/experiments/`.
 - `PyAnsys/`: executable Fluent automation, case inspection, run orchestration, and machine-readable checks.
 
 Start with:
@@ -14,10 +14,10 @@ Start with:
 - `Project/index.md` for current project truth and the selected-experiment contract.
 - `CFD_wiki/wiki/index.md` for reusable CFD knowledge.
 - `ResearchProject_wiki/wiki/index.md` for retained project-source, progress, technical, and V&V records.
-- `Setups/index.md` for simulation-programme navigation and setup/report separation.
-- `Setups/full-geometry/index.md` for current `Full-geomV2` setup definitions.
-- `Setups/reports/full-geometry/index.md` for current `Full-geomV2` result reports.
-- `Setups/order-dictionary.md` only when working with the historical numbered lineage.
+- `Setups/index.md` for retained simulation-programme navigation and setup/report provenance.
+- `Setups/full-geometry/index.md` for retained `Full-geomV2` setup definitions.
+- `Setups/reports/full-geometry/index.md` for retained `Full-geomV2` result reports.
+- `Setups/order-dictionary.md` only when working with historical numbered lineage; it is not current routing.
 
 ## What Is Not In The Remote Repo
 
@@ -105,7 +105,7 @@ They support the project-specific extraction and audit trail under:
 3. Read `AGENTS.md` before editing so content goes to the correct knowledge system.
 4. Use `CFD_wiki/paper_lookup/index.md` as the first stop for paper navigation.
 5. Use `Project/index.md` for current project state, then consult `ResearchProject_wiki/wiki/index.md` only for retained source/detail pages.
-6. Use `Setups/index.md` to select the geometry programme and distinguish setup definitions from reports.
+6. Use `Project/experiments/README.md` for new selected experiment setup/results records; consult `Setups/index.md` only for retained setup/report provenance.
 7. Use `Setups/order-dictionary.md` only for historical numbered-lineage work.
 
 Do not commit `CFD_wiki/raw/`, the large Fluent guide PDF, local virtual environments, or generated cache files unless the storage strategy is changed deliberately.

@@ -1,12 +1,15 @@
 # Setup Reports
 
-`Setups/reports/` is the dedicated home for **numerical result reports, execution evidence, post-analysis reports, and interpretation sections based on completed simulations**.
+> **RETAINED REPORT SOURCE — NOT FOR NEW SELECTED EXPERIMENTS**
+> New selected experiments belong in [`Project/experiments/`](../../Project/experiments/), where the setup and result records live together. Existing reports below remain available for numerical provenance and implementation readback.
+
+`Setups/reports/` retains **numerical result reports, execution evidence, post-analysis reports, and interpretation sections based on completed simulations**.
 
 Setup definitions and plans are kept separately under the corresponding setup tree.
 
-## Current full-geometry reports
+## Retained full-geometry reports
 
-New `Full-geomV2` reports use the mirrored geometry-first hierarchy:
+Existing `Full-geomV2` reports use the retained mirrored geometry-first hierarchy:
 
 - [Full-geometry reports](full-geometry/index.md)
   - [Mixture reports](full-geometry/mixture/index.md)
@@ -35,7 +38,7 @@ The steady full-geometry campaign predates the new mirrored report structure. It
 
 - [Full-geometry Mixture steady liquid-outlet reports](full-geometry/mixture/steady-liquid-outlet/index.md)
 
-New reports for that campaign should use the mirrored full-geometry report folder.
+For explicit repair of that retained campaign, use the mirrored full-geometry report folder. Ordinary new selected results belong beside their setup under `Project/experiments/`.
 
 ## Report-only rule
 

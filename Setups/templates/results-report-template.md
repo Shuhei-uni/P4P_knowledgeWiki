@@ -14,7 +14,7 @@ setup_path: "Setups/full-geometry/<physics>/<campaign>/<setup-or-stage>.md"
 
 # Results Report — <campaign / setup / stage / run>
 
-> **Filing rule:** for new full-geometry work, save this report under `Setups/reports/full-geometry/<physics>/<campaign>/<experiment-id>/`. Do not save completed-run reports beside `setup.md` under `Setups/full-geometry/...`.
+> **Retained template:** use this report shape only for reviewing or explicitly repairing a retained `Setups/reports/` record. New selected experiments use [`Project/experiments/`](../../Project/experiments/) with `setup.md` and `results.md` co-located; do not create new mirrored reports here.
 >
 > Default behavior: this report presents the evidence clearly and leaves scientific interpretation to the user unless an interpretation framework was supplied in advance or the user explicitly asks the agent to interpret.
 >

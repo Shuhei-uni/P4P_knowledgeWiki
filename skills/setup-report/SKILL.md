@@ -1,29 +1,34 @@
 ---
 name: setup-report
-description: "Create and manage concrete Fluent setup records and separate setup-linked result reports. Route by geometry first, organize current Full-geomV2 setup plans by physics family and scientific campaign, mirror completed-run reports under Setups/reports/full-geometry, preserve the historical numbered/reference corpus, make the Fluent build contract explicit, and keep interpretation user-led by default."
+description: "Review retained concrete Fluent setup records and setup-linked result reports. Preserve geometry/lineage evidence and user-led interpretation, while routing new selected experiments to the co-located Project/experiments contract instead of creating new Setups mirrors."
 ---
 
 # Setup Report
 
+> **LEGACY FOR NEW WORK**
+> New selected experiments belong in [`Project/experiments/`](../../Project/experiments/), with `setup.md` and `results.md` co-located.
+> Do not create new setup/report records under `Setups/`.
+> Use this skill for retained setup/report provenance, historical lineage, and explicit repair only.
+
 ## Purpose
 
-`Setups/` documents concrete simulation experiments with a deliberate separation between **experiment definition** and **result evidence**.
+`Setups/` retains concrete simulation experiments with a deliberate separation between **experiment definition** and **result evidence**. It is no longer the authoring home for new selected experiments.
 
 A setup record has two jobs:
 
 1. make the intended Fluent case reproducible enough for an implementation agent to build or verify it; and
 2. make the scientific reason for the case obvious enough that later analysis can collect relevant evidence.
 
-A result report records what actually happened after execution. It must not be mixed into the setup-plan folder for new full-geometry work.
+A result report records what actually happened after execution. Retained reports must not be mixed into the retained setup-plan folder.
 
-Keep reusable CFD methods in `CFD_wiki`, project-level conclusions in `ResearchProject_wiki`, and executable automation in `PyAnsys/`.
+Keep reusable CFD methods in `CFD_wiki`, current project-level conclusions and selected experiments in `Project/`, retained detail in `ResearchProject_wiki`, and executable automation in `PyAnsys/`.
 
 Before working on a setup or report, read:
 
 1. repository `AGENTS.md`;
-2. `Setups/index.md`;
-3. the relevant geometry-programme index;
-4. the matching report-programme index when results exist;
+2. `Project/index.md` and `Project/experiments/README.md`;
+3. `Setups/index.md` when retained setup/report provenance is needed;
+4. the relevant retained geometry/report programme index;
 5. the parent/comparison setup and linked evidence;
 6. the project roadmap when current research direction matters.
 
@@ -33,15 +38,15 @@ Read `Setups/order-dictionary.md` when working on the historical numbered corpus
 
 Determine geometry from explicit mesh/case provenance before choosing a path.
 
-### Current full geometry
+### Retained full geometry
 
-New `Full-geomV2` setup work belongs under:
+Existing `Full-geomV2` setup records remain under:
 
 ```text
 Setups/full-geometry/<physics-family>/<scientific-campaign>/
 ```
 
-Completed-run reports belong under the exact mirrored path:
+Existing completed-run reports remain under the exact mirrored path:
 
 ```text
 Setups/reports/full-geometry/<physics-family>/<scientific-campaign>/
@@ -54,7 +59,7 @@ Setups/full-geometry/mixture/transient-liquid-outlet/
 Setups/reports/full-geometry/mixture/transient-liquid-outlet/
 ```
 
-The campaign folder is the primary human-facing identity. A stable machine/reference ID such as `FG-MIX-T01` may be used in metadata and Fluent artifact names.
+The retained campaign folder is the historical human-facing identity. A stable machine/reference ID such as `FG-MIX-T01` may be used in metadata and Fluent artifact names. New selected experiments use the Project experiment contract instead.
 
 Do not create `02f`, `02g`, or another global number merely because the campaign comes later in time.
 
@@ -73,11 +78,11 @@ When editing a legacy numbered record:
 
 Never infer geometry from a setup number, branch suffix, or phrase such as “full geometry.” Require an exact mesh filename, verified case identity, or equivalent geometry-provenance evidence.
 
-A methodological predecessor may inform a new campaign without being a case/geometry parent.
+A methodological predecessor may inform a new Project experiment without being a case/geometry parent.
 
-## Strict setup/report separation
+## Retained setup/report separation
 
-For new full-geometry work:
+For retained full-geometry work:
 
 ### Setup tree
 
@@ -102,13 +107,13 @@ Keep only completed-run evidence in `Setups/reports/full-geometry/...`:
 - measured/derived numerical findings;
 - interpretation sections added after user direction.
 
-Do not create `results.md` beside `setup.md`. Do not place a stage plan in the report tree.
+Do not create new records in this retained mirror. Existing records keep results separate from setup plans; do not place a stage plan in the report tree.
 
 Each report must link back to the exact setup/stage plan that defined the run.
 
-## Canonical campaign structure
+## Retained campaign structure
 
-Treat one campaign folder as the smallest canonical unit. Use the matching setup/report paths and only the file roles the campaign needs:
+Treat one campaign folder as the smallest historical unit. Use the matching retained setup/report paths and only the file roles the campaign needs:
 
 ```text
 Setups/full-geometry/<physics>/<campaign>/
@@ -126,15 +131,15 @@ Setups/reports/full-geometry/<physics>/<campaign>/
     └── evidence/                    # companion artifacts only
 ```
 
-Use `Setups/templates/campaign-index-template.md` for new campaign indexes. Every campaign has one index and every reportable setup/stage/experiment has one report folder; indexes link to records instead of repeating them. New paths and filenames use lowercase kebab-case. Do not add a status folder, a second ID-based copy, a campaign-level `plots/` directory, or a new global number sequence.
+Use `Setups/templates/campaign-index-template.md` when explicitly repairing a retained campaign. Every retained campaign has one index and every reportable setup/stage/experiment has one report folder; indexes link to records instead of repeating them. Retained paths and filenames use lowercase kebab-case. Do not add a status folder, a second ID-based copy, a campaign-level `plots/` directory, or a new global number sequence.
 
-For new records, include `record_type`, `programme`, `geometry`, `physics_family`, `campaign`, `record_id` (or `none`), and `lifecycle` in front matter. The descriptive campaign path is the human-facing identity; the stable ID is metadata and a link key.
+For retained records being repaired, preserve or add `record_type`, `programme`, `geometry`, `physics_family`, `campaign`, `record_id` (or `none`), and `lifecycle` in front matter. The historical campaign path is the human-facing identity; the stable ID is metadata and a link key.
 
 Keep all plots and companion evidence under the experiment folder that produced them, using `plots/` and `evidence/` as needed. Do not create unexplained numeric folders or a shared campaign-level plot folder. Keep executable outputs in `PyAnsys/` or their source-data owner and link to them.
 
 ## Compatibility and migration rule
 
-`active/`, `future/`, `past/`, `archived/`, `compatibility-snapshots/`, and old numbered report directories are frozen compatibility surfaces. New full-geometry work never starts there. Do not copy a canonical record into them.
+`active/`, `future/`, `past/`, `archived/`, `compatibility-snapshots/`, and old numbered report directories are frozen compatibility surfaces. No new selected experiment starts anywhere in `Setups/`. Do not copy a canonical record into them.
 
 If an old record is relocated, leave a redirect stub where possible. Use a detailed compatibility snapshot only when old relative links or historical provenance require the old directory depth, and link it to the canonical record. Edit the canonical record only; preserve legacy names and IDs unless an intentional migration includes link updates.
 
@@ -200,9 +205,9 @@ The default result is an **evidence packet**, not an agent verdict. It should:
 
 Do not automatically end with `keep`, `reject`, a preferred pressure/model, or the next simulation. If the user asks for interpretation, add a clearly separated interpretation section and identify whether it is user-provided, joint, or agent-proposed.
 
-## Lifecycle
+## Lifecycle of retained records
 
-Lifecycle is metadata, not a required directory for new full-geometry work:
+Lifecycle is metadata, not a required directory for retained full-geometry work:
 
 - `active` — currently being built/run/analysed;
 - `future` — intentionally planned but not started;
@@ -211,17 +216,17 @@ Lifecycle is metadata, not a required directory for new full-geometry work:
 
 `reported` does not mean verified or validated.
 
-Do not use `current`, `latest`, `final`, `new`, or an unqualified `results.md` for new records. Use role-based names such as `setup-<id>-<slug>.md`, `stage-<nn>-<slug>.md`, and `stage-<nn>-<slug>-results.md`.
+When repairing retained records, preserve their existing names and IDs; do not introduce `current`, `latest`, `final`, or `new` status words. Keep any intentionally migrated record role-based and traceable.
 
 ## Completion check
 
 Before finishing setup/report work, confirm:
 
 - geometry programme is supported by explicit provenance;
-- setup path follows geometry → physics → campaign for new full-geometry work;
-- report path exactly mirrors that campaign under `Setups/reports/full-geometry/`;
-- campaign has one index and each record has one canonical path;
-- new record names use a role plus a descriptive lowercase slug;
+- retained setup path follows geometry → physics → campaign;
+- retained report path exactly mirrors that campaign under `Setups/reports/full-geometry/`;
+- retained campaign has one index and each record has one canonical path;
+- repaired record names remain traceable and use a role plus a descriptive lowercase slug when a rename is unavoidable;
 - lifecycle is metadata rather than a new top-level status folder;
 - compatibility copies are redirect stubs or explicitly labelled snapshots, not second authorities;
 - no result report was placed inside the setup tree;

@@ -1,5 +1,8 @@
 # Full Geometry — Mixture Steady Liquid-Outlet Reports
 
+> **RETAINED REPORT SOURCE — NOT FOR NEW SELECTED EXPERIMENTS**
+> New selected experiments belong under [`Project/experiments/`](../../../../../Project/experiments/); existing reports remain here for provenance and implementation readback.
+
 Corresponding setup campaign: [Mixture steady liquid-outlet setups](../../../../full-geometry/mixture/steady-liquid-outlet/index.md).
 
 ## Experiment folders
@@ -14,4 +17,4 @@ The `02c` and `02e` folders preserve their existing report groupings. The `03a` 
 
 ## Filing rule
 
-New evidence belongs in the folder for the setup or experiment that produced it. Use `plots/` and `evidence/` inside that experiment folder when companion artifacts are needed. Do not place result files or plots directly in this campaign directory.
+For retained report repair, evidence belongs in the folder for the setup or experiment that produced it. Use `plots/` and `evidence/` inside that experiment folder when companion artifacts are needed. Do not place result files or plots directly in this campaign directory. Ordinary new selected results belong beside their setup under `Project/experiments/`.

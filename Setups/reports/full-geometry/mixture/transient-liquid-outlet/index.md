@@ -1,5 +1,8 @@
 # Full Geometry — Mixture Transient Liquid-Outlet Reports
 
+> **RETAINED REPORT SOURCE — NOT FOR NEW SELECTED EXPERIMENTS**
+> New selected experiments belong under [`Project/experiments/`](../../../../../Project/experiments/); existing reports remain here for provenance and implementation readback.
+
 Corresponding setup campaign: [Mixture transient liquid-outlet setups](../../../../full-geometry/mixture/transient-liquid-outlet/index.md).
 
 **Current status:** Stage 1 execution is complete; Stage 2 startup-state case construction is complete and the user accepted the small physical INIT-S/INIT-H difference. The original Stage 3 initialization sweep failed, and the sequential no-patch recovery `NP-DT1` also failed with a floating-point exception before its requested `200` transient steps completed. No Stage 3 endpoint or complete physical-time history exists.

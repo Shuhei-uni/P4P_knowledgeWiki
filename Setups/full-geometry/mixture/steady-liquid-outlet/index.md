@@ -1,8 +1,11 @@
 # Full Geometry — Mixture Steady Liquid-Outlet Setup Campaign
 
-This is the canonical setup-side home for the full-geometry steady Mixture investigation of the physical brine outlet and retained lower-vessel liquid.
+> **RETAINED CAMPAIGN SOURCE — NOT FOR NEW SELECTED EXPERIMENTS**
+> New selected experiments belong under [`Project/experiments/`](../../../../Project/experiments/). The setup records below remain available for provenance and implementation readback.
 
-## Canonical setup definitions
+This is the retained setup-side source for the full-geometry steady Mixture investigation of the physical brine outlet and retained lower-vessel liquid.
+
+## Retained setup definitions
 
 - [`02c` — unprimed brine-outlet pressure sensitivity](02c-mixture-brine-outlet-pressure-sensitivity-unprimed.md)
 - [`02e` — Y010 outlet-boundary characterization](02e-mixture-y010-brine-outlet-boundary-characterization.md)

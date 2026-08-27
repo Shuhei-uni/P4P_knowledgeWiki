@@ -1,6 +1,9 @@
 # Full Geometry — Mixture Reports
 
-Numerical evidence for full-geometry Mixture campaigns is filed here, separately from the setup definitions.
+> **RETAINED REPORT SOURCE — NOT FOR NEW SELECTED EXPERIMENTS**
+> New selected experiments belong under [`Project/experiments/`](../../../../Project/experiments/); their setup and results records are co-located. Existing numerical evidence remains here for provenance.
+
+Numerical evidence for retained full-geometry Mixture campaigns is filed here, separately from the setup definitions.
 
 ## Campaigns
 

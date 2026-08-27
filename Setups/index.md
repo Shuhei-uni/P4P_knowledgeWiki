@@ -1,10 +1,13 @@
 # Setups
 
-> Repository restructure tracked in #9. Once Project is proven, do not create new mirrored work in `Setups/active/`, `Setups/future/`, or legacy report paths; current `Setups/full-geometry/` remains in use until cutover. Do not delete historical content yet.
+> **LEGACY FOR NEW WORK**
+> New selected experiments belong in [`Project/experiments/`](../Project/experiments/).
+> Do not create new mirrored setup/report records here.
+> Historical files remain available for provenance.
 
-`Setups/` stores concrete Fluent experiment definitions and their setup-linked evidence, with setup definitions and result reports intentionally kept in separate trees.
+`Setups/` stores retained concrete Fluent experiment definitions, setup-linked evidence, and historical lineage. Existing setup definitions and result reports remain intentionally separated for compatibility; new selected experiments keep `setup.md` and `results.md` together under `Project/experiments/`.
 
-The primary navigation is geometry-first because the current `Full-geomV2` programme is a different experimental generation from the older Purnanto/reference work.
+The retained programme navigation is geometry-first because the `Full-geomV2` records are a different experimental generation from the older Purnanto/reference work.
 
 ## Primary programme entry points
 
@@ -13,20 +16,20 @@ The primary navigation is geometry-first because the current `Full-geomV2` progr
 - [Setup reports](reports/index.md)
 - [Archived setup plans](archived/index.md)
 
-## Full-geometry separation rule
+## Retained full-geometry separation rule
 
-For current production work, mirror setup and result ownership:
+For retained production-work records, the existing mirror separates setup and result ownership:
 
 ```text
 Setups/full-geometry/<physics>/<campaign>/
 Setups/reports/full-geometry/<physics>/<campaign>/
 ```
 
-Use the first path for what is intended to be built/run and the second for what actually happened.
+Use the first path for what was intended to be built/run and the second for what actually happened. Do not start a new selected experiment in either path.
 
-## New-work structure rule
+## Retained layout reference (do not use for new work)
 
-The campaign directory is the canonical unit for new work. Use the smallest shape that fits the campaign:
+The campaign directory is the historical unit for existing Setups work. Use the smallest shape that fits a retained campaign:
 
 ```text
 Setups/full-geometry/<physics>/<campaign>/
@@ -43,7 +46,7 @@ Setups/reports/full-geometry/<physics>/<campaign>/
     └── evidence/                     # only for companion artifacts
 ```
 
-Use [`campaign-index-template.md`](templates/campaign-index-template.md) for the campaign index, and keep one canonical copy of each record. Each setup/experiment gets one report folder; plots belong inside that folder, never in a shared campaign-level `plots/` directory. Lifecycle is metadata, not a new status directory. New paths use lowercase kebab-case and stable campaign-scoped IDs; do not start another global numbered sequence.
+Use [`campaign-index-template.md`](templates/campaign-index-template.md) when repairing a retained campaign, and keep one canonical copy of each record. Each setup/experiment gets one report folder; plots belong inside that folder, never in a shared campaign-level `plots/` directory. Lifecycle is metadata, not a new status directory. Retained paths use lowercase kebab-case and stable campaign-scoped IDs; do not start another global numbered sequence.
 
 Existing exceptions are retained for link compatibility. Do not move or rename them solely for style. If a record is intentionally migrated, leave a redirect stub or an explicitly labelled compatibility snapshot at the old path and link it to the canonical record.
 
@@ -58,7 +61,7 @@ Do not keep operating-system metadata such as `.DS_Store` in this tree.
 - [compatibility snapshots](compatibility-snapshots/index.md) preserve detailed pre-migration records whose relative links depended on their old directory depth;
 - [templates](templates/) contains the setup, result, technical readback, and campaign-index templates.
 
-Do not create new setup definitions in `Setups/active/` or `Setups/future/`.
+Do not create new setup definitions or result reports anywhere in `Setups/` for a selected experiment. Use the [Project experiment contract](../Project/experiments/README.md), where the setup and result records are co-located.
 
 ## Historical ordering
 

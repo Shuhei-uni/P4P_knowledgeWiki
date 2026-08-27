@@ -14,4 +14,4 @@ Canonical setup ownership is now programme-based rather than stored in this dire
 - [02e redirect](02e-mixture-y010-brine-outlet-boundary-characterization.md)
 - [09cV3 redirect](09cV3-fine-mist-5pct-psd-rerun.md)
 
-Do not create new setup definitions in `Setups/active/`. Use the owning geometry/physics programme instead.
+Do not create new setup definitions in `Setups/active/`. New selected experiments belong under `Project/experiments/`; use the owning geometry/physics programme only to inspect retained provenance.

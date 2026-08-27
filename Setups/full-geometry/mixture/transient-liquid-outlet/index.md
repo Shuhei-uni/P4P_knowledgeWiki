@@ -1,6 +1,9 @@
 # Full Geometry — Mixture Transient Liquid-Outlet Setup Campaign
 
-**Status:** next major full-geometry campaign / active planning
+> **RETAINED CAMPAIGN SOURCE — NOT FOR NEW SELECTED EXPERIMENTS**
+> New selected experiments belong under [`Project/experiments/`](../../../../Project/experiments/). The setup plans below remain historical/provenance records; do not add new mirrored work here.
+
+**Status:** retained full-geometry campaign plan / historical execution source
 
 **Investigation mode:** exploratory sensitivity screen with numerical-method qualification
 

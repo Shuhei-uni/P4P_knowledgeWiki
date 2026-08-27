@@ -5,8 +5,9 @@ This repository connects reusable CFD knowledge, geothermal-separator project re
 ## Migration safety (#9)
 
 > Repository restructure tracked in #9.
-> Once a replacement area is proven, do not create new work in legacy progress/log or mirrored setup/report paths; current authorities remain in use until cutover.
+> Once a replacement area is proven, do not create new work in legacy progress/log or mirrored setup/report paths; use the replacement authority and retain the old paths for provenance.
 > Do not delete historical content yet.
+> The `Project/` experiment contract is now proven for selected work: create `setup.md` and `results.md` together under `Project/experiments/`; retain `Setups/` mirrors for provenance and explicit historical repair only.
 
 > For current project-specific scientific truth, start with [`Project/index.md`](Project/index.md). `ResearchProject_wiki/` remains the detailed/provenance source until the relevant migration issue establishes a replacement authority.
 

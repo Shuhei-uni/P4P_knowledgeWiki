@@ -1,10 +1,14 @@
 # Setups Order Dictionary
 
+> **LEGACY / REFERENCE ONLY**
+> This file records historical numbered lineage. It is not current routing or project authority.
+> New selected experiments belong in [`Project/experiments/`](../Project/experiments/); do not assign a new global setup number here.
+
 ## Purpose
 
 This file is the ordering and lineage reference for `Setups/`.
 
-Use it to answer two questions quickly:
+Use it only to answer historical questions quickly:
 
 1. which setup came before or after another;
 2. which filename should be used when reports are renamed into a strict sequence.
@@ -19,6 +23,8 @@ Where the history is uncertain, the ordering below reflects the current best rec
 - internal parent/child notes inside each setup report
 
 ## Project Linkage
+
+For current project state and selected experiments, start with [`Project/index.md`](../Project/index.md). Use this dictionary only when a retained numbered record or its provenance is involved.
 
 Use this file together with:
 

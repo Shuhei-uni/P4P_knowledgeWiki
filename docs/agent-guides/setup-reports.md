@@ -1,6 +1,11 @@
 # Setup reports and lineage
 
-`Setups/` is for concrete simulation experiments, not generic CFD guidance or day-to-day project logging.
+> **LEGACY FOR NEW WORK**
+> New selected experiments belong in [`Project/experiments/`](../../Project/experiments/), where `setup.md` and `results.md` are co-located.
+> Do not create new mirrored setup/report records under `Setups/`.
+> This guide now covers retained setup/report sources, historical lineage, and explicit repair of those records.
+
+`Setups/` retains concrete simulation experiments and their provenance, not generic CFD guidance or day-to-day project logging.
 
 A setup record should make two things obvious:
 
@@ -9,27 +14,29 @@ A setup record should make two things obvious:
 
 It should not decide what a future result means.
 
+For current work, read [`Project/index.md`](../../Project/index.md) and the [`Project experiment contract`](../../Project/experiments/README.md) first. Read `Setups/index.md` and the relevant retained programme index only when existing setup/report provenance or an explicit historical repair is needed.
+
 ## Route by geometry before naming the setup
 
-Before creating a setup, identify the geometry programme from explicit mesh/case provenance.
+Before reviewing or explicitly repairing a retained setup, identify the geometry programme from explicit mesh/case provenance.
 
-### Current full geometry
+### Retained full geometry
 
-New `Full-geomV2` setup work belongs under:
+Existing `Full-geomV2` setup records remain under:
 
 ```text
 Setups/full-geometry/<physics-family>/<scientific-campaign>/
 ```
 
-Result reports for the same campaign belong under the mirrored path:
+Existing result reports for the same campaign remain under the mirrored path:
 
 ```text
 Setups/reports/full-geometry/<physics-family>/<scientific-campaign>/
 ```
 
-Use descriptive campaign names such as `mixture/transient-liquid-outlet`. Stable IDs such as `FG-MIX-T01` may be recorded in metadata and artifact filenames, but do not organize new work as one global numbered sequence.
+Use the retained campaign paths to locate existing records. Stable IDs such as `FG-MIX-T01` may be recorded in metadata and artifact filenames; do not organize new work as a Setups campaign or global numbered sequence.
 
-### Strict setup/report separation
+### Retained setup/report separation
 
 The setup tree answers **what should be run**. The report tree answers **what actually happened**.
 
@@ -50,11 +57,11 @@ Keep in `Setups/reports/full-geometry/...`:
 - numerical findings;
 - later interpretation sections based on completed evidence.
 
-Do not create `results.md` beside `setup.md` for new full-geometry work. Do not put setup/stage plans in the report tree.
+Do not create new records in this retained mirror. Existing records keep results separate from setup plans; do not put setup/stage plans in the report tree.
 
 ### Canonical campaign unit
 
-For new work, one campaign directory is the smallest canonical unit. Keep its shape predictable:
+For retained work, one campaign directory is the smallest historical unit. Keep its shape predictable:
 
 ```text
 Setups/full-geometry/<physics-family>/<campaign>/
@@ -74,11 +81,11 @@ Setups/reports/full-geometry/<physics-family>/<campaign>/
 
 Use only the branches that the campaign needs. A campaign with one setup may use `setup.md`; a staged campaign may use `setup.md` plus stage plans. Every reportable setup/stage/experiment gets one report folder, and any plots or evidence belong inside that folder. If an experiment has multiple run packets, keep those files together under the experiment folder rather than creating a campaign-level plot directory.
 
-Every new campaign directory has one `index.md`, and every setup or result record has a single canonical path. Indexes should link to records and report their lifecycle; they should not become second copies of the records. New paths and filenames use lowercase kebab-case. Stable IDs belong in metadata and links, not in a new global numbering sequence.
+Every retained campaign directory has one `index.md`, and every setup or result record has a single canonical path. Indexes should link to records and report their lifecycle; they should not become second copies of the records. Retained paths and filenames use lowercase kebab-case. Stable IDs belong in metadata and links, not in a new global numbering sequence.
 
-Use `Setups/templates/campaign-index-template.md` for the index shape rather than inventing a new navigation format for each campaign.
+Use `Setups/templates/campaign-index-template.md` when explicitly repairing a retained campaign rather than inventing a new navigation format.
 
-For new records, include machine-readable filing metadata for at least `record_type`, `programme`, `geometry`, `physics_family`, `campaign`, `record_id` (or `none`), and `lifecycle`. The human-facing campaign path remains the primary identity.
+For retained records being repaired, preserve or add machine-readable filing metadata for at least `record_type`, `programme`, `geometry`, `physics_family`, `campaign`, `record_id` (or `none`), and `lifecycle`. The historical campaign path remains the primary identity.
 
 ### Compatibility is not a second source of truth
 
@@ -102,7 +109,7 @@ A methodological predecessor is not automatically a geometry parent.
 
 ## Start with the intent contract
 
-Before drafting a new setup, determine from the user and existing project context:
+Before reviewing or explicitly repairing a retained setup, determine from the user and existing project context:
 
 - the primary investigation question;
 - whether the setup is exploratory, diagnostic, sensitivity, verification, validation, production/decision, or another explicitly named mode;
@@ -148,14 +155,14 @@ The post-simulation analysis workflow should discover the live/file state first,
 
 ## Naming and lineage
 
-For new full-geometry work:
+For historical Setups maintenance:
 
 1. choose the geometry programme;
 2. choose the physics family;
 3. choose a descriptive scientific campaign;
-4. place setup/stage plans in `Setups/full-geometry/...`;
-5. place completed-run reports in the exactly mirrored `Setups/reports/full-geometry/...` path;
-6. name new records with their role (`setup`, `stage-<nn>`, or `run-<id>`) and a descriptive lowercase slug;
+4. preserve setup/stage plans in the existing `Setups/full-geometry/...` source;
+5. preserve completed-run reports in the exactly mirrored `Setups/reports/full-geometry/...` source;
+6. if a retained repair requires a new record, name it with its role (`setup`, `stage-<nn>`, or `run-<id>`) and a descriptive lowercase slug;
 7. record an optional stable machine/reference ID in metadata.
 
 For legacy numbered work:
@@ -164,6 +171,6 @@ For legacy numbered work:
 2. avoid `current`, `latest`, or `final` in filenames;
 3. update `Setups/order-dictionary.md` and affected links after a rename or lineage change.
 
-Lifecycle (`active`, `future`, `reported`, `archived`) is metadata, not a required top-level folder for new full-geometry work and not a statement of scientific claim strength.
+Lifecycle (`active`, `future`, `reported`, `archived`) is metadata, not a required top-level folder for retained full-geometry work and not a statement of scientific claim strength.
 
 Do not use `current`, `latest`, `final`, `new`, or an unqualified `results.md` as a new record name. Preserve legacy names and IDs when editing historical records; the naming rule is for new additions and intentional migrations only.

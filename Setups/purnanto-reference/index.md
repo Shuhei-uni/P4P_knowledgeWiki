@@ -36,4 +36,4 @@ The previously planned `10`, `11`, and `12` branches are no longer in the future
 
 Do not classify geometry from the setup number alone. Some historical notes use phrases such as “full geometry” while still belonging to the older Purnanto/reference lineage. Require explicit mesh/case provenance before promoting a setup into the current `Full-geomV2` programme.
 
-New `Full-geomV2` campaigns belong under [`Setups/full-geometry/`](../full-geometry/index.md), not here.
+Existing `Full-geomV2` setup sources are indexed under [`Setups/full-geometry/`](../full-geometry/index.md), not here. New selected experiments belong under [`Project/experiments/`](../../Project/experiments/).

@@ -11,6 +11,9 @@ report_home: "Setups/reports/full-geometry/<physics>/<campaign>/"
 
 # <Programme> — <Physics family> — <Campaign>
 
+> **RETAINED TEMPLATE — NOT FOR NEW SELECTED EXPERIMENTS**
+> New selected experiments use [`Project/experiments/`](../../Project/experiments/). Use this template only when reviewing or explicitly repairing a retained mirrored setup/report campaign.
+
 > This index is navigation and filing metadata, not a second copy of the setup or result records. Keep one canonical record at each linked path.
 
 ## Purpose
@@ -38,5 +41,5 @@ report_home: "Setups/reports/full-geometry/<physics>/<campaign>/"
 - Use `setup.md` for a shared campaign contract, `setup-<id>-<slug>.md` for an independent setup, and `stage-<nn>-<slug>.md` for an ordered stage plan.
 - Use `stage-<nn>-<slug>-results.md` or `run-<id>-<slug>-results.md` for new result packets.
 - Use lowercase kebab-case for new paths and filenames; preserve legacy IDs and names when editing historical records.
-- Do not add `active/`, `future/`, `past/`, `archived/`, or compatibility copies for new work.
+- Do not add `active/`, `future/`, `past/`, `archived/`, or compatibility copies for new Setups work; new selected experiments belong under `Project/experiments/`.
 - If an old link must remain, use a redirect stub or a clearly labelled compatibility snapshot that points back here.

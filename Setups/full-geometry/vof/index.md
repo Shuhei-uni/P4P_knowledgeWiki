@@ -1,6 +1,9 @@
 # Full Geometry — VOF Setup Campaigns
 
-This area owns **VOF setup definitions and plans** on the current full geometry.
+> **RETAINED CAMPAIGN SOURCE — NOT FOR NEW SELECTED EXPERIMENTS**
+> New selected experiments belong under [`Project/experiments/`](../../../Project/experiments/). The VOF plans below remain available for provenance and explicit historical repair.
+
+This area retains **VOF setup definitions and plans** for the full geometry.
 
 Numerical reports are kept separately under [Setups/reports/full-geometry/vof](../../reports/full-geometry/vof/index.md).
 

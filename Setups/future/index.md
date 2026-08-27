@@ -11,4 +11,4 @@ All setup plans that were previously filed here were archived on 2026-08-17:
 
 The same filenames remaining under `Setups/future/` are compatibility redirects only, so older wiki links continue to resolve. They are not future setup records.
 
-New work should be created under the appropriate geometry/physics programme only when it is genuinely planned for execution.
+New selected work should be created under `Project/experiments/`; the appropriate geometry/physics programme is retained here only as provenance for these archived plans.

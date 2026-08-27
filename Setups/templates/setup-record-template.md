@@ -11,6 +11,9 @@ canonical_path: "Setups/full-geometry/<physics>/<campaign>/<filename>.md"
 report_home: "Setups/reports/full-geometry/<physics>/<campaign>/"
 ---
 
+> **RETAINED TEMPLATE — NOT FOR NEW SELECTED EXPERIMENTS**
+> New selected experiments use [`Project/experiments/`](../../Project/experiments/) with co-located `setup.md` and `results.md`. Use this template only when reviewing or explicitly repairing a retained `Setups/` setup record.
+
 # Setup Record — <campaign / stage / setup name>
 
 > This is a flexible setup record, not a form that must be filled completely. Keep only sections that help define, build, run, or later analyse this specific case.

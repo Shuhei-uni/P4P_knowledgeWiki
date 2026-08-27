@@ -1,6 +1,9 @@
 # Full-Geometry Result Reports
 
-This is the canonical report tree for completed simulations on the current `Full-geomV2` programme.
+> **RETAINED REPORT SOURCE — NOT FOR NEW SELECTED EXPERIMENTS**
+> New selected experiments belong in [`Project/experiments/`](../../../Project/experiments/), where the setup and result records live together. Existing reports remain readable here for provenance and implementation readback.
+
+This is the retained report tree for completed simulations on the `Full-geomV2` programme.
 
 The corresponding setup-definition tree is [Setups/full-geometry](../../full-geometry/index.md).
 

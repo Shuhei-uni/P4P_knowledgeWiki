@@ -1,6 +1,9 @@
 # Full Geometry — VOF Reports
 
-Numerical evidence for full-geometry VOF campaigns is filed here, separately from VOF setup definitions.
+> **RETAINED REPORT SOURCE — NOT FOR NEW SELECTED EXPERIMENTS**
+> New selected experiments belong under [`Project/experiments/`](../../../../Project/experiments/); their setup and results records are co-located. Existing numerical evidence remains here for provenance.
+
+Numerical evidence for retained full-geometry VOF campaigns is filed here, separately from VOF setup definitions.
 
 ## Campaigns
 
