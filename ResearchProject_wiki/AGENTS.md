@@ -1,7 +1,7 @@
 # AGENTS.md
 
 > Repository restructure tracked in #9.
-> Once a replacement area is proven, do not create new work in legacy progress/log surfaces here; current project truth remains here until Project cutover.
+> Once a replacement area is proven, do not create new work in legacy progress/log surfaces here; current project truth now starts in the root `Project/` layer, while this corpus remains available until each area is cut over.
 > Do not delete historical content yet.
 
 ## Mission
@@ -52,7 +52,8 @@ Treat `CFD_wiki/raw/informit.366967552564856.pdf` as the key baseline reconstruc
 - `AGENTS.md`: operational protocol (this file).
 
 ## Cross-System Boundaries
-- `ResearchProject_wiki` owns project interpretation, run progress, technical notes, and human-readable V&V sign-off.
+- `Project/` owns current project-specific scientific truth, selected experiments, evidence interpretation, and claim boundaries.
+- `ResearchProject_wiki` retains detailed project interpretation, run progress, technical notes, and human-readable V&V sign-off until the relevant area is cut over.
 - `CFD_wiki` owns reusable CFD methods, literature extraction, and generic Fluent guidance.
 - `Setups/` owns concrete setup-branch identity, ordered lineage, and report-facing setup snapshots.
 - `PyAnsys/` owns executable automation, machine-readable validation targets, and claim-gate logic.

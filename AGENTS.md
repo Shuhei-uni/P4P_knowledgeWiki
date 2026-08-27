@@ -8,6 +8,8 @@ This repository connects reusable CFD knowledge, geothermal-separator project re
 > Once a replacement area is proven, do not create new work in legacy progress/log or mirrored setup/report paths; current authorities remain in use until cutover.
 > Do not delete historical content yet.
 
+> For current project-specific scientific truth, start with [`Project/index.md`](Project/index.md). `ResearchProject_wiki/` remains the detailed/provenance source until the relevant migration issue establishes a replacement authority.
+
 - For a note move: move through Obsidian → inspect the Git diff → search the old path → fix non-note references explicitly → commit the move batch.
 - Treat Obsidian/Wikilinks and Markdown note links separately from Python/YAML/JSON path literals, shell examples, GitHub URLs, and immutable historical artifacts. Do not assume Obsidian updates non-note references.
 - Run `python3 scripts/check_stale_paths.py` after a move. It checks active Markdown destinations and reports missing active links, compatibility/archive references, and path-literal cases separately; it is not a migration framework.

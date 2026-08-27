@@ -1,17 +1,19 @@
 # P4P Knowledge Wiki
 
-This repository stores the working knowledge base for the P4P geothermal separator CFD project. It is split into four linked systems:
+This repository stores the working knowledge base for the P4P geothermal separator CFD project. It is split into five linked systems:
 
 - `CFD_wiki/`: reusable CFD knowledge, paper extraction, Fluent guidance, setup patterns, and cross-paper synthesis.
-- `ResearchProject_wiki/`: project-specific decisions, progress, blockers, validation notes, and report-facing research trace.
+- `Project/`: the compact current authority for project-specific scientific truth, selected experiments, evidence interpretation, and claim boundaries.
+- `ResearchProject_wiki/`: the retained project corpus—detailed progress, blockers, technical notes, and existing V&V records—until each area is deliberately cut over.
 - `Setups/`: concrete simulation experiments. Current production work is routed geometry-first, with **setup definitions under `Setups/full-geometry/` and completed-run reports under the mirrored `Setups/reports/full-geometry/` tree**. Historical numbered/reference work is navigated separately.
 - `PyAnsys/`: executable Fluent automation, case inspection, run orchestration, and machine-readable checks.
 
 Start with:
 
 - `AGENTS.md` for routing rules and repository operating instructions.
+- `Project/index.md` for current project truth and the selected-experiment contract.
 - `CFD_wiki/wiki/index.md` for reusable CFD knowledge.
-- `ResearchProject_wiki/wiki/index.md` for project state.
+- `ResearchProject_wiki/wiki/index.md` for retained project-source, progress, technical, and V&V records.
 - `Setups/index.md` for simulation-programme navigation and setup/report separation.
 - `Setups/full-geometry/index.md` for current `Full-geomV2` setup definitions.
 - `Setups/reports/full-geometry/index.md` for current `Full-geomV2` result reports.
@@ -102,7 +104,7 @@ They support the project-specific extraction and audit trail under:
 2. Restore omitted source PDFs into the same paths.
 3. Read `AGENTS.md` before editing so content goes to the correct knowledge system.
 4. Use `CFD_wiki/paper_lookup/index.md` as the first stop for paper navigation.
-5. Use `ResearchProject_wiki/wiki/index.md` and `ResearchProject_wiki/wiki/progress/current-status.md` for project state.
+5. Use `Project/index.md` for current project state, then consult `ResearchProject_wiki/wiki/index.md` only for retained source/detail pages.
 6. Use `Setups/index.md` to select the geometry programme and distinguish setup definitions from reports.
 7. Use `Setups/order-dictionary.md` only for historical numbered-lineage work.
 

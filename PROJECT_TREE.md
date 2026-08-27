@@ -7,6 +7,13 @@ P4P_knowledgeWiki/
 ├── AGENTS.md
 ├── PROJECT_TREE.md
 ├── CFD_wiki/
+├── Project/
+│   ├── index.md
+│   ├── scope.md
+│   ├── model.md
+│   ├── vnv.md
+│   └── experiments/
+│       └── README.md
 ├── ResearchProject_wiki/
 ├── Setups/
 │   ├── full-geometry/                 # setup definitions / plans
@@ -39,7 +46,8 @@ P4P_knowledgeWiki/
 ## What Goes Where
 
 - `CFD_wiki/`: reusable CFD knowledge, literature extraction, external method logic.
-- `ResearchProject_wiki/`: project decisions, progress, technical notes, V&V reports, and sign-off.
+- `Project/`: current project-specific scientific truth, selected experiments, evidence interpretation, and claim boundaries.
+- `ResearchProject_wiki/`: retained project corpus, detailed progress/technical/V&V records, and source detail until cutover.
 - `Setups/full-geometry/`: current production-geometry **setup definitions and plans**, organized by physics family and scientific campaign.
 - `Setups/reports/full-geometry/`: current production-geometry **result reports and evidence**, mirroring the setup campaign path.
 - `Setups/purnanto-reference/`: navigation for the historical numbered/reference setup corpus.

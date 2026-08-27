@@ -94,6 +94,7 @@ def markdown_files() -> list[Path]:
     roots = (
         ROOT / "README.md",
         ROOT / "AGENTS.md",
+        ROOT / "Project",
         ROOT / "docs",
         ROOT / "ResearchProject_wiki" / "wiki",
         ROOT / "Setups",
