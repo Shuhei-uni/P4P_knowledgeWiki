@@ -1,149 +1,130 @@
 ---
 name: scientific-goal-loop
-description: "Orchestrate an autonomous scientific research loop from a human goal through evidence review, experiment design, implementation, analysis, interpretation, next-action selection, and stopping. Use when the task is to keep progressing toward a research objective rather than execute one predefined simulation."
+description: "Navigate a scientific phase from a human-defined phase goal toward a defensible conclusion. Use when the route is not known in advance and the agent should learn from existing evidence, explore useful branches, call specialist skills and subagents, and let new evidence reshape what happens next."
 ---
 
-# Scientific Goal Loop
+# Scientific Phase Loop
 
-Own the research loop, not the low-level work.
+You are navigating a scientific phase toward a conclusion.
 
-## Core loop
+Keep the phase question in view, but do not assume the route to it is known in advance. The purpose of the loop is not to execute a predetermined sequence of simulations. It is to reduce meaningful uncertainty about the phase question until the evidence supports a useful conclusion.
+
+A phase might ask whether a steady Mixture solution can be made numerically credible before more physical complexity is added. Another phase may ask whether a modelling assumption is responsible for an observed result, whether a new formulation improves the physics, or whether the evidence is strong enough to move forward. Let the question shape the investigation.
+
+## Orient to the phase
+
+Begin by forming a clear picture of where the investigation stands.
+
+Understand the phase goal, the current model and assumptions, the experiments already attempted, the evidence they produced, what appears established, what has failed, and what remains unresolved.
+
+Previous work is evidence, not a prescribed trajectory. Do not simply continue from the last setup because it is the most recent. Reconsider the problem from the phase question itself.
+
+Ask:
+
+- Where are we now?
+- What do we actually know?
+- What do we only suspect?
+- What remains unexplained?
+- Which assumptions are carrying the current interpretation?
+- What evidence would materially change our understanding?
+
+The repository is the durable scientific memory. Use it to understand the investigation, not to constrain the investigation to paths already tried.
+
+## Navigate uncertainty
+
+Treat the unexplained parts of the phase as a landscape of uncertainty.
+
+There may be several plausible lines of investigation. Some may involve conservative numerical changes. Others may challenge an equation, formulation, physical assumption, initialization strategy, interpretation, or even the way the question has been framed. A useful branch may also be literature research, additional analysis of an existing run, or a deliberately simple diagnostic experiment.
+
+Do not force the phase into a fixed experiment matrix before the evidence justifies one.
+
+Sketch the branches that are visible now. Leave the rest in the fog. As evidence arrives, new branches may become visible, old branches may collapse, and the most useful direction may change completely.
+
+Prefer work that helps distinguish between plausible explanations or removes an important uncertainty. An easy simulation is not automatically a useful simulation.
+
+## Learn, then look again
+
+Each meaningful piece of work should change the picture of the phase.
+
+After new evidence arrives, do not blindly continue the old plan. Reconsider the landscape:
 
 ```text
-goal
--> review current project evidence
--> decide what is unresolved
--> design candidate experiments
--> critique/select an experiment
--> create or approve setup.md
--> implement experiment
--> analyse the evidence required by the setup
--> interpret only supported claims
--> choose next action
--> loop, escalate, or stop
+What did we learn?
+        ↓
+What changed in our understanding?
+        ↓
+What is uncertain now?
+        ↓
+What would be most informative next?
 ```
 
-The repository is the durable memory. Do not depend on one long-lived agent context.
+Sometimes the answer is another experiment. Sometimes it is more analysis of the same run, a numerical sensitivity, a literature check, a repair to the setup, a challenge to the current model, or no further work at all.
 
-## Start from the goal
+The loop should remain responsive to evidence rather than loyal to its original plan.
 
-Recover:
+## Use specialists to deepen the investigation
 
-- the human research goal;
-- current project scope and model assumptions;
-- relevant prior `setup.md` and `results.md` records;
-- unresolved questions, contradictions, and limitations;
-- available compute and operational constraints.
+The orchestrator owns the scientific direction, not every specialist discipline beneath it.
 
-State the current question in one sentence. If the goal is too broad to choose a meaningful next experiment, decompose it into the smallest answerable scientific question.
+Reach for specialist skills and subagents when they can sharpen the picture. They may investigate previous experiments, design candidate tests, assess CFD numerics, analyse data, apply statistics, search literature, implement a Fluent case, or challenge an interpretation.
 
-## Delegate discovery
+Use parallel or independent viewpoints when the problem benefits from diversity of thought. Use adversarial review when a consequential conclusion, experiment design, or interpretation deserves to be challenged.
 
-Use subagents for broad read-only review when the evidence spans many experiments or sources. Give each subagent a narrow question and require a concise evidence summary with paths. Keep synthesis and final decisions in the main agent.
+Subagents investigate. The orchestrator synthesises and decides.
 
-Good delegation targets include:
+Do not route work to a specialist merely because that skill exists. Call the capability that fits the uncertainty in front of you.
 
-- prior experiments and their conclusions;
-- numerical limitations;
-- relevant CFD literature/guidance;
-- conflicting interpretations;
-- missing evidence.
+## Let branches compete with evidence
 
-Do not create permanent orchestration files merely to coordinate subagents.
+A phase may have several competing branches at once.
 
-## Design before execution
+Think of them as hypotheses about how to make progress, not commitments. One branch may explore gentle changes while another challenges the formulation more deeply. One may prove fruitful, several may converge on the same conclusion, or the evidence may reveal that all of them were asking the wrong question.
 
-Invoke `design-experiment` when new evidence is needed. For consequential choices, use `arena` or `interrogate` before accepting the experiment plan.
+Branches should earn continued attention through what they teach.
 
-A candidate experiment must identify:
+When useful, compare branches by questions such as:
 
-- one primary question;
-- hypothesis or competing explanations where appropriate;
-- controlled change(s);
-- what remains fixed;
-- required evidence and analyses;
-- expected decision value;
-- approximate cost/risk.
+- What uncertainty does this branch reduce?
+- What would we learn if it succeeds?
+- What would we learn if it fails?
+- Can it distinguish between competing explanations?
+- Is it repeating something the current evidence has already settled?
+- Is there a cheaper or clearer way to learn the same thing?
 
-Prefer experiments that distinguish between competing explanations. Do not run a simulation just because it is easy to run.
+Do not confuse completing a branch with advancing the phase.
 
-## Human selection gate
+## Human direction and autonomy
 
-When the human has asked to approve the first setup or select among alternatives, stop at that gate. Present a small set of well-differentiated experiments and wait.
+The human defines the phase goal and may define boundaries, preferences, compute limits, or decisions they want to retain.
 
-In autonomous/goal mode, continue without approval only when the existing goal and constraints clearly authorize it. Escalate when a choice would materially alter project direction, physics assumptions, validation claims, or compute budget.
+Within those boundaries, use judgement. Do not ask the human to decide questions that can be answered by inspecting evidence, running a reversible diagnostic, or asking a specialist.
 
-## Implement the chosen experiment
+Return to the human when the investigation reaches a genuine judgement boundary: a major change in project direction, a new modelling assumption with broad consequences, an important ambiguity that evidence cannot resolve, a material compute or resource decision outside the agreed scope, or an explicit human-selection gate.
 
-Create or confirm `setup.md`, then invoke `implement-experiment`.
+If the phase has been handed over for autonomous work, keep moving while there are credible, useful ways to reduce uncertainty within the agreed boundaries.
 
-Do not let the orchestration skill improvise Fluent commands. The implementation workflow owns case creation, verification, initialization, run launch, checkpoint/recovery, and completion evidence.
+## Know when the phase is finished
 
-If implementation fails, do not automatically redesign the physics experiment. Send the failure through `next-action` first; the correct action may be repair, rerun, capability research, or human review.
+The output of this loop is not a collection of simulations. It is a defensible phase-level conclusion and the evidence that supports it.
 
-## Analyse against the experiment objective
+A phase can finish because the desired behaviour has been demonstrated, because a route has been shown not to work, because the remaining uncertainty is no longer important to the phase goal, or because the evidence reveals that a different assumption or phase must come next.
 
-Invoke `plan-analysis` using the experiment question before choosing plots or metrics.
+Stop when you can answer the phase question to the level justified by the evidence, when further work is unlikely to change that answer enough to matter, or when useful progress now depends on a human judgement outside the phase.
 
-Then use specialist skills as needed:
+A good ending should make clear:
 
-- `cfd-numerical-analysis` for solver/numerical trustworthiness;
-- `numerical-data-analysis` for histories, signals, comparisons, and derived numerical evidence;
-- `statistical-analysis` only when statistical reasoning is scientifically appropriate;
-- existing deterministic PyAnsys extraction/plotting tools for mechanics.
+- what the phase set out to understand;
+- what the investigation established;
+- what evidence carries that conclusion;
+- what remains uncertain or limited;
+- what this means for the next phase of the project.
 
-Do not reverse the workflow into `available script -> plot -> explanation`.
+Do not manufacture certainty. A well-supported negative or conditional conclusion is a successful phase conclusion.
 
-## Interpret with evidence gates
+## Preserve the scientific thread
 
-Invoke `interpret-experiment` only after the required evidence is available or the evidence gap itself has been established.
+Long-running research should survive the death of any individual agent context.
 
-For consequential results, use `interrogate` to challenge:
+Use the repository to preserve the scientific thread through setup definitions, results, observations, figures, and the current phase understanding. A fresh agent should be able to recover where the phase stands and continue reasoning without needing the previous chat transcript.
 
-- unsupported causal claims;
-- confounding variables;
-- numerical inadequacy;
-- alternative explanations;
-- whether the plots actually support the written conclusion.
-
-Write/update `results.md` with measured evidence before interpretation.
-
-## Choose the next action
-
-Invoke `next-action`. Valid outcomes include:
-
-- `NEXT_EXPERIMENT`;
-- `CONTINUE_RUN`;
-- `RERUN_FROM_CHECKPOINT`;
-- `REPAIR_SETUP`;
-- `COLLECT_MISSING_EVIDENCE`;
-- `NUMERICAL_SENSITIVITY`;
-- `MODEL_OR_HYPOTHESIS_REVIEW`;
-- `HUMAN_REVIEW_REQUIRED`;
-- `GOAL_REACHED_STOP`;
-- `BRANCH_NOT_WORTH_CONTINUING`.
-
-Do not force every loop iteration to create a new case.
-
-## Stop conditions
-
-Stop and report when:
-
-- the goal is answered to the level justified by the evidence;
-- a predeclared stopping criterion is reached;
-- further experiments have low expected information value relative to cost;
-- progress requires a major new modelling assumption or irreversible direction change;
-- the evidence is contradictory enough that human judgement is required;
-- infrastructure failure prevents safe unattended continuation.
-
-## Durable handoff
-
-At every loop boundary, ensure another fresh agent can continue by reading the repository rather than the chat history. The minimum durable state is:
-
-- the active goal/question;
-- the chosen experiment in `setup.md`;
-- the evidence and bounded interpretation in `results.md`;
-- explicit unresolved questions/limitations;
-- the selected next action or human gate.
-
-Use `show-me-your-work` when a long unattended sequence needs a concise reconstruction of decisions and evidence.
+Keep that durable state concise enough to be useful. The repository is the memory of the investigation, not a transcript of the agent's thought process.
