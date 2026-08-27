@@ -23,12 +23,12 @@ The current execution lane is the canonical full-geometry Mixture `03A`
 Stage-4 promising-state development campaign. Its Project tracer is the
 shortest route through the selected record:
 
-- [03A tracer index](experiments/03A/index.md)
-- [03A-Q01 setup — S4-01 50-iteration qualification](experiments/03A/q01-s4-01-50-iteration-qualification/setup.md)
-- [03A-Q01 results — S4-01 50-iteration qualification](experiments/03A/q01-s4-01-50-iteration-qualification/results.md)
-- [Stage-4 setup contract](experiments/03A/stage-04/setup.md)
-- [Stage-4 execution evidence](experiments/03A/stage-04/results.md)
-- [Stage-3 results](experiments/03A/stage-03/results.md)
+- [03A tracer index](experiments/full-geometry-03a-mixture-08b-parity-baseline/index.md)
+- [03A-Q01 setup — S4-01 50-iteration qualification](experiments/full-geometry-03a-mixture-08b-parity-baseline/q01-s4-01-50-iteration-qualification/setup.md)
+- [03A-Q01 results — S4-01 50-iteration qualification](experiments/full-geometry-03a-mixture-08b-parity-baseline/q01-s4-01-50-iteration-qualification/results.md)
+- [Stage-4 setup contract](experiments/full-geometry-03a-mixture-08b-parity-baseline/stage-04/setup.md)
+- [Stage-4 execution evidence](experiments/full-geometry-03a-mixture-08b-parity-baseline/stage-04/results.md)
+- [Stage-3 results](experiments/full-geometry-03a-mixture-08b-parity-baseline/stage-03/results.md)
 
 The earlier Project experiment records preserve the migrated setup and result
 memory for the Purnanto, full-geometry, DPM, EWF, VOF, and reconstruction
