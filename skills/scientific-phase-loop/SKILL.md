@@ -1,6 +1,6 @@
 ---
 name: scientific-phase-loop
-description: "Navigate a scientific phase from a human-defined phase goal toward a defensible conclusion. Use when the route is not known in advance and the agent should learn from existing evidence, explore useful branches, call specialist skills and subagents, and let new evidence reshape what happens next."
+description: "Navigate a scientific phase from a human-defined phase goal toward a defensible conclusion. Use when the route is not known in advance and the agent should learn from existing evidence, choose high-information simulations and analyses, call specialist skills and subagents, and let new simulation evidence reshape what happens next."
 ---
 
 # Scientific Phase Loop
@@ -9,7 +9,23 @@ You are navigating a scientific phase toward a conclusion.
 
 Keep the phase question in view, but do not assume the route to it is known in advance. The purpose of the loop is not to execute a predetermined sequence of simulations. It is to reduce meaningful uncertainty about the phase question until the evidence supports a useful conclusion.
 
-A phase might ask whether a steady Mixture solution can be made numerically credible before more physical complexity is added. Another phase may ask whether a modelling assumption is responsible for an observed result, whether a new formulation improves the physics, or whether the evidence is strong enough to move forward. Let the question shape the investigation.
+## Simulation evidence is the anchor
+
+Reasoning, literature, prior experience, and specialist opinions are useful for forming hypotheses and deciding what to test. Unless genuinely equivalent evidence already exists, they do not tell you what this simulation will do.
+
+Treat untested expectations as hypotheses.
+
+When the uncertainty concerns the behaviour of the current CFD model, the strongest way to resolve it is normally to run the relevant simulation properly and inspect the resulting data.
+
+The governing posture is:
+
+```text
+reasoning proposes
+simulation tests
+data constrains the conclusion
+```
+
+Simulation output is not automatically truth. Its scientific weight depends on whether the case was implemented as intended, run for an adequate duration or convergence window, and shown to be numerically credible for the claim being made. Use the appropriate specialist skills to establish that before making strong conclusions.
 
 ## Orient to the phase
 
@@ -22,25 +38,34 @@ Previous work is evidence, not a prescribed trajectory. Do not simply continue f
 Ask:
 
 - Where are we now?
-- What do we actually know?
-- What do we only suspect?
-- What remains unexplained?
-- Which assumptions are carrying the current interpretation?
-- What evidence would materially change our understanding?
+- What is genuinely supported by simulation evidence?
+- What is still only a hypothesis or interpretation?
+- What uncertainty matters most to the phase goal?
+- What observation would materially change our understanding?
 
 The repository is the durable scientific memory. Use it to understand the investigation, not to constrain the investigation to paths already tried.
 
 ## Navigate uncertainty
 
-Treat the unexplained parts of the phase as a landscape of uncertainty.
+Treat the unresolved parts of the phase as a landscape of uncertainty.
 
-There may be several plausible lines of investigation. Some may involve conservative numerical changes. Others may challenge an equation, formulation, physical assumption, initialization strategy, interpretation, or even the way the question has been framed. A useful branch may also be literature research, additional analysis of an existing run, or a deliberately simple diagnostic experiment.
+There may be several plausible lines of investigation. Some may involve conservative numerical changes. Others may challenge an equation, formulation, physical assumption, initialization strategy, interpretation, or even the way the question has been framed. A useful branch may also be additional analysis of an existing run, literature research, or a deliberately simple diagnostic case.
 
 Do not force the phase into a fixed experiment matrix before the evidence justifies one.
 
 Sketch the branches that are visible now. Leave the rest in the fog. As evidence arrives, new branches may become visible, old branches may collapse, and the most useful direction may change completely.
 
-Prefer work that helps distinguish between plausible explanations or removes an important uncertainty. An easy simulation is not automatically a useful simulation.
+## Make simulations earn their cost
+
+Simulation time is expensive. Do not brute-force the phase merely because automation makes it possible.
+
+Prefer a small number of high-information runs over a large number of weakly motivated cases. A simulation earns its cost when its possible outcomes would materially change the current understanding, distinguish between plausible explanations, establish a useful bound, or reveal behaviour needed to decide the next move.
+
+Before committing compute, ask what the run can teach that the current evidence cannot.
+
+Whenever possible, design a run so that both success and failure are informative. Capture enough behaviour, history, and comparison data that the run can answer more than a narrow endpoint question without contaminating the experiment with unnecessary changes.
+
+Do not confuse a large sweep with a strong investigation. Coverage matters only when the cases are chosen to resolve uncertainty.
 
 ## Learn, then look again
 
@@ -49,11 +74,11 @@ Each meaningful piece of work should change the picture of the phase.
 After new evidence arrives, do not blindly continue the old plan. Reconsider the landscape:
 
 ```text
-What did we learn?
+What did the simulation or analysis actually show?
         ↓
 What changed in our understanding?
         ↓
-What is uncertain now?
+What remains uncertain?
         ↓
 What would be most informative next?
 ```
@@ -114,9 +139,9 @@ Stop when you can answer the phase question to the level justified by the eviden
 A good ending should make clear:
 
 - what the phase set out to understand;
-- what the investigation established;
-- what evidence carries that conclusion;
-- what remains uncertain or limited;
+- what the simulations and analyses actually established;
+- what remains hypothesis rather than evidence;
+- what numerical or modelling limitations bound the conclusion;
 - what this means for the next phase of the project.
 
 Do not manufacture certainty. A well-supported negative or conditional conclusion is a successful phase conclusion.
