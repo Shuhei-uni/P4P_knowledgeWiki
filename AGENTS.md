@@ -2,6 +2,18 @@
 
 This repository connects reusable CFD knowledge, geothermal-separator project records, ordered simulation setups, and PyFluent automation without conflating their roles.
 
+## Migration safety (#9)
+
+> Repository restructure tracked in #9.
+> Once a replacement area is proven, do not create new work in legacy progress/log or mirrored setup/report paths; current authorities remain in use until cutover.
+> Do not delete historical content yet.
+
+- For a note move: move through Obsidian → inspect the Git diff → search the old path → fix non-note references explicitly → commit the move batch.
+- Treat Obsidian/Wikilinks and Markdown note links separately from Python/YAML/JSON path literals, shell examples, GitHub URLs, and immutable historical artifacts. Do not assume Obsidian updates non-note references.
+- Run `python3 scripts/check_stale_paths.py` after a move. It checks active Markdown destinations and reports missing active links, compatibility/archive references, and path-literal cases separately; it is not a migration framework.
+
+The root-vault move check on 2026-08-27 used a disposable Markdown backlink. Obsidian recognised the backlink but did not rewrite the temporary target link after the target moved, so the Git diff and repository search remain required. No `[[Wikilinks]]` were present in the vault.
+
 ## Always
 
 - Never edit files in any `raw/` directory.

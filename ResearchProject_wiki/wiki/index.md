@@ -1,5 +1,7 @@
 # Research Wiki Index
 
+> Repository restructure tracked in #9. Once a replacement area is proven, do not create new work in legacy progress/log surfaces here; current project truth remains here until Project cutover. Do not delete historical content yet.
+
 ## Project Layer
 - `wiki/project/objective-and-scope.md`
 - `wiki/project/roadmap.md`

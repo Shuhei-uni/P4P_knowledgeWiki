@@ -1,5 +1,7 @@
 # Setups
 
+> Repository restructure tracked in #9. Once Project is proven, do not create new mirrored work in `Setups/active/`, `Setups/future/`, or legacy report paths; current `Setups/full-geometry/` remains in use until cutover. Do not delete historical content yet.
+
 `Setups/` stores concrete Fluent experiment definitions and their setup-linked evidence, with setup definitions and result reports intentionally kept in separate trees.
 
 The primary navigation is geometry-first because the current `Full-geomV2` programme is a different experimental generation from the older Purnanto/reference work.

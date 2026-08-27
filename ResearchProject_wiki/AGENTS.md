@@ -1,5 +1,9 @@
 # AGENTS.md
 
+> Repository restructure tracked in #9.
+> Once a replacement area is proven, do not create new work in legacy progress/log surfaces here; current project truth remains here until Project cutover.
+> Do not delete historical content yet.
+
 ## Mission
 This repository is a personal final-year research wiki for:
 **Geothermal steam-water separator design CFD modelling and optimisation**.
