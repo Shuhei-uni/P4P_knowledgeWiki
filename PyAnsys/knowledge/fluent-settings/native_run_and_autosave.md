@@ -142,7 +142,7 @@ are visible; a `partial` pair must not be used for recovery.
 
 The `03A-stage3` F01–F12 convergence sweep is a narrow, user-approved exception to the normal detached/native-run preference because its next solver state depends on an evidence gate evaluated at discrete iteration checkpoints. The authoritative scientific workflow is:
 
-Project/experiments/03A/stage-03/setup-source.md is the migrated authority for
+Project/experiments/full-geometry-03a-mixture-08b-parity-baseline/stage-03/setup-source.md is the migrated authority for
 the Stage-3 execution specification.
 
 For **F01–F12 only**, an execution agent may keep its client attached and issue one synchronous blocking Fluent solve command for the current decision block:
