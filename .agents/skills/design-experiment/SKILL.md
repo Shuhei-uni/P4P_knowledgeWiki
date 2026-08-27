@@ -1,6 +1,6 @@
 ---
 name: design-experiment
-description: "Turn an important scientific uncertainty into a high-information simulation strategy in either discovery mode or hypothesis-test mode. Use when new simulation evidence is needed and the agent must decide what setup or campaign is worth the compute cost, what behavior would be informative, and what data must be captured before the runs."
+description: "Turn an important scientific uncertainty into a high-information simulation strategy in either discovery mode or hypothesis-test mode. Use when new simulation evidence is needed and the agent must decide what setup or campaign is worth the compute cost, what behavior would be informative, what working assumptions matter, and what data must be captured before the runs."
 ---
 
 # Design Experiment
@@ -40,6 +40,25 @@ Prefer one focused experiment or a very small linked campaign, with enough run l
 Before spending that compute, make clear what hypothesis is being tested, what observations would support or weaken it, and what histories, plots, contours, balances, or other evidence are required to make the resulting statement.
 
 A promising discovery case may become the basis of a focused hypothesis test, including an explicitly planned continuation when scientifically legitimate. Do not silently upgrade discovery evidence into hypothesis-test evidence simply because the early result looks convincing.
+
+## Record working assumptions without becoming fixated on them
+
+Alongside the hypothesis, list the assumptions that are being accepted so the experiment can be interpreted. These may concern the model formulation, mesh adequacy, initialization, boundary treatment, monitor meaning, numerical scheme, comparison basis, or other conditions that are not the direct target of the experiment.
+
+Keep hypotheses and assumptions distinct:
+
+- a **hypothesis** is something the experiment is actively trying to test;
+- a **working assumption** is something being treated as acceptable for now so the test can proceed.
+
+Do not turn every assumption into another experiment. Record only assumptions that materially shape the interpretation or could plausibly limit the conclusion.
+
+Use three practical states when useful:
+
+- `accepted-for-now`;
+- `questioned`;
+- `materially-challenged`.
+
+Assumptions should be revisited when evidence makes them relevant, not continuously attacked by default. A materially challenged assumption may become a future experiment target if it could change the phase-level conclusion.
 
 ## Design the smallest useful strategy
 
@@ -93,6 +112,6 @@ The purpose is to make every candidate earn its place through the same evidence-
 
 Choose the best justified strategy for the current uncertainty and mode. The selected strategy may be a focused setup, a small linked campaign, or a bounded discovery matrix.
 
-Then call `create-setup` to convert that strategy into the required setup records. `design-experiment` owns why the experiment strategy is worth doing and what evidence will judge it. `create-setup` owns the precise handoff for implementation.
+Then call `create-setup` to convert that strategy into the required setup records. `design-experiment` owns why the experiment strategy is worth doing, what working assumptions bound it, and what evidence will judge it. `create-setup` owns the precise handoff for implementation.
 
 Do not write predicted results into the setup records. The strategy defines what will be tested and what would be informative; the simulation data decides what actually happened.
