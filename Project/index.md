@@ -23,12 +23,12 @@ The current execution lane is the canonical full-geometry Mixture `03A`
 Stage-4 promising-state development campaign. Its Project tracer is the
 shortest route through the selected record:
 
-- [03A tracer index](experiments/03a/index.md)
-- [03A-Q01 setup — S4-01 50-iteration qualification](experiments/03a/q01-s4-01-50-iteration-qualification/setup.md)
-- [03A-Q01 results — S4-01 50-iteration qualification](experiments/03a/q01-s4-01-50-iteration-qualification/results.md)
-- [Stage-4 setup contract](experiments/03a/stage-04/setup.md)
-- [Stage-4 execution evidence](experiments/03a/stage-04/results.md)
-- [Stage-3 results](experiments/03a/stage-03/results.md)
+- [03A tracer index](experiments/03A/index.md)
+- [03A-Q01 setup — S4-01 50-iteration qualification](experiments/03A/q01-s4-01-50-iteration-qualification/setup.md)
+- [03A-Q01 results — S4-01 50-iteration qualification](experiments/03A/q01-s4-01-50-iteration-qualification/results.md)
+- [Stage-4 setup contract](experiments/03A/stage-04/setup.md)
+- [Stage-4 execution evidence](experiments/03A/stage-04/results.md)
+- [Stage-3 results](experiments/03A/stage-03/results.md)
 
 The earlier Project experiment records preserve the migrated setup and result
 memory for the Purnanto, full-geometry, DPM, EWF, VOF, and reconstruction
@@ -84,7 +84,6 @@ explicit.
 
 ## Supporting source input
 
-The two tracked files under `ResearchProject_wiki/raw/` are immutable source
-inputs for the project-specific extraction. The retired written project wiki
-and its progress/meeting navigation are recoverable from Git history; they are
-not active authorities.
+The original project source inputs and retired written project wiki were
+removed from the current checkout at the user's request. Their exact history
+is recoverable from Git; they are not active authorities.

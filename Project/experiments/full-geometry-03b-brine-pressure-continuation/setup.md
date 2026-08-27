@@ -4,7 +4,7 @@
 # Setup 03B — Steady Brine-Outlet Pressure Continuation
 
 > **Lifecycle:** `draft — child experiment of 03A`  
-> **Parent:** [`03A — 08b-parity full-geometry steady Mixture baseline`](../03a/setup-source.md)  
+> **Parent:** [`03A — 08b-parity full-geometry steady Mixture baseline`](../03A/setup-source.md)
 > **Primary objective:** use the developed 03A steady field as the parent and progressively change only the brine-outlet pressure **without reinitialization**, following the same solution branch instead of repeating independent pressure cases.  
 > **Key distinction from 02c/02e:** this is steady numerical continuation, not a collection of separately initialized pressure siblings and not a physical transient pressure ramp.
 

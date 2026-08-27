@@ -31,9 +31,9 @@ skills   = focused workflows that route work through those owners
   boundaries in `Project/`.
 - Keep `skills/` narrow and procedural. A skill routes work; it is not a second
   authority for project facts or a dump of run chronology.
-- The tracked `ResearchProject_wiki/raw/` files are immutable supporting source
-  inputs only. Do not recreate the retired written wiki or numbered setup
-  tree.
+- The former project source vault and written wiki were removed. Do not
+  recreate them or the retired numbered setup tree; recover exact history from
+  Git when needed.
 
 ## Core safeguards
 
@@ -64,7 +64,7 @@ and the applicable focused skill under `skills/`.
 
 ## Cleanup rule
 
-The former `ResearchProject_wiki/` written corpus, `Setups/` tree, meeting
-reports, fixed `subagents/` prompts, and deprecated wrapper skills are retired.
-Recover their exact history from Git when needed; do not add compatibility
-shells or a new giant `legacy/` directory.
+The former project-written corpus, `Setups/` tree, meeting reports, fixed
+`subagents/` prompts, and deprecated wrapper skills are retired. Recover their
+exact history from Git when needed; do not add compatibility shells or a new
+giant `legacy/` directory.

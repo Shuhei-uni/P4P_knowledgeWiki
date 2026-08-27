@@ -11,11 +11,11 @@ The repository has four active ownership domains:
 - `skills/` owns focused procedural workflows that route work through those
   systems. Skills do not replace the scientific or implementation authority.
 
-`ResearchProject_wiki/raw/` is a small immutable source vault for two tracked
-project inputs. It is not an active documentation owner. The former written
-project wiki, numbered setup/report tree, meeting-report folder, and fixed
-subagent prompts were retired after their useful content was migrated. Git
-history is the archive.
+The former project source vault is absent from the current checkout. It is not
+an active documentation owner; its exact inputs and the former written project
+wiki, numbered setup/report tree, meeting-report folder, and fixed subagent
+prompts are recoverable from Git history after their useful content was
+migrated.
 
 ## Routing map
 

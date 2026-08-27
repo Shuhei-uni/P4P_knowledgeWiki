@@ -50,7 +50,7 @@ LIQUID_DENSITY = 881.21088
 LIQUID_VISCOSITY = 1.45544e-4
 
 SOURCE_AUTHORITY = {
-    "target_setup": "Project/experiments/03a/setup-source.md",
+    "target_setup": "Project/experiments/03A/setup-source.md",
     "carrier_authority": "Project/experiments/purnanto-00a-live-setup-audit/technical-live-setup-reference.md",
     "parity_lineage": "Project/experiments/purnanto-08b-parity-split-inlet/setup.md",
     "split_representation": "Project/experiments/purnantov2-08a-steam-outlet-placement/setup.md",

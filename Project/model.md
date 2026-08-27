@@ -43,7 +43,7 @@ setup and its machine-readable evidence.
 
 - **Geometry and mesh:** the 03A full-geometry branch uses the explicitly
   identified Full-geomV2-231kcells.msh.h5 mesh with 231,376 cells (Observed,
-  [03A setup source](experiments/03a/setup-source.md)). Mesh identity and
+  [03A setup source](experiments/03A/setup-source.md)). Mesh identity and
   quality remain setup evidence, not assumptions inferred from a setup number.
 - **Phases and materials:** the carrier represents primary water vapour and
   secondary liquid water in a steady Mixture model; energy/phase change is off
@@ -54,7 +54,7 @@ setup and its machine-readable evidence.
   outlet without a modelled lower liquid path; the 03A full-geometry branch
   deliberately adds a physical brine pressure outlet. Results from those
   boundaries cannot be pooled into one balance rule (Inferred, [03A setup
-  source](experiments/03a/setup-source.md)).
+  source](experiments/03A/setup-source.md)).
 - **DPM role:** DPM is reserved for entrained fine mist, provisionally
   5–100 µm; a separate 100–150 µm coarse-tail sensitivity may be justified.
   The distribution is literature-informed/engineering-assumed rather than a

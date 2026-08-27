@@ -12,12 +12,10 @@ separator CFD project. It has four active systems with clear ownership:
 - `skills/` — focused repository-local workflows for the active CFD, Fluent,
   evidence, and project-loop tasks.
 
-The small `ResearchProject_wiki/raw/` directory is a supporting immutable source
-vault for two project inputs that are intentionally kept in the repository.
-It is not an active documentation system. The old written project wiki,
-numbered setup/report tree, meeting-report folder, and fixed subagent prompts
-were retired after their useful content was distilled into `Project/`,
-`CFD_wiki/`, and `PyAnsys/`; Git history is their recovery path.
+The former project source vault is not part of the current checkout. The old
+written project wiki, numbered setup/report tree, meeting-report folder, and
+fixed subagent prompts were retired after their useful content was distilled
+into `Project/`, `CFD_wiki/`, and `PyAnsys/`; Git history is their recovery path.
 
 Start with:
 
@@ -38,25 +36,20 @@ the verified 33,000-iteration parent and issued exactly one Fluent-native
 `/solve/iterate 50` command. The Project packet records the endpoint,
 transcript, residual history, physical histories, hashes, and limitations:
 
-- [`03A-Q01 setup`](Project/experiments/03a/q01-s4-01-50-iteration-qualification/setup.md)
-- [`03A-Q01 results`](Project/experiments/03a/q01-s4-01-50-iteration-qualification/results.md)
-- [`03A tracer index`](Project/experiments/03a/index.md)
+- [`03A-Q01 setup`](Project/experiments/03A/q01-s4-01-50-iteration-qualification/setup.md)
+- [`03A-Q01 results`](Project/experiments/03A/q01-s4-01-50-iteration-qualification/results.md)
+- [`03A tracer index`](Project/experiments/03A/index.md)
 - [`Q01 runner`](PyAnsys/scripts/setup/run_03a_q01_s4_01_50.py)
 
-## Supporting source files
+## Source and generated files
 
-These tracked project inputs are retained because they are small enough for
-the repository and are needed to rebuild or audit the project-specific source
-extractions. Never edit files under a `raw/` directory.
-
-- `ResearchProject_wiki/raw/Shuhei Report.docx`
-- `ResearchProject_wiki/raw/Zarrouk and Purnanto 2014.pdf`
-
-Other source material remains local and intentionally outside normal GitHub
-storage, including the CFD paper PDFs under `CFD_wiki/raw/`, the Fluent manual
-under `CFD_wiki/guide/`, the local `PyAnsys/.venv/`, and generated run output.
-The maintained extracted pages identify the source paths and uncertainty
-labels needed for later rechecks.
+The original project source inputs were removed from this checkout at the
+user's request; their exact committed versions remain recoverable from Git
+history. Other source material remains local and intentionally outside normal
+GitHub storage, including the CFD paper PDFs under `CFD_wiki/raw/`, the Fluent
+manual under `CFD_wiki/guide/`, the local `PyAnsys/.venv/`, and generated run
+output. The maintained extracted pages identify the source paths and
+uncertainty labels needed for later rechecks.
 
 ## Rebuild and verification habits
 

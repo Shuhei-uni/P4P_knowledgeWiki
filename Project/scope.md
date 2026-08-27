@@ -7,8 +7,9 @@ idealised two-phase inlet representation with more realistic inlet-regime
 options, and quantify effects on internal flow behaviour, separation
 efficiency, and pressure drop.
 
-Source: ResearchProject_wiki/raw/Shuhei Report.docx
-(shuhei-report-2026, Reported).
+Source provenance: the original project report source was removed from this
+checkout at the user's request; its exact committed version is recoverable
+from Git history (shuhei-report-2026, Reported).
 
 ## Current research boundary
 
@@ -56,8 +57,8 @@ Project/ is the compact authority for current project-specific scientific
 truth: the question being pursued, stable assumptions, selected experiments,
 evidence interpretation, and claim boundaries. Reusable methods belong in
 CFD_wiki/, and executable implementation or machine evidence belongs in
-PyAnsys/. The two tracked files under ResearchProject_wiki/raw/ are source
-inputs only.
+PyAnsys/. Original source inputs are outside the current checkout and can be
+recovered from Git history when an extraction must be audited.
 
 ## Evidence labels
 

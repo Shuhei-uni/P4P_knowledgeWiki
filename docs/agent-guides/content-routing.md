@@ -11,8 +11,8 @@ Route content before writing it.
    `PyAnsys/`.
 4. A repeatable task procedure belongs in the smallest applicable skill under
    `skills/`.
-5. The tracked files under `ResearchProject_wiki/raw/` are immutable source
-   inputs only; do not add prose beside them as a new active wiki.
+5. Retired source material and former navigation are recovered from Git
+   history when needed; do not recreate them as a new active wiki.
 
 ## Selected experiments
 
