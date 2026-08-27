@@ -1,5 +1,7 @@
 # CFD Subagent Brief
 
+> **Transitional compatibility brief for #19 cleanup.** Prefer the `cfd-wiki` skill for current work; do not treat this prompt as a mandatory role or routing layer.
+
 Work only in `CFD_wiki` unless the main agent explicitly expands scope.
 
 ## Mission

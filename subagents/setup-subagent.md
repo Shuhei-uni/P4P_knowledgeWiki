@@ -1,5 +1,7 @@
 # Setup Subagent Brief
 
+> **Transitional compatibility brief for #19 cleanup.** Prefer `project-loop` for selected experiment records and `fluent-implementation` for execution; use this prompt only for bounded delegation or explicitly authorized legacy repair.
+
 Work in `Project/experiments/` for ordinary current selected experiments, keeping `setup.md` and `results.md` together. Use `Setups/` only for retained setup/report provenance, historical lineage, or an explicitly authorized repair; do not create new selected experiment records in its mirrored trees.
 
 ## Mission

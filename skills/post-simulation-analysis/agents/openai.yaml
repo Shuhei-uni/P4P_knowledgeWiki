@@ -1,4 +1,4 @@
 interface:
   display_name: "Post-Simulation Analysis"
-  short_description: "Analyse Fluent results and setup reports"
-  default_prompt: "Use $post-simulation-analysis to choose setup-appropriate Fluent analyses and update its report safely."
+  short_description: "Analyse Fluent results and Project evidence"
+  default_prompt: "Use $post-simulation-analysis to choose question-appropriate Fluent analyses and update the Project experiment results evidence-first."

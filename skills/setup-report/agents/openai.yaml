@@ -1,4 +1,6 @@
 interface:
-  display_name: "Setup Report"
-  short_description: "Assess and manage setup lifecycle and reports."
-  default_prompt: "Use $setup-report to assess a simulation setup's lifecycle and report needs, then ask me for the final call before making changes."
+  display_name: "Legacy Setup Report"
+  short_description: "Compatibility reference for retained setup records"
+  default_prompt: "Use $setup-report only for explicitly authorized historical repair of retained Setups records."
+policy:
+  allow_implicit_invocation: false

@@ -1,7 +1,9 @@
 ---
 name: setup-report
-description: "Review retained concrete Fluent setup records and setup-linked result reports. Preserve geometry/lineage evidence and user-led interpretation, while routing new selected experiments to the co-located Project/experiments contract instead of creating new Setups mirrors."
+description: "Deprecated compatibility workflow for retained Setups records; use project-loop and fluent-implementation for new selected experiments."
 ---
+
+> **Transitional compatibility skill.** Do not route new selected experiments here. Use `project-loop` with `Project/experiments/` and `fluent-implementation`; use this file only for explicitly authorized historical Setups repair until the #19 cleanup stage.
 
 # Setup Report
 

@@ -1,7 +1,9 @@
 ---
 name: research-project-wiki
-description: "Use when working with ResearchProject_wiki project-specific knowledge for the geothermal separator CFD project: progress updates, experiment logs, blockers, objectives, technical notes, V&V records, project-facing evidence, report support, or decisions that should be traceable to the final-year research project."
+description: "Deprecated compatibility workflow for retained ResearchProject_wiki records; use project-loop and Project/ for current project work."
 ---
+
+> **Transitional compatibility skill.** Do not route new current-state work here. Use `project-loop` and `Project/`; use this file only for explicitly authorized historical repair until the #19 cleanup stage.
 
 # Research Project Wiki
 

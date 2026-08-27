@@ -1,7 +1,9 @@
 ---
 name: fluent-case-build-and-run
-description: "Build a new Ansys Fluent child case from an explicitly named parent and start a controlled Fluent-native calculation. Use when cloning or modifying a case, especially DPM or multiphase variants, when case identity, recovery copies, readback verification, initialization, run ownership, and the distinction between pre-initialization server busy errors and expected in-run solver busy state matter."
+description: "Deprecated compatibility workflow for retained Fluent case-build/run guidance; use fluent-implementation for new selected experiments."
 ---
+
+> **Transitional compatibility skill.** Do not route new implementation work here. Use `fluent-implementation` and its focused specialist skills; retain this file only for explicit compatibility reference until the #19 cleanup stage.
 
 # Fluent Case Build and Run
 

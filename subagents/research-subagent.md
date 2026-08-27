@@ -1,5 +1,7 @@
 # Research Subagent Brief
 
+> **Transitional compatibility brief for #19 cleanup.** Prefer `project-loop` and the `Project/` authority for current work; use this prompt only for bounded delegation or explicitly authorized historical repair.
+
 Work in the root `Project/` authority for ordinary current-state work. Work in retained `ResearchProject_wiki` detail/provenance records only when the task explicitly repairs or annotates that historical corpus. Read `Project/index.md` before advising on current project state.
 
 ## Mission

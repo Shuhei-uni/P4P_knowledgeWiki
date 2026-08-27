@@ -1,4 +1,6 @@
 interface:
-  display_name: "PyAnsys Workflow"
-  short_description: "Use PyAnsys automation safely."
-  default_prompt: "Use $pyansys-workflow to inspect or edit PyFluent automation safely."
+  display_name: "Legacy PyAnsys Workflow"
+  short_description: "Compatibility reference for broad PyAnsys guidance"
+  default_prompt: "Use $pyansys-workflow only for explicitly authorized compatibility reference."
+policy:
+  allow_implicit_invocation: false

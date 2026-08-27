@@ -1,35 +1,37 @@
 # Repository guide
 
-This repository connects reusable CFD knowledge, geothermal-separator project records, ordered simulation setups, and PyFluent automation without conflating their roles.
+This repository has three deliberately separate systems:
 
-## Migration safety (#9)
+```text
+CFD_wiki = reusable external CFD knowledge
+Project  = current project-specific scientific truth
+PyAnsys  = implementation, execution, and data tools
+```
 
-> Repository restructure tracked in #9.
-> Once a replacement area is proven, do not create new work in legacy progress/log or mirrored setup/report paths; use the replacement authority and retain the old paths for provenance.
-> Do not delete historical content yet.
-> The `Project/` experiment contract is now proven for selected work: create `setup.md` and `results.md` together under `Project/experiments/`; retain `Setups/` mirrors for provenance and explicit historical repair only.
+## Start with the current project
 
-> For current project-specific scientific truth, start with [`Project/index.md`](Project/index.md). `ResearchProject_wiki/` remains the detailed/provenance source until the relevant migration issue establishes a replacement authority.
+- Begin project work at [`Project/index.md`](Project/index.md).
+- Load only the latest relevant experiment `setup.md` or `results.md`, then a parent record when the question requires it. Do not preload legacy logs or whole knowledge trees.
+- Create `setup.md` and `results.md` together only for a human-selected experiment under `Project/experiments/<campaign>/<experiment>/`.
+- Keep unselected proposals in the conversation or temporary reasoning; do not create repository records for them.
+- Update `Project/index.md` only when the current scientific state changes. Git history is the operational history; do not create chat/work logs or duplicate project state.
 
-- For a note move: move through Obsidian → inspect the Git diff → search the old path → fix non-note references explicitly → commit the move batch.
-- Treat Obsidian/Wikilinks and Markdown note links separately from Python/YAML/JSON path literals, shell examples, GitHub URLs, and immutable historical artifacts. Do not assume Obsidian updates non-note references.
-- Run `python3 scripts/check_stale_paths.py` after a move. It checks active Markdown destinations and reports missing active links, compatibility/archive references, and path-literal cases separately; it is not a migration framework.
+## Keep ownership clear
 
-The root-vault move check on 2026-08-27 used a disposable Markdown backlink. Obsidian recognised the backlink but did not rewrite the temporary target link after the target moved, so the Git diff and repository search remain required. No `[[Wikilinks]]` were present in the vault.
+- Put reusable literature, CFD methods, and generic Fluent guidance in `CFD_wiki/`; preserve its citations, evidence labels, units, and uncertainty.
+- Put case implementation, execution, inspection, extraction, and generated evidence in `PyAnsys/`. Prefer proven reusable code and inspect dynamic Fluent state before inventing a new access pattern.
+- Put current scientific questions, selected experiments, findings, and next uncertainty in `Project/`. Generated/debug artifacts are evidence or diagnostics, not project conclusions.
+- `Setups/` and `ResearchProject_wiki/` are retained provenance/compatibility areas during this migration. Do not create new selected-work mirrors or delete historical material without the explicit cleanup stage.
 
-## Always
+## Core safeguards
 
-- Never edit files in any `raw/` directory.
+- Never edit any file under a `raw/` directory.
+- Do not silently copy case-specific names, values, paths, or branch assumptions between experiments.
+- Keep source citations and `Reported`, `Inferred`, `Assumed`, `Missing`, and related uncertainty labels required by the owning local guide.
 - Before changing a subsystem, read its local guide: [`CFD_wiki/AGENTS.md`](CFD_wiki/AGENTS.md), [`ResearchProject_wiki/AGENTS.md`](ResearchProject_wiki/AGENTS.md), or [`PyAnsys/AGENTS.md`](PyAnsys/AGENTS.md).
-- Keep source citations and uncertainty labels required by the applicable local guide.
 
-## Read the guide for the task
+## Migration and task guides
 
-- [Repository architecture](docs/agent-guides/repository-architecture.md) — ownership boundaries and the top-level map.
-- [Content routing](docs/agent-guides/content-routing.md) — where to place new knowledge and how to link systems.
-- [Setup reports](docs/agent-guides/setup-reports.md) — case definitions, naming, ordering, and lineage.
-- [Fluent guidance](docs/agent-guides/fluent-guidance.md) — how-to questions and reusable GUI procedures.
-- [Evidence lookup](docs/agent-guides/evidence-lookup.md) — when and how to use the CFD paper lookup layer.
-- [Progress reporting](docs/agent-guides/progress-reporting.md) — mandatory handling of progress requests.
-- [Wiki change discipline](docs/agent-guides/wiki-change-discipline.md) — scoped, evidence-led edits and completion checks.
-- [Delegation](docs/agent-guides/delegation.md) — briefs and main-agent responsibilities for larger cross-system tasks.
+For note moves, inspect the Git diff and search old references after the move; Obsidian does not rewrite every Markdown, code, or path-literal reference. Run `python3 scripts/check_stale_paths.py` after a move.
+
+Use only the task-specific guide needed: [repository architecture](docs/agent-guides/repository-architecture.md), [content routing](docs/agent-guides/content-routing.md), [setup reports](docs/agent-guides/setup-reports.md), [Fluent guidance](docs/agent-guides/fluent-guidance.md), [evidence lookup](docs/agent-guides/evidence-lookup.md), [progress reporting](docs/agent-guides/progress-reporting.md), [wiki change discipline](docs/agent-guides/wiki-change-discipline.md), or [delegation](docs/agent-guides/delegation.md).

@@ -1,7 +1,9 @@
 ---
 name: pyansys-workflow
-description: "Use when working with PyAnsys executable automation for Fluent/PyFluent: connection checks, inspection scripts, setup rebuild scripts, remote Student Edition fallback, machine-readable validation targets, claim gates, dependency-ordered Fluent settings, or PyAnsys knowledge updates."
+description: "Deprecated compatibility workflow for broad PyAnsys guidance; use fluent-implementation, post-simulation-analysis, or the relevant specialist skill."
 ---
+
+> **Transitional compatibility skill.** Do not route new work through this broad workflow. Use `fluent-implementation`, `post-simulation-analysis`, or a focused specialist; retain this file only for explicit compatibility reference until the #19 cleanup stage.
 
 # PyAnsys Workflow
 
@@ -54,7 +56,7 @@ Use `rg` to find existing helpers and prior discoveries before writing new code:
 rg -n "target setting|boundary role|DPM|reacquire|readback|TUI|claim" PyAnsys/src PyAnsys/scripts PyAnsys/knowledge PyAnsys/docs
 ```
 
-For setup intent or lineage, use `$setup-report` style lookup. For reusable CFD method logic, use `$cfd-wiki` style lookup. For project claim interpretation, use `$research-project-wiki` style lookup.
+For current scientific intent, use `project-loop` and `Project/`. For reusable CFD method logic, use `cfd-wiki`. For implementation, use `fluent-implementation`; for evidence extraction, use `post-simulation-analysis` or its focused specialist skills. Use this retained skill only when an explicit compatibility reference requires its older workflow text.
 
 ## Fluent Settings Rule
 
