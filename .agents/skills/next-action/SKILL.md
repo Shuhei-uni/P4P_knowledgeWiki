@@ -1,11 +1,11 @@
 ---
 name: next-action
-description: "Summarize what the current evidence has answered and what remains weak, then return either the most useful unresolved uncertainty to investigate or a recommendation to conclude. Use as a small handoff back to scientific-phase-loop."
+description: "Make a small inside-the-phase decision after new evidence arrives: summarize what the current hypothesis has answered, identify the most important remaining weakness, and return either the smallest useful investigation or a recommendation to conclude that line of inquiry. Use inside scientific-phase-loop, not for choosing the project's next phase."
 ---
 
 # Next Action
 
-Keep this small.
+Keep this small and keep it inside the current phase.
 
 Ask two things:
 
@@ -18,4 +18,6 @@ If the evidence already supports a sufficiently strong, bounded statement for th
 
 Do not generate another simulation merely because one just finished. Reuse existing evidence or additional analysis when that can resolve the remaining weakness.
 
-Return only the current evidence-backed answer, the important remaining uncertainty if any, and the recommended direction: investigate further or conclude.
+Do not choose or redefine the next project phase. That belongs to the human-invoked `phase-planner` when the loop reaches a phase boundary.
+
+Return only the current evidence-backed answer, the important remaining uncertainty if any, and the recommended inside-phase direction: investigate further or conclude.
