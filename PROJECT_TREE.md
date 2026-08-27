@@ -6,6 +6,10 @@ Simple orientation map for the repository.
 P4P_knowledgeWiki/
 ├── AGENTS.md
 ├── PROJECT_TREE.md
+├── .agents/
+│   └── skills/                        # repo-scoped Codex skills
+├── .codex/
+│   └── environments/                  # Codex environment configuration
 ├── CFD_wiki/
 ├── ResearchProject_wiki/
 ├── Setups/
@@ -31,13 +35,14 @@ P4P_knowledgeWiki/
 │   ├── templates/
 │   └── order-dictionary.md
 ├── PyAnsys/
-├── skills/
 ├── subagents/
 └── docs/
 ```
 
 ## What Goes Where
 
+- `.agents/skills/`: repo-scoped Codex skills. Each skill lives in its own directory with a required `SKILL.md`; supporting scripts, references, assets, or `agents/openai.yaml` may live beside it when useful.
+- `.codex/`: Codex environment/configuration material; repo skills are not stored here.
 - `CFD_wiki/`: reusable CFD knowledge, literature extraction, external method logic.
 - `ResearchProject_wiki/`: project decisions, progress, technical notes, V&V reports, and sign-off.
 - `Setups/full-geometry/`: current production-geometry **setup definitions and plans**, organized by physics family and scientific campaign.
@@ -46,4 +51,3 @@ P4P_knowledgeWiki/
 - `Setups/reports/purnanto-reference/`: navigation for the historical numbered/reference report corpus.
 - `Setups/active|future|past` and numbered directories directly under `Setups/reports/`: compatibility storage for existing links.
 - `PyAnsys/`: automation, machine-readable targets, and executable workflows.
-- `skills/`: repo-local Codex skills distilled from repository workflow rules.
