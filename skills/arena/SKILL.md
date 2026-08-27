@@ -1,76 +1,44 @@
 ---
 name: arena
-description: "Generate multiple independent candidate solutions or experiment designs, select the strongest base, and synthesize useful ideas from the rest. Use when there are several plausible approaches and diversity is more valuable than one agent refining its first idea."
+description: "Generate independent candidate scientific directions or experiment strategies and synthesize the strongest result. Use when several plausible approaches deserve genuine comparison before committing direction or compute."
 ---
 
 # Arena
 
-Use independent candidates to reduce first-idea bias.
+Use independent candidates when diversity of reasoning can improve an important choice.
 
-## When to use
+## Keep the judging level clear
 
-Good uses include:
+At the **phase level**, favour the direction with the strongest scientific reasoning: which line of inquiry best advances the phase question and attacks the most important uncertainty?
 
-- experiment design;
-- analysis-plan alternatives;
-- numerical recovery strategies;
-- competing report structures;
-- major modelling choices where several defensible approaches exist.
+At the **experiment level**, favour information value: how much of the relevant hypothesis could this experiment or linked campaign resolve, how interpretable would that evidence be, and is the learning worth the compute?
 
-Do not use Arena for trivial deterministic tasks.
+Do not apply one generic rubric to every level of the investigation.
 
-## Fan out
+## Generate independently
 
-Spawn several independent subagents, usually 3–5.
+Give several subagents the same problem, evidence, constraints, and level of decision. Let them reason independently before seeing the alternatives.
 
-Give each the same core problem, goal, constraints, and evidence. Do not tell later candidates what earlier candidates proposed.
+Ask for genuinely different approaches rather than cosmetic variants.
 
-Require each candidate to return:
+## Judge from evidence
 
-- proposed approach;
-- reasoning/evidence;
-- main strengths;
-- main risks/confounders;
-- what would falsify or reject it;
-- cost/complexity.
+Compare the candidates using the criteria that matter for the calling skill. Scientific reasoning, prior evidence, information value, interpretability, feasibility, and cost may all matter, but their importance depends on whether the Arena is choosing a phase direction or an experiment strategy.
 
-Keep responses concise enough for synthesis.
+Do not choose by majority vote, confidence of writing, or novelty.
 
-## Evaluate
+## Synthesize when synthesis is stronger
 
-The main agent compares candidates against explicit criteria tied to the task, such as:
+The output does not have to be one candidate copied intact.
 
-- scientific information value;
-- control of confounding variables;
-- numerical feasibility;
-- evidence requirements;
-- implementation risk;
-- compute cost;
-- reversibility;
-- alignment with project goal.
+A strong conclusion may combine compatible pieces from several candidates: one may identify the right scientific direction, another the strongest experiment, and another an important control or evidence requirement.
 
-Do not choose by majority vote or writing quality alone.
+Combine only pieces that remain scientifically coherent together. Do not merge everything into an overengineered compromise.
 
-## Synthesize
-
-Choose the strongest candidate as the base. Graft only genuinely compatible ideas from the others.
-
-Do not merge every idea into an overengineered hybrid.
-
-The final result should usually be simpler than the union of all candidates.
-
-## Record disagreement
-
-Preserve meaningful disagreements that affect the decision. If two candidates depend on different unresolved assumptions, surface that uncertainty instead of hiding it through synthesis.
+Preserve meaningful disagreements when the evidence does not resolve them.
 
 ## Output
 
-Return:
+Return the chosen or synthesized direction, why the evidence supports it, which useful pieces came from alternatives, and any unresolved disagreement that still matters.
 
-- chosen base;
-- why it won;
-- useful ideas adopted from alternatives;
-- important rejected alternatives and why;
-- unresolved disagreement/human gate if any.
-
-Then hand the selected result back to the calling skill.
+Then hand the result back to the calling skill.
