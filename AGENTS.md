@@ -29,7 +29,7 @@ skills   = focused workflows that route work through those owners
   evidence in `PyAnsys/`.
 - Put current scientific questions, selected experiments, findings, and claim
   boundaries in `Project/`.
-- Keep `skills/` narrow and procedural. A skill routes work; it is not a second
+- Keep skills narrow and procedural. A skill routes work; it is not a second
   authority for project facts or a dump of run chronology.
 - The former project source vault and written wiki were removed. Do not
   recreate them or the retired numbered setup tree; recover exact history from
@@ -45,22 +45,12 @@ skills   = focused workflows that route work through those owners
 - Before changing a subsystem, read its local guide: [`CFD_wiki/AGENTS.md`](CFD_wiki/AGENTS.md)
   or [`PyAnsys/AGENTS.md`](PyAnsys/AGENTS.md). Project records follow the root
   routing and evidence rules.
-
-## Focused task guides
-
-Read only the guide needed for the work:
-
-- [repository architecture](docs/agent-guides/repository-architecture.md)
-- [content routing](docs/agent-guides/content-routing.md)
-- [Fluent guidance](docs/agent-guides/fluent-guidance.md)
-- [evidence lookup](docs/agent-guides/evidence-lookup.md)
-- [progress reporting](docs/agent-guides/progress-reporting.md)
-- [wiki change discipline](docs/agent-guides/wiki-change-discipline.md)
-- [delegation](docs/agent-guides/delegation.md)
+- Use the smallest applicable repo skill for a repeatable workflow rather than
+  creating another general-purpose guide or documentation layer.
 
 For native Fluent runs, also read
 [`PyAnsys/knowledge/fluent-settings/native_run_and_autosave.md`](PyAnsys/knowledge/fluent-settings/native_run_and_autosave.md)
-and the applicable focused skill under `skills/`.
+and the applicable focused skill.
 
 ## Cleanup rule
 
