@@ -1,121 +1,54 @@
 ---
 name: implement-experiment
-description: "Orchestrate implementation of an approved experiment from setup.md through verified Fluent case construction, initialization, run execution, checkpoint/recovery, and completed simulation artifacts. Use after the scientific question and setup are already decided."
+description: "Execute an approved setup faithfully in Fluent: build the specified case, prove the setup by readback and save/reopen, smoke-test it, then run the fixed target and verify completion. Use after create-setup has defined the experiment."
 ---
 
 # Implement Experiment
 
-Turn an approved `setup.md` into a verified simulation run. Do not redesign the scientific question unless implementation exposes a blocking contradiction.
+Get the approved setup done as written.
 
-## Contract
+The scientific decisions have already been made. This skill owns faithful execution, not experiment design.
 
-Input:
+## Preserve the setup
 
-- approved `setup.md`;
-- explicit parent/reference case where applicable;
-- run target and compute constraints;
-- required monitors/evidence identified by analysis planning.
+Treat `setup.md` as the experiment contract. Build the requested delta from the verified parent/reference case and preserve everything that the setup says must remain unchanged.
 
-Output:
+Have essentially no scientific freedom here. Do not add models, change numerics, alter run length, redefine monitors, or otherwise improve the experiment because another choice seems better.
 
-- verified child case;
-- observed initialization/run state;
-- completed or recoverable simulation artifacts;
-- clear implementation status and failures;
-- no scientific interpretation beyond implementation observations.
+Implementation details may need to change when Fluent, PyFluent, repository tooling, or pipeline versions differ from what the setup expected. In that case, find an implementation that is scientifically equivalent and preserves the intended case state. If the setup cannot be implemented faithfully, stop the implementation and return that conflict rather than silently changing the experiment.
 
-## Workflow
+Use existing `fluent-case-build-and-run` guidance and reusable PyAnsys tooling for the low-level mechanics.
 
-```text
-setup.md
--> inspect parent/live state
--> build requested delta
--> read back + verify
--> save/reopen child case
--> configure required monitors/checkpoints
--> initialize
--> run
--> observe completion/recovery state
--> hand off to analysis
-```
+## Prove the case before the long run
 
-## Use existing implementation tools
+Do not spend hours on a case that has only been built in theory.
 
-Prefer the existing `fluent-case-build-and-run` skill and reusable PyAnsys modules/scripts for Fluent operations. Do not duplicate their low-level recipes here.
+Before the full run, verify the important setup state by exact readback, save the case, reopen it, and verify that the saved state still matches the intended setup.
 
-Treat Fluent as a dependency-ordered state machine. Inspect live active settings before mutation, reacquire objects after dependency-changing operations, and read back important values.
+Then run a short smoke test, normally about 50 iterations for an iteration-based case. The purpose is simple: prove that the saved case and chosen execution path can actually solve and advance before committing to the expensive run.
 
-## Build only the requested delta
+Initialization is not universally required. Follow the setup. Do not initialize merely because this skill has an initialization step.
 
-From `setup.md`, extract:
+If the smoke test exposes an execution error or a setup/pipeline incompatibility, fix only what can be fixed without changing the experiment. Otherwise return the problem for redesign or cancellation.
 
-- parent case;
-- intended changes;
-- invariants that must remain unchanged;
-- initialization method;
-- run duration/iterations/physical time;
-- required report definitions/monitors;
-- checkpoint/autosave expectations.
+## Run the intended horizon
 
-Do not silently add physics, numerics, models, or acceptance criteria.
+Once the verification gate passes, run the fixed iteration target defined by the setup.
 
-If the setup is ambiguous in a way that changes the experiment, stop and escalate rather than choosing a convenient interpretation.
+Do not stop early merely because residuals, balances, or monitors look poor, noisy, oscillatory, or unpromising. Those behaviours are evidence for later analysis. Unless the solver or execution path encounters an actual error that prevents continuation, let the experiment reach its planned horizon.
 
-## Verification gate
+Use the repository's resilient/native run mechanism so the simulation does not depend on keeping one agent context alive.
 
-Before running, require evidence that:
+## Completion means the data reached the target
 
-- the intended changes are present;
-- declared invariants remain intact;
-- the case can be saved and reopened;
-- the saved state still matches the intended setup;
-- required analysis monitors/report definitions exist before a long run when they cannot be reconstructed later.
+Do not claim completion because a command was submitted or enough wall time has passed.
 
-Use machine-readable checks where available. Human-readable `setup.md` remains the experiment definition; machine state is evidence that implementation matches it.
+For an iteration-based experiment, the strongest minimal completion evidence is that the final saved data reports the iteration count requested by `setup.md`.
 
-## Run ownership
-
-For long runs, prefer Fluent-native execution/checkpointing or the repository's established resilient run mechanism. Do not keep an agent context alive merely to babysit a solver.
-
-Record the difference between:
-
-- run launched;
-- run observed active;
-- requested horizon reached;
-- final state independently verified.
-
-Do not claim completion from elapsed wall time alone.
-
-## Recovery
-
-When a run crashes or becomes unavailable:
-
-1. preserve the latest known-good checkpoint/state;
-2. determine whether the failure is infrastructure, setup, or numerical;
-3. avoid silently reinitializing a resumed calculation;
-4. return a structured failure to the scientific loop.
-
-The next action may be `RERUN_FROM_CHECKPOINT`, `REPAIR_SETUP`, `NUMERICAL_SENSITIVITY`, or `HUMAN_REVIEW_REQUIRED`; do not automatically create a new experiment.
-
-## Delegate when useful
-
-Use subagents for read-only implementation review when the setup is complex, for example:
-
-- one checks intended Fluent state/invariants;
-- one checks analysis instrumentation;
-- one checks run/recovery safety.
-
-The main agent owns mutations and final verification.
+Preserve the final case/data and any required histories or checkpoints. If execution failed before the target, report the final observed iteration and the failure without pretending the experiment completed.
 
 ## Handoff
 
-Report only what was observed:
+Return only execution facts: whether the setup matched on readback, whether save/reopen verification passed, whether the smoke test ran, the requested iteration target, the final observed iteration, artifact locations, and any implementation deviations or failures.
 
-- case built/reload-verified or not;
-- initialization completed or not;
-- run launched/completed/recovered or not;
-- observed final iteration/physical time where available;
-- checkpoint/final artifact locations;
-- implementation deviations or uncertainties.
-
-Then hand off to `plan-analysis` / analysis execution. Scientific meaning belongs later.
+Scientific interpretation belongs downstream.
