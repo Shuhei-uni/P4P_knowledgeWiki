@@ -29,6 +29,32 @@ Start with:
 - [`.agents/skills/`](.agents/skills/) for the focused task-scoped repository
   workflows.
 
+## Human-invoked skills to remember
+
+Most skills are internal specialists and should be called by the scientific workflow when needed. The main skills the human should deliberately invoke are:
+
+- `$phase-planner` — use for a scientific catch-up before a phase, after the autonomous loop stops, or whenever you want to reconstruct where the project stands and discuss the next phase-level direction.
+- `$scientific-phase-loop` — use once the phase question, boundaries, and desired level of evidence are agreed. It autonomously designs and runs experiments, analyses results, revises hypotheses and assumptions, and continues until it can conclude the phase or reaches a genuine human boundary.
+- `$show-me-your-work` — optional audit/handoff tool when you specifically want a concise reconstruction of what an autonomous sequence did and where the supporting evidence lives.
+
+Typical flow:
+
+```text
+$phase-planner
+    ↓
+agree phase question / boundaries
+    ↓
+$scientific-phase-loop
+    ↓
+autonomous discovery or hypothesis-test cycles
+    ↓
+conclude phase / return to human
+    ↓
+$phase-planner
+```
+
+The human normally does not need to invoke experiment-design, setup, Fluent execution, numerical-analysis, interpretation, next-action, or closure skills individually; the loop should call them as required.
+
 ## Current execution proof
 
 The latest selected experiment is the 03A-Q01 S4-01 qualification. It loaded
