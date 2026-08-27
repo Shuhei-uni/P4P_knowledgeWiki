@@ -1,22 +1,15 @@
 # PyAnsys / PyFluent remote Fluent kit
 
-PyAnsys owns executable Fluent implementation, live inspection, native-run
-support, and machine-readable evidence checks. Project-specific scientific
-truth remains in ../Project/; reusable CFD and literature knowledge remains in
-../CFD_wiki/.
+PyAnsys owns executable Fluent implementation, live inspection, Python-supervised execution, and machine-readable evidence checks. Project-specific scientific truth remains in `../Project/`; reusable CFD and literature knowledge remains in `../CFD_wiki/`.
 
-The operating rule is simple: Fluent is a dependency-ordered state machine,
-and Fluent owns long iteration and native autosave. Python may prepare a case,
-issue a bounded native journal, reconnect, inspect, and analyse; it must not
-own a blanket laptop-side iteration/checkpoint loop.
+The operating rule is simple: Fluent is a dependency-ordered state machine, and autonomous-loop runs default to a Python/PyFluent runner supervised by an agent for the full planned horizon. TUI-driven iteration, Fluent journal submission, and GUI-owned execution require explicit human approval for that run.
 
 ## Start here
 
 1. Read the selected Project setup and results packet.
-2. Read the applicable focused skill under ../skills/.
-3. Read [the native run and autosave policy](knowledge/fluent-settings/native_run_and_autosave.md).
-4. Use the proven source module or script, then inspect critical live values
-   and identity before changing anything.
+2. Read the applicable focused skill under `../.agents/skills/`.
+3. Read [the current run supervision and recovery policy](knowledge/fluent-settings/native_run_and_autosave.md).
+4. Use the proven source module or script, then inspect critical live values and identity before changing anything.
 
 ## Canonical workflow
 
@@ -27,59 +20,44 @@ selected Project setup/results
     -> load case or mesh
     -> enable/change in dependency order
     -> reacquire, inspect, set, and read back critical values
-    -> write a case-only artifact
-    -> Fluent-native initialize/run/autosave
-    -> reconnect and verify endpoint/evidence
-    -> hand off interpretation to Project
+    -> write and reload-verify the case artifact
+    -> short Python/PyFluent smoke test
+    -> Python runner supervised by agent
+    -> verify final data and execution state
+    -> hand off to numerical analysis / Project interpretation
 ```
 
-Setup builders stop at a valid .cas.h5 artifact unless the selected
-experiment explicitly combines preparation with a bounded native journal.
-Long runs must remain solver-owned, and case/data identity must be explicit.
+Use `supervise-fluent-run` for the long-lived execution period. The agent should mostly wait while Fluent advances, wake on meaningful execution events, and never turn poor residuals or unexpected physics into an unapproved mid-run experiment change.
 
 ## Connection and run tools
 
-- scripts/connection/check_connection.py — endpoint health check.
-- scripts/connection/local_preflight.py — local runtime and endpoint preflight.
-- scripts/inspection/inspect_fluent_session.py — non-mutating live tree
-  inspection.
-- scripts/inspection/monitor_native_run.py — reconnecting read-only native run
-  monitor.
-- scripts/setup/generate_native_run_journal.py — generate a Fluent-owned
-  steady journal with transcript and residual export.
-- scripts/setup/run_03a_q01_s4_01_50.py — the selected 03A-Q01 runner, locked
-  to exactly 50 native iterations for the qualification packet.
-- scripts/inspection/post_simulation_analysis.py — selected read-only
-  residual, flux, and results-evidence checks.
+- `scripts/connection/check_connection.py` — endpoint health check.
+- `scripts/connection/local_preflight.py` — local runtime and endpoint preflight.
+- `scripts/inspection/inspect_fluent_session.py` — non-mutating live tree inspection.
+- `scripts/inspection/monitor_native_run.py` — legacy-named reconnecting read-only monitor that can supplement the supervising agent.
+- `scripts/setup/` — case-specific Python setup/run orchestration. Prefer a proven runner when one matches the approved experiment; otherwise keep new runners thin and explicit.
+- `scripts/setup/generate_native_run_journal.py` and other journal/native-queue tools — retained for historical or human-approved exception use; not autonomous-loop defaults.
+- `scripts/inspection/post_simulation_analysis.py` — selected read-only residual, flux, and results-evidence checks.
 
-The remaining setup and inspection scripts are kept only when they support a
-current Project experiment, a focused skill, a reusable source module, or
-unique evidence recovery. Campaign-specific scripts are not a general API;
-retired report builders and one-off run wrappers are recoverable from Git
-history.
+The remaining setup and inspection scripts are kept when they support a current Project experiment, a focused skill, a reusable source module, or unique evidence recovery. Campaign-specific scripts are not a general API.
 
 ## Source layout
 
-- src/pyansys_fluent/ — reusable connection, setup, journal, extraction,
-  monitoring, and evidence logic.
-- scripts/connection/ — connection and local-environment checks.
-- scripts/inspection/ — non-mutating discovery, snapshots, monitors, and
-  post-processing.
-- scripts/setup/ — thin setup and selected native-run orchestration.
-- knowledge/fluent-settings/native_run_and_autosave.md — durable native-run
-  policy and recovery limits.
-- cases/actual_setup_archives/ — small unique live-case exports retained for
-  exact setup reconciliation; Project records own their interpretation.
-- output/ — generated extracts and diagnostics, never the scientific authority.
+- `src/pyansys_fluent/` — reusable connection, setup, extraction, monitoring, and evidence logic.
+- `scripts/connection/` — connection and local-environment checks.
+- `scripts/inspection/` — non-mutating discovery, snapshots, monitors, and post-processing.
+- `scripts/setup/` — thin setup and Python-supervised run orchestration.
+- `server-profiles/` — non-secret per-server remote directory knowledge.
+- `knowledge/fluent-settings/native_run_and_autosave.md` — current run supervision, autosave, recovery, and exception policy.
+- `cases/actual_setup_archives/` — small unique live-case exports retained for exact setup reconciliation; Project records own their interpretation.
+- `output/` — generated extracts and diagnostics, never the scientific authority.
 
 ## Local runtime
 
-From this directory, use .venv/bin/python when the repository runtime exists.
-The optional bootstrap script can create a local environment:
+From this directory, use `.venv/bin/python` when the repository runtime exists. The optional bootstrap script can create a local environment:
 
 ```bash
 python3 scripts/connection/bootstrap_local_env.py
 ```
 
-Do not commit .env, .venv/, cache files, remote case/data files, or generated
-output. Do not edit any raw/ directory.
+Do not commit `.env`, `.venv/`, cache files, remote case/data files, or generated output. Do not edit any `raw/` directory.
