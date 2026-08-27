@@ -25,21 +25,23 @@ Prefer the smallest simulation strategy that can produce the needed learning.
 
 Sometimes that is one discriminating run. Sometimes it is a pair of controlled comparisons, a short sensitivity series, or a staged campaign where later setups become meaningful only in relation to earlier ones.
 
-For each strategy, ask:
+A supporting setup does not need high standalone impact if it creates the reference, comparison, or sequence that makes the campaign informative.
 
-- What uncertainty does this strategy reduce?
-- Why might one setup be enough, or why are several needed?
-- What would we learn if the behavior matches the hypothesis?
-- What would we learn if it does not?
-- What useful intermediate or unexpected behavior could appear?
-- Can the strategy distinguish competing explanations or reveal a trend that matters?
-- Could fewer runs or existing data provide the same information?
+## Design the evidence at the same time
 
-Do not force every setup to have high standalone impact. A supporting setup can be valuable because it creates the reference, comparison, or sequence that makes the campaign informative.
+Analysis planning is part of experiment design, not an afterthought.
+
+For each hypothesis or comparison, decide what result would let you judge it and what evidence must therefore exist when the run finishes. Work backward from the judgement you want to make.
+
+Prefer evidence that shows behaviour over the run rather than only a final snapshot. Iteration/time histories, residuals, balances, physical monitors, fluxes, inventories, and other question-specific values often tell much more than one endpoint.
+
+Plan useful plots, contours, and other visualisations before the simulation. Visual evidence should help reveal the behaviour relevant to the hypothesis, while concise tables can support exact comparisons.
+
+If a quantity must be instrumented before solving, make that requirement part of the experiment now. Do not discover after an expensive run that the decisive history or monitor was never recorded.
+
+For linked setups, make the evidence comparable enough that the intended campaign-level comparison is actually possible.
 
 ## Design for interpretation
-
-The strategy should make its own result as interpretable as possible.
 
 Identify the reference or parent state, the intentional changes, and the important conditions that should remain comparable across the setup or setup series.
 
@@ -47,21 +49,11 @@ Think about confounders before paying for the runs. Initialization, run length, 
 
 Do not demand artificial purity when the science requires a larger formulation change. Make the comparison and its limitations explicit instead.
 
-## Plan the evidence before the run
-
-A simulation only answers the question if the relevant behavior is observable.
-
-Before implementation, decide what evidence would make the strategy interpretable. This may include residual histories, mass and phase balances, monitor stability, inventories, fluxes, local fields, contours, time histories, comparisons, or derived quantities.
-
-Call `plan-analysis` when the analysis requirements are non-trivial. If decisive evidence must be recorded during the run, make that part of the experiment design before any case is launched.
-
-For linked setups, make sure the planned evidence is comparable enough to support the intended cross-case interpretation.
-
 ## Generate and question candidate strategies
 
 When several plausible ways exist to attack the uncertainty, generate a small set of genuinely different experiment strategies. A strategy may contain one setup or several linked setups.
 
-Use independent subagents, `arena`, or other broadening methods when they help expose alternatives.
+Use independent subagents, `arena`, or literature-focused `swarm` work when they help expose better alternatives.
 
 Then call `question-experiment` before selection. Judge each strategy against past simulation evidence, relevant literature or CFD guidance, and the three key criteria:
 
@@ -69,14 +61,12 @@ Then call `question-experiment` before selection. Judge each strategy against pa
 2. evidence and interpretability;
 3. cost-effectiveness.
 
-The purpose is not to distrust any idea because of when it was generated. It is to make every candidate earn its place through the same evidence-based judgement.
-
-`question-experiment` may recommend keeping, reshaping, merging, splitting, deferring, or rejecting strategies.
+The purpose is to make every candidate earn its place through the same evidence-based judgement. `question-experiment` may recommend keeping, reshaping, merging, splitting, deferring, or rejecting strategies.
 
 ## Select and formalize
 
 Choose the best justified strategy for the current uncertainty. The selected strategy may be a single setup or a small linked campaign.
 
-Then call `create-setup` to convert that strategy into one or more setup records. `create-setup` owns the precise setup handoff; `design-experiment` owns why the experiment strategy is worth doing.
+Then call `create-setup` to convert that strategy into one or more setup records. `design-experiment` owns why the experiment strategy is worth doing and what evidence will judge it. `create-setup` owns the precise handoff for implementation.
 
 Do not write predicted results into the setup records. The strategy defines what will be tested and what would be informative; the simulation data decides what actually happened.
