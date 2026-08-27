@@ -9,7 +9,7 @@ separator CFD project. It has four active systems with clear ownership:
   evidence interpretation, and claim limits.
 - `PyAnsys/` — executable Fluent automation, inspection, native-run support,
   and machine-readable evidence checks.
-- `skills/` — focused repository-local workflows for the active CFD, Fluent,
+- `.agents/skills/` — focused repository-local workflows for the active CFD, Fluent,
   evidence, and project-loop tasks.
 
 The former project source vault is not part of the current checkout. The old
@@ -26,8 +26,8 @@ Start with:
   knowledge and paper navigation.
 - [`PyAnsys/README.md`](PyAnsys/README.md) for the implementation and native
   Fluent execution workflow.
-- [`docs/agent-guides/README.md`](docs/agent-guides/README.md) for the small
-  set of task-scoped repository guides.
+- [`.agents/skills/`](.agents/skills/) for the focused task-scoped repository
+  workflows.
 
 ## Current execution proof
 

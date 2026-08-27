@@ -1,0 +1,4 @@
+interface:
+  display_name: "Setup Report"
+  short_description: "Assess and manage setup lifecycle and reports."
+  default_prompt: "Use $setup-report to assess a simulation setup's lifecycle and report needs, then ask me for the final call before making changes."

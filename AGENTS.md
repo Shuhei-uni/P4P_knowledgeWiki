@@ -6,7 +6,7 @@ This repository keeps four active systems separate:
 CFD_wiki = reusable external CFD knowledge and Fluent guidance
 Project  = current project-specific scientific truth and selected experiments
 PyAnsys  = implementation, execution, inspection, and evidence tools
-skills   = focused workflows that route work through those owners
+.agents/skills = focused workflows that route work through those owners
 ```
 
 ## Start with the current project
