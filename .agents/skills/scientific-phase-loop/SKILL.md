@@ -1,6 +1,6 @@
 ---
 name: scientific-phase-loop
-description: "Navigate a scientific phase from a human-defined phase goal toward a defensible conclusion. Use when the phase direction and boundaries are agreed but the route is not known in advance, and the agent should autonomously learn from evidence, design and run high-information simulations, interpret results, revise hypotheses, and keep testing until the phase is answered or a genuine human boundary is reached."
+description: "Navigate a scientific phase from a human-defined phase goal toward a defensible conclusion. Use when the phase direction and boundaries are agreed but the route is not known in advance, and the agent should autonomously learn from evidence, choose between discovery and hypothesis-test experiments, run simulations, interpret results, revise hypotheses, and keep testing until the phase is answered or a genuine human boundary is reached."
 ---
 
 # Scientific Phase Loop
@@ -68,21 +68,53 @@ Treat the unresolved parts of the phase as a landscape of uncertainty.
 
 There may be several plausible lines of investigation. Some may involve conservative numerical changes. Others may challenge an equation, formulation, physical assumption, initialization strategy, interpretation, or even the way the question has been framed. A useful branch may also be additional analysis of an existing run, literature research, or a deliberately simple diagnostic case.
 
-Do not force the phase into a fixed experiment matrix before the evidence justifies one.
+Do not force the phase into a fixed experiment matrix by default. When the important direction is genuinely unclear and breadth itself would reduce uncertainty, deliberately enter discovery mode and use a bounded matrix instead.
 
 Sketch the branches that are visible now. Leave the rest in the fog. As evidence arrives, new branches may become visible, old branches may collapse, and the most useful direction may change completely.
+
+## Choose the experiment-design mode
+
+When new simulation evidence is needed, decide what kind of uncertainty you are trying to reduce before designing the cases.
+
+### Discovery mode: find where to look
+
+Use discovery mode when literature, past results, and current reasoning still leave several plausible directions and it is not yet clear which mechanism, setting, formulation, or branch deserves an expensive test.
+
+Call `design-experiment` in discovery mode and use `explore-experiment-space` to create a compact experiment matrix of at most six cases.
+
+A rough budget of 500 to 1,000 iterations per case is a useful project ballpark when that is enough to expose early comparative behaviour. This is a planning default, not a universal convergence criterion.
+
+Optimise discovery mode for breadth, comparability, and information across the matrix. Use the resulting histories, plots, balances, monitors, and other evidence to identify promising directions, eliminate weak ones, reveal unexpected behaviour, and sharpen the next hypothesis.
+
+Treat these short runs as screening evidence. They can tell you where the evidence is pointing, but they normally cannot support the same strength of statement as a deliberately long hypothesis test.
+
+### Hypothesis-test mode: earn a stronger answer
+
+Use hypothesis-test mode when there is a specific, important hypothesis or question and the result could support a meaningful statement about how the model behaves.
+
+Call `design-experiment` in hypothesis-test mode. Prefer one focused experiment or a very small linked campaign whose evidence is designed around the claim you want to test.
+
+A run around 10,000 iterations may be an appropriate ballpark for the current project when that duration is deliberately chosen to expose the required behaviour. Do not treat 10,000 as a universal criterion; justify the run length from the model, question, and evidence required.
+
+Before spending the compute, be able to say what observations would support or weaken the hypothesis and what data must exist to make that judgement.
+
+The two modes are not fixed stages. Discovery can produce a focused hypothesis worth testing deeply. A long hypothesis test can expose an unexpected broad uncertainty that sends the loop back into discovery.
+
+Choose again whenever the evidence changes the nature of the uncertainty.
 
 ## Make simulations earn their cost
 
 Simulation time is expensive. Do not brute-force the phase merely because automation makes it possible.
 
-Prefer a small number of high-information runs over a large number of weakly motivated cases. A simulation earns its cost when its possible outcomes would materially change the current understanding, distinguish between plausible explanations, establish a useful bound, or reveal behaviour needed to decide the next move.
+In hypothesis-test mode, prefer a small number of high-information runs over many weakly motivated cases. In discovery mode, a somewhat broader matrix is justified only because the combined comparison is the information source; keep it bounded and make every case contribute to reducing uncertainty.
 
-Before committing compute, ask what the run can teach that the current evidence cannot.
+A simulation earns its cost when its possible outcomes would materially change the current understanding, distinguish between plausible explanations, establish a useful bound, reveal behaviour needed to decide the next move, or efficiently screen several plausible directions.
+
+Before committing compute, ask what the run or matrix can teach that the current evidence cannot.
 
 Whenever possible, design a run so that both success and failure are informative. Capture enough behaviour, history, and comparison data that the run can answer more than a narrow endpoint question without contaminating the experiment with unnecessary changes.
 
-Do not confuse a large sweep with a strong investigation. Coverage matters only when the cases are chosen to resolve uncertainty.
+Do not confuse a large sweep with a strong investigation. Even discovery mode is a deliberately small scientific matrix, not brute-force coverage.
 
 ## Learn, then look again
 
@@ -97,6 +129,8 @@ What changed in our understanding?
         ↓
 What remains uncertain?
         ↓
+Is the uncertainty broad or focused now?
+        ↓
 What would be most informative next?
 ```
 
@@ -104,7 +138,7 @@ Sometimes the answer is another experiment. Sometimes it is more analysis of the
 
 The loop should remain responsive to evidence rather than loyal to its original plan.
 
-When another experiment is justified, form or revise the hypothesis, design the smallest high-information experiment or campaign that can test it, run it, analyse the resulting evidence, interpret it, and update the phase understanding before choosing again.
+When another experiment is justified, form or revise the hypothesis, choose discovery or hypothesis-test mode, design the experiment or campaign, run it, analyse the resulting evidence, interpret it, and update the phase understanding before choosing again.
 
 ## Use specialists to deepen the investigation
 
