@@ -20,7 +20,7 @@ Stage boundaries, interventions, and numerical-failure tails are annotations on 
 | Evidence | Presentation |
 |---|---|
 | continuous history | line versus iteration |
-| sampled history | unconnected markers at recorded iterations |
+| sampled history | a line within each retained contiguous window; no connection across unrecorded gaps |
 | several checkpoints only | markers at actual cumulative iterations |
 | one checkpoint | table only |
 | unavailable | explicit status statement; no placeholder figure |

@@ -7,7 +7,7 @@ Branch case/data, journals, transcripts, and sampled residual exports are stored
 
 ## F08 — qualified partial evidence
 
-The branch-linked physical reports are continuous from 9,000–12,045. Figures plot the validated interval 9,000–12,000; 12,001–12,045 is excluded as the failed next-stage tail. Residual points are sampled stage windows and remain unconnected. The older 3,939–4,898 residual fragment is excluded as unjoinable.
+The branch-linked physical reports are continuous from 9,000–12,045. Figures plot the validated interval 9,000–12,000; 12,001–12,045 is excluded as the failed next-stage tail. Sampled residuals are connected only within each retained stage window. The older 3,939–4,898 residual fragment is excluded as unjoinable.
 
 1. [Sampled scaled residuals](./plots/03a-stage3/iteration-led/server1/F08/01-scaled-residuals-vs-iteration.png)
 2. [Mass convergence, 9,000–12,000](./plots/03a-stage3/iteration-led/server1/F08/02-mass-convergence-vs-iteration.png)
@@ -21,7 +21,7 @@ No valid solve endpoint, residual history, or physical history was recovered. Th
 
 ## F12 — completed six-stage sequence
 
-Physical histories are continuous from 1–18,000. The six retained residual exports each contain 250 sampled points; they are shown as unconnected markers at native iterations, with no inferred values between samples.
+Physical histories are continuous from 1–18,000. The six retained residual exports each contain 250 sampled points; each retained window is a line segment at native iterations, with no line across the gaps between windows.
 
 1. [Sampled scaled residuals](./plots/03a-stage3/iteration-led/server1/F12/01-scaled-residuals-vs-iteration.png)
 2. [Mass convergence](./plots/03a-stage3/iteration-led/server1/F12/02-mass-convergence-vs-iteration.png)

@@ -15,13 +15,13 @@
 | F05 | five figures | continuous residual and physical histories 1–3,000 |
 | F06 | five figures | continuous joined histories 1–6,000; phase-fraction residual absent during carrier stage |
 | F07 | five figures | continuous 1–9,174; 9,151–9,174 is a numerical-failure tail |
-| F08 | five qualified partial figures | physical history 9,000–12,000; residuals are sampled windows; next-stage tail excluded |
+| F08 | five qualified partial figures | physical history 9,000–12,000; sampled residual windows are line segments; next-stage tail excluded |
 | F09 | five figures | continuous residual and physical histories 1–15,000 |
 | F10 | unavailable statement | initialized case evidence only; no valid solve history |
 | F11 | five figures | continuous joined histories 1–15,000 |
-| F12 | five figures | physical history 1–18,000; residuals are sampled windows, shown as unconnected markers |
+| F12 | five figures | physical history 1–18,000; residuals are sampled windows, shown as separate line segments |
 
-No figure fabricates continuity. Continuous series are lines, sampled residual exports are unconnected markers at their native iterations, and unavailable evidence has no placeholder plot.
+No figure fabricates continuity. Continuous series are lines; sampled residual exports are separate lines within each retained window and never bridge an unrecorded gap; unavailable evidence has no placeholder plot.
 
 ## Result packages
 

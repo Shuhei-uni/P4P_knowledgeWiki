@@ -1,6 +1,15 @@
 # 03A Stage 4 — Initial Experiment Brief
 
-## Execution status — S4-03 recovery interrupted
+## Historical execution status — superseded by the updated result report
+
+> The execution narrative below is the original 2026-08-23 snapshot.  The
+> authoritative Server 2 tree was rechecked on 2026-08-27 and contains later
+> S4-01/S4-02/S4-03 artifacts, including a complete S4-03 recovery endpoint.
+> Use the [updated execution evidence report](03a-stage4-native-queue-execution-2026-08-23.md)
+> and its [Server 2 evidence package](evidence/03a-stage4-server2/README.md)
+> for current run status, relocation paths, histories, and plots.
+
+## Execution status — S4-03 recovery interrupted (historical snapshot)
 
 The first authoritative native queue was submitted at `2026-08-22T12:30:11Z`
 under the non-overwriting label
