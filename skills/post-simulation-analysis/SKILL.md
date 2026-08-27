@@ -85,7 +85,15 @@ and a partial history can still be useful exploratory evidence.
 ## Report
 
 Write evidence to the selected experiment's `Project/experiments/.../results.md`
-and link raw JSON/CSV/plot/transcript artifacts. Keep these sections distinct:
+and link raw JSON/CSV/plot/transcript artifacts. The existing
+`PyAnsys/scripts/inspection/post_simulation_analysis.py` can update a selected
+record with `--results-md path/to/results.md`; select only the checks required
+by the setup with repeated `--check` options. Its generated block is bounded by
+the `CODEX GENERATED EVIDENCE: post-simulation-analysis` markers, so rerunning
+the workflow replaces only machine-owned text and preserves human-owned
+interpretation.
+
+Keep these sections distinct:
 
 ```text
 what ran | identity/horizon | measured values | numerical/evidence state
@@ -96,6 +104,12 @@ Report evidence before meaning. Do not automatically choose a preferred model,
 declare validation, or create the next experiment. `project-loop` owns the
 findings/next-direction handoff; interpretation defaults to the user unless
 explicitly delegated or governed by pre-agreed criteria.
+
+The generated handoff must retain the native iteration or physical-time
+coordinate, units, signs, and surface/zone scope. A live snapshot without an
+iteration/time coordinate is reported as such. Extraction status (`complete`,
+`partial`, `unavailable`, or `failed`) is not a scientific adequacy verdict;
+raw transcripts remain debug artifacts rather than report prose.
 
 ## Known working code
 

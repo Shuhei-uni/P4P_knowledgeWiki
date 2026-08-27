@@ -45,6 +45,17 @@ Use one result file with clear sections:
 
 Measured evidence must remain distinguishable from interpretation. A separate `decision.md`, execution YAML, archive tree, or additional global index is not required by default; add one only when an actual workflow problem demonstrates the need.
 
+The read-only `post_simulation_analysis.py` workflow may append a bounded
+machine-evidence block with `--results-md path/to/results.md`. It owns only the
+`CODEX GENERATED EVIDENCE: post-simulation-analysis` marker block: rerunning it
+replaces that block and preserves human-authored setup, observations, findings,
+and interpretation text outside the markers. The generated block reports
+extraction status, native coordinates, units, scope, artifact links, and
+missing evidence; it does not choose a case, declare convergence or validation,
+or select the next experiment. Large JSON/CSV/plot/transcript artifacts remain
+with their PyAnsys output directory and are linked rather than copied into the
+Project record.
+
 ## Selection and handoff rules
 
 - A record is selected only after the project question, parent, controlled change, and evidence request are explicit.

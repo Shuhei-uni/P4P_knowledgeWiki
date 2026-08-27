@@ -103,7 +103,9 @@ connect
 - `scripts/inspection/monitor_native_run.py`: read-only reconnecting monitor for Fluent-native runs
 - `scripts/setup/generate_native_run_journal.py`: generate a Fluent-owned steady run with native transcript and post-run residual-history export
 - `scripts/inspection/inspect_fluent_session.py`: non-mutating tree inspection
+- `scripts/inspection/post_simulation_analysis.py`: selected read-only checks with an optional bounded `results.md` evidence handoff
 - `src/pyansys_fluent/common.py`: shared remote/session/path helpers
+- `src/pyansys_fluent/results_evidence.py`: marker-bounded Project `results.md` evidence handoff
 - `src/pyansys_fluent/dependency_workflow.py`: dependency-aware step runner and failure classifier
 - `src/pyansys_fluent/extraction.py`: shared read-mostly extraction helpers for live/offline setup capture
 - `src/pyansys_fluent/setup_common.py`: shared setup-name, boundary, and remap helpers
