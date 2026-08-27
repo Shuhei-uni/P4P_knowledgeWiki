@@ -1,113 +1,127 @@
 ---
 name: interpret-experiment
-description: "Convert simulation evidence into bounded scientific interpretation with explicit claim-to-evidence links, alternative explanations, and limitations. Use after the required analysis is available and numerical adequacy has been assessed."
+description: "Turn simulation evidence into a bounded scientific interpretation. Use after the required analysis exists and numerical adequacy has been assessed, to separate hypothesis from observation, interpretation, and conclusion, and to state only what the simulation evidence actually supports."
 ---
 
 # Interpret Experiment
 
-Interpret what the evidence supports, not what the experiment was hoped to show.
+Interpret what the simulation showed, not what you expected it to show.
 
-## Preconditions
+Reasoning proposes. Simulation tests. Data constrains the conclusion.
 
-Read:
+Literature, prior experience, and physical intuition may help explain a result. They do not substitute for the result itself.
 
-- `setup.md` question and controlled changes;
-- analysis plan;
-- measured/derived evidence and plots;
-- `cfd-numerical-analysis` status;
-- relevant comparison results.
+## Start from the evidence
 
-If decisive evidence is missing or numerical status is `insufficient`/`failed`, restrict interpretation accordingly and state the gap.
+Read the experiment question, the controlled changes, the analysis plan, the measured and derived data, the plots, the comparison cases, and the numerical-quality assessment.
 
-## Separate four levels
+If decisive evidence is missing, say what cannot be concluded. If the simulation is numerically inadequate, interpret the numerical behavior that was actually observed without turning it into a physics claim.
 
-Keep these distinct:
+A simulation run is not automatically scientific evidence for the intended mechanism. Its value depends on whether the setup represented the intended experiment, whether the required behavior was observed, and whether the numerical solution is credible enough for the claim being made.
 
-1. **Observation** — directly seen in a plot/number/state.
-2. **Interpretation** — what that observation likely means.
-3. **Hypothesis/explanation** — plausible mechanism not yet proven.
-4. **Conclusion** — answer justified by the experiment and its controls.
+## Keep four levels separate
 
-Do not write hypotheses as observations.
+### Hypothesis
 
-## Claim-evidence discipline
+What was expected before the evidence was seen.
 
-For every major claim identify:
+A hypothesis can come from theory, Fluent guidance, literature, previous simulations, engineering intuition, or a competing explanation. It is not a result.
 
-- supporting figure/table/metric;
-- exact comparison;
-- numerical-quality status;
-- important limitation;
-- plausible alternative explanation.
+### Observation
 
-Prefer:
+What the simulation data directly shows.
+
+Observations should be traceable to a number, history, field, plot, comparison, solver event, or other recorded evidence.
+
+### Interpretation
+
+What those observations may mean.
+
+Interpretation can connect multiple observations and use scientific reasoning, but it must remain distinguishable from what was measured directly.
+
+### Conclusion
+
+What the experiment actually allows us to say about its question.
+
+The conclusion should be no stronger than the evidence, controls, and numerical quality permit.
+
+Do not collapse these four levels into one narrative.
+
+## Anchor claims to behavior
+
+For every important claim, be able to answer:
+
+- What simulation behavior supports this?
+- Where is that behavior recorded?
+- What comparison makes the claim meaningful?
+- Is the simulation numerically trustworthy enough for this claim?
+- What else could plausibly explain the same observation?
+
+Prefer specific evidence over labels such as `better`, `stable`, `improved`, or `physical` unless those terms are tied to explicit behavior or metrics.
+
+The most useful interpretation often comes from histories and behavior over the run, not only the final checkpoint.
+
+## Respect the limits of the experiment
+
+Do not claim causality unless the comparison isolates the relevant change well enough to justify it.
+
+Do not turn a solver failure into a physics conclusion unless the experiment specifically establishes that connection.
+
+Do not treat a numerically completed run as a valid physical result merely because Fluent reached the requested iteration count or timestep count.
+
+Do not interpret beyond the model being tested. A credible result can support a conclusion about the chosen CFD formulation without proving that the real separator behaves identically.
+
+If the evidence only supports a directional, conditional, numerical, or exploratory conclusion, say exactly that.
+
+## Use outside knowledge as context, not replacement evidence
+
+Use `cfd-wiki`, literature, Fluent documentation, or specialist reasoning when they help explain an observed mechanism or challenge an interpretation.
+
+Keep the boundary visible:
 
 ```text
-Claim
--> measured evidence
--> comparison
--> limitation
+simulation evidence -> what happened in this experiment
+outside knowledge    -> why that behavior might make sense
 ```
 
-Avoid vague statements such as "more stable", "better", or "improved" unless the metric defining them is explicit.
+Unless prior evidence is genuinely equivalent to the present setup and question, do not use it to claim what this simulation must have done.
 
-## Causality gate
+When a consequential interpretation depends heavily on a proposed mechanism, use independent reviewers or `interrogate` to look for alternative explanations and unsupported leaps.
 
-Before claiming a controlled variable caused an effect, ask:
+## Treat unexpected results as valuable evidence
 
-- Was it the only meaningful change?
-- Were cases compared at equivalent states/windows?
-- Could initialization, timestep, mesh, solver settings, or run length explain the difference?
-- Is the observed response larger than known numerical/temporal variability?
+A result that contradicts the hypothesis is not a failed experiment if it teaches us something important.
 
-If not, use association/directional language rather than causal language.
+A numerical failure, unexpected trend, non-monotonic response, plateau, oscillation, reversal, or apparently insignificant change may all reshape the investigation.
 
-## Negative and failed experiments
+Ask what the evidence changed in our understanding, not whether it matched the prediction.
 
-A failed or inconclusive simulation can still support useful conclusions about:
+## Write the scientific record
 
-- numerical viability;
-- implementation feasibility;
-- invalid assumptions;
-- evidence gaps;
-- eliminated hypotheses.
+`results.md` should preserve the evidence before the story.
 
-Do not turn numerical failure into a physics conclusion unless the experiment specifically establishes that link.
+Make clear:
 
-## Alternative explanations
-
-For consequential findings, generate at least the strongest plausible alternative explanation and state what evidence would distinguish it.
-
-Use `interrogate` when the result will materially influence the next project direction.
-
-## Literature/reference use
-
-Use `cfd-wiki` when external knowledge is needed to contextualize a mechanism or modelling expectation. Keep clear which statements come from the simulation and which come from literature/general CFD knowledge.
-
-Do not retroactively redefine the experiment to match literature.
-
-## Write results.md
-
-Structure report-facing interpretation around:
-
-- experiment question;
 - what was actually run;
-- measured evidence and plots;
-- numerical/evidence quality;
-- neutral observations;
-- bounded interpretation;
-- alternative explanations/limitations;
+- what data and plots were examined;
+- what was directly observed;
+- the numerical-quality limitations;
+- the bounded interpretation;
+- alternative explanations where they matter;
+- the conclusion the experiment supports;
 - what remains unresolved.
 
-Preserve historical evidence; do not silently overwrite an earlier interpretation without provenance.
+Significant claims should be traceable to the evidence that carries them.
+
+Preserve historical observations and results. Do not silently rewrite old evidence to fit the current interpretation.
 
 ## Handoff
 
-Return a concise set of:
+Return the experiment to the scientific phase with a concise account of:
 
-- supported conclusions;
-- unsupported/unsafe claims;
-- unresolved explanations;
-- evidence that would resolve them.
+- what the simulation established;
+- what it did not establish;
+- what changed in the current understanding;
+- what uncertainty remains.
 
-Then invoke `next-action` rather than automatically proposing another setup.
+The next step should emerge from that updated understanding rather than from loyalty to the original hypothesis or experiment plan.
