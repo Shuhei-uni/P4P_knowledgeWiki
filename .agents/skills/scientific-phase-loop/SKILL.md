@@ -106,6 +106,16 @@ The two modes are not fixed stages. Discovery can produce a focused hypothesis w
 
 Choose again whenever the evidence changes the nature of the uncertainty.
 
+## Execute approved experiments through supervised Python
+
+Once `create-setup` has made the experiment precise, call `implement-experiment` to build and verify it. Long calculations then pass to `supervise-fluent-run`.
+
+For experiments inside this autonomous loop, the default execution mechanism is a Python/PyFluent runner supervised by an agent for the full planned horizon.
+
+Do not independently choose TUI-driven iteration, a Fluent journal/batch, or GUI-owned execution. Those mechanisms require explicit human approval for that specific run. If the Python/PyFluent path is blocked, return the execution evidence rather than silently changing run mechanism.
+
+The run supervisor is an execution observer, not another scientist. It should let poor residuals, poor balances, or unexpected model behaviour continue to the planned horizon when Fluent can still solve. A genuine initialization failure, floating-point/fatal error, process crash, unreconciled run state, or failed final save returns the experiment to this loop for a rethink.
+
 ## Make simulations earn their cost
 
 Simulation time is expensive. Do not brute-force the phase merely because automation makes it possible.
@@ -154,7 +164,7 @@ After each meaningful experiment or analysis cycle, call `check-phase-closure` b
 
 The orchestrator owns the scientific direction, not every specialist discipline beneath it.
 
-Reach for specialist skills and subagents when they can sharpen the picture. They may investigate previous experiments, design candidate tests, assess CFD numerics, analyse data, apply statistics, search literature, implement a Fluent case, or challenge an interpretation.
+Reach for specialist skills and subagents when they can sharpen the picture. They may investigate previous experiments, design candidate tests, assess CFD numerics, analyse data, apply statistics, search literature, implement a Fluent case, supervise an execution, or challenge an interpretation.
 
 Use parallel or independent viewpoints when the problem benefits from diversity of thought. Use adversarial review when a consequential conclusion, experiment design, assumption, or interpretation deserves to be challenged.
 
@@ -187,7 +197,7 @@ The human defines the phase goal and may define boundaries, preferences, compute
 
 Within those boundaries, use judgement. Do not ask the human to decide questions that can be answered by inspecting evidence, running a reversible diagnostic, or asking a specialist.
 
-Return to the human when the investigation reaches a genuine judgement boundary: a major change in project direction, a new modelling assumption with broad consequences, an important ambiguity that evidence cannot resolve, a material compute or resource decision outside the agreed scope, or an explicit human-selection gate.
+Return to the human when the investigation reaches a genuine judgement boundary: a major change in project direction, a new modelling assumption with broad consequences, an important ambiguity that evidence cannot resolve, a material compute or resource decision outside the agreed scope, an execution mechanism requiring TUI/journal approval, or an explicit human-selection gate.
 
 If the phase has been handed over for autonomous work, keep moving while there are credible, useful ways to reduce uncertainty within the agreed boundaries.
 
