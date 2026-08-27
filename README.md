@@ -62,9 +62,9 @@ the verified 33,000-iteration parent and issued exactly one Fluent-native
 `/solve/iterate 50` command. The Project packet records the endpoint,
 transcript, residual history, physical histories, hashes, and limitations:
 
-- [`03A-Q01 setup`](Project/experiments/03A/q01-s4-01-50-iteration-qualification/setup.md)
-- [`03A-Q01 results`](Project/experiments/03A/q01-s4-01-50-iteration-qualification/results.md)
-- [`03A tracer index`](Project/experiments/03A/index.md)
+- [`03A-Q01 setup`](Project/experiments/full-geometry-03a-mixture-08b-parity-baseline/q01-s4-01-50-iteration-qualification/setup.md)
+- [`03A-Q01 results`](Project/experiments/full-geometry-03a-mixture-08b-parity-baseline/q01-s4-01-50-iteration-qualification/results.md)
+- [`03A tracer index`](Project/experiments/full-geometry-03a-mixture-08b-parity-baseline/index.md)
 - [`Q01 runner`](PyAnsys/scripts/setup/run_03a_q01_s4_01_50.py)
 
 ## Source and generated files
