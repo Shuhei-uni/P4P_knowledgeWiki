@@ -150,7 +150,7 @@ class PostprocessLiveTests(unittest.TestCase):
         self.assertAlmostEqual(metrics["eta_phase"], 1.0 - (10.0 / 116.92))
         self.assertAlmostEqual(metrics["x_out"], 80.0 / 90.0)
         self.assertAlmostEqual(metrics["mass_imbalance_kg_s"], abs((116.92 + 80.69) - 196.90))
-        self.assertIn("small relative", metrics["mass_imbalance_note"])
+        self.assertIn("not an acceptance criterion", metrics["mass_imbalance_note"])
 
     def test_compile_and_render_report(self) -> None:
         result = compile_postprocess_result(

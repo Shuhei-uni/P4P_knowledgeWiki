@@ -27,7 +27,11 @@ from typing import Any, Mapping
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
-from pyansys_fluent.common import remote_file_exists, safe_get_state  # noqa: E402
+from pyansys_fluent.common import (  # noqa: E402
+    remote_file_exists,
+    require_remote_files,
+    safe_get_state,
+)
 from pyansys_fluent.connection import connect  # noqa: E402
 
 
@@ -340,15 +344,13 @@ def patch_phase_two_liquid(solver: Any, register: str) -> None:
 
 def write_case(solver: Any, path: str) -> None:
     solver.settings.file.write_case(file_name=path)
-    if not remote_file_exists(solver, path):
-        raise RuntimeError(f"Fluent did not expose written case: {path}")
+    require_remote_files(solver, (path,), "Fluent did not expose written case")
 
 
 def write_pair(solver: Any, case: str, data: str) -> None:
     write_case(solver, case)
     solver.settings.file.write_data(file_name=data)
-    if not remote_file_exists(solver, data):
-        raise RuntimeError(f"Fluent did not expose written data: {data}")
+    require_remote_files(solver, (data,), "Fluent did not expose written data")
 
 
 def main() -> int:

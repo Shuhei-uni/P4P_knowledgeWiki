@@ -9,7 +9,7 @@ import json
 import os
 import re
 import time
-from collections.abc import Callable, Mapping
+from collections.abc import Callable, Iterable, Mapping
 from pathlib import Path
 from typing import Any
 
@@ -35,6 +35,23 @@ def quote_scheme_string(text: str) -> str:
 def remote_file_exists(solver: Any, path_text: str) -> bool:
     quoted = quote_scheme_string(path_text)
     return bool(solver.scheme.eval(f'(file-exists? "{quoted}")'))
+
+
+def missing_remote_files(solver: Any, paths: Iterable[str]) -> list[str]:
+    """Return required remote paths that Fluent cannot currently see."""
+    normalized_paths = [str(path) for path in paths]
+    return [path for path in normalized_paths if not remote_file_exists(solver, path)]
+
+
+def require_remote_files(
+    solver: Any,
+    paths: Iterable[str],
+    label: str = "required remote artifacts",
+) -> None:
+    """Raise a focused error when one or more remote artifacts are missing."""
+    missing = missing_remote_files(solver, paths)
+    if missing:
+        raise FileNotFoundError(f"{label}: missing remote artifact(s): {', '.join(missing)}")
 
 
 def remote_chdir(solver: Any, path_text: str) -> None:
