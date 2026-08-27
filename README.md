@@ -35,9 +35,10 @@ Most skills are internal specialists and should be called by the scientific work
 
 - `$phase-planner` — use for a scientific catch-up before a phase, after the autonomous loop stops, or whenever you want to reconstruct where the project stands and discuss the next phase-level direction.
 - `$scientific-phase-loop` — use once the phase question, boundaries, and desired level of evidence are agreed. It autonomously designs and runs experiments, analyses results, revises hypotheses and assumptions, and continues until it can conclude the phase or reaches a genuine human boundary.
+- `$workflow-surgeon` — use when the agent workflow itself is frustrating, repeatedly behaves badly, has a missing responsibility, stale rule, poor handoff, or bad default. It diagnoses the root cause with fresh reviewers and prefers the smallest surgical change over redesigning the skill system. It may also self-invoke when frustrated user feedback clearly points to an identifiable workflow failure.
 - `$show-me-your-work` — optional audit/handoff tool when you specifically want a concise reconstruction of what an autonomous sequence did and where the supporting evidence lives.
 
-Typical flow:
+Typical scientific flow:
 
 ```text
 $phase-planner
@@ -51,6 +52,18 @@ autonomous discovery or hypothesis-test cycles
 conclude phase / return to human
     ↓
 $phase-planner
+```
+
+Workflow maintenance is separate from the scientific loop:
+
+```text
+human encounters workflow friction
+    ↓
+$workflow-surgeon
+    ↓
+diagnose root cause
+    ↓
+smallest justified skill / handoff / rule edit
 ```
 
 The human normally does not need to invoke experiment-design, setup, Fluent execution, numerical-analysis, interpretation, next-action, or closure skills individually; the loop should call them as required. Inside the loop, long Fluent runs default to a Python/PyFluent runner supervised by an agent. TUI-driven or Fluent-journal execution requires explicit human approval for that run.
@@ -90,7 +103,9 @@ uncertainty labels needed for later rechecks.
 5. For autonomous-loop execution, use a Python/PyFluent runner supervised by
    an agent through `supervise-fluent-run`; do not switch to TUI or a Fluent
    journal without explicit human approval.
-6. Run the repository’s targeted tests and stale-path check after cross-system
+6. When improving the agent workflow, prefer `$workflow-surgeon` so changes are
+   root-cause-driven and surgical rather than broad rewrites.
+7. Run the repository’s targeted tests and stale-path check after cross-system
    edits.
 
 Do not commit raw papers, the large Fluent manual, local environments, Python
