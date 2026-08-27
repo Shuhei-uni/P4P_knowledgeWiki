@@ -402,10 +402,17 @@ def configure_residual_history(solver: Any, size: int) -> dict[str, Any]:
     return state
 
 
-def configure_autosave(solver: Any, root: str) -> dict[str, Any]:
+def configure_autosave(
+    solver: Any,
+    root: str,
+    *,
+    data_frequency: int = 5000,
+) -> dict[str, Any]:
+    if data_frequency <= 0:
+        raise ValueError(f"Autosave data frequency must be positive: {data_frequency!r}")
     requested = {
         "case_frequency": "each-time",
-        "data_frequency": 5000,
+        "data_frequency": data_frequency,
         "root_name": win(root, "checkpoint-%i"),
         "retain_most_recent_files": True,
         "max_files": 6,

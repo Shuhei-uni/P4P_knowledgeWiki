@@ -124,6 +124,7 @@ def render_results_evidence(
     requested = ", ".join(
         f"`{_inline(record.get('name', 'unnamed'))}`" for record in normalized_records
     ) or "none"
+    load_mode = load_summary.get("mode") or load_summary.get("load_mode") or "unavailable"
 
     lines = [
         BEGIN_MARKER,
@@ -132,7 +133,7 @@ def render_results_evidence(
         "### What ran",
         f"- Run label: `{_inline(run_label)}`",
         f"- Selected checks: {requested}",
-        f"- Case/data action: `{_inline(load_summary.get('mode', 'unavailable'))}`",
+        f"- Case/data action: `{_inline(load_mode)}`",
         "",
         "### Run identity / horizon",
         *_case_identity_lines(case_identity),

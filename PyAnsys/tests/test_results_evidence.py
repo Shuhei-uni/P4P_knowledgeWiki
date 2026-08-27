@@ -76,6 +76,28 @@ class ResultsEvidenceTests(unittest.TestCase):
         self.assertIn("does not choose a preferred case or model", markdown)
         self.assertIn("../../../PyAnsys/output/demo.json", markdown)
 
+    def test_render_reports_explicit_load_mode(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "Project" / "experiments" / "demo" / "results.md"
+            markdown = render_results_evidence(
+                results_path=path,
+                run_label="explicit-load",
+                load_summary={
+                    "load_mode": "explicit-read_case-then-read_data",
+                },
+                case_identity={
+                    "status": "verified",
+                    "basis": "explicit case/data load performed by this workflow",
+                },
+                fluent_version="25.2.0",
+                records=[],
+            )
+
+        self.assertIn(
+            "Case/data action: `explicit-read_case-then-read_data`",
+            markdown,
+        )
+
     def test_update_appends_without_touching_human_interpretation(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "Project" / "experiments" / "demo" / "results.md"
