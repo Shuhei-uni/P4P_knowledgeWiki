@@ -10,7 +10,7 @@ from pathlib import Path
 from pathlib import PureWindowsPath
 from typing import Any
 
-from pyansys_fluent.common import quote_scheme_string
+from pyansys_fluent.common import remote_chdir, remote_file_exists
 from pyansys_fluent.dependency_workflow import (
     safe_allowed_values,
     safe_child_names,
@@ -217,11 +217,6 @@ def capture_candidate_paths(
     return captures
 
 
-def remote_file_exists(solver: Any, path_text: str) -> bool:
-    quoted = quote_scheme_string(path_text)
-    return bool(solver.scheme.eval(f'(file-exists? "{quoted}")'))
-
-
 def load_remote_case_data(
     solver: Any,
     case_path: str,
@@ -235,7 +230,7 @@ def load_remote_case_data(
 
     case_name = PureWindowsPath(case_path).name
     case_dir = str(PureWindowsPath(case_path).parent)
-    solver.scheme.eval(f'(chdir "{quote_scheme_string(case_dir)}")')
+    remote_chdir(solver, case_dir)
 
     if data_path:
         expected_data_name = case_name.removesuffix(".cas.h5") + ".dat.h5"

@@ -67,11 +67,8 @@ If `ansys-fluent-visualization` imports fail, still continue with `ansys-fluent-
 
 ## 10. Local one-inlet parity script behaves differently than older notes
 
-The current local hardened smoke-test path is documented separately in:
-
-```text
-docs/LOCAL_ONE_INLET_SMOKE_TEST.md
-```
+The current project-facing smoke-test evidence is documented in
+Project/experiments/purnantov2-08-one-inlet-massflow-recreation/technical-reconstruction-smoke-test.md.
 
 Use that note when the task is:
 

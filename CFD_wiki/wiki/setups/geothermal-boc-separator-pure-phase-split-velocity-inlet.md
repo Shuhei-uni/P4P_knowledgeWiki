@@ -12,10 +12,10 @@ This page merges the stable baseline solver stack from the 2013 reconstruction w
 - Paper extraction: [purnanto-2013-cfd-geothermal-separator](../sources/purnanto-2013-cfd-geothermal-separator.md)
 - Baseline reconstruction: [geothermal-boc-separator-fluent-2013-baseline](geothermal-boc-separator-fluent-2013-baseline.md)
 - Reusable split-inlet rule: [geothermal-boc-separator-two-zone-split-inlet](geothermal-boc-separator-two-zone-split-inlet.md)
-- Setup lineage used for the velocity-inlet variants:
-  - `../../../Setups/past/reported/04-mixed-wet-half-actual-area.md`
-  - `../../../Setups/past/archived/06-pure-phase-split-fixed-velocity.md`
-  - `../../../Setups/past/reported/07-pure-phase-split-actual-area.md`
+- Project experiment records used for the velocity-inlet variants:
+  - [mixed wet-half actual-area record](../../../Project/experiments/purnanto-04-mixed-wet-half-actual-area/setup.md)
+  - [pure-phase fixed-velocity record](../../../Project/experiments/purnanto-06-pure-phase-fixed-velocity/setup.md)
+  - [pure-phase actual-area record](../../../Project/experiments/purnanto-07-pure-phase-actual-area/setup.md)
 
 ## Evidence Labels
 - `Reported`: directly stated in the 2013 paper.
@@ -264,4 +264,5 @@ total inlet  ~= 195.37 kg/s
 ## Cross-Linkage
 - `extends` [geothermal-boc-separator-two-zone-split-inlet](geothermal-boc-separator-two-zone-split-inlet.md) by turning the general split rule into a full pure-phase velocity-inlet package.
 - `reuses` [geothermal-boc-separator-fluent-2013-baseline](geothermal-boc-separator-fluent-2013-baseline.md) for the solver, numerics, gravity, and material basis.
-- Project-facing trace should remain in `ResearchProject_wiki/wiki/model/inlet-regimes.md`.
+- Project-facing trace is maintained in [the Project inlet-regimes
+  interpretation](../../../Project/experiments/purnanto-08c-inlet-loading-sensitivity/inlet-regimes-interpretation.md).

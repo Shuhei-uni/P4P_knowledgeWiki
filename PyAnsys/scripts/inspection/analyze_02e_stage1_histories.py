@@ -21,7 +21,6 @@ import numpy as np
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 INPUT_DIR = PROJECT_ROOT / "output" / "02e_stage1_recovered_reports_20260816"
 OUTPUT_DIR = INPUT_DIR
-REPORT_DIR = PROJECT_ROOT.parent / "Setups" / "reports" / "02e"
 TRANSCRIPT_DIR = INPUT_DIR / "transcripts"
 LIQUID_DENSITY = 881.77
 INITIAL_Y010_MASS = 4224.25373425353
@@ -190,7 +189,7 @@ def save_inventory_figure(
     title: str,
     filename: str,
 ) -> None:
-    """Save a four-family inventory figure in the recovery and report folders."""
+    """Save a four-family inventory figure in the recovered evidence folder."""
     fig, axes = plt.subplots(2, 2, figsize=(13, 9), constrained_layout=True)
     families = ["PO", "OV", "MF", "EF"]
     divisor = LIQUID_DENSITY if quantity == "volume" else 1.0
@@ -217,8 +216,7 @@ def save_inventory_figure(
         ax.grid(True, alpha=0.25)
         ax.legend(fontsize=7, ncol=2)
     fig.suptitle(title)
-    for destination in (OUTPUT_DIR / filename, REPORT_DIR / filename):
-        fig.savefig(destination, dpi=180)
+    fig.savefig(OUTPUT_DIR / filename, dpi=180)
     plt.close(fig)
 
 
@@ -254,14 +252,12 @@ def save_scaled_residual_figure(
         y=0.985,
     )
     fig.subplots_adjust(left=0.055, right=0.985, top=0.90, bottom=0.12, wspace=0.28, hspace=0.55)
-    for destination in (OUTPUT_DIR / filename, REPORT_DIR / filename):
-        fig.savefig(destination, dpi=180, bbox_inches="tight")
+    fig.savefig(OUTPUT_DIR / filename, dpi=180, bbox_inches="tight")
     plt.close(fig)
 
 
 def main() -> None:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    REPORT_DIR.mkdir(parents=True, exist_ok=True)
     summary: dict[str, Any] = {
         "source": str(INPUT_DIR),
         "analysis": "offline native Fluent report-history extraction",
@@ -418,9 +414,6 @@ def main() -> None:
     print(f"Wrote {OUTPUT_DIR / '02e_stage1_inventory_flux_summary_20260816.json'}")
     print(f"Wrote {OUTPUT_DIR / '02e_stage1_inventory_flux_summary_20260816.csv'}")
     print(f"Wrote {OUTPUT_DIR / '02e_stage1_inventory_histories_20260816.png'}")
-    print(f"Wrote {REPORT_DIR / '02e_stage1_inventory_histories_20260816.png'}")
-    print(f"Wrote {REPORT_DIR / '02e_stage1_mass_inventory_histories_20260816.png'}")
-    print(f"Wrote {REPORT_DIR / '02e_stage1_scaled_residuals_20260816.png'}")
     print("case,status,n,y010_last_m3,y030_last_m3,L_kg_s,y010_trend,y030_trend")
     for row in csv_rows:
         print(

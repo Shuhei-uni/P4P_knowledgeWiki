@@ -50,12 +50,12 @@ LIQUID_DENSITY = 881.21088
 LIQUID_VISCOSITY = 1.45544e-4
 
 SOURCE_AUTHORITY = {
-    "target_setup": "Setups/full-geometry/mixture/steady-liquid-outlet/03a-08b-parity-full-geometry-baseline.md",
-    "carrier_authority": "Setups/past/archived/00a-purnanto-setup-5000-live-audit.md",
-    "parity_lineage": "Setups/past/reported/08b-purnanto-parity-split-inlet-rebuild.md",
-    "split_representation": "Setups/past/archived/08a-steam-outlet-extension-student-trial.md",
-    "surviving_machine_extract": "PyAnsys/cases/actual_setup_archives/purnanto-enthalpy1520-live-extract/live/bundle.json",
-    "missing_machine_extract": "PyAnsys/cases/actual_setup_archives/purnanto-enthalpy1680-live-extract/live/settings_root_tree.json",
+    "target_setup": "Project/experiments/03A/setup-source.md",
+    "carrier_authority": "Project/experiments/purnanto-00a-live-setup-audit/technical-live-setup-reference.md",
+    "parity_lineage": "Project/experiments/purnanto-08b-parity-split-inlet/setup.md",
+    "split_representation": "Project/experiments/purnantov2-08a-steam-outlet-placement/setup.md",
+    "surviving_machine_extract": "Project/experiments/purnanto-00a-live-setup-audit/technical-live-setup-reference.md (migrated readback summary)",
+    "missing_machine_extract": "not retained; recoverable from Git history if the original archive is required",
     "excluded_parent": "FG-MIX-T01-S1-C1375 (explicitly excluded by 03A)",
 }
 

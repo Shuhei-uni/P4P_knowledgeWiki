@@ -4,7 +4,7 @@
   "fluent_version": "Ansys Fluent 2024 R2",
   "source_case": "C:\\Users\\syok443\\Documents\\Setup07extractor\\FFF.1-2.cas.h5",
   "source_data": "C:\\Users\\syok443\\Documents\\Setup07extractor\\FFF.1-2-02541.dat.h5",
-  "report_ref": "Setups/past/reported/07-pure-phase-split-actual-area.md",
+  "report_ref": "Project/experiments/purnanto-07-pure-phase-actual-area/setup.md",
   "notes_label": "Live export from loaded Setup07extractor case/data",
   "mesh_and_runtime": {
     "iterations": 2000,

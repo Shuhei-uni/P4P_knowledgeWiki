@@ -20,7 +20,11 @@ from typing import Any, Mapping
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
-from pyansys_fluent.common import remote_file_exists, safe_get_state  # noqa: E402
+from pyansys_fluent.common import (  # noqa: E402
+    remote_file_exists,
+    require_remote_files,
+    safe_get_state,
+)
 from pyansys_fluent.connection import connect  # noqa: E402
 import build_02e_y010_campaign as stage1  # noqa: E402
 
@@ -121,8 +125,11 @@ def build_child(solver: Any, parent_case: str, remote_dir: str, stamp: str, item
         raise ValueError(family)
     solver.settings.file.write_case(file_name=output)
     solver.settings.file.write_data(file_name=data_output)
-    if not remote_file_exists(solver, output) or not remote_file_exists(solver, data_output):
-        raise RuntimeError(f"Paired Stage-2 child not visible after write: {output}, {data_output}")
+    require_remote_files(
+        solver,
+        (output, data_output),
+        "Paired Stage-2 child not visible after write",
+    )
     return {
         "case_id": case_id,
         "family": family,

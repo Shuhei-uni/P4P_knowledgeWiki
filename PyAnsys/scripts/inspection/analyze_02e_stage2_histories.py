@@ -22,7 +22,6 @@ import numpy as np
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 INPUT_DIR = PROJECT_ROOT / "output" / "02e_stage2_recovered_20260816"
 OUTPUT_DIR = INPUT_DIR
-REPORT_DIR = PROJECT_ROOT.parent / "Setups" / "reports" / "02e"
 TRANSCRIPT_DIR = INPUT_DIR / "transcripts"
 LIQUID_DENSITY = 881.77
 INITIAL_Y010_MASS = 4224.25373425353
@@ -168,8 +167,7 @@ def inventory_figure(histories: dict[str, dict[str, tuple[np.ndarray, np.ndarray
         ax.grid(True, alpha=0.25)
         ax.legend(fontsize=7, ncol=2)
     fig.suptitle("Setup 02e Stage 2: Y010 and Y030 liquid inventory histories")
-    for destination in (OUTPUT_DIR / filename, REPORT_DIR / filename):
-        fig.savefig(destination, dpi=180)
+    fig.savefig(OUTPUT_DIR / filename, dpi=180)
     plt.close(fig)
 
 
@@ -194,14 +192,12 @@ def residual_figure(residual_histories: dict[str, tuple[np.ndarray, np.ndarray] 
     fig.legend(handles, labels, loc="lower center", ncol=4, fontsize=9, bbox_to_anchor=(0.5, 0.01))
     fig.suptitle("Setup 02e Stage 2: native Fluent scaled residual histories", y=0.985)
     fig.subplots_adjust(left=0.06, right=0.985, top=0.90, bottom=0.12, wspace=0.28, hspace=0.40)
-    for destination in (OUTPUT_DIR / filename, REPORT_DIR / filename):
-        fig.savefig(destination, dpi=180, bbox_inches="tight")
+    fig.savefig(OUTPUT_DIR / filename, dpi=180, bbox_inches="tight")
     plt.close(fig)
 
 
 def main() -> None:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    REPORT_DIR.mkdir(parents=True, exist_ok=True)
     summary: dict[str, Any] = {
         "source": str(INPUT_DIR),
         "analysis": "offline native Fluent report-history extraction",

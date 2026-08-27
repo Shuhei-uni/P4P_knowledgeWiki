@@ -23,6 +23,11 @@ Example naming:
 - `07-pure-phase-split-actual-area-live-fff-1-2`
 - `00a-purnanto-live-baseline-5000`
 
-Relationship to the main wiki:
-- `Setups/` remains the human-authored, report-facing setup lineage.
-- `PyAnsys/cases/actual_setup_archives/` holds the machine-exported source of truth for what Fluent actually contained.
+Relationship to the current records:
+- `Project/experiments/` owns the human-authored setup contracts and scientific
+  interpretation.
+- `PyAnsys/cases/actual_setup_archives/` holds small machine-exported evidence
+  for what Fluent actually contained.
+- Keep an archive only when it preserves unique live readback that cannot be
+  reconstructed from Project records or Git history. Do not use this directory
+  as a second setup tree.

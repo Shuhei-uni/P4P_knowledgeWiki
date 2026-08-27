@@ -1,129 +1,85 @@
-# PyAnsys / PyFluent Remote Fluent Ready Kit
+# PyAnsys / PyFluent remote Fluent kit
 
-Use this kit to prepare your laptop now, before you have access to the PC with Ansys Fluent.
+PyAnsys owns executable Fluent implementation, live inspection, native-run
+support, and machine-readable evidence checks. Project-specific scientific
+truth remains in ../Project/; reusable CFD and literature knowledge remains in
+../CFD_wiki/.
 
-The folder has been reorganized around one rule: Fluent automation is a dependency-ordered state machine, not a flat Python API. If syntax, nesting, or call-order problems appear, start with the execution contract below rather than editing the case scripts ad hoc.
+The operating rule is simple: Fluent is a dependency-ordered state machine,
+and Fluent owns long iteration and native autosave. Python may prepare a case,
+issue a bounded native journal, reconnect, inspect, and analyse; it must not
+own a blanket laptop-side iteration/checkpoint loop.
 
-The current operating split is strict:
-- setup scripts create or modify only `.cas.h5`
-- Fluent owns initialization, iteration, and native autosave; Python never owns a long iteration loop
+## Start here
 
-Read [`knowledge/fluent-settings/native_run_and_autosave.md`](./knowledge/fluent-settings/native_run_and_autosave.md) before planning a long run. Python can prepare the case and reconnect later, but it must not be required to stay connected for Fluent to reach its next checkpoint.
+1. Read the selected Project setup and results packet.
+2. Read the applicable focused skill under ../skills/.
+3. Read [the native run and autosave policy](knowledge/fluent-settings/native_run_and_autosave.md).
+4. Use the proven source module or script, then inspect critical live values
+   and identity before changing anything.
 
-Recommended local target:
+## Canonical workflow
 
 ```text
-- CPython 3.12 virtual environment in PyAnsys/.venv
-- PyFluent core + visualization installed locally
-- connect_to_fluent workflow only
+selected Project setup/results
+    -> focused skill and proven source path
+    -> connect and verify explicit remote inputs
+    -> load case or mesh
+    -> enable/change in dependency order
+    -> reacquire, inspect, set, and read back critical values
+    -> write a case-only artifact
+    -> Fluent-native initialize/run/autosave
+    -> reconnect and verify endpoint/evidence
+    -> hand off interpretation to Project
 ```
 
-Your target workflow:
+Setup builders stop at a valid .cas.h5 artifact unless the selected
+experiment explicitly combines preparation with a bounded native journal.
+Long runs must remain solver-owned, and case/data identity must be explicit.
 
-```text
-Laptop:
-- Codex
-- Python
-- PyFluent / PyAnsys packages
-- scripts in this repo
+## Connection and run tools
 
-      connects over gRPC
+- scripts/connection/check_connection.py — endpoint health check.
+- scripts/connection/local_preflight.py — local runtime and endpoint preflight.
+- scripts/inspection/inspect_fluent_session.py — non-mutating live tree
+  inspection.
+- scripts/inspection/monitor_native_run.py — reconnecting read-only native run
+  monitor.
+- scripts/setup/generate_native_run_journal.py — generate a Fluent-owned
+  steady journal with transcript and residual export.
+- scripts/setup/run_03a_q01_s4_01_50.py — the selected 03A-Q01 runner, locked
+  to exactly 50 native iterations for the qualification packet.
+- scripts/inspection/post_simulation_analysis.py — selected read-only
+  residual, flux, and results-evidence checks.
 
-Fluent PC:
-- Ansys Fluent installed and licensed
-- Fluent running
-- Fluent gRPC server started
-- server_info.txt generated
-```
+The remaining setup and inspection scripts are kept only when they support a
+current Project experiment, a focused skill, a reusable source module, or
+unique evidence recovery. Campaign-specific scripts are not a general API;
+retired report builders and one-off run wrappers are recoverable from Git
+history.
 
-What you can do now:
+## Source layout
+
+- src/pyansys_fluent/ — reusable connection, setup, journal, extraction,
+  monitoring, and evidence logic.
+- scripts/connection/ — connection and local-environment checks.
+- scripts/inspection/ — non-mutating discovery, snapshots, monitors, and
+  post-processing.
+- scripts/setup/ — thin setup and selected native-run orchestration.
+- knowledge/fluent-settings/native_run_and_autosave.md — durable native-run
+  policy and recovery limits.
+- cases/actual_setup_archives/ — small unique live-case exports retained for
+  exact setup reconciliation; Project records own their interpretation.
+- output/ — generated extracts and diagnostics, never the scientific authority.
+
+## Local runtime
+
+From this directory, use .venv/bin/python when the repository runtime exists.
+The optional bootstrap script can create a local environment:
 
 ```bash
 python3 scripts/connection/bootstrap_local_env.py
 ```
 
-This script prefers Python 3.12. If `python3.12` is not already installed, it can
-also use `uv` to create a local 3.12 environment automatically.
-
-When you are at the Fluent PC:
-
-1. Start Fluent.
-2. Start the gRPC server.
-3. Copy IP/port/password or `server_info.txt`.
-4. Fill `.env`.
-5. Run:
-
-```bash
-.venv/bin/python scripts/connection/check_connection.py
-.venv/bin/python scripts/inspection/inspect_fluent_session.py
-```
-
-## Canonical workflow
-
-Read these in order before changing any setup script:
-
-1. [`knowledge/fluent-settings/agent_start_prompt.md`](./knowledge/fluent-settings/agent_start_prompt.md)
-2. [`docs/PYANSYS_OVERHAUL_BLUEPRINT.md`](./docs/PYANSYS_OVERHAUL_BLUEPRINT.md)
-3. [`src/pyansys_fluent/common.py`](./src/pyansys_fluent/common.py)
-4. [`src/pyansys_fluent/dependency_workflow.py`](./src/pyansys_fluent/dependency_workflow.py)
-5. [`src/pyansys_fluent/setup_common.py`](./src/pyansys_fluent/setup_common.py)
-
-Execution sequence:
-
-```text
-connect
--> verify remote inputs
--> load mesh or source case
--> enable parent model
--> reacquire object
--> inspect children/options
--> set child value
--> read back value
--> classify failure
--> choose settings API / TUI / manual fallback
--> write `.cas.h5`
-```
-
-Run sequence after setup creation:
-
-```text
-connect
--> verify remote `.cas.h5`
--> load case only
--> configure Fluent-native monitors and autosave
--> initialize and start from Fluent or a Fluent-native journal
--> disconnect the Python client if needed without shutting down Fluent
--> reconnect later for monitoring or recovery
--> verify the native case/data checkpoint
-```
-
-## Current script layout
-
-- `scripts/connection/check_connection.py`: connection health check only
-- `scripts/inspection/monitor_native_run.py`: read-only reconnecting monitor for Fluent-native runs
-- `scripts/setup/generate_native_run_journal.py`: generate a Fluent-owned steady run with native transcript and post-run residual-history export
-- `scripts/inspection/inspect_fluent_session.py`: non-mutating tree inspection
-- `src/pyansys_fluent/common.py`: shared remote/session/path helpers
-- `src/pyansys_fluent/dependency_workflow.py`: dependency-aware step runner and failure classifier
-- `src/pyansys_fluent/extraction.py`: shared read-mostly extraction helpers for live/offline setup capture
-- `src/pyansys_fluent/setup_common.py`: shared setup-name, boundary, and remap helpers
-- `src/pyansys_fluent/setup_io.py`: shared setup/run file IO helpers including case-only loading
-- `knowledge/fluent-settings/native_run_and_autosave.md`: authoritative long-run and reconnection policy
-- `scripts/setup/setup07_rebuild_run.py`: rebuild setup 07 on a target mesh
-- `scripts/setup/setup09a_dpm_split_inlet_carryover.py`: build setup 09a from the setup 07 carrier-field scaffold
-- `scripts/setup/setup_vof_ewf_from_existing_case.py`: derive a VOF + EWF case from an existing case/data pair
-- `scripts/setup/rebuild_setup_from_reference_case.py`: clone a reference setup onto another mesh
-
-## Extractor tracks
-
-Two separate extractor paths are now scaffolded:
-
-- `extractors/python/`: offline `.cas.h5` / `.dat.h5` inspection with `h5py`
-- `extractors/python/`: offline legacy `.cas` and `.dat` inspection, plus HDF5 support where available
-- `extractors/fluent/`: live Fluent/PyFluent export tools, including a fuller hybrid live+offline bundle exporter
-
-Recommended order:
-
-1. use `extractors/python/` now on any HDF5 case/data files you already have;
-2. review the candidate strings and tree layout;
-3. use `extractors/fluent/` later on the Fluent machine to export the real active setup tree and reconcile gaps.
+Do not commit .env, .venv/, cache files, remote case/data files, or generated
+output. Do not edit any raw/ directory.
