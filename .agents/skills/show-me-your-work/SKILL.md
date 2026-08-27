@@ -1,6 +1,6 @@
 ---
 name: show-me-your-work
-description: "Reconstruct a concise evidence trail for a long or autonomous research sequence: what decisions were made, why, what evidence supported them, what changed, and where the durable artifacts live. Use for handoff, review, or debugging unattended work without dumping full chat history."
+description: "Reconstruct a concise evidence trail for a long or autonomous research sequence: what decisions were made, why, what evidence supported them, what changed, and where the durable artifacts live. Use for handoff, review, debugging unattended work, or to give phase-planner the scientific history it needs without dumping full chat history."
 ---
 
 # Show Me Your Work
@@ -17,7 +17,7 @@ A fresh human or agent should be able to answer:
 - What evidence was produced?
 - What failed or changed course?
 - What conclusions are currently supported?
-- What is the next action or human decision?
+- What remains unresolved or at a human boundary?
 - Where are the durable files?
 
 ## Reconstruct from durable evidence
@@ -43,7 +43,7 @@ goal
 -> implementation succeeded/failed because ...
 -> evidence showed ...
 -> interpretation limited by ...
--> next action chosen because ...
+-> direction changed because ...
 ```
 
 Skip routine file reads, successful deterministic extractions, and repeated low-level commands unless they explain a failure.
@@ -69,6 +69,12 @@ Explicitly show when:
 
 Do not rewrite history into a cleaner story than actually occurred.
 
+## Boundary with phase planning
+
+When called from `phase-planner`, reconstruct the scientific history needed to understand the current position, but do not decide the next phase-level research direction yourself.
+
+`show-me-your-work` answers **what happened and what is currently supported**. `phase-planner` uses that reconstruction to discuss **what the project should pursue next** with the human.
+
 ## Output
 
 Produce a compact handoff with:
@@ -79,7 +85,7 @@ Produce a compact handoff with:
 4. **Important failures/course changes**
 5. **Supported conclusions**
 6. **Unresolved questions/risks**
-7. **Next action / human gate**
+7. **Human boundary or stop reason, if any**
 8. **Durable artifact paths**
 
 Do not create a permanent progress-log system by default. Write this into an existing handoff/task location only when useful or explicitly requested.
