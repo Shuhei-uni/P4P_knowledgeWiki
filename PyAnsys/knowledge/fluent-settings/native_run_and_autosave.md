@@ -1,219 +1,152 @@
-# Native Fluent Run and Autosave Policy
+# Python-Supervised Fluent Run and Recovery Policy
+
+> The filename is retained for stable repository links. The current default is no longer a detached/native-run workflow.
 
 ## Key rule
 
-Python may prepare a Fluent case, configure the native run controls, and reconnect later for inspection. Python must not own a long simulation by repeatedly calling Fluent iteration commands or by issuing client-side checkpoint writes after each block.
-
-The calculation and its recovery points belong to Fluent itself:
+For experiments inside `scientific-phase-loop`, run Fluent through Python/PyFluent and keep an agent supervising the runner terminal for the planned horizon.
 
 ```text
-Python setup/inspection -> Fluent-native initialization -> Fluent-native run + autosave -> Python reconnect/inspect
+verified case
+-> Python/PyFluent runner
+-> initialization if required
+-> approved calculation horizon
+-> final save/verification
+-> execution handoff
 ```
 
-This policy applies to steady and transient runs unless a separate workflow explicitly documents why a solver-side alternative is unavailable.
+The agent is expected to remain active for the run, but mostly read-only while Fluent is advancing. The agent watches for meaningful execution events rather than repeatedly reasoning about every iteration.
 
-## Why this matters
+TUI-driven iteration, Fluent journal/batch submission, and GUI-owned execution are not automatic fallbacks. They require explicit human approval for that specific run.
 
-A PyFluent call such as `solver.tui.solve.iterate(...)` or `solver.settings.solution.run_calculation.iterate(...)` is a client-issued command. A Python loop around that call also owns the progress count, checkpoint timing, interrupt handling, and final save. If the gRPC connection disappears, that loop can no longer guarantee that the next checkpoint or final file will be written.
+## Why Python supervision is the default
 
-Fluent has its own calculation activity and autosave controls. For a steady-state calculation, the data-save frequency is specified in iterations. Fluent can retain only the most recent autosave files, so the solver can continue saving without Python remaining attached and without retaining the entire checkpoint history.
+The autonomous scientific loop benefits from having an execution agent present when the calculation begins, fails, completes, or leaves its state uncertain. Initialization failures, floating-point errors, PyFluent exceptions, lost connections, failed final writes, and Fluent process crashes should be detected at the execution boundary rather than discovered much later.
 
-## Approved workflow
+The supervising agent does not interpret the science. Poor residuals, poor balances, oscillation, or unexpected physics are normally evidence to analyse after the planned run, not reasons to alter the experiment while it is executing.
 
-### 1. Prepare the case
+## Runner contract
 
-Python is allowed to:
+Use a Python runner whose intended sequence is explicit:
 
-1. connect and verify the requested Fluent endpoint;
-2. load and audit the intended case or mesh;
-3. apply setup changes in dependency order;
-4. read back boundary, model, material, and DPM settings;
-5. write the case-only setup artifact;
-6. configure Fluent's native calculation activities and autosave settings if the live path has been inspected and verified.
-
-Setup builders should stop at a valid `.cas.h5` artifact. Do not hybrid-initialize, iterate, and write a long-run `.dat.h5` from a setup-builder Python loop.
-
-### 2. Configure native autosave in Fluent
-
-In Fluent's calculation-activity/autosave controls:
-
-- set `Save Data File Every` to the desired steady-state iteration interval, for example `500`;
-- choose a hard-coded path on the Fluent computer, not a laptop-local path;
-- choose `Only if Modified` for the associated case when the mesh and setup remain unchanged, or `Each Time` when a paired case/data snapshot is required at every checkpoint;
-- enable retention of only the most recent files and keep at least two checkpoint slots for failure tolerance;
-- use a run-specific root name so an old run cannot be mistaken for the current one;
-- verify the resulting remote filenames and the current autosave state before starting the calculation.
-
-Fluent appends the steady-state iteration number to autosaved filenames. “Overwrite” therefore means limiting the retained set and allowing Fluent to replace the oldest retained file, not assuming that every checkpoint has one fixed filename.
-
-The case and data files together are the restart artifact. If only data files are autosaved, retain a matching case file whose mesh and setup have not changed. If the mesh or case settings change during the run, write a new paired case/data checkpoint.
-
-### 3. Start and detach safely
-
-1. Complete initialization in Fluent and confirm that it has returned to an idle/ready state.
-2. Confirm the iteration limit, monitors, and autosave settings in Fluent.
-3. Start the calculation from Fluent's own `Run Calculation`/`Calculate` control or from a Fluent-native journal that is executed by Fluent.
-4. Disconnect only the Python client if needed. Do not call `solver.exit()` or `solver.force_exit()`; those are shutdown/termination operations, not client detachment.
-5. Do not treat a Python stdout log or local JSON file as proof that the remote solve is still running. Fluent's live state and remote autosave files are authoritative.
-
-For runs that need observable text evidence while Fluent is too busy to serve a
-new gRPC client, generate a Fluent-native steady-run journal with
-`scripts/setup/generate_native_run_journal.py`. The generated journal:
-
-- starts `file/start-transcript` before iteration, so Fluent writes console input
-  and output to a Windows-local transcript;
-- enables `solve/monitors/residual/print?`, putting the iteration number and
-  residual row in that progressively written transcript;
-- executes one Fluent-native `solve/iterate` command rather than a Python loop;
-- exports Fluent's retained residual history through
-  `plot/residuals-set/plot-to-file` after the iteration command returns; and
-- stops the transcript but deliberately leaves Fluent open.
-
-From the repository root, for example:
-
-```bash
-PyAnsys/.venv/bin/python \
-  PyAnsys/scripts/setup/generate_native_run_journal.py \
-  --iterations 5000 \
-  --transcript-file 'C:\FluentRuns\09cV3\run.trn' \
-  --residual-file 'C:\FluentRuns\09cV3\residuals.out' \
-  --residual-history-size 6000 \
-  --output-journal PyAnsys/output/09cV3-native-run.jou
+```text
+connect
+-> verify endpoint and case identity
+-> load/confirm approved case
+-> configure approved remote output/checkpoint paths
+-> initialize if required
+-> run the planned horizon
+-> write final data
+-> verify final data
 ```
 
-Copy the generated journal to the Fluent computer and read it from Fluent only
-after the intended case is loaded, initialization is complete, autosave has
-been verified, and the output directory already exists. The transcript is the
-live monitoring artifact. The dedicated residual file is a post-run/post-
-interrupt snapshot: it is not continuously rewritten during the iteration
-command. Put the Windows output directory on an authenticated read-only SMB
-share if a remote observer must tail the transcript without using gRPC.
+Prefer a single clear PyFluent solve call for the planned horizon, or another coarse bounded structure required by the approved experiment. Do not build one-iteration polling loops simply to keep the agent awake.
 
-The normal PyFluent iteration method is synchronous from the Python caller's perspective. Sending one long command and then killing the client connection is not a substitute for a verified native run. If a native journal or GUI start is not available, keep the command attached and state that limitation explicitly rather than pretending the run is detached.
+Do not hide TUI commands inside a Python script and call that a Python/PyFluent run. If the required operation is only available through TUI or a Fluent journal, stop and obtain explicit human approval before using it.
 
-### 4. Reconnect and recover
+## Remote paths and server knowledge
 
-After a connection loss:
+Use explicit remote paths from the experiment setup when supplied. Otherwise use verified non-secret filesystem knowledge from `PyAnsys/server-profiles/`.
 
-1. reconnect to the existing Fluent session without starting a second Fluent process;
-2. check whether Fluent is still solving or has returned to idle;
-3. read the live iteration counter and residual/physical monitor histories;
-4. inspect the remote autosave evidence and identify the newest complete case/data pair;
-5. do not reload a checkpoint into a session that is still actively solving;
-6. if Fluent stopped, resume from the newest verified checkpoint using Fluent's own read-case/data and run controls;
-7. record the exact case/data filenames, iteration, Fluent version, and monitor state after recovery.
+A server alias is routing only. It does not identify the loaded case, current iteration, or correct experiment directory.
 
-A dropped client connection is recoverable only if the Fluent process and the Fluent computer remain alive. Autosave protects against losing the client connection; it cannot make a crashed Fluent process continue by itself.
+Do not guess output roots or silently reuse a previous campaign directory. Keep active run data on the Fluent machine's intended storage and use run-specific names that cannot be confused with an earlier simulation.
 
-### 5. Use the reconnecting monitor
+## Autosave and recovery
 
-The repository provides a read-only monitor at
-`scripts/inspection/monitor_native_run.py`. It is designed to run in a separate
-terminal and be stopped/restarted independently of Fluent:
+Python supervision does not remove the value of Fluent-side autosave. When the experiment is long enough to justify recovery checkpoints, configure Fluent's autosave controls through the approved Python/PyFluent path before the main solve.
 
-```bash
-python3 PyAnsys/scripts/inspection/monitor_native_run.py \
-  --server-id 1 \
-  --poll-interval-seconds 30 \
-  --checkpoint-pair \
-    'C:\\path\\run-500.cas.h5' \
-    'C:\\path\\run-500.dat.h5' \
-  --checkpoint-pair \
-    'C:\\path\\run-1000.cas.h5' \
-    'C:\\path\\run-1000.dat.h5'
-```
+Useful habits:
 
-The monitor:
+- use a run-specific remote autosave root;
+- keep enough recent checkpoints to recover from a failure;
+- know which case file matches the data checkpoints;
+- verify the configured remote paths before starting;
+- do not treat a local ledger or filename pattern as proof that a remote checkpoint exists.
 
-- reconnects after transient transport failures with bounded exponential backoff;
-- records connection generations so a recovered client is distinguishable from the original connection;
-- reads Fluent health, version, run-control values, summarized monitor data, and explicitly supplied checkpoint-pair existence;
-- derives live iteration from the newest monitor x-value rather than treating Fluent's configured maximum-iteration RP value as completed progress, then compares it with the last snapshot (including a snapshot persisted by an earlier monitor process);
-- writes an atomic latest-state JSON plus an append-only JSONL event log;
-- reports `advancing`, `not_advancing`, `went_backwards_or_reloaded`, or `unknown` rather than falsely claiming that Fluent is idle or stopped;
-- never calls initialization, iteration, save, reload, interrupt, `solver.exit()`, or `solver.force_exit()`.
+The final data save may be performed by the Python runner after the calculation call returns. For long runs, autosave provides recovery evidence if the runner, connection, or Fluent process fails before that final save.
 
-The monitor does not infer case identity from `server_id`, and it does not guess
-autosave filenames. Pass each retained case/data pair explicitly with repeated
-`--checkpoint-pair` options. A `complete` pair is evidence that both remote files
-are visible; a `partial` pair must not be used for recovery.
+## Agent supervision
 
-## Explicit 03A Stage-3 adaptive blocking exception
+Use `supervise-fluent-run` for the long-lived execution period.
 
-The `03A-stage3` F01–F12 convergence sweep is a narrow, user-approved exception to the normal detached/native-run preference because its next solver state depends on an evidence gate evaluated at discrete iteration checkpoints. The authoritative scientific workflow is:
+Most of the time the correct action is simply to wait. Do not narrate every residual row or repeatedly inspect the solver without a reason.
 
-Project/experiments/full-geometry-03a-mixture-08b-parity-baseline/stage-03/setup-source.md is the migrated authority for
-the Stage-3 execution specification.
+Wake on meaningful events such as:
 
-For **F01–F12 only**, an execution agent may keep its client attached and issue one synchronous blocking Fluent solve command for the current decision block:
+- initialization success/failure;
+- calculation launch;
+- checkpoint observation;
+- Python exception;
+- Fluent fatal/floating-point error;
+- unexpected Fluent/runner termination;
+- connection uncertainty;
+- calculation return;
+- final data write/verification.
 
-- `750` iterations for the first assessment at an intermediate state;
-- `250` iterations for each subsequent reassessment;
-- final-condition blocks as defined by the Stage-3 authority.
+The runner terminal is the primary execution surface. `scripts/inspection/monitor_native_run.py` may still be used as a separate read-only helper when it adds useful state evidence, despite its legacy name. It must never become a second mutating controller.
 
-The return of that blocking Fluent command is intentionally the wake-up point for the agent. The agent may then inspect histories, evaluate the frozen Stage-3 gate, save the prescribed transition checkpoint, apply only the prescribed next state, and issue the next blocking solve command.
+## Distinguish failure types
 
-This exception has strict limits:
+### Normal scientific behaviour — continue
 
-- do **not** implement a Python `for`/`while` loop around iteration calls;
-- do **not** issue one-iteration or other fine-grained client loops;
-- every new solve block must follow an explicit Stage-3 decision point;
-- configure Fluent-native autosave locally so recovery does not depend solely on the client call returning;
-- do not silently repeat a block after a transport failure when completion is uncertain;
-- first reconnect to the same Fluent process and establish the actual completed iteration/stage state;
-- classify gRPC/client/transport loss separately from a Fluent numerical failure;
-- keep all run-specific autosaves/checkpoints on the Fluent computer's local storage;
-- this exception does not authorize the same client-owned adaptive pattern for other campaigns unless the user explicitly approves it.
+Do not stop a run merely because:
 
-The purpose of the exception is orchestration wake-up at scientifically required checkpoints, not moving solver ownership back into a generic Python iteration runner.
+- residuals are poor, noisy, oscillatory, or slowly converging;
+- balances are poor;
+- physical monitors are unexpected;
+- the result appears scientifically unpromising;
+- a secondary read-only request cannot respond while the main calculation is busy.
 
-### Fixed-3,000 Stage-3 supervisor override
+If Fluent can continue and the experiment contract does not define another stop rule, let the approved horizon finish.
 
-The user additionally approved a narrow operational override for the assigned
-fixed-block queue `F02 -> F04 -> F11 -> F06 -> F05`. Its supervisor is
-`scripts/setup/run_03a_stage3_override_native_queue_server2.py`. Python may
-remain active across the queue so it can reconcile a completed Fluent-native
-stage, restore its named case/data endpoint, apply the prescribed transition,
-and submit the next native stage.
+### Execution blocker — preserve and return
 
-This remains safe only under these limits:
+Treat these as execution blockers when they prevent faithful continuation:
 
-- Fluent owns every 3,000-iteration solve, native autosave, transcript, and
-  endpoint write; Python never polls individual iterations or writes periodic
-  checkpoints.
-- The local resume ledger is intent/audit evidence, not recovery authority. A
-  resumed supervisor must verify and reload the named Fluent case/data pair;
-  it must never repeat a stage recorded as submitted but not yet reconciled.
-- A `PAUSE` file in the local campaign directory stops the supervisor at the
-  next stage boundary. A mid-stage pause must be issued through Fluent's Pause
-  control, not Interrupt/Ctrl+C, because Interrupt exits a journal.
-- A process-level Fluent crash, missing endpoint, or transport uncertainty
-  blocks the queue for recovery; it cannot be safely skipped unattended.
+- initialization failure;
+- floating-point/fatal Fluent error;
+- Fluent process crash/exit;
+- Python/PyFluent runner exception before completion;
+- run state that cannot be reconciled safely;
+- required final data cannot be written or verified;
+- recovery/output state is uncertain enough that another run command could duplicate or overwrite unknown progress.
 
-## Prohibited Python run patterns
+Capture the error, preserve the newest verified state, record the final observed progress, and return the blocker to `implement-experiment` / `scientific-phase-loop`. Do not redesign numerics inside the run supervisor.
 
-Except for the explicit `03A-stage3` blocking exception above, do not add or use Python code that:
+## Connection loss and uncertain progress
 
-- loops over `solver.settings.solution.run_calculation.iterate(...)`;
-- loops over `solver.tui.solve.iterate(...)`;
-- writes a checkpoint only after a Python loop receives a successful iteration response;
-- relies on `RunPersistence.record_checkpoint` or a local run-state JSON as the only recovery mechanism;
-- reconnects and silently repeats an unknown in-memory iteration block;
-- calls `solver.exit()` at the end of a long run when the intention is merely to detach the client.
+A lost gRPC connection is not automatically a Fluent numerical failure.
 
-Post-run Python inspection and offline case/data analysis remain allowed. They must not change the solver state or be required for Fluent to reach its next checkpoint.
+When state becomes uncertain:
 
-## Evidence and uncertainty
+1. establish whether the same Fluent process still exists;
+2. determine the newest independently observed progress;
+3. inspect the latest verified remote checkpoint/data state;
+4. do not silently repeat a solve command whose completion is unknown;
+5. resume or restart only after the actual state has been reconciled and the upstream execution decision is clear.
 
-- `Reported`: Fluent's User's Guide documents autosaving case/data files during a calculation, iteration-based frequency for steady solutions, “Only if Modified” versus “Each Time” case saving, and retention of only the most recent files.
-- `Inferred`: once these settings are accepted by Fluent, the solve-side autosave is independent of a laptop-side Python polling loop because Fluent owns the calculation and file-write activity. Verify the live settings on the target Fluent release before a long run.
-- `Not live-verified here`: an arbitrary PyFluent client disconnect in the middle of a synchronous iteration RPC. Do not use that as the resilience mechanism.
-- `Reported`: PyFluent exposes existing monitor sets through `get_monitor_set_names()` and `get_monitor_set_data()`; the reconnecting monitor uses those read-only accessors without starting a new calculation or callback loop ([PyFluent monitor guide](https://fluent.docs.pyansys.com/version/stable/user_guide/monitors.html)).
-- `Reported`: Fluent's `number-of-iterations` RP value is the run-control maximum in the live 2025 R2 session; it is retained by the monitor as configuration context, not used as the completed-iteration count.
-- `Inferred`: a snapshot that observes an increasing monitor x-coordinate is classified as `advancing`; an unchanged coordinate is reported conservatively as `not_advancing`, because a read-only client cannot distinguish idle from a stalled or paused solver without a release-specific solver-status variable.
+If reconciliation requires changing the experiment, return control upstream rather than improvising inside the supervisor.
 
-## Sources
+## Completion proof
 
-- [Ansys Fluent 2025 R2 User's Guide — Reading and Writing Case and Data Files](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_CaseDataFiles.html)
-- [Ansys Fluent 2025 R2 Text Command List — `file/auto-save`](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_tcl/x1-50005.html)
-- [PyFluent — connecting to an existing Fluent session](https://fluent.docs.pyansys.com/version/stable/user_guide/session/launching_ansys_fluent.html)
+A Python command returning is not enough.
+
+For an iteration-based run, verify at minimum:
+
+- requested iteration target;
+- final independently observed iteration count;
+- expected final `.dat.h5` exists;
+- matching case/restart identity is known;
+- required logs/histories/checkpoints can be located;
+- execution anomalies are recorded.
+
+If the target was not reached, report the run as blocked/incomplete.
+
+## Human-approved alternative execution
+
+TUI, Fluent journals, native queues, or GUI execution may still be useful in special circumstances, but they are outside the autonomous-loop default.
+
+Before using one, obtain explicit human approval for the specific run and record why Python/PyFluent supervision was not suitable.
+
+Legacy Stage-3/Stage-4 native queue scripts and journals remain historical implementation evidence. Their existence does not authorize new autonomous-loop runs to use the same mechanism without approval.
