@@ -57,6 +57,11 @@ Use the focused specialist when relevant:
 
 ## Proven-code rule
 
+Use implementation evidence in this order: reusable code in `PyAnsys/src`, a
+small proven generic script, a campaign-specific known-working script as a
+pattern only, then prose/API memory. Live Fluent inspection wins when the
+current tree differs.
+
 Inspect known-working repository code before constructing an equivalent
 PyFluent access pattern from memory. Reuse the access pattern, not case-specific
 names, values, paths, or branch assumptions. If the current live Fluent tree

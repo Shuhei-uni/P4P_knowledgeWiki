@@ -27,6 +27,9 @@ differs, inspect and adapt.
 
 ## Known working code
 
+Prefer reusable `src` code before a campaign-specific script; live EWF state
+wins over prose/API memory.
+
 - `PyAnsys/src/pyansys_fluent/ewf_core.py`
 - `PyAnsys/src/pyansys_fluent/ewf_audit.py`
 - `PyAnsys/src/pyansys_fluent/ewf_flux.py`

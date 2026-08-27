@@ -27,6 +27,9 @@ differs, inspect and adapt.
 
 ## Known working code
 
+Prefer the reusable or proven parser before a campaign-specific adaptation;
+live Fluent/file evidence wins over prose/API memory.
+
 - `PyAnsys/scripts/inspection/extract_report_plot_histories.py`
 
 Inspect its Fluent file-read and parsing behaviour, pass the actual remote

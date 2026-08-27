@@ -28,6 +28,9 @@ differs, inspect and adapt.
 
 ## Known working code
 
+Prefer reusable `src` code before a campaign-specific script; live DPM state
+wins over prose/API memory.
+
 - `PyAnsys/src/pyansys_fluent/dpm_reports.py`
 - `PyAnsys/src/pyansys_fluent/dpm_transcript.py`
 - `PyAnsys/scripts/inspection/run_dpm_particle_tracks.py`

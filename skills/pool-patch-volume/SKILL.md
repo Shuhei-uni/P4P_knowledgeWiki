@@ -34,6 +34,9 @@ differs, inspect and adapt.
 
 ## Known working code
 
+Prefer the proven implementation as an access pattern; current mesh, phase,
+register, and live Fluent state win over prose/API memory.
+
 - `PyAnsys/scripts/setup/build_02d_vof_ic0_ic1_ic2_from_loaded_mesh.py`
 - `PyAnsys/scripts/setup/prepare_02d_fine_patch_cases_and_queue.py`
 

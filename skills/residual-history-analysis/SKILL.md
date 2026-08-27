@@ -24,6 +24,9 @@ differs, inspect and adapt.
 
 ## Known working code
 
+Prefer reusable code, then a generic script, then a campaign pattern; live
+Fluent evidence wins over prose/API memory.
+
 - `PyAnsys/scripts/inspection/export_residuals.py` for direct residual export.
 - `PyAnsys/scripts/report/build_03a_stage3_stitched_scaled_residuals.py` for
   proven staged/batched parsing and merge concepts.

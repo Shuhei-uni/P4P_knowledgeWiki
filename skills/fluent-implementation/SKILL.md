@@ -15,6 +15,15 @@ Read the selected `setup.md` first and apply only its controlled delta.
 
 ## Proven-code and live-state rule
 
+Use implementation evidence in this order:
+
+```text
+reusable code in PyAnsys/src
+→ small proven generic script
+→ campaign-specific known-working script (pattern only)
+→ prose/API memory
+```
+
 Inspect known-working repository code before constructing an equivalent
 PyFluent access pattern from memory. Reuse the access pattern, not case-specific
 names, values, paths, or branch assumptions. If the current live Fluent tree

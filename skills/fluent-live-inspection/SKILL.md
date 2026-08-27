@@ -25,6 +25,9 @@ disabled or that an old recipe should be forced.
 
 ## Known working code
 
+Prefer reusable `src` code, then a generic script, then a campaign pattern;
+prose/API memory is last and the live tree wins.
+
 - `PyAnsys/scripts/inspection/inspect_fluent_session.py`
 - `PyAnsys/scripts/inspection/inspect_case.py`
 - `PyAnsys/scripts/inspection/explore_settings_space.py`
