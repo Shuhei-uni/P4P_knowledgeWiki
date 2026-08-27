@@ -2,6 +2,10 @@
 
 This directory is the default home for a selected project experiment. Do not create a folder for an unselected proposal; keep proposals in temporary reasoning or conversation until a project decision makes one real.
 
+## Current tracer
+
+- [03A Stage-3/Stage-4 tracer](03a/index.md) — the pilot record for the two-file-per-stage contract and the first Project authority cutover.
+
 ## Default record
 
 A selected experiment normally has only:

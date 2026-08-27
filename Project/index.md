@@ -10,13 +10,15 @@ The immediate technical question is whether the extraction-first 08b-parity/full
 
 ## Active/latest experiment
 
-The current execution lane is the canonical full-geometry Mixture `03A` Stage-4 promising-state development campaign:
+The current execution lane is the canonical full-geometry Mixture `03A` Stage-4 promising-state development campaign. Its Project tracer is now the shortest route through the two-stage record:
 
-- [Stage-4 setup contract](../Setups/full-geometry/mixture/steady-liquid-outlet/03a-stage4-promising-state-development.md)
-- [Stage-4 execution evidence](../Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/03a-stage4-native-queue-execution-2026-08-23.md)
+- [03A tracer index](experiments/03a/index.md)
+- [Stage-4 setup contract](experiments/03a/stage-04/setup.md)
+- [Stage-4 execution evidence](experiments/03a/stage-04/results.md)
+- [Stage-3 results](experiments/03a/stage-03/results.md)
 - [steady Mixture campaign index](../Setups/full-geometry/mixture/steady-liquid-outlet/index.md)
 
-The 03A record remains in the setup/report programme for now. This initial Project layer does not migrate it or create a second copy of its evidence.
+The original 03A setup/report records remain frozen source and provenance records. The tracer does not duplicate their full evidence; it carries only the decision-relevant setup delta, findings, limitations, and handoff.
 
 ## What did the latest experiment show?
 
@@ -33,7 +35,7 @@ The broader evidence boundary is unchanged: the documented longer runs are diagn
 
 ## What happens next?
 
-Review the active setup/report evidence, promote only a state that passes its readback and physical-history checks, then record the next selected experiment with the [setup/results contract](experiments/README.md). Keep each new experiment to a concise delta from a verified parent and make its evidence and interpretation explicit.
+Review the 03A tracer's remaining readback and physical-history gaps, promote only a state that passes those checks, then record the next selected experiment with the [setup/results contract](experiments/README.md). Keep each new experiment to a concise delta from a verified parent and make its evidence and interpretation explicit.
 
 ## Relevant files
 
