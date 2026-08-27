@@ -4,6 +4,8 @@
 > Once a replacement area is proven, do not create new work in legacy progress/log surfaces here; current project truth now starts in the root `Project/` layer, while this corpus remains available until each area is cut over.
 > Do not delete historical content yet.
 
+> New project work must not append to `wiki/log.md` or `wiki/progress/`. Record current truth in the root [`Project/`](../Project/index.md) layer and selected experiments in [`Project/experiments/`](../Project/experiments/). The progress/log workflow below is retained only for explicit historical/provenance repair until a later cleanup issue removes it.
+
 ## Mission
 This repository is a personal final-year research wiki for:
 **Geothermal steam-water separator design CFD modelling and optimisation**.
@@ -103,8 +105,8 @@ Do not use this layer for generic CFD method explanations that belong in `CFD_wi
 ### E. Literature Layer (`wiki/sources/`, `wiki/literature/`, `wiki/synthesis/`)
 Use for source extraction and cross-paper synthesis.
 
-## Required Wiki Files
-Maintain these as the wiki grows:
+## Retained Wiki Files
+These files remain available for detailed project context and provenance. They are not the authority for new current-state work; use the root `Project/` layer and selected experiment records first. Do not expand the frozen progress/log files except for explicit historical/provenance repair:
 - `wiki/index.md`
 - `wiki/log.md`
 - `wiki/project/objective-and-scope.md`
@@ -129,7 +131,9 @@ Use consistent IDs:
 - `zarrouk-purnanto-2014` -> `raw/Zarrouk and Purnanto 2014.pdf`
 - `purnanto-zarrouk-cater-2013` -> `CFD_wiki/raw/informit.366967552564856.pdf`
 
-## Progress Tracking Workflow (Mandatory)
+## Progress Tracking Workflow (Retained Legacy Workflow)
+The following schema describes the historical progress corpus. It applies only when a task explicitly repairs or annotates that retained corpus. Ordinary modelling work must use `Project/experiments/<experiment-id>/setup.md` and `results.md`, with current interpretation in `Project/`.
+
 When any modelling work is performed:
 1. Update `wiki/progress/current-status.md`.
 2. Add one run entry to `wiki/progress/experiments.md`.

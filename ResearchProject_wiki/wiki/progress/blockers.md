@@ -1,5 +1,7 @@
 # Blockers
 
+> Frozen compatibility record for migration #13. Do not append new project blockers here. Start at [`Project/index.md`](../../../Project/index.md) for current scientific truth and [`Project/experiments/`](../../../Project/experiments/) for selected experiment records. Retain this snapshot for historical provenance until final cleanup.
+
 ## Active Blockers
 
 ### BLK-012 | FG-MIX-T01 Stage-3 no-patch control failed at NP-DT1

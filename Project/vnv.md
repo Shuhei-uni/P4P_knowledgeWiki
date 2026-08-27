@@ -30,6 +30,13 @@ The selected experiment must identify:
 
 Use the strongest available comparison first: same-geometry or test data, then analytical/design correlation, then separator-CFD literature trend, then internal A/B evidence. If no defensible target exists, label the metric `trend-only` rather than upgrading the claim.
 
+## Current target and sign-off state
+
+- No branch is signed off as `Numerically verified` or `Externally validated`; the retained [sign-off record](../ResearchProject_wiki/wiki/vnv/signoff-log.md) still has a pending baseline entry (`Observed`).
+- Available geothermal literature and design/correlation sources can support context or trend checks. They are not direct validation targets for the current geometry unless operating conditions, geometry, and metric definitions are shown to be transferable (`Inferred`, [validation summary](../ResearchProject_wiki/wiki/model/validation.md)).
+- A non-geothermal experiment-backed RSM-DPM study can inform a later method sensitivity, but its operating values are not geothermal targets (`Reported`, [validation summary](../ResearchProject_wiki/wiki/model/validation.md)).
+- Missing project inputs include an active-geometry pressure-drop target, expected steam quality/carryover range, brine-flow expectation, separator-efficiency target, and any usable partner/field comparison table (`Missing Info`, [validation summary](../ResearchProject_wiki/wiki/model/validation.md)).
+
 ## Ownership and evidence flow
 
 - `CFD_wiki/` owns reusable verification/validation methods and literature hierarchy.

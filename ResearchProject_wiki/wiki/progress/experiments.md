@@ -1,5 +1,7 @@
 # Experiment Log
 
+> Frozen compatibility record for migration #13. Do not append new project experiments here. Start at [`Project/index.md`](../../../Project/index.md) for current scientific truth and [`Project/experiments/`](../../../Project/experiments/) for selected experiment records. Retain this log for historical provenance until final cleanup.
+
 ## Run Template
 - Run ID:
 - Date:

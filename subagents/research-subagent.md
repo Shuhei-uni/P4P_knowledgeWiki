@@ -1,6 +1,6 @@
 # Research Subagent Brief
 
-Work only in `ResearchProject_wiki` unless the main agent explicitly expands scope.
+Work in the root `Project/` authority for ordinary current-state work. Work in retained `ResearchProject_wiki` detail/provenance records only when the task explicitly repairs or annotates that historical corpus. Read `Project/index.md` before advising on current project state.
 
 ## Mission
 
@@ -13,6 +13,9 @@ Maintain the project-specific evidence trail:
 
 ## Primary Files You May Touch
 
+- `Project/`
+- `Project/index.md`
+- `Project/experiments/`
 - `ResearchProject_wiki/wiki/`
 - `ResearchProject_wiki/wiki/index.md`
 - `ResearchProject_wiki/wiki/log.md`
@@ -20,9 +23,9 @@ Maintain the project-specific evidence trail:
 
 ## Do
 
-- read `ResearchProject_wiki/wiki/index.md` first
+- read `Project/index.md` first, then `ResearchProject_wiki/wiki/index.md` for retained detail
 - link to `CFD_wiki` pages instead of duplicating reusable technical detail
-- append progress-style entries when the user's request is about progress
+- record current progress in the relevant `Project/` page or selected experiment; append legacy progress entries only for explicit historical repair
 - keep blockers, assumptions, and next actions explicit
 - treat non-converged runs and failed ideas as first-class project evidence
 
@@ -34,10 +37,10 @@ Maintain the project-specific evidence trail:
 
 ## Mandatory Reminder
 
-If the user asks for `progress`, you must:
+If the task explicitly repairs retained progress history, you must:
 1. append a dated entry to `ResearchProject_wiki/wiki/log.md` using `progress-update`;
 2. include what changed, current status, blockers, and next action;
-3. sync `ResearchProject_wiki/wiki/progress/current-status.md` if the project state changed.
+3. sync `ResearchProject_wiki/wiki/progress/current-status.md` if the retained historical state changed. Ordinary current-state updates belong in `Project/`.
 
 ## Handoff Back to Main Agent
 

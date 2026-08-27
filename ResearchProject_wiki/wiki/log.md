@@ -1,5 +1,7 @@
 # Work Log
 
+> Frozen compatibility record for migration #13. Do not append new project updates here. Start at [`Project/index.md`](../../Project/index.md) for current scientific truth and [`Project/experiments/`](../../Project/experiments/) for selected experiment records. Retain this log for historical provenance until final cleanup.
+
 ## [2026-08-17] run-update | Execute 03A 08b-parity native 1,000-iteration checkpoint
 
 - files created/updated: `../../PyAnsys/scripts/setup/run_03a_08b_parity_full_geometry.py`, `../../PyAnsys/output/03a_08b_parity_full_geometry_iter1000_20260817T110345Z.jou`, `../../PyAnsys/output/03a_08b_parity_full_geometry_iter1000_20260817T110345Z.json`, `../../PyAnsys/output/post_simulation_analysis/03a_08b_parity_full_geometry_iter1000_20260817T110345Z-flux-check.json`, `../../PyAnsys/output/post_simulation_analysis/03a_08b_parity_full_geometry_iter1000_20260817T110345Z-residual-check.json`, `../../PyAnsys/output/post_simulation_analysis/03a_08b_parity_full_geometry_iter1000_20260817T110345Z-residual-check.png`, `../../PyAnsys/src/pyansys_fluent/postprocess_live.py`, `wiki/progress/current-status.md`, `wiki/progress/experiments.md`, `wiki/log.md`, `../../PyAnsys/knowledge/fluent-settings/logs/successful_paths.md`
