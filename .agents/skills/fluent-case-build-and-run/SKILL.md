@@ -44,7 +44,7 @@ Before the smoke test or long run:
 5. preserve the scientific report/monitor definition while changing only its file destination;
 6. read back important destinations when possible;
 7. ensure required output directories exist and are writable;
-8. write or update the run's `run-paths.json` or equivalent authoritative path record.
+8. update the authoritative Project `run-paths.yaml` with the resolved destinations.
 
 Never rely on an unexamined Fluent current working directory. Never assume loading `C:\\somewhere\\parent.cas.h5` means a relative `monitor.out` will be written to `C:\\somewhere`.
 
@@ -61,19 +61,21 @@ A bare filename is acceptable only when its containing directory has been delibe
 
 Do not silently combine setup redesign with execution. Once the case is proven, hand the approved run to `implement-experiment` / `supervise-fluent-run`.
 
-## Initialize and run through Python by default
+## Initialize and hand off the run through Python by default
 
-For autonomous experiments inside `scientific-phase-loop`, use a Python/PyFluent runner supervised by an agent.
+For autonomous experiments inside `scientific-phase-loop`, use an approved Python/PyFluent runner launched through the detached run-and-handoff path.
 
 1. Load the verified child case when it is not already the known active case.
 2. Reconfirm the declared working directory and all required output/checkpoint/report paths on the Fluent machine.
 3. Start the initialization required by the setup.
-4. Wait for initialization to return successfully before starting the main calculation. If initialization fails, blocks irrecoverably, or leaves state uncertain, do not start the run.
-5. Start the requested calculation through the Python/PyFluent runner.
-6. Use the smoke test to confirm important generated files are appearing at their declared paths.
-7. Hand the long-lived terminal observation to `supervise-fluent-run`.
+4. Wait for initialization to return successfully before committing the expensive long run. If initialization fails, blocks irrecoverably, or leaves state uncertain, do not launch it.
+5. Run the agreed smoke test, including the exact setup readback/save-reopen proof and the short execution check required by the experiment.
+6. Define the exact Python/PyFluent long-run command and the terminal completion evidence: required files and/or a deterministic verifier.
+7. Create the derived run-and-handoff job spec with the exact Codex session ID.
+8. Launch `PyAnsys/scripts/orchestration/run_and_handoff.py --job <job.yaml>` through `supervise-fluent-run`.
+9. Let the detached worker own the long synchronous calculation. The current AI turn should not remain alive solely to observe normal Fluent progress.
 
-A busy or blocked Fluent call during an active synchronous calculation is not by itself evidence of failure. The supervising agent should primarily watch the runner terminal and use read-only inspection only when useful.
+A busy or blocked Fluent call during the active synchronous calculation is not by itself evidence of failure. The worker should let the approved horizon continue while Fluent can solve and should classify the terminal result only after the runner returns and verification runs.
 
 TUI-driven iteration, Fluent journal/batch submission, and GUI-owned runs require explicit human approval for that specific run. A PyFluent path failure is not permission to switch execution mechanisms automatically.
 
@@ -87,18 +89,22 @@ Stop before mutation or run launch when any of these occurs:
 - a dependency-sensitive setting cannot be read back;
 - an output/recovery file would be overwritten without permission;
 - initialization does not complete successfully;
-- the Python/PyFluent run path cannot execute the approved experiment faithfully.
+- the Python/PyFluent run path cannot execute the approved experiment faithfully;
+- no deterministic terminal completion proof can be defined;
+- the exact Codex session ID for autonomous continuation is unavailable when handoff is required.
 
 At handoff, state separately:
 
 - whether the child case was built and reload-verified;
 - whether the run path map was established and where it is stored;
 - the deliberately established Fluent working directory;
-- whether initialization completed;
+- whether initialization and smoke testing completed;
 - the Python runner and remote output paths;
+- the detached job spec and terminal manifest paths;
 - whether execution was completed or blocked;
 - the final independently observed progress;
 - the declared and actual locations of recovery, child, final data, `.out`/report files, transcript/log, and verification artifacts;
+- the Codex handoff status;
 - any path anomaly, implementation limitation, or execution limitation that must be reconsidered upstream.
 
 Scientific interpretation belongs downstream.
