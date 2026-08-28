@@ -1,6 +1,6 @@
 ---
 name: fluent-case-build-and-run
-description: "Build a new Ansys Fluent child case from an explicitly named parent and prepare it for a controlled Python-supervised calculation. Use when cloning or modifying a case, especially DPM or multiphase variants, when case identity, recovery copies, readback verification, initialization, and run handoff matter."
+description: "Build a new Ansys Fluent child case from an explicitly named parent and prepare it for a controlled Python-supervised calculation. Use when cloning or modifying a case, especially DPM or multiphase variants, when case identity, explicit output paths, recovery copies, readback verification, initialization, and run handoff matter."
 ---
 
 # Fluent Case Build and Run
@@ -14,6 +14,7 @@ Use this workflow for a case-derived Fluent setup and its handoff to execution. 
 - Define the child change narrowly: list what changes and what must remain unchanged. Identify the exact mutable state leaves and their expected post-change values before making a mutation.
 - Derive unique child-output and recovery paths. Refuse to overwrite a parent, recovery artifact, or existing child unless the user explicitly requests reuse.
 - Use an explicit experiment path or verified `PyAnsys/server-profiles/` filesystem knowledge. Never infer a run directory from `server_id`.
+- Receive the authoritative run path map from `fluent-fleet-orchestration` / `implement-experiment`; do not invent a second set of output locations inside the case-building script.
 
 ## Inspect before mutating
 
@@ -30,14 +31,33 @@ enable or create parent -> reacquire -> inspect active children/options
 
 Reacquire settings objects after loading a case, enabling a model, creating an object, changing particle type, or changing injection type.
 
+## Resolve Fluent file outputs before solving
+
+Fluent can retain relative filenames inside a case, especially for report/monitor files such as `.out`, autosaves, exports, transcripts, or other file-backed definitions. These may resolve against the directory where the active Fluent session was launched rather than the directory containing the loaded case.
+
+Before the smoke test or long run:
+
+1. inspect file-backed outputs that matter to the experiment;
+2. compare each destination with the run path map;
+3. replace relative, inherited, blank, or ambiguous destinations with explicit run-specific paths when the API supports this;
+4. if Fluent requires a relative filename, deliberately establish and verify the intended working directory and record the resulting absolute path;
+5. preserve the scientific report/monitor definition while changing only its file destination;
+6. read back important destinations when possible;
+7. ensure required output directories exist and are writable;
+8. write or update the run's `run-paths.json` or equivalent authoritative path record.
+
+Never rely on an unexamined Fluent current working directory. Never assume loading `C:\\somewhere\\parent.cas.h5` means a relative `monitor.out` will be written to `C:\\somewhere`.
+
+A bare filename is acceptable only when its containing directory has been deliberately fixed and the full resolved destination is recorded.
+
 ## Build the child case
 
 1. Before the first mutation, preserve the recovery state required by the experiment. If a recoverable field state matters, write and confirm a paired `.cas.h5`/`.dat.h5`; do not replace it with a case-only save.
 2. Make the requested changes in dependency order. For a replacement population, create and fully read back each new object before removing an inherited one.
 3. Run a strict pre-save audit. Require every intended change and every declared invariant to match the experiment contract.
 4. When a broad state object contains both immutable state and an intentional delta, compare it with a scoped diff: remove or replace only the declared mutable leaves on both sides, then require all remaining state to match. Audit each mutable leaf separately.
-5. Write the child `.cas.h5`, confirm that the remote file exists, reload it by full path, and repeat the strict audit.
-6. Record the explicit parent and child paths, intended delta, readback, Fluent version, and uncertainty labels. Do not use the server ID as report-facing case identity.
+5. Write the child `.cas.h5` to its declared full path, confirm that the remote file exists, reload it by full path, and repeat the strict audit.
+6. Record the explicit parent and child paths, intended delta, readback, Fluent version, output path map, and uncertainty labels. Do not use the server ID as report-facing case identity.
 
 Do not silently combine setup redesign with execution. Once the case is proven, hand the approved run to `implement-experiment` / `supervise-fluent-run`.
 
@@ -46,11 +66,12 @@ Do not silently combine setup redesign with execution. Once the case is proven, 
 For autonomous experiments inside `scientific-phase-loop`, use a Python/PyFluent runner supervised by an agent.
 
 1. Load the verified child case when it is not already the known active case.
-2. Configure the approved output/checkpoint paths on the Fluent machine.
+2. Reconfirm the declared working directory and all required output/checkpoint/report paths on the Fluent machine.
 3. Start the initialization required by the setup.
 4. Wait for initialization to return successfully before starting the main calculation. If initialization fails, blocks irrecoverably, or leaves state uncertain, do not start the run.
 5. Start the requested calculation through the Python/PyFluent runner.
-6. Hand the long-lived terminal observation to `supervise-fluent-run`.
+6. Use the smoke test to confirm important generated files are appearing at their declared paths.
+7. Hand the long-lived terminal observation to `supervise-fluent-run`.
 
 A busy or blocked Fluent call during an active synchronous calculation is not by itself evidence of failure. The supervising agent should primarily watch the runner terminal and use read-only inspection only when useful.
 
@@ -61,6 +82,7 @@ TUI-driven iteration, Fluent journal/batch submission, and GUI-owned runs requir
 Stop before mutation or run launch when any of these occurs:
 
 - parent/output identity cannot be established;
+- an important artifact or file-backed output destination remains implicit or ambiguous;
 - the parent audit does not match the intended branch assumptions;
 - a dependency-sensitive setting cannot be read back;
 - an output/recovery file would be overwritten without permission;
@@ -70,11 +92,13 @@ Stop before mutation or run launch when any of these occurs:
 At handoff, state separately:
 
 - whether the child case was built and reload-verified;
+- whether the run path map was established and where it is stored;
+- the deliberately established Fluent working directory;
 - whether initialization completed;
 - the Python runner and remote output paths;
 - whether execution was completed or blocked;
 - the final independently observed progress;
-- the location of recovery, child, final data, and verification artifacts;
-- any implementation or execution limitation that must be reconsidered upstream.
+- the declared and actual locations of recovery, child, final data, `.out`/report files, transcript/log, and verification artifacts;
+- any path anomaly, implementation limitation, or execution limitation that must be reconsidered upstream.
 
 Scientific interpretation belongs downstream.
