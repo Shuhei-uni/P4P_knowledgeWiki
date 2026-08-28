@@ -1,203 +1,218 @@
 ---
 name: supervise-fluent-run
-description: "Supervise a long Fluent calculation launched from a Python runner. Use inside implement-experiment after the case has been verified and smoke-tested, when an agent should stay with the terminal, observe execution efficiently, classify real run failures, verify declared output paths and final data, preserve selected important recovery states, and hand back clean execution facts without redesigning or interpreting the experiment."
+description: "Launch and supervise an approved long Fluent calculation without keeping an AI agent alive for the full solve. Use after the case has been verified and smoke-tested to create a detached deterministic run job, verify terminal outputs, write a machine-readable COMPLETE/BLOCKED manifest, and resume the exact Codex session when the run finishes or blocks."
 ---
 
 # Supervise Fluent Run
 
-Watch the approved simulation until it either produces verified final data or reaches a real execution blocker.
+The long solve should outlive the agent turn that launched it.
 
-The default autonomous-loop execution path is a Python runner supervised by an agent. TUI-driven runs and Fluent journal submission require explicit human approval for that run.
-
-The governing posture is:
+Default architecture:
 
 ```text
-observe continuously
-intervene rarely
-never confuse bad scientific behaviour with an execution failure
+verified case + execution contract
+→ detached Python/PyFluent worker
+→ Fluent advances for the approved horizon
+→ deterministic completion verification
+→ terminal job manifest: COMPLETE | BLOCKED
+→ resume exact Codex session
+→ analyse or diagnose
 ```
+
+Do **not** keep the scientific agent awake for hours merely to watch Fluent iterate.
+The worker owns waiting; the agent owns decisions before and after the run.
+
+The implementation entrypoint is:
+
+```text
+PyAnsys/scripts/orchestration/run_and_handoff.py
+```
+
+and the reusable implementation is:
+
+```text
+PyAnsys/src/pyansys_fluent/run_handoff.py
+```
+
+See `PyAnsys/queues/run-and-handoff.example.yaml` for the job contract shape.
 
 ## Receive an execution contract
 
 Before launch, know:
 
 - experiment/setup identity and run ID;
-- the canonical runtime `server.ref` plus separate server ID and IP;
-- exact remote case path;
-- exact remote run/output directory;
-- the canonical `run-paths.yaml` beside `setup.md` and `results.md` in the Project experiment packet;
-- the deliberately established Fluent working directory;
-- Python runner path and arguments;
-- initialization intent;
-- requested iteration/time horizon;
+- canonical runtime `server.ref`, separate server ID and IP;
+- exact parent/child case identity;
+- canonical experiment `run-paths.yaml`;
+- exact Python/PyFluent runner command and working directory;
+- initialization intent and approved iteration/time horizon;
 - expected final case/data paths;
 - checkpoint/autosave paths when configured;
-- every required file-backed report/monitor output path, including `.out` files;
-- which, if any, selected checkpoint states should be promoted for durable recovery;
-- expected OneDrive durability target for the final state when configured;
-- terminal/transcript/log paths when available.
+- required monitor/report/log outputs;
+- any deterministic remote verifier needed when output files are not visible to the worker locally;
+- OneDrive durability target when applicable;
+- the **explicit Codex session/thread ID** that should receive the completion event.
 
-Use the server profile under `PyAnsys/server-profiles/` when one exists. A server profile describes remote directory layout only; it does not establish which scientific case is loaded or where a relative Fluent output will actually be written.
+Do not identify the machine by a short server alias alone. Do not guess output roots.
+Do not use `codex exec resume --last` for autonomous handoff when several jobs may
+finish independently.
 
-Do not identify the machine by a short alias such as `server-2` alone when collaborators may have duplicate numbering. Use the fleet-resolved reference such as `server-2@192.168.1.42`.
+## Build the run-and-handoff job
 
-Do not guess a remote output root. Do not accept a bare output filename unless its working directory and resulting absolute destination are recorded. If neither the execution plan nor the experiment-local `run-paths.yaml` establishes important destinations, return the missing execution information before launching.
+Create a derived YAML job specification for the execution worker. It is an
+operational input, not a second scientific path authority; canonical scientific
+paths remain in the Project experiment packet.
 
-A remote copy of the path configuration may exist temporarily if the runner needs it, but it is derived. Do not let a server-local manifest become a competing source of truth.
+The job must define:
 
-## Default to Python-supervised execution
+```yaml
+job:
+  id: ...
+  manifest: ...
 
-Launch the approved run through Python/PyFluent and keep the agent attached to the runner terminal for the intended horizon.
+runner:
+  command: [...]
+  cwd: ...
+  log: ...
 
-Prefer one clear run command for the planned horizon rather than fine-grained agent-controlled iteration loops. Python may own the synchronous run call and final save; the supervising agent owns observation, failure classification, path/output reconciliation, recovery-artifact verification, and handoff.
+completion:
+  required_files: [...]
+  # and/or verifier_command: [...]
 
-Do not switch to TUI iteration, a Fluent journal, GUI submission, or another execution mechanism because it seems more convenient. Those are human-approved exceptions. If the Python/PyFluent path cannot execute the approved setup, report the blocker and request approval before using TUI or a journal.
+codex:
+  enabled: true
+  session_id: <explicit session id>
+  trigger_on: [COMPLETE, BLOCKED]
+```
 
-## Stay token-efficient
+Use argv lists, not shell command strings. Do not hide TUI or journal fallbacks
+inside the worker.
 
-Most of the supervisor's lifetime should require no reasoning.
+A zero process exit code is never enough by itself. The job must declare at
+least one completion proof:
 
-Do not narrate normal iteration-by-iteration progress. Wake up on meaningful events such as:
+- locally visible required files with minimum-size checks; and/or
+- a deterministic verifier command that returns zero only after the declared
+  remote final state has been verified.
 
-- initialization returns or fails;
-- the calculation begins;
-- a declared report/monitor output or selected recovery checkpoint appears;
-- an expected output fails to appear where the path map says it should;
-- the runner emits an exception or Fluent fatal error;
-- the runner or Fluent process terminates unexpectedly;
-- connection state becomes uncertain;
-- the calculation command returns;
-- the requested horizon is reached.
+## Launch detached
 
-When the terminal is simply advancing normally, wait and continue observing.
+Normal launch:
 
-Use read-only monitoring helpers when useful, but do not make continuous secondary polling a requirement for the solve to proceed.
+```text
+python PyAnsys/scripts/orchestration/run_and_handoff.py --job <job.yaml>
+```
 
-## Keep output locations reconciled
+The launcher starts a detached worker and returns immediately. The current Codex
+turn is therefore free to end while Fluent continues.
 
-The Project experiment `run-paths.yaml` is part of the execution contract.
+The worker then:
 
-During supervision, treat these as path anomalies worth reconciling:
+1. writes `RUNNING` to the job manifest;
+2. executes the approved Python/PyFluent runner synchronously;
+3. captures runner output to the declared log;
+4. enters `VERIFYING` after the runner returns;
+5. checks all required files and/or runs the deterministic verifier;
+6. writes terminal `COMPLETE` or `BLOCKED` **before** invoking the AI handoff;
+7. launches `codex exec resume <SESSION_ID> <prompt>` for the exact recorded
+   session when the terminal status matches `codex.trigger_on`.
 
-- a required `.out`, transcript, checkpoint, case/data save, or log is missing from its declared destination when it should exist;
-- Fluent creates an important file in the session launch directory or another unexpected location;
-- an existing relative path resolves somewhere other than the intended run root;
-- a file from another run would be overwritten;
-- the runner and Fluent disagree about the expected final path.
+The terminal manifest is the execution handoff source of truth. The Codex
+handoff is secondary: a completed simulation remains `COMPLETE` even if the
+Codex executable itself cannot be launched; the manifest records that handoff
+failure separately.
 
-Do not redirect scientific outputs ad hoc during an active run unless doing so is a safe execution-only correction. Prefer to preserve the current state, record the actual observed location, and return a blocker when changing paths mid-run could create uncertainty.
+## Duplicate-run safeguard
 
-An unexpected file found elsewhere must be documented with its actual path in the same canonical `run-paths.yaml`. Never silently pretend it was written to the planned location.
+The launcher refuses to start when the job manifest already exists.
+
+Do not bypass this casually. First reconcile whether the previous job is still
+running, completed, blocked, or left uncertain state. Only then may an explicit
+`--force` rerun be justified.
+
+This prevents a newly awakened agent from blindly repeating a 20k-iteration job
+because it lost conversational context.
 
 ## Distinguish evidence from execution failure
 
-The following are normally scientific evidence, not reasons for the supervisor to stop the run:
+The following are normally scientific evidence, not stop conditions:
 
 - poor, noisy, oscillatory, or slowly decaying residuals;
 - poor balances or unexpected physical monitors;
-- behaviour that appears scientifically unpromising;
-- an unexpected flow field or trend;
-- a temporarily unavailable read-only snapshot while the main calculation is busy.
+- scientifically unpromising behaviour;
+- unexpected flow fields or trends.
 
-Unless the experiment contract explicitly says otherwise, let the approved horizon finish when Fluent can continue solving.
+Unless the experiment contract defines another deterministic stop rule, the
+runner should attempt the approved fixed horizon while Fluent can continue.
 
-A real execution blocker includes events such as:
+A real execution blocker includes:
 
-- initialization cannot complete;
-- Fluent reports a floating-point/fatal solver error and cannot continue;
-- the Fluent process exits or crashes;
-- the Python runner raises an execution error before completion;
-- the calculation stops before the requested horizon and cannot be reconciled;
-- required final data cannot be written or verified;
-- important output locations become ambiguous enough that scientific evidence may be lost or overwritten;
-- case/data state becomes uncertain enough that repeating work could duplicate or overwrite unknown progress.
+- initialization failure;
+- Fluent floating-point/fatal error;
+- Fluent or Python runner crash;
+- the calculation stopping before the approved horizon;
+- required final files missing or undersized;
+- a deterministic final-state verifier failing;
+- output/case identity uncertainty severe enough that completion cannot be
+  proven safely.
 
-## Reconcile uncertainty; never blindly repeat work
+A blocked worker should preserve the available execution evidence and still
+trigger the Codex handoff so the scientific loop can diagnose the failure.
 
-Treat observer/gRPC loss separately from Fluent numerical failure.
+## Recovery and durability
 
-If connection or runner state becomes uncertain:
+Routine autosaves may remain local for same-server recovery. Preserve selected
+expensive checkpoints and important final case+data pairs according to the
+canonical `run-paths.yaml` and OneDrive durability policy.
 
-1. determine whether the same Fluent process still exists;
-2. establish the newest independently observed iteration/progress state;
-3. identify the latest verified paired case/data or autosave artifact;
-4. reconcile actual files against the canonical Project experiment path map;
-5. update that same `run-paths.yaml` with actual locations or uncertainty;
-6. do not issue another run command while completion of the previous command is uncertain;
-7. resume observation only after the actual state is reconciled.
+The detached wrapper does not itself redesign recovery policy or Fluent
+numerics. The experiment runner/verifier may use existing deterministic helpers
+to check or promote artifacts when the approved execution plan requires it.
 
-A local status file, short server alias, or iteration count is not sufficient evidence of simulation progress or case identity.
+Do not automatically rerun from a checkpoint after a numerical or setup failure.
+Wake the scientific agent with the blocker evidence and let the upstream loop
+decide.
 
-## Preserve selected important recovery states
+## Completion manifest
 
-Do not turn high-frequency autosave into high-frequency network synchronization.
-
-Routine autosaves may remain local for immediate same-server recovery. When the execution plan identifies an expensive or strategically important checkpoint worth protecting, preserve a complete matching case+data pair at the declared recovery paths and promote that selected state through the OneDrive durability path defined by `fluent-fleet-orchestration` when practical.
-
-A protected recovery artifact should have one artifact ID and enough provenance to identify its source run, runtime `server.ref`, and iteration/progress. Prefer manifest/hash verification after transfer for important checkpoints. Record its verified local and OneDrive locations in `run-paths.yaml`.
-
-This is specifically intended to reduce dependence on the current server: if the machine later becomes unavailable, a verified shared recovery pair may allow re-placement to another compatible server.
-
-## On a blocker, preserve and hand back
-
-Do not redesign the experiment from inside this skill.
-
-When a real execution blocker occurs:
-
-- stop issuing new mutating commands;
-- preserve the last verified paired checkpoint/data state available locally;
-- when practical and safe, promote a valuable recovery pair to OneDrive before abandoning the server state;
-- capture the relevant terminal error, Fluent message, and runner exception;
-- record the last independently observed iteration/progress;
-- update the experiment-local `run-paths.yaml` with actual-vs-declared path differences and durability state;
-- classify whether the failure is initialization, solver/numerical execution, Python/PyFluent execution, transport/state uncertainty, path/output failure, or file/output failure;
-- hand the execution facts back to `implement-experiment` and `scientific-phase-loop` for the rethink.
-
-Do not automatically lower relaxation factors, change timestep, alter initialization, change models, or rerun from a checkpoint. Those are scientific or implementation decisions owned upstream.
-
-## Completion requires verified data and locatable outputs
-
-Do not claim success because the Python command returned or enough wall time elapsed.
-
-For an iteration-based run, verify at minimum:
-
-- the requested target;
-- the final independently observed iteration count;
-- the expected final `.dat.h5` exists at the declared path and belongs to the intended run;
-- the matching final case/restart identity is known at its declared path;
-- required logs, histories, report `.out` files, and checkpoints are locatable at their declared paths or have an explicitly reconciled actual location;
-- the canonical Project experiment `run-paths.yaml` is updated and available;
-- any execution or path anomaly is recorded.
-
-For scientifically important finals, also preserve a complete paired case+data final artifact. When the execution plan calls for durable preservation, promote that pair to OneDrive and verify the shared copy. If promotion cannot be completed, report `LOCAL_ONLY` rather than masking the durability gap.
-
-If the target was not reached, return `BLOCKED`, not `COMPLETE`.
-
-## Handoff
-
-Return a compact execution handoff only:
+The terminal JSON should make the execution state recoverable without the old
+agent context. At minimum it records:
 
 ```text
-STATUS: COMPLETE | BLOCKED
-experiment: ...
-run: ...
-server.ref: server-2@192.168.1.42
-server.id: server-2
-server.ip: 192.168.1.42
-runner: ...
-requested horizon: ...
-final observed progress: ...
-run-paths manifest: Project/.../experiment/run-paths.yaml
-fluent working directory: ...
-local case: ...
-local final data: ...
-report/monitor outputs: declared -> actual
-latest verified recovery artifact: ...
-onedrive final/recovery artifact: ...
-durability: VERIFIED | LOCAL_ONLY | NOT_REQUIRED
-log/transcript: ...
-path anomaly: ...
-execution failure/anomaly: ...
+job_id
+status: COMPLETE | BLOCKED
+worker pid
+runner command/cwd/log/return code
+start/finish timestamps
+required-file checks
+verifier command/result/log when used
+Codex handoff enabled/status/pid/log
 ```
 
-Do not perform CFD interpretation here. Successful completion hands the data to numerical analysis. A blocked run hands the execution evidence back to the scientific loop.
+The resumed agent must also read the canonical Project experiment packet and
+`run-paths.yaml`; the generated worker manifest does not replace them.
+
+## Handoff behaviour
+
+On `COMPLETE`:
+
+```text
+read terminal manifest
+→ verify experiment identity/path authority
+→ run required post-processing
+→ interpret evidence
+→ update Project result state
+→ choose the next scientific action
+```
+
+On `BLOCKED`:
+
+```text
+read terminal manifest + runner/verifier logs
+→ classify the execution failure
+→ preserve/reconcile latest verified state
+→ decide recovery, repair, redesign, or human boundary
+```
+
+Do not perform CFD interpretation inside the detached worker. The worker is an
+execution boundary and hook; the resumed scientific agent does the reasoning.
