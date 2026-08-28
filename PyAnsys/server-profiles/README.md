@@ -8,21 +8,23 @@ A server profile is routing and filesystem knowledge only. It must never be used
 
 ## Profile convention
 
-Use one YAML file per configured endpoint, for example:
+Use one YAML file per configured endpoint/profile. Because multiple operators may each have a local `server-1`, `server-2`, and so on, make the profile filename itself collision-resistant with a stable operator or endpoint namespace, for example:
 
 ```text
-server-1.yaml
-server-2.yaml
-server-3.yaml
-student.yaml
+shuhei-server-1.yaml
+shuhei-server-2.yaml
+partner-server-1.yaml
+partner-server-2.yaml
 ```
 
-Keep only paths and operational notes that have been directly observed or explicitly supplied by the user. Do not guess missing roots.
+The static profile does not need to contain the server IP. Keep connection/IP resolution in the existing environment or connection configuration, especially while this repository is public.
 
 A minimal profile may contain:
 
 ```yaml
-server: 1
+profile_id: shuhei-server-1
+server_id: server-1
+connection_key: SHUHEI_FLUENT_SERVER_1
 path_style: windows
 working_root: 'C:\\known\\working\\root'
 experiment_root: 'C:\\known\\experiment\\root'
@@ -31,12 +33,34 @@ notes:
   - 'Keep active Fluent run data on local storage.'
 ```
 
-Do not store IP addresses, passwords, server-info credentials, tokens, or other secrets here. Connection credentials remain in the existing environment configuration.
+Keep only paths and operational notes that have been directly observed or explicitly supplied by the user. Do not guess missing roots.
+
+Do not store passwords, server-info credentials, tokens, or other secrets here.
+
+## Runtime server identity
+
+A short server ID alone is not unique enough for execution records when collaborators may each have `server-1`, `server-2`, and so on.
+
+During live fleet preflight, resolve the actual IP used for the connection and form a runtime server reference from both values:
+
+```yaml
+server:
+  ref: 'server-2@192.168.1.42'
+  id: 'server-2'
+  ip: '192.168.1.42'
+  profile_id: 'shuhei-server-2'
+```
+
+Use `server.ref` as the canonical server identity in run placement, execution handoffs, and `run-paths.yaml`. Keep `server.id` and `server.ip` as separate fields as well so tooling does not need to parse the combined string.
+
+Do not use `server_id` alone as a durable run identity. The IP is live operational metadata and should be recorded from the endpoint actually used for the run rather than guessed from the profile name.
+
+If a public/routable IP or another endpoint value should not be committed to this public repository, keep that sensitive value out of Git and use the approved private operational record instead. Private/local endpoint details should not be exposed merely for naming convenience.
 
 ## Run use
 
-`supervise-fluent-run` should read the matching profile before allocating an operational run directory. If the experiment setup already gives explicit remote paths, those paths take precedence.
+`fluent-fleet-orchestration` should resolve the static profile plus the live endpoint into the runtime server reference before allocating work. `supervise-fluent-run` then uses that resolved placement.
 
 If no verified profile or explicit path exists, stop before launching and obtain/inspect the correct remote path. Once a path is verified, it may be added to the profile for future runs.
 
-Do not infer case identity, iteration state, or scientific provenance from the server name or directory alone.
+Do not infer case identity, iteration state, or scientific provenance from the server reference, profile name, or directory alone.
