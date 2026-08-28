@@ -1,0 +1,7 @@
+interface:
+  display_name: "Wait What"
+  short_description: "Re-pitch the last explanation more clearly."
+  default_prompt: "Use $wait-what to re-pitch the explanation that just did not land, adding the missing context and using the project's established language."
+
+policy:
+  allow_implicit_invocation: false
