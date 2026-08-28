@@ -19,7 +19,9 @@ When several setups belong together, make their relationship explicit: what each
 
 ## Define each experiment boundary
 
-For every setup, state the verified parent/reference case, the intentional change, and what must remain comparable.
+For every setup, state the verified parent/reference artifact, the intentional change, and what must remain comparable.
+
+Prefer a server-neutral parent artifact identity over a machine-specific path. When available, record the artifact ID and enough provenance to distinguish the exact parent case/data state from similarly named files. Server aliases and local paths belong to the later execution plan created by `fluent-fleet-orchestration`, not to the scientific meaning of the setup.
 
 Make clear which settings are inherited, which are deliberately changed, and which differences would compromise interpretation.
 
@@ -39,6 +41,8 @@ For linked setups, preserve compatible definitions and output bases wherever the
 
 Specify enough about initialization when required, run mode, fixed iteration target, numerical settings, checkpointing, and comparison basis for `implement-experiment` to reproduce the intended tests.
 
+When the resulting final state is scientifically important, likely to become a future parent, or expensive to reproduce, mark it for durable preservation as a complete paired case+data artifact. Likewise, identify any deliberately selected recovery checkpoint worth preserving beyond the local server. Do not request OneDrive promotion for every routine autosave.
+
 Do not invent unnecessary Fluent detail. Prefer a clear delta from a verified parent/reference case where that is safer and easier to audit.
 
 ## Preserve uncertainty
@@ -51,6 +55,8 @@ Keep hypotheses labelled as hypotheses. Do not write expected trends as conclusi
 
 Create or update one setup record per distinct simulation in the selected strategy, using the repository's canonical setup location and naming conventions.
 
-A useful setup record contains the question and rationale, hypothesis, prior evidence, parent/reference identity, controlled change, frozen comparison context, run intent, required evidence/visualisations, important assumptions and limitations, and any relationship to the wider linked campaign.
+A useful setup record contains the question and rationale, hypothesis, prior evidence, parent/reference artifact identity, controlled change, frozen comparison context, run intent, required evidence/visualisations, important assumptions and limitations, durability intent for final/selected recovery states, and any relationship to the wider linked campaign.
 
-The handoff is complete when `implement-experiment` can build and run every intended setup and `interpret-experiment` can later recover both the purpose of each run and the logic of the combined experiment strategy.
+Do not bind the setup to a server merely because the parent currently lives there. After setup creation, `fluent-fleet-orchestration` resolves the current live server placement, verified parent source, any OneDrive transfer, and exact remote paths.
+
+The handoff is complete when `fluent-fleet-orchestration` can place the setup, `implement-experiment` can build and run it from the exact resolved parent, and `interpret-experiment` can later recover both the purpose of the run and the logic of the combined experiment strategy.
