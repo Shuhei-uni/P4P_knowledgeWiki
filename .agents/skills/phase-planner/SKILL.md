@@ -1,6 +1,7 @@
 ---
 name: phase-planner
 description: "Run a human-invoked catch-up to work out where the CFD project stands and what phase-level direction to take next. Read the repo, explain what the simulations actually tell us, discuss the best next directions with the human, then hand the agreed phase goal to scientific-phase-loop. Do not design individual simulations or start the loop."
+disable-model-invocation: true
 ---
 
 # Phase Planner
