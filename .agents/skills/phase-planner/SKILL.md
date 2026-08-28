@@ -1,104 +1,88 @@
 ---
 name: phase-planner
-description: "Run a human-invoked scientific catch-up and phase-planning session. Use before starting a phase, after an autonomous phase loop stops, or when the human wants to reconstruct where the project stands and decide the next phase-level direction without designing individual simulations yet."
+description: "Run a human-invoked catch-up to work out where the CFD project stands and what phase-level direction to take next. Read the repo, explain what the simulations actually tell us, discuss the best next directions with the human, then hand the agreed phase goal to scientific-phase-loop. Do not design individual simulations or start the loop."
 ---
 
 # Phase Planner
 
-Before deciding what the project should do next, reconstruct what the evidence actually says about where the science stands.
+Treat this like a research catch-up with the human, not a formal planning report.
 
-This is a human-invoked planning skill. It does not run the autonomous scientific loop and it does not design the experiment sequence for that loop.
+Read the repo first. Work out what we were trying to learn, what the simulations actually showed, what did not work, and what is still unclear. Use `show-me-your-work` when there is a lot of previous work to reconstruct.
 
-## Reconstruct the current position
+## Catch me up
 
-Start from durable repository evidence, not from the most recent chat message or setup number.
+Answer the useful questions:
 
-Recover:
+- What were we trying to figure out?
+- What do the runs actually tell us?
+- What surprised us or went against what we expected?
+- What do we still not know?
+- What limits how strongly we can say anything?
 
-- the phase question or goal that was being pursued;
-- the experiments and analyses that materially changed understanding;
-- the strongest simulation evidence;
-- important failures, contradictions, or superseded interpretations;
-- what is currently supported;
-- what remains uncertain, weakly supported, contradicted, or untested;
-- numerical or modelling limitations that bound the current conclusions.
+Do not dump every setup or result. Pull out the evidence that changes the current picture.
 
-Use `show-me-your-work` when substantial autonomous work needs to be reconstructed. Treat that reconstruction as evidence for planning, not as the plan itself.
+Simulation data is the main source of truth for what happened in our model. Literature, Fluent guidance, past experience, and reasoning can help explain results or suggest what to try next, but do not turn them into simulation results we have not actually observed.
 
-## Think at phase level
+If the evidence is weak, say so. `We do not know yet` is a valid answer.
 
-Do not jump straight to individual Fluent settings or setup files.
+## What should we do next?
 
-Ask:
+Stay at phase level. Do not jump straight into exact URFs, pressures, timesteps, setup files, or an experiment matrix unless the human asks.
 
-- What question can we answer now that we could not answer before?
-- What important uncertainty still prevents a strong phase-level statement?
-- Is the current phase still the right question to pursue?
-- Has the evidence exposed a more important modelling assumption or scientific direction?
-- Would more work in the current phase materially improve the project, or are we ready to move on?
+First decide whether the current phase still has useful work left. Do not invent a new phase just because the last batch of simulations finished.
 
-A phase may continue, narrow, broaden, be reframed, or end.
+If there are genuinely different ways forward, give a small number of real options. Usually one to three is enough.
 
-## Develop a small number of directions
+For each direction, explain simply:
 
-If further work is justified, identify a small number of scientifically meaningful phase-level directions.
-
-Judge them by what they would accomplish for the project, not by how easy they are to turn into simulations.
-
-For each direction explain:
-
-- the phase-level question it would pursue;
+- what question it would answer;
 - why that question matters now;
-- which current uncertainty it addresses;
-- what kind of evidence would make the direction successful;
-- major trade-offs, assumptions, or human decisions involved.
+- what evidence would make the work worthwhile;
+- the main cost, risk, or assumption.
 
-Use `arena` or `interrogate` when the phase direction is consequential or genuinely contested. Do not create alternatives merely to fill a list.
+Say which direction you would pick and why when the evidence supports a recommendation. The human can change it, merge ideas, reject it, or keep discussing.
 
-Recommend the strongest direction when the evidence supports one, while keeping the judgement open for human discussion.
+Use `arena` or `interrogate` only when the direction is genuinely hard to choose or worth challenging from independent viewpoints.
 
-## Discuss before handing off
+## Talk like a technical teammate
 
-The purpose of this skill is a scientific planning conversation with the human.
+Use technical terms when they are the clearest words: Mixture, VOF, residuals, mass balance, `k`, `epsilon`, FPE, timestep, under-relaxation factor, and so on.
 
-Do not automatically launch simulations, invoke `scientific-phase-loop`, or turn the recommended direction into a fixed experiment campaign.
+But prefer plain language around them.
 
-Resolve with the human, as needed:
+Say `what do we still not know?` instead of `what unresolved uncertainty remains?`.
 
-- the next phase goal or question;
-- important modelling or scientific boundaries;
-- compute or resource limits;
-- decisions the human wants to retain;
-- what would count as a useful phase-level conclusion;
-- when the autonomous loop should return control.
+Say `this run does not support that claim yet` instead of wrapping the point in formal scientific-planning language.
 
-## Handoff to the autonomous loop
+Keep the technical detail. Cut the fluff.
 
-Once the phase direction is agreed, produce a concise phase handoff for `scientific-phase-loop` containing:
+Do not use consultant-speak, fake certainty, or long formal summaries when a short direct explanation works.
 
-- phase goal/question;
-- current evidence that matters;
-- important unresolved uncertainty;
-- human constraints and boundaries;
-- definition of a useful phase conclusion;
-- explicit human-return conditions.
+## Decide with the human
 
-The handoff defines the destination and boundaries, not the route.
+Do not automatically launch simulations or invoke `scientific-phase-loop`.
 
-`scientific-phase-loop` remains responsible for reasoning within the phase: forming and revising hypotheses, designing high-information experiments, running simulations, analysing evidence, interpreting results, and choosing what to test next.
+Talk through the direction first. Before handing off, agree on the parts that actually matter:
 
-## Output
+- the phase question or goal;
+- what is in scope and what is not;
+- important modelling assumptions or boundaries;
+- compute or resource limits when they matter;
+- what would count as enough evidence for this phase;
+- when the loop should come back to the human.
 
-Keep the catch-up compact enough to discuss:
+## Handoff
 
-1. **Current phase question**
-2. **Where we are now**
-3. **Strongest evidence and important contradictions**
-4. **What remains unresolved**
-5. **Whether the current phase should continue, change, or end**
-6. **Candidate phase-level directions, if needed**
-7. **Recommended direction and trade-offs**
-8. **Questions or boundaries to agree with the human**
-9. **Phase handoff**, only after direction is agreed
+Once the direction is agreed, give `scientific-phase-loop` a short handoff:
 
-Do not turn this into a project-management roadmap. The aim is to decide what scientific question deserves the next autonomous effort.
+- **Goal** — what this phase is trying to answer.
+- **Why now** — why this is the useful question given the evidence so far.
+- **What we already know** — only the evidence that matters for this phase.
+- **Main unknowns / assumptions** — what is still open or being accepted for now.
+- **Boundaries** — what the loop should not casually change.
+- **Enough evidence looks like** — what would support a useful phase conclusion.
+- **Return to the human when** — the decisions the loop should not make alone.
+
+The handoff sets the destination and boundaries, not the route.
+
+`scientific-phase-loop` still owns the thinking inside the phase: revising hypotheses and assumptions, choosing discovery or hypothesis-test experiments, running simulations, analysing the data, interpreting what happened, and deciding what to test next.
