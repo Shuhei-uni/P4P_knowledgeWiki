@@ -1,6 +1,6 @@
 ---
 name: fluent-fleet-orchestration
-description: "Discover the live Fluent server fleet, inventory exact case/data artifacts, plan verified transfers and server placement for approved simulation work, and preserve important restart states through OneDrive. Use whenever scientific work needs new Fluent compute, especially when multiple independent servers may be online or offline and parent cases are not available on every machine."
+description: "Discover the live Fluent server fleet, inventory exact case/data artifacts, plan verified transfers and server placement for approved simulation work, make every run output location explicit, and preserve important restart states through OneDrive. Use whenever scientific work needs new Fluent compute, especially when multiple independent servers may be online or offline and parent cases are not available on every machine."
 ---
 
 # Fluent Fleet Orchestration
@@ -92,6 +92,79 @@ Also consider whether a server is already occupied, whether several related runs
 
 Do not copy artifacts between machines merely because another server is idle. Transfer only when it unlocks justified work, improves resilience, or preserves an important state.
 
+## Make every filesystem destination explicit
+
+Do not let Fluent, Python, or a previously launched session decide where outputs happen to land.
+
+Before `implement-experiment` starts mutating or solving, the execution plan must contain a **run path map** that resolves every important write location. Prefer absolute paths. At minimum state, when applicable:
+
+- the observed or deliberately set Fluent working directory;
+- staging/temporary root;
+- run root;
+- verified parent case and data paths;
+- built child/setup case path;
+- smoke-test case/data paths when they are saved;
+- final case path;
+- final data path;
+- autosave/checkpoint directory and filename pattern;
+- every file-backed report/monitor destination, including Fluent `.out` files;
+- transcript path;
+- Python runner log/status path;
+- journal path only when a human-approved journal is used;
+- artifact manifest path;
+- the OneDrive destination for durable final/recovery artifacts.
+
+Do not use a bare filename such as `mass-flow.out`, `final.dat.h5`, or `checkpoint.cas.h5` without also resolving and recording the directory in which Fluent will create it.
+
+The active Fluent session may have been launched from an unrelated directory. Treat the inherited session working directory as unsafe for scientific outputs unless it has been deliberately inspected and accepted for this run. Loading a case from a directory also does not prove that later relative outputs will be written beside that case.
+
+### Inspect relative paths embedded in the loaded case
+
+A loaded Fluent case may already contain report files, monitor files, autosave definitions, exports, or other file-backed objects with relative destinations. Before the smoke test and again before the long run when needed:
+
+1. inspect the active file-backed output definitions;
+2. identify any relative, blank, inherited, or ambiguous destination;
+3. resolve it to the intended run path;
+4. where Fluent/PyFluent supports it, rewrite only the output destination to an explicit run-specific path;
+5. where the interface requires a relative filename, deliberately establish and verify the working directory and record the resulting absolute destination;
+6. read back the configured destination when possible.
+
+Changing only a report/monitor **file destination** is an implementation detail and should not change its scientific definition, scope, quantity, or sampling behaviour.
+
+If the location of an important generated file cannot be resolved before launch, treat that as missing execution information rather than hoping the file can be found later.
+
+### Write the run path map to disk
+
+Before the main solve, write a small machine-readable file under the run root, preferably `run-paths.json` or an equivalent manifest, containing the resolved destinations actually being used.
+
+Example:
+
+```json
+{
+  "run_id": "S4-05-run-001",
+  "server": "server-3",
+  "fluent_working_dir": "C:\\P4P\\runs\\S4-05-run-001",
+  "run_root": "C:\\P4P\\runs\\S4-05-run-001",
+  "parent_case": "C:\\P4P\\parents\\F11.cas.h5",
+  "parent_data": "C:\\P4P\\parents\\F11.dat.h5",
+  "child_case": "C:\\P4P\\runs\\S4-05-run-001\\setup.cas.h5",
+  "final_case": "C:\\P4P\\runs\\S4-05-run-001\\final.cas.h5",
+  "final_data": "C:\\P4P\\runs\\S4-05-run-001\\final.dat.h5",
+  "report_files": {
+    "brine_mass_flow": "C:\\P4P\\runs\\S4-05-run-001\\reports\\brine_mass_flow.out"
+  },
+  "autosave_root": "C:\\P4P\\runs\\S4-05-run-001\\checkpoints",
+  "transcript": "C:\\P4P\\runs\\S4-05-run-001\\logs\\fluent.trn",
+  "runner_log": "C:\\P4P\\runs\\S4-05-run-001\\logs\\runner.log",
+  "artifact_manifest": "C:\\P4P\\runs\\S4-05-run-001\\artifact-manifest.json",
+  "onedrive_final_root": "..."
+}
+```
+
+The exact schema may evolve, but one authoritative path record must exist. Code, agents, and later analysis should use or reconcile against that record rather than reconstructing locations from assumptions.
+
+Before launch, create required directories and check that intended destinations are writable and will not unintentionally overwrite another run. After the smoke test and after the long run, verify that required outputs appeared at the declared locations. Unexpected files discovered elsewhere should be recorded as an execution anomaly and either moved/reconciled deliberately or left untouched with their actual location documented.
+
 ## Use OneDrive as the shared durability and transfer layer
 
 Treat OneDrive as a verified shared cache/archive for important Fluent artifacts, not as scientific identity by itself.
@@ -128,7 +201,7 @@ If OneDrive is temporarily unavailable, preserve the full local case/data pair a
 
 ## Produce an explicit execution plan
 
-Before `implement-experiment`, make placement and staging concrete. A useful execution plan contains:
+Before `implement-experiment`, make placement, staging, paths, and durability concrete. A useful execution plan contains:
 
 ```yaml
 setup_id: S4-05
@@ -142,10 +215,24 @@ parent:
 staging:
   transfer_required: true
   verify_before_load: true
-remote:
+paths:
+  fluent_working_dir: ...
+  staging_root: ...
+  run_root: ...
   parent_case: ...
   parent_data: ...
-  run_root: ...
+  child_case: ...
+  final_case: ...
+  final_data: ...
+  autosave_root: ...
+  report_files:
+    brine_mass_flow: ...
+    continuity: ...
+  transcript: ...
+  runner_log: ...
+  run_paths_manifest: .../run-paths.json
+  artifact_manifest: .../artifact-manifest.json
+  onedrive_final_root: ...
 durability:
   final_to_onedrive: true
   important_checkpoint_policy: selected-only
@@ -153,7 +240,7 @@ durability:
 
 The exact remote paths belong to the execution plan, not the scientific setup definition.
 
-`implement-experiment` should receive this placement contract and execute it faithfully. If staging cannot prove the required parent, do not substitute a similarly named local file; return the placement failure for re-planning.
+`implement-experiment` should receive this placement contract and execute it faithfully. If staging cannot prove the required parent, or important output locations remain ambiguous, do not substitute a similarly named local file or implicit working directory; return the placement/path failure for re-planning.
 
 ## Use the fleet in waves when useful
 
@@ -192,9 +279,10 @@ Return a compact operational state rather than scientific interpretation:
 FLEET: active / busy / unavailable servers
 ARTIFACTS: exact parent/final/recovery locations and verification status
 PLACEMENT: setup -> run -> server
+PATH MAP: run-paths manifest and all resolved local/output roots
 TRANSFERS: required source -> OneDrive -> destination actions
 DURABILITY: verified OneDrive finals/checkpoints and any LOCAL_ONLY debt
-BLOCKERS: unavailable parent, uncertain identity, missing paths, compatibility issues
+BLOCKERS: unavailable parent, uncertain identity, ambiguous output path, compatibility issues
 ```
 
-The scientific orchestrator decides what experiments are worth doing. This skill makes the justified work runnable, parallel where sensible, and less dependent on any one physical server.
+The scientific orchestrator decides what experiments are worth doing. This skill makes the justified work runnable, locatable, parallel where sensible, and less dependent on any one physical server.
