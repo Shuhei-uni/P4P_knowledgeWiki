@@ -64,6 +64,16 @@ Ask:
 
 The repository is the durable scientific memory. Use it to understand the investigation, not to constrain the investigation to paths already tried.
 
+## Preflight the live compute fleet before runnable design
+
+Whenever the next step requires new Fluent compute, call `fluent-fleet-orchestration` before committing runnable experiments.
+
+Establish which configured servers are actually reachable now, which are idle or occupied, and which exact parent/final/recovery case+data artifacts are accessible locally or through the shared OneDrive layer. Treat this as live operational evidence, not static project configuration.
+
+Give `design-experiment` the real resource envelope so a scientifically justified campaign can exploit useful parallel capacity and case locality. Do not let server availability invent weak experiments merely to keep machines busy.
+
+Repeat this preflight every time the loop returns for another round of compute, because server availability and artifact locality may have changed since the previous cycle.
+
 ## Navigate uncertainty
 
 Treat the unresolved parts of the phase as a landscape of uncertainty.
@@ -108,13 +118,17 @@ Choose again whenever the evidence changes the nature of the uncertainty.
 
 ## Execute approved experiments through supervised Python
 
-Once `create-setup` has made the experiment precise, call `implement-experiment` to build and verify it. Long calculations then pass to `supervise-fluent-run`.
+Once `create-setup` has made the experiment precise, call `fluent-fleet-orchestration` again to resolve each server-neutral setup into an explicit execution plan: run ID, selected server, exact parent artifact, any verified OneDrive staging, remote paths, and durability expectations.
+
+Then call `implement-experiment` to build and verify it. Long calculations pass to `supervise-fluent-run`.
 
 For experiments inside this autonomous loop, the default execution mechanism is a Python/PyFluent runner supervised by an agent for the full planned horizon.
 
 Do not independently choose TUI-driven iteration, a Fluent journal/batch, or GUI-owned execution. Those mechanisms require explicit human approval for that specific run. If the Python/PyFluent path is blocked, return the execution evidence rather than silently changing run mechanism.
 
 The run supervisor is an execution observer, not another scientist. It should let poor residuals, poor balances, or unexpected model behaviour continue to the planned horizon when Fluent can still solve. A genuine initialization failure, floating-point/fatal error, process crash, unreconciled run state, or failed final save returns the experiment to this loop for a rethink.
+
+Important final states and selected expensive recovery checkpoints should not remain dependent on one server. When practical, preserve complete paired case+data artifacts and promote them through the OneDrive durability path defined by `fluent-fleet-orchestration`.
 
 ## Make simulations earn their cost
 
@@ -238,8 +252,8 @@ Do not manufacture certainty. A well-supported negative or conditional conclusio
 
 ## Preserve the scientific thread
 
-Long-running research should survive the death of any individual agent context.
+Long-running research should survive the death of any individual agent context or physical Fluent server.
 
-Use the repository to preserve the scientific thread through setup definitions, results, observations, figures, hypotheses, working assumptions, and the current phase understanding. A fresh agent should be able to recover where the phase stands and continue reasoning without needing the previous chat transcript.
+Use the repository to preserve the scientific thread through setup definitions, results, observations, figures, hypotheses, working assumptions, and the current phase understanding. Use verified OneDrive copies of important full case+data states to preserve the reusable simulation artifacts themselves. A fresh agent should be able to recover where the phase stands and a different available server should be able to recover important parent/restart artifacts without depending on one machine remaining online forever.
 
-Keep that durable state concise enough to be useful. The repository is the memory of the investigation, not a transcript of the agent's thought process.
+Keep durable state concise enough to be useful. The repository is the memory of the investigation, not a transcript of the agent's thought process; OneDrive is the durable artifact layer, not a substitute for scientific provenance.
