@@ -32,7 +32,7 @@ from another shell, and do not hard-code a different clone's absolute path.
 - `scripts/inspection/`: non-mutating discovery, snapshots, and probes.
 - `scripts/setup/`: thin case-specific setup/run orchestration.
 - `server-profiles/`: non-secret per-server remote directory knowledge; routing
-  and filesystem context only, never case identity.
+  and filesystem context only, never case identity or live availability.
 - Report/post-processing helpers that were tied to retired campaign trees are
   not kept as a second active layer; current read-only checks live in
   `scripts/inspection/` and reusable modules under `src/`.
@@ -51,6 +51,9 @@ Treat Fluent as a dependency-ordered state machine, not a static object tree.
 or diagnostic metadata, not case identity. Inspect the loaded case/data state
 and use an explicit or independently observed case/data path. If identity
 cannot be established, record it as unavailable rather than guessing.
+
+Keep artifact ID, setup ID, run ID, and server ID separate. A scientific setup
+must remain meaningful when re-placed onto another compatible server.
 
 For a non-trivial change, use this order:
 
@@ -74,13 +77,33 @@ exception. Use these failure labels: `order/dependency issue`,
 limitation`, `requires human-approved TUI/journal fallback`, or `requires
 manual GUI cleanup`.
 
+## Fleet preflight and placement
+
+Before new Fluent compute is committed, use `fluent-fleet-orchestration` to
+check which configured servers are actually reachable and usable now, which are
+busy, and which exact paired case/data artifacts are available on each machine
+or through OneDrive.
+
+Do not assume a server is available because it was used earlier in the phase.
+Do not assume a parent exists on every server. Repeat live preflight whenever a
+new compute cycle starts or server availability materially changes.
+
+Prefer run placement in this order: exact verified parent already local;
+verified parent available through OneDrive; verified parent publishable from
+another active server; otherwise block until a trusted replica can be found.
+Use useful active servers in parallel when the scientific work justifies it,
+but never invent low-value experiments solely to increase utilization.
+
+A setup record remains server-neutral. Exact server selection, local paths,
+transfer steps, and durability destinations belong to the execution plan.
+
 ## CASE → INITIALISE / RUN
 
 Setup construction and long-run supervision are separate responsibilities.
 
-- A setup script loads an explicit parent, verifies remote inputs, inspects the
-  current state, applies only the selected delta, verifies critical invariants,
-  and writes the required case artifact.
+- A setup script loads the exact resolved parent artifact, verifies remote
+  inputs, inspects the current state, applies only the selected delta, verifies
+  critical invariants, and writes the required case artifact.
 - For autonomous work inside `scientific-phase-loop`, the default run mechanism
   is a Python/PyFluent runner supervised by an agent using `supervise-fluent-run`.
 - The supervising agent stays with the runner terminal for the planned horizon,
@@ -98,9 +121,42 @@ Setup construction and long-run supervision are separate responsibilities.
   verified state and return the execution evidence for a rethink. Poor
   residuals or scientifically unpromising behaviour are not execution stop
   conditions when Fluent can still continue.
-- Record the actual parent identity, controlled change, readback, case artifact,
-  Python runner, requested budget, observed final state, remote artifact paths,
-  and unresolved execution uncertainty.
+- Record the actual parent artifact identity, controlled change, readback, case
+  artifact, run ID, selected server, Python runner, requested budget, observed
+  final state, remote artifact paths, durability status, and unresolved
+  execution uncertainty.
+
+## Durable case/data preservation
+
+Treat server-local storage as working storage, not the sole long-term home of
+important scientific state.
+
+Strongly prefer saving and promoting a **complete matching case+data pair** to
+the approved OneDrive location for:
+
+- scientifically important final run states;
+- final states likely to become future branch parents;
+- selected expensive recovery checkpoints whose loss would require substantial
+  rerunning;
+- important pre-change/reference states that would be difficult to reconstruct.
+
+Do not synchronize every routine autosave or checkpoint. Keep high-frequency
+recovery local when appropriate, then promote deliberately selected recovery
+states and finals.
+
+For important promoted artifacts, preserve one artifact ID plus source
+setup/run, iteration or progress, filenames, origin server, and hashes when
+feasible. Verify the copied pair before treating it as durable. A file merely
+appearing in a local OneDrive folder is not enough evidence of successful
+preservation when the artifact is crucial.
+
+If OneDrive is temporarily unavailable, keep the complete local pair intact and
+record the state as `LOCAL_ONLY` durability debt. A run may be computationally
+complete while still not yet safely replicated.
+
+The aim is practical portability: loss or shutdown of one server should not
+strand final results or force reconstruction of an expensive parent when a
+verified shared copy could have prevented it.
 
 ## High-risk model guardrails
 
@@ -122,8 +178,9 @@ infer completion from a filename.
 
 Put current experiment evidence and findings in the selected `Project` record.
 Put reusable CFD lessons in `CFD_wiki/`. Put implementation/discovery details
-that are durable across cases in `PyAnsys/knowledge/`. Do not create a second
-project log inside this folder.
+that are durable across cases in `PyAnsys/knowledge/`. Use OneDrive for verified
+large case/data artifact preservation and transfer; do not create a second
+scientific project log there.
 
 ## Troubleshooting and delegation
 
@@ -138,5 +195,6 @@ uncertainty. There is no mandatory multi-agent ceremony; the main agent owns
 reconciliation of live evidence, proven code, and project intent.
 
 Before handoff, verify dependency order, critical readbacks, artifact
-locations, case identity, failure classification, and that no raw file or
-unrequested project conclusion was changed.
+locations, case identity, durability status for important artifacts, failure
+classification, and that no raw file or unrequested project conclusion was
+changed.
