@@ -26,7 +26,7 @@ Do not create a matrix merely because many parameters exist. Every case should h
 
 ## Build a small discovery matrix
 
-Create at most six simulation cases.
+Create at most twelve quick simulation cases. Twelve is a hard ceiling, not a target; prefer fewer whenever they span the useful uncertainty adequately.
 
 Prefer a compact matrix containing a useful reference plus deliberately different directions. Cases may test alternative mechanisms, settings, formulations, operating conditions, or combinations when an interaction is itself worth screening.
 
@@ -74,7 +74,7 @@ Discovery evidence can eliminate poor directions, expose trends, generate hypoth
 Return:
 
 1. the discovery question;
-2. the case matrix, with no more than six cases;
+2. the case matrix, with no more than twelve quick screening cases;
 3. the evidence that should be comparable across the matrix;
 4. the short-run budget and why it is sufficient for screening;
 5. after execution, which directions appear promising, weak, unresolved, or surprising;
