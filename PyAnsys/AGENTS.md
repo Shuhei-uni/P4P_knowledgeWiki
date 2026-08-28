@@ -97,6 +97,33 @@ but never invent low-value experiments solely to increase utilization.
 A setup record remains server-neutral. Exact server selection, local paths,
 transfer steps, and durability destinations belong to the execution plan.
 
+## Experiment packet and path authority
+
+Keep the path record with the experiment rather than inside `PyAnsys/` runtime
+output:
+
+```text
+Project/.../experiment/
+├── setup.md
+├── run-paths.json
+└── results.md
+```
+
+`setup.md` is the scientific contract, `run-paths.json` is the authoritative
+machine-readable record of server placement and actual artifact/output paths,
+and `results.md` is the evidence/interpretation record.
+
+The canonical `run-paths.json` must state the actual Fluent working directory,
+run root, parent/child/final case-data paths, autosaves/checkpoints, file-backed
+monitor/report outputs such as `.out`, logs/transcripts, manifests, and OneDrive
+final/recovery destinations when applicable. Do not reconstruct these paths from
+a server alias, case filename, launch directory, or code defaults.
+
+A remote runner may use a temporary derived copy of path configuration, but do
+not create another durable path manifest that competes with the Project packet.
+Reconcile actual observed output locations back into the same Project
+`run-paths.json` after smoke testing and final execution.
+
 ## CASE → INITIALISE / RUN
 
 Setup construction and long-run supervision are separate responsibilities.
@@ -195,6 +222,6 @@ uncertainty. There is no mandatory multi-agent ceremony; the main agent owns
 reconciliation of live evidence, proven code, and project intent.
 
 Before handoff, verify dependency order, critical readbacks, artifact
-locations, case identity, durability status for important artifacts, failure
-classification, and that no raw file or unrequested project conclusion was
-changed.
+locations, case identity, the canonical experiment `run-paths.json`, durability
+status for important artifacts, failure classification, and that no raw file or
+unrequested project conclusion was changed.
