@@ -27,7 +27,7 @@ The scientific phase loop has two useful experiment-design modes. Choose based o
 
 Use discovery mode when literature, previous simulations, and reasoning still leave several plausible directions and the important mechanism or experiment direction is unclear.
 
-Call `explore-experiment-space` to build a compact experiment matrix of at most six cases. A rough budget of 500 to 1,000 iterations per case is a useful default when that is enough to reveal early comparative behaviour. Treat that range as a planning ballpark, not a universal convergence criterion.
+Call `explore-experiment-space` to build a quick discovery campaign of at most twelve cases. Twelve is a hard ceiling, not a target; use fewer whenever they span the useful uncertainty adequately. A rough budget of 500 to 1,000 iterations per case is a useful default when that is enough to reveal early comparative behaviour. Treat that range as a planning ballpark, not a universal convergence criterion.
 
 Discovery mode optimises breadth and information across the matrix. Its results are screening evidence: useful for finding promising directions, eliminating weak ones, exposing unexpected behaviour, and sharpening hypotheses. Do not normally turn a short discovery run into a strong claim about settled model behaviour.
 
@@ -54,7 +54,7 @@ Let this affect **campaign shape and execution efficiency**, not the scientific 
 - favor strategies whose exact parents can be staged safely without unnecessary duplication or reconstruction;
 - account for transfer/recovery cost when two strategies are scientifically comparable.
 
-Do not create weak extra cases merely because a server is idle. Scientific value, evidence quality, and interpretability remain primary; fleet utilization is an optimization within the set of justified experiments.
+Do not create weak extra cases merely because a server is idle. Unused capacity can, however, justify a deliberately bold speculative probe when the mainline campaign cannot use that server and the probe has meaningful asymmetric information value. Prefer a genuinely different question, mechanism, formulation, or challenged assumption over another minor variation whose outcome is unlikely to change the investigation.
 
 Keep scientific setup identity server-neutral. Server assignment and local paths are resolved after setup creation by `fluent-fleet-orchestration`.
 
@@ -83,7 +83,7 @@ Prefer the smallest simulation strategy that can produce the needed learning wit
 
 In hypothesis-test mode, that may be one discriminating run, a pair of controlled comparisons, a short sensitivity series, or a staged campaign where later setups become meaningful only in relation to earlier ones.
 
-In discovery mode, the smallest useful strategy may deliberately be a bounded multi-case matrix because breadth is the information source. Keep it to the fewest cases that meaningfully span the plausible directions, never more than six.
+In discovery mode, the smallest useful strategy may deliberately be a bounded multi-case matrix because breadth is the information source. Keep it to the fewest cases that meaningfully span the plausible directions, never more than twelve quick screening cases.
 
 A supporting setup does not need high standalone impact if it creates the reference, comparison, or sequence that makes the campaign informative.
 
