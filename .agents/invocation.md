@@ -6,7 +6,7 @@ The purpose of this policy is to keep human decision boundaries explicit while s
 
 ## 1. Human-only
 
-Human-only skills are top-level decision boundaries. They may be invoked explicitly by the human, but the model must not start them implicitly.
+Human-only skills are top-level human entry points or conversational controls. They may be invoked explicitly by the human, but the model must not start them implicitly.
 
 For a human-only skill, keep both controls aligned:
 
@@ -24,8 +24,9 @@ policy:
 Current human-only skills:
 
 - `phase-planner` — the human phase-level catch-up and direction-setting boundary.
+- `wait-what` — a human-triggered conversational reset that re-pitches an explanation when it did not land.
 
-A human-only skill may call model-invoked or hybrid skills after the human has supplied the necessary decision or boundary. It should not be entered merely because an agent thinks a new phase discussion would be useful.
+A human-only skill may call model-invoked or hybrid skills after the human has supplied the necessary decision or boundary. It should not be entered merely because an agent thinks it would be useful.
 
 ## 2. Hybrid
 
