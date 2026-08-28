@@ -9,16 +9,30 @@ Turn the currently available Fluent machines and case/data artifacts into a safe
 
 Servers are interchangeable compute only when the exact required scientific artifact can be proven available there. Server-local disks are working storage, not the only durable scientific archive.
 
-## Keep four identities separate
+## Keep scientific and execution identities separate
 
 Do not collapse these concepts:
 
 - **artifact ID** — one exact scientific case/data state used as a parent, final result, or recovery point;
 - **setup ID** — the server-neutral scientific experiment definition;
 - **run ID** — one actual execution attempt of a setup;
-- **server ID** — the machine used for that execution.
+- **server reference** — the exact machine endpoint used for that run.
 
-A setup must mean the same experiment regardless of whether it runs on Server 1, Server 2, or Server 3. Hostnames, ports, local paths, and server aliases are execution facts, not scientific identity.
+A short `server-1` or `server-2` alias is not globally unique when collaborators may use the same local numbering. During fleet preflight, resolve the actual IP used for the connection and form the runtime server reference from both values:
+
+```yaml
+server:
+  ref: 'server-2@192.168.1.42'
+  id: 'server-2'
+  ip: '192.168.1.42'
+  profile_id: 'shuhei-server-2'
+```
+
+Use `server.ref` as the canonical server identity in placement and execution records. Keep `server.id` and `server.ip` separately as well so tooling does not need to parse the combined string.
+
+The scientific setup must mean the same experiment regardless of the server reference used to execute it. IPs, hostnames, ports, local paths, and server aliases are execution facts, not scientific identity.
+
+Static files under `PyAnsys/server-profiles/` may use a collision-resistant profile namespace such as `shuhei-server-2` or `partner-server-2`; they do not need to hard-code the IP. Resolve the live endpoint during preflight.
 
 ## Start every new compute cycle with fleet preflight
 
@@ -27,6 +41,7 @@ Before selecting placement or launching new Fluent work, establish the live reso
 For every configured server that can reasonably be checked, determine:
 
 - whether it is reachable now;
+- the actual endpoint/IP being used and resulting `server.ref`;
 - whether Fluent/PyFluent execution is available;
 - whether it is idle, occupied, or in an uncertain state;
 - the verified working/output roots from `PyAnsys/server-profiles/` when available;
@@ -34,20 +49,20 @@ For every configured server that can reasonably be checked, determine:
 - which active or recovery runs already occupy that server;
 - any material version or environment limitation that could prevent a scientifically equivalent run.
 
-Do not infer scientific case identity from a directory name, server name, status file, or Fluent iteration count. Inspect explicit paths and, where practical, verify artifact identity from a manifest, hash, saved provenance, or direct case/data inspection.
+Do not infer scientific case identity from a directory name, server reference, status file, or Fluent iteration count. Inspect explicit paths and, where practical, verify artifact identity from a manifest, hash, saved provenance, or direct case/data inspection.
 
 Server availability is temporary state. Repeat fleet preflight whenever the scientific loop needs another round of compute, after a material server outage/recovery, or when existing placement assumptions may no longer be true.
 
 ## Build an artifact availability map
 
-For each parent, final result, or important restart state relevant to the planned work, record where an exact verified copy currently exists:
+For each parent, final result, or important restart state relevant to the planned work, record where an exact verified copy currently exists. Use full runtime server references when there is any chance of alias collision.
 
 ```text
 artifact: F11-final
 local:
-  server-1: absent
-  server-2: verified
-  server-3: absent
+  server-1@192.168.1.31: absent
+  server-2@192.168.1.42: verified
+  server-1@192.168.1.55: absent
 onedrive: verified | absent | unknown
 ```
 
@@ -64,7 +79,7 @@ case_file: ...
 data_file: ...
 case_sha256: ...
 data_sha256: ...
-origin_server: ...
+origin_server_ref: 'server-2@192.168.1.42'
 ```
 
 Hashes are strongly preferred for transferred important artifacts when the workflow can produce them cheaply. If hashes are unavailable, use the strongest available independent identity evidence and state the limitation.
@@ -99,24 +114,25 @@ Every experiment packet should keep its scientific contract, execution-location 
 ```text
 experiment/
 ├── setup.md
-├── run-paths.json
+├── run-paths.yaml
 └── results.md
 ```
 
-`run-paths.json` is the **single durable authoritative path record** for that experiment. It belongs in the same canonical `Project/` experiment directory as `setup.md` and `results.md`, not in `PyAnsys/output/`, a server-local run directory, or a separate documentation tree.
+`run-paths.yaml` is the **single durable authoritative path record** for that experiment. It belongs in the same canonical `Project/` experiment directory as `setup.md` and `results.md`, not in `PyAnsys/output/`, a server-local run directory, or a separate documentation tree.
 
 The file may contain absolute paths on remote Fluent servers and OneDrive. Its location in `Project/` does not imply that the large artifacts themselves belong in Git.
 
-Create/populate `run-paths.json` once placement is known, before implementation begins. Update the same file when smoke testing or the long run reveals actual paths, transfers, or durability status. Do not create multiple competing long-lived path manifests.
+Create/populate `run-paths.yaml` once placement is known, before implementation begins. Update the same file when smoke testing or the long run reveals actual paths, transfers, or durability status. Do not create multiple competing long-lived path manifests.
 
-If a remote Python runner needs a machine-local copy of the path configuration, that copy is transient/derived. The canonical `Project/.../run-paths.json` remains the source of truth and must be reconciled with the actual run afterward.
+If a remote Python runner needs a machine-local copy of the path configuration, that copy is transient/derived. The canonical `Project/.../run-paths.yaml` remains the source of truth and must be reconciled with the actual run afterward.
 
 ## Make every filesystem destination explicit
 
 Do not let Fluent, Python, or a previously launched session decide where outputs happen to land.
 
-Before `implement-experiment` starts mutating or solving, `run-paths.json` must resolve every important write location. Prefer absolute paths. At minimum state, when applicable:
+Before `implement-experiment` starts mutating or solving, `run-paths.yaml` must resolve every important write location. Prefer absolute paths. At minimum state, when applicable:
 
+- runtime `server.ref`, `server.id`, and `server.ip`;
 - the observed or deliberately set Fluent working directory;
 - staging/temporary root;
 - run root;
@@ -152,36 +168,45 @@ Changing only a report/monitor **file destination** is an implementation detail 
 
 If the location of an important generated file cannot be resolved before launch, treat that as missing execution information rather than hoping the file can be found later.
 
-### Canonical `run-paths.json`
+### Canonical `run-paths.yaml`
+
+Prefer YAML because this record is both machine-read and routinely inspected by humans. Keep the schema simple and deterministic. Quote Windows paths when that avoids YAML ambiguity.
 
 A useful record is:
 
-```json
-{
-  "setup_id": "S4-05",
-  "run_id": "S4-05-run-001",
-  "server": "server-3",
-  "fluent_working_dir": "C:\\P4P\\runs\\S4-05-run-001",
-  "run_root": "C:\\P4P\\runs\\S4-05-run-001",
-  "parent_case": "C:\\P4P\\parents\\F11.cas.h5",
-  "parent_data": "C:\\P4P\\parents\\F11.dat.h5",
-  "child_case": "C:\\P4P\\runs\\S4-05-run-001\\setup.cas.h5",
-  "final_case": "C:\\P4P\\runs\\S4-05-run-001\\final.cas.h5",
-  "final_data": "C:\\P4P\\runs\\S4-05-run-001\\final.dat.h5",
-  "report_files": {
-    "brine_mass_flow": "C:\\P4P\\runs\\S4-05-run-001\\reports\\brine_mass_flow.out"
-  },
-  "autosave_root": "C:\\P4P\\runs\\S4-05-run-001\\checkpoints",
-  "transcript": "C:\\P4P\\runs\\S4-05-run-001\\logs\\fluent.trn",
-  "runner_log": "C:\\P4P\\runs\\S4-05-run-001\\logs\\runner.log",
-  "artifact_manifest": "C:\\P4P\\runs\\S4-05-run-001\\artifact-manifest.json",
-  "onedrive_final_root": "..."
-}
+```yaml
+setup_id: S4-05
+run_id: S4-05-run-001
+server:
+  ref: 'server-2@192.168.1.42'
+  id: 'server-2'
+  ip: '192.168.1.42'
+  profile_id: 'shuhei-server-2'
+
+paths:
+  fluent_working_dir: 'C:\P4P\runs\S4-05-run-001'
+  run_root: 'C:\P4P\runs\S4-05-run-001'
+  parent_case: 'C:\P4P\parents\F11.cas.h5'
+  parent_data: 'C:\P4P\parents\F11.dat.h5'
+  child_case: 'C:\P4P\runs\S4-05-run-001\setup.cas.h5'
+  final_case: 'C:\P4P\runs\S4-05-run-001\final.cas.h5'
+  final_data: 'C:\P4P\runs\S4-05-run-001\final.dat.h5'
+  autosave_root: 'C:\P4P\runs\S4-05-run-001\checkpoints'
+  transcript: 'C:\P4P\runs\S4-05-run-001\logs\fluent.trn'
+  runner_log: 'C:\P4P\runs\S4-05-run-001\logs\runner.log'
+  artifact_manifest: 'C:\P4P\runs\S4-05-run-001\artifact-manifest.json'
+
+report_files:
+  brine_mass_flow: 'C:\P4P\runs\S4-05-run-001\reports\brine_mass_flow.out'
+
+durability:
+  onedrive_final_root: '...'
+  status: PENDING
 ```
 
 The exact schema may evolve, but the experiment-local file is authoritative. Code, agents, and later analysis should use or reconcile against it rather than reconstructing locations from assumptions.
 
-Before launch, create required remote directories and check that intended destinations are writable and will not unintentionally overwrite another run. After the smoke test and after the long run, verify that required outputs appeared at the declared locations and update the same `run-paths.json` with any reconciled actual locations or path anomalies.
+Before launch, create required remote directories and check that intended destinations are writable and will not unintentionally overwrite another run. After the smoke test and after the long run, verify that required outputs appeared at the declared locations and update the same `run-paths.yaml` with any reconciled actual locations or path anomalies.
 
 ## Use OneDrive as the shared durability and transfer layer
 
@@ -211,18 +236,18 @@ Whenever an important artifact is promoted:
 4. copy/upload both files to the approved OneDrive location;
 5. preserve a small manifest with filenames and provenance;
 6. verify the copied files, preferably with hashes for important artifacts;
-7. update `run-paths.json` with the verified durable locations;
+7. update `run-paths.yaml` with the verified durable locations;
 8. only then describe the OneDrive copy as verified/durable.
 
 Never assume synchronization completed merely because a file appeared in a local OneDrive folder. For crucial artifacts, verify that the intended files are present and complete through the available filesystem/sync evidence.
 
-If OneDrive is temporarily unavailable, preserve the full local case/data pair, record the local paths in `run-paths.json`, and report the artifact as `LOCAL_ONLY` durability debt rather than pretending it is safely replicated.
+If OneDrive is temporarily unavailable, preserve the full local case/data pair, record the local paths in `run-paths.yaml`, and report the artifact as `LOCAL_ONLY` durability debt rather than pretending it is safely replicated.
 
 ## Produce an explicit execution plan
 
-Before `implement-experiment`, make placement, staging, paths, and durability concrete. The execution plan is represented durably by the experiment-local `run-paths.json` plus the setup's scientific contract.
+Before `implement-experiment`, make placement, staging, paths, and durability concrete. The execution plan is represented durably by the experiment-local `run-paths.yaml` plus the setup's scientific contract.
 
-The exact remote paths belong to `run-paths.json`, not `setup.md`. `setup.md` remains server-neutral.
+The exact remote paths and runtime server reference belong to `run-paths.yaml`, not `setup.md`. `setup.md` remains server-neutral.
 
 `implement-experiment` should receive this placement contract and execute it faithfully. If staging cannot prove the required parent, or important output locations remain ambiguous, do not substitute a similarly named local file or implicit working directory; return the placement/path failure for re-planning.
 
@@ -260,10 +285,10 @@ Migration still requires verification that the target Fluent/PyFluent environmen
 Return a compact operational state rather than scientific interpretation:
 
 ```text
-FLEET: active / busy / unavailable servers
+FLEET: active / busy / unavailable server refs
 ARTIFACTS: exact parent/final/recovery locations and verification status
-PLACEMENT: setup -> run -> server
-PATH MAP: canonical Project/.../run-paths.json
+PLACEMENT: setup -> run -> server.ref
+PATH MAP: canonical Project/.../run-paths.yaml
 TRANSFERS: required source -> OneDrive -> destination actions
 DURABILITY: verified OneDrive finals/checkpoints and any LOCAL_ONLY debt
 BLOCKERS: unavailable parent, uncertain identity, ambiguous output path, compatibility issues
