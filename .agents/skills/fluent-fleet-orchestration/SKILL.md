@@ -92,11 +92,30 @@ Also consider whether a server is already occupied, whether several related runs
 
 Do not copy artifacts between machines merely because another server is idle. Transfer only when it unlocks justified work, improves resilience, or preserves an important state.
 
+## Keep the run path record with the experiment
+
+Every experiment packet should keep its scientific contract, execution-location record, and results together:
+
+```text
+experiment/
+├── setup.md
+├── run-paths.json
+└── results.md
+```
+
+`run-paths.json` is the **single durable authoritative path record** for that experiment. It belongs in the same canonical `Project/` experiment directory as `setup.md` and `results.md`, not in `PyAnsys/output/`, a server-local run directory, or a separate documentation tree.
+
+The file may contain absolute paths on remote Fluent servers and OneDrive. Its location in `Project/` does not imply that the large artifacts themselves belong in Git.
+
+Create/populate `run-paths.json` once placement is known, before implementation begins. Update the same file when smoke testing or the long run reveals actual paths, transfers, or durability status. Do not create multiple competing long-lived path manifests.
+
+If a remote Python runner needs a machine-local copy of the path configuration, that copy is transient/derived. The canonical `Project/.../run-paths.json` remains the source of truth and must be reconciled with the actual run afterward.
+
 ## Make every filesystem destination explicit
 
 Do not let Fluent, Python, or a previously launched session decide where outputs happen to land.
 
-Before `implement-experiment` starts mutating or solving, the execution plan must contain a **run path map** that resolves every important write location. Prefer absolute paths. At minimum state, when applicable:
+Before `implement-experiment` starts mutating or solving, `run-paths.json` must resolve every important write location. Prefer absolute paths. At minimum state, when applicable:
 
 - the observed or deliberately set Fluent working directory;
 - staging/temporary root;
@@ -133,14 +152,13 @@ Changing only a report/monitor **file destination** is an implementation detail 
 
 If the location of an important generated file cannot be resolved before launch, treat that as missing execution information rather than hoping the file can be found later.
 
-### Write the run path map to disk
+### Canonical `run-paths.json`
 
-Before the main solve, write a small machine-readable file under the run root, preferably `run-paths.json` or an equivalent manifest, containing the resolved destinations actually being used.
-
-Example:
+A useful record is:
 
 ```json
 {
+  "setup_id": "S4-05",
   "run_id": "S4-05-run-001",
   "server": "server-3",
   "fluent_working_dir": "C:\\P4P\\runs\\S4-05-run-001",
@@ -161,9 +179,9 @@ Example:
 }
 ```
 
-The exact schema may evolve, but one authoritative path record must exist. Code, agents, and later analysis should use or reconcile against that record rather than reconstructing locations from assumptions.
+The exact schema may evolve, but the experiment-local file is authoritative. Code, agents, and later analysis should use or reconcile against it rather than reconstructing locations from assumptions.
 
-Before launch, create required directories and check that intended destinations are writable and will not unintentionally overwrite another run. After the smoke test and after the long run, verify that required outputs appeared at the declared locations. Unexpected files discovered elsewhere should be recorded as an execution anomaly and either moved/reconciled deliberately or left untouched with their actual location documented.
+Before launch, create required remote directories and check that intended destinations are writable and will not unintentionally overwrite another run. After the smoke test and after the long run, verify that required outputs appeared at the declared locations and update the same `run-paths.json` with any reconciled actual locations or path anomalies.
 
 ## Use OneDrive as the shared durability and transfer layer
 
@@ -193,52 +211,18 @@ Whenever an important artifact is promoted:
 4. copy/upload both files to the approved OneDrive location;
 5. preserve a small manifest with filenames and provenance;
 6. verify the copied files, preferably with hashes for important artifacts;
-7. only then describe the OneDrive copy as verified/durable.
+7. update `run-paths.json` with the verified durable locations;
+8. only then describe the OneDrive copy as verified/durable.
 
 Never assume synchronization completed merely because a file appeared in a local OneDrive folder. For crucial artifacts, verify that the intended files are present and complete through the available filesystem/sync evidence.
 
-If OneDrive is temporarily unavailable, preserve the full local case/data pair and report the artifact as `LOCAL_ONLY` durability debt rather than pretending it is safely replicated.
+If OneDrive is temporarily unavailable, preserve the full local case/data pair, record the local paths in `run-paths.json`, and report the artifact as `LOCAL_ONLY` durability debt rather than pretending it is safely replicated.
 
 ## Produce an explicit execution plan
 
-Before `implement-experiment`, make placement, staging, paths, and durability concrete. A useful execution plan contains:
+Before `implement-experiment`, make placement, staging, paths, and durability concrete. The execution plan is represented durably by the experiment-local `run-paths.json` plus the setup's scientific contract.
 
-```yaml
-setup_id: S4-05
-run_id: S4-05-run-001
-server: server-3
-parent:
-  artifact_id: F11-final
-  source: onedrive
-  case_hash: ...
-  data_hash: ...
-staging:
-  transfer_required: true
-  verify_before_load: true
-paths:
-  fluent_working_dir: ...
-  staging_root: ...
-  run_root: ...
-  parent_case: ...
-  parent_data: ...
-  child_case: ...
-  final_case: ...
-  final_data: ...
-  autosave_root: ...
-  report_files:
-    brine_mass_flow: ...
-    continuity: ...
-  transcript: ...
-  runner_log: ...
-  run_paths_manifest: .../run-paths.json
-  artifact_manifest: .../artifact-manifest.json
-  onedrive_final_root: ...
-durability:
-  final_to_onedrive: true
-  important_checkpoint_policy: selected-only
-```
-
-The exact remote paths belong to the execution plan, not the scientific setup definition.
+The exact remote paths belong to `run-paths.json`, not `setup.md`. `setup.md` remains server-neutral.
 
 `implement-experiment` should receive this placement contract and execute it faithfully. If staging cannot prove the required parent, or important output locations remain ambiguous, do not substitute a similarly named local file or implicit working directory; return the placement/path failure for re-planning.
 
@@ -279,7 +263,7 @@ Return a compact operational state rather than scientific interpretation:
 FLEET: active / busy / unavailable servers
 ARTIFACTS: exact parent/final/recovery locations and verification status
 PLACEMENT: setup -> run -> server
-PATH MAP: run-paths manifest and all resolved local/output roots
+PATH MAP: canonical Project/.../run-paths.json
 TRANSFERS: required source -> OneDrive -> destination actions
 DURABILITY: verified OneDrive finals/checkpoints and any LOCAL_ONLY debt
 BLOCKERS: unavailable parent, uncertain identity, ambiguous output path, compatibility issues
