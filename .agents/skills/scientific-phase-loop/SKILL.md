@@ -64,15 +64,27 @@ Ask:
 
 The repository is the durable scientific memory. Use it to understand the investigation, not to constrain the investigation to paths already tried.
 
+## Reconstruct prior experiment history before proposing new work
+
+Before inventing new experiment directions, inspect the retained Project history across all phases. Start from `Project/index.md`, `Project/experiments/README.md`, relevant phase indexes, `Project/observations/`, and the setup/results records of the closest historical experiments.
+
+Search by scientific substance rather than names alone: physical mechanism, formulation, modelling choice, boundary condition, initialization, numerical change, operating regime, intended question, and comparison logic. Failed, rejected, non-converged, partial, and inconclusive runs still count as prior work and may already rule out, constrain, or reshape a proposed idea.
+
+For every serious mainline or speculative candidate, identify the closest previous experiment or experiments and state the exact scientific delta. Classify the candidate as `NEW`, `PARTIAL REPEAT`, `REPLICATION`, or `REDUNDANT`, and explain why existing evidence or additional analysis of existing data does not already answer the proposed question.
+
+A new setup ID, parent, phase, or slightly different parameter value is not enough to make an experiment new. Do not proceed to runnable design with a `REDUNDANT` candidate. A replication must be deliberate and justified as replication. A failed historical run may be repeated only when the new attempt has a specific correction, stronger evidence requirement, or unresolved scientific delta.
+
 ## Preflight the live compute fleet before runnable design
 
 Whenever the next step requires new Fluent compute, call `fluent-fleet-orchestration` before committing runnable experiments.
 
 Establish which configured servers are actually reachable now, which are idle or occupied, and which exact parent/final/recovery case+data artifacts are accessible locally or through the shared OneDrive layer. Treat this as live operational evidence, not static project configuration.
 
-Give `design-experiment` the real resource envelope so a scientifically justified campaign can exploit useful parallel capacity and case locality. Allocate runnable high-value mainline work first. If usable servers would otherwise sit idle because the mainline is staged, gated, or has too few independent experiments, deliberately consider high-upside speculative probes rather than weak filler cases.
+Give `design-experiment` the real resource envelope so a scientifically justified campaign can exploit useful parallel capacity and case locality. Use the number of servers actually usable now; never assume a fixed fleet size.
 
-Repeat this preflight every time the loop returns for another round of compute, because server availability and artifact locality may have changed since the previous cycle. Use the number of servers actually available now; never assume a fixed fleet size.
+When two or more servers are simultaneously usable for new compute, reserve one server lane for a bold speculative probe. This is mandatory while the autonomous loop is active: ordinary mainline work must not consume every usable server merely because it can. The remaining usable servers carry the strongest runnable mainline work. Do not preempt an already running approved job solely to create the lane; establish or restore the bold lane at the next placement opportunity.
+
+Repeat this preflight every time the loop returns for another round of compute, because server availability and artifact locality may have changed since the previous cycle.
 
 ## Navigate uncertainty
 
@@ -116,13 +128,13 @@ The two modes are not fixed stages. Discovery can produce a focused hypothesis w
 
 Choose again whenever the evidence changes the nature of the uncertainty.
 
-## Use spare capacity for speculative probes
+## Keep one bold-probe lane active when parallel compute exists
 
-Mainline scientific value has priority, but available parallel compute is also an opportunity to learn.
+When the live fleet has two or more servers usable for new compute, one server is the **bold-probe lane**. Keep that lane running a scientifically justified speculative experiment while the autonomous loop remains active and the fleet continues to support at least two usable servers.
 
-After assigning all runnable, justified mainline experiments, inspect any usable server capacity that would otherwise remain idle because later mainline work is gated by earlier results. Do not invent another incremental variation merely to occupy the machine. Instead ask whether a short, independent, high-upside **speculative probe** could reveal something important.
+The bold lane is not merely overflow capacity. It exists to test questions that the conservative mainline is unlikely to reach quickly. When a bold probe completes, analyse what it taught, rerun the prior-experiment collision check, and if two or more servers remain usable, select and launch the next justified bold probe rather than quietly folding that server back into ordinary mainline work.
 
-A speculative probe may:
+A bold speculative probe may:
 
 - challenge a bold working assumption or accepted interpretation;
 - test a substantially different mechanism, formulation, initialization strategy, or operating regime;
@@ -130,13 +142,15 @@ A speculative probe may:
 - ask a broader question whose answer could make the current route unnecessary or expose a better future direction;
 - screen a question that could become a candidate for a future phase.
 
-Prefer probes with asymmetric information value: cheap enough to justify on spare capacity, independently runnable, and potentially capable of changing how the project is understood even if the expected answer seems unlikely. Both a positive and a negative result should teach something.
+Prefer probes with asymmetric information value: quick enough to justify as exploratory compute, independently runnable, and potentially capable of changing how the project is understood even if the expected answer seems unlikely. Both a positive and a negative result should teach something.
 
-Idle capacity alone is not scientific justification. Reject speculative probes that are redundant, uninterpretable, unsafe to compare, expensive without a clear learning target, or merely small parameter variations dressed up as exploration.
+The mandatory lane does not authorize junk experiments. Every bold probe must pass the same historical collision check as mainline work and have a clear learning target. Reject probes that are redundant, uninterpretable, unsafe to compare, excessively expensive for the question, or merely small parameter variations dressed up as bold exploration.
+
+If no valid non-redundant bold probe can currently be formulated, do not fill the lane with noise. Use analysis, literature, prior evidence, independent subagents, or adversarial reasoning immediately to generate a better bold question. If a real modelling, artifact, or execution boundary still prevents any justified probe, record that blocker explicitly; that is the exception to keeping the lane occupied.
 
 A speculative probe may sit outside the active phase question as an exploratory side branch when it remains within the agreed compute and modelling boundaries. It does **not** silently create or promote a new formal phase. If its result deserves a sustained new phase, preserve the evidence and return that candidate direction to the human / `phase-planner` for phase-level selection.
 
-Re-evaluate the whole portfolio whenever results return. A speculative branch can be dropped, repeated more carefully, folded into the current phase if it becomes directly relevant, or proposed as a future phase; the fact that compute was available does not give the branch permanent priority.
+Re-evaluate the whole portfolio whenever results return. A speculative branch can be dropped, repeated more carefully, folded into the current phase if it becomes directly relevant, or proposed as a future phase. While two or more servers remain usable, dropping one bold branch should normally lead to a different justified bold probe taking its place.
 
 ## Execute approved experiments through detached Python handoff
 
@@ -162,7 +176,7 @@ After launch, the current turn may end. Scientific work resumes only when the co
 
 Simulation time is expensive. Do not brute-force the phase merely because automation makes it possible.
 
-In hypothesis-test mode, prefer a small number of high-information runs over many weakly motivated cases. In discovery mode, a somewhat broader matrix is justified only because the combined comparison is the information source; keep it bounded and make every case contribute to reducing uncertainty. Speculative probes earn their place differently: they should be cheap relative to the otherwise idle capacity and have unusually high potential information value if the bold question turns out to matter.
+In hypothesis-test mode, prefer a small number of high-information runs over many weakly motivated cases. In discovery mode, a somewhat broader matrix is justified only because the combined comparison is the information source; keep it bounded and make every case contribute to reducing uncertainty. Bold speculative probes earn their place differently: they must have unusually high potential information value and justify the dedicated exploratory lane through the question they test, not by pretending every available server needs any arbitrary job.
 
 A simulation earns its cost when its possible outcomes would materially change the current understanding, distinguish between plausible explanations, establish a useful bound, reveal behaviour needed to decide the next move, or efficiently screen several plausible directions.
 
