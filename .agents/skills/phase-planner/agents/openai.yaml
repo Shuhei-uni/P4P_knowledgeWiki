@@ -1,0 +1,7 @@
+interface:
+  display_name: "Phase Planner"
+  short_description: "Catch up and choose the next scientific phase."
+  default_prompt: "Use $phase-planner to review the current project evidence and discuss the next phase-level direction with me."
+
+policy:
+  allow_implicit_invocation: false
