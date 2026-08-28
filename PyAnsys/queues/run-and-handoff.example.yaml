@@ -1,0 +1,47 @@
+job:
+  id: S4-EXAMPLE
+  manifest: PyAnsys/output/run-handoff/S4-EXAMPLE/job_manifest.json
+  worker_log: PyAnsys/output/run-handoff/S4-EXAMPLE/worker.log
+
+runner:
+  # Use the exact approved Python/PyFluent runner for the experiment.
+  # Keep this as an argv list: no shell string and no hidden fallback mechanism.
+  command:
+    - PyAnsys/.venv/Scripts/python.exe
+    - PyAnsys/scripts/setup/run_example_20k.py
+  cwd: .
+  log: PyAnsys/output/run-handoff/S4-EXAMPLE/runner.log
+
+completion:
+  # Use local paths when this worker can see the files directly.
+  required_files:
+    - path: PyAnsys/output/run-handoff/S4-EXAMPLE/final.cas.h5
+      min_size_bytes: 1
+    - path: PyAnsys/output/run-handoff/S4-EXAMPLE/final.dat.h5
+      min_size_bytes: 1
+
+  # Optional: for remote Fluent paths, point this at an existing deterministic
+  # verifier that returns 0 only when the declared remote outputs are verified.
+  # verifier_command:
+  #   - PyAnsys/.venv/Scripts/python.exe
+  #   - PyAnsys/scripts/inspection/verify_example_final.py
+  # verifier_cwd: .
+  # verifier_log: PyAnsys/output/run-handoff/S4-EXAMPLE/verifier.log
+
+codex:
+  enabled: true
+  # Always record the exact session/thread ID for this scientific loop.
+  # Do not use "--last" when several servers/jobs may finish independently.
+  session_id: REPLACE_WITH_EXPLICIT_CODEX_SESSION_ID
+  executable: codex
+  cwd: .
+  trigger_on:
+    - COMPLETE
+    - BLOCKED
+  log: PyAnsys/output/run-handoff/S4-EXAMPLE/codex_handoff.log
+  prompt: >-
+    The Fluent simulation job has terminated. Read the job manifest and the
+    canonical Project experiment packet. If COMPLETE, perform the required
+    post-processing and continue the scientific phase loop. If BLOCKED,
+    diagnose the execution failure from the preserved evidence and choose the
+    appropriate recovery or redesign path. Do not blindly rerun the same job.
