@@ -31,8 +31,8 @@ from another shell, and do not hard-code a different clone's absolute path.
 - `scripts/connection/`: connection and bootstrap checks.
 - `scripts/inspection/`: non-mutating discovery, snapshots, and probes.
 - `scripts/setup/`: thin case-specific setup/run orchestration.
-- `server-profiles/`: non-secret per-server remote directory knowledge; routing
-  and filesystem context only, never case identity or live availability.
+- `server-profiles/`: non-secret per-endpoint remote directory knowledge;
+  routing and filesystem context only, never case identity or live availability.
 - Report/post-processing helpers that were tied to retired campaign trees are
   not kept as a second active layer; current read-only checks live in
   `scripts/inspection/` and reusable modules under `src/`.
@@ -47,13 +47,31 @@ code. Skills describe the workflow; code is the implementation evidence.
 ## Fluent state and identity
 
 Treat Fluent as a dependency-ordered state machine, not a static object tree.
-`server_id`, hostname, port, Fluent version, and iteration count are connection
-or diagnostic metadata, not case identity. Inspect the loaded case/data state
-and use an explicit or independently observed case/data path. If identity
-cannot be established, record it as unavailable rather than guessing.
+`server_id`, IP/hostname, port, Fluent version, and iteration count are
+connection or diagnostic metadata, not case identity. Inspect the loaded
+case/data state and use an explicit or independently observed case/data path. If
+identity cannot be established, record it as unavailable rather than guessing.
 
-Keep artifact ID, setup ID, run ID, and server ID separate. A scientific setup
-must remain meaningful when re-placed onto another compatible server.
+Keep artifact ID, setup ID, run ID, and runtime server reference separate. A
+scientific setup must remain meaningful when re-placed onto another compatible
+server.
+
+Because collaborators may each have a `server-1`, `server-2`, and so on, do not
+use the short server ID alone as the durable execution identity. Fleet preflight
+should resolve the actual endpoint and record:
+
+```yaml
+server:
+  ref: 'server-2@192.168.1.42'
+  id: 'server-2'
+  ip: '192.168.1.42'
+  profile_id: 'shuhei-server-2'
+```
+
+Use `server.ref` for run placement and handoff while retaining the separate ID
+and IP fields for machine-readable use. Static server profiles may use
+collision-resistant names such as `shuhei-server-2` or `partner-server-2`
+without hard-coding the IP into the public repository.
 
 For a non-trivial change, use this order:
 
@@ -94,8 +112,9 @@ another active server; otherwise block until a trusted replica can be found.
 Use useful active servers in parallel when the scientific work justifies it,
 but never invent low-value experiments solely to increase utilization.
 
-A setup record remains server-neutral. Exact server selection, local paths,
-transfer steps, and durability destinations belong to the execution plan.
+A setup record remains server-neutral. Exact runtime server reference, local
+paths, transfer steps, and durability destinations belong to the execution
+plan.
 
 ## Experiment packet and path authority
 
@@ -105,24 +124,26 @@ output:
 ```text
 Project/.../experiment/
 ├── setup.md
-├── run-paths.json
+├── run-paths.yaml
 └── results.md
 ```
 
-`setup.md` is the scientific contract, `run-paths.json` is the authoritative
-machine-readable record of server placement and actual artifact/output paths,
-and `results.md` is the evidence/interpretation record.
+`setup.md` is the scientific contract, `run-paths.yaml` is the authoritative
+human-readable and machine-readable record of runtime server placement and
+actual artifact/output paths, and `results.md` is the evidence/interpretation
+record.
 
-The canonical `run-paths.json` must state the actual Fluent working directory,
-run root, parent/child/final case-data paths, autosaves/checkpoints, file-backed
+The canonical `run-paths.yaml` must state the runtime `server.ref`, separate
+server ID and IP, actual Fluent working directory, run root,
+parent/child/final case-data paths, autosaves/checkpoints, file-backed
 monitor/report outputs such as `.out`, logs/transcripts, manifests, and OneDrive
 final/recovery destinations when applicable. Do not reconstruct these paths from
-a server alias, case filename, launch directory, or code defaults.
+a short server alias, case filename, launch directory, or code defaults.
 
 A remote runner may use a temporary derived copy of path configuration, but do
 not create another durable path manifest that competes with the Project packet.
 Reconcile actual observed output locations back into the same Project
-`run-paths.json` after smoke testing and final execution.
+`run-paths.yaml` after smoke testing and final execution.
 
 ## CASE → INITIALISE / RUN
 
@@ -149,8 +170,8 @@ Setup construction and long-run supervision are separate responsibilities.
   residuals or scientifically unpromising behaviour are not execution stop
   conditions when Fluent can still continue.
 - Record the actual parent artifact identity, controlled change, readback, case
-  artifact, run ID, selected server, Python runner, requested budget, observed
-  final state, remote artifact paths, durability status, and unresolved
+  artifact, run ID, runtime server reference, Python runner, requested budget,
+  observed final state, remote artifact paths, durability status, and unresolved
   execution uncertainty.
 
 ## Durable case/data preservation
@@ -172,9 +193,9 @@ recovery local when appropriate, then promote deliberately selected recovery
 states and finals.
 
 For important promoted artifacts, preserve one artifact ID plus source
-setup/run, iteration or progress, filenames, origin server, and hashes when
-feasible. Verify the copied pair before treating it as durable. A file merely
-appearing in a local OneDrive folder is not enough evidence of successful
+setup/run, iteration or progress, filenames, origin `server.ref`, and hashes
+when feasible. Verify the copied pair before treating it as durable. A file
+merely appearing in a local OneDrive folder is not enough evidence of successful
 preservation when the artifact is crucial.
 
 If OneDrive is temporarily unavailable, keep the complete local pair intact and
@@ -197,8 +218,8 @@ proven pattern.
 
 ## Evidence and synchronization
 
-Generated JSON, CSV, plots, transcripts, and debug snapshots document what was
-observed; they do not become project findings automatically. Preserve raw
+Generated YAML/JSON, CSV, plots, transcripts, and debug snapshots document what
+was observed; they do not become project findings automatically. Preserve raw
 artifacts, units, scope, signs, native coordinates, completeness, and identity
 status. Do not turn missing evidence into zero, interpolate unknown gaps, or
 infer completion from a filename.
@@ -222,6 +243,7 @@ uncertainty. There is no mandatory multi-agent ceremony; the main agent owns
 reconciliation of live evidence, proven code, and project intent.
 
 Before handoff, verify dependency order, critical readbacks, artifact
-locations, case identity, the canonical experiment `run-paths.json`, durability
-status for important artifacts, failure classification, and that no raw file or
-unrequested project conclusion was changed.
+locations, case identity, the canonical experiment `run-paths.yaml`, runtime
+server reference, durability status for important artifacts, failure
+classification, and that no raw file or unrequested project conclusion was
+changed.
