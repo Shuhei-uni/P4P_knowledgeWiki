@@ -41,6 +41,23 @@ Before spending that compute, make clear what hypothesis is being tested, what o
 
 A promising discovery case may become the basis of a focused hypothesis test, including an explicitly planned continuation when scientifically legitimate. Do not silently upgrade discovery evidence into hypothesis-test evidence simply because the early result looks convincing.
 
+## Use the live fleet as a constraint and opportunity
+
+When this design will require new Fluent compute, use the current resource envelope from `fluent-fleet-orchestration`. If no current fleet snapshot exists, obtain one before finalizing the runnable strategy.
+
+Know which servers are actually available now and which exact parent/recovery artifacts are already local, available through OneDrive, transferable from another active server, or stranded on an unavailable machine.
+
+Let this affect **campaign shape and execution efficiency**, not the scientific question itself:
+
+- if several independent, worthwhile branches already exist and several servers are active, prefer a portfolio that can run them concurrently;
+- for discovery work, consider wave-based matrices that use the active fleet and re-evaluate later cases after early evidence arrives;
+- favor strategies whose exact parents can be staged safely without unnecessary duplication or reconstruction;
+- account for transfer/recovery cost when two strategies are scientifically comparable.
+
+Do not create weak extra cases merely because a server is idle. Scientific value, evidence quality, and interpretability remain primary; fleet utilization is an optimization within the set of justified experiments.
+
+Keep scientific setup identity server-neutral. Server assignment and local paths are resolved after setup creation by `fluent-fleet-orchestration`.
+
 ## Record working assumptions without becoming fixated on them
 
 Alongside the hypothesis, list the assumptions that are being accepted so the experiment can be interpreted. These may concern the model formulation, mesh adequacy, initialization, boundary treatment, monitor meaning, numerical scheme, comparison basis, or other conditions that are not the direct target of the experiment.
@@ -112,6 +129,6 @@ The purpose is to make every candidate earn its place through the same evidence-
 
 Choose the best justified strategy for the current uncertainty and mode. The selected strategy may be a focused setup, a small linked campaign, or a bounded discovery matrix.
 
-Then call `create-setup` to convert that strategy into the required setup records. `design-experiment` owns why the experiment strategy is worth doing, what working assumptions bound it, and what evidence will judge it. `create-setup` owns the precise handoff for implementation.
+Then call `create-setup` to convert that strategy into the required server-neutral setup records. `design-experiment` owns why the experiment strategy is worth doing, what working assumptions bound it, and what evidence will judge it. `create-setup` owns the precise scientific handoff; `fluent-fleet-orchestration` later resolves exact placement, staging, and durable artifact handling.
 
 Do not write predicted results into the setup records. The strategy defines what will be tested and what would be informative; the simulation data decides what actually happened.
