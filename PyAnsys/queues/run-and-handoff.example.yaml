@@ -31,8 +31,12 @@ completion:
 codex:
   enabled: true
   # Always record the exact session/thread ID for this scientific loop.
-  # Do not use "--last" when several servers/jobs may finish independently.
-  session_id: REPLACE_WITH_EXPLICIT_CODEX_SESSION_ID
+  # When the job is prepared from inside Codex, read CODEX_THREAD_ID from the
+  # agent shell environment and write that concrete value here. Codex injects
+  # CODEX_THREAD_ID into model-reachable child processes. Do not leave the
+  # variable name literally in this YAML and do not use "--last" when several
+  # servers/jobs may finish independently.
+  session_id: REPLACE_WITH_VALUE_OF_CODEX_THREAD_ID
   executable: codex
   cwd: .
   trigger_on:
