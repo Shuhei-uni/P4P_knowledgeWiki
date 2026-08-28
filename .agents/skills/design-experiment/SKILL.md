@@ -19,6 +19,24 @@ Do not begin from an available parameter list and ask what can be swept. Begin f
 
 Reasoning, literature, previous experience, and prior simulations can shape the hypothesis. Unless there is genuinely equivalent prior evidence, they do not establish what a new simulation will do.
 
+## Check for prior experiment collisions before generating candidates
+
+Before proposing new experiments, inspect the retained Project history across all phases, not only the current phase. Start from `Project/index.md`, `Project/experiments/README.md`, relevant phase indexes, `Project/observations/`, and the setup/results records of the closest historical experiments.
+
+Search by scientific substance rather than experiment names alone: physical mechanism, modelling choice, formulation, boundary condition, numerical change, initialization, operating regime, intended question, and comparison logic.
+
+For every serious candidate, identify the closest prior experiment or experiments and record:
+
+- what was already tested;
+- what happened, including failed, non-converged, partial, rejected, or inconclusive outcomes;
+- the exact scientific delta of the proposed experiment;
+- why existing evidence or additional analysis of existing data does not already answer the question;
+- a novelty judgement: `NEW`, `PARTIAL REPEAT`, `REPLICATION`, or `REDUNDANT`.
+
+A new setup ID, parent, phase, or slightly different parameter value does not make an experiment scientifically new. Reject `REDUNDANT` candidates before they consume design effort or compute. Keep a `REPLICATION` only when repeating prior work is itself the scientific purpose. A failed or inconclusive historical run still counts as prior work; rerun it only when a specific correction, stronger evidence requirement, or unresolved question makes the new attempt materially different.
+
+This collision check applies equally to mainline experiments, discovery cases, and speculative probes.
+
 ## Respect the experiment-design mode
 
 The scientific phase loop has two useful experiment-design modes. Choose based on the kind of uncertainty, not by habit.
@@ -54,7 +72,9 @@ Let this affect **campaign shape and execution efficiency**, not the scientific 
 - favor strategies whose exact parents can be staged safely without unnecessary duplication or reconstruction;
 - account for transfer/recovery cost when two strategies are scientifically comparable.
 
-Do not create weak extra cases merely because a server is idle. Unused capacity can, however, justify a deliberately bold speculative probe when the mainline campaign cannot use that server and the probe has meaningful asymmetric information value. Prefer a genuinely different question, mechanism, formulation, or challenged assumption over another minor variation whose outcome is unlikely to change the investigation.
+When the live fleet has two or more servers usable for new compute, the runnable portfolio must include at least one bold speculative probe suitable for the loop's dedicated bold-probe lane. Do not let ordinary mainline work consume every usable server merely because it can. The bold candidate must still pass the prior-experiment collision check and have a clear learning target; generate a genuinely different question, mechanism, formulation, regime, or challenged assumption rather than a cosmetic variation.
+
+Do not create weak extra cases merely because a server is idle. If no non-redundant, interpretable bold probe can be justified within the current modelling and execution boundaries, say why rather than disguising filler as exploration; the scientific loop then decides whether analysis, literature work, or a human boundary is needed to create a valid next probe.
 
 Keep scientific setup identity server-neutral. Server assignment and local paths are resolved after setup creation by `fluent-fleet-orchestration`.
 
