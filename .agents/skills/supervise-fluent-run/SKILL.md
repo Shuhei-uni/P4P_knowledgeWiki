@@ -25,7 +25,7 @@ Before launch, know:
 - server alias;
 - exact remote case path;
 - exact remote run/output directory;
-- the `run-paths` manifest or equivalent authoritative path map;
+- the canonical `run-paths.json` beside `setup.md` and `results.md` in the Project experiment packet;
 - the deliberately established Fluent working directory;
 - Python runner path and arguments;
 - initialization intent;
@@ -39,7 +39,9 @@ Before launch, know:
 
 Use the server profile under `PyAnsys/server-profiles/` when one exists. A server profile describes remote directory layout only; it does not establish which scientific case is loaded or where a relative Fluent output will actually be written.
 
-Do not guess a remote output root. Do not accept a bare output filename unless its working directory and resulting absolute destination are recorded. If neither the execution plan nor the `run-paths` manifest establishes important destinations, return the missing execution information before launching.
+Do not guess a remote output root. Do not accept a bare output filename unless its working directory and resulting absolute destination are recorded. If neither the execution plan nor the experiment-local `run-paths.json` establishes important destinations, return the missing execution information before launching.
+
+A remote copy of the path configuration may exist temporarily if the runner needs it, but it is derived. Do not let a server-local manifest become a competing source of truth.
 
 ## Default to Python-supervised execution
 
@@ -71,7 +73,7 @@ Use read-only monitoring helpers when useful, but do not make continuous seconda
 
 ## Keep output locations reconciled
 
-The path manifest is part of the execution contract.
+The Project experiment `run-paths.json` is part of the execution contract.
 
 During supervision, treat these as path anomalies worth reconciling:
 
@@ -83,7 +85,7 @@ During supervision, treat these as path anomalies worth reconciling:
 
 Do not redirect scientific outputs ad hoc during an active run unless doing so is a safe execution-only correction. Prefer to preserve the current state, record the actual observed location, and return a blocker when changing paths mid-run could create uncertainty.
 
-An unexpected file found elsewhere must be documented with its actual path. Never silently pretend it was written to the planned location.
+An unexpected file found elsewhere must be documented with its actual path in the same canonical `run-paths.json`. Never silently pretend it was written to the planned location.
 
 ## Distinguish evidence from execution failure
 
@@ -117,9 +119,10 @@ If connection or runner state becomes uncertain:
 1. determine whether the same Fluent process still exists;
 2. establish the newest independently observed iteration/progress state;
 3. identify the latest verified paired case/data or autosave artifact;
-4. reconcile actual files against the declared run path map;
-5. do not issue another run command while completion of the previous command is uncertain;
-6. resume observation only after the actual state is reconciled.
+4. reconcile actual files against the canonical Project experiment path map;
+5. update that same `run-paths.json` with actual locations or uncertainty;
+6. do not issue another run command while completion of the previous command is uncertain;
+7. resume observation only after the actual state is reconciled.
 
 A local status file or server alias is not sufficient evidence of simulation progress or case identity.
 
@@ -129,7 +132,7 @@ Do not turn high-frequency autosave into high-frequency network synchronization.
 
 Routine autosaves may remain local for immediate same-server recovery. When the execution plan identifies an expensive or strategically important checkpoint worth protecting, preserve a complete matching case+data pair at the declared recovery paths and promote that selected state through the OneDrive durability path defined by `fluent-fleet-orchestration` when practical.
 
-A protected recovery artifact should have one artifact ID and enough provenance to identify its source run and iteration/progress. Prefer manifest/hash verification after transfer for important checkpoints.
+A protected recovery artifact should have one artifact ID and enough provenance to identify its source run and iteration/progress. Prefer manifest/hash verification after transfer for important checkpoints. Record its verified local and OneDrive locations in `run-paths.json`.
 
 This is specifically intended to reduce dependence on the current server: if the machine later becomes unavailable, a verified shared recovery pair may allow re-placement to another compatible server.
 
@@ -144,7 +147,7 @@ When a real execution blocker occurs:
 - when practical and safe, promote a valuable recovery pair to OneDrive before abandoning the server state;
 - capture the relevant terminal error, Fluent message, and runner exception;
 - record the last independently observed iteration/progress;
-- preserve the `run-paths` manifest and record any actual-vs-declared path differences;
+- update the experiment-local `run-paths.json` with actual-vs-declared path differences and durability state;
 - classify whether the failure is initialization, solver/numerical execution, Python/PyFluent execution, transport/state uncertainty, path/output failure, or file/output failure;
 - hand the execution facts back to `implement-experiment` and `scientific-phase-loop` for the rethink.
 
@@ -161,7 +164,7 @@ For an iteration-based run, verify at minimum:
 - the expected final `.dat.h5` exists at the declared path and belongs to the intended run;
 - the matching final case/restart identity is known at its declared path;
 - required logs, histories, report `.out` files, and checkpoints are locatable at their declared paths or have an explicitly reconciled actual location;
-- the `run-paths` manifest remains available;
+- the canonical Project experiment `run-paths.json` is updated and available;
 - any execution or path anomaly is recorded.
 
 For scientifically important finals, also preserve a complete paired case+data final artifact. When the execution plan calls for durable preservation, promote that pair to OneDrive and verify the shared copy. If promotion cannot be completed, report `LOCAL_ONLY` rather than masking the durability gap.
@@ -180,7 +183,7 @@ server: ...
 runner: ...
 requested horizon: ...
 final observed progress: ...
-run-paths manifest: ...
+run-paths manifest: Project/.../experiment/run-paths.json
 fluent working directory: ...
 local case: ...
 local final data: ...
