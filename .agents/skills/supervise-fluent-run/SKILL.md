@@ -1,6 +1,6 @@
 ---
 name: supervise-fluent-run
-description: "Supervise a long Fluent calculation launched from a Python runner. Use inside implement-experiment after the case has been verified and smoke-tested, when an agent should stay with the terminal, observe execution efficiently, classify real run failures, verify final data, and hand back clean execution facts without redesigning or interpreting the experiment."
+description: "Supervise a long Fluent calculation launched from a Python runner. Use inside implement-experiment after the case has been verified and smoke-tested, when an agent should stay with the terminal, observe execution efficiently, classify real run failures, verify final data, preserve selected important recovery states, and hand back clean execution facts without redesigning or interpreting the experiment."
 ---
 
 # Supervise Fluent Run
@@ -21,26 +21,28 @@ never confuse bad scientific behaviour with an execution failure
 
 Before launch, know:
 
-- experiment/setup identity;
+- experiment/setup identity and run ID;
 - server alias;
 - exact remote case path;
 - exact remote run/output directory;
 - Python runner path and arguments;
 - initialization intent;
 - requested iteration/time horizon;
-- expected final data path;
+- expected final case/data paths;
 - checkpoint/autosave paths when configured;
+- which, if any, selected checkpoint states should be promoted for durable recovery;
+- expected OneDrive durability target for the final state when configured;
 - terminal/transcript/log paths when available.
 
 Use the server profile under `PyAnsys/server-profiles/` when one exists. A server profile describes remote directory layout only; it does not establish which scientific case is loaded.
 
-Do not guess a remote output root. If neither the setup nor a verified server profile establishes the path, return the missing execution information before launching.
+Do not guess a remote output root. If neither the execution plan nor a verified server profile establishes the path, return the missing execution information before launching.
 
 ## Default to Python-supervised execution
 
 Launch the approved run through Python/PyFluent and keep the agent attached to the runner terminal for the intended horizon.
 
-Prefer one clear run command for the planned horizon rather than fine-grained agent-controlled iteration loops. Python may own the synchronous run call and final save; the supervising agent owns observation, failure classification, and handoff.
+Prefer one clear run command for the planned horizon rather than fine-grained agent-controlled iteration loops. Python may own the synchronous run call and final save; the supervising agent owns observation, failure classification, recovery-artifact verification, and handoff.
 
 Do not switch to TUI iteration, a Fluent journal, GUI submission, or another execution mechanism because it seems more convenient. Those are human-approved exceptions. If the Python/PyFluent path cannot execute the approved setup, report the blocker and request approval before using TUI or a journal.
 
@@ -52,7 +54,7 @@ Do not narrate normal iteration-by-iteration progress. Wake up on meaningful eve
 
 - initialization returns or fails;
 - the calculation begins;
-- a checkpoint/final file is observed;
+- a selected recovery checkpoint or final file is observed;
 - the runner emits an exception or Fluent fatal error;
 - the runner or Fluent process terminates unexpectedly;
 - connection state becomes uncertain;
@@ -93,11 +95,21 @@ If connection or runner state becomes uncertain:
 
 1. determine whether the same Fluent process still exists;
 2. establish the newest independently observed iteration/progress state;
-3. identify the latest verified case/data or autosave artifact;
+3. identify the latest verified paired case/data or autosave artifact;
 4. do not issue another run command while completion of the previous command is uncertain;
 5. resume observation only after the actual state is reconciled.
 
 A local status file or server alias is not sufficient evidence of simulation progress or case identity.
+
+## Preserve selected important recovery states
+
+Do not turn high-frequency autosave into high-frequency network synchronization.
+
+Routine autosaves may remain local for immediate same-server recovery. When the execution plan identifies an expensive or strategically important checkpoint worth protecting, preserve a complete matching case+data pair and promote that selected state through the OneDrive durability path defined by `fluent-fleet-orchestration` when practical.
+
+A protected recovery artifact should have one artifact ID and enough provenance to identify its source run and iteration/progress. Prefer manifest/hash verification after transfer for important checkpoints.
+
+This is specifically intended to reduce dependence on the current server: if the machine later becomes unavailable, a verified shared recovery pair may allow re-placement to another compatible server.
 
 ## On a blocker, preserve and hand back
 
@@ -106,7 +118,8 @@ Do not redesign the experiment from inside this skill.
 When a real execution blocker occurs:
 
 - stop issuing new mutating commands;
-- preserve the last verified checkpoint/data state;
+- preserve the last verified paired checkpoint/data state available locally;
+- when practical and safe, promote a valuable recovery pair to OneDrive before abandoning the server state;
 - capture the relevant terminal error, Fluent message, and runner exception;
 - record the last independently observed iteration/progress;
 - classify whether the failure is initialization, solver/numerical execution, Python/PyFluent execution, transport/state uncertainty, or file/output failure;
@@ -123,9 +136,11 @@ For an iteration-based run, verify at minimum:
 - the requested target;
 - the final independently observed iteration count;
 - the expected final `.dat.h5` exists and belongs to the intended run;
-- the matching case/restart identity is known;
+- the matching final case/restart identity is known;
 - required logs/histories/checkpoints are locatable;
 - any execution anomaly is recorded.
+
+For scientifically important finals, also preserve a complete paired case+data final artifact. When the execution plan calls for durable preservation, promote that pair to OneDrive and verify the shared copy. If promotion cannot be completed, report `LOCAL_ONLY` rather than masking the durability gap.
 
 If the target was not reached, return `BLOCKED`, not `COMPLETE`.
 
@@ -136,13 +151,16 @@ Return a compact execution handoff only:
 ```text
 STATUS: COMPLETE | BLOCKED
 experiment: ...
+run: ...
 server: ...
 runner: ...
 requested horizon: ...
 final observed progress: ...
-case: ...
-final data: ...
+local case: ...
+local final data: ...
 latest verified recovery artifact: ...
+onedrive final/recovery artifact: ...
+durability: VERIFIED | LOCAL_ONLY | NOT_REQUIRED
 log/transcript: ...
 execution failure/anomaly: ...
 ```
