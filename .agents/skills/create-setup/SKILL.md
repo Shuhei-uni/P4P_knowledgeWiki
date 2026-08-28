@@ -21,7 +21,7 @@ When several setups belong together, make their relationship explicit: what each
 
 For every setup, state the verified parent/reference artifact, the intentional change, and what must remain comparable.
 
-Prefer a server-neutral parent artifact identity over a machine-specific path. When available, record the artifact ID and enough provenance to distinguish the exact parent case/data state from similarly named files. Server aliases and local paths belong to the later execution plan created by `fluent-fleet-orchestration`, not to the scientific meaning of the setup.
+Prefer a server-neutral parent artifact identity over a machine-specific path. When available, record the artifact ID and enough provenance to distinguish the exact parent case/data state from similarly named files. Server identities and local paths belong to the later execution plan created by `fluent-fleet-orchestration`, not to the scientific meaning of the setup.
 
 Make clear which settings are inherited, which are deliberately changed, and which differences would compromise interpretation.
 
@@ -52,11 +52,11 @@ The canonical experiment directory should keep these three records together:
 ```text
 experiment/
 ├── setup.md
-├── run-paths.json
+├── run-paths.yaml
 └── results.md
 ```
 
-`setup.md` is the server-neutral scientific contract. `run-paths.json` is populated later by `fluent-fleet-orchestration` once live placement and exact filesystem destinations are known. `results.md` records the resulting evidence and interpretation.
+`setup.md` is the server-neutral scientific contract. `run-paths.yaml` is populated later by `fluent-fleet-orchestration` once live placement and exact filesystem destinations are known. `results.md` records the resulting evidence and interpretation.
 
 Do not put machine-specific server paths into `setup.md` merely because they are known at setup time. Do not create a second durable path manifest elsewhere. Keeping the three records together makes a fresh agent able to recover what was intended, where the actual run/artifacts lived, and what happened.
 
@@ -72,6 +72,6 @@ Create or update one `setup.md` per distinct simulation in the selected strategy
 
 A useful setup record contains the question and rationale, hypothesis, prior evidence, parent/reference artifact identity, controlled change, frozen comparison context, run intent, required evidence/visualisations, important assumptions and limitations, durability intent for final/selected recovery states, and any relationship to the wider linked campaign.
 
-Do not bind the setup to a server merely because the parent currently lives there. After setup creation, `fluent-fleet-orchestration` resolves the current live server placement, verified parent source, any OneDrive transfer, and exact remote paths into the sibling `run-paths.json`.
+Do not bind the setup to a server merely because the parent currently lives there. After setup creation, `fluent-fleet-orchestration` resolves the current live server placement, verified parent source, any OneDrive transfer, exact runtime server reference, and exact remote paths into the sibling `run-paths.yaml`.
 
 The handoff is complete when `fluent-fleet-orchestration` can place the setup, `implement-experiment` can build and run it from the exact resolved parent, and `interpret-experiment` can later recover both the purpose of the run and the logic of the combined experiment strategy.
