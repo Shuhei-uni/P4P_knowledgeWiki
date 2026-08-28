@@ -35,6 +35,23 @@ PyAnsys  = implementation, execution, inspection, and evidence tools
   recreate them or the retired numbered setup tree; recover exact history from
   Git when needed.
 
+## Skill invocation policy
+
+Read [`.agents/invocation.md`](.agents/invocation.md) when deciding whether a
+skill may be entered automatically.
+
+- `phase-planner` is human-only and must never be started implicitly.
+- `scientific-phase-loop` and `workflow-surgeon` are hybrid: the human may call
+  them directly, and the model may enter them when their documented trigger or
+  preconditions are already satisfied.
+- Other active specialist skills are model-invoked by default and should be
+  selected automatically when applicable.
+- Retired/unrouted skills listed in `.agents/invocation.md` must not be selected
+  as current workflow authorities.
+
+Invocation policy controls who may start a workflow. The responsibility and
+human-gate rules inside each skill still apply.
+
 ## Core safeguards
 
 - Never edit any file under a `raw/` directory.
