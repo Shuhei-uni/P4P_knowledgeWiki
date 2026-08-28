@@ -1,0 +1,7 @@
+interface:
+  display_name: "Scientific Phase Loop"
+  short_description: "Autonomously navigate an agreed scientific phase."
+  default_prompt: "Use $scientific-phase-loop to pursue this agreed phase goal autonomously within the supplied boundaries and return when the phase is answered or a genuine human boundary is reached."
+
+policy:
+  allow_implicit_invocation: true
