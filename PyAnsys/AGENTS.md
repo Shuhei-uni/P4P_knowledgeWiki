@@ -31,14 +31,15 @@ from another shell, and do not hard-code a different clone's absolute path.
 - `scripts/connection/`: connection and bootstrap checks.
 - `scripts/inspection/`: non-mutating discovery, snapshots, and probes.
 - `scripts/setup/`: thin case-specific setup/run orchestration.
+- `scripts/orchestration/`: generic detached run supervision and event-driven handoff.
 - `server-profiles/`: non-secret per-endpoint remote directory knowledge;
   routing and filesystem context only, never case identity or live availability.
 - Report/post-processing helpers that were tied to retired campaign trees are
   not kept as a second active layer; current read-only checks live in
   `scripts/inspection/` and reusable modules under `src/`.
 - `knowledge/fluent-settings/native_run_and_autosave.md`: the durable current
-  run-supervision, recovery, and autosave policy. The legacy filename is kept
-  for stable links; Python-supervised execution is now the default.
+  run-supervision, recovery, autosave, and handoff policy. The legacy filename
+  is kept for stable links; Python-supervised execution remains the default.
 - `output/`: generated extracts and diagnostics; never the scientific authority.
 
 Prefer an existing helper or proven script before writing campaign-specific
@@ -147,32 +148,42 @@ Reconcile actual observed output locations back into the same Project
 
 ## CASE → INITIALISE / RUN
 
-Setup construction and long-run supervision are separate responsibilities.
+Setup construction and long-run execution are separate responsibilities.
 
 - A setup script loads the exact resolved parent artifact, verifies remote
   inputs, inspects the current state, applies only the selected delta, verifies
   critical invariants, and writes the required case artifact.
 - For autonomous work inside `scientific-phase-loop`, the default run mechanism
-  is a Python/PyFluent runner supervised by an agent using `supervise-fluent-run`.
-- The supervising agent stays with the runner terminal for the planned horizon,
-  remains mostly read-only while Fluent is advancing, wakes on meaningful
-  events/errors, and verifies the final data before handoff.
+  is a Python/PyFluent runner launched through `supervise-fluent-run` and the
+  detached `scripts/orchestration/run_and_handoff.py` worker.
+- Do not keep an AI agent alive merely to watch Fluent advance. The detached
+  worker owns the synchronous runner, logs, completion checks, and terminal
+  manifest. When the job reaches `COMPLETE` or `BLOCKED`, it may resume the
+  exact recorded Codex session with `codex exec resume <SESSION_ID> ...`.
+- Use an explicit Codex session/thread ID for each scientific loop. Never use
+  `--last` for autonomous handoff when several servers or jobs may finish
+  independently.
+- A zero runner exit code is not sufficient completion proof. The job contract
+  must declare local required files and/or a deterministic verifier command so
+  the final save and required execution evidence are checked before `COMPLETE`.
 - Prefer one clear Python-issued run for the planned horizon over fine-grained
   one-iteration polling loops. Periodic recovery artifacts may still be
-  configured when the experiment requires them, but the agent should not
+  configured when the experiment requires them; the worker should not
   micromanage normal solver progress.
 - TUI-driven iteration, Fluent journal/batch submission, or GUI-owned execution
   are exceptions that require explicit human approval for that run. Do not use
   them automatically as a fallback when the Python/PyFluent path fails.
 - A floating-point error, initialization failure, Fluent crash, unreconciled
   connection/run state, or final-save failure is a blocker: preserve the last
-  verified state and return the execution evidence for a rethink. Poor
+  verified state and hand the execution evidence back for a rethink. Poor
   residuals or scientifically unpromising behaviour are not execution stop
   conditions when Fluent can still continue.
+- Refuse duplicate launches while an old job manifest exists unless the prior
+  state has been reconciled and an explicit forced rerun is justified.
 - Record the actual parent artifact identity, controlled change, readback, case
   artifact, run ID, runtime server reference, Python runner, requested budget,
-  observed final state, remote artifact paths, durability status, and unresolved
-  execution uncertainty.
+  observed final state, remote artifact paths, durability status, terminal job
+  manifest, handoff status, and unresolved execution uncertainty.
 
 ## Durable case/data preservation
 
@@ -244,6 +255,6 @@ reconciliation of live evidence, proven code, and project intent.
 
 Before handoff, verify dependency order, critical readbacks, artifact
 locations, case identity, the canonical experiment `run-paths.yaml`, runtime
-server reference, durability status for important artifacts, failure
-classification, and that no raw file or unrequested project conclusion was
-changed.
+server reference, durability status for important artifacts, terminal job
+manifest, failure classification, and that no raw file or unrequested project
+conclusion was changed.
