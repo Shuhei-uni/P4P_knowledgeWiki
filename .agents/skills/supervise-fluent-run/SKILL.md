@@ -1,6 +1,6 @@
 ---
 name: supervise-fluent-run
-description: "Supervise a long Fluent calculation launched from a Python runner. Use inside implement-experiment after the case has been verified and smoke-tested, when an agent should stay with the terminal, observe execution efficiently, classify real run failures, verify final data, preserve selected important recovery states, and hand back clean execution facts without redesigning or interpreting the experiment."
+description: "Supervise a long Fluent calculation launched from a Python runner. Use inside implement-experiment after the case has been verified and smoke-tested, when an agent should stay with the terminal, observe execution efficiently, classify real run failures, verify declared output paths and final data, preserve selected important recovery states, and hand back clean execution facts without redesigning or interpreting the experiment."
 ---
 
 # Supervise Fluent Run
@@ -25,24 +25,27 @@ Before launch, know:
 - server alias;
 - exact remote case path;
 - exact remote run/output directory;
+- the `run-paths` manifest or equivalent authoritative path map;
+- the deliberately established Fluent working directory;
 - Python runner path and arguments;
 - initialization intent;
 - requested iteration/time horizon;
 - expected final case/data paths;
 - checkpoint/autosave paths when configured;
+- every required file-backed report/monitor output path, including `.out` files;
 - which, if any, selected checkpoint states should be promoted for durable recovery;
 - expected OneDrive durability target for the final state when configured;
 - terminal/transcript/log paths when available.
 
-Use the server profile under `PyAnsys/server-profiles/` when one exists. A server profile describes remote directory layout only; it does not establish which scientific case is loaded.
+Use the server profile under `PyAnsys/server-profiles/` when one exists. A server profile describes remote directory layout only; it does not establish which scientific case is loaded or where a relative Fluent output will actually be written.
 
-Do not guess a remote output root. If neither the execution plan nor a verified server profile establishes the path, return the missing execution information before launching.
+Do not guess a remote output root. Do not accept a bare output filename unless its working directory and resulting absolute destination are recorded. If neither the execution plan nor the `run-paths` manifest establishes important destinations, return the missing execution information before launching.
 
 ## Default to Python-supervised execution
 
 Launch the approved run through Python/PyFluent and keep the agent attached to the runner terminal for the intended horizon.
 
-Prefer one clear run command for the planned horizon rather than fine-grained agent-controlled iteration loops. Python may own the synchronous run call and final save; the supervising agent owns observation, failure classification, recovery-artifact verification, and handoff.
+Prefer one clear run command for the planned horizon rather than fine-grained agent-controlled iteration loops. Python may own the synchronous run call and final save; the supervising agent owns observation, failure classification, path/output reconciliation, recovery-artifact verification, and handoff.
 
 Do not switch to TUI iteration, a Fluent journal, GUI submission, or another execution mechanism because it seems more convenient. Those are human-approved exceptions. If the Python/PyFluent path cannot execute the approved setup, report the blocker and request approval before using TUI or a journal.
 
@@ -54,7 +57,8 @@ Do not narrate normal iteration-by-iteration progress. Wake up on meaningful eve
 
 - initialization returns or fails;
 - the calculation begins;
-- a selected recovery checkpoint or final file is observed;
+- a declared report/monitor output or selected recovery checkpoint appears;
+- an expected output fails to appear where the path map says it should;
 - the runner emits an exception or Fluent fatal error;
 - the runner or Fluent process terminates unexpectedly;
 - connection state becomes uncertain;
@@ -64,6 +68,22 @@ Do not narrate normal iteration-by-iteration progress. Wake up on meaningful eve
 When the terminal is simply advancing normally, wait and continue observing.
 
 Use read-only monitoring helpers when useful, but do not make continuous secondary polling a requirement for the solve to proceed.
+
+## Keep output locations reconciled
+
+The path manifest is part of the execution contract.
+
+During supervision, treat these as path anomalies worth reconciling:
+
+- a required `.out`, transcript, checkpoint, case/data save, or log is missing from its declared destination when it should exist;
+- Fluent creates an important file in the session launch directory or another unexpected location;
+- an existing relative path resolves somewhere other than the intended run root;
+- a file from another run would be overwritten;
+- the runner and Fluent disagree about the expected final path.
+
+Do not redirect scientific outputs ad hoc during an active run unless doing so is a safe execution-only correction. Prefer to preserve the current state, record the actual observed location, and return a blocker when changing paths mid-run could create uncertainty.
+
+An unexpected file found elsewhere must be documented with its actual path. Never silently pretend it was written to the planned location.
 
 ## Distinguish evidence from execution failure
 
@@ -85,6 +105,7 @@ A real execution blocker includes events such as:
 - the Python runner raises an execution error before completion;
 - the calculation stops before the requested horizon and cannot be reconciled;
 - required final data cannot be written or verified;
+- important output locations become ambiguous enough that scientific evidence may be lost or overwritten;
 - case/data state becomes uncertain enough that repeating work could duplicate or overwrite unknown progress.
 
 ## Reconcile uncertainty; never blindly repeat work
@@ -96,8 +117,9 @@ If connection or runner state becomes uncertain:
 1. determine whether the same Fluent process still exists;
 2. establish the newest independently observed iteration/progress state;
 3. identify the latest verified paired case/data or autosave artifact;
-4. do not issue another run command while completion of the previous command is uncertain;
-5. resume observation only after the actual state is reconciled.
+4. reconcile actual files against the declared run path map;
+5. do not issue another run command while completion of the previous command is uncertain;
+6. resume observation only after the actual state is reconciled.
 
 A local status file or server alias is not sufficient evidence of simulation progress or case identity.
 
@@ -105,7 +127,7 @@ A local status file or server alias is not sufficient evidence of simulation pro
 
 Do not turn high-frequency autosave into high-frequency network synchronization.
 
-Routine autosaves may remain local for immediate same-server recovery. When the execution plan identifies an expensive or strategically important checkpoint worth protecting, preserve a complete matching case+data pair and promote that selected state through the OneDrive durability path defined by `fluent-fleet-orchestration` when practical.
+Routine autosaves may remain local for immediate same-server recovery. When the execution plan identifies an expensive or strategically important checkpoint worth protecting, preserve a complete matching case+data pair at the declared recovery paths and promote that selected state through the OneDrive durability path defined by `fluent-fleet-orchestration` when practical.
 
 A protected recovery artifact should have one artifact ID and enough provenance to identify its source run and iteration/progress. Prefer manifest/hash verification after transfer for important checkpoints.
 
@@ -122,12 +144,13 @@ When a real execution blocker occurs:
 - when practical and safe, promote a valuable recovery pair to OneDrive before abandoning the server state;
 - capture the relevant terminal error, Fluent message, and runner exception;
 - record the last independently observed iteration/progress;
-- classify whether the failure is initialization, solver/numerical execution, Python/PyFluent execution, transport/state uncertainty, or file/output failure;
+- preserve the `run-paths` manifest and record any actual-vs-declared path differences;
+- classify whether the failure is initialization, solver/numerical execution, Python/PyFluent execution, transport/state uncertainty, path/output failure, or file/output failure;
 - hand the execution facts back to `implement-experiment` and `scientific-phase-loop` for the rethink.
 
 Do not automatically lower relaxation factors, change timestep, alter initialization, change models, or rerun from a checkpoint. Those are scientific or implementation decisions owned upstream.
 
-## Completion requires verified data
+## Completion requires verified data and locatable outputs
 
 Do not claim success because the Python command returned or enough wall time elapsed.
 
@@ -135,10 +158,11 @@ For an iteration-based run, verify at minimum:
 
 - the requested target;
 - the final independently observed iteration count;
-- the expected final `.dat.h5` exists and belongs to the intended run;
-- the matching final case/restart identity is known;
-- required logs/histories/checkpoints are locatable;
-- any execution anomaly is recorded.
+- the expected final `.dat.h5` exists at the declared path and belongs to the intended run;
+- the matching final case/restart identity is known at its declared path;
+- required logs, histories, report `.out` files, and checkpoints are locatable at their declared paths or have an explicitly reconciled actual location;
+- the `run-paths` manifest remains available;
+- any execution or path anomaly is recorded.
 
 For scientifically important finals, also preserve a complete paired case+data final artifact. When the execution plan calls for durable preservation, promote that pair to OneDrive and verify the shared copy. If promotion cannot be completed, report `LOCAL_ONLY` rather than masking the durability gap.
 
@@ -156,12 +180,16 @@ server: ...
 runner: ...
 requested horizon: ...
 final observed progress: ...
+run-paths manifest: ...
+fluent working directory: ...
 local case: ...
 local final data: ...
+report/monitor outputs: declared -> actual
 latest verified recovery artifact: ...
 onedrive final/recovery artifact: ...
 durability: VERIFIED | LOCAL_ONLY | NOT_REQUIRED
 log/transcript: ...
+path anomaly: ...
 execution failure/anomaly: ...
 ```
 
