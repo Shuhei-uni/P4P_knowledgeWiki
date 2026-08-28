@@ -116,19 +116,25 @@ The two modes are not fixed stages. Discovery can produce a focused hypothesis w
 
 Choose again whenever the evidence changes the nature of the uncertainty.
 
-## Execute approved experiments through supervised Python
+## Execute approved experiments through detached Python handoff
 
 Once `create-setup` has made the experiment precise, call `fluent-fleet-orchestration` again to resolve each server-neutral setup into an explicit execution plan: run ID, selected server, exact parent artifact, any verified OneDrive staging, remote paths, and durability expectations.
 
-Then call `implement-experiment` to build and verify it. Long calculations pass to `supervise-fluent-run`.
+Then call `implement-experiment` to build, reload-verify, and smoke-test it. Long calculations pass to `supervise-fluent-run`, which launches the approved Python/PyFluent runner through the detached `run_and_handoff.py` worker.
 
-For experiments inside this autonomous loop, the default execution mechanism is a Python/PyFluent runner supervised by an agent for the full planned horizon.
+Do not keep this scientific agent alive merely to observe Fluent for the full planned horizon. The detached worker owns the blocking calculation, runner log, deterministic terminal verification, and job manifest. When the run reaches `COMPLETE` or `BLOCKED`, it resumes the exact recorded Codex session so this loop can continue from the persisted execution evidence.
+
+For multi-server or multi-job work, every job must carry the explicit Codex session/thread ID that owns the scientific loop. Never use `--last`, because jobs may complete in a different order from launch order.
+
+A zero Python return code is not sufficient completion proof. Require locally visible final files and/or a deterministic verifier command that proves the declared remote final state before the worker records `COMPLETE`.
 
 Do not independently choose TUI-driven iteration, a Fluent journal/batch, or GUI-owned execution. Those mechanisms require explicit human approval for that specific run. If the Python/PyFluent path is blocked, return the execution evidence rather than silently changing run mechanism.
 
-The run supervisor is an execution observer, not another scientist. It should let poor residuals, poor balances, or unexpected model behaviour continue to the planned horizon when Fluent can still solve. A genuine initialization failure, floating-point/fatal error, process crash, unreconciled run state, or failed final save returns the experiment to this loop for a rethink.
+The run supervisor is an execution boundary, not another scientist. It should let poor residuals, poor balances, or unexpected model behaviour continue to the planned horizon when Fluent can still solve. A genuine initialization failure, floating-point/fatal error, process crash, unreconciled run state, or failed final save produces `BLOCKED` and wakes this loop for a rethink rather than improvising numerics inside the worker.
 
 Important final states and selected expensive recovery checkpoints should not remain dependent on one server. When practical, preserve complete paired case+data artifacts and promote them through the OneDrive durability path defined by `fluent-fleet-orchestration`.
+
+After launch, the current turn may end. Scientific work resumes only when the completion hook supplies the terminal manifest or when a human explicitly returns to the phase. The repository and manifests, not a continuously alive agent process, preserve the thread across the long solve.
 
 ## Make simulations earn their cost
 
