@@ -1,23 +1,46 @@
 ---
 name: implement-experiment
-description: "Execute an approved setup faithfully in Fluent: build the specified case, prove the setup by readback and save/reopen, smoke-test it, then hand the fixed target to a Python-supervised Fluent run and verify completion. Use after create-setup has defined the experiment."
+description: "Execute an approved setup faithfully in Fluent: stage the exact resolved parent, build the specified case, prove the setup by readback and save/reopen, smoke-test it, then hand the fixed target to a Python-supervised Fluent run and verify completion. Use after create-setup and fluent-fleet-orchestration have defined the experiment and execution placement."
 ---
 
 # Implement Experiment
 
-Get the approved setup done as written.
+Get the approved setup done as written on the server assigned by the execution plan.
 
-The scientific decisions have already been made. This skill owns faithful execution, not experiment design.
+The scientific decisions have already been made. This skill owns faithful execution, not experiment design or server selection.
+
+## Receive the execution plan
+
+Before mutating Fluent, require the placement contract produced by `fluent-fleet-orchestration`.
+
+Know at minimum:
+
+- setup ID and run ID;
+- selected server;
+- exact parent artifact ID;
+- verified parent case/data source;
+- whether OneDrive staging is required;
+- exact remote parent and run/output paths;
+- any available expected hashes/provenance for the parent;
+- final-artifact durability intent and any selected important checkpoint policy.
+
+Do not choose another server or substitute a similarly named local parent merely because it is convenient. If the assigned parent cannot be staged or verified, return the placement failure for re-planning.
 
 ## Preserve the setup
 
-Treat `setup.md` as the experiment contract. Build the requested delta from the verified parent/reference case and preserve everything that the setup says must remain unchanged.
+Treat `setup.md` as the experiment contract. Build the requested delta from the verified parent/reference artifact and preserve everything that the setup says must remain unchanged.
 
 Have essentially no scientific freedom here. Do not add models, change numerics, alter run length, redefine monitors, or otherwise improve the experiment because another choice seems better.
 
 Implementation details may need to change when Fluent, PyFluent, repository tooling, or pipeline versions differ from what the setup expected. In that case, find an implementation that is scientifically equivalent and preserves the intended case state. If the setup cannot be implemented faithfully, stop the implementation and return that conflict rather than silently changing the experiment.
 
 Use existing `fluent-case-build-and-run` guidance and reusable PyAnsys tooling for the low-level mechanics.
+
+## Stage and prove the parent
+
+When the exact parent is not already local, stage the complete required case/data pair through the transfer path defined in the execution plan, normally via the verified OneDrive artifact layer.
+
+Before deriving the child, prove that the staged files correspond to the intended parent. Prefer manifest/hash verification when available; otherwise use the strongest available provenance and direct readback evidence. Do not treat matching filenames alone as sufficient proof for an important transferred artifact.
 
 ## Prove the case before the long run
 
@@ -41,6 +64,16 @@ Python-supervised execution is the default for experiments inside `scientific-ph
 
 Do not stop early merely because residuals, balances, or monitors look poor, noisy, oscillatory, or unpromising. Those behaviours are evidence for later analysis. Unless the solver or execution path encounters an actual error that prevents continuation, let the experiment reach its planned horizon.
 
+## Preserve important artifacts beyond the server
+
+Server-local storage is the working copy, not the only durable scientific copy.
+
+For a scientifically important final state, final parent likely to be branched from again, or deliberately selected expensive recovery checkpoint, preserve a complete paired case+data artifact and promote it to the approved OneDrive location when practical.
+
+Do not upload every autosave. Promote only final states and checkpoints whose loss would materially cost future work.
+
+For an important promoted artifact, preserve the artifact ID, source setup/run, iteration or progress, filenames, origin server, and hashes when feasible. Verify the copied pair before describing it as durable. If the OneDrive step cannot be completed, keep the local pair intact and return a `LOCAL_ONLY` durability status rather than silently treating the run as safely archived.
+
 ## Completion means the data reached the target
 
 Do not claim completion because a command was submitted, the Python process exited, or enough wall time has passed.
@@ -49,8 +82,10 @@ For an iteration-based experiment, the strongest minimal completion evidence is 
 
 Preserve the final case/data and any required histories or checkpoints. If execution failed before the target, report the final observed iteration and the failure without pretending the experiment completed.
 
+A successfully solved run and a durably replicated run are related but separate facts. Report both execution completion and durability status.
+
 ## Handoff
 
-Return only execution facts: whether the setup matched on readback, whether save/reopen verification passed, whether the smoke test ran, the Python runner used, the requested horizon, the final observed progress, artifact locations, and any implementation deviations or execution failures.
+Return only execution facts: whether the parent was staged and verified, whether the setup matched on readback, whether save/reopen verification passed, whether the smoke test ran, the selected server, Python runner, requested horizon, final observed progress, local artifact locations, verified OneDrive artifact locations when available, durability status, and any implementation deviations or execution failures.
 
 Scientific interpretation belongs downstream.
