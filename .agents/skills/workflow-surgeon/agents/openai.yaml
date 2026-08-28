@@ -1,0 +1,7 @@
+interface:
+  display_name: "Workflow Surgeon"
+  short_description: "Repair concrete P4P workflow failures with minimal changes."
+  default_prompt: "Use $workflow-surgeon to diagnose this concrete workflow failure and make the smallest justified repair without redesigning the working architecture."
+
+policy:
+  allow_implicit_invocation: true
