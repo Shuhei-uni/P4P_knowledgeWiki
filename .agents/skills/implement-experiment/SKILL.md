@@ -21,7 +21,8 @@ Know at minimum:
 - verified parent case/data source;
 - whether OneDrive staging is required;
 - exact remote parent and run/output paths;
-- the explicit run path map, including Fluent working directory, final case/data, autosave/checkpoint paths, file-backed report/monitor outputs such as `.out`, transcript/log paths, and artifact-manifest locations when applicable;
+- the canonical sibling `run-paths.json` beside `setup.md` and `results.md` in the Project experiment packet;
+- the explicit path map, including Fluent working directory, final case/data, autosave/checkpoint paths, file-backed report/monitor outputs such as `.out`, transcript/log paths, and artifact-manifest locations when applicable;
 - any available expected hashes/provenance for the parent;
 - final-artifact durability intent and any selected important checkpoint policy.
 
@@ -49,14 +50,16 @@ Before deriving the child, prove that the staged files correspond to the intende
 
 Before the smoke test or long solve:
 
-1. create the declared run, report, log, checkpoint, staging, and manifest directories as required;
+1. create the declared remote run, report, log, checkpoint, staging, and manifest directories as required;
 2. verify the intended destinations are writable and will not unintentionally overwrite another run;
 3. inspect the active Fluent case for file-backed reports, monitors, autosaves, exports, transcripts, or other outputs with relative or inherited filenames;
-4. resolve those outputs to the run path map;
+4. resolve those outputs to the canonical Project experiment `run-paths.json`;
 5. where possible, rewrite only the file destination to an explicit run-specific path without changing the scientific monitor/report definition;
 6. where Fluent requires a relative filename, deliberately set or verify the Fluent working directory and record the resulting absolute destination;
 7. read back important configured destinations when possible;
-8. write the resolved path record under the run root, preferably `run-paths.json`.
+8. write or update the sibling `run-paths.json` in the Project experiment packet before solving.
+
+Do not make the remote run directory the durable home of the path manifest. If the runner needs a local machine-readable copy, it may receive a transient/derived copy, but the Project experiment `run-paths.json` remains authoritative.
 
 Do not assume that loading a case changes Fluent's working directory or causes relative `.out` files to be written beside the case. Do not rely on the directory from which an existing Fluent session happened to be launched.
 
@@ -70,7 +73,7 @@ Before the full run, verify the important setup state by exact readback, save th
 
 Then run a short smoke test, normally about 50 iterations for an iteration-based case. The purpose is simple: prove that the saved case and chosen Python/PyFluent execution path can actually solve and advance before committing to the expensive run.
 
-Use the smoke test to confirm that required file-backed outputs are appearing at the declared locations. If Fluent silently writes an important `.out`, checkpoint, transcript, or other artifact somewhere else, reconcile the path configuration before the long run.
+Use the smoke test to confirm that required file-backed outputs are appearing at the declared locations. If Fluent silently writes an important `.out`, checkpoint, transcript, or other artifact somewhere else, reconcile the path configuration before the long run and update the same canonical `run-paths.json`.
 
 Initialization is not universally required. Follow the setup. Do not initialize merely because this skill has an initialization step.
 
@@ -94,7 +97,9 @@ For a scientifically important final state, final parent likely to be branched f
 
 Do not upload every autosave. Promote only final states and checkpoints whose loss would materially cost future work.
 
-For an important promoted artifact, preserve the artifact ID, source setup/run, iteration or progress, filenames, origin server, and hashes when feasible. Verify the copied pair before describing it as durable. If the OneDrive step cannot be completed, keep the local pair intact and return a `LOCAL_ONLY` durability status rather than silently treating the run as safely archived.
+For an important promoted artifact, preserve the artifact ID, source setup/run, iteration or progress, filenames, origin server, and hashes when feasible. Verify the copied pair before describing it as durable. Record verified OneDrive locations and durability status in the same Project experiment `run-paths.json`.
+
+If the OneDrive step cannot be completed, keep the local pair intact, record its actual local path, and return a `LOCAL_ONLY` durability status rather than silently treating the run as safely archived.
 
 ## Completion means the data reached the target and outputs are locatable
 
@@ -102,7 +107,7 @@ Do not claim completion because a command was submitted, the Python process exit
 
 For an iteration-based experiment, the strongest minimal completion evidence is that the final saved data belongs to the intended run and reports the iteration count requested by `setup.md`.
 
-Also reconcile required generated outputs against `run-paths.json` or the equivalent path record. Required histories, `.out` files, checkpoints, transcripts, logs, manifests, and final case/data should be locatable at their declared paths or explicitly recorded as anomalies with their actual locations.
+Also reconcile required generated outputs against the sibling `run-paths.json`. Required histories, `.out` files, checkpoints, transcripts, logs, manifests, and final case/data should be locatable at their declared paths or explicitly recorded as anomalies with their actual locations.
 
 Preserve the final case/data and any required histories or checkpoints. If execution failed before the target, report the final observed iteration and the failure without pretending the experiment completed.
 
@@ -110,6 +115,6 @@ A successfully solved run and a durably replicated run are related but separate 
 
 ## Handoff
 
-Return only execution facts: whether the parent was staged and verified, whether the run filesystem/path map was established, the `run-paths` manifest location, whether the setup matched on readback, whether save/reopen verification passed, whether the smoke test ran, the selected server, Python runner, requested horizon, final observed progress, declared and actual local artifact/output locations, verified OneDrive artifact locations when available, durability status, and any implementation deviations, path anomalies, or execution failures.
+Return only execution facts: whether the parent was staged and verified, whether the run filesystem/path map was established, the canonical Project `run-paths.json` location, whether the setup matched on readback, whether save/reopen verification passed, whether the smoke test ran, the selected server, Python runner, requested horizon, final observed progress, declared and actual local artifact/output locations, verified OneDrive artifact locations when available, durability status, and any implementation deviations, path anomalies, or execution failures.
 
 Scientific interpretation belongs downstream.
