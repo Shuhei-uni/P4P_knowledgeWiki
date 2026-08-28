@@ -24,8 +24,6 @@ Stage-4 promising-state development campaign. Its Project tracer is the
 shortest route through the selected record:
 
 - [03A tracer index](experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/index.md)
-- [03A-Q01 setup — S4-01 50-iteration qualification](experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/q01-s4-01-50-iteration-qualification/setup.md)
-- [03A-Q01 results — S4-01 50-iteration qualification](experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/q01-s4-01-50-iteration-qualification/results.md)
 - [Stage-4 setup contract](experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/stage-04/setup.md)
 - [Stage-4 execution evidence](experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/stage-04/results.md)
 - [Stage-3 results](experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/stage-03/results.md)
@@ -39,24 +37,20 @@ silently upgraded to current conclusions.
 
 Stage 4 produced completed diagnostic continuation evidence for S4-01 and
 S4-03, completed-budget but endpoint-incomplete evidence for S4-02, and
-prepared-only evidence for S4-04. The selected Q01 qualification then
-completed exactly 50 native steady iterations from the verified `33,000`
-parent endpoint, reaching native coordinate `33,050` with a paired endpoint,
-hashes, scientific readback, residual/transcript evidence, and all 30
-configured physical histories.
+prepared-only evidence for S4-04. S4-05 and S4-06 remain gated because the
+exact F09 40% parent was not proved accessible.
 
-The short window still contains residual excursions and movement in mass
-imbalance, liquid inventory, and routing; no paired native autosave checkpoint
-was recovered. The available records do not establish physical convergence, a
-report-ready baseline, or eligibility for a new parent branch. The Q01 packet
-is diagnostic execution evidence, not a performance or validation claim.
+The available Stage-4 records do not establish physical convergence, a
+report-ready baseline, or eligibility for a new parent branch. The executed
+branches remain diagnostic until their binary identity, readback, and full
+physical-history evidence are reviewed together.
 
 ## What remains unresolved?
 
 - whether any 03A state has stable residuals, phase routing, pressure behaviour,
   and liquid-inventory behaviour over the required continuation window;
-- whether the Q01 short-window movement can be qualified over a longer
-  explicitly selected continuation with complete checkpoint evidence;
+- whether the completed S4-01 and S4-03 continuations contain a stable,
+  parent-eligible window;
 - whether the rebuilt case is truly at parity with the audited Purnanto carrier
   settings apart from its declared project change;
 - which external, analytical, or measured targets are appropriate for a
@@ -66,9 +60,9 @@ is diagnostic execution evidence, not a performance or validation claim.
 
 ## What happens next?
 
-Review the Q01 packet together with the 03A tracer's remaining readback and
-physical-history gaps. Promote only a state that passes those checks, then
-record the next explicitly selected experiment with the
+Review the Stage-4 execution package together with the 03A tracer's remaining
+readback and physical-history gaps. Promote only a state that passes those
+checks, then record the next explicitly selected experiment with the
 [setup/results contract](experiments/README.md). Keep each new experiment to a
 concise delta from a verified parent and make its evidence and interpretation
 explicit.

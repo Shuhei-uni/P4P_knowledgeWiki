@@ -66,5 +66,5 @@ trend-only rather than upgrading the claim.
   judgment.
 - Project/ owns the project-specific interpretation and claim boundary.
 
-No final human sign-off has been granted. The current Q01 packet is an
-execution qualification with a diagnostic result, not a validation record.
+No final human sign-off has been granted. The current Stage-4 execution
+package remains diagnostic evidence, not a validation record.
