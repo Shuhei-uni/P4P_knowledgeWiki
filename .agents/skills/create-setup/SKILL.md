@@ -45,6 +45,21 @@ When the resulting final state is scientifically important, likely to become a f
 
 Do not invent unnecessary Fluent detail. Prefer a clear delta from a verified parent/reference case where that is safer and easier to audit.
 
+## Keep the experiment packet together
+
+The canonical experiment directory should keep these three records together:
+
+```text
+experiment/
+├── setup.md
+├── run-paths.json
+└── results.md
+```
+
+`setup.md` is the server-neutral scientific contract. `run-paths.json` is populated later by `fluent-fleet-orchestration` once live placement and exact filesystem destinations are known. `results.md` records the resulting evidence and interpretation.
+
+Do not put machine-specific server paths into `setup.md` merely because they are known at setup time. Do not create a second durable path manifest elsewhere. Keeping the three records together makes a fresh agent able to recover what was intended, where the actual run/artifacts lived, and what happened.
+
 ## Preserve uncertainty
 
 A setup is a plan, not a result.
@@ -53,10 +68,10 @@ Keep hypotheses labelled as hypotheses. Do not write expected trends as conclusi
 
 ## Output
 
-Create or update one setup record per distinct simulation in the selected strategy, using the repository's canonical setup location and naming conventions.
+Create or update one `setup.md` per distinct simulation in the selected strategy, using the repository's canonical experiment location and naming conventions.
 
 A useful setup record contains the question and rationale, hypothesis, prior evidence, parent/reference artifact identity, controlled change, frozen comparison context, run intent, required evidence/visualisations, important assumptions and limitations, durability intent for final/selected recovery states, and any relationship to the wider linked campaign.
 
-Do not bind the setup to a server merely because the parent currently lives there. After setup creation, `fluent-fleet-orchestration` resolves the current live server placement, verified parent source, any OneDrive transfer, and exact remote paths.
+Do not bind the setup to a server merely because the parent currently lives there. After setup creation, `fluent-fleet-orchestration` resolves the current live server placement, verified parent source, any OneDrive transfer, and exact remote paths into the sibling `run-paths.json`.
 
 The handoff is complete when `fluent-fleet-orchestration` can place the setup, `implement-experiment` can build and run it from the exact resolved parent, and `interpret-experiment` can later recover both the purpose of the run and the logic of the combined experiment strategy.
