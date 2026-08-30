@@ -1,11 +1,13 @@
 ---
 name: supervise-fluent-run
-description: "Launch and supervise an approved long Fluent calculation without keeping an AI agent alive for the full solve. Use after the case has been verified and smoke-tested to create a detached deterministic run job, verify terminal outputs, write a machine-readable COMPLETE/BLOCKED manifest, and resume the exact Codex session when the run finishes or blocks."
+description: "Launch and supervise an approved long hypothesis-test Fluent calculation without keeping an AI agent alive for the full solve. Use after a hypothesis-test case has been verified and smoke-tested to create a detached deterministic run job, verify terminal outputs, write a machine-readable COMPLETE/BLOCKED manifest, and resume the exact Codex session when the run finishes or blocks."
 ---
 
 # Supervise Fluent Run
 
-The long solve should outlive the agent turn that launched it.
+This skill is for long **hypothesis-test** runs. Discovery-mode runs stay agent-attached and do not use this detached path.
+
+The long hypothesis solve should outlive the agent turn that launched it.
 
 Default architecture:
 
@@ -19,7 +21,7 @@ verified case + execution contract
 → analyse or diagnose
 ```
 
-Do **not** keep the scientific agent awake for hours merely to watch Fluent iterate.
+Do **not** keep the scientific agent awake for hours merely to watch a hypothesis-test run iterate.
 The worker owns waiting; the agent owns decisions before and after the run.
 
 The implementation entrypoint is:
@@ -94,6 +96,14 @@ least one completion proof:
 - locally visible required files with minimum-size checks; and/or
 - a deterministic verifier command that returns zero only after the declared
   remote final state has been verified.
+
+### Mandatory self-wake
+
+Every background hypothesis-test Python entrypoint must end through the Codex handoff path. The canonical way is to launch `run_and_handoff.py` as the background Python entrypoint; do **not** background-launch the raw experiment runner directly.
+
+The originating `CODEX_THREAD_ID` must be captured before launch and written into the job contract. After terminal verification, the Python path must send a prompt back with `codex exec resume <SESSION_ID> ...` on both `COMPLETE` and `BLOCKED`.
+
+Do not start a background hypothesis run if that wake-up path is missing or unverified. Requiring a human to send a later prompt to restart the scientific loop is a workflow failure.
 
 ## Launch detached
 
