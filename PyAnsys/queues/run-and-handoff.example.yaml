@@ -1,10 +1,11 @@
 job:
   id: S4-EXAMPLE
+  mode: hypothesis-test
   manifest: PyAnsys/output/run-handoff/S4-EXAMPLE/job_manifest.json
   worker_log: PyAnsys/output/run-handoff/S4-EXAMPLE/worker.log
 
 runner:
-  # Use the exact approved Python/PyFluent runner for the experiment.
+  # Use the exact approved Python/PyFluent hypothesis-test runner.
   # Keep this as an argv list: no shell string and no hidden fallback mechanism.
   command:
     - PyAnsys/.venv/Scripts/python.exe
@@ -29,14 +30,10 @@ completion:
   # verifier_log: PyAnsys/output/run-handoff/S4-EXAMPLE/verifier.log
 
 codex:
-  enabled: true
-  # Always record the exact session/thread ID for this scientific loop.
-  # When the job is prepared from inside Codex, read CODEX_THREAD_ID from the
-  # agent shell environment and write that concrete value here. Codex injects
-  # CODEX_THREAD_ID into model-reachable child processes. Do not leave the
-  # variable name literally in this YAML and do not use "--last" when several
-  # servers/jobs may finish independently.
-  session_id: REPLACE_WITH_VALUE_OF_CODEX_THREAD_ID
+  # Hypothesis-test jobs automatically enable the wakeup hook. The launcher
+  # captures CODEX_THREAD_ID from the Codex process that starts this job, so a
+  # session_id normally should not be copied manually into the file.
+  # session_id: OPTIONAL_EXPLICIT_OVERRIDE
   executable: codex
   cwd: .
   trigger_on:
@@ -44,8 +41,9 @@ codex:
     - BLOCKED
   log: PyAnsys/output/run-handoff/S4-EXAMPLE/codex_handoff.log
   prompt: >-
-    The Fluent simulation job has terminated. Read the job manifest and the
-    canonical Project experiment packet. If COMPLETE, perform the required
-    post-processing and continue the scientific phase loop. If BLOCKED,
-    diagnose the execution failure from the preserved evidence and choose the
-    appropriate recovery or redesign path. Do not blindly rerun the same job.
+    The hypothesis-test Fluent simulation has terminated. Read the job manifest
+    and the canonical Project experiment packet. If COMPLETE, perform the
+    required post-processing and continue the scientific phase loop immediately.
+    If BLOCKED, diagnose the execution failure from the preserved evidence and
+    choose the appropriate recovery or redesign path. Do not wait for a human
+    prompt and do not blindly rerun the same job.
