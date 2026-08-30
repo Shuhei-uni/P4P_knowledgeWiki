@@ -43,15 +43,32 @@ A ballpark of roughly 500 to 1,000 iterations per case is appropriate when that 
 
 The point is to obtain comparable early behaviour across several directions without paying the cost of fully developing every case.
 
-## Design comparable screening evidence
+## Design comparable screening evidence and plots
 
 Plan the evidence before running the matrix.
 
 Prefer iteration or time histories over endpoint snapshots. Capture the residuals, balances, physical monitors, fluxes, inventories, contours, or other quantities needed to compare how each case behaves.
 
-Use the same definitions, plotting conventions, comparison windows, and run budget across cases whenever scientifically appropriate.
+Do not default to one giant overview figure. Pick the few plots that are most likely to separate the candidate directions.
 
-Short runs can be noisy or still evolving. Preserve that behaviour rather than hiding it behind a single final value.
+For a discovery campaign, usually define `1-3` **core screening figures** and reuse them consistently across the cases. For each figure, state:
+
+- the screening question it answers;
+- x-axis and units, normally iteration or physical time for evolving quantities;
+- y-axis/field, units, phase/zone/surface scope, and sign convention;
+- which cases or quantities should be shown together;
+- the comparison window or reduction, if any;
+- the exact source monitor/report/field;
+- any pre-run instrumentation needed;
+- what visible pattern would make one direction worth deeper investigation, without predicting which case will show it.
+
+Use branch-by-branch histories when that is clearer than overlaying many cases. Do not create unreadable twelve-case spaghetti plots. A compact cross-case comparison is useful only when it answers a real screening question, for example comparing the same final-window metric across cases after the histories have established what that metric means.
+
+Residuals are supporting numerical evidence by default, not automatically one of the core discovery figures. Promote them only when solver behaviour itself helps discriminate the candidate directions.
+
+Contours should be targeted to a spatial question. Generic velocity, pressure, or phase contours do not become high-value discovery evidence merely because they are easy to generate.
+
+Use the same metric definitions, plotting conventions, comparison windows, and run budget across cases whenever scientifically appropriate. Short runs can be noisy or still evolving; preserve that behaviour rather than hiding it behind a single final value or aggressive smoothing.
 
 ## Interpret as discovery evidence
 
@@ -76,9 +93,10 @@ Return:
 1. the discovery question;
 2. the case matrix, with no more than twelve quick screening cases;
 3. the evidence that should be comparable across the matrix;
-4. the short-run budget and why it is sufficient for screening;
-5. after execution, which directions appear promising, weak, unresolved, or surprising;
-6. the hypothesis or focused question that now deserves deeper testing, if one emerged.
+4. the `1-3` core screening figures and their exact plot specifications;
+5. the short-run budget and why it is sufficient for screening;
+6. after execution, which directions appear promising, weak, unresolved, or surprising;
+7. the hypothesis or focused question that now deserves deeper testing, if one emerged.
 
 Hand promising focused questions back to `scientific-phase-loop` / `design-experiment` for hypothesis-test mode.
 
