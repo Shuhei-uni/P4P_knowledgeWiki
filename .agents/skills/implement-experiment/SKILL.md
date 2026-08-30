@@ -1,6 +1,6 @@
 ---
 name: implement-experiment
-description: "Execute an approved setup faithfully in Fluent: stage the exact resolved parent, establish explicit output paths, build the specified case, prove the setup by readback and save/reopen, smoke-test it, then hand the fixed target to a detached Python-supervised Fluent run and verify completion. Use after create-setup and fluent-fleet-orchestration have defined the experiment and execution placement."
+description: "Execute an approved setup faithfully in Fluent: stage the exact resolved parent, establish explicit output paths, build the specified case, prove the setup by readback and save/reopen, smoke-test it, then execute it according to discovery or hypothesis-test mode. Use after create-setup and fluent-fleet-orchestration have defined the experiment and execution placement."
 ---
 
 # Implement Experiment
@@ -83,15 +83,15 @@ If the smoke test exposes an execution error or a setup/pipeline incompatibility
 
 ## Run the intended horizon
 
-Once the verification gate passes, execute the fixed iteration/time target defined by the setup through the approved Python/PyFluent runner using the detached handoff mechanism.
+Once the verification gate passes, execute the fixed iteration/time target defined by the setup through the approved Python/PyFluent path.
 
-Call `supervise-fluent-run` to create and launch the run-and-handoff job. The detached worker owns the long synchronous runner call, captures its logs, verifies the declared final outputs, writes a terminal `COMPLETE` or `BLOCKED` manifest, and resumes the exact Codex session recorded in the job contract.
+For **discovery mode**, keep the scientific agent attached for the full short run. Do not launch the detached handoff worker. Wait for the run to finish, return the execution evidence immediately, and let the active scientific thread inspect it and choose the next discovery experiment without a human restart.
 
-Do not keep the current scientific agent alive merely to watch normal Fluent progress. The agent should return only when a terminal event wakes it again.
+For **hypothesis-test mode**, call `supervise-fluent-run` and launch the background job only through the self-waking Python entrypoint. The raw experiment runner must not be background-launched directly. The originating Codex thread/session ID must be captured before launch, and the terminal Python path must resume that exact thread on both `COMPLETE` and `BLOCKED`.
 
-The long-run job must declare at least one deterministic completion proof: locally visible required files and/or a verifier command that returns zero only when the declared remote final state is verified. A zero runner exit code alone is not sufficient.
+The hypothesis job must declare at least one deterministic completion proof: locally visible required files and/or a verifier command that returns zero only when the declared remote final state is verified. A zero runner exit code alone is not sufficient.
 
-Use an explicit Codex session/thread ID. Never use `--last` for autonomous multi-server handoff because several jobs may complete out of launch order.
+Never use `--last` for autonomous multi-server handoff because several jobs may complete out of launch order.
 
 Python/PyFluent execution is the default for experiments inside `scientific-phase-loop`. Do not switch to TUI-driven iteration or a Fluent journal without explicit human approval for that run.
 
@@ -119,10 +119,10 @@ Also reconcile required generated outputs against the sibling `run-paths.yaml`. 
 
 Preserve the final case/data and any required histories or checkpoints. If execution failed before the target, report the final observed iteration and the failure without pretending the experiment completed.
 
-A successfully solved run, a successfully launched Codex handoff, and a durably replicated run are related but separate facts. Report all three independently.
+A successfully solved run, a successfully launched Codex handoff, and a durably replicated run are related but separate facts. Report all three independently when the handoff path applies.
 
 ## Handoff
 
-Return only execution facts: whether the parent was staged and verified, whether the run filesystem/path map was established, the canonical Project `run-paths.yaml` location, whether the setup matched on readback, whether save/reopen verification passed, whether the smoke test ran, the runtime server reference, Python runner, requested horizon, detached job/manifest paths, terminal status, final observed progress, declared and actual local artifact/output locations, verified OneDrive artifact locations when available, durability status, Codex handoff status, and any implementation deviations, path anomalies, or execution failures.
+Return only execution facts: whether the parent was staged and verified, whether the run filesystem/path map was established, the canonical Project `run-paths.yaml` location, whether the setup matched on readback, whether save/reopen verification passed, whether the smoke test ran, the runtime server reference, Python runner, requested horizon, execution mode, terminal status, final observed progress, declared and actual local artifact/output locations, verified OneDrive artifact locations when available, durability status, Codex handoff status for hypothesis runs, and any implementation deviations, path anomalies, or execution failures.
 
 Scientific interpretation belongs downstream.
