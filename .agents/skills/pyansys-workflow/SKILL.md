@@ -7,13 +7,14 @@ description: "Use when working with PyAnsys executable automation for Fluent/PyF
 
 ## Core Rule
 
-Use `PyAnsys/` as the executable automation layer for Fluent setup, inspection, detached execution, data extraction, and machine-readable verification. Treat Fluent as a dependency-ordered GUI state machine, not a stable static Python object tree.
+Use `PyAnsys/` as the executable automation layer for Fluent setup, inspection, execution, data extraction, and machine-readable verification. Treat Fluent as a dependency-ordered GUI state machine, not a stable static Python object tree.
 
 Keep setup construction and run supervision conceptually separate:
 
 - setup/build code creates or modifies the approved Fluent case and proves its state;
 - run code connects to the intended case and performs the approved initialization/run/save sequence;
-- `supervise-fluent-run` launches that long runner through the detached run-and-handoff worker, which verifies terminal evidence and resumes the exact Codex session afterward.
+- discovery runs stay agent-attached through the short run and immediate evidence review;
+- hypothesis-test runs use the background run-and-handoff worker, which must wake the exact originating Codex thread afterward.
 
 For autonomous experiments inside `scientific-phase-loop`, Python/PyFluent execution is the default. TUI-driven iteration, Fluent journal submission, and GUI-owned execution require explicit human approval for that run.
 
@@ -59,29 +60,54 @@ Keep file roles strict:
 - `scripts/connection/`: bootstrap and preflight;
 - `scripts/inspection/`: non-mutating discovery, monitoring, and probes;
 - `scripts/setup/`: thin case-specific build/run orchestration;
-- `scripts/orchestration/`: generic detached run execution and event-driven handoff;
+- `scripts/orchestration/`: background hypothesis execution and event-driven Codex handoff;
 - `server-profiles/`: non-secret per-server filesystem layout;
 - `knowledge/fluent-settings/`: durable Fluent/PyFluent execution and settings knowledge;
 - `output/`: generated extracts only; do not treat as authoritative scientific knowledge.
 
 Setup scripts should remain thin: parse inputs, connect, verify remote files, load case/mesh, inspect state, apply the approved changes, read back critical values, and write the required case artifact.
 
-## Python-supervised run contract
+## Mode-specific Python execution
 
-For a long run inside the scientific loop, use a Python runner that makes the intended PyFluent calls and launch it through `supervise-fluent-run` / `scripts/orchestration/run_and_handoff.py`.
+### Discovery
 
-The runner should make the execution sequence explicit:
+Discovery mode is intentionally interactive at the agent-workflow level even though the Fluent solve itself remains deterministic.
+
+For the short discovery horizon, normally around 500-1,000 iterations:
+
+```text
+agent launches Python/PyFluent run
+→ agent stays attached and mostly waits
+→ run returns
+→ agent immediately inspects screening evidence
+→ agent revises hypothesis / chooses next discovery probe
+```
+
+Do not use the detached sleep/wake worker merely to avoid waiting. Do not end the scientific thread between ordinary discovery runs. The point is fast experimental iteration while context is still live.
+
+Do not create one-iteration polling loops merely to keep the agent awake. Prefer one clear solve call for the approved short horizon and wait on that call or its terminal.
+
+### Hypothesis test
+
+For a background hypothesis-test run, use the canonical `supervise-fluent-run` / `scripts/orchestration/run_and_handoff.py` path.
+
+The experiment runner should make the execution sequence explicit:
 
 ```text
 connect -> establish case identity -> initialize if required
--> run the approved horizon -> write final data -> verify output
+-> run approved horizon -> write final data -> verify output
 ```
 
-Prefer a single clear solve call for the planned horizon or another coarse bounded structure required by the experiment. Do not create one-iteration polling loops merely to keep an agent awake.
+The background Python orchestration must then finish through this mandatory tail:
 
-The current AI turn does not need to remain alive while Fluent advances. The detached worker captures the runner log, writes `RUNNING`/`VERIFYING`/terminal state to a job manifest, checks required files and/or a deterministic verifier, and records `COMPLETE` or `BLOCKED` before invoking the Codex continuation hook.
+```text
+persist COMPLETE or BLOCKED evidence
+→ codex exec resume <ORIGINATING_THREAD_ID> <continuation prompt>
+```
 
-For autonomous continuation, store an explicit Codex session/thread ID in the job contract and use `codex exec resume <SESSION_ID> ...`. Never use `--last` when multiple servers or jobs may finish independently.
+The originating thread is captured automatically from `CODEX_THREAD_ID` when the job is launched from Codex; an explicit `codex.session_id` is only an override. Never use `--last` when multiple servers or jobs may finish independently.
+
+A hypothesis-test job is invalid if the wakeup hook is disabled, the originating thread cannot be resolved, or either `COMPLETE` or `BLOCKED` is excluded from the wakeup triggers.
 
 A zero runner exit code is not sufficient completion proof. Declare required final files and/or a deterministic verifier command. Poor residuals or unexpected physics are not execution failures while Fluent can continue.
 
