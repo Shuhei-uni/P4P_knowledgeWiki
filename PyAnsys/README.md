@@ -2,7 +2,7 @@
 
 PyAnsys owns executable Fluent implementation, live inspection, Python-supervised execution, and machine-readable evidence checks. Project-specific scientific truth remains in `../Project/`; reusable CFD and literature knowledge remains in `../CFD_wiki/`.
 
-The operating rule is simple: Fluent is a dependency-ordered state machine, and autonomous-loop runs default to an approved Python/PyFluent runner launched through a detached execution worker. The AI agent does not need to remain alive for the full solve; the worker verifies the terminal state and then resumes the exact Codex session. TUI-driven iteration, Fluent journal submission, and GUI-owned execution require explicit human approval for that run.
+The operating rule is simple: Fluent is a dependency-ordered state machine, and autonomous-loop execution follows experiment mode. Discovery runs stay agent-attached through their short screening horizons so the same scientific thread can inspect evidence and choose the next probe immediately. Hypothesis-test runs use the detached self-waking worker, which verifies the terminal state and then resumes the exact originating Codex thread. TUI-driven iteration, Fluent journal submission, and GUI-owned execution require explicit human approval for that run.
 
 ## Start here
 
@@ -22,14 +22,23 @@ selected Project setup/results
     -> reacquire, inspect, set, and read back critical values
     -> write and reload-verify the case artifact
     -> short Python/PyFluent smoke test
+    -> execute according to experiment mode
+
+DISCOVERY:
+    attached short run
+    -> immediate evidence review
+    -> next discovery probe in same active thread
+
+HYPOTHESIS TEST:
+    capture CODEX_THREAD_ID
     -> detached run-and-handoff worker
     -> Fluent completes or blocks
     -> verify final outputs and write terminal manifest
-    -> resume exact Codex session
+    -> mandatory resume of exact originating Codex thread
     -> numerical analysis / Project interpretation
 ```
 
-Use `supervise-fluent-run` to prepare and launch the long-lived execution. The worker should let the approved fixed horizon run while Fluent can continue, record `COMPLETE` or `BLOCKED`, and wake the scientific agent only when there is a terminal execution event.
+Use `supervise-fluent-run` for long hypothesis-test execution. Discovery runs should not use that detached path merely to avoid waiting.
 
 ## Connection and run tools
 
@@ -38,14 +47,14 @@ Use `supervise-fluent-run` to prepare and launch the long-lived execution. The w
 - `scripts/inspection/inspect_fluent_session.py` — non-mutating live tree inspection.
 - `scripts/inspection/monitor_native_run.py` — reconnecting read-only monitor that can supplement execution evidence without becoming a mutating controller.
 - `scripts/setup/` — case-specific Python setup/run orchestration. Prefer a proven runner when one matches the approved experiment; otherwise keep new runners thin and explicit.
-- `scripts/orchestration/run_and_handoff.py` — generic detached worker launcher. It runs the approved runner, verifies declared completion evidence, writes a terminal manifest, and optionally resumes an explicit Codex session.
-- `queues/run-and-handoff.example.yaml` — example detached job contract.
+- `scripts/orchestration/run_and_handoff.py` — detached hypothesis worker launcher. It captures the originating Codex thread, runs the approved runner, verifies declared completion evidence, writes a terminal manifest, and mandatorily attempts to wake the thread on `COMPLETE` or `BLOCKED`.
+- `queues/run-and-handoff.example.yaml` — example hypothesis-test job contract.
 - `scripts/setup/generate_native_run_journal.py` and other journal/native-queue tools — retained for historical or human-approved exception use; not autonomous-loop defaults.
 - `scripts/inspection/post_simulation_analysis.py` — selected read-only residual, flux, and results-evidence checks.
 
 The remaining setup and inspection scripts are kept when they support a current Project experiment, a focused skill, a reusable source module, or unique evidence recovery. Campaign-specific scripts are not a general API.
 
-## Detached handoff contract
+## Hypothesis handoff contract
 
 Normal launch is:
 
@@ -53,17 +62,17 @@ Normal launch is:
 python PyAnsys/scripts/orchestration/run_and_handoff.py --job <job.yaml>
 ```
 
-The launcher returns after starting a detached worker. The worker then owns the long synchronous runner call.
+The launcher resolves the originating thread from `CODEX_THREAD_ID` when the job is started from Codex, then starts the detached worker. An explicit `codex.session_id` is only an override.
 
-A job must declare at least one completion proof: locally visible required files and/or a deterministic verifier command. A zero runner exit code by itself cannot produce `COMPLETE`.
+A hypothesis job must declare at least one completion proof: locally visible required files and/or a deterministic verifier command. A zero runner exit code by itself cannot produce `COMPLETE`.
 
-For Codex continuation, store an explicit session/thread ID in the job specification. The hook uses:
+The worker's mandatory terminal Python tail uses:
 
 ```text
-codex exec resume <SESSION_ID> <PROMPT>
+codex exec resume <ORIGINATING_THREAD_ID> <PROMPT>
 ```
 
-Do not use `--last` for autonomous multi-server work because jobs can finish in a different order from launch order.
+on both `COMPLETE` and `BLOCKED`. Do not use `--last` for autonomous multi-server work because jobs can finish in a different order from launch order.
 
 The generated job manifest is execution evidence only. Canonical scientific paths and server placement remain in the experiment's `Project/.../run-paths.yaml`.
 
@@ -73,7 +82,7 @@ The generated job manifest is execution evidence only. Canonical scientific path
 - `scripts/connection/` — connection and local-environment checks.
 - `scripts/inspection/` — non-mutating discovery, snapshots, monitors, and post-processing.
 - `scripts/setup/` — thin experiment-specific setup and Python/PyFluent runner orchestration.
-- `scripts/orchestration/` — generic detached execution and event-driven handoff.
+- `scripts/orchestration/` — background hypothesis execution and event-driven Codex handoff.
 - `server-profiles/` — non-secret per-server remote directory knowledge.
 - `knowledge/fluent-settings/native_run_and_autosave.md` — current execution, autosave, recovery, verification, and handoff policy.
 - `cases/actual_setup_archives/` — small unique live-case exports retained for exact setup reconciliation; Project records own their interpretation.
