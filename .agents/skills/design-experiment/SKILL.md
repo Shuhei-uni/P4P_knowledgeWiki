@@ -107,7 +107,7 @@ In discovery mode, the smallest useful strategy may deliberately be a bounded mu
 
 A supporting setup does not need high standalone impact if it creates the reference, comparison, or sequence that makes the campaign informative.
 
-## Design the evidence at the same time
+## Design the evidence and figure plan at the same time
 
 Analysis planning is part of experiment design, not an afterthought.
 
@@ -115,11 +115,62 @@ For each hypothesis or comparison, decide what result would let you judge it and
 
 Prefer evidence that shows behaviour over the run rather than only a final snapshot. Iteration/time histories, residuals, balances, physical monitors, fluxes, inventories, and other question-specific values often tell much more than one endpoint.
 
-Plan useful plots, contours, and other visualisations before the simulation. Visual evidence should help reveal the behaviour relevant to the hypothesis, while concise tables can support exact comparisons.
+### Require a small core figure set
 
-If a quantity must be instrumented before solving, make that requirement part of the experiment now. Do not discover after an expensive run that the decisive history or monitor was never recorded.
+Do not merely request an "overview plot" or plot every available monitor. Define a **small core figure set** before the run whose purpose is to answer the scientific question as directly as possible.
+
+As a default:
+
+- discovery mode: usually `1-3` core figures reused consistently across the screening cases;
+- hypothesis-test mode: usually `2-5` core figures, each supporting a distinct reasoning step;
+- additional overview/debug plots may exist as supporting artifacts, but they do **not** count as core scientific figures unless they directly answer the question.
+
+The first core figure should normally be the most direct visual answer to the experiment question. Later figures should explain the mechanism, comparison, or numerical adequacy needed to interpret that answer.
+
+Residuals and generic convergence dashboards are supporting numerical evidence by default. Promote them into the core figure set only when convergence or solver behaviour is itself part of the hypothesis.
+
+### Specify each planned figure explicitly
+
+For every core figure, record:
+
+| Field | Required content |
+|---|---|
+| `figure_id` | Stable short name such as `F1`, `F2` |
+| `question` | The exact sub-question this figure answers |
+| `message` | What scientific distinction the figure is intended to make, without predicting the result |
+| `plot_type` | History, contour, profile, targeted comparison, scatter, bar, etc. |
+| `x_axis` | Quantity, units, and domain/window; use iteration or physical time for evolving behaviour unless another axis is scientifically more informative |
+| `y_axis_or_field` | Exact quantity/field, units, sign convention, phase/surface/zone scope |
+| `series_or_cases` | Which variables/cases belong together and why |
+| `comparison_basis` | Parent/reference/baseline, aligned window, normalization, threshold, or none |
+| `reduction` | Raw, mean, rolling statistic, final-window range, area/volume average, integral, etc. |
+| `data_source` | Monitor, report definition, `.out` history, case/data field, derived calculation, checkpoint, etc. |
+| `pre_run_instrumentation` | Anything that must exist before solving so the figure can be produced |
+| `interpretation_use` | What observation in this figure would support, weaken, or distinguish the competing explanations |
+
+If one of these items is genuinely not applicable, say so rather than leaving the plot concept vague.
+
+### Figure-design rules
+
+- Prefer **one scientific message per figure**. Do not dump many unrelated monitors into one panel simply because they are available.
+- For quantities that evolve during the solve, iteration or physical time should normally be the x-axis. Use endpoint bars/scatters only when the comparison or relationship itself is the scientific question.
+- Use targeted comparisons. Do not create unreadable all-branch spaghetti plots when a branch-by-branch history or a small controlled comparison communicates the result more clearly.
+- Keep units, sign conventions, phase/zone scope, reference definitions, and comparison windows explicit.
+- Avoid dual y-axes unless there is a strong scientific reason; separate figures are usually clearer.
+- Do not smooth away oscillations, reversals, drift, or failure tails. If a smoothed/reduced view is useful, preserve the raw history and state the reduction.
+- A contour must answer a spatial question. Do not add generic velocity/pressure/volume-fraction contours merely because they are easy to produce.
+- A figure can contain matched panels when the panels together answer one question; do not use panels as a way to hide an unfocused plot dump.
+- For linked cases, keep definitions and axes comparable where the scientific comparison depends on them. Do not force identical limits when doing so would hide an important feature; record any deliberate difference.
+
+### Plan the evidence behind the figures
+
+The plot plan is also an instrumentation contract. If the decisive figure needs a history that cannot be reconstructed from the final `.dat.h5`, require the corresponding report definition/file/monitor before the run begins.
+
+If the planned figure uses a derived metric, define the calculation, units, sign convention, source quantities, and comparison window now.
 
 For linked setups or discovery matrices, make the evidence comparable enough that the intended comparison is actually possible.
+
+The output of this section should make it possible for a later analysis agent to create the high-impact figures without inventing the scientific story after seeing the data.
 
 ## Design for interpretation
 
@@ -149,6 +200,6 @@ The purpose is to make every candidate earn its place through the same evidence-
 
 Choose the best justified strategy for the current uncertainty and mode. The selected strategy may be a focused setup, a small linked campaign, or a bounded discovery matrix.
 
-Then call `create-setup` to convert that strategy into the required server-neutral setup records. `design-experiment` owns why the experiment strategy is worth doing, what working assumptions bound it, and what evidence will judge it. `create-setup` owns the precise scientific handoff; `fluent-fleet-orchestration` later resolves exact placement, staging, and durable artifact handling.
+Then call `create-setup` to convert that strategy into the required server-neutral setup records. `design-experiment` owns why the experiment strategy is worth doing, what working assumptions bound it, what evidence will judge it, and the core figure plan that communicates that evidence. `create-setup` owns the precise scientific handoff; `fluent-fleet-orchestration` later resolves exact placement, staging, and durable artifact handling.
 
-Do not write predicted results into the setup records. The strategy defines what will be tested and what would be informative; the simulation data decides what actually happened.
+Do not write predicted results into the setup records. The strategy defines what will be tested, what would be informative, and how the evidence should be visualised; the simulation data decides what actually happened.
