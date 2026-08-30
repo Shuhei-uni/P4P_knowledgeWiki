@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run a deterministic simulation command and hand terminal state back to Codex."""
+"""Run a background hypothesis job and wake its originating Codex thread."""
 
 from __future__ import annotations
 
@@ -12,7 +12,6 @@ PYANSYS_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PYANSYS_ROOT / "src"))
 
 from pyansys_fluent.run_handoff import (  # noqa: E402
-    launch_codex_handoff,
     launch_detached_worker,
     load_spec,
     run_job,
@@ -22,9 +21,9 @@ from pyansys_fluent.run_handoff import (  # noqa: E402
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
-            "Launch a long-running deterministic runner independently of the current agent. "
-            "When it reaches COMPLETE or BLOCKED, write a terminal manifest and optionally "
-            "resume an explicit Codex session."
+            "Launch a long-running hypothesis-test runner independently of the current agent. "
+            "The worker writes COMPLETE/BLOCKED terminal evidence and then wakes the exact "
+            "originating Codex thread. Discovery runs should stay agent-attached instead."
         )
     )
     parser.add_argument("--job", required=True, help="YAML run-and-handoff job specification")
@@ -53,7 +52,8 @@ def main() -> int:
         pid = launch_detached_worker(
             Path(__file__).resolve(), spec_path, spec.worker_log_path, force=args.force
         )
-        print(f"Detached run worker started: job={spec.job_id} pid={pid}")
+        print(f"Detached run worker started: job={spec.job_id} mode={spec.mode} pid={pid}")
+        print(f"Originating Codex thread: {spec.codex.session_id}")
         print(f"Manifest: {spec.manifest_path}")
         print(f"Worker log: {spec.worker_log_path}")
         return 0
@@ -64,7 +64,7 @@ def main() -> int:
         print(f"Run worker failed before terminal handoff: {type(exc).__name__}: {exc}", file=sys.stderr)
         return 2
 
-    handoff = launch_codex_handoff(spec, manifest)
+    handoff = manifest.get("handoff", {})
     print(f"Job terminal status: {manifest['status']}")
     print(f"Manifest: {spec.manifest_path}")
     print(f"Codex handoff: {handoff.get('status')}")
