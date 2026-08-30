@@ -1,0 +1,34 @@
+runs:
+  - setup_id: P6-S1-R
+    run_id: P6-S1-R-server2-20260830T030000Z
+    lane: fixed_pressure_reference
+    server: {ref: 'server-2@10.104.145.174', id: '2', ip: '10.104.145.174'}
+    paths:
+      run_root: 'C:\Users\syok443\Documents\FluentRuns\P6\S1\reference-server2-20260830T030000Z'
+      prepared_case: 'C:\Users\syok443\Documents\FluentRuns\P6\S1\reference-server2-20260830T030000Z\prepared.cas.h5'
+      prepared_data: 'C:\Users\syok443\Documents\FluentRuns\P6\S1\reference-server2-20260830T030000Z\prepared.dat.h5'
+      final_case: 'C:\Users\syok443\Documents\FluentRuns\P6\S1\reference-server2-20260830T030000Z\final.cas.h5'
+      final_data: 'C:\Users\syok443\Documents\FluentRuns\P6\S1\reference-server2-20260830T030000Z\final.dat.h5'
+      monitor_root: 'C:\Users\syok443\Documents\FluentRuns\P6\S1\reference-server2-20260830T030000Z\monitors'
+      runner_manifest: 'PyAnsys/output/phase06_stage01/reference-server2-20260830T030000Z.json'
+    execution: {smoke_iterations: 50, discovery_iterations: 500, native_report_window: [15000, 15550]}
+    durability: {onedrive_final_root: 'NOT_YET_PROMOTED', status: 'COMPLETE_LOCAL_ONLY'}
+  - setup_id: P6-S1-O
+    run_id: P6-S1-O-server2-20260830T235000Z
+    lane: outlet_vent_resistance
+    intentional_delta: 'brineoutlet is converted from pressure outlet to outlet vent at retained ambient pressure with loss coefficient K=10; K is a non-plant-calibrated capability probe.'
+    server: {ref: 'server-2@10.104.145.174', id: '2', ip: '10.104.145.174'}
+    paths:
+      run_root: 'C:\Users\syok443\Documents\FluentRuns\P6\S1\vent-server2-20260830T235000Z'
+      prepared_case: 'C:\Users\syok443\Documents\FluentRuns\P6\S1\vent-server2-20260830T235000Z\prepared.cas.h5'
+      prepared_data: 'C:\Users\syok443\Documents\FluentRuns\P6\S1\vent-server2-20260830T235000Z\prepared.dat.h5'
+      final_case: 'C:\Users\syok443\Documents\FluentRuns\P6\S1\vent-server2-20260830T235000Z\final.cas.h5'
+      final_data: 'C:\Users\syok443\Documents\FluentRuns\P6\S1\vent-server2-20260830T235000Z\final.dat.h5'
+      monitor_root: 'C:\Users\syok443\Documents\FluentRuns\P6\S1\vent-server2-20260830T235000Z\monitors'
+      runner_manifest: 'PyAnsys/output/phase06_stage01/vent-server2-20260830T235000Z.json'
+    execution: {smoke_iterations: 50, discovery_iterations: 500, native_report_window: [15000, 15550], status: 'COMPLETE'}
+    durability: {onedrive_final_root: 'NOT_YET_PROMOTED', status: 'COMPLETE_LOCAL_ONLY'}
+parent:
+  case: 'C:\Users\syok443\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\P5\F11\F11.cas.h5'
+  data: 'C:\Users\syok443\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\P5\F11\F11.dat.h5'
+  identity: 'F11 paired artifact; Stage-5 hashes retained in Phase-06 setup/results context'

@@ -161,17 +161,21 @@ mode follows the scientific experiment mode.
 - Do not route ordinary discovery runs through the detached sleep/wake path just
   to avoid waiting. Prefer one clear short solve call and let the active agent
   wait on it.
-- **Hypothesis-test mode:** launch the approved Python/PyFluent run through
-  `supervise-fluent-run` and `scripts/orchestration/run_and_handoff.py`.
-- The hypothesis worker must capture the exact originating Codex thread,
+- **Hypothesis-test mode:** follow `supervise-fluent-run`. On Codex, launch
+  the approved Python/PyFluent run through
+  `scripts/orchestration/run_and_handoff.py`. On Cursor, keep the agent
+  attached through the approved horizon.
+- On Codex, the hypothesis worker must capture the exact originating thread,
   normally from `CODEX_THREAD_ID`, persist terminal `COMPLETE` or `BLOCKED`
   evidence, and then resume that exact thread as the mandatory final Python
   action. An explicit session ID is only an override.
-- A background hypothesis run may not start if the wakeup hook is disabled, the
-  originating thread cannot be resolved, or either terminal state would fail to
-  wake the scientific loop.
-- Never use `--last` for autonomous handoff when several servers or jobs may
-  finish independently.
+- A Codex background hypothesis run may not start if the wakeup hook is
+  disabled, the originating thread cannot be resolved, or either terminal
+  state would fail to wake the scientific loop.
+- On Cursor, missing `CODEX_THREAD_ID` is expected. Do not block the run for
+  that reason and do not call `codex exec resume`.
+- Never use `--last` for autonomous Codex handoff when several servers or jobs
+  may finish independently.
 - A zero runner exit code is not sufficient completion proof. Background
   hypothesis jobs must declare local required files and/or a deterministic
   verifier command so the final save and required execution evidence are checked

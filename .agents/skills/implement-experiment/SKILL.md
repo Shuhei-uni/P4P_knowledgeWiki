@@ -87,15 +87,17 @@ Once the verification gate passes, execute the fixed iteration/time target defin
 
 For **discovery mode**, keep the scientific agent attached for the full short run. Do not launch the detached handoff worker. Wait for the run to finish, return the execution evidence immediately, and let the active scientific thread inspect it and choose the next discovery experiment without a human restart. Continue this attached pattern throughout the active discovery campaign, not only for the first run.
 
-For **hypothesis-test mode**, call `supervise-fluent-run` and launch the background job only through the self-waking Python entrypoint. The raw experiment runner must not be background-launched directly.
+For **hypothesis-test mode**, call `supervise-fluent-run`. On Codex, launch the background job only through the self-waking Python entrypoint; the raw experiment runner must not be background-launched directly. On Cursor, keep the agent attached through the approved horizon unless the human explicitly requests a detached manifest-only job.
 
-The background launcher should capture the originating thread automatically from `CODEX_THREAD_ID`. An explicit `codex.session_id` is only an override when necessary. Do not start the hypothesis run if neither is available.
+On Codex, the background launcher should capture the originating thread automatically from `CODEX_THREAD_ID`. An explicit `codex.session_id` is only an override when necessary. Do not start a Codex detached hypothesis run if neither is available.
 
-The terminal Python path must resume that exact originating thread on both `COMPLETE` and `BLOCKED`. The wakeup code is mandatory and must execute after terminal evidence has been persisted; it cannot be omitted and cannot depend on the human sending another message.
+On Codex, the terminal Python path must resume that exact originating thread on both `COMPLETE` and `BLOCKED`. The wakeup code is mandatory and must execute after terminal evidence has been persisted; it cannot be omitted and cannot depend on the human sending another message.
+
+On Cursor, do not require `CODEX_THREAD_ID` and do not call `codex exec resume`. Wait on the approved solve in the live session, then continue analysis.
 
 The hypothesis job must declare at least one deterministic completion proof: locally visible required files and/or a verifier command that returns zero only when the declared remote final state is verified. A zero runner exit code alone is not sufficient.
 
-Never use `--last` for autonomous multi-server handoff because several jobs may complete out of launch order.
+Never use `--last` for autonomous multi-server Codex handoff because several jobs may complete out of launch order.
 
 Python/PyFluent execution is the default for experiments inside `scientific-phase-loop`. Do not switch to TUI-driven iteration or a Fluent journal without explicit human approval for that run.
 
@@ -123,10 +125,10 @@ Also reconcile required generated outputs against the sibling `run-paths.yaml`. 
 
 Preserve the final case/data and any required histories or checkpoints. If execution failed before the target, report the final observed iteration and the failure without pretending the experiment completed.
 
-A successfully solved run, a successfully launched Codex handoff, and a durably replicated run are related but separate facts. Report all three independently when the handoff path applies.
+A successfully solved run, a successfully launched Codex handoff when that path applies, and a durably replicated run are related but separate facts. Report all three independently when the Codex handoff path applies. On Cursor, report attached-run completion instead of Codex handoff status.
 
 ## Handoff
 
-Return only execution facts: whether the parent was staged and verified, whether the run filesystem/path map was established, the canonical Project `run-paths.yaml` location, whether the setup matched on readback, whether save/reopen verification passed, whether the smoke test ran, the runtime server reference, Python runner, requested horizon, execution mode, terminal status, final observed progress, declared and actual local artifact/output locations, verified OneDrive artifact locations when available, durability status, Codex handoff status for hypothesis runs, and any implementation deviations, path anomalies, or execution failures.
+Return only execution facts: whether the parent was staged and verified, whether the run filesystem/path map was established, the canonical Project `run-paths.yaml` location, whether the setup matched on readback, whether save/reopen verification passed, whether the smoke test ran, the runtime server reference, Python runner, requested horizon, execution mode, terminal status, final observed progress, declared and actual local artifact/output locations, verified OneDrive artifact locations when available, durability status, Codex handoff status for Codex hypothesis runs or attached-session completion for Cursor, and any implementation deviations, path anomalies, or execution failures.
 
 Scientific interpretation belongs downstream.

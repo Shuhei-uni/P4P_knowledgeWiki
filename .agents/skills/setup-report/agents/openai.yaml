@@ -1,4 +1,7 @@
 interface:
   display_name: "Setup Report"
-  short_description: "Assess and manage setup lifecycle and reports."
-  default_prompt: "Use $setup-report to assess a simulation setup's lifecycle and report needs, then ask me for the final call before making changes."
+  short_description: "Retired. Do not use."
+  default_prompt: "Do not use $setup-report. Create and update Project experiment setup.md and results.md instead."
+
+policy:
+  allow_implicit_invocation: false

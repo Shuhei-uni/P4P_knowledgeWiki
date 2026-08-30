@@ -1,6 +1,6 @@
 ---
 name: wait-what
-description: "Stop. That last explanation did not land — re-pitch it."
+description: "Re-pitch the previous explanation in simpler established project language when the human says it did not land. Human-only; never start implicitly."
 disable-model-invocation: true
 ---
 

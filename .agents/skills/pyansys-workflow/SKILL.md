@@ -14,7 +14,7 @@ Keep setup construction and run supervision conceptually separate:
 - setup/build code creates or modifies the approved Fluent case and proves its state;
 - run code connects to the intended case and performs the approved initialization/run/save sequence;
 - discovery runs stay agent-attached through the short run and immediate evidence review;
-- hypothesis-test runs use the background run-and-handoff worker, which must wake the exact originating Codex thread afterward.
+- hypothesis-test runs use `supervise-fluent-run`: Codex detaches and wakes the originating Codex thread; Cursor stays attached through the approved horizon.
 
 For autonomous experiments inside `scientific-phase-loop`, Python/PyFluent execution is the default. TUI-driven iteration, Fluent journal submission, and GUI-owned execution require explicit human approval for that run.
 
@@ -60,7 +60,7 @@ Keep file roles strict:
 - `scripts/connection/`: bootstrap and preflight;
 - `scripts/inspection/`: non-mutating discovery, monitoring, and probes;
 - `scripts/setup/`: thin case-specific build/run orchestration;
-- `scripts/orchestration/`: background hypothesis execution and event-driven Codex handoff;
+- `scripts/orchestration/`: background hypothesis execution and event-driven Codex handoff when launched from Codex;
 - `server-profiles/`: non-secret per-server filesystem layout;
 - `knowledge/fluent-settings/`: durable Fluent/PyFluent execution and settings knowledge;
 - `output/`: generated extracts only; do not treat as authoritative scientific knowledge.
@@ -89,7 +89,7 @@ Do not create one-iteration polling loops merely to keep the agent awake. Prefer
 
 ### Hypothesis test
 
-For a background hypothesis-test run, use the canonical `supervise-fluent-run` / `scripts/orchestration/run_and_handoff.py` path.
+For a background Codex hypothesis-test run, use the canonical `supervise-fluent-run` / `scripts/orchestration/run_and_handoff.py` path. For a Cursor hypothesis-test run, keep the agent attached and wait on the approved Python/PyFluent solve; do not require Codex wakeup.
 
 The experiment runner should make the execution sequence explicit:
 
@@ -98,7 +98,7 @@ connect -> establish case identity -> initialize if required
 -> run approved horizon -> write final data -> verify output
 ```
 
-The background Python orchestration must then finish through this mandatory tail:
+On Codex, the background Python orchestration must then finish through this mandatory tail:
 
 ```text
 persist COMPLETE or BLOCKED evidence
@@ -107,7 +107,9 @@ persist COMPLETE or BLOCKED evidence
 
 The originating thread is captured automatically from `CODEX_THREAD_ID` when the job is launched from Codex; an explicit `codex.session_id` is only an override. Never use `--last` when multiple servers or jobs may finish independently.
 
-A hypothesis-test job is invalid if the wakeup hook is disabled, the originating thread cannot be resolved, or either `COMPLETE` or `BLOCKED` is excluded from the wakeup triggers.
+A Codex hypothesis-test job is invalid if the wakeup hook is disabled, the originating thread cannot be resolved, or either `COMPLETE` or `BLOCKED` is excluded from the wakeup triggers.
+
+On Cursor, persist the same completion evidence in the live session. Do not call `codex exec resume`. Missing `CODEX_THREAD_ID` is not a blocker.
 
 A zero runner exit code is not sufficient completion proof. Declare required final files and/or a deterministic verifier command. Poor residuals or unexpected physics are not execution failures while Fluent can continue.
 

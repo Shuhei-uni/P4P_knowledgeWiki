@@ -126,7 +126,7 @@ A run around 10,000 iterations may be an appropriate ballpark for the current pr
 
 Before spending the compute, be able to say what observations would support or weaken the hypothesis, what working assumptions materially bound the interpretation, and what data must exist to make that judgement.
 
-**Hypothesis-test runs must be self-waking.** Before a background hypothesis run is launched, capture the originating Codex thread/session ID and make the Python execution path resume that exact thread on both `COMPLETE` and `BLOCKED`. Do not launch a background hypothesis run without this terminal wake-up path.
+**Hypothesis-test runs must return to the scientific loop.** On Codex, capture the originating thread/session ID and make the Python execution path resume that exact thread on both `COMPLETE` and `BLOCKED` before a background hypothesis run is launched. On Cursor, keep the agent attached through the approved horizon; do not launch a Codex self-wake job and do not treat missing `CODEX_THREAD_ID` as a blocker.
 
 The two modes are not fixed stages. Discovery can produce a focused hypothesis worth testing deeply. A long hypothesis test can expose an unexpected broad uncertainty that sends the loop back into discovery.
 
@@ -164,9 +164,9 @@ Then call `implement-experiment` to build, reload-verify, and smoke-test it.
 
 For **discovery mode**, keep the agent attached to the Python/PyFluent execution through the short planned run. Do not use `run_and_handoff.py` merely to avoid waiting. When the run returns, analyse it immediately and continue the discovery loop while context is live.
 
-For **hypothesis-test mode**, pass the long calculation to `supervise-fluent-run`. The Python execution path must include the terminal handoff that resumes the originating Codex thread after verified `COMPLETE` or `BLOCKED`; the current turn may end only after that wake-up contract is in place.
+For **hypothesis-test mode**, pass the long calculation to `supervise-fluent-run`. On Codex, the Python execution path must include the terminal handoff that resumes the originating Codex thread after verified `COMPLETE` or `BLOCKED`; the current turn may end only after that wake-up contract is in place. On Cursor, keep the agent attached through the approved horizon and analyse when the run returns in the same session.
 
-For multi-server or multi-job hypothesis work, every background job must carry the explicit Codex session/thread ID that owns the scientific loop. Never use `--last`, because jobs may complete in a different order from launch order.
+For multi-server or multi-job Codex hypothesis work, every background job must carry the explicit Codex session/thread ID that owns the scientific loop. Never use `--last`, because jobs may complete in a different order from launch order. Do not use `codex exec resume` from Cursor.
 
 A zero Python return code is not sufficient completion proof. Require locally visible final files and/or a deterministic verifier command that proves the declared remote final state before a hypothesis run records `COMPLETE`.
 

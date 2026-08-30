@@ -9,6 +9,22 @@ PyAnsys  = implementation, execution, inspection, and evidence tools
 .agents/skills = focused workflows that route work through those owners
 ```
 
+Codex and Cursor both load this file and the skills under `.agents/skills/`.
+Keep that directory as the single skill home. Do not duplicate skills into
+`.cursor/skills/` or copy this contract into `.cursor/rules/`.
+
+Nested `AGENTS.md` files in `CFD_wiki/` and `PyAnsys/` apply when work is in
+those trees. Cursor treats them as scoped rules; Codex reads them as local
+guides.
+
+Human-only skills are invoked as `/skill-name` in Cursor and `$skill-name` in
+Codex. Keep `SKILL.md` `disable-model-invocation` aligned with Codex
+`agents/openai.yaml` as described in [`.agents/invocation.md`](.agents/invocation.md).
+
+Hypothesis-test self-wake via `codex exec resume` is Codex-only. In Cursor,
+keep the agent attached through the approved horizon unless a detached
+`COMPLETE`/`BLOCKED` job is explicitly required; see `supervise-fluent-run`.
+
 ## Start with the current project
 
 - Begin project work at [`Project/index.md`](Project/index.md).

@@ -16,6 +16,9 @@ This is the Project-layer tracer for the full-geometry Mixture `03A` campaign. I
 - [Stage-3 results](stage-03/results.md)
 - [Stage-4 setup](stage-04/setup.md)
 - [Stage-4 results](stage-04/results.md)
+- [Stage-5 setup](stage-05/setup.md)
+- [Stage-5 results](stage-05/results.md)
+- [Phase 06 — Full Geometry with Brine Pool](../../phase-06-full-geometry-with-brine-pool/index.md)
 - [Historical Stage-2 screening report](stage-02/source-screening-report.md)
 
 ## Source and artifact authorities
@@ -36,8 +39,13 @@ evidence rather than copying binary run output.
 ## Current status
 
 - Stage 3 is a completed diagnostic sweep. Its branches reached different horizons and several have missing, transport-blocked, or numerical-failure evidence; no branch is a validated or report-ready baseline.
-- Stage 4 has completed diagnostic continuation evidence for S4-01 and S4-03, completed-budget but endpoint-incomplete evidence for S4-02, and prepared-only evidence for S4-04. S4-05 and S4-06 remain gated on an exact F09 40% parent.
-- The current 03A state is therefore still diagnostic and unresolved for scientific parent promotion.
+- Stage 4 has completed diagnostic continuation evidence for S4-01 and S4-03, completed-budget but endpoint-incomplete evidence for S4-02, a completed F11/RNG-to-standard-`k-epsilon` sensitivity test (S4-04), and a completed F12 carrier-first/progressive-loading full-load test (S4-07). Its results did not establish a mass-closed, report-ready baseline.
+- Stage 5 completed two discovery → focused-hypothesis cycles. Higher fixed brine-outlet pressure was worse for both tested practical `k-epsilon` closures, and Realizable `k-epsilon` did not improve on RNG at the preferred low pressure. RSM and SST did not produce practical full-screen comparisons at the tested full-geometry horizon.
+- Phase 06 — Full Geometry with Brine Pool is the human-selected next
+  top-level scientific phase. It investigates the reported real brine-pool
+  level-control mechanism before treating the fixed-pressure Stage-5 result as
+  a pure Mixture model-form failure. No Phase-06 case has yet been built or
+  run.
 
 ## Cutover gate
 

@@ -1,4 +1,7 @@
 interface:
   display_name: "Research Project Wiki"
-  short_description: "Search project progress and V&V records."
-  default_prompt: "Use $research-project-wiki to update project progress or find research evidence."
+  short_description: "Retired. Do not use."
+  default_prompt: "Do not use $research-project-wiki. Start at Project/index.md instead."
+
+policy:
+  allow_implicit_invocation: false

@@ -11,6 +11,7 @@ their exact history remains recoverable from Git.
 - [Phase 3 — DPM carryover and coupling](phase-03-dpm-carryover-and-coupling/index.md)
 - [Phase 4 — EWF wall-film mechanisms](phase-04-ewf-wall-film-mechanisms/index.md)
 - [Phase 5 — Full Geometry V2](phase-05-full-geometry-v2/index.md)
+- [Phase 6 — Full Geometry with Brine Pool](phase-06-full-geometry-with-brine-pool/index.md)
 - [Legacy reconstruction](legacy/legacy-bangma-reconstruction/historical-run.md)
 
 Each retained experiment keeps its historical descriptive folder name and

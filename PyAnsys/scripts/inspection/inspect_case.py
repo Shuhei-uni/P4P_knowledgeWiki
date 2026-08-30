@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
+import argparse
 import sys
 from pathlib import Path
 
@@ -79,7 +80,10 @@ def try_scheme(solver, label: str, expression: str) -> None:
 
 
 def main() -> int:
-    solver = connect()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--server-id", default="1", help="Configured Fluent server id. Default: 1.")
+    args = parser.parse_args()
+    solver = connect(server_id=args.server_id, start_transcript=False)
     print("\nConnected. Inspecting loaded case without modifying it...")
     print(f"Fluent version: {solver.get_fluent_version()}")
 
@@ -93,6 +97,7 @@ def main() -> int:
     materials_state = solver.settings.setup.materials.get_state()
     cell_zone_state = solver.settings.setup.cell_zone_conditions.get_state()
     solution_state = solver.settings.solution.get_state()
+    register_names = solver.settings.solution.cell_registers.get_object_names()
 
     compact_boundary_summary(boundary_state)
     compact_model_summary(models_state)
@@ -104,6 +109,30 @@ def main() -> int:
             print(f"{zone_type}: {', '.join(keys_of(zones))}")
 
     compact_solution_summary(solution_state)
+
+    print("\n--- Brine-outlet state ---")
+    try:
+        print(boundary_state["pressure_outlet"]["brineoutlet"])
+    except Exception as exc:
+        print(f"unavailable ({exc})")
+
+    print("\n--- Cell registers ---")
+    if register_names:
+        for name in sorted(register_names):
+            try:
+                print(f"{name}: {solver.settings.solution.cell_registers[name].get_state()}")
+            except Exception as exc:
+                print(f"{name}: unavailable ({exc})")
+    else:
+        print("none")
+
+    print("\n--- Report-definition names ---")
+    report_definitions = solver.settings.solution.report_definitions
+    for category in ("volume", "flux", "expression"):
+        try:
+            print(f"{category}: {', '.join(sorted(getattr(report_definitions, category).get_object_names())) or 'none'}")
+        except Exception as exc:
+            print(f"{category}: unavailable ({exc})")
 
     print("\nInspection finished. No iterations were run.")
     return 0

@@ -74,11 +74,11 @@ For autonomous experiments inside `scientific-phase-loop`, use the approved Pyth
 
 For **discovery mode**, keep the scientific agent attached through the short run and throughout the active discovery campaign. Do not hand discovery work to the detached sleep/wake path merely to avoid waiting. Return each result immediately so the same active thread can inspect it, revise the working hypothesis, and choose the next discovery experiment.
 
-For **hypothesis-test mode**, create the self-waking run-and-handoff job and launch it through `supervise-fluent-run`. Do not background-launch the raw hypothesis runner directly.
+For **hypothesis-test mode**, create the run through `supervise-fluent-run`. On Codex, that is the self-waking run-and-handoff job; do not background-launch the raw hypothesis runner directly. On Cursor, keep the agent attached through the approved horizon.
 
-The hypothesis launcher should resolve the originating thread automatically from `CODEX_THREAD_ID`. An explicit `codex.session_id` is only an override. The background Python path must persist `COMPLETE` or `BLOCKED` evidence and then resume that exact thread as its mandatory final action.
+On Codex, the hypothesis launcher should resolve the originating thread automatically from `CODEX_THREAD_ID`. An explicit `codex.session_id` is only an override. The background Python path must persist `COMPLETE` or `BLOCKED` evidence and then resume that exact thread as its mandatory final action.
 
-Do not start a background hypothesis run if the originating thread cannot be resolved, the wakeup hook is disabled, or either terminal state would fail to wake the scientific loop.
+Do not start a Codex background hypothesis run if the originating thread cannot be resolved, the wakeup hook is disabled, or either terminal state would fail to wake the scientific loop. On Cursor, missing `CODEX_THREAD_ID` is expected; do not block the run for that reason and do not call `codex exec resume`.
 
 A busy or blocked Fluent call during an active synchronous calculation is not by itself evidence of failure. Let the approved horizon continue while Fluent can solve and classify the result from the returned execution evidence.
 
@@ -96,7 +96,7 @@ Stop before mutation or run launch when any of these occurs:
 - initialization does not complete successfully;
 - the Python/PyFluent run path cannot execute the approved experiment faithfully;
 - no deterministic terminal completion proof can be defined for a background hypothesis run;
-- the originating Codex thread cannot be resolved for a background hypothesis run.
+- the originating Codex thread cannot be resolved for a Codex background hypothesis run.
 
 At handoff, state separately:
 
@@ -106,7 +106,7 @@ At handoff, state separately:
 - whether initialization and smoke testing completed;
 - the Python runner and remote output paths;
 - the execution mode;
-- for hypothesis runs, the detached job spec, terminal manifest, originating thread, and Codex handoff status;
+- for hypothesis runs, the detached job spec and terminal manifest when used, originating Codex thread and Codex handoff status on Codex, or attached-session completion on Cursor;
 - whether execution was completed or blocked;
 - the final independently observed progress;
 - the declared and actual locations of recovery, child, final data, `.out`/report files, transcript/log, and verification artifacts;

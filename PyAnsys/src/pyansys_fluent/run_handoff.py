@@ -1,13 +1,13 @@
-"""Detached hypothesis-run orchestration with mandatory Codex wakeup.
+"""Detached hypothesis-run orchestration with originating-session wakeup.
 
 Discovery runs should not use this module: they stay agent-attached so the
 scientific loop can inspect each short result and immediately choose the next
 probe. This module is the background path for hypothesis-test runs.
 
-A hypothesis job is not valid unless it can wake the originating Codex thread
-on both COMPLETE and BLOCKED. The thread id is read from the job specification
-or, preferably, captured automatically from ``CODEX_THREAD_ID`` inherited from
-the Codex process that launches the worker.
+A hypothesis job is not valid unless it can wake the originating agent session
+on both COMPLETE and BLOCKED. Codex captures ``CODEX_THREAD_ID`` and resumes
+with ``codex exec resume``. Cursor captures ``CURSOR_CONVERSATION_ID`` and
+resumes with ``agent --print --resume``. Never resume the most recent session.
 """
 
 from __future__ import annotations

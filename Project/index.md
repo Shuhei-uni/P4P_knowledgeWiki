@@ -8,25 +8,28 @@ in `PyAnsys/`.
 
 ## What are we trying to answer now?
 
-Can a controlled, sufficiently iterated reference case for the vertical BOC
-separator be established before comparing more realistic two-phase inlet
-regimes or making report-facing performance claims?
+Can a full-geometry CFD model reproduce a physically credible, controlled
+bottom brine-pool operating condition for the separator, rather than merely a
+response to a fixed brine-outlet pressure?
 
-The immediate technical question is whether the extraction-first 08b-parity
-full-geometry branch can separate setup-fidelity uncertainty from the intended
-inlet change while producing interpretable residual, phase-flux, pressure, and
-liquid-carryover evidence.
+The immediate technical question is whether the F11-derived model can provide
+a defensible level-related observable and phase-aware outlet-flow basis before
+we test a more physically meaningful brine-outlet response representation.
 
 ## Active/latest experiment
 
-The current execution lane is the canonical full-geometry Mixture `03A`
-Stage-4 promising-state development campaign. Its Project tracer is the
-shortest route through the selected record:
+The current scientific lane is the canonical full-geometry Mixture `03A`
+brine-pool level-control phase, following the completed Stage-5 fixed-pressure
+discovery work. Its Project tracer is the shortest route through the selected
+record:
 
 - [03A tracer index](experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/index.md)
 - [Stage-4 setup contract](experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/stage-04/setup.md)
 - [Stage-4 execution evidence](experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/stage-04/results.md)
-- [Stage-3 results](experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/stage-03/results.md)
+- [Stage-5 fixed-pressure evidence](experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/stage-05/results.md)
+- [Phase-06 Full Geometry with Brine Pool contract](experiments/phase-06-full-geometry-with-brine-pool/setup.md)
+- [Phase-06 Stage-01 setup](experiments/phase-06-full-geometry-with-brine-pool/stage-01-level-observable-and-outlet-response/setup.md)
+- [Phase-06 Stage-01 results](experiments/phase-06-full-geometry-with-brine-pool/stage-01-level-observable-and-outlet-response/results.md)
 
 The earlier Project experiment records preserve the migrated setup and result
 memory for the Purnanto, full-geometry, DPM, EWF, VOF, and reconstruction
@@ -35,22 +38,25 @@ silently upgraded to current conclusions.
 
 ## What did the latest experiment show?
 
-Stage 4 produced completed diagnostic continuation evidence for S4-01 and
-S4-03, completed-budget but endpoint-incomplete evidence for S4-02, and
-prepared-only evidence for S4-04. S4-05 and S4-06 remain gated because the
-exact F09 40% parent was not proved accessible.
+The first Phase-06 short fixed-pressure reference is complete. Its retained
+native report histories show continued growth in total and lower-region
+phase-2 liquid mass and a positive phase-liquid net rate; the short screen
+remained materially mass-unclosed. The lower-region liquid-mass reports are
+useful inventory-response proxies, but they are not a calibrated pool level or
+instrument signal. Residual history was unavailable after reconnecting, so no
+convergence claim is made.
 
-The available Stage-4 records do not establish physical convergence, a
-report-ready baseline, or eligibility for a new parent branch. The executed
-branches remain diagnostic until their binary identity, readback, and full
-physical-history evidence are reviewed together.
+This result confirms why a fixed pressure outlet must be treated as a
+reference condition, not the real separator's level-control mechanism.
 
 ## What remains unresolved?
 
-- whether any 03A state has stable residuals, phase routing, pressure behaviour,
-  and liquid-inventory behaviour over the required continuation window;
-- whether the completed S4-01 and S4-03 continuations contain a stable,
-  parent-eligible window;
+- whether the F11-derived model can represent the real brine-pool level and
+  its measurement location with a defensible geometric/phase observable;
+- whether an explicitly specified level-control outlet condition can establish
+  a controlled steady operating point with credible residuals and phase flows;
+- whether any resulting remaining drift is caused by retained model form,
+  setup fidelity, or a requirement for time-dependent control modelling;
 - whether the rebuilt case is truly at parity with the audited Purnanto carrier
   settings apart from its declared project change;
 - which external, analytical, or measured targets are appropriate for a
@@ -60,12 +66,18 @@ physical-history evidence are reviewed together.
 
 ## What happens next?
 
-Review the Stage-4 execution package together with the 03A tracer's remaining
-readback and physical-history gaps. Promote only a state that passes those
-checks, then record the next explicitly selected experiment with the
-[setup/results contract](experiments/README.md). Keep each new experiment to a
-concise delta from a verified parent and make its evidence and interpretation
-explicit.
+Phase 06 has now completed that matched steady outlet-vent resistance screen.
+At the deliberately non-plant-calibrated `K=10`, it substantially reduced
+liquid brine drainage and worsened liquid accumulation, liquid carryover, and
+the retained imbalance indicators. The screen rules out that exact arbitrary
+resistance representation as a controlled-pool candidate; it does not select a
+different coefficient or make any claim about the real valve. The next step is
+geometry-to-level mapping and a physically specified outlet/feedback relation,
+not another arbitrary resistance or fixed-pressure sweep.
+
+Actual plant level setpoint, measurement position, level band, outlet
+hardware/line characteristic, downstream condition, and controller behaviour
+remain required before any model can claim physical level-control fidelity.
 
 ## Project map
 

@@ -8,18 +8,22 @@ The purpose of this policy is to keep human decision boundaries explicit while s
 
 Human-only skills are top-level human entry points or conversational controls. They may be invoked explicitly by the human, but the model must not start them implicitly.
 
-For a human-only skill, keep both controls aligned:
+For a human-only skill, keep both controls aligned. Cursor reads only the
+`SKILL.md` flag. Codex also reads `agents/openai.yaml`. Do not set one without
+the other.
 
 ```yaml
-# SKILL.md frontmatter
+# SKILL.md frontmatter (Cursor and Codex)
 disable-model-invocation: true
 ```
 
 ```yaml
-# agents/openai.yaml
+# agents/openai.yaml (Codex UI / policy; Cursor ignores this file)
 policy:
   allow_implicit_invocation: false
 ```
+
+Human invocation is `/skill-name` in Cursor and `$skill-name` in Codex.
 
 Current human-only skills:
 
@@ -89,6 +93,10 @@ These skill directories remain in the repository for now but belong to supersede
 - `post-simulation-analysis`
 - `research-project-wiki`
 - `setup-report`
+
+Keep `disable-model-invocation: true` on each retired skill so Cursor does not
+auto-apply it from the description. Codex should keep
+`allow_implicit_invocation: false` when that skill has `agents/openai.yaml`.
 
 The current root `AGENTS.md` routing to `Project/`, `CFD_wiki/`, and `PyAnsys/` takes precedence. Remove or migrate these retired skills in a dedicated cleanup rather than reviving their old `Setups/` or `ResearchProject_wiki/` structures.
 

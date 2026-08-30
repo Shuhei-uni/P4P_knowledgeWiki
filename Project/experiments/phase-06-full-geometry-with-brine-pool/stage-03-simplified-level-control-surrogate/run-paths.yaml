@@ -1,0 +1,14 @@
+setup_id: P6-S3-C
+run_id: P6-S3-C-server2-20260831T001500Z
+mode: discovery
+server: {ref: 'server-2@10.104.145.174', id: '2', ip: '10.104.145.174'}
+paths:
+  run_root: 'C:\Users\syok443\Documents\FluentRuns\P6\S3\control-server2-20260831T001500Z'
+  parent_case: 'C:\Users\syok443\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\P5\F11\F11.cas.h5'
+  parent_data: 'C:\Users\syok443\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\P5\F11\F11.dat.h5'
+  final_case: 'C:\Users\syok443\Documents\FluentRuns\P6\S3\control-server2-20260831T001500Z\final.cas.h5'
+  final_data: 'C:\Users\syok443\Documents\FluentRuns\P6\S3\control-server2-20260831T001500Z\final.dat.h5'
+  monitor_root: 'C:\Users\syok443\Documents\FluentRuns\P6\S3\control-server2-20260831T001500Z\monitors'
+  runner_manifest: 'PyAnsys/output/phase06_stage03/control-server2-20260831T001500Z.json'
+execution: {chunks: 5, chunk_iterations: 100, target_proxy_kg: 200, pressure_bounds_pa: [1115000, 1137500]}
+durability: {status: PENDING_DISCOVERY, onedrive_final_root: NOT_YET_PROMOTED}

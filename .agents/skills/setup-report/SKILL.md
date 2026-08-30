@@ -1,9 +1,14 @@
 ---
 name: setup-report
-description: "Create and manage concrete Fluent setup records and separate setup-linked result reports. Route by geometry first, organize current Full-geomV2 setup plans by physics family and scientific campaign, mirror completed-run reports under Setups/reports/full-geometry, preserve the historical numbered/reference corpus, make the Fluent build contract explicit, and keep interpretation user-led by default."
+description: "Retired workflow. Do not use. Current setup and result records live under Project/experiments as setup.md and results.md. Kept only for historical reference."
+disable-model-invocation: true
 ---
 
 # Setup Report
+
+**Retired / unrouted.** Do not use this skill as a current workflow authority.
+Create and update `Project/experiments/<campaign>/<experiment>/setup.md` and
+`results.md` instead.
 
 ## Purpose
 

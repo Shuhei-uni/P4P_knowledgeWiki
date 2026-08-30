@@ -1,0 +1,87 @@
+{
+  "native_window": [
+    15451,
+    15550
+  ],
+  "y010_mass_kg": {
+    "initial": 187.7928814004864,
+    "final": 256.2042838654088,
+    "delta": 68.41140246492239,
+    "late_mean": 250.62543044938468,
+    "late_min": 244.655962497043,
+    "late_max": 256.2042838654088,
+    "late_slope_per_iteration": 0.11930053060650386
+  },
+  "y030_mass_kg": {
+    "initial": 194.1539057922307,
+    "final": 262.7283030756209,
+    "delta": 68.5743972833902,
+    "late_mean": 257.13558270428007,
+    "late_min": 251.2362570560864,
+    "late_max": 262.7283030756209,
+    "late_slope_per_iteration": 0.11888099893067806
+  },
+  "total_liquid_mass_kg": {
+    "initial": 345.3654721265753,
+    "final": 430.3486516187448,
+    "delta": 84.98317949216948,
+    "late_mean": 424.2533337360937,
+    "late_min": 418.5176287340421,
+    "late_max": 430.3486516187448,
+    "late_slope_per_iteration": 0.1202307055165779
+  },
+  "liquid_to_brine_kg_s": {
+    "initial": -84.81428254168473,
+    "final": -60.76972629823371,
+    "delta": 24.044556243451026,
+    "late_mean": -58.99525571494707,
+    "late_min": -60.77102885149939,
+    "late_max": -57.81736201198181,
+    "late_slope_per_iteration": -0.03711247787787865
+  },
+  "liquid_to_steam_kg_s": {
+    "initial": -7.436096756970905,
+    "final": -13.11177408724548,
+    "delta": -5.675677330274576,
+    "late_mean": -13.034753539631078,
+    "late_min": -13.22673701443231,
+    "late_max": -12.95122886763152,
+    "late_slope_per_iteration": 0.0015139038729258846
+  },
+  "net_liquid_rate_kg_s": {
+    "initial": 24.596397623690756,
+    "final": 42.96527653686721,
+    "delta": 18.368878913176452,
+    "late_mean": 44.81676766776825,
+    "late_min": 42.96527653686721,
+    "late_max": 45.920227647693956,
+    "late_slope_per_iteration": -0.03559857400495264
+  },
+  "relative_mass_imbalance": {
+    "initial": 0.1237726069589354,
+    "final": 0.2158877954187654,
+    "delta": 0.09211518845983001,
+    "late_mean": 0.2249492608772324,
+    "late_min": 0.2154676347882229,
+    "late_max": 0.2311882917137597,
+    "late_slope_per_iteration": -0.00017770982129816426
+  },
+  "full_mass_imbalance_kg_s": {
+    "initial": 24.56716457698704,
+    "final": 42.85076585625582,
+    "delta": 18.28360127926878,
+    "late_mean": 44.64934244518311,
+    "late_min": 42.76736973482862,
+    "late_max": 45.88770447962516,
+    "late_slope_per_iteration": -0.035272961716217445
+  },
+  "brine_entry_static_pressure_pa": {
+    "initial": 1121690.390620245,
+    "final": 1137520.605186483,
+    "delta": 15830.214566237992,
+    "late_mean": 1137407.1382429218,
+    "late_min": 1137279.749742252,
+    "late_max": 1137543.24591804,
+    "late_slope_per_iteration": 2.626819844120112
+  }
+}

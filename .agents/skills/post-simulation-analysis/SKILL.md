@@ -1,9 +1,14 @@
 ---
 name: post-simulation-analysis
-description: "Plan and perform setup-specific post-simulation analysis for existing Ansys Fluent case/data results. Start from the setup's scientific question, discover what evidence is available, propose analyses with an explicit relevance rationale, ask the user to choose or refine the analysis when the choice is material, reuse existing carrier/DPM/EWF scripts where they fit, and create custom read-only extraction when they do not. Reports are evidence-first and user-interpreted by default."
+description: "Retired workflow. Do not use. Current analysis routing lives in cfd-numerical-analysis, interpret-experiment, and the selected Project results.md. Kept only for historical reference."
+disable-model-invocation: true
 ---
 
 # Adaptive Post-Simulation Analysis
+
+**Retired / unrouted.** Do not use this skill as a current workflow authority.
+Use `cfd-numerical-analysis`, `interpret-experiment`, and the selected Project
+`results.md` instead.
 
 ## Purpose
 

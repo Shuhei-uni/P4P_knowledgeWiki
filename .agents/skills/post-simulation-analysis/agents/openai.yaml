@@ -1,4 +1,7 @@
 interface:
   display_name: "Post-Simulation Analysis"
-  short_description: "Analyse Fluent results and setup reports"
-  default_prompt: "Use $post-simulation-analysis to choose setup-appropriate Fluent analyses and update its report safely."
+  short_description: "Retired. Do not use."
+  default_prompt: "Do not use $post-simulation-analysis. Use cfd-numerical-analysis, interpret-experiment, and the selected Project results.md instead."
+
+policy:
+  allow_implicit_invocation: false

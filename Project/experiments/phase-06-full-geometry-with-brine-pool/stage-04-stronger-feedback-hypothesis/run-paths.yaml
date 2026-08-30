@@ -1,0 +1,14 @@
+setup_id: P6-S4-C
+run_id: P6-S4-C-server2-20260831T023000Z
+mode: hypothesis-test
+server: {ref: 'server-2@10.104.145.174', id: '2', ip: '10.104.145.174'}
+paths:
+  run_root: 'C:\Users\syok443\Documents\FluentRuns\P6\S4\control-server2-20260831T023000Z'
+  parent_case: 'C:\Users\syok443\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\P5\F11\F11.cas.h5'
+  parent_data: 'C:\Users\syok443\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\P5\F11\F11.dat.h5'
+  final_case: 'C:\Users\syok443\Documents\FluentRuns\P6\S4\control-server2-20260831T023000Z\final.cas.h5'
+  final_data: 'C:\Users\syok443\Documents\FluentRuns\P6\S4\control-server2-20260831T023000Z\final.dat.h5'
+  monitor_root: 'C:\Users\syok443\Documents\FluentRuns\P6\S4\control-server2-20260831T023000Z\monitors'
+  runner_manifest: 'PyAnsys/output/phase06_stage04/control-server2-20260831T023000Z.json'
+execution: {chunks: 10, chunk_iterations: 100, gain_pa_per_kg: 2000, max_step_pa: 5000, target_proxy_kg: 200}
+durability: {status: PENDING_HYPOTHESIS, onedrive_final_root: NOT_YET_PROMOTED}

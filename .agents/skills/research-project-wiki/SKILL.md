@@ -1,9 +1,13 @@
 ---
 name: research-project-wiki
-description: "Use when working with ResearchProject_wiki project-specific knowledge for the geothermal separator CFD project: progress updates, experiment logs, blockers, objectives, technical notes, V&V records, project-facing evidence, report support, or decisions that should be traceable to the final-year research project."
+description: "Retired workflow. Do not use. Current project scientific truth lives in Project/, starting at Project/index.md. Kept only for historical reference."
+disable-model-invocation: true
 ---
 
 # Research Project Wiki
+
+**Retired / unrouted.** Do not use this skill as a current workflow authority.
+Start at `Project/index.md` instead. Do not recreate `ResearchProject_wiki/`.
 
 ## Core Rule
 

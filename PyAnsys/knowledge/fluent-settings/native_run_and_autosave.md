@@ -1,8 +1,8 @@
 # Python-Supervised Fluent Run and Recovery Policy
 
 > The filename is retained for stable repository links. Execution now has two
-> deliberate modes: attached discovery runs and detached self-waking hypothesis
-> tests.
+> deliberate modes: attached discovery runs, and hypothesis tests that detach
+> and self-wake on Codex or stay attached on Cursor.
 
 ## Key rule
 
@@ -17,7 +17,7 @@ verified case
 → inspect evidence immediately
 → choose the next discovery experiment in the same active thread
 
-HYPOTHESIS TEST
+HYPOTHESIS TEST (Codex)
 verified case
 → capture originating CODEX_THREAD_ID
 → detached run-and-handoff worker
@@ -25,7 +25,21 @@ verified case
 → final save + deterministic verification
 → COMPLETE | BLOCKED manifest
 → mandatory resume of exact originating Codex thread
+
+HYPOTHESIS TEST (Cursor / no session-resume hook)
+verified case
+→ scientific agent stays attached
+→ approved Python/PyFluent calculation horizon
+→ final save + deterministic verification
+→ analyse in the same session
 ```
+
+On Cursor, do not capture `CODEX_THREAD_ID` or call `codex exec resume`.
+Keep the agent attached through the approved hypothesis horizon. Launch
+`run_and_handoff.py` only when a detached `COMPLETE`/`BLOCKED` job is
+explicitly required; missing `CODEX_THREAD_ID` is then expected, not a
+blocker. Codex self-wake remains mandatory when the job is launched from
+Codex.
 
 TUI-driven iteration, Fluent journal/batch submission, and GUI-owned execution
 are not automatic fallbacks. They require explicit human approval for that
@@ -39,16 +53,19 @@ adds unnecessary latency. During an active discovery campaign, the scientific
 agent should stay alive through each short run so it can immediately inspect the
 result, revise the working hypothesis, and launch the next useful probe.
 
-Hypothesis tests are different. A long focused run should not consume hours of
-AI context merely because Fluent is calculating. The background worker should
-own the long wait, terminal evidence, and wakeup event, then return control to
-the exact scientific thread that launched it.
+Hypothesis tests are different. On Codex, a long focused run should not
+consume hours of AI context merely because Fluent is calculating. The
+background worker should own the long wait, terminal evidence, and wakeup
+event, then return control to the exact scientific thread that launched it.
+On Cursor, stay attached and wait on the approved horizon in the live
+session.
 
 This gives the intended split:
 
 ```text
 discovery: agent → run → evidence → next probe
-hypothesis: agent → background worker → wake same agent thread
+hypothesis (Codex): agent → background worker → wake same agent thread
+hypothesis (Cursor): agent → run → evidence → next action in the same session
 ```
 
 Poor residuals, poor balances, oscillation, or unexpected physics are normally
@@ -132,12 +149,15 @@ YAML. When the job is launched from Codex, the Python loader captures
 `CODEX_THREAD_ID` from the process environment. `codex.session_id` is an
 explicit override only when needed.
 
-A hypothesis job is invalid if:
+A Codex hypothesis job is invalid if:
 
 - the wakeup hook is disabled;
 - the originating thread cannot be resolved;
 - either `COMPLETE` or `BLOCKED` is missing from the trigger set;
 - no deterministic completion proof is defined.
+
+A Cursor attached hypothesis run is invalid if no deterministic completion
+proof is defined. Missing `CODEX_THREAD_ID` does not make a Cursor run invalid.
 
 The job spec is a derived execution input. It does not replace the experiment's
 canonical `Project/.../run-paths.yaml`.
@@ -152,7 +172,8 @@ python PyAnsys/scripts/orchestration/run_and_handoff.py --job <job.yaml>
 
 The launcher resolves the originating Codex thread and starts a detached worker.
 The current scientific turn may then end because the worker now owns the wakeup
-obligation.
+obligation. Use this launcher from Codex. From Cursor, keep the agent attached
+instead of ending the turn.
 
 The worker lifecycle is:
 
@@ -166,10 +187,13 @@ RUNNING
 → codex exec resume <ORIGINATING_THREAD_ID> <handoff prompt>
 ```
 
-The final Codex resume is a **mandatory Python tail** for hypothesis mode. It is
-not optional cleanup. The worker must attempt the wakeup after both `COMPLETE`
-and `BLOCKED`, so progress does not depend on the human noticing that the
-simulation probably finished and sending another prompt.
+The final Codex resume is a **mandatory Python tail** for Codex hypothesis
+mode. It is not optional cleanup. The worker must attempt the wakeup after
+both `COMPLETE` and `BLOCKED`, so progress does not depend on the human
+noticing that the simulation probably finished and sending another prompt.
+
+Do not use that tail from Cursor. Cursor hypothesis runs stay in the live
+session.
 
 The terminal manifest is written before the Codex process is launched. This
 means run completion is still recoverable even if the AI handoff itself fails.
@@ -326,8 +350,9 @@ codex exec resume <SESSION_ID> <PROMPT>
 ```
 
 The hypothesis worker launches that command only after writing the terminal
-manifest. The resumed prompt points the agent to the manifest and the canonical
-Project experiment packet.
+manifest, and only when the job was launched from Codex. The resumed prompt
+points the agent to the manifest and the canonical Project experiment packet.
+Cursor agents must not invoke this command.
 
 The CFD run status and AI handoff status remain separate. For example:
 
