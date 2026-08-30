@@ -48,6 +48,7 @@ These are narrow, composable disciplines and execution helpers. The model and ca
 Current model-invoked specialists:
 
 - `arena`
+- `bold-probe-research`
 - `cfd-numerical-analysis`
 - `cfd-wiki`
 - `check-phase-closure`
@@ -76,6 +77,8 @@ Current model-invoked specialists:
 - `swarm`
 
 Use the smallest applicable specialist. Supporting skills should hand control back to the calling workflow rather than silently taking over the scientific direction.
+
+Before `scientific-phase-loop` or `design-experiment` selects any bold/speculative probe, invoke `bold-probe-research`. The research pass must begin from the current scientific tension, check prior project collisions, examine relevant CFD knowledge and authoritative literature/manual guidance, and produce evidence-backed candidate questions before `arena` or experiment selection. A bold lane must not be populated by an unresearched Fluent option, a random model switch, or a nearby parameter variation merely because compute is available.
 
 For Fluent configuration uncertainty, use `fluent-live-inspection` first when the active live tree can resolve the path, object, state, or allowed value directly. Escalate automatically to `fluent-manual-researcher` when the live tree alone cannot safely determine the setting's meaning, prerequisites, activation order, or verifiable PyFluent/TUI implementation path. Do not guess a Fluent configuration from memory or copy a recipe from another model/version merely to keep implementation moving.
 
