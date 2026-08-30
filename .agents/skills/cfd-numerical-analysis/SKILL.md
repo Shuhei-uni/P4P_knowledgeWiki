@@ -114,6 +114,14 @@ Return:
 5. exact source data, units, sign conventions, windows, and transformations;
 6. a short set of neutral observations linked to the figures.
 
+### File report-facing figures with their experiment
+
+When the analysis belongs to a named Project experiment, place each selected
+report-facing PNG, SVG, or PDF in that experiment or stage's existing
+`figures/` directory, alongside the associated `results.md`. Use a
+case- or run-specific subdirectory when names could collide, and link the
+Project-local figure from the result record or its figure index.
+
 Make clear what the figures genuinely show, what remains uncertain, and what numerical limitations matter for `interpret-experiment`.
 
 Physical meaning belongs downstream.
