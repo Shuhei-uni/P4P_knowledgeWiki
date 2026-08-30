@@ -15,6 +15,7 @@ This is the Project-layer tracer for the full-geometry Mixture `03A` campaign. I
 - [Stage-3 setup](stage-03/setup.md)
 - [Stage-3 results](stage-03/results.md)
 - [Stage-4 setup](stage-04/setup.md)
+- [Stage-4 run-paths](stage-04/run-paths.yaml)
 - [Stage-4 results](stage-04/results.md)
 - [Historical Stage-2 screening report](stage-02/source-screening-report.md)
 
@@ -37,7 +38,8 @@ evidence rather than copying binary run output.
 
 - Stage 3 is a completed diagnostic sweep. Its branches reached different horizons and several have missing, transport-blocked, or numerical-failure evidence; no branch is a validated or report-ready baseline.
 - Stage 4 has completed diagnostic continuation evidence for S4-01 and S4-03, completed-budget but endpoint-incomplete evidence for S4-02, and prepared-only evidence for S4-04. S4-05 and S4-06 remain gated on an exact F09 40% parent.
-- The current 03A state is therefore still diagnostic and unresolved for scientific parent promotion.
+- A 2026-08-30 PNG review rejects the executed RNG continuations as parent-eligible: persistent ~5–11% mass-imbalance oscillation, unconverged continuity, and no computed 20–30k window statistics. No qualified 03A parent exists. Remote endpoint files are Reported, not live-verified from this checkout.
+- S4-04 remains the unexecuted Stage-4-B item from hashed F11 @ 15,000. Any new solve is PyFluent unless a journal is explicitly approved.
 
 ## Cutover gate
 

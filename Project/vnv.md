@@ -67,4 +67,7 @@ trend-only rather than upgrading the claim.
 - Project/ owns the project-specific interpretation and claim boundary.
 
 No final human sign-off has been granted. The current Stage-4 execution
-package remains diagnostic evidence, not a validation record.
+package remains diagnostic evidence, not a validation record. The 2026-08-30
+PNG review does not upgrade that claim class: executed RNG continuations are
+not parent-eligible, and no Numerically verified or Externally validated
+state exists.

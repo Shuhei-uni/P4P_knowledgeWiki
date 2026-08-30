@@ -35,37 +35,55 @@ silently upgraded to current conclusions.
 
 ## What did the latest experiment show?
 
-Stage 4 produced completed diagnostic continuation evidence for S4-01 and
-S4-03, completed-budget but endpoint-incomplete evidence for S4-02, and
-prepared-only evidence for S4-04. S4-05 and S4-06 remain gated because the
-exact F09 40% parent was not proved accessible.
+No qualified 03A parent currently exists. Remote named S4-01 and S4-03
+case/data pairs, and the Stage-3 F05/F06/F11 parents, are Reported to exist on
+the last-known Server-2 tree; they are not missing files. None of those states
+has cleared the identity + prescribed-window gate.
 
-The available Stage-4 records do not establish physical convergence, a
-report-ready baseline, or eligibility for a new parent branch. The executed
-branches remain diagnostic until their binary identity, readback, and full
-physical-history evidence are reviewed together.
+A 2026-08-30 PNG review of the committed Stage-4 figures is enough to
+**reject** the executed RNG continuations as parent-eligible (Observed). After
+the early drop, relative mass imbalance occupies a persistent roughly 5–11%
+oscillation on S4-01, S4-02, and S4-03. Continuity remains `O(10^{-1})` on
+S4-01/S4-02 and `O(1)` on S4-03. `k`/`epsilon` stay intermittent; PR #7's
+bounded-versus-deteriorating distinction is retained, so ugly turbulence
+residuals are not by themselves the parent reject. Visual liquid-inventory
+plateaus in the 2026-08-20 volume-integral family (~318 kg at F05 3,000,
+~345 kg at F11 15,000, late S4-01/S4-03 near ~465 kg) are not
+\(dM_l/dN \to 0\). The 2026-08-21 checkpoint kg column (~4,457 kg at F05) is
+an unreconciliation family and is not used against these PNGs.
+
+S4-02 remains endpoint-incomplete and not parent-eligible. S4-04 remains
+prepared-only from hashed F11 @ 15,000. S4-05/S4-06 remain gated. Contracted
+0–5k / 5–10k / 10–20k / 20–30k mean/median/P95/slope are Missing Info because
+the portable CSV/JSON package is not in this checkout. Live checksum/readback
+is Missing Info: this environment has no Fluent `.env`, no server-profile
+YAML, and no reachable `FLUENT_IP2`.
 
 ## What remains unresolved?
 
-- whether any 03A state has stable residuals, phase routing, pressure behaviour,
-  and liquid-inventory behaviour over the required continuation window;
-- whether the completed S4-01 and S4-03 continuations contain a stable,
-  parent-eligible window;
+- live identity of the remote S4-01/S4-03 endpoints and the hashed F11
+  15,000 parent;
+- prescribed-window CSV statistics for the executed branches;
+- whether standard `k-epsilon` from F11 @ 15,000 (existing S4-04) can change
+  the residual/mass envelope without claiming a new turbulence authority;
+- whether the gated F09 40% loading path (S4-05/S4-06) still matters;
 - whether the rebuilt case is truly at parity with the audited Purnanto carrier
   settings apart from its declared project change;
 - which external, analytical, or measured targets are appropriate for a
-  validation claim;
+  validation claim (`Project/vnv.md` remains Missing Info for pressure drop,
+  carryover, brine flow, and efficiency);
 - whether later DPM evidence is complete enough to support more than a bounded
   carryover diagnostic.
 
 ## What happens next?
 
-Review the Stage-4 execution package together with the 03A tracer's remaining
-readback and physical-history gaps. Promote only a state that passes those
-checks, then record the next explicitly selected experiment with the
-[setup/results contract](experiments/README.md). Keep each new experiment to a
-concise delta from a verified parent and make its evidence and interpretation
-explicit.
+When a Fluent endpoint is reachable, recover the Server-2 CSV/JSON package and
+live-hash the named endpoints before any new solve. Do not add another
+unchanged RNG `+30,000`. Keep S4-04 as the unexecuted Stage-4-B item, parent
+F11 @ 15,000, PyFluent unless a journal is explicitly approved. Keep
+S4-05/S4-06 gated. Do not create a parallel experiment that retargets S4-04
+onto S4-03 @ 45,000. The Stage-4 packet is `setup.md` + `run-paths.yaml` +
+`results.md`.
 
 ## Project map
 
