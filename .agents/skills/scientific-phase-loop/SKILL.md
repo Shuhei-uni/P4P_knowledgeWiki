@@ -110,6 +110,8 @@ Call `design-experiment` in discovery mode and use `explore-experiment-space` to
 
 A rough budget of 500 to 1,000 iterations per case is a useful project ballpark when that is enough to expose early comparative behaviour. This is a planning default, not a universal convergence criterion.
 
+**Stay attached throughout discovery mode.** Discovery runs are deliberately short, so do not end the agent turn or hand them to the detached sleep/wake path. Wait for each discovery run to finish, inspect the evidence immediately, update the working hypothesis, and choose the next useful discovery experiment while the same scientific thread is active.
+
 Optimise discovery mode for breadth, comparability, and information across the matrix. Use the resulting histories, plots, balances, monitors, and other evidence to identify promising directions, eliminate weak ones, reveal unexpected behaviour, and sharpen the next hypothesis.
 
 Treat these short runs as screening evidence. They can tell you where the evidence is pointing, but they normally cannot support the same strength of statement as a deliberately long hypothesis test.
@@ -123,6 +125,8 @@ Call `design-experiment` in hypothesis-test mode. Prefer one focused experiment 
 A run around 10,000 iterations may be an appropriate ballpark for the current project when that duration is deliberately chosen to expose the required behaviour. Do not treat 10,000 as a universal criterion; justify the run length from the model, question, and evidence required.
 
 Before spending the compute, be able to say what observations would support or weaken the hypothesis, what working assumptions materially bound the interpretation, and what data must exist to make that judgement.
+
+**Hypothesis-test runs must be self-waking.** Before a background hypothesis run is launched, capture the originating Codex thread/session ID and make the Python execution path resume that exact thread on both `COMPLETE` and `BLOCKED`. Do not launch a background hypothesis run without this terminal wake-up path.
 
 The two modes are not fixed stages. Discovery can produce a focused hypothesis worth testing deeply. A long hypothesis test can expose an unexpected broad uncertainty that sends the loop back into discovery.
 
@@ -152,25 +156,25 @@ A speculative probe may sit outside the active phase question as an exploratory 
 
 Re-evaluate the whole portfolio whenever results return. A speculative branch can be dropped, repeated more carefully, folded into the current phase if it becomes directly relevant, or proposed as a future phase. While two or more servers remain usable, dropping one bold branch should normally lead to a different justified bold probe taking its place.
 
-## Execute approved experiments through detached Python handoff
+## Execute approved experiments according to mode
 
 Once `create-setup` has made the experiment precise, call `fluent-fleet-orchestration` again to resolve each server-neutral setup into an explicit execution plan: run ID, selected server, exact parent artifact, any verified OneDrive staging, remote paths, and durability expectations.
 
-Then call `implement-experiment` to build, reload-verify, and smoke-test it. Long calculations pass to `supervise-fluent-run`, which launches the approved Python/PyFluent runner through the detached `run_and_handoff.py` worker.
+Then call `implement-experiment` to build, reload-verify, and smoke-test it.
 
-Do not keep this scientific agent alive merely to observe Fluent for the full planned horizon. The detached worker owns the blocking calculation, runner log, deterministic terminal verification, and job manifest. When the run reaches `COMPLETE` or `BLOCKED`, it resumes the exact recorded Codex session so this loop can continue from the persisted execution evidence.
+For **discovery mode**, keep the agent attached to the Python/PyFluent execution through the short planned run. Do not use `run_and_handoff.py` merely to avoid waiting. When the run returns, analyse it immediately and continue the discovery loop while context is live.
 
-For multi-server or multi-job work, every job must carry the explicit Codex session/thread ID that owns the scientific loop. Never use `--last`, because jobs may complete in a different order from launch order.
+For **hypothesis-test mode**, pass the long calculation to `supervise-fluent-run`. The Python execution path must include the terminal handoff that resumes the originating Codex thread after verified `COMPLETE` or `BLOCKED`; the current turn may end only after that wake-up contract is in place.
 
-A zero Python return code is not sufficient completion proof. Require locally visible final files and/or a deterministic verifier command that proves the declared remote final state before the worker records `COMPLETE`.
+For multi-server or multi-job hypothesis work, every background job must carry the explicit Codex session/thread ID that owns the scientific loop. Never use `--last`, because jobs may complete in a different order from launch order.
+
+A zero Python return code is not sufficient completion proof. Require locally visible final files and/or a deterministic verifier command that proves the declared remote final state before a hypothesis run records `COMPLETE`.
 
 Do not independently choose TUI-driven iteration, a Fluent journal/batch, or GUI-owned execution. Those mechanisms require explicit human approval for that specific run. If the Python/PyFluent path is blocked, return the execution evidence rather than silently changing run mechanism.
 
 The run supervisor is an execution boundary, not another scientist. It should let poor residuals, poor balances, or unexpected model behaviour continue to the planned horizon when Fluent can still solve. A genuine initialization failure, floating-point/fatal error, process crash, unreconciled run state, or failed final save produces `BLOCKED` and wakes this loop for a rethink rather than improvising numerics inside the worker.
 
 Important final states and selected expensive recovery checkpoints should not remain dependent on one server. When practical, preserve complete paired case+data artifacts and promote them through the OneDrive durability path defined by `fluent-fleet-orchestration`.
-
-After launch, the current turn may end. Scientific work resumes only when the completion hook supplies the terminal manifest or when a human explicitly returns to the phase. The repository and manifests, not a continuously alive agent process, preserve the thread across the long solve.
 
 ## Make simulations earn their cost
 
