@@ -27,15 +27,37 @@ Make clear which settings are inherited, which are deliberately changed, and whi
 
 If the selected strategy still contains an ambiguity that would materially change the experiment, return it for clarification rather than silently choosing.
 
-## Carry the analysis design into the setup
+## Carry the analysis and figure design into the setup
 
-The evidence plan created during `design-experiment` belongs in the setup contract.
+The evidence plan and core figure plan created during `design-experiment` belong in the setup contract. Do not reduce them to a vague instruction such as "plot monitors" or "create overview plots."
 
 Record the histories, monitors, report definitions, fields, fluxes, contours, checkpoints, or other outputs required to judge the hypothesis. Prefer iteration/time histories where behaviour over the run matters rather than relying on one final snapshot.
 
-If evidence cannot be reconstructed after the run, make its instrumentation an explicit pre-run requirement.
+### Preserve the core figure contract
 
-For linked setups, preserve compatible definitions and output bases wherever the campaign depends on cross-case comparison.
+Include a compact **Core figure plan** in `setup.md`. Preserve each planned figure's scientific purpose and enough technical detail for a fresh analysis agent to reproduce it without redesigning the story after seeing the data.
+
+For each core figure, record at minimum:
+
+| Field | Required content |
+|---|---|
+| Figure | Stable ID and short title |
+| Question | Exact sub-question answered |
+| Plot | Plot type and intended scientific message |
+| X-axis | Quantity, units, and full/selected window |
+| Y-axis / field | Exact quantity, units, sign convention, phase/zone/surface scope |
+| Series / cases | What belongs together and why |
+| Comparison basis | Parent/reference/window/normalization/threshold if relevant |
+| Reduction | Raw/history/final-window statistic/mean/range/integral/etc. |
+| Data source | Monitor/report file/case-data field/derived calculation/checkpoint |
+| Instrumentation | What must exist before the solve |
+| Interpretation use | What observation would support, weaken, or distinguish the competing explanations |
+
+The setup should normally carry only a few core figures: roughly `1-3` for discovery screening and `2-5` for a focused hypothesis test. Supporting numerical/debug figures may be generated later, but they should remain clearly secondary.
+
+The first core figure should normally be the most direct visual answer to the experiment question. Do not let a residual dashboard or generic multi-monitor overview displace it unless numerical convergence itself is the question.
+
+If a quantity cannot be reconstructed after the run, make its instrumentation an explicit pre-run requirement. For linked setups, preserve compatible definitions, units, sign conventions, output bases, and comparison windows wherever the campaign depends on cross-case comparison.
 
 ## Define the run intent
 
@@ -66,12 +88,14 @@ A setup is a plan, not a result.
 
 Keep hypotheses labelled as hypotheses. Do not write expected trends as conclusions, and do not add acceptance criteria that were never part of the experiment design.
 
+The figure plan may state what observations would discriminate between competing explanations, but it must not pre-label which result the simulation will produce.
+
 ## Output
 
 Create or update one `setup.md` per distinct simulation in the selected strategy, using the repository's canonical experiment location and naming conventions.
 
-A useful setup record contains the question and rationale, hypothesis, prior evidence, parent/reference artifact identity, controlled change, frozen comparison context, run intent, required evidence/visualisations, important assumptions and limitations, durability intent for final/selected recovery states, and any relationship to the wider linked campaign.
+A useful setup record contains the question and rationale, hypothesis, prior evidence, parent/reference artifact identity, controlled change, frozen comparison context, run intent, required evidence, **core figure plan**, important assumptions and limitations, durability intent for final/selected recovery states, and any relationship to the wider linked campaign.
 
 Do not bind the setup to a server merely because the parent currently lives there. After setup creation, `fluent-fleet-orchestration` resolves the current live server placement, verified parent source, any OneDrive transfer, exact runtime server reference, and exact remote paths into the sibling `run-paths.yaml`.
 
-The handoff is complete when `fluent-fleet-orchestration` can place the setup, `implement-experiment` can build and run it from the exact resolved parent, and `interpret-experiment` can later recover both the purpose of the run and the logic of the combined experiment strategy.
+The handoff is complete when `fluent-fleet-orchestration` can place the setup, `implement-experiment` can build and run it from the exact resolved parent, and `interpret-experiment` can later recover both the purpose of the run and the exact evidence/figure logic of the combined experiment strategy.
