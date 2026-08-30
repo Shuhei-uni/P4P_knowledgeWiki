@@ -85,9 +85,13 @@ If the smoke test exposes an execution error or a setup/pipeline incompatibility
 
 Once the verification gate passes, execute the fixed iteration/time target defined by the setup through the approved Python/PyFluent path.
 
-For **discovery mode**, keep the scientific agent attached for the full short run. Do not launch the detached handoff worker. Wait for the run to finish, return the execution evidence immediately, and let the active scientific thread inspect it and choose the next discovery experiment without a human restart.
+For **discovery mode**, keep the scientific agent attached for the full short run. Do not launch the detached handoff worker. Wait for the run to finish, return the execution evidence immediately, and let the active scientific thread inspect it and choose the next discovery experiment without a human restart. Continue this attached pattern throughout the active discovery campaign, not only for the first run.
 
-For **hypothesis-test mode**, call `supervise-fluent-run` and launch the background job only through the self-waking Python entrypoint. The raw experiment runner must not be background-launched directly. The originating Codex thread/session ID must be captured before launch, and the terminal Python path must resume that exact thread on both `COMPLETE` and `BLOCKED`.
+For **hypothesis-test mode**, call `supervise-fluent-run` and launch the background job only through the self-waking Python entrypoint. The raw experiment runner must not be background-launched directly.
+
+The background launcher should capture the originating thread automatically from `CODEX_THREAD_ID`. An explicit `codex.session_id` is only an override when necessary. Do not start the hypothesis run if neither is available.
+
+The terminal Python path must resume that exact originating thread on both `COMPLETE` and `BLOCKED`. The wakeup code is mandatory and must execute after terminal evidence has been persisted; it cannot be omitted and cannot depend on the human sending another message.
 
 The hypothesis job must declare at least one deterministic completion proof: locally visible required files and/or a verifier command that returns zero only when the declared remote final state is verified. A zero runner exit code alone is not sufficient.
 
