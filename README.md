@@ -7,7 +7,7 @@ separator CFD project. It has four active systems with clear ownership:
   cross-paper method synthesis.
 - `Project/` — current project-specific scientific truth, selected experiments,
   evidence interpretation, and claim limits.
-- `PyAnsys/` — executable Fluent automation, inspection, detached Python-supervised
+- `PyAnsys/` — executable Fluent automation, inspection, Python-supervised
   execution support, and machine-readable evidence checks.
 - `.agents/skills/` — focused repository-local workflows for the active CFD, Fluent,
   evidence, and project-loop tasks.
@@ -24,8 +24,8 @@ Start with:
   selected-experiment contract.
 - [`CFD_wiki/wiki/index.md`](CFD_wiki/wiki/index.md) for reusable CFD
   knowledge and paper navigation.
-- [`PyAnsys/README.md`](PyAnsys/README.md) for implementation and detached
-  Fluent execution/handoff workflow.
+- [`PyAnsys/README.md`](PyAnsys/README.md) for implementation and Fluent
+  execution/handoff workflow.
 - [`.agents/skills/`](.agents/skills/) for the focused task-scoped repository
   workflows.
 
@@ -66,7 +66,14 @@ diagnose root cause
 smallest justified skill / handoff / rule edit
 ```
 
-The human normally does not need to invoke experiment-design, setup, Fluent execution, numerical-analysis, interpretation, next-action, or closure skills individually; the loop should call them as required. Inside the loop, long Fluent runs default to an approved Python/PyFluent runner launched through a detached worker. The worker writes a terminal `COMPLETE`/`BLOCKED` manifest and resumes the exact Codex session; the scientific agent does not need to remain alive while Fluent advances. TUI-driven or Fluent-journal execution requires explicit human approval for that run.
+The human normally does not need to invoke experiment-design, setup, Fluent execution, numerical-analysis, interpretation, next-action, or closure skills individually; the loop should call them as required.
+
+Inside the loop, execution depends on experiment mode:
+
+- **Discovery:** short screening runs stay attached to the active scientific agent so results can immediately drive the next probe without a human restart.
+- **Hypothesis test:** long runs use the background self-waking Python worker. It persists `COMPLETE`/`BLOCKED` evidence and resumes the exact originating Codex thread automatically; the human should not need to send a prompt just to restart progress after the solve finishes.
+
+TUI-driven or Fluent-journal execution requires explicit human approval for that run.
 
 ## Current execution proof
 
@@ -100,10 +107,10 @@ uncertainty labels needed for later rechecks.
 3. Use `CFD_wiki/paper_lookup/index.md` before reading a long source paper.
 4. For Fluent automation, read the relevant focused skill and
    `PyAnsys/knowledge/fluent-settings/native_run_and_autosave.md`.
-5. For autonomous-loop execution, use the Python/PyFluent detached worker via
-   `supervise-fluent-run`; require explicit terminal verification and an exact
-   Codex session ID for handoff. Do not switch to TUI or a Fluent journal
-   without explicit human approval.
+5. Preserve execution mode: keep discovery attached; for hypothesis tests use
+   the self-waking run-and-handoff worker with deterministic terminal evidence
+   and the exact originating Codex thread. Never use `--last` for multi-job
+   handoff.
 6. When improving the agent workflow, prefer `$workflow-surgeon` so changes are
    root-cause-driven and surgical rather than broad rewrites.
 7. Run the repository’s targeted tests and stale-path check after cross-system
