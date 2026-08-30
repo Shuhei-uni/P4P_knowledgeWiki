@@ -1,0 +1,109 @@
+# 03A Stage-4 path record.
+# Placement is BLOCKED from this cloud checkout. Paths below that are not
+# marked live-verified are Reported from the migrated execution report and
+# the Stage-4 prepare script; they are not a current fleet inventory.
+
+setup_id: 03A-stage4
+run_id: 03A-stage4-review-20260830
+placement_status: BLOCKED
+placement_blockers:
+  - 'No PyAnsys/.env, FLUENT_IP/FLUENT_IP2, FLUENT_PORT, or FLUENT_PASSWORD in this checkout.'
+  - 'python3 PyAnsys/scripts/connection/check_connection.py --server-id 2: Endpoint UNKNOWN (configure FLUENT_IP2 and FLUENT_PORT2); gRPC FAILED (No module named ansys).'
+  - 'PyAnsys/server-profiles/ contains only README.md; no shuhei-server-*.yaml.'
+  - 'No PyAnsys/output/ tree and no live job manifest in this checkout.'
+  - 'Native H5 case/data and the portable CSV/JSON package were never committed; they remain remote-only until a usable file-transfer route exists.'
+
+server:
+  ref: unknown
+  id: unknown
+  ip: unknown
+  profile_id: missing
+  last_known_alias: server-2
+  last_known_alias_status: Reported-unverified
+
+historical_native_queue:
+  record_id: 03A-stage4-native-queue-20260822T123011Z
+  last_known_remote_root: 'C:\Users\syok443\Documents\FluentRuns\03A-stage4'
+  last_known_local_output_root: PyAnsys/output/03a_stage4/native_queue/20260822T123011Z
+  last_known_recovery_roots:
+    - PyAnsys/output/03a_stage4/native_queue_recovery/20260823T125149Z
+    - PyAnsys/output/03a_stage4/native_queue_recovery/20260823T125548Z
+  status: Reported-unverified
+
+parents:
+  F05_100pct_iter3000:
+    artifact_id: F05-100pct-end-iter3000
+    source_setup: 03A-stage3-F05
+    progress: 3000
+    case_file: 'C:\Users\syok443\Documents\FluentRuns\03A-stage3\F05\run-20260820T013223Z\03A-stage3-F05-full-mixture-100pct-end-20260820T013223Z.cas.h5'
+    data_file: 'C:\Users\syok443\Documents\FluentRuns\03A-stage3\F05\run-20260820T013223Z\03A-stage3-F05-full-mixture-100pct-end-20260820T013223Z.dat.h5'
+    case_sha256: missing
+    data_sha256: missing
+    origin_server_ref: unknown
+    status: Reported-unverified
+  F06_100pct_iter6000:
+    artifact_id: F06-100pct-end-iter6000
+    source_setup: 03A-stage3-F06
+    progress: 6000
+    case_file: 'C:\Users\syok443\Documents\FluentRuns\03A-stage3\F06\run-20260820T013223Z\03A-stage3-F06-full-mixture-100pct-end-20260820T013223Z.cas.h5'
+    data_file: 'C:\Users\syok443\Documents\FluentRuns\03A-stage3\F06\run-20260820T013223Z\03A-stage3-F06-full-mixture-100pct-end-20260820T013223Z.dat.h5'
+    case_sha256: missing
+    data_sha256: missing
+    origin_server_ref: unknown
+    status: Reported-unverified
+  F11_100pct_iter15000:
+    artifact_id: F11-100pct-end-iter15000
+    source_setup: 03A-stage3-F11
+    progress: 15000
+    case_file: 'C:\Users\syok443\Documents\FluentRuns\03A-stage3\F11\run-20260820T013223Z\03A-stage3-F11-full-mixture-100pct-end-20260820T013223Z.cas.h5'
+    data_file: 'C:\Users\syok443\Documents\FluentRuns\03A-stage3\F11\run-20260820T013223Z\03A-stage3-F11-full-mixture-100pct-end-20260820T013223Z.dat.h5'
+    case_sha256: f82125f5d4f17e3c161cfc9f17c2158698eea5132154deef53b16fa6a3b994a5
+    data_sha256: cb1a2b2b3f6c7bb2d607dd9a8e45c7c161e30a457a5cabe7eb799b1768b78919
+    origin_server_ref: unknown
+    status: Reported-hash-from-execution-report; live-readback Missing Info
+  F09_40pct:
+    artifact_id: F09-40pct-end
+    status: gated-not-proved-accessible
+
+executed_branches:
+  S4-01:
+    parent: F05_100pct_iter3000
+    named_endpoint: present-on-remote-host-Reported
+    residual_export: present-Reported
+    physical_histories: 30-report-files-Reported
+    local_pngs: figures/03a-stage4/server2/s4-01/
+    csv_json_package: remote-only-Missing-Info
+    live_checksum: Missing Info
+  S4-02:
+    parent: F06_100pct_iter6000
+    named_endpoint: absent
+    residual_export: absent
+    transcript_residual_table: present-Reported
+    forensic_case_sha256: 8b49aff7d5a522f04a952eae640e81fb6d24f7052783496b8b09886c16ecab1c
+    forensic_data_sha256: 887c0cff41ddd823b6d6eecdcba3efc78c3bea21de19bdbc59729772be302bd3
+    parent_eligible: false
+    local_pngs: figures/03a-stage4/server2/s4-02/
+    csv_json_package: remote-only-Missing-Info
+  S4-03:
+    parent: F11_100pct_iter15000
+    named_endpoint: present-on-remote-host-Reported
+    residual_export: present-Reported
+    physical_histories: 30-report-files-Reported
+    local_pngs: figures/03a-stage4/server2/s4-03/
+    csv_json_package: remote-only-Missing-Info
+    live_checksum: Missing Info
+  S4-04:
+    parent: F11_100pct_iter15000
+    controlled_delta: RNG to standard k-epsilon only
+    prepared_case: present-on-remote-host-Reported
+    solve: not-executed
+    execution_mechanism_if_run: PyFluent unless human-approved journal for this specific run
+    live_paths: Missing Info
+
+durability:
+  onedrive_final_root: Missing Info
+  status: LOCAL_ONLY debt on last-known Server-2 tree; this checkout has PNGs only
+
+verifier:
+  status: not-run
+  note: No live Fluent job exists in this checkout. Do not treat a Python exit code as COMPLETE.
