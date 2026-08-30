@@ -23,6 +23,15 @@ Use the live tree as authority for the current case and Fluent version. A
 missing expected path means inspect/adapt; it does not prove that the model is
 disabled or that an old recipe should be forced.
 
+If the live tree cannot safely resolve the setting's meaning, documented
+prerequisites, activation order, or a verifiable Settings API/TUI mutation
+path, escalate automatically to `fluent-manual-researcher`. That skill must
+consult the version-matched official Fluent manual, translate the documented
+GUI/model state into a disposable live implementation attempt, and return only
+a save/reopen-verified recipe or a bounded research blocker. Do not keep
+probing or inventing paths once the uncertainty is semantic rather than merely
+structural.
+
 ## Known working code
 
 Prefer reusable `src` code, then a generic script, then a campaign pattern;
