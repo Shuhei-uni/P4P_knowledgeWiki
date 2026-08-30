@@ -59,23 +59,24 @@ A bare filename is acceptable only when its containing directory has been delibe
 5. Write the child `.cas.h5` to its declared full path, confirm that the remote file exists, reload it by full path, and repeat the strict audit.
 6. Record the explicit parent and child paths, intended delta, readback, Fluent version, output path map, and uncertainty labels. Do not use the server ID as report-facing case identity.
 
-Do not silently combine setup redesign with execution. Once the case is proven, hand the approved run to `implement-experiment` / `supervise-fluent-run`.
+Do not silently combine setup redesign with execution. Once the case is proven, hand the approved run to `implement-experiment` / `supervise-fluent-run` as appropriate for its mode.
 
-## Initialize and hand off the run through Python by default
+## Initialize and run through Python by mode
 
-For autonomous experiments inside `scientific-phase-loop`, use an approved Python/PyFluent runner launched through the detached run-and-handoff path.
+For autonomous experiments inside `scientific-phase-loop`, use the approved Python/PyFluent runner and preserve the experiment mode chosen upstream.
 
 1. Load the verified child case when it is not already the known active case.
 2. Reconfirm the declared working directory and all required output/checkpoint/report paths on the Fluent machine.
 3. Start the initialization required by the setup.
-4. Wait for initialization to return successfully before committing the expensive long run. If initialization fails, blocks irrecoverably, or leaves state uncertain, do not launch it.
+4. Wait for initialization to return successfully before committing the planned run. If initialization fails, blocks irrecoverably, or leaves state uncertain, do not launch it.
 5. Run the agreed smoke test, including the exact setup readback/save-reopen proof and the short execution check required by the experiment.
-6. Define the exact Python/PyFluent long-run command and the terminal completion evidence: required files and/or a deterministic verifier.
-7. Create the derived run-and-handoff job spec with the exact Codex session ID.
-8. Launch `PyAnsys/scripts/orchestration/run_and_handoff.py --job <job.yaml>` through `supervise-fluent-run`.
-9. Let the detached worker own the long synchronous calculation. The current AI turn should not remain alive solely to observe normal Fluent progress.
+6. Define the exact Python/PyFluent run command and the required completion evidence.
 
-A busy or blocked Fluent call during the active synchronous calculation is not by itself evidence of failure. The worker should let the approved horizon continue while Fluent can solve and should classify the terminal result only after the runner returns and verification runs.
+For **discovery mode**, keep the scientific agent attached through the short run. Do not hand it to the detached sleep/wake path; return the evidence immediately so the active thread can choose the next discovery experiment.
+
+For **hypothesis-test mode**, create the self-waking run-and-handoff job with the exact originating Codex session ID and launch it through `supervise-fluent-run`. Do not background-launch the raw hypothesis runner directly.
+
+A busy or blocked Fluent call during an active synchronous calculation is not by itself evidence of failure. Let the approved horizon continue while Fluent can solve and classify the result from the returned execution evidence.
 
 TUI-driven iteration, Fluent journal/batch submission, and GUI-owned runs require explicit human approval for that specific run. A PyFluent path failure is not permission to switch execution mechanisms automatically.
 
@@ -90,8 +91,8 @@ Stop before mutation or run launch when any of these occurs:
 - an output/recovery file would be overwritten without permission;
 - initialization does not complete successfully;
 - the Python/PyFluent run path cannot execute the approved experiment faithfully;
-- no deterministic terminal completion proof can be defined;
-- the exact Codex session ID for autonomous continuation is unavailable when handoff is required.
+- no deterministic terminal completion proof can be defined for a background hypothesis run;
+- the exact Codex session ID for autonomous continuation is unavailable for a background hypothesis run.
 
 At handoff, state separately:
 
@@ -100,11 +101,11 @@ At handoff, state separately:
 - the deliberately established Fluent working directory;
 - whether initialization and smoke testing completed;
 - the Python runner and remote output paths;
-- the detached job spec and terminal manifest paths;
+- the execution mode;
+- for hypothesis runs, the detached job spec, terminal manifest, and Codex handoff status;
 - whether execution was completed or blocked;
 - the final independently observed progress;
 - the declared and actual locations of recovery, child, final data, `.out`/report files, transcript/log, and verification artifacts;
-- the Codex handoff status;
 - any path anomaly, implementation limitation, or execution limitation that must be reconsidered upstream.
 
 Scientific interpretation belongs downstream.
