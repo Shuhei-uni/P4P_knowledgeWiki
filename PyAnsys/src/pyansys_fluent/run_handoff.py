@@ -1,9 +1,13 @@
-"""Detached run orchestration with terminal manifests and Codex handoff.
+"""Detached hypothesis-run orchestration with mandatory Codex wakeup.
 
-The long-running simulation command is deterministic. This module does not
-interpret CFD results or alter Fluent settings. It owns only process execution,
-terminal verification, durable local status, and the optional event-driven
-handoff to a Codex session after the run reaches a terminal state.
+Discovery runs should not use this module: they stay agent-attached so the
+scientific loop can inspect each short result and immediately choose the next
+probe. This module is the background path for hypothesis-test runs.
+
+A hypothesis job is not valid unless it can wake the originating Codex thread
+on both COMPLETE and BLOCKED. The thread id is read from the job specification
+or, preferably, captured automatically from ``CODEX_THREAD_ID`` inherited from
+the Codex process that launches the worker.
 """
 
 from __future__ import annotations
@@ -22,6 +26,11 @@ import yaml
 
 
 TERMINAL_STATUSES = {"COMPLETE", "BLOCKED"}
+HYPOTHESIS_MODE = "hypothesis-test"
+UTILITY_MODE = "utility"
+SUPPORTED_MODES = {HYPOTHESIS_MODE, UTILITY_MODE}
+CODEX_THREAD_ID_ENV = "CODEX_THREAD_ID"
+CODEX_SESSION_ID_ENV = "CODEX_SESSION_ID"
 
 
 def utc_timestamp() -> str:
@@ -46,6 +55,23 @@ def _resolve(root: Path, value: str | Path) -> Path:
     return path if path.is_absolute() else root / path
 
 
+def resolve_codex_session_id(explicit: Any = None) -> str | None:
+    """Resolve the exact originating Codex thread/session id.
+
+    Prefer an explicit job value when present. Otherwise use CODEX_THREAD_ID,
+    which Codex injects into model-reachable child processes. CODEX_SESSION_ID
+    is kept as a compatibility fallback. Never use a 'most recent' session.
+    """
+    value = str(explicit or "").strip()
+    if value:
+        return value
+    return (
+        os.environ.get(CODEX_THREAD_ID_ENV, "").strip()
+        or os.environ.get(CODEX_SESSION_ID_ENV, "").strip()
+        or None
+    )
+
+
 @dataclass(frozen=True)
 class RequiredFile:
     path: Path
@@ -67,8 +93,8 @@ class CodexHandoff:
             return
         if not self.session_id:
             raise ValueError(
-                "codex.session_id is required when Codex handoff is enabled; "
-                "do not use --last for autonomous multi-job handoff"
+                "Codex handoff requires an explicit originating thread/session id. "
+                "Launch from Codex so CODEX_THREAD_ID can be captured, or set codex.session_id."
             )
         invalid = [status for status in self.trigger_on if status not in TERMINAL_STATUSES]
         if invalid:
@@ -78,6 +104,7 @@ class CodexHandoff:
 @dataclass(frozen=True)
 class RunHandoffSpec:
     job_id: str
+    mode: str
     repo_root: Path
     command: tuple[str, ...]
     working_directory: Path
@@ -94,6 +121,8 @@ class RunHandoffSpec:
     def validate(self) -> None:
         if not self.job_id.strip():
             raise ValueError("job.id must not be empty")
+        if self.mode not in SUPPORTED_MODES:
+            raise ValueError(f"job.mode must be one of {sorted(SUPPORTED_MODES)}")
         if not self.command:
             raise ValueError("runner.command must not be empty")
         for item in self.required_files:
@@ -104,7 +133,26 @@ class RunHandoffSpec:
                 "completion must declare required_files and/or verifier_command so a zero exit code "
                 "is not mistaken for a verified final save"
             )
+
         self.codex.validate()
+
+        if self.mode == HYPOTHESIS_MODE:
+            if not self.codex.enabled:
+                raise ValueError(
+                    "hypothesis-test jobs must enable the Codex wakeup hook; background hypothesis "
+                    "runs may not finish silently"
+                )
+            missing = TERMINAL_STATUSES.difference(self.codex.trigger_on)
+            if missing:
+                raise ValueError(
+                    "hypothesis-test jobs must wake the originating Codex thread on both COMPLETE "
+                    f"and BLOCKED; missing {sorted(missing)}"
+                )
+            if not self.codex.session_id:
+                raise ValueError(
+                    "hypothesis-test jobs require the originating Codex thread id. "
+                    "CODEX_THREAD_ID was not available and codex.session_id was not supplied."
+                )
 
 
 def load_spec(path: Path, *, repo_root: Path) -> RunHandoffSpec:
@@ -120,6 +168,7 @@ def load_spec(path: Path, *, repo_root: Path) -> RunHandoffSpec:
         raise ValueError("job, runner, completion, and codex sections must be YAML mappings")
 
     job_id = str(job.get("id", "")).strip()
+    mode = str(job.get("mode", HYPOTHESIS_MODE)).strip().lower()
     command = _as_command(runner.get("command"), "runner.command")
     working_directory = _resolve(repo_root, str(runner.get("cwd", ".")))
 
@@ -159,21 +208,24 @@ def load_spec(path: Path, *, repo_root: Path) -> RunHandoffSpec:
     verifier_working_directory = _resolve(repo_root, str(completion.get("verifier_cwd", ".")))
     verifier_log_path = _resolve(repo_root, str(completion.get("verifier_log", default_output / "verifier.log")))
 
-    codex_enabled = bool(codex_raw.get("enabled", False))
+    default_codex_enabled = mode == HYPOTHESIS_MODE
+    codex_enabled = bool(codex_raw.get("enabled", default_codex_enabled))
     trigger_on_raw = codex_raw.get("trigger_on", ["COMPLETE", "BLOCKED"])
     if not isinstance(trigger_on_raw, list) or not all(isinstance(item, str) for item in trigger_on_raw):
         raise ValueError("codex.trigger_on must be a list of terminal status names")
     codex = CodexHandoff(
         enabled=codex_enabled,
-        session_id=str(codex_raw.get("session_id", "")).strip() or None,
+        session_id=resolve_codex_session_id(codex_raw.get("session_id")),
         executable=str(codex_raw.get("executable", "codex")),
         working_directory=_resolve(repo_root, str(codex_raw.get("cwd", "."))),
         prompt=str(
             codex_raw.get(
                 "prompt",
-                "The Fluent job has reached a terminal state. Read the job manifest, "
-                "inspect the execution evidence, and continue the scientific workflow. "
-                "If the run completed, analyse it; if it blocked, diagnose the blocker."
+                "The hypothesis-test Fluent job has reached a terminal state. Read the job "
+                "manifest and canonical Project experiment packet, then continue the scientific "
+                "phase loop without waiting for a human prompt. If COMPLETE, analyse the result "
+                "and choose the next action. If BLOCKED, diagnose the blocker and choose the "
+                "appropriate recovery or redesign path."
             )
         ),
         log_path=_resolve(repo_root, str(codex_raw.get("log", default_output / "codex_handoff.log"))),
@@ -182,6 +234,7 @@ def load_spec(path: Path, *, repo_root: Path) -> RunHandoffSpec:
 
     spec = RunHandoffSpec(
         job_id=job_id,
+        mode=mode,
         repo_root=repo_root,
         command=command,
         working_directory=working_directory,
@@ -259,11 +312,13 @@ def _run_verifier(spec: RunHandoffSpec) -> dict[str, Any] | None:
 
 def _base_manifest(spec: RunHandoffSpec) -> dict[str, Any]:
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "job_id": spec.job_id,
+        "mode": spec.mode,
         "status": "PENDING",
         "worker_pid": os.getpid(),
         "repo_root": str(spec.repo_root),
+        "originating_codex_thread_id": spec.codex.session_id if spec.codex.enabled else None,
         "runner": {
             "command": list(spec.command),
             "cwd": str(spec.working_directory),
@@ -274,13 +329,98 @@ def _base_manifest(spec: RunHandoffSpec) -> dict[str, Any]:
             "verifier": None,
         },
         "handoff": {
+            "required": spec.mode == HYPOTHESIS_MODE,
             "enabled": spec.codex.enabled,
             "status": "NOT_STARTED" if spec.codex.enabled else "DISABLED",
         },
     }
 
 
+def _detached_process_kwargs() -> dict[str, Any]:
+    if os.name == "nt":
+        flags = 0
+        flags |= int(getattr(subprocess, "CREATE_NEW_PROCESS_GROUP", 0))
+        flags |= int(getattr(subprocess, "DETACHED_PROCESS", 0))
+        return {"creationflags": flags, "close_fds": True}
+    return {"start_new_session": True, "close_fds": True}
+
+
+def launch_codex_handoff(spec: RunHandoffSpec, manifest: dict[str, Any]) -> dict[str, Any]:
+    status = str(manifest.get("status"))
+    if not spec.codex.enabled:
+        result = {"required": spec.mode == HYPOTHESIS_MODE, "enabled": False, "status": "DISABLED"}
+        manifest["handoff"] = result
+        atomic_write_json(spec.manifest_path, manifest)
+        return result
+    if status not in spec.codex.trigger_on:
+        result = {
+            "required": spec.mode == HYPOTHESIS_MODE,
+            "enabled": True,
+            "status": "SKIPPED",
+            "reason": f"status {status} not in trigger_on",
+        }
+        manifest["handoff"] = result
+        atomic_write_json(spec.manifest_path, manifest)
+        return result
+
+    command = build_codex_command(spec.codex, spec.manifest_path, status)
+    executable = shutil.which(spec.codex.executable)
+    if executable is None:
+        result = {
+            "required": spec.mode == HYPOTHESIS_MODE,
+            "enabled": True,
+            "status": "FAILED",
+            "error": f"Codex executable not found on PATH: {spec.codex.executable}",
+            "command": list(command),
+        }
+        manifest["handoff"] = result
+        atomic_write_json(spec.manifest_path, manifest)
+        return result
+
+    spec.codex.log_path.parent.mkdir(parents=True, exist_ok=True)
+    log = None
+    try:
+        log = spec.codex.log_path.open("a", encoding="utf-8")
+        process = subprocess.Popen(
+            command,
+            cwd=spec.codex.working_directory,
+            env=os.environ.copy(),
+            stdout=log,
+            stderr=subprocess.STDOUT,
+            stdin=subprocess.DEVNULL,
+            text=True,
+            **_detached_process_kwargs(),
+        )
+    except Exception as exc:
+        if log is not None:
+            log.close()
+        result = {
+            "required": spec.mode == HYPOTHESIS_MODE,
+            "enabled": True,
+            "status": "FAILED",
+            "error": f"{type(exc).__name__}: {exc}",
+            "command": list(command),
+            "log": str(spec.codex.log_path),
+        }
+    else:
+        log.close()
+        result = {
+            "required": spec.mode == HYPOTHESIS_MODE,
+            "enabled": True,
+            "status": "LAUNCHED",
+            "pid": process.pid,
+            "command": list(command),
+            "cwd": str(spec.codex.working_directory),
+            "log": str(spec.codex.log_path),
+            "launched_at_utc": utc_timestamp(),
+        }
+    manifest["handoff"] = result
+    atomic_write_json(spec.manifest_path, manifest)
+    return result
+
+
 def run_job(spec: RunHandoffSpec, *, allow_existing_terminal: bool = False) -> dict[str, Any]:
+    """Run one background job and, for hypothesis mode, always execute the wakeup tail."""
     spec.validate()
     if spec.manifest_path.exists() and not allow_existing_terminal:
         try:
@@ -342,82 +482,15 @@ def run_job(spec: RunHandoffSpec, *, allow_existing_terminal: bool = False) -> d
     manifest["status"] = "COMPLETE" if runner_ok and files_ok and verifier_ok else "BLOCKED"
     manifest["finished_at_utc"] = utc_timestamp()
     atomic_write_json(spec.manifest_path, manifest)
+
+    # Mandatory hypothesis-test tail: once terminal evidence is persisted, wake
+    # the exact originating thread without waiting for a human message.
+    if spec.mode == HYPOTHESIS_MODE:
+        launch_codex_handoff(spec, manifest)
+    elif spec.codex.enabled:
+        launch_codex_handoff(spec, manifest)
+
     return manifest
-
-
-def _detached_process_kwargs() -> dict[str, Any]:
-    if os.name == "nt":
-        flags = 0
-        flags |= int(getattr(subprocess, "CREATE_NEW_PROCESS_GROUP", 0))
-        flags |= int(getattr(subprocess, "DETACHED_PROCESS", 0))
-        return {"creationflags": flags, "close_fds": True}
-    return {"start_new_session": True, "close_fds": True}
-
-
-def launch_codex_handoff(spec: RunHandoffSpec, manifest: dict[str, Any]) -> dict[str, Any]:
-    status = str(manifest.get("status"))
-    if not spec.codex.enabled:
-        result = {"enabled": False, "status": "DISABLED"}
-        manifest["handoff"] = result
-        atomic_write_json(spec.manifest_path, manifest)
-        return result
-    if status not in spec.codex.trigger_on:
-        result = {"enabled": True, "status": "SKIPPED", "reason": f"status {status} not in trigger_on"}
-        manifest["handoff"] = result
-        atomic_write_json(spec.manifest_path, manifest)
-        return result
-
-    command = build_codex_command(spec.codex, spec.manifest_path, status)
-    executable = shutil.which(spec.codex.executable)
-    if executable is None:
-        result = {
-            "enabled": True,
-            "status": "FAILED",
-            "error": f"Codex executable not found on PATH: {spec.codex.executable}",
-            "command": list(command),
-        }
-        manifest["handoff"] = result
-        atomic_write_json(spec.manifest_path, manifest)
-        return result
-
-    spec.codex.log_path.parent.mkdir(parents=True, exist_ok=True)
-    log = None
-    try:
-        log = spec.codex.log_path.open("a", encoding="utf-8")
-        process = subprocess.Popen(
-            command,
-            cwd=spec.codex.working_directory,
-            env=os.environ.copy(),
-            stdout=log,
-            stderr=subprocess.STDOUT,
-            stdin=subprocess.DEVNULL,
-            text=True,
-            **_detached_process_kwargs(),
-        )
-    except Exception as exc:
-        if log is not None:
-            log.close()
-        result = {
-            "enabled": True,
-            "status": "FAILED",
-            "error": f"{type(exc).__name__}: {exc}",
-            "command": list(command),
-            "log": str(spec.codex.log_path),
-        }
-    else:
-        log.close()
-        result = {
-            "enabled": True,
-            "status": "LAUNCHED",
-            "pid": process.pid,
-            "command": list(command),
-            "cwd": str(spec.codex.working_directory),
-            "log": str(spec.codex.log_path),
-            "launched_at_utc": utc_timestamp(),
-        }
-    manifest["handoff"] = result
-    atomic_write_json(spec.manifest_path, manifest)
-    return result
 
 
 def launch_detached_worker(
