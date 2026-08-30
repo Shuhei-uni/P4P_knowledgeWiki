@@ -13,11 +13,31 @@ Literature, prior experience, and physical intuition may help explain a result. 
 
 ## Start from the evidence
 
-Read the experiment question, the controlled changes, the working assumptions, the analysis plan, the measured and derived data, the plots, the comparison cases, and the numerical-quality assessment.
+Read the experiment question, the controlled changes, the working assumptions, the analysis plan, the **core figure plan**, the measured and derived data, the resulting plots, the comparison cases, and the numerical-quality assessment.
+
+The planned core figures are the primary visual evidence path because they were designed before the result was known. Check whether each was actually produced from the intended data source, axes, scope, window, and comparison basis.
+
+Do not accept a generic overview dashboard as a substitute for the planned figures. If the analysis produced only broad residual/monitor overviews while the setup defines more discriminating plots, create or request the focused plots before making the main interpretation when the required data exists. If the required history was never instrumented, record the evidence gap rather than inventing a substitute.
 
 If decisive evidence is missing, say what cannot be concluded. If the simulation is numerically inadequate, interpret the numerical behavior that was actually observed without turning it into a physics claim.
 
 A simulation run is not automatically scientific evidence for the intended mechanism. Its value depends on whether the setup represented the intended experiment, whether the required behavior was observed, and whether the numerical solution is credible enough for the claim being made.
+
+## Read figures for their intended message
+
+For each core figure, answer the sub-question it was designed to address before combining the figures into a broader interpretation.
+
+Ask:
+
+- What does the plotted quantity directly show over the declared iteration/time window or spatial domain?
+- What comparison or reference makes that observation meaningful?
+- Does the figure distinguish the competing explanations it was designed to test?
+- Is any reduction, smoothing, normalization, sign conversion, or final-window statistic obscuring important raw behavior?
+- Does the figure need a supporting numerical-quality check before its scientific message can be trusted?
+
+Prefer a few strong figure-linked observations over a catalogue of every plotted variable.
+
+Supporting figures such as full residual dashboards, diagnostic overview plots, or extra contours may help check quality or explain an anomaly, but they should not dominate the scientific narrative unless they materially change the answer to the experiment question.
 
 ## Keep four levels separate
 
@@ -31,7 +51,7 @@ A hypothesis can come from theory, Fluent guidance, literature, previous simulat
 
 What the simulation data directly shows.
 
-Observations should be traceable to a number, history, field, plot, comparison, solver event, or other recorded evidence.
+Observations should be traceable to a number, history, field, **planned core figure**, comparison, solver event, or other recorded evidence.
 
 ### Interpretation
 
@@ -68,7 +88,7 @@ If an assumption remains uncertain but does not materially affect the statement 
 For every important claim, be able to answer:
 
 - What simulation behavior supports this?
-- Where is that behavior recorded?
+- Which core figure, measured value, or supporting artifact records that behavior?
 - What comparison makes the claim meaningful?
 - Is the simulation numerically trustworthy enough for this claim?
 - What else could plausibly explain the same observation?
@@ -113,6 +133,8 @@ A numerical failure, unexpected trend, non-monotonic response, plateau, oscillat
 
 Ask what the evidence changed in our understanding, not whether it matched the prediction.
 
+If an unexpected result makes a different figure more informative than the pre-run plan anticipated, add that figure as a clearly labelled **responsive figure** rather than silently replacing the original core figure set. Preserve the planned figures so the experiment remains auditable.
+
 ## Write the scientific record
 
 `results.md` should preserve the evidence before the story.
@@ -120,7 +142,9 @@ Ask what the evidence changed in our understanding, not whether it matched the p
 Make clear:
 
 - what was actually run;
-- what data and plots were examined;
+- whether the planned core figures were produced completely, partially, or not at all;
+- the few high-impact plots that carry the main scientific argument;
+- what supporting numerical/debug plots were examined separately;
 - what was directly observed;
 - the numerical-quality limitations;
 - the bounded interpretation;
@@ -129,7 +153,7 @@ Make clear:
 - any working assumption that became questioned or materially challenged;
 - what remains unresolved.
 
-Significant claims should be traceable to the evidence that carries them.
+Significant claims should be traceable to the figure or evidence that carries them.
 
 Preserve historical observations and results. Do not silently rewrite old evidence to fit the current interpretation.
 
@@ -138,6 +162,7 @@ Preserve historical observations and results. Do not silently rewrite old eviden
 Return the experiment to the scientific phase with a concise account of:
 
 - what the simulation established;
+- which core figures carry that conclusion;
 - what it did not establish;
 - what changed in the current understanding;
 - whether any relevant working assumption changed state;
