@@ -59,6 +59,7 @@ Current model-invoked specialists:
 - `fluent-case-build-and-run`
 - `fluent-fleet-orchestration`
 - `fluent-live-inspection`
+- `fluent-manual-researcher`
 - `fluent-report-histories`
 - `implement-experiment`
 - `interpret-experiment`
@@ -75,6 +76,8 @@ Current model-invoked specialists:
 - `swarm`
 
 Use the smallest applicable specialist. Supporting skills should hand control back to the calling workflow rather than silently taking over the scientific direction.
+
+For Fluent configuration uncertainty, use `fluent-live-inspection` first when the active live tree can resolve the path, object, state, or allowed value directly. Escalate automatically to `fluent-manual-researcher` when the live tree alone cannot safely determine the setting's meaning, prerequisites, activation order, or verifiable PyFluent/TUI implementation path. Do not guess a Fluent configuration from memory or copy a recipe from another model/version merely to keep implementation moving.
 
 ## 4. Retired / unrouted
 
