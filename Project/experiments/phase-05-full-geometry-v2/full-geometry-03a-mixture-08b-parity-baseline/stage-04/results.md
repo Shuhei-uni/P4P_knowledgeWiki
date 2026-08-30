@@ -206,7 +206,18 @@ Recommended inside-phase direction: **investigate further**, but the next step i
 | phase-planner | skipped | human-only |
 | post-simulation-analysis / research-project-wiki / setup-report | skipped | retired |
 
-Overseer follow-up `29585c0c-aa7d-43ee-aa1e-485f4e00a774` folded in: PR #7 read and not competed with; `run-paths.yaml` created as BLOCKED; journal path left human-gated; Q01 404 ignored; no live job to monitor.
+Overseer follow-up `29585c0c-aa7d-43ee-aa1e-485f4e00a774` was folded during the PNG review. The same map was received again as a user turn; it does **not** start a new experiment. Point-by-point:
+
+| Map item | Action taken | Evidence |
+|---|---|---|
+| 1. Open PR #7 | Read; residual/mass split cited, not redone as a competing `Setups/` packet; `main` not merged | this file; PR #7 left open |
+| 2. No `run-paths.yaml` on `main` | Created Stage-4 `run-paths.yaml` as BLOCKED last-known paths; implement/execute not marked complete | [run-paths.yaml](run-paths.yaml) |
+| 3. Journals human-gated | Historical journal ownership moved out of the live execution contract; new solves are PyFluent unless Shuhei approves that run | [setup.md](setup.md) Execution mechanism |
+| 4. No live git simulation state | Confirmed: no `PyAnsys/output/`, no `server-profiles/*.yaml`, records are `results.md`. Q01 README 404 ignored; smoke remains ~50 iter inside `implement-experiment` | fleet preflight above |
+| 5. Skip-prone gates | Scoring, core figure table, F11 parent hash vs filename, exit-0 ≠ COMPLETE, no `CODEX_THREAD_ID` wakeup all recorded. `monitor_native_run.py --once` must not be used here without credentials: default reconnect is unbounded and hung this checkout | scoring table; core figure plan; `run-paths.yaml` hashes; this row |
+| 6. Mesh / V&V | Mesh `Full-geomV2-231kcells.msh.h5`. V&V pressure-drop, carryover, brine-flow, efficiency targets remain Missing Info | [setup.md](setup.md); [Project/vnv.md](../../../../vnv.md) |
+
+`check-phase-closure` after this confirmation pass is unchanged: **CONTINUE**. No new experiment. Fluent status remains **no live job**.
 
 ## reflect
 
