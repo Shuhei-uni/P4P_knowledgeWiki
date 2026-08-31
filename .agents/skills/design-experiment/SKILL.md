@@ -1,6 +1,6 @@
 ---
 name: design-experiment
-description: "Turn an important scientific uncertainty into a high-information simulation strategy in either discovery mode or hypothesis-test mode. Use when new simulation evidence is needed and the agent must decide what setup or campaign is worth the compute cost, what behavior would be informative, what working assumptions matter, and what data must be captured before the runs."
+description: "Turn the current phase uncertainty into a high-information discovery strategy or, only after verified discovery, a deep hypothesis-qualification strategy. Design the evidence and core figures before compute is spent."
 ---
 
 # Design Experiment
@@ -8,6 +8,22 @@ description: "Turn an important scientific uncertainty into a high-information s
 Design simulations to learn something important, not to generate more cases.
 
 A useful design may be one decisive setup or a campaign of linked setups whose combined evidence answers a question that no single run can. The unit of design is the scientific strategy, not automatically one simulation.
+
+## Respect the mandatory phase lifecycle
+
+This skill has two modes, but they are not interchangeable entry points inside an autonomous phase.
+
+```text
+DISCOVERY DESIGN
+→ discovery runs and analysis
+→ DISCOVERY_EVIDENCE = PASS
+→ HYPOTHESIS_DEFINITION = PASS
+→ HYPOTHESIS-TEST DESIGN
+```
+
+Discovery is the normal first experiment-design stage of a new phase. Hypothesis-test mode is legal only when the phase-root `phase-state.yaml` shows `DISCOVERY_EVIDENCE == PASS` and `HYPOTHESIS_DEFINITION == PASS`, unless the human phase handoff supplied equivalent verified discovery evidence and `verify-phase-transition` accepted it.
+
+Do not bypass the lifecycle because one candidate looks obvious.
 
 ## Start from the uncertainty
 
@@ -21,185 +37,206 @@ Reasoning, literature, previous experience, and prior simulations can shape the 
 
 ## Check for prior experiment collisions before generating candidates
 
-Before proposing new experiments, inspect the retained Project history across all phases, not only the current phase. Start from `Project/index.md`, `Project/experiments/README.md`, relevant phase indexes, `Project/observations/`, and the setup/results records of the closest historical experiments.
+Before proposing new experiments, inspect retained Project history across all phases, not only the current phase. Search by scientific substance: physical mechanism, modelling choice, formulation, boundary condition, numerical change, initialization, operating regime, intended question, and comparison logic.
 
-Search by scientific substance rather than experiment names alone: physical mechanism, modelling choice, formulation, boundary condition, numerical change, initialization, operating regime, intended question, and comparison logic.
-
-For every serious candidate, identify the closest prior experiment or experiments and record:
+For every serious candidate record:
 
 - what was already tested;
 - what happened, including failed, non-converged, partial, rejected, or inconclusive outcomes;
-- the exact scientific delta of the proposed experiment;
-- why existing evidence or additional analysis of existing data does not already answer the question;
-- a novelty judgement: `NEW`, `PARTIAL REPEAT`, `REPLICATION`, or `REDUNDANT`.
+- the exact scientific delta;
+- why existing evidence/additional analysis does not already answer the question;
+- novelty: `NEW`, `PARTIAL REPEAT`, `REPLICATION`, or `REDUNDANT`.
 
-A new setup ID, parent, phase, or slightly different parameter value does not make an experiment scientifically new. Reject `REDUNDANT` candidates before they consume design effort or compute. Keep a `REPLICATION` only when repeating prior work is itself the scientific purpose. A failed or inconclusive historical run still counts as prior work; rerun it only when a specific correction, stronger evidence requirement, or unresolved question makes the new attempt materially different.
+Reject `REDUNDANT` candidates. A failed historical run still counts; rerun only when a concrete correction or unresolved delta makes the new attempt scientifically different.
 
-This collision check applies equally to mainline experiments, discovery cases, and speculative probes.
+This collision check applies equally to mainline, discovery, and speculative work.
 
-## Respect the experiment-design mode
+## Discovery mode — earn a hypothesis
 
-The scientific phase loop has two useful experiment-design modes. Choose based on the kind of uncertainty, not by habit.
+Use discovery mode to determine **what deserves qualification**, not to produce the final phase claim.
 
-### Discovery mode: find where to look
+Use `explore-experiment-space` when breadth is useful. A discovery campaign may contain at most twelve cases; use fewer whenever they span the useful uncertainty. Roughly 500–1,000 iterations per case is a useful project ballpark when sufficient to expose comparative behaviour, not a convergence criterion.
 
-Use discovery mode when literature, previous simulations, and reasoning still leave several plausible directions and the important mechanism or experiment direction is unclear.
+Design discovery for:
 
-Call `explore-experiment-space` to build a quick discovery campaign of at most twelve cases. Twelve is a hard ceiling, not a target; use fewer whenever they span the useful uncertainty adequately. A rough budget of 500 to 1,000 iterations per case is a useful default when that is enough to reveal early comparative behaviour. Treat that range as a planning ballpark, not a universal convergence criterion.
+- breadth across plausible mechanisms/branches;
+- comparability;
+- early response shape and direction;
+- diagnostics that distinguish explanations;
+- enough evidence to formulate a falsifiable hypothesis.
 
-Discovery mode optimises breadth and information across the matrix. Its results are screening evidence: useful for finding promising directions, eliminating weak ones, exposing unexpected behaviour, and sharpening hypotheses. Do not normally turn a short discovery run into a strong claim about settled model behaviour.
+Every discovery strategy must state what it is screening and what outcome would justify deeper qualification.
 
-### Hypothesis-test mode: earn a stronger answer
+### Mandatory discovery output
 
-Use hypothesis-test mode when there is a specific, important question whose answer could support a meaningful scientific statement about the model.
+The discovery design must define the evidence needed so the later analysis can produce:
 
-Prefer one focused experiment or a very small linked campaign, with enough run length and evidence to make the intended judgement credible. A run around 10,000 iterations may be an appropriate ballpark for the current project when that duration is deliberately chosen to expose the required behaviour, but the justified run length comes from the experiment and model rather than from a universal number.
+```text
+candidate hypothesis
+supporting discovery observations
+strongest competing explanation
+why discovery alone is insufficient for the final claim
+what a long qualification run would need to establish
+```
 
-Before spending that compute, make clear what hypothesis is being tested, what observations would support or weaken it, and what histories, plots, contours, balances, or other evidence are required to make the resulting statement.
+A discovery campaign has not succeeded merely because its cases completed. It succeeds when its evidence can narrow the uncertainty enough to earn a specific hypothesis.
 
-A promising discovery case may become the basis of a focused hypothesis test, including an explicitly planned continuation when scientifically legitimate. Do not silently upgrade discovery evidence into hypothesis-test evidence simply because the early result looks convincing.
+Before implementation, `scientific-phase-loop` must obtain `DISCOVERY_DESIGN == PASS` from `verify-phase-transition`.
+
+## Hypothesis-test mode — design for a strong statement
+
+Use hypothesis-test mode only after the hypothesis contract is verified.
+
+Start from the hypothesis contract, not from the most promising discovery setup. Preserve:
+
+- one clear falsifiable hypothesis/question;
+- discovery evidence that motivated it;
+- strongest competing explanation or material alternative;
+- observations that would support it;
+- observations that would weaken/reject it;
+- important assumptions and claim limits.
+
+### Write the intended claim form before designing the run
+
+State the form of strong statement the evidence should be capable of supporting, without predicting which answer will occur.
+
+For example:
+
+> Under the specified model and boundary conditions, the carrier solution is or is not demonstrably bounded and phase-mass-closed over the declared qualification window.
+
+Then work backward from that statement. If a piece of evidence would be required to make the statement defensible, instrument it before the solve.
+
+### Long qualification depth is mandatory
+
+For ordinary steady iteration-based full-geometry hypothesis qualification in this project, the planned horizon must be **at least 10,000 iterations** by default.
+
+For slow inventory, routing, stationarity, or convergence questions, 10k–30k or another deliberately justified longer horizon may be appropriate.
+
+A shorter hypothesis run is allowed only when:
+
+- the human explicitly approves the exception; or
+- the experiment uses a scientifically equivalent non-iteration qualification basis appropriate to the model/question.
+
+Do not relabel a 500–1,000 iteration discovery screen as `hypothesis-test`.
+
+When the intended claim depends on steady/stationary/bounded/reference behaviour, include a deliberate continuation or cold save/reopen qualification window when needed to distinguish a durable state from a favourable transient.
+
+### Hypothesis qualification contract
+
+Record at minimum:
+
+```yaml
+hypothesis: ...
+discovery_basis: ...
+competing_explanation: ...
+intended_statement_form: ...
+would_support: ...
+would_weaken: ...
+qualification_horizon: ...
+qualification_window: ...
+restart_or_continuation_requirement: ...
+required_numerical_evidence: ...
+required_physical_evidence: ...
+required_core_figures: ...
+```
+
+If numerical credibility is necessary to the claim, scaled residual/equation histories or another explicitly justified equivalent are **required evidence**, not optional post-run decoration.
+
+Missing required evidence after the run means the evidence gate fails; do not design a contract whose requirements the implementation cannot actually capture.
 
 ## Use the live fleet as a constraint and opportunity
 
-When this design will require new Fluent compute, use the current resource envelope from `fluent-fleet-orchestration`. If no current fleet snapshot exists, obtain one before finalizing the runnable strategy.
+Use the current resource envelope from `fluent-fleet-orchestration` before finalizing runnable work.
 
-Know which servers are actually available now and which exact parent/recovery artifacts are already local, available through OneDrive, transferable from another active server, or stranded on an unavailable machine.
+Know which servers are reachable, which exact parents/recovery states are available locally or through OneDrive, and which sessions the active scientific goal can take over under its authority envelope.
 
-Let this affect **campaign shape and execution efficiency**, not the scientific question itself:
+Let fleet state influence campaign shape and execution efficiency, not the scientific question itself.
 
-- if several independent, worthwhile branches already exist and several servers are active, prefer a portfolio that can run them concurrently;
-- for discovery work, consider wave-based matrices that use the active fleet and re-evaluate later cases after early evidence arrives;
-- favor strategies whose exact parents can be staged safely without unnecessary duplication or reconstruction;
-- account for transfer/recovery cost when two strategies are scientifically comparable.
+When two or more servers are usable for new compute, include a justified bold-probe candidate for the dedicated bold lane. Call `bold-probe-research` before selecting it. Do not invent weak extra cases merely to use idle capacity.
 
-When the live fleet has two or more servers usable for new compute, the runnable portfolio must include at least one bold speculative probe suitable for the loop's dedicated bold-probe lane. Do not let ordinary mainline work consume every usable server merely because it can. The bold candidate must still pass the prior-experiment collision check and have a clear learning target; generate a genuinely different question, mechanism, formulation, regime, or challenged assumption rather than a cosmetic variation.
+Keep setup identity server-neutral. Placement is resolved later.
 
-Do not create weak extra cases merely because a server is idle. If no non-redundant, interpretable bold probe can be justified within the current modelling and execution boundaries, say why rather than disguising filler as exploration; the scientific loop then decides whether analysis, literature work, or a human boundary is needed to create a valid next probe.
-
-Keep scientific setup identity server-neutral. Server assignment and local paths are resolved after setup creation by `fluent-fleet-orchestration`.
-
-## Record working assumptions without becoming fixated on them
-
-Alongside the hypothesis, list the assumptions that are being accepted so the experiment can be interpreted. These may concern the model formulation, mesh adequacy, initialization, boundary treatment, monitor meaning, numerical scheme, comparison basis, or other conditions that are not the direct target of the experiment.
+## Record working assumptions without hiding missing facts
 
 Keep hypotheses and assumptions distinct:
 
-- a **hypothesis** is something the experiment is actively trying to test;
-- a **working assumption** is something being treated as acceptable for now so the test can proceed.
+- **hypothesis** — actively tested;
+- **working assumption** — accepted temporarily so the test can proceed;
+- **missing human-owned fact** — cannot be replaced by an assumption unless the phase contract explicitly authorizes a surrogate class.
 
-Do not turn every assumption into another experiment. Record only assumptions that materially shape the interpretation or could plausibly limit the conclusion.
+Use `accepted-for-now`, `questioned`, and `materially-challenged` where useful.
 
-Use three practical states when useful:
-
-- `accepted-for-now`;
-- `questioned`;
-- `materially-challenged`.
-
-Assumptions should be revisited when evidence makes them relevant, not continuously attacked by default. A materially challenged assumption may become a future experiment target if it could change the phase-level conclusion.
+If an assumption would materially determine the answer rather than merely bound it, surface that before compute. If it crosses a human boundary, the correct result is `HUMAN_REQUIRED`, not an invented target or plant parameter.
 
 ## Design the smallest useful strategy
 
-Prefer the smallest simulation strategy that can produce the needed learning within the selected mode.
+Prefer the smallest strategy that can produce the needed learning **at the required evidence depth**.
 
-In hypothesis-test mode, that may be one discriminating run, a pair of controlled comparisons, a short sensitivity series, or a staged campaign where later setups become meaningful only in relation to earlier ones.
+In discovery this may be a bounded small matrix because breadth is the information source.
 
-In discovery mode, the smallest useful strategy may deliberately be a bounded multi-case matrix because breadth is the information source. Keep it to the fewest cases that meaningfully span the plausible directions, never more than twelve quick screening cases.
+In hypothesis-test mode this may be one deep run, a controlled pair, or a very small linked campaign. “Smallest” must not be used to shrink the qualification horizon until the intended claim is no longer supportable.
 
-A supporting setup does not need high standalone impact if it creates the reference, comparison, or sequence that makes the campaign informative.
+## Design evidence and figures before the run
 
-## Design the evidence and figure plan at the same time
+Analysis planning is part of experiment design.
 
-Analysis planning is part of experiment design, not an afterthought.
-
-For each hypothesis or comparison, decide what result would let you judge it and what evidence must therefore exist when the run finishes. Work backward from the judgement you want to make.
-
-Prefer evidence that shows behaviour over the run rather than only a final snapshot. Iteration/time histories, residuals, balances, physical monitors, fluxes, inventories, and other question-specific values often tell much more than one endpoint.
+For each hypothesis/comparison decide what result would let you judge it and what evidence must therefore exist when the run finishes. Prefer behaviour over the run rather than only an endpoint.
 
 ### Require a small core figure set
 
-Do not merely request an "overview plot" or plot every available monitor. Define a **small core figure set** before the run whose purpose is to answer the scientific question as directly as possible.
+Default:
 
-As a default:
+- discovery: usually `1–3` reusable core figures;
+- hypothesis qualification: usually `2–5` core figures supporting distinct reasoning steps.
 
-- discovery mode: usually `1-3` core figures reused consistently across the screening cases;
-- hypothesis-test mode: usually `2-5` core figures, each supporting a distinct reasoning step;
-- additional overview/debug plots may exist as supporting artifacts, but they do **not** count as core scientific figures unless they directly answer the question.
+The first core figure should normally be the most direct visual answer to the experiment question. Generic residual dashboards are supporting numerical evidence unless convergence itself is the question.
 
-The first core figure should normally be the most direct visual answer to the experiment question. Later figures should explain the mechanism, comparison, or numerical adequacy needed to interpret that answer.
-
-Residuals and generic convergence dashboards are supporting numerical evidence by default. Promote them into the core figure set only when convergence or solver behaviour is itself part of the hypothesis.
-
-### Specify each planned figure explicitly
-
-For every core figure, record:
+For every core figure specify:
 
 | Field | Required content |
 |---|---|
-| `figure_id` | Stable short name such as `F1`, `F2` |
-| `question` | The exact sub-question this figure answers |
-| `message` | What scientific distinction the figure is intended to make, without predicting the result |
-| `plot_type` | History, contour, profile, targeted comparison, scatter, bar, etc. |
-| `x_axis` | Quantity, units, and domain/window; use iteration or physical time for evolving behaviour unless another axis is scientifically more informative |
-| `y_axis_or_field` | Exact quantity/field, units, sign convention, phase/surface/zone scope |
-| `series_or_cases` | Which variables/cases belong together and why |
-| `comparison_basis` | Parent/reference/baseline, aligned window, normalization, threshold, or none |
-| `reduction` | Raw, mean, rolling statistic, final-window range, area/volume average, integral, etc. |
-| `data_source` | Monitor, report definition, `.out` history, case/data field, derived calculation, checkpoint, etc. |
-| `pre_run_instrumentation` | Anything that must exist before solving so the figure can be produced |
-| `interpretation_use` | What observation in this figure would support, weaken, or distinguish the competing explanations |
+| `figure_id` | Stable ID |
+| `question` | Exact sub-question |
+| `message` | Scientific distinction, without predicting result |
+| `plot_type` | History/contour/profile/comparison/etc. |
+| `x_axis` | Quantity, units, window |
+| `y_axis_or_field` | Exact quantity/field, units, sign, phase/zone scope |
+| `series_or_cases` | What belongs together and why |
+| `comparison_basis` | Parent/reference/window/normalization |
+| `reduction` | Raw/mean/final-window/etc. |
+| `data_source` | Monitor/report/case-data/derived/checkpoint |
+| `pre_run_instrumentation` | What must exist before solve |
+| `interpretation_use` | What observation distinguishes explanations |
 
-If one of these items is genuinely not applicable, say so rather than leaving the plot concept vague.
+### Figure and evidence rules
 
-### Figure-design rules
+- one scientific message per figure;
+- use iteration/physical time for evolving quantities unless another axis is more informative;
+- avoid unfocused spaghetti plots and unnecessary dual axes;
+- preserve raw oscillation/drift even when showing reductions;
+- contours must answer a spatial question;
+- define units, sign conventions, phase/zone scope, and comparison windows;
+- if a decisive history cannot be reconstructed from final data, require its monitor/report before the run;
+- define derived metrics before execution.
 
-- Prefer **one scientific message per figure**. Do not dump many unrelated monitors into one panel simply because they are available.
-- For quantities that evolve during the solve, iteration or physical time should normally be the x-axis. Use endpoint bars/scatters only when the comparison or relationship itself is the scientific question.
-- Use targeted comparisons. Do not create unreadable all-branch spaghetti plots when a branch-by-branch history or a small controlled comparison communicates the result more clearly.
-- Keep units, sign conventions, phase/zone scope, reference definitions, and comparison windows explicit.
-- Avoid dual y-axes unless there is a strong scientific reason; separate figures are usually clearer.
-- Do not smooth away oscillations, reversals, drift, or failure tails. If a smoothed/reduced view is useful, preserve the raw history and state the reduction.
-- A contour must answer a spatial question. Do not add generic velocity/pressure/volume-fraction contours merely because they are easy to produce.
-- A figure can contain matched panels when the panels together answer one question; do not use panels as a way to hide an unfocused plot dump.
-- For linked cases, keep definitions and axes comparable where the scientific comparison depends on them. Do not force identical limits when doing so would hide an important feature; record any deliberate difference.
+The later analysis agent should be able to create the key figures without inventing the scientific story after seeing the data.
 
-### Plan the evidence behind the figures
+## Generate and challenge candidate strategies
 
-The plot plan is also an instrumentation contract. If the decisive figure needs a history that cannot be reconstructed from the final `.dat.h5`, require the corresponding report definition/file/monitor before the run begins.
+When several plausible strategies exist, generate a small set of genuinely different approaches. Use `arena`, independent subagents, or literature-focused `swarm` when useful.
 
-If the planned figure uses a derived metric, define the calculation, units, sign convention, source quantities, and comparison window now.
+Call `question-experiment` before selection.
 
-For linked setups or discovery matrices, make the evidence comparable enough that the intended comparison is actually possible.
+For hypothesis qualification, independent challenge is mandatory. The reviewer must check not only scientific value, interpretability, and cost, but also whether the proposed evidence/horizon could actually support the intended strong statement and whether a human lock or material missing fact is being bypassed.
 
-The output of this section should make it possible for a later analysis agent to create the high-impact figures without inventing the scientific story after seeing the data.
-
-## Design for interpretation
-
-Identify the reference or parent state, the intentional changes, and the important conditions that should remain comparable across the setup or setup series.
-
-Think about confounders before paying for the runs. Initialization, run length, mesh, timestep, numerical scheme, boundary conditions, monitor definitions, and comparison windows can all change the meaning of the result.
-
-Do not demand artificial purity when the science requires a larger formulation change. Make the comparison and its limitations explicit instead.
-
-## Generate and question candidate strategies
-
-When several plausible ways exist to attack the uncertainty, generate a small set of genuinely different experiment strategies. A strategy may contain one setup or several linked setups.
-
-Use independent subagents, `arena`, or literature-focused `swarm` work when they help expose better alternatives.
-
-Then call `question-experiment` before selection. Judge each strategy against past simulation evidence, relevant literature or CFD guidance, and the three key criteria:
-
-1. scientific value;
-2. evidence and interpretability;
-3. cost-effectiveness.
-
-Apply those criteria in the context of the chosen mode. Discovery strategies can earn their place through combined screening value across a matrix; hypothesis-test strategies should earn the greater compute through the strength of the answer they could support.
-
-The purpose is to make every candidate earn its place through the same evidence-based judgement. `question-experiment` may recommend keeping, reshaping, merging, splitting, deferring, or rejecting strategies.
+`question-experiment` recommends a strategy. It does not grant lifecycle permission.
 
 ## Select and formalize
 
-Choose the best justified strategy for the current uncertainty and mode. The selected strategy may be a focused setup, a small linked campaign, or a bounded discovery matrix.
+Choose the best justified strategy for the current mode, then call `create-setup`.
 
-Then call `create-setup` to convert that strategy into the required server-neutral setup records. `design-experiment` owns why the experiment strategy is worth doing, what working assumptions bound it, what evidence will judge it, and the core figure plan that communicates that evidence. `create-setup` owns the precise scientific handoff; `fluent-fleet-orchestration` later resolves exact placement, staging, and durable artifact handling.
+Before discovery implementation, require `DISCOVERY_DESIGN == PASS` from `verify-phase-transition`.
 
-Do not write predicted results into the setup records. The strategy defines what will be tested, what would be informative, and how the evidence should be visualised; the simulation data decides what actually happened.
+Before hypothesis qualification launch, require `HYPOTHESIS_RUN_READY == PASS` after setup creation, implementation readback/save-reopen/smoke, instrumentation verification, horizon verification, and the runtime-specific self-wake contract are all in place.
+
+Do not write predicted results into setup records. The setup defines what will be tested, what evidence will judge it, and how that evidence should be visualised. Simulation data decides what happened.
