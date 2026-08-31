@@ -1,7 +1,7 @@
 interface:
   display_name: "Scientific Phase Loop"
   short_description: "Run a verified discovery-to-hypothesis scientific phase autonomously."
-  default_prompt: "Use $scientific-phase-loop to run this agreed phase autonomously through its mandatory verified lifecycle. Take the experiment-selection and Fluent fleet/session authority granted by the phase contract. Do not skip or self-waive transition gates. Discovery must stay attached until each short run returns terminal evidence and must continue until it earns a falsifiable hypothesis. Then design and execute a genuinely long hypothesis qualification using the verified evidence contract; on Codex use the exact-thread self-waking handoff path. Continue from phase-state.yaml after every run/wake. Finish only when PHASE_CLOSURE passes and the phase is concluded, or when a genuine HUMAN_REQUIRED lock is reached."
+  default_prompt: "Use $scientific-phase-loop to run this agreed phase autonomously through its mandatory verified lifecycle. Take the experiment-selection and Fluent fleet/session authority granted by the phase contract. Do not skip or self-waive transition gates. Discovery must stay attached until each short run returns terminal evidence, must execute at least 6 and at most 12 valid discovery cases, and must compare them before promoting a falsifiable hypothesis. Then design and execute a genuinely long hypothesis qualification using the verified evidence contract; on Codex use the exact-thread self-waking handoff path. Continue from phase-state.yaml after every run/wake. Finish only when PHASE_CLOSURE passes and the phase is concluded, or when a genuine HUMAN_REQUIRED lock is reached."
 
 policy:
   allow_implicit_invocation: true
