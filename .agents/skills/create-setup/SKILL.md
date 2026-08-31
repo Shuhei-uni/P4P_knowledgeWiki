@@ -1,75 +1,136 @@
 ---
 name: create-setup
-description: "Turn one selected and justified experiment strategy into one or more clear setup records for implementation. Use after design-experiment and question-experiment have selected the strategy, before implement-experiment builds or runs the Fluent cases."
+description: "Turn a selected and justified discovery or hypothesis strategy into precise server-neutral setup records, preserving lifecycle permission, evidence requirements, core figures, qualification horizon, and claim limits for faithful implementation."
 ---
 
 # Create Setup
 
 Turn a selected experiment strategy into precise scientific and implementation handoffs.
 
-The strategy may require one setup or several linked setups. Create the smallest set of setup records needed to preserve the intended campaign logic.
+Do not redesign the strategy here. Preserve the reasoning and make the setup explicit enough that a fresh implementation agent can execute it without reconstructing the design conversation.
 
-Do not redesign the strategy here. Preserve the reasoning that justified it and make each intended test explicit enough that a fresh implementation agent can build and run it without needing the design conversation.
+## Require the correct lifecycle state
+
+Read the phase-root `phase-state.yaml`.
+
+For a **discovery** setup require `DISCOVERY_DESIGN == PASS`.
+
+For a **hypothesis-test** setup require:
+
+```text
+DISCOVERY_EVIDENCE == PASS
+HYPOTHESIS_DEFINITION == PASS
+question-experiment completed with no surviving blocker
+```
+
+Do not create later-stage setup records under an unresolved `HUMAN_REQUIRED` lock.
+
+Do not convert missing human-owned information into an assumed surrogate unless the phase contract explicitly authorizes that surrogate class.
 
 ## Carry forward the scientific intent
 
-The setup record or linked setup set should make clear the phase question, the uncertainty being tested, the hypothesis or competing explanations, why the strategy was selected, the prior simulation or literature evidence that informed it, and what the experiment is intended to teach without predicting the result as fact.
+Every setup or linked setup set should make clear:
 
-When several setups belong together, make their relationship explicit: what each setup contributes, what comparison or sequence links them, and why the combined evidence is useful.
+- phase question;
+- lifecycle mode: `discovery` or `hypothesis-test`;
+- uncertainty/hypothesis being tested;
+- competing explanation where relevant;
+- why the strategy was selected;
+- prior simulation/literature evidence that informed it;
+- exact parent/reference artifact identity;
+- intentional change and frozen comparison context;
+- what the experiment is intended to teach without predicting the result.
+
+For a hypothesis setup also preserve the verified hypothesis contract:
+
+```text
+hypothesis
+verified discovery basis
+competing explanation / material alternative
+intended strong statement form
+what would support it
+what would weaken/reject it
+important assumptions / claim limits
+```
 
 ## Define each experiment boundary
 
-For every setup, state the verified parent/reference artifact, the intentional change, and what must remain comparable.
+For every setup state the verified parent/reference artifact, intentional delta, and invariants.
 
-Prefer a server-neutral parent artifact identity over a machine-specific path. When available, record the artifact ID and enough provenance to distinguish the exact parent case/data state from similarly named files. Server identities and local paths belong to the later execution plan created by `fluent-fleet-orchestration`, not to the scientific meaning of the setup.
+Prefer server-neutral artifact identity over machine paths. Server assignment and local paths belong later in `run-paths.yaml` through `fluent-fleet-orchestration`.
 
-Make clear which settings are inherited, which are deliberately changed, and which differences would compromise interpretation.
+If an ambiguity would materially change the experiment, return it upstream rather than silently choosing.
 
-If the selected strategy still contains an ambiguity that would materially change the experiment, return it for clarification rather than silently choosing.
+## Carry the evidence and figure design unchanged
 
-## Carry the analysis and figure design into the setup
+The evidence plan and core figure plan from `design-experiment` are part of the setup contract, not optional suggestions.
 
-The evidence plan and core figure plan created during `design-experiment` belong in the setup contract. Do not reduce them to a vague instruction such as "plot monitors" or "create overview plots."
+Record all required histories, reports, fields, fluxes, balances, residual/equation histories, contours, checkpoints, and derived metrics needed to judge the experiment.
 
-Record the histories, monitors, report definitions, fields, fluxes, contours, checkpoints, or other outputs required to judge the hypothesis. Prefer iteration/time histories where behaviour over the run matters rather than relying on one final snapshot.
+If a quantity cannot be reconstructed after the run, mark its instrumentation as a **hard pre-run requirement**.
 
 ### Preserve the core figure contract
 
-Include a compact **Core figure plan** in `setup.md`. Preserve each planned figure's scientific purpose and enough technical detail for a fresh analysis agent to reproduce it without redesigning the story after seeing the data.
-
-For each core figure, record at minimum:
+Include a compact **Core figure plan**. For each core figure record at least:
 
 | Field | Required content |
 |---|---|
-| Figure | Stable ID and short title |
-| Question | Exact sub-question answered |
-| Plot | Plot type and intended scientific message |
-| X-axis | Quantity, units, and full/selected window |
-| Y-axis / field | Exact quantity, units, sign convention, phase/zone/surface scope |
+| Figure | Stable ID/title |
+| Question | Exact sub-question |
+| Plot | Plot type and intended message |
+| X-axis | Quantity, units, window |
+| Y-axis / field | Exact quantity, units, sign, phase/zone/surface scope |
 | Series / cases | What belongs together and why |
-| Comparison basis | Parent/reference/window/normalization/threshold if relevant |
-| Reduction | Raw/history/final-window statistic/mean/range/integral/etc. |
-| Data source | Monitor/report file/case-data field/derived calculation/checkpoint |
-| Instrumentation | What must exist before the solve |
-| Interpretation use | What observation would support, weaken, or distinguish the competing explanations |
+| Comparison basis | Parent/reference/window/normalization/threshold |
+| Reduction | Raw/history/final-window statistic/etc. |
+| Data source | Monitor/report/case-data/derived/checkpoint |
+| Instrumentation | What must exist before solve |
+| Interpretation use | What observation supports/weakens/distinguishes explanations |
 
-The setup should normally carry only a few core figures: roughly `1-3` for discovery screening and `2-5` for a focused hypothesis test. Supporting numerical/debug figures may be generated later, but they should remain clearly secondary.
+Typical core-figure counts remain roughly `1–3` for discovery and `2–5` for hypothesis qualification. Supporting debug figures are secondary.
 
-The first core figure should normally be the most direct visual answer to the experiment question. Do not let a residual dashboard or generic multi-monitor overview displace it unless numerical convergence itself is the question.
+The first core figure should normally be the most direct visual answer to the experiment question.
 
-If a quantity cannot be reconstructed after the run, make its instrumentation an explicit pre-run requirement. For linked setups, preserve compatible definitions, units, sign conventions, output bases, and comparison windows wherever the campaign depends on cross-case comparison.
+## Define the run intent explicitly
 
-## Define the run intent
+Record:
 
-Specify enough about initialization when required, run mode, fixed iteration target, numerical settings, checkpointing, and comparison basis for `implement-experiment` to reproduce the intended tests.
+- initialization intent;
+- run mode;
+- fixed iteration/time horizon;
+- qualification/final analysis window;
+- numerical settings that are part of the experiment;
+- checkpoint/autosave intent;
+- continuation/restart qualification when required;
+- durability intent for final/selected recovery states.
 
-When the resulting final state is scientifically important, likely to become a future parent, or expensive to reproduce, mark it for durable preservation as a complete paired case+data artifact. Likewise, identify any deliberately selected recovery checkpoint worth preserving beyond the local server. Do not request OneDrive promotion for every routine autosave.
+### Hypothesis qualification depth
 
-Do not invent unnecessary Fluent detail. Prefer a clear delta from a verified parent/reference case where that is safer and easier to audit.
+For ordinary steady iteration-based full-geometry hypothesis qualification, the setup must specify at least **10,000 iterations** unless it records:
+
+- an explicit human-approved shorter-run exception; or
+- a scientifically equivalent non-iteration qualification basis.
+
+For slow inventory/routing/stationarity questions, use the deeper horizon selected by `design-experiment`, often 10k–30k.
+
+Do not write `hypothesis-test` on a discovery-scale run and expect downstream skills to accept it.
+
+When the intended statement depends on steady/stationary/bounded/reference behaviour, carry any required continuation or cold save/reopen qualification window into the setup.
+
+## Make required evidence non-waivable after the run
+
+Separate:
+
+- **required evidence** — must exist for the intended judgement;
+- **supporting evidence** — useful but not gate-critical.
+
+If scaled residual history, a phase balance, a checkpoint comparison, or another signal is listed as required, later agents must not quietly waive it because the run finished without it.
+
+Changing the evidence contract after seeing the result requires an explicit upstream redesign; it is not an interpretation convenience.
 
 ## Keep the experiment packet together
 
-The canonical experiment directory should keep these three records together:
+Use:
 
 ```text
 experiment/
@@ -78,24 +139,35 @@ experiment/
 └── results.md
 ```
 
-`setup.md` is the server-neutral scientific contract. `run-paths.yaml` is populated later by `fluent-fleet-orchestration` once live placement and exact filesystem destinations are known. `results.md` records the resulting evidence and interpretation.
+`setup.md` is server-neutral scientific intent. `run-paths.yaml` is populated by `fluent-fleet-orchestration`. `results.md` records resulting evidence/interpretation.
 
-Do not put machine-specific server paths into `setup.md` merely because they are known at setup time. Do not create a second durable path manifest elsewhere. Keeping the three records together makes a fresh agent able to recover what was intended, where the actual run/artifacts lived, and what happened.
+Do not put server paths into `setup.md` just because they are known.
 
 ## Preserve uncertainty
 
 A setup is a plan, not a result.
 
-Keep hypotheses labelled as hypotheses. Do not write expected trends as conclusions, and do not add acceptance criteria that were never part of the experiment design.
+Keep hypotheses labelled as hypotheses. Do not write expected trends as conclusions or add post-hoc acceptance criteria.
 
-The figure plan may state what observations would discriminate between competing explanations, but it must not pre-label which result the simulation will produce.
+The figure/evidence plan may state what observations discriminate explanations, but not which result Fluent will produce.
 
 ## Output
 
-Create or update one `setup.md` per distinct simulation in the selected strategy, using the repository's canonical experiment location and naming conventions.
+Create/update one `setup.md` per distinct simulation in the selected strategy.
 
-A useful setup record contains the question and rationale, hypothesis, prior evidence, parent/reference artifact identity, controlled change, frozen comparison context, run intent, required evidence, **core figure plan**, important assumptions and limitations, durability intent for final/selected recovery states, and any relationship to the wider linked campaign.
+A complete setup should contain:
 
-Do not bind the setup to a server merely because the parent currently lives there. After setup creation, `fluent-fleet-orchestration` resolves the current live server placement, verified parent source, any OneDrive transfer, exact runtime server reference, and exact remote paths into the sibling `run-paths.yaml`.
+- phase/lifecycle mode and prerequisite gate references;
+- question/rationale/hypothesis;
+- prior evidence and competing explanation where relevant;
+- parent/reference artifact identity;
+- controlled delta and invariants;
+- run/qualification intent and horizon;
+- required versus supporting evidence;
+- core figure plan;
+- assumptions/limits;
+- continuation/restart requirement if any;
+- durability intent;
+- linked-campaign relationship when applicable.
 
-The handoff is complete when `fluent-fleet-orchestration` can place the setup, `implement-experiment` can build and run it from the exact resolved parent, and `interpret-experiment` can later recover both the purpose of the run and the exact evidence/figure logic of the combined experiment strategy.
+The handoff is complete when `fluent-fleet-orchestration` can place it, `implement-experiment` can prove and execute it faithfully, and later analysis can judge the exact predeclared evidence without inventing a new story after the run.
