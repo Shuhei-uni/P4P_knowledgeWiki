@@ -19,7 +19,7 @@ Use a fresh independent reviewer/subagent whenever the runtime supports subagent
 
 Where useful, use `interrogate` as the adversarial-review pattern. The main scientific agent may synthesize factual corrections, but it may not convert a surviving blocker into a pass merely because it disagrees with the reviewer.
 
-Machine-checkable requirements should be checked deterministically before scientific judgement. Do not ask a reviewer to infer whether a file exists, whether the requested iteration count was reached, or whether a recorded gate is already blocked when those facts can be verified directly.
+Machine-checkable requirements should be checked deterministically before scientific judgement. Do not ask a reviewer to infer whether a file exists, whether the requested iteration count was reached, how many valid discovery cases completed, or whether a recorded gate is already blocked when those facts can be verified directly.
 
 ## Allowed outputs
 
@@ -57,10 +57,14 @@ Require:
 - current phase uncertainty is explicit;
 - prior-experiment collision check completed;
 - discovery strategy is genuinely screening/diagnostic rather than a disguised qualification claim;
+- the planned discovery campaign contains **at least 6 and at most 12 cases**;
+- the six-case minimum is not being waived simply because an early candidate looks promising;
 - required monitors/histories and core figures are specified before execution;
 - each proposed case can teach something relevant;
 - bold-probe research has been performed when a bold lane is required;
 - no unresolved human lock is being bypassed with an invented surrogate unless the phase contract explicitly authorizes that surrogate class.
+
+Return `BLOCK` when fewer than six discovery cases are planned. A different discovery case-count rule requires explicit human phase-level authorization.
 
 ### `DISCOVERY_EXECUTION`
 
@@ -81,13 +85,16 @@ A tool/RPC timeout while Fluent is still solving is not terminal discovery evide
 
 Require:
 
-- the completed discovery runs have been analysed, not merely listed;
+- **at least six valid discovery cases have completed** and passed their execution requirements;
+- the completed discovery runs have been compared and analysed, not merely listed;
 - the planned core figures/equivalent decisive evidence exist;
 - important numerical/physical caveats are identified;
 - discovery has materially narrowed the uncertainty;
 - at least one specific, falsifiable hypothesis is supported strongly enough to justify qualification compute;
 - a meaningful competing explanation or claim limit is stated;
 - discovery evidence is not being presented as the final qualification result.
+
+Do not pass because one or two early cases look decisive. The six-case minimum is intended to provide comparative breadth before hypothesis promotion. If fewer than six valid cases exist, return `BLOCK`. If six cases are complete but uncertainty remains broad, require additional discovery up to the twelve-case ceiling or a redesigned discovery strategy.
 
 If no defensible hypothesis has emerged, return `BLOCK` and require more/better discovery rather than permitting a weak hypothesis test.
 
