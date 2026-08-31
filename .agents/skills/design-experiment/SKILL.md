@@ -55,7 +55,7 @@ This collision check applies equally to mainline, discovery, and speculative wor
 
 Use discovery mode to determine **what deserves qualification**, not to produce the final phase claim.
 
-Use `explore-experiment-space` when breadth is useful. A discovery campaign may contain at most twelve cases; use fewer whenever they span the useful uncertainty. Roughly 500–1,000 iterations per case is a useful project ballpark when sufficient to expose comparative behaviour, not a convergence criterion.
+Use `explore-experiment-space` when breadth is useful. Every discovery campaign must contain **at least six and at most twelve cases**. Six is the hard minimum needed before discovery evidence can promote a hypothesis; twelve is the hard ceiling. Choose between six and twelve based on the uncertainty and compute available, but do not stop after one or two promising cases merely because a direction appears obvious. Roughly 500–1,000 iterations per case is a useful project ballpark when sufficient to expose comparative behaviour, not a convergence criterion.
 
 Design discovery for:
 
@@ -79,7 +79,7 @@ why discovery alone is insufficient for the final claim
 what a long qualification run would need to establish
 ```
 
-A discovery campaign has not succeeded merely because its cases completed. It succeeds when its evidence can narrow the uncertainty enough to earn a specific hypothesis.
+A discovery campaign has not succeeded merely because its cases completed. It succeeds when at least six valid discovery cases have completed, their evidence has been compared, and that evidence narrows the uncertainty enough to earn a specific hypothesis.
 
 Before implementation, `scientific-phase-loop` must obtain `DISCOVERY_DESIGN == PASS` from `verify-phase-transition`.
 
@@ -172,7 +172,7 @@ If an assumption would materially determine the answer rather than merely bound 
 
 Prefer the smallest strategy that can produce the needed learning **at the required evidence depth**.
 
-In discovery this may be a bounded small matrix because breadth is the information source.
+In discovery the smallest valid strategy is six cases; expand up to twelve when additional breadth is scientifically useful.
 
 In hypothesis-test mode this may be one deep run, a controlled pair, or a very small linked campaign. “Smallest” must not be used to shrink the qualification horizon until the intended claim is no longer supportable.
 
