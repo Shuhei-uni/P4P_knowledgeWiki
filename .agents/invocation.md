@@ -79,8 +79,29 @@ Current model-invoked specialists:
 - `statistical-analysis`
 - `supervise-fluent-run`
 - `swarm`
+- `verify-phase-transition`
 
 Use the smallest applicable specialist. Supporting skills should hand control back to the calling workflow rather than silently taking over the scientific direction.
+
+### Mandatory scientific phase lifecycle
+
+When `scientific-phase-loop` is active, its lifecycle is mandatory rather than advisory:
+
+```text
+PHASE_CONTRACT
+→ DISCOVERY_DESIGN
+→ DISCOVERY_EXECUTION / DISCOVERY_EVIDENCE
+→ HYPOTHESIS_DEFINITION
+→ HYPOTHESIS_RUN_READY
+→ HYPOTHESIS_EXECUTION / HYPOTHESIS_EVIDENCE
+→ PHASE_CLOSURE
+```
+
+Every state-changing transition must invoke `verify-phase-transition`. A `BLOCK` or `HUMAN_REQUIRED` result may not be self-overruled by the scientific loop or another specialist.
+
+Normal autonomous `CONCLUDE PHASE` is illegal until the verified discovery-to-hypothesis lifecycle has completed. A human may explicitly terminate/reframe a phase earlier.
+
+Discovery stays attached to the active scientific goal through terminal execution evidence. A long Codex hypothesis qualification uses the exact-thread self-waking supervisor path and resumes the same scientific loop. `phase-state.yaml` is the machine-readable lifecycle authority after interruption or wakeup.
 
 Before `scientific-phase-loop` or `design-experiment` selects any bold/speculative probe, invoke `bold-probe-research`. The research pass must begin from the current scientific tension, check prior project collisions, examine relevant CFD knowledge and authoritative literature/manual guidance, and produce evidence-backed candidate questions before `arena` or experiment selection. A bold lane must not be populated by an unresearched Fluent option, a random model switch, or a nearby parameter variation merely because compute is available.
 
@@ -109,5 +130,6 @@ When a task arrives:
 3. A hybrid skill may be entered implicitly only when its documented preconditions are already satisfied.
 4. Otherwise select the smallest relevant model-invoked specialist and return its result to the calling workflow.
 5. Do not select retired/unrouted skills.
+6. While `scientific-phase-loop` is active, no specialist may bypass or retroactively waive a required `verify-phase-transition` gate.
 
-The policy controls **who may start a workflow**, not who owns every decision inside it. Scientific, implementation, execution, analysis, and human-gate responsibilities remain defined by each skill and the repository guides.
+The policy controls who may start a workflow and, for the scientific phase lifecycle, which independent gate must authorize state changes. Scientific, implementation, execution, analysis, and human-gate responsibilities remain defined by each skill and the repository guides.
