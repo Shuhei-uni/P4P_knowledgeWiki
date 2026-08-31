@@ -1,85 +1,138 @@
 ---
 name: check-phase-closure
-description: "Decide whether an autonomous scientific phase should continue, conclude, or return to the human. Use after a meaningful experiment or analysis cycle to judge whether the phase now has sufficient evidence for its intended decision or scientific statement, whether important uncertainty still justifies more work, and whether the loop is stagnating."
+description: "Decide whether an autonomous scientific phase should continue, conclude, or return to the human after verified hypothesis evidence exists. Normal autonomous closure is illegal until the mandatory lifecycle gates have passed."
 ---
 
 # Check Phase Closure
 
-Decide whether another scientific cycle is justified.
+Decide whether the phase has earned a conclusion **after** the mandatory discovery → hypothesis-qualification lifecycle has produced verified evidence.
 
-The goal is not complete understanding. The goal is sufficient evidence for the decision or scientific statement this phase was created to make.
+This is not an early-exit skill for discovery.
 
-## Judge the phase, not just the last experiment
+## Closure precondition
 
-Use the accumulated phase evidence, not only the newest result.
+Before scientific closure judgement, read the phase-root `phase-state.yaml`.
+
+Normal autonomous `CONCLUDE PHASE` is not permitted unless all of these are `PASS`:
+
+```text
+PHASE_CONTRACT
+DISCOVERY_EVIDENCE
+HYPOTHESIS_DEFINITION
+HYPOTHESIS_RUN_READY
+HYPOTHESIS_EXECUTION
+HYPOTHESIS_EVIDENCE
+```
+
+There must also be no unresolved `HUMAN_REQUIRED` lock.
+
+If the lifecycle is incomplete:
+
+- return `CONTINUE` when the missing work is still inside the current phase/autonomy boundary;
+- return `RETURN TO HUMAN / PHASE-PLANNER` when the missing requirement is human-owned;
+- do **not** reinterpret short discovery evidence as sufficient phase closure.
+
+A human may explicitly terminate or reframe a phase before this lifecycle completes. That is a human decision, not autonomous `CONCLUDE PHASE`.
+
+## Judge the phase, not only the last run
+
+Use accumulated evidence across discovery, hypothesis qualification, previous phases, numerical checks, and important claim limits.
 
 Ask:
 
-- Can the phase question now be answered with a bounded, evidence-backed statement?
-- Is the evidence strong enough for that statement, given implementation quality, run depth, comparisons, and numerical credibility?
-- Is there an unresolved hypothesis or materially challenged assumption that could still change the phase-level conclusion?
-- Is there a feasible next investigation with enough information value to justify its compute and effort?
+- What phase-level statement is actually supported now?
+- Did the hypothesis qualification reach the depth and evidence completeness required by its setup contract?
+- Did required residual/numerical histories, physical monitors, balances, and core figures actually exist?
+- Does the phase-level statement stay within the verified model/setup/run limitations?
+- Is there a competing explanation or materially challenged assumption that could still change the answer?
+- Is there a feasible next investigation whose result could materially strengthen or reverse the proposed conclusion?
 
-Remaining uncertainty is normal. Continue only when resolving it could materially change the phase answer.
+A bounded, conditional, or negative conclusion is valid. A missing required evidence stream is not.
+
+If the hypothesis setup required scaled residual history, restart evidence, a final-window statistic, or another qualification signal and it is unavailable, closure is blocked until that evidence is repaired, rerun, or the human explicitly changes the claim/evidence requirement before the run.
+
+Do not weaken the evidence standard after seeing an inconvenient result.
 
 ## Treat assumptions proportionately
 
-Working assumptions should stay visible, but they are not automatically new experiments.
+Use:
 
-Use three practical states:
+- `accepted-for-now`;
+- `questioned`;
+- `materially-challenged`.
 
-- `accepted-for-now`: no current evidence makes the assumption important enough to test;
-- `questioned`: some evidence or reasoning makes it relevant, but it does not yet threaten the phase conclusion;
-- `materially-challenged`: there is a credible reason it could change the phase conclusion.
+Do not demand proof of every assumption. Ask whether an assumption materially limits or threatens the specific phase-level statement.
 
-Do not demand proof of every assumption. Ask whether the remaining assumptions materially bound or threaten the statement the phase needs to make.
+A missing plant fact or other human-owned parameter is not a working assumption merely because the agent would like to continue. If the conclusion depends on it, return to the human.
 
 ## Return one of three outcomes
 
-### CONTINUE
+### `CONTINUE`
 
-Choose `CONTINUE` when an important unresolved hypothesis or materially challenged assumption remains and there is a useful, feasible investigation that could materially strengthen or change the phase answer.
+Choose `CONTINUE` when:
 
-State the uncertainty that justifies another cycle. Do not design the experiment here; hand the uncertainty back to `scientific-phase-loop`.
+- a lifecycle gate remains `BLOCK` but can be resolved autonomously;
+- the verified hypothesis result reveals another focused uncertainty that could materially change the phase answer;
+- evidence is incomplete for the intended statement;
+- another discovery/qualification cycle has clear information value.
 
-### CONCLUDE PHASE
+State which lifecycle state should be reopened and why. Do not design the experiment here.
 
-Choose `CONCLUDE PHASE` when there is sufficient evidence for the decision or scientific statement the phase was created to make and further feasible work is unlikely to change that statement enough to matter.
+### `CONCLUDE PHASE`
 
-A bounded, conditional, or negative conclusion is valid. Do not require the model to be fully understood.
+Choose `CONCLUDE PHASE` only when:
 
-State the supported phase-level conclusion, the important limits on it, and any assumptions that remain accepted-for-now or questioned but do not materially threaten it.
+- all lifecycle preconditions above are `PASS`;
+- an independent `verify-phase-transition` review of `PHASE_CLOSURE` returns `PASS`;
+- the accumulated evidence supports a useful bounded statement;
+- further feasible work is unlikely to change that statement enough to matter.
 
-### RETURN TO HUMAN / PHASE-PLANNER
+State the supported conclusion, important claim limits, and any assumptions that remain accepted-for-now/questioned but do not threaten it.
 
-Choose `RETURN TO HUMAN / PHASE-PLANNER` when useful progress depends on a phase-level judgement outside the current autonomous boundaries: a major modelling assumption, scope change, project-direction choice, resource decision, unresolved ambiguity, or explicit human gate.
+### `RETURN TO HUMAN / PHASE-PLANNER`
 
-State the decision boundary and the evidence that brought the phase there.
+Choose this when useful progress depends on a decision or fact outside the granted autonomy envelope: scope/model-boundary change, missing plant/validation information, phase-question change, explicit resource decision, or another persisted human lock.
+
+State exactly what decision/fact is needed and which evidence brought the phase to that boundary.
+
+## Independent closure review is mandatory
+
+Before `CONCLUDE PHASE`, call `verify-phase-transition` for `PHASE_CLOSURE`.
+
+That review must independently check that:
+
+- the mandatory lifecycle actually occurred;
+- the hypothesis evidence gate passed on the evidence promised before the run;
+- the proposed phase-level statement follows from the data rather than from labels/setup intent;
+- no important missing evidence is being waived retrospectively;
+- no unresolved human lock is being bypassed;
+- the conclusion is no broader than the tested formulation/range/conditions.
+
+The scientific loop may not self-overrule a closure `BLOCK`.
 
 ## Anti-loop safeguard
 
-Track whether meaningful cycles are actually changing the scientific picture.
+Track whether meaningful cycles are changing the scientific picture.
 
-If two consecutive experiment or analysis cycles fail to materially change the current understanding, reduce an important uncertainty, strengthen the phase-level statement, or materially update an assumption, treat that as stagnation.
+If two consecutive cycles fail to reduce an important uncertainty, strengthen the statement, or materially update an assumption:
 
-Do not respond by generating a third minor variation of the same idea.
+- do not generate a third nearby variation by habit;
+- reopen discovery with a substantially different researched question/branch, including the bold-probe process when appropriate; or
+- return to the human if the needed rethink crosses the phase boundary.
 
-Instead, either:
-
-- rethink the investigation substantially, including whether a different experiment-design mode, analysis, model assumption, or branch is needed; or
-- return `RETURN TO HUMAN / PHASE-PLANNER` when the necessary rethink crosses a genuine phase-level boundary.
-
-Stagnation is evidence about the usefulness of the current route.
+Stagnation can justify changing the route. It does not justify skipping qualification.
 
 ## Output
 
 Return only:
 
 1. **Outcome:** `CONTINUE`, `CONCLUDE PHASE`, or `RETURN TO HUMAN / PHASE-PLANNER`;
-2. **Phase-level statement currently supported**;
-3. **Important unresolved hypothesis or materially challenged assumption**, if any;
-4. **Why another cycle is or is not worth doing**;
-5. **Stagnation status**, including whether the two-cycle safeguard has been triggered;
-6. **Important limits or human decision boundary**.
+2. **Lifecycle readiness:** which mandatory gates are `PASS`, `BLOCK`, or `HUMAN_REQUIRED`;
+3. **Phase-level statement currently supported**;
+4. **Important unresolved hypothesis / materially challenged assumption / missing evidence**, if any;
+5. **Why another cycle is or is not worth doing**;
+6. **Stagnation status**;
+7. **Important limits or human decision boundary**;
+8. **PHASE_CLOSURE verifier result** when conclusion is proposed.
 
-Do not create the next experiment. This skill decides whether the loop has earned another cycle.
+Do not create the next experiment. This skill decides whether the verified lifecycle has earned closure.
