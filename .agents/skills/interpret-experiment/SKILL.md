@@ -1,6 +1,6 @@
 ---
 name: interpret-experiment
-description: "Turn simulation evidence into a bounded scientific interpretation. Use after the required analysis exists and numerical adequacy has been assessed, to separate hypothesis from observation, interpretation, and conclusion, revisit relevant working assumptions, and state only what the simulation evidence actually supports."
+description: "Turn simulation evidence into a bounded scientific interpretation after the required analysis exists. Preserve the pre-run evidence contract, separate observation from interpretation, and never treat a completed run as permission to waive missing qualification evidence or close the phase."
 ---
 
 # Interpret Experiment
@@ -11,161 +11,186 @@ Reasoning proposes. Simulation tests. Data constrains the conclusion.
 
 Literature, prior experience, and physical intuition may help explain a result. They do not substitute for the result itself.
 
+## Respect lifecycle state and the pre-run evidence contract
+
+Read the experiment setup, results/evidence, and phase-root `phase-state.yaml`.
+
+For discovery, interpretation helps decide whether discovery has earned a specific hypothesis. It does not promote discovery evidence into a final phase claim.
+
+For hypothesis qualification, terminal execution `COMPLETE` is only execution evidence. Before the phase can rely on the interpretation, the required analysis must be produced and `verify-phase-transition` must later judge `HYPOTHESIS_EVIDENCE`.
+
+Do not silently change the required evidence after seeing the result.
+
+If the setup declared scaled residual histories, phase balances, restart/continuation evidence, a qualification window, or another metric as **required**, and it is missing, record that as a gate-critical evidence gap. Do not replace it with prose or a convenient surrogate unless the experiment is explicitly redesigned upstream.
+
 ## Start from the evidence
 
-Read the experiment question, the controlled changes, the working assumptions, the analysis plan, the **core figure plan**, the measured and derived data, the resulting plots, the comparison cases, and the numerical-quality assessment.
+Read:
 
-The planned core figures are the primary visual evidence path because they were designed before the result was known. Check whether each was actually produced from the intended data source, axes, scope, window, and comparison basis.
+- experiment question and hypothesis;
+- verified discovery basis for hypothesis work;
+- controlled changes and invariants;
+- working assumptions and claim limits;
+- intended strong statement form for hypothesis work;
+- required versus supporting evidence;
+- core figure plan;
+- measured/derived data;
+- numerical-quality assessment;
+- comparison cases and declared analysis windows.
 
-Do not accept a generic overview dashboard as a substitute for the planned figures. If the analysis produced only broad residual/monitor overviews while the setup defines more discriminating plots, create or request the focused plots before making the main interpretation when the required data exists. If the required history was never instrumented, record the evidence gap rather than inventing a substitute.
+The preplanned core figures are the primary visual evidence path because they were designed before the result was known. Check whether each was produced from the intended source, axes, scope, window, and comparison basis.
 
-If decisive evidence is missing, say what cannot be concluded. If the simulation is numerically inadequate, interpret the numerical behavior that was actually observed without turning it into a physics claim.
+Do not accept a generic overview dashboard as a substitute for planned discriminating figures.
 
-A simulation run is not automatically scientific evidence for the intended mechanism. Its value depends on whether the setup represented the intended experiment, whether the required behavior was observed, and whether the numerical solution is credible enough for the claim being made.
+If a planned figure can still be produced from existing data, produce/request it before making the main interpretation. If the required history was never captured, preserve the gap explicitly.
 
 ## Read figures for their intended message
 
-For each core figure, answer the sub-question it was designed to address before combining the figures into a broader interpretation.
+For each core figure ask:
 
-Ask:
-
-- What does the plotted quantity directly show over the declared iteration/time window or spatial domain?
-- What comparison or reference makes that observation meaningful?
+- What does the plotted quantity directly show over the declared window/domain?
+- What reference/comparison makes that observation meaningful?
 - Does the figure distinguish the competing explanations it was designed to test?
-- Is any reduction, smoothing, normalization, sign conversion, or final-window statistic obscuring important raw behavior?
-- Does the figure need a supporting numerical-quality check before its scientific message can be trusted?
+- Is any smoothing/reduction/normalization/sign conversion hiding raw behaviour?
+- Does the figure require supporting numerical-quality evidence before its scientific message is trustworthy?
 
-Prefer a few strong figure-linked observations over a catalogue of every plotted variable.
+Prefer a few strong figure-linked observations over a catalogue of every available variable.
 
-Supporting figures such as full residual dashboards, diagnostic overview plots, or extra contours may help check quality or explain an anomaly, but they should not dominate the scientific narrative unless they materially change the answer to the experiment question.
+Supporting residual dashboards, diagnostics, or extra contours may help explain anomalies but should not replace the declared core argument.
 
 ## Keep four levels separate
 
 ### Hypothesis
 
-What was expected before the evidence was seen.
-
-A hypothesis can come from theory, Fluent guidance, literature, previous simulations, engineering intuition, or a competing explanation. It is not a result.
+What was proposed before the evidence was seen.
 
 ### Observation
 
-What the simulation data directly shows.
-
-Observations should be traceable to a number, history, field, **planned core figure**, comparison, solver event, or other recorded evidence.
+What recorded simulation data directly shows. Trace important observations to a number, history, field, planned core figure, comparison, or solver event.
 
 ### Interpretation
 
-What those observations may mean.
-
-Interpretation can connect multiple observations and use scientific reasoning, but it must remain distinguishable from what was measured directly.
+What those observations may mean, including connections to theory/literature and plausible alternative explanations.
 
 ### Conclusion
 
-What the experiment actually allows us to say about its question.
+What this **experiment** actually allows us to say.
 
-The conclusion should be no stronger than the evidence, controls, working assumptions, and numerical quality permit.
+Do not collapse these levels.
 
-Do not collapse these four levels into one narrative.
+The experiment conclusion is not automatically the phase conclusion.
 
-## Revisit working assumptions without chasing all of them
+## Judge the hypothesis from its predeclared criteria
 
-After interpreting the direct experiment evidence, ask whether any working assumption became more or less credible because of what was observed.
+For hypothesis qualification, explicitly classify the result against the pre-run contract:
 
-Do not treat assumptions as hidden truths or as automatic experiment targets. Use them to bound the conclusion.
+- evidence supporting the hypothesis;
+- evidence weakening/rejecting it;
+- evidence supporting the competing explanation;
+- unresolved ambiguity;
+- numerical credibility of the relevant claim;
+- whether the intended strong statement form can actually be populated from the evidence.
 
-When useful, update each relevant assumption as:
+If the qualification run completed but required evidence is missing, the proper classification may be:
 
-- `accepted-for-now`: no observed evidence makes it important enough to challenge;
-- `questioned`: the evidence makes it worth watching or acknowledging, but it does not yet threaten the current conclusion;
-- `materially-challenged`: there is a credible reason it could change the experiment or phase-level conclusion.
+```text
+execution complete
+hypothesis evidence incomplete
+```
 
-Only elevate an assumption into a major uncertainty when the evidence gives a concrete reason to do so. Do not create an endless verification chain by attacking assumptions merely because they are assumptions.
+Do not force `supported` or `rejected` when the evidence contract cannot be satisfied.
 
-If an assumption remains uncertain but does not materially affect the statement being made, preserve it as a limitation rather than manufacturing another experiment.
+## Revisit working assumptions without inventing facts
 
-## Anchor claims to behavior
+Use:
 
-For every important claim, be able to answer:
+- `accepted-for-now`;
+- `questioned`;
+- `materially-challenged`.
 
-- What simulation behavior supports this?
-- Which core figure, measured value, or supporting artifact records that behavior?
-- What comparison makes the claim meaningful?
-- Is the simulation numerically trustworthy enough for this claim?
-- What else could plausibly explain the same observation?
-- Does any materially challenged assumption weaken the claim?
+Only elevate an assumption when evidence gives a concrete reason.
 
-Prefer specific evidence over labels such as `better`, `stable`, `improved`, or `physical` unless those terms are tied to explicit behavior or metrics.
+A missing plant fact or human-owned target remains missing. Do not convert it into a scientific conclusion because a numerical surrogate produced a trend.
 
-The most useful interpretation often comes from histories and behavior over the run, not only the final checkpoint.
+## Anchor claims to behaviour
 
-## Respect the limits of the experiment
+For every important claim answer:
 
-Do not claim causality unless the comparison isolates the relevant change well enough to justify it.
+- What simulation behaviour supports this?
+- Which figure/value/artifact records it?
+- What comparison makes it meaningful?
+- Is the numerical evidence sufficient for this exact claim?
+- What else could explain it?
+- Does a challenged assumption weaken it?
 
-Do not turn a solver failure into a physics conclusion unless the experiment specifically establishes that connection.
+Avoid labels such as `better`, `stable`, `converged`, `physical`, or `controlled` without explicit criteria and evidence.
 
-Do not treat a numerically completed run as a valid physical result merely because Fluent reached the requested iteration count or timestep count.
+For steady/stationary/reference claims, use the declared qualification window and any required continuation/restart evidence. Do not infer stationarity from a favourable short tail.
 
-Do not interpret beyond the model being tested. A credible result can support a conclusion about the chosen CFD formulation without proving that the real separator behaves identically.
+## Respect experiment limits
 
-If the evidence only supports a directional, conditional, numerical, or exploratory conclusion, say exactly that.
+Do not claim causality unless the comparison isolates the change sufficiently.
 
-## Use outside knowledge as context, not replacement evidence
+Do not turn solver failure into physics unless the experiment establishes that connection.
 
-Use `cfd-wiki`, literature, Fluent documentation, or specialist reasoning when they help explain an observed mechanism or challenge an interpretation.
+Do not treat reaching the requested horizon as proof of numerical/physical credibility.
+
+Do not extend a CFD-formulation result directly to the real separator without validation evidence.
+
+Directional, conditional, numerical, exploratory, or negative conclusions are all acceptable when that is what the data supports.
+
+## Use outside knowledge as context
+
+Use `cfd-wiki`, literature, Fluent documentation, or specialist reasoning to explain/challenge observed mechanisms.
 
 Keep the boundary visible:
 
 ```text
-simulation evidence -> what happened in this experiment
-outside knowledge    -> why that behavior might make sense
+project simulation evidence -> what happened here
+outside knowledge            -> why it may make sense / what else may explain it
 ```
 
-Unless prior evidence is genuinely equivalent to the present setup and question, do not use it to claim what this simulation must have done.
+For consequential interpretation, use `interrogate` or independent review to look for unsupported leaps and alternative explanations.
 
-When a consequential interpretation depends heavily on a proposed mechanism, use independent reviewers or `interrogate` to look for alternative explanations and unsupported leaps.
+## Treat unexpected results as useful
 
-## Treat unexpected results as valuable evidence
+Contradicting the hypothesis is not experiment failure.
 
-A result that contradicts the hypothesis is not a failed experiment if it teaches us something important.
+Unexpected trends, plateaus, oscillations, reversals, solver pathologies, or small effects may materially reshape the investigation.
 
-A numerical failure, unexpected trend, non-monotonic response, plateau, oscillation, reversal, or apparently insignificant change may all reshape the investigation.
-
-Ask what the evidence changed in our understanding, not whether it matched the prediction.
-
-If an unexpected result makes a different figure more informative than the pre-run plan anticipated, add that figure as a clearly labelled **responsive figure** rather than silently replacing the original core figure set. Preserve the planned figures so the experiment remains auditable.
+If an unexpected result requires a responsive figure, add it clearly as **responsive evidence** while retaining the planned core figures.
 
 ## Write the scientific record
 
-`results.md` should preserve the evidence before the story.
+`results.md` should state:
 
-Make clear:
-
-- what was actually run;
-- whether the planned core figures were produced completely, partially, or not at all;
-- the few high-impact plots that carry the main scientific argument;
-- what supporting numerical/debug plots were examined separately;
-- what was directly observed;
-- the numerical-quality limitations;
-- the bounded interpretation;
-- alternative explanations where they matter;
-- the conclusion the experiment supports;
-- any working assumption that became questioned or materially challenged;
+- what was actually run and verified;
+- requested and actual horizon;
+- whether planned core figures were produced completely/partially/not at all;
+- required-evidence completeness;
+- key direct observations;
+- numerical-quality result/limits;
+- hypothesis classification when applicable;
+- bounded interpretation;
+- alternative explanations;
+- experiment conclusion;
+- assumptions whose state changed;
 - what remains unresolved.
 
-Significant claims should be traceable to the figure or evidence that carries them.
+For hypothesis work, explicitly record whether the result appears ready to be sent to `verify-phase-transition` for `HYPOTHESIS_EVIDENCE` or which missing evidence prevents that.
 
-Preserve historical observations and results. Do not silently rewrite old evidence to fit the current interpretation.
+Do not mark the phase concluded here.
 
 ## Handoff
 
-Return the experiment to the scientific phase with a concise account of:
+Return to `scientific-phase-loop`:
 
-- what the simulation established;
-- which core figures carry that conclusion;
+- what the experiment established;
+- which planned figures/evidence carry that statement;
+- required evidence that is missing, if any;
 - what it did not establish;
-- what changed in the current understanding;
-- whether any relevant working assumption changed state;
-- what uncertainty remains.
-
-The next step should emerge from that updated understanding rather than from loyalty to the original hypothesis, assumptions, or experiment plan.
+- hypothesis classification when applicable;
+- what changed in current understanding;
+- assumption-state changes;
+- remaining uncertainty;
+- whether the next required lifecycle action is `DISCOVERY_EVIDENCE`, `HYPOTHESIS_EVIDENCE`, further discovery/qualification work, or a human lock.
