@@ -72,6 +72,16 @@ Talk through the direction first. Before handing off, agree on the parts that ac
 - what would count as enough evidence for this phase;
 - when the loop should come back to the human.
 
+### Define the autonomy envelope explicitly
+
+Unless the human narrows it, the normal autonomous handoff should grant `scientific-phase-loop` authority to choose, reject, modify, and execute experiment ideas inside the fixed phase question and modelling boundaries without asking again for each setup.
+
+When Fluent compute is part of the phase, the normal `/goal` handoff should also grant exclusive active-session authority over the configured Fluent fleet for the duration of the phase goal. Within that authority the loop may stop active calculations, preserve a recovery pair when a valuable unpreserved state could otherwise be lost, reload or restart Fluent, replace the loaded case, reassign servers, terminate abandoned workers, and use available servers for mainline and bold-probe work.
+
+This authority applies to active working sessions and experiment children. It does **not** authorize silently deleting verified durable Project/OneDrive parent artifacts, inventing plant facts or validation targets, changing the fixed phase-level question, or crossing an explicit human boundary.
+
+If the human wants a narrower authority envelope for a particular phase, record the restriction in the handoff.
+
 ## Handoff
 
 Once the direction is agreed, give `scientific-phase-loop` a short handoff:
@@ -82,8 +92,9 @@ Once the direction is agreed, give `scientific-phase-loop` a short handoff:
 - **Main unknowns / assumptions** — what is still open or being accepted for now.
 - **Boundaries** — what the loop should not casually change.
 - **Enough evidence looks like** — what would support a useful phase conclusion.
-- **Return to the human when** — the decisions the loop should not make alone.
+- **Autonomy** — the granted experiment-selection and Fluent fleet/session authority, including any restrictions from the normal full within-phase authority described above.
+- **Return to the human when** — the decisions or missing facts the loop must not invent or authorize itself.
 
-The handoff sets the destination and boundaries, not the route.
+The handoff sets the destination, authority, and boundaries, not the route.
 
-`scientific-phase-loop` still owns the thinking inside the phase: revising hypotheses and assumptions, choosing discovery or hypothesis-test experiments, running simulations, analysing the data, interpreting what happened, and deciding what to test next.
+`scientific-phase-loop` still owns the thinking inside the phase: mandatory discovery, forming a specific hypothesis from discovery evidence, designing and running a long qualification experiment, analysing the data, revising hypotheses and assumptions, choosing further experiments when required, and reaching a verified phase conclusion only after the hard lifecycle gates pass.
