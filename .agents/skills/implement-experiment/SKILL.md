@@ -1,134 +1,223 @@
 ---
 name: implement-experiment
-description: "Execute an approved setup faithfully in Fluent: stage the exact resolved parent, establish explicit output paths, build the specified case, prove the setup by readback and save/reopen, smoke-test it, then execute it according to discovery or hypothesis-test mode. Use after create-setup and fluent-fleet-orchestration have defined the experiment and execution placement."
+description: "Execute an approved setup faithfully in Fluent after the relevant phase transition gate has passed: stage the exact parent, prove paths and instrumentation, build/read back/save-reopen/smoke-test the case, then run discovery attached or hand a verified long hypothesis case to the self-waking supervisor."
 ---
 
 # Implement Experiment
 
-Get the approved setup done as written on the server assigned by the execution plan.
+Get the approved setup done as written on the assigned Fluent server.
 
-The scientific decisions have already been made. This skill owns faithful execution, not experiment design or server selection.
+The scientific decisions have already been made. This skill owns faithful implementation/execution, not experiment design or phase closure.
+
+## Require lifecycle permission before mutation
+
+Read the phase-root `phase-state.yaml` before implementing a phase-loop experiment.
+
+For **discovery** require:
+
+```text
+PHASE_CONTRACT == PASS
+DISCOVERY_DESIGN == PASS
+```
+
+For **hypothesis-test** require:
+
+```text
+DISCOVERY_EVIDENCE == PASS
+HYPOTHESIS_DEFINITION == PASS
+```
+
+Do not treat a mode label in `setup.md` as permission to skip lifecycle state.
+
+`HYPOTHESIS_RUN_READY` is granted only **after** this skill has produced the implementation/readback/save-reopen/smoke/instrumentation proof and `verify-phase-transition` accepts it. Do not launch the long hypothesis solve before that gate is `PASS`.
+
+If `phase-state.yaml` contains an unresolved `HUMAN_REQUIRED` lock, stop. Implementation may not bypass it by substituting an assumed target or different physical boundary.
 
 ## Receive the execution plan
 
-Before mutating Fluent, require the placement contract produced by `fluent-fleet-orchestration`.
+Before mutating Fluent, require the placement/path contract from `fluent-fleet-orchestration`.
 
 Know at minimum:
 
 - setup ID and run ID;
-- the selected runtime `server.ref` plus separate server ID and IP;
-- exact parent artifact ID;
-- verified parent case/data source;
-- whether OneDrive staging is required;
-- exact remote parent and run/output paths;
-- the canonical sibling `run-paths.yaml` beside `setup.md` and `results.md` in the Project experiment packet;
-- the explicit path map, including Fluent working directory, final case/data, autosave/checkpoint paths, file-backed report/monitor outputs such as `.out`, transcript/log paths, and artifact-manifest locations when applicable;
-- any available expected hashes/provenance for the parent;
-- final-artifact durability intent and any selected important checkpoint policy.
+- selected `server.ref`, server ID, and IP;
+- exact parent artifact ID and verified case/data source;
+- canonical sibling `run-paths.yaml`;
+- exact remote parent/run/output paths;
+- Fluent working directory;
+- final case/data paths;
+- checkpoint/autosave locations;
+- required report/monitor/history outputs;
+- runner/log/manifest paths;
+- OneDrive durability intent when applicable;
+- whether the active phase has exclusive Fluent fleet/session authority.
 
-Do not choose another server or substitute a similarly named local parent merely because it is convenient. If the assigned parent cannot be staged or verified, return the placement failure for re-planning.
+Do not substitute a convenient similarly named parent.
 
-Do not identify a run by `server-1`, `server-2`, or another short alias alone. Use the exact runtime server reference resolved by fleet preflight, such as `server-2@192.168.1.42`.
+## Respect active-session authority
 
-Do not begin a solve while an important output destination is still implicit. A bare filename is not an adequate artifact path unless the intended working directory has been deliberately established and the resulting absolute destination is recorded.
+When `fluent-fleet-orchestration` has granted the active scientific goal an exclusive fleet lease, the assigned Fluent session is a working resource for this phase.
 
-## Preserve the setup
+The execution plan may require stopping an inherited calculation, preserving a quick recovery pair, restarting/reloading Fluent, or replacing the loaded case. Follow that plan without asking the human again.
 
-Treat `setup.md` as the experiment contract. Build the requested delta from the verified parent/reference artifact and preserve everything that the setup says must remain unchanged.
+Do not silently destroy a valuable unpreserved endpoint when a recovery pair can be saved cheaply. Do not overwrite verified durable Project/OneDrive parents.
 
-Have essentially no scientific freedom here. Do not add models, change numerics, alter run length, redefine monitors, or otherwise improve the experiment because another choice seems better.
+## Preserve the scientific setup
 
-Implementation details may need to change when Fluent, PyFluent, repository tooling, or pipeline versions differ from what the setup expected. In that case, find an implementation that is scientifically equivalent and preserves the intended case state. If the setup cannot be implemented faithfully, stop the implementation and return that conflict rather than silently changing the experiment.
+Treat `setup.md` as the scientific contract. Build the declared delta from the verified parent and preserve stated invariants.
 
-Use existing `fluent-case-build-and-run` guidance and reusable PyAnsys tooling for the low-level mechanics.
+Have essentially no scientific freedom here. Do not add models, alter the hypothesis, change the planned horizon, redefine evidence, or “improve” numerics because another choice seems better.
+
+If Fluent/PyFluent requires a scientifically equivalent implementation change, make only that implementation adaptation and prove the final state. If equivalence cannot be established, return a blocker.
+
+Use `fluent-live-inspection` first for uncertain live paths/state and escalate to `fluent-manual-researcher` when meaning/prerequisites/activation cannot be resolved safely.
 
 ## Stage and prove the parent
 
-When the exact parent is not already local, stage the complete required case/data pair through the transfer path defined in the execution plan, normally via the verified OneDrive artifact layer.
+When the exact parent is not local, stage the complete paired case/data through the execution plan, normally using the verified OneDrive artifact layer.
 
-Before deriving the child, prove that the staged files correspond to the intended parent. Prefer manifest/hash verification when available; otherwise use the strongest available provenance and direct readback evidence. Do not treat matching filenames alone as sufficient proof for an important transferred artifact.
+Prove identity with manifest/hash when available; otherwise use the strongest direct provenance/readback evidence. Matching filenames are not proof.
 
 ## Establish and verify the run filesystem
 
-Before the smoke test or long solve:
+Before any solve:
 
-1. create the declared remote run, report, log, checkpoint, staging, and manifest directories as required;
-2. verify the intended destinations are writable and will not unintentionally overwrite another run;
-3. inspect the active Fluent case for file-backed reports, monitors, autosaves, exports, transcripts, or other outputs with relative or inherited filenames;
-4. resolve those outputs to the canonical Project experiment `run-paths.yaml`;
-5. where possible, rewrite only the file destination to an explicit run-specific path without changing the scientific monitor/report definition;
-6. where Fluent requires a relative filename, deliberately set or verify the Fluent working directory and record the resulting absolute destination;
-7. read back important configured destinations when possible;
-8. write or update the sibling `run-paths.yaml` in the Project experiment packet before solving.
+1. create declared run/report/log/checkpoint/staging directories;
+2. verify destinations are writable and do not unintentionally overwrite another run;
+3. inspect inherited file-backed reports/monitors/autosaves/exports/transcripts;
+4. resolve every important destination against canonical `run-paths.yaml`;
+5. rewrite only file destinations where needed, preserving scientific definitions;
+6. deliberately establish the Fluent working directory when relative filenames are unavoidable;
+7. read back important destinations;
+8. reconcile/update the same canonical `run-paths.yaml`.
 
-Do not make the remote run directory the durable home of the path manifest. If the runner needs a local machine-readable copy, it may receive a transient/derived copy, but the Project experiment `run-paths.yaml` remains authoritative.
+A bare filename is not an adequate scientific artifact path unless its containing directory has been deliberately fixed and recorded.
 
-Do not assume that loading a case changes Fluent's working directory or causes relative `.out` files to be written beside the case. Do not rely on the directory from which an existing Fluent session happened to be launched.
+## Prove the case before any planned run
 
-If an important file location cannot be resolved, return a path blocker before the expensive run rather than hoping to locate the file afterward.
+Do not spend compute on a case that exists only in memory.
 
-## Prove the case before the long run
+Before the discovery run or long hypothesis launch:
 
-Do not spend hours on a case that has only been built in theory.
+1. read back every intended critical setup state and declared invariant;
+2. save the prepared paired case/data to declared paths;
+3. reopen the saved pair from those exact paths;
+4. reacquire affected Settings objects;
+5. repeat the critical audit;
+6. run the planned smoke test, normally about 50 iterations for iteration-based work;
+7. prove that required file-backed instrumentation actually writes to the declared destinations during smoke.
 
-Before the full run, verify the important setup state by exact readback, save the case to its declared full path, reopen it, and verify that the saved state still matches the intended setup.
+Initialization is required only when the setup says so.
 
-Then run a short smoke test, normally about 50 iterations for an iteration-based case. The purpose is simple: prove that the saved case and chosen Python/PyFluent execution path can actually solve and advance before committing to the expensive run.
+A readback mismatch, missing required output, or save/reopen mismatch is a blocker. Do not proceed because the GUI/API call appeared to succeed.
 
-Use the smoke test to confirm that required file-backed outputs are appearing at the declared locations. If Fluent silently writes an important `.out`, checkpoint, transcript, or other artifact somewhere else, reconcile the path configuration before the long run and update the same canonical `run-paths.yaml`.
+## Instrumentation is a hard pre-run requirement
 
-Initialization is not universally required. Follow the setup. Do not initialize merely because this skill has an initialization step.
+Compare the actual case against the experiment's evidence contract before the main solve.
 
-If the smoke test exposes an execution error or a setup/pipeline incompatibility, fix only what can be fixed without changing the experiment. Otherwise return the problem for redesign or cancellation.
+Every history/monitor/report that cannot be reconstructed later and is required for a gate or core figure must already exist and must write during smoke.
 
-## Run the intended horizon
+This includes required residual/equation histories when numerical credibility is part of the hypothesis claim.
 
-Once the verification gate passes, execute the fixed iteration/time target defined by the setup through the approved Python/PyFluent path.
+Do not knowingly launch a qualification run with “we will see if we can recover the residuals later.” If the required evidence channel cannot be made durable, return the setup for redesign or an explicit pre-run change to the claim/evidence contract.
 
-For **discovery mode**, keep the scientific agent attached for the full short run. Do not launch the detached handoff worker. Wait for the run to finish, return the execution evidence immediately, and let the active scientific thread inspect it and choose the next discovery experiment without a human restart. Continue this attached pattern throughout the active discovery campaign, not only for the first run.
+## Discovery execution — remain attached
 
-For **hypothesis-test mode**, call `supervise-fluent-run`. On Codex, launch the background job only through the self-waking Python entrypoint; the raw experiment runner must not be background-launched directly. On Cursor, keep the agent attached through the approved horizon unless the human explicitly requests a detached manifest-only job.
+Once implementation proof passes and discovery execution is authorized, run the fixed short horizon synchronously through Python/PyFluent.
 
-On Codex, the background launcher should capture the originating thread automatically from `CODEX_THREAD_ID`. An explicit `codex.session_id` is only an override when necessary. Do not start a Codex detached hypothesis run if neither is available.
+The scientific goal must remain attached until terminal execution evidence returns.
 
-On Codex, the terminal Python path must resume that exact originating thread on both `COMPLETE` and `BLOCKED`. The wakeup code is mandatory and must execute after terminal evidence has been persisted; it cannot be omitted and cannot depend on the human sending another message.
+Do not:
 
-On Cursor, do not require `CODEX_THREAD_ID` and do not call `codex exec resume`. Wait on the approved solve in the live session, then continue analysis.
+- launch the detached hypothesis worker;
+- end/pause the goal because Fluent is still calculating;
+- require a human message to resume;
+- interpret an RPC/tool timeout as run completion/failure without reconciling the live manifest/session.
 
-The hypothesis job must declare at least one deterministic completion proof: locally visible required files and/or a verifier command that returns zero only when the declared remote final state is verified. A zero runner exit code alone is not sufficient.
+If the call times out while Fluent is still advancing, inspect the operational manifest/live iteration state and continue waiting/polling in the same goal.
 
-Never use `--last` for autonomous multi-server Codex handoff because several jobs may complete out of launch order.
+After terminal discovery execution:
 
-Python/PyFluent execution is the default for experiments inside `scientific-phase-loop`. Do not switch to TUI-driven iteration or a Fluent journal without explicit human approval for that run.
+- verify requested horizon reached;
+- verify final paired case/data;
+- verify required histories;
+- return execution facts to the scientific loop;
+- let `verify-phase-transition` decide `DISCOVERY_EXECUTION`.
 
-Do not stop early merely because residuals, balances, or monitors look poor, noisy, oscillatory, or unpromising. Those behaviours are evidence for later analysis. Unless the solver or execution path encounters an actual error that prevents continuation, let the experiment reach its planned horizon.
+This skill does not itself mark discovery evidence as scientifically sufficient.
+
+## Hypothesis qualification — prove readiness before launch
+
+For hypothesis-test mode, first verify that the setup is genuinely qualification-scale.
+
+For ordinary steady iteration-based full-geometry work, reject a planned horizon below 10,000 iterations unless the setup records an explicit human-approved exception or scientifically equivalent non-iteration qualification basis.
+
+Verify any planned continuation/restart qualification for steady/stationary claims.
+
+Then return the implementation evidence needed for `verify-phase-transition` to judge `HYPOTHESIS_RUN_READY`, including:
+
+- exact parent/setup identity;
+- readback audit;
+- save/reopen audit;
+- smoke result;
+- required instrumentation proof;
+- selected horizon and qualification basis;
+- exact final/checkpoint/report paths;
+- runtime-specific wake/completion contract.
+
+Do **not** launch the long solve until `HYPOTHESIS_RUN_READY == PASS` appears in `phase-state.yaml`.
+
+## Run the approved hypothesis horizon
+
+After readiness passes, call `supervise-fluent-run`.
+
+On **Codex**, launch only through the self-waking run-and-handoff entrypoint. Do not background-launch the raw runner.
+
+The Codex job must capture the exact originating `CODEX_THREAD_ID`, trigger on both `COMPLETE` and `BLOCKED`, and have deterministic completion verification. Never use `--last` for multi-job autonomous work.
+
+On **Cursor/runtime without session resume**, keep the agent attached through the full approved horizon instead.
+
+Do not stop early because residuals, balances, routing, or physical monitors look poor while Fluent can still execute the approved experiment. Those behaviours are scientific evidence.
+
+## Completion is execution proof, not scientific proof
+
+Do not claim completion because a command was submitted, a process exited zero, or enough wall time passed.
+
+For an iteration-based run require independent evidence that the intended final saved data belongs to the intended run and reached the requested iteration count.
+
+Also reconcile all required outputs against `run-paths.yaml`.
+
+If the run stops before target, report final observed progress and failure truthfully.
+
+For a hypothesis run, terminal execution `COMPLETE` means only that execution completed and the declared completion verifier passed. It does **not** mean the hypothesis or phase passed. The resumed scientific loop must next run `HYPOTHESIS_EXECUTION` and `HYPOTHESIS_EVIDENCE` verification.
 
 ## Preserve important artifacts beyond the server
 
-Server-local storage is the working copy, not the only durable scientific copy.
+For scientifically important final states, likely future parents, or deliberately selected expensive recovery checkpoints, preserve complete paired case/data and promote them to the approved OneDrive location when practical.
 
-For a scientifically important final state, final parent likely to be branched from again, or deliberately selected expensive recovery checkpoint, preserve a complete paired case+data artifact and promote it to the approved OneDrive location when practical.
+Do not upload every autosave. Preserve only final/selected recovery states whose loss would materially cost future work.
 
-Do not upload every autosave. Promote only final states and checkpoints whose loss would materially cost future work.
+Record artifact ID, source setup/run, progress, filenames, origin `server.ref`, hashes when feasible, and durability status in the canonical `run-paths.yaml`.
 
-For an important promoted artifact, preserve the artifact ID, source setup/run, iteration or progress, filenames, origin `server.ref`, and hashes when feasible. Verify the copied pair before describing it as durable. Record verified OneDrive locations and durability status in the same Project experiment `run-paths.yaml`.
-
-If the OneDrive step cannot be completed, keep the local pair intact, record its actual local path, and return a `LOCAL_ONLY` durability status rather than silently treating the run as safely archived.
-
-## Completion means the data reached the target and outputs are locatable
-
-Do not claim completion because a command was submitted, the Python process exited, or enough wall time has passed.
-
-For an iteration-based experiment, the strongest minimal completion evidence is that the final saved data belongs to the intended run and reports the iteration count requested by `setup.md`.
-
-Also reconcile required generated outputs against the sibling `run-paths.yaml`. Required histories, `.out` files, checkpoints, transcripts, logs, manifests, and final case/data should be locatable at their declared paths or explicitly recorded as anomalies with their actual locations.
-
-Preserve the final case/data and any required histories or checkpoints. If execution failed before the target, report the final observed iteration and the failure without pretending the experiment completed.
-
-A successfully solved run, a successfully launched Codex handoff when that path applies, and a durably replicated run are related but separate facts. Report all three independently when the Codex handoff path applies. On Cursor, report attached-run completion instead of Codex handoff status.
+If promotion fails, preserve the local pair and record `LOCAL_ONLY` rather than pretending durability.
 
 ## Handoff
 
-Return only execution facts: whether the parent was staged and verified, whether the run filesystem/path map was established, the canonical Project `run-paths.yaml` location, whether the setup matched on readback, whether save/reopen verification passed, whether the smoke test ran, the runtime server reference, Python runner, requested horizon, execution mode, terminal status, final observed progress, declared and actual local artifact/output locations, verified OneDrive artifact locations when available, durability status, Codex handoff status for Codex hypothesis runs or attached-session completion for Cursor, and any implementation deviations, path anomalies, or execution failures.
+Return execution facts only:
+
+- lifecycle mode and prerequisite gate status;
+- parent staging/identity proof;
+- canonical `run-paths.yaml`;
+- working/output path proof;
+- setup readback proof;
+- save/reopen proof;
+- instrumentation proof;
+- smoke result;
+- requested horizon and actual terminal progress;
+- runtime/server/runner;
+- final case/data and required history locations;
+- Codex handoff status for detached hypothesis work or attached-session completion otherwise;
+- durability status;
+- implementation/path/execution deviations or blockers.
 
 Scientific interpretation belongs downstream.
