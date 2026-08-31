@@ -1,6 +1,6 @@
 ---
 name: explore-experiment-space
-description: "Design a small, fast simulation matrix to explore several plausible directions when the important mechanism or experiment direction is still unclear. Use inside scientific-phase-loop discovery mode before spending heavily on a focused hypothesis test."
+description: "Design a small, fast simulation matrix of six to twelve cases to explore several plausible directions when the important mechanism or experiment direction is still unclear. Use inside scientific-phase-loop discovery mode before spending heavily on a focused hypothesis test."
 ---
 
 # Explore Experiment Space
@@ -19,14 +19,18 @@ Ask:
 
 - What important uncertainty is still broad rather than sharply testable?
 - Which plausible directions remain difficult to rank from existing evidence?
-- What small set of contrasting simulations could make that landscape clearer?
+- What set of contrasting simulations could make that landscape clearer?
 - What would make a direction look promising, weak, or unexpectedly interesting?
 
 Do not create a matrix merely because many parameters exist. Every case should help distinguish a meaningful possibility.
 
-## Build a small discovery matrix
+## Build a six-to-twelve-case discovery matrix
 
-Create at most twelve quick simulation cases. Twelve is a hard ceiling, not a target; prefer fewer whenever they span the useful uncertainty adequately.
+Create **at least six and at most twelve** quick simulation cases for every discovery campaign.
+
+- `6` is the hard minimum: discovery must test enough distinct cases to provide real comparative breadth before a hypothesis can be promoted.
+- `12` is the hard ceiling: do not turn discovery into brute-force coverage.
+- Use between six and twelve based on the breadth of the uncertainty and available compute, but never reduce the campaign below six merely because one early case looks promising.
 
 Prefer a compact matrix containing a useful reference plus deliberately different directions. Cases may test alternative mechanisms, settings, formulations, operating conditions, or combinations when an interaction is itself worth screening.
 
@@ -38,10 +42,14 @@ Use a table such as:
 |---|---|---|---:|---|
 | D1 | Reference | Comparison anchor | 500-1000 | ... |
 | D2 | ... | Tests direction A | 500-1000 | ... |
+| D3 | ... | Tests direction B | 500-1000 | ... |
+| D4 | ... | Tests direction C | 500-1000 | ... |
+| D5 | ... | Tests direction D | 500-1000 | ... |
+| D6 | ... | Tests direction E | 500-1000 | ... |
 
 A ballpark of roughly 500 to 1,000 iterations per case is appropriate when that is enough to expose useful early behaviour. This is a planning default, not a universal numerical criterion. Use a different short budget when the model, solver behaviour, or phase constraints justify it.
 
-The point is to obtain comparable early behaviour across several directions without paying the cost of fully developing every case.
+The point is to obtain comparable early behaviour across enough distinct directions to support a defensible hypothesis without paying the cost of fully developing every case.
 
 ## Design comparable screening evidence and plots
 
@@ -91,7 +99,7 @@ Discovery evidence can eliminate poor directions, expose trends, generate hypoth
 Return:
 
 1. the discovery question;
-2. the case matrix, with no more than twelve quick screening cases;
+2. the case matrix, containing **6-12** quick screening cases;
 3. the evidence that should be comparable across the matrix;
 4. the `1-3` core screening figures and their exact plot specifications;
 5. the short-run budget and why it is sufficient for screening;
@@ -100,4 +108,4 @@ Return:
 
 Hand promising focused questions back to `scientific-phase-loop` / `design-experiment` for hypothesis-test mode.
 
-If the matrix does not reduce the uncertainty enough to justify a focused test, redesign the discovery question rather than automatically extending every case into a long simulation.
+Do not promote a hypothesis before at least six valid discovery cases have completed and been compared. If the matrix does not reduce the uncertainty enough to justify a focused test after six or more cases, continue discovery up to twelve cases or redesign the discovery question rather than automatically extending every case into a long simulation.
