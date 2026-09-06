@@ -1,0 +1,237 @@
+phase_id: phase-06-full-geometry-with-brine-pool
+cycle_plan:
+  requested_cycles: 5
+  completed_cycles: 0
+  stop_on_genuine_conclude: true
+  persistence: autonomous-continuation-with-terminal-gate-locks
+phase_question: >-
+  Can a full-geometry CFD model reproduce a physically credible, controlled
+  bottom brine-pool operating condition for the separator, rather than merely
+  a response to a fixed brine-outlet pressure?
+state: DISCOVERY_ANALYSIS
+
+autonomy:
+  experiment_selection: full
+  fluent_fleet_sessions: exclusive
+  exclusive_server_scope: all_configured
+  takeover_rule: >-
+    Continue a traceable still-valid job from this goal; otherwise preserve a
+    quick paired recovery when scientifically valuable, then overwrite and
+    reassign disposable live-session state.
+
+gates:
+  PHASE_CONTRACT:
+    status: PASS
+    checked_at: 2026-08-31
+    evidence:
+      - Project/experiments/phase-06-full-geometry-with-brine-pool/setup.md
+      - Human authorization in the current Codex task for a simple numerical pool-control substitute that approximately mimics the required behaviour.
+      - Human clarification on 2026-08-31 that steady-state is fixed, while Mixture/RNG is a reference rather than a frozen model-form requirement; justified steady multiphase and turbulence comparisons are authorized.
+      - Human authorization on 2026-08-31 granting exclusive Phase 06 control of every configured Fluent server, with traceable valid jobs reconciled and durable verified artifacts protected.
+    missing: []
+    reviewer: phase06_lease_reviewer-all-configured
+  DISCOVERY_DESIGN:
+    status: PASS
+    checked_at: 2026-08-31
+    evidence:
+      - Project/experiments/phase-06-full-geometry-with-brine-pool/discovery-campaign-20260831/setup.md
+      - Project/experiments/phase-06-full-geometry-with-brine-pool/discovery-campaign-20260831/bold-probe-research.md
+      - Project/experiments/phase-06-full-geometry-with-brine-pool/discovery-campaign-20260831/run-paths.yaml
+      - Original six-case design reviewed before D06 stalled during smoke.
+      - Project/experiments/phase-06-full-geometry-with-brine-pool/discovery-campaign-20260831/d06-repair-research.md
+      - Project/experiments/phase-06-full-geometry-with-brine-pool/discovery-campaign-20260831/d06r-coupled-capability-20260831.md
+      - Fresh independent review permitted the repaired D06R campaign to enter execution.
+      - Required residual/report/core-figure contract specified before execution.
+      - Project/experiments/phase-06-full-geometry-with-brine-pool/discovery-campaign-20260831/d06-repair-research.md (D06C prescribed-continuation repair: 1115000, 1120000, 1125000, 1131250, 1137500 Pa gauge).
+      - PyAnsys/output/phase06_discovery/20260831/P6-D03-V-20260831T063000Z.manifest.json reconciled to terminal BLOCKED_STALE_RUNNER; its non-counting status now agrees with this phase state.
+      - Fresh independent PASS: /root/d06c_discovery_design_reviewer_r2. It verified the six-case campaign, all five canonical completed manifests, D03 reconciliation, D06C's pressure sequence and claim boundary, the retained F1--F3 contract, and the runner's exact 30-report by 551-sample terminal enforcement.
+    missing: []
+    reviewer: /root/d06c_discovery_design_reviewer_r2 (PASS)
+  DISCOVERY_EXECUTION:
+    status: PASS
+    checked_at: 2026-08-31
+    evidence:
+      - Project/experiments/phase-06-full-geometry-with-brine-pool/stage-01-level-observable-and-outlet-response/results.md
+      - Project/experiments/phase-06-full-geometry-with-brine-pool/stage-03-simplified-level-control-surrogate/results.md
+      - PyAnsys/scripts/inspection/rebuild_p6_discovery_residual_history.py re-parsed all six preserved solver transcripts after a verified repeated-header parser repair: every canonical residual JSON now has 551 unique native coordinates from 15000 through 15550, seven aligned residual curves, no interpolation, and explicit raw-row/duplicate-boundary provenance.
+      - Fresh independent PASS: /root/d06c_discovery_execution_reviewer_r2. It verified all six selected cases' parent/setup/readback/save-reopen/smoke/report package/horizon/final pair/attached terminal evidence, and independently re-parsed every residual transcript against the regenerated JSON.
+    missing: []
+    reviewer: /root/d06c_discovery_execution_reviewer_r2 (PASS)
+  DISCOVERY_EVIDENCE:
+    status: BLOCK
+    checked_at: 2026-08-31
+    evidence:
+      - Project/experiments/phase-06-full-geometry-with-brine-pool/results.md
+      - Project/experiments/phase-06-full-geometry-with-brine-pool/stage-01-level-observable-and-outlet-response/results.md
+      - Project/experiments/phase-06-full-geometry-with-brine-pool/stage-03-simplified-level-control-surrogate/results.md
+    missing:
+      - F1 pool-proxy and F2 phase-liquid-balance core figures from the six retained report histories. The report files were written and terminally counted, but no portable history extract exists locally; server 2 currently rejects the configured Fluent credential and server 3 is unreachable.
+      - Comparative discovery analysis that can materially narrow uncertainty to one falsifiable hypothesis once F1/F2 are available.
+    reviewer: phase06_gate_reviewer
+  HYPOTHESIS_DEFINITION:
+    status: BLOCK
+    checked_at: 2026-08-31
+    evidence:
+      - Project/experiments/phase-06-full-geometry-with-brine-pool/stage-06-long-horizon-surrogate-hypothesis/setup.md
+    missing:
+      - DISCOVERY_EVIDENCE must pass before the hypothesis may be promoted into the qualification lifecycle.
+      - A separately gate-reviewed contract that explicitly names the strongest competing explanation and the exact form of strong statement sought.
+    reviewer: phase06_gate_reviewer
+  HYPOTHESIS_RUN_READY:
+    status: BLOCK
+    checked_at: 2026-08-31
+    evidence:
+      - Project/experiments/phase-06-full-geometry-with-brine-pool/stage-06-long-horizon-surrogate-hypothesis/setup.md
+      - PyAnsys/queues/p6-s6-h-server2-20260831T004750Z.yaml
+    missing:
+      - DISCOVERY_EVIDENCE and HYPOTHESIS_DEFINITION gate passes.
+      - A proven durable residual-history capture path before solve.
+      - A restart or cold save/reopen qualification window adequate to distinguish durable stationarity from transient passage for the stated bounded-state hypothesis.
+    reviewer: phase06_gate_reviewer
+  HYPOTHESIS_EXECUTION:
+    status: BLOCK
+    checked_at: 2026-08-31
+    evidence:
+      - PyAnsys/output/run-handoff/P6-S6-H-server2-20260831T004750Z/job_manifest.json
+      - PyAnsys/output/phase06_stage06/P6-S6-H-server2-20260831T004750Z.runner.json
+      - Project/experiments/phase-06-full-geometry-with-brine-pool/stage-06-long-horizon-surrogate-hypothesis/results.md
+    missing:
+      - Terminal completion verification; the canonical job and runner statuses are BLOCKED.
+      - The required residual-history artifact.
+      - The declared named final case/data pair and a passing final-pair verifier; only a separately verified chunk-100 checkpoint is retained.
+    reviewer: phase06_gate_reviewer
+  HYPOTHESIS_EVIDENCE:
+    status: BLOCK
+    checked_at: 2026-08-31
+    evidence:
+      - Project/experiments/phase-06-full-geometry-with-brine-pool/stage-06-long-horizon-surrogate-hypothesis/results.md
+      - Project/experiments/phase-06-full-geometry-with-brine-pool/stage-06-long-horizon-surrogate-hypothesis/figures/P6-S6-H-server2-20260831T004750Z/summary.json
+    missing:
+      - F4 scaled-residual history promised by the setup contract; it may not be waived after seeing the result.
+      - A passing HYPOTHESIS_EXECUTION gate.
+    reviewer: phase06_gate_reviewer
+  PHASE_CLOSURE:
+    status: BLOCK
+    checked_at: 2026-08-31
+    evidence:
+      - Project/experiments/phase-06-full-geometry-with-brine-pool/results.md
+      - Project/experiments/phase-06-full-geometry-with-brine-pool/stage-05-phase-conclusion/results.md
+    missing:
+      - PASS for PHASE_CONTRACT, DISCOVERY_EVIDENCE, HYPOTHESIS_DEFINITION, HYPOTHESIS_RUN_READY, HYPOTHESIS_EXECUTION, and HYPOTHESIS_EVIDENCE.
+      - Completion of the mandatory discovery-to-hypothesis lifecycle for the authorized surrogate route.
+    reviewer: phase06_gate_reviewer
+
+active_jobs: []
+recent_execution_attempts:
+  - run_id: P6-D06C-PR-20260831T084410Z
+    setup_id: P6-D06C-PR
+    server_ref: server-2@10.104.145.174
+    status: COMPLETE_PENDING_DISCOVERY_EXECUTION_REVIEW
+    manifest: PyAnsys/output/phase06_discovery/20260831/P6-D06C-PR-20260831T084410Z.manifest.json
+    evidence: report_iteration_start=15000; smoke_report_iteration=15050; final_report_iteration=15550; report_iteration_delta=550; residual_history_points=556; five prescribed pressure command/readbacks at 1115000,1120000,1125000,1131250,1137500 Pa; 30 report histories each have 551 samples; report_package_verification=PASS; terminal_verification=PASS; final pair saved and reopened.
+  - run_id: P6-D06R-EC-20260831T211500Z
+    setup_id: P6-D06R-EC
+    server_ref: server-2@10.104.145.174
+    status: BLOCKED_INVALID_REPORT_PACKAGE
+    manifest: PyAnsys/output/phase06_discovery/20260831/P6-D06R-EC-20260831T211500Z.manifest.json
+    reason: >-
+      Eulerian Coupled smoke produced a solver validation warning that the
+      inherited brine-entry total-pressure report field is unavailable, and
+      its redirected report file was not written. The runner blocked before a
+      countable smoke horizon, discovery horizon, residual package, or final
+      pair. It may not be cured by silently weakening the declared report
+      package after seeing the failure.
+  - run_id: P6-D02-R-20260831T203500Z
+    setup_id: P6-D02-R
+    server_ref: server-2@10.104.145.174
+    status: COMPLETE
+    manifest: PyAnsys/output/phase06_discovery/20260831/P6-D02-R-20260831T203500Z.manifest.json
+    evidence: report_iteration_start=15000; smoke_report_iteration=15050; final_report_iteration=15550; report_iteration_delta=550; residual_history_points=552; 30 report histories each have 551 samples; terminal_verification=PASS; autosave root was redirected and survived prepared save/reopen.
+  - run_id: P6-D01-R-20260831T201000Z
+    setup_id: P6-D01-R
+    server_ref: server-2@10.104.145.174
+    status: COMPLETE
+    manifest: PyAnsys/output/phase06_discovery/20260831/P6-D01-R-20260831T201000Z.manifest.json
+    evidence: report_iteration_start=15000; smoke_report_iteration=15050; final_report_iteration=15550; report_iteration_delta=550; residual_history_points=552; 30 report histories each have 551 samples; terminal_verification=PASS; autosave root was redirected and survived prepared save/reopen.
+  - run_id: P6-D06-E-20260831T194000Z
+    setup_id: P6-D06-E
+    server_ref: server-3@10.104.145.176
+    status: BLOCKED_STALLED_SMOKE
+    manifest: PyAnsys/output/phase06_discovery/20260831/P6-D06-E-20260831T194000Z.manifest.json
+    reason: >-
+      The attached client entered the declared 50-iteration smoke at
+      2026-08-31T19:48 NZST but did not produce a file-backed smoke report
+      coordinate after more than 17 minutes. The locally traceable client was
+      terminated under the Phase 06 exclusive-server authority. Its manifest
+      has been reconciled to terminal `BLOCKED_STALLED_SMOKE`. A subsequent
+      2026-08-31 health check to server 3 timed out, so D06R is deliberately
+      placed on independently proven quiescent server 2. No discovery
+      iterations, residual evidence, or final pair exist; it cannot count.
+  - run_id: P6-D05-F-20260831T195000Z
+    setup_id: P6-D05-F
+    server_ref: server-2@10.104.145.174
+    status: COMPLETE
+    manifest: PyAnsys/output/phase06_discovery/20260831/P6-D05-F-20260831T195000Z.manifest.json
+    evidence: report_iteration_start=15000; smoke_report_iteration=15050; final_report_iteration=15550; report_iteration_delta=550; residual_history_points=561; ten feedback updates read back; 30 report histories each have 551 samples; terminal_verification=PASS; autosave root was redirected and survived prepared save/reopen.
+  - run_id: P6-D04-F-20260831T193500Z
+    setup_id: P6-D04-F
+    server_ref: server-2@10.104.145.174
+    status: COMPLETE
+    manifest: PyAnsys/output/phase06_discovery/20260831/P6-D04-F-20260831T193500Z.manifest.json
+    evidence: report_iteration_start=15000; smoke_report_iteration=15050; final_report_iteration=15550; report_iteration_delta=550; residual_history_points=556; five feedback updates read back; 30 report histories each have 551 samples; terminal_verification=PASS; autosave root was redirected and survived prepared save/reopen.
+  - run_id: P6-D03-V-20260831T192500Z
+    setup_id: P6-D03-V
+    server_ref: server-3@10.104.145.176
+    status: COMPLETE
+    manifest: PyAnsys/output/phase06_discovery/20260831/P6-D03-V-20260831T192500Z.manifest.json
+    evidence: report_iteration_start=15000; smoke_report_iteration=15050; final_report_iteration=15550; report_iteration_delta=550; residual_history_points=552; 30 report histories each have 551 samples; terminal_verification=PASS; autosave root was redirected and survived prepared save/reopen.
+  - run_id: P6-D03-V-20260831T063000Z
+    setup_id: P6-D03-V
+    server_ref: server-3@10.104.145.176
+    status: BLOCKED_STALE_RUNNER
+    manifest: PyAnsys/output/phase06_discovery/20260831/P6-D03-V-20260831T063000Z.manifest.json
+    reason: The controlling agent exhausted its service quota after runner start; no local runner process, smoke event, mutation evidence, or terminal verification remains. The run root is not reused.
+  - run_id: P6-D03-V-20260831T062000Z
+    setup_id: P6-D03-V
+    server_ref: server-3@10.104.145.176
+    status: BLOCKED_INVALID_HORIZON
+    manifest: PyAnsys/output/phase06_discovery/20260831/P6-D03-V-20260831T062000Z.manifest.json
+    reason: Native residual/transcript advanced only 200 iterations after smoke (15050 to 15250) although 500 were requested; proxy report horizon gate blocked before final pair save. Root not reused.
+  - run_id: P6-D02-R-20260831T060000Z
+    setup_id: P6-D02-R
+    server_ref: server-2@10.104.145.174
+    status: COMPLETE
+    manifest: PyAnsys/output/phase06_discovery/20260831/P6-D02-R-20260831T060000Z.manifest.json
+    evidence: report_iteration_start=15000; smoke_report_iteration=15050; final_report_iteration=15550; residual_history_points=552; terminal_verification=PASS
+  - run_id: P6-D03-V-20260831T061000Z
+    setup_id: P6-D03-V
+    server_ref: server-3@10.104.145.176
+    status: BLOCKED_INVALID_OWNERSHIP_PREFLIGHT
+    manifest: PyAnsys/output/phase06_discovery/20260831/P6-D03-V-20260831T061000Z.manifest.json
+    reason: Preflight observed Fluent iterating=true before mutation; no case mutation or discovery iteration was issued. Exclusive-authority reconciliation interrupted the stale calculation and proved iterating=false at native iteration 1556.
+  - run_id: P6-D01-R-20260831T053000Z
+    setup_id: P6-D01-R
+    server_ref: server-2@10.104.145.174
+    status: COMPLETE
+    manifest: PyAnsys/output/phase06_discovery/20260831/P6-D01-R-20260831T053000Z.manifest.json
+    evidence: report_iteration_start=15000; smoke_report_iteration=15050; final_report_iteration=15550; residual_history_points=552; terminal_verification=PASS
+  - run_id: P6-D01-R-20260831T051500Z
+    setup_id: P6-D01-R
+    server_ref: server-2@10.104.145.174
+    status: BLOCKED_INVALID_NO_RESIDUAL
+    manifest: PyAnsys/output/phase06_discovery/20260831/P6-D01-R-20260831T051500Z.manifest.json
+    reason: Fluent 2025 R2 did not expose the residual monitor set through the live monitor-stream manager during smoke; no discovery iterations were counted.
+operational_blockers:
+  - id: fluent-fleet-unreachable
+    status: CLEARED
+    observed_through: 2026-08-31T16:39:00+12:00
+    cleared_at: 2026-08-31T17:10:00+12:00
+    evidence: Direct preflight verified server-2@10.104.145.174 and server-3@10.104.145.176 reachable, gRPC connected, Fluent 2025 R2, quiescent over a 3-second activity window, and canonical F11 case/data visible on both.
+    recovery: Repeat fleet preflight before each compute wave; exclusive Phase 06 authority permits takeover/reload of disposable active session state.
+next_required_action: >-
+  Recover the six retained remote report-history packages without changing
+  scientific definitions or silently substituting other data. Once F1/F2 and
+  F3 are complete, perform comparative discovery analysis and obtain an
+  independent DISCOVERY_EVIDENCE review before any hypothesis definition or
+  qualification design. Continue periodic fleet/access checks; a temporary
+  credential or reachability failure is not permission to waive the evidence.

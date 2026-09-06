@@ -1,0 +1,60 @@
+job:
+  id: P6-S6-H-server2-20260831T003300Z
+  mode: hypothesis-test
+  manifest: PyAnsys/output/run-handoff/P6-S6-H-server2-20260831T003300Z/job_manifest.json
+  worker_log: PyAnsys/output/run-handoff/P6-S6-H-server2-20260831T003300Z/worker.log
+
+runner:
+  command:
+    - PyAnsys/.venv/bin/python
+    - PyAnsys/scripts/setup/run_p6_s6_long_surrogate_hypothesis.py
+    - --server-id
+    - '2'
+    - --run-root
+    - 'C:\Users\syok443\Documents\FluentRuns\P6\S6\long-hypothesis-server2-20260831T003300Z'
+    - --manifest
+    - PyAnsys/output/phase06_stage06/P6-S6-H-server2-20260831T003300Z.runner.json
+    - --residual-history
+    - PyAnsys/output/phase06_stage06/P6-S6-H-server2-20260831T003300Z.residuals.json
+    - --chunks
+    - '100'
+    - --chunk-iterations
+    - '100'
+    - --gain-pa-per-kg
+    - '2000'
+    - --max-step-pa
+    - '5000'
+    - --checkpoint-every-chunks
+    - '50'
+  cwd: .
+  log: PyAnsys/output/run-handoff/P6-S6-H-server2-20260831T003300Z/runner.log
+
+completion:
+  required_files:
+    - path: PyAnsys/output/phase06_stage06/P6-S6-H-server2-20260831T003300Z.runner.json
+      min_size_bytes: 100
+    - path: PyAnsys/output/phase06_stage06/P6-S6-H-server2-20260831T003300Z.residuals.json
+      min_size_bytes: 100
+  verifier_command:
+    - PyAnsys/.venv/bin/python
+    - PyAnsys/scripts/inspection/verify_p6_s6_long_final.py
+    - --server-id
+    - '2'
+    - --final-case
+    - 'C:\Users\syok443\Documents\FluentRuns\P6\S6\long-hypothesis-server2-20260831T003300Z\final.cas.h5'
+    - --final-data
+    - 'C:\Users\syok443\Documents\FluentRuns\P6\S6\long-hypothesis-server2-20260831T003300Z\final.dat.h5'
+  verifier_cwd: .
+  verifier_log: PyAnsys/output/run-handoff/P6-S6-H-server2-20260831T003300Z/verifier.log
+
+codex:
+  executable: codex
+  cwd: .
+  trigger_on: [COMPLETE, BLOCKED]
+  log: PyAnsys/output/run-handoff/P6-S6-H-server2-20260831T003300Z/codex_handoff.log
+  prompt: >-
+    P6-S6-H has reached a terminal state. Read its job and runner manifests,
+    then analyse the file-backed histories and residual capture, update the
+    canonical Stage-06 results and Project state, apply check-phase-closure,
+    and continue the scientific phase loop. Do not describe this numerical
+    surrogate as plant level-control validation.

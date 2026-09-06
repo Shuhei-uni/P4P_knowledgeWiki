@@ -1,0 +1,124 @@
+campaign_id: phase06-discovery-campaign-20260831
+phase_id: phase-06-full-geometry-with-brine-pool
+mode: discovery
+parent:
+  artifact_id: F11-paired-reference
+  case: 'C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\P5\\F11\\F11.cas.h5'
+  data: 'C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\P5\\F11\\F11.dat.h5'
+  model_boundary: steady
+  reference_model: Mixture/RNG
+runs:
+  - case_id: P6-D01-R
+    classification: REPLICATION
+    server: server-2@10.104.145.174
+    run_id: P6-D01-R-20260831T201000Z
+    manifest: PyAnsys/output/phase06_discovery/20260831/P6-D01-R-20260831T201000Z.manifest.json
+    residual_history: PyAnsys/output/phase06_discovery/20260831/P6-D01-R-20260831T201000Z.residual.json
+    final_case: 'C:\\Users\\syok443\\Documents\\FluentRuns\\P6\\D01-R-20260831T201000Z\\final.cas.h5'
+    final_data: 'C:\\Users\\syok443\\Documents\\FluentRuns\\P6\\D01-R-20260831T201000Z\\final.dat.h5'
+    status: COMPLETE
+    terminal_verification: PASS
+    report_iteration_start: 15000
+    smoke_report_iteration: 15050
+    final_report_iteration: 15550
+    report_iteration_delta: 550
+    residual_history_points: 552
+  - case_id: P6-D02-R
+    classification: REPLICATION
+    server: server-2@10.104.145.174
+    run_id: P6-D02-R-20260831T203500Z
+    manifest: PyAnsys/output/phase06_discovery/20260831/P6-D02-R-20260831T203500Z.manifest.json
+    residual_history: PyAnsys/output/phase06_discovery/20260831/P6-D02-R-20260831T203500Z.residual.json
+    final_case: 'C:\\Users\\syok443\\Documents\\FluentRuns\\P6\\D02-R-20260831T203500Z\\final.cas.h5'
+    final_data: 'C:\\Users\\syok443\\Documents\\FluentRuns\\P6\\D02-R-20260831T203500Z\\final.dat.h5'
+    status: COMPLETE
+    terminal_verification: PASS
+    report_iteration_start: 15000
+    smoke_report_iteration: 15050
+    final_report_iteration: 15550
+    report_iteration_delta: 550
+    residual_history_points: 552
+  - case_id: P6-D03-V
+    classification: PARTIAL REPEAT
+    server: server-3@10.104.145.176
+    run_id: P6-D03-V-20260831T192500Z
+    manifest: PyAnsys/output/phase06_discovery/20260831/P6-D03-V-20260831T192500Z.manifest.json
+    residual_history: PyAnsys/output/phase06_discovery/20260831/P6-D03-V-20260831T192500Z.residual.json
+    final_case: 'C:\\Users\\syok443\\Documents\\FluentRuns\\P6\\D03-V-20260831T192500Z\\final.cas.h5'
+    final_data: 'C:\\Users\\syok443\\Documents\\FluentRuns\\P6\\D03-V-20260831T192500Z\\final.dat.h5'
+    status: COMPLETE
+    terminal_verification: PASS
+    report_iteration_start: 15000
+    smoke_report_iteration: 15050
+    final_report_iteration: 15550
+    report_iteration_delta: 550
+    residual_history_points: 552
+  - case_id: P6-D04-F
+    classification: PARTIAL REPEAT
+    server: server-2@10.104.145.174
+    run_id: P6-D04-F-20260831T193500Z
+    manifest: PyAnsys/output/phase06_discovery/20260831/P6-D04-F-20260831T193500Z.manifest.json
+    residual_history: PyAnsys/output/phase06_discovery/20260831/P6-D04-F-20260831T193500Z.residual.json
+    final_case: 'C:\\Users\\syok443\\Documents\\FluentRuns\\P6\\D04-F-20260831T193500Z\\final.cas.h5'
+    final_data: 'C:\\Users\\syok443\\Documents\\FluentRuns\\P6\\D04-F-20260831T193500Z\\final.dat.h5'
+    status: COMPLETE
+    terminal_verification: PASS
+    report_iteration_start: 15000
+    smoke_report_iteration: 15050
+    final_report_iteration: 15550
+    report_iteration_delta: 550
+    residual_history_points: 556
+    residual_unique_native_samples: 551
+    residual_raw_transcript_rows: 556
+    residual_verified_duplicate_boundary_rows_removed: 5
+  - case_id: P6-D05-F
+    classification: NEW
+    server: server-2@10.104.145.174
+    run_id: P6-D05-F-20260831T195000Z
+    manifest: PyAnsys/output/phase06_discovery/20260831/P6-D05-F-20260831T195000Z.manifest.json
+    residual_history: PyAnsys/output/phase06_discovery/20260831/P6-D05-F-20260831T195000Z.residual.json
+    final_case: 'C:\\Users\\syok443\\Documents\\FluentRuns\\P6\\D05-F-20260831T195000Z\\final.cas.h5'
+    final_data: 'C:\\Users\\syok443\\Documents\\FluentRuns\\P6\\D05-F-20260831T195000Z\\final.dat.h5'
+    status: COMPLETE
+    terminal_verification: PASS
+    report_iteration_start: 15000
+    smoke_report_iteration: 15050
+    final_report_iteration: 15550
+    report_iteration_delta: 550
+    residual_history_points: 561
+  - case_id: P6-D06C-PR
+    classification: NEW
+    server: server-2@10.104.145.174
+    run_id: P6-D06C-PR-20260831T084410Z
+    manifest: PyAnsys/output/phase06_discovery/20260831/P6-D06C-PR-20260831T084410Z.manifest.json
+    residual_history: PyAnsys/output/phase06_discovery/20260831/P6-D06C-PR-20260831T084410Z.residual.json
+    residual_transcript: PyAnsys/output/phase06_discovery/20260831/P6-D06C-PR-20260831T084410Z.residual.transcript.txt
+    runner: PyAnsys/scripts/setup/run_p6_discovery_case.py
+    run_root: 'C:\Users\syok443\Documents\FluentRuns\P6\D06C-PR-20260831T084410Z'
+    monitor_root: 'C:\Users\syok443\Documents\FluentRuns\P6\D06C-PR-20260831T084410Z\reports'
+    autosave_root: 'C:\Users\syok443\Documents\FluentRuns\P6\D06C-PR-20260831T084410Z\autosave'
+    final_case: 'C:\Users\syok443\Documents\FluentRuns\P6\D06C-PR-20260831T084410Z\final.cas.h5'
+    final_data: 'C:\Users\syok443\Documents\FluentRuns\P6\D06C-PR-20260831T084410Z\final.dat.h5'
+    working_directory: 'C:\Users\syok443\Documents\FluentRuns\P6\D06C-PR-20260831T084410Z\reports'
+    pressure_sequence_pa: [1115000, 1120000, 1125000, 1131250, 1137500]
+    requested_smoke_iterations: 50
+    requested_discovery_iterations: 500
+    required_report_count: 30
+    required_samples_per_report: 551
+    report_iteration_start: 15000
+    smoke_report_iteration: 15050
+    final_report_iteration: 15550
+    report_iteration_delta: 550
+    residual_history_points: 556
+    pressure_command_readbacks:
+      - {pressure_pa: 1115000, verified_at: initial_before_smoke}
+      - {pressure_pa: 1120000, verified_after_chunk: 1}
+      - {pressure_pa: 1125000, verified_after_chunk: 2}
+      - {pressure_pa: 1131250, verified_after_chunk: 3}
+      - {pressure_pa: 1137500, verified_after_chunk: 4_and_final_reopen}
+    report_package_verification: {status: PASS, reports: 30, samples_per_report: 551}
+    status: COMPLETE
+    terminal_verification: PASS
+durability:
+  selected_final_pairs: pending
+  local_only_debt_allowed: true

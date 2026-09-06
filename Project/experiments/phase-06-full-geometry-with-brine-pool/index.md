@@ -36,7 +36,26 @@ the phase question with a convenient pressure, turbulence, or numerical sweep.
 - [Stage 02 — level mapping and control-data gate](stage-02-level-mapping-and-control-data-gate/setup.md)
 - [Stage 03 — simplified level-control surrogate](stage-03-simplified-level-control-surrogate/setup.md)
 - [Stage 04 — stronger-feedback hypothesis](stage-04-stronger-feedback-hypothesis/setup.md)
-- [Stage 05 — phase conclusion](stage-05-phase-conclusion/results.md)
+- [Stage 05 — premature conclusion retained as diagnostic interpretation](stage-05-phase-conclusion/results.md)
+- [Stage 06 — long-horizon surrogate hypothesis](stage-06-long-horizon-surrogate-hypothesis/setup.md)
+- [Stage 06 — long-horizon surrogate partial evidence](stage-06-long-horizon-surrogate-hypothesis/results.md)
+- [mandatory lifecycle gate state](phase-state.yaml)
+
+## Current phase outcome
+
+**Not closed; current lifecycle state is `DISCOVERY_DESIGN`.** The Phase-06
+screens identified a lower-region liquid-inventory proxy and the long
+`P6-S6-H` calculation retained useful report histories and a verified
+chunk-100 checkpoint. Its proxy remained above target with positive late
+storage and phase-liquid accumulation after pressure saturation.
+
+That bounded numerical observation does not satisfy the current lifecycle.
+Only three valid discovery cases are identified, the canonical long-run job is
+`BLOCKED`, its required residual capture is unavailable, and its named final
+pair failed verification. The human has now authorized a deliberately simple
+numerical-surrogate route, so missing plant data no longer blocks that bounded
+investigation. It still prevents a physical level-control validation claim.
+The next requirement is a verified 6–12-case discovery design.
 
 ## Relationship to the prior work
 

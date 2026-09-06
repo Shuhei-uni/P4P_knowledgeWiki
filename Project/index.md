@@ -29,7 +29,8 @@ record:
 - [Stage-5 fixed-pressure evidence](experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/stage-05/results.md)
 - [Phase-06 Full Geometry with Brine Pool contract](experiments/phase-06-full-geometry-with-brine-pool/setup.md)
 - [Phase-06 Stage-01 setup](experiments/phase-06-full-geometry-with-brine-pool/stage-01-level-observable-and-outlet-response/setup.md)
-- [Phase-06 Stage-01 results](experiments/phase-06-full-geometry-with-brine-pool/stage-01-level-observable-and-outlet-response/results.md)
+- [Phase-06 results and closure](experiments/phase-06-full-geometry-with-brine-pool/results.md)
+- [Phase-06 Stage-06 long-horizon evidence](experiments/phase-06-full-geometry-with-brine-pool/stage-06-long-horizon-surrogate-hypothesis/results.md)
 
 The earlier Project experiment records preserve the migrated setup and result
 memory for the Purnanto, full-geometry, DPM, EWF, VOF, and reconstruction
@@ -38,46 +39,46 @@ silently upgraded to current conclusions.
 
 ## What did the latest experiment show?
 
-The first Phase-06 short fixed-pressure reference is complete. Its retained
-native report histories show continued growth in total and lower-region
-phase-2 liquid mass and a positive phase-liquid net rate; the short screen
-remained materially mass-unclosed. The lower-region liquid-mass reports are
-useful inventory-response proxies, but they are not a calibrated pool level or
-instrument signal. Residual history was unavailable after reconnecting, so no
-convergence claim is made.
+The completed Phase-06 discovery screens and the Stage-06 10,000-iteration
+long numerical-surrogate hypothesis test did not establish a controlled pool
+state in the F11 steady Mixture/RNG bracket. In the long test, the lower-region
+proxy remained well above its deliberately non-plant 200 kg target after the
+bounded pressure actuator saturated, while the final-window phase-liquid net
+rate and imbalance remained positive. The final endpoint has a verified paired
+checkpoint and complete file-backed report histories; the PyFluent residual
+monitor did not populate, so no convergence claim is made.
 
-This result confirms why a fixed pressure outlet must be treated as a
-reference condition, not the real separator's level-control mechanism.
+This is a bounded model result, not evidence that the physical separator
+cannot be level controlled.
 
 ## What remains unresolved?
 
-- whether the F11-derived model can represent the real brine-pool level and
-  its measurement location with a defensible geometric/phase observable;
-- whether an explicitly specified level-control outlet condition can establish
-  a controlled steady operating point with credible residuals and phase flows;
-- whether any resulting remaining drift is caused by retained model form,
-  setup fidelity, or a requirement for time-dependent control modelling;
-- whether the rebuilt case is truly at parity with the audited Purnanto carrier
-  settings apart from its declared project change;
+- the real level sensor datum/location, target and operating band;
+- the brine outlet hardware/line characteristic, downstream condition, and
+  controller behaviour required to model a physical controlled outlet;
+- whether a human-approved new transient/model-form/control scope is warranted
+  after the current steady surrogate has failed to establish control;
 - which external, analytical, or measured targets are appropriate for a
-  validation claim;
-- whether later DPM evidence is complete enough to support more than a bounded
-  carryover diagnostic.
+  validation claim.
 
 ## What happens next?
 
-Phase 06 has now completed that matched steady outlet-vent resistance screen.
-At the deliberately non-plant-calibrated `K=10`, it substantially reduced
-liquid brine drainage and worsened liquid accumulation, liquid carryover, and
-the retained imbalance indicators. The screen rules out that exact arbitrary
-resistance representation as a controlled-pool candidate; it does not select a
-different coefficient or make any claim about the real valve. The next step is
-geometry-to-level mapping and a physically specified outlet/feedback relation,
-not another arbitrary resistance or fixed-pressure sweep.
+**Phase 06 is not closed under the current mandatory lifecycle gates.** The
+10,000-iteration calculation usefully weakened the Stage-04 hypothesis: after
+pressure saturation, the numerical proxy remained above target with positive
+late storage/phase-liquid accumulation. However, only three valid discovery
+cases are identified, the canonical long-run job is `BLOCKED`, and the required
+residual history and named final pair are absent. Those gaps prevent discovery,
+hypothesis-evidence, and closure gates from passing.
 
-Actual plant level setpoint, measurement position, level band, outlet
-hardware/line characteristic, downstream condition, and controller behaviour
-remain required before any model can claim physical level-control fidelity.
+The human has authorized a bounded numerical-surrogate route whose purpose is
+to mimic the main level-control behaviour without claiming plant fidelity. The
+persisted state is now `DISCOVERY_DESIGN`. The next permitted step is a
+gate-reviewed campaign of 6–12 nonredundant full-geometry steady surrogate
+cases with durable numerical and physical histories. Mixture/RNG is the
+reference, but justified steady multiphase and turbulence alternatives are
+allowed. Transient work or a physical validation claim still requires a return
+to the human.
 
 ## Project map
 

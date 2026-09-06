@@ -1,0 +1,78 @@
+{
+  "kind": "p6_s6_long_hypothesis_analysis",
+  "target_proxy_kg": 200.0,
+  "late_window_points": 1000,
+  "native_late_window": [
+    24051,
+    25050
+  ],
+  "report_history_points": 10051,
+  "residual_capture": {
+    "status": "UNAVAILABLE",
+    "reason": "The post-run PyFluent residual monitor did not populate before timeout; no replacement diagnostic was substituted."
+  },
+  "proxy_y010_mass_kg": {
+    "initial": 187.7928814004864,
+    "final": 284.8335783200515,
+    "delta": 97.04069691956511,
+    "late_mean": 284.4507279285738,
+    "late_min": 281.6060895674934,
+    "late_max": 287.58267570585,
+    "late_slope_per_iteration": 0.002486248333361246
+  },
+  "proxy_y030_mass_kg": {
+    "initial": 194.1539057922307,
+    "final": 291.7704715169574,
+    "delta": 97.61656572472671,
+    "late_mean": 291.25919170928285,
+    "late_min": 288.5631771908029,
+    "late_max": 294.3255230576892,
+    "late_slope_per_iteration": 0.0024973303360722827
+  },
+  "total_phase2_mass_kg": {
+    "initial": 345.3654721265753,
+    "final": 433.8201199373872,
+    "delta": 88.45464781081188,
+    "late_mean": 432.6416007152975,
+    "late_min": 428.8064313193219,
+    "late_max": 436.7752852715852,
+    "late_slope_per_iteration": 0.004936049250073884
+  },
+  "liquid_net_rate_kg_s": {
+    "initial": 24.596397623690756,
+    "final": 13.346080535828627,
+    "delta": -11.250317087862129,
+    "late_mean": 16.096730384759617,
+    "late_min": 12.063779567118457,
+    "late_max": 20.01630375870546,
+    "late_slope_per_iteration": 0.00037405438240019963
+  },
+  "full_mass_imbalance_kg_s": {
+    "initial": 24.56716457698704,
+    "final": 13.3400130372051,
+    "delta": -11.22715153978194,
+    "late_mean": 16.106951972097214,
+    "late_min": 12.07486820259987,
+    "late_max": 19.91518999354977,
+    "late_slope_per_iteration": 0.0003182776587175254
+  },
+  "relative_mass_imbalance": {
+    "initial": 0.1237726069589354,
+    "final": 0.06720874056535335,
+    "delta": -0.056563866393582046,
+    "late_mean": 0.08114894291123508,
+    "late_min": 0.06083477445831617,
+    "late_max": 0.100335347038509,
+    "late_slope_per_iteration": 1.6035247141689486e-06
+  },
+  "controller": {
+    "minimum_pressure_mpa_gauge": 1.115,
+    "maximum_pressure_mpa_gauge": 1.125,
+    "final_pressure_mpa_gauge": 1.115,
+    "at_lower_bound_endpoints": 98
+  },
+  "sign_convention": {
+    "raw_outlet_reports": "Fluent reports are negative for outward liquid flux in this F11 lineage.",
+    "derived_net_liquid_rate": "liquid inlet \u2212 physical brine discharge \u2212 physical steam discharge; numerically equal to raw inlet + raw brine + raw steam."
+  }
+}

@@ -90,7 +90,66 @@ claim is not supportable if phase balance is persistently unaccounted for.
   level metric, numerical evidence, and final paired artifact have all been
   verified.
 
+## Human-authorized simplified surrogate route
+
+**Authorized by the human on 2026-08-31.** Phase 06 does not need a complete
+plant sensor, valve, line, or controller definition before numerical discovery
+continues. The immediate purpose is to create a deliberately simple substitute
+that approximately mimics the main control behaviour while retaining the brine
+outlet and a liquid pool:
+
+- use a clearly declared simulated liquid-inventory or level-related proxy;
+- when that proxy rises above its numerical target/band, change the brine
+  outlet condition in the direction that increases liquid removal;
+- when that proxy falls below its numerical target/band, change the outlet
+  condition in the direction that reduces liquid removal;
+- seek a bounded, approximately constant numerical pool proxy with credible
+  phase balance and numerical histories.
+
+The loop may select deliberately simple or "hacky" numerical outlet-response
+relations inside the retained full-geometry, **steady-state** boundary. Mixture
+with RNG `k-epsilon` is a verified reference, not a frozen model-form
+requirement. Discovery may compare other justified steady multiphase
+formulations and turbulence closures when the change is nonredundant and can
+materially affect pool representation, phase routing, or the ability to hold a
+bounded proxy. The proxy, target, response law, gains, limits, multiphase model,
+and turbulence closure must be explicit numerical assumptions and must be
+varied or challenged through the required discovery campaign. They are not
+plant facts.
+
+The resulting claim is limited to whether the tested simplified surrogate can
+produce a numerically credible bounded liquid-pool state in this model. It must
+not be described as reproducing the real level instrument, valve, controller,
+or separator response.
+
+### Authority envelope for this route
+
+- **Experiment selection:** full inside the simplified full-geometry,
+  steady-state surrogate boundary and the mandatory lifecycle gates. This
+  includes justified steady multiphase-formulation and turbulence-closure
+  comparisons; F11 Mixture/RNG remains the reference basis.
+- **Fluent fleet:** the human grants Phase 06 an exclusive lease on every
+  configured Fluent server. The loop must reconcile and continue an active
+  calculation when it can be traced to a still-valid call/job from this goal.
+  Otherwise it may preserve a quick paired recovery state when the loaded
+  unpreserved endpoint is scientifically valuable, then stop or replace active
+  calculations/workers, reload Fluent, overwrite disposable in-session state
+  and run-local scratch outputs, and reassign the session to the approved
+  campaign. Verified durable Project/OneDrive parent and final artifacts remain
+  protected.
+- **Return to the human:** before changing to transient modelling, a physical
+  controller/validation claim, or another modelling boundary outside this
+  simplified steady surrogate route. A steady VOF proposal must first prove
+  that it is technically appropriate and interpretable for the intended
+  question; it is not authorized merely because model-form comparison is open.
+- Missing plant control information remains `Missing Info`, but it no longer
+  blocks this explicitly bounded numerical-surrogate investigation.
+
 ## Information needed before a runnable setup
+
+The following information remains necessary for a **physical plant-control
+claim**, but is not required for the authorized simplified numerical-surrogate
+route:
 
 1. Normal pool-level setpoint, nominal operating band, and alarm/trip limits.
 2. Level instrument measurement location and its relation to the CFD geometry.
@@ -108,6 +167,12 @@ claim is not supportable if phase balance is persistently unaccounted for.
 
 The phase can conclude one of the following only after the control mechanism
 and level observable are explicit:
+
+For the authorized surrogate route, `control mechanism` means the declared
+numerical outlet-response rule, and `level observable` means the declared
+simulated liquid-inventory or level-related proxy. These can support only a
+surrogate-model conclusion; they cannot satisfy the physical plant-control
+criterion.
 
 - a controlled steady operating point is feasible in the retained model and
   remains numerically credible over an agreed evidence window;
