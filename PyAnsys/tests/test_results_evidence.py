@@ -142,7 +142,9 @@ class ResultsEvidenceTests(unittest.TestCase):
 
     def test_update_rejects_orphan_end_marker(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
-            path = Path(directory) / "results.md"
+            # Use the same repository layout as _render, even under Linux /tmp.
+            path = Path(directory) / "Project" / "experiments" / "demo" / "results.md"
+            path.parent.mkdir(parents=True)
             path.write_text(END_MARKER + "\n", encoding="utf-8")
 
             with self.assertRaisesRegex(ValueError, "end marker without a begin marker"):
