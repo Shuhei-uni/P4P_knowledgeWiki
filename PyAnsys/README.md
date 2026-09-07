@@ -54,6 +54,22 @@ Use `supervise-fluent-run` for long hypothesis-test execution. Discovery runs sh
 
 The remaining setup and inspection scripts are kept when they support a current Project experiment, a focused skill, a reusable source module, or unique evidence recovery. Campaign-specific scripts are not a general API.
 
+Library callers can opt into a TCP reachability check with
+`connect(tcp_timeout_seconds=5)` or `FLUENT_TCP_PREFLIGHT_TIMEOUT_SECONDS`
+(default `0`, disabled). Numbered endpoints accept the usual suffix, such as
+`FLUENT_TCP_PREFLIGHT_TIMEOUT_SECONDS2`; the named Student endpoint accepts
+`STUDENT_TCP_PREFLIGHT_TIMEOUT_SECONDS`. This check applies to IP/port routing.
+`connect(start_transcript=True)` remains the default; pass `False` for quiet
+operation or `None` to read `FLUENT_STREAM_TRANSCRIPT` and its endpoint override
+(`FLUENT_STREAM_TRANSCRIPT2` or `STUDENT_STREAM_TRANSCRIPT`).
+
+The reusable `mesh_convergence.py` and `constant_water_level_sink.py` modules
+contain offline parsing and numerical helpers recovered from Andy's local work.
+Their tests do not launch Fluent. The sink source-law calculations are not an
+approval or validation of a model for the current experiment. Historical setup
+runners, compiled UDF sources, and tests specific to those UDFs remain in Git
+history; the retired numbered setup tree is not required by these helpers.
+
 ## Hypothesis handoff contract
 
 Normal launch is:

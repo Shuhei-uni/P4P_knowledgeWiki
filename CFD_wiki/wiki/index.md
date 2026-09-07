@@ -40,7 +40,7 @@
 
 ## Guidance
 - [guidance/index](guidance/index.md): entry point for reusable click-by-click Fluent guidance pages.
-- [fluent-general-click-by-click](guidance/fluent-general-click-by-click.md): first-stop GUI navigation playbook for setup questions.
+- [fluent-general-click-by-click](guidance/fluent-general-click-by-click.md): first-stop GUI navigation playbook for setup questions, including the recovered multiphase outlet/gravity and pool-drainage guidance.
 - [workbench-meshdat-semi-automated-improvement](guidance/workbench-meshdat-semi-automated-improvement.md): conservative `.meshdat` mesh-improvement workflow with PyFluent baseline/export validation and Workbench operator trial steps.
 - External guide reference: `../guide/Ansys_Fluent_Users_Guide.pdf` is the local Fluent manual PDF used to verify and extend click-by-click guidance.
 
@@ -69,7 +69,7 @@
 ## Synthesis
 - [geothermal-separator-design-and-cfd-patterns](synthesis/geothermal-separator-design-and-cfd-patterns.md): merged design defaults and failure checks for geothermal separators.
 - [geothermal-separator-inlet-droplets-and-carryover](synthesis/geothermal-separator-inlet-droplets-and-carryover.md): external-web and local-wiki inventory of separator-inlet steam/brine/droplet/mineral evidence, reported sizes, calculated loads, and missing measured particle-size data.
-- [fluent-separator-efficiency-methods](synthesis/fluent-separator-efficiency-methods.md): Purnanto-style DPM separator-efficiency reconstruction plus improved Fluent phase-flux, mass-weighted DPM, wall-film, and field-validation workflows.
+- [fluent-separator-efficiency-methods](synthesis/fluent-separator-efficiency-methods.md): Purnanto-style DPM separator-efficiency reconstruction plus improved Fluent phase-flux, mass-weighted DPM, wall-film, field-validation, and diagnostic pool/sink qualification workflows.
 - [separator-cfd-verification-and-validation-workflow](synthesis/separator-cfd-verification-and-validation-workflow.md): reusable separator CFD verification/validation ladder linking mesh checks, monitor gates, DPM checks, and external evidence hierarchy.
 - [annular-flow-three-field-cfd-patterns](synthesis/annular-flow-three-field-cfd-patterns.md): cross-source annular-flow three-field modeling defaults and sensitivities.
 - [two-phase-geofluid-property-to-binary-plant-design](synthesis/two-phase-geofluid-property-to-binary-plant-design.md): links geofluid property modeling to downstream binary-plant design choices.

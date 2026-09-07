@@ -13,6 +13,7 @@ their exact history remains recoverable from Git.
 - [Phase 5 — Full Geometry V2](phase-05-full-geometry-v2/index.md)
 - [Phase 6 — Full Geometry with Brine Pool](phase-06-full-geometry-with-brine-pool/index.md)
 - [Legacy reconstruction](legacy/legacy-bangma-reconstruction/historical-run.md)
+- [Historical parallel studies from Andy's checkout](parallel-andy-studies/README.md) — enthalpy/DPM replication, liquid-sink diagnostics and resolved-outlet VOF evidence, with explicit identities and recovery provenance.
 
 Each retained experiment keeps its historical descriptive folder name and
 internal stage structure. Its setup, results, observations, figures, and

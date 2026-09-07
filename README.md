@@ -1,5 +1,10 @@
 # P4P Knowledge Wiki
 
+For shared development, start with [Working together](CONTRIBUTING.md).
+Use `main` as the agreed source of truth, make changes on task branches, and
+merge through pull requests. The [local data and recovery guide](LOCAL_DATA.md)
+maps the reconciled workspaces.
+
 This repository is the compact working knowledge base for the P4P geothermal
 separator CFD project. It has four active systems with clear ownership:
 
@@ -75,17 +80,17 @@ Inside the loop, execution depends on experiment mode:
 
 TUI-driven or Fluent-journal execution requires explicit human approval for that run.
 
-## Current execution proof
+## Historical execution proof
 
-The latest selected experiment is the 03A-Q01 S4-01 qualification. It loaded
+The historical 03A-Q01 S4-01 qualification loaded
 the verified 33,000-iteration parent and issued exactly one Fluent-native
 `/solve/iterate 50` command. The Project packet records the endpoint,
 transcript, residual history, physical histories, hashes, and limitations. This
 is historical execution evidence, not the default execution mechanism for new
 autonomous-loop runs.
 
-- [`03A-Q01 setup`](Project/experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/q01-s4-01-50-iteration-qualification/setup.md)
-- [`03A-Q01 results`](Project/experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/q01-s4-01-50-iteration-qualification/results.md)
+- [`03A-Q01 setup`](https://github.com/Shuhei-uni/P4P_knowledgeWiki/blob/7345fadef6bc41a5120e6df0648d98f1dfe02aad/Project/experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/q01-s4-01-50-iteration-qualification/setup.md)
+- [`03A-Q01 results`](https://github.com/Shuhei-uni/P4P_knowledgeWiki/blob/7345fadef6bc41a5120e6df0648d98f1dfe02aad/Project/experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/q01-s4-01-50-iteration-qualification/results.md)
 - [`03A tracer index`](Project/experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/index.md)
 - [`Q01 runner`](PyAnsys/scripts/setup/run_03a_q01_s4_01_50.py)
 

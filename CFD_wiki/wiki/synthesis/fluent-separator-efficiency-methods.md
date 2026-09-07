@@ -3,6 +3,13 @@
 ## Scope
 Reusable methods for estimating geothermal steam-water separator efficiency in ANSYS Fluent, starting from the Purnanto 2013 baseline and extending to more defensible post-processing and validation workflows.
 
+## Historical drainage-method evidence
+
+The [preserved Andy resolved-outlet studies](../../../Project/experiments/parallel-andy-studies/resolved-brine-outlet.md)
+contain the case-specific observations behind the drainage qualification patterns
+below. Short-window mass closure did not persist in the longer tests; those
+records do not establish constant-level operation or a plant boundary condition.
+
 ## Sources Covered
 - [purnanto-2013-cfd-geothermal-separator](../sources/purnanto-2013-cfd-geothermal-separator.md)
 - [chen-2025-straight-through-cyclone-water-separator](../sources/chen-2025-straight-through-cyclone-water-separator.md)
@@ -22,6 +29,12 @@ Reusable methods for estimating geothermal steam-water separator efficiency in A
   - [Ansys Fluent DPM boundary conditions](https://ansyshelp.ansys.com/public/Views/Secured/corp/v251/en/flu_ug/flu_ug_sec_discrete_bc.html)
   - [Ansys Fluent DPM postprocessing](https://ansyshelp.ansys.com/public/Views/Secured/corp/v242/en/flu_ug/flu_ug_sec_discrete_post.html)
   - [Ansys Fluent Eulerian Wall Film boundary/source conditions](https://ansyshelp.ansys.com/public/Views/Secured/corp/v242/en/flu_ug/flu_ug_ewf_sec_bound.html)
+  - [Ansys Fluent Mixture-model UDF hook table](https://ansyshelp.ansys.com/public/Views/Secured/corp/v242/en/flu_udf/x1-79900012.2.html)
+  - [Ansys Fluent DEFINE_SOURCE](https://ansyshelp.ansys.com/public/Views/Secured/corp/v242/en/flu_udf/flu_udf_ModelSpecificDEFINE.html)
+  - [Ansys Fluent parallel UDF guidance](https://ansyshelp.ansys.com/public/Views/Secured/corp/v242/en/flu_udf/flu_udf_sec_using_udfs_parallel.html)
+  - [Ansys Fluent open-channel flow theory](https://ansyshelp.ansys.com/public/Views/Secured/corp/v251/en/flu_th/flu_th_open_channel_flow.html)
+  - [Ansys Fluent boundary-condition guidance](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_bcs_sec_bound_cond.html)
+  - [Numerical Investigation of Vertical Plunging Jet Using Hybrid Multifluid-VOF](https://doi.org/10.1155/2015/925639)
 
 ## Chen 2025 Experiment-Backed RSM-DPM Anchor
 Chen 2025 gives a stronger validation pattern than the geothermal separator papers currently in this wiki, even though the application is aircraft water separation rather than geothermal steam-brine separation.
@@ -88,6 +101,81 @@ Do not report one efficiency value if `N_incomplete` is large. Report brackets:
 4. Compute mass-weighted efficiency by bin, not only total particle count.
 5. Record `N_incomplete/N_injected`; if it is not small, run mesh, tracking-step, and time-step/trajectory sensitivity before trusting efficiency.
 6. Independently report continuous-phase mass balance at every inlet and outlet.
+
+## Diagnostic Constant-Water-Level Liquid Sink
+
+When a truncated separator model intentionally places a wall at an assumed
+constant water level, a phase-scoped volumetric sink in the wall-adjacent cell
+layer can be used as a diagnostic unresolved-reservoir abstraction. For liquid
+volume fraction `alpha_l`, density `rho_l`, ramp `R` and removal time scale
+`tau`, use:
+
+`S_l = -rho_l alpha_l R/tau`
+
+Attach the mass source to the liquid phase only. Remove the associated carried
+mixture momentum using `S_mi = S_l u_i`; do not attach a vapor mass source.
+Keep the boundary itself as a wall. The liquid balance must include the source:
+
+`liquid inlet + liquid outlet(s) + integrated liquid sink = 0`
+
+This method can test whether an assumed fixed water-level cutoff permits a
+steady carrier solution, but it is not a porous wall, resolved brine outlet,
+weir, drain or prediction of lower-vessel hydraulics. Its outcome remains
+diagnostic until pressure, velocity, liquid inventory and integrated sink rate
+are iteration-independent and insensitive to `tau`, ramp schedule and sink-layer
+resolution. Start qualification from a clean mesh with fresh initialization;
+an accumulated closed-bottom solution field contaminates the test.
+
+## Resolved Constant-Level Pool and Drainage Sequence
+
+For a separator that resolves the lower pool and brine leg, the constant-level
+assumption should be imposed through the liquid balance or a bounded outlet
+controller, not by forcing the brine phase composition. The water pool must
+remain an emergent VOF steam seal over the outlet.
+
+Use the following qualification order:
+
+1. Relax a closed-drain VOF pool and establish a checksum-bound parent.
+2. At zero feed, replace the brine wall with a pressure outlet and cold-load
+   independent low/centre/high pressure members. Establish the sign and
+   monotonicity of liquid response before enabling feedback.
+3. If Fluent exposes a single bulk/mixture mass-flow-outlet rate, test an ideal
+   constant-level diagnostic by ramping liquid feed and total brine discharge
+   together. Do not prescribe separate liquid and vapor outlet rates: that
+   would prescribe phase routing instead of testing whether the pool blocks
+   steam.
+4. After the pressure sign and balanced-rate abstraction pass, test a bounded
+   outlet-pressure controller against pool inventory or a mesh-resolved level
+   proxy. Clamp pressure and pressure slew to the qualified zero-feed bracket.
+5. If the short brine leg cannot retain liquid-only drainage, model the missing
+   hydraulic resistance explicitly with a longer liquid-filled leg, loop seal,
+   water drum or a validated resistance relation.
+
+Acceptance requires residual history and physical evidence together: phase and
+total mass closure including storage, bounded inventory/level, liquid-filled
+brine face, negligible vapor through the brine outlet, negligible liquid through
+the steam outlet, finite pressure/velocity/VOF, Courant compliance and verified
+clock advance. Exact balance from a rate-forced outlet is a boundary-condition
+identity, not proof of physical separator drainage.
+
+Evidence:
+
+- `Reported`: Fluent VOF supports pressure/free-surface boundary treatment and
+  documents pressure outlets for outlet states including possible reverse flow;
+  a mass-flow outlet prescribes outward flow and must not be used where the
+  boundary has mixed or reversing flow ([Fluent open-channel theory](https://ansyshelp.ansys.com/public/Views/Secured/corp/v251/en/flu_th/flu_th_open_channel_flow.html),
+  [Fluent boundary-condition guidance](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_bcs_sec_bound_cond.html)).
+- `Reported`: a transient Multifluid-VOF plunging-jet model prescribed outlet
+  mass flow equal to inlet mass flow to maintain a constant water level
+  ([Qu et al. 2015](https://doi.org/10.1155/2015/925639)).
+- `Reported`: the Purnanto geothermal baseline assumed a constant level but did
+  not resolve water flow into the brine pipe ([geothermal BOC baseline](../setups/geothermal-boc-separator-fluent-2013-baseline.md)).
+- `Inferred`: pressure-response sign, balanced bulk-rate drainage and bounded
+  pressure feedback are a conservative staged adaptation of those methods for
+  a pressurised separator with an emergent liquid steam seal.
+- `Assumed`: until plant data are supplied, neither the downstream brine pressure
+  nor the pipe/valve resistance and operating level is known. CFD-derived
+  modified pressures are diagnostic only.
 
 ## More Accurate or More Defensible Methods
 

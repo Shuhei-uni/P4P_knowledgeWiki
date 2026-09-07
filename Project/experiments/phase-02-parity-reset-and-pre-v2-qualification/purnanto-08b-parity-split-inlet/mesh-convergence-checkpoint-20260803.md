@@ -125,3 +125,48 @@ The `bottom` zone is intentionally a wall, while `steamoutlet` is the only outle
 `Needs follow-up` — retain this as a useful diagnostic mesh-convergence checkpoint for setup `08b`. The completed results indicate that the vapor-throughput quantity is robust, while pressure and velocity-field quantities remain iteration-dependent. The most useful next evidence is a continuation of the fine meshes beyond `3000` iterations, with preserved checkpoints and the same monitor definitions, followed by a common stable-window or otherwise explicitly defined state comparison.
 
 If the fine meshes plateau, re-evaluate mesh sensitivity using the matured outputs. If they do not plateau, document the calculation as a closed-bottom quasi-steady/accumulating-state limitation rather than claiming steady mesh convergence.
+
+## Later evidence from Andy's 07a study
+
+The preserved
+[Andy 07a study record](https://github.com/Shuhei-uni/P4P_knowledgeWiki/blob/archive/andy-local-20260908/Setup%20report/07a-split-inlet-carrier-mesh-convergence.md)
+reports the later closure of study `split_inlet_mesh_convergence_20260801`.
+Its first six mesh endpoint and drift values match the table above; it adds
+the seventh completed mesh and a 900k continuation. This addendum preserves
+those later observations without rewriting the dated 3 August checkpoint.
+Andy names the carrier parent `07` and this study `07a`; this migrated record
+uses the `08b` parity folder. The numbering difference is provenance, not
+proof that every case called `07a` or `08b` is interchangeable.
+
+**Observed in the preserved notes, closure dated 5 August 2026:** all seven
+formal meshes reached the nominal 3,000-iteration endpoint. The 2300k-labelled
+mesh gave pressure drop 23.7092 kPa and steam-outlet vapour magnitude
+81.4465 kg/s; pressure final-500 drift was 2.660% and domain-velocity drift
+9.133%. Its classification remained unresolved.
+
+The independently preserved 900k diagnostic continuation reached iteration
+6,000. Over iterations 5,500–6,000, pressure drift was 4.612%, vapour outlet
+flow drift 0.0217%, outlet-velocity drift 1.485%, domain-velocity drift 1.700%
+and vorticity drift 1.825%. Only vapour flow passed. The source's liquid-volume
+audit recorded the following inventory/pressure evolution:
+
+| Iteration | Liquid inventory (kg) | Pressure drop (kPa) |
+|---:|---:|---:|
+| 4,000 | 104.054 | 31.029 |
+| 5,000 | 134.328 | 33.069 |
+| 5,500 | 152.103 | 33.591 |
+| 6,000 | 171.030 | 34.049 |
+
+The 64.37% inventory increase shows that pressure was still being compared
+across changing phase distributions. Iterative independence and mesh
+independence remained unresolved; Richardson/GCI and production-mesh
+selection were not accepted. The earlier suggestion to continue these steady
+meshes is therefore historical, not the latest disposition for Andy's study.
+The source retained carrier carryover/quality as trend-only and moved to
+[separate liquid-removal diagnostics](../../parallel-andy-studies/closed-bottom-liquid-sinks.md).
+
+These values were transcribed from the retained study note, which points to
+`PyAnsys/output/split_inlet_mesh_convergence_20260801/STUDY_DIAGNOSTIC_CLOSURE_20260805.md`
+and its audit artifacts. Their exact original written provenance is on the
+recovery branch; this migration did not recalculate or independently qualify
+the solver results.

@@ -99,6 +99,65 @@ Evidence:
 - `Reported`: Fluent supports velocity-inlet turbulence specification through intensity and hydraulic diameter terminology in boundary-condition setup.
 - `Inferred`: the non-circular duct calculation and artificial-split-zone caution are practical setup guidance based on the standard hydraulic-diameter definition and Fluent boundary-condition usage.
 
+### 6.2) Multiphase Pressure Outlets with Gravity
+
+Click path:
+1. Confirm gravity and the operating-density method under `Operating Conditions` before setting outlet pressures.
+2. Open each `Pressure Outlet` and enter the known downstream static-pressure condition in the same Fluent pressure convention used by the case.
+3. Under the secondary-phase branch, set the backflow volume fraction to the composition expected only if flow reverses. This value does not force the normal outward composition.
+4. Apply the setting and reopen both the mixture and phase branches to verify pressure and backflow-composition readback.
+5. Initialize or patch the expected phase distribution when the initial liquid reservoir is physically important; save it as a distinct case/data origin.
+
+Important gravity rule:
+- Fluent's pressure inputs use a modified-pressure formulation when gravity is active. Do not manually add a separate hydrostatic `rho*g*h` difference between vertically separated pressure outlets unless the chosen reference-pressure formulation explicitly requires it.
+- A pressure-outlet backflow fraction affects reverse flow only. It cannot make a brine outlet discharge liquid when the local solution is vapor-filled.
+- `Target Mass Flow Rate` at a pressure outlet is not a supported control for multiphase flow. Use a physically defensible pressure condition or a separately labelled outward-only diagnostic boundary.
+
+Common failure mode:
+- A dry Hybrid start can fill a lower pressure outlet with vapor or cause liquid backflow even when the backflow liquid fraction is set to 1. Patch a physically justified initial pool and test whether the steady result becomes independent of that initialization. If it does not, use a transient formulation.
+
+Evidence:
+- `Reported`: ANSYS Fluent User's Guide sections on pressure outlets, gravity/pressure treatment, multiphase setup and solution initialization.
+- `Inferred`: the initial-pool diagnostic and steady-to-transient decision rule combine those documented controls into a conservative troubleshooting sequence.
+
+### 6.3) Resolved Pool with Constant-Level Brine Drainage
+
+Use this only after a closed-drain VOF pool is transiently bounded and saved as
+a clean parent.
+
+1. Cold-load the same parent independently for every outlet comparison.
+2. With both inlets at zero, convert the submerged brine wall to a pressure
+   outlet and test a small low/centre/high modified-pressure bracket.
+3. Read back the outlet type, pressure, liquid backflow fraction and unchanged
+   steam-outlet state after every conversion. The liquid backflow fraction is
+   only a reverse-flow condition; it does not prevent outward steam.
+4. Confirm that liquid response is monotonic and changes sign across the
+   bracket while the brine face stays liquid-filled. Do not enable level
+   feedback before this response sign is measured.
+5. For an ideal constant-level diagnostic, use a mass-flow outlet only if the
+   live multiphase object exposes one total mixture rate and the boundary is
+   strictly outward. Ramp total brine discharge with liquid feed and allow VOF
+   to determine the outlet composition.
+6. For a pressure-controlled level model, use the qualified bracket as a clamp,
+   limit pressure change per physical step, begin with proportional-only action
+   and monitor pool inventory/level, phase storage closure and steam sealing.
+7. Stop at the first residual-envelope, Courant, phase-routing, inventory,
+   pressure, velocity, VOF or clock gate failure. Save failed fields only as
+   non-resumable diagnostics.
+
+Evidence:
+
+- `Reported`: Fluent documents VOF free-surface boundary treatment, pressure
+  outlets and outward prescribed mass-flow outlets ([open-channel theory](https://ansyshelp.ansys.com/public/Views/Secured/corp/v251/en/flu_th/flu_th_open_channel_flow.html),
+  [boundary-condition guidance](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_bcs_sec_bound_cond.html)).
+- `Reported`: matching outlet mass flow to inlet mass flow has been used in a
+  transient Multifluid-VOF water-level calculation ([Qu et al. 2015](https://doi.org/10.1155/2015/925639)).
+- `Inferred`: the staged bracket/balance/controller order prevents outlet
+  pressure, phase routing and control direction from becoming hidden factors.
+- `Assumed`: downstream pressure, resistance and operating level must be
+  measured or separately modelled before this diagnostic becomes a plant
+  boundary.
+
 ## 7) Solver Controls and Initialization
 1. Open `Solution Methods` and select coupling/discretization schemes.
 2. Open `Solution Controls` and set relaxation factors if needed.

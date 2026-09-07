@@ -7,6 +7,7 @@ import argparse
 import atexit
 import os
 from pathlib import Path
+import socket
 import subprocess
 import tempfile
 import time
@@ -56,6 +57,28 @@ def endpoint_env_namespace(server_id: str | int | None) -> tuple[str, str, str]:
         return "student", "STUDENT", ""
     suffix = env_suffix(server_id)
     return suffix or "1", "FLUENT", suffix
+
+
+def float_env(name: str, default: float) -> float:
+    value = os.getenv(name)
+    if value is None or value.strip() == "":
+        return default
+    return float(value)
+
+
+def tcp_preflight(ip: str, port: int, timeout_seconds: float) -> None:
+    """Check the configured TCP endpoint when a positive timeout is supplied."""
+    if timeout_seconds <= 0:
+        return
+    try:
+        with socket.create_connection((ip, port), timeout=timeout_seconds):
+            return
+    except OSError as exc:
+        raise TimeoutError(
+            f"TCP preflight failed for the configured server after {timeout_seconds:.1f}s. "
+            "Check that Fluent is still running, the gRPC port is current, and the "
+            "server firewall allows inbound TCP on that port."
+        ) from exc
 
 
 def _launch_local_fluent(
@@ -156,13 +179,19 @@ def _launch_local_fluent(
 def connect(
     server_id: str | int | None = None,
     *,
-    start_transcript: bool = True,
+    start_transcript: bool | None = True,
+    tcp_timeout_seconds: float | None = None,
 ):
     """Connect to a configured Fluent endpoint.
 
     ``start_transcript`` defaults to ``True`` to preserve existing callers. A
     quiet status client can disable transcript streaming and opt in later when
-    it explicitly wants console output.
+    it explicitly wants console output. Passing ``None`` reads the endpoint's
+    ``*_STREAM_TRANSCRIPT`` environment setting instead.
+
+    TCP preflight is opt-in through ``tcp_timeout_seconds`` or the endpoint's
+    ``*_TCP_PREFLIGHT_TIMEOUT_SECONDS`` setting; its default is zero (disabled).
+    It applies only to IP/port connections, not server-info files or local launch.
     """
     load_dotenv(_ENV_FILE)
     import ansys.fluent.core as pyfluent
@@ -189,6 +218,11 @@ def connect(
         insecure_mode_key,
         bool_env("FLUENT_INSECURE_MODE", False),
     )
+    if start_transcript is None:
+        start_transcript = bool_env(
+            f"{env_prefix}_STREAM_TRANSCRIPT{suffix}",
+            bool_env("FLUENT_STREAM_TRANSCRIPT", True),
+        )
 
     common = {
         "allow_remote_host": allow_remote_host,
@@ -200,7 +234,7 @@ def connect(
     if server_info:
         path = Path(server_info).expanduser()
         if not path.exists():
-            raise FileNotFoundError(f"FLUENT_SERVER_INFO_FILE{suffix} does not exist: {path}")
+            raise FileNotFoundError(f"{server_info_key} does not exist: {path}")
         print(f"Connecting to Fluent server {label} using server-info file: {path}")
         return pyfluent.connect_to_fluent(server_info_file_name=str(path), **common)
 
@@ -227,7 +261,14 @@ def connect(
             f"{local_launch_note}"
         )
 
-    print(f"Connecting to Fluent server {label} using IP/port: {ip}:{port}")
+    if tcp_timeout_seconds is None:
+        tcp_timeout_seconds = float_env(
+            f"{env_prefix}_TCP_PREFLIGHT_TIMEOUT_SECONDS{suffix}",
+            float_env("FLUENT_TCP_PREFLIGHT_TIMEOUT_SECONDS", 0.0),
+        )
+    # Keep endpoint credentials out of routine connection transcripts.
+    print(f"Connecting to configured Fluent server {label} using IP/port credentials.")
+    tcp_preflight(ip, int(port), tcp_timeout_seconds)
     return pyfluent.connect_to_fluent(
         ip=ip,
         port=int(port),
