@@ -16,7 +16,7 @@ cd P4P_shared
 git config pull.ff only
 git config push.default simple
 git config fetch.prune true
-git config merge.conflictstyle zdiff3
+git config merge.conflictstyle diff3
 ```
 
 Check `git remote -v` points to the shared repo. Check `git config user.name`
