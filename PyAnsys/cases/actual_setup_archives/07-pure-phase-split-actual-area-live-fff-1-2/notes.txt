@@ -1,0 +1,43 @@
+setup.models.multiphase.models.child_names: unavailable ('models_1' object has no attribute 'child_names')
+setup.models.multiphase.vaporization_pressure: unavailable (api-get-var: the object is not active
+Error Object: setup/models/multiphase/vaporization-pressure)
+setup.models.multiphase.vaporization_pressure.child_names: unavailable ('vaporization_pressure' object has no attribute 'child_names')
+setup.models.multiphase.non_condensable_gas: unavailable (api-get-var: the object is not active
+Error Object: setup/models/multiphase/non-condensable-gas)
+setup.models.multiphase.non_condensable_gas.child_names: unavailable ('non_condensable_gas' object has no attribute 'child_names')
+setup.models.multiphase.liquid_surface_tension: unavailable (api-get-var: the object is not active
+Error Object: setup/models/multiphase/liquid-surface-tension)
+setup.models.multiphase.liquid_surface_tension.child_names: unavailable ('liquid_surface_tension' object has no attribute 'child_names')
+setup.models.multiphase.bubble_number_density: unavailable (api-get-var: the object is not active
+Error Object: setup/models/multiphase/bubble-number-density)
+setup.models.multiphase.bubble_number_density.child_names: unavailable ('bubble_number_density' object has no attribute 'child_names')
+setup.models.multiphase.number_of_phases.child_names: unavailable ('number_of_phases' object has no attribute 'child_names')
+setup.models.multiphase.number_of_eulerian_discrete_phases: unavailable (api-get-var: the object is not active
+Error Object: setup/models/multiphase/number-of-eulerian-discrete-phases)
+setup.models.multiphase.number_of_eulerian_discrete_phases.child_names: unavailable ('number_of_eulerian_discrete_phases' object has no attribute 'child_names')
+solution.initialization.initialization_type.child_names: unavailable ('initialization_type' object has no attribute 'child_names')
+solution.initialization.reference_frame.child_names: unavailable ('reference_frame_7' object has no attribute 'child_names')
+solution.initialization.defaults: unavailable (api-get-var: the object is not active
+Error Object: solution/initialization/defaults)
+solution.initialization.defaults.child_names: unavailable ('defaults' has no attribute 'child_names')
+solution.initialization.localized_turb_init: unavailable (api-get-var: the object is not active
+Error Object: solution/initialization/localized-turb-init)
+solution.initialization.localized_turb_init.enabled: unavailable ('<session>.solution.initialization.localized_turb_init' is currently inactive.)
+solution.initialization.localized_turb_init.turbulent_intensity: unavailable ('<session>.solution.initialization.localized_turb_init' is currently inactive.)
+solution.initialization.localized_turb_init.turbulent_viscosity_ratio: unavailable ('<session>.solution.initialization.localized_turb_init' is currently inactive.)
+solution.initialization.hybrid_init_options.species_setting: unavailable (api-get-var: the object is not active
+Error Object: solution/initialization/hybrid-init-options/species-setting)
+solution.initialization.open_channel_auto_init: unavailable (api-get-var: the object is not active
+Error Object: solution/initialization/open-channel-auto-init)
+solution.initialization.open_channel_auto_init.boundary_zone: unavailable ('<session>.solution.initialization.open_channel_auto_init' is currently inactive.)
+solution.initialization.open_channel_auto_init.flat_init: unavailable ('<session>.solution.initialization.open_channel_auto_init' is currently inactive.)
+solution.initialization.open_channel_auto_init.wavy_surface_init: unavailable ('<session>.solution.initialization.open_channel_auto_init' is currently inactive.)
+solution.initialization.fmg: unavailable (api-get-var: the object is not active
+Error Object: solution/initialization/fmg)
+solution.initialization.fmg.fmg_courant_number: unavailable ('<session>.solution.initialization.fmg' is currently inactive.)
+solution.initialization.fmg.enable_fmg_verbose: unavailable ('<session>.solution.initialization.fmg' is currently inactive.)
+solution.initialization.fmg.viscous_terms: unavailable ('<session>.solution.initialization.fmg' is currently inactive.)
+solution.initialization.fmg.species_reactions: unavailable ('<session>.solution.initialization.fmg' is currently inactive.)
+solution.initialization.fmg.turbulent_viscosity_ratio: unavailable ('<session>.solution.initialization.fmg' is currently inactive.)
+scheme (cx-send '(getcwd)): unavailable (An error occurred in the server while evaluating the Scheme expression)
+scheme (cx-send '(getcwd)): unavailable (An error occurred in the server while evaluating the Scheme expression)

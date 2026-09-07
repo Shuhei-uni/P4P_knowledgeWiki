@@ -1,0 +1,59 @@
+name: multiphase_order
+high_risk: true
+common_dependencies:
+  - materials must exist before phase assignment
+  - multiphase model must be enabled before phase count and phase objects exist
+  - phase materials must be assigned before phase interactions reliably appear
+  - phase-specific boundary condition tabs appear after model + phases are assigned
+order:
+  - create_or_select_materials:
+      examples: [water-vapor, water-liquid]
+  - enable_multiphase_model:
+      options: [VOF, Mixture, Eulerian]
+  - set_number_of_phases
+  - refresh_phase_tree
+  - assign_primary_secondary_phase_materials
+  - refresh_phase_interaction_tree
+  - set_model_specific_options
+  - set_phase_pair_interactions
+  - refresh_boundary_tree
+  - set_phase_specific_boundary_conditions
+  - initialize_or_patch_volume_fractions
+model_specific:
+  VOF:
+    order:
+      - enable VOF
+      - set number of phases
+      - assign materials
+      - choose explicit/implicit volume fraction formulation
+      - choose interface capturing scheme
+      - enable/set surface tension if needed
+      - set wall adhesion/contact angle if needed
+      - set volume fraction BCs
+      - set volume fraction discretization
+    hidden_dependencies:
+      - surface tension phase-pair controls need at least two assigned phases
+      - wall adhesion needs surface tension enabled
+      - Geo-Reconstruct/compressive schemes need VOF active
+  Mixture:
+    order:
+      - enable Mixture
+      - set number of phases
+      - assign materials
+      - set slip/relative velocity options
+      - set drag law if exposed
+      - set surface tension only if exposed for this model combination
+      - set phase volume fraction BCs
+    warning: "Do not assume VOF surface-tension paths work under Mixture."
+  Eulerian:
+    order:
+      - enable Eulerian
+      - set number of phases
+      - assign materials
+      - choose phase interaction model family
+      - set drag first
+      - then optional lift/wall lubrication/turbulent dispersion/virtual mass
+      - enable Energy before heat transfer
+      - enable mass transfer/phase change before evaporation/boiling
+      - set interfacial area options
+      - set phase-specific BCs

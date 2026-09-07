@@ -1,0 +1,51 @@
+# Research Paper Dictionary and Lookup Table
+
+This Markdown file is designed as a fast lookup guide for the uploaded research papers. Each paper has a high-level summary, a detailed section dictionary, keyword lookup table, method/data lookup, and figure/table lookup so you can quickly find where useful information is located.
+
+## Contents
+
+- [Paper index](#paper-index)
+- [Quick topic map](#quick-topic-map)
+- [P1: Montesdeoca-Martínez et al. 2026 - Two-phase geothermal ORC techno-economics](#p1-montesdeoca-martnez-et-al-2026-two-phase-geothermal-orc-techno-economics)
+- [P2: Mubarok et al. 2020 - CFD pressure differential flow meters](#p2-mubarok-et-al-2020-cfd-pressure-differential-flow-meters)
+- [P3: Merbecks et al. 2025 - GeoProp geofluid property framework](#p3-merbecks-et-al-2025-geoprop-geofluid-property-framework)
+- [P4: Mondal & Sharma 2024 - Air-water annular flow CFD](#p4-mondal-sharma-2024-air-water-annular-flow-cfd)
+- [P5: Rivas-Cruz et al. 2015 - Geothermal steam separator review](#p5-rivas-cruz-et-al-2015-geothermal-steam-separator-review)
+- [P6: Skoog 2020 - Three-field annular-flow CFD thesis](#p6-skoog-2020-three-field-annular-flow-cfd-thesis)
+- [Combined methods and data lookup](#combined-methods-and-data-lookup)
+- [Combined figure and table lookup](#combined-figure-and-table-lookup)
+- [Combined keyword index](#combined-keyword-index)
+
+---
+
+## Paper index
+
+| Paper ID | Short name | Year | Main topic | Best use | Key methods/models | Important outputs | Cautions / limitations | Source file |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| P1 | Montesdeoca-Martínez et al. 2026 - Two-phase geothermal ORC techno-economics | 2026 | ORC/binary power plant design for two-phase geothermal fluids | Use this as the main source for plant-level thermodynamic modelling, ORC component definitions, working-fluid selection, and techno-economic comparison. | EES model; well/two-phase production model; ORC energy balances; parametric study; cost correlations and CAPEX comparison. | Net power output, specific power output, thermal/utilization efficiency, heat exchanger sizing/cost, CAPEX comparison with single-flash and flash-binary systems. | This is a system-level model rather than a CFD separator paper, so it abstracts the separator and focuses on energy conversion performance. | 1-s2.0-S0196890426000191-main(1).pdf |
+| P2 | Mubarok et al. 2020 - CFD pressure differential flow meters | 2020 | ANSYS Fluent CFD for two-phase geothermal flow through pressure-differential meters | Use this as the most directly relevant ANSYS Fluent geothermal CFD reference among the uploaded papers, especially for model settings, validation workflow, mesh refinement, and result contours. | 3D CFD in ANSYS Fluent; mixture model; SST k-omega turbulence; energy equation; steady/transient comparison; field validation. | Pressure drop, velocity fields, turbulent kinetic energy, mass flow rate, temperature, enthalpy, entropy, and comparison across six meter geometries. | The geometry is pipeline flow-meter geometry, so separation objectives differ from steam-water separator design. | 1-s2.0-S0375650519304328-main(1).pdf |
+| P3 | Merbecks et al. 2025 - GeoProp geofluid property framework | 2025 | Thermophysical property and phase-partition modelling for geothermal geofluids | Use this when you need to justify why fluid properties, brine salinity, NCGs, phase partitioning, enthalpy, density, viscosity, and heat content matter for geothermal simulations. | Framework coupling Reaktoro, CoolProp, and ThermoFun; comparison of pure-fluid, binary-fluid, reactive, and empirical geofluid models; validation against brine data. | Validated property predictions for brines/geofluids, comparison of heat-release curves, and architecture for coupling partition and property calculations. | This is a modelling-framework paper, not a CFD paper, so use it for property modelling rather than mesh or boundary-condition decisions. | 1-s2.0-S0375650524002323-main(1).pdf |
+| P4 | Mondal & Sharma 2024 - Air-water annular flow CFD | 2024 | ANSYS Fluent CFD for upward annular air-water flow using DPM and Eulerian wall film | Use this when you need a detailed example of modelling annular flow with a gas core, droplet entrainment/deposition, and liquid wall film in Fluent. | ANSYS Fluent 19.2; DPM for gas-core droplets; Eulerian Wall Film for wall film; SST k-omega; UDF entrainment correlations; transient two-way coupled simulation. | Liquid film thickness, film velocity, entrainment rate, deposition rate, entrainment fraction, and comparison with experimental data and literature correlations. | The working fluids and operating context are not geothermal steam/brine, and the pipe annular-flow geometry differs from a BOC separator. | 1-s2.0-S1738573324002365-main(1).pdf |
+| P5 | Rivas-Cruz et al. 2015 - Geothermal steam separator review | 2015 | State-of-art review of geothermal steam-water separators, Webre separators, dryers, Bangma BOC, and Lazalde-Crabtree methods | Use this as the main lookup source for geothermal separator design history, separator types, Webre-type separators, Lazalde-Crabtree design logic, and Cerro Prieto separator evaluation context. | Literature review; design/evaluation comparison matrix; discussion of separator/dryer design methods and software tools. | Design-history summary, key references, separator/dryer methodology comparison, and conclusions about Webre-type separator performance and Lazalde-Crabtree methodology. | Because it is a review, it often summarizes older sources rather than presenting new experiments or CFD data. | 1032231(1).pdf |
+| P6 | Skoog 2020 - Three-field annular-flow CFD thesis | 2020 | Three-field CFD modelling of annular flow with steam core, liquid film, and droplets | Use this for a long-form explanation of three-field annular-flow modelling, Fluent equations, DPM deposition, EWF film treatment, and how simulation results compare to Okawa correlations. | ANSYS Fluent; Eulerian-Lagrangian approach; steam core, liquid film, liquid droplets; DPM; entrainment and deposition correlations; post-processing scripts. | Film/droplet/steam mass-flow evolution, deposition-rate comparisons, sensitivity to droplet fraction and transverse velocity, and suggested improvements. | This is a thesis rather than a peer-reviewed paper, and it is oriented to BWR annular flow rather than geothermal separator hardware. | FULLTEXT02(1).pdf |
+| P7 | Chen et al. 2025 - Straight-through cyclone water separator | 2025 | Experiment-backed cyclone separator CFD with RSM-DPM, droplet breakup/coalescence, and pressure-effect sensitivity | Use this when you need a modern separator CFD workflow that is validated against measured pressure loss and wet-case efficiency. | ANSYS Fluent 2024R1; transient pressure-based solver; RSM; DPM; KHRT breakup; stochastic collision; rough wall; grid-independence study. | Pressure loss, separation efficiency, streamlines, particle trajectories, and pressure-effect comparison. | The working fluid and application are aircraft air-water separation rather than geothermal steam-brine separation, so transfer only the method and trend logic. | Chen et al. (2025), Experimental and Simulation Research on Straight-Through Cyclone Water Separator.pdf |
+
+---
+
+## Quick topic map
+
+| Task / question | Recommended papers and sections | Why go there first | Search terms |
+| --- | --- | --- | --- |
+| I need a quick geothermal separator design literature source | P5 Section 2, especially Bangma/BOC and Lazalde-Crabtree rows | It is the only uploaded paper directly reviewing geothermal steam separators and dryers. | BOC; Webre; Lazalde-Crabtree; steam quality |
+| I need ANSYS Fluent settings for two-phase geothermal CFD | P2 Sections 3.2-3.4 and Table 2 | P2 gives solver, multiphase, turbulence, energy, discretisation, mesh, and validation details for geothermal two-phase flow. | Fluent settings; mixture model; SST; energy equation |
+| I need an example of mesh convergence analysis | P2 Section 3.4; P4 Section 3; P6 Method/Results | P2 explicitly uses Richardson extrapolation and reports mesh error, while P4 uses mesh independence for annular flow. | mesh refinement; Richardson; mesh study |
+| I need an experiment-backed swirl-separator RSM-DPM benchmark | P7 Sections 3-5 | P7 gives a modern Fluent separator stack, a reported droplet PSD, and direct experiment-simulation comparison for pressure loss and efficiency. | RSM; DPM; Rosin-Rammler; swirl angle; separator efficiency |
+| I need pressure/velocity/TKE contour interpretation | P2 Sections 4.2.2-4.2.4 | P2 explains how restrictions create pressure loss, vena contracta, separation, and turbulence hotspots. | pressure contour; velocity; TKE |
+| I need liquid film, droplet, entrainment and deposition theory | P4 Sections 1, 2.2.2-2.5; P6 Sections 2.2, 3.1-3.2 | P4 and P6 both explain annular film-droplet mass exchange using DPM/EWF/1D correlations. | annular flow; entrainment; deposition; EWF; DPM |
+| I need to justify thermophysical property choices | P3 Sections 2-6 | P3 explains why brine, NCGs, phase behaviour, enthalpy, density, viscosity, and heat content matter. | GeoProp; brine; NCG; thermophysical properties |
+| I need ORC/binary plant equations and economics | P1 Sections 2.1-2.3 and 4 | P1 contains ORC layout, energy balances, performance metrics, cost equations, parametric results, and plant comparisons. | ORC; CAPEX; net power; specific power |
+| I need citation-ready headline results | P1 Section 5; P2 Section 5; P4 Section 4; P5 Section 3; P6 Section 6; P3 Section 7 | Conclusion sections are the fastest places to extract final claims and limitations. | conclusion; results; takeaways |
+| I need BOC/spiral inlet historical details | P5 Section 2 - Bangma / BOC | P5 summarises Bangma's BOC work, including spiral versus tangential inlet testing and dimensions relative to inlet diameter. | Bangma; spiral inlet; BOC |
+| I need to decide whether VOF, mixture, DPM or EWF is suitable | P2 Section 3.2; P4 Sections 2.2.1-2.2.3; P6 Theory | P2 shows a geothermal mixture-model case, while P4/P6 show DPM/EWF annular-flow cases. | VOF; mixture; DPM; EWF; multiphase model |
+
+---

@@ -1,0 +1,37 @@
+name: energy_order
+recommendation: "Leave Energy off for isothermal hydrodynamic reproduction; enable only for heat transfer, condensation, evaporation, boiling, or temperature-dependent properties."
+order:
+  - decide_isothermal_or_nonisothermal
+  - enable_Energy_if_needed
+  - refresh_model_tree
+  - update_material_thermal_properties:
+      - density
+      - specific heat
+      - thermal conductivity
+      - viscosity
+      - latent heat if phase change
+      - saturation properties if needed
+  - set_thermal_boundary_conditions:
+      - inlet temperature
+      - outlet backflow temperature
+      - wall heat flux/temperature/convection
+      - phase-specific temperatures if exposed
+  - if_multiphase_enabled_refresh_phase_interaction_tree
+  - set_interphase_heat_transfer_if_needed
+  - enable_and_set_mass_transfer_if_phase_change_needed
+  - if_DPM_enabled_refresh_injection_tree
+  - set_DPM_thermal_fields_if_needed:
+      - particle temperature
+      - heat transfer law
+      - vaporization law
+      - boiling law
+  - if_EWF_enabled_refresh_EWF_tree
+  - set_wall_film_thermal_fields_if_needed
+  - set_energy_discretization
+  - set_energy_under_relaxation
+  - initialize_temperature_field
+hidden_dependencies:
+  - inlet/outlet/wall temperature fields appear only after Energy is enabled
+  - interphase heat transfer requires Energy + Multiphase
+  - DPM particle temperature/laws require Energy + DPM/injection
+  - film temperature/evaporation requires Energy + EWF

@@ -1,0 +1,59 @@
+Week 3 – 18/03
+The team discussed the efficiency of a separator in a geothermal system, focusing on producing dry steam to avoid turbine damage. They emphasized the importance of minimizing moisture content in the steam. The primary separator's efficiency was highlighted, with secondary mechanisms used if necessary. They plan to use CFD modeling to optimize the separator's performance. The team agreed to start with a simple homogeneous model, validate it with existing data, and then progress to a two-phase model. A literature review draft is expected by early April, with a detailed discussion scheduled for the next meeting.
+Action Items
+	•	Review the posted student CFD model and provide feedback on what changes were made
+	•	Obtain field data for model validation (work on getting data from the field to support CFD validation)
+	•	Submit a 5–6 page draft literature review (research questions, objectives, scope) before next-week's meeting (deadline: next week Thursday) so supervisors can read and comment
+	•	Upload the latest CFD model files to the Teams channel so supervisors can review the changes
+
+
+Week 4 – 26/03
+The team discussed the progress and next steps for their literature review and CFD modeling project. Speaker 1 plans to complete and submit their literature review by tonight and tomorrow, while Andy has already uploaded theirs to Teams. They reviewed eight papers, mostly from Speaker 1, including a 2013 paper on CFD modeling. Speaker 3 noted that Speaker 1's report used an outdated template, which was corrected. The team also discussed using Ansys for CFD simulations, starting with single-phase water models, and potentially redesigning the model if necessary. They emphasized focusing on CFD work during the upcoming break.
+Action Items
+	•	Upload the collected papers (about eight papers) to the Teams shared folder so the team can read and comment
+	•	Send literature review to the team for comments by tonight or tomorrow so the team can provide feedback before next week
+	•	Update the report to use the latest template and include the required declaration/acknowledgement and AI section
+	•	Start running CFD simulations beginning with a single-phase water case, then test air and later two-phase runs to build the model
+	•	Email the former student to request the other design/model files for the separator;
+
+Week 5 – 02/04 
+The team discussed modifying a spiral geometry for a two-phase flow model, aiming to achieve optimal efficiency in a cyclone separator. They plan to complete ANSYS learning by April and present initial results by mid-year. The goal is to model different inlet flow regimes to optimize steam output. They emphasized the importance of model calibration and validation, noting that historical data may not apply to modern separator sizes. The team will replicate a 2013 CFD paper to ensure model accuracy. They also discussed the need for a spiral inlet to reduce pressure and improve efficiency, aiming for a 99.9% simulation result.
+Action Items
+	•	Replicate the 2013 CFD paper setup and run the ANSYS model to reproduce results
+	•	Submit the literature review/materials tonight (submit by tonight as stated)
+	•	Update the Gantt chart to add verification and validation (include model calibration and validation tasks)
+	•	Obtain industry data on different separator sizes for comparison (work in progress)
+
+
+
+Week 6 – 23/04
+ 
+Modelling questions:
+	•	Bottom wall is set as a wall not an outlet?
+	•	You used the mixture model, so both steam and fluid was flowing in?
+	•	Fluid accumulating in the vessel, is that okay?
+
+The meeting focused on the design and modeling of a spiral inlet for a separator. Speaker 1 provided the CFD model and discussed the homogeneous mixture of water and steam entering the spiral inlet. The inlet conditions were clarified, with water on the outer side and steam on the inner side. The team discussed simplifying the model by assuming a constant water level and open outlets. They also considered the impact of heat loss and condensation on the separator walls. The next steps involve modifying the inlet boundary conditions, running simulations, and comparing results with the homogeneous model. The goal is to improve the model's realism and address practical issues in separator design.
+
+Action Items
+	•	Contact the company contact Energy to obtain a detailed design case for their new large separators for use in the CFD model.
+	•	Call industry contacts to obtain a real-case separator design that can be used to update the CFD model with realistic dimensions and operating conditions.
+	•	Modify the CFD inlet boundary conditions to represent separate water and steam inlets, using the existing spiral inlet geometry as a starting point.
+	•	Review the spiral inlet design file and, if needed, modify it to match the updated inlet configuration for the CFD model.
+	•	Run the first CFD simulation with the modified inlet boundary conditions and compare the results with the previous homogeneous-mixture case.
+	•	Use the base-case separator enthalpy of 1600 kJ/kg from the paper to calculate the dryness fraction and mass flow rates for the water and steam inlets, and keep this enthalpy constant for the initial runs.
+	•	Run the new CFD model with the updated boundary conditions and save the results for later comparison with the homogeneous-mixture case.
+
+Week 7 – 30/04
+The team discussed the replication of results from a 2013 paper, focusing on the spiral inlet and steam-liquid separation. They noted discrepancies in steam quality, with their model showing higher values than expected. The k-epsilon model with default parameters was used, but its accuracy is uncertain. They proposed adding a chemical tracer to track liquid movement and suggested modifying the geometry to include a bottom pipe for better accuracy. Andy highlighted the need for detailed parameters missing from the original paper. The team agreed to continue testing and refining the model to match analytical results and improve the separator design.
+Action Items
+	•	Email the specific file name to the contact energy person so they can send the corresponding file.
+	•	Implement a chemical tracer in the simulation to track liquid droplets and see how much liquid travels with the steam, coordinating with the team member who will look into the injection details.
+	•	Run systematic parameter sweeps (for example, k-epsilon model parameters) and compare the resulting graphs with the analytical solution to perform a sensitivity analysis.
+	•	Design a full separator geometry that includes the bottom section and a water outlet pipe, and define appropriate boundary conditions for the water exit based on hydrostatic pressure.
+	•	Obtain data and design for a real separator from contact energy so the team can match the simulation results against real-world data.
+	•	Investigate how to implement the tracer injection (for example, using fake particles) in the simulation and report back on the approach.
+
+
+
+

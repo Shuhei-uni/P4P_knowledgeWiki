@@ -1,0 +1,9 @@
+ansys-fluent-core
+ansys-fluent-visualization
+pyvista
+matplotlib
+pandas
+numpy
+h5py
+python-dotenv
+PyYAML
