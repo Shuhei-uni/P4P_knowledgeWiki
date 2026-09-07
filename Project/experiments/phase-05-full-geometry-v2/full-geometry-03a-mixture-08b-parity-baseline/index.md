@@ -16,8 +16,9 @@ This is the Project-layer tracer for the full-geometry Mixture `03A` campaign. I
 - [Stage-3 results](stage-03/results.md)
 - [Stage-4 setup](stage-04/setup.md)
 - [Stage-4 results](stage-04/results.md)
-- [Stage-5 setup](stage-05/setup.md)
-- [Stage-5 results](stage-05/results.md)
+- [Stage-5 summary](#current-status). The referenced detailed Stage-5
+  setup/results packet is absent from the checked-in history; this summary
+  does not substitute for the missing detailed evidence.
 - [Phase 06 — Full Geometry with Brine Pool](../../phase-06-full-geometry-with-brine-pool/index.md)
 - [Historical Stage-2 screening report](stage-02/source-screening-report.md)
 

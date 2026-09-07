@@ -107,6 +107,18 @@ def capture_parallel_connectivity_roster(solver: Any) -> dict[str, Any]:
     return parsed
 
 
+def require_live_compute_node_count(solver: Any, expected: int) -> dict[str, Any]:
+    """Require a specific compute-node count for a controlled comparison."""
+    roster = capture_parallel_connectivity_roster(solver)
+    actual = int(roster["compute_node_count"])
+    if actual != expected:
+        raise RuntimeError(
+            "invalid value/format issue: live Fluent compute-node count "
+            f"must be {expected} for this controlled comparison; actual={actual}"
+        )
+    return roster
+
+
 def safe_get_state(obj: Any, label: str) -> Any:
     try:
         state = obj.get_state()

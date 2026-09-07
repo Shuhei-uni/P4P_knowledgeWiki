@@ -104,4 +104,4 @@ establish plant-level control fidelity.
 
 - [Phase-6 fixed question and boundaries](../setup.md)
 - [Phase-6 carried evidence](../results.md)
-- [03A Stage-5 fixed-pressure results](../../phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/stage-05/results.md)
+- [Stage-5 inherited summary; detailed packet unavailable](../../phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/index.md#current-status)

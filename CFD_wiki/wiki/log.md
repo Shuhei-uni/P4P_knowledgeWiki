@@ -449,3 +449,15 @@
 - notable guidance: create a fresh copy for each child, hold the global DPM coupling state fixed, keep EWF off, change only selected wall DPM boundary conditions, use `wall-jet` first when available, and reserve `DEFINE_DPM_BC` for `10b-2`.
 - uncertainty: exact Fluent wall-zone names and availability of the `wall-jet` boundary option require live-case readback.
 - next action: verify the `09c` wall DPM conditions and build `10b-1` before preparing the UDF-based `10b-2` child.
+
+## [2026-09-08] refactor | reconcile-andy-local-guidance
+
+- Updated `wiki/guidance/fluent-general-click-by-click.md`,
+  `wiki/synthesis/fluent-separator-efficiency-methods.md`, and `wiki/index.md`.
+- Recovered Andy's uncommitted outlet/gravity and diagnostic liquid-sink/pool
+  guidance by a three-way comparison, retaining the current shared revisions.
+- Preserved source links and evidence labels. Case-specific observations now
+  link to the historical Andy records in `Project/`; no live revalidation,
+  new plant assumption or active experiment promotion occurred.
+- Exact original notes and their log remain in the
+  [source recovery snapshot](https://github.com/Shuhei-uni/P4P_knowledgeWiki/tree/archive/andy-local-20260908).

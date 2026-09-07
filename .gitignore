@@ -11,7 +11,21 @@
 
 # Local environment and secrets
 *.env
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+.pytest_cache/
 PyAnsys/.venv/
+
+# Machine-specific data, recovery material and credentials
+/local-data/
+/_reconciliation/
+*.pem
+*.key
+server-info*.txt
+server_info*.txt
 
 # Large/reference PDFs
 *.pdf
@@ -41,5 +55,7 @@ fluent-*.log
 *.tmp
 *.bak
 *.swp
+*.pid
+PyAnsys/tmp/
 
 CFD_wiki/raw/

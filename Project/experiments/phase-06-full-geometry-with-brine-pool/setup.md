@@ -185,6 +185,5 @@ criterion.
 
 ## Sources
 
-- [03A Stage 5 results](../phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/stage-05/results.md)
-- [03A Stage 5 setup](../phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/stage-05/setup.md)
+- [Stage-5 inherited summary; detailed packet unavailable](../phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/index.md#current-status)
 - [current Project state](../../index.md)
