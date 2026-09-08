@@ -10,26 +10,35 @@ in `PyAnsys/`.
 
 The liquid-removal work has two separate planning lanes:
 
-- **Shuhei — Phase 7:** what practical mechanism can remove separated liquid
-  from the truncated simplified Purnanto model while preserving useful and
-  interpretable separation behaviour?
+- **Shuhei — Phase 7:** what practical numerical mechanism can remove separated
+  liquid from the truncated simplified Purnanto model while preserving useful
+  and interpretable separation behaviour?
 - **Andy — Phase 7b:** can a function-based ideal liquid collector in the lower
   full-geometry vessel support a balanced, numerically stable steady-state
   solution while preserving useful separation above the collector?
 
 Andy's Phase 7b retains the lower brine geometry and explicitly does not require
 a standing pool. Shuhei's Phase 7 retains its simplified-geometry scope. Each
-phase has its own planning authority; neither supersedes the other.
+phase has its own planning authority; neither supersedes the other. The
+human-supplied Phase 7 mesh is accepted as the intended truncated geometry; its
+steam-outlet diameter is `0.876 m`, correcting the former Project value of
+`0.724 m`.
 
 ## Active/latest experiment
 
-Both phases are in planning. Shuhei's Phase 7 has not selected a removal method.
-For Andy's Phase 7b, a function-based ideal collector is the selected mechanism
-direction; its exact zone, source law, parent, screening experiment and gate
-remain to be defined. The most direct records are:
+Both phases are in planning. In Shuhei's Phase 7, E0 is human-approved as the
+corrected fixed-mesh reference experiment, with an initial `2,000`-iteration
+discovery horizon; no bottom liquid-removal treatment is approved yet. Its
+server-neutral setup is complete, but no execution is authorized until the
+treatment series is defined. For Andy's Phase 7b, a function-based ideal
+collector is the selected mechanism direction; its exact zone, source law,
+parent, screening experiment and gate remain to be defined. The most direct
+records are:
 
 - [Shuhei's Phase 7 direction and boundaries](experiments/phase-07-simplified-purnanto-liquid-removal/index.md)
 - [Shuhei's Phase 7 planning context](experiments/phase-07-simplified-purnanto-liquid-removal/CONTEXT.md)
+- [Shuhei's Phase 7 supplied-mesh inspection](experiments/phase-07-simplified-purnanto-liquid-removal/mesh-inspection.md)
+- [Shuhei's Phase 7 E0 setup contract](experiments/phase-07-simplified-purnanto-liquid-removal/e0-08b-corrected-reference/setup.md)
 - [Andy's Phase 7b direction and boundaries](experiments/phase-07b-full-geometry-liquid-removal/index.md)
 - [Andy's Phase 7b planning context](experiments/phase-07b-full-geometry-liquid-removal/CONTEXT.md)
 - [Phase-06 human-directed conclusion](experiments/phase-06-full-geometry-with-brine-pool/conclusion.md)
@@ -80,8 +89,8 @@ steady state. A standing pool is explicitly not required in Phase 7b.
 
 ## What remains unresolved?
 
-- for Shuhei's Phase 7, the exact physical cut-plane elevation and mapped
-  coordinate, removal candidates, and screening gate;
+- for Shuhei's Phase 7, solver-side mesh quality and live Fluent topology
+  readback, removal candidates, and the screening gate;
 - for Andy's Phase 7b, the exact full-geometry mesh/parent, collector location and extent, and
   treatment of the former brine outlet;
 - whether liquid reaches the collector and can be removed without unacceptable
@@ -102,8 +111,11 @@ Andy's Phase 7b must define the collector region and exact reference, then use
 interpretable screening experiment. The intervention, tuning, artefacts,
 conservation behaviour, claim limits and decision gate must be explicit.
 Any numerical collector elevation must be declared honestly. Shuhei's Phase 7
-separately retains its physical cut-plane requirement and candidate-framing
-step. Experiment selection and gates belong to each phase's own `CONTEXT.md`.
+will next build the approved E0 08b-derived reference on the accepted mesh,
+including the corrected steam-outlet turbulence/backflow length scale. Its
+`2,000`-iteration discovery history will establish the comparison scale before
+`phase-grill` is used to approve any bottom liquid-removal candidate.
+Experiment selection and gates belong to each phase's own `CONTEXT.md`.
 
 ## Project map
 

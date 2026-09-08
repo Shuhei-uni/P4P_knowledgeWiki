@@ -59,7 +59,7 @@ keep the agent attached through the approved horizon unless a detached
 Read [`.agents/invocation.md`](.agents/invocation.md) when deciding whether a
 skill may be entered automatically.
 
-- `phase-planner` is human-only and must never be started implicitly.
+- `phase-planner` is mostly human invoked.
 - `scientific-phase-loop` and `workflow-surgeon` are hybrid: the human may call
   them directly, and the model may enter them when their documented trigger or
   preconditions are already satisfied.

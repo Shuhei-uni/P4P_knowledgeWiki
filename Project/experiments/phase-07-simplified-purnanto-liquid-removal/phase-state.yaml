@@ -1,0 +1,47 @@
+phase_id: phase-07-simplified-purnanto-liquid-removal
+phase_question: >-
+  What practical numerical mechanism can remove separated liquid from the
+  bottom of the truncated Purnanto separator model while preserving a useful
+  and interpretable representation of the separation behaviour?
+state: DISCOVERY_DESIGN
+
+autonomy:
+  experiment_selection: human-approved-context-only
+  fluent_fleet_sessions: not_authorized_by_current_context
+  human_return_conditions:
+    - >-
+      Do not add or promote a bottom-treatment candidate without explicit
+      human approval recorded in CONTEXT.md.
+
+gates:
+  DISCOVERY_DESIGN:
+    status: PASS
+    checked_at: 2026-09-08
+    permission_scope: G0_server_neutral_setup_creation_only
+    evidence:
+      - Project/experiments/phase-07-simplified-purnanto-liquid-removal/CONTEXT.md
+      - Project/experiments/phase-07-simplified-purnanto-liquid-removal/e0-08b-corrected-reference/design.md
+      - Project/experiments/phase-07-simplified-purnanto-liquid-removal/mesh-inspection.md
+      - >-
+        G0 explicitly authorizes creation of E0's server-neutral setup.md and
+        paired empty results.md; it does not authorize live Fluent mutation,
+        E0 execution, E1--E3 setup/selection, or scientific-phase-loop entry.
+      - >-
+        E0 is explicitly human-approved for setup creation; its design records
+        the exact parent/mesh identities, controlled corrections and
+        invariants, prior-experiment collision check, 2,000-iteration intent,
+        instrumentation, core figures, invalidity conditions, and claim limit.
+      - >-
+        The later G1 contrastive screen is explicitly separate; E1--E3 remain
+        unapproved and the context forbids scientific-phase-loop entry until
+        the treatment series and G1 coverage are settled.
+    missing: []
+    reviewer: independent_phase07_discovery_design_review
+
+active_jobs: []
+next_required_action: >-
+  Create E0's server-neutral setup.md and paired empty results.md under G0.
+  Preserve the prohibition on live Fluent mutation, E0 execution, E1--E3
+  setup/selection, and scientific-phase-loop entry. After setup creation, obtain
+  explicit human approval for the treatment series and G1 coverage before any
+  loop-entry gate is evaluated.

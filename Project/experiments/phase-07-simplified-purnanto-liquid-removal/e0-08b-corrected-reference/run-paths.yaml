@@ -1,0 +1,19 @@
+setup_id: P7-E0-REF
+status: UNASSIGNED
+permission: >-
+  Placeholder only. G0 authorizes server-neutral setup creation but does not
+  authorize Fluent placement, mutation, or execution.
+server: null
+parent_case: null
+mesh: null
+prepared_case: null
+initialized_case: null
+initialized_data: null
+smoke_case: null
+smoke_data: null
+checkpoint_root: null
+final_case: null
+final_data: null
+report_root: null
+residual_history: null
+manifest: null

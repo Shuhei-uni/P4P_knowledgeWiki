@@ -25,14 +25,14 @@ Use the technical companion when you need the exact Fluent export and a drift lo
 |---|---|---:|---|---|---|
 | Geometry | Separator design | **Spiral-inlet BOC design** | Geometry |  | The paper compares three designs and the spiral-inlet design is one of them.  [oai_citation:0‡informit.366967552564856.pdf](sediment://file_0000000006b0720b935da5499729cdc0) |
 | Geometry | Main diameter \(D\) | **2.134 m** | Geometry |  |  [oai_citation:1‡informit.366967552564856.pdf](sediment://file_0000000006b0720b935da5499729cdc0) |
-| Geometry | Steam outlet diameter \(D_e\) | **0.724 m** | Geometry |  |  [oai_citation:2‡informit.366967552564856.pdf](sediment://file_0000000006b0720b935da5499729cdc0) |
+| Geometry | Steam outlet diameter \(D_e\) | **0.876 m** | Geometry | Human-corrected on 2026-09-08; supersedes the earlier project extraction of `0.724 m`. The current Phase-07 mesh independently gives an area-equivalent diameter of `0.875936 m`. | Earlier extraction: [oai_citation:2‡informit.366967552564856.pdf](sediment://file_0000000006b0720b935da5499729cdc0); current project correction: [Phase-07 mesh inspection](../../phase-07-simplified-purnanto-liquid-removal/mesh-inspection.md) |
 | Geometry | Brine outlet diameter \(D_b\) | **0.508 m** | Geometry |  |  [oai_citation:3‡informit.366967552564856.pdf](sediment://file_0000000006b0720b935da5499729cdc0) |
 | Geometry | \(\alpha\) | **0.200 m** | Geometry |  |  [oai_citation:4‡informit.366967552564856.pdf](sediment://file_0000000006b0720b935da5499729cdc0) |
 | Geometry | \(\beta\) | **2.320 m** | Geometry |  |  [oai_citation:5‡informit.366967552564856.pdf](sediment://file_0000000006b0720b935da5499729cdc0) |
 | Geometry | \(Z\) | **4.195 m** | Geometry |  |  [oai_citation:6‡informit.366967552564856.pdf](sediment://file_0000000006b0720b935da5499729cdc0) |
 | Geometry | \(L_T\) | **4.929 m** | Geometry |  |  [oai_citation:7‡informit.366967552564856.pdf](sediment://file_0000000006b0720b935da5499729cdc0) |
 | Geometry | \(L_B\) | **3.579 m** | Geometry |  |  [oai_citation:8‡informit.366967552564856.pdf](sediment://file_0000000006b0720b935da5499729cdc0) |
-| Geometry | Outlet area \(A_o\) | **0.5242 m²** | Geometry |  |  [oai_citation:9‡informit.366967552564856.pdf](sediment://file_0000000006b0720b935da5499729cdc0) |
+| Geometry | Square inlet area \(A_o\) | **0.5242 m²** | Geometry | Corrected label: this is the `0.724 m × 0.724 m` inlet area, not the steam-outlet area. | [oai_citation:9‡informit.366967552564856.pdf](sediment://file_0000000006b0720b935da5499729cdc0) |
 | Mesh | Mesh type | **Unstructured tetrahedral** | Meshing |  |  [oai_citation:10‡informit.366967552564856.pdf](sediment://file_0000000006b0720b935da5499729cdc0) |
 | Mesh | Average element size | **5 cm** | Meshing |  |  [oai_citation:11‡informit.366967552564856.pdf](sediment://file_0000000006b0720b935da5499729cdc0) |
 | Mesh | Local refined faces | **1 cm** on some faces near boundaries | Meshing |  |  [oai_citation:12‡informit.366967552564856.pdf](sediment://file_0000000006b0720b935da5499729cdc0) |

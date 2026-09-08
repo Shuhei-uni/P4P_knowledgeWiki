@@ -71,6 +71,8 @@ The current project distinction is:
 ## Evidence Labels
 
 - `Reported`: directly taken from the Purnanto paper or the existing baseline extraction
+- `Human-corrected`: explicitly corrected by the project owner and, where
+  available, checked against the active mesh
 - `Calculated`: derived from reported dimensions using explicit formulas
 - `Assumed`: reconstruction choice used because the paper does not fully define the exact local curve or CAD profile
 - `Inferred`: interpretation of why the reconstruction choice is reasonable for this project branch
@@ -83,14 +85,22 @@ These are the main dimensions already reused elsewhere in the project.
 |---|---:|---|---|
 | Separator type | spiral-inlet vertical BOC separator | `Reported` | Purnanto comparison geometry |
 | Main vessel diameter `D` | `2.134 m` | `Reported` | `2134 mm` |
-| Steam outlet diameter `D_e` | `0.724 m` | `Reported` | also used as the current square-inlet side length in project setup notes |
+| Steam outlet diameter `D_e` | `0.876 m` | `Human-corrected` | supersedes the earlier incorrect `0.724 m` outlet value; the Phase-07 mesh gives `0.875936 m` from its measured `0.602608 m2` face area |
 | Brine outlet diameter `D_b` | `0.508 m` | `Reported` | paper baseline value even though this branch is "no brine outlet" |
 | `alpha` | `0.200 m` | `Reported` | Table-3-style baseline dimension |
 | `beta` | `2.320 m` | `Reported` | Table-3-style baseline dimension |
 | Vessel height `Z` | `4.195 m` | `Reported` | |
 | Total height `L_T` | `4.929 m` | `Reported` | |
 | Lower-body height `L_B` | `3.579 m` | `Reported` | |
-| Inlet / outlet area `A_o` | `0.5242 m2` | `Reported` | matches `0.724 m x 0.724 m` within rounding |
+| Square inlet area `A_o` | `0.5242 m2` | `Reported` | matches the separate `0.724 m x 0.724 m` inlet dimensions within rounding; this is not the steam-outlet area |
+
+Correction note (2026-09-08): the earlier project record conflated the
+`0.724 m` square-inlet dimension with the steam-outlet diameter. The active
+steam-outlet geometry fact is `0.876 m`; `0.724 m` remains valid for the inlet
+side length. Historical Fluent records that actually used `0.724 m` as the
+pressure-outlet backflow hydraulic diameter remain evidence of their executed
+setting, but that value is superseded for new setups using the corrected
+geometry.
 
 Source trail:
 
