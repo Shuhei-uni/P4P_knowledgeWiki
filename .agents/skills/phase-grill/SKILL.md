@@ -98,6 +98,9 @@ present, and only the latest relevant predecessor setup/result record. Separate
 `Observed` evidence, `Human thinking`, `Inferred` implications, `Assumed`
 working conditions, and `Missing Info`.
 
+Delegate independent context or evidence lookup when parallel support is
+available; keep the human conversation and `CONTEXT.md` synthesis central.
+
 Do not propose a mechanism or simulation matrix before the human has described
 their current thinking.
 

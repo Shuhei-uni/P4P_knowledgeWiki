@@ -10,7 +10,31 @@ Treat this like a research catch-up with the human, not a formal planning report
 
 Read the repo first. Work out what we were trying to learn, what the simulations actually showed, what did not work, and what is still unclear. Use `show-me-your-work` when there is a lot of previous work to reconstruct.
 
+## Use parallel support
+
+During phase planning, delegate independent context gathering, evidence lookup,
+and repository investigation as early and as broadly as available parallelism
+allows. Keep the planner's attention on the human conversation, the next
+decision, and the phase `CONTEXT.md`.
+
+Subagents support the plan; they do not choose the phase, select experiments,
+or approve candidates. Give each one a focused research question and ask for
+concise, source-linked findings.
+
+Continue planning while they work. Use their findings when they return, and
+bring only material decisions, trade-offs, and unresolved uncertainty back to
+the human. If parallel delegation is unavailable, perform the same research
+locally.
+
 ## Catch me up
+
+Start from the human's apparent context. When they already seem current on the
+phase, give only the short state of play: what changed, what it means, and the
+next decision. Do not replay the phase history just because this skill began.
+
+Expand the catch-up when the human asks for background or their question shows
+they may not have the needed context. Explain the relevant evidence, why it
+matters, and the claim limit before asking them to choose a direction.
 
 Answer the useful questions:
 
