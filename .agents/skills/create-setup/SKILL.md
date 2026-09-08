@@ -1,13 +1,19 @@
 ---
 name: create-setup
-description: "Turn a selected and justified discovery or hypothesis strategy into precise server-neutral setup records, preserving lifecycle permission, evidence requirements, core figures, qualification horizon, and claim limits for faithful implementation."
+description: "Compile a human-approved CONTEXT.md discovery or qualification item into a precise server-neutral setup record, preserving lifecycle permission, evidence requirements, core figures, qualification horizon, and claim limits."
 ---
 
 # Create Setup
 
-Turn a selected experiment strategy into precise scientific and implementation handoffs.
+Compile a human-selected experiment strategy into precise scientific and
+implementation handoffs. Read the phase-root `CONTEXT.md` first and require a
+named approved candidate/screen/qualification ID, its origin, decision-gate
+linkage, and human approval status.
 
-Do not redesign the strategy here. Preserve the reasoning and make the setup explicit enough that a fresh implementation agent can execute it without reconstructing the design conversation.
+Do not redesign the strategy here. Preserve the approved scientific purpose,
+intentional delta, invariants, claim limit, and evidence objective; return to
+`phase-planner` / `phase-grill` if implementation detail would materially
+change any of them.
 
 ## Require the correct lifecycle state
 
@@ -31,6 +37,8 @@ Do not convert missing human-owned information into an assumed surrogate unless 
 
 Every setup or linked setup set should make clear:
 
+- `CONTEXT.md` path, approved candidate/screen/qualification ID, origin, and
+  decision-gate linkage;
 - phase question;
 - lifecycle mode: `discovery` or `hypothesis-test`;
 - uncertainty/hypothesis being tested;
@@ -59,7 +67,9 @@ For every setup state the verified parent/reference artifact, intentional delta,
 
 Prefer server-neutral artifact identity over machine paths. Server assignment and local paths belong later in `run-paths.yaml` through `fluent-fleet-orchestration`.
 
-If an ambiguity would materially change the experiment, return it upstream rather than silently choosing.
+If an ambiguity would materially change the experiment, return it upstream
+rather than silently choosing. A context candidate that is only `proposed` is
+not a setup source.
 
 ## Carry the evidence and figure design unchanged
 
@@ -157,6 +167,7 @@ Create/update one `setup.md` per distinct simulation in the selected strategy.
 
 A complete setup should contain:
 
+- context path/revision, approved candidate ID, origin, and decision gate;
 - phase/lifecycle mode and prerequisite gate references;
 - question/rationale/hypothesis;
 - prior evidence and competing explanation where relevant;

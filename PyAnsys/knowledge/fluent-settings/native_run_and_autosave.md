@@ -15,7 +15,7 @@ verified case
 → short Python/PyFluent run (~500-1000 iterations)
 → scientific agent stays attached and mostly waits
 → inspect evidence immediately
-→ choose the next discovery experiment in the same active thread
+→ evaluate the declared CONTEXT.md gate and follow only its approved next action
 
 HYPOTHESIS TEST (Codex)
 verified case

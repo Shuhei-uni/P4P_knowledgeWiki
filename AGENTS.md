@@ -28,9 +28,12 @@ keep the agent attached through the approved horizon unless a detached
 ## Start with the current project
 
 - Begin project work at [`Project/index.md`](Project/index.md).
-- Load only the latest relevant experiment `setup.md` or `results.md`, then a
-  parent record when the question requires it. Do not preload old chronology
-  or whole knowledge trees.
+- For active phase planning, read the phase-root `CONTEXT.md` first, then only
+  the latest relevant experiment `setup.md` or `results.md`, and a parent
+  record when the question requires it. Do not preload old chronology or whole
+  knowledge trees. `CONTEXT.md` records current human-approved decisions, not a
+  chat transcript; `setup.md` remains the runnable contract for a
+  human-selected experiment.
 - Create `setup.md` and `results.md` together only for a human-selected
   experiment under `Project/experiments/<campaign>/<experiment>/`.
 - Update `Project/index.md` only when the current scientific state changes.

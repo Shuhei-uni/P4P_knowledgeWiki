@@ -1,11 +1,12 @@
 ---
 name: scientific-phase-loop
-description: "Run an agreed scientific phase autonomously through a mandatory verified lifecycle: orient, discover, form a falsifiable hypothesis, qualify it with a long evidence-designed run, independently verify the evidence, and only then conclude or continue. Use after the human or phase-planner has fixed the phase question, boundaries, and authority envelope."
+description: "Execute and analyse a human-approved CFD phase through its mandatory verified lifecycle. Use after phase-planner has fixed the phase question and recorded approved candidates, gates, and conditional qualification paths in CONTEXT.md."
 ---
 
 # Scientific Phase Loop
 
-Navigate the agreed phase autonomously until it reaches a **verified** phase conclusion or a genuine human-owned boundary.
+Navigate the agreed phase through verified execution and evidence analysis until
+it reaches a **verified** phase conclusion or a genuine human-owned boundary.
 
 The route may adapt to evidence, but the lifecycle may not be skipped.
 
@@ -53,26 +54,40 @@ Require:
 - modelling/scope boundaries;
 - what would count as enough evidence for the phase;
 - the granted autonomy envelope;
-- conditions that must return to the human.
+- conditions that must return to the human; and
+- the phase-root `CONTEXT.md`, including at least one human-approved candidate
+  or conditional qualification path before new compute.
 
-Treat this as the destination, authority, and boundaries. The loop owns the scientific route inside them.
+Treat this as the destination, approved route, authority, and boundaries.
 
-### Full within-phase autonomy
+### Context-gated experiment authority
 
-When the phase handoff grants the normal autonomous `/goal` authority, the loop may without repeated human approval:
+The human owns experiment origination and selection. Before planning, setup
+creation, execution, or promotion, read the current phase `CONTEXT.md`.
 
-- formulate, reject, modify, and select experiment ideas;
-- choose discovery and hypothesis setups inside the agreed modelling boundaries;
-- use literature, `bold-probe-research`, `arena`, `swarm`, and specialist analysis to generate better questions;
+The loop may without repeated human approval:
+
+- execute a setup derived from a named human-approved context candidate;
+- verify declared setup/instrumentation requirements and analyse its evidence;
+- evaluate a declared decision gate and take only its named allowed next action;
+- use research and specialist analysis to challenge or implement an approved
+  candidate without changing its scientific purpose;
 - allocate and reallocate available Fluent servers;
 - stop active Fluent calculations, terminate abandoned workers, restart/reload Fluent, replace loaded cases, and otherwise control active working sessions;
 - preserve a quick recovery case+data pair before destroying a scientifically valuable unpreserved state;
-- abandon weak branches and promote stronger ones;
-- run mainline and bold-probe work in parallel when justified.
+- abandon or defer a candidate only when its declared gate permits that action.
 
-This authority does **not** allow the loop to invent plant facts, measured setpoints, validation targets, physical controller data, or other human-owned facts; silently change the fixed phase question; cross an explicit modelling/scope boundary; or delete verified durable Project/OneDrive parent artifacts merely to make a run convenient.
+This authority does **not** allow the loop to invent, select, modify, or promote
+a new experiment; add a bold lane; change a candidate's purpose, controlled
+delta, invariants, claim limit, or required evidence; invent plant facts,
+measured setpoints, validation targets, physical controller data, or other
+human-owned facts; silently change the fixed phase question; cross an explicit
+modelling/scope boundary; or delete verified durable Project/OneDrive parent
+artifacts merely to make a run convenient.
 
-If a needed fact is explicitly `Missing Info` and the phase contract does not authorize a surrogate class, return `HUMAN_REQUIRED`. Do not clear the boundary by inventing a numerical surrogate and continuing.
+If a needed fact is explicitly `Missing Info`, a gate does not cover the result,
+or an unplanned observation suggests a new direction, return `HUMAN_REQUIRED`.
+Do not clear the boundary by inventing a surrogate or new experiment branch.
 
 ## Persist current lifecycle state
 
@@ -91,8 +106,13 @@ phase_id: ...
 phase_question: ...
 state: PHASE_CONTRACT | DISCOVERY_DESIGN | DISCOVERY_RUNNING | DISCOVERY_ANALYSIS | HYPOTHESIS_DEFINITION | HYPOTHESIS_RUN_READY | HYPOTHESIS_RUNNING | HYPOTHESIS_ANALYSIS | PHASE_CLOSURE | HUMAN_REQUIRED
 
+context:
+  path: Project/experiments/<phase>/CONTEXT.md
+  authority: human-approved-context-only
+  approved_candidate_ids: []
+
 autonomy:
-  experiment_selection: full | restricted
+  experiment_selection: context_gated
   fluent_fleet_sessions: exclusive | restricted
 
 gates:
@@ -126,11 +146,15 @@ Before proposing new work:
 2. reconstruct the closest relevant experiments across **all** phases;
 3. inspect failed, blocked, partial, non-converged, rejected, and inconclusive work as evidence too;
 4. identify what is observed versus inferred, assumed, or missing;
-5. identify the most consequential unresolved uncertainty.
+5. identify the most consequential unresolved uncertainty within the approved
+   context route.
 
 Search by scientific substance, not setup names alone: mechanism, formulation, multiphase/turbulence model, boundary condition, initialization, numerical architecture, operating regime, comparison logic, and intended question.
 
-For every serious candidate identify the closest prior experiment and classify the delta as `NEW`, `PARTIAL REPEAT`, `REPLICATION`, or `REDUNDANT`. Do not run a `REDUNDANT` candidate.
+For every approved context candidate identify the closest prior experiment and
+classify the delta as `NEW`, `PARTIAL REPEAT`, `REPLICATION`, or `REDUNDANT`.
+Do not run a `REDUNDANT` candidate; return to the human instead of substituting
+a new one.
 
 The governing posture remains:
 
@@ -160,24 +184,22 @@ Discovery asks:
 
 > What specific hypothesis is worth paying for a deep qualification run?
 
-It may include:
+It may include human-approved:
 
 - short controlled simulation screens;
-- a bounded matrix generated with `explore-experiment-space`;
+- a bounded screen listed in `CONTEXT.md`;
 - numerical diagnostics;
 - analysis of existing runs;
 - literature/manual research;
-- bold probes that challenge the conservative mainline.
+- probes that challenge the conservative mainline.
 
-When simulation discovery is useful, call `design-experiment` in discovery mode. Use at most twelve cases; twelve is a ceiling, not a target. Roughly 500–1,000 iterations per case is a useful project ballpark when enough to expose comparative behaviour, but discovery length is determined by the screening question.
-
-### Bold lane
-
-When two or more Fluent servers are usable for new compute, reserve one lane for a scientifically justified bold probe while the loop remains active.
-
-Before selecting any bold probe call `bold-probe-research`. The bold question must be evidence-backed, non-redundant, interpretable, bounded, and capable of teaching something whether it succeeds or fails. Do not fill an idle server with a random Fluent option or nearby parameter variation.
-
-A bold side branch may inform the current phase without silently creating a new formal phase. If it deserves a sustained change of phase objective, return that direction to the human/`phase-planner`.
+When simulation discovery is useful, call `design-experiment` in discovery mode
+for a named approved context candidate. The human-approved decision gate, not an
+arbitrary case count, determines the smallest adequate campaign. Roughly
+500–1,000 iterations per case is a useful project ballpark when enough to
+expose comparative behaviour, but the declared screening question determines
+the horizon. `bold-probe-research` may research an approved speculative
+candidate; idle compute never authorizes a new one.
 
 ### Discovery design gate
 
@@ -197,7 +219,7 @@ launch synchronous Python/PyFluent run
 → wait while Fluent calculates
 → verify terminal execution evidence
 → immediately analyse
-→ choose next discovery action
+→ follow the exact next action authorized by CONTEXT.md
 ```
 
 Do **not** pause the goal, end the turn because Fluent is still running, launch the detached hypothesis handoff path merely to avoid waiting, or require the human to send another message.
@@ -222,7 +244,9 @@ The discovery result must identify:
 - why prior evidence does not already settle it;
 - what a deeper run could say that discovery cannot.
 
-If discovery has not produced a defensible hypothesis, do **more or better discovery**. Do not advance merely because a few short simulations finished.
+If discovery has not produced a defensible hypothesis for a declared context
+path, return `HUMAN_REQUIRED`. Do not invent more discovery work or advance
+merely because a few short simulations finished.
 
 Call `verify-phase-transition` for `DISCOVERY_EVIDENCE`.
 
@@ -230,7 +254,10 @@ Only `PASS` permits hypothesis formation.
 
 ## Stage 2 — define the hypothesis contract
 
-Write a clear hypothesis contract before designing the long run.
+Write or confirm the context-approved hypothesis contract before designing the
+long run. A long-run path must be named in `CONTEXT.md` and triggered by a
+declared gate; discovery evidence does not independently authorize the loop to
+promote a new path.
 
 It must state:
 
@@ -329,7 +356,10 @@ Classify the hypothesis from the data while preserving claim limits and competin
 
 Call `verify-phase-transition` for `HYPOTHESIS_EVIDENCE`.
 
-If it returns `BLOCK`, repair instrumentation, extend/repeat qualification, run the needed controlled comparison, or otherwise obtain the missing evidence. If new evidence reopens a broad uncertainty, return to discovery and run the lifecycle again from the appropriate state.
+If it returns `BLOCK`, repair an approved setup or obtain missing evidence only
+when the approved context path permits it. If new evidence reopens uncertainty
+or requires another comparison, return `HUMAN_REQUIRED` rather than creating a
+new discovery branch.
 
 ## Stage 6 — phase closure
 
@@ -342,10 +372,12 @@ A bounded or negative conclusion is valid, but it must be earned by the same lif
 After closure review the outcome is:
 
 - `CONCLUDE PHASE` — verified phase-level statement is supported;
-- `CONTINUE` — another evidence cycle could materially change/strengthen the phase answer;
+- `CONTINUE` — a named approved context path can materially change/strengthen
+  the phase answer;
 - `RETURN TO HUMAN / PHASE-PLANNER` — the useful next step crosses the human-owned boundary.
 
-If `CONTINUE` reopens broad uncertainty, return to discovery. If the uncertainty remains focused, form/revise a hypothesis and repeat qualification after the relevant gates pass.
+If `CONTINUE` would require a new question, candidate, or revised hypothesis,
+return to the human. Only a named approved context path may continue.
 
 ## Human locks are real locks
 
@@ -365,7 +397,8 @@ Discovery optimises breadth and information. Hypothesis qualification optimises 
 
 Use the smallest relevant specialist:
 
-- `bold-probe-research`, `swarm`, `arena` for research and candidate diversity;
+- `bold-probe-research`, `swarm`, `arena` to research or challenge approved
+  candidates, never to create an executable new candidate;
 - `design-experiment`, `question-experiment`, `create-setup` for scientific design;
 - `fluent-fleet-orchestration` for live placement/session authority;
 - `fluent-live-inspection` and `fluent-manual-researcher` for uncertain Fluent configuration;

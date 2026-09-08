@@ -1,0 +1,4 @@
+interface:
+  display_name: "Phase Grill"
+  short_description: "Shape human-led phase decisions"
+  default_prompt: "Use $phase-grill inside this phase-planning conversation to capture my thinking and sharpen the next decision."

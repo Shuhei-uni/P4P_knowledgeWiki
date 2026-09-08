@@ -22,6 +22,8 @@ no unresolved HUMAN_REQUIRED lock
 
 Also require the approved setup/run contract to contain:
 
+- phase `CONTEXT.md` path and approved qualification-path ID, with no
+  unresolved context lock;
 - experiment/setup/run identity;
 - exact runtime `server.ref` and parent/child identity;
 - canonical `run-paths.yaml`;

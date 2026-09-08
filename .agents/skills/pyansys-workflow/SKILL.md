@@ -86,7 +86,7 @@ agent launches Python/PyFluent run
 → agent stays attached and mostly waits
 → run returns
 → agent immediately inspects screening evidence
-→ agent revises hypothesis / chooses next discovery probe
+→ agent evaluates the declared context gate / follows its approved next action
 ```
 
 Do not use the detached sleep/wake worker merely to avoid waiting. Do not end or pause the scientific goal between ordinary discovery runs. The point is fast experimental iteration while context is still live.

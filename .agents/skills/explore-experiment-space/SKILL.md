@@ -1,111 +1,58 @@
 ---
 name: explore-experiment-space
-description: "Design a small, fast simulation matrix of six to twelve cases to explore several plausible directions when the important mechanism or experiment direction is still unclear. Use inside scientific-phase-loop discovery mode before spending heavily on a focused hypothesis test."
+description: "Organize human-approved CONTEXT.md candidate experiments into a small, contrastive discovery screen. Use inside an active phase only after candidates and a decision gate are approved; do not originate or promote new candidates."
 ---
 
 # Explore Experiment Space
 
-When the important direction is unclear, breadth can be more valuable than depth.
+Turn an approved candidate pool into the smallest contrastive discovery screen
+that can answer its declared decision gate. The phase `CONTEXT.md` owns
+candidate origin, approval, and the allowed next paths; this skill owns a clear
+comparison plan.
 
-Use this skill to create a bounded discovery campaign that quickly exposes which ideas, mechanisms, parameter regions, or modelling choices deserve deeper investigation.
+## Require an approved context campaign
 
-Discovery runs are screening evidence. Their job is to reveal direction, not to manufacture strong conclusions from short simulations.
+Read the phase-root `CONTEXT.md`. Require every proposed screen to have a
+candidate ID, origin, `approved` status, controlled delta, invariants, required
+evidence, and a shared decision gate. Return to `phase-grill` when a missing
+candidate or gate would need a new human decision.
 
-## Start from the unresolved landscape
+Check each approved candidate against prior Project work. Classify its delta as
+`NEW`, `PARTIAL REPEAT`, `REPLICATION`, or `REDUNDANT`. A redundant candidate
+does not license a substitute candidate; return it to the human.
 
-Before creating cases, inspect the relevant literature, previous simulation results, current model behaviour, and competing explanations.
+## Build the screen
 
-Ask:
+Use the fewest approved cases that genuinely distinguish the gate's stated
+alternatives. Preserve a reference where the gate needs one, change as little
+as practical within each comparison, and state why each approved case is
+necessary. Do not add cases for arbitrary breadth or idle compute capacity.
 
-- What important uncertainty is still broad rather than sharply testable?
-- Which plausible directions remain difficult to rank from existing evidence?
-- What set of contrasting simulations could make that landscape clearer?
-- What would make a direction look promising, weak, or unexpectedly interesting?
+For each screen record:
 
-Do not create a matrix merely because many parameters exist. Every case should help distinguish a meaningful possibility.
+| Field | Required content |
+| --- | --- |
+| Context candidate ID | Human-approved candidate being screened |
+| Parent/reference | Exact comparison anchor |
+| Delta and invariants | What changes and what remains fixed |
+| Short horizon | Enough to answer the screen question, not a qualification claim |
+| Evidence | Histories, balances, fields, or comparisons required by the gate |
+| Rejection signal | Artifact or outcome that rules the candidate out |
 
-## Build a six-to-twelve-case discovery matrix
+## Design evidence before compute
 
-Create **at least six and at most twelve** quick simulation cases for every discovery campaign.
+Define the small core figure set and instrumentation that the declared gate
+needs. Prefer histories and comparable metrics over endpoint snapshots. State
+units, sign conventions, phase/zone/surface scope, comparison window, and data
+source. Preserve noise, drift, or instability rather than smoothing away the
+screen's signal.
 
-- `6` is the hard minimum: discovery must test enough distinct cases to provide real comparative breadth before a hypothesis can be promoted.
-- `12` is the hard ceiling: do not turn discovery into brute-force coverage.
-- Use between six and twelve based on the breadth of the uncertainty and available compute, but never reduce the campaign below six merely because one early case looks promising.
+Discovery evidence may screen candidates and trigger a named conditional path;
+it may not establish the long-run claim by itself.
 
-Prefer a compact matrix containing a useful reference plus deliberately different directions. Cases may test alternative mechanisms, settings, formulations, operating conditions, or combinations when an interaction is itself worth screening.
+## Output
 
-Keep the matrix interpretable. Change as little as practical within each comparison and preserve common conditions where possible.
-
-Use a table such as:
-
-| Case | Main change | Why it is included | Planned iterations | Evidence to compare |
-|---|---|---|---:|---|
-| D1 | Reference | Comparison anchor | 500-1000 | ... |
-| D2 | ... | Tests direction A | 500-1000 | ... |
-| D3 | ... | Tests direction B | 500-1000 | ... |
-| D4 | ... | Tests direction C | 500-1000 | ... |
-| D5 | ... | Tests direction D | 500-1000 | ... |
-| D6 | ... | Tests direction E | 500-1000 | ... |
-
-A ballpark of roughly 500 to 1,000 iterations per case is appropriate when that is enough to expose useful early behaviour. This is a planning default, not a universal numerical criterion. Use a different short budget when the model, solver behaviour, or phase constraints justify it.
-
-The point is to obtain comparable early behaviour across enough distinct directions to support a defensible hypothesis without paying the cost of fully developing every case.
-
-## Design comparable screening evidence and plots
-
-Plan the evidence before running the matrix.
-
-Prefer iteration or time histories over endpoint snapshots. Capture the residuals, balances, physical monitors, fluxes, inventories, contours, or other quantities needed to compare how each case behaves.
-
-Do not default to one giant overview figure. Pick the few plots that are most likely to separate the candidate directions.
-
-For a discovery campaign, usually define `1-3` **core screening figures** and reuse them consistently across the cases. For each figure, state:
-
-- the screening question it answers;
-- x-axis and units, normally iteration or physical time for evolving quantities;
-- y-axis/field, units, phase/zone/surface scope, and sign convention;
-- which cases or quantities should be shown together;
-- the comparison window or reduction, if any;
-- the exact source monitor/report/field;
-- any pre-run instrumentation needed;
-- what visible pattern would make one direction worth deeper investigation, without predicting which case will show it.
-
-Use branch-by-branch histories when that is clearer than overlaying many cases. Do not create unreadable twelve-case spaghetti plots. A compact cross-case comparison is useful only when it answers a real screening question, for example comparing the same final-window metric across cases after the histories have established what that metric means.
-
-Residuals are supporting numerical evidence by default, not automatically one of the core discovery figures. Promote them only when solver behaviour itself helps discriminate the candidate directions.
-
-Contours should be targeted to a spatial question. Generic velocity, pressure, or phase contours do not become high-value discovery evidence merely because they are easy to generate.
-
-Use the same metric definitions, plotting conventions, comparison windows, and run budget across cases whenever scientifically appropriate. Short runs can be noisy or still evolving; preserve that behaviour rather than hiding it behind a single final value or aggressive smoothing.
-
-## Interpret as discovery evidence
-
-After the matrix is run, compare the cases primarily to decide where deeper investigation is worth the compute.
-
-The useful outputs are statements such as:
-
-- this direction is consistently more promising than the alternatives;
-- this option appears weak enough to deprioritise;
-- these two mechanisms remain difficult to distinguish;
-- this case produced unexpected behaviour that creates a new hypothesis;
-- the matrix did not separate the candidates, so a different experiment design is needed.
-
-Do not normally use a 500-1,000-iteration discovery case by itself to claim settled model behaviour, convergence, or a strong quantitative conclusion.
-
-Discovery evidence can eliminate poor directions, expose trends, generate hypotheses, and identify the most valuable focused test. It does not need to finish the scientific argument.
-
-## Return to the loop
-
-Return:
-
-1. the discovery question;
-2. the case matrix, containing **6-12** quick screening cases;
-3. the evidence that should be comparable across the matrix;
-4. the `1-3` core screening figures and their exact plot specifications;
-5. the short-run budget and why it is sufficient for screening;
-6. after execution, which directions appear promising, weak, unresolved, or surprising;
-7. the hypothesis or focused question that now deserves deeper testing, if one emerged.
-
-Hand promising focused questions back to `scientific-phase-loop` / `design-experiment` for hypothesis-test mode.
-
-Do not promote a hypothesis before at least six valid discovery cases have completed and been compared. If the matrix does not reduce the uncertainty enough to justify a focused test after six or more cases, continue discovery up to twelve cases or redesign the discovery question rather than automatically extending every case into a long simulation.
+Return the approved context candidate IDs, screening table, declared gate,
+required evidence/core figures, and each case's short horizon. After execution,
+classify only the gate-authorized next action. When evidence suggests an
+unlisted direction, return `HUMAN_REQUIRED` rather than proposing another case.

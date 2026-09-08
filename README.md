@@ -38,8 +38,8 @@ Start with:
 
 Most skills are internal specialists and should be called by the scientific workflow when needed. The main skills the human should deliberately invoke are:
 
-- `$phase-planner` — use for a scientific catch-up before a phase, after the autonomous loop stops, or whenever you want to reconstruct where the project stands and discuss the next phase-level direction.
-- `$scientific-phase-loop` — use once the phase question, boundaries, and desired level of evidence are agreed. It autonomously designs and runs experiments, analyses results, revises hypotheses and assumptions, and continues until it can conclude the phase or reaches a genuine human boundary.
+- `$phase-planner` — use for a scientific catch-up before a phase, after the autonomous loop stops, or whenever you want to reconstruct where the project stands, think aloud about the next direction, and approve phase/experiment candidates.
+- `$scientific-phase-loop` — use once `CONTEXT.md` records the approved phase question, candidates, decision gates, and conditional qualification paths. It executes approved work, analyses results, and follows declared gates; it does not invent experiments from scratch.
 - `$workflow-surgeon` — use when the agent workflow itself is frustrating, repeatedly behaves badly, has a missing responsibility, stale rule, poor handoff, or bad default. It diagnoses the root cause with fresh reviewers and prefers the smallest surgical change over redesigning the skill system. It may also self-invoke when frustrated user feedback clearly points to an identifiable workflow failure.
 - `$show-me-your-work` — optional audit/handoff tool when you specifically want a concise reconstruction of what an autonomous sequence did and where the supporting evidence lives.
 
@@ -48,11 +48,13 @@ Typical scientific flow:
 ```text
 $phase-planner
     ↓
-agree phase question / boundaries
+human think-aloud / $phase-grill
     ↓
-$scientific-phase-loop
+CONTEXT.md phase scope, approved candidates, and decision gates
     ↓
-autonomous discovery or hypothesis-test cycles
+design-experiment → create-setup
+    ↓
+$scientific-phase-loop executes approved discovery or hypothesis-test paths
     ↓
 conclude phase / return to human
     ↓
@@ -75,7 +77,7 @@ The human normally does not need to invoke experiment-design, setup, Fluent exec
 
 Inside the loop, execution depends on experiment mode:
 
-- **Discovery:** short screening runs stay attached to the active scientific agent so results can immediately drive the next probe without a human restart.
+- **Discovery:** short screening runs stay attached to the active scientific agent so results can immediately evaluate the next declared context gate without a human restart.
 - **Hypothesis test:** long runs use the background self-waking Python worker. It persists `COMPLETE`/`BLOCKED` evidence and resumes the exact originating Codex thread automatically; the human should not need to send a prompt just to restart progress after the solve finishes.
 
 TUI-driven or Fluent-journal execution requires explicit human approval for that run.

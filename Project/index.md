@@ -8,20 +8,26 @@ in `PyAnsys/`.
 
 ## What are we trying to answer now?
 
-Can a full-geometry CFD model reproduce a physically credible, controlled
-bottom brine-pool operating condition for the separator, rather than merely a
-response to a fixed brine-outlet pressure?
+What practical numerical mechanism can remove separated liquid from the
+bottom of a simplified Purnanto separator model while preserving useful and
+interpretable separation behaviour?
 
-The immediate technical question is whether the F11-derived model can provide
-a defensible level-related observable and phase-aware outlet-flow basis before
-we test a more physically meaningful brine-outlet response representation.
+The simplified geometry will be truncated at the elevation corresponding to
+the real separator's brine-pool surface. Phase 07 will use human-originated,
+explicitly approved liquid-removal candidates at the bottom of this truncated
+computational domain.
 
 ## Active/latest experiment
 
-The current scientific lane is the canonical full-geometry Mixture `03A`
-brine-pool level-control phase, following the completed Stage-5 fixed-pressure
-discovery work. Its Project tracer is the shortest route through the selected
-record:
+The current scientific lane is Phase 07: simplified Purnanto liquid-removal
+mechanism development. No particular removal method or runnable experiment has
+yet been selected. The most direct records are:
+
+- [Phase-07 direction and boundaries](experiments/phase-07-simplified-purnanto-liquid-removal/index.md)
+- [Phase-07 human-approved planning context](experiments/phase-07-simplified-purnanto-liquid-removal/CONTEXT.md)
+- [Phase-06 human-directed conclusion](experiments/phase-06-full-geometry-with-brine-pool/conclusion.md)
+
+The predecessor evidence remains available through these records:
 
 - [03A tracer index](experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/index.md)
 - [Stage-4 setup contract](experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/stage-04/setup.md)
@@ -29,7 +35,7 @@ record:
 - [Stage-5 inherited summary; detailed packet unavailable](experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/index.md#current-status)
 - [Phase-06 Full Geometry with Brine Pool contract](experiments/phase-06-full-geometry-with-brine-pool/setup.md)
 - [Phase-06 Stage-01 setup](experiments/phase-06-full-geometry-with-brine-pool/stage-01-level-observable-and-outlet-response/setup.md)
-- [Phase-06 results and closure](experiments/phase-06-full-geometry-with-brine-pool/results.md)
+- [Phase-06 pre-decision results](experiments/phase-06-full-geometry-with-brine-pool/results.md)
 - [Phase-06 Stage-06 long-horizon evidence](experiments/phase-06-full-geometry-with-brine-pool/stage-06-long-horizon-surrogate-hypothesis/results.md)
 
 The earlier Project experiment records preserve the migrated setup and result
@@ -51,34 +57,33 @@ monitor did not populate, so no convergence claim is made.
 This is a bounded model result, not evidence that the physical separator
 cannot be level controlled.
 
+**Human decision as of 2026-09-08.** The full geometry is too complex to
+remain the immediate development platform. Phase 06 is therefore concluded
+for now, and the project is returning to the simplified Purnanto geometry.
+
 ## What remains unresolved?
 
-- the real level sensor datum/location, target and operating band;
-- the brine outlet hardware/line characteristic, downstream condition, and
-  controller behaviour required to model a physical controlled outlet;
-- whether a human-approved new transient/model-form/control scope is warranted
-  after the current steady surrogate has failed to establish control;
-- which external, analytical, or measured targets are appropriate for a
-  validation claim.
+- the exact brine-pool-surface elevation in the real separator and its mapped
+  coordinate in the simplified Purnanto geometry;
+- which numerical mechanism can remove liquid at the truncated bottom without
+  unacceptable steam loss, phase-routing distortion, mass imbalance, or
+  numerical instability;
+- how the candidate methods should be compared and what evidence is sufficient
+  to select one; and
+- which external, analytical, or measured targets would eventually support a
+  physical validation claim.
 
 ## What happens next?
 
-**Phase 06 is not closed under the current mandatory lifecycle gates.** The
-10,000-iteration calculation usefully weakened the Stage-04 hypothesis: after
-pressure saturation, the numerical proxy remained above target with positive
-late storage/phase-liquid accumulation. However, only three valid discovery
-cases are identified, the canonical long-run job is `BLOCKED`, and the required
-residual history and named final pair are absent. Those gaps prevent discovery,
-hypothesis-evidence, and closure gates from passing.
+**Phase 06 is concluded for now by explicit human direction.** Its blocked
+lifecycle record is retained as historical evidence rather than silently
+upgraded to a completed physical validation.
 
-The human has authorized a bounded numerical-surrogate route whose purpose is
-to mimic the main level-control behaviour without claiming plant fidelity. The
-persisted state is now `DISCOVERY_DESIGN`. The next permitted step is a
-gate-reviewed campaign of 6–12 nonredundant full-geometry steady surrogate
-cases with durable numerical and physical histories. Mixture/RNG is the
-reference, but justified steady multiphase and turbulence alternatives are
-allowed. Transient work or a physical validation claim still requires a return
-to the human.
+Phase 07 must first establish the exact geometry cut plane and then use
+`phase-grill` to capture and approve any bottom liquid-removal candidates for
+the simplified Purnanto model. Pragmatic numerical workarounds are permitted,
+but each must make its intervention, tuning, artefacts, conservation behaviour,
+claim limits, and decision gate explicit before it can be retained.
 
 ## Project map
 

@@ -71,10 +71,13 @@ A missing plant fact or other human-owned parameter is not a working assumption 
 
 Choose `CONTINUE` when:
 
-- a lifecycle gate remains `BLOCK` but can be resolved autonomously;
-- the verified hypothesis result reveals another focused uncertainty that could materially change the phase answer;
+- a lifecycle gate remains `BLOCK` and the approved context path explicitly
+  authorizes the repair;
+- the verified hypothesis result requires a named approved context path that
+  could materially change the phase answer;
 - evidence is incomplete for the intended statement;
-- another discovery/qualification cycle has clear information value.
+- another already-approved discovery/qualification cycle has clear information
+  value.
 
 State which lifecycle state should be reopened and why. Do not design the experiment here.
 
@@ -117,8 +120,9 @@ Track whether meaningful cycles are changing the scientific picture.
 If two consecutive cycles fail to reduce an important uncertainty, strengthen the statement, or materially update an assumption:
 
 - do not generate a third nearby variation by habit;
-- reopen discovery with a substantially different researched question/branch, including the bold-probe process when appropriate; or
-- return to the human if the needed rethink crosses the phase boundary.
+- return to the human / `phase-planner` for a substantially different question
+  or branch; or
+- follow a named approved context path when one already exists.
 
 Stagnation can justify changing the route. It does not justify skipping qualification.
 

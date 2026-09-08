@@ -35,13 +35,14 @@ Use `server.ref` in placement/execution records.
 
 Before preflight, read the active phase contract and `phase-state.yaml`.
 
-When the human has granted normal autonomous `/goal` authority, record an exclusive fleet lease such as:
+When the human has granted context-gated execution authority, record an
+exclusive fleet lease such as:
 
 ```yaml
 goal_lease:
   phase_id: phase-07
   mode: exclusive
-  experiment_selection: full
+  experiment_selection: context_gated
   active_session_control: full
 ```
 
@@ -81,7 +82,8 @@ Do not infer case identity from server name, directory name, iteration count, or
 
 If Fluent is iterating when an exclusive lease is active:
 
-1. determine whether the calculation belongs to an approved active job in the same `phase-state.yaml`;
+1. determine whether the calculation belongs to an approved active job and
+   context candidate ID in the same `phase-state.yaml`;
 2. if yes, preserve/continue it according to that job's state;
 3. if it is stale, abandoned, from an older goal, or conflicts with the new approved placement, reconcile useful state;
 4. save a paired recovery artifact first when losing the current unpreserved endpoint would materially cost scientific work;
@@ -112,9 +114,8 @@ For important artifacts prefer a small manifest containing artifact ID, source s
 
 Return live server count, session state, takeover status, artifact locality, transfer possibilities, and material version limitations to `scientific-phase-loop` / `design-experiment` before runnable work is committed.
 
-Use parallel capacity aggressively only for scientifically justified work.
-
-When two or more servers are usable for new compute, preserve the scientific loop's bold-probe lane. Do not create filler experiments merely to maximize utilization.
+Use parallel capacity only for human-approved context items. Do not create a
+bold lane or filler experiments merely to maximize utilization.
 
 ## Place runs by exact-parent locality
 
@@ -215,4 +216,7 @@ DURABILITY: verified finals/checkpoints and LOCAL_ONLY debt
 BLOCKERS: unavailable parent, uncertain identity, path/compatibility issue
 ```
 
-The scientific loop chooses what is worth running. This skill ensures the whole live fleet can actually be controlled and used according to the granted phase authority without losing valuable scientific state or confusing session identity with artifact identity.
+The human-approved `CONTEXT.md` chooses what is worth running. This skill
+ensures the whole live fleet can actually be controlled and used according to
+the granted phase authority without losing valuable scientific state or
+confusing session identity with artifact identity.

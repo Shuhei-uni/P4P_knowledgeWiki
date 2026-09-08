@@ -1,11 +1,12 @@
 ---
 name: arena
-description: "Generate independent candidate scientific directions or experiment strategies and synthesize the strongest result. Use when several plausible approaches deserve genuine comparison before committing direction or compute."
+description: "Compare several human-approved CONTEXT.md scientific directions or experiment strategies without selecting an executable route. Use when approved approaches deserve independent comparison before a human decision."
 ---
 
 # Arena
 
-Use independent candidates when diversity of reasoning can improve an important choice.
+Use independent reasoning to compare candidates already approved in
+`CONTEXT.md`. The human, not this skill, chooses an executable route.
 
 ## Keep the judging level clear
 
@@ -15,11 +16,12 @@ At the **experiment level**, favour information value: how much of the relevant 
 
 Do not apply one generic rubric to every level of the investigation.
 
-## Generate independently
+## Compare independently
 
-Give several subagents the same problem, evidence, constraints, and level of decision. Let them reason independently before seeing the alternatives.
+Give several subagents the same approved candidate set, evidence, constraints,
+and level of decision. Let them reason independently before seeing alternatives.
 
-Ask for genuinely different approaches rather than cosmetic variants.
+Ask them to assess the approved alternatives rather than generate new ones.
 
 ## Judge from evidence
 
@@ -27,18 +29,18 @@ Compare the candidates using the criteria that matter for the calling skill. Sci
 
 Do not choose by majority vote, confidence of writing, or novelty.
 
-## Synthesize when synthesis is stronger
+## Preserve the decision boundary
 
-The output does not have to be one candidate copied intact.
-
-A strong conclusion may combine compatible pieces from several candidates: one may identify the right scientific direction, another the strongest experiment, and another an important control or evidence requirement.
-
-Combine only pieces that remain scientifically coherent together. Do not merge everything into an overengineered compromise.
+The output may identify strengths, conflicts, and evidence needs across the
+approved candidates. It must not merge them into an unapproved experiment or
+select an executable strategy.
 
 Preserve meaningful disagreements when the evidence does not resolve them.
 
 ## Output
 
-Return the chosen or synthesized direction, why the evidence supports it, which useful pieces came from alternatives, and any unresolved disagreement that still matters.
+Return the comparison, evidence-supported tradeoffs, any useful constraints,
+and unresolved disagreement that still matters.
 
-Then hand the result back to the calling skill.
+Then hand the result to `phase-grill` / the human for any selection or context
+change.

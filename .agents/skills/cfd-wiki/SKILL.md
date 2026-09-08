@@ -1,57 +1,68 @@
 ---
 name: cfd-wiki
-description: "Use when working with CFD_wiki reusable CFD knowledge: searching literature lookup chunks, answering Fluent how-to/setup questions, extracting paper evidence, updating CFD source/setup/guidance/concept/entity/synthesis pages, or deciding what generic CFD knowledge belongs outside the project wiki."
+description: "Route reusable CFD knowledge: locate or extract paper evidence, answer or author generic Fluent guidance, or update CFD_wiki sources, setups, concepts, entities, and synthesis. Use when the task concerns transferable CFD method or evidence rather than a selected Project experiment or PyAnsys automation."
 ---
 
 # CFD Wiki
 
-## Core Rule
+Use `CFD_wiki/` as the reusable evidence and method library: paper reconstruction, generic Fluent click paths, solver/model patterns, and cross-paper synthesis. Its **boundary** is reusable knowledge.
 
-Use `CFD_wiki/` for reusable CFD reconstruction knowledge, paper extraction, Fluent setup guidance, solver/model patterns, and cross-paper synthesis. Do not store project run decisions, setup lineage, or PyAnsys implementation detail here unless the point is to extract a reusable CFD lesson.
+- Keep selected experiment questions, findings, and claim limits in `Project/`.
+- Keep executable implementation, inspection, and generated machine evidence in `PyAnsys/`.
+- A project-specific result may enter this wiki only as a clearly labelled reusable lesson; retain a link to its owning project record.
 
-Before editing, read:
+Never edit `CFD_wiki/raw/`.
 
-1. `AGENTS.md` at the repository root for cross-system routing.
-2. `CFD_wiki/AGENTS.md` for the local schema and citation rules.
-3. `CFD_wiki/wiki/index.md` for the maintained page catalog.
+Before changing the wiki, read `CFD_wiki/AGENTS.md`, then the maintained catalog at `CFD_wiki/wiki/index.md`. The local guide owns page schemas, citation style, uncertainty labels, and the full ingest procedure; do not duplicate or replace it here.
 
-Never edit anything under `CFD_wiki/raw/`.
+## Choose the branch
 
-## Search Workflow
+Classify the request before opening source material:
 
-For paper, model, mesh, validation, separator, annular-flow, DPM, EWF, steam-purity, carryover, ORC, or geofluid-property questions:
+| Request concerns | Take this branch |
+| --- | --- |
+| Where a paper reports a method, model, parameter, validation result, or limitation | **Evidence lookup** |
+| How to carry out a reusable action in Fluent, or how to improve generic Fluent guidance | **Fluent guidance** |
+| Adding, correcting, connecting, or synthesising transferable CFD knowledge | **Wiki update** |
+| A selected experiment's decision, result, setup lineage, or a runnable PyAnsys change | Route to `Project/` or `PyAnsys/`; use this skill only if a separate reusable lesson is needed |
 
-1. Read `CFD_wiki/paper_lookup/index.md`.
-2. Open only the relevant chunk under `CFD_wiki/paper_lookup/broad/` or `CFD_wiki/paper_lookup/geothermal/`.
-3. Use the lookup to choose source pages under `CFD_wiki/wiki/sources/`, setup pages under `CFD_wiki/wiki/setups/`, or synthesis pages under `CFD_wiki/wiki/synthesis/`.
-4. Inspect raw papers or guide PDFs only at pinpointed pages/sections when source precision matters.
-5. Answer or update pages with citations and uncertainty labels: `Reported`, `Inferred`, `Assumed`, `Missing`, or `Not Applicable`.
+## Evidence lookup
 
-Use `rg` first when searching:
+For a paper, model, mesh, validation, separator, annular-flow, DPM, EWF, steam-purity, carryover, ORC, or geofluid-property question:
+
+1. Read `CFD_wiki/paper_lookup/index.md` and search the lookup/catalogue with `rg`.
+2. Open only the relevant broad or geothermal lookup chunk, then the smallest relevant maintained page: `wiki/sources/`, `wiki/setups/`, `wiki/concepts/`, `wiki/entities/`, or `wiki/synthesis/`.
+3. If precision matters, use those pointers to inspect only the needed raw-paper or guide pages/sections. The lookup accelerates navigation; it never replaces the primary source.
+4. State source-backed facts with their page/section citation, and label every non-verbatim conclusion `Reported`, `Inferred`, `Assumed`, `Missing Info`, or `Not Applicable`, as applicable.
+
+Completion criterion: the answer identifies the supporting source location and clearly distinguishes source evidence from inference or an unresolved gap.
+
+## Fluent guidance
+
+For a generic “how do I do this in Fluent?” request:
+
+1. Read `CFD_wiki/wiki/guidance/index.md`, then the smallest matching guidance page. Start with `fluent-general-click-by-click.md` only when no narrower page applies.
+2. Verify uncertain terminology, prerequisites, or GUI paths against the relevant official-guide material or a cited maintained source.
+3. Give a GUI-first, reusable click path. Explain critical settings in plain language and keep case-specific numerical values out of generic guidance.
+4. When values are necessary, identify their source or route to the owning `Project/` setup record; never promote a project's defaults into generic guidance without transferable evidence.
+
+Completion criterion: the response or updated page supplies a reproducible generic procedure, cites its authority, and does not silently assume a case-specific value.
+
+## Wiki update
+
+When adding or correcting reusable CFD knowledge:
+
+1. Choose the smallest existing destination: `sources/`, `setups/`, `guidance/`, `concepts/`, `entities/`, or `synthesis/`. Create a new page only when no existing page can own the knowledge cleanly.
+2. Apply the extraction schema, evidence labels, units, citations, and missing-information rules from `CFD_wiki/AGENTS.md`.
+3. Link related pages in both directions with a meaningful relation—`supports`, `extends`, `contradicts`, `replaces`, or `reuses`.
+4. Update `CFD_wiki/wiki/index.md` and append the required parseable entry to `CFD_wiki/wiki/log.md`.
+
+Completion criterion: every setup-critical value is cited and unit-bearing, uncertainty is visible, related knowledge is bidirectionally linked, and the maintained catalogue/log expose the change.
+
+## Search pattern
+
+Use `rg` first; it keeps lookup scoped before long documents are opened.
 
 ```bash
 rg -n "term|alternate term" CFD_wiki/wiki CFD_wiki/paper_lookup
 ```
-
-## Fluent Guidance Workflow
-
-For "how do I do this in Fluent" requests:
-
-1. Read `CFD_wiki/wiki/guidance/index.md`.
-2. Open the relevant guidance page, especially `CFD_wiki/wiki/guidance/fluent-general-click-by-click.md` for broad GUI navigation.
-3. Pull case-specific numbers from `CFD_wiki/wiki/setups/`, `ResearchProject_wiki/`, or `Setups/` only after the generic click path is established.
-4. Keep guidance pages procedural and GUI-first. Do not put project-specific numerical defaults in reusable guidance pages.
-
-## Update Workflow
-
-When adding reusable CFD knowledge:
-
-1. Choose the smallest existing page that fits: `sources/`, `setups/`, `guidance/`, `concepts/`, `entities/`, or `synthesis/`.
-2. Use the extraction schema and page style in `CFD_wiki/AGENTS.md`.
-3. Preserve units and citations for every setup-critical value.
-4. Add `Missing Info`, `Assumptions`, risk labels, confidence, and sensitivity tests when data is incomplete.
-5. Link related pages bidirectionally with relation tags such as `supports`, `extends`, `contradicts`, `replaces`, or `reuses`.
-6. Update `CFD_wiki/wiki/index.md`.
-7. Append one parseable entry to `CFD_wiki/wiki/log.md`.
-
-If the result affects the geothermal separator project specifically, add only a short linked impact summary in `ResearchProject_wiki/` rather than duplicating the CFD page.

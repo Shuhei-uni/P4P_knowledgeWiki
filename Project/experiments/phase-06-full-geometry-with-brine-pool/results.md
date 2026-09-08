@@ -2,14 +2,19 @@
 
 ## Status
 
-**Phase 06 is not closed under the current scientific-phase-loop gates.**
-The short screens and 10,000-iteration long calculation provide useful bounded
-numerical evidence, but the mandatory lifecycle is reopened at
-`DISCOVERY_DESIGN`: only three valid short discovery cases are identified, the
-long-run job is terminally `BLOCKED`, and the residual history and named final
-pair promised by its setup are absent. The human has authorized a bounded
-simple-surrogate route, not a physical plant-control claim. See
-[phase-state.yaml](phase-state.yaml).
+**Historical pre-decision evidence status.** Phase 06 had not closed under the
+scientific-phase-loop gates when this results record was assembled. The short
+screens and 10,000-iteration long calculation provide useful bounded numerical
+evidence, but the mandatory lifecycle had reopened at `DISCOVERY_DESIGN`: only
+three valid short discovery cases were identified, the long-run job was
+terminally `BLOCKED`, and the residual history and named final pair promised by
+its setup were absent.
+
+The human subsequently concluded Phase 06 for now on 2026-09-08 and redirected
+the project to the simplified Purnanto geometry. That direction change does not
+retroactively pass the blocked evidence gates. See the
+[human-directed conclusion](conclusion.md) and the retained
+[pre-decision gate state](phase-state.yaml).
 
 ## Carried evidence from Stage 5
 

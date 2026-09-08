@@ -41,6 +41,7 @@ Use these gate IDs in `phase-state.yaml`.
 
 Require:
 
+- a phase-root `CONTEXT.md` with the current human-approved planning state;
 - a fixed phase question/goal;
 - explicit in-scope and out-of-scope boundaries;
 - important known facts versus assumptions/missing information separated;
@@ -54,17 +55,23 @@ Do not pass if the loop would need to invent a plant fact, validation target, ph
 
 Require:
 
+- `CONTEXT.md` identifies every proposed screen by candidate ID, origin, human
+  approval, and decision-gate linkage;
 - current phase uncertainty is explicit;
 - prior-experiment collision check completed;
 - discovery strategy is genuinely screening/diagnostic rather than a disguised qualification claim;
-- the planned discovery campaign contains **at least 6 and at most 12 cases**;
-- the six-case minimum is not being waived simply because an early candidate looks promising;
 - required monitors/histories and core figures are specified before execution;
 - each proposed case can teach something relevant;
-- bold-probe research has been performed when a bold lane is required;
+- the approved campaign contains enough contrastive cases to satisfy its
+  declared decision gate, with no unapproved candidate added for breadth or
+  idle capacity;
+- every possible long-run promotion is a named conditional qualification path
+  in `CONTEXT.md`;
 - no unresolved human lock is being bypassed with an invented surrogate unless the phase contract explicitly authorizes that surrogate class.
 
-Return `BLOCK` when fewer than six discovery cases are planned. A different discovery case-count rule requires explicit human phase-level authorization.
+Return `BLOCK` when a proposed case lacks human approval, provenance, required
+evidence, or decision-gate coverage. Return `HUMAN_REQUIRED` when resolving the
+gap requires a new candidate or changed phase direction.
 
 ### `DISCOVERY_EXECUTION`
 
@@ -85,7 +92,8 @@ A tool/RPC timeout while Fluent is still solving is not terminal discovery evide
 
 Require:
 
-- **at least six valid discovery cases have completed** and passed their execution requirements;
+- every human-approved discovery case required by the declared gate has
+  completed and passed its execution requirements;
 - the completed discovery runs have been compared and analysed, not merely listed;
 - the planned core figures/equivalent decisive evidence exist;
 - important numerical/physical caveats are identified;
@@ -94,7 +102,10 @@ Require:
 - a meaningful competing explanation or claim limit is stated;
 - discovery evidence is not being presented as the final qualification result.
 
-Do not pass because one or two early cases look decisive. The six-case minimum is intended to provide comparative breadth before hypothesis promotion. If fewer than six valid cases exist, return `BLOCK`. If six cases are complete but uncertainty remains broad, require additional discovery up to the twelve-case ceiling or a redesigned discovery strategy.
+Do not pass because an early result looks decisive unless the human-approved
+gate explicitly covers that result and its declared evidence is complete. If
+the approved screen is insufficient or uncertainty remains broad, return
+`HUMAN_REQUIRED` for the human to approve another candidate or revised gate.
 
 If no defensible hypothesis has emerged, return `BLOCK` and require more/better discovery rather than permitting a weak hypothesis test.
 
@@ -102,6 +113,8 @@ If no defensible hypothesis has emerged, return `BLOCK` and require more/better 
 
 Require a hypothesis contract containing:
 
+- a named context-approved conditional qualification path and the gate that
+  triggered it;
 - one clear falsifiable statement/question;
 - the discovery evidence that motivated it;
 - the strongest competing explanation or material alternative;
@@ -115,6 +128,8 @@ Require a hypothesis contract containing:
 Require:
 
 - `DISCOVERY_EVIDENCE == PASS` and `HYPOTHESIS_DEFINITION == PASS`;
+- the setup references the approved context qualification-path ID and no
+  unresolved context lock exists;
 - a focused long-run setup/campaign designed backward from the intended strong statement;
 - required histories, balances, residuals/numerical evidence, fields, checkpoints, and core figures are instrumented before the solve;
 - exact parent/setup/readback/save-reopen/smoke verification passed;

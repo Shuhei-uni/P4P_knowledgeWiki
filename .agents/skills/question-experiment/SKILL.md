@@ -1,11 +1,14 @@
 ---
 name: question-experiment
-description: "Challenge and justify candidate simulation experiments or linked campaigns before compute is spent. In hypothesis-test mode, independent adversarial review is mandatory before the strategy can proceed to the hard transition gate."
+description: "Challenge a human-approved CONTEXT.md experiment or linked campaign before compute is spent. In hypothesis-test mode, independent adversarial review is mandatory before the strategy can proceed to the hard transition gate."
 ---
 
 # Question Experiment
 
-Challenge candidate experiment strategies before compute is spent and decide which ones genuinely earn further consideration.
+Challenge human-approved candidate experiment strategies before compute is spent.
+Require the phase `CONTEXT.md` path, candidate ID, origin, approval status, and
+decision-gate linkage. This skill recommends; it never selects a new strategy
+or turns a proposed candidate into an approved one.
 
 A strategy may be one decisive setup or a small series whose value comes from the comparison, trend, sequence, or combined evidence. Judge the strategy at the level where its scientific value actually exists.
 
@@ -114,7 +117,9 @@ Ask:
 - Could fewer runs or existing data answer the same question?
 - Is the horizon appropriately discovery-scale or qualification-scale for its label?
 
-Reject, merge, split, reshape, or defer weak strategies.
+Reject or defer a weak approved strategy. If repair would change its candidate,
+delta, invariants, or claim limit, return the issue to the human instead of
+merging, splitting, or reshaping it here.
 
 ## Output
 
@@ -126,7 +131,8 @@ Return:
 - strongest surviving criticisms and their severity;
 - existing evidence supporting the judgement;
 - assumptions/missing facts that matter;
-- whether the strategy should be modified, deferred, rejected, or sent to the relevant `verify-phase-transition` gate;
-- the best justified strategy, if any, and why.
+- whether the approved strategy is viable, deferred, rejected, or ready for the
+  relevant `verify-phase-transition` gate; and
+- exact changes that require a human/context decision.
 
 Do not claim what the simulation will do. State expectations as hypotheses and let the data decide.

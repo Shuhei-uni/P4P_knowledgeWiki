@@ -1,11 +1,12 @@
 ---
 name: bold-probe-research
-description: "Research and frame evidence-backed bold experiment candidates before a speculative probe is selected. Invoke automatically whenever scientific-phase-loop or design-experiment needs a bold-probe candidate, especially when the point is to challenge a model form, physical assumption, mechanism, numerical architecture, initialization strategy, or accepted interpretation rather than make a nearby parameter variation."
+description: "Research a human-raised or context-approved speculative CFD candidate before it is formalized. Use to challenge an approved mechanism, assumption, model form, or numerical architecture; research never authorizes a runnable probe."
 ---
 
 # Bold Probe Research
 
-Use this skill before selecting a bold speculative experiment.
+Use this skill to research a human-raised or explicitly context-approved bold
+speculative experiment.
 
 A bold probe should come from a researched scientific question, not from novelty for its own sake. Its purpose is to expose a plausible mechanism, formulation, assumption, or alternative representation that the conservative mainline is unlikely to test quickly.
 
@@ -15,11 +16,10 @@ This skill is read-only. It researches and frames candidates; it does not create
 
 Invoke this skill whenever:
 
-- `scientific-phase-loop` has two or more usable servers and needs to populate or refresh the mandatory bold-probe lane;
-- `design-experiment` is considering a candidate described as bold, speculative, orthogonal, alternative-formulation, or assumption-challenging;
-- a completed bold probe needs a genuinely different successor rather than another nearby variation;
-- the current mainline is becoming stagnant and an evidence-backed alternative question is needed;
-- the best next question may come from literature, Fluent guidance, another modelling family, a known physical mechanism, or a materially different numerical architecture.
+- `phase-grill` or `CONTEXT.md` contains a human-raised candidate described as
+  bold, speculative, orthogonal, alternative-formulation, or
+  assumption-challenging; or
+- a human asks whether an approved candidate is worth developing further.
 
 Do not use this skill for routine mainline parameter tuning unless that research is needed to understand the science itself.
 
@@ -186,10 +186,10 @@ Do not write a literature expectation as a project finding.
 
 After the research brief is complete:
 
-1. use `arena` when several genuinely different researched candidates deserve independent comparison;
-2. hand the strongest candidate or candidate set back to `design-experiment`;
-3. let `question-experiment` challenge its scientific value, interpretability, and cost before setup creation;
-4. only after selection should implementation-specific uncertainty be resolved through `fluent-live-inspection` or `fluent-manual-researcher`.
+1. return research evidence to `phase-grill` / the human for candidate approval;
+2. let `question-experiment` challenge an approved candidate before setup creation;
+3. only after human approval should implementation-specific uncertainty be
+   resolved through `fluent-live-inspection` or `fluent-manual-researcher`.
 
 If research reveals that the strongest idea would change the phase objective, success definition, or agreed modelling boundary rather than merely probe it, do not silently launch it as a bold side branch. Return that direction to the human / `phase-planner`.
 
@@ -201,7 +201,7 @@ Return:
 - the research angles covered;
 - a compact Bold-Probe Research Brief with the serious candidates;
 - rejected/deferred candidates and why;
-- the strongest researched candidate(s) to send into `arena` / `design-experiment`;
+- research findings to return to `phase-grill` / the human for any approval;
 - any phase-level or implementation boundary that must be resolved before the idea can become runnable.
 
 Do not create or update CFD wiki pages merely because research was performed. Preserve reusable knowledge there only when a separate update is justified by the owning workflow.

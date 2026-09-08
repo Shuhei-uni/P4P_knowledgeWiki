@@ -32,6 +32,7 @@ the phase question with a convenient pressure, turbulence, or numerical sweep.
 
 - [setup and phase contract](setup.md)
 - [results and current evidence](results.md)
+- [human-directed conclusion as of 2026-09-08](conclusion.md)
 - [Stage 01 — level observable and outlet-response discovery](stage-01-level-observable-and-outlet-response/setup.md)
 - [Stage 02 — level mapping and control-data gate](stage-02-level-mapping-and-control-data-gate/setup.md)
 - [Stage 03 — simplified level-control surrogate](stage-03-simplified-level-control-surrogate/setup.md)
@@ -43,19 +44,19 @@ the phase question with a convenient pressure, turbulence, or numerical sweep.
 
 ## Current phase outcome
 
-**Not closed; current lifecycle state is `DISCOVERY_DESIGN`.** The Phase-06
-screens identified a lower-region liquid-inventory proxy and the long
-`P6-S6-H` calculation retained useful report histories and a verified
-chunk-100 checkpoint. Its proxy remained above target with positive late
-storage and phase-liquid accumulation after pressure saturation.
+**Concluded for now by human direction on 2026-09-08.** The full separator
+geometry is too complex to remain the immediate model-development platform.
+The project will return to a simplified Purnanto geometry truncated at the
+elevation of the real separator's brine-pool surface. Phase 07 will explore
+pragmatic numerical mechanisms for removing liquid from the bottom of that
+simplified domain.
 
-That bounded numerical observation does not satisfy the current lifecycle.
-Only three valid discovery cases are identified, the canonical long-run job is
-`BLOCKED`, its required residual capture is unavailable, and its named final
-pair failed verification. The human has now authorized a deliberately simple
-numerical-surrogate route, so missing plant data no longer blocks that bounded
-investigation. It still prevents a physical level-control validation claim.
-The next requirement is a verified 6–12-case discovery design.
+This is a change in project direction, not a claim that the physical separator
+is uncontrollable or that full-geometry CFD can never work. The blocked
+lifecycle state in `phase-state.yaml` is retained as the pre-decision record;
+its next action is no longer the active project direction. See the
+[Phase-06 conclusion](conclusion.md) and
+[Phase-07 direction](../phase-07-simplified-purnanto-liquid-removal/index.md).
 
 ## Relationship to the prior work
 

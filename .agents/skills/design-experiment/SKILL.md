@@ -1,11 +1,14 @@
 ---
 name: design-experiment
-description: "Turn the current phase uncertainty into a high-information discovery strategy or, only after verified discovery, a deep hypothesis-qualification strategy. Design the evidence and core figures before compute is spent."
+description: "Formalize a human-approved CONTEXT.md candidate into an evidence-designed discovery or qualification strategy. Use after phase planning; do not originate, select, or promote new experiment ideas."
 ---
 
 # Design Experiment
 
-Design simulations to learn something important, not to generate more cases.
+Formalize an approved simulation direction into evidence-complete work, not new
+cases. The phase-root `CONTEXT.md` owns candidate selection; this skill owns
+comparison logic, evidence design, figure planning, and faithful scientific
+formalization.
 
 A useful design may be one decisive setup or a campaign of linked setups whose combined evidence answers a question that no single run can. The unit of design is the scientific strategy, not automatically one simulation.
 
@@ -27,7 +30,12 @@ Do not bypass the lifecycle because one candidate looks obvious.
 
 ## Start from the uncertainty
 
-Begin with the question the phase still cannot answer.
+Read the phase-root `CONTEXT.md` before designing. Require a named candidate or
+conditional qualification path with `Human status: approved`, its origin,
+decision gate, and declared claim limit. If any is absent, return to
+`phase-planner` / `phase-grill`; do not invent it here.
+
+Begin with the approved question the phase still cannot answer.
 
 Understand what is known, what is only suspected, what competing explanations are plausible, and what observation would actually change the current understanding.
 
@@ -35,11 +43,15 @@ Do not begin from an available parameter list and ask what can be swept. Begin f
 
 Reasoning, literature, previous experience, and prior simulations can shape the hypothesis. Unless there is genuinely equivalent prior evidence, they do not establish what a new simulation will do.
 
-## Check for prior experiment collisions before generating candidates
+## Check approved candidates for prior experiment collisions
 
-Before proposing new experiments, inspect retained Project history across all phases, not only the current phase. Search by scientific substance: physical mechanism, modelling choice, formulation, boundary condition, numerical change, initialization, operating regime, intended question, and comparison logic.
+Before formalizing an approved candidate, inspect retained Project history
+across all phases, not only the current phase. Search by scientific substance:
+physical mechanism, modelling choice, formulation, boundary condition,
+numerical change, initialization, operating regime, intended question, and
+comparison logic.
 
-For every serious candidate record:
+For every approved candidate record:
 
 - what was already tested;
 - what happened, including failed, non-converged, partial, rejected, or inconclusive outcomes;
@@ -47,7 +59,10 @@ For every serious candidate record:
 - why existing evidence/additional analysis does not already answer the question;
 - novelty: `NEW`, `PARTIAL REPEAT`, `REPLICATION`, or `REDUNDANT`.
 
-Reject `REDUNDANT` candidates. A failed historical run still counts; rerun only when a concrete correction or unresolved delta makes the new attempt scientifically different.
+Reject `REDUNDANT` candidates. A failed historical run still counts; rerun only
+when a concrete correction or unresolved delta makes the new attempt
+scientifically different. Return a rejected approved candidate to the human;
+do not substitute a new one.
 
 This collision check applies equally to mainline, discovery, and speculative work.
 
@@ -55,7 +70,12 @@ This collision check applies equally to mainline, discovery, and speculative wor
 
 Use discovery mode to determine **what deserves qualification**, not to produce the final phase claim.
 
-Use `explore-experiment-space` when breadth is useful. Every discovery campaign must contain **at least six and at most twelve cases**. Six is the hard minimum needed before discovery evidence can promote a hypothesis; twelve is the hard ceiling. Choose between six and twelve based on the uncertainty and compute available, but do not stop after one or two promising cases merely because a direction appears obvious. Roughly 500–1,000 iterations per case is a useful project ballpark when sufficient to expose comparative behaviour, not a convergence criterion.
+Use `explore-experiment-space` only to organize approved context candidates into
+a contrastive campaign. The declared human-approved decision gate determines
+the smallest adequate screen; it may contain a few tests when they genuinely
+distinguish the stated alternatives. Roughly 500–1,000 iterations per case is
+a useful project ballpark when sufficient to expose comparative behaviour, not
+a convergence criterion.
 
 Design discovery for:
 
@@ -79,7 +99,10 @@ why discovery alone is insufficient for the final claim
 what a long qualification run would need to establish
 ```
 
-A discovery campaign has not succeeded merely because its cases completed. It succeeds when at least six valid discovery cases have completed, their evidence has been compared, and that evidence narrows the uncertainty enough to earn a specific hypothesis.
+A discovery campaign has not succeeded merely because its cases completed. It
+succeeds when every approved screen has completed, its declared evidence has
+been compared, and its decision gate either authorizes a named qualification
+path or returns the decision to the human.
 
 Before implementation, `scientific-phase-loop` must obtain `DISCOVERY_DESIGN == PASS` from `verify-phase-transition`.
 
@@ -152,7 +175,9 @@ Know which servers are reachable, which exact parents/recovery states are availa
 
 Let fleet state influence campaign shape and execution efficiency, not the scientific question itself.
 
-When two or more servers are usable for new compute, include a justified bold-probe candidate for the dedicated bold lane. Call `bold-probe-research` before selecting it. Do not invent weak extra cases merely to use idle capacity.
+When two or more servers are usable, use the capacity only for approved context
+items. `bold-probe-research` may support an approved speculative candidate; idle
+capacity never authorizes a new bold lane.
 
 Keep setup identity server-neutral. Placement is resolved later.
 
@@ -172,7 +197,9 @@ If an assumption would materially determine the answer rather than merely bound 
 
 Prefer the smallest strategy that can produce the needed learning **at the required evidence depth**.
 
-In discovery the smallest valid strategy is six cases; expand up to twelve when additional breadth is scientifically useful.
+In discovery the smallest valid strategy is the approved contrastive screen
+that can satisfy its declared gate. Add breadth only when the human approves
+the additional candidates in `CONTEXT.md`.
 
 In hypothesis-test mode this may be one deep run, a controlled pair, or a very small linked campaign. “Smallest” must not be used to shrink the qualification horizon until the intended claim is no longer supportable.
 
@@ -221,19 +248,24 @@ For every core figure specify:
 
 The later analysis agent should be able to create the key figures without inventing the scientific story after seeing the data.
 
-## Generate and challenge candidate strategies
+## Challenge approved strategies
 
-When several plausible strategies exist, generate a small set of genuinely different approaches. Use `arena`, independent subagents, or literature-focused `swarm` when useful.
+When several approved strategies exist, compare them without generating a new
+one. Use `arena`, independent subagents, or literature-focused `swarm` only to
+challenge or research a context-approved candidate.
 
-Call `question-experiment` before selection.
+Call `question-experiment` before formalizing an approved strategy.
 
 For hypothesis qualification, independent challenge is mandatory. The reviewer must check not only scientific value, interpretability, and cost, but also whether the proposed evidence/horizon could actually support the intended strong statement and whether a human lock or material missing fact is being bypassed.
 
 `question-experiment` recommends a strategy. It does not grant lifecycle permission.
 
-## Select and formalize
+## Formalize
 
-Choose the best justified strategy for the current mode, then call `create-setup`.
+Formalize the named approved context candidate for the current mode, then call
+`create-setup`. Record its context path, candidate ID, gate ID, and human
+approval in the resulting setup. Do not change its scientific purpose,
+intentional delta, invariants, claim limit, or evidence objective.
 
 Before discovery implementation, require `DISCOVERY_DESIGN == PASS` from `verify-phase-transition`.
 

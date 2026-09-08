@@ -156,8 +156,9 @@ mode follows the scientific experiment mode.
 - **Discovery mode:** keep the scientific agent attached through the short
   Python/PyFluent run, normally around 500-1,000 iterations, and throughout the
   active discovery campaign. The agent may mostly wait while Fluent advances,
-  but it should inspect each result immediately and choose the next useful probe
-  without ending the thread or requiring a human restart.
+  but it should inspect each result immediately and evaluate the declared
+  `CONTEXT.md` gate without ending the thread or requiring a human restart.
+  A new probe requires a human-approved context candidate.
 - Do not route ordinary discovery runs through the detached sleep/wake path just
   to avoid waiting. Prefer one clear short solve call and let the active agent
   wait on it.

@@ -102,7 +102,8 @@ Before editing, identify what must remain true.
 Important current invariants include:
 
 - `phase-planner` remains the human phase-level planning boundary;
-- `scientific-phase-loop` remains the autonomous scientific thinker inside the agreed phase;
+- `scientific-phase-loop` remains the autonomous execution, evidence, and
+  lifecycle authority inside the human-approved phase route;
 - specialist skills remain narrow and composable;
 - simulation evidence remains the scientific anchor;
 - implementation skills do not redesign experiments;

@@ -71,6 +71,7 @@ Current model-invoked specialists:
 - `interrogate`
 - `next-action`
 - `pool-patch-volume`
+- `phase-grill`
 - `pyansys-workflow`
 - `question-experiment`
 - `reflect`
@@ -101,9 +102,9 @@ Every state-changing transition must invoke `verify-phase-transition`. A `BLOCK`
 
 Normal autonomous `CONCLUDE PHASE` is illegal until the verified discovery-to-hypothesis lifecycle has completed. A human may explicitly terminate/reframe a phase earlier.
 
-Discovery stays attached to the active scientific goal through terminal execution evidence. A long Codex hypothesis qualification uses the exact-thread self-waking supervisor path and resumes the same scientific loop. `phase-state.yaml` is the machine-readable lifecycle authority after interruption or wakeup.
+Discovery stays attached to the active scientific goal through terminal execution evidence. A long Codex hypothesis qualification uses the exact-thread self-waking supervisor path and resumes the same scientific loop. `phase-state.yaml` is the machine-readable lifecycle authority after interruption or wakeup; the phase-root `CONTEXT.md` is the current human-approved experiment-selection authority.
 
-Before `scientific-phase-loop` or `design-experiment` selects any bold/speculative probe, invoke `bold-probe-research`. The research pass must begin from the current scientific tension, check prior project collisions, examine relevant CFD knowledge and authoritative literature/manual guidance, and produce evidence-backed candidate questions before `arena` or experiment selection. A bold lane must not be populated by an unresearched Fluent option, a random model switch, or a nearby parameter variation merely because compute is available.
+`phase-grill` is the only workflow step that may turn human thinking into new candidate experiments. `design-experiment` and `scientific-phase-loop` may refine evidence and implementation for candidates already approved in `CONTEXT.md`, but may not originate, select, or promote a new candidate. `bold-probe-research` may research an approved speculative candidate; it does not authorize a mandatory autonomous bold lane.
 
 For Fluent configuration uncertainty, use `fluent-live-inspection` first when the active live tree can resolve the path, object, state, or allowed value directly. Escalate automatically to `fluent-manual-researcher` when the live tree alone cannot safely determine the setting's meaning, prerequisites, activation order, or verifiable PyFluent/TUI implementation path. Do not guess a Fluent configuration from memory or copy a recipe from another model/version merely to keep implementation moving.
 

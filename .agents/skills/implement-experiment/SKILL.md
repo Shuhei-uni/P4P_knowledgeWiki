@@ -12,6 +12,11 @@ The scientific decisions have already been made. This skill owns faithful implem
 ## Require lifecycle permission before mutation
 
 Read the phase-root `phase-state.yaml` before implementing a phase-loop experiment.
+Read the phase-root `CONTEXT.md` too. Before mutation, verify that the setup's
+candidate/screen/qualification ID exists there, is human-approved, and matches
+the setup's purpose, delta, invariants, evidence contract, and gate linkage.
+Return `HUMAN_REQUIRED` on a provenance mismatch; do not repair it by changing
+the science during implementation.
 
 For **discovery** require:
 
