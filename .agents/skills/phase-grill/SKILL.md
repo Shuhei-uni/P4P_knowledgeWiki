@@ -18,39 +18,78 @@ materially restructuring a context record.
 
 ## Make questions easy to scan
 
-In messages to the human, use a small, consistent visual vocabulary. The
-icons label the *kind* of prompt so a response can be free-form without losing
-the decision being made:
+Treat the conversation as a **decision tree**. A round contains the current
+**frontier**: human decisions whose prerequisites are already settled. Ask the
+whole frontier, then wait. Do not mix in a dependent question merely because
+it is likely to matter later.
 
-- 💭 **Your thinking** — an open invitation to ramble, add context, or name an
-  intuition. No answer format is required.
-- 🧭 **Phase direction** — the phase-level decision currently being sharpened.
-- 🧪 **Experiment direction** — an experiment-level idea, comparison, or
-  quick-screen question.
-- 🎯 **Recommended focus** — the agent's provisional recommendation about the
-  next question to settle. State why it is useful; it is never a decision or
-  an approved candidate.
-- ❓ **Question** — a specific, answerable prompt. Number these when there is
-  more than one.
-- ⚖️ **Trade-off** — a material choice with its consequences.
-- 🚦 **Decision gate** — the evidence/condition that would determine a
-  permitted next action.
-- ✅ **Locked in** — a concise restatement of something the human has
-  explicitly confirmed.
-- ⚠️ **Still open** — an uncertainty, risk, or human decision that remains.
-- 📌 **What I'll record** — the attributed context update that follows a
-  meaningful answer.
+Open every round with a compact mode and outcome. Make every point a labelled
+bullet so the human can see what it means and how to answer it:
 
-Use one leading icon per idea, not a decorative emoji on every line. Keep the
-response visually sparse: an opening prompt or recommendation, at most three
-questions, and a brief statement of what an answer will unlock. Put the
-recommended focus before the questions so the human can accept, reject, or
-redirect it. Always leave a low-friction escape hatch such as “You can answer
-in rough notes; a partial answer is useful.”
+```md
+🧭 **Phase framing — round <n>**
+
+- **Goal:** <the phase decision this round will sharpen>.
+- **Unlocks:** <what can be decided after these answers>.
+
+1️⃣ — **<short decision title>**
+
+- **Question:** <one human-owned decision in plain language>.
+- **Why it matters:** <the consequence for scope, evidence, or a later choice>.
+- **Options:**
+  - **A — <option>:** <consequence>.
+  - **B — <option>:** <consequence>.
+- **Reply with:** <the smallest useful answer; rough notes are welcome>.
+
+➡️ **Recommended answer:** <a provisional answer and its reason>.
+
+---
+
+2️⃣ — **<independent decision title>**
+
+- **Question:** ...
+- **Why it matters:** ...
+- **Reply with:** ...
+
+➡️ **Recommended answer:** ...
+```
+
+Use `🧭` for phase framing and `🧪` for experiment framing. Use options only
+when there is a real choice; otherwise omit that bullet. `➡️ Recommended
+answer` is an explicit, revisable proposal—not a decision or approved
+candidate. If a recommendation would prematurely supply the human's idea, say
+so plainly and leave the recommendation open until they have thought aloud.
+
+Mark every question with the sequential numeric emojis `1️⃣`, `2️⃣`, and
+`3️⃣`, in the form `1️⃣ — **Title**`. The visible number is the reply handle:
+refer back to “1” or “2”, never `Q1`, `Q2`, a red-circle marker, or a
+question-mark marker.
+
+Use at most three independent questions in a round. Ask one question when it
+is the only frontier decision. Find facts in the repository, evidence, or
+tools rather than asking the human for something the agent can determine.
+
+After the human replies, first reflect the outcome before asking the next
+frontier:
+
+```md
+✅ **Locked in**
+
+- **Decision:** <what the human confirmed>.
+- **Reason:** <their stated reasoning, attributed to them>.
+
+⚠️ **Still open**
+
+- **Decision:** <the next unresolved, prerequisite-aware issue>.
+
+📌 **CONTEXT.md update**
+
+- **Record:** <the exact field or candidate/gate status being updated>.
+```
 
 Icons guide the conversation only. Record the final decision, evidence, and
-approval state in plain, durable `CONTEXT.md` fields; never mistake a 🎯
-recommendation for a ✅ human lock.
+approval state in plain, durable `CONTEXT.md` fields; never mistake a `➡️`
+recommendation for a `✅` human lock.
 
 ## Orient
 
@@ -69,10 +108,11 @@ questionnaire:
 
 > 💭 **Your thinking**
 >
-> Before I frame options, talk me through what you are currently thinking —
-> even if it is rough. What feels promising, suspicious, blocked, or worth
-> trying? What experiment or mechanism ideas are already in your head, and
-> what would you most like to learn from them?
+> - **Tell me:** what you are currently thinking, even if it is rough.
+> - **Include anything useful:** what feels promising, suspicious, blocked, or
+>   worth trying.
+> - **Also include:** experiment or mechanism ideas already in your head and
+>   what you would most like to learn.
 >
 > You can answer in rough notes or a stream of thought; you do not need to
 > make it coherent yet.
@@ -92,17 +132,20 @@ limit, useful evidence standard, or human-owned decision is unsettled. Ask one
 to three high-information questions per turn. Ask only what can change the
 phase contract. Present each turn in this order:
 
-> 🧭 **Phase direction**
+> 🧭 **Phase framing — round <n>**
 >
-> 🎯 **Recommended focus:** [the one phase-level uncertainty worth settling
-> next]. This matters because [what it unlocks or prevents].
+> - **Goal:** settle [one phase-level uncertainty].
+> - **Unlocks:** [the phase-contract element this will make safe to frame].
 >
-> ❓ **1.** [Question whose answer changes the phase question, scope, claim
-> limit, or human decision.]
-> ❓ **2.** [Optional independent high-information question.]
+> 1️⃣ — **<short decision title>**
 >
-> 📌 **What I'll record:** [the concrete phase-contract element that the
-> answer will settle]. You can answer in rough notes or redirect the focus.
+> - **Question:** [Question whose answer changes the phase question, scope,
+>   claim limit, or human decision.]
+> - **Why it matters:** [the specific consequence of the answer.]
+> - **Reply with:** [a preference, boundary, or rough reasoning.]
+>
+> ➡️ **Recommended answer:** [a provisional recommendation and why; omit the
+> recommendation until the human has supplied the thinking it depends on.]
 
 Clarify the uncertainty worth reducing now, why it matters over other open
 issues, what stays fixed or out of scope, what result would still make the
@@ -117,9 +160,11 @@ Once phase scope is settled, ask again for present experiment ideas:
 
 > 🧪 **Experiment direction**
 >
-> 💭 **Your thinking:** Within this phase, what experiments or mechanisms are
-> you imagining right now? What would you change or compare first, and what
-> would each idea teach us?
+> 💭 **Your thinking**
+>
+> - **Ideas:** What experiments or mechanisms are you imagining right now?
+> - **First contrast:** What would you change or compare first?
+> - **Learning value:** What would each idea teach us?
 >
 > You can list fragments, alternatives, or doubts. I will distinguish your
 > ideas from any variants I later recommend.
@@ -130,24 +175,42 @@ invariants, screening observation, unacceptable artifact, and potential
 qualification path that matter to an interpretable decision. When ready to
 grill an idea, use the same scan pattern:
 
-> 🧪 **Experiment direction:** [named human idea or its traceable variant]
+> 🧪 **Experiment framing — round <n>**
 >
-> 🎯 **Recommended focus:** [the smallest contrastive quick screen that would
-> make this idea informative]. This is a proposal, not approval.
+> - **Idea under discussion:** [named human idea or traceable variant].
+> - **Goal:** settle [the next independent experiment decision].
+> - **Unlocks:** [the quick-screen or gate detail that can be specified next].
 >
-> ❓ **1.** [What single controlled change should this screen make?]
-> ❓ **2.** [What observation would make the screen worth continuing?]
-> ❓ **3.** [What artifact or result would make this route unhelpful?]
+> 1️⃣ — **Controlled change**
 >
-> 🚦 **Decision gate:** [the kind of evidence needed before a named long-run
-> qualification path could be considered].
+> - **Question:** What single controlled change should this screen make?
+> - **Why it matters:** It keeps the comparison interpretable.
+> - **Reply with:** the preferred delta, or the choices you are weighing.
 >
-> 📌 **What I'll record:** [human idea, proposed candidate, or approval state].
+> ➡️ **Recommended answer:** [the smallest contrastive quick screen and why;
+> this remains a proposal until the human approves it.]
+>
+> 2️⃣ — **Continue signal**
+>
+> - **Question:** What observation would make the screen worth continuing?
+> - **Why it matters:** It defines the evidence that justifies a longer run.
+> - **Reply with:** the result you would find informative.
+>
+> 🚦 **Decision gate**
+>
+> - **Evidence needed:** [the evidence required before a named qualification
+>   path could be considered.]
+> - **No automatic branch:** a gate can select only a human-approved path.
+>
+> 📌 **CONTEXT.md update**
+>
+> - **Record:** [human idea, proposed candidate, approval state, or gate].
 
 Use ⚖️ only when the human must choose between genuinely different scope,
-comparison, or compute trade-offs. Use ⚠️ to name a confounder or missing
-information, then ask the one question that resolves it; do not turn the
-screen into a long form.
+comparison, or compute trade-offs. In that case, present each alternative as a
+bullet with its concrete consequence. Use ⚠️ to name a confounder or missing
+information, then ask the one frontier question that resolves it; do not turn
+the screen into a long form.
 
 ## Form traceable candidates and gates
 
