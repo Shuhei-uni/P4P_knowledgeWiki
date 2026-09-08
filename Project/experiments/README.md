@@ -12,7 +12,8 @@ their exact history remains recoverable from Git.
 - [Phase 4 — EWF wall-film mechanisms](phase-04-ewf-wall-film-mechanisms/index.md)
 - [Phase 5 — Full Geometry V2](phase-05-full-geometry-v2/index.md)
 - [Phase 6 — Full Geometry with Brine Pool](phase-06-full-geometry-with-brine-pool/index.md)
-- [Phase 7 — Simplified Purnanto Liquid-Removal Mechanisms](phase-07-simplified-purnanto-liquid-removal/index.md)
+- [Phase 7 — Simplified Purnanto Liquid-Removal Mechanisms (Shuhei)](phase-07-simplified-purnanto-liquid-removal/index.md)
+- [Phase 7b — Full-Geometry Steady Liquid Removal (Andy)](phase-07b-full-geometry-liquid-removal/index.md)
 - [Legacy reconstruction](legacy/legacy-bangma-reconstruction/historical-run.md)
 - [Historical parallel studies from Andy's checkout](parallel-andy-studies/README.md) — enthalpy/DPM replication, liquid-sink diagnostics and resolved-outlet VOF evidence, with explicit identities and recovery provenance.
 

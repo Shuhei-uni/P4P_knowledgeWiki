@@ -8,24 +8,33 @@ in `PyAnsys/`.
 
 ## What are we trying to answer now?
 
-What practical numerical mechanism can remove separated liquid from the
-bottom of a simplified Purnanto separator model while preserving useful and
-interpretable separation behaviour?
+The liquid-removal work has two separate planning lanes:
 
-The simplified geometry will be truncated at the elevation corresponding to
-the real separator's brine-pool surface. Phase 07 will use human-originated,
-explicitly approved liquid-removal candidates at the bottom of this truncated
-computational domain.
+- **Shuhei — Phase 7:** what practical mechanism can remove separated liquid
+  from the truncated simplified Purnanto model while preserving useful and
+  interpretable separation behaviour?
+- **Andy — Phase 7b:** can a function-based ideal liquid collector in the lower
+  full-geometry vessel support a balanced, numerically stable steady-state
+  solution while preserving useful separation above the collector?
+
+Andy's Phase 7b retains the lower brine geometry and explicitly does not require
+a standing pool. Shuhei's Phase 7 retains its simplified-geometry scope. Each
+phase has its own planning authority; neither supersedes the other.
 
 ## Active/latest experiment
 
-The current scientific lane is Phase 07: simplified Purnanto liquid-removal
-mechanism development. No particular removal method or runnable experiment has
-yet been selected. The most direct records are:
+Both phases are in planning. Shuhei's Phase 7 has not selected a removal method.
+For Andy's Phase 7b, a function-based ideal collector is the selected mechanism
+direction; its exact zone, source law, parent, screening experiment and gate
+remain to be defined. The most direct records are:
 
-- [Phase-07 direction and boundaries](experiments/phase-07-simplified-purnanto-liquid-removal/index.md)
-- [Phase-07 human-approved planning context](experiments/phase-07-simplified-purnanto-liquid-removal/CONTEXT.md)
+- [Shuhei's Phase 7 direction and boundaries](experiments/phase-07-simplified-purnanto-liquid-removal/index.md)
+- [Shuhei's Phase 7 planning context](experiments/phase-07-simplified-purnanto-liquid-removal/CONTEXT.md)
+- [Andy's Phase 7b direction and boundaries](experiments/phase-07b-full-geometry-liquid-removal/index.md)
+- [Andy's Phase 7b planning context](experiments/phase-07b-full-geometry-liquid-removal/CONTEXT.md)
 - [Phase-06 human-directed conclusion](experiments/phase-06-full-geometry-with-brine-pool/conclusion.md)
+- [Historical liquid-sink evidence and accounting corrections](experiments/parallel-andy-studies/closed-bottom-liquid-sinks.md)
+- [Historical resolved-outlet and transient VOF evidence](experiments/parallel-andy-studies/resolved-brine-outlet.md)
 
 The predecessor evidence remains available through these records:
 
@@ -57,19 +66,28 @@ monitor did not populate, so no convergence claim is made.
 This is a bounded model result, not evidence that the physical separator
 cannot be level controlled.
 
-**Human decision as of 2026-09-08.** The full geometry is too complex to
-remain the immediate development platform. Phase 06 is therefore concluded
-for now, and the project is returning to the simplified Purnanto geometry.
+The separate historical resolved-outlet lane did switch to transient VOF.
+Its short, very low-feed drainage success did not persist in later holds.
+Earlier steady closed-bottom liquid sinks also failed to establish accepted
+stability windows; the preserved notes identify limited liquid availability
+in the sink band and a corrected source-accounting error. These are related
+diagnostics with distinct meshes and parents, not one continuous experiment.
+
+**Human decision as of 2026-09-08.** Phase 06 remains concluded for now.
+Shuhei's Phase 7 pursues simplified-geometry liquid removal. Andy's separate
+Phase 7b retains full geometry with an ideal liquid collector and requires
+steady state. A standing pool is explicitly not required in Phase 7b.
 
 ## What remains unresolved?
 
-- the exact brine-pool-surface elevation in the real separator and its mapped
-  coordinate in the simplified Purnanto geometry;
-- which numerical mechanism can remove liquid at the truncated bottom without
-  unacceptable steam loss, phase-routing distortion, mass imbalance, or
-  numerical instability;
-- how the candidate methods should be compared and what evidence is sufficient
-  to select one; and
+- for Shuhei's Phase 7, the exact physical cut-plane elevation and mapped
+  coordinate, removal candidates, and screening gate;
+- for Andy's Phase 7b, the exact full-geometry mesh/parent, collector location and extent, and
+  treatment of the former brine outlet;
+- whether liquid reaches the collector and can be removed without unacceptable
+  steam loss, phase-routing distortion, mass imbalance, or numerical instability;
+- the source law and coupling, numerical screening horizon, comparison and
+  acceptance gate; and
 - which external, analytical, or measured targets would eventually support a
   physical validation claim.
 
@@ -79,11 +97,13 @@ for now, and the project is returning to the simplified Purnanto geometry.
 lifecycle record is retained as historical evidence rather than silently
 upgraded to a completed physical validation.
 
-Phase 07 must first establish the exact geometry cut plane and then use
-`phase-grill` to capture and approve any bottom liquid-removal candidates for
-the simplified Purnanto model. Pragmatic numerical workarounds are permitted,
-but each must make its intervention, tuning, artefacts, conservation behaviour,
-claim limits, and decision gate explicit before it can be retained.
+Andy's Phase 7b must define the collector region and exact reference, then use
+`phase-grill` to sharpen the selected function-based mechanism into an
+interpretable screening experiment. The intervention, tuning, artefacts,
+conservation behaviour, claim limits and decision gate must be explicit.
+Any numerical collector elevation must be declared honestly. Shuhei's Phase 7
+separately retains its physical cut-plane requirement and candidate-framing
+step. Experiment selection and gates belong to each phase's own `CONTEXT.md`.
 
 ## Project map
 
