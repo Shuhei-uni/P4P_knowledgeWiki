@@ -40,7 +40,7 @@ Do not set `disable-model-invocation: true` or `allow_implicit_invocation: false
 
 Current hybrid skills:
 
-- `scientific-phase-loop` — may be started directly by the human when a phase goal/boundaries are already supplied, or handed off from `phase-planner` after agreement.
+- `scientific-phase-loop` — may be started directly by the human when a phase goal/boundaries are already supplied, or handed off from `phase-planner` only after the human explicitly selects its ❗❗❗ launch option 1️⃣ or 2️⃣.
 - `workflow-surgeon` — may be invoked explicitly by the human, or implicitly when a concrete repeated workflow defect or clearly identifiable workflow failure satisfies its trigger conditions.
 
 Hybrid does not remove human gates inside the workflow. A hybrid skill must still return to the human when its own boundaries require it.

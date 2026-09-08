@@ -5,43 +5,100 @@ phase_question: >-
   and interpretable representation of the separation behaviour?
 state: DISCOVERY_DESIGN
 
+context:
+  path: Project/experiments/phase-07-simplified-purnanto-liquid-removal/CONTEXT.md
+  authority: human-approved-context-only
+  approved_candidate_ids:
+    - E0
+    - E1-PO
+    - E2-OV
+    - E3-MFO
+    - E4-ADAPT
+    - E5-PSINK
+
 autonomy:
-  experiment_selection: human-approved-context-only
-  fluent_fleet_sessions: not_authorized_by_current_context
+  experiment_selection: context_gated
+  fluent_fleet_sessions: exclusive
+  authorized_at: 2026-09-08
+  authority_evidence: >-
+    Explicit human instruction to enter scientific-phase-loop for Phase 07,
+    take over available Fluent servers, execute P7-E0-REF for 2,000 discovery
+    iterations, analyse its required evidence, and proceed only through the
+    approved G1 gates.
   human_return_conditions:
     - >-
       Do not add or promote a bottom-treatment candidate without explicit
       human approval recorded in CONTEXT.md.
 
 gates:
+  PHASE_CONTRACT:
+    status: PASS
+    checked_at: 2026-09-08
+    evidence:
+      - Project/experiments/phase-07-simplified-purnanto-liquid-removal/CONTEXT.md
+      - Project/experiments/phase-07-simplified-purnanto-liquid-removal/e0-08b-corrected-reference/setup.md
+      - >-
+        Explicit human instruction on 2026-09-08 authorizing loop entry,
+        available-Fluent-server takeover, and P7-E0-REF execution through the
+        2,000-iteration discovery horizon, restricted to approved G1 gates.
+    missing: []
+    reviewer: verify_phase_contract independent subagent
   DISCOVERY_DESIGN:
     status: PASS
     checked_at: 2026-09-08
-    permission_scope: G0_server_neutral_setup_creation_only
+    permission_scope: G1_server_neutral_setup_creation_only
     evidence:
       - Project/experiments/phase-07-simplified-purnanto-liquid-removal/CONTEXT.md
+      - Project/experiments/phase-07-simplified-purnanto-liquid-removal/fixed-mesh-treatment-screen/design.md
       - Project/experiments/phase-07-simplified-purnanto-liquid-removal/e0-08b-corrected-reference/design.md
+      - Project/experiments/phase-07-simplified-purnanto-liquid-removal/e0-08b-corrected-reference/setup.md
       - Project/experiments/phase-07-simplified-purnanto-liquid-removal/mesh-inspection.md
       - >-
-        G0 explicitly authorizes creation of E0's server-neutral setup.md and
-        paired empty results.md; it does not authorize live Fluent mutation,
-        E0 execution, E1--E3 setup/selection, or scientific-phase-loop entry.
+        Independent deterministic check: fixed-mesh-treatment-screen/design.md
+        contains exactly 15 unique initial child IDs, three each for E1-PO,
+        E2-OV, E3-MFO, E4-ADAPT, and E5-PSINK; no unapproved child appears in
+        the initial matrix.
       - >-
-        E0 is explicitly human-approved for setup creation; its design records
-        the exact parent/mesh identities, controlled corrections and
-        invariants, prior-experiment collision check, 2,000-iteration intent,
-        instrumentation, core figures, invalidity conditions, and claim limit.
+        CONTEXT.md records human approval on 2026-09-08 for the five-family
+        mechanism ladder, all 15 initial values/tunings, the 500-iteration
+        screens, bounded one-point fourth branches, and at-most-one-member
+        500-to-2,000 discovery continuations. Candidate IDs, H2 origins,
+        G1 linkage, and the fixed-mesh comparison boundary are explicit.
       - >-
-        The later G1 contrastive screen is explicitly separate; E1--E3 remain
-        unapproved and the context forbids scientific-phase-loop entry until
-        the treatment series and G1 coverage are settled.
+        The collision table classifies all five families as partial repeats or
+        new and states the nonredundant Phase-07 delta against retained Phase
+        05/06 evidence. Required monitor/history outputs and F1-F4 core figures
+        are specified before execution, and the design is explicitly discovery
+        rather than qualification.
+      - >-
+        Adaptive normalization is explicitly conditional on valid E0 liquid
+        history through iteration 1,000 and positive measurable DeltaMref;
+        E3/E4 phase-specific outlet capability and E5 liquid-only
+        mass/momentum source accounting remain hard execution locks. No
+        surrogate substitution is authorized.
+      - >-
+        G0 evidence is preserved: E0 remains human-approved only for its
+        server-neutral setup packet, with exact parent/mesh identities,
+        bounded reconciliation, setup evidence, and no live Fluent authority.
+        G1 does not authorize execution, fleet/session use, loop entry, or any
+        qualification path; CONTEXT.md records that no qualification path is
+        approved.
+      - >-
+        Prior Phase-06 records retain the relevant fixed-pressure, outlet-vent,
+        and bounded-pressure-feedback evidence; the Phase-07 collision analysis
+        correctly identifies changed geometry, initialization, actuator law,
+        and matched phase-resolved evidence as the nonredundant comparison
+        basis.
     missing: []
     reviewer: independent_phase07_discovery_design_review
 
 active_jobs: []
 next_required_action: >-
-  Create E0's server-neutral setup.md and paired empty results.md under G0.
-  Preserve the prohibition on live Fluent mutation, E0 execution, E1--E3
-  setup/selection, and scientific-phase-loop entry. After setup creation, obtain
-  explicit human approval for the treatment series and G1 coverage before any
-  loop-entry gate is evaluated.
+  The E0 packet and exact 15 approved initial treatment setup/results packets
+  are complete. Await an explicit human request to enter the scientific phase
+  loop, then verify the remaining phase-contract and fleet/session authority,
+  populate run paths, prove E3/E4 phase-specific outlet capability and E5
+  liquid-only mass/momentum source capability, and obtain the applicable
+  execution transition gates before any Fluent mutation or solve. Conditional
+  fourth points, 500-to-2,000 continuations, and qualification remain governed
+  by their separate evidence and human-decision gates.

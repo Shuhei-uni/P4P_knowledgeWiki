@@ -128,9 +128,46 @@ question, or crossing an explicit human boundary.
 
 If the human wants a narrower authority envelope for a particular phase, record the restriction in the handoff.
 
-## Handoff
+## ❗❗❗ Scientific Phase Loop - launch decision
 
-Once the direction is agreed, give `scientific-phase-loop` a short handoff:
+When the direction, `CONTEXT.md`, and autonomy envelope are ready, stop here.
+A complete handoff is not permission to start `scientific-phase-loop`.
+
+Show this decision clearly and wait for an explicit choice:
+
+> ❗❗❗ **Scientific Phase Loop - launch decision**
+>
+> - **1️⃣ Continue in this chat** — enter `scientific-phase-loop` in the
+>   current conversation.
+> - **2️⃣ Start in a new task** — start the loop in a new thread with a short
+>   handoff prompt.
+> - **3️⃣ Keep grilling** — return to `phase-grill`; the direction is not yet
+>   aligned enough to launch.
+>
+> **Choose 1, 2, or 3.** The loop will not start until you choose 1 or 2.
+
+After an explicit selection:
+
+- **1️⃣** — enter `scientific-phase-loop` in this chat with the handoff below.
+- **2️⃣** — create a new task/thread in the same project and give it this
+  short prompt. On a runtime that cannot create a task, present the prompt for
+  the human to start in a new chat.
+
+  ```md
+  Use `scientific-phase-loop` for `<phase>`.
+
+  - **Context:** `<phase-root CONTEXT.md>`
+  - **Goal:** <phase question>
+  - **Approved route:** <candidate IDs and decision gates>
+  - **Return:** `HUMAN_REQUIRED` outside that context authority.
+  ```
+
+- **3️⃣** — continue the human conversation through `phase-grill`. Do not
+  create a handoff, a setup, or a scientific-loop goal.
+
+## Handoff after launch choice
+
+Only after choice **1️⃣** or **2️⃣**, give `scientific-phase-loop` its handoff:
 
 - **Goal** — what this phase is trying to answer.
 - **Why now** — why this is the useful question given the evidence so far.

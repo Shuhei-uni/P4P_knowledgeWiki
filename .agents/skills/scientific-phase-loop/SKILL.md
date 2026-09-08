@@ -41,6 +41,19 @@ Do not autonomously `CONCLUDE PHASE` before at least one hypothesis qualificatio
 
 Every lifecycle transition must call `verify-phase-transition`. A `BLOCK` or `HUMAN_REQUIRED` result is a lock. The scientific agent may not self-overrule it.
 
+## ❗❗❗ Planner launch authorization
+
+When this loop is reached from `phase-planner`, it may start only after the
+human explicitly chose the planner's **1️⃣ Continue in this chat** or
+**2️⃣ Start in a new task** launch option. A complete `CONTEXT.md` or handoff
+alone does not authorize entry.
+
+If that selection is absent or unclear, return to the planner's ❗❗❗ launch
+decision
+without creating a phase goal, setup, run, or other lifecycle state. A direct
+human invocation of `scientific-phase-loop` remains explicit authorization to
+enter the loop.
+
 ## Enter with a phase handoff
 
 Start from the human-agreed phase handoff or phase setup.

@@ -2,14 +2,18 @@
 
 ## Status
 
-- **Planning state:** E0 reference setup created; treatment-series planning
-  is active and must finish before scientific-phase-loop entry
+- **Planning state:** scientific-phase-loop entered by explicit human direction;
+  E0 execution and available-Fluent-server takeover are authorized, with all
+  later action restricted to the approved G1 gates
 - **Last human review:** 2026-09-08
 - **Experiment-selection authority:** human-approved-context-only
-- **Current decision:** E0's server-neutral setup contract is complete. Define
-  and human-approve a contrastive series of fixed-mesh bottom-treatment setups
-  before entering `scientific-phase-loop`. The planned E0 discovery horizon is
-  `2,000` iterations; no live execution or later treatment is yet authorized.
+- **Current decision:** the human-approved contrastive fixed-mesh setup series
+  is fully defined and compiled. On 2026-09-08 the human explicitly entered
+  `scientific-phase-loop`, authorized takeover of available Fluent servers,
+  and directed execution to begin with `P7-E0-REF` through its full
+  `2,000`-iteration discovery horizon. Remaining placement, implementation,
+  and execution gates still apply, and progression remains limited to the
+  approved G1 actions.
 
 ## Human thinking
 
@@ -82,12 +86,103 @@ approved; the controlled changes and decision gate remain under human review.
 
 The human approved the full H2 mechanism-ladder architecture on 2026-09-08:
 E0 wall reference, conventional bottom pressure outlet, resistive outlet,
-prescribed withdrawal, and adaptive withdrawal, in that order. They require at
-least three meaningfully separated settings within every treatment family
+prescribed withdrawal, adaptive prescribed withdrawal, and an adaptive phase-
+selective continuous-liquid sink, in that order. They require at least three
+meaningfully separated settings within every treatment family
 before the family is judged good or bad. The purpose is to distinguish a poor
 parameter choice from a poor mechanism. This approves the family architecture
 and replication principle, not the still-unsettled parameter values, run
 horizons, or executable child setups.
+
+The human then approved a common staged run protocol. Every initial treatment
+variant receives `500` steady iterations from the same initialized E0 state.
+The strongest valid setting within each family may continue from its own
+iteration-500 checkpoint to a matched total of `2,000` iterations. The initial
+500 iterations are a survivability, response-direction, vapor-loss, inventory,
+phase-routing, and numerical-behavior screen; they cannot alone establish a
+bounded or converged state.
+
+Each family begins with three meaningfully separated settings. One additional
+pre-bounded fourth setting is conditionally authorized in principle only when
+the initial three leave the useful stable-to-failure transition unresolved,
+show a material non-monotonic response, or place the best valid response at a
+tested range boundary. The exact fourth-point interval and deterministic
+selection rule must be specified with each family before execution; this is
+not permission to invent an unbounded post-hoc setting.
+
+The human approved the initial E1–E3 parameter sets on 2026-09-08:
+
+| Family | Approved initial children | Controlled values |
+| --- | --- | --- |
+| E1-PO pressure outlet | `P7-E1-PO-P1120`, `P7-E1-PO-P1160`, `P7-E1-PO-P1200` | `1.120`, `1.160`, `1.200 MPa` gauge |
+| E2-OV outlet vent | `P7-E2-OV-K000`, `P7-E2-OV-K003`, `P7-E2-OV-K007` | constant normal-velocity loss coefficient `K=0`, `3`, `7` |
+| E3-MFO prescribed withdrawal | `P7-E3-MFO-Q025`, `P7-E3-MFO-Q050`, `P7-E3-MFO-Q100` | intended liquid withdrawal `29.23`, `58.46`, `116.92 kg/s` (`25%`, `50%`, `100%` of nominal liquid inflow) |
+
+E1 uses the higher-pressure bracket chosen by the human rather than a tight
+bracket around the `1.120 MPa` steam outlet. E3's intended vapor target is
+zero, but live Fluent capability inspection must prove whether the selected
+outlet formulation can impose and expose phase-specific withdrawal. If it can
+only impose total mixture flow, that limitation is material and must be
+returned to the human rather than relabelled as pure-liquid withdrawal.
+
+The conditionally permitted fourth points are:
+
+- **E1-PO:** add `1.180 MPa` if `1.160 MPa` is valid and `1.200 MPa` is
+  invalid; add `1.140 MPa` if `1.120 MPa` is too permissive and the useful
+  transition lies below `1.160 MPa`; or add at most `1.240 MPa` if all three
+  are valid and improvement remains unresolved at the upper edge. Only one
+  branch may activate, and no pressure outside `1.120–1.240 MPa` is permitted.
+- **E2-OV:** add `K=5` if `K=3` is valid and `K=7` invalid; add `K=10` if
+  `K=7` is valid and remains the unresolved best upper-edge setting; or add
+  `K=1` if the useful transition lies between `K=0` and `K=3`. Only one branch
+  may activate, and no `K>10` is permitted.
+- **E3-MFO:** add `87.69 kg/s` if `58.46 kg/s` is valid and `116.92 kg/s`
+  invalid; add at most `146.15 kg/s` if all three are valid and the upper edge
+  still under-removes liquid without unacceptable vapor loss; or add
+  `14.615 kg/s` if even `29.23 kg/s` is too aggressive for a useful
+  survivability diagnostic. Only one branch may activate, and no withdrawal
+  above `146.15 kg/s` is permitted.
+
+The human approved the shared E4/E5 adaptive architecture on 2026-09-08:
+
+- start every adaptive child from the exact E0 iteration-500 case/data
+  checkpoint;
+- define the numerical target `M*` as E0 total continuous-liquid mass at
+  iteration 500;
+- define `ΔMref` as the positive E0 liquid-mass increase from iterations 500
+  to 1,000;
+- update the command every 50 controller-active solver iterations using
+  `e = max(0, (Mcurrent - M*) / ΔMref)` and
+  `command = clamp(G × 116.92 kg/s × e, 0, 146.15 kg/s)`;
+- screen `G=0.25`, `0.50`, and `1.00` for both actuators, giving nominal
+  commands of `29.23`, `58.46`, and `116.92 kg/s` when `e=1`;
+- record every inventory input, normalized error, requested/clamped command,
+  saturation state, realized removal, phase routing, and balance at every
+  controller update; and
+- treat the target as a numerical inventory reference, not a real separator
+  level or plant control setpoint.
+
+The approved adaptive child IDs are:
+
+| Family | Low | Medium | High |
+| --- | --- | --- | --- |
+| E4 adaptive prescribed withdrawal | `P7-E4-ADAPT-G025` | `P7-E4-ADAPT-G050` | `P7-E4-ADAPT-G100` |
+| E5 adaptive phase-selective sink | `P7-E5-PSINK-G025` | `P7-E5-PSINK-G050` | `P7-E5-PSINK-G100` |
+
+For each adaptive family, one conditional fourth tuning is permitted:
+`G=0.75` if `G=0.50` is valid but `G=1.00` is unstable/oscillatory;
+`G=1.50` if `G=1.00` is valid, remains too weak, and is not materially cap-
+limited; or `G=0.125` if even `G=0.25` is too aggressive. Only one branch may
+activate per actuator, and no `G>1.50` is permitted. If `ΔMref` is not positive
+and measurable, no adaptive child may run and the design returns to the human.
+
+For E5, the human approved one frozen bottom-adjacent sink region containing
+only cells in fluid zone `separator-purnanto` whose centroids satisfy
+`0 ≤ y ≤ 0.10 m`. The selected cell IDs, count, volume, and initial/activation
+liquid mass must be recorded and identical across E5 children. The commanded
+sink is distributed in proportion to local continuous-liquid mass, applies no
+direct vapor sink, and must remove associated continuous-liquid momentum
+consistently and report every explicit mass/momentum source contribution.
 
 ### Constraints expressed by the human
 
@@ -207,10 +302,11 @@ remain human-unconfirmed.
 | ID | Origin | Controlled delta | Screening question | Required evidence | Artifact/rejection signal | Human status |
 | --- | --- | --- | --- | --- | --- | --- |
 | E0 | H2 reference implied by the human-selected fixed-mesh comparison | Reconcile setup `08b` onto the supplied mesh with its bottom as a non-draining wall and correct the steam-outlet turbulence/backflow hydraulic diameter to `0.875936 m`; no removal treatment. | Does the corrected fixed-mesh case reproduce the relevant 08b inlet realization and flow behaviour closely enough to serve as the matched Phase-07 reference? | Verified mesh/zone and 08b-setting readback, including the controlled outlet-scale correction; phase-resolved boundary fluxes; liquid inventory; native residual histories; matched late-window slopes over the `2,000`-iteration discovery horizon. | Unproven parent reconciliation, unintended setting drift beyond declared geometry/outlet corrections, invalid monitor package, or failure before a comparable reference horizon. | human-approved 2026-09-08 for setup creation under G0; execution awaits completed series planning and loop gates |
-| E1-PO | H2 — human-inspired variant | Change only the existing `bottom` wall to a conventional pressure outlet; screen at least three approved pressure settings. | Across a meaningful pressure range, can passive bottom discharge reduce liquid accumulation without disastrous vapor loss? | E0 evidence plus bottom phase-resolved fluxes and matched setting-response comparisons. | Apparent improvement is vapor-dominated, numerically unstable, non-monotonic without explanation, or no tested setting improves the E0 trend. | family and ≥3-setting rule approved; exact settings/horizon pending |
-| E2-OV | H2 — human-inspired variant | Change only `bottom` to a resistive outlet-vent treatment; screen at least three approved loss coefficients. | Can added outlet resistance trade liquid drainage against vapor loss more usefully than an unrestricted passive outlet? | E0/E1 evidence plus pressure drop, normal velocity, bottom phase flux, and coefficient-response comparisons. | Resistance merely delays failure, causes reversal/instability, blocks useful liquid drainage, or leaves vapor loss unacceptable. | family and ≥3-setting rule approved; exact settings/horizon pending |
-| E3-MFO | H2 — human-inspired variant | Change only `bottom` to a prescribed withdrawal treatment; screen at least three approved withdrawal levels. | Does a controlled removal range reveal a setting that materially reduces buildup without phase-routing or numerical failure? | E0 evidence plus commanded-versus-observed withdrawal, bottom phase split, and rate-response comparisons. | Fluent cannot impose/verify the intended phase routing, numerical failure dominates, or apparent closure is only the imposed sink with unacceptable vapor removal. | family and ≥3-setting rule approved; exact settings/horizon pending |
-| E4-ADAPT | H2 — human-inspired variant | Change only `bottom` to an adaptive withdrawal function; test at least three approved tunings of one fixed controller architecture. | Can feedback reduce liquid drift more robustly than fixed withdrawal without saturation, oscillation, or vapor-driven closure? | E0–E3 evidence plus indicator, command, gain/bounds, saturation state, bottom phase split, inventory, and balance histories. | Controller saturation, cycling, hidden mass source/sink, sensitivity to one arbitrary tuning, or vapor-dominated removal. | family and ≥3-tuning rule approved; controller form/tunings/horizon pending |
+| E1-PO | H2 — human-inspired variant | Change only the existing `bottom` wall to a conventional pressure outlet at `1.120`, `1.160`, or `1.200 MPa` gauge. | Across the approved pressure range, can passive bottom discharge reduce liquid accumulation without disastrous vapor loss? | E0 evidence plus bottom phase-resolved fluxes and matched setting-response comparisons. | Apparent improvement is vapor-dominated, numerically unstable, non-monotonic without explanation, or no tested setting improves the E0 trend. | initial three settings, bounded fourth rule, and 500→2,000 protocol human-approved |
+| E2-OV | H2 — human-inspired variant | Change only `bottom` to a constant normal-velocity outlet-vent treatment at `K=0`, `3`, or `7`. | Can added outlet resistance trade liquid drainage against vapor loss more usefully than an unrestricted passive outlet? | E0/E1 evidence plus pressure drop, normal velocity, bottom phase flux, and coefficient-response comparisons. | Resistance merely delays failure, causes reversal/instability, blocks useful liquid drainage, or leaves vapor loss unacceptable. | initial three settings, bounded fourth rule, and 500→2,000 protocol human-approved |
+| E3-MFO | H2 — human-inspired variant | Change only `bottom` to intended liquid withdrawal of `29.23`, `58.46`, or `116.92 kg/s`, subject to live proof of the outlet's phase-specific capability. | Does the approved controlled-removal range reveal a setting that materially reduces buildup without phase-routing or numerical failure? | E0 evidence plus commanded-versus-observed withdrawal, bottom phase split, and rate-response comparisons. | Fluent cannot impose/verify the intended phase routing, numerical failure dominates, or apparent closure is only the imposed sink with unacceptable vapor removal. | initial three settings, bounded fourth rule, and 500→2,000 protocol human-approved; capability proof required |
+| E4-ADAPT | H2 — human-inspired variant | From E0 iteration 500, adapt the `bottom` prescribed-withdrawal command every 50 iterations using the approved normalized inventory-error law at `G=0.25`, `0.50`, or `1.00`. | Can adaptive boundary withdrawal reduce liquid drift more robustly than fixed withdrawal without saturation, oscillation, or vapor-driven closure? | E0–E3 evidence plus `M*`, `ΔMref`, error, command, gain/bounds, saturation state, bottom phase split, inventory, and balance histories. | Invalid/nonpositive normalization, controller saturation/cycling, sensitivity to one tuning, hidden phase routing, or vapor-dominated removal. | initial three tunings, bounded fourth rule, controller law, activation state, and 500→2,000 active protocol human-approved |
+| E5-PSINK | H2 — human-selected phase-selective variant | From E0 iteration 500, apply the same approved adaptive law at `G=0.25`, `0.50`, or `1.00` as an explicitly accounted continuous-liquid-only sink in the frozen `0≤y≤0.10 m` fluid-cell region. | Can a deliberately artificial liquid-only actuator reduce inventory drift without hiding conservation or destabilizing the carrier solution? | E4 evidence plus sink-region identity, selected cells/volume, `M*`, `ΔMref`, error/command, realized liquid removal, associated momentum removal, total inventory, phase balances, and proof of zero direct vapor sink. | Invalid/nonpositive normalization, unaccounted mass/momentum removal, region drift, source saturation, numerical instability, or balance inconsistency. | initial three tunings, bounded fourth rule, controller law, region, activation state, and 500→2,000 active protocol human-approved |
 
 H1 bottom holes and H3 lower-geometry changes remain deferred human ideas and
 are not executable candidates in the first campaign.
@@ -219,10 +315,11 @@ are not executable candidates in the first campaign.
 
 E0 is approved as the first reference experiment and its server-neutral setup
 has been created under G0. The mechanism ladder and minimum three-setting rule
-for E1-PO, E2-OV, E3-MFO, and E4-ADAPT are human-approved. It is not yet an
-executable multi-case screening campaign because the common screening horizon,
-exact settings, and adaptive-controller definition remain unsettled. The phase
-may not enter `scientific-phase-loop` until those details and G1 coverage pass.
+for E1-PO, E2-OV, E3-MFO, E4-ADAPT, and E5-PSINK are human-approved. The
+independent G1 design review passed, and server-neutral setup/results packets
+now exist for all 15 approved initial children. The campaign is not executable
+until the remaining phase-contract, fleet/session, placement, implementation-
+capability, and execution gates pass.
 
 The initial E0 discovery horizon is `2,000` solver iterations. The experiment
 design must preserve the full native histories and compare at least the
@@ -230,6 +327,15 @@ design must preserve the full native histories and compare at least the
 primary late-window basis for liquid-inventory and balance slopes. Earlier
 valid samples remain part of the evidence and must not be discarded merely to
 make a trend look favourable.
+
+Every E1–E3 child starts from the exact same save/reopen-proven E0 initialized
+case/data pair, not from the solved E0 endpoint or another treatment case.
+Every E4/E5 child starts from the exact same E0 iteration-500 checkpoint under
+the approved adaptive activation rule. Each initial child attempts 500
+treatment-active iterations. The family member selected by the predeclared G1
+evidence rule may continue from its own valid screen checkpoint to 2,000 total
+treatment-active iterations; it is not restarted or seeded from a different
+family.
 
 ## Decision gates
 
@@ -286,9 +392,12 @@ make a trend look favourable.
   zero, phase and mixture balances become small and stable, bottom discharge is
   predominantly liquid with vapor loss as close to zero as practicable, and
   the numerical histories remain credible.
-- **Allowed next action:** rejection; another already approved short screen; or
-  an explicitly approved longer qualification of the same candidate. The gate
-  cannot originate a new treatment or geometry change.
+- **Allowed next action:** rejection; one named conditionally authorized fourth
+  point; or continuation of at most one valid member per family from 500 to
+  2,000 treatment-active discovery iterations. After the approved discovery
+  evidence is complete, any hypothesis qualification requires a new explicit
+  human decision and verified hypothesis contract. The gate cannot originate a
+  new treatment, geometry change, or qualification run.
 - **Not established by this screen:** final steady convergence, long-term
   boundedness, mesh independence, physical outlet fidelity, plant drainage or
   control behaviour, or validated separation efficiency.

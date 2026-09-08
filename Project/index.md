@@ -28,9 +28,9 @@ steam-outlet diameter is `0.876 m`, correcting the former Project value of
 
 Both phases are in planning. In Shuhei's Phase 7, E0 is human-approved as the
 corrected fixed-mesh reference experiment, with an initial `2,000`-iteration
-discovery horizon; no bottom liquid-removal treatment is approved yet. Its
-server-neutral setup is complete, but no execution is authorized until the
-treatment series is defined. For Andy's Phase 7b, a function-based ideal
+discovery horizon. Its server-neutral setup and the human-approved five-family,
+15-child fixed-mesh treatment series are complete; no execution is authorized
+yet. For Andy's Phase 7b, a function-based ideal
 collector is the selected mechanism direction; its exact zone, source law,
 parent, screening experiment and gate remain to be defined. The most direct
 records are:
@@ -39,6 +39,8 @@ records are:
 - [Shuhei's Phase 7 planning context](experiments/phase-07-simplified-purnanto-liquid-removal/CONTEXT.md)
 - [Shuhei's Phase 7 supplied-mesh inspection](experiments/phase-07-simplified-purnanto-liquid-removal/mesh-inspection.md)
 - [Shuhei's Phase 7 E0 setup contract](experiments/phase-07-simplified-purnanto-liquid-removal/e0-08b-corrected-reference/setup.md)
+- [Shuhei's Phase 7 fixed-mesh treatment series](experiments/phase-07-simplified-purnanto-liquid-removal/fixed-mesh-treatment-screen/index.md)
+- [Shuhei's Phase 7 campaign design](experiments/phase-07-simplified-purnanto-liquid-removal/fixed-mesh-treatment-screen/design.md)
 - [Andy's Phase 7b direction and boundaries](experiments/phase-07b-full-geometry-liquid-removal/index.md)
 - [Andy's Phase 7b planning context](experiments/phase-07b-full-geometry-liquid-removal/CONTEXT.md)
 - [Phase-06 human-directed conclusion](experiments/phase-06-full-geometry-with-brine-pool/conclusion.md)

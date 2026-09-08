@@ -62,7 +62,9 @@ skill may be entered automatically.
 - `phase-planner` is mostly human invoked.
 - `scientific-phase-loop` and `workflow-surgeon` are hybrid: the human may call
   them directly, and the model may enter them when their documented trigger or
-  preconditions are already satisfied.
+  preconditions are already satisfied. A `phase-planner` handoff enters
+  `scientific-phase-loop` only after the human selects its ❗❗❗ launch option 1️⃣
+  or 2️⃣.
 - Other active specialist skills are model-invoked by default and should be
   selected automatically when applicable.
 - Retired/unrouted skills listed in `.agents/invocation.md` must not be selected

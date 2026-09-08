@@ -32,6 +32,15 @@ The human-approved E0 server-neutral packet is now available:
 G0 authorizes these records only. No Fluent execution is authorized until the
 requested treatment series is defined and the later G1/loop-entry gates pass.
 
+The complete human-approved fixed-mesh series is now defined and compiled:
+
+- [campaign design and evidence contract](fixed-mesh-treatment-screen/design.md)
+- [15-case setup-series index](fixed-mesh-treatment-screen/index.md)
+
+The independent G1 design review passed for server-neutral setup creation.
+Execution, fleet/session takeover, conditional fourth points, continuations,
+and qualification remain separately unauthorized.
+
 ## Phase question
 
 > What practical numerical mechanism can remove separated liquid from the
