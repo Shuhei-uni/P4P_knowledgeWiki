@@ -1,14 +1,15 @@
 ---
 name: create-setup
-description: "Compile a human-approved CONTEXT.md discovery or qualification item into a precise server-neutral setup record, preserving lifecycle permission, evidence requirements, core figures, qualification horizon, and claim limits."
+description: "Compile an authorized CONTEXT.md discovery or qualification item into a precise server-neutral setup record, preserving lifecycle permission, provenance, evidence requirements, core figures, qualification horizon, and claim limits."
 ---
 
 # Create Setup
 
-Compile a human-selected experiment strategy into precise scientific and
-implementation handoffs. Read the phase-root `CONTEXT.md` first and require a
-named approved candidate/screen/qualification ID, its origin, decision-gate
-linkage, and human approval status.
+Compile an authorized experiment strategy into precise scientific and
+implementation handoffs. Read the phase-root `CONTEXT.md` and `phase-state.yaml`
+first and require a named candidate/screen/qualification ID, its origin,
+decision-gate linkage, and one valid authority: human approval for Phase Loop,
+or `origin: auto-loop` matching the active Auto Loop envelope.
 
 Do not redesign the strategy here. Preserve the approved scientific purpose,
 intentional delta, invariants, claim limit, and evidence objective; return to
@@ -37,8 +38,8 @@ Do not convert missing human-owned information into an assumed surrogate unless 
 
 Every setup or linked setup set should make clear:
 
-- `CONTEXT.md` path, approved candidate/screen/qualification ID, origin, and
-  decision-gate linkage;
+- `CONTEXT.md` path, authorized candidate/screen/qualification ID, origin,
+  authority source, and decision-gate linkage;
 - phase question;
 - lifecycle mode: `discovery` or `hypothesis-test`;
 - uncertainty/hypothesis being tested;
@@ -167,7 +168,8 @@ Create/update one `setup.md` per distinct simulation in the selected strategy.
 
 A complete setup should contain:
 
-- context path/revision, approved candidate ID, origin, and decision gate;
+- context path/revision, authorized candidate ID, origin, authority source,
+  and decision gate;
 - phase/lifecycle mode and prerequisite gate references;
 - question/rationale/hypothesis;
 - prior evidence and competing explanation where relevant;

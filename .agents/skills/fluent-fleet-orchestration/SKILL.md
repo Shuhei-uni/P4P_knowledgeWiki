@@ -46,7 +46,10 @@ goal_lease:
   active_session_control: full
 ```
 
-Under an **exclusive** lease, the scientific phase loop is explicitly authorized to control every configured Fluent working session during the goal. That includes:
+Under an **exclusive** lease, the active Phase Loop or Auto Loop is explicitly
+authorized to control every configured Fluent working session during the goal.
+The lease is valid only after the loop-entry authority check has recorded
+`fluent_fleet_sessions: full`. That includes:
 
 - stopping an active calculation;
 - terminating/replacing an abandoned or conflicting worker;
@@ -112,10 +115,13 @@ For important artifacts prefer a small manifest containing artifact ID, source s
 
 ## Give scientific design the real resource envelope
 
-Return live server count, session state, takeover status, artifact locality, transfer possibilities, and material version limitations to `scientific-phase-loop` / `design-experiment` before runnable work is committed.
+Return live server count, session state, takeover status, artifact locality,
+transfer possibilities, and material version limitations to the active loop /
+`design-experiment` before runnable work is committed.
 
-Use parallel capacity only for human-approved context items. Do not create a
-bold lane or filler experiments merely to maximize utilization.
+Use parallel capacity only for Phase Loop queue items or Auto Loop cases inside
+the recorded envelope. Do not create filler experiments merely to maximize
+utilization.
 
 ## Place runs by exact-parent locality
 
@@ -216,7 +222,8 @@ DURABILITY: verified finals/checkpoints and LOCAL_ONLY debt
 BLOCKERS: unavailable parent, uncertain identity, path/compatibility issue
 ```
 
-The human-approved `CONTEXT.md` chooses what is worth running. This skill
-ensures the whole live fleet can actually be controlled and used according to
+The active loop authority in `CONTEXT.md` / `phase-state.yaml` chooses what is
+worth running. This skill ensures the whole live fleet can actually be
+controlled and used according to
 the granted phase authority without losing valuable scientific state or
 confusing session identity with artifact identity.

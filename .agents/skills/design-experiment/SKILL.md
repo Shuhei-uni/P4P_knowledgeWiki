@@ -1,6 +1,6 @@
 ---
 name: design-experiment
-description: "Formalize a human-approved CONTEXT.md candidate into an evidence-designed discovery or qualification strategy. Use after phase planning; do not originate, select, or promote new experiment ideas."
+description: "Formalize a Phase Loop-approved or Auto Loop-generated CONTEXT.md candidate into an evidence-designed discovery or qualification strategy. Preserve its recorded authority and do not create a case outside the active loop envelope."
 ---
 
 # Design Experiment
@@ -30,10 +30,16 @@ Do not bypass the lifecycle because one candidate looks obvious.
 
 ## Start from the uncertainty
 
-Read the phase-root `CONTEXT.md` before designing. Require a named candidate or
-conditional qualification path with `Human status: approved`, its origin,
-decision gate, and declared claim limit. If any is absent, return to
-`phase-planner` / `phase-grill`; do not invent it here.
+Read the phase-root `CONTEXT.md` and `phase-state.yaml` before designing.
+Require a named candidate or conditional qualification path, its origin,
+decision gate, declared claim limit, and one valid authority:
+
+- `Human status: approved` for Phase Loop; or
+- `Origin: auto-loop` with a matching active Auto Loop envelope for Auto Loop.
+
+If any is absent, return to `phase-planner` / `phase-grill`; do not invent it
+here. This skill formalizes an Auto Loop candidate only after Auto Loop itself
+has recorded it; it never creates one on the loop's behalf.
 
 Begin with the approved question the phase still cannot answer.
 
@@ -43,15 +49,15 @@ Do not begin from an available parameter list and ask what can be swept. Begin f
 
 Reasoning, literature, previous experience, and prior simulations can shape the hypothesis. Unless there is genuinely equivalent prior evidence, they do not establish what a new simulation will do.
 
-## Check approved candidates for prior experiment collisions
+## Check authorized candidates for prior experiment collisions
 
-Before formalizing an approved candidate, inspect retained Project history
+Before formalizing an authorized candidate, inspect retained Project history
 across all phases, not only the current phase. Search by scientific substance:
 physical mechanism, modelling choice, formulation, boundary condition,
 numerical change, initialization, operating regime, intended question, and
 comparison logic.
 
-For every approved candidate record:
+For every authorized candidate record:
 
 - what was already tested;
 - what happened, including failed, non-converged, partial, rejected, or inconclusive outcomes;
@@ -61,8 +67,8 @@ For every approved candidate record:
 
 Reject `REDUNDANT` candidates. A failed historical run still counts; rerun only
 when a concrete correction or unresolved delta makes the new attempt
-scientifically different. Return a rejected approved candidate to the human;
-do not substitute a new one.
+scientifically different. Return a rejected Phase Loop candidate to the human;
+return an Auto Loop candidate to Auto Loop without substituting one here.
 
 This collision check applies equally to mainline, discovery, and speculative work.
 
@@ -70,12 +76,12 @@ This collision check applies equally to mainline, discovery, and speculative wor
 
 Use discovery mode to determine **what deserves qualification**, not to produce the final phase claim.
 
-Use `explore-experiment-space` only to organize approved context candidates into
-a contrastive campaign. The declared human-approved decision gate determines
-the smallest adequate screen; it may contain a few tests when they genuinely
-distinguish the stated alternatives. Roughly 500–1,000 iterations per case is
-a useful project ballpark when sufficient to expose comparative behaviour, not
-a convergence criterion.
+Use `explore-experiment-space` only to organize authorized context candidates
+into a contrastive campaign. The recorded decision gate determines the smallest
+adequate screen; it may contain a few tests when they genuinely distinguish the
+stated alternatives. Roughly 500–1,000 iterations per case is a useful project
+ballpark when sufficient to expose comparative behaviour, not a convergence
+criterion.
 
 Design discovery for:
 
@@ -104,7 +110,8 @@ succeeds when every approved screen has completed, its declared evidence has
 been compared, and its decision gate either authorizes a named qualification
 path or returns the decision to the human.
 
-Before implementation, `scientific-phase-loop` must obtain `DISCOVERY_DESIGN == PASS` from `verify-phase-transition`.
+Before implementation, the active loop must obtain `DISCOVERY_DESIGN == PASS`
+from `verify-phase-transition`.
 
 ## Hypothesis-test mode — design for a strong statement
 
@@ -175,9 +182,10 @@ Know which servers are reachable, which exact parents/recovery states are availa
 
 Let fleet state influence campaign shape and execution efficiency, not the scientific question itself.
 
-When two or more servers are usable, use the capacity only for approved context
-items. `bold-probe-research` may support an approved speculative candidate; idle
-capacity never authorizes a new bold lane.
+When two or more servers are usable, use the capacity only for authorized
+context items. `bold-probe-research` may support an authorized speculative
+candidate; idle capacity never authorizes a new bold lane outside the Auto Loop
+envelope.
 
 Keep setup identity server-neutral. Placement is resolved later.
 
@@ -250,11 +258,11 @@ The later analysis agent should be able to create the key figures without invent
 
 ## Challenge approved strategies
 
-When several approved strategies exist, compare them without generating a new
+When several authorized strategies exist, compare them without generating a new
 one. Use `arena`, independent subagents, or literature-focused `swarm` only to
-challenge or research a context-approved candidate.
+challenge or research a recorded candidate.
 
-Call `question-experiment` before formalizing an approved strategy.
+Call `question-experiment` before formalizing an authorized strategy.
 
 For hypothesis qualification, independent challenge is mandatory. The reviewer must check not only scientific value, interpretability, and cost, but also whether the proposed evidence/horizon could actually support the intended strong statement and whether a human lock or material missing fact is being bypassed.
 
@@ -262,10 +270,11 @@ For hypothesis qualification, independent challenge is mandatory. The reviewer m
 
 ## Formalize
 
-Formalize the named approved context candidate for the current mode, then call
-`create-setup`. Record its context path, candidate ID, gate ID, and human
-approval in the resulting setup. Do not change its scientific purpose,
-intentional delta, invariants, claim limit, or evidence objective.
+Formalize the named authorized context candidate for the current mode, then
+call `create-setup`. Record its context path, candidate ID, gate ID, and either
+human approval or Auto Loop envelope provenance in the resulting setup. Do not
+change its scientific purpose, intentional delta, invariants, claim limit, or
+evidence objective.
 
 Before discovery implementation, require `DISCOVERY_DESIGN == PASS` from `verify-phase-transition`.
 

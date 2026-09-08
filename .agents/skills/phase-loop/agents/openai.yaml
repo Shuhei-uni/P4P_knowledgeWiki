@@ -1,0 +1,7 @@
+interface:
+  display_name: "Phase Loop"
+  short_description: "Execute a defined setup queue with proof."
+  default_prompt: "Use $phase-loop to execute the declared setup queue exactly. Ask the one Fluent-authority check at entry, verify each requested short or hypothesis run actually completed, and return to the human unless the pre-authorized Auto Loop route is ready."
+
+policy:
+  allow_implicit_invocation: true

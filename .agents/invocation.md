@@ -40,7 +40,12 @@ Do not set `disable-model-invocation: true` or `allow_implicit_invocation: false
 
 Current hybrid skills:
 
-- `scientific-phase-loop` — may be started directly by the human when a phase goal/boundaries are already supplied, or handed off from `phase-planner` only after the human explicitly selects its ❗❗❗ launch option 1️⃣ or 2️⃣.
+- `phase-loop` — may be started directly by the human with a defined setup
+  queue, or handed off from `phase-planner` only after the human explicitly
+  selects its ❗❗❗ launch option 1️⃣ or 2️⃣.
+- `auto-loop` — may be started directly by the human with a bounded autonomy
+  profile, or entered from a completed Phase Loop when that profile was
+  frontloaded at entry.
 - `workflow-surgeon` — may be invoked explicitly by the human, or implicitly when a concrete repeated workflow defect or clearly identifiable workflow failure satisfies its trigger conditions.
 
 Hybrid does not remove human gates inside the workflow. A hybrid skill must still return to the human when its own boundaries require it.
@@ -86,7 +91,7 @@ Use the smallest applicable specialist. Supporting skills should hand control ba
 
 ### Mandatory scientific phase lifecycle
 
-When `scientific-phase-loop` is active, its lifecycle is mandatory rather than advisory:
+When `phase-loop` or `auto-loop` is active, its lifecycle is mandatory rather than advisory:
 
 ```text
 PHASE_CONTRACT
@@ -102,9 +107,15 @@ Every state-changing transition must invoke `verify-phase-transition`. A `BLOCK`
 
 Normal autonomous `CONCLUDE PHASE` is illegal until the verified discovery-to-hypothesis lifecycle has completed. A human may explicitly terminate/reframe a phase earlier.
 
-Discovery stays attached to the active scientific goal through terminal execution evidence. A long Codex hypothesis qualification uses the exact-thread self-waking supervisor path and resumes the same scientific loop. `phase-state.yaml` is the machine-readable lifecycle authority after interruption or wakeup; the phase-root `CONTEXT.md` is the current human-approved experiment-selection authority.
+Discovery stays attached to the active scientific goal through terminal execution evidence. A long Codex hypothesis qualification uses the exact-thread self-waking supervisor path and resumes the same active loop. `phase-state.yaml` is the machine-readable lifecycle authority after interruption or wakeup.
 
-`phase-grill` is the only workflow step that may turn human thinking into new candidate experiments. `design-experiment` and `scientific-phase-loop` may refine evidence and implementation for candidates already approved in `CONTEXT.md`, but may not originate, select, or promote a new candidate. `bold-probe-research` may research an approved speculative candidate; it does not authorize a mandatory autonomous bold lane.
+`phase-grill` is the only workflow step that may turn human thinking into
+human-approved candidates. `phase-loop`, `design-experiment`, and
+`create-setup` execute/formalize only those defined setup routes. `auto-loop`
+may generate cases only inside its recorded family, direction, horizon, and
+timebox envelope; it records `origin: auto-loop` rather than human approval.
+Both loops use the same execution and evidence gates. `bold-probe-research` is
+research support, not authority to run a case by itself.
 
 For Fluent configuration uncertainty, use `fluent-live-inspection` first when the active live tree can resolve the path, object, state, or allowed value directly. Escalate automatically to `fluent-manual-researcher` when the live tree alone cannot safely determine the setting's meaning, prerequisites, activation order, or verifiable PyFluent/TUI implementation path. Do not guess a Fluent configuration from memory or copy a recipe from another model/version merely to keep implementation moving.
 
@@ -131,6 +142,6 @@ When a task arrives:
 3. A hybrid skill may be entered implicitly only when its documented preconditions are already satisfied.
 4. Otherwise select the smallest relevant model-invoked specialist and return its result to the calling workflow.
 5. Do not select retired/unrouted skills.
-6. While `scientific-phase-loop` is active, no specialist may bypass or retroactively waive a required `verify-phase-transition` gate.
+6. While either loop is active, no specialist may bypass or retroactively waive a required `verify-phase-transition` gate.
 
 The policy controls who may start a workflow and, for the scientific phase lifecycle, which independent gate must authorize state changes. Scientific, implementation, execution, analysis, and human-gate responsibilities remain defined by each skill and the repository guides.

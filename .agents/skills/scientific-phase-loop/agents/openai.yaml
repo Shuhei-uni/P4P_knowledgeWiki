@@ -1,7 +1,0 @@
-interface:
-  display_name: "Scientific Phase Loop"
-  short_description: "Execute a verified human-approved scientific phase."
-  default_prompt: "Use $scientific-phase-loop to execute the approved CONTEXT.md candidates and gates through the verified lifecycle. Do not originate experiments, skip gates, or self-waive a human boundary. Keep discovery attached until each approved screen returns terminal evidence; then follow only the gate-authorized path. Use the exact-thread self-waking handoff for approved long Codex qualifications. Finish at PHASE_CLOSURE or a genuine HUMAN_REQUIRED lock."
-
-policy:
-  allow_implicit_invocation: true

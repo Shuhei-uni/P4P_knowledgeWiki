@@ -1,12 +1,13 @@
 ---
 name: bold-probe-research
-description: "Research a human-raised or context-approved speculative CFD candidate before it is formalized. Use to challenge an approved mechanism, assumption, model form, or numerical architecture; research never authorizes a runnable probe."
+description: "Research a human-raised, context-approved, or Auto Loop-generated speculative CFD candidate before it is formalized. Research never authorizes a runnable probe by itself."
 ---
 
 # Bold Probe Research
 
-Use this skill to research a human-raised or explicitly context-approved bold
-speculative experiment.
+Use this skill to research a human-raised, explicitly context-approved, or
+Auto Loop-generated bold speculative experiment. An Auto Loop candidate must
+already be recorded inside its active envelope before research begins.
 
 A bold probe should come from a researched scientific question, not from novelty for its own sake. Its purpose is to expose a plausible mechanism, formulation, assumption, or alternative representation that the conservative mainline is unlikely to test quickly.
 
@@ -43,7 +44,8 @@ Do not start from "what other Fluent models exist?" Start from "what scientific 
 
 ## Reconstruct local prior work first
 
-Before external research, perform the same project-history collision check required by `scientific-phase-loop` and `design-experiment`.
+Before external research, perform the same project-history collision check
+required by the active loop and `design-experiment`.
 
 Search the retained Project history across phases by scientific substance:
 

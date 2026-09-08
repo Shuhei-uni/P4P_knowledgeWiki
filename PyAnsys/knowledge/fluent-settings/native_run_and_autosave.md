@@ -6,8 +6,8 @@
 
 ## Key rule
 
-For experiments inside `scientific-phase-loop`, run Fluent through the approved
-Python/PyFluent path and preserve the scientific experiment mode.
+For experiments inside `phase-loop` or `auto-loop`, run Fluent through the
+approved Python/PyFluent path and preserve the scientific experiment mode.
 
 ```text
 DISCOVERY
@@ -15,7 +15,7 @@ verified case
 → short Python/PyFluent run (~500-1000 iterations)
 → scientific agent stays attached and mostly waits
 → inspect evidence immediately
-→ evaluate the declared CONTEXT.md gate and follow only its approved next action
+→ evaluate the recorded CONTEXT.md gate and follow the authorized next action
 
 HYPOTHESIS TEST (Codex)
 verified case
@@ -106,8 +106,8 @@ For each short discovery run:
 2. issue the approved short run as a clear Python/PyFluent calculation;
 3. mostly wait while Fluent advances rather than narrating every iteration;
 4. when the run returns, inspect the agreed screening evidence immediately;
-5. revise the working hypothesis and decide whether another discovery run is
-   justified;
+5. evaluate the recorded gate; Phase Loop follows only its defined queue, while
+   Auto Loop may record another bounded discovery case within its envelope;
 6. if so, continue within the same active scientific thread.
 
 This attached behaviour applies throughout the discovery campaign, not only to

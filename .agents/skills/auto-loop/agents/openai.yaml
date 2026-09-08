@@ -1,0 +1,7 @@
+interface:
+  display_name: "Auto Loop"
+  short_description: "Autonomously explore a bounded CFD phase."
+  default_prompt: "Use $auto-loop to explore inside the recorded phase envelope. Ask the single Fluent-authority check and the four blunt Auto Loop questions at entry unless a Phase Loop handoff already recorded them. Create short screens first, require verified terminal evidence, then earn every long hypothesis run through the full gates. Do not stop at a launch or a partial result."
+
+policy:
+  allow_implicit_invocation: true

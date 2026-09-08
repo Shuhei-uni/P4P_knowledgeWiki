@@ -100,7 +100,7 @@ Do not use consultant-speak, fake certainty, or long formal summaries when a sho
 
 ## Decide with the human
 
-Do not automatically launch simulations or invoke `scientific-phase-loop`.
+Do not automatically launch simulations or invoke `phase-loop`.
 
 Talk through the direction first. Before handing off, agree on the parts that actually matter:
 
@@ -114,11 +114,16 @@ Talk through the direction first. Before handing off, agree on the parts that ac
 ### Define the autonomy envelope explicitly
 
 Experiment origination and selection remain human-controlled. The normal handoff
-grants `scientific-phase-loop` authority to execute, verify, and analyse only
-the candidates, decision gates, and conditional qualification paths that the
-human has approved in the phase `CONTEXT.md`.
+grants `phase-loop` authority to execute, verify, and analyse only the defined
+setup queue and its already-approved evidence/gate contracts.
 
-When Fluent compute is part of the phase, the normal `/goal` handoff should also grant exclusive active-session authority over the configured Fluent fleet for the duration of the phase goal. Within that authority the loop may stop active calculations, preserve a recovery pair when a valuable unpreserved state could otherwise be lost, reload or restart Fluent, replace the loaded case, reassign servers, terminate abandoned workers, and use available servers only for approved context work.
+When Fluent compute is part of the phase, do not add a separate planner-side
+session question. At loop entry, the single Fluent-authority check records
+whether the active goal has full session-overwrite authority or a restriction.
+With full authority, the loop may stop active calculations, preserve a recovery
+pair when a valuable unpreserved state could otherwise be lost, reload or
+restart Fluent, replace the loaded case, reassign servers, terminate abandoned
+workers, and use available servers only for authorized work.
 
 This authority applies to active working sessions and approved experiment
 children. It does **not** authorize creating or promoting a new experiment
@@ -128,16 +133,17 @@ question, or crossing an explicit human boundary.
 
 If the human wants a narrower authority envelope for a particular phase, record the restriction in the handoff.
 
-## ❗❗❗ Scientific Phase Loop - launch decision
+## ❗❗❗ Phase Loop - launch decision
 
-When the direction, `CONTEXT.md`, and autonomy envelope are ready, stop here.
-A complete handoff is not permission to start `scientific-phase-loop`.
+When the direction, `CONTEXT.md`, defined setup queue, and autonomy envelope
+are ready, stop here.
+A complete handoff is not permission to start `phase-loop`.
 
 Show this decision clearly and wait for an explicit choice:
 
-> ❗❗❗ **Scientific Phase Loop - launch decision**
+> ❗❗❗ **Phase Loop - launch decision**
 >
-> - **1️⃣ Continue in this chat** — enter `scientific-phase-loop` in the
+> - **1️⃣ Continue in this chat** — enter `phase-loop` in the
 >   current conversation.
 > - **2️⃣ Start in a new task** — start the loop in a new thread with a short
 >   handoff prompt.
@@ -148,18 +154,18 @@ Show this decision clearly and wait for an explicit choice:
 
 After an explicit selection:
 
-- **1️⃣** — enter `scientific-phase-loop` in this chat with the handoff below.
+- **1️⃣** — enter `phase-loop` in this chat with the handoff below.
 - **2️⃣** — create a new task/thread in the same project and give it this
   short prompt. On a runtime that cannot create a task, present the prompt for
   the human to start in a new chat.
 
   ```md
-  Use `scientific-phase-loop` for `<phase>`.
+  Use `phase-loop` for `<phase>`.
 
   - **Context:** `<phase-root CONTEXT.md>`
   - **Goal:** <phase question>
-  - **Approved route:** <candidate IDs and decision gates>
-  - **Return:** `HUMAN_REQUIRED` outside that context authority.
+  - **Defined queue:** <ordered setup paths and lifecycle gates>
+  - **Return:** `HUMAN_REQUIRED` outside that queue.
   ```
 
 - **3️⃣** — continue the human conversation through `phase-grill`. Do not
@@ -167,7 +173,7 @@ After an explicit selection:
 
 ## Handoff after launch choice
 
-Only after choice **1️⃣** or **2️⃣**, give `scientific-phase-loop` its handoff:
+Only after choice **1️⃣** or **2️⃣**, give `phase-loop` its handoff:
 
 - **Goal** — what this phase is trying to answer.
 - **Why now** — why this is the useful question given the evidence so far.
@@ -175,15 +181,18 @@ Only after choice **1️⃣** or **2️⃣**, give `scientific-phase-loop` its h
 - **Main unknowns / assumptions** — what is still open or being accepted for now.
 - **Boundaries** — what the loop should not casually change.
 - **Enough evidence looks like** — what would support a useful phase conclusion.
-- **Context authority** — path/revision of `CONTEXT.md`, approved candidate IDs,
-  declared decision gates, and conditional qualification paths.
-- **Autonomy** — context-gated experiment execution plus the granted Fluent
-  fleet/session authority, including any restrictions.
+- **Defined queue** — ordered `setup.md` paths, lifecycle roles, prerequisite
+  gates, and no-unlisted-work rule.
+- **Completion route** — return to the human, or offer the pre-authorized Auto
+  Loop option at Phase Loop entry.
+- **Autonomy** — queue execution plus the granted Fluent fleet/session
+  authority, including any restrictions.
 - **Return to the human when** — the decisions or missing facts the loop must not invent or authorize itself.
 
 The handoff sets the destination, authority, approved route, and boundaries.
 
-`scientific-phase-loop` still owns faithful execution, evidence verification,
-analysis, and lifecycle discipline. It may follow only the human-approved route
-recorded in `CONTEXT.md`; a new candidate, ambiguous gate, or unplanned result
-returns to this human planning boundary.
+`phase-loop` still owns faithful execution, evidence verification, analysis,
+and lifecycle discipline. It may follow only the defined queue; a new
+candidate, ambiguous gate, or non-equivalent workaround returns to this human
+planning boundary. Auto Loop is entered only through a deliberate completion
+route or direct human invocation.

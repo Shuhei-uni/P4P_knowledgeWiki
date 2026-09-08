@@ -39,7 +39,13 @@ Start with:
 Most skills are internal specialists and should be called by the scientific workflow when needed. The main skills the human should deliberately invoke are:
 
 - `$phase-planner` — use for a scientific catch-up before a phase, after the autonomous loop stops, or whenever you want to reconstruct where the project stands, think aloud about the next direction, and approve phase/experiment candidates.
-- `$scientific-phase-loop` — use once `CONTEXT.md` records the approved phase question, candidates, decision gates, and conditional qualification paths. It executes approved work, analyses results, and follows declared gates; it does not invent experiments from scratch.
+- `$phase-loop` — use once an ordered queue of selected `setup.md` records is
+  defined. It executes that queue faithfully, verifies that every planned run
+  and evidence gate actually completed, and does not invent cases.
+- `$auto-loop` — use for a bounded autonomous exploration window inside a fixed
+  phase. It asks for a compact family/horizon/direction/stop-time profile, then
+  creates and tests short discovery cases before earning each long hypothesis
+  run through the same hard evidence gates.
 - `$workflow-surgeon` — use when the agent workflow itself is frustrating, repeatedly behaves badly, has a missing responsibility, stale rule, poor handoff, or bad default. It diagnoses the root cause with fresh reviewers and prefers the smallest surgical change over redesigning the skill system. It may also self-invoke when frustrated user feedback clearly points to an identifiable workflow failure.
 - `$show-me-your-work` — optional audit/handoff tool when you specifically want a concise reconstruction of what an autonomous sequence did and where the supporting evidence lives.
 
@@ -52,11 +58,11 @@ human think-aloud / $phase-grill
     ↓
 CONTEXT.md phase scope, approved candidates, and decision gates
     ↓
-design-experiment → create-setup
+design-experiment → create-setup → defined setup queue
     ↓
-$scientific-phase-loop executes approved discovery or hypothesis-test paths
+$phase-loop executes the defined paths
     ↓
-conclude phase / return to human
+return to human / pre-authorized $auto-loop
     ↓
 $phase-planner
 ```
@@ -75,9 +81,9 @@ smallest justified skill / handoff / rule edit
 
 The human normally does not need to invoke experiment-design, setup, Fluent execution, numerical-analysis, interpretation, next-action, or closure skills individually; the loop should call them as required.
 
-Inside the loop, execution depends on experiment mode:
+Inside either loop, execution depends on experiment mode:
 
-- **Discovery:** short screening runs stay attached to the active scientific agent so results can immediately evaluate the next declared context gate without a human restart.
+- **Discovery:** short screening runs stay attached to the active scientific agent so results can immediately evaluate their declared gate; Auto Loop may create another bounded screen only after this evidence is verified.
 - **Hypothesis test:** long runs use the background self-waking Python worker. It persists `COMPLETE`/`BLOCKED` evidence and resumes the exact originating Codex thread automatically; the human should not need to send a prompt just to restart progress after the solve finishes.
 
 TUI-driven or Fluent-journal execution requires explicit human approval for that run.

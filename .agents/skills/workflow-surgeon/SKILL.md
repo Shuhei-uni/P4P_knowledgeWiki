@@ -34,7 +34,7 @@ Establish:
 - whether it happened once or represents a repeatable weakness;
 - which existing skill or boundary was supposed to own that responsibility.
 
-Do not begin by rewriting `scientific-phase-loop` or reorganising the skill tree.
+Do not begin by rewriting `phase-loop`, `auto-loop`, or reorganising the skill tree.
 
 Read only the relevant skill chain, repository rules, and execution evidence needed to understand the failure.
 
@@ -102,8 +102,9 @@ Before editing, identify what must remain true.
 Important current invariants include:
 
 - `phase-planner` remains the human phase-level planning boundary;
-- `scientific-phase-loop` remains the autonomous execution, evidence, and
-  lifecycle authority inside the human-approved phase route;
+- `phase-loop` remains the strict setup-queue execution, evidence, and
+  lifecycle authority; `auto-loop` remains the bounded autonomous exploration
+  authority inside a fixed phase;
 - specialist skills remain narrow and composable;
 - simulation evidence remains the scientific anchor;
 - implementation skills do not redesign experiments;

@@ -1,14 +1,16 @@
 ---
 name: question-experiment
-description: "Challenge a human-approved CONTEXT.md experiment or linked campaign before compute is spent. In hypothesis-test mode, independent adversarial review is mandatory before the strategy can proceed to the hard transition gate."
+description: "Challenge an authorized CONTEXT.md experiment or linked campaign before compute is spent. In hypothesis-test mode, independent adversarial review is mandatory before the strategy can proceed to the hard transition gate."
 ---
 
 # Question Experiment
 
-Challenge human-approved candidate experiment strategies before compute is spent.
-Require the phase `CONTEXT.md` path, candidate ID, origin, approval status, and
-decision-gate linkage. This skill recommends; it never selects a new strategy
-or turns a proposed candidate into an approved one.
+Challenge authorized candidate experiment strategies before compute is spent.
+Require the phase `CONTEXT.md` path, candidate ID, origin, authority source,
+and decision-gate linkage. Human-approved candidates are required for Phase
+Loop; `origin: auto-loop` is valid only under a matching active Auto Loop
+envelope. This skill recommends; it never selects a new strategy or turns a
+proposed candidate into an authorized one.
 
 A strategy may be one decisive setup or a small series whose value comes from the comparison, trend, sequence, or combined evidence. Judge the strategy at the level where its scientific value actually exists.
 
@@ -117,7 +119,7 @@ Ask:
 - Could fewer runs or existing data answer the same question?
 - Is the horizon appropriately discovery-scale or qualification-scale for its label?
 
-Reject or defer a weak approved strategy. If repair would change its candidate,
+Reject or defer a weak authorized strategy. If repair would change its candidate,
 delta, invariants, or claim limit, return the issue to the human instead of
 merging, splitting, or reshaping it here.
 
@@ -131,7 +133,7 @@ Return:
 - strongest surviving criticisms and their severity;
 - existing evidence supporting the judgement;
 - assumptions/missing facts that matter;
-- whether the approved strategy is viable, deferred, rejected, or ready for the
+- whether the authorized strategy is viable, deferred, rejected, or ready for the
   relevant `verify-phase-transition` gate; and
 - exact changes that require a human/context decision.
 

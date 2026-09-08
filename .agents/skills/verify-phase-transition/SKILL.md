@@ -1,11 +1,11 @@
 ---
 name: verify-phase-transition
-description: "Independently verify that an autonomous scientific phase has satisfied the hard requirements for a lifecycle transition. Use before every scientific-phase-loop transition that changes lifecycle state. Return PASS, BLOCK, or HUMAN_REQUIRED; the calling loop may not self-overrule BLOCK or HUMAN_REQUIRED."
+description: "Independently verify that Phase Loop or Auto Loop has satisfied the hard requirements for a lifecycle transition. Return PASS, BLOCK, or HUMAN_REQUIRED; the calling loop may not self-overrule BLOCK or HUMAN_REQUIRED."
 ---
 
 # Verify Phase Transition
 
-Act as the independent gatekeeper for `scientific-phase-loop`.
+Act as the independent gatekeeper for `phase-loop` and `auto-loop`.
 
 This skill does not design the next experiment, reinterpret inconvenient evidence, or help the calling agent justify a preferred transition. Its job is narrower:
 
@@ -41,37 +41,44 @@ Use these gate IDs in `phase-state.yaml`.
 
 Require:
 
-- a phase-root `CONTEXT.md` with the current human-approved planning state;
+- a phase-root `CONTEXT.md` with the current human-approved planning state and,
+  for Auto Loop, its recorded bounded exploration envelope;
 - a fixed phase question/goal;
 - explicit in-scope and out-of-scope boundaries;
 - important known facts versus assumptions/missing information separated;
 - what would count as enough evidence for a useful phase conclusion;
-- the autonomous authority envelope, including Fluent fleet/session authority;
+- the active loop type and autonomy authority envelope, including Fluent
+  fleet/session authority;
 - explicit human-return conditions.
 
-Do not pass if the loop would need to invent a plant fact, validation target, physical boundary condition, or other human-owned fact in order to begin.
+For Phase Loop, require a declared setup queue. For Auto Loop, require the
+recorded family focus, deepening/enumeration direction, hypothesis horizon,
+stop time/timezone, and one recorded Fluent-authority outcome. Do not pass if
+either loop would need to invent a plant fact, validation target, physical
+boundary condition, or other human-owned fact in order to begin.
 
 ### `DISCOVERY_DESIGN`
 
 Require:
 
-- `CONTEXT.md` identifies every proposed screen by candidate ID, origin, human
-  approval, and decision-gate linkage;
+- `CONTEXT.md` identifies every proposed screen by candidate ID, origin,
+  authority source, and decision-gate linkage;
 - current phase uncertainty is explicit;
 - prior-experiment collision check completed;
 - discovery strategy is genuinely screening/diagnostic rather than a disguised qualification claim;
 - required monitors/histories and core figures are specified before execution;
 - each proposed case can teach something relevant;
-- the approved campaign contains enough contrastive cases to satisfy its
-  declared decision gate, with no unapproved candidate added for breadth or
-  idle capacity;
+- the campaign contains enough contrastive cases to satisfy its declared
+  decision gate, with no case outside the Phase Loop queue or Auto Loop
+  envelope added for breadth or idle capacity;
 - every possible long-run promotion is a named conditional qualification path
-  in `CONTEXT.md`;
+  or an Auto Loop-recorded path linked to completed discovery evidence;
 - no unresolved human lock is being bypassed with an invented surrogate unless the phase contract explicitly authorizes that surrogate class.
 
-Return `BLOCK` when a proposed case lacks human approval, provenance, required
+Return `BLOCK` when a proposed case lacks valid authority, provenance, required
 evidence, or decision-gate coverage. Return `HUMAN_REQUIRED` when resolving the
-gap requires a new candidate or changed phase direction.
+gap requires a changed phase direction or human-owned fact. A Phase Loop cannot
+repair a missing queue item by proposing another case.
 
 ### `DISCOVERY_EXECUTION`
 
@@ -92,8 +99,8 @@ A tool/RPC timeout while Fluent is still solving is not terminal discovery evide
 
 Require:
 
-- every human-approved discovery case required by the declared gate has
-  completed and passed its execution requirements;
+- every Phase Loop queue item or Auto Loop-generated discovery case required by
+  the declared gate has completed and passed its execution requirements;
 - the completed discovery runs have been compared and analysed, not merely listed;
 - the planned core figures/equivalent decisive evidence exist;
 - important numerical/physical caveats are identified;
@@ -102,10 +109,11 @@ Require:
 - a meaningful competing explanation or claim limit is stated;
 - discovery evidence is not being presented as the final qualification result.
 
-Do not pass because an early result looks decisive unless the human-approved
-gate explicitly covers that result and its declared evidence is complete. If
-the approved screen is insufficient or uncertainty remains broad, return
-`HUMAN_REQUIRED` for the human to approve another candidate or revised gate.
+Do not pass because an early result looks decisive unless the recorded gate
+explicitly covers that result and its declared evidence is complete. If a Phase
+Loop screen is insufficient or uncertainty remains broad, return
+`HUMAN_REQUIRED`. Auto Loop may make another screen only if the recorded
+envelope/timebox covers it.
 
 If no defensible hypothesis has emerged, return `BLOCK` and require more/better discovery rather than permitting a weak hypothesis test.
 
@@ -113,8 +121,8 @@ If no defensible hypothesis has emerged, return `BLOCK` and require more/better 
 
 Require a hypothesis contract containing:
 
-- a named context-approved conditional qualification path and the gate that
-  triggered it;
+- a named human-approved conditional qualification path, or an Auto
+  Loop-recorded qualification path, and the gate that triggered it;
 - one clear falsifiable statement/question;
 - the discovery evidence that motivated it;
 - the strongest competing explanation or material alternative;
@@ -128,7 +136,7 @@ Require a hypothesis contract containing:
 Require:
 
 - `DISCOVERY_EVIDENCE == PASS` and `HYPOTHESIS_DEFINITION == PASS`;
-- the setup references the approved context qualification-path ID and no
+- the setup references the authorized context qualification-path ID and no
   unresolved context lock exists;
 - a focused long-run setup/campaign designed backward from the intended strong statement;
 - required histories, balances, residuals/numerical evidence, fields, checkpoints, and core figures are instrumented before the solve;

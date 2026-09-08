@@ -9,7 +9,11 @@ description: "Use when working with PyAnsys executable automation for Fluent/PyF
 
 Use `PyAnsys/` as the executable automation layer for Fluent setup, inspection, execution, data extraction, and machine-readable verification. Treat Fluent as a dependency-ordered GUI state machine, not a stable static Python object tree.
 
-When this work belongs to an active `scientific-phase-loop`, read the phase-root `phase-state.yaml` and obey its hard lifecycle gates. PyAnsys tooling must not become an escape hatch around `verify-phase-transition`: discovery compute requires the discovery design permission, and a long hypothesis solve may not launch before `HYPOTHESIS_RUN_READY == PASS`.
+When this work belongs to an active `phase-loop` or `auto-loop`, read the
+phase-root `phase-state.yaml` and obey its hard lifecycle gates. PyAnsys tooling
+must not become an escape hatch around `verify-phase-transition`: discovery
+compute requires the discovery design permission, and a long hypothesis solve
+may not launch before `HYPOTHESIS_RUN_READY == PASS`.
 
 Keep setup construction and run supervision conceptually separate:
 
@@ -18,7 +22,9 @@ Keep setup construction and run supervision conceptually separate:
 - discovery runs stay agent-attached through the short run and immediate evidence review;
 - hypothesis-test runs use `supervise-fluent-run`: Codex detaches and wakes the originating Codex thread; Cursor stays attached through the approved horizon.
 
-For autonomous experiments inside `scientific-phase-loop`, Python/PyFluent execution is the default. TUI-driven iteration, Fluent journal submission, and GUI-owned execution require explicit human approval for that run.
+For autonomous experiments inside either loop, Python/PyFluent execution is the
+default. TUI-driven iteration, Fluent journal submission, and GUI-owned
+execution require explicit human approval for that run.
 
 Do not merge unrelated setup mutation, scientific decision-making, and long-run supervision into one opaque script. A case-specific Python runner is fine when it is the clearest faithful implementation of the approved experiment.
 

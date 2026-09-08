@@ -1,6 +1,6 @@
 ---
 name: next-action
-description: "Evaluate a declared CONTEXT.md decision gate after new evidence arrives and return its allowed next action or HUMAN_REQUIRED. Use inside scientific-phase-loop, not for choosing the project's next phase."
+description: "Evaluate a declared CONTEXT.md decision gate after new evidence arrives and return its allowed next action or HUMAN_REQUIRED. Use inside Phase Loop or Auto Loop, not for choosing the project's next phase."
 ---
 
 # Next Action
@@ -12,9 +12,12 @@ Ask two things:
 1. What part of the current hypothesis or phase question is now supported by the available evidence?
 2. What important part is still weak, unresolved, or unsupported?
 
-If a meaningful uncertainty remains, evaluate the declared context decision gate.
-Return only its named allowed next action. If the evidence calls for an unlisted
-investigation, return `HUMAN_REQUIRED` to `phase-planner` / `phase-grill`.
+If a meaningful uncertainty remains, evaluate the declared context decision
+gate. Return only its named allowed next action. For Auto Loop, a newly
+generated action is valid only when it is recorded with gate linkage and stays
+inside the active envelope/timebox. If the evidence calls for an unlisted
+Phase Loop investigation or an Auto Loop boundary change, return
+`HUMAN_REQUIRED` to `phase-planner` / `phase-grill`.
 
 If the evidence already supports a sufficiently strong, bounded statement for the current question, recommend ending this line of investigation and carrying the conclusion back to the phase loop.
 

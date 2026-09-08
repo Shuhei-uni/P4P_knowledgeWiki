@@ -183,7 +183,7 @@ Do not mark the phase concluded here.
 
 ## Handoff
 
-Return to `scientific-phase-loop`:
+Return to the active `phase-loop` or `auto-loop`:
 
 - what the experiment established;
 - which planned figures/evidence carry that statement;

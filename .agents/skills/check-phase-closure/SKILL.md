@@ -73,11 +73,11 @@ Choose `CONTINUE` when:
 
 - a lifecycle gate remains `BLOCK` and the approved context path explicitly
   authorizes the repair;
-- the verified hypothesis result requires a named approved context path that
-  could materially change the phase answer;
+- the verified hypothesis result requires a named Phase Loop-approved context
+  path, or an Auto Loop-recorded path still inside its envelope, that could
+  materially change the phase answer;
 - evidence is incomplete for the intended statement;
-- another already-approved discovery/qualification cycle has clear information
-  value.
+- another authorized discovery/qualification cycle has clear information value.
 
 State which lifecycle state should be reopened and why. Do not design the experiment here.
 
@@ -122,7 +122,8 @@ If two consecutive cycles fail to reduce an important uncertainty, strengthen th
 - do not generate a third nearby variation by habit;
 - return to the human / `phase-planner` for a substantially different question
   or branch; or
-- follow a named approved context path when one already exists.
+- follow a named Phase Loop-approved path, or an Auto Loop path that remains
+  inside the recorded envelope and timebox.
 
 Stagnation can justify changing the route. It does not justify skipping qualification.
 

@@ -1,29 +1,32 @@
 ---
 name: explore-experiment-space
-description: "Organize human-approved CONTEXT.md candidate experiments into a small, contrastive discovery screen. Use inside an active phase only after candidates and a decision gate are approved; do not originate or promote new candidates."
+description: "Organize authorized CONTEXT.md candidate experiments into a small, contrastive discovery screen. Use inside an active phase only after candidates and a decision gate are recorded; do not originate or promote new candidates."
 ---
 
 # Explore Experiment Space
 
-Turn an approved candidate pool into the smallest contrastive discovery screen
+Turn an authorized candidate pool into the smallest contrastive discovery screen
 that can answer its declared decision gate. The phase `CONTEXT.md` owns
 candidate origin, approval, and the allowed next paths; this skill owns a clear
 comparison plan.
 
-## Require an approved context campaign
+## Require an authorized context campaign
 
-Read the phase-root `CONTEXT.md`. Require every proposed screen to have a
-candidate ID, origin, `approved` status, controlled delta, invariants, required
-evidence, and a shared decision gate. Return to `phase-grill` when a missing
-candidate or gate would need a new human decision.
+Read the phase-root `CONTEXT.md` and `phase-state.yaml`. Require every proposed
+screen to have a candidate ID, origin, valid authority, controlled delta,
+invariants, required evidence, and a shared decision gate. Valid authority is
+human approval for Phase Loop or `origin: auto-loop` matching the active Auto
+Loop envelope. Return to `phase-grill` when a missing Phase Loop candidate/gate
+would need a human decision; return to Auto Loop when its own candidate lacks
+envelope coverage.
 
-Check each approved candidate against prior Project work. Classify its delta as
+Check each authorized candidate against prior Project work. Classify its delta as
 `NEW`, `PARTIAL REPEAT`, `REPLICATION`, or `REDUNDANT`. A redundant candidate
 does not license a substitute candidate; return it to the human.
 
 ## Build the screen
 
-Use the fewest approved cases that genuinely distinguish the gate's stated
+Use the fewest authorized cases that genuinely distinguish the gate's stated
 alternatives. Preserve a reference where the gate needs one, change as little
 as practical within each comparison, and state why each approved case is
 necessary. Do not add cases for arbitrary breadth or idle compute capacity.
@@ -32,7 +35,7 @@ For each screen record:
 
 | Field | Required content |
 | --- | --- |
-| Context candidate ID | Human-approved candidate being screened |
+| Context candidate ID | Authorized candidate being screened |
 | Parent/reference | Exact comparison anchor |
 | Delta and invariants | What changes and what remains fixed |
 | Short horizon | Enough to answer the screen question, not a qualification claim |

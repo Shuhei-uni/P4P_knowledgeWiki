@@ -35,7 +35,8 @@ keep the agent attached through the approved horizon unless a detached
   chat transcript; `setup.md` remains the runnable contract for a
   human-selected experiment.
 - Create `setup.md` and `results.md` together only for a human-selected
-  experiment under `Project/experiments/<campaign>/<experiment>/`.
+  experiment, or an Auto Loop-generated experiment with explicit generated
+  provenance, under `Project/experiments/<campaign>/<experiment>/`.
 - Update `Project/index.md` only when the current scientific state changes.
   Git history is the operational history; do not create chat/work logs or a
   second project log.
@@ -60,11 +61,12 @@ Read [`.agents/invocation.md`](.agents/invocation.md) when deciding whether a
 skill may be entered automatically.
 
 - `phase-planner` is mostly human invoked.
-- `scientific-phase-loop` and `workflow-surgeon` are hybrid: the human may call
-  them directly, and the model may enter them when their documented trigger or
-  preconditions are already satisfied. A `phase-planner` handoff enters
-  `scientific-phase-loop` only after the human selects its ❗❗❗ launch option 1️⃣
-  or 2️⃣.
+- `phase-loop`, `auto-loop`, and `workflow-surgeon` are hybrid: the human may
+  call them directly, and the model may enter them when their documented
+  trigger or preconditions are already satisfied. A `phase-planner` handoff
+  enters `phase-loop` only after the human selects its ❗❗❗ launch option 1️⃣ or
+  2️⃣. `auto-loop` enters from a direct human invocation or a Phase Loop
+  completion route whose Auto Loop profile was recorded before execution.
 - Other active specialist skills are model-invoked by default and should be
   selected automatically when applicable.
 - Retired/unrouted skills listed in `.agents/invocation.md` must not be selected

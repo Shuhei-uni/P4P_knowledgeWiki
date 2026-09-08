@@ -146,7 +146,7 @@ verify experiment identity and approved horizon
 run verify-phase-transition for HYPOTHESIS_EXECUTION
 produce required post-processing/core figures
 run verify-phase-transition for HYPOTHESIS_EVIDENCE
-continue the same scientific-phase-loop automatically
+continue the same active Phase Loop or Auto Loop automatically
 ```
 
 Do not wake with a vague “simulation finished” prompt that leaves the next lifecycle step optional.

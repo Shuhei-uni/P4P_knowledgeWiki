@@ -13,7 +13,7 @@ chronology. Git history preserves superseded wording.
 - **Planning state:** phase framing | screening design | screening active |
   qualification candidate selected | human decision required
 - **Last human review:** YYYY-MM-DD
-- **Experiment-selection authority:** human-approved-context-only
+- **Experiment-selection authority:** human-approved-context-only | auto-loop-bounded-envelope
 - **Current decision:** [one sentence]
 
 ## Human thinking
@@ -92,10 +92,34 @@ priorities.]
 - **Required qualification evidence and horizon:** [...]
 - **Further human review before `setup.md`:** yes | no
 
+## Phase Loop setup queue (only when ready)
+
+| Order | Setup path | Lifecycle role | Required gate | Completion requirement |
+| --- | --- | --- | --- | --- |
+| 1 | `.../setup.md` | discovery | DISCOVERY_DESIGN | COMPLETE_VERIFIED |
+
+This is the finite worklist Phase Loop may execute. A setup may enter only
+after its human-approved candidate/path is formalized; Phase Loop never fills a
+blank queue slot with a new case.
+
 ## Human locks and handoff rules
 
 - [Exact decision/fact the loop may not self-authorize.]
-- `scientific-phase-loop` executes only approved context items and evaluates
-  declared gates. It returns to the human for a new candidate, changed purpose,
-  ambiguous gate, or unplanned observation.
+- `phase-loop` executes only its defined setup queue and evaluates declared
+  gates. It returns to the human for a new candidate, changed purpose,
+  ambiguous gate, or non-equivalent workaround.
+
+## Auto Loop envelope (only when authorized)
+
+- **Family focus:** [...]
+- **Direction:** deepen | enumerate
+- **Hypothesis iterations:** [...], including any explicit short-run exception
+- **Stop time/timezone:** [...]
+- **Fluent authority:** full | restricted
+
+Generated candidates must be kept separate from the human-approved pool and
+record `Origin: auto-loop`, rationale, controlled delta, evidence gate, and
+the profile that authorizes them. `auto-loop` may create these candidates only
+inside this envelope; it returns to the human for a new phase direction,
+human-owned fact, or boundary change.
 ```
