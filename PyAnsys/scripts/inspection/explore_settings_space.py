@@ -101,11 +101,12 @@ def start_local_fluent(
         server_info.unlink()
     process = subprocess.Popen(
         [str(fluent_exe), "3ddp", f"-t{processor_count}", "-g", f"-sifile={server_info}"],
-        stdin=subprocess.PIPE,
+        stdin=subprocess.DEVNULL,
         stdout=(output_dir / "fluent_stdout.log").open("w", encoding="utf-8", errors="replace"),
         stderr=(output_dir / "fluent_stderr.log").open("w", encoding="utf-8", errors="replace"),
         cwd=str(output_dir),
         text=True,
+        start_new_session=True,
     )
     deadline = time.time() + timeout
     while time.time() < deadline:
@@ -191,10 +192,7 @@ def main() -> int:
     output_path.write_text(json.dumps(payload, indent=2, default=str) + "\n", encoding="utf-8")
     print(f"wrote_json: {output_path}")
     print(json.dumps(summary, indent=2, default=str))
-    solver.exit()
-    if local_process is not None and local_process.poll() is None:
-        local_process.terminate()
-        local_process.wait(timeout=20)
+    print("fluent_session: PRESERVED_RUNNING")
     return 0
 
 

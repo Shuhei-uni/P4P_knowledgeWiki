@@ -11,6 +11,14 @@ This is a narrow capability-resolution skill. It does not redesign the experimen
 
 > For this exact Fluent version and case state, what configuration does the Fluent manual require, and how can that state be applied and proven through PyFluent or a controlled TUI fallback?
 
+When this answer will inform a parent decision, read [focused lookup
+delegation](../references/focused-lookup.md) and run this skill in a focused
+subagent. Its brief must name the decision, one target-state question, the
+Fluent/case fingerprint, and the manual fact or capability proof that could
+change or constrain the decision. The subagent returns a compact evidence
+packet plus the terminal `VERIFIED_RECIPE` or `RESEARCH_BLOCKED` result; the
+parent agent retains model selection and experiment authority.
+
 ## Automatic trigger
 
 Invoke this skill automatically when any of the following occurs:
@@ -169,7 +177,8 @@ A TUI fallback is acceptable for setup mutation when all of the following are tr
 - the official Fluent/PyFluent documentation supports the command family for the matching version;
 - the Settings API path is absent, inactive, or inadequate;
 - the command is version-pinned when prompt compatibility matters;
-- the mutation is performed only in a disposable test child/session first;
+- the mutation is performed only in recoverable test child state first while
+  its Fluent session remains running;
 - the resulting state can be read back independently through Settings state, a second documented query, or another deterministic inspection method;
 - save/reopen verification is possible.
 
@@ -178,13 +187,14 @@ Do not use TUI merely because it is familiar. Do not use a successful command re
 This skill researches setup/configuration controls only. It does not override
 the repository rule that autonomous iteration normally uses Python/PyFluent;
 when that path is inadequate, a version-pinned TUI fallback may be used only
-after disposable validation, independent readback, and save/reopen proof.
+after recoverable-child validation, independent readback, and save/reopen proof.
 
-### 7. Prove the recipe in a disposable child/session
+### 7. Prove the recipe in recoverable child state
 
 Do not first test an uncertain mutation on the only important parent or on a running experiment.
 
-Use a disposable child or recoverable session and apply the smallest dependency-ordered sequence:
+Use recoverable child state in a preserved session and apply the smallest
+dependency-ordered sequence:
 
 ```text
 load exact parent
@@ -204,11 +214,12 @@ If a step cannot be read back, the recipe is not yet verified.
 
 A recipe is not verified merely because the setter returned without error.
 
-For the completed disposable configuration:
+For the completed test configuration:
 
 1. perform a strict pre-save readback against the manual state checklist;
-2. save the child case to a declared disposable path;
-3. close or leave the original session as appropriate and open the saved case in a fresh Fluent session;
+2. save the child case to a declared test path;
+3. leave the original session running and open the saved case in another
+   still-running or newly launched Fluent session;
 4. reacquire all relevant Settings objects;
 5. repeat the critical readback;
 6. compare the reopened state with the intended target state.

@@ -14,6 +14,8 @@ Wait up to one minute when the runtime can wait for a human reply. An explicit
 restriction wins; otherwise record `fluent_fleet_sessions: full`, including a
 timestamp or timeout expiry. This is the only Fluent-session authority question.
 Fleet orchestration consumes the recorded authority and must not ask again.
+Full authority permits replacing loaded case state but never shutting down,
+terminating, restarting, or relaunching a Fluent process/session.
 
 ## Phase Loop completion route
 

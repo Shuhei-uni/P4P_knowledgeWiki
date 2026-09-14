@@ -7,6 +7,13 @@ description: "Reconstruct a concise evidence trail for a long or autonomous rese
 
 Make an autonomous sequence auditable without reproducing every intermediate thought or tool call.
 
+For a past-experiment lookup supporting a parent decision, read [focused lookup
+delegation](../references/focused-lookup.md) and run this skill in a focused
+subagent. Its brief must name the pending decision, one question about prior
+project evidence, the relevant phase/mechanism boundary, and the kind of prior
+result, failure, contradiction, or claim limit that could matter. Return the
+compact evidence packet and handoff below; the parent decides what follows.
+
 ## Purpose
 
 A fresh human or agent should be able to answer:

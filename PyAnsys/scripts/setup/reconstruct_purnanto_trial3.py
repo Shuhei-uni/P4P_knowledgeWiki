@@ -361,6 +361,7 @@ def main() -> int:
             precision="double",
             processor_count=args.processor_count,
             dimension=3,
+            cleanup_on_exit=False,
         )
         print(f"LAUNCH_OK: {solver.get_fluent_version()}")
 
@@ -411,11 +412,7 @@ def main() -> int:
         return 1
     finally:
         if solver is not None:
-            try:
-                solver.exit()
-                print("EXIT_OK")
-            except Exception as exc:
-                print(f"EXIT_FAILED: {exc}")
+            print("FLUENT_SESSION_PRESERVED_RUNNING")
 
 
 if __name__ == "__main__":

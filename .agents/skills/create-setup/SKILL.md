@@ -144,6 +144,13 @@ Changing the evidence contract after seeing the result requires an explicit upst
 
 ## Keep the experiment packet together
 
+Create an experiment directory only for a candidate authorized by `CONTEXT.md`:
+human-selected work, or generated work whose `origin: auto-loop` or
+`origin: autonomous-recovery` matches the active envelope. Create `setup.md`
+and `results.md` together. Initialize `results.md` as planned/not run; later
+execution and `interpret-experiment` replace that status with evidence rather
+than backfilling a result into the setup contract.
+
 Use:
 
 ```text

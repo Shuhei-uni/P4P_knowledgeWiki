@@ -69,7 +69,9 @@ Do not substitute a convenient similarly named parent.
 
 When `fluent-fleet-orchestration` has granted the active scientific goal an exclusive fleet lease, the assigned Fluent session is a working resource for this phase.
 
-The execution plan may require stopping an inherited calculation, preserving a quick recovery pair, restarting/reloading Fluent, or replacing the loaded case. Follow that plan without asking the human again.
+The execution plan may require stopping an inherited calculation, preserving a
+quick recovery pair, or replacing the loaded case. Follow that plan without
+asking the human again while leaving the Fluent process/session running.
 
 Do not silently destroy a valuable unpreserved endpoint when a recovery pair can be saved cheaply. Do not overwrite verified durable Project/OneDrive parents.
 

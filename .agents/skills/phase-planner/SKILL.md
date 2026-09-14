@@ -8,7 +8,12 @@ disable-model-invocation: true
 
 Treat this like a research catch-up with the human, not a formal planning report.
 
-Read the repo first. Work out what we were trying to learn, what the simulations actually showed, what did not work, and what is still unclear. Use `show-me-your-work` when there is a lot of previous work to reconstruct.
+Start at `Project/index.md`. Then read the current phase's `CONTEXT.md` and only
+the latest relevant `setup.md`, `results.md`, or parent record needed for the
+current decision. Do not preload old chronology or whole knowledge trees. Work
+out what we were trying to learn, what the simulations actually showed, what
+did not work, and what is still unclear. Use `show-me-your-work` when a long
+campaign needs a concise evidence reconstruction.
 
 ## Use parallel support
 
@@ -121,9 +126,10 @@ When Fluent compute is part of the phase, do not add a separate planner-side
 session question. At loop entry, the single Fluent-authority check records
 whether the active goal has full session-overwrite authority or a restriction.
 With full authority, the loop may stop active calculations, preserve a recovery
-pair when a valuable unpreserved state could otherwise be lost, reload or
-restart Fluent, replace the loaded case, reassign servers, terminate abandoned
-workers, and use available servers only for authorized work.
+pair when a valuable unpreserved state could otherwise be lost, replace the
+loaded case, reassign servers, detach abandoned clients that do not own the
+Fluent process, and use available servers only for authorized work. Every
+Fluent process/session remains running.
 
 This authority applies to active working sessions and approved experiment
 children. It does **not** authorize creating or promoting a new experiment

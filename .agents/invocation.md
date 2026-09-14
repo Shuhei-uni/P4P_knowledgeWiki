@@ -64,6 +64,7 @@ Current model-invoked specialists:
 - `cfd-numerical-analysis`
 - `cfd-wiki`
 - `check-phase-closure`
+- `create-figure`
 - `create-setup`
 - `design-experiment`
 - `dpm-analysis`
@@ -83,6 +84,7 @@ Current model-invoked specialists:
 - `pyansys-workflow`
 - `question-experiment`
 - `reflect`
+- `report-writing`
 - `residual-history-analysis`
 - `show-me-your-work`
 - `statistical-analysis`

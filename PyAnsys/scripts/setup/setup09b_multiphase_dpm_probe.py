@@ -91,11 +91,12 @@ def start_fluent(
     print_kv("launch_command", args)
     process = subprocess.Popen(
         args,
-        stdin=subprocess.PIPE,
+        stdin=subprocess.DEVNULL,
         stdout=stdout_log.open("w", encoding="utf-8", errors="replace"),
         stderr=stderr_log.open("w", encoding="utf-8", errors="replace"),
         cwd=str(output_dir),
         text=True,
+        start_new_session=True,
     )
     print_kv("launch_pid", process.pid)
     return process, server_info, stdout_log, stderr_log
@@ -253,18 +254,9 @@ def main() -> int:
         return 1
     finally:
         if solver is not None:
-            try:
-                solver.exit()
-                print_kv("solver_exit", "OK")
-            except Exception as exc:
-                print_kv("solver_exit_failed", exc)
+            print_kv("fluent_session", "PRESERVED_RUNNING")
         elif process is not None and process.poll() is None:
-            try:
-                process.terminate()
-                process.wait(timeout=20)
-                print_kv("process_terminate", "OK")
-            except Exception as exc:
-                print_kv("process_terminate_failed", exc)
+            print_kv("fluent_process", "PRESERVED_RUNNING")
 
 
 if __name__ == "__main__":

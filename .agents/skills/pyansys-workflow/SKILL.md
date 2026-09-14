@@ -25,7 +25,7 @@ Keep setup construction and run supervision conceptually separate:
 For autonomous experiments inside either loop, Python/PyFluent execution is the
 default. A version-pinned TUI/journal fallback is allowed only after the live
 API limitation is researched through `fluent-manual-researcher`, proven in a
-disposable child/session, independently read back, and verified through
+recoverable child state in a preserved session, independently read back, and verified through
 save/reopen. GUI-owned execution is not an autonomous fallback.
 
 Do not merge unrelated setup mutation, scientific decision-making, and long-run supervision into one opaque script. A case-specific Python runner is fine when it is the clearest faithful implementation of the approved experiment.
@@ -34,7 +34,18 @@ Connection routing is not case provenance: `server_id` only selects the Fluent e
 
 Use verified remote directory knowledge from `PyAnsys/server-profiles/` when available. An explicit path in the experiment setup takes precedence. Never invent a remote output root from the server alias.
 
-When the phase execution plan grants an exclusive fleet lease, a busy inherited Fluent session is not automatically protected working state. Follow `fluent-fleet-orchestration`: preserve a paired recovery state when scientifically valuable, then stop/reload/reassign the active session as the approved goal requires. Never overwrite verified durable parent artifacts merely because the session can be controlled.
+When the phase execution plan grants an exclusive fleet lease, a busy inherited
+calculation is not automatically protected working state. Follow
+`fluent-fleet-orchestration`: preserve a paired recovery state when
+scientifically valuable, then stop the calculation, reconnect the client, or
+replace/reassign loaded case state while the Fluent process remains running.
+Never overwrite verified durable parent artifacts merely because the session
+can be controlled.
+
+The exact runner must use `cleanup_on_exit=False` and contain no Fluent
+shutdown, process termination, or restart action on success, error, timeout, or
+cleanup; reconnect clients and replace loaded case state inside the preserved
+Fluent process instead.
 
 ## Fluent Settings Rule
 
@@ -53,7 +64,7 @@ Mandatory habits:
 
 A Settings/API limitation is not permission to switch blindly to TUI. Return
 `BLOCK`, research the official version-matched route, prove the smallest TUI or
-journal mutation in a disposable child, read it back, save/reopen it, then use
+journal mutation in recoverable child state, read it back, save/reopen it, then use
 that verified fallback or persist a durable autonomous block.
 
 For semantic/prerequisite uncertainty in a Fluent setting, escalate from live inspection to `fluent-manual-researcher` rather than inventing a path or model state.
@@ -144,7 +155,7 @@ A zero runner exit code is not sufficient completion proof. Declare required fin
 
 If Python/PyFluent cannot perform the approved run faithfully, return `BLOCK` to
 the loop. Do not silently fall back to TUI, a Fluent journal, or GUI execution;
-use only the verified disposable TUI/journal fallback above, or durably block
+use only the verified recoverable-child TUI/journal fallback above, or durably block
 the path and continue another lane.
 
 ## Cross-System Sync

@@ -15,6 +15,16 @@ Never edit `CFD_wiki/raw/`.
 
 Before changing the wiki, read `CFD_wiki/AGENTS.md`, then the maintained catalog at `CFD_wiki/wiki/index.md`. The local guide owns page schemas, citation style, uncertainty labels, and the full ingest procedure; do not duplicate or replace it here.
 
+For a decision-support lookup, read [focused lookup
+delegation](../references/focused-lookup.md). Run each applicable lookup branch
+in its own focused subagent. For **Evidence lookup**, ask one reusable-CFD
+question and name the reported fact, contradiction, or limitation that could
+matter. For **Fluent guidance**, ask one generic procedure/model-use question
+and name the prerequisite, restriction, recommendation, or uncertainty that
+could matter. Each subagent returns the compact evidence packet; the parent
+agent synthesizes it with the other applicable research paths. An explicit
+wiki update remains in the owning agent because it changes durable knowledge.
+
 ## Choose the branch
 
 Classify the request before opening source material:

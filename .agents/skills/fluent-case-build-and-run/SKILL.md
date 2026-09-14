@@ -19,7 +19,10 @@ This skill implements a case that has already earned scientific permission. It m
 - Define the intended mutable leaves and invariants before mutation.
 - Derive run-specific output/recovery paths.
 
-When the active `/goal` has an exclusive fleet lease, the assigned Fluent session is disposable working state after required recovery is preserved. It is valid to stop an inherited solve, reload/restart Fluent, or replace the loaded case according to the execution plan without additional human approval.
+When the active `/goal` has an exclusive fleet lease, the loaded Fluent state
+may be replaced after required recovery is preserved. It is valid to stop an
+inherited solve or replace the loaded case according to the execution plan
+without additional human approval; the Fluent process/session remains running.
 
 Do not use that authority to overwrite verified durable parents or lose a scientifically valuable unpreserved endpoint when a paired recovery save can be made cheaply.
 

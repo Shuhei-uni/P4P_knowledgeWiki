@@ -1,100 +1,48 @@
-# Repository guide
+# Repository contract
 
-This repository keeps four active systems separate:
+Route each kind of truth to one owner:
 
-```text
-CFD_wiki = reusable external CFD knowledge and Fluent guidance
-Project  = current project-specific scientific truth and selected experiments
-PyAnsys  = implementation, execution, inspection, and evidence tools
-.agents/skills = focused workflows that route work through those owners
-```
+| Owner | Stores |
+| --- | --- |
+| `Project/` | Current project questions, decisions, selected experiments, findings, and claim limits |
+| `CFD_wiki/` | Reusable literature evidence, CFD methods, and generic Fluent guidance |
+| `PyAnsys/` | Fluent/PyFluent implementation, execution, inspection, extraction, and machine evidence |
+| `.agents/skills/` | Focused workflows that operate on those owners |
 
-Codex and Cursor both load this file and the skills under `.agents/skills/`.
-Keep that directory as the single skill home. Do not duplicate skills into
-`.cursor/skills/` or copy this contract into `.cursor/rules/`.
+For project-specific scientific work, start at [`Project/index.md`](Project/index.md).
+For changes under `CFD_wiki/` or `PyAnsys/`, read that tree's `AGENTS.md` first.
+Use the smallest matching repository skill for a repeatable workflow; the skill
+owns its reading order, gates, procedure, and completion criteria.
 
-Nested `AGENTS.md` files in `CFD_wiki/` and `PyAnsys/` apply when work is in
-those trees. Cursor treats them as scoped rules; Codex reads them as local
-guides.
+Before a consequential scientific or Fluent decision, run a **three-path
+check**: reusable CFD evidence through `cfd-wiki`'s evidence-lookup branch,
+generic Fluent guidance through its Fluent-guidance branch (escalating exact
+version/case-state uncertainty to `fluent-manual-researcher`), and past project
+evidence through `show-me-your-work`. Delegate each applicable path to a
+focused subagent with the decision, one precise question, and the kind of fact
+that could change or constrain it. Synthesize the compact returns; record why
+any path is irrelevant rather than silently skipping it.
 
-Human-only skills are invoked as `/skill-name` in Cursor and `$skill-name` in
-Codex. Keep `SKILL.md` `disable-model-invocation` aligned with Codex
-`agents/openai.yaml` as described in [`.agents/invocation.md`](.agents/invocation.md).
+## Durable truth
 
-Hypothesis-test self-wake via `codex exec resume` is Codex-only. In Cursor,
-keep the agent attached through the approved horizon unless a detached
-`COMPLETE`/`BLOCKED` job is explicitly required; see `supervise-fluent-run`.
-
-## Start with the current project
-
-- Begin project work at [`Project/index.md`](Project/index.md).
-- For active phase planning, read the phase-root `CONTEXT.md` first, then only
-  the latest relevant experiment `setup.md` or `results.md`, and a parent
-  record when the question requires it. Do not preload old chronology or whole
-  knowledge trees. `CONTEXT.md` records current human-approved decisions, not a
-  chat transcript; `setup.md` remains the runnable contract for a
-  human-selected experiment.
-- Create `setup.md` and `results.md` together only for a human-selected
-  experiment, or an Auto Loop-generated experiment with explicit generated
-  provenance, under `Project/experiments/<campaign>/<experiment>/`.
+- Keep a fact in its owning system and link to it elsewhere. A skill is a
+  procedure, not another store for project facts or run history.
+- Keep current human-approved phase decisions in the phase-root `CONTEXT.md`,
+  runnable scientific intent in `setup.md`, resulting evidence and bounded
+  interpretation in `results.md`, and active lifecycle state in
+  `phase-state.yaml`.
 - Update `Project/index.md` only when the current scientific state changes.
-  Git history is the operational history; do not create chat/work logs or a
-  second project log.
+  Git history is the chronology; use `show-me-your-work` when that chronology
+  must be reconstructed for review or handoff.
+- Preserve the evidence and uncertainty labels required by the owning guide.
+  Treat every directory named `raw/` as immutable source or generated evidence.
+- Preserve every Fluent session: never close, exit, terminate, kill, restart, or relaunch Fluent, and call a script only after verifying that its success, error, timeout, and cleanup paths leave the Fluent process running.
+- Carry case-specific names, values, paths, parent identity, and assumptions
+  only from the selected experiment's verified records. Record uncertainty
+  instead of borrowing details from another case.
 
-## Keep ownership clear
+## Skill maintenance
 
-- Put reusable literature, CFD methods, generic Fluent guidance, citations,
-  evidence labels, units, and uncertainty in `CFD_wiki/`.
-- Put case implementation, execution, inspection, extraction, and generated
-  evidence in `PyAnsys/`.
-- Put current scientific questions, selected experiments, findings, and claim
-  boundaries in `Project/`.
-- Keep skills narrow and procedural. A skill routes work; it is not a second
-  authority for project facts or a dump of run chronology.
-- The former project source vault and written wiki were removed. Do not
-  recreate them or the retired numbered setup tree; recover exact history from
-  Git when needed.
-
-## Skill invocation policy
-
-Read [`.agents/invocation.md`](.agents/invocation.md) when deciding whether a
-skill may be entered automatically.
-
-- `phase-planner` is mostly human invoked.
-- `phase-loop`, `auto-loop`, and `workflow-surgeon` are hybrid: the human may
-  call them directly, and the model may enter them when their documented
-  trigger or preconditions are already satisfied. A `phase-planner` handoff
-  enters `phase-loop` only after the human selects its ❗❗❗ launch option 1️⃣ or
-  2️⃣. `auto-loop` enters from a direct human invocation or a Phase Loop
-  completion route whose Auto Loop profile was recorded before execution.
-- Other active specialist skills are model-invoked by default and should be
-  selected automatically when applicable.
-- Retired/unrouted skills listed in `.agents/invocation.md` must not be selected
-  as current workflow authorities.
-
-Invocation policy controls who may start a workflow. The responsibility and
-human-gate rules inside each skill still apply.
-
-## Core safeguards
-
-- Never edit any file under a `raw/` directory.
-- Do not silently copy case-specific names, values, paths, or branch
-  assumptions between experiments.
-- Keep `Reported`, `Observed`, `Inferred`, `Assumed`, `Missing Info`, and
-  related uncertainty labels required by the owning guide.
-- Before changing a subsystem, read its local guide: [`CFD_wiki/AGENTS.md`](CFD_wiki/AGENTS.md)
-  or [`PyAnsys/AGENTS.md`](PyAnsys/AGENTS.md). Project records follow the root
-  routing and evidence rules.
-- Use the smallest applicable repo skill for a repeatable workflow rather than
-  creating another general-purpose guide or documentation layer.
-
-For native Fluent runs, also read
-[`PyAnsys/knowledge/fluent-settings/native_run_and_autosave.md`](PyAnsys/knowledge/fluent-settings/native_run_and_autosave.md)
-and the applicable focused skill.
-
-## Cleanup rule
-
-The former project-written corpus, `Setups/` tree, meeting reports, fixed
-`subagents/` prompts, and deprecated wrapper skills are retired. Recover their
-exact history from Git when needed; do not add compatibility shells or a new
-giant `legacy/` directory.
+Use `writing-for-agents` when editing agent instructions. Keep repository skills
+only in `.agents/skills/`; when adding, retiring, or changing a skill's
+invocation class, follow [`.agents/invocation.md`](.agents/invocation.md).

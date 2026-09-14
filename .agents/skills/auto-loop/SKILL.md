@@ -96,7 +96,9 @@ The loop may without repeated human approval:
 - use research and specialist analysis to challenge, enumerate, or create
   deliberately adversarial cases within the fixed phase direction;
 - allocate and reallocate available Fluent servers;
-- stop active Fluent calculations, terminate abandoned workers, restart/reload Fluent, replace loaded cases, and otherwise control active working sessions;
+- stop active Fluent calculations, replace loaded cases, and detach abandoned
+  clients only after proving that doing so leaves the Fluent process/session
+  running;
 - preserve a quick recovery case+data pair before destroying a scientifically valuable unpreserved state;
 - abandon or defer a candidate only when its declared gate permits that action.
 
@@ -207,7 +209,11 @@ recorded stop time. After the deadline, launch no new work; let any already
 approved run reach its declared terminal state, then return the durable summary
 to the human.
 
-Under an exclusive autonomous fleet lease, treat active Fluent sessions as working resources owned by the phase goal, not as untouchable state. Reconcile what is running, preserve a recovery pair when losing an unpreserved scientifically valuable endpoint would matter, then stop/reload/reassign sessions as needed.
+Under an exclusive autonomous fleet lease, treat active Fluent sessions as
+preserved working resources owned by the phase goal. Reconcile what is running,
+preserve a recovery pair when replacing valuable in-session state would matter,
+then stop the calculation, load the approved case, or reassign the still-running
+session as needed.
 
 Do not destroy verified durable parent artifacts. Do not let an inherited busy session block the goal merely because Fluent is iterating when the phase has explicit takeover authority.
 

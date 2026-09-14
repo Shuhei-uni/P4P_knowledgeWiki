@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import argparse
-import atexit
 import os
 from pathlib import Path
 import socket
@@ -21,21 +20,7 @@ except ModuleNotFoundError:  # pragma: no cover - local convenience fallback
         return False
 
 
-_LOCAL_FLUENT_PROCESSES: list[subprocess.Popen[str]] = []
 _ENV_FILE = Path(__file__).resolve().parents[2] / ".env"
-
-
-def _cleanup_local_fluent_processes() -> None:
-    for process in list(_LOCAL_FLUENT_PROCESSES):
-        try:
-            if process.poll() is None:
-                process.terminate()
-                process.wait(timeout=10)
-        except Exception:
-            pass
-
-
-atexit.register(_cleanup_local_fluent_processes)
 
 
 def env_suffix(server_id: str | int | None) -> str:
@@ -139,13 +124,13 @@ def _launch_local_fluent(
 
     process = subprocess.Popen(
         launch_args,
-        stdin=subprocess.PIPE,
+        stdin=subprocess.DEVNULL,
         stdout=stdout_log.open("w", encoding="utf-8", errors="replace"),
         stderr=stderr_log.open("w", encoding="utf-8", errors="replace"),
         cwd=str(output_dir),
         text=True,
+        start_new_session=True,
     )
-    _LOCAL_FLUENT_PROCESSES.append(process)
 
     deadline = time.time() + startup_timeout
     while time.time() < deadline:

@@ -52,16 +52,20 @@ The lease is valid only after the loop-entry authority check has recorded
 `fluent_fleet_sessions: full`. That includes:
 
 - stopping an active calculation;
-- terminating/replacing an abandoned or conflicting worker;
+- detaching/replacing an abandoned or conflicting client only after proving
+  that it does not terminate the Fluent process/session;
 - saving a quick paired recovery state when the currently loaded endpoint is scientifically valuable and not already durable;
-- closing/restarting/reconnecting Fluent;
+- reconnecting a client to the still-running Fluent session;
 - loading a different verified parent;
 - reassigning a server to another approved experiment;
 - overwriting disposable in-session setup state and run-local scratch outputs according to the new run plan.
 
 Do not ask the human for confirmation for each of those actions while the exclusive lease is active.
 
-The lease does **not** authorize deleting or overwriting verified durable Project/OneDrive parents/finals simply because they are inconvenient. Active session state is disposable; durable scientific artifacts are not.
+The lease does **not** authorize shutting down a Fluent process/session or
+deleting or overwriting verified durable Project/OneDrive parents/finals simply
+because they are inconvenient. Loaded in-session state may be replaced; the
+Fluent process and durable scientific artifacts are preserved.
 
 If the phase handoff grants restricted rather than exclusive authority, obey those restrictions.
 
@@ -90,7 +94,8 @@ If Fluent is iterating when an exclusive lease is active:
 2. if yes, preserve/continue it according to that job's state;
 3. if it is stale, abandoned, from an older goal, or conflicts with the new approved placement, reconcile useful state;
 4. save a paired recovery artifact first when losing the current unpreserved endpoint would materially cost scientific work;
-5. stop/terminate/reload/reassign the session;
+5. stop the calculation, detach only non-owning clients, then load/reassign the
+   still-running session;
 6. record the takeover/recovery fact in the execution plan.
 
 Do not let `iterating=true` by itself force `BLOCKED` when the phase has explicit takeover authority.
