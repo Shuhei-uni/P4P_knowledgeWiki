@@ -3,7 +3,7 @@ phase_question: >-
   Can the selected bottom-only cell-zone absorber reach credible scaled-residual
   and continuity convergence in the simplified Purnanto model when turbulence
   closure and turbulence-specific treatments are changed one at a time?
-state: DISCOVERY_DESIGN
+state: DISCOVERY_EXECUTION
 
 context:
   path: Project/experiments/phase-07-1a-absorber-convergence/CONTEXT.md
@@ -13,6 +13,14 @@ context:
     - C2-T0
     - C2-T1-STD
     - C2-T1-REAL
+    - C2-T2-PROD
+    - C2-T2-DIFF
+    - C2-T2-SWIRL
+    - C2-T2-KATO
+    - C2-T3-SCALABLE
+    - C2-T3-NON-EQ
+    - C2-T4-K2
+    - C2-T4-DISPERSION
   draft_family_path: Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/README.md
 
 autonomy:
@@ -23,6 +31,20 @@ autonomy:
     profile_status: NOT_AUTHORIZED
     family_focus: none
     direction: none
+
+phase_loop:
+  autonomy_check_in:
+    checked_at: 2026-09-11
+    fluent_fleet_sessions: full
+    fluent_fleet_scope: student only
+    authority_source: direct human phase-loop invocation to complete the remaining staged turbulence-family setups
+    completion_route: return
+    auto_loop_selected: false
+    auto_loop_profile_status: NOT_AUTHORIZED
+    note: >-
+      The previous full-session authority remains in force for this bounded
+      extension. The user did not authorize an Auto Loop handoff; return after
+      the eight queued discovery items and their recovery routes are resolved.
 
 gates:
   PHASE_CONTRACT:
@@ -44,28 +66,73 @@ gates:
       - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/parent-reference.md
       - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/closure-path-readback.md
       - Project/experiments/phase-07-1a-absorber-convergence/lifecycle-gate-review-20260911.md
+      - >-
+        Direct human phase-loop invocation on 2026-09-11 explicitly extends
+        the declared turbulence-family discovery queue to the staged T2-T4
+        setup contracts below; each remains a one-delta, 500-active-iteration
+        discovery item using the exact active-1000 parent.
+      - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/t2-rng-production-limiter/setup.md
+      - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/t2-rng-differential-viscosity-off/setup.md
+      - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/t2-rng-swirl-off/setup.md
+      - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/t2-rng-kato-launder/setup.md
+      - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/t3-scalable-wall-functions/setup.md
+      - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/t3-non-equilibrium-wall-functions/setup.md
+      - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/t4-k-second-order/setup.md
+      - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/t4-multiphase-turbulence-dispersion/setup.md
     missing: []
     reviewer: Harvey / 01a08fa5-d73d-7fe1-88f2-8ef0570c7a19
   DISCOVERY_EXECUTION:
-    status: BLOCK
+    status: PASS
     checked_at: 2026-09-11
-    evidence: []
-    missing:
-      - DISCOVERY_DESIGN must pass before execution
-    reviewer: not-applicable
+    evidence:
+      - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/t0-rng-reference/run-manifest.json
+      - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/t1-standard-kepsilon/run-manifest.json
+      - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/t1-realizable-kepsilon/run-manifest.json
+      - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/t0-rng-reference/analysis-summary.json
+      - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/t1-standard-kepsilon/analysis-summary.json
+      - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/t1-realizable-kepsilon/analysis-summary.json
+      - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/family-analysis-summary.json
+      - >-
+        Each successful child passed exact active-1000 parent hashes, complete
+        state and closure readback, prepared save/reopen, 50-iteration smoke,
+        500 active iterations, final paired case/data, terminal readback, and
+        the required 18 report histories plus seven residual histories.
+      - >-
+        The first realizable preflight blocker is preserved under
+        turbulence-family/t1-realizable-kepsilon/attempts/20260911T100015Z;
+        the corrected retry started from a fresh exact parent and passed.
+    missing: []
+    reviewer: phase-loop terminal verification in current task; no hypothesis route entered
   DISCOVERY_EVIDENCE:
     status: BLOCK
     checked_at: 2026-09-11
-    evidence: []
+    evidence:
+      - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/t0-rng-reference/results.md
+      - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/t1-standard-kepsilon/results.md
+      - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/t1-realizable-kepsilon/results.md
+      - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/figures/turbulence-family-residual-comparison.png
+      - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/figures/turbulence-family-phase-balance-comparison.png
+      - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/family-analysis-summary.json
+      - >-
+        The three finite histories show closure-dependent trajectories, but
+        each retains nonstationarity, reverse flow, and broad turbulent-
+        viscosity limiting over the 500-active-iteration screen.
     missing:
-      - No Phase 7.1A turbulence child has run
-    reviewer: not-applicable
+      - >-
+        No child establishes a bounded stationary or qualification-ready
+        branch over this finite horizon; no defensible hypothesis candidate is
+        promoted.
+      - >-
+        The planned contour-level spatial evidence was not captured; F3 is
+        limited to selected-cell inventory histories and cannot support a
+        field-level turbulence claim.
+    reviewer: phase-loop evidence assessment in current task; independent hypothesis gate not passed
   HYPOTHESIS_DEFINITION:
     status: BLOCK
     checked_at: 2026-09-11
     evidence: []
     missing:
-      - Discovery evidence is not available
+      - DISCOVERY_EVIDENCE is BLOCK; no bounded qualification hypothesis is supported
     reviewer: not-applicable
   HYPOTHESIS_RUN_READY:
     status: BLOCK
@@ -93,7 +160,7 @@ gates:
     checked_at: 2026-09-11
     evidence: []
     missing:
-      - Phase has not entered execution or evidence review
+      - Discovery evidence is BLOCK and no qualification route is authorized
     reviewer: not-applicable
 
 active_jobs: []
@@ -107,7 +174,9 @@ queue:
     setup_path: turbulence-family/t0-rng-reference/setup.md
     lifecycle_role: discovery-reference
     required_gate: DISCOVERY_DESIGN
-    status: READY_FOR_PHASE_LOOP
+    status: COMPLETE_VERIFIED
+    run_id: P71A-T0-RNG-REFERENCE-student-20260911T092613Z
+    results_path: turbulence-family/t0-rng-reference/results.md
     completion_requirement: >-
       Same-parent baseline readback, prepared save/reopen, 500-iteration
       discovery evidence, and core figures.
@@ -120,7 +189,9 @@ queue:
     setup_path: turbulence-family/t1-standard-kepsilon/setup.md
     lifecycle_role: discovery
     required_gate: DISCOVERY_DESIGN
-    status: READY_FOR_PHASE_LOOP
+    status: COMPLETE_VERIFIED
+    run_id: P71A-T1-STANDARD-KEPSILON-student-20260911T094339Z
+    results_path: turbulence-family/t1-standard-kepsilon/results.md
     completion_requirement: >-
       Closure-only comparison against T0 with full residual, turbulence,
       phase-routing, absorber, and balance evidence.
@@ -133,10 +204,160 @@ queue:
     setup_path: turbulence-family/t1-realizable-kepsilon/setup.md
     lifecycle_role: discovery
     required_gate: DISCOVERY_DESIGN
-    status: READY_FOR_PHASE_LOOP
+    status: COMPLETE_VERIFIED
+    run_id: P71A-T1-REALIZABLE-KEPSILON-student-20260911T100157Z
+    results_path: turbulence-family/t1-realizable-kepsilon/results.md
     completion_requirement: >-
       Closure-only comparison against T0 with full residual, turbulence,
       phase-routing, absorber, and balance evidence.
+  - order: 4
+    setup_id: P71A-T2-RNG-PRODUCTION-LIMITER
+    candidate_id: C2-T2-PROD
+    origin: human-approved-context-only
+    authority: direct human phase-loop invocation
+    gate_linkage: G0 / DISCOVERY_DESIGN extension
+    setup_path: turbulence-family/t2-rng-production-limiter/setup.md
+    lifecycle_role: discovery
+    required_gate: DISCOVERY_DESIGN
+    parent_identity: P7-E5-CZ-ABSORB-COLD-RAMP11692 active-1000 paired case/data
+    required_horizon: 500 active iterations after 50-iteration smoke
+    evidence_contract: shared turbulence-family contract; production-limiter readback and full phase/source histories
+    status: BLOCKED_AUTONOMOUS
+    blocker: >-
+      Active-250 pair saved, then repeated AMG divergence and floating-point
+      exceptions occurred while advancing toward active 500; no active-500
+      completion or terminal readback was proven. Attempts are preserved under
+      turbulence-family/t2-rng-production-limiter/attempts/.
+    attempts:
+      - turbulence-family/t2-rng-production-limiter/attempts/20260911T1054-blocked-production-limiter-delta-proof/run-manifest.json
+      - turbulence-family/t2-rng-production-limiter/attempts/20260911T110613Z-active250-fpe/run-manifest.json
+    completion_requirement: >-
+      Enable only the RNG production limiter, prove the delta by readback,
+      complete the attached 500-active-iteration discovery evidence, and write
+      paired results with core figures.
+  - order: 5
+    setup_id: P71A-T2-RNG-DIFFERENTIAL-VISCOSITY-OFF
+    candidate_id: C2-T2-DIFF
+    origin: human-approved-context-only
+    authority: direct human phase-loop invocation
+    gate_linkage: G0 / DISCOVERY_DESIGN extension
+    setup_path: turbulence-family/t2-rng-differential-viscosity-off/setup.md
+    lifecycle_role: discovery
+    required_gate: DISCOVERY_DESIGN
+    parent_identity: P7-E5-CZ-ABSORB-COLD-RAMP11692 active-1000 paired case/data
+    required_horizon: 500 active iterations after 50-iteration smoke
+    evidence_contract: shared turbulence-family contract; differential-viscosity readback and full phase/source histories
+    status: NOT_RUN
+    completion_requirement: >-
+      Disable only RNG differential viscosity, prove the delta by readback,
+      complete the attached 500-active-iteration discovery evidence, and write
+      paired results with core figures.
+  - order: 6
+    setup_id: P71A-T2-RNG-SWIRL-OFF
+    candidate_id: C2-T2-SWIRL
+    origin: human-approved-context-only
+    authority: direct human phase-loop invocation
+    gate_linkage: G0 / DISCOVERY_DESIGN extension
+    setup_path: turbulence-family/t2-rng-swirl-off/setup.md
+    lifecycle_role: discovery
+    required_gate: DISCOVERY_DESIGN
+    parent_identity: P7-E5-CZ-ABSORB-COLD-RAMP11692 active-1000 paired case/data
+    required_horizon: 500 active iterations after 50-iteration smoke
+    evidence_contract: shared turbulence-family contract; RNG swirl readback and full phase/source histories
+    status: NOT_RUN
+    completion_requirement: >-
+      Disable only the RNG swirl option, prove the delta by readback, complete
+      the attached 500-active-iteration discovery evidence, and write paired
+      results with core figures.
+  - order: 7
+    setup_id: P71A-T2-RNG-KATO-LAUNDER
+    candidate_id: C2-T2-KATO
+    origin: human-approved-context-only
+    authority: direct human phase-loop invocation
+    gate_linkage: G0 / DISCOVERY_DESIGN extension
+    setup_path: turbulence-family/t2-rng-kato-launder/setup.md
+    lifecycle_role: discovery
+    required_gate: DISCOVERY_DESIGN
+    parent_identity: P7-E5-CZ-ABSORB-COLD-RAMP11692 active-1000 paired case/data
+    required_horizon: 500 active iterations after 50-iteration smoke
+    evidence_contract: shared turbulence-family contract; Kato-Launder readback and full phase/source histories
+    status: NOT_RUN
+    completion_requirement: >-
+      Enable only Kato-Launder production treatment, prove the delta by
+      readback, complete the attached 500-active-iteration discovery evidence,
+      and write paired results with core figures.
+  - order: 8
+    setup_id: P71A-T3-SCALABLE-WALL-FUNCTIONS
+    candidate_id: C2-T3-SCALABLE
+    origin: human-approved-context-only
+    authority: direct human phase-loop invocation
+    gate_linkage: G0 / DISCOVERY_DESIGN extension
+    setup_path: turbulence-family/t3-scalable-wall-functions/setup.md
+    lifecycle_role: discovery
+    required_gate: DISCOVERY_DESIGN
+    parent_identity: P7-E5-CZ-ABSORB-COLD-RAMP11692 active-1000 paired case/data
+    required_horizon: 500 active iterations after 50-iteration smoke
+    evidence_contract: shared turbulence-family contract; wall/y-plus prerequisite and full phase/source histories
+    status: NOT_RUN
+    completion_requirement: >-
+      Inspect wall y-plus/wall-distance evidence, change only the wall
+      treatment, complete the attached 500-active-iteration discovery
+      evidence, and write paired results with core figures.
+  - order: 9
+    setup_id: P71A-T3-NON-EQUILIBRIUM-WALL-FUNCTIONS
+    candidate_id: C2-T3-NON-EQ
+    origin: human-approved-context-only
+    authority: direct human phase-loop invocation
+    gate_linkage: G0 / DISCOVERY_DESIGN extension
+    setup_path: turbulence-family/t3-non-equilibrium-wall-functions/setup.md
+    lifecycle_role: discovery
+    required_gate: DISCOVERY_DESIGN
+    parent_identity: P7-E5-CZ-ABSORB-COLD-RAMP11692 active-1000 paired case/data
+    required_horizon: 500 active iterations after 50-iteration smoke
+    evidence_contract: shared turbulence-family contract; wall/y-plus prerequisite and full phase/source histories
+    status: NOT_RUN
+    completion_requirement: >-
+      Inspect wall y-plus/wall-distance evidence, change only the wall
+      treatment, complete the attached 500-active-iteration discovery
+      evidence, and write paired results with core figures.
+  - order: 10
+    setup_id: P71A-T4-K-SECOND-ORDER
+    candidate_id: C2-T4-K2
+    origin: human-approved-context-only
+    authority: direct human phase-loop invocation
+    gate_linkage: G0 / DISCOVERY_DESIGN extension
+    setup_path: turbulence-family/t4-k-second-order/setup.md
+    lifecycle_role: discovery
+    required_gate: DISCOVERY_DESIGN
+    parent_identity: P7-E5-CZ-ABSORB-COLD-RAMP11692 active-1000 paired case/data
+    required_horizon: 500 active iterations after 50-iteration smoke
+    evidence_contract: shared turbulence-family contract; k-discretization readback and full phase/source histories
+    status: NOT_RUN
+    completion_requirement: >-
+      Change only k discretization to second-order upwind, prove the delta by
+      readback, complete the attached 500-active-iteration discovery evidence,
+      and write paired results with core figures.
+  - order: 11
+    setup_id: P71A-T4-MULTIPHASE-TURBULENCE-DISPERSION
+    candidate_id: C2-T4-DISPERSION
+    origin: human-approved-context-only
+    authority: direct human phase-loop invocation
+    gate_linkage: G0 / DISCOVERY_DESIGN extension
+    setup_path: turbulence-family/t4-multiphase-turbulence-dispersion/setup.md
+    lifecycle_role: discovery
+    required_gate: DISCOVERY_DESIGN
+    parent_identity: P7-E5-CZ-ABSORB-COLD-RAMP11692 active-1000 paired case/data
+    required_horizon: 500 active iterations after 50-iteration smoke
+    evidence_contract: shared turbulence-family contract; dispersion readback and full phase/source histories
+    status: NOT_RUN
+    completion_requirement: >-
+      Enable only multiphase turbulence dispersion in relative velocity, prove
+      the delta by readback, complete the attached 500-active-iteration
+      discovery evidence, and write paired results with core figures.
 next_required_action: >-
-  Enter Phase Loop for the finite three-item queue. Phase Loop must complete
-  parent/closure readback, prepared save/reopen, and smoke gates before solving.
+  Execute orders 4 through 11 in order on student. Keep every child attached
+  to the exact active-1000 parent, apply one declared delta only, and preserve
+  the absorber, boundaries, Mixture formulation, steady solver, numerics,
+  source, and evidence contract. Do not enter a hypothesis route or add an
+  outlet, introduce transient modelling, patch/reset/remesh/resplit, or alter
+  the restart field.

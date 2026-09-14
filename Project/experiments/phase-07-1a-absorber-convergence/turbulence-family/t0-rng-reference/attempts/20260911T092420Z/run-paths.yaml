@@ -1,0 +1,61 @@
+setup_id: P71A-T0-RNG-REFERENCE
+run_id: P71A-T0-RNG-REFERENCE-student-20260911T092420Z
+phase_id: phase-07-1a-absorber-convergence
+server:
+  ref: student@10.0.0.5
+  id: student
+  ip: 10.0.0.5
+  fluent_version: Ansys Fluent 2025 R2
+execution:
+  mode: attached-discovery
+  requested_active_iterations: 500
+  smoke_iterations: 50
+parent:
+  setup_id: P7-E5-CZ-ABSORB-COLD-RAMP11692
+  case: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneAbsorberCold\20260910T135421Z\P7-E5-CZ-ABSORB-COLD-RAMP11692\P7-E5-CZ-ABSORB-COLD-RAMP11692-active1000.cas.h5
+  data: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneAbsorberCold\20260910T135421Z\P7-E5-CZ-ABSORB-COLD-RAMP11692\P7-E5-CZ-ABSORB-COLD-RAMP11692-active1000.dat.h5
+remote:
+  run_root: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T0-RNG-REFERENCE\20260911T092420Z
+  monitor_root: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T0-RNG-REFERENCE\20260911T092420Z\monitors
+  scratch_root: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T0-RNG-REFERENCE\20260911T092420Z\scratch
+prepared:
+  case: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T0-RNG-REFERENCE\20260911T092420Z\P71A-T0-RNG-REFERENCE-prepared.cas.h5
+  data: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T0-RNG-REFERENCE\20260911T092420Z\P71A-T0-RNG-REFERENCE-prepared.dat.h5
+smoke:
+  case: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T0-RNG-REFERENCE\20260911T092420Z\P71A-T0-RNG-REFERENCE-active050.cas.h5
+  data: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T0-RNG-REFERENCE\20260911T092420Z\P71A-T0-RNG-REFERENCE-active050.dat.h5
+checkpoint:
+  case: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T0-RNG-REFERENCE\20260911T092420Z\P71A-T0-RNG-REFERENCE-active250.cas.h5
+  data: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T0-RNG-REFERENCE\20260911T092420Z\P71A-T0-RNG-REFERENCE-active250.dat.h5
+final:
+  case: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T0-RNG-REFERENCE\20260911T092420Z\P71A-T0-RNG-REFERENCE-active500.cas.h5
+  data: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T0-RNG-REFERENCE\20260911T092420Z\P71A-T0-RNG-REFERENCE-active500.dat.h5
+report_files:
+  absorb-adjacent-liquid-mass-rfile: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T0-RNG-REFERENCE\20260911T092420Z\monitors\P71A-T0-RNG-REFERENCE-absorb-adjacent-liquid-mass-rfile.out
+  absorb-broad-liquid-mass-rfile: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T0-RNG-REFERENCE\20260911T092420Z\monitors\P71A-T0-RNG-REFERENCE-absorb-broad-liquid-mass-rfile.out
+  absorb-lower-liquid-mass-rfile: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T0-RNG-REFERENCE\20260911T092420Z\monitors\P71A-T0-RNG-REFERENCE-absorb-lower-liquid-mass-rfile.out
+  absorb-lower-liquid-volume-rfile: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T0-RNG-REFERENCE\20260911T092420Z\monitors\P71A-T0-RNG-REFERENCE-absorb-lower-liquid-volume-rfile.out
+  e0-flux-mixture-bottom-rfile: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T0-RNG-REFERENCE\20260911T092420Z\monitors\P71A-T0-RNG-REFERENCE-e0-flux-mixture-bottom-rfile.out
+  e0-flux-mixture-liquidinlet-rfile: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T0-RNG-REFERENCE\20260911T092420Z\monitors\P71A-T0-RNG-REFERENCE-e0-flux-mixture-liquidinlet-rfile.out
+  e0-flux-mixture-steaminlet-rfile: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T0-RNG-REFERENCE\20260911T092420Z\monitors\P71A-T0-RNG-REFERENCE-e0-flux-mixture-steaminlet-rfile.out
+  e0-flux-mixture-steamoutlet-rfile: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T0-RNG-REFERENCE\20260911T092420Z\monitors\P71A-T0-RNG-REFERENCE-e0-flux-mixture-steamoutlet-rfile.out
+  e0-flux-phase1-bottom-rfile: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T0-RNG-REFERENCE\20260911T092420Z\monitors\P71A-T0-RNG-REFERENCE-e0-flux-phase1-bottom-rfile.out
+  e0-flux-phase1-liquidinlet-rfile: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T0-RNG-REFERENCE\20260911T092420Z\monitors\P71A-T0-RNG-REFERENCE-e0-flux-phase1-liquidinlet-rfile.out
+  e0-flux-phase1-steaminlet-rfile: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T0-RNG-REFERENCE\20260911T092420Z\monitors\P71A-T0-RNG-REFERENCE-e0-flux-phase1-steaminlet-rfile.out
+  e0-flux-phase1-steamoutlet-rfile: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T0-RNG-REFERENCE\20260911T092420Z\monitors\P71A-T0-RNG-REFERENCE-e0-flux-phase1-steamoutlet-rfile.out
+  e0-flux-phase2-bottom-rfile: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T0-RNG-REFERENCE\20260911T092420Z\monitors\P71A-T0-RNG-REFERENCE-e0-flux-phase2-bottom-rfile.out
+  e0-flux-phase2-liquidinlet-rfile: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T0-RNG-REFERENCE\20260911T092420Z\monitors\P71A-T0-RNG-REFERENCE-e0-flux-phase2-liquidinlet-rfile.out
+  e0-flux-phase2-steaminlet-rfile: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T0-RNG-REFERENCE\20260911T092420Z\monitors\P71A-T0-RNG-REFERENCE-e0-flux-phase2-steaminlet-rfile.out
+  e0-flux-phase2-steamoutlet-rfile: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T0-RNG-REFERENCE\20260911T092420Z\monitors\P71A-T0-RNG-REFERENCE-e0-flux-phase2-steamoutlet-rfile.out
+  e0-liquid-mass-total-rfile: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T0-RNG-REFERENCE\20260911T092420Z\monitors\P71A-T0-RNG-REFERENCE-e0-liquid-mass-total-rfile.out
+  e0-liquid-volume-total-rfile: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T0-RNG-REFERENCE\20260911T092420Z\monitors\P71A-T0-RNG-REFERENCE-e0-liquid-volume-total-rfile.out
+local_artifacts:
+  directory: /Users/shuheiyokkaichi/.codex/worktrees/54a7/P4P_knowledgeWiki/Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/t0-rng-reference
+  manifest: /Users/shuheiyokkaichi/.codex/worktrees/54a7/P4P_knowledgeWiki/Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/t0-rng-reference/run-manifest.json
+  residuals: /Users/shuheiyokkaichi/.codex/worktrees/54a7/P4P_knowledgeWiki/Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/t0-rng-reference/residuals.json
+  reports: /Users/shuheiyokkaichi/.codex/worktrees/54a7/P4P_knowledgeWiki/Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/t0-rng-reference/reports.json
+  transcript: /Users/shuheiyokkaichi/.codex/worktrees/54a7/P4P_knowledgeWiki/Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/t0-rng-reference/transcript.txt
+durability:
+  status: LOCAL_ONLY
+  note: Remote pair is preserved on student; no OneDrive promotion was requested by
+    this queue.

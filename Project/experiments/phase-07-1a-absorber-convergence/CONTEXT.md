@@ -2,12 +2,22 @@
 
 ## Status
 
-- **Planning state:** phase framing
+- **Planning state:** discovery evidence review
 - **Last human review:** 2026-09-11
 - **Experiment-selection authority:** human-approved-context-only
 - **Current decision:** preserve the lower cell-zone, phase-2-only absorber as
   the working liquid-removal path and begin the convergence-focused phase with
   a matched turbulence-closure comparison before considering Phase 08.
+- **Discovery execution:** the approved T0 / standard k-epsilon / realizable
+  k-epsilon queue completed in order on `student` from the exact active-1000
+  parent. All three children have paired final artifacts and bounded 500-active
+  iteration evidence. The direct human phase-loop invocation now extends the
+  same bounded queue through the staged T2-T4 turbulence-family setups.
+- **Discovery evidence decision:** the finite screen is informative but does
+  not pass a qualification/hypothesis transition. All three branches retain
+  nonstationarity, reverse flow, and broad turbulent-viscosity limiting; no
+  closure is promoted. The T2-T4 extension remains discovery-only and does not
+  authorize a hypothesis route.
 - **Steady-state boundary:** the phase remains steady-state. A transient or
   time-accurate solver branch is not an automatic fallback and is outside the
   current Phase 7.1A experiment families.
@@ -34,8 +44,8 @@ The human has now selected the contrastive family-screen structure as the
 preferred planning route because each family answers a critical, separable
 question and should identify useful failures faster than committing to one
 solver choice and tuning it extensively before comparing alternatives. This
-selects the family-level route, not yet an exact setup queue or every branch
-within each family.
+selected the family-level route; the exact first turbulence queue is now
+recorded below and complete.
 The human has now selected turbulence as the first and highest-weight family.
 The near-term work should therefore spend most of its decision effort on
 separating turbulence-closure effects from turbulence-specific numerical and
@@ -43,8 +53,9 @@ wall-treatment effects before moving to the remaining solver families.
 The human agrees with the recommended first contrast: compare the current RNG
 (k)-epsilon closure against the closest available standard or realizable
 (k)-epsilon alternative before opening SST or RSM branches. This approves the
-first turbulence direction, but the exact alternative, parent state, and
-short-horizon gate still require evidence and setup framing.
+first turbulence direction. The exact parent, closure deltas, and short-horizon
+gate were then framed and executed; the resulting evidence does not promote a
+closure or authorize SST/RSM escalation.
 
 ### Ideas raised by the human
 
@@ -55,9 +66,9 @@ short-horizon gate still require evidence and setup framing.
 | H3 | Do not promote this to Phase 08 yet. | Preserves uncertainty about whether the absorber is ultimately the right path. | selected phase boundary |
 | H4 | Stay with steady-state calculations and do not move into transient modelling. | Keeps the phase focused on finding a steady numerical branch for the selected absorber. | selected hard boundary |
 | H5 | Start with high-impact solver/model decisions, then close down to lower-impact numerical settings. | Prevents early tuning of a model family that may be fundamentally unsuitable and gives each branch a clear scientific question. | selected planning structure |
-| H6 | Use the previously proposed contrastive family screen as the fastest route to finding what works and what does not. | Makes each run answer a distinct question and preserves useful information even when a branch fails. | selected planning structure; exact first candidate pending |
-| H7 | Give turbulence first priority and substantially more weight within the family screen. | The observed failure involved (k), epsilon, and turbulent-viscosity limiting, so a deeper turbulence screen can distinguish closure effects from downstream numerical effects. | selected planning priority; exact branches pending |
-| H8 | Begin turbulence screening with the closest matched standard or realizable (k)-epsilon alternative against the RNG reference. | Isolates closure-form effects with less physical and computational change before escalating to SST or RSM. | selected first turbulence direction; exact alternative pending verification |
+| H6 | Use the previously proposed contrastive family screen as the fastest route to finding what works and what does not. | Makes each run answer a distinct question and preserves useful information even when a branch fails. | selected planning structure; first finite screen complete |
+| H7 | Give turbulence first priority and substantially more weight within the family screen. | The observed failure involved (k), epsilon, and turbulent-viscosity limiting, so a deeper turbulence screen can distinguish closure effects from downstream numerical effects. | selected planning priority; first finite screen complete |
+| H8 | Begin turbulence screening with the closest matched standard or realizable (k)-epsilon alternative against the RNG reference. | Isolates closure-form effects with less physical and computational change before escalating to SST or RSM. | first finite screen complete; no closure promoted |
 
 ### Constraints expressed by the human
 
@@ -189,9 +200,9 @@ mostly lineage and documentation details—not evidence of an unseen active
 liquid-removal mechanism.
 
 The selected active-1000 parent and finite T0/standard/realizable queue were
-approved after this audit. The queue remains non-executable until the
-independent lifecycle review passes and the implementation performs full
-prepared-parent and closure readback.
+approved after this audit. The independent lifecycle review passed, and the
+queue has now completed with full prepared-parent and closure readback for each
+child.
 
 ## Phase contract
 
@@ -233,16 +244,24 @@ A useful Phase 7.1A result must include, for each controlled branch:
 
 ## Candidate experiment pool
 
-The phase direction is selected. The human has approved the finite first
-turbulence screen, but its lifecycle execution gate remains pending.
+The phase direction is selected. The human-approved finite first turbulence
+screen has passed execution and is now at its bounded discovery-evidence gate.
 
 | ID | Origin | Controlled delta | Screening question | Required evidence | Artifact/rejection signal | Human status |
 | --- | --- | --- | --- | --- | --- | --- |
 | C1 | H5/H6 — human-directed family screen | Multiphase formulation/solver family, beginning with the current Mixture baseline and bounded steady alternatives | Is the current phase formulation the main reason the absorber branch cannot reach a steady converged field? | Model readback, phase-fraction histories, residuals, phase routing, absorber delivery, balances, vapor carryover | Alternative form cannot establish a valid steady field, changes the scientific question, or loses auditable phase/source accounting | family selected; follow-on after turbulence screen |
-| C2 | H5/H6/H7/H8 — human-directed family screen | First compare RNG (k)-ε with standard and realizable (k)-ε; then isolate RNG production/options, wall treatment, turbulence-equation order, and Mixture turbulence-dispersion coupling; defer SST/RSM escalation | Is the turbulence closure or its treatment, rather than the absorber or another coupled family, driving the (k)/ε and viscosity-limit blow-up? | Turbulence residuals, viscosity limiting, pressure/velocity field, phase balances, carryover, steady convergence, wall-treatment evidence where relevant | Added turbulence complexity worsens stability, or an apparent improvement is caused by an uncontrolled non-turbulence change | family selected; finite first screen approved, lifecycle gate pending |
-| C2-T0 | C2 — human-approved turbulence family | Use the active RNG k-epsilon absorber state as the same-parent reference | What is the reproducible baseline against which the two closure changes are judged? | Full baseline readback, residuals, turbulence limits, phase/source balances, inventories, core figures | Parent or readback mismatch; incomplete evidence; no executable comparison basis | approved first-screen control; ready for Phase Loop |
-| C2-T1-STD | C2 — human-approved turbulence family | RNG k-epsilon to standard k-epsilon only | Does the standard closure change the coupled turbulence/residual behaviour? | Same-parent closure readback, residuals, turbulence limits, phase/source balances, inventories, core figures | Any uncontrolled non-closure change; phase/source evidence lost; no valid same-parent comparison | approved first-screen branch; ready for Phase Loop |
-| C2-T1-REAL | C2 — human-approved turbulence family | RNG k-epsilon to realizable k-epsilon only | Does the realizable closure change the coupled turbulence/residual behaviour? | Same-parent closure readback, residuals, turbulence limits, phase/source balances, inventories, core figures | Any uncontrolled non-closure change; phase/source evidence lost; no valid same-parent comparison | approved first-screen branch; ready for Phase Loop |
+| C2 | H5/H6/H7/H8 — human-directed family screen | First compare RNG (k)-ε with standard and realizable (k)-ε; then isolate RNG production/options, wall treatment, turbulence-equation order, and Mixture turbulence-dispersion coupling; defer SST/RSM escalation | Is the turbulence closure or its treatment, rather than the absorber or another coupled family, driving the (k)/ε and viscosity-limit blow-up? | Turbulence residuals, viscosity limiting, pressure/velocity field, phase balances, carryover, steady convergence, wall-treatment evidence where relevant | Added turbulence complexity worsens stability, or an apparent improvement is caused by an uncontrolled non-turbulence change | first screen complete; T2-T4 extension directly human-authorized |
+| C2-T0 | C2 — human-approved turbulence family | Use the active RNG k-epsilon absorber state as the same-parent reference | What is the reproducible baseline against which the two closure changes are judged? | Full baseline readback, residuals, turbulence limits, phase/source balances, inventories, core figures | Parent or readback mismatch; incomplete evidence; no executable comparison basis | `COMPLETE_VERIFIED`; no promotion |
+| C2-T1-STD | C2 — human-approved turbulence family | RNG k-epsilon to standard k-epsilon only | Does the standard closure change the coupled turbulence/residual behaviour? | Same-parent closure readback, residuals, turbulence limits, phase/source balances, inventories, core figures | Any uncontrolled non-closure change; phase/source evidence lost; no valid same-parent comparison | `COMPLETE_VERIFIED`; no promotion |
+| C2-T1-REAL | C2 — human-approved turbulence family | RNG k-epsilon to realizable k-epsilon only | Does the realizable closure change the coupled turbulence/residual behaviour? | Same-parent closure readback, residuals, turbulence limits, phase/source balances, inventories, core figures | Any uncontrolled non-closure change; phase/source evidence lost; no valid same-parent comparison | `COMPLETE_VERIFIED`; no promotion |
+| C2-T2-PROD | C2 — direct human phase-loop extension | RNG production limiter off to on | Does limiting modeled production reduce turbulence instability without hiding phase imbalance? | One-option readback, residuals, turbulence limits, phase/source balances, inventories, core figures | queued; not run |
+| C2-T2-DIFF | C2 — direct human phase-loop extension | RNG differential viscosity on to off | Is the RNG differential-viscosity option contributing to viscosity limiting? | One-option readback, residuals, turbulence limits, phase/source balances, inventories, core figures | queued; not run |
+| C2-T2-SWIRL | C2 — direct human phase-loop extension | RNG swirl modification on to off | Is the RNG swirl option affecting the recirculating turbulence response? | One-option readback, residuals, turbulence limits, phase/source balances, inventories, core figures | queued; not run |
+| C2-T2-KATO | C2 — direct human phase-loop extension | Kato-Launder production treatment off to on | Does Kato-Launder production treatment change the strong-rotation response? | One-option readback, residuals, turbulence limits, phase/source balances, inventories, core figures | queued; not run |
+| C2-T3-SCALABLE | C2 — direct human phase-loop extension | Standard to scalable wall functions | Is the finite turbulence response sensitive to near-wall treatment? | Wall/y-plus prerequisite, wall readback, residuals, phase/source balances, inventories, core figures | queued; not run |
+| C2-T3-NON-EQ | C2 — direct human phase-loop extension | Standard to non-equilibrium wall functions | Does non-equilibrium wall treatment change recirculating/adverse-gradient response? | Wall/y-plus prerequisite, wall readback, residuals, phase/source balances, inventories, core figures | queued; not run |
+| C2-T4-K2 | C2 — direct human phase-loop extension | First- to second-order k discretization | Is first-order k acting as a stabilizer or contributing to the observed trajectory? | k-scheme readback, residuals, turbulence limits, phase/source balances, inventories, core figures | queued; not run |
+| C2-T4-DISPERSION | C2 — direct human phase-loop extension | Multiphase relative-velocity turbulence dispersion off to on | Does turbulent dispersion alter phase routing and absorber delivery? | Dispersion readback, residuals, phase routing, absorber/source balances, inventories, core figures | queued; not run |
 | C3 | H5/H6 — human-directed family screen | Steady pressure–velocity algorithm, with a selected model scaffold held fixed | Is continuity limited mainly by pressure correction and velocity coupling? | Coupling/Courant readback, continuity/momentum histories, balances, absorber delivery, warnings | No continuity improvement, immediate AMG instability, or confounded model changes | family selected; follow-on after turbulence screen |
 | C4 | H5/H6 — human-directed family screen | Spatial discretization, equation order, under-relaxation, or steady pseudo-time treatment | Can the selected model family be stabilized and then upgraded without changing its physical interpretation? | Scheme/relaxation readback, residual trajectory, order-ramp behaviour, balances, phase routing | Only an over-diffusive first-order endpoint survives, or higher order immediately re-diverges | family selected; follow-on after turbulence screen |
 | C5 | H5/H6 — human-directed family screen | Pressure-outlet reverse-flow specification, with the model and numerical scaffold fixed | Is the large reversed-flow region at the steam outlet feeding the residual instability? | Backflow readback, reversed-face behaviour, phase-resolved outlet fluxes, residuals, vapor/liquid routing | No stability improvement, or neighboring-cell backflow admits unacceptable liquid recirculation | family selected; follow-on after turbulence screen |
@@ -306,10 +325,10 @@ The intended first turbulence decision is therefore:
   confidence that closure is the main blocker and move attention to the next
   family without declaring the absorber invalid.
 
-This remains a planning structure. The closure direction, parent, and short
-screen are now human-selected, but the runnable setup contracts remain
-non-executable until the lifecycle gate passes and the implementation performs
-the required immediate closure readback.
+The broader hierarchy remains a planning structure. The closure direction,
+parent, and short screen were human-selected; the first three runnable setup
+contracts have now completed their required immediate closure readbacks. No
+later family is authorized by the finite screen.
 
 ## Expected outcomes and decision meaning
 
@@ -337,11 +356,11 @@ fraction, and the absorber source. A turbulence branch is informative only if
 those coupled quantities are recorded together.
 
 The human-reported statement that standard and other k-epsilon options were
-previously tried is useful planning prior, but no directly matched Phase 7A
-records have yet been located that are strong enough to mark those branches as
-rejected results. Historical runs from other phases are not interchangeable
-with the present absorber/geometry. Until a matched record is recovered, those
-options remain prior context rather than closed Phase 7.1A conclusions.
+previously tried remains useful historical planning context, but the matched
+Phase 7.1A T0/standard/realizable records are now the current evidence. They
+show closure-dependent finite trajectories without a stationary or qualified
+branch; historical runs from other phases remain non-interchangeable with the
+present absorber/geometry.
 
 ## Approved screening campaign
 
@@ -352,11 +371,38 @@ records for the reference, closure, RNG-option, wall-treatment,
 turbulence-equation, and multiphase-dispersion branches.
 
 The finite first screen of T0 RNG reference, standard k-epsilon, and realizable
-k-epsilon is human-approved and recorded as a draft queue in
-[phase-state.yaml](phase-state.yaml). The queue uses the active-1000 absorber
-parent in [parent-reference.md](turbulence-family/parent-reference.md).
-It remains non-executable until the independent lifecycle review passes and
-each child performs its required prepared readback.
+k-epsilon was human-approved, passed the lifecycle review, and has now been
+executed in order. The direct human phase-loop invocation now extends the
+queue through the staged T2-T4 packets. The queue uses the active-1000 absorber
+parent in [parent-reference.md](turbulence-family/parent-reference.md). Each
+child must perform the required complete parent readback, single declared
+delta, save/reopen, smoke test, 500-active attached solve, and evidence
+extraction.
+
+## Discovery execution and evidence outcome
+
+The three results are recorded at:
+
+- [T0 RNG reference](turbulence-family/t0-rng-reference/results.md)
+- [T1 standard k-epsilon](turbulence-family/t1-standard-kepsilon/results.md)
+- [T1 realizable k-epsilon](turbulence-family/t1-realizable-kepsilon/results.md)
+
+The exact parent case/data hashes were read before each mutation as
+`cd7f27b45435b0c381f9f01bc02e7a3bce3655fbd6269175aab60c262c4c29d3` and
+`16b77042d1d62eb3a56aee1b01aee1bfa9fadf96a94f3c3804c6eab12705268b`. The
+active source readback remained `-116.9200000000002 kg/s` on
+`p7-e5-lower-y010` for the three successful children. No child introduced an
+outlet, transient model, patch, reset, remesh, resplit, or restart-field
+alteration.
+
+The family comparison shows closure-dependent finite trajectories, but none is
+stationary or numerically qualified over the short horizon. Continuity,
+inventory drift, reverse flow, and viscosity limiting remain coupled concerns;
+the selected-cell histories also do not provide the planned contour-level
+spatial evidence. Therefore `DISCOVERY_EXECUTION` passes while
+`DISCOVERY_EVIDENCE` remains blocked for a hypothesis/qualification route.
+The first realizable preflight blocker and its corrected fresh-parent retry are
+preserved under [the realizable attempts directory](turbulence-family/t1-realizable-kepsilon/attempts/).
 
 ## Conditional qualification path
 
@@ -384,8 +430,9 @@ This is a named conditional path, not an authorization to run it.
 ## Decision gates
 
 The independent lifecycle review passed for the finite first-screen queue on
-2026-09-11. The queue is now ready to enter Phase Loop; this does not establish
-that any setup has run or that the turbulence family will qualify.
+2026-09-11. The direct human phase-loop invocation now extends execution to
+the staged T2-T4 contracts; this remains discovery-only and does not establish
+that any closure or turbulence treatment qualifies.
 
 ### G0 — Phase 7.1A candidate framing
 
@@ -395,10 +442,10 @@ that any setup has run or that the turbulence family will qualify.
 - **Decision condition:** the candidate changes one declared non-absorber
   treatment and can distinguish residual convergence from source-dominated or
   globally cancelled mass balance.
-- **Allowed next action:** enter Phase Loop with the three paired setup packets
-  listed below. Phase Loop must still verify the exact parent, read back the
-  complete active state, apply only the declared closure delta, save/reopen,
-  and smoke-test each child before solving.
+- **Allowed next action:** this gate allowed the original three packets and,
+  by direct human phase-loop invocation, the eight staged T2-T4 packets listed
+  below to enter the attached discovery queue. Every item must still satisfy
+  exact-parent, one-delta, save/reopen, smoke, horizon, and evidence gates.
 - **Not established by this gate:** absorber physical validity, steady-state
   qualification, or Phase 08 readiness.
 - **Human-return condition:** an option requires changing the absorber
@@ -415,6 +462,14 @@ Phase Loop from this context:
 | 1 | turbulence-family/t0-rng-reference/setup.md | C2-T0 | discovery-reference | DISCOVERY_DESIGN |
 | 2 | turbulence-family/t1-standard-kepsilon/setup.md | C2-T1-STD | discovery | DISCOVERY_DESIGN |
 | 3 | turbulence-family/t1-realizable-kepsilon/setup.md | C2-T1-REAL | discovery | DISCOVERY_DESIGN |
+| 4 | turbulence-family/t2-rng-production-limiter/setup.md | C2-T2-PROD | discovery | DISCOVERY_DESIGN |
+| 5 | turbulence-family/t2-rng-differential-viscosity-off/setup.md | C2-T2-DIFF | discovery | DISCOVERY_DESIGN |
+| 6 | turbulence-family/t2-rng-swirl-off/setup.md | C2-T2-SWIRL | discovery | DISCOVERY_DESIGN |
+| 7 | turbulence-family/t2-rng-kato-launder/setup.md | C2-T2-KATO | discovery | DISCOVERY_DESIGN |
+| 8 | turbulence-family/t3-scalable-wall-functions/setup.md | C2-T3-SCALABLE | discovery | DISCOVERY_DESIGN |
+| 9 | turbulence-family/t3-non-equilibrium-wall-functions/setup.md | C2-T3-NON-EQ | discovery | DISCOVERY_DESIGN |
+| 10 | turbulence-family/t4-k-second-order/setup.md | C2-T4-K2 | discovery | DISCOVERY_DESIGN |
+| 11 | turbulence-family/t4-multiphase-turbulence-dispersion/setup.md | C2-T4-DISPERSION | discovery | DISCOVERY_DESIGN |
 
 ## Autonomous recovery and handoff rules
 

@@ -2,14 +2,14 @@
 
 | Field | Value |
 | --- | --- |
-| Status | PLANNING_DRAFT_NOT_EXECUTABLE |
+| Status | READY_FOR_PHASE_LOOP |
 | Lifecycle role | Discovery turbulence-production sensitivity |
 | Phase context | [Phase 7.1A CONTEXT](../../CONTEXT.md) |
 | Baseline | [Active Fluent baseline](../../baseline-setup-record.md) |
 | Parent identity | P7-E5-CZ-ABSORB-COLD-RAMP11692 active-1000 pair; see [parent reference](../parent-reference.md) |
 | Novelty | NEW turbulence-production sensitivity |
 | Controlled delta | Kato-Launder production treatment off to on |
-| Run authorization | None |
+| Run authorization | Direct human phase-loop invocation on 2026-09-11 |
 
 ## Question
 

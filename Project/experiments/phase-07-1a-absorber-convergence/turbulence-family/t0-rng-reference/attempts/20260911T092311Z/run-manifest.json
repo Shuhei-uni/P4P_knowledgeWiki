@@ -1,0 +1,48 @@
+{
+  "status": "BLOCKED",
+  "setup_id": "P71A-T0-RNG-REFERENCE",
+  "candidate_id": "C2-T0",
+  "run_id": "P71A-T0-RNG-REFERENCE-student-20260911T092311Z",
+  "family": "phase-07-1a-turbulence-family",
+  "mode": "attached-discovery",
+  "server_id": "student",
+  "server_ref": "student@10.0.0.5",
+  "fluent_version_expected": "Ansys Fluent 2025 R2",
+  "parent_setup_id": "P7-E5-CZ-ABSORB-COLD-RAMP11692",
+  "parent_case": "C:\\Users\\Shuhei Yokkaichi\\Documents\\FluentRuns\\Phase07\\CellZoneAbsorberCold\\20260910T135421Z\\P7-E5-CZ-ABSORB-COLD-RAMP11692\\P7-E5-CZ-ABSORB-COLD-RAMP11692-active1000.cas.h5",
+  "parent_data": "C:\\Users\\Shuhei Yokkaichi\\Documents\\FluentRuns\\Phase07\\CellZoneAbsorberCold\\20260910T135421Z\\P7-E5-CZ-ABSORB-COLD-RAMP11692\\P7-E5-CZ-ABSORB-COLD-RAMP11692-active1000.dat.h5",
+  "parent_state": "active-1000",
+  "controlled_delta": "none",
+  "requested_closure": "rng",
+  "requested_active_iterations": 500,
+  "smoke_iterations": 50,
+  "restart_field_mutation": "none; no initialization, patch, reset, remesh, or resplit",
+  "remote_run_root": "C:\\Users\\Shuhei Yokkaichi\\Documents\\FluentRuns\\Phase07\\Phase71A\\TurbulenceFamily\\P71A-T0-RNG-REFERENCE\\20260911T092311Z",
+  "artifact_paths": {
+    "prepared_case": "C:\\Users\\Shuhei Yokkaichi\\Documents\\FluentRuns\\Phase07\\Phase71A\\TurbulenceFamily\\P71A-T0-RNG-REFERENCE\\20260911T092311Z\\P71A-T0-RNG-REFERENCE-prepared.cas.h5",
+    "prepared_data": "C:\\Users\\Shuhei Yokkaichi\\Documents\\FluentRuns\\Phase07\\Phase71A\\TurbulenceFamily\\P71A-T0-RNG-REFERENCE\\20260911T092311Z\\P71A-T0-RNG-REFERENCE-prepared.dat.h5",
+    "smoke_case": "C:\\Users\\Shuhei Yokkaichi\\Documents\\FluentRuns\\Phase07\\Phase71A\\TurbulenceFamily\\P71A-T0-RNG-REFERENCE\\20260911T092311Z\\P71A-T0-RNG-REFERENCE-active050.cas.h5",
+    "smoke_data": "C:\\Users\\Shuhei Yokkaichi\\Documents\\FluentRuns\\Phase07\\Phase71A\\TurbulenceFamily\\P71A-T0-RNG-REFERENCE\\20260911T092311Z\\P71A-T0-RNG-REFERENCE-active050.dat.h5",
+    "checkpoint_case": "C:\\Users\\Shuhei Yokkaichi\\Documents\\FluentRuns\\Phase07\\Phase71A\\TurbulenceFamily\\P71A-T0-RNG-REFERENCE\\20260911T092311Z\\P71A-T0-RNG-REFERENCE-active250.cas.h5",
+    "checkpoint_data": "C:\\Users\\Shuhei Yokkaichi\\Documents\\FluentRuns\\Phase07\\Phase71A\\TurbulenceFamily\\P71A-T0-RNG-REFERENCE\\20260911T092311Z\\P71A-T0-RNG-REFERENCE-active250.dat.h5",
+    "final_case": "C:\\Users\\Shuhei Yokkaichi\\Documents\\FluentRuns\\Phase07\\Phase71A\\TurbulenceFamily\\P71A-T0-RNG-REFERENCE\\20260911T092311Z\\P71A-T0-RNG-REFERENCE-active500.cas.h5",
+    "final_data": "C:\\Users\\Shuhei Yokkaichi\\Documents\\FluentRuns\\Phase07\\Phase71A\\TurbulenceFamily\\P71A-T0-RNG-REFERENCE\\20260911T092311Z\\P71A-T0-RNG-REFERENCE-active500.dat.h5",
+    "monitor_root": "C:\\Users\\Shuhei Yokkaichi\\Documents\\FluentRuns\\Phase07\\Phase71A\\TurbulenceFamily\\P71A-T0-RNG-REFERENCE\\20260911T092311Z\\monitors",
+    "scratch_root": "C:\\Users\\Shuhei Yokkaichi\\Documents\\FluentRuns\\Phase07\\Phase71A\\TurbulenceFamily\\P71A-T0-RNG-REFERENCE\\20260911T092311Z\\scratch"
+  },
+  "events": [],
+  "parent_sha256": {
+    "case": "cd7f27b45435b0c381f9f01bc02e7a3bce3655fbd6269175aab60c262c4c29d3",
+    "data": "16b77042d1d62eb3a56aee1b01aee1bfa9fadf96a94f3c3804c6eab12705268b"
+  },
+  "error": "RuntimeError: Green-Gauss node-based gradient is not proven",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/shuheiyokkaichi/.codex/worktrees/54a7/P4P_knowledgeWiki/PyAnsys/scripts/setup/run_p71a_turbulence_closure.py\", line 467, in main\n    validate_parent_readback(parent, \"rng\")\n  File \"/Users/shuheiyokkaichi/.codex/worktrees/54a7/P4P_knowledgeWiki/PyAnsys/scripts/setup/run_p71a_turbulence_closure.py\", line 233, in validate_parent_readback\n    raise RuntimeError(\"Green-Gauss node-based gradient is not proven\")\nRuntimeError: Green-Gauss node-based gradient is not proven\n",
+  "last_live_clock": {
+    "iteration": {
+      "error": "RuntimeError: An error occurred in the server while evaluating the Scheme expression"
+    },
+    "current-iteration": 1556,
+    "number-of-iterations": 10,
+    "iterating": false
+  }
+}

@@ -1,0 +1,169 @@
+{
+  "kind": "phase71a_turbulence_closure_analysis",
+  "setup_id": "P71A-T1-STANDARD-KEPSILON",
+  "run_id": "P71A-T1-STANDARD-KEPSILON-student-20260911T094339Z",
+  "manifest_status": "COMPLETE",
+  "requested_active_iterations": 500,
+  "achieved_active_iterations": 500,
+  "controlled_delta": "rng to standard k-epsilon",
+  "parent_setup_id": "P7-E5-CZ-ABSORB-COLD-RAMP11692",
+  "parent_sha256": {
+    "case": "cd7f27b45435b0c381f9f01bc02e7a3bce3655fbd6269175aab60c262c4c29d3",
+    "data": "16b77042d1d62eb3a56aee1b01aee1bfa9fadf96a94f3c3804c6eab12705268b"
+  },
+  "report_count": 18,
+  "report_points": [
+    501
+  ],
+  "residual_point_count": 501,
+  "late_window_definition": "last half of each complete finite history; raw histories retained",
+  "late_window_statistics": {
+    "total_liquid_mass_kg": {
+      "points": 251,
+      "iteration_window": [
+        1250,
+        1500
+      ],
+      "first": 982.7199332191119,
+      "last": 1164.478028789131,
+      "minimum": 982.7199332191119,
+      "maximum": 1164.478028789131,
+      "mean": 1057.7022878242333,
+      "range": 181.75809557001912,
+      "slope_per_native_iteration": 0.7284634215707542
+    },
+    "total_liquid_volume_m3": {
+      "points": 251,
+      "iteration_window": [
+        1250,
+        1500
+      ],
+      "first": 1.115192696169977,
+      "last": 1.321452174377011,
+      "minimum": 1.115192696169977,
+      "maximum": 1.321452174377011,
+      "mean": 1.200282833624818,
+      "range": 0.20625947820703394,
+      "slope_per_native_iteration": 0.0008266618592965037
+    },
+    "lower_liquid_mass_kg": {
+      "points": 251,
+      "iteration_window": [
+        1250,
+        1500
+      ],
+      "first": 0.0,
+      "last": 0.0,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "mean": 0.0,
+      "range": 0.0,
+      "slope_per_native_iteration": 0.0
+    },
+    "adjacent_liquid_mass_kg": {
+      "points": 251,
+      "iteration_window": [
+        1250,
+        1500
+      ],
+      "first": 0.002509733496035805,
+      "last": 0.001106987664938054,
+      "minimum": 0.001106987664938054,
+      "maximum": 0.002509733496035805,
+      "mean": 0.0018462699834701267,
+      "range": 0.001402745831097751,
+      "slope_per_native_iteration": -4.603264857878948e-06
+    },
+    "broad_liquid_mass_kg": {
+      "points": 251,
+      "iteration_window": [
+        1250,
+        1500
+      ],
+      "first": 0.01138208699822298,
+      "last": 0.004981772431470918,
+      "minimum": 0.004981772431470918,
+      "maximum": 0.03283307658601786,
+      "mean": 0.011820185494043785,
+      "range": 0.027851304154546945,
+      "slope_per_native_iteration": 2.2980742268423453e-05
+    },
+    "phase2_net_without_absorber_kg_s": {
+      "points": 251,
+      "iteration_window": [
+        1250,
+        1500
+      ],
+      "first": 116.46948933629689,
+      "last": 116.3749214517312,
+      "minimum": 115.55745149692648,
+      "maximum": 116.46948933629689,
+      "mean": 115.92009824566264,
+      "range": 0.9120378393704129,
+      "slope_per_native_iteration": -0.0011328744277311117
+    },
+    "mixture_net_kg_s": {
+      "points": 251,
+      "iteration_window": [
+        1250,
+        1500
+      ],
+      "first": 116.59114984284174,
+      "last": 116.39174123533756,
+      "minimum": 115.54533557579052,
+      "maximum": 116.59114984284174,
+      "mean": 115.92010818822986,
+      "range": 1.0458142670512274,
+      "slope_per_native_iteration": -0.0016031874656477578
+    }
+  },
+  "diagnostics": {
+    "reversed_flow_messages": 500,
+    "turbulent_viscosity_limit_messages": 500,
+    "amg_divergence_messages": 0,
+    "floating_point_or_fatal_messages": 0
+  },
+  "source_readback": {
+    "available": {
+      "phase2_mass": {
+        "field": "phase-2-user-mass-source",
+        "reduction": "get_sum",
+        "integral": {
+          "Net": -116.9200000000002,
+          "p7-e5-lower-y010": -116.9200000000002
+        }
+      }
+    },
+    "errors": {}
+  },
+  "figures": {
+    "F1": {
+      "path": "Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/t1-standard-kepsilon/figures/F1-turbulence-stability-history.png",
+      "status": "core",
+      "completeness": "complete",
+      "message": "finite-horizon residual and turbulence/phase-fraction history"
+    },
+    "F2": {
+      "path": "Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/t1-standard-kepsilon/figures/F2-coupled-phase-source-balance.png",
+      "status": "core",
+      "completeness": "complete",
+      "message": "phase routing and absorber-related balance"
+    },
+    "F3": {
+      "path": "Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/t1-standard-kepsilon/figures/F3-spatial-phase-state-derived.png",
+      "status": "core",
+      "completeness": "partial",
+      "message": "selected-cell inventory histories; no spatial contours were captured"
+    }
+  },
+  "observations": [
+    "The plots describe the finite discovery horizon only; reaching the requested iteration count is not treated as convergence.",
+    "The absorber command is a controlled setting and the integrated source readback remains the required realization evidence.",
+    "F3 is derived selected-cell evidence, not a contour or field-based spatial claim."
+  ],
+  "claim_limits": [
+    "No qualification or hypothesis-route claim is made by this child.",
+    "No physical conclusion is inferred from residual or reverse-flow behaviour alone.",
+    "F3 contour evidence is unavailable because the queue captured report histories, not field contours."
+  ]
+}

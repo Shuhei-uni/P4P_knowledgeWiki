@@ -77,6 +77,19 @@ The new Phase 7.1A planning record is:
 - [Phase 7.1A convergence direction](experiments/phase-07-1a-absorber-convergence/index.md)
 - [Phase 7.1A planning context](experiments/phase-07-1a-absorber-convergence/CONTEXT.md)
 
+The approved Phase 7.1A turbulence-first finite screen is execution-complete.
+T0 RNG reference, T1 standard k-epsilon, and T1 realizable k-epsilon ran in
+order on `student` from the exact active-1000 absorber parent, each with 500
+active iterations, paired final artifacts, and plot-led evidence. The closures
+produced distinct finite trajectories, but all retained nonstationarity,
+reverse flow, and broad turbulent-viscosity limiting; no branch is qualified
+or promoted. The direct-human T2-T4 extension queue is active in orders 4-11.
+Order 4, RNG production limiter, is recorded as `BLOCKED_AUTONOMOUS` after
+AMG divergence and floating-point exceptions at active 250; orders 5-11 have
+not run. The discovery-evidence gate remains blocked for a hypothesis route,
+and any continuation must preserve the exact parent and the queue's one-delta
+contract.
+
 For
 Andy's
 Phase 7b, a function-based ideal
@@ -143,12 +156,14 @@ steady state. A standing pool is explicitly not required in Phase 7b.
 
 ## What remains unresolved?
 
-- for Shuhei's Phase 7.1A, whether the selected lower cell-zone absorber can
-  reach credible scaled-residual and continuity convergence while preserving
-  bottom-only liquid removal and negligible direct vapor absorption;
-- for Shuhei's Phase 7.1A, which numerical, pressure-coupling, turbulence, or
-  phase-treatment change is responsible for improving or degrading residual
-  behaviour when changed one at a time;
+- for Shuhei's Phase 7.1A, whether any later, separately authorized numerical
+  treatment can improve the selected lower cell-zone absorber's scaled-residual
+  and continuity behaviour while preserving bottom-only liquid removal and
+  negligible direct vapor absorption;
+- for Shuhei's Phase 7.1A, whether the finite turbulence-family differences
+  persist over a declared qualification horizon or are dominated by pressure
+  coupling, outlet reverse flow, source/local conditioning, or equation
+  treatment;
 - for Andy's Phase 7b, the exact full-geometry mesh/parent, collector location and extent, and
   treatment of the former brine outlet;
 - whether liquid reaches the collector and can be removed without unacceptable
@@ -164,8 +179,14 @@ steady state. A standing pool is explicitly not required in Phase 7b.
 lifecycle record is retained as historical evidence rather than silently
 upgraded to a completed physical validation.
 
-Phase 7.1A must first define its controlled convergence screens and evidence
-gate; it does not yet have an executable setup queue. Andy's Phase 7b must
+Phase 7.1A's first controlled turbulence screen is complete but remains
+discovery-only: its execution gate passed, its evidence gate is blocked by
+finite nonstationarity and incomplete contour-level spatial evidence, and no
+hypothesis route is authorized. The direct-human T2-T4 extension queue remains
+active in order, with the production-limiter item blocked at active 250 and
+the remaining orders not yet run; continuation requires the same exact parent,
+readback, save/reopen, smoke-test, and one-declared-delta controls. Andy's
+Phase 7b must
 define the collector region and exact reference, then use
 `phase-grill` to sharpen the selected function-based mechanism into an
 interpretable screening experiment. The intervention, tuning, artefacts,

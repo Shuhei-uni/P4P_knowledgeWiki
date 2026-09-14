@@ -1,0 +1,2658 @@
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1000  3.6824e-01  3.4972e-04  3.3331e-04  3.6336e-04  3.8778e-03  1.2961e-02  9.6444e-03  0:00:00   50
+
+ Reversed flow on 4802 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 15999 cells 
+  1001  3.8644e-01  3.7821e-04  3.3147e-04  3.8994e-04  1.0384e-02  2.3374e-02  9.7024e-03  0:01:21   49
+
+ Reversed flow on 4795 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 17113 cells 
+  1002  3.8851e-01  3.5985e-04  3.2628e-04  3.6918e-04  9.3386e-03  1.7816e-02  9.7680e-03  0:02:30   48
+
+ Reversed flow on 4827 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 18236 cells 
+  1003  3.8660e-01  3.5380e-04  3.2394e-04  3.6138e-04  9.1584e-03  1.6645e-02  9.8338e-03  0:02:11   47
+
+ Reversed flow on 4827 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 19323 cells 
+  1004  3.8328e-01  3.5124e-04  3.2252e-04  3.5731e-04  9.0304e-03  1.6616e-02  9.8966e-03  0:01:57   46
+
+ Reversed flow on 4831 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 20391 cells 
+  1005  3.8115e-01  3.5025e-04  3.2202e-04  3.5464e-04  8.9411e-03  1.6811e-02  9.9530e-03  0:01:45   45
+
+ Reversed flow on 4825 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 21530 cells 
+  1006  3.7954e-01  3.4990e-04  3.2157e-04  3.5223e-04  8.8283e-03  1.6875e-02  1.0006e-02  0:01:35   44
+
+ Reversed flow on 4805 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 22834 cells 
+  1007  3.7932e-01  3.4957e-04  3.2117e-04  3.4978e-04  8.6657e-03  1.6873e-02  1.0063e-02  0:01:27   43
+
+ Reversed flow on 4813 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 24144 cells 
+  1008  3.7775e-01  3.4968e-04  3.2110e-04  3.4835e-04  8.6168e-03  1.7190e-02  1.0115e-02  0:01:20   42
+
+ Reversed flow on 4792 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 25603 cells 
+  1009  3.7741e-01  3.5056e-04  3.2119e-04  3.4756e-04  8.6143e-03  1.7810e-02  1.0154e-02  0:01:16   41
+
+ Reversed flow on 4770 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 27009 cells 
+  1010  3.7657e-01  3.5087e-04  3.2041e-04  3.4652e-04  8.5171e-03  1.7976e-02  1.0189e-02  0:01:11   40
+
+ Reversed flow on 4760 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 28339 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1011  3.7527e-01  3.5064e-04  3.1968e-04  3.4511e-04  8.3485e-03  1.8000e-02  1.0225e-02  0:01:07   39
+
+ Reversed flow on 4727 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 29673 cells 
+  1012  3.7422e-01  3.5036e-04  3.1936e-04  3.4437e-04  8.1723e-03  1.7923e-02  1.0271e-02  0:01:03   38
+
+ Reversed flow on 4720 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 30980 cells 
+  1013  3.7270e-01  3.4976e-04  3.1869e-04  3.4326e-04  7.9534e-03  1.7783e-02  1.0314e-02  0:01:01   37
+
+ Reversed flow on 4694 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 32271 cells 
+  1014  3.7057e-01  3.4934e-04  3.1828e-04  3.4221e-04  7.6997e-03  1.7589e-02  1.0363e-02  0:00:58   36
+
+ Reversed flow on 4702 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 33558 cells 
+  1015  3.6826e-01  3.4782e-04  3.1842e-04  3.4140e-04  7.4447e-03  1.7322e-02  1.0410e-02  0:00:55   35
+
+ Reversed flow on 4672 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 34898 cells 
+  1016  3.6592e-01  3.4639e-04  3.1902e-04  3.4203e-04  7.3198e-03  1.7522e-02  1.0457e-02  0:00:53   34
+
+ Reversed flow on 4662 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 36133 cells 
+  1017  3.6322e-01  3.4445e-04  3.1934e-04  3.4219e-04  7.0687e-03  1.7306e-02  1.0512e-02  0:00:54   33
+
+ Reversed flow on 4631 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 37253 cells 
+  1018  3.6055e-01  3.4333e-04  3.2019e-04  3.4260e-04  6.8429e-03  1.7099e-02  1.0581e-02  0:00:52   32
+
+ Reversed flow on 4622 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 38322 cells 
+  1019  3.5758e-01  3.4205e-04  3.2070e-04  3.4373e-04  6.5682e-03  1.6906e-02  1.0653e-02  0:00:49   31
+
+ Reversed flow on 4628 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 39381 cells 
+  1020  3.5433e-01  3.4085e-04  3.2148e-04  3.4529e-04  6.3290e-03  1.6679e-02  1.0737e-02  0:00:47   30
+
+ Reversed flow on 4640 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 40478 cells 
+  1021  3.5148e-01  3.4060e-04  3.2310e-04  3.4819e-04  6.2295e-03  1.6750e-02  1.0821e-02  0:00:45   29
+
+ Reversed flow on 4654 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 41339 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1022  3.4834e-01  3.4024e-04  3.2420e-04  3.5068e-04  6.0528e-03  1.6491e-02  1.0904e-02  0:00:43   28
+
+ Reversed flow on 4657 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 42249 cells 
+  1023  3.4565e-01  3.4026e-04  3.2535e-04  3.5259e-04  5.8478e-03  1.6187e-02  1.0986e-02  0:00:41   27
+
+ Reversed flow on 4674 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 43234 cells 
+  1024  3.4312e-01  3.4073e-04  3.2692e-04  3.5450e-04  5.6776e-03  1.6010e-02  1.1062e-02  0:00:39   26
+
+ Reversed flow on 4670 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 44373 cells 
+  1025  3.4137e-01  3.4182e-04  3.2901e-04  3.5655e-04  5.5238e-03  1.5825e-02  1.1137e-02  0:00:37   25
+
+ Reversed flow on 4666 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 45596 cells 
+  1026  3.3939e-01  3.4373e-04  3.3182e-04  3.5887e-04  5.4204e-03  1.5787e-02  1.1206e-02  0:00:36   24
+
+ Reversed flow on 4682 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 46918 cells 
+  1027  3.3789e-01  3.4722e-04  3.3517e-04  3.6134e-04  5.3839e-03  1.6001e-02  1.1283e-02  0:00:35   23
+
+ Reversed flow on 4672 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 48522 cells 
+  1028  3.3620e-01  3.5129e-04  3.3875e-04  3.6308e-04  5.3156e-03  1.6065e-02  1.1358e-02  0:00:34   22
+
+ Reversed flow on 4672 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 50523 cells 
+  1029  3.3461e-01  3.5607e-04  3.4232e-04  3.6392e-04  5.2061e-03  1.6059e-02  1.1431e-02  0:00:32   21
+
+ Reversed flow on 4670 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 52663 cells 
+  1030  3.3309e-01  3.6247e-04  3.4627e-04  3.6535e-04  5.1711e-03  1.6073e-02  1.1506e-02  0:00:30   20
+
+ Reversed flow on 4667 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 55015 cells 
+  1031  3.3228e-01  3.6955e-04  3.5042e-04  3.6662e-04  5.1231e-03  1.6068e-02  1.1588e-02  0:00:28   19
+
+ Reversed flow on 4664 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 57709 cells 
+  1032  3.3209e-01  3.7764e-04  3.5429e-04  3.6714e-04  5.0375e-03  1.5964e-02  1.1672e-02  0:00:27   18
+
+ Reversed flow on 4652 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 60445 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1033  3.3176e-01  3.8720e-04  3.5862e-04  3.6881e-04  5.0615e-03  1.6056e-02  1.1746e-02  0:00:25   17
+
+ Reversed flow on 4664 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 63258 cells 
+  1034  3.3210e-01  3.9789e-04  3.6327e-04  3.7075e-04  5.1052e-03  1.6223e-02  1.1811e-02  0:00:23   16
+
+ Reversed flow on 4650 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 66052 cells 
+  1035  3.3238e-01  4.0859e-04  3.6770e-04  3.7334e-04  5.1261e-03  1.6355e-02  1.1886e-02  0:00:22   15
+
+ Reversed flow on 4660 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 68583 cells 
+  1036  3.3323e-01  4.1882e-04  3.7226e-04  3.7670e-04  5.1023e-03  1.6150e-02  1.1957e-02  0:00:22   14
+
+ Reversed flow on 4649 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 70974 cells 
+  1037  3.3458e-01  4.2903e-04  3.7732e-04  3.8191e-04  5.1154e-03  1.5925e-02  1.2014e-02  0:00:20   13
+
+ Reversed flow on 4672 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 73033 cells 
+  1038  3.3609e-01  4.3753e-04  3.8248e-04  3.8886e-04  5.0959e-03  1.5573e-02  1.2057e-02  0:00:19   12
+
+ Reversed flow on 4670 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 75037 cells 
+  1039  3.3778e-01  4.4606e-04  3.8811e-04  3.9771e-04  5.1581e-03  1.5401e-02  1.2088e-02  0:00:17   11
+
+ Reversed flow on 4673 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 76923 cells 
+  1040  3.3888e-01  4.5201e-04  3.9360e-04  4.0898e-04  5.1824e-03  1.5116e-02  1.2117e-02  0:00:15   10
+
+ Reversed flow on 4667 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 78567 cells 
+  1041  3.4011e-01  4.5655e-04  3.9934e-04  4.2179e-04  5.1807e-03  1.4833e-02  1.2129e-02  0:00:13    9
+
+ Reversed flow on 4682 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 80070 cells 
+  1042  3.4040e-01  4.5934e-04  4.0535e-04  4.3715e-04  5.1805e-03  1.4435e-02  1.2139e-02  0:00:12    8
+
+ Reversed flow on 4682 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 81481 cells 
+  1043  3.3999e-01  4.6082e-04  4.1148e-04  4.5372e-04  5.1858e-03  1.3993e-02  1.2162e-02  0:00:10    7
+
+ Reversed flow on 4689 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 82814 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1044  3.3953e-01  4.6212e-04  4.1732e-04  4.7069e-04  5.1667e-03  1.3569e-02  1.2202e-02  0:00:09    6
+
+ Reversed flow on 4699 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 83988 cells 
+  1045  3.3956e-01  4.6368e-04  4.2342e-04  4.8777e-04  5.1420e-03  1.3090e-02  1.2260e-02  0:00:07    5
+
+ Reversed flow on 4713 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 85091 cells 
+  1046  3.3935e-01  4.6653e-04  4.2948e-04  5.0393e-04  5.1389e-03  1.2628e-02  1.2320e-02  0:00:06    4
+
+ Reversed flow on 4697 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 86128 cells 
+  1047  3.3942e-01  4.7154e-04  4.3551e-04  5.1718e-04  5.1160e-03  1.2201e-02  1.2391e-02  0:00:04    3
+
+ Reversed flow on 4717 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 87180 cells 
+  1048  3.3961e-01  4.7895e-04  4.4105e-04  5.2661e-04  5.0475e-03  1.1768e-02  1.2465e-02  0:00:03    2
+
+ Reversed flow on 4707 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 88244 cells 
+  1049  3.4015e-01  4.8951e-04  4.4659e-04  5.3308e-04  5.0271e-03  1.1466e-02  1.2541e-02  0:00:01    1
+
+ Reversed flow on 4730 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 89181 cells 
+  1050  3.4100e-01  5.0214e-04  4.5150e-04  5.3554e-04  5.0012e-03  1.1202e-02  1.2630e-02  0:00:00    0
+
+Writing to Home-Desktop-Shuhei:"C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T1-REALIZABLE-KEPSILON\20260911T100157Z\P71A-T1-REALIZABLE-KEPSILON-active050.cas.h5" in NODE0 mode and compression level 1 ...
+Grouping cells for Laplace smoothing ...
+      342609 cells,     2 zones ...
+     1647633 faces,    12 zones ...
+     1046255 nodes,     1 zone  ...
+  Done.
+Done.
+
+Writing to Home-Desktop-Shuhei:"C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T1-REALIZABLE-KEPSILON\20260911T100157Z\P71A-T1-REALIZABLE-KEPSILON-active050.dat.h5" in NODE0 mode and compression level 1 ...
+  Writing results.
+Done.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1050  3.4100e-01  5.0214e-04  4.5150e-04  5.3554e-04  5.0012e-03  1.1202e-02  1.2630e-02  0:04:53  200
+
+ Reversed flow on 4741 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 90190 cells 
+  1051  3.4162e-01  5.1667e-04  4.5621e-04  5.3550e-04  4.9954e-03  1.1007e-02  1.2723e-02  0:04:42  199
+
+ Reversed flow on 4753 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 91155 cells 
+  1052  3.4205e-01  5.3253e-04  4.6017e-04  5.3309e-04  4.9756e-03  1.0813e-02  1.2838e-02  0:04:43  198
+
+ Reversed flow on 4756 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 92105 cells 
+  1053  3.4266e-01  5.4912e-04  4.6364e-04  5.3020e-04  4.9778e-03  1.0622e-02  1.2952e-02  0:04:43  197
+
+ Reversed flow on 4762 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 93114 cells 
+  1054  3.4299e-01  5.6518e-04  4.6669e-04  5.2738e-04  4.9494e-03  1.0420e-02  1.3084e-02  0:04:43  196
+
+ Reversed flow on 4764 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 94159 cells 
+  1055  3.4351e-01  5.8012e-04  4.6892e-04  5.2557e-04  4.9174e-03  1.0183e-02  1.3195e-02  0:04:41  195
+
+ Reversed flow on 4787 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 95233 cells 
+  1056  3.4459e-01  5.9351e-04  4.7045e-04  5.2549e-04  4.9008e-03  1.0009e-02  1.3336e-02  0:04:41  194
+
+ Reversed flow on 4789 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 96348 cells 
+  1057  3.4566e-01  6.0507e-04  4.7184e-04  5.2749e-04  4.8933e-03  9.9064e-03  1.3430e-02  0:04:40  193
+
+ Reversed flow on 4796 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 97293 cells 
+  1058  3.4653e-01  6.1300e-04  4.7286e-04  5.3139e-04  4.8621e-03  9.7729e-03  1.3559e-02  0:04:38  192
+
+ Reversed flow on 4798 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 98248 cells 
+  1059  3.4741e-01  6.1831e-04  4.7365e-04  5.3773e-04  4.8376e-03  9.6606e-03  1.3662e-02  0:04:36  191
+
+ Reversed flow on 4809 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 99149 cells 
+  1060  3.4813e-01  6.2014e-04  4.7432e-04  5.4642e-04  4.8436e-03  9.6066e-03  1.3747e-02  0:04:36  190
+
+ Reversed flow on 4821 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 99846 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1061  3.4956e-01  6.1888e-04  4.7479e-04  5.5757e-04  4.8225e-03  9.5748e-03  1.3835e-02  0:04:35  189
+
+ Reversed flow on 4825 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 100480 cells 
+  1062  3.5067e-01  6.1592e-04  4.7526e-04  5.7059e-04  4.8099e-03  9.5392e-03  1.3902e-02  0:04:36  188
+
+ Reversed flow on 4826 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 101230 cells 
+  1063  3.5214e-01  6.1027e-04  4.7554e-04  5.8423e-04  4.7700e-03  9.4713e-03  1.3971e-02  0:04:39  187
+
+ Reversed flow on 4830 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 101904 cells 
+  1064  3.5397e-01  6.0513e-04  4.7595e-04  6.0001e-04  4.7611e-03  9.4296e-03  1.4005e-02  0:04:36  186
+
+ Reversed flow on 4825 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 102561 cells 
+  1065  3.5619e-01  5.9769e-04  4.7623e-04  6.1621e-04  4.7821e-03  9.4416e-03  1.4058e-02  0:04:46  185
+
+ Reversed flow on 4837 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 103185 cells 
+  1066  3.5874e-01  5.9064e-04  4.7666e-04  6.3245e-04  4.7597e-03  9.3882e-03  1.4062e-02  0:04:40  184
+
+ Reversed flow on 4849 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 103862 cells 
+  1067  3.6158e-01  5.8369e-04  4.7729e-04  6.4793e-04  4.7732e-03  9.4149e-03  1.4057e-02  0:04:37  183
+
+ Reversed flow on 4864 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 104394 cells 
+  1068  3.6340e-01  5.7766e-04  4.7836e-04  6.6157e-04  4.7709e-03  9.4008e-03  1.4023e-02  0:04:34  182
+
+ Reversed flow on 4896 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 104986 cells 
+  1069  3.6510e-01  5.7241e-04  4.7945e-04  6.7314e-04  4.7553e-03  9.4041e-03  1.3955e-02  0:04:30  181
+
+ Reversed flow on 4917 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 105558 cells 
+  1070  3.6621e-01  5.6913e-04  4.8080e-04  6.8043e-04  4.7722e-03  9.4294e-03  1.3888e-02  0:04:28  180
+
+ Reversed flow on 4939 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 106149 cells 
+  1071  3.6709e-01  5.6879e-04  4.8241e-04  6.8500e-04  4.7811e-03  9.4464e-03  1.3791e-02  0:04:26  179
+
+ Reversed flow on 4940 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 106701 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1072  3.6752e-01  5.7160e-04  4.8486e-04  6.8500e-04  4.8082e-03  9.5033e-03  1.3704e-02  0:04:23  178
+
+ Reversed flow on 4946 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 107261 cells 
+  1073  3.6761e-01  5.7754e-04  4.8708e-04  6.8184e-04  4.8239e-03  9.5610e-03  1.3604e-02  0:04:23  177
+
+ Reversed flow on 4959 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 107711 cells 
+  1074  3.6726e-01  5.8668e-04  4.9011e-04  6.7524e-04  4.8370e-03  9.6233e-03  1.3507e-02  0:04:19  176
+
+ Reversed flow on 4965 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 108213 cells 
+  1075  3.6700e-01  5.9877e-04  4.9288e-04  6.6565e-04  4.8519e-03  9.6339e-03  1.3432e-02  0:04:17  175
+
+ Reversed flow on 4974 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 108748 cells 
+  1076  3.6694e-01  6.1379e-04  4.9627e-04  6.5464e-04  4.8652e-03  9.6518e-03  1.3378e-02  0:04:14  174
+
+ Reversed flow on 4992 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 109250 cells 
+  1077  3.6757e-01  6.2992e-04  4.9917e-04  6.4161e-04  4.8572e-03  9.6418e-03  1.3346e-02  0:04:10  173
+
+ Reversed flow on 5001 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 109698 cells 
+  1078  3.6826e-01  6.4785e-04  5.0208e-04  6.3011e-04  4.8759e-03  9.7366e-03  1.3304e-02  0:04:07  172
+
+ Reversed flow on 5006 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 110190 cells 
+  1079  3.6971e-01  6.6614e-04  5.0516e-04  6.1966e-04  4.9910e-03  1.0039e-02  1.3266e-02  0:04:05  171
+
+ Reversed flow on 5016 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 110651 cells 
+  1080  3.7168e-01  6.8450e-04  5.0792e-04  6.1085e-04  5.1394e-03  1.0439e-02  1.3240e-02  0:04:03  170
+
+ Reversed flow on 5036 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 111132 cells 
+  1081  3.7355e-01  7.0031e-04  5.1030e-04  6.0392e-04  5.2053e-03  1.0618e-02  1.3211e-02  0:04:01  169
+
+ Reversed flow on 5057 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 111551 cells 
+  1082  3.7517e-01  7.1131e-04  5.1189e-04  5.9933e-04  5.1090e-03  1.0260e-02  1.3193e-02  0:04:01  168
+
+ Reversed flow on 5061 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 111992 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1083  3.7697e-01  7.1810e-04  5.1338e-04  5.9715e-04  5.0018e-03  9.7492e-03  1.3185e-02  0:04:01  167
+
+ Reversed flow on 5072 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 112459 cells 
+  1084  3.7814e-01  7.2049e-04  5.1451e-04  5.9817e-04  4.8560e-03  9.2077e-03  1.3164e-02  0:04:14  166
+
+ Reversed flow on 5076 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 112892 cells 
+  1085  3.8000e-01  7.1831e-04  5.1446e-04  6.0370e-04  4.7319e-03  8.7560e-03  1.3186e-02  0:04:21  165
+
+ Reversed flow on 5072 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 113394 cells 
+  1086  3.8222e-01  7.1276e-04  5.1430e-04  6.1232e-04  4.6619e-03  8.4611e-03  1.3189e-02  0:04:22  164
+
+ Reversed flow on 5081 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 113869 cells 
+  1087  3.8457e-01  7.0323e-04  5.1398e-04  6.2432e-04  4.5841e-03  8.2538e-03  1.3202e-02  0:04:15  163
+
+ Reversed flow on 5082 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114404 cells 
+  1088  3.8622e-01  6.9052e-04  5.1326e-04  6.3990e-04  4.5486e-03  8.1014e-03  1.3235e-02  0:04:10  162
+
+ Reversed flow on 5095 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114958 cells 
+  1089  3.8767e-01  6.7602e-04  5.1247e-04  6.5795e-04  4.5300e-03  7.9854e-03  1.3260e-02  0:04:04  161
+
+ Reversed flow on 5105 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115460 cells 
+  1090  3.8924e-01  6.6125e-04  5.1156e-04  6.7724e-04  4.5163e-03  7.9045e-03  1.3287e-02  0:04:00  160
+
+ Reversed flow on 5115 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115869 cells 
+  1091  3.9120e-01  6.4562e-04  5.1021e-04  6.9520e-04  4.4913e-03  7.7989e-03  1.3311e-02  0:03:58  159
+
+ Reversed flow on 5109 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 116331 cells 
+  1092  3.9272e-01  6.3133e-04  5.0948e-04  7.1254e-04  4.4825e-03  7.7258e-03  1.3308e-02  0:04:03  158
+
+ Reversed flow on 5113 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 116796 cells 
+  1093  3.9484e-01  6.1933e-04  5.0848e-04  7.2742e-04  4.4850e-03  7.6383e-03  1.3300e-02  0:04:08  157
+
+ Reversed flow on 5117 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 117180 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1094  3.9711e-01  6.1043e-04  5.0763e-04  7.3846e-04  4.4972e-03  7.5797e-03  1.3268e-02  0:04:18  156
+
+ Reversed flow on 5114 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 117581 cells 
+  1095  3.9938e-01  6.0494e-04  5.0709e-04  7.4551e-04  4.4661e-03  7.4811e-03  1.3203e-02  0:04:18  155
+
+ Reversed flow on 5109 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 117932 cells 
+  1096  4.0134e-01  6.0359e-04  5.0692e-04  7.4787e-04  4.4787e-03  7.4314e-03  1.3141e-02  0:04:12  154
+
+ Reversed flow on 5109 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118257 cells 
+  1097  4.0295e-01  6.0639e-04  5.0636e-04  7.4554e-04  4.4658e-03  7.3469e-03  1.3050e-02  0:04:09  153
+
+ Reversed flow on 5108 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118632 cells 
+  1098  4.0508e-01  6.1350e-04  5.0615e-04  7.3828e-04  4.4629e-03  7.2598e-03  1.2947e-02  0:04:04  152
+
+ Reversed flow on 5102 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118932 cells 
+  1099  4.0647e-01  6.2429e-04  5.0641e-04  7.2657e-04  4.4538e-03  7.1909e-03  1.2851e-02  0:03:59  151
+
+ Reversed flow on 5101 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 119276 cells 
+  1100  4.0794e-01  6.3815e-04  5.0634e-04  7.1114e-04  4.4480e-03  7.0993e-03  1.2751e-02  0:04:00  150
+
+ Reversed flow on 5099 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 119579 cells 
+  1101  4.1015e-01  6.5358e-04  5.0633e-04  6.9372e-04  4.4288e-03  7.0212e-03  1.2624e-02  0:03:57  149
+
+ Reversed flow on 5097 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 119883 cells 
+  1102  4.1151e-01  6.6979e-04  5.0682e-04  6.7463e-04  4.4400e-03  6.9607e-03  1.2524e-02  0:03:54  148
+
+ Reversed flow on 5102 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 120131 cells 
+  1103  4.1252e-01  6.8629e-04  5.0694e-04  6.5502e-04  4.4021e-03  6.8757e-03  1.2422e-02  0:04:06  147
+
+ Reversed flow on 5101 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 120401 cells 
+  1104  4.1365e-01  7.0112e-04  5.0712e-04  6.3678e-04  4.3911e-03  6.8136e-03  1.2309e-02  0:04:01  146
+
+ Reversed flow on 5099 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 120729 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1105  4.1488e-01  7.1373e-04  5.0781e-04  6.1966e-04  4.3624e-03  6.7624e-03  1.2221e-02  0:03:59  145
+
+ Reversed flow on 5094 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 121037 cells 
+  1106  4.1495e-01  7.2258e-04  5.0849e-04  6.0678e-04  4.3489e-03  6.7271e-03  1.2147e-02  0:03:55  144
+
+ Reversed flow on 5096 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 121219 cells 
+  1107  4.1501e-01  7.2722e-04  5.0901e-04  5.9804e-04  4.3496e-03  6.7093e-03  1.2075e-02  0:03:48  143
+
+ Reversed flow on 5098 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 121368 cells 
+  1108  4.1455e-01  7.2827e-04  5.0934e-04  5.9326e-04  4.3204e-03  6.6649e-03  1.2011e-02  0:03:53  142
+
+ Reversed flow on 5106 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 121678 cells 
+  1109  4.1368e-01  7.2444e-04  5.0984e-04  5.9320e-04  4.3140e-03  6.6387e-03  1.1966e-02  0:03:46  141
+
+ Reversed flow on 5099 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 121942 cells 
+  1110  4.1242e-01  7.1678e-04  5.1001e-04  5.9740e-04  4.2998e-03  6.6003e-03  1.1921e-02  0:03:41  140
+
+ Reversed flow on 5110 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 122171 cells 
+  1111  4.1152e-01  7.0540e-04  5.1042e-04  6.0530e-04  4.3144e-03  6.6116e-03  1.1892e-02  0:03:38  139
+
+ Reversed flow on 5116 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 122360 cells 
+  1112  4.1032e-01  6.9034e-04  5.1083e-04  6.1715e-04  4.3037e-03  6.6430e-03  1.1865e-02  0:03:33  138
+
+ Reversed flow on 5119 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 122560 cells 
+  1113  4.0938e-01  6.7280e-04  5.1095e-04  6.3172e-04  4.3327e-03  6.7164e-03  1.1847e-02  0:03:32  137
+
+ Reversed flow on 5122 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 122756 cells 
+  1114  4.0908e-01  6.5403e-04  5.1143e-04  6.4814e-04  4.3388e-03  6.7664e-03  1.1845e-02  0:03:29  136
+
+ Reversed flow on 5124 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 122888 cells 
+  1115  4.0928e-01  6.3432e-04  5.1187e-04  6.6558e-04  4.3578e-03  6.8388e-03  1.1849e-02  0:03:25  135
+
+ Reversed flow on 5133 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 123080 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1116  4.0981e-01  6.1453e-04  5.1236e-04  6.8221e-04  4.3373e-03  6.8533e-03  1.1861e-02  0:03:21  134
+
+ Reversed flow on 5128 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 123332 cells 
+  1117  4.1056e-01  5.9707e-04  5.1254e-04  6.9812e-04  4.3495e-03  6.8861e-03  1.1885e-02  0:03:19  133
+
+ Reversed flow on 5126 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 123527 cells 
+  1118  4.1196e-01  5.8257e-04  5.1326e-04  7.1183e-04  4.3639e-03  6.9360e-03  1.1914e-02  0:03:17  132
+
+ Reversed flow on 5128 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 123725 cells 
+  1119  4.1389e-01  5.7267e-04  5.1417e-04  7.2273e-04  4.3805e-03  7.0135e-03  1.1968e-02  0:03:15  131
+
+ Reversed flow on 5122 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 123914 cells 
+  1120  4.1577e-01  5.6739e-04  5.1507e-04  7.3041e-04  4.4186e-03  7.1363e-03  1.2016e-02  0:03:11  130
+
+ Reversed flow on 5123 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 124113 cells 
+  1121  4.1804e-01  5.6619e-04  5.1640e-04  7.3384e-04  4.4318e-03  7.2376e-03  1.2059e-02  0:03:18  129
+
+ Reversed flow on 5128 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 124329 cells 
+  1122  4.1998e-01  5.7056e-04  5.1777e-04  7.3329e-04  4.4454e-03  7.3490e-03  1.2121e-02  0:03:13  128
+
+ Reversed flow on 5126 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 124503 cells 
+  1123  4.2208e-01  5.8052e-04  5.1983e-04  7.2917e-04  4.4714e-03  7.4823e-03  1.2172e-02  0:03:09  127
+
+ Reversed flow on 5124 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 124683 cells 
+  1124  4.2427e-01  5.9452e-04  5.2294e-04  7.2102e-04  4.4798e-03  7.6102e-03  1.2247e-02  0:03:05  126
+
+ Reversed flow on 5116 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 124840 cells 
+  1125  4.2632e-01  6.1288e-04  5.2568e-04  7.1030e-04  4.5253e-03  7.7646e-03  1.2309e-02  0:03:03  125
+
+ Reversed flow on 5104 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 124969 cells 
+  1126  4.2883e-01  6.3417e-04  5.2919e-04  6.9763e-04  4.5549e-03  7.8952e-03  1.2368e-02  0:03:01  124
+
+ Reversed flow on 5097 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 125118 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1127  4.3157e-01  6.5634e-04  5.3236e-04  6.8326e-04  4.5672e-03  7.9795e-03  1.2420e-02  0:02:58  123
+
+ Reversed flow on 5093 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 125323 cells 
+  1128  4.3439e-01  6.7846e-04  5.3525e-04  6.6786e-04  4.5976e-03  8.0644e-03  1.2455e-02  0:02:55  122
+
+ Reversed flow on 5090 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 125487 cells 
+  1129  4.3730e-01  6.9887e-04  5.3784e-04  6.5303e-04  4.6289e-03  8.1430e-03  1.2486e-02  0:02:53  121
+
+ Reversed flow on 5083 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 125649 cells 
+  1130  4.3906e-01  7.1652e-04  5.4006e-04  6.3890e-04  4.6345e-03  8.1947e-03  1.2505e-02  0:02:52  120
+
+ Reversed flow on 5065 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 125792 cells 
+  1131  4.4075e-01  7.3053e-04  5.4207e-04  6.2728e-04  4.6478e-03  8.2763e-03  1.2529e-02  0:02:50  119
+
+ Reversed flow on 5048 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 125999 cells 
+  1132  4.4360e-01  7.4040e-04  5.4336e-04  6.1883e-04  4.6692e-03  8.3427e-03  1.2537e-02  0:02:48  118
+
+ Reversed flow on 5043 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 126155 cells 
+  1133  4.4612e-01  7.4568e-04  5.4395e-04  6.1446e-04  4.6886e-03  8.3970e-03  1.2539e-02  0:02:47  117
+
+ Reversed flow on 5035 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 126302 cells 
+  1134  4.4862e-01  7.4654e-04  5.4428e-04  6.1450e-04  4.7309e-03  8.5202e-03  1.2525e-02  0:02:45  116
+
+ Reversed flow on 5026 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 126440 cells 
+  1135  4.5127e-01  7.4281e-04  5.4409e-04  6.1910e-04  4.7442e-03  8.6519e-03  1.2501e-02  0:02:44  115
+
+ Reversed flow on 5013 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 126556 cells 
+  1136  4.5366e-01  7.3485e-04  5.4378e-04  6.2742e-04  4.8038e-03  8.7669e-03  1.2462e-02  0:02:42  114
+
+ Reversed flow on 5006 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 126636 cells 
+  1137  4.5588e-01  7.2221e-04  5.4298e-04  6.3997e-04  4.8058e-03  8.8577e-03  1.2433e-02  0:02:41  113
+
+ Reversed flow on 4981 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 126695 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1138  4.5897e-01  7.0640e-04  5.4210e-04  6.5593e-04  4.8516e-03  9.0447e-03  1.2407e-02  0:02:39  112
+
+ Reversed flow on 4984 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 126695 cells 
+  1139  4.6113e-01  6.8810e-04  5.4212e-04  6.7494e-04  4.8690e-03  9.1190e-03  1.2377e-02  0:02:38  111
+
+ Reversed flow on 4978 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 126713 cells 
+  1140  4.6374e-01  6.6697e-04  5.4285e-04  6.9537e-04  4.8931e-03  9.1697e-03  1.2335e-02  0:02:45  110
+
+ Reversed flow on 4969 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 126792 cells 
+  1141  4.6559e-01  6.4511e-04  5.4447e-04  7.1546e-04  4.9144e-03  9.1880e-03  1.2299e-02  0:02:43  109
+
+ Reversed flow on 4974 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 126687 cells 
+  1142  4.6679e-01  6.2485e-04  5.4634e-04  7.3383e-04  4.9532e-03  9.3092e-03  1.2255e-02  0:02:40  108
+
+ Reversed flow on 4944 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 126663 cells 
+  1143  4.6767e-01  6.0706e-04  5.4894e-04  7.4873e-04  4.9593e-03  9.3543e-03  1.2224e-02  0:02:37  107
+
+ Reversed flow on 4937 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 126499 cells 
+  1144  4.6892e-01  5.9371e-04  5.5158e-04  7.6006e-04  4.9548e-03  9.3099e-03  1.2188e-02  0:02:35  106
+
+ Reversed flow on 4918 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 126381 cells 
+  1145  4.6937e-01  5.8457e-04  5.5451e-04  7.6743e-04  4.9757e-03  9.3499e-03  1.2140e-02  0:02:33  105
+
+ Reversed flow on 4905 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 126251 cells 
+  1146  4.6932e-01  5.8138e-04  5.5763e-04  7.7105e-04  4.9842e-03  9.4082e-03  1.2101e-02  0:02:33  104
+
+ Reversed flow on 4898 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 126130 cells 
+  1147  4.6967e-01  5.8460e-04  5.6071e-04  7.6871e-04  5.0154e-03  9.4347e-03  1.2057e-02  0:02:31  103
+
+ Reversed flow on 4890 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 126026 cells 
+  1148  4.6978e-01  5.9384e-04  5.6405e-04  7.6097e-04  5.0292e-03  9.3697e-03  1.1985e-02  0:02:29  102
+
+ Reversed flow on 4880 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 125788 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1149  4.7016e-01  6.0951e-04  5.6707e-04  7.4898e-04  5.0538e-03  9.3817e-03  1.1939e-02  0:02:27  101
+
+ Reversed flow on 4859 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 125529 cells 
+  1150  4.7166e-01  6.2962e-04  5.7090e-04  7.3293e-04  5.0623e-03  9.4111e-03  1.1885e-02  0:02:25  100
+
+ Reversed flow on 4846 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 125311 cells 
+  1151  4.7258e-01  6.5386e-04  5.7435e-04  7.1206e-04  5.0825e-03  9.4461e-03  1.1863e-02  0:02:23   99
+
+ Reversed flow on 4849 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 124991 cells 
+  1152  4.7318e-01  6.7986e-04  5.7835e-04  6.8885e-04  5.1290e-03  9.5044e-03  1.1852e-02  0:02:21   98
+
+ Reversed flow on 4841 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 124688 cells 
+  1153  4.7403e-01  7.0675e-04  5.8321e-04  6.6471e-04  5.1314e-03  9.5407e-03  1.1819e-02  0:02:23   97
+
+ Reversed flow on 4831 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 124330 cells 
+  1154  4.7558e-01  7.3354e-04  5.8825e-04  6.4202e-04  5.2073e-03  9.7353e-03  1.1862e-02  0:02:20   96
+
+ Reversed flow on 4837 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 124014 cells 
+  1155  4.7767e-01  7.5789e-04  5.9374e-04  6.2269e-04  5.2785e-03  9.9507e-03  1.1912e-02  0:02:18   95
+
+ Reversed flow on 4820 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 123648 cells 
+  1156  4.8026e-01  7.7947e-04  6.0028e-04  6.0983e-04  5.3717e-03  1.0201e-02  1.1983e-02  0:02:17   94
+
+ Reversed flow on 4820 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 123228 cells 
+  1157  4.8440e-01  7.9933e-04  6.0701e-04  6.0755e-04  5.4705e-03  1.0506e-02  1.2079e-02  0:02:15   93
+
+ Reversed flow on 4819 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 122825 cells 
+  1158  4.9056e-01  8.1704e-04  6.1416e-04  6.1496e-04  5.5862e-03  1.0797e-02  1.2166e-02  0:02:20   92
+
+ Reversed flow on 4820 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 122457 cells 
+  1159  4.9902e-01  8.3226e-04  6.2047e-04  6.3120e-04  5.7121e-03  1.0999e-02  1.2281e-02  0:02:16   91
+
+ Reversed flow on 4824 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 122059 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1160  5.1075e-01  8.4394e-04  6.2608e-04  6.5646e-04  5.8349e-03  1.1173e-02  1.2399e-02  0:02:13   90
+
+ Reversed flow on 4849 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 121699 cells 
+  1161  5.2511e-01  8.4877e-04  6.3039e-04  6.8631e-04  5.9403e-03  1.1351e-02  1.2505e-02  0:02:12   89
+
+ Reversed flow on 4851 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 121303 cells 
+  1162  5.3972e-01  8.4663e-04  6.3323e-04  7.1894e-04  6.0324e-03  1.1488e-02  1.2651e-02  0:02:10   88
+
+ Reversed flow on 4860 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 120897 cells 
+  1163  5.5169e-01  8.3816e-04  6.3468e-04  7.4965e-04  6.1322e-03  1.1610e-02  1.2759e-02  0:02:07   87
+
+ Reversed flow on 4868 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 120640 cells 
+  1164  5.6082e-01  8.2402e-04  6.3433e-04  7.7813e-04  6.2168e-03  1.1712e-02  1.2867e-02  0:02:05   86
+
+ Reversed flow on 4887 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 120319 cells 
+  1165  5.6618e-01  8.0462e-04  6.3217e-04  8.0395e-04  6.2865e-03  1.1792e-02  1.2968e-02  0:02:03   85
+
+ Reversed flow on 4907 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 119989 cells 
+  1166  5.7122e-01  7.8223e-04  6.2916e-04  8.2868e-04  6.3898e-03  1.1917e-02  1.3050e-02  0:02:01   84
+
+ Reversed flow on 4906 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 119749 cells 
+  1167  5.7554e-01  7.5834e-04  6.2561e-04  8.5126e-04  6.4386e-03  1.1955e-02  1.3129e-02  0:01:59   83
+
+ Reversed flow on 4919 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 119581 cells 
+  1168  5.7786e-01  7.3630e-04  6.2108e-04  8.7030e-04  6.4715e-03  1.1975e-02  1.3195e-02  0:01:58   82
+
+ Reversed flow on 4937 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 119421 cells 
+  1169  5.7981e-01  7.1864e-04  6.1615e-04  8.8370e-04  6.4876e-03  1.1943e-02  1.3240e-02  0:01:56   81
+
+ Reversed flow on 4945 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 119226 cells 
+  1170  5.8141e-01  7.0707e-04  6.1124e-04  8.9054e-04  6.4972e-03  1.1995e-02  1.3267e-02  0:01:54   80
+
+ Reversed flow on 4973 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 119047 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1171  5.8403e-01  7.0298e-04  6.0660e-04  8.9212e-04  6.5141e-03  1.1927e-02  1.3276e-02  0:01:52   79
+
+ Reversed flow on 4971 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118981 cells 
+  1172  5.8670e-01  7.0669e-04  6.0206e-04  8.8787e-04  6.4948e-03  1.1876e-02  1.3270e-02  0:01:51   78
+
+ Reversed flow on 4983 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118845 cells 
+  1173  5.9045e-01  7.1845e-04  5.9820e-04  8.7803e-04  6.5148e-03  1.1842e-02  1.3245e-02  0:01:49   77
+
+ Reversed flow on 4985 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118752 cells 
+  1174  5.9439e-01  7.3724e-04  5.9480e-04  8.6143e-04  6.5362e-03  1.1877e-02  1.3210e-02  0:01:47   76
+
+ Reversed flow on 4984 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118716 cells 
+  1175  5.9753e-01  7.6168e-04  5.9215e-04  8.3926e-04  6.5010e-03  1.1761e-02  1.3146e-02  0:01:46   75
+
+ Reversed flow on 5002 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118644 cells 
+  1176  5.9938e-01  7.9024e-04  5.9001e-04  8.1276e-04  6.4644e-03  1.1696e-02  1.3072e-02  0:01:44   74
+
+ Reversed flow on 5024 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118636 cells 
+  1177  6.0161e-01  8.2015e-04  5.8854e-04  7.8379e-04  6.3995e-03  1.1656e-02  1.2981e-02  0:01:48   73
+
+ Reversed flow on 5023 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118604 cells 
+  1178  6.0378e-01  8.4898e-04  5.8776e-04  7.5447e-04  6.3555e-03  1.1582e-02  1.2886e-02  0:01:46   72
+
+ Reversed flow on 5029 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118653 cells 
+  1179  6.0419e-01  8.7506e-04  5.8729e-04  7.2713e-04  6.3470e-03  1.1547e-02  1.2784e-02  0:01:43   71
+
+ Reversed flow on 5029 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118618 cells 
+  1180  6.0278e-01  8.9722e-04  5.8769e-04  7.0390e-04  6.3377e-03  1.1475e-02  1.2673e-02  0:01:42   70
+
+ Reversed flow on 5043 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118608 cells 
+  1181  6.0135e-01  9.1304e-04  5.8811e-04  6.8639e-04  6.3064e-03  1.1370e-02  1.2566e-02  0:01:40   69
+
+ Reversed flow on 5050 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118619 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1182  5.9941e-01  9.2247e-04  5.8975e-04  6.7632e-04  6.3152e-03  1.1377e-02  1.2458e-02  0:01:38   68
+
+ Reversed flow on 5054 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118588 cells 
+  1183  5.9738e-01  9.2393e-04  5.9141e-04  6.7483e-04  6.3077e-03  1.1307e-02  1.2342e-02  0:01:37   67
+
+ Reversed flow on 5045 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118458 cells 
+  1184  5.9483e-01  9.1799e-04  5.9330e-04  6.8199e-04  6.2992e-03  1.1248e-02  1.2238e-02  0:01:35   66
+
+ Reversed flow on 5050 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118514 cells 
+  1185  5.9162e-01  9.0419e-04  5.9603e-04  6.9779e-04  6.2848e-03  1.1166e-02  1.2135e-02  0:01:33   65
+
+ Reversed flow on 5058 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118473 cells 
+  1186  5.8788e-01  8.8428e-04  5.9879e-04  7.2091e-04  6.2501e-03  1.1063e-02  1.2060e-02  0:01:31   64
+
+ Reversed flow on 5055 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118527 cells 
+  1187  5.8343e-01  8.5959e-04  6.0226e-04  7.5105e-04  6.2488e-03  1.1001e-02  1.1988e-02  0:01:30   63
+
+ Reversed flow on 5068 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118600 cells 
+  1188  5.7982e-01  8.3171e-04  6.0592e-04  7.8503e-04  6.2434e-03  1.0932e-02  1.1933e-02  0:01:28   62
+
+ Reversed flow on 5076 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118651 cells 
+  1189  5.7751e-01  8.0098e-04  6.0973e-04  8.2000e-04  6.2223e-03  1.0886e-02  1.1911e-02  0:01:27   61
+
+ Reversed flow on 5080 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118660 cells 
+  1190  5.7527e-01  7.7061e-04  6.1351e-04  8.5497e-04  6.2198e-03  1.0862e-02  1.1901e-02  0:01:25   60
+
+ Reversed flow on 5085 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118652 cells 
+  1191  5.7426e-01  7.4337e-04  6.1718e-04  8.8711e-04  6.2466e-03  1.0905e-02  1.1906e-02  0:01:24   59
+
+ Reversed flow on 5080 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118603 cells 
+  1192  5.7371e-01  7.1998e-04  6.2070e-04  9.1414e-04  6.2720e-03  1.0957e-02  1.1929e-02  0:01:22   58
+
+ Reversed flow on 5082 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118623 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1193  5.7406e-01  7.0311e-04  6.2347e-04  9.3413e-04  6.2869e-03  1.1026e-02  1.1958e-02  0:01:21   57
+
+ Reversed flow on 5087 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118513 cells 
+  1194  5.7506e-01  6.9366e-04  6.2561e-04  9.4632e-04  6.2759e-03  1.0981e-02  1.1975e-02  0:01:20   56
+
+ Reversed flow on 5087 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118476 cells 
+  1195  5.7676e-01  6.9259e-04  6.2665e-04  9.5064e-04  6.2949e-03  1.0997e-02  1.2002e-02  0:01:23   55
+
+ Reversed flow on 5100 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118475 cells 
+  1196  5.7932e-01  7.0081e-04  6.2663e-04  9.4590e-04  6.3951e-03  1.1127e-02  1.2003e-02  0:01:20   54
+
+ Reversed flow on 5099 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118485 cells 
+  1197  5.8046e-01  7.1627e-04  6.2545e-04  9.3304e-04  6.2959e-03  1.0880e-02  1.2002e-02  0:01:18   53
+
+ Reversed flow on 5111 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118603 cells 
+  1198  5.8143e-01  7.3838e-04  6.2335e-04  9.1290e-04  6.2324e-03  1.0639e-02  1.2011e-02  0:01:16   52
+
+ Reversed flow on 5126 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118785 cells 
+  1199  5.8111e-01  7.6515e-04  6.2169e-04  8.8699e-04  6.1820e-03  1.0394e-02  1.1977e-02  0:01:14   51
+
+ Reversed flow on 5137 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118824 cells 
+  1200  5.8007e-01  7.9616e-04  6.2231e-04  8.5718e-04  6.1042e-03  1.0215e-02  1.1919e-02  0:01:12   50
+
+ Reversed flow on 5144 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118906 cells 
+  1201  5.7840e-01  8.2891e-04  6.2489e-04  8.2491e-04  6.0657e-03  1.0024e-02  1.1824e-02  0:01:10   49
+
+ Reversed flow on 5150 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 119081 cells 
+  1202  5.7642e-01  8.5965e-04  6.3015e-04  7.9174e-04  6.0386e-03  9.9225e-03  1.1712e-02  0:01:09   48
+
+ Reversed flow on 5155 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 119187 cells 
+  1203  5.7420e-01  8.8859e-04  6.3784e-04  7.6164e-04  6.0875e-03  9.9177e-03  1.1580e-02  0:01:07   47
+
+ Reversed flow on 5154 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 119310 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1204  5.7130e-01  9.1262e-04  6.4639e-04  7.3796e-04  6.1157e-03  9.9318e-03  1.1442e-02  0:01:06   46
+
+ Reversed flow on 5146 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 119427 cells 
+  1205  5.6883e-01  9.2962e-04  6.5558e-04  7.2114e-04  6.1257e-03  9.8835e-03  1.1339e-02  0:01:04   45
+
+ Reversed flow on 5144 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 119529 cells 
+  1206  5.6653e-01  9.4080e-04  6.6416e-04  7.1181e-04  6.1477e-03  9.8119e-03  1.1252e-02  0:01:04   44
+
+ Reversed flow on 5141 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 119562 cells 
+  1207  5.6614e-01  9.4499e-04  6.7240e-04  7.1115e-04  6.1260e-03  9.7485e-03  1.1220e-02  0:01:02   43
+
+ Reversed flow on 5133 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 119625 cells 
+  1208  5.6585e-01  9.4173e-04  6.7892e-04  7.2083e-04  6.1453e-03  9.7224e-03  1.1240e-02  0:01:00   42
+
+ Reversed flow on 5131 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 119584 cells 
+  1209  5.6686e-01  9.3107e-04  6.8456e-04  7.3784e-04  6.0959e-03  9.5728e-03  1.1537e-02  0:00:59   41
+
+ Reversed flow on 5130 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 119486 cells 
+  1210  5.4659e-01  9.1434e-04  6.8985e-04  7.6463e-04  6.1805e-03  9.6438e-03  1.1489e-02  0:00:57   40
+
+ Reversed flow on 5128 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 119385 cells 
+  1211  5.7614e-01  9.0403e-04  6.9240e-04  7.9096e-04  6.1062e-03  9.4901e-03  1.1768e-02  0:00:56   39
+
+ Reversed flow on 5127 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 119223 cells 
+  1212  5.5657e-01  8.7655e-04  6.9497e-04  8.2608e-04  6.1388e-03  9.4793e-03  1.1723e-02  0:00:55   38
+
+ Reversed flow on 5130 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118958 cells 
+  1213  5.8322e-01  8.5839e-04  6.9530e-04  8.5734e-04  6.1508e-03  9.4571e-03  1.1761e-02  0:00:54   37
+
+ Reversed flow on 5121 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118728 cells 
+  1214  5.8501e-01  8.3127e-04  6.9550e-04  8.8834e-04  6.1805e-03  9.4160e-03  1.1812e-02  0:00:55   36
+
+ Reversed flow on 5130 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118486 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1215  5.8432e-01  8.0662e-04  6.9537e-04  9.1636e-04  6.2286e-03  9.4283e-03  1.1820e-02  0:00:52   35
+
+ Reversed flow on 5117 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118278 cells 
+  1216  5.8585e-01  7.8695e-04  6.9411e-04  9.3956e-04  6.2936e-03  9.4306e-03  1.1795e-02  0:00:50   34
+
+ Reversed flow on 5108 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118081 cells 
+  1217  5.9026e-01  7.7253e-04  6.9200e-04  9.5456e-04  6.2956e-03  9.3278e-03  1.1723e-02  0:00:49   33
+
+ Reversed flow on 5099 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 117921 cells 
+  1218  5.9495e-01  7.6336e-04  6.8854e-04  9.6103e-04  6.2876e-03  9.2393e-03  1.1613e-02  0:00:47   32
+
+ Reversed flow on 5072 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 117899 cells 
+  1219  5.9855e-01  7.5940e-04  6.8428e-04  9.5765e-04  6.2268e-03  9.0884e-03  1.1489e-02  0:00:45   31
+
+ Reversed flow on 5057 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 117825 cells 
+  1220  5.9982e-01  7.6362e-04  6.7737e-04  9.4475e-04  6.2236e-03  9.0261e-03  1.1373e-02  0:00:44   30
+
+ Reversed flow on 5058 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 117813 cells 
+  1221  6.0094e-01  7.7514e-04  6.7020e-04  9.2361e-04  6.1735e-03  8.9565e-03  1.1243e-02  0:00:42   29
+
+ Reversed flow on 5033 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 117808 cells 
+  1222  6.0227e-01  7.9153e-04  6.6151e-04  8.9629e-04  6.0941e-03  8.8020e-03  1.1137e-02  0:00:41   28
+
+ Reversed flow on 5021 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 117803 cells 
+  1223  6.0079e-01  8.1319e-04  6.5340e-04  8.6428e-04  6.0453e-03  8.7309e-03  1.1040e-02  0:00:39   27
+
+ Reversed flow on 5008 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 117838 cells 
+  1224  5.9777e-01  8.3775e-04  6.4546e-04  8.3045e-04  6.0102e-03  8.7060e-03  1.0900e-02  0:00:37   26
+
+ Reversed flow on 5008 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 117790 cells 
+  1225  5.9562e-01  8.6006e-04  6.3711e-04  7.9782e-04  5.9193e-03  8.5897e-03  1.0790e-02  0:00:36   25
+
+ Reversed flow on 4997 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 117812 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1226  5.9187e-01  8.8049e-04  6.3004e-04  7.6707e-04  5.8496e-03  8.4815e-03  1.0676e-02  0:00:35   24
+
+ Reversed flow on 4988 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 117870 cells 
+  1227  5.8710e-01  8.9574e-04  6.2257e-04  7.4147e-04  5.7807e-03  8.3842e-03  1.0535e-02  0:00:33   23
+
+ Reversed flow on 4979 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 117858 cells 
+  1228  5.8556e-01  9.0427e-04  6.1504e-04  7.2295e-04  5.7213e-03  8.3045e-03  1.0457e-02  0:00:32   22
+
+ Reversed flow on 4982 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 117786 cells 
+  1229  5.8096e-01  9.0418e-04  6.0852e-04  7.1196e-04  5.6665e-03  8.2613e-03  1.0368e-02  0:00:30   21
+
+ Reversed flow on 4976 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 117744 cells 
+  1230  5.7700e-01  8.9506e-04  6.0248e-04  7.0875e-04  5.6087e-03  8.1965e-03  1.0240e-02  0:00:29   20
+
+ Reversed flow on 4987 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 117824 cells 
+  1231  5.7525e-01  8.7812e-04  5.9690e-04  7.1420e-04  5.5758e-03  8.2114e-03  1.0339e-02  0:00:27   19
+
+ Reversed flow on 4980 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 117588 cells 
+  1232  5.6189e-01  8.5196e-04  5.9365e-04  7.2772e-04  5.5647e-03  8.2601e-03  1.0074e-02  0:00:27   18
+
+ Reversed flow on 4972 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 117554 cells 
+  1233  5.7711e-01  8.3047e-04  5.8887e-04  7.4429e-04  5.5520e-03  8.2703e-03  9.9167e-03  0:00:25   17
+
+ Reversed flow on 4966 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 117466 cells 
+  1234  5.6931e-01  7.9584e-04  5.8528e-04  7.6635e-04  5.5533e-03  8.3182e-03  9.8428e-03  0:00:24   16
+
+ Reversed flow on 4961 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 117234 cells 
+  1235  5.6049e-01  7.6130e-04  5.8269e-04  7.9043e-04  5.5858e-03  8.5114e-03  9.7884e-03  0:00:22   15
+
+ Reversed flow on 4948 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 117075 cells 
+  1236  5.5557e-01  7.2966e-04  5.8055e-04  8.1426e-04  5.6102e-03  8.6432e-03  9.9053e-03  0:00:21   14
+
+ Reversed flow on 4935 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 116862 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1237  5.4309e-01  6.9956e-04  5.7991e-04  8.3609e-04  5.6388e-03  8.7538e-03  9.6924e-03  0:00:19   13
+
+ Reversed flow on 4936 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 116699 cells 
+  1238  5.5996e-01  6.8134e-04  5.7687e-04  8.5244e-04  5.5995e-03  8.7145e-03  9.5946e-03  0:00:18   12
+
+ Reversed flow on 4920 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 116507 cells 
+  1239  5.5416e-01  6.6345e-04  5.7396e-04  8.6244e-04  5.5686e-03  8.7380e-03  9.5605e-03  0:00:16   11
+
+ Reversed flow on 4908 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 116260 cells 
+  1240  5.4852e-01  6.5314e-04  5.7125e-04  8.6628e-04  5.5805e-03  8.8258e-03  9.5464e-03  0:00:15   10
+
+ Reversed flow on 4891 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115963 cells 
+  1241  5.4675e-01  6.5111e-04  5.6847e-04  8.6404e-04  5.5986e-03  8.9371e-03  9.5427e-03  0:00:13    9
+
+ Reversed flow on 4874 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115681 cells 
+  1242  5.4651e-01  6.5660e-04  5.6495e-04  8.5429e-04  5.5949e-03  8.9425e-03  9.5502e-03  0:00:12    8
+
+ Reversed flow on 4855 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115325 cells 
+  1243  5.4548e-01  6.6813e-04  5.6124e-04  8.3880e-04  5.6142e-03  9.0315e-03  9.5515e-03  0:00:10    7
+
+ Reversed flow on 4850 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115009 cells 
+  1244  5.4571e-01  6.8496e-04  5.5747e-04  8.1871e-04  5.6380e-03  9.1350e-03  9.5436e-03  0:00:09    6
+
+ Reversed flow on 4827 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114671 cells 
+  1245  5.4598e-01  7.0573e-04  5.5393e-04  7.9508e-04  5.6609e-03  9.2304e-03  9.5408e-03  0:00:07    5
+
+ Reversed flow on 4818 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114356 cells 
+  1246  5.4553e-01  7.2925e-04  5.5020e-04  7.6999e-04  5.6822e-03  9.2596e-03  9.5383e-03  0:00:06    4
+
+ Reversed flow on 4806 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 113988 cells 
+  1247  5.4587e-01  7.5371e-04  5.4707e-04  7.4513e-04  5.6933e-03  9.3138e-03  9.5394e-03  0:00:04    3
+
+ Reversed flow on 4793 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 113713 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1248  5.4671e-01  7.7769e-04  5.4439e-04  7.2069e-04  5.7462e-03  9.4219e-03  9.5345e-03  0:00:03    2
+
+ Reversed flow on 4779 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 113374 cells 
+  1249  5.4733e-01  7.9943e-04  5.4268e-04  6.9956e-04  5.7894e-03  9.5356e-03  9.5289e-03  0:00:01    1
+
+ Reversed flow on 4763 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 113034 cells 
+
+Writing to Home-Desktop-Shuhei:"C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T1-REALIZABLE-KEPSILON\20260911T100157Z\checkpoint-1250-1-01250.cas.h5" in NODE0 mode and compression level 1 ...
+Grouping cells for Laplace smoothing ...
+      342609 cells,     2 zones ...
+     1647633 faces,    12 zones ...
+     1046255 nodes,     1 zone  ...
+  Done.
+Done.
+
+Writing to Home-Desktop-Shuhei:"C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T1-REALIZABLE-KEPSILON\20260911T100157Z\checkpoint-1250-1-01250.dat.h5" in NODE0 mode and compression level 1 ...
+  Writing results.
+Done.
+Create new project file for writing: C:\\Users\\Shuhei Yokkaichi\\Documents\\FluentRuns\\Phase07\\Phase71A\\TurbulenceFamily\\P71A-T1-REALIZABLE-KEPSILON\\20260911T100157Z\\checkpoint-%i.flprj
+  1250  5.4753e-01  8.1646e-04  5.4140e-04  6.8376e-04  5.7869e-03  9.6404e-03  9.5037e-03  0:00:00    0
+
+Writing to Home-Desktop-Shuhei:"C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T1-REALIZABLE-KEPSILON\20260911T100157Z\P71A-T1-REALIZABLE-KEPSILON-active250.cas.h5" in NODE0 mode and compression level 1 ...
+Grouping cells for Laplace smoothing ...
+      342609 cells,     2 zones ...
+     1647633 faces,    12 zones ...
+     1046255 nodes,     1 zone  ...
+  Done.
+Done.
+
+Writing to Home-Desktop-Shuhei:"C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T1-REALIZABLE-KEPSILON\20260911T100157Z\P71A-T1-REALIZABLE-KEPSILON-active250.dat.h5" in NODE0 mode and compression level 1 ...
+  Writing results.
+Done.
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1250  5.4753e-01  8.1646e-04  5.4140e-04  6.8376e-04  5.7869e-03  9.6404e-03  9.5037e-03  0:05:59  250
+
+ Reversed flow on 4762 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 112765 cells 
+  1251  5.4984e-01  8.2866e-04  5.4053e-04  6.7327e-04  5.8221e-03  9.7494e-03  9.4536e-03  0:05:48  249
+
+ Reversed flow on 4754 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 112393 cells 
+  1252  5.5409e-01  8.3282e-04  5.4017e-04  6.6924e-04  5.7949e-03  9.8150e-03  9.4141e-03  0:05:48  248
+
+ Reversed flow on 4746 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 112058 cells 
+  1253  5.5388e-01  8.3058e-04  5.3968e-04  6.6992e-04  5.7871e-03  9.8936e-03  9.3666e-03  0:05:47  247
+
+ Reversed flow on 4748 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 111696 cells 
+  1254  5.5348e-01  8.2186e-04  5.3914e-04  6.7744e-04  5.8241e-03  1.0028e-02  9.3296e-03  0:05:46  246
+
+ Reversed flow on 4762 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 111310 cells 
+  1255  5.5608e-01  8.0735e-04  5.3853e-04  6.9013e-04  5.8243e-03  1.0089e-02  9.2681e-03  0:05:45  245
+
+ Reversed flow on 4756 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 110985 cells 
+  1256  5.5957e-01  7.8837e-04  5.3788e-04  7.0769e-04  5.8751e-03  1.0188e-02  9.2060e-03  0:05:51  244
+
+ Reversed flow on 4763 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 110563 cells 
+  1257  5.6157e-01  7.6562e-04  5.3629e-04  7.2784e-04  5.8740e-03  1.0244e-02  9.1211e-03  0:05:48  243
+
+ Reversed flow on 4766 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 109975 cells 
+  1258  5.6568e-01  7.4171e-04  5.3441e-04  7.5052e-04  5.9042e-03  1.0309e-02  9.0874e-03  0:05:46  242
+
+ Reversed flow on 4752 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 109543 cells 
+  1259  5.6550e-01  7.1713e-04  5.3198e-04  7.7244e-04  5.9352e-03  1.0379e-02  9.0435e-03  0:05:45  241
+
+ Reversed flow on 4764 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 109163 cells 
+  1260  5.6619e-01  6.9457e-04  5.2916e-04  7.9351e-04  5.9731e-03  1.0507e-02  9.0309e-03  0:05:43  240
+
+ Reversed flow on 4769 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 108688 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1261  5.6787e-01  6.7495e-04  5.2557e-04  8.1022e-04  5.9980e-03  1.0625e-02  9.0075e-03  0:05:43  239
+
+ Reversed flow on 4785 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 108267 cells 
+  1262  5.6734e-01  6.5921e-04  5.2130e-04  8.2133e-04  6.0288e-03  1.0719e-02  8.9957e-03  0:05:41  238
+
+ Reversed flow on 4795 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 107889 cells 
+  1263  5.6661e-01  6.4911e-04  5.1665e-04  8.2664e-04  6.0269e-03  1.0887e-02  8.9853e-03  0:05:38  237
+
+ Reversed flow on 4805 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 107493 cells 
+  1264  5.6340e-01  6.4464e-04  5.1137e-04  8.2418e-04  6.0462e-03  1.1093e-02  8.9772e-03  0:05:37  236
+
+ Reversed flow on 4792 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 107221 cells 
+  1265  5.6091e-01  6.4483e-04  5.0555e-04  8.1508e-04  6.0745e-03  1.1213e-02  8.9422e-03  0:05:52  235
+
+ Reversed flow on 4802 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 106875 cells 
+  1266  5.5831e-01  6.5004e-04  5.0007e-04  8.0049e-04  6.1149e-03  1.1370e-02  8.9099e-03  0:05:49  234
+
+ Reversed flow on 4803 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 106636 cells 
+  1267  5.5628e-01  6.6034e-04  4.9464e-04  7.7982e-04  6.0983e-03  1.1458e-02  8.8605e-03  0:05:46  233
+
+ Reversed flow on 4805 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 106449 cells 
+  1268  5.5404e-01  6.7483e-04  4.8983e-04  7.5558e-04  6.0904e-03  1.1421e-02  8.7916e-03  0:05:45  232
+
+ Reversed flow on 4803 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 106239 cells 
+  1269  5.5159e-01  6.9052e-04  4.8552e-04  7.2977e-04  6.0831e-03  1.1447e-02  8.7216e-03  0:05:42  231
+
+ Reversed flow on 4804 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 106098 cells 
+  1270  5.4959e-01  7.0736e-04  4.8233e-04  7.0338e-04  6.0935e-03  1.1522e-02  8.6603e-03  0:05:38  230
+
+ Reversed flow on 4807 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 105958 cells 
+  1271  5.4729e-01  7.2367e-04  4.7979e-04  6.7734e-04  6.1074e-03  1.1743e-02  8.5956e-03  0:05:34  229
+
+ Reversed flow on 4805 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 105834 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1272  5.4480e-01  7.3676e-04  4.7700e-04  6.5399e-04  6.0637e-03  1.1609e-02  8.5278e-03  0:05:31  228
+
+ Reversed flow on 4803 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 105660 cells 
+  1273  5.4250e-01  7.4737e-04  4.7460e-04  6.3363e-04  6.0607e-03  1.1616e-02  8.4650e-03  0:05:28  227
+
+ Reversed flow on 4811 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 105580 cells 
+  1274  5.4014e-01  7.5335e-04  4.7220e-04  6.1679e-04  5.9906e-03  1.1472e-02  8.4000e-03  0:05:25  226
+
+ Reversed flow on 4810 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 105520 cells 
+  1275  5.3694e-01  7.5434e-04  4.7023e-04  6.0496e-04  5.9697e-03  1.1351e-02  8.3237e-03  0:05:23  225
+
+ Reversed flow on 4814 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 105558 cells 
+  1276  5.3411e-01  7.5039e-04  4.6851e-04  5.9773e-04  5.8970e-03  1.1153e-02  8.2477e-03  0:05:20  224
+
+ Reversed flow on 4822 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 105597 cells 
+  1277  5.2981e-01  7.4120e-04  4.6678e-04  5.9528e-04  5.8334e-03  1.0964e-02  8.1816e-03  0:05:18  223
+
+ Reversed flow on 4826 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 105684 cells 
+  1278  5.2640e-01  7.2738e-04  4.6590e-04  5.9769e-04  5.7948e-03  1.0855e-02  8.1135e-03  0:05:15  222
+
+ Reversed flow on 4828 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 105775 cells 
+  1279  5.2268e-01  7.0963e-04  4.6526e-04  6.0386e-04  5.7023e-03  1.0666e-02  8.0465e-03  0:05:13  221
+
+ Reversed flow on 4833 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 105948 cells 
+  1280  5.1877e-01  6.8918e-04  4.6454e-04  6.1313e-04  5.6251e-03  1.0546e-02  7.9814e-03  0:05:11  220
+
+ Reversed flow on 4843 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 106086 cells 
+  1281  5.1487e-01  6.6731e-04  4.6400e-04  6.2495e-04  5.5544e-03  1.0482e-02  7.9203e-03  0:05:10  219
+
+ Reversed flow on 4850 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 106176 cells 
+  1282  5.1184e-01  6.4471e-04  4.6383e-04  6.3806e-04  5.5217e-03  1.0460e-02  7.8674e-03  0:05:10  218
+
+ Reversed flow on 4860 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 106294 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1283  5.0855e-01  6.2263e-04  4.6325e-04  6.5123e-04  5.4833e-03  1.0460e-02  7.8232e-03  0:05:07  217
+
+ Reversed flow on 4873 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 106402 cells 
+  1284  5.0507e-01  6.0161e-04  4.6285e-04  6.6376e-04  5.4246e-03  1.0399e-02  7.7899e-03  0:05:23  216
+
+ Reversed flow on 4881 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 106617 cells 
+  1285  5.0206e-01  5.8347e-04  4.6271e-04  6.7464e-04  5.3911e-03  1.0369e-02  7.7698e-03  0:05:17  215
+
+ Reversed flow on 4888 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 106785 cells 
+  1286  5.0031e-01  5.6859e-04  4.6296e-04  6.8280e-04  5.3875e-03  1.0362e-02  7.7492e-03  0:05:13  214
+
+ Reversed flow on 4895 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 106974 cells 
+  1287  4.9861e-01  5.5737e-04  4.6270e-04  6.8780e-04  5.3624e-03  1.0335e-02  7.7332e-03  0:05:09  213
+
+ Reversed flow on 4912 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 107144 cells 
+  1288  4.9642e-01  5.5015e-04  4.6264e-04  6.8919e-04  5.3642e-03  1.0363e-02  7.7219e-03  0:05:05  212
+
+ Reversed flow on 4920 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 107292 cells 
+  1289  4.9409e-01  5.4740e-04  4.6281e-04  6.8641e-04  5.3646e-03  1.0389e-02  7.7108e-03  0:05:02  211
+
+ Reversed flow on 4938 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 107458 cells 
+  1290  4.9096e-01  5.4887e-04  4.6276e-04  6.7922e-04  5.3725e-03  1.0452e-02  7.7004e-03  0:04:59  210
+
+ Reversed flow on 4940 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 107581 cells 
+  1291  4.8797e-01  5.5411e-04  4.6254e-04  6.6874e-04  5.3792e-03  1.0539e-02  7.6913e-03  0:04:57  209
+
+ Reversed flow on 4958 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 107696 cells 
+  1292  4.8600e-01  5.6368e-04  4.6228e-04  6.5487e-04  5.3986e-03  1.0624e-02  7.6818e-03  0:04:54  208
+
+ Reversed flow on 4966 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 107819 cells 
+  1293  4.8247e-01  5.7616e-04  4.6197e-04  6.3931e-04  5.3913e-03  1.0716e-02  7.6755e-03  0:04:53  207
+
+ Reversed flow on 4978 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 107949 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1294  4.7909e-01  5.9089e-04  4.6165e-04  6.2225e-04  5.4088e-03  1.0839e-02  7.6624e-03  0:04:52  206
+
+ Reversed flow on 4990 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 108087 cells 
+  1295  4.7634e-01  6.0640e-04  4.6134e-04  6.0536e-04  5.4240e-03  1.0988e-02  7.6461e-03  0:04:53  205
+
+ Reversed flow on 4992 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 108207 cells 
+  1296  4.7452e-01  6.2272e-04  4.6085e-04  5.8934e-04  5.4959e-03  1.1230e-02  7.6377e-03  0:04:54  204
+
+ Reversed flow on 4999 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 108352 cells 
+  1297  4.7331e-01  6.3762e-04  4.6036e-04  5.7466e-04  5.5104e-03  1.1436e-02  7.6372e-03  0:04:52  203
+
+ Reversed flow on 5008 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 108455 cells 
+  1298  4.7152e-01  6.5050e-04  4.5991e-04  5.6180e-04  5.5670e-03  1.1666e-02  7.6425e-03  0:04:49  202
+
+ Reversed flow on 5010 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 108593 cells 
+  1299  4.7033e-01  6.6070e-04  4.5927e-04  5.5205e-04  5.6216e-03  1.1911e-02  7.6570e-03  0:04:47  201
+
+ Reversed flow on 5021 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 108662 cells 
+  1300  4.6998e-01  6.6754e-04  4.5852e-04  5.4574e-04  5.6507e-03  1.2144e-02  7.6639e-03  0:04:44  200
+
+ Reversed flow on 5029 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 108803 cells 
+  1301  4.7025e-01  6.6982e-04  4.5738e-04  5.4324e-04  5.7087e-03  1.2325e-02  7.6729e-03  0:04:42  199
+
+ Reversed flow on 5029 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 108924 cells 
+  1302  4.7050e-01  6.6819e-04  4.5609e-04  5.4426e-04  5.7013e-03  1.2462e-02  7.6833e-03  0:04:55  198
+
+ Reversed flow on 5030 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 109034 cells 
+  1303  4.7105e-01  6.6239e-04  4.5505e-04  5.4937e-04  5.6998e-03  1.2557e-02  7.6797e-03  0:04:51  197
+
+ Reversed flow on 5039 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 109129 cells 
+  1304  4.7204e-01  6.5350e-04  4.5411e-04  5.5733e-04  5.6791e-03  1.2607e-02  7.6741e-03  0:04:54  196
+
+ Reversed flow on 5040 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 109251 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1305  4.7314e-01  6.4151e-04  4.5359e-04  5.6826e-04  5.7121e-03  1.2692e-02  7.6609e-03  0:04:51  195
+
+ Reversed flow on 5044 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 109341 cells 
+  1306  4.7351e-01  6.2659e-04  4.5333e-04  5.8098e-04  5.7445e-03  1.2712e-02  7.6348e-03  0:04:48  194
+
+ Reversed flow on 5051 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 109444 cells 
+  1307  4.7364e-01  6.1145e-04  4.5364e-04  5.9517e-04  5.7813e-03  1.2778e-02  7.5992e-03  0:04:44  193
+
+ Reversed flow on 5058 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 109487 cells 
+  1308  4.7299e-01  5.9562e-04  4.5444e-04  6.0950e-04  5.7943e-03  1.2724e-02  7.5519e-03  0:04:40  192
+
+ Reversed flow on 5056 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 109568 cells 
+  1309  4.7221e-01  5.8040e-04  4.5551e-04  6.2222e-04  5.7566e-03  1.2587e-02  7.4971e-03  0:04:37  191
+
+ Reversed flow on 5054 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 109618 cells 
+  1310  4.7137e-01  5.6643e-04  4.5719e-04  6.3324e-04  5.7805e-03  1.2548e-02  7.4320e-03  0:04:34  190
+
+ Reversed flow on 5055 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 109628 cells 
+  1311  4.7049e-01  5.5491e-04  4.5909e-04  6.4104e-04  5.7302e-03  1.2384e-02  7.3558e-03  0:04:33  189
+
+ Reversed flow on 5055 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 109594 cells 
+  1312  4.6858e-01  5.4655e-04  4.6128e-04  6.4543e-04  5.6543e-03  1.2243e-02  7.2762e-03  0:04:31  188
+
+ Reversed flow on 5052 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 109649 cells 
+  1313  4.6609e-01  5.4123e-04  4.6394e-04  6.4610e-04  5.6025e-03  1.2146e-02  7.1873e-03  0:04:28  187
+
+ Reversed flow on 5055 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 109816 cells 
+  1314  4.6342e-01  5.3911e-04  4.6715e-04  6.4256e-04  5.5747e-03  1.2074e-02  7.1015e-03  0:04:26  186
+
+ Reversed flow on 5053 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 109923 cells 
+  1315  4.6026e-01  5.4056e-04  4.7077e-04  6.3528e-04  5.6349e-03  1.2270e-02  7.0162e-03  0:04:24  185
+
+ Reversed flow on 5045 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 110035 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1316  4.5589e-01  5.4419e-04  4.7433e-04  6.2517e-04  5.6307e-03  1.2297e-02  6.9306e-03  0:04:22  184
+
+ Reversed flow on 5039 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 110165 cells 
+  1317  4.5154e-01  5.5002e-04  4.7767e-04  6.1221e-04  5.6189e-03  1.2378e-02  6.8671e-03  0:04:19  183
+
+ Reversed flow on 5046 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 110337 cells 
+  1318  4.4754e-01  5.5760e-04  4.8079e-04  5.9772e-04  5.6250e-03  1.2297e-02  6.8135e-03  0:04:17  182
+
+ Reversed flow on 5043 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 110462 cells 
+  1319  4.4338e-01  5.6593e-04  4.8339e-04  5.8256e-04  5.5642e-03  1.2326e-02  6.7744e-03  0:04:15  181
+
+ Reversed flow on 5038 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 110656 cells 
+  1320  4.3963e-01  5.7467e-04  4.8589e-04  5.6942e-04  5.6805e-03  1.3450e-02  6.7507e-03  0:04:14  180
+
+ Reversed flow on 5034 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 110865 cells 
+  1321  4.3630e-01  5.8183e-04  4.8767e-04  5.5671e-04  5.6249e-03  1.4170e-02  6.7412e-03  0:04:26  179
+
+ Reversed flow on 5031 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 111087 cells 
+  1322  4.3442e-01  5.8832e-04  4.8982e-04  5.4539e-04  5.8027e-03  1.6315e-02  6.7496e-03  0:04:22  178
+
+ Reversed flow on 5019 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 111197 cells 
+  1323  4.3304e-01  5.9211e-04  4.9066e-04  5.3718e-04  5.8318e-03  1.4525e-02  6.7660e-03  0:04:19  177
+
+ Reversed flow on 5020 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 111356 cells 
+  1324  4.3214e-01  5.9213e-04  4.9057e-04  5.3167e-04  5.7447e-03  1.3189e-02  6.7972e-03  0:04:16  176
+
+ Reversed flow on 5022 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 111549 cells 
+  1325  4.3144e-01  5.8776e-04  4.8936e-04  5.2866e-04  5.4315e-03  1.1973e-02  6.8365e-03  0:04:14  175
+
+ Reversed flow on 5020 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 111792 cells 
+  1326  4.3178e-01  5.8003e-04  4.8822e-04  5.2777e-04  5.2947e-03  1.1286e-02  6.8831e-03  0:04:11  174
+
+ Reversed flow on 5014 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 112031 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1327  4.3217e-01  5.6987e-04  4.8771e-04  5.2891e-04  5.1663e-03  1.0771e-02  6.9413e-03  0:04:10  173
+
+ Reversed flow on 5023 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 112318 cells 
+  1328  4.3193e-01  5.5761e-04  4.8769e-04  5.3249e-04  5.0845e-03  1.0452e-02  7.0063e-03  0:04:08  172
+
+ Reversed flow on 5019 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 112571 cells 
+  1329  4.3086e-01  5.4400e-04  4.8813e-04  5.3784e-04  5.0769e-03  1.0237e-02  7.0685e-03  0:04:07  171
+
+ Reversed flow on 5022 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 112862 cells 
+  1330  4.2986e-01  5.2987e-04  4.8851e-04  5.4392e-04  5.1397e-03  1.0278e-02  7.1281e-03  0:04:04  170
+
+ Reversed flow on 5014 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 113092 cells 
+  1331  4.2945e-01  5.1563e-04  4.8924e-04  5.5076e-04  5.0351e-03  1.0082e-02  7.1747e-03  0:04:02  169
+
+ Reversed flow on 5004 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 113386 cells 
+  1332  4.2871e-01  5.0265e-04  4.9009e-04  5.5814e-04  5.0223e-03  1.0096e-02  7.2132e-03  0:04:01  168
+
+ Reversed flow on 5009 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 113646 cells 
+  1333  4.2744e-01  4.9138e-04  4.9171e-04  5.6493e-04  4.9844e-03  1.0153e-02  7.2364e-03  0:04:00  167
+
+ Reversed flow on 5019 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 113950 cells 
+  1334  4.2635e-01  4.8145e-04  4.9344e-04  5.7042e-04  4.9541e-03  1.0215e-02  7.2469e-03  0:03:57  166
+
+ Reversed flow on 5019 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114112 cells 
+  1335  4.2517e-01  4.7360e-04  4.9582e-04  5.7373e-04  4.9235e-03  1.0344e-02  7.2538e-03  0:03:56  165
+
+ Reversed flow on 5019 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114281 cells 
+  1336  4.2375e-01  4.6929e-04  4.9892e-04  5.7380e-04  4.8804e-03  1.0441e-02  7.2573e-03  0:03:54  164
+
+ Reversed flow on 5018 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114441 cells 
+  1337  4.2167e-01  4.6851e-04  5.0249e-04  5.7098e-04  4.8749e-03  1.0646e-02  7.2532e-03  0:03:52  163
+
+ Reversed flow on 5016 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114515 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1338  4.2044e-01  4.7015e-04  5.0621e-04  5.6508e-04  4.8338e-03  1.0714e-02  7.2458e-03  0:03:50  162
+
+ Reversed flow on 5011 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114704 cells 
+  1339  4.1958e-01  4.7449e-04  5.1022e-04  5.5641e-04  4.7910e-03  1.0785e-02  7.2356e-03  0:04:00  161
+
+ Reversed flow on 5012 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114867 cells 
+  1340  4.1874e-01  4.8286e-04  5.1435e-04  5.4611e-04  4.8190e-03  1.0894e-02  7.2349e-03  0:03:57  160
+
+ Reversed flow on 5019 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114991 cells 
+  1341  4.1780e-01  4.9323e-04  5.1816e-04  5.3516e-04  4.7634e-03  1.0917e-02  7.2372e-03  0:03:53  159
+
+ Reversed flow on 5008 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115062 cells 
+  1342  4.1741e-01  5.0504e-04  5.2186e-04  5.2345e-04  4.7981e-03  1.1005e-02  7.2341e-03  0:03:50  158
+
+ Reversed flow on 5009 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115170 cells 
+  1343  4.1566e-01  5.1764e-04  5.2507e-04  5.1182e-04  4.7937e-03  1.1013e-02  7.2377e-03  0:03:48  157
+
+ Reversed flow on 5005 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115292 cells 
+  1344  4.1505e-01  5.2967e-04  5.2790e-04  5.0140e-04  4.7302e-03  1.0934e-02  7.2282e-03  0:03:46  156
+
+ Reversed flow on 5003 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115348 cells 
+  1345  4.1391e-01  5.4138e-04  5.3001e-04  4.9277e-04  4.6671e-03  1.0906e-02  7.2184e-03  0:03:44  155
+
+ Reversed flow on 4996 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115367 cells 
+  1346  4.1294e-01  5.4986e-04  5.3206e-04  4.8517e-04  4.6123e-03  1.0810e-02  7.1958e-03  0:03:41  154
+
+ Reversed flow on 4989 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115408 cells 
+  1347  4.1176e-01  5.5570e-04  5.3364e-04  4.8018e-04  4.5392e-03  1.0717e-02  7.1654e-03  0:03:39  153
+
+ Reversed flow on 4987 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115550 cells 
+  1348  4.1169e-01  5.5814e-04  5.3479e-04  4.7737e-04  4.5039e-03  1.0679e-02  7.1461e-03  0:03:38  152
+
+ Reversed flow on 4991 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115630 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1349  4.0872e-01  5.5624e-04  5.3593e-04  4.7717e-04  4.4603e-03  1.0644e-02  7.1372e-03  0:03:36  151
+
+ Reversed flow on 4986 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115613 cells 
+  1350  4.0656e-01  5.5155e-04  5.3680e-04  4.7974e-04  4.4605e-03  1.0666e-02  7.1090e-03  0:03:34  150
+
+ Reversed flow on 4983 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115668 cells 
+  1351  4.0589e-01  5.4457e-04  5.3733e-04  4.8458e-04  4.4617e-03  1.0710e-02  7.0893e-03  0:03:33  149
+
+ Reversed flow on 4970 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115683 cells 
+  1352  4.0520e-01  5.3475e-04  5.3773e-04  4.9183e-04  4.4553e-03  1.0714e-02  7.0698e-03  0:03:35  148
+
+ Reversed flow on 4961 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115678 cells 
+  1353  4.0238e-01  5.2368e-04  5.3795e-04  5.0182e-04  4.4392e-03  1.0696e-02  7.0423e-03  0:03:33  147
+
+ Reversed flow on 4950 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115657 cells 
+  1354  4.0061e-01  5.1229e-04  5.3759e-04  5.1340e-04  4.4759e-03  1.0739e-02  7.0219e-03  0:03:31  146
+
+ Reversed flow on 4949 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115610 cells 
+  1355  3.9987e-01  5.0108e-04  5.3738e-04  5.2571e-04  4.5159e-03  1.0911e-02  7.0134e-03  0:03:29  145
+
+ Reversed flow on 4935 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115549 cells 
+  1356  3.9811e-01  4.9092e-04  5.3672e-04  5.3739e-04  4.5548e-03  1.0988e-02  7.0029e-03  0:03:26  144
+
+ Reversed flow on 4926 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115481 cells 
+  1357  3.9666e-01  4.8150e-04  5.3574e-04  5.4751e-04  4.5861e-03  1.1128e-02  7.0002e-03  0:03:25  143
+
+ Reversed flow on 4915 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115460 cells 
+  1358  3.9506e-01  4.7410e-04  5.3490e-04  5.5509e-04  4.5851e-03  1.1180e-02  6.9990e-03  0:03:34  142
+
+ Reversed flow on 4905 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115401 cells 
+  1359  3.9323e-01  4.6958e-04  5.3374e-04  5.5925e-04  4.6336e-03  1.1280e-02  7.0042e-03  0:03:32  141
+
+ Reversed flow on 4889 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115344 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1360  3.9126e-01  4.6816e-04  5.3256e-04  5.5981e-04  4.6444e-03  1.1363e-02  7.0242e-03  0:03:28  140
+
+ Reversed flow on 4876 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115276 cells 
+  1361  3.8988e-01  4.6956e-04  5.3156e-04  5.5694e-04  4.6966e-03  1.1541e-02  7.0466e-03  0:03:25  139
+
+ Reversed flow on 4878 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115248 cells 
+  1362  3.8952e-01  4.7345e-04  5.3012e-04  5.5076e-04  4.7175e-03  1.1663e-02  7.0666e-03  0:03:23  138
+
+ Reversed flow on 4870 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115190 cells 
+  1363  3.8942e-01  4.8034e-04  5.2846e-04  5.4227e-04  4.7360e-03  1.1804e-02  7.0896e-03  0:03:20  137
+
+ Reversed flow on 4869 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115110 cells 
+  1364  3.8970e-01  4.8938e-04  5.2677e-04  5.3170e-04  4.7500e-03  1.1898e-02  7.1144e-03  0:03:17  136
+
+ Reversed flow on 4854 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115075 cells 
+  1365  3.8910e-01  4.9997e-04  5.2528e-04  5.2058e-04  4.7672e-03  1.1901e-02  7.1311e-03  0:03:15  135
+
+ Reversed flow on 4851 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115042 cells 
+  1366  3.8891e-01  5.1192e-04  5.2373e-04  5.0927e-04  4.7988e-03  1.1900e-02  7.1473e-03  0:03:12  134
+
+ Reversed flow on 4844 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115046 cells 
+  1367  3.8764e-01  5.2354e-04  5.2217e-04  4.9858e-04  4.7951e-03  1.1790e-02  7.1545e-03  0:03:10  133
+
+ Reversed flow on 4837 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115035 cells 
+  1368  3.8635e-01  5.3372e-04  5.2059e-04  4.8859e-04  4.8040e-03  1.1634e-02  7.1579e-03  0:03:08  132
+
+ Reversed flow on 4845 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115043 cells 
+  1369  3.8509e-01  5.4240e-04  5.1890e-04  4.8035e-04  4.7507e-03  1.1342e-02  7.1584e-03  0:03:07  131
+
+ Reversed flow on 4838 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115034 cells 
+  1370  3.8423e-01  5.4848e-04  5.1766e-04  4.7469e-04  4.7328e-03  1.1128e-02  7.1412e-03  0:03:06  130
+
+ Reversed flow on 4849 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115010 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1371  3.8441e-01  5.5187e-04  5.1629e-04  4.7247e-04  4.7159e-03  1.0924e-02  7.1136e-03  0:03:04  129
+
+ Reversed flow on 4838 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114971 cells 
+  1372  3.8496e-01  5.5187e-04  5.1494e-04  4.7320e-04  4.6554e-03  1.0691e-02  7.0873e-03  0:03:03  128
+
+ Reversed flow on 4833 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114902 cells 
+  1373  3.8582e-01  5.4931e-04  5.1447e-04  4.7725e-04  4.6392e-03  1.0664e-02  7.0525e-03  0:03:02  127
+
+ Reversed flow on 4827 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114853 cells 
+  1374  3.8707e-01  5.4483e-04  5.1430e-04  4.8429e-04  4.6233e-03  1.0660e-02  7.0052e-03  0:03:01  126
+
+ Reversed flow on 4817 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114846 cells 
+  1375  3.8858e-01  5.3934e-04  5.1441e-04  4.9337e-04  4.6057e-03  1.0679e-02  6.9638e-03  0:03:00  125
+
+ Reversed flow on 4818 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114740 cells 
+  1376  3.9001e-01  5.3258e-04  5.1508e-04  5.0385e-04  4.6313e-03  1.0918e-02  6.9289e-03  0:03:07  124
+
+ Reversed flow on 4815 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114646 cells 
+  1377  3.9187e-01  5.2626e-04  5.1622e-04  5.1495e-04  4.6747e-03  1.1257e-02  6.9019e-03  0:03:04  123
+
+ Reversed flow on 4809 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114563 cells 
+  1378  3.9317e-01  5.1958e-04  5.1758e-04  5.2613e-04  4.7198e-03  1.1671e-02  6.9037e-03  0:03:00  122
+
+ Reversed flow on 4810 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114474 cells 
+  1379  3.9500e-01  5.1310e-04  5.1851e-04  5.3646e-04  4.7637e-03  1.2137e-02  6.9202e-03  0:02:58  121
+
+ Reversed flow on 4800 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114433 cells 
+  1380  3.9774e-01  5.0860e-04  5.1950e-04  5.4591e-04  4.8093e-03  1.2669e-02  6.9557e-03  0:02:55  120
+
+ Reversed flow on 4799 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114371 cells 
+  1381  3.9970e-01  5.0562e-04  5.2078e-04  5.5328e-04  4.8290e-03  1.3248e-02  7.0047e-03  0:02:53  119
+
+ Reversed flow on 4805 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114299 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1382  4.0276e-01  5.0476e-04  5.2214e-04  5.5823e-04  4.8698e-03  1.3895e-02  7.0557e-03  0:02:50  118
+
+ Reversed flow on 4800 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114246 cells 
+  1383  4.0773e-01  5.0648e-04  5.2385e-04  5.6183e-04  4.9004e-03  1.4445e-02  7.1191e-03  0:02:48  117
+
+ Reversed flow on 4787 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114179 cells 
+  1384  4.1096e-01  5.1126e-04  5.2593e-04  5.6229e-04  4.9770e-03  1.5297e-02  7.1895e-03  0:02:46  116
+
+ Reversed flow on 4802 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114104 cells 
+  1385  4.1305e-01  5.1751e-04  5.2761e-04  5.6059e-04  5.0068e-03  1.5847e-02  7.2607e-03  0:02:44  115
+
+ Reversed flow on 4809 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114076 cells 
+  1386  4.1775e-01  5.2468e-04  5.2906e-04  5.5818e-04  5.0206e-03  1.6392e-02  7.3385e-03  0:02:42  114
+
+ Reversed flow on 4808 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114037 cells 
+  1387  4.2047e-01  5.3389e-04  5.3056e-04  5.5475e-04  5.1041e-03  1.7083e-02  7.4074e-03  0:02:43  113
+
+ Reversed flow on 4815 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114041 cells 
+  1388  4.2252e-01  5.4374e-04  5.3144e-04  5.5110e-04  5.1113e-03  1.7454e-02  7.4816e-03  0:02:42  112
+
+ Reversed flow on 4807 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 113980 cells 
+  1389  4.2411e-01  5.5298e-04  5.3188e-04  5.4664e-04  5.1520e-03  1.7809e-02  7.5424e-03  0:02:41  111
+
+ Reversed flow on 4803 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 113953 cells 
+  1390  4.2468e-01  5.6141e-04  5.3231e-04  5.4226e-04  5.1647e-03  1.7947e-02  7.5872e-03  0:02:39  110
+
+ Reversed flow on 4794 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 113930 cells 
+  1391  4.2445e-01  5.6878e-04  5.3238e-04  5.3795e-04  5.2162e-03  1.8312e-02  7.6254e-03  0:02:37  109
+
+ Reversed flow on 4794 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 113857 cells 
+  1392  4.2484e-01  5.7321e-04  5.3225e-04  5.3557e-04  5.2303e-03  1.8372e-02  7.6517e-03  0:02:35  108
+
+ Reversed flow on 4804 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 113740 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1393  4.2501e-01  5.7550e-04  5.3131e-04  5.3402e-04  5.1858e-03  1.8398e-02  7.6687e-03  0:02:33  107
+
+ Reversed flow on 4810 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 113708 cells 
+  1394  4.2593e-01  5.7562e-04  5.3109e-04  5.3408e-04  5.2258e-03  1.8459e-02  7.6711e-03  0:02:31  106
+
+ Reversed flow on 4819 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 113655 cells 
+  1395  4.2708e-01  5.7216e-04  5.3012e-04  5.3590e-04  5.1447e-03  1.8206e-02  7.6605e-03  0:02:38  105
+
+ Reversed flow on 4824 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 113571 cells 
+  1396  4.2697e-01  5.6793e-04  5.2949e-04  5.3969e-04  5.2752e-03  1.8560e-02  7.6402e-03  0:02:35  104
+
+ Reversed flow on 4812 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 113489 cells 
+  1397  4.2556e-01  5.6170e-04  5.2848e-04  5.4472e-04  5.2189e-03  1.8312e-02  7.6050e-03  0:02:32  103
+
+ Reversed flow on 4818 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 113395 cells 
+  1398  4.2511e-01  5.5484e-04  5.2776e-04  5.5135e-04  5.2248e-03  1.8108e-02  7.5699e-03  0:02:30  102
+
+ Reversed flow on 4834 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 113418 cells 
+  1399  4.2343e-01  5.4707e-04  5.2671e-04  5.5861e-04  5.2625e-03  1.8014e-02  7.5225e-03  0:02:27  101
+
+ Reversed flow on 4837 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 113389 cells 
+  1400  4.2205e-01  5.4019e-04  5.2573e-04  5.6598e-04  5.3556e-03  1.8456e-02  7.4824e-03  0:02:25  100
+
+ Reversed flow on 4838 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 113368 cells 
+  1401  4.1937e-01  5.3315e-04  5.2511e-04  5.7189e-04  5.3640e-03  1.8200e-02  7.4379e-03  0:02:24   99
+
+ Reversed flow on 4835 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 113418 cells 
+  1402  4.1727e-01  5.2668e-04  5.2228e-04  5.7539e-04  5.3039e-03  1.8104e-02  7.4014e-03  0:02:24   98
+
+ Reversed flow on 4836 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 113475 cells 
+  1403  4.1692e-01  5.2035e-04  5.1897e-04  5.7595e-04  5.1632e-03  1.7011e-02  7.3646e-03  0:02:21   97
+
+ Reversed flow on 4838 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 113577 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1404  4.1607e-01  5.1602e-04  5.1515e-04  5.7370e-04  5.0365e-03  1.6097e-02  7.3409e-03  0:02:20   96
+
+ Reversed flow on 4840 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 113656 cells 
+  1405  4.1561e-01  5.1394e-04  5.1207e-04  5.7148e-04  5.1166e-03  1.5791e-02  7.3206e-03  0:02:18   95
+
+ Reversed flow on 4836 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 113772 cells 
+  1406  4.1366e-01  5.1378e-04  5.0806e-04  5.6483e-04  4.9757e-03  1.4383e-02  7.3024e-03  0:02:16   94
+
+ Reversed flow on 4835 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 113875 cells 
+  1407  4.1330e-01  5.1503e-04  5.0318e-04  5.5490e-04  4.6951e-03  1.2634e-02  7.2803e-03  0:02:15   93
+
+ Reversed flow on 4833 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114010 cells 
+  1408  4.1215e-01  5.1836e-04  4.9799e-04  5.4438e-04  4.5464e-03  1.1566e-02  7.2646e-03  0:02:13   92
+
+ Reversed flow on 4837 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114177 cells 
+  1409  4.1043e-01  5.2322e-04  4.9350e-04  5.3423e-04  4.4744e-03  1.1062e-02  7.2615e-03  0:02:12   91
+
+ Reversed flow on 4829 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114366 cells 
+  1410  4.0784e-01  5.2988e-04  4.8877e-04  5.2415e-04  4.4440e-03  1.0808e-02  7.2563e-03  0:02:10   90
+
+ Reversed flow on 4835 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114558 cells 
+  1411  4.0768e-01  5.3591e-04  4.8417e-04  5.1475e-04  4.4028e-03  1.0585e-02  7.2496e-03  0:02:07   89
+
+ Reversed flow on 4823 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 114784 cells 
+  1412  4.0607e-01  5.4194e-04  4.7936e-04  5.0588e-04  4.3840e-03  1.0427e-02  7.2426e-03  0:02:06   88
+
+ Reversed flow on 4818 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115029 cells 
+  1413  4.0342e-01  5.4648e-04  4.7455e-04  4.9869e-04  4.3796e-03  1.0285e-02  7.2385e-03  0:02:11   87
+
+ Reversed flow on 4822 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115275 cells 
+  1414  3.9983e-01  5.4804e-04  4.6987e-04  4.9273e-04  4.3760e-03  1.0195e-02  7.2274e-03  0:02:08   86
+
+ Reversed flow on 4819 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115522 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1415  3.9723e-01  5.4819e-04  4.6494e-04  4.8825e-04  4.3887e-03  1.0155e-02  7.2161e-03  0:02:05   85
+
+ Reversed flow on 4806 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 115856 cells 
+  1416  3.9458e-01  5.4574e-04  4.6006e-04  4.8557e-04  4.3374e-03  1.0022e-02  7.2111e-03  0:02:03   84
+
+ Reversed flow on 4817 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 116172 cells 
+  1417  3.9173e-01  5.4103e-04  4.5520e-04  4.8499e-04  4.3459e-03  9.9459e-03  7.2009e-03  0:02:01   83
+
+ Reversed flow on 4823 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 116616 cells 
+  1418  3.8885e-01  5.3488e-04  4.5030e-04  4.8661e-04  4.3254e-03  9.8493e-03  7.1916e-03  0:02:00   82
+
+ Reversed flow on 4818 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 116933 cells 
+  1419  3.8642e-01  5.2727e-04  4.4632e-04  4.9024e-04  4.3377e-03  9.8513e-03  7.1792e-03  0:01:58   81
+
+ Reversed flow on 4822 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 117335 cells 
+  1420  3.8461e-01  5.1889e-04  4.4231e-04  4.9496e-04  4.3518e-03  9.8770e-03  7.1626e-03  0:01:57   80
+
+ Reversed flow on 4838 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 117685 cells 
+  1421  3.8249e-01  5.1119e-04  4.3851e-04  5.0091e-04  4.4262e-03  9.9885e-03  7.1385e-03  0:01:55   79
+
+ Reversed flow on 4830 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118001 cells 
+  1422  3.8114e-01  5.0319e-04  4.3452e-04  5.0708e-04  4.3837e-03  9.9638e-03  7.1085e-03  0:01:53   78
+
+ Reversed flow on 4832 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118385 cells 
+  1423  3.7945e-01  4.9583e-04  4.3082e-04  5.1264e-04  4.3348e-03  9.9353e-03  7.0755e-03  0:01:51   77
+
+ Reversed flow on 4836 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118696 cells 
+  1424  3.7860e-01  4.8926e-04  4.2738e-04  5.1728e-04  4.3468e-03  1.0004e-02  7.0341e-03  0:01:49   76
+
+ Reversed flow on 4821 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 118994 cells 
+  1425  3.7770e-01  4.8363e-04  4.2442e-04  5.1999e-04  4.3365e-03  1.0081e-02  6.9998e-03  0:01:48   75
+
+ Reversed flow on 4829 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 119255 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1426  3.7669e-01  4.7944e-04  4.2211e-04  5.2049e-04  4.2980e-03  1.0056e-02  6.9557e-03  0:01:47   74
+
+ Reversed flow on 4838 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 119537 cells 
+  1427  3.7511e-01  4.7662e-04  4.1971e-04  5.1853e-04  4.2869e-03  1.0087e-02  6.9137e-03  0:01:45   73
+
+ Reversed flow on 4827 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 119798 cells 
+  1428  3.7386e-01  4.7499e-04  4.1769e-04  5.1585e-04  4.2897e-03  1.0135e-02  6.8780e-03  0:01:43   72
+
+ Reversed flow on 4831 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 120053 cells 
+  1429  3.7221e-01  4.7492e-04  4.1591e-04  5.1076e-04  4.2489e-03  1.0063e-02  6.8493e-03  0:01:42   71
+
+ Reversed flow on 4818 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 120288 cells 
+  1430  3.7088e-01  4.7645e-04  4.1440e-04  5.0365e-04  4.2509e-03  9.9976e-03  6.8138e-03  0:01:40   70
+
+ Reversed flow on 4831 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 120483 cells 
+  1431  3.6986e-01  4.7919e-04  4.1269e-04  4.9627e-04  4.2335e-03  9.8844e-03  6.7816e-03  0:01:38   69
+
+ Reversed flow on 4838 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 120727 cells 
+  1432  3.6803e-01  4.8307e-04  4.1110e-04  4.8882e-04  4.1888e-03  9.7794e-03  6.7426e-03  0:01:42   68
+
+ Reversed flow on 4835 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 120923 cells 
+  1433  3.6609e-01  4.8796e-04  4.0979e-04  4.8145e-04  4.1853e-03  9.7223e-03  6.7099e-03  0:01:40   67
+
+ Reversed flow on 4831 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 121124 cells 
+  1434  3.6467e-01  4.9256e-04  4.0818e-04  4.7401e-04  4.1024e-03  9.5837e-03  6.6642e-03  0:01:37   66
+
+ Reversed flow on 4829 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 121305 cells 
+  1435  3.6365e-01  4.9701e-04  4.0696e-04  4.6731e-04  4.0608e-03  9.4867e-03  6.6261e-03  0:01:36   65
+
+ Reversed flow on 4825 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 121479 cells 
+  1436  3.6252e-01  5.0014e-04  4.0613e-04  4.6199e-04  4.0691e-03  9.5184e-03  6.5862e-03  0:01:34   64
+
+ Reversed flow on 4819 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 121607 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1437  3.6146e-01  5.0166e-04  4.0513e-04  4.5776e-04  4.0582e-03  9.5264e-03  6.5473e-03  0:01:32   63
+
+ Reversed flow on 4820 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 121792 cells 
+  1438  3.5991e-01  5.0128e-04  4.0489e-04  4.5473e-04  4.0607e-03  9.6923e-03  6.5008e-03  0:01:30   62
+
+ Reversed flow on 4839 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 121874 cells 
+  1439  3.5925e-01  4.9914e-04  4.0464e-04  4.5307e-04  4.0760e-03  9.7980e-03  6.4558e-03  0:01:28   61
+
+ Reversed flow on 4821 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 122061 cells 
+  1440  3.5814e-01  4.9506e-04  4.0462e-04  4.5307e-04  4.0567e-03  9.9119e-03  6.4202e-03  0:01:27   60
+
+ Reversed flow on 4836 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 122166 cells 
+  1441  3.5626e-01  4.8969e-04  4.0513e-04  4.5463e-04  4.1036e-03  1.0118e-02  6.3861e-03  0:01:26   59
+
+ Reversed flow on 4828 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 122346 cells 
+  1442  3.5474e-01  4.8304e-04  4.0516e-04  4.5796e-04  4.0927e-03  1.0242e-02  6.3525e-03  0:01:24   58
+
+ Reversed flow on 4839 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 122514 cells 
+  1443  3.5316e-01  4.7569e-04  4.0516e-04  4.6270e-04  4.0635e-03  1.0238e-02  6.3158e-03  0:01:22   57
+
+ Reversed flow on 4843 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 122705 cells 
+  1444  3.5089e-01  4.6808e-04  4.0536e-04  4.6851e-04  4.0415e-03  1.0172e-02  6.2828e-03  0:01:20   56
+
+ Reversed flow on 4839 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 122877 cells 
+  1445  3.4991e-01  4.6034e-04  4.0498e-04  4.7487e-04  3.9990e-03  1.0075e-02  6.2603e-03  0:01:19   55
+
+ Reversed flow on 4824 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 123048 cells 
+  1446  3.4804e-01  4.5249e-04  4.0502e-04  4.8161e-04  3.9708e-03  1.0038e-02  6.2340e-03  0:01:18   54
+
+ Reversed flow on 4839 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 123168 cells 
+  1447  3.4648e-01  4.4544e-04  4.0475e-04  4.8779e-04  3.9742e-03  1.0020e-02  6.2062e-03  0:01:17   53
+
+ Reversed flow on 4858 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 123323 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1448  3.4503e-01  4.3972e-04  4.0434e-04  4.9249e-04  3.9706e-03  9.9894e-03  6.1796e-03  0:01:17   52
+
+ Reversed flow on 4867 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 123543 cells 
+  1449  3.4346e-01  4.3569e-04  4.0361e-04  4.9498e-04  3.9962e-03  1.0004e-02  6.1515e-03  0:01:16   51
+
+ Reversed flow on 4874 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 123749 cells 
+  1450  3.4213e-01  4.3292e-04  4.0271e-04  4.9513e-04  3.9919e-03  9.9305e-03  6.1254e-03  0:01:18   50
+
+ Reversed flow on 4882 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 123891 cells 
+  1451  3.4066e-01  4.3205e-04  4.0129e-04  4.9340e-04  3.9603e-03  9.8728e-03  6.1019e-03  0:01:16   49
+
+ Reversed flow on 4885 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 124099 cells 
+  1452  3.3958e-01  4.3329e-04  3.9980e-04  4.8988e-04  3.9873e-03  9.8500e-03  6.0822e-03  0:01:13   48
+
+ Reversed flow on 4901 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 124275 cells 
+  1453  3.3702e-01  4.3627e-04  3.9825e-04  4.8476e-04  3.9698e-03  9.7894e-03  6.0680e-03  0:01:10   47
+
+ Reversed flow on 4912 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 124440 cells 
+  1454  3.3503e-01  4.4104e-04  3.9649e-04  4.7862e-04  3.9743e-03  9.7770e-03  6.0594e-03  0:01:09   46
+
+ Reversed flow on 4924 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 124665 cells 
+  1455  3.3268e-01  4.4726e-04  3.9466e-04  4.7228e-04  3.9804e-03  9.7476e-03  6.0589e-03  0:01:08   45
+
+ Reversed flow on 4937 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 124824 cells 
+  1456  3.3052e-01  4.5439e-04  3.9281e-04  4.6595e-04  4.0178e-03  9.7284e-03  6.0680e-03  0:01:07   44
+
+ Reversed flow on 4945 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 124989 cells 
+  1457  3.2857e-01  4.6172e-04  3.9074e-04  4.5944e-04  3.9930e-03  9.6634e-03  6.0845e-03  0:01:08   43
+
+ Reversed flow on 4959 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 125169 cells 
+  1458  3.2678e-01  4.6871e-04  3.8883e-04  4.5434e-04  3.9819e-03  9.6214e-03  6.1078e-03  0:01:06   42
+
+ Reversed flow on 4965 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 125443 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1459  3.2609e-01  4.7504e-04  3.8713e-04  4.5055e-04  4.0076e-03  9.6225e-03  6.1415e-03  0:01:04   41
+
+ Reversed flow on 4974 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 125608 cells 
+  1460  3.2515e-01  4.7947e-04  3.8546e-04  4.4807e-04  4.0016e-03  9.6075e-03  6.1725e-03  0:01:02   40
+
+ Reversed flow on 4980 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 125799 cells 
+  1461  3.2479e-01  4.8236e-04  3.8424e-04  4.4728e-04  3.9962e-03  9.5979e-03  6.2128e-03  0:00:59   39
+
+ Reversed flow on 4985 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 126055 cells 
+  1462  3.2476e-01  4.8372e-04  3.8319e-04  4.4846e-04  3.9900e-03  9.6108e-03  6.2539e-03  0:00:57   38
+
+ Reversed flow on 4995 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 126266 cells 
+  1463  3.2501e-01  4.8310e-04  3.8224e-04  4.5160e-04  3.9976e-03  9.6435e-03  6.2977e-03  0:00:55   37
+
+ Reversed flow on 5009 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 126430 cells 
+  1464  3.2601e-01  4.8150e-04  3.8188e-04  4.5651e-04  4.0370e-03  9.7678e-03  6.3451e-03  0:00:53   36
+
+ Reversed flow on 5015 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 126630 cells 
+  1465  3.2715e-01  4.7864e-04  3.8140e-04  4.6315e-04  4.0580e-03  9.8144e-03  6.3922e-03  0:00:51   35
+
+ Reversed flow on 5022 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 126827 cells 
+  1466  3.2844e-01  4.7461e-04  3.8087e-04  4.7120e-04  4.0234e-03  9.8063e-03  6.4436e-03  0:00:49   34
+
+ Reversed flow on 5027 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 127031 cells 
+  1467  3.2984e-01  4.7029e-04  3.8085e-04  4.8085e-04  4.1592e-03  1.0173e-02  6.4873e-03  0:00:47   33
+
+ Reversed flow on 5043 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 127249 cells 
+  1468  3.3120e-01  4.6533e-04  3.8093e-04  4.9052e-04  4.1794e-03  1.0306e-02  6.5271e-03  0:00:46   32
+
+ Reversed flow on 5047 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 127435 cells 
+  1469  3.3185e-01  4.5976e-04  3.8122e-04  4.9999e-04  4.1464e-03  1.0207e-02  6.5723e-03  0:00:47   31
+
+ Reversed flow on 5047 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 127608 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1470  3.3283e-01  4.5448e-04  3.8157e-04  5.0848e-04  4.1883e-03  1.0268e-02  6.6146e-03  0:00:46   30
+
+ Reversed flow on 5042 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 127828 cells 
+  1471  3.3370e-01  4.5011e-04  3.8237e-04  5.1624e-04  4.2048e-03  1.0330e-02  6.6554e-03  0:00:46   29
+
+ Reversed flow on 5046 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 128096 cells 
+  1472  3.3438e-01  4.4696e-04  3.8368e-04  5.2188e-04  4.2179e-03  1.0425e-02  6.6918e-03  0:00:45   28
+
+ Reversed flow on 5049 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 128326 cells 
+  1473  3.3525e-01  4.4476e-04  3.8512e-04  5.2536e-04  4.2504e-03  1.0536e-02  6.7253e-03  0:00:43   27
+
+ Reversed flow on 5059 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 128640 cells 
+  1474  3.3599e-01  4.4387e-04  3.8679e-04  5.2708e-04  4.3140e-03  1.0756e-02  6.7691e-03  0:00:41   26
+
+ Reversed flow on 5066 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 128909 cells 
+  1475  3.3672e-01  4.4420e-04  3.8883e-04  5.2672e-04  4.3164e-03  1.0874e-02  6.8131e-03  0:00:40   25
+
+ Reversed flow on 5066 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 129197 cells 
+  1476  3.3626e-01  4.4598e-04  3.9076e-04  5.2433e-04  4.3384e-03  1.0945e-02  6.8607e-03  0:00:41   24
+
+ Reversed flow on 5066 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 129463 cells 
+  1477  3.3719e-01  4.4881e-04  3.9259e-04  5.2072e-04  4.4419e-03  1.1121e-02  6.9063e-03  0:00:38   23
+
+ Reversed flow on 5070 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 129660 cells 
+  1478  3.3736e-01  4.5203e-04  3.9365e-04  5.1553e-04  4.3760e-03  1.0964e-02  6.9644e-03  0:00:36   22
+
+ Reversed flow on 5071 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 129885 cells 
+  1479  3.3834e-01  4.5575e-04  3.9472e-04  5.0951e-04  4.3191e-03  1.0879e-02  7.0212e-03  0:00:34   21
+
+ Reversed flow on 5071 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 130095 cells 
+  1480  3.3922e-01  4.6029e-04  3.9589e-04  5.0432e-04  4.3561e-03  1.0942e-02  7.0825e-03  0:00:32   20
+
+ Reversed flow on 5076 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 130306 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1481  3.3963e-01  4.6502e-04  3.9639e-04  4.9847e-04  4.3557e-03  1.0970e-02  7.1494e-03  0:00:30   19
+
+ Reversed flow on 5076 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 130608 cells 
+  1482  3.4255e-01  4.6974e-04  3.9715e-04  4.9407e-04  4.4147e-03  1.1150e-02  7.2211e-03  0:00:29   18
+
+ Reversed flow on 5081 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 130980 cells 
+  1483  3.4297e-01  4.7359e-04  3.9832e-04  4.9082e-04  4.4859e-03  1.1483e-02  7.2971e-03  0:00:27   17
+
+ Reversed flow on 5079 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 131335 cells 
+  1484  3.4575e-01  4.7716e-04  4.0052e-04  4.8906e-04  4.5342e-03  1.1895e-02  7.3722e-03  0:00:25   16
+
+ Reversed flow on 5073 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 131638 cells 
+  1485  3.4694e-01  4.7943e-04  4.0320e-04  4.9039e-04  4.5595e-03  1.2387e-02  7.4446e-03  0:00:23   15
+
+ Reversed flow on 5072 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 132022 cells 
+  1486  3.4878e-01  4.8143e-04  4.0632e-04  4.9329e-04  4.6277e-03  1.3076e-02  7.5166e-03  0:00:21   14
+
+ Reversed flow on 5067 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 132454 cells 
+  1487  3.5191e-01  4.8299e-04  4.1070e-04  4.9873e-04  4.6824e-03  1.3759e-02  7.5920e-03  0:00:21   13
+
+ Reversed flow on 5060 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 132908 cells 
+  1488  3.5688e-01  4.8323e-04  4.1509e-04  5.0720e-04  4.7812e-03  1.4453e-02  7.6561e-03  0:00:19   12
+
+ Reversed flow on 5057 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 133267 cells 
+  1489  3.5830e-01  4.8268e-04  4.1957e-04  5.1693e-04  4.7979e-03  1.5030e-02  7.7225e-03  0:00:17   11
+
+ Reversed flow on 5050 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 133607 cells 
+  1490  3.6319e-01  4.8130e-04  4.2485e-04  5.2789e-04  4.8633e-03  1.5748e-02  7.7932e-03  0:00:15   10
+
+ Reversed flow on 5049 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 133977 cells 
+  1491  3.6478e-01  4.8038e-04  4.2963e-04  5.3910e-04  4.8763e-03  1.6166e-02  7.8626e-03  0:00:14    9
+
+ Reversed flow on 5047 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 134312 cells 
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  1492  3.7147e-01  4.7961e-04  4.3391e-04  5.5006e-04  4.9053e-03  1.6508e-02  7.9296e-03  0:00:12    8
+
+ Reversed flow on 5040 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 134653 cells 
+  1493  3.7375e-01  4.7938e-04  4.3773e-04  5.5974e-04  4.8995e-03  1.6681e-02  7.9882e-03  0:00:10    7
+
+ Reversed flow on 5047 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 135013 cells 
+  1494  3.7843e-01  4.8055e-04  4.4053e-04  5.6703e-04  4.8987e-03  1.6689e-02  8.0653e-03  0:00:09    6
+
+ Reversed flow on 5038 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 135437 cells 
+  1495  3.8058e-01  4.8266e-04  4.4293e-04  5.7322e-04  4.9124e-03  1.6609e-02  8.1358e-03  0:00:07    5
+
+ Reversed flow on 5039 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 135784 cells 
+  1496  3.8238e-01  4.8686e-04  4.4438e-04  5.7569e-04  4.8944e-03  1.6393e-02  8.1999e-03  0:00:06    4
+
+ Reversed flow on 5034 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 136118 cells 
+  1497  3.8487e-01  4.9228e-04  4.4548e-04  5.7690e-04  4.9246e-03  1.6203e-02  8.2636e-03  0:00:04    3
+
+ Reversed flow on 5031 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 136426 cells 
+  1498  3.8503e-01  4.9895e-04  4.4599e-04  5.7462e-04  4.9587e-03  1.5935e-02  8.3398e-03  0:00:03    2
+
+ Reversed flow on 5030 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 136706 cells 
+  1499  3.8712e-01  5.0679e-04  4.4679e-04  5.7150e-04  4.9989e-03  1.5618e-02  8.4116e-03  0:00:01    1
+
+ Reversed flow on 5025 faces of pressure-outlet 30.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 137039 cells 
+
+Writing to Home-Desktop-Shuhei:"C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T1-REALIZABLE-KEPSILON\20260911T100157Z\checkpoint-1500-1-01500.cas.h5" in NODE0 mode and compression level 1 ...
+Grouping cells for Laplace smoothing ...
+      342609 cells,     2 zones ...
+     1647633 faces,    12 zones ...
+     1046255 nodes,     1 zone  ...
+  Done.
+Done.
+
+Writing to Home-Desktop-Shuhei:"C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T1-REALIZABLE-KEPSILON\20260911T100157Z\checkpoint-1500-1-01500.dat.h5" in NODE0 mode and compression level 1 ...
+  Writing results.
+Done.
+  1500  3.8531e-01  5.1522e-04  4.4638e-04  5.6590e-04  5.0323e-03  1.5300e-02  8.4834e-03  0:00:00    0
+
+Writing to Home-Desktop-Shuhei:"C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T1-REALIZABLE-KEPSILON\20260911T100157Z\P71A-T1-REALIZABLE-KEPSILON-active500.cas.h5" in NODE0 mode and compression level 1 ...
+Grouping cells for Laplace smoothing ...
+      342609 cells,     2 zones ...
+     1647633 faces,    12 zones ...
+     1046255 nodes,     1 zone  ...
+  Done.
+Done.
+
+Writing to Home-Desktop-Shuhei:"C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\Phase71A\TurbulenceFamily\P71A-T1-REALIZABLE-KEPSILON\20260911T100157Z\P71A-T1-REALIZABLE-KEPSILON-active500.dat.h5" in NODE0 mode and compression level 1 ...
+  Writing results.
+Done.

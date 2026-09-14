@@ -2,14 +2,14 @@
 
 | Field | Value |
 | --- | --- |
-| Status | PLANNING_DRAFT_NOT_EXECUTABLE |
+| Status | READY_FOR_PHASE_LOOP |
 | Lifecycle role | Discovery near-wall sensitivity |
 | Phase context | [Phase 7.1A CONTEXT](../../CONTEXT.md) |
 | Baseline | [Active Fluent baseline](../../baseline-setup-record.md) |
 | Parent identity | P7-E5-CZ-ABSORB-COLD-RAMP11692 active-1000 pair; see [parent reference](../parent-reference.md) |
 | Novelty | NEW wall-treatment sensitivity |
 | Controlled delta | Standard wall functions to scalable wall functions |
-| Run authorization | None |
+| Run authorization | Direct human phase-loop invocation on 2026-09-11 |
 
 ## Question
 

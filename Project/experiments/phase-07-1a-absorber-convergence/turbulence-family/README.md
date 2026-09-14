@@ -2,21 +2,36 @@
 
 ## Status
 
-**Human-selected family; the first three packets are ready for Phase Loop.**
+**Human-selected family; the first closure screen is complete and the staged
+T2-T4 extension queue is active.**
 
 This family was created after the live Fluent baseline audit on 2026-09-11.
 It expands the turbulence investigation while preserving the accepted
 bottom-only, phase-2-only cell-zone absorber.
 
-The child packets are staged. The first tier compares turbulence closures.
-Later tiers isolate RNG options, wall treatment, turbulence-equation numerics,
-and multiphase turbulence coupling. SST and RSM are deferred escalation
+The first tier compared turbulence closures. The active extension queue now
+isolates RNG options, wall treatment, turbulence-equation numerics, and
+multiphase turbulence coupling. SST and RSM remain deferred escalation
 branches and do not yet have child setup packets.
 
-No Fluent run has started from this folder. The first three packets may enter
-Phase Loop after the explicit new-task handoff; Phase Loop still owns all
-parent, closure, save/reopen, smoke, and instrumentation checks. T2-T4 remain
-staged and unqueued.
+T0 RNG reference, T1 standard k-epsilon, and T1 realizable k-epsilon were
+executed in order on the `student` server from the exact active-1000 parent.
+All three completed their 500-active-iteration attached discovery horizon with
+paired save/reopen and evidence artifacts. The first realizable preflight was
+blocked before solving when the validator had not yet encoded Fluent's
+branch-specific absent Kato-Launder option; that attempt is preserved and the
+fresh-parent retry completed successfully. The direct human phase-loop
+invocation has now declared the remaining T2-T4 packets as queue orders 4–11,
+in the order listed under Planned staging.
+
+The first-screen execution gate is complete. The discovery evidence is
+intentionally not promoted to a hypothesis route: the three closure branches
+retain finite-horizon nonstationarity, reverse flow, and broad
+turbulent-viscosity limiting, and no branch has a qualification claim. The
+first campaign comparison is recorded in
+[`family-analysis-summary.json`](family-analysis-summary.json) with the two
+family-level comparison figures under `figures/`. The T2-T4 extension uses the
+same exact parent and evidence contract and remains discovery-only.
 
 ## Family question
 
@@ -35,7 +50,7 @@ The future parent must be a complete paired case/data artifact that is reopened
 and read back against the baseline fingerprint before mutation. A live session
 or iteration count alone is not sufficient parent identity.
 
-The selected parent for the first three queue items is the saved active-1000
+The selected parent for the turbulence-family queue is the saved active-1000
 absorber pair documented in [parent-reference.md](parent-reference.md). Its
 prior manifest proves the absorber topology, source tree, bottom wall, and
 save/reopen state. A read-only Fluent file-existence probe on 2026-09-11
@@ -89,9 +104,11 @@ criteria to make a branch appear converged.
 | T3 | t3-scalable-wall-functions, t3-non-equilibrium-wall-functions | Test near-wall compatibility |
 | T4 | t4-k-second-order, t4-multiphase-turbulence-dispersion | Separate turbulence-equation order from phase-slip/turbulence coupling |
 
-The first scientific comparison should be T0, T1-standard-kepsilon, and
-T1-realizable-kepsilon. The T2-T4 packets are prepared as a bounded family,
-but their execution order remains gate-dependent.
+The first scientific comparison was T0, T1-standard-kepsilon, and
+T1-realizable-kepsilon. The remaining queue is now ordered as T2 production
+limiter, T2 differential viscosity off, T2 swirl off, T2 Kato-Launder, T3
+scalable wall functions, T3 non-equilibrium wall functions, T4 second-order
+`k`, and T4 multiphase turbulence dispersion.
 
 ## Deferred escalation branches
 
@@ -135,21 +152,24 @@ Each child uses the same three core figure questions:
 
 1. **Turbulence stability history** — native iteration versus continuity, k,
    epsilon, phase-fraction residuals, and turbulent-viscosity limiting,
-   compared against the T0 reference.
+   compared against the T0 reference. The campaign-level residual comparison
+   is `figures/turbulence-family-residual-comparison.png`.
 2. **Coupled phase/source balance** — native iteration versus phase-2 inlet,
    absorber/source accounting, steam-outlet phase fluxes, and lower/total
    liquid inventories.
 3. **Spatial turbulence/phase state** — matched-checkpoint contours or derived
    fields for k, epsilon, turbulent viscosity or viscosity ratio, and phase-2
-   volume fraction, with the lower absorber zone marked.
+   volume fraction, with the lower absorber zone marked. This queue captured
+   selected-cell inventory histories rather than contours, so the spatial
+   figure is explicitly partial and makes no field-level claim.
 
 These figures support a bounded discovery judgement only. They do not establish
 physical separator validation or Phase 08 readiness.
 
 ## Lifecycle note
 
-The phase-root phase-state.yaml and independent DISCOVERY_DESIGN transition
-review are not yet present for Phase 7.1A. The child files therefore remain
-planning drafts. They must not be treated as executable setup contracts until
-that lifecycle gate, the exact parent identity, and setup-specific live
-readback are verified.
+The phase-root phase-state.yaml records the passed DISCOVERY_DESIGN gate, the
+completed first-screen execution, and the active direct-human T2-T4 extension
+queue. All extension items remain discovery-only. The bounded
+DISCOVERY_EVIDENCE outcome does not authorize Q-TURB-CLOSURE or a hypothesis
+route; qualification work remains separately gated.
