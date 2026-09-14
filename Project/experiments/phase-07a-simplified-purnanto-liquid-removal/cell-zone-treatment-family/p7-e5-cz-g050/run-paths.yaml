@@ -1,0 +1,62 @@
+setup_id: P7-E5-CZ-G050
+run_id: P7-E5-CZ-G050-student-20260910T044606Z
+status: COMPLETE_VERIFIED
+permission: HUMAN_APPROVED_FOLLOW_ON_DISCOVERY
+goal_lease:
+  phase_id: phase-07a-simplified-purnanto-liquid-removal
+  mode: exclusive
+  experiment_selection: context_gated
+  active_session_control: full
+parent_case_data:
+  case: 'C:\Users\Shuhei Yokkaichi\OneDrive\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\P7\P7-E0-REF\shared-parent-20260908T092043Z\checkpoint-iter0500.cas.h5'
+  data: 'C:\Users\Shuhei Yokkaichi\OneDrive\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\P7\P7-E0-REF\shared-parent-20260908T092043Z\checkpoint-iter0500.dat.h5'
+mesh_split:
+  source_mesh: Separator-purnanto342k.msh.h5
+  register: p7-e5-cz-lower-y010
+  min_point: [-2.067034, 0.0, -1.469893]
+  max_point: [1.066950, 0.10, 1.066889]
+  inside: true
+  fluent_command: mesh/modify-zones/sep-cell-zone-mark
+  cell_zone_name: separator-purnanto
+  move_faces: true
+  lower_zone_name: p7-e5-lower-y010
+  technical_probe_marked_cells: 3794
+  technical_probe_parent_cells: 338815
+  technical_probe_total_cells: 342609
+  technical_probe_total_faces: 1647633
+  technical_probe_solver_nodes: 1046255
+source_contract:
+  phase2_mass: lower-zone-only negative uniform volumetric source
+  phase1_mass: none
+  mixture_momentum: lower-zone-only x/y/z sources from phase-2 removal velocity basis
+  energy_turbulence_parent_sources: none
+gain: 0.5
+active_iterations: 500
+controller_update_interval: 50
+output_root: 'C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneTreatment\20260910T044606Z\P7-E5-CZ-G050'
+manifest: PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G050-student-20260910T044606Z-manifest.json
+residual_history: PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G050-student-20260910T044606Z-residuals.json
+residual_transcript: PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G050-student-20260910T044606Z-residuals-transcript.txt
+report_histories: PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G050-student-20260910T044606Z-reports.json
+analysis_summary: PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G050-student-20260910T044606Z-analysis/summary.json
+current_attempt: recovery continuation from the durable 20260910T034401Z active-250 pair; corrected get_sum source audit
+resume_case: 'C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneTreatment\20260910T034401Z\P7-E5-CZ-G050\P7-E5-CZ-G050-active250.cas.h5'
+resume_data: 'C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneTreatment\20260910T034401Z\P7-E5-CZ-G050\P7-E5-CZ-G050-active250.dat.h5'
+resume_start_active_iteration: 250
+resume_checkpoints:
+  resume_start: 'C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneTreatment\20260910T044606Z\P7-E5-CZ-G050\P7-E5-CZ-G050-resume-start-active250.cas.h5'
+  active300: 'C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneTreatment\20260910T044606Z\P7-E5-CZ-G050\P7-E5-CZ-G050-active300.cas.h5'
+  active350: 'C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneTreatment\20260910T044606Z\P7-E5-CZ-G050\P7-E5-CZ-G050-active350.cas.h5'
+  active400: 'C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneTreatment\20260910T044606Z\P7-E5-CZ-G050\P7-E5-CZ-G050-active400.cas.h5'
+  active450: 'C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneTreatment\20260910T044606Z\P7-E5-CZ-G050\P7-E5-CZ-G050-active450.cas.h5'
+  final_case: 'C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneTreatment\20260910T044606Z\P7-E5-CZ-G050\P7-E5-CZ-G050-active500.cas.h5'
+  final_data: 'C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneTreatment\20260910T044606Z\P7-E5-CZ-G050\P7-E5-CZ-G050-active500.dat.h5'
+final_case: 'C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneTreatment\20260910T044606Z\P7-E5-CZ-G050\P7-E5-CZ-G050-active500.cas.h5'
+final_data: 'C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneTreatment\20260910T044606Z\P7-E5-CZ-G050\P7-E5-CZ-G050-active500.dat.h5'
+durability_status: COMPLETE_WITH_VERIFIED_RECOVERY_CONTINUATION
+prior_attempt: P7-E5-CZ-G050-student-20260910T034401Z BLOCKED_AFTER_ACTIVE500_ENDPOINT_RESET
+blocker: >-
+  Terminal execution is complete and verified, but G050's current numerical
+  package is a recovered native 748--998 continuation window. The positive
+  inventory drift and open boundary closure do not support promotion or an
+  automatic long continuation without the next Phase 07 lifecycle decision.

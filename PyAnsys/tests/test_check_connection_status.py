@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 import importlib.util
-import io
 from contextlib import redirect_stdout
+import io
 from pathlib import Path
 from threading import Event
 from types import SimpleNamespace
@@ -19,91 +19,93 @@ check_connection = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(check_connection)
 
 
-def snapshot(
-    iteration: int | None,
-    *,
-    flow_time: float | None = None,
-    continuity: float = 1e-4,
-) -> dict:
-    return {
-        "progress": {"iteration": iteration},
-        "runtime": {"flow_time": flow_time},
-        "monitors": {
-            "residual": {
-                "last_values": {"continuity": continuity} if iteration is not None else {},
-            }
-        },
-        "fluent_version": "25.2.0",
-    }
+def solver_with_iterating(value: object) -> SimpleNamespace:
+    return SimpleNamespace(
+        settings=SimpleNamespace(
+            solution=SimpleNamespace(
+                run_calculation=SimpleNamespace(iterating=lambda: value),
+            ),
+        ),
+    )
 
 
 class CheckConnectionStatusTests(unittest.TestCase):
-    def test_activity_is_running_when_iteration_advances(self) -> None:
-        activity, reason = check_connection.classify_activity(snapshot(100), snapshot(106))
-        self.assertEqual(activity, "RUNNING")
-        self.assertEqual(reason, "iteration advanced")
+    def test_activity_is_running_only_for_exact_boolean_true(self) -> None:
+        state, reason = check_connection.read_iterating_state(solver_with_iterating(True))
+        self.assertTrue(state)
+        self.assertEqual(reason, "solution.run_calculation.iterating returned true")
 
-    def test_activity_is_running_when_flow_time_advances_without_iteration_monitor(self) -> None:
-        activity, reason = check_connection.classify_activity(
-            snapshot(None, flow_time=0.10),
-            snapshot(None, flow_time=0.12),
+    def test_false_is_not_running(self) -> None:
+        state, reason = check_connection.read_iterating_state(solver_with_iterating(False))
+        self.assertFalse(state)
+        self.assertIn("not true", reason)
+
+    def test_unknown_return_is_not_running(self) -> None:
+        state, reason = check_connection.read_iterating_state(solver_with_iterating(None))
+        self.assertFalse(state)
+        self.assertIn("not true", reason)
+
+    def test_truthy_non_boolean_return_is_not_running(self) -> None:
+        state, reason = check_connection.read_iterating_state(solver_with_iterating(1))
+        self.assertFalse(state)
+        self.assertIn("not true", reason)
+
+    def test_query_exception_is_not_running(self) -> None:
+        def failing_query() -> bool:
+            raise RuntimeError("stale Fluent value")
+
+        solver = solver_with_iterating(False)
+        solver.settings.solution.run_calculation.iterating = failing_query
+        state, reason = check_connection.read_iterating_state(solver)
+        self.assertFalse(state)
+        self.assertIn("did not return true", reason)
+        self.assertIn("RuntimeError", reason)
+
+    def test_missing_query_is_not_running(self) -> None:
+        solver = SimpleNamespace(
+            settings=SimpleNamespace(
+                solution=SimpleNamespace(run_calculation=SimpleNamespace()),
+            ),
         )
-        self.assertEqual(activity, "RUNNING")
-        self.assertEqual(reason, "flow time advanced")
+        state, reason = check_connection.read_iterating_state(solver)
+        self.assertFalse(state)
+        self.assertIn("did not return true", reason)
 
-    def test_unchanged_progress_is_quiescent_not_idle(self) -> None:
-        activity, reason = check_connection.classify_activity(snapshot(100), snapshot(100))
-        self.assertEqual(activity, "QUIESCENT")
-        self.assertIn("no progress detected", reason)
+    def test_activity_query_timeout_is_not_running(self) -> None:
+        release = Event()
+        solver = solver_with_iterating(False)
+        solver.settings.solution.run_calculation.iterating = lambda: release.wait(timeout=1)
 
+        state, reason = check_connection.read_iterating_state_with_timeout(solver, 0.001)
+
+        self.assertFalse(state)
+        self.assertIn("did not return true", reason)
+        self.assertIn("TimeoutError", reason)
+        release.set()
+
+    def test_activity_output_is_binary_and_has_no_residuals(self) -> None:
         output = io.StringIO()
         with redirect_stdout(output):
-            check_connection.print_activity_summary(
-                snapshot(100),
-                snapshot(100),
-                activity_window_seconds=2,
-            )
-        self.assertIn("QUIESCENT", output.getvalue())
-        self.assertIn("not proof of idle", output.getvalue())
-        self.assertNotIn("Activity : IDLE", output.getvalue())
-
-    def test_status_summary_prints_delta_version_and_latest_residuals(self) -> None:
-        first = snapshot(1250, flow_time=0.75, continuity=1.2e-4)
-        second = snapshot(1255, flow_time=0.76, continuity=9.0e-5)
-        output = io.StringIO()
-
-        with redirect_stdout(output):
-            activity = check_connection.print_activity_summary(
-                first,
-                second,
-                activity_window_seconds=2,
-            )
-
+            check_connection.print_activity(False, "query did not return true")
         text = output.getvalue()
-        self.assertEqual(activity, "RUNNING")
-        self.assertIn("Activity : RUNNING", text)
-        self.assertIn("Iteration: 1250 -> 1255 (+5 in 2 s)", text)
-        self.assertIn("Flow time: 0.75 -> 0.76 (+0.01 s)", text)
-        self.assertIn("Fluent   : 25.2.0", text)
-        self.assertIn("continuity", text)
-        self.assertIn("9e-05", text)
+        self.assertIn("Activity : NOT RUNNING", text)
+        self.assertNotIn("UNKNOWN", text)
+        self.assertNotIn("Residual", text)
+        self.assertNotIn("Monitor", text)
 
-    def test_snapshot_passes_previous_state_to_monitor(self) -> None:
-        first = snapshot(42)
-        second = snapshot(43)
-        with patch.object(check_connection, "collect_snapshot", return_value=second) as collect:
-            value, error = check_connection._collect_snapshot_with_timeout(
-                object(),
-                timeout_seconds=1,
-                previous_state=first,
+    def test_tcp_output_is_binary_and_uses_tcp_label(self) -> None:
+        output = io.StringIO()
+        with redirect_stdout(output):
+            check_connection.print_endpoint_probe(
+                {
+                    "status": "unavailable",
+                    "detail": "configure FLUENT_IP and FLUENT_PORT",
+                },
             )
-        self.assertIsNone(error)
-        self.assertEqual(value, second)
-        collect.assert_called_once_with(
-            unittest.mock.ANY,
-            previous_state=first,
-            monitor_sets=("residual",),
-        )
+        text = output.getvalue()
+        self.assertIn("TCP      : NOT CONNECTED", text)
+        self.assertNotIn("Endpoint", text)
+        self.assertNotIn("UNKNOWN", text)
 
     def test_blocking_fluent_call_is_bounded_by_timeout(self) -> None:
         release = Event()
@@ -151,45 +153,6 @@ class CheckConnectionStatusTests(unittest.TestCase):
 
         self.assertEqual(probe["status"], "unreachable")
         self.assertIn("Connection refused", probe["detail"])
-
-    def test_console_stream_starts_new_fluent_output(self) -> None:
-        transcript = SimpleNamespace(
-            is_streaming=True,
-            stop=MagicMock(),
-            start=MagicMock(),
-        )
-        solver = SimpleNamespace(transcript=transcript)
-
-        returned = check_connection.start_console_stream(solver)
-
-        self.assertIs(returned, transcript)
-        transcript.stop.assert_called_once_with()
-        transcript.start.assert_called_once_with(write_to_stdout=True)
-
-    def test_console_timer_streams_for_requested_duration(self) -> None:
-        transcript = SimpleNamespace(
-            is_streaming=False,
-            stop=MagicMock(),
-            start=MagicMock(),
-        )
-        solver = SimpleNamespace(transcript=transcript)
-        sleep = MagicMock()
-        output = io.StringIO()
-
-        with redirect_stdout(output):
-            streamed = check_connection.stream_console_for(
-                solver,
-                37.5,
-                sleep_fn=sleep,
-            )
-
-        self.assertTrue(streamed)
-        transcript.start.assert_called_once_with(write_to_stdout=True)
-        sleep.assert_called_once_with(37.5)
-        transcript.stop.assert_called_once_with()
-        self.assertIn("Console  : STREAMING for 37.5 s", output.getvalue())
-        self.assertIn("--- end Fluent console sample ---", output.getvalue())
-
 
 if __name__ == "__main__":
     unittest.main()

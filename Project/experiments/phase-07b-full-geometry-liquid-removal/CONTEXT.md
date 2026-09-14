@@ -22,7 +22,7 @@ remove liquid entering a designated zone. The human explicitly selected an
 ideal collector with no requirement to preserve a standing pool.
 
 Phase 7b is Andy's separate full-geometry investigation. Shuhei's
-[Phase 7](../phase-07-simplified-purnanto-liquid-removal/CONTEXT.md) continues
+[Phase 7](../phase-07a-simplified-purnanto-liquid-removal/CONTEXT.md) continues
 to own the simplified, truncated Purnanto direction. Neither phase supersedes
 the other. Phase 06 remains concluded with its historical evidence intact.
 

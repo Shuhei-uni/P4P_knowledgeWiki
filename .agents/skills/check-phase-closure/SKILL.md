@@ -1,6 +1,6 @@
 ---
 name: check-phase-closure
-description: "Decide whether an autonomous scientific phase should continue, conclude, or return to the human after verified hypothesis evidence exists. Normal autonomous closure is illegal until the mandatory lifecycle gates have passed."
+description: "Decide whether an autonomous scientific phase should continue, conclude, or finish timeboxed with durable autonomous blocks after verified hypothesis evidence exists."
 ---
 
 # Check Phase Closure
@@ -24,12 +24,15 @@ HYPOTHESIS_EXECUTION
 HYPOTHESIS_EVIDENCE
 ```
 
-There must also be no unresolved `HUMAN_REQUIRED` lock.
+There must also be no unresolved autonomous recovery item that would materially
+change the proposed closure statement.
 
 If the lifecycle is incomplete:
 
-- return `CONTINUE` when the missing work is still inside the current phase/autonomy boundary;
-- return `RETURN TO HUMAN / PHASE-PLANNER` when the missing requirement is human-owned;
+- return `CONTINUE` when a repair, sensitivity, or in-envelope alternate path
+  remains feasible;
+- return `AUTONOMOUSLY BLOCKED / TIMEBOX EXHAUSTED` when no such path remains
+  or the recorded deadline prevents another launch;
 - do **not** reinterpret short discovery evidence as sufficient phase closure.
 
 A human may explicitly terminate or reframe a phase before this lifecycle completes. That is a human decision, not autonomous `CONCLUDE PHASE`.
@@ -49,7 +52,7 @@ Ask:
 
 A bounded, conditional, or negative conclusion is valid. A missing required evidence stream is not.
 
-If the hypothesis setup required scaled residual history, restart evidence, a final-window statistic, or another qualification signal and it is unavailable, closure is blocked until that evidence is repaired, rerun, or the human explicitly changes the claim/evidence requirement before the run.
+If the hypothesis setup required scaled residual history, restart evidence, a final-window statistic, or another qualification signal and it is unavailable, closure is blocked until that evidence is repaired, rerun, or the claim is bounded to what the verified evidence can support.
 
 Do not weaken the evidence standard after seeing an inconvenient result.
 
@@ -63,7 +66,10 @@ Use:
 
 Do not demand proof of every assumption. Ask whether an assumption materially limits or threatens the specific phase-level statement.
 
-A missing plant fact or other human-owned parameter is not a working assumption merely because the agent would like to continue. If the conclusion depends on it, return to the human.
+A missing external parameter is not a working fact merely because the agent
+would like to continue. Research the narrowest defensible range, record an
+`Assumed` surrogate/sensitivity where it is material, and bound the conclusion;
+if no defensible path remains, preserve an autonomous block.
 
 ## Return one of three outcomes
 
@@ -92,11 +98,16 @@ Choose `CONCLUDE PHASE` only when:
 
 State the supported conclusion, important claim limits, and any assumptions that remain accepted-for-now/questioned but do not threaten it.
 
-### `RETURN TO HUMAN / PHASE-PLANNER`
+### `AUTONOMOUSLY BLOCKED / TIMEBOX EXHAUSTED`
 
-Choose this when useful progress depends on a decision or fact outside the granted autonomy envelope: scope/model-boundary change, missing plant/validation information, phase-question change, explicit resource decision, or another persisted human lock.
+Choose this only after autonomous recovery has exhausted the useful,
+context-consistent options or the timebox has ended. It may cover a missing
+external fact, unavailable resource, phase-boundary conflict, or failed
+technical route, but it is a durable autonomous disposition—not a request for
+a reply.
 
-State exactly what decision/fact is needed and which evidence brought the phase to that boundary.
+State the attempted research/repairs, the exact unresolved limitation, retained
+artifacts, and the strongest bounded conclusion supported.
 
 ## Independent closure review is mandatory
 
@@ -108,7 +119,7 @@ That review must independently check that:
 - the hypothesis evidence gate passed on the evidence promised before the run;
 - the proposed phase-level statement follows from the data rather than from labels/setup intent;
 - no important missing evidence is being waived retrospectively;
-- no unresolved human lock is being bypassed;
+- no unresolved recovery item is being bypassed;
 - the conclusion is no broader than the tested formulation/range/conditions.
 
 The scientific loop may not self-overrule a closure `BLOCK`.
@@ -120,10 +131,10 @@ Track whether meaningful cycles are changing the scientific picture.
 If two consecutive cycles fail to reduce an important uncertainty, strengthen the statement, or materially update an assumption:
 
 - do not generate a third nearby variation by habit;
-- return to the human / `phase-planner` for a substantially different question
-  or branch; or
-- follow a named Phase Loop-approved path, or an Auto Loop path that remains
-  inside the recorded envelope and timebox.
+- generate a materially different, research-backed in-envelope diagnostic or
+  sensitivity route; or
+- record `AUTONOMOUSLY BLOCKED / TIMEBOX EXHAUSTED` with the failed approaches
+  and the retained evidence.
 
 Stagnation can justify changing the route. It does not justify skipping qualification.
 
@@ -131,13 +142,13 @@ Stagnation can justify changing the route. It does not justify skipping qualific
 
 Return only:
 
-1. **Outcome:** `CONTINUE`, `CONCLUDE PHASE`, or `RETURN TO HUMAN / PHASE-PLANNER`;
-2. **Lifecycle readiness:** which mandatory gates are `PASS`, `BLOCK`, or `HUMAN_REQUIRED`;
+1. **Outcome:** `CONTINUE`, `CONCLUDE PHASE`, or `AUTONOMOUSLY BLOCKED / TIMEBOX EXHAUSTED`;
+2. **Lifecycle readiness:** which mandatory gates are `PASS` or `BLOCK`;
 3. **Phase-level statement currently supported**;
 4. **Important unresolved hypothesis / materially challenged assumption / missing evidence**, if any;
 5. **Why another cycle is or is not worth doing**;
 6. **Stagnation status**;
-7. **Important limits or human decision boundary**;
+7. **Important limits and durable autonomous-block boundary**;
 8. **PHASE_CLOSURE verifier result** when conclusion is proposed.
 
 Do not create the next experiment. This skill decides whether the verified lifecycle has earned closure.

@@ -165,7 +165,9 @@ After an explicit selection:
   - **Context:** `<phase-root CONTEXT.md>`
   - **Goal:** <phase question>
   - **Defined queue:** <ordered setup paths and lifecycle gates>
-  - **Return:** `HUMAN_REQUIRED` outside that queue.
+  - **Recovery:** `BLOCK` outside that queue; inspect/research the narrowest
+    context-consistent diagnostic, sensitivity, or durable block without
+    silently replacing the phase question.
   ```
 
 - **3️⃣** — continue the human conversation through `phase-grill`. Do not
@@ -183,16 +185,17 @@ Only after choice **1️⃣** or **2️⃣**, give `phase-loop` its handoff:
 - **Enough evidence looks like** — what would support a useful phase conclusion.
 - **Defined queue** — ordered `setup.md` paths, lifecycle roles, prerequisite
   gates, and no-unlisted-work rule.
-- **Completion route** — return to the human, or offer the pre-authorized Auto
-  Loop option at Phase Loop entry.
+- **Completion route** — persist the evidence-backed outcome, or offer the
+  pre-authorized Auto Loop option at Phase Loop entry.
 - **Autonomy** — queue execution plus the granted Fluent fleet/session
   authority, including any restrictions.
-- **Return to the human when** — the decisions or missing facts the loop must not invent or authorize itself.
+- **Autonomous recovery** — material unknowns, research/sensitivity fallback,
+  durable-block record, and claim consequence.
 
 The handoff sets the destination, authority, approved route, and boundaries.
 
 `phase-loop` still owns faithful execution, evidence verification, analysis,
-and lifecycle discipline. It may follow only the defined queue; a new
-candidate, ambiguous gate, or non-equivalent workaround returns to this human
-planning boundary. Auto Loop is entered only through a deliberate completion
-route or direct human invocation.
+and lifecycle discipline. It follows the defined queue first; a new candidate,
+ambiguous gate, or non-equivalent workaround triggers autonomous recovery with
+an explicit claim limit rather than a pause. Auto Loop is entered only through
+a deliberate completion route or direct human invocation.

@@ -56,7 +56,7 @@ is uncontrollable or that full-geometry CFD can never work. The blocked
 lifecycle state in `phase-state.yaml` is retained as the pre-decision record;
 its next action is no longer the active project direction. See the
 [Phase-06 conclusion](conclusion.md) and
-[Phase-07 direction](../phase-07-simplified-purnanto-liquid-removal/index.md).
+[Phase-07 direction](../phase-07a-simplified-purnanto-liquid-removal/index.md).
 
 ## Relationship to the prior work
 

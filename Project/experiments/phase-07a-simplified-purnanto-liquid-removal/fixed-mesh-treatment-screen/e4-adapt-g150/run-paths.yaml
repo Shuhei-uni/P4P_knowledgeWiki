@@ -1,0 +1,28 @@
+setup_id: P7-E4-ADAPT-G150
+run_id: P7-E4-ADAPT-G150-student-20260910T003002Z
+status: COMPLETE
+permission: HUMAN_AUTHORIZED_CONDITIONAL_FOURTH_BRANCH
+goal_lease:
+  phase_id: phase-07a-simplified-purnanto-liquid-removal
+  mode: exclusive
+  active_session_control: full
+server:
+  ref: student@10.0.0.5
+  id: student
+  ip: 10.0.0.5
+  fluent_version: Ansys Fluent 2025 R2
+  takeover: student is the only currently reachable Fluent endpoint; quiescent read-only preflight passed and the phase has exclusive session authority
+parent_case_data:
+  case: 'C:\Users\Shuhei Yokkaichi\OneDrive\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\P7\P7-E0-REF\shared-parent-20260908T092043Z\checkpoint-iter0500.cas.h5'
+  data: 'C:\Users\Shuhei Yokkaichi\OneDrive\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\P7\P7-E0-REF\shared-parent-20260908T092043Z\checkpoint-iter0500.dat.h5'
+output_root: 'C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\TreatmentScreen\20260910T003002Z\P7-E4-ADAPT-G150'
+prepared_case: 'C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\TreatmentScreen\20260910T003002Z\P7-E4-ADAPT-G150\P7-E4-ADAPT-G150-prepared.cas.h5'
+smoke_case: 'C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\TreatmentScreen\20260910T003002Z\P7-E4-ADAPT-G150\P7-E4-ADAPT-G150-active050.cas.h5'
+checkpoint250_case: 'C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\TreatmentScreen\20260910T003002Z\P7-E4-ADAPT-G150\P7-E4-ADAPT-G150-active250.cas.h5'
+final_case: 'C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\TreatmentScreen\20260910T003002Z\P7-E4-ADAPT-G150\P7-E4-ADAPT-G150-active500.cas.h5'
+report_root: 'C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\TreatmentScreen\20260910T003002Z\P7-E4-ADAPT-G150\monitors'
+manifest: PyAnsys/output/phase07_treatment_screen/P7-E4-ADAPT-G150-student-20260910T003002Z-manifest.json
+residual_history: PyAnsys/output/phase07_treatment_screen/P7-E4-ADAPT-G150-student-20260910T003002Z-residuals.json
+transcript: PyAnsys/output/phase07_treatment_screen/P7-E4-ADAPT-G150-student-20260910T003002Z-residuals-transcript.txt
+durability_status: LOCAL_ONLY
+blocker: adaptive command saturated at the final update and liquid inventory remained increasing; no promotion claim

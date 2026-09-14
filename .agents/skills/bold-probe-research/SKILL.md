@@ -188,12 +188,20 @@ Do not write a literature expectation as a project finding.
 
 After the research brief is complete:
 
-1. return research evidence to `phase-grill` / the human for candidate approval;
-2. let `question-experiment` challenge an approved candidate before setup creation;
-3. only after human approval should implementation-specific uncertainty be
-   resolved through `fluent-live-inspection` or `fluent-manual-researcher`.
+1. for a Phase Loop candidate, return the evidence to the calling loop as a
+   recovery/disposition record; it may not silently replace the declared queue;
+2. for an `origin: auto-loop` candidate inside the recorded envelope, return it
+   directly to Auto Loop to record the gate-linked candidate, then let
+   `question-experiment` challenge it before setup creation;
+3. resolve implementation-specific uncertainty through
+   `fluent-live-inspection` or `fluent-manual-researcher` only after the
+   candidate is recorded.
 
-If research reveals that the strongest idea would change the phase objective, success definition, or agreed modelling boundary rather than merely probe it, do not silently launch it as a bold side branch. Return that direction to the human / `phase-planner`.
+If research reveals that the strongest idea would change the phase objective,
+success definition, or agreed modelling boundary rather than merely probe it,
+do not silently launch it as a bold side branch. Preserve the direction as a
+deferred observation and return the closest in-envelope probe or a durable
+autonomous block.
 
 ## Output
 
@@ -203,7 +211,9 @@ Return:
 - the research angles covered;
 - a compact Bold-Probe Research Brief with the serious candidates;
 - rejected/deferred candidates and why;
-- research findings to return to `phase-grill` / the human for any approval;
-- any phase-level or implementation boundary that must be resolved before the idea can become runnable.
+- research findings for the calling loop's in-envelope candidate/recovery
+  decision; and
+- any phase-level or implementation boundary, with the closest valid probe or
+  durable autonomous-block disposition.
 
 Do not create or update CFD wiki pages merely because research was performed. Preserve reusable knowledge there only when a separate update is justified by the owning workflow.

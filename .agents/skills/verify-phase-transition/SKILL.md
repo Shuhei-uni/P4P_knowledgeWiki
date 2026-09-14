@@ -1,6 +1,6 @@
 ---
 name: verify-phase-transition
-description: "Independently verify that Phase Loop or Auto Loop has satisfied the hard requirements for a lifecycle transition. Return PASS, BLOCK, or HUMAN_REQUIRED; the calling loop may not self-overrule BLOCK or HUMAN_REQUIRED."
+description: "Independently verify that Phase Loop or Auto Loop has satisfied a hard lifecycle transition. Return PASS or BLOCK; the calling loop must autonomously recover a BLOCK and may not self-overrule it."
 ---
 
 # Verify Phase Transition
@@ -26,12 +26,13 @@ Machine-checkable requirements should be checked deterministically before scient
 Return exactly one gate status:
 
 - `PASS` — every mandatory requirement for this transition is satisfied and evidenced;
-- `BLOCK` — the transition is not allowed yet, but the deficiency can be addressed within the current phase/autonomy boundary;
-- `HUMAN_REQUIRED` — progress requires information, permission, or a phase-level decision that the autonomous loop is not allowed to invent or self-authorize.
+- `BLOCK` — the transition is not allowed yet. The caller must inspect, research,
+  repair, sensitise, defer, or durably record this path under the autonomous
+  recovery contract before choosing another valid in-envelope path.
 
-The calling loop must not proceed past `BLOCK` or `HUMAN_REQUIRED`.
+The calling loop must not proceed past `BLOCK`.
 
-A later verification may replace a prior `BLOCK` only after new evidence resolves the listed deficiency. A `HUMAN_REQUIRED` lock may be cleared only by explicit human input/authorization or by newly located authoritative evidence that directly resolves the stated missing fact without changing the phase contract.
+A later verification may replace a prior `BLOCK` only after new evidence resolves the listed deficiency. A durable autonomous block permits the loop to defer that path and continue other valid work, but never to claim this transition passed.
 
 ## Canonical lifecycle gates
 
@@ -49,13 +50,13 @@ Require:
 - what would count as enough evidence for a useful phase conclusion;
 - the active loop type and autonomy authority envelope, including Fluent
   fleet/session authority;
-- explicit human-return conditions.
+- autonomous recovery and durable-block recording conditions.
 
 For Phase Loop, require a declared setup queue. For Auto Loop, require the
 recorded family focus, deepening/enumeration direction, hypothesis horizon,
 stop time/timezone, and one recorded Fluent-authority outcome. Do not pass if
-either loop would need to invent a plant fact, validation target, physical
-boundary condition, or other human-owned fact in order to begin.
+  either loop lacks a defensible recorded assumption/sensitivity plan for a
+  material external fact needed to begin.
 
 ### `DISCOVERY_DESIGN`
 
@@ -73,12 +74,15 @@ Require:
   envelope added for breadth or idle capacity;
 - every possible long-run promotion is a named conditional qualification path
   or an Auto Loop-recorded path linked to completed discovery evidence;
-- no unresolved human lock is being bypassed with an invented surrogate unless the phase contract explicitly authorizes that surrogate class.
+- no unsupported surrogate is being passed off as a fact; material unknowns
+  must be labelled `Assumed`, bounded by research/sensitivity where feasible,
+  and reflected in the claim limit.
 
 Return `BLOCK` when a proposed case lacks valid authority, provenance, required
-evidence, or decision-gate coverage. Return `HUMAN_REQUIRED` when resolving the
-gap requires a changed phase direction or human-owned fact. A Phase Loop cannot
-repair a missing queue item by proposing another case.
+evidence, or decision-gate coverage. If a fact or direction is missing, return
+`BLOCK` with the narrowest research, sensitivity, or in-envelope recovery
+needed. A Phase Loop cannot silently replace a queue item with an unrelated
+scientific case.
 
 ### `DISCOVERY_EXECUTION`
 
@@ -103,6 +107,13 @@ Require:
   the declared gate has completed and passed its execution requirements;
 - the completed discovery runs have been compared and analysed, not merely listed;
 - the planned core figures/equivalent decisive evidence exist;
+- the corresponding `results.md` identifies the exact experiment/run and
+  answers its declared screening question rather than only listing outputs;
+- selected core figures are embedded in the report with readable captions and
+  figure-linked observations, or each unavailable required figure records its
+  evidence consequence;
+- raw histories, manifests, and machine paths are supporting detail rather than
+  the report's main narrative;
 - important numerical/physical caveats are identified;
 - discovery has materially narrowed the uncertainty;
 - at least one specific, falsifiable hypothesis is supported strongly enough to justify qualification compute;
@@ -111,9 +122,9 @@ Require:
 
 Do not pass because an early result looks decisive unless the recorded gate
 explicitly covers that result and its declared evidence is complete. If a Phase
-Loop screen is insufficient or uncertainty remains broad, return
-`HUMAN_REQUIRED`. Auto Loop may make another screen only if the recorded
-envelope/timebox covers it.
+Loop screen is insufficient or uncertainty remains broad, return `BLOCK` and
+recover with its nearest allowed diagnostic. Auto Loop must make another
+in-envelope screen or record a durable autonomous block.
 
 If no defensible hypothesis has emerged, return `BLOCK` and require more/better discovery rather than permitting a weak hypothesis test.
 
@@ -142,7 +153,7 @@ Require:
 - required histories, balances, residuals/numerical evidence, fields, checkpoints, and core figures are instrumented before the solve;
 - exact parent/setup/readback/save-reopen/smoke verification passed;
 - the selected horizon is adequate for the claim;
-- for ordinary steady iteration-based full-geometry qualification, the planned horizon is at least 10,000 iterations unless an explicit human-approved exception or scientifically equivalent non-iteration qualification basis is recorded;
+- for ordinary steady iteration-based full-geometry qualification, the planned horizon is at least 10,000 iterations unless the setup declares a scoped Auto Loop qualification horizon (normally 2,000 iterations) with a correspondingly bounded claim, or a scientifically equivalent non-iteration basis is recorded;
 - when a claim depends on stationarity/steady behaviour, restart/continuation qualification is included when needed to distinguish transient drift from a durable state;
 - for Codex detached hypothesis runs, exact originating thread capture, `COMPLETE` and `BLOCKED` wake triggers, and deterministic completion verification are configured before launch.
 
@@ -166,13 +177,21 @@ Require:
 
 - all evidence declared necessary to judge the hypothesis is present;
 - planned core figures/equivalent analyses have been produced;
+- the corresponding `results.md` gives a plot-led answer to the hypothesis:
+  selected core figures are embedded with captions, observations are tied to
+  them, and the report states the bounded conclusion and limitations;
+- referenced report-facing figures exist at their declared Project-local paths,
+  or the report explicitly records why a required figure is unavailable and
+  the resulting evidence block;
 - numerical credibility is assessed using the evidence the setup said was required;
 - required residual/history evidence is not silently waived after the run;
 - final-window/qualification statistics use an explicit window/basis;
 - the hypothesis is classified from the data with important limits and competing explanations retained;
 - the resulting statement is no stronger than implementation quality, run depth, and evidence completeness allow.
 
-If a required history is missing, return `BLOCK`; do not compensate with prose.
+If a required history, core figure, or curated result explanation is missing,
+return `BLOCK`; do not compensate with prose, raw artifact links, or a generic
+diagnostic dashboard.
 
 ### `PHASE_CLOSURE`
 
@@ -184,7 +203,8 @@ Normal autonomous `CONCLUDE PHASE` requires all of:
 - `HYPOTHESIS_RUN_READY == PASS`;
 - `HYPOTHESIS_EXECUTION == PASS`;
 - `HYPOTHESIS_EVIDENCE == PASS`;
-- no unresolved `HUMAN_REQUIRED` lock;
+- no unresolved autonomous recovery item that would materially change the
+  proposed closure statement;
 - independent review finds that the proposed phase-level statement follows from the accumulated evidence and further feasible work is unlikely to materially change that statement.
 
 A human may explicitly terminate/reframe a phase earlier. The autonomous loop may not manufacture an early `CONCLUDE PHASE` by skipping qualification.
@@ -197,7 +217,7 @@ Write or update the phase-root `phase-state.yaml` with:
 state: <current lifecycle state>
 gates:
   <GATE_ID>:
-    status: PASS | BLOCK | HUMAN_REQUIRED
+    status: PASS | BLOCK
     checked_at: <timestamp or commit/run reference when available>
     evidence:
       - <artifact/path/manifest/result pointer>
@@ -215,7 +235,7 @@ Do not mark the next lifecycle state active until the gate permitting that trans
 Return:
 
 1. gate ID;
-2. status: `PASS`, `BLOCK`, or `HUMAN_REQUIRED`;
+2. status: `PASS` or `BLOCK`;
 3. deterministic checks performed;
 4. strongest independent-review finding;
 5. exact evidence supporting the status;

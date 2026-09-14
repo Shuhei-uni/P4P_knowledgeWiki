@@ -16,9 +16,11 @@ Loop experiment.
 Read the phase-root `CONTEXT.md` too. Before mutation, verify that the setup's
 candidate/screen/qualification ID exists there and matches the setup's purpose,
 delta, invariants, evidence contract, and gate linkage. The authority must be
-either human approval (Phase Loop) or `origin: auto-loop` matching the active
-Auto Loop envelope. Return `HUMAN_REQUIRED` on a provenance mismatch; do not
-repair it by changing the science during implementation.
+either human approval (Phase Loop) or `origin: auto-loop` /
+`origin: autonomous-recovery` matching the active loop envelope. On a
+provenance mismatch, return `BLOCK` with exact reconciliation evidence; the
+calling loop must repair the recorded context/setup relationship or durably
+block the path, never change the science silently during implementation.
 
 For **discovery** require:
 
@@ -38,7 +40,9 @@ Do not treat a mode label in `setup.md` as permission to skip lifecycle state.
 
 `HYPOTHESIS_RUN_READY` is granted only **after** this skill has produced the implementation/readback/save-reopen/smoke/instrumentation proof and `verify-phase-transition` accepts it. Do not launch the long hypothesis solve before that gate is `PASS`.
 
-If `phase-state.yaml` contains an unresolved `HUMAN_REQUIRED` lock, stop. Implementation may not bypass it by substituting an assumed target or different physical boundary.
+If `phase-state.yaml` contains an unresolved material recovery block, do not
+mutate this case. Reconcile it through autonomous recovery; implementation may
+not bypass it by substituting an assumed target or different physical boundary.
 
 ## Receive the execution plan
 
@@ -126,7 +130,10 @@ Every history/monitor/report that cannot be reconstructed later and is required 
 
 This includes required residual/equation histories when numerical credibility is part of the hypothesis claim.
 
-Do not knowingly launch a qualification run with “we will see if we can recover the residuals later.” If the required evidence channel cannot be made durable, return the setup for redesign or an explicit pre-run change to the claim/evidence contract.
+Do not knowingly launch a qualification run with “we will see if we can recover
+the residuals later.” If the required evidence channel cannot be made durable,
+return `BLOCK` to the calling loop for an autonomous repair, equivalent
+instrumentation, bounded claim redesign, or durable blocked disposition.
 
 ## Discovery execution — remain attached
 
@@ -157,7 +164,10 @@ This skill does not itself mark discovery evidence as scientifically sufficient.
 
 For hypothesis-test mode, first verify that the setup is genuinely qualification-scale.
 
-For ordinary steady iteration-based full-geometry work, reject a planned horizon below 10,000 iterations unless the setup records an explicit human-approved exception or scientifically equivalent non-iteration qualification basis.
+For ordinary steady iteration-based full-geometry work, reject a planned
+horizon below 10,000 iterations unless the setup records a scoped Auto Loop
+qualification horizon (normally 2,000 iterations) with its bounded claim, or a
+scientifically equivalent non-iteration qualification basis.
 
 Verify any planned continuation/restart qualification for steady/stationary claims.
 

@@ -14,7 +14,8 @@ This skill implements a case that has already earned scientific permission. It m
 - Treat connection/server ID as transport routing, never case identity.
 - Require exact parent case/data paths and artifact identity.
 - Receive canonical `run-paths.yaml` and server placement from `fluent-fleet-orchestration` / `implement-experiment`.
-- Read phase lifecycle state before mutation; do not implement under an unresolved `HUMAN_REQUIRED` lock.
+- Read phase lifecycle state before mutation; do not implement under an
+  unresolved material recovery block.
 - Define the intended mutable leaves and invariants before mutation.
 - Derive run-specific output/recovery paths.
 
@@ -85,7 +86,10 @@ Before any planned discovery or long hypothesis solve, require:
 - no setup/readback drift after smoke;
 - no unresolved path ambiguity.
 
-If a required evidence stream cannot be captured durably, do not launch a qualification run and hope to recover it later.
+If a required evidence stream cannot be captured durably, return `BLOCK` to the
+calling loop for autonomous repair, equivalent instrumentation, bounded claim
+redesign, or durable blocked disposition; do not launch and hope to recover it
+later.
 
 ## Mode-aware handoff
 
@@ -107,18 +111,26 @@ Do not detach discovery merely to avoid waiting. An RPC/tool timeout is not a te
 
 A long hypothesis run may launch only after `verify-phase-transition` records `HYPOTHESIS_RUN_READY == PASS`.
 
-For ordinary steady iteration-based full-geometry qualification, reject a planned horizon below 10,000 iterations unless the setup records an explicit human-approved exception or scientifically equivalent non-iteration basis.
+For ordinary steady iteration-based full-geometry qualification, reject a
+planned horizon below 10,000 iterations unless the setup records a scoped Auto
+Loop qualification horizon (normally 2,000 iterations) with a bounded claim,
+or a scientifically equivalent non-iteration basis.
 
 On Codex, hand the run to `supervise-fluent-run`; do not background-launch the raw runner. On runtimes without self-resume, remain attached for the approved horizon.
 
 The hypothesis execution path must not change the scientific experiment after readiness verification.
 
-## Stop conditions
+## Autonomous recovery conditions
 
-Stop before mutation or launch when any of these remains unresolved:
+Do not mutate or launch this path while any of these remains unresolved. Return
+`BLOCK`, then apply the autonomous-recovery sequence: reconcile exact artifacts,
+inspect live state, research the repository/official manual, test the leanest
+recoverable child or alternate server, verify readback/save-reopen, and retry.
+If recovery is exhausted, persist `BLOCKED_AUTONOMOUS` with retained evidence
+and continue another valid lane:
 
 - lifecycle permission missing;
-- `HUMAN_REQUIRED` lock active;
+- material recovery block active;
 - parent identity uncertain;
 - path/output identity ambiguous;
 - parent audit conflicts with branch assumptions;

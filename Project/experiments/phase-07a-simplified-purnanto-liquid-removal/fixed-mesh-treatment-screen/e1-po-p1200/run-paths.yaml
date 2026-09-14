@@ -1,0 +1,30 @@
+setup_id: P7-E1-PO-P1200
+run_id: P7-E1-PO-P1200-server3-20260909T001000Z
+status: BLOCKED
+permission: HUMAN_AUTHORIZED_ATTEMPT_DEPENDENCY_GATED
+goal_lease:
+  phase_id: phase-07a-simplified-purnanto-liquid-removal
+  mode: exclusive
+  active_session_control: full
+server:
+  ref: server-3@10.104.145.176
+  id: server-3
+  ip: 10.104.145.176
+  fluent_version: Ansys Fluent 2025 R2
+  takeover: prior treatment screen completed; same session reused under current human authorization
+parent_case_data:
+  case: 'C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\P7\\P7-E0-REF\\shared-parent-20260908T092043Z\\initialized.cas.h5'
+  data: 'C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\P7\\P7-E0-REF\\shared-parent-20260908T092043Z\\initialized.dat.h5'
+output_root: 'C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\TreatmentScreen\\20260909T001000Z\\P7-E1-PO-P1200'
+prepared_case: 'C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\TreatmentScreen\\20260909T001000Z\\P7-E1-PO-P1200\\P7-E1-PO-P1200-prepared.cas.h5'
+smoke_case: 'C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\TreatmentScreen\\20260909T001000Z\\P7-E1-PO-P1200\\P7-E1-PO-P1200-active050.cas.h5'
+checkpoint250_case: 'C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\TreatmentScreen\\20260909T001000Z\\P7-E1-PO-P1200\\P7-E1-PO-P1200-active250.cas.h5'
+final_case: 'C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\TreatmentScreen\\20260909T001000Z\\P7-E1-PO-P1200\\P7-E1-PO-P1200-active500.cas.h5'
+report_root: 'C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\TreatmentScreen\\20260909T001000Z\\P7-E1-PO-P1200\\monitors'
+manifest: PyAnsys/output/phase07_treatment_screen/P7-E1-PO-P1200-server3-20260909T001000Z-manifest.json
+residual_history: PyAnsys/output/phase07_treatment_screen/P7-E1-PO-P1200-server3-20260909T001000Z-residuals.json
+transcript: PyAnsys/output/phase07_treatment_screen/P7-E1-PO-P1200-server3-20260909T001000Z-residuals-transcript.txt
+prior_invalid_attempt:
+  run_id: P7-E1-PO-P1200-server1-20260908T103000Z
+  reason: final Fluent readback was 1120000 Pa, not the requested 1200000 Pa
+durability_status: LOCAL_ONLY

@@ -1,0 +1,61 @@
+setup_id: P7-E5-CZ-G100-CONT2500
+run_id: P7-E5-CZ-G100-CONT2500-student-20260910T070332Z
+status: COMPLETE_VERIFIED
+permission: HUMAN_APPROVED_CONTINUATION_DIRECTION
+goal_lease:
+  phase_id: phase-07a-simplified-purnanto-liquid-removal
+  mode: exclusive
+  experiment_selection: context_gated
+  active_session_control: full
+parent_setup_id: P7-E5-CZ-G100
+parent_run_id: P7-E5-CZ-G100-student-20260910T045745Z
+parent_case: 'C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneTreatment\20260910T045745Z\P7-E5-CZ-G100\P7-E5-CZ-G100-active500.cas.h5'
+parent_data: 'C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneTreatment\20260910T045745Z\P7-E5-CZ-G100\P7-E5-CZ-G100-active500.dat.h5'
+continuation:
+  starting_active_iteration: 500
+  additional_active_iterations: 2000
+  target_final_active_iteration: 2500
+  approximate_start_native_iteration: 1000
+  approximate_final_native_iteration: 3000
+  update_interval_active_iterations: 50
+  no_reinitialize: true
+  no_resplit: true
+  no_mesh_change: true
+  no_source_law_change: true
+mesh_split:
+  source_mesh: Separator-purnanto342k.msh.h5
+  register: p7-e5-cz-lower-y010
+  min_point: [-2.067034, 0.0, -1.469893]
+  max_point: [1.066950, 0.10, 1.066889]
+  inside: true
+  move_faces: true
+  lower_zone_name: p7-e5-lower-y010
+  expected_marked_cells: 3794
+  expected_parent_cells: 338815
+  expected_total_cells: 342609
+  expected_total_faces: 1647633
+  expected_solver_nodes: 1046255
+source_contract:
+  phase2_mass: unchanged lower-zone-only negative uniform volumetric source
+  phase1_mass: none
+  mixture_momentum: unchanged lower-zone-only x/y/z sources from phase-2 removal velocity basis
+  gain: 1.0
+  controller_bound_kg_s: 146.15
+  controller_update_interval: 50
+output_root: 'C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneTreatment\20260910T070332Z\P7-E5-CZ-G100-CONT2500'
+manifest: PyAnsys/output/phase07_cell_zone_cont2500/P7-E5-CZ-G100-CONT2500-student-20260910T070332Z-manifest.json
+residual_history: PyAnsys/output/phase07_cell_zone_cont2500/P7-E5-CZ-G100-CONT2500-student-20260910T070332Z-residuals.json
+report_histories: PyAnsys/output/phase07_cell_zone_cont2500/P7-E5-CZ-G100-CONT2500-student-20260910T070332Z-reports.json
+analysis_summary: PyAnsys/output/phase07_cell_zone_cont2500/P7-E5-CZ-G100-CONT2500-student-20260910T070332Z-analysis/summary.json
+final_case: 'C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneTreatment\20260910T070332Z\P7-E5-CZ-G100-CONT2500\P7-E5-CZ-G100-CONT2500-active2500.cas.h5'
+final_data: 'C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneTreatment\20260910T070332Z\P7-E5-CZ-G100-CONT2500\P7-E5-CZ-G100-CONT2500-active2500.dat.h5'
+durability_status: REMOTE_PAIRED_ARTIFACTS_PRESENT_LOCAL_EVIDENCE_WRITTEN
+prior_attempts:
+  - run_id: P7-E5-CZ-G100-CONT2500-student-20260910T065844Z
+    status: STOPPED_BEFORE_SOLVE_FOR_PATH_CORRECTION
+    manifest: PyAnsys/output/phase07_cell_zone_cont2500/P7-E5-CZ-G100-CONT2500-student-20260910T065844Z-manifest.json
+    note: >-
+      The shell supplied a literal ${RUN_TAG} path during pre-run continuation
+      anchor saving. No continuation iterations ran and paired recovery files
+      were preserved.
+blocker: null

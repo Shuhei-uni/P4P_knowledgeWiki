@@ -1,0 +1,40 @@
+setup_id: P7-E5-CZ-ABSORB-G200-CAP58460
+family_id: E5-CZ-ABSORB
+status: BLOCKED_VERIFIED
+permission: HUMAN_APPROVED_PHASE_LOOP_EXECUTION
+lifecycle_role: discovery
+phase_id: phase-07a-simplified-purnanto-liquid-removal
+parent_setup_id: P7-E5-CZ-G100-CONT2500
+parent_run_id: P7-E5-CZ-G100-CONT2500-student-20260910T070332Z
+parent_identity: exact active-2500 paired case/data from completed G100 continuation
+parent_case: 'C:/Users/Shuhei Yokkaichi/Documents/FluentRuns/Phase07/CellZoneTreatment/20260910T070332Z/P7-E5-CZ-G100-CONT2500/P7-E5-CZ-G100-CONT2500-active2500.cas.h5'
+parent_data: 'C:/Users/Shuhei Yokkaichi/Documents/FluentRuns/Phase07/CellZoneTreatment/20260910T070332Z/P7-E5-CZ-G100-CONT2500/P7-E5-CZ-G100-CONT2500-active2500.dat.h5'
+child:
+  gain: 2.0
+  source_cap_kg_s: 584.60
+  update_interval_active_iterations: 50
+  horizon_active_iterations: 500
+  target_rule: M_L_target = 0.50 * M_L0
+  feedback_signal: lower-zone phase-2 liquid mass
+  no_direct_phase1_mass_source: true
+  no_outlet_change: true
+  no_remesh: true
+  no_resplit: true
+output_root: 'C:/Users/Shuhei Yokkaichi/Documents/FluentRuns/Phase07/CellZoneAbsorber/20260910T113103Z/P7-E5-CZ-ABSORB-G200-CAP58460'
+manifest: PyAnsys/output/phase07_cz_absorb/P7-E5-CZ-ABSORB-G200-CAP58460-student-20260910T113103Z-manifest.json
+preflight_manifest: PyAnsys/output/phase07_cz_absorb/P7-E5-CZ-ABSORB-G200-CAP58460-student-20260910T112941Z-manifest.json
+reports: PyAnsys/output/phase07_cz_absorb/P7-E5-CZ-ABSORB-G200-CAP58460-student-20260910T113103Z-reports.json
+residuals: PyAnsys/output/phase07_cz_absorb/P7-E5-CZ-ABSORB-G200-CAP58460-student-20260910T113103Z-residuals-transcript.txt
+analysis_summary: Project/experiments/phase-07a-simplified-purnanto-liquid-removal/cell-zone-absorber-control-family/p7-e5-cz-absorb-g200-cap58460/analysis/20260910T113103Z.json
+smoke_case: 'C:/Users/Shuhei Yokkaichi/Documents/FluentRuns/Phase07/CellZoneAbsorber/20260910T113103Z/P7-E5-CZ-ABSORB-G200-CAP58460/P7-E5-CZ-ABSORB-G200-CAP58460-active050.cas.h5'
+checkpoint100_case: 'C:/Users/Shuhei Yokkaichi/Documents/FluentRuns/Phase07/CellZoneAbsorber/20260910T113103Z/P7-E5-CZ-ABSORB-G200-CAP58460/P7-E5-CZ-ABSORB-G200-CAP58460-active100.cas.h5'
+checkpoint250_case: 'C:/Users/Shuhei Yokkaichi/Documents/FluentRuns/Phase07/CellZoneAbsorber/20260910T113103Z/P7-E5-CZ-ABSORB-G200-CAP58460/P7-E5-CZ-ABSORB-G200-CAP58460-active250.cas.h5'
+recovery_data: 'C:/Users/Shuhei Yokkaichi/Documents/FluentRuns/Phase07/CellZoneAbsorber/20260910T113103Z/P7-E5-CZ-ABSORB-G200-CAP58460/P7-E5-CZ-ABSORB-G200-CAP58460-active250.dat.h5'
+final_case: null
+final_data: null
+durability_status: BLOCKED_SOLVER_DIVERGENCE_AFTER_VALID_ACTIVE400_EVIDENCE
+blocker: >-
+  Corrected rerun reached valid controller/source evidence through active 400,
+  then encountered AMG solver divergence and a floating-point exception during
+  the block ending at active 450. The earlier 112941Z preflight block was due
+  to missing parent history and is excluded from scientific comparison.

@@ -1,0 +1,74 @@
+setup_id: P7-E0-REF
+run_id: P7-E0-REF-server1-20260908T170000Z
+status: COMPLETE
+goal_lease:
+  phase_id: phase-07a-simplified-purnanto-liquid-removal
+  mode: exclusive
+  experiment_selection: context_gated
+  active_session_control: full
+server:
+  ref: server-1@10.104.145.170
+  id: server-1
+  ip: 10.104.145.170
+  profile_id: null
+  fluent_version: Ansys Fluent 2025 R2
+  takeover: overwrite_all_live_session_state_authorized
+working_directory: 'C:\Users\syok443\Documents\FluentRuns\Phase07\P7-E0-REF\rerun-20260908T170000Z'
+run_root: 'C:\Users\syok443\Documents\FluentRuns\Phase07\P7-E0-REF\rerun-20260908T170000Z'
+execution_source_case: 'C:\Users\syok443\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\P7\P7-E0-REF\shared-parent-20260908T092043Z\initialized.cas.h5'
+parent_case:
+  path: 'C:\Users\syok443\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\TwoPhaseInletV2(Purnanto).cas.h5'
+  sha256: b75a69dcad7da29fa9576c15d478a187798029b51d45ac773a265ecdf146ae56
+  availability: VERIFIED_VISIBLE_TO_FLUENT
+mesh:
+  path: 'C:\Users\syok443\OneDrive - The University of Auckland\2026 Sem 1\700\P4PCFD\CAD PurnantoV2\Separator-purnanto342k.msh.h5'
+  sha256: 59b7cf3bcf1cf0266587d4b98f8c6d67bbca007a4381ceb16a05fd8728b37801
+  availability: VERIFIED_VISIBLE_TO_FLUENT
+prepared_case: 'C:\Users\syok443\Documents\FluentRuns\Phase07\P7-E0-REF\rerun-20260908T170000Z\prepared.cas.h5'
+initialized_case: 'C:\Users\syok443\Documents\FluentRuns\Phase07\P7-E0-REF\rerun-20260908T170000Z\initialized.cas.h5'
+initialized_data: 'C:\Users\syok443\Documents\FluentRuns\Phase07\P7-E0-REF\rerun-20260908T170000Z\initialized.dat.h5'
+dependency_only_shared_parent:
+  initialized_case: 'C:\Users\syok443\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\P7\P7-E0-REF\shared-parent-20260908T092043Z\initialized.cas.h5'
+  initialized_data: 'C:\Users\syok443\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\P7\P7-E0-REF\shared-parent-20260908T092043Z\initialized.dat.h5'
+  checkpoint_iter0500_case: 'C:\Users\syok443\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\P7\P7-E0-REF\shared-parent-20260908T092043Z\checkpoint-iter0500.cas.h5'
+  checkpoint_iter0500_data: 'C:\Users\syok443\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\P7\P7-E0-REF\shared-parent-20260908T092043Z\checkpoint-iter0500.dat.h5'
+  visible_to: server-1@10.104.145.170 and server-3@10.104.145.176
+  validity: dependency-only; not a valid 2,000-iteration E0 reference
+smoke_case: 'C:\Users\syok443\Documents\FluentRuns\Phase07\P7-E0-REF\rerun-20260908T170000Z\smoke-iter0050.cas.h5'
+smoke_data: 'C:\Users\syok443\Documents\FluentRuns\Phase07\P7-E0-REF\rerun-20260908T170000Z\smoke-iter0050.dat.h5'
+checkpoint_root: 'C:\Users\syok443\Documents\FluentRuns\Phase07\P7-E0-REF\rerun-20260908T170000Z'
+final_case: 'C:\Users\syok443\Documents\FluentRuns\Phase07\P7-E0-REF\rerun-20260908T170000Z\final-iter2000.cas.h5'
+final_data: 'C:\Users\syok443\Documents\FluentRuns\Phase07\P7-E0-REF\rerun-20260908T170000Z\final-iter2000.dat.h5'
+report_root: 'C:\Users\syok443\Documents\FluentRuns\Phase07\P7-E0-REF\rerun-20260908T170000Z\monitors'
+residual_history: PyAnsys/output/phase07_e0_ref/P7-E0-REF-server1-20260908T170000Z-residuals.json
+transcript: PyAnsys/output/phase07_e0_ref/P7-E0-REF-server1-20260908T170000Z-residuals-transcript.txt
+manifest: PyAnsys/output/phase07_e0_ref/P7-E0-REF-server1-20260908T170000Z-manifest.json
+report_histories: PyAnsys/output/phase07_e0_ref/P7-E0-REF-server1-20260908T170000Z-report-histories.json
+prior_report_emission_attempt:
+  run_id: P7-E0-REF-server1-20260908T164500Z
+  status: BLOCKED_REPORT_FILES_MISSING_AT_SMOKE
+  reason: inherited definitions were not emitting the redirected report files
+  manifest: PyAnsys/output/phase07_e0_ref/P7-E0-REF-server1-20260908T164500Z-manifest.json
+prior_report_object_cleanup_attempt:
+  run_id: P7-E0-REF-server1-20260908T163000Z
+  status: BLOCKED_STALE_REPORT_PACKAGE
+  reason: shared dependency pair contained 14 stale generic report-file objects
+  manifest: PyAnsys/output/phase07_e0_ref/P7-E0-REF-server1-20260908T163000Z-manifest.json
+prior_instrumentation_attempt:
+  run_id: P7-E0-REF-server1-20260908T160000Z
+  status: BLOCKED_SETUP_INSTRUMENTATION
+  reason: original source case exposed old fluid-zone topology; no solver iteration started
+  manifest: PyAnsys/output/phase07_e0_ref/P7-E0-REF-server1-20260908T160000Z-manifest.json
+onedrive_final_destination: 'C:\Users\syok443\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\P7\P7-E0-REF\run-20260908T170000Z'
+durability_status: LOCAL_ONLY
+durability_note: current final pair and histories are preserved in the server-local run root; OneDrive promotion was not completed before the Fluent endpoint became unresponsive
+terminal_evidence:
+  completed_iterations: 2000
+  residual_points: 2000
+  report_histories: 14
+  report_points_each: 2000
+  checkpoints: [50, 500, 1000, 1500, 2000]
+  final_reopen_readback: PASS
+prior_invalid_attempt:
+  run_id: P7-E0-REF-server3-20260908T041031Z
+  reason: parent RNG differential-viscosity and swirl-dominated-flow options were not preserved

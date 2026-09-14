@@ -1,0 +1,1336 @@
+phase_id: phase-07a-simplified-purnanto-liquid-removal
+phase_question: >-
+  What practical numerical mechanism can remove separated liquid from the
+  bottom of the truncated Purnanto separator model while preserving a useful
+  and interpretable representation of the separation behaviour?
+state: HUMAN_REFRAMED
+reframed_to: Project/experiments/phase-07-1a-absorber-convergence
+
+context:
+  path: Project/experiments/phase-07a-simplified-purnanto-liquid-removal/CONTEXT.md
+  authority: human-approved-context-only
+  approved_candidate_ids:
+    - E0
+    - E1-PO
+    - E2-OV
+    - E3-MFO
+    - E4-ADAPT
+    - E5-PSINK
+    - E5-CZ
+    - E5-CZ-ABSORB
+    - E5-CZ-ABSORB-COLD
+    - E5-CZ-ABSORB-COLD-CONT5000
+
+autonomy:
+  experiment_selection: context_gated
+  fluent_fleet_sessions: full
+  authorized_at: 2026-09-08
+  auto_loop:
+    profile_status: HUMAN_AUTHORIZED_PROFILE_RECORDED_CURRENT
+    family_focus: all approved Phase-07 families; preplanned fourth branches first
+    direction: deepen-and-enumerate
+    discovery_screen_iterations: 500
+    promising_extension_iterations: 1000
+    hypothesis_iterations: 2000
+    short_run_exception: explicit human-approved scoping exception; claims limited to the declared window
+    stop_at: 2026-09-11T09:00:00+12:00
+    timezone: Pacific/Auckland
+    fleet_split_intent: server-1 deepen selected families; server-3 enumerate/broaden when reachable
+    no_human_response_required: true
+  authority_evidence: >-
+    Explicit human instruction to enter scientific-phase-loop for Phase 07,
+    take over available Fluent servers, execute P7-E0-REF for 2,000 discovery
+    iterations, analyse its required evidence, and proceed only through the
+    approved G1 gates. A subsequent explicit human instruction on 2026-09-08
+    authorizes attempts of all 16 compiled initial setup packets, active Fluent
+    session takeover/overwrite, and maximum contract-preserving parallelism;
+    parent, capability, adaptive-normalization, source-accounting, and evidence
+    contracts remain in force.
+  human_return_conditions:
+    - >-
+      Do not add or promote a bottom-treatment candidate without explicit
+      human approval recorded in CONTEXT.md.
+
+phase_loop:
+  autonomy_check_in:
+    checked_at: 2026-09-11
+    fluent_fleet_sessions: full
+    authority_source: explicit human authorization recorded above
+    auto_loop_selected: true
+    launch_decision:
+      status: EXPLICIT_HUMAN_PHASE_LOOP_INVOCATION
+      checked_at: 2026-09-11
+      scope: queue order 27, P7-E5-CZ-ABSORB-COLD-RAMP11692
+      evidence: >-
+        The human explicitly invoked $phase-loop and then $auto-loop in this
+        chat after approving the E5-CZ-ABSORB-COLD family. This authorizes
+        Phase Loop execution of queue order 27 and the recorded Auto Loop
+        route; it does not waive parent, implementation, smoke,
+        terminal-horizon, or evidence gates.
+    completion_route: auto_loop
+    completion_route_reason: >-
+      After queue order 27 is classified with attached terminal evidence,
+      continue directly into the current Phase 07 Auto Loop envelope through
+      2026-09-11 09:00 Pacific/Auckland. The Auto Loop may deepen or enumerate
+      only within the recorded Phase-07 families and no-outlet absorber
+      question; it may not add an outlet, patch/reset fields, or waive the
+      discovery and hypothesis gates.
+    current_human_request:
+      status: EXPLICIT_HUMAN_CONTINUATION_REQUEST
+      checked_at: 2026-09-11
+      scope: queue order 28, P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000
+      evidence: >-
+        The human explicitly requested continuation of the exact completed
+        cold-start case from total active iteration 1,000 to 5,000. This is a
+        human-selected Phase Loop continuation, not an Auto Loop invention;
+        the existing no-outlet/source/mesh boundaries remain unchanged.
+  queue_order:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+    - 11
+    - 12
+    - 13
+    - 14
+    - 15
+    - 16
+    - 17
+    - 18
+    - 19
+    - 20
+    - 21
+    - 22
+    - 23
+    - 24
+    - 25
+    - 26
+    - 27
+    - 28
+  queue:
+    - order: 1
+      setup_id: P7-E0-REF
+      setup_path: e0-08b-corrected-reference/setup.md
+      lifecycle_role: discovery
+      gate_linkage: G0 setup / G1 fixed-mesh reference execution
+      parent_identity: exact 08b-derived parent reconciled onto the supplied Phase-07 mesh
+      required_horizon: 2000 native iterations
+      evidence_contract: setup.md required histories, checkpoints, terminal manifest, and F1-F3 analysis
+      status: COMPLETE_VERIFIED
+      terminal_execution: COMPLETE
+      run_id: P7-E0-REF-server1-20260908T170000Z
+      manifest: PyAnsys/output/phase07_e0_ref/P7-E0-REF-server1-20260908T170000Z-manifest.json
+      checks:
+        parent_identity: PASS
+        setup_readback: PASS
+        save_reopen: PASS
+        smoke: PASS
+        instrumentation: PASS
+        requested_horizon: PASS
+        final_case_data: PASS
+        required_histories: PASS
+        terminal_manifest: PASS
+        planned_analysis_and_core_figures: PASS
+      blocker: E0 reference is execution-complete but scientifically inconclusive; no promotion claim
+
+    - order: 2
+      setup_id: P7-E1-PO-P1120
+      setup_path: fixed-mesh-treatment-screen/e1-po-p1120/setup.md
+      lifecycle_role: discovery
+      gate_linkage: G1
+      parent_identity: exact E0 initialized iteration-0 case/data pair
+      required_horizon: 500 iterations including smoke
+      evidence_contract: setup.md shared package, bottom readback, phase fluxes, balances, residuals, and F1-F3
+      status: COMPLETE_VERIFIED
+      terminal_execution: COMPLETE
+      run_id: P7-E1-PO-P1120-server1-20260908T092500Z
+      manifest: PyAnsys/output/phase07_treatment_screen/P7-E1-PO-P1120-server1-20260908T092500Z-manifest.json
+      checks:
+        parent_identity: PASS
+        setup_readback: PASS
+        save_reopen: PASS
+        smoke: PASS
+        instrumentation: PASS
+        requested_horizon: PASS
+        final_case_data: PASS
+        required_histories: PASS
+        terminal_manifest: PASS
+        planned_analysis_and_core_figures: PASS
+      blocker: positive inventory drift and vapor-dominated routing; no promotion claim
+
+    - order: 3
+      setup_id: P7-E1-PO-P1160
+      setup_path: fixed-mesh-treatment-screen/e1-po-p1160/setup.md
+      lifecycle_role: discovery
+      gate_linkage: G1
+      parent_identity: exact E0 initialized iteration-0 case/data pair
+      required_horizon: 500 iterations including smoke
+      evidence_contract: setup.md shared package, bottom readback, phase fluxes, balances, residuals, and F1-F3
+      status: BLOCKED_VERIFIED
+      terminal_execution: BLOCKED
+      run_id: P7-E1-PO-P1160-server1-20260909T001000Z
+      manifest: PyAnsys/output/phase07_treatment_screen/P7-E1-PO-P1160-server1-20260909T001000Z-manifest.json
+      checks:
+        parent_identity: PASS
+        setup_readback: PASS
+        save_reopen: PASS
+        smoke: BLOCKED
+        instrumentation: PASS
+        requested_horizon: NOT RUN
+        final_case_data: NOT RUN
+        required_histories: BLOCKED
+        terminal_manifest: PASS
+        planned_analysis_and_core_figures: NOT APPLICABLE
+      blocker: corrected 1160000 Pa readback followed by smoke-horizon divergence and floating-point exception
+
+    - order: 4
+      setup_id: P7-E1-PO-P1200
+      setup_path: fixed-mesh-treatment-screen/e1-po-p1200/setup.md
+      lifecycle_role: discovery
+      gate_linkage: G1
+      parent_identity: exact E0 initialized iteration-0 case/data pair
+      required_horizon: 500 iterations including smoke
+      evidence_contract: setup.md shared package, bottom readback, phase fluxes, balances, residuals, and F1-F3
+      status: BLOCKED_VERIFIED
+      terminal_execution: BLOCKED
+      run_id: P7-E1-PO-P1200-server3-20260909T001000Z
+      manifest: PyAnsys/output/phase07_treatment_screen/P7-E1-PO-P1200-server3-20260909T001000Z-manifest.json
+      checks:
+        parent_identity: PASS
+        setup_readback: PASS
+        save_reopen: PASS
+        smoke: BLOCKED
+        instrumentation: PASS
+        requested_horizon: NOT RUN
+        final_case_data: NOT RUN
+        required_histories: BLOCKED
+        terminal_manifest: PASS
+        planned_analysis_and_core_figures: NOT APPLICABLE
+      blocker: corrected 1200000 Pa readback followed by smoke-horizon divergence and floating-point exception
+
+    - order: 5
+      setup_id: P7-E2-OV-K000
+      setup_path: fixed-mesh-treatment-screen/e2-ov-k000/setup.md
+      lifecycle_role: discovery
+      gate_linkage: G1
+      parent_identity: exact E0 initialized iteration-0 case/data pair
+      required_horizon: 500 iterations including smoke
+      evidence_contract: setup.md shared package, vent readback, pressure/velocity response, balances, residuals, and F1-F3
+      status: COMPLETE_VERIFIED
+      terminal_execution: COMPLETE
+      run_id: P7-E2-OV-K000-server3-20260908T092500Z
+      manifest: PyAnsys/output/phase07_treatment_screen/P7-E2-OV-K000-server3-20260908T092500Z-manifest.json
+      checks: &screen_checks
+        parent_identity: PASS
+        setup_readback: PASS
+        save_reopen: PASS
+        smoke: PASS
+        instrumentation: PASS
+        requested_horizon: PASS
+        final_case_data: PASS
+        required_histories: PASS
+        terminal_manifest: PASS
+        planned_analysis_and_core_figures: PASS
+      blocker: positive inventory drift, imbalance, and vapor-dominated routing; no promotion claim
+
+    - order: 6
+      setup_id: P7-E2-OV-K003
+      setup_path: fixed-mesh-treatment-screen/e2-ov-k003/setup.md
+      lifecycle_role: discovery
+      gate_linkage: G1
+      parent_identity: exact E0 initialized iteration-0 case/data pair
+      required_horizon: 500 iterations including smoke
+      evidence_contract: setup.md shared package, vent readback, pressure/velocity response, balances, residuals, and F1-F3
+      status: COMPLETE_VERIFIED
+      terminal_execution: COMPLETE
+      run_id: P7-E2-OV-K003-server3-20260908T094500Z
+      manifest: PyAnsys/output/phase07_treatment_screen/P7-E2-OV-K003-server3-20260908T094500Z-manifest.json
+      checks: *screen_checks
+      blocker: positive inventory drift, imbalance, and vapor-dominated routing; no promotion claim
+
+    - order: 7
+      setup_id: P7-E2-OV-K007
+      setup_path: fixed-mesh-treatment-screen/e2-ov-k007/setup.md
+      lifecycle_role: discovery
+      gate_linkage: G1
+      parent_identity: exact E0 initialized iteration-0 case/data pair
+      required_horizon: 500 iterations including smoke
+      evidence_contract: setup.md shared package, vent readback, pressure/velocity response, balances, residuals, and F1-F3
+      status: COMPLETE_VERIFIED
+      terminal_execution: COMPLETE
+      run_id: P7-E2-OV-K007-server3-20260908T103000Z
+      manifest: PyAnsys/output/phase07_treatment_screen/P7-E2-OV-K007-server3-20260908T103000Z-manifest.json
+      checks: *screen_checks
+      blocker: positive inventory drift, imbalance, and vapor-dominated routing; no promotion claim
+
+    - order: 8
+      setup_id: P7-E3-MFO-Q025
+      setup_path: fixed-mesh-treatment-screen/e3-mfo-q025/setup.md
+      lifecycle_role: discovery
+      gate_linkage: G1
+      parent_identity: exact E0 initialized iteration-0 case/data pair
+      required_horizon: 500 iterations including smoke
+      evidence_contract: setup.md phase-specific capability, command/realization, phase fluxes, balances, residuals, and F1-F3
+      status: COMPLETE_VERIFIED
+      terminal_execution: COMPLETE
+      run_id: P7-E3-MFO-Q025-server1-20260908T114000Z
+      manifest: PyAnsys/output/phase07_treatment_screen/P7-E3-MFO-Q025-server1-20260908T114000Z-manifest.json
+      checks: *screen_checks
+      blocker: positive inventory drift and mixture imbalance; no promotion claim
+
+    - order: 9
+      setup_id: P7-E3-MFO-Q050
+      setup_path: fixed-mesh-treatment-screen/e3-mfo-q050/setup.md
+      lifecycle_role: discovery
+      gate_linkage: G1
+      parent_identity: exact E0 initialized iteration-0 case/data pair
+      required_horizon: 500 iterations including smoke
+      evidence_contract: setup.md phase-specific capability, command/realization, phase fluxes, balances, residuals, and F1-F3
+      status: COMPLETE_VERIFIED
+      terminal_execution: COMPLETE
+      run_id: P7-E3-MFO-Q050-server3-20260908T114000Z
+      manifest: PyAnsys/output/phase07_treatment_screen/P7-E3-MFO-Q050-server3-20260908T114000Z-manifest.json
+      checks: *screen_checks
+      blocker: positive inventory drift and mixture imbalance; no promotion claim
+
+    - order: 10
+      setup_id: P7-E3-MFO-Q100
+      setup_path: fixed-mesh-treatment-screen/e3-mfo-q100/setup.md
+      lifecycle_role: discovery
+      gate_linkage: G1
+      parent_identity: exact E0 initialized iteration-0 case/data pair
+      required_horizon: 500 iterations including smoke
+      evidence_contract: setup.md phase-specific capability, command/realization, phase fluxes, balances, residuals, and F1-F3
+      status: COMPLETE_VERIFIED
+      terminal_execution: COMPLETE
+      run_id: P7-E3-MFO-Q100-server1-20260908T123000Z
+      manifest: PyAnsys/output/phase07_treatment_screen/P7-E3-MFO-Q100-server1-20260908T123000Z-manifest.json
+      checks: *screen_checks
+      blocker: positive inventory trend remains; no promotion claim
+
+    - order: 11
+      setup_id: P7-E4-ADAPT-G025
+      setup_path: fixed-mesh-treatment-screen/e4-adapt-g025/setup.md
+      lifecycle_role: discovery
+      gate_linkage: G1
+      parent_identity: exact E0 iteration-500 case/data checkpoint
+      required_horizon: 500 controller-active iterations
+      evidence_contract: setup.md adaptive normalization, ten controller updates, phase routing, balances, residuals, and F1-F4
+      status: COMPLETE_VERIFIED
+      terminal_execution: COMPLETE
+      run_id: P7-E4-ADAPT-G025-server3-20260908T124500Z
+      manifest: PyAnsys/output/phase07_treatment_screen/P7-E4-ADAPT-G025-server3-20260908T124500Z-manifest.json
+      checks: *screen_checks
+      prior_attempt: P7-E4-ADAPT-G025-server3-20260908T123000Z BLOCKED before solve; superseded by the listed retry
+      blocker: adaptive inventory drift and imbalance; no promotion claim
+
+    - order: 12
+      setup_id: P7-E4-ADAPT-G050
+      setup_path: fixed-mesh-treatment-screen/e4-adapt-g050/setup.md
+      lifecycle_role: discovery
+      gate_linkage: G1
+      parent_identity: exact E0 iteration-500 case/data checkpoint
+      required_horizon: 500 controller-active iterations
+      evidence_contract: setup.md adaptive normalization, ten controller updates, phase routing, balances, residuals, and F1-F4
+      status: COMPLETE_VERIFIED
+      terminal_execution: COMPLETE
+      run_id: P7-E4-ADAPT-G050-server1-20260908T140000Z
+      manifest: PyAnsys/output/phase07_treatment_screen/P7-E4-ADAPT-G050-server1-20260908T140000Z-manifest.json
+      checks: *screen_checks
+      blocker: adaptive inventory drift and imbalance; no promotion claim
+
+    - order: 13
+      setup_id: P7-E4-ADAPT-G100
+      setup_path: fixed-mesh-treatment-screen/e4-adapt-g100/setup.md
+      lifecycle_role: discovery
+      gate_linkage: G1
+      parent_identity: exact E0 iteration-500 case/data checkpoint
+      required_horizon: 500 controller-active iterations
+      evidence_contract: setup.md adaptive normalization, ten controller updates, phase routing, balances, residuals, and F1-F4
+      status: COMPLETE_VERIFIED
+      terminal_execution: COMPLETE
+      run_id: P7-E4-ADAPT-G100-server3-20260908T140000Z
+      manifest: PyAnsys/output/phase07_treatment_screen/P7-E4-ADAPT-G100-server3-20260908T140000Z-manifest.json
+      checks: *screen_checks
+      blocker: adaptive inventory drift despite high gain; no promotion claim
+
+    - order: 14
+      setup_id: P7-E5-PSINK-G025
+      setup_path: fixed-mesh-treatment-screen/e5-psink-g025/setup.md
+      lifecycle_role: discovery
+      gate_linkage: G1
+      parent_identity: exact E0 iteration-500 case/data checkpoint
+      required_horizon: 500 controller-active iterations
+      evidence_contract: setup.md frozen-region identity, liquid-only mass/momentum source proof, zero vapor source, controller history, and F1-F4
+      status: BLOCKED_VERIFIED
+      terminal_execution: BLOCKED
+      run_id: P7-E5-PSINK-G025-server1-20260908T150000Z
+      manifest: PyAnsys/output/phase07_treatment_screen/P7-E5-PSINK-G025-server1-20260908T150000Z-manifest.json
+      checks:
+        parent_identity: PASS
+        setup_probe: PASS
+        frozen_register_readback: PASS
+        region_specific_source_binding: BLOCKED
+        solve: NOT_RUN
+        requested_horizon: NOT_RUN
+        final_case_data: NOT_RUN
+        required_histories: NOT_RUN
+      blocker: Fluent 2025 R2 exposes no region-specific liquid-only mass/momentum source binding
+
+    - order: 15
+      setup_id: P7-E5-PSINK-G050
+      setup_path: fixed-mesh-treatment-screen/e5-psink-g050/setup.md
+      lifecycle_role: discovery
+      gate_linkage: G1
+      parent_identity: exact E0 iteration-500 case/data checkpoint
+      required_horizon: 500 controller-active iterations
+      evidence_contract: setup.md frozen-region identity, liquid-only mass/momentum source proof, zero vapor source, controller history, and F1-F4
+      status: BLOCKED_VERIFIED
+      terminal_execution: BLOCKED
+      run_id: P7-E5-PSINK-G050-server3-20260908T150000Z
+      manifest: PyAnsys/output/phase07_treatment_screen/P7-E5-PSINK-G050-server3-20260908T150000Z-manifest.json
+      checks:
+        parent_identity: PASS
+        setup_probe: PASS
+        frozen_register_readback: PASS
+        region_specific_source_binding: BLOCKED
+        solve: NOT_RUN
+        requested_horizon: NOT_RUN
+        final_case_data: NOT_RUN
+        required_histories: NOT_RUN
+      blocker: Fluent 2025 R2 exposes no region-specific liquid-only mass/momentum source binding
+
+    - order: 16
+      setup_id: P7-E5-PSINK-G100
+      setup_path: fixed-mesh-treatment-screen/e5-psink-g100/setup.md
+      lifecycle_role: discovery
+      gate_linkage: G1
+      parent_identity: exact E0 iteration-500 case/data checkpoint
+      required_horizon: 500 controller-active iterations
+      evidence_contract: setup.md frozen-region identity, liquid-only mass/momentum source proof, zero vapor source, controller history, and F1-F4
+      status: BLOCKED_VERIFIED
+      terminal_execution: BLOCKED
+      run_id: P7-E5-PSINK-G100-server1-20260908T153000Z
+      manifest: PyAnsys/output/phase07_treatment_screen/P7-E5-PSINK-G100-server1-20260908T153000Z-manifest.json
+      checks:
+        parent_identity: PASS
+        setup_probe: PASS
+        frozen_register_readback: PASS
+        region_specific_source_binding: BLOCKED
+        solve: NOT_RUN
+        requested_horizon: NOT_RUN
+        final_case_data: NOT_RUN
+        required_histories: NOT_RUN
+      blocker: Fluent 2025 R2 exposes no region-specific liquid-only mass/momentum source binding
+
+    - order: 17
+      setup_id: P7-E2-OV-K010
+      setup_path: fixed-mesh-treatment-screen/e2-ov-k010/setup.md
+      lifecycle_role: discovery
+      gate_linkage: G1 conditional fourth recovery branch
+      parent_identity: exact E0 initialized iteration-0 case/data pair
+      required_horizon: 500 iterations including smoke
+      evidence_contract: setup.md shared package, K=10 readback, phase fluxes, balances, residuals, and F1-F3
+      status: BLOCKED_VERIFIED
+      terminal_execution: BLOCKED
+      run_id: P7-E2-OV-K010-server1-20260909T004500Z
+      manifest: PyAnsys/output/phase07_treatment_screen/P7-E2-OV-K010-server1-20260909T004500Z-manifest.json
+      checks:
+        parent_identity: PASS
+        setup_readback: PASS
+        save_reopen: PASS
+        smoke: BLOCKED
+        instrumentation: PASS
+        requested_horizon: NOT RUN
+        final_case_data: NOT RUN
+        required_histories: BLOCKED
+        terminal_manifest: PASS
+        planned_analysis_and_core_figures: NOT APPLICABLE
+      blocker: K=10 readback passed, then Fluent diverged and raised floating-point exceptions during smoke
+
+    - order: 18
+      setup_id: P7-E3-MFO-Q14615
+      setup_path: fixed-mesh-treatment-screen/e3-mfo-q14615/setup.md
+      lifecycle_role: discovery
+      gate_linkage: G1 conditional fourth recovery branch
+      parent_identity: exact E0 initialized iteration-0 case/data pair
+      required_horizon: 500 iterations including smoke
+      evidence_contract: setup.md phase-specific capability, command/realization, phase fluxes, balances, residuals, and F1-F3
+      status: COMPLETE_VERIFIED
+      terminal_execution: COMPLETE
+      run_id: P7-E3-MFO-Q14615-student-20260910T000651Z
+      manifest: PyAnsys/output/phase07_treatment_screen/P7-E3-MFO-Q14615-student-20260910T000651Z-manifest.json
+      checks:
+        parent_identity: PASS
+        setup_readback: PASS
+        save_reopen: PASS
+        smoke: PASS
+        instrumentation: PASS
+        requested_horizon: PASS
+        final_case_data: PASS
+        required_histories: PASS
+        terminal_manifest: PASS
+        planned_analysis_and_core_figures: PASS
+      blocker: finite-horizon screen has positive inventory drift and open mixture balance; no promotion claim
+
+    - order: 19
+      setup_id: P7-E4-ADAPT-G150
+      setup_path: fixed-mesh-treatment-screen/e4-adapt-g150/setup.md
+      lifecycle_role: discovery
+      gate_linkage: G1 conditional fourth recovery branch
+      parent_identity: exact E0 iteration-500 case/data checkpoint
+      required_horizon: 500 controller-active iterations
+      evidence_contract: setup.md adaptive normalization, ten controller updates, phase routing, balances, residuals, and F1-F4
+      status: COMPLETE_VERIFIED
+      terminal_execution: COMPLETE
+      run_id: P7-E4-ADAPT-G150-student-20260910T003002Z
+      manifest: PyAnsys/output/phase07_treatment_screen/P7-E4-ADAPT-G150-student-20260910T003002Z-manifest.json
+      checks:
+        parent_identity: PASS
+        setup_readback: PASS
+        save_reopen: PASS
+        smoke: PASS
+        instrumentation: PASS
+        requested_horizon: PASS
+        final_case_data: PASS
+        required_histories: PASS
+        terminal_manifest: PASS
+        planned_analysis_and_core_figures: PASS
+      blocker: adaptive command saturated at the final update and inventory drift remained positive; no promotion claim
+
+    - order: 20
+      setup_id: P7-E5-CZ-G025
+      setup_path: cell-zone-treatment-family/p7-e5-cz-g025/setup.md
+      lifecycle_role: discovery
+      gate_linkage: G2 E5-CZ cell-zone recovery screen
+      parent_identity: exact E0 iteration-500 case/data checkpoint after verified split-by-mark operation
+      required_horizon: 500 controller-active iterations
+      evidence_contract: setup.md split invariants, source readback, controller history, phase balances, residuals, and F1-F3
+      status: COMPLETE_VERIFIED
+      terminal_execution: COMPLETE
+      run_id: P7-E5-CZ-G025-student-20260910T031110Z
+      manifest: PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G025-student-20260910T031110Z-manifest.json
+      checks:
+        parent_identity: PASS
+        setup_readback: PASS
+        split_invariants: PASS
+        save_reopen: PASS
+        smoke: PASS
+        instrumentation: PASS
+        source_volume_normalization: PASS
+        source_integral_audit: PASS_CORRECTED_GET_SUM
+        requested_horizon: PASS
+        final_case_data: PASS
+        required_histories: PASS
+        terminal_manifest: PASS
+        planned_analysis_and_core_figures: PASS_WITH_FINITE_HORIZON_CLAIM_LIMIT
+      blocker: >-
+        The corrected 500-iteration screen completed with finite residuals and
+        valid source normalization, but liquid inventory still drifted at
+        approximately the E0 rate and the boundary-only mixture closure stayed
+        open. Do not promote G025; complete the three-gain contrast first.
+
+    - order: 21
+      setup_id: P7-E5-CZ-G050
+      setup_path: cell-zone-treatment-family/p7-e5-cz-g050/setup.md
+      lifecycle_role: discovery
+      gate_linkage: G2 E5-CZ cell-zone recovery screen
+      parent_identity: exact E0 iteration-500 case/data checkpoint after verified split-by-mark operation
+      required_horizon: 500 controller-active iterations
+      evidence_contract: setup.md split invariants, source readback, controller history, phase balances, residuals, and F1-F3
+      status: COMPLETE_VERIFIED
+      terminal_execution: COMPLETE
+      run_id: P7-E5-CZ-G050-student-20260910T044606Z
+      manifest: PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G050-student-20260910T044606Z-manifest.json
+      checks:
+        parent_identity: PASS
+        setup_readback: PASS
+        split_invariants: PASS
+        save_reopen: PASS
+        smoke: PASS
+        instrumentation: PASS
+        requested_horizon: PASS
+        final_case_data: PASS
+        required_histories: PASS_WITH_RESTART_WINDOW_LIMIT
+        terminal_manifest: PASS
+        planned_analysis_and_core_figures: PASS_WITH_FINITE_HORIZON_CLAIM_LIMIT
+      blocker: >-
+        The previous corrected G050 attempt reached active iteration 500 and
+        recorded all controller updates, but the Fluent stream reset during
+        final readback. The recovery continuation then reopened the durable
+        active-250 pair, completed active iterations 251-500, saved and
+        reopened the final pair, and passed terminal readback with the
+        corrected get_sum source audit. Its current report/residual package is
+        a native 748-998 restart window, so the family comparison remains
+        finite and no promotion or automatic long continuation follows.
+
+    - order: 22
+      setup_id: P7-E5-CZ-G100
+      setup_path: cell-zone-treatment-family/p7-e5-cz-g100/setup.md
+      lifecycle_role: discovery
+      gate_linkage: G2 E5-CZ cell-zone recovery screen
+      parent_identity: exact E0 iteration-500 case/data checkpoint after verified split-by-mark operation
+      required_horizon: 500 controller-active iterations
+      evidence_contract: setup.md split invariants, source readback, controller history, phase balances, residuals, and F1-F3
+      status: COMPLETE_VERIFIED
+      terminal_execution: COMPLETE
+      run_id: P7-E5-CZ-G100-student-20260910T045745Z
+      manifest: PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G100-student-20260910T045745Z-manifest.json
+      checks:
+        parent_identity: PASS
+        setup_readback: PASS
+        split_invariants: PASS
+        save_reopen: PASS
+        smoke: PASS
+        instrumentation: PASS
+        requested_horizon: PASS
+        final_case_data: PASS
+        required_histories: PASS
+        terminal_manifest: PASS
+        planned_analysis_and_core_figures: PASS_WITH_FINITE_HORIZON_CLAIM_LIMIT
+      blocker: >-
+        The earlier endpoint-blocked G100 attempt is retained, but the
+        corrected rerun completed from the exact E0-500 parent with the
+        unchanged lower-zone source contract and get_sum audit. Fluent emitted
+        one inherited invalid autosave-path warning near native iteration 999;
+        the final pair, histories, and save/reopen readback nevertheless
+        completed successfully. The finite screen still has positive inventory
+        drift and open closure, so no promotion follows.
+
+    - order: 23
+      setup_id: P7-E5-CZ-G100-CONT2500
+      setup_path: cell-zone-treatment-family/p7-e5-cz-g100-cont2500/setup.md
+      lifecycle_role: discovery
+      gate_linkage: G2 E5-CZ human-approved horizon continuation
+      parent_identity: exact verified P7-E5-CZ-G100 active-500 case/data pair
+      required_horizon: 2000 additional controller-active iterations; total active 2500
+      evidence_contract: setup.md unchanged-mechanism continuation, lower-zone and bottom phase routing, source audit, balances, residuals, checkpoints, and F1-F4
+      status: COMPLETE_VERIFIED
+      terminal_execution: COMPLETE
+      run_id: P7-E5-CZ-G100-CONT2500-student-20260910T070332Z
+      manifest: PyAnsys/output/phase07_cell_zone_cont2500/P7-E5-CZ-G100-CONT2500-student-20260910T070332Z-manifest.json
+      checks:
+        parent_identity: PASS
+        setup_readback: PASS
+        source_invariants: PASS
+        instrumentation: PASS
+        requested_horizon: PASS
+        final_case_data: PASS
+        required_histories: PASS
+        terminal_manifest: PASS
+        planned_analysis_and_core_figures: PASS_WITH_FINITE_HORIZON_CLAIM_LIMIT
+      blocker: >-
+        Final runtime readback reports a stale current-iteration field, while
+        report/residual histories and final paired save/reopen evidence reach
+        the requested endpoint. The continuation retains positive inventory
+        drift and open closure, so no promotion follows.
+
+    - order: 24
+      setup_id: P7-E5-CZ-ABSORB-G200-CAP14615
+      setup_path: cell-zone-absorber-control-family/p7-e5-cz-absorb-g200-cap14615/setup.md
+      lifecycle_role: discovery
+      gate_linkage: G3 E5-CZ lower-inventory absorber-capacity screen
+      parent_identity: exact verified P7-E5-CZ-G100-CONT2500 active-2500 case/data pair
+      required_horizon: 500 controller-active iterations
+      evidence_contract: setup.md local target/readback, cap/source audit, nested lower inventories, phase/vapor balances, residuals, checkpoints, and F1-F3
+      status: COMPLETE_VERIFIED
+      terminal_execution: COMPLETE
+      run_id: P7-E5-CZ-ABSORB-G200-CAP14615-student-20260910T104533Z-manifest
+      manifest: PyAnsys/output/phase07_cz_absorb/P7-E5-CZ-ABSORB-G200-CAP14615-student-20260910T104533Z-manifest.json
+      checks:
+        parent_identity: PASS
+        setup_readback: PASS
+        source_invariants: PASS
+        instrumentation: PASS
+        requested_horizon: PASS
+        final_case_data: PASS
+        required_histories: PASS
+        terminal_manifest: PASS
+        planned_analysis_and_core_figures: PASS
+      blocker: >-
+        Execution contract passed, but lower-zone target holding and global
+        liquid removal were not demonstrated; finite-horizon non-converged
+        evidence does not support promotion or automatic continuation.
+
+    - order: 25
+      setup_id: P7-E5-CZ-ABSORB-G200-CAP29230
+      setup_path: cell-zone-absorber-control-family/p7-e5-cz-absorb-g200-cap29230/setup.md
+      lifecycle_role: discovery
+      gate_linkage: G3 E5-CZ lower-inventory absorber-capacity screen
+      parent_identity: exact verified P7-E5-CZ-G100-CONT2500 active-2500 case/data pair
+      required_horizon: 500 controller-active iterations
+      evidence_contract: setup.md local target/readback, cap/source audit, nested lower inventories, phase/vapor balances, residuals, checkpoints, and F1-F3
+      status: BLOCKED_VERIFIED
+      terminal_execution: BLOCKED
+      run_id: P7-E5-CZ-ABSORB-G200-CAP29230-student-20260910T110936Z-manifest
+      manifest: PyAnsys/output/phase07_cz_absorb/P7-E5-CZ-ABSORB-G200-CAP29230-student-20260910T110936Z-manifest.json
+      checks:
+        parent_identity: PASS
+        setup_readback: PASS
+        source_invariants: PASS
+        instrumentation: PASS
+        requested_horizon: BLOCKED
+        final_case_data: NOT RUN
+        required_histories: BLOCKED
+        terminal_manifest: PASS
+        planned_analysis_and_core_figures: PASS
+      blocker: >-
+        AMG solver divergence and floating-point exception during the block
+        ending at active 450; valid controller/source evidence through active
+        400 is retained, but the declared horizon and final paired state were
+        not reached.
+
+    - order: 26
+      setup_id: P7-E5-CZ-ABSORB-G200-CAP58460
+      setup_path: cell-zone-absorber-control-family/p7-e5-cz-absorb-g200-cap58460/setup.md
+      lifecycle_role: discovery
+      gate_linkage: G3 E5-CZ lower-inventory absorber-capacity screen
+      parent_identity: exact verified P7-E5-CZ-G100-CONT2500 active-2500 case/data pair
+      required_horizon: 500 controller-active iterations
+      evidence_contract: setup.md local target/readback, cap/source audit, nested lower inventories, phase/vapor balances, residuals, checkpoints, and F1-F3
+      status: BLOCKED_VERIFIED
+      terminal_execution: BLOCKED
+      run_id: P7-E5-CZ-ABSORB-G200-CAP58460-student-20260910T113103Z-manifest
+      manifest: PyAnsys/output/phase07_cz_absorb/P7-E5-CZ-ABSORB-G200-CAP58460-student-20260910T113103Z-manifest.json
+      checks:
+        parent_identity: PASS
+        setup_readback: PASS
+        source_invariants: PASS
+        instrumentation: PASS
+        requested_horizon: BLOCKED
+        final_case_data: NOT RUN
+        required_histories: BLOCKED
+        terminal_manifest: PASS
+        planned_analysis_and_core_figures: PASS
+      blocker: >-
+        Corrected rerun encountered AMG solver divergence and a floating-point
+        exception during the block ending at active 450; valid
+        controller/source evidence through active 400 is retained. The earlier
+        missing-parent-history preflight block is excluded from scientific
+        comparison.
+
+    - order: 27
+      setup_id: P7-E5-CZ-ABSORB-COLD-RAMP11692
+      setup_path: cell-zone-absorber-control-family/p7-e5-cz-absorb-cold-ramp11692/setup.md
+      lifecycle_role: discovery
+      gate_linkage: G3 E5-CZ cold-start inlet-matched absorber balance probe
+      parent_identity: exact E0-style initialized case/data state before treatment iterations
+      required_horizon: 1000 controller-active iterations
+      evidence_contract: setup.md initialized-state readback, ramp/source audit, liquid inventories, phase/vapor balances, residuals, checkpoints, and F1-F3
+      status: BLOCKED_VERIFIED
+      terminal_execution: COMPLETE
+      run_id: P7-E5-CZ-ABSORB-COLD-RAMP11692-student-20260910T135421Z
+      manifest: PyAnsys/output/phase07_cz_absorb_cold/P7-E5-CZ-ABSORB-COLD-RAMP11692-student-20260910T135421Z-manifest.json
+      checks:
+        parent_identity: PASS
+        setup_readback: PASS
+        source_invariants: PASS
+        instrumentation: PASS
+        requested_horizon: PASS
+        final_case_data: PASS
+        required_histories: PARTIAL
+        terminal_manifest: PASS
+        planned_analysis_and_core_figures: PARTIAL
+      blocker: >-
+        The attached discovery reached active 1,000, passed final save/reopen,
+        and recovered the declared 18 report histories plus residual history.
+        The executed child did not configure the required vapor-inventory
+        report history, so the F3 evidence package is partial and the run is
+        blocked from a fully verified discovery disposition. The finite result
+        also shows positive total-liquid drift and effectively zero lower-zone
+        liquid; it is not a qualification result.
+
+    - order: 28
+      setup_id: P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000
+      setup_path: cell-zone-absorber-control-family/p7-e5-cz-absorb-cold-ramp11692-cont5000/setup.md
+      lifecycle_role: discovery-extension
+      gate_linkage: G3 E5-CZ cold-start absorber time-horizon extension
+      parent_identity: exact verified P7-E5-CZ-ABSORB-COLD-RAMP11692 active-1000 case/data pair
+      required_horizon: 4000 additional iterations, total active 5000
+      evidence_contract: setup.md parent/source readback, continuation histories, residuals, checkpoints, final save/reopen, and evidence-bounded analysis
+      status: BLOCKED_VERIFIED
+      terminal_execution: BLOCKED_SOLVER_DIVERGENCE
+      run_id: P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000-student-20260910T211158Z
+      manifest: PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000-student-20260910T211158Z-manifest.json
+      checks:
+        parent_identity: PASS
+        setup_readback: PASS
+        source_invariants: PASS
+        instrumentation: PASS
+        smoke: PASS
+        requested_horizon: BLOCKED
+        final_case_data: BLOCKED
+        required_histories: PASS_VALID_INTERVAL_ONLY
+        terminal_manifest: PASS
+        planned_analysis_and_core_figures: PARTIAL
+      blocker: >-
+        Solver divergence/fatal diagnostic occurred in the block ending at
+        total active iteration 1,970. The last valid reported iteration is
+        1,960; the requested active-5,000 horizon and final-5,000 save/reopen
+        were not achieved. The inherited vapor-inventory history is also
+        missing, so F3 remains partial. An exact-settings restart from the
+        durable active-1,900 pair reproduced the same blow-up and terminal
+        Fluent node failure, so this is a repeatable frozen-settings blocker,
+        not only a transient first-run interruption.
+      recovery_attempt:
+        status: BLOCKED_REPORT_FILE_SCHEME_QUERY
+        basis: exact durable active-1900 autosave; no scientific setting delta
+        run_id: P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-student-20260910T220409Z
+        manifest: PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-student-20260910T220409Z-manifest.json
+        last_observed_total_active_iteration: 1900
+        note: >-
+          Preparation and source readback passed, but the first recovery
+          wrapper stopped on a non-scientific report-file Scheme query after
+          restart, before taking additional iterations.
+      recovery_attempt_2:
+        status: BLOCKED_REPEATABLE_SOLVER_FAILURE
+        basis: exact durable active-1900 autosave; report-file query removed; no scientific setting delta
+        run_id: P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-R2-student-20260910T221403Z
+        manifest: PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-R2-student-20260910T221403Z-manifest.json
+        last_observed_total_active_iteration: 1975
+        solver_failure_block_ending_total_active_iteration: 1970
+        note: >-
+          With the report-file query removed, the exact active-1900 restart
+          followed the original trajectory through the valid interval and
+          reproduced epsilon/flow-field blow-up, followed by Fluent node
+          SIGSEGV after residual escalation. No active-5,000 pair exists.
+      recovery_attempt_3:
+        status: BLOCKED_REPEATABLE_SOLVER_FAILURE
+        basis: exact durable active-1900 autosave after Fluent relaunch; no scientific setting delta
+        run_id: P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-R3-student-20260910T224003Z
+        server_ref: student@10.0.0.5:49468
+        manifest: PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-R3-student-20260910T224003Z-manifest.json
+        last_observed_total_active_iteration: 1975
+        solver_failure_block_ending_total_active_iteration: 1970
+        note: >-
+          After the human relaunched Fluent, the fresh endpoint accepted the
+          exact active-1900 restart. The run reproduced the same residual
+          escalation and node SIGSEGV; only the active-1900 paired start state
+          was durable and no active-5,000 pair exists.
+
+gates:
+  PHASE_CONTRACT:
+    status: PASS
+    checked_at: 2026-09-08
+    evidence:
+      - Project/experiments/phase-07a-simplified-purnanto-liquid-removal/CONTEXT.md
+      - Project/experiments/phase-07a-simplified-purnanto-liquid-removal/e0-08b-corrected-reference/setup.md
+      - >-
+        Explicit human instruction on 2026-09-08 authorizing loop entry,
+        available-Fluent-server takeover, and P7-E0-REF execution through the
+        2,000-iteration discovery horizon, restricted to approved G1 gates.
+    missing: []
+    reviewer: verify_phase_contract independent subagent
+  DISCOVERY_DESIGN:
+    status: PASS
+    checked_at: 2026-09-11
+    permission_scope: G3_phase_loop_execution_for_queue_orders_27_and_28_and_recorded_auto_loop_handoff
+    evidence:
+      - Project/experiments/phase-07a-simplified-purnanto-liquid-removal/CONTEXT.md
+      - Project/experiments/phase-07a-simplified-purnanto-liquid-removal/fixed-mesh-treatment-screen/design.md
+      - Project/experiments/phase-07a-simplified-purnanto-liquid-removal/e0-08b-corrected-reference/design.md
+      - Project/experiments/phase-07a-simplified-purnanto-liquid-removal/e0-08b-corrected-reference/setup.md
+      - Project/experiments/phase-07a-simplified-purnanto-liquid-removal/mesh-inspection.md
+      - >-
+        Independent deterministic check: fixed-mesh-treatment-screen/design.md
+        contains exactly 15 unique initial child IDs, three each for E1-PO,
+        E2-OV, E3-MFO, E4-ADAPT, and E5-PSINK; no unapproved child appears in
+        the initial matrix.
+      - >-
+        CONTEXT.md records human approval on 2026-09-08 for the five-family
+        mechanism ladder, all 15 initial values/tunings, the 500-iteration
+        screens, bounded one-point fourth branches, and at-most-one-member
+        500-to-2,000 discovery continuations. Candidate IDs, H2 origins,
+        G1 linkage, and the fixed-mesh comparison boundary are explicit.
+      - >-
+        The collision table classifies all five families as partial repeats or
+        new and states the nonredundant Phase-07 delta against retained Phase
+        05/06 evidence. Required monitor/history outputs and F1-F4 core figures
+        are specified before execution, and the design is explicitly discovery
+        rather than qualification.
+      - >-
+        Adaptive normalization is explicitly conditional on valid E0 liquid
+        history through iteration 1,000 and positive measurable DeltaMref;
+        E3/E4 phase-specific outlet capability and E5 liquid-only
+        mass/momentum source accounting remain hard execution locks. No
+        surrogate substitution is authorized.
+      - >-
+        G0 evidence is preserved: E0 remains human-approved only for its
+        server-neutral setup packet, with exact parent/mesh identities,
+        bounded reconciliation, setup evidence, and no live Fluent authority.
+        G1 does not authorize execution, fleet/session use, loop entry, or any
+        qualification path; CONTEXT.md records that no qualification path is
+        approved.
+      - >-
+        Prior Phase-06 records retain the relevant fixed-pressure, outlet-vent,
+        and bounded-pressure-feedback evidence; the Phase-07 collision analysis
+        correctly identifies changed geometry, initialization, actuator law,
+        and matched phase-resolved evidence as the nonredundant comparison
+        basis.
+      - Project/experiments/phase-07a-simplified-purnanto-liquid-removal/cell-zone-treatment-family/design.md
+      - >-
+        The human-approved E5-CZ recovery design records the exact split-by-mark
+        topology delta, the student-server unsplit/split invariant proof, the
+        native phase-2 mass and mixture-momentum source limitations, three gain
+        children, hard readback/evidence requirements, and the G2 discovery
+        claim boundary. No patch/reset route is included.
+      - Project/experiments/phase-07a-simplified-purnanto-liquid-removal/cell-zone-treatment-family/p7-e5-cz-g100-cont2500/setup.md
+      - >-
+        Human-approved H5 continuation formalization: the exact verified G100
+        active-500 parent is continued for 2,000 additional active iterations
+        to total active 2,500, with the mesh, lower zone, source law, gain,
+        momentum coupling, numerics, and bottom-only claim boundary unchanged.
+        The continuation is discovery-scale and nonredundant because it tests
+        persistence of the unresolved inventory trend.
+      - Project/experiments/phase-07a-simplified-purnanto-liquid-removal/cell-zone-absorber-control-family/design.md
+      - >-
+        Human-approved H6 absorber-control extension: three matched
+        active-2,500 continuations fix G=2.00, vary only the predeclared caps
+        146.15, 292.30, and 584.60 kg/s, use lower-zone phase-2 inventory as
+        the primary feedback, preserve the no-outlet abstraction, and record
+        the parent-relative numerical target and cap/saturation evidence.
+        The adversarial review found no discovery blocker; stale parent
+        runtime counter, numerical target assumption, mixture-momentum vapor
+        coupling, and high-cap stiffness are explicit hard checks/limits.
+      - >-
+        The human explicitly invoked $phase-loop in this chat after the H6
+        family was approved. This upgrades the family from design-only to the
+        declared Phase Loop execution queue for orders 24--26; all live
+        implementation, smoke, terminal-horizon, and evidence gates remain
+        mandatory.
+      - Project/experiments/phase-07a-simplified-purnanto-liquid-removal/cell-zone-absorber-control-family/p7-e5-cz-absorb-g200-cap14615/setup.md
+      - Project/experiments/phase-07a-simplified-purnanto-liquid-removal/cell-zone-absorber-control-family/p7-e5-cz-absorb-g200-cap29230/setup.md
+      - Project/experiments/phase-07a-simplified-purnanto-liquid-removal/cell-zone-absorber-control-family/p7-e5-cz-absorb-g200-cap58460/setup.md
+      - Project/experiments/phase-07a-simplified-purnanto-liquid-removal/cell-zone-absorber-control-family/p7-e5-cz-absorb-cold-ramp11692/setup.md
+      - >-
+        Human-approved H7 cold-start balance probe: the exact E0-style
+        initialized case/data state is used before treatment iterations; the
+        lower-zone phase-2 absorber is ramped from zero to 116.92 kg/s over
+        active 0--100 and then held through a 1,000-iteration discovery
+        horizon. The human subsequently invoked Phase Loop and Auto Loop in
+        this chat, authorizing execution through the recorded gates and a
+        handoff to the current Auto Loop envelope.
+      - >-
+        Independent setup review for human-selected queue order 28 returned
+        DISCOVERY_DESIGN PASS on 2026-09-11. The reviewer confirmed the exact
+        active-1000 parent, 4,000-additional/5,000-total continuation horizon,
+        lower-zone phase-2-only absorber, and unchanged no-outlet/no-patch/
+        no-remesh/no-resplit boundaries. The inherited missing vapor-inventory
+        history remains an explicit evidence limitation.
+      - Project/experiments/phase-07a-simplified-purnanto-liquid-removal/cell-zone-absorber-control-family/p7-e5-cz-absorb-cold-ramp11692-cont5000/setup.md
+    missing: []
+    reviewer: verify_discovery_design_exec independent subagent (execution re-review)
+  DISCOVERY_EXECUTION:
+    status: BLOCK
+    checked_at: 2026-09-11
+    permission_scope: HUMAN_AUTHORIZED_ATTEMPT_DEPENDENCY_GATED
+    evidence:
+      - PyAnsys/output/phase07_e0_ref/P7-E0-REF-server3-20260908T041031Z-manifest.json
+      - PyAnsys/output/phase07_e0_ref/P7-E0-REF-server3-20260908T041031Z-final-reopen.json
+      - >-
+        The first attempt reached 2,000 iterations but is invalid because its
+        rebuilt setup changed the exact parent's RNG differential-viscosity and
+        swirl-dominated-flow options from true to false.
+      - PyAnsys/output/phase07_e0_ref/P7-E0-REF-server3-20260908T083413Z-manifest.json
+      - PyAnsys/output/phase07_e0_ref/P7-E0-REF-server3-20260908T083413Z-residuals-transcript.txt
+      - >-
+        The repaired setup preserved and save/reopen-proved both parent RNG
+        options, but Fluent diverged in the epsilon AMG solve and stopped with
+        floating-point exceptions at native iteration 1,724 of 2,000.
+      - >-
+        Current human instruction authorizes execution attempts for P7-E0-REF
+        and all 15 approved initial E1–E5 packets, takeover/overwrite of active
+        Fluent sessions, and maximum contract-preserving parallelism.
+      - >-
+        Independent gate review confirms that this authorization does not waive
+        the exact E0 initialized-parent, adaptive DeltaMref, E3 capability, or
+        E5 source-accounting requirements; execution remains dependency-gated.
+      - >-
+        Under that authorization, all 15 child packets were attempted in
+        isolated paths using servers 1 and 3 with attached discovery runners:
+        E1 P1120 completed its 500-iteration screen, while corrected E1
+        P1160/P1200 readbacks were proven and both then blocked during smoke;
+        E2-OV (3/3) completed 500-iteration screens, E3-MFO (3/3) completed
+        500-iteration screens with phase-specific readback, E4-ADAPT (3/3)
+        completed 500 active iterations from the E0-500 pair with ten
+        controller readbacks each, and E5-PSINK (3/3) reached the source-region
+        capability probe and was blocked before solve.
+      - >-
+        E5's live probe created and read back the frozen 0<=y<=0.10 m register,
+        but Fluent 2025 R2 exposed only a uniform phase-2 fluid-zone source
+        list with no register/region binding; all three E5 packets therefore
+        have the same explicit capability blocker.
+      - >-
+        The context-authorized E2 K=10 conditional fourth branch proved
+        setup/readback and then blocked during smoke with Fluent divergence and
+        floating-point exceptions. The selected E3 Q=146.15 kg/s and E4 G=1.50
+        branches were subsequently rerun on the only reachable student
+        endpoint from their exact approved parents/checkpoint. Both completed
+        their declared 500-iteration discovery screens and plot-led analysis;
+        Q146.15 retained positive inventory drift and open mixture balance,
+        while G1.50 reached the command cap with positive inventory drift.
+      - PyAnsys/output/phase07_e0_ref/P7-E0-REF-server1-20260908T170000Z-manifest.json
+      - >-
+        The latest parent-preserving E0 rerun completed all 2,000 native
+        iterations, passed the 50-iteration smoke and final save/reopen
+        readback, emitted checkpoints at 50/500/1,000/1,500/2,000, and
+        produced 14 report histories plus 7 residual histories at 2,000
+        points each.
+      - PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G025-student-20260910T024900Z-manifest.json
+      - >-
+        G025 independently reloaded the exact E0-500 parent, split the native
+        fluid zone with 3,794 marked cells, preserved the recorded global mesh
+        counts, passed source-off save/reopen, reapplied child-local report
+        paths after reopen, and reached the 50-iteration smoke. The source
+        active continuation is not accepted because the first runner used an
+        invalid geometric-volume API and produced an impossible geometry versus
+        phase-2-volume comparison.
+      - PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G025-student-20260910T024900Z-residuals-transcript.txt
+      - PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G050-student-20260910T025500Z-manifest.json
+      - PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G100-student-20260910T030000Z-manifest.json
+      - >-
+        G050 and G100 were attempted as queue members, but the student TCP
+        endpoint remained reachable while Fluent's gRPC health check timed out
+        after the G025 solver failure; neither child reached parent placement.
+      - PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G050-student-20260910T044606Z-manifest.json
+      - >-
+        The corrected G050 recovery continuation reopened the durable active-250
+        pair, completed active 251-500, saved/reopened the final pair, recovered
+        its restart-window histories and passed terminal readback. The current
+        late inventory slope is +0.3256 kg/native iteration, with positive
+        drift and open boundary closure.
+      - PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G100-student-20260910T045745Z-manifest.json
+      - >-
+        The corrected G100 rerun completed the exact-parent split, source-off
+        smoke, ten controller updates through native 1,000, full histories,
+        final save/reopen, and terminal readback. The inherited autosave-path
+        warning near native 999 was nonfatal.
+      - PyAnsys/output/phase07_cz_absorb/P7-E5-CZ-ABSORB-G200-CAP14615-student-20260910T104533Z-manifest.json
+      - >-
+        The low-cap absorber-control child passed parent/source/topology
+        readback, smoke, the 500-active-iteration horizon, required histories,
+        source audit, paired final save/reopen, and terminal manifest checks.
+        Its finite analysis shows lower-inventory oscillation above target and
+        positive late global liquid drift, so execution is complete but no
+        promotion follows.
+      - PyAnsys/output/phase07_cz_absorb/P7-E5-CZ-ABSORB-G200-CAP29230-student-20260910T110936Z-manifest.json
+      - PyAnsys/output/phase07_cz_absorb/P7-E5-CZ-ABSORB-G200-CAP29230-student-20260910T110936Z-residuals-transcript.txt
+      - >-
+        The medium-cap child passed parent/source/instrumentation checks and
+        produced valid controller/source evidence through active 400, then
+        blocked on AMG divergence and a floating-point exception during the
+        block ending at active 450.
+      - PyAnsys/output/phase07_cz_absorb/P7-E5-CZ-ABSORB-G200-CAP58460-student-20260910T113103Z-manifest.json
+      - PyAnsys/output/phase07_cz_absorb/P7-E5-CZ-ABSORB-G200-CAP58460-student-20260910T113103Z-residuals-transcript.txt
+      - >-
+        The corrected high-cap child passed parent/source/instrumentation
+        checks and produced valid controller/source evidence through active
+        400, then encountered the same divergence/floating-point failure
+        during the block ending at active 450. The earlier missing-history
+        preflight block is excluded from the scientific comparison.
+    missing:
+      - >-
+        Corrected E1 P1160 and P1200 cases reached the intended pressure
+        readback but failed the 50-iteration smoke horizon with Fluent
+        divergence/floating-point exceptions.
+      - >-
+        The three E5-PSINK packets cannot pass their declared execution
+        contract until Fluent exposes a human-approved region-specific
+        liquid-only source binding for the frozen y<=0.10 m register.
+      - >-
+        The selected Q=146.15 kg/s and G=1.50 recovery branches are now
+        execution-complete on student, but neither supports promotion: Q146.15
+        has positive inventory drift/open mixture balance and G1.50 saturates
+        at 146.15 kg/s while inventory continues to rise.
+      - >-
+        The first G025 runner used invalid source-volume normalization and is
+        retained only as a blocked implementation record. The corrected G025
+        rerun completed the full 500-active-iteration screen, recovered all
+        fourteen report histories and seven residual histories, and passed the
+        corrected get_sum source audit. Corrected G050 and G100 are now also
+        execution-complete; G050 is explicitly limited to its recovered
+        native 748-998 continuation window.
+      - >-
+        The corrected G100-CONT2500 continuation is execution-complete through
+        active 2,500. Its final pair, histories, and analysis are recorded;
+        the stale post-reopen runtime-counter field remains an explicit
+        limitation and the finite result retains positive inventory drift/open
+        closure.
+      - PyAnsys/output/phase07_cz_absorb_cold/P7-E5-CZ-ABSORB-COLD-RAMP11692-student-20260910T135421Z-manifest.json
+      - PyAnsys/output/phase07_cz_absorb_cold/P7-E5-CZ-ABSORB-COLD-RAMP11692-student-20260910T135421Z-reports.json
+      - PyAnsys/output/phase07_cz_absorb_cold/P7-E5-CZ-ABSORB-COLD-RAMP11692-student-20260910T135421Z-residuals.json
+      - >-
+        Independent reviewer Meitner verified the exact initialized parent,
+        split/source readback, save/reopen, smoke, attached active-1,000
+        terminal, final paired case/data, 18 one-thousand-point histories, and
+        seven one-thousand-point residual curves. The execution gate passes;
+        the separate discovery-evidence gate remains blocked by the missing
+        vapor-inventory history and finite non-converged result.
+      - PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000-student-20260910T211158Z-manifest.json
+      - >-
+        Human-selected queue order 28 loaded the exact active-1,000 pair,
+        preserved the two-zone topology and fixed lower-zone phase-2 source,
+        passed save/reopen and smoke, and produced 18 histories plus seven
+        residual curves through the last valid active-1,960 iteration. The
+        continuation then diverged in the block ending at active 1,970, so
+        execution is blocked at the requested 5,000 horizon.
+      - PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-student-20260910T220409Z-manifest.json
+      - >-
+        The first exact-settings restart from the durable active-1,900 pair
+        passed preparation/source checks but stopped at active 1,900 on a
+        report-file Scheme query; it did not constitute a scientific setting
+        change or advance the trajectory.
+      - PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-R2-student-20260910T221403Z-manifest.json
+      - >-
+        The second exact-settings restart removed the nonessential report-file
+        query, reproduced the original active-1,900-to-1,970 deterioration,
+        and ended after Fluent node SIGSEGV around active 1,975. This confirms
+        that the frozen-settings continuation is repeatably blocked and still
+        has no active-5,000 endpoint.
+      - PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-R3-student-20260910T224003Z-manifest.json
+      - >-
+        Following a human relaunch, the third exact-settings recovery connected
+        to student at port 49468, reloaded the same durable active-1,900 pair,
+        and again reproduced the active-1,970 failure trajectory and SIGSEGV
+        through active 1,975. This is a fresh post-relaunch reproduction, not
+        a wrapper-only failure, and still produced no active-5,000 endpoint.
+    reviewer: independent reviewers Meitner and Planck; terminal-manifest-and-history checks complete; exact-settings recovery repeatability recorded across two post-relaunch solver attempts; corrected E1 pressure retries audited
+    reviewer: independent reviewers Meitner and Planck; terminal-manifest-and-history checks complete; exact-settings recovery repeatability recorded; corrected E1 pressure retries audited
+
+  DISCOVERY_EVIDENCE:
+    status: BLOCK
+    checked_at: 2026-09-11
+    permission_scope: ANALYSIS_REQUIRED_BEFORE_G1_OR_QUALIFICATION
+    evidence:
+      - >-
+        E0, E1-P1120, E2-OV, E3-MFO, and E4-ADAPT result files contain their
+        declared plot-led analysis; corrected E1-P1160/P1200 and E5-PSINK
+        contain explicit numerical/capability block evidence.
+      - >-
+        P7-E0-REF-server1-20260908T170000Z contains the complete 2,000-point
+        reference histories required for the fixed-mesh comparison.
+    missing:
+      - >-
+        E0--E4 analyses and core figures are now complete, but the reference
+        and all completed treatment screens remain finite-horizon/inconclusive;
+        no bounded promotion hypothesis is established.
+      - >-
+        The cold-start child is missing its planned vapor-inventory report
+        history. Do not infer vapor inventory from phase-1 boundary fluxes.
+        Record this as the durable evidence blocker; the independent review
+        authorizes no new experimental action from order 27 before the stop
+        time.
+      - >-
+        E5-PSINK remains blocked at region-specific liquid-only source
+        accounting; the separate E5-CZ cell-zone recovery family has now
+        completed its three declared gain screens.
+      - >-
+        The E5-CZ family now has a complete three-gain execution/analysis
+        comparison. G025, G050, and G100 all retain positive inventory drift
+        and open boundary-only mixture closure; G050 is the smallest
+        provisional late-slope member, but its evidence is a recovered
+        native 748-998 continuation window rather than a fresh full-history
+        trace. No member supports promotion or qualification.
+      - >-
+        The corrected G100-CONT2500 continuation now provides bounded evidence
+        over 2,000 additional active iterations: positive inventory drift,
+        zero bottom boundary phase-2 flux under the absorber abstraction,
+        source-cap saturation, and open mixture closure. It does not establish
+        physical pool control or qualification.
+      - >-
+        The E5-CZ-ABSORB family is now analyzed as a three-member comparison:
+        CAP14615 completed its declared horizon but retained positive global
+        liquid drift and missed the lower target; CAP29230 and CAP58460 both
+        diverged during the block ending at active 450 after valid readbacks
+        through active 400. No member supports promotion or qualification.
+      - >-
+        The post-divergence report tails for CAP29230 and CAP58460 are retained
+        as numerical-failure evidence only and are excluded from physical
+        trend claims. Their source audits remained precise and direct phase-1
+        mass sources remained off through the valid interval.
+      - >-
+        The selected E3 Q=146.15 and E4 G=1.50 fourth branches are now
+        execution-complete and analyzed on student, but their finite screens
+        remain inconclusive for bounded promotion; G1.50 also hit the
+        predeclared saturation rejection condition.
+      - >-
+        The cold-start inlet-matched child reached active 1,000 with exact E0
+        initialized-parent readback, split/source readback, save/reopen,
+        smoke, final paired state, 18 histories, and 1,000 residual points.
+        Its source audit remained at machine precision and direct phase-1
+        source stayed off, but total liquid drifted positively while the lower
+        absorber zone remained effectively empty. The planned vapor-inventory
+        history was not configured, so its F3 evidence is partial.
+      - >-
+        The order-28 continuation analysis stitches valid active 1,001--1,960
+        data to the parent. Total liquid mass rose from 651.30 kg at active
+        1,000 to 1,655.14 kg at active 1,960, the lower-zone liquid remained
+        negligible (maximum 0.0787 kg), and the fixed source audit remained at
+        116.92 kg/s to 1.99e-13 kg/s maximum absolute error. The solver then
+        diverged; the requested active-5,000 endpoint and final pair do not
+        exist. F3 remains partial because vapor inventory was not recorded.
+      - >-
+        The exact active-1,900 recovery with the report query removed reached
+        the same deterioration and terminal node failure as the primary run.
+        This repeatability strengthens the numerical blocker but does not
+        create a 5,000-iteration result or complete the missing vapor history.
+      - >-
+        The post-relaunch R3 recovery reproduced the same active-1,970 failure
+        trajectory and Fluent node SIGSEGV, confirming that restarting the
+        Fluent session does not remove the frozen-settings blocker. No new
+        scientific evidence beyond the valid active-1,960 interval was added.
+    reviewer: independent reviewers Meitner and Planck — BLOCK; valid partial continuation only, F3 partial, repeatable frozen-settings solver failure after relaunch, no bounded qualification hypothesis
+
+  HYPOTHESIS_DEFINITION:
+    status: BLOCK
+    checked_at: 2026-09-10
+    missing:
+      - DISCOVERY_EVIDENCE is BLOCK; no specific bounded qualification hypothesis is yet supported.
+      - The completed Q146.15 and G1.50 screens do not support a bounded qualification hypothesis; G1.50 saturated at the command cap.
+    reviewer: lifecycle gate not entered
+
+  HYPOTHESIS_RUN_READY:
+    status: BLOCK
+    checked_at: 2026-09-09
+    missing:
+      - DISCOVERY_EVIDENCE and HYPOTHESIS_DEFINITION are not PASS.
+      - No verified parent/readback/smoke contract exists for a qualification run.
+    reviewer: lifecycle gate not entered
+
+  HYPOTHESIS_EXECUTION:
+    status: BLOCK
+    checked_at: 2026-09-09
+    missing:
+      - No hypothesis qualification setup is authorized.
+    reviewer: lifecycle gate not entered
+
+  HYPOTHESIS_EVIDENCE:
+    status: BLOCK
+    checked_at: 2026-09-09
+    missing:
+      - No hypothesis qualification run exists.
+    reviewer: lifecycle gate not entered
+
+  PHASE_CLOSURE:
+    status: BLOCK
+    checked_at: 2026-09-09
+    missing:
+      - Mandatory discovery and hypothesis lifecycle gates are incomplete.
+    reviewer: lifecycle gate not entered
+
+active_jobs:
+  - run_id: P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-R3-student-20260910T224003Z
+    setup_id: P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000
+    mode: attached-unchanged-settings-recovery
+    server_ref: student@10.0.0.5:49468
+    requested_iterations: 3100 additional from active 1900, target active 5000
+    manifest: PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-R3-student-20260910T224003Z-manifest.json
+    actual_iterations: 75 additional observed through active 1975; failure block ending active 1970
+    terminal_status: BLOCKED_REPEATABLE_SOLVER_FAILURE
+  - run_id: P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-R2-student-20260910T221403Z
+    setup_id: P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000
+    mode: attached-unchanged-settings-recovery
+    server_ref: student@10.0.0.5
+    requested_iterations: 3100 additional from active 1900, target active 5000
+    manifest: PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-R2-student-20260910T221403Z-manifest.json
+    actual_iterations: 75 additional observed through active 1975; failure block ending active 1970
+    terminal_status: BLOCKED_REPEATABLE_SOLVER_FAILURE
+  - run_id: P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-student-20260910T220409Z
+    setup_id: P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000
+    mode: attached-unchanged-settings-recovery
+    server_ref: student@10.0.0.5
+    requested_iterations: 3100 additional from active 1900, target active 5000
+    manifest: PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-student-20260910T220409Z-manifest.json
+    actual_iterations: 0 additional; stopped at active 1900 during report-file Scheme query
+    terminal_status: BLOCKED_REPORT_FILE_SCHEME_QUERY
+  - run_id: P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000-student-20260910T211158Z
+    setup_id: P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000
+    mode: attached-discovery-extension
+    server_ref: student@10.0.0.5
+    requested_iterations: 4000 additional, total active 5000
+    manifest: PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000-student-20260910T211158Z-manifest.json
+    actual_iterations: 960 additional, last valid total active 1960
+    terminal_status: BLOCKED_SOLVER_DIVERGENCE
+  - run_id: P7-E5-CZ-ABSORB-COLD-RAMP11692-student-20260910T135421Z
+    setup_id: P7-E5-CZ-ABSORB-COLD-RAMP11692
+    mode: attached-discovery
+    server_ref: student@10.0.0.5
+    requested_iterations: 1000
+    manifest: PyAnsys/output/phase07_cz_absorb_cold/P7-E5-CZ-ABSORB-COLD-RAMP11692-student-20260910T135421Z-manifest.json
+    terminal_status: COMPLETE_EXECUTION_EVIDENCE_BLOCKED
+  - run_id: P7-E0-REF-server1-20260908T170000Z
+    setup_id: P7-E0-REF
+    mode: attached-discovery
+    server_ref: server-1@10.104.145.170
+    requested_iterations: 2000
+    actual_iterations: 2000
+    manifest: PyAnsys/output/phase07_e0_ref/P7-E0-REF-server1-20260908T170000Z-manifest.json
+    terminal_status: COMPLETE
+  - run_id: P7-E0-REF-server3-20260908T041031Z
+    setup_id: P7-E0-REF
+    mode: attached-discovery
+    server_ref: server-3@10.104.145.176
+    requested_iterations: 2000
+    manifest: PyAnsys/output/phase07_e0_ref/P7-E0-REF-server3-20260908T041031Z-manifest.json
+    terminal_status: INVALID_SETUP_DRIFT
+  - run_id: P7-E0-REF-server3-20260908T083413Z
+    setup_id: P7-E0-REF
+    mode: attached-discovery-repair
+    server_ref: server-3@10.104.145.176
+    requested_iterations: 2000
+    actual_iterations: 1724
+    manifest: PyAnsys/output/phase07_e0_ref/P7-E0-REF-server3-20260908T083413Z-manifest.json
+    terminal_status: BLOCKED_SOLVER_DIVERGENCE
+next_required_action: >-
+  Queue order 28 is terminally complete for execution and durably blocked at
+  the requested horizon after solver divergence in the block ending at active
+  1,970. Preserve the valid active-1,960 histories and 1,900 autosave pair;
+  do not promote this continuation to qualification or infer behaviour beyond
+  active 1,960. The exact-settings active-1,900 recovery reproduced the same
+  epsilon/flow-field blow-up and terminal Fluent node failure, while the first
+  wrapper-only recovery stopped before iterating on a report-file Scheme query.
+  After Fluent was relaunched, a third exact-settings recovery on the fresh
+  endpoint reproduced the same active-1,970 failure and node SIGSEGV. No
+  active-5,000 endpoint exists. No further identical retry under the frozen
+  settings is justified in this audit. The inherited vapor-inventory history
+  remains missing and F3 remains partial.
+  Any altered numerics, absorber setting, or recovery route requires a
+  separately authorized setup. Queue order 27 remains terminally
+  complete for execution and durably blocked at
+  DISCOVERY_EVIDENCE. Preserve the completed plot-led E0--E4 discovery packets, including the
+  student-server Q=146.15 kg/s and G=1.50 fourth-branch analyses, corrected E1
+  numerical blocks, and K=10 fourth-point block. Do not promote any child to
+  qualification: Q146.15 retains positive inventory drift/open mixture
+  balance, G1.50 saturates at 146.15 kg/s with positive inventory drift, and
+  the original E5-PSINK packets remain blocked at the region-specific
+  liquid-only source capability boundary. The E5-CZ launch selected in this
+  chat is now execution-complete: corrected G025, recovered G050 from its
+  durable active-250 pair, and fresh G100 all passed their declared contracts
+  and produced finite analyses. G050 has the smallest provisional late
+  inventory slope, but its package is a recovered native 748-998 window; all
+  three gains retain positive inventory drift and open boundary closure. The
+  human-approved G100 continuation packet is order 23 and is now
+  execution-complete through total active 2,500. Its bounded evidence retains
+  positive inventory drift, cap saturation, open closure, and the stale
+  runtime-counter limitation. The E5-CZ-ABSORB family orders 24--26 is now
+  classified: CAP14615 is the stable completed baseline but misses the target
+  and retains positive global liquid drift; CAP29230 and CAP58460 are verified
+  solver-divergence blockers after valid active-400 evidence. Return the family
+  to the human for a separately authorized stabilization design if desired.
+  Do not resume divergent endpoints or infer physical late trends from their
+  post-failure report tails. The current Auto Loop route is now a durable
+  evidence-gate recovery/defer through 09:00 Pacific/Auckland. Independent
+  reviewer Meitner returned DISCOVERY_EXECUTION PASS and DISCOVERY_EVIDENCE
+  BLOCK: F1/F2 are complete, F3 is partial because the vapor-inventory
+  history was not configured, total liquid drift is positive, and residuals
+  are finite but non-converged. Do not enter HYPOTHESIS_DEFINITION,
+  HYPOTHESIS_RUN_READY, or qualification; do not start a new experiment,
+  add an outlet, patch/reset fields, remesh, or invent an unbounded treatment.
+  Preserve the durable block and return the evidence-bounded result at the
+  recorded stop time.

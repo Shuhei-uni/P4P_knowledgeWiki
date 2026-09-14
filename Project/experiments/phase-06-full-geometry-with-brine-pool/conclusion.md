@@ -45,4 +45,4 @@ in Phase 07 would establish a useful modelling mechanism; it would not by
 itself validate the mechanism as a faithful representation of the real brine
 pool, outlet hardware, or controller.
 
-- [Phase 07 — simplified Purnanto liquid-removal mechanisms](../phase-07-simplified-purnanto-liquid-removal/index.md)
+- [Phase 07 — simplified Purnanto liquid-removal mechanisms](../phase-07a-simplified-purnanto-liquid-removal/index.md)

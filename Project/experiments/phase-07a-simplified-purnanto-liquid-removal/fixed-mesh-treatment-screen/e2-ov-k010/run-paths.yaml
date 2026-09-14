@@ -1,0 +1,28 @@
+setup_id: P7-E2-OV-K010
+run_id: P7-E2-OV-K010-server1-20260909T004500Z
+status: BLOCKED
+permission: HUMAN_AUTHORIZED_CONDITIONAL_FOURTH_BRANCH
+goal_lease:
+  phase_id: phase-07a-simplified-purnanto-liquid-removal
+  mode: exclusive
+  active_session_control: full
+server:
+  ref: server-1@10.104.145.170
+  id: server-1
+  ip: 10.104.145.170
+  fluent_version: Ansys Fluent 2025 R2
+  takeover: server-3 endpoint was unresponsive after corrected E1 solver fault; server-1 selected as the only verified reachable fleet member
+parent_case_data:
+  case: 'C:\Users\syok443\Documents\FluentRuns\Phase07\P7-E0-REF\rerun-20260908T170000Z\initialized.cas.h5'
+  data: 'C:\Users\syok443\Documents\FluentRuns\Phase07\P7-E0-REF\rerun-20260908T170000Z\initialized.dat.h5'
+output_root: 'C:\Users\syok443\Documents\FluentRuns\Phase07\TreatmentScreen\${stamp}\${id}'
+prepared_case: 'C:\Users\syok443\Documents\FluentRuns\Phase07\TreatmentScreen\${stamp}\${id}\P7-E2-OV-K010-prepared.cas.h5'
+smoke_case: 'C:\Users\syok443\Documents\FluentRuns\Phase07\TreatmentScreen\${stamp}\${id}\P7-E2-OV-K010-active050.cas.h5'
+checkpoint250_case: 'C:\Users\syok443\Documents\FluentRuns\Phase07\TreatmentScreen\${stamp}\${id}\P7-E2-OV-K010-active250.cas.h5'
+final_case: 'C:\Users\syok443\Documents\FluentRuns\Phase07\TreatmentScreen\${stamp}\${id}\P7-E2-OV-K010-active500.cas.h5'
+report_root: 'C:\Users\syok443\Documents\FluentRuns\Phase07\TreatmentScreen\${stamp}\${id}\monitors'
+manifest: PyAnsys/output/phase07_treatment_screen/P7-E2-OV-K010-server1-20260909T004500Z-manifest.json
+residual_history: PyAnsys/output/phase07_treatment_screen/P7-E2-OV-K010-server1-20260909T004500Z-residuals.json
+transcript: PyAnsys/output/phase07_treatment_screen/P7-E2-OV-K010-server1-20260909T004500Z-residuals-transcript.txt
+durability_status: LOCAL_ONLY
+terminal_status: BLOCKED_SMOKE_DIVERGENCE_FLOATING_POINT_EXCEPTION

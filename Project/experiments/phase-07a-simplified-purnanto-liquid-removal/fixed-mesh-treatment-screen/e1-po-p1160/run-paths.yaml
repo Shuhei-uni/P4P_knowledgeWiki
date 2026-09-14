@@ -1,0 +1,30 @@
+setup_id: P7-E1-PO-P1160
+run_id: P7-E1-PO-P1160-server1-20260909T001000Z
+status: BLOCKED
+permission: HUMAN_AUTHORIZED_ATTEMPT_DEPENDENCY_GATED
+goal_lease:
+  phase_id: phase-07a-simplified-purnanto-liquid-removal
+  mode: exclusive
+  active_session_control: full
+server:
+  ref: server-1@10.104.145.170
+  id: server-1
+  ip: 10.104.145.170
+  fluent_version: Ansys Fluent 2025 R2
+  takeover: prior treatment screen completed; same session reused under current human authorization
+parent_case_data:
+  case: 'C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\P7-E0-REF\\rerun-20260908T170000Z\\initialized.cas.h5'
+  data: 'C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\P7-E0-REF\\rerun-20260908T170000Z\\initialized.dat.h5'
+output_root: 'C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\TreatmentScreen\\20260909T001000Z\\P7-E1-PO-P1160'
+prepared_case: 'C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\TreatmentScreen\\20260909T001000Z\\P7-E1-PO-P1160\\P7-E1-PO-P1160-prepared.cas.h5'
+smoke_case: 'C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\TreatmentScreen\\20260909T001000Z\\P7-E1-PO-P1160\\P7-E1-PO-P1160-active050.cas.h5'
+checkpoint250_case: 'C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\TreatmentScreen\\20260909T001000Z\\P7-E1-PO-P1160\\P7-E1-PO-P1160-active250.cas.h5'
+final_case: 'C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\TreatmentScreen\\20260909T001000Z\\P7-E1-PO-P1160\\P7-E1-PO-P1160-active500.cas.h5'
+report_root: 'C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\TreatmentScreen\\20260909T001000Z\\P7-E1-PO-P1160\\monitors'
+manifest: PyAnsys/output/phase07_treatment_screen/P7-E1-PO-P1160-server1-20260909T001000Z-manifest.json
+residual_history: PyAnsys/output/phase07_treatment_screen/P7-E1-PO-P1160-server1-20260909T001000Z-residuals.json
+transcript: PyAnsys/output/phase07_treatment_screen/P7-E1-PO-P1160-server1-20260909T001000Z-residuals-transcript.txt
+prior_invalid_attempt:
+  run_id: P7-E1-PO-P1160-server1-20260908T094500Z
+  reason: final Fluent readback was 1120000 Pa, not the requested 1160000 Pa
+durability_status: LOCAL_ONLY

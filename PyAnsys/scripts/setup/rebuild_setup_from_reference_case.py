@@ -95,6 +95,11 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--source-case", required=True, help="Remote reference case file.")
     parser.add_argument(
+        "--server-id",
+        default="1",
+        help="Configured Fluent server id. Default: 1.",
+    )
+    parser.add_argument(
         "--source-data",
         default="",
         help=(
@@ -128,12 +133,9 @@ def read_reference_case_data(solver, case_file: str, data_file: str) -> None:
     try_action("read_reference_case", lambda: solver.settings.file.read_case(file_name=case_file), critical=True)
     if data_file:
         try_action("read_reference_data", lambda: solver.settings.file.read_data(file_name=data_file), critical=True)
-    else:
-        try_action(
-            "read_reference_case_data_default_pair",
-            lambda: solver.settings.file.read_case_data(file_name=case_file),
-            critical=True,
-        )
+    # A case-only source is sufficient when the task is setup transfer.  Do
+    # not implicitly require or load a same-stem data file unless the caller
+    # supplied --source-data explicitly.
 
 
 def capture_reference_snapshot(solver) -> dict[str, Any]:
@@ -148,9 +150,10 @@ def capture_reference_snapshot(solver) -> dict[str, Any]:
                 setup.general.operating_conditions,
                 "setup.general.operating_conditions",
             ),
-            "reference_values": safe_get_state(
-                setup.general.reference_values,
-                "setup.general.reference_values",
+            "reference_values": (
+                safe_get_state(setup.general.reference_values, "setup.general.reference_values")
+                if hasattr(setup.general, "reference_values")
+                else None
             ),
         },
         "models": safe_get_state(setup.models, "setup.models"),
@@ -190,21 +193,15 @@ def build_name_replacements(
     source_cell_zone_state = source_snapshot["cell_zone_conditions"]
 
     for role in ROLE_ALIASES:
-        source_match = detect_role_name(source_boundary_state, role) if isinstance(source_boundary_state, Mapping) else None
-        target_match = detect_role_name(target_boundary_state, role)
+        source_match = (
+            detect_role_name(source_boundary_state, ROLE_ALIASES, role)
+            if isinstance(source_boundary_state, Mapping)
+            else None
+        )
+        target_match = detect_role_name(target_boundary_state, ROLE_ALIASES, role)
         if source_match and target_match:
             replacements[source_match[1]] = target_match[1]
             print(f"role_map[{role}]: {source_match[1]} -> {target_match[1]}")
-
-    source_fluid = detect_cell_zone_name(source_cell_zone_state, ("fluid",))
-    target_fluid = detect_cell_zone_name(target_cell_zone_state, ("fluid",))
-    if not source_fluid and isinstance(source_cell_zone_state, Mapping):
-        source_fluid = pick_first_named_object(source_cell_zone_state)
-    if not target_fluid:
-        target_fluid = pick_first_named_object(target_cell_zone_state)
-    if source_fluid and target_fluid and source_fluid[1] != target_fluid[1]:
-        replacements[source_fluid[1]] = target_fluid[1]
-        print(f"cell_zone_map: {source_fluid[1]} -> {target_fluid[1]}")
 
     return replacements
 
@@ -260,8 +257,41 @@ def apply_models(solver, models_state: Mapping[str, Any]) -> None:
                 "set_k_epsilon_variant",
                 lambda: setattr(models.viscous, "k_epsilon_model", viscous_state["k_epsilon_model"]),
             )
+        rng_state = viscous_state.get("rng")
+        if isinstance(rng_state, Mapping):
+            for option in ("differential_viscosity_model", "swirl_dominated_flow"):
+                if option in rng_state:
+                    try_action(
+                        f"set_rng_{option}",
+                        lambda key=option, value=rng_state[option]: setattr(models.viscous.rng, key, value),
+                        critical=True,
+                    )
+        near_wall_state = viscous_state.get("near_wall_treatment")
+        if isinstance(near_wall_state, Mapping) and "wall_treatment" in near_wall_state:
+            try_action(
+                "set_viscous_wall_treatment",
+                lambda: setattr(
+                    models.viscous.near_wall_treatment,
+                    "wall_treatment",
+                    near_wall_state["wall_treatment"],
+                ),
+                critical=True,
+            )
 
-    try_action("apply_full_models_state", lambda: models.set_state(models_state))
+    # Do not replay the full model tree here: multiphase phase-material
+    # assignments depend on the source fluids being created first.  The
+    # dependency-ordered caller applies materials and phases next, then replays
+    # the isolated DPM branch.
+
+
+def apply_discrete_phase_state(solver, models_state: Mapping[str, Any]) -> None:
+    dpm_state = models_state.get("discrete_phase")
+    if isinstance(dpm_state, Mapping):
+        try_action(
+            "apply_discrete_phase_state",
+            lambda: solver.settings.setup.models.discrete_phase.set_state(dpm_state),
+            critical=True,
+        )
 
 
 def apply_phase_assignments(solver, phases_state: Mapping[str, Any]) -> None:
@@ -315,8 +345,8 @@ def convert_target_boundaries(
     bc = solver.settings.setup.boundary_conditions
 
     for role in ("liquid_inlet", "steam_inlet", "outlet", "wall", "bottom"):
-        source_match = detect_role_name(source_boundary_state, role)
-        target_match = detect_role_name(target_boundary_state, role)
+        source_match = detect_role_name(source_boundary_state, ROLE_ALIASES, role)
+        target_match = detect_role_name(target_boundary_state, ROLE_ALIASES, role)
         if not source_match or not target_match:
             continue
         desired_type, target_name = source_match[0], target_match[1]
@@ -361,16 +391,32 @@ def apply_boundary_states(solver, boundary_state: Mapping[str, Any]) -> None:
 
 def apply_cell_zone_conditions(solver, cell_zone_state: Mapping[str, Any]) -> None:
     print_header("Apply Cell Zone Conditions")
+    current = safe_get_state(
+        solver.settings.setup.cell_zone_conditions,
+        "target_cell_zone_conditions_for_apply",
+    )
+    source_match = detect_cell_zone_name(cell_zone_state, ("fluid",))
+    target_match = detect_cell_zone_name(current, ("separator-purnanto", "fluid"))
+    if not source_match or not target_match:
+        raise RuntimeError(
+            f"Could not resolve source/target fluid zones: source={source_match}, target={target_match}"
+        )
+    source_type, source_name = source_match
+    target_type, target_name = target_match
+    payload = deepcopy(cell_zone_state[source_type][source_name])
+    payload["name"] = target_name
+    target_branch = getattr(solver.settings.setup.cell_zone_conditions, target_type)
     try_action(
-        "apply_cell_zone_conditions",
-        lambda: solver.settings.setup.cell_zone_conditions.set_state(cell_zone_state),
+        f"apply_cell_zone_conditions_{target_name}",
+        lambda: target_branch[target_name].set_state(payload),
+        critical=True,
     )
 
 
 def apply_solution_state(solver, solution_state: Mapping[str, Any]) -> None:
     print_header("Apply Solution State")
     solution = solver.settings.solution
-    for branch_name in ("methods", "controls", "monitor", "report_definitions"):
+    for branch_name in ("methods", "controls", "monitor", "report_definitions", "initialization"):
         branch_state = solution_state.get(branch_name)
         if not isinstance(branch_state, Mapping):
             continue
@@ -397,7 +443,7 @@ def main() -> int:
     args = build_parser().parse_args()
     load_dotenv()
 
-    solver = connect()
+    solver = connect(server_id=args.server_id)
     print(f"\nConnected to Fluent {solver.get_fluent_version()}")
 
     read_reference_case_data(solver, args.source_case, args.source_data)
@@ -429,6 +475,7 @@ def main() -> int:
     apply_models(solver, remapped_snapshot["models"])
     apply_materials(solver, remapped_snapshot["materials"])
     apply_phase_assignments(solver, remapped_snapshot["phases"])
+    apply_discrete_phase_state(solver, remapped_snapshot["models"])
     apply_cell_zone_conditions(solver, remapped_snapshot["cell_zone_conditions"])
 
     current_target_boundary_state = safe_get_state(

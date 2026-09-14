@@ -37,9 +37,11 @@ decision gate, declared claim limit, and one valid authority:
 - `Human status: approved` for Phase Loop; or
 - `Origin: auto-loop` with a matching active Auto Loop envelope for Auto Loop.
 
-If any is absent, return to `phase-planner` / `phase-grill`; do not invent it
-here. This skill formalizes an Auto Loop candidate only after Auto Loop itself
-has recorded it; it never creates one on the loop's behalf.
+If any is absent, return an autonomous recovery request to the calling loop.
+Phase Loop may record only the narrowest diagnostic child of its queued setup;
+Auto Loop must first record an `origin: auto-loop` or
+`origin: autonomous-recovery` candidate with its gate linkage. Do not invent an
+unrecorded scientific direction here.
 
 Begin with the approved question the phase still cannot answer.
 
@@ -67,8 +69,9 @@ For every authorized candidate record:
 
 Reject `REDUNDANT` candidates. A failed historical run still counts; rerun only
 when a concrete correction or unresolved delta makes the new attempt
-scientifically different. Return a rejected Phase Loop candidate to the human;
-return an Auto Loop candidate to Auto Loop without substituting one here.
+scientifically different. Return a rejected candidate to the calling loop with
+the closest research-backed contrast or a durable block; do not substitute an
+unrelated case here.
 
 This collision check applies equally to mainline, discovery, and speculative work.
 
@@ -79,9 +82,9 @@ Use discovery mode to determine **what deserves qualification**, not to produce 
 Use `explore-experiment-space` only to organize authorized context candidates
 into a contrastive campaign. The recorded decision gate determines the smallest
 adequate screen; it may contain a few tests when they genuinely distinguish the
-stated alternatives. Roughly 500–1,000 iterations per case is a useful project
-ballpark when sufficient to expose comparative behaviour, not a convergence
-criterion.
+stated alternatives. For the active Auto Loop profile, start each new family
+member at 500 iterations and extend only promising members to 1,000; neither is
+a convergence criterion.
 
 Design discovery for:
 
@@ -108,7 +111,7 @@ what a long qualification run would need to establish
 A discovery campaign has not succeeded merely because its cases completed. It
 succeeds when every approved screen has completed, its declared evidence has
 been compared, and its decision gate either authorizes a named qualification
-path or returns the decision to the human.
+path or starts a new in-envelope recovery screen.
 
 Before implementation, the active loop must obtain `DISCOVERY_DESIGN == PASS`
 from `verify-phase-transition`.
@@ -142,10 +145,10 @@ For ordinary steady iteration-based full-geometry hypothesis qualification in th
 
 For slow inventory, routing, stationarity, or convergence questions, 10k–30k or another deliberately justified longer horizon may be appropriate.
 
-A shorter hypothesis run is allowed only when:
-
-- the human explicitly approves the exception; or
-- the experiment uses a scientifically equivalent non-iteration qualification basis appropriate to the model/question.
+A shorter hypothesis run is allowed when the Auto Loop profile/setup explicitly
+records it as a scoped qualification (normally 2,000 iterations here) with a
+claim limited to that window, or when it uses a scientifically equivalent
+non-iteration qualification basis appropriate to the model/question.
 
 Do not relabel a 500–1,000 iteration discovery screen as `hypothesis-test`.
 
@@ -195,19 +198,24 @@ Keep hypotheses and assumptions distinct:
 
 - **hypothesis** — actively tested;
 - **working assumption** — accepted temporarily so the test can proceed;
-- **missing human-owned fact** — cannot be replaced by an assumption unless the phase contract explicitly authorizes a surrogate class.
+- **missing external fact** — must be researched and, when material, represented
+  by a defensible range/sensitivity and a bounded claim rather than silently
+  treated as known.
 
 Use `accepted-for-now`, `questioned`, and `materially-challenged` where useful.
 
-If an assumption would materially determine the answer rather than merely bound it, surface that before compute. If it crosses a human boundary, the correct result is `HUMAN_REQUIRED`, not an invented target or plant parameter.
+If an assumption would materially determine the answer rather than merely bound
+it, surface it before compute. Use autonomous recovery to research the narrowest
+defensible range and test a sensitivity; if that cannot be done, record a
+durable block rather than inventing a target or plant parameter.
 
 ## Design the smallest useful strategy
 
 Prefer the smallest strategy that can produce the needed learning **at the required evidence depth**.
 
 In discovery the smallest valid strategy is the approved contrastive screen
-that can satisfy its declared gate. Add breadth only when the human approves
-the additional candidates in `CONTEXT.md`.
+that can satisfy its declared gate. Auto Loop may add only in-envelope,
+gate-linked breadth; Phase Loop may add only a recovery child of a queued item.
 
 In hypothesis-test mode this may be one deep run, a controlled pair, or a very small linked campaign. “Smallest” must not be used to shrink the qualification horizon until the intended claim is no longer supportable.
 
@@ -264,7 +272,11 @@ challenge or research a recorded candidate.
 
 Call `question-experiment` before formalizing an authorized strategy.
 
-For hypothesis qualification, independent challenge is mandatory. The reviewer must check not only scientific value, interpretability, and cost, but also whether the proposed evidence/horizon could actually support the intended strong statement and whether a human lock or material missing fact is being bypassed.
+For hypothesis qualification, independent challenge is mandatory. The reviewer
+must check not only scientific value, interpretability, and cost, but also
+whether the proposed evidence/horizon could actually support the intended
+strong statement and whether a material unknown is bounded by
+research/sensitivity rather than being passed off as known.
 
 `question-experiment` recommends a strategy. It does not grant lifecycle permission.
 

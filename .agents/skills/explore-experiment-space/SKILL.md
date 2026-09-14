@@ -1,6 +1,6 @@
 ---
 name: explore-experiment-space
-description: "Organize authorized CONTEXT.md candidate experiments into a small, contrastive discovery screen. Use inside an active phase only after candidates and a decision gate are recorded; do not originate or promote new candidates."
+description: "Organize authorized CONTEXT.md candidate experiments into a small, contrastive discovery screen. In an active autonomous loop, derive the smallest in-envelope recovery candidate when evidence demands it."
 ---
 
 # Explore Experiment Space
@@ -15,14 +15,16 @@ comparison plan.
 Read the phase-root `CONTEXT.md` and `phase-state.yaml`. Require every proposed
 screen to have a candidate ID, origin, valid authority, controlled delta,
 invariants, required evidence, and a shared decision gate. Valid authority is
-human approval for Phase Loop or `origin: auto-loop` matching the active Auto
-Loop envelope. Return to `phase-grill` when a missing Phase Loop candidate/gate
-would need a human decision; return to Auto Loop when its own candidate lacks
-envelope coverage.
+human approval for Phase Loop or `origin: auto-loop` / `autonomous-recovery`
+matching the active loop envelope. When a candidate/gate is missing, return a
+recovery request to the calling loop: Phase Loop may create only the narrowest
+diagnostic/recovery child of the queued case, while Auto Loop may create the
+nearest in-envelope candidate.
 
 Check each authorized candidate against prior Project work. Classify its delta as
 `NEW`, `PARTIAL REPEAT`, `REPLICATION`, or `REDUNDANT`. A redundant candidate
-does not license a substitute candidate; return it to the human.
+does not license an arbitrary substitute; derive the nearest contrastive
+in-envelope candidate or record the redundancy as a durable block.
 
 ## Build the screen
 
@@ -58,4 +60,5 @@ it may not establish the long-run claim by itself.
 Return the approved context candidate IDs, screening table, declared gate,
 required evidence/core figures, and each case's short horizon. After execution,
 classify only the gate-authorized next action. When evidence suggests an
-unlisted direction, return `HUMAN_REQUIRED` rather than proposing another case.
+unlisted direction, preserve it as a deferred observation and propose the
+closest in-envelope contrast or autonomous recovery disposition.

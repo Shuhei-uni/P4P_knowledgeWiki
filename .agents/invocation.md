@@ -48,7 +48,10 @@ Current hybrid skills:
   frontloaded at entry.
 - `workflow-surgeon` — may be invoked explicitly by the human, or implicitly when a concrete repeated workflow defect or clearly identifiable workflow failure satisfies its trigger conditions.
 
-Hybrid does not remove human gates inside the workflow. A hybrid skill must still return to the human when its own boundaries require it.
+Hybrid preserves hard evidence gates, but a running loop does not return to the
+human for ordinary blockers. It applies the autonomous-recovery contract,
+records assumptions or durable blocks, and continues valid work inside its
+timebox and phase envelope.
 
 ## 3. Model-invoked specialists
 
@@ -103,7 +106,9 @@ PHASE_CONTRACT
 → PHASE_CLOSURE
 ```
 
-Every state-changing transition must invoke `verify-phase-transition`. A `BLOCK` or `HUMAN_REQUIRED` result may not be self-overruled by the scientific loop or another specialist.
+Every state-changing transition must invoke `verify-phase-transition`. A `BLOCK`
+may not be self-overruled by the scientific loop or another specialist; it
+starts autonomous recovery under `.agents/skills/references/autonomous-recovery.md`.
 
 Normal autonomous `CONCLUDE PHASE` is illegal until the verified discovery-to-hypothesis lifecycle has completed. A human may explicitly terminate/reframe a phase earlier.
 

@@ -76,9 +76,9 @@ priorities.]
 
 - **Evidence required:** [...]
 - **Decision condition:** [...]
-- **Allowed next action:** [named approved path, rejection, or return]
+- **Allowed next action:** [named path, rejection, recovery sensitivity, or durable block]
 - **Not established by this screen:** [...]
-- **Return to human when:** [...]
+- **Autonomous recovery when:** [research/sensitivity/fallback and claim limit]
 
 ## Conditional qualification paths
 
@@ -90,7 +90,7 @@ priorities.]
 - **Long-run comparison:** [...]
 - **Intended claim form:** [...]
 - **Required qualification evidence and horizon:** [...]
-- **Further human review before `setup.md`:** yes | no
+- **Autonomous recovery constraints before `setup.md`:** [...]
 
 ## Phase Loop setup queue (only when ready)
 
@@ -102,24 +102,27 @@ This is the finite worklist Phase Loop may execute. A setup may enter only
 after its human-approved candidate/path is formalized; Phase Loop never fills a
 blank queue slot with a new case.
 
-## Human locks and handoff rules
+## Autonomous recovery and handoff rules
 
-- [Exact decision/fact the loop may not self-authorize.]
+- [Exact external fact/technical uncertainty, defensible range or fallback, and claim consequence.]
 - `phase-loop` executes only its defined setup queue and evaluates declared
-  gates. It returns to the human for a new candidate, changed purpose,
-  ambiguous gate, or non-equivalent workaround.
+  gates. A blocked item triggers autonomous research, the leanest equivalent
+  repair/sensitivity child, or a durable autonomous block; it never silently
+  changes the phase purpose or durable parent.
 
 ## Auto Loop envelope (only when authorized)
 
 - **Family focus:** [...]
-- **Direction:** deepen | enumerate
-- **Hypothesis iterations:** [...], including any explicit short-run exception
+- **Direction:** deepen | enumerate | deepen-and-enumerate
+- **Discovery screen / promising extension:** 500 / 1,000 iterations unless overridden
+- **Hypothesis iterations:** [...], normally 2,000 for scoped claims
 - **Stop time/timezone:** [...]
 - **Fluent authority:** full | restricted
 
 Generated candidates must be kept separate from the human-approved pool and
 record `Origin: auto-loop`, rationale, controlled delta, evidence gate, and
 the profile that authorizes them. `auto-loop` may create these candidates only
-inside this envelope; it returns to the human for a new phase direction,
-human-owned fact, or boundary change.
+inside this envelope. For a new direction, external fact, or boundary conflict,
+it records a deferred observation, researches the closest defensible
+sensitivity/probe, or persists a durable autonomous block.
 ```

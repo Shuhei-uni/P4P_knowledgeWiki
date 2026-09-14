@@ -34,7 +34,8 @@ If existing data can answer the question through additional analysis, prefer tha
 
 ## Challenge assumptions without inventing missing facts
 
-Review the experiment's working assumptions and distinguish them from missing human-owned facts.
+Review the experiment's working assumptions and distinguish them from missing
+external facts.
 
 Use:
 
@@ -44,7 +45,11 @@ Use:
 
 A normal working assumption can be bounded. A materially challenged assumption should be repaired, explicitly tested, or reflected in the claim limit.
 
-A missing plant setpoint, measurement location, validation target, controller law, or other human-owned fact must not be converted into an assumed surrogate unless the phase contract explicitly authorizes that surrogate class. If the strategy depends on such a fact, recommend `HUMAN_REQUIRED`.
+A missing plant setpoint, measurement location, validation target, controller
+law, or other external fact must not be silently converted into an assumed
+surrogate. Recommend `BLOCK` with a research-backed range/sensitivity and
+claim-limit repair; if no defensible repair exists, recommend a durable
+autonomous block.
 
 ## Judge with three criteria
 
@@ -78,7 +83,10 @@ Is the expected learning worth the compute and implementation cost?
 
 Use the smallest useful strategy, but do not shorten a qualification run until it becomes discovery-scale.
 
-For ordinary steady iteration-based full-geometry hypothesis qualification, challenge any horizon below 10,000 iterations unless there is an explicit human-approved exception or a scientifically equivalent non-iteration basis.
+For ordinary steady iteration-based full-geometry hypothesis qualification,
+challenge any horizon below 10,000 iterations unless the setup records a scoped
+Auto Loop qualification horizon (normally 2,000 iterations) with a bounded
+claim, or a scientifically equivalent non-iteration basis.
 
 For slow inventory/stationarity behaviour, ask whether the proposed horizon and continuation/restart plan are deep enough to distinguish persistent drift from a durable state.
 
@@ -96,7 +104,8 @@ Useful review lenses include:
 - experiment design/confounding;
 - evidence completeness;
 - information value versus compute;
-- whether a human boundary is being bypassed.
+- whether a material external unknown is bounded by research/sensitivity rather
+  than being passed off as known.
 
 Classify surviving issues as `blocker`, `important`, `minor`, or `non-issue`.
 
@@ -115,13 +124,14 @@ Ask:
 - Does the strategy distinguish a competing explanation?
 - Could the required claim be supported from the planned evidence?
 - Are any setup assumptions materially threatened?
-- Is an unresolved human lock present?
+- Is an unresolved material recovery item present?
 - Could fewer runs or existing data answer the same question?
 - Is the horizon appropriately discovery-scale or qualification-scale for its label?
 
 Reject or defer a weak authorized strategy. If repair would change its candidate,
-delta, invariants, or claim limit, return the issue to the human instead of
-merging, splitting, or reshaping it here.
+delta, invariants, or claim limit, return an autonomous recovery disposition:
+the loop must record the smallest context-consistent repair/sensitivity or
+durably block it rather than silently reshaping it here.
 
 ## Output
 
@@ -135,6 +145,6 @@ Return:
 - assumptions/missing facts that matter;
 - whether the authorized strategy is viable, deferred, rejected, or ready for the
   relevant `verify-phase-transition` gate; and
-- exact changes that require a human/context decision.
+- exact autonomous recovery, sensitivity, or durable-block disposition needed.
 
 Do not claim what the simulation will do. State expectations as hypotheses and let the data decide.

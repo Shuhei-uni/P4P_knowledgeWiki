@@ -1,0 +1,69 @@
+setup_id: P7-E5-CZ-ABSORB-COLD-RAMP11692
+candidate_id: E5-CZ-ABSORB-COLD
+family_id: E5-CZ-ABSORB
+status: BLOCKED_VERIFIED
+permission: HUMAN_APPROVED_PHASE_LOOP_EXECUTION
+authority: explicit human selection in current chat on 2026-09-11
+origin: human-approved-context-only
+lifecycle_role: discovery
+phase_id: phase-07a-simplified-purnanto-liquid-removal
+gate_linkage: G3 cold-start inlet-matched absorber balance probe
+reference_setup_id: P7-E0-REF
+reference_identity: exact E0-style initialized case/data pair before treatment iterations
+reference_case: initialized.cas.h5
+reference_data: initialized.dat.h5
+forbidden_parent_states:
+  - P7-E0-REF active-500 checkpoint
+  - P7-E0-REF active-2000 endpoint
+  - P7-E5-CZ-G025
+  - P7-E5-CZ-G050
+  - P7-E5-CZ-G100
+  - P7-E5-CZ-G100-CONT2500
+  - P7-E5-CZ-ABSORB-G200-CAP14615
+  - P7-E5-CZ-ABSORB-G200-CAP29230
+  - P7-E5-CZ-ABSORB-G200-CAP58460
+initialization:
+  method: E0 parent-derived hybrid initialization
+  treatment_iterations_before_split: 0
+  second_initialization_after_split: forbidden
+  initialized_state_readback_required: true
+child:
+  lower_zone: p7-e5-lower-y010
+  lower_zone_extent: 0 <= y <= 0.10 m
+  expected_marked_cells: 3794
+  final_absorber_rate_kg_s: 116.92
+  ramp_duration_active_iterations: 100
+  source_update_interval_active_iterations: 10
+  horizon_active_iterations: 1000
+  late_analysis_window: active 700-1000
+  direct_phase1_mass_source: off
+  no_outlet_change: true
+  no_remesh: true
+  no_resplit_after_preparation: true
+  no_patch_or_reset: true
+  momentum_source: matched lower-zone phase-2 velocity basis
+run_id: P7-E5-CZ-ABSORB-COLD-RAMP11692-student-20260910T135421Z
+server:
+  id: student
+  ref: student@10.0.0.5
+  fluent_version: 2025 R2
+reference_parent:
+  case: C:\Users\Shuhei Yokkaichi\OneDrive\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\P7\P7-E0-REF\shared-parent-20260908T092043Z\initialized.cas.h5
+  data: C:\Users\Shuhei Yokkaichi\OneDrive\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\P7\P7-E0-REF\shared-parent-20260908T092043Z\initialized.dat.h5
+run_root: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneAbsorberCold\20260910T135421Z\P7-E5-CZ-ABSORB-COLD-RAMP11692
+output_root: PyAnsys/output/phase07_cz_absorb_cold
+manifest: PyAnsys/output/phase07_cz_absorb_cold/P7-E5-CZ-ABSORB-COLD-RAMP11692-student-20260910T135421Z-manifest.json
+residuals: PyAnsys/output/phase07_cz_absorb_cold/P7-E5-CZ-ABSORB-COLD-RAMP11692-student-20260910T135421Z-residuals.json
+transcript: PyAnsys/output/phase07_cz_absorb_cold/P7-E5-CZ-ABSORB-COLD-RAMP11692-student-20260910T135421Z-residuals-transcript.txt
+reports: PyAnsys/output/phase07_cz_absorb_cold/P7-E5-CZ-ABSORB-COLD-RAMP11692-student-20260910T135421Z-reports.json
+analysis_summary: PyAnsys/output/phase07_cz_absorb_cold/P7-E5-CZ-ABSORB-COLD-RAMP11692-student-20260910T135421Z-analysis.json
+figures_dir: Project/experiments/phase-07a-simplified-purnanto-liquid-removal/cell-zone-absorber-control-family/p7-e5-cz-absorb-cold-ramp11692/figures
+final_case: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneAbsorberCold\20260910T135421Z\P7-E5-CZ-ABSORB-COLD-RAMP11692\P7-E5-CZ-ABSORB-COLD-RAMP11692-active1000.cas.h5
+final_data: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneAbsorberCold\20260910T135421Z\P7-E5-CZ-ABSORB-COLD-RAMP11692\P7-E5-CZ-ABSORB-COLD-RAMP11692-active1000.dat.h5
+blocker: >-
+  Independent lifecycle review passed terminal execution but blocked discovery
+  evidence: the planned vapor-inventory history was not configured, total
+  liquid inventory drifted positively in active 700-1000, and residuals remain
+  finite but non-converged. Auto Loop is durably deferred at the evidence gate
+  through 2026-09-11 09:00 Pacific/Auckland; no new experiment or qualification
+  transition is authorized from this result.

@@ -139,7 +139,10 @@ For every non-trivial model option, classify it as one of:
 
 Never convert `manual-default` or `candidate` into `experiment-specified` silently.
 
-If a scientific value is missing, verify the mechanism with a disposable candidate only when that does not contaminate the approved experiment, and return the unresolved scientific choice explicitly.
+If a scientific value is missing, verify the mechanism with a disposable
+candidate only when that does not contaminate the approved experiment. Return a
+bounded research result to the active loop, which must choose the leanest
+context-consistent range/sensitivity or persist a durable autonomous block.
 
 ### 5. Resolve the live automation path
 
@@ -172,7 +175,10 @@ A TUI fallback is acceptable for setup mutation when all of the following are tr
 
 Do not use TUI merely because it is familiar. Do not use a successful command return as proof that the intended Fluent state exists.
 
-This skill researches setup/configuration controls only. It does not override the repository rule that autonomous experiment iteration should remain on the approved Python/PyFluent execution path unless the human explicitly approves another run mechanism.
+This skill researches setup/configuration controls only. It does not override
+the repository rule that autonomous iteration normally uses Python/PyFluent;
+when that path is inadequate, a version-pinned TUI fallback may be used only
+after disposable validation, independent readback, and save/reopen proof.
 
 ### 7. Prove the recipe in a disposable child/session
 
@@ -266,7 +272,9 @@ A `VERIFIED_RECIPE` proves **how to create and preserve the requested Fluent sta
 
 ### `RESEARCH_BLOCKED`
 
-Use when the intended state cannot be implemented and proven safely.
+Use when the intended state cannot be implemented and proven safely. This is an
+autonomous recovery result: the calling loop must attempt the stated smallest
+fallback or durably block/defer the path, not wait for a human reply.
 
 Report:
 

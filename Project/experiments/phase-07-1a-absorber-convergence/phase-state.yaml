@@ -1,0 +1,142 @@
+phase_id: phase-07-1a-absorber-convergence
+phase_question: >-
+  Can the selected bottom-only cell-zone absorber reach credible scaled-residual
+  and continuity convergence in the simplified Purnanto model when turbulence
+  closure and turbulence-specific treatments are changed one at a time?
+state: DISCOVERY_DESIGN
+
+context:
+  path: Project/experiments/phase-07-1a-absorber-convergence/CONTEXT.md
+  authority: human-approved-context-only
+  approved_candidate_ids:
+    - C2
+    - C2-T0
+    - C2-T1-STD
+    - C2-T1-REAL
+  draft_family_path: Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/README.md
+
+autonomy:
+  experiment_selection: context_gated
+  fluent_fleet_sessions: full
+  fluent_fleet_scope: student only
+  auto_loop:
+    profile_status: NOT_AUTHORIZED
+    family_focus: none
+    direction: none
+
+gates:
+  PHASE_CONTRACT:
+    status: PASS
+    checked_at: 2026-09-11
+    evidence:
+      - Project/experiments/phase-07-1a-absorber-convergence/CONTEXT.md
+      - Project/experiments/phase-07-1a-absorber-convergence/baseline-setup-record.md
+      - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/parent-reference.md
+      - Project/experiments/phase-07-1a-absorber-convergence/lifecycle-gate-review-20260911.md
+    missing: []
+    reviewer: Harvey / 01a08fa5-d73d-7fe1-88f2-8ef0570c7a19
+  DISCOVERY_DESIGN:
+    status: PASS
+    checked_at: 2026-09-11
+    evidence:
+      - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/README.md
+      - Human selection of the turbulence-first family in the current task
+      - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/parent-reference.md
+      - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/closure-path-readback.md
+      - Project/experiments/phase-07-1a-absorber-convergence/lifecycle-gate-review-20260911.md
+    missing: []
+    reviewer: Harvey / 01a08fa5-d73d-7fe1-88f2-8ef0570c7a19
+  DISCOVERY_EXECUTION:
+    status: BLOCK
+    checked_at: 2026-09-11
+    evidence: []
+    missing:
+      - DISCOVERY_DESIGN must pass before execution
+    reviewer: not-applicable
+  DISCOVERY_EVIDENCE:
+    status: BLOCK
+    checked_at: 2026-09-11
+    evidence: []
+    missing:
+      - No Phase 7.1A turbulence child has run
+    reviewer: not-applicable
+  HYPOTHESIS_DEFINITION:
+    status: BLOCK
+    checked_at: 2026-09-11
+    evidence: []
+    missing:
+      - Discovery evidence is not available
+    reviewer: not-applicable
+  HYPOTHESIS_RUN_READY:
+    status: BLOCK
+    checked_at: 2026-09-11
+    evidence: []
+    missing:
+      - Discovery evidence and hypothesis definition are not passed
+    reviewer: not-applicable
+  HYPOTHESIS_EXECUTION:
+    status: BLOCK
+    checked_at: 2026-09-11
+    evidence: []
+    missing:
+      - Hypothesis run readiness is not passed
+    reviewer: not-applicable
+  HYPOTHESIS_EVIDENCE:
+    status: BLOCK
+    checked_at: 2026-09-11
+    evidence: []
+    missing:
+      - No hypothesis execution exists
+    reviewer: not-applicable
+  PHASE_CLOSURE:
+    status: BLOCK
+    checked_at: 2026-09-11
+    evidence: []
+    missing:
+      - Phase has not entered execution or evidence review
+    reviewer: not-applicable
+
+active_jobs: []
+queue:
+  - order: 1
+    setup_id: P71A-T0-RNG-REFERENCE
+    candidate_id: C2-T0
+    origin: human-approved-context-only
+    authority: current human selection
+    gate_linkage: G0 / DISCOVERY_DESIGN
+    setup_path: turbulence-family/t0-rng-reference/setup.md
+    lifecycle_role: discovery-reference
+    required_gate: DISCOVERY_DESIGN
+    status: READY_FOR_PHASE_LOOP
+    completion_requirement: >-
+      Same-parent baseline readback, prepared save/reopen, 500-iteration
+      discovery evidence, and core figures.
+  - order: 2
+    setup_id: P71A-T1-STANDARD-KEPSILON
+    candidate_id: C2-T1-STD
+    origin: human-approved-context-only
+    authority: current human selection
+    gate_linkage: G0 / DISCOVERY_DESIGN
+    setup_path: turbulence-family/t1-standard-kepsilon/setup.md
+    lifecycle_role: discovery
+    required_gate: DISCOVERY_DESIGN
+    status: READY_FOR_PHASE_LOOP
+    completion_requirement: >-
+      Closure-only comparison against T0 with full residual, turbulence,
+      phase-routing, absorber, and balance evidence.
+  - order: 3
+    setup_id: P71A-T1-REALIZABLE-KEPSILON
+    candidate_id: C2-T1-REAL
+    origin: human-approved-context-only
+    authority: current human selection
+    gate_linkage: G0 / DISCOVERY_DESIGN
+    setup_path: turbulence-family/t1-realizable-kepsilon/setup.md
+    lifecycle_role: discovery
+    required_gate: DISCOVERY_DESIGN
+    status: READY_FOR_PHASE_LOOP
+    completion_requirement: >-
+      Closure-only comparison against T0 with full residual, turbulence,
+      phase-routing, absorber, and balance evidence.
+next_required_action: >-
+  Enter Phase Loop for the finite three-item queue. Phase Loop must complete
+  parent/closure readback, prepared save/reopen, and smoke gates before solving.

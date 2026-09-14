@@ -1,12 +1,15 @@
 ---
 name: phase-loop
-description: "Execute a declared CFD setup queue faithfully through verified run, analysis, and lifecycle gates. Use after phase-planner has fixed the queue and its completion route; do not invent scientific cases."
+description: "Execute a declared CFD setup queue faithfully through verified run, analysis, and lifecycle gates. Recover blockers autonomously; do not silently replace the phase question."
 ---
 
 # Phase Loop
 
 Execute the defined setups. Think hard about their evidence, figures, and
 diagnostics, but do not turn that thinking into a new scientific case.
+
+Read [autonomous recovery](../references/autonomous-recovery.md) whenever a
+gate, setup, run, evidence stream, or Fluent configuration blocks progress.
 
 ## Enter only with a defined queue
 
@@ -37,10 +40,12 @@ Phase Loop may:
   preserves the setup's scientific purpose, controlled delta, invariants,
   evidence contract, and horizon.
 
-Phase Loop does not originate, select, promote, reorder, or broaden cases. A
-workaround that cannot prove equivalence is `HUMAN_REQUIRED`, not a replacement
-setup. It does not use `design-experiment`, `create-setup`, or an unqueued
-candidate to keep servers busy.
+Phase Loop follows the declared queue first. When a queued setup is blocked, it
+may autonomously add the leanest recovery child or related diagnostic family
+that preserves the phase question and records its provenance, rationale,
+controlled delta, evidence contract, and claim limit. Use
+`design-experiment` / `create-setup` for that recovery work; do not fabricate
+an unrelated case or silently alter a durable parent.
 
 ## Make every setup earn completion
 
@@ -52,42 +57,53 @@ For each queued setup, in order:
 3. Keep discovery attached through terminal evidence. For qualification use
    `supervise-fluent-run` only after `HYPOTHESIS_RUN_READY == PASS`.
 4. Produce the setup's planned numerical and scientific analysis, including
-   its core figures. Use `interpret-experiment` to keep observation,
-   interpretation, and claim limits separate.
+   its core figures. Use `interpret-experiment` to write/update the plot-led
+   `results.md`: it must answer the experiment question, embed and explain the
+   selected figures, preserve limitations, and keep raw artifact paths compact.
 5. Call the execution and evidence gates that apply to the setup's lifecycle
-   role. Persist their evidence and the queue item status.
+   role. A `BLOCK` invokes autonomous recovery, not a human handoff. Persist
+   the evidence, recovery decision, and queue item status.
 
 Use only these queue states:
 
 - `COMPLETE_VERIFIED` — the requested horizon was actually reached, required
   final artifacts/histories exist, terminal verification passed, and the
-  relevant execution/evidence gates passed.
+  relevant execution/evidence gates passed. Its `results.md` is a curated,
+  plot-led scientific record rather than a pointer list.
 - `BLOCKED_VERIFIED` — a real, evidenced execution or evidence blocker exists.
+- `BLOCKED_AUTONOMOUS` — recovery was evidenced and recorded; continue other
+  useful lanes while a further recovery child is prepared or awaits resources.
 - `ATTEMPTED_UNVERIFIED` — launch, a tool return, or partial output exists but
   terminal proof is absent.
 - `NOT_RUN` — work has not started.
 
-Only `COMPLETE_VERIFIED` satisfies a required queue item. A submitted job,
+Only `COMPLETE_VERIFIED` or a durably recorded `BLOCKED_VERIFIED` after its
+recovery path is exhausted satisfies queue disposition. A submitted job,
 process exit, worker wakeup, or interesting partial plot is never completion.
+A run whose report, required figures, or evidence explanation is incomplete
+remains blocked from this state even when its solver execution completed; repair
+or reconstruct the evidence autonomously.
 
 ## Finish the queue deliberately
 
-After every required item is `COMPLETE_VERIFIED`, follow the completion route
+After every required item is `COMPLETE_VERIFIED` or `BLOCKED_VERIFIED`, follow the completion route
 recorded at entry. Run `check-phase-closure` before a human-return route when
 the completed queue is intended to close the phase; an Auto Loop route instead
 continues the verified phase inside its already-recorded exploration envelope:
 
-- **Return to human** — report the evidence-backed state and any remaining
-  human decision.
+- **Return route** — persist the evidence-backed state; do not pause the
+  active autonomous goal for a human reply.
 - **Auto Loop** — enter `auto-loop` in the same goal with the persisted Auto
   Loop profile and Fluent authority. Do not ask the profile questions again.
 
-If any required item is `BLOCKED_VERIFIED`, `ATTEMPTED_UNVERIFIED`, or
-`NOT_RUN`, do not transition into Auto Loop. Persist the exact deficiency and
-return to the human.
+If a required item is `ATTEMPTED_UNVERIFIED` or `NOT_RUN`, start/continue its
+autonomous recovery family. Continue independent queue items and do not enter
+Auto Loop until the original/recovery route has produced verified evidence or a
+durable `BLOCKED_VERIFIED` record, or the loop timebox ends.
 
 ## Completion condition
 
-The goal is complete only after the declared queue has either reached its
-recorded completion route or stopped at a persisted human-owned blocker. Do not
-end merely because a runner was launched or because one setup produced a result.
+The goal is complete only after the declared queue/recovery routes reach their
+recorded completion route or the loop timebox expires with durable autonomous
+block records. Do not end merely because a runner was launched or because one
+setup produced a result.

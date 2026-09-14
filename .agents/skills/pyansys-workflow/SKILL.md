@@ -23,8 +23,10 @@ Keep setup construction and run supervision conceptually separate:
 - hypothesis-test runs use `supervise-fluent-run`: Codex detaches and wakes the originating Codex thread; Cursor stays attached through the approved horizon.
 
 For autonomous experiments inside either loop, Python/PyFluent execution is the
-default. TUI-driven iteration, Fluent journal submission, and GUI-owned
-execution require explicit human approval for that run.
+default. A version-pinned TUI/journal fallback is allowed only after the live
+API limitation is researched through `fluent-manual-researcher`, proven in a
+disposable child/session, independently read back, and verified through
+save/reopen. GUI-owned execution is not an autonomous fallback.
 
 Do not merge unrelated setup mutation, scientific decision-making, and long-run supervision into one opaque script. A case-specific Python runner is fine when it is the clearest faithful implementation of the approved experiment.
 
@@ -47,9 +49,12 @@ Mandatory habits:
 - Reacquire objects after enabling models, creating objects, changing types, loading a case/data file, changing phase count, or switching boundary/model families.
 - Inspect live child names, commands, and allowed values before setting deep paths.
 - Treat readback mismatch as failure even when no exception was raised.
-- Classify failures as `order/dependency issue`, `path/version issue`, `invalid value/format issue`, `PyFluent wrapper limitation`, `requires human-approved TUI/journal fallback`, or `requires manual GUI cleanup`.
+- Classify failures as `order/dependency issue`, `path/version issue`, `invalid value/format issue`, `PyFluent wrapper limitation`, `verified TUI/journal fallback candidate`, or `manual GUI cleanup unavailable to the autonomous loop`.
 
-A Settings/API limitation is not permission to switch to TUI. Return the blocker and obtain explicit human approval before using TUI or a Fluent journal.
+A Settings/API limitation is not permission to switch blindly to TUI. Return
+`BLOCK`, research the official version-matched route, prove the smallest TUI or
+journal mutation in a disposable child, read it back, save/reopen it, then use
+that verified fallback or persist a durable autonomous block.
 
 For semantic/prerequisite uncertainty in a Fluent setting, escalate from live inspection to `fluent-manual-researcher` rather than inventing a path or model state.
 
@@ -85,7 +90,9 @@ Setup scripts should remain thin: parse inputs, connect, verify remote files, lo
 
 Discovery mode is intentionally interactive at the agent-workflow level even though the Fluent solve itself remains deterministic.
 
-For the short discovery horizon, normally around 500-1,000 iterations:
+For the short discovery horizon, start each new settings-family member at 500
+iterations and extend only promising members to 1,000 (unless the recorded
+setup says otherwise):
 
 ```text
 agent launches Python/PyFluent run
@@ -105,7 +112,11 @@ Do not create one-iteration polling loops merely to keep the agent awake. Prefer
 
 For a background Codex hypothesis-test run, use the canonical `supervise-fluent-run` / `scripts/orchestration/run_and_handoff.py` path. For a Cursor hypothesis-test run, keep the agent attached and wait on the approved Python/PyFluent solve; do not require Codex wakeup.
 
-Before execution, the scientific design/setup layers must already have selected a genuine qualification horizon. For ordinary steady full-geometry work that means the project default minimum of 10,000 iterations unless the approved setup carries the explicit exception/equivalent basis required by the lifecycle.
+Before execution, the scientific design/setup layers must already have selected
+a genuine qualification horizon. For ordinary steady full-geometry work that
+means the project default minimum of 10,000 iterations unless the approved setup
+carries a scoped Auto Loop qualification horizon (normally 2,000 iterations)
+with a bounded claim, or an equivalent non-iteration basis.
 
 The experiment runner should make the execution sequence explicit:
 
@@ -131,7 +142,10 @@ On Cursor, persist the same completion evidence in the live session. Do not call
 
 A zero runner exit code is not sufficient completion proof. Declare required final files and/or a deterministic verifier command. Poor residuals or unexpected physics are not execution failures while Fluent can continue.
 
-If Python/PyFluent cannot perform the approved run faithfully, stop and return the blocker. Do not silently fall back to TUI, a Fluent journal, or GUI execution.
+If Python/PyFluent cannot perform the approved run faithfully, return `BLOCK` to
+the loop. Do not silently fall back to TUI, a Fluent journal, or GUI execution;
+use only the verified disposable TUI/journal fallback above, or durably block
+the path and continue another lane.
 
 ## Cross-System Sync
 

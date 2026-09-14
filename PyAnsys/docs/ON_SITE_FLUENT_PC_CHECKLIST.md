@@ -209,11 +209,18 @@ Run:
 Expected:
 
 ```text
-Connected to Fluent.
-Health ...
-Fluent version ...
-Done. This script did not close Fluent.
+Fluent server: 1
+TCP      : CONNECTED (...)
+gRPC     : CONNECTED
+Activity : NOT RUNNING (...)
+Read-only check complete; no solver command was issued and Fluent was not closed.
 ```
+
+`Activity : RUNNING` is printed only when Fluent's direct
+`solution.run_calculation.iterating()` query returns the exact boolean `True`.
+If it returns `False`, cannot be read, raises an exception, times out, or
+returns any other value, the checker prints `Activity : NOT RUNNING`.
+This connection checker does not read or print residuals or monitor history.
 
 ## 8. Inspect current Fluent session
 

@@ -1,0 +1,364 @@
+{
+  "setup_id": "P7-E5-CZ-ABSORB-G200-CAP58460",
+  "run_id": "P7-E5-CZ-ABSORB-G200-CAP58460-student-20260910T113103Z-manifest",
+  "manifest_status": "BLOCKED",
+  "error": "RuntimeError: solver divergence/fatal diagnostic during block ending at active 450",
+  "requested_active_iterations": 500,
+  "achieved_controller_horizon_active_iterations": 400,
+  "native_report_extent": [
+    2998,
+    3430
+  ],
+  "report_count": 18,
+  "report_points_each": [
+    433
+  ],
+  "residual_points": 433,
+  "target_M_L_kg": 29.916664680566523,
+  "source_cap_kg_s": 584.6,
+  "inventory": {
+    "total_liquid_mass": {
+      "points": 100,
+      "window": [
+        3331.0,
+        3430.0
+      ],
+      "start": 2917.884476571308,
+      "end": 3302.47451828123,
+      "minimum": 2917.884476571308,
+      "maximum": 3302.47451828123,
+      "mean": 2999.705904399891,
+      "range": 384.59004170992193,
+      "slope_per_native_iteration": 2.1817200761437143
+    },
+    "lower_liquid_mass": {
+      "points": 100,
+      "window": [
+        3331.0,
+        3430.0
+      ],
+      "start": 39.42906764002625,
+      "end": 53.64603334994962,
+      "minimum": 39.42906764002625,
+      "maximum": 72.73430572989254,
+      "mean": 57.32635834898647,
+      "range": 33.30523808986629,
+      "slope_per_native_iteration": 0.25830118064722796
+    },
+    "adjacent_liquid_mass": {
+      "points": 100,
+      "window": [
+        3331.0,
+        3430.0
+      ],
+      "start": 69.00769103341185,
+      "end": 113.5489336863789,
+      "minimum": 69.00769103341185,
+      "maximum": 126.9000795864228,
+      "mean": 104.70427294022424,
+      "range": 57.89238855301096,
+      "slope_per_native_iteration": 0.5440418533184356
+    },
+    "broad_liquid_mass": {
+      "points": 100,
+      "window": [
+        3331.0,
+        3430.0
+      ],
+      "start": 161.6112393289354,
+      "end": 271.6477063568154,
+      "minimum": 161.6112393289354,
+      "maximum": 279.2978864365051,
+      "mean": 235.88800761880725,
+      "range": 117.68664710756971,
+      "slope_per_native_iteration": 1.1916246206310535
+    },
+    "lower_liquid_volume": {
+      "points": 100,
+      "window": [
+        3331.0,
+        3430.0
+      ],
+      "start": 0.04474419085497897,
+      "end": 0.06087763415399672,
+      "minimum": 0.04474419085497897,
+      "maximum": 0.08253904675085369,
+      "mean": 0.06505407488723106,
+      "range": 0.03779485589587472,
+      "slope_per_native_iteration": 0.0002931207359621523
+    }
+  },
+  "controller": {
+    "updates": 9,
+    "saturated_updates": 0,
+    "max_command_kg_s": 316.37248637123633,
+    "source_audit_max_abs_error_kg_s": 3.979039320256561e-13,
+    "direct_phase1_source_off_all_updates": true
+  },
+  "routing_late": {
+    "phase2_in": {
+      "points": 100,
+      "window": [
+        3331.0,
+        3430.0
+      ],
+      "start": 116.92,
+      "end": 116.92,
+      "minimum": 116.92,
+      "maximum": 116.92,
+      "mean": 116.92000000000002,
+      "range": 0.0,
+      "slope_per_native_iteration": -1.5805610360685622e-16
+    },
+    "phase2_out": {
+      "points": 100,
+      "window": [
+        3331.0,
+        3430.0
+      ],
+      "start": 0.8737187406897413,
+      "end": 1.324807837440378e+45,
+      "minimum": 0.23729124539337,
+      "maximum": 1.324807837440378e+45,
+      "mean": 1.324807837440378e+43,
+      "range": 1.324807837440378e+45,
+      "slope_per_native_iteration": 7.870145568952645e+41
+    },
+    "phase2_net": {
+      "points": 100,
+      "window": [
+        3331.0,
+        3430.0
+      ],
+      "start": 116.04628125931026,
+      "end": -1.324807837440378e+45,
+      "minimum": -1.324807837440378e+45,
+      "maximum": 116.68270875460664,
+      "mean": -1.324807837440378e+43,
+      "range": 1.324807837440378e+45,
+      "slope_per_native_iteration": -7.870145568952645e+41
+    },
+    "phase1_in": {
+      "points": 100,
+      "window": [
+        3331.0,
+        3430.0
+      ],
+      "start": 80.68999999999996,
+      "end": 80.68999999999996,
+      "minimum": 80.68999999999996,
+      "maximum": 80.68999999999996,
+      "mean": 80.68999999999994,
+      "range": 0.0,
+      "slope_per_native_iteration": 3.362895821422473e-17
+    },
+    "phase1_out": {
+      "points": 100,
+      "window": [
+        3331.0,
+        3430.0
+      ],
+      "start": 81.54435139794592,
+      "end": -1.625880148796773e+45,
+      "minimum": -1.625880148796773e+45,
+      "maximum": 300.8733478298872,
+      "mean": -1.625880148796773e+43,
+      "range": 1.625880148796773e+45,
+      "slope_per_native_iteration": -9.658693953248038e+41
+    },
+    "phase1_net": {
+      "points": 100,
+      "window": [
+        3331.0,
+        3430.0
+      ],
+      "start": -0.8543513979459618,
+      "end": 1.625880148796773e+45,
+      "minimum": -220.18334782988728,
+      "maximum": 1.625880148796773e+45,
+      "mean": 1.625880148796773e+43,
+      "range": 1.625880148796773e+45,
+      "slope_per_native_iteration": 9.658693953248038e+41
+    },
+    "mixture_in": {
+      "points": 100,
+      "window": [
+        3331.0,
+        3430.0
+      ],
+      "start": 197.60999999999996,
+      "end": 197.60999999999996,
+      "minimum": 197.60999999999996,
+      "maximum": 197.60999999999996,
+      "mean": 197.60999999999996,
+      "range": 0.0,
+      "slope_per_native_iteration": 2.5221718660668543e-16
+    },
+    "mixture_out": {
+      "points": 100,
+      "window": [
+        3331.0,
+        3430.0
+      ],
+      "start": 82.41694456968163,
+      "end": -1.159920341660633e+29,
+      "minimum": -1.159920341660633e+29,
+      "maximum": 8791311406816.51,
+      "mean": -1.1599203416606329e+27,
+      "range": 1.159920341660633e+29,
+      "slope_per_native_iteration": -6.8906158910531796e+25
+    },
+    "mixture_net": {
+      "points": 100,
+      "window": [
+        3331.0,
+        3430.0
+      ],
+      "start": 115.19305543031832,
+      "end": 1.159920341660633e+29,
+      "minimum": -8791311406618.899,
+      "maximum": 1.159920341660633e+29,
+      "mean": 1.1599203416606329e+27,
+      "range": 1.159920341660633e+29,
+      "slope_per_native_iteration": 6.8906158910531796e+25
+    },
+    "bottom_phase1_raw": {
+      "points": 100,
+      "window": [
+        3331.0,
+        3430.0
+      ],
+      "start": 0.0,
+      "end": 0.0,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "mean": 0.0,
+      "range": 0.0,
+      "slope_per_native_iteration": 0.0
+    },
+    "bottom_phase2_raw": {
+      "points": 100,
+      "window": [
+        3331.0,
+        3430.0
+      ],
+      "start": 0.0,
+      "end": 0.0,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "mean": 0.0,
+      "range": 0.0,
+      "slope_per_native_iteration": 0.0
+    }
+  },
+  "residuals_late": {
+    "continuity": {
+      "points": 100,
+      "window": [
+        3331.0,
+        3430.0
+      ],
+      "start": 83.148,
+      "end": 1.7053e+31,
+      "minimum": 66.966,
+      "maximum": 1.7053e+31,
+      "mean": 1.7053000000000002e+29,
+      "range": 1.7053e+31,
+      "slope_per_native_iteration": 1.0130495049504829e+28
+    },
+    "x-velocity": {
+      "points": 100,
+      "window": [
+        3331.0,
+        3430.0
+      ],
+      "start": 0.00046847,
+      "end": 115650000000.0,
+      "minimum": 0.00046847,
+      "maximum": 115650000000.0,
+      "mean": 1156501561.3628793,
+      "range": 115649999999.99953,
+      "slope_per_native_iteration": 68703061.17698635
+    },
+    "y-velocity": {
+      "points": 100,
+      "window": [
+        3331.0,
+        3430.0
+      ],
+      "start": 0.00062563,
+      "end": 0.21559,
+      "minimum": 0.00062563,
+      "maximum": 1.5887,
+      "mean": 0.025563644500000003,
+      "range": 1.58807437,
+      "slope_per_native_iteration": 0.0013959610409240793
+    },
+    "z-velocity": {
+      "points": 100,
+      "window": [
+        3331.0,
+        3430.0
+      ],
+      "start": 0.00052102,
+      "end": 0.060298,
+      "minimum": 0.00052102,
+      "maximum": 0.098999,
+      "mean": 0.0034886003000000002,
+      "range": 0.09847798,
+      "slope_per_native_iteration": 0.00015211179927992672
+    },
+    "k": {
+      "points": 100,
+      "window": [
+        3331.0,
+        3430.0
+      ],
+      "start": 0.018213,
+      "end": 1.0696e+17,
+      "minimum": 0.010081,
+      "maximum": 1.0696e+17,
+      "mean": 1069601112200016.1,
+      "range": 1.0696e+17,
+      "slope_per_native_iteration": 63540658795919.74
+    },
+    "epsilon": {
+      "points": 100,
+      "window": [
+        3331.0,
+        3430.0
+      ],
+      "start": 0.33356,
+      "end": 1.1429e+28,
+      "minimum": 0.040457,
+      "maximum": 1.1429e+28,
+      "mean": 1.1429000000000574e+26,
+      "range": 1.1429e+28,
+      "slope_per_native_iteration": 6.789504950495299e+24
+    },
+    "vf-phase-2": {
+      "points": 100,
+      "window": [
+        3331.0,
+        3430.0
+      ],
+      "start": 0.0067106,
+      "end": 0.1594,
+      "minimum": 0.0066697,
+      "maximum": 0.25996,
+      "mean": 0.013815589000000001,
+      "range": 0.2532903,
+      "slope_per_native_iteration": 0.00035281056645664245
+    }
+  },
+  "figures": {
+    "F1": "Project/experiments/phase-07a-simplified-purnanto-liquid-removal/cell-zone-absorber-control-family/p7-e5-cz-absorb-g200-cap58460/figures/20260910T113103Z/F1-liquid-inventory-and-selectivity.png",
+    "F2": "Project/experiments/phase-07a-simplified-purnanto-liquid-removal/cell-zone-absorber-control-family/p7-e5-cz-absorb-g200-cap58460/figures/20260910T113103Z/F2-controller-command-and-saturation.png",
+    "F3": "Project/experiments/phase-07a-simplified-purnanto-liquid-removal/cell-zone-absorber-control-family/p7-e5-cz-absorb-g200-cap58460/figures/20260910T113103Z/F3-phase-routing-and-numerical-adequacy.png"
+  },
+  "claim_limits": [
+    "This is a numerical discovery result, not a physically qualified separator prediction.",
+    "A completed horizon does not imply converged flow when residuals or closure are poor.",
+    "Volumetric phase-2 source audit does not by itself prove that the absorber represents a real brine pool."
+  ]
+}

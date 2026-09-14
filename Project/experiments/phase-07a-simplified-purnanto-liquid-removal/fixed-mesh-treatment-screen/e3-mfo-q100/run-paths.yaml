@@ -1,0 +1,27 @@
+setup_id: P7-E3-MFO-Q100
+run_id: P7-E3-MFO-Q100-server1-20260908T123000Z
+status: COMPLETE
+permission: HUMAN_AUTHORIZED_ATTEMPT_DEPENDENCY_GATED
+goal_lease:
+  phase_id: phase-07a-simplified-purnanto-liquid-removal
+  mode: exclusive
+  active_session_control: full
+server:
+  ref: server-1@10.104.145.170
+  id: server-1
+  ip: 10.104.145.170
+  fluent_version: Ansys Fluent 2025 R2
+  takeover: prior treatment screen completed; same session reused under current human authorization
+parent_case_data:
+  case: 'C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\P7\\P7-E0-REF\\shared-parent-20260908T092043Z\\initialized.cas.h5'
+  data: 'C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\P7\\P7-E0-REF\\shared-parent-20260908T092043Z\\initialized.dat.h5'
+output_root: 'C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\TreatmentScreen\\20260908T123000Z\\P7-E3-MFO-Q100'
+prepared_case: 'C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\TreatmentScreen\\20260908T123000Z\\P7-E3-MFO-Q100\\P7-E3-MFO-Q100-prepared.cas.h5'
+smoke_case: 'C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\TreatmentScreen\\20260908T123000Z\\P7-E3-MFO-Q100\\P7-E3-MFO-Q100-active050.cas.h5'
+checkpoint250_case: 'C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\TreatmentScreen\\20260908T123000Z\\P7-E3-MFO-Q100\\P7-E3-MFO-Q100-active250.cas.h5'
+final_case: 'C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\TreatmentScreen\\20260908T123000Z\\P7-E3-MFO-Q100\\P7-E3-MFO-Q100-active500.cas.h5'
+report_root: 'C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\TreatmentScreen\\20260908T123000Z\\P7-E3-MFO-Q100\\monitors'
+manifest: PyAnsys/output/phase07_treatment_screen/P7-E3-MFO-Q100-server1-20260908T123000Z-manifest.json
+residual_history: PyAnsys/output/phase07_treatment_screen/P7-E3-MFO-Q100-server1-20260908T123000Z-residuals.json
+transcript: PyAnsys/output/phase07_treatment_screen/P7-E3-MFO-Q100-server1-20260908T123000Z-residuals-transcript.txt
+durability_status: LOCAL_ONLY

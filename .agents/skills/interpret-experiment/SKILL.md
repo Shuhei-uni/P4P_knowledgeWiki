@@ -162,20 +162,79 @@ If an unexpected result requires a responsive figure, add it clearly as **respon
 
 ## Write the scientific record
 
-`results.md` should state:
+`results.md` is the experiment's durable **scientific answer**, not an index of
+JSON, manifests, histories, or figure paths. Write it so a scientist can
+understand what the case answered, why the answer is credible, and its limits
+without opening every artifact.
 
-- what was actually run and verified;
-- requested and actual horizon;
-- whether planned core figures were produced completely/partially/not at all;
-- required-evidence completeness;
-- key direct observations;
-- numerical-quality result/limits;
-- hypothesis classification when applicable;
-- bounded interpretation;
-- alternative explanations;
-- experiment conclusion;
-- assumptions whose state changed;
-- what remains unresolved.
+Use this report shape for new or materially updated results. Do not
+retroactively reformat historical reports solely for this contract.
+
+```md
+# <experiment> — results
+
+## Answer at a glance
+
+- **Question:** ...
+- **Result:** ...
+- **Evidence status:** complete | incomplete | blocked
+- **Decision / gate status:** ...
+
+## Core visual evidence
+
+![F1 — direct answer](figures/<file>.png)
+
+_Figure F1. A short caption stating the scientific message, scope, comparison,
+and window._
+
+- **What it shows:** ...
+- **Why it matters:** ...
+- **Important limitation:** ...
+
+## Numerical adequacy
+
+<Only the residual, balance, and monitor evidence needed to judge the figures.>
+
+## Interpretation
+
+- **Observed:** ...
+- **Inferred:** ...
+- **Competing explanation:** ...
+- **Claim boundary:** ...
+
+## Conclusion and next action
+
+<Bounded experiment conclusion and the declared gate/action.>
+
+## Run and artifact details
+
+<Compact links to manifests, raw histories, checkpoints, and machine summaries.>
+```
+
+Embed each selected core figure with Markdown image syntax, then give it a
+caption and figure-linked observation. A bare artifact link, a raw-data table,
+or a generic diagnostic collage is not a substitute for the visual argument.
+
+Use only the numbers that make the figure-linked observation precise. Keep
+full histories, raw extracts, manifests, and debug plots available in the
+artifact section, not in the report's main narrative.
+
+The report must state:
+
+- what was actually run and verified, including requested and actual horizon;
+- the answer to the declared experiment question near the top;
+- whether planned core figures were produced completely, partially, or not at
+  all, with an evidence consequence for every unavailable required figure;
+- key direct observations tied to the embedded figures;
+- numerical-quality result/limits needed to trust those observations;
+- hypothesis classification, bounded interpretation, and alternative
+  explanations when applicable;
+- experiment conclusion, changed assumptions, and unresolved uncertainty.
+
+For a capability audit or a genuine no-plot outcome, explain why no valid core
+plot exists and use the strongest appropriate table/evidence matrix instead.
+That exception does not allow an ordinary simulation result to omit its
+available core plots.
 
 For hypothesis work, explicitly record whether the result appears ready to be sent to `verify-phase-transition` for `HYPOTHESIS_EVIDENCE` or which missing evidence prevents that.
 
@@ -193,4 +252,6 @@ Return to the active `phase-loop` or `auto-loop`:
 - what changed in current understanding;
 - assumption-state changes;
 - remaining uncertainty;
-- whether the next required lifecycle action is `DISCOVERY_EVIDENCE`, `HYPOTHESIS_EVIDENCE`, further discovery/qualification work, or a human lock.
+- whether the next required lifecycle action is `DISCOVERY_EVIDENCE`,
+  `HYPOTHESIS_EVIDENCE`, further discovery/qualification work, or autonomous
+  recovery/durable block.

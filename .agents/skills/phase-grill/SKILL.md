@@ -152,7 +152,8 @@ phase contract. Present each turn in this order:
 
 Clarify the uncertainty worth reducing now, why it matters over other open
 issues, what stays fixed or out of scope, what result would still make the
-phase useful, and which decisions the loop must return to the human for.
+phase useful, and the recovery/claim limits that will keep a later autonomous
+loop from silently crossing those boundaries.
 
 Do not enter experiment framing until the human confirms the phase question,
 boundaries, and claim limit in `CONTEXT.md`.

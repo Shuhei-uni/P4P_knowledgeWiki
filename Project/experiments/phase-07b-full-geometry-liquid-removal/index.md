@@ -8,7 +8,7 @@ removal zone. The model must stay steady state. The human explicitly selected
 an ideal collector with no requirement to maintain a standing pool.
 
 This is Andy's Phase 7b, separate from
-[Shuhei's Phase 7](../phase-07-simplified-purnanto-liquid-removal/index.md),
+[Shuhei's Phase 7](../phase-07a-simplified-purnanto-liquid-removal/index.md),
 which retains the simplified, truncated Purnanto direction. The current
 planning authority for Phase 7b is
 [`CONTEXT.md`](CONTEXT.md). Exact zone, source law, parent, outlet treatment,

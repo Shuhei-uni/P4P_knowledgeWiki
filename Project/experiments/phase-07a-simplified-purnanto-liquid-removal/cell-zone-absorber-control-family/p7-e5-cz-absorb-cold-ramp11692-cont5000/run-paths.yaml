@@ -1,0 +1,87 @@
+setup_id: P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000
+candidate_id: E5-CZ-ABSORB-COLD-CONT5000
+family_id: E5-CZ-ABSORB
+status: BLOCKED_SOLVER_DIVERGENCE
+permission: HUMAN_APPROVED_PHASE_LOOP_EXECUTION
+authority: explicit human continuation request in current chat on 2026-09-11
+origin: human-selected-continuation
+lifecycle_role: discovery-extension
+phase_id: phase-07a-simplified-purnanto-liquid-removal
+gate_linkage: G3 cold-start absorber time-horizon extension
+parent_setup_id: P7-E5-CZ-ABSORB-COLD-RAMP11692
+parent_run_id: P7-E5-CZ-ABSORB-COLD-RAMP11692-student-20260910T135421Z
+parent_case: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneAbsorberCold\20260910T135421Z\P7-E5-CZ-ABSORB-COLD-RAMP11692\P7-E5-CZ-ABSORB-COLD-RAMP11692-active1000.cas.h5
+parent_data: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneAbsorberCold\20260910T135421Z\P7-E5-CZ-ABSORB-COLD-RAMP11692\P7-E5-CZ-ABSORB-COLD-RAMP11692-active1000.dat.h5
+reference_identity: verified final active-1000 cold-start case/data pair
+child:
+  lower_zone: p7-e5-lower-y010
+  expected_marked_cells: 3794
+  fixed_absorber_rate_kg_s: 116.92
+  source_update_interval_additional_iterations: 10
+  parent_active_iteration: 1000
+  additional_iterations: 4000
+  target_total_active_iteration: 5000
+  no_outlet_change: true
+  no_remesh: true
+  no_resplit: true
+  no_patch_or_reset: true
+  momentum_source: matched lower-zone phase-2 velocity basis
+server:
+  id: student
+  ref: student@10.0.0.5
+  fluent_version: 2025 R2
+run_id: P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000-student-20260910T211158Z
+run_root: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneAbsorberColdContinuation\20260910T211158Z\P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000
+output_root: PyAnsys/output/phase07_cz_absorb_cold_cont5000
+manifest: PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000-student-20260910T211158Z-manifest.json
+residuals: PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000-student-20260910T211158Z-residuals.json
+transcript: PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000-student-20260910T211158Z-residuals-transcript.txt
+reports: remote run-root monitors/P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000-reopen-*.out
+analysis_summary: PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000-student-20260910T211158Z-analysis.json
+figures_dir: Project/experiments/phase-07a-simplified-purnanto-liquid-removal/cell-zone-absorber-control-family/p7-e5-cz-absorb-cold-ramp11692-cont5000/figures
+final_case: pending — active-5000 not reached; last durable autosave is checkpoint-1900-1-01900.cas.h5
+final_data: pending — active-5000 not reached; last durable autosave is checkpoint-1900-1-01900.dat.h5
+last_valid_reported_iteration: 1960
+solver_failure_iteration: 1970
+last_durable_case: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneAbsorberColdContinuation\20260910T211158Z\P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000\checkpoint-1900-1-01900.cas.h5
+last_durable_data: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneAbsorberColdContinuation\20260910T211158Z\P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000\checkpoint-1900-1-01900.dat.h5
+recovery_attempts:
+  - run_id: P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-student-20260910T220409Z
+    basis: exact durable active-1900 pair; no scientific setting delta
+    status: BLOCKED_REPORT_FILE_SCHEME_QUERY
+    manifest: PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-student-20260910T220409Z-manifest.json
+    transcript: PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-student-20260910T220409Z-residuals-transcript.txt
+    last_observed_total_active_iteration: 1900
+    note: >-
+      Preparation/source readback passed; no additional iterations were
+      completed because the recovery wrapper hit a report-file Scheme query
+      after restart.
+  - run_id: P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-R2-student-20260910T221403Z
+    basis: exact durable active-1900 pair; report-file query removed; no scientific setting delta
+    status: BLOCKED_REPEATABLE_SOLVER_FAILURE
+    manifest: PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-R2-student-20260910T221403Z-manifest.json
+    transcript: PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-R2-student-20260910T221403Z-residuals-transcript.txt
+    last_observed_total_active_iteration: 1975
+    solver_failure_block_ending_total_active_iteration: 1970
+    note: >-
+      The exact restart reproduced the primary epsilon/flow-field blow-up and
+      ended after Fluent node SIGSEGV; no active-5000 pair exists.
+  - run_id: P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-R3-student-20260910T224003Z
+    basis: exact durable active-1900 pair after Fluent relaunch; no scientific setting delta
+    server_ref: student@10.0.0.5:49468
+    status: BLOCKED_REPEATABLE_SOLVER_FAILURE
+    manifest: PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-R3-student-20260910T224003Z-manifest.json
+    transcript: PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-R3-student-20260910T224003Z-residuals-transcript.txt
+    residuals: PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-R3-student-20260910T224003Z-residuals.json
+    last_observed_total_active_iteration: 1975
+    solver_failure_block_ending_total_active_iteration: 1970
+    note: >-
+      The fresh post-relaunch exact-settings run reproduced the primary
+      epsilon/flow-field blow-up and Fluent node SIGSEGV; only its active-1900
+      paired start state was durable and no active-5000 pair exists.
+blocker: >-
+  Solver divergence/fatal diagnostic in the block ending at total active 1970;
+  last valid reported iteration 1960 and no active-5000 pair. An exact
+  active-1900 restart with the report query removed reproduced the same
+  failure, and a fresh post-relaunch restart reproduced it again, establishing
+  a repeatable frozen-settings blocker independent of the prior Fluent session.

@@ -42,7 +42,7 @@ Use `supervise-fluent-run` for long hypothesis-test execution. Discovery runs sh
 
 ## Connection and run tools
 
-- `scripts/connection/check_connection.py` — endpoint health check.
+- `scripts/connection/check_connection.py` — binary TCP, gRPC, and direct Fluent `RUNNING`/`NOT RUNNING` check; it does not read or print residuals.
 - `scripts/connection/local_preflight.py` — local runtime and endpoint preflight.
 - `scripts/inspection/inspect_fluent_session.py` — non-mutating live tree inspection.
 - `scripts/inspection/monitor_native_run.py` — reconnecting read-only monitor that can supplement execution evidence without becoming a mutating controller.

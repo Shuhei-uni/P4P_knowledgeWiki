@@ -11,10 +11,11 @@ first and require a named candidate/screen/qualification ID, its origin,
 decision-gate linkage, and one valid authority: human approval for Phase Loop,
 or `origin: auto-loop` matching the active Auto Loop envelope.
 
-Do not redesign the strategy here. Preserve the approved scientific purpose,
-intentional delta, invariants, claim limit, and evidence objective; return to
-`phase-planner` / `phase-grill` if implementation detail would materially
-change any of them.
+Do not redesign the strategy here. Preserve the recorded scientific purpose,
+intentional delta, invariants, claim limit, and evidence objective. If an
+implementation detail would materially change them, return an autonomous
+recovery disposition to the calling loop, which must research a lean equivalent,
+add a bounded sensitivity child, or durably block the path.
 
 ## Require the correct lifecycle state
 
@@ -30,9 +31,11 @@ HYPOTHESIS_DEFINITION == PASS
 question-experiment completed with no surviving blocker
 ```
 
-Do not create later-stage setup records under an unresolved `HUMAN_REQUIRED` lock.
+Do not create later-stage setup records under an unresolved material recovery
+block. Recover or record the durable block first.
 
-Do not convert missing human-owned information into an assumed surrogate unless the phase contract explicitly authorizes that surrogate class.
+Do not silently convert missing external information into an assumed surrogate.
+Research and record a defensible range/sensitivity with its claim consequence.
 
 ## Carry forward the scientific intent
 
@@ -68,9 +71,9 @@ For every setup state the verified parent/reference artifact, intentional delta,
 
 Prefer server-neutral artifact identity over machine paths. Server assignment and local paths belong later in `run-paths.yaml` through `fluent-fleet-orchestration`.
 
-If an ambiguity would materially change the experiment, return it upstream
-rather than silently choosing. A context candidate that is only `proposed` is
-not a setup source.
+If an ambiguity would materially change the experiment, return an autonomous
+recovery disposition rather than silently choosing. A context candidate that is
+only `proposed` is not a setup source.
 
 ## Carry the evidence and figure design unchanged
 
@@ -117,10 +120,10 @@ Record:
 
 ### Hypothesis qualification depth
 
-For ordinary steady iteration-based full-geometry hypothesis qualification, the setup must specify at least **10,000 iterations** unless it records:
-
-- an explicit human-approved shorter-run exception; or
-- a scientifically equivalent non-iteration qualification basis.
+For ordinary steady iteration-based full-geometry hypothesis qualification, the
+setup must specify at least **10,000 iterations** unless it records a scoped
+Auto Loop qualification horizon (normally 2,000 iterations) and a conclusion
+limited to that window, or a scientifically equivalent non-iteration basis.
 
 For slow inventory/routing/stationarity questions, use the deeper horizon selected by `design-experiment`, often 10k–30k.
 

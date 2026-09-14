@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 import tempfile
+from types import SimpleNamespace
 import unittest
 
 import sys
@@ -49,10 +50,11 @@ class FakeMonitors:
 
 
 class FakeSolver:
-    def __init__(self, iteration: int = 11):
+    def __init__(self, iteration: int = 11, *, iterating: bool = False):
         self.health_check = FakeHealth()
         self.scheme = FakeScheme(
             {
+                "current-iteration": iteration,
                 "number-of-iterations": iteration,
                 "flow-time": 0.0,
                 "time-step": 0.0,
@@ -60,6 +62,11 @@ class FakeSolver:
             }
         )
         self.monitors = FakeMonitors(iteration=iteration)
+        self.settings = SimpleNamespace(
+            solution=SimpleNamespace(
+                run_calculation=SimpleNamespace(iterating=lambda: iterating),
+            )
+        )
         self.exit_called = False
         self.force_exit_called = False
 
@@ -116,7 +123,9 @@ class NativeRunMonitorTests(unittest.TestCase):
 
         self.assertEqual(snapshot["progress"]["state"], "advancing")
         self.assertEqual(snapshot["progress"]["delta"], 1)
-        self.assertEqual(snapshot["progress"]["source"], "monitor_x_value")
+        self.assertEqual(snapshot["progress"]["source"], "rp_current_iteration")
+        self.assertEqual(snapshot["progress"]["monitor_iteration"], 11)
+        self.assertFalse(snapshot["activity"]["iterating"])
         self.assertEqual(snapshot["runtime"]["configured_number_of_iterations"], 11)
         self.assertEqual(snapshot["monitors"]["residual"]["latest_iteration"], 11)
         self.assertEqual(snapshot["checkpoints"][0]["status"], "partial")
@@ -124,7 +133,19 @@ class NativeRunMonitorTests(unittest.TestCase):
         self.assertFalse(solver.exit_called)
         self.assertFalse(solver.force_exit_called)
 
-    def test_collect_snapshot_uses_highest_iteration_when_monitor_history_is_unsorted(self) -> None:
+    def test_collect_snapshot_reads_direct_iterating_query(self) -> None:
+        solver = FakeSolver(iteration=11, iterating=True)
+
+        snapshot = monitor.collect_snapshot(solver)
+
+        self.assertEqual(snapshot["activity"], {
+            "iterating": True,
+            "source": "solution.run_calculation.iterating",
+        })
+        self.assertEqual(snapshot["progress"]["iteration"], 11)
+        self.assertEqual(snapshot["progress"]["source"], "rp_current_iteration")
+
+    def test_collect_snapshot_keeps_highest_iteration_when_monitor_history_is_unsorted(self) -> None:
         solver = FakeSolver(iteration=11)
         solver.monitors.get_monitor_set_data = lambda **_kwargs: (
             [4204, 4164, 4356, 4146],
@@ -137,7 +158,9 @@ class NativeRunMonitorTests(unittest.TestCase):
         self.assertEqual(residual["latest_iteration"], 4356)
         self.assertEqual(residual["highest_iteration"], 4356)
         self.assertEqual(residual["last_values"]["continuity"], 0.19)
-        self.assertEqual(snapshot["progress"]["iteration"], 4356)
+        self.assertEqual(snapshot["progress"]["iteration"], 11)
+        self.assertEqual(snapshot["progress"]["source"], "rp_current_iteration")
+        self.assertEqual(snapshot["progress"]["monitor_iteration"], 4356)
 
     def test_retry_then_reconnect_persists_latest_state_and_events(self) -> None:
         attempts: list[str] = []

@@ -1,13 +1,15 @@
 ---
 name: auto-loop
-description: "Autonomously create, execute, and analyse bounded CFD experiments through verified discovery and hypothesis gates. Use for a human-authorized exploration window inside a fixed phase; do not change the phase contract or invent human-owned facts."
+description: "Autonomously create, execute, and analyse bounded CFD experiments through verified discovery and hypothesis gates. Recover blockers within the phase envelope and preserve explicit claim limits."
 ---
 
 # Auto Loop
 
 Explore the agreed phase autonomously through verified execution and evidence
-analysis until its timebox, a verified phase conclusion, or a genuine
-human-owned boundary.
+analysis until its timebox or a verified phase conclusion.
+
+Read [autonomous recovery](../references/autonomous-recovery.md) whenever a
+gate, setup, run, evidence stream, or Fluent configuration blocks progress.
 
 The route may adapt to evidence, but the lifecycle may not be skipped.
 
@@ -38,9 +40,13 @@ Discovery and hypothesis testing are different evidence classes, not interchange
 
 Do not call a discovery-scale screen a hypothesis qualification merely because the setup file says `hypothesis-test`.
 
-Do not autonomously `CONCLUDE PHASE` before at least one hypothesis qualification has passed the required transition and evidence gates. The only earlier terminal path is `HUMAN_REQUIRED` or an explicit human instruction to stop/reframe the phase.
+Do not autonomously `CONCLUDE PHASE` before at least one hypothesis path has
+passed the required transition and evidence gates. Before then, continue
+autonomous recovery and bounded exploration until the recorded stop time.
 
-Every lifecycle transition must call `verify-phase-transition`. A `BLOCK` or `HUMAN_REQUIRED` result is a lock. The scientific agent may not self-overrule it.
+Every lifecycle transition must call `verify-phase-transition`. A `BLOCK`
+prevents that transition, but it starts autonomous diagnosis/recovery rather
+than ending the loop. The scientific agent may not relabel a block as a pass.
 
 ## ❗❗❗ Launch authorization
 
@@ -67,7 +73,6 @@ Require:
 - what would count as enough evidence for the phase;
 - the granted autonomy envelope, including the Auto Loop family focus,
   deepening/enumeration direction, hypothesis horizon, and stop time;
-- conditions that must return to the human; and
 - the phase-root `CONTEXT.md`.
 
 Treat this as the destination, approved route, authority, and boundaries.
@@ -76,7 +81,7 @@ Treat this as the destination, approved route, authority, and boundaries.
 
 Read the current phase `CONTEXT.md` before planning, setup creation, execution,
 or promotion. It fixes the phase question, scope, invariants, claim limits,
-human locks, and the Auto Loop envelope. Within those bounds, Auto Loop owns
+recorded assumptions, and the Auto Loop envelope. Within those bounds, Auto Loop owns
 experiment origination and selection.
 
 The loop may without repeated human approval:
@@ -95,16 +100,17 @@ The loop may without repeated human approval:
 - preserve a quick recovery case+data pair before destroying a scientifically valuable unpreserved state;
 - abandon or defer a candidate only when its declared gate permits that action.
 
-This authority does **not** allow the loop to invent plant facts, measured
-setpoints, validation targets, physical controller data, or other human-owned
-facts; silently change the fixed phase question; cross an explicit
+This authority does **not** allow the loop to silently invent plant facts,
+measured setpoints, validation targets, physical controller data, or other
+external facts; silently change the fixed phase question; cross an explicit
 modelling/scope boundary; violate the recorded family/direction/timebox; or
 delete verified durable Project/OneDrive parent artifacts merely to make a run
 convenient.
 
 If a needed fact is explicitly `Missing Info`, a gate does not cover the result,
-or an unplanned observation requires a new phase direction, return
-`HUMAN_REQUIRED`. Do not clear the boundary by inventing a surrogate.
+or an observation opens a new direction, use autonomous recovery: research,
+record a conservative `Assumed` surrogate or bounded sensitivity family, and
+keep the claim limit aligned with it. Do not silently invent a fact.
 
 ## Persist current lifecycle state
 
@@ -121,7 +127,7 @@ Keep at minimum:
 ```yaml
 phase_id: ...
 phase_question: ...
-state: PHASE_CONTRACT | DISCOVERY_DESIGN | DISCOVERY_RUNNING | DISCOVERY_ANALYSIS | HYPOTHESIS_DEFINITION | HYPOTHESIS_RUN_READY | HYPOTHESIS_RUNNING | HYPOTHESIS_ANALYSIS | PHASE_CLOSURE | HUMAN_REQUIRED
+state: PHASE_CONTRACT | DISCOVERY_DESIGN | DISCOVERY_RUNNING | DISCOVERY_ANALYSIS | HYPOTHESIS_DEFINITION | HYPOTHESIS_RUN_READY | HYPOTHESIS_RUNNING | HYPOTHESIS_ANALYSIS | PHASE_CLOSURE | RECOVERY
 
 context:
   path: Project/experiments/<phase>/CONTEXT.md
@@ -133,12 +139,14 @@ autonomy:
   fluent_fleet_sessions: full | restricted
   auto_loop:
     family_focus: ...
-    direction: deepen | enumerate
+    direction: deepen | enumerate | deepen-and-enumerate
+    discovery_screen_iterations: 500
+    promising_extension_iterations: 1000
     hypothesis_iterations: ...
     stop_at: <timestamp + timezone>
 
 gates:
-  PHASE_CONTRACT: {status: PASS | BLOCK | HUMAN_REQUIRED}
+  PHASE_CONTRACT: {status: PASS | BLOCK}
   DISCOVERY_DESIGN: {status: ...}
   DISCOVERY_EXECUTION: {status: ...}
   DISCOVERY_EVIDENCE: {status: ...}
@@ -158,7 +166,8 @@ Do not infer permission to advance from conversational memory. Read `phase-state
 
 Call `verify-phase-transition` for `PHASE_CONTRACT` before new phase compute.
 
-If the result is `HUMAN_REQUIRED`, write that lock to `phase-state.yaml` and stop autonomous progression. Only explicit human input/authorization or authoritative evidence that directly resolves the missing fact may clear it.
+If the result is `BLOCK`, enter `RECOVERY`, apply autonomous recovery, and
+re-run the gate only after new evidence resolves the recorded deficiency.
 
 ## Orient from evidence
 
@@ -176,8 +185,8 @@ Search by scientific substance, not setup names alone: mechanism, formulation, m
 For every generated Auto Loop candidate identify the closest prior experiment and
 classify the delta as `NEW`, `PARTIAL REPEAT`, `REPLICATION`, or `REDUNDANT`.
 Do not run a `REDUNDANT` candidate; generate a materially distinct candidate
-only when it remains inside the recorded envelope, otherwise return to the
-human.
+that remains as close as possible to the phase direction, record the scope
+assumption, and test the smallest useful family.
 
 The governing posture remains:
 
@@ -224,11 +233,14 @@ It may include:
 When simulation discovery is useful, first record the generated candidate and
 its decision gate in `CONTEXT.md`, then call `design-experiment` in discovery
 mode. The Auto Loop envelope and gate, not idle capacity or an arbitrary case
-count, determine the smallest adequate campaign. Roughly 500–1,000 iterations
-per case is a useful project ballpark when enough to expose comparative
-behaviour, but the screening question determines the horizon. Deliberately
-adversarial probes are allowed only when their phase-bound rationale and
-evidence test are recorded first.
+count, determine the smallest adequate campaign. Unless the recorded profile
+says otherwise, screen each new settings-family member at **500 iterations**
+and extend only a promising result to **1,000** before promotion/rejection.
+When two servers are available, keep one lane deepening the current
+evidence-backed family and one lane broadening the in-envelope solution space;
+do not let an inherited blockage starve the other lane. Deliberately adversarial
+probes are allowed only when their phase-bound rationale and evidence test are
+recorded first.
 
 ### Discovery design gate
 
@@ -259,6 +271,12 @@ The same attached behaviour applies throughout the discovery campaign, not only 
 
 After each discovery run counted as evidence, require exact parent/setup proof, readback, save/reopen, smoke success, required instrumentation, requested horizon, final pair, and required histories. Call `verify-phase-transition` for `DISCOVERY_EXECUTION` before treating the run as valid discovery evidence.
 
+Before `DISCOVERY_EVIDENCE`, use `cfd-numerical-analysis` and
+`interpret-experiment` to create/update that case's `results.md`. It must be a
+plot-led answer to the screening question: embed and explain selected core
+figures, state the observations and limits, and keep raw artifacts as compact
+supporting links. Solver completion or a folder of plots is not enough.
+
 ## Discovery analysis must earn a hypothesis
 
 Analyse discovery evidence immediately. Use the preplanned core figures and question-specific histories rather than generic overview plots.
@@ -273,9 +291,9 @@ The discovery result must identify:
 - why prior evidence does not already settle it;
 - what a deeper run could say that discovery cannot.
 
-If discovery has not produced a defensible hypothesis, generate another short
-screen only if it stays inside the Auto Loop profile and timebox. Otherwise
-return `HUMAN_REQUIRED`. Never advance merely because a few short simulations
+If discovery has not produced a defensible hypothesis, generate the leanest
+additional discriminating screen/family, record its rationale, and continue
+until the timebox. Never advance merely because a few short simulations
 finished.
 
 Call `verify-phase-transition` for `DISCOVERY_EVIDENCE`.
@@ -334,9 +352,11 @@ For ordinary steady iteration-based full-geometry qualification in this project,
 
 For slow inventory, phase-routing, or stationarity questions, 10k–30k or another deliberately justified horizon may be more appropriate.
 
-A shorter hypothesis run requires either the human-approved Auto Loop profile
-to record the exception explicitly, or a scientifically equivalent
-non-iteration qualification basis appropriate to the model/question.
+A shorter hypothesis run is valid when the recorded Auto Loop profile/setup
+explicitly defines it as a scoped qualification. In this goal, use **2,000
+iterations** for hypothesis-answering runs unless a setup records another
+horizon. State that the evidence is scoped to that window; do not use it for a
+long-stationarity, fully converged, or broader claim without stronger evidence.
 
 A 500–1,000 iteration discovery screen does not become a qualification run because the label changed.
 
@@ -382,12 +402,18 @@ Missing required evidence is a blocker. For example, if the setup said scaled re
 
 Classify the hypothesis from the data while preserving claim limits and competing explanations.
 
+Before `HYPOTHESIS_EVIDENCE`, use `cfd-numerical-analysis` and
+`interpret-experiment` to create/update `results.md` as the durable visual
+scientific report. It must answer the hypothesis question near the top, embed
+and explain the selected core figures, retain numerical adequacy and competing
+explanations, and separate raw artifact links from the main argument.
+
 Call `verify-phase-transition` for `HYPOTHESIS_EVIDENCE`.
 
-If it returns `BLOCK`, repair the recorded setup or obtain missing evidence
-only when the Auto Loop envelope permits it. If new evidence reopens
-uncertainty, Auto Loop may create a new discovery branch only within that
-envelope and before the stop time; otherwise return `HUMAN_REQUIRED`.
+If it returns `BLOCK`, diagnose and repair the recorded setup/evidence through
+autonomous recovery. If evidence reopens uncertainty, create the leanest next
+discovery branch or sensitivity family and record its scope/claim limit before
+the stop time.
 
 ## Stage 6 — phase closure
 
@@ -395,24 +421,27 @@ Call `check-phase-closure` only after `HYPOTHESIS_EVIDENCE == PASS`.
 
 Normal autonomous closure requires `verify-phase-transition` to return `PHASE_CLOSURE == PASS`.
 
-A bounded or negative conclusion is valid, but it must be earned by the same lifecycle. The autonomous agent may not close a phase from short discovery evidence, an unverified hypothesis run, missing required residual/history evidence, or an unresolved human lock.
+A bounded or negative conclusion is valid, but it must be earned by the same lifecycle. The autonomous agent may not close a phase from short discovery evidence, an unverified hypothesis run, missing required residual/history evidence, or an unresolved autonomous recovery item that would materially alter the conclusion.
 
 After closure review the outcome is:
 
 - `CONCLUDE PHASE` — verified phase-level statement is supported;
 - `CONTINUE` — another generated path within the Auto Loop envelope can
   materially change/strengthen the phase answer before the stop time;
-- `RETURN TO HUMAN / PHASE-PLANNER` — the useful next step crosses the human-owned boundary.
+- `RECOVER / CONTINUE` — the current evidence is incomplete or challenged;
+  diagnose, research, and create the smallest next bounded family.
 
-If `CONTINUE` would require a new phase question or cross an envelope boundary,
-return to the human. Otherwise record the next generated candidate/path before
-continuing.
+If `CONTINUE` would require a broader framing, record the interpreted scope and
+claim limit, then create the smallest investigation that resolves whether the
+broader framing is material before continuing.
 
-## Human locks are real locks
+## Blocks are autonomous recovery work
 
-When `verify-phase-transition` or `check-phase-closure` returns `HUMAN_REQUIRED` / `RETURN TO HUMAN`, persist the lock in `phase-state.yaml` and stop autonomous progression.
-
-Do not create later setup stages underneath the lock. Do not reinterpret the missing fact as an “assumed numerical target” unless the human explicitly authorizes that surrogate class in the phase contract.
+When `verify-phase-transition` or `check-phase-closure` returns `BLOCK`,
+persist the evidence and recovery plan in `phase-state.yaml`, then continue
+with the leanest repair, surrogate sensitivity, or independent useful lane.
+Do not silently treat an assumed numerical target as a fact; label it
+`Assumed`, test it where material, and bound the claim accordingly.
 
 ## Make simulations earn their cost
 
@@ -447,6 +476,7 @@ The `/goal` is complete only when one of these is true:
 1. `PHASE_CLOSURE == PASS` and `check-phase-closure` returns `CONCLUDE PHASE`; or
 2. the recorded Auto Loop stop time has passed and no generated/approved run remains
    active; or
-3. a persisted `HUMAN_REQUIRED` / `RETURN TO HUMAN` lock identifies the exact missing fact, permission, or phase-level decision.
+3. all remaining paths are recorded `BLOCKED_AUTONOMOUS` at the stop time, with
+   recovery evidence and bounded conclusions persisted.
 
 Do not end the goal merely because a discovery simulation is still running, a long hypothesis worker has been launched, or one experiment produced an interesting result. Discovery stays attached; a Codex hypothesis worker self-wakes the exact originating goal thread; the lifecycle continues from `phase-state.yaml`.

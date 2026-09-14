@@ -17,7 +17,7 @@ Before launch, read the phase-root `phase-state.yaml` and require:
 DISCOVERY_EVIDENCE == PASS
 HYPOTHESIS_DEFINITION == PASS
 HYPOTHESIS_RUN_READY == PASS
-no unresolved HUMAN_REQUIRED lock
+no unresolved material recovery block for this run
 ```
 
 Also require the approved setup/run contract to contain:
@@ -37,7 +37,10 @@ Also require the approved setup/run contract to contain:
 
 Do not launch a run merely because `mode: hypothesis-test` appears in YAML.
 
-For ordinary steady iteration-based full-geometry qualification, reject a horizon below **10,000 iterations** unless the setup records an explicit human-approved exception or a scientifically equivalent non-iteration qualification basis.
+For ordinary steady iteration-based full-geometry qualification, reject a
+horizon below **10,000 iterations** unless the setup records a scoped Auto Loop
+qualification horizon (normally 2,000 iterations) with a claim limited to that
+window, or a scientifically equivalent non-iteration qualification basis.
 
 When the hypothesis claim depends on stationarity/steady/bounded behaviour, require the approved continuation/restart qualification component when the setup says it is necessary.
 
@@ -118,9 +121,10 @@ Every Codex detached hypothesis job must capture the exact originating thread.
 
 Prefer `CODEX_THREAD_ID`; an explicit `codex.session_id` is only an override.
 
-Do not launch if:
+Do not launch this specific detached job if:
 
-- no exact originating thread can be resolved;
+- no exact originating thread can be resolved (then use attached deterministic
+  supervision where the runtime permits);
 - wakeup is disabled;
 - either `COMPLETE` or `BLOCKED` is absent from triggers;
 - deterministic completion proof is absent.
@@ -191,7 +195,10 @@ On Codex, a blocked worker must still persist the blocker and wake the exact sci
 
 Routine autosaves may remain server-local. Preserve selected expensive checkpoints and important final paired case/data according to canonical `run-paths.yaml` and the OneDrive durability plan.
 
-Do not automatically redesign or restart from a checkpoint inside the worker. Wake the scientific loop with the evidence and let it decide.
+Do not automatically redesign or restart from a checkpoint inside the worker.
+Wake the scientific loop with the evidence so it can apply autonomous recovery,
+choose a verified restart, or durably block the path without waiting for a
+human reply.
 
 ## Terminal manifest
 

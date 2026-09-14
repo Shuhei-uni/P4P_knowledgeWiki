@@ -4,7 +4,9 @@
 The monitor deliberately does not initialize, iterate, save, reload, interrupt,
 or shut down Fluent.  It may be stopped and restarted independently of the
 solver; the local state file lets a fresh monitor process compare progress with
-the last observation it recorded before a connection loss.
+the last observation it recorded before a connection loss.  Solver activity is
+read from Fluent's direct ``iterating?`` query; monitor history is supporting
+evidence and is never treated as proof that a solve is currently running.
 """
 
 from __future__ import annotations
@@ -140,6 +142,19 @@ def _call_or_value(value: Any) -> Any:
     return value() if callable(value) else value
 
 
+def _boolean(value: Any) -> bool | None:
+    """Convert a Fluent boolean query without treating arbitrary values as true."""
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        normalized = value.strip().casefold()
+        if normalized in {"true", "#t"}:
+            return True
+        if normalized in {"false", "#f"}:
+            return False
+    return None
+
+
 def _read_health(solver: Any, errors: list[str]) -> tuple[dict[str, Any], bool]:
     health: dict[str, Any] = {}
     health_obj = getattr(solver, "health_check", None)
@@ -155,6 +170,35 @@ def _read_health(solver: Any, errors: list[str]) -> tuple[dict[str, Any], bool]:
         except Exception as exc:
             errors.append(f"health_check.{name}: {type(exc).__name__}: {exc}")
     return health, probe_succeeded
+
+
+def _read_activity(solver: Any, errors: list[str]) -> tuple[dict[str, Any], bool]:
+    """Read Fluent's direct run-calculation query, if available.
+
+    Monitor history is a client-side stream and may be hydrated or reordered
+    after a new client attaches.  The generated ``iterating`` query executes
+    Fluent's ``iterating?`` query directly, so it is the authoritative signal
+    for whether the solver is iterating at the instant of the snapshot.
+    """
+    activity: dict[str, Any] = {}
+    try:
+        run_calculation = solver.settings.solution.run_calculation
+        query = getattr(run_calculation, "iterating")
+        if not callable(query):
+            raise TypeError("solution.run_calculation.iterating is not callable")
+        value = _boolean(query())
+        if value is None:
+            raise ValueError("Fluent returned a non-boolean value")
+        activity.update(
+            {
+                "iterating": value,
+                "source": "solution.run_calculation.iterating",
+            }
+        )
+        return activity, True
+    except Exception as exc:
+        errors.append(f"solution.run_calculation.iterating: {type(exc).__name__}: {exc}")
+        return activity, False
 
 
 def _read_scheme_variable(solver: Any, variable: str) -> Any:
@@ -174,6 +218,9 @@ def _read_runtime(solver: Any, errors: list[str]) -> tuple[dict[str, Any], bool]
     runtime: dict[str, Any] = {}
     probe_succeeded = False
     variables = (
+        # Unlike the configured run limit below, this is Fluent's current
+        # completed iteration counter and is read directly from the server.
+        ("current_iteration", "current-iteration"),
         # Fluent exposes this RP variable as the configured maximum for the
         # run-calculation control, not as the number of iterations already
         # completed.  Keep it for context, but do not use it as live progress.
@@ -316,19 +363,26 @@ def collect_snapshot(
         version_ok = False
         errors.append(f"get_fluent_version: {type(exc).__name__}: {exc}")
 
+    activity, activity_ok = _read_activity(solver, errors)
     runtime, runtime_ok = _read_runtime(solver, errors)
     monitors, monitors_ok = _read_monitors(solver, monitor_sets, errors)
     checkpoints = _read_checkpoint_pairs(solver, checkpoint_pairs, errors)
 
-    if not (health_ok or version_ok or runtime_ok or monitors_ok):
+    if not (health_ok or activity_ok or version_ok or runtime_ok or monitors_ok):
         detail = errors[0] if errors else "all live probes failed"
         raise MonitorConnectionLost(detail)
 
-    # Prefer monitor history: the RP value above is the configured maximum,
-    # while monitor x-values are the live flow-iteration coordinates.  If no
-    # monitor set is available, report progress as unknown rather than turning
-    # a maximum setting into a false completed-iteration count.
-    iteration = _latest_monitor_iteration(monitors)
+    # Prefer Fluent's direct current-iteration RP value.  Monitor history is
+    # retained as supporting evidence, but it can be stale while a newly
+    # attached client hydrates its stream cache.
+    current_iteration = _numeric(runtime.get("current_iteration"))
+    monitor_iteration = _latest_monitor_iteration(monitors)
+    iteration = current_iteration if current_iteration is not None else monitor_iteration
+    progress_source = (
+        "rp_current_iteration"
+        if current_iteration is not None
+        else ("monitor_x_value" if monitor_iteration is not None else "unavailable")
+    )
 
     previous_iteration = _previous_iteration(previous_state)
     if iteration is None or previous_iteration is None:
@@ -346,6 +400,7 @@ def collect_snapshot(
         "connection_generation": connection_generation,
         "fluent_version": version,
         "health": health,
+        "activity": activity,
         "runtime": runtime,
         "progress": {
             "iteration": iteration,
@@ -354,7 +409,8 @@ def collect_snapshot(
             if iteration is not None and previous_iteration is not None
             else None,
             "state": progress_state,
-            "source": "monitor_x_value" if iteration is not None else "unavailable",
+            "source": progress_source,
+            "monitor_iteration": monitor_iteration,
         },
         "monitors": monitors,
         "checkpoints": checkpoints,

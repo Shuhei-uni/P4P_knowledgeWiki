@@ -103,6 +103,25 @@ When a new plot would materially clarify an anomaly, mechanism, regime change, o
 
 Do not silently replace the original core figures with post-hoc plots that make the result look cleaner or more convincing. Preserve the planned figure set for auditability.
 
+## Produce a report-ready figure package
+
+Hand `interpret-experiment` an ordered, compact visual argument—not a directory
+listing or machine-readable summary. For every selected core or responsive
+figure, provide:
+
+- project-local figure path and confirmed file existence;
+- status: `core`, `responsive`, or `supporting`;
+- a report-ready title and caption;
+- its intended question and the observed message;
+- units, scope, comparison basis, window, and transformations; and
+- completeness: `complete`, `partial`, `unavailable`, or `requires rerun`.
+
+The selected core figures are the figures that `results.md` embeds and explains.
+For a PDF-only plot, also produce a report-facing PNG or SVG preview; a core
+figure must be viewable inline in the result record.
+Keep diagnostic plots available, but do not make the next writer infer which
+ones constitute the scientific answer.
+
 ## Output
 
 Return:
@@ -112,7 +131,8 @@ Return:
 3. only the supporting diagnostic plots needed to assess numerical adequacy;
 4. concise tables for exact values or final-window statistics where useful;
 5. exact source data, units, sign conventions, windows, and transformations;
-6. a short set of neutral observations linked to the figures.
+6. a short set of neutral observations linked to the figures; and
+7. the ordered, captioned report-ready figure package.
 
 ### File report-facing figures with their experiment
 
