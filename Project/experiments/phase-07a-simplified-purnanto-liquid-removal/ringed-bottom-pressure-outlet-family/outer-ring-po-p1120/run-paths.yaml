@@ -1,0 +1,17 @@
+setup_id: P7-E6-RING-OUTER-PO-P1120
+status: NOT_PLACED
+server:
+  id: null
+  ref: null
+parent:
+  case: exact_verified_e0_initialized_parent
+  data: exact_verified_e0_initialized_parent
+  mesh: Separator-purnanto342k.msh.h5
+outputs:
+  root: null
+  case: null
+  data: null
+  manifest: null
+notes:
+  - Resolve the runtime server and output paths only after the mesh catalogue capability test passes.
+  - Do not overwrite the E0 parent or existing E1/E5 artifacts.

@@ -5,6 +5,15 @@
 **Human-selected planning direction on 2026-09-11.** Phase 7.1A continues
 from the mechanism result retained in [Phase 07A](../phase-07a-simplified-purnanto-liquid-removal/index.md): the lower cell-zone, phase-2-only absorber is the preferred liquid-removal path for the simplified Purnanto model. The purpose of this phase is to find out whether the scaled residuals—especially continuity—can converge while that removal behaviour remains useful.
 
+The human has additionally raised a Phase 7.1A-specific long-horizon
+hypothesis from the current longer runs: steady-state assessment may not be
+meaningful until at least roughly `4,000` solver iterations, and the separator
+may plausibly operate near `2,000 kg` of total liquid inventory. These values
+are observation-window and operating-point markers, not generic Fluent rules
+or sufficient acceptance criteria. Any steady-state claim still requires
+bounded late-window inventory and key monitors, credible phase-resolved and
+mixture mass closure, acceptable residual behaviour, and explained routing.
+
 This is a new planning phase, not Phase 08. It does not create an executable
 setup queue yet. Specific solver changes must be framed as controlled,
 human-approved candidates before `setup.md` is created.

@@ -1,7 +1,7 @@
 # Supervisors' Meeting Report — 14 September 2026
 
 **Status:** Draft for the meeting on 15 September 2026  
-**Scope:** Phase 05, Phase 06, Phase 07A, and Phase 07.1A  
+**Scope:** Phase 05, Phase 06, and Phase 07A
 **Purpose:** A short visual summary of what I tried, what I saw, what it means, and what I will do next.
 
 This report is for discussion. It gives the main story only. Detailed setup, run history, and evidence records remain in the Project folder.
@@ -14,7 +14,7 @@ I then tested a lower-pool control method. The liquid amount continued to rise, 
 
 I moved to a simpler separator geometry. This made the liquid-removal question easier to isolate. I found that a lower absorber can be set up correctly, but the tested field did not deliver enough liquid to that region.
 
-I am now testing numerical choices one at a time. The current results show different residual behaviour, but no stable coupled solution yet.
+The next direction is to explore numerical stability around this absorber. The current Phase 07A result still does not close the global mass imbalance because not enough liquid reaches the lower absorber region.
 
 The main conclusion is about the tested simulation setups. It is not a conclusion that the physical separator cannot work.
 
@@ -25,7 +25,6 @@ The main conclusion is about the tested simulation setups. It is not a conclusio
 | 05 | Can the full geometry provide a stable baseline? | I saw unsettled liquid inventory and mass balance. The flow field showed outer-region accumulation and recirculation. | I use this work as diagnostic evidence, not as a performance claim. |
 | 06 | Can lower-pool control keep the liquid amount near a target? | I saw the liquid proxy rise to about 285 kg against a 200 kg numerical target. Pressure action reached its lower limit of 1.115 MPa gauge. | I am setting aside this full-geometry control route for now. |
 | 07A | Can a lower absorber remove liquid in the simpler geometry? | I confirmed that the absorber source was set correctly, but almost no phase-2 liquid reached the sampled lower region. | I am keeping the mechanism as a working path, but treating liquid access as the open problem. |
-| 07.1A | Can numerical changes make the absorber case stable? | I saw different residual paths for the tested turbulence choices. None gave stable coupled behaviour. | I will continue with one controlled change at a time. |
 
 ## Geometry and figure convention
 
@@ -216,7 +215,7 @@ Contours show where phase 2 is present. Vector-only views show flow direction an
 
 <p class="phase-point"><strong>Saw:</strong> The absorber source was set correctly, but the lower sampled plane contained almost no phase-2 liquid. The absorber can therefore be present without receiving enough liquid to remove. The inventory history also continued to rise during the tested continuation.<br /><strong>Meaning:</strong> The simpler geometry has isolated the next question: how can liquid reach the lower absorber region? The absorber mechanism is not yet a physical or performance result.</p>
 
-<p class="phase-point"><strong>Figures:</strong> The history and matched contour views show the inventory response and lower-region liquid access.</p>
+<p class="phase-point"><strong>Figures:</strong> The history and matched lower-region contour views show the inventory response and whether phase-2 liquid reaches the absorber region. I have not inserted the available mixed contour/vector full-view export because it would make the contour comparison less clear.</p>
 
 ![Phase 07A: liquid inventory and lower-region access during the absorber test](../../experiments/phase-07a-simplified-purnanto-liquid-removal/cell-zone-absorber-control-family/p7-e5-cz-absorb-cold-ramp11692-cont5000/figures/F1-stitched-inventory-response.png)
 
@@ -231,67 +230,7 @@ Contours show where phase 2 is present. Vector-only views show flow direction an
 </figure>
 </div>
 
-<p class="phase-point"><strong>Conclusion &amp; transition:</strong> The absorber was correctly configured, but the tested field did not deliver enough liquid to it. I therefore moved to testing whether numerical changes could stabilise the absorber case while keeping the mechanism fixed.</p>
-
-## Phase 07.1A — numerical stability of the absorber case
-
-<p class="phase-point"><strong>Why:</strong> I wanted to know whether a controlled change to the turbulence treatment could make the absorber case numerically stable while keeping the absorber mechanism fixed.<br /><strong>Did:</strong> I compared three turbulence choices at the same finite checkpoint. I kept the geometry and absorber concept fixed so that the residual change could be linked to the model choice.</p>
-
-<details class="experiment-details">
-<summary>Show experiments I actually ran in Phase 07.1A</summary>
-<p>I changed one turbulence treatment at a time from the same active-1,000 absorber parent. The remaining queued turbulence, wall-function, discretisation, and multiphase-dispersion variants had not been run and are not included.</p>
-<table>
-<thead>
-<tr><th>Experiment family and settings</th><th>Why I ran it</th><th>What I saw</th></tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>RNG turbulence reference</strong><br />Unchanged RNG <em>k–epsilon</em> closure; <code>500</code> active iterations after the smoke block.</td>
-<td>I ran the unchanged turbulence treatment first so the two closure changes had a common finite reference.</td>
-<td>Total liquid mass rose from about <code>943</code> to <code>1,228 kg</code>. Continuity remained around <code>0.65–0.95</code>, with reverse flow and turbulent-viscosity limiting throughout.</td>
-</tr>
-<tr>
-<td><strong>Standard <em>k–epsilon</em> closure</strong><br />Only the turbulence closure changed from RNG to standard <em>k–epsilon</em>; all other absorber, geometry, boundary, and numerical settings were held fixed; <code>500</code> active iterations.</td>
-<td>I wanted to test whether the residual and absorber behaviour depended on the RNG closure form.</td>
-<td>Continuity was lower over part of the screen and ended near <code>0.547</code>, but liquid mass still rose from about <code>983</code> to <code>1,164 kg</code>. The tail remained non-stationary and the same broad limiting behaviour persisted.</td>
-</tr>
-<tr>
-<td><strong>Realizable <em>k–epsilon</em> closure</strong><br />Only the turbulence closure changed from RNG to realizable <em>k–epsilon</em>; same parent and <code>500</code>-iteration horizon.</td>
-<td>I wanted to compare the other closely related <em>k–epsilon</em> alternative without mixing in a coupling, source, or mesh change.</td>
-<td>Continuity ended near <code>0.385</code>, but liquid mass still rose from about <code>1,010</code> to <code>1,158 kg</code>. Reverse flow, viscosity limiting, and a non-stationary residual tail remained.</td>
-</tr>
-<tr>
-<td><strong>RNG production-limiter test</strong><br />RNG reference with only the production limiter changed from off to on; Fluent applied its default <code>clip factor=10.0</code>; <code>500</code> active iterations requested.</td>
-<td>I wanted to test whether a turbulence-specific limiter could prevent the observed residual blow-up without changing the absorber or the rest of the numerical setup.</td>
-<td>The smoke block and active-<code>250</code> checkpoint completed, but the next block produced AMG divergence and floating-point exceptions. The required 500-iteration comparison was not proven.</td>
-</tr>
-</tbody>
-</table>
-</details>
-
-<p class="phase-point"><strong>Saw:</strong> The residual paths were different, but they did not settle into stable coupled behaviour. Continuity, turbulence, and phase-fraction residuals remained active, and the wider numerical problems were not removed.<br /><strong>Meaning:</strong> No turbulence choice has been promoted. The next tests must change one numerical treatment at a time and must check both residuals and liquid behaviour.</p>
-
-<p class="phase-point"><strong>Figures:</strong> The residual comparison and matched native Fluent vector views show how the turbulence choices changed the numerical path without producing a credible steady solution. The native Fluent spatial views use the same centre plane, show all vectors, and share one 0–225 m/s velocity-magnitude range.</p>
-
-![Phase 07.1A: residual comparison for the tested turbulence choices](../../experiments/phase-07-1a-absorber-convergence/turbulence-family/figures/turbulence-family-residual-comparison.png)
-
-
-<div class="figure-grid three">
-<figure>
-<img src="figures/P071A-native-RNG-active500-XY-Z0-vector-colour-normal-2400x1800.png" alt="Phase 07.1A: RNG reference velocity vectors at active 500" />
-<figcaption>RNG reference, active 500. Native Fluent vector-only view on the centre plane.</figcaption>
-</figure>
-<figure>
-<img src="figures/P071A-native-standard-active500-XY-Z0-vector-colour-normal-2400x1800.png" alt="Phase 07.1A: standard k-epsilon velocity vectors at active 500" />
-<figcaption>Standard <em>k–epsilon</em>, active 500. Same plane, camera, vector policy, and colour range.</figcaption>
-</figure>
-<figure>
-<img src="figures/P071A-native-realizable-active500-XY-Z0-vector-colour-normal-2400x1800.png" alt="Phase 07.1A: realizable k-epsilon velocity vectors at active 500" />
-<figcaption>Realizable <em>k–epsilon</em>, active 500. Same plane, camera, vector policy, and colour range.</figcaption>
-</figure>
-</div>
-
-<p class="phase-point"><strong>Conclusion &amp; transition:</strong> The turbulence choices changed the residual path, but none produced a credible steady solution. I therefore continue with one numerical treatment change at a time, checking residuals and liquid behaviour together.</p>
+<p class="phase-point"><strong>Conclusion &amp; next direction:</strong> The absorber was implemented and its phase-2 source was accounted for correctly, but not enough liquid reached the lower region to close the global mass imbalance. The total liquid inventory therefore continued to rise and continuity remained unsettled. I will explore this absorber direction further by testing whether numerical treatment can improve liquid access and continuity.</p>
 
 ## Overall conclusion
 
@@ -299,13 +238,13 @@ Contours show where phase 2 is present. Vector-only views show flow direction an
 2. I found that the lower-pool control route did not stop the liquid proxy from rising.
 3. I used the simpler geometry to isolate the liquid-removal question.
 4. I found that the lower absorber can be set up, but the tested field does not deliver enough liquid to it.
-5. I will present the current work as a numerical-stability screen, not yet as a plant-performance result.
+5. I will continue exploring the absorber direction as a numerical-stability problem, not yet as a plant-performance result.
 
 ## Next steps
 
 - I will recover the exact late Phase 06 case/data pair and create the missing native Fluent spatial view.
-- I will use the matched Phase 07A contour pair and the three Phase 07.1A vector views alongside the existing histories.
-- I will continue with one numerical change at a time.
+- I will use the matched Phase 07A lower-region contour pair alongside the existing histories.
+- I will explore one numerical change at a time while keeping the absorber mechanism fixed.
 - I will link every spatial claim to liquid inventory, phase routing, and mass-balance evidence before making a physical claim.
 
 ## Evidence links
@@ -316,5 +255,3 @@ Contours show where phase 2 is present. Vector-only views show flow direction an
 - [Phase 06 long-horizon results](../../experiments/phase-06-full-geometry-with-brine-pool/stage-06-long-horizon-surrogate-hypothesis/results.md)
 - [Phase 07A current record](../../experiments/phase-07a-simplified-purnanto-liquid-removal/index.md)
 - [Phase 07A absorber results](../../experiments/phase-07a-simplified-purnanto-liquid-removal/cell-zone-absorber-control-family/p7-e5-cz-absorb-cold-ramp11692-cont5000/results.md)
-- [Phase 07.1A current record](../../experiments/phase-07-1a-absorber-convergence/index.md)
-- [Phase 07.1A turbulence results](../../experiments/phase-07-1a-absorber-convergence/turbulence-family/README.md)

@@ -2,7 +2,8 @@ phase_id: phase-07-1a-absorber-convergence
 phase_question: >-
   Can the selected bottom-only cell-zone absorber reach credible scaled-residual
   and continuity convergence in the simplified Purnanto model when turbulence
-  closure and turbulence-specific treatments are changed one at a time?
+  closure and selected non-absorber steady solver treatments are changed in
+  controlled discovery branches?
 state: DISCOVERY_EXECUTION
 
 context:
@@ -21,6 +22,7 @@ context:
     - C2-T3-NON-EQ
     - C2-T4-K2
     - C2-T4-DISPERSION
+    - C3C4-COUPLED-GLOBAL-PSEUDO-TIME
   draft_family_path: Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/README.md
 
 autonomy:
@@ -34,10 +36,10 @@ autonomy:
 
 phase_loop:
   autonomy_check_in:
-    checked_at: 2026-09-11
+    checked_at: 2026-09-15
     fluent_fleet_sessions: full
     fluent_fleet_scope: student only
-    authority_source: direct human phase-loop invocation to complete the remaining staged turbulence-family setups
+    authority_source: direct human phase-loop invocation to complete the staged turbulence-family setups, followed by the human request on 2026-09-15 to append the C3+C4 Coupled + Global Time Step discovery packet
     completion_route: return
     auto_loop_selected: false
     auto_loop_profile_status: NOT_AUTHORIZED
@@ -45,6 +47,9 @@ phase_loop:
       The previous full-session authority remains in force for this bounded
       extension. The user did not authorize an Auto Loop handoff; return after
       the eight queued discovery items and their recovery routes are resolved.
+      The newly appended C3+C4 solver-path packet remains after that queue and
+      is not run until Student is reachable and the live global-step controls
+      are read back.
 
 gates:
   PHASE_CONTRACT:
@@ -79,6 +84,12 @@ gates:
       - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/t3-non-equilibrium-wall-functions/setup.md
       - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/t4-k-second-order/setup.md
       - Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/t4-multiphase-turbulence-dispersion/setup.md
+      - Project/experiments/phase-07-1a-absorber-convergence/solver-path-family/c3c4-coupled-global-pseudo-time/setup.md
+      - >-
+        Direct human request on 2026-09-15 appended the combined C3+C4
+        Coupled + steady Global Time Step discovery candidate after the
+        existing turbulence queue; execution remains subject to live control
+        readback and the Student endpoint being reachable.
     missing: []
     reviewer: Harvey / 01a08fa5-d73d-7fe1-88f2-8ef0570c7a19
   DISCOVERY_EXECUTION:
@@ -354,10 +365,36 @@ queue:
       Enable only multiphase turbulence dispersion in relative velocity, prove
       the delta by readback, complete the attached 500-active-iteration
       discovery evidence, and write paired results with core figures.
+  - order: 12
+    setup_id: P71A-C3C4-COUPLED-GLOBAL-PSEUDO-TIME
+    candidate_id: C3C4-COUPLED-GLOBAL-PSEUDO-TIME
+    origin: human-approved-context-only
+    authority: direct human request on 2026-09-15
+    gate_linkage: G0 / DISCOVERY_DESIGN extension
+    setup_path: solver-path-family/c3c4-coupled-global-pseudo-time/setup.md
+    lifecycle_role: discovery
+    required_gate: DISCOVERY_DESIGN
+    parent_identity: P7-E5-CZ-ABSORB-COLD-RAMP11692 active-1000 paired case/data
+    required_horizon: 500 active iterations after 50-iteration smoke
+    evidence_contract: solver-path residual, coupling/pseudo-time readback, source audit, phase-resolved fluxes, liquid/vapor inventories, routing, limiter/warning diagnostics, and paired checkpoints
+    status: NOT_RUN
+    blocker: >-
+      Student endpoint was unreachable during packet preparation. Before
+      mutation, the live Mixture parent must prove the exact Coupled + Global
+      Time Step route and all pseudo-time controls; server 3 is not an allowed
+      substitute parent.
+    completion_requirement: >-
+      Apply only the declared combined Coupled + Global Time Step solver-path
+      package to the exact active-1000 parent, prove it by save/reopen,
+      complete the 50-iteration smoke and attached 500-active-iteration
+      discovery evidence, and write paired results with the predeclared
+      balance, inventory, routing, turbulence, and warning diagnostics.
 next_required_action: >-
-  Execute orders 4 through 11 in order on student. Keep every child attached
+  Execute orders 4 through 12 in order on student. Keep every child attached
   to the exact active-1000 parent, apply one declared delta only, and preserve
   the absorber, boundaries, Mixture formulation, steady solver, numerics,
   source, and evidence contract. Do not enter a hypothesis route or add an
-  outlet, introduce transient modelling, patch/reset/remesh/resplit, or alter
-  the restart field.
+  outlet, introduce transient/time-accurate modelling, patch/reset/remesh/
+  resplit, or alter the restart field. For order 12, the declared delta is the
+  combined pressure-based Coupled plus steady Global Time Step package, and
+  the exact live-supported controls must be read back before mutation.

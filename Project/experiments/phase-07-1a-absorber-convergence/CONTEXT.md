@@ -3,7 +3,7 @@
 ## Status
 
 - **Planning state:** discovery evidence review
-- **Last human review:** 2026-09-11
+- **Last human review:** 2026-09-15
 - **Experiment-selection authority:** human-approved-context-only
 - **Current decision:** preserve the lower cell-zone, phase-2-only absorber as
   the working liquid-removal path and begin the convergence-focused phase with
@@ -21,6 +21,18 @@
 - **Steady-state boundary:** the phase remains steady-state. A transient or
   time-accurate solver branch is not an automatic fallback and is outside the
   current Phase 7.1A experiment families.
+- **Solver-path extension:** on 2026-09-15 the human requested a bounded
+  discovery test of the Fluent pressure-based Coupled solver with its
+  compatible steady Global Time Step / pseudo-time treatment. This is a
+  combined C3+C4 solver-package candidate, not a transient branch or a claim
+  about pseudo-time alone. It is appended after the existing turbulence queue.
+- **Long-horizon maturity hypothesis:** while running the longer cases, the
+  human observed that steady-state assessment may not be meaningful until at
+  least roughly `4,000` solver iterations, and that the separator may approach
+  a plausible operating condition with roughly `2,000 kg` of total liquid
+  inventory. These are Phase 7.1A-specific planning markers raised from the
+  current runs, not generic Fluent requirements, convergence criteria, or
+  evidence that the `2,000 kg` state is physically validated.
 
 ## Human thinking
 
@@ -56,6 +68,12 @@ The human agrees with the recommended first contrast: compare the current RNG
 first turbulence direction. The exact parent, closure deltas, and short-horizon
 gate were then framed and executed; the resulting evidence does not promote a
 closure or authorize SST/RSM escalation.
+The human's longer-run observation now adds a provisional maturity hypothesis:
+the inventory response may need roughly `4,000` steady solver iterations to
+develop, with a plausible separator operating inventory near `2,000 kg`.
+This hypothesis is to guide observation-window planning only. It must be
+tested against bounded late-window behaviour, not converted into an automatic
+steady-state pass condition.
 
 ### Ideas raised by the human
 
@@ -69,6 +87,7 @@ closure or authorize SST/RSM escalation.
 | H6 | Use the previously proposed contrastive family screen as the fastest route to finding what works and what does not. | Makes each run answer a distinct question and preserves useful information even when a branch fails. | selected planning structure; first finite screen complete |
 | H7 | Give turbulence first priority and substantially more weight within the family screen. | The observed failure involved (k), epsilon, and turbulent-viscosity limiting, so a deeper turbulence screen can distinguish closure effects from downstream numerical effects. | selected planning priority; first finite screen complete |
 | H8 | Begin turbulence screening with the closest matched standard or realizable (k)-epsilon alternative against the RNG reference. | Isolates closure-form effects with less physical and computational change before escalating to SST or RSM. | first finite screen complete; no closure promoted |
+| H9 | Treat roughly 4,000 solver iterations as the earliest point at which steady-state assessment may become meaningful, and roughly 2,000 kg total liquid as a plausible operating-point marker. | Allows the inventory response to mature before judging the branch, while keeping the proposed inventory separate from the actual convergence proof. | human-raised planning hypothesis; requires long-horizon evidence |
 
 ### Constraints expressed by the human
 
@@ -85,6 +104,12 @@ closure or authorize SST/RSM escalation.
   its phase-resolved balances must be credible.
 - Transient or time-accurate calculations are outside this phase and may not be
   introduced as an autonomous recovery route.
+- The proposed `~4,000`-iteration horizon and `~2,000 kg` total-liquid level
+  are maturity/operating-point hypotheses only. Neither is a sufficient
+  steady-state acceptance criterion; any claim still requires bounded
+  late-window inventory and key-monitor behaviour, credible phase-resolved and
+  mixture mass closure including storage/source terms, acceptable residual
+  behaviour, and explained routing/reverse-flow behaviour.
 
 ## Evidence anchors
 
@@ -241,6 +266,12 @@ A useful Phase 7.1A result must include, for each controlled branch:
   and
 - a decision record separating genuine convergence improvement from merely
   loosening the residual criterion or hiding an imbalance in a global sum.
+- For any long-horizon branch testing H9, preserve the full inventory history
+  through at least the proposed `~4,000`-iteration maturity point where the
+  run remains numerically valid. If total liquid approaches `~2,000 kg`, treat
+  that as a candidate operating-point observation and assess whether the late
+  inventory slope and variability actually flatten; do not stop or promote the
+  branch because the mass value alone has been reached.
 
 ## Candidate experiment pool
 
@@ -264,6 +295,7 @@ screen has passed execution and is now at its bounded discovery-evidence gate.
 | C2-T4-DISPERSION | C2 — direct human phase-loop extension | Multiphase relative-velocity turbulence dispersion off to on | Does turbulent dispersion alter phase routing and absorber delivery? | Dispersion readback, residuals, phase routing, absorber/source balances, inventories, core figures | queued; not run |
 | C3 | H5/H6 — human-directed family screen | Steady pressure–velocity algorithm, with a selected model scaffold held fixed | Is continuity limited mainly by pressure correction and velocity coupling? | Coupling/Courant readback, continuity/momentum histories, balances, absorber delivery, warnings | No continuity improvement, immediate AMG instability, or confounded model changes | family selected; follow-on after turbulence screen |
 | C4 | H5/H6 — human-directed family screen | Spatial discretization, equation order, under-relaxation, or steady pseudo-time treatment | Can the selected model family be stabilized and then upgraded without changing its physical interpretation? | Scheme/relaxation readback, residual trajectory, order-ramp behaviour, balances, phase routing | Only an over-diffusive first-order endpoint survives, or higher order immediately re-diverges | family selected; follow-on after turbulence screen |
+| C3C4-COUPLED-GLOBAL-PSEUDO-TIME | H2/H5/H6 — direct human phase-loop extension | SIMPLE to pressure-based Coupled plus the Coupled-compatible steady Global Time Step / pseudo-time treatment | Can a stronger pressure-coupling and steady pseudo-time solver path bound the difficult active-1000 trajectory without changing absorber interpretation? | Coupling and pseudo-time readback, residuals, limiter/warning diagnostics, phase-resolved fluxes, source delivery, liquid and vapor inventories, reverse-flow evidence, paired checkpoints | Immediate AMG/FPE failure; nonstationary inventories despite longer endurance; loss of phase-selective routing; or unavailable live-supported controls | human-authorized discovery candidate; appended after T2-T4 queue; preflight required |
 | C5 | H5/H6 — human-directed family screen | Pressure-outlet reverse-flow specification, with the model and numerical scaffold fixed | Is the large reversed-flow region at the steam outlet feeding the residual instability? | Backflow readback, reversed-face behaviour, phase-resolved outlet fluxes, residuals, vapor/liquid routing | No stability improvement, or neighboring-cell backflow admits unacceptable liquid recirculation | family selected; follow-on after turbulence screen |
 | C6 | H5/H6 — human-directed family screen | Mesh/absorber-zone conditioning while preserving the bottom-only absorber concept | Is the source discontinuity or lower-zone resolution the remaining local conditioning problem? | Zone geometry, local mesh evidence, source density/integral, absorber-interface flux, residuals, balances | Improvement cannot be separated from changed absorber extent, or upper liquid is removed | family selected; late follow-on after turbulence screen |
 
@@ -470,6 +502,7 @@ Phase Loop from this context:
 | 9 | turbulence-family/t3-non-equilibrium-wall-functions/setup.md | C2-T3-NON-EQ | discovery | DISCOVERY_DESIGN |
 | 10 | turbulence-family/t4-k-second-order/setup.md | C2-T4-K2 | discovery | DISCOVERY_DESIGN |
 | 11 | turbulence-family/t4-multiphase-turbulence-dispersion/setup.md | C2-T4-DISPERSION | discovery | DISCOVERY_DESIGN |
+| 12 | solver-path-family/c3c4-coupled-global-pseudo-time/setup.md | C3C4-COUPLED-GLOBAL-PSEUDO-TIME | discovery | DISCOVERY_DESIGN extension |
 
 ## Autonomous recovery and handoff rules
 

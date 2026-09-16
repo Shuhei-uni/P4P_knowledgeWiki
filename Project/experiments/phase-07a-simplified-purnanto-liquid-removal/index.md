@@ -90,6 +90,14 @@ new [E5-CZ absorber-control family](cell-zone-absorber-control-family/index.md)
 is now planned with lower-zone feedback, fixed `G=2.00`, and three bounded
 source caps. It remains NOT_RUN pending a separate launch decision.
 
+On 2026-09-15 the human authorized a separate E6 localized pressure-boundary
+diagnostic. The design partitions the existing planar bottom into five
+mesh-supported radial bands, keeps the inner four as walls, and starts by
+opening only the outermost resolved band as a pressure outlet. See the
+[E6 localized radial-band pressure-outlet family](ringed-bottom-pressure-outlet-family/index.md).
+The family is design-ready but not placed or executed; its mesh catalogue and
+save/reopen capability gate remain mandatory.
+
 ## Phase question
 
 > What practical numerical mechanism can remove separated liquid from the

@@ -72,6 +72,14 @@ the frozen-settings continuation is therefore a repeatable numerical block.
 After Fluent was relaunched, a third exact restart reproduced the same failure
 on the new endpoint, confirming that the block is not tied to the prior Fluent
 session.
+On 2026-09-15 the human authorized a separate E6 localized bottom-boundary
+diagnostic: partition the existing planar bottom into reusable radial bands,
+retain the inner bands as walls, and start with the outermost resolved band as
+a pressure outlet. The [E6 design packet](experiments/phase-07a-simplified-purnanto-liquid-removal/ringed-bottom-pressure-outlet-family/index.md)
+records the five-band catalogue, the three reused E1 pressure points, and the
+hard disposable face-zone/save-reopen gate. It is design-ready but not placed
+or executed; the pressure outlet remains a phase-permissive diagnostic, not an
+assumed liquid-only drain.
 The new Phase 7.1A planning record is:
 
 - [Phase 7.1A convergence direction](experiments/phase-07-1a-absorber-convergence/index.md)
@@ -90,6 +98,16 @@ not run. The discovery-evidence gate remains blocked for a hypothesis route,
 and any continuation must preserve the exact parent and the queue's one-delta
 contract.
 
+The human has also raised a Phase 7.1A-specific long-horizon planning
+hypothesis from the current extended runs: steady-state assessment may not be
+meaningful until at least roughly `4,000` solver iterations, with a plausible
+separator operating inventory near `2,000 kg`. This is recorded as a maturity
+and operating-point marker—not as a generic Fluent requirement, a convergence
+criterion, or a physical conclusion. The steady-state gate remains conjunctive:
+late-window boundedness and slope, residual behaviour, phase-resolved and
+mixture mass closure including storage/source terms, and credible phase routing
+must all be demonstrated.
+
 For
 Andy's
 Phase 7b, a function-based ideal
@@ -106,6 +124,7 @@ records are:
 - [Shuhei's Phase 07A campaign design](experiments/phase-07a-simplified-purnanto-liquid-removal/fixed-mesh-treatment-screen/design.md)
 - [Shuhei's Phase 07A cell-zone recovery family](experiments/phase-07a-simplified-purnanto-liquid-removal/cell-zone-treatment-family/design.md)
 - [Shuhei's Phase 07A absorber-control family](experiments/phase-07a-simplified-purnanto-liquid-removal/cell-zone-absorber-control-family/index.md)
+- [Shuhei's Phase 07A localized radial-band pressure-outlet family](experiments/phase-07a-simplified-purnanto-liquid-removal/ringed-bottom-pressure-outlet-family/index.md)
 - [Andy's Phase 7b direction and boundaries](experiments/phase-07b-full-geometry-liquid-removal/index.md)
 - [Andy's Phase 7b planning context](experiments/phase-07b-full-geometry-liquid-removal/CONTEXT.md)
 - [Phase-06 human-directed conclusion](experiments/phase-06-full-geometry-with-brine-pool/conclusion.md)

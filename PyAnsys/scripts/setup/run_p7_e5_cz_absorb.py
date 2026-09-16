@@ -158,17 +158,26 @@ def configure_inventory_reports(solver: Any) -> dict[str, Any]:
         report.cell_zones = selections
         if field is not None:
             report.field = field
-        report.phase = phase
+        # Fluent 2025 R2 does not expose a writable phase selector on
+        # volume-integral definitions; the phase is encoded by the selected
+        # phase-specific field (for example phase-2-vof).  Volume-mass
+        # definitions do expose the selector and still require it.
+        if report_type != "volume-integral":
+            report.phase = phase
         for key, value in (
             ("per_selection", False),
             ("average_over", 1),
-            ("retain_instantaneous_values", True),
             ("create_report_file", True),
             ("create_report_plot", True),
         ):
             set_optional(report, key, value)
         state = safe_get_state(report, f"absorber report {name}")
-        if not isinstance(state, Mapping) or state.get("report_type") != report_type or state.get("cell_zones") != selections or state.get("phase") != phase:
+        if (
+            not isinstance(state, Mapping)
+            or state.get("report_type") != report_type
+            or state.get("cell_zones") != selections
+            or (report_type != "volume-integral" and state.get("phase") != phase)
+        ):
             raise RuntimeError(f"absorber report readback mismatch for {name}: {state}")
         if field is not None and state.get("field") != field:
             raise RuntimeError(f"absorber report field readback mismatch for {name}: {state}")
@@ -252,6 +261,17 @@ def redirect_all_reports(solver: Any, monitor_root: str, candidate: str) -> dict
         if not isinstance(actual, str) or PureWindowsPath(actual).name != PureWindowsPath(path).name:
             raise RuntimeError(f"report path readback mismatch for {name}: requested={path}; actual={actual!r}")
         paths[name] = path
+        state = safe_get_state(reports[name], f"report file definition links {name}")
+        definitions = state.get("report_defs") if isinstance(state, Mapping) else None
+        if isinstance(definitions, list):
+            for definition in definitions:
+                if isinstance(definition, str) and definition not in paths:
+                    # In Fluent 2025 R2, newly created volume-report monitor
+                    # objects may retain generated names (report-file-1, ...)
+                    # while their report_defs field carries the scientific
+                    # definition name.  Expose both keys so downstream
+                    # evidence checks can address either representation.
+                    paths[definition] = path
     return paths
 
 

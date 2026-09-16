@@ -20,6 +20,23 @@ context:
     - E5-CZ-ABSORB
     - E5-CZ-ABSORB-COLD
     - E5-CZ-ABSORB-COLD-CONT5000
+    - E6-RING-PO
+
+pending_designs:
+  - id: E6-RING-PO
+    origin: direct-human-request
+    authorized_at: 2026-09-15
+    status: DESIGN_AUTHORIZED_NOT_PLACED
+    design_path: ringed-bottom-pressure-outlet-family/design.md
+    first_pattern: outermost-resolved-radial-band-pressure-outlet
+    mesh_catalogue_path: ringed-bottom-pressure-outlet-family/mesh-catalogue/setup.md
+    initial_children:
+      - P7-E6-RING-OUTER-PO-P1120
+      - P7-E6-RING-OUTER-PO-P1160
+      - P7-E6-RING-OUTER-PO-P1200
+    execution_authority: not_yet_recorded
+    hard_gate: disposable-face-zone-capability-save-reopen-proof
+    claim_limit: localized-pressure-routing-diagnostic_only
 
 autonomy:
   experiment_selection: context_gated
@@ -1330,7 +1347,10 @@ next_required_action: >-
   BLOCK: F1/F2 are complete, F3 is partial because the vapor-inventory
   history was not configured, total liquid drift is positive, and residuals
   are finite but non-converged. Do not enter HYPOTHESIS_DEFINITION,
-  HYPOTHESIS_RUN_READY, or qualification; do not start a new experiment,
-  add an outlet, patch/reset fields, remesh, or invent an unbounded treatment.
-  Preserve the durable block and return the evidence-bounded result at the
-  recorded stop time.
+  HYPOTHESIS_RUN_READY, or qualification. The direct human request on
+  2026-09-15 authorizes E6-RING-PO design and setup preparation only; it does
+  not authorize autonomous placement or execution. Do not mutate a durable
+  parent, activate a pressure outlet, patch/reset fields, remesh, or invent an
+  unbounded treatment until the disposable face-zone capability packet passes
+  and a separate Phase Loop launch decision is recorded. Preserve the durable
+  block and return the evidence-bounded result at the recorded stop time.

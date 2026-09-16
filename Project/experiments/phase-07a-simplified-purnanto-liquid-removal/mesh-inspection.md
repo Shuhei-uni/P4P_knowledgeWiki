@@ -102,6 +102,35 @@ clean zone that can later receive an approved outlet treatment without a CAD
 change. The local structural inspection cannot prove that `y=0` corresponds
 to the physical plant pool elevation; that mapping remains human-reported.
 
+### Bottom radial-band survey for E6
+
+**Observed, local read-only HDF5 analysis on 2026-09-15.** The bottom-face
+centroid area-weighted centre is approximately `(x,z) =
+(0.000036,-0.000011) m`. The face-centroid radial coordinate is measured as
+`r = sqrt((x-xc)^2 + (z-zc)^2)`. The smallest observed radius is `0.377616 m`
+and the largest is `1.044660 m`, so the bottom is an annular, square-like
+cutoff rather than a filled circular disk.
+
+The following catalogue is a selection survey, not a Fluent face-zone split.
+It records the existing face rows that the E6 disposable capability test should
+attempt to name and preserve:
+
+| Target band | Radial interval [m] | Faces | Area [m²] |
+| --- | ---: | ---: | ---: |
+| `R01-inner` | `0.3776 ≤ r < 0.60` | `86` | `0.703555` |
+| `R02` | `0.60 ≤ r < 0.75` | `86` | `0.725761` |
+| `R03` | `0.75 ≤ r < 0.90` | `102` | `0.799562` |
+| `R04` | `0.90 ≤ r < 0.99` | `91` | `0.660073` |
+| `R05-outer` | `r ≥ 0.99` | `67` | `0.276031` |
+| **Total** | — | **432** | **3.164981** |
+
+The proposed first pressure-outlet candidate is `R05-outer`, the outermost
+resolved face row. It is a mesh-supported pseudo-ring, not an exact circular
+annulus: the outer row has a nominal radial width of roughly `0.055 m` from
+the maximum observed radius, but its centroid radii have a gap between about
+`0.990` and `1.041 m`. Actual Fluent post-split counts, areas, adjacency, and
+save/reopen topology remain authoritative.
+
 ### Corrected steam-outlet diameter
 
 **Observed and human-confirmed.** The new mesh's `steamoutlet` area is

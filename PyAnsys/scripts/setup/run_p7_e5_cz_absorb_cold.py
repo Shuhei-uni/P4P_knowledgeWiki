@@ -149,14 +149,25 @@ def run_discovery(
     manifest: dict[str, Any],
     manifest_path: Path,
     density_kg_m3: float,
+    save_initial: bool = True,
+    start_active: int = 0,
 ) -> None:
-    initial_event = schedule_update(solver, 0, density_kg_m3, manifest)
-    manifest["initial_schedule"] = initial_event
-    save_pair(solver, paths["child_start"])
-    manifest["events"].append({"event": "child_start_saved", "active_iteration": 0, "case": paths["child_start"]})
+    if start_active < 0 or start_active > HORIZON:
+        raise ValueError(f"invalid start_active={start_active}; horizon={HORIZON}")
+    if start_active:
+        initial_event = schedule_update(solver, start_active, density_kg_m3, manifest)
+        manifest["resume_schedule"] = initial_event
+    else:
+        initial_event = schedule_update(solver, 0, density_kg_m3, manifest)
+        manifest["initial_schedule"] = initial_event
+    if save_initial and start_active == 0:
+        save_pair(solver, paths["child_start"])
+        manifest["events"].append({"event": "child_start_saved", "active_iteration": 0, "case": paths["child_start"]})
+    else:
+        manifest["events"].append({"event": "child_start_reused", "active_iteration": start_active, "case": paths["child_start"]})
     write_json(manifest_path, manifest)
 
-    active = 0
+    active = start_active
     marker = capture.mark()
     while active < HORIZON:
         block = min(UPDATE_INTERVAL, HORIZON - active)
@@ -199,8 +210,9 @@ def run_discovery(
             save_pair(solver, paths[key])
 
     residuals = parse_residuals(capture.text_since(marker))
-    if residuals["point_count"] < HORIZON:
-        raise RuntimeError(f"cold-start residual history too short: {residuals['point_count']}")
+    required_points = HORIZON - start_active
+    if residuals["point_count"] < required_points:
+        raise RuntimeError(f"cold-start residual history too short: {residuals['point_count']} < {required_points}")
 
     histories: dict[str, Any] = {}
     for name in sorted(REQUIRED_REPORT_NAMES):
@@ -208,8 +220,8 @@ def run_discovery(
         if not remote_file_exists(solver, path):
             raise RuntimeError(f"required cold-start absorber report is missing after run: {path}")
         history = parse_report_forms(read_remote_forms(solver, path))
-        if history["points"] < HORIZON:
-            raise RuntimeError(f"cold-start report history too short for {name}: {history['points']}")
+        if history["points"] < required_points:
+            raise RuntimeError(f"cold-start report history too short for {name}: {history['points']} < {required_points}")
         histories[name] = {
             "points": history["points"],
             "first_iteration": history["iterations"][0],

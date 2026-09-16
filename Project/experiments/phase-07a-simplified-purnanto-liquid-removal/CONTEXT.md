@@ -11,7 +11,9 @@
   evidence. The lower cell-zone, phase-2-only absorber is the human-selected
   working liquid-removal path, but it is not physically qualified or shown to
   be numerically converged. The new convergence-focused work is recorded in
-  [Phase 7.1A](../phase-07-1a-absorber-convergence/).
+  [Phase 7.1A](../phase-07-1a-absorber-convergence/). A separately authorized
+  E6 localized radial-band pressure-outlet diagnostic is now designed, but no
+  Fluent placement or execution has been authorized yet.
 
 - **Historical execution authorization (2026-09-08):** the human explicitly
   directs the agent to attempt all 16 concrete setup packets currently
@@ -121,6 +123,7 @@ an E0 solve and not any proposed E1–E3 treatment.
 | H4 | Split the existing fluid zone into a lower cell zone and apply the liquid-removal source there as a numerical brine-pool absorber. | Tests whether Fluent's native zone-scoped source terms can recover the blocked E5 mechanism while preserving the same mesh coordinates/connectivity and allowing liquid to disappear locally without a bottom outlet. | human-approved follow-on discovery family on 2026-09-10 |
 | H5 | Continue G100 for `2,000` additional active iterations, reaching a total of `2,500`, before rejecting the mechanism. | Tests whether the positive 500-iteration inventory slope is only an early transient response or persists after the flow field evolves. | human-approved continuation completed on 2026-09-10; bounded result returned to the human with no automatic follow-on |
 | H6 | Treat the lower cell zone as an externally controlled brine-pool absorber: absorb liquid volumetrically after it reaches the lower region, leave vapor without a direct mass sink, and adapt the sink from lower-region inventory. | Tests whether the absorber concept is viable when source capacity and feedback are matched to the liquid actually present near the bottom, rather than only to total separator inventory. | human-approved absorber-control family on 2026-09-10; setup design authorized, Fluent launch still gated |
+| H7 | Partition the existing planar bottom into several radial bands, retain the inner bands as walls, and expose the thin outermost band as a pressure outlet first. | Tests whether spatially localizing the full-bottom pressure outlet changes vapor shortcut, lower-region routing, and numerical survivability while preserving a wall over most of the cutoff plane. | human-approved localized pressure-routing diagnostic on 2026-09-15; mesh catalogue and face-zone capability proof required before execution |
 
 The human also supports comparing a range of distinct methods rather than
 committing immediately to one mechanism. The original first campaign kept the
@@ -128,8 +131,20 @@ supplied mesh unchanged and worked within H2. That campaign has now supplied
 the relevant fixed-mesh evidence and exposed E5's region-specific source
 limitation. The human has therefore approved a follow-on `E5-CZ` direction in
 which the supplied mesh may be split into a lower fluid cell zone. H1 and H3
-remain separate human-originated directions and are not being opened by this
-decision.
+remain separate human-originated directions and are not being opened as
+arbitrary geometry changes by this decision. On 2026-09-15 the human
+explicitly reopened the localized H1/H2 sub-direction recorded as `E6-RING-PO`:
+the existing bottom may be partitioned into reusable radial bands, with only
+the outermost resolved band exposed as a pressure outlet in the first pattern.
+This exception does not authorize arbitrary holes, remeshing, lower-geometry
+changes, or execution before the disposable face-zone capability test passes.
+
+The E6 design and setup packets are recorded in
+[ringed-bottom-pressure-outlet-family](ringed-bottom-pressure-outlet-family/index.md).
+The outer-band pressure matrix reuses the already human-approved E1 values
+`1.120`, `1.160`, and `1.200 MPa` gauge so that the new spatial topology can be
+compared directly with E1. The values remain boundary-condition probes, not
+identified physical bottom pressures.
 
 The human has clarified that E5-CZ is intended to imitate a brine pool whose
 surface is held by an external component. It is not intended to imitate a
@@ -321,6 +336,16 @@ consistently and report every explicit mass/momentum source contribution.
   must be compared against the unsplit pair before the result is used as a
   family parent. Generated adjacent face zones are part of the recorded
   topology delta.
+- The explicitly approved H7 ring branch may partition the existing `bottom`
+  face zone into named radial bands, but it must not overwrite the supplied
+  mesh or silently become a CAD/remeshing change. The initial catalogue uses
+  the existing square-annular face resolution and treats the outermost
+  resolved row as the thin outer ring. A face-zone capability test, global
+  mesh-invariant check, and save/reopen proof are required before any pressure
+  outlet is activated.
+- H7 is a boundary-topology contrastive diagnostic, not a replacement for the
+  E5 absorber interpretation. A pressure outlet is not assumed to be
+  liquid-selective; ring liquid and vapor fluxes must be reported separately.
 - The H4 native source family must distinguish phase-specific mass from
   mixture-level momentum source capabilities. It may not claim the old
   local-mass-weighted liquid/momentum UDF law unless that law is separately
@@ -429,10 +454,13 @@ remain human-unconfirmed.
 | E5-PSINK | H2 — human-selected phase-selective variant | From E0 iteration 500, apply the same approved adaptive law at `G=0.25`, `0.50`, or `1.00` as an explicitly accounted continuous-liquid-only sink in the frozen `0≤y≤0.10 m` fluid-cell region. | Can a deliberately artificial liquid-only actuator reduce inventory drift without hiding conservation or destabilizing the carrier solution? | E4 evidence plus sink-region identity, selected cells/volume, `M*`, `ΔMref`, error/command, realized liquid removal, associated momentum removal, total inventory, phase balances, and proof of zero direct vapor sink. | Invalid/nonpositive normalization, unaccounted mass/momentum removal, region drift, source saturation, numerical instability, or balance inconsistency. | initial three tunings, bounded fourth rule, controller law, region, activation state, and 500→2,000 active protocol human-approved |
 | E5-CZ | H4/H6 — human-approved cell-zone brine-pool absorber | Starting from the exact E0 iteration-500 checkpoint, split the supplied single fluid zone by the frozen `0≤y≤0.10 m` register into a lower fluid zone, then apply a native zone-scoped phase-2 mass source with matched mixture-momentum accounting at `G=0.25`, `0.50`, or `1.00`. The lower zone represents an externally controlled brine pool; it is not an outlet. | Does native zone separation recover a usable, auditable liquid-absorber route in which lower-region liquid can disappear without a direct vapor sink, and how sensitive is the response to source capacity and gain? | Split invariants; lower-zone cell count/volume; phase-2 mass-source readback; mixture momentum-source readback; zero phase-1 mass source; integrated user sources; nested lower-region liquid inventory; phase-resolved balances; residuals; commands; vapor response; and generated face-zone topology. Bottom phase-2 boundary flux is a supporting diagnostic, not a required removal path for this abstraction. | In-place split fails or changes mesh metrics; source tree cannot be bound to the lower zone; momentum coupling is unaccounted; source saturates or destabilizes; lower-region and total inventories remain positively unbounded; vapor is directly removed or materially disturbed; or apparent closure is source-dominated/open. | human-approved follow-on family and three-setting discovery screen on 2026-09-10; future high-capacity/local-feedback extension requires a separate setup decision |
 | E5-CZ-ABSORB | H6 — human-approved absorber-control extension | Starting from the exact verified G100 active-2,500 pair, preserve the lower cell-zone absorber but replace the total-inventory feedback with a parent-relative lower-zone phase-2 inventory signal at fixed `G=2.00`; compare only the predeclared command caps `146.15`, `292.30`, and `584.60 kg/s`. No outlet is introduced. | Can a high-capacity, lower-inventory-controlled absorber pull the accumulated lower liquid toward a bounded numerical pool target while keeping direct vapor absorption at zero and avoiding source-dominated or unstable behaviour? | Parent active-2,500 readback; lower-zone and nested-band liquid inventories; parent-relative target/error provenance; command/cap/saturation history; phase-2 get_sum source audit; zero direct phase-1 source; mixture-momentum source; vapor inventory/flux; phase and mixture balances; residuals; warnings; and paired checkpoints. | Parent cannot be proven; target rule is not reproducible; source cap remains saturated without useful lower-inventory response; lower and total inventories remain positively drifting; vapor is directly removed or materially disturbed; source/momentum audit is incomplete; or high-capacity settings destabilize the carrier solution. | human-approved family design on 2026-09-10; explicit Phase Loop launch entered in this chat; three discovery children queued in orders 24–26 |
+| E6-RING-PO | H7 — direct human request on 2026-09-15 | Split the existing planar `bottom` into five named radial bands; retain R01–R04 as walls and convert only the thin outermost resolved band R05 to a pressure outlet at `1.120`, `1.160`, or `1.200 MPa` gauge. | Does spatially localized bottom discharge change E1’s vapor shortcut and numerical failure behaviour while allowing liquid reaching the outer lower region to leave? | Disposable face-zone capability proof; per-band counts/areas/plane/adjacency; unchanged global mesh invariants; save/reopen topology readback; per-ring total/liquid/vapor flux; reverse flow; pressure/velocity at wall/outlet junctions; lower and total inventories; phase-resolved closure; residuals; warnings; and matched E0/E1 comparisons. | Face split cannot be proven; ring is too jagged or changes mesh metrics; unselected bands do not remain walls; apparent inventory improvement is vapor-dominated; outlet flux is negligible; reverse flow or FPE dominates; or the response is not persistent over the discovery window. | human-approved design on 2026-09-15; setup packets prepared, mesh catalogue and Fluent capability proof required before placement; no queue execution authorization yet |
 
-H1 bottom holes and H3 lower-geometry changes remain deferred human ideas and
-are not executable candidates in the original campaign. H4 is the separate
-approved follow-on candidate recorded above.
+Arbitrary H1 bottom holes and H3 lower-geometry changes remain deferred human
+ideas and are not executable candidates. The explicitly authorized E6 branch
+is the narrower reusable radial-band diagnostic recorded above; it remains
+blocked from placement until its disposable face-zone capability proof passes.
+H4 is the separate approved absorber follow-on candidate recorded above.
 
 ## Approved follow-on: E5-CZ cell-zone family
 
