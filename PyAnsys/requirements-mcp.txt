@@ -1,0 +1,6 @@
+# Reviewed upstream source; upgrades require offline contract + live acceptance tests.
+# Python >=3.12. Install in the same environment as P4P workers.
+ansys-fluent-mcp @ git+https://github.com/ansys/pyfluent-mcp.git@65de7c8226d1382c9620f11fac32def059a48e79
+ansys-common-mcp==0.3.3
+ansys-fluent-core==0.42.0
+python-dotenv

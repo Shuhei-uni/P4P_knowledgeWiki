@@ -1,26 +1,31 @@
 #!/usr/bin/env python3
-"""Reusable remote Fluent connection helpers."""
+"""Endpoint resolution for MCP and reviewed deterministic P4P workers.
 
+Connections are attach-only. The MCP owns generic discovery and generated
+execution; existing domain workers retain this narrow transport seam.
+"""
 from __future__ import annotations
 
 import argparse
 import os
 from pathlib import Path
 import socket
-import subprocess
-import tempfile
-import time
+import sys
 
-from pyansys_fluent.common import bool_env
+from pyansys_fluent.mcp_policy import SessionPolicyError
 
 try:
     from dotenv import load_dotenv
-except ModuleNotFoundError:  # pragma: no cover - local convenience fallback
+except ModuleNotFoundError:
     def load_dotenv(*_args, **_kwargs) -> bool:
         return False
 
-
 _ENV_FILE = Path(__file__).resolve().parents[2] / ".env"
+
+
+def _bool_env(name: str, default: bool) -> bool:
+    value = os.getenv(name)
+    return default if value is None else value.strip().lower() in {"1", "true", "yes", "on"}
 
 
 def env_suffix(server_id: str | int | None) -> str:
@@ -30,13 +35,6 @@ def env_suffix(server_id: str | int | None) -> str:
 
 
 def endpoint_env_namespace(server_id: str | int | None) -> tuple[str, str, str]:
-    """Return display label, environment prefix, and numeric suffix for an endpoint.
-
-    ``student`` is a named routing alias for the Windows Student Edition pool.
-    It reads ``STUDENT_*`` variables directly, while all existing numeric aliases
-    retain their ``FLUENT_*`` variable names and suffixes.
-    """
-
     normalized = str(server_id or "1").strip().lower()
     if normalized == "student":
         return "student", "STUDENT", ""
@@ -46,234 +44,82 @@ def endpoint_env_namespace(server_id: str | int | None) -> tuple[str, str, str]:
 
 def float_env(name: str, default: float) -> float:
     value = os.getenv(name)
-    if value is None or value.strip() == "":
-        return default
-    return float(value)
+    return default if value is None or not value.strip() else float(value)
 
 
 def tcp_preflight(ip: str, port: int, timeout_seconds: float) -> None:
-    """Check the configured TCP endpoint when a positive timeout is supplied."""
     if timeout_seconds <= 0:
         return
     try:
         with socket.create_connection((ip, port), timeout=timeout_seconds):
             return
     except OSError as exc:
-        raise TimeoutError(
-            f"TCP preflight failed for the configured server after {timeout_seconds:.1f}s. "
-            "Check that Fluent is still running, the gRPC port is current, and the "
-            "server firewall allows inbound TCP on that port."
-        ) from exc
+        raise TimeoutError("Fluent endpoint is unreachable; reconcile the fleet before reconnecting.") from exc
 
 
-def _launch_local_fluent(
-    *,
-    suffix: str,
-    insecure_mode: bool,
-    start_transcript: bool = True,
-):
-    import ansys.fluent.core as pyfluent
-
-    exe = os.getenv(f"FLUENT_LOCAL_EXE{suffix}", "").strip()
-    if not exe:
-        raise RuntimeError("Local Fluent launch requested without FLUENT_LOCAL_EXE configured.")
-
-    dimension = os.getenv(f"FLUENT_LOCAL_DIMENSION{suffix}", os.getenv("FLUENT_LOCAL_DIMENSION", "3")).strip() or "3"
-    precision = os.getenv(f"FLUENT_LOCAL_PRECISION{suffix}", os.getenv("FLUENT_LOCAL_PRECISION", "double")).strip() or "double"
-    processor_count = int(
-        os.getenv(
-            f"FLUENT_LOCAL_PROCESSOR_COUNT{suffix}",
-            os.getenv("FLUENT_LOCAL_PROCESSOR_COUNT", "2"),
-        ).strip()
-        or "2"
-    )
-    gui = bool_env(f"FLUENT_LOCAL_GUI{suffix}", bool_env("FLUENT_LOCAL_GUI", False))
-    startup_timeout = int(
-        os.getenv(
-            f"FLUENT_LOCAL_STARTUP_TIMEOUT{suffix}",
-            os.getenv("FLUENT_LOCAL_STARTUP_TIMEOUT", "120"),
-        ).strip()
-        or "120"
-    )
-
-    output_dir = Path(
-        os.getenv(
-            f"FLUENT_LOCAL_OUTPUT_DIR{suffix}",
-            os.getenv("FLUENT_LOCAL_OUTPUT_DIR", tempfile.gettempdir()),
-        )
-    ).expanduser()
-    output_dir.mkdir(parents=True, exist_ok=True)
-
-    server_info = output_dir / f"serverinfo-local{suffix or '1'}.txt"
-    stdout_log = output_dir / f"fluent-local{suffix or '1'}-stdout.log"
-    stderr_log = output_dir / f"fluent-local{suffix or '1'}-stderr.log"
-    if server_info.exists():
-        server_info.unlink()
-
-    launch_args = [
-        exe,
-        f"{dimension}ddp",
-        f"-t{processor_count}",
-    ]
-    if not gui:
-        launch_args.append("-g")
-    launch_args.append(f"-sifile={server_info}")
-
-    print(f"Launching local Fluent {suffix or '1'} via executable: {exe}")
-    print(f"Local Fluent args: {launch_args}")
-
-    process = subprocess.Popen(
-        launch_args,
-        stdin=subprocess.DEVNULL,
-        stdout=stdout_log.open("w", encoding="utf-8", errors="replace"),
-        stderr=stderr_log.open("w", encoding="utf-8", errors="replace"),
-        cwd=str(output_dir),
-        text=True,
-        start_new_session=True,
-    )
-
-    deadline = time.time() + startup_timeout
-    while time.time() < deadline:
-        if server_info.exists() and server_info.stat().st_size > 0:
-            print(f"Local Fluent server-info ready: {server_info}")
-            session = pyfluent.connect_to_fluent(
-                server_info_file_name=str(server_info),
-                allow_remote_host=False,
-                cleanup_on_exit=False,
-                start_transcript=start_transcript,
-                insecure_mode=insecure_mode,
-            )
-            setattr(session, "_codex_local_fluent_process", process)
-            setattr(session, "_codex_local_fluent_server_info", str(server_info))
-            setattr(session, "_codex_local_fluent_stdout_log", str(stdout_log))
-            setattr(session, "_codex_local_fluent_stderr_log", str(stderr_log))
-            return session
-        if process.poll() is not None:
-            raise RuntimeError(
-                f"Local Fluent exited early with code {process.returncode}. "
-                f"stdout={stdout_log} stderr={stderr_log}"
-            )
-        time.sleep(2)
-
-    raise TimeoutError(
-        f"Timed out waiting for local Fluent server-info file: {server_info}. "
-        f"stdout={stdout_log} stderr={stderr_log}"
-    )
-
-
-def connect(
+def resolve_connection_kwargs(
     server_id: str | int | None = None,
     *,
     start_transcript: bool | None = True,
     tcp_timeout_seconds: float | None = None,
-):
-    """Connect to a configured Fluent endpoint.
+) -> dict:
+    """Resolve existing endpoint configuration without launching or loading Fluent.
 
-    ``start_transcript`` defaults to ``True`` to preserve existing callers. A
-    quiet status client can disable transcript streaming and opt in later when
-    it explicitly wants console output. Passing ``None`` reads the endpoint's
-    ``*_STREAM_TRANSCRIPT`` environment setting instead.
-
-    TCP preflight is opt-in through ``tcp_timeout_seconds`` or the endpoint's
-    ``*_TCP_PREFLIGHT_TIMEOUT_SECONDS`` setting; its default is zero (disabled).
-    It applies only to IP/port connections, not server-info files or local launch.
+    Contains credentials: do not write the returned mapping to logs or evidence.
+    Server-info paths are local to the MCP/worker host, not necessarily Fluent.
     """
     load_dotenv(_ENV_FILE)
-    import ansys.fluent.core as pyfluent
-
-    label, env_prefix, suffix = endpoint_env_namespace(server_id)
-    server_info_key = f"{env_prefix}_SERVER_INFO_FILE{suffix}"
-    ip_key = f"{env_prefix}_IP{suffix}"
-    port_key = f"{env_prefix}_PORT{suffix}"
-    password_key = f"{env_prefix}_PASSWORD{suffix}"
-    local_exe_key = f"{env_prefix}_LOCAL_EXE{suffix}"
-    allow_remote_host_key = f"{env_prefix}_ALLOW_REMOTE_HOST{suffix}"
-    insecure_mode_key = f"{env_prefix}_INSECURE_MODE{suffix}"
-
-    server_info = os.getenv(server_info_key, "").strip()
-    ip = os.getenv(ip_key, "").strip()
-    port = os.getenv(port_key, "").strip()
-    password = os.getenv(password_key, "").strip()
-    local_exe = os.getenv(local_exe_key, "").strip()
-    allow_remote_host = bool_env(
-        allow_remote_host_key,
-        bool_env("FLUENT_ALLOW_REMOTE_HOST", True),
-    )
-    insecure_mode = bool_env(
-        insecure_mode_key,
-        bool_env("FLUENT_INSECURE_MODE", False),
-    )
+    label, prefix, suffix = endpoint_env_namespace(server_id)
+    key = lambda name: f"{prefix}_{name}{suffix}"
+    server_info = os.getenv(key("SERVER_INFO_FILE"), "").strip()
+    ip = os.getenv(key("IP"), "").strip()
+    port = os.getenv(key("PORT"), "").strip()
+    password = os.getenv(key("PASSWORD"), "").strip()
     if start_transcript is None:
-        start_transcript = bool_env(
-            f"{env_prefix}_STREAM_TRANSCRIPT{suffix}",
-            bool_env("FLUENT_STREAM_TRANSCRIPT", True),
-        )
-
+        start_transcript = _bool_env(key("STREAM_TRANSCRIPT"), _bool_env("FLUENT_STREAM_TRANSCRIPT", True))
     common = {
-        "allow_remote_host": allow_remote_host,
+        "allow_remote_host": _bool_env(key("ALLOW_REMOTE_HOST"), _bool_env("FLUENT_ALLOW_REMOTE_HOST", True)),
         "cleanup_on_exit": False,
         "start_transcript": start_transcript,
-        "insecure_mode": insecure_mode,
+        "insecure_mode": _bool_env(key("INSECURE_MODE"), _bool_env("FLUENT_INSECURE_MODE", False)),
     }
-
     if server_info:
         path = Path(server_info).expanduser()
-        if not path.exists():
-            raise FileNotFoundError(f"{server_info_key} does not exist: {path}")
-        print(f"Connecting to Fluent server {label} using server-info file: {path}")
-        return pyfluent.connect_to_fluent(server_info_file_name=str(path), **common)
-
+        if not path.is_file():
+            raise FileNotFoundError(f"Configured {key('SERVER_INFO_FILE')} is not a file.")
+        return {"server_info_file_name": str(path), **common}
     if not (ip and port and password):
-        if local_exe:
-            if env_prefix != "FLUENT":
-                raise RuntimeError(
-                    f"Local launch is not supported for the named {label!r} endpoint. "
-                    "Use a numbered FLUENT_* endpoint for FLUENT_LOCAL_EXE."
-                )
-            return _launch_local_fluent(
-                suffix=suffix,
-                insecure_mode=insecure_mode,
-                start_transcript=start_transcript,
-            )
-        local_launch_note = (
-            f" Or set {local_exe_key} for local manual launch."
-            if env_prefix == "FLUENT"
-            else ""
-        )
+        if os.getenv(key("LOCAL_EXE"), "").strip():
+            raise SessionPolicyError("Automatic Fluent launch is disabled. Attach to an existing session.")
         raise RuntimeError(
-            f"Missing connection details for Fluent server {label}. Set either "
-            f"{server_info_key} or {ip_key}, {port_key}, and {password_key} in .env."
-            f"{local_launch_note}"
+            f"Missing connection details for Fluent server {label}. Set {key('SERVER_INFO_FILE')} "
+            f"or {key('IP')}, {key('PORT')}, and {key('PASSWORD')} in PyAnsys/.env."
         )
-
+    port_number = int(port)
+    if not 1 <= port_number <= 65535:
+        raise ValueError("Fluent port must be between 1 and 65535.")
     if tcp_timeout_seconds is None:
-        tcp_timeout_seconds = float_env(
-            f"{env_prefix}_TCP_PREFLIGHT_TIMEOUT_SECONDS{suffix}",
-            float_env("FLUENT_TCP_PREFLIGHT_TIMEOUT_SECONDS", 0.0),
-        )
-    # Keep endpoint credentials out of routine connection transcripts.
-    print(f"Connecting to configured Fluent server {label} using IP/port credentials.")
-    tcp_preflight(ip, int(port), tcp_timeout_seconds)
-    return pyfluent.connect_to_fluent(
-        ip=ip,
-        port=int(port),
-        password=password,
-        **common,
-    )
+        tcp_timeout_seconds = float_env(key("TCP_PREFLIGHT_TIMEOUT_SECONDS"), float_env("FLUENT_TCP_PREFLIGHT_TIMEOUT_SECONDS", 0.0))
+    tcp_preflight(ip, port_number, tcp_timeout_seconds)
+    return {"ip": ip, "port": port_number, "password": password, **common}
+
+
+def _launch_local_fluent(**_kwargs):
+    """Compatibility failure for old launch callers; never start a process."""
+    raise SessionPolicyError("Automatic Fluent launch is disabled. Attach to an existing session.")
+
+
+def connect(server_id: str | int | None = None, *, start_transcript: bool | None = True,
+            tcp_timeout_seconds: float | None = None):
+    kwargs = resolve_connection_kwargs(server_id, start_transcript=start_transcript,
+                                       tcp_timeout_seconds=tcp_timeout_seconds)
+    import ansys.fluent.core as pyfluent
+    label, _, _ = endpoint_env_namespace(server_id)
+    print(f"Attaching to configured Fluent server {label}; session will be preserved.", file=sys.stderr)
+    return pyfluent.connect_to_fluent(**kwargs)
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(
-        description="Connect to one configured Fluent gRPC server and run non-mutating health checks."
-    )
-    parser.add_argument(
-        "--server-id",
-        default="1",
-        help=(
-            "Connection alias selecting the configured Fluent endpoint. "
-            "It does not identify the case loaded in that session. "
-            "Use 1 for FLUENT_IP, 2 for FLUENT_IP2, 3 for FLUENT_IP3, "
-            "4 for FLUENT_IP4, or student for STUDENT_IP."
-        ),
-    )
+    parser = argparse.ArgumentParser(description="Attach to an existing Fluent endpoint; never launch or terminate it.")
+    parser.add_argument("--server-id", default="1", help="Transport alias: 1, 2, 3, 4, or student. Not case identity.")
     return parser
