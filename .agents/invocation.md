@@ -1,155 +1,51 @@
 # Skill invocation policy
 
-P4P skills use three active invocation classes plus a retired/unrouted state.
+Keep the skill surface small. A new skill is justified by a distinct invocation
+boundary, not by a new sub-step.
 
-The purpose of this policy is to keep human decision boundaries explicit while still allowing the scientific loop to compose narrow specialist skills automatically.
+## Human-only
 
-## 1. Human-only
+These exist because the human must deliberately enter them:
 
-Human-only skills are top-level human entry points or conversational controls. They may be invoked explicitly by the human, but the model must not start them implicitly.
+- `phase-planner` — frame or reframe the scientific phase;
+- `wait-what` — request a clearer re-pitch;
+- `direct-fluent-use` — direct local Fluent start/close control.
 
-For a human-only skill, keep both controls aligned. Cursor reads only the
-`SKILL.md` flag. Codex also reads `agents/openai.yaml`. Do not set one without
-the other.
+Use `disable-model-invocation: true` and
+`policy.allow_implicit_invocation: false` for these.
 
-```yaml
-# SKILL.md frontmatter (Cursor and Codex)
-disable-model-invocation: true
-```
+## Hybrid
 
-```yaml
-# agents/openai.yaml (Codex UI / policy; Cursor ignores this file)
-policy:
-  allow_implicit_invocation: false
-```
+These may be invoked explicitly or reached naturally from active work:
 
-Human invocation is `/skill-name` in Cursor and `$skill-name` in Codex.
+- `phase-loop` — owns the complete scientific experiment loop;
+- `workflow-surgeon` — repairs the agent workflow when a real defect appears.
 
-Current human-only skills:
+## Model-invoked workflows
 
-- `phase-planner` — the human phase-level catch-up and direction-setting boundary.
-- `wait-what` — a human-triggered conversational reset that re-pitches an explanation when it did not land.
-- `direct-fluent-use` — explicit terminal/PyFluent control restricted to the designated Windows workstation and pinned Fluent 2025 R2 Student Edition.
-
-A human-only skill may call model-invoked or hybrid skills after the human has supplied the necessary decision or boundary. It should not be entered merely because an agent thinks it would be useful.
-
-## 2. Hybrid
-
-Hybrid skills may be invoked explicitly by the human or implicitly by another skill/model when their stated preconditions are satisfied.
-
-Do not set `disable-model-invocation: true` or `allow_implicit_invocation: false` on a hybrid skill.
-
-Current hybrid skills:
-
-- `phase-loop` — may be started directly by the human with a defined setup
-  queue, or handed off from `phase-planner` only after the human explicitly
-  selects its ❗❗❗ launch option 1️⃣ or 2️⃣.
-- `auto-loop` — may be started directly by the human with a bounded autonomy
-  profile, or entered from a completed Phase Loop when that profile was
-  frontloaded at entry.
-- `workflow-surgeon` — may be invoked explicitly by the human, or implicitly when a concrete repeated workflow defect or clearly identifiable workflow failure satisfies its trigger conditions.
-
-Hybrid preserves hard evidence gates, but a running loop does not return to the
-human for ordinary blockers. It applies the autonomous-recovery contract,
-records assumptions or durable blocks, and continues valid work inside its
-timebox and phase envelope.
-
-## 3. Model-invoked specialists
-
-These are narrow, composable disciplines and execution helpers. The model and calling skills should select them automatically when their applicability conditions are met. A human may still explicitly invoke one for a focused task, but they are not primary human workflow boundaries.
-
-Current model-invoked specialists:
-
-- `arena`
-- `bold-probe-research`
+- `pyansys-workflow`
 - `cfd-numerical-analysis`
 - `cfd-wiki`
-- `check-phase-closure`
-- `create-figure`
-- `create-setup`
-- `design-experiment`
-- `dpm-analysis`
-- `ewf-analysis`
-- `explore-experiment-space`
-- `fluent-case-build-and-run`
-- `fluent-fleet-orchestration`
-- `fluent-live-inspection`
-- `fluent-manual-researcher`
-- `fluent-report-histories`
-- `implement-experiment`
-- `interpret-experiment`
-- `interrogate`
-- `next-action`
-- `pool-patch-volume`
-- `phase-grill`
-- `pyansys-workflow`
-- `question-experiment`
-- `reflect`
 - `report-writing`
-- `residual-history-analysis`
-- `show-me-your-work`
-- `statistical-analysis`
-- `supervise-fluent-run`
-- `swarm`
-- `verify-phase-transition`
+- `writing-for-agents`
 
-Use the smallest applicable specialist. Supporting skills should hand control back to the calling workflow rather than silently taking over the scientific direction.
+These descriptions should name the trigger clearly and stay short.
 
-### Mandatory scientific phase lifecycle
+## Structure rule
 
-When `phase-loop` or `auto-loop` is active, its lifecycle is mandatory rather than advisory:
+Do not create separate skills for inspection, setup compilation, run
+supervision, residual analysis, DPM/EWF analysis, experiment review, phase gates,
+or similar branches. Put that material under the owning workflow's
+`references/` directory and disclose it only when that branch is reached.
 
-```text
-PHASE_CONTRACT
-→ DISCOVERY_DESIGN
-→ DISCOVERY_EXECUTION / DISCOVERY_EVIDENCE
-→ HYPOTHESIS_DEFINITION
-→ HYPOTHESIS_RUN_READY
-→ HYPOTHESIS_EXECUTION / HYPOTHESIS_EVIDENCE
-→ PHASE_CLOSURE
-```
+Historical records may still mention retired names such as `auto-loop`,
+`phase-grill`, `verify-phase-transition`, or
+`fluent-manual-researcher`. Treat those as provenance, not active invocation
+targets.
 
-Every state-changing transition must invoke `verify-phase-transition`. A `BLOCK`
-may not be self-overruled by the scientific loop or another specialist; it
-starts autonomous recovery under `.agents/skills/references/autonomous-recovery.md`.
+## Human gates
 
-Normal autonomous `CONCLUDE PHASE` is illegal until the verified discovery-to-hypothesis lifecycle has completed. A human may explicitly terminate/reframe a phase earlier.
-
-Discovery stays attached to the active scientific goal through terminal execution evidence. A long Codex hypothesis qualification uses the exact-thread self-waking supervisor path and resumes the same active loop. `phase-state.yaml` is the machine-readable lifecycle authority after interruption or wakeup.
-
-`phase-grill` is the only workflow step that may turn human thinking into
-human-approved candidates. `phase-loop`, `design-experiment`, and
-`create-setup` execute/formalize only those defined setup routes. `auto-loop`
-may generate cases only inside its recorded family, direction, horizon, and
-timebox envelope; it records `origin: auto-loop` rather than human approval.
-Both loops use the same execution and evidence gates. `bold-probe-research` is
-research support, not authority to run a case by itself.
-
-For Fluent configuration uncertainty, use `fluent-live-inspection` first when the active live tree can resolve the path, object, state, or allowed value directly. Escalate automatically to `fluent-manual-researcher` when the live tree alone cannot safely determine the setting's meaning, prerequisites, activation order, or verifiable PyFluent/TUI implementation path. Do not guess a Fluent configuration from memory or copy a recipe from another model/version merely to keep implementation moving.
-
-## 4. Retired / unrouted
-
-These skill directories remain in the repository for now but belong to superseded architecture and must not be selected as active workflow authorities:
-
-- `post-simulation-analysis`
-- `research-project-wiki`
-- `setup-report`
-
-Keep `disable-model-invocation: true` on each retired skill so Cursor does not
-auto-apply it from the description. Codex should keep
-`allow_implicit_invocation: false` when that skill has `agents/openai.yaml`.
-
-The current root `AGENTS.md` routing to `Project/`, `CFD_wiki/`, and `PyAnsys/` takes precedence. Remove or migrate these retired skills in a dedicated cleanup rather than reviving their old `Setups/` or `ResearchProject_wiki/` structures.
-
-## Selection rule
-
-When a task arrives:
-
-1. Respect explicit human invocation first.
-2. Never enter a human-only skill implicitly.
-3. A hybrid skill may be entered implicitly only when its documented preconditions are already satisfied.
-4. Otherwise select the smallest relevant model-invoked specialist and return its result to the calling workflow.
-5. Do not select retired/unrouted skills.
-6. While either loop is active, no specialist may bypass or retroactively waive a required `verify-phase-transition` gate.
-
-The policy controls who may start a workflow and, for the scientific phase lifecycle, which independent gate must authorize state changes. Scientific, implementation, execution, analysis, and human-gate responsibilities remain defined by each skill and the repository guides.
+Human input is not a routine execution gate. Active workflows recover ordinary
+technical and scientific blockers autonomously inside the recorded phase scope.
+Return to the human only for a scope/goal change, an unauthorized irreversible
+external action, or an actually human-owned judgement.
