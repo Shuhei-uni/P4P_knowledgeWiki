@@ -1,4 +1,4 @@
 interface:
   display_name: "PyAnsys Workflow"
-  short_description: "Use PyAnsys automation safely."
-  default_prompt: "Use $pyansys-workflow to inspect or edit PyFluent automation safely."
+  short_description: "Inspect, build, run, or recover Fluent work."
+  default_prompt: "Use $pyansys-workflow for the Fluent/PyFluent implementation required by the active experiment."
