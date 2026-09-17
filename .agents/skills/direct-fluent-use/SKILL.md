@@ -75,13 +75,10 @@ gRPC connection rather than trying to infer an endpoint from internal Fluent
 ports. The PyFluent launcher may remove temporary server-info files when its
 controller exits, making later attachment unreliable.
 
-After connecting or launching, inspect the live session before acting. When the
-preserved server-info handoff is configured for P4P, use MCP `session_status`,
-`solver_status`, and targeted state for generic status and unfamiliar-tree
-inspection; keep the authenticated driver for the explicitly approved direct
-operation. Record the reported Fluent version and the actually loaded case/data
-identity when available; never infer case identity from a server id, process id,
-or an old session.
+After connecting or launching, inspect the live session before acting. Record
+the reported Fluent version and the actually loaded case/data identity when
+available; never infer case identity from a server id, process id, or an old
+session.
 
 ## Common direct operations
 
@@ -108,9 +105,9 @@ Fluent-specific inspection/manual workflow instead of guessing an API path.
 ## Lifecycle and failure handling
 
 Keep a launched Fluent session running across normal follow-up operations,
-including case replacement and simple setting changes. On a solver error, use
-MCP status when the preserved handoff is configured, then reconcile the direct
-operation's receipt/readback before deciding whether recovery is possible.
+including case replacement and simple setting changes. On a solver error,
+probe the authenticated session for version, responsiveness, and iteration
+state before deciding whether recovery is possible.
 
 End a Fluent session only after the user explicitly requests it. When ending
 one, identify the exact pinned Fluent process tree first, stop only that tree,
