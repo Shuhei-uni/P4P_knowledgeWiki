@@ -102,6 +102,11 @@ check which configured servers are actually reachable and usable now, which are
 busy, and which exact paired case/data artifacts are available on each machine
 or through OneDrive.
 
+For each alias, use MCP `session_status` and `solver_status` as the authoritative
+generic session/solver observation. TCP or process checks diagnose routing only;
+do not convert their failure into a claim that Fluent stopped. Reconcile MCP
+status with run manifests and artifact evidence before acting on a busy session.
+
 Do not assume a server is available because it was used earlier in the phase.
 Do not assume a parent exists on every server. Repeat live preflight whenever a
 new compute cycle starts or server availability materially changes.

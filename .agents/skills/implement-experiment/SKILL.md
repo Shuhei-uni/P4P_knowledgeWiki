@@ -150,7 +150,7 @@ Do not:
 - require a human message to resume;
 - interpret an RPC/tool timeout as run completion/failure without reconciling the live manifest/session.
 
-If the call times out while Fluent is still advancing, inspect the operational manifest/live iteration state and continue waiting/polling in the same goal.
+If the call times out while Fluent is still advancing, inspect the operational manifest with MCP `solver_status` and targeted state, then continue waiting/polling in the same goal.
 
 After terminal discovery execution:
 

@@ -74,7 +74,7 @@ Perform cheap, read-only discovery first. This discovery does not require the us
 Discover as applicable:
 
 - observed case/data filenames or whether identity is unavailable;
-- Fluent and PyFluent version;
+- Fluent and PyFluent version from MCP status/path evidence;
 - steady/transient state, iteration count or physical time;
 - active multiphase/turbulence/energy/DPM/EWF models;
 - phase names;
@@ -153,7 +153,7 @@ Use them when their outputs answer an approved analysis question. Preserve their
 
 If no existing script exposes the needed evidence:
 
-1. inspect the live/file state to identify the relevant Fluent quantity, zone, surface, report definition, monitor, or field variable;
+1. inspect MCP live status/path state and the saved files to identify the relevant Fluent quantity, zone, surface, report definition, monitor, or field variable;
 2. search the repository for an existing accessor or extraction pattern;
 3. when Fluent/PyFluent API behavior is uncertain, consult the version-relevant official Fluent/PyFluent documentation;
 4. prefer a read-only Settings API query, Fluent report/surface/volume integral, field-data extraction, transcript command, or offline calculation from saved data;
@@ -281,7 +281,7 @@ Do not use a fixed wall-clock supervision duration as the primary completion rul
 For each analysis command, define completion predicates such as:
 
 - process/client completion;
-- Fluent health/liveness when live;
+- MCP `session_status`/`solver_status` when live;
 - expected transcript marker(s);
 - required JSON/CSV/image/artifact existence;
 - parser completion;

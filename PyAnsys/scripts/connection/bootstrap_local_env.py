@@ -15,6 +15,7 @@ VENV_DIR = PROJECT_ROOT / ".venv"
 ENV_TEMPLATE = PROJECT_ROOT / ".env.example"
 ENV_FILE = PROJECT_ROOT / ".env"
 MINIMAL_REQUIREMENTS = PROJECT_ROOT / "requirements-minimal.txt"
+MCP_REQUIREMENTS = PROJECT_ROOT / "requirements-mcp.txt"
 EXTENDED_REQUIREMENTS = PROJECT_ROOT / "requirements-extended.txt"
 PREFERRED_PYTHON = "3.12"
 
@@ -91,6 +92,7 @@ def create_venv(args: argparse.Namespace) -> Path:
 def install_requirements(venv_python: Path, args: argparse.Namespace) -> None:
     run([str(venv_python), "-m", "pip", "install", "--upgrade", "pip"])
     run([str(venv_python), "-m", "pip", "install", "-r", str(MINIMAL_REQUIREMENTS)])
+    run([str(venv_python), "-m", "pip", "install", "-r", str(MCP_REQUIREMENTS)])
     if args.extended:
         run([str(venv_python), "-m", "pip", "install", "-r", str(EXTENDED_REQUIREMENTS)])
 
@@ -142,8 +144,8 @@ def main() -> int:
     print("\nEnvironment is ready.", flush=True)
     print(f"Activate it with: {activate_cmd}", flush=True)
     print("When you reach the Fluent PC, start the gRPC server and then run:", flush=True)
-    print("  .venv/bin/python scripts/connection/check_connection.py", flush=True)
-    print("  .venv/bin/python scripts/inspection/inspect_fluent_session.py", flush=True)
+    print("  .venv/bin/python scripts/inspection/inspect_fluent_session.py --status-only", flush=True)
+    print("  .venv/bin/python scripts/inspection/inspect_fluent_session.py --paths setup.models", flush=True)
     return 0
 
 

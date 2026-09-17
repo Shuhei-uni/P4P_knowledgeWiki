@@ -121,34 +121,33 @@ class ConnectionCompatibilityTests(unittest.TestCase):
     def test_failed_preflight_stops_before_pyfluent_connect(self) -> None:
         self.configure_endpoint()
         self.socket_connect.side_effect = OSError("test connection refused")
-        with self.assertRaisesRegex(TimeoutError, "configured server after 2.0s"):
+        with self.assertRaisesRegex(TimeoutError, "endpoint is unreachable"):
             connection.connect(tcp_timeout_seconds=2)
         self.client_connect.assert_not_called()
 
     def test_server_info_route_bypasses_tcp_probe(self) -> None:
         os.environ["STUDENT_SERVER_INFO_FILE"] = "/test/server-info.txt"
-        with patch.object(connection.Path, "exists", return_value=True):
+        with patch.object(connection.Path, "is_file", return_value=True):
             connection.connect("student", start_transcript=False, tcp_timeout_seconds=2)
         self.socket_connect.assert_not_called()
         self.client_connect.assert_called_once_with(
-            server_info_file_name="/test/server-info.txt",
+            server_info_file_name=str(Path("/test/server-info.txt")),
             allow_remote_host=True, cleanup_on_exit=False,
             start_transcript=False, insecure_mode=False,
         )
 
     def test_missing_named_server_info_reports_correct_variable(self) -> None:
         os.environ["STUDENT_SERVER_INFO_FILE"] = "/test/missing.txt"
-        with patch.object(connection.Path, "exists", return_value=False):
+        with patch.object(connection.Path, "is_file", return_value=False):
             with self.assertRaisesRegex(FileNotFoundError, "STUDENT_SERVER_INFO_FILE"):
                 connection.connect("student")
         self.client_connect.assert_not_called()
 
-    def test_local_launch_preserves_route_and_explicit_transcript(self) -> None:
+    def test_local_launch_configuration_is_rejected(self) -> None:
         os.environ["FLUENT_LOCAL_EXE2"] = "/test/fluent"
-        connection.connect("2", start_transcript=False, tcp_timeout_seconds=2)
-        self.local_launch.assert_called_once_with(
-            suffix="2", insecure_mode=False, start_transcript=False,
-        )
+        with self.assertRaisesRegex(connection.SessionPolicyError, "Automatic Fluent launch is disabled"):
+            connection.connect("2", start_transcript=False, tcp_timeout_seconds=2)
+        self.local_launch.assert_not_called()
         self.socket_connect.assert_not_called()
 
 

@@ -36,7 +36,7 @@ any path is irrelevant rather than silently skipping it.
   must be reconstructed for review or handoff.
 - Preserve the evidence and uncertainty labels required by the owning guide.
   Treat every directory named `raw/` as immutable source or generated evidence.
-- Preserve every Fluent session: never close, exit, terminate, kill, restart, or relaunch Fluent, and call a script only after verifying that its success, error, timeout, and cleanup paths leave the Fluent process running.
+- Preserve every Fluent session: never close, exit, terminate, kill, restart, or relaunch Fluent, and call a script only after verifying that its success, error, timeout, and cleanup paths leave the Fluent process running. For generic live-session status, use MCP `session_status` and `solver_status`; OS/process probes diagnose transport only.
 - Carry case-specific names, values, paths, parent identity, and assumptions
   only from the selected experiment's verified records. Record uncertainty
   instead of borrowing details from another case.

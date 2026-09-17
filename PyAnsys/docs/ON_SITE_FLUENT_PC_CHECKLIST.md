@@ -198,29 +198,18 @@ FLUENT_INSECURE_MODE=false
 
 If the copied server-info file contains `127.0.0.1`, use Option A instead.
 
-## 7. Test connection from laptop
+## 7. Capture session status from laptop
 
 Run:
 
 ```bash
-.venv/bin/python scripts/connection/check_connection.py
+.venv/bin/python scripts/inspection/inspect_fluent_session.py --status-only
 ```
 
-Expected:
-
-```text
-Fluent server: 1
-TCP      : CONNECTED (...)
-gRPC     : CONNECTED
-Activity : NOT RUNNING (...)
-Read-only check complete; no solver command was issued and Fluent was not closed.
-```
-
-`Activity : RUNNING` is printed only when Fluent's direct
-`solution.run_calculation.iterating()` query returns the exact boolean `True`.
-If it returns `False`, cannot be read, raises an exception, times out, or
-returns any other value, the checker prints `Activity : NOT RUNNING`.
-This connection checker does not read or print residuals or monitor history.
+The JSON capture records MCP `session_status` and `solver_status`. Treat a
+connection or status error as `BLOCKED`/unknown and reconcile it before retrying;
+do not convert it to `NOT RUNNING`. This status capture does not read residuals
+or monitor history.
 
 ## 8. Inspect current Fluent session
 
@@ -237,7 +226,7 @@ This should help Codex discover what Fluent can expose.
 Ask Codex:
 
 ```text
-Connection works. Use PyFluent to inspect the current Fluent session. List the available boundary condition names, phases/materials, enabled models, and working directory. Do not run iterations yet. Build a robust inspect_case.py script for this case.
+Connection works. Use the MCP inspection tools to inspect the current Fluent session. List the available boundary condition names, phases/materials, enabled models, and working directory. Do not run iterations yet.
 ```
 
 ## 10. Important path reminder

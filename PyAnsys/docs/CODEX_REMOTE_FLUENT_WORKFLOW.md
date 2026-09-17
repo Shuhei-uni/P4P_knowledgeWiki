@@ -53,10 +53,8 @@ requirements-minimal.txt
 requirements-extended.txt
 .env.example
 scripts/connection/local_preflight.py
-scripts/connection/check_connection.py
 scripts/connection/parse_server_info.py
 scripts/inspection/inspect_fluent_session.py
-scripts/inspection/inspect_case.py
 scripts/inspection/probe_remote_paths.py
 scripts/inspection/load_case_data.py
 docs/PREPARE_NOW_ON_LAPTOP.md
@@ -72,16 +70,19 @@ docs/ON_SITE_FLUENT_PC_CHECKLIST.md
 ```
 
 2. Once Fluent PC is available, fill `.env`.
-3. Run connection check:
+3. Capture MCP session and solver status:
 
 ```bash
-.venv/bin/python scripts/connection/check_connection.py
+.venv/bin/python scripts/inspection/inspect_fluent_session.py --status-only
 ```
 
-4. Inspect Fluent session:
+An MCP error or unavailable status is uncertainty; it does not establish that
+Fluent is stopped. TCP/process checks are routing diagnostics only.
+
+4. Inspect exact Fluent session paths:
 
 ```bash
-.venv/bin/python scripts/inspection/inspect_fluent_session.py
+.venv/bin/python scripts/inspection/inspect_fluent_session.py --paths setup.models
 ```
 
 5. Probe the Fluent-PC project folders:
@@ -95,7 +96,6 @@ docs/ON_SITE_FLUENT_PC_CHECKLIST.md
 ## First useful project-specific scripts
 
 ```text
-scripts/inspection/inspect_case.py
 scripts/inspection/load_case_data.py
 scripts/list_boundaries.py
 scripts/list_models.py

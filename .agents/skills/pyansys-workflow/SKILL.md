@@ -73,10 +73,14 @@ For semantic/prerequisite uncertainty in a Fluent setting, escalate from live in
 
 Before writing a setup script for a new Fluent branch:
 
-1. Run `scripts/connection/check_connection.py`.
-2. Run `scripts/inspection/inspect_fluent_session.py`.
-3. Add a targeted non-mutating probe if paths or object names are unclear.
+1. Run `scripts/inspection/inspect_fluent_session.py --status-only` to capture MCP `session_status` and `solver_status`.
+2. Run `scripts/inspection/inspect_fluent_session.py --paths <exact-live-branches>`.
+3. Add a targeted non-mutating MCP probe if paths or object names are unclear.
 4. Only then edit or create mutation-heavy setup code.
+
+Do not use socket, process, or direct `iterating()` probes as Fluent liveness
+evidence when MCP is available. Those can diagnose transport only; preserve an
+MCP error or unavailable state as uncertainty rather than calling it stopped.
 
 Prefer existing helpers and proven code paths before inventing new campaign-specific machinery.
 

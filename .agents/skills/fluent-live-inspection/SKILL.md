@@ -11,7 +11,9 @@ client configuration, or a transport/version mismatch, read [MCP integration](mc
 ## Workflow
 
 1. Resolve fleet placement and ownership. Use the MCP process bound to that server
-   alias; call `connect` without arguments. Endpoint identity is not case identity.
+   alias; call `connect` without arguments, then capture `session_status` and
+   `solver_status`. Endpoint identity is not case identity; unavailable or failed
+   MCP status remains uncertainty, not `not running`.
 2. Establish the loaded case/data from verified experiment records and independent
    live evidence. Missing identity remains unavailable.
 3. Use `find_api` for candidate paths; its bundled schema is not proof of current
