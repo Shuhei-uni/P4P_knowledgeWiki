@@ -1,207 +1,57 @@
 ---
 name: phase-planner
-description: "Catch up on project evidence, hear the human's phase or experiment thinking, and agree a human-controlled next direction. Human-only; invoke with /phase-planner in Cursor or $phase-planner in Codex."
+description: "Catch up on current P4P evidence and define or revise the next scientific phase with the human. Human-only."
 disable-model-invocation: true
 ---
 
 # Phase Planner
 
-Treat this like a research catch-up with the human, not a formal planning report.
+Plan the scientific **envelope**, not every solver action.
 
-Start at `Project/index.md`. Then read the current phase's `CONTEXT.md` and only
-the latest relevant `setup.md`, `results.md`, or parent record needed for the
-current decision. Do not preload old chronology or whole knowledge trees. Work
-out what we were trying to learn, what the simulations actually showed, what
-did not work, and what is still unclear. Use `show-me-your-work` when a long
-campaign needs a concise evidence reconstruction.
+Start at `Project/index.md`, then read the active phase `CONTEXT.md` and only the
+latest evidence needed to understand the frontier. Use
+[planning reference](references/planning.md) when the direction is unsettled.
 
-## Use parallel support
+## Conversation
 
-During phase planning, delegate independent context gathering, evidence lookup,
-and repository investigation as early and as broadly as available parallelism
-allows. Keep the planner's attention on the human conversation, the next
-decision, and the phase `CONTEXT.md`.
+Work like a technical teammate:
 
-Subagents support the plan; they do not choose the phase, select experiments,
-or approve candidates. Give each one a focused research question and ask for
-concise, source-linked findings.
+- reconstruct what is known and what is still uncertain;
+- research factual unknowns instead of asking the human to remember them;
+- ask the human only for scientific judgement, priorities, or scope choices that
+  cannot be inferred from evidence;
+- offer a recommendation when the evidence supports one;
+- keep implementation detail out of the conversation unless it changes the
+  scientific choice.
 
-Continue planning while they work. Use their findings when they return, and
-bring only material decisions, trade-offs, and unresolved uncertainty back to
-the human. If parallel delegation is unavailable, perform the same research
-locally.
+Do not require the human to approve every experiment. The useful human boundary
+is the phase question and its autonomy envelope.
 
-## Catch me up
+## Record the phase contract
 
-Start from the human's apparent context. When they already seem current on the
-phase, give only the short state of play: what changed, what it means, and the
-next decision. Do not replay the phase history just because this skill began.
+Keep the active phase `CONTEXT.md` compact and current. It should make these
+things obvious:
 
-Expand the catch-up when the human asks for background or their question shows
-they may not have the needed context. Explain the relevant evidence, why it
-matters, and the claim limit before asking them to choose a direction.
+- question / goal;
+- why it matters now;
+- strongest current evidence;
+- important unknowns or assumptions;
+- in-scope and out-of-scope changes;
+- candidate mechanisms or experiment families worth testing;
+- what evidence would be enough for a useful conclusion;
+- compute/time boundary and any explicit Fluent authority.
 
-Answer the useful questions:
+Use `phase-state.yaml` only for machine state and short attempt/status records,
+not as a second scientific narrative.
 
-- What were we trying to figure out?
-- What do the runs actually tell us?
-- What surprised us or went against what we expected?
-- What do we still not know?
-- What limits how strongly we can say anything?
+## Handoff
 
-Do not dump every setup or result. Pull out the evidence that changes the current picture.
+When the human says to execute, hand the recorded phase contract to
+`phase-loop`.
 
-Simulation data is the main source of truth for what happened in our model. Literature, Fluent guidance, past experience, and reasoning can help explain results or suggest what to try next, but do not turn them into simulation results we have not actually observed.
+The handoff should not contain a long command script. The phase contract is the
+authority; `phase-loop` owns bounded experiment selection, recovery, execution,
+analysis, and continuation inside that envelope.
 
-If the evidence is weak, say so. `We do not know yet` is a valid answer.
-
-## Shape the direction with the human
-
-When the human wants to move from catch-up into choosing, reframing, or
-designing work for a phase, invoke `phase-grill` before proposing a phase,
-mechanism, or experiment matrix. It first captures the human's own thinking,
-then distinguishes unfinished phase framing from experiment framing.
-
-Maintain the current phase-root `CONTEXT.md` through that conversation. It is
-the human-approved planning authority for candidates, decision gates, and
-conditional qualification paths; it is not a chat log or a replacement for a
-selected experiment's `setup.md`.
-
-## What should we do next?
-
-Stay at phase level. Do not jump straight into exact URFs, pressures, timesteps, setup files, or an experiment matrix unless the human asks.
-
-First decide whether the current phase still has useful work left. Do not invent
-a new phase just because the last batch of simulations finished. If direction
-setting is needed, let `phase-grill` hear the human's thinking before narrowing
-the options.
-
-If there are genuinely different ways forward, give a small number of real options. Usually one to three is enough.
-
-For each direction, explain simply:
-
-- what question it would answer;
-- why that question matters now;
-- what evidence would make the work worthwhile;
-- the main cost, risk, or assumption.
-
-Say which direction you would pick and why when the evidence supports a recommendation. The human can change it, merge ideas, reject it, or keep discussing.
-
-Use `arena` or `interrogate` only when the direction is genuinely hard to choose or worth challenging from independent viewpoints.
-
-## Talk like a technical teammate
-
-Use technical terms when they are the clearest words: Mixture, VOF, residuals, mass balance, `k`, `epsilon`, FPE, timestep, under-relaxation factor, and so on.
-
-But prefer plain language around them.
-
-Say `what do we still not know?` instead of `what unresolved uncertainty remains?`.
-
-Say `this run does not support that claim yet` instead of wrapping the point in formal scientific-planning language.
-
-Keep the technical detail. Cut the fluff.
-
-Do not use consultant-speak, fake certainty, or long formal summaries when a short direct explanation works.
-
-## Decide with the human
-
-Do not automatically launch simulations or invoke `phase-loop`.
-
-Talk through the direction first. Before handing off, agree on the parts that actually matter:
-
-- the phase question or goal;
-- what is in scope and what is not;
-- important modelling assumptions or boundaries;
-- compute or resource limits when they matter;
-- what would count as enough evidence for this phase;
-- when the loop should come back to the human.
-
-### Define the autonomy envelope explicitly
-
-Experiment origination and selection remain human-controlled. The normal handoff
-grants `phase-loop` authority to execute, verify, and analyse only the defined
-setup queue and its already-approved evidence/gate contracts.
-
-When Fluent compute is part of the phase, do not add a separate planner-side
-session question. At loop entry, the single Fluent-authority check records
-whether the active goal has full session-overwrite authority or a restriction.
-With full authority, the loop may stop active calculations, preserve a recovery
-pair when a valuable unpreserved state could otherwise be lost, replace the
-loaded case, reassign servers, detach abandoned clients that do not own the
-Fluent process, and use available servers only for authorized work. Every
-Fluent process/session remains running.
-
-This authority applies to active working sessions and approved experiment
-children. It does **not** authorize creating or promoting a new experiment
-idea, silently deleting verified durable Project/OneDrive parent artifacts,
-inventing plant facts or validation targets, changing the fixed phase-level
-question, or crossing an explicit human boundary.
-
-If the human wants a narrower authority envelope for a particular phase, record the restriction in the handoff.
-
-## ❗❗❗ Phase Loop - launch decision
-
-When the direction, `CONTEXT.md`, defined setup queue, and autonomy envelope
-are ready, stop here.
-A complete handoff is not permission to start `phase-loop`.
-
-Show this decision clearly and wait for an explicit choice:
-
-> ❗❗❗ **Phase Loop - launch decision**
->
-> - **1️⃣ Continue in this chat** — enter `phase-loop` in the
->   current conversation.
-> - **2️⃣ Start in a new task** — start the loop in a new thread with a short
->   handoff prompt.
-> - **3️⃣ Keep grilling** — return to `phase-grill`; the direction is not yet
->   aligned enough to launch.
->
-> **Choose 1, 2, or 3.** The loop will not start until you choose 1 or 2.
-
-After an explicit selection:
-
-- **1️⃣** — enter `phase-loop` in this chat with the handoff below.
-- **2️⃣** — create a new task/thread in the same project and give it this
-  short prompt. On a runtime that cannot create a task, present the prompt for
-  the human to start in a new chat.
-
-  ```md
-  Use `phase-loop` for `<phase>`.
-
-  - **Context:** `<phase-root CONTEXT.md>`
-  - **Goal:** <phase question>
-  - **Defined queue:** <ordered setup paths and lifecycle gates>
-  - **Recovery:** `BLOCK` outside that queue; inspect/research the narrowest
-    context-consistent diagnostic, sensitivity, or durable block without
-    silently replacing the phase question.
-  ```
-
-- **3️⃣** — continue the human conversation through `phase-grill`. Do not
-  create a handoff, a setup, or a scientific-loop goal.
-
-## Handoff after launch choice
-
-Only after choice **1️⃣** or **2️⃣**, give `phase-loop` its handoff:
-
-- **Goal** — what this phase is trying to answer.
-- **Why now** — why this is the useful question given the evidence so far.
-- **What we already know** — only the evidence that matters for this phase.
-- **Main unknowns / assumptions** — what is still open or being accepted for now.
-- **Boundaries** — what the loop should not casually change.
-- **Enough evidence looks like** — what would support a useful phase conclusion.
-- **Defined queue** — ordered `setup.md` paths, lifecycle roles, prerequisite
-  gates, and no-unlisted-work rule.
-- **Completion route** — persist the evidence-backed outcome, or offer the
-  pre-authorized Auto Loop option at Phase Loop entry.
-- **Autonomy** — queue execution plus the granted Fluent fleet/session
-  authority, including any restrictions.
-- **Autonomous recovery** — material unknowns, research/sensitivity fallback,
-  durable-block record, and claim consequence.
-
-The handoff sets the destination, authority, approved route, and boundaries.
-
-`phase-loop` still owns faithful execution, evidence verification, analysis,
-and lifecycle discipline. It follows the defined queue first; a new candidate,
-ambiguous gate, or non-equivalent workaround triggers autonomous recovery with
-an explicit claim limit rather than a pause. Auto Loop is entered only through
-a deliberate completion route or direct human invocation.
+Return to planning only when the phase question/scope itself needs to change or
+the human explicitly asks to reframe it.
