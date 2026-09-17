@@ -16,26 +16,47 @@ Run the following checks before launching, connecting to, or mutating Fluent:
 
 ```powershell
 $fluentExe = 'C:\Program Files\ANSYS Inc\ANSYS Student\v252\fluent\ntbin\win64\fluent.exe'
+$fluentWorkDir = 'C:\Users\Shuhei Yokkaichi\Documents\CFD\FluentDirectUse'
+$repoRoot = 'C:\Users\Shuhei Yokkaichi\Documents\CFD\P4P_knowledgeWiki'
 $machineOk = $env:OS -eq 'Windows_NT' -and [System.Environment]::MachineName -eq 'HOME-DESKTOP-SH'
 $pathOk = (Test-Path -LiteralPath $fluentExe) -and (([System.IO.FileInfo]$fluentExe).FullName -eq $fluentExe)
 $versionOk = $pathOk -and ((Get-Item -LiteralPath $fluentExe).VersionInfo.ProductVersion -eq '25.2.0')
-if (-not ($machineOk -and $pathOk -and $versionOk)) {
+$workDirOk = $fluentWorkDir -ne $repoRoot -and -not $fluentWorkDir.StartsWith($repoRoot + '\', [System.StringComparison]::OrdinalIgnoreCase)
+if (-not ($machineOk -and $pathOk -and $versionOk -and $workDirOk)) {
     throw 'BLOCKED: direct-fluent-use is restricted to HOME-DESKTOP-SH with Fluent 2025 R2 Student Edition at the pinned path.'
 }
+New-Item -ItemType Directory -Force -Path $fluentWorkDir | Out-Null
+Set-Location -LiteralPath $fluentWorkDir
 ```
 
 If any check fails, stop and report `BLOCKED`. Do not use this skill through
 WSL, Linux, a remote host, another Windows computer, a different Fluent
 installation, or GUI/computer-use automation.
 
+## Dedicated working directory
+
+`C:\Users\Shuhei Yokkaichi\Documents\CFD\FluentDirectUse` is the dedicated
+Fluent runtime directory. Launch Fluent and its persistent Python driver with
+that directory as the current working directory. Keep transcripts, server-info
+handoffs, journals, scratch scripts, and generated case/data outputs there or
+below it. A repository helper may be invoked by absolute path, but the Fluent
+process must inherit the dedicated directory as its working directory.
+
 ## Terminal and gRPC workflow
 
 Use the locally installed Python environment that can import
-`ansys.fluent.core`. Launch Fluent from a persistent Python driver and keep the
-authenticated `solver` object alive for the whole interaction:
+`ansys.fluent.core`. From the dedicated working directory, launch Fluent from
+a persistent Python driver and keep the authenticated `solver` object alive for
+the whole interaction:
 
 ```python
+import os
+from pathlib import Path
 import ansys.fluent.core as pyfluent
+
+fluent_work_dir = Path(r"C:\Users\Shuhei Yokkaichi\Documents\CFD\FluentDirectUse")
+fluent_work_dir.mkdir(parents=True, exist_ok=True)
+os.chdir(fluent_work_dir)
 
 solver = pyfluent.launch_fluent(
     mode="solver",
