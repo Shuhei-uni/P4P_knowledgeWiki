@@ -43,20 +43,7 @@ After the flow is approved:
 1. Start from [`Project/index.md`](../../../Project/index.md). For each selected
    phase, read its phase-root `CONTEXT.md` first, then only the latest relevant
    `setup.md`, `results.md`, figure index, or parent record needed to answer the
-   report question. Use `show-me-your-work` when a long campaign needs a
-   concise evidence reconstruction.
-2. Build a private evidence spine with one row per report section:
-   `question → experiments included → observed result → justified conclusion
-   → claim limit → next decision → figure(s)`. Keep exact paths and evidence
-   status in the working notes so the report does not rely on memory.
-3. Select the smallest useful evidence set. Prefer one direct-answer figure
-   and, only when it adds a distinct message, one mechanism or numerical-
-   adequacy figure per phase. Existing quantitative plots come first. Do not
-   add a plot merely because it exists.
-4. Separate `Reported`, `Observed`, `Inferred`, `Assumed`, and `Missing Info`
-   where the distinction matters. A completed run is not automatically a
-   converged or qualified result; preserve the source record's lifecycle and
-   claim boundary.
+   report question. Use Git history and the current Project setup/results when a long campaign needs a concise evidence reconstruction.
 
 The evidence spine is complete when every planned section has a source-backed
 answer, a bounded conclusion, a next step, and either an existing figure, an
@@ -90,11 +77,7 @@ while pointing at it. Keep the point-to-say faithful to what the figure can
 actually show. A spatial contour can show distribution; it cannot by itself
 prove phase-resolved mass transfer or a stable solution.
 
-Use the independent [`create-figure`](../create-figure/SKILL.md) skill when a
-new Fluent contour, vector scene, plane, or geometry-aware spatial comparison
-is needed. Give it the approved scientific message and exact case/checkpoint
-choices; it owns the Fluent postprocessing workflow. Do not duplicate its
-plane-setting or export procedure here.
+Use `cfd-numerical-analysis` and its figure branch when a report needs new CFD figures.
 
 When a required figure is not yet available, insert a useful placeholder rather
 than inventing an image. A good placeholder states:
