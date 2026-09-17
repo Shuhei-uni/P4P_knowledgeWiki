@@ -271,7 +271,11 @@ launch synchronous Python/PyFluent run
 
 Do **not** pause the goal, end the turn because Fluent is still running, launch the detached hypothesis handoff path merely to avoid waiting, or require the human to send another message.
 
-A tool/RPC timeout is not permission to pause the goal. Check the operational manifest and live Fluent state. If the approved discovery calculation is still advancing, keep waiting/polling in the active goal until it returns terminal `COMPLETE` or `BLOCKED` evidence.
+A tool/RPC timeout is not permission to pause the goal. Query MCP `solver_status`
+and targeted state, then reconcile the operational manifest. If the approved
+discovery calculation is still advancing, keep waiting/polling in the active goal
+until it returns terminal `COMPLETE` or `BLOCKED` evidence; do not infer liveness
+from a process or socket check.
 
 The same attached behaviour applies throughout the discovery campaign, not only the first run.
 

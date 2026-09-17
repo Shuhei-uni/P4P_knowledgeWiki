@@ -42,9 +42,9 @@ Use `supervise-fluent-run` for long hypothesis-test execution. Discovery runs sh
 
 ## Connection and run tools
 
-- `scripts/connection/check_connection.py` — binary TCP, gRPC, and direct Fluent `RUNNING`/`NOT RUNNING` check; it does not read or print residuals.
-- `scripts/connection/local_preflight.py` — local runtime and endpoint preflight.
-- `scripts/inspection/inspect_fluent_session.py` — non-mutating live tree inspection.
+- `scripts/connection/local_preflight.py` — local runtime preflight.
+- `scripts/inspection/inspect_fluent_session.py --status-only` — MCP session/solver status capture; unavailable status remains uncertainty.
+- `scripts/inspection/inspect_fluent_session.py --paths <paths>` — non-mutating MCP live-tree inspection.
 - `scripts/inspection/monitor_native_run.py` — reconnecting read-only monitor that can supplement execution evidence without becoming a mutating controller.
 - `scripts/setup/` — case-specific Python setup/run orchestration. Prefer a proven runner when one matches the approved experiment; otherwise keep new runners thin and explicit.
 - `scripts/orchestration/run_and_handoff.py` — detached hypothesis worker launcher. It captures the originating Codex thread, runs the approved runner, verifies declared completion evidence, writes a terminal manifest, and mandatorily attempts to wake the thread on `COMPLETE` or `BLOCKED`.

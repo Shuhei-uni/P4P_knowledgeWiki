@@ -28,7 +28,7 @@ Do not use that authority to overwrite verified durable parents or lose a scient
 
 ## Inspect before mutating
 
-Inspect the loaded parent and record the settings that must be preserved. For multiphase/DPM work this normally includes model family, phase materials, phase-specific boundaries, turbulence/energy state, injections, wall fates, and other relevant topology.
+Inspect the loaded parent through MCP and record the settings that must be preserved. For multiphase/DPM work this normally includes model family, phase materials, phase-specific boundaries, turbulence/energy state, injections, wall fates, and other relevant topology.
 
 Use the active live tree as authority.
 
@@ -108,7 +108,7 @@ verified child + smoke
 → immediate analysis
 ```
 
-Do not detach discovery merely to avoid waiting. An RPC/tool timeout is not a terminal state; reconcile manifest/live iteration and keep waiting while the approved run advances.
+Do not detach discovery merely to avoid waiting. An RPC/tool timeout is not a terminal state; reconcile the manifest with MCP `solver_status` and targeted state, then keep waiting while the approved run advances.
 
 ### Hypothesis-test
 

@@ -1,3 +1,4 @@
+-r requirements-mcp.txt
 ansys-fluent-core
 ansys-fluent-visualization
 pyvista

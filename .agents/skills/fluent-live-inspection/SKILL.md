@@ -1,50 +1,52 @@
 ---
 name: fluent-live-inspection
-description: Inspect an uncertain live Fluent/PyFluent session, Settings branch, object name, allowed value, or case state before implementing or analysing a change.
+description: Inspect live Fluent paths, named objects, allowed values, or uncertain case state through the P4P-preserving PyFluent MCP interface before implementation or analysis.
 ---
 
 # Fluent live inspection
 
-Use this skill when a PyFluent path, object identity, allowed value,
-model/phase/domain state, or loaded-session identity is uncertain. Do not guess
-deep Settings paths from memory.
+Use upstream discovery, not an improvised Settings-tree crawler. For installation,
+client configuration, or a transport/version mismatch, read [MCP integration](mcp-integration.md).
 
 ## Workflow
 
-1. Connect using the server ID only as transport routing.
-2. Inspect the loaded case/data and current session state.
-3. Inspect the smallest relevant Settings branch, children, commands, and
-   allowed values.
-4. If a parent/model/type change is required, perform it through the
-   implementation workflow, then reacquire affected objects.
-5. Inspect again and read back critical state after mutation.
+1. Resolve fleet placement and ownership. Use the MCP process bound to that server
+   alias; call `connect` without arguments, then capture `session_status` and
+   `solver_status`. Endpoint identity is not case identity; unavailable or failed
+   MCP status remains uncertainty, not `not running`.
+2. Establish the loaded case/data from verified experiment records and independent
+   live evidence. Missing identity remains unavailable.
+3. Use `find_api` for candidate paths; its bundled schema is not proof of current
+   activity. Use `describe_path` on the smallest relevant live branch, or
+   `probe_path`, `get_active_status`, `get_allowed_values`, and named-object tools
+   for a focused question. Preserve null/unknown separately from false/empty.
+4. For changes, return to the implementation workflow. Validate generated Python
+   through `validate_code`, execute through `run_code`, reacquire affected objects,
+   and inspect critical values again. Parent/model/type changes invalidate earlier
+   assumptions. A successful MCP call is execution evidence, not a passed gate.
+5. Return the observed path, state, scope, endpoint, and unresolved uncertainty.
+   `fluent-case-build-and-run` still owns readback, save/reopen, invariant,
+   smoke/instrumentation, and completion proof.
 
-Use the live tree as authority for the current case and Fluent version. A
-missing expected path means inspect/adapt; it does not prove that the model is
-disabled or that an old recipe should be forced.
+For mesh quality use `mesh_quality`; for available fields use `list_fields`.
+Generic reports and screenshots supplement, not replace, the selected evidence contract.
 
-If the live tree cannot safely resolve the setting's meaning, documented
-prerequisites, activation order, or a verifiable Settings API/TUI mutation
-path, escalate automatically to `fluent-manual-researcher`. That skill must
-consult the version-matched official Fluent manual, translate the documented
-GUI/model state into a disposable live implementation attempt, and return only
-a save/reopen-verified recipe or a bounded research blocker. Do not keep
-probing or inventing paths once the uncertainty is semantic rather than merely
-structural.
+When uncertainty concerns physical meaning, prerequisites, or a verified mutation
+strategy rather than tree structure, escalate to `fluent-manual-researcher`.
+Keep its version-matched manual research and save/reopen-verified recipe requirement.
+TUI/journal fallback remains an explicitly approved reviewed-worker exception.
 
-## Known working code
+## Failure and compatibility
 
-Prefer reusable `src` code, then a generic script, then a campaign pattern;
-prose/API memory is last and the live tree wins.
+After a lost response or partial mutation, reconcile live state and existing run
+records before retrying. Never infer that a timeout stopped Fluent.
 
-- `PyAnsys/scripts/inspection/inspect_fluent_session.py`
-- `PyAnsys/scripts/inspection/inspect_case.py`
-- `PyAnsys/scripts/inspection/explore_settings_space.py`
-- `PyAnsys/scripts/inspection/compare_case_setup.py`
-- `PyAnsys/scripts/inspection/load_case_data.py`
-- `PyAnsys/src/pyansys_fluent/dependency_workflow.py`
+MCP unavailability blocks the generic route; it does not authorize a silent
+fallback to `dir()`, recursive probing, or model activation during inspection.
+`explore_settings_space.py` and `inspect_fluent_session.py` now use MCP.
+`compare_case_setup.py` compares captured MCP snapshots offline and never reloads
+an active workspace. Capture exact invariant paths to avoid truncated state.
 
-Inspect known-working repository code before constructing an equivalent
-PyFluent access pattern from memory. Reuse the access pattern, not case-specific
-names, values, paths, or branch assumptions. If the current live Fluent tree
-differs, inspect and adapt.
+Reviewed P4P domain workers remain available for scientific setup, extraction,
+file movement, and supervised runs. Reuse their proven logic, not another case's
+names, values, paths, or assumptions. The retired mapper is historical replay only.

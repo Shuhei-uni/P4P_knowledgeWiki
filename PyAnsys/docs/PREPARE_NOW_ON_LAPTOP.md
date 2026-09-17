@@ -134,7 +134,7 @@ docs/CODEX_REMOTE_FLUENT_WORKFLOW.md
 Then when you are ready, tell Codex:
 
 ```text
-Read docs/CODEX_REMOTE_FLUENT_WORKFLOW.md and docs/ON_SITE_FLUENT_PC_CHECKLIST.md. We are preparing to connect this laptop to a remote Ansys Fluent session using PyFluent gRPC. Do not use launch_fluent. Use connect_to_fluent. First run scripts/connection/local_preflight.py and inspect the connection scripts.
+Read docs/CODEX_REMOTE_FLUENT_WORKFLOW.md and docs/ON_SITE_FLUENT_PC_CHECKLIST.md. We are preparing to connect this laptop to a remote Ansys Fluent session using the P4P-preserving PyFluent MCP. Do not use launch_fluent. First run scripts/connection/local_preflight.py, then use `scripts/inspection/inspect_fluent_session.py --status-only` after configuring the endpoint.
 ```
 
 ## 8. What you cannot test yet

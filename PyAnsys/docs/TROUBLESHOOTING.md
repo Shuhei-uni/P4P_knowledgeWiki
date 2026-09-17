@@ -46,7 +46,7 @@ Use the local manual-launch fallback in `src/pyansys_fluent/connection.py`:
 ```text
 - set FLUENT_LOCAL_EXE on the Windows host
 - keep stdin open by launching Fluent directly instead of through a short-lived SSH shell
-- verify the session with scripts/connection/check_connection.py
+- configure the preserved endpoint handoff, then capture MCP status with `scripts/inspection/inspect_fluent_session.py --status-only`
 ```
 
 If `connect_to_fluent()` starts asking for TLS certificates or otherwise refuses the remote handoff, switch to the local manual-launch path instead of iterating on shell quoting.

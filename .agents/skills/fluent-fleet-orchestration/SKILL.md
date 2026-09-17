@@ -83,6 +83,12 @@ For every configured server that can reasonably be checked determine:
 - active/recovery runs present;
 - important output/session state that would be lost by takeover.
 
+Use the MCP process bound to each alias for generic status: `session_status`
+establishes attachment/session availability and `solver_status` establishes live
+solver state. Socket/process checks are transport diagnostics only. Reconcile
+MCP status with manifests and artifact evidence for ownership; neither a server
+alias nor a status string establishes case identity.
+
 Do not infer case identity from server name, directory name, iteration count, or a status string. Inspect exact paths/provenance and use manifests/hashes/readback where practical.
 
 ### Busy is not automatically blocked under an exclusive goal lease

@@ -154,7 +154,7 @@ context-consistent range/sensitivity or persist a durable autonomous block.
 
 ### 5. Resolve the live automation path
 
-Use `fluent-live-inspection` and the repository inspection tooling to inspect the smallest relevant live branch.
+Use `fluent-live-inspection` and MCP status/path tools to inspect the smallest relevant live branch.
 
 Prefer this order:
 
@@ -164,9 +164,9 @@ Prefer this order:
 4. version-matched PyFluent TUI path;
 5. no mutation.
 
-Inspect active children, active commands, current state, allowed values, object names, and read-only/active status where supported.
+Inspect MCP `session_status`/`solver_status`, then active children, active commands, current state, allowed values, object names, and read-only/active status where supported.
 
-Do not rely on `dir()` or wrapper attributes alone when the live active-state methods can provide stronger evidence.
+Do not rely on `dir()` or wrapper attributes alone. Use MCP active-path/state tools first; direct wrapper inspection is only for a documented MCP limitation.
 
 After any parent/model/type creation or activation, discard stale handles, reacquire the affected Settings objects, and inspect again.
 

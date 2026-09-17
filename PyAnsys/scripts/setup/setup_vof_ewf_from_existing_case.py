@@ -24,10 +24,10 @@ Use:
     python scripts/setup/setup_vof_ewf_from_existing_case.py --apply --all-walls
 
 Recommended first workflow:
-    1. check_connection.py
+    1. inspect_fluent_session.py --status-only
     2. probe_remote_paths.py
     3. setup_vof_ewf_from_existing_case.py --dry-run
-    4. inspect_case.py
+    4. inspect_fluent_session.py --paths <exact branches>
     5. setup_vof_ewf_from_existing_case.py --apply --film-walls
 """
 
