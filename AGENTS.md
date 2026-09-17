@@ -1,48 +1,70 @@
 # Repository contract
 
-Route each kind of truth to one owner:
+Route truth to one owner:
 
 | Owner | Stores |
 | --- | --- |
-| `Project/` | Current project questions, decisions, selected experiments, findings, and claim limits |
-| `CFD_wiki/` | Reusable literature evidence, CFD methods, and generic Fluent guidance |
-| `PyAnsys/` | Fluent/PyFluent implementation, execution, inspection, extraction, and machine evidence |
-| `.agents/skills/` | Focused workflows that operate on those owners |
+| `Project/` | Current project question, phase scope, selected work, results, and claim limits |
+| `CFD_wiki/` | Reusable CFD literature, methods, and generic Fluent guidance |
+| `PyAnsys/` | Executable Fluent/PyFluent implementation and machine evidence |
+| `.agents/skills/` | A small set of workflows that operate on those owners |
 
-For project-specific scientific work, start at [`Project/index.md`](Project/index.md).
-For changes under `CFD_wiki/` or `PyAnsys/`, read that tree's `AGENTS.md` first.
-Use the smallest matching repository skill for a repeatable workflow; the skill
-owns its reading order, gates, procedure, and completion criteria.
+For project science start at `Project/index.md`, then read only the active
+phase material needed for the current decision.
 
-Before a consequential scientific or Fluent decision, run a **three-path
-check**: reusable CFD evidence through `cfd-wiki`'s evidence-lookup branch,
-generic Fluent guidance through its Fluent-guidance branch (escalating exact
-version/case-state uncertainty to `fluent-manual-researcher`), and past project
-evidence through `show-me-your-work`. Delegate each applicable path to a
-focused subagent with the decision, one precise question, and the kind of fact
-that could change or constrain it. Synthesize the compact returns; record why
-any path is irrelevant rather than silently skipping it.
+## Workflow map
+
+Use one owning workflow skill and let it follow its internal references:
+
+- `phase-planner` — human phase framing/reframing;
+- `phase-loop` — experiment selection, execution, recovery, analysis, and phase closure;
+- `pyansys-workflow` — Fluent implementation/execution;
+- `cfd-numerical-analysis` — CFD evidence and figures;
+- `cfd-wiki` — reusable research/method knowledge;
+- `report-writing` — technical report production;
+- `workflow-surgeon` — repair the agent workflow itself;
+- `writing-for-agents` — edit agent instructions;
+- `wait-what` and `direct-fluent-use` — explicit human controls.
+
+A sub-step is not a reason to create another `SKILL.md`. Put branch-specific
+procedure/reference material inside the owning workflow folder. Create a new
+skill only when it needs a genuinely distinct invocation boundary.
+
+## Autonomy
+
+The human sets or changes the scientific envelope through `phase-planner`.
+Inside that envelope, `phase-loop` owns ordinary experiment choice, technical
+recovery, analysis, and continuation.
+
+Do not turn implementation errors, solver failures, missing plots, or routine
+evidence gaps into human review gates. Recover them in-scope or record a durable
+external block. Ask the human only when the scientific scope/goal must change,
+an unauthorized irreversible external action is required, or the user's
+judgement is itself the missing input.
+
+Before a consequential decision, consult only the evidence sources that could
+change it: current Project evidence, reusable CFD evidence, and live/version-
+matched Fluent evidence. Parallel review is optional when it resolves a concrete
+uncertainty; it is not ceremony.
 
 ## Durable truth
 
-- Keep a fact in its owning system and link to it elsewhere. A skill is a
-  procedure, not another store for project facts or run history.
-- Keep current human-approved phase decisions in the phase-root `CONTEXT.md`,
-  runnable scientific intent in `setup.md`, resulting evidence and bounded
-  interpretation in `results.md`, and active lifecycle state in
-  `phase-state.yaml`.
-- Update `Project/index.md` only when the current scientific state changes.
-  Git history is the chronology; use `show-me-your-work` when that chronology
-  must be reconstructed for review or handoff.
-- Preserve the evidence and uncertainty labels required by the owning guide.
-  Treat every directory named `raw/` as immutable source or generated evidence.
-- Preserve every Fluent session: never close, exit, terminate, kill, restart, or relaunch Fluent, and call a script only after verifying that its success, error, timeout, and cleanup paths leave the Fluent process running. For generic live-session status, use MCP `session_status` and `solver_status`; OS/process probes diagnose transport only.
-- Carry case-specific names, values, paths, parent identity, and assumptions
-  only from the selected experiment's verified records. Record uncertainty
-  instead of borrowing details from another case.
+- Keep a fact in its owning system and link to it elsewhere.
+- `CONTEXT.md` holds the current phase contract; `setup.md` holds runnable
+  scientific intent; `results.md` holds evidence/interpretation;
+  `phase-state.yaml` holds compact machine state.
+- Git history is chronology. Avoid diary-style duplicate logs.
+- Treat every `raw/` directory as immutable source/generated evidence.
+- Carry case-specific names, values, parents, and assumptions only from verified
+  records for that case.
+
+## Fluent safety
+
+Preserve valuable endpoints before replacement and never terminate an unrelated
+or unpreserved Fluent process. When the active phase explicitly owns the
+session/fleet, its recorded authority governs restart/recreate recovery.
 
 ## Skill maintenance
 
-Use `writing-for-agents` when editing agent instructions. Keep repository skills
-only in `.agents/skills/`; when adding, retiring, or changing a skill's
-invocation class, follow [`.agents/invocation.md`](.agents/invocation.md).
+Use `writing-for-agents` when editing agent instructions and keep the active
+invocation map in [`.agents/invocation.md`](.agents/invocation.md).
