@@ -1,7 +1,0 @@
-interface:
-  display_name: "Setup Report"
-  short_description: "Retired. Do not use."
-  default_prompt: "Do not use $setup-report. Create and update Project experiment setup.md and results.md instead."
-
-policy:
-  allow_implicit_invocation: false
