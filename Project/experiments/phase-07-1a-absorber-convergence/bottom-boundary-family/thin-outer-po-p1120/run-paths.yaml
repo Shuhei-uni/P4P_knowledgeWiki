@@ -1,0 +1,21 @@
+setup_id: P71A-BB-THIN-OUTER-PO-P1120-RAMP
+status: PREPARED_RAMP_BASELINE_SAVE_REOPEN_VERIFIED
+server:
+  ref: server-1@10.104.145.170
+  id: '1'
+parent:
+  case: C:\Users\syok443\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\Phase07\ThinOuterBaseline\20260918T000000Z\P71A-thin-outer-baseline-prepared.cas.h5
+  data: C:\Users\syok443\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\Phase07\ThinOuterBaseline\20260918T000000Z\P71A-thin-outer-baseline-prepared.dat.h5
+prepared_ramp_baseline:
+  case: C:\Users\syok443\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\Phase07\ThinOuterBaseline\20260918T000000Z\P71A-thin-outer-ramp-baseline-active000.cas.h5
+  data: C:\Users\syok443\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\Phase07\ThinOuterBaseline\20260918T000000Z\P71A-thin-outer-ramp-baseline-active000.dat.h5
+ramp:
+  active_iteration_0_command_kg_s: 0.0
+  full_command_kg_s: 116.92
+  duration_active_iterations: 100
+  update_interval_active_iterations: 10
+  source_law: -command_kg_s / measured_lower_zone_volume_m3
+execution:
+  initialized: inherited from parent
+  iterations_run: 0
+  run_authority: not_authorized_by_setup

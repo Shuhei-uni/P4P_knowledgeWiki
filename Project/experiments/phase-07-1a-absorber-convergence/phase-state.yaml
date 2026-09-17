@@ -23,6 +23,7 @@ context:
     - C2-T4-K2
     - C2-T4-DISPERSION
     - C3C4-COUPLED-GLOBAL-PSEUDO-TIME
+    - C5-THIN-OUTER-BOTTOM-BOUNDARY
   draft_family_path: Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/README.md
 
 autonomy:
@@ -176,6 +177,20 @@ gates:
 
 active_jobs: []
 queue:
+  - order: 0
+    setup_id: P71A-BB-THIN-OUTER-PO-P1120
+    candidate_id: C5-THIN-OUTER-BOTTOM-BOUNDARY
+    origin: direct human request on 2026-09-18
+    authority: create prepared baseline only
+    gate_linkage: new mesh / save-reopen setup gate
+    setup_path: bottom-boundary-family/thin-outer-po-p1120/setup.md
+    lifecycle_role: prepared boundary-topology baseline
+    required_gate: prepared-case readback only
+    status: RAMP_BASELINE_SAVE_REOPEN_VERIFIED
+    completion_requirement: >-
+      Preserve the live Phase 7.1A baseline, rebuild it on the named 237k mesh,
+      recreate the lower absorber zone, prove the thin-outer pressure outlet
+      and retained-wall topology by save/reopen, and do not initialize or run.
   - order: 1
     setup_id: P71A-T0-RNG-REFERENCE
     candidate_id: C2-T0

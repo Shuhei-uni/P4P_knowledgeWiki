@@ -33,6 +33,12 @@
   inventory. These are Phase 7.1A-specific planning markers raised from the
   current runs, not generic Fluent requirements, convergence criteria, or
   evidence that the `2,000 kg` state is physically validated.
+- **Bottom-boundary family:** on 2026-09-18 the human authorized a separate
+  Phase 7.1A family that rebuilds the absorber baseline on the supplied 237k
+  thin-outer mesh. Its first prepared state retains the lower phase-2 absorber
+  and opens only the named thin outer bottom band as a `1.120 MPa` gauge
+  pressure outlet. This is a boundary-routing contrast, not an absorber-only
+  convergence child and not permission to start a solve.
 
 ## Human thinking
 
