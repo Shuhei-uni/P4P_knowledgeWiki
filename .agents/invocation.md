@@ -29,6 +29,7 @@ Current human-only skills:
 
 - `phase-planner` — the human phase-level catch-up and direction-setting boundary.
 - `wait-what` — a human-triggered conversational reset that re-pitches an explanation when it did not land.
+- `direct-fluent-use` — explicit terminal/PyFluent control restricted to the designated Windows workstation and pinned Fluent 2025 R2 Student Edition.
 
 A human-only skill may call model-invoked or hybrid skills after the human has supplied the necessary decision or boundary. It should not be entered merely because an agent thinks it would be useful.
 
