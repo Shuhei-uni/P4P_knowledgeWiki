@@ -1,24 +1,53 @@
-# PyFluent MCP migration — work in progress
+# PyFluent MCP migration — prepared changes published
 
 Branch: `codex/pyfluent-mcp-migration`.
 Base: `75eac6e3cf2e98424c84619057da0281e1708a2e`.
-First migration commit: `7a3532c2ffc6ccafbc8fa6724d78a1d615ff332c`.
+Interface commit: `7a3532c2ffc6ccafbc8fa6724d78a1d615ff332c`.
 
-## Present on this branch
+## Publication scope
 
-- Pinned upstream `ansys/pyfluent-mcp` dependency.
-- An upstream-backed MCP server with P4P attach-only session policy.
-- A small MCP wire client with explicit execution-uncertainty handling and no automatic replay.
-- Existing endpoint aliases retained; automatic Fluent launch removed from the shared connection helper.
+All 22 repository-relative files from `p4p-pyfluent-mcp-prepared-changes.zip`
+are included on this branch. The 15 previously unuploaded files are now present
+alongside the original seven interface files. This supersedes the earlier note
+that verification, inspection routing, comparison, skill and test changes existed
+only in the handoff archive.
 
-This is not yet a complete migration or a qualified deployment. Subsequent upload requests were blocked by the tool's safety-status check, so prepared verification, inspection routing, comparison, skill and test changes are not in this commit. Do not assume those changes are present merely because the branch has a migration name.
+The original mapper is also preserved unchanged at
+`PyAnsys/legacy/settings_tree_mapper.py`, using Git blob
+`45bcac7cadbb03848af62a651201264e4919b356` from the base commit.
+Its compatibility entry point requires explicit historical-replay opt-in;
+ordinary discovery uses upstream MCP instead.
 
-## Preserved
+## Included changes
 
-Project science, phase-state and run-path records, evidence, fleet orchestration, artifact provenance, OneDrive handling, long-run supervision, exact-thread wakeup, and domain-specific extraction workers were not replaced. A successful MCP call remains execution evidence only, not experiment acceptance.
+- Pinned upstream dependency, preserving MCP server/client, and attach-only
+  endpoint resolution shared with reviewed domain workers.
+- Fail-stop dependency verification, typed readbacks, and explicit uncertainty.
+- MCP inspection commands, offline setup-snapshot comparison, and a generated
+  snippet execution command for the existing supervisor.
+- Updated live-inspection skill and integration guidance.
+- Four migration test modules and a Linux/Windows GitHub Actions workflow.
 
-## Outstanding before merge
+Project science, phase-state and run-path records, raw evidence, fleet
+orchestration, artifact provenance, OneDrive handling, long-run supervision,
+exact-thread wakeup, and domain-specific extraction workers remain retained.
+A successful MCP call remains execution evidence, not experiment acceptance.
 
-Review and integrate the remaining migration changes, reconcile instruction and command references, run the complete repository test suite with the pinned upstream dependencies, and qualify one controlled live workflow through identity, readback, save/reopen, invariants, smoke, evidence streams and completion verification. Confirm MCP shutdown leaves Fluent running. No live Fluent sessions were used or changed during this migration.
+## Validation and remaining qualification
 
-The local prepared-file test run passed 52 tests and skipped the installed-upstream contract-test module because its dependencies were unavailable. This is not a test result for the complete repository or the current branch alone.
+The prepared migration suite was rerun on 17 September 2026:
+`52 passed, 1 skipped`. The skipped module requires the installed upstream MCP
+dependencies, which were unavailable in this execution environment. Python
+compilation of the authored modules and scripts passed. These results do not
+represent the full repository suite or a live Fluent deployment.
+
+Publication is complete for the prepared package; the overall migration remains
+work in progress. Before merge, finish full-repository command/instruction
+compatibility review, run the complete suite with the pinned dependencies and
+without skipping upstream contract tests, and qualify a controlled live workflow
+through identity, readback, paired save/reopen, invariants, smoke, evidence
+streams, long-run completion and exact-thread wakeup. Confirm MCP shutdown leaves
+Fluent running and lost responses are reconciled rather than replayed.
+
+No live Fluent sessions were used or changed. This branch has not been merged
+into `main`; publication alone is not deployment qualification.
