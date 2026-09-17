@@ -1,53 +1,61 @@
-# PyFluent MCP migration — prepared changes published
+# PyFluent MCP migration — interface and skill routing
 
 Branch: `codex/pyfluent-mcp-migration`.
-Base: `75eac6e3cf2e98424c84619057da0281e1708a2e`.
-Interface commit: `7a3532c2ffc6ccafbc8fa6724d78a1d615ff332c`.
+Original migration base: `75eac6e3cf2e98424c84619057da0281e1708a2e`.
+Prepared-package publication: `4e6b51639a26fe1813c8b09b243ed5389b5ff945`.
 
-## Publication scope
+## Published interface
 
-All 22 repository-relative files from `p4p-pyfluent-mcp-prepared-changes.zip`
-are included on this branch. The 15 previously unuploaded files are now present
-alongside the original seven interface files. This supersedes the earlier note
-that verification, inspection routing, comparison, skill and test changes existed
-only in the handoff archive.
+The 22 repository-relative files from the prepared migration package are retained:
+pinned upstream dependency, preserving MCP server/client, attach-only resolution,
+fail-stop dependency verification, inspection and execution entry points, offline
+snapshot comparison, tests and Linux/Windows CI configuration. The original mapper
+is preserved unchanged at `PyAnsys/legacy/settings_tree_mapper.py`, blob
+`45bcac7cadbb03848af62a651201264e4919b356`; it is not ordinary discovery.
 
-The original mapper is also preserved unchanged at
-`PyAnsys/legacy/settings_tree_mapper.py`, using Git blob
-`45bcac7cadbb03848af62a651201264e4919b356` from the base commit.
-Its compatibility entry point requires explicit historical-replay opt-in;
-ordinary discovery uses upstream MCP instead.
+## Skill sweep — 17 September 2026
 
-## Included changes
+All 41 skill entries were classified, including three already-retired workflows.
+Thirteen active operational skills now route generic Fluent work through MCP:
+`pyansys-workflow`, `fluent-live-inspection`, `fluent-manual-researcher`,
+`fluent-case-build-and-run`, `implement-experiment`, `fluent-fleet-orchestration`,
+`supervise-fluent-run`, `fluent-report-histories`, `residual-history-analysis`,
+`dpm-analysis`, `ewf-analysis`, `pool-patch-volume`, and `create-figure`.
 
-- Pinned upstream dependency, preserving MCP server/client, and attach-only
-  endpoint resolution shared with reviewed domain workers.
-- Fail-stop dependency verification, typed readbacks, and explicit uncertainty.
-- MCP inspection commands, offline setup-snapshot comparison, and a generated
-  snippet execution command for the existing supervisor.
-- Updated live-inspection skill and integration guidance.
-- Four migration test modules and a Linux/Windows GitHub Actions workflow.
+The existing `fluent-live-inspection/mcp-integration.md` is the shared route
+contract. Root and PyAnsys instructions, recovery/run guidance and three related
+UI prompts are aligned with it. No new orchestration skill or capability registry
+was added. Scientific/research/reporting skills and invocation classes remain;
+retired skills remain disabled and historical code is not deleted.
 
-Project science, phase-state and run-path records, raw evidence, fleet
-orchestration, artifact provenance, OneDrive handling, long-run supervision,
-exact-thread wakeup, and domain-specific extraction workers remain retained.
-A successful MCP call remains execution evidence, not experiment acceptance.
+MCP owns generic discovery, validated generated execution and inspection. P4P
+retains scientific phase gates, exact artifact and run-path identity, fleet
+ownership, OneDrive, paired save/reopen, smoke/stream proof, complete domain/history
+parsing, native figure quality and long-run verification/exact-thread wakeup.
+Existing direct workers require a named capability gap and reviewed execution
+scope; they are not automatic fallbacks for MCP failure. TUI/journal exceptions
+retain explicit run approval. A successful MCP call is not scientific acceptance.
+
+This sweep changes instructions and adds offline instruction-contract tests. It
+does not replace retained domain algorithms, change project conclusions or start
+a simulation. The new autoresearch sandbox discussed separately is not created
+or configured by this sweep.
 
 ## Validation and remaining qualification
 
-The prepared migration suite was rerun on 17 September 2026:
-`52 passed, 1 skipped`. The skipped module requires the installed upstream MCP
-dependencies, which were unavailable in this execution environment. Python
-compilation of the authored modules and scripts passed. These results do not
-represent the full repository suite or a live Fluent deployment.
+The scoped local suite on 17 September 2026 returned `86 passed, 1 skipped`:
+the four existing migration test modules plus the new skill-routing contract
+module. The skip is the installed-upstream contract module because upstream MCP
+dependencies were unavailable locally. Python compilation of the available
+migration code/scripts/tests passed. This is not the complete repository suite,
+a GitHub Actions success report or live Fluent validation.
 
-Publication is complete for the prepared package; the overall migration remains
-work in progress. Before merge, finish full-repository command/instruction
-compatibility review, run the complete suite with the pinned dependencies and
-without skipping upstream contract tests, and qualify a controlled live workflow
-through identity, readback, paired save/reopen, invariants, smoke, evidence
-streams, long-run completion and exact-thread wakeup. Confirm MCP shutdown leaves
-Fluent running and lost responses are reconciled rather than replayed.
+Before deployment, run the complete repository suite with pinned dependencies
+and no skipped upstream contract module. Qualify one owned live workflow through
+identity, discovery, approved delta, critical readback, paired save/reopen,
+invariants, smoke, required histories, full horizon, final save, terminal verifier
+and exact-thread wakeup. Confirm shutdown preserves Fluent, lost responses do not
+cause replay and another endpoint has independent ownership/path handling.
 
-No live Fluent sessions were used or changed. This branch has not been merged
-into `main`; publication alone is not deployment qualification.
+No live Fluent sessions or Project/CFD_wiki evidence were changed. The branch is
+not merged into `main`; instruction consistency is not deployment qualification.

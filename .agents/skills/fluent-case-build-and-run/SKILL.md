@@ -1,163 +1,106 @@
 ---
 name: fluent-case-build-and-run
-description: "Build and prove a Fluent child case from an explicit parent under the active phase execution contract. Use for dependency-ordered mutation, output-path resolution, strict readback/save-reopen verification, smoke testing, and mode-aware handoff."
+description: Build and prove an approved Fluent child through MCP, with dependency-ordered changes, exact paths, strict readback/save-reopen verification and smoke/instrumentation gates.
 ---
 
-# Fluent Case Build and Run
+# Fluent case build and run
 
-Treat Fluent as a dependency-ordered GUI state machine, not a stable Python object tree.
+Implement a case that has already earned scientific permission. Use
+[MCP integration](../fluent-live-inspection/mcp-integration.md) for all generic
+Fluent operations and retained-worker exceptions. This skill owns setup proof,
+not experiment selection or phase closure.
 
-This skill implements a case that has already earned scientific permission. It may not waive phase lifecycle gates.
+## Establish authority, identity and scope
 
-## Establish identity, authority, and scope
+Receive the approved setup, lifecycle permission and canonical `run-paths.yaml`
+from `implement-experiment` / `fluent-fleet-orchestration`. Require exact parent
+artifact and case/data paths, run ID, `server.ref`, declared mutable leaves,
+invariants, output destinations and recovery plan. Block unresolved material
+recovery or identity/path ambiguity before mutation.
 
-- Treat connection/server ID as transport routing, never case identity.
-- Require exact parent case/data paths and artifact identity.
-- Receive canonical `run-paths.yaml` and server placement from `fluent-fleet-orchestration` / `implement-experiment`.
-- Read phase lifecycle state before mutation; do not implement under an
-  unresolved material recovery block.
-- Define the intended mutable leaves and invariants before mutation.
-- Derive run-specific output/recovery paths.
+An exclusive goal lease permits planned loaded-state replacement, after preserving
+valuable unreplicated state. It does not permit closing/relaunching Fluent or
+overwriting durable parents. Use an owned, still-running session and one writer.
 
-When the active `/goal` has an exclusive fleet lease, the loaded Fluent state
-may be replaced after required recovery is preserved. It is valid to stop an
-inherited solve or replace the loaded case according to the execution plan
-without additional human approval; the Fluent process/session remains running.
+## Ground before mutation
 
-Do not use that authority to overwrite verified durable parents or lose a scientifically valuable unpreserved endpoint when a paired recovery save can be made cheaply.
+Use `fluent-live-inspection`: discover candidate APIs, then inspect actual active
+state with MCP descriptors, named-object tools and `get_state`. For multiphase/DPM,
+include phase/material/boundary identity, turbulence/energy, injections, wall fates
+and relevant topology. `summarize_setup` alone is not an invariant audit.
 
-## Inspect before mutating
-
-Inspect the loaded parent and record the settings that must be preserved. For multiphase/DPM work this normally includes model family, phase materials, phase-specific boundaries, turbulence/energy state, injections, wall fates, and other relevant topology.
-
-Use the active live tree as authority.
-
-Whenever a dependency-sensitive object changes:
+For each dependency-sensitive change:
 
 ```text
-enable/create parent
-→ reacquire objects
-→ inspect active children/options
-→ set one dependent child
-→ read back
-→ continue
+inspect parent → validate_code → run_code for approved parent change
+→ reacquire → describe active child/options → validate and execute child
+→ independent critical readback → continue only on a match
 ```
 
-Do not guess a missing path. Use `fluent-live-inspection`; escalate semantic/prerequisite/automation uncertainty to `fluent-manual-researcher`.
+Reacquire after loads, model/type/phase changes and object creation. Semantic or
+prerequisite uncertainty goes to `fluent-manual-researcher`; missing paths never
+justify guessing, recursive probing or silently enabling unrelated models.
 
-## Resolve all file outputs before solving
+## Resolve outputs before solving
 
-Fluent may retain relative filenames whose destination depends on the session working directory.
+Inspect inherited reports, monitors, autosaves, exports and transcripts through
+MCP. Match their destinations to `run-paths.yaml`. Change only output paths,
+preserving scientific definitions. For required relative filenames deliberately
+establish and verify Fluent's working directory; loading a case does not establish
+it. Create and prove writable directories with the approved host/file support,
+not a guessed local path or code pasted around the MCP sandbox.
 
-Before smoke/main solve:
-
-1. inspect important report/monitor/autosave/export/transcript destinations;
-2. compare them with canonical `run-paths.yaml`;
-3. replace ambiguous/relative inherited paths with explicit run-specific paths where supported;
-4. where a relative filename is required, deliberately set/verify Fluent working directory and record the resolved absolute path;
-5. preserve scientific monitor/report definitions while changing only file destinations;
-6. create required directories and prove writability;
-7. read back important configured destinations;
-8. reconcile the canonical `run-paths.yaml`.
-
-Never assume loading a case changes Fluent's working directory.
+Read back important destinations and reconcile the same canonical path file after
+smoke and final execution. Block unresolved output locations before compute.
 
 ## Build and prove the child
 
-1. Preserve required recovery state before first destructive mutation.
-2. Make requested changes in dependency order.
-3. Reacquire affected objects after topology/model/type changes.
-4. Strictly audit every intended delta and declared invariant.
-5. Write paired prepared case/data to declared full paths.
-6. Confirm the files exist.
-7. Reload by full path.
-8. Reacquire objects and repeat the strict audit.
-9. Record explicit parent/child paths, Fluent version, delta, readback, and output path map.
+1. Preserve any required paired recovery state.
+2. Apply only the approved delta through validated MCP execution.
+3. Independently read back every critical delta and invariant.
+4. Write the prepared case/data pair to declared full paths; verify both files.
+5. Reopen that pair in an owned, still-running session and reacquire objects.
+6. Repeat the critical audit against expected values, not merely the previous snapshot.
+7. Record parent/child identity, Fluent version, changes, readbacks and paths.
 
-A successful setter call is not proof. Save/reopen readback is proof.
+Use captured-path comparison as supporting evidence only. Neither a successful
+setter, an `EXECUTED` receipt nor `WITHIN_DECLARED_DIFF_SCOPE` proves the setup.
+Required missing, inactive, failed or truncated state blocks the audit.
 
-## Smoke and instrumentation gate
+## Smoke and instrumentation
 
-Run the setup's short smoke test, normally around 50 iterations for iteration-based cases.
+Initialize only when the setup requires it. Run its smoke test, normally about
+50 iterations for iteration-based cases, through the approved MCP worker.
+Require actual iteration/physical-time advancement, no setup/readback drift,
+required file-backed histories at declared paths, required residual/equation
+capture, and no unresolved output ambiguity.
 
-Before any planned discovery or long hypothesis solve, require:
-
-- initialization success when initialization is part of the setup;
-- iteration/physical-time advancement;
-- required file-backed histories appearing at declared paths;
-- required residual/equation capture working when the evidence contract needs it;
-- no setup/readback drift after smoke;
-- no unresolved path ambiguity.
-
-If a required evidence stream cannot be captured durably, return `BLOCK` to the
-calling loop for autonomous repair, equivalent instrumentation, bounded claim
-redesign, or durable blocked disposition; do not launch and hope to recover it
-later.
+A missing decisive stream returns `BLOCK` for autonomous repair, equivalent
+instrumentation or upstream claim redesign. Do not launch and hope to reconstruct
+uncaptured histories later. Smoke and main-run budgets remain distinct and recorded.
 
 ## Mode-aware handoff
 
-### Discovery
+Discovery remains attached: verified child and smoke → MCP worker for the fixed
+short horizon → terminal proof → immediate evidence analysis. A tool timeout is
+not a terminal state. Reconcile progress; do not replay or open a competing writer.
 
-Discovery remains synchronous and attached.
+Hypothesis execution requires `HYPOTHESIS_RUN_READY == PASS`. Preserve the default
+10,000+ steady full-geometry qualification horizon, the explicitly scoped Auto Loop
+2,000-iteration exception with bounded claim, or an approved equivalent basis.
+On Codex use `supervise-fluent-run`; on runtimes without self-resume stay attached.
+Do not redesign the experiment after readiness. Poor numerical/physical behaviour
+is evidence, not a stop condition while the approved run can continue.
 
-```text
-verified child + smoke
-→ synchronous Python/PyFluent discovery run
-→ scientific goal remains active
-→ terminal execution evidence
-→ immediate analysis
-```
+## Recovery and handoff
 
-Do not detach discovery merely to avoid waiting. An RPC/tool timeout is not a terminal state; reconcile manifest/live iteration and keep waiting while the approved run advances.
+Return execution facts and explicit blockers: lifecycle permission, exact parent
+and child, recovery pair, path map, pre-save/post-reopen audits, smoke/streams,
+requested and observed horizon, MCP worker/receipt, final/checkpoint/history/log
+locations, durability and supervisor/wakeup status where applicable.
 
-### Hypothesis-test
-
-A long hypothesis run may launch only after `verify-phase-transition` records `HYPOTHESIS_RUN_READY == PASS`.
-
-For ordinary steady iteration-based full-geometry qualification, reject a
-planned horizon below 10,000 iterations unless the setup records a scoped Auto
-Loop qualification horizon (normally 2,000 iterations) with a bounded claim,
-or a scientifically equivalent non-iteration basis.
-
-On Codex, hand the run to `supervise-fluent-run`; do not background-launch the raw runner. On runtimes without self-resume, remain attached for the approved horizon.
-
-The hypothesis execution path must not change the scientific experiment after readiness verification.
-
-## Autonomous recovery conditions
-
-Do not mutate or launch this path while any of these remains unresolved. Return
-`BLOCK`, then apply the autonomous-recovery sequence: reconcile exact artifacts,
-inspect live state, research the repository/official manual, test the leanest
-recoverable child or alternate server, verify readback/save-reopen, and retry.
-If recovery is exhausted, persist `BLOCKED_AUTONOMOUS` with retained evidence
-and continue another valid lane:
-
-- lifecycle permission missing;
-- material recovery block active;
-- parent identity uncertain;
-- path/output identity ambiguous;
-- parent audit conflicts with branch assumptions;
-- required setting cannot be read back;
-- save/reopen audit fails;
-- required instrumentation does not write during smoke;
-- initialization fails when required;
-- planned qualification horizon violates the hypothesis contract;
-- no deterministic completion proof exists for a detached hypothesis run;
-- Codex hypothesis self-wake cannot target the exact originating thread.
-
-## Reporting
-
-Return execution proof, not scientific interpretation:
-
-- lifecycle mode/prerequisite gates;
-- parent and child identity;
-- recovery state preserved when takeover occurred;
-- run path map and working directory;
-- strict pre-save and post-reopen audits;
-- smoke/instrumentation result;
-- requested horizon;
-- exact Python runner and output paths;
-- hypothesis handoff job/terminal manifest where applicable;
-- final observed progress;
-- final/recovery/report/log locations;
-- blockers or implementation limitations.
+Blocked permission, identity, critical readback, save/reopen, initialization,
+instrumentation, qualification depth or completion/wakeup proof prevents launch.
+Use [autonomous recovery](../references/autonomous-recovery.md); exhausting a lane
+means a durable `BLOCKED_AUTONOMOUS`, not a fabricated pass. Technical recovery
+must preserve the scientific contract and session policy.

@@ -1,34 +1,28 @@
 ---
 name: residual-history-analysis
-description: Extract, stitch, and plot Fluent residual histories using native iteration coordinates across staged, restarted, or batched runs.
+description: Extract, stitch, and plot complete Fluent residual histories with native coordinates; use MCP for live state and retained history parsers where needed.
 ---
 
 # Residual history analysis
 
-Use this skill when residual history is part of the numerical evidence.
+Use [MCP integration](../fluent-live-inspection/mcp-integration.md) for live
+operations. Current residuals or a convergence flag are not a recorded history.
 
-## Rules
+1. Read the run/evidence contract and canonical output paths. Use MCP
+   `solver_status` for current diagnostic context and scoped discovery/readback
+   for residual/monitor configuration; neither establishes historical completeness.
+2. Prefer existing file-backed histories/transcripts. Where MCP lacks complete
+   export, review `PyAnsys/scripts/inspection/export_residuals.py` and record the
+   exact capability gap, source and helper before using it. Preserve the native
+   residual definition/scaling and equation identities.
+3. Stitch by Fluent iteration or physical time, not sample number. Remove only
+   verified duplicate samples. Preserve restarts, stage boundaries, real gaps,
+   failed tails and the actual horizon; never blindly concatenate or interpolate.
+4. Plot/reduce locally with the approved analysis plan. Record source segments,
+   transformations and completeness: complete, partial, unavailable or requires
+   rerun. Missing history cannot be made complete by a final data snapshot.
 
-- Use Fluent/native iteration as the x-axis when available; never replace it
-  with sample index.
-- Do not blindly concatenate restarted or batched segments.
-- Remove only verified duplicate iterations.
-- Preserve real gaps, failure tails, stage boundaries, and the actual horizon;
-  do not interpolate unknown iterations.
-- State stitching limits and distinguish a complete history from a partial one.
-
-Inspect known-working repository code before constructing an equivalent
-PyFluent access pattern from memory. Reuse the access pattern, not case-specific
-names, values, paths, or branch assumptions. If the current live Fluent tree
-differs, inspect and adapt.
-
-## Known working code
-
-Prefer reusable code, then a generic script, then a campaign pattern; live
-Fluent evidence wins over prose/API memory.
-
-- `PyAnsys/scripts/inspection/export_residuals.py` for direct residual export.
-- The former Stage-3 stitched-residual builder was campaign-specific and is
-  retired. Recover its parser/merge/plot implementation from Git history only
-  when a future experiment demonstrates the need; do not treat that historical
-  script as a current workflow authority.
+The retired Stage-3 stitched builder is historical implementation evidence, not
+a current entry point. Reuse a parser only when a demonstrated need warrants it;
+do not recreate generic live probing. Missing required capture is an evidence
+block to the calling workflow, not authority to silently change or rerun a case.

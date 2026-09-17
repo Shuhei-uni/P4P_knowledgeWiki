@@ -14,6 +14,12 @@ For changes under `CFD_wiki/` or `PyAnsys/`, read that tree's `AGENTS.md` first.
 Use the smallest matching repository skill for a repeatable workflow; the skill
 owns its reading order, gates, procedure, and completion criteria.
 
+For live Fluent discovery, generated execution, or a proposed direct-worker
+exception, follow the [MCP integration contract](.agents/skills/fluent-live-inspection/mcp-integration.md).
+Generic Fluent interaction is MCP-first; P4P retains scientific gates, evidence,
+fleet/artifact management and supervision. Existing Python/PyFluent workflow
+wording refers to that route, not permission to bypass it with an old script.
+
 Before a consequential scientific or Fluent decision, run a **three-path
 check**: reusable CFD evidence through `cfd-wiki`'s evidence-lookup branch,
 generic Fluent guidance through its Fluent-guidance branch (escalating exact

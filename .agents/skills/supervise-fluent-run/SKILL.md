@@ -1,238 +1,111 @@
 ---
 name: supervise-fluent-run
-description: "Launch and supervise an approved long hypothesis-qualification Fluent calculation only after HYPOTHESIS_RUN_READY passes. On Codex, use a detached worker that deterministically verifies completion and resumes the exact originating scientific goal; on runtimes without session resume, stay attached."
+description: "Supervise an approved long Fluent hypothesis run after HYPOTHESIS_RUN_READY passes, using the MCP execution route. On Codex, verify terminal evidence and wake the exact originating thread; otherwise remain attached."
 ---
 
 # Supervise Fluent Run
 
-This skill is only for long **hypothesis qualification** runs.
+Own long-run supervision, not solver discovery or scientific interpretation.
+Discovery remains attached and does not use this detached path merely to avoid
+waiting. Follow [MCP integration](../fluent-live-inspection/mcp-integration.md).
 
-Discovery stays attached and must never use this detached path merely to avoid waiting.
+## Require readiness
 
-## Hard launch preconditions
+Read `CONTEXT.md`, `phase-state.yaml`, the approved setup and `run-paths.yaml`.
+Require `DISCOVERY_EVIDENCE`, `HYPOTHESIS_DEFINITION` and
+`HYPOTHESIS_RUN_READY` all `PASS`, with no material unresolved recovery block.
+Require the authorized candidate ID, exact parent/prepared pair, run/endpoint
+identity and ownership, initialization intent, paths, evidence streams, final
+pair, verifier and durability plan. Confirm the recorded implementation proof
+includes paired save/reopen, invariant readbacks, smoke and instrumentation.
 
-Before launch, read the phase-root `phase-state.yaml` and require:
+For ordinary steady full-geometry qualification require at least 10,000
+iterations, unless the setup declares scoped Auto Loop qualification (normally
+2,000) with a correspondingly bounded claim or an equivalent non-iteration
+basis. Preserve any required continuation/restart qualification. A mode label
+alone grants no permission to launch.
 
-```text
-DISCOVERY_EVIDENCE == PASS
-HYPOTHESIS_DEFINITION == PASS
-HYPOTHESIS_RUN_READY == PASS
-no unresolved material recovery block for this run
-```
+## Keep the existing supervisor
 
-Also require the approved setup/run contract to contain:
+On Codex use `PyAnsys/scripts/orchestration/run_and_handoff.py`, backed by
+`PyAnsys/src/pyansys_fluent/run_handoff.py`. Read the current job schema in
+`PyAnsys/queues/run-and-handoff.example.yaml`; preserve its actual field names.
+Supply argv lists rather than shell strings, an explicit cwd, run-specific logs
+and manifest, required-file checks, a deterministic verifier and both terminal
+wake triggers. Keep the job input derived from canonical `run-paths.yaml`.
 
-- phase `CONTEXT.md` path and approved qualification-path ID, with no
-  unresolved context lock;
-- experiment/setup/run identity;
-- exact runtime `server.ref` and parent/child identity;
-- canonical `run-paths.yaml`;
-- exact Python/PyFluent runner and working directory;
-- initialization intent;
-- approved qualification horizon/window;
-- required final case/data;
-- required report/monitor/residual/checkpoint outputs;
-- deterministic terminal completion proof;
-- OneDrive durability intent when applicable.
+For generated Fluent execution, `runner.command` uses the existing
+`PyAnsys/scripts/orchestration/execute_fluent_code.py` with `--server-id`,
+`--code-file` and a fresh `--output-json` from the path contract. A coherent
+MCP client worker is also appropriate when multiple calls/readbacks are needed.
+Keep the approved solve and final-save sequence in that worker lifetime.
+Use a direct domain worker only for a named, reviewed capability gap under the
+shared contract; it is not the default because an old runner exists.
 
-Do not launch a run merely because `mode: hypothesis-test` appears in YAML.
+The snippet uses upstream's `solver` binding. The worker validates and executes
+through MCP; neither the supervisor nor a skill may bypass sandbox rejection.
+MCP does not provide a durable job scheduler, final-save verifier or AI wakeup.
 
-For ordinary steady iteration-based full-geometry qualification, reject a
-horizon below **10,000 iterations** unless the setup records a scoped Auto Loop
-qualification horizon (normally 2,000 iterations) with a claim limited to that
-window, or a scientifically equivalent non-iteration qualification basis.
+## Verify completion independently
 
-When the hypothesis claim depends on stationarity/steady/bounded behaviour, require the approved continuation/restart qualification component when the setup says it is necessary.
+`EXECUTED`, a zero exit code, elapsed time, a receipt filename or a status summary
+is not completion proof. The verifier must parse the execution outcome and prove:
 
-## Runtime architecture
+- the intended run reached the approved native iteration/physical-time horizon;
+- the final matching case/data pair exists, is non-trivial and has the right identity;
+- required histories, reports and checkpoints exist at the declared paths;
+- required continuation endpoints and canonical path reconciliation are present.
 
-### Codex
+Use reviewed filesystem/evidence helpers when the worker cannot inspect the
+remote filesystem directly. Required-file presence alone cannot establish the
+saved state or horizon. Empty/partial receipts and missing required streams block.
 
-```text
-verified hypothesis case
-→ exact CODEX_THREAD_ID
-→ run_and_handoff.py
-→ detached Python/PyFluent worker
-→ full approved horizon
-→ deterministic terminal verification
-→ COMPLETE | BLOCKED manifest
-→ resume exact originating scientific goal thread
-→ read phase-state.yaml
-→ verify HYPOTHESIS_EXECUTION
-→ analyse/verify HYPOTHESIS_EVIDENCE
-```
+## Runtime handoff
 
-Do not keep the Codex scientific agent awake for hours just to watch a long qualification solve. The worker waits; the scientific goal owns decisions before and after.
-
-### Cursor / runtime without session resume
-
-```text
-verified hypothesis case
-→ keep scientific agent attached
-→ Python/PyFluent run full horizon
-→ deterministic terminal verification
-→ continue analysis in same session
-```
-
-Do not call `codex exec resume` outside Codex.
-
-## Build the run-and-handoff job
-
-On Codex, use:
+On Codex, capture `CODEX_THREAD_ID` at launch; an explicit session ID is only an
+override. Require both terminal wake triggers and a working verifier before a
+detached job starts. Never use `--last` for autonomous handoff.
 
 ```text
-PyAnsys/scripts/orchestration/run_and_handoff.py
+RUNNING → approved MCP worker → VERIFYING
+→ persist COMPLETE | BLOCKED
+→ resume exact originating thread as the final handoff action
 ```
 
-with reusable implementation:
+The wake prompt must direct the thread to read the terminal manifest and
+`phase-state.yaml`, reconcile identity/horizon, verify `HYPOTHESIS_EXECUTION`,
+produce the planned analysis/figures, verify `HYPOTHESIS_EVIDENCE`, and continue
+the same loop. A failed AI handoff after verified completion is recorded
+separately; it does not justify rerunning CFD.
 
-```text
-PyAnsys/src/pyansys_fluent/run_handoff.py
-```
+On Cursor or a runtime without self-resume, stay attached for the approved
+horizon and retain the same terminal proof. Do not require `CODEX_THREAD_ID`
+or run `codex exec resume` there. Missing exact-thread support prevents this
+Codex detached route, not an explicitly available attached route.
 
-The derived job spec must define at least:
+## Supervision and failure
 
-```yaml
-job:
-  id: ...
-  mode: hypothesis-test
-  manifest: ...
+Refuse duplicate launch while a prior job manifest is unresolved. Inspect whether
+the prior run is active, complete, blocked or uncertain before any forced rerun.
+A lost MCP response or execution error can follow partial mutation or a continuing
+solve. Status calls may wait behind a solve; use file-backed progress where
+available. Preserve `BLOCKED` and reconcile before replay, not a competing client.
 
-runner:
-  command: [...]
-  cwd: ...
-  log: ...
+Poor residuals, balances or disappointing physics are evidence, not early-stop
+permission while Fluent can reach the approved horizon. Follow a different
+stop rule only when the experiment contract explicitly defines it. FPE, fatal
+error, failed initialization/save/verifier or unreconciled identity are blockers.
+Preserve evidence and wake the exact Codex thread on `BLOCKED` too.
 
-completion:
-  required_files: [...]
-  verifier_command: [...]  # when needed
+The worker must not redesign numerics, reinitialize or automatically restart from
+a checkpoint. The scientific loop chooses an authorized recovery. Fluent stays
+running through client cleanup; process restart is not recovery authority.
+Promote only important final/selected recovery pairs under the OneDrive plan.
 
-codex:
-  trigger_on: [COMPLETE, BLOCKED]
-```
+## Handoff record
 
-Use argv lists, not shell strings.
-
-A zero runner exit code is never sufficient completion proof.
-
-## Codex self-wake is mandatory
-
-Every Codex detached hypothesis job must capture the exact originating thread.
-
-Prefer `CODEX_THREAD_ID`; an explicit `codex.session_id` is only an override.
-
-Do not launch this specific detached job if:
-
-- no exact originating thread can be resolved (then use attached deterministic
-  supervision where the runtime permits);
-- wakeup is disabled;
-- either `COMPLETE` or `BLOCKED` is absent from triggers;
-- deterministic completion proof is absent.
-
-Never use `codex exec resume --last` for autonomous multi-job work.
-
-The worker's terminal sequence must be:
-
-1. persist `RUNNING`;
-2. run the approved Python/PyFluent runner synchronously;
-3. capture logs/return code;
-4. enter `VERIFYING`;
-5. verify required files and/or run the deterministic verifier;
-6. persist terminal `COMPLETE` or `BLOCKED` **before** AI handoff;
-7. as the final action, launch `codex exec resume <EXACT_THREAD_ID> <prompt>`.
-
-The wake prompt must tell the resumed thread to:
-
-```text
-read the terminal manifest
-read the phase-root phase-state.yaml
-verify experiment identity and approved horizon
-run verify-phase-transition for HYPOTHESIS_EXECUTION
-produce required post-processing/core figures
-run verify-phase-transition for HYPOTHESIS_EVIDENCE
-continue the same active Phase Loop or Auto Loop automatically
-```
-
-Do not wake with a vague “simulation finished” prompt that leaves the next lifecycle step optional.
-
-A completed simulation remains `COMPLETE` if the handoff executable itself fails after terminal evidence was safely persisted. Record handoff failure separately and do not rerun CFD merely because the wake hook failed.
-
-## Completion verifier must prove the approved qualification actually happened
-
-The terminal completion proof should verify as much as can be checked deterministically before waking the scientist:
-
-- final case/data exist and are non-trivial;
-- saved data belongs to the intended run;
-- requested iteration/time horizon was reached;
-- required monitor/report/history files exist at declared paths;
-- required checkpoint/continuation endpoint exists when part of the contract;
-- output identity/path map is consistent with `run-paths.yaml`.
-
-If the required residual/history file is known to be mandatory and absent, terminal verification should not report a clean scientific-ready completion. Record the deficiency so the resumed evidence gate can return `BLOCK` rather than discovering silently missing data later.
-
-## Duplicate-run safeguard
-
-Refuse to launch when the same job manifest already exists until previous state is reconciled.
-
-Determine whether the prior job is still running, complete, blocked, or uncertain before any forced rerun. This prevents self-wake/context loss from duplicating expensive work.
-
-## Scientific behaviour is not an execution stop rule
-
-While Fluent can continue, these are normally evidence rather than execution blockers:
-
-- poor/noisy/oscillatory residuals;
-- poor balances;
-- unexpected routing or inventory behaviour;
-- scientifically unpromising trends.
-
-Attempt the full approved horizon unless the experiment contract contains another deterministic stop condition.
-
-Real execution blockers include initialization failure, FPE/fatal error, process crash, failure to reach approved horizon, missing required final files, failed deterministic verifier, or severe run identity uncertainty.
-
-On Codex, a blocked worker must still persist the blocker and wake the exact scientific thread.
-
-## Recovery and durability
-
-Routine autosaves may remain server-local. Preserve selected expensive checkpoints and important final paired case/data according to canonical `run-paths.yaml` and the OneDrive durability plan.
-
-Do not automatically redesign or restart from a checkpoint inside the worker.
-Wake the scientific loop with the evidence so it can apply autonomous recovery,
-choose a verified restart, or durably block the path without waiting for a
-human reply.
-
-## Terminal manifest
-
-Record at minimum:
-
-```text
-job_id
-phase_id
-setup_id/run_id
-mode: hypothesis-test
-approved qualification horizon
-originating Codex thread ID when applicable
-status: COMPLETE | BLOCKED
-worker pid
-runner command/cwd/log/return code
-start/finish timestamps
-final observed progress
-required-file checks
-verifier command/result/log
-Codex handoff required/enabled/status/pid/log when applicable
-runtime: Codex | Cursor | other
-```
-
-The generated worker manifest is operational evidence. It does not replace the Project experiment packet or `phase-state.yaml`.
-
-## Handoff meaning
-
-`COMPLETE` means the approved execution and deterministic terminal checks completed.
-
-It does **not** mean:
-
-- the hypothesis is supported;
-- the required scientific evidence is complete;
-- numerical credibility is established;
-- the phase may conclude.
-
-Those require the resumed scientific loop to pass `HYPOTHESIS_EXECUTION`, then `HYPOTHESIS_EVIDENCE`, then eventually `PHASE_CLOSURE`.
+Keep the existing operational manifest: job/phase/setup/run, mode/horizon,
+endpoint, command/cwd/log/return code, worker PID, timestamps, final observed
+progress, pair/history checks, verifier outcome and runtime-specific wake status.
+It does not replace `run-paths.yaml` or `phase-state.yaml`. `COMPLETE` verifies
+execution only; hypothesis evidence and phase closure still require their gates.

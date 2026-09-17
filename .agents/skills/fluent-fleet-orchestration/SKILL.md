@@ -1,25 +1,19 @@
 ---
 name: fluent-fleet-orchestration
-description: "Discover and control the live Fluent fleet for approved scientific work: inventory exact artifacts, take/reconcile active sessions under the phase authority envelope, plan verified transfers and placement, make output paths explicit, and preserve important restart states through OneDrive."
+description: "Discover and control the live Fluent fleet for approved scientific work: inventory exact artifacts, reconcile owned sessions, plan verified transfers and placement, make output paths explicit, and preserve important restart states through OneDrive."
 ---
 
 # Fluent Fleet Orchestration
 
-Turn the currently available Fluent machines and exact case/data artifacts into a safe execution plan without making scientific setup identity depend on a server.
+Place approved work on usable preserved sessions. Scientific artifacts, not
+server aliases, are the durable identities. Use the shared
+[MCP integration](../fluent-live-inspection/mcp-integration.md) contract.
 
-Servers are working compute resources. Verified scientific artifacts are the durable identities.
+## Establish authority and identity
 
-## Keep identities separate
-
-Do not collapse:
-
-- **artifact ID** — exact scientific case/data state;
-- **setup ID** — server-neutral experiment definition;
-- **run ID** — one execution attempt;
-- **server reference** — exact runtime endpoint;
-- **goal lease** — which autonomous phase currently owns active-session control.
-
-Resolve runtime server identity using alias + live IP, for example:
+Read the phase `CONTEXT.md` and `phase-state.yaml`; consume the existing entry
+check-in, including full/restricted Fluent authority, without asking again.
+Keep artifact ID, setup ID, run ID, endpoint and goal lease separate.
 
 ```yaml
 server:
@@ -29,206 +23,80 @@ server:
   profile_id: 'shuhei-server-2'
 ```
 
-Use `server.ref` in placement/execution records.
+Resolve the actual endpoint; the example is not configuration. A profile is
+filesystem knowledge, not proof of availability or loaded case identity.
 
-## Read the phase authority envelope first
+An exclusive lease permits stopping a calculation, preserving a recovery pair,
+loading another approved parent and reassigning still-running sessions. It does
+not permit process shutdown/relaunch or overwriting verified durable artifacts.
+Restricted leases retain their explicit limits. Preserve valuable unreplicated
+state before a destructive takeover; reconcile prior job ownership first.
 
-Before preflight, read the active phase contract and `phase-state.yaml`.
+## Preflight each compute wave
 
-When the human has granted context-gated execution authority, record an
-exclusive fleet lease such as:
+Check every configured endpoint that can reasonably be checked. Use the MCP
+process bound to that alias: `session_status`, argument-free `connect` only when
+needed, `solver_status`, and scoped live discovery/readback. Determine:
 
-```yaml
-goal_lease:
-  phase_id: phase-07
-  mode: exclusive
-  experiment_selection: context_gated
-  active_session_control: full
-```
+- current reachability, resolved endpoint, versions and usable capabilities;
+- idle/running/blocked/uncertain state and the owner of any active job;
+- exact loaded identity or its uncertainty;
+- local paired parents/recovery states, verified remote roots and transfer options;
+- valuable state that a takeover would lose.
 
-Under an **exclusive** lease, the active Phase Loop or Auto Loop is explicitly
-authorized to control every configured Fluent working session during the goal.
-The lease is valid only after the loop-entry authority check has recorded
-`fluent_fleet_sessions: full`. That includes:
+MCP session tools are not a remote filesystem browser or fleet scheduler. Use
+reviewed host/file-transfer helpers for actual file presence, hashes, directories
+and OneDrive replicas; record that capability gap and exact helper. Do not infer
+file availability from a case name or alias.
 
-- stopping an active calculation;
-- detaching/replacing an abandoned or conflicting client only after proving
-  that it does not terminate the Fluent process/session;
-- saving a quick paired recovery state when the currently loaded endpoint is scientifically valuable and not already durable;
-- reconnecting a client to the still-running Fluent session;
-- loading a different verified parent;
-- reassigning a server to another approved experiment;
-- overwriting disposable in-session setup state and run-local scratch outputs according to the new run plan.
+Enforce one writer per Fluent session across all agents, MCP processes and direct
+workers. Under an exclusive lease, a busy inherited solve is not automatically
+protected, but reconcile it before stopping or replacing it. Continue jobs that
+belong to the active plan. Use only an authorized, verified non-terminating stop
+route; `disconnect` and `manage_fluent` are not takeover tools. If a safe stop
+cannot be performed, preserve the block and use another valid lane.
 
-Do not ask the human for confirmation for each of those actions while the exclusive lease is active.
+## Place by exact-parent locality
 
-The lease does **not** authorize shutting down a Fluent process/session or
-deleting or overwriting verified durable Project/OneDrive parents/finals simply
-because they are inconvenient. Loaded in-session state may be replaced; the
-Fluent process and durable scientific artifacts are preserved.
+Prefer a compatible usable server with the exact verified parent already local,
+then a verified OneDrive replica, then a parent promotable from another server.
+If the only trusted copy is inaccessible, block that placement.
 
-If the phase handoff grants restricted rather than exclusive authority, obey those restrictions.
+Return real capacity, locality and compatibility to the designer. Parallelism
+serves approved science; it does not authorize filler experiments. Repeat
+preflight whenever a new wave starts or availability materially changes.
 
-## Start every compute cycle with fleet preflight
+## Keep one path authority
 
-For every configured server that can reasonably be checked determine:
+Populate and reconcile the experiment's existing `run-paths.yaml`:
 
-- reachability;
-- live endpoint/IP and `server.ref`;
-- Fluent/PyFluent availability and version constraints;
-- whether it is idle, iterating, blocked, or uncertain;
-- which process/run appears to own current activity;
-- verified working/output roots;
-- exact useful paired `.cas.h5`/`.dat.h5` artifacts accessible locally;
-- active/recovery runs present;
-- important output/session state that would be lost by takeover.
+- phase/lease, setup/run, `server.ref`, separate alias/IP and profile;
+- takeover/recovery facts and exact artifact identity;
+- actual Fluent working directory, staging/run roots and parent/prepared/final pairs;
+- autosave/checkpoint/report/monitor/transcript/export destinations;
+- worker logs/manifests and completion verifier;
+- OneDrive destinations and verified/local-only durability.
 
-Do not infer case identity from server name, directory name, iteration count, or a status string. Inspect exact paths/provenance and use manifests/hashes/readback where practical.
+Use MCP to inspect inherited file-backed definitions and validate/run only the
+approved path corrections. Preserve their scientific meaning. Host helpers prove
+directory existence and writability. Resolve required relative paths deliberately;
+loading a case does not prove a working-directory change. Reconcile actual paths
+after smoke and final execution, without creating a competing durable manifest.
 
-### Busy is not automatically blocked under an exclusive goal lease
+## Promote selected artifacts
 
-If Fluent is iterating when an exclusive lease is active:
+Preserve complete matching case/data pairs for important finals, likely parents,
+expensive selected checkpoints and difficult-to-reconstruct reference states.
+Keep routine autosaves local. Save via the approved MCP route, then use the
+reviewed transfer layer to copy and verify both files, preferably by hashes.
+Record artifact ID, source setup/run, progress, origin endpoint and destinations.
+A file appearing in a local OneDrive folder is not proof of completed replication.
+If replication fails, keep the local pair and record `LOCAL_ONLY` durability debt.
 
-1. determine whether the calculation belongs to an approved active job and
-   context candidate ID in the same `phase-state.yaml`;
-2. if yes, preserve/continue it according to that job's state;
-3. if it is stale, abandoned, from an older goal, or conflicts with the new approved placement, reconcile useful state;
-4. save a paired recovery artifact first when losing the current unpreserved endpoint would materially cost scientific work;
-5. stop the calculation, detach only non-owning clients, then load/reassign the
-   still-running session;
-6. record the takeover/recovery fact in the execution plan.
+## Handoff
 
-Do not let `iterating=true` by itself force `BLOCKED` when the phase has explicit takeover authority.
-
-If session ownership cannot be identified, preserve the recoverable state where cheap, then take control under the exclusive lease.
-
-## Build an artifact availability map
-
-For relevant parents, finals, and important recovery points record where an exact verified copy exists:
-
-```text
-artifact: F11-final
-local:
-  server-1@192.168.1.31: absent
-  server-2@192.168.1.42: verified
-onedrive: verified | absent | unknown
-```
-
-Prefer paired case+data. A case without the required data or data without the matching case is not automatically a complete branch parent.
-
-For important artifacts prefer a small manifest containing artifact ID, source setup/run, progress, filenames, origin `server.ref`, and SHA256 hashes when cheap to obtain.
-
-## Give scientific design the real resource envelope
-
-Return live server count, session state, takeover status, artifact locality,
-transfer possibilities, and material version limitations to the active loop /
-`design-experiment` before runnable work is committed.
-
-Use parallel capacity only for Phase Loop queue items or Auto Loop cases inside
-the recorded envelope. Do not create filler experiments merely to maximize
-utilization.
-
-## Place runs by exact-parent locality
-
-Default placement priority:
-
-1. usable server already has exact verified parent;
-2. usable server can receive exact verified parent from OneDrive;
-3. exact parent can be promoted from another active server to OneDrive, then staged;
-4. only known copy is inaccessible and no verified replica exists — block the run.
-
-A server occupied by disposable/stale activity is still potentially usable under an exclusive lease after reconciliation/takeover.
-
-## Keep path authority with the experiment
-
-Every runnable experiment packet keeps:
-
-```text
-experiment/
-├── setup.md
-├── run-paths.yaml
-└── results.md
-```
-
-`run-paths.yaml` is the single durable authoritative path record. Populate it before implementation and reconcile the same file after smoke/main execution.
-
-Record when applicable:
-
-- goal lease / phase ID;
-- `server.ref`, ID, IP, profile ID;
-- takeover/recovery action performed;
-- Fluent working directory;
-- staging/run roots;
-- parent case/data;
-- prepared/smoke/final case/data;
-- autosave/checkpoint locations;
-- every required file-backed report/monitor destination;
-- transcript/log/status/job manifests;
-- deterministic verifier path/command when applicable;
-- OneDrive durable artifact destinations/status.
-
-Do not use bare filenames without a deliberately fixed containing directory.
-
-## Resolve inherited relative paths
-
-A loaded case may contain relative report/monitor/autosave/export paths. Before smoke and again before a long run when needed:
-
-1. inspect important file-backed definitions;
-2. identify relative/blank/inherited/ambiguous destinations;
-3. resolve them to run-specific destinations;
-4. rewrite only file paths where possible without changing scientific definitions;
-5. deliberately establish/verify Fluent working directory when relative paths are unavoidable;
-6. read back configured destinations;
-7. reconcile actual destinations with canonical `run-paths.yaml`.
-
-If an important output location cannot be resolved, return an execution blocker before expensive compute.
-
-## OneDrive is the shared durability/transfer layer
-
-Use server-local storage as working copy and verified OneDrive paired case+data as durable reusable copy.
-
-Strongly prefer promotion for:
-
-- scientifically important final states;
-- likely future parents;
-- selected expensive recovery checkpoints;
-- important pre-change states that would be difficult to recreate.
-
-Do not synchronize every autosave.
-
-For promotion:
-
-1. save matching case+data;
-2. assign one artifact ID;
-3. record source setup/run/progress/origin server;
-4. copy both files;
-5. preserve a small manifest;
-6. verify copy integrity, preferably hashes;
-7. update `run-paths.yaml`;
-8. only then call it durable.
-
-If OneDrive is unavailable, keep the local pair and mark `LOCAL_ONLY` durability debt.
-
-## Produce an explicit execution plan
-
-Before `implement-experiment`, return a concrete placement/path/session-control contract.
-
-Example compact handoff:
-
-```text
-FLEET LEASE: phase-07 / exclusive
-FLEET: reachable / running / taken-over / unavailable server refs
-RECOVERY: any pre-takeover paired saves and why
-ARTIFACTS: exact parent/final/recovery verification status
-PLACEMENT: setup -> run -> server.ref
-PATH MAP: canonical Project/.../run-paths.yaml
-TRANSFERS: source -> OneDrive -> destination
-DURABILITY: verified finals/checkpoints and LOCAL_ONLY debt
-BLOCKERS: unavailable parent, uncertain identity, path/compatibility issue
-```
-
-The active loop authority in `CONTEXT.md` / `phase-state.yaml` chooses what is
-worth running. This skill ensures the whole live fleet can actually be
-controlled and used according to
-the granted phase authority without losing valuable scientific state or
-confusing session identity with artifact identity.
+Return fleet availability/ownership, useful artifacts, placement, takeover and
+recovery facts, the canonical path map, required transfers, durability and exact
+blockers. `implement-experiment` consumes this plan; the scientific loop retains
+experiment selection. A status call does not prove a run complete, and a lost
+response must be reconciled before another writer or solve is started.

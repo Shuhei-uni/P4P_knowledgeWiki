@@ -5,46 +5,46 @@ description: Inspect live Fluent paths, named objects, allowed values, or uncert
 
 # Fluent live inspection
 
-Use upstream discovery, not an improvised Settings-tree crawler. For installation,
-client configuration, or a transport/version mismatch, read [MCP integration](mcp-integration.md).
+Use [MCP integration](mcp-integration.md) for the shared tool route, session
+policy, errors and retained-worker exceptions. Inspect current state; this skill
+does not load another case, activate a model, change a working directory or solve.
 
 ## Workflow
 
-1. Resolve fleet placement and ownership. Use the MCP process bound to that server
-   alias; call `connect` without arguments. Endpoint identity is not case identity.
-2. Establish the loaded case/data from verified experiment records and independent
-   live evidence. Missing identity remains unavailable.
-3. Use `find_api` for candidate paths; its bundled schema is not proof of current
-   activity. Use `describe_path` on the smallest relevant live branch, or
-   `probe_path`, `get_active_status`, `get_allowed_values`, and named-object tools
-   for a focused question. Preserve null/unknown separately from false/empty.
-4. For changes, return to the implementation workflow. Validate generated Python
-   through `validate_code`, execute through `run_code`, reacquire affected objects,
-   and inspect critical values again. Parent/model/type changes invalidate earlier
-   assumptions. A successful MCP call is execution evidence, not a passed gate.
-5. Return the observed path, state, scope, endpoint, and unresolved uncertainty.
-   `fluent-case-build-and-run` still owns readback, save/reopen, invariant,
-   smoke/instrumentation, and completion proof.
+1. Resolve the fleet endpoint and ownership. Check `session_status`; attach with
+   argument-free `connect` only when needed. Endpoint identity is not case identity.
+2. Reconcile the loaded case/data with exact experiment records and independent
+   evidence. Report unavailable identity rather than guessing from an alias.
+3. Use `find_api`/`get_help` for candidate paths. Use `describe_path` and
+   `get_state` for the smallest relevant live scope. Use focused probes,
+   `get_targeted_context` and named-object/template tools when needed.
+4. Preserve unknown, inactive, empty, failed and truncated results. Narrow a
+   missing/truncated read; do not turn it into absence or a passing invariant.
+5. Return observed paths, values, scope, version/endpoint, identity confidence
+   and unresolved uncertainty to the caller.
 
-For mesh quality use `mesh_quality`; for available fields use `list_fields`.
-Generic reports and screenshots supplement, not replace, the selected evidence contract.
+For mesh diagnostics use `mesh_quality`; for field names use `list_fields`.
+Setup digests and screenshots supplement the evidence contract, not replace it.
+A discovered field does not supply its history or establish its phase meaning.
 
-When uncertainty concerns physical meaning, prerequisites, or a verified mutation
-strategy rather than tree structure, escalate to `fluent-manual-researcher`.
-Keep its version-matched manual research and save/reopen-verified recipe requirement.
-TUI/journal fallback remains an explicitly approved reviewed-worker exception.
+## Mutation handoff
 
-## Failure and compatibility
+Return required dependency changes to `fluent-case-build-and-run` or the caller's
+approved implementation workflow. It uses `validate_code` then `run_code`,
+reacquires affected objects, and repeats critical inspection. It also owns
+save/reopen, invariants and smoke/instrumentation proof. Inspection itself is
+not permission to mutate.
 
-After a lost response or partial mutation, reconcile live state and existing run
-records before retrying. Never infer that a timeout stopped Fluent.
+Escalate physical meaning, prerequisites, or unresolved implementation mechanics
+to `fluent-manual-researcher`. A schema search cannot answer those questions.
 
-MCP unavailability blocks the generic route; it does not authorize a silent
-fallback to `dir()`, recursive probing, or model activation during inspection.
-`explore_settings_space.py` and `inspect_fluent_session.py` now use MCP.
-`compare_case_setup.py` compares captured MCP snapshots offline and never reloads
-an active workspace. Capture exact invariant paths to avoid truncated state.
+## Recovery
 
-Reviewed P4P domain workers remain available for scientific setup, extraction,
-file movement, and supervised runs. Reuse their proven logic, not another case's
-names, values, paths, or assumptions. The retired mapper is historical replay only.
+After a lost response, reconcile current state and run records before retrying.
+MCP unavailability blocks this generic route; it does not authorize a custom
+crawler, `dir()` probe, parent activation or direct-PyFluent fallback.
+
+`inspect_fluent_session.py` and `explore_settings_space.py` are MCP CLI clients.
+`compare_case_setup.py` compares captured MCP snapshots offline; it does not load
+cases into a live workspace. Existing domain code supplies domain logic only
+under the shared retained-worker exception, never case-specific assumptions.

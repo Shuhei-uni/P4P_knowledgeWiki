@@ -1,4 +1,4 @@
 interface:
   display_name: "Pool Patch Volume"
-  short_description: "Patch a CFD liquid pool, measure volume, and optionally estimate pressure"
-  default_prompt: "Use $pool-patch-volume to patch the selected liquid pool in a loaded Fluent session, report geometric and phase-integrated volume, and include pressure information when relevant to the case intent."
+  short_description: "Apply an authorized pool patch through MCP and verify volume."
+  default_prompt: "Use $pool-patch-volume to apply only the authorized pool initial condition through MCP, verify selected-cell and actual liquid volumes, and report any separately requested pressure evidence."

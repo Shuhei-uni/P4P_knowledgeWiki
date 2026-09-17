@@ -1,277 +1,98 @@
-# AGENTS.md
+# PyAnsys contract
 
-`PyAnsys/` owns the executable implementation, execution support, inspection,
-and data-extraction layer for Fluent. It is not the authority for project
-scientific conclusions (`../Project/`) or reusable CFD literature/method
-knowledge (`../CFD_wiki/`).
+`PyAnsys/` owns execution support and machine evidence, not project scientific
+conclusions (`Project/`) or reusable CFD literature (`CFD_wiki/`).
 
-## Progressive context
+## Read only the needed route
 
-Load context only for the branch being worked:
+Start with the selected setup/results and relevant skill. For generic live
+Fluent interaction follow the [MCP integration contract](../.agents/skills/fluent-live-inspection/mcp-integration.md)
+through `pyansys-workflow`. It owns the default tools, preserving adapter,
+validation, error semantics and narrow retained-worker exceptions. Existing
+code is implementation evidence, not the first-choice discovery interface.
 
-```text
-selected Project setup/results
-→ relevant skill
-→ proven PyAnsys code
-→ live Fluent inspection when the current tree or version is uncertain
-```
+Use the repository's own runtime executable when present; do not rely on shell
+activation or another clone's absolute path. MCP requires the pinned Python 3.12+
+environment. Keep credentials on the worker host. Do not preload the whole
+knowledge tree or old campaign logs.
 
-Do not preload the entire `knowledge/` tree, old logs, or every setup script.
-When a task changes DPM, multiphase, Energy, EWF, or another version-sensitive
-model, read only the relevant focused skill, the selected Project setup, and
-the proven code path.
+## Focused owners
 
-## Runtime and folder roles
+- `fluent-fleet-orchestration`: current reachability, ownership, exact artifact
+  locality, placement, remote directories and OneDrive transfers.
+- `implement-experiment` / `fluent-case-build-and-run`: approved delta,
+  dependency order, paired save/reopen, invariants, smoke and instrumentation.
+- `supervise-fluent-run`: approved long-horizon execution, terminal verification
+  and exact-thread wakeup. Discovery remains attached.
+- `fluent-live-inspection` / `fluent-manual-researcher`: live structure versus
+  version-matched semantics and independently proven configuration mechanics.
+- Domain/history/figure skills: complete scoped extraction and scientific
+  presentation, with local analysis over recorded evidence.
 
-From the repository root, use `PyAnsys/.venv/bin/python` for non-interactive
-commands when that repository runtime exists. Do not rely on activation state
-from another shell, and do not hard-code a different clone's absolute path.
+Read [run and autosave guidance](knowledge/fluent-settings/native_run_and_autosave.md)
+when configuring execution, checkpoints or recovery. The same scientific phase
+gates, authority envelope and approved horizons apply with MCP.
 
-- `src/pyansys_fluent/`: reusable library and extraction logic.
-- `scripts/connection/`: connection and bootstrap checks.
-- `scripts/inspection/`: non-mutating discovery, snapshots, and probes.
-- `scripts/setup/`: thin case-specific setup/run orchestration.
-- `scripts/orchestration/`: generic background hypothesis-run supervision and event-driven handoff.
-- `server-profiles/`: non-secret per-endpoint remote directory knowledge;
-  routing and filesystem context only, never case identity or live availability.
-- Report/post-processing helpers that were tied to retired campaign trees are
-  not kept as a second active layer; current read-only checks live in
-  `scripts/inspection/` and reusable modules under `src/`.
-- `knowledge/fluent-settings/native_run_and_autosave.md`: the durable current
-  execution, recovery, autosave, and handoff policy.
-- `output/`: generated extracts and diagnostics; never the scientific authority.
+## Identity and paths
 
-Prefer an existing helper or proven script before writing campaign-specific
-code. Skills describe the workflow; code is the implementation evidence.
+Keep artifact, setup, run and runtime server identities separate. An alias,
+version or iteration count is not case identity. Establish the exact loaded
+case/data using observed paths/provenance; report missing identity honestly.
+Resolve `server.ref` from alias and endpoint, retaining separate ID/IP/profile
+fields because collaborators can reuse short aliases.
 
-## Fluent state and identity
+The experiment's canonical `run-paths.yaml` owns actual placement, Fluent working
+directory, parents/children/finals, checkpoints, histories, logs/manifests and
+OneDrive destinations. Use temporary derived worker inputs only; reconcile actual
+locations after smoke and final execution into that same path map. Loading a
+case does not establish its working directory. Source parents and all `raw/`
+directories remain immutable.
 
-Treat Fluent as a dependency-ordered state machine, not a static object tree.
-`server_id`, IP/hostname, port, Fluent version, and iteration count are
-connection or diagnostic metadata, not case identity. Inspect the loaded
-case/data state and use an explicit or independently observed case/data path. If
-identity cannot be established, record it as unavailable rather than guessing.
+Important states need matching case/data pairs. Prefer verified OneDrive copies
+for important finals, likely parents and selected expensive recovery states;
+keep routine autosaves local. Verify replication, preferably by hashes, before
+claiming durability. If unavailable, preserve the pair and record `LOCAL_ONLY`.
+Computational completion and durability are different states.
 
-Keep artifact ID, setup ID, run ID, and runtime server reference separate. A
-scientific setup must remain meaningful when re-placed onto another compatible
-server.
+## State and verification
 
-Because collaborators may each have a `server-1`, `server-2`, and so on, do not
-use the short server ID alone as the durable execution identity. Fleet preflight
-should resolve the actual endpoint and record:
+For a dependency-sensitive change: enable/create the approved parent, reacquire,
+inspect live active options, validate/run one logical change, read back critical
+values and stop dependent steps on mismatch. Reacquire after case/mesh loads,
+model/type changes, object creation or phase-count changes. Missing paths mean
+inspect prerequisites/version, not force an old recipe.
 
-```yaml
-server:
-  ref: 'server-2@192.168.1.42'
-  id: 'server-2'
-  ip: '192.168.1.42'
-  profile_id: 'shuhei-server-2'
-```
+A successful MCP call is execution evidence only. Readback, paired save/reopen,
+setup invariants, planned smoke and required history streams still have to pass.
+Do not turn missing evidence into zero, infer completion from a filename, or
+replay an uncertain mutation/solve. Preserve the block and reconcile first.
 
-Use `server.ref` for run placement and handoff while retaining the separate ID
-and IP fields for machine-readable use. Static server profiles may use
-collision-resistant names such as `shuhei-server-2` or `partner-server-2`
-without hard-coding the IP into the public repository.
+Stabilize carrier state before DPM/EWF unless the setup explicitly requires a
+different order. Create/read back default DPM injections before detailed edits;
+reacquire after type changes and verify scope/fates. Enable EWF only with its
+carrier/DPM prerequisites, and Energy only when thermal fields are part of the
+question. Inspect current phase/domain/wall mappings before reusing a pattern.
 
-For a non-trivial change, use this order:
+A TUI/journal exception needs explicit human approval for the specific run and
+the shared contract's research/verification. GUI execution and process restart
+are not autonomous recovery. Every success/error/timeout/cleanup path must leave
+Fluent running. Poor scientific behaviour alone does not shorten a fixed horizon.
 
-```text
-enable/change parent
-→ reacquire affected object
-→ inspect children/options
-→ set one logical child
-→ read back the critical value
-→ classify any failure before continuing
-```
+## Implementation and handoff
 
-Reacquire after loading a case/data or mesh, enabling a model, creating an
-object, changing an object/type, or changing phase count. A missing child path
-means inspect the live parent and dependency state; it does not prove that the
-old path is valid or that the model is disabled.
+Keep reusable code in `src/pyansys_fluent/`; MCP bootstrap in
+`scripts/connection/`; inspection/extraction in `scripts/inspection/`; thin
+approved orchestration in `scripts/setup/` and `scripts/orchestration/`;
+non-secret filesystem knowledge in `server-profiles/`; reusable implementation
+lessons in `knowledge/`. `output/` is generated evidence, not scientific truth.
 
-Readback mismatch is a failure even when the setter returned without an
-exception. Use these failure labels: `order/dependency issue`,
-`path/version issue`, `invalid value/format issue`, `PyFluent wrapper
-limitation`, `requires human-approved TUI/journal fallback`, or `requires
-manual GUI cleanup`.
+For a retained direct worker, record its exact capability gap and reviewed path;
+never use it as an automatic substitute for failed MCP validation. Preserve
+native coordinates, units, signs, scope, raw evidence and completeness labels.
 
-## Fleet preflight and placement
-
-Before new Fluent compute is committed, use `fluent-fleet-orchestration` to
-check which configured servers are actually reachable and usable now, which are
-busy, and which exact paired case/data artifacts are available on each machine
-or through OneDrive.
-
-Do not assume a server is available because it was used earlier in the phase.
-Do not assume a parent exists on every server. Repeat live preflight whenever a
-new compute cycle starts or server availability materially changes.
-
-Prefer run placement in this order: exact verified parent already local;
-verified parent available through OneDrive; verified parent publishable from
-another active server; otherwise block until a trusted replica can be found.
-Use useful active servers in parallel when the scientific work justifies it,
-but never invent low-value experiments solely to increase utilization.
-
-A setup record remains server-neutral. Exact runtime server reference, local
-paths, transfer steps, and durability destinations belong to the execution
-plan.
-
-## Experiment packet and path authority
-
-Keep the path record with the experiment rather than inside `PyAnsys/` runtime
-output:
-
-```text
-Project/.../experiment/
-├── setup.md
-├── run-paths.yaml
-└── results.md
-```
-
-`setup.md` is the scientific contract, `run-paths.yaml` is the authoritative
-human-readable and machine-readable record of runtime server placement and
-actual artifact/output paths, and `results.md` is the evidence/interpretation
-record.
-
-The canonical `run-paths.yaml` must state the runtime `server.ref`, separate
-server ID and IP, actual Fluent working directory, run root,
-parent/child/final case-data paths, autosaves/checkpoints, file-backed
-monitor/report outputs such as `.out`, logs/transcripts, manifests, and OneDrive
-final/recovery destinations when applicable. Do not reconstruct these paths from
-a short server alias, case filename, launch directory, or code defaults.
-
-A remote runner may use a temporary derived copy of path configuration, but do
-not create another durable path manifest that competes with the Project packet.
-Reconcile actual observed output locations back into the same Project
-`run-paths.yaml` after smoke testing and final execution.
-
-## CASE → INITIALISE / RUN
-
-Setup construction and execution are separate responsibilities, and execution
-mode follows the scientific experiment mode.
-
-- A setup script loads the exact resolved parent artifact, verifies remote
-  inputs, inspects the current state, applies only the selected delta, verifies
-  critical invariants, and writes the required case artifact.
-- **Discovery mode:** keep the scientific agent attached through the short
-  Python/PyFluent run, normally around 500-1,000 iterations, and throughout the
-  active discovery campaign. The agent may mostly wait while Fluent advances,
-  but it should inspect each result immediately and evaluate the declared
-  `CONTEXT.md` gate without ending the thread or requiring a human restart.
-  A new probe requires a human-approved context candidate.
-- Do not route ordinary discovery runs through the detached sleep/wake path just
-  to avoid waiting. Prefer one clear short solve call and let the active agent
-  wait on it.
-- **Hypothesis-test mode:** follow `supervise-fluent-run`. On Codex, launch
-  the approved Python/PyFluent run through
-  `scripts/orchestration/run_and_handoff.py`. On Cursor, keep the agent
-  attached through the approved horizon.
-- On Codex, the hypothesis worker must capture the exact originating thread,
-  normally from `CODEX_THREAD_ID`, persist terminal `COMPLETE` or `BLOCKED`
-  evidence, and then resume that exact thread as the mandatory final Python
-  action. An explicit session ID is only an override.
-- A Codex background hypothesis run may not start if the wakeup hook is
-  disabled, the originating thread cannot be resolved, or either terminal
-  state would fail to wake the scientific loop.
-- On Cursor, missing `CODEX_THREAD_ID` is expected. Do not block the run for
-  that reason and do not call `codex exec resume`.
-- Never use `--last` for autonomous Codex handoff when several servers or jobs
-  may finish independently.
-- A zero runner exit code is not sufficient completion proof. Background
-  hypothesis jobs must declare local required files and/or a deterministic
-  verifier command so the final save and required execution evidence are checked
-  before `COMPLETE`.
-- Prefer one clear Python-issued run for the planned horizon over fine-grained
-  one-iteration polling loops. Periodic recovery artifacts may still be
-  configured when the experiment requires them; normal solver progress should
-  not be micromanaged.
-- TUI-driven iteration, Fluent journal/batch submission, or GUI-owned execution
-  are exceptions that require explicit human approval for that run. Do not use
-  them automatically as a fallback when the Python/PyFluent path fails.
-- A floating-point error, initialization failure, Fluent crash, unreconciled
-  connection/run state, or final-save failure is a blocker: preserve the last
-  verified state and hand the execution evidence back for a rethink. Poor
-  residuals or scientifically unpromising behaviour are not execution stop
-  conditions when Fluent can still continue.
-- Refuse duplicate background hypothesis launches while an old job manifest
-  exists unless the prior state has been reconciled and an explicit forced rerun
-  is justified.
-- Record the actual parent artifact identity, controlled change, readback, case
-  artifact, run ID, runtime server reference, Python runner, requested budget,
-  observed final state, remote artifact paths, durability status, execution
-  mode, terminal manifest/handoff status when applicable, and unresolved
-  execution uncertainty.
-
-## Durable case/data preservation
-
-Treat server-local storage as working storage, not the sole long-term home of
-important scientific state.
-
-Strongly prefer saving and promoting a **complete matching case+data pair** to
-the approved OneDrive location for:
-
-- scientifically important final run states;
-- final states likely to become future branch parents;
-- selected expensive recovery checkpoints whose loss would require substantial
-  rerunning;
-- important pre-change/reference states that would be difficult to reconstruct.
-
-Do not synchronize every routine autosave or checkpoint. Keep high-frequency
-recovery local when appropriate, then promote deliberately selected recovery
-states and finals.
-
-For important promoted artifacts, preserve one artifact ID plus source
-setup/run, iteration or progress, filenames, origin `server.ref`, and hashes
-when feasible. Verify the copied pair before treating it as durable. A file
-merely appearing in a local OneDrive folder is not enough evidence of successful
-preservation when the artifact is crucial.
-
-If OneDrive is temporarily unavailable, keep the complete local pair intact and
-record the state as `LOCAL_ONLY` durability debt. A run may be computationally
-complete while still not yet safely replicated.
-
-The aim is practical portability: loss or shutdown of one server should not
-strand final results or force reconstruction of an expensive parent when a
-verified shared copy could have prevented it.
-
-## High-risk model guardrails
-
-Stabilize the carrier setup before adding DPM or EWF unless the selected setup
-explicitly requires another order. Create/read back default DPM injections
-before editing detailed properties, reacquire after injection/type changes, and
-verify particle scope and fates. Enable EWF only after its carrier/DPM
-preconditions are established. Enable Energy only when thermal fields are part
-of the question. Inspect the current phase/domain/wall mapping before using a
-proven pattern.
-
-## Evidence and synchronization
-
-Generated YAML/JSON, CSV, plots, transcripts, and debug snapshots document what
-was observed; they do not become project findings automatically. Preserve raw
-artifacts, units, scope, signs, native coordinates, completeness, and identity
-status. Do not turn missing evidence into zero, interpolate unknown gaps, or
-infer completion from a filename.
-
-Put current experiment evidence and findings in the selected `Project` record.
-Put reusable CFD lessons in `CFD_wiki/`. Put implementation/discovery details
-that are durable across cases in `PyAnsys/knowledge/`. Use OneDrive for verified
-large case/data artifact preservation and transfer; do not create a second
-scientific project log there.
-
-## Troubleshooting and delegation
-
-When a deep path fails, inspect the live branch and allowed values, check the
-relevant local knowledge, and isolate the smallest failing operation. If the
-Python/PyFluent path cannot perform the required operation, classify that
-failure and return it. TUI or journal fallback requires explicit human approval;
-do not silently take that route.
-
-Use a bounded specialist review or probe only when it answers a concrete
-uncertainty. There is no mandatory multi-agent ceremony; the main agent owns
-reconciliation of live evidence, proven code, and project intent.
-
-Before handoff, verify dependency order, critical readbacks, artifact
-locations, case identity, the canonical experiment `run-paths.yaml`, runtime
-server reference, durability status for important artifacts, execution mode,
-terminal job manifest/handoff state when applicable, failure classification,
-and that no raw file or unrequested project conclusion was changed.
+Before handoff verify identity, declared delta, readbacks, paired persistence,
+canonical paths, instrumentation, observed progress, terminal proof, wake status
+where required and artifact durability. Put evidence/interpretation in the
+selected Project record, reusable methods in CFD_wiki, and generic implementation
+lessons in PyAnsys/knowledge. Do not create a second project log or change
+scientific conclusions during implementation maintenance.

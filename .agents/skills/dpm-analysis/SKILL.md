@@ -1,40 +1,45 @@
 ---
 name: dpm-analysis
-description: Extract and assess Fluent DPM tracking, fate, and mass-transfer evidence when DPM is relevant to the experiment question.
+description: Extract and assess relevant DPM tracking, fate and mass-transfer evidence; discover live injections through MCP and retain complete transcript parsing.
 ---
 
 # DPM analysis
 
-Run this skill only when the experiment question or requested evidence needs
-DPM.
+Run only when the setup question or requested evidence needs DPM. Follow
+[MCP integration](../fluent-live-inspection/mcp-integration.md).
 
-## Rules
+## Discover before tracking
 
-- Verify active injections, identity, source scope, particle type, and tracked
-  rows before interpreting output.
-- Preserve raw transcripts/output needed to audit parsing.
-- Require actual tracked-count/report evidence; never replace missing rows with
-  zero.
-- Preserve fate/zone, represented or net mass flow, and units.
-- Distinguish mechanism/event counters from terminal particle fates so mass is
-  not double-counted.
-- Relevance comes from `setup.md`; a complete DPM report can still be
-  scientifically irrelevant.
+Use MCP named-object tools and scoped `describe_path`/`get_state` to verify
+active injections, particle types, source surfaces, represented flow, model
+coupling and exact case identity. Existing injection objects alone do not prove
+active mass loading or scientific relevance.
 
-Inspect known-working repository code before constructing an equivalent
-PyFluent access pattern from memory. Reuse the access pattern, not case-specific
-names, values, paths, or branch assumptions. If the current live Fluent tree
-differs, inspect and adapt.
+Tracking is an operation, not read-only discovery. Require the approved diagnostic
+scope and tracking budget; avoid an unrequested all-injection retrack or change
+to the carrier solution. Ground any generated tracking/report commands through
+MCP, validate and execute under the existing session ownership.
 
-## Known working code
+## Preserve complete domain evidence
 
-Prefer reusable `src` code before a campaign-specific script; live DPM state
-wins over prose/API memory.
+Retain these helpers for semantics not supplied by a generic MCP report:
 
-- `PyAnsys/src/pyansys_fluent/dpm_reports.py`
-- `PyAnsys/src/pyansys_fluent/dpm_transcript.py`
-- `PyAnsys/scripts/inspection/run_dpm_particle_tracks.py`
+- `PyAnsys/src/pyansys_fluent/dpm_reports.py`;
+- `PyAnsys/src/pyansys_fluent/dpm_transcript.py`;
+- `PyAnsys/scripts/inspection/run_dpm_particle_tracks.py`.
 
-Inspect current injections/settings when the live case differs from the proven
-example. Keep transcript and parsed evidence linked so a missing or ambiguous
-fate remains visible.
+Review the exact worker before use and name the missing capability. Any TUI or
+journal path still needs the shared contract's explicit run approval; an old
+worker is not permission to bypass MCP.
+
+For every selected injection require actual tracked count, a mass-transfer
+summary, parsed fate/zone rows and command/transcript completion evidence.
+Preserve raw/partial output promptly. A quiet interval alone does not establish
+completion; a missing row is not zero. Keep represented/net mass, units,
+particle scope and available timing evidence.
+
+Distinguish event/mechanism counters from terminal particle fates so splash or
+film-absorption events are not double-counted with later terminal sinks.
+Return linked raw and parsed evidence, completeness and claim limits. A complete
+DPM report can still be irrelevant to the scientific question; interpretation
+belongs to the caller.

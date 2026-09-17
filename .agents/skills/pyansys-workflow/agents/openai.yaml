@@ -1,4 +1,4 @@
 interface:
   display_name: "PyAnsys Workflow"
-  short_description: "Use PyAnsys automation safely."
-  default_prompt: "Use $pyansys-workflow to inspect or edit PyFluent automation safely."
+  short_description: "Use MCP-first Fluent execution with P4P verification."
+  default_prompt: "Use $pyansys-workflow to route Fluent discovery and generated execution through the preserving MCP interface while retaining P4P evidence gates."

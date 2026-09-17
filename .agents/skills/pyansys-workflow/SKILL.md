@@ -1,170 +1,92 @@
 ---
 name: pyansys-workflow
-description: "Use when working with PyAnsys executable automation for Fluent/PyFluent: connection checks, inspection scripts, setup/run scripts, machine-readable validation, dependency-ordered Fluent settings, or PyAnsys knowledge updates."
+description: Route Fluent implementation through PyFluent MCP while retaining P4P verification, fleet/artifact handling, specialised extraction and supervised execution.
 ---
 
-# PyAnsys Workflow
+# PyAnsys workflow
 
-## Core Rule
+Use [MCP integration](../fluent-live-inspection/mcp-integration.md) before Fluent
+work. It owns tool selection, generated-code execution, session preservation
+and narrow retained-worker exceptions. Generic discovery and mutation use MCP,
+not existing scripts first. `PyAnsys/` owns P4P's implementation support and
+machine evidence; it is not a second Fluent API-discovery layer.
 
-Use `PyAnsys/` as the executable automation layer for Fluent setup, inspection, execution, data extraction, and machine-readable verification. Treat Fluent as a dependency-ordered GUI state machine, not a stable static Python object tree.
+## Route the task
 
-When this work belongs to an active `phase-loop` or `auto-loop`, read the
-phase-root `phase-state.yaml` and obey its hard lifecycle gates. PyAnsys tooling
-must not become an escape hatch around `verify-phase-transition`: discovery
-compute requires the discovery design permission, and a long hypothesis solve
-may not launch before `HYPOTHESIS_RUN_READY == PASS`.
+| Task | Workflow |
+| --- | --- |
+| Uncertain path, object, current value or allowed option | `fluent-live-inspection` |
+| Meaning, prerequisite or version-specific implementation uncertainty | `fluent-manual-researcher` |
+| Server ownership, artifact locality, transfer or output paths | `fluent-fleet-orchestration` |
+| Implement an approved experiment | `implement-experiment` and `fluent-case-build-and-run` |
+| Long hypothesis execution and exact-thread wakeup | `supervise-fluent-run` |
+| Residual/report/DPM/EWF evidence | Matching focused extraction skill |
+| Spatial Fluent figure | `create-figure` |
 
-Keep setup construction and run supervision conceptually separate:
+Read the selected setup and relevant code only. Reuse a proven domain algorithm,
+not its unverified paths, phase names, values or server assumptions. New snippets
+use the upstream `solver` binding and the `validate_code` → `run_code` path.
+Standalone generated connection scripts and recursive probes are not the route.
 
-- setup/build code creates or modifies the approved Fluent case and proves its state;
-- run code connects to the intended case and performs the approved initialization/run/save sequence;
-- discovery runs stay agent-attached through the short run and immediate evidence review;
-- hypothesis-test runs use `supervise-fluent-run`: Codex detaches and wakes the originating Codex thread; Cursor stays attached through the approved horizon.
+## Preserve authority and identity
 
-For autonomous experiments inside either loop, Python/PyFluent execution is the
-default. A version-pinned TUI/journal fallback is allowed only after the live
-API limitation is researched through `fluent-manual-researcher`, proven in a
-recoverable child state in a preserved session, independently read back, and verified through
-save/reopen. GUI-owned execution is not an autonomous fallback.
+For active Phase Loop or Auto Loop work, read `CONTEXT.md` and `phase-state.yaml`.
+Discovery needs its design permission; long qualification needs
+`HYPOTHESIS_RUN_READY == PASS`. MCP availability never grants scientific authority.
 
-Do not merge unrelated setup mutation, scientific decision-making, and long-run supervision into one opaque script. A case-specific Python runner is fine when it is the clearest faithful implementation of the approved experiment.
+Keep artifact, setup, run and `server.ref` distinct. A connection alias does not
+identify a case. Fleet orchestration resolves exact parent paths and the canonical
+`run-paths.yaml`; verified server profiles provide filesystem knowledge only.
 
-Connection routing is not case provenance: `server_id` only selects the Fluent endpoint. After connecting, inspect what is loaded. Use observed case/data identity when available; otherwise mark it unavailable and never infer a case or setup from the server ID or a previous session. Do not persist `server_id` in report-facing identity fields.
+An exclusive phase lease permits approved loaded-state replacement after required
+recovery preservation. It does not permit process shutdown/relaunch or overwriting
+durable parents. All clients/workers must share one writer for a Fluent session.
 
-Use verified remote directory knowledge from `PyAnsys/server-profiles/` when available. An explicit path in the experiment setup takes precedence. Never invent a remote output root from the server alias.
-
-When the phase execution plan grants an exclusive fleet lease, a busy inherited
-calculation is not automatically protected working state. Follow
-`fluent-fleet-orchestration`: preserve a paired recovery state when
-scientifically valuable, then stop the calculation, reconnect the client, or
-replace/reassign loaded case state while the Fluent process remains running.
-Never overwrite verified durable parent artifacts merely because the session
-can be controlled.
-
-The exact runner must use `cleanup_on_exit=False` and contain no Fluent
-shutdown, process termination, or restart action on success, error, timeout, or
-cleanup; reconnect clients and replace loaded case state inside the preserved
-Fluent process instead.
-
-## Fluent Settings Rule
-
-Follow this canonical order for non-trivial setting changes:
+## Dependency-ordered implementation
 
 ```text
-enable parent -> refresh/reacquire -> inspect children/options -> set child -> read back -> classify failure
+enable approved parent → reacquire → inspect live children/options
+→ validate and execute one dependent change → read back → classify
 ```
 
-Mandatory habits:
+Reacquire after model/type/phase/object changes and case/data loads. Missing paths,
+readback mismatch or absent required evidence block dependent actions. Classify
+order/dependency, path/version, invalid value, wrapper limitation, readback mismatch,
+missing verification, or an approved-fallback requirement without guessing.
 
-- Reacquire objects after enabling models, creating objects, changing types, loading a case/data file, changing phase count, or switching boundary/model families.
-- Inspect live child names, commands, and allowed values before setting deep paths.
-- Treat readback mismatch as failure even when no exception was raised.
-- Classify failures as `order/dependency issue`, `path/version issue`, `invalid value/format issue`, `PyFluent wrapper limitation`, `verified TUI/journal fallback candidate`, or `manual GUI cleanup unavailable to the autonomous loop`.
+A fallback recipe is not authorization: TUI/journal use requires the shared
+explicit-human-approval and verification conditions. Return a bounded blocker
+rather than bypassing MCP or silently changing the experiment.
 
-A Settings/API limitation is not permission to switch blindly to TUI. Return
-`BLOCK`, research the official version-matched route, prove the smallest TUI or
-journal mutation in recoverable child state, read it back, save/reopen it, then use
-that verified fallback or persist a durable autonomous block.
+## Execution and evidence
 
-For semantic/prerequisite uncertainty in a Fluent setting, escalate from live inspection to `fluent-manual-researcher` rather than inventing a path or model state.
+Build and prove the child before the planned run: exact parent, approved delta,
+invariants, paired save/reopen, and smoke/instrumentation at declared paths.
+Initialization follows the setup, never a connection or retry convenience.
 
-## Inspection-First Workflow
+Discovery stays attached through the approved short horizon and immediate analysis.
+Use the setup's screening budget; ordinary family screens remain 500 iterations
+with promising extensions to 1,000 unless the recorded setup says otherwise.
+Use one clear solve rather than one-iteration keep-alive loops.
 
-Before writing a setup script for a new Fluent branch:
+Long hypothesis work uses the existing supervisor, not a raw background launch.
+Preserve the ordinary 10,000-iteration qualification basis, the explicitly scoped
+Auto Loop 2,000-iteration exception, or an approved equivalent non-iteration basis.
+Codex requires exact-thread wakeup on `COMPLETE` and `BLOCKED`; other runtimes stay
+attached. The supervisor's verifier must prove the actual horizon, final pair and
+required histories. An `EXECUTED` MCP receipt or zero exit status is not completion.
 
-1. Run `scripts/connection/check_connection.py`.
-2. Run `scripts/inspection/inspect_fluent_session.py`.
-3. Add a targeted non-mutating probe if paths or object names are unclear.
-4. Only then edit or create mutation-heavy setup code.
+Poor residuals/physics are evidence while the approved run can continue. A timeout
+or partial mutation requires reconciliation, not replay or a new competing client.
 
-Prefer existing helpers and proven code paths before inventing new campaign-specific machinery.
+## Placement and durable truth
 
-## Code Placement
+Keep reusable support in `src/pyansys_fluent/`, MCP clients in connection/inspection
+scripts, and supervision in `scripts/orchestration/`. Keep any necessary setup
+worker thin and within the retained-worker exception; do not add generic plumbing.
 
-Keep file roles strict:
-
-- `src/pyansys_fluent/`: reusable library code;
-- `scripts/connection/`: bootstrap and preflight;
-- `scripts/inspection/`: non-mutating discovery, monitoring, and probes;
-- `scripts/setup/`: thin case-specific build/run orchestration;
-- `scripts/orchestration/`: background hypothesis execution and event-driven Codex handoff when launched from Codex;
-- `server-profiles/`: non-secret per-server filesystem layout;
-- `knowledge/fluent-settings/`: durable Fluent/PyFluent execution and settings knowledge;
-- `output/`: generated extracts only; do not treat as authoritative scientific knowledge.
-
-Setup scripts should remain thin: parse inputs, connect, verify remote files, load case/mesh, inspect state, apply the approved changes, read back critical values, and write the required case artifact.
-
-## Mode-specific Python execution
-
-### Discovery
-
-Discovery mode is intentionally interactive at the agent-workflow level even though the Fluent solve itself remains deterministic.
-
-For the short discovery horizon, start each new settings-family member at 500
-iterations and extend only promising members to 1,000 (unless the recorded
-setup says otherwise):
-
-```text
-agent launches Python/PyFluent run
-→ agent stays attached and mostly waits
-→ run returns
-→ agent immediately inspects screening evidence
-→ agent evaluates the declared context gate / follows its approved next action
-```
-
-Do not use the detached sleep/wake worker merely to avoid waiting. Do not end or pause the scientific goal between ordinary discovery runs. The point is fast experimental iteration while context is still live.
-
-A tool/RPC timeout is not permission to leave discovery. Reconcile the operational manifest/live Fluent state and continue waiting while the approved calculation is still advancing.
-
-Do not create one-iteration polling loops merely to keep the agent awake. Prefer one clear solve call for the approved short horizon and wait on that call or its terminal state.
-
-### Hypothesis test
-
-For a background Codex hypothesis-test run, use the canonical `supervise-fluent-run` / `scripts/orchestration/run_and_handoff.py` path. For a Cursor hypothesis-test run, keep the agent attached and wait on the approved Python/PyFluent solve; do not require Codex wakeup.
-
-Before execution, the scientific design/setup layers must already have selected
-a genuine qualification horizon. For ordinary steady full-geometry work that
-means the project default minimum of 10,000 iterations unless the approved setup
-carries a scoped Auto Loop qualification horizon (normally 2,000 iterations)
-with a bounded claim, or an equivalent non-iteration basis.
-
-The experiment runner should make the execution sequence explicit:
-
-```text
-connect -> establish case identity -> initialize if required
--> run approved horizon -> write final data -> verify output
-```
-
-On Codex, the background Python orchestration must then finish through this mandatory tail:
-
-```text
-persist COMPLETE or BLOCKED evidence
-→ codex exec resume <ORIGINATING_THREAD_ID> <continuation prompt>
-```
-
-The continuation prompt must return to the exact scientific lifecycle: read `phase-state.yaml`, verify `HYPOTHESIS_EXECUTION`, produce the required analysis, verify `HYPOTHESIS_EVIDENCE`, and continue automatically.
-
-The originating thread is captured automatically from `CODEX_THREAD_ID` when the job is launched from Codex; an explicit `codex.session_id` is only an override. Never use `--last` when multiple servers or jobs may finish independently.
-
-A Codex hypothesis-test job is invalid if the wakeup hook is disabled, the originating thread cannot be resolved, either `COMPLETE` or `BLOCKED` is excluded from the wakeup triggers, or deterministic completion proof is absent.
-
-On Cursor, persist the same completion evidence in the live session. Do not call `codex exec resume`. Missing `CODEX_THREAD_ID` is not a blocker.
-
-A zero runner exit code is not sufficient completion proof. Declare required final files and/or a deterministic verifier command. Poor residuals or unexpected physics are not execution failures while Fluent can continue.
-
-If Python/PyFluent cannot perform the approved run faithfully, return `BLOCK` to
-the loop. Do not silently fall back to TUI, a Fluent journal, or GUI execution;
-use only the verified recoverable-child TUI/journal fallback above, or durably block
-the path and continue another lane.
-
-## Cross-System Sync
-
-After PyAnsys work:
-
-- put current experiment evidence and findings in the matching `Project/` record;
-- put reusable CFD method knowledge in `CFD_wiki/`;
-- put durable implementation/discovery details in `PyAnsys/knowledge/`;
-- update a server profile only with directly observed or user-supplied filesystem facts.
-
-Do not create a second project log inside PyAnsys.
+Current experimental evidence belongs in `Project/`, reusable CFD knowledge in
+`CFD_wiki/`, durable implementation lessons in `PyAnsys/knowledge/`, and directly
+observed filesystem facts in server profiles. Generated `output/` is not scientific
+authority. Preserve raw evidence and valuable paired artifacts via the existing
+OneDrive policy; create no competing project log or path manifest.
