@@ -1,7 +1,0 @@
-interface:
-  display_name: "Research Project Wiki"
-  short_description: "Retired. Do not use."
-  default_prompt: "Do not use $research-project-wiki. Start at Project/index.md instead."
-
-policy:
-  allow_implicit_invocation: false
