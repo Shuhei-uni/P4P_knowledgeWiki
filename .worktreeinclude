@@ -1,0 +1,6 @@
+# Local environment files copied into Codex-managed worktrees.
+# Keep these entries explicit so unrelated ignored secrets are not copied.
+.env
+.env.local
+PyAnsys/.env
+PyAnsys/.env.local

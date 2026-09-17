@@ -119,7 +119,12 @@ def create_lower_register(solver: Any) -> tuple[str, dict[str, Any]]:
     return actual, state
 
 
-def split_lower_zone(solver: Any, capture: SessionTranscriptCapture) -> dict[str, Any]:
+def split_lower_zone(
+    solver: Any,
+    capture: SessionTranscriptCapture,
+    *,
+    require_reference_mesh: bool = True,
+) -> dict[str, Any]:
     before = fluid_names(solver)
     if PARENT_ZONE not in before:
         raise RuntimeError(f"parent fluid zone missing before split: {before}")
@@ -142,21 +147,35 @@ def split_lower_zone(solver: Any, capture: SessionTranscriptCapture) -> dict[str
         raise RuntimeError(f"split/rename zone readback mismatch: {after_rename}")
 
     # These native commands provide the durable transcript evidence for the
-    # topology delta and mesh check.  The expected counts are checked against
-    # the technical split proof and recorded again for every scientific child.
+    # topology delta and mesh check.  Reference-mesh children retain their
+    # historical fingerprint; separately identified meshes record Fluent's
+    # observed counts and must be assessed as a distinct experiment.
     mesh_marker = capture.mark()
     solver.settings.mesh.size_info()
     solver.settings.mesh.check()
     mesh_console = capture.text_since(mesh_marker)
-    observed_counts = {
-        "total_cells": EXPECTED_TOTAL_CELLS if re.search(r"342609|342,609", split_console + mesh_console) else None,
-        "total_faces": EXPECTED_TOTAL_FACES if re.search(r"1647633|1,647,633", split_console + mesh_console) else None,
-        "solver_nodes": EXPECTED_SOLVER_NODES if re.search(r"1046255|1,046,255", split_console + mesh_console) else None,
-        "lower_cells": EXPECTED_LOWER_CELLS if re.search(r"3794|3,794", split_console + mesh_console) else None,
-        "parent_cells": EXPECTED_PARENT_CELLS if re.search(r"338815|338,815", split_console + mesh_console) else None,
-    }
-    if any(value is None for value in observed_counts.values()):
-        raise RuntimeError(f"split mesh count evidence incomplete: {observed_counts}; transcript={split_console + mesh_console}")
+    if require_reference_mesh:
+        observed_counts = {
+            "total_cells": EXPECTED_TOTAL_CELLS if re.search(r"342609|342,609", split_console + mesh_console) else None,
+            "total_faces": EXPECTED_TOTAL_FACES if re.search(r"1647633|1,647,633", split_console + mesh_console) else None,
+            "solver_nodes": EXPECTED_SOLVER_NODES if re.search(r"1046255|1,046,255", split_console + mesh_console) else None,
+            "lower_cells": EXPECTED_LOWER_CELLS if re.search(r"3794|3,794", split_console + mesh_console) else None,
+            "parent_cells": EXPECTED_PARENT_CELLS if re.search(r"338815|338,815", split_console + mesh_console) else None,
+        }
+        if any(value is None for value in observed_counts.values()):
+            raise RuntimeError(f"split mesh count evidence incomplete: {observed_counts}; transcript={split_console + mesh_console}")
+    else:
+        size_match = re.search(r"\b0\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\b", mesh_console)
+        if size_match is None or not re.search(r"Checking mesh.*?Done\.", mesh_console, re.S):
+            raise RuntimeError(f"split mesh size/check evidence incomplete: {mesh_console}")
+        observed_counts = {
+            "total_cells": int(size_match.group(1)),
+            "total_faces": int(size_match.group(2)),
+            "solver_nodes": int(size_match.group(3)),
+            "partitions": int(size_match.group(4)),
+            "lower_cells": "not exposed by the size-info transcript",
+            "parent_cells": "not exposed by the size-info transcript",
+        }
     return {
         "register_name": register,
         "register_state": register_state,

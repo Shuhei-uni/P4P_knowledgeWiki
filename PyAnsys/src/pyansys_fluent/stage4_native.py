@@ -6,7 +6,11 @@ from __future__ import annotations
 import contextlib
 import copy
 from dataclasses import dataclass
-import fcntl
+try:
+    import fcntl
+except ModuleNotFoundError:  # Windows local Fluent runners
+    fcntl = None
+    import msvcrt
 import io
 import json
 import os
@@ -51,8 +55,12 @@ def exclusive_writer_lock(path: Path) -> Iterator[TextIO]:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("a+", encoding="utf-8") as handle:
         try:
-            fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
-        except BlockingIOError as exc:
+            if fcntl is not None:
+                fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+            else:
+                handle.seek(0)
+                msvcrt.locking(handle.fileno(), msvcrt.LK_NBLCK, 1)
+        except (BlockingIOError, OSError) as exc:
             raise RuntimeError(f"Another 03A Stage-4 writer owns {path}") from exc
         handle.seek(0)
         handle.truncate()
@@ -61,7 +69,11 @@ def exclusive_writer_lock(path: Path) -> Iterator[TextIO]:
         try:
             yield handle
         finally:
-            fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
+            if fcntl is not None:
+                fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
+            else:
+                handle.seek(0)
+                msvcrt.locking(handle.fileno(), msvcrt.LK_UNLCK, 1)
 
 
 class EventLog:

@@ -1,6 +1,6 @@
 interface:
   display_name: "Direct Fluent Use"
-  short_description: "Control pinned Fluent 2025 R2 Student Edition via terminal."
-  default_prompt: "Use $direct-fluent-use for direct terminal/PyFluent control of the pinned local Fluent installation."
+  short_description: "Start and close pinned Fluent 2025 R2."
+  default_prompt: "Use $direct-fluent-use only to start or close the pinned local Fluent session."
 policy:
   allow_implicit_invocation: false

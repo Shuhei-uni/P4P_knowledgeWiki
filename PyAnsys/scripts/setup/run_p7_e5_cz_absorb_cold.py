@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
-"""Run the Phase-07 cold-start inlet-matched absorber discovery child.
+"""Run a cold-start inlet-matched cell-zone absorber discovery child.
 
-The runner loads the exact E0-style initialized case/data pair, preserves the
-initialized field through the validated lower-zone split, ramps a lower-zone
-phase-2 volumetric sink from zero to the reconciled liquid-inlet rate, and
-holds that rate for the declared discovery horizon.  It does not continue
-from an evolved E0/G100 state, add an outlet, patch/reset fields, remesh, or
-use a UDF.
+The runner accepts either an initialized case/data parent or an explicitly
+requested case-only Hybrid initialization. It preserves the supplied parent,
+creates and proves the lower-zone split in a child, ramps a lower-zone phase-2
+sink from zero to the liquid-inlet rate, and holds it for the declared
+discovery horizon. It does not add an outlet, remesh, or use a UDF.
 """
 
 from __future__ import annotations
@@ -21,6 +20,8 @@ import traceback
 from collections.abc import Mapping
 from pathlib import Path, PureWindowsPath
 from typing import Any
+
+import ansys.fluent.core as pyfluent
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
@@ -82,6 +83,52 @@ def write_json(path: Path, payload: object) -> None:
     temporary = path.with_suffix(path.suffix + ".tmp")
     temporary.write_text(json.dumps(payload, indent=2, default=str) + "\n", encoding="utf-8")
     temporary.replace(path)
+
+
+def save_case_only(solver: Any, case_path: str) -> None:
+    """Preserve a valid pre-initialization recovery case without inventing data."""
+
+    solver.settings.file.write_case(file_name=case_path)
+    if not remote_file_exists(solver, case_path):
+        raise RuntimeError(f"case-only recovery artifact was not saved: {case_path}")
+
+
+def configure_total_inventory_reports(solver: Any) -> list[dict[str, Any]]:
+    """Replace inherited total-liquid reports with the post-split full domain."""
+
+    zones = [PARENT_ZONE, LOWER_ZONE]
+    volume = solver.settings.solution.report_definitions.volume
+    readbacks: list[dict[str, Any]] = []
+    for name, report_type, field, phase in (
+        ("e0-liquid-mass-total", "volume-mass", None, "phase-2"),
+        ("e0-liquid-volume-total", "volume-integral", "phase-2-vof", "mixture"),
+    ):
+        names = set(str(item) for item in volume.get_object_names())
+        if name in names:
+            volume.delete(name_list=[name])
+        volume.create(name=name)
+        report = volume[name]
+        report.report_type = report_type
+        report = volume[name]
+        report.cell_zones = zones
+        if field is not None:
+            report.field = field
+        if report_type != "volume-integral":
+            report.phase = phase
+        for key, value in (("per_selection", False), ("average_over", 1), ("create_report_file", True), ("create_report_plot", True)):
+            try:
+                setattr(report, key, value)
+            except Exception:
+                pass
+        state = safe_get_state(report, f"post-split total-liquid report {name}")
+        if not isinstance(state, Mapping) or state.get("report_type") != report_type or state.get("cell_zones") != zones:
+            raise RuntimeError(f"post-split total-liquid report readback mismatch for {name}: {state}")
+        if report_type != "volume-integral" and state.get("phase") != phase:
+            raise RuntimeError(f"post-split total-liquid phase mismatch for {name}: {state}")
+        if field is not None and state.get("field") != field:
+            raise RuntimeError(f"post-split total-liquid field mismatch for {name}: {state}")
+        readbacks.append({"name": name, "state": state})
+    return readbacks
 
 
 def build_paths(run_root: str) -> dict[str, str]:
@@ -234,14 +281,28 @@ def run_discovery(
 
 
 def main() -> int:
+    global CANDIDATE
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--server-id", default="student")
+    parser.add_argument("--candidate", default=CANDIDATE)
     parser.add_argument("--parent-case", required=True)
-    parser.add_argument("--parent-data", required=True)
+    parser.add_argument("--parent-data", help="Optional paired parent data file. Omit only for a case-only cold start.")
+    parser.add_argument(
+        "--initialize-parent",
+        action="store_true",
+        help="Hybrid-initialize a case-only parent after prepared-case save/reopen.",
+    )
+    parser.add_argument(
+        "--server-info-file",
+        type=Path,
+        help="Connect directly to a preserved local Fluent session instead of a configured endpoint.",
+    )
     parser.add_argument("--run-root", required=True)
     parser.add_argument("--manifest", required=True, type=Path)
     parser.add_argument("--residual-history", required=True, type=Path)
     args = parser.parse_args()
+
+    CANDIDATE = args.candidate
 
     if args.manifest.exists() or args.residual_history.exists():
         raise FileExistsError("refusing to overwrite local cold-start absorber evidence")
@@ -260,7 +321,7 @@ def main() -> int:
         "server_ref": f"student@{os.getenv('STUDENT_IP', 'unknown')}",
         "reference_setup_id": "P7-E0-REF",
         "parent_case": args.parent_case,
-        "parent_data": args.parent_data,
+        "parent_data": args.parent_data or "",
         "run_root": args.run_root,
         "final_absorber_rate_kg_s": LIQUID_INLET_KG_S,
         "ramp_iterations": RAMP_ITERATIONS,
@@ -272,14 +333,28 @@ def main() -> int:
     write_json(args.manifest, manifest)
     capture: SessionTranscriptCapture | None = None
     try:
-        solver = connect(server_id=args.server_id, start_transcript=True)
+        if args.server_info_file:
+            if not args.server_info_file.is_file():
+                raise FileNotFoundError(f"local Fluent server-info file is unavailable: {args.server_info_file}")
+            solver = pyfluent.connect_to_fluent(
+                server_info_file_name=str(args.server_info_file),
+                allow_remote_host=False,
+                cleanup_on_exit=False,
+                start_transcript=True,
+            )
+        else:
+            solver = connect(server_id=args.server_id, start_transcript=True)
         ensure_remote_directory(solver, args.run_root)
         ensure_remote_directory(solver, paths["monitor_root"])
         existing = [path for path in remote_artifacts if remote_file_exists(solver, path)]
         if existing:
             raise FileExistsError(f"refusing to overwrite remote cold-start artifacts: {existing}")
-        if not remote_file_exists(solver, args.parent_case) or not remote_file_exists(solver, args.parent_data):
-            raise FileNotFoundError(f"exact initialized E0 pair is not visible: {args.parent_case}; {args.parent_data}")
+        if not remote_file_exists(solver, args.parent_case):
+            raise FileNotFoundError(f"parent case is not visible: {args.parent_case}")
+        if args.parent_data and not remote_file_exists(solver, args.parent_data):
+            raise FileNotFoundError(f"parent data is not visible: {args.parent_data}")
+        if not args.parent_data and not args.initialize_parent:
+            raise RuntimeError("a case-only parent requires --initialize-parent; do not infer an initialized field")
 
         remote_chdir(solver, str(PureWindowsPath(args.parent_case).parent))
         capture_path = args.residual_history.with_name(args.residual_history.stem + "-transcript.txt")
@@ -287,7 +362,8 @@ def main() -> int:
         capture.start()
 
         solver.settings.file.read_case(file_name=args.parent_case)
-        solver.settings.file.read_data(file_name=args.parent_data)
+        if args.parent_data:
+            solver.settings.file.read_data(file_name=args.parent_data)
         names = fluid_names(solver)
         if names != [PARENT_ZONE]:
             raise RuntimeError(f"initialized E0 topology mismatch before split: {names}")
@@ -295,20 +371,31 @@ def main() -> int:
             "fluid_zones": names,
             "base_invariants": base_invariants(solver),
             "runtime_state": safe_get_state(solver.settings.solution.run_calculation, "initialized runtime state"),
-            "initialization_claim": "E0-style initialized pair before treatment iterations",
+            "initialization_claim": (
+                "initialized parent data read from the supplied pair"
+                if args.parent_data
+                else "case-only parent; hybrid initialization is required after prepared save/reopen"
+            ),
         }
         density = density_from_case(solver)
         manifest["liquid_density_kg_m3"] = density
-        save_pair(solver, paths["pre_split_recovery"])
+        if args.parent_data:
+            save_pair(solver, paths["pre_split_recovery"])
+        else:
+            save_case_only(solver, paths["pre_split_recovery"])
         manifest["events"].append({"event": "pre_split_recovery_saved", "case": paths["pre_split_recovery"]})
 
-        split = split_lower_zone(solver, capture)
+        split = split_lower_zone(solver, capture, require_reference_mesh=False)
         manifest["mesh_split"] = split
         disable_sources(solver)
         manifest["split_source_off_readback"] = read_source_tree(solver)
-        save_pair(solver, paths["split_source_off"])
+        if args.parent_data:
+            save_pair(solver, paths["split_source_off"])
+        else:
+            save_case_only(solver, paths["split_source_off"])
         manifest["events"].append({"event": "split_source_off_saved", "case": paths["split_source_off"]})
 
+        manifest["total_inventory_definitions"] = configure_total_inventory_reports(solver)
         manifest["monitor_definitions"] = configure_inventory_reports(solver)
         manifest["report_files"] = redirect_all_reports(solver, paths["monitor_root"], CANDIDATE)
         manifest["residual_configuration"] = configure_residual_history(solver, 1200)
@@ -325,11 +412,15 @@ def main() -> int:
         write_json(args.manifest, manifest)
 
         solver.settings.file.write_case(file_name=paths["prepared"])
-        solver.settings.file.write_data(file_name=data_path(paths["prepared"]))
-        if not remote_file_exists(solver, paths["prepared"]) or not remote_file_exists(solver, data_path(paths["prepared"])):
-            raise RuntimeError("prepared cold-start pair was not saved")
+        if args.parent_data:
+            solver.settings.file.write_data(file_name=data_path(paths["prepared"]))
+        if not remote_file_exists(solver, paths["prepared"]):
+            raise RuntimeError("prepared cold-start case was not saved")
+        if args.parent_data and not remote_file_exists(solver, data_path(paths["prepared"])):
+            raise RuntimeError("prepared cold-start data was not saved")
         solver.settings.file.read_case(file_name=paths["prepared"])
-        solver.settings.file.read_data(file_name=data_path(paths["prepared"]))
+        if args.parent_data:
+            solver.settings.file.read_data(file_name=data_path(paths["prepared"]))
         if set(fluid_names(solver)) != {PARENT_ZONE, LOWER_ZONE}:
             raise RuntimeError(f"prepared save/reopen topology mismatch: {fluid_names(solver)}")
         manifest["prepared_reopen"] = {
@@ -338,6 +429,15 @@ def main() -> int:
             "source_tree": read_source_tree(solver),
         }
         manifest["report_files_after_reopen"] = redirect_all_reports(solver, paths["monitor_root"], CANDIDATE)
+        if args.initialize_parent:
+            solver.settings.solution.initialization.hybrid_initialize()
+            manifest["initialization"] = {
+                "method": "hybrid",
+                "state_after_initialization": safe_get_state(
+                    solver.settings.solution.initialization,
+                    "hybrid initialization readback",
+                ),
+            }
         write_json(args.manifest, manifest)
 
         run_discovery(
