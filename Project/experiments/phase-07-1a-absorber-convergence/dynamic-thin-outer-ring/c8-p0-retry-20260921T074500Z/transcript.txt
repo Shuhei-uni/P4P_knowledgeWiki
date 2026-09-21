@@ -12556,3 +12556,80 @@ Done.
  Reversed flow on 1200 faces of pressure-outlet 42.
 
  turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 19141 cells 
+  7359  1.1032e-01  1.0473e-04  1.1060e-04  1.0451e-04  5.8460e-03  1.6168e-02  4.0698e-03  0:00:02    1
+
+ Reversed flow on 1219 faces of pressure-outlet 42.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 19188 cells 
+  7360  1.1103e-01  1.0511e-04  1.1052e-04  1.0446e-04  5.8817e-03  1.6338e-02  4.0841e-03  0:00:00    0
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  7360  1.1103e-01  1.0511e-04  1.1052e-04  1.0446e-04  5.8817e-03  1.6338e-02  4.0841e-03  0:00:18   10
+
+ Reversed flow on 1225 faces of pressure-outlet 42.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 19276 cells 
+  7361  1.0962e-01  1.0550e-04  1.1054e-04  1.0414e-04  5.8815e-03  1.6513e-02  4.0968e-03  0:00:15    9
+
+ Reversed flow on 1232 faces of pressure-outlet 42.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 19378 cells 
+  7362  1.0932e-01  1.0597e-04  1.1046e-04  1.0393e-04  5.8680e-03  1.6551e-02  4.1099e-03  0:00:14    8
+
+ Reversed flow on 1216 faces of pressure-outlet 42.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 19416 cells 
+  7363  1.1040e-01  1.0645e-04  1.1035e-04  1.0375e-04  5.8680e-03  1.6578e-02  4.1285e-03  0:00:12    7
+
+ Reversed flow on 1185 faces of pressure-outlet 42.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 19445 cells 
+  7364  1.0953e-01  1.0673e-04  1.1044e-04  1.0352e-04  5.8693e-03  1.6706e-02  4.1456e-03  0:00:10    6
+
+ Reversed flow on 1183 faces of pressure-outlet 42.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 19568 cells 
+  7365  1.1022e-01  1.0700e-04  1.1042e-04  1.0357e-04  5.8652e-03  1.6705e-02  4.1589e-03  0:00:09    5
+
+ Reversed flow on 1180 faces of pressure-outlet 42.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 19618 cells 
+  7366  1.1021e-01  1.0714e-04  1.1056e-04  1.0371e-04  5.8429e-03  1.6680e-02  4.1711e-03  0:00:07    4
+
+ Reversed flow on 1171 faces of pressure-outlet 42.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 19617 cells 
+  7367  1.0976e-01  1.0686e-04  1.1096e-04  1.0386e-04  5.8088e-03  1.6716e-02  4.1774e-03  0:00:05    3
+
+ Reversed flow on 1176 faces of pressure-outlet 42.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 19603 cells 
+  7368  1.1034e-01  1.0653e-04  1.1131e-04  1.0423e-04  5.7855e-03  1.6643e-02  4.1758e-03  0:00:04    2
+
+ Reversed flow on 1180 faces of pressure-outlet 42.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 19552 cells 
+  7369  1.1081e-01  1.0601e-04  1.1177e-04  1.0463e-04  5.7550e-03  1.6625e-02  4.1708e-03  0:00:02    1
+
+ Reversed flow on 1175 faces of pressure-outlet 42.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 19527 cells 
+  7370  1.1118e-01  1.0539e-04  1.1218e-04  1.0511e-04  5.7334e-03  1.6535e-02  4.1633e-03  0:00:00    0
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  7370  1.1118e-01  1.0539e-04  1.1218e-04  1.0511e-04  5.7334e-03  1.6535e-02  4.1633e-03  0:00:18   10
+
+ Reversed flow on 1188 faces of pressure-outlet 42.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 19511 cells 
+  7371  1.1152e-01  1.0478e-04  1.1272e-04  1.0552e-04  5.7096e-03  1.6492e-02  4.1535e-03  0:00:15    9
+
+ Reversed flow on 1193 faces of pressure-outlet 42.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 19528 cells 
+  7372  1.1134e-01  1.0407e-04  1.1314e-04  1.0597e-04  5.6913e-03  1.6452e-02  4.1422e-03  0:00:14    8
+
+ Reversed flow on 1195 faces of pressure-outlet 42.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 19642 cells 
+  7373  1.1095e-01  1.0341e-04  1.1343e-04  1.0655e-04  5.6702e-03  1.6387e-02  4.1323e-03  0:00:12    7
