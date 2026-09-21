@@ -1,0 +1,5790 @@
+{
+  "run_id": "p7b-s080-20260921T130348Z",
+  "percent": 80,
+  "requested_iterations": 5000,
+  "steps": [
+    {
+      "name": "connect",
+      "state": "PASS",
+      "value": "<ansys.fluent.core.session_solver.Solver object at 0x1132d77d0>"
+    },
+    {
+      "name": "load_clean_n0",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "mesh_before",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "split_collector_cells",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "mesh_after",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "mesh_check",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bAlpha",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bMask",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bK",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bEpsilon",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bSink",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bLiquidX",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bSinkX",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bLiquidY",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bSinkY",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bLiquidZ",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bSinkZ",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bSinkK",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bSinkEpsilon",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bCount",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bGeometryVolume",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bWaterVolume",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bWaterMass",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bCollectorVolume",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bCollectorMass",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bAboveVolume",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bRemoval",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bLiquidLiquidInlet",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bLiquidSteamInlet",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bLiquidOutlet",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bLiquidBrineWall",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bLiquidBoundary",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bLiquidClosure",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bVaporLiquidInlet",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bVaporSteamInlet",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bVaporOutlet",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bVaporBrineWall",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bVaporBoundary",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bVaporClosure",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bMixtureLiquidInlet",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bMixtureSteamInlet",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bMixtureOutlet",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bMixtureBrineWall",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bMixtureBoundary",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bMixtureClosure",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bPressureLiquid",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bPressureSteam",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bPressureOutlet",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bDropLiquid",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bDropSteam",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bSplitVolume",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bSplitMismatch",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bMinimumPressure",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bMaximumPressure",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "define_P7bMaximumSpeed",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "fresh_hybrid_initialize",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "save_initial",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "reopen_initial",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "initial_metrics",
+      "state": "PASS",
+      "value": [
+        {
+          "p7bwatervolume": [
+            0.0,
+            "m^3"
+          ]
+        },
+        {
+          "p7bwatermass": [
+            0.0,
+            "kg"
+          ]
+        },
+        {
+          "p7bcollectorvolume": [
+            0.0,
+            "m^3"
+          ]
+        },
+        {
+          "p7bcollectormass": [
+            0.0,
+            "kg"
+          ]
+        },
+        {
+          "p7babovevolume": [
+            0.0,
+            "m^3"
+          ]
+        },
+        {
+          "p7bremoval": [
+            -0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidsteaminlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidoutlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidboundary": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidclosure": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporliquidinlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporsteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporoutlet": [
+            -72.56017240747673,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporboundary": [
+            8.129729950862156,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporclosure": [
+            8.129729950862156,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturesteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureoutlet": [
+            -72.56017240747673,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturebrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureboundary": [
+            125.0509624093356,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureclosure": [
+            125.0509624093356,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bpressureliquid": [
+            1119999.999999995,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressuresteam": [
+            1120000.0,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressureoutlet": [
+            1119999.999999995,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropliquid": [
+            2.328306436538696e-10,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropsteam": [
+            4.889443516731262e-09,
+            "Pa"
+          ]
+        },
+        {
+          "p7bminimumpressure": [
+            1119999.999999997,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumpressure": [
+            1119999.999999997,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumspeed": [
+            372.6267004748667,
+            "m/s"
+          ]
+        },
+        {
+          "p7b-applied-source": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7b-native-water": [
+            0.0,
+            "m^3"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "save_prepared",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "reopen_prepared",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "extract_initial_sections",
+      "state": "PASS",
+      "value": {
+        "fields": [
+          "phase-2-vof",
+          "pressure",
+          "velocity-magnitude",
+          "x-velocity",
+          "y-velocity",
+          "z-velocity",
+          "phase-2-velocity-magnitude",
+          "phase-2-x-velocity",
+          "phase-2-y-velocity",
+          "phase-2-z-velocity"
+        ],
+        "sampling": "Fluent iso-surface facet values; node_value=False",
+        "sections": {
+          "p7b-section-y0p5": {
+            "file": "p7b-section-y0p5.npz",
+            "facets": 3138,
+            "vertices": 4316
+          },
+          "p7b-section-y1p5": {
+            "file": "p7b-section-y1p5.npz",
+            "facets": 2964,
+            "vertices": 4124
+          },
+          "p7b-section-y3p0": {
+            "file": "p7b-section-y3p0.npz",
+            "facets": 2780,
+            "vertices": 3714
+          },
+          "p7b-section-y5p0": {
+            "file": "p7b-section-y5p0.npz",
+            "facets": 3096,
+            "vertices": 4129
+          }
+        }
+      }
+    },
+    {
+      "name": "start_remote_transcript",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "iterate_0_to_50",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "metrics_50",
+      "state": "PASS",
+      "value": [
+        {
+          "p7bwatervolume": [
+            0.003799682950047415,
+            "m^3"
+          ]
+        },
+        {
+          "p7bwatermass": [
+            3.350446434863309,
+            "kg"
+          ]
+        },
+        {
+          "p7bcollectorvolume": [
+            4.083033319989995e-37,
+            "m^3"
+          ]
+        },
+        {
+          "p7bcollectormass": [
+            3.600296290567578e-34,
+            "kg"
+          ]
+        },
+        {
+          "p7babovevolume": [
+            0.003799682950047415,
+            "m^3"
+          ]
+        },
+        {
+          "p7bremoval": [
+            1.494153501830199e-31,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidsteaminlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidoutlet": [
+            -1.677271417224203e-40,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidboundary": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidclosure": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporliquidinlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporsteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporoutlet": [
+            -81.44280460334676,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporboundary": [
+            -0.7529022450078742,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporclosure": [
+            -0.7529022450078742,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturesteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureoutlet": [
+            -81.44280460334676,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturebrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureboundary": [
+            116.1683302134655,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureclosure": [
+            116.1683302134655,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bpressureliquid": [
+            1125595.611729471,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressuresteam": [
+            1125800.105433545,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressureoutlet": [
+            1119890.744123413,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropliquid": [
+            5704.867606057553,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropsteam": [
+            5909.361310131615,
+            "Pa"
+          ]
+        },
+        {
+          "p7bminimumpressure": [
+            1119615.039423605,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumpressure": [
+            1126621.559921354,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumspeed": [
+            42.53377473931003,
+            "m/s"
+          ]
+        },
+        {
+          "p7b-applied-source": [
+            -1.245472259707147e-31,
+            "kg/s"
+          ]
+        },
+        {
+          "p7b-native-water": [
+            0.003799682950047415,
+            "m^3"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "save_n00050",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "iterate_50_to_500",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "metrics_500",
+      "state": "PASS",
+      "value": [
+        {
+          "p7bwatervolume": [
+            0.1009023560829256,
+            "m^3"
+          ]
+        },
+        {
+          "p7bwatermass": [
+            88.97267052324129,
+            "kg"
+          ]
+        },
+        {
+          "p7bcollectorvolume": [
+            0.0001426274300218886,
+            "m^3"
+          ]
+        },
+        {
+          "p7bcollectormass": [
+            0.1257645889704007,
+            "kg"
+          ]
+        },
+        {
+          "p7babovevolume": [
+            0.1007597286529037,
+            "m^3"
+          ]
+        },
+        {
+          "p7bremoval": [
+            52.19337128132208,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidsteaminlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidoutlet": [
+            -7.139840728068475e-06,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidboundary": [
+            116.9212253186327,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidclosure": [
+            64.7278540373106,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporliquidinlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporsteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporoutlet": [
+            -81.09728949633558,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporboundary": [
+            -0.4073871379966931,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporclosure": [
+            -0.4073871379966931,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturesteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureoutlet": [
+            -81.0972966361763,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturebrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureboundary": [
+            116.513838180636,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureclosure": [
+            64.32046689931391,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bpressureliquid": [
+            1139910.822938333,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressuresteam": [
+            1140118.525473677,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressureoutlet": [
+            1119706.827568899,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropliquid": [
+            20203.99536943343,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropsteam": [
+            20411.69790477748,
+            "Pa"
+          ]
+        },
+        {
+          "p7bminimumpressure": [
+            1118936.305891405,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumpressure": [
+            1144769.218971081,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumspeed": [
+            80.10228475450681,
+            "m/s"
+          ]
+        },
+        {
+          "p7b-applied-source": [
+            -51.56483396844301,
+            "kg/s"
+          ]
+        },
+        {
+          "p7b-native-water": [
+            0.1009023560829256,
+            "m^3"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "save_n00500",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "iterate_500_to_1000",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "metrics_1000",
+      "state": "PASS",
+      "value": [
+        {
+          "p7bwatervolume": [
+            0.1169992385678185,
+            "m^3"
+          ]
+        },
+        {
+          "p7bwatermass": [
+            103.1664185919453,
+            "kg"
+          ]
+        },
+        {
+          "p7bcollectorvolume": [
+            0.000295562368213191,
+            "m^3"
+          ]
+        },
+        {
+          "p7bcollectormass": [
+            0.2606180294193455,
+            "kg"
+          ]
+        },
+        {
+          "p7babovevolume": [
+            0.1167036761996053,
+            "m^3"
+          ]
+        },
+        {
+          "p7bremoval": [
+            108.1586930267931,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidsteaminlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidoutlet": [
+            -0.02539731594811347,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidboundary": [
+            116.8958351425253,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidclosure": [
+            8.737142115732212,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporliquidinlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporsteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporoutlet": [
+            -80.72678493601465,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporboundary": [
+            -0.03688257767576886,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporclosure": [
+            -0.03688257767576886,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturesteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureoutlet": [
+            -80.75218358526439,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturebrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureboundary": [
+            116.8589512315479,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureclosure": [
+            8.700258204754817,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bpressureliquid": [
+            1144288.50652133,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressuresteam": [
+            1144496.11133967,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressureoutlet": [
+            1119641.760664652,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropliquid": [
+            24646.74585667858,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropsteam": [
+            24854.35067501827,
+            "Pa"
+          ]
+        },
+        {
+          "p7bminimumpressure": [
+            1117846.357830113,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumpressure": [
+            1149143.151351025,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumspeed": [
+            88.27127606293438,
+            "m/s"
+          ]
+        },
+        {
+          "p7b-applied-source": [
+            -108.1400962041961,
+            "kg/s"
+          ]
+        },
+        {
+          "p7b-native-water": [
+            0.1169992385678185,
+            "m^3"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "save_n01000",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "iterate_1000_to_1500",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "metrics_1500",
+      "state": "PASS",
+      "value": [
+        {
+          "p7bwatervolume": [
+            0.1360114675315782,
+            "m^3"
+          ]
+        },
+        {
+          "p7bwatermass": [
+            119.9308317253197,
+            "kg"
+          ]
+        },
+        {
+          "p7bcollectorvolume": [
+            0.0002996653460292905,
+            "m^3"
+          ]
+        },
+        {
+          "p7bcollectormass": [
+            0.2642359121682475,
+            "kg"
+          ]
+        },
+        {
+          "p7babovevolume": [
+            0.1357118021855489,
+            "m^3"
+          ]
+        },
+        {
+          "p7bremoval": [
+            109.6601450580178,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidsteaminlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidoutlet": [
+            -0.1998246968206557,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidboundary": [
+            116.7214077616528,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidclosure": [
+            7.06126270363491,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporliquidinlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporsteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporoutlet": [
+            -80.74399190218911,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporboundary": [
+            -0.05408954385022469,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporclosure": [
+            -0.05408954385022469,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturesteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureoutlet": [
+            -80.94386203097731,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturebrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureboundary": [
+            116.667272785835,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureclosure": [
+            7.007127727817135,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bpressureliquid": [
+            1146403.804044054,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressuresteam": [
+            1146611.554968956,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressureoutlet": [
+            1119613.986773918,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropliquid": [
+            26789.81727013527,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropsteam": [
+            26997.56819503801,
+            "Pa"
+          ]
+        },
+        {
+          "p7bminimumpressure": [
+            1118071.688321659,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumpressure": [
+            1151250.140439379,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumspeed": [
+            91.88646563539416,
+            "m/s"
+          ]
+        },
+        {
+          "p7b-applied-source": [
+            -109.768115971114,
+            "kg/s"
+          ]
+        },
+        {
+          "p7b-native-water": [
+            0.1360114675315782,
+            "m^3"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "save_n01500",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "iterate_1500_to_2000",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "metrics_2000",
+      "state": "PASS",
+      "value": [
+        {
+          "p7bwatervolume": [
+            0.1663957769646515,
+            "m^3"
+          ]
+        },
+        {
+          "p7bwatermass": [
+            146.7228042541207,
+            "kg"
+          ]
+        },
+        {
+          "p7bcollectorvolume": [
+            0.0005863548521181035,
+            "m^3"
+          ]
+        },
+        {
+          "p7bcollectormass": [
+            0.5170301179521801,
+            "kg"
+          ]
+        },
+        {
+          "p7babovevolume": [
+            0.1658094221125334,
+            "m^3"
+          ]
+        },
+        {
+          "p7bremoval": [
+            214.5718849067684,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidsteaminlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidoutlet": [
+            -0.5924073237909717,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidboundary": [
+            116.3288251346824,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidclosure": [
+            -98.24305977208591,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporliquidinlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporsteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporoutlet": [
+            -80.04547024449965,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporboundary": [
+            0.6444321138392297,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporclosure": [
+            0.6444321138392297,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturesteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureoutlet": [
+            -80.63820719755009,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturebrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureboundary": [
+            116.9729276192622,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureclosure": [
+            -97.59895728750615,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bpressureliquid": [
+            1147467.602653813,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressuresteam": [
+            1147676.414708971,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressureoutlet": [
+            1119617.577462671,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropliquid": [
+            27850.02519114246,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropsteam": [
+            28058.83724629995,
+            "Pa"
+          ]
+        },
+        {
+          "p7bminimumpressure": [
+            1118022.436472154,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumpressure": [
+            1153394.390531318,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumspeed": [
+            91.57582404083331,
+            "m/s"
+          ]
+        },
+        {
+          "p7b-applied-source": [
+            -215.8119900141104,
+            "kg/s"
+          ]
+        },
+        {
+          "p7b-native-water": [
+            0.1663957769646515,
+            "m^3"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "save_n02000",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "iterate_2000_to_2500",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "metrics_2500",
+      "state": "PASS",
+      "value": [
+        {
+          "p7bwatervolume": [
+            0.2149447357227641,
+            "m^3"
+          ]
+        },
+        {
+          "p7bwatermass": [
+            189.5318196182617,
+            "kg"
+          ]
+        },
+        {
+          "p7bcollectorvolume": [
+            0.0003752961661565771,
+            "m^3"
+          ]
+        },
+        {
+          "p7bcollectormass": [
+            0.3309249004318849,
+            "kg"
+          ]
+        },
+        {
+          "p7babovevolume": [
+            0.2145694395566075,
+            "m^3"
+          ]
+        },
+        {
+          "p7bremoval": [
+            137.336640908841,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidsteaminlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidoutlet": [
+            -1.734451585940357,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidboundary": [
+            115.186780872533,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidclosure": [
+            -22.14986003630791,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporliquidinlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporsteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporoutlet": [
+            -80.54334644700809,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporboundary": [
+            0.1465559113307933,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporclosure": [
+            0.1465559113307933,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturesteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureoutlet": [
+            -82.27827942310552,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturebrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureboundary": [
+            115.3328553937068,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureclosure": [
+            -22.00378551513418,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bpressureliquid": [
+            1149172.349915508,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressuresteam": [
+            1149382.936258374,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressureoutlet": [
+            1119620.816087892,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropliquid": [
+            29551.53382761637,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropsteam": [
+            29762.12017048243,
+            "Pa"
+          ]
+        },
+        {
+          "p7bminimumpressure": [
+            1117789.545570885,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumpressure": [
+            1154232.804905514,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumspeed": [
+            89.99544100157146,
+            "m/s"
+          ]
+        },
+        {
+          "p7b-applied-source": [
+            -137.0516763391647,
+            "kg/s"
+          ]
+        },
+        {
+          "p7b-native-water": [
+            0.2149447357227641,
+            "m^3"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "save_n02500",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "iterate_2500_to_3000",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "metrics_3000",
+      "state": "PASS",
+      "value": [
+        {
+          "p7bwatervolume": [
+            0.2792239770381402,
+            "m^3"
+          ]
+        },
+        {
+          "p7bwatermass": [
+            246.2113262329208,
+            "kg"
+          ]
+        },
+        {
+          "p7bcollectorvolume": [
+            0.0004147111850743328,
+            "m^3"
+          ]
+        },
+        {
+          "p7bcollectormass": [
+            0.3656798816629944,
+            "kg"
+          ]
+        },
+        {
+          "p7babovevolume": [
+            0.2788092658530658,
+            "m^3"
+          ]
+        },
+        {
+          "p7bremoval": [
+            151.7602529455935,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidsteaminlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidoutlet": [
+            -2.071630210327569,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidboundary": [
+            114.8496022481458,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidclosure": [
+            -36.91065069744762,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporliquidinlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporsteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporoutlet": [
+            -80.42074280114429,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporboundary": [
+            0.2691595571945982,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporclosure": [
+            0.2691595571945982,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturesteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureoutlet": [
+            -82.4919634232386,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturebrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureboundary": [
+            115.1191713935737,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureclosure": [
+            -36.64108155201977,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bpressureliquid": [
+            1148229.990754557,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressuresteam": [
+            1148440.41607315,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressureoutlet": [
+            1119617.200325276,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropliquid": [
+            28612.79042928084,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropsteam": [
+            28823.21574787446,
+            "Pa"
+          ]
+        },
+        {
+          "p7bminimumpressure": [
+            1117893.705233587,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumpressure": [
+            1161358.52412007,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumspeed": [
+            89.43314273489169,
+            "m/s"
+          ]
+        },
+        {
+          "p7b-applied-source": [
+            -152.047981619467,
+            "kg/s"
+          ]
+        },
+        {
+          "p7b-native-water": [
+            0.2792239770381402,
+            "m^3"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "save_n03000",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "iterate_3000_to_3500",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "metrics_3500",
+      "state": "PASS",
+      "value": [
+        {
+          "p7bwatervolume": [
+            0.4009192089930531,
+            "m^3"
+          ]
+        },
+        {
+          "p7bwatermass": [
+            353.5185309138044,
+            "kg"
+          ]
+        },
+        {
+          "p7bcollectorvolume": [
+            0.0008370442713807747,
+            "m^3"
+          ]
+        },
+        {
+          "p7bcollectormass": [
+            0.7380805271754257,
+            "kg"
+          ]
+        },
+        {
+          "p7babovevolume": [
+            0.4000821647216723,
+            "m^3"
+          ]
+        },
+        {
+          "p7bremoval": [
+            306.3096799008139,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidsteaminlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidoutlet": [
+            -6.268739588131698,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidboundary": [
+            110.6524928703417,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidclosure": [
+            -195.6571870304722,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporliquidinlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporsteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporoutlet": [
+            -79.35781386810318,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporboundary": [
+            1.332088490235705,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporclosure": [
+            1.332088490235705,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturesteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureoutlet": [
+            -85.63308003668313,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturebrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureboundary": [
+            111.9780547801292,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureclosure": [
+            -194.3316251206847,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bpressureliquid": [
+            1149967.46990464,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressuresteam": [
+            1150178.642709889,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressureoutlet": [
+            1119615.701209608,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropliquid": [
+            30351.76869503222,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropsteam": [
+            30562.94150028192,
+            "Pa"
+          ]
+        },
+        {
+          "p7bminimumpressure": [
+            1111137.236842681,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumpressure": [
+            1167164.166447444,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumspeed": [
+            84.01832259508268,
+            "m/s"
+          ]
+        },
+        {
+          "p7b-applied-source": [
+            -311.9866338539643,
+            "kg/s"
+          ]
+        },
+        {
+          "p7b-native-water": [
+            0.4009192089930531,
+            "m^3"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "save_n03500",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "iterate_3500_to_4000",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "metrics_4000",
+      "state": "PASS",
+      "value": [
+        {
+          "p7bwatervolume": [
+            0.4992963529582393,
+            "m^3"
+          ]
+        },
+        {
+          "p7bwatermass": [
+            440.2645451479867,
+            "kg"
+          ]
+        },
+        {
+          "p7bcollectorvolume": [
+            0.0005681456478651289,
+            "m^3"
+          ]
+        },
+        {
+          "p7bcollectormass": [
+            0.5009737879180347,
+            "kg"
+          ]
+        },
+        {
+          "p7babovevolume": [
+            0.4987282073103742,
+            "m^3"
+          ]
+        },
+        {
+          "p7bremoval": [
+            207.9083717370569,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidsteaminlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidoutlet": [
+            -5.489909362336736,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidboundary": [
+            111.4313230961367,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidclosure": [
+            -96.47704864092026,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporliquidinlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporsteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporoutlet": [
+            -80.07745932125013,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporboundary": [
+            0.6124430370887524,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporclosure": [
+            0.6124430370887524,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturesteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureoutlet": [
+            -85.57297121605471,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturebrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureboundary": [
+            112.0381636007576,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureclosure": [
+            -95.87020813629935,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bpressureliquid": [
+            1148244.776484769,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressuresteam": [
+            1148454.034816649,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressureoutlet": [
+            1119658.614211508,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropliquid": [
+            28586.1622732603,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropsteam": [
+            28795.42060514051,
+            "Pa"
+          ]
+        },
+        {
+          "p7bminimumpressure": [
+            1118010.648968938,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumpressure": [
+            1174863.095587144,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumspeed": [
+            81.99724776486629,
+            "m/s"
+          ]
+        },
+        {
+          "p7b-applied-source": [
+            -207.0417037832494,
+            "kg/s"
+          ]
+        },
+        {
+          "p7b-native-water": [
+            0.4992963529582393,
+            "m^3"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "save_n04000",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "iterate_4000_to_4500",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "metrics_4500",
+      "state": "PASS",
+      "value": [
+        {
+          "p7bwatervolume": [
+            0.6142905198802696,
+            "m^3"
+          ]
+        },
+        {
+          "p7bwatermass": [
+            541.6629517148253,
+            "kg"
+          ]
+        },
+        {
+          "p7bcollectorvolume": [
+            0.0008456645559663291,
+            "m^3"
+          ]
+        },
+        {
+          "p7bcollectormass": [
+            0.74568163551443,
+            "kg"
+          ]
+        },
+        {
+          "p7babovevolume": [
+            0.6134448553243033,
+            "m^3"
+          ]
+        },
+        {
+          "p7bremoval": [
+            309.4642043415563,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidsteaminlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidoutlet": [
+            -14.71872842171465,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidboundary": [
+            102.2025040367588,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidclosure": [
+            -207.2617003047975,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporliquidinlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporsteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporoutlet": [
+            -79.35934119717963,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporboundary": [
+            1.330561161159252,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporclosure": [
+            1.330561161159252,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturesteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureoutlet": [
+            -94.06835704732312,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturebrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureboundary": [
+            103.5427777694892,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureclosure": [
+            -205.9214265720671,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bpressureliquid": [
+            1150644.650495544,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressuresteam": [
+            1150854.601401015,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressureoutlet": [
+            1119637.654515365,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropliquid": [
+            31006.9959801787,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropsteam": [
+            31216.94688564958,
+            "Pa"
+          ]
+        },
+        {
+          "p7bminimumpressure": [
+            1103498.324572543,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumpressure": [
+            1159102.995255463,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumspeed": [
+            82.97252298256393,
+            "m/s"
+          ]
+        },
+        {
+          "p7b-applied-source": [
+            -308.7674471036811,
+            "kg/s"
+          ]
+        },
+        {
+          "p7b-native-water": [
+            0.6142905198802696,
+            "m^3"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "save_n04500",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "iterate_4500_to_5000",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "metrics_5000",
+      "state": "PASS",
+      "value": [
+        {
+          "p7bwatervolume": [
+            0.6955426998460403,
+            "m^3"
+          ]
+        },
+        {
+          "p7bwatermass": [
+            613.308686443243,
+            "kg"
+          ]
+        },
+        {
+          "p7bcollectorvolume": [
+            0.0008016058818912746,
+            "m^3"
+          ]
+        },
+        {
+          "p7bcollectormass": [
+            0.7068320184752692,
+            "kg"
+          ]
+        },
+        {
+          "p7babovevolume": [
+            0.6947410939641491,
+            "m^3"
+          ]
+        },
+        {
+          "p7bremoval": [
+            293.3412837097461,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidsteaminlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidoutlet": [
+            -33.29990991043341,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidboundary": [
+            83.62132254804001,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidclosure": [
+            -209.7199611617061,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporliquidinlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporsteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporoutlet": [
+            -79.34194207892178,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporboundary": [
+            1.347960279417109,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporclosure": [
+            1.347960279417109,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturesteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureoutlet": [
+            -112.614785477617,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturebrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureboundary": [
+            84.9963493391953,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureclosure": [
+            -208.3449343705508,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bpressureliquid": [
+            1162956.707485643,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressuresteam": [
+            1163169.389752211,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressureoutlet": [
+            1119600.454654685,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropliquid": [
+            43356.25283095776,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropsteam": [
+            43568.93509752583,
+            "Pa"
+          ]
+        },
+        {
+          "p7bminimumpressure": [
+            1118673.270388515,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumpressure": [
+            1196074.91646522,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumspeed": [
+            83.4268534633091,
+            "m/s"
+          ]
+        },
+        {
+          "p7b-applied-source": [
+            -295.5017335876702,
+            "kg/s"
+          ]
+        },
+        {
+          "p7b-native-water": [
+            0.6955426998460403,
+            "m^3"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "save_final",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "extract_final_sections",
+      "state": "PASS",
+      "value": {
+        "fields": [
+          "phase-2-vof",
+          "pressure",
+          "velocity-magnitude",
+          "x-velocity",
+          "y-velocity",
+          "z-velocity",
+          "phase-2-velocity-magnitude",
+          "phase-2-x-velocity",
+          "phase-2-y-velocity",
+          "phase-2-z-velocity"
+        ],
+        "sampling": "Fluent iso-surface facet values; node_value=False",
+        "sections": {
+          "p7b-section-y0p5": {
+            "file": "p7b-section-y0p5.npz",
+            "facets": 3138,
+            "vertices": 4316
+          },
+          "p7b-section-y1p5": {
+            "file": "p7b-section-y1p5.npz",
+            "facets": 2964,
+            "vertices": 4124
+          },
+          "p7b-section-y3p0": {
+            "file": "p7b-section-y3p0.npz",
+            "facets": 2780,
+            "vertices": 3714
+          },
+          "p7b-section-y5p0": {
+            "file": "p7b-section-y5p0.npz",
+            "facets": 3096,
+            "vertices": 4129
+          }
+        }
+      }
+    }
+  ],
+  "status": "HORIZON_COMPLETE_ANALYSIS_PENDING",
+  "parent_case": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-clean-initial-20260912T080713Z.cas.h5",
+  "report": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-s080-20260921T130348Z.out",
+  "remote_transcript": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/logs/p7b-s080-20260921T130348Z.trn",
+  "previous_endpoint": {
+    "manifest": "PyAnsys/output/p7b-s060-resume-20260921T113238Z/manifest.json",
+    "final_case": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s060-resume-20260921T113238Z-final.cas.h5",
+    "live_iteration_verified": 5000,
+    "saved_pair_exists": true
+  },
+  "reference_setup": {
+    "general": {
+      "solver": {
+        "type": "pressure-based",
+        "velocity_formulation": "absolute",
+        "time": "steady"
+      },
+      "operating_conditions": {
+        "gravity": {
+          "enable": true,
+          "components": [
+            0,
+            -9.81,
+            0
+          ]
+        },
+        "operating_pressure": 0,
+        "reference_pressure_location": [
+          0,
+          0,
+          0
+        ],
+        "reference_pressure_method": "Connected and disconnected fluid zones",
+        "operating_density": {
+          "method": "minimum-phase-averaged"
+        }
+      },
+      "units_settings": {
+        "units": {
+          "acceleration": {
+            "unit_name": "m/s^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "angle": {
+            "unit_name": "deg",
+            "scale_factor": 0.0174532925,
+            "offset": 0.0
+          },
+          "angular-velocity": {
+            "unit_name": "rad/s",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "area": {
+            "unit_name": "m^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "area-inverse": {
+            "unit_name": "m^-2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "area-per-time": {
+            "unit_name": "m^2/s",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "area-temperature": {
+            "unit_name": "m^2 K",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "collision-rate": {
+            "unit_name": "m^-3 s^-1",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "concentration": {
+            "unit_name": "kmol/m^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "contact-resistance": {
+            "unit_name": "(m^2 K)/W",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "contact-resistance-vol": {
+            "unit_name": "Ohm m^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "crank-angle": {
+            "unit_name": "deg",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "crank-angular-velocity": {
+            "unit_name": "rev/min",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "current": {
+            "unit_name": "A",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "current-density": {
+            "unit_name": "A/m^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "current-vol-density": {
+            "unit_name": "A/m^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "density": {
+            "unit_name": "kg/m^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "density*specific-energy": {
+            "unit_name": "J/m^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "density*specific-heat": {
+            "unit_name": "J/(m^3 K)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "density*velocity": {
+            "unit_name": "kg/(m^2 s)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "density-gradient": {
+            "unit_name": "kg/m^4",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "density-inverse": {
+            "unit_name": "m^3/kg",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "depth": {
+            "unit_name": "m",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "elec-capacity": {
+            "unit_name": "Ah",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "elec-charge": {
+            "unit_name": "A h",
+            "scale_factor": 3600.0,
+            "offset": 0.0
+          },
+          "elec-charge-density": {
+            "unit_name": "(A s)/m^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "elec-charge-flux-density": {
+            "unit_name": "Ah/m^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "elec-concentration": {
+            "unit_name": "mol/m^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "elec-conductivity": {
+            "unit_name": "S/m",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "elec-contact-resistance": {
+            "unit_name": "Ohm m^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "elec-field": {
+            "unit_name": "V/m",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "elec-permittivity": {
+            "unit_name": "farad/m",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "elec-resistance": {
+            "unit_name": "Ohm",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "elec-resistivity": {
+            "unit_name": "Ohm m",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "energy": {
+            "unit_name": "J",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "energy-density": {
+            "unit_name": "J/m2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "force": {
+            "unit_name": "N",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "force*time-per-volume": {
+            "unit_name": "(N s)/m^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "force-per-area": {
+            "unit_name": "N/m^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "force-per-volume": {
+            "unit_name": "N/m^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "frequency": {
+            "unit_name": "Hz",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "gas-constant": {
+            "unit_name": "J/(kg K)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "heat-flux": {
+            "unit_name": "W/m^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "heat-flux-resolved": {
+            "unit_name": "(m K)/s",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "heat-generation-rate": {
+            "unit_name": "W/m^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "heat-transfer-coefficient": {
+            "unit_name": "W/(m^2 K)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "ignition-energy": {
+            "unit_name": "J/mol",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "kinematic-viscosity": {
+            "unit_name": "m^2/s",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "length": {
+            "unit_name": "m",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "length-inverse": {
+            "unit_name": "m^-1",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "length-temperature": {
+            "unit_name": "m K",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "length-time-inverse": {
+            "unit_name": "m^-1 s^-1",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "length4-per-time": {
+            "unit_name": "m^4/s",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "mag-permeability": {
+            "unit_name": "H/m",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "mass": {
+            "unit_name": "kg",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "mass-diffusivity": {
+            "unit_name": "m^2/s",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "mass-flow": {
+            "unit_name": "kg/s",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "mass-flow-per-depth": {
+            "unit_name": "kg/(m s)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "mass-flow-per-time": {
+            "unit_name": "kg/s^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "mass-flux": {
+            "unit_name": "kg/(m^2 s)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "mass-transfer-rate": {
+            "unit_name": "kg/(m^3 s)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "mole-con-henry-const": {
+            "unit_name": "(Pa m^3)/kgmol",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "mole-specific-energy": {
+            "unit_name": "J/kgmol",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "mole-specific-entropy": {
+            "unit_name": "J/(kgmol K)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "mole-transfer-rate": {
+            "unit_name": "kgmol/(m^3 s)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "molec-wt": {
+            "unit_name": "kg/kmol",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "moment": {
+            "unit_name": "N m",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "moment-of-inertia": {
+            "unit_name": "kg m^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "no-unit": {
+            "unit_name": "",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "nucleation-rate": {
+            "unit_name": "m^-3 s^-1",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "number-density": {
+            "unit_name": "m^-3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "particles-conc": {
+            "unit_name": "1.e15-particles/kg",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "particles-rate": {
+            "unit_name": "1.e15 m^-3 s^-1",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "percentage": {
+            "unit_name": "%",
+            "scale_factor": 0.01,
+            "offset": 0.0
+          },
+          "power": {
+            "unit_name": "W",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "power-per-time": {
+            "unit_name": "W/s",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "pressure": {
+            "unit_name": "Pa",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "pressure-2nd-time-derivative": {
+            "unit_name": "Pa/s^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "pressure-gradient": {
+            "unit_name": "Pa/m",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "pressure-time-deriv-sqr": {
+            "unit_name": "Pa^2/s^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "pressure-time-derivative": {
+            "unit_name": "Pa/s",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "resistance": {
+            "unit_name": "m^-1",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "site-density": {
+            "unit_name": "kgmol/m^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "soot-formation-constant-unit": {
+            "unit_name": "kg/(N m s)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "soot-limiting-nuclei-rate": {
+            "unit_name": "1e+15-particles/m3-s",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "soot-linear-termination": {
+            "unit_name": "m^3/s",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "soot-oxidation-constant": {
+            "unit_name": "kg m kgmol^-1 K^-0.5 s^-1",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "soot-pre-exponential-constant": {
+            "unit_name": "1.e15 kg^-1 s^-1",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "soot-sitespecies-concentration": {
+            "unit_name": "kmol/m^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "soot-surface-growth-scale-factor": {
+            "unit_name": "(kg m)/(kgmol s)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "source-elliptic-relaxation-function": {
+            "unit_name": "kg/(m^3 s^2)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "source-energy": {
+            "unit_name": "W/m^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "source-kinetic-energy": {
+            "unit_name": "kg/(m s^3)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "source-mass": {
+            "unit_name": "kg/(m^3 s)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "source-momentum": {
+            "unit_name": "N/m^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "source-specific-dissipation-rate": {
+            "unit_name": "kg/(m^3 s^2)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "source-temperature-variance": {
+            "unit_name": "K^2/(m^3 s)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "source-turbulent-dissipation-rate": {
+            "unit_name": "kg/(m s^4)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "source-turbulent-viscosity": {
+            "unit_name": "kg/(m s^2)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "specific-area": {
+            "unit_name": "m^2/kg",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "specific-energy": {
+            "unit_name": "J/kg",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "specific-heat": {
+            "unit_name": "J/(kg K)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "spring-constant": {
+            "unit_name": "N/m",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "spring-constant-angular": {
+            "unit_name": "(N m)/rad",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "stefan-boltzmann-constant": {
+            "unit_name": "W/(m^2 K^4)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "surface-density": {
+            "unit_name": "kg/m^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "surface-mole-transfer-rate": {
+            "unit_name": "kgmol/(m^2 s)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "surface-tension": {
+            "unit_name": "N/m",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "surface-tension-gradient": {
+            "unit_name": "N/(m K)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "temperature": {
+            "unit_name": "K",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "temperature-difference": {
+            "unit_name": "K",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "temperature-gradient": {
+            "unit_name": "K/m",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "temperature-inverse": {
+            "unit_name": "K^-1",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "temperature-variance": {
+            "unit_name": "K^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "thermal-conductivity": {
+            "unit_name": "W/(m K)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "thermal-resistance": {
+            "unit_name": "(m^2 K)/W",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "thermal-resistivity": {
+            "unit_name": "(m K)/W",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "thermophoretic-diffusivity": {
+            "unit_name": "(kg m^2)/s^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "time": {
+            "unit_name": "s",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "time-inverse": {
+            "unit_name": "s^-1",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "time-inverse-cubed": {
+            "unit_name": "s^-3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "time-inverse-squared": {
+            "unit_name": "s^-2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "turb-kinetic-energy-production": {
+            "unit_name": "kg/(m s^3)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "turbulent-energy-diss-rate": {
+            "unit_name": "m^2/s^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "turbulent-energy-diss-rate-gradient": {
+            "unit_name": "m/s^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "turbulent-kinetic-energy": {
+            "unit_name": "m^2/s^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "turbulent-kinetic-energy-gradient": {
+            "unit_name": "m/s^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "univ-gas-constant": {
+            "unit_name": "J/(K kgmol)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "velocity": {
+            "unit_name": "m/s",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "viscosity": {
+            "unit_name": "kg/(m s)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "viscosity-consistency-index": {
+            "unit_name": "kg s^n-2 m^-1",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "voltage": {
+            "unit_name": "V",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "volume": {
+            "unit_name": "m^3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "volume-flow-rate": {
+            "unit_name": "m^3/s",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "volume-flow-rate-per-depth": {
+            "unit_name": "m^3/(s m)",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "volume-inverse": {
+            "unit_name": "m^-3",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "volume-temperature": {
+            "unit_name": "m^3/K",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "wave-length": {
+            "unit_name": "Angstrom",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          },
+          "youngs-modulus": {
+            "unit_name": "N/m^2",
+            "scale_factor": 1.0,
+            "offset": 0.0
+          }
+        }
+      }
+    },
+    "models": {
+      "multiphase": {
+        "model": "mixture",
+        "vof_parameters": {
+          "vof_formulation": "implicit",
+          "vof_cutoff": 1e-06,
+          "interface_modeling_options": {
+            "interface_type": "dispersed"
+          }
+        },
+        "advanced_formulation": {
+          "implicit_body_force": false
+        },
+        "phases": {
+          "phase-1": {
+            "name": "phase-1",
+            "material": "water-vapor-purnanto2013"
+          },
+          "phase-2": {
+            "name": "phase-2",
+            "material": "water-liquid-purnanto2013"
+          }
+        }
+      },
+      "energy": {
+        "enabled": false
+      },
+      "viscous": {
+        "model": "k-epsilon",
+        "k_epsilon_model": "rng",
+        "rng": {
+          "differential_viscosity_model": true,
+          "swirl_dominated_flow": true
+        },
+        "near_wall_treatment": {
+          "wall_treatment": "standard-wall-fn"
+        },
+        "options": {
+          "curvature_correction": {
+            "enabled": false
+          },
+          "production_kato_launder_enabled": false,
+          "production_limiter": {
+            "enabled": false
+          }
+        },
+        "multiphase_turbulence": {
+          "multiphase_options": {
+            "dispersion_in_relative_velocity": false
+          }
+        },
+        "turbulence_expert": {
+          "turbulence_damping": {
+            "enable_turb_damping": false
+          },
+          "turb_non_newtonian": false
+        },
+        "user_defined_functions": {
+          "turb_visc": "none"
+        }
+      },
+      "acoustics": {
+        "model": "off"
+      },
+      "radiation": {
+        "model": "none",
+        "solar_load": {
+          "solar_model": "none",
+          "sun_direction_vector_definition": {}
+        },
+        "solar_calculator": {
+          "longitude": -1.4770719,
+          "latitude": 0.23823741,
+          "timezone": -5.0,
+          "mesh_orientation": {
+            "north_direction": {
+              "north_x": 0.0,
+              "north_y": 1.0,
+              "north_z": 0.0
+            },
+            "east_direction": {
+              "east_x": 1.0,
+              "east_y": 0.0,
+              "east_z": 0.0
+            }
+          },
+          "date_and_time": {
+            "day": 21,
+            "month": 6,
+            "hour": 13,
+            "minute": 0
+          },
+          "calculator_method": "fair-weather-condition",
+          "sunshine_factor": 1.0
+        },
+        "solar_calculator_gui": {
+          "longitude": -1.4770719,
+          "latitude": 0.23823741,
+          "timezone": -5.0,
+          "mesh_orientation": {
+            "north_direction": {
+              "north_x": 0.0,
+              "north_y": 1.0,
+              "north_z": 0.0
+            },
+            "east_direction": {
+              "east_x": 1.0,
+              "east_y": 0.0,
+              "east_z": 0.0
+            }
+          },
+          "date_and_time": {
+            "day": 21,
+            "month": 6,
+            "hour": 13,
+            "minute": 0
+          },
+          "calculator_method": "fair-weather-condition",
+          "sunshine_factor": 1.0
+        }
+      },
+      "species": {
+        "model": {
+          "option": "off",
+          "phase_material": {
+            "phase-1": "water-vapor-purnanto2013",
+            "phase-2": "water-liquid-purnanto2013"
+          },
+          "number_vol_spec": false
+        }
+      },
+      "discrete_phase": {
+        "general_settings": {
+          "interaction": {
+            "enabled": false
+          },
+          "contour_plotting": "none"
+        },
+        "physical_models": {
+          "particle_forces": {
+            "pressure_gradient_force": {},
+            "saffman_lift_force_enabled": false,
+            "pressure_force_enabled": false,
+            "virtual_mass_force": {
+              "enabled": false
+            }
+          },
+          "erosion_accretion_enabled": false
+        },
+        "tracking": {
+          "max_num_steps": 50000,
+          "step_size_controls": {
+            "option": "step-length-factor",
+            "step_length_factor": 5
+          },
+          "expert": {
+            "randomize_every_iteration": true,
+            "randomize_every_timestep": true,
+            "verbosity": 1,
+            "reference_frame": "relative"
+          }
+        },
+        "numerics": {
+          "tracking": {
+            "accuracy_control": {
+              "enabled": true,
+              "tolerance": 1e-05,
+              "max_num_refinements": 20,
+              "step_size_fraction": 1.0
+            },
+            "option": "automatic",
+            "low_order_scheme": "implicit",
+            "high_order_scheme": "trapezoidal"
+          },
+          "node_based_averaging": {
+            "enabled": false,
+            "kernel_type": "gaussian"
+          },
+          "dynamic_interaction_range_enabled": false,
+          "high_res_tracking": {
+            "enabled": true,
+            "always_use_face_centroid_with_periodics": true,
+            "flow_interpolation": {
+              "specific_heat_enabled": false,
+              "density_enabled": true,
+              "gradients_enabled": true,
+              "viscosity_enabled": true,
+              "temperature_enabled": false,
+              "wall_zero_vel_enabled": false
+            },
+            "boundary_layer_tracking_enabled": true,
+            "subtet_validity_checking_enabled": false,
+            "auto_intersect_tol_enabled": true,
+            "barycentric_intersection_enabled": false,
+            "particle_relocation": {
+              "enhanced_method_enabled": false,
+              "support_for_std_track_data_read_enabled": false,
+              "overset_robustness_level": 1,
+              "legacy_method_enabled": false
+            },
+            "stuck_particle_removal_enabled": true,
+            "barycentric_sampling_enabled": false,
+            "quad_face_centroid_enabled": false
+          }
+        },
+        "parallel": {
+          "option": "hybrid",
+          "hybrid": {
+            "dpm_domain": {
+              "enabled": false
+            }
+          },
+          "expert": {
+            "parallel_verbosity_level": 0
+          }
+        },
+        "user_defined_functions": {
+          "body_force": "none",
+          "source_terms": "none",
+          "output": "none",
+          "scalar_update": "none",
+          "dpm_time_step_size": "none",
+          "flow_interpolation": "none",
+          "number_of_scalars": 0,
+          "max_num_udf_species": 50
+        },
+        "injections": {}
+      },
+      "virtual_blade_model": {
+        "enabled": false
+      },
+      "structure": {
+        "model": "off"
+      },
+      "echemistry": {
+        "enabled": false
+      },
+      "battery": {
+        "enabled": false
+      },
+      "system_coupling": {
+        "user_defined_coupling_variables_via_udm": [],
+        "use_face_or_element_based_data_transfer": true,
+        "flow_boundary_coupling": {
+          "activate_flow_boundary_coupling_model": false
+        }
+      },
+      "sofc": {
+        "enabled": false
+      },
+      "pemfc": {
+        "enabled": false
+      }
+    },
+    "materials": {
+      "database": {
+        "database_type": "fluent-database"
+      },
+      "fluid": {
+        "air": {
+          "name": "air",
+          "chemical_formula": "",
+          "density": {
+            "option": "value",
+            "value": 1.225
+          },
+          "viscosity": {
+            "option": "value",
+            "value": 1.7894e-05
+          }
+        },
+        "water-liquid-purnanto2013": {
+          "name": "water-liquid-purnanto2013",
+          "chemical_formula": "",
+          "density": {
+            "option": "value",
+            "value": 881.77
+          },
+          "viscosity": {
+            "option": "value",
+            "value": 0.00014596
+          }
+        },
+        "water-vapor-purnanto2013": {
+          "name": "water-vapor-purnanto2013",
+          "chemical_formula": "",
+          "density": {
+            "option": "value",
+            "value": 5.73
+          },
+          "viscosity": {
+            "option": "value",
+            "value": 1.5188e-05
+          }
+        }
+      },
+      "solid": {
+        "aluminum": {
+          "name": "aluminum",
+          "chemical_formula": "al",
+          "density": {
+            "option": "value",
+            "value": 2719
+          }
+        }
+      }
+    },
+    "cell_zone_conditions": {
+      "fluid": {
+        "simple-spiral-separator--brine-outlet-": {
+          "name": "simple-spiral-separator--brine-outlet-",
+          "phase": {
+            "mixture": {
+              "general": {
+                "laminar": false
+              },
+              "reference_frame": {
+                "frame_motion": false,
+                "reference_frame_axis_origin": [
+                  {
+                    "option": "value",
+                    "value": 0
+                  },
+                  {
+                    "option": "value",
+                    "value": 0
+                  },
+                  {
+                    "option": "value",
+                    "value": 0
+                  }
+                ],
+                "reference_frame_axis_direction": [
+                  {
+                    "option": "value",
+                    "value": 0
+                  },
+                  {
+                    "option": "value",
+                    "value": 0
+                  },
+                  {
+                    "option": "value",
+                    "value": 1
+                  }
+                ]
+              },
+              "mesh_motion": {},
+              "porous_zone": {
+                "porous": false
+              },
+              "fan_zone": {
+                "fan_zone": false
+              },
+              "sources": {
+                "enable": false
+              },
+              "fixed_values": {
+                "enable": false
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "general": {},
+              "reference_frame": {},
+              "mesh_motion": {},
+              "porous_zone": {},
+              "fan_zone": {
+                "fan_zone": false
+              },
+              "sources": {
+                "enable": false
+              },
+              "fixed_values": {
+                "enable": false
+              },
+              "multiphase": {}
+            },
+            "phase-2": {
+              "general": {},
+              "reference_frame": {},
+              "mesh_motion": {},
+              "porous_zone": {},
+              "fan_zone": {
+                "fan_zone": false
+              },
+              "sources": {
+                "enable": false
+              },
+              "fixed_values": {
+                "enable": false
+              },
+              "multiphase": {}
+            }
+          }
+        }
+      }
+    },
+    "boundary_conditions": {
+      "interior": {
+        "interior--simple-spiral-separator--brine-outlet-": {
+          "name": "interior--simple-spiral-separator--brine-outlet-",
+          "phase": {
+            "mixture": {
+              "interior": {}
+            },
+            "phase-1": {
+              "interior": {}
+            },
+            "phase-2": {
+              "interior": {}
+            }
+          }
+        }
+      },
+      "pressure_outlet": {
+        "steam-outlet": {
+          "name": "steam-outlet",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "gauge_pressure": {
+                  "option": "value",
+                  "value": 1120000
+                },
+                "pressure_profile_multiplier": 1.0,
+                "backflow_dir_spec_method": "Normal to Boundary",
+                "backflow_pressure_spec": "Total Pressure",
+                "radial_equ_pressure_distribution": false
+              },
+              "turbulence": {
+                "turbulence_specification": "Intensity and Hydraulic Diameter",
+                "backflow_turbulent_intensity": 0.0211,
+                "backflow_hydraulic_diameter": 0.876
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "multiphase": {
+                "volume_frac_spec_method": "Backflow Volume Fraction",
+                "backflow_volume_fraction": {
+                  "option": "value",
+                  "value": 0
+                }
+              }
+            }
+          }
+        }
+      },
+      "velocity_inlet": {
+        "liquid-inlet": {
+          "name": "liquid-inlet",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "initial_gauge_pressure": {
+                  "option": "value",
+                  "value": 1140000
+                }
+              },
+              "turbulence": {
+                "turbulence_specification": "Intensity and Hydraulic Diameter",
+                "turbulent_intensity": 0.0211,
+                "hydraulic_diameter": 0.01338
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {
+                "velocity_specification_method": "Magnitude, Normal to Boundary",
+                "reference_frame": "Absolute",
+                "velocity_magnitude": {
+                  "option": "value",
+                  "value": 27.118
+                }
+              },
+              "turbulence": {},
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {
+                "velocity_specification_method": "Magnitude, Normal to Boundary",
+                "reference_frame": "Absolute",
+                "velocity_magnitude": {
+                  "option": "value",
+                  "value": 27.118
+                }
+              },
+              "turbulence": {},
+              "multiphase": {
+                "volume_fraction": {
+                  "option": "value",
+                  "value": 1.0
+                }
+              }
+            }
+          }
+        },
+        "steam-inlet": {
+          "name": "steam-inlet",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "initial_gauge_pressure": {
+                  "option": "value",
+                  "value": 1140000
+                }
+              },
+              "turbulence": {
+                "turbulence_specification": "Intensity and Hydraulic Diameter",
+                "turbulent_intensity": 0.0211,
+                "hydraulic_diameter": 0.72061
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {
+                "velocity_specification_method": "Magnitude, Normal to Boundary",
+                "reference_frame": "Absolute",
+                "velocity_magnitude": {
+                  "option": "value",
+                  "value": 27.118
+                }
+              },
+              "turbulence": {},
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {
+                "velocity_specification_method": "Magnitude, Normal to Boundary",
+                "reference_frame": "Absolute",
+                "velocity_magnitude": {
+                  "option": "value",
+                  "value": 27.118
+                }
+              },
+              "turbulence": {},
+              "multiphase": {
+                "volume_fraction": {
+                  "option": "value",
+                  "value": 0
+                }
+              }
+            }
+          }
+        }
+      },
+      "wall": {
+        "brine-outlet": {
+          "name": "brine-outlet",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "multiphase": {}
+            }
+          }
+        },
+        "inlet-outer-wall-wall-simple-spiral-separator--brine-outlet-": {
+          "name": "inlet-outer-wall-wall-simple-spiral-separator--brine-outlet-",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "multiphase": {}
+            }
+          }
+        },
+        "wall": {
+          "name": "wall",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "multiphase": {}
+            }
+          }
+        }
+      },
+      "non_reflecting_bc": {
+        "general_nrbc": {
+          "sigma": 0.15,
+          "sigma2": 5.0
+        },
+        "turbo_specific_nrbc": {
+          "enable": false
+        }
+      },
+      "perforated_wall": {
+        "setup_method": "None",
+        "model_setup": {
+          "ninjections": 1,
+          "urf": 1,
+          "injection": [
+            {
+              "injection_thread": false,
+              "coupled": true,
+              "extraction_thread": false,
+              "uniform": true,
+              "static": false,
+              "formulation": 0,
+              "dynamic_setup": {
+                "method": -1
+              }
+            }
+          ]
+        }
+      },
+      "settings": {
+        "mass_flow": true,
+        "pressure_outlet": {
+          "blending_factor": 0.0,
+          "bin_count": 65,
+          "average_pressure": false
+        },
+        "target_mass_flow_rate_settings": {
+          "under_relaxation_factor": 0.05,
+          "verbosity": false
+        },
+        "advanced": {
+          "delay_model_change_update": false,
+          "batch_thread_update": false
+        }
+      }
+    },
+    "mesh_interfaces": {
+      "interface": {},
+      "auto_options": {
+        "set_default_name_prefix": "intf",
+        "set_minimum_area_percentage": 0.0,
+        "pairing_between_different_cell_zones_only": false,
+        "pairing_between_interface_zones_only": false
+      },
+      "verbosity": 0,
+      "enforce_continuity_after_bc": false,
+      "coupled_interfaces_inherit_bcs": false,
+      "enforce_coupled_wall_between_solids": false,
+      "enable_visualization_of_interfaces": true,
+      "non_conformal_interface_numerics": {}
+    },
+    "dynamic_mesh": {
+      "enabled": false
+    },
+    "reference_values": {
+      "area": 1,
+      "density": 1.225,
+      "enthalpy": 0,
+      "length": 1,
+      "pressure": 0,
+      "temperature": 288.16,
+      "yplus": 300,
+      "velocity": 1,
+      "viscosity": 1.7894e-05,
+      "ratio_of_specific_heats": 1.4,
+      "zone": ""
+    },
+    "reference_frames": {
+      "global": {
+        "name": "global",
+        "motion": {
+          "motion_type": "no-motion"
+        },
+        "parent_ref_frame": "",
+        "initial_state": {
+          "origin": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "orientation": {
+            "first_axis": {
+              "axis_from": {
+                "direction_option": "axis-label",
+                "axis_label": "x"
+              },
+              "axis_to": {
+                "direction_option": "vector",
+                "vector": [
+                  1.0,
+                  0.0,
+                  0.0
+                ]
+              }
+            },
+            "auto_second_axis": true
+          }
+        },
+        "current_state": {
+          "origin": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "x_axis": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "y_axis": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "z_axis": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "display_state": "current"
+      }
+    },
+    "named_expressions": {
+      "P7bCleanWaterVolume": {
+        "name": "P7bCleanWaterVolume",
+        "definition": "VolumeInt(Volumefraction(phase=\"phase-2\"),[\"simple-spiral-separator--brine-outlet-\"])",
+        "description": "",
+        "parameterid": "",
+        "parametername": "",
+        "unit": "m^3",
+        "input_parameter": false,
+        "output_parameter": false
+      },
+      "P7bGlobalIteration": {
+        "name": "P7bGlobalIteration",
+        "definition": "Iteration",
+        "description": "",
+        "parameterid": "",
+        "parametername": "",
+        "unit": "",
+        "input_parameter": false,
+        "output_parameter": false
+      }
+    },
+    "turbo_models": {
+      "enabled": false
+    },
+    "user_defined": {
+      "auto_compile_compiled_functions": false,
+      "memory": {
+        "memory_locations": 0,
+        "memory_node_locations": 0,
+        "zone_based_udm": false
+      },
+      "scalars": {
+        "inlet_diffusion": true,
+        "diffusion_long": false,
+        "scalar": []
+      }
+    },
+    "profiles": {
+      "update_interval": 1
+    }
+  },
+  "residual_equations": {
+    "continuity": {
+      "monitor": true,
+      "check_convergence": false
+    },
+    "epsilon": {
+      "monitor": true,
+      "check_convergence": false
+    },
+    "k": {
+      "monitor": true,
+      "check_convergence": false
+    },
+    "vf-phase-2": {
+      "monitor": true,
+      "check_convergence": false
+    },
+    "x-velocity": {
+      "monitor": true,
+      "check_convergence": false
+    },
+    "y-velocity": {
+      "monitor": true,
+      "check_convergence": false
+    },
+    "z-velocity": {
+      "monitor": true,
+      "check_convergence": false
+    }
+  },
+  "definitions": {
+    "P7bAlpha": "Volumefraction(phase=\"phase-2\")",
+    "P7bMask": "IF(AND(y >= -1.4845837354660034[m], y <= -0.28091674709320058[m]),1.0,0.0)",
+    "P7bK": "TurbulentKineticEnergyk",
+    "P7bEpsilon": "TurbulenceDissipationRate",
+    "P7bSink": "-P7bMask*881.77[kg/m^3]*min(1.0,max(0.0,P7bAlpha))/0.0024095893[s]",
+    "P7bLiquidX": "Velocity.x(phase=\"phase-2\")",
+    "P7bSinkX": "P7bSink*P7bLiquidX",
+    "P7bLiquidY": "Velocity.y(phase=\"phase-2\")",
+    "P7bSinkY": "P7bSink*P7bLiquidY",
+    "P7bLiquidZ": "Velocity.z(phase=\"phase-2\")",
+    "P7bSinkZ": "P7bSink*P7bLiquidZ",
+    "P7bSinkK": "P7bSink*P7bK",
+    "P7bSinkEpsilon": "P7bSink*P7bEpsilon",
+    "P7bCount": "CountIf(AND(y >= -1.4845837354660034[m], y <= -0.28091674709320058[m]),[\"simple-spiral-separator--brine-outlet-\", \"p7b-collector\"])",
+    "P7bGeometryVolume": "VolumeInt(P7bMask,[\"simple-spiral-separator--brine-outlet-\", \"p7b-collector\"])",
+    "P7bWaterVolume": "VolumeInt(P7bAlpha,[\"simple-spiral-separator--brine-outlet-\", \"p7b-collector\"])",
+    "P7bWaterMass": "881.77[kg/m^3]*P7bWaterVolume",
+    "P7bCollectorVolume": "VolumeInt(P7bMask*P7bAlpha,[\"simple-spiral-separator--brine-outlet-\", \"p7b-collector\"])",
+    "P7bCollectorMass": "881.77[kg/m^3]*P7bCollectorVolume",
+    "P7bAboveVolume": "P7bWaterVolume-P7bCollectorVolume",
+    "P7bRemoval": "-VolumeInt(P7bSink,[\"simple-spiral-separator--brine-outlet-\", \"p7b-collector\"])",
+    "P7bLiquidLiquidInlet": "MassFlow([\"liquid-inlet\"],phase=\"phase-2\")",
+    "P7bLiquidSteamInlet": "MassFlow([\"steam-inlet\"],phase=\"phase-2\")",
+    "P7bLiquidOutlet": "MassFlow([\"steam-outlet\"],phase=\"phase-2\")",
+    "P7bLiquidBrineWall": "MassFlow([\"brine-outlet\"],phase=\"phase-2\")",
+    "P7bLiquidBoundary": "P7bLiquidLiquidInlet+P7bLiquidSteamInlet+P7bLiquidOutlet+P7bLiquidBrineWall",
+    "P7bLiquidClosure": "P7bLiquidBoundary-P7bRemoval",
+    "P7bVaporLiquidInlet": "MassFlow([\"liquid-inlet\"],phase=\"phase-1\")",
+    "P7bVaporSteamInlet": "MassFlow([\"steam-inlet\"],phase=\"phase-1\")",
+    "P7bVaporOutlet": "MassFlow([\"steam-outlet\"],phase=\"phase-1\")",
+    "P7bVaporBrineWall": "MassFlow([\"brine-outlet\"],phase=\"phase-1\")",
+    "P7bVaporBoundary": "P7bVaporLiquidInlet+P7bVaporSteamInlet+P7bVaporOutlet+P7bVaporBrineWall",
+    "P7bVaporClosure": "P7bVaporBoundary",
+    "P7bMixtureLiquidInlet": "MassFlow([\"liquid-inlet\"],phase=\"mixture\")",
+    "P7bMixtureSteamInlet": "MassFlow([\"steam-inlet\"],phase=\"mixture\")",
+    "P7bMixtureOutlet": "MassFlow([\"steam-outlet\"],phase=\"mixture\")",
+    "P7bMixtureBrineWall": "MassFlow([\"brine-outlet\"],phase=\"mixture\")",
+    "P7bMixtureBoundary": "P7bMixtureLiquidInlet+P7bMixtureSteamInlet+P7bMixtureOutlet+P7bMixtureBrineWall",
+    "P7bMixtureClosure": "P7bMixtureBoundary-P7bRemoval",
+    "P7bPressureLiquid": "AreaAve(StaticPressure,[\"liquid-inlet\"])",
+    "P7bPressureSteam": "AreaAve(StaticPressure,[\"steam-inlet\"])",
+    "P7bPressureOutlet": "AreaAve(StaticPressure,[\"steam-outlet\"])",
+    "P7bDropLiquid": "P7bPressureLiquid-P7bPressureOutlet",
+    "P7bDropSteam": "P7bPressureSteam-P7bPressureOutlet",
+    "P7bSplitVolume": "Volume([\"p7b-collector\"])",
+    "P7bSplitMismatch": "VolumeInt(1-P7bMask,[\"p7b-collector\"])+VolumeInt(P7bMask,[\"simple-spiral-separator--brine-outlet-\"])",
+    "P7bMinimumPressure": "Minimum(StaticPressure,[\"simple-spiral-separator--brine-outlet-\", \"p7b-collector\"])",
+    "P7bMaximumPressure": "Maximum(StaticPressure,[\"simple-spiral-separator--brine-outlet-\", \"p7b-collector\"])",
+    "P7bMaximumSpeed": "Maximum(VelocityMagnitude(phase=\"mixture\"),[\"simple-spiral-separator--brine-outlet-\", \"p7b-collector\"])"
+  },
+  "fluid_zones": [
+    "simple-spiral-separator--brine-outlet-",
+    "p7b-collector"
+  ],
+  "interface_proof": {
+    "interior--simple-spiral-separator--brine-outlet-:001": {
+      "count": 2870,
+      "outward_sign": 1,
+      "all_faces_cross_centroid_mask": true,
+      "area_dot_c1_minus_c0_positive": true
+    },
+    "interior--simple-spiral-separator--brine-outlet-:004": {
+      "count": 3307,
+      "outward_sign": 1,
+      "all_faces_cross_centroid_mask": true,
+      "area_dot_c1_minus_c0_positive": true
+    },
+    "interior--simple-spiral-separator--brine-outlet-:007": {
+      "count": 353125,
+      "crossing_faces": 0
+    },
+    "interior--simple-spiral-separator--brine-outlet-": {
+      "count": 2447695,
+      "crossing_faces": 0
+    }
+  },
+  "hybrid_options": {
+    "general_settings": {
+      "iter_count": 10,
+      "explicit_urf": [
+        1.0,
+        1.0
+      ],
+      "initialization_options": {
+        "initial_pressure": false,
+        "external_aero": false,
+        "const_velocity": false
+      }
+    },
+    "turbulent_setting": {
+      "averaged_turbulent_parameters": true
+    }
+  },
+  "pairs": {
+    "initial": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s080-20260921T130348Z-initial.cas.h5",
+    "prepared": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s080-20260921T130348Z-prepared.cas.h5",
+    "n00050": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s080-20260921T130348Z-n00050.cas.h5",
+    "n00500": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s080-20260921T130348Z-n00500.cas.h5",
+    "n01000": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s080-20260921T130348Z-n01000.cas.h5",
+    "n01500": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s080-20260921T130348Z-n01500.cas.h5",
+    "n02000": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s080-20260921T130348Z-n02000.cas.h5",
+    "n02500": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s080-20260921T130348Z-n02500.cas.h5",
+    "n03000": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s080-20260921T130348Z-n03000.cas.h5",
+    "n03500": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s080-20260921T130348Z-n03500.cas.h5",
+    "n04000": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s080-20260921T130348Z-n04000.cas.h5",
+    "n04500": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s080-20260921T130348Z-n04500.cas.h5",
+    "final": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s080-20260921T130348Z-final.cas.h5"
+  },
+  "source_slots": {
+    "simple-spiral-separator--brine-outlet-": {
+      "mixture": {
+        "enable": false
+      },
+      "phase-1": {
+        "enable": false
+      },
+      "phase-2": {
+        "enable": false
+      }
+    },
+    "p7b-collector": {
+      "mixture": {
+        "enable": true,
+        "terms": {
+          "epsilon": [
+            {
+              "option": "value",
+              "value": "P7bSinkEpsilon"
+            }
+          ],
+          "k": [
+            {
+              "option": "value",
+              "value": "P7bSinkK"
+            }
+          ],
+          "x-momentum": [
+            {
+              "option": "value",
+              "value": "P7bSinkX"
+            }
+          ],
+          "y-momentum": [
+            {
+              "option": "value",
+              "value": "P7bSinkY"
+            }
+          ],
+          "z-momentum": [
+            {
+              "option": "value",
+              "value": "P7bSinkZ"
+            }
+          ]
+        }
+      },
+      "phase-1": {
+        "enable": false
+      },
+      "phase-2": {
+        "enable": true,
+        "terms": {
+          "mass": [
+            {
+              "option": "value",
+              "value": "P7bSink"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "sections": {
+    "p7b-section-y0p5": {
+      "y_m": 0.5,
+      "area_m2": 3.164901413456425
+    },
+    "p7b-section-y1p5": {
+      "y_m": 1.5,
+      "area_m2": 3.164724181642331
+    },
+    "p7b-section-y3p0": {
+      "y_m": 3.0,
+      "area_m2": 3.165024401509376
+    },
+    "p7b-section-y5p0": {
+      "y_m": 5.0,
+      "area_m2": 3.165050005098089
+    }
+  },
+  "report_definitions": {
+    "mesh": {},
+    "surface": {},
+    "volume": {
+      "p7b-applied-source": {
+        "name": "p7b-applied-source",
+        "report_type": "volume-sum",
+        "field": "phase-2-user-mass-source",
+        "cell_zones": [
+          "simple-spiral-separator--brine-outlet-",
+          "p7b-collector"
+        ],
+        "per_selection": false,
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "phase": "mixture",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7b-clean-native-water": {
+        "name": "p7b-clean-native-water",
+        "report_type": "volume-integral",
+        "field": "phase-2-vof",
+        "cell_zones": [
+          "simple-spiral-separator--brine-outlet-",
+          "p7b-collector"
+        ],
+        "per_selection": false,
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "phase": "mixture",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7b-native-water": {
+        "name": "p7b-native-water",
+        "report_type": "volume-integral",
+        "field": "phase-2-vof",
+        "cell_zones": [
+          "simple-spiral-separator--brine-outlet-",
+          "p7b-collector"
+        ],
+        "per_selection": false,
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "phase": "mixture",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      }
+    },
+    "force": {},
+    "lift": {},
+    "drag": {},
+    "moment": {},
+    "time": {},
+    "flux": {},
+    "vbm": {},
+    "user_defined": {},
+    "expression": {},
+    "single_valued_expression": {
+      "p7b-clean-expression-water": {
+        "name": "p7b-clean-expression-water",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bCleanWaterVolume",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7babovevolume": {
+        "name": "p7babovevolume",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bAboveVolume",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bcollectormass": {
+        "name": "p7bcollectormass",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bCollectorMass",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bcollectorvolume": {
+        "name": "p7bcollectorvolume",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bCollectorVolume",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bdropliquid": {
+        "name": "p7bdropliquid",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bDropLiquid",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bdropsteam": {
+        "name": "p7bdropsteam",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bDropSteam",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bliquidboundary": {
+        "name": "p7bliquidboundary",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bLiquidBoundary",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bliquidbrinewall": {
+        "name": "p7bliquidbrinewall",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bLiquidBrineWall",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bliquidclosure": {
+        "name": "p7bliquidclosure",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bLiquidClosure",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bliquidliquidinlet": {
+        "name": "p7bliquidliquidinlet",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bLiquidLiquidInlet",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bliquidoutlet": {
+        "name": "p7bliquidoutlet",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bLiquidOutlet",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bliquidsteaminlet": {
+        "name": "p7bliquidsteaminlet",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bLiquidSteamInlet",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bmaximumpressure": {
+        "name": "p7bmaximumpressure",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bMaximumPressure",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bmaximumspeed": {
+        "name": "p7bmaximumspeed",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bMaximumSpeed",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bminimumpressure": {
+        "name": "p7bminimumpressure",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bMinimumPressure",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bmixtureboundary": {
+        "name": "p7bmixtureboundary",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bMixtureBoundary",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bmixturebrinewall": {
+        "name": "p7bmixturebrinewall",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bMixtureBrineWall",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bmixtureclosure": {
+        "name": "p7bmixtureclosure",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bMixtureClosure",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bmixtureliquidinlet": {
+        "name": "p7bmixtureliquidinlet",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bMixtureLiquidInlet",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bmixtureoutlet": {
+        "name": "p7bmixtureoutlet",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bMixtureOutlet",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bmixturesteaminlet": {
+        "name": "p7bmixturesteaminlet",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bMixtureSteamInlet",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bpressureliquid": {
+        "name": "p7bpressureliquid",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bPressureLiquid",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bpressureoutlet": {
+        "name": "p7bpressureoutlet",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bPressureOutlet",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bpressuresteam": {
+        "name": "p7bpressuresteam",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bPressureSteam",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bremoval": {
+        "name": "p7bremoval",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bRemoval",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bvaporboundary": {
+        "name": "p7bvaporboundary",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bVaporBoundary",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bvaporbrinewall": {
+        "name": "p7bvaporbrinewall",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bVaporBrineWall",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bvaporclosure": {
+        "name": "p7bvaporclosure",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bVaporClosure",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bvaporliquidinlet": {
+        "name": "p7bvaporliquidinlet",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bVaporLiquidInlet",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bvaporoutlet": {
+        "name": "p7bvaporoutlet",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bVaporOutlet",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bvaporsteaminlet": {
+        "name": "p7bvaporsteaminlet",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bVaporSteamInlet",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bwatermass": {
+        "name": "p7bwatermass",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bWaterMass",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      },
+      "p7bwatervolume": {
+        "name": "p7bwatervolume",
+        "average_over": 1,
+        "retain_instantaneous_values": false,
+        "definition": "P7bWaterVolume",
+        "list_valid_report_names": "",
+        "output_parameter": false,
+        "create_report_file": true,
+        "create_report_plot": false
+      }
+    }
+  },
+  "initial_metrics": [
+    {
+      "p7bwatervolume": [
+        0.0,
+        "m^3"
+      ]
+    },
+    {
+      "p7bwatermass": [
+        0.0,
+        "kg"
+      ]
+    },
+    {
+      "p7bcollectorvolume": [
+        0.0,
+        "m^3"
+      ]
+    },
+    {
+      "p7bcollectormass": [
+        0.0,
+        "kg"
+      ]
+    },
+    {
+      "p7babovevolume": [
+        0.0,
+        "m^3"
+      ]
+    },
+    {
+      "p7bremoval": [
+        -0.0,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bliquidliquidinlet": [
+        116.9212324584734,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bliquidsteaminlet": [
+        0.0,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bliquidoutlet": [
+        0.0,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bliquidbrinewall": [
+        0.0,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bliquidboundary": [
+        116.9212324584734,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bliquidclosure": [
+        116.9212324584734,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bvaporliquidinlet": [
+        0.0,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bvaporsteaminlet": [
+        80.68990235833888,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bvaporoutlet": [
+        -72.56017240747673,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bvaporbrinewall": [
+        0.0,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bvaporboundary": [
+        8.129729950862156,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bvaporclosure": [
+        8.129729950862156,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bmixtureliquidinlet": [
+        116.9212324584734,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bmixturesteaminlet": [
+        80.68990235833888,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bmixtureoutlet": [
+        -72.56017240747673,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bmixturebrinewall": [
+        0.0,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bmixtureboundary": [
+        125.0509624093356,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bmixtureclosure": [
+        125.0509624093356,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bpressureliquid": [
+        1119999.999999995,
+        "Pa"
+      ]
+    },
+    {
+      "p7bpressuresteam": [
+        1120000.0,
+        "Pa"
+      ]
+    },
+    {
+      "p7bpressureoutlet": [
+        1119999.999999995,
+        "Pa"
+      ]
+    },
+    {
+      "p7bdropliquid": [
+        2.328306436538696e-10,
+        "Pa"
+      ]
+    },
+    {
+      "p7bdropsteam": [
+        4.889443516731262e-09,
+        "Pa"
+      ]
+    },
+    {
+      "p7bminimumpressure": [
+        1119999.999999997,
+        "Pa"
+      ]
+    },
+    {
+      "p7bmaximumpressure": [
+        1119999.999999997,
+        "Pa"
+      ]
+    },
+    {
+      "p7bmaximumspeed": [
+        372.6267004748667,
+        "m/s"
+      ]
+    },
+    {
+      "p7b-applied-source": [
+        0.0,
+        "kg/s"
+      ]
+    },
+    {
+      "p7b-native-water": [
+        0.0,
+        "m^3"
+      ]
+    }
+  ],
+  "initial_sections": {
+    "fields": [
+      "phase-2-vof",
+      "pressure",
+      "velocity-magnitude",
+      "x-velocity",
+      "y-velocity",
+      "z-velocity",
+      "phase-2-velocity-magnitude",
+      "phase-2-x-velocity",
+      "phase-2-y-velocity",
+      "phase-2-z-velocity"
+    ],
+    "sampling": "Fluent iso-surface facet values; node_value=False",
+    "sections": {
+      "p7b-section-y0p5": {
+        "file": "p7b-section-y0p5.npz",
+        "facets": 3138,
+        "vertices": 4316
+      },
+      "p7b-section-y1p5": {
+        "file": "p7b-section-y1p5.npz",
+        "facets": 2964,
+        "vertices": 4124
+      },
+      "p7b-section-y3p0": {
+        "file": "p7b-section-y3p0.npz",
+        "facets": 2780,
+        "vertices": 3714
+      },
+      "p7b-section-y5p0": {
+        "file": "p7b-section-y5p0.npz",
+        "facets": 3096,
+        "vertices": 4129
+      }
+    }
+  },
+  "flux_monitor": {
+    "schema_version": 1,
+    "capture_id": "b65cfa7fc2f44f2bbc6d7e031f3ed767",
+    "registered": false,
+    "start_iteration": 0,
+    "prefix_source": null,
+    "inherited_rows": 0,
+    "last_completed_iteration": 5000,
+    "last_event_iteration": 5000,
+    "skipped_duplicate_count": 10,
+    "skipped_duplicate_indices": [
+      50,
+      500,
+      1000,
+      1500,
+      2000,
+      2500,
+      3000,
+      3500,
+      4000,
+      4500
+    ],
+    "local_rows": 5000,
+    "remote_write_completed_rows": 5000,
+    "remote_readback_verified": false,
+    "local_jsonl": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s080-20260921T130348Z/collector-flux.jsonl",
+    "remote_path_pattern": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-flux-b65cfa7fc2f44f2bbc6d7e031f3ed767-i{iteration:07d}.json",
+    "face_zones": [
+      {
+        "name": "interior--simple-spiral-separator--brine-outlet-:001",
+        "outward_sign": 1,
+        "expected_owned_count": 2870
+      },
+      {
+        "name": "interior--simple-spiral-separator--brine-outlet-:004",
+        "outward_sign": 1,
+        "expected_owned_count": 3307
+      }
+    ],
+    "error": null
+  },
+  "actual_iteration": 5000,
+  "remote_flux_readbacks": [
+    {
+      "iteration": 50,
+      "path": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-flux-b65cfa7fc2f44f2bbc6d7e031f3ed767-i0000050.json",
+      "matches_local": true
+    },
+    {
+      "iteration": 500,
+      "path": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-flux-b65cfa7fc2f44f2bbc6d7e031f3ed767-i0000500.json",
+      "matches_local": true
+    },
+    {
+      "iteration": 1000,
+      "path": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-flux-b65cfa7fc2f44f2bbc6d7e031f3ed767-i0001000.json",
+      "matches_local": true
+    },
+    {
+      "iteration": 1500,
+      "path": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-flux-b65cfa7fc2f44f2bbc6d7e031f3ed767-i0001500.json",
+      "matches_local": true
+    },
+    {
+      "iteration": 2000,
+      "path": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-flux-b65cfa7fc2f44f2bbc6d7e031f3ed767-i0002000.json",
+      "matches_local": true
+    },
+    {
+      "iteration": 2500,
+      "path": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-flux-b65cfa7fc2f44f2bbc6d7e031f3ed767-i0002500.json",
+      "matches_local": true
+    },
+    {
+      "iteration": 3000,
+      "path": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-flux-b65cfa7fc2f44f2bbc6d7e031f3ed767-i0003000.json",
+      "matches_local": true
+    },
+    {
+      "iteration": 3500,
+      "path": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-flux-b65cfa7fc2f44f2bbc6d7e031f3ed767-i0003500.json",
+      "matches_local": true
+    },
+    {
+      "iteration": 4000,
+      "path": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-flux-b65cfa7fc2f44f2bbc6d7e031f3ed767-i0004000.json",
+      "matches_local": true
+    },
+    {
+      "iteration": 4500,
+      "path": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-flux-b65cfa7fc2f44f2bbc6d7e031f3ed767-i0004500.json",
+      "matches_local": true
+    },
+    {
+      "iteration": 5000,
+      "path": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-flux-b65cfa7fc2f44f2bbc6d7e031f3ed767-i0005000.json",
+      "matches_local": true
+    }
+  ],
+  "latest_metrics": [
+    {
+      "p7bwatervolume": [
+        0.6955426998460403,
+        "m^3"
+      ]
+    },
+    {
+      "p7bwatermass": [
+        613.308686443243,
+        "kg"
+      ]
+    },
+    {
+      "p7bcollectorvolume": [
+        0.0008016058818912746,
+        "m^3"
+      ]
+    },
+    {
+      "p7bcollectormass": [
+        0.7068320184752692,
+        "kg"
+      ]
+    },
+    {
+      "p7babovevolume": [
+        0.6947410939641491,
+        "m^3"
+      ]
+    },
+    {
+      "p7bremoval": [
+        293.3412837097461,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bliquidliquidinlet": [
+        116.9212324584734,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bliquidsteaminlet": [
+        0.0,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bliquidoutlet": [
+        -33.29990991043341,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bliquidbrinewall": [
+        0.0,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bliquidboundary": [
+        83.62132254804001,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bliquidclosure": [
+        -209.7199611617061,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bvaporliquidinlet": [
+        0.0,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bvaporsteaminlet": [
+        80.68990235833888,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bvaporoutlet": [
+        -79.34194207892178,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bvaporbrinewall": [
+        0.0,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bvaporboundary": [
+        1.347960279417109,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bvaporclosure": [
+        1.347960279417109,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bmixtureliquidinlet": [
+        116.9212324584734,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bmixturesteaminlet": [
+        80.68990235833888,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bmixtureoutlet": [
+        -112.614785477617,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bmixturebrinewall": [
+        0.0,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bmixtureboundary": [
+        84.9963493391953,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bmixtureclosure": [
+        -208.3449343705508,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bpressureliquid": [
+        1162956.707485643,
+        "Pa"
+      ]
+    },
+    {
+      "p7bpressuresteam": [
+        1163169.389752211,
+        "Pa"
+      ]
+    },
+    {
+      "p7bpressureoutlet": [
+        1119600.454654685,
+        "Pa"
+      ]
+    },
+    {
+      "p7bdropliquid": [
+        43356.25283095776,
+        "Pa"
+      ]
+    },
+    {
+      "p7bdropsteam": [
+        43568.93509752583,
+        "Pa"
+      ]
+    },
+    {
+      "p7bminimumpressure": [
+        1118673.270388515,
+        "Pa"
+      ]
+    },
+    {
+      "p7bmaximumpressure": [
+        1196074.91646522,
+        "Pa"
+      ]
+    },
+    {
+      "p7bmaximumspeed": [
+        83.4268534633091,
+        "m/s"
+      ]
+    },
+    {
+      "p7b-applied-source": [
+        -295.5017335876702,
+        "kg/s"
+      ]
+    },
+    {
+      "p7b-native-water": [
+        0.6955426998460403,
+        "m^3"
+      ]
+    }
+  ],
+  "final_sections": {
+    "fields": [
+      "phase-2-vof",
+      "pressure",
+      "velocity-magnitude",
+      "x-velocity",
+      "y-velocity",
+      "z-velocity",
+      "phase-2-velocity-magnitude",
+      "phase-2-x-velocity",
+      "phase-2-y-velocity",
+      "phase-2-z-velocity"
+    ],
+    "sampling": "Fluent iso-surface facet values; node_value=False",
+    "sections": {
+      "p7b-section-y0p5": {
+        "file": "p7b-section-y0p5.npz",
+        "facets": 3138,
+        "vertices": 4316
+      },
+      "p7b-section-y1p5": {
+        "file": "p7b-section-y1p5.npz",
+        "facets": 2964,
+        "vertices": 4124
+      },
+      "p7b-section-y3p0": {
+        "file": "p7b-section-y3p0.npz",
+        "facets": 2780,
+        "vertices": 3714
+      },
+      "p7b-section-y5p0": {
+        "file": "p7b-section-y5p0.npz",
+        "facets": 3096,
+        "vertices": 4129
+      }
+    }
+  },
+  "completed_iterations": 5000
+}

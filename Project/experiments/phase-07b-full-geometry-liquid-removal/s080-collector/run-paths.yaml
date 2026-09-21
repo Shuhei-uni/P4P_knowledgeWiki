@@ -1,7 +1,7 @@
 setup_id: phase07b-s80
 candidate_id: E1
 case_id: S80
-run_id: phase07b-s80-20260908
+run_id: p7b-s080-20260921T130348Z
 mode: discovery
 goal_lease:
   phase_id: phase-07b-full-geometry-liquid-removal
@@ -12,7 +12,7 @@ server:
   id: server-1
   ip: 10.104.145.174
   fluent_version: Ansys Fluent 2025 R2
-working_directory: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/udf
+working_directory: null
 phase_root: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal
 parent:
   artifact_id: p7b-clean-initial-20260912T080713Z
@@ -20,22 +20,28 @@ parent:
   data: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-clean-initial-20260912T080713Z.dat.h5
   status: verified clean N0 pair; reinitialize each child with recorded Hybrid options
 paths:
-  source_directory: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/udf
-  initial_case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/phase07b-s80-20260908-initial.cas.h5
-  initial_data: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/phase07b-s80-20260908-initial.dat.h5
-  prepared_case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/phase07b-s80-20260908-prepared.cas.h5
-  prepared_data: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/phase07b-s80-20260908-prepared.dat.h5
-  final_case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/phase07b-s80-20260908-final.cas.h5
-  final_data: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/phase07b-s80-20260908-final.dat.h5
-  checkpoint_prefix: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/checkpoints/phase07b-s80-20260908
-  reports: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/phase07b-s80-20260908.out
-  transcript: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/logs/phase07b-s80-20260908.trn
-  exports_prefix: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/exports/phase07b-s80-20260908
-instrumentation_status: pending exact report definition/path verification
+  source_directory: null
+  initial_case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s080-20260921T130348Z-initial.cas.h5
+  initial_data: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s080-20260921T130348Z-initial.dat.h5
+  prepared_case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s080-20260921T130348Z-prepared.cas.h5
+  prepared_data: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s080-20260921T130348Z-prepared.dat.h5
+  final_case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s080-20260921T130348Z-final.cas.h5
+  final_data: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s080-20260921T130348Z-final.dat.h5
+  checkpoint_prefix: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s080-20260921T130348Z-n
+  reports: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-s080-20260921T130348Z.out
+  transcript: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/logs/p7b-s080-20260921T130348Z.trn
+  exports_prefix: null
+  latest_checkpoint_case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s080-20260921T130348Z-final.cas.h5
+  latest_checkpoint_data: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s080-20260921T130348Z-final.dat.h5
+instrumentation_status: All5000 unique finite scalar, residual and collector-flux rows complete;5000
+  remote writes, checkpoint readbacks match, recorder unregistered without error.
 durability:
   status: LOCAL_ONLY
   onedrive_destination: null
   reason: No verified independent destination currently configured
-local_evidence: PyAnsys/output/phase07b-s80-20260908
-paths_status: Provisional filenames; replace with actual run manifest before accepting
-  execution
+local_evidence: PyAnsys/output/p7b-s080-20260921T130348Z
+paths_status: N5000 final paired artifacts and all four final sections complete; live endpoint
+  verified before next-case replacement.
+execution_manifest: PyAnsys/output/p7b-s080-20260921T130348Z/manifest.json
+controller_exec_session_id: 69458
+analysis: PyAnsys/output/p7b-s080-20260921T130348Z/analysis/summary.json

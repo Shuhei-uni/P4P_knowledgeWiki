@@ -31,18 +31,17 @@ paths:
   reports: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-s020-20260920T221831Z.out
   transcript: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/logs/p7b-s020-20260920T221831Z.trn
   exports_prefix: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/exports/phase07b-s20-20260908
-  latest_checkpoint_case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s020-20260920T221831Z-n00050.cas.h5
-  latest_checkpoint_data: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s020-20260920T221831Z-n00050.dat.h5
-instrumentation_status: N50 complete native history and collector-flux sequence; last
-  PC flux row readback matches; prepared and N50 matching pairs verified; initial
-  section extraction passes.
+  latest_checkpoint_case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s020-20260920T221831Z-final.cas.h5
+  latest_checkpoint_data: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s020-20260920T221831Z-final.dat.h5
+instrumentation_status: 5000 complete native scalar/residual/collector-flux records;
+  checkpoint PC row readbacks match; initial/final four-section fields exported.
 durability:
   status: LOCAL_ONLY
   onedrive_destination: null
   reason: No verified independent destination currently configured
 local_evidence: PyAnsys/output/p7b-s020-20260920T221831Z
-paths_status: Prepared and N50 pairs verified. Runner continuing; final paths planned
-  until manifest confirms creation.
+paths_status: Prepared, all checkpoint, and final matching pairs verified by runner;
+  final section files saved locally. Analysis in progress.
 working_directory_note: All artifacts use absolute PC paths; live cwd is not a dependency.
 execution_manifest: PyAnsys/output/p7b-s020-20260920T221831Z/manifest.json
 blocked_recovery_manifest: PyAnsys/output/p7b-s020-20260918T070215Z/manifest.json

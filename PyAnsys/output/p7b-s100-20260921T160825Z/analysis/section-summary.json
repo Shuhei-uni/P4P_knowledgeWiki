@@ -1,0 +1,578 @@
+{
+  "run_id": "p7b-s100-20260921T160825Z",
+  "source_case_data": {
+    "initial": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s100-20260921T160825Z-initial.cas.h5",
+    "prepared": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s100-20260921T160825Z-prepared.cas.h5",
+    "n00050": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s100-20260921T160825Z-n00050.cas.h5",
+    "n00500": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s100-20260921T160825Z-n00500.cas.h5",
+    "n01000": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s100-20260921T160825Z-n01000.cas.h5",
+    "n01500": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s100-20260921T160825Z-n01500.cas.h5",
+    "n02000": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s100-20260921T160825Z-n02000.cas.h5",
+    "n02500": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s100-20260921T160825Z-n02500.cas.h5",
+    "n03000": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s100-20260921T160825Z-n03000.cas.h5",
+    "n03500": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s100-20260921T160825Z-n03500.cas.h5",
+    "n04000": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s100-20260921T160825Z-n04000.cas.h5"
+  },
+  "rendering": "Piecewise constant native Fluent iso-surface facet values; no interpolation or smoothing.",
+  "field_identity_limit": "Run-local API metadata identifies unqualified pressure/velocity fields as mixture and phase-2-prefixed fields as phase-2.",
+  "initial_comparison_geometry_identical": true,
+  "scales": {
+    "phase-2-vof": [
+      0.0,
+      1.0
+    ],
+    "velocity-magnitude": [
+      0,
+      80
+    ],
+    "phase-2-velocity-magnitude": [
+      0,
+      80
+    ],
+    "x-velocity": [
+      -80,
+      80
+    ],
+    "y-velocity": [
+      -80,
+      80
+    ],
+    "z-velocity": [
+      -80,
+      80
+    ],
+    "phase-2-x-velocity": [
+      -80,
+      80
+    ],
+    "phase-2-y-velocity": [
+      -80,
+      80
+    ],
+    "phase-2-z-velocity": [
+      -80,
+      80
+    ]
+  },
+  "comparison_rule": "Reuse these scales across cases; if exceeded, widen and regenerate every comparison figure.",
+  "claim_limit": "Recovery-checkpoint fields, not a final or successful endpoint. No matched N5000 spatial comparison is available.",
+  "evidence": {
+    "initial": {
+      "p7b-section-y0p5": {
+        "source": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/initial-sections/p7b-section-y0p5.npz",
+        "sha256": "96e6fd12386b39bcb6613e3495977ce359e9461a0c076721a0af86f8b2e7f3e4",
+        "height_m": 0.5,
+        "facets": 3138,
+        "zero_projected_area_facets": 0,
+        "area_m2": 3.1649012565612793,
+        "fields": {
+          "phase-2-vof": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "pressure": {
+            "minimum": 1120000.0,
+            "maximum": 1120000.0,
+            "area_weighted_mean": 1120000.125
+          },
+          "velocity-magnitude": {
+            "minimum": 0.33050283789634705,
+            "maximum": 0.8550105094909668,
+            "area_weighted_mean": 0.4834395945072174
+          },
+          "x-velocity": {
+            "minimum": -0.2624844014644623,
+            "maximum": 0.6934977769851685,
+            "area_weighted_mean": 0.132596954703331
+          },
+          "y-velocity": {
+            "minimum": -0.6632225513458252,
+            "maximum": 0.4673197865486145,
+            "area_weighted_mean": -0.00018764278502203524
+          },
+          "z-velocity": {
+            "minimum": -0.06309133768081665,
+            "maximum": 0.8377507925033569,
+            "area_weighted_mean": 0.2404443472623825
+          },
+          "phase-2-velocity-magnitude": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "phase-2-x-velocity": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "phase-2-y-velocity": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "phase-2-z-velocity": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          }
+        }
+      },
+      "p7b-section-y1p5": {
+        "source": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/initial-sections/p7b-section-y1p5.npz",
+        "sha256": "9b916620c10b6c6644eb161c6073b6b18e81988b4fa7409b16bc00e481067813",
+        "height_m": 1.5,
+        "facets": 2964,
+        "zero_projected_area_facets": 1,
+        "area_m2": 3.164724111557007,
+        "fields": {
+          "phase-2-vof": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "pressure": {
+            "minimum": 1120000.0,
+            "maximum": 1120000.0,
+            "area_weighted_mean": 1120000.0
+          },
+          "velocity-magnitude": {
+            "minimum": 1.202074408531189,
+            "maximum": 8.171854972839355,
+            "area_weighted_mean": 2.3348262310028076
+          },
+          "x-velocity": {
+            "minimum": -2.2354390621185303,
+            "maximum": 3.130687713623047,
+            "area_weighted_mean": 0.6813514232635498
+          },
+          "y-velocity": {
+            "minimum": -7.865133762359619,
+            "maximum": 1.4275920391082764,
+            "area_weighted_mean": 0.011015559546649456
+          },
+          "z-velocity": {
+            "minimum": -0.5779772996902466,
+            "maximum": 4.1861042976379395,
+            "area_weighted_mean": 1.2357786893844604
+          },
+          "phase-2-velocity-magnitude": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "phase-2-x-velocity": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "phase-2-y-velocity": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "phase-2-z-velocity": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          }
+        }
+      },
+      "p7b-section-y3p0": {
+        "source": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/initial-sections/p7b-section-y3p0.npz",
+        "sha256": "a07f2f5c31216b9f3436d4a4e384074a677a40b9b81d5e6901554fdf4ff80844",
+        "height_m": 3.0,
+        "facets": 2780,
+        "zero_projected_area_facets": 0,
+        "area_m2": 3.1650242805480957,
+        "fields": {
+          "phase-2-vof": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "pressure": {
+            "minimum": 1120000.0,
+            "maximum": 1120000.0,
+            "area_weighted_mean": 1120000.0
+          },
+          "velocity-magnitude": {
+            "minimum": 3.4735143184661865,
+            "maximum": 7.0196075439453125,
+            "area_weighted_mean": 4.591414451599121
+          },
+          "x-velocity": {
+            "minimum": -0.8135868906974792,
+            "maximum": 1.9124845266342163,
+            "area_weighted_mean": 0.36033719778060913
+          },
+          "y-velocity": {
+            "minimum": 3.4731948375701904,
+            "maximum": 7.013026237487793,
+            "area_weighted_mean": 4.490790367126465
+          },
+          "z-velocity": {
+            "minimum": -0.19423769414424896,
+            "maximum": 2.194317102432251,
+            "area_weighted_mean": 0.6682210564613342
+          },
+          "phase-2-velocity-magnitude": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "phase-2-x-velocity": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "phase-2-y-velocity": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "phase-2-z-velocity": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          }
+        }
+      },
+      "p7b-section-y5p0": {
+        "source": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/initial-sections/p7b-section-y5p0.npz",
+        "sha256": "ddb76b1d1f6b87ec813609daa5b56ee13dc446f9e648842b5f13988be1c20b66",
+        "height_m": 5.0,
+        "facets": 3096,
+        "zero_projected_area_facets": 1,
+        "area_m2": 3.1650500297546387,
+        "fields": {
+          "phase-2-vof": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "pressure": {
+            "minimum": 1120000.0,
+            "maximum": 1120000.0,
+            "area_weighted_mean": 1120000.0
+          },
+          "velocity-magnitude": {
+            "minimum": 4.405665874481201,
+            "maximum": 4.577038288116455,
+            "area_weighted_mean": 4.49056339263916
+          },
+          "x-velocity": {
+            "minimum": -0.033406343311071396,
+            "maximum": 0.09382425993680954,
+            "area_weighted_mean": 0.019795067608356476
+          },
+          "y-velocity": {
+            "minimum": 4.405664443969727,
+            "maximum": 4.577028751373291,
+            "area_weighted_mean": 4.490260601043701
+          },
+          "z-velocity": {
+            "minimum": -0.022872647270560265,
+            "maximum": 0.1173405647277832,
+            "area_weighted_mean": 0.03628510609269142
+          },
+          "phase-2-velocity-magnitude": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "phase-2-x-velocity": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "phase-2-y-velocity": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "phase-2-z-velocity": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          }
+        }
+      }
+    },
+    "checkpoint-04000": {
+      "p7b-section-y0p5": {
+        "source": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/checkpoint-04000-sections/p7b-section-y0p5.npz",
+        "sha256": "7e198be912b8ab3d233df0b4cca96595d6e3bdb637a2f8a96c915ce9862ce2dc",
+        "height_m": 0.5,
+        "facets": 3138,
+        "zero_projected_area_facets": 0,
+        "area_m2": 3.1649012565612793,
+        "fields": {
+          "phase-2-vof": {
+            "minimum": 0.0,
+            "maximum": 0.9495493769645691,
+            "area_weighted_mean": 0.010533769614994526
+          },
+          "pressure": {
+            "minimum": 1135954.625,
+            "maximum": 1144360.125,
+            "area_weighted_mean": 1140139.5
+          },
+          "velocity-magnitude": {
+            "minimum": 8.296428680419922,
+            "maximum": 44.73137664794922,
+            "area_weighted_mean": 31.54306983947754
+          },
+          "x-velocity": {
+            "minimum": -37.82638168334961,
+            "maximum": 35.90477752685547,
+            "area_weighted_mean": -1.7403324842453003
+          },
+          "y-velocity": {
+            "minimum": -27.84695816040039,
+            "maximum": 14.846796035766602,
+            "area_weighted_mean": -0.10681138932704926
+          },
+          "z-velocity": {
+            "minimum": -36.643733978271484,
+            "maximum": 36.01808166503906,
+            "area_weighted_mean": 1.5509105920791626
+          },
+          "phase-2-velocity-magnitude": {
+            "minimum": 0.0,
+            "maximum": 44.77357864379883,
+            "area_weighted_mean": 28.81040382385254
+          },
+          "phase-2-x-velocity": {
+            "minimum": -37.851539611816406,
+            "maximum": 35.99324035644531,
+            "area_weighted_mean": -0.42919033765792847
+          },
+          "phase-2-y-velocity": {
+            "minimum": -27.855796813964844,
+            "maximum": 14.919672966003418,
+            "area_weighted_mean": -0.7342061400413513
+          },
+          "phase-2-z-velocity": {
+            "minimum": -36.64900207519531,
+            "maximum": 36.00627136230469,
+            "area_weighted_mean": 2.6890108585357666
+          }
+        }
+      },
+      "p7b-section-y1p5": {
+        "source": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/checkpoint-04000-sections/p7b-section-y1p5.npz",
+        "sha256": "c7e80d86593b9214ee3e481be9f81c1aec3c83d4d7203e80c9eb0deb573443a7",
+        "height_m": 1.5,
+        "facets": 2964,
+        "zero_projected_area_facets": 1,
+        "area_m2": 3.164724111557007,
+        "fields": {
+          "phase-2-vof": {
+            "minimum": 0.0,
+            "maximum": 0.9671097993850708,
+            "area_weighted_mean": 0.02953987754881382
+          },
+          "pressure": {
+            "minimum": 1135172.125,
+            "maximum": 1148313.25,
+            "area_weighted_mean": 1140307.25
+          },
+          "velocity-magnitude": {
+            "minimum": 2.7876484394073486,
+            "maximum": 54.73914337158203,
+            "area_weighted_mean": 30.89591407775879
+          },
+          "x-velocity": {
+            "minimum": -39.1405143737793,
+            "maximum": 47.64262008666992,
+            "area_weighted_mean": 0.32826733589172363
+          },
+          "y-velocity": {
+            "minimum": -22.859189987182617,
+            "maximum": 13.496554374694824,
+            "area_weighted_mean": -0.17330187559127808
+          },
+          "z-velocity": {
+            "minimum": -37.990482330322266,
+            "maximum": 48.55625915527344,
+            "area_weighted_mean": 4.158607006072998
+          },
+          "phase-2-velocity-magnitude": {
+            "minimum": 0.0,
+            "maximum": 54.87568283081055,
+            "area_weighted_mean": 30.279035568237305
+          },
+          "phase-2-x-velocity": {
+            "minimum": -39.12151336669922,
+            "maximum": 47.846492767333984,
+            "area_weighted_mean": -0.11210522055625916
+          },
+          "phase-2-y-velocity": {
+            "minimum": -23.233741760253906,
+            "maximum": 13.483038902282715,
+            "area_weighted_mean": -0.3326697051525116
+          },
+          "phase-2-z-velocity": {
+            "minimum": -38.010623931884766,
+            "maximum": 48.74935531616211,
+            "area_weighted_mean": 4.1786789894104
+          }
+        }
+      },
+      "p7b-section-y3p0": {
+        "source": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/checkpoint-04000-sections/p7b-section-y3p0.npz",
+        "sha256": "a9b8f7253d567811520ec22f388dde3ab1ed99832a6bee849d1c76ff574e1541",
+        "height_m": 3.0,
+        "facets": 2780,
+        "zero_projected_area_facets": 0,
+        "area_m2": 3.1650242805480957,
+        "fields": {
+          "phase-2-vof": {
+            "minimum": 0.0,
+            "maximum": 0.9737149477005005,
+            "area_weighted_mean": 0.03182993456721306
+          },
+          "pressure": {
+            "minimum": 1136664.5,
+            "maximum": 1143687.375,
+            "area_weighted_mean": 1140005.0
+          },
+          "velocity-magnitude": {
+            "minimum": 5.519441604614258,
+            "maximum": 32.85894775390625,
+            "area_weighted_mean": 25.841522216796875
+          },
+          "x-velocity": {
+            "minimum": -31.979145050048828,
+            "maximum": 30.016117095947266,
+            "area_weighted_mean": -0.9404038190841675
+          },
+          "y-velocity": {
+            "minimum": -5.557347774505615,
+            "maximum": 14.94814395904541,
+            "area_weighted_mean": 4.384628772735596
+          },
+          "z-velocity": {
+            "minimum": -28.533798217773438,
+            "maximum": 27.868738174438477,
+            "area_weighted_mean": 0.24026381969451904
+          },
+          "phase-2-velocity-magnitude": {
+            "minimum": 0.0,
+            "maximum": 32.84955978393555,
+            "area_weighted_mean": 25.426410675048828
+          },
+          "phase-2-x-velocity": {
+            "minimum": -31.96328353881836,
+            "maximum": 30.021453857421875,
+            "area_weighted_mean": -1.1137309074401855
+          },
+          "phase-2-y-velocity": {
+            "minimum": -5.557363986968994,
+            "maximum": 14.896499633789062,
+            "area_weighted_mean": 4.277999401092529
+          },
+          "phase-2-z-velocity": {
+            "minimum": -28.562824249267578,
+            "maximum": 27.865192413330078,
+            "area_weighted_mean": 0.48407626152038574
+          }
+        }
+      },
+      "p7b-section-y5p0": {
+        "source": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/checkpoint-04000-sections/p7b-section-y5p0.npz",
+        "sha256": "73402284528330c16fe8f8565628e39559c07e5919cc358e2754db4ee9efc26a",
+        "height_m": 5.0,
+        "facets": 3096,
+        "zero_projected_area_facets": 1,
+        "area_m2": 3.1650500297546387,
+        "fields": {
+          "phase-2-vof": {
+            "minimum": 2.3095394485750376e-09,
+            "maximum": 0.9649061560630798,
+            "area_weighted_mean": 0.033383648842573166
+          },
+          "pressure": {
+            "minimum": 1136649.25,
+            "maximum": 1143481.5,
+            "area_weighted_mean": 1139924.5
+          },
+          "velocity-magnitude": {
+            "minimum": 9.707231521606445,
+            "maximum": 30.28978729248047,
+            "area_weighted_mean": 25.116304397583008
+          },
+          "x-velocity": {
+            "minimum": -28.991724014282227,
+            "maximum": 29.518390655517578,
+            "area_weighted_mean": 0.11650476604700089
+          },
+          "y-velocity": {
+            "minimum": -4.077639579772949,
+            "maximum": 21.74526023864746,
+            "area_weighted_mean": 4.394562721252441
+          },
+          "z-velocity": {
+            "minimum": -26.682111740112305,
+            "maximum": 28.946176528930664,
+            "area_weighted_mean": -0.03945045545697212
+          },
+          "phase-2-velocity-magnitude": {
+            "minimum": 0.0,
+            "maximum": 30.29581069946289,
+            "area_weighted_mean": 25.105445861816406
+          },
+          "phase-2-x-velocity": {
+            "minimum": -28.99173927307129,
+            "maximum": 29.518308639526367,
+            "area_weighted_mean": 0.1017744243144989
+          },
+          "phase-2-y-velocity": {
+            "minimum": -4.077639579772949,
+            "maximum": 21.78633689880371,
+            "area_weighted_mean": 4.386817932128906
+          },
+          "phase-2-z-velocity": {
+            "minimum": -26.68956756591797,
+            "maximum": 28.958280563354492,
+            "area_weighted_mean": -0.035412244498729706
+          }
+        }
+      }
+    }
+  },
+  "figures": [
+    "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/analysis/F3-initial-above-cap-fields.png",
+    "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/analysis/F3-initial-velocity-components.png",
+    "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/analysis/F3-checkpoint-04000-above-cap-fields.png",
+    "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/analysis/F3-checkpoint-04000-velocity-components.png"
+  ],
+  "recovery_sections": {
+    "receipt": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/recovery-sections.json",
+    "sha256": "aa61091e1ee3bdc09bff27eba72d881a7ebe47ee8c1e609261509ad258170b80",
+    "stage": "checkpoint-04000",
+    "iteration": 4000,
+    "case": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s100-20260921T160825Z-n04000.cas.h5",
+    "data": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s100-20260921T160825Z-n04000.dat.h5",
+    "purpose": "Recovery-checkpoint spatial evidence; failed case, no N5000 endpoint",
+    "iterations_issued": 0,
+    "status": "RECOVERY_CHECKPOINT_FIELDS_VERIFIED_NO_SOLVE"
+  },
+  "field_metadata": {
+    "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/field-metadata.json",
+    "sha256": "4ba1df24d9da9f31befaa20d312584e59a1a096e5265f7b057464eb608e615d0",
+    "domains": {
+      "phase-2-vof": "phase-2",
+      "pressure": "mixture",
+      "velocity-magnitude": "mixture",
+      "x-velocity": "mixture",
+      "y-velocity": "mixture",
+      "z-velocity": "mixture",
+      "phase-2-velocity-magnitude": "phase-2",
+      "phase-2-x-velocity": "phase-2",
+      "phase-2-y-velocity": "phase-2",
+      "phase-2-z-velocity": "phase-2"
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "phase-2-vof": {
+    "display_name": "Volume fraction",
+    "section": "Phases...",
+    "domain": "phase-2",
+    "quantity_name": "*null*"
+  },
+  "pressure": {
+    "display_name": "Static Pressure",
+    "section": "Pressure...",
+    "domain": "mixture",
+    "quantity_name": "pressure"
+  },
+  "velocity-magnitude": {
+    "display_name": "Velocity Magnitude",
+    "section": "Velocity...",
+    "domain": "mixture",
+    "quantity_name": "velocity"
+  },
+  "x-velocity": {
+    "display_name": "X Velocity",
+    "section": "Velocity...",
+    "domain": "mixture",
+    "quantity_name": "velocity"
+  },
+  "y-velocity": {
+    "display_name": "Y Velocity",
+    "section": "Velocity...",
+    "domain": "mixture",
+    "quantity_name": "velocity"
+  },
+  "z-velocity": {
+    "display_name": "Z Velocity",
+    "section": "Velocity...",
+    "domain": "mixture",
+    "quantity_name": "velocity"
+  },
+  "phase-2-velocity-magnitude": {
+    "display_name": "Velocity Magnitude",
+    "section": "Velocity...",
+    "domain": "phase-2",
+    "quantity_name": "velocity"
+  },
+  "phase-2-x-velocity": {
+    "display_name": "X Velocity",
+    "section": "Velocity...",
+    "domain": "phase-2",
+    "quantity_name": "velocity"
+  },
+  "phase-2-y-velocity": {
+    "display_name": "Y Velocity",
+    "section": "Velocity...",
+    "domain": "phase-2",
+    "quantity_name": "velocity"
+  },
+  "phase-2-z-velocity": {
+    "display_name": "Z Velocity",
+    "section": "Velocity...",
+    "domain": "phase-2",
+    "quantity_name": "velocity"
+  }
+}

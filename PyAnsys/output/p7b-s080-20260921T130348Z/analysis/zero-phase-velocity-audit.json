@@ -1,0 +1,40 @@
+{
+  "p7b-section-y0p5": {
+    "zero_liquid_speed_facets": 6,
+    "liquid_fraction_on_zero_speed": [
+      0.0,
+      2.751830985303627e-09
+    ],
+    "zero_liquid_fraction_facets": 5
+  },
+  "p7b-section-y3p0": {
+    "zero_liquid_speed_facets": 1,
+    "liquid_fraction_on_zero_speed": [
+      9.901717668014953e-09
+    ],
+    "zero_liquid_fraction_facets": 0
+  },
+  "p7b-section-y5p0": {
+    "zero_liquid_speed_facets": 5,
+    "liquid_fraction_on_zero_speed": [
+      8.387618599670077e-09,
+      8.650050453695712e-09,
+      9.257682620500418e-09,
+      9.403768430615855e-09,
+      9.460610961298244e-09
+    ],
+    "zero_liquid_fraction_facets": 0
+  },
+  "p7b-section-y1p5": {
+    "zero_liquid_speed_facets": 29,
+    "liquid_fraction_on_zero_speed": [
+      0.0,
+      2.696382839229017e-10,
+      1.3869806414490427e-09,
+      3.2928619830840944e-09,
+      6.134934782409118e-09,
+      7.442463534346189e-09
+    ],
+    "zero_liquid_fraction_facets": 24
+  }
+}

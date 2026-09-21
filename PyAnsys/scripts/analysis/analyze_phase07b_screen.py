@@ -214,9 +214,32 @@ def fixed_windows(x: np.ndarray, metrics: dict[str, np.ndarray], units: dict[str
                 a, b = first[name]["mean"], second[name]["mean"]
                 item = {"mean_change": b - a, "unit": units[name]}
                 if units[name] == "m^3":
-                    item["mean_change_percent_with_1e-6_m3_floor"] = 100 * (b - a) / max(abs(a), 1e-6)
+                    item["mean_change_percent_of_larger_mean_with_1e-6_m3_floor"] = 100 * (b - a) / max(abs(a), abs(b), 1e-6)
                 comparisons[name] = item
     return {"windows": windows, "second_minus_first": comparisons}
+
+
+def screening_indicators(metric_windows: dict[str, Any], residual_windows: dict[str, Any]) -> dict[str, Any]:
+    """Evaluate declared discovery conventions; never promote a case."""
+    final = metric_windows["windows"]["4501-5000"]
+    residual_final = residual_windows["windows"]["4501-5000"]
+    if not final["complete"] or not residual_final["complete"]:
+        return {"status": "INCOMPLETE_WINDOWS"}
+    result: dict[str, Any] = {"status": "EVALUATED_DISCOVERY_ONLY"}
+    result["closure"] = {}
+    for phase in ["liquid", "vapor", "mixture"]:
+        value = final["metrics"].get(phase + "_closure_percent_feed", {}).get("mean_absolute")
+        result["closure"][phase] = {"mean_absolute_percent_feed": value,
+                                    "passes_1_percent": value <= 1 if value is not None else None}
+    change = metric_windows["second_minus_first"].get("whole_water_volume", {}).get(
+        "mean_change_percent_of_larger_mean_with_1e-6_m3_floor")
+    result["inventory"] = {"window_mean_change_percent_of_larger_mean": change,
+                            "passes_1_percent": abs(change) <= 1 if change is not None else None}
+    expected = {"continuity", "x-velocity", "y-velocity", "z-velocity", "k", "epsilon", "vf-phase-2"}
+    result["residual_equations_complete"] = expected == set(residual_final["metrics"])
+    result["residuals"] = {name: {"maximum": values["maximum"], "passes_1e_3_throughout_window": values["maximum"] <= 1e-3}
+                           for name, values in residual_final["metrics"].items()}
+    return result
 
 
 def draw(ax: Any, x: np.ndarray, metrics: dict[str, np.ndarray], names: list[tuple[str, str]], ylabel: str) -> None:
@@ -233,12 +256,20 @@ def draw(ax: Any, x: np.ndarray, metrics: dict[str, np.ndarray], names: list[tup
     ax.grid(alpha=.2)
 
 
-def analyze(run: Path, output: Path) -> dict[str, Any]:
+def analyze(run: Path, output: Path, section_scales: Path | None = None) -> dict[str, Any]:
     output.mkdir(parents=True, exist_ok=True)
     manifest_path = run / "manifest.json"
     if not manifest_path.exists():
         manifest_path = run / "result.json"
     manifest = json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
+    terminal_path = run / "terminal-disposition.json"
+    terminal = json.loads(terminal_path.read_text()) if terminal_path.exists() else None
+    if terminal:
+        completed = terminal["last_completed_iteration"]
+        failed = terminal["failed_iteration"]
+        if (terminal["disposition"] != "NUMERICAL_FAILURE" or type(completed) is not int
+                or type(failed) is not int or not 0 < completed < HORIZON or failed != completed + 1):
+            raise ValueError("Inconsistent numerical-failure disposition receipt")
     candidates = list(run.glob("history-*.out")) + ([run / "history.out"] if (run / "history.out").exists() else [])
     parsed, rejected_files = [], []
     for path in candidates:
@@ -253,17 +284,30 @@ def analyze(run: Path, output: Path) -> dict[str, Any]:
     x = data["iteration"]
     last = int(x[-1]) if len(x) else 0
     claimed = manifest.get("completed_iterations", manifest.get("actual_iteration", manifest.get("final_iteration", 0)))
-    end = max(last, int(claimed or 0))
+    end = terminal["last_completed_iteration"] if terminal else max(last, int(claimed or 0))
+    if terminal and last > end:
+        raise ValueError("Scalar history extends beyond declared last completed iteration")
     coverage(history_audit, data, end)
     flux_path = run / "collector-flux.jsonl"
     flux, flux_audit = parse_flux(flux_path) if flux_path.exists() else ({"iteration": np.array([], dtype=int)}, {"missing": True})
     residual_path = run / "solve.trn"
     residuals, residual_audit = parse_residuals(residual_path) if residual_path.exists() else ({"iteration": np.array([], dtype=int)}, {"missing": True})
+    if terminal and any(np.any(stream["iteration"] > end) for stream in [flux, residuals]):
+        raise ValueError("Evidence extends beyond declared last completed iteration")
     coverage(flux_audit, flux, end)
     coverage(residual_audit, residuals, end)
     metrics, units = derive(data)
+    source_lag_audit = None
+    if all(name in metrics for name in ["native_applied_removal", "current_expression_removal"]):
+        adjacent = np.diff(x) == 1
+        lag_error = (metrics["native_applied_removal"][1:] - metrics["current_expression_removal"][:-1])[adjacent]
+        source_lag_audit = {"comparison": "native applied removal at N minus recomputed removal at N-1",
+                            "consecutive_pairs": len(lag_error), "unit": "kg/s",
+                            "maximum_absolute_error": float(np.max(np.abs(lag_error))) if len(lag_error) else None}
     label = str(manifest.get("run_id", run.name))
     qualifier = "5,000-iteration evidence" if last == HORIZON else f"PARTIAL: through iteration {last}"
+    if terminal:
+        qualifier = f"NUMERICAL FAILURE at attempted N{terminal['failed_iteration']}; completed through N{end}"
     fig, axes = plt.subplots(3, 1, figsize=(10, 9), constrained_layout=True, sharex=True)
     draw(axes[0], x, metrics, [(n, l) for n, l in [("whole_water_volume", "Whole vessel"), ("collector_water_volume", "Collector"), ("above_water_volume", "Above collector")]], "Liquid volume (m³)")
     draw(axes[1], x, metrics, [("native_applied_removal", "Native applied removal"), ("current_expression_removal", "Current expression S(αₙ)")], "Liquid removal (kg/s)")
@@ -271,6 +315,10 @@ def analyze(run: Path, output: Path) -> dict[str, Any]:
         axes[1].text(.02, .92, "Native applied source missing", transform=axes[1].transAxes, fontsize=9)
     draw(axes[2], flux["iteration"], flux, [("delivery_kg_s", "Gross delivery to collector"), ("escape_kg_s", "Gross escape from collector")], "Liquid mask flux (kg/s)")
     axes[2].set_xlabel("Steady iteration (not physical time)")
+    if terminal:
+        for ax in axes[1:]:
+            ax.set_yscale("symlog", linthresh=1)
+            ax.set_ylabel(ax.get_ylabel() + " · symlog")
     fig.suptitle(f"F1 — Inventory and collection\n{label} · {qualifier}")
     fig.savefig(output / "F1-inventory-removal.png", dpi=160); plt.close(fig)
     fig, axes = plt.subplots(2, 1, figsize=(10, 7), constrained_layout=True, sharex=True)
@@ -280,6 +328,10 @@ def analyze(run: Path, output: Path) -> dict[str, Any]:
         axes[0].text(.02, .92, "Liquid/mixture closure unavailable: native applied source missing", transform=axes[0].transAxes, fontsize=9)
     draw(axes[1], x, metrics, [("liquid_carryover_fraction", "Liquid carryover / liquid feed"), ("steam_recovery_fraction", "Steam recovery / vapor feed"), ("outlet_vapor_mass_fraction", "Outlet vapor mass fraction")], "Signed net-flow ratio")
     axes[1].set_xlabel("Steady iteration")
+    if terminal:
+        for ax in axes:
+            ax.set_yscale("symlog", linthresh=1)
+            ax.set_ylabel(ax.get_ylabel() + " · symlog")
     fig.suptitle(f"F2 — Conservation and outlet routing\n{label} · {qualifier}")
     fig.savefig(output / "F2-closure-routing.png", dpi=160); plt.close(fig)
     fig, ax = plt.subplots(figsize=(10, 5), constrained_layout=True)
@@ -287,7 +339,43 @@ def analyze(run: Path, output: Path) -> dict[str, Any]:
     ax.set_yscale("log"); ax.set_xlabel("Steady iteration")
     ax.set_title(f"All active residual histories\n{label} · {qualifier}")
     fig.savefig(output / "residuals.png", dpi=160); plt.close(fig)
+    supplemental_figures = []
+    recovery_path = run / "recovery-sections.json"
+    recovery = json.loads(recovery_path.read_text()) if recovery_path.exists() else None
+    prefix_metrics = None
+    if terminal and recovery:
+        checkpoint = recovery["iteration"]
+        if type(checkpoint) is not int or not 0 < checkpoint <= end:
+            raise ValueError("Recovery checkpoint is outside completed evidence")
+        if terminal.get("checkpoint_iteration", checkpoint) != checkpoint:
+            raise ValueError("Recovery and terminal checkpoint receipts disagree")
+        mask = x <= checkpoint
+        prefix = {name: values[mask] for name, values in metrics.items()}
+        rmask = residuals["iteration"] <= checkpoint
+        rprefix = {name: values[rmask] for name, values in residuals.items() if name != "iteration"}
+        fig, axes = plt.subplots(3, 1, figsize=(10, 9), constrained_layout=True, sharex=True)
+        draw(axes[0], x[mask], prefix, [("whole_water_volume", "Whole vessel"), ("collector_water_volume", "Collector")], "Liquid volume (m³)")
+        draw(axes[1], x[mask], prefix, [(p + "_closure_percent_feed", p.title()) for p in ["liquid", "vapor", "mixture"]], "Applied-source closure (% feed)")
+        axes[1].axhline(0, color="black", lw=.7)
+        draw(axes[2], residuals["iteration"][rmask], rprefix, [(name, name) for name in rprefix], "Native scaled residual")
+        axes[2].set_yscale("log"); axes[2].set_xlabel("Steady iteration")
+        fig.suptitle(f"Recovery-checkpoint prefix, N1–{checkpoint} (unconverged)\n{label}; full runaway retained in F1/F2/residuals")
+        prefix_name = f"recovery-prefix-N{checkpoint:05d}.png"
+        fig.savefig(output / prefix_name, dpi=160); plt.close(fig)
+        supplemental_figures.append(prefix_name)
+        indices = np.where(x == checkpoint)[0]
+        if len(indices) == 1:
+            idx = indices[0]
+            prefix_metrics = {"iteration": checkpoint, "metrics": {name: {"value": float(values[idx]) if np.isfinite(values[idx]) else None,
+                                                                                     "unit": units[name]} for name, values in metrics.items()}}
     residual_metrics = {n: a for n, a in residuals.items() if n != "iteration"}
+    metric_windows = fixed_windows(x, metrics, units)
+    residual_windows = fixed_windows(residuals["iteration"], residual_metrics, {n: "1" for n in residual_metrics})
+    section_summary = None
+    if (run / "initial-sections" / "index.json").exists() and ((run / "final-sections" / "index.json").exists()
+            or recovery and (run / recovery.get("directory", recovery["stage"] + "-sections") / "index.json").exists()):
+        from plot_phase07b_sections import render
+        section_summary = render(run, output, section_scales)
     required = ["whole_water_volume", "collector_water_volume", "above_water_volume", "native_applied_removal", "current_expression_removal", "liquid_closure_applied", "vapor_closure_applied", "mixture_closure_applied"]
     summary = {
         "schema_version": 1, "generated_utc": datetime.now(timezone.utc).isoformat(),
@@ -297,19 +385,27 @@ def analyze(run: Path, output: Path) -> dict[str, Any]:
         "planned_scientific_horizon": HORIZON,
         "requested_iterations": manifest.get("requested_iterations", manifest.get("requested_diagnostic_iterations")),
         "claimed_completed_or_actual_iteration": claimed, "observed_report_last_iteration": last,
+        "terminal_disposition": {"source": fingerprint(terminal_path), **terminal} if terminal else None,
+        "completed_evidence_end": end,
+        "recovery_checkpoint_metrics": prefix_metrics,
         "horizon_observed": last == HORIZON and history_audit["complete_to_expected_end"],
-        "analysis_status": ("HORIZON_OBSERVED_EVIDENCE_REVIEW_REQUIRED" if last == HORIZON and history_audit["complete_to_expected_end"]
+        "analysis_status": (("NUMERICAL_FAILURE_COMPLETED_PREFIX_VERIFIED" if all(a["complete_to_expected_end"] for a in [history_audit,flux_audit,residual_audit])
+                             else "NUMERICAL_FAILURE_PREFIX_EVIDENCE_INCOMPLETE") if terminal else
+                            "HORIZON_OBSERVED_EVIDENCE_REVIEW_REQUIRED" if last == HORIZON and history_audit["complete_to_expected_end"]
                             else "INCOMPLETE_EVIDENCE_NO_HORIZON_CLAIM" if last >= HORIZON
                             else "PARTIAL_NO_LATE_WINDOW_JUDGMENT"),
         "history": history_audit, "other_history_candidates": [a["source"] for _, a in parsed if a is not history_audit],
         "rejected_history_files": rejected_files, "collector_flux": flux_audit,
         "run_flux_monitor": manifest.get("flux_monitor"), "residuals": residual_audit,
+        "applied_source_lag_audit": source_lag_audit,
         "latest_residuals": {n: float(a[-1]) if len(a) and np.isfinite(a[-1]) else None for n, a in residual_metrics.items()},
         "missing_required_derived_metrics": [name for name in required if name not in metrics],
         "latest_metrics": {n: {"value": float(y[-1]) if len(y) and np.isfinite(y[-1]) else None, "unit": units[n]} for n, y in metrics.items()},
-        "fixed_late_windows": fixed_windows(x, metrics, units),
+        "fixed_late_windows": metric_windows,
         "collector_flux_fixed_late_windows": fixed_windows(flux["iteration"], {n: a for n, a in flux.items() if n != "iteration"}, {n: "kg/s" for n in flux if n != "iteration"}),
-        "residual_fixed_late_windows": fixed_windows(residuals["iteration"], residual_metrics, {n: "1" for n in residual_metrics}),
+        "residual_fixed_late_windows": residual_windows,
+        "declared_screening_indicators": screening_indicators(metric_windows, residual_windows),
+        "spatial_evidence": fingerprint(output / "section-summary.json") if section_summary else None,
         "definitions": {
             "applied_closure": "B + signed native applied mass source for liquid/mixture; B for vapor. Source counted once.",
             "B": "Sum of signed phase/mixture flux at both inlets, steam outlet and brine wall; positive into vessel.",
@@ -318,10 +414,14 @@ def analyze(run: Path, output: Path) -> dict[str, Any]:
             "steady_trends": "Slopes are per iteration, never physical kg/s storage or a second source.",
         },
         "limitations": ["Horizon completion does not establish convergence or physical steady state.",
-                        "F3 requires native saved case/data spatial extraction; no spatial figure was synthesized.",
+                        ("Attempted failure iteration has no completed report row; it is not a missing completed sample. Finite runaway values are retained but are not physical results."
+                         if terminal else "No terminal numerical-failure disposition was supplied."),
+                        ("F3 renders saved native facet data without interpolation; common scales must be maintained across the five cases."
+                         if section_summary else "F3 remains missing: native initial/final field extraction is required."),
                         "Conflicting duplicate samples retain the first observed row and invalidate completeness.",
                         "No numerical qualification claim is made by this script."],
-        "figures": [{"path": str((output / name).resolve()), "source": label} for name in ["F1-inventory-removal.png", "F2-closure-routing.png", "residuals.png"]],
+        "figures": [{"path": str((output / name).resolve()), "source": label} for name in ["F1-inventory-removal.png", "F2-closure-routing.png", "residuals.png"] + supplemental_figures]
+                   + ([{"path": path, "source": label} for path in section_summary["figures"]] if section_summary else []),
     }
     (output / "summary.json").write_text(json.dumps(summary, indent=2, allow_nan=False) + "\n")
     return summary
@@ -331,8 +431,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("run_directory", type=Path)
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--section-scales", type=Path, help="Shared scale JSON for matched cross-case F3 panels")
     args = parser.parse_args()
-    result = analyze(args.run_directory, args.output or args.run_directory / "analysis")
+    result = analyze(args.run_directory, args.output or args.run_directory / "analysis", args.section_scales)
     print(json.dumps({"run_id": result["run_id"], "status": result["analysis_status"],
                       "last_iteration": result["observed_report_last_iteration"],
                       "missing_metrics": result["missing_required_derived_metrics"]}, indent=2))

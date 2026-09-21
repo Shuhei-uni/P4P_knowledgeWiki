@@ -1,8 +1,7 @@
 phase_id: phase-07b-full-geometry-liquid-removal
-phase_question: Can a lower-region ideal liquid collector support balanced stable
-  steady Mixture flow in the full separator while preserving useful separation above
-  it?
-state: DISCOVERY_RUNNING
+phase_question: Can a lower-region ideal liquid collector support balanced stable steady Mixture flow
+  in the full separator while preserving useful separation above it?
+state: AWAITING_G1_DECISION
 context:
   path: Project/experiments/phase-07b-full-geometry-liquid-removal/CONTEXT.md
   authority: human-approved-context-only
@@ -18,8 +17,8 @@ context:
 autonomy:
   experiment_selection: context_gated
   fluent_fleet_sessions: restricted
-  scope: Configured server-1 PC; Phase7b preparation and selected children only; all
-    PC access through Fluent API
+  scope: Configured server-1 PC; Phase7b preparation and selected children only; all PC access through
+    Fluent API
   launch_authorization: Human selected planner option 1 on 2026-09-08
   max_iterations_per_case: 5000
   qualification_authorized: false
@@ -55,34 +54,45 @@ gates:
     - diagnostics.md
     missing: []
   DISCOVERY_EXECUTION:
-    status: IN_PROGRESS
-    checked_at: '2026-09-20T22:20:00Z'
-    reviewer: phase-loop deterministic recovery checks
+    status: COMPLETE_WITH_NUMERICAL_BLOCKER
+    checked_at: '2026-09-21T19:10:52.110395+00:00'
+    reviewer: phase-loop terminal evidence audit
     evidence:
-    - PyAnsys/output/phase07b_preparation/fresh-reload-20260918T061745Z/result.json
-    - PyAnsys/output/phase07b_preparation/fresh-reload-20260918T061745Z/reload.trn
-    - PyAnsys/output/phase07b_preparation/fresh-reload-20260918T061745Z/reconnect-after-client-exit.json
-    - diagnostics.md
-    - PyAnsys/output/phase07b_preparation/speed-report-repair-20260920T221216Z/result.json
-    missing:
-    - Five selected 5000-iteration screen endpoints and analyses
-active_jobs:
-- kind: S20_resume
-  requested_iterations: 5000
-  parent_receipt: PyAnsys/output/phase07b_preparation/speed-report-repair-20260920T221216Z/result.json
-  run_id: p7b-s020-20260920T221831Z
-  manifest: PyAnsys/output/p7b-s020-20260920T221831Z/manifest.json
-  last_verified_iteration: 50
-  checkpoint: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s020-20260920T221831Z-n00050.cas.h5
-next_required_action: Supervise S20 milestones, preserve endpoint and analyze evidence;
-  continue remaining approved thickness cases.
-operational_status: S20_RUNNING
+    - results.md
+    - s020-collector/results.md
+    - s040-collector/results.md
+    - s060-collector/results.md
+    - s080-collector/results.md
+    - s100-collector/results.md
+    missing: []
+  DISCOVERY_EVIDENCE:
+    status: PASS_G1_BOUNDED_COMPARISON
+    checked_at: '2026-09-21T19:10:52.110395+00:00'
+    evidence:
+    - results.md
+    - PyAnsys/output/phase07b-g1/comparison.json
+    missing: []
+  G1:
+    status: READY_FOR_HUMAN_DECISION
+    checked_at: '2026-09-21T19:10:52.110395+00:00'
+    terminal_dispositions: 5
+    horizon_complete_cases: 4
+    numerical_blocked_cases: 1
+    qualified_cases: 0
+    evidence: results.md
+    further_solve_authorized: false
+active_jobs: []
+next_required_action: Return G1 five-case evidence to Andy. No further solve, tuning, source-strength
+  change or qualification is authorized. Proposed separate fixed-geometry source-strength diagnostic requires
+  a new scientific decision.
+operational_status: G1_DISCOVERY_EVIDENCE_COMPLETE_NO_QUALIFIED_CASE
 last_api_reconciliation:
-  global_iteration: 50
-  case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s020-20260920T221831Z-n00050.cas.h5
-  evidence: PyAnsys/output/p7b-s020-20260920T221831Z/manifest.json
-  note: Verified N50 and saved matching checkpoint; runner continuing toward N500
-    then 5000.
+  global_iteration: 4000
+  case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s100-20260921T160825Z-n04000.cas.h5
+  data: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s100-20260921T160825Z-n04000.dat.h5
+  evidence: PyAnsys/output/p7b-s100-20260921T160825Z/failure-recovery/last-flux-readback.json
+  note: Failed N4183 state saved separately before readback of N4000 recovery pair. Recovery sections
+    extracted, no additional solve; session preserved idle.
 failed_export:
   path: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/exports/p7b-phase-velocity-comparison-20260908T102932Z.csv
   status: ERROR_REPORTED; FILE_EXISTS_WITH_DATA; COMPLETENESS_UNVERIFIED
@@ -90,11 +100,11 @@ failed_export:
   api_evidence: PyAnsys/output/phase07b_preparation/failed-export-inspection.json
   accepted_validation_evidence: false
   automatic_retry: false
-latest_human_authorization: "2026-09-18: Sounds good. do it. \u2014 recover diagnostics\
-  \ and proceed with approved steady thickness screen."
+latest_human_authorization: '2026-09-21: resume after temporary Wi-Fi disconnection; approved five-case
+  screen and periodic checks remain active.'
 latest_read_only_access_check:
   health: SERVING
-  evidence: PyAnsys/output/phase07b_preparation/reconnect-20260920T221113Z/result.json
+  evidence: PyAnsys/output/p7b-s060-20260921T043132Z/resume-check-20260921T112457Z/result.json
 latest_requested_reload:
   status: PASS
   evidence: PyAnsys/output/phase07b_preparation/speed-report-repair-20260920T221216Z/result.json
@@ -109,9 +119,10 @@ source_diagnostic:
   nonzero_source_coupling: pending; effectively no liquid reaches S20 by N50
   lag: native applied source N50 matches recomputed source N49
 flux_recorder:
-  status: SCREEN_N50_PASS
-  evidence: PyAnsys/output/p7b-s020-20260920T221831Z/manifest.json
-  recording: 50 continuous rows; last PC row readback matched local row.
+  status: S100_N4182_COMPLETE_UNREGISTERED_FINAL_REMOTE_READBACK_PASS
+  evidence: PyAnsys/output/p7b-s100-20260921T160825Z/manifest.json
+  recording: All4182 completed local rows and PC writes; final4182 PC record exactly matches local. No
+    recorder error. Callback unregistered.
 external_block:
   kind: session_wide_api_timeout
   observed_at_utc: '2026-09-18T07:08:00Z'
@@ -122,8 +133,7 @@ external_block:
   - Settings.GetAttrs
   - Scheme.StringEval
   per_probe_deadline_s: 8
-  reload_status: 'NOT_DISPATCHED: timed out resolving Settings activity before read_case_data
-    execution'
+  reload_status: 'NOT_DISPATCHED: timed out resolving Settings activity before read_case_data execution'
   last_successful_operation: file.stop_transcript; Transcript closed
   causation: unknown; ordering does not establish transcript closure caused the stall
   last_verified_screen_iteration: 0
@@ -135,12 +145,118 @@ external_block:
   status: RESOLVED_2026-09-21_NZ
 report_correction:
   status: PASS
-  definition: Maximum(VelocityMagnitude(phase="mixture"),["simple-spiral-separator--brine-outlet-",
-    "p7b-collector"])
+  definition: Maximum(VelocityMagnitude(phase="mixture"),["simple-spiral-separator--brine-outlet-", "p7b-collector"])
   saved_reopened: true
   evidence: PyAnsys/output/phase07b_preparation/speed-report-repair-20260920T221216Z/result.json
 section_extraction:
-  status: PASS
-  evidence: PyAnsys/output/p7b-s020-20260920T221831Z/initial-sections/index.json
-  sections: 4
+  status: ALL_FIVE_INITIAL_AND_FINAL_OR_RECOVERY_COMPLETE
+  evidence: PyAnsys/output/p7b-s100-20260921T160825Z/analysis/section-summary.json
+  sections_per_case: 4
   fields_per_section: 10
+  s100_limit: N4000 recovery fields, not a N5000 endpoint
+completed_cases:
+  S20:
+    run_id: p7b-s020-20260920T221831Z
+    completed_iterations: 5000
+    endpoint: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s020-20260920T221831Z-final.cas.h5
+    manifest: PyAnsys/output/p7b-s020-20260920T221831Z/manifest.json
+    analysis_status: COMPLETE_NUMERICAL_CRITERIA_NOT_MET
+    qualification: false
+    results: s020-collector/results.md
+  S40:
+    run_id: p7b-s040-20260921T013001Z
+    completed_iterations: 5000
+    endpoint: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s040-20260921T013001Z-final.cas.h5
+    manifest: PyAnsys/output/p7b-s040-20260921T013001Z/manifest.json
+    analysis_status: COMPLETE_NUMERICAL_CRITERIA_NOT_MET
+    qualification: false
+    results: s040-collector/results.md
+    analysis: PyAnsys/output/p7b-s040-20260921T013001Z/analysis/summary.json
+  S60:
+    run_id: p7b-s060-resume-20260921T113238Z
+    completed_iterations: 5000
+    endpoint: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s060-resume-20260921T113238Z-final.cas.h5
+    manifest: PyAnsys/output/p7b-s060-resume-20260921T113238Z/manifest.json
+    analysis_status: COMPLETE_NUMERICAL_CRITERIA_NOT_MET
+    qualification: false
+    results: s060-collector/results.md
+    analysis: PyAnsys/output/p7b-s060-resume-20260921T113238Z/analysis/summary.json
+  S80:
+    run_id: p7b-s080-20260921T130348Z
+    completed_iterations: 5000
+    endpoint: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s080-20260921T130348Z-final.cas.h5
+    manifest: PyAnsys/output/p7b-s080-20260921T130348Z/manifest.json
+    analysis_status: COMPLETE_NUMERICAL_CRITERIA_NOT_MET
+    qualification: false
+    results: s080-collector/results.md
+    analysis: PyAnsys/output/p7b-s080-20260921T130348Z/analysis/summary.json
+check_ins:
+  automation_id: phase-7b-run-check-ins
+  interval_minutes: 15
+  status: PAUSED_G1_COMPLETE
+  last_checked_at_utc: '2026-09-21T19:10:52.110395+00:00'
+  last_observed_iteration: 4182
+  stop_reason: All five terminal dispositions and G1 comparison complete; app automation confirmed PAUSED.
+recording_audit:
+  case_id: S100
+  completed_history_through: 4182
+  failed_attempt: 4183
+  scalar_history_complete: true
+  residuals_continuous_through: 4182
+  collector_flux_continuous_through: 4182
+  conflicting_duplicates: false
+  nonfinite_values: false
+  fatal_transcript_markers: true
+  interpretation: Complete finite histories include severe numerical runaway; finite is not physically
+    valid. Failed4183 is not a completed record.
+  evidence: PyAnsys/output/p7b-s100-20260921T160825Z/analysis/summary.json
+  checked_at_utc: '2026-09-21T19:10:52.110395+00:00'
+pause_recovery:
+  case_id: S60
+  case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s060-wifi-preserve-20260921T060414Z.cas.h5
+  data: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s060-wifi-preserve-20260921T060414Z.dat.h5
+  start_iteration: 2495
+  remaining_iterations: 2505
+  parent_manifest: PyAnsys/output/p7b-s060-20260921T043132Z/manifest.json
+  do_not_reinitialize: true
+  native_history_pending_local_transfer: false
+  reason: Human temporary Wi-Fi disconnection
+  condition: Human resume instruction received; live state and complete prefix reconciled, continuation
+    launched.
+  status: RESUMED_WITHOUT_RELOAD_OR_INITIALIZATION
+  resumed_manifest: PyAnsys/output/p7b-s060-resume-20260921T113238Z/manifest.json
+numerical_failure:
+  case_id: S100
+  failed_global_iteration: 4183
+  last_completed_record_iteration: 4182
+  latest_verified_pair_iteration: 4000
+  failure: Epsilon AMG divergence and floating point exception on host/nodes
+  evidence: PyAnsys/output/p7b-s100-20260921T160825Z/solve.trn
+  controller_exit: 1
+  implementation_error: false
+  evidence_recovered: true
+  failed_state_preserved: true
+  recovery_fields_iteration: 4000
+  retry_performed: false
+  reproducibility_established: false
+blocked_cases:
+  S100:
+    run_id: p7b-s100-20260921T160825Z
+    last_completed_iteration: 4182
+    failed_iteration: 4183
+    disposition: NUMERICAL_FAILURE
+    manifest: PyAnsys/output/p7b-s100-20260921T160825Z/manifest.json
+    terminal_receipt: PyAnsys/output/p7b-s100-20260921T160825Z/terminal-disposition.json
+    recovery_case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s100-20260921T160825Z-n04000.cas.h5
+    recovery_data: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s100-20260921T160825Z-n04000.dat.h5
+    failed_diagnostic_case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s100-failed-n04183-20260921T185920Z.cas.h5
+    analysis: PyAnsys/output/p7b-s100-20260921T160825Z/analysis/summary.json
+    results: s100-collector/results.md
+    qualification: false
+g1_summary: results.md
+meeting_report:
+  record: meeting-report.md
+  pdf: output/pdf/phase-7b-supervisor-meeting-2026-09-22.pdf
+  evidence: PyAnsys/output/phase07b-meeting-20260922/extraction.json
+  additional_iterations: 0
+  restored_case_iteration: 4000

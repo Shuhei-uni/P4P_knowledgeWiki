@@ -1,0 +1,1652 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-09-21T16:07:46.327036+00:00",
+  "run_directory": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s080-20260921T130348Z",
+  "run_id": "p7b-s080-20260921T130348Z",
+  "manifest_source": {
+    "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s080-20260921T130348Z/manifest.json",
+    "sha256": "d760f8ffc407d350a3f322dc88124eae1e6633d7b1925d60de5012b24b58bff6"
+  },
+  "manifest_status": "HORIZON_COMPLETE_ANALYSIS_PENDING",
+  "scientific_screen": true,
+  "planned_scientific_horizon": 5000,
+  "requested_iterations": 5000,
+  "claimed_completed_or_actual_iteration": 5000,
+  "observed_report_last_iteration": 5000,
+  "horizon_observed": true,
+  "analysis_status": "HORIZON_OBSERVED_EVIDENCE_REVIEW_REQUIRED",
+  "history": {
+    "rows": 5000,
+    "unique_rows": 5000,
+    "duplicate_indices": [],
+    "conflicting_indices": [],
+    "nonfinite_columns": [],
+    "first_iteration": 1,
+    "last_iteration": 5000,
+    "source": {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s080-20260921T130348Z/history-05000.out",
+      "sha256": "1fafd9e9f348fe5ddc8e35066342ecf9f30e0b3ce6149cadcb8204a9772fe3f9"
+    },
+    "native_header": [
+      "Iteration",
+      "p7bwatervolume",
+      "p7bwatermass",
+      "p7bcollectorvolume",
+      "p7bcollectormass",
+      "p7babovevolume",
+      "p7bremoval",
+      "p7bliquidliquidinlet",
+      "p7bliquidsteaminlet",
+      "p7bliquidoutlet",
+      "p7bliquidbrinewall",
+      "p7bliquidboundary",
+      "p7bliquidclosure",
+      "p7bvaporliquidinlet",
+      "p7bvaporsteaminlet",
+      "p7bvaporoutlet",
+      "p7bvaporbrinewall",
+      "p7bvaporboundary",
+      "p7bvaporclosure",
+      "p7bmixtureliquidinlet",
+      "p7bmixturesteaminlet",
+      "p7bmixtureoutlet",
+      "p7bmixturebrinewall",
+      "p7bmixtureboundary",
+      "p7bmixtureclosure",
+      "p7bpressureliquid",
+      "p7bpressuresteam",
+      "p7bpressureoutlet",
+      "p7bdropliquid",
+      "p7bdropsteam",
+      "p7bminimumpressure",
+      "p7bmaximumpressure",
+      "p7bmaximumspeed",
+      "p7b-applied-source",
+      "p7b-native-water"
+    ],
+    "rejected_lines": [],
+    "expected_start": 1,
+    "expected_end": 5000,
+    "missing_indices": [],
+    "complete_to_expected_end": true
+  },
+  "other_history_candidates": [
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s080-20260921T130348Z/history-01500.out",
+      "sha256": "c2a62116a7e50f63bb1f0f1703db2ccf30f938f81451f83eed84b0008d461f66"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s080-20260921T130348Z/history-03500.out",
+      "sha256": "1d1eb37434c74a1035b4f3437290fef672b8014cc4e1ec15f6292475fb2a7ee7"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s080-20260921T130348Z/history-03000.out",
+      "sha256": "42d1f93be587615ae11b2c2f5231ee61db842037006eb6bcfd3c57ca635d4a90"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s080-20260921T130348Z/history-00050.out",
+      "sha256": "ea2936f7ae9fed602590150827697016c5e49445efa7fdf219f0017bf13e72d3"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s080-20260921T130348Z/history-01000.out",
+      "sha256": "4873001d5b825243c782f0cf14e41a82e3c29aee48a12245d1fcc7f5dad9e815"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s080-20260921T130348Z/history-00500.out",
+      "sha256": "416abbae454d26dc1c2933dbe718288eed3e953c570f9bb71cad9a8a054318ee"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s080-20260921T130348Z/history-04000.out",
+      "sha256": "97cb7e98c2df244bae7d662abcb22d6a33442372f6d7a3126c3311cdeb16cd77"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s080-20260921T130348Z/history-02500.out",
+      "sha256": "08f7d810f52a5b14c26cd9dce59e5e4c882774413ed23bf72eee3505005b955b"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s080-20260921T130348Z/history-02000.out",
+      "sha256": "07d6d94733c95bad4edae083d98150ab13e4f8ee96ba067eb70ba175c11725c4"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s080-20260921T130348Z/history-04500.out",
+      "sha256": "7dd85039e6154091a4cccf51c9188a674687d2bbd8f351288eb2661aec5026e6"
+    }
+  ],
+  "rejected_history_files": [],
+  "collector_flux": {
+    "rows": 5000,
+    "unique_rows": 5000,
+    "duplicate_indices": [],
+    "conflicting_indices": [],
+    "nonfinite_columns": [],
+    "first_iteration": 1,
+    "last_iteration": 5000,
+    "source": {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s080-20260921T130348Z/collector-flux.jsonl",
+      "sha256": "ef6fb601ca25c339fcff9967a05df4a4334e6c9dc8e526f56721791b8aa01426"
+    },
+    "rejected_lines": [],
+    "remote_persistence": "Local rows alone do not prove remote writes; inspect run flux_monitor manifest.",
+    "expected_start": 1,
+    "expected_end": 5000,
+    "missing_indices": [],
+    "complete_to_expected_end": true
+  },
+  "run_flux_monitor": {
+    "schema_version": 1,
+    "capture_id": "b65cfa7fc2f44f2bbc6d7e031f3ed767",
+    "registered": false,
+    "start_iteration": 0,
+    "prefix_source": null,
+    "inherited_rows": 0,
+    "last_completed_iteration": 5000,
+    "last_event_iteration": 5000,
+    "skipped_duplicate_count": 10,
+    "skipped_duplicate_indices": [
+      50,
+      500,
+      1000,
+      1500,
+      2000,
+      2500,
+      3000,
+      3500,
+      4000,
+      4500
+    ],
+    "local_rows": 5000,
+    "remote_write_completed_rows": 5000,
+    "remote_readback_verified": false,
+    "local_jsonl": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s080-20260921T130348Z/collector-flux.jsonl",
+    "remote_path_pattern": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-flux-b65cfa7fc2f44f2bbc6d7e031f3ed767-i{iteration:07d}.json",
+    "face_zones": [
+      {
+        "name": "interior--simple-spiral-separator--brine-outlet-:001",
+        "outward_sign": 1,
+        "expected_owned_count": 2870
+      },
+      {
+        "name": "interior--simple-spiral-separator--brine-outlet-:004",
+        "outward_sign": 1,
+        "expected_owned_count": 3307
+      }
+    ],
+    "error": null
+  },
+  "residuals": {
+    "rows": 5010,
+    "unique_rows": 5000,
+    "duplicate_indices": [
+      50,
+      500,
+      1000,
+      1500,
+      2000,
+      2500,
+      3000,
+      3500,
+      4000,
+      4500
+    ],
+    "conflicting_indices": [],
+    "nonfinite_columns": [],
+    "first_iteration": 1,
+    "last_iteration": 5000,
+    "source": {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s080-20260921T130348Z/solve.trn",
+      "sha256": "3caa66121724030223206d437a60f606d1bd2307b6b70b906b7b8aed1b94d151"
+    },
+    "rejected_lines": [],
+    "nonpositive_columns": [],
+    "expected_start": 1,
+    "expected_end": 5000,
+    "missing_indices": [],
+    "complete_to_expected_end": true
+  },
+  "applied_source_lag_audit": {
+    "comparison": "native applied removal at N minus recomputed removal at N-1",
+    "consecutive_pairs": 4999,
+    "unit": "kg/s",
+    "maximum_absolute_error": 0.0
+  },
+  "latest_residuals": {
+    "continuity": 0.52392,
+    "x-velocity": 9.3445e-05,
+    "y-velocity": 7.5672e-05,
+    "z-velocity": 9.3299e-05,
+    "k": 0.0064678,
+    "epsilon": 0.017147,
+    "vf-phase-2": 0.0076515
+  },
+  "missing_required_derived_metrics": [],
+  "latest_metrics": {
+    "whole_water_volume": {
+      "value": 0.6955426998460403,
+      "unit": "m^3"
+    },
+    "collector_water_volume": {
+      "value": 0.0008016058818912746,
+      "unit": "m^3"
+    },
+    "above_water_volume": {
+      "value": 0.6947410939641491,
+      "unit": "m^3"
+    },
+    "whole_water_mass": {
+      "value": 613.308686443243,
+      "unit": "kg"
+    },
+    "collector_water_mass": {
+      "value": 0.7068320184752692,
+      "unit": "kg"
+    },
+    "above_water_mass": {
+      "value": 612.6018544247677,
+      "unit": "kg"
+    },
+    "current_expression_removal": {
+      "value": 293.3412837097461,
+      "unit": "kg/s"
+    },
+    "liquid_inlet_pressure": {
+      "value": 1162956.707485643,
+      "unit": "Pa"
+    },
+    "steam_inlet_pressure": {
+      "value": 1163169.389752211,
+      "unit": "Pa"
+    },
+    "outlet_pressure": {
+      "value": 1119600.454654685,
+      "unit": "Pa"
+    },
+    "liquid_inlet_pressure_drop": {
+      "value": 43356.25283095776,
+      "unit": "Pa"
+    },
+    "steam_inlet_pressure_drop": {
+      "value": 43568.93509752583,
+      "unit": "Pa"
+    },
+    "minimum_fluid_pressure": {
+      "value": 1118673.270388515,
+      "unit": "Pa"
+    },
+    "maximum_fluid_pressure": {
+      "value": 1196074.91646522,
+      "unit": "Pa"
+    },
+    "maximum_mixture_speed": {
+      "value": 83.4268534633091,
+      "unit": "m/s"
+    },
+    "native_applied_removal": {
+      "value": 295.5017335876702,
+      "unit": "kg/s"
+    },
+    "liquid_net_boundary_inflow": {
+      "value": 83.62132254803998,
+      "unit": "kg/s"
+    },
+    "liquid_measured_feed": {
+      "value": 116.9212324584734,
+      "unit": "kg/s"
+    },
+    "liquid_closure_applied": {
+      "value": -211.8804110396302,
+      "unit": "kg/s"
+    },
+    "liquid_closure_percent_feed": {
+      "value": -181.21636813474677,
+      "unit": "%"
+    },
+    "liquid_carryover_fraction": {
+      "value": 0.2848063539037741,
+      "unit": "1"
+    },
+    "vapor_net_boundary_inflow": {
+      "value": 1.3479602794171086,
+      "unit": "kg/s"
+    },
+    "vapor_measured_feed": {
+      "value": 80.68990235833888,
+      "unit": "kg/s"
+    },
+    "vapor_closure_applied": {
+      "value": 1.3479602794171086,
+      "unit": "kg/s"
+    },
+    "vapor_closure_percent_feed": {
+      "value": 1.6705439466649743,
+      "unit": "%"
+    },
+    "steam_recovery_fraction": {
+      "value": 0.9832945605333503,
+      "unit": "1"
+    },
+    "mixture_net_boundary_inflow": {
+      "value": 84.99634933919529,
+      "unit": "kg/s"
+    },
+    "mixture_measured_feed": {
+      "value": 197.6111348168123,
+      "unit": "kg/s"
+    },
+    "mixture_closure_applied": {
+      "value": -210.50538424847488,
+      "unit": "kg/s"
+    },
+    "mixture_closure_percent_feed": {
+      "value": -106.52506218519301,
+      "unit": "%"
+    },
+    "outlet_vapor_mass_fraction": {
+      "value": 0.704373558119585,
+      "unit": "1"
+    }
+  },
+  "fixed_late_windows": {
+    "windows": {
+      "4001-4500": {
+        "complete": true,
+        "observed_samples": 500,
+        "metrics": {
+          "whole_water_volume": {
+            "valid": true,
+            "samples": 500,
+            "unit": "m^3",
+            "mean": 0.5819981581959949,
+            "minimum": 0.4996380560334669,
+            "maximum": 0.6149746137687464,
+            "standard_deviation": 0.03196516008688593,
+            "slope_per_iteration": 0.0001944124288693714,
+            "slope_unit": "m^3/iteration",
+            "mean_absolute": 0.5819981581959949
+          },
+          "collector_water_volume": {
+            "valid": true,
+            "samples": 500,
+            "unit": "m^3",
+            "mean": 0.0007034431557728117,
+            "minimum": 0.0004359141610486339,
+            "maximum": 0.0009838542219139982,
+            "standard_deviation": 0.0001618808700387917,
+            "slope_per_iteration": -5.355429456794377e-07,
+            "slope_unit": "m^3/iteration",
+            "mean_absolute": 0.0007034431557728117
+          },
+          "above_water_volume": {
+            "valid": true,
+            "samples": 500,
+            "unit": "m^3",
+            "mean": 0.581294715040222,
+            "minimum": 0.4990671051326793,
+            "maximum": 0.6141058340746552,
+            "standard_deviation": 0.032013933579570594,
+            "slope_per_iteration": 0.00019494797181505042,
+            "slope_unit": "m^3/iteration",
+            "mean_absolute": 0.581294715040222
+          },
+          "whole_water_mass": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg",
+            "mean": 513.1885159524824,
+            "minimum": 440.5658486686301,
+            "maximum": 542.2661651828676,
+            "standard_deviation": 28.185919209813402,
+            "slope_per_iteration": 0.17142704740414638,
+            "slope_unit": "kg/iteration",
+            "mean_absolute": 513.1885159524824
+          },
+          "collector_water_mass": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg",
+            "mean": 0.6202750714657921,
+            "minimum": 0.3843760297878539,
+            "maximum": 0.8675331372571061,
+            "standard_deviation": 0.14274169477410537,
+            "slope_per_iteration": -0.00047222570321175776,
+            "slope_unit": "kg/iteration",
+            "mean_absolute": 0.6202750714657921
+          },
+          "above_water_mass": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg",
+            "mean": 512.5682408810164,
+            "minimum": 440.06240129284265,
+            "maximum": 541.5001013120087,
+            "standard_deviation": 28.228926212457964,
+            "slope_per_iteration": 0.17189927310735867,
+            "slope_unit": "kg/iteration",
+            "mean_absolute": 512.5682408810164
+          },
+          "current_expression_removal": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg/s",
+            "mean": 257.4194164398855,
+            "minimum": 159.5193130164772,
+            "maximum": 360.0336112287301,
+            "standard_deviation": 59.23901420632364,
+            "slope_per_iteration": -0.19597767271449928,
+            "slope_unit": "kg/s/iteration",
+            "mean_absolute": 257.4194164398855
+          },
+          "liquid_inlet_pressure": {
+            "valid": true,
+            "samples": 500,
+            "unit": "Pa",
+            "mean": 1151739.7712290643,
+            "minimum": 1147457.252749744,
+            "maximum": 1157312.760917545,
+            "standard_deviation": 2333.957348550552,
+            "slope_per_iteration": 9.23236527655721,
+            "slope_unit": "Pa/iteration",
+            "mean_absolute": 1151739.7712290643
+          },
+          "steam_inlet_pressure": {
+            "valid": true,
+            "samples": 500,
+            "unit": "Pa",
+            "mean": 1151950.6101027303,
+            "minimum": 1147667.653221972,
+            "maximum": 1157524.829352947,
+            "standard_deviation": 2334.4309380683253,
+            "slope_per_iteration": 9.233284820740293,
+            "slope_unit": "Pa/iteration",
+            "mean_absolute": 1151950.6101027303
+          },
+          "outlet_pressure": {
+            "valid": true,
+            "samples": 500,
+            "unit": "Pa",
+            "mean": 1119620.415459762,
+            "minimum": 1119559.504411715,
+            "maximum": 1119660.870137342,
+            "standard_deviation": 27.739668276544588,
+            "slope_per_iteration": -0.14588332002152848,
+            "slope_unit": "Pa/iteration",
+            "mean_absolute": 1119620.415459762
+          },
+          "liquid_inlet_pressure_drop": {
+            "valid": true,
+            "samples": 500,
+            "unit": "Pa",
+            "mean": 32119.355769302325,
+            "minimum": 27800.09245158779,
+            "maximum": 37719.99855039734,
+            "standard_deviation": 2357.1107505354366,
+            "slope_per_iteration": 9.378248596579445,
+            "slope_unit": "Pa/iteration",
+            "mean_absolute": 32119.355769302325
+          },
+          "steam_inlet_pressure_drop": {
+            "valid": true,
+            "samples": 500,
+            "unit": "Pa",
+            "mean": 32330.194642968185,
+            "minimum": 28010.49292381643,
+            "maximum": 37932.06698579923,
+            "standard_deviation": 2357.5842646887922,
+            "slope_per_iteration": 9.379168140764442,
+            "slope_unit": "Pa/iteration",
+            "mean_absolute": 32330.194642968185
+          },
+          "minimum_fluid_pressure": {
+            "valid": true,
+            "samples": 500,
+            "unit": "Pa",
+            "mean": 1108189.49788578,
+            "minimum": 1037715.845655532,
+            "maximum": 1118542.028658658,
+            "standard_deviation": 17001.05789592159,
+            "slope_per_iteration": 15.251543101904483,
+            "slope_unit": "Pa/iteration",
+            "mean_absolute": 1108189.49788578
+          },
+          "maximum_fluid_pressure": {
+            "valid": true,
+            "samples": 500,
+            "unit": "Pa",
+            "mean": 1169305.5088022684,
+            "minimum": 1156882.573834629,
+            "maximum": 1276540.351989811,
+            "standard_deviation": 11804.842500532239,
+            "slope_per_iteration": -18.512792762489884,
+            "slope_unit": "Pa/iteration",
+            "mean_absolute": 1169305.5088022684
+          },
+          "maximum_mixture_speed": {
+            "valid": true,
+            "samples": 500,
+            "unit": "m/s",
+            "mean": 83.73206783394212,
+            "minimum": 78.05965350858108,
+            "maximum": 346.9653843045224,
+            "standard_deviation": 17.742778062085527,
+            "slope_per_iteration": 0.01657694533182757,
+            "slope_unit": "m/s/iteration",
+            "mean_absolute": 83.73206783394212
+          },
+          "native_applied_removal": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg/s",
+            "mean": 257.2163047746765,
+            "minimum": 159.5193130164772,
+            "maximum": 360.0336112287301,
+            "standard_deviation": 59.23432211976551,
+            "slope_per_iteration": -0.19604335749397583,
+            "slope_unit": "kg/s/iteration",
+            "mean_absolute": 257.2163047746765
+          },
+          "liquid_net_boundary_inflow": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg/s",
+            "mean": 102.27820639454931,
+            "minimum": 95.92961252086644,
+            "maximum": 111.38435739272025,
+            "standard_deviation": 5.102401083620317,
+            "slope_per_iteration": -0.03163471049315497,
+            "slope_unit": "kg/s/iteration",
+            "mean_absolute": 102.27820639454931
+          },
+          "liquid_measured_feed": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg/s",
+            "mean": 116.92123245847341,
+            "minimum": 116.9212324584734,
+            "maximum": 116.9212324584734,
+            "standard_deviation": 1.4210854715202004e-14,
+            "slope_per_iteration": 1.4037128818941537e-16,
+            "slope_unit": "kg/s/iteration",
+            "mean_absolute": 116.92123245847341
+          },
+          "liquid_closure_applied": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg/s",
+            "mean": -154.93809838012717,
+            "minimum": -252.19456757947898,
+            "maximum": -61.14324317045026,
+            "standard_deviation": 56.07195028427829,
+            "slope_per_iteration": 0.16440864700082058,
+            "slope_unit": "kg/s/iteration",
+            "mean_absolute": 154.93809838012717
+          },
+          "liquid_closure_percent_feed": {
+            "valid": true,
+            "samples": 500,
+            "unit": "%",
+            "mean": -132.5149377254094,
+            "minimum": -215.6961248839472,
+            "maximum": -52.29438818322954,
+            "standard_deviation": 47.957029792850676,
+            "slope_per_iteration": 0.1406148768224909,
+            "slope_unit": "%/iteration",
+            "mean_absolute": 132.5149377254094
+          },
+          "liquid_carryover_fraction": {
+            "valid": true,
+            "samples": 500,
+            "unit": "1",
+            "mean": 0.12523838276443777,
+            "minimum": 0.047355599571871305,
+            "maximum": 0.17953642376342968,
+            "standard_deviation": 0.04363964505277109,
+            "slope_per_iteration": 0.00027056429211341554,
+            "slope_unit": "1/iteration",
+            "mean_absolute": 0.12523838276443777
+          },
+          "vapor_net_boundary_inflow": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg/s",
+            "mean": 1.0235814038898636,
+            "minimum": 0.3501252880820118,
+            "maximum": 1.6474360976123137,
+            "standard_deviation": 0.3650393541200562,
+            "slope_per_iteration": -0.0011165514672260288,
+            "slope_unit": "kg/s/iteration",
+            "mean_absolute": 1.0235814038898636
+          },
+          "vapor_measured_feed": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg/s",
+            "mean": 80.68990235833891,
+            "minimum": 80.68990235833888,
+            "maximum": 80.68990235833888,
+            "standard_deviation": 2.842170943040401e-14,
+            "slope_per_iteration": 9.087261395103704e-20,
+            "slope_unit": "kg/s/iteration",
+            "mean_absolute": 80.68990235833891
+          },
+          "vapor_closure_applied": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg/s",
+            "mean": 1.0235814038898636,
+            "minimum": 0.3501252880820118,
+            "maximum": 1.6474360976123137,
+            "standard_deviation": 0.3650393541200562,
+            "slope_per_iteration": -0.0011165514672260288,
+            "slope_unit": "kg/s/iteration",
+            "mean_absolute": 1.0235814038898636
+          },
+          "vapor_closure_percent_feed": {
+            "valid": true,
+            "samples": 500,
+            "unit": "%",
+            "mean": 1.268537170046633,
+            "minimum": 0.4339146260546047,
+            "maximum": 2.0416880544682674,
+            "standard_deviation": 0.45239781366810805,
+            "slope_per_iteration": -0.0013837561263458878,
+            "slope_unit": "%/iteration",
+            "mean_absolute": 1.268537170046633
+          },
+          "steam_recovery_fraction": {
+            "valid": true,
+            "samples": 500,
+            "unit": "1",
+            "mean": 0.9873146282995338,
+            "minimum": 0.9795831194553173,
+            "maximum": 0.9956608537394539,
+            "standard_deviation": 0.00452397813668108,
+            "slope_per_iteration": 1.3837561263457519e-05,
+            "slope_unit": "1/iteration",
+            "mean_absolute": 0.9873146282995338
+          },
+          "mixture_net_boundary_inflow": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg/s",
+            "mean": 103.30048493331412,
+            "minimum": 96.4033621483564,
+            "maximum": 112.00095486558594,
+            "standard_deviation": 5.321835749214993,
+            "slope_per_iteration": -0.0327265992184616,
+            "slope_unit": "kg/s/iteration",
+            "mean_absolute": 103.30048493331412
+          },
+          "mixture_measured_feed": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg/s",
+            "mean": 197.61113481681235,
+            "minimum": 197.6111348168123,
+            "maximum": 197.6111348168123,
+            "standard_deviation": 5.684341886080802e-14,
+            "slope_per_iteration": -1.1668966202021605e-17,
+            "slope_unit": "kg/s/iteration",
+            "mean_absolute": 197.61113481681235
+          },
+          "mixture_closure_applied": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg/s",
+            "mean": -153.91581984136235,
+            "minimum": -250.54726242850847,
+            "maximum": -60.7117881932092,
+            "standard_deviation": 55.71183279922807,
+            "slope_per_iteration": 0.16331675827551398,
+            "slope_unit": "kg/s/iteration",
+            "mean_absolute": 153.91581984136235
+          },
+          "mixture_closure_percent_feed": {
+            "valid": true,
+            "samples": 500,
+            "unit": "%",
+            "mean": -77.88823235292081,
+            "minimum": -126.7880287519064,
+            "maximum": -30.72285792472661,
+            "standard_deviation": 28.19265870360673,
+            "slope_per_iteration": 0.08264552421446814,
+            "slope_unit": "%/iteration",
+            "mean_absolute": 77.88823235292081
+          },
+          "outlet_vapor_mass_fraction": {
+            "valid": true,
+            "samples": 500,
+            "unit": "1",
+            "mean": 0.8473299640542666,
+            "minimum": 0.79254285907705,
+            "maximum": 0.9353202256271074,
+            "standard_deviation": 0.046186346594162944,
+            "slope_per_iteration": -0.0002876551329670637,
+            "slope_unit": "1/iteration",
+            "mean_absolute": 0.8473299640542666
+          }
+        }
+      },
+      "4501-5000": {
+        "complete": true,
+        "observed_samples": 500,
+        "metrics": {
+          "whole_water_volume": {
+            "valid": true,
+            "samples": 500,
+            "unit": "m^3",
+            "mean": 0.6467998675690769,
+            "minimum": 0.6120253565019933,
+            "maximum": 0.6955426998460403,
+            "standard_deviation": 0.02691672035121995,
+            "slope_per_iteration": 0.00017633340551667092,
+            "slope_unit": "m^3/iteration",
+            "mean_absolute": 0.6467998675690769
+          },
+          "collector_water_volume": {
+            "valid": true,
+            "samples": 500,
+            "unit": "m^3",
+            "mean": 0.0013722808466343325,
+            "minimum": 0.0006959834162902262,
+            "maximum": 0.002250354154290299,
+            "standard_deviation": 0.00043958432407401813,
+            "slope_per_iteration": 1.0501904970833583e-06,
+            "slope_unit": "m^3/iteration",
+            "mean_absolute": 0.0013722808466343325
+          },
+          "above_water_volume": {
+            "valid": true,
+            "samples": 500,
+            "unit": "m^3",
+            "mean": 0.6454275867224426,
+            "minimum": 0.6111288595370911,
+            "maximum": 0.6947410939641491,
+            "standard_deviation": 0.026710479420765775,
+            "slope_per_iteration": 0.00017528321501958786,
+            "slope_unit": "m^3/iteration",
+            "mean_absolute": 0.6454275867224426
+          },
+          "whole_water_mass": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg",
+            "mean": 570.328719226385,
+            "minimum": 539.6655986027627,
+            "maximum": 613.308686443243,
+            "standard_deviation": 23.73435650409522,
+            "slope_per_iteration": 0.1554855069824345,
+            "slope_unit": "kg/iteration",
+            "mean_absolute": 570.328719226385
+          },
+          "collector_water_mass": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg",
+            "mean": 1.2100360821367553,
+            "minimum": 0.6136972969822327,
+            "maximum": 1.984294782628557,
+            "standard_deviation": 0.38761226943874694,
+            "slope_per_iteration": 0.0009260264746131922,
+            "slope_unit": "kg/iteration",
+            "mean_absolute": 1.2100360821367553
+          },
+          "above_water_mass": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg",
+            "mean": 569.1186831442483,
+            "minimum": 538.8750944740208,
+            "maximum": 612.6018544247677,
+            "standard_deviation": 23.552499438848642,
+            "slope_per_iteration": 0.1545594805078205,
+            "slope_unit": "kg/iteration",
+            "mean_absolute": 569.1186831442483
+          },
+          "current_expression_removal": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg/s",
+            "mean": 502.1752387997223,
+            "minimum": 254.6895842300723,
+            "maximum": 823.4991675255818,
+            "standard_deviation": 160.86237992455685,
+            "slope_per_iteration": 0.38430884242936897,
+            "slope_unit": "kg/s/iteration",
+            "mean_absolute": 502.1752387997223
+          },
+          "liquid_inlet_pressure": {
+            "valid": true,
+            "samples": 500,
+            "unit": "Pa",
+            "mean": 1152991.5281371346,
+            "minimum": 1145895.493063367,
+            "maximum": 1163957.243206085,
+            "standard_deviation": 4737.10342074236,
+            "slope_per_iteration": 15.019987689514137,
+            "slope_unit": "Pa/iteration",
+            "mean_absolute": 1152991.5281371346
+          },
+          "steam_inlet_pressure": {
+            "valid": true,
+            "samples": 500,
+            "unit": "Pa",
+            "mean": 1153202.9828717955,
+            "minimum": 1146106.868737489,
+            "maximum": 1164169.853101272,
+            "standard_deviation": 4737.790257693911,
+            "slope_per_iteration": 15.022147997119639,
+            "slope_unit": "Pa/iteration",
+            "mean_absolute": 1153202.9828717955
+          },
+          "outlet_pressure": {
+            "valid": true,
+            "samples": 500,
+            "unit": "Pa",
+            "mean": 1119667.036047654,
+            "minimum": 1119597.951227174,
+            "maximum": 1119735.154897719,
+            "standard_deviation": 30.40393558923011,
+            "slope_per_iteration": -0.008134756251765293,
+            "slope_unit": "Pa/iteration",
+            "mean_absolute": 1119667.036047654
+          },
+          "liquid_inlet_pressure_drop": {
+            "valid": true,
+            "samples": 500,
+            "unit": "Pa",
+            "mean": 33324.492089480955,
+            "minimum": 26243.23535557976,
+            "maximum": 44288.06284350553,
+            "standard_deviation": 4731.2463981858555,
+            "slope_per_iteration": 15.02812244576504,
+            "slope_unit": "Pa/iteration",
+            "mean_absolute": 33324.492089480955
+          },
+          "steam_inlet_pressure_drop": {
+            "valid": true,
+            "samples": 500,
+            "unit": "Pa",
+            "mean": 33535.94682414213,
+            "minimum": 26454.61102970224,
+            "maximum": 44500.67273869202,
+            "standard_deviation": 4731.932717088812,
+            "slope_per_iteration": 15.030282753369747,
+            "slope_unit": "Pa/iteration",
+            "mean_absolute": 33535.94682414213
+          },
+          "minimum_fluid_pressure": {
+            "valid": true,
+            "samples": 500,
+            "unit": "Pa",
+            "mean": 1053798.5314263883,
+            "minimum": 897177.2416016811,
+            "maximum": 1118673.270388515,
+            "standard_deviation": 52106.79843208939,
+            "slope_per_iteration": 66.32318383838633,
+            "slope_unit": "Pa/iteration",
+            "mean_absolute": 1053798.5314263883
+          },
+          "maximum_fluid_pressure": {
+            "valid": true,
+            "samples": 500,
+            "unit": "Pa",
+            "mean": 1194477.372913479,
+            "minimum": 1154630.67331974,
+            "maximum": 1729548.364727952,
+            "standard_deviation": 42791.625922171064,
+            "slope_per_iteration": 60.0752181766486,
+            "slope_unit": "Pa/iteration",
+            "mean_absolute": 1194477.372913479
+          },
+          "maximum_mixture_speed": {
+            "valid": true,
+            "samples": 500,
+            "unit": "m/s",
+            "mean": 88.11437948403223,
+            "minimum": 73.96881257855122,
+            "maximum": 561.4320295029544,
+            "standard_deviation": 33.65597178901726,
+            "slope_per_iteration": -0.020784604798190966,
+            "slope_unit": "m/s/iteration",
+            "mean_absolute": 88.11437948403223
+          },
+          "native_applied_removal": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg/s",
+            "mean": 502.20748464098597,
+            "minimum": 254.6895842300723,
+            "maximum": 823.4991675255818,
+            "standard_deviation": 160.82212558974908,
+            "slope_per_iteration": 0.3939467346302835,
+            "slope_unit": "kg/s/iteration",
+            "mean_absolute": 502.20748464098597
+          },
+          "liquid_net_boundary_inflow": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg/s",
+            "mean": 100.45526989738238,
+            "minimum": 83.51127983851688,
+            "maximum": 110.7323091523115,
+            "standard_deviation": 9.190978539338088,
+            "slope_per_iteration": -0.05139993421265612,
+            "slope_unit": "kg/s/iteration",
+            "mean_absolute": 100.45526989738238
+          },
+          "liquid_measured_feed": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg/s",
+            "mean": 116.92123245847341,
+            "minimum": 116.9212324584734,
+            "maximum": 116.9212324584734,
+            "standard_deviation": 1.4210854715202004e-14,
+            "slope_per_iteration": 1.4037128818941537e-16,
+            "slope_unit": "kg/s/iteration",
+            "mean_absolute": 116.92123245847341
+          },
+          "liquid_closure_applied": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg/s",
+            "mean": -401.75221474360353,
+            "minimum": -724.3012421993444,
+            "maximum": -148.5873974439544,
+            "standard_deviation": 161.32508612192674,
+            "slope_per_iteration": -0.4453466688429398,
+            "slope_unit": "kg/s/iteration",
+            "mean_absolute": 401.75221474360353
+          },
+          "liquid_closure_percent_feed": {
+            "valid": true,
+            "samples": 500,
+            "unit": "%",
+            "mean": -343.60928831834957,
+            "minimum": -619.4779399512339,
+            "maximum": -127.08333150416267,
+            "standard_deviation": 137.9775792042084,
+            "slope_per_iteration": -0.38089460697492383,
+            "slope_unit": "%/iteration",
+            "mean_absolute": 343.60928831834957
+          },
+          "liquid_carryover_fraction": {
+            "valid": true,
+            "samples": 500,
+            "unit": "1",
+            "mean": 0.14082953296732642,
+            "minimum": 0.05293241591821235,
+            "maximum": 0.28574752350324945,
+            "standard_deviation": 0.07860829334485867,
+            "slope_per_iteration": 0.00043961163538805116,
+            "slope_unit": "1/iteration",
+            "mean_absolute": 0.14082953296732642
+          },
+          "vapor_net_boundary_inflow": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg/s",
+            "mean": 2.6180452023974006,
+            "minimum": 0.954104507526722,
+            "maximum": 4.836260997207361,
+            "standard_deviation": 1.0662459805753994,
+            "slope_per_iteration": 0.003036945520399057,
+            "slope_unit": "kg/s/iteration",
+            "mean_absolute": 2.6180452023974006
+          },
+          "vapor_measured_feed": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg/s",
+            "mean": 80.68990235833891,
+            "minimum": 80.68990235833888,
+            "maximum": 80.68990235833888,
+            "standard_deviation": 2.842170943040401e-14,
+            "slope_per_iteration": 9.087261395103704e-20,
+            "slope_unit": "kg/s/iteration",
+            "mean_absolute": 80.68990235833891
+          },
+          "vapor_closure_applied": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg/s",
+            "mean": 2.6180452023974006,
+            "minimum": 0.954104507526722,
+            "maximum": 4.836260997207361,
+            "standard_deviation": 1.0662459805753994,
+            "slope_per_iteration": 0.003036945520399057,
+            "slope_unit": "kg/s/iteration",
+            "mean_absolute": 2.6180452023974006
+          },
+          "vapor_closure_percent_feed": {
+            "valid": true,
+            "samples": 500,
+            "unit": "%",
+            "mean": 3.2445759951112887,
+            "minimum": 1.1824335878975323,
+            "maximum": 5.993638430407096,
+            "standard_deviation": 1.3214119107992803,
+            "slope_per_iteration": 0.0037637243714983876,
+            "slope_unit": "%/iteration",
+            "mean_absolute": 3.2445759951112887
+          },
+          "steam_recovery_fraction": {
+            "valid": true,
+            "samples": 500,
+            "unit": "1",
+            "mean": 0.9675542400488871,
+            "minimum": 0.940063615695929,
+            "maximum": 0.9881756641210246,
+            "standard_deviation": 0.013214119107992804,
+            "slope_per_iteration": -3.763724371498338e-05,
+            "slope_unit": "1/iteration",
+            "mean_absolute": 0.9675542400488871
+          },
+          "mixture_net_boundary_inflow": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg/s",
+            "mean": 103.07041057899637,
+            "minimum": 84.845469211949,
+            "maximum": 113.02103664916702,
+            "standard_deviation": 9.140972302081122,
+            "slope_per_iteration": -0.048381318855886674,
+            "slope_unit": "kg/s/iteration",
+            "mean_absolute": 103.07041057899637
+          },
+          "mixture_measured_feed": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg/s",
+            "mean": 197.61113481681235,
+            "minimum": 197.6111348168123,
+            "maximum": 197.6111348168123,
+            "standard_deviation": 5.684341886080802e-14,
+            "slope_per_iteration": -1.1668966202021605e-17,
+            "slope_unit": "kg/s/iteration",
+            "mean_absolute": 197.61113481681235
+          },
+          "mixture_closure_applied": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg/s",
+            "mean": -399.13707406198955,
+            "minimum": -719.4769439259862,
+            "maximum": -147.57815770081763,
+            "standard_deviation": 160.26846093969877,
+            "slope_per_iteration": -0.4423280534861697,
+            "slope_unit": "kg/s/iteration",
+            "mean_absolute": 399.13707406198955
+          },
+          "mixture_closure_percent_feed": {
+            "valid": true,
+            "samples": 500,
+            "unit": "%",
+            "mean": -201.98106469657898,
+            "minimum": -364.087248723585,
+            "maximum": -74.68109417904219,
+            "standard_deviation": 81.10295054388985,
+            "slope_per_iteration": -0.2238376161830218,
+            "slope_unit": "%/iteration",
+            "mean_absolute": 201.98106469657898
+          },
+          "outlet_vapor_mass_fraction": {
+            "valid": true,
+            "samples": 500,
+            "unit": "1",
+            "mean": 0.8330604505156687,
+            "minimum": 0.7002106040127786,
+            "maximum": 0.9268621685582583,
+            "standard_deviation": 0.07598511379321585,
+            "slope_per_iteration": -0.00042249714824486916,
+            "slope_unit": "1/iteration",
+            "mean_absolute": 0.8330604505156687
+          }
+        }
+      }
+    },
+    "second_minus_first": {
+      "whole_water_volume": {
+        "mean_change": 0.06480170937308205,
+        "unit": "m^3",
+        "mean_change_percent_of_larger_mean_with_1e-6_m3_floor": 10.018819208580213
+      },
+      "collector_water_volume": {
+        "mean_change": 0.0006688376908615208,
+        "unit": "m^3",
+        "mean_change_percent_of_larger_mean_with_1e-6_m3_floor": 48.73912599610478
+      },
+      "above_water_volume": {
+        "mean_change": 0.0641328716822206,
+        "unit": "m^3",
+        "mean_change_percent_of_larger_mean_with_1e-6_m3_floor": 9.936493729357753
+      },
+      "whole_water_mass": {
+        "mean_change": 57.14020327390267,
+        "unit": "kg"
+      },
+      "collector_water_mass": {
+        "mean_change": 0.5897610106709632,
+        "unit": "kg"
+      },
+      "above_water_mass": {
+        "mean_change": 56.550442263231844,
+        "unit": "kg"
+      },
+      "current_expression_removal": {
+        "mean_change": 244.75582235983683,
+        "unit": "kg/s"
+      },
+      "liquid_inlet_pressure": {
+        "mean_change": 1251.756908070296,
+        "unit": "Pa"
+      },
+      "steam_inlet_pressure": {
+        "mean_change": 1252.3727690652013,
+        "unit": "Pa"
+      },
+      "outlet_pressure": {
+        "mean_change": 46.62058789189905,
+        "unit": "Pa"
+      },
+      "liquid_inlet_pressure_drop": {
+        "mean_change": 1205.1363201786298,
+        "unit": "Pa"
+      },
+      "steam_inlet_pressure_drop": {
+        "mean_change": 1205.7521811739425,
+        "unit": "Pa"
+      },
+      "minimum_fluid_pressure": {
+        "mean_change": -54390.96645939164,
+        "unit": "Pa"
+      },
+      "maximum_fluid_pressure": {
+        "mean_change": 25171.864111210685,
+        "unit": "Pa"
+      },
+      "maximum_mixture_speed": {
+        "mean_change": 4.382311650090102,
+        "unit": "m/s"
+      },
+      "native_applied_removal": {
+        "mean_change": 244.9911798663095,
+        "unit": "kg/s"
+      },
+      "liquid_net_boundary_inflow": {
+        "mean_change": -1.8229364971669355,
+        "unit": "kg/s"
+      },
+      "liquid_measured_feed": {
+        "mean_change": 0.0,
+        "unit": "kg/s"
+      },
+      "liquid_closure_applied": {
+        "mean_change": -246.81411636347636,
+        "unit": "kg/s"
+      },
+      "liquid_closure_percent_feed": {
+        "mean_change": -211.09435059294017,
+        "unit": "%"
+      },
+      "liquid_carryover_fraction": {
+        "mean_change": 0.015591150202888648,
+        "unit": "1"
+      },
+      "vapor_net_boundary_inflow": {
+        "mean_change": 1.594463798507537,
+        "unit": "kg/s"
+      },
+      "vapor_measured_feed": {
+        "mean_change": 0.0,
+        "unit": "kg/s"
+      },
+      "vapor_closure_applied": {
+        "mean_change": 1.594463798507537,
+        "unit": "kg/s"
+      },
+      "vapor_closure_percent_feed": {
+        "mean_change": 1.9760388250646557,
+        "unit": "%"
+      },
+      "steam_recovery_fraction": {
+        "mean_change": -0.019760388250646632,
+        "unit": "1"
+      },
+      "mixture_net_boundary_inflow": {
+        "mean_change": -0.23007435431775036,
+        "unit": "kg/s"
+      },
+      "mixture_measured_feed": {
+        "mean_change": 0.0,
+        "unit": "kg/s"
+      },
+      "mixture_closure_applied": {
+        "mean_change": -245.2212542206272,
+        "unit": "kg/s"
+      },
+      "mixture_closure_percent_feed": {
+        "mean_change": -124.09283234365817,
+        "unit": "%"
+      },
+      "outlet_vapor_mass_fraction": {
+        "mean_change": -0.014269513538597955,
+        "unit": "1"
+      }
+    }
+  },
+  "collector_flux_fixed_late_windows": {
+    "windows": {
+      "4001-4500": {
+        "complete": true,
+        "observed_samples": 500,
+        "metrics": {
+          "delivery_kg_s": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg/s",
+            "mean": 283.154196868391,
+            "minimum": 175.59076332864385,
+            "maximum": 399.417076599526,
+            "standard_deviation": 65.68330388703099,
+            "slope_per_iteration": -0.22664087603297184,
+            "slope_unit": "kg/s/iteration",
+            "mean_absolute": 283.154196868391
+          },
+          "escape_kg_s": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg/s",
+            "mean": 26.172571498313722,
+            "minimum": 16.83057453678605,
+            "maximum": 42.391149676688634,
+            "standard_deviation": 7.391992263872599,
+            "slope_per_iteration": -0.028668445480286683,
+            "slope_unit": "kg/s/iteration",
+            "mean_absolute": 26.172571498313722
+          },
+          "net_outward_kg_s": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg/s",
+            "mean": -256.9816253700772,
+            "minimum": -360.8357543374673,
+            "maximum": -158.51985630323242,
+            "standard_deviation": 59.10518363349231,
+            "slope_per_iteration": 0.197972430552685,
+            "slope_unit": "kg/s/iteration",
+            "mean_absolute": 256.9816253700772
+          }
+        }
+      },
+      "4501-5000": {
+        "complete": true,
+        "observed_samples": 500,
+        "metrics": {
+          "delivery_kg_s": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg/s",
+            "mean": 562.7004954068303,
+            "minimum": 276.8559168652074,
+            "maximum": 958.2839673345413,
+            "standard_deviation": 189.15544045548688,
+            "slope_per_iteration": 0.47542489514607683,
+            "slope_unit": "kg/s/iteration",
+            "mean_absolute": 562.7004954068303
+          },
+          "escape_kg_s": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg/s",
+            "mean": 61.7982211066918,
+            "minimum": 22.580864593390753,
+            "maximum": 137.28924521736835,
+            "standard_deviation": 29.816961288418895,
+            "slope_per_iteration": 0.10870947172356304,
+            "slope_unit": "kg/s/iteration",
+            "mean_absolute": 61.7982211066918
+          },
+          "net_outward_kg_s": {
+            "valid": true,
+            "samples": 500,
+            "unit": "kg/s",
+            "mean": -500.9022743001386,
+            "minimum": -821.181212643563,
+            "maximum": -252.59822882457587,
+            "standard_deviation": 161.13615488094237,
+            "slope_per_iteration": -0.366715423422514,
+            "slope_unit": "kg/s/iteration",
+            "mean_absolute": 500.9022743001386
+          }
+        }
+      }
+    },
+    "second_minus_first": {
+      "delivery_kg_s": {
+        "mean_change": 279.5462985384393,
+        "unit": "kg/s"
+      },
+      "escape_kg_s": {
+        "mean_change": 35.625649608378076,
+        "unit": "kg/s"
+      },
+      "net_outward_kg_s": {
+        "mean_change": -243.92064893006136,
+        "unit": "kg/s"
+      }
+    }
+  },
+  "residual_fixed_late_windows": {
+    "windows": {
+      "4001-4500": {
+        "complete": true,
+        "observed_samples": 500,
+        "metrics": {
+          "continuity": {
+            "valid": true,
+            "samples": 500,
+            "unit": "1",
+            "mean": 0.40757564,
+            "minimum": 0.33624,
+            "maximum": 0.5345,
+            "standard_deviation": 0.0567507138051179,
+            "slope_per_iteration": -0.00032185765447061767,
+            "slope_unit": "1/iteration",
+            "mean_absolute": 0.40757564
+          },
+          "x-velocity": {
+            "valid": true,
+            "samples": 500,
+            "unit": "1",
+            "mean": 7.8636858e-05,
+            "minimum": 5.0775e-05,
+            "maximum": 0.00013324,
+            "standard_deviation": 2.3258140781193926e-05,
+            "slope_per_iteration": -1.1432603684014751e-07,
+            "slope_unit": "1/iteration",
+            "mean_absolute": 7.8636858e-05
+          },
+          "y-velocity": {
+            "valid": true,
+            "samples": 500,
+            "unit": "1",
+            "mean": 6.947181599999999e-05,
+            "minimum": 4.4673e-05,
+            "maximum": 9.9707e-05,
+            "standard_deviation": 1.6182276421633144e-05,
+            "slope_per_iteration": -8.10369164676659e-08,
+            "slope_unit": "1/iteration",
+            "mean_absolute": 6.947181599999999e-05
+          },
+          "z-velocity": {
+            "valid": true,
+            "samples": 500,
+            "unit": "1",
+            "mean": 7.841452000000001e-05,
+            "minimum": 4.8399e-05,
+            "maximum": 0.00013686,
+            "standard_deviation": 2.4371528018932256e-05,
+            "slope_per_iteration": -1.1881131873327507e-07,
+            "slope_unit": "1/iteration",
+            "mean_absolute": 7.841452000000001e-05
+          },
+          "k": {
+            "valid": true,
+            "samples": 500,
+            "unit": "1",
+            "mean": 0.0045495546,
+            "minimum": 0.0032421,
+            "maximum": 0.0063875,
+            "standard_deviation": 0.0009308465896370034,
+            "slope_per_iteration": -5.010856515426069e-06,
+            "slope_unit": "1/iteration",
+            "mean_absolute": 0.0045495546
+          },
+          "epsilon": {
+            "valid": true,
+            "samples": 500,
+            "unit": "1",
+            "mean": 0.01369849,
+            "minimum": 0.0084307,
+            "maximum": 0.04699,
+            "standard_deviation": 0.004198511912049316,
+            "slope_per_iteration": -7.89644834099338e-06,
+            "slope_unit": "1/iteration",
+            "mean_absolute": 0.01369849
+          },
+          "vf-phase-2": {
+            "valid": true,
+            "samples": 500,
+            "unit": "1",
+            "mean": 0.008405382599999999,
+            "minimum": 0.0064065,
+            "maximum": 0.012919,
+            "standard_deviation": 0.0017282788774839665,
+            "slope_per_iteration": -1.0219284331537308e-05,
+            "slope_unit": "1/iteration",
+            "mean_absolute": 0.008405382599999999
+          }
+        }
+      },
+      "4501-5000": {
+        "complete": true,
+        "observed_samples": 500,
+        "metrics": {
+          "continuity": {
+            "valid": true,
+            "samples": 500,
+            "unit": "1",
+            "mean": 0.55415938,
+            "minimum": 0.37599,
+            "maximum": 0.7624,
+            "standard_deviation": 0.10145475211844736,
+            "slope_per_iteration": 0.0005047843648974596,
+            "slope_unit": "1/iteration",
+            "mean_absolute": 0.55415938
+          },
+          "x-velocity": {
+            "valid": true,
+            "samples": 500,
+            "unit": "1",
+            "mean": 0.00011775175599999999,
+            "minimum": 7.2718e-05,
+            "maximum": 0.00020169,
+            "standard_deviation": 2.9584972850291143e-05,
+            "slope_per_iteration": -1.5796631826527531e-09,
+            "slope_unit": "1/iteration",
+            "mean_absolute": 0.00011775175599999999
+          },
+          "y-velocity": {
+            "valid": true,
+            "samples": 500,
+            "unit": "1",
+            "mean": 9.949201200000001e-05,
+            "minimum": 6.2422e-05,
+            "maximum": 0.00014491,
+            "standard_deviation": 1.9142117225528005e-05,
+            "slope_per_iteration": 4.822720218880958e-09,
+            "slope_unit": "1/iteration",
+            "mean_absolute": 9.949201200000001e-05
+          },
+          "z-velocity": {
+            "valid": true,
+            "samples": 500,
+            "unit": "1",
+            "mean": 0.00011927427,
+            "minimum": 7.4107e-05,
+            "maximum": 0.00017583,
+            "standard_deviation": 2.7949089171940827e-05,
+            "slope_per_iteration": 1.0858403273613169e-09,
+            "slope_unit": "1/iteration",
+            "mean_absolute": 0.00011927427
+          },
+          "k": {
+            "valid": true,
+            "samples": 500,
+            "unit": "1",
+            "mean": 0.0072621624,
+            "minimum": 0.0035445,
+            "maximum": 0.033402,
+            "standard_deviation": 0.0023816986875644535,
+            "slope_per_iteration": 4.072656181824724e-06,
+            "slope_unit": "1/iteration",
+            "mean_absolute": 0.0072621624
+          },
+          "epsilon": {
+            "valid": true,
+            "samples": 500,
+            "unit": "1",
+            "mean": 0.0353492274,
+            "minimum": 0.0099667,
+            "maximum": 4.6067,
+            "standard_deviation": 0.2087184467419659,
+            "slope_per_iteration": 3.7876915877263496e-05,
+            "slope_unit": "1/iteration",
+            "mean_absolute": 0.0353492274
+          },
+          "vf-phase-2": {
+            "valid": true,
+            "samples": 500,
+            "unit": "1",
+            "mean": 0.010192462000000001,
+            "minimum": 0.0070105,
+            "maximum": 0.013636,
+            "standard_deviation": 0.0016444107469595303,
+            "slope_per_iteration": -2.53038762555058e-07,
+            "slope_unit": "1/iteration",
+            "mean_absolute": 0.010192462000000001
+          }
+        }
+      }
+    },
+    "second_minus_first": {
+      "continuity": {
+        "mean_change": 0.14658373999999996,
+        "unit": "1"
+      },
+      "x-velocity": {
+        "mean_change": 3.9114897999999995e-05,
+        "unit": "1"
+      },
+      "y-velocity": {
+        "mean_change": 3.0020196000000017e-05,
+        "unit": "1"
+      },
+      "z-velocity": {
+        "mean_change": 4.0859749999999994e-05,
+        "unit": "1"
+      },
+      "k": {
+        "mean_change": 0.0027126078,
+        "unit": "1"
+      },
+      "epsilon": {
+        "mean_change": 0.0216507374,
+        "unit": "1"
+      },
+      "vf-phase-2": {
+        "mean_change": 0.0017870794000000023,
+        "unit": "1"
+      }
+    }
+  },
+  "declared_screening_indicators": {
+    "status": "EVALUATED_DISCOVERY_ONLY",
+    "closure": {
+      "liquid": {
+        "mean_absolute_percent_feed": 343.60928831834957,
+        "passes_1_percent": false
+      },
+      "vapor": {
+        "mean_absolute_percent_feed": 3.2445759951112887,
+        "passes_1_percent": false
+      },
+      "mixture": {
+        "mean_absolute_percent_feed": 201.98106469657898,
+        "passes_1_percent": false
+      }
+    },
+    "inventory": {
+      "window_mean_change_percent_of_larger_mean": 10.018819208580213,
+      "passes_1_percent": false
+    },
+    "residual_equations_complete": true,
+    "residuals": {
+      "continuity": {
+        "maximum": 0.7624,
+        "passes_1e_3_throughout_window": false
+      },
+      "x-velocity": {
+        "maximum": 0.00020169,
+        "passes_1e_3_throughout_window": true
+      },
+      "y-velocity": {
+        "maximum": 0.00014491,
+        "passes_1e_3_throughout_window": true
+      },
+      "z-velocity": {
+        "maximum": 0.00017583,
+        "passes_1e_3_throughout_window": true
+      },
+      "k": {
+        "maximum": 0.033402,
+        "passes_1e_3_throughout_window": false
+      },
+      "epsilon": {
+        "maximum": 4.6067,
+        "passes_1e_3_throughout_window": false
+      },
+      "vf-phase-2": {
+        "maximum": 0.013636,
+        "passes_1e_3_throughout_window": false
+      }
+    }
+  },
+  "spatial_evidence": {
+    "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s080-20260921T130348Z/analysis/section-summary.json",
+    "sha256": "996093d9e08c2f732fba3e9cb42bf2ba70ed1691da5d6e61cda8118aeb7cf605"
+  },
+  "definitions": {
+    "applied_closure": "B + signed native applied mass source for liquid/mixture; B for vapor. Source counted once.",
+    "B": "Sum of signed phase/mixture flux at both inlets, steam outlet and brine wall; positive into vessel.",
+    "current_expression_removal": "-integral S(alpha_N) dV; distinct from native source used during the iteration.",
+    "ratios": "Signed net outlet export divided by measured phase feed; not clipped to [0,1].",
+    "steady_trends": "Slopes are per iteration, never physical kg/s storage or a second source."
+  },
+  "limitations": [
+    "Horizon completion does not establish convergence or physical steady state.",
+    "F3 renders saved native facet data without interpolation; common scales must be maintained across the five cases.",
+    "Conflicting duplicate samples retain the first observed row and invalidate completeness.",
+    "No numerical qualification claim is made by this script."
+  ],
+  "figures": [
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s080-20260921T130348Z/analysis/F1-inventory-removal.png",
+      "source": "p7b-s080-20260921T130348Z"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s080-20260921T130348Z/analysis/F2-closure-routing.png",
+      "source": "p7b-s080-20260921T130348Z"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s080-20260921T130348Z/analysis/residuals.png",
+      "source": "p7b-s080-20260921T130348Z"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s080-20260921T130348Z/analysis/F3-initial-above-cap-fields.png",
+      "source": "p7b-s080-20260921T130348Z"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s080-20260921T130348Z/analysis/F3-initial-velocity-components.png",
+      "source": "p7b-s080-20260921T130348Z"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s080-20260921T130348Z/analysis/F3-final-above-cap-fields.png",
+      "source": "p7b-s080-20260921T130348Z"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s080-20260921T130348Z/analysis/F3-final-velocity-components.png",
+      "source": "p7b-s080-20260921T130348Z"
+    }
+  ]
+}

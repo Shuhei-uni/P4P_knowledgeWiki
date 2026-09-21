@@ -1,0 +1,72 @@
+{
+  "S20-z0": {
+    "file": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/phase07b-meeting-20260922/S20/p7b-meeting-z0.npz",
+    "sha256": "127e13a384fa8e7bddd969cced17a68de2c3b071ac659f353ad4eea57faa0add",
+    "facets": 11172,
+    "minimum": 0.0,
+    "maximum": 0.9770284295082092
+  },
+  "S40-z0": {
+    "file": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/phase07b-meeting-20260922/S40/p7b-meeting-z0.npz",
+    "sha256": "cf06b206695f885be6dc9da1f43addb4524c38f3f8487672b082a5454e6ec348",
+    "facets": 11172,
+    "minimum": 0.0,
+    "maximum": 0.9760215878486633
+  },
+  "S60-z0": {
+    "file": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/phase07b-meeting-20260922/S60/p7b-meeting-z0.npz",
+    "sha256": "5f3459eaf35219b3811edcc3195994fc6bccaf3a22ed4811e9df5868da411cfd",
+    "facets": 11172,
+    "minimum": 0.0,
+    "maximum": 0.9823715090751648
+  },
+  "S80-z0": {
+    "file": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/phase07b-meeting-20260922/S80/p7b-meeting-z0.npz",
+    "sha256": "6eb79c613db16f8e9b9aae69ab734ef2cb41f940932e01fdb6b9938d67f521d9",
+    "facets": 11172,
+    "minimum": 0.0,
+    "maximum": 0.969191312789917
+  },
+  "S100-z0": {
+    "file": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/phase07b-meeting-20260922/S100/p7b-meeting-z0.npz",
+    "sha256": "7ae44e02bdcfb573f8dfc760d4eec3141743dc43965ed049a1ff6e9e0b68a114",
+    "facets": 11172,
+    "minimum": 0.0,
+    "maximum": 0.9737229347229004
+  },
+  "S20-x0": {
+    "file": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/phase07b-meeting-20260922/S20/p7b-meeting-x0.npz",
+    "sha256": "6f92f9f4d40f72fa489c1b1cd49530d2c6725ef8e986fcfdf77c8c77164bf4a8",
+    "facets": 11395,
+    "minimum": 0.0,
+    "maximum": 0.9790629744529724
+  },
+  "S40-x0": {
+    "file": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/phase07b-meeting-20260922/S40/p7b-meeting-x0.npz",
+    "sha256": "7a57467ca1dd62955328a7014c53d160c00175ca4924d769c68c7a759444dac2",
+    "facets": 11395,
+    "minimum": 0.0,
+    "maximum": 0.9785840511322021
+  },
+  "S60-x0": {
+    "file": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/phase07b-meeting-20260922/S60/p7b-meeting-x0.npz",
+    "sha256": "f8417836a74715a2347a0574165be455f0ee03c82f315ac12ac99cc79cf6d67c",
+    "facets": 11395,
+    "minimum": 0.0,
+    "maximum": 0.9617613554000854
+  },
+  "S80-x0": {
+    "file": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/phase07b-meeting-20260922/S80/p7b-meeting-x0.npz",
+    "sha256": "1638b69885e25b4d198a27da30d5dcc31b66683e79302b61cc0e14f16a784acf",
+    "facets": 11395,
+    "minimum": 0.0,
+    "maximum": 0.9711833000183105
+  },
+  "S100-x0": {
+    "file": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/phase07b-meeting-20260922/S100/p7b-meeting-x0.npz",
+    "sha256": "10a110739979d5f7d006bc9731a5936d0ee26656fc75fe157ae146c8201bd272",
+    "facets": 11395,
+    "minimum": 0.0,
+    "maximum": 0.9731913805007935
+  }
+}

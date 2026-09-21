@@ -1,0 +1,9 @@
+{
+  "stage": "checkpoint-04000",
+  "iteration": 4000,
+  "case": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s100-20260921T160825Z-n04000.cas.h5",
+  "data": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s100-20260921T160825Z-n04000.dat.h5",
+  "purpose": "Recovery-checkpoint spatial evidence; failed case, no N5000 endpoint",
+  "iterations_issued": 0,
+  "status": "RECOVERY_CHECKPOINT_FIELDS_VERIFIED_NO_SOLVE"
+}

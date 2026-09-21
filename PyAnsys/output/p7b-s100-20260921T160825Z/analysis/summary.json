@@ -1,0 +1,588 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-09-21T19:11:09.538090+00:00",
+  "run_directory": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z",
+  "run_id": "p7b-s100-20260921T160825Z",
+  "manifest_source": {
+    "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/manifest.json",
+    "sha256": "43b4f50445d702f7078c568fa1ea920fa3c7e34515445b213fa058d7cd5b0789"
+  },
+  "manifest_status": "BLOCKED_EXECUTION",
+  "scientific_screen": true,
+  "planned_scientific_horizon": 5000,
+  "requested_iterations": 5000,
+  "claimed_completed_or_actual_iteration": 4183,
+  "observed_report_last_iteration": 4182,
+  "terminal_disposition": {
+    "source": {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/terminal-disposition.json",
+      "sha256": "e3b32041b5e71c8d64e5a043265487bf1ef9308ba80a6cae8bb5f6e3754cb3e7"
+    },
+    "disposition": "NUMERICAL_FAILURE",
+    "last_completed_iteration": 4182,
+    "failed_iteration": 4183,
+    "failure": "Epsilon AMG divergence followed by host/node floating point exception",
+    "transcript": "solve.trn",
+    "reconciliation": "failure-recovery/reconciliation.json",
+    "checkpoint_iteration": 4000,
+    "checkpoint_case": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s100-20260921T160825Z-n04000.cas.h5",
+    "qualification": false,
+    "claim_limit": "Single failed attempt; reproducibility and isolated root cause not established. Finite runaway rows are retained as numerical evidence, not physical results."
+  },
+  "completed_evidence_end": 4182,
+  "recovery_checkpoint_metrics": {
+    "iteration": 4000,
+    "metrics": {
+      "whole_water_volume": {
+        "value": 0.6288361318442768,
+        "unit": "m^3"
+      },
+      "collector_water_volume": {
+        "value": 0.0007841563230879022,
+        "unit": "m^3"
+      },
+      "above_water_volume": {
+        "value": 0.6280519755211889,
+        "unit": "m^3"
+      },
+      "whole_water_mass": {
+        "value": 554.4888359763279,
+        "unit": "kg"
+      },
+      "collector_water_mass": {
+        "value": 0.6914455210092195,
+        "unit": "kg"
+      },
+      "above_water_mass": {
+        "value": 553.7973904553187,
+        "unit": "kg"
+      },
+      "current_expression_removal": {
+        "value": 286.9557567379724,
+        "unit": "kg/s"
+      },
+      "liquid_inlet_pressure": {
+        "value": 1149175.564316303,
+        "unit": "Pa"
+      },
+      "steam_inlet_pressure": {
+        "value": 1149385.732741775,
+        "unit": "Pa"
+      },
+      "outlet_pressure": {
+        "value": 1119630.866042618,
+        "unit": "Pa"
+      },
+      "liquid_inlet_pressure_drop": {
+        "value": 29544.69827368436,
+        "unit": "Pa"
+      },
+      "steam_inlet_pressure_drop": {
+        "value": 29754.86669915635,
+        "unit": "Pa"
+      },
+      "minimum_fluid_pressure": {
+        "value": 1118078.553523394,
+        "unit": "Pa"
+      },
+      "maximum_fluid_pressure": {
+        "value": 1159335.823899984,
+        "unit": "Pa"
+      },
+      "maximum_mixture_speed": {
+        "value": 81.80185534643388,
+        "unit": "m/s"
+      },
+      "native_applied_removal": {
+        "value": 286.3164899486096,
+        "unit": "kg/s"
+      },
+      "liquid_net_boundary_inflow": {
+        "value": 108.86525340976372,
+        "unit": "kg/s"
+      },
+      "liquid_measured_feed": {
+        "value": 116.9212324584734,
+        "unit": "kg/s"
+      },
+      "liquid_closure_applied": {
+        "value": -177.45123653884588,
+        "unit": "kg/s"
+      },
+      "liquid_closure_percent_feed": {
+        "value": -151.76989910867624,
+        "unit": "%"
+      },
+      "liquid_carryover_fraction": {
+        "value": 0.06890090772495829,
+        "unit": "1"
+      },
+      "vapor_net_boundary_inflow": {
+        "value": 1.1324576655400875,
+        "unit": "kg/s"
+      },
+      "vapor_measured_feed": {
+        "value": 80.68990235833888,
+        "unit": "kg/s"
+      },
+      "vapor_closure_applied": {
+        "value": 1.1324576655400875,
+        "unit": "kg/s"
+      },
+      "vapor_closure_percent_feed": {
+        "value": 1.4034688758339462,
+        "unit": "%"
+      },
+      "steam_recovery_fraction": {
+        "value": 0.9859653112416605,
+        "unit": "1"
+      },
+      "mixture_net_boundary_inflow": {
+        "value": 110.00188345735378,
+        "unit": "kg/s"
+      },
+      "mixture_measured_feed": {
+        "value": 197.6111348168123,
+        "unit": "kg/s"
+      },
+      "mixture_closure_applied": {
+        "value": -176.31460649125583,
+        "unit": "kg/s"
+      },
+      "mixture_closure_percent_feed": {
+        "value": -89.22301197991774,
+        "unit": "%"
+      },
+      "outlet_vapor_mass_fraction": {
+        "value": 0.9080508590501183,
+        "unit": "1"
+      }
+    }
+  },
+  "horizon_observed": false,
+  "analysis_status": "NUMERICAL_FAILURE_COMPLETED_PREFIX_VERIFIED",
+  "history": {
+    "rows": 4182,
+    "unique_rows": 4182,
+    "duplicate_indices": [],
+    "conflicting_indices": [],
+    "nonfinite_columns": [],
+    "first_iteration": 1,
+    "last_iteration": 4182,
+    "source": {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/history-04182.out",
+      "sha256": "9be16c16b0e82835ad490f19a8d281b3f44818920c3665a4593f5d572a3ed6b7"
+    },
+    "native_header": [
+      "Iteration",
+      "p7bwatervolume",
+      "p7bwatermass",
+      "p7bcollectorvolume",
+      "p7bcollectormass",
+      "p7babovevolume",
+      "p7bremoval",
+      "p7bliquidliquidinlet",
+      "p7bliquidsteaminlet",
+      "p7bliquidoutlet",
+      "p7bliquidbrinewall",
+      "p7bliquidboundary",
+      "p7bliquidclosure",
+      "p7bvaporliquidinlet",
+      "p7bvaporsteaminlet",
+      "p7bvaporoutlet",
+      "p7bvaporbrinewall",
+      "p7bvaporboundary",
+      "p7bvaporclosure",
+      "p7bmixtureliquidinlet",
+      "p7bmixturesteaminlet",
+      "p7bmixtureoutlet",
+      "p7bmixturebrinewall",
+      "p7bmixtureboundary",
+      "p7bmixtureclosure",
+      "p7bpressureliquid",
+      "p7bpressuresteam",
+      "p7bpressureoutlet",
+      "p7bdropliquid",
+      "p7bdropsteam",
+      "p7bminimumpressure",
+      "p7bmaximumpressure",
+      "p7bmaximumspeed",
+      "p7b-applied-source",
+      "p7b-native-water"
+    ],
+    "rejected_lines": [],
+    "expected_start": 1,
+    "expected_end": 4182,
+    "missing_indices": [],
+    "complete_to_expected_end": true
+  },
+  "other_history_candidates": [
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/history-01500.out",
+      "sha256": "01df94d13354ade95324140b32edf4c3dd059b75ae04361bbf114d6adc89cd50"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/history-03500.out",
+      "sha256": "4d8b58bdfbf4c831cafd4ab7f79c6c7923f77ba36880b931c50c33893ae1de80"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/history-03000.out",
+      "sha256": "f651940265a57c66c00c7f1c9a3db85d0ab3a7835ef9a1706dd0683d3018ae4e"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/history-00050.out",
+      "sha256": "c224f3fe9013120fb12cbeab5ececc589cd046679e11969da12dcfa6c94d7e6d"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/history-01000.out",
+      "sha256": "f729a47c1f618d8be0af308acfa4d31657446563cfd9bba997378aa744354cbc"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/history-00500.out",
+      "sha256": "67b94b857c2e829e1087ab80a3fa80935333c4405b3ee611a780b7f1c2013ac8"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/history-04000.out",
+      "sha256": "e3a7cba4bb5b77113bedb55369cf711734a71760983f4a101f44a9e7a087f1c6"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/history-02500.out",
+      "sha256": "1293fe97396efebf9f5c09298afae51d9c2dab49f07b8f160844992065c0389a"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/history-02000.out",
+      "sha256": "59be1ee973d313cdc9173ed28882088e9a1965f3c9e94447816f25c77c70a315"
+    }
+  ],
+  "rejected_history_files": [],
+  "collector_flux": {
+    "rows": 4182,
+    "unique_rows": 4182,
+    "duplicate_indices": [],
+    "conflicting_indices": [],
+    "nonfinite_columns": [],
+    "first_iteration": 1,
+    "last_iteration": 4182,
+    "source": {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/collector-flux.jsonl",
+      "sha256": "8bad4787c4ed7e35258e30d4a568b89e60fc3d17ccb81b74afddb677035751eb"
+    },
+    "rejected_lines": [],
+    "remote_persistence": "Local rows alone do not prove remote writes; inspect run flux_monitor manifest.",
+    "expected_start": 1,
+    "expected_end": 4182,
+    "missing_indices": [],
+    "complete_to_expected_end": true
+  },
+  "run_flux_monitor": {
+    "schema_version": 1,
+    "capture_id": "550a37ae491e440d811cf8515f74f1b9",
+    "registered": false,
+    "start_iteration": 0,
+    "prefix_source": null,
+    "inherited_rows": 0,
+    "last_completed_iteration": 4182,
+    "last_event_iteration": 4182,
+    "skipped_duplicate_count": 9,
+    "skipped_duplicate_indices": [
+      50,
+      500,
+      1000,
+      1500,
+      2000,
+      2500,
+      3000,
+      3500,
+      4000
+    ],
+    "local_rows": 4182,
+    "remote_write_completed_rows": 4182,
+    "remote_readback_verified": false,
+    "local_jsonl": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/collector-flux.jsonl",
+    "remote_path_pattern": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-flux-550a37ae491e440d811cf8515f74f1b9-i{iteration:07d}.json",
+    "face_zones": [
+      {
+        "name": "interior--simple-spiral-separator--brine-outlet-:001",
+        "outward_sign": 1,
+        "expected_owned_count": 2887
+      },
+      {
+        "name": "interior--simple-spiral-separator--brine-outlet-:004",
+        "outward_sign": 1,
+        "expected_owned_count": 3399
+      }
+    ],
+    "error": null
+  },
+  "residuals": {
+    "rows": 4191,
+    "unique_rows": 4182,
+    "duplicate_indices": [
+      50,
+      500,
+      1000,
+      1500,
+      2000,
+      2500,
+      3000,
+      3500,
+      4000
+    ],
+    "conflicting_indices": [],
+    "nonfinite_columns": [],
+    "first_iteration": 1,
+    "last_iteration": 4182,
+    "source": {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/solve.trn",
+      "sha256": "b3ca068beb6329b77c27fdf755d5c2f2c686e60640d3fb168953c2b45b8ff286"
+    },
+    "rejected_lines": [],
+    "nonpositive_columns": [],
+    "expected_start": 1,
+    "expected_end": 4182,
+    "missing_indices": [],
+    "complete_to_expected_end": true
+  },
+  "applied_source_lag_audit": {
+    "comparison": "native applied removal at N minus recomputed removal at N-1",
+    "consecutive_pairs": 4181,
+    "unit": "kg/s",
+    "maximum_absolute_error": 0.0
+  },
+  "latest_residuals": {
+    "continuity": 9.9752e+32,
+    "x-velocity": 1448300000000.0,
+    "y-velocity": 0.28315,
+    "z-velocity": 0.0046485,
+    "k": 9.8453e+20,
+    "epsilon": 4.9975e+41,
+    "vf-phase-2": 0.15103
+  },
+  "missing_required_derived_metrics": [],
+  "latest_metrics": {
+    "whole_water_volume": {
+      "value": 0.7802542066668409,
+      "unit": "m^3"
+    },
+    "collector_water_volume": {
+      "value": 0.001726355778746871,
+      "unit": "m^3"
+    },
+    "above_water_volume": {
+      "value": 0.778527850888094,
+      "unit": "m^3"
+    },
+    "whole_water_mass": {
+      "value": 688.0047518126203,
+      "unit": "kg"
+    },
+    "collector_water_mass": {
+      "value": 1.522248735025628,
+      "unit": "kg"
+    },
+    "above_water_mass": {
+      "value": 686.4825030775946,
+      "unit": "kg"
+    },
+    "current_expression_removal": {
+      "value": 631.7461382425682,
+      "unit": "kg/s"
+    },
+    "liquid_inlet_pressure": {
+      "value": 7.113182817862419e+46,
+      "unit": "Pa"
+    },
+    "steam_inlet_pressure": {
+      "value": 7.361217740489055e+46,
+      "unit": "Pa"
+    },
+    "outlet_pressure": {
+      "value": -1.961314430265212e+60,
+      "unit": "Pa"
+    },
+    "liquid_inlet_pressure_drop": {
+      "value": 1.961314430265283e+60,
+      "unit": "Pa"
+    },
+    "steam_inlet_pressure_drop": {
+      "value": 1.961314430265285e+60,
+      "unit": "Pa"
+    },
+    "minimum_fluid_pressure": {
+      "value": -2.440052639909441e+52,
+      "unit": "Pa"
+    },
+    "maximum_fluid_pressure": {
+      "value": 1.441086264348256e+52,
+      "unit": "Pa"
+    },
+    "maximum_mixture_speed": {
+      "value": 3.715131012974672e+36,
+      "unit": "m/s"
+    },
+    "native_applied_removal": {
+      "value": 655.90340673597,
+      "unit": "kg/s"
+    },
+    "liquid_net_boundary_inflow": {
+      "value": 116.9212324584734,
+      "unit": "kg/s"
+    },
+    "liquid_measured_feed": {
+      "value": 116.9212324584734,
+      "unit": "kg/s"
+    },
+    "liquid_closure_applied": {
+      "value": -538.9821742774966,
+      "unit": "kg/s"
+    },
+    "liquid_closure_percent_feed": {
+      "value": -460.978868375276,
+      "unit": "%"
+    },
+    "liquid_carryover_fraction": {
+      "value": -0.0,
+      "unit": "1"
+    },
+    "vapor_net_boundary_inflow": {
+      "value": 3.822037296025441e+30,
+      "unit": "kg/s"
+    },
+    "vapor_measured_feed": {
+      "value": 80.68990235833888,
+      "unit": "kg/s"
+    },
+    "vapor_closure_applied": {
+      "value": 3.822037296025441e+30,
+      "unit": "kg/s"
+    },
+    "vapor_closure_percent_feed": {
+      "value": 4.736698377762324e+30,
+      "unit": "%"
+    },
+    "steam_recovery_fraction": {
+      "value": -4.736698377762324e+28,
+      "unit": "1"
+    },
+    "mixture_net_boundary_inflow": {
+      "value": 3.822037296025441e+30,
+      "unit": "kg/s"
+    },
+    "mixture_measured_feed": {
+      "value": 197.6111348168123,
+      "unit": "kg/s"
+    },
+    "mixture_closure_applied": {
+      "value": 3.822037296025441e+30,
+      "unit": "kg/s"
+    },
+    "mixture_closure_percent_feed": {
+      "value": 1.9341204125812606e+30,
+      "unit": "%"
+    },
+    "outlet_vapor_mass_fraction": {
+      "value": null,
+      "unit": "1"
+    }
+  },
+  "fixed_late_windows": {
+    "windows": {
+      "4001-4500": {
+        "complete": false,
+        "observed_samples": 182,
+        "metrics": {}
+      },
+      "4501-5000": {
+        "complete": false,
+        "observed_samples": 0,
+        "metrics": {}
+      }
+    },
+    "second_minus_first": {}
+  },
+  "collector_flux_fixed_late_windows": {
+    "windows": {
+      "4001-4500": {
+        "complete": false,
+        "observed_samples": 182,
+        "metrics": {}
+      },
+      "4501-5000": {
+        "complete": false,
+        "observed_samples": 0,
+        "metrics": {}
+      }
+    },
+    "second_minus_first": {}
+  },
+  "residual_fixed_late_windows": {
+    "windows": {
+      "4001-4500": {
+        "complete": false,
+        "observed_samples": 182,
+        "metrics": {}
+      },
+      "4501-5000": {
+        "complete": false,
+        "observed_samples": 0,
+        "metrics": {}
+      }
+    },
+    "second_minus_first": {}
+  },
+  "declared_screening_indicators": {
+    "status": "INCOMPLETE_WINDOWS"
+  },
+  "spatial_evidence": {
+    "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/analysis/section-summary.json",
+    "sha256": "dc4ebe12bf3ea0a49c3c3a116871977e95acf2826c149682353c9b64e2fc675c"
+  },
+  "definitions": {
+    "applied_closure": "B + signed native applied mass source for liquid/mixture; B for vapor. Source counted once.",
+    "B": "Sum of signed phase/mixture flux at both inlets, steam outlet and brine wall; positive into vessel.",
+    "current_expression_removal": "-integral S(alpha_N) dV; distinct from native source used during the iteration.",
+    "ratios": "Signed net outlet export divided by measured phase feed; not clipped to [0,1].",
+    "steady_trends": "Slopes are per iteration, never physical kg/s storage or a second source."
+  },
+  "limitations": [
+    "Horizon completion does not establish convergence or physical steady state.",
+    "Attempted failure iteration has no completed report row; it is not a missing completed sample. Finite runaway values are retained but are not physical results.",
+    "F3 renders saved native facet data without interpolation; common scales must be maintained across the five cases.",
+    "Conflicting duplicate samples retain the first observed row and invalidate completeness.",
+    "No numerical qualification claim is made by this script."
+  ],
+  "figures": [
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/analysis/F1-inventory-removal.png",
+      "source": "p7b-s100-20260921T160825Z"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/analysis/F2-closure-routing.png",
+      "source": "p7b-s100-20260921T160825Z"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/analysis/residuals.png",
+      "source": "p7b-s100-20260921T160825Z"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/analysis/recovery-prefix-N04000.png",
+      "source": "p7b-s100-20260921T160825Z"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/analysis/F3-initial-above-cap-fields.png",
+      "source": "p7b-s100-20260921T160825Z"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/analysis/F3-initial-velocity-components.png",
+      "source": "p7b-s100-20260921T160825Z"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/analysis/F3-checkpoint-04000-above-cap-fields.png",
+      "source": "p7b-s100-20260921T160825Z"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s100-20260921T160825Z/analysis/F3-checkpoint-04000-velocity-components.png",
+      "source": "p7b-s100-20260921T160825Z"
+    }
+  ]
+}

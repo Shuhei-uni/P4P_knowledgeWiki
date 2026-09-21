@@ -1,0 +1,38 @@
+{
+  "phase-2-vof": [
+    0.0,
+    1.0
+  ],
+  "velocity-magnitude": [
+    0,
+    80
+  ],
+  "phase-2-velocity-magnitude": [
+    0,
+    80
+  ],
+  "x-velocity": [
+    -80,
+    80
+  ],
+  "y-velocity": [
+    -80,
+    80
+  ],
+  "z-velocity": [
+    -80,
+    80
+  ],
+  "phase-2-x-velocity": [
+    -80,
+    80
+  ],
+  "phase-2-y-velocity": [
+    -80,
+    80
+  ],
+  "phase-2-z-velocity": [
+    -80,
+    80
+  ]
+}

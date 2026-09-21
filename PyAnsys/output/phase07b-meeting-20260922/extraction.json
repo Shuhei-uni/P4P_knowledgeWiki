@@ -1,0 +1,99 @@
+{
+  "started_utc": "2026-09-21T21:28:29.162285+00:00",
+  "iterations_issued": 0,
+  "cases": {
+    "S100": {
+      "run": "p7b-s100-20260921T160825Z",
+      "case": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s100-20260921T160825Z-n04000.cas.h5",
+      "data": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s100-20260921T160825Z-n04000.dat.h5",
+      "iteration": 4000,
+      "role": "recovery checkpoint",
+      "water_volume_readback": 0.6288361318442768
+    },
+    "S20": {
+      "run": "p7b-s020-20260920T221831Z",
+      "case": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s020-20260920T221831Z-final.cas.h5",
+      "data": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s020-20260920T221831Z-final.dat.h5",
+      "iteration": 5000,
+      "role": "completed horizon",
+      "water_volume_readback": 0.9358703493835151
+    },
+    "S40": {
+      "run": "p7b-s040-20260921T013001Z",
+      "case": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s040-20260921T013001Z-final.cas.h5",
+      "data": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s040-20260921T013001Z-final.dat.h5",
+      "iteration": 5000,
+      "role": "completed horizon",
+      "water_volume_readback": 0.8021703504197755
+    },
+    "S60": {
+      "run": "p7b-s060-resume-20260921T113238Z",
+      "case": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s060-resume-20260921T113238Z-final.cas.h5",
+      "data": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s060-resume-20260921T113238Z-final.dat.h5",
+      "iteration": 5000,
+      "role": "completed horizon",
+      "water_volume_readback": 0.7257131666814095
+    },
+    "S80": {
+      "run": "p7b-s080-20260921T130348Z",
+      "case": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s080-20260921T130348Z-final.cas.h5",
+      "data": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s080-20260921T130348Z-final.dat.h5",
+      "iteration": 5000,
+      "role": "completed horizon",
+      "water_volume_readback": 0.6955426998460403
+    }
+  },
+  "steps": [
+    {
+      "name": "connect",
+      "status": "PASS"
+    },
+    {
+      "name": "native_boundary_geometry",
+      "status": "PASS"
+    },
+    {
+      "name": "export_axial_S100",
+      "status": "PASS"
+    },
+    {
+      "name": "load_S20",
+      "status": "PASS"
+    },
+    {
+      "name": "export_axial_S20",
+      "status": "PASS"
+    },
+    {
+      "name": "load_S40",
+      "status": "PASS"
+    },
+    {
+      "name": "export_axial_S40",
+      "status": "PASS"
+    },
+    {
+      "name": "load_S60",
+      "status": "PASS"
+    },
+    {
+      "name": "export_axial_S60",
+      "status": "PASS"
+    },
+    {
+      "name": "load_S80",
+      "status": "PASS"
+    },
+    {
+      "name": "export_axial_S80",
+      "status": "PASS"
+    },
+    {
+      "name": "restore_preserved_S100_N4000",
+      "status": "PASS"
+    }
+  ],
+  "restore_case": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s100-20260921T160825Z-n04000.cas.h5",
+  "restored_iteration": 4000,
+  "status": "COMPLETE_NO_SOLVE_OR_CHECKPOINT_OVERWRITE"
+}

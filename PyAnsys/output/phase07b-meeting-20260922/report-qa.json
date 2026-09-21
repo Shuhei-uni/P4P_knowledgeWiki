@@ -1,0 +1,18 @@
+{
+  "verified_utc": "2026-09-21T21:36:01.937126+00:00",
+  "pdf_pages": 13,
+  "all_pages_rendered": true,
+  "whole_page_visual_review": "PASS",
+  "figure_sources_hash_verified": true,
+  "all_case_axial_exports": [
+    "S100",
+    "S20",
+    "S40",
+    "S60",
+    "S80"
+  ],
+  "restored_fluent_iteration": 4000,
+  "additional_iterations": 0,
+  "pdf_sha256": "a18588b10368a0b17ff3f802e15f4fccd6c2c5cb18e43ee967c3ecc2e621ac30",
+  "claim_limits_preserved": true
+}

@@ -1,0 +1,12 @@
+{
+  "disposition": "NUMERICAL_FAILURE",
+  "last_completed_iteration": 4182,
+  "failed_iteration": 4183,
+  "failure": "Epsilon AMG divergence followed by host/node floating point exception",
+  "transcript": "solve.trn",
+  "reconciliation": "failure-recovery/reconciliation.json",
+  "checkpoint_iteration": 4000,
+  "checkpoint_case": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s100-20260921T160825Z-n04000.cas.h5",
+  "qualification": false,
+  "claim_limit": "Single failed attempt; reproducibility and isolated root cause not established. Finite runaway rows are retained as numerical evidence, not physical results."
+}
