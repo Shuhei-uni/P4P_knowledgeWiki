@@ -1,0 +1,61 @@
+{
+  "kind": "fluent_live_native_observation",
+  "server_id": "student",
+  "fluent_version": "Ansys Fluent 2025 R2",
+  "native_iteration": 4002,
+  "basis": "Read-only live Settings/API and active Fluent Report File readback after the user continued the case from the 2000-iteration checkpoint.",
+  "active_report_file_window": {
+    "first_iteration": 2000,
+    "last_iteration": 4002,
+    "points": 2003,
+    "generated_file_suffix": "_2001.out"
+  },
+  "boundary_readback": {
+    "liquidinlet_phase_2_kg_s": 116.92,
+    "steaminlet_phase_1_kg_s": 80.69
+  },
+  "named_expression_readback": {
+    "P71V2Iteration": 4002.0,
+    "P71V2Command_kg_s": 116.9199999999999,
+    "P71V2Removal_kg_s": 116.9200000000001,
+    "P71V2AvailableVolume_m3": 0.002833945059516157,
+    "P71V2CommandError_kg_s": 1.70530256582424e-13
+  },
+  "native_report_points_at_4002": {
+    "v2-flux-mixture-steamoutlet_kg_s_raw": -102.6238308204032,
+    "v2-flux-phase1-steamoutlet_kg_s_raw": -80.49734923231854,
+    "v2-flux-phase2-steamoutlet_kg_s_raw": -22.1164980751132,
+    "v2-flux-phase2-liquidinlet_kg_s_raw": 116.9199999999999,
+    "v2-flux-phase1-steaminlet_kg_s_raw": 80.6899999999998,
+    "v2-total-liquid-mass_kg": 318.6608254204938,
+    "v2-total-liquid-volume_m3": 0.3616169908148059,
+    "v2-lower-liquid-mass_kg": 2.497303209749448,
+    "v2-lower-liquid-volume_m3": 0.002833945059516157,
+    "v2-applied-absorber_kg_s_raw": -116.9200000000001,
+    "v2-command_kg_s": 116.9199999999999,
+    "v2-absorber-removal_kg_s": 116.9200000000001,
+    "v2-lower-available-volume_m3": 0.002833945059516157,
+    "v2-command-error_kg_s": 1.70530256582424e-13,
+    "v2-solver-iteration": 4002.0
+  },
+  "residual_monitor_readback": {
+    "monitor_set": "residual",
+    "points": 1902,
+    "first_iteration": 4,
+    "last_iteration": 4002,
+    "values_at_4002": {
+      "continuity": 0.01727701544554587,
+      "x-velocity": 0.00009140296599887951,
+      "y-velocity": 0.00008627142020562017,
+      "z-velocity": 9.713334273535337e-05,
+      "k": 9.026594500011188e-04,
+      "epsilon": 2.176040950530641e-03,
+      "vf-phase-2": 2.59919620457929e-03
+    },
+    "adequacy_judgement": "finite but not qualified; all seven endpoint residuals are higher than at native iteration 2000"
+  },
+  "report_file_paths": {
+    "root": "C:\\Users\\Shuhei Yokkaichi\\Documents\\FluentRuns\\Phase71A\\V2InletLoading\\P71A-V2-INLET-LOADING-RAMP\\20260922T031500Z\\monitors",
+    "suffix": "_2001.out"
+  }
+}

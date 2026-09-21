@@ -1,0 +1,31 @@
+phase_id: phase-07-1a-absorber-convergence
+setup_id: P71A-V2-INLET-LOADING-RAMP
+candidate_id: P71A-V2-INLET-LOADING-RAMP
+server:
+  id: student
+  ref: student@10.0.0.5
+  fluent_version: 2025 R2
+parent:
+  case: 'C:\Users\Shuhei Yokkaichi\OneDrive\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\Phase07\Phase71A\BaselineV2\20260922T013000Z\P71A-BASELINE-V2-VIRTUAL-OUTLET-prepared.cas.h5'
+  data: 'C:\Users\Shuhei Yokkaichi\OneDrive\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\Phase07\Phase71A\BaselineV2\20260922T013000Z\P71A-BASELINE-V2-VIRTUAL-OUTLET-prepared.dat.h5'
+  identity: Project/experiments/phase-07-1a-absorber-convergence/baseline-v2-virtual-liquid-outlet/build-manifest.json
+schedule:
+  start_multiplier: 0.25
+  ramp_active_iterations: 2000
+  horizon: 2000
+  liquid_base_target_kg_s: 116.92
+  steam_base_target_kg_s: 80.69
+storage:
+  checkpoint_root_local: 'C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase71A\V2InletLoading'
+  final_root_onedrive: 'C:\Users\Shuhei Yokkaichi\OneDrive\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\Phase71A\V2InletLoading\finals'
+  checkpoint_policy: active-0000,0500,1000,1500 paired case/data
+  final_policy: active-2000 paired case/data
+local_evidence:
+  root: PyAnsys/output/phase71a_v2_inlet_loading
+  files:
+    manifest: run-manifest.json
+    residuals: residuals.json
+    histories: report-histories.json
+    transcript: transcript.txt
+    figure: v2-inlet-loading-summary.png
+    live_4002_readback: live-4002-readback.json

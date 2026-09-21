@@ -2,6 +2,47 @@
 
 ## Status
 
+### Human contract override — 2026-09-22
+
+Phase 7.1A is completely redirected to a v2 baseline built on the supplied
+`Separator-purnanto-60k.msh.h5` mesh. The former lower-inventory controller is
+replaced by a throughput-controlled virtual liquid outlet:
+
+\[
+Q_{\rm cmd}=|\dot m_{l,in}|,\qquad
+S_l=-Q_{\rm cmd}\frac{\alpha_l}
+{\max(\int_{V_a}\alpha_l dV,10^{-6}\ {\rm m^3})}.
+\]
+
+The sink acts directly on phase 2 only and removes matching liquid momentum;
+phase 1 receives no direct mass sink. The lower-zone liquid volume is now a
+starvation diagnostic, not the controller input or primary success metric.
+
+The [v2 setup contract](baseline-v2-virtual-liquid-outlet/setup.md) and
+[verified build result](baseline-v2-virtual-liquid-outlet/results.md) are the
+active Phase 7.1A baseline. The prepared/reopened 60k pair is loaded on
+`student`. It contains `60,964` fluid cells, including the `715`-cell
+`p71a-v2-virtual-outlet` zone. The one-iteration smoke passed, and the first
+controlled v2 inlet-development run is now recorded in
+[v2-inlet-loading-ramp/results.md](v2-inlet-loading-ramp/results.md). That
+finite-horizon run shows that the lower zone develops enough liquid for the
+native applied phase-2 source to track the inlet-derived command in its late
+window. It also shows continuously increasing total liquid inventory,
+persistent pressure-outlet reverse flow, and residuals that do not qualify as
+steady convergence. The throughput result is discovery evidence, not a
+qualification or physical-performance claim.
+
+The later request for a Coupled/physical-transient comparison was withdrawn by
+the human after execution began. That physical-transient branch is scrapped;
+no physical-transient result or claim may be selected from it. A future
+Coupled pseudo-transient run must be recorded as a separate setup with its own
+verified solver controls and evidence.
+
+All earlier Phase 7.1A families with `results.md` remain historical evidence.
+Setup records that had no sibling `results.md` were removed by direct human
+instruction. The 2026-09-21 C7/C8 direction and all following text describing
+it as active are superseded; they must not be used to select new work.
+
 ### Human contract override — 2026-09-21
 
 The dynamic thin-outer-ring work is now an **independent Server-3 C8
@@ -32,9 +73,10 @@ cross-server handoff records remain historical evidence only.
   nonstationarity, reverse flow, and broad turbulent-viscosity limiting; no
   closure is promoted. The T2-T4 extension remains discovery-only and does not
   authorize a hypothesis route.
-- **Steady-state boundary:** the phase remains steady-state. A transient or
-  time-accurate solver branch is not an automatic fallback and is outside the
-  current Phase 7.1A experiment families.
+- **Steady-state boundary for prior families:** the earlier steady branches
+  remain steady-state, and physical transient is not an automatic recovery
+  route. The withdrawn physical-transient comparison is scrapped; any future
+  pseudo-transient branch must be explicitly separated from these results.
 - **Superseded queue:** the unrun T2--T4 turbulence packets and the unrun
   C3+C4 Coupled/Global-Time-Step packet are no longer active selection
   candidates. Their prepared records remain preserved as historical planning

@@ -1,0 +1,18 @@
+{
+  "status": "RUNNING",
+  "setup_id": "C8-V2-THIN-RING-BASELINES",
+  "server_id": "3",
+  "parent_case": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8\\independent-d0-finals\\C8-D0\\20260921T062500Z\\C8-D0-active5000.cas.h5",
+  "parent_data": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8\\independent-d0-finals\\C8-D0\\20260921T062500Z\\C8-D0-active5000.dat.h5",
+  "run_root": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8-v2-absorber-correction\\20260922T120000Z",
+  "baseline_root": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8-v2\\20260922T120000Z",
+  "paths": {
+    "live_recovery": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8-v2-absorber-correction\\20260922T120000Z\\C8-old-incorrect-absorber-live-recovery.cas.h5",
+    "all_wall": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8-v2\\20260922T120000Z\\C8-V2-thin-outer-all-wall-prepared.cas.h5",
+    "pressure_baseline": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8-v2\\20260922T120000Z\\C8-V2-thin-ring-pressure-baseline-P1120.cas.h5"
+  },
+  "pressure_pa": 1120000.0,
+  "scientific_screen": false,
+  "iterations": 0,
+  "created_at": "2026-09-21T22:52:02.007360+00:00"
+}

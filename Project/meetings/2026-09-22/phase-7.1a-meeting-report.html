@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Phase 7.1A Meeting Report — 22 September 2026</title>
+  <style>
+    :root { --ink:#17212b; --muted:#5e6b78; --paper:#fff; --canvas:#eef2f5; --line:#dce4ea; --navy:#12334a; --blue:#1977a8; --cyan:#dff4fb; --amber:#a46309; --amber-bg:#fff6e5; --green:#14745a; --green-bg:#e7f5ef; --violet:#65438e; --violet-bg:#f1ecf8; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; background:var(--canvas); }
+    body { width:min(1240px,calc(100% - 40px)); margin:34px auto 68px; color:var(--ink); background:var(--paper); font:16px/1.58 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; box-shadow:0 18px 55px rgb(16 43 61 / 12%); }
+    .page { padding:56px 68px 72px; }
+    header { padding:0 0 34px; border-bottom:1px solid var(--line); }
+    .eyebrow { margin:0 0 12px; color:var(--blue); font-size:.75rem; font-weight:800; letter-spacing:.13em; text-transform:uppercase; }
+    h1,h2,h3 { color:var(--navy); line-height:1.14; letter-spacing:-.025em; }
+    h1 { max-width:900px; margin:0; font-size:clamp(2.4rem,5vw,4.45rem); }
+    h2 { margin:64px 0 20px; padding-top:21px; border-top:1px solid var(--line); font-size:clamp(1.6rem,3vw,2.3rem); }
+    h3 { margin:0 0 8px; font-size:1.15rem; }
+    p { margin:0 0 16px; } a { color:#086796; text-decoration-thickness:1px; text-underline-offset:3px; }
+    .meta { display:flex; flex-wrap:wrap; gap:9px 22px; margin:24px 0 0; color:var(--muted); font-size:.93rem; }
+    .meta strong { color:var(--ink); }
+    .lede { max-width:785px; margin:27px 0 0; color:#334554; font-size:1.16rem; }
+    .report-nav { display:flex; flex-wrap:wrap; gap:10px; margin:24px 0 0; } .report-nav a { padding:7px 12px; border:1px solid #b8d3df; border-radius:999px; color:#13597a; background:#f5fbfd; font-size:.86rem; font-weight:700; text-decoration:none; }
+    .summary { max-width:960px; margin:22px 0; padding:25px 28px; border-left:6px solid var(--blue); background:linear-gradient(100deg,#edf8fc,#fff); }
+    .summary p:last-child { margin-bottom:0; }
+    .status-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin:26px 0 10px; }
+    .status { min-height:175px; padding:22px; border:1px solid var(--line); border-radius:10px; background:#fff; }
+    .status .label { margin:0 0 8px; font-size:.76rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+    .status.v1 { border-top:5px solid var(--amber); } .status.v1 .label { color:var(--amber); }
+    .status.c8 { border-top:5px solid var(--violet); } .status.c8 .label { color:var(--violet); }
+    .status.v2 { border-top:5px solid var(--green); } .status.v2 .label { color:var(--green); }
+    .status strong { display:block; margin:5px 0 9px; color:var(--navy); font-size:1.08rem; }
+    .status p { margin:0; color:#435463; font-size:.92rem; }
+    .callout { max-width:960px; margin:22px 0; padding:18px 21px; border:1px solid #d3e3ea; border-radius:8px; background:#f6fbfd; }
+    .callout.warning { border-color:#eed6a9; background:var(--amber-bg); } .callout strong { color:var(--navy); }
+    .metric-table { width:100%; margin:25px 0; border-collapse:collapse; font-size:.92rem; } .metric-table th,.metric-table td { padding:13px 14px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line); } .metric-table th { color:#334b5d; background:#f3f7f9; font-weight:800; } .metric-table tr:last-child td { border-bottom:0; }
+    .twocol { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:25px; align-items:start; margin:24px 0; }
+    .card { padding:23px; border:1px solid var(--line); border-radius:9px; } .card p:last-child { margin-bottom:0; }
+    ul,ol { margin:10px 0 17px; padding-left:23px; } li { margin:7px 0; }
+    figure { margin:0; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#fafcfd; } figure img { display:block; width:100%; height:auto; background:#fff; } figcaption { padding:13px 15px 15px; color:#556572; font-size:.88rem; line-height:1.48; } figcaption strong { color:var(--navy); }
+    .single-figure { max-width:960px; margin:25px 0; }
+    .evidence-gap { max-width:960px; margin:25px 0; padding:20px 22px; border:1px dashed #c58d3d; border-left:6px solid var(--amber); border-radius:7px; background:var(--amber-bg); } .evidence-gap h3 { color:#885207; }
+    .decision { max-width:960px; margin-top:27px; padding:27px 29px; border-radius:10px; color:#fff; background:linear-gradient(125deg,#12334a,#0b627d); } .decision h2 { margin:0 0 12px; padding:0; border:0; color:#fff; font-size:1.75rem; } .decision p { color:#e6f3f8; } .decision ul { margin-bottom:0; } .decision strong { color:#fff; }
+    footer { margin-top:50px; padding-top:20px; border-top:1px solid var(--line); color:var(--muted); font-size:.87rem; } footer ul { columns:2; gap:30px; }
+    @media (max-width:760px) { body { width:100%; margin:0; } .page { padding:37px 23px 52px; } .status-grid,.twocol { grid-template-columns:1fr; } .metric-table { display:block; overflow-x:auto; white-space:nowrap; } footer ul { columns:1; } }
+    @media print { html,body { background:#fff; } body { width:100%; margin:0; box-shadow:none; } .page { padding:0; } .report-nav { display:none; } h2 { break-before:page; } h2:first-of-type { break-before:auto; } figure,.status,.card { break-inside:avoid; } a { color:inherit; text-decoration:none; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <p class="eyebrow">CFD numerical-development update</p>
+      <h1>Phase 7.1A<br>Meeting Report</h1>
+      <div class="meta"><span><strong>Date:</strong> 22 September 2026</span><span><strong>Status:</strong> Discussion draft</span><span><strong>Scope:</strong> V1 reference · C8 bottom pressure outlet · V2 inlet ramp</span></div>
+      <p class="lede">A concise account of what has improved in the liquid-removal route, what remains numerically unresolved, and the decision needed for the next test.</p>
+      <nav class="report-nav" aria-label="Report navigation"><a href="#position">Position</a><a href="#v1">V1 baseline</a><a href="#c8">Bottom outlet</a><a href="#v2">V2 inlet ramp</a><a href="#decision">Next decision</a></nav>
+    </header>
+
+    <section aria-labelledby="story"><h2 id="story">The story in one minute</h2>
+      <div class="summary">
+        <p>The historical V1 absorber was <strong>correctly implemented</strong>, but it was effectively starved of liquid: inventory grew, continuity did not settle, and little liquid reached the lower absorption zone.</p>
+        <p>The Server-3 bottom-pressure-outlet diagnostic shows a potentially useful liquid-routing mechanism, but it also allows vapour to escape. It is incomplete and needs an artificial bottom pressure-control treatment before it can be assessed as a liquid-removal route.</p>
+        <p>V2 is more promising: its new virtual outlet demonstrably tracks the inlet-derived liquid-removal command once liquid arrives in the lower zone. It has <strong>not</strong> yet produced bounded inventory, source-inclusive closure, or steady convergence.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="position"><h2 id="position">Position at this meeting</h2>
+      <div class="status-grid">
+        <article class="status v1"><p class="label">Historical V1</p><strong>Correct source; inadequate liquid access</strong><p>Late liquid mass increased from 943.23 to 1,227.86 kg. Continuity remained approximately 0.65–0.95.</p></article>
+        <article class="status c8"><p class="label">C8 / Server 3</p><strong>Liquid-dominated ring flux; vapour also escapes</strong><p>The thin outer bottom ring is an informative routing diagnostic, not a qualified outlet condition.</p></article>
+        <article class="status v2"><p class="label">V2 inlet ramp</p><strong>Command is realized after liquid develops</strong><p>At iteration 4,002, removal matches the 116.920 kg/s liquid-inlet command, while inventory continues rising.</p></article>
+      </div>
+      <div class="callout"><strong>Claim boundary.</strong> This report describes finite numerical evidence from the tested model states. It does not establish separator performance, a physical brine-outlet analogue, or a converged operating point.</div>
+    </section>
+
+    <section aria-labelledby="v1"><h2 id="v1">1. V1 baseline — why the original absorber did not solve the problem</h2>
+      <div class="twocol"><div><p>V1 completed its 500-iteration discovery horizon and remains a useful diagnostic reference. It did not approach a usable steady state: total liquid inventory rose by <strong>284.63 kg</strong> over native iterations 1,250–1,500, while continuity stayed of order one.</p><p>The key result is not a missing source. The integrated phase-2 absorber source was <strong>−116.92 kg/s</strong>, matching its command. The lower-zone liquid-mass report nevertheless stayed zero while liquid accumulated elsewhere.</p></div><aside class="card"><h3>What V1 isolates</h3><ol><li><strong>Source realization:</strong> the phase-2 absorber was present, selective, and auditable.</li><li><strong>Field response:</strong> the developed field did not deliver useful liquid to that lower region.</li><li><strong>Numerical state:</strong> reverse flow and turbulent-viscosity limiting occurred at every solved iteration; no steady-state claim follows.</li></ol></aside></div>
+    </section>
+
+    <section aria-labelledby="c8"><h2 id="c8">2. Bottom pressure outlet — useful routing signal, but vapour leakage is a design constraint</h2>
+      <p>The independent Server-3 C8 family first developed an all-wall field for 5,000 active iterations. After a predeclared lower-liquid trigger, only the thin outer bottom ring was changed to a <strong>1.120 MPa gauge pressure outlet</strong>; the remaining four bottom bands stayed walls.</p>
+      <div class="twocol"><article class="card"><h3>Observed partial state</h3><p>At native iteration 7,800 (C8-P0 active 2,800), the ring reports about <strong>−1,720.11 kg/s phase 2</strong> and <strong>−8.32 kg/s phase 1</strong>. The stored signs are not independently normalized in this package; the defensible observation is that the ring is strongly liquid-dominated but not phase-exclusive.</p></article><article class="card"><h3>What this means</h3><p>The test supplies a plausible artificial liquid-routing mechanism. It does not yet demonstrate acceptable vapour loss, mass closure, stable inventory, or a selected outlet pressure. A controlled artificial bottom pressure treatment is needed to constrain steam escape.</p></article></div>
+      <div class="evidence-gap"><h3>Native Server-3 contours are not inserted yet</h3><p>The pressure and phase-2 volume-fraction fields are verified on the Y–Z plane at <code>x = 0 m</code> in the stopped C8-P0 state. Fluent hardcopy export stalled before producing PNGs, so no substitute figures are presented. Add those native exports and the continuity history when the Server-3 graphics endpoint is responsive.</p></div>
+    </section>
+
+    <section aria-labelledby="v2"><h2 id="v2">3. V2 inlet-loading ramp — the virtual outlet begins to work once liquid arrives</h2>
+      <p>V2 changes the removal law rather than simply increasing source strength. Its 715-cell lower virtual-outlet zone removes phase 2 in proportion to locally available phase-2 volume fraction; its command follows the instantaneous liquid-inlet throughput. It does not directly delete phase 1.</p>
+      <p>The initial lower region was effectively vapour-only, so realized removal started near zero as expected. During the inlet ramp, liquid developed into the lower zone and the source became active. From iteration 501 onward, the named removal and native applied phase-2 source differed by at most approximately <code>3e-13 kg/s</code>.</p>
+      <table class="metric-table"><thead><tr><th>V2 monitor</th><th>Iteration 2,000</th><th>Iteration 4,002</th><th>Evidence reading</th></tr></thead><tbody>
+        <tr><td>Liquid-inlet flux</td><td>116.482 kg/s</td><td>116.920 kg/s</td><td>The prescribed ramp reaches its declared liquid target.</td></tr>
+        <tr><td>Named virtual-outlet removal</td><td>116.482 kg/s</td><td>116.920 kg/s</td><td>When liquid is available, removal follows the inlet-derived command.</td></tr>
+        <tr><td>Total liquid mass</td><td>183.595 kg</td><td>318.661 kg</td><td>Inventory remains increasing, not bounded.</td></tr>
+        <tr><td>Lower-zone liquid mass</td><td>0.103 kg</td><td>2.497 kg</td><td>The virtual-outlet zone is no longer effectively starved.</td></tr>
+        <tr><td>Phase-2 flux at steam outlet</td><td>9.156 kg/s</td><td>22.116 kg/s</td><td>Phase routing continues to change during the extension.</td></tr>
+        <tr><td>Continuity residual</td><td>9.62e-3</td><td>1.73e-2</td><td>Finite, but higher at 4,002; not a convergence signature.</td></tr>
+      </tbody></table>
+      <div class="callout warning"><strong>Continuity comparison with V1.</strong> V2 continuity is far lower in magnitude than the V1 reference endpoint (about 8.09e-1 at V1 native iteration 1,500). This is encouraging direction-of-travel evidence only: the mesh, initialization, configurations, and iteration windows differ, so it is not a like-for-like convergence ranking.</div>
+
+      <h3>Existing V2 native figures</h3>
+      <div class="twocol">
+        <figure><img src="/Users/shuheiyokkaichi/Library/CloudStorage/OneDrive-TheUniversityofAuckland/P4P-Fluent-Artifacts/Phase71A/V2InletLoading/finals/P71A-V2-INLET-LOADING-RAMP/20260922T031500Z/P71A-V2-INLET-LOADING-RAMP-active4002-residual.png" alt="Scaled residual histories through iteration 4,002"><figcaption><strong>Scaled residuals through iteration 4,002.</strong> The late histories oscillate and rise after their earlier low levels. Continuity ends at 1.73 × 10<sup>−2</sup>; this is not steady convergence.</figcaption></figure>
+        <figure><img src="/Users/shuheiyokkaichi/Library/CloudStorage/OneDrive-TheUniversityofAuckland/P4P-Fluent-Artifacts/Phase71A/V2InletLoading/finals/P71A-V2-INLET-LOADING-RAMP/20260922T031500Z/P71A-V2-INLET-LOADING-RAMP-active4002-densityContour.png" alt="V2 mixture-density contour at iteration 4,002"><figcaption><strong>Mixture-density contour at iteration 4,002.</strong> A native Fluent view of one continued state. It does not by itself establish bounded inventory or preferred phase routing.</figcaption></figure>
+      </div>
+      <figure class="single-figure"><img src="/Users/shuheiyokkaichi/Library/CloudStorage/OneDrive-TheUniversityofAuckland/P4P-Fluent-Artifacts/Phase71A/V2InletLoading/finals/P71A-V2-INLET-LOADING-RAMP/20260922T031500Z/P71A-V2-INLET-LOADING-RAMP-active4002-BottomCellRegister.png" alt="V2 lower virtual-outlet cell register"><figcaption><strong>Lower virtual-outlet cell register.</strong> The 715-cell lower source region used by the V2 virtual outlet. This is a controlled-region register view, not a liquid-volume-fraction contour.</figcaption></figure>
+    </section>
+
+    <section class="decision" id="decision" aria-labelledby="decision-title"><h2 id="decision-title">Meeting conclusion and next decision</h2>
+      <p>Phase 7.1A has moved from a correctly applied but inaccessible V1 absorber to a V2 outlet that demonstrably realizes its inlet-following phase-2 command after liquid develops in the lower zone. That is a meaningful implementation and liquid-development improvement.</p>
+      <p>The system is not yet solved: V2 inventory still grows, continuity worsens between iterations 2,000 and 4,002, pressure-outlet reverse flow persists, and phase-2 carryover at the steam outlet increases. C8 adds a useful liquid-routing signal but also exposes vapour loss through the artificial bottom boundary.</p>
+      <p><strong>The next run should decide from all of the following together:</strong></p><ul><li>source-inclusive, phase-resolved mass closure including storage;</li><li>a late-window liquid-inventory slope;</li><li>controlled vapour flux through an artificial bottom pressure-control boundary;</li><li>credible phase routing; and</li><li>finite, improving residual behaviour.</li></ul>
+    </section>
+
+    <footer><strong>Evidence basis</strong><ul><li><a href="../../experiments/phase-07-1a-absorber-convergence/CONTEXT.md">Phase 7.1A context</a></li><li><a href="../../experiments/phase-07-1a-absorber-convergence/turbulence-family/t0-rng-reference/results.md">V1 RNG reference result</a></li><li><a href="../../experiments/phase-07-1a-absorber-convergence/baseline-v2-virtual-liquid-outlet/results.md">V2 baseline build</a></li><li><a href="../../experiments/phase-07-1a-absorber-convergence/v2-inlet-loading-ramp/results.md">V2 ramp result</a></li><li><a href="../../experiments/phase-07-1a-absorber-convergence/dynamic-thin-outer-ring/results.md">Server-3 C8 result</a></li><li><a href="../../../PyAnsys/output/phase71a_v2_inlet_loading/20260922T031500Z/">Authoritative V2 evidence package</a></li></ul></footer>
+  </main>
+</body>
+</html>

@@ -1,5 +1,6 @@
 {
-  "status": "COMPLETE",
+  "status": "HISTORICAL_INCORRECT_ABSORBER_V1",
+  "historical_label": "INCORRECT ABSORBER (v1); superseded by corrected C8-V2 family on 2026-09-22",
   "setup_id": "C8-D0",
   "family": "P71A-INDEPENDENT-C8-D0-RESUME",
   "server_id": "3",

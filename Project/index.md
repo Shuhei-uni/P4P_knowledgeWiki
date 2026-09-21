@@ -13,9 +13,10 @@ The liquid-removal work has two separate planning lanes:
 - **Shuhei — Phase 07A:** what practical numerical mechanism can remove
   separated liquid from the truncated simplified Purnanto model while
   preserving useful and interpretable separation behaviour?
-- **Shuhei — Phase 7.1A:** can the selected lower cell-zone absorber reach
-  credible scaled-residual and continuity convergence when the remaining
-  solver/model treatments are changed one at a time?
+- **Shuhei — Phase 7.1A:** can the 60k-mesh, phase-2-only virtual liquid outlet
+  track commanded liquid-inlet throughput while preserving credible phase
+  routing, source-inclusive mass closure, bounded inventory behaviour, and
+  useful steady convergence?
 - **Andy — Phase 7b:** can a function-based ideal liquid collector in the lower
   full-geometry vessel support a balanced, numerically stable steady-state
   solution while preserving useful separation above the collector?
@@ -29,6 +30,17 @@ steam-outlet diameter is `0.876 m`, correcting the former Project value of
 `0.724 m`.
 
 ## Active/latest experiment
+
+**Phase 7.1A was redirected by the human on 2026-09-22.** The active baseline
+is now [v2 on the supplied 60k mesh](experiments/phase-07-1a-absorber-convergence/baseline-v2-virtual-liquid-outlet/results.md).
+It replaces the v1 lower-inventory/uniform absorber with a feed-forward virtual
+liquid outlet whose command is the phase-2 liquid-inlet throughput and whose
+local source is weighted by phase-2 volume fraction. The prepared/reopened pair
+is verified and loaded on `student`: `60,964` total fluid cells, including a
+`715`-cell lower virtual-outlet zone. Its one-iteration setup smoke passed, but
+the fresh lower zone was liquid-starved, so throughput tracking and convergence
+remain untested. Earlier Phase 7.1A records with `results.md` are historical;
+the C7/C8 direction is superseded.
 
 Shuhei's Phase 07A mechanism-discovery record is retained as historical
 evidence. The lower cell-zone, phase-2-only absorber is now the human-selected
@@ -87,7 +99,8 @@ The new Phase 7.1A planning record is:
 - [Phase 7.1A convergence direction](experiments/phase-07-1a-absorber-convergence/index.md)
 - [Phase 7.1A planning context](experiments/phase-07-1a-absorber-convergence/CONTEXT.md)
 
-The approved Phase 7.1A turbulence-first finite screen is execution-complete.
+The earlier Phase 7.1A turbulence-first finite screen is execution-complete and
+is retained as historical v1 evidence.
 T0 RNG reference, T1 standard k-epsilon, and T1 realizable k-epsilon ran in
 order on `student` from the exact active-1000 absorber parent, each with 500
 active iterations, paired final artifacts, and plot-led evidence. The closures
@@ -95,13 +108,10 @@ produced distinct finite trajectories, but all retained nonstationarity,
 reverse flow, and broad turbulent-viscosity limiting; no branch is qualified
 or promoted. The unrun T2-T4 and Coupled/Global-Time-Step packets are now
 superseded as active candidates and retained only as planning history. The
-next two design families are a low-to-base inlet-development ramp and a
-delayed thin-outer-ring pressure-boundary screen; neither has an executable
-run packet until its controls and evidence gates are specified.
-Their staged design is recorded in the [C7/C8 liquid-development and
-dynamic-ring family plan](experiments/phase-07-1a-absorber-convergence/liquid-development-and-dynamic-ring-family.md).
-C7 is assigned to Server 1; its selected all-wall 237k checkpoint must be
-verified after transfer before C8 proceeds on Server 3.
+former low-to-base inlet-development and delayed thin-outer-ring families are
+also superseded by the 2026-09-22 v2 virtual-outlet reframe. Their staged
+[C7/C8 plan](experiments/phase-07-1a-absorber-convergence/liquid-development-and-dynamic-ring-family.md)
+is historical and is not execution authority.
 
 The human has also raised a Phase 7.1A-specific long-horizon planning
 hypothesis from the current extended runs: steady-state assessment may not be
@@ -193,12 +203,12 @@ steady state. A standing pool is explicitly not required in Phase 7b.
 
 ## What remains unresolved?
 
-- for Shuhei's Phase 7.1A, whether a controlled inlet-development path can
-  form and retain measurably more liquid in the lower separator region before
-  the base flow is reached;
-- for Shuhei's Phase 7.1A, what observable lower-liquid criterion and pressure
-  range can make the delayed thin-outer-ring intervention informative without
-  producing predominantly vapor loss or an uninterpretable imbalance;
+- for Shuhei's Phase 7.1A, whether the v2 virtual outlet can realize its
+  inlet-throughput command after liquid reaches the lower zone, without direct
+  vapor deletion or unacceptable source-inclusive imbalance;
+- for Shuhei's Phase 7.1A, whether the v2 60k branch can reach bounded liquid
+  inventory and credible steady numerical behaviour after the outlet is no
+  longer starved;
 - for Andy's Phase 7b, API/session recovery, complete reference phase-interaction
   readback, collector source/velocity implementation and file-backed instrumentation;
 - whether liquid reaches the collector and can be removed without unacceptable
@@ -214,13 +224,12 @@ steady state. A standing pool is explicitly not required in Phase 7b.
 lifecycle record is retained as historical evidence rather than silently
 upgraded to a completed physical validation.
 
-Phase 7.1A's first controlled turbulence screen is complete but remains
-discovery-only: its execution gate passed, its evidence gate is blocked by
-finite nonstationarity and incomplete contour-level spatial evidence, and no
-hypothesis route is authorized. The active planning work has been reframed to
-an inlet-development ramp followed by an iterative delayed thin-outer-ring
-pressure-boundary study. The older unrun turbulence and solver-path packets
-remain preserved but are not to be executed. Andy's Phase 7b has verified its
+Phase 7.1A's v2 60k virtual-outlet baseline is prepared, reopened, smoke-tested,
+and loaded on `student`. The next Phase 7.1A action is a predeclared discovery
+run from that exact pair with native applied-source, command, liquid-availability,
+inventory, phase-routing, closure, and residual evidence. The old turbulence,
+solver-path, C7, and C8 packets remain historical and are not to be executed.
+Andy's Phase 7b has verified its
 five collector masks and PC/API paths and declared a common finite source
 coefficient and evidence contract in its
 [design](experiments/phase-07b-full-geometry-liquid-removal/design.md).

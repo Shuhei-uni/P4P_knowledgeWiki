@@ -1,5 +1,6 @@
 {
-  "status": "RUNNING",
+  "status": "HISTORICAL_INCORRECT_ABSORBER_V1_STOPPED",
+  "historical_label": "INCORRECT ABSORBER (v1); superseded by corrected C8-V2 pressure ladder on 2026-09-22",
   "setup_id": "C8-P0",
   "family": "P71A-INDEPENDENT-C8-DYNAMIC-THIN-OUTER",
   "server_id": "3",
