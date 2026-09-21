@@ -2,7 +2,7 @@
 
 ## Status
 
-- **Planning state:** selected screen; API recovered and speed-report repair saved/reopened; S20 resuming
+- **Planning state:** G1 discovery comparison complete; four N5000 cases fail numerical criteria; S100 numerical failure at attempted N4183. See [results](results.md). No qualification or further solve authorized.
 - **Owner:** Andy; separate from Shuhei's Phase 7
 - **Last human review:** 2026-09-08
 - **Experiment-selection authority:** human-approved-context-only
@@ -13,9 +13,9 @@
   standing brine pool is not required. Close the physical brine outlet as a
   wall. Five thicknesses (`20%, 40%, 60%, 80%, 100%`) and the carrier-only
   reference are approved, with at most `5,000` steady iterations per case.
-  Finish technical preparation and return the comparative evidence to the
-  human. Collector coordinates are established; source implementation and
-  complete live case readiness remain open.
+  The approved comparison is complete and returned in [results](results.md).
+  Source implementation and instrumentation are verified; none of the tested
+  cases establishes a credible steady solution.
 
 ## Human thinking
 
@@ -487,7 +487,14 @@ returns to the human. This handoff is active following the human's explicit laun
   Five-case selection, technical preparation and loop launch are authorized.
   Verified lifecycle gates still govern implementation and execution.
 
-### Current implementation boundary
+### Implementation evidence and current boundary
+
+**G1 disposition (2026-09-22 NZ):** all five cases have terminal evidence.
+S20/S40/S60/S80 reached N5000 without meeting numerical criteria; S100 has
+complete N1–4182 records before numerical failure at attempted N4183. Its
+failed state and N4000 recovery pair are preserved; recovery fields were
+extracted without further solving. See [results](results.md). Earlier
+preparation/recovery details below are historical evidence, not open actions.
 
 **Current verified state (2026-09-12):** rebuilt the approved reference from
 only the original mesh through Python, with automatic C compilation disabled.
@@ -524,7 +531,7 @@ additional pressure/velocity reports, fixed sections and checkpoints. A
 maximum-speed report context error was caught at N0. On 2026-09-21 NZ the API
 responded again, and the report correction was applied, saved and reopened
 successfully. The S20 runner is resuming verification and its approved screen.
-All five screen outcomes remain open.
+All five screen outcomes are now recorded in [results](results.md).
 The current `phase-loop` owns these in-scope recoveries; earlier restart locks
 are historical. Exact execution status is in `phase-state.yaml` and machine
 manifests; evidence and claim limits are in [diagnostics](diagnostics.md).

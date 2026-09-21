@@ -1,0 +1,2241 @@
+{
+  "percent": 60,
+  "definitions": {
+    "P7bAlpha": "Volumefraction(phase=\"phase-2\")",
+    "P7bMask": "IF(AND(y >= -1.4845837354660034[m], y <= -0.5818334941864014[m]),1.0,0.0)",
+    "P7bK": "TurbulentKineticEnergyk",
+    "P7bEpsilon": "TurbulenceDissipationRate",
+    "P7bSink": "-P7bMask*881.77[kg/m^3]*min(1.0,max(0.0,P7bAlpha))/0.0024095893[s]",
+    "P7bLiquidX": "Velocity.x(phase=\"phase-2\")",
+    "P7bSinkX": "P7bSink*P7bLiquidX",
+    "P7bLiquidY": "Velocity.y(phase=\"phase-2\")",
+    "P7bSinkY": "P7bSink*P7bLiquidY",
+    "P7bLiquidZ": "Velocity.z(phase=\"phase-2\")",
+    "P7bSinkZ": "P7bSink*P7bLiquidZ",
+    "P7bSinkK": "P7bSink*P7bK",
+    "P7bSinkEpsilon": "P7bSink*P7bEpsilon",
+    "P7bCount": "CountIf(AND(y >= -1.4845837354660034[m], y <= -0.5818334941864014[m]),[\"simple-spiral-separator--brine-outlet-\", \"p7b-collector\"])",
+    "P7bGeometryVolume": "VolumeInt(P7bMask,[\"simple-spiral-separator--brine-outlet-\", \"p7b-collector\"])",
+    "P7bWaterVolume": "VolumeInt(P7bAlpha,[\"simple-spiral-separator--brine-outlet-\", \"p7b-collector\"])",
+    "P7bWaterMass": "881.77[kg/m^3]*P7bWaterVolume",
+    "P7bCollectorVolume": "VolumeInt(P7bMask*P7bAlpha,[\"simple-spiral-separator--brine-outlet-\", \"p7b-collector\"])",
+    "P7bCollectorMass": "881.77[kg/m^3]*P7bCollectorVolume",
+    "P7bAboveVolume": "P7bWaterVolume-P7bCollectorVolume",
+    "P7bRemoval": "-VolumeInt(P7bSink,[\"simple-spiral-separator--brine-outlet-\", \"p7b-collector\"])",
+    "P7bLiquidLiquidInlet": "MassFlow([\"liquid-inlet\"],phase=\"phase-2\")",
+    "P7bLiquidSteamInlet": "MassFlow([\"steam-inlet\"],phase=\"phase-2\")",
+    "P7bLiquidOutlet": "MassFlow([\"steam-outlet\"],phase=\"phase-2\")",
+    "P7bLiquidBrineWall": "MassFlow([\"brine-outlet\"],phase=\"phase-2\")",
+    "P7bLiquidBoundary": "P7bLiquidLiquidInlet+P7bLiquidSteamInlet+P7bLiquidOutlet+P7bLiquidBrineWall",
+    "P7bLiquidClosure": "P7bLiquidBoundary-P7bRemoval",
+    "P7bVaporLiquidInlet": "MassFlow([\"liquid-inlet\"],phase=\"phase-1\")",
+    "P7bVaporSteamInlet": "MassFlow([\"steam-inlet\"],phase=\"phase-1\")",
+    "P7bVaporOutlet": "MassFlow([\"steam-outlet\"],phase=\"phase-1\")",
+    "P7bVaporBrineWall": "MassFlow([\"brine-outlet\"],phase=\"phase-1\")",
+    "P7bVaporBoundary": "P7bVaporLiquidInlet+P7bVaporSteamInlet+P7bVaporOutlet+P7bVaporBrineWall",
+    "P7bVaporClosure": "P7bVaporBoundary",
+    "P7bMixtureLiquidInlet": "MassFlow([\"liquid-inlet\"],phase=\"mixture\")",
+    "P7bMixtureSteamInlet": "MassFlow([\"steam-inlet\"],phase=\"mixture\")",
+    "P7bMixtureOutlet": "MassFlow([\"steam-outlet\"],phase=\"mixture\")",
+    "P7bMixtureBrineWall": "MassFlow([\"brine-outlet\"],phase=\"mixture\")",
+    "P7bMixtureBoundary": "P7bMixtureLiquidInlet+P7bMixtureSteamInlet+P7bMixtureOutlet+P7bMixtureBrineWall",
+    "P7bMixtureClosure": "P7bMixtureBoundary-P7bRemoval",
+    "P7bPressureLiquid": "AreaAve(StaticPressure,[\"liquid-inlet\"])",
+    "P7bPressureSteam": "AreaAve(StaticPressure,[\"steam-inlet\"])",
+    "P7bPressureOutlet": "AreaAve(StaticPressure,[\"steam-outlet\"])",
+    "P7bDropLiquid": "P7bPressureLiquid-P7bPressureOutlet",
+    "P7bDropSteam": "P7bPressureSteam-P7bPressureOutlet",
+    "P7bSplitVolume": "Volume([\"p7b-collector\"])",
+    "P7bSplitMismatch": "VolumeInt(1-P7bMask,[\"p7b-collector\"])+VolumeInt(P7bMask,[\"simple-spiral-separator--brine-outlet-\"])",
+    "P7bMinimumPressure": "Minimum(StaticPressure,[\"simple-spiral-separator--brine-outlet-\", \"p7b-collector\"])",
+    "P7bMaximumPressure": "Maximum(StaticPressure,[\"simple-spiral-separator--brine-outlet-\", \"p7b-collector\"])",
+    "P7bMaximumSpeed": "Maximum(VelocityMagnitude(phase=\"mixture\"),[\"simple-spiral-separator--brine-outlet-\", \"p7b-collector\"])"
+  },
+  "source_slots": {
+    "simple-spiral-separator--brine-outlet-": {
+      "mixture": {
+        "enable": false
+      },
+      "phase-1": {
+        "enable": false
+      },
+      "phase-2": {
+        "enable": false
+      }
+    },
+    "p7b-collector": {
+      "mixture": {
+        "enable": true,
+        "terms": {
+          "epsilon": [
+            {
+              "option": "value",
+              "value": "P7bSinkEpsilon"
+            }
+          ],
+          "k": [
+            {
+              "option": "value",
+              "value": "P7bSinkK"
+            }
+          ],
+          "x-momentum": [
+            {
+              "option": "value",
+              "value": "P7bSinkX"
+            }
+          ],
+          "y-momentum": [
+            {
+              "option": "value",
+              "value": "P7bSinkY"
+            }
+          ],
+          "z-momentum": [
+            {
+              "option": "value",
+              "value": "P7bSinkZ"
+            }
+          ]
+        }
+      },
+      "phase-1": {
+        "enable": false
+      },
+      "phase-2": {
+        "enable": true,
+        "terms": {
+          "mass": [
+            {
+              "option": "value",
+              "value": "P7bSink"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "sections": {
+    "p7b-section-y0p5": {
+      "y_m": 0.5,
+      "area_m2": 3.164901415174664
+    },
+    "p7b-section-y1p5": {
+      "y_m": 1.5,
+      "area_m2": 3.164724180589247
+    },
+    "p7b-section-y3p0": {
+      "y_m": 3.0,
+      "area_m2": 3.165024401509376
+    },
+    "p7b-section-y5p0": {
+      "y_m": 5.0,
+      "area_m2": 3.165050005098089
+    }
+  },
+  "parent_case": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-clean-initial-20260912T080713Z.cas.h5",
+  "run_id": "p7b-s060-resume-20260921T113238Z",
+  "status": "HORIZON_COMPLETE_ANALYSIS_PENDING",
+  "steps": [
+    {
+      "name": "connect",
+      "state": "PASS",
+      "value": "<ansys.fluent.core.session_solver.Solver object at 0x10afc8c50>"
+    },
+    {
+      "name": "verify_exact_live_endpoint_and_evidence",
+      "state": "PASS",
+      "value": {
+        "iteration": 2495,
+        "pair_exists": true,
+        "water_volume": 0.2448366589094557,
+        "scalar_history": {
+          "rows": 2495,
+          "unique_rows": 2495,
+          "duplicate_indices": [],
+          "conflicting_indices": [],
+          "nonfinite_columns": [],
+          "first_iteration": 1,
+          "last_iteration": 2495,
+          "source": {
+            "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-resume-20260921T113238Z/history-02495.out",
+            "sha256": "7ac2bb05aeb6ee0bf7676e09b7f23a5b21a1d4df8884f79bef6938afb8d45475"
+          },
+          "native_header": [
+            "Iteration",
+            "p7bwatervolume",
+            "p7bwatermass",
+            "p7bcollectorvolume",
+            "p7bcollectormass",
+            "p7babovevolume",
+            "p7bremoval",
+            "p7bliquidliquidinlet",
+            "p7bliquidsteaminlet",
+            "p7bliquidoutlet",
+            "p7bliquidbrinewall",
+            "p7bliquidboundary",
+            "p7bliquidclosure",
+            "p7bvaporliquidinlet",
+            "p7bvaporsteaminlet",
+            "p7bvaporoutlet",
+            "p7bvaporbrinewall",
+            "p7bvaporboundary",
+            "p7bvaporclosure",
+            "p7bmixtureliquidinlet",
+            "p7bmixturesteaminlet",
+            "p7bmixtureoutlet",
+            "p7bmixturebrinewall",
+            "p7bmixtureboundary",
+            "p7bmixtureclosure",
+            "p7bpressureliquid",
+            "p7bpressuresteam",
+            "p7bpressureoutlet",
+            "p7bdropliquid",
+            "p7bdropsteam",
+            "p7bminimumpressure",
+            "p7bmaximumpressure",
+            "p7bmaximumspeed",
+            "p7b-applied-source",
+            "p7b-native-water"
+          ],
+          "rejected_lines": [],
+          "expected_start": 1,
+          "expected_end": 2495,
+          "missing_indices": [],
+          "complete_to_expected_end": true
+        },
+        "remote_flux_last_row_matches": true
+      }
+    },
+    {
+      "name": "iterate_2495_to_2500",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "metrics_2500",
+      "state": "PASS",
+      "value": [
+        {
+          "p7bwatervolume": [
+            0.2450672867835344,
+            "m^3"
+          ]
+        },
+        {
+          "p7bwatermass": [
+            216.0929814671171,
+            "kg"
+          ]
+        },
+        {
+          "p7bcollectorvolume": [
+            0.000366714628480805,
+            "m^3"
+          ]
+        },
+        {
+          "p7bcollectormass": [
+            0.3233579579555194,
+            "kg"
+          ]
+        },
+        {
+          "p7babovevolume": [
+            0.2447005721550536,
+            "m^3"
+          ]
+        },
+        {
+          "p7bremoval": [
+            134.1962955909207,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidsteaminlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidoutlet": [
+            -4.094938326385893,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidboundary": [
+            112.8262941320875,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidclosure": [
+            -21.3700014588332,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporliquidinlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporsteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporoutlet": [
+            -80.5478065247152,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporboundary": [
+            0.1420958336236851,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporclosure": [
+            0.1420958336236851,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturesteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureoutlet": [
+            -84.6412039790769,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturebrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureboundary": [
+            112.9699308377354,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureclosure": [
+            -21.22636475318534,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bpressureliquid": [
+            1147293.153588555,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressuresteam": [
+            1147502.806993972,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressureoutlet": [
+            1119643.229354581,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropliquid": [
+            27649.92423397419,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropsteam": [
+            27859.57763939095,
+            "Pa"
+          ]
+        },
+        {
+          "p7bminimumpressure": [
+            1117840.197853742,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumpressure": [
+            1152413.597094444,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumspeed": [
+            86.25476244742151,
+            "m/s"
+          ]
+        },
+        {
+          "p7b-applied-source": [
+            -134.4038984654663,
+            "kg/s"
+          ]
+        },
+        {
+          "p7b-native-water": [
+            0.2450672867835344,
+            "m^3"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "save_n02500",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "iterate_2500_to_3000",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "metrics_3000",
+      "state": "PASS",
+      "value": [
+        {
+          "p7bwatervolume": [
+            0.2954767477212484,
+            "m^3"
+          ]
+        },
+        {
+          "p7bwatermass": [
+            260.5425318381652,
+            "kg"
+          ]
+        },
+        {
+          "p7bcollectorvolume": [
+            0.000443540994502295,
+            "m^3"
+          ]
+        },
+        {
+          "p7bcollectormass": [
+            0.3911011427222886,
+            "kg"
+          ]
+        },
+        {
+          "p7babovevolume": [
+            0.2950332067267462,
+            "m^3"
+          ]
+        },
+        {
+          "p7bremoval": [
+            162.3102919332722,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidsteaminlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidoutlet": [
+            -5.083861712434215,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidboundary": [
+            111.8373707460392,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidclosure": [
+            -50.47292118723303,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporliquidinlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporsteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporoutlet": [
+            -80.38741927885606,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporboundary": [
+            0.3024830794828262,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporclosure": [
+            0.3024830794828262,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturesteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureoutlet": [
+            -85.4733755472114,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturebrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureboundary": [
+            112.1377592696009,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureclosure": [
+            -50.17253266367133,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bpressureliquid": [
+            1146014.779880406,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressuresteam": [
+            1146224.239076432,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressureoutlet": [
+            1119667.639680996,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropliquid": [
+            26347.14019941003,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropsteam": [
+            26556.5993954367,
+            "Pa"
+          ]
+        },
+        {
+          "p7bminimumpressure": [
+            1118040.525716764,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumpressure": [
+            1193682.643606792,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumspeed": [
+            125.4901101497072,
+            "m/s"
+          ]
+        },
+        {
+          "p7b-applied-source": [
+            -163.3863613153875,
+            "kg/s"
+          ]
+        },
+        {
+          "p7b-native-water": [
+            0.2954767477212484,
+            "m^3"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "save_n03000",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "iterate_3000_to_3500",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "metrics_3500",
+      "state": "PASS",
+      "value": [
+        {
+          "p7bwatervolume": [
+            0.4304491245794184,
+            "m^3"
+          ]
+        },
+        {
+          "p7bwatermass": [
+            379.5571245803937,
+            "kg"
+          ]
+        },
+        {
+          "p7bcollectorvolume": [
+            0.000999666886268782,
+            "m^3"
+          ]
+        },
+        {
+          "p7bcollectormass": [
+            0.8814762703052239,
+            "kg"
+          ]
+        },
+        {
+          "p7babovevolume": [
+            0.4294494576931496,
+            "m^3"
+          ]
+        },
+        {
+          "p7bremoval": [
+            365.8201297230302,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidsteaminlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidoutlet": [
+            -9.741988052799696,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidboundary": [
+            107.1792444056737,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidclosure": [
+            -258.6408853173565,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporliquidinlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporsteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporoutlet": [
+            -79.00183110601466,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporboundary": [
+            1.688071252324221,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporclosure": [
+            1.688071252324221,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturesteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureoutlet": [
+            -88.74398579355112,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturebrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureboundary": [
+            108.8671490232612,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureclosure": [
+            -256.9529806997691,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bpressureliquid": [
+            1150050.593719464,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressuresteam": [
+            1150260.063210349,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressureoutlet": [
+            1119663.886247158,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropliquid": [
+            30386.70747230574,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropsteam": [
+            30596.17696319125,
+            "Pa"
+          ]
+        },
+        {
+          "p7bminimumpressure": [
+            1117906.384572669,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumpressure": [
+            1165260.554461899,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumspeed": [
+            84.18887416564853,
+            "m/s"
+          ]
+        },
+        {
+          "p7b-applied-source": [
+            -367.9213225462638,
+            "kg/s"
+          ]
+        },
+        {
+          "p7b-native-water": [
+            0.4304491245794184,
+            "m^3"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "save_n03500",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "iterate_3500_to_4000",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "metrics_4000",
+      "state": "PASS",
+      "value": [
+        {
+          "p7bwatervolume": [
+            0.5537025249750445,
+            "m^3"
+          ]
+        },
+        {
+          "p7bwatermass": [
+            488.238275447245,
+            "kg"
+          ]
+        },
+        {
+          "p7bcollectorvolume": [
+            0.001164701660356824,
+            "m^3"
+          ]
+        },
+        {
+          "p7bcollectormass": [
+            1.026998983052837,
+            "kg"
+          ]
+        },
+        {
+          "p7babovevolume": [
+            0.5525378233146876,
+            "m^3"
+          ]
+        },
+        {
+          "p7bremoval": [
+            426.21328997968,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidsteaminlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidoutlet": [
+            -10.74249148143246,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidboundary": [
+            106.178740977041,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidclosure": [
+            -320.034549002639,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporliquidinlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporsteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporoutlet": [
+            -78.65217683619393,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporboundary": [
+            2.037725522144953,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporclosure": [
+            2.037725522144953,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturesteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureoutlet": [
+            -89.39114470686634,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturebrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureboundary": [
+            108.219990109946,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureclosure": [
+            -317.993299869734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bpressureliquid": [
+            1154915.62469681,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressuresteam": [
+            1155125.778902502,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressureoutlet": [
+            1119648.908170012,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropliquid": [
+            35266.71652679774,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropsteam": [
+            35476.87073248997,
+            "Pa"
+          ]
+        },
+        {
+          "p7bminimumpressure": [
+            1079695.933192342,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumpressure": [
+            1192155.446197351,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumspeed": [
+            81.84497794781463,
+            "m/s"
+          ]
+        },
+        {
+          "p7b-applied-source": [
+            -417.236017000124,
+            "kg/s"
+          ]
+        },
+        {
+          "p7b-native-water": [
+            0.5537025249750445,
+            "m^3"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "save_n04000",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "iterate_4000_to_4500",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "metrics_4500",
+      "state": "PASS",
+      "value": [
+        {
+          "p7bwatervolume": [
+            0.597844665005423,
+            "m^3"
+          ]
+        },
+        {
+          "p7bwatermass": [
+            527.1614902618318,
+            "kg"
+          ]
+        },
+        {
+          "p7bcollectorvolume": [
+            0.0006093040812931339,
+            "m^3"
+          ]
+        },
+        {
+          "p7bcollectormass": [
+            0.5372660597618466,
+            "kg"
+          ]
+        },
+        {
+          "p7babovevolume": [
+            0.5972353609241299,
+            "m^3"
+          ]
+        },
+        {
+          "p7bremoval": [
+            222.9699724188877,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidsteaminlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidoutlet": [
+            -11.14097913606093,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidboundary": [
+            105.7802533224125,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidclosure": [
+            -117.1897190964752,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporliquidinlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporsteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporoutlet": [
+            -79.99357277149225,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporboundary": [
+            0.6963295868466304,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporclosure": [
+            0.6963295868466304,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturesteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureoutlet": [
+            -91.13092472790709,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturebrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureboundary": [
+            106.4802100889052,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureclosure": [
+            -116.4897623299825,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bpressureliquid": [
+            1150737.397731825,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressuresteam": [
+            1150950.465026284,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressureoutlet": [
+            1119685.998742667,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropliquid": [
+            31051.39898915892,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropsteam": [
+            31264.46628361731,
+            "Pa"
+          ]
+        },
+        {
+          "p7bminimumpressure": [
+            1118201.745238382,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumpressure": [
+            1160940.168876236,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumspeed": [
+            79.88252383203191,
+            "m/s"
+          ]
+        },
+        {
+          "p7b-applied-source": [
+            -228.3509781010603,
+            "kg/s"
+          ]
+        },
+        {
+          "p7b-native-water": [
+            0.597844665005423,
+            "m^3"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "save_n04500",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "iterate_4500_to_5000",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "metrics_5000",
+      "state": "PASS",
+      "value": [
+        {
+          "p7bwatervolume": [
+            0.7257131666814095,
+            "m^3"
+          ]
+        },
+        {
+          "p7bwatermass": [
+            639.9120989846665,
+            "kg"
+          ]
+        },
+        {
+          "p7bcollectorvolume": [
+            0.0013444640220631,
+            "m^3"
+          ]
+        },
+        {
+          "p7bcollectormass": [
+            1.185508040734579,
+            "kg"
+          ]
+        },
+        {
+          "p7babovevolume": [
+            0.7243687026593464,
+            "m^3"
+          ]
+        },
+        {
+          "p7bremoval": [
+            491.995893546913,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidsteaminlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidoutlet": [
+            -23.57690018710037,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidboundary": [
+            93.34433227137305,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bliquidclosure": [
+            -398.65156127554,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporliquidinlet": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporsteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporoutlet": [
+            -78.03445943065154,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporbrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporboundary": [
+            2.655442927687346,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bvaporclosure": [
+            2.655442927687346,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureliquidinlet": [
+            116.9212324584734,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturesteaminlet": [
+            80.68990235833888,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureoutlet": [
+            -101.6298165773463,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixturebrinewall": [
+            0.0,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureboundary": [
+            95.98131823946596,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bmixtureclosure": [
+            -396.014575307447,
+            "kg/s"
+          ]
+        },
+        {
+          "p7bpressureliquid": [
+            1151187.947193854,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressuresteam": [
+            1151397.984198675,
+            "Pa"
+          ]
+        },
+        {
+          "p7bpressureoutlet": [
+            1119701.843051527,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropliquid": [
+            31486.10414232663,
+            "Pa"
+          ]
+        },
+        {
+          "p7bdropsteam": [
+            31696.14114714763,
+            "Pa"
+          ]
+        },
+        {
+          "p7bminimumpressure": [
+            1107649.607580204,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumpressure": [
+            1164557.2628231,
+            "Pa"
+          ]
+        },
+        {
+          "p7bmaximumspeed": [
+            72.92230842001085,
+            "m/s"
+          ]
+        },
+        {
+          "p7b-applied-source": [
+            -490.4929747285676,
+            "kg/s"
+          ]
+        },
+        {
+          "p7b-native-water": [
+            0.7257131666814095,
+            "m^3"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "save_final",
+      "state": "PASS",
+      "value": null
+    },
+    {
+      "name": "extract_final_sections",
+      "state": "PASS",
+      "value": {
+        "fields": [
+          "phase-2-vof",
+          "pressure",
+          "velocity-magnitude",
+          "x-velocity",
+          "y-velocity",
+          "z-velocity",
+          "phase-2-velocity-magnitude",
+          "phase-2-x-velocity",
+          "phase-2-y-velocity",
+          "phase-2-z-velocity"
+        ],
+        "sampling": "Fluent iso-surface facet values; node_value=False",
+        "sections": {
+          "p7b-section-y0p5": {
+            "file": "p7b-section-y0p5.npz",
+            "facets": 3138,
+            "vertices": 4316
+          },
+          "p7b-section-y1p5": {
+            "file": "p7b-section-y1p5.npz",
+            "facets": 2964,
+            "vertices": 4124
+          },
+          "p7b-section-y3p0": {
+            "file": "p7b-section-y3p0.npz",
+            "facets": 2780,
+            "vertices": 3714
+          },
+          "p7b-section-y5p0": {
+            "file": "p7b-section-y5p0.npz",
+            "facets": 3096,
+            "vertices": 4129
+          }
+        }
+      }
+    },
+    {
+      "name": "close_native_transcript",
+      "state": "PASS",
+      "value": null
+    }
+  ],
+  "pairs": {
+    "n02500": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s060-resume-20260921T113238Z-n02500.cas.h5",
+    "n03000": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s060-resume-20260921T113238Z-n03000.cas.h5",
+    "n03500": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s060-resume-20260921T113238Z-n03500.cas.h5",
+    "n04000": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s060-resume-20260921T113238Z-n04000.cas.h5",
+    "n04500": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s060-resume-20260921T113238Z-n04500.cas.h5",
+    "final": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s060-resume-20260921T113238Z-final.cas.h5"
+  },
+  "requested_iterations": 5000,
+  "start_iteration": 2495,
+  "parent_manifest": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-20260921T043132Z/manifest.json",
+  "preservation_receipt": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-20260921T043132Z/wifi-preservation.json",
+  "preserved_case": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s060-wifi-preserve-20260921T060414Z.cas.h5",
+  "report": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-s060-20260921T043132Z.out",
+  "remote_transcript": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/logs/p7b-s060-20260921T043132Z.trn",
+  "resume_mode": "continue verified live state; no reload or initialization",
+  "inherited_flux_monitor": {
+    "schema_version": 1,
+    "capture_id": "bc23dc2e1a0b40d987211c2d63ede2ba",
+    "registered": false,
+    "start_iteration": 0,
+    "last_completed_iteration": 2495,
+    "last_event_iteration": 2495,
+    "skipped_duplicate_count": 5,
+    "skipped_duplicate_indices": [
+      50,
+      500,
+      1000,
+      1500,
+      2000
+    ],
+    "local_rows": 2495,
+    "remote_write_completed_rows": 2495,
+    "remote_readback_verified": false,
+    "local_jsonl": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-20260921T043132Z/collector-flux.jsonl",
+    "remote_path_pattern": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-flux-bc23dc2e1a0b40d987211c2d63ede2ba-i{iteration:07d}.json",
+    "face_zones": [
+      {
+        "name": "interior--simple-spiral-separator--brine-outlet-:001",
+        "outward_sign": 1,
+        "expected_owned_count": 3174
+      },
+      {
+        "name": "interior--simple-spiral-separator--brine-outlet-:004",
+        "outward_sign": 1,
+        "expected_owned_count": 2947
+      }
+    ],
+    "error": null
+  },
+  "inherited_evidence": {
+    "flux": {
+      "rows": 2495,
+      "unique_rows": 2495,
+      "duplicate_indices": [],
+      "conflicting_indices": [],
+      "nonfinite_columns": [],
+      "first_iteration": 1,
+      "last_iteration": 2495,
+      "source": {
+        "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-20260921T043132Z/collector-flux.jsonl",
+        "sha256": "6b182282dfb26cf5bea4e444c2f24d770edee43b8e17d57f0a73a2b16d08907e"
+      },
+      "rejected_lines": [],
+      "remote_persistence": "Local rows alone do not prove remote writes; inspect run flux_monitor manifest.",
+      "expected_start": 1,
+      "expected_end": 2495,
+      "missing_indices": [],
+      "complete_to_expected_end": true
+    },
+    "residuals": {
+      "rows": 2500,
+      "unique_rows": 2495,
+      "duplicate_indices": [
+        50,
+        500,
+        1000,
+        1500,
+        2000
+      ],
+      "conflicting_indices": [],
+      "nonfinite_columns": [],
+      "first_iteration": 1,
+      "last_iteration": 2495,
+      "source": {
+        "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-20260921T043132Z/solve.trn",
+        "sha256": "571100974ff20d63945f0ffeb70eefbaf94854d4b9e209c588ef67c803b1a8be"
+      },
+      "rejected_lines": [],
+      "nonpositive_columns": [],
+      "expected_start": 1,
+      "expected_end": 2495,
+      "missing_indices": [],
+      "complete_to_expected_end": true
+    },
+    "initial_sections": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-20260921T043132Z/initial-sections"
+  },
+  "live_report_file": {
+    "name": "p7b-screen-history",
+    "file_name": "reports\\\\p7b-s060-20260921T043132Z.out",
+    "frequency_of": "iteration",
+    "frequency": 1,
+    "itr_index": "1",
+    "run_index": "0",
+    "report_defs": [
+      "p7bwatervolume",
+      "p7bwatermass",
+      "p7bcollectorvolume",
+      "p7bcollectormass",
+      "p7babovevolume",
+      "p7bremoval",
+      "p7bliquidliquidinlet",
+      "p7bliquidsteaminlet",
+      "p7bliquidoutlet",
+      "p7bliquidbrinewall",
+      "p7bliquidboundary",
+      "p7bliquidclosure",
+      "p7bvaporliquidinlet",
+      "p7bvaporsteaminlet",
+      "p7bvaporoutlet",
+      "p7bvaporbrinewall",
+      "p7bvaporboundary",
+      "p7bvaporclosure",
+      "p7bmixtureliquidinlet",
+      "p7bmixturesteaminlet",
+      "p7bmixtureoutlet",
+      "p7bmixturebrinewall",
+      "p7bmixtureboundary",
+      "p7bmixtureclosure",
+      "p7bpressureliquid",
+      "p7bpressuresteam",
+      "p7bpressureoutlet",
+      "p7bdropliquid",
+      "p7bdropsteam",
+      "p7bminimumpressure",
+      "p7bmaximumpressure",
+      "p7bmaximumspeed",
+      "p7b-applied-source",
+      "p7b-native-water"
+    ],
+    "print": false,
+    "active": true,
+    "write_instantaneous_values": false
+  },
+  "reports": [
+    "p7bwatervolume",
+    "p7bwatermass",
+    "p7bcollectorvolume",
+    "p7bcollectormass",
+    "p7babovevolume",
+    "p7bremoval",
+    "p7bliquidliquidinlet",
+    "p7bliquidsteaminlet",
+    "p7bliquidoutlet",
+    "p7bliquidbrinewall",
+    "p7bliquidboundary",
+    "p7bliquidclosure",
+    "p7bvaporliquidinlet",
+    "p7bvaporsteaminlet",
+    "p7bvaporoutlet",
+    "p7bvaporbrinewall",
+    "p7bvaporboundary",
+    "p7bvaporclosure",
+    "p7bmixtureliquidinlet",
+    "p7bmixturesteaminlet",
+    "p7bmixtureoutlet",
+    "p7bmixturebrinewall",
+    "p7bmixtureboundary",
+    "p7bmixtureclosure",
+    "p7bpressureliquid",
+    "p7bpressuresteam",
+    "p7bpressureoutlet",
+    "p7bdropliquid",
+    "p7bdropsteam",
+    "p7bminimumpressure",
+    "p7bmaximumpressure",
+    "p7bmaximumspeed",
+    "p7b-applied-source",
+    "p7b-native-water"
+  ],
+  "resume_verification": {
+    "iteration": 2495,
+    "pair_exists": true,
+    "water_volume": 0.2448366589094557,
+    "scalar_history": {
+      "rows": 2495,
+      "unique_rows": 2495,
+      "duplicate_indices": [],
+      "conflicting_indices": [],
+      "nonfinite_columns": [],
+      "first_iteration": 1,
+      "last_iteration": 2495,
+      "source": {
+        "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-resume-20260921T113238Z/history-02495.out",
+        "sha256": "7ac2bb05aeb6ee0bf7676e09b7f23a5b21a1d4df8884f79bef6938afb8d45475"
+      },
+      "native_header": [
+        "Iteration",
+        "p7bwatervolume",
+        "p7bwatermass",
+        "p7bcollectorvolume",
+        "p7bcollectormass",
+        "p7babovevolume",
+        "p7bremoval",
+        "p7bliquidliquidinlet",
+        "p7bliquidsteaminlet",
+        "p7bliquidoutlet",
+        "p7bliquidbrinewall",
+        "p7bliquidboundary",
+        "p7bliquidclosure",
+        "p7bvaporliquidinlet",
+        "p7bvaporsteaminlet",
+        "p7bvaporoutlet",
+        "p7bvaporbrinewall",
+        "p7bvaporboundary",
+        "p7bvaporclosure",
+        "p7bmixtureliquidinlet",
+        "p7bmixturesteaminlet",
+        "p7bmixtureoutlet",
+        "p7bmixturebrinewall",
+        "p7bmixtureboundary",
+        "p7bmixtureclosure",
+        "p7bpressureliquid",
+        "p7bpressuresteam",
+        "p7bpressureoutlet",
+        "p7bdropliquid",
+        "p7bdropsteam",
+        "p7bminimumpressure",
+        "p7bmaximumpressure",
+        "p7bmaximumspeed",
+        "p7b-applied-source",
+        "p7b-native-water"
+      ],
+      "rejected_lines": [],
+      "expected_start": 1,
+      "expected_end": 2495,
+      "missing_indices": [],
+      "complete_to_expected_end": true
+    },
+    "remote_flux_last_row_matches": true
+  },
+  "actual_iteration": 5000,
+  "flux_monitor": {
+    "schema_version": 1,
+    "capture_id": "4be74084a60743ac8fe71867012a5f34",
+    "registered": false,
+    "start_iteration": 2495,
+    "prefix_source": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-20260921T043132Z/collector-flux.jsonl",
+    "inherited_rows": 2495,
+    "last_completed_iteration": 5000,
+    "last_event_iteration": 5000,
+    "skipped_duplicate_count": 6,
+    "skipped_duplicate_indices": [
+      2495,
+      2500,
+      3000,
+      3500,
+      4000,
+      4500
+    ],
+    "local_rows": 2505,
+    "remote_write_completed_rows": 2505,
+    "remote_readback_verified": false,
+    "local_jsonl": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-resume-20260921T113238Z/collector-flux.jsonl",
+    "remote_path_pattern": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-flux-4be74084a60743ac8fe71867012a5f34-i{iteration:07d}.json",
+    "face_zones": [
+      {
+        "name": "interior--simple-spiral-separator--brine-outlet-:001",
+        "outward_sign": 1,
+        "expected_owned_count": 3174
+      },
+      {
+        "name": "interior--simple-spiral-separator--brine-outlet-:004",
+        "outward_sign": 1,
+        "expected_owned_count": 2947
+      }
+    ],
+    "error": null
+  },
+  "remote_flux_readbacks": [
+    {
+      "iteration": 2500,
+      "path": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-flux-4be74084a60743ac8fe71867012a5f34-i0002500.json",
+      "matches_local": true
+    },
+    {
+      "iteration": 3000,
+      "path": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-flux-4be74084a60743ac8fe71867012a5f34-i0003000.json",
+      "matches_local": true
+    },
+    {
+      "iteration": 3500,
+      "path": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-flux-4be74084a60743ac8fe71867012a5f34-i0003500.json",
+      "matches_local": true
+    },
+    {
+      "iteration": 4000,
+      "path": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-flux-4be74084a60743ac8fe71867012a5f34-i0004000.json",
+      "matches_local": true
+    },
+    {
+      "iteration": 4500,
+      "path": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-flux-4be74084a60743ac8fe71867012a5f34-i0004500.json",
+      "matches_local": true
+    },
+    {
+      "iteration": 5000,
+      "path": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-flux-4be74084a60743ac8fe71867012a5f34-i0005000.json",
+      "matches_local": true
+    }
+  ],
+  "recording_audit": {
+    "iteration": 5000,
+    "scalar": {
+      "rows": 5000,
+      "unique_rows": 5000,
+      "duplicate_indices": [],
+      "conflicting_indices": [],
+      "nonfinite_columns": [],
+      "first_iteration": 1,
+      "last_iteration": 5000,
+      "source": {
+        "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-resume-20260921T113238Z/history-05000.out",
+        "sha256": "3eb89685807b44c769d041d2e8ecfca5205bd5f038cb75171d600a5ae16180a4"
+      },
+      "native_header": [
+        "Iteration",
+        "p7bwatervolume",
+        "p7bwatermass",
+        "p7bcollectorvolume",
+        "p7bcollectormass",
+        "p7babovevolume",
+        "p7bremoval",
+        "p7bliquidliquidinlet",
+        "p7bliquidsteaminlet",
+        "p7bliquidoutlet",
+        "p7bliquidbrinewall",
+        "p7bliquidboundary",
+        "p7bliquidclosure",
+        "p7bvaporliquidinlet",
+        "p7bvaporsteaminlet",
+        "p7bvaporoutlet",
+        "p7bvaporbrinewall",
+        "p7bvaporboundary",
+        "p7bvaporclosure",
+        "p7bmixtureliquidinlet",
+        "p7bmixturesteaminlet",
+        "p7bmixtureoutlet",
+        "p7bmixturebrinewall",
+        "p7bmixtureboundary",
+        "p7bmixtureclosure",
+        "p7bpressureliquid",
+        "p7bpressuresteam",
+        "p7bpressureoutlet",
+        "p7bdropliquid",
+        "p7bdropsteam",
+        "p7bminimumpressure",
+        "p7bmaximumpressure",
+        "p7bmaximumspeed",
+        "p7b-applied-source",
+        "p7b-native-water"
+      ],
+      "rejected_lines": [],
+      "expected_start": 1,
+      "expected_end": 5000,
+      "missing_indices": [],
+      "complete_to_expected_end": true
+    },
+    "flux": {
+      "rows": 5000,
+      "unique_rows": 5000,
+      "duplicate_indices": [],
+      "conflicting_indices": [],
+      "nonfinite_columns": [],
+      "first_iteration": 1,
+      "last_iteration": 5000,
+      "source": {
+        "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-resume-20260921T113238Z/collector-flux.jsonl",
+        "sha256": "3fe31449731872982cb6b7a4d78a8925c9da07937b28e7f9414fa844aea8ccaf"
+      },
+      "rejected_lines": [],
+      "remote_persistence": "Local rows alone do not prove remote writes; inspect run flux_monitor manifest.",
+      "expected_start": 1,
+      "expected_end": 5000,
+      "missing_indices": [],
+      "complete_to_expected_end": true
+    },
+    "residuals": {
+      "rows": 5011,
+      "unique_rows": 5000,
+      "duplicate_indices": [
+        50,
+        500,
+        1000,
+        1500,
+        2000,
+        2495,
+        2500,
+        3000,
+        3500,
+        4000,
+        4500
+      ],
+      "conflicting_indices": [],
+      "nonfinite_columns": [],
+      "first_iteration": 1,
+      "last_iteration": 5000,
+      "source": {
+        "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-resume-20260921T113238Z/solve.trn",
+        "sha256": "2ed05a9f6d72bd09e77b88dd5c0e2a79c7d088622e2ee93cd4a1bccd0f7b680f"
+      },
+      "rejected_lines": [],
+      "nonpositive_columns": [],
+      "expected_start": 1,
+      "expected_end": 5000,
+      "missing_indices": [],
+      "complete_to_expected_end": true
+    }
+  },
+  "latest_metrics": [
+    {
+      "p7bwatervolume": [
+        0.7257131666814095,
+        "m^3"
+      ]
+    },
+    {
+      "p7bwatermass": [
+        639.9120989846665,
+        "kg"
+      ]
+    },
+    {
+      "p7bcollectorvolume": [
+        0.0013444640220631,
+        "m^3"
+      ]
+    },
+    {
+      "p7bcollectormass": [
+        1.185508040734579,
+        "kg"
+      ]
+    },
+    {
+      "p7babovevolume": [
+        0.7243687026593464,
+        "m^3"
+      ]
+    },
+    {
+      "p7bremoval": [
+        491.995893546913,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bliquidliquidinlet": [
+        116.9212324584734,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bliquidsteaminlet": [
+        0.0,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bliquidoutlet": [
+        -23.57690018710037,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bliquidbrinewall": [
+        0.0,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bliquidboundary": [
+        93.34433227137305,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bliquidclosure": [
+        -398.65156127554,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bvaporliquidinlet": [
+        0.0,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bvaporsteaminlet": [
+        80.68990235833888,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bvaporoutlet": [
+        -78.03445943065154,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bvaporbrinewall": [
+        0.0,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bvaporboundary": [
+        2.655442927687346,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bvaporclosure": [
+        2.655442927687346,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bmixtureliquidinlet": [
+        116.9212324584734,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bmixturesteaminlet": [
+        80.68990235833888,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bmixtureoutlet": [
+        -101.6298165773463,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bmixturebrinewall": [
+        0.0,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bmixtureboundary": [
+        95.98131823946596,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bmixtureclosure": [
+        -396.014575307447,
+        "kg/s"
+      ]
+    },
+    {
+      "p7bpressureliquid": [
+        1151187.947193854,
+        "Pa"
+      ]
+    },
+    {
+      "p7bpressuresteam": [
+        1151397.984198675,
+        "Pa"
+      ]
+    },
+    {
+      "p7bpressureoutlet": [
+        1119701.843051527,
+        "Pa"
+      ]
+    },
+    {
+      "p7bdropliquid": [
+        31486.10414232663,
+        "Pa"
+      ]
+    },
+    {
+      "p7bdropsteam": [
+        31696.14114714763,
+        "Pa"
+      ]
+    },
+    {
+      "p7bminimumpressure": [
+        1107649.607580204,
+        "Pa"
+      ]
+    },
+    {
+      "p7bmaximumpressure": [
+        1164557.2628231,
+        "Pa"
+      ]
+    },
+    {
+      "p7bmaximumspeed": [
+        72.92230842001085,
+        "m/s"
+      ]
+    },
+    {
+      "p7b-applied-source": [
+        -490.4929747285676,
+        "kg/s"
+      ]
+    },
+    {
+      "p7b-native-water": [
+        0.7257131666814095,
+        "m^3"
+      ]
+    }
+  ],
+  "segment_iterations": 2505,
+  "final_sections": {
+    "fields": [
+      "phase-2-vof",
+      "pressure",
+      "velocity-magnitude",
+      "x-velocity",
+      "y-velocity",
+      "z-velocity",
+      "phase-2-velocity-magnitude",
+      "phase-2-x-velocity",
+      "phase-2-y-velocity",
+      "phase-2-z-velocity"
+    ],
+    "sampling": "Fluent iso-surface facet values; node_value=False",
+    "sections": {
+      "p7b-section-y0p5": {
+        "file": "p7b-section-y0p5.npz",
+        "facets": 3138,
+        "vertices": 4316
+      },
+      "p7b-section-y1p5": {
+        "file": "p7b-section-y1p5.npz",
+        "facets": 2964,
+        "vertices": 4124
+      },
+      "p7b-section-y3p0": {
+        "file": "p7b-section-y3p0.npz",
+        "facets": 2780,
+        "vertices": 3714
+      },
+      "p7b-section-y5p0": {
+        "file": "p7b-section-y5p0.npz",
+        "facets": 3096,
+        "vertices": 4129
+      }
+    }
+  },
+  "completed_iterations": 5000
+}

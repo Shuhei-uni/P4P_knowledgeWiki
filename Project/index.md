@@ -118,8 +118,12 @@ with component-first syntax; all three components match native phase reports
 at nonzero slip. Corrected collector expressions completed a 50-iteration
 startup diagnostic with complete histories. Exact mask-face flux recording
 also passed its live smoke. The API has recovered and the S20 report-context error is corrected, saved
-and verified after reload. S20 is resuming its approved screen; no
-5,000-iteration case is complete yet. See the
+and verified after reload. S20 completed its 5,000-iteration screen with all histories and final sections.
+It did not achieve acceptable mass closure; S40, S60 and S80 also completed 5,000 iterations with final artifacts and full analyses;
+none of the four meets the numerical criteria. S100 suffered numerical failure
+at attempted N4183; all completed N1–4182 records and a labelled N4000 recovery
+field set are preserved. The [G1 comparison](experiments/phase-07b-full-geometry-liquid-removal/results.md)
+is complete; no case is qualified and check-ins stop. See the
 [technical diagnostics](experiments/phase-07b-full-geometry-liquid-removal/diagnostics.md).
 Gate G1 returns the comparative observations to Andy. The selected condition
 is steady Mixture/RNG physics with Energy off and full-feed `1600 kJ/kg`,
@@ -196,12 +200,12 @@ steady state. A standing pool is explicitly not required in Phase 7b.
   persist over a declared qualification horizon or are dominated by pressure
   coupling, outlet reverse flow, source/local conditioning, or equation
   treatment;
-- for Andy's Phase 7b, API/session recovery, complete reference phase-interaction
-  readback, collector source/velocity implementation and file-backed instrumentation;
+- for Andy's Phase 7b, which separately authorized diagnostic could distinguish
+  source-strength/coupling effects from collector coverage after the G1 screen;
 - whether liquid reaches the collector and can be removed without unacceptable
   steam loss, phase-routing distortion, mass imbalance, or numerical instability;
-- verified source coupling and persistence before the approved five-case,
-  5,000-iteration screen and G1 review; and
+- why the fixed-treatment Phase 7b cases retain strong mass imbalance and
+  nonstationarity, including S100's numerical divergence; and
 - which external, analytical, or measured targets would eventually support a
   physical validation claim.
 
@@ -222,8 +226,10 @@ readback, save/reopen, smoke-test, and one-declared-delta controls.
 Andy's Phase 7b has verified its five collector masks and PC/API paths and
 declared a common finite source coefficient and evidence contract in its
 [design](experiments/phase-07b-full-geometry-liquid-removal/design.md).
-Complete the first fully instrumented child and execute the approved five-case
-screen with the verified Python-only source and exact-face recording route. Shuhei's Phase 7
+The approved five-case screen now has a complete G1 comparison: four
+N5000 endpoints fail numerical criteria and S100 has a documented numerical
+block at attempted N4183. Review its [results](experiments/phase-07b-full-geometry-liquid-removal/results.md)
+before authorizing any new scientific treatment. Shuhei's Phase 7
 retains the original E0--E4 fixed-mesh campaign as the comparison record and
 now executes the human-approved E5 cell-zone recovery family. The first
 student-server split placed `3,794` lower cells in a second fluid zone without
@@ -244,7 +250,8 @@ Extreme SSD and its SHA-256 verified. The copied PC phase folder under
 `C:/Users/qtra338/P4P/experiments/` was verified accessible through Fluent/PyFluent,
 with output text round-trips and a historical compiled source-free geometry
 probe. Fresh-process clean N3 reload and client-exit preservation are now verified;
-this establishes current recovery, not a runnable collector.
+these preparation checks were followed by the completed G1 discovery screen
+linked above; no credible steady collector solution was established.
 
 ## Project map
 

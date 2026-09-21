@@ -1,0 +1,190 @@
+{
+  "original_run": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-20260921T043132Z",
+  "resumed_run": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-resume-20260921T113238Z",
+  "continued_from_global_iteration": 2495,
+  "total_global_iterations": 5000,
+  "resumed_iterations": 2505,
+  "resume_mode": "continue verified live state; no reload or initialization",
+  "original_flux_source": {
+    "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-20260921T043132Z/collector-flux.jsonl",
+    "sha256": "6b182282dfb26cf5bea4e444c2f24d770edee43b8e17d57f0a73a2b16d08907e"
+  },
+  "combined_flux_source": {
+    "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-resume-20260921T113238Z/collector-flux.jsonl",
+    "sha256": "3fe31449731872982cb6b7a4d78a8925c9da07937b28e7f9414fa844aea8ccaf"
+  },
+  "original_flux_byte_prefix_unchanged": true,
+  "capture_groups": {
+    "bc23dc2e1a0b40d987211c2d63ede2ba": {
+      "first": 1,
+      "last": 2495,
+      "rows": 2495
+    },
+    "4be74084a60743ac8fe71867012a5f34": {
+      "first": 2496,
+      "last": 5000,
+      "rows": 2505
+    }
+  },
+  "scalar_prefix_2495_values_identical": true,
+  "residual_prefix_2495_values_identical": true,
+  "initial_section_files_identical_to_original": [
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-resume-20260921T113238Z/initial-sections/p7b-section-y0p5.npz",
+      "sha256": "759134623fc2b7be2e489e59b5808cbd07914e41f235096cd427575b6d0ff293"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-resume-20260921T113238Z/initial-sections/p7b-section-y3p0.npz",
+      "sha256": "70f40ec61789956b0502e98bba185b703f816e6497b1499a910b36289afc3535"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-resume-20260921T113238Z/initial-sections/p7b-section-y5p0.npz",
+      "sha256": "619b7c2af84f9dfb0d6687cb91bf6d00b914ca7a299737407934b681770d176d"
+    },
+    {
+      "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-resume-20260921T113238Z/initial-sections/p7b-section-y1p5.npz",
+      "sha256": "bda1b43a5b0c0ab8ad07f77c05e943052ffdc8a79c86ff9424b5ebcc96480f78"
+    }
+  ],
+  "inherited_remote_completed_writes": 2495,
+  "resumed_remote_completed_writes": 2505,
+  "remote_checkpoint_readbacks": [
+    {
+      "iteration": 2500,
+      "path": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-flux-4be74084a60743ac8fe71867012a5f34-i0002500.json",
+      "matches_local": true
+    },
+    {
+      "iteration": 3000,
+      "path": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-flux-4be74084a60743ac8fe71867012a5f34-i0003000.json",
+      "matches_local": true
+    },
+    {
+      "iteration": 3500,
+      "path": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-flux-4be74084a60743ac8fe71867012a5f34-i0003500.json",
+      "matches_local": true
+    },
+    {
+      "iteration": 4000,
+      "path": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-flux-4be74084a60743ac8fe71867012a5f34-i0004000.json",
+      "matches_local": true
+    },
+    {
+      "iteration": 4500,
+      "path": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-flux-4be74084a60743ac8fe71867012a5f34-i0004500.json",
+      "matches_local": true
+    },
+    {
+      "iteration": 5000,
+      "path": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-flux-4be74084a60743ac8fe71867012a5f34-i0005000.json",
+      "matches_local": true
+    }
+  ],
+  "global_coverage": {
+    "history": {
+      "rows": 5000,
+      "unique_rows": 5000,
+      "duplicate_indices": [],
+      "conflicting_indices": [],
+      "nonfinite_columns": [],
+      "first_iteration": 1,
+      "last_iteration": 5000,
+      "source": {
+        "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-resume-20260921T113238Z/history-05000.out",
+        "sha256": "3eb89685807b44c769d041d2e8ecfca5205bd5f038cb75171d600a5ae16180a4"
+      },
+      "native_header": [
+        "Iteration",
+        "p7bwatervolume",
+        "p7bwatermass",
+        "p7bcollectorvolume",
+        "p7bcollectormass",
+        "p7babovevolume",
+        "p7bremoval",
+        "p7bliquidliquidinlet",
+        "p7bliquidsteaminlet",
+        "p7bliquidoutlet",
+        "p7bliquidbrinewall",
+        "p7bliquidboundary",
+        "p7bliquidclosure",
+        "p7bvaporliquidinlet",
+        "p7bvaporsteaminlet",
+        "p7bvaporoutlet",
+        "p7bvaporbrinewall",
+        "p7bvaporboundary",
+        "p7bvaporclosure",
+        "p7bmixtureliquidinlet",
+        "p7bmixturesteaminlet",
+        "p7bmixtureoutlet",
+        "p7bmixturebrinewall",
+        "p7bmixtureboundary",
+        "p7bmixtureclosure",
+        "p7bpressureliquid",
+        "p7bpressuresteam",
+        "p7bpressureoutlet",
+        "p7bdropliquid",
+        "p7bdropsteam",
+        "p7bminimumpressure",
+        "p7bmaximumpressure",
+        "p7bmaximumspeed",
+        "p7b-applied-source",
+        "p7b-native-water"
+      ],
+      "rejected_lines": [],
+      "expected_start": 1,
+      "expected_end": 5000,
+      "missing_indices": [],
+      "complete_to_expected_end": true
+    },
+    "collector_flux": {
+      "rows": 5000,
+      "unique_rows": 5000,
+      "duplicate_indices": [],
+      "conflicting_indices": [],
+      "nonfinite_columns": [],
+      "first_iteration": 1,
+      "last_iteration": 5000,
+      "source": {
+        "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-resume-20260921T113238Z/collector-flux.jsonl",
+        "sha256": "3fe31449731872982cb6b7a4d78a8925c9da07937b28e7f9414fa844aea8ccaf"
+      },
+      "rejected_lines": [],
+      "remote_persistence": "Local rows alone do not prove remote writes; inspect run flux_monitor manifest.",
+      "expected_start": 1,
+      "expected_end": 5000,
+      "missing_indices": [],
+      "complete_to_expected_end": true
+    },
+    "residuals": {
+      "rows": 5011,
+      "unique_rows": 5000,
+      "duplicate_indices": [
+        50,
+        500,
+        1000,
+        1500,
+        2000,
+        2495,
+        2500,
+        3000,
+        3500,
+        4000,
+        4500
+      ],
+      "conflicting_indices": [],
+      "nonfinite_columns": [],
+      "first_iteration": 1,
+      "last_iteration": 5000,
+      "source": {
+        "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-resume-20260921T113238Z/solve.trn",
+        "sha256": "f3bd82ddd85b00ee43004da6efc3a5835865b87ee41628b120d0727550fac700"
+      },
+      "rejected_lines": [],
+      "nonpositive_columns": [],
+      "expected_start": 1,
+      "expected_end": 5000,
+      "missing_indices": [],
+      "complete_to_expected_end": true
+    }
+  }
+}

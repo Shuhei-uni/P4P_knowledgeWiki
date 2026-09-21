@@ -76,6 +76,7 @@ class Phase07bFluxMonitor:
         start_iteration: int,
         local_jsonl: str | Path,
         remote_directory: str,
+        prefix_source: str | Path | None = None,
     ) -> None:
         if not face_zones or len({z.name for z in face_zones}) != len(face_zones):
             raise ValueError("Require at least one unique face-zone name")
@@ -93,6 +94,7 @@ class Phase07bFluxMonitor:
         self.local_jsonl = Path(local_jsonl)
         self.remote_directory = remote_directory.replace("\\", "/").rstrip("/")
         self.capture_id = uuid4().hex
+        self.prefix_source = Path(prefix_source) if prefix_source else None
         self._callback_id: str | None = None
         self._file: Any = None
         self._lock = threading.RLock()
@@ -117,8 +119,17 @@ class Phase07bFluxMonitor:
         with self._lock:
             if self._started:
                 raise RuntimeError("Create a new monitor for another registration")
+            prefix = ""
+            if self.prefix_source is not None:
+                prefix = self.prefix_source.read_text(encoding="ascii")
+                rows = [json.loads(line) for line in prefix.splitlines()]
+                if [row['iteration'] for row in rows] != list(range(1, self.start_iteration + 1)):
+                    raise ValueError('Resume flux prefix must cover exactly 1..start_iteration')
             self.local_jsonl.parent.mkdir(parents=True, exist_ok=True)
             self._file = self.local_jsonl.open("x", encoding="ascii")
+            if prefix:
+                self._file.write(prefix.rstrip('\n') + '\n')
+                self._file.flush()
             self._started = True
             try:
                 self._callback_id = self._solver.events.register_callback(
@@ -242,6 +253,8 @@ class Phase07bFluxMonitor:
                 "capture_id": self.capture_id,
                 "registered": self._callback_id is not None,
                 "start_iteration": self.start_iteration,
+                "prefix_source": str(self.prefix_source.resolve()) if self.prefix_source else None,
+                "inherited_rows": self.start_iteration if self.prefix_source else 0,
                 "last_completed_iteration": self._last_iteration,
                 "last_event_iteration": self._last_event,
                 "skipped_duplicate_count": len(self._skipped_duplicate_indices),

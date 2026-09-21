@@ -1,0 +1,12 @@
+{
+  "comparison_case": "S80",
+  "reference_setup_identical": true,
+  "hybrid_options_identical": true,
+  "total_cells": 620431,
+  "collector_cells": 98519,
+  "interface_faces": 6286,
+  "interface_zone_names": [
+    "interior--simple-spiral-separator--brine-outlet-:001",
+    "interior--simple-spiral-separator--brine-outlet-:004"
+  ]
+}

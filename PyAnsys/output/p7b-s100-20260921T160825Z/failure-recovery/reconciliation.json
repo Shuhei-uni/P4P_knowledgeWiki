@@ -1,0 +1,40 @@
+{
+  "started_utc": "2026-09-21T18:59:11.512117+00:00",
+  "status": "FAILED_STATE_RECONCILED_AND_PRESERVED_NO_SOLVE",
+  "steps": [
+    {
+      "name": "connect",
+      "status": "PASS",
+      "value": "<ansys.fluent.core.session_solver.Solver object at 0x107ab6720>"
+    },
+    {
+      "name": "health",
+      "status": "PASS",
+      "value": "Status.SERVING"
+    },
+    {
+      "name": "iteration",
+      "status": "PASS",
+      "value": 4183.0
+    },
+    {
+      "name": "recover_native_scalar_history",
+      "status": "PASS",
+      "value": {
+        "lines": 4185
+      }
+    },
+    {
+      "name": "preserve_failed_diagnostic_pair",
+      "status": "PASS",
+      "value": null
+    }
+  ],
+  "health": "Status.SERVING",
+  "iteration": 4183.0,
+  "checkpoint_4000_exists": true,
+  "failed_diagnostic_case": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s100-failed-n04183-20260921T185920Z.cas.h5",
+  "failed_diagnostic_use": "Diverged terminal state; not a valid scientific endpoint or restart parent",
+  "failed_pair_exists": true,
+  "iteration_after_save": 4183.0
+}

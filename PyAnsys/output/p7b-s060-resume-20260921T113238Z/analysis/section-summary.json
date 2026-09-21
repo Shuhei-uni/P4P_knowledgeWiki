@@ -1,0 +1,562 @@
+{
+  "run_id": "p7b-s060-resume-20260921T113238Z",
+  "source_case_data": {
+    "n02500": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s060-resume-20260921T113238Z-n02500.cas.h5",
+    "n03000": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s060-resume-20260921T113238Z-n03000.cas.h5",
+    "n03500": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s060-resume-20260921T113238Z-n03500.cas.h5",
+    "n04000": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s060-resume-20260921T113238Z-n04000.cas.h5",
+    "n04500": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s060-resume-20260921T113238Z-n04500.cas.h5",
+    "final": "C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s060-resume-20260921T113238Z-final.cas.h5"
+  },
+  "rendering": "Piecewise constant native Fluent iso-surface facet values; no interpolation or smoothing.",
+  "field_identity_limit": "Run-local API metadata identifies unqualified pressure/velocity fields as mixture and phase-2-prefixed fields as phase-2.",
+  "initial_final_geometry_identical": true,
+  "scales": {
+    "phase-2-vof": [
+      0.0,
+      1.0
+    ],
+    "velocity-magnitude": [
+      0,
+      80
+    ],
+    "phase-2-velocity-magnitude": [
+      0,
+      80
+    ],
+    "x-velocity": [
+      -80,
+      80
+    ],
+    "y-velocity": [
+      -80,
+      80
+    ],
+    "z-velocity": [
+      -80,
+      80
+    ],
+    "phase-2-x-velocity": [
+      -80,
+      80
+    ],
+    "phase-2-y-velocity": [
+      -80,
+      80
+    ],
+    "phase-2-z-velocity": [
+      -80,
+      80
+    ]
+  },
+  "comparison_rule": "Reuse these scales across cases; if exceeded, widen and regenerate every comparison figure.",
+  "claim_limit": "Finite unconverged field snapshots; no thickness effect can be inferred from a single case.",
+  "evidence": {
+    "initial": {
+      "p7b-section-y0p5": {
+        "source": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-resume-20260921T113238Z/initial-sections/p7b-section-y0p5.npz",
+        "sha256": "759134623fc2b7be2e489e59b5808cbd07914e41f235096cd427575b6d0ff293",
+        "height_m": 0.5,
+        "facets": 3138,
+        "zero_projected_area_facets": 0,
+        "area_m2": 3.1649012565612793,
+        "fields": {
+          "phase-2-vof": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "pressure": {
+            "minimum": 1120000.0,
+            "maximum": 1120000.0,
+            "area_weighted_mean": 1120000.0
+          },
+          "velocity-magnitude": {
+            "minimum": 0.3304993808269501,
+            "maximum": 0.8550099730491638,
+            "area_weighted_mean": 0.48343613743782043
+          },
+          "x-velocity": {
+            "minimum": -0.2624814808368683,
+            "maximum": 0.6934968829154968,
+            "area_weighted_mean": 0.13259796798229218
+          },
+          "y-velocity": {
+            "minimum": -0.6632489562034607,
+            "maximum": 0.4672876000404358,
+            "area_weighted_mean": -0.00021600531181320548
+          },
+          "z-velocity": {
+            "minimum": -0.06309189647436142,
+            "maximum": 0.8377471566200256,
+            "area_weighted_mean": 0.24044333398342133
+          },
+          "phase-2-velocity-magnitude": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "phase-2-x-velocity": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "phase-2-y-velocity": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "phase-2-z-velocity": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          }
+        }
+      },
+      "p7b-section-y1p5": {
+        "source": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-resume-20260921T113238Z/initial-sections/p7b-section-y1p5.npz",
+        "sha256": "bda1b43a5b0c0ab8ad07f77c05e943052ffdc8a79c86ff9424b5ebcc96480f78",
+        "height_m": 1.5,
+        "facets": 2964,
+        "zero_projected_area_facets": 1,
+        "area_m2": 3.164724111557007,
+        "fields": {
+          "phase-2-vof": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "pressure": {
+            "minimum": 1120000.0,
+            "maximum": 1120000.0,
+            "area_weighted_mean": 1120000.0
+          },
+          "velocity-magnitude": {
+            "minimum": 1.2021132707595825,
+            "maximum": 8.17190170288086,
+            "area_weighted_mean": 2.334810256958008
+          },
+          "x-velocity": {
+            "minimum": -2.2354393005371094,
+            "maximum": 3.13067889213562,
+            "area_weighted_mean": 0.6813476085662842
+          },
+          "y-velocity": {
+            "minimum": -7.865180969238281,
+            "maximum": 1.4275469779968262,
+            "area_weighted_mean": 0.010969717055559158
+          },
+          "z-velocity": {
+            "minimum": -0.5779747366905212,
+            "maximum": 4.18610143661499,
+            "area_weighted_mean": 1.2357770204544067
+          },
+          "phase-2-velocity-magnitude": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "phase-2-x-velocity": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "phase-2-y-velocity": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "phase-2-z-velocity": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          }
+        }
+      },
+      "p7b-section-y3p0": {
+        "source": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-resume-20260921T113238Z/initial-sections/p7b-section-y3p0.npz",
+        "sha256": "70f40ec61789956b0502e98bba185b703f816e6497b1499a910b36289afc3535",
+        "height_m": 3.0,
+        "facets": 2780,
+        "zero_projected_area_facets": 0,
+        "area_m2": 3.1650242805480957,
+        "fields": {
+          "phase-2-vof": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "pressure": {
+            "minimum": 1120000.0,
+            "maximum": 1120000.0,
+            "area_weighted_mean": 1120000.0
+          },
+          "velocity-magnitude": {
+            "minimum": 3.473445177078247,
+            "maximum": 7.01953649520874,
+            "area_weighted_mean": 4.591349124908447
+          },
+          "x-velocity": {
+            "minimum": -0.813576340675354,
+            "maximum": 1.9124623537063599,
+            "area_weighted_mean": 0.36033087968826294
+          },
+          "y-velocity": {
+            "minimum": 3.473125457763672,
+            "maximum": 7.012951850891113,
+            "area_weighted_mean": 4.490726470947266
+          },
+          "z-velocity": {
+            "minimum": -0.19423545897006989,
+            "maximum": 2.1942944526672363,
+            "area_weighted_mean": 0.6682124733924866
+          },
+          "phase-2-velocity-magnitude": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "phase-2-x-velocity": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "phase-2-y-velocity": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "phase-2-z-velocity": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          }
+        }
+      },
+      "p7b-section-y5p0": {
+        "source": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-resume-20260921T113238Z/initial-sections/p7b-section-y5p0.npz",
+        "sha256": "619b7c2af84f9dfb0d6687cb91bf6d00b914ca7a299737407934b681770d176d",
+        "height_m": 5.0,
+        "facets": 3096,
+        "zero_projected_area_facets": 1,
+        "area_m2": 3.1650500297546387,
+        "fields": {
+          "phase-2-vof": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "pressure": {
+            "minimum": 1120000.0,
+            "maximum": 1120000.0,
+            "area_weighted_mean": 1120000.0
+          },
+          "velocity-magnitude": {
+            "minimum": 4.405588150024414,
+            "maximum": 4.576952934265137,
+            "area_weighted_mean": 4.490485191345215
+          },
+          "x-velocity": {
+            "minimum": -0.03340612351894379,
+            "maximum": 0.09380575269460678,
+            "area_weighted_mean": 0.019783392548561096
+          },
+          "y-velocity": {
+            "minimum": 4.4055867195129395,
+            "maximum": 4.576943874359131,
+            "area_weighted_mean": 4.490182399749756
+          },
+          "z-velocity": {
+            "minimum": -0.022868748754262924,
+            "maximum": 0.11733469367027283,
+            "area_weighted_mean": 0.03628531098365784
+          },
+          "phase-2-velocity-magnitude": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "phase-2-x-velocity": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "phase-2-y-velocity": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          },
+          "phase-2-z-velocity": {
+            "minimum": 0.0,
+            "maximum": 0.0,
+            "area_weighted_mean": 0.0
+          }
+        }
+      }
+    },
+    "final": {
+      "p7b-section-y0p5": {
+        "source": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-resume-20260921T113238Z/final-sections/p7b-section-y0p5.npz",
+        "sha256": "8f1f94338aef5c03c48f6704da6886dcf39532e54be4c2af06d78b45beb1727b",
+        "height_m": 0.5,
+        "facets": 3138,
+        "zero_projected_area_facets": 0,
+        "area_m2": 3.1649012565612793,
+        "fields": {
+          "phase-2-vof": {
+            "minimum": 0.0003260801313444972,
+            "maximum": 0.9375736713409424,
+            "area_weighted_mean": 0.020313989371061325
+          },
+          "pressure": {
+            "minimum": 1137576.125,
+            "maximum": 1148001.75,
+            "area_weighted_mean": 1141860.0
+          },
+          "velocity-magnitude": {
+            "minimum": 0.22430434823036194,
+            "maximum": 44.9579963684082,
+            "area_weighted_mean": 24.8597469329834
+          },
+          "x-velocity": {
+            "minimum": -36.061405181884766,
+            "maximum": 32.1092529296875,
+            "area_weighted_mean": -2.6974759101867676
+          },
+          "y-velocity": {
+            "minimum": -27.654972076416016,
+            "maximum": 14.213617324829102,
+            "area_weighted_mean": -0.1937006115913391
+          },
+          "z-velocity": {
+            "minimum": -34.55826950073242,
+            "maximum": 32.737548828125,
+            "area_weighted_mean": 1.2760990858078003
+          },
+          "phase-2-velocity-magnitude": {
+            "minimum": 0.23904269933700562,
+            "maximum": 45.00233840942383,
+            "area_weighted_mean": 24.866836547851562
+          },
+          "phase-2-x-velocity": {
+            "minimum": -36.07278823852539,
+            "maximum": 32.11802291870117,
+            "area_weighted_mean": -2.694352626800537
+          },
+          "phase-2-y-velocity": {
+            "minimum": -27.68902587890625,
+            "maximum": 14.210150718688965,
+            "area_weighted_mean": -0.19765456020832062
+          },
+          "phase-2-z-velocity": {
+            "minimum": -34.56206130981445,
+            "maximum": 32.8081169128418,
+            "area_weighted_mean": 1.2827000617980957
+          }
+        }
+      },
+      "p7b-section-y1p5": {
+        "source": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-resume-20260921T113238Z/final-sections/p7b-section-y1p5.npz",
+        "sha256": "d2e65ea6a180944cddc352e509875b2bf5b7c769d23e5980fdc399ac84022fc5",
+        "height_m": 1.5,
+        "facets": 2964,
+        "zero_projected_area_facets": 1,
+        "area_m2": 3.164724111557007,
+        "fields": {
+          "phase-2-vof": {
+            "minimum": 0.0003989020478911698,
+            "maximum": 0.9472208619117737,
+            "area_weighted_mean": 0.018721148371696472
+          },
+          "pressure": {
+            "minimum": 1137912.125,
+            "maximum": 1147476.5,
+            "area_weighted_mean": 1141749.875
+          },
+          "velocity-magnitude": {
+            "minimum": 2.363554000854492,
+            "maximum": 54.7671012878418,
+            "area_weighted_mean": 26.530061721801758
+          },
+          "x-velocity": {
+            "minimum": -43.73070526123047,
+            "maximum": 49.66856384277344,
+            "area_weighted_mean": 2.1733176708221436
+          },
+          "y-velocity": {
+            "minimum": -22.138099670410156,
+            "maximum": 14.002889633178711,
+            "area_weighted_mean": -0.2727466821670532
+          },
+          "z-velocity": {
+            "minimum": -34.253257751464844,
+            "maximum": 46.85639190673828,
+            "area_weighted_mean": 1.7323514223098755
+          },
+          "phase-2-velocity-magnitude": {
+            "minimum": 2.3885338306427,
+            "maximum": 55.27008819580078,
+            "area_weighted_mean": 26.54200553894043
+          },
+          "phase-2-x-velocity": {
+            "minimum": -43.71099090576172,
+            "maximum": 50.05436706542969,
+            "area_weighted_mean": 2.1903889179229736
+          },
+          "phase-2-y-velocity": {
+            "minimum": -22.14706039428711,
+            "maximum": 14.019086837768555,
+            "area_weighted_mean": -0.27234944701194763
+          },
+          "phase-2-z-velocity": {
+            "minimum": -34.24874496459961,
+            "maximum": 46.95448684692383,
+            "area_weighted_mean": 1.7327791452407837
+          }
+        }
+      },
+      "p7b-section-y3p0": {
+        "source": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-resume-20260921T113238Z/final-sections/p7b-section-y3p0.npz",
+        "sha256": "6bb42b238044cec656028253ca331f11aff4608a41ea9e6ebb87095c3c923ba1",
+        "height_m": 3.0,
+        "facets": 2780,
+        "zero_projected_area_facets": 0,
+        "area_m2": 3.1650242805480957,
+        "fields": {
+          "phase-2-vof": {
+            "minimum": 0.00012953205441590399,
+            "maximum": 0.983159065246582,
+            "area_weighted_mean": 0.02815716341137886
+          },
+          "pressure": {
+            "minimum": 1138003.75,
+            "maximum": 1149376.625,
+            "area_weighted_mean": 1141898.375
+          },
+          "velocity-magnitude": {
+            "minimum": 6.953080654144287,
+            "maximum": 47.95500183105469,
+            "area_weighted_mean": 27.86249351501465
+          },
+          "x-velocity": {
+            "minimum": -42.20344924926758,
+            "maximum": 36.451316833496094,
+            "area_weighted_mean": -0.3755546808242798
+          },
+          "y-velocity": {
+            "minimum": -3.5017001628875732,
+            "maximum": 19.316377639770508,
+            "area_weighted_mean": 4.304924488067627
+          },
+          "z-velocity": {
+            "minimum": -38.485328674316406,
+            "maximum": 41.804195404052734,
+            "area_weighted_mean": 1.5463223457336426
+          },
+          "phase-2-velocity-magnitude": {
+            "minimum": 6.949154376983643,
+            "maximum": 48.03705596923828,
+            "area_weighted_mean": 27.86475372314453
+          },
+          "phase-2-x-velocity": {
+            "minimum": -42.21492385864258,
+            "maximum": 36.45436096191406,
+            "area_weighted_mean": -0.3550768792629242
+          },
+          "phase-2-y-velocity": {
+            "minimum": -3.503126382827759,
+            "maximum": 19.35323715209961,
+            "area_weighted_mean": 4.3056488037109375
+          },
+          "phase-2-z-velocity": {
+            "minimum": -38.48736572265625,
+            "maximum": 41.94635009765625,
+            "area_weighted_mean": 1.5378433465957642
+          }
+        }
+      },
+      "p7b-section-y5p0": {
+        "source": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-resume-20260921T113238Z/final-sections/p7b-section-y5p0.npz",
+        "sha256": "d484655f8352cdaee8672060398cf983933c2e02af1b295f3eafaf9f4f2e2cfe",
+        "height_m": 5.0,
+        "facets": 3096,
+        "zero_projected_area_facets": 1,
+        "area_m2": 3.1650500297546387,
+        "fields": {
+          "phase-2-vof": {
+            "minimum": 0.00014650011144112796,
+            "maximum": 0.9647681713104248,
+            "area_weighted_mean": 0.04925897717475891
+          },
+          "pressure": {
+            "minimum": 1138268.0,
+            "maximum": 1153192.75,
+            "area_weighted_mean": 1141884.625
+          },
+          "velocity-magnitude": {
+            "minimum": 7.651885509490967,
+            "maximum": 30.521564483642578,
+            "area_weighted_mean": 25.980934143066406
+          },
+          "x-velocity": {
+            "minimum": -29.18390655517578,
+            "maximum": 29.1138973236084,
+            "area_weighted_mean": 0.216199591755867
+          },
+          "y-velocity": {
+            "minimum": -3.013389825820923,
+            "maximum": 23.257549285888672,
+            "area_weighted_mean": 4.319972515106201
+          },
+          "z-velocity": {
+            "minimum": -28.838899612426758,
+            "maximum": 30.14813232421875,
+            "area_weighted_mean": -0.5753762125968933
+          },
+          "phase-2-velocity-magnitude": {
+            "minimum": 7.610483646392822,
+            "maximum": 30.533206939697266,
+            "area_weighted_mean": 25.98046112060547
+          },
+          "phase-2-x-velocity": {
+            "minimum": -29.191482543945312,
+            "maximum": 29.109970092773438,
+            "area_weighted_mean": 0.20712514221668243
+          },
+          "phase-2-y-velocity": {
+            "minimum": -3.016629457473755,
+            "maximum": 23.27142333984375,
+            "area_weighted_mean": 4.31622838973999
+          },
+          "phase-2-z-velocity": {
+            "minimum": -28.84133529663086,
+            "maximum": 30.147539138793945,
+            "area_weighted_mean": -0.5706865787506104
+          }
+        }
+      }
+    }
+  },
+  "figures": [
+    "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-resume-20260921T113238Z/analysis/F3-initial-above-cap-fields.png",
+    "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-resume-20260921T113238Z/analysis/F3-initial-velocity-components.png",
+    "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-resume-20260921T113238Z/analysis/F3-final-above-cap-fields.png",
+    "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-resume-20260921T113238Z/analysis/F3-final-velocity-components.png"
+  ],
+  "field_metadata": {
+    "path": "/Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/p7b-s060-resume-20260921T113238Z/field-metadata.json",
+    "sha256": "4ba1df24d9da9f31befaa20d312584e59a1a096e5265f7b057464eb608e615d0",
+    "domains": {
+      "phase-2-vof": "phase-2",
+      "pressure": "mixture",
+      "velocity-magnitude": "mixture",
+      "x-velocity": "mixture",
+      "y-velocity": "mixture",
+      "z-velocity": "mixture",
+      "phase-2-velocity-magnitude": "phase-2",
+      "phase-2-x-velocity": "phase-2",
+      "phase-2-y-velocity": "phase-2",
+      "phase-2-z-velocity": "phase-2"
+    }
+  }
+}

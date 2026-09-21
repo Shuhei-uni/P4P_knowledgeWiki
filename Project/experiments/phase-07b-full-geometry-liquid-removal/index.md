@@ -13,8 +13,8 @@ case uses the same fresh initialization without a patched standing pool.
 The maximum
 collector top is the old model cut plane associated with the assumed water-pool
 surface, now mapped to `y=+0.020 m` by the [geometry proof](geometry-proof.md).
-All five centroid masks were counted through Fluent; source implementation
-and the complete reference setup are still being verified.
+All five centroid masks were counted through Fluent; the corrected source
+implementation and complete recording route have now completed the S20 screen.
 The human selected the reference steady Mixture/RNG
 physics with Energy off and the full-feed `1600 kJ/kg` condition: liquid
 `116.92 kg/s` and vapour `80.69 kg/s`. Retain this mesh's separate liquid and
@@ -32,11 +32,12 @@ planning authority for Phase 7b is
 [`CONTEXT.md`](CONTEXT.md). The five-case screen is selected and technical
 preparation is authorized. The clean reference, corrected native source syntax,
 50-iteration source diagnostic and exact collector-face recorder have passed
-bounded checks. The API has recovered, and the report-context correction is applied and
-verified after save/reopen. S20 is resuming; no 5,000-iteration result is
-available yet. See [diagnostics](diagnostics.md).
-Gate G1 returns the observed
-five-case comparison to the human rather than authorizing automatic continuation.
+bounded checks. All five approved cases now have terminal dispositions:
+S20/S40/S60/S80 completed N5000 but failed the numerical indicators; S100
+suffered numerical divergence at attempted N4183, with complete records through
+N4182 and preserved failed/recovery pairs. The [G1 comparison](results.md)
+contains the figures, observations, alternatives and proposed next decision.
+No case is qualified. Check-ins stop at G1; no further solve is authorized.
 
 The resolved brine-outlet study's 620,431-cell mesh is staged in the Phase 7b
 folder on Extreme SSD with a verified matching SHA-256. Its PC copy is at
@@ -44,8 +45,7 @@ folder on Extreme SSD with a verified matching SHA-256. Its PC copy is at
 assistant access is through Fluent/PyFluent. API connectivity, directory
 write/read access and a source-free compiled diagnostic passed on Fluent
 2025 R2. The uninitialized reference preparation case also passed strict
-settings checks before save and after same-process reload. The full runnable
-steady setup remains incomplete. See `CONTEXT.md`
+settings checks before save and after same-process reload. The corrected Python-only steady setup has completed S20. See `CONTEXT.md`
 for the handoff boundary.
 
 ## Phase question
@@ -81,11 +81,11 @@ Success would qualify a computational collection mechanism within its tested
 conditions. Physical pool behaviour, drainage hardware and separator-efficiency
 validation remain outside this phase's initial claim.
 
-## Next preparation step
+## Next decision
 
-Finish liquid-source implementation, phase-interaction readback and evidence
-instrumentation. Geometry coverage and the common finite removal coefficient
-are recorded. Preserve complete liquid-volume,
-residual and source-inclusive mass-balance histories and document each case's
-results and observations in its Project packet. See the [discovery design](design.md)
-for the pre-run evidence contract and unresolved implementation checks.
+Review the [G1 evidence](results.md) and decide whether to authorize a separate
+fixed-geometry source-strength diagnostic. The current five-case queue is
+exhausted. No source-strength change, numerical tuning, extra iterations or
+qualification is automatically authorized.
+
+[Supervisor meeting PDF and figure bundle](meeting-report.md) provide a minimal-text presentation of the G1 evidence.

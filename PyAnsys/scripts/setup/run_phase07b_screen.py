@@ -7,10 +7,13 @@ from prepare_phase07b_collector import *
 import re
 import numpy as np
 from pyansys_fluent.phase07b_flux_monitor import FluxFaceZone, Phase07bFluxMonitor
+sys.path.insert(0,str(BASE/'scripts/inspection'))
+from export_phase07b_sections import export_sections
 
 
 def main():
     ap=argparse.ArgumentParser();ap.add_argument('--percent',type=int,choices=list(TOPS),required=True)
+    ap.add_argument('--previous-manifest',type=Path)
     ap.add_argument('--iterations',type=int,default=5000);a=ap.parse_args()
     assert 1<=a.iterations<=5000
     run=f'p7b-s{a.percent:03d}-'+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
@@ -38,6 +41,13 @@ def main():
     try:
         s=step('connect',lambda:connect(server_id=1,start_transcript=False,tcp_timeout_seconds=5),30)
         s.transcript.start(file_name=str(out/'setup.trn'),write_to_stdout=False)
+        if a.previous_manifest:
+            prior=json.loads(a.previous_manifest.read_text())
+            assert prior['status']=='HORIZON_COMPLETE_ANALYSIS_PENDING' and prior['completed_iterations']==5000
+            assert nvalue('P7bGlobalIteration')==prior['completed_iterations']
+            for name,d in prior['definitions'].items():assert s.settings.setup.named_expressions[name].definition()==d,(name,'unexpected live case')
+            assert all(remote_file_exists(s,prior['pairs']['final'].replace('.cas.h5',x)) for x in ['.cas.h5','.dat.h5'])
+            r['previous_endpoint']={'manifest':str(a.previous_manifest),'final_case':prior['pairs']['final'],'live_iteration_verified':5000,'saved_pair_exists':True};persist()
         step('load_clean_n0',lambda:s.settings.file.read_case_data(file_name=r['parent_case']),180)
         assert nvalue('P7bGlobalIteration')==0
         for name in s.settings.solution.monitor.report_files.get_object_names():s.settings.solution.monitor.report_files[name].active=False
@@ -121,6 +131,7 @@ def main():
         for name,d in defs.items():assert s.settings.setup.named_expressions[name].definition()==d
         for z in zones:
             for ph in ['mixture','phase-1','phase-2']:assert s.settings.setup.cell_zone_conditions.fluid[z].phase[ph].sources.get_state()==r['source_slots'][z][ph]
+        r['initial_sections']=step('extract_initial_sections',lambda:export_sections(s,r['sections'],out/'initial-sections'),180)
         s.transcript.stop();setup=(out/'setup.trn').read_text();assert 'SEGMENTATION VIOLATION' not in setup
         counts=re.findall(r'^\s*0\s+(620431)\s+(2852567)\s+(\d+)\s+(16)\s*$',setup,re.M);assert len(counts)>=2 and counts[0]==counts[1]
         s.transcript.start(file_name=str(out/'solve.trn'),write_to_stdout=False)
@@ -134,13 +145,15 @@ def main():
             m.assert_complete(actual);r['flux_monitor']=m.manifest()
             # Verify the durable last row and complete native scalar history.
             last=json.loads((out/'collector-flux.jsonl').read_text().splitlines()[-1]);assert json.loads(read_text(s,last['remote_path']))==last
+            r.setdefault('remote_flux_readbacks',[]).append({'iteration':actual,'path':last['remote_path'],'matches_local':True})
             history=read_text(s,r['report']);(out/f'history-{actual:05d}.out').write_text(history)
             rows=np.loadtxt(history.splitlines(),skiprows=3);rows=np.atleast_2d(rows)
             assert np.array_equal(rows[:,0],np.arange(1,actual+1));assert np.isfinite(rows).all()
             solve=(out/'solve.trn').read_text();assert not any(x in solve for x in ['SEGMENTATION VIOLATION','floating point exception','Divergence detected'])
             r['latest_metrics']=step(f'metrics_{actual}',lambda:s.settings.solution.report_definitions.compute(report_defs=reports))
             save('final' if actual==a.iterations else f'n{actual:05d}');current=actual;persist()
-        m.unregister();m=None
+        m.unregister();r['flux_monitor']=m.manifest();m=None
+        r['final_sections']=step('extract_final_sections',lambda:export_sections(s,r['sections'],out/'final-sections'),180)
         s.settings.file.stop_transcript();s.transcript.stop()
         r['status']='HORIZON_COMPLETE_ANALYSIS_PENDING' if a.iterations==5000 else 'PARTIAL_DIAGNOSTIC_COMPLETE';r['completed_iterations']=current;persist()
     except Exception as e:

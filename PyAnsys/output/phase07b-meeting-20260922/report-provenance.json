@@ -1,0 +1,99 @@
+{
+  "pdf": "output/pdf/phase-7b-supervisor-meeting-2026-09-22.pdf",
+  "pages": 13,
+  "page_format": "A3 landscape for readable engineering figures",
+  "sources": [
+    {
+      "page": 2,
+      "title": "01 / Separator geometry",
+      "figure": "PyAnsys/output/phase07b-meeting-20260922/figures/geometry-overview.png",
+      "sha256": "544d39b9fe11082820ea354b15a28d5f32f62bc4e7ef78a7a90c44401a019946",
+      "caption": "Native mesh surfaces and a central fluid section. The ideal collector retains the lower geometry; the physical brine-outlet face is a wall. No standing pool is required.",
+      "source": "S100 preserved N4000 pair; native boundary and z=0 section geometry."
+    },
+    {
+      "page": 3,
+      "title": "02 / What changes between the cases?",
+      "figure": "PyAnsys/output/phase07b-meeting-20260922/figures/collector-regions.png",
+      "sha256": "eaaf9562febfd8528869d5f5d21037f0367d64b64d718d9dc2e55e3a5176f312",
+      "caption": "Shading shows geometric removal extents, not liquid. Percentages refer to height, not volume; Fluent selects cells by centroid elevation. The dotted line is the historical cutoff at y=+0.020 m.",
+      "source": "Verified geometry and S20-S100 elevation definitions; common lower datum y=-1.484584 m."
+    },
+    {
+      "page": 4,
+      "title": "03 / All five cases: matched numerical history",
+      "figure": "PyAnsys/output/phase07b-g1/G1-common-history.png",
+      "sha256": "6bd68f84d0a541059117ca311590e436ac61a03f997cd1973360c033eb1ef87c",
+      "caption": "Changing thickness changes inventory and removal. Larger removal is not evidence of successful collection when the source-inclusive mass balance remains open.",
+      "source": "G1 native reports, N1-4000; all five runs. Later histories are shown separately."
+    },
+    {
+      "page": 5,
+      "title": "04 / Completed cases: late inventory and mass balance",
+      "figure": "PyAnsys/output/phase07b-g1/G1-late-history.png",
+      "sha256": "5d55ae669c17808d0a6972ba448bdf9d2aa49b5d2005752451d44452ea79d75b",
+      "caption": "All four completed cases retain drift and strong imbalance. The source is counted once; steady-iteration inventory slopes are not physical storage rates.",
+      "source": "S20/S40/S60/S80, N4001-5000; S100 has no complete prescribed late window."
+    },
+    {
+      "page": 6,
+      "title": "05 / Full-height liquid fraction: first central plane",
+      "figure": "PyAnsys/output/phase07b-meeting-20260922/figures/liquid-fraction-z0-all-cases.png",
+      "sha256": "245744a943c82f14252b6e661d780d86a2ecf207bf8a2d87aa144d2e21b60b2b",
+      "caption": "Liquid fraction: 0 = no liquid; 1 = all liquid. Dashed lines locate the collectors. S100 is a recovery snapshot at N4000, not an equivalent N5000 endpoint.",
+      "source": "Native phase-2 facet values at z=0; four final N5000 pairs and S100 recovery N4000."
+    },
+    {
+      "page": 7,
+      "title": "06 / Full-height liquid fraction: orthogonal plane",
+      "figure": "PyAnsys/output/phase07b-meeting-20260922/figures/liquid-fraction-x0-all-cases.png",
+      "sha256": "912933441f53bd54b48338698877539dd67ab60f773fa8e71055b9ece5e284fc",
+      "caption": "The second plane exposes azimuthal differences. These are unconverged field snapshots; use them to understand liquid distribution, not to claim validated separation efficiency.",
+      "source": "Native phase-2 facet values at x=0; common 0-1 scale; S100 recovery N4000."
+    },
+    {
+      "page": 8,
+      "title": "07 / Liquid fraction above the collector",
+      "figure": "PyAnsys/output/phase07b-g1/G1-spatial-phase-2-vof.png",
+      "sha256": "7f96e60098f2359309737f6dd1e0ae836d9d90d2c58d9848cbea63647ef90e87",
+      "caption": "Liquid-rich outer regions persist. Lower total inventory does not produce a uniform improvement at every height. All four planes lie above the maximum collector top.",
+      "source": "Original G1 comparison; y=0.5, 1.5, 3 and 5 m; native facets; S100 N4000, others N5000."
+    },
+    {
+      "page": 9,
+      "title": "08 / Mixture speed above the collector",
+      "figure": "PyAnsys/output/phase07b-g1/G1-spatial-velocity-magnitude.png",
+      "sha256": "35b024fa91fb201588eca917c4c0eb7cad327f2fe5a5fb6a78c3516b370b54b0",
+      "caption": "Common 0-80 m/s scale. These section snapshots do not show the full domain or the larger speed excursions recorded earlier in the runs.",
+      "source": "Original G1 comparison; native mixture velocity magnitude; same four planes and snapshot indices."
+    },
+    {
+      "page": 10,
+      "title": "09 / Liquid speed above the collector",
+      "figure": "PyAnsys/output/phase07b-g1/G1-spatial-phase-2-velocity-magnitude.png",
+      "sha256": "ecf41332129b91c82b38ea7582fa26a42c31c13ef6ba5d8a19bdae369d49cd78",
+      "caption": "Common 0-80 m/s scale. Zero liquid speed in nearly liquid-free regions is not evidence of a stagnant liquid pool.",
+      "source": "Original G1 comparison; native phase-2 velocity magnitude; same four planes and snapshot indices."
+    },
+    {
+      "page": 11,
+      "title": "10 / Residuals: every active equation",
+      "figure": "PyAnsys/output/phase07b-meeting-20260922/figures/residuals-completed-cases.png",
+      "sha256": "1848745701773bdc5631165e9f00bf716d2c7df322daf1a3e4068b5ae4cc8d73",
+      "caption": "All four completed cases fail the 10^-3 throughout-final-window requirement for continuity, k, epsilon and liquid fraction. The three momentum equations pass that late-window indicator.",
+      "source": "Complete native residual histories N1-5000; seven equations; identical vertical limits across these four cases."
+    },
+    {
+      "page": 12,
+      "title": "11 / S100: numerical failure",
+      "figure": "PyAnsys/output/phase07b-meeting-20260922/figures/residuals-S100-failure.png",
+      "sha256": "ba1cf362825d430fee3cd77562b1b90afd09ff4358564b1eaa7a6caa493ef491",
+      "caption": "S100 was already unconverged at N4000. Epsilon, pressure and velocity escalated before the floating-point exception at attempted N4183. The failure cause and repeatability are not isolated.",
+      "source": "All seven native residuals; left N1-4100, right N4100-4182. Full N1-4182 records remain in the evidence bundle."
+    }
+  ],
+  "extraction": "PyAnsys/output/phase07b-meeting-20260922/extraction.json",
+  "g1_summary": "Project/experiments/phase-07b-full-geometry-liquid-removal/results.md",
+  "claim_limit": "Unconverged discovery; S100 fields at recovery N4000, other cases final N5000",
+  "iterations_issued_for_report": 0
+}
