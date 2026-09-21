@@ -30,6 +30,9 @@ A sub-step is not a reason to create another `SKILL.md`. Put branch-specific
 procedure/reference material inside the owning workflow folder. Create a new
 skill only when it needs a genuinely distinct invocation boundary.
 
+Fluent runs:
+When running simulations try to run in large batches, rather than iter(10) do around 1000 and when saving checkpoint save it on fluent local machine rather than onedrive. Onedrive is for start or final case/data pair that we'd like to share across computers not a place to store everything.
+
 ## Autonomy
 
 The human sets or changes the scientific envelope through `phase-planner`.

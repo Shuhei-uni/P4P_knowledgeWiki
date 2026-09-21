@@ -1518,6 +1518,186 @@
       "lower_liquid_mass_kg": 17.92525263954153,
       "trigger_streak_samples": 0,
       "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2410,
+      "lower_liquid_mass_kg": 18.04791589449129,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2420,
+      "lower_liquid_mass_kg": 17.78256395699542,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2430,
+      "lower_liquid_mass_kg": 17.50935381773823,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2440,
+      "lower_liquid_mass_kg": 17.64872769390406,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2450,
+      "lower_liquid_mass_kg": 17.89858681419606,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2460,
+      "lower_liquid_mass_kg": 17.74219269495009,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2470,
+      "lower_liquid_mass_kg": 17.20667292849475,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2480,
+      "lower_liquid_mass_kg": 16.75921755197859,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2490,
+      "lower_liquid_mass_kg": 16.94781828301637,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2500,
+      "lower_liquid_mass_kg": 17.80766212754632,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2510,
+      "lower_liquid_mass_kg": 18.6511064602472,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2520,
+      "lower_liquid_mass_kg": 18.9913074868913,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2530,
+      "lower_liquid_mass_kg": 18.87642677750031,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2540,
+      "lower_liquid_mass_kg": 18.70904759052042,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2550,
+      "lower_liquid_mass_kg": 19.02656988697603,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2560,
+      "lower_liquid_mass_kg": 19.54055910288188,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2570,
+      "lower_liquid_mass_kg": 19.66278858262175,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2580,
+      "lower_liquid_mass_kg": 19.66885994404914,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2590,
+      "lower_liquid_mass_kg": 20.18582881381704,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2600,
+      "lower_liquid_mass_kg": 20.90620643294919,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2610,
+      "lower_liquid_mass_kg": 21.32830406447967,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2620,
+      "lower_liquid_mass_kg": 21.44911807678809,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2630,
+      "lower_liquid_mass_kg": 21.80823434836471,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2640,
+      "lower_liquid_mass_kg": 22.92165161919415,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2650,
+      "lower_liquid_mass_kg": 24.27173906948893,
+      "trigger_streak_samples": 1,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2660,
+      "lower_liquid_mass_kg": 24.92811168879917,
+      "trigger_streak_samples": 2,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2670,
+      "lower_liquid_mass_kg": 24.59022115580791,
+      "trigger_streak_samples": 3,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2680,
+      "lower_liquid_mass_kg": 23.65711680722969,
+      "trigger_streak_samples": 4,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2690,
+      "lower_liquid_mass_kg": 23.03532683162248,
+      "trigger_streak_samples": 5,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2700,
+      "lower_liquid_mass_kg": 23.05352900067577,
+      "trigger_streak_samples": 6,
+      "ring_state": "pressure-outlet"
     }
   ],
   "parent_readback": {

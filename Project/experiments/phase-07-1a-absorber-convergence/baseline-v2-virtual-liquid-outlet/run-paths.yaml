@@ -1,0 +1,10 @@
+setup_id: P71A-BASELINE-V2-VIRTUAL-OUTLET
+server_id: student
+mesh: 'C:\Users\Shuhei Yokkaichi\OneDrive\OneDrive - The University of Auckland\2026 Sem 2\700\Purnanto-new\Separator-purnanto-60k.msh.h5'
+run_root: 'C:\Users\Shuhei Yokkaichi\OneDrive\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\Phase07\Phase71A\BaselineV2\20260922T013000Z'
+recovery_case: 'C:\Users\Shuhei Yokkaichi\OneDrive\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\Phase07\Phase71A\BaselineV2\20260922T013000Z\P71A-BASELINE-V2-VIRTUAL-OUTLET-v1-live-recovery.cas.h5'
+prepared_case: 'C:\Users\Shuhei Yokkaichi\OneDrive\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\Phase07\Phase71A\BaselineV2\20260922T013000Z\P71A-BASELINE-V2-VIRTUAL-OUTLET-prepared.cas.h5'
+smoke_case: 'C:\Users\Shuhei Yokkaichi\OneDrive\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\Phase07\Phase71A\BaselineV2\20260922T013000Z\P71A-BASELINE-V2-VIRTUAL-OUTLET-smoke-plus001.cas.h5'
+local_manifest: Project/experiments/phase-07-1a-absorber-convergence/baseline-v2-virtual-liquid-outlet/build-manifest.json
+canonical_loaded_endpoint: student
+canonical_loaded_state: freshly hybrid-initialized prepared pair after one-iteration smoke verification
