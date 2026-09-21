@@ -1,0 +1,10 @@
+{
+  "status": "RUNNING",
+  "setup_id": "C8-V2-THIN-RING-PRESSURE-BASELINE-P1120",
+  "server_id": "3",
+  "all_wall_case": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8-v2\\20260922T120000Z\\C8-V2-thin-outer-all-wall-prepared.cas.h5",
+  "all_wall_data": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8-v2\\20260922T120000Z\\C8-V2-thin-outer-all-wall-prepared.dat.h5",
+  "pressure_case": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8-v2\\20260922T120000Z\\C8-V2-thin-ring-pressure-baseline-P1120.cas.h5",
+  "pressure_data": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8-v2\\20260922T120000Z\\C8-V2-thin-ring-pressure-baseline-P1120.dat.h5",
+  "pressure_pa": 1120000.0
+}
