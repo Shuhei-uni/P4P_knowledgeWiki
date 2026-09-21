@@ -5,7 +5,7 @@
 | Field | Value |
 | --- | --- |
 | Lifecycle | `discovery` adaptive short screen |
-| Context | [`../CONTEXT.md`](../CONTEXT.md) |
+| Context | [`../CONTEXT.md`](../../CONTEXT.md) |
 | Candidate/origin | `E5-CZ`; human-approved H4 follow-on direction, 2026-09-10 |
 | Gate/design | `G2`; [`shared design`](../design.md) |
 | Parent | Exact valid E0 iteration-500 case/data pair after the split-by-mark operation |

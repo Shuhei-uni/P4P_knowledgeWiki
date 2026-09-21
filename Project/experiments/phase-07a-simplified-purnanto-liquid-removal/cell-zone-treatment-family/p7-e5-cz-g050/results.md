@@ -25,7 +25,7 @@ restart window only (`native 748--998`), not a newly recorded full native
 | Requirement | Status | Evidence |
 | --- | --- | --- |
 | Approved setup/design | PASS | [G050 setup](setup.md), shared E5-CZ design, gain `G=0.50` |
-| Exact parent and recovery boundary | PASS | Paired durable active-250 checkpoint from the first corrected attempt; [anchor manifest](../../../../../PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G050-student-20260910T034401Z-manifest.json) |
+| Exact parent and recovery boundary | PASS | Paired durable active-250 checkpoint from the first corrected attempt; anchor manifest (local generated artifact): `PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G050-student-20260910T034401Z-manifest.json` |
 | Cell-zone topology/source binding | PASS | Recovery readback retained `p7-e5-lower-y010` and `separator-purnanto`; source tree remained lower-zone-only |
 | Requested active horizon | PASS | Continuation covered active `251--500`; five controller updates through native `998` |
 | Final paired case/data | PASS | Final active-500 pair was saved, reopened, and read back successfully |
@@ -33,7 +33,7 @@ restart window only (`native 748--998`), not a newly recorded full native
 | Residual history | PASS WITH WINDOW LIMIT | Seven residual series, 251 points, native `748--998` |
 | Source audit | PASS | Every continuation update used Fluent `get_sum` for `phase-2-user-mass-source`; integrated values matched the analytical command to floating-point precision |
 | Planned figures | PASS WITH WINDOW LIMIT | F1--F4 generated from the current continuation package |
-| Prior endpoint failure | RETAINED | [superseded first-attempt manifest](../../../../../PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G050-student-20260910T034401Z-manifest.json) records the lost final readback connection after active 500 |
+| Prior endpoint failure | RETAINED | superseded first-attempt manifest (local generated artifact): `PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G050-student-20260910T034401Z-manifest.json` records the lost final readback connection after active 500 |
 
 ## Controller and source readback
 
@@ -49,7 +49,7 @@ The final lower-zone phase-2 source was `-151.132656 kg/m3/s`, with final
 requested integrated removal `46.594592 kg/s`; Fluent's `get_sum` returned
 `-46.594592 kg/s`. No controller update saturated, and the phase-1 direct
 source readback remained zero. The full machine-readable controller/source
-record is in the [continuation manifest](../../../../../PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G050-student-20260910T044606Z-manifest.json).
+record is in the continuation manifest (local generated artifact): `PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G050-student-20260910T044606Z-manifest.json`.
 
 ## Numerical observations
 
@@ -100,10 +100,10 @@ lifecycle gate.
 
 - [G050 setup](setup.md)
 - [G050 run paths](run-paths.yaml)
-- [continuation manifest](../../../../../PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G050-student-20260910T044606Z-manifest.json)
-- [report histories](../../../../../PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G050-student-20260910T044606Z-reports.json)
-- [residual history](../../../../../PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G050-student-20260910T044606Z-residuals.json)
-- [numerical summary](../../../../../PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G050-student-20260910T044606Z-analysis/summary.json)
+- continuation manifest (local generated artifact): `PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G050-student-20260910T044606Z-manifest.json`
+- report histories (local generated artifact): `PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G050-student-20260910T044606Z-reports.json`
+- residual history (local generated artifact): `PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G050-student-20260910T044606Z-residuals.json`
+- numerical summary (local generated artifact): `PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G050-student-20260910T044606Z-analysis/summary.json`
 - [corrected fresh-run builder](../../../../../PyAnsys/scripts/setup/run_p7_e5_cz.py)
 - [recovery continuation runner](../../../../../PyAnsys/scripts/setup/resume_p7_e5_cz.py)
 

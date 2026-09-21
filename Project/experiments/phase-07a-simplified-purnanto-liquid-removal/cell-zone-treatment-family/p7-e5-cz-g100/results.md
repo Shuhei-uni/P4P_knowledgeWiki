@@ -39,7 +39,7 @@ terminal evidence.
 | Final paired case/data | PASS | Final active-500 case/data saved and reopened |
 | Planned figures | PASS | F1--F4 generated from the full run package |
 | Inherited-path warning | NONFATAL | Old E0 autosave path warning near native 999; no effect on final pair, histories, or terminal readback |
-| Prior endpoint failure | RETAINED | [superseded endpoint manifest](../../../../../PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G100-student-20260910T030000Z-manifest.json) remains as the earlier blocked attempt |
+| Prior endpoint failure | RETAINED | superseded endpoint manifest (local generated artifact): `PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G100-student-20260910T030000Z-manifest.json` remains as the earlier blocked attempt |
 
 ## Controller and source readback
 
@@ -60,7 +60,7 @@ The final lower-zone phase-2 volumetric source was `-311.032323 kg/m3/s`.
 The final commanded removal was `95.892077 kg/s`, below the `146.15 kg/s`
 clamp; no controller update saturated. Direct phase-1 source readback stayed
 zero. The complete source tree and update-by-update `get_sum` records are in
-the [G100 manifest](../../../../../PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G100-student-20260910T045745Z-manifest.json).
+the G100 manifest (local generated artifact): `PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G100-student-20260910T045745Z-manifest.json`.
 
 ## Numerical observations
 
@@ -112,10 +112,10 @@ qualification run or unbounded continuation is authorized by this result.
 
 - [G100 setup](setup.md)
 - [G100 run paths](run-paths.yaml)
-- [G100 manifest](../../../../../PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G100-student-20260910T045745Z-manifest.json)
-- [report histories](../../../../../PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G100-student-20260910T045745Z-reports.json)
-- [residual history](../../../../../PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G100-student-20260910T045745Z-residuals.json)
-- [numerical summary](../../../../../PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G100-student-20260910T045745Z-analysis/summary.json)
+- G100 manifest (local generated artifact): `PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G100-student-20260910T045745Z-manifest.json`
+- report histories (local generated artifact): `PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G100-student-20260910T045745Z-reports.json`
+- residual history (local generated artifact): `PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G100-student-20260910T045745Z-residuals.json`
+- numerical summary (local generated artifact): `PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G100-student-20260910T045745Z-analysis/summary.json`
 - [corrected E5-CZ runner](../../../../../PyAnsys/scripts/setup/run_p7_e5_cz.py)
 
 The final remote pair is recorded in `run-paths.yaml` and the manifest:

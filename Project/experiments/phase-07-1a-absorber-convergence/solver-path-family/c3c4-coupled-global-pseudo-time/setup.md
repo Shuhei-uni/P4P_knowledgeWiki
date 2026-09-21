@@ -10,7 +10,7 @@
 | Authority | Current human request to try steady pseudo-transient stabilization |
 | Decision gate | `G0 / DISCOVERY_DESIGN` extension |
 | Baseline | [Active Fluent baseline](../../baseline-setup-record.md) |
-| Parent identity | `P7-E5-CZ-ABSORB-COLD-RAMP11692` active-1000 paired case; see [parent reference](../turbulence-family/parent-reference.md) |
+| Parent identity | `P7-E5-CZ-ABSORB-COLD-RAMP11692` active-1000 paired case; see [parent reference](../../turbulence-family/parent-reference.md) |
 | Novelty | New steady solver-path package; not a transient-model branch |
 | Planned horizon | 50-iteration smoke, then 500 attached discovery iterations |
 

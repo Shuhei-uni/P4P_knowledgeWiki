@@ -37,7 +37,7 @@ as an invalid implementation attempt and is not used here.
 | Generated topology | PASS | New lower fluid zone and adjacent generated face zones were present after save/reopen |
 | Source binding | PASS | Lower-zone phase-2 mass and mixture x/y/z momentum sources enabled; parent and lower phase-1 sources disabled |
 | Source normalization | PASS | Corrected lower-zone geometric volume `0.308302610 m3`; final phase-2 source `-91.703713 kg/m3/s`; analytical integrated source `-28.272494 kg/s` |
-| Source-integral audit | PASS with corrected reduction | `get_sum(phase-2-user-mass-source) = -28.272494 kg/s`; see [source audit](../../../../../PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G025-student-20260910T031110Z-source-audit.json) |
+| Source-integral audit | PASS with corrected reduction | `get_sum(phase-2-user-mass-source) = -28.272494 kg/s`; see source audit (local generated artifact): `PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G025-student-20260910T031110Z-source-audit.json` |
 | Save/reopen | PASS | Split source-off parent and prepared source-off child reopened with both fluid zones present |
 | Smoke horizon | PASS | Source-off smoke completed from native 500 to 550 before source activation |
 | Requested horizon | PASS | Ten controller blocks completed, active 1--500 / native 501--1,000 |
@@ -125,8 +125,8 @@ geometry change is introduced by this next step.
 
 Durable implementation artifacts:
 
-- [corrected E5-CZ runner](/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/scripts/setup/run_p7_e5_cz.py)
-- [G025 manifest](../../../../../PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G025-student-20260910T031110Z-manifest.json)
-- [G025 report histories](../../../../../PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G025-student-20260910T031110Z-reports.json)
-- [G025 residual history](../../../../../PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G025-student-20260910T031110Z-residuals.json)
-- [G025 numerical summary](../../../../../PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G025-student-20260910T031110Z-analysis/summary.json)
+- [corrected E5-CZ runner](../../../../../PyAnsys/scripts/setup/run_p7_e5_cz.py)
+- G025 manifest (local generated artifact): `PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G025-student-20260910T031110Z-manifest.json`
+- G025 report histories (local generated artifact): `PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G025-student-20260910T031110Z-reports.json`
+- G025 residual history (local generated artifact): `PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G025-student-20260910T031110Z-residuals.json`
+- G025 numerical summary (local generated artifact): `PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G025-student-20260910T031110Z-analysis/summary.json`

@@ -13,8 +13,8 @@ three-dimensional geometry equivalence or a physical pool elevation.
 
 | Role | Artifact | SHA-256 |
 | --- | --- | --- |
-| Historical truncated reference | [mesh-900k_initialized.cas.h5](</Volumes/Extreme SSD/P4P/experiments/phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/andy-07a-mesh-study/split_inlet_mesh_convergence_20260801/mesh_900k/mesh-900k_initialized.cas.h5>) | `2771ef93c30518c5706688814474c3860e2693c2a70ed7893e5c82bcc9361b9c` |
-| Staged full geometry | [brine-outlet-620kcells.msh.h5](</Volumes/Extreme SSD/P4P/experiments/phase-07b-full-geometry-liquid-removal/inputs/brine-outlet-620kcells.msh.h5>) | `0d75a86e53bc020aeefa4b13ef8616413a862b15646355d90d8037d1be888394` |
+| Historical truncated reference | `/Volumes/Extreme SSD/P4P/experiments/phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/andy-07a-mesh-study/split_inlet_mesh_convergence_20260801/mesh_900k/mesh-900k_initialized.cas.h5` | `2771ef93c30518c5706688814474c3860e2693c2a70ed7893e5c82bcc9361b9c` |
+| Staged full geometry | `/Volumes/Extreme SSD/P4P/experiments/phase-07b-full-geometry-liquid-removal/inputs/brine-outlet-620kcells.msh.h5` | `0d75a86e53bc020aeefa4b13ef8616413a862b15646355d90d8037d1be888394` |
 
 **Observed:** the historical reference stores `5,335,623` cells, `923,066`
 nodes and `10,743,466` faces. Its historical `900k` filename is not its cell
@@ -23,7 +23,7 @@ count. The staged full mesh stores `620,431` cells, `1,770,229` nodes and
 steady case/data parent.
 
 The historical prepared-07c descendant
-[start_from_prepared07c_fresh_hybrid_tau0p020_ramp0.cas.h5](</Volumes/Extreme SSD/P4P/experiments/andy-sinks/split_inlet_mass_balance_sink_control_20260810/mesh-900k_band0p140165_target116p92_v1/start_from_prepared07c_fresh_hybrid_tau0p020_ramp0.cas.h5>)
+`/Volumes/Extreme SSD/P4P/experiments/andy-sinks/split_inlet_mass_balance_sink_control_20260810/mesh-900k_band0p140165_target116p92_v1/start_from_prepared07c_fresh_hybrid_tau0p020_ramp0.cas.h5`
 was also inspected during the initial investigation. **Observed:** it has the
 same counts, face-zone names and coordinate-array bytes as the truncated
 reference. Both NumPy coordinate-array byte hashes are
@@ -73,7 +73,7 @@ The rounding difference must itself pass the `1e-5 m` consistency check.
 The separate historical full-mesh initial-pool patch at `y <= 0 m` is therefore
 20 mm below this mapped cutoff. Shuhei's later 342k truncated mesh also has
 its bottom at approximately `y=0`, as documented in its
-[own mesh inspection](../phase-07-simplified-purnanto-liquid-removal/mesh-inspection.md).
+[own mesh inspection](../phase-07a-simplified-purnanto-liquid-removal/mesh-inspection.md).
 Neither zero-plane reference replaces Andy's selected historical cutoff.
 
 ## Numerical lower datum and approved height fractions
@@ -150,7 +150,7 @@ PYTHONDONTWRITEBYTECODE=1 PyAnsys/.venv/bin/python \
 ```
 
 Omit `--output` to reproduce to stdout without creating another file. The
-[generated JSON](../../../PyAnsys/output/phase07b_preparation/geometry-proof-20260908.json)
+generated JSON (local generated artifact): `PyAnsys/output/phase07b_preparation/geometry-proof-20260908.json`
 is an ignored machine-evidence extract. This Project record retains the
 source identities, material observations, inference and claim limits when that
 local extract or the SSD is unavailable.
@@ -184,7 +184,7 @@ not liquid inventories or proof of a working source.
 The [probe source](../../../PyAnsys/scripts/inspection/phase07b_collector_probe.c)
 has SHA-256 `843f22b34210935461a841a0310cd4b05a968796e36b73e88a91889b879e6aa7`.
 Its API upload passed exact text readback before compilation. The live
-[extracted records](../../../PyAnsys/output/phase07b_preparation/live-collector-geometry.json)
+extracted records (local generated artifact): `PyAnsys/output/phase07b_preparation/live-collector-geometry.json`
 retain each check. No initialization or solution iteration was requested;
 phase field storage was unallocated. Source-mask equivalence after source
 installation, phase-velocity access, and mask-boundary flux integration

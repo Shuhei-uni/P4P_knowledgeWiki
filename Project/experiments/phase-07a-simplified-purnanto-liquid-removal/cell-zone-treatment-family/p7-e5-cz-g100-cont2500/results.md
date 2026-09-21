@@ -183,20 +183,20 @@ histories with the stated units and sign convention. The bottom-outflow plots
 negate Fluent's raw boundary flux so positive values would denote outflow;
 both bottom phase curves remain at zero.
 
-- [F1 — total liquid inventory](figures/P7-E5-CZ-G100-CONT2500-student-20260910T070332Z/F1-total-liquid-inventory.png)
-- [F2 — lower zone and bottom routing](figures/P7-E5-CZ-G100-CONT2500-student-20260910T070332Z/F2-lower-zone-and-bottom-routing.png)
-- [F3 — adaptive controller and source audit](figures/P7-E5-CZ-G100-CONT2500-student-20260910T070332Z/F3-controller-and-source-audit.png)
-- [F4 — balances and residuals](figures/P7-E5-CZ-G100-CONT2500-student-20260910T070332Z/F4-balances-and-residuals.png)
+- F1 — total liquid inventory (recorded path; file not in this checkout): `figures/P7-E5-CZ-G100-CONT2500-student-20260910T070332Z/F1-total-liquid-inventory.png`
+- F2 — lower zone and bottom routing (recorded path; file not in this checkout): `figures/P7-E5-CZ-G100-CONT2500-student-20260910T070332Z/F2-lower-zone-and-bottom-routing.png`
+- F3 — adaptive controller and source audit (recorded path; file not in this checkout): `figures/P7-E5-CZ-G100-CONT2500-student-20260910T070332Z/F3-controller-and-source-audit.png`
+- F4 — balances and residuals (recorded path; file not in this checkout): `figures/P7-E5-CZ-G100-CONT2500-student-20260910T070332Z/F4-balances-and-residuals.png`
 
 ## Durable evidence
 
 - [Continuation setup](setup.md)
 - [Resolved run paths](run-paths.yaml)
-- [Continuation manifest](../../../../../PyAnsys/output/phase07_cell_zone_cont2500/P7-E5-CZ-G100-CONT2500-student-20260910T070332Z-manifest.json)
-- [Continuation reports](../../../../../PyAnsys/output/phase07_cell_zone_cont2500/P7-E5-CZ-G100-CONT2500-student-20260910T070332Z-reports.json)
-- [Continuation residual history](../../../../../PyAnsys/output/phase07_cell_zone_cont2500/P7-E5-CZ-G100-CONT2500-student-20260910T070332Z-residuals.json)
-- [Solver transcript and warnings](../../../../../PyAnsys/output/phase07_cell_zone_cont2500/P7-E5-CZ-G100-CONT2500-student-20260910T070332Z-residuals-transcript.txt)
-- [F1-F4 analysis summary](../../../../../PyAnsys/output/phase07_cell_zone_cont2500/P7-E5-CZ-G100-CONT2500-student-20260910T070332Z-analysis/summary.json)
-- [Continuation runner](../../../../../PyAnsys/scripts/setup/run_p7_e5_cz_cont2500.py)
-- [Analysis script](../../../../../PyAnsys/scripts/analysis/analyze_p7_e5_cz_cont2500.py)
+- Continuation manifest (local generated artifact): `PyAnsys/output/phase07_cell_zone_cont2500/P7-E5-CZ-G100-CONT2500-student-20260910T070332Z-manifest.json`
+- Continuation reports (local generated artifact): `PyAnsys/output/phase07_cell_zone_cont2500/P7-E5-CZ-G100-CONT2500-student-20260910T070332Z-reports.json`
+- Continuation residual history (local generated artifact): `PyAnsys/output/phase07_cell_zone_cont2500/P7-E5-CZ-G100-CONT2500-student-20260910T070332Z-residuals.json`
+- Solver transcript and warnings (local generated artifact): `PyAnsys/output/phase07_cell_zone_cont2500/P7-E5-CZ-G100-CONT2500-student-20260910T070332Z-residuals-transcript.txt`
+- F1-F4 analysis summary (local generated artifact): `PyAnsys/output/phase07_cell_zone_cont2500/P7-E5-CZ-G100-CONT2500-student-20260910T070332Z-analysis/summary.json`
+- Continuation runner (historical path; file not retained): `PyAnsys/scripts/setup/run_p7_e5_cz_cont2500.py`
+- Analysis script (historical path; file not retained): `PyAnsys/scripts/analysis/analyze_p7_e5_cz_cont2500.py`
 - [Exact G100 parent results](../p7-e5-cz-g100/results.md)

@@ -9,7 +9,7 @@ valid reported iteration is `1,960`; the requested total-active-5,000 horizon
 was not reached. This is a valid partial continuation result, not a failed
 setup identity or a qualification result.
 
-Run manifest: [continuation manifest](../../../../../PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000-student-20260910T211158Z-manifest.json)
+Run manifest: continuation manifest (local generated artifact): `PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000-student-20260910T211158Z-manifest.json`
 
 The exact parent was:
 
@@ -51,8 +51,8 @@ C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneAbsorberColdConti
 The stitched analysis uses the original active-1–1,000 history plus the
 continuation’s valid active-1,001–1,960 interval. The invalid report tail after
 active 1,960 was excluded. The full machine-readable summary is
-[analysis.json](../../../../../PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000-student-20260910T211158Z-analysis.json), with the paired residual artifact at
-[residuals.json](../../../../../PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000-student-20260910T211158Z-residuals.json).
+analysis.json (local generated artifact): `PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000-student-20260910T211158Z-analysis.json`, with the paired residual artifact at
+residuals.json (local generated artifact): `PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000-student-20260910T211158Z-residuals.json`.
 
 | Quantity | Parent late window, active 700–1,000 | Valid continuation, active 1,001–1,960 | Interpretation |
 | --- | ---: | ---: | --- |
@@ -86,9 +86,9 @@ transient first-run interruption from a repeatable continuation failure.
 
 | Attempt | Outcome | Evidence |
 | --- | --- | --- |
-| Recovery 1 | `BLOCKED_REPORT_FILE_SCHEME_QUERY` at active 1,900 | [manifest](../../../../../PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-student-20260910T220409Z-manifest.json) and [transcript](../../../../../PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-student-20260910T220409Z-residuals-transcript.txt) |
-| Recovery 2 | `BLOCKED_REPEATABLE_SOLVER_FAILURE`; observed through active 1,975, with the failure block ending at active 1,970 | [manifest](../../../../../PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-R2-student-20260910T221403Z-manifest.json) and [transcript](../../../../../PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-R2-student-20260910T221403Z-residuals-transcript.txt) |
-| Recovery 3 after Fluent relaunch | `BLOCKED_REPEATABLE_SOLVER_FAILURE`; observed through active 1,975, with the failure block ending at active 1,970 | [manifest](../../../../../PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-R3-student-20260910T224003Z-manifest.json) and [transcript](../../../../../PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-R3-student-20260910T224003Z-residuals-transcript.txt) |
+| Recovery 1 | `BLOCKED_REPORT_FILE_SCHEME_QUERY` at active 1,900 | manifest (local generated artifact): `PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-student-20260910T220409Z-manifest.json` and transcript (local generated artifact): `PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-student-20260910T220409Z-residuals-transcript.txt` |
+| Recovery 2 | `BLOCKED_REPEATABLE_SOLVER_FAILURE`; observed through active 1,975, with the failure block ending at active 1,970 | manifest (local generated artifact): `PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-R2-student-20260910T221403Z-manifest.json` and transcript (local generated artifact): `PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-R2-student-20260910T221403Z-residuals-transcript.txt` |
+| Recovery 3 after Fluent relaunch | `BLOCKED_REPEATABLE_SOLVER_FAILURE`; observed through active 1,975, with the failure block ending at active 1,970 | manifest (local generated artifact): `PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-R3-student-20260910T224003Z-manifest.json` and transcript (local generated artifact): `PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-R3-student-20260910T224003Z-residuals-transcript.txt` |
 
 Recovery 1 passed parent preparation and source readback but the wrapper
 stopped on a non-scientific report-file Scheme query immediately after saving
@@ -109,7 +109,7 @@ trajectory, active-1,970 blow-up, and node `SIGSEGV` again matched the earlier
 recoveries. This confirms that restarting the Fluent session does not remove
 the unchanged-settings solver blocker. Only the active-1,900 paired start
 state was durable in this attempt; no active-5,000 pair was written. The
-recovery transcript was parsed into [R3 residual evidence](../../../../../PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-R3-student-20260910T224003Z-residuals.json): 76 raw points were captured, of which the active-1,900--1,960 interval is retained as valid and the active-1,970 onward tail is explicitly excluded as numerical-failure evidence.
+recovery transcript was parsed into R3 residual evidence (local generated artifact): `PyAnsys/output/phase07_cz_absorb_cold_cont5000/P7-E5-CZ-ABSORB-COLD-RAMP11692-RECOVER1900-CONT5000-R3-student-20260910T224003Z-residuals.json`: 76 raw points were captured, of which the active-1,900--1,960 interval is retained as valid and the active-1,970 onward tail is explicitly excluded as numerical-failure evidence.
 
 Because the scientific question was specifically the unchanged continuation,
 no further autonomous retry under the same settings is warranted. Any next

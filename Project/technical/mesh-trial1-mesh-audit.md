@@ -11,7 +11,7 @@ Primary reusable guidance is the maintained
 [Workbench `.meshdat` workflow](../../CFD_wiki/wiki/guidance/workbench-meshdat-semi-automated-improvement.md).
 No direct Workbench GUI runner is retained in `PyAnsys`; after an operator
 exports a candidate mesh, use the read-only
-[`inspect_case.py`](../../PyAnsys/scripts/inspection/inspect_case.py) workflow
+[`inspect_fluent_session.py`](../../PyAnsys/scripts/inspection/inspect_fluent_session.py) workflow
 to inspect the loaded Fluent case.
 
 ## Inputs used on 2026-06-10

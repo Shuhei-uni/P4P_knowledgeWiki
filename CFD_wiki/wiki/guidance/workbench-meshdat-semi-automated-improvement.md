@@ -117,7 +117,7 @@ A trial is successful only if:
 ## Repo implementation
 
 - Project evidence note: [mesh-trial technical audit](../../../Project/technical/mesh-trial1-mesh-audit.md)
-- Read-only Fluent inspection after export: [inspect_case.py](../../../PyAnsys/scripts/inspection/inspect_case.py)
+- Read-only Fluent inspection after export: [inspect_fluent_session.py](../../../PyAnsys/scripts/inspection/inspect_fluent_session.py)
 - No direct Workbench GUI runner or lower-level mesh-trial harness is retained;
   the former implementation is recoverable from Git history.
 

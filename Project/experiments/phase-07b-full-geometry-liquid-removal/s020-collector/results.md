@@ -38,6 +38,6 @@ pair, and the prescribed comparative analyses. The S20 runner is active; consult
 
 Evidence: [technical diagnostics](../diagnostics.md),
 [execution paths](run-paths.yaml),
-[failed N0 build receipt](../../../../PyAnsys/output/p7b-s020-20260918T065338Z/manifest.json),
-[recovery timeout](../../../../PyAnsys/output/p7b-s020-20260918T070215Z/manifest.json).
+failed N0 build receipt (local generated artifact): `PyAnsys/output/p7b-s020-20260918T065338Z/manifest.json`,
+recovery timeout (local generated artifact): `PyAnsys/output/p7b-s020-20260918T070215Z/manifest.json`.
 Required scientific evidence remains fixed by [setup.md](setup.md).

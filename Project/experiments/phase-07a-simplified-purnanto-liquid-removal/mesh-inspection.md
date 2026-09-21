@@ -23,7 +23,7 @@ does not establish solver-side mesh quality or flow-behaviour parity with setup
 | Units | `m` |
 
 The generated machine-readable inspection is
-[`PyAnsys/output/phase07_mesh_inspection/Separator-purnanto342k-inspection-20260908.json`](../../../PyAnsys/output/phase07_mesh_inspection/Separator-purnanto342k-inspection-20260908.json).
+`PyAnsys/output/phase07_mesh_inspection/Separator-purnanto342k-inspection-20260908.json` (local generated artifact): `PyAnsys/output/phase07_mesh_inspection/Separator-purnanto342k-inspection-20260908.json`.
 The reusable read-only extractor is
 [`PyAnsys/scripts/inspection/inspect_fluent_mesh_h5.py`](../../../PyAnsys/scripts/inspection/inspect_fluent_mesh_h5.py).
 
