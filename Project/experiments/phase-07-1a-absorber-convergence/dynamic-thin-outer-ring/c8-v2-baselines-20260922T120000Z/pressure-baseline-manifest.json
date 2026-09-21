@@ -1,10 +1,282 @@
 {
-  "status": "RUNNING",
+  "status": "COMPLETE",
   "setup_id": "C8-V2-THIN-RING-PRESSURE-BASELINE-P1120",
   "server_id": "3",
   "all_wall_case": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8-v2\\20260922T120000Z\\C8-V2-thin-outer-all-wall-prepared.cas.h5",
   "all_wall_data": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8-v2\\20260922T120000Z\\C8-V2-thin-outer-all-wall-prepared.dat.h5",
   "pressure_case": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8-v2\\20260922T120000Z\\C8-V2-thin-ring-pressure-baseline-P1120.cas.h5",
   "pressure_data": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8-v2\\20260922T120000Z\\C8-V2-thin-ring-pressure-baseline-P1120.dat.h5",
-  "pressure_pa": 1120000.0
+  "pressure_pa": 1120000.0,
+  "pre_save_audit": {
+    "boundary": {
+      "name": "bottom-bottom-band1-thin-outer-separator-purnanto",
+      "phase": {
+        "mixture": {
+          "momentum": {
+            "gauge_pressure": {
+              "option": "value",
+              "value": 1120000.0
+            },
+            "pressure_profile_multiplier": 1.0,
+            "backflow_dir_spec_method": "Normal to Boundary",
+            "backflow_pressure_spec": "Total Pressure",
+            "radial_equ_pressure_distribution": false
+          },
+          "turbulence": {
+            "turbulence_specification": "Intensity and Viscosity Ratio",
+            "backflow_turbulent_intensity": 0.05,
+            "backflow_turbulent_viscosity_ratio": 10
+          },
+          "discrete_phase": {
+            "bc_type": "escape"
+          },
+          "multiphase": {}
+        },
+        "phase-1": {
+          "momentum": {},
+          "turbulence": {},
+          "discrete_phase": {},
+          "multiphase": {}
+        },
+        "phase-2": {
+          "momentum": {},
+          "turbulence": {},
+          "discrete_phase": {},
+          "multiphase": {
+            "volume_frac_spec_method": "Backflow Volume Fraction",
+            "backflow_volume_fraction": {
+              "option": "value",
+              "value": 0
+            }
+          }
+        }
+      }
+    },
+    "pressure_pa": 1120000.0,
+    "phase2_backflow_volume_fraction": 0.0,
+    "source_state": {
+      "p71a-v2-virtual-outlet": {
+        "mixture": {
+          "enable": true,
+          "terms": {
+            "epsilon": [
+              {
+                "option": "value",
+                "value": "P71V2SinkEpsilon"
+              }
+            ],
+            "k": [
+              {
+                "option": "value",
+                "value": "P71V2SinkK"
+              }
+            ],
+            "x-momentum": [
+              {
+                "option": "value",
+                "value": "P71V2SinkX"
+              }
+            ],
+            "y-momentum": [
+              {
+                "option": "value",
+                "value": "P71V2SinkY"
+              }
+            ],
+            "z-momentum": [
+              {
+                "option": "value",
+                "value": "P71V2SinkZ"
+              }
+            ]
+          }
+        },
+        "phase-1": {
+          "enable": false
+        },
+        "phase-2": {
+          "enable": true,
+          "terms": {
+            "mass": [
+              {
+                "option": "value",
+                "value": "P71V2Sink"
+              }
+            ]
+          }
+        }
+      },
+      "separator-purnanto": {
+        "mixture": {
+          "enable": false
+        },
+        "phase-1": {
+          "enable": false
+        },
+        "phase-2": {
+          "enable": false
+        }
+      }
+    },
+    "expression_definitions": {
+      "P71V2Iteration": "Iteration",
+      "P71V2Alpha": "Volumefraction(phase=\"phase-2\")",
+      "P71V2LiquidInlet": "abs(MassFlow([\"liquidinlet\"],phase=\"phase-2\"))",
+      "P71V2Command": "P71V2LiquidInlet",
+      "P71V2AvailableVolume": "VolumeInt(P71V2Alpha,[\"p71a-v2-virtual-outlet\"])",
+      "P71V2NormalizationVolume": "max(P71V2AvailableVolume,9.9999999999999995e-07[m^3])",
+      "P71V2Sink": "-P71V2Command*P71V2Alpha/P71V2NormalizationVolume",
+      "P71V2LiquidX": "Velocity.x(phase=\"phase-2\")",
+      "P71V2LiquidY": "Velocity.y(phase=\"phase-2\")",
+      "P71V2LiquidZ": "Velocity.z(phase=\"phase-2\")",
+      "P71V2SinkX": "P71V2Sink*P71V2LiquidX",
+      "P71V2SinkY": "P71V2Sink*P71V2LiquidY",
+      "P71V2SinkZ": "P71V2Sink*P71V2LiquidZ",
+      "P71V2K": "TurbulentKineticEnergyk",
+      "P71V2Epsilon": "TurbulenceDissipationRate",
+      "P71V2SinkK": "P71V2Sink*P71V2K",
+      "P71V2SinkEpsilon": "P71V2Sink*P71V2Epsilon",
+      "P71V2Removal": "-VolumeInt(P71V2Sink,[\"p71a-v2-virtual-outlet\"])",
+      "P71V2CommandError": "P71V2Removal-P71V2Command"
+    }
+  },
+  "pair": {
+    "case": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8-v2\\20260922T120000Z\\C8-V2-thin-ring-pressure-baseline-P1120.cas.h5",
+    "data": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8-v2\\20260922T120000Z\\C8-V2-thin-ring-pressure-baseline-P1120.dat.h5",
+    "case_sha256": "aa9d7ef0fb2e1d5b79aaf8d8bb5a55751ee0d05b87fe50b6bbcf25eee1d94702",
+    "data_sha256": "f9a47ad3aebc7535b952086939bc437b832274af1024db5b7a31249a511e2331"
+  },
+  "post_reopen_audit": {
+    "boundary": {
+      "name": "bottom-bottom-band1-thin-outer-separator-purnanto",
+      "phase": {
+        "mixture": {
+          "momentum": {
+            "gauge_pressure": {
+              "option": "value",
+              "value": 1120000.0
+            },
+            "pressure_profile_multiplier": 1.0,
+            "backflow_dir_spec_method": "Normal to Boundary",
+            "backflow_pressure_spec": "Total Pressure",
+            "radial_equ_pressure_distribution": false
+          },
+          "turbulence": {
+            "turbulence_specification": "Intensity and Viscosity Ratio",
+            "backflow_turbulent_intensity": 0.05,
+            "backflow_turbulent_viscosity_ratio": 10
+          },
+          "discrete_phase": {
+            "bc_type": "escape"
+          },
+          "multiphase": {}
+        },
+        "phase-1": {
+          "momentum": {},
+          "turbulence": {},
+          "discrete_phase": {},
+          "multiphase": {}
+        },
+        "phase-2": {
+          "momentum": {},
+          "turbulence": {},
+          "discrete_phase": {},
+          "multiphase": {
+            "volume_frac_spec_method": "Backflow Volume Fraction",
+            "backflow_volume_fraction": {
+              "option": "value",
+              "value": 0
+            }
+          }
+        }
+      }
+    },
+    "pressure_pa": 1120000.0,
+    "phase2_backflow_volume_fraction": 0.0,
+    "source_state": {
+      "p71a-v2-virtual-outlet": {
+        "mixture": {
+          "enable": true,
+          "terms": {
+            "epsilon": [
+              {
+                "option": "value",
+                "value": "P71V2SinkEpsilon"
+              }
+            ],
+            "k": [
+              {
+                "option": "value",
+                "value": "P71V2SinkK"
+              }
+            ],
+            "x-momentum": [
+              {
+                "option": "value",
+                "value": "P71V2SinkX"
+              }
+            ],
+            "y-momentum": [
+              {
+                "option": "value",
+                "value": "P71V2SinkY"
+              }
+            ],
+            "z-momentum": [
+              {
+                "option": "value",
+                "value": "P71V2SinkZ"
+              }
+            ]
+          }
+        },
+        "phase-1": {
+          "enable": false
+        },
+        "phase-2": {
+          "enable": true,
+          "terms": {
+            "mass": [
+              {
+                "option": "value",
+                "value": "P71V2Sink"
+              }
+            ]
+          }
+        }
+      },
+      "separator-purnanto": {
+        "mixture": {
+          "enable": false
+        },
+        "phase-1": {
+          "enable": false
+        },
+        "phase-2": {
+          "enable": false
+        }
+      }
+    },
+    "expression_definitions": {
+      "P71V2Iteration": "Iteration",
+      "P71V2Alpha": "Volumefraction(phase=\"phase-2\")",
+      "P71V2LiquidInlet": "abs(MassFlow([\"liquidinlet\"],phase=\"phase-2\"))",
+      "P71V2Command": "P71V2LiquidInlet",
+      "P71V2AvailableVolume": "VolumeInt(P71V2Alpha,[\"p71a-v2-virtual-outlet\"])",
+      "P71V2NormalizationVolume": "max(P71V2AvailableVolume,9.9999999999999995e-07[m^3])",
+      "P71V2Sink": "-P71V2Command*P71V2Alpha/P71V2NormalizationVolume",
+      "P71V2LiquidX": "Velocity.x(phase=\"phase-2\")",
+      "P71V2LiquidY": "Velocity.y(phase=\"phase-2\")",
+      "P71V2LiquidZ": "Velocity.z(phase=\"phase-2\")",
+      "P71V2SinkX": "P71V2Sink*P71V2LiquidX",
+      "P71V2SinkY": "P71V2Sink*P71V2LiquidY",
+      "P71V2SinkZ": "P71V2Sink*P71V2LiquidZ",
+      "P71V2K": "TurbulentKineticEnergyk",
+      "P71V2Epsilon": "TurbulenceDissipationRate",
+      "P71V2SinkK": "P71V2Sink*P71V2K",
+      "P71V2SinkEpsilon": "P71V2Sink*P71V2Epsilon",
+      "P71V2Removal": "-VolumeInt(P71V2Sink,[\"p71a-v2-virtual-outlet\"])",
+      "P71V2CommandError": "P71V2Removal-P71V2Command"
+    }
+  }
 }
