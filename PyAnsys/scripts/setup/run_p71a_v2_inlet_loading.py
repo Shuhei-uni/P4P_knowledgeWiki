@@ -46,6 +46,7 @@ HORIZON = 2000
 UPDATE_INTERVAL = 10
 CHECKPOINTS = (500, 1000, 1500, 2000)
 SETUP_ID = "P71A-V2-INLET-LOADING-RAMP"
+COUPLED_PSEUDO_SETUP_ID = "P71A-V2-COUPLED-GLOBAL-PSEUDO-TIME-INLET-RAMP"
 
 
 def dump(path: Path, value: Any) -> None:
@@ -171,6 +172,32 @@ def audit(solver: Any, active: int | None = None) -> dict[str, Any]:
         "named_expression_definitions": defs,
         "named_expression_values": {name: expression_value(solver, name) for name in ("P71V2Command", "P71V2Removal", "P71V2AvailableVolume", "P71V2CommandError")},
         "source_audit": sources,
+    }
+
+
+def configure_coupled_global_pseudo_time(solver: Any) -> dict[str, Any]:
+    """Apply only the requested Coupled + global pseudo-time delta."""
+    solver.settings.setup.general.solver.time.set_state("steady")
+    solver.settings.solution.methods.p_v_coupling.flow_scheme.set_state("Coupled")
+    pseudo_method = solver.settings.solution.methods.pseudo_time_method
+    pseudo_method.formulation.coupled_solver.set_state("global-time-step")
+    pseudo_settings = solver.settings.solution.run_calculation.pseudo_time_settings
+    pseudo_settings.time_step_method.time_step_method.set_state("automatic")
+
+    solver_state = safe_get_state(solver.settings.setup.general.solver, "coupled pseudo solver")
+    methods_state = safe_get_state(solver.settings.solution.methods, "coupled pseudo methods")
+    pseudo_method_state = safe_get_state(pseudo_method, "pseudo-time method")
+    pseudo_settings_state = safe_get_state(pseudo_settings, "pseudo-time settings")
+    require(solver_state.get("time") == "steady", f"solver formulation changed unexpectedly: {solver_state}")
+    require(methods_state.get("p_v_coupling", {}).get("flow_scheme") == "Coupled", f"Coupled readback mismatch: {methods_state}")
+    require(pseudo_method_state.get("formulation", {}).get("coupled_solver") == "global-time-step", f"global pseudo-time readback mismatch: {pseudo_method_state}")
+    require(pseudo_settings_state.get("time_step_method", {}).get("time_step_method") == "automatic", f"automatic pseudo-time readback mismatch: {pseudo_settings_state}")
+    return {
+        "solver": solver_state,
+        "methods": methods_state,
+        "pseudo_time_method": pseudo_method_state,
+        "pseudo_time_settings": pseudo_settings_state,
+        "controlled_delta": "SIMPLE -> Coupled; pseudo-time off -> Global Time Step with Automatic timestep",
     }
 
 
@@ -305,6 +332,7 @@ def main() -> int:
     parser.add_argument("--server-id", default="student")
     parser.add_argument("--case", default="P71A-V2-INLET-LOADING-RAMP")
     parser.add_argument("--stamp", default=datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ"))
+    parser.add_argument("--coupled-pseudo-time", action="store_true", help="Use Coupled pressure-velocity with steady Global Time Step pseudo-time.")
     args = parser.parse_args()
     local = args.local_dir.resolve()
     local.mkdir(parents=True, exist_ok=False)
@@ -312,7 +340,7 @@ def main() -> int:
     run_paths = paths(args.checkpoint_root, args.final_root, args.case, args.stamp)
     manifest: dict[str, Any] = {
         "status": "RUNNING",
-        "setup_id": SETUP_ID,
+        "setup_id": COUPLED_PSEUDO_SETUP_ID if args.coupled_pseudo_time else SETUP_ID,
         "case_id": args.case,
         "server_id": args.server_id,
         "parent_case": args.parent_case,
@@ -323,6 +351,7 @@ def main() -> int:
         "liquid_base_target_kg_s": LIQUID_BASE_KG_S,
         "steam_base_target_kg_s": VAPOR_BASE_KG_S,
         "absorber_law": "P71V2Sink follows P71V2Command from instantaneous liquid-inlet throughput; no source retuning",
+        "controlled_delta": "SIMPLE -> Coupled; steady Global Time Step pseudo-time enabled with Automatic timestep" if args.coupled_pseudo_time else "v2 baseline settings",
         "artifacts": run_paths,
         "events": [],
     }
@@ -336,6 +365,8 @@ def main() -> int:
         require(remote_file_exists(solver, args.parent_case) and remote_file_exists(solver, args.parent_data), "v2 prepared parent pair is not visible on student")
         solver.settings.file.read_case(file_name=args.parent_case)
         solver.settings.file.read_data(file_name=args.parent_data)
+        if args.coupled_pseudo_time:
+            manifest["solver_variant_readback"] = configure_coupled_global_pseudo_time(solver)
         manifest["parent_readback"] = audit(solver, 0)
         definitions = configure_definitions(solver)
         manifest["report_definitions"] = definitions
@@ -348,6 +379,8 @@ def main() -> int:
         save_pair(solver, run_paths["prepared"])
         solver.settings.file.read_case(file_name=run_paths["prepared"])
         solver.settings.file.read_data(file_name=data_path(run_paths["prepared"]))
+        if args.coupled_pseudo_time:
+            manifest["prepared_reopen_solver_variant_readback"] = configure_coupled_global_pseudo_time(solver)
         manifest["prepared_reopen_parent_state"] = audit(solver, 0)
         # Fluent case/data reopen restores the parent boundary values. Reapply
         # the declared child schedule after reopen, then audit it before the

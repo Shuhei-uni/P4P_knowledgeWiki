@@ -158,7 +158,10 @@ def configure_c8_v2_virtual_outlet(solver: Any) -> dict[str, Any]:
 def mesh_counts(solver: Any) -> dict[str, Any]:
     zones = solver.fields.solution_variable_info.get_zones_info()
     names = solver.settings.setup.cell_zone_conditions.fluid.get_object_names()
-    counts = {name: int(zones[name].count) for name in names if name in zones}
+    # ``zones`` is a remote Settings collection; membership checks issue a
+    # separate RPC for each name and can hang on the 237k mesh.  The fluid
+    # names have already been read from the same live tree, so index directly.
+    counts = {name: int(zones[name].count) for name in names}
     return {"fluid_cell_counts": counts, "total_fluid_cells": sum(counts.values())}
 
 

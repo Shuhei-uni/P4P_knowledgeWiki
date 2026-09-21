@@ -1,0 +1,35 @@
+setup_id: P71A-V2-COUPLED-GLOBAL-PSEUDO-TIME-INLET-RAMP
+server:
+  id: "1"
+  host: 10.104.145.170
+  fluent_version: "2025 R2"
+parent:
+  case: >-
+    C:\Users\syok443\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\Phase07\Phase71A\BaselineV2\20260922T013000Z\P71A-BASELINE-V2-VIRTUAL-OUTLET-prepared.cas.h5
+  data: >-
+    C:\Users\syok443\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\Phase07\Phase71A\BaselineV2\20260922T013000Z\P71A-BASELINE-V2-VIRTUAL-OUTLET-prepared.dat.h5
+controlled_delta:
+  pressure_velocity: Coupled
+  formulation: steady
+  pseudo_time_method: global-time-step
+  pseudo_time_selection: automatic
+  physical_transient: false
+schedule:
+  horizon_native_iterations: 2000
+  inlet_update_interval: 10
+  checkpoints: [0, 500, 1000, 1500, 2000]
+  start_multiplier: 0.25
+  liquid_base_target_kg_s: 116.92
+  steam_base_target_kg_s: 80.69
+storage:
+  checkpoint_root: >-
+    C:\Users\syok443\Documents\FluentRuns\Phase71A\V2CoupledGlobalPseudoTime
+  final_root: >-
+    C:\Users\syok443\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\Phase71A\V2CoupledGlobalPseudoTime\finals
+evidence:
+  local_root: PyAnsys/output/phase71a_v2_coupled_global_pseudo_time
+  planned_files:
+    - run-manifest.json
+    - transcript.txt
+    - residuals.json
+    - report-histories.json
