@@ -43,6 +43,16 @@ Use `supervise-fluent-run` for long hypothesis-test execution. Discovery runs sh
 ## Connection and run tools
 
 - `scripts/connection/local_preflight.py` — local runtime preflight.
+- `scripts/inspection/probe_remote_paths.py --server-id <id>` — check configured
+  absolute PC paths through Fluent without loading or changing a case. Reads
+  `PyAnsys/.env` regardless of the calling directory. Repeated `--path` arguments
+  override the environment paths. Missing paths/API errors return failure;
+  existence does not prove contents or write permissions.
+- `src/pyansys_fluent/remote_text.py` — exact ASCII text upload/readback through
+  Fluent's Scheme API, without a PC shell. Use `write_ascii_text_new` for C
+  sources with literal backslashes; it refuses existing files and requires
+  exact readback. The historical `stage4_native.write_remote_text_new` did not
+  preserve C escape sequences in the Phase 7b 2025 R2 round-trip check.
 - `scripts/inspection/inspect_fluent_session.py --status-only` — MCP session/solver status capture; unavailable status remains uncertainty.
 - `scripts/inspection/inspect_fluent_session.py --paths <paths>` — non-mutating MCP live-tree inspection.
 - `scripts/inspection/monitor_native_run.py` — reconnecting read-only monitor that can supplement execution evidence without becoming a mutating controller.

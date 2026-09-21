@@ -7,12 +7,46 @@ including its lower brine region, and investigate a function-based liquid-only
 removal zone. The model must stay steady state. The human explicitly selected
 an ideal collector with no requirement to maintain a standing pool.
 
+The human approved five cases at `20%, 40%, 60%, 80%, 100%` collector thickness,
+each with a maximum of `5,000` steady iterations. DPM and EWF are off; every
+case uses the same fresh initialization without a patched standing pool.
+The maximum
+collector top is the old model cut plane associated with the assumed water-pool
+surface, now mapped to `y=+0.020 m` by the [geometry proof](geometry-proof.md).
+All five centroid masks were counted through Fluent; source implementation
+and the complete reference setup are still being verified.
+The human selected the reference steady Mixture/RNG
+physics with Energy off and the full-feed `1600 kJ/kg` condition: liquid
+`116.92 kg/s` and vapour `80.69 kg/s`. Retain this mesh's separate liquid and
+steam inlet faces, using Shuhei's earlier pure-phase equal-velocity design:
+nominally `27.118 m/s` on both faces, with the design's consistent densities
+and actual areas checked against the phase-flow targets. Close the physical
+brine outlet as a wall; the collector is the intended lower liquid-removal
+path. The transient `0.05%` study is historical context, not the
+Phase-7b settings parent or development route.
+
 This is Andy's Phase 7b, separate from
 [Shuhei's Phase 7](../phase-07a-simplified-purnanto-liquid-removal/index.md),
 which retains the simplified, truncated Purnanto direction. The current
 planning authority for Phase 7b is
-[`CONTEXT.md`](CONTEXT.md). Exact zone, source law, parent, outlet treatment,
-screening horizon and acceptance gate remain to be defined; no run is selected.
+[`CONTEXT.md`](CONTEXT.md). The five-case screen is selected and technical
+preparation is authorized. The clean reference, corrected native source syntax,
+50-iteration source diagnostic and exact collector-face recorder have passed
+bounded checks. The API has recovered, and the report-context correction is applied and
+verified after save/reopen. S20 is resuming; no 5,000-iteration result is
+available yet. See [diagnostics](diagnostics.md).
+Gate G1 returns the observed
+five-case comparison to the human rather than authorizing automatic continuation.
+
+The resolved brine-outlet study's 620,431-cell mesh is staged in the Phase 7b
+folder on Extreme SSD with a verified matching SHA-256. Its PC copy is at
+`C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal`;
+assistant access is through Fluent/PyFluent. API connectivity, directory
+write/read access and a source-free compiled diagnostic passed on Fluent
+2025 R2. The uninitialized reference preparation case also passed strict
+settings checks before save and after same-process reload. The full runnable
+steady setup remains incomplete. See `CONTEXT.md`
+for the handoff boundary.
 
 ## Phase question
 
@@ -47,8 +81,11 @@ Success would qualify a computational collection mechanism within its tested
 conditions. Physical pool behaviour, drainage hardware and separator-efficiency
 validation remain outside this phase's initial claim.
 
-## Next planning step
+## Next preparation step
 
-Define the collector's location and extent and identify the exact full-geometry
-reference. Then frame the smallest informative screen of the human's selected
-mechanism, with explicit invariants and a decision gate in `CONTEXT.md`.
+Finish liquid-source implementation, phase-interaction readback and evidence
+instrumentation. Geometry coverage and the common finite removal coefficient
+are recorded. Preserve complete liquid-volume,
+residual and source-inclusive mass-balance histories and document each case's
+results and observations in its Project packet. See the [discovery design](design.md)
+for the pre-run evidence contract and unresolved implementation checks.

@@ -1,0 +1,53 @@
+setup_id: phase07b-s20
+candidate_id: E1
+case_id: S20
+run_id: p7b-s020-20260920T221831Z
+mode: discovery
+goal_lease:
+  phase_id: phase-07b-full-geometry-liquid-removal
+  mode: restricted
+  scope: Phase7b preparation and selected children on configured server-1
+server:
+  ref: server-1@10.104.145.174
+  id: server-1
+  ip: 10.104.145.174
+  fluent_version: Ansys Fluent 2025 R2
+working_directory: null
+phase_root: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal
+parent:
+  artifact_id: p7b-clean-initial-20260912T080713Z
+  case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-clean-initial-20260912T080713Z.cas.h5
+  data: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-clean-initial-20260912T080713Z.dat.h5
+  status: verified clean N0 pair; reinitialize each child with recorded Hybrid options
+paths:
+  source_directory: null
+  initial_case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s020-20260918T065338Z-initial.cas.h5
+  initial_data: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s020-20260918T065338Z-initial.dat.h5
+  prepared_case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s020-20260920T221831Z-prepared.cas.h5
+  prepared_data: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s020-20260920T221831Z-prepared.dat.h5
+  final_case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s020-20260920T221831Z-final.cas.h5
+  final_data: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s020-20260920T221831Z-final.dat.h5
+  checkpoint_prefix: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s020-20260920T221831Z-n
+  reports: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-s020-20260920T221831Z.out
+  transcript: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/logs/p7b-s020-20260920T221831Z.trn
+  exports_prefix: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/exports/phase07b-s20-20260908
+  latest_checkpoint_case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s020-20260920T221831Z-n00050.cas.h5
+  latest_checkpoint_data: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s020-20260920T221831Z-n00050.dat.h5
+instrumentation_status: N50 complete native history and collector-flux sequence; last
+  PC flux row readback matches; prepared and N50 matching pairs verified; initial
+  section extraction passes.
+durability:
+  status: LOCAL_ONLY
+  onedrive_destination: null
+  reason: No verified independent destination currently configured
+local_evidence: PyAnsys/output/p7b-s020-20260920T221831Z
+paths_status: Prepared and N50 pairs verified. Runner continuing; final paths planned
+  until manifest confirms creation.
+working_directory_note: All artifacts use absolute PC paths; live cwd is not a dependency.
+execution_manifest: PyAnsys/output/p7b-s020-20260920T221831Z/manifest.json
+blocked_recovery_manifest: PyAnsys/output/p7b-s020-20260918T070215Z/manifest.json
+previous_run_id: p7b-s020-20260918T065338Z
+prepared_parent:
+  case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/speed-report-repair-20260920T221216Z-corrected.cas.h5
+  receipt: PyAnsys/output/phase07b_preparation/speed-report-repair-20260920T221216Z/result.json
+  iteration: 0

@@ -108,11 +108,24 @@ late-window boundedness and slope, residual behaviour, phase-resolved and
 mixture mass closure including storage/source terms, and credible phase routing
 must all be demonstrated.
 
-For
-Andy's
-Phase 7b, a function-based ideal
-collector is the selected mechanism direction; its exact zone, source law,
-parent, screening experiment and gate remain to be defined. The most direct
+For Andy's Phase 7b, a function-based ideal collector with five thickness
+cases (`20%, 40%, 60%, 80%, 100%`) is approved, with at most `5,000` steady
+iterations per case, DPM/EWF off, and the same fresh initialization without a
+patched pool. Its maximum top is the historical cut plane / assumed pool
+surface. The clean Python-only reference, save/reopen and source-free smoke passed.
+The Cortex fault was reproduced in phase-velocity expression syntax and avoided
+with component-first syntax; all three components match native phase reports
+at nonzero slip. Corrected collector expressions completed a 50-iteration
+startup diagnostic with complete histories. Exact mask-face flux recording
+also passed its live smoke. The API has recovered and the S20 report-context error is corrected, saved
+and verified after reload. S20 is resuming its approved screen; no
+5,000-iteration case is complete yet. See the
+[technical diagnostics](experiments/phase-07b-full-geometry-liquid-removal/diagnostics.md).
+Gate G1 returns the comparative observations to Andy. The selected condition
+is steady Mixture/RNG physics with Energy off and full-feed `1600 kJ/kg`,
+supplied through separate liquid and steam inlet faces using the earlier
+equal-velocity split design, with the physical brine outlet closed as a wall.
+The most direct
 records are:
 
 - [Shuhei's Phase 07A direction and boundaries](experiments/phase-07a-simplified-purnanto-liquid-removal/index.md)
@@ -183,12 +196,12 @@ steady state. A standing pool is explicitly not required in Phase 7b.
   persist over a declared qualification horizon or are dominated by pressure
   coupling, outlet reverse flow, source/local conditioning, or equation
   treatment;
-- for Andy's Phase 7b, the exact full-geometry mesh/parent, collector location and extent, and
-  treatment of the former brine outlet;
+- for Andy's Phase 7b, API/session recovery, complete reference phase-interaction
+  readback, collector source/velocity implementation and file-backed instrumentation;
 - whether liquid reaches the collector and can be removed without unacceptable
   steam loss, phase-routing distortion, mass imbalance, or numerical instability;
-- the source law and coupling, numerical screening horizon, comparison and
-  acceptance gate; and
+- verified source coupling and persistence before the approved five-case,
+  5,000-iteration screen and G1 review; and
 - which external, analytical, or measured targets would eventually support a
   physical validation claim.
 
@@ -204,13 +217,13 @@ finite nonstationarity and incomplete contour-level spatial evidence, and no
 hypothesis route is authorized. The direct-human T2-T4 extension queue remains
 active in order, with the production-limiter item blocked at active 250 and
 the remaining orders not yet run; continuation requires the same exact parent,
-readback, save/reopen, smoke-test, and one-declared-delta controls. Andy's
-Phase 7b must
-define the collector region and exact reference, then use
-`phase-grill` to sharpen the selected function-based mechanism into an
-interpretable screening experiment. The intervention, tuning, artefacts,
-conservation behaviour, claim limits and decision gate must be explicit.
-Any numerical collector elevation must be declared honestly. Shuhei's Phase 7
+readback, save/reopen, smoke-test, and one-declared-delta controls.
+
+Andy's Phase 7b has verified its five collector masks and PC/API paths and
+declared a common finite source coefficient and evidence contract in its
+[design](experiments/phase-07b-full-geometry-liquid-removal/design.md).
+Complete the first fully instrumented child and execute the approved five-case
+screen with the verified Python-only source and exact-face recording route. Shuhei's Phase 7
 retains the original E0--E4 fixed-mesh campaign as the comparison record and
 now executes the human-approved E5 cell-zone recovery family. The first
 student-server split placed `3,794` lower cells in a second fluid zone without
@@ -225,6 +238,13 @@ fixed-rate continuation is now a verified execution block with a durable
 solver-divergence limitation; any stabilization, instrumentation repair, or
 altered absorber law requires a separate human-approved setup. Experiment
 selection and gates belong to each phase's own `CONTEXT.md`.
+
+For Phase 7b, the resolved-outlet study's 620,431-cell mesh has been copied to
+Extreme SSD and its SHA-256 verified. The copied PC phase folder under
+`C:/Users/qtra338/P4P/experiments/` was verified accessible through Fluent/PyFluent,
+with output text round-trips and a historical compiled source-free geometry
+probe. Fresh-process clean N3 reload and client-exit preservation are now verified;
+this establishes current recovery, not a runnable collector.
 
 ## Project map
 

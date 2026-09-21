@@ -1,0 +1,146 @@
+phase_id: phase-07b-full-geometry-liquid-removal
+phase_question: Can a lower-region ideal liquid collector support balanced stable
+  steady Mixture flow in the full separator while preserving useful separation above
+  it?
+state: DISCOVERY_RUNNING
+context:
+  path: Project/experiments/phase-07b-full-geometry-liquid-removal/CONTEXT.md
+  authority: human-approved-context-only
+  approved_candidate_ids:
+  - E1
+  approved_case_ids:
+  - S20
+  - S40
+  - S60
+  - S80
+  - S100
+  decision_gate: G1
+autonomy:
+  experiment_selection: context_gated
+  fluent_fleet_sessions: restricted
+  scope: Configured server-1 PC; Phase7b preparation and selected children only; all
+    PC access through Fluent API
+  launch_authorization: Human selected planner option 1 on 2026-09-08
+  max_iterations_per_case: 5000
+  qualification_authorized: false
+gates:
+  PHASE_CONTRACT:
+    status: PASS
+    checked_at: '2026-09-10T10:44:22.044944+00:00'
+    reviewer: /root/phase7b_resume_gates
+    evidence:
+    - CONTEXT.md
+    - design.md
+    - geometry-proof.md
+    - s020-collector/setup.md
+    - s040-collector/setup.md
+    - s060-collector/setup.md
+    - s080-collector/setup.md
+    - s100-collector/setup.md
+    - diagnostics.md
+    missing: []
+  DISCOVERY_DESIGN:
+    status: PASS
+    checked_at: '2026-09-10T10:44:22.044944+00:00'
+    reviewer: /root/phase7b_resume_gates
+    evidence:
+    - CONTEXT.md
+    - design.md
+    - geometry-proof.md
+    - s020-collector/setup.md
+    - s040-collector/setup.md
+    - s060-collector/setup.md
+    - s080-collector/setup.md
+    - s100-collector/setup.md
+    - diagnostics.md
+    missing: []
+  DISCOVERY_EXECUTION:
+    status: IN_PROGRESS
+    checked_at: '2026-09-20T22:20:00Z'
+    reviewer: phase-loop deterministic recovery checks
+    evidence:
+    - PyAnsys/output/phase07b_preparation/fresh-reload-20260918T061745Z/result.json
+    - PyAnsys/output/phase07b_preparation/fresh-reload-20260918T061745Z/reload.trn
+    - PyAnsys/output/phase07b_preparation/fresh-reload-20260918T061745Z/reconnect-after-client-exit.json
+    - diagnostics.md
+    - PyAnsys/output/phase07b_preparation/speed-report-repair-20260920T221216Z/result.json
+    missing:
+    - Five selected 5000-iteration screen endpoints and analyses
+active_jobs:
+- kind: S20_resume
+  requested_iterations: 5000
+  parent_receipt: PyAnsys/output/phase07b_preparation/speed-report-repair-20260920T221216Z/result.json
+  run_id: p7b-s020-20260920T221831Z
+  manifest: PyAnsys/output/p7b-s020-20260920T221831Z/manifest.json
+  last_verified_iteration: 50
+  checkpoint: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s020-20260920T221831Z-n00050.cas.h5
+next_required_action: Supervise S20 milestones, preserve endpoint and analyze evidence;
+  continue remaining approved thickness cases.
+operational_status: S20_RUNNING
+last_api_reconciliation:
+  global_iteration: 50
+  case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s020-20260920T221831Z-n00050.cas.h5
+  evidence: PyAnsys/output/p7b-s020-20260920T221831Z/manifest.json
+  note: Verified N50 and saved matching checkpoint; runner continuing toward N500
+    then 5000.
+failed_export:
+  path: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/exports/p7b-phase-velocity-comparison-20260908T102932Z.csv
+  status: ERROR_REPORTED; FILE_EXISTS_WITH_DATA; COMPLETENESS_UNVERIFIED
+  user_evidence: /Users/andy/Downloads/IMG_4358.HEIC
+  api_evidence: PyAnsys/output/phase07b_preparation/failed-export-inspection.json
+  accepted_validation_evidence: false
+  automatic_retry: false
+latest_human_authorization: "2026-09-18: Sounds good. do it. \u2014 recover diagnostics\
+  \ and proceed with approved steady thickness screen."
+latest_read_only_access_check:
+  health: SERVING
+  evidence: PyAnsys/output/phase07b_preparation/reconnect-20260920T221113Z/result.json
+latest_requested_reload:
+  status: PASS
+  evidence: PyAnsys/output/phase07b_preparation/speed-report-repair-20260920T221216Z/result.json
+  iterations_issued: 0
+velocity_validation:
+  status: PASS
+  evidence: PyAnsys/output/phase07b_preparation/corrected-velocity-validation.json
+source_diagnostic:
+  status: HORIZON_AND_RECORDING_PASS
+  evidence: PyAnsys/output/phase07b_preparation/p7b-source-proof-s20-20260918T063831Z/validation.json
+  scientific_screen: false
+  nonzero_source_coupling: pending; effectively no liquid reaches S20 by N50
+  lag: native applied source N50 matches recomputed source N49
+flux_recorder:
+  status: SCREEN_N50_PASS
+  evidence: PyAnsys/output/p7b-s020-20260920T221831Z/manifest.json
+  recording: 50 continuous rows; last PC row readback matched local row.
+external_block:
+  kind: session_wide_api_timeout
+  observed_at_utc: '2026-09-18T07:08:00Z'
+  tcp: reachable
+  failed_services:
+  - health
+  - AppUtilities.GetBuildInfo
+  - Settings.GetAttrs
+  - Scheme.StringEval
+  per_probe_deadline_s: 8
+  reload_status: 'NOT_DISPATCHED: timed out resolving Settings activity before read_case_data
+    execution'
+  last_successful_operation: file.stop_transcript; Transcript closed
+  causation: unknown; ordering does not establish transcript closure caused the stall
+  last_verified_screen_iteration: 0
+  client_solve_active: false
+  evidence:
+  - PyAnsys/output/p7b-s020-20260918T070215Z/error.txt
+  - PyAnsys/output/phase07b_preparation/post-transcript-api-probe-20260918.json
+  - PyAnsys/output/phase07b_preparation/post-transcript-settings-scheme-20260918.json
+  status: RESOLVED_2026-09-21_NZ
+report_correction:
+  status: PASS
+  definition: Maximum(VelocityMagnitude(phase="mixture"),["simple-spiral-separator--brine-outlet-",
+    "p7b-collector"])
+  saved_reopened: true
+  evidence: PyAnsys/output/phase07b_preparation/speed-report-repair-20260920T221216Z/result.json
+section_extraction:
+  status: PASS
+  evidence: PyAnsys/output/p7b-s020-20260920T221831Z/initial-sections/index.json
+  sections: 4
+  fields_per_section: 10

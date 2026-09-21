@@ -10,6 +10,7 @@ from __future__ import annotations
 import importlib
 import platform
 import sys
+from pathlib import Path
 
 
 PACKAGES = [
@@ -42,6 +43,13 @@ def import_check(module_name: str, label: str) -> bool:
 
 
 def main() -> int:
+    # Resolve the repo's .env before importing libraries such as Matplotlib.
+    # Still report a missing dotenv dependency through the checks below.
+    try:
+        from dotenv import load_dotenv
+        load_dotenv(Path(__file__).resolve().parents[2] / ".env")
+    except ModuleNotFoundError:
+        pass
     print("=== Local PyAnsys / PyFluent preflight ===")
     print(f"Python: {sys.version.split()[0]}")
     print(f"Platform: {platform.platform()}")

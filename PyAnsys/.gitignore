@@ -2,3 +2,5 @@
 .env
 server_info.txt
 __pycache__/
+.matplotlib-cache/
+.cache/
