@@ -1,0 +1,16 @@
+{
+  "status": "COMPLETE",
+  "family": "independent Server-3 C8",
+  "parent_run_manifest": "Project/experiments/phase-07-1a-absorber-convergence/dynamic-thin-outer-ring/independent-c8-d0-resume2-20260921T062500Z/run-manifest.json",
+  "parent_case": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8\\independent-d0-finals\\C8-D0\\20260921T062500Z\\C8-D0-active5000.cas.h5",
+  "parent_data": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8\\independent-d0-finals\\C8-D0\\20260921T062500Z\\C8-D0-active5000.dat.h5",
+  "metric": "absorb-lower-liquid-mass",
+  "window_active_iterations": [4000, 5000],
+  "late_median_kg": 28.67767752217757,
+  "threshold_fraction_of_median": 0.8,
+  "threshold_kg": 22.942142017742057,
+  "cadence_active_iterations": 10,
+  "persistence_samples": 20,
+  "persistence_active_iterations": 200,
+  "open_condition": "Each of 20 consecutive sampled lower-liquid-mass values is >= threshold_kg."
+}

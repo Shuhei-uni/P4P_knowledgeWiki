@@ -17,6 +17,10 @@ Start at `Project/index.md`, then read only the selected phases/campaigns and
 their current `CONTEXT.md`, `setup.md`, `results.md`, and relevant figure
 artifacts.
 
+Use [evidence assembly](references/evidence-assembly.md) when reconciling
+several experiments, tracing claims to sources, or choosing the smallest figure
+set that can carry the report's argument.
+
 For each section answer:
 
 1. what we wanted to learn;

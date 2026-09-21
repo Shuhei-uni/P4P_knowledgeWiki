@@ -33,9 +33,11 @@ steam-outlet diameter is `0.876 m`, correcting the former Project value of
 Shuhei's Phase 07A mechanism-discovery record is retained as historical
 evidence. The lower cell-zone, phase-2-only absorber is now the human-selected
 working removal path, but it is not yet physically qualified or numerically
-converged. Phase 7.1A is the new planning phase for convergence and solver
-stability. Its purpose is to keep the absorber mechanism fixed while changing
-the remaining solver/model treatment one controlled step at a time. E0 is
+converged. Phase 7.1A now focuses on liquid-field development and artificial
+bottom-boundary routing: retain the absorber, develop both inlet phases from
+reduced conditions to base flow on the 237k thin-outer mesh with every bottom
+band closed, then assess a delayed thin-outer-ring pressure intervention using
+phase-resolved evidence. E0 is
 human-approved as the
 corrected fixed-mesh reference experiment, with an initial `2,000`-iteration
 discovery horizon. Its server-neutral setup and the human-approved five-family,
@@ -91,12 +93,15 @@ order on `student` from the exact active-1000 absorber parent, each with 500
 active iterations, paired final artifacts, and plot-led evidence. The closures
 produced distinct finite trajectories, but all retained nonstationarity,
 reverse flow, and broad turbulent-viscosity limiting; no branch is qualified
-or promoted. The direct-human T2-T4 extension queue is active in orders 4-11.
-Order 4, RNG production limiter, is recorded as `BLOCKED_AUTONOMOUS` after
-AMG divergence and floating-point exceptions at active 250; orders 5-11 have
-not run. The discovery-evidence gate remains blocked for a hypothesis route,
-and any continuation must preserve the exact parent and the queue's one-delta
-contract.
+or promoted. The unrun T2-T4 and Coupled/Global-Time-Step packets are now
+superseded as active candidates and retained only as planning history. The
+next two design families are a low-to-base inlet-development ramp and a
+delayed thin-outer-ring pressure-boundary screen; neither has an executable
+run packet until its controls and evidence gates are specified.
+Their staged design is recorded in the [C7/C8 liquid-development and
+dynamic-ring family plan](experiments/phase-07-1a-absorber-convergence/liquid-development-and-dynamic-ring-family.md).
+C7 is assigned to Server 1; its selected all-wall 237k checkpoint must be
+verified after transfer before C8 proceeds on Server 3.
 
 The human has also raised a Phase 7.1A-specific long-horizon planning
 hypothesis from the current extended runs: steady-state assessment may not be
@@ -188,14 +193,12 @@ steady state. A standing pool is explicitly not required in Phase 7b.
 
 ## What remains unresolved?
 
-- for Shuhei's Phase 7.1A, whether any later, separately authorized numerical
-  treatment can improve the selected lower cell-zone absorber's scaled-residual
-  and continuity behaviour while preserving bottom-only liquid removal and
-  negligible direct vapor absorption;
-- for Shuhei's Phase 7.1A, whether the finite turbulence-family differences
-  persist over a declared qualification horizon or are dominated by pressure
-  coupling, outlet reverse flow, source/local conditioning, or equation
-  treatment;
+- for Shuhei's Phase 7.1A, whether a controlled inlet-development path can
+  form and retain measurably more liquid in the lower separator region before
+  the base flow is reached;
+- for Shuhei's Phase 7.1A, what observable lower-liquid criterion and pressure
+  range can make the delayed thin-outer-ring intervention informative without
+  producing predominantly vapor loss or an uninterpretable imbalance;
 - for Andy's Phase 7b, API/session recovery, complete reference phase-interaction
   readback, collector source/velocity implementation and file-backed instrumentation;
 - whether liquid reaches the collector and can be removed without unacceptable
@@ -214,16 +217,16 @@ upgraded to a completed physical validation.
 Phase 7.1A's first controlled turbulence screen is complete but remains
 discovery-only: its execution gate passed, its evidence gate is blocked by
 finite nonstationarity and incomplete contour-level spatial evidence, and no
-hypothesis route is authorized. The direct-human T2-T4 extension queue remains
-active in order, with the production-limiter item blocked at active 250 and
-the remaining orders not yet run; continuation requires the same exact parent,
-readback, save/reopen, smoke-test, and one-declared-delta controls.
-
-Andy's Phase 7b has verified its five collector masks and PC/API paths and
-declared a common finite source coefficient and evidence contract in its
+hypothesis route is authorized. The active planning work has been reframed to
+an inlet-development ramp followed by an iterative delayed thin-outer-ring
+pressure-boundary study. The older unrun turbulence and solver-path packets
+remain preserved but are not to be executed. Andy's Phase 7b has verified its
+five collector masks and PC/API paths and declared a common finite source
+coefficient and evidence contract in its
 [design](experiments/phase-07b-full-geometry-liquid-removal/design.md).
 Complete the first fully instrumented child and execute the approved five-case
-screen with the verified Python-only source and exact-face recording route. Shuhei's Phase 7
+screen with the verified Python-only source and exact-face recording route.
+Shuhei's Phase 7
 retains the original E0--E4 fixed-mesh campaign as the comparison record and
 now executes the human-approved E5 cell-zone recovery family. The first
 student-server split placed `3,794` lower cells in a second fluid zone without

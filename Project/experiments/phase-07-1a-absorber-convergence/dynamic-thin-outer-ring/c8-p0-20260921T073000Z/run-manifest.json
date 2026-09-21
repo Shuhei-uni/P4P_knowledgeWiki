@@ -1,0 +1,864 @@
+{
+  "status": "BLOCKED",
+  "setup_id": "C8-P0",
+  "family": "P71A-INDEPENDENT-C8-DYNAMIC-THIN-OUTER",
+  "server_id": "3",
+  "parent_case": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8\\independent-d0-finals\\C8-D0\\20260921T062500Z\\C8-D0-active5000.cas.h5",
+  "parent_data": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8\\independent-d0-finals\\C8-D0\\20260921T062500Z\\C8-D0-active5000.dat.h5",
+  "trigger_receipt": "Project/experiments/phase-07-1a-absorber-convergence/dynamic-thin-outer-ring/c8-d0-trigger-receipt-20260921T062500Z.json",
+  "threshold_kg": 22.942142017742057,
+  "persistence_samples": 20,
+  "cadence_active_iterations": 10,
+  "pressure_pa": 1120000.0,
+  "artifacts": {
+    "local_root": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T073000Z",
+    "monitor_root": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T073000Z\\monitors",
+    "scratch": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T073000Z\\scratch",
+    "prepared": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T073000Z\\C8-P0-prepared.cas.h5",
+    "active000": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T073000Z\\C8-P0-active000.cas.h5",
+    "pre_switch": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T073000Z\\C8-P0-pre-switch.cas.h5",
+    "post_switch": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T073000Z\\C8-P0-post-switch.cas.h5",
+    "final_root": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8\\dynamic-thin-outer-finals\\C8-P0\\20260921T073000Z",
+    "active1000": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T073000Z\\C8-P0-active1000.cas.h5",
+    "active2000": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T073000Z\\C8-P0-active2000.cas.h5",
+    "active3000": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T073000Z\\C8-P0-active3000.cas.h5",
+    "active4000": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T073000Z\\C8-P0-active4000.cas.h5",
+    "active5000": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8\\dynamic-thin-outer-finals\\C8-P0\\20260921T073000Z\\C8-P0-active5000.cas.h5"
+  },
+  "events": [],
+  "parent_readback": {
+    "bottom_wall_bands": [
+      "bottom",
+      "bottom-thin-inner-separator-purnanto",
+      "bottom-thick-inner-separator-purnanto",
+      "bottom-thick-outer-separator-purnanto",
+      "bottom-bottom-band1-thin-outer-separator-purnanto"
+    ],
+    "lower_volume_m3": 0.3212056374640875,
+    "phase2_source_density_kg_m3_s": -364.0035739194406,
+    "integrated_phase2_source_kg_s": -116.92000000000002,
+    "source_tree": {
+      "separator-purnanto": {
+        "phase-1": {
+          "enable": false
+        },
+        "phase-2": {
+          "enable": false
+        },
+        "mixture": {
+          "enable": false
+        }
+      },
+      "p7-e5-lower-y010": {
+        "phase-1": {
+          "enable": false
+        },
+        "phase-2": {
+          "enable": true,
+          "terms": {
+            "mass": [
+              {
+                "option": "value",
+                "value": -364.0035739194406
+              }
+            ]
+          }
+        },
+        "mixture": {
+          "enable": true,
+          "terms": {
+            "epsilon": [],
+            "k": [],
+            "x-momentum": [
+              {
+                "option": "value",
+                "value": 0
+              }
+            ],
+            "y-momentum": [
+              {
+                "option": "value",
+                "value": 0
+              }
+            ],
+            "z-momentum": [
+              {
+                "option": "value",
+                "value": 0
+              }
+            ]
+          }
+        }
+      }
+    },
+    "boundaries": {
+      "interior": {
+        "interior--separator-purnanto": {
+          "name": "interior--separator-purnanto",
+          "phase": {
+            "mixture": {
+              "interior": {}
+            },
+            "phase-1": {
+              "interior": {}
+            },
+            "phase-2": {
+              "interior": {}
+            }
+          }
+        },
+        "interior--separator-purnanto:001": {
+          "name": "interior--separator-purnanto:001",
+          "phase": {
+            "mixture": {
+              "interior": {}
+            },
+            "phase-1": {
+              "interior": {}
+            },
+            "phase-2": {
+              "interior": {}
+            }
+          }
+        },
+        "interior--separator-purnanto:004": {
+          "name": "interior--separator-purnanto:004",
+          "phase": {
+            "mixture": {
+              "interior": {}
+            },
+            "phase-1": {
+              "interior": {}
+            },
+            "phase-2": {
+              "interior": {}
+            }
+          }
+        },
+        "interior--separator-purnanto:007": {
+          "name": "interior--separator-purnanto:007",
+          "phase": {
+            "mixture": {
+              "interior": {}
+            },
+            "phase-1": {
+              "interior": {}
+            },
+            "phase-2": {
+              "interior": {}
+            }
+          }
+        }
+      },
+      "mass_flow_inlet": {
+        "liquidinlet": {
+          "name": "liquidinlet",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "reference_frame": "Absolute",
+                "supersonic_gauge_pressure": {
+                  "option": "value",
+                  "value": 1140000
+                },
+                "direction_specification": "Normal to Boundary"
+              },
+              "turbulence": {
+                "turbulence_specification": "Intensity and Hydraulic Diameter",
+                "turbulent_intensity": 0.021099999,
+                "hydraulic_diameter": 0.01338
+              },
+              "discrete_phase": {
+                "bc_type": "escape"
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {
+                "mass_flow_specification": "Mass Flow Rate",
+                "mass_flow_rate": {
+                  "option": "value",
+                  "value": 0
+                }
+              },
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {
+                "mass_flow_specification": "Mass Flow Rate",
+                "mass_flow_rate": {
+                  "option": "value",
+                  "value": 116.92
+                }
+              },
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            }
+          }
+        },
+        "steaminlet": {
+          "name": "steaminlet",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "reference_frame": "Absolute",
+                "supersonic_gauge_pressure": {
+                  "option": "value",
+                  "value": 1140000
+                },
+                "direction_specification": "Normal to Boundary"
+              },
+              "turbulence": {
+                "turbulence_specification": "Intensity and Hydraulic Diameter",
+                "turbulent_intensity": 0.021099999,
+                "hydraulic_diameter": 0.7206100000000001
+              },
+              "discrete_phase": {
+                "bc_type": "escape"
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {
+                "mass_flow_specification": "Mass Flow Rate",
+                "mass_flow_rate": {
+                  "option": "value",
+                  "value": 80.69
+                }
+              },
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {
+                "mass_flow_specification": "Mass Flow Rate",
+                "mass_flow_rate": {
+                  "option": "value",
+                  "value": 0
+                }
+              },
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            }
+          }
+        }
+      },
+      "pressure_outlet": {
+        "steamoutlet": {
+          "name": "steamoutlet",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "gauge_pressure": {
+                  "option": "value",
+                  "value": 1120000
+                },
+                "pressure_profile_multiplier": 1.0,
+                "backflow_dir_spec_method": "Normal to Boundary",
+                "backflow_pressure_spec": "Total Pressure",
+                "radial_equ_pressure_distribution": false
+              },
+              "turbulence": {
+                "turbulence_specification": "Intensity and Hydraulic Diameter",
+                "backflow_turbulent_intensity": 0.021099999,
+                "backflow_hydraulic_diameter": 0.875936
+              },
+              "discrete_phase": {
+                "bc_type": "escape"
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {
+                "volume_frac_spec_method": "Backflow Volume Fraction",
+                "backflow_volume_fraction": {
+                  "option": "value",
+                  "value": 0
+                }
+              }
+            }
+          }
+        }
+      },
+      "wall": {
+        "bottom": {
+          "name": "bottom",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "discrete_phase": {
+                "bc_type": "trap"
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            }
+          }
+        },
+        "bottom-bottom-band1-thin-outer-separator-purnanto": {
+          "name": "bottom-bottom-band1-thin-outer-separator-purnanto",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "discrete_phase": {
+                "bc_type": "escape"
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            }
+          }
+        },
+        "bottom-thick-inner-separator-purnanto": {
+          "name": "bottom-thick-inner-separator-purnanto",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "discrete_phase": {
+                "bc_type": "reflect",
+                "reflection_coefficients": {
+                  "normal": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  },
+                  "tangential": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  }
+                }
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            }
+          }
+        },
+        "bottom-thick-outer-separator-purnanto": {
+          "name": "bottom-thick-outer-separator-purnanto",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "discrete_phase": {
+                "bc_type": "reflect",
+                "reflection_coefficients": {
+                  "normal": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  },
+                  "tangential": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  }
+                }
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            }
+          }
+        },
+        "bottom-thin-inner-separator-purnanto": {
+          "name": "bottom-thin-inner-separator-purnanto",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "discrete_phase": {
+                "bc_type": "reflect",
+                "reflection_coefficients": {
+                  "normal": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  },
+                  "tangential": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  }
+                }
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            }
+          }
+        },
+        "separator-purnanto:1": {
+          "name": "separator-purnanto:1",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "discrete_phase": {
+                "bc_type": "reflect",
+                "reflection_coefficients": {
+                  "normal": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  },
+                  "tangential": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  }
+                }
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            }
+          }
+        },
+        "separator-purnanto:1:013": {
+          "name": "separator-purnanto:1:013",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "discrete_phase": {
+                "bc_type": "reflect",
+                "reflection_coefficients": {
+                  "normal": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  },
+                  "tangential": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  }
+                }
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            }
+          }
+        },
+        "wall": {
+          "name": "wall",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "discrete_phase": {
+                "bc_type": "reflect",
+                "reflection_coefficients": {
+                  "normal": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  },
+                  "tangential": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  }
+                }
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            }
+          }
+        },
+        "wall:010": {
+          "name": "wall:010",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "discrete_phase": {
+                "bc_type": "reflect",
+                "reflection_coefficients": {
+                  "normal": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  },
+                  "tangential": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  }
+                }
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            }
+          }
+        }
+      },
+      "non_reflecting_bc": {
+        "general_nrbc": {
+          "sigma": 0.15,
+          "sigma2": 5.0
+        },
+        "turbo_specific_nrbc": {
+          "enable": false
+        }
+      },
+      "perforated_wall": {
+        "setup_method": "None",
+        "model_setup": {
+          "ninjections": 1,
+          "urf": 1,
+          "injection": [
+            {
+              "injection_thread": false,
+              "coupled": true,
+              "extraction_thread": false,
+              "uniform": true,
+              "static": false,
+              "formulation": 0,
+              "dynamic_setup": {
+                "method": -1
+              }
+            }
+          ]
+        }
+      },
+      "settings": {
+        "mass_flow": true,
+        "pressure_outlet": {
+          "blending_factor": 0.0,
+          "bin_count": 65,
+          "average_pressure": false
+        },
+        "target_mass_flow_rate_settings": {
+          "under_relaxation_factor": 0.05,
+          "verbosity": false
+        },
+        "advanced": {
+          "delay_model_change_update": false,
+          "batch_thread_update": false
+        }
+      }
+    },
+    "absorber_multiplier": 1.0
+  },
+  "error": "RuntimeError: C8 report package incomplete: ['c8-ring-flux-mixture', 'c8-ring-flux-phase1', 'c8-ring-flux-phase2']",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/scripts/setup/run_c8_dynamic_thin_outer.py\", line 121, in main\n    ring_reports(s); configure_total_inventory_reports(s); configure_inventory_reports(s); report_paths=bind_reports(s,p[\"monitor_root\"],a.case); m[\"report_paths\"]=report_paths; m[\"residual_configuration\"]=configure_residual_history(s,HORIZON+200)\n                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/scripts/setup/run_c8_dynamic_thin_outer.py\", line 81, in bind_reports\n    require(set(mapping) == REQUIRED, f\"C8 report package incomplete: {sorted(REQUIRED-set(mapping))}\")\n  File \"/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/scripts/setup/run_c8_dynamic_thin_outer.py\", line 47, in require\n    if not ok: raise RuntimeError(msg)\n               ^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: C8 report package incomplete: ['c8-ring-flux-mixture', 'c8-ring-flux-phase1', 'c8-ring-flux-phase2']\n"
+}

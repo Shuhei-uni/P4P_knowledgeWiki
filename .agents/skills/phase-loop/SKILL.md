@@ -13,6 +13,14 @@ records relevant to the current frontier. Then use:
 
 - [lifecycle](references/lifecycle.md) for the few hard scientific gates;
 - [experiment cycle](references/experiment-cycle.md) for design → run → analysis;
+- [experiment design](references/experiment-design.md) when selecting a new
+  contrast, defining its evidence, or compiling `setup.md`;
+- [research and challenge](references/research-and-challenge.md) when a
+  mechanism, capability, or consequential inference needs targeted research or
+  independent challenge;
+- [evidence reconstruction](references/evidence-reconstruction.md) after an
+  interruption or long sequence when durable records must be condensed into the
+  next scientific decision;
 - [recovery](references/recovery.md) when anything fails or blocks.
 
 Legacy `phase-loop` / `auto-loop` state labels may remain in historical

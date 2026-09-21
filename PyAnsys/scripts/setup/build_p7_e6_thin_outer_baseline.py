@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """Rebuild the P7.1A absorber baseline on the supplied 237k thin-outer mesh.
 
-This is a *prepared-case* builder only.  It preserves the loaded baseline to
-a paired recovery artifact, reads the supplied mesh, reapplies the baseline
-physics/numerics and named-boundary settings, creates the y<=0.10 m absorber
-cell zone, and configures its phase-2-only source at -116.92 kg/s.  The thin
-outer bottom band is a 1.120 MPa-gauge pressure outlet; all other bottom bands
-are retained as walls.  It never initializes or iterates Fluent.
+This is a *prepared-case* builder only. It preserves the loaded Server-3 state
+to a paired recovery artifact, reads the supplied mesh, reapplies either the
+loaded or a supplied verified baseline snapshot, creates the y<=0.10 m
+absorber cell zone, and configures its phase-2-only source at -116.92 kg/s.
+The thin outer bottom band is either a 1.120 MPa-gauge pressure outlet or,
+when requested, retained as a wall with the other bottom bands. It never
+calls ``run_calculation.iterate``.
 """
 from __future__ import annotations
 
@@ -80,8 +81,16 @@ def split_lower_zone(solver: Any) -> dict[str, Any]:
     return {"register": register_state, "generated_name": generated[0], "fluid_zones": after}
 
 
-def configure_outer_ring(solver: Any) -> dict[str, Any]:
+def configure_outer_ring(solver: Any, *, all_bottom_walls: bool = False) -> dict[str, Any]:
     bc = solver.settings.setup.boundary_conditions
+    if all_bottom_walls:
+        state_before = safe_get_state(bc, "target boundaries before all-wall configuration")
+        if OUTER_RING in (state_before.get("pressure_outlet", {}) if isinstance(state_before, Mapping) else {}):
+            bc.set_zone_type(zone_list=[OUTER_RING], new_type="wall")
+        state = safe_get_state(bc, "all-bottom-wall readback")
+        walls = state.get("wall", {}) if isinstance(state, Mapping) else {}
+        require(OUTER_RING in walls, f"thin outer all-wall conversion failed: {state}")
+        return {"boundary_type": "wall", "state": walls[OUTER_RING]}
     state = safe_get_state(bc, "target boundaries before outer-ring configuration")
     pressure = state.get("pressure_outlet", {}) if isinstance(state, Mapping) else {}
     require(OUTER_RING in pressure, f"thin outer pressure outlet missing: {sorted(pressure)}")
@@ -101,20 +110,25 @@ def configure_outer_ring(solver: Any) -> dict[str, Any]:
     return result
 
 
-def audit(solver: Any, expected_density: float) -> dict[str, Any]:
+def audit(solver: Any, expected_density: float, *, all_bottom_walls: bool = False) -> dict[str, Any]:
     models = safe_get_state(solver.settings.setup.models, "models")
     boundaries = safe_get_state(solver.settings.setup.boundary_conditions, "boundaries")
     volume = lower_volume(solver)
     source = read_source_tree(solver)
     mass = source[LOWER_ZONE]["phase-2"]["terms"]["mass"][0]["value"]
-    outer = boundaries["pressure_outlet"][OUTER_RING]
     require(models["multiphase"]["model"] == "mixture", "Mixture model missing")
     require(models["viscous"]["k_epsilon_model"] == "rng", "RNG k-epsilon missing")
     require(abs(float(mass) - expected_density) < 1e-10, f"source density mismatch: {mass}")
     require(abs(float(mass) * volume + SOURCE_RATE_KG_S) < 1e-7, "integrated source mismatch")
     walls = set(boundaries.get("wall", {}))
-    for name in ("bottom", "bottom-thin-inner-separator-purnanto", "bottom-thick-inner-separator-purnanto", "bottom-thick-outer-separator-purnanto"):
+    required_walls = ["bottom", "bottom-thin-inner-separator-purnanto", "bottom-thick-inner-separator-purnanto", "bottom-thick-outer-separator-purnanto"]
+    if all_bottom_walls:
+        required_walls.append(OUTER_RING)
+    for name in required_walls:
         require(name in walls, f"required retained wall missing: {name}")
+    if all_bottom_walls:
+        require(OUTER_RING not in set(boundaries.get("pressure_outlet", {})), "C7 outer ring remained a pressure outlet")
+    outer = boundaries.get("wall", {}).get(OUTER_RING) if all_bottom_walls else boundaries["pressure_outlet"][OUTER_RING]
     return {"fluid_zones": fluid_names(solver), "lower_volume_m3": volume, "source_density_kg_m3_s": mass,
             "integrated_source_kg_s": float(mass) * volume, "outer_ring": outer,
             "models": models, "source_tree": source}
@@ -126,15 +140,28 @@ def main() -> int:
     parser.add_argument("--mesh", required=True)
     parser.add_argument("--run-root", required=True)
     parser.add_argument("--manifest", required=True, type=Path)
+    parser.add_argument(
+        "--reference-manifest",
+        type=Path,
+        help=(
+            "Optional local completed all-wall build manifest whose "
+            "baseline_snapshot is the verified setup recipe. This lets a "
+            "Server-3 rebuild avoid inheriting an unrelated live solver path."
+        ),
+    )
     parser.add_argument("--resume-after-split", action="store_true",
                         help="Resume only the verified, loaded thin-outer mesh after the lower-zone split.")
+    parser.add_argument("--all-bottom-walls", action="store_true",
+                        help="Create the C7 parent with every bottom band retained as a wall.")
     args = parser.parse_args()
     root = PureWindowsPath(args.run_root)
     recovery = str(root / "P71A-baseline-pre-thin-outer-recovery.cas.h5")
     prepared = str(root / "P71A-thin-outer-baseline-prepared.cas.h5")
     manifest: dict[str, Any] = {"status": "RUNNING", "server_id": args.server_id, "mesh": args.mesh,
                                 "run_root": args.run_root, "recovery_case": recovery, "prepared_case": prepared,
-                                "outer_ring": OUTER_RING, "outer_pressure_pa": OUTER_PRESSURE_PA,
+                                "outer_ring": OUTER_RING, "outer_pressure_pa": None if args.all_bottom_walls else OUTER_PRESSURE_PA,
+                                "all_bottom_walls": args.all_bottom_walls,
+                                "reference_manifest": str(args.reference_manifest) if args.reference_manifest else None,
                                 "absorber_rate_kg_s": SOURCE_RATE_KG_S, "initialized": False, "iterated": False}
     write_json(args.manifest, manifest)
     try:
@@ -143,7 +170,16 @@ def main() -> int:
         if not args.resume_after_split:
             for path in (recovery, data_path(recovery), prepared):
                 require(not remote_file_exists(solver, path), f"refusing to overwrite: {path}")
-            manifest["baseline_snapshot"] = capture_reference_snapshot(solver)
+            manifest["server3_prebuild_snapshot"] = capture_reference_snapshot(solver)
+            if args.reference_manifest:
+                reference = json.loads(args.reference_manifest.read_text(encoding="utf-8"))
+                baseline_snapshot = reference.get("baseline_snapshot")
+                require(isinstance(baseline_snapshot, Mapping),
+                        "reference manifest lacks a baseline_snapshot mapping")
+                manifest["baseline_snapshot"] = deepcopy(dict(baseline_snapshot))
+                manifest["baseline_snapshot_origin"] = str(args.reference_manifest)
+            else:
+                manifest["baseline_snapshot"] = manifest["server3_prebuild_snapshot"]
             remote_chdir(solver, args.run_root)
             solver.settings.file.write_case(file_name=recovery)
             solver.settings.file.write_data(file_name=data_path(recovery))
@@ -157,13 +193,13 @@ def main() -> int:
             target = safe_get_state(solver.settings.setup.boundary_conditions, "target boundaries")
             convert_target_boundaries(solver, manifest["baseline_snapshot"]["boundary_conditions"], target)
             apply_boundary_states(solver, manifest["baseline_snapshot"]["boundary_conditions"])
-            manifest["outer_ring_readback_pre_split"] = configure_outer_ring(solver)
+            manifest["outer_ring_readback_pre_split"] = configure_outer_ring(solver, all_bottom_walls=args.all_bottom_walls)
             manifest["lower_zone_split"] = split_lower_zone(solver)
         else:
             require(set(fluid_names(solver)) == {PARENT_ZONE, LOWER_ZONE},
                     f"resume requires the verified two-zone topology; got {fluid_names(solver)}")
             manifest["resumed_after_split"] = True
-            manifest["outer_ring_readback_pre_split"] = configure_outer_ring(solver)
+            manifest["outer_ring_readback_pre_split"] = configure_outer_ring(solver, all_bottom_walls=args.all_bottom_walls)
         # Volume-integral evaluation is unavailable until Fluent owns an
         # initialized field. Hybrid initialization does not advance iterations.
         init = solver.settings.solution.initialization
@@ -176,14 +212,14 @@ def main() -> int:
         manifest["source_readback"] = configure_sources(solver, density, {"x": 0.0, "y": 0.0, "z": 0.0})
         if not args.resume_after_split:
             apply_solution_state(solver, manifest["baseline_snapshot"]["solution"])
-        manifest["pre_save_audit"] = audit(solver, density)
+        manifest["pre_save_audit"] = audit(solver, density, all_bottom_walls=args.all_bottom_walls)
         remote_chdir(solver, args.run_root)
         solver.settings.file.write_case(file_name=prepared)
         solver.settings.file.write_data(file_name=data_path(prepared))
         require(remote_file_exists(solver, prepared) and remote_file_exists(solver, data_path(prepared)), "prepared case/data pair missing")
         solver.settings.file.read_case(file_name=prepared)
         solver.settings.file.read_data(file_name=data_path(prepared))
-        manifest["post_reopen_audit"] = audit(solver, density)
+        manifest["post_reopen_audit"] = audit(solver, density, all_bottom_walls=args.all_bottom_walls)
         manifest["status"] = "COMPLETE"
         write_json(args.manifest, manifest)
         print(json.dumps({k: manifest.get(k) for k in ("status", "recovery_case", "prepared_case", "lower_zone_split", "pre_save_audit", "post_reopen_audit")}, indent=2, default=str))

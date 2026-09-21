@@ -2,12 +2,26 @@
 
 ## Status
 
-- **Planning state:** discovery evidence review
-- **Last human review:** 2026-09-15
+### Human contract override — 2026-09-21
+
+The dynamic thin-outer-ring work is now an **independent Server-3 C8
+discovery family**, built from scratch and unrelated to C7. C8 must not use,
+inspect, wait on, transfer, or alter any Server-1 or C7 artifact. Its parent
+route is a fresh 237k all-wall Server-3 baseline build followed by a local
+all-wall C8-D0 inlet-development run. C8-D0 supplies the selected paired
+checkpoint and lower-liquid trigger receipt. The named thin outer ring remains
+the only boundary permitted to change, after the declared persistent trigger.
+This override replaces the prior C7-to-C8 transfer dependency; all prior
+cross-server handoff records remain historical evidence only.
+
+- **Planning state:** reframed discovery design
+- **Last human review:** 2026-09-21
 - **Experiment-selection authority:** human-approved-context-only
 - **Current decision:** preserve the lower cell-zone, phase-2-only absorber as
-  the working liquid-removal path and begin the convergence-focused phase with
-  a matched turbulence-closure comparison before considering Phase 08.
+  the working liquid-removal path, but focus the next discovery work on how
+  liquid first develops and reaches the lower separator region. Two selected
+  families are controlled low-to-base inlet development and a delayed,
+  dynamically activated thin-outer-bottom pressure-boundary intervention.
 - **Discovery execution:** the approved T0 / standard k-epsilon / realizable
   k-epsilon queue completed in order on `student` from the exact active-1000
   parent. All three children have paired final artifacts and bounded 500-active
@@ -21,11 +35,10 @@
 - **Steady-state boundary:** the phase remains steady-state. A transient or
   time-accurate solver branch is not an automatic fallback and is outside the
   current Phase 7.1A experiment families.
-- **Solver-path extension:** on 2026-09-15 the human requested a bounded
-  discovery test of the Fluent pressure-based Coupled solver with its
-  compatible steady Global Time Step / pseudo-time treatment. This is a
-  combined C3+C4 solver-package candidate, not a transient branch or a claim
-  about pseudo-time alone. It is appended after the existing turbulence queue.
+- **Superseded queue:** the unrun T2--T4 turbulence packets and the unrun
+  C3+C4 Coupled/Global-Time-Step packet are no longer active selection
+  candidates. Their prepared records remain preserved as historical planning
+  evidence; they are not deleted or silently reinterpreted.
 - **Long-horizon maturity hypothesis:** while running the longer cases, the
   human observed that steady-state assessment may not be meaningful until at
   least roughly `4,000` solver iterations, and that the separator may approach
@@ -33,12 +46,12 @@
   inventory. These are Phase 7.1A-specific planning markers raised from the
   current runs, not generic Fluent requirements, convergence criteria, or
   evidence that the `2,000 kg` state is physically validated.
-- **Bottom-boundary family:** on 2026-09-18 the human authorized a separate
-  Phase 7.1A family that rebuilds the absorber baseline on the supplied 237k
-  thin-outer mesh. Its first prepared state retains the lower phase-2 absorber
-  and opens only the named thin outer bottom band as a `1.120 MPa` gauge
-  pressure outlet. This is a boundary-routing contrast, not an absorber-only
-  convergence child and not permission to start a solve.
+- **Bottom-boundary family:** the prepared 237k thin-outer mesh is now the
+  selected platform for an iterative boundary-routing study. The thin outer
+  ring must remain a wall during early field development, then become a
+  pressure outlet only after a declared, monitor-observed lower-liquid state.
+  The pressure range and activation rule are deliberately to be screened; the
+  outlet remains phase-permissive and is not a claimed liquid-only drain.
 
 ## Human thinking
 
@@ -49,15 +62,23 @@ promising liquid-removal route found so far. The main Phase 07 goal was to find
 a way for lower liquid to disappear while allowing steam to remain in the
 separator flow, and that mechanism is now accepted as the working direction.
 The human does not yet want to commit to Phase 08 because the absorber itself
-has not been shown to converge robustly. Phase 7.1A should therefore preserve
-the absorber and systematically change the remaining numerical or modelling
-choices until the scaled residuals and continuity behaviour are understood.
-The human now wants the work organized from high-impact decisions down to
-lower-impact numerical refinement: first assess the governing solver/model
-families and turbulence closure, then narrow into pressure coupling,
-discretization, relaxation, and boundary details. The solution space should be
-enumerated through controlled steady branches rather than by starting with a
-large under-relaxation or scheme sweep.
+has not been shown to converge robustly. The immediate scientific focus now
+changes from further turbulence/solver-option screening to forming a liquid
+field that reaches the lower separator region before high-throughput flow is
+fully established. Both liquid and steam inlets should start below their base
+targets and increase gradually to the existing base flow, so gravity can act
+on a less forcibly developed initial field. This is a testable numerical
+initial-development hypothesis, not a claim that inlet velocity alone makes
+the physical separator more effective.
+
+The prepared thin outer bottom band is now treated as an intentionally
+artificial, dynamically switched boundary intervention. It should begin as a
+wall, remain closed while the early field is predominantly vapor at the lower
+region, and be opened only when declared liquid-development monitors show a
+sufficient lower-region liquid presence. The study should iterate over a
+bounded pressure range and activation times/criteria, with phase-resolved ring
+fluxes determining whether the intervention preferentially routes liquid or
+merely vents steam.
 The human has now selected the contrastive family-screen structure as the
 preferred planning route because each family answers a critical, separable
 question and should identify useful failures faster than committing to one
@@ -94,14 +115,16 @@ steady-state pass condition.
 | H7 | Give turbulence first priority and substantially more weight within the family screen. | The observed failure involved (k), epsilon, and turbulent-viscosity limiting, so a deeper turbulence screen can distinguish closure effects from downstream numerical effects. | selected planning priority; first finite screen complete |
 | H8 | Begin turbulence screening with the closest matched standard or realizable (k)-epsilon alternative against the RNG reference. | Isolates closure-form effects with less physical and computational change before escalating to SST or RSM. | first finite screen complete; no closure promoted |
 | H9 | Treat roughly 4,000 solver iterations as the earliest point at which steady-state assessment may become meaningful, and roughly 2,000 kg total liquid as a plausible operating-point marker. | Allows the inventory response to mature before judging the branch, while keeping the proposed inventory separate from the actual convergence proof. | human-raised planning hypothesis; requires long-horizon evidence |
+| H10 | Start both liquid and steam inlets below their base targets, then ramp both to the existing base flow on the 237k thin-outer mesh while every bottom band remains a wall. | Directly tests whether a gentler two-phase formation path increases lower-region liquid presence before high-throughput circulation dominates. | selected direction; exact profile not yet selected |
+| H11 | Keep the thin outer bottom ring as a wall initially and dynamically convert it to a pressure outlet only after lower liquid has developed; screen a wide but bounded pressure range. | Tests an artificial boundary analogue for bottom routing while avoiding an initially vapor-dominated open path. | selected direction; activation criterion and pressure ladder not yet selected |
 
 ### Constraints expressed by the human
 
 - Liquid removal must remain localized at the bottom/lower cell-zone region.
 - Liquid higher in the separator may remain and need not be removed
   immediately.
-- The bottom remains a wall; a conventional bottom outlet is not the selected
-  absorber representation.
+- Except during the explicitly selected thin-outer-ring intervention, the
+  bottom remains a wall. The conventional full-bottom outlet is not selected.
 - Steam/vapor must not receive a direct mass sink.
 - Patching or resetting the field remains a human-only last resort and is not
   an autonomous recovery route.
@@ -239,19 +262,31 @@ child.
 
 ### Phase question
 
-> Can the selected bottom-only cell-zone absorber reach credible scaled-residual
-> and continuity convergence while preserving phase-selective liquid removal?
+> Can a controlled mixture-field development path and a delayed thin-outer
+> bottom-boundary intervention increase and retain liquid in the lower
+> separator region while preserving interpretable phase routing and mass
+> accounting?
 
 ### Scope, invariants, and claim limit
 
-- **In scope:** one-at-a-time convergence and stability sensitivities attached
-  to the existing absorber branch.
+- **In scope:** controlled inlet development from low flow to the existing base
+  flow; lower-region liquid-development observation; dynamically switching the
+  thin outer bottom band from wall to a pressure outlet; and iterative,
+  phase-resolved pressure/activation screening attached to the existing
+  absorber branch.
 - **Out of scope:** a new liquid-removal mechanism, automatic Phase 08
   promotion, physical brine-outlet validation, transient/time-accurate
   modelling, or unapproved field patching.
-- **Must remain fixed:** bottom-only absorber interpretation, phase-2-only
-  direct sink, zero direct phase-1 mass source, bottom wall, and the simplified
-  Purnanto geometry for the primary comparison.
+- **Must remain fixed:** phase-2-only direct sink, zero direct phase-1 mass
+  source, the 237k thin-outer simplified Purnanto mesh, existing base inlet
+  targets after a completed ramp, and all bottom bands as walls in C7. In C8,
+  the named thin-outer ring is the only bottom boundary permitted to change
+  state; all other bottom bands remain walls.
+- **Baseline inheritance:** first rebuild a baseline-equivalent state on the
+  237k mesh, then apply only the family delta. C7 is assigned to the
+  `student` Fluent endpoint and C8 to Server 3. The mesh-specific lower-zone source density may be
+  recalculated only to preserve the baseline integrated `-116.92 kg/s`
+  phase-2 command; it is not a free source-strength change.
 - **Claim limit:** numerical convergence under tested settings only; no plant,
   hardware, or mesh-independent physical claim.
 
@@ -278,11 +313,24 @@ A useful Phase 7.1A result must include, for each controlled branch:
   that as a candidate operating-point observation and assess whether the late
   inventory slope and variability actually flatten; do not stop or promote the
   branch because the mass value alone has been reached.
+- For inlet development, record both inlet commands and realized phase fluxes,
+  lower/adjacent/total liquid inventory, lower-zone liquid fraction, residuals,
+  and imbalance throughout the ramp and subsequent base-flow hold. Every C7
+  and C8 setup runs for 5,000 active iterations with paired case/data
+  checkpoints at 1,000-iteration intervals; a checkpoint is evidence, not a
+  convergence claim.
+- For the dynamic ring, record the wall/open state and exact switch iteration,
+  ring pressure, mixture/vapor/liquid ring fluxes, reverse flow, steam loss,
+  inventories, and absorber-source accounting. A switch is not a successful
+  liquid-routing event unless those phase-resolved measures support it.
 
 ## Candidate experiment pool
 
-The phase direction is selected. The human-approved finite first turbulence
-screen has passed execution and is now at its bounded discovery-evidence gate.
+The phase direction is selected. The T0/T1 closure records remain completed
+discovery evidence. The older C1--C6 and unrun T2--T4/C3C4 rows below are
+preserved planning history and are no longer active selection candidates.
+The active C7/C8 staged family plan is
+[liquid-development-and-dynamic-ring-family.md](liquid-development-and-dynamic-ring-family.md).
 
 | ID | Origin | Controlled delta | Screening question | Required evidence | Artifact/rejection signal | Human status |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -299,6 +347,8 @@ screen has passed execution and is now at its bounded discovery-evidence gate.
 | C2-T3-NON-EQ | C2 — direct human phase-loop extension | Standard to non-equilibrium wall functions | Does non-equilibrium wall treatment change recirculating/adverse-gradient response? | Wall/y-plus prerequisite, wall readback, residuals, phase/source balances, inventories, core figures | queued; not run |
 | C2-T4-K2 | C2 — direct human phase-loop extension | First- to second-order k discretization | Is first-order k acting as a stabilizer or contributing to the observed trajectory? | k-scheme readback, residuals, turbulence limits, phase/source balances, inventories, core figures | queued; not run |
 | C2-T4-DISPERSION | C2 — direct human phase-loop extension | Multiphase relative-velocity turbulence dispersion off to on | Does turbulent dispersion alter phase routing and absorber delivery? | Dispersion readback, residuals, phase routing, absorber/source balances, inventories, core figures | queued; not run |
+| C7-INLET-DEVELOPMENT | H10 — direct human reframe | On the 237k thin-outer mesh, begin both liquid and steam inlets below their existing base mass-flow targets and ramp both to the unchanged bases; retain every bottom band as a wall | Does a gentler two-phase field-formation route create more durable lower-region liquid presence before base-flow operation? | Declared ramp profile, commanded/realized phase inlet fluxes, lower/adjacent/total liquid inventories, liquid fraction, residuals, and balances through ramp and hold | No material lower-region liquid development; unacceptable imbalance/instability; or a result that cannot separate ramp effects from an uncontrolled source/boundary change | selected direction; exact profile and initialized 237k parent remain to be defined |
+| C8-DYNAMIC-THIN-OUTER-RING | H11 — direct human reframe | On the prepared 237k thin-outer mesh, keep the named ring as a wall during field development, then dynamically change only that ring to a pressure outlet across a bounded pressure/activation screen | Can a delayed artificial boundary intervention route lower liquid without predominantly venting vapor or destroying mass accounting? | Exact switch rule/time, ring pressure, ring mixture/vapor/liquid fluxes, reverse-flow evidence, liquid inventories, vapor loss, source accounting, and residuals | Ring opens before usable lower liquid exists; vapor-dominated loss; unacceptable reverse flow/imbalance; or no liquid-routing response | selected direction; executable trigger and pressure ladder remain to be defined |
 | C3 | H5/H6 — human-directed family screen | Steady pressure–velocity algorithm, with a selected model scaffold held fixed | Is continuity limited mainly by pressure correction and velocity coupling? | Coupling/Courant readback, continuity/momentum histories, balances, absorber delivery, warnings | No continuity improvement, immediate AMG instability, or confounded model changes | family selected; follow-on after turbulence screen |
 | C4 | H5/H6 — human-directed family screen | Spatial discretization, equation order, under-relaxation, or steady pseudo-time treatment | Can the selected model family be stabilized and then upgraded without changing its physical interpretation? | Scheme/relaxation readback, residual trajectory, order-ramp behaviour, balances, phase routing | Only an over-diffusive first-order endpoint survives, or higher order immediately re-diverges | family selected; follow-on after turbulence screen |
 | C3C4-COUPLED-GLOBAL-PSEUDO-TIME | H2/H5/H6 — direct human phase-loop extension | SIMPLE to pressure-based Coupled plus the Coupled-compatible steady Global Time Step / pseudo-time treatment | Can a stronger pressure-coupling and steady pseudo-time solver path bound the difficult active-1000 trajectory without changing absorber interpretation? | Coupling and pseudo-time readback, residuals, limiter/warning diagnostics, phase-resolved fluxes, source delivery, liquid and vapor inventories, reverse-flow evidence, paired checkpoints | Immediate AMG/FPE failure; nonstationary inventories despite longer endurance; loss of phase-selective routing; or unavailable live-supported controls | human-authorized discovery candidate; appended after T2-T4 queue; preflight required |

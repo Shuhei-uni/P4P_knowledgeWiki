@@ -1,35 +1,28 @@
 phase_id: phase-07-1a-absorber-convergence
 phase_question: >-
-  Can the selected bottom-only cell-zone absorber reach credible scaled-residual
-  and continuity convergence in the simplified Purnanto model when turbulence
-  closure and selected non-absorber steady solver treatments are changed in
-  controlled discovery branches?
-state: DISCOVERY_EXECUTION
+  Can a controlled mixture-field development path and a delayed thin-outer
+  bottom-boundary intervention increase and retain liquid in the lower
+  separator region while preserving interpretable phase routing and mass
+  accounting?
+state: DISCOVERY_DESIGN
 
 context:
   path: Project/experiments/phase-07-1a-absorber-convergence/CONTEXT.md
   authority: human-approved-context-only
   approved_candidate_ids:
-    - C2
-    - C2-T0
-    - C2-T1-STD
-    - C2-T1-REAL
-    - C2-T2-PROD
-    - C2-T2-DIFF
-    - C2-T2-SWIRL
-    - C2-T2-KATO
-    - C2-T3-SCALABLE
-    - C2-T3-NON-EQ
-    - C2-T4-K2
-    - C2-T4-DISPERSION
-    - C3C4-COUPLED-GLOBAL-PSEUDO-TIME
-    - C5-THIN-OUTER-BOTTOM-BOUNDARY
-  draft_family_path: Project/experiments/phase-07-1a-absorber-convergence/turbulence-family/README.md
+    - C7-INLET-DEVELOPMENT
+    - C8-DYNAMIC-THIN-OUTER-RING
+  draft_family_path: Project/experiments/phase-07-1a-absorber-convergence/liquid-development-and-dynamic-ring-family.md
+  contract_override:
+    approved_at: 2026-09-21
+    authority: direct human instruction
+    route: independent Server-3 C8 baseline -> C8-D0 all-wall development -> C8 pressure ladder
+    prohibits: Server 1 and C7 case/task inspection, transfer, waiting, or mutation
 
 autonomy:
   experiment_selection: context_gated
-  fluent_fleet_sessions: full
-  fluent_fleet_scope: student only
+  fluent_fleet_sessions: Server 3 C8 only
+  fluent_fleet_scope: independent C8 Server 3 only; C7 and Server 1 are out of scope
   auto_loop:
     profile_status: NOT_AUTHORIZED
     family_focus: none
@@ -37,20 +30,17 @@ autonomy:
 
 phase_loop:
   autonomy_check_in:
-    checked_at: 2026-09-15
-    fluent_fleet_sessions: full
+    checked_at: 2026-09-21
+    fluent_fleet_sessions: none
     fluent_fleet_scope: student only
-    authority_source: direct human phase-loop invocation to complete the staged turbulence-family setups, followed by the human request on 2026-09-15 to append the C3+C4 Coupled + Global Time Step discovery packet
+    authority_source: direct human phase-planner reframe to inlet-development and dynamic thin-outer-ring design
     completion_route: return
     auto_loop_selected: false
     auto_loop_profile_status: NOT_AUTHORIZED
     note: >-
-      The previous full-session authority remains in force for this bounded
-      extension. The user did not authorize an Auto Loop handoff; return after
-      the eight queued discovery items and their recovery routes are resolved.
-      The newly appended C3+C4 solver-path packet remains after that queue and
-      is not run until Student is reachable and the live global-step controls
-      are read back.
+      The prior turbulence and solver-path execution authority is superseded.
+      No solve is authorized until an executable inlet-ramp or dynamic-ring
+      setup has a declared parent, controls, monitors, and evidence gate.
 
 gates:
   PHASE_CONTRACT:
@@ -177,6 +167,49 @@ gates:
 
 active_jobs: []
 queue:
+  - order: 1
+    setup_id: P71A-INLET-DEVELOPMENT-RAMP
+    candidate_id: C7-INLET-DEVELOPMENT
+    origin: direct human phase-planner reframe on 2026-09-21
+    authority: planning direction only
+    assigned_runtime: student
+    lifecycle_role: controlled mixture-field development discovery
+    status: FAMILY_PLANNED
+    missing:
+      - exact initialized 237k thin-outer-mesh case-data identity
+      - baseline-to-237k/all-wall readback and save/reopen proof on Server 1
+      - initial liquid and steam inlet targets; both are to be ramped
+      - predeclared liquid-development measures and comparison window
+    completion_requirement: >-
+      Create a readback-verifiable setup on the 237k thin-outer mesh that
+      ramps both phase inlets linearly over 2,000 active iterations to the
+      unchanged base targets, then holds base flow through active 5,000 while
+      every bottom band remains a wall. Save paired case/data checkpoints at
+      active 1,000 intervals and capture phase-resolved inlet, inventory,
+      lower-region, residual, and balance evidence.
+  - order: 2
+    setup_id: P71A-DYNAMIC-THIN-OUTER-RING
+    candidate_id: C8-DYNAMIC-THIN-OUTER-RING
+    origin: direct human phase-planner reframe on 2026-09-21
+    authority: planning direction only
+    assigned_runtime: Server 3
+    lifecycle_role: iterative artificial boundary-routing discovery
+    status: FAMILY_PLANNED
+    prerequisite: P71A-INLET-DEVELOPMENT-RAMP on the same 237k mesh must establish a declared lower-liquid development observation
+    missing:
+      - exact wall-to-pressure-outlet switch criterion and observation cadence
+      - transfer, paired-file identity check, and Server 3 reopen/readback of the selected all-wall C7 checkpoint
+      - bounded pressure ladder and stop conditions
+      - whether the lower cell-zone absorber is active before/during/after switching
+      - durable phase-resolved thin-ring flux and vapor-loss monitors
+    completion_requirement: >-
+      Create a readback-verifiable delayed-switch setup on the prepared thin
+      outer mesh with a 5,000-active-iteration horizon and paired case/data
+      checkpoints at active 1,000 intervals. Report ring phase fluxes, vapor
+      loss, inventories, source accounting, residuals, and reverse flow for
+      each pressure/trigger point.
+
+superseded_queue:
   - order: 0
     setup_id: P71A-BB-THIN-OUTER-PO-P1120
     candidate_id: C5-THIN-OUTER-BOTTOM-BOUNDARY
@@ -405,11 +438,8 @@ queue:
       discovery evidence, and write paired results with the predeclared
       balance, inventory, routing, turbulence, and warning diagnostics.
 next_required_action: >-
-  Execute orders 4 through 12 in order on student. Keep every child attached
-  to the exact active-1000 parent, apply one declared delta only, and preserve
-  the absorber, boundaries, Mixture formulation, steady solver, numerics,
-  source, and evidence contract. Do not enter a hypothesis route or add an
-  outlet, introduce transient/time-accurate modelling, patch/reset/remesh/
-  resplit, or alter the restart field. For order 12, the declared delta is the
-  combined pressure-based Coupled plus steady Global Time Step package, and
-  the exact live-supported controls must be read back before mutation.
+  Design the inlet-development packet first: select an exact parent, low-flow
+  starting values, ramp law, hold horizon, and lower-liquid evidence measures.
+  Then define the delayed thin-outer-ring packet's switch criterion, bounded
+  pressure ladder, stop conditions, absorber schedule, and phase-resolved ring
+  monitors. Do not run either packet before those details are recorded.

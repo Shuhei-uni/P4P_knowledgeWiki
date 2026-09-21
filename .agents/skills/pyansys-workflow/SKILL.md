@@ -14,6 +14,8 @@ Use the branch that matches the task:
   apply the controlled delta, read back, save/reopen, smoke-test;
 - [run control](references/run-control.md) — execute, checkpoint, supervise, and
   prove completion;
+- [fleet and artifacts](references/fleet-and-artifacts.md) — choose/reconcile
+  live endpoints, case-data transfers, output paths, and durable checkpoints;
 - [manual fallback](references/manual-fallback.md) — resolve uncertain Fluent
   configuration from the version-matched manual and live tree;
 - [special operations](references/special-operations.md) — pool patching and

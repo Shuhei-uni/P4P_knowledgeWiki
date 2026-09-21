@@ -11,6 +11,8 @@ Plan the scientific **envelope**, not every solver action.
 Start at `Project/index.md`, then read the active phase `CONTEXT.md` and only the
 latest evidence needed to understand the frontier. Use
 [planning reference](references/planning.md) when the direction is unsettled.
+Use [context schema](references/context-schema.md) when creating or materially
+revising the active `CONTEXT.md`.
 
 ## Conversation
 

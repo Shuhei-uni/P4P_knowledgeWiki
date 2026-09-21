@@ -13,8 +13,11 @@ Produce the decisive evidence first. Use supporting branches only when relevant:
   stitching, trend summaries;
 - [model-specific evidence](references/model-specific.md) — DPM, EWF, phase
   routing, balances, inventory;
-- [figures](references/figures.md) — native Fluent spatial figures and
-  comparison rules.
+- [figures](references/figures.md) — when creating or exporting a native Fluent
+  contour, vector scene, plane, or spatial comparison; source identity,
+  post-processing, export, visual QA, and provenance.
+- [interpretation](references/interpretation.md) — when translating planned
+  evidence into a hypothesis judgement, bounded claim, and `results.md` story.
 
 ## Analysis order
 

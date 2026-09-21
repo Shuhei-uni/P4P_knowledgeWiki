@@ -1,0 +1,30 @@
+{
+  "status": "RECOVERY_SUPERSEDED",
+  "setup_id": "C8-D0",
+  "family": "P71A-INDEPENDENT-C8-D0-RESUME",
+  "server_id": "3",
+  "parent_case": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\independent-d0-checkpoints\\C8-D0\\20260921T023500Z\\C8-D0-active1000.cas.h5",
+  "parent_data": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\independent-d0-checkpoints\\C8-D0\\20260921T023500Z\\C8-D0-active1000.dat.h5",
+  "checkpoint_root_local_disk": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\independent-d0-checkpoints",
+  "final_root_onedrive": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8\\independent-d0-finals",
+  "requested_active_iterations": 5000,
+  "start_active_iteration": 1000,
+  "inlet_start_multiplier": 0.25,
+  "ramp_active_iterations": 2000,
+  "hold_active_iterations": 3000,
+  "absorber_target_kg_s": -116.92,
+  "artifacts": {
+    "prepared": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\independent-d0-checkpoints\\C8-D0\\20260921T061500Z\\C8-D0-prepared.cas.h5",
+    "active000": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\independent-d0-checkpoints\\C8-D0\\20260921T061500Z\\C8-D0-active000.cas.h5",
+    "monitors": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\independent-d0-checkpoints\\C8-D0\\20260921T061500Z\\monitors",
+    "scratch": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\independent-d0-checkpoints\\C8-D0\\20260921T061500Z\\scratch",
+    "final_root": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8\\independent-d0-finals\\C8-D0\\20260921T061500Z",
+    "active1000": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\independent-d0-checkpoints\\C8-D0\\20260921T061500Z\\C8-D0-active1000.cas.h5",
+    "active2000": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\independent-d0-checkpoints\\C8-D0\\20260921T061500Z\\C8-D0-active2000.cas.h5",
+    "active3000": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\independent-d0-checkpoints\\C8-D0\\20260921T061500Z\\C8-D0-active3000.cas.h5",
+    "active4000": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\independent-d0-checkpoints\\C8-D0\\20260921T061500Z\\C8-D0-active4000.cas.h5",
+    "active5000": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8\\independent-d0-finals\\C8-D0\\20260921T061500Z\\C8-D0-active5000.cas.h5"
+  },
+  "events": [],
+  "recovery_note": "Client-side read/reconnect stalled before any parent readback or solve; preserved active1000 pair remains untouched."
+}

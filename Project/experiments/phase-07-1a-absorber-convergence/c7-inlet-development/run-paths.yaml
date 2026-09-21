@@ -1,0 +1,36 @@
+phase_id: phase-07-1a-absorber-convergence
+setup_id: P71A-INLET-DEVELOPMENT-RAMP
+candidate_id: C7-INLET-DEVELOPMENT
+server:
+  id: student
+  ref: student@10.0.0.5
+  fluent_version: 2025 R2
+  path_namespace: 'C:\Users\Shuhei Yokkaichi'
+parent:
+  scientific_source_case: 'C:\Users\Shuhei Yokkaichi\OneDrive\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\Phase07\C7\20260921T000000Z\P71A-thin-outer-baseline-prepared.cas.h5'
+  scientific_source_data: 'C:\Users\Shuhei Yokkaichi\OneDrive\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\Phase07\C7\20260921T000000Z\P71A-thin-outer-baseline-prepared.dat.h5'
+  identity_receipt: PyAnsys/output/phase07_c7/c7-all-wall-build-manifest.json
+  verified_on_student: true
+storage:
+  checkpoint_root_local: 'C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\C7\student-continuations'
+  final_root_onedrive: 'C:\Users\Shuhei Yokkaichi\OneDrive\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\Phase07\C7\finals'
+  local_manifest_root: PyAnsys/output/phase07_c7
+  checkpoint_policy: active-1000,2000,3000,4000 paired case/data on student local disk
+  final_policy: active-5000 paired case/data only in the student-visible OneDrive finals root
+cases:
+  C7-R0:
+    status: COMPLETE_ON_PREVIOUS_ENDPOINT
+    final_pair: 'C:\Users\Shuhei Yokkaichi\OneDrive\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\Phase07\C7\finals\C7-R0\20260921T060000Z\C7-R0-active5000.{cas.h5,dat.h5}'
+    action: do-not-rerun
+  C7-R25:
+    status: QUEUED_ON_STUDENT
+    initial_multiplier: 0.25
+    action: run
+  C7-R50:
+    status: QUEUED_ON_STUDENT
+    initial_multiplier: 0.50
+    action: run
+  C7-R75:
+    status: QUEUED_ON_STUDENT
+    initial_multiplier: 0.75
+    action: run

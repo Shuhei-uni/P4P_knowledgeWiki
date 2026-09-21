@@ -1,0 +1,5483 @@
+{
+  "status": "RUNNING",
+  "setup_id": "C8-P0",
+  "family": "P71A-INDEPENDENT-C8-DYNAMIC-THIN-OUTER",
+  "server_id": "3",
+  "parent_case": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8\\independent-d0-finals\\C8-D0\\20260921T062500Z\\C8-D0-active5000.cas.h5",
+  "parent_data": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8\\independent-d0-finals\\C8-D0\\20260921T062500Z\\C8-D0-active5000.dat.h5",
+  "trigger_receipt": "Project/experiments/phase-07-1a-absorber-convergence/dynamic-thin-outer-ring/c8-d0-trigger-receipt-20260921T062500Z.json",
+  "threshold_kg": 22.942142017742057,
+  "persistence_samples": 20,
+  "cadence_active_iterations": 10,
+  "pressure_pa": 1120000.0,
+  "artifacts": {
+    "local_root": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z",
+    "monitor_root": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\monitors",
+    "scratch": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\scratch",
+    "prepared": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\C8-P0-prepared.cas.h5",
+    "active000": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\C8-P0-active000.cas.h5",
+    "pre_switch": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\C8-P0-pre-switch.cas.h5",
+    "post_switch": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\C8-P0-post-switch.cas.h5",
+    "final_root": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8\\dynamic-thin-outer-finals\\C8-P0\\20260921T074500Z",
+    "active1000": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\C8-P0-active1000.cas.h5",
+    "active2000": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\C8-P0-active2000.cas.h5",
+    "active3000": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\C8-P0-active3000.cas.h5",
+    "active4000": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\C8-P0-active4000.cas.h5",
+    "active5000": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8\\dynamic-thin-outer-finals\\C8-P0\\20260921T074500Z\\C8-P0-active5000.cas.h5"
+  },
+  "events": [
+    {
+      "active_iteration": 10,
+      "lower_liquid_mass_kg": 30.38269502708134,
+      "trigger_streak_samples": 1,
+      "ring_state": "wall"
+    },
+    {
+      "active_iteration": 20,
+      "lower_liquid_mass_kg": 29.1994098227321,
+      "trigger_streak_samples": 2,
+      "ring_state": "wall"
+    },
+    {
+      "active_iteration": 30,
+      "lower_liquid_mass_kg": 27.96244354326937,
+      "trigger_streak_samples": 3,
+      "ring_state": "wall"
+    },
+    {
+      "active_iteration": 40,
+      "lower_liquid_mass_kg": 27.12134337491023,
+      "trigger_streak_samples": 4,
+      "ring_state": "wall"
+    },
+    {
+      "active_iteration": 50,
+      "lower_liquid_mass_kg": 27.07954585898517,
+      "trigger_streak_samples": 5,
+      "ring_state": "wall"
+    },
+    {
+      "active_iteration": 60,
+      "lower_liquid_mass_kg": 27.7464417949379,
+      "trigger_streak_samples": 6,
+      "ring_state": "wall"
+    },
+    {
+      "active_iteration": 70,
+      "lower_liquid_mass_kg": 28.52518623758138,
+      "trigger_streak_samples": 7,
+      "ring_state": "wall"
+    },
+    {
+      "active_iteration": 80,
+      "lower_liquid_mass_kg": 29.00341333110643,
+      "trigger_streak_samples": 8,
+      "ring_state": "wall"
+    },
+    {
+      "active_iteration": 90,
+      "lower_liquid_mass_kg": 28.90253813745371,
+      "trigger_streak_samples": 9,
+      "ring_state": "wall"
+    },
+    {
+      "active_iteration": 100,
+      "lower_liquid_mass_kg": 28.38764750720858,
+      "trigger_streak_samples": 10,
+      "ring_state": "wall"
+    },
+    {
+      "active_iteration": 110,
+      "lower_liquid_mass_kg": 27.88295043150087,
+      "trigger_streak_samples": 11,
+      "ring_state": "wall"
+    },
+    {
+      "active_iteration": 120,
+      "lower_liquid_mass_kg": 27.67974570395992,
+      "trigger_streak_samples": 12,
+      "ring_state": "wall"
+    },
+    {
+      "active_iteration": 130,
+      "lower_liquid_mass_kg": 28.41835620479146,
+      "trigger_streak_samples": 13,
+      "ring_state": "wall"
+    },
+    {
+      "active_iteration": 140,
+      "lower_liquid_mass_kg": 30.93539170022957,
+      "trigger_streak_samples": 14,
+      "ring_state": "wall"
+    },
+    {
+      "active_iteration": 150,
+      "lower_liquid_mass_kg": 34.24133248263523,
+      "trigger_streak_samples": 15,
+      "ring_state": "wall"
+    },
+    {
+      "active_iteration": 160,
+      "lower_liquid_mass_kg": 36.35428665463326,
+      "trigger_streak_samples": 16,
+      "ring_state": "wall"
+    },
+    {
+      "active_iteration": 170,
+      "lower_liquid_mass_kg": 37.12296336780862,
+      "trigger_streak_samples": 17,
+      "ring_state": "wall"
+    },
+    {
+      "active_iteration": 180,
+      "lower_liquid_mass_kg": 37.59033197467762,
+      "trigger_streak_samples": 18,
+      "ring_state": "wall"
+    },
+    {
+      "active_iteration": 190,
+      "lower_liquid_mass_kg": 37.87831599328389,
+      "trigger_streak_samples": 19,
+      "ring_state": "wall"
+    },
+    {
+      "active_iteration": 200,
+      "lower_liquid_mass_kg": 37.91127124285271,
+      "trigger_streak_samples": 20,
+      "ring_state": "wall",
+      "pre_switch_case": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\C8-P0-pre-switch.cas.h5",
+      "switch_readback": {
+        "pressure_pa": 1120000.0,
+        "phase2_backflow_volume_fraction": 0.0,
+        "boundary": {
+          "name": "bottom-bottom-band1-thin-outer-separator-purnanto",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "gauge_pressure": {
+                  "option": "value",
+                  "value": 1120000.0
+                },
+                "pressure_profile_multiplier": 1.0,
+                "backflow_dir_spec_method": "Normal to Boundary",
+                "backflow_pressure_spec": "Total Pressure",
+                "radial_equ_pressure_distribution": false
+              },
+              "turbulence": {
+                "turbulence_specification": "Intensity and Viscosity Ratio",
+                "backflow_turbulent_intensity": 0.05,
+                "backflow_turbulent_viscosity_ratio": 10
+              },
+              "discrete_phase": {
+                "bc_type": "escape"
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {
+                "volume_frac_spec_method": "Backflow Volume Fraction",
+                "backflow_volume_fraction": {
+                  "option": "value",
+                  "value": 0
+                }
+              }
+            }
+          }
+        }
+      },
+      "post_switch_case": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\C8-P0-post-switch.cas.h5",
+      "switch_active_iteration": 200
+    },
+    {
+      "active_iteration": 210,
+      "lower_liquid_mass_kg": 37.07522758979722,
+      "trigger_streak_samples": 21,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 220,
+      "lower_liquid_mass_kg": 35.72047701477432,
+      "trigger_streak_samples": 22,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 230,
+      "lower_liquid_mass_kg": 34.18617438141055,
+      "trigger_streak_samples": 23,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 240,
+      "lower_liquid_mass_kg": 32.43507821747477,
+      "trigger_streak_samples": 24,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 250,
+      "lower_liquid_mass_kg": 30.99439175146416,
+      "trigger_streak_samples": 25,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 260,
+      "lower_liquid_mass_kg": 29.95031961105196,
+      "trigger_streak_samples": 26,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 270,
+      "lower_liquid_mass_kg": 29.58340874932576,
+      "trigger_streak_samples": 27,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 280,
+      "lower_liquid_mass_kg": 30.32352792301213,
+      "trigger_streak_samples": 28,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 290,
+      "lower_liquid_mass_kg": 31.35081061107437,
+      "trigger_streak_samples": 29,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 300,
+      "lower_liquid_mass_kg": 31.74109702499776,
+      "trigger_streak_samples": 30,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 310,
+      "lower_liquid_mass_kg": 31.34426583609445,
+      "trigger_streak_samples": 31,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 320,
+      "lower_liquid_mass_kg": 30.30892757704962,
+      "trigger_streak_samples": 32,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 330,
+      "lower_liquid_mass_kg": 28.89067155342897,
+      "trigger_streak_samples": 33,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 340,
+      "lower_liquid_mass_kg": 27.78802386017152,
+      "trigger_streak_samples": 34,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 350,
+      "lower_liquid_mass_kg": 27.32850896768942,
+      "trigger_streak_samples": 35,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 360,
+      "lower_liquid_mass_kg": 26.95879568585001,
+      "trigger_streak_samples": 36,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 370,
+      "lower_liquid_mass_kg": 26.34985528026013,
+      "trigger_streak_samples": 37,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 380,
+      "lower_liquid_mass_kg": 25.59376397064371,
+      "trigger_streak_samples": 38,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 390,
+      "lower_liquid_mass_kg": 24.95174241135054,
+      "trigger_streak_samples": 39,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 400,
+      "lower_liquid_mass_kg": 24.45612122125046,
+      "trigger_streak_samples": 40,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 410,
+      "lower_liquid_mass_kg": 24.21026916720653,
+      "trigger_streak_samples": 41,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 420,
+      "lower_liquid_mass_kg": 24.67576290013905,
+      "trigger_streak_samples": 42,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 430,
+      "lower_liquid_mass_kg": 25.84888250389053,
+      "trigger_streak_samples": 43,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 440,
+      "lower_liquid_mass_kg": 26.94411391573626,
+      "trigger_streak_samples": 44,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 450,
+      "lower_liquid_mass_kg": 27.25322204751282,
+      "trigger_streak_samples": 45,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 460,
+      "lower_liquid_mass_kg": 27.16633617132658,
+      "trigger_streak_samples": 46,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 470,
+      "lower_liquid_mass_kg": 27.9178174002915,
+      "trigger_streak_samples": 47,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 480,
+      "lower_liquid_mass_kg": 28.73477842568921,
+      "trigger_streak_samples": 48,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 490,
+      "lower_liquid_mass_kg": 28.88910462787026,
+      "trigger_streak_samples": 49,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 500,
+      "lower_liquid_mass_kg": 27.99933928996682,
+      "trigger_streak_samples": 50,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 510,
+      "lower_liquid_mass_kg": 26.58176029556731,
+      "trigger_streak_samples": 51,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 520,
+      "lower_liquid_mass_kg": 25.02461285080533,
+      "trigger_streak_samples": 52,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 530,
+      "lower_liquid_mass_kg": 23.29487392228214,
+      "trigger_streak_samples": 53,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 540,
+      "lower_liquid_mass_kg": 22.08522824354473,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 550,
+      "lower_liquid_mass_kg": 21.70930794809313,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 560,
+      "lower_liquid_mass_kg": 21.98806527005891,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 570,
+      "lower_liquid_mass_kg": 22.40959613132785,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 580,
+      "lower_liquid_mass_kg": 22.61357645905166,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 590,
+      "lower_liquid_mass_kg": 22.58713734014448,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 600,
+      "lower_liquid_mass_kg": 22.55446971517521,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 610,
+      "lower_liquid_mass_kg": 22.71690950001008,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 620,
+      "lower_liquid_mass_kg": 23.15075149000544,
+      "trigger_streak_samples": 1,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 630,
+      "lower_liquid_mass_kg": 23.56556069175051,
+      "trigger_streak_samples": 2,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 640,
+      "lower_liquid_mass_kg": 23.57502221932672,
+      "trigger_streak_samples": 3,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 650,
+      "lower_liquid_mass_kg": 23.68306705939975,
+      "trigger_streak_samples": 4,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 660,
+      "lower_liquid_mass_kg": 25.10761174661123,
+      "trigger_streak_samples": 5,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 670,
+      "lower_liquid_mass_kg": 27.81341405853695,
+      "trigger_streak_samples": 6,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 680,
+      "lower_liquid_mass_kg": 30.07626961789502,
+      "trigger_streak_samples": 7,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 690,
+      "lower_liquid_mass_kg": 30.62495406195998,
+      "trigger_streak_samples": 8,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 700,
+      "lower_liquid_mass_kg": 30.06385294994337,
+      "trigger_streak_samples": 9,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 710,
+      "lower_liquid_mass_kg": 30.07599802340009,
+      "trigger_streak_samples": 10,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 720,
+      "lower_liquid_mass_kg": 30.77984597476995,
+      "trigger_streak_samples": 11,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 730,
+      "lower_liquid_mass_kg": 31.16853954072845,
+      "trigger_streak_samples": 12,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 740,
+      "lower_liquid_mass_kg": 30.75505318172534,
+      "trigger_streak_samples": 13,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 750,
+      "lower_liquid_mass_kg": 29.87248420703433,
+      "trigger_streak_samples": 14,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 760,
+      "lower_liquid_mass_kg": 28.68357045907962,
+      "trigger_streak_samples": 15,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 770,
+      "lower_liquid_mass_kg": 27.28984318946525,
+      "trigger_streak_samples": 16,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 780,
+      "lower_liquid_mass_kg": 25.79661556531208,
+      "trigger_streak_samples": 17,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 790,
+      "lower_liquid_mass_kg": 24.32682551762953,
+      "trigger_streak_samples": 18,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 800,
+      "lower_liquid_mass_kg": 23.0696404640393,
+      "trigger_streak_samples": 19,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 810,
+      "lower_liquid_mass_kg": 22.32542810994302,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 820,
+      "lower_liquid_mass_kg": 22.75701826440176,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 830,
+      "lower_liquid_mass_kg": 24.41029931860687,
+      "trigger_streak_samples": 1,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 840,
+      "lower_liquid_mass_kg": 26.43389751779676,
+      "trigger_streak_samples": 2,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 850,
+      "lower_liquid_mass_kg": 28.16463502352114,
+      "trigger_streak_samples": 3,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 860,
+      "lower_liquid_mass_kg": 29.30264714452709,
+      "trigger_streak_samples": 4,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 870,
+      "lower_liquid_mass_kg": 29.50351132177491,
+      "trigger_streak_samples": 5,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 880,
+      "lower_liquid_mass_kg": 28.75722221086446,
+      "trigger_streak_samples": 6,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 890,
+      "lower_liquid_mass_kg": 27.61703895965529,
+      "trigger_streak_samples": 7,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 900,
+      "lower_liquid_mass_kg": 26.61289162589927,
+      "trigger_streak_samples": 8,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 910,
+      "lower_liquid_mass_kg": 25.83417384709093,
+      "trigger_streak_samples": 9,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 920,
+      "lower_liquid_mass_kg": 25.01327554698299,
+      "trigger_streak_samples": 10,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 930,
+      "lower_liquid_mass_kg": 24.17541752917172,
+      "trigger_streak_samples": 11,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 940,
+      "lower_liquid_mass_kg": 23.33209386967666,
+      "trigger_streak_samples": 12,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 950,
+      "lower_liquid_mass_kg": 22.95592701784426,
+      "trigger_streak_samples": 13,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 960,
+      "lower_liquid_mass_kg": 23.27008969432392,
+      "trigger_streak_samples": 14,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 970,
+      "lower_liquid_mass_kg": 24.00659240139006,
+      "trigger_streak_samples": 15,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 980,
+      "lower_liquid_mass_kg": 24.83231414881693,
+      "trigger_streak_samples": 16,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 990,
+      "lower_liquid_mass_kg": 25.26421989507518,
+      "trigger_streak_samples": 17,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1000,
+      "lower_liquid_mass_kg": 25.11122373876782,
+      "trigger_streak_samples": 18,
+      "ring_state": "pressure-outlet",
+      "checkpoint_case": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\C8-P0-active1000.cas.h5"
+    },
+    {
+      "active_iteration": 1010,
+      "lower_liquid_mass_kg": 25.18792135868122,
+      "trigger_streak_samples": 19,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1020,
+      "lower_liquid_mass_kg": 25.72812227939003,
+      "trigger_streak_samples": 20,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1030,
+      "lower_liquid_mass_kg": 27.01425009252827,
+      "trigger_streak_samples": 21,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1040,
+      "lower_liquid_mass_kg": 29.19250513081357,
+      "trigger_streak_samples": 22,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1050,
+      "lower_liquid_mass_kg": 31.67731765030452,
+      "trigger_streak_samples": 23,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1060,
+      "lower_liquid_mass_kg": 33.25956899497392,
+      "trigger_streak_samples": 24,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1070,
+      "lower_liquid_mass_kg": 33.39916794320343,
+      "trigger_streak_samples": 25,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1080,
+      "lower_liquid_mass_kg": 32.69265105325156,
+      "trigger_streak_samples": 26,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1090,
+      "lower_liquid_mass_kg": 31.42751629275687,
+      "trigger_streak_samples": 27,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1100,
+      "lower_liquid_mass_kg": 29.4059465315804,
+      "trigger_streak_samples": 28,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1110,
+      "lower_liquid_mass_kg": 27.19680858506018,
+      "trigger_streak_samples": 29,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1120,
+      "lower_liquid_mass_kg": 25.57118370299971,
+      "trigger_streak_samples": 30,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1130,
+      "lower_liquid_mass_kg": 24.88433336158766,
+      "trigger_streak_samples": 31,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1140,
+      "lower_liquid_mass_kg": 24.90366279019461,
+      "trigger_streak_samples": 32,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1150,
+      "lower_liquid_mass_kg": 25.33236553586188,
+      "trigger_streak_samples": 33,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1160,
+      "lower_liquid_mass_kg": 25.92089895487749,
+      "trigger_streak_samples": 34,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1170,
+      "lower_liquid_mass_kg": 26.59660751079074,
+      "trigger_streak_samples": 35,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1180,
+      "lower_liquid_mass_kg": 27.47745224596497,
+      "trigger_streak_samples": 36,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1190,
+      "lower_liquid_mass_kg": 28.61010709604655,
+      "trigger_streak_samples": 37,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1200,
+      "lower_liquid_mass_kg": 29.86742437522097,
+      "trigger_streak_samples": 38,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1210,
+      "lower_liquid_mass_kg": 30.56013351877507,
+      "trigger_streak_samples": 39,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1220,
+      "lower_liquid_mass_kg": 30.4988296935345,
+      "trigger_streak_samples": 40,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1230,
+      "lower_liquid_mass_kg": 30.14906539821312,
+      "trigger_streak_samples": 41,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1240,
+      "lower_liquid_mass_kg": 29.68112768275956,
+      "trigger_streak_samples": 42,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1250,
+      "lower_liquid_mass_kg": 29.24585454961376,
+      "trigger_streak_samples": 43,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1260,
+      "lower_liquid_mass_kg": 28.68277020780394,
+      "trigger_streak_samples": 44,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1270,
+      "lower_liquid_mass_kg": 27.75045125309856,
+      "trigger_streak_samples": 45,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1280,
+      "lower_liquid_mass_kg": 26.55198691476931,
+      "trigger_streak_samples": 46,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1290,
+      "lower_liquid_mass_kg": 25.42776560171289,
+      "trigger_streak_samples": 47,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1300,
+      "lower_liquid_mass_kg": 24.9103726202753,
+      "trigger_streak_samples": 48,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1310,
+      "lower_liquid_mass_kg": 24.94780336811656,
+      "trigger_streak_samples": 49,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1320,
+      "lower_liquid_mass_kg": 25.02408692362739,
+      "trigger_streak_samples": 50,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1330,
+      "lower_liquid_mass_kg": 24.56242494604801,
+      "trigger_streak_samples": 51,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1340,
+      "lower_liquid_mass_kg": 23.40565386593386,
+      "trigger_streak_samples": 52,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1350,
+      "lower_liquid_mass_kg": 22.2714172523199,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1360,
+      "lower_liquid_mass_kg": 21.790493154571,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1370,
+      "lower_liquid_mass_kg": 21.74943029467299,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1380,
+      "lower_liquid_mass_kg": 21.91152391049702,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1390,
+      "lower_liquid_mass_kg": 22.68914315683603,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1400,
+      "lower_liquid_mass_kg": 23.77660638172495,
+      "trigger_streak_samples": 1,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1410,
+      "lower_liquid_mass_kg": 24.3498662331077,
+      "trigger_streak_samples": 2,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1420,
+      "lower_liquid_mass_kg": 24.31878581279484,
+      "trigger_streak_samples": 3,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1430,
+      "lower_liquid_mass_kg": 23.88748369774851,
+      "trigger_streak_samples": 4,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1440,
+      "lower_liquid_mass_kg": 23.14971575186349,
+      "trigger_streak_samples": 5,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1450,
+      "lower_liquid_mass_kg": 22.28446793790426,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1460,
+      "lower_liquid_mass_kg": 21.56055391534584,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1470,
+      "lower_liquid_mass_kg": 21.18144017608689,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1480,
+      "lower_liquid_mass_kg": 21.39967548400437,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1490,
+      "lower_liquid_mass_kg": 22.21826124876821,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1500,
+      "lower_liquid_mass_kg": 23.260493644725,
+      "trigger_streak_samples": 1,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1510,
+      "lower_liquid_mass_kg": 24.88485907827204,
+      "trigger_streak_samples": 2,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1520,
+      "lower_liquid_mass_kg": 27.78587843200177,
+      "trigger_streak_samples": 3,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1530,
+      "lower_liquid_mass_kg": 31.20733423246168,
+      "trigger_streak_samples": 4,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1540,
+      "lower_liquid_mass_kg": 34.04912030695836,
+      "trigger_streak_samples": 5,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1550,
+      "lower_liquid_mass_kg": 35.26043754554918,
+      "trigger_streak_samples": 6,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1560,
+      "lower_liquid_mass_kg": 34.61342482384888,
+      "trigger_streak_samples": 7,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1570,
+      "lower_liquid_mass_kg": 33.33665653259795,
+      "trigger_streak_samples": 8,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1580,
+      "lower_liquid_mass_kg": 32.19484559443379,
+      "trigger_streak_samples": 9,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1590,
+      "lower_liquid_mass_kg": 30.92266235719629,
+      "trigger_streak_samples": 10,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1600,
+      "lower_liquid_mass_kg": 29.31293835408338,
+      "trigger_streak_samples": 11,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1610,
+      "lower_liquid_mass_kg": 27.68811534613635,
+      "trigger_streak_samples": 12,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1620,
+      "lower_liquid_mass_kg": 26.66787499836643,
+      "trigger_streak_samples": 13,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1630,
+      "lower_liquid_mass_kg": 26.33576431856773,
+      "trigger_streak_samples": 14,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1640,
+      "lower_liquid_mass_kg": 25.96842256982364,
+      "trigger_streak_samples": 15,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1650,
+      "lower_liquid_mass_kg": 25.15717704964088,
+      "trigger_streak_samples": 16,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1660,
+      "lower_liquid_mass_kg": 24.11859454587436,
+      "trigger_streak_samples": 17,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1670,
+      "lower_liquid_mass_kg": 23.29355601473156,
+      "trigger_streak_samples": 18,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1680,
+      "lower_liquid_mass_kg": 22.75302443822391,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1690,
+      "lower_liquid_mass_kg": 22.37398028303559,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1700,
+      "lower_liquid_mass_kg": 22.14091204373786,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1710,
+      "lower_liquid_mass_kg": 22.63975108150104,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1720,
+      "lower_liquid_mass_kg": 24.3074917909856,
+      "trigger_streak_samples": 1,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1730,
+      "lower_liquid_mass_kg": 26.3737917946907,
+      "trigger_streak_samples": 2,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1740,
+      "lower_liquid_mass_kg": 28.02028933019707,
+      "trigger_streak_samples": 3,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1750,
+      "lower_liquid_mass_kg": 28.93352824847087,
+      "trigger_streak_samples": 4,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1760,
+      "lower_liquid_mass_kg": 29.19895290084838,
+      "trigger_streak_samples": 5,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1770,
+      "lower_liquid_mass_kg": 29.58018444627186,
+      "trigger_streak_samples": 6,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1780,
+      "lower_liquid_mass_kg": 29.99310518666334,
+      "trigger_streak_samples": 7,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1790,
+      "lower_liquid_mass_kg": 29.53012948939519,
+      "trigger_streak_samples": 8,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1800,
+      "lower_liquid_mass_kg": 28.31048513962239,
+      "trigger_streak_samples": 9,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1810,
+      "lower_liquid_mass_kg": 26.99349412804503,
+      "trigger_streak_samples": 10,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1820,
+      "lower_liquid_mass_kg": 26.20760473472884,
+      "trigger_streak_samples": 11,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1830,
+      "lower_liquid_mass_kg": 25.94927746389186,
+      "trigger_streak_samples": 12,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1840,
+      "lower_liquid_mass_kg": 25.79089718739172,
+      "trigger_streak_samples": 13,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1850,
+      "lower_liquid_mass_kg": 25.63716298231653,
+      "trigger_streak_samples": 14,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1860,
+      "lower_liquid_mass_kg": 25.48983349223056,
+      "trigger_streak_samples": 15,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1870,
+      "lower_liquid_mass_kg": 25.334885891593,
+      "trigger_streak_samples": 16,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1880,
+      "lower_liquid_mass_kg": 25.40921087636961,
+      "trigger_streak_samples": 17,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1890,
+      "lower_liquid_mass_kg": 25.75553853352093,
+      "trigger_streak_samples": 18,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1900,
+      "lower_liquid_mass_kg": 25.80321828206865,
+      "trigger_streak_samples": 19,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1910,
+      "lower_liquid_mass_kg": 25.13776050734535,
+      "trigger_streak_samples": 20,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1920,
+      "lower_liquid_mass_kg": 24.2969190741715,
+      "trigger_streak_samples": 21,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1930,
+      "lower_liquid_mass_kg": 23.81348616739164,
+      "trigger_streak_samples": 22,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1940,
+      "lower_liquid_mass_kg": 23.96176528665683,
+      "trigger_streak_samples": 23,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1950,
+      "lower_liquid_mass_kg": 24.60380719521442,
+      "trigger_streak_samples": 24,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1960,
+      "lower_liquid_mass_kg": 25.29117633175255,
+      "trigger_streak_samples": 25,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1970,
+      "lower_liquid_mass_kg": 25.47922113593109,
+      "trigger_streak_samples": 26,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1980,
+      "lower_liquid_mass_kg": 24.94001921231646,
+      "trigger_streak_samples": 27,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 1990,
+      "lower_liquid_mass_kg": 23.83807179616448,
+      "trigger_streak_samples": 28,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2000,
+      "lower_liquid_mass_kg": 22.49348801590975,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet",
+      "checkpoint_case": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\C8-P0-active2000.cas.h5"
+    },
+    {
+      "active_iteration": 2010,
+      "lower_liquid_mass_kg": 21.27225746923764,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2020,
+      "lower_liquid_mass_kg": 20.36387736185893,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2030,
+      "lower_liquid_mass_kg": 19.9641864878618,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2040,
+      "lower_liquid_mass_kg": 20.26881435447984,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2050,
+      "lower_liquid_mass_kg": 21.2523406230181,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2060,
+      "lower_liquid_mass_kg": 23.27408400388763,
+      "trigger_streak_samples": 1,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2070,
+      "lower_liquid_mass_kg": 26.56881114006324,
+      "trigger_streak_samples": 2,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2080,
+      "lower_liquid_mass_kg": 29.67684970475392,
+      "trigger_streak_samples": 3,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2090,
+      "lower_liquid_mass_kg": 31.16867082328348,
+      "trigger_streak_samples": 4,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2100,
+      "lower_liquid_mass_kg": 31.18581914573043,
+      "trigger_streak_samples": 5,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2110,
+      "lower_liquid_mass_kg": 30.56603771445423,
+      "trigger_streak_samples": 6,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2120,
+      "lower_liquid_mass_kg": 29.60156603586828,
+      "trigger_streak_samples": 7,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2130,
+      "lower_liquid_mass_kg": 28.44878544741255,
+      "trigger_streak_samples": 8,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2140,
+      "lower_liquid_mass_kg": 27.67044627474468,
+      "trigger_streak_samples": 9,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2150,
+      "lower_liquid_mass_kg": 28.42393986887167,
+      "trigger_streak_samples": 10,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2160,
+      "lower_liquid_mass_kg": 30.189896994427,
+      "trigger_streak_samples": 11,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2170,
+      "lower_liquid_mass_kg": 31.1057265249086,
+      "trigger_streak_samples": 12,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2180,
+      "lower_liquid_mass_kg": 30.64174622252867,
+      "trigger_streak_samples": 13,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2190,
+      "lower_liquid_mass_kg": 29.26442784744066,
+      "trigger_streak_samples": 14,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2200,
+      "lower_liquid_mass_kg": 27.96803355135624,
+      "trigger_streak_samples": 15,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2210,
+      "lower_liquid_mass_kg": 27.48193837984109,
+      "trigger_streak_samples": 16,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2220,
+      "lower_liquid_mass_kg": 27.4181994637569,
+      "trigger_streak_samples": 17,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2230,
+      "lower_liquid_mass_kg": 27.01696498230359,
+      "trigger_streak_samples": 18,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2240,
+      "lower_liquid_mass_kg": 26.02884423183472,
+      "trigger_streak_samples": 19,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2250,
+      "lower_liquid_mass_kg": 24.98386121664519,
+      "trigger_streak_samples": 20,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2260,
+      "lower_liquid_mass_kg": 24.79162259086316,
+      "trigger_streak_samples": 21,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2270,
+      "lower_liquid_mass_kg": 25.33929541797089,
+      "trigger_streak_samples": 22,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2280,
+      "lower_liquid_mass_kg": 25.68470999870174,
+      "trigger_streak_samples": 23,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2290,
+      "lower_liquid_mass_kg": 25.20383071662059,
+      "trigger_streak_samples": 24,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2300,
+      "lower_liquid_mass_kg": 23.92140217639146,
+      "trigger_streak_samples": 25,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2310,
+      "lower_liquid_mass_kg": 22.41362476910495,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2320,
+      "lower_liquid_mass_kg": 21.18368272067035,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2330,
+      "lower_liquid_mass_kg": 20.31777138902884,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2340,
+      "lower_liquid_mass_kg": 19.55065140439305,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2350,
+      "lower_liquid_mass_kg": 18.72187217611994,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2360,
+      "lower_liquid_mass_kg": 17.89975340707349,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2370,
+      "lower_liquid_mass_kg": 17.31304911055394,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2380,
+      "lower_liquid_mass_kg": 17.18634504748279,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2390,
+      "lower_liquid_mass_kg": 17.51759263332321,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    },
+    {
+      "active_iteration": 2400,
+      "lower_liquid_mass_kg": 17.92525263954153,
+      "trigger_streak_samples": 0,
+      "ring_state": "pressure-outlet"
+    }
+  ],
+  "parent_readback": {
+    "bottom_wall_bands": [
+      "bottom",
+      "bottom-thin-inner-separator-purnanto",
+      "bottom-thick-inner-separator-purnanto",
+      "bottom-thick-outer-separator-purnanto",
+      "bottom-bottom-band1-thin-outer-separator-purnanto"
+    ],
+    "lower_volume_m3": 0.3212056374640875,
+    "phase2_source_density_kg_m3_s": -364.0035739194406,
+    "integrated_phase2_source_kg_s": -116.92000000000002,
+    "source_tree": {
+      "separator-purnanto": {
+        "phase-1": {
+          "enable": false
+        },
+        "phase-2": {
+          "enable": false
+        },
+        "mixture": {
+          "enable": false
+        }
+      },
+      "p7-e5-lower-y010": {
+        "phase-1": {
+          "enable": false
+        },
+        "phase-2": {
+          "enable": true,
+          "terms": {
+            "mass": [
+              {
+                "option": "value",
+                "value": -364.0035739194406
+              }
+            ]
+          }
+        },
+        "mixture": {
+          "enable": true,
+          "terms": {
+            "epsilon": [],
+            "k": [],
+            "x-momentum": [
+              {
+                "option": "value",
+                "value": 0
+              }
+            ],
+            "y-momentum": [
+              {
+                "option": "value",
+                "value": 0
+              }
+            ],
+            "z-momentum": [
+              {
+                "option": "value",
+                "value": 0
+              }
+            ]
+          }
+        }
+      }
+    },
+    "boundaries": {
+      "interior": {
+        "interior--separator-purnanto": {
+          "name": "interior--separator-purnanto",
+          "phase": {
+            "mixture": {
+              "interior": {}
+            },
+            "phase-1": {
+              "interior": {}
+            },
+            "phase-2": {
+              "interior": {}
+            }
+          }
+        },
+        "interior--separator-purnanto:001": {
+          "name": "interior--separator-purnanto:001",
+          "phase": {
+            "mixture": {
+              "interior": {}
+            },
+            "phase-1": {
+              "interior": {}
+            },
+            "phase-2": {
+              "interior": {}
+            }
+          }
+        },
+        "interior--separator-purnanto:004": {
+          "name": "interior--separator-purnanto:004",
+          "phase": {
+            "mixture": {
+              "interior": {}
+            },
+            "phase-1": {
+              "interior": {}
+            },
+            "phase-2": {
+              "interior": {}
+            }
+          }
+        },
+        "interior--separator-purnanto:007": {
+          "name": "interior--separator-purnanto:007",
+          "phase": {
+            "mixture": {
+              "interior": {}
+            },
+            "phase-1": {
+              "interior": {}
+            },
+            "phase-2": {
+              "interior": {}
+            }
+          }
+        }
+      },
+      "mass_flow_inlet": {
+        "liquidinlet": {
+          "name": "liquidinlet",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "reference_frame": "Absolute",
+                "supersonic_gauge_pressure": {
+                  "option": "value",
+                  "value": 1140000
+                },
+                "direction_specification": "Normal to Boundary"
+              },
+              "turbulence": {
+                "turbulence_specification": "Intensity and Hydraulic Diameter",
+                "turbulent_intensity": 0.021099999,
+                "hydraulic_diameter": 0.01338
+              },
+              "discrete_phase": {
+                "bc_type": "escape"
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {
+                "mass_flow_specification": "Mass Flow Rate",
+                "mass_flow_rate": {
+                  "option": "value",
+                  "value": 0
+                }
+              },
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {
+                "mass_flow_specification": "Mass Flow Rate",
+                "mass_flow_rate": {
+                  "option": "value",
+                  "value": 116.92
+                }
+              },
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            }
+          }
+        },
+        "steaminlet": {
+          "name": "steaminlet",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "reference_frame": "Absolute",
+                "supersonic_gauge_pressure": {
+                  "option": "value",
+                  "value": 1140000
+                },
+                "direction_specification": "Normal to Boundary"
+              },
+              "turbulence": {
+                "turbulence_specification": "Intensity and Hydraulic Diameter",
+                "turbulent_intensity": 0.021099999,
+                "hydraulic_diameter": 0.7206100000000001
+              },
+              "discrete_phase": {
+                "bc_type": "escape"
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {
+                "mass_flow_specification": "Mass Flow Rate",
+                "mass_flow_rate": {
+                  "option": "value",
+                  "value": 80.69
+                }
+              },
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {
+                "mass_flow_specification": "Mass Flow Rate",
+                "mass_flow_rate": {
+                  "option": "value",
+                  "value": 0
+                }
+              },
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            }
+          }
+        }
+      },
+      "pressure_outlet": {
+        "steamoutlet": {
+          "name": "steamoutlet",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "gauge_pressure": {
+                  "option": "value",
+                  "value": 1120000
+                },
+                "pressure_profile_multiplier": 1.0,
+                "backflow_dir_spec_method": "Normal to Boundary",
+                "backflow_pressure_spec": "Total Pressure",
+                "radial_equ_pressure_distribution": false
+              },
+              "turbulence": {
+                "turbulence_specification": "Intensity and Hydraulic Diameter",
+                "backflow_turbulent_intensity": 0.021099999,
+                "backflow_hydraulic_diameter": 0.875936
+              },
+              "discrete_phase": {
+                "bc_type": "escape"
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {
+                "volume_frac_spec_method": "Backflow Volume Fraction",
+                "backflow_volume_fraction": {
+                  "option": "value",
+                  "value": 0
+                }
+              }
+            }
+          }
+        }
+      },
+      "wall": {
+        "bottom": {
+          "name": "bottom",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "discrete_phase": {
+                "bc_type": "trap"
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            }
+          }
+        },
+        "bottom-bottom-band1-thin-outer-separator-purnanto": {
+          "name": "bottom-bottom-band1-thin-outer-separator-purnanto",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "discrete_phase": {
+                "bc_type": "escape"
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            }
+          }
+        },
+        "bottom-thick-inner-separator-purnanto": {
+          "name": "bottom-thick-inner-separator-purnanto",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "discrete_phase": {
+                "bc_type": "reflect",
+                "reflection_coefficients": {
+                  "normal": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  },
+                  "tangential": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  }
+                }
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            }
+          }
+        },
+        "bottom-thick-outer-separator-purnanto": {
+          "name": "bottom-thick-outer-separator-purnanto",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "discrete_phase": {
+                "bc_type": "reflect",
+                "reflection_coefficients": {
+                  "normal": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  },
+                  "tangential": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  }
+                }
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            }
+          }
+        },
+        "bottom-thin-inner-separator-purnanto": {
+          "name": "bottom-thin-inner-separator-purnanto",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "discrete_phase": {
+                "bc_type": "reflect",
+                "reflection_coefficients": {
+                  "normal": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  },
+                  "tangential": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  }
+                }
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            }
+          }
+        },
+        "separator-purnanto:1": {
+          "name": "separator-purnanto:1",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "discrete_phase": {
+                "bc_type": "reflect",
+                "reflection_coefficients": {
+                  "normal": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  },
+                  "tangential": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  }
+                }
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            }
+          }
+        },
+        "separator-purnanto:1:013": {
+          "name": "separator-purnanto:1:013",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "discrete_phase": {
+                "bc_type": "reflect",
+                "reflection_coefficients": {
+                  "normal": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  },
+                  "tangential": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  }
+                }
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            }
+          }
+        },
+        "wall": {
+          "name": "wall",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "discrete_phase": {
+                "bc_type": "reflect",
+                "reflection_coefficients": {
+                  "normal": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  },
+                  "tangential": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  }
+                }
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            }
+          }
+        },
+        "wall:010": {
+          "name": "wall:010",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "discrete_phase": {
+                "bc_type": "reflect",
+                "reflection_coefficients": {
+                  "normal": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  },
+                  "tangential": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  }
+                }
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            }
+          }
+        }
+      },
+      "non_reflecting_bc": {
+        "general_nrbc": {
+          "sigma": 0.15,
+          "sigma2": 5.0
+        },
+        "turbo_specific_nrbc": {
+          "enable": false
+        }
+      },
+      "perforated_wall": {
+        "setup_method": "None",
+        "model_setup": {
+          "ninjections": 1,
+          "urf": 1,
+          "injection": [
+            {
+              "injection_thread": false,
+              "coupled": true,
+              "extraction_thread": false,
+              "uniform": true,
+              "static": false,
+              "formulation": 0,
+              "dynamic_setup": {
+                "method": -1
+              }
+            }
+          ]
+        }
+      },
+      "settings": {
+        "mass_flow": true,
+        "pressure_outlet": {
+          "blending_factor": 0.0,
+          "bin_count": 65,
+          "average_pressure": false
+        },
+        "target_mass_flow_rate_settings": {
+          "under_relaxation_factor": 0.05,
+          "verbosity": false
+        },
+        "advanced": {
+          "delay_model_change_update": false,
+          "batch_thread_update": false
+        }
+      }
+    },
+    "absorber_multiplier": 1.0
+  },
+  "report_paths": {
+    "absorb-adjacent-liquid-mass": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\monitors\\C8-P0-absorb-adjacent-liquid-mass.out",
+    "absorb-broad-liquid-mass": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\monitors\\C8-P0-absorb-broad-liquid-mass.out",
+    "absorb-lower-liquid-mass": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\monitors\\C8-P0-absorb-lower-liquid-mass.out",
+    "absorb-lower-liquid-volume": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\monitors\\C8-P0-absorb-lower-liquid-volume.out",
+    "e0-flux-mixture-bottom": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\monitors\\C8-P0-e0-flux-mixture-bottom.out",
+    "e0-flux-mixture-liquidinlet": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\monitors\\C8-P0-e0-flux-mixture-liquidinlet.out",
+    "e0-flux-mixture-steaminlet": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\monitors\\C8-P0-e0-flux-mixture-steaminlet.out",
+    "e0-flux-mixture-steamoutlet": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\monitors\\C8-P0-e0-flux-mixture-steamoutlet.out",
+    "e0-flux-phase1-bottom": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\monitors\\C8-P0-e0-flux-phase1-bottom.out",
+    "e0-flux-phase1-liquidinlet": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\monitors\\C8-P0-e0-flux-phase1-liquidinlet.out",
+    "e0-flux-phase1-steaminlet": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\monitors\\C8-P0-e0-flux-phase1-steaminlet.out",
+    "e0-flux-phase1-steamoutlet": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\monitors\\C8-P0-e0-flux-phase1-steamoutlet.out",
+    "e0-flux-phase2-bottom": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\monitors\\C8-P0-e0-flux-phase2-bottom.out",
+    "e0-flux-phase2-liquidinlet": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\monitors\\C8-P0-e0-flux-phase2-liquidinlet.out",
+    "e0-flux-phase2-steaminlet": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\monitors\\C8-P0-e0-flux-phase2-steaminlet.out",
+    "e0-flux-phase2-steamoutlet": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\monitors\\C8-P0-e0-flux-phase2-steamoutlet.out",
+    "e0-liquid-mass-total": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\monitors\\C8-P0-e0-liquid-mass-total.out",
+    "e0-liquid-volume-total": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\monitors\\C8-P0-e0-liquid-volume-total.out",
+    "c8-ring-flux-mixture": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\monitors\\C8-P0-c8-ring-flux-mixture.out",
+    "c8-ring-flux-phase1": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\monitors\\C8-P0-c8-ring-flux-phase1.out",
+    "c8-ring-flux-phase2": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8\\dynamic-thin-outer-checkpoints\\C8-P0\\20260921T074500Z\\monitors\\C8-P0-c8-ring-flux-phase2.out"
+  },
+  "residual_configuration": {
+    "equations": {
+      "continuity": {
+        "monitor": true,
+        "check_convergence": true,
+        "absolute_criteria": 0.0001
+      },
+      "epsilon": {
+        "monitor": true,
+        "check_convergence": true,
+        "absolute_criteria": 0.001
+      },
+      "k": {
+        "monitor": true,
+        "check_convergence": true,
+        "absolute_criteria": 0.001
+      },
+      "vf-phase-2": {
+        "monitor": true,
+        "check_convergence": true,
+        "absolute_criteria": 0.001
+      },
+      "x-velocity": {
+        "monitor": true,
+        "check_convergence": true,
+        "absolute_criteria": 0.001
+      },
+      "y-velocity": {
+        "monitor": true,
+        "check_convergence": true,
+        "absolute_criteria": 0.001
+      },
+      "z-velocity": {
+        "monitor": true,
+        "check_convergence": true,
+        "absolute_criteria": 0.001
+      }
+    },
+    "options": {
+      "criterion_type": "absolute",
+      "n_save": 5200,
+      "normalize": false,
+      "residual_values": {
+        "scale_residuals": true,
+        "compute_local_scale": false
+      },
+      "print": true,
+      "plot": true,
+      "n_display": 5200
+    },
+    "axes": {
+      "x": {
+        "label": "",
+        "number_format": {
+          "format_type": "float",
+          "precision": 0
+        },
+        "log_scale": false,
+        "auto_range": true,
+        "auto_range_min": true,
+        "auto_range_max": true,
+        "show_major_gridlines": true,
+        "major_gridlines": {
+          "color": "dark blue",
+          "weight": 1,
+          "auto_placement": true
+        },
+        "show_minor_gridlines": true,
+        "minor_gridlines": {
+          "color": "dark green",
+          "weight": 1,
+          "auto_placement": true
+        }
+      },
+      "y": {
+        "label": "",
+        "number_format": {
+          "format_type": "exponential",
+          "precision": 0
+        },
+        "log_scale": true,
+        "auto_range": true,
+        "auto_range_min": true,
+        "auto_range_max": true,
+        "show_major_gridlines": false,
+        "show_minor_gridlines": false
+      },
+      "background_color": ""
+    },
+    "curves": [
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "monte carlo green"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "monte carlo green"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "monte carlo green"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "monte carlo green"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "lavender gray"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "lavender gray"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "lavender gray"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "lavender gray"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "scarlet red"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "scarlet red"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "scarlet red"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "scarlet red"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "grayish blue"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "grayish blue"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "grayish blue"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "grayish blue"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "flush orange"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "flush orange"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "flush orange"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "flush orange"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "lime green"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "lime green"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "lime green"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "lime green"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "classic pink"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "classic pink"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "classic pink"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "classic pink"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "red"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "red"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "red"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "red"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "green"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "green"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "green"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "green"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "blue"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "blue"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "blue"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "blue"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "cyan"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "cyan"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "cyan"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "cyan"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "magenta"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "magenta"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "magenta"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "magenta"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "yellow"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "yellow"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "yellow"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "yellow"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "orange"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "orange"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "orange"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "orange"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "pink"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "pink"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "pink"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "pink"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "brown"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "brown"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "brown"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "brown"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "copper"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "copper"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "copper"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "copper"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "maroon"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "maroon"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "maroon"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "maroon"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "tan"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "tan"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "tan"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "tan"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "teal"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "teal"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "teal"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "teal"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "silver"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "silver"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "silver"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "silver"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "salmon"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "salmon"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "salmon"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "salmon"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "light yellow"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "light yellow"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "light yellow"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "light yellow"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "light red"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "light red"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "light red"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "light red"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "light green"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "light green"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "light green"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "light green"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "light blue"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "light blue"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "light blue"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "light blue"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "light gray"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "light gray"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "light gray"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "light gray"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "dark gray"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "dark gray"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "dark gray"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "dark gray"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "dark red"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "dark red"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "dark red"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "dark red"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "dark green"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "dark green"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "dark green"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "dark green"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "dark blue"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "dark blue"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "dark blue"
+        },
+        "marker_in_file": {
+          "symbol": "(*)",
+          "size": 0.3,
+          "color": "dark blue"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      },
+      {
+        "line": {
+          "pattern": "----",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "line_in_file": {
+          "pattern": "",
+          "weight": 2,
+          "color": "foreground"
+        },
+        "marker": {
+          "symbol": "",
+          "size": 0.3,
+          "color": "foreground"
+        },
+        "marker_in_file": {
+          "symbol": "+",
+          "size": 0.3,
+          "color": "foreground"
+        }
+      }
+    ]
+  },
+  "prepared_reopen": {
+    "bottom_wall_bands": [
+      "bottom",
+      "bottom-thin-inner-separator-purnanto",
+      "bottom-thick-inner-separator-purnanto",
+      "bottom-thick-outer-separator-purnanto",
+      "bottom-bottom-band1-thin-outer-separator-purnanto"
+    ],
+    "lower_volume_m3": 0.3212056374640875,
+    "phase2_source_density_kg_m3_s": -364.0035739194406,
+    "integrated_phase2_source_kg_s": -116.92000000000002,
+    "source_tree": {
+      "separator-purnanto": {
+        "phase-1": {
+          "enable": false
+        },
+        "phase-2": {
+          "enable": false
+        },
+        "mixture": {
+          "enable": false
+        }
+      },
+      "p7-e5-lower-y010": {
+        "phase-1": {
+          "enable": false
+        },
+        "phase-2": {
+          "enable": true,
+          "terms": {
+            "mass": [
+              {
+                "option": "value",
+                "value": -364.0035739194406
+              }
+            ]
+          }
+        },
+        "mixture": {
+          "enable": true,
+          "terms": {
+            "epsilon": [],
+            "k": [],
+            "x-momentum": [
+              {
+                "option": "value",
+                "value": 0
+              }
+            ],
+            "y-momentum": [
+              {
+                "option": "value",
+                "value": 0
+              }
+            ],
+            "z-momentum": [
+              {
+                "option": "value",
+                "value": 0
+              }
+            ]
+          }
+        }
+      }
+    },
+    "boundaries": {
+      "interior": {
+        "interior--separator-purnanto": {
+          "name": "interior--separator-purnanto",
+          "phase": {
+            "mixture": {
+              "interior": {}
+            },
+            "phase-1": {
+              "interior": {}
+            },
+            "phase-2": {
+              "interior": {}
+            }
+          }
+        },
+        "interior--separator-purnanto:001": {
+          "name": "interior--separator-purnanto:001",
+          "phase": {
+            "mixture": {
+              "interior": {}
+            },
+            "phase-1": {
+              "interior": {}
+            },
+            "phase-2": {
+              "interior": {}
+            }
+          }
+        },
+        "interior--separator-purnanto:004": {
+          "name": "interior--separator-purnanto:004",
+          "phase": {
+            "mixture": {
+              "interior": {}
+            },
+            "phase-1": {
+              "interior": {}
+            },
+            "phase-2": {
+              "interior": {}
+            }
+          }
+        },
+        "interior--separator-purnanto:007": {
+          "name": "interior--separator-purnanto:007",
+          "phase": {
+            "mixture": {
+              "interior": {}
+            },
+            "phase-1": {
+              "interior": {}
+            },
+            "phase-2": {
+              "interior": {}
+            }
+          }
+        }
+      },
+      "mass_flow_inlet": {
+        "liquidinlet": {
+          "name": "liquidinlet",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "reference_frame": "Absolute",
+                "supersonic_gauge_pressure": {
+                  "option": "value",
+                  "value": 1140000
+                },
+                "direction_specification": "Normal to Boundary"
+              },
+              "turbulence": {
+                "turbulence_specification": "Intensity and Hydraulic Diameter",
+                "turbulent_intensity": 0.021099999,
+                "hydraulic_diameter": 0.01338
+              },
+              "discrete_phase": {
+                "bc_type": "escape"
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {
+                "mass_flow_specification": "Mass Flow Rate",
+                "mass_flow_rate": {
+                  "option": "value",
+                  "value": 0
+                }
+              },
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {
+                "mass_flow_specification": "Mass Flow Rate",
+                "mass_flow_rate": {
+                  "option": "value",
+                  "value": 116.92
+                }
+              },
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            }
+          }
+        },
+        "steaminlet": {
+          "name": "steaminlet",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "reference_frame": "Absolute",
+                "supersonic_gauge_pressure": {
+                  "option": "value",
+                  "value": 1140000
+                },
+                "direction_specification": "Normal to Boundary"
+              },
+              "turbulence": {
+                "turbulence_specification": "Intensity and Hydraulic Diameter",
+                "turbulent_intensity": 0.021099999,
+                "hydraulic_diameter": 0.7206100000000001
+              },
+              "discrete_phase": {
+                "bc_type": "escape"
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {
+                "mass_flow_specification": "Mass Flow Rate",
+                "mass_flow_rate": {
+                  "option": "value",
+                  "value": 80.69
+                }
+              },
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {
+                "mass_flow_specification": "Mass Flow Rate",
+                "mass_flow_rate": {
+                  "option": "value",
+                  "value": 0
+                }
+              },
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            }
+          }
+        }
+      },
+      "pressure_outlet": {
+        "steamoutlet": {
+          "name": "steamoutlet",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "gauge_pressure": {
+                  "option": "value",
+                  "value": 1120000
+                },
+                "pressure_profile_multiplier": 1.0,
+                "backflow_dir_spec_method": "Normal to Boundary",
+                "backflow_pressure_spec": "Total Pressure",
+                "radial_equ_pressure_distribution": false
+              },
+              "turbulence": {
+                "turbulence_specification": "Intensity and Hydraulic Diameter",
+                "backflow_turbulent_intensity": 0.021099999,
+                "backflow_hydraulic_diameter": 0.875936
+              },
+              "discrete_phase": {
+                "bc_type": "escape"
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {
+                "volume_frac_spec_method": "Backflow Volume Fraction",
+                "backflow_volume_fraction": {
+                  "option": "value",
+                  "value": 0
+                }
+              }
+            }
+          }
+        }
+      },
+      "wall": {
+        "bottom": {
+          "name": "bottom",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "discrete_phase": {
+                "bc_type": "trap"
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            }
+          }
+        },
+        "bottom-bottom-band1-thin-outer-separator-purnanto": {
+          "name": "bottom-bottom-band1-thin-outer-separator-purnanto",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "discrete_phase": {
+                "bc_type": "escape"
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {},
+              "multiphase": {}
+            }
+          }
+        },
+        "bottom-thick-inner-separator-purnanto": {
+          "name": "bottom-thick-inner-separator-purnanto",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "discrete_phase": {
+                "bc_type": "reflect",
+                "reflection_coefficients": {
+                  "normal": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  },
+                  "tangential": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  }
+                }
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            }
+          }
+        },
+        "bottom-thick-outer-separator-purnanto": {
+          "name": "bottom-thick-outer-separator-purnanto",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "discrete_phase": {
+                "bc_type": "reflect",
+                "reflection_coefficients": {
+                  "normal": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  },
+                  "tangential": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  }
+                }
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            }
+          }
+        },
+        "bottom-thin-inner-separator-purnanto": {
+          "name": "bottom-thin-inner-separator-purnanto",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "discrete_phase": {
+                "bc_type": "reflect",
+                "reflection_coefficients": {
+                  "normal": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  },
+                  "tangential": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  }
+                }
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            }
+          }
+        },
+        "separator-purnanto:1": {
+          "name": "separator-purnanto:1",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "discrete_phase": {
+                "bc_type": "reflect",
+                "reflection_coefficients": {
+                  "normal": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  },
+                  "tangential": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  }
+                }
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            }
+          }
+        },
+        "separator-purnanto:1:013": {
+          "name": "separator-purnanto:1:013",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "discrete_phase": {
+                "bc_type": "reflect",
+                "reflection_coefficients": {
+                  "normal": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  },
+                  "tangential": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  }
+                }
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            }
+          }
+        },
+        "wall": {
+          "name": "wall",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "discrete_phase": {
+                "bc_type": "reflect",
+                "reflection_coefficients": {
+                  "normal": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  },
+                  "tangential": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  }
+                }
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            }
+          }
+        },
+        "wall:010": {
+          "name": "wall:010",
+          "phase": {
+            "mixture": {
+              "momentum": {
+                "wall_motion": "Stationary Wall",
+                "shear_condition": "No Slip"
+              },
+              "turbulence": {
+                "roughness_height": {
+                  "option": "value",
+                  "value": 0
+                },
+                "roughness_const": {
+                  "option": "value",
+                  "value": 0.5
+                }
+              },
+              "discrete_phase": {
+                "bc_type": "reflect",
+                "reflection_coefficients": {
+                  "normal": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  },
+                  "tangential": {
+                    "option": "polynomial",
+                    "function_of": "angle",
+                    "polynomial": {
+                      "function_of": "angle",
+                      "coefficients": [
+                        1
+                      ]
+                    }
+                  }
+                }
+              },
+              "multiphase": {}
+            },
+            "phase-1": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            },
+            "phase-2": {
+              "momentum": {},
+              "turbulence": {},
+              "discrete_phase": {
+                "reflection_coefficients": {}
+              },
+              "multiphase": {}
+            }
+          }
+        }
+      },
+      "non_reflecting_bc": {
+        "general_nrbc": {
+          "sigma": 0.15,
+          "sigma2": 5.0
+        },
+        "turbo_specific_nrbc": {
+          "enable": false
+        }
+      },
+      "perforated_wall": {
+        "setup_method": "None",
+        "model_setup": {
+          "ninjections": 1,
+          "urf": 1,
+          "injection": [
+            {
+              "injection_thread": false,
+              "coupled": true,
+              "extraction_thread": false,
+              "uniform": true,
+              "static": false,
+              "formulation": 0,
+              "dynamic_setup": {
+                "method": -1
+              }
+            }
+          ]
+        }
+      },
+      "settings": {
+        "mass_flow": true,
+        "pressure_outlet": {
+          "blending_factor": 0.0,
+          "bin_count": 65,
+          "average_pressure": false
+        },
+        "target_mass_flow_rate_settings": {
+          "under_relaxation_factor": 0.05,
+          "verbosity": false
+        },
+        "advanced": {
+          "delay_model_change_update": false,
+          "batch_thread_update": false
+        }
+      }
+    },
+    "absorber_multiplier": 1.0
+  },
+  "switch_active_iteration": 200
+}
