@@ -1,5 +1,7 @@
 # Phase 1 — Purnanto baseline and inlet exploration
 
+
+> [Phase-level interpretation](interpretation.md) — concise hypothesis → experiments → evidence → decision narrative.
 ## Scientific purpose
 
 Reconstruct the early Purnanto/reference context and test inlet and initial
