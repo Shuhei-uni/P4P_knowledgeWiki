@@ -1,5 +1,7 @@
 # Phase 7.1A — 60k Virtual Liquid Outlet (parent evidence)
 
+
+> [Phase-level interpretation](interpretation.md) — concise hypothesis → experiments → evidence → decision narrative.
 ## Status
 
 **Completed parent phase.** Phase 7.1A established the developed numerical state that is now used as the baseline for [Phase 7.2A](../phase-07-2a-wall-liquid-routing/index.md).
