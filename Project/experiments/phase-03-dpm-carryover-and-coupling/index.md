@@ -1,5 +1,7 @@
 # Phase 3 — DPM carryover and coupling
 
+
+> [Phase-level interpretation](interpretation.md) — concise hypothesis → experiments → evidence → decision narrative.
 ## Scientific purpose
 
 Introduce and qualify dispersed-droplet carryover, stochastic dispersion,
