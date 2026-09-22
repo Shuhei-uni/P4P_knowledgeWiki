@@ -1,5 +1,7 @@
 # Phase 2 — Parity reset and pre-V2 qualification
 
+
+> [Phase-level interpretation](interpretation.md) — concise hypothesis → experiments → evidence → decision narrative.
 ## Scientific purpose
 
 Establish the 08b parity lineage and investigate carrier/inlet behaviour,
