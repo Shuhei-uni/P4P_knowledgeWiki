@@ -2,48 +2,75 @@
 
 ## Status
 
-**Parent-phase record.** The human created [Phase 7.2A](../phase-07-2a-wall-liquid-routing/index.md)
-on 2026-09-22 and promoted the completed R0 Coupled / Global-Time-Step
-continuation as its starting baseline. This Phase 7.1A record remains the owner
-of the v2 build and control evidence; active wall-mechanism work is now
-recorded in Phase 7.2A.
+**Completed parent phase.** Phase 7.1A established the developed numerical state that is now used as the baseline for [Phase 7.2A](../phase-07-2a-wall-liquid-routing/index.md).
 
-The original human-selected direction on 2026-09-22 restarted Phase 7.1A from
-a new baseline on the supplied 60k-cell mesh. The v1 lower-inventory controller
-is no longer the active mechanism. V2 treats the lower phase-2 source as a
-virtual liquid outlet whose commanded throughput follows the liquid inlet and
-whose local removal is weighted by the liquid actually present.
+The promoted parent is the completed R0 smooth-wall continuation:
 
-The [v2 setup](baseline-v2-virtual-liquid-outlet/deffered.md) has been built,
-save/reopen verified, one-iteration smoke tested, and reloaded on `student`.
-See the [build result](baseline-v2-virtual-liquid-outlet/results.md) for the
-artifact hashes and exact readback. The first v2 liquid-development run is now
-complete as the [inlet-loading ramp result](v2-inlet-loading-ramp/results.md):
-the absorber realizes its command after lower-zone liquid develops, but the
-finite trajectory remains nonstationary with growing total liquid inventory
-and persistent outlet reverse flow.
+- source run: `PyAnsys/output/phase71a_r0_control_run4`;
+- steady pressure-based Coupled solver;
+- Coupled-compatible Global Time Step pseudo-time;
+- full inlet loading;
+- v2 phase-2-only throughput-controlled virtual liquid outlet;
+- smooth wall, EWF off;
+- terminal native report/transcript state: iteration `5586`.
 
-At the time of the solver-control handoff, the immediate work was the
-human-selected [Family N numerical improvement screen](solver-improvement-family/index.md).
-It kept the v2 prepared pair and
-the common loading rule as the base, then tests the smallest solver delta first:
-steady Coupled pressure–velocity treatment with Coupled-compatible Global Time
-Step pseudo-time, automatic initially. The roughness and EWF design records
-were subsequently superseded as active execution authority by Phase 7.2A;
-they now derive from the completed terminal R0 control endpoint rather than
-the prepared v2 pair.
+The exact case/data pair and hashes are recorded in the [Phase 7.2A baseline handoff](../phase-07-2a-wall-liquid-routing/baseline-control-handoff.md).
 
-Earlier turbulence, solver-path, inlet-ramp, and dynamic-ring material is
-historical v1 evidence. Any earlier language describing C7 or C8 as active is
-superseded.
+## Why this state was promoted
 
-## Phase question
+The decision to move to Phase 7.2A was **not** based on every scaled residual becoming smooth or small.
 
-> Can the 60k-mesh phase-2 virtual liquid outlet realize the commanded liquid
-> inlet throughput while preserving credible phase routing, source-inclusive
-> mass closure, bounded inventory behaviour, and useful steady convergence?
+The run4 endpoint was promoted because, relative to the earlier Phase 7.1A states, it gave the strongest combined behaviour in the quantities that matter most for this project:
 
-## Active mechanism
+- liquid inventory became bounded and much more stable;
+- source-inclusive mass closure was the best obtained so far;
+- continuity reached the lowest useful level obtained so far;
+- the absorber command remained exactly matched by the applied phase-2 removal;
+- the 1,000-iteration continuation completed without AMG, FPE, nonfinite, or fatal events.
+
+At the terminal report point:
+
+- total liquid mass: `295.8536 kg`;
+- absorber command / applied removal: `116.9200 / 116.9200 kg/s`;
+- command error: `4.26e-14 kg/s`;
+- continuity residual: `2.7841e-3`;
+- phase-2 volume-fraction residual: `5.4762e-4`;
+- phase-2 liquid through `steamoutlet`: `-24.3344 kg/s`;
+- phase-1 vapor through `steamoutlet`: `-80.2509 kg/s`.
+
+This is therefore the **best-available developed parent**, not a fully converged or physically validated separator solution.
+
+## What remains wrong
+
+The remaining problem is now more physical than purely numerical.
+
+The multiphase and turbulence residuals remain oscillatory, and substantial liquid still leaves through `steamoutlet`. The endpoint therefore does **not** demonstrate correct separator performance.
+
+For this project, a jumpy residual by itself is not enough reason to reject a state if the macroscopic solution is bounded. The more important failure would be continued drift in liquid inventory, poor source-inclusive mass closure, worsening continuity, or unstable phase routing.
+
+The Phase 7.1A endpoint passed that parent-state test well enough to stop treating residual reduction as the main question.
+
+## Phase 7.1A decision
+
+Phase 7.1A therefore ends with the following decision:
+
+> Preserve the run4 developed state and move the next experiments to the unresolved liquid-routing problem.
+
+Phase 7.2A now asks whether wall interaction can reduce liquid carryover through `steamoutlet` **without destroying** the useful behaviour established here.
+
+The comparison priority for 7.2A is:
+
+1. bounded total liquid inventory and late-window inventory slope;
+2. source-inclusive mass closure;
+3. continuity behaviour;
+4. phase-resolved routing, especially liquid through `steamoutlet`;
+5. residual amplitude/trend and solver-event health.
+
+Lower residuals alone are not a positive result if inventory, closure, or phase routing becomes worse.
+
+## Active mechanism retained from 7.1A
+
+The v2 virtual outlet command is
 
 \[
 Q_{\rm cmd}=|\dot m_{l,in}|,
@@ -54,74 +81,19 @@ S_l(\mathbf{x})=-Q_{\rm cmd}
 \]
 
 The source acts directly on phase 2 only. Matching liquid momentum and shared
-`k`/`epsilon` removal are attached. Phase 1 has no direct mass source. The
-lower-zone liquid volume is an availability/starvation diagnostic, not the
-controller input and not the success metric.
+`k`/`epsilon` removal are attached. Phase 1 has no direct mass source.
 
-## Scope and evidence boundary
+This mechanism is held fixed in the initial Phase 7.2A wall-treatment screen so that changes in liquid routing can be attributed to the wall treatment rather than to a new absorber law.
 
-- **In scope:** steady v2 liquid development, commanded-versus-applied removal,
-  source-inclusive phase and mixture balances, lower-zone starvation, whole-
-  separator liquid inventory, phase routing, residual behaviour, and numerical
-  recovery inside the v2 envelope.
-- **Fixed baseline:** the verified 60k mesh and prepared pair, bottom wall,
-  phase-2-only direct mass removal, fresh Hybrid Initialization without a
-  patched pool, and the recorded Mixture/RNG physics and numerics.
-- **Required primary evidence:** command, native applied phase-2 source, liquid
-  inlet throughput, lower-zone available liquid, total liquid inventory,
-  phase-resolved boundary fluxes, zero phase-1 source, source-inclusive closure,
-  and residual histories on native iteration coordinates.
-- **Out of scope:** claiming that the source predicts physical brine-pipe
-  hydraulics, validating a real pool level, or inferring plant performance.
-- **Claim limit:** the baseline build result proves save/reopen and smoke
-  integrity. The inlet-loading result adds finite-horizon throughput and
-  inventory evidence, but does not establish steady convergence, bounded
-  inventory, physical absorber validity, or plant drainage performance.
+## Evidence boundary
 
-## Completed discovery
+Phase 7.1A establishes a reusable numerical parent and its provenance. It does not establish:
 
-The [v2 inlet-loading ramp](v2-inlet-loading-ramp/deffered.md) started both inlets
-at `0.25` of the prior recorded base targets and ramped them to
-`116.92 kg/s` liquid and `80.69 kg/s` steam over `2,000` iterations. The
-native applied phase-2 source matches the named removal and follows the
-inlet-derived command in the late trajectory. The lower zone remains a small
-liquid reservoir while total liquid mass reaches `183.595 kg`; residuals do not
-qualify as converged and the pressure outlet retains roughly 250 reversed-flow
-faces late in the run. See the [result record](v2-inlet-loading-ramp/results.md)
-and [summary figure](../../PyAnsys/output/phase71a_v2_inlet_loading/20260922T031500Z/v2-inlet-loading-summary.png).
+- physical validity of the virtual outlet;
+- correct real-plant brine hydraulics;
+- a validated separator liquid inventory;
+- negligible liquid carryover;
+- mesh independence; or
+- fully steady convergence of every solved equation.
 
-## Historical solver-improvement direction
-
-Family N was the immediate discovery queue at the time of the solver-control
-handoff. N1 is a combined solver package,
-not a pseudo-time-only test. The live Fluent controls must be read back before
-mutation, and pseudo-time must remain numerical rather than physical. N2/N3 are
-not pre-filled with guessed tuning values: their deltas will be selected only
-from N1 evidence.
-
-The existing mechanism-family split remains recorded below as a separate
-follow-on route.
-
-## Superseded mechanism-family design
-
-The former follow-on planning direction was the human-selected split between [Family R
-— wall roughness](roughness-family/index.md) on Server 1 and [Family E —
-Eulerian Wall Film](ewf-family/index.md) on Server 3. Both derive from the
-verified v2 prepared pair and used the same explicit first-2,000-iteration
-`0.25 -> 1.00` inlet ramp. That design is retained as provenance. The active
-wall-mechanism contract is now in [Phase 7.2A](../phase-07-2a-wall-liquid-routing/index.md),
-whose children start from the terminal R0 control and do not replay that ramp.
-
-The two streams are independent and may run in parallel after each server
-passes its own parent hash/reopen/readback gate. No old 237k thin-outer-ring,
-C7, C8, turbulence, or v1 absorber artifact is an eligible parent for these
-families.
-
-## Historical next experiment
-
-The historical selected next action was to prepare N1 from the exact v2 parent and pass its
-hash/reopen/readback and smoke gates. The run must preserve the native
-command/applied-source distinction, source-inclusive phase balances, solver
-warnings, reverse flow, and the first 2,000 iterations on the declared ramp.
-Do not promote this loading history to a steady or physical-performance claim.
-The current active experiment is Phase 7.2A.
+Earlier turbulence, C7/C8, inlet-ramp, dynamic-ring, prepared-v2, and Family N records remain historical provenance. They are not eligible parents for the active Phase 7.2A comparison.
