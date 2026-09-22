@@ -358,7 +358,7 @@ def main() -> int:
     dump(manifest_path, manifest)
     capture = None
     try:
-        solver = connect(server_id=args.server_id, start_transcript=True, tcp_timeout_seconds=120)
+        solver = connect(server_id=args.server_id, start_transcript=True, tcp_timeout_seconds=900)
         require("2025 R2" in str(solver.get_fluent_version()), f"unexpected Fluent version: {solver.get_fluent_version()}")
         for directory in (str(PureWindowsPath(args.checkpoint_root) / args.case / args.stamp), run_paths["monitor_root"], run_paths["scratch"], run_paths["final_root"]):
             ensure_remote_directory(solver, directory)

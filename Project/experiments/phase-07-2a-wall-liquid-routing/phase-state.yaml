@@ -1,0 +1,88 @@
+phase_id: phase-07-2a-wall-liquid-routing
+phase_question: >-
+  Can wall roughness or Eulerian Wall Film reduce phase-2 liquid carryover
+  through steamoutlet by changing wall-adjacent routing while preserving
+  absorber tracking, source-inclusive closure, liquid-inventory behaviour, and
+  credible vapor routing relative to the R0 control?
+state: PLANNING_READY
+planning_state: BASELINE_SELECTED_MECHANISM_SCREEN_DESIGNED
+
+context:
+  path: Project/experiments/phase-07-2a-wall-liquid-routing/CONTEXT.md
+  authority: direct human selection on 2026-09-22
+  index_path: Project/experiments/phase-07-2a-wall-liquid-routing/index.md
+  baseline_handoff: Project/experiments/phase-07-2a-wall-liquid-routing/baseline-control-handoff.md
+  monitoring_contract: Project/experiments/phase-07-2a-wall-liquid-routing/monitoring-contract.md
+  source_phase: phase-07-1a-absorber-convergence
+  source_run: PyAnsys/output/phase71a_r0_control_run4
+
+baseline:
+  id: P72A-R0-SMOOTH-CONTROL-COUPLED-GLOBAL-TIME
+  source_setup_id: P71A-R0-SMOOTH-CONTROL-COUPLED-GLOBAL-TIME-PLUS1000
+  server_source: server-1
+  source_native_window: final-5586
+  historical_comparison_window: expected-4580-5580-transcript-4586-5586
+  parent_native_iteration: 5586
+  case_sha256: 4fd493972839929f1f0922ad42679456d1f4aea294da86e4b13d6b7c32f754fc
+  data_sha256: b2261fac8626b2e338c3a9c80c334c8a910d1bfb536f782ef9234623f00e1a72
+  case_path: >-
+    C:\Users\syok443\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\Phase71A\FamilyR\finals\P71A-R0-SMOOTH-CONTROL-COUPLED-GLOBAL-TIME-PLUS1000\20260922T162500Z\P71A-R0-SMOOTH-CONTROL-COUPLED-GLOBAL-TIME-PLUS1000-full-loading-plus1000.cas.h5
+  data_path: >-
+    C:\Users\syok443\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\Phase71A\FamilyR\finals\P71A-R0-SMOOTH-CONTROL-COUPLED-GLOBAL-TIME-PLUS1000\20260922T162500Z\P71A-R0-SMOOTH-CONTROL-COUPLED-GLOBAL-TIME-PLUS1000-full-loading-plus1000.dat.h5
+  status: VERIFIED_COMPLETED_DISCOVERY_CONTROL
+  qualification: false
+
+families:
+  roughness:
+    path: Project/experiments/phase-07-2a-wall-liquid-routing/roughness-family/index.md
+    server_id: server-1
+    status: SELECTED_NOT_RUN
+  ewf:
+    path: Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/index.md
+    server_id: server-3
+    status: SELECTED_NOT_RUN
+
+execution_envelope:
+  formulation: steady
+  max_first_screen_iterations_per_child: 1000
+  checkpoints: [0, 250, 500, 750, 1000]
+  report_cadence_native_iterations: 10
+  plot_refresh_native_iterations: 50-100
+  shared_parent_or_session: false
+  replay_old_v2_inlet_ramp: false
+  whole_domain_reinitialization: false
+  interaction_family_in_first_screen: false
+
+gates:
+  PHASE_CONTRACT:
+    status: PASS
+    evidence:
+      - Project/experiments/phase-07-2a-wall-liquid-routing/CONTEXT.md
+      - Project/experiments/phase-07-2a-wall-liquid-routing/baseline-control-handoff.md
+  BASELINE_IDENTITY:
+    status: PASS_SOURCE_EVIDENCE
+    evidence:
+      - PyAnsys/output/phase71a_r0_control_run4/authoritative-completion-receipt.json
+      - Project/experiments/phase-07-1a-absorber-convergence/roughness-family/r0-smooth-control/control-window.md
+  DISCOVERY_DESIGN:
+    status: PASS
+    evidence:
+      - Project/experiments/phase-07-2a-wall-liquid-routing/roughness-family/index.md
+      - Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/index.md
+      - Project/experiments/phase-07-2a-wall-liquid-routing/monitoring-contract.md
+  DISCOVERY_EXECUTION:
+    status: NOT_STARTED
+  DISCOVERY_EVIDENCE:
+    status: NOT_STARTED
+  PHASE_CLOSURE:
+    status: NOT_READY
+    missing:
+      - roughness and EWF child evidence
+      - matched phase-resolved outlet carryover comparison
+      - mechanism-specific wall/film transfer evidence
+
+active_jobs: []
+next_required_action: >-
+  At execution request, prepare independent R0/E0 control copies from the
+  verified baseline, pass hash/reopen/readback and instrumentation gates, then
+  select the first roughness and EWF children inside this contract.

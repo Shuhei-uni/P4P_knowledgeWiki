@@ -1,0 +1,25 @@
+{
+  "status": "SUPERSEDED_STOPPED_NO_ENDPOINT",
+  "note": "Initial v2 development controller was stopped at a small active horizon after confirming the 237k mesh was too slow for its 10-iteration RPC cadence; no active checkpoint or trigger receipt was claimed. Durable supervisor owns the replacement run.",
+  "setup_id": "C8-D0-V2",
+  "family": "P71A-C8-V2-ALL-WALL-DEVELOPMENT",
+  "server_id": "3",
+  "parent_case": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8-v2\\20260922T120000Z\\C8-V2-thin-outer-all-wall-prepared.cas.h5",
+  "parent_data": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8-v2\\20260922T120000Z\\C8-V2-thin-outer-all-wall-prepared.dat.h5",
+  "checkpoint_root": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8-v2-development-checkpoints",
+  "final_root": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8-v2",
+  "artifacts": {
+    "prepared": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8-v2-development-checkpoints\\C8-D0-V2\\20260922T120000Z\\C8-D0-V2-prepared.cas.h5",
+    "active000": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8-v2-development-checkpoints\\C8-D0-V2\\20260922T120000Z\\C8-D0-V2-active000.cas.h5",
+    "monitor_root": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8-v2-development-checkpoints\\C8-D0-V2\\20260922T120000Z\\monitors",
+    "scratch": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8-v2-development-checkpoints\\C8-D0-V2\\20260922T120000Z\\scratch",
+    "final_root": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8-v2\\C8-D0-V2\\20260922T120000Z",
+    "active5000": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8-v2\\C8-D0-V2\\20260922T120000Z\\C8-D0-V2-active5000.cas.h5",
+    "active1000": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8-v2-development-checkpoints\\C8-D0-V2\\20260922T120000Z\\C8-D0-V2-active1000.cas.h5",
+    "active2000": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8-v2-development-checkpoints\\C8-D0-V2\\20260922T120000Z\\C8-D0-V2-active2000.cas.h5",
+    "active3000": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8-v2-development-checkpoints\\C8-D0-V2\\20260922T120000Z\\C8-D0-V2-active3000.cas.h5",
+    "active4000": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase07\\C8-v2-development-checkpoints\\C8-D0-V2\\20260922T120000Z\\C8-D0-V2-active4000.cas.h5"
+  },
+  "requested_active_iterations": 5000,
+  "events": []
+}

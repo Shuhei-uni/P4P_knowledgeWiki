@@ -17,6 +17,10 @@ The liquid-removal work has two separate planning lanes:
   track commanded liquid-inlet throughput while preserving credible phase
   routing, source-inclusive mass closure, bounded inventory behaviour, and
   useful steady convergence?
+- **Shuhei — Phase 7.2A:** starting from the completed 7.1A R0 control, can
+  wall roughness or Eulerian Wall Film reduce phase-2 liquid carryover through
+  `steamoutlet` while preserving absorber tracking, mass closure, liquid
+  inventory behaviour, and credible vapor routing?
 - **Andy — Phase 7b:** can a function-based ideal liquid collector in the lower
   full-geometry vessel support a balanced, numerically stable steady-state
   solution while preserving useful separation above the collector?
@@ -31,6 +35,31 @@ steam-outlet diameter is `0.876 m`, correcting the former Project value of
 
 ## Active/latest experiment
 
+**Phase 7.2A was created by the human on 2026-09-22.** Its starting baseline
+is the verified terminal Phase 7.1A R0 Coupled / Global-Time-Step continuation,
+not the earlier prepared v2 pair. The baseline is the full-loading smooth-wall,
+no-EWF endpoint with case SHA-256
+`4fd493972839929f1f0922ad42679456d1f4aea294da86e4b13d6b7c32f754fc` and data
+SHA-256 `b2261fac8626b2e338c3a9c80c334c8a910d1bfb536f782ef9234623f00e1a72`.
+Its final native report/transcript state is iteration `5586`, with phase-2
+`steamoutlet` flux `-24.3344 kg/s`; the absorber command remains matched to the
+applied removal, and the run has useful late residuals without qualifying as
+fully steady or physically validated. The historical R0 comparison ledger
+still uses the expected `4580–5580` checkpoint window; 7.2A starts from the
+final `5586` state.
+
+The new phase screens wall roughness and EWF as separate mechanisms from this
+developed endpoint. The old first-2,000-iteration v2 inlet ramp is not replayed
+in 7.2A children, and the first screen does not combine roughness with EWF.
+See the [Phase 7.2A record](experiments/phase-07-2a-wall-liquid-routing/index.md),
+[context](experiments/phase-07-2a-wall-liquid-routing/CONTEXT.md), and
+[throughout-run monitoring contract](experiments/phase-07-2a-wall-liquid-routing/monitoring-contract.md).
+
+Phase 7.1A remains the parent/evidence phase below; its prepared v2 pair,
+loading history, and solver-control records are retained for provenance.
+
+### Phase 7.1A parent evidence
+
 **Phase 7.1A was redirected by the human on 2026-09-22.** The active baseline
 is now [v2 on the supplied 60k mesh](experiments/phase-07-1a-absorber-convergence/baseline-v2-virtual-liquid-outlet/results.md).
 It replaces the v1 lower-inventory/uniform absorber with a feed-forward virtual
@@ -40,7 +69,11 @@ is verified and loaded on `student`: `60,964` total fluid cells, including a
 `715`-cell lower virtual-outlet zone. Its one-iteration setup smoke passed, but
 the fresh lower zone was liquid-starved, so throughput tracking and convergence
 remain untested. Earlier Phase 7.1A records with `results.md` are historical;
-the C7/C8 direction is superseded.
+the C7/C8 direction is superseded. The brief corrected Server-3 C8 attempt was
+paused before qualification; its bounded partial state is recorded in
+[the paused result](experiments/phase-07-1a-absorber-convergence/dynamic-thin-outer-ring/results-v2-corrected-absorber.md),
+and the remaining Phase 7.1A setup packets are deferred in `deffered.md`
+records rather than active execution candidates.
 
 Shuhei's Phase 07A mechanism-discovery record is retained as historical
 evidence. The lower cell-zone, phase-2-only absorber is now the human-selected
@@ -237,10 +270,16 @@ lifecycle record is retained as historical evidence rather than silently
 upgraded to a completed physical validation.
 
 Phase 7.1A's v2 60k virtual-outlet baseline is prepared, reopened, smoke-tested,
-and loaded on `student`. The next Phase 7.1A action is a predeclared discovery
-run from that exact pair with native applied-source, command, liquid-availability,
-inventory, phase-routing, closure, and residual evidence. The old turbulence,
-solver-path, C7, and C8 packets remain historical and are not to be executed.
+and loaded on `student`. The first 2,000 iterations of the v2 baseline are now
+explicitly defined as a shared inlet-loading ramp from `0.25` to `1.00` of the
+recorded `116.92 kg/s` liquid and `80.69 kg/s` steam targets, updated every 10
+iterations. The immediate active planning direction is [Family N numerical
+improvement](experiments/phase-07-1a-absorber-convergence/solver-improvement-family/index.md),
+with roughness and EWF retained as later mechanism branches. Family N must
+monitor the full loading, absorber, routing, closure, residual, warning, and
+timing trajectory over the run; its detailed monitoring contract is recorded
+in the family record. The old turbulence, solver-path, C7, and C8 packets
+remain historical and are not eligible parents.
 Andy's Phase 7b has verified its
 five collector masks and PC/API paths and declared a common finite source
 coefficient and evidence contract in its

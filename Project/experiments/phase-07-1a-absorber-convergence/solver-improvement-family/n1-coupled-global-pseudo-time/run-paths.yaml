@@ -1,0 +1,26 @@
+phase_id: phase-07-1a-absorber-convergence
+setup_id: P71A-V2-N1-COUPLED-GLOBAL-PSEUDO-TIME
+candidate_id: P71A-V2-N1-COUPLED-GLOBAL-PSEUDO-TIME
+server:
+  id: student
+  ref: student@10.0.0.5
+  fluent_version: 2025 R2
+parent:
+  case: 'C:\Users\Shuhei Yokkaichi\OneDrive\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\Phase07\Phase71A\BaselineV2\20260922T013000Z\P71A-BASELINE-V2-VIRTUAL-OUTLET-prepared.cas.h5'
+  data: 'C:\Users\Shuhei Yokkaichi\OneDrive\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\Phase07\Phase71A\BaselineV2\20260922T013000Z\P71A-BASELINE-V2-VIRTUAL-OUTLET-prepared.dat.h5'
+  identity: ../../baseline-v2-virtual-liquid-outlet/build-manifest.json
+schedule:
+  start_multiplier: 0.25
+  ramp_active_iterations: 2000
+  horizon: 2000
+  update_interval_iterations: 10
+  liquid_base_target_kg_s: 116.92
+  steam_base_target_kg_s: 80.69
+storage:
+  checkpoint_root_local: 'C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase71A\SolverN1'
+  final_root_onedrive: 'C:\Users\Shuhei Yokkaichi\OneDrive\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\Phase71A\SolverN1\finals'
+  checkpoint_policy: active-000,500,1000,1500 paired case/data plus smoke/recovery
+  final_policy: active-2000 paired case/data
+local_evidence:
+  root: PyAnsys/output/phase71a_v2_solver_n1
+  status: design-only; no run artifacts exist

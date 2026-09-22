@@ -22,7 +22,7 @@ separator performance.
 C8-D0 completed all 5,000 requested active iterations after recovery from an
 earlier client transport interruption. Its selected terminal case/data pair is
 the C8-only OneDrive parent identified in
-[`setup.md`](setup.md). The terminal audit records all five named bottom bands
+[`deffered.md`](deffered.md). The terminal audit records all five named bottom bands
 as walls, base inlet commands of 116.92 kg/s liquid and 80.69 kg/s vapor, and
 the lower phase-2-only absorber at -116.92 kg/s integrated command.
 

@@ -30,7 +30,7 @@ from pyansys_fluent.stage4_native import configure_residual_history, data_path, 
 from build_p71a_baseline_v2_virtual_outlet import OUTLET_ZONE, SOURCE_HOOKS, expression_definitions, source_state
 from run_c8_dynamic_thin_outer import (BASE, REQUIRED, RINGS, bind_reports, dump, parse_residuals, save_pair)
 
-HORIZON, STEP, PERSISTENCE = 5000, 10, 20
+HORIZON, BATCH, PERSISTENCE = 5000, 1000, 20
 
 
 def require(ok: bool, msg: str) -> None:
@@ -87,7 +87,7 @@ def main() -> int:
         manifest["prepared_reopen"] = v2_audit(s); save_pair(s, paths["active000"])
         capture = SessionTranscriptCapture(s, stream_path=local / "transcript.txt", echo=False); capture.start(); marker = capture.mark(); active = 0
         while active < HORIZON:
-            before = capture.mark(); s.settings.solution.run_calculation.iterate(iter_count=STEP); active += STEP; text = capture.text_since(before)
+            before = capture.mark(); s.settings.solution.run_calculation.iterate(iter_count=min(BATCH, HORIZON - active)); active += min(BATCH, HORIZON - active); text = capture.text_since(before)
             if re.search(r"floating point exception|Divergence detected in AMG solver|fatal error", text, re.I):
                 manifest["last_valid_active_iteration"] = active - STEP; manifest["failure_console_tail"] = text[-16000:]; dump(local / "run-manifest.json", manifest); raise RuntimeError(f"solver failure at active {active}")
             lower_path = report_paths["absorb-lower-liquid-mass"]
@@ -110,7 +110,7 @@ def main() -> int:
         args.trigger_receipt.parent.mkdir(parents=True, exist_ok=True); args.trigger_receipt.write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
         manifest.update({"achieved_active_iterations": HORIZON, "residuals": residuals, "trigger_receipt": str(args.trigger_receipt), "trigger_values": {"late_median_kg": median, "threshold_kg": threshold}, "status": "COMPLETE"})
         dump(local / "run-manifest.json", manifest); return 0
-    except Exception as exc:
+    except (Exception, KeyboardInterrupt) as exc:
         manifest.update({"status": "BLOCKED", "error": f"{type(exc).__name__}: {exc}", "traceback": traceback.format_exc()}); dump(local / "run-manifest.json", manifest); return 1
     finally:
         if capture: capture.close()

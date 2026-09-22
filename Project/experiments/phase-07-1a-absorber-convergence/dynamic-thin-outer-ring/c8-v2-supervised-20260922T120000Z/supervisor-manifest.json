@@ -1,0 +1,18 @@
+{
+  "status": "PAUSED_BY_HUMAN_DEFERRED",
+  "family": "P71A-C8-V2-DYNAMIC-THIN-OUTER",
+  "server_id": "3",
+  "started_at": "2026-09-21T23:18:31.615777+00:00",
+  "steps": [
+    {
+      "step": "C8-D0-V2",
+      "returncode": 1,
+      "manifest": "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/Project/experiments/phase-07-1a-absorber-convergence/dynamic-thin-outer-ring/c8-v2-supervised-20260922T120000Z/c8-d0-v2/run-manifest.json"
+    }
+  ],
+  "waiting_for_server3_idle": false,
+  "last_wait_at": "2026-09-21T23:32:13.129314+00:00",
+  "failed_step": "C8-D0-V2",
+  "closure_note": "Human paused the Server-3 run and deferred the remaining pressure-family approach. Preserve the blocked D0 evidence; do not resume or start pressure children from this supervisor.",
+  "completed_at": "2026-09-21T23:36:33.592510+00:00"
+}

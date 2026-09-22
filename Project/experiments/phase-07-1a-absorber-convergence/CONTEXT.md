@@ -1,5 +1,64 @@
 # Phase Context — Phase 7.1A Absorber Convergence and Solver Stability
 
+### Human contract override — 2026-09-22 — v2 numerical-improvement family
+
+The verified `P71A-BASELINE-V2-VIRTUAL-OUTLET` prepared pair remains the main
+base for Phase 7.1A work. The immediate next discovery is now Family N, a
+solver-improvement family that makes small, auditable changes to the v2 steady
+solution treatment while preserving the mesh, v2 absorber law, initialization,
+inlet-loading history, and physical model. N1 is the first candidate: steady
+pressure-based Coupled plus Coupled-compatible Global Time Step pseudo-time,
+automatic initially. Pseudo-time is numerical only. N2/N3 are evidence-gated
+follow-ups and must not be populated with guessed settings before live Fluent
+readback.
+
+The previously designed roughness and EWF families remain preserved as separate
+mechanism branches. They are not to be mixed with Family N, because doing so
+would prevent attribution of any numerical change to solver treatment.
+
+### Human contract override — 2026-09-22 — v2 mechanism split
+
+The next active discovery is now split into two independent mechanism families
+derived from the verified 60k v2 virtual-liquid-outlet baseline:
+
+- **Family R — wall roughness:** Server 1;
+- **Family E — Eulerian Wall Film:** Server 3.
+
+The natural assignment above is the recorded server allocation. Each live
+endpoint must be verified at execution preflight; the two streams must not
+share a live session, working directory, checkpoint, or mutable artifact.
+
+The baseline and both families share one explicit first-2,000-iteration inlet
+loading rule: start liquid and steam at `0.25` of their final targets, ramp
+linearly to `116.92 kg/s` liquid and `80.69 kg/s` steam over `2,000` steady
+iterations, and update every `10` iterations. The prepared v2 pair remains the
+clean parent; the ramp is applied in the child run and is part of the baseline
+definition for comparison.
+
+The shared control is smooth wall, no EWF, and the active v2 phase-2-only
+throughput-controlled absorber. Family R varies only `k_s` with `C_s=0.5` and
+EWF off. Family E keeps `k_s=0` and varies EWF from off to basic film and phase
+accretion; its additional E3 film option is capability-gated and must be named
+before execution. The former 237k C7/C8 inlet-development and dynamic-ring
+families are historical and are not eligible parents for this screen.
+This latest override supersedes any earlier wording below that presents C7 or
+C8 as active selection authority.
+
+### Human contract override — 2026-09-22 — corrected Server-3 C8 family paused
+
+The human briefly reauthorized the Server-3 thin-outer-ring pressure family
+after identifying the absorber in the preserved C8-D0/C8-P0 lineage as
+incorrect. Those records are historical and labeled **INCORRECT ABSORBER
+(v1)**. The corrected v2 absorber was built, loaded, and exercised only for
+the short partial D0 block recorded in
+`dynamic-thin-outer-ring/results-v2-corrected-absorber.md`; the human then
+paused the run and deferred the remaining pressure-family approach before
+qualification. No pressure ladder is active.
+
+The corrected v2 setup and all deferred setup records are retained as
+provenance. The exact deferred records use the requested filename spelling
+`deffered.md`.
+
 ## Status
 
 ### Human contract override — 2026-09-22
@@ -18,7 +77,7 @@ The sink acts directly on phase 2 only and removes matching liquid momentum;
 phase 1 receives no direct mass sink. The lower-zone liquid volume is now a
 starvation diagnostic, not the controller input or primary success metric.
 
-The [v2 setup contract](baseline-v2-virtual-liquid-outlet/setup.md) and
+The [v2 setup contract](baseline-v2-virtual-liquid-outlet/deffered.md) and
 [verified build result](baseline-v2-virtual-liquid-outlet/results.md) are the
 active Phase 7.1A baseline. The prepared/reopened 60k pair is loaded on
 `student`. It contains `60,964` fluid cells, including the `715`-cell
@@ -157,8 +216,8 @@ steady-state pass condition.
 | H7 | Give turbulence first priority and substantially more weight within the family screen. | The observed failure involved (k), epsilon, and turbulent-viscosity limiting, so a deeper turbulence screen can distinguish closure effects from downstream numerical effects. | selected planning priority; first finite screen complete |
 | H8 | Begin turbulence screening with the closest matched standard or realizable (k)-epsilon alternative against the RNG reference. | Isolates closure-form effects with less physical and computational change before escalating to SST or RSM. | first finite screen complete; no closure promoted |
 | H9 | Treat roughly 4,000 solver iterations as the earliest point at which steady-state assessment may become meaningful, and roughly 2,000 kg total liquid as a plausible operating-point marker. | Allows the inventory response to mature before judging the branch, while keeping the proposed inventory separate from the actual convergence proof. | human-raised planning hypothesis; requires long-horizon evidence |
-| H10 | Start both liquid and steam inlets below their base targets, then ramp both to the existing base flow on the 237k thin-outer mesh while every bottom band remains a wall. | Directly tests whether a gentler two-phase formation path increases lower-region liquid presence before high-throughput circulation dominates. | selected direction; exact profile not yet selected |
-| H11 | Keep the thin outer bottom ring as a wall initially and dynamically convert it to a pressure outlet only after lower liquid has developed; screen a wide but bounded pressure range. | Tests an artificial boundary analogue for bottom routing while avoiding an initially vapor-dominated open path. | selected direction; activation criterion and pressure ladder not yet selected |
+| H10 | Start both liquid and steam inlets below their base targets, then ramp both to the existing base flow on the 237k thin-outer mesh while every bottom band remains a wall. | Historical precursor to the later v2 loading rule. | superseded by the v2 60k ramp contract |
+| H11 | Keep the thin outer bottom ring as a wall initially and dynamically convert it to a pressure outlet only after lower liquid has developed; screen a wide but bounded pressure range. | Historical artificial-boundary branch. | superseded; not an active parent or queue |
 
 ### Constraints expressed by the human
 
@@ -304,31 +363,32 @@ child.
 
 ### Phase question
 
-> Can a controlled mixture-field development path and a delayed thin-outer
-> bottom-boundary intervention increase and retain liquid in the lower
-> separator region while preserving interpretable phase routing and mass
-> accounting?
+> Can the 60k-mesh phase-2 virtual liquid outlet be advanced toward a bounded,
+> auditable steady trajectory by making small solver-treatment changes while
+> preserving phase routing, source-inclusive mass accounting, and the intended
+> phase-2-only absorber interpretation?
 
 ### Scope, invariants, and claim limit
 
-- **In scope:** controlled inlet development from low flow to the existing base
-  flow; lower-region liquid-development observation; dynamically switching the
-  thin outer bottom band from wall to a pressure outlet; and iterative,
-  phase-resolved pressure/activation screening attached to the existing
-  absorber branch.
-- **Out of scope:** a new liquid-removal mechanism, automatic Phase 08
-  promotion, physical brine-outlet validation, transient/time-accurate
-  modelling, or unapproved field patching.
-- **Must remain fixed:** phase-2-only direct sink, zero direct phase-1 mass
-  source, the 237k thin-outer simplified Purnanto mesh, existing base inlet
-  targets after a completed ramp, and all bottom bands as walls in C7. In C8,
-  the named thin-outer ring is the only bottom boundary permitted to change
-  state; all other bottom bands remain walls.
-- **Baseline inheritance:** first rebuild a baseline-equivalent state on the
-  237k mesh, then apply only the family delta. C7 is assigned to the
-  `student` Fluent endpoint and C8 to Server 3. The mesh-specific lower-zone source density may be
-  recalculated only to preserve the baseline integrated `-116.92 kg/s`
-  phase-2 command; it is not a free source-strength change.
+- **In scope:** the common 0.25-to-1.00 inlet ramp over the first 2,000 steady
+  iterations; Family N solver-improvement screening; the later Family R
+  roughness-only and Family E EWF-only mechanism screens; lower-region liquid
+  development; phase-resolved routing; and source-inclusive closure.
+- **Out of scope:** a roughness-plus-EWF interaction family, automatic Phase 08
+  promotion, physical wall-film or plant-drainage validation,
+  transient/time-accurate modelling, mesh changes, or unapproved field
+  patching.
+- **Must remain fixed:** the verified 60k v2 mesh and virtual-outlet zone,
+  phase-2-only direct sink, zero direct phase-1 mass source, steady
+  Mixture/RNG scaffold, fresh unpatched initialization, bottom walls, and the
+  common inlet targets and ramp.
+- **Baseline inheritance:** each child independently loads and verifies the
+  exact v2 prepared pair, then applies one family delta. Family N changes only
+  the declared steady solver package; roughness runs on Server 1 and EWF runs
+  on Server 3 as later mechanism branches. Live endpoint details and all
+  version-specific controls are verified at preflight. The v2 source command
+  remains tied to instantaneous liquid-inlet throughput and is not a free
+  source-strength change.
 - **Claim limit:** numerical convergence under tested settings only; no plant,
   hardware, or mesh-independent physical claim.
 
@@ -355,27 +415,60 @@ A useful Phase 7.1A result must include, for each controlled branch:
   that as a candidate operating-point observation and assess whether the late
   inventory slope and variability actually flatten; do not stop or promote the
   branch because the mass value alone has been reached.
-- For inlet development, record both inlet commands and realized phase fluxes,
-  lower/adjacent/total liquid inventory, lower-zone liquid fraction, residuals,
-  and imbalance throughout the ramp and subsequent base-flow hold. Every C7
-  and C8 setup runs for 5,000 active iterations with paired case/data
-  checkpoints at 1,000-iteration intervals; a checkpoint is evidence, not a
-  convergence claim.
-- For the dynamic ring, record the wall/open state and exact switch iteration,
-  ring pressure, mixture/vapor/liquid ring fluxes, reverse flow, steam loss,
-  inventories, and absorber-source accounting. A switch is not a successful
-  liquid-routing event unless those phase-resolved measures support it.
+- For the v2 mechanism screen, record both inlet commands and realized phase
+  fluxes through the entire 2,000-iteration ramp, with paired checkpoints at
+  the declared parent and ramp milestones. Record the roughness wall readback
+  or EWF/film-transfer readback before solving; a checkpoint is evidence, not
+  a convergence claim.
+- For Family R, record the outer-wall mean liquid vertical velocity and its
+  sign convention, together with lower inventory, liquid discharge, carryover,
+  and the absence of a bottom outlet path.
+- For Family E, record film inventory, film flow toward the bottom, and
+  bulk-to-film/film-to-bulk transfer whenever exposed by Fluent. A lower global
+  inventory alone is not evidence of wall-film drainage.
+
+### Throughout-run monitoring contract
+
+The immediate Family N run and the later R/E branches use the same monitoring
+cadence. Every 10-iteration control block must retain raw native values for:
+
+- scheduled and realized liquid/steam inlet fluxes;
+- `P71V2Command`, named removal, native applied phase-2 source, and their
+  command-minus-applied error;
+- direct phase-1 source audit;
+- lower-zone available liquid, lower-zone liquid inventory, total liquid
+  inventory, and phase-1 vapor inventory;
+- phase-resolved `steamoutlet` fluxes and reverse-flow activity;
+- source-inclusive phase and mixture closure, including storage while
+  nonstationary;
+- continuity, momentum, `k`, epsilon, and phase-fraction residuals; and
+- AMG/FPE/non-finite warnings, turbulent-viscosity limiting, and block timing.
+
+At active `0`, `500`, `1,000`, `1,500`, and `2,000`, preserve paired case/data
+checkpoints with solver/family readback and representative phase-fraction,
+velocity, pressure, and turbulence-health fields. At any numerical or
+accounting event, preserve the first event iteration, last valid monitor row,
+last valid pair, transcript, and readback before recovery or stop.
+
+Interpret the run in four windows (`0–500`, `500–1,000`, `1,000–1,500`,
+`1,500–2,000`). The decision requires the late-window trends of inventory,
+source tracking, phase routing, closure, residuals, reverse flow, and timing to
+be read together. Endpoint residuals alone are insufficient.
 
 ## Candidate experiment pool
 
-The phase direction is selected. The T0/T1 closure records remain completed
-discovery evidence. The older C1--C6 and unrun T2--T4/C3C4 rows below are
-preserved planning history and are no longer active selection candidates.
-The active C7/C8 staged family plan is
-[liquid-development-and-dynamic-ring-family.md](liquid-development-and-dynamic-ring-family.md).
+The phase direction is selected. The T0/T1 closure records and the earlier
+C7/C8 material remain historical evidence. The immediate active plan is the
+[Family N solver-improvement screen](solver-improvement-family/index.md), with
+the roughness/EWF mechanism families preserved as later follow-on work. The
+older C1--C6, T2--T4, and C7/C8 rows remain preserved planning history and are
+not active selection candidates.
 
 | ID | Origin | Controlled delta | Screening question | Required evidence | Artifact/rejection signal | Human status |
 | --- | --- | --- | --- | --- | --- | --- |
+| N | Human reframe — v2 numerical-improvement family | N1: SIMPLE to pressure-based Coupled plus steady Global Time Step, automatic initially; later N2/N3 are evidence-gated single-control probes | Can the solver package improve boundedness/endurance without changing the v2 absorber interpretation? | Coupling/pseudo-time readback, residuals, source-inclusive phase balances, inventories, reverse flow, limiter/warnings, and timing | Missing live controls, earlier AMG/FPE failure, worse phase routing, or instrumentation gap | selected; N1 next |
+| R | Human reframe — v2 mechanism split | `k_s = 0`, `5e-5`, `2e-4`, `5e-4 m` with `C_s=0.5`; EWF off; Server 1 | Does wall shear alone change the near-wall liquid trajectory and lower-region routing? | Roughness readback, wall liquid vertical velocity, source-inclusive balances, inventory, carryover, residuals | Uncontrolled wall/solver change, no roughness capability, or no auditable phase/source evidence | selected; first queue excludes optional R4 |
+| E | Human reframe — v2 mechanism split | EWF off, basic EWF on, phase accretion on, optional named film-physics delta; `k_s=0`; Server 3 | Does liquid transfer into and drain as a wall-attached film? | EWF/film readback, film mass and flow, bulk-film transfer, phase/source balances, inventory, carryover, residuals | Film transfer not observable, vapor routing unaccounted, or E3 option not uniquely named | selected; E3 capability-gated |
 | C1 | H5/H6 — human-directed family screen | Multiphase formulation/solver family, beginning with the current Mixture baseline and bounded steady alternatives | Is the current phase formulation the main reason the absorber branch cannot reach a steady converged field? | Model readback, phase-fraction histories, residuals, phase routing, absorber delivery, balances, vapor carryover | Alternative form cannot establish a valid steady field, changes the scientific question, or loses auditable phase/source accounting | family selected; follow-on after turbulence screen |
 | C2 | H5/H6/H7/H8 — human-directed family screen | First compare RNG (k)-ε with standard and realizable (k)-ε; then isolate RNG production/options, wall treatment, turbulence-equation order, and Mixture turbulence-dispersion coupling; defer SST/RSM escalation | Is the turbulence closure or its treatment, rather than the absorber or another coupled family, driving the (k)/ε and viscosity-limit blow-up? | Turbulence residuals, viscosity limiting, pressure/velocity field, phase balances, carryover, steady convergence, wall-treatment evidence where relevant | Added turbulence complexity worsens stability, or an apparent improvement is caused by an uncontrolled non-turbulence change | first screen complete; T2-T4 extension directly human-authorized |
 | C2-T0 | C2 — human-approved turbulence family | Use the active RNG k-epsilon absorber state as the same-parent reference | What is the reproducible baseline against which the two closure changes are judged? | Full baseline readback, residuals, turbulence limits, phase/source balances, inventories, core figures | Parent or readback mismatch; incomplete evidence; no executable comparison basis | `COMPLETE_VERIFIED`; no promotion |
@@ -389,11 +482,11 @@ The active C7/C8 staged family plan is
 | C2-T3-NON-EQ | C2 — direct human phase-loop extension | Standard to non-equilibrium wall functions | Does non-equilibrium wall treatment change recirculating/adverse-gradient response? | Wall/y-plus prerequisite, wall readback, residuals, phase/source balances, inventories, core figures | queued; not run |
 | C2-T4-K2 | C2 — direct human phase-loop extension | First- to second-order k discretization | Is first-order k acting as a stabilizer or contributing to the observed trajectory? | k-scheme readback, residuals, turbulence limits, phase/source balances, inventories, core figures | queued; not run |
 | C2-T4-DISPERSION | C2 — direct human phase-loop extension | Multiphase relative-velocity turbulence dispersion off to on | Does turbulent dispersion alter phase routing and absorber delivery? | Dispersion readback, residuals, phase routing, absorber/source balances, inventories, core figures | queued; not run |
-| C7-INLET-DEVELOPMENT | H10 — direct human reframe | On the 237k thin-outer mesh, begin both liquid and steam inlets below their existing base mass-flow targets and ramp both to the unchanged bases; retain every bottom band as a wall | Does a gentler two-phase field-formation route create more durable lower-region liquid presence before base-flow operation? | Declared ramp profile, commanded/realized phase inlet fluxes, lower/adjacent/total liquid inventories, liquid fraction, residuals, and balances through ramp and hold | No material lower-region liquid development; unacceptable imbalance/instability; or a result that cannot separate ramp effects from an uncontrolled source/boundary change | selected direction; exact profile and initialized 237k parent remain to be defined |
-| C8-DYNAMIC-THIN-OUTER-RING | H11 — direct human reframe | On the prepared 237k thin-outer mesh, keep the named ring as a wall during field development, then dynamically change only that ring to a pressure outlet across a bounded pressure/activation screen | Can a delayed artificial boundary intervention route lower liquid without predominantly venting vapor or destroying mass accounting? | Exact switch rule/time, ring pressure, ring mixture/vapor/liquid fluxes, reverse-flow evidence, liquid inventories, vapor loss, source accounting, and residuals | Ring opens before usable lower liquid exists; vapor-dominated loss; unacceptable reverse flow/imbalance; or no liquid-routing response | selected direction; executable trigger and pressure ladder remain to be defined |
-| C3 | H5/H6 — human-directed family screen | Steady pressure–velocity algorithm, with a selected model scaffold held fixed | Is continuity limited mainly by pressure correction and velocity coupling? | Coupling/Courant readback, continuity/momentum histories, balances, absorber delivery, warnings | No continuity improvement, immediate AMG instability, or confounded model changes | family selected; follow-on after turbulence screen |
-| C4 | H5/H6 — human-directed family screen | Spatial discretization, equation order, under-relaxation, or steady pseudo-time treatment | Can the selected model family be stabilized and then upgraded without changing its physical interpretation? | Scheme/relaxation readback, residual trajectory, order-ramp behaviour, balances, phase routing | Only an over-diffusive first-order endpoint survives, or higher order immediately re-diverges | family selected; follow-on after turbulence screen |
-| C3C4-COUPLED-GLOBAL-PSEUDO-TIME | H2/H5/H6 — direct human phase-loop extension | SIMPLE to pressure-based Coupled plus the Coupled-compatible steady Global Time Step / pseudo-time treatment | Can a stronger pressure-coupling and steady pseudo-time solver path bound the difficult active-1000 trajectory without changing absorber interpretation? | Coupling and pseudo-time readback, residuals, limiter/warning diagnostics, phase-resolved fluxes, source delivery, liquid and vapor inventories, reverse-flow evidence, paired checkpoints | Immediate AMG/FPE failure; nonstationary inventories despite longer endurance; loss of phase-selective routing; or unavailable live-supported controls | human-authorized discovery candidate; appended after T2-T4 queue; preflight required |
+| C7-INLET-DEVELOPMENT | H10 — historical reframe | On the 237k thin-outer mesh, begin both liquid and steam inlets below their existing base mass-flow targets and ramp both to the unchanged bases; retain every bottom band as a wall | Historical precursor to controlled field development | Historical C7 evidence only | superseded by v2 60k ramp and not an active parent |
+| C8-DYNAMIC-THIN-OUTER-RING | H11 — historical reframe | On the prepared 237k thin-outer mesh, keep the named ring as a wall during field development, then dynamically change only that ring to a pressure outlet across a bounded pressure/activation screen | Historical artificial-boundary diagnostic | Historical C8 evidence only | superseded; no pressure ladder is active |
+| C3 | Historical planning row | Steady pressure–velocity algorithm on the old active-1000 parent | Historical solver-family question retained for provenance | Historical evidence only | Old parent is not eligible for v2 Family N | superseded by N1 |
+| C4 | Historical planning row | Spatial discretization, equation order, under-relaxation, or steady pseudo-time treatment | Historical numerical-treatment question retained for provenance | Historical evidence only | No v2 child may combine unresolved deltas | superseded by N2/N3 design |
+| C3C4-COUPLED-GLOBAL-PSEUDO-TIME | Historical planning row | Coupled plus Global Time Step on the old active-1000 parent | Historical precursor to the v2 N1 package | Historical setup provenance only | Old parent and unavailable endpoint; no result | superseded by v2 N1 |
 | C5 | H5/H6 — human-directed family screen | Pressure-outlet reverse-flow specification, with the model and numerical scaffold fixed | Is the large reversed-flow region at the steam outlet feeding the residual instability? | Backflow readback, reversed-face behaviour, phase-resolved outlet fluxes, residuals, vapor/liquid routing | No stability improvement, or neighboring-cell backflow admits unacceptable liquid recirculation | family selected; follow-on after turbulence screen |
 | C6 | H5/H6 — human-directed family screen | Mesh/absorber-zone conditioning while preserving the bottom-only absorber concept | Is the source discontinuity or lower-zone resolution the remaining local conditioning problem? | Zone geometry, local mesh evidence, source density/integral, absorber-interface flux, residuals, balances | Improvement cannot be separated from changed absorber extent, or upper liquid is removed | family selected; late follow-on after turbulence screen |
 
@@ -584,23 +677,19 @@ that any closure or turbulence treatment qualifies.
 
 ## Phase Loop setup queue
 
-The following is the human-approved finite queue. It is the only queue entering
-Phase Loop from this context:
+The current human-selected queue is intentionally short and evidence-driven:
 
 | Order | Setup path | Candidate | Lifecycle role | Required gate |
 | --- | --- | --- | --- | --- |
-| 1 | turbulence-family/t0-rng-reference/setup.md | C2-T0 | discovery-reference | DISCOVERY_DESIGN |
-| 2 | turbulence-family/t1-standard-kepsilon/setup.md | C2-T1-STD | discovery | DISCOVERY_DESIGN |
-| 3 | turbulence-family/t1-realizable-kepsilon/setup.md | C2-T1-REAL | discovery | DISCOVERY_DESIGN |
-| 4 | turbulence-family/t2-rng-production-limiter/setup.md | C2-T2-PROD | discovery | DISCOVERY_DESIGN |
-| 5 | turbulence-family/t2-rng-differential-viscosity-off/setup.md | C2-T2-DIFF | discovery | DISCOVERY_DESIGN |
-| 6 | turbulence-family/t2-rng-swirl-off/setup.md | C2-T2-SWIRL | discovery | DISCOVERY_DESIGN |
-| 7 | turbulence-family/t2-rng-kato-launder/setup.md | C2-T2-KATO | discovery | DISCOVERY_DESIGN |
-| 8 | turbulence-family/t3-scalable-wall-functions/setup.md | C2-T3-SCALABLE | discovery | DISCOVERY_DESIGN |
-| 9 | turbulence-family/t3-non-equilibrium-wall-functions/setup.md | C2-T3-NON-EQ | discovery | DISCOVERY_DESIGN |
-| 10 | turbulence-family/t4-k-second-order/setup.md | C2-T4-K2 | discovery | DISCOVERY_DESIGN |
-| 11 | turbulence-family/t4-multiphase-turbulence-dispersion/setup.md | C2-T4-DISPERSION | discovery | DISCOVERY_DESIGN |
-| 12 | solver-path-family/c3c4-coupled-global-pseudo-time/setup.md | C3C4-COUPLED-GLOBAL-PSEUDO-TIME | discovery | DISCOVERY_DESIGN extension |
+| 1 | solver-improvement-family/n1-coupled-global-pseudo-time/deffered.md | N1 | discovery numerical-improvement screen | parent hash/readback, live control readback, save/reopen, smoke |
+| 2 | solver-improvement-family/index.md | N2 | conditional pseudo-time policy probe | define only from N1 evidence |
+| 3 | solver-improvement-family/index.md | N3 | conditional one-control numerical probe | define only from N1/N2 evidence |
+| 4 | roughness-family/index.md | R | later mechanism family | separate endpoint and parent gate |
+| 5 | ewf-family/index.md | E | later mechanism family | separate endpoint, film instrumentation, and parent gate |
+
+The completed turbulence queue, the old active-1000 Coupled/pseudo-time
+candidate, and their setup records remain preserved as historical planning
+evidence. They are not eligible parents or automatic recovery routes for N1.
 
 ## Autonomous recovery and handoff rules
 

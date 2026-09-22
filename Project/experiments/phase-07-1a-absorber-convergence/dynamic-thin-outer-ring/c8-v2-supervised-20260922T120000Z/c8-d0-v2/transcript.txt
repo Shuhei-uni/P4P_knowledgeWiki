@@ -1,0 +1,43 @@
+
+  iter  continuity  x-velocity  y-velocity  z-velocity           k     epsilon  vf-phase-2     time/iter
+  5000  1.3096e-01  1.3555e-04  1.6188e-04  1.3393e-04  7.1641e-03  2.9470e-02  5.6553e-03  0:00:00 1000
+
+ Reversed flow on 1145 faces of pressure-outlet 42.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 19284 cells 
+  5001  1.3278e-01  1.3644e-04  1.6153e-04  1.3522e-04  7.2863e-03  2.9277e-02  5.6497e-03  0:25:47  999
+
+ Reversed flow on 1146 faces of pressure-outlet 42.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 19504 cells 
+  5002  1.3299e-01  1.3676e-04  1.6089e-04  1.3530e-04  7.3864e-03  2.9244e-02  5.6527e-03  1:06:01  998
+
+ Reversed flow on 1156 faces of pressure-outlet 42.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 19605 cells 
+  5003  1.3369e-01  1.3692e-04  1.6041e-04  1.3578e-04  7.4582e-03  2.9091e-02  5.6558e-03  0:57:47  997
+
+ Reversed flow on 1154 faces of pressure-outlet 42.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 19711 cells 
+  5004  1.3329e-01  1.3708e-04  1.5982e-04  1.3593e-04  7.5234e-03  2.8895e-02  5.6550e-03  0:52:34  996
+
+ Reversed flow on 1151 faces of pressure-outlet 42.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 19878 cells 
+  5005  1.3329e-01  1.3735e-04  1.5918e-04  1.3617e-04  7.5640e-03  2.8806e-02  5.6493e-03  0:47:04  995
+
+ Reversed flow on 1155 faces of pressure-outlet 42.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 19986 cells 
+  5006  1.3290e-01  1.3743e-04  1.5849e-04  1.3631e-04  7.5948e-03  2.8737e-02  5.6400e-03  0:45:15  994
+
+ Reversed flow on 1152 faces of pressure-outlet 42.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 20111 cells 
+  5007  1.3260e-01  1.3723e-04  1.5769e-04  1.3659e-04  7.5912e-03  2.8656e-02  5.6262e-03  1:28:12  993
+
+ Reversed flow on 1139 faces of pressure-outlet 42.
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 20182 cells 
+  5008  1.3276e-01  1.3677e-04  1.5669e-04  1.3667e-04  7.5457e-03  2.8400e-02  5.6132e-03  2:04:10  992

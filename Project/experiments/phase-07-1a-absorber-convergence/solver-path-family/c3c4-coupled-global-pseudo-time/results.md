@@ -11,7 +11,7 @@ claim about pseudo-time alone or absorber validity.
 ## Execution record
 
 - Exact parent: active-1000 paired absorber case/data, as specified in
-  `setup.md` and `turbulence-family/parent-reference.md`.
+  `deffered.md` and `turbulence-family/parent-reference.md`.
 - Live endpoint: Student endpoint was unreachable during preparation on
   2026-09-15.
 - Read-only API probe: Fluent 2025 R2 server 3 exposed
@@ -33,4 +33,3 @@ Populate only after a verified run:
 - liquid and vapor inventories:
 - limiter/reverse-flow/warning diagnostics:
 - checkpoints and figures:
-

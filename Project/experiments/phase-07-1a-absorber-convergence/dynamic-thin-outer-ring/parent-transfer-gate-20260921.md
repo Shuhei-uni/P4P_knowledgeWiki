@@ -127,5 +127,5 @@ made. The planned pressure values and stopping criteria remain valid only
 after the required C7 parent gate is passed.
 
 The executable handoff requirements and all child controls are fixed in the
-[C8 setup contract](setup.md); only the C7-evidence-derived trigger numbers
+[C8 deferred setup contract](deffered.md); only the C7-evidence-derived trigger numbers
 and exact selected parent identity remain to be populated.

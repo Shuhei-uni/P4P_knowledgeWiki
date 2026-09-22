@@ -1,5 +1,6 @@
 {
-  "status": "RUNNING",
+  "status": "PARTIAL_ARTIFACTS_SUPERSEDED",
+  "note": "v2 all-wall pair was written, but the broad post-boundary audit was interrupted by a slow Fluent Settings RPC. The corrected pressure baseline was independently reopened and verified by pressure-baseline-manifest.json.",
   "setup_id": "C8-V2-THIN-RING-BASELINES",
   "server_id": "3",
   "parent_case": "C:\\Users\\syok443\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase07\\C8\\independent-d0-finals\\C8-D0\\20260921T062500Z\\C8-D0-active5000.cas.h5",

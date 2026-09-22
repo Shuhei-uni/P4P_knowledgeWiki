@@ -5,17 +5,34 @@ phase_question: >-
   mass closure, bounded inventory behaviour, and useful steady convergence?
 state: DISCOVERY_COMPLETE
 
+planning_state: NUMERICAL_IMPROVEMENT_FAMILY_DESIGN_SELECTED
+
 context:
   path: Project/experiments/phase-07-1a-absorber-convergence/CONTEXT.md
   authority: direct human reframe on 2026-09-22
   active_baseline: P71A-BASELINE-V2-VIRTUAL-OUTLET
-  setup_path: Project/experiments/phase-07-1a-absorber-convergence/baseline-v2-virtual-liquid-outlet/setup.md
+  setup_path: Project/experiments/phase-07-1a-absorber-convergence/baseline-v2-virtual-liquid-outlet/deffered.md
   results_path: Project/experiments/phase-07-1a-absorber-convergence/baseline-v2-virtual-liquid-outlet/results.md
   manifest_path: Project/experiments/phase-07-1a-absorber-convergence/baseline-v2-virtual-liquid-outlet/build-manifest.json
   runtime: student
-  latest_discovery_setup: Project/experiments/phase-07-1a-absorber-convergence/v2-inlet-loading-ramp/setup.md
+  latest_discovery_setup: Project/experiments/phase-07-1a-absorber-convergence/v2-inlet-loading-ramp/deffered.md
   latest_discovery_results: Project/experiments/phase-07-1a-absorber-convergence/v2-inlet-loading-ramp/results.md
   latest_discovery_manifest: PyAnsys/output/phase71a_v2_inlet_loading/20260922T031500Z/run-manifest.json
+  active_family_screen: Project/experiments/phase-07-1a-absorber-convergence/solver-improvement-family/index.md
+  mechanism_family_screen: Project/experiments/phase-07-1a-absorber-convergence/v2-mechanism-family-screen/index.md
+  solver_improvement_family: Project/experiments/phase-07-1a-absorber-convergence/solver-improvement-family/index.md
+  roughness_family: Project/experiments/phase-07-1a-absorber-convergence/roughness-family/index.md
+  ewf_family: Project/experiments/phase-07-1a-absorber-convergence/ewf-family/index.md
+
+baseline_loading_rule:
+  start_multiplier: 0.25
+  end_multiplier: 1.0
+  ramp_active_iterations: 2000
+  update_interval_iterations: 10
+  liquid_base_target_kg_s: 116.92
+  steam_base_target_kg_s: 80.69
+  applies_to: baseline, solver-improvement-family, roughness-family, ewf-family
+  qualification_status: discovery_loading_rule_only
 
 baseline_v2:
   status: READY
@@ -48,7 +65,7 @@ gates:
     checked_at: 2026-09-22
     evidence:
       - Project/experiments/phase-07-1a-absorber-convergence/CONTEXT.md
-      - Project/experiments/phase-07-1a-absorber-convergence/baseline-v2-virtual-liquid-outlet/setup.md
+      - Project/experiments/phase-07-1a-absorber-convergence/baseline-v2-virtual-liquid-outlet/deffered.md
   BASELINE_BUILD:
     status: PASS
     checked_at: 2026-09-22
@@ -58,7 +75,7 @@ gates:
   DISCOVERY_DESIGN:
     status: PASS
     evidence:
-      - Project/experiments/phase-07-1a-absorber-convergence/v2-inlet-loading-ramp/setup.md
+      - Project/experiments/phase-07-1a-absorber-convergence/v2-inlet-loading-ramp/deffered.md
       - Project/experiments/phase-07-1a-absorber-convergence/v2-inlet-loading-ramp/run-paths.yaml
   DISCOVERY_EXECUTION:
     status: PASS
@@ -75,6 +92,16 @@ gates:
       - finite-horizon trajectory is nonstationary with increasing total liquid inventory
       - persistent pressure-outlet reverse flow remains
       - no physical absorber or plant-drainage claim is authorized
+  N1_PREFLIGHT:
+    status: BLOCKED_EXTERNAL
+    checked_at: 2026-09-22
+    evidence:
+      - Project/experiments/phase-07-1a-absorber-convergence/solver-improvement-family/n1-coupled-global-pseudo-time/results.md
+      - Project/experiments/phase-07-1a-absorber-convergence/solver-improvement-family/n1-coupled-global-pseudo-time/run-paths.yaml
+    limits:
+      - recorded student endpoint was unavailable to the read-only status probe
+      - reachable server-1 endpoint did not contain the exact v2 parent pair
+      - no Fluent session was mutated and no solver iteration was run
   PHASE_CLOSURE:
     status: BLOCK
     missing:
@@ -90,6 +117,30 @@ queue:
       Develop liquid from the freshly initialized field and determine whether
       native applied phase-2 removal tracks the inlet-derived command without
       direct vapor deletion; result is finite-horizon evidence only.
+  - order: 2
+    setup_id: P71A-V2-SOLVER-IMPROVEMENT-FAMILY
+    status: READY_BUT_ENDPOINT_BLOCKED
+    parent: P71A-BASELINE-V2-VIRTUAL-OUTLET prepared pair
+    objective: >-
+      Test the smallest solver-treatment improvement first: steady Coupled
+      plus Global Time Step with automatic pseudo-time controls, while keeping
+      the v2 absorber, loading ramp, and all physical settings fixed.
+  - order: 3
+    setup_id: P71A-V2-ROUGHNESS-FAMILY
+    status: DESIGN_SELECTED_NOT_RUN
+    server_id: server-1
+    parent: P71A-BASELINE-V2-VIRTUAL-OUTLET prepared pair
+    objective: >-
+      Test whether increasing wall roughness with EWF off changes near-wall
+      liquid trajectory and lower-region routing under the common v2 inlet ramp.
+  - order: 4
+    setup_id: P71A-V2-EWF-FAMILY
+    status: DESIGN_SELECTED_NOT_RUN
+    server_id: server-3
+    parent: P71A-BASELINE-V2-VIRTUAL-OUTLET prepared pair
+    objective: >-
+      Test whether explicit Eulerian wall-film formation and phase accretion
+      create downward wall-attached liquid routing under the common v2 inlet ramp.
 
 historical_evidence:
   rule: >-
@@ -97,4 +148,4 @@ historical_evidence:
     evidence. Their absorber and C7/C8 direction are not active v2 authority.
   removed_setup_records_without_results:
     - bottom-boundary-family/thin-outer-po-p1120/setup.md
-    - dynamic-thin-outer-ring/setup.md
+    - dynamic-thin-outer-ring/deffered.md

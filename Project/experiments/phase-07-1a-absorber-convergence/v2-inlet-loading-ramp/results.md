@@ -146,7 +146,7 @@ and outlet reverse-flow behaviour rather than residual magnitude alone.
 
 ## Evidence and artifacts
 
-- [Setup contract](setup.md)
+- [Deferred setup contract](deffered.md)
 - [Run-path map](run-paths.yaml)
 - [Run manifest](../../../../PyAnsys/output/phase71a_v2_inlet_loading/20260922T031500Z/run-manifest.json)
 - [Native report histories](../../../../PyAnsys/output/phase71a_v2_inlet_loading/20260922T031500Z/report-histories.json)
