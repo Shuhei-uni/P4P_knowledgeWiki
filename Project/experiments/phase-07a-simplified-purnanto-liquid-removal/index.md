@@ -1,5 +1,7 @@
 # Phase 07A — Simplified Purnanto Liquid-Removal Mechanisms
 
+
+> [Phase-level interpretation](interpretation.md) — concise hypothesis → experiments → evidence → decision narrative.
 ## Status
 
 **Human-reframed on 2026-09-11.** This record preserves the Phase 07
