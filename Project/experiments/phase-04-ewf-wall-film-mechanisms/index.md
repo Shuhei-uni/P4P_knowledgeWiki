@@ -1,5 +1,7 @@
 # Phase 4 — EWF wall-film mechanisms
 
+
+> [Phase-level interpretation](interpretation.md) — concise hypothesis → experiments → evidence → decision narrative.
 ## Scientific purpose
 
 Investigate wall-film deposition, drainage, splash, edge separation, particle
