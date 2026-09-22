@@ -40,7 +40,7 @@ However, at native iteration 4002:
 That run therefore established a working v2 source but not a bounded operating state.
 
 The corresponding summary figure is:
-[v2 inlet-loading summary](../../PyAnsys/output/phase71a_v2_inlet_loading/20260922T031500Z/v2-inlet-loading-summary.png).
+[v2 inlet-loading summary](../../../PyAnsys/output/phase71a_v2_inlet_loading/20260922T031500Z/v2-inlet-loading-summary.png).
 
 ## Why run4 was the promotion point
 
