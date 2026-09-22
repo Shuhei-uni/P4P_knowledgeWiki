@@ -1,5 +1,7 @@
 # Phase 5 — Full Geometry V2
 
+
+> [Phase-level interpretation](interpretation.md) — concise hypothesis → experiments → evidence → decision narrative.
 ## Scientific purpose
 
 Qualify the Full Geometry V2 carrier and outlet formulations, then test the
