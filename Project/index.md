@@ -60,101 +60,29 @@ loading history, and solver-control records are retained for provenance.
 
 ### Phase 7.1A parent evidence
 
-**Phase 7.1A was redirected by the human on 2026-09-22.** The active baseline
-is now [v2 on the supplied 60k mesh](experiments/phase-07-1a-absorber-convergence/baseline-v2-virtual-liquid-outlet/results.md).
-It replaces the v1 lower-inventory/uniform absorber with a feed-forward virtual
-liquid outlet whose command is the phase-2 liquid-inlet throughput and whose
-local source is weighted by phase-2 volume fraction. The prepared/reopened pair
-is verified and loaded on `student`: `60,964` total fluid cells, including a
-`715`-cell lower virtual-outlet zone. Its one-iteration setup smoke passed, but
-the fresh lower zone was liquid-starved, so throughput tracking and convergence
-remain untested. Earlier Phase 7.1A records with `results.md` are historical;
-the C7/C8 direction is superseded. The brief corrected Server-3 C8 attempt was
-paused before qualification; its bounded partial state is recorded in
-[the paused result](experiments/phase-07-1a-absorber-convergence/dynamic-thin-outer-ring/results-v2-corrected-absorber.md),
-and the remaining Phase 7.1A setup packets are deferred in `deffered.md`
-records rather than active execution candidates.
+Phase 7.1A is complete as the parent-development phase for Shuhei's 60k virtual
+liquid outlet. The selected endpoint is the R0 smooth-wall run4 continuation at
+native state `5586`: full loading, steady Coupled / Global Time Step, EWF off,
+and the v2 phase-2-only throughput-controlled absorber.
 
-Shuhei's Phase 07A mechanism-discovery record is retained as historical
-evidence. The lower cell-zone, phase-2-only absorber is now the human-selected
-working removal path, but it is not yet physically qualified or numerically
-converged. Phase 7.1A now focuses on liquid-field development and artificial
-bottom-boundary routing: retain the absorber, develop both inlet phases from
-reduced conditions to base flow on the 237k thin-outer mesh with every bottom
-band closed, then assess a delayed thin-outer-ring pressure intervention using
-phase-resolved evidence. E0 is
-human-approved as the
-corrected fixed-mesh reference experiment, with an initial `2,000`-iteration
-discovery horizon. Its server-neutral setup and the human-approved five-family,
-15-child fixed-mesh treatment series are complete. Dependency-gated execution
-of all 15 initial child packets has now been attempted under explicit human
-authorization: 10 produced their approved 500-iteration discovery artifacts,
-two corrected E1 pressure cases blocked during smoke, and all three E5 packets
-were capability-blocked before solve because the live Fluent tree exposes no
-region-specific source binding. E0 and the completed treatment screens have
-plot-led analyses and core figures. The one activated E2 fourth point (K=10)
-also blocked during smoke. The activated E3 Q=146.15 and E4 G=1.50 fourth
-points were subsequently rerun on the only reachable `student` Fluent
-endpoint from their exact approved parents/checkpoint. Both completed their
-500-iteration discovery screens and analyses; Q=146.15 retained positive
-inventory drift/open mixture balance, while G=1.50 reached the command cap
-with positive inventory drift. Discovery evidence remains finite-horizon and
-inconclusive, and no qualification is authorized. The subsequently approved
-E5-CZ-ABSORB lower-inventory family also completed its Phase Loop screen:
-CAP14615 reached 500 iterations but missed its lower target and retained
-positive global liquid drift, while CAP29230 and CAP58460 encountered verified
-solver divergence during the block ending at active 450 after valid active-400
-readbacks. No member is promoted; any stabilization change requires a separate
-human decision. A separate [cold-start setup](experiments/phase-07a-simplified-purnanto-liquid-removal/cell-zone-absorber-control-family/p7-e5-cz-absorb-cold-ramp11692/setup.md)
-was created from the E0-style initialized state with a ramp to
-`116.92 kg/s` and completed its active-1,000 discovery horizon. The requested
-[1,000-to-5,000 continuation](experiments/phase-07a-simplified-purnanto-liquid-removal/cell-zone-absorber-control-family/p7-e5-cz-absorb-cold-ramp11692-cont5000/results.md)
-then reached a valid active-1,960 history before solver divergence in the
-active-1,970 block; it did not produce an active-5,000 pair. Its valid history
-shows continuing total-liquid buildup and negligible lower-zone liquid, so no
-bounded branch or qualification claim is supported. An exact restart from the
-durable active-1,900 pair reproduced the same epsilon/flow-field blow-up and
-terminal Fluent node failure after the report-query wrapper issue was removed;
-the frozen-settings continuation is therefore a repeatable numerical block.
-After Fluent was relaunched, a third exact restart reproduced the same failure
-on the new endpoint, confirming that the block is not tied to the prior Fluent
-session.
-On 2026-09-15 the human authorized a separate E6 localized bottom-boundary
-diagnostic: partition the existing planar bottom into reusable radial bands,
-retain the inner bands as walls, and start with the outermost resolved band as
-a pressure outlet. The [E6 design packet](experiments/phase-07a-simplified-purnanto-liquid-removal/ringed-bottom-pressure-outlet-family/index.md)
-records the five-band catalogue, the three reused E1 pressure points, and the
-hard disposable face-zone/save-reopen gate. It is design-ready but not placed
-or executed; the pressure outlet remains a phase-permissive diagnostic, not an
-assumed liquid-only drain.
-The new Phase 7.1A planning record is:
+It was promoted because the combined late behaviour was the strongest obtained
+so far: liquid inventory was bounded and substantially more stable, mass closure
+and continuity were the best obtained in the phase, absorber command tracking
+remained exact, and the 1,000-iteration continuation completed without fatal
+solver events.
 
-- [Phase 7.1A convergence direction](experiments/phase-07-1a-absorber-convergence/index.md)
-- [Phase 7.1A planning context](experiments/phase-07-1a-absorber-convergence/CONTEXT.md)
+This is **not** a claim of a fully converged or physically correct separator.
+Multiphase/turbulence residuals remain oscillatory and phase-2 liquid carryover
+through `steamoutlet` remains about `24.33 kg/s`. That unresolved routing error
+is now the main target of Phase 7.2A.
 
-The earlier Phase 7.1A turbulence-first finite screen is execution-complete and
-is retained as historical v1 evidence.
-T0 RNG reference, T1 standard k-epsilon, and T1 realizable k-epsilon ran in
-order on `student` from the exact active-1000 absorber parent, each with 500
-active iterations, paired final artifacts, and plot-led evidence. The closures
-produced distinct finite trajectories, but all retained nonstationarity,
-reverse flow, and broad turbulent-viscosity limiting; no branch is qualified
-or promoted. The unrun T2-T4 and Coupled/Global-Time-Step packets are now
-superseded as active candidates and retained only as planning history. The
-former low-to-base inlet-development and delayed thin-outer-ring families are
-also superseded by the 2026-09-22 v2 virtual-outlet reframe. Their staged
-[C7/C8 plan](experiments/phase-07-1a-absorber-convergence/liquid-development-and-dynamic-ring-family.md)
-is historical and is not execution authority.
+The decision rule carried forward is therefore: preserve bounded inventory,
+closure, continuity and absorber tracking first; then judge whether the new wall
+mechanism improves phase routing. Lower residuals alone do not justify promotion
+if the macroscopic behaviour becomes worse.
 
-The human has also raised a Phase 7.1A-specific long-horizon planning
-hypothesis from the current extended runs: steady-state assessment may not be
-meaningful until at least roughly `4,000` solver iterations, with a plausible
-separator operating inventory near `2,000 kg`. This is recorded as a maturity
-and operating-point marker—not as a generic Fluent requirement, a convergence
-criterion, or a physical conclusion. The steady-state gate remains conjunctive:
-late-window boundedness and slope, residual behaviour, phase-resolved and
-mixture mass closure including storage/source terms, and credible phase routing
-must all be demonstrated.
+See the [Phase 7.1A parent record](experiments/phase-07-1a-absorber-convergence/index.md)
+and the [Phase 7.2A baseline handoff](experiments/phase-07-2a-wall-liquid-routing/baseline-control-handoff.md).
 
 For Andy's Phase 7b, a function-based ideal collector with five thickness
 cases (`20%, 40%, 60%, 80%, 100%`) is approved, with at most `5,000` steady
