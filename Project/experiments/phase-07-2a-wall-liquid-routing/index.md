@@ -1,5 +1,7 @@
 # Phase 7.2A — Wall-Liquid Routing and Steam-Outflow Carryover
 
+
+> [Phase-level interpretation](interpretation.md) — concise hypothesis → experiments → evidence → decision narrative.
 ## Status
 
 **Human-selected phase created on 2026-09-22.** The completed Phase 7.1A R0
