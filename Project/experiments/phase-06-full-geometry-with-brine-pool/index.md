@@ -1,5 +1,7 @@
 # Phase 06 — Full Geometry with Brine Pool
 
+
+> [Phase-level interpretation](interpretation.md) — concise hypothesis → experiments → evidence → decision narrative.
 This is a new top-level Project experiment phase. It follows the `03A`
 full-geometry fixed-pressure work and is not another Stage-5 pressure or
 turbulence variation.
