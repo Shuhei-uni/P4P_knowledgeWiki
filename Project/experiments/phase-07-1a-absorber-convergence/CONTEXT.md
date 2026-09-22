@@ -1,5 +1,28 @@
 # Phase Context — Phase 7.1A Absorber Convergence and Solver Stability
 
+
+## Current handoff — completed Phase 7.1A
+
+Phase 7.1A is no longer an active solver-tuning queue. The completed R0 smooth-wall
+Coupled / Global-Time-Step run4 endpoint is the selected developed parent for
+Phase 7.2A.
+
+The promotion decision is based on the combined macroscopic behaviour, not on
+scaled residuals alone. Run4 produced the strongest liquid-inventory stability,
+source-inclusive mass closure, and continuity behaviour obtained in this phase,
+while maintaining exact absorber command tracking and completing the continuation
+without fatal solver events.
+
+The state is still imperfect: volume-fraction and turbulence residuals remain
+oscillatory and about `24.33 kg/s` of phase-2 liquid still leaves through
+`steamoutlet`. Those unresolved routing errors are the reason for moving to
+Phase 7.2A rather than continuing to optimize residual appearance in Phase 7.1A.
+
+For active work, use the [Phase 7.2A record](../phase-07-2a-wall-liquid-routing/index.md).
+The material below is retained as Phase 7.1A decision provenance and historical
+experiment context.
+
+
 ### Human contract override — 2026-09-22 — v2 numerical-improvement family
 
 The verified `P71A-BASELINE-V2-VIRTUAL-OUTLET` prepared pair remains the main
