@@ -10,15 +10,15 @@ and [E1/E3 export manifest](../../../../PyAnsys/output/phase72a_e1_e3_native_vof
 
 E0 — smooth, EWF off:
 
-![E0 phase-2 volume fraction on the X–Y centre cut at native 8586](../../../../PyAnsys/output/phase72a_e0_native_vof_contour_20260923/P72A-E0-phase2-vof-xy-z0-final8586.png)
+![E0 phase-2 volume fraction on the X–Y centre cut at native 8586](figures/E0-phase2-vof-xy-z0-final8586.png)
 
 E1 — smooth, basic EWF:
 
-![E1 phase-2 volume fraction on the X–Y centre cut at native 8586](../../../../PyAnsys/output/phase72a_e1_e3_native_vof_contours_20260923_v2/P72A-E1-phase2-vof-xy-z0-final8586.png)
+![E1 phase-2 volume fraction on the X–Y centre cut at native 8586](figures/E1-phase2-vof-xy-z0-final8586.png)
 
 E3 — basic EWF plus R3 roughness:
 
-![E3 phase-2 volume fraction on the X–Y centre cut at native 8586](../../../../PyAnsys/output/phase72a_e1_e3_native_vof_contours_20260923_v2/P72A-E3-phase2-vof-xy-z0-final8586.png)
+![E3 phase-2 volume fraction on the X–Y centre cut at native 8586](figures/E3-phase2-vof-xy-z0-final8586.png)
 
 At this scale E0 and E1 look similar; all three cuts are mostly low phase-2
 volume fraction with a narrow wall-adjacent cyan region and no distinct thick
@@ -29,7 +29,7 @@ off-centre crop and was not used for interpretation.
 
 ## E1/E3 film thickness and steamoutlet liquid escape — 2026-09-23
 
-The [paired history figure](../../../../PyAnsys/output/phase72a_family_e_e1_e3_film_escape_20260923/film-thickness-and-steamoutlet-escape.png)
+The [paired history figure](figures/E1-E3-film-thickness-and-steamoutlet-escape.png)
 uses the 300 file-backed samples at native 5590–8580 (10-iteration cadence).
 On the active `wall` film surface, both maximum and area-weighted EWF film
 thickness were exactly zero at every sample for E1 and E3. This is a measured
@@ -47,7 +47,7 @@ delta relative to E1, but this history alone does not prove a steady response.
 
 ## Liquid-inventory comparison — 2026-09-23
 
-The [inventory figure](../../../../PyAnsys/output/phase72a_family_e_liquid_inventory_comparison_20260923/liquid-inventory-comparison.png)
+The [inventory figure](figures/E0-E1-E3-liquid-inventory-comparison.png)
 compares total and lower-zone continuous-liquid mass for E0, E1, and E3 on
 the shared native 5590–8580 coordinates (300 points, every 10 iterations).
 E2 is excluded because its FPE prevented a comparable continuation. E0's
