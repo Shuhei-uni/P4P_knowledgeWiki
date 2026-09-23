@@ -23,6 +23,10 @@ intended wall zones.
 | `R5` | off | `2e-3` | `0.5` | human-requested rougher extension | complete; carryover magnitude `-20.58%` vs R0; major liquid-inventory depletion |
 | `R6` | off | `4e-3` | `0.5` | second doubled-roughness extension | complete; carryover magnitude `-38.38%` vs R0; `183.5 kg` domain-liquid loss |
 | `R7` | off | `8e-3` | `0.5` | second doubled-roughness extension | complete; carryover magnitude `-44.09%` vs R0; `187.1 kg` domain-liquid loss |
+| `R8` | off | `5e-4` | `0.75` | R3-height roughness-constant sensitivity | complete |
+| `R9` | off | `5e-4` | `1.0` | R3-height roughness-constant sensitivity | complete |
+| `R10` | off | `2e-3` | `0.75` | R5-height roughness-constant sensitivity | complete |
+| `R11` | off | `2e-3` | `1.0` | R5-height roughness-constant sensitivity | complete |
 
 ## Selection evidence
 
@@ -39,10 +43,13 @@ outlet, source, mesh, or solver change.
 
 ## Result
 
-The eight-case branch is complete. The original R0–R3 negative outlet screen was
-superseded by the explicit [R4–R5 extension](extension-r4-r5-setup.md). Stronger
-roughness reduced modeled outlet flux, but the R4–R7 runs do not establish
-improved separation: R4 is oscillatory and R5–R7 depleted much of the domain
-liquid inventory. See
+R8–R11 are the human-selected roughness-constant sensitivity extension; see [extension-r8-r11-setup.md](extension-r8-r11-setup.md). All four runs passed the terminal artifact checks; the matched comparison is in [results.md](results.md).
+
+The R0–R11 branch is complete. The original R0–R3 negative outlet screen was
+extended by [R4–R5](extension-r4-r5-setup.md), [R6–R7](extension-r6-r7-setup.md)
+roughness-height cases, and the [R8–R11 roughness-constant sensitivity](extension-r8-r11-setup.md). Lower outlet
+flux at the larger settings does not establish improved separation: R4 and R9
+are oscillatory, and R5–R7 and R10–R11 depleted much of the domain liquid
+inventory. See
 [results.md](results.md) for matched-window statistics, execution receipts,
 figures, solver-health evidence, and claim limits.

@@ -1,4 +1,4 @@
-"""Export matched native Fluent phase-2 VOF contours from E1/E3 final pairs; no solve."""
+"""Export matched native Fluent phase-2 VOF contours from final E-family pairs; no solve."""
 
 from __future__ import annotations
 
@@ -18,11 +18,24 @@ MANIFESTS = {
     "E0": ROOT / "PyAnsys/output/phase72a_ewf_family_e_student_20260922T115500Z/E0/run-manifest.json",
     "E1": ROOT / "PyAnsys/output/phase72a_ewf_student_e1_run_20260923T024000Z/E1/run-manifest.json",
     "E3": ROOT / "PyAnsys/output/phase72a_ewf_student_e3_run_20260923T032500Z/E3/run-manifest.json",
+    "E2.7": ROOT / "PyAnsys/output/phase72a_ewf_student_e27_run_20260923T071523Z/E2.7/run-manifest.json",
 }
 REMOTE_DIR = PureWindowsPath(
     r"C:\Users\Shuhei Yokkaichi\Documents\OneDrive - The University of Auckland"
     r"\P4P-Fluent-Artifacts\Phase72A\FamilyE\figures\E1-E3-VOF-20260923-v2"
 )
+REMOTE_E27_DIR = PureWindowsPath(
+    r"C:\Users\Shuhei Yokkaichi\Documents\OneDrive - The University of Auckland"
+    r"\P4P-Fluent-Artifacts\Phase72A\FamilyE\figures\E2.7-VOF-20260923"
+)
+OUTPUT_DIRS = {
+    "E0": ROOT / "PyAnsys/output/phase72a_e0_native_vof_contour_20260923",
+    "E2.7": ROOT / "PyAnsys/output/phase72a_e27_native_vof_contour_20260923",
+}
+REMOTE_DIRS = {
+    "E0": REMOTE_DIR.parent / "E0-VOF-20260923",
+    "E2.7": REMOTE_E27_DIR,
+}
 PLANE = "p72a-e13-xy-z0"
 CONTOUR = "p72a-e13-phase2-vof"
 
@@ -33,11 +46,11 @@ def write(record: dict, output_dir: Path) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--case", choices=("E0", "E1", "E3"), help="Export one case; default is the original E1/E3 pair")
+    parser.add_argument("--case", choices=("E0", "E1", "E3", "E2.7"), help="Export one case; default is the original E1/E3 pair")
     args = parser.parse_args()
     cases = (args.case,) if args.case else ("E1", "E3")
-    output_dir = (ROOT / "PyAnsys/output/phase72a_e0_native_vof_contour_20260923") if args.case == "E0" else OUT
-    remote_dir = (REMOTE_DIR.parent / "E0-VOF-20260923") if args.case == "E0" else REMOTE_DIR
+    output_dir = OUTPUT_DIRS.get(args.case, OUT)
+    remote_dir = REMOTE_DIRS.get(args.case, REMOTE_DIR)
     output_dir.mkdir(parents=True, exist_ok=True)
     record = {"status": "STARTED", "server_id": "student", "solve_issued": False,
               "surface": {"type": "xy-plane", "z_m": 0.0},
@@ -51,21 +64,24 @@ def main() -> None:
         records = {case: json.loads(MANIFESTS[case].read_text()) for case in cases}
         for case, manifest in records.items():
             assert manifest["status"] == "COMPLETE"
-            assert manifest["terminal_native_iteration_before_save"] == 8586
+            expected_iteration = 8586
+            assert manifest["terminal_native_iteration_before_save"] == expected_iteration
             pair = manifest["durable_final_pair"]
             case_path, data_path = pair["case"], pair["data"]
             assert remote_file_exists(solver, case_path)
             assert remote_file_exists(solver, data_path)
             record["cases"][case] = {"case": case_path, "data": data_path,
                                       "source_manifest": str(MANIFESTS[case].relative_to(ROOT)),
-                                      "checkpoint": "completed final native 8586"}
+                                      "checkpoint": "completed final native 8586",
+                                      "case_sha256": pair["case_sha256"],
+                                      "data_sha256": pair["data_sha256"]}
         write(record, output_dir)
         ensure_remote_directory(solver, str(remote_dir))
         for case in cases:
             info = record["cases"][case]
             solver.settings.file.read_case(file_name=info["case"])
             solver.settings.file.read_data(file_name=info["data"])
-            assert round(float(solver.settings.setup.named_expressions["P71V2Iteration"].get_value())) == 8586
+            assert round(float(solver.settings.setup.named_expressions["P71V2Iteration"].get_value())) == expected_iteration
             surfaces = solver.settings.results.surfaces.plane_surface
             if PLANE not in surfaces.get_object_names():
                 surfaces.create(name=PLANE)

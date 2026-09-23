@@ -46,6 +46,8 @@ def ewf_validator(
     expected_initial_dt: float,
     expected_subiterations: int,
     expected_max_thickness: float,
+    expected_controls: dict[str, Any],
+    expected_flow_momentum_coupling: bool,
 ):
     def validate(solver: Any, _audit: Any) -> None:
         parameters = solver.rp_vars().get("wall-film/model-parameters")
@@ -63,9 +65,23 @@ def ewf_validator(
             <= max(1e-12, expected_max_thickness * 1e-9),
             f"film thickness limit mismatch: {max_thickness!r}",
         )
+        for key, expected in expected_controls.items():
+            actual = alist_value(parameters, key)
+            if isinstance(expected, float):
+                native.require(
+                    actual is not None
+                    and abs(float(actual) - expected) <= max(1e-12, abs(expected) * 1e-9),
+                    f"EWF control {key} mismatch: expected {expected!r}, got {actual!r}",
+                )
+            else:
+                native.require(actual == expected, f"EWF control {key} mismatch: {actual!r}")
         walls = solver.settings.setup.boundary_conditions.wall
         wall_state = walls["wall"].phase["mixture"].wall_film.get_state()
         native.require(wall_state.get("eulerian_film_wall") is True, "wall film is not active on wall")
+        native.require(
+            wall_state.get("enable_flow_momentum_coupling") is expected_flow_momentum_coupling,
+            f"wall flow momentum coupling mismatch: {wall_state.get('enable_flow_momentum_coupling')!r}",
+        )
         bottom_state = walls["bottom"].phase["mixture"].wall_film.get_state()
         native.require(bottom_state.get("eulerian_film_wall") is not True, "bottom unexpectedly became a film wall")
         dpm = solver.settings.setup.models.discrete_phase.get_state()
@@ -79,7 +95,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--build-receipt", type=Path, required=True)
     parser.add_argument("--local-root", type=Path, required=True)
-    parser.add_argument("--case", choices=("E1", "E2", "E2.1", "E2.2", "E3"), required=True)
+    parser.add_argument("--case", choices=("E1", "E2", "E2.1", "E2.2", "E2.3", "E2.4", "E2.5", "E2.6", "E2.7", "E3"), required=True)
     parser.add_argument("--secondary-phase-mode", type=int, required=True)
     parser.add_argument("--max-film-thickness", type=float, required=True)
     parser.add_argument("--report-frequency", type=int, required=True)
@@ -92,7 +108,7 @@ def main() -> int:
     native.require(receipt.get("solve_issued") is False, "prepared build unexpectedly issued a solve")
     expected_build_case = "E1" if args.case == "E3" else args.case
     native.require(receipt.get("case_id", "E1") == expected_build_case, "wrong EWF build recipe")
-    expected_mode = 1 if args.case in {"E2", "E2.1", "E2.2"} else 0
+    expected_mode = 1 if args.case in {"E2", "E2.1", "E2.2", "E2.3", "E2.4", "E2.5", "E2.6", "E2.7"} else 0
     native.require(args.secondary_phase_mode == expected_mode, "wrong EWF phase-coupling mode")
     native.require(args.report_frequency >= 1, "report frequency must be at least one iteration")
     saved = receipt["saved_pair"]
@@ -122,14 +138,38 @@ def main() -> int:
     )
     expected_initial_dt = float(receipt.get("screenshot_model_values", {}).get("adapt-init-dt", 0.0001))
     expected_subiterations = int(receipt.get("screenshot_model_values", {}).get("sub-iter-nums", 5))
+    expected_controls = {
+        "E2.4": {"courant-number": 0.05, "film-message?": True, "sub-iter-interval": 1},
+        "E2.5": {"ewf-adaptive?": False, "timestep-max": 1e-6, "film-message?": True, "sub-iter-interval": 1},
+        "E2.6": {
+            "film-coupled-solution?": True,
+            "ewf-adaptive?": False,
+            "timestep-max": 1e-5,
+            "courant-number": 0.05,
+            "sub-iter-nums": 10,
+            "film-message?": True,
+            "sub-iter-interval": 1,
+        },
+        "E2.7": {
+            "film-coupled-solution?": True,
+            "ewf-adaptive?": False,
+            "timestep-max": 1e-5,
+            "courant-number": 0.05,
+            "sub-iter-nums": 10,
+            "film-message?": True,
+            "sub-iter-interval": 1,
+        },
+    }.get(args.case, {})
     native.validate_model_state = ewf_validator(
         args.secondary_phase_mode,
         expected_initial_dt,
         expected_subiterations,
         args.max_film_thickness,
+        expected_controls,
+        expected_flow_momentum_coupling=args.case != "E2.7",
     )
     native.controlled_delta_record = lambda case_id, ks, cs: {
-        "EWF": "phase-accretion" if case_id in {"E2", "E2.1", "E2.2"} else "basic",
+        "EWF": "phase-accretion" if case_id in {"E2", "E2.1", "E2.2", "E2.3", "E2.4", "E2.5", "E2.6", "E2.7"} else "basic",
         "roughness_height_m": ks,
         "roughness_constant_Cs": cs,
         "film_material": FILM_MATERIAL,
@@ -138,6 +178,11 @@ def main() -> int:
         "film_initial_time_step_s": receipt.get("screenshot_model_values", {}).get("adapt-init-dt"),
         "film_subiterations": receipt.get("screenshot_model_values", {}).get("sub-iter-nums"),
         "film_maximum_thickness_m": receipt.get("screenshot_model_values", {}).get("thickness-limit"),
+        "film_adaptive_time_stepping": receipt.get("screenshot_model_values", {}).get("ewf-adaptive?"),
+        "film_courant_number": receipt.get("screenshot_model_values", {}).get("courant-number"),
+        "film_fixed_time_step_s": receipt.get("screenshot_model_values", {}).get("timestep-max") if case_id in {"E2.5", "E2.6", "E2.7"} else None,
+        "film_coupled_solution": receipt.get("screenshot_model_values", {}).get("film-coupled-solution?"),
+        "film_flow_momentum_coupling": case_id != "E2.7",
         "interaction_basis": "E1-basic-EWF-plus-R3-roughness" if case_id == "E3" else None,
         "authoritative_baseline_case": receipt["parent_case"],
         "authoritative_baseline_data": receipt["parent_data"],

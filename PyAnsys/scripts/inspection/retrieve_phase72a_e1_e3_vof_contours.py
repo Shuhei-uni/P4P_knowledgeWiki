@@ -17,10 +17,13 @@ OUT = ROOT / "PyAnsys/output/phase72a_e1_e3_native_vof_contours_20260923_v2"
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--case", choices=("E0", "E1", "E3"), help="Retrieve one case; default is the original E1/E3 pair")
+    parser.add_argument("--case", choices=("E0", "E1", "E3", "E2.7"), help="Retrieve one case; default is the original E1/E3 pair")
     args = parser.parse_args()
     cases = (args.case,) if args.case else ("E1", "E3")
-    output_dir = (ROOT / "PyAnsys/output/phase72a_e0_native_vof_contour_20260923") if args.case == "E0" else OUT
+    output_dir = {
+        "E0": ROOT / "PyAnsys/output/phase72a_e0_native_vof_contour_20260923",
+        "E2.7": ROOT / "PyAnsys/output/phase72a_e27_native_vof_contour_20260923",
+    }.get(args.case, OUT)
     manifest_path = output_dir / "export-manifest.json"
     manifest = json.loads(manifest_path.read_text())
     assert manifest["status"] == "EXPORTED_NATIVE_FLUENT_AWAIT_LOCAL_QA"

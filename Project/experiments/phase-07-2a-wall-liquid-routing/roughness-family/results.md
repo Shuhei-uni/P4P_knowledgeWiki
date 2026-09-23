@@ -2,14 +2,14 @@
 
 ## Outcome
 
-Family R is complete for `R0`–`R7`. The human-requested rougher extensions
+Family R is complete for `R0`–`R11`, including the human-selected `C_s` sensitivity at the R3 and R5 roughness heights. The human-requested rougher extensions
 reduced the modeled phase-2 `steamoutlet` flux magnitude relative to the smooth
 control: `R4` by `9.79%`, `R5` by `20.58%`, `R6` by `38.38%`, and `R7` by
 `44.09%` over the matched tail-500 window.
 This reverses the earlier R0–R3 negative outlet screen, but does **not** establish
-improved separation or wall drainage. `R4` remains oscillatory with elevated
+improved separation or wall drainage. `R4` and `R9` show oscillatory outlet histories, and R9 has elevated
 late residuals; `R5`–`R7` lost about `162`, `183`, and `187 kg` of domain liquid
-over their respective child runs. Their lower outlet flux may reflect liquid
+over their respective child runs. The `C_s` sensitivity reduced outlet magnitude further at matched `k_s`, while R8–R11 lost `6`, `34`, `180`, and `186 kg`, respectively. Their lower outlet flux may reflect liquid
 depletion rather than improved routing. The source-inclusive ledger is
 non-closing, and the wall-surface
 velocity report cannot resolve near-wall motion. Phase 7.2A remains open while
@@ -17,7 +17,7 @@ the independent EWF branch is separately owned.
 
 ## Execution identity and controls
 
-All eight children were run on Server 1 from the same verified native-iteration
+All twelve children were run on Server 1 from the same verified native-iteration
 5586 parent:
 
 - case SHA-256: `4fd493972839929f1f0922ad42679456d1f4aea294da86e4b13d6b7c32f754fc`;
@@ -46,6 +46,8 @@ native-coordinate checks, wall-only readbacks, prepared save/reopen gates,
 and terminal durable pair reopens passed. Their queue and case manifests
 report `COMPLETE` at native iteration 8586.
 
+`R8`–`R11` followed the [roughness-constant sensitivity setup](extension-r8-r11-setup.md). At both `k_s=5e-4 m` and `2e-3 m`, `C_s=0.75` and `1.0` were tested as fresh children of the common native-5586 parent. All four passed wall-only readback, unchanged-model audit, prepared save/reopen, one `/solve/iterate 3000` TUI command, 12 paired 250-iteration server-local checkpoints, 16 report histories with 3001 points each, and terminal durable-pair reopen at 8586. The four manifests report `COMPLETE`; no AMG, FPE, nonfinite, or fatal event occurred. Reverse-flow and turbulent-viscosity-limit messages occurred on all 3000 iterations in every case.
+
 The R0 Windows directory-list helper returned an invalid-path message after the
 solve, so its manifest's parsed directory inventory is empty. Its native solve
 transcript independently records all 12 paired checkpoint writes. The parser
@@ -59,16 +61,20 @@ retained: the phase-2 `steamoutlet` values are negative, and carryover is
 compared by magnitude. `±` is the sample standard deviation over the tail-500
 window, not an uncertainty interval.
 
-| Case | `k_s` (m) | Phase-2 outlet (kg/s) | Magnitude change vs R0 | Total liquid mass (kg) | Mass slope (kg/iteration) | Lower-zone liquid mass (kg) | Mean absorber command error (kg/s) |
+| Case | `k_s` (m) | `C_s` | Phase-2 outlet (kg/s) | Magnitude change vs R0 | Total liquid mass (kg) | Mass slope (kg/iteration) | Lower-zone liquid mass (kg) | Mean absorber command error (kg/s) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| `R0` | `0` | `-24.3715 ± 0.0219` | `0.00%` | `296.022` | `+3.52e-4` | `0.0957` | `-0.603` |
-| `R1` | `5e-5` | `-29.5412 ± 0.0338` | `+21.21%` | `320.652` | `-1.78e-4` | `0.0971` | `-2.382` |
-| `R2` | `2e-4` | `-28.0762 ± 0.0314` | `+15.20%` | `312.905` | `+3.54e-5` | `0.1132` | `-1.609` |
-| `R3` | `5e-4` | `-24.6518 ± 0.0583` | `+1.15%` | `298.154` | `+1.36e-4` | `0.1770` | `-0.244` |
-| `R4` | `1e-3` | `-21.9851 ± 1.2723` | `-9.79%` | `262.490` | `-6.17e-4` | `0.2133` | `~0` |
-| `R5` | `2e-3` | `-19.3568 ± 0.0114` | `-20.58%` | `134.086` | `+5.34e-4` | `0.2635` | `~0` |
-| `R6` | `4e-3` | `-15.0171 ± 0.0161` | `-38.38%` | `111.973` | `+1.32e-3` | `0.3636` | `~0` |
-| `R7` | `8e-3` | `-13.6253 ± 0.0331` | `-44.09%` | `108.803` | `-4.36e-5` | `0.2805` | `~0` |
+| `R0` | `0` | `0.5` | `-24.3715 ± 0.0219` | `0.00%` | `296.022` | `+3.52e-4` | `0.0957` | `-0.603` |
+| `R1` | `5e-5` | `0.5` | `-29.5412 ± 0.0338` | `+21.21%` | `320.652` | `-1.78e-4` | `0.0971` | `-2.382` |
+| `R2` | `2e-4` | `0.5` | `-28.0762 ± 0.0314` | `+15.20%` | `312.905` | `+3.54e-5` | `0.1132` | `-1.609` |
+| `R3` | `5e-4` | `0.5` | `-24.6518 ± 0.0583` | `+1.15%` | `298.154` | `+1.36e-4` | `0.1770` | `-0.244` |
+| `R4` | `1e-3` | `0.5` | `-21.9851 ± 1.2723` | `-9.79%` | `262.490` | `-6.17e-4` | `0.2133` | `~0` |
+| `R5` | `2e-3` | `0.5` | `-19.3568 ± 0.0114` | `-20.58%` | `134.086` | `+5.34e-4` | `0.2635` | `~0` |
+| `R6` | `4e-3` | `0.5` | `-15.0171 ± 0.0161` | `-38.38%` | `111.973` | `+1.32e-3` | `0.3636` | `~0` |
+| `R7` | `8e-3` | `0.5` | `-13.6253 ± 0.0331` | `-44.09%` | `108.803` | `-4.36e-5` | `0.2805` | `~0` |
+| `R8` | `5e-4` | `0.75` | `-22.6660 ± 0.1292` | `-7.00%` | `290.038` | `-6.82e-5` | `0.2065` | `~0` |
+| `R9` | `5e-4` | `1.0` | `-21.8994 ± 1.2839` | `-10.14%` | `261.805` | `-3.64e-4` | `0.2152` | `-0.0623` |
+| `R10` | `2e-3` | `0.75` | `-15.7045 ± 0.0066` | `-35.56%` | `115.773` | `-2.86e-4` | `0.3436` | `~0` |
+| `R11` | `2e-3` | `1.0` | `-14.0164 ± 0.0160` | `-42.49%` | `109.746` | `-7.85e-4` | `0.3671` | `-0.0813` |
 
 The total-inventory slopes are small over the matched tail, but this does not
 erase the much larger whole-run inventory changes. `R4` finishes at `262.135 kg`
@@ -91,10 +97,34 @@ No case recorded an AMG failure, floating-point exception, nonfinite value, or f
 solver event. Reversed-flow and turbulent-viscosity-limit messages persist in
 all children and are therefore retained as solver-health context, not hidden.
 
+
+## Roughness-constant sensitivity
+
+At the R3 height (`k_s=5e-4 m`), increasing `C_s` from `0.5` to `0.75`
+changed tail-500 phase-2 outlet magnitude by `-8.06%` relative to R3; at
+`C_s=1.0` the change was `-11.17%`. R8 was comparatively tight (`SD=0.129
+kg/s`); R9 was highly variable (`SD=1.284 kg/s`) and its tail outlet trend
+was `+4.93e-3 kg/s per iteration`. Their total domain liquid losses were
+`6.01 kg` and `34.33 kg`, respectively.
+
+At the R5 height (`k_s=2e-3 m`), the outlet magnitude fell a further `18.87%`
+for `C_s=0.75` and `27.59%` for `C_s=1.0` relative to R5 (`C_s=0.5`). The
+corresponding whole-run domain liquid losses grew from `161.66 kg` in R5 to
+`180.21 kg` in R10 and `186.33 kg` in R11. This reinforces the existing
+interpretation: larger modeled roughness response coincides with severe domain
+liquid depletion and does not demonstrate improved separation.
+
+The four matched child windows all end at native iteration 8586. R8, R10,
+and R11 have relatively narrow outlet tails; R9 is strongly oscillatory. All
+four have large negative phase-2 source-inclusive closure means (about `-22.64`,
+`-21.88`, `-15.71`, and `-14.04 kg/s` for R8–R11 by the runner's sign-retained
+ledger), so this sensitivity remains a modeled response screen and not an
+absolute balance or physical validation.
+
 ## Claim limits
 
 - The direct matched response is non-monotonic: `R1`–`R3` did not reduce outlet
-  carryover, whereas `R4`–`R7` did. `R7` gives the lowest modeled outlet flux,
+  carryover, whereas `R4`–`R11` did. `R11` gives the lowest modeled outlet flux,
   not a qualified separation improvement.
 - The outer-wall surface-area-average liquid vertical velocity is identically
   zero in every child because the report samples the no-slip wall surface. It
@@ -107,7 +137,7 @@ all children and are therefore retained as solver-health context, not hidden.
 - Lower-zone liquid mass remains highly iteration-oscillatory. Its small mean
   differences are contextual only and are not used to claim successful lower
   delivery.
-- `R4`–`R7` were run under subsequent explicit human extension requests,
+- `R4`–`R11` were run under subsequent explicit human extension requests,
   superseding the original conditional `R4` trigger. No further roughness case
   is selected here.
 
@@ -122,17 +152,20 @@ all children and are therefore retained as solver-health context, not hidden.
 - R6–R7 queue and case manifests:
   `PyAnsys/output/phase72a_family_r/20260923T043840Z/`;
 - eight-case matched metrics, table, and figures:
-  `PyAnsys/output/phase72a_family_r/analysis-20260923T043840Z/`;
+  `PyAnsys/output/phase72a_family_r/analysis-20260923T043840Z/` (R0–R7);
+- twelve-case matched metrics, table, and figures: `PyAnsys/output/phase72a_family_r/analysis-20260923T054600Z-cs-sensitivity-v2/`;
+- R8–R11 queue and case manifests: `PyAnsys/output/phase72a_family_r/20260923T054600Z/`;
 - executable queue owner:
   `PyAnsys/scripts/setup/run_phase72a_family_r_native.py`; and
 - analysis owner:
   `PyAnsys/scripts/inspection/analyze_phase72a_family_r.py`.
 
-The minimum figure set is:
+The twelve-case comparison figure set is:
 
 1. `01-phase2-steamoutlet-carryover.png` — matched carryover response;
 2. `02-liquid-inventories.png` — total and lower-zone inventories;
 3. `03-wall-velocity-and-absorber-error.png` — zero wall-surface velocity and
    absorber tracking error;
 4. `04-vapor-and-absorber.png` — vapor outlet and absorber histories; and
-5. `05-residual-histories.png` — complete child residual histories.
+5. `05-residual-histories.png` — complete child residual histories;
+6. `06-Cs-sensitivity-at-matched-height.png` — direct `C_s` comparison at the R3 and R5 roughness heights.

@@ -145,6 +145,28 @@ mass every native iteration, with the EWF transfer, outlet, closure, and
 solver-health evidence already required for Family E. Its setup and claim
 limits are in [E2.1 setup](ewf-family/e2.1/setup.md).
 
+After E2.4 and E2.5 were each tested individually, the user selected a
+combined E2.6: 10 film sub-iterations, maximum Courant `0.05`, fixed film
+timestep `10e-6 s` (`1e-5 s`), and EWF Coupled Solution ON, retaining the
+`0.3 m` exploratory cap. E2.6 starts independently from the same native-5586
+parent. Since fixed film stepping is selected, the Courant value is retained
+for requested readback but is inactive in time-step selection. The [E2.6
+setup](ewf-family/e2.6/setup.md) records the combined-control interpretation
+limit and every-iteration monitoring contract. E2.6 reached the `0.3 m` cap
+at native 5760 and an FPE at 5765; all 26 native Report Files were recovered
+through 5764. The combined controls delayed failure relative to E2.1 and E2.4
+but not E2.5, without isolating any individual control effect. See the
+[E2.6 result](ewf-family/results.md#e26--combined-ewf-controls--2026-09-23).
+The user next selected E2.7 to repeat the E2.6 controls from the same parent
+while disabling only film-wall Flow Momentum Coupling. Phase Accretion and
+Fluent's separate EWF Coupled Solution option remain on. E2.7 completed native
+5586–8586 without cap or FPE; maximum thickness was `0.000331 m`, and film
+mass reached `3.111 kg`. This is a run-specific numerical improvement over
+E2.6's cap/FPE sequence, not evidence of convergence or physical carryover
+benefit. Liquid inventory and absorber tracking were still moving/off-command.
+See the [E2.7 setup and result](ewf-family/e2.7/setup.md) and
+[Family E results](ewf-family/results.md#e27--flow-momentum-coupling-off--2026-09-23).
+
 ## Decision conditions
 
 The screen is useful only if each child passes parent identity, wall/EWF

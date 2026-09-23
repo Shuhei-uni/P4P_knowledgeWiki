@@ -2,11 +2,12 @@
 
 ## Native phase-2 volume-fraction contours — 2026-09-23
 
-The three Fluent-native contours use the preserved final native-8586
+The four Fluent-native contours use the preserved final native-8586
 case/data pairs, X–Y centre cut at Z = 0 m, `phase-2-vof`, fixed 0–1 scale,
 and matching orthographic camera and 2400 × 1800 export. Source identities
-and settings are in the [E0 export manifest](../../../../PyAnsys/output/phase72a_e0_native_vof_contour_20260923/export-manifest.json)
-and [E1/E3 export manifest](../../../../PyAnsys/output/phase72a_e1_e3_native_vof_contours_20260923_v2/export-manifest.json).
+and settings are in the [E0 export manifest](../../../../PyAnsys/output/phase72a_e0_native_vof_contour_20260923/export-manifest.json),
+[E1/E3 export manifest](../../../../PyAnsys/output/phase72a_e1_e3_native_vof_contours_20260923_v2/export-manifest.json),
+and [E2.7 export manifest](../../../../PyAnsys/output/phase72a_e27_native_vof_contour_20260923/export-manifest.json).
 
 E0 — smooth, EWF off:
 
@@ -20,11 +21,16 @@ E3 — basic EWF plus R3 roughness:
 
 ![E3 phase-2 volume fraction on the X–Y centre cut at native 8586](figures/E3-phase2-vof-xy-z0-final8586.png)
 
-At this scale E0 and E1 look similar; all three cuts are mostly low phase-2
+E2.7 — phase accretion enabled, Flow Momentum Coupling off:
+
+![E2.7 phase-2 volume fraction on the X–Y centre cut at native 8586](figures/E2.7-phase2-vof-xy-z0-final8586.png)
+
+At this scale E0 and E1 look similar; all four cuts are mostly low phase-2
 volume fraction with a narrow wall-adjacent cyan region and no distinct thick
 liquid layer. These are bulk-liquid contours, not EWF film-thickness contours.
-The independent E1/E3 film-thickness reports remain zero, so film cannot be
-inferred from these colours alone. The first E1/E3 export attempt had an
+The independent E1/E3 film-thickness reports remain zero, while E2.7 has a
+measured nonzero but thin wall film. Film thickness cannot be inferred from
+these bulk-volume-fraction colours alone. The first E1/E3 export attempt had an
 off-centre crop and was not used for interpretation.
 
 ## E1/E3 film thickness and steamoutlet liquid escape — 2026-09-23
@@ -107,6 +113,12 @@ AMG/FPE/nonfinite/fatal events in these completed cases.
 | E1 | basic EWF, accretion off, `k_s=0` | complete to 8586; film reports zero | `-24.3617` |
 | E2 | EWF plus phase accretion, `k_s=0` | FPE at 5653; no final pair | unavailable |
 | E2.1 | E2 plus `0.3 m` maximum film thickness | reached cap at 5650; FPE at 5653; no final pair | unavailable |
+| E2.2 | E2.1 plus 20 film sub-iterations | reached cap at 5650; FPE at 5653; no final pair | unavailable |
+| E2.3 | E2.2 plus `1e-6 s` initial film time step | reached cap at 5647; FPE at 5653; no final pair | unavailable |
+| E2.4 | E2.1 with adaptive film Courant `0.05` | reached cap at 5737; FPE at 5742; no final pair | unavailable |
+| E2.5 | E2.1 with fixed `1e-6 s` film time step | reached cap at 6018; FPE at 6022; no final pair | unavailable |
+| E2.6 | E2.1 with 10 sub-iterations, fixed `1e-5 s`, Courant `0.05`, Coupled Solution ON | cap at 5760; FPE at 5765; 26 native reports recovered through 5764 | unavailable |
+| E2.7 | E2.6 settings with film-wall Flow Momentum Coupling OFF; Phase Accretion and Coupled Solution ON | complete to 8586; no cap or FPE; 26 native reports recovered | `-1.7361` |
 | E3 | E1 basic EWF plus R3 roughness, `k_s=5e-4 m`, `C_s=0.5` | complete to 8586; film reports zero | `-24.6178` |
 
 Fluent signs are retained (negative means outflow). The E0 mean uses 991
@@ -164,6 +176,110 @@ have remained stable beyond that value. There is no valid post-parent
 checkpoint: the first scheduled 250-iteration checkpoint was not reached.
 The prepared native-5586 pair and all per-iteration reports are preserved.
 E2.1 is a numerical block, not a completed carryover or drainage comparison.
+
+## E2.2 — sub-iteration recovery — 2026-09-23
+
+E2.2 repeated E2.1 from the verified native-5586 parent and changed only the
+EWF film sub-iterations from 5 to 20. The `0.3 m` thickness cap, phase
+accretion, `1e-4 s` initial film time step, and other settings were preserved
+and verified after save/reopen. Native Report Files were configured at
+frequency `1`; all 26 active files were recovered with 67 samples each from
+5586 to 5652. The [native histories](../../../../PyAnsys/output/phase72a_ewf_student_e22_run_20260923T053831Z/E2.2/e22-native-report-histories_20260923_174911.json),
+[aligned E2.1/E2.2 history](../../../../PyAnsys/output/phase72a_ewf_student_e22_run_20260923T053831Z/E2.2/e21-e22-aligned-film-history.csv),
+and [summary](../../../../PyAnsys/output/phase72a_ewf_student_e22_run_20260923T053831Z/E2.2/e22-summary.json) preserve the samples.
+
+E2.2 also first hit the `0.3 m` cap at 5650 and failed with AMG divergence and
+FPE at 5653. At 5649, one iteration before the cap, its maximum thickness
+(`0.02165 m`) and maximum Courant (`342`) were already above E2.1's
+`0.007735 m` and `24.6`. By 5652 the reported film mass had risen to
+`10070 kg` and maximum Courant was infinite; these are numerical-divergence
+artifacts, not physical predictions. Raising sub-iterations did not prevent
+or delay the cap/FPE event and the run produced no valid post-parent
+checkpoint. The [paired figure](figures/E2.1-E2.2-iteration-monitoring.png)
+shows the two histories on the same native-iteration axis.
+
+## E2.3 — reduced initial film time step — 2026-09-23
+
+E2.3 repeated E2.2 from the verified native-5586 parent, changing only the
+initial film time step from `1e-4 s` to `1e-6 s`; the `0.3 m` cap and 20 film
+sub-iterations were retained. The saved/reopened readback confirmed all three
+settings. Native Report Files were configured at frequency `1`; all 26 active
+files were recovered with 67 samples each from native 5586–5652. Evidence is
+preserved in the [native histories](../../../../PyAnsys/output/phase72a_ewf_student_e23_run_20260923T055258Z/E2.3/e23-native-report-histories_20260923_180234.json),
+[aligned E2.1–E2.3 histories](../../../../PyAnsys/output/phase72a_ewf_student_e23_run_20260923T055258Z/E2.3/e21-e23-aligned-film-history.csv),
+[summary](../../../../PyAnsys/output/phase72a_ewf_student_e23_run_20260923T055258Z/E2.3/e23-summary.json), and [comparison figure](figures/E2.1-E2.3-iteration-monitoring.png).
+
+The smaller initial step did not postpone the instability. Maximum thickness
+first hit `0.3 m` at native 5647, three iterations earlier than E2.1/E2.2;
+maximum film Courant was `21661` at 5647, `12894` at 5649, and `5.18e13` at
+5650. Film mass rose from `0.114 kg` at 5646 to `12.61 kg` at 5647, then to
+`10219 kg` by the last sample at 5652 as maximum Courant became infinite.
+These post-onset values are numerical divergence artifacts. The transcript
+records AMG divergence and FPE at 5653. No 250-iteration checkpoint was
+reached, and no valid post-parent case/data pair exists.
+
+Across E2.1–E2.3, changing the cap, film sub-iterations, and initial film
+time step did not prevent the early FPE. All three reached the `0.3 m` cap
+before failure. The evidence shows numerical instability in this setup; it
+does not establish that phase accretion itself is physically invalid. No
+carryover, drainage, steady-state, or physical-thickness claim is supported.
+
+## E2.4 — lower adaptive film Courant number — 2026-09-23
+
+E2.4 repeated the E2.1 phase-accretion case independently from the verified
+native-5586 parent, retaining its `0.3 m` thickness cap, five film
+sub-iterations, and `1e-4 s` initial film step. The only scientific control
+change was adaptive EWF maximum Courant `0.25 -> 0.05`. Fluent-native surface
+report definitions for maximum/area-average film thickness, total film mass,
+film Courant, and phase-accretion quantities were linked to Report Files at
+every iteration. The native flow residual monitor was retained, and the
+native EWF sub-iteration residuals (`h`, `u`, `v`) were printed to the solve
+transcript every film sub-iteration.
+
+E2.4 reached the `0.3 m` maximum film-thickness cap at native `5737` and then
+failed with FPE at `5742`; the last complete report sample is `5741`. Compared
+with E2.1 (cap at `5650`, FPE at `5653`), the lower adaptive Courant delayed
+the cap by 87 iterations and the FPE by 89. It did not prevent cap-reaching or
+numerical failure. During terminal divergence, maximum film Courant and the
+`h/u/v` residuals became astronomically large or infinite; terminal film mass
+and thickness after the cap are not physically interpretable.
+
+Evidence is in the [E2.4 setup and result](e2.4/setup.md), the [E2.1/E2.4/E2.5
+cap-hit comparison figure](figures/E2.1-E2.5-film-thickness-monitoring.png), [native
+every-iteration report histories](../../../../PyAnsys/output/phase72a_ewf_student_e24_run_20260923T060500Z/E2.4/e24-native-report-histories_20260923_182121.json),
+[summary](../../../../PyAnsys/output/phase72a_ewf_student_e24_run_20260923T060500Z/E2.4/e24-summary.json),
+and [failure transcript](../../../../PyAnsys/output/phase72a_ewf_student_e24_run_20260923T060500Z/E2.4/transcript-failure-tail.txt).
+This supports only that the Courant change delayed the instability in the
+observed run; it does not establish stable film transport or reduced carryover.
+
+## E2.5 — fixed EWF film time step — 2026-09-23
+
+E2.5 independently repeated E2.1 from the verified native-5586 parent, with
+the `0.3 m` thickness cap and five film sub-iterations retained. The adaptive
+film-step flag was OFF and Fluent's fixed EWF `Time-Step` read back as
+`1e-6 s` before and after save/reopen. Fluent-native definitions for maximum
+and area-average thickness, total film mass, Courant, and the phase-accretion
+reports were linked to native Report Files at every iteration. All 26 active
+report files were recovered. Flow residuals were retained with Fluent's
+residual history; EWF `h/u/v` residuals were present in the native solve
+transcript at each film sub-iteration.
+
+Maximum thickness reached the `0.3 m` cap at native `6018`, then Fluent raised
+an FPE at `6022`; the last complete report sample is `6021`. This delayed the
+E2.1 cap/FPE coordinates (`5650`/`5653`) by 368/369 iterations, and extended
+the E2.4 cap/FPE coordinates (`5737`/`5742`) by 281/280 iterations. It did not
+avoid cap-reaching or numerical failure. In the divergence tail the EWF
+residuals reached `1e210`–`1e215`; maximum Courant also exploded. Film mass
+and thickness values after the cap are not interpretable as physical results.
+
+See the [E2.5 setup and result](e2.5/setup.md), [native every-iteration
+reports](../../../../PyAnsys/output/phase72a_ewf_student_e25_run_20260923T062200Z/E2.5/e25-native-report-histories_20260923_183617.json),
+[summary](../../../../PyAnsys/output/phase72a_ewf_student_e25_run_20260923T062200Z/E2.5/e25-summary.json),
+and [native solve transcript](../../../../PyAnsys/output/phase72a_ewf_student_e25_run_20260923T062200Z/E2.5/transcript-native-solve.txt).
+
+E2.5's fixed step prolonged the observed response in that separate setup, but
+did not establish stable film growth, drainage, or reduced carryover. The user
+later selected the combined E2.6 controls; its outcome is reported below.
 
 Evidence: [E0 manifest](../../../../PyAnsys/output/phase72a_ewf_family_e_student_20260922T115500Z/E0/run-manifest.json),
 [E1 manifest](../../../../PyAnsys/output/phase72a_ewf_student_e1_run_20260923T024000Z/E1/run-manifest.json),
@@ -262,3 +378,125 @@ model-parameter, film-wall, roughness-zero, DPM-erosion-off, instrumentation,
 and save/reopen readbacks before solving. Then execute E0, E1, and E2 in order,
 with one native `/solve/iterate 3000` command per valid child as explicitly
 requested for this run.
+
+
+## E2.6 — combined EWF controls — 2026-09-23
+
+E2.6 was built independently from the verified native-5586 parent. The saved
+and reopened model read back 10 film sub-iterations, Courant `0.05`, adaptive
+stepping OFF, fixed EWF timestep `1e-5 s`, EWF Coupled Solution ON, and the
+exploratory `0.3 m` thickness cap. The Courant value is inactive for timestep
+selection with adaptive stepping OFF. The fixed film timestep stayed at
+`1e-5 s`; the film solver typically stopped at 6–8 sub-iterations while
+residuals met its tolerance, then used all 10 in the unstable tail.
+
+Fluent reached the thickness cap at native `5760` and raised an FPE at native
+`5765`; the last complete native report sample is `5764`. All 26 configured
+Fluent Report Files were recovered, each containing 179 samples from 5586
+through 5764. Maximum film Courant first exceeded `0.05` at 5673 despite the
+fixed timestep, which confirms why the stored Courant control should not be
+read as a timestep limiter in this run.
+
+At the cap-hit iteration, maximum thickness was `0.300000012 m`, while
+area-weighted thickness was `0.000658 m`. It remained capped through the last
+report point, when area-weighted thickness had risen to `0.1825 m`. Reported
+film mass rose from `0.00232 kg` at 5587 to `30.96 kg` at the cap, then to
+`8593.59 kg` at 5764. Maximum film Courant escalated from `0.0876` at 5757 to
+`2596.6` at 5759, `7.56e5` at 5760, and infinity at the last point. EWF `h/u/v`
+residuals reached about `2.43e175`, `3.46e175`, and `1.73e172`; Fluent also
+flagged AMG divergence in `k` and `epsilon` before the FPE. The cap and
+post-cap values describe numerical runaway and cannot be interpreted as
+physical film thickness, mass, or transport.
+
+Relative to E2.1, the combined E2.6 run delayed cap/FPE by 110/112 iterations.
+It delayed them 23/23 iterations relative to E2.4 and reached them 258/257
+iterations earlier than E2.5. Since E2.6 changed several settings together,
+these timings do not isolate any one control's effect. No completed outlet,
+drainage, or carryover comparison is available.
+
+The [E2.6 setup](e2.6/setup.md), [monitoring figure](figures/E2.6-combined-film-monitoring.png),
+[native every-iteration report histories](../../../../PyAnsys/output/phase72a_ewf_student_e26_run_20260923T065114Z/E2.6/e26-native-report-histories_20260923_190209.json),
+[summary](../../../../PyAnsys/output/phase72a_ewf_student_e26_run_20260923T065114Z/E2.6/e26-summary.json),
+[run manifest](../../../../PyAnsys/output/phase72a_ewf_student_e26_run_20260923T065114Z/E2.6/run-manifest.json),
+and [native solve transcript](../../../../PyAnsys/output/phase72a_ewf_student_e26_run_20260923T065114Z/E2.6/transcript-native-solve.txt)
+preserve the result.
+
+
+## E2.7 — Flow Momentum Coupling off — 2026-09-23
+
+E2.7 repeated E2.6 from the verified native-5586 parent with the same
+exploratory `0.3 m` film-thickness cap, 10 maximum film sub-iterations, fixed
+film timestep `1e-5 s`, Courant setting `0.05`, adaptive stepping OFF, and EWF
+Coupled Solution ON. The sole intended setting change was disabling Flow
+Momentum Coupling on film wall `wall`; Phase Accretion remained ON. Saved and
+reopened readback confirmed both switches independently. With Flow Momentum
+Coupling OFF, gas-to-film momentum influence remains one-way and the film does
+not feed momentum back to the bulk flow; this is distinct from both Phase
+Accretion and the EWF Coupled Solution algorithm ([Fluent boundary control
+documentation](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_boundary_conditions_task_page.html),
+[Fluent EWF model controls](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_models_task_page.html)).
+
+The full 3,000-iteration continuation completed at native 8586. Fluent
+recovered all 26 native Report Files, each with 3,001 per-iteration samples
+from 5586 through 8586. There was no cap hit, FPE, AMG divergence, nonfinite
+report, or fatal event. Reverse flow and turbulent-viscosity limiting were
+still flagged. The maximum reported film thickness was `0.0003310 m`
+(0.331 mm), versus the `0.3 m` cap; the terminal area-weighted thickness was
+`0.00006607 m` (0.0661 mm). Film mass reached `3.111 kg` at the final report
+point. In the final native 7590–8580 window it rose from `2.149` to `3.106 kg`,
+while maximum thickness varied from `0.297` to `0.328 mm`. The film remained
+small relative to the configured cap, but its upward trend means this window
+does not establish a stationary film state.
+
+At the shared native coordinate 5760, E2.7 reported maximum thickness
+`0.0000703 m` and film mass `0.235 kg`; E2.6 was already at the cap
+(`0.300000 m`) with `30.96 kg` reported film mass and then failed at 5765.
+This is a clear difference in numerical response for these runs, but it is
+not a matched stable comparison beyond E2.6's failure point. The comparison is visualized below; the successful-run
+phase-2 outlet history is in the [flux comparison](#successful-e-family-phase-2-steamoutlet-flux-comparison--2026-09-23).
+
+![E2.6 and E2.7 maximum film thickness and total film mass](figures/E2.6-E2.7-flow-momentum-coupling-comparison.png)
+
+[Open the thickness and film-mass comparison](figures/E2.6-E2.7-flow-momentum-coupling-comparison.png).
+ In the later
+7590–8580 window, phase-2 `steamoutlet` signed flux averaged `-1.7361 kg/s`
+(negative is outflow), total liquid inventory averaged `63.03 kg`, and absorber
+removal averaged `98.23 kg/s` against a `116.92 kg/s` command. The inventory
+and absorber signals were moving or off-command, so this continuation does
+not establish source-inclusive closure, steady carryover, improved drainage,
+or a physical carryover benefit. EWF residuals remained finite overall, but
+their early transient maxima were large (`h=1.83e3`, `u=2.75e4`, `v=105`);
+completion alone does not demonstrate convergence.
+
+The Courant setting `0.05` was retained and verified but is inactive for
+timestep selection because adaptive stepping was OFF. The actual reported
+maximum film Courant reached `0.225` and ended at `0.143`. Thus, within this
+particular numerical setup, turning Flow Momentum Coupling off prevented the
+cap/FPE sequence seen in E2.6 over the tested 3,000 iterations. It does not
+isolate a general physical effect, prove the film solution is converged, or
+qualify Phase Accretion as a predictive carryover mechanism.
+
+See the [E2.7 setup and readback](e2.7/setup.md), [E2.6/E2.7 film
+comparison](figures/E2.6-E2.7-flow-momentum-coupling-comparison.png),
+[native report histories](../../../../PyAnsys/output/phase72a_ewf_student_e27_run_20260923T071523Z/E2.7/report-histories.json),
+[summary](../../../../PyAnsys/output/phase72a_ewf_student_e27_run_20260923T071523Z/E2.7/e27-summary.json),
+[run manifest](../../../../PyAnsys/output/phase72a_ewf_student_e27_run_20260923T071523Z/E2.7/run-manifest.json),
+and [native solve transcript](../../../../PyAnsys/output/phase72a_ewf_student_e27_run_20260923T071523Z/E2.7/transcript-native-solve.txt).
+
+## Successful E-family phase-2 `steamoutlet` flux comparison — 2026-09-23
+
+![Successful E-family phase-2 steamoutlet flux comparison](figures/e-family-phase2-steamoutlet-flux.png)
+
+This simple linear-scale plot compares only E0, E1, E3, and E2.7, the four
+successful E-family runs, over their shared native window 5590–8580. All
+series use the same 10-iteration coordinates; per-iteration E0/E2.7 histories
+were sampled at those existing coordinates without interpolation. Negative
+Fluent flux is outflow. E0 and E1 stay near `-24.4 kg/s`; E3 has a strong early
+transient before returning near that range. E2.7 trends upward from the same
+starting range to about `-1.74 kg/s` by the end. This is
+a history comparison only and does not establish that E2.7's change is a
+physical carryover reduction.
+
+The [aligned values](figures/e-family-phase2-steamoutlet-flux.csv) and
+[Matplotlib script](../../../../PyAnsys/scripts/inspection/plot_phase72a_ewf_family_steamoutlet.py)
+preserve the source and plotting method.

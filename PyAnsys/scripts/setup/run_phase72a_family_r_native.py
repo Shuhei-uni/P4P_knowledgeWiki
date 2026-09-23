@@ -90,6 +90,10 @@ CASES: tuple[tuple[str, float, float], ...] = (
     ("R5", 2e-3, 0.5),
     ("R6", 4e-3, 0.5),
     ("R7", 8e-3, 0.5),
+    ("R8", 5e-4, 0.75),
+    ("R9", 5e-4, 1.0),
+    ("R10", 2e-3, 0.75),
+    ("R11", 2e-3, 1.0),
 )
 
 
@@ -326,6 +330,21 @@ def parse_required_residuals(text: str) -> dict[str, Any]:
     return {"line_count": len(rows), "first_rows": rows[:10], "last_rows": rows[-20:]}
 
 
+def parse_ewf_residuals(text: str) -> dict[str, Any]:
+    """Summarize Fluent's native EWF sub-iteration residual lines (h/u/v)."""
+    rows = [
+        line
+        for line in text.splitlines()
+        if re.search(r"\bsub-iteration:\s*\d+\s+residual\s*-\s*h:", line, re.I)
+    ]
+    return {
+        "line_count": len(rows),
+        "first_rows": rows[:12],
+        "last_rows": rows[-24:],
+        "channels": ["h", "u", "v"],
+    }
+
+
 def checkpoint_pairs_from_transcript(text: str) -> list[dict[str, str]]:
     paths = re.findall(r'Writing to [^:]+:"([^"]+checkpoint-[^"]+\.(?:cas|dat)\.h5)"', text, re.I)
     cases = {path[:-7]: path for path in paths if path.casefold().endswith(".cas.h5")}
@@ -471,6 +490,7 @@ def one_case(solver: Any, case_id: str, ks: float, cs: float, stamp: str, local_
         manifest["terminal_native_clock_before_save"] = native_clock(solver)
         manifest["terminal_native_iteration_before_save"] = authoritative_native_iteration(solver)
         manifest["residual_transcript_summary"] = parse_required_residuals(transcript)
+        manifest["ewf_residual_transcript_summary"] = parse_ewf_residuals(transcript)
         require(authoritative_native_iteration(solver) == start + HORIZON, f"native solve ended at {authoritative_native_iteration(solver)}, expected {start + HORIZON}")
         if flags["amg"] or flags["fpe"] or flags["nonfinite"] or flags["fatal"]:
             manifest["first_event_preserved"] = transcript[:20000]
@@ -522,7 +542,10 @@ def one_case(solver: Any, case_id: str, ks: float, cs: float, stamp: str, local_
         if capture is not None:
             try:
                 capture.wait_until_quiet(quiet_seconds=1.0, timeout_seconds=5.0)
-                (case_local / "transcript-failure-tail.txt").write_text(capture.text_since(0)[-50000:], encoding="utf-8")
+                captured = capture.text_since(0)
+                (case_local / "transcript-failure-tail.txt").write_text(captured[-50000:], encoding="utf-8")
+                manifest["residual_transcript_summary"] = parse_required_residuals(captured)
+                manifest["ewf_residual_transcript_summary"] = parse_ewf_residuals(captured)
             except Exception:
                 pass
         manifest["status"] = "BLOCKED"

@@ -75,6 +75,7 @@ SCREENSHOT_MODEL_VALUES = {
     "sub-iter-stop": 1e-5,
     "sub-iter-nums": 5,
     "sub-iter-interval": 1,
+    "film-message?": True,
 }
 
 
@@ -115,8 +116,11 @@ def critical_readback(solver: Any) -> dict[str, Any]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--case", choices=("E1", "E2", "E2.1", "E2.2"), default="E1")
+    parser.add_argument("--case", choices=("E1", "E2", "E2.1", "E2.2", "E2.3", "E2.4", "E2.5", "E2.6", "E2.7"), default="E1")
     parser.add_argument("--initial-film-dt", type=float, default=0.0001)
+    parser.add_argument("--film-courant", type=float)
+    parser.add_argument("--adaptive-film-timestep", choices=("on", "off"))
+    parser.add_argument("--fixed-film-timestep", type=float)
     parser.add_argument("--film-subiterations", type=int, default=5)
     parser.add_argument("--max-film-thickness", type=float, default=0.01)
     parser.add_argument("--report-frequency", type=int, default=10)
@@ -126,6 +130,8 @@ def main() -> int:
     )
     args = parser.parse_args()
     require(args.initial_film_dt > 0, "initial film time step must be positive")
+    require(args.film_courant is None or args.film_courant > 0, "film Courant number must be positive")
+    require(args.fixed_film_timestep is None or args.fixed_film_timestep > 0, "fixed film time step must be positive")
     require(args.film_subiterations >= 1, "film sub-iterations must be positive")
     require(args.max_film_thickness > 0, "maximum film thickness must be positive")
     require(args.report_frequency >= 1, "report frequency must be at least one iteration")
@@ -182,10 +188,23 @@ def main() -> int:
             "EWF screenshot controls are missing from this release",
         )
         target_values = dict(SCREENSHOT_MODEL_VALUES)
-        target_values["secondary-phase-mode"] = 1 if args.case in {"E2", "E2.1", "E2.2"} else 0
+        target_values["secondary-phase-mode"] = 1 if args.case in {"E2", "E2.1", "E2.2", "E2.3", "E2.4", "E2.5", "E2.6", "E2.7"} else 0
         target_values["adapt-init-dt"] = args.initial_film_dt
         target_values["sub-iter-nums"] = args.film_subiterations
         target_values["thickness-limit"] = args.max_film_thickness
+        if args.case == "E2.4":
+            target_values["courant-number"] = 0.05
+        elif args.case == "E2.5":
+            target_values["ewf-adaptive?"] = False
+            target_values["timestep-max"] = 1e-6
+        elif args.case in {"E2.6", "E2.7"}:
+            target_values["film-coupled-solution?"] = True
+        if args.film_courant is not None:
+            target_values["courant-number"] = args.film_courant
+        if args.adaptive_film_timestep is not None:
+            target_values["ewf-adaptive?"] = args.adaptive_film_timestep == "on"
+        if args.fixed_film_timestep is not None:
+            target_values["timestep-max"] = args.fixed_film_timestep
         changed_parameters = [
             (key, target_values.get(str(key), value))
             for key, value in previous_parameters
@@ -208,7 +227,8 @@ def main() -> int:
             .wall_film
         )
         film_wall.film_condition_type = "film-wall-boundary"
-        film_wall.enable_flow_momentum_coupling = True
+        flow_momentum_coupling = args.case != "E2.7"
+        film_wall.enable_flow_momentum_coupling = flow_momentum_coupling
         ewf.initialize_wallfilm_model()
         capture.wait_until_quiet(quiet_seconds=1.0, timeout_seconds=10.0)
         transcript = capture.text_since(marker)
@@ -228,14 +248,18 @@ def main() -> int:
         require(FILM_MATERIAL in parameters_text, "film material readback mismatch")
         require(before["film_wall"].get("eulerian_film_wall") is True, "wall is not a film wall")
         require(
+            before["film_wall"].get("enable_flow_momentum_coupling") is flow_momentum_coupling,
+            "film-wall flow momentum coupling readback mismatch",
+        )
+        require(
             before["dpm_erosion_accretion_enabled"] is False,
             "DPM erosion/accretion was unexpectedly enabled",
         )
         require(round(before["native_iteration"]) == PARENT_NATIVE, "probe changed native coordinate")
 
         report_names: list[str] = []
-        required_report_keys = E2_REPORT_KEYS if args.case in {"E2", "E2.1", "E2.2"} else E1_REPORT_KEYS
-        if args.case in {"E2", "E2.1", "E2.2"}:
+        required_report_keys = E2_REPORT_KEYS if args.case in {"E2", "E2.1", "E2.2", "E2.3", "E2.4", "E2.5", "E2.6", "E2.7"} else E1_REPORT_KEYS
+        if args.case in {"E2", "E2.1", "E2.2", "E2.3", "E2.4", "E2.5", "E2.6", "E2.7"}:
             # Fluent 2025 R2 exposes these fields only with Phase Accretion.
             receipt["phase_accretion_report_gate"] = {
                 "mode": current_parameters.get("secondary-phase-mode"),
@@ -273,6 +297,10 @@ def main() -> int:
         )
         require(json.dumps(after["model_parameters"], default=str) == parameters_text, "model parameters did not persist")
         require(after["film_wall"].get("eulerian_film_wall") is True, "film wall did not persist")
+        require(
+            after["film_wall"].get("enable_flow_momentum_coupling") is flow_momentum_coupling,
+            "reopened film-wall flow momentum coupling mismatch",
+        )
         require(round(after["native_iteration"]) == PARENT_NATIVE, "reopen changed native coordinate")
         require(set(report_names).issubset(reopened_reports), "film reports did not persist")
         receipt["status"] = "COMPLETE_NO_SOLVE"

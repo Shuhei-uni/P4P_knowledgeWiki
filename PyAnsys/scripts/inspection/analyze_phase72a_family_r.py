@@ -14,9 +14,10 @@ from typing import Any
 import matplotlib.pyplot as plt
 
 
-CASES = ("R0", "R1", "R2", "R3", "R4", "R5", "R6", "R7")
-ROUGHNESS = {"R0": 0.0, "R1": 5e-5, "R2": 2e-4, "R3": 5e-4, "R4": 1e-3, "R5": 2e-3, "R6": 4e-3, "R7": 8e-3}
-COLORS = {"R0": "#333333", "R1": "#0072B2", "R2": "#E69F00", "R3": "#D55E00", "R4": "#009E73", "R5": "#CC79A7", "R6": "#56B4E9", "R7": "#A6761D"}
+CASES = ("R0", "R1", "R2", "R3", "R4", "R5", "R6", "R7", "R8", "R9", "R10", "R11")
+ROUGHNESS = {"R0": 0.0, "R1": 5e-5, "R2": 2e-4, "R3": 5e-4, "R4": 1e-3, "R5": 2e-3, "R6": 4e-3, "R7": 8e-3, "R8": 5e-4, "R9": 5e-4, "R10": 2e-3, "R11": 2e-3}
+ROUGHNESS_CONSTANT = {case: (0.75 if case in ("R8", "R10") else 1.0 if case in ("R9", "R11") else 0.5) for case in CASES}
+COLORS = {case: color for case, color in zip(CASES, ("#333333", "#0072B2", "#E69F00", "#D55E00", "#009E73", "#CC79A7", "#56B4E9", "#A6761D", "#8C564B", "#17BECF", "#BCBD22", "#9467BD"))}
 
 
 def load(path: Path) -> Any:
@@ -86,6 +87,7 @@ def main() -> int:
     parser.add_argument("--r123-root", type=Path, required=True)
     parser.add_argument("--r45-root", type=Path, required=True)
     parser.add_argument("--r67-root", type=Path, required=True)
+    parser.add_argument("--r8-r11-root", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=False)
@@ -95,6 +97,7 @@ def main() -> int:
         **{case: args.r123_root / case for case in ("R1", "R2", "R3")},
         **{case: args.r45_root / case for case in ("R4", "R5")},
         **{case: args.r67_root / case for case in ("R6", "R7")},
+        **{case: args.r8_r11_root / case for case in ("R8", "R9", "R10", "R11")},
     }
     manifests = {case: load(root / "run-manifest.json") for case, root in roots.items()}
     histories = {case: load(root / "report-histories.json") for case, root in roots.items()}
@@ -122,34 +125,56 @@ def main() -> int:
     for case in CASES:
         metrics["cases"][case] = {
             "roughness_height_m": ROUGHNESS[case],
-            "roughness_constant": 0.5,
+            "roughness_constant": ROUGHNESS_CONSTANT[case],
             "reports": {name: stats(series(histories[case], name)[1]) for name in report_names},
             "closure_summary": manifests[case]["closure_summary"],
             "solver_events": manifests[case]["native_solve_event_flags"],
             "final_hashes": manifests[case]["final_hashes"],
+            "whole_run_total_liquid_mass_change_kg": series(histories[case], "v2-total-liquid-mass")[1][-1] - series(histories[case], "v2-total-liquid-mass")[1][0],
+            "whole_run_lower_liquid_mass_change_kg": series(histories[case], "v2-lower-liquid-mass")[1][-1] - series(histories[case], "v2-lower-liquid-mass")[1][0],
         }
     baseline = metrics["cases"]["R0"]["reports"]["v2-flux-phase2-steamoutlet"]["mean_last_500"]
     for case in CASES:
         value = metrics["cases"][case]["reports"]["v2-flux-phase2-steamoutlet"]["mean_last_500"]
         metrics["cases"][case]["phase2_outlet_tail500_delta_from_R0_kg_s"] = value - baseline
         metrics["cases"][case]["phase2_outlet_tail500_magnitude_change_from_R0_percent"] = (abs(value) / abs(baseline) - 1.0) * 100.0
+    for case, matched in (("R8", "R3"), ("R9", "R3"), ("R10", "R5"), ("R11", "R5")):
+        value = metrics["cases"][case]["reports"]["v2-flux-phase2-steamoutlet"]["mean_last_500"]
+        reference = metrics["cases"][matched]["reports"]["v2-flux-phase2-steamoutlet"]["mean_last_500"]
+        metrics["cases"][case]["matched_Cs05_reference_case"] = matched
+        metrics["cases"][case]["phase2_outlet_tail500_magnitude_change_from_matched_Cs05_percent"] = (abs(value) / abs(reference) - 1.0) * 100.0
     dump(args.output / "metrics.json", metrics)
 
     with (args.output / "tail-summary.csv").open("w", newline="", encoding="utf-8") as handle:
         writer = csv.writer(handle)
-        writer.writerow(("case", "k_s_m", "phase2_outlet_mean_last_500_kg_s", "magnitude_change_from_R0_percent", "wall_y_velocity_mean_last_500_m_s", "total_liquid_mass_slope_last_500_kg_per_iter"))
+        writer.writerow(("case", "k_s_m", "C_s", "phase2_outlet_mean_last_500_kg_s", "magnitude_change_from_R0_percent", "wall_y_velocity_mean_last_500_m_s", "total_liquid_mass_slope_last_500_kg_per_iter", "whole_run_total_liquid_mass_change_kg"))
         for case in CASES:
             reports = metrics["cases"][case]["reports"]
-            writer.writerow((case, ROUGHNESS[case], reports["v2-flux-phase2-steamoutlet"]["mean_last_500"], metrics["cases"][case]["phase2_outlet_tail500_magnitude_change_from_R0_percent"], reports["family-r-outer-wall-liquid-y-velocity"]["mean_last_500"], reports["v2-total-liquid-mass"]["slope_last_500_per_iteration"]))
+            writer.writerow((case, ROUGHNESS[case], ROUGHNESS_CONSTANT[case], reports["v2-flux-phase2-steamoutlet"]["mean_last_500"], metrics["cases"][case]["phase2_outlet_tail500_magnitude_change_from_R0_percent"], reports["family-r-outer-wall-liquid-y-velocity"]["mean_last_500"], reports["v2-total-liquid-mass"]["slope_last_500_per_iteration"], metrics["cases"][case]["whole_run_total_liquid_mass_change_kg"]))
 
     fig, ax = plt.subplots(figsize=(8.2, 4.8))
     for case in CASES:
         x, y = series(histories[case], "v2-flux-phase2-steamoutlet")
-        ax.plot(x, y, color=COLORS[case], lw=1.1, label=f"{case}: $k_s$={ROUGHNESS[case]:g} m")
+        ax.plot(x, y, color=COLORS[case], lw=1.1, label=f"{case}: $k_s$={ROUGHNESS[case]:g}, $C_s$={ROUGHNESS_CONSTANT[case]:g}")
     ax.axvspan(2501, 3000, color="#999999", alpha=0.12, label="tail-500 statistic")
     ax.set(xlabel="Child native iteration offset", ylabel="Phase-2 steamoutlet mass flux (kg/s)", title="Family R liquid carryover response (Fluent sign retained)")
-    ax.grid(alpha=0.25); ax.legend(ncol=3, fontsize=8)
+    ax.grid(alpha=0.25); ax.legend(ncol=3, fontsize=7)
     finish_figure(fig, args.output / "01-phase2-steamoutlet-carryover.png")
+
+    fig, axes = plt.subplots(1, 2, figsize=(10.0, 4.5), sharey=True)
+    for ax, title, group in (
+        (axes[0], "$k_s=5\\times10^{-4}$ m (R3 height)", ("R3", "R8", "R9")),
+        (axes[1], "$k_s=2\\times10^{-3}$ m (R5 height)", ("R5", "R10", "R11")),
+    ):
+        for case in group:
+            x, y = series(histories[case], "v2-flux-phase2-steamoutlet")
+            ax.plot(x, y, color=COLORS[case], lw=1.2, label=f"{case}: $C_s$={ROUGHNESS_CONSTANT[case]:g}")
+        ax.axvspan(2501, 3000, color="#999999", alpha=0.12)
+        ax.set_title(title); ax.set_xlabel("Child native iteration offset")
+        ax.grid(alpha=0.25); ax.legend(fontsize=8)
+    axes[0].set_ylabel("Phase-2 steamoutlet mass flux (kg/s; Fluent sign retained)")
+    fig.suptitle("Roughness-constant sensitivity at matched roughness height")
+    finish_figure(fig, args.output / "06-Cs-sensitivity-at-matched-height.png")
 
     fig, axes = plt.subplots(2, 1, figsize=(8.2, 7.0), sharex=True)
     for case in CASES:
@@ -157,7 +182,7 @@ def main() -> int:
             x, y = series(histories[case], name); ax.plot(x, y, color=COLORS[case], lw=1.0, label=case)
     axes[0].set_ylabel("Total liquid mass (kg)"); axes[1].set_ylabel("Lower-zone liquid mass (kg)")
     axes[1].set_xlabel("Child native iteration offset")
-    for ax in axes: ax.grid(alpha=0.25); ax.legend(ncol=8, fontsize=8)
+    for ax in axes: ax.grid(alpha=0.25); ax.legend(ncol=6, fontsize=7)
     fig.suptitle("Family R liquid inventories")
     finish_figure(fig, args.output / "02-liquid-inventories.png")
 
@@ -169,7 +194,7 @@ def main() -> int:
         axes[1].plot(x, y, color=COLORS[case], lw=1.0, label=case)
     axes[0].axhline(0, color="black", lw=0.7); axes[0].set_ylabel("Outer-wall liquid $v_y$ (m/s)\n(+ upward, − downward)")
     axes[1].axhline(0, color="black", lw=0.7); axes[1].set_ylabel("Absorber command error (kg/s)"); axes[1].set_xlabel("Child native iteration offset")
-    for ax in axes: ax.grid(alpha=0.25); ax.legend(ncol=8, fontsize=8)
+    for ax in axes: ax.grid(alpha=0.25); ax.legend(ncol=6, fontsize=7)
     fig.suptitle("Wall-routing response and absorber tracking")
     finish_figure(fig, args.output / "03-wall-velocity-and-absorber-error.png")
 
@@ -189,13 +214,13 @@ def main() -> int:
     fig.suptitle("Vapor routing and absorber response")
     finish_figure(fig, args.output / "04-vapor-and-absorber.png")
 
-    fig, axes = plt.subplots(4, 2, figsize=(10.2, 13.0), sharex=True, sharey=True)
+    fig, axes = plt.subplots(6, 2, figsize=(10.2, 18.0), sharex=True, sharey=True)
     for ax, case in zip(axes.flat, CASES):
         data = residuals(roots[case] / "transcript-native-solve.txt")
         for name in ("continuity", "x-velocity", "y-velocity", "z-velocity", "k", "epsilon", "vf-phase-2"):
             ax.semilogy(data["offset"], data[name], lw=0.75, label=name)
         ax.set_title(case); ax.grid(alpha=0.2)
-    axes[3, 0].set_xlabel("Child native iteration offset"); axes[3, 1].set_xlabel("Child native iteration offset")
+    axes[5, 0].set_xlabel("Child native iteration offset"); axes[5, 1].set_xlabel("Child native iteration offset")
     for ax in axes[:, 0]: ax.set_ylabel("Scaled residual")
     handles, labels = axes[0, 0].get_legend_handles_labels(); fig.legend(handles, labels, ncol=4, loc="lower center", fontsize=8)
     fig.suptitle("Family R solver residual histories")
