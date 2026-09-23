@@ -136,6 +136,15 @@ plus R3 roughness, with no phase accretion or additional film-physics option.
 Its clean two-factor contrast is E0/E1/R3/E3, judged by the same matched-window
 carryover, film, closure, inventory, and solver-health evidence.
 
+The human also selected E2.1 on 2026-09-23 after reviewing the EWF result:
+repeat E2's phase-accretion setup from the same verified 5586 parent, changing
+only the Fluent maximum film-thickness limit from `0.01 m` to `0.3 m`. Treat
+this as an exploratory numerical-limit sensitivity, not a physical film
+thickness target. Record maximum and area-weighted film thickness and film
+mass every native iteration, with the EWF transfer, outlet, closure, and
+solver-health evidence already required for Family E. Its setup and claim
+limits are in [E2.1 setup](ewf-family/e2.1/setup.md).
+
 ## Decision conditions
 
 The screen is useful only if each child passes parent identity, wall/EWF

@@ -115,9 +115,11 @@ def critical_readback(solver: Any) -> dict[str, Any]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--case", choices=("E1", "E2"), default="E1")
+    parser.add_argument("--case", choices=("E1", "E2", "E2.1", "E2.2"), default="E1")
     parser.add_argument("--initial-film-dt", type=float, default=0.0001)
     parser.add_argument("--film-subiterations", type=int, default=5)
+    parser.add_argument("--max-film-thickness", type=float, default=0.01)
+    parser.add_argument("--report-frequency", type=int, default=10)
     parser.add_argument("--local-root", type=Path, required=True)
     parser.add_argument(
         "--stamp", default=datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
@@ -125,6 +127,8 @@ def main() -> int:
     args = parser.parse_args()
     require(args.initial_film_dt > 0, "initial film time step must be positive")
     require(args.film_subiterations >= 1, "film sub-iterations must be positive")
+    require(args.max_film_thickness > 0, "maximum film thickness must be positive")
+    require(args.report_frequency >= 1, "report frequency must be at least one iteration")
     local_root = args.local_root.expanduser().resolve()
     local_root.mkdir(parents=True, exist_ok=False)
     receipt_path = local_root / "probe-receipt.json"
@@ -178,9 +182,10 @@ def main() -> int:
             "EWF screenshot controls are missing from this release",
         )
         target_values = dict(SCREENSHOT_MODEL_VALUES)
-        target_values["secondary-phase-mode"] = 1 if args.case == "E2" else 0
+        target_values["secondary-phase-mode"] = 1 if args.case in {"E2", "E2.1", "E2.2"} else 0
         target_values["adapt-init-dt"] = args.initial_film_dt
         target_values["sub-iter-nums"] = args.film_subiterations
+        target_values["thickness-limit"] = args.max_film_thickness
         changed_parameters = [
             (key, target_values.get(str(key), value))
             for key, value in previous_parameters
@@ -229,8 +234,8 @@ def main() -> int:
         require(round(before["native_iteration"]) == PARENT_NATIVE, "probe changed native coordinate")
 
         report_names: list[str] = []
-        required_report_keys = E2_REPORT_KEYS if args.case == "E2" else E1_REPORT_KEYS
-        if args.case == "E2":
+        required_report_keys = E2_REPORT_KEYS if args.case in {"E2", "E2.1", "E2.2"} else E1_REPORT_KEYS
+        if args.case in {"E2", "E2.1", "E2.2"}:
             # Fluent 2025 R2 exposes these fields only with Phase Accretion.
             receipt["phase_accretion_report_gate"] = {
                 "mode": current_parameters.get("secondary-phase-mode"),
@@ -247,7 +252,7 @@ def main() -> int:
                 surfaces=["wall"],
                 object_policy="replace",
                 create_history_file=False,
-                frequency=10,
+                frequency=args.report_frequency,
             )
             report_names.append(configured["name"])
             receipt["ewf_reports"].append(configured)

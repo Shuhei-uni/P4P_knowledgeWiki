@@ -37,6 +37,26 @@ zero signal, not a missing report. The [aligned values](../../../../PyAnsys/outp
 and [source/summary record](../../../../PyAnsys/output/phase72a_family_e_e1_e3_film_escape_20260923/summary.json)
 preserve report identities and original Fluent flux signs.
 
+### Interpretation of the zero-thickness histories
+
+The zero is consistent with the E1/E3 configuration. EWF was enabled and
+solved on `wall`, but both cases used `secondary_phase_mode=0` (phase
+accretion off); the wall film began with zero film height. DPM coupling,
+phase change, and an imposed film source were also off. Thus these runs had no
+configured source to transfer the continuous phase-2 liquid into the wall
+film. Fluent documents Eulerian secondary-phase capture as the separate
+Phase Accretion interaction, with the collected secondary-phase material
+matching the film material ([2025 R2 model options](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_ewf_sec_options.html),
+[2025 R2 theory guide](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_th/flu_th_ewf_sec_film_submodels.html)).
+The E1 transcript shows the film solver advancing, and the thickness histories
+are populated at every sample, so the recorded zero is consistent with a dry
+film state rather than a missing report. E3 kept the same no-accretion EWF
+settings while changing roughness; its zero film history therefore does not
+test whether phase-2 liquid would accrete under active Phase Accretion. The
+recorded settings are preserved in the [E1 manifest](../../../../PyAnsys/output/phase72a_ewf_student_e1_run_20260923T024000Z/E1/run-manifest.json),
+[E3 manifest](../../../../PyAnsys/output/phase72a_ewf_student_e3_run_20260923T032500Z/E3/run-manifest.json),
+and [EWF configuration probe](../../../../PyAnsys/output/phase72a_ewf_student_e1_build_20260923T022700Z/probe-receipt.json).
+
 The phase-2 `steamoutlet` signed flux is negative for outflow. Shown as
 positive escape magnitude, its native 7590–8580 mean was 24.3617 kg/s for
 E1 and 24.6178 kg/s for E3 (+0.2561 kg/s, +1.05%). E3 also had a strong
@@ -86,6 +106,7 @@ AMG/FPE/nonfinite/fatal events in these completed cases.
 | E0 | EWF off, `k_s=0` | complete to 8586 | `-24.3686` |
 | E1 | basic EWF, accretion off, `k_s=0` | complete to 8586; film reports zero | `-24.3617` |
 | E2 | EWF plus phase accretion, `k_s=0` | FPE at 5653; no final pair | unavailable |
+| E2.1 | E2 plus `0.3 m` maximum film thickness | reached cap at 5650; FPE at 5653; no final pair | unavailable |
 | E3 | E1 basic EWF plus R3 roughness, `k_s=5e-4 m`, `C_s=0.5` | complete to 8586; film reports zero | `-24.6178` |
 
 Fluent signs are retained (negative means outflow). The E0 mean uses 991
@@ -99,6 +120,9 @@ fields `film-phase2-mass` and `film-phase2-mass-collection`. Film mass rose
 from about `0.059 kg` at 5590 to `0.170 kg` at 5640. At 5650 maximum film
 thickness hit its configured `0.01 m` limit and maximum film Courant jumped
 to about `5.1e5`; film/bulk residuals then diverged with AMG and FPE events.
+This initial mass increase is direct evidence that the phase-accretion setup
+did create film before the numerical failure; it does not provide a completed
+carryover or drainage comparison.
 No 250-iteration checkpoint was reached. A separately labelled technical
 recovery, changing only the initial film time step from `1e-4` to `1e-6 s`,
 reproduced a floating-point exception near 5652. Its Python client remained
@@ -107,6 +131,39 @@ therefore its manifest is stale at `RUNNING_FLUENT_NATIVE_SOLVE`. The clean
 pre-solve pair was preserved. A bounded MCP status probe then found the
 student Fluent endpoint unresponsive. An additional proposed recovery that
 changes only film sub-iterations from 5 to 20 remains unrun.
+
+## E2.1 — maximum-thickness sensitivity — 2026-09-23
+
+E2.1 repeated E2 from the verified native-5586 parent, changing only Fluent's
+maximum film thickness from `0.01 m` to `0.3 m`. The saved/reopened build
+read back `0.3 m`, with phase accretion active. Fluent native Report Files
+were configured at frequency `1` and recovered for all 26 active reports;
+each contains 67 samples at every native iteration from 5586 through 5652.
+The maximum and area-weighted thickness, film mass, phase-2 film
+mass/collection, film outflow/velocity, maximum film Courant, phase-resolved
+outlet flux, inventory, absorber, and closure definitions are in the
+[recovered native histories](../../../../PyAnsys/output/phase72a_ewf_student_e21_run_20260923T052000Z/E2.1/e21-native-report-histories_20260923_173131.json).
+
+The maximum film thickness first reached the configured `0.3 m` cap at native
+5650, the same iteration at which E2 reached its `0.01 m` cap. One iteration
+earlier, at 5649, maximum thickness was `0.007735 m`, area-weighted thickness
+was `4.51e-6 m`, total film mass was `0.212 kg`, and maximum film Courant was
+already `24.6`. At 5650 the capped maximum was `0.30000001 m`, film mass
+jumped to `7.03 kg`, and maximum film Courant to `5.09e5`. The last report
+sample at 5652 shows area-weighted thickness `0.154 m`, film mass `7256 kg`,
+and infinite maximum film Courant. Those terminal film values are part of
+numerical divergence and are not physically meaningful predictions. The
+transcript records very large residuals, AMG divergence, and a floating-point
+exception at native 5653. See the [iteration figure](figures/E2.1-native-iteration-monitoring.png)
+and machine-readable [summary](../../../../PyAnsys/output/phase72a_ewf_student_e21_run_20260923T052000Z/E2.1/e21-summary.json).
+
+Raising the cap moved the clipping value from `0.01 m` to `0.3 m` but did not
+prevent the early instability. The event still reaches the active thickness
+limit at 5650, so this run cannot tell us whether an unconstrained film would
+have remained stable beyond that value. There is no valid post-parent
+checkpoint: the first scheduled 250-iteration checkpoint was not reached.
+The prepared native-5586 pair and all per-iteration reports are preserved.
+E2.1 is a numerical block, not a completed carryover or drainage comparison.
 
 Evidence: [E0 manifest](../../../../PyAnsys/output/phase72a_ewf_family_e_student_20260922T115500Z/E0/run-manifest.json),
 [E1 manifest](../../../../PyAnsys/output/phase72a_ewf_student_e1_run_20260923T024000Z/E1/run-manifest.json),

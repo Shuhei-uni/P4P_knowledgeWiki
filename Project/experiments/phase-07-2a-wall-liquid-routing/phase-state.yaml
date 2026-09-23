@@ -4,8 +4,8 @@ phase_question: >-
   through steamoutlet by changing wall-adjacent routing while preserving
   absorber tracking, source-inclusive closure, liquid-inventory behaviour, and
   credible vapor routing relative to the R0 control?
-state: DISCOVERY_PARTIAL_E2_NUMERICAL_BLOCK
-planning_state: BASELINE_SELECTED_MECHANISM_SCREEN_EXECUTED_WITH_E2_BLOCK
+state: DISCOVERY_PARTIAL_E2_E2_1_NUMERICAL_BLOCK_E2_2_RUNNING
+planning_state: BASELINE_SELECTED_MECHANISM_SCREEN_WITH_E2_2_NUMERICAL_RECOVERY_RUNNING
 
 context:
   path: Project/experiments/phase-07-2a-wall-liquid-routing/CONTEXT.md
@@ -42,17 +42,33 @@ families:
       - PyAnsys/output/phase72a_family_r/20260922T103758Z
       - PyAnsys/output/phase72a_family_r/20260922T110217Z
       - PyAnsys/output/phase72a_family_r/20260923T021955Z
-    analysis_root: PyAnsys/output/phase72a_family_r/analysis-20260923T021955Z
-    completed_cases: [R0, R1, R2, R3, R4, R5]
+      - PyAnsys/output/phase72a_family_r/20260923T043840Z
+    analysis_root: PyAnsys/output/phase72a_family_r/analysis-20260923T043840Z
+    completed_cases: [R0, R1, R2, R3, R4, R5, R6, R7]
   ewf:
     path: Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/index.md
     server_id: server-3
     execution_server_id: student
-    status: PARTIAL_COMPLETE_E2_NUMERICAL_BLOCK
+    status: E2_AND_E2_1_NUMERICAL_BLOCKS
     result: Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/results.md
     completed_cases: [E0, E1, E3]
     blocked_case: E2
     extension_E3: HUMAN_SELECTED_E1_PLUS_R3_INTERACTION
+    selected_followup_E2_1:
+      setup: Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/e2.1/setup.md
+      controlled_delta: "maximum EWF film thickness 0.01 m -> 0.3 m; other E2 settings held"
+      build_receipt: PyAnsys/output/phase72a_ewf_student_e21_build_20260923T052000Z/probe-receipt.json
+      run_root: PyAnsys/output/phase72a_ewf_student_e21_run_20260923T052000Z
+      status: BLOCKED_FPE_AT_5653_CAP_REACHED_AT_5650
+      last_reported_iteration: 5652
+      report_histories: PyAnsys/output/phase72a_ewf_student_e21_run_20260923T052000Z/E2.1/e21-native-report-histories_20260923_173131.json
+      report_summary: PyAnsys/output/phase72a_ewf_student_e21_run_20260923T052000Z/E2.1/e21-summary.json
+    selected_recovery_E2_2:
+      setup: Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/e2.2/setup.md
+      controlled_delta: "EWF film sub-iterations 5 -> 20; E2.1 0.3 m thickness limit retained"
+      build_receipt: PyAnsys/output/phase72a_ewf_student_e22_build_20260923T053831Z/probe-receipt.json
+      run_root: PyAnsys/output/phase72a_ewf_student_e22_run_20260923T053831Z
+      status: RUNNING_FLUENT_NATIVE_SOLVE
 
 execution_envelope:
   formulation: steady
@@ -94,10 +110,13 @@ gates:
       - matched phase-resolved outlet carryover comparison
       - mechanism-specific wall/film transfer evidence
 
-active_jobs: []
+active_jobs:
+  - id: P72A-FAMILY-E-E2.2-20260923T053831Z
+    case_id: E2.2
+    run_root: PyAnsys/output/phase72a_ewf_student_e22_run_20260923T053831Z
+    status: RUNNING_FLUENT_NATIVE_SOLVE
 next_required_action: >-
-  Reconcile the student Fluent endpoint after the second E2 FPE without
-  terminating any unpreserved Fluent process. If it becomes responsive,
-  build and save/reopen one E2 numerical recovery changing only film
-  sub-iterations from 5 to 20, then test viability. Otherwise preserve the
-  E2 block and use completed E0/E1/E3/R-family evidence for a bounded result.
+  Build and run E2.2 from the verified native-5586 parent with only film
+  sub-iterations changed to 20. Retain 0.3 m maximum thickness and monitor all
+  configured native report files every iteration. E2.1 reached the cap at
+  5650 and failed with an FPE at 5653.

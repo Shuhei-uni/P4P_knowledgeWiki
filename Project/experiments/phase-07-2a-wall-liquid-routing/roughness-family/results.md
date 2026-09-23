@@ -2,20 +2,22 @@
 
 ## Outcome
 
-Family R is complete for `R0`–`R5`. The two human-requested rougher extensions
+Family R is complete for `R0`–`R7`. The human-requested rougher extensions
 reduced the modeled phase-2 `steamoutlet` flux magnitude relative to the smooth
-control: `R4` by `9.79%` and `R5` by `20.58%` over the matched tail-500 window.
+control: `R4` by `9.79%`, `R5` by `20.58%`, `R6` by `38.38%`, and `R7` by
+`44.09%` over the matched tail-500 window.
 This reverses the earlier R0–R3 negative outlet screen, but does **not** establish
 improved separation or wall drainage. `R4` remains oscillatory with elevated
-late residuals, while `R5` lost about `162 kg` of domain liquid over the child
-run. Its lower outlet flux may reflect liquid depletion rather than improved
-routing. The source-inclusive ledger is non-closing, and the wall-surface
+late residuals; `R5`–`R7` lost about `162`, `183`, and `187 kg` of domain liquid
+over their respective child runs. Their lower outlet flux may reflect liquid
+depletion rather than improved routing. The source-inclusive ledger is
+non-closing, and the wall-surface
 velocity report cannot resolve near-wall motion. Phase 7.2A remains open while
 the independent EWF branch is separately owned.
 
 ## Execution identity and controls
 
-All six children were run on Server 1 from the same verified native-iteration
+All eight children were run on Server 1 from the same verified native-iteration
 5586 parent:
 
 - case SHA-256: `4fd493972839929f1f0922ad42679456d1f4aea294da86e4b13d6b7c32f754fc`;
@@ -36,6 +38,13 @@ with `k_s=1e-3 m` and `2e-3 m` respectively and `C_s=0.5` in both. Their
 prepared cases and terminal case/data pairs passed native reopen/readback;
 the four intended wall zones had the requested roughness and the bottom walls
 remained smooth. Both queue and case manifests report `COMPLETE`.
+
+`R6` and `R7` followed the [doubled-roughness setup](extension-r6-r7-setup.md)
+at `k_s=4e-3 m` and `8e-3 m`, respectively. Their exact-parent hash and
+native-coordinate checks, wall-only readbacks, prepared save/reopen gates,
+`3001` rows in each of 16 reports, 12 paired server-local checkpoints each,
+and terminal durable pair reopens passed. Their queue and case manifests
+report `COMPLETE` at native iteration 8586.
 
 The R0 Windows directory-list helper returned an invalid-path message after the
 solve, so its manifest's parsed directory inventory is empty. Its native solve
@@ -58,6 +67,8 @@ window, not an uncertainty interval.
 | `R3` | `5e-4` | `-24.6518 ± 0.0583` | `+1.15%` | `298.154` | `+1.36e-4` | `0.1770` | `-0.244` |
 | `R4` | `1e-3` | `-21.9851 ± 1.2723` | `-9.79%` | `262.490` | `-6.17e-4` | `0.2133` | `~0` |
 | `R5` | `2e-3` | `-19.3568 ± 0.0114` | `-20.58%` | `134.086` | `+5.34e-4` | `0.2635` | `~0` |
+| `R6` | `4e-3` | `-15.0171 ± 0.0161` | `-38.38%` | `111.973` | `+1.32e-3` | `0.3636` | `~0` |
+| `R7` | `8e-3` | `-13.6253 ± 0.0331` | `-44.09%` | `108.803` | `-4.36e-5` | `0.2805` | `~0` |
 
 The total-inventory slopes are small over the matched tail, but this does not
 erase the much larger whole-run inventory changes. `R4` finishes at `262.135 kg`
@@ -65,16 +76,26 @@ and `R5` at `134.192 kg`, versus their common initial `295.854 kg`: losses of
 `33.719 kg` and `161.662 kg`. `R4`'s outlet still trends upward over the tail
 (`+0.00460 kg/s` per iteration) and its residuals remain elevated. `R5`'s
 outlet is comparatively steady (tail slope `-1.11e-5 kg/s` per iteration),
-but its reduced inventory makes the outlet result physically ambiguous. No case
-recorded an AMG failure, floating-point exception, nonfinite value, or fatal
+but its reduced inventory makes the outlet result physically ambiguous.
+
+`R6` and `R7` finish at `112.355 kg` and `108.744 kg`, respectively, from the
+same `295.854 kg` start: losses of `183.498 kg` and `187.109 kg`. Their
+tail-500 outlet fluxes are comparatively tight, and the phase-1 outlet means
+remain near `-80.4 kg/s`, but this does not resolve the liquid path. The
+lower-zone mass report is small and oscillatory relative to the domain losses.
+The reduction from R6 to R7 is only `1.392 kg/s`, while both show almost the
+same very low inventory. This pattern is consistent with a depletion-driven
+outlet response, though the current reports cannot establish causation.
+
+No case recorded an AMG failure, floating-point exception, nonfinite value, or fatal
 solver event. Reversed-flow and turbulent-viscosity-limit messages persist in
 all children and are therefore retained as solver-health context, not hidden.
 
 ## Claim limits
 
 - The direct matched response is non-monotonic: `R1`–`R3` did not reduce outlet
-  carryover, whereas `R4`–`R5` did. `R5` is the clearest numerical outlet
-  reduction, not a qualified separation improvement.
+  carryover, whereas `R4`–`R7` did. `R7` gives the lowest modeled outlet flux,
+  not a qualified separation improvement.
 - The outer-wall surface-area-average liquid vertical velocity is identically
   zero in every child because the report samples the no-slip wall surface. It
   therefore does not resolve wall-adjacent routing and cannot support a
@@ -86,7 +107,7 @@ all children and are therefore retained as solver-health context, not hidden.
 - Lower-zone liquid mass remains highly iteration-oscillatory. Its small mean
   differences are contextual only and are not used to claim successful lower
   delivery.
-- `R4` and `R5` were run under a subsequent explicit human extension request,
+- `R4`–`R7` were run under subsequent explicit human extension requests,
   superseding the original conditional `R4` trigger. No further roughness case
   is selected here.
 
@@ -98,8 +119,10 @@ all children and are therefore retained as solver-health context, not hidden.
   `PyAnsys/output/phase72a_family_r/20260922T110217Z/`;
 - R4–R5 queue and case manifests:
   `PyAnsys/output/phase72a_family_r/20260923T021955Z/`;
-- six-case matched metrics, table, and figures:
-  `PyAnsys/output/phase72a_family_r/analysis-20260923T021955Z/`;
+- R6–R7 queue and case manifests:
+  `PyAnsys/output/phase72a_family_r/20260923T043840Z/`;
+- eight-case matched metrics, table, and figures:
+  `PyAnsys/output/phase72a_family_r/analysis-20260923T043840Z/`;
 - executable queue owner:
   `PyAnsys/scripts/setup/run_phase72a_family_r_native.py`; and
 - analysis owner:

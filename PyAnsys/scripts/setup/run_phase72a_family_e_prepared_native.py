@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run a verified prepared Phase 7.2A E1/E2/E3 child on student."""
+"""Run a verified prepared Phase 7.2A Family E child on student."""
 
 from __future__ import annotations
 
@@ -41,17 +41,28 @@ def alist_value(value: Any, target: str) -> Any:
     return None
 
 
-def ewf_validator(expected_mode: int, expected_initial_dt: float, expected_subiterations: int):
+def ewf_validator(
+    expected_mode: int,
+    expected_initial_dt: float,
+    expected_subiterations: int,
+    expected_max_thickness: float,
+):
     def validate(solver: Any, _audit: Any) -> None:
         parameters = solver.rp_vars().get("wall-film/model-parameters")
         material = alist_value(parameters, "film-material")
         mode = alist_value(parameters, "secondary-phase-mode")
         initial_dt = alist_value(parameters, "adapt-init-dt")
         subiterations = alist_value(parameters, "sub-iter-nums")
+        max_thickness = alist_value(parameters, "thickness-limit")
         native.require(str(material).strip('"') == FILM_MATERIAL, f"film material mismatch: {material!r}")
         native.require(int(mode) == expected_mode, f"secondary phase mode mismatch: {mode!r}")
         native.require(abs(float(initial_dt) - expected_initial_dt) <= max(1e-12, expected_initial_dt * 1e-9), f"initial film time step mismatch: {initial_dt!r}")
         native.require(int(subiterations) == expected_subiterations, f"film sub-iterations mismatch: {subiterations!r}")
+        native.require(
+            abs(float(max_thickness) - expected_max_thickness)
+            <= max(1e-12, expected_max_thickness * 1e-9),
+            f"film thickness limit mismatch: {max_thickness!r}",
+        )
         walls = solver.settings.setup.boundary_conditions.wall
         wall_state = walls["wall"].phase["mixture"].wall_film.get_state()
         native.require(wall_state.get("eulerian_film_wall") is True, "wall film is not active on wall")
@@ -68,8 +79,10 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--build-receipt", type=Path, required=True)
     parser.add_argument("--local-root", type=Path, required=True)
-    parser.add_argument("--case", choices=("E1", "E2", "E3"), required=True)
+    parser.add_argument("--case", choices=("E1", "E2", "E2.1", "E2.2", "E3"), required=True)
     parser.add_argument("--secondary-phase-mode", type=int, required=True)
+    parser.add_argument("--max-film-thickness", type=float, required=True)
+    parser.add_argument("--report-frequency", type=int, required=True)
     parser.add_argument(
         "--run-stamp", default=datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     )
@@ -79,9 +92,18 @@ def main() -> int:
     native.require(receipt.get("solve_issued") is False, "prepared build unexpectedly issued a solve")
     expected_build_case = "E1" if args.case == "E3" else args.case
     native.require(receipt.get("case_id", "E1") == expected_build_case, "wrong EWF build recipe")
-    expected_mode = 1 if args.case == "E2" else 0
+    expected_mode = 1 if args.case in {"E2", "E2.1", "E2.2"} else 0
     native.require(args.secondary_phase_mode == expected_mode, "wrong EWF phase-coupling mode")
+    native.require(args.report_frequency >= 1, "report frequency must be at least one iteration")
     saved = receipt["saved_pair"]
+    receipt_thickness = float(
+        receipt.get("screenshot_model_values", {}).get("thickness-limit", float("nan"))
+    )
+    native.require(
+        abs(receipt_thickness - args.max_film_thickness)
+        <= max(1e-12, args.max_film_thickness * 1e-9),
+        f"build receipt thickness limit {receipt_thickness!r} does not match requested {args.max_film_thickness!r}",
+    )
     report_names = [str(name) for name in receipt["ewf_report_names"]]
 
     native.SERVER_ID = "student"
@@ -100,9 +122,14 @@ def main() -> int:
     )
     expected_initial_dt = float(receipt.get("screenshot_model_values", {}).get("adapt-init-dt", 0.0001))
     expected_subiterations = int(receipt.get("screenshot_model_values", {}).get("sub-iter-nums", 5))
-    native.validate_model_state = ewf_validator(args.secondary_phase_mode, expected_initial_dt, expected_subiterations)
+    native.validate_model_state = ewf_validator(
+        args.secondary_phase_mode,
+        expected_initial_dt,
+        expected_subiterations,
+        args.max_film_thickness,
+    )
     native.controlled_delta_record = lambda case_id, ks, cs: {
-        "EWF": "phase-accretion" if case_id == "E2" else "basic",
+        "EWF": "phase-accretion" if case_id in {"E2", "E2.1", "E2.2"} else "basic",
         "roughness_height_m": ks,
         "roughness_constant_Cs": cs,
         "film_material": FILM_MATERIAL,
@@ -110,6 +137,7 @@ def main() -> int:
         "secondary_phase_mode": args.secondary_phase_mode,
         "film_initial_time_step_s": receipt.get("screenshot_model_values", {}).get("adapt-init-dt"),
         "film_subiterations": receipt.get("screenshot_model_values", {}).get("sub-iter-nums"),
+        "film_maximum_thickness_m": receipt.get("screenshot_model_values", {}).get("thickness-limit"),
         "interaction_basis": "E1-basic-EWF-plus-R3-roughness" if case_id == "E3" else None,
         "authoritative_baseline_case": receipt["parent_case"],
         "authoritative_baseline_data": receipt["parent_data"],
@@ -148,15 +176,24 @@ def main() -> int:
         native.require(set(report_names).issubset(available), "prepared EWF reports are missing")
         return [*bulk, *report_names]
 
-    def configure_report_files_at_ten(
+    def configure_report_files_at_frequency(
         solver: Any, monitor_root: str, case: str, definitions: list[str]
     ) -> dict[str, str]:
-        return original_report_files(
-            solver, monitor_root, case, definitions, frequency=10
+        paths = original_report_files(
+            solver, monitor_root, case, definitions, frequency=args.report_frequency
         )
+        files = solver.settings.solution.monitor.report_files
+        for name in files.get_object_names():
+            state = files[str(name)].get_state()
+            if state.get("active") and state.get("report_defs"):
+                native.require(
+                    int(state.get("frequency", -1)) == args.report_frequency,
+                    f"report-file frequency mismatch in {name}: {state}",
+                )
+        return paths
 
     native.configure_definitions = configure_definitions_with_ewf
-    native.configure_report_files = configure_report_files_at_ten
+    native.configure_report_files = configure_report_files_at_frequency
     native.configure_outer_wall_velocity_report = configure_outer_wall_velocity_report
 
     local_root = args.local_root.expanduser().resolve()
