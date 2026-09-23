@@ -4,8 +4,8 @@ phase_question: >-
   through steamoutlet by changing wall-adjacent routing while preserving
   absorber tracking, source-inclusive closure, liquid-inventory behaviour, and
   credible vapor routing relative to the R0 control?
-state: PLANNING_READY
-planning_state: BASELINE_SELECTED_MECHANISM_SCREEN_DESIGNED
+state: DISCOVERY_PARTIAL_E2_NUMERICAL_BLOCK
+planning_state: BASELINE_SELECTED_MECHANISM_SCREEN_EXECUTED_WITH_E2_BLOCK
 
 context:
   path: Project/experiments/phase-07-2a-wall-liquid-routing/CONTEXT.md
@@ -36,11 +36,23 @@ families:
   roughness:
     path: Project/experiments/phase-07-2a-wall-liquid-routing/roughness-family/index.md
     server_id: server-1
-    status: SELECTED_NOT_RUN
+    status: EXTENSION_COMPLETE_RESPONSE_UNQUALIFIED
+    result: Project/experiments/phase-07-2a-wall-liquid-routing/roughness-family/results.md
+    run_roots:
+      - PyAnsys/output/phase72a_family_r/20260922T103758Z
+      - PyAnsys/output/phase72a_family_r/20260922T110217Z
+      - PyAnsys/output/phase72a_family_r/20260923T021955Z
+    analysis_root: PyAnsys/output/phase72a_family_r/analysis-20260923T021955Z
+    completed_cases: [R0, R1, R2, R3, R4, R5]
   ewf:
     path: Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/index.md
     server_id: server-3
-    status: SELECTED_NOT_RUN
+    execution_server_id: student
+    status: PARTIAL_COMPLETE_E2_NUMERICAL_BLOCK
+    result: Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/results.md
+    completed_cases: [E0, E1, E3]
+    blocked_case: E2
+    extension_E3: HUMAN_SELECTED_E1_PLUS_R3_INTERACTION
 
 execution_envelope:
   formulation: steady
@@ -52,6 +64,7 @@ execution_envelope:
   replay_old_v2_inlet_ramp: false
   whole_domain_reinitialization: false
   interaction_family_in_first_screen: false
+  interaction_follow_on_E3: E1_BASIC_EWF_PLUS_R3_KS_5E-4_M_CS_0_5
 
 gates:
   PHASE_CONTRACT:
@@ -71,9 +84,9 @@ gates:
       - Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/index.md
       - Project/experiments/phase-07-2a-wall-liquid-routing/monitoring-contract.md
   DISCOVERY_EXECUTION:
-    status: NOT_STARTED
+    status: PARTIAL_E2_NUMERICAL_BLOCK
   DISCOVERY_EVIDENCE:
-    status: NOT_STARTED
+    status: PARTIAL_E0_E1_E3_AND_ROUGHNESS_COMPLETE
   PHASE_CLOSURE:
     status: NOT_READY
     missing:
@@ -83,6 +96,8 @@ gates:
 
 active_jobs: []
 next_required_action: >-
-  At execution request, prepare independent R0/E0 control copies from the
-  verified baseline, pass hash/reopen/readback and instrumentation gates, then
-  select the first roughness and EWF children inside this contract.
+  Reconcile the student Fluent endpoint after the second E2 FPE without
+  terminating any unpreserved Fluent process. If it becomes responsive,
+  build and save/reopen one E2 numerical recovery changing only film
+  sub-iterations from 5 to 20, then test viability. Otherwise preserve the
+  E2 block and use completed E0/E1/E3/R-family evidence for a bounded result.

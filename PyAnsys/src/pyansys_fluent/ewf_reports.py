@@ -138,7 +138,8 @@ def _configure_report_object(
     set_child(report, ("print_to_console", "print"), True, required=False, actions=actions)
     set_child(report, ("create_report_file",), bool(create_history_file), required=False, actions=actions)
     set_child(report, ("create_report_plot",), False, required=False, actions=actions)
-    set_child(report, ("current_domain", "domain", "phase"), "mixture", required=False, actions=actions)
+    # Fluent 2025 R2 exposes the report's phase as a read-only leaf for these
+    # film fields.  The newly created report already uses the mixture domain.
     return {
         "report_type": report_type,
         "field": field_value,

@@ -279,7 +279,14 @@ def configure_definitions(solver: Any) -> list[str]:
     return names
 
 
-def configure_report_files(solver: Any, monitor_root: str, case: str, definitions: list[str]) -> dict[str, str]:
+def configure_report_files(
+    solver: Any,
+    monitor_root: str,
+    case: str,
+    definitions: list[str],
+    *,
+    frequency: int = 1,
+) -> dict[str, str]:
     ensure_remote_directory(solver, monitor_root)
     files = solver.settings.solution.monitor.report_files
     existing = list(files.get_object_names())
@@ -291,7 +298,14 @@ def configure_report_files(solver: Any, monitor_root: str, case: str, definition
         files.create(name=file_name)
         path = str(PureWindowsPath(monitor_root) / f"{case}-{definition}.out")
         require(not remote_file_exists(solver, path), f"refusing to overwrite report file: {path}")
-        files[file_name].set_state({"file_name": path, "report_defs": [definition], "frequency": 1, "active": True})
+        files[file_name].set_state(
+            {
+                "file_name": path,
+                "report_defs": [definition],
+                "frequency": int(frequency),
+                "active": True,
+            }
+        )
         state = safe_get_state(files[file_name], f"report file {file_name}")
         require(PureWindowsPath(str(state.get("file_name"))).name == PureWindowsPath(path).name, f"report file path mismatch: {state}")
         paths[definition] = path

@@ -31,7 +31,7 @@ procedure/reference material inside the owning workflow folder. Create a new
 skill only when it needs a genuinely distinct invocation boundary.
 
 Fluent runs:
-When running simulations try to run in large batches, rather than iter(10) do around 1000 and when saving checkpoint save it on fluent local machine rather than onedrive. Onedrive is for start or final case/data pair that we'd like to share across computers not a place to store everything.
+When running simulations try to run in large batches, rather than iter(10) do around 1000 (Prefer using TUI run commands for cases where its just setup and then run) and when saving checkpoint save it on fluent local machine rather than onedrive. Onedrive is for start or final case/data pair that we'd like to share across computers not a place to store everything.
 
 ## Autonomy
 

@@ -108,7 +108,10 @@ for Phase 7.1A and is not replayed in 7.2A children.
 
 ### Out of scope and claim limits
 
-- No roughness-plus-EWF interaction case in the first screen.
+- No roughness-plus-EWF interaction in the initial single-mechanism E0–E2/R0–R3
+  screen. The human-selected E3 follow-on combines E1 basic EWF with the
+  already tested R3 wall roughness (`k_s=5e-4 m`, `C_s=0.5`), from the same
+  verified parent; phase accretion stays off in E3.
 - No claim that lower carryover proves physical wall-scale validity, plant
   separation efficiency, or hardware drainage performance.
 - No claim of steady convergence solely from the control's low residuals or a
@@ -126,10 +129,12 @@ for Phase 7.1A and is not replayed in 7.2A children.
 | R — roughness | Wall roughness only; EWF off; `C_s=0.5` when active | Does increased wall shear change near-wall liquid direction and reduce phase-2 carryover? | Monotonic or otherwise interpretable change in outer-wall liquid velocity, lower-region delivery, and lower `steamoutlet` liquid flux with preserved closure | Wall scope/readback is not clean, another setting changes, or the response is unresolvable against numerical deterioration |
 | E — Eulerian Wall Film | EWF only; roughness `k_s=0` | Does explicit wall-film formation and drainage capture liquid that remains in the bulk near-wall path? | Film mass/transfer evidence shows bulk-to-film capture and downward film flow, accompanied by reduced bulk liquid carryover and preserved vapor audit | Film variables/transfer cannot be exposed, film behaviour is unaccounted for, or apparent benefit is only a global inventory change |
 
-The first queue is `R0/E0` smooth no-EWF control reference, then R1–R3 and
-E1–E2. R4 and E3 are optional, evidence-gated extensions. The exact Fluent
-E3 option must be named and proved available before any mutation; it must not
-become an arbitrary bundle of wetting, drag, entrainment, or coupling changes.
+The initial queue is `R0/E0` smooth no-EWF control reference, then R1–R3 and
+E1–E2. R4 remains an evidence-gated roughness extension. By direct human
+reframe on 2026-09-23, E3 is a selected interaction follow-on: E1 basic EWF
+plus R3 roughness, with no phase accretion or additional film-physics option.
+Its clean two-factor contrast is E0/E1/R3/E3, judged by the same matched-window
+carryover, film, closure, inventory, and solver-health evidence.
 
 ## Decision conditions
 

@@ -51,6 +51,13 @@ final `5586` state.
 The new phase screens wall roughness and EWF as separate mechanisms from this
 developed endpoint. The old first-2,000-iteration v2 inlet ramp is not replayed
 in 7.2A children, and the first screen does not combine roughness with EWF.
+The current [Family E result](experiments/phase-07-2a-wall-liquid-routing/ewf-family/results.md)
+has completed E0, basic-EWF E1, and the subsequently human-selected E1-plus-R3
+interaction E3 at native 8586. E1/E3 formed no measured film; E2 phase
+accretion diverged early, and a smaller-initial-film-step recovery reproduced
+the FPE. E2 has no late-window comparison, so the film-capture question remains
+open under a numerical block. The student Fluent endpoint became unresponsive
+after that recovery FPE; Server 1 is not part of Family E execution.
 See the [Phase 7.2A record](experiments/phase-07-2a-wall-liquid-routing/index.md),
 [context](experiments/phase-07-2a-wall-liquid-routing/CONTEXT.md), and
 [throughout-run monitoring contract](experiments/phase-07-2a-wall-liquid-routing/monitoring-contract.md).
