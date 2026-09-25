@@ -50,7 +50,7 @@ families:
     path: Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/index.md
     server_id: server-3
     execution_server_id: student
-    status: E2_6_FPE_AT_5765_E2_7_COMPLETE_TO_8586_NO_CAP_OR_FPE
+    status: E2_7_CONTINUATION_TO_13586_COMPLETE_UNQUALIFIED
     result: Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/results.md
     completed_cases: [E0, E1, E3]
     blocked_case: E2
@@ -119,6 +119,21 @@ families:
       report_histories: PyAnsys/output/phase72a_ewf_student_e27_run_20260923T071523Z/E2.7/report-histories.json
       report_summary: PyAnsys/output/phase72a_ewf_student_e27_run_20260923T071523Z/E2.7/e27-summary.json
       run_manifest: PyAnsys/output/phase72a_ewf_student_e27_run_20260923T071523Z/E2.7/run-manifest.json
+    selected_continuation_5000_server1:
+      setup: Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/e2.7-continuation-5000/setup.md
+      controlled_delta: "No model change; continue the copied E2.7 native-8586 endpoint for 5000 steady iterations on Server 1"
+      run_root: PyAnsys/output/phase72a_ewf_server1_e27_cont5000_20260923T102912Z
+      handoff_job: PyAnsys/output/run-handoff/P72A-E2.7-CONT5000-SERVER1-20260923T102912Z/job.yaml
+      status: COMPLETE_TO_13586_NO_CAP_OR_FPE; 26_REPORT_FILES_EACH_5001_POINTS
+      requested_start_iteration: 8586
+      requested_additional_iterations: 5000
+      expected_terminal_iteration: 13586
+      terminal_native_iteration: 13586
+      report_histories: PyAnsys/output/phase72a_ewf_server1_e27_cont5000_20260923T102912Z/report-histories.json
+      run_manifest: PyAnsys/output/phase72a_ewf_server1_e27_cont5000_20260923T102912Z/run-manifest.json
+      histories_figure: Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/figures/E2.7-CONT5000-requested-histories.png
+      volume_fraction_contour: Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/figures/E2.7-CONT5000-phase2-vof-xy-z0-final13586-v3.png
+      wetted_area_evidence: PyAnsys/output/phase72a_e27_cont5000_wetted_area/wetted-area.json
 
 execution_envelope:
   formulation: steady
@@ -162,7 +177,8 @@ gates:
 
 active_jobs: []
 next_required_action: >-
-  Review E2.7 as a completed numerical screen only. Do not infer convergence,
-  steady film behaviour, source-inclusive closure, drainage, or physical
-  carryover benefit from this run; phase closure still requires matched
-  phase-resolved outlet and mechanism-specific evidence.
+  Review the completed E-family results and decide the next scientific
+  experiment. The E2.7 continuation through native 13586 is complete and
+  documented with per-iteration reports; its copied starting pair hashes
+  differ from the earlier E2.7 run manifest, so that source-identity
+  limitation remains attached to the continuation.

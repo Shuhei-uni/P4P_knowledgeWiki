@@ -1,0 +1,66 @@
+{
+  "status": "PLOTTED",
+  "source_manifest": "PyAnsys/output/phase72a_ewf_server1_e27_cont5000_20260923T102912Z/run-manifest.json",
+  "source_histories": "PyAnsys/output/phase72a_ewf_server1_e27_cont5000_20260923T102912Z/report-histories.json",
+  "native_iteration_start": 8586,
+  "native_iteration_end": 13586,
+  "samples_per_native_report": 5001,
+  "ewf_area": {
+    "value_m2": 53.4369522992766,
+    "source": "temporary Fluent-native surface-area report computed on the active EWF wall at native iteration 13586",
+    "interpretation": "total static geometric area of the active EWF wall; terminal wetted area is available at native 13586",
+    "wetted_area_m2_terminal": 50.689694342827835,
+    "wetted_area_fraction_terminal": 0.948588797859156,
+    "wetted_area_source": "PyAnsys/output/phase72a_e27_cont5000_wetted_area/wetted-area.json",
+    "wetted_area_measurement_method": "Integrate the reconstructed per-face Film Coverage indicator over the active EWF wall, using mesh face polygon areas from the Fluent case HDF5 and EWF face thicknesses from the paired Fluent data HDF5."
+  },
+  "series": {
+    "v2-total-liquid-mass": {
+      "count": 5001,
+      "first": 63.02335540190473,
+      "last": 62.98913049879675,
+      "minimum": 62.89449236715325,
+      "maximum": 63.08605840674207,
+      "mean_final_500": 63.002315092388336,
+      "slope_final_500_per_iteration": -3.7797681555257744e-05
+    },
+    "v2-flux-phase2-steamoutlet": {
+      "count": 5001,
+      "first": -1.736546966818777,
+      "last": -1.734624033250239,
+      "minimum": -1.746149559936534,
+      "maximum": -1.719072348290899,
+      "mean_final_500": -1.7335374524969156,
+      "slope_final_500_per_iteration": -4.108792962623304e-06
+    },
+    "p72a-e2.7-ewf-film-mass-total": {
+      "count": 5001,
+      "first": 3.111232139629345,
+      "last": 5.842478445133369,
+      "minimum": 3.111232139629345,
+      "maximum": 5.842478445133369,
+      "mean_final_500": 5.74552764396683,
+      "slope_final_500_per_iteration": 0.00039403523249550683
+    },
+    "p72a-e2.7-ewf-velocity-mag-awavg": {
+      "count": 5001,
+      "first": 46.3388993615908,
+      "last": 82.41131537736712,
+      "minimum": 46.3388993615908,
+      "maximum": 82.41131537736712,
+      "mean_final_500": 81.36755532202694,
+      "slope_final_500_per_iteration": 0.004196193375283409
+    },
+    "p72a-e2.7-ewf-thickness-max": {
+      "count": 5001,
+      "first": 0.3310326137579978,
+      "last": 0.3097905719187111,
+      "minimum": 0.2748168772086501,
+      "maximum": 0.5311344866640866,
+      "mean_final_500": 0.31101809127721936,
+      "slope_final_500_per_iteration": -1.6420042862692754e-06
+    }
+  },
+  "figure": "Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/figures/E2.7-CONT5000-requested-histories.png",
+  "csv": "Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/figures/E2.7-CONT5000-requested-histories.csv"
+}

@@ -15,6 +15,48 @@ non-closing, and the wall-surface
 velocity report cannot resolve near-wall motion. Phase 7.2A remains open while
 the independent EWF branch is separately owned.
 
+## R-family figures
+
+These six plots use the matched R0–R11 child histories from native iteration
+5586 through 8586. The comparison figures and their metric source are in the
+[twelve-case analysis output](../../../../PyAnsys/output/phase72a_family_r/analysis-20260923T054600Z-cs-sensitivity-v2/metrics.json).
+
+### Phase-2 steamoutlet response
+
+![Phase-2 steamoutlet mass flux for R0–R11 over each 3,000-iteration child run](../../../../PyAnsys/output/phase72a_family_r/analysis-20260923T054600Z-cs-sensitivity-v2/01-phase2-steamoutlet-carryover.png)
+
+*Figure 1. Phase-2 steamoutlet flux, with Fluent’s negative sign retained; the shaded region is the tail-500 comparison window. Higher roughness settings generally lower the modeled outlet-flux magnitude. This plot alone cannot distinguish improved liquid routing from loss of liquid inventory.*
+
+### Total and lower-zone liquid inventory
+
+![Total and lower-zone liquid mass histories for R0–R11](../../../../PyAnsys/output/phase72a_family_r/analysis-20260923T054600Z-cs-sensitivity-v2/02-liquid-inventories.png)
+
+*Figure 2. Total and lower-zone liquid mass over the matched runs. The lower-zone traces are small and strongly oscillatory, with brief spikes that are much larger than their tail means (0.096–0.367 kg). The larger roughness settings also show substantial total-inventory loss. These histories do not establish better separation or drainage.*
+
+### Wall-surface velocity and absorber tracking
+
+![No-slip outer-wall liquid vertical velocity and absorber command error](../../../../PyAnsys/output/phase72a_family_r/analysis-20260923T054600Z-cs-sensitivity-v2/03-wall-velocity-and-absorber-error.png)
+
+*Figure 3. The reported liquid vertical velocity is zero on the no-slip wall surface, so it does not measure near-wall transport. The absorber-error history shows intermittent command-tracking deviations, especially in early-family runs; those deviations are retained as recorded and should not be mistaken for outlet-routing changes.*
+
+### Vapor outlet and absorber response
+
+![Phase-1 steamoutlet flux and absorber command versus applied removal](../../../../PyAnsys/output/phase72a_family_r/analysis-20260923T054600Z-cs-sensitivity-v2/04-vapor-and-absorber.png)
+
+*Figure 4. Phase-1 steamoutlet flux stays near its matched range across cases. The absorber panel shows intermittent dips in applied removal below the command in several runs, consistent with the tracking deviations in Figure 3. These histories provide context for the phase-2 response; they do not resolve the non-closing source-inclusive balance.*
+
+### Solver residual histories
+
+![Seven residual histories for each R0–R11 child run](../../../../PyAnsys/output/phase72a_family_r/analysis-20260923T054600Z-cs-sensitivity-v2/05-residual-histories.png)
+
+*Figure 5. Residual histories for each matched child window. R9 has a higher and more oscillatory late residual pattern than the other new sensitivity cases. Residuals are numerical-health evidence, not proof of physical improvement or full convergence.*
+
+### Roughness-constant sensitivity at fixed roughness height
+
+![Phase-2 steamoutlet response for Cs 0.5, 0.75, and 1.0 at the R3 and R5 roughness heights](../../../../PyAnsys/output/phase72a_family_r/analysis-20260923T054600Z-cs-sensitivity-v2/06-Cs-sensitivity-at-matched-height.png)
+
+*Figure 6. Direct matched-height comparison: R3/R8/R9 at `k_s=5e-4 m` and R5/R10/R11 at `k_s=2e-3 m`. Increasing `C_s` reduces the tail outlet-flux magnitude at each height, but R9 is strongly oscillatory and the R5-height cases lose roughly 162–186 kg of total liquid. The sensitivity therefore does not establish improved separation.*
+
 ## Execution identity and controls
 
 All twelve children were run on Server 1 from the same verified native-iteration

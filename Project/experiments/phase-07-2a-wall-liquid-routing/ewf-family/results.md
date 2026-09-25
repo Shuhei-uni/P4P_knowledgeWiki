@@ -500,3 +500,67 @@ physical carryover reduction.
 The [aligned values](figures/e-family-phase2-steamoutlet-flux.csv) and
 [Matplotlib script](../../../../PyAnsys/scripts/inspection/plot_phase72a_ewf_family_steamoutlet.py)
 preserve the source and plotting method.
+
+## E2.7 continuation — another 5,000 iterations on Server 1 — 2026-09-23
+
+![E2.7 continuation liquid inventory, phase-2 outlet flux, EWF film mass and wetted area, average film speed, and maximum film thickness](figures/E2.7-CONT5000-requested-histories.png)
+
+The completed TUI continuation covered native iterations 8586–13586. All 26
+Fluent-native Report Files were active at every iteration and each history has
+5,001 points including the starting coordinate. The solver returned normally;
+the run manifest records no FPE, AMG, nonfinite, or fatal event. EWF residuals
+were captured in the transcript (49,972 residual rows). The [run manifest](../../../../PyAnsys/output/phase72a_ewf_server1_e27_cont5000_20260923T102912Z/run-manifest.json),
+[report histories](../../../../PyAnsys/output/phase72a_ewf_server1_e27_cont5000_20260923T102912Z/report-histories.json),
+[figure values and statistics](figures/E2.7-CONT5000-requested-histories-manifest.json),
+and [plotted CSV](figures/E2.7-CONT5000-requested-histories.csv) retain the
+measurements.
+
+Total liquid inventory fluctuated between `62.894` and `63.086 kg` and ended
+at `62.989 kg`, only `0.034 kg` below its starting value. Phase-2
+`steamoutlet` signed mass flux remained negative (outflow): it ranged from
+`-1.746` to `-1.719 kg/s` and ended at `-1.735 kg/s`. These outlet and
+inventory histories were comparatively level over the extension, but they do
+not establish source-inclusive closure.
+
+The EWF signals continued to change: reported film mass rose throughout the
+extension from `3.111` to `5.842 kg` (about 88%); area-weighted average speed
+rose from `46.34` to `82.41 m/s`. Maximum film thickness varied between
+`0.275` and `0.531 mm` and ended at `0.310 mm`. The latter stayed far below
+the configured `0.3 m` cap, with no cap event, but the film-mass and speed
+trends mean this horizon still does not show a stationary film response.
+
+At iteration 13586, the EWF wetted area was `50.690 m²` (`94.86%` of the
+active EWF wall). Fluent defines Film Coverage as 1 when film thickness is
+above its critical value and 0 when below; for EWF the critical thickness is
+`1e-10 m`, and the surface integral of Film Coverage gives wetted area
+([Fluent Theory Guide, Partial Wetting Effect](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_th/flu_th_ewf_sec_wet.html),
+[Fluent field-variable definition](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_fvdefs.html)).
+The value was reconstructed from terminal per-face EWF thicknesses and mesh
+face areas in the hash-verified final Fluent HDF5 pair. The 3,463-face mesh
+area sum (`53.4369523 m²`) matches the earlier Fluent-native wall-area report
+to `1.4e-14 m²`; 2,529 faces exceed the wetness threshold. Another 282 faces
+have positive thickness below the threshold and are counted dry by Fluent's
+coverage definition. The [wetted-area evidence record](../../../../PyAnsys/output/phase72a_e27_cont5000_wetted_area/wetted-area.json)
+preserves this calculation. Server 1 became unreachable when I attempted a
+live Film Coverage report, so the result is reconstructed from the exact
+Fluent-documented coverage threshold and the preserved terminal mesh/data
+instead of a newly computed native report definition. The wetted area is
+measured only at the final iteration; the run did not retain its full time
+history.
+
+The final-state Fluent-native [phase-2 volume-fraction contour](figures/E2.7-CONT5000-phase2-vof-xy-z0-final13586-v3.png)
+uses the X–Y centre cut at Z = 0 m and a fixed physical 0–1 scale. The cut
+appears predominantly near zero phase-2 volume fraction at this full scale;
+the image does not provide a useful resolution of small local values, and it
+cannot be used to infer EWF film thickness. Its [native export manifest](../../../../PyAnsys/output/phase72a_e27_cont5000_native_vof_v3/export-manifest.json)
+records the field, range, source-pair hashes, and Fluent view settings.
+
+This was a continuation, not a new physics contrast. The copied OneDrive
+starting pair was verified loaded at native 8586 with E2.7 settings, but its
+hashes differ from those in the earlier E2.7 run manifest. That source-identity
+limitation remains attached to the extension. Completion and relatively level
+outlet/inventory signals do not establish convergence, stable film behaviour,
+drainage, source-inclusive closure, or a physical carryover benefit. The
+[continuation setup](e2.7-continuation-5000/setup.md) and [native contour export
+script](../../../../PyAnsys/scripts/inspection/export_phase72a_e27_cont5000_vof_v3.py)
+record the analysis path.
