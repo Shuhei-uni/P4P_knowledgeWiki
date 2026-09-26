@@ -944,3 +944,31 @@ captured by the wall film or establish a carryover mechanism.
 [Open the six-case flux plot](../../../../PyAnsys/output/phase72a_ewf_fixed_dt_comparison_20260927/phase2-steamoutlet-flux-e2.7-to-e2.84.svg)
 or its [native-iteration CSV](../../../../PyAnsys/output/phase72a_ewf_fixed_dt_comparison_20260927/phase2-steamoutlet-flux-e2.7-to-e2.84.csv)
 and [summary](../../../../PyAnsys/output/phase72a_ewf_fixed_dt_comparison_20260927/phase2-steamoutlet-flux-e2.7-to-e2.84-summary.json).
+
+## Family-wide liquid-inventory comparison — 2026-09-27
+
+The following overlay includes the 17 accessible trajectories from E0–E3 and
+E2.1–E2.84 with report data in native iterations 5586–8586. The upper panel is
+Fluent's `v2-total-liquid-mass` continuous-phase report; the lower panel is the
+separate `ewf-film-mass-total` wall-film report on a symmetric-log axis. The
+panels retain the distinct report quantities rather than combining them.
+
+![Phase 7.2A Family E liquid inventory comparison](../../../../PyAnsys/output/phase72a_ewf_family_total_liquid_inventory_20260927/ewf-family-liquid-inventory.svg)
+
+E0, E1, and E3 stay near 296–298 kg of continuous liquid through the compared
+window. E2.7 and E2.82–E2.84 fall from about 295.85 kg to 63.02 kg; their bulk
+histories overlap within `1e-10 kg` at every recorded coordinate. Their film
+histories differ substantially: E2.82 ends at 3.665 kg, while the already
+rejected E2.83 and E2.84 divergent runs end at 4,543.9 kg and 4,902.8 kg,
+respectively. The early-blocked E2 and E2.1–E2.6 traces stop at their last
+available report point. E2.8 uses the selected adaptive prefix followed by
+fixed-step recovery from native 7000; E4 is omitted because no total-liquid
+history was available.
+
+The plot uses raw native report points without interpolation. The bulk report
+does not include the separately plotted wall-film report, and neither history
+alone establishes liquid capture, outlet carryover, or mass closure. See the
+[figure as PNG](../../../../PyAnsys/output/phase72a_ewf_family_total_liquid_inventory_20260927/ewf-family-liquid-inventory.png),
+[native-point CSV](../../../../PyAnsys/output/phase72a_ewf_family_total_liquid_inventory_20260927/ewf-family-liquid-inventory.csv),
+[machine-readable summary](../../../../PyAnsys/output/phase72a_ewf_family_total_liquid_inventory_20260927/ewf-family-liquid-inventory-summary.json),
+and [analysis script](../../../../PyAnsys/scripts/analysis/compare_phase72a_ewf_family_total_liquid_inventory.py).

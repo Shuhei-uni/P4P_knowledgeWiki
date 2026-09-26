@@ -1,0 +1,474 @@
+{
+  "question": "Compare the available Phase 7.2A Family E liquid-inventory histories.",
+  "window_native_iteration": [
+    5586,
+    8586
+  ],
+  "alignment": "Native report iterations retained; no interpolation or resampling.",
+  "definitions": {
+    "continuous_liquid_mass_kg": "v2-total-liquid-mass; continuous-liquid inventory, excluding separately reported EWF film mass.",
+    "ewf_film_mass_kg": "ewf-film-mass-total; Fluent EWF film inventory."
+  },
+  "bulk_overlay_tolerance_kg": 1e-10,
+  "bulk_overlay_groups_within_tolerance": [
+    [
+      "E2.7",
+      "E2.82",
+      "E2.83",
+      "E2.84"
+    ]
+  ],
+  "excluded": {
+    "E4": "No total-liquid-mass history was present in the accessible E4 run directory."
+  },
+  "cases": {
+    "E0": {
+      "status_or_lineage": "smooth no-film control",
+      "bulk_points": 3001,
+      "bulk_native_range": [
+        5586,
+        8586
+      ],
+      "bulk_first_kg": 295.8535672079267,
+      "bulk_last_kg": 296.1476388457782,
+      "bulk_min_kg": 295.6867635087072,
+      "bulk_max_kg": 296.2989964184557,
+      "bulk_source": "E0/20260922T115500Z/monitors/P72A-E0-v2-total-liquid-mass.out",
+      "film_points": 0,
+      "film_native_range": null,
+      "film_first_kg": null,
+      "film_last_kg": null,
+      "film_min_kg": null,
+      "film_max_kg": null,
+      "film_source": null
+    },
+    "E1": {
+      "status_or_lineage": "basic EWF; film report remains zero",
+      "bulk_points": 300,
+      "bulk_native_range": [
+        5590,
+        8580
+      ],
+      "bulk_first_kg": 296.1927710379335,
+      "bulk_last_kg": 295.9148256131827,
+      "bulk_min_kg": 295.700731922922,
+      "bulk_max_kg": 296.2515445033573,
+      "bulk_source": "E1/20260923T024000Z/monitors/P72A-E1-v2-total-liquid-mass.out",
+      "film_points": 300,
+      "film_native_range": [
+        5590,
+        8580
+      ],
+      "film_first_kg": 0.0,
+      "film_last_kg": 0.0,
+      "film_min_kg": 0.0,
+      "film_max_kg": 0.0,
+      "film_source": "E1/20260923T024000Z/monitors/P72A-E1-p72a-e1-ewf-film-mass-total.out"
+    },
+    "E2 attempt 1": {
+      "status_or_lineage": "phase-accretion branch; cap/FPE block",
+      "bulk_points": 7,
+      "bulk_native_range": [
+        5590,
+        5650
+      ],
+      "bulk_first_kg": 287.6568273960148,
+      "bulk_last_kg": 339.4338101901095,
+      "bulk_min_kg": 219.363614736913,
+      "bulk_max_kg": 339.4338101901095,
+      "bulk_source": "E2/20260923T031600Z/monitors/P72A-E2-v2-total-liquid-mass.out",
+      "film_points": 7,
+      "film_native_range": [
+        5590,
+        5650
+      ],
+      "film_first_kg": 0.059396813429025,
+      "film_last_kg": 0.8382633526701098,
+      "film_min_kg": 0.059396813429025,
+      "film_max_kg": 0.8382633526701098,
+      "film_source": "E2/20260923T031600Z/monitors/P72A-E2-p72a-e2-ewf-film-mass-total.out"
+    },
+    "E2 recovery attempt": {
+      "status_or_lineage": "phase-accretion recovery; cap/FPE block",
+      "bulk_points": 7,
+      "bulk_native_range": [
+        5590,
+        5650
+      ],
+      "bulk_first_kg": 287.6891104898233,
+      "bulk_last_kg": 264.6762237566621,
+      "bulk_min_kg": 223.9348961485272,
+      "bulk_max_kg": 287.6891104898233,
+      "bulk_source": "E2/20260923T040000Z/monitors/P72A-E2-v2-total-liquid-mass.out",
+      "film_points": 7,
+      "film_native_range": [
+        5590,
+        5650
+      ],
+      "film_first_kg": 0.001258818573443577,
+      "film_last_kg": 9.270473183170699,
+      "film_min_kg": 0.001258818573443577,
+      "film_max_kg": 9.270473183170699,
+      "film_source": "E2/20260923T040000Z/monitors/P72A-E2-p72a-e2-ewf-film-mass-total.out"
+    },
+    "E2.1": {
+      "status_or_lineage": "phase-accretion numerical block; cap/FPE",
+      "bulk_points": 67,
+      "bulk_native_range": [
+        5586,
+        5652
+      ],
+      "bulk_first_kg": 295.8535672079267,
+      "bulk_last_kg": 351.4631702107499,
+      "bulk_min_kg": 209.3368429072034,
+      "bulk_max_kg": 351.4631702107499,
+      "bulk_source": "E2.1/20260923T052000Z/monitors/P72A-E2.1-v2-total-liquid-mass.out",
+      "film_points": 67,
+      "film_native_range": [
+        5586,
+        5652
+      ],
+      "film_first_kg": 0.0,
+      "film_last_kg": 7256.448343490107,
+      "film_min_kg": 0.0,
+      "film_max_kg": 7256.448343490107,
+      "film_source": "E2.1/20260923T052000Z/monitors/P72A-E2.1-p72a-e2.1-ewf-film-mass-total.out"
+    },
+    "E2.2": {
+      "status_or_lineage": "phase-accretion numerical block; cap/FPE",
+      "bulk_points": 67,
+      "bulk_native_range": [
+        5586,
+        5652
+      ],
+      "bulk_first_kg": 295.8535672079267,
+      "bulk_last_kg": 523.3042707671675,
+      "bulk_min_kg": 209.3879097015686,
+      "bulk_max_kg": 523.3042707671675,
+      "bulk_source": "E2.2/20260923T053831Z/monitors/P72A-E2.2-v2-total-liquid-mass.out",
+      "film_points": 67,
+      "film_native_range": [
+        5586,
+        5652
+      ],
+      "film_first_kg": 0.0,
+      "film_last_kg": 10070.22276124328,
+      "film_min_kg": 0.0,
+      "film_max_kg": 10070.22276124328,
+      "film_source": "E2.2/20260923T053831Z/monitors/P72A-E2.2-p72a-e2.2-ewf-film-mass-total.out"
+    },
+    "E2.3": {
+      "status_or_lineage": "phase-accretion numerical block; cap/FPE",
+      "bulk_points": 67,
+      "bulk_native_range": [
+        5586,
+        5652
+      ],
+      "bulk_first_kg": 295.8535672079267,
+      "bulk_last_kg": 518.5551116703073,
+      "bulk_min_kg": 214.5769105370418,
+      "bulk_max_kg": 601.0057684523811,
+      "bulk_source": "E2.3/20260923T055258Z/monitors/P72A-E2.3-v2-total-liquid-mass.out",
+      "film_points": 67,
+      "film_native_range": [
+        5586,
+        5652
+      ],
+      "film_first_kg": 0.0,
+      "film_last_kg": 10218.56946816561,
+      "film_min_kg": 0.0,
+      "film_max_kg": 10218.56946816561,
+      "film_source": "E2.3/20260923T055258Z/monitors/P72A-E2.3-p72a-e2.3-ewf-film-mass-total.out"
+    },
+    "E2.4": {
+      "status_or_lineage": "phase-accretion numerical block; cap/FPE",
+      "bulk_points": 156,
+      "bulk_native_range": [
+        5586,
+        5741
+      ],
+      "bulk_first_kg": 295.8535672079267,
+      "bulk_last_kg": 283.8104808525229,
+      "bulk_min_kg": 138.7727507392146,
+      "bulk_max_kg": 295.8535672079267,
+      "bulk_source": "E2.4/20260923T060500Z/monitors/P72A-E2.4-v2-total-liquid-mass.out",
+      "film_points": 156,
+      "film_native_range": [
+        5586,
+        5741
+      ],
+      "film_first_kg": 0.0,
+      "film_last_kg": 7770.018303076334,
+      "film_min_kg": 0.0,
+      "film_max_kg": 7770.018303076334,
+      "film_source": "E2.4/20260923T060500Z/monitors/P72A-E2.4-p72a-e2.4-ewf-film-mass-total.out"
+    },
+    "E2.5": {
+      "status_or_lineage": "phase-accretion numerical block; cap/FPE",
+      "bulk_points": 436,
+      "bulk_native_range": [
+        5586,
+        6021
+      ],
+      "bulk_first_kg": 295.8535672079267,
+      "bulk_last_kg": 289.5935399642856,
+      "bulk_min_kg": 81.95461652270839,
+      "bulk_max_kg": 354.4035529188417,
+      "bulk_source": "E2.5/20260923T062200Z/monitors/P72A-E2.5-v2-total-liquid-mass.out",
+      "film_points": 436,
+      "film_native_range": [
+        5586,
+        6021
+      ],
+      "film_first_kg": 0.0,
+      "film_last_kg": 7588.313780522554,
+      "film_min_kg": 0.0,
+      "film_max_kg": 7588.313780522554,
+      "film_source": "E2.5/20260923T062200Z/monitors/P72A-E2.5-p72a-e2.5-ewf-film-mass-total.out"
+    },
+    "E2.6": {
+      "status_or_lineage": "phase-accretion numerical block; cap/FPE",
+      "bulk_points": 179,
+      "bulk_native_range": [
+        5586,
+        5764
+      ],
+      "bulk_first_kg": 295.8535672079267,
+      "bulk_last_kg": 533.8247922749747,
+      "bulk_min_kg": 121.6466085096827,
+      "bulk_max_kg": 533.8247922749747,
+      "bulk_source": "E2.6/20260923T065114Z/monitors/P72A-E2.6-v2-total-liquid-mass.out",
+      "film_points": 179,
+      "film_native_range": [
+        5586,
+        5764
+      ],
+      "film_first_kg": 0.0,
+      "film_last_kg": 8593.59054321673,
+      "film_min_kg": 0.0,
+      "film_max_kg": 8593.59054321673,
+      "film_source": "E2.6/20260923T065114Z/monitors/P72A-E2.6-p72a-e2.6-ewf-film-mass-total.out"
+    },
+    "E2.7": {
+      "status_or_lineage": "phase-accretion baseline; matched horizon ends at N8586",
+      "bulk_points": 3001,
+      "bulk_native_range": [
+        5586,
+        8586
+      ],
+      "bulk_first_kg": 295.8535672079267,
+      "bulk_last_kg": 63.02335540190473,
+      "bulk_min_kg": 62.95803560129904,
+      "bulk_max_kg": 295.8535672079267,
+      "bulk_source": "E2.7/20260923T071523Z/monitors/P72A-E2.7-v2-total-liquid-mass.out",
+      "film_points": 3001,
+      "film_native_range": [
+        5586,
+        8586
+      ],
+      "film_first_kg": 0.0,
+      "film_last_kg": 3.111232139629345,
+      "film_min_kg": 0.0,
+      "film_max_kg": 3.111232139629345,
+      "film_source": "E2.7/20260923T071523Z/monitors/P72A-E2.7-p72a-e2.7-ewf-film-mass-total.out"
+    },
+    "E3": {
+      "status_or_lineage": "basic EWF plus selected roughness",
+      "bulk_points": 300,
+      "bulk_native_range": [
+        5590,
+        8580
+      ],
+      "bulk_first_kg": 296.2793723317673,
+      "bulk_last_kg": 298.1010742287647,
+      "bulk_min_kg": 269.1182476072286,
+      "bulk_max_kg": 304.9345028050826,
+      "bulk_source": "E3/20260923T032500Z/monitors/P72A-E3-v2-total-liquid-mass.out",
+      "film_points": 300,
+      "film_native_range": [
+        5590,
+        8580
+      ],
+      "film_first_kg": 0.0,
+      "film_last_kg": 0.0,
+      "film_min_kg": 0.0,
+      "film_max_kg": 0.0,
+      "film_source": "E3/20260923T032500Z/monitors/P72A-E3-p72a-e1-ewf-film-mass-total.out"
+    },
+    "E2.8": {
+      "status_or_lineage": "selected adaptive prefix plus fixed-step recovery from N7000",
+      "bulk_points": 3001,
+      "bulk_native_range": [
+        5586,
+        8586
+      ],
+      "bulk_first_kg": 295.8535672079275,
+      "bulk_last_kg": 62.97570610491248,
+      "bulk_min_kg": 62.97551389240632,
+      "bulk_max_kg": 295.8535672079275,
+      "bulk_source": {
+        "path": "PyAnsys/output/phase72a_ewf_direct_e28_20260926T010700Z/report-histories.json",
+        "report_name": "v2-total-liquid-mass",
+        "selected_trajectory_sources": {
+          "fast_adaptive_through_native": 7000,
+          "fast_report_file": "FluentRuns/Phase72A/FamilyE/E2.8-fast-time-20260926T010700Z/monitors/v2-total-liquid-mass.out",
+          "fixed_step_recovery_after_native": 7000,
+          "recovery_report_file": "FluentRuns/Phase72A/FamilyE/E2.8-fast-time-20260926T010700Z/monitors-recovery/v2-total-liquid-mass.out"
+        },
+        "local_file": null
+      },
+      "film_points": 3001,
+      "film_native_range": [
+        5586,
+        8586
+      ],
+      "film_first_kg": 0.0,
+      "film_last_kg": 4.248407833344333,
+      "film_min_kg": 0.0,
+      "film_max_kg": 4.248407833344333,
+      "film_source": {
+        "path": "PyAnsys/output/phase72a_ewf_direct_e28_20260926T010700Z/report-histories.json",
+        "report_name": "p72a-e2.8-ewf-film-mass-total",
+        "selected_trajectory_sources": {
+          "fast_adaptive_through_native": 7000,
+          "fast_report_file": "FluentRuns/Phase72A/FamilyE/E2.8-fast-time-20260926T010700Z/monitors/p72a-e2.8-ewf-film-mass-total.out",
+          "fixed_step_recovery_after_native": 7000,
+          "recovery_report_file": "FluentRuns/Phase72A/FamilyE/E2.8-fast-time-20260926T010700Z/monitors-recovery/p72a-e2.8-ewf-film-mass-total.out"
+        },
+        "local_file": null
+      }
+    },
+    "E2.81": {
+      "status_or_lineage": "adaptive follow-up; numerical qualification unresolved",
+      "bulk_points": 3001,
+      "bulk_native_range": [
+        5586,
+        8586
+      ],
+      "bulk_first_kg": 295.8535672079275,
+      "bulk_last_kg": 63.02900466640725,
+      "bulk_min_kg": 62.97866375595783,
+      "bulk_max_kg": 295.8535672079275,
+      "bulk_source": {
+        "path": "PyAnsys/output/phase72a_ewf_direct_e281_20260926T052048Z/report-histories.json",
+        "report_name": "v2-total-liquid-mass",
+        "selected_trajectory_sources": null,
+        "local_file": "FluentRuns/Phase72A/FamilyE/E2.81-fast-time-20260926T052048Z/monitors/v2-total-liquid-mass.out"
+      },
+      "film_points": 3001,
+      "film_native_range": [
+        5586,
+        8586
+      ],
+      "film_first_kg": 0.0,
+      "film_last_kg": 3.160955054745472,
+      "film_min_kg": 0.0,
+      "film_max_kg": 3.849956971128817,
+      "film_source": {
+        "path": "PyAnsys/output/phase72a_ewf_direct_e281_20260926T052048Z/report-histories.json",
+        "report_name": "p72a-e2.81-ewf-film-mass-total",
+        "selected_trajectory_sources": null,
+        "local_file": "FluentRuns/Phase72A/FamilyE/E2.81-fast-time-20260926T052048Z/monitors/p72a-e2.81-ewf-film-mass-total.out"
+      }
+    },
+    "E2.82": {
+      "status_or_lineage": "fixed dt 1.25e-5 s; late numerical excursion",
+      "bulk_points": 3001,
+      "bulk_native_range": [
+        5586,
+        8586
+      ],
+      "bulk_first_kg": 295.8535672079275,
+      "bulk_last_kg": 63.02335540190473,
+      "bulk_min_kg": 62.95803560129904,
+      "bulk_max_kg": 295.8535672079275,
+      "bulk_source": {
+        "path": "PyAnsys/output/phase72a_ewf_fixed_dt_e2.82_20260926T134145Z/report-histories.json",
+        "report_name": "v2-total-liquid-mass",
+        "selected_trajectory_sources": null,
+        "local_file": "FluentRuns/Phase72A/FamilyE/E2.82-fast-time-20260926T134145Z/monitors/v2-total-liquid-mass.out"
+      },
+      "film_points": 3001,
+      "film_native_range": [
+        5586,
+        8586
+      ],
+      "film_first_kg": 0.0,
+      "film_last_kg": 3.664955579442817,
+      "film_min_kg": 0.0,
+      "film_max_kg": 3.664955579442817,
+      "film_source": {
+        "path": "PyAnsys/output/phase72a_ewf_fixed_dt_e2.82_20260926T134145Z/report-histories.json",
+        "report_name": "p72a-e2.82-ewf-film-mass-total",
+        "selected_trajectory_sources": null,
+        "local_file": "FluentRuns/Phase72A/FamilyE/E2.82-fast-time-20260926T134145Z/monitors/p72a-e2.82-ewf-film-mass-total.out"
+      }
+    },
+    "E2.83": {
+      "status_or_lineage": "fixed dt 1.50e-5 s; thickness cap/divergence",
+      "bulk_points": 3001,
+      "bulk_native_range": [
+        5586,
+        8586
+      ],
+      "bulk_first_kg": 295.8535672079275,
+      "bulk_last_kg": 63.02335540190473,
+      "bulk_min_kg": 62.95803560129904,
+      "bulk_max_kg": 295.8535672079275,
+      "bulk_source": {
+        "path": "PyAnsys/output/phase72a_ewf_fixed_dt_e2.83_20260926T144249Z/report-histories.json",
+        "report_name": "v2-total-liquid-mass",
+        "selected_trajectory_sources": null,
+        "local_file": "FluentRuns/Phase72A/FamilyE/E2.83-fast-time-20260926T144249Z/monitors/v2-total-liquid-mass.out"
+      },
+      "film_points": 3001,
+      "film_native_range": [
+        5586,
+        8586
+      ],
+      "film_first_kg": 0.0,
+      "film_last_kg": 4543.926243510889,
+      "film_min_kg": 0.0,
+      "film_max_kg": 5423.433322612433,
+      "film_source": {
+        "path": "PyAnsys/output/phase72a_ewf_fixed_dt_e2.83_20260926T144249Z/report-histories.json",
+        "report_name": "p72a-e2.83-ewf-film-mass-total",
+        "selected_trajectory_sources": null,
+        "local_file": "FluentRuns/Phase72A/FamilyE/E2.83-fast-time-20260926T144249Z/monitors/p72a-e2.83-ewf-film-mass-total.out"
+      }
+    },
+    "E2.84": {
+      "status_or_lineage": "fixed dt 1.75e-5 s; thickness cap/divergence",
+      "bulk_points": 3001,
+      "bulk_native_range": [
+        5586,
+        8586
+      ],
+      "bulk_first_kg": 295.8535672079275,
+      "bulk_last_kg": 63.02335540190473,
+      "bulk_min_kg": 62.95803560129904,
+      "bulk_max_kg": 295.8535672079275,
+      "bulk_source": {
+        "path": "PyAnsys/output/phase72a_ewf_fixed_dt_e2.84_20260926T154347Z/report-histories.json",
+        "report_name": "v2-total-liquid-mass",
+        "selected_trajectory_sources": null,
+        "local_file": "FluentRuns/Phase72A/FamilyE/E2.84-fast-time-20260926T154347Z/monitors/v2-total-liquid-mass.out"
+      },
+      "film_points": 3001,
+      "film_native_range": [
+        5586,
+        8586
+      ],
+      "film_first_kg": 0.0,
+      "film_last_kg": 4902.772237201507,
+      "film_min_kg": 0.0,
+      "film_max_kg": 5402.685137664403,
+      "film_source": {
+        "path": "PyAnsys/output/phase72a_ewf_fixed_dt_e2.84_20260926T154347Z/report-histories.json",
+        "report_name": "p72a-e2.84-ewf-film-mass-total",
+        "selected_trajectory_sources": null,
+        "local_file": "FluentRuns/Phase72A/FamilyE/E2.84-fast-time-20260926T154347Z/monitors/p72a-e2.84-ewf-film-mass-total.out"
+      }
+    }
+  }
+}
