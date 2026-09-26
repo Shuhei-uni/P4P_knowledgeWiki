@@ -1,0 +1,47 @@
+status: G2_COMPLETE_NO_QUALIFIED_CASE
+server_id: 1
+pc_access: Fluent API only
+storage: LOCAL_ONLY
+baseline_manifest: PyAnsys/output/p7b-s040-20260921T013001Z/manifest.json
+cases:
+  S40-T020:
+    run_id: p7b-s40-t020-resume-20260921T231240Z
+    manifest: PyAnsys/output/p7b-s40-t020-resume-20260921T231240Z/manifest.json
+    parent_case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-clean-initial-20260912T080713Z.cas.h5
+    prepared_case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s40-t020-resume-20260921T231240Z-prepared.cas.h5
+    verified_N50_case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s40-t020-resume-20260921T231240Z-n00050.cas.h5
+    report: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-s40-t020-resume-20260921T231240Z.out
+    remote_transcript: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/logs/p7b-s40-t020-resume-20260921T231240Z.trn
+    local_directory: PyAnsys/output/p7b-s40-t020-resume-20260921T231240Z
+    controller_pid: 61084
+    latest_verified_checkpoint_case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s40-t020-resume-20260921T231240Z-final.cas.h5
+    latest_verified_checkpoint_iteration: 5000
+    status: COMPLETE_NUMERICAL_CRITERIA_NOT_MET
+    final_case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s40-t020-resume-20260921T231240Z-final.cas.h5
+    final_data: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s40-t020-resume-20260921T231240Z-final.dat.h5
+    completion_audit: PyAnsys/output/p7b-s40-t020-resume-20260921T231240Z/completion-audit.json
+    controller_status: EXITED_ZERO
+  S40-T100:
+    status: COMPLETE_NUMERICAL_CRITERIA_NOT_MET
+    run_id: p7b-s40-t100-20260922T022956Z
+    manifest: PyAnsys/output/p7b-s40-t100-20260922T022956Z/manifest.json
+    parent_case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-clean-initial-20260912T080713Z.cas.h5
+    report: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/reports/p7b-s40-t100-20260922T022956Z.out
+    remote_transcript: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/logs/p7b-s40-t100-20260922T022956Z.trn
+    local_directory: PyAnsys/output/p7b-s40-t100-20260922T022956Z
+    controller_pid: 75064
+    pre_solve_failed_attempt: PyAnsys/output/p7b-s40-t100-20260922T022827Z/manifest.json
+    prepared_case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s40-t100-20260922T022956Z-prepared.cas.h5
+    initial_case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s40-t100-20260922T022956Z-initial.cas.h5
+    predecessor_preserved_case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s40-t100-20260922T022956Z-predecessor-preserved.cas.h5
+    initial_parity: PyAnsys/output/p7b-s40-t100-20260922T022956Z/initial-parity.json
+    verified_N50_case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s40-t100-20260922T022956Z-n00050.cas.h5
+    latest_verified_checkpoint_case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s40-t100-20260922T022956Z-final.cas.h5
+    latest_verified_checkpoint_iteration: 5000
+    final_case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s40-t100-20260922T022956Z-final.cas.h5
+    final_data: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s40-t100-20260922T022956Z-final.dat.h5
+    completion_audit: PyAnsys/output/p7b-s40-t100-20260922T022956Z/completion-audit.json
+    controller_status: EXITED_ZERO
+comparison: PyAnsys/output/phase07b-g2/comparison.json
+native_graphics_manifest: PyAnsys/output/phase07b-g2/native-graphics-manifest.json
+further_solve_authorized: false

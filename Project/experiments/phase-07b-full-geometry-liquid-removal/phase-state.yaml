@@ -1,27 +1,52 @@
 phase_id: phase-07b-full-geometry-liquid-removal
 phase_question: Can a lower-region ideal liquid collector support balanced stable steady Mixture flow
   in the full separator while preserving useful separation above it?
-state: AWAITING_G1_DECISION
+state: E7_EXTERNAL_CONNECTIVITY_BLOCK_LIVE_ITERATION_UNKNOWN
 context:
   path: Project/experiments/phase-07b-full-geometry-liquid-removal/CONTEXT.md
   authority: human-approved-context-only
   approved_candidate_ids:
   - E1
+  - E2
+  - E3
+  - E4
+  - E5
+  - E6
+  - E7
   approved_case_ids:
   - S20
   - S40
   - S60
   - S80
   - S100
-  decision_gate: G1
+  - S40-T020
+  - S40-T100
+  - S40-T020-DIAG
+  - S40-T020-COUPLED-OFF
+  - S40-T020-COUPLED-CFL20
+  - S40-T020-COUPLED-CFL20-NPHASE
+  - S40-T100-COUPLED-CFL20-NPHASE
+  decision_gate: E7_IMPLEMENTATION
+  active_case_ids:
+  - S40-T100-COUPLED-CFL20-NPHASE
+  post_g3_authority: convergence-investigation/plan.md
 autonomy:
-  experiment_selection: context_gated
+  experiment_selection: phase_loop_within_post_g3_convergence_investigation
   fluent_fleet_sessions: restricted
   scope: Configured server-1 PC; Phase7b preparation and selected children only; all PC access through
     Fluent API
-  launch_authorization: Human selected planner option 1 on 2026-09-08
+  launch_authorization: '2026-09-22: Andy requested autonomous post-E3 audit of Shuhei''s newly pulled
+    work, correctness checks, literature/documentation research, and iterative controlled experiments
+    toward credible steady full-geometry convergence, especially continuity. Current E3 remains unchanged
+    through N5000 and G3.'
   max_iterations_per_case: 5000
-  qualification_authorized: false
+  qualification_authorized: true
+  further_solve_authorized: true
+  iteration_limit_note: Current E3 absolute cap remains 5000. Subsequent discovery default cap 5000; longer
+    bounded continuation requires prospective justification and cumulative horizon in the selected setup
+    under convergence-investigation/plan.md.
+  qualification_scope: Post-G3 numerical qualification only when prospectively designed to test supported
+    hypothesis; no automatic physical validation claim.
 gates:
   PHASE_CONTRACT:
     status: PASS
@@ -73,7 +98,7 @@ gates:
     - PyAnsys/output/phase07b-g1/comparison.json
     missing: []
   G1:
-    status: READY_FOR_HUMAN_DECISION
+    status: REVIEWED_FOLLOWUP_E2_SELECTED
     checked_at: '2026-09-21T19:10:52.110395+00:00'
     terminal_dispositions: 5
     horizon_complete_cases: 4
@@ -81,18 +106,145 @@ gates:
     qualified_cases: 0
     evidence: results.md
     further_solve_authorized: false
+    decision_record: CONTEXT.md#current-follow-up-authority--e2-22-september-2026
+  E2_DESIGN:
+    status: RECORDED_FROM_ACCEPTED_PROPOSAL
+    evidence: lower-sink-rate/setup.md
+    checked_at: '2026-09-21T22:53:47.847033+00:00'
+  E2_IMPLEMENTATION:
+    status: PASS_BOTH_CHILD_BUILDS_AND_N50
+    required:
+    - explicit tau parameter and unique run identity
+    - safe preserved-state predecessor reconciliation
+    - S40 parent/setup/mask/source parity and save-reopen
+    - complete recording route before solve
+    offline_evidence: PyAnsys/output/phase07b-e2-preparation/offline-verification.json
+    evidence: PyAnsys/output/p7b-s40-t020-resume-20260921T231240Z/manifest.json
+    scientific_iterations_before_recovery: 0
+    initial_field_parity: PyAnsys/output/p7b-s40-t020-resume-20260921T231240Z/initial-parity.json
+    smoke_evidence: PyAnsys/output/p7b-s40-t020-resume-20260921T231240Z/smoke-n00050.json
+    second_child_live_verification: BUILD_SAVE_REOPEN_INITIAL_PARITY_N50_PASS
+    second_child_initial_parity: PyAnsys/output/p7b-s40-t100-20260922T022956Z/initial-parity.json
+    second_child_smoke_evidence: PyAnsys/output/p7b-s40-t100-20260922T022956Z/smoke-n00050.json
+  G2:
+    status: PASS_BOUNDED_COMPARISON
+    checked_at: '2026-09-22T06:58:59.367691+00:00'
+    terminal_dispositions: 3
+    horizon_complete_cases: 3
+    new_horizon_complete_cases: 2
+    numerical_failure_cases: 0
+    qualified_cases: 0
+    evidence:
+    - lower-sink-rate/results.md
+    - lower-sink-rate/spatial-comparison.md
+    - PyAnsys/output/phase07b-g2/comparison.json
+    - PyAnsys/output/phase07b-g2/native-graphics-manifest.json
+    further_solve_authorized: false
+    qualification_authorized: false
+    claim_limit: Completed authorized discovery comparison; no balanced steady solution or qualified physical
+      mechanism established.
+    completion_audit: PyAnsys/output/phase07b-g2/completion-audit.json
+  E3_DESIGN:
+    status: PASS_HUMAN_SELECTED_REPLICATION
+    evidence: spike-diagnostic/setup.md
+  E3_IMPLEMENTATION:
+    status: PASS_BUILD_SAVE_REOPEN_INITIAL_PARITY_N0_N50_DIAGNOSTICS
+    evidence: PyAnsys/output/p7b-s40-t020-diag-20260922T071533Z/manifest.json
+    initial_parity: PyAnsys/output/p7b-s40-t020-diag-20260922T071533Z/initial-parity.json
+    configuration_parity: PyAnsys/output/p7b-s40-t020-diag-20260922T071533Z/configuration-parity.json
+    diagnostic_n0: PyAnsys/output/p7b-s40-t020-diag-20260922T071533Z/spike-diagnostics/fields-n00000.json
+    smoke_evidence: PyAnsys/output/p7b-s40-t020-diag-20260922T071533Z/smoke-n00050.json
+  G3:
+    status: PASS_BOUNDED_DIAGNOSTIC_COMPARISON
+    checked_at: '2026-09-22T13:27:59.024477+00:00'
+    terminal_dispositions: 1
+    horizon_complete_cases: 1
+    qualified_cases: 0
+    evidence:
+    - spike-diagnostic/results.md
+    - spike-diagnostic/spatial-comparison.md
+    - PyAnsys/output/phase07b-g3/completion-audit.json
+    claim_limit: Deterministic replication and sampled hotspot localisation; no causal isolation or credible
+      steady solution.
+  E4_IMPLEMENTATION:
+    status: PASS_BUILD_SAVE_REOPEN_N0_PARITY_AND_N50
+    evidence: PyAnsys/output/p7b-s40-t020-coupled-off-20260922T134224Z/manifest.json
+    initial_field_parity: PyAnsys/output/p7b-s40-t020-coupled-off-20260922T134224Z/initial-parity.json
+    geometry_parity: PyAnsys/output/p7b-s40-t020-coupled-off-20260922T134224Z/initial-geometry-parity.json
+    smoke_status: PASS
+    smoke_evidence: PyAnsys/output/p7b-s40-t020-coupled-off-20260922T134224Z/smoke-n00050.json
+  G4:
+    status: PASS_G4_BOUNDED_COMPARISON
+    checked_at: '2026-09-22T20:27:00.739900+00:00'
+    terminal_dispositions: 1
+    qualified_cases: 0
+    evidence:
+    - convergence-investigation/coupled-off/results.md
+    - PyAnsys/output/phase07b-g4/completion-audit.json
+  E5_DESIGN:
+    status: PASS_IN_SCOPE_CONTROLLED_CONTRAST
+    evidence: convergence-investigation/coupled-cfl20/setup.md
+  E5_IMPLEMENTATION:
+    status: PASS_BUILD_SAVE_REOPEN_N0_FIELDS_GEOMETRY_AND_N50
+    evidence: PyAnsys/output/p7b-s40-t020-coupled-cfl20-20260922T202845Z/manifest.json
+    initial_fields: PyAnsys/output/p7b-s40-t020-coupled-cfl20-20260922T202845Z/initial-parity.json
+    initial_geometry: PyAnsys/output/p7b-s40-t020-coupled-cfl20-20260922T202845Z/initial-geometry-parity.json
+    smoke_status: PASS
+    smoke_evidence: PyAnsys/output/p7b-s40-t020-coupled-cfl20-20260922T202845Z/supervision/20260922T205326Z/audit.json
+  G5:
+    status: PASS_G5_BOUNDED_COMPARISON
+    checked_at: '2026-09-23T02:43:59.509740+00:00'
+    qualified_cases: 0
+    evidence:
+    - convergence-investigation/coupled-cfl20/results.md
+    - PyAnsys/output/phase07b-g5/completion-audit.json
+  E6_DESIGN:
+    status: PASS_IN_SCOPE_CONTROLLED_CONTRAST
+    evidence: convergence-investigation/coupled-nphase/setup.md
+  E6_IMPLEMENTATION:
+    status: PASS_BUILD_EXACT_N0_RECOVERED_N50_AND_N55_CONTINUATION
+    scientific_iterations: 55
+    evidence: PyAnsys/output/phase07b-convergence-investigation/e6/resume-n50/live-audit-n55.json
+    passed:
+    - both Nphase initialization and prepared source/Coupled reopens
+    - exact original ordered physical fields and geometry at N0
+    - N-phase-only methods/controls
+    - eight residual monitors
+    - solver iterations and local flux/diagnostic recording started
+    not_passed: []
+    recovery_evidence: PyAnsys/output/phase07b-convergence-investigation/e6/retry2/persistence-probe-2/reconciliation.json
+  G6:
+    status: PASS_G6_BOUNDED_COMPARISON
+    checked_at: '2026-09-24T05:27:22.461339+00:00'
+    qualified_cases: 0
+    evidence:
+    - convergence-investigation/coupled-nphase/results.md
+    - PyAnsys/output/phase07b-g6/completion-audit.json
+  E7_DESIGN:
+    status: PASS_IN_SCOPE_CONTROLLED_CONTRAST
+    evidence: convergence-investigation/coupled-nphase-weaker-sink/setup.md
+  E7_IMPLEMENTATION:
+    status: PASS_TAU_ONLY_BOTH_REOPENS_EXACT_N0_RECOVERY_AND_N50
+    evidence: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n0-retry1/live-audit-n50.json
+    scientific_iterations: 50
+    passed:
+    - exact tau-only source delta
+    - both initial/prepared pair reopens
+    - unchanged live N0 fields/settings and original geometry/physical parity
+    - unique recovery N0 and N50 paired checkpoints
+    - all eight residuals, scalar and flux histories, diagnostic snapshots
+    - 49 source-lag pairs exact zero error
+    - normalized inventory/native parity while retaining raw phase data
 active_jobs: []
-next_required_action: Return G1 five-case evidence to Andy. No further solve, tuning, source-strength
-  change or qualification is authorized. Proposed separate fixed-geometry source-strength diagnostic requires
-  a new scientific decision.
-operational_status: G1_DISCOVERY_EVIDENCE_COMPLETE_NO_QUALIFIED_CASE
+next_required_action: Restore endpoint access, then perform one read-only API reconciliation of actual
+  iteration and idle/advancing state. Preserve live endpoint and recover native histories before deciding
+  continuation or explicitly documented checkpoint replay. Do not reload or issue solve from the stale
+  N500 counter.
+operational_status: NO_CONTROLLER_API_UNREACHABLE_N500_PRESERVED
 last_api_reconciliation:
-  global_iteration: 4000
-  case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s100-20260921T160825Z-n04000.cas.h5
-  data: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s100-20260921T160825Z-n04000.dat.h5
-  evidence: PyAnsys/output/p7b-s100-20260921T160825Z/failure-recovery/last-flux-readback.json
-  note: Failed N4183 state saved separately before readback of N4000 recovery pair. Recovery sections
-    extracted, no additional solve; session preserved idle.
+  status: UNREACHABLE_LIVE_STATE_UNKNOWN
+  evidence: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n679/check-20260926T101511Z/reconciliation.json
+  iterations_issued: 0
 failed_export:
   path: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/exports/p7b-phase-velocity-comparison-20260908T102932Z.csv
   status: ERROR_REPORTED; FILE_EXISTS_WITH_DATA; COMPLETENESS_UNVERIFIED
@@ -100,8 +252,10 @@ failed_export:
   api_evidence: PyAnsys/output/phase07b_preparation/failed-export-inspection.json
   accepted_validation_evidence: false
   automatic_retry: false
-latest_human_authorization: '2026-09-21: resume after temporary Wi-Fi disconnection; approved five-case
-  screen and periodic checks remain active.'
+latest_human_authorization: '2026-09-22: Andy requested autonomous post-E3 audit of Shuhei''s newly pulled
+  work, correctness checks, literature/documentation research, and iterative controlled experiments toward
+  credible steady full-geometry convergence, especially continuity. Current E3 remains unchanged through
+  N5000 and G3.'
 latest_read_only_access_check:
   health: SERVING
   evidence: PyAnsys/output/p7b-s060-20260921T043132Z/resume-check-20260921T112457Z/result.json
@@ -190,6 +344,44 @@ completed_cases:
     qualification: false
     results: s080-collector/results.md
     analysis: PyAnsys/output/p7b-s080-20260921T130348Z/analysis/summary.json
+  S40-T020:
+    run_id: p7b-s40-t020-resume-20260921T231240Z
+    completed_iterations: 5000
+    endpoint: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s40-t020-resume-20260921T231240Z-final.cas.h5
+    manifest: PyAnsys/output/p7b-s40-t020-resume-20260921T231240Z/manifest.json
+    analysis_status: COMPLETE_NUMERICAL_CRITERIA_NOT_MET
+    qualification: false
+    results: lower-sink-rate/results.md
+    analysis: PyAnsys/output/p7b-s40-t020-resume-20260921T231240Z/analysis/summary.json
+    completion_audit: PyAnsys/output/p7b-s40-t020-resume-20260921T231240Z/completion-audit.json
+  S40-T100:
+    run_id: p7b-s40-t100-20260922T022956Z
+    completed_iterations: 5000
+    endpoint: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s40-t100-20260922T022956Z-final.cas.h5
+    manifest: PyAnsys/output/p7b-s40-t100-20260922T022956Z/manifest.json
+    analysis_status: COMPLETE_NUMERICAL_CRITERIA_NOT_MET
+    qualification: false
+    results: lower-sink-rate/results.md
+    analysis: PyAnsys/output/p7b-s40-t100-20260922T022956Z/analysis/summary.json
+    completion_audit: PyAnsys/output/p7b-s40-t100-20260922T022956Z/completion-audit.json
+  S40-T020-DIAG:
+    run_id: p7b-s40-t020-diag-resume-20260922T122811Z
+    manifest: PyAnsys/output/p7b-s40-t020-diag-resume-20260922T122811Z/manifest.json
+    completed_iterations: 5000
+    endpoint: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s40-t020-diag-resume-20260922T122811Z-final.cas.h5
+    qualification: false
+    analysis_status: COMPLETE_NUMERICAL_CRITERIA_NOT_MET
+    results: spike-diagnostic/results.md
+    analysis: PyAnsys/output/phase07b-g3/comparison.json
+  S40-T020-COUPLED-OFF:
+    run_id: p7b-s40-t020-coupled-off-20260922T134224Z
+    completed_iterations: 5000
+    endpoint: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s40-t020-coupled-off-20260922T134224Z-final.cas.h5
+    manifest: PyAnsys/output/p7b-s40-t020-coupled-off-20260922T134224Z/manifest.json
+    qualification: false
+    analysis_status: COMPLETE_NUMERICAL_CRITERIA_NOT_MET
+    analysis: PyAnsys/output/phase07b-g4/comparison.json
+    results: convergence-investigation/coupled-off/results.md
 check_ins:
   automation_id: phase-7b-run-check-ins
   interval_minutes: 15
@@ -260,3 +452,233 @@ meeting_report:
   evidence: PyAnsys/output/phase07b-meeting-20260922/extraction.json
   additional_iterations: 0
   restored_case_iteration: 4000
+followup:
+  candidate_id: E2
+  setup: lower-sink-rate/setup.md
+  handover: HANDOVER.md
+  comparison_baseline: p7b-s040-20260921T013001Z
+  ordered_cases:
+  - case_id: S40-T020
+    tau_s: 0.02
+    collector_percent: 40
+    max_iterations: 5000
+    status: COMPLETE_NUMERICAL_CRITERIA_NOT_MET
+    run_id: p7b-s40-t020-resume-20260921T231240Z
+    manifest: PyAnsys/output/p7b-s40-t020-resume-20260921T231240Z/manifest.json
+    verified_checkpoint_iteration: 5000
+    analysis: PyAnsys/output/p7b-s40-t020-resume-20260921T231240Z/analysis/summary.json
+    completion_audit: PyAnsys/output/p7b-s40-t020-resume-20260921T231240Z/completion-audit.json
+  - case_id: S40-T100
+    tau_s: 0.1
+    collector_percent: 40
+    max_iterations: 5000
+    status: COMPLETE_NUMERICAL_CRITERIA_NOT_MET
+    run_id: p7b-s40-t100-20260922T022956Z
+    manifest: PyAnsys/output/p7b-s40-t100-20260922T022956Z/manifest.json
+    pre_solve_implementation_recovery: PyAnsys/output/p7b-s40-t100-20260922T022827Z/recovery-disposition.json
+    verified_checkpoint_iteration: 5000
+    analysis: PyAnsys/output/p7b-s40-t100-20260922T022956Z/analysis/summary.json
+    completion_audit: PyAnsys/output/p7b-s40-t100-20260922T022956Z/completion-audit.json
+  check_ins:
+    automation_id: phase-7b-e2-weaker-sink-supervision
+    interval_minutes: 15
+    status: PAUSED_G2_COMPLETE
+    scope: Current task E2 only; notify on meaningful change, completion, failure or required user action
+    last_checked_at_utc: '2026-09-22T07:01:08.438337+00:00'
+    last_observed_iteration: 5000
+    latest_evidence: PyAnsys/output/phase07b-g2/comparison.json
+    stop_reason: G2 comparison and required evidence complete. App automation update and persisted config
+      both confirm PAUSED.
+    pause_receipt: PyAnsys/output/phase07b-g2/automation-pause-receipt.json
+  source_lag_audit:
+    case_id: S40-T100
+    evidence: PyAnsys/output/p7b-s40-t100-20260922T022956Z/analysis/summary.json
+    max_abs_error_kg_s: 0.0
+    consecutive_pairs: 4999
+    limit: Complete T100 history; applied source at N equals current-field expression at N-1 for all 4999
+      pairs. T020 full proof retained separately.
+  comparison_script: PyAnsys/scripts/analysis/compare_phase07b_strength.py
+  residual_onset_diagnostic:
+    human_observation: Residuals appear more spiky after roughly N2700.
+    status: INCORPORATED_IN_TERMINAL_G2_ANALYSIS
+    record: lower-sink-rate/residual-onset.md
+    evidence: PyAnsys/output/p7b-s40-t020-resume-20260921T231240Z/diagnostics/residual-onset-n04500/summary.json
+    finding: Sharp epsilon bursts co-occur with maximum-speed excursions; other equations show broader
+      oscillations. Source/flow/turbulence cause not isolated.
+    scientific_changes: false
+    next_action: No automatic follow-up; causal localization remains a proposal for a new scientific decision.
+    terminal_evidence: PyAnsys/output/phase07b-g2/residual-peak-comparison.json
+  native_graphics_comparison:
+    status: COMPLETE_NATIVE_EXPORTS_QA_PASS
+    scope: Native Fluent images for baseline and both E2 dispositions, common planes/cameras/ranges; native
+      facet fields are preserved.
+    restriction: Use native Fluent graphics export under cfd-numerical-analysis figure reference; existing
+      local facet renders are not the final spatial deliverable.
+    evidence: PyAnsys/output/phase07b-g2/native-graphics-manifest.json
+    recovery: Unique view names avoid overwrite prompts; read timeout reconciled before retry; six portrait
+      labels repaired with native re-export. All source pairs preserved.
+    native_images: 30
+    additional_iterations: 0
+  status: G2_COMPLETE
+  comparison: PyAnsys/output/phase07b-g2/comparison.json
+  results: lower-sink-rate/results.md
+human_post_completion_constraint: Earlier stop after E3 superseded by latest autonomous convergence investigation
+  instruction. Finish E3/G3 first; no concurrent or duplicate controller.
+diagnostic_followup:
+  candidate_id: E3
+  case_id: S40-T020-DIAG
+  status: COMPLETE_NUMERICAL_CRITERIA_NOT_MET
+  setup: spike-diagnostic/setup.md
+  replication_of: p7b-s40-t020-resume-20260921T231240Z
+  max_iterations: 5000
+  capability_evidence: PyAnsys/output/phase07b-e3-capability-20260922T071037Z/receipt.json
+  check_ins:
+    automation_id: phase-7b-e2-weaker-sink-supervision
+    status: SUPERSEDED_BY_ACTIVE_E4_INVESTIGATION_HEARTBEAT
+    interval_minutes: 15
+    last_observed_iteration: 5000
+    last_checked_at_utc: '2026-09-22T13:27:59.024477+00:00'
+    latest_evidence: PyAnsys/output/phase07b-g3/completion-audit.json
+  run_id: p7b-s40-t020-diag-resume-20260922T122811Z
+  manifest: PyAnsys/output/p7b-s40-t020-diag-resume-20260922T122811Z/manifest.json
+  verified_checkpoint_iteration: 5000
+  latest_recording_audit:
+    status: TERMINAL_HISTORIES_AND_27_SNAPSHOTS_PASS
+    complete_through: 5000
+    verified_checkpoint_iteration: 5000
+    verified_snapshot_iterations:
+    - 0
+    - 50
+    - 500
+    - 1000
+    - 1500
+    - 2000
+    - 2500
+    - 2600
+    - 2700
+    - 2800
+    - 3000
+    - 3500
+    - 3786
+    - 3787
+    - 3791
+    - 4000
+    - 4124
+    - 4125
+    - 4129
+    - 4328
+    - 4329
+    - 4333
+    - 4500
+    - 4763
+    - 4764
+    - 4768
+    - 5000
+    evidence: PyAnsys/output/phase07b-g3/comparison.json
+  first_speed_event:
+    iteration: 3786
+    max_speed_m_s: 661.8642434452098
+    xyz_m:
+    - 0.3934276399250945
+    - 2.4274766404274253
+    - -0.9995445996090059
+    outside_collector: true
+    verified_followup_iterations:
+    - 3787
+    - 3791
+    evidence: PyAnsys/output/p7b-s40-t020-diag-20260922T071533Z/supervision/20260922T111456Z-first-event.json
+    status: INTERIM_LOCALISATION_VERIFIED_CAUSE_UNRESOLVED
+  controller_loss_recovery:
+    local_last_complete_iteration: 4283
+    native_scalar_and_live_iteration: 4284
+    controller_pid_absent: 91348
+    controller_lock_free: true
+    scientific_changes: false
+    inspection: PyAnsys/output/p7b-s40-t020-diag-20260922T071533Z/recovery-20260922T1202/attempt-3/inspection.json
+    preservation: PyAnsys/output/p7b-s40-t020-diag-20260922T071533Z/recovery-20260922T1202/preservation.json
+    case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s40-t020-diag-20260922T071533Z-preserve-n04284-20260922T1210.cas.h5
+    pending_chunk: 4000_to_4500
+    interrupt_status: End-of-iteration interrupt completed asynchronously; live idle state verified by
+      pause-discovery/result.json before replacement controller
+    cause: Local controller disappearance cause unknown; not evidence of numerical failure
+    resume_manifest: PyAnsys/output/p7b-s40-t020-diag-resume-20260922T122811Z/manifest.json
+    worker_manifest: PyAnsys/output/p7b-s40-t020-diag-20260922T071533Z/recovery-20260922T1202/resume3-job-manifest.json
+    retired_pause_release: PyAnsys/output/p7b-s40-t020-diag-20260922T071533Z/recovery-20260922T1202/pause-owner/release.json
+    recovery_worker_repair: PyAnsys/output/p7b-s40-t020-diag-20260922T071533Z/recovery-20260922T1202/worker-repair/receipt.json
+    status: RECOVERED_WITH_FULL_HISTORY_NO_REINITIALIZATION
+    recovery_pass: PyAnsys/output/p7b-s40-t020-diag-resume-20260922T122811Z/supervision/20260922T123007Z-recovery-pass.json
+  initial_run_id: p7b-s40-t020-diag-20260922T071533Z
+  initial_manifest: PyAnsys/output/p7b-s40-t020-diag-20260922T071533Z/manifest.json
+  completion_audit: PyAnsys/output/p7b-s40-t020-diag-resume-20260922T122811Z/completion-audit.json
+  postprocessing:
+    status: COMPLETE_NATIVE_QA_PASS
+    evidence: PyAnsys/output/phase07b-g3/native-graphics-manifest.json
+    restored_endpoint: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s40-t020-diag-resume-20260922T122811Z-final.cas.h5
+  analysis: PyAnsys/output/phase07b-g3/comparison.json
+  results: spike-diagnostic/results.md
+  g3_completion: PyAnsys/output/phase07b-g3/completion-audit.json
+convergence_investigation:
+  status: E7_EXTERNAL_CONNECTIVITY_BLOCK_LIVE_ITERATION_UNKNOWN
+  plan: convergence-investigation/plan.md
+  authority: '2026-09-22: Andy requested autonomous post-E3 audit of Shuhei''s newly pulled work, correctness
+    checks, literature/documentation research, and iterative controlled experiments toward credible steady
+    full-geometry convergence, especially continuity. Current E3 remains unchanged through N5000 and G3.'
+  initial_pulled_commit: b8c7830
+  initial_audit_target: Project/experiments/phase-07-1a-absorber-convergence/roughness-family/r0-smooth-control
+  next_child_selected: true
+  check_ins:
+    automation_id: phase-7b-e2-weaker-sink-supervision
+    status: PAUSED_EXTERNAL_CONNECTIVITY_BLOCK
+    interval_minutes: 15
+    pause_after_G3: false
+    receipt: PyAnsys/output/phase07b-convergence-investigation/e6/retry2/automation-resume-receipt.json
+    last_checked_at_utc: '2026-09-24T09:28:12.407130+00:00'
+    last_observed_iteration: 678
+    latest_evidence: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n679/partial-recording-audit.json
+    pause_receipt: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n679/automation-pause-receipt.json
+  audit: convergence-investigation/shuhei-audit.md
+  results: convergence-investigation/results.md
+  selected_setup: convergence-investigation/coupled-nphase-weaker-sink/setup.md
+  case_id: S40-T100-COUPLED-CFL20-NPHASE
+  run_id: p7b-s40-t100-coupled-cfl20-nphase-resume-20260924T054531Z
+  manifest: PyAnsys/output/p7b-s40-t100-coupled-cfl20-nphase-resume-20260924T054531Z/manifest.json
+  capability: PyAnsys/output/phase07b-e4-control-probe-20260922T1352/receipt.json
+  completion_policy_note: E7 requires correct section index.json paths and source_treatment exact tau-only
+    proof; no E4 reconciliation applies.
+  latest_evidence: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n679/check-20260926T101511Z/reconciliation.json
+  previous_completion: PyAnsys/output/phase07b-g6/completion-audit.json
+  verified_checkpoint_iteration: 500
+  e6_history:
+    recovery_design: convergence-investigation/coupled-nphase/recovery.md
+    initial_failed_run: p7b-s40-t020-coupled-cfl20-nphase-20260923T024536Z
+    pre_solve_session_preference_retry: p7b-s40-t020-coupled-cfl20-nphase-20260923T223022Z
+    recovery_order: Enable N-phase before original SIMPLE Hybrid; exact physical/geometry parity before
+      both pair reopens and after prepared reload
+    previous_failed_retry: p7b-s40-t020-coupled-cfl20-nphase-20260923T225542Z
+    analysis_preparation:
+      status: G6_NORMALIZED_AND_RAW_FRACTION_SNAPSHOT_TOOL_VERIFIED
+      evidence: PyAnsys/output/phase07b-convergence-investigation/e6/resume-n50/g6-snapshot-tool-verification.json
+      terminal_analysis_complete: false
+  initial_run_id: p7b-s40-t100-coupled-cfl20-nphase-20260924T053024Z
+  recovery:
+    kind: implementation_failure_before_solve
+    evidence: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n0/offline-verification.json
+    selected_run_id: p7b-s40-t100-coupled-cfl20-nphase-resume-20260924T054531Z
+    job: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n0-retry1/job.yaml
+    scientific_changes: false
+    report_path_reconciliation: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n0/report-path-inspection.json
+    status: COMPLETE_NO_RELOAD_NO_INITIALIZATION_NO_SCIENTIFIC_CHANGE
+  transport_recovery:
+    status: EXTERNAL_CONNECTIVITY_BLOCK
+    last_paired_checkpoint: 500
+    last_local_flux: 679
+    last_local_diagnostic_and_residual: 678
+    failure: Stream removed (recvmsg:Operation timed out)
+    evidence: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n679/check-20260926T101511Z/reconciliation.json
+    no_retry_solve_or_reload: true
+    partial_audit: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n679/partial-recording-audit.json
+    live_iteration: unknown
+    last_attempt_utc: '2026-09-26T10:15:12.140742+00:00'
+next_action: Restore endpoint access, then perform one read-only API reconciliation of actual iteration
+  and idle/advancing state. Preserve live endpoint and recover native histories before deciding continuation
+  or explicitly documented checkpoint replay. Do not reload or issue solve from the stale N500 counter.

@@ -1,12 +1,14 @@
 # Phase Context — Phase 7b Full-Geometry Steady Liquid Removal
 
+Current frontier: **G6 complete; E7 weaker-sink contrast selected**, with no qualified case. See [investigation results](convergence-investigation/results.md) and [E7 setup](convergence-investigation/coupled-nphase-weaker-sink/setup.md). Machine state owns live progress.
+
 ## Status
 
-- **Planning state:** G1 discovery comparison complete; four N5000 cases fail numerical criteria; S100 numerical failure at attempted N4183. See [results](results.md). No qualification or further solve authorized.
+- **Planning state:** G1–G6 are complete; no qualified case. E6 reduced some residuals but did not restore conservation. E7 changes only tau0.02→0.10s under unchanged Coupled/N-phase treatment. Live build/parity/smoke status belongs to phase-state.
 - **Owner:** Andy; separate from Shuhei's Phase 7
-- **Last human review:** 2026-09-08
-- **Experiment-selection authority:** human-approved-context-only
-- **Current decision:** retain the full geometry and investigate a function-based
+- **Last human review:** 2026-09-22 (autonomous convergence investigation after E3, including Shuhei's new work)
+- **Experiment-selection authority:** phase-loop within the human-approved convergence objective below
+- **Original G1 decision (completed):** retain the full geometry and investigate a function-based
   liquid-removal zone as an ideal collector in a strictly steady-state model.
   Compare multiple collector thicknesses, with the maximum upper elevation at
   the historical model cut plane representing the assumed pool surface. A
@@ -16,6 +18,58 @@
   The approved comparison is complete and returned in [results](results.md).
   Source implementation and instrumentation are verified; none of the tested
   cases establishes a credible steady solution.
+
+## Current authority — autonomous convergence investigation after E3 (22 September 2026)
+
+Andy requested that, once the current run finishes, the agent audit Shuhei's
+newly pulled work and its apparently improved residuals, check correctness,
+consult literature/documentation, and keep iterating autonomously toward a
+credible steady model, particularly better continuity. The
+[investigation plan](convergence-investigation/plan.md) records the ordered
+audit, scientific objective, allowed numerical/source experiments, bounded
+execution and evidence requirements. This supersedes the earlier stop after
+G3 and prohibition on automatically selecting further experiments. Routine
+experiment selection, implementation, recovery and evidence-backed continuation
+inside that objective do not require another human approval.
+
+E3 and G3 are complete with the frozen settings and N5000 cap. Keep the existing supervision heartbeat
+active afterward for the investigation. The target remains steady full geometry
+at the intended full feed, with liquid removal and credible phase routing;
+good residuals alone are insufficient. E6 selects all-phase volume-fraction equations from the same fresh parent after G5, and Shuhei's separate campaign is not execution authority
+for Andy's run.
+
+## Completed run authority — E3 (22 September 2026)
+
+Andy returned home, requested a new run, and selected “Diagnostic repeat of
+S40-T020.” This supersedes the earlier temporary stop after E2. Execute one
+fresh S40-T020-DIAG case at tau 0.02 s with unchanged physics/numerics and a
+5,000-iteration cap. Added diagnostics locate sampled velocity/turbulence
+excursions and investigate the observed onset near N2700. The
+[E3 setup](spike-diagnostic/setup.md) owns the runnable evidence contract.
+Routine implementation, verification, execution, recovery and G3 analysis are
+authorized. E3 itself remains this one unchanged case with no extension.
+Post-G3 work now follows the later autonomous-investigation authority above.
+Keep the old G1 automation paused; retain the existing current-task heartbeat.
+
+## Completed follow-up authority — E2 (22 September 2026)
+
+Andy said: “up next we can try the experiment with the lower [sink] rate,
+as you suggested,” and requested a handover for a new chat. The execution task carries out the accepted experiment via phase-loop. [E2 setup](lower-sink-rate/setup.md) owns the new runnable intent.
+
+The accepted proposal holds S40 geometry fixed and tests tau 0.02 s first,
+then 0.10 s, each from the verified common fresh reference and with at most
+5,000 steady iterations. Reuse the completed S40 tau=0.0024095893 s baseline.
+Change only tau and its consequent scaling of the existing coupled sources.
+Retain steady Python/PyFluent-only operation, Energy off, full feed, closed
+brine face and no standing-pool requirement. The old G1 requirement to keep
+tau fixed across thicknesses remains the historical comparison contract; it
+does not prohibit these newly accepted E2 coefficients.
+
+Preparation, execution, in-scope technical recovery and analysis of these two
+points are authorized. Implementation/readback/save-reopen gates remain
+necessary; new physics, numerical treatments, additional coefficients,
+extended horizons and qualification are not authorized. G2 returns the
+baseline-plus-two-point comparison and next scientific decision. That comparison is complete in [G2 results](lower-sink-rate/results.md). Both solve controllers have exited and all endpoints are preserved. Andy temporarily requested no new simulation after this work; the later E3 selection above supersedes that stop. The earlier G1 automation remains paused; E2 supervision is also confirmed paused after G2 completion.
 
 ## Human thinking
 

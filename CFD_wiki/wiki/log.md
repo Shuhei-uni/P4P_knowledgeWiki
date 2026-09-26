@@ -461,3 +461,9 @@
   new plant assumption or active experiment promotion occurred.
 - Exact original notes and their log remain in the
   [source recovery snapshot](https://github.com/Shuhei-uni/P4P_knowledgeWiki/tree/archive/andy-local-20260908).
+
+## [2026-09-22] guidance-update | steady-mixture-coupled-and-residual-controls
+
+- Files updated: `wiki/guidance/fluent-general-click-by-click.md`, `wiki/sources/ansys-fluent-users-guide-2025r2.md`, `wiki/index.md`, `wiki/log.md`.
+- Reason: focused official-v252 lookup distinguishes ordinary Coupled, phase coupling and Global Time Step; preserves the multiphase conservation caveat and independent balance requirement.
+- Assumptions: no sink exception or case-specific convergence guarantee inferred; generic default controls are not promoted to optimal settings.

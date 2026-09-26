@@ -30,16 +30,25 @@ VOLUMES = {20: .5612436425388415, 40: 1.4681621275, 60: 2.4628949897,
 HOOKS = {"phase-2": {"mass": "P7bSink"}, "mixture": {
     "x-momentum": "P7bSinkX", "y-momentum": "P7bSinkY", "z-momentum": "P7bSinkZ",
     "k": "P7bSinkK", "epsilon": "P7bSinkEpsilon"}}
+BASELINE_TAU_S = 0.0024095893
 
 
-def definitions(percent):
+def positive_tau(value):
+    tau = float(value)
+    if not math.isfinite(tau) or tau <= 0:
+        raise ValueError("Collector tau must be finite and strictly positive")
+    return tau
+
+
+def definitions(percent, tau_s=BASELINE_TAU_S):
+    tau_s = positive_tau(tau_s)
     loc = f'["{ZONE}"]'
     predicate = f"AND(y >= -1.4845837354660034[m], y <= {TOPS[percent]:.17g}[m])"
     d = {"P7bAlpha": 'Volumefraction(phase="phase-2")',
          "P7bMask": f"IF({predicate},1.0,0.0)",
          "P7bK": 'TurbulentKineticEnergyk',
          "P7bEpsilon": 'TurbulenceDissipationRate',
-         "P7bSink": "-P7bMask*881.77[kg/m^3]*min(1.0,max(0.0,P7bAlpha))/0.0024095893[s]"}
+         "P7bSink": f"-P7bMask*881.77[kg/m^3]*min(1.0,max(0.0,P7bAlpha))/{tau_s}[s]"}
     for axis in "xyz":
         d["P7bLiquid"+axis.upper()] = f'Velocity.{axis}(phase="phase-2")'
         d["P7bSink"+axis.upper()] = "P7bSink*P7bLiquid"+axis.upper()

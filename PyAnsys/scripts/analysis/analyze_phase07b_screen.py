@@ -25,6 +25,22 @@ import numpy as np
 
 HORIZON = 5000
 WINDOWS = ((4001, 4500), (4501, 5000))
+BASE_RESIDUAL_EQUATIONS = {"continuity", "x-velocity", "y-velocity", "z-velocity", "k", "epsilon", "vf-phase-2"}
+
+
+def expected_residual_equations(manifest: dict[str, Any]) -> set[str]:
+    """Use the recorded post-treatment set; only historical runs use seven."""
+    names = manifest.get("expected_residual_equations")
+    if names is None:
+        if manifest.get("experiment_id") in {"E6", "E7"}:
+            raise ValueError("N-phase runs must record post-treatment residual expectations")
+        return set(BASE_RESIDUAL_EQUATIONS)
+    if not isinstance(names, list) or not all(isinstance(n, str) for n in names):
+        raise ValueError("Invalid expected residual equation list")
+    expected = set(names)
+    if len(expected) != len(names) or not BASE_RESIDUAL_EQUATIONS.issubset(expected) or "iteration" in expected:
+        raise ValueError("Expected residual equations omit baseline or contain duplicates")
+    return expected
 
 
 def fingerprint(path: Path) -> dict[str, Any]:
@@ -219,7 +235,7 @@ def fixed_windows(x: np.ndarray, metrics: dict[str, np.ndarray], units: dict[str
     return {"windows": windows, "second_minus_first": comparisons}
 
 
-def screening_indicators(metric_windows: dict[str, Any], residual_windows: dict[str, Any]) -> dict[str, Any]:
+def screening_indicators(metric_windows: dict[str, Any], residual_windows: dict[str, Any], expected_equations: set[str] | None = None) -> dict[str, Any]:
     """Evaluate declared discovery conventions; never promote a case."""
     final = metric_windows["windows"]["4501-5000"]
     residual_final = residual_windows["windows"]["4501-5000"]
@@ -235,7 +251,7 @@ def screening_indicators(metric_windows: dict[str, Any], residual_windows: dict[
         "mean_change_percent_of_larger_mean_with_1e-6_m3_floor")
     result["inventory"] = {"window_mean_change_percent_of_larger_mean": change,
                             "passes_1_percent": abs(change) <= 1 if change is not None else None}
-    expected = {"continuity", "x-velocity", "y-velocity", "z-velocity", "k", "epsilon", "vf-phase-2"}
+    expected = BASE_RESIDUAL_EQUATIONS if expected_equations is None else expected_equations
     result["residual_equations_complete"] = expected == set(residual_final["metrics"])
     result["residuals"] = {name: {"maximum": values["maximum"], "passes_1e_3_throughout_window": values["maximum"] <= 1e-3}
                            for name, values in residual_final["metrics"].items()}
@@ -256,7 +272,8 @@ def draw(ax: Any, x: np.ndarray, metrics: dict[str, np.ndarray], names: list[tup
     ax.grid(alpha=.2)
 
 
-def analyze(run: Path, output: Path, section_scales: Path | None = None) -> dict[str, Any]:
+def analyze(run: Path, output: Path, section_scales: Path | None = None,
+            *, render_sections: bool = True) -> dict[str, Any]:
     output.mkdir(parents=True, exist_ok=True)
     manifest_path = run / "manifest.json"
     if not manifest_path.exists():
@@ -296,6 +313,8 @@ def analyze(run: Path, output: Path, section_scales: Path | None = None) -> dict
         raise ValueError("Evidence extends beyond declared last completed iteration")
     coverage(flux_audit, flux, end)
     coverage(residual_audit, residuals, end)
+    residual_audit["expected_equations"] = sorted(expected_residual_equations(manifest))
+    residual_audit["equation_set_complete"] = set(residuals) == {"iteration"} | expected_residual_equations(manifest)
     metrics, units = derive(data)
     source_lag_audit = None
     if all(name in metrics for name in ["native_applied_removal", "current_expression_removal"]):
@@ -372,7 +391,7 @@ def analyze(run: Path, output: Path, section_scales: Path | None = None) -> dict
     metric_windows = fixed_windows(x, metrics, units)
     residual_windows = fixed_windows(residuals["iteration"], residual_metrics, {n: "1" for n in residual_metrics})
     section_summary = None
-    if (run / "initial-sections" / "index.json").exists() and ((run / "final-sections" / "index.json").exists()
+    if render_sections and (run / "initial-sections" / "index.json").exists() and ((run / "final-sections" / "index.json").exists()
             or recovery and (run / recovery.get("directory", recovery["stage"] + "-sections") / "index.json").exists()):
         from plot_phase07b_sections import render
         section_summary = render(run, output, section_scales)
@@ -404,7 +423,7 @@ def analyze(run: Path, output: Path, section_scales: Path | None = None) -> dict
         "fixed_late_windows": metric_windows,
         "collector_flux_fixed_late_windows": fixed_windows(flux["iteration"], {n: a for n, a in flux.items() if n != "iteration"}, {n: "kg/s" for n in flux if n != "iteration"}),
         "residual_fixed_late_windows": residual_windows,
-        "declared_screening_indicators": screening_indicators(metric_windows, residual_windows),
+        "declared_screening_indicators": screening_indicators(metric_windows, residual_windows, expected_residual_equations(manifest)),
         "spatial_evidence": fingerprint(output / "section-summary.json") if section_summary else None,
         "definitions": {
             "applied_closure": "B + signed native applied mass source for liquid/mixture; B for vapor. Source counted once.",
@@ -416,7 +435,9 @@ def analyze(run: Path, output: Path, section_scales: Path | None = None) -> dict
         "limitations": ["Horizon completion does not establish convergence or physical steady state.",
                         ("Attempted failure iteration has no completed report row; it is not a missing completed sample. Finite runaway values are retained but are not physical results."
                          if terminal else "No terminal numerical-failure disposition was supplied."),
-                        ("F3 renders saved native facet data without interpolation; common scales must be maintained across the five cases."
+                        ("Spatial graphics are handled separately through native Fluent exports; this invocation covers histories only."
+                         if not render_sections else
+                         "F3 renders saved native facet data without interpolation; common scales must be maintained across the five cases."
                          if section_summary else "F3 remains missing: native initial/final field extraction is required."),
                         "Conflicting duplicate samples retain the first observed row and invalidate completeness.",
                         "No numerical qualification claim is made by this script."],
@@ -432,8 +453,10 @@ if __name__ == "__main__":
     parser.add_argument("run_directory", type=Path)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--section-scales", type=Path, help="Shared scale JSON for matched cross-case F3 panels")
+    parser.add_argument("--histories-only", action="store_true", help="Keep spatial graphics in the separate native Fluent export workflow")
     args = parser.parse_args()
-    result = analyze(args.run_directory, args.output or args.run_directory / "analysis", args.section_scales)
+    result = analyze(args.run_directory, args.output or args.run_directory / "analysis", args.section_scales,
+                     render_sections=not args.histories_only)
     print(json.dumps({"run_id": result["run_id"], "status": result["analysis_status"],
                       "last_iteration": result["observed_report_last_iteration"],
                       "missing_metrics": result["missing_required_derived_metrics"]}, indent=2))

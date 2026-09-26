@@ -1,5 +1,9 @@
 # ansys-fluent-users-guide-2025r2
 
+The [steady Mixture coupling procedure](../guidance/fluent-general-click-by-click.md#steady-mixture-coupling-and-residual-comparisons-2025-r2)
+extends this source with verified v252 restrictions on Coupled, Global Time
+Step and residual normalization; primary section links are retained there.
+
 ## A. Study Scope
 - Problem statement and objective:
   - `Reported`: official software documentation describing Fluent capabilities and operating procedures for meshing, solution setup, execution, and postprocessing.

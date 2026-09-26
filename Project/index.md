@@ -106,8 +106,21 @@ It did not achieve acceptable mass closure; S40, S60 and S80 also completed 5,00
 none of the four meets the numerical criteria. S100 suffered numerical failure
 at attempted N4183; all completed N1–4182 records and a labelled N4000 recovery
 field set are preserved. The [G1 comparison](experiments/phase-07b-full-geometry-liquid-removal/results.md)
-is complete; no case is qualified and check-ins stop. See the
+is complete; no case is qualified and G1 check-ins are paused. After the
+meeting Andy accepted the fixed-S40 weaker-sink follow-up (tau 0.02 s, then
+0.10 s). Its [new-chat handover](experiments/phase-07b-full-geometry-liquid-removal/HANDOVER.md)
+and [E2 setup](experiments/phase-07b-full-geometry-liquid-removal/lower-sink-rate/setup.md)
+record the completed experiment: both children reached N5000 with verified
+evidence and failed the numerical indicators. The [G2 comparison](experiments/phase-07b-full-geometry-liquid-removal/lower-sink-rate/results.md)
+shows that tau alone did not establish balanced, stationary behaviour. Andy subsequently selected one [S40-T020 diagnostic replication](experiments/phase-07b-full-geometry-liquid-removal/spike-diagnostic/setup.md), with additional spike capture and unchanged physics/numerics. See the
 [technical diagnostics](experiments/phase-07b-full-geometry-liquid-removal/diagnostics.md).
+On 2026-09-22 Andy expanded the post-E3 authority to an
+[autonomous convergence investigation](experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/plan.md):
+finish E3/G3, audit Shuhei's newly pulled results and their correctness, consult
+relevant documentation/literature, and iterate through controlled tests toward
+credible steady convergence, especially continuity. The existing heartbeat
+continues past completed G5. The [E5 result](experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/coupled-cfl20/results.md) shows improved closure but worse inventory drift. [E6 N-phase equations](experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/coupled-nphase/setup.md) is selected but blocked before solve by a prepared-data reload crash and loss of API access. The [Shuhei audit](experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/shuhei-audit.md) remains the correctness and transfer reference.
+
 Gate G1 returns the comparative observations to Andy. The selected condition
 is steady Mixture/RNG physics with Energy off and full-feed `1600 kJ/kg`,
 supplied through separate liquid and steam inlet faces using the earlier
@@ -221,8 +234,10 @@ coefficient and evidence contract in its
 [design](experiments/phase-07b-full-geometry-liquid-removal/design.md).
 The approved five-case screen now has a complete G1 comparison: four
 N5000 endpoints fail numerical criteria and S100 has a documented numerical
-block at attempted N4183. Review its [results](experiments/phase-07b-full-geometry-liquid-removal/results.md)
-before authorizing any new scientific treatment. Shuhei's Phase 7
+block at attempted N4183. The post-meeting E2 weaker-sink follow-up and
+[G2 comparison](experiments/phase-07b-full-geometry-liquid-removal/lower-sink-rate/results.md)
+are complete: both fresh strength points reached N5000 but failed the numerical
+indicators. G3 diagnostic replication and G4/G5 Coupled comparisons are also complete without a qualified case; E6 N-phase equations is the active controlled contrast under the autonomous investigation authority. Shuhei's Phase 7
 retains the original E0--E4 fixed-mesh campaign as the comparison record and
 now executes the human-approved E5 cell-zone recovery family. The first
 student-server split placed `3,794` lower cells in a second fluid zone without

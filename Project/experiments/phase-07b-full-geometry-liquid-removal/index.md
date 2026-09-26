@@ -1,5 +1,7 @@
 # Phase 7b — Full-Geometry Steady Liquid Removal
 
+Current frontier: **G6 complete; E7 weaker-sink contrast selected**, with no qualified case. See [investigation results](convergence-investigation/results.md) and [E7 setup](convergence-investigation/coupled-nphase-weaker-sink/setup.md). Machine state owns live progress.
+
 ## Status
 
 **Human-selected direction, revised on 2026-09-08.** Retain the full geometry,
@@ -37,7 +39,12 @@ S20/S40/S60/S80 completed N5000 but failed the numerical indicators; S100
 suffered numerical divergence at attempted N4183, with complete records through
 N4182 and preserved failed/recovery pairs. The [G1 comparison](results.md)
 contains the figures, observations, alternatives and proposed next decision.
-No case is qualified. Check-ins stop at G1; no further solve is authorized.
+No case is qualified. The G1 check-ins are paused. After the meeting, Andy
+accepted the weaker-sink E2 follow-up; see [new-chat handover](HANDOVER.md)
+and [E2 setup](lower-sink-rate/setup.md). Both weaker-sink children completed
+N5000 with full evidence but failed the numerical indicators. The three-point
+[G2 result](lower-sink-rate/results.md) and [native spatial comparison](lower-sink-rate/spatial-comparison.md)
+are complete. Andy subsequently selected one [S40-T020 diagnostic replication (E3)](spike-diagnostic/setup.md), with unchanged physics/numerics and a fresh 5,000-iteration cap; it adds spatial capture around sampled speed spikes.
 
 The resolved brine-outlet study's 620,431-cell mesh is staged in the Phase 7b
 folder on Extreme SSD with a verified matching SHA-256. Its PC copy is at
@@ -81,11 +88,11 @@ Success would qualify a computational collection mechanism within its tested
 conditions. Physical pool behaviour, drainage hardware and separator-efficiency
 validation remain outside this phase's initial claim.
 
-## Next decision
+## Next selected work
 
-Review the [G1 evidence](results.md) and decide whether to authorize a separate
-fixed-geometry source-strength diagnostic. The current five-case queue is
-exhausted. No source-strength change, numerical tuning, extra iterations or
-qualification is automatically authorized.
+G5 is complete. The [E5 comparison](convergence-investigation/coupled-cfl20/results.md)
+and focused documentation lookup select [E6 N-phase equations](convergence-investigation/coupled-nphase/setup.md).
+The [autonomous investigation](convergence-investigation/plan.md) remains active;
+[phase-state](phase-state.yaml) identifies the current build/run and next action.
 
 [Supervisor meeting PDF and figure bundle](meeting-report.md) provide a minimal-text presentation of the G1 evidence.

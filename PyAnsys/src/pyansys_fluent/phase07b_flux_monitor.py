@@ -77,6 +77,7 @@ class Phase07bFluxMonitor:
         local_jsonl: str | Path,
         remote_directory: str,
         prefix_source: str | Path | None = None,
+        after_capture: Any = None,
     ) -> None:
         if not face_zones or len({z.name for z in face_zones}) != len(face_zones):
             raise ValueError("Require at least one unique face-zone name")
@@ -95,6 +96,7 @@ class Phase07bFluxMonitor:
         self.remote_directory = remote_directory.replace("\\", "/").rstrip("/")
         self.capture_id = uuid4().hex
         self.prefix_source = Path(prefix_source) if prefix_source else None
+        self.after_capture = after_capture
         self._callback_id: str | None = None
         self._file: Any = None
         self._lock = threading.RLock()
@@ -242,6 +244,9 @@ class Phase07bFluxMonitor:
                     raise RuntimeError("Remote write unconfirmed or destination already exists")
                 self._rows += 1
                 self._last_iteration = iteration
+                if self.after_capture is not None:
+                    stage = "additional_diagnostic_capture"
+                    self.after_capture(session, iteration, row)
             except Exception as exc:
                 self._latch(exc, stage=stage, iteration=iteration)
 

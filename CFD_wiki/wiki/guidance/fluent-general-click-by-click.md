@@ -11,6 +11,41 @@ Evidence label policy for this page:
 - `Reported`: explicitly listed in User's Guide sections/menu terminology.
 - `Inferred`: practical click path assembled from Fluent UI flow when the exact dialog path is distributed across sections.
 
+## Steady Mixture coupling and residual comparisons (2025 R2)
+
+**Reported:** ordinary Coupled supports Mixture with segregated volume fraction.
+Coupled with Volume Fractions is a separate option and is unavailable with
+Mixture slip enabled. Global pseudo time does not guarantee mass conservation
+for a steady closed domain or when phases lack separate inflow/outflow
+boundaries. **Missing:** this guidance does not say that a volumetric sink
+substitutes for a phase outlet. [UG §§27.8.1.2–1.3, 27.8.1.7](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_sec_multiphase_solution.html).
+
+**Inferred procedure:** preserve the parent pair. In General retain steady,
+pressure-based operation. In Solution → Methods choose Coupled and retain the
+intended volume-fraction coupling state. Explicitly choose pseudo time Off or
+Global Time Step; then inspect Solution → Controls and advanced controls.
+Save/reopen and verify every activated setting before solving.
+
+**Reported:** Coupled with pseudo time Off uses Flow Courant and explicit
+pressure/momentum relaxation; generic defaults are 200 and 0.5/0.5, not a
+case-specific optimum. [UG §37.3.1.5](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_sec_uns_solve_pvel_1.html).
+For Global Time Step also inspect Run Calculation → Pseudo Time Settings,
+automatic versus specified timestep, Time Scale Factor and per-equation
+controls. Verbosity 1 prints timestep; verbosity 2 adds its calculation details.
+Multiphase is excluded from segregated Local Time Step. [UG §37.14](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_sec_solve_pseudo.html).
+
+**Reported:** global continuity scaling uses the first-five-iteration maximum.
+Optional Normalize and Renormalize are separate operations. Preserve scaling,
+normalization and restart history when comparing residuals. [UG §37.16.1](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_sec_solve_monitor.html).
+**Inferred:** identical options do not make residual magnitude an independent
+mass-budget test; assess boundary/source closure and inventory separately.
+Keep spatial schemes, high-order relaxation and blending explicit, since they
+can confound a coupling contrast. [UG §37.2](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_sec_solve_choose_disc.html).
+
+This extends the [documentation source](../sources/ansys-fluent-users-guide-2025r2.md).
+The [Phase-7b investigation](../../../Project/experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/shuhei-audit.md)
+reuses these restrictions; its selected controls and outcomes remain Project evidence.
+
 ## 1) Start Fluent
 1. Open `Ansys Fluent Launcher`.
 2. Set:
