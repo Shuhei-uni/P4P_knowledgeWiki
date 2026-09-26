@@ -1,5 +1,42 @@
 # Phase 7.2A Family E — Execution result
 
+## E4 — direct EWF film feed attempt — 2026-09-25
+
+This exploratory branch started from the verified native-5586 baseline pair
+and localized the intended `116.92 kg/s` liquid feed to a `0.00331036 m²`
+wall patch. However, the executed patch used the EWF Initial Condition User
+Source Terms, not the proposed EWF Boundary Condition Film Mass Flux. The
+saved start pair round-tripped the requested adaptive settings
+(`Co_max=0.5`, initial film step `1e-4 s`, increase/decrease `2`, three film
+sub-iterations, stop residual `1e-3`, first-order implicit, EWF Coupled
+Solution ON, Flow Momentum Coupling OFF). Pressure-gradient driving was OFF
+in the case, although the direct-film proposal called for it ON.
+
+The run stopped at native 5871 after 285 iterations (last report row 5870).
+Film elapsed time reached only `2e-4 s` before adaptive steps collapsed to
+sub-picosecond scale. The `0.3 m` thickness cap was hit; peak film Courant
+was about `6.7e3`, and peak velocity about `5.49e10 m/s`. At the last monitor
+row, reported film mass was `13.948 kg`, cumulative outflow `69.009 kg`, and
+total liquid mass `128.110 kg`. Phase-2 steamoutlet flux was `-11.657 kg/s`
+(negative is outflow). `P71V2Command` remained `116.92 kg/s`, while removal
+was only `6.944 kg/s` and command error `-109.976 kg/s`. The command targeted
+the original bulk inlet despite that inlet being set to zero; it is invalid
+for a direct-film branch and must be disabled/redefined before retry.
+
+Only one paired autosave was created, at native 5750 (164 iterations beyond
+the parent), and the local Fluent transcript was preserved. The machine
+receipt and raw monitor streams are in
+[`PyAnsys/output/phase72a_ewf_e4_direct_film_fast_20260925T104504Z`](../../../../PyAnsys/output/phase72a_ewf_e4_direct_film_fast_20260925T104504Z);
+the exact parent/start/checkpoint hashes and process outcome are recorded in
+`run_receipt.json`. No Fluent process remains open.
+
+**Interpretation:** this is a failed setup/solver screen, not evidence against
+the direct EWF boundary condition and not a physical film or carryover result.
+The next attempt needs the native Boundary Condition film mass/momentum flux
+fields, zero bulk phase-2 absorber command/source, and pressure-gradient
+driving ON. E2.7 remains the strongest successful wall-film development
+evidence in this family, with its existing limits.
+
 ## Native phase-2 volume-fraction contours — 2026-09-23
 
 The four Fluent-native contours use the preserved final native-8586
@@ -564,3 +601,346 @@ drainage, source-inclusive closure, or a physical carryover benefit. The
 [continuation setup](e2.7-continuation-5000/setup.md) and [native contour export
 script](../../../../PyAnsys/scripts/inspection/export_phase72a_e27_cont5000_vof_v3.py)
 record the analysis path.
+
+## E2.8 — adaptive speed screen with fixed-step recovery — 2026-09-26
+
+E2.8 started independently from the exact native-5586 baseline pair used by
+E2.7 (case SHA-256
+`4fd493972839929f1f0922ad42679456d1f4aea294da86e4b13d6b7c32f754fc`; data
+SHA-256 `b2261fac8626b2e338c3a9c80c334c8a910d1bfb536f782ef9234623f00e1a72`).
+It retained E2.7's EWF Coupled Solution, Phase Accretion, Flow Momentum
+Coupling OFF, mesh, flow, and `0.3 m` exploratory thickness cap, and applied
+the combined fast controls recorded in the [E2.8 setup](e2.8/setup.md).
+
+The aggressive adaptive branch reached a close match to E2.7 at native 7000
+after 1,414 additional iterations. It then developed nonphysical film values.
+The paired native-7000 state was preserved; the subsequent 318 divergent
+iterations were excluded from the selected trajectory. Recovery used E2.7's
+fixed `1e-5 s` film step, ten maximum film sub-iterations, and `1e-5` stop to
+continue the saved state through native 8586. Thus the selected trajectory has
+3,000 additional iterations (1,414 adaptive plus 1,586 fixed-step recovery),
+while total solver work was 3,318 iterations. The native-8586 pair is a
+recovered hybrid result, not a successful 3,000-iteration run of the
+aggressive adaptive profile.
+
+The final case/data pair was saved locally and copied to OneDrive with matching
+hashes: case SHA-256 `eec5e1a319bb23be81f85edfb49171fe2d262159eaabbb4dba09999e6f197fcc`;
+data SHA-256 `b9d1b70f4a34fa9570a9b8ac67e1c686fc142c563d5d80a3a63a1e6edf0b67b0`.
+
+### Early adaptive match
+
+The native-7000 comparison below uses E2.7's native-8586 endpoint as the
+reference. The area-threshold values use the same saved-pair face geometry
+reconstruction for both runs.
+
+| Measure | E2.7 at 8586 | E2.8 at 7000 | Difference |
+| --- | ---: | ---: | ---: |
+| Film mass | 3.1112 kg | 3.2007 kg | +2.9% |
+| Maximum thickness | 0.3310 mm | 0.3078 mm | -7.0% |
+| Area-weighted thickness | 0.06607 mm | 0.06797 mm | +2.9% |
+| Area-weighted film speed | 46.34 m/s | 45.36 m/s | -2.1% |
+| Maximum film speed | 222.07 m/s | 221.25 m/s | -0.4% |
+| Reconstructed Film Coverage | 50.1453 m² | 50.2027 m² | +0.11% |
+| Wall area with thickness ≥ 0.01 mm | 45.3449 m² | 46.3220 m² | +2.15% |
+| Wall area with thickness ≥ 0.05 mm | 21.3569 m² | 22.2961 m² | +4.40% |
+| Wall area with thickness ≥ 0.10 mm | 13.9070 m² | 13.9150 m² | +0.06% |
+| Wall area with thickness ≥ 0.25 mm | 1.5479 m² | 1.6730 m² | +8.08% |
+| Wall area with thickness ≥ 0.50 mm | 0 m² | 0 m² | 0 m² |
+
+E2.8 had advanced `0.02930 s` of EWF time by native 7000, compared with
+`0.03000 s` after E2.7's 3,000 fixed steps. The adaptive trajectory therefore
+reached a similar reported film state in 47.1% of the iteration count, but
+this state was not numerically converged and the fast profile did not remain
+stable.
+
+### Thickness-distribution areas
+
+Area values are reconstructed from EWF film height on 3,463 faces of `wall`.
+The reconstructed total wall area is `53.436952299276584 m²`; Fluent reports
+`53.4369522992766 m²`, an absolute difference of `1.42e-14 m²`. The 250-step
+checkpoint CSV covers 12 paired snapshots plus the native-5586 start and
+native-8586 final pairs.
+
+| Thickness area | E2.7 at 8586 | E2.8 at 7000 | E2.8 at 8586 |
+| --- | ---: | ---: | ---: |
+| Film Coverage, height > 1e-10 m | 50.1453 m² | 50.2027 m² | 50.3946 m² |
+| ≥ 0.01 mm | 45.3449 m² | 46.3220 m² | 48.1630 m² |
+| ≥ 0.05 mm | 21.3569 m² | 22.2961 m² | 27.3846 m² |
+| ≥ 0.10 mm | 13.9070 m² | 13.9150 m² | 21.2575 m² |
+| ≥ 0.25 mm | 1.5479 m² | 1.6730 m² | 1.3059 m² |
+| ≥ 0.50 mm | 0 m² | 0 m² | 0 m² |
+| 0–0.01 mm | 8.0921 m² | 7.1149 m² | 5.2739 m² |
+| 0.01–0.05 mm | 23.9879 m² | 24.0259 m² | 20.7785 m² |
+| 0.05–0.10 mm | 7.4500 m² | 8.3811 m² | 6.1270 m² |
+| 0.10–0.25 mm | 12.3591 m² | 12.2421 m² | 19.9516 m² |
+| 0.25–0.50 mm | 1.5479 m² | 1.6730 m² | 1.3059 m² |
+| ≥ 0.50 mm | 0 m² | 0 m² | 0 m² |
+
+Fluent's native per-iteration Film Coverage integral is retained separately
+from this checkpoint reconstruction. At E2.8 native 8586 the native monitor
+is `50.2051 m²`, versus `50.3946 m²` from reconstructed face areas. The two
+values are not substituted for each other; the same reconstruction method is
+used for the E2.7/E2.8 thickness-distribution comparison.
+
+### Recovered endpoint and numerical limits
+
+At native 8586 the selected hybrid path reports `4.2484 kg` film mass,
+`0.3026 mm` maximum thickness, `0.09022 mm` area-weighted thickness,
+`63.14 m/s` area-weighted film speed, `230.19 m/s` maximum film speed,
+`50.3946 m²` reconstructed Film Coverage, and maximum film Courant `0.1366`.
+Compared with E2.7 at native 8586, this endpoint has 36.6% greater film mass,
+36.6% greater area-weighted thickness, and 36.3% greater area-weighted speed;
+maximum thickness is 8.6% lower and reconstructed coverage is 0.50% higher.
+The adaptive branch's film elapsed time was `0.02930 s` at native 7000; the
+hybrid endpoint reached `0.04516 s`, compared with `0.03000 s` for E2.7's
+3,000 fixed steps.
+
+The adaptive segment hit its three-sub-iteration limit in all 1,414 selected
+updates, and none ended with the last captured `h/u/v` residuals all at or
+below the configured `1e-3` stop. At native 7195, maximum thickness reached
+`0.11091 m` and area-weighted speed reached `73,395 m/s`. Maximum film CFL
+reached `4.3616` at 7197 and the adaptive timestep collapsed to about
+`9.54e-11 s`; the divergent branch was stopped at 7318.
+
+In fixed-step recovery, 230 of 1,586 updates ended with all three last-captured
+EWF residuals at or below `1e-5`, while 1,551 updates reached the 10-substep
+cap. The largest selected-path residuals occurred at native 7395
+(`h=2.01e5`, `u=2.23e5`, `v=1.71e3`). The selected recovery manifest records
+no FPE, AMG divergence, nonfinite, or fatal-event flags, but these facts do not
+establish EWF convergence. The combined fast-control package also cannot
+attribute the early match or later instability to any single setting.
+
+The run captured 37 native reports at all 3,001 selected coordinates. EWF
+fields include mass, maximum and area-weighted thickness, film Courant,
+cumulative outflow, phase-accretion mass and collection coefficient, film and
+free-surface speed/velocity components, effective pressure, film and
+stripping Weber numbers, and per-iteration Film Coverage. DPM-to-film source
+mass, stripped mass, and separated mass were unavailable in the allowed
+surface-report field list.
+
+![E2.8 per-iteration film response](e2.8/figures/film-response.svg)
+
+![E2.8 reconstructed wall area by thickness](e2.8/figures/wet-area-by-thickness.svg)
+
+![E2.8 EWF numerical health and transfer](e2.8/figures/ewf-numerical-health.svg)
+
+See the [setup and execution record](e2.8/setup.md), [all 3,001 per-iteration
+report rows](../../../../PyAnsys/output/phase72a_ewf_direct_e28_20260926T010700Z/e28-per-iteration-history.csv),
+[checkpoint thickness-area table](../../../../PyAnsys/output/phase72a_ewf_direct_e28_20260926T010700Z/checkpoint-area/checkpoint-thickness-area.csv),
+[response analysis summary](../../../../PyAnsys/output/phase72a_ewf_direct_e28_20260926T010700Z/e28-response-summary.json),
+[recovery manifest](../../../../PyAnsys/output/phase72a_ewf_direct_e28_20260926T010700Z/recovery-run-manifest.json),
+[initial fast-run manifest](../../../../PyAnsys/output/phase72a_ewf_direct_e28_20260926T010700Z/run-manifest.json),
+[analysis manifest](../../../../PyAnsys/output/phase72a_ewf_direct_e28_20260926T010700Z/analysis-manifest.json),
+and [run paths](e2.8/run-paths.yaml).
+
+**Interpretation:** E2.8 demonstrates that the aggressive adaptive controls
+can approach E2.7's observed film response in fewer iterations, but the same
+profile becomes unstable soon afterward. The recovered native-8586 endpoint
+is a different hybrid trajectory with elevated film mass, mean thickness,
+speed, and film physical time. This is numerical response evidence only; it
+does not establish a stationary film, drainage, source-inclusive closure, or
+improved physical carryover.
+
+## E2.81 — slightly tightened adaptive EWF — 2026-09-26
+
+E2.81 repeated the fast adaptive phase-accretion run from the same exact
+native-5586 parent as E2.7/E2.8 and completed all 3,000 requested iterations
+to native 8586. It used maximum film Courant `0.4`, timestep increase `1.5`,
+four maximum film sub-iterations, and stop `5e-4`; adaptive stepping remained
+on from `1e-4 s`, with decrease factor `2`. EWF Coupled Solution and Phase
+Accretion remained on, film-wall Flow Momentum Coupling remained off, the
+maximum thickness cap remained `0.3 m`, and the film wall remained `wall`.
+The exact setup and per-run paths are in the [E2.81 setup](e2.81/setup.md)
+and [run-path record](e2.81/run-paths.yaml).
+
+The run reached an E2.7-like observed film state by native 7196, after 1,610
+additional iterations (46.3% fewer than E2.7's 3,000 iterations to native
+8586). At that point mass, thickness, speed, and reconstructed wet area were
+all close to the E2.7 endpoint:
+
+| Measure | E2.7 at 8586 | E2.81 at 7196 | Difference |
+| --- | ---: | ---: | ---: |
+| Film mass | 3.1112 kg | 2.9093 kg | -6.5% |
+| Maximum thickness | 0.3310 mm | 0.3249 mm | -1.8% |
+| Area-weighted thickness | 0.06607 mm | 0.06178 mm | -6.5% |
+| Area-weighted film speed | 46.34 m/s | 40.92 m/s | -11.7% |
+| Maximum film speed | 222.07 m/s | 219.53 m/s | -1.1% |
+| Reconstructed Film Coverage area | 50.1453 m² | 50.0237 m² | -0.24% |
+| Wall area with thickness ≥ 0.01 mm | 45.3449 m² | 45.5518 m² | +0.46% |
+| Wall area with thickness ≥ 0.05 mm | 21.3569 m² | 20.6108 m² | -3.5% |
+| Wall area with thickness ≥ 0.10 mm | 13.9070 m² | 11.9549 m² | -14.0% |
+| Wall area with thickness ≥ 0.25 mm | 1.5479 m² | 1.4952 m² | -3.4% |
+| Wall area with thickness ≥ 0.50 mm | 0 m² | 0 m² | 0 m² |
+
+This is a close intermediate match and it survived E2.8's known divergence
+window: at native 7196 E2.81 reported maximum CFL `0.2976`, not the E2.8
+runaway CFL/thickness/velocity pattern. Its film-time increment then was
+`0.02647 s`; by native 8586 it had advanced `0.03582832 s`, 19.4% more film
+time than E2.7's `0.03000 s` over the same iteration horizon.
+
+The terminal distribution had drifted from the early E2.7-like state. At
+native 8586 E2.81 reported `3.1610 kg` film mass, `1.4068 mm` maximum
+thickness, `0.06713 mm` area-weighted thickness, `216.13 m/s` area-weighted
+speed, and `1204.65 m/s` maximum speed. Relative to E2.7 at the same endpoint,
+mass is 1.6% higher and area-weighted thickness is 1.6% higher, while maximum
+thickness is 4.25 times higher, area-weighted speed is 4.66 times higher, and
+maximum speed is 5.42 times higher. Fluent's native Film Coverage integral is
+`51.7618 m²`; independent face-area reconstruction gives `51.8122 m²`.
+Against E2.7's reconstructed `50.1453 m²`, E2.81 has 3.3% more covered area,
+but less area at or above `0.05 mm` (`14.0482` vs `21.3569 m²`) and `0.10 mm`
+(`9.4663` vs `13.9070 m²`), with more area at or above `0.25 mm` (`4.1391`
+vs `1.5479 m²`) and `0.50 mm` (`0.7213` vs `0 m²`). The wet-area measure
+and height-threshold reconstruction are distinct diagnostics.
+
+All 37 Report Files contain 3,001 native coordinates. They cover film mass,
+maximum and area-weighted thickness, film Courant, cumulative outflow,
+phase-accretion mass and collection, film and free-surface velocity, pressure,
+Weber/stripping indicators, Film Coverage, and inherited phase-2 outlet,
+absorber, and closure signals. DPM-to-film source, stripped mass, and separated
+mass were unavailable in the Fluent surface-report field list. Film height
+was reconstructed over all 3,463 `wall` faces at 12 250-step checkpoint pairs
+plus the named start, native-7196 review, and final pairs. Reconstructed wall
+area `53.436952299276584 m²` matches Fluent's `53.4369522992766 m²` within
+`1.42e-14 m²`; tables include cumulative areas at five thickness thresholds
+and six disjoint thickness bands.
+
+The selected trajectory completed without FPE, AMG-divergence, nonfinite, or
+fatal-event flags, and without discarded iterations. However, it is not
+numerically qualified as a stable/converged film solution: 2,998 of 3,000
+updates reached the four-sub-iteration cap, only 10 ended with all last
+captured `h/u/v` residuals at or below `5e-4`, and the largest per-step
+residual maxima occurred at native 7764 (`h=2.08e10`, `u=2.31e11`,
+`v=2.58e8`). Late film speeds and maximum thickness were also elevated. The
+combined control changes do not identify which setting enabled survival of
+the earlier risk window or drove later response. This remains an exploratory
+numerical screen; it does not establish steady convergence, drainage,
+source-inclusive closure, or physical carryover benefit. The sum of per-batch
+solve timers was about 2 h 23 min despite reaching the E2.7-like state in
+fewer iterations.
+
+The final local and OneDrive case/data pairs have matching SHA-256 hashes:
+case `affb844234e602f829f2ee42817329df573c13390e52b698c4012ace44a7a6e3`,
+data `7168fb166294d9a253916bb6e0caabb675da3599716728c101e133d6cb992dd9`.
+The [E2.81 response figure](e2.81/figures/film-response.svg), [wet-area
+figure](e2.81/figures/wet-area-by-thickness.svg), and [numerical-health
+figure](e2.81/figures/ewf-numerical-health.svg) summarize the full trajectory.
+The [all-iteration history](../../../../PyAnsys/output/phase72a_ewf_direct_e281_20260926T052048Z/e281-per-iteration-history.csv),
+[checkpoint thickness-area table](../../../../PyAnsys/output/phase72a_ewf_direct_e281_20260926T052048Z/checkpoint-area/checkpoint-thickness-area.csv),
+[response summary](../../../../PyAnsys/output/phase72a_ewf_direct_e281_20260926T052048Z/e281-response-summary.json),
+[run manifest](../../../../PyAnsys/output/phase72a_ewf_direct_e281_20260926T052048Z/run-manifest.json),
+and [checkpoint-area result](../../../../PyAnsys/output/phase72a_ewf_direct_e281_20260926T052048Z/checkpoint-area/checkpoint-thickness-area.json)
+retain the underlying evidence.
+
+## E2.82–E2.84 — fixed EWF timestep screen — 2026-09-27
+
+### Question and controlled comparison
+
+Test fixed film timesteps of `1.25e-5`, `1.50e-5`, and `1.75e-5 s` against
+E2.7's `1e-5 s`, seeking faster film buildup without E2.81's large excursions.
+Each case was loaded independently from the verified common native-5586 parent
+(case SHA-256 `4fd493972839929f1f0922ad42679456d1f4aea294da86e4b13d6b7c32f754fc`;
+data SHA-256 `b2261fac8626b2e338c3a9c80c334c8a910d1bfb536f782ef9234623f00e1a72`).
+All three completed exactly 3,000 added iterations to native 8586. Adaptive
+stepping was OFF; EWF Coupled Solution was ON; wall Flow Momentum Coupling was
+OFF; Phase Accretion was ON; each used 10 maximum film sub-iterations and a
+`1e-5` residual stop. The stored Courant setting `0.05` was inactive in fixed
+mode. Start-pair reopen and one-step report-write gates passed for each run;
+final local and OneDrive case/data SHA-256 pairs match.
+
+### Film response at matched physical time
+
+Compare E2.7 at 0.030000 s with each candidate at the closest attainable
+0.030000 s (`0.029995 s` for E2.84). This removes the extra film-time advance
+that would otherwise make equal-iteration endpoints misleading.
+
+| Case | Native iteration at ~0.03 s | Film mass (kg) | Max thickness (mm) | Area-weighted thickness (mm) | Area-weighted speed (m/s) | EWF max CFL |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| E2.7, `1e-5 s` | 8586 | 3.1112 | 0.3310 | 0.06607 | 46.339 | 0.1427 |
+| E2.82, `1.25e-5 s` | 7986 | 3.1442 | 0.3296 | 0.06677 | 46.451 | 0.1781 |
+| E2.83, `1.50e-5 s` | 7586 | 3.1770 | 0.3280 | 0.06752 | 46.573 | 0.2137 |
+| E2.84, `1.75e-5 s` | 7300 | 3.2092 | 0.3260 | 0.06820 | 46.701 | 0.2498 |
+
+At matched film time, E2.82 adds only 1.1% film mass and 0.24% area-weighted
+speed over E2.7. E2.83 and E2.84 show 2.1% and 3.1% more mass at this early
+coordinate, but both later enter grossly nonphysical states. These small early
+differences do not establish a sustained increase in buildup rate.
+
+At equal iteration 8586, E2.82 reports `3.6650 kg` film mass versus E2.7's
+`3.1112 kg` (+17.8%), but it has also advanced to 0.0375 s rather than 0.0300 s.
+The time-normalized endpoint film accumulation is about 5.8% lower for E2.82
+(97.7 versus 103.7 kg/s from the common zero report origin). Thus the apparent
+same-iteration gain is explained by its 25% longer film-time interval; it is
+not evidence of faster average buildup.
+
+### Numerical health and full-horizon endpoints
+
+| Case | Film time at 8586 (s) | Endpoint film mass (kg) | Endpoint max thickness (mm) | Peak CFL (native iteration) | Peak max film speed (native iteration) | EWF residual maxima `h / u / v` | Steps ending with all `h/u/v <= 1e-5` |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| E2.7 | 0.0300 | 3.1112 | 0.3310 | 0.2248 (6268) | 262.2 m/s (6268) | baseline residual transcript not available in this comparison set | — |
+| E2.81 adaptive | 0.03583 | 3.1610 | 1.4068 | 58.60 | 4.733e9 m/s | `2.083e10 / 2.314e11 / 2.580e8` | 10 / 3000 ended below its looser `5e-4` stop |
+| E2.82, `1.25e-5 s` | 0.03750 | 3.6650 | 0.3577 | 3.314 (8537) | 4,169.5 m/s (8537) | `6.852e7 / 2.440e8 / 5.973e5` (8246) | 262 / 3000 |
+| E2.83, `1.50e-5 s` | 0.04500 | 4,543.9 | 300 (cap) | 2.032e8 (7965) | 1.435e11 m/s (8094) | `1.536e11 / 1.606e11 / 2.779e9` | 56 / 3000 |
+| E2.84, `1.75e-5 s` | 0.05250 | 4,902.8 | 300 (cap) | 2.600e8 (8227) | 1.508e11 m/s (8571) | `1.250e11 / 1.892e11 / 2.078e9` | 44 / 3000 |
+
+E2.82 is the best of these three numerical responses. Relative to E2.81 its
+peak CFL is about 18 times lower, its peak speed is over six orders of
+magnitude lower, its maximum `h/u/v` residuals are roughly 300–950 times
+lower, and its endpoint maximum thickness is about four times lower. It still
+is not stable or converged: its CFL and maximum-speed peaks are still about
+15 and 16 times E2.7's respective maxima over the same native interval. It
+has a late CFL/speed burst at native 8537, and only 262 of 3,000 updates ended
+with all last captured EWF residuals below the stricter `1e-5` stop. The run
+completed without FPE, AMG divergence, nonfinite, or fatal-event flags, but
+these flags do not certify a valid film solution.
+
+E2.83 first reached the `0.3 m` exploratory thickness cap at native 7800;
+E2.84 reached it at 7473. Their later mass, thickness, velocity, CFL, and
+residual values are nonphysical. Both are rejected as fixed-step candidates.
+The growth excursions begin near 0.033 s in both runs. E2.82 remains far more
+bounded but develops a residual spike near 0.0333 s and its largest speed/CFL
+spike near 0.0369 s.
+
+### Decision and evidence
+
+Do not adopt E2.83 or E2.84. E2.82 is substantially less pathological than
+E2.81, but this screen does not show a meaningful sustained buildup-rate gain
+at matched physical time, and its late spike leaves stability unproven. Keep
+E2.7 as the reference; if the timestep study continues, the next useful range
+is closer to `1e-5 s` than the failed `1.5–1.75e-5 s` settings, with any new
+comparison judged at matched film time and with the same per-iteration residual
+and velocity checks.
+
+The trajectories are available as [film mass](../../../../PyAnsys/output/phase72a_ewf_fixed_dt_comparison_20260927/film-mass-total.svg),
+[area-weighted speed](../../../../PyAnsys/output/phase72a_ewf_fixed_dt_comparison_20260927/velocity-mag-awavg.svg),
+[maximum thickness](../../../../PyAnsys/output/phase72a_ewf_fixed_dt_comparison_20260927/thickness-max.svg),
+and [maximum CFL](../../../../PyAnsys/output/phase72a_ewf_fixed_dt_comparison_20260927/courant-max.svg), plotted against film elapsed time. The [3,001-point matched history CSV](../../../../PyAnsys/output/phase72a_ewf_fixed_dt_comparison_20260927/ewf-timestep-screen.csv)
+and [machine-readable summary](../../../../PyAnsys/output/phase72a_ewf_fixed_dt_comparison_20260927/ewf-timestep-screen-summary.json)
+retain the numerical values. Per-case manifests and histories are under the
+[E2.82 output](../../../../PyAnsys/output/phase72a_ewf_fixed_dt_e2.82_20260926T134145Z),
+[E2.83 output](../../../../PyAnsys/output/phase72a_ewf_fixed_dt_e2.83_20260926T144249Z),
+and [E2.84 output](../../../../PyAnsys/output/phase72a_ewf_fixed_dt_e2.84_20260926T154347Z)
+folders; their paired final Fluent files are indexed in each case's `run-paths.yaml`.
+
+### Phase-2 `steamoutlet` flux overlay across E2.7–E2.84
+
+The signed phase-2 `steamoutlet` flux is negative for outflow. The plot compares
+all 3,001 native-iteration points from 5586 to 8586 for E2.7, E2.8, and E2.81–E2.84.
+E2.8 uses its selected trajectory: the adaptive prefix followed by the recorded
+fixed-step recovery from native 7000 after the adaptive branch diverged.
+
+E2.82, E2.83, and E2.84 exactly overlay E2.7 at every recorded native iteration.
+Their terminal-window mean (`7590–8580`) is `-1.736142505 kg/s`, and their native-8586
+endpoint is `-1.736546967 kg/s`, the same as E2.7. E2.8 and E2.81 have small
+transient departures, with maximum absolute difference `0.126516 kg/s` at native
+5736; their terminal-window means are `-1.739938826` and `-1.740602294 kg/s`,
+respectively. By native 8586 their endpoint differences from E2.7 are only
+`-0.004075` kg/s (E2.8) and `-0.006989 kg/s` (E2.81).
+
+This confirms that the fixed-timestep E2.82–E2.84 changes did not alter this
+bulk phase-2 outlet history in the recorded trajectory, consistent with film
+Flow Momentum Coupling OFF. The flux overlay alone does not measure liquid
+captured by the wall film or establish a carryover mechanism.
+
+[Open the six-case flux plot](../../../../PyAnsys/output/phase72a_ewf_fixed_dt_comparison_20260927/phase2-steamoutlet-flux-e2.7-to-e2.84.svg)
+or its [native-iteration CSV](../../../../PyAnsys/output/phase72a_ewf_fixed_dt_comparison_20260927/phase2-steamoutlet-flux-e2.7-to-e2.84.csv)
+and [summary](../../../../PyAnsys/output/phase72a_ewf_fixed_dt_comparison_20260927/phase2-steamoutlet-flux-e2.7-to-e2.84-summary.json).

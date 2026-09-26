@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="384" viewBox="0 0 1240 384">
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#172033}.title{font-size:21px;font-weight:700}.panel-title{font-size:15px;font-weight:600}.tick{font-size:10px;fill:#475569}.legend{font-size:10px}.axis-label{font-size:11px}.grid{stroke:#dbe3ec;stroke-width:1}.axis{stroke:#334155;stroke-width:1}.reference-v{stroke:#0f172a;stroke-width:1.3;stroke-dasharray:3 5}</style>
+<text x="24" y="31" class="title">E2.81 active-wall area by film thickness</text>
+<g class="panel"><text x="10" y="68" class="panel-title">Cumulative wall area above thickness threshold</text>
+<line x1="74.0" y1="316.0" x2="596.0" y2="316.0" class="grid"/>
+<text x="65.0" y="320.0" text-anchor="end" class="tick">-2.8</text>
+<line x1="74.0" y1="257.5" x2="596.0" y2="257.5" class="grid"/>
+<text x="65.0" y="261.5" text-anchor="end" class="tick">10.3</text>
+<line x1="74.0" y1="199.0" x2="596.0" y2="199.0" class="grid"/>
+<text x="65.0" y="203.0" text-anchor="end" class="tick">23.4</text>
+<line x1="74.0" y1="140.5" x2="596.0" y2="140.5" class="grid"/>
+<text x="65.0" y="144.5" text-anchor="end" class="tick">36.4</text>
+<line x1="74.0" y1="82.0" x2="596.0" y2="82.0" class="grid"/>
+<text x="65.0" y="86.0" text-anchor="end" class="tick">49.5</text>
+<line x1="74.0" y1="82.0" x2="74.0" y2="316.0" class="grid"/>
+<text x="74.0" y="334.0" text-anchor="middle" class="tick">5586</text>
+<line x1="204.5" y1="82.0" x2="204.5" y2="316.0" class="grid"/>
+<text x="204.5" y="334.0" text-anchor="middle" class="tick">6336</text>
+<line x1="335.0" y1="82.0" x2="335.0" y2="316.0" class="grid"/>
+<text x="335.0" y="334.0" text-anchor="middle" class="tick">7086</text>
+<line x1="465.5" y1="82.0" x2="465.5" y2="316.0" class="grid"/>
+<text x="465.5" y="334.0" text-anchor="middle" class="tick">7836</text>
+<line x1="596.0" y1="82.0" x2="596.0" y2="316.0" class="grid"/>
+<text x="596.0" y="334.0" text-anchor="middle" class="tick">8586</text>
+<line x1="74.0" y1="316.0" x2="596.0" y2="316.0" class="axis"/>
+<line x1="74.0" y1="82.0" x2="74.0" y2="316.0" class="axis"/>
+<line x1="596.0" y1="82.0" x2="596.0" y2="316.0" class="reference-v"/>
+<polyline points="74.0,303.5 102.5,232.5 146.0,183.7 189.5,152.2 233.0,132.2 276.5,118.2 320.0,107.0 354.1,99.8 363.5,98.9 407.0,94.5 450.5,94.7 494.0,95.0 537.5,98.8 581.0,105.0 596.0,97.9" fill="none" stroke="#1d4ed8" stroke-width="1.6"/>
+<polyline points="74.0,303.5 102.5,293.5 146.0,279.4 189.5,267.5 233.0,255.9 276.5,243.0 320.0,224.8 354.1,211.3 363.5,208.4 407.0,199.2 450.5,199.5 494.0,199.5 537.5,198.1 581.0,216.7 596.0,240.6" fill="none" stroke="#059669" stroke-width="1.6"/>
+<polyline points="74.0,303.5 102.5,303.0 146.0,295.4 189.5,285.0 233.0,277.8 276.5,272.0 320.0,262.5 354.1,250.0 363.5,246.8 407.0,234.2 450.5,233.8 494.0,234.6 537.5,231.2 581.0,247.6 596.0,261.1" fill="none" stroke="#ea580c" stroke-width="1.6"/>
+<polyline points="74.0,303.5 102.5,303.5 146.0,303.5 189.5,303.5 233.0,303.3 276.5,300.4 320.0,298.2 354.1,296.8 363.5,296.9 407.0,294.7 450.5,293.1 494.0,292.2 537.5,289.7 581.0,287.1 596.0,285.0" fill="none" stroke="#dc2626" stroke-width="1.6"/>
+<polyline points="74.0,303.5 102.5,303.5 146.0,303.5 189.5,303.5 233.0,303.5 276.5,303.5 320.0,303.5 354.1,303.5 363.5,303.5 407.0,303.5 450.5,302.6 494.0,301.8 537.5,302.1 581.0,302.7 596.0,300.2" fill="none" stroke="#7c3aed" stroke-width="1.6"/>
+<text x="335.0" y="360" text-anchor="middle" class="axis-label">Native iteration</text>
+<text x="15" y="199.0" text-anchor="middle" class="axis-label" transform="rotate(-90 15 199.0)">Area (m2)</text>
+<line x1="431" y1="96" x2="454" y2="96" stroke="#1d4ed8" stroke-width="2"/>
+<text x="460" y="100" class="legend">&gt;= 0.01 mm</text>
+<line x1="431" y1="113" x2="454" y2="113" stroke="#059669" stroke-width="2"/>
+<text x="460" y="117" class="legend">&gt;= 0.05 mm</text>
+<line x1="431" y1="130" x2="454" y2="130" stroke="#ea580c" stroke-width="2"/>
+<text x="460" y="134" class="legend">&gt;= 0.1 mm</text>
+<line x1="431" y1="147" x2="454" y2="147" stroke="#dc2626" stroke-width="2"/>
+<text x="460" y="151" class="legend">&gt;= 0.25 mm</text>
+<line x1="431" y1="164" x2="454" y2="164" stroke="#7c3aed" stroke-width="2"/>
+<text x="460" y="168" class="legend">&gt;= 0.5 mm</text>
+</g>
+<g class="panel"><text x="630" y="68" class="panel-title">Disjoint wall-area thickness bands</text>
+<line x1="694.0" y1="316.0" x2="1216.0" y2="316.0" class="grid"/>
+<text x="685.0" y="320.0" text-anchor="end" class="tick">-3.21</text>
+<line x1="694.0" y1="257.5" x2="1216.0" y2="257.5" class="grid"/>
+<text x="685.0" y="261.5" text-anchor="end" class="tick">11.8</text>
+<line x1="694.0" y1="199.0" x2="1216.0" y2="199.0" class="grid"/>
+<text x="685.0" y="203.0" text-anchor="end" class="tick">26.7</text>
+<line x1="694.0" y1="140.5" x2="1216.0" y2="140.5" class="grid"/>
+<text x="685.0" y="144.5" text-anchor="end" class="tick">41.7</text>
+<line x1="694.0" y1="82.0" x2="1216.0" y2="82.0" class="grid"/>
+<text x="685.0" y="86.0" text-anchor="end" class="tick">56.6</text>
+<line x1="694.0" y1="82.0" x2="694.0" y2="316.0" class="grid"/>
+<text x="694.0" y="334.0" text-anchor="middle" class="tick">5586</text>
+<line x1="824.5" y1="82.0" x2="824.5" y2="316.0" class="grid"/>
+<text x="824.5" y="334.0" text-anchor="middle" class="tick">6336</text>
+<line x1="955.0" y1="82.0" x2="955.0" y2="316.0" class="grid"/>
+<text x="955.0" y="334.0" text-anchor="middle" class="tick">7086</text>
+<line x1="1085.5" y1="82.0" x2="1085.5" y2="316.0" class="grid"/>
+<text x="1085.5" y="334.0" text-anchor="middle" class="tick">7836</text>
+<line x1="1216.0" y1="82.0" x2="1216.0" y2="316.0" class="grid"/>
+<text x="1216.0" y="334.0" text-anchor="middle" class="tick">8586</text>
+<line x1="694.0" y1="316.0" x2="1216.0" y2="316.0" class="axis"/>
+<line x1="694.0" y1="82.0" x2="694.0" y2="316.0" class="axis"/>
+<line x1="1216.0" y1="82.0" x2="1216.0" y2="316.0" class="reference-v"/>
+<polyline points="694.0,94.5 722.5,156.6 766.0,199.3 809.5,226.8 853.0,244.3 896.5,256.5 940.0,266.3 974.1,272.6 983.5,273.4 1027.0,277.2 1070.5,277.1 1114.0,276.8 1157.5,273.5 1201.0,268.0 1216.0,274.3" fill="none" stroke="#94a3b8" stroke-width="1.6"/>
+<polyline points="694.0,303.5 722.5,250.1 766.0,219.7 809.5,202.7 853.0,195.3 896.5,194.4 940.0,200.5 974.1,205.9 983.5,207.7 1027.0,211.9 1070.5,211.8 1114.0,212.1 1157.5,216.7 1201.0,205.8 1216.0,178.7" fill="none" stroke="#38bdf8" stroke-width="1.6"/>
+<polyline points="694.0,303.5 722.5,295.2 766.0,289.5 809.5,288.1 853.0,284.3 896.5,278.1 940.0,270.5 974.1,269.6 983.5,269.9 1027.0,272.9 1070.5,273.4 1114.0,272.8 1157.5,274.5 1201.0,276.4 1216.0,285.5" fill="none" stroke="#34d399" stroke-width="1.6"/>
+<polyline points="694.0,303.5 722.5,303.1 766.0,296.4 809.5,287.3 853.0,281.1 896.5,278.7 940.0,272.3 974.1,262.6 983.5,259.7 1027.0,250.6 1070.5,251.6 1114.0,253.1 1157.5,252.3 1201.0,268.9 1216.0,282.6" fill="none" stroke="#fbbf24" stroke-width="1.6"/>
+<polyline points="694.0,303.5 722.5,303.5 766.0,303.5 809.5,303.5 853.0,303.3 896.5,300.8 940.0,298.8 974.1,297.6 983.5,297.7 1027.0,295.8 1070.5,295.2 1114.0,295.0 1157.5,292.6 1201.0,289.8 1216.0,290.1" fill="none" stroke="#fb7185" stroke-width="1.6"/>
+<polyline points="694.0,303.5 722.5,303.5 766.0,303.5 809.5,303.5 853.0,303.5 896.5,303.5 940.0,303.5 974.1,303.5 983.5,303.5 1027.0,303.5 1070.5,302.7 1114.0,302.0 1157.5,302.3 1201.0,302.8 1216.0,300.6" fill="none" stroke="#8b5cf6" stroke-width="1.6"/>
+<text x="955.0" y="360" text-anchor="middle" class="axis-label">Native iteration</text>
+<text x="635" y="199.0" text-anchor="middle" class="axis-label" transform="rotate(-90 635 199.0)">Area (m2)</text>
+<line x1="1051" y1="96" x2="1074" y2="96" stroke="#94a3b8" stroke-width="2"/>
+<text x="1080" y="100" class="legend">0 to 0.01 mm</text>
+<line x1="1051" y1="113" x2="1074" y2="113" stroke="#38bdf8" stroke-width="2"/>
+<text x="1080" y="117" class="legend">0.01 to 0.05 mm</text>
+<line x1="1051" y1="130" x2="1074" y2="130" stroke="#34d399" stroke-width="2"/>
+<text x="1080" y="134" class="legend">0.05 to 0.1 mm</text>
+<line x1="1051" y1="147" x2="1074" y2="147" stroke="#fbbf24" stroke-width="2"/>
+<text x="1080" y="151" class="legend">0.1 to 0.25 mm</text>
+<line x1="1051" y1="164" x2="1074" y2="164" stroke="#fb7185" stroke-width="2"/>
+<text x="1080" y="168" class="legend">0.25 to 0.5 mm</text>
+<line x1="1051" y1="181" x2="1074" y2="181" stroke="#8b5cf6" stroke-width="2"/>
+<text x="1080" y="185" class="legend">0.5 to inf mm</text>
+</g>
+</svg>

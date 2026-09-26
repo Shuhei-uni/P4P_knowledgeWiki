@@ -4,7 +4,7 @@ phase_question: >-
   through steamoutlet by changing wall-adjacent routing while preserving
   absorber tracking, source-inclusive closure, liquid-inventory behaviour, and
   credible vapor routing relative to the R0 control?
-state: DISCOVERY_E2_7_COMPLETE_NO_CAP_OR_FPE
+state: DISCOVERY_E2_81_COMPLETE_NO_FATAL_FLAGS_RESPONSE_UNQUALIFIED
 planning_state: USER_SELECTED_E2_7_FLOW_MOMENTUM_COUPLING_OFF
 
 context:
@@ -50,10 +50,28 @@ families:
     path: Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/index.md
     server_id: server-3
     execution_server_id: student
-    status: E2_7_CONTINUATION_TO_13586_COMPLETE_UNQUALIFIED
+    status: E2_7_CONTINUATION_TO_13586_COMPLETE_UNQUALIFIED_E4_STOPPED_DIRECT_BOUNDARY_UNTESTED_E2_8_DIVERGED_E2_81_COMPLETE_RESPONSE_UNQUALIFIED_E2_82_E2_83_E2_84_FIXED_STEP_SCREEN_COMPLETE_UNQUALIFIED
     result: Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/results.md
     completed_cases: [E0, E1, E3]
+    exploratory_fixed_dt_screen:
+      cases: [E2.82, E2.83, E2.84]
+      setup_root: Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family
+      parent_native_iteration: 5586
+      additional_iterations_each: 3000
+      endpoint_native_iteration_each: 8586
+      outcome: E2_82_BEST_BOUNDED_WITH_LATE_SPIKE_E2_83_E2_84_NONPHYSICAL_CAP_DIVERGENCE
+      matched_film_time_s: 0.03
+      comparison: PyAnsys/output/phase72a_ewf_fixed_dt_comparison_20260927/ewf-timestep-screen-summary.json
     blocked_case: E2
+    exploratory_direct_film_E4:
+      setup: Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/e4-direct-film-inlet/setup.md
+      output_root: PyAnsys/output/phase72a_ewf_e4_direct_film_fast_20260925T104504Z
+      status: STOPPED_EARLY_DIVERGED_DIRECT_BOUNDARY_NOT_TESTED
+      parent_native_iteration: 5586
+      stop_native_iteration: 5871
+      last_monitor_native_iteration: 5870
+      only_paired_checkpoint_native_iteration: 5750
+      interpretation: DIRECT_FILM_BOUNDARY_CONDITION_NOT_EXERCISED
     extension_E3: HUMAN_SELECTED_E1_PLUS_R3_INTERACTION
     selected_followup_E2_1:
       setup: Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/e2.1/setup.md
@@ -134,6 +152,35 @@ families:
       histories_figure: Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/figures/E2.7-CONT5000-requested-histories.png
       volume_fraction_contour: Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/figures/E2.7-CONT5000-phase2-vof-xy-z0-final13586-v3.png
       wetted_area_evidence: PyAnsys/output/phase72a_e27_cont5000_wetted_area/wetted-area.json
+    exploratory_fast_time_E2_8:
+      setup: Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/e2.8/setup.md
+      run_root: PyAnsys/output/phase72a_ewf_direct_e28_20260926T010700Z
+      recovery_status: COMPLETE_TO_8586_HYBRID_SELECTED_TRAJECTORY
+      fast_branch_status: DIVERGED_AFTER_NATIVE_7000_STOPPED_AT_7318
+      parent_native_iteration: 5586
+      selected_additional_iterations: 3000
+      solver_iterations_including_discarded_branch: 3318
+      report_histories: PyAnsys/output/phase72a_ewf_direct_e28_20260926T010700Z/report-histories.json
+      response_summary: PyAnsys/output/phase72a_ewf_direct_e28_20260926T010700Z/e28-response-summary.json
+      thickness_area: PyAnsys/output/phase72a_ewf_direct_e28_20260926T010700Z/checkpoint-area/checkpoint-thickness-area.json
+    exploratory_fast_time_E2_81:
+      setup: Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/e2.81/setup.md
+      run_paths: Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/e2.81/run-paths.yaml
+      run_root: PyAnsys/output/phase72a_ewf_direct_e281_20260926T052048Z
+      local_fluent_run_root: C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase72A\FamilyE\E2.81-fast-time-20260926T052048Z
+      durable_pair_root: C:\Users\Shuhei Yokkaichi\Documents\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\Phase72A\FamilyE\E2.81\20260926T052048Z
+      status: COMPLETE_TO_8586_NO_FATAL_FLAGS_RESIDUALS_UNQUALIFIED
+      parent_native_iteration: 5586
+      requested_additional_iterations: 3000
+      terminal_native_iteration: 8586
+      matched_E2_7_like_state_native_iteration: 7196
+      matched_state_after_iterations: 1610
+      solver_work_iterations: 3000
+      report_histories: PyAnsys/output/phase72a_ewf_direct_e281_20260926T052048Z/report-histories.json
+      response_summary: PyAnsys/output/phase72a_ewf_direct_e281_20260926T052048Z/e281-response-summary.json
+      thickness_area: PyAnsys/output/phase72a_ewf_direct_e281_20260926T052048Z/checkpoint-area/checkpoint-thickness-area.json
+      final_case_sha256: affb844234e602f829f2ee42817329df573c13390e52b698c4012ace44a7a6e3
+      final_data_sha256: 7168fb166294d9a253916bb6e0caabb675da3599716728c101e133d6cb992dd9
 
 execution_envelope:
   formulation: steady
@@ -165,9 +212,9 @@ gates:
       - Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/index.md
       - Project/experiments/phase-07-2a-wall-liquid-routing/monitoring-contract.md
   DISCOVERY_EXECUTION:
-    status: PARTIAL_E2_THROUGH_E2_6_NUMERICAL_BLOCKS_E2_7_COMPLETE_UNQUALIFIED
+    status: PARTIAL_E2_THROUGH_E2_6_NUMERICAL_BLOCKS_E2_7_COMPLETE_E4_SETUP_SOLVER_FAILURE_E2_8_DIVERGED_E2_81_COMPLETE_UNQUALIFIED
   DISCOVERY_EVIDENCE:
-    status: PARTIAL_E0_E1_E3_E2_7_AND_ROUGHNESS_COMPLETE
+    status: PARTIAL_E0_E1_E3_E2_7_E2_81_AND_ROUGHNESS_COMPLETE_E4_FAILURE_EVIDENCE_ONLY_E2_8_E2_81_SPEED_SCREEN_UNQUALIFIED
   PHASE_CLOSURE:
     status: NOT_READY
     missing:
@@ -177,8 +224,9 @@ gates:
 
 active_jobs: []
 next_required_action: >-
-  Review the completed E-family results and decide the next scientific
-  experiment. The E2.7 continuation through native 13586 is complete and
-  documented with per-iteration reports; its copied starting pair hashes
-  differ from the earlier E2.7 run manifest, so that source-identity
-  limitation remains attached to the continuation.
+  Repair the exploratory E4 build to use the native EWF Boundary Condition
+  film mass/momentum flux fields, set the bulk phase-2 absorber command/source
+  to zero for the direct-film inlet, enable pressure-gradient driving, then
+  save/reopen and verify before a bounded exploratory solve. E2.7 through
+  native 13586 remains complete and unqualified with its copied-start-pair
+  identity limitation.

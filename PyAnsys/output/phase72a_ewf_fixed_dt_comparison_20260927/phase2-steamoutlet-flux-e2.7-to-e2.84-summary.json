@@ -1,0 +1,87 @@
+{
+  "status": "ANALYZED",
+  "metric": "v2-flux-phase2-steamoutlet",
+  "units": "kg/s",
+  "sign_convention": "Negative values indicate outflow from the phase-2 steamoutlet boundary.",
+  "native_interval": [
+    5586,
+    8586
+  ],
+  "points_per_case": 3001,
+  "case_provenance": {
+    "E2.8": "Selected trajectory, adaptive prefix followed by fixed-step recovery from native 7000 after the adaptive branch diverged.",
+    "E2.81": "Selected complete 3000-iteration adaptive trajectory.",
+    "E2.82-E2.84": "Independent complete fixed-step trajectories from common native-5586 parent."
+  },
+  "cases": {
+    "E2.7": {
+      "start_native_5586_kg_s": -24.33441180279063,
+      "end_native_8586_kg_s": -1.736546966818777,
+      "mean_native_5586_8586_kg_s": -3.0262538315511205,
+      "mean_native_7590_8580_kg_s": -1.7361425052023398,
+      "minimum_kg_s": -24.33441180279063,
+      "maximum_kg_s": -1.726341501622272,
+      "endpoint_delta_from_e2_7_kg_s": 0.0,
+      "max_abs_delta_from_e2_7_kg_s": 0.0,
+      "max_abs_delta_native_iteration": 5586
+    },
+    "E2.8": {
+      "start_native_5586_kg_s": -24.33441180279063,
+      "end_native_8586_kg_s": -1.740621999253396,
+      "mean_native_5586_8586_kg_s": -3.030362303115017,
+      "mean_native_7590_8580_kg_s": -1.7399388256922192,
+      "minimum_kg_s": -24.33441180279063,
+      "maximum_kg_s": -1.727916698141965,
+      "endpoint_delta_from_e2_7_kg_s": -0.004075032434619041,
+      "max_abs_delta_from_e2_7_kg_s": 0.1265164482771297,
+      "max_abs_delta_native_iteration": 5736
+    },
+    "E2.81": {
+      "start_native_5586_kg_s": -24.33441180279063,
+      "end_native_8586_kg_s": -1.74353558299164,
+      "mean_native_5586_8586_kg_s": -3.0308191765532713,
+      "mean_native_7590_8580_kg_s": -1.7406022941770931,
+      "minimum_kg_s": -24.33441180279063,
+      "maximum_kg_s": -1.728834333818428,
+      "endpoint_delta_from_e2_7_kg_s": -0.006988616172862949,
+      "max_abs_delta_from_e2_7_kg_s": 0.1265164482771297,
+      "max_abs_delta_native_iteration": 5736
+    },
+    "E2.82": {
+      "start_native_5586_kg_s": -24.33441180279063,
+      "end_native_8586_kg_s": -1.736546966818777,
+      "mean_native_5586_8586_kg_s": -3.0262538315511205,
+      "mean_native_7590_8580_kg_s": -1.7361425052023398,
+      "minimum_kg_s": -24.33441180279063,
+      "maximum_kg_s": -1.726341501622272,
+      "endpoint_delta_from_e2_7_kg_s": 0.0,
+      "max_abs_delta_from_e2_7_kg_s": 0.0,
+      "max_abs_delta_native_iteration": 5586
+    },
+    "E2.83": {
+      "start_native_5586_kg_s": -24.33441180279063,
+      "end_native_8586_kg_s": -1.736546966818777,
+      "mean_native_5586_8586_kg_s": -3.0262538315511205,
+      "mean_native_7590_8580_kg_s": -1.7361425052023398,
+      "minimum_kg_s": -24.33441180279063,
+      "maximum_kg_s": -1.726341501622272,
+      "endpoint_delta_from_e2_7_kg_s": 0.0,
+      "max_abs_delta_from_e2_7_kg_s": 0.0,
+      "max_abs_delta_native_iteration": 5586
+    },
+    "E2.84": {
+      "start_native_5586_kg_s": -24.33441180279063,
+      "end_native_8586_kg_s": -1.736546966818777,
+      "mean_native_5586_8586_kg_s": -3.0262538315511205,
+      "mean_native_7590_8580_kg_s": -1.7361425052023398,
+      "minimum_kg_s": -24.33441180279063,
+      "maximum_kg_s": -1.726341501622272,
+      "endpoint_delta_from_e2_7_kg_s": 0.0,
+      "max_abs_delta_from_e2_7_kg_s": 0.0,
+      "max_abs_delta_native_iteration": 5586
+    }
+  },
+  "plot": "C:\\Users\\Shuhei Yokkaichi\\Documents\\CFD\\P4P_knowledgeWiki\\PyAnsys\\output\\phase72a_ewf_fixed_dt_comparison_20260927\\phase2-steamoutlet-flux-e2.7-to-e2.84.svg",
+  "csv": "C:\\Users\\Shuhei Yokkaichi\\Documents\\CFD\\P4P_knowledgeWiki\\PyAnsys\\output\\phase72a_ewf_fixed_dt_comparison_20260927\\phase2-steamoutlet-flux-e2.7-to-e2.84.csv",
+  "interpretation_limit": "Bulk-flow flux is compared as recorded on each selected trajectory; a phase-2 steamoutlet flux change alone does not establish wall-film carryover or a film-transport mechanism."
+}

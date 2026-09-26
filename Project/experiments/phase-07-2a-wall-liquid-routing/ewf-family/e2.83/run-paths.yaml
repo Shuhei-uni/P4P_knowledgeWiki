@@ -1,0 +1,12 @@
+experiment_id: E2.83
+run_stamp: "20260926T144249Z"
+parent_case: "C:\\Users\\Shuhei Yokkaichi\\Documents\\FluentRuns\\Phase72A\\FamilyE\\parent-transfer-20260922T115133Z\\P71A-R0-SMOOTH-CONTROL-COUPLED-GLOBAL-TIME-PLUS1000-full-loading-plus1000.cas.h5"
+parent_data: "C:\\Users\\Shuhei Yokkaichi\\Documents\\FluentRuns\\Phase72A\\FamilyE\\parent-transfer-20260922T115133Z\\P71A-R0-SMOOTH-CONTROL-COUPLED-GLOBAL-TIME-PLUS1000-full-loading-plus1000.dat.h5"
+local_run_root: "C:\\Users\\Shuhei Yokkaichi\\Documents\\FluentRuns\\Phase72A\\FamilyE\\E2.83-fast-time-20260926T144249Z"
+local_checkpoint_root: "C:\\Users\\Shuhei Yokkaichi\\Documents\\FluentRuns\\Phase72A\\FamilyE\\E2.83-fast-time-20260926T144249Z\\checkpoints"
+local_output_root: "C:\\Users\\Shuhei Yokkaichi\\Documents\\CFD\\P4P_knowledgeWiki\\PyAnsys\\output\\phase72a_ewf_fixed_dt_e2.83_20260926T144249Z"
+onedrive_root: "C:\\Users\\Shuhei Yokkaichi\\Documents\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase72A\\FamilyE\\E2.83\\20260926T144249Z"
+parent_native_iteration: 5586
+requested_additional_iterations: 3000
+requested_checkpoint_frequency: 250
+

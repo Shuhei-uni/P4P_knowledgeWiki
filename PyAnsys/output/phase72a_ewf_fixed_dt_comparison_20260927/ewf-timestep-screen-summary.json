@@ -1,0 +1,389 @@
+{
+  "E2.7": {
+    "courant-max": {
+      "label": "EWF max Courant",
+      "unit": "-",
+      "native_5586": 0.0,
+      "native_8586": 0.1427301615476608,
+      "interval_peak": 0.2248415946960449,
+      "interval_peak_native_iteration": 6268,
+      "change_5586_to_8586": 0.1427301615476608
+    },
+    "film-mass-total": {
+      "label": "Film mass",
+      "unit": "kg",
+      "native_5586": 0.0,
+      "native_8586": 3.111232139629345,
+      "interval_peak": 3.111232139629345,
+      "interval_peak_native_iteration": 8586,
+      "change_5586_to_8586": 3.111232139629345
+    },
+    "thickness-max": {
+      "label": "Maximum film thickness",
+      "unit": "mm",
+      "native_5586": 0.0,
+      "native_8586": 0.3310326137579978,
+      "interval_peak": 0.3310326137579978,
+      "interval_peak_native_iteration": 8586,
+      "change_5586_to_8586": 0.3310326137579978
+    },
+    "thickness-awavg": {
+      "label": "Area weighted film thickness",
+      "unit": "mm",
+      "native_5586": 0.0,
+      "native_8586": 0.0660710010417016,
+      "interval_peak": 0.0660710010417016,
+      "interval_peak_native_iteration": 8586,
+      "change_5586_to_8586": 0.0660710010417016
+    },
+    "velocity-mag-awavg": {
+      "label": "Area weighted film speed",
+      "unit": "m/s",
+      "native_5586": 0.0,
+      "native_8586": 46.3388993615908,
+      "interval_peak": 46.3388993615908,
+      "interval_peak_native_iteration": 8586,
+      "change_5586_to_8586": 46.3388993615908
+    },
+    "velocity-mag-max": {
+      "label": "Maximum film speed",
+      "unit": "m/s",
+      "native_5586": 0.0,
+      "native_8586": 222.0650177001953,
+      "interval_peak": 262.2084350585938,
+      "interval_peak_native_iteration": 6268,
+      "change_5586_to_8586": 222.0650177001953
+    },
+    "matched_physical_time_0.03s": {
+      "native_iteration": 8586,
+      "actual_elapsed_time_s": 0.030000000000000002,
+      "metrics": {
+        "courant-max": 0.1427301615476608,
+        "film-mass-total": 3.111232139629345,
+        "thickness-max": 0.3310326137579978,
+        "thickness-awavg": 0.0660710010417016,
+        "velocity-mag-awavg": 46.3388993615908,
+        "velocity-mag-max": 222.0650177001953
+      }
+    },
+    "stability": {
+      "max_abs_ewf_subiteration_residuals_h_u_v": {
+        "h": {
+          "value": null,
+          "native_iteration": null
+        },
+        "u": {
+          "value": null,
+          "native_iteration": null
+        },
+        "v": {
+          "value": null,
+          "native_iteration": null
+        }
+      },
+      "steps_with_all_ewf_last_residuals_at_or_below_1e-5": null,
+      "captured_ewf_residual_steps": 0,
+      "final_film_elapsed_time_s": null,
+      "requested_fixed_timestep_s": 1e-05,
+      "event_flags": null
+    }
+  },
+  "E2.82": {
+    "courant-max": {
+      "label": "EWF max Courant",
+      "unit": "-",
+      "native_5586": 0.0,
+      "native_8586": 0.1695310175418854,
+      "interval_peak": 3.313677072525024,
+      "interval_peak_native_iteration": 8537,
+      "change_5586_to_8586": 0.1695310175418854
+    },
+    "film-mass-total": {
+      "label": "Film mass",
+      "unit": "kg",
+      "native_5586": 0.0,
+      "native_8586": 3.664955579442817,
+      "interval_peak": 3.664955579442817,
+      "interval_peak_native_iteration": 8586,
+      "change_5586_to_8586": 3.664955579442817
+    },
+    "thickness-max": {
+      "label": "Maximum film thickness",
+      "unit": "mm",
+      "native_5586": 0.0,
+      "native_8586": 0.3576948947738856,
+      "interval_peak": 0.3913908440154046,
+      "interval_peak_native_iteration": 8257,
+      "change_5586_to_8586": 0.3576948947738856
+    },
+    "thickness-awavg": {
+      "label": "Area weighted film thickness",
+      "unit": "mm",
+      "native_5586": 0.0,
+      "native_8586": 0.07783002779599862,
+      "interval_peak": 0.07783002779599862,
+      "interval_peak_native_iteration": 8586,
+      "change_5586_to_8586": 0.07783002779599862
+    },
+    "velocity-mag-awavg": {
+      "label": "Area weighted film speed",
+      "unit": "m/s",
+      "native_5586": 0.0,
+      "native_8586": 55.84051575420305,
+      "interval_peak": 55.84051575420305,
+      "interval_peak_native_iteration": 8586,
+      "change_5586_to_8586": 55.84051575420305
+    },
+    "velocity-mag-max": {
+      "label": "Maximum film speed",
+      "unit": "m/s",
+      "native_5586": 0.0,
+      "native_8586": 224.9129486083984,
+      "interval_peak": 4169.5478515625,
+      "interval_peak_native_iteration": 8537,
+      "change_5586_to_8586": 224.9129486083984
+    },
+    "matched_physical_time_0.03s": {
+      "native_iteration": 7986,
+      "actual_elapsed_time_s": 0.030000000000000002,
+      "metrics": {
+        "courant-max": 0.1781021654605865,
+        "film-mass-total": 3.144167662725782,
+        "thickness-max": 0.3296334180049598,
+        "thickness-awavg": 0.06677042907636854,
+        "velocity-mag-awavg": 46.4511333975349,
+        "velocity-mag-max": 222.0530242919922
+      }
+    },
+    "stability": {
+      "max_abs_ewf_subiteration_residuals_h_u_v": {
+        "h": {
+          "value": 68522810.0,
+          "native_iteration": 8246
+        },
+        "u": {
+          "value": 243998900.0,
+          "native_iteration": 8246
+        },
+        "v": {
+          "value": 597299.6,
+          "native_iteration": 8246
+        }
+      },
+      "steps_with_all_ewf_last_residuals_at_or_below_1e-5": 262,
+      "captured_ewf_residual_steps": 3000,
+      "final_film_elapsed_time_s": 0.0375,
+      "requested_fixed_timestep_s": 1.25e-05,
+      "event_flags": {
+        "fpe": false,
+        "amg_divergence": false,
+        "nonfinite": false,
+        "fatal": false
+      }
+    }
+  },
+  "E2.83": {
+    "courant-max": {
+      "label": "EWF max Courant",
+      "unit": "-",
+      "native_5586": 0.0,
+      "native_8586": 123.3974990844727,
+      "interval_peak": 203220928.0,
+      "interval_peak_native_iteration": 7965,
+      "change_5586_to_8586": 123.3974990844727
+    },
+    "film-mass-total": {
+      "label": "Film mass",
+      "unit": "kg",
+      "native_5586": 0.0,
+      "native_8586": 4543.926243510889,
+      "interval_peak": 5423.433322612433,
+      "interval_peak_native_iteration": 8455,
+      "change_5586_to_8586": 4543.926243510889
+    },
+    "thickness-max": {
+      "label": "Maximum film thickness",
+      "unit": "mm",
+      "native_5586": 0.0,
+      "native_8586": 300.000011920929,
+      "interval_peak": 300.000011920929,
+      "interval_peak_native_iteration": 7800,
+      "change_5586_to_8586": 300.000011920929
+    },
+    "thickness-awavg": {
+      "label": "Area weighted film thickness",
+      "unit": "mm",
+      "native_5586": 0.0,
+      "native_8586": 96.49609611071638,
+      "interval_peak": 115.1735558860017,
+      "interval_peak_native_iteration": 8455,
+      "change_5586_to_8586": 96.49609611071638
+    },
+    "velocity-mag-awavg": {
+      "label": "Area weighted film speed",
+      "unit": "m/s",
+      "native_5586": 0.0,
+      "native_8586": 7240.203829893997,
+      "interval_peak": 55170340.71646594,
+      "interval_peak_native_iteration": 8528,
+      "change_5586_to_8586": 7240.203829893997
+    },
+    "velocity-mag-max": {
+      "label": "Maximum film speed",
+      "unit": "m/s",
+      "native_5586": 0.0,
+      "native_8586": 1313494.375,
+      "interval_peak": 143496527872.0,
+      "interval_peak_native_iteration": 8094,
+      "change_5586_to_8586": 1313494.375
+    },
+    "matched_physical_time_0.03s": {
+      "native_iteration": 7586,
+      "actual_elapsed_time_s": 0.030000000000000002,
+      "metrics": {
+        "courant-max": 0.2137331664562225,
+        "film-mass-total": 3.177045195594614,
+        "thickness-max": 0.3279882075730711,
+        "thickness-awavg": 0.06746862561424688,
+        "velocity-mag-awavg": 46.57333418214313,
+        "velocity-mag-max": 222.0312652587891
+      }
+    },
+    "stability": {
+      "max_abs_ewf_subiteration_residuals_h_u_v": {
+        "h": {
+          "value": 153573300000.0,
+          "native_iteration": 8529
+        },
+        "u": {
+          "value": 160648300000.0,
+          "native_iteration": 8458
+        },
+        "v": {
+          "value": 2779300000.0,
+          "native_iteration": 7850
+        }
+      },
+      "steps_with_all_ewf_last_residuals_at_or_below_1e-5": 56,
+      "captured_ewf_residual_steps": 3000,
+      "final_film_elapsed_time_s": 0.045,
+      "requested_fixed_timestep_s": 1.5e-05,
+      "event_flags": {
+        "fpe": false,
+        "amg_divergence": false,
+        "nonfinite": false,
+        "fatal": false
+      }
+    }
+  },
+  "E2.84": {
+    "courant-max": {
+      "label": "EWF max Courant",
+      "unit": "-",
+      "native_5586": 0.0,
+      "native_8586": 31769366.0,
+      "interval_peak": 260021392.0,
+      "interval_peak_native_iteration": 8227,
+      "change_5586_to_8586": 31769366.0
+    },
+    "film-mass-total": {
+      "label": "Film mass",
+      "unit": "kg",
+      "native_5586": 0.0,
+      "native_8586": 4902.772237201507,
+      "interval_peak": 5402.685137664403,
+      "interval_peak_native_iteration": 8171,
+      "change_5586_to_8586": 4902.772237201507
+    },
+    "thickness-max": {
+      "label": "Maximum film thickness",
+      "unit": "mm",
+      "native_5586": 0.0,
+      "native_8586": 300.000011920929,
+      "interval_peak": 300.000011920929,
+      "interval_peak_native_iteration": 7473,
+      "change_5586_to_8586": 300.000011920929
+    },
+    "thickness-awavg": {
+      "label": "Area weighted film thickness",
+      "unit": "mm",
+      "native_5586": 0.0,
+      "native_8586": 104.1166505916713,
+      "interval_peak": 114.73294159308101,
+      "interval_peak_native_iteration": 8171,
+      "change_5586_to_8586": 104.1166505916713
+    },
+    "velocity-mag-awavg": {
+      "label": "Area weighted film speed",
+      "unit": "m/s",
+      "native_5586": 0.0,
+      "native_8586": 7990031.581102211,
+      "interval_peak": 61326003.09955151,
+      "interval_peak_native_iteration": 8160,
+      "change_5586_to_8586": 7990031.581102211
+    },
+    "velocity-mag-max": {
+      "label": "Maximum film speed",
+      "unit": "m/s",
+      "native_5586": 0.0,
+      "native_8586": 13443417088.0,
+      "interval_peak": 150760128512.0,
+      "interval_peak_native_iteration": 8571,
+      "change_5586_to_8586": 13443417088.0
+    },
+    "matched_physical_time_0.03s": {
+      "native_iteration": 7300,
+      "actual_elapsed_time_s": 0.029994999999999997,
+      "metrics": {
+        "courant-max": 0.2496433407068253,
+        "film-mass-total": 3.209207775728517,
+        "thickness-max": 0.3259860095568001,
+        "thickness-awavg": 0.06815163921469909,
+        "velocity-mag-awavg": 46.70148687694298,
+        "velocity-mag-max": 222.0159149169922
+      }
+    },
+    "stability": {
+      "max_abs_ewf_subiteration_residuals_h_u_v": {
+        "h": {
+          "value": 124977300000.0,
+          "native_iteration": 8168
+        },
+        "u": {
+          "value": 189248900000.0,
+          "native_iteration": 7679
+        },
+        "v": {
+          "value": 2077511000.0,
+          "native_iteration": 8430
+        }
+      },
+      "steps_with_all_ewf_last_residuals_at_or_below_1e-5": 44,
+      "captured_ewf_residual_steps": 3000,
+      "final_film_elapsed_time_s": 0.0525,
+      "requested_fixed_timestep_s": 1.75e-05,
+      "event_flags": {
+        "fpe": false,
+        "amg_divergence": false,
+        "nonfinite": false,
+        "fatal": false
+      }
+    }
+  },
+  "metadata": {
+    "native_interval": [
+      5586,
+      8586
+    ],
+    "iterations_per_run": 3000,
+    "e27_reference_fixed_dt_s": 1e-05,
+    "figure_paths": {
+      "film-mass-total": "C:\\Users\\Shuhei Yokkaichi\\Documents\\CFD\\P4P_knowledgeWiki\\PyAnsys\\output\\phase72a_ewf_fixed_dt_comparison_20260927\\film-mass-total.svg",
+      "velocity-mag-awavg": "C:\\Users\\Shuhei Yokkaichi\\Documents\\CFD\\P4P_knowledgeWiki\\PyAnsys\\output\\phase72a_ewf_fixed_dt_comparison_20260927\\velocity-mag-awavg.svg",
+      "courant-max": "C:\\Users\\Shuhei Yokkaichi\\Documents\\CFD\\P4P_knowledgeWiki\\PyAnsys\\output\\phase72a_ewf_fixed_dt_comparison_20260927\\courant-max.svg",
+      "thickness-max": "C:\\Users\\Shuhei Yokkaichi\\Documents\\CFD\\P4P_knowledgeWiki\\PyAnsys\\output\\phase72a_ewf_fixed_dt_comparison_20260927\\thickness-max.svg"
+    },
+    "joined_history_csv": "C:\\Users\\Shuhei Yokkaichi\\Documents\\CFD\\P4P_knowledgeWiki\\PyAnsys\\output\\phase72a_ewf_fixed_dt_comparison_20260927\\ewf-timestep-screen.csv",
+    "interpretation_limit": "Endpoint growth and numerical excursions are compared; completing 3000 iterations is not evidence of physical or time-step convergence."
+  }
+}
