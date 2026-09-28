@@ -118,12 +118,13 @@ def set_speed(solver: Any, family: str, speed: float) -> dict[str, Any]:
     return readback
 
 
-def configure_reports(solver: Any, monitor_root: Path) -> tuple[dict[str, dict[str, Any]], dict[str, str]]:
+def configure_reports(solver: Any, monitor_root: Path,
+                      boundaries: tuple[str, ...] = BOUNDARIES) -> tuple[dict[str, dict[str, Any]], dict[str, str]]:
     definitions: dict[str, dict[str, Any]] = {}
     reports = solver.settings.solution.report_definitions
     flux = reports.flux
     for phase in PHASES:
-        for boundary in BOUNDARIES:
+        for boundary in boundaries:
             name = f"p8-flux-{phase.replace('-', '')}-{boundary}"
             require(name not in flux.get_object_names(), f"Inherited Phase 8 report: {name}")
             flux.create(name=name)
@@ -169,7 +170,7 @@ def configure_reports(solver: Any, monitor_root: Path) -> tuple[dict[str, dict[s
 
     surface = reports.surface
     pressure_field: str | None = None
-    for boundary in BOUNDARIES:
+    for boundary in boundaries:
         name = f"p8-pressure-{boundary}"
         require(name not in surface.get_object_names(), f"Inherited Phase 8 report: {name}")
         surface.create(name=name)

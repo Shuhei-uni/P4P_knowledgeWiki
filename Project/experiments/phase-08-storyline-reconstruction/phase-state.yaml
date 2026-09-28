@@ -13,6 +13,10 @@ families:
     gate: PyAnsys/output/phase8-analysis/26p81-f1-coupled-n10000/assessment.json
     diagnostic_dpm: PyAnsys/output/phase8-dpm/F1-diagnostic-050permil-26p81-20260928T143528Z/build.json
     dpm_tracking_status: COMPLETE_WITH_77P30PCT_DIAGNOSTIC_WEIGHT_INCOMPLETE
+    separate_single_face_parity: PyAnsys/output/phase8-single-face/F1-single-face-parity-26p81-20260928T162910Z/build.json
+    single_face_pilot: PyAnsys/output/phase8-single-face/F1-single-face-SIMPLE-26p81-20260928T165448Z/manifest.json
+    single_face_assessment: PyAnsys/output/phase8-analysis/26p81-f1-single-face-simple-n2000/assessment.json
+    current_speed_run: PyAnsys/output/phase8-carrier/F1-20p11-coupled-gts-20260928T170440Z/manifest.json
   F2:
     status: COUPLED_26P81_OPERATIONAL_CARRIER_GATE_PASS
     final_run: PyAnsys/output/phase8-carrier/F2-26p81-coupled-gts-extension-to10000-20260928T123834Z/manifest.json
@@ -21,16 +25,22 @@ families:
     dpm_tracking_status: COMPLETE_WITH_80P76PCT_DIAGNOSTIC_WEIGHT_INCOMPLETE
     dpm_step_probe: PyAnsys/output/phase8-dpm/F2-26p81-dpm-maxsteps-200000-20260928T143334Z/probe.json
   F3:
-    status: EXTENDING_5PCT_ALLOCATED_DPM_UPD100_TO_NATIVE15000
+    status: N15000_5PCT_ALLOCATED_DPM_UPD100_CARRIER_GATE_FAIL
     verified_child: PyAnsys/output/phase8-dpm/F2-allocated-050permil-26p81-upd100-20260928T144555Z/build.json
     pilot_run: PyAnsys/output/phase8-carrier/F3-26p81-5pct-coupled-upd100-20260928T144733Z/manifest.json
     pilot_assessment: PyAnsys/output/phase8-analysis/26p81-f3-5pct-upd100-n11000/assessment.json
-    current_run: PyAnsys/output/phase8-carrier/F3-26p81-5pct-coupled-upd100-extension-to15000-20260928T151004Z/manifest.json
+    final_run: PyAnsys/output/phase8-carrier/F3-26p81-5pct-coupled-upd100-extension-to15000-20260928T151004Z/manifest.json
+    final_assessment: PyAnsys/output/phase8-analysis/26p81-f3-5pct-upd100-n15000/assessment.json
     interrupted_upd1_pilot: PyAnsys/output/phase8-carrier/F3-26p81-5pct-coupled-20260928T144022Z/manifest.json
-    report_correction: Pilot used Volume Integral for per-cell DPM Mass Source and is excluded from kg/s accounting. N11000 to N15000 continuation uses Volume Sum.
+    report_correction: Pilot used Volume Integral for per-cell DPM Mass Source and is excluded from kg/s accounting. N11000 to N15000 continuation uses Volume Sum, readback 0 kg/s.
   F4:
-    status: PROVISIONAL_E27_5PCT_BUILDER_READY_WAITING_FOR_F3_PILOT
+    status: PROVISIONAL_E27_5PCT_N11000_CARRIER_GATE_FAIL
     builder: PyAnsys/scripts/setup/build_phase8_f4_provisional_ewf.py
+    verified_child: PyAnsys/output/phase8-ewf/F4-26p81-5pct-E27-provisional-20260928T163502Z/build.json
+    pilot_run: PyAnsys/output/phase8-ewf/F4-26p81-5pct-E27-provisional-20260928T163918Z/manifest.json
+    pilot_assessment: PyAnsys/output/phase8-analysis/26p81-f4-5pct-e27-provisional-n11000/assessment.json
+    rejected_lwf_boundary_attempt: PyAnsys/output/phase8-ewf/F4-26p81-5pct-E27-provisional-20260928T163022Z/build.json
+    rejected_global_only_splash_child: PyAnsys/output/phase8-ewf/F4-26p81-5pct-E27-provisional-20260928T163224Z/build.json
     claim_limit: Phase 7.2A EWF treatment remains unfinalized; E2.7 is only an exploratory switch basis.
 matched_26p81_comparison: PyAnsys/output/phase8-analysis/26p81-f1-f2-coupled-n10000/summary.json
-next_required_action: Finish and assess the F3 5% update-100 continuation through native N15000; preserve unresolved particle fates and verify corrected source report.
+next_required_action: Finish and assess the F1 20.11 m/s Coupled pilot, then run the matched F2 20.11 m/s point; preserve separate SIMPLE parity and failed F3/F4 gates.

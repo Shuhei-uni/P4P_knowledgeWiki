@@ -56,13 +56,15 @@ def inspect(solver) -> dict:
     film = safe_get_state(wall["wall"].phase["mixture"].wall_film, "film wall")
     bottom = safe_get_state(wall["bottom"].phase["mixture"].wall_film, "bottom film")
     require(film.get("eulerian_film_wall") is True and
-            film.get("enable_flow_momentum_coupling") is False, "Film wall mismatch")
+            film.get("enable_flow_momentum_coupling") is False and
+            film.get("enable_dpm_wall_splash") is True,
+            "Film wall or wall splash mismatch")
     require(bottom.get("eulerian_film_wall") is not True, "Bottom became a film wall")
     wall_dpm = safe_get_state(wall["wall"].phase["mixture"].discrete_phase,
                               "film wall DPM")
     bottom_dpm = safe_get_state(wall["bottom"].phase["mixture"].discrete_phase,
                                 "bottom DPM")
-    require(wall_dpm["bc_type"] == "wall-film", "Wall does not collect DPM into film")
+    require(wall_dpm["bc_type"] == "reflect", "Inherited main-wall DPM BC changed")
     require(bottom_dpm["bc_type"] == "trap", "Bottom DPM fate changed")
     dpm = safe_get_state(solver.settings.setup.models.discrete_phase, "F4 DPM")
     injections = set(dpm.get("injections", {}))
@@ -131,8 +133,15 @@ def main() -> None:
         set_leaf_readback(film.film_condition_type, "film-wall-boundary", "F4 film condition")
         set_leaf_readback(film.enable_flow_momentum_coupling, False,
                           "F4 wall flow momentum coupling")
-        set_leaf_readback(wall["wall"].phase["mixture"].discrete_phase.bc_type,
-                          "wall-film", "F4 particle-to-film wall fate")
+        set_leaf_readback(film.enable_dpm_wall_splash, True,
+                          "F4 EWF wall DPM splash")
+        # EWF collection is controlled by the EWF DPM Coupling option and its
+        # film-wall DPM Interaction tab. Fluent 2025 R2 removes the DPM
+        # ``wall-film`` BC while EWF is active: that BC belongs to the
+        # incompatible Lagrangian Wall Film model. Preserve the parent BC.
+        require(safe_get_state(wall["wall"].phase["mixture"].discrete_phase,
+                               "F4 inherited wall DPM")["bc_type"] == "reflect",
+                "F4 inherited main-wall DPM BC changed")
         require(safe_get_state(wall["bottom"].phase["mixture"].wall_film,
                                "F4 bottom film").get("eulerian_film_wall") is not True,
                 "F4 bottom unexpectedly became EWF")
