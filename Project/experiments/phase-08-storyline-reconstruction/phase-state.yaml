@@ -30,6 +30,9 @@ families:
     speed_23p46_n10000_assessment: PyAnsys/output/phase8-analysis/23p46-f1-coupled-n10000/assessment.json
     speed_23p46_diagnostic_dpm: PyAnsys/output/phase8-dpm/F1-diagnostic-050permil-23p46-20260928T222919Z/build.json
     speed_23p46_dpm_fates: PyAnsys/output/phase8-analysis/23p46-f1-diagnostic-dpm/summary.json
+    speed_29p48_current_pilot: PyAnsys/output/phase8-carrier/F1-29p48-coupled-gts-20260928T223744Z/manifest.json
+    speed_29p48_pilot_assessment: PyAnsys/output/phase8-analysis/29p48-f1-coupled-n2000/assessment.json
+    speed_29p48_current_extension: PyAnsys/output/phase8-carrier/F1-29p48-coupled-gts-extension-to10000-20260928T225313Z/manifest.json
     excluded_speed_23p46_simple_start: PyAnsys/output/phase8-carrier/F1-23p46-20260928T194516Z/manifest.json
   F2:
     status: COUPLED_26P81_OPERATIONAL_CARRIER_GATE_PASS
@@ -74,4 +77,4 @@ matched_26p81_comparison: PyAnsys/output/phase8-analysis/26p81-f1-f2-coupled-n10
 matched_20p11_n5000_comparison: PyAnsys/output/phase8-analysis/20p11-f1-f2-coupled-n5000/summary.json
 matched_20p11_n10000_comparison: PyAnsys/output/phase8-analysis/20p11-f1-f2-coupled-n10000/summary.json
 matched_23p46_n10000_comparison: PyAnsys/output/phase8-analysis/23p46-f1-f2-coupled-n10000/summary.json
-next_required_action: Continue the matched F1/F2 Coupled carrier speed sweep at 29.48 m/s, starting independently from each verified numerical-recovery parent; preserve diagnostic DPM incompletes as an unresolved claim limit.
+next_required_action: Inspect the active F1 29.48 m/s Coupled extension manifest and terminal before any new launch. Assess its saved N10000 endpoint, then run the matched F2 point.
