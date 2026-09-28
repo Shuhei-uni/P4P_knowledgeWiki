@@ -467,3 +467,14 @@
 - Files updated: `wiki/guidance/fluent-general-click-by-click.md`, `wiki/sources/ansys-fluent-users-guide-2025r2.md`, `wiki/index.md`, `wiki/log.md`.
 - Reason: focused official-v252 lookup distinguishes ordinary Coupled, phase coupling and Global Time Step; preserves the multiphase conservation caveat and independent balance requirement.
 - Assumptions: no sink exception or case-specific convergence guarantee inferred; generic default controls are not promoted to optimal settings.
+
+## [2026-09-26] query | mixture-startup-and-ewf-conservation
+
+- Updated `wiki/guidance/fluent-general-click-by-click.md`, `wiki/guidance/index.md`,
+  `wiki/sources/ansys-fluent-users-guide-2025r2.md`, and `wiki/index.md`.
+- Reason: focused v252 research distinguishes supported Mixture accretion,
+  reciprocal flow feedback, film-equation coupling, edge drainage and inventory
+  versus rate reports; preserves a documented Mixture startup alternative.
+- Assumptions: no source Jacobian, conserved run, physical drainage, or generic
+  numerical cure inferred. A UDF degassing example is an analogy, not a verified
+  expression-source implementation.

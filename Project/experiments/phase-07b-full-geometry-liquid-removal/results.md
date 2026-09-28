@@ -1,8 +1,8 @@
 # Phase 7b — G1 five-case discovery review
 
-Current frontier: **G5 complete; API restored and E6 recovery in preparation**, with no qualified case. See [investigation results](convergence-investigation/results.md) and [E6 setup](convergence-investigation/coupled-nphase/setup.md). Machine state owns live progress.
+Current frontier: **G1–G6 complete; E7 incomplete under an external connectivity block**, with no qualified case. See the [28 September evidence conclusions](convergence-investigation/evidence-conclusions-2026-09-28.md) and [investigation results](convergence-investigation/results.md). Machine state owns live progress; the G1 narrative below is historical.
 
-**Completed comparison:** See [G5](convergence-investigation/coupled-cfl20/results.md) for improved closure but worse inventory drift, and the active [convergence investigation](convergence-investigation/results.md) for E6.
+**Latest completed comparison:** [G6](convergence-investigation/coupled-nphase/results.md) finds that all-phase equations did not restore conservation or stationary inventory. [E7](convergence-investigation/coupled-nphase-weaker-sink/results.md) remains partial.
 
 **Later E2/G2 result:** the approved weaker-sink comparison is complete; see [G2 results](lower-sink-rate/results.md). The session and next-action statements below describe the G1 handoff, not the current state.
 

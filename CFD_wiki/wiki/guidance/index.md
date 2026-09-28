@@ -9,7 +9,7 @@ Use this directory first when a question is about:
 - startup, import/export, initialization, run controls, or postprocessing navigation.
 
 ## Files
-- [fluent-general-click-by-click](fluent-general-click-by-click.md): primary Fluent GUI navigation playbook for common CFD setup actions.
+- [fluent-general-click-by-click](fluent-general-click-by-click.md): primary Fluent GUI navigation, including v252 Mixture startup and EWF accretion/conservation checks.
 - [workbench-meshdat-semi-automated-improvement](workbench-meshdat-semi-automated-improvement.md): conservative `.meshdat` plus baseline-mesh workflow for Workbench control edits with PyFluent audit and export validation.
 
 ## Usage Rule

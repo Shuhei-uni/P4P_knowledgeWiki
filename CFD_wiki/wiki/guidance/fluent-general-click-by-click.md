@@ -46,6 +46,75 @@ This extends the [documentation source](../sources/ansys-fluent-users-guide-2025
 The [Phase-7b investigation](../../../Project/experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/shuhei-audit.md)
 reuses these restrictions; its selected controls and outcomes remain Project evidence.
 
+## Mixture startup and source-treatment checks (2025 R2)
+
+**Reported:** for cyclone separation, the guide suggests establishing flow
+with Volume Fraction and Slip Velocity equations temporarily disabled, then
+enabling both. It recommends initial slip relaxation no greater than 0.2.
+**Inferred procedure:** preserve the initial pair; use Solution → Controls →
+Equations to record and change equation enablement, then restore every intended
+equation before assessing the final model. A frozen-equation initialization
+cannot qualify the subsequent multiphase solution. Treat startup and relaxation
+as separate changes when isolating their effects.
+[UG §27.8.2.2](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_sec_multiphase_solution.html).
+
+**Reported:** user mass sources require appropriate sources in the other
+transport equations; Fluent does not automatically add them.
+[UG §8.2.7](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_bcs_sec_cell_zones.html).
+**Reported:** `DEFINE_SOURCE` accepts a derivative with respect to the solved
+variable. Its degassing example supplies a negative fraction derivative and
+momentum terms. **Missing:** that example does not establish automatic
+differentiation of expression sources or a ready-made steady Mixture liquid
+sink. Verify model/thread/variable semantics before transferring it.
+[Customization Manual §2.3.45](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_udf/flu_udf_ModelSpecificDEFINE.html).
+
+## Mixture accretion and EWF conservation checks (2025 R2)
+
+This **extends** the [documentation source](../sources/ansys-fluent-users-guide-2025r2.md)
+with Theory/Customization Manual cross-references. It complements the later
+DPM/EWF examples on this page; their coupling choices are not Mixture defaults.
+
+1. In Models → Eulerian Wall Film, inspect Phase Accretion and the collected
+   phase/material. **Reported:** Mixture with Slip Velocity supports accretion.
+   Film and collected phase must use compatible material definitions.
+   [UG §30.3](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_ewf_sec_options.html).
+2. In each film wall's boundary settings, record Flow Momentum Coupling.
+   **Reported:** off means flow influences film without reciprocal film-motion
+   feedback. Separately record film Coupled Solution: it couples film mass and
+   momentum equations numerically. These controls are not interchangeable.
+   [UG §30.5.1](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_ewf_sec_bound.html),
+   [Theory §17.4.4](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_th/flu_th_ewf_sec_time_coupl.html).
+3. Map film-enabled walls and all their edges. **Reported:** an edge adjoining
+   neither another film wall nor a symmetry/periodic boundary becomes a film
+   outlet. **Inferred:** names such as `closedfilm` and bulk-outlet labels do
+   not establish drainage topology. Inspect the actual edge network.
+   [UG §30.5](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_ewf_sec_bound.html).
+4. Record film elapsed time and inventory. **Reported:** film remains time
+   dependent even with steady bulk flow. Inspect whether the bulk is frozen
+   or being updated; iteration counts alone do not establish physical storage
+   rates. [Theory §17.4.3](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_th/flu_th_ewf_sec_sol_alg.html).
+5. Use Results → Reports → Fluxes → Film Mass Flow Rate for named-boundary
+   discharge; `report/fluxes/film-mass-flow` is the corresponding TUI route.
+   Film Mass is inventory, while Film Outflow Mass is cumulative outflow.
+   Audit units and reductions of custom reports before combining them.
+   [UG §30.7](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_ewf_sec_post.html),
+   [UG §43.4](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_fvdefs.html).
+
+**Reported:** accretion removes secondary-phase mass and momentum from the
+bulk multiphase flow and adds them to film equations. The theory describes
+Eulerian flow; Mixture availability is separately documented above.
+[Theory §17.2.1.5](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_th/flu_th_ewf_sec_film_submodels.html).
+**Inferred diagnostic:** when combining bulk and film balances, cancel their
+internal exchange; count external film discharge and user sources once.
+Stationary bulk inventory can coexist with growing film inventory. Neither
+small carryover nor nonzero film speed demonstrates stationary drainage.
+
+**Reported:** Maximum Thickness removes excess film. Monitor clipping and
+compare thickness with local curvature; staying below the cap is necessary
+evidence against cap removal, not a complete thin-film validity test.
+[UG §30.4](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_ewf_sec_eqns.html),
+[Theory §17.1](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_th/flu_th_ewf_intro.html).
+
 ## 1) Start Fluent
 1. Open `Ansys Fluent Launcher`.
 2. Set:

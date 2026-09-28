@@ -63,13 +63,18 @@ final `5586` state.
 The new phase screens wall roughness and EWF as separate mechanisms from this
 developed endpoint. The old first-2,000-iteration v2 inlet ramp is not replayed
 in 7.2A children, and the first screen does not combine roughness with EWF.
-The current [Family E result](experiments/phase-07-2a-wall-liquid-routing/ewf-family/results.md)
-has completed E0, basic-EWF E1, and the subsequently human-selected E1-plus-R3
-interaction E3 at native 8586. E1/E3 formed no measured film; E2 phase
-accretion diverged early, and a smaller-initial-film-step recovery reproduced
-the FPE. E2 has no late-window comparison, so the film-capture question remains
-open under a numerical block. The student Fluent endpoint became unresponsive
-after that recovery FPE; Server 1 is not part of Family E execution.
+The [Family E result](experiments/phase-07-2a-wall-liquid-routing/ewf-family/results.md)
+now includes E2.7 and its additional 5,000-iteration continuation to native
+N13586. With phase accretion and coupled film equations on, but Flow Momentum
+Coupling off, its exported histories show bulk liquid mass near 63 kg and
+liquid carryover near 1.734 kg/s. Film mass increases 3.111→5.842 kg and film
+speed 46.34→82.41 m/s. This establishes film development, not steady drainage
+or complete conservation. The five committed histories can be independently
+checked; the linked full native run bundles are absent from this checkout.
+The [26 September cross-branch review](experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/phase-review-2026-09-26.md)
+records this distinction, a roughness-run mixture-ledger double count, and
+remaining provenance and drainage questions. Older E0/E1/E3 zero-film results
+and E2 recovery failures remain historical evidence, not the current frontier.
 See the [Phase 7.2A record](experiments/phase-07-2a-wall-liquid-routing/index.md),
 [context](experiments/phase-07-2a-wall-liquid-routing/CONTEXT.md), and
 [throughout-run monitoring contract](experiments/phase-07-2a-wall-liquid-routing/monitoring-contract.md).
@@ -95,6 +100,11 @@ Multiphase/turbulence residuals remain oscillatory and phase-2 liquid carryover
 through `steamoutlet` remains about `24.33 kg/s`. That unresolved routing error
 is now the main target of Phase 7.2A.
 
+The independent [R0 audit](experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/shuhei-audit.md)
+also reconstructs approximately 20.8% liquid and 12.1% native-mixture terminal
+error from the available reported terms. Its historical promotion is a
+development-parent decision, not evidence that the absolute balances close.
+
 The decision rule carried forward is therefore: preserve bounded inventory,
 closure, continuity and absorber tracking first; then judge whether the new wall
 mechanism improves phase routing. Lower residuals alone do not justify promotion
@@ -103,40 +113,38 @@ if the macroscopic behaviour becomes worse.
 See the [Phase 7.1A parent record](experiments/phase-07-1a-absorber-convergence/index.md)
 and the [Phase 7.2A baseline handoff](experiments/phase-07-2a-wall-liquid-routing/baseline-control-handoff.md).
 
-For Andy's Phase 7b, a function-based ideal collector with five thickness
-cases (`20%, 40%, 60%, 80%, 100%`) is approved, with at most `5,000` steady
-iterations per case, DPM/EWF off, and the same fresh initialization without a
-patched pool. Its maximum top is the historical cut plane / assumed pool
-surface. The clean Python-only reference, save/reopen and source-free smoke passed.
-The Cortex fault was reproduced in phase-velocity expression syntax and avoided
-with component-first syntax; all three components match native phase reports
-at nonzero slip. Corrected collector expressions completed a 50-iteration
-startup diagnostic with complete histories. Exact mask-face flux recording
-also passed its live smoke. The API has recovered and the S20 report-context error is corrected, saved
-and verified after reload. S20 completed its 5,000-iteration screen with all histories and final sections.
-It did not achieve acceptable mass closure; S40, S60 and S80 also completed 5,000 iterations with final artifacts and full analyses;
-none of the four meets the numerical criteria. S100 suffered numerical failure
-at attempted N4183; all completed N1–4182 records and a labelled N4000 recovery
-field set are preserved. The [G1 comparison](experiments/phase-07b-full-geometry-liquid-removal/results.md)
-is complete; no case is qualified and G1 check-ins are paused. After the
-meeting Andy accepted the fixed-S40 weaker-sink follow-up (tau 0.02 s, then
-0.10 s). Its [new-chat handover](experiments/phase-07b-full-geometry-liquid-removal/HANDOVER.md)
-and [E2 setup](experiments/phase-07b-full-geometry-liquid-removal/lower-sink-rate/setup.md)
-record the completed experiment: both children reached N5000 with verified
-evidence and failed the numerical indicators. The [G2 comparison](experiments/phase-07b-full-geometry-liquid-removal/lower-sink-rate/results.md)
-shows that tau alone did not establish balanced, stationary behaviour. Andy subsequently selected one [S40-T020 diagnostic replication](experiments/phase-07b-full-geometry-liquid-removal/spike-diagnostic/setup.md), with additional spike capture and unchanged physics/numerics. See the
-[technical diagnostics](experiments/phase-07b-full-geometry-liquid-removal/diagnostics.md).
-On 2026-09-22 Andy expanded the post-E3 authority to an
-[autonomous convergence investigation](experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/plan.md):
-finish E3/G3, audit Shuhei's newly pulled results and their correctness, consult
-relevant documentation/literature, and iterate through controlled tests toward
-credible steady convergence, especially continuity. The existing heartbeat
-continues past completed G5. The [E5 result](experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/coupled-cfl20/results.md) shows improved closure but worse inventory drift. [E6 N-phase equations](experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/coupled-nphase/setup.md) is selected but blocked before solve by a prepared-data reload crash and loss of API access. The [Shuhei audit](experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/shuhei-audit.md) remains the correctness and transfer reference.
+For Andy's Phase 7b, **G1–G6 are complete and no case is qualified**.
+The [G1 collector screen](experiments/phase-07b-full-geometry-liquid-removal/results.md),
+[G2 weaker-sink comparison](experiments/phase-07b-full-geometry-liquid-removal/lower-sink-rate/results.md)
+and [G3 diagnostic replication](experiments/phase-07b-full-geometry-liquid-removal/spike-diagnostic/results.md)
+are followed by controlled Coupled, Courant and N-phase contrasts. Coupled
+eliminates the recorded extreme speed bursts, but
+[G6](experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/coupled-nphase/results.md)
+still has late mean absolute liquid/vapor/native-mixture closure errors of
+144.369/1.520/84.841% and inventory change of 18.451%. Regional budgets place
+most liquid deficit above the collector; they do not prove a localized cause.
 
-Gate G1 returns the comparative observations to Andy. The selected condition
-is steady Mixture/RNG physics with Energy off and full-feed `1600 kJ/kg`,
-supplied through separate liquid and steam inlet faces using the earlier
-equal-velocity split design, with the physical brine outlet closed as a wall.
+[E7](experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/coupled-nphase-weaker-sink/setup.md)
+is the selected tau 0.10 s contrast under unchanged Coupled/N-phase settings.
+It passed its build, exact N0 and N50 checks, then lost API access. The accepted
+28 September recovery restored the preserved N500 pair with exact readbacks.
+E7 is now externally blocked after another host-sleep interruption: paired N2500
+and local records throughN2742 are preserved, but the live endpoint is unreachable
+and its iteration unknown. The owned local controller was retired; Fluent was
+not terminated. Supervision is paused pending sustained awake/network access.
+Reconcile [phase-state](experiments/phase-07b-full-geometry-liquid-removal/phase-state.yaml)
+before any action; E7 has no terminal numerical result.
+
+The [26 September review](experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/phase-review-2026-09-26.md)
+recommended a bounded finish, which Andy accepted on 28 September: complete E7,
+audit source treatment, then at most one justified documented startup contrast
+if needed, followed by bounded qualification or closure of the tested route.
+The [current contract](experiments/phase-07b-full-geometry-liquid-removal/CONTEXT.md)
+owns that execution envelope; no new physical phase is selected. Full feed, steady Mixture/RNG, Energy/DPM/EWF
+off, the full geometry and closed physical brine wall remain the model.
+A standing pool is not required. The ideal collector is a numerical removal
+mechanism, not a physical drainage model.
+
 The most direct
 records are:
 
@@ -172,7 +180,7 @@ memory for the Purnanto, full-geometry, DPM, EWF, VOF, and reconstruction
 families. Their historical status is part of the evidence; they are not
 silently upgraded to current conclusions.
 
-## What did the latest experiment show?
+## Historical predecessor findings
 
 The completed Phase-06 discovery screens and the Stage-06 10,000-iteration
 long numerical-surrogate hypothesis test did not establish a controlled pool
@@ -200,78 +208,33 @@ steady state. A standing pool is explicitly not required in Phase 7b.
 
 ## What remains unresolved?
 
-- for Shuhei's Phase 7.1A, whether the v2 virtual outlet can realize its
-  inlet-throughput command after liquid reaches the lower zone, without direct
-  vapor deletion or unacceptable source-inclusive imbalance;
-- for Shuhei's Phase 7.1A, whether the v2 60k branch can reach bounded liquid
-  inventory and credible steady numerical behaviour after the outlet is no
-  longer starved;
-- for Shuhei's Phase 7.1A, whether any later, separately authorized numerical
-  treatment can improve the selected lower cell-zone absorber's scaled-residual
-  and continuity behaviour while preserving bottom-only liquid removal and
-  negligible direct vapor absorption;
-- for Shuhei's Phase 7.1A, whether the finite turbulence-family differences
-  persist over a declared qualification horizon or are dominated by pressure
-  coupling, outlet reverse flow, source/local conditioning, or equation
-  treatment;
-- for Andy's Phase 7b, which separately authorized diagnostic could distinguish
-  source-strength/coupling effects from collector coverage after the G1 screen;
-- whether liquid reaches the collector and can be removed without unacceptable
-  steam loss, phase-routing distortion, mass imbalance, or numerical instability;
-- why the fixed-treatment Phase 7b cases retain strong mass imbalance and
-  nonstationarity, including S100's numerical divergence; and
-- which external, analytical, or measured targets would eventually support a
-  physical validation claim.
+- Whether completing E7 and one isolated startup treatment can establish
+  source-inclusive phase/native-mixture closure and stationary inventory in
+  the full-geometry ideal-collector model.
+- The expression sink's implicit derivative and the cause of the large
+  above-collector phase deficit; exact recording and normalized fractions do
+  not settle these questions.
+- Whether Phase 7.2A's film reaches a documented external drain with a complete
+  bulk/film/source ledger and bounded film inventory, and whether its omitted
+  reciprocal flow feedback materially changes routing.
+- Whether any numerically qualified result agrees with external pressure-drop,
+  carryover, brine-flow or separation measurements. No branch is externally
+  validated merely by low residuals or source-command tracking.
 
 ## What happens next?
 
-**Phase 06 is concluded for now by explicit human direction.** Its blocked
-lifecycle record is retained as historical evidence rather than silently
-upgraded to a completed physical validation.
+The [phase review](experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/phase-review-2026-09-26.md)
+recommends resolving E7's partial disposition, verifying source treatment and,
+if still justified, at most one further startup contrast under the existing
+question. Failed numerical indicators after that bounded work would support
+closing the tested Phase 7b route without claiming global steady nonexistence.
 
-Phase 7.1A's v2 60k virtual-outlet baseline is prepared, reopened, smoke-tested,
-and loaded on `student`. The first 2,000 iterations of the v2 baseline are now
-explicitly defined as a shared inlet-loading ramp from `0.25` to `1.00` of the
-recorded `116.92 kg/s` liquid and `80.69 kg/s` steam targets, updated every 10
-iterations. The immediate active planning direction is [Family N numerical
-improvement](experiments/phase-07-1a-absorber-convergence/solver-improvement-family/index.md),
-with roughness and EWF retained as later mechanism branches. Family N must
-monitor the full loading, absorber, routing, closure, residual, warning, and
-timing trajectory over the run; its detailed monitoring contract is recorded
-in the family record. The old turbulence, solver-path, C7, and C8 packets
-remain historical and are not eligible parents.
-Andy's Phase 7b has verified its
-five collector masks and PC/API paths and declared a common finite source
-coefficient and evidence contract in its
-[design](experiments/phase-07b-full-geometry-liquid-removal/design.md).
-The approved five-case screen now has a complete G1 comparison: four
-N5000 endpoints fail numerical criteria and S100 has a documented numerical
-block at attempted N4183. The post-meeting E2 weaker-sink follow-up and
-[G2 comparison](experiments/phase-07b-full-geometry-liquid-removal/lower-sink-rate/results.md)
-are complete: both fresh strength points reached N5000 but failed the numerical
-indicators. G3 diagnostic replication and G4/G5 Coupled comparisons are also complete without a qualified case; E6 N-phase equations is the active controlled contrast under the autonomous investigation authority. Shuhei's Phase 7
-retains the original E0--E4 fixed-mesh campaign as the comparison record and
-now executes the human-approved E5 cell-zone recovery family. The first
-student-server split placed `3,794` lower cells in a second fluid zone without
-changing solver mesh counts, extents, volume/face statistics, or mesh-check
-status. Corrected G025 completed the full screen but did not improve the E0
-inventory trend; recovered G050 and fresh G100 are now also complete with the
-corrected `get_sum` source audit. G050 has the smallest provisional late
-inventory slope, but all three gains retain positive inventory drift and open
-boundary-only closure. No qualification path is authorized. Patching or reset
-remains a human-only last resort and is not an autonomous prompt. The cold-start
-fixed-rate continuation is now a verified execution block with a durable
-solver-divergence limitation; any stabilization, instrumentation repair, or
-altered absorber law requires a separate human-approved setup. Experiment
-selection and gates belong to each phase's own `CONTEXT.md`.
-
-For Phase 7b, the resolved-outlet study's 620,431-cell mesh has been copied to
-Extreme SSD and its SHA-256 verified. The copied PC phase folder under
-`C:/Users/qtra338/P4P/experiments/` was verified accessible through Fluent/PyFluent,
-with output text round-trips and a historical compiled source-free geometry
-probe. Fresh-process clean N3 reload and client-exit preservation are now verified;
-these preparation checks were followed by the completed G1 discovery screen
-linked above; no credible steady collector solution was established.
+For wall-film work, first recover the native evidence, correct the derived
+mixture ledger and verify film discharge and combined conservation within
+existing Phase 7.2A. A full-geometry film/drainage model changes the physical
+representation and needs its own human-framed phase; it is not selected here.
+Phase 06 remains concluded. Each phase's `CONTEXT.md` and machine state own
+actual authority and progress; historical setup instructions are not new jobs.
 
 ## Project map
 

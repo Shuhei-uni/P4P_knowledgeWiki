@@ -4,6 +4,13 @@ The [steady Mixture coupling procedure](../guidance/fluent-general-click-by-clic
 extends this source with verified v252 restrictions on Coupled, Global Time
 Step and residual normalization; primary section links are retained there.
 
+The [Mixture startup/source checks](../guidance/fluent-general-click-by-click.md#mixture-startup-and-source-treatment-checks-2025-r2)
+and [Mixture accretion/EWF checks](../guidance/fluent-general-click-by-click.md#mixture-accretion-and-ewf-conservation-checks-2025-r2)
+extend this source with v252 equation staging, supported accretion, film
+boundary topology and inventory-versus-flux reporting. Theory and Customization
+Manual evidence is linked explicitly there; no case-specific validation or
+automatic expression-source derivative is inferred.
+
 ## A. Study Scope
 - Problem statement and objective:
   - `Reported`: official software documentation describing Fluent capabilities and operating procedures for meshing, solution setup, execution, and postprocessing.

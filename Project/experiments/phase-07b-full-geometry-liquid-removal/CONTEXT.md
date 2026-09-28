@@ -1,12 +1,12 @@
 # Phase Context — Phase 7b Full-Geometry Steady Liquid Removal
 
-Current frontier: **G6 complete; E7 weaker-sink contrast selected**, with no qualified case. See [investigation results](convergence-investigation/results.md) and [E7 setup](convergence-investigation/coupled-nphase-weaker-sink/setup.md). Machine state owns live progress.
+Current frontier: **E7 is externally blocked: the Mac returned to lid-close sleep, its local controller stalled and was retired, and the configured Fluent endpoint is currently unreachable. Last verified paired checkpoint N2500; complete local residual/flux/speed records N2742; live iteration unknown. G1–G6 are complete and no case is qualified.** The [recovery record](convergence-investigation/coupled-nphase-weaker-sink/recovery-n500.md) preserves provenance. No Fluent process was terminated and no uncertain block was replayed. Andy's bounded finish remains the scientific envelope; no new case or physical scope is selected. Supervision is paused under the recorded external-block policy until sustained awake/network access is restored. Machine state owns the exact recovery next step.
 
 ## Status
 
 - **Planning state:** G1–G6 are complete; no qualified case. E6 reduced some residuals but did not restore conservation. E7 changes only tau0.02→0.10s under unchanged Coupled/N-phase treatment. Live build/parity/smoke status belongs to phase-state.
 - **Owner:** Andy; separate from Shuhei's Phase 7
-- **Last human review:** 2026-09-22 (autonomous convergence investigation after E3, including Shuhei's new work)
+- **Latest human authorization:** 2026-09-28: execute the bounded finish proposed after the 26 September review, inside the existing steady full-geometry envelope.
 - **Experiment-selection authority:** phase-loop within the human-approved convergence objective below
 - **Original G1 decision (completed):** retain the full geometry and investigate a function-based
   liquid-removal zone as an ideal collector in a strictly steady-state model.
@@ -18,6 +18,12 @@ Current frontier: **G6 complete; E7 weaker-sink contrast selected**, with no qua
   The approved comparison is complete and returned in [results](results.md).
   Source implementation and instrumentation are verified; none of the tested
   cases establishes a credible steady solution.
+
+## Current authority — accepted bounded finish (28 September 2026)
+
+Andy accepted the proposed plan and instructed execution. Recover E7 from the latest verified checkpoint and finish its existing absolute N5000 horizon, preserving the interrupted tail and identifying any replay. Complete the source-treatment/linearization audit. If E7 still fails and no concrete implementation defect supersedes the experiment, run at most one isolated, documented Mixture startup contrast with a predeclared discovery cap of 5000. A promising endpoint requires bounded persistence/restart qualification before acceptance. If the bounded work still fails, close the tested Phase 7b route with its limitations rather than continuing an open-ended tuning series.
+
+A future full-geometry EWF/drainage investigation remains a separate scientific phase. The next physical question should be informed by a conserved film-routing audit of Shuhei's Phase 7.2A; this authorization does not add EWF or physical transient pool modelling to Phase 7b. Routine implementation, evidence recovery, source audit, execution and analysis within this bounded finish require no further approval.
 
 ## Current authority — autonomous convergence investigation after E3 (22 September 2026)
 

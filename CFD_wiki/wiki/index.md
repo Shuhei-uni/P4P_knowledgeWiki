@@ -40,7 +40,7 @@
 
 ## Guidance
 - [guidance/index](guidance/index.md): entry point for reusable click-by-click Fluent guidance pages.
-- [fluent-general-click-by-click](guidance/fluent-general-click-by-click.md): GUI navigation including multiphase outlet/gravity, steady Mixture Coupled versus pseudo time, conservation restrictions and residual comparison controls.
+- [fluent-general-click-by-click](guidance/fluent-general-click-by-click.md): GUI navigation including Mixture startup/source checks, Coupled versus pseudo time, and EWF accretion, feedback, drain topology and inventory/flux accounting.
 - [workbench-meshdat-semi-automated-improvement](guidance/workbench-meshdat-semi-automated-improvement.md): conservative `.meshdat` mesh-improvement workflow with PyFluent baseline/export validation and Workbench operator trial steps.
 - External guide reference: `../guide/Ansys_Fluent_Users_Guide.pdf` is the local Fluent manual PDF used to verify and extend click-by-click guidance.
 

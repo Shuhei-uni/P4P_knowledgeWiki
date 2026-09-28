@@ -1,7 +1,13 @@
 phase_id: phase-07b-full-geometry-liquid-removal
 phase_question: Can a lower-region ideal liquid collector support balanced stable steady Mixture flow
   in the full separator while preserving useful separation above it?
-state: E7_EXTERNAL_CONNECTIVITY_BLOCK_LIVE_ITERATION_UNKNOWN
+state: E7_EXTERNAL_BLOCK_HOST_SLEEP_ENDPOINT_UNREACHABLE
+latest_planning_review:
+  date: '2026-09-26'
+  status: REVIEW_COMPLETE_NO_NEW_CASE_OR_PHASE_SELECTED
+  evidence: convergence-investigation/phase-review-2026-09-26.md
+  execution_state_changed: true
+  accepted_for_execution: '2026-09-28'
 context:
   path: Project/experiments/phase-07b-full-geometry-liquid-removal/CONTEXT.md
   authority: human-approved-context-only
@@ -35,18 +41,19 @@ autonomy:
   fluent_fleet_sessions: restricted
   scope: Configured server-1 PC; Phase7b preparation and selected children only; all PC access through
     Fluent API
-  launch_authorization: '2026-09-22: Andy requested autonomous post-E3 audit of Shuhei''s newly pulled
-    work, correctness checks, literature/documentation research, and iterative controlled experiments
-    toward credible steady full-geometry convergence, especially continuity. Current E3 remains unchanged
-    through N5000 and G3.'
+  launch_authorization: '2026-09-28: Andy accepted the bounded finish plan: recover E7 and finish absolute
+    N5000; audit source treatment/linearization; at most one justified documented Mixture startup contrast
+    capped at 5000 if E7 fails; qualify a passing endpoint or close tested route. No new EWF or physical
+    transient scope.'
   max_iterations_per_case: 5000
   qualification_authorized: true
   further_solve_authorized: true
-  iteration_limit_note: Current E3 absolute cap remains 5000. Subsequent discovery default cap 5000; longer
-    bounded continuation requires prospective justification and cumulative horizon in the selected setup
-    under convergence-investigation/plan.md.
+  iteration_limit_note: E7 retained absolute cap 5000; N500 recovery adds 4500 and total attempted-compute
+    upper bound 5500, prospectively justified in recovery-n500.md. One remaining startup contrast cap
+    5000; qualification separately bounded before solve.
   qualification_scope: Post-G3 numerical qualification only when prospectively designed to test supported
     hypothesis; no automatic physical validation claim.
+  remaining_discovery_contrasts_after_e7_max: 1
 gates:
   PHASE_CONTRACT:
     status: PASS
@@ -235,16 +242,27 @@ gates:
     - all eight residuals, scalar and flux histories, diagnostic snapshots
     - 49 source-lag pairs exact zero error
     - normalized inventory/native parity while retaining raw phase data
+  E7_N500_RECOVERY:
+    status: N500_BOTH_REOPEN_EXACT_AND_N505_FULL_RECORDING_PASS
+    preservation: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/preservation.json
+    n505_preservation: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/preservation-n505.json
+    n505_recording: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/n505-prefix-audit.json
+    report_rollover_tests: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/rollover-offline-verification.json
+    new_scientific_settings: false
 active_jobs: []
-next_required_action: Restore endpoint access, then perform one read-only API reconciliation of actual
-  iteration and idle/advancing state. Preserve live endpoint and recover native histories before deciding
-  continuation or explicitly documented checkpoint replay. Do not reload or issue solve from the stale
-  N500 counter.
-operational_status: NO_CONTROLLER_API_UNREACHABLE_N500_PRESERVED
+next_required_action: Reconcile actual live Fluent endpoint with one read-only client; preserve live state
+  and recover native histories before further solve. Never repeat the failed chunk or reload blindly.
+operational_status: NO_ACTIVE_CONTROLLER_LAST_PAIRED_N2500_LOCAL_N2742_LIVE_UNKNOWN
 last_api_reconciliation:
-  status: UNREACHABLE_LIVE_STATE_UNKNOWN
-  evidence: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n679/check-20260926T101511Z/reconciliation.json
+  status: N687_IDLE_PRESERVED_FULL_RECORDING_AND_SETTINGS_PASS
+  endpoint: 10.104.145.174:51225
+  evidence: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n505/rpc-stall-recovery/preserve-n687/receipt.json
   iterations_issued: 0
+  reloads_issued: 0
+  live_iteration: 687
+  iterating: false
+  geometry_exact: true
+  settings_exact: true
 failed_export:
   path: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/exports/p7b-phase-velocity-comparison-20260908T102932Z.csv
   status: ERROR_REPORTED; FILE_EXISTS_WITH_DATA; COMPLETENESS_UNVERIFIED
@@ -252,10 +270,10 @@ failed_export:
   api_evidence: PyAnsys/output/phase07b_preparation/failed-export-inspection.json
   accepted_validation_evidence: false
   automatic_retry: false
-latest_human_authorization: '2026-09-22: Andy requested autonomous post-E3 audit of Shuhei''s newly pulled
-  work, correctness checks, literature/documentation research, and iterative controlled experiments toward
-  credible steady full-geometry convergence, especially continuity. Current E3 remains unchanged through
-  N5000 and G3.'
+latest_human_authorization: '2026-09-28: Andy accepted the bounded finish plan: recover E7 and finish
+  absolute N5000; audit source treatment/linearization; at most one justified documented Mixture startup
+  contrast capped at 5000 if E7 fails; qualify a passing endpoint or close tested route. No new EWF or
+  physical transient scope.'
 latest_read_only_access_check:
   health: SERVING
   evidence: PyAnsys/output/p7b-s060-20260921T043132Z/resume-check-20260921T112457Z/result.json
@@ -278,25 +296,19 @@ flux_recorder:
   recording: All4182 completed local rows and PC writes; final4182 PC record exactly matches local. No
     recorder error. Callback unregistered.
 external_block:
-  kind: session_wide_api_timeout
-  observed_at_utc: '2026-09-18T07:08:00Z'
-  tcp: reachable
-  failed_services:
-  - health
-  - AppUtilities.GetBuildInfo
-  - Settings.GetAttrs
-  - Scheme.StringEval
-  per_probe_deadline_s: 8
-  reload_status: 'NOT_DISPATCHED: timed out resolving Settings activity before read_case_data execution'
-  last_successful_operation: file.stop_transcript; Transcript closed
-  causation: unknown; ordering does not establish transcript closure caused the stall
-  last_verified_screen_iteration: 0
-  client_solve_active: false
-  evidence:
-  - PyAnsys/output/p7b-s020-20260918T070215Z/error.txt
-  - PyAnsys/output/phase07b_preparation/post-transcript-api-probe-20260918.json
-  - PyAnsys/output/phase07b_preparation/post-transcript-settings-scheme-20260918.json
-  status: RESOLVED_2026-09-21_NZ
+  recorded_utc: '2026-09-28T05:49:13.560049+00:00'
+  kind: HOST_SLEEP_AND_UNREACHABLE_FLUENT_ENDPOINT
+  scientific_failure_established: false
+  remaining_independent_work: Source audit and conditional startup guidance are complete. G7 terminal
+    comparison and live recovery require endpoint access; no new contrast selected before G7.
+  required_user_action: Confirm Fluent PC is awake and existing Fluent server address/port remain correct; local VPN route is present but configured TCP endpoint times out.
+  heartbeat_disposition: PAUSED_CONFIRMED_PER_ACCEPTED_EXTERNAL_BLOCK_POLICY
+  latest_user_retry_utc: '2026-09-28T09:42:09.908397+00:00'
+  latest_user_retry_evidence: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n2185/sleep-recovery-20260928T0540/reconnect-20260928T094143Z/endpoint-read-only.json
+  latest_user_retry_result: ENDPOINT_STILL_UNREACHABLE_NO_SOLVE_RELOAD_OR_TERMINATION
+  latest_network_route_evidence: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n2185/sleep-recovery-20260928T0540/reconnect-20260928T094143Z/local-route.json
+  vpn_user_report: Connected; local route to Fluent host resolves through ppp0.
+  heartbeat_evidence: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n2185/sleep-recovery-20260928T0540/automation-pause-receipt.json
 report_correction:
   status: PASS
   definition: Maximum(VelocityMagnitude(phase="mixture"),["simple-spiral-separator--brine-outlet-", "p7b-collector"])
@@ -618,36 +630,38 @@ diagnostic_followup:
   results: spike-diagnostic/results.md
   g3_completion: PyAnsys/output/phase07b-g3/completion-audit.json
 convergence_investigation:
-  status: E7_EXTERNAL_CONNECTIVITY_BLOCK_LIVE_ITERATION_UNKNOWN
+  status: E7_EXTERNAL_BLOCK_HOST_SLEEP_ENDPOINT_UNREACHABLE
   plan: convergence-investigation/plan.md
-  authority: '2026-09-22: Andy requested autonomous post-E3 audit of Shuhei''s newly pulled work, correctness
-    checks, literature/documentation research, and iterative controlled experiments toward credible steady
-    full-geometry convergence, especially continuity. Current E3 remains unchanged through N5000 and G3.'
+  authority: '2026-09-28: Andy accepted the bounded finish plan: recover E7 and finish absolute N5000;
+    audit source treatment/linearization; at most one justified documented Mixture startup contrast capped
+    at 5000 if E7 fails; qualify a passing endpoint or close tested route. No new EWF or physical transient
+    scope.'
   initial_pulled_commit: b8c7830
   initial_audit_target: Project/experiments/phase-07-1a-absorber-convergence/roughness-family/r0-smooth-control
   next_child_selected: true
   check_ins:
     automation_id: phase-7b-e2-weaker-sink-supervision
-    status: PAUSED_EXTERNAL_CONNECTIVITY_BLOCK
+    status: ACTIVE
     interval_minutes: 15
     pause_after_G3: false
-    receipt: PyAnsys/output/phase07b-convergence-investigation/e6/retry2/automation-resume-receipt.json
-    last_checked_at_utc: '2026-09-24T09:28:12.407130+00:00'
-    last_observed_iteration: 678
-    latest_evidence: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n679/partial-recording-audit.json
-    pause_receipt: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n679/automation-pause-receipt.json
+    receipt: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n687/automation-update-receipt.json
+    last_checked_at_utc: '2026-09-28T02:51:21.494305+00:00'
+    last_observed_iteration: 1580
+    latest_evidence: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n687/live-audit-20260928T025046Z.json
+    scope: 'Accepted bounded finish: E7 completion, source audit, at most one justified startup contrast
+      or qualification; quiet ordinary progress'
   audit: convergence-investigation/shuhei-audit.md
   results: convergence-investigation/results.md
   selected_setup: convergence-investigation/coupled-nphase-weaker-sink/setup.md
   case_id: S40-T100-COUPLED-CFL20-NPHASE
-  run_id: p7b-s40-t100-coupled-cfl20-nphase-resume-20260924T054531Z
-  manifest: PyAnsys/output/p7b-s40-t100-coupled-cfl20-nphase-resume-20260924T054531Z/manifest.json
+  run_id: p7b-s40-t100-coupled-cfl20-nphase-network-resume-20260928T042000Z
+  manifest: PyAnsys/output/p7b-s40-t100-coupled-cfl20-nphase-network-resume-20260928T042000Z/manifest.json
   capability: PyAnsys/output/phase07b-e4-control-probe-20260922T1352/receipt.json
   completion_policy_note: E7 requires correct section index.json paths and source_treatment exact tau-only
     proof; no E4 reconciliation applies.
-  latest_evidence: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n679/check-20260926T101511Z/reconciliation.json
+  latest_evidence: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n2185/sleep-recovery-20260928T0540/endpoint-read-only-retry.json
   previous_completion: PyAnsys/output/phase07b-g6/completion-audit.json
-  verified_checkpoint_iteration: 500
+  verified_checkpoint_iteration: 2500
   e6_history:
     recovery_design: convergence-investigation/coupled-nphase/recovery.md
     initial_failed_run: p7b-s40-t020-coupled-cfl20-nphase-20260923T024536Z
@@ -669,16 +683,198 @@ convergence_investigation:
     report_path_reconciliation: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n0/report-path-inspection.json
     status: COMPLETE_NO_RELOAD_NO_INITIALIZATION_NO_SCIENTIFIC_CHANGE
   transport_recovery:
-    status: EXTERNAL_CONNECTIVITY_BLOCK
+    status: ORIGINAL_N500_REPLAY_RETAINED_CURRENT_N687_NO_REPLAY_CONTINUATION
     last_paired_checkpoint: 500
     last_local_flux: 679
     last_local_diagnostic_and_residual: 678
     failure: Stream removed (recvmsg:Operation timed out)
     evidence: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n679/check-20260926T101511Z/reconciliation.json
-    no_retry_solve_or_reload: true
+    no_retry_solve_or_reload: false
     partial_audit: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n679/partial-recording-audit.json
-    live_iteration: unknown
-    last_attempt_utc: '2026-09-26T10:15:12.140742+00:00'
-next_action: Restore endpoint access, then perform one read-only API reconciliation of actual iteration
-  and idle/advancing state. Preserve live endpoint and recover native histories before deciding continuation
-  or explicitly documented checkpoint replay. Do not reload or issue solve from the stale N500 counter.
+    live_iteration: 697
+    last_attempt_utc: '2026-09-28T01:47:59.311915+00:00'
+    original_terminal_iteration: Unknown; last native scalar680, residual679; issued block upper bound1000
+    native_history_recovery: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/artifact-inspection.json
+    preservation: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/preservation.json
+    prefix_audit: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/prefix-audit.json
+    original_partial_tail_retained: true
+    retained_prefix:
+    - 1
+    - 500
+    replay_range:
+    - 501
+    - 5000
+    new_steps: 4500
+    maximum_cumulative_attempt_steps: 5500
+    native_rollover: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/reconcile-n505/state.json
+    preservation_n505: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/preservation-n505.json
+    native_scalar_prefix_end: 500
+    active_segment_start: 500
+    duplicate_boundary_policy: Only exact matching repeated N500 is accepted; raw native segment retained.
+    current_job: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n687/job.yaml
+    current_remaining_steps: 4313
+    additional_replay_after_n505: 0
+  recovery_design: convergence-investigation/coupled-nphase-weaker-sink/recovery-n500.md
+  source_treatment_audit:
+    status: NO_CONCRETE_ASSIGNMENT_SIGN_DEFECT_FOUND_JACOBIAN_UNVERIFIED
+    evidence: convergence-investigation/source-treatment-audit.md
+    local_packet: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/source-documentation-audit.md
+    scientific_changes: false
+  latest_recording_audit:
+    status: RUNNING_LOCAL_EVIDENCE_AUDIT_PASS
+    utc: '2026-09-28T04:54:44.220983+00:00'
+    run_id: p7b-s40-t100-coupled-cfl20-nphase-network-resume-20260928T042000Z
+    controller_pid: 51147
+    controller_lock_held: true
+    last_common_local_iteration: 2645
+    last_flux_iteration: 2645
+    last_speed_iteration: 2645
+    last_residual_iteration: 2645
+    latest_capture_utc: '2026-09-28T04:54:33.658419+00:00'
+    capture_age_seconds: 10.562564
+    scalar_complete_through: 2500
+    paired_checkpoint_verified_through: 2500
+    paired_case: C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s40-t100-coupled-cfl20-nphase-network-resume-20260928T042000Z-n02500.cas.h5
+    pair_presence_basis: Controller Fluent-API save and existence checks
+    remote_checkpoint_flux_readback_exact: true
+    verified_snapshots:
+    - 0
+    - 50
+    - 500
+    - 505
+    - 687
+    - 1000
+    - 1500
+    - 1631
+    - 2000
+    - 2185
+    - 2500
+    - 2600
+    diagnostic_error: null
+    inventory_snapshot_validation:
+      mode: cellwise_normalized_raw_phase_vector
+      relative_tolerance: 1.0e-09
+      absolute_tolerance_m3: 1.0e-12
+      basis: N-phase snapshot monitor native-volume parity tolerance
+    source_lag_max_abs_error_kg_s: 0.0
+    source_lag_pairs: 2499
+    fatal_markers: []
+    last_speed_m_s: 87.14677601751598
+    max_observed_speed_m_s: 283.0914394711872
+    incomplete_trailing_jsonl_ignored:
+      flux: false
+      speed: false
+    scientific_warning: null
+    freshness_warning: null
+    claim_limit: Recording audit only, not numerical adequacy; phase-state and interpretation are maintained
+      separately.
+  partial_recording: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n505/rpc-stall-recovery/partial-recording-audit.json
+  rpc_stall_recovery:
+    retired_run_id: p7b-s40-t100-coupled-cfl20-nphase-replay-resume-20260928T005800Z
+    retired_controller_pid: 36509
+    preservation: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n505/rpc-stall-recovery/preservation-n687.json
+    release: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n505/rpc-stall-recovery/pause-release-retry.json
+    native_evidence: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n505/rpc-stall-recovery/preserve-n687/receipt.json
+    offline_tests: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n505/rpc-stall-recovery/offline-verification.json
+    current_job: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n687/job.yaml
+    remaining_steps: 4313
+    additional_replay: 0
+    maximum_cumulative_attempt_steps: 5500
+    status: HISTORICAL_N687_RECOVERY_SUCCEEDED_CONTROLLER_RETIRED_AFTER_N1631_TRANSPORT_FAILURE
+    startup_evidence: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n687/live-audit-startup.json
+  terminal_analysis_plan: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n2185/terminal-analysis-plan.json
+  transport_failure_n1630:
+    run_id: p7b-s40-t100-coupled-cfl20-nphase-rpc-resume-20260928T014500Z
+    job_status: BLOCKED
+    controller_return_code: 1
+    controller_lock_held: false
+    last_complete_local_flux_speed: 1630
+    last_verified_paired_checkpoint: 1500
+    issued_block:
+    - 1500
+    - 2000
+    error: Stream removed (recvmsg:Operation timed out)
+    evidence_directory: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n687/transport-recovery-20260928T0305
+    numerical_failure_established: false
+    resolution: Unchanged idle N1631 preserved and native records recovered; no numerical failure.
+  host_sleep_recovery:
+    status: HISTORICAL_N1631_RECOVERY_SUCCEEDED_CONTROLLER_RETIRED_AFTER_NETWORK_LOSS
+    evidence_directory: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n687/transport-recovery-20260928T0305
+    preservation: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n687/transport-recovery-20260928T0305/preservation-n1631.json
+    native_evidence: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n687/transport-recovery-20260928T0305/preserve-n1631/receipt.json
+    source_lag_pairs: 1630
+    source_lag_max_abs_error_kg_s: 0.0
+    remaining_steps: 3369
+    additional_replay: 0
+    maximum_cumulative_attempt_steps: 5500
+    planned_job: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n1631/job.yaml
+    cause_evidence: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n687/transport-recovery-20260928T0305/host-sleep-evidence.txt
+    mitigation: Process-lifetime caffeinate -i; lid must stay open; no persistent power setting change.
+    current_job: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n1631/job.yaml
+    startup_evidence: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n1631/live-audit-startup.json
+    controller_pid: 47098
+    pause_registration_ids:
+      SolverEvent.ITERATION_ENDED-2: 4
+  network_failure_n2184:
+    retired_run_id: p7b-s40-t100-coupled-cfl20-nphase-awake-resume-20260928T032000Z
+    retired_pid: 47098
+    error: Stream removed (recvmsg:Can't assign requested address)
+    cleanup_error: 'failed to connect to all addresses; last error: FAILED_PRECONDITION: ipv4:10.104.145.174:51225:
+      connect failed: addr: ipv4:10.104.145.174:51225 error: Network is unreachable'
+    owned_pause_registration_ids:
+      SolverEvent.ITERATION_ENDED-2: 4
+    evidence_directory: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n1631/network-recovery-20260928T0408
+    local_complete_through: 2184
+    paired_through: 2000
+    numerical_failure_established: false
+    resolution: User restored connectivity; unchanged idle N2185 preserved with complete recovered records,
+      no replay.
+    preservation: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n1631/network-recovery-20260928T0408/preservation-n2185.json
+    remaining_steps: 2815
+    planned_job: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n2185/job.yaml
+    additional_replay: 0
+    current_job: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n2185/job.yaml
+    status: COMPLETE_N2185_PRESERVED_NO_REPLAY_RESUMED_AND_AUDITED
+    startup_evidence: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n2185/live-audit-startup.json
+    current_controller_pid: 51147
+    current_pause_registration_ids:
+      SolverEvent.ITERATION_ENDED-2: 5
+  conditional_startup_guidance: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n1631/network-recovery-20260928T0408/startup-guidance-packet.md
+  stale_n2742:
+    run_id: p7b-s40-t100-coupled-cfl20-nphase-network-resume-20260928T042000Z
+    controller_pid: 51147
+    owned_pause_registration_ids:
+      SolverEvent.ITERATION_ENDED-2: 5
+    evidence_directory: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n2185/sleep-recovery-20260928T0540
+    first_stale_audit: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n2185/live-audit-20260928T051118Z.json
+    still_no_progress_at_utc: '2026-09-28T05:44:54.293899+00:00'
+    last_verified_paired_iteration: 2500
+    last_complete_local_iteration: 2742
+    numerical_failure_established: false
+    status: OWNED_LOCAL_CLIENT_RETIRED_EXTERNAL_BLOCK
+    retirement_receipt: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n2185/sleep-recovery-20260928T0540/client-retirement.json
+    endpoint_checks:
+    - PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n2185/sleep-recovery-20260928T0540/endpoint-read-only.json
+    - PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n2185/sleep-recovery-20260928T0540/endpoint-read-only-retry.json
+    live_iteration: UNKNOWN
+    local_controller_lock: FREE
+    partial_numerical_disposition: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n2185/sleep-recovery-20260928T0540/partial-numerical-disposition.json
+    fluent_terminated: false
+    required_external_change: Mac awake with lid open and stable route to configured Fluent PC; keep Fluent
+      session open.
+next_action: After access is restored, reactivate primary supervision and reconcile actual native iteration/iterating
+  state with one client. Inspect known retired pause ID5 only after confirming session/ownership. Preserve
+  live fields and recover native scalar/residual/flux/speed before any solve. Never relaunch retired controller,
+  blindly reload N2500, or replay uncertain N2500-3000; account any additional replay/budget prospectively.
+retired_controller:
+  run_id: p7b-s40-t100-coupled-cfl20-nphase-replay-resume-20260928T005800Z
+  controller_pid: 36509
+  local_signal: SIGTERM
+  evidence: PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n505/rpc-stall-recovery/client-retirement.json
+  fluent_terminated: false
+  numerical_failure_established: false
+evidence_review_2026_09_28:
+  status: COMPLETED_CASES_AND_RETROSPECTIVE_E7_PREFIX_REVIEWED_NO_TERMINAL_G7
+  interpretation: convergence-investigation/evidence-conclusions-2026-09-28.md
+  machine_evidence: PyAnsys/output/phase07b-review-20260928/e7-partial/comparison.json
+  scientific_or_execution_authority_changed: false

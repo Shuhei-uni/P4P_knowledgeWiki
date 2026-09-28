@@ -31,6 +31,16 @@ a development treatment and must finish and be assessed at full loading.
 The earlier rejection of a physical transient/pool-control model remains in
 force. Do not turn Shuhei's separate phase or machine into this campaign.
 
+## Accepted bounded finish — 28 September 2026
+
+Andy approved execution of the [26 September review](phase-review-2026-09-26.md) plan with “Sounds good. run it.” This narrows the remaining work to E7 recovery/completion, the source-treatment/linearization audit, and—only if still justified—one isolated Fluent-documented Mixture startup contrast capped at 5000. Record its delta, parent, comparison window, startup/full-feed allocation and stopping conditions before compute. If a concrete implementation defect is found, resolve it explicitly before selecting further treatment; do not add an unbounded series of cases. Passing numerical criteria requires prospectively bounded persistence/restart qualification. Otherwise close the tested route with explicit evidence limits. A separate EWF/drainage phase is not selected by this instruction.
+
+E7 uses the [N500 recovery design](coupled-nphase-weaker-sink/recovery-n500.md): retained N1–500, replay N501–5000, 4500 added steps, at most 5500 cumulative attempted steps including the interrupted block's upper bound. The retired partial tail remains immutable and excluded from the recovered trajectory. The controller must verify restored N500 fields/settings and then N505 recording before ordinary supervision.
+
+The [28 September source audit](source-treatment-audit.md) is complete: no concrete source assignment/sign defect was found, while expression-source implicit derivatives remain unverified.
+
+A focused [startup guidance packet](../../../../PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n1631/network-recovery-20260928T0408/startup-guidance-packet.md) confirms the documented joint Volume Fraction/Slip Velocity freeze and restore sequence; the conditioning count and quantitative gate remain investigator choices. E6 slip relaxation is already0.1. Combined behavior with N-phase, full split feed and expression removal still needs live verification if G7 supports selecting that last contrast. This lookup selects no new run.
+
 ## Ordered work
 
 1. Finish the existing S40-T020-DIAG controller at its absolute N5000 cap or

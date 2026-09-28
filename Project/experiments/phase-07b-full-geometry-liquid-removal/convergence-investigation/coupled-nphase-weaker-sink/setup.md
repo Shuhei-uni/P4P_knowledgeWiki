@@ -29,3 +29,7 @@ Unchanged necessary discovery indicators: all three meanabsolute closureerrors<=
 ## Decision-changing documentation and alternatives
 
 Fluent2025R2 [UG27.8.1.3–1.4](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_sec_multiphase_solution.html) excludes Coupled with Volume Fractions for Mixture Slip Velocity; retained drift means that path cannot be a one-control contrast. N-phase normalization does not guarantee conservation. [UG37.14](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_sec_solve_pseudo.html) supports Global Time Step as steady implicit relaxation; [TG23.6.2](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_th/flu_th_sec_pseudo_auto.html) describes automatic convective/gravity/etc timescales without establishing awareness of this user-expression sink timescale. Global pseudo time remains a broader alternative, requiring explicit dependent-control design. No documentation establishes expression-source implicit derivatives. Tau0.10 is investigator-selected, not a manual recommendation.
+
+## Accepted checkpoint recovery
+
+The [28 September N500 recovery design](recovery-n500.md) governs the explicit post-interruption replay and cumulative budget. Scientific treatment and the original comparison windows remain unchanged; phase-state and run-paths own the selected controller.

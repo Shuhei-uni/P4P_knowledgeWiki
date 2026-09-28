@@ -1,6 +1,6 @@
 # Phase 7b — Full-Geometry Steady Liquid Removal
 
-Current frontier: **G6 complete; E7 weaker-sink contrast selected**, with no qualified case. See [investigation results](convergence-investigation/results.md) and [E7 setup](convergence-investigation/coupled-nphase-weaker-sink/setup.md). Machine state owns live progress.
+Current frontier: **G1–G6 complete; E7 recovered continuation active, no qualified case.** Andy accepted the bounded finish on28 September. See [current contract](CONTEXT.md), [E7 results](convergence-investigation/coupled-nphase-weaker-sink/results.md) and [machine state](phase-state.yaml) for the sole controller and fresh evidence. No new phase is selected.
 
 ## Status
 

@@ -1,5 +1,9 @@
 # Shuhei R0 audit and transferable lessons
 
+Scope note: this is the historical R0 audit. The [26 September review](phase-review-2026-09-26.md)
+supplements it with the subsequently pulled EWF continuation and roughness
+accounting checks; it does not rewrite the original raw evidence.
+
 Audited 22 September 2026 UTC, local HEAD `b8c7830ef3dc56b2454d319d9d154b6b0de6cb26`.
 This supersedes the older [transfer review](../shuhei-transfer-review.md) for the
 newly pulled R0 records. **The reported residual improvement is substantial,

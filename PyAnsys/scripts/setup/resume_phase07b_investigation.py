@@ -1,4 +1,4 @@
-"""Resume preserved E6 live N50 to absolute N5000 without reload or initialization.
+"""Resume verified E6/E7 live checkpoint to N5000 without reinitialization.
 
 Requires a separately repaired, complete diagnostic prefix. No failed evidence
 is overwritten, no counter offset is allowed, and no foreign callback is removed.
@@ -8,6 +8,7 @@ import shutil
 import threading
 from pyansys_fluent.phase07b_spike_monitor import Phase07bSpikeMonitor, SpikeSchedule
 from analyze_phase07b_screen import parse_history, derive
+from pathlib import PureWindowsPath
 
 START = 50
 HORIZON = 5000
@@ -32,8 +33,11 @@ def validate_inputs(parent_manifest, preservation_receipt, recovered):
     old = json.loads(parent_manifest.read_text())
     receipt = json.loads(preservation_receipt.read_text())
     parent = parent_manifest.parent
-    assert old['case_id'] == 'S40-T020-COUPLED-CFL20-NPHASE'
-    assert old['percent'] == 40 and old['tau_s'] == .02 and old['requested_iterations'] == HORIZON
+    expected_cases = {'E6': ('S40-T020-COUPLED-CFL20-NPHASE', .02),
+                      'E7': ('S40-T100-COUPLED-CFL20-NPHASE', .1)}
+    case, tau = expected_cases[old['experiment_id']]
+    assert old['case_id'] == case
+    assert old['percent'] == 40 and old['tau_s'] == tau and old['requested_iterations'] == HORIZON
     assert old['selected_methods']['p_v_coupling']['solve_n_phase'] is True
     assert old['selected_controls']['p_v_controls']['flow_courant_number'] == 20.
     assert old['actual_iteration'] == START
@@ -63,6 +67,11 @@ def validate_inputs(parent_manifest, preservation_receipt, recovered):
         assert reasons == row['snapshot_reasons'], row['iteration']
         if reasons: required[row['iteration']] = reasons
     assert len({snap['iteration'] for snap in dm['snapshots']}) == len(dm['snapshots'])
+    extras = old.get('verified_recovery_snapshot_iterations', [])
+    assert set(extras) <= {505, 687, 1631, 2185} and (not extras or old['experiment_id']=='E7')
+    for iteration in extras:
+        assert iteration <= START
+        required[iteration] = ['recovery_semantics_validation']
     assert {snap['iteration'] for snap in dm['snapshots']} == set(required)
     with np.load(recovered / 'geometry.npz') as geo, np.load(parent / 'spike-diagnostics/geometry.npz') as original:
         assert set(geo.files) == set(original.files)
@@ -124,14 +133,49 @@ def residual_audit(path, expected, end):
     return audit
 
 
+def read_scalar_snapshot(s, manifest, out, end):
+    """Join an immutable checkpoint prefix to Fluent's distinct native segment.
+
+    Fluent rolls an existing report destination to an iteration-suffixed file
+    after a case reload. Preserve that segment verbatim and require strict
+    continuity before constructing the combined analysis history. A repeated
+    checkpoint row is allowed only if every scalar exactly matches the prefix.
+    """
+    remote = read_text(s, manifest['report'])
+    raw = out/f'native-history-segment-{end:05d}.out'
+    assert not raw.exists(); raw.write_text(remote)
+    prefix = manifest.get('native_scalar_prefix')
+    if prefix:
+        path = Path(prefix['path'])
+        assert fingerprint(path)['sha256'] == prefix['sha256']
+        first, fa = parse_history(path); segment, sa = parse_history(raw)
+        assert fa['native_header'] == sa['native_header']
+        assert np.array_equal(first['iteration'], np.arange(1, prefix['end_iteration']+1))
+        start=int(segment['iteration'][0]); boundary=prefix['end_iteration']
+        assert start in {boundary,boundary+1}
+        assert np.array_equal(segment['iteration'], np.arange(start,end+1))
+        if start==boundary:
+            assert all(first[key][-1]==segment[key][0] for key in first), 'Conflicting native restart boundary row'
+        assert not sa['conflicting_indices'] and not sa['nonfinite_columns'] and not sa['rejected_lines']
+        remote = path.read_text().rstrip('\n')+'\n'+remote
+    combined=out/f'history-{end:05d}.out'
+    assert not combined.exists(); combined.write_text(remote)
+    return scalar_audit(combined,end)
+
+
 def main():
+    global START, TARGETS
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--parent-manifest', type=Path, required=True)
     ap.add_argument('--preservation-receipt', type=Path, required=True)
     ap.add_argument('--recovered-diagnostic-directory', type=Path, required=True)
     ap.add_argument('--run-id', required=True)
+    ap.add_argument('--start-iteration', type=int, choices=[50, 500, 505, 687, 1631, 2185], default=50,
+                    help='Exact verified live checkpoint; never a counter offset')
     ap.add_argument('--validate-only', action='store_true', help='Validate local receipts and evidence without connecting')
     a = ap.parse_args()
+    START = a.start_iteration
+    TARGETS = ([] if START in {505, 687, 1631, 2185} else [START + 5]) + list(range((START // 500 + 1) * 500, HORIZON + 1, 500))
     assert re.fullmatch(r'p7b-[a-z0-9-]+-[0-9]{8}T[0-9]{6}Z', a.run_id)
     old, receipt, dm, speed, flux = validate_inputs(a.parent_manifest, a.preservation_receipt, a.recovered_diagnostic_directory)
     assert a.run_id != old['run_id']
@@ -148,11 +192,12 @@ def main():
              actual_iteration=START, start_iteration=START, prefix_end=START, segment_iterations=0,
              parent_manifest=str(a.parent_manifest.resolve()), preservation_receipt=str(a.preservation_receipt.resolve()),
              recovered_diagnostic_directory=str(a.recovered_diagnostic_directory.resolve()),
-             resume_mode='unchanged preserved live N50; no reload/initialization/counter offset',
+             resume_mode=f'unchanged verified live N{START}; no controller reload/initialization/counter offset',
              recovery_inputs=[fingerprint(a.parent_manifest), fingerprint(a.preservation_receipt), fingerprint(a.recovered_diagnostic_directory/'manifest.json')],
              recovery_targets=TARGETS, remote_flux_readbacks=[])
     r.pop('callback_cleanup_error', None)
-    r['pairs']['n00050'] = receipt['case']
+    r.pop('pause_registration_ids', None)
+    r['pairs'][f'n{START:05d}'] = receipt['case']
     r['pairs']['recovery-preserved'] = receipt['case']
     r['implementation_sha256'][str(Path(__file__).resolve())] = fingerprint(Path(__file__))['sha256']
     monitor_path=Path(sys.modules[Phase07bSpikeMonitor.__module__].__file__).resolve()
@@ -187,22 +232,25 @@ def main():
                               ('residual_options', s.settings.solution.monitor.residual.options), ('residual_equations', s.settings.solution.monitor.residual.equations),
                               ('report_definitions', s.settings.solution.report_definitions)]: exact_parity(old[key], live.get_state(), key)
             assert s.settings.solution.run_calculation.profile_update_interval()==1
+            report_file=s.settings.solution.monitor.report_files['p7b-screen-history'].get_state()
+            wanted=PureWindowsPath(old['report'])
+            assert PureWindowsPath(report_file['file_name']) in {wanted,PureWindowsPath('reports')/wanted.name}
+            assert report_file['active'] and report_file['frequency_of']=='iteration' and report_file['frequency']==1
             info=s.fields.solution_variable_info.get_zones_info()
             assert info['p7b-collector'].count==COUNTS[40] and sum(info[z].count for z in old['fluid_zones'])==620431
             # Recheck the preserved endpoint against the repaired full-cell snapshot.
-            with np.load(a.recovered_diagnostic_directory/'geometry.npz') as geometry, np.load(a.recovered_diagnostic_directory/'fields-n00050.npz') as fields:
+            with np.load(a.recovered_diagnostic_directory/'geometry.npz') as geometry, np.load(a.recovered_diagnostic_directory/f'fields-n{START:05d}.npz') as fields:
                 arrays={key:geometry[key] for key in geometry.files}; arrays.update({key:fields[key] for key in fields.files if 'MASS_IMBALANCE' not in key})
                 requests={tuple(key.split('_',2)[1:]) for key in arrays}
                 for domain, variable in sorted(requests):
                     values=s.fields.solution_variable_data.get_data(variable_name=variable,zone_names=old['fluid_zones'],domain_name=domain)
                     for i, zone in enumerate(old['fluid_zones']):
                         key=f'z{i}_{domain}_{variable}'; assert np.array_equal(np.asarray(values[zone]),arrays[key]), key
-            endpoint=json.loads((a.recovered_diagnostic_directory/'fields-n00050.json').read_text())
+            endpoint=json.loads((a.recovered_diagnostic_directory/f'fields-n{START:05d}.json').read_text())
             for key, name in [('speed','P7bMaximumSpeed'),('k','P7bDiagnosticMaxK'),('epsilon','P7bDiagnosticMaxEpsilon'),('water','P7bWaterVolume')]:
                 value=float(s.settings.setup.named_expressions[name].get_value())
                 assert math.isclose(value,endpoint['native'][key],rel_tol=1e-9,abs_tol=1e-12), (key,value,endpoint['native'][key])
-            history=read_text(s,old['report']); (out/'history-00050.out').write_text(history)
-            scalar=scalar_audit(out/'history-00050.out',START)
+            scalar=read_scalar_snapshot(s,old,out,START)
             native=read_text(s,old['remote_transcript']); (out/'solve.trn').write_text(native)
             residual=residual_audit(out/'solve.trn',expected_residual_equations(old),START)
             assert json.loads(read_text(s,flux[-1]['remote_path']))==flux[-1]
@@ -213,7 +261,7 @@ def main():
         r['remote_flux_readbacks'].append({'iteration':START,'path':flux[-1]['remote_path'],'matches_local':True})
         for folder in ['initial-sections','initial-axial-sections','pre-reopen-initial','pre-reopen-prepared']:
             if (parent/folder).exists(): shutil.copytree(parent/folder,out/folder)
-        for name in ['initial-parity.json','initial-geometry-parity.json','configuration-parity.json','setup.trn']:
+        for name in ['initial-parity.json','initial-geometry-parity.json','configuration-parity.json','setup.trn','smoke-n00050.json']:
             if (parent/name).exists(): shutil.copy2(parent/name,out/name)
         for path in parent.glob('interface-*.npz'): shutil.copy2(path,out/path.name)
         for path in parent.glob('history-*.out'):
@@ -235,24 +283,39 @@ def main():
         diag.file.write((a.recovered_diagnostic_directory/'spike-history.jsonl').read_text()); diag.file.flush(); diag.last_iteration=START; diag.persist()
         faces=[FluxFaceZone(**value) for value in old['flux_monitor']['face_zones']]
         m=Phase07bFluxMonitor(s,face_zones=faces,start_iteration=START,local_jsonl=out/'collector-flux.jsonl',remote_directory=ROOT+'/reports',prefix_source=parent/'collector-flux.jsonl',after_capture=diag.capture)
-        m.register(); m.assert_complete(START); diag.assert_complete(START)
+        callback_id=m.register()
+        # Persist the exact pause owned by this one controller for interruption
+        # recovery. Discovery of a monitor alone is not ownership evidence.
+        pause_ids=dict(s.events._sync_event_ids)
+        assert callback_id in pause_ids and len(pause_ids)==1, pause_ids
+        r['pause_registration_ids']=pause_ids
+        persist()
+        m.assert_complete(START); diag.assert_complete(START)
         r.update(status='RUNNING',flux_monitor=m.manifest(),spike_diagnostics=diag.manifest(),
-                 instrumentation_smoke='Recovered N1-50 scalar, exact-face flux, all eight residuals and full native diagnostics verified before continuation')
-        (out/'smoke-n00050.json').write_text(json.dumps(r['recovery_verification'],indent=2)+'\n'); persist()
+                 instrumentation_smoke=f'Recovered N1-{START} scalar, exact-face flux, all eight residuals and full native diagnostics verified before continuation')
+        if START==505:
+            r['recovery_smoke']='N501-505 scalar/flux/all eight residuals/diagnostics and preserved paired checkpoint PASS; native report rollover reconciled without repeating any iteration'
+        elif START==687:
+            r['recovery_smoke']='Native N1-687 scalar/all eight residuals, exact-face flux, speed and paired endpoint recovered after retired recorder RPC stall; no replay or scientific change'
+        elif START==1631:
+            r['recovery_smoke']='Native N1-1631 scalar/all eight residuals, recovered idle endpoint face flux/speed and paired checkpoint verified after host sleep interrupted transport; no replay or scientific change'
+        elif START==2185:
+            r['recovery_smoke']='Native N1-2185 scalar/all eight residuals, recovered idle endpoint face flux/speed and paired checkpoint verified after network loss; no replay or scientific change'
+        (out/f'smoke-n{START:05d}.json').write_text(json.dumps(r['recovery_verification'],indent=2)+'\n')
+        (out/'recovery-verification.json').write_text(json.dumps(r['recovery_verification'],indent=2)+'\n'); persist()
         current=START
         for target in TARGETS:
             assert START < target <= HORIZON
             step(f'iterate_{current}_to_{target}',lambda current=current,target=target:s.settings.solution.run_calculation.iterate(iter_count=target-current),max(600,(target-current)*20))
             r['actual_iteration']=n(); assert r['actual_iteration']==target and not s.settings.solution.run_calculation.iterating()
             m.assert_complete(target); diag.assert_complete(target)
-            if target==55 and not any(snap['iteration']==55 for snap in diag.snapshots):
-                step('verify_n55_normalized_inventory_snapshot',lambda:diag.snapshot(55,diag.value('P7bMaximumSpeed'),['recovery_semantics_validation']),180)
-                diag.assert_complete(55)
+            if target==START+5 and not any(snap['iteration']==target for snap in diag.snapshots):
+                step(f'verify_n{target}_normalized_inventory_snapshot',lambda:diag.snapshot(target,diag.value('P7bMaximumSpeed'),['recovery_semantics_validation']),180)
+                diag.assert_complete(target)
             r.update(flux_monitor=m.manifest(),spike_diagnostics=diag.manifest())
             last=json.loads((out/'collector-flux.jsonl').read_text().splitlines()[-1]); assert json.loads(read_text(s,last['remote_path']))==last
             r['remote_flux_readbacks'].append({'iteration':target,'path':last['remote_path'],'matches_local':True})
-            (out/f'history-{target:05d}.out').write_text(read_text(s,r['report']))
-            r['scalar_coverage']=scalar_audit(out/f'history-{target:05d}.out',target)
+            r['scalar_coverage']=read_scalar_snapshot(s,r,out,target)
             r['residual_coverage']=residual_audit(out/'solve.trn',expected_residual_equations(r),target)
             r['latest_metrics']=step(f'metrics_{target}',lambda:s.settings.solution.report_definitions.compute(report_defs=s.settings.solution.monitor.report_files['p7b-screen-history'].report_defs()))
             tag='final' if target==HORIZON else f'n{target:05d}'
@@ -261,7 +324,7 @@ def main():
             step('save_'+tag,lambda:s.settings.file.write_case_data(file_name=path),180)
             assert all(remote_file_exists(s,path.replace('.cas.h5',ext)) for ext in ['.cas.h5','.dat.h5'])
             r['pairs'][tag]=path; current=target; r['segment_iterations']=current-START
-            if target==55: r['recovery_smoke']='N51-55 scalar/flux/all eight residuals/diagnostic continuation and paired checkpoint PASS'
+            if target==START+5: r['recovery_smoke']=f'N{START+1}-{target} scalar/flux/all eight residuals/diagnostic continuation and paired checkpoint PASS'
             persist()
         m.unregister(); r['flux_monitor']=m.manifest(); m=None
         r['final_sections']=step('extract_final_sections',lambda:export_sections(s,r['sections'],out/'final-sections'),180)
