@@ -31,8 +31,11 @@ def extend(source_manifest: Path, target: int) -> dict:
     family = source["family"]
     speed = source["speed_m_s"]
     variant = source.get("variant")
-    audit = ((audit_recovery_f1 if family == "F1" else audit_recovery_f2)
-             if variant == "coupled-global-time-step-recovery" else lambda solver: audit_parity(solver, exact_flows=False))
+    if variant == "coupled-global-time-step-recovery":
+        audit = (lambda solver: audit_recovery_f1(solver, speed=speed)) if family == "F1" else (
+            lambda solver: audit_recovery_f2(solver, speed=speed))
+    else:
+        audit = lambda solver: audit_parity(solver, exact_flows=False)
     variant_label = "coupled-gts-" if variant else ""
     label = f"{family}-{str(speed).replace('.', 'p')}-{variant_label}extension-to{target}-{datetime.now(timezone.utc):%Y%m%dT%H%M%SZ}"
     local = RUN_ROOT / label

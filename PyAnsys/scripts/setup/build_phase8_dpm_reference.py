@@ -26,10 +26,12 @@ from run_phase8_parity_carrier import dump, load_pair, pair, require, save_pair,
 
 LIQUID_FEED = 116.93872650
 VAPOR_FEED = 80.70292372
+REFERENCE_SPEED = 26.81
 OUTPUT_ROOT = Path(r"C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase8\DPM")
 
 
-def inspect(solver, *, fraction: float, allocated: bool) -> dict:
+def inspect(solver, *, fraction: float, allocated: bool,
+            speed: float = REFERENCE_SPEED) -> dict:
     settings = solver.settings.setup
     boundary = safe_get_state(settings.boundary_conditions, "boundaries")
     models = safe_get_state(settings.models, "models")
@@ -39,13 +41,14 @@ def inspect(solver, *, fraction: float, allocated: bool) -> dict:
                     for phase in ("phase-1", "phase-2")} for zone in ("liquidinlet", "steaminlet")}
     vapor = sum(p["phase-1"] for p in feeds.values())
     liquid = sum(p["phase-2"] for p in feeds.values())
-    target_liquid = LIQUID_FEED * (1 - fraction) if allocated else LIQUID_FEED
-    require(abs(vapor - VAPOR_FEED) < 1e-5, f"Vapor feed drift: {vapor}")
+    scale = speed / REFERENCE_SPEED
+    target_liquid = LIQUID_FEED * scale * (1 - fraction) if allocated else LIQUID_FEED * scale
+    require(abs(vapor - VAPOR_FEED * scale) < 1e-5, f"Vapor feed drift: {vapor}")
     require(abs(liquid - target_liquid) < 1e-5, f"Liquid feed drift: {liquid}")
     require(len(injections) == 7, f"Expected seven injections, got {list(injections)}")
     flows = {name: float(payload["initial_values"]["mass_flow_rate"]["total_flow_rate"])
              for name, payload in injections.items()}
-    require(abs(sum(flows.values()) - LIQUID_FEED * fraction) < 1e-7,
+    require(abs(sum(flows.values()) - LIQUID_FEED * scale * fraction) < 1e-7,
             f"DPM flow drift: {sum(flows.values())}")
     for name, payload in injections.items():
         require(payload["particle_type"] == "inert", f"{name} is not an inert droplet")
@@ -53,6 +56,10 @@ def inspect(solver, *, fraction: float, allocated: bool) -> dict:
         require(payload["injection_type"]["option"] == "surface", f"{name} type changed")
         require(payload["initial_values"]["location"]["injection_surfaces"] == ["steaminlet"],
                 f"{name} release surface changed")
+        actual_velocity = float(payload["initial_values"]["velocity"]["x_velocity"])
+        expected_velocity = STEAM_VELOCITY_M_S * scale
+        require(abs(actual_velocity - expected_velocity) < 1e-6,
+                f"{name} release velocity changed: {actual_velocity}")
     interaction = dpm["general_settings"]["interaction"]
     require(bool(interaction["enabled"]) is allocated, "Interaction mode mismatch")
     walls = {name: payload.get("phase", {}).get("mixture", {}).get("discrete_phase", {}).get("bc_type")
@@ -84,12 +91,12 @@ def ensure_material(solver) -> dict:
 
 
 def configure(solver, *, fraction: float, allocated: bool,
-              source_interval: int = 1) -> dict:
+              source_interval: int = 1, speed: float = REFERENCE_SPEED) -> dict:
     setup = solver.settings.setup
     before = safe_get_state(setup.boundary_conditions, "parent boundaries")
     require(abs(sum(float(before["mass_flow_inlet"][z]["phase"]["phase-2"]["momentum"]["mass_flow_rate"]["value"])
-                    for z in ("liquidinlet", "steaminlet")) - LIQUID_FEED) < 1e-5,
-            "Parent liquid feed does not match the qualified 26.81 m/s point")
+                    for z in ("liquidinlet", "steaminlet")) - LIQUID_FEED * speed / REFERENCE_SPEED) < 1e-5,
+            "Parent liquid feed does not match the qualified speed point")
     require(not safe_get_state(setup.models.discrete_phase.injections, "parent injections"),
             "Parent already has DPM injections")
     # In Fluent 2025 R2 the inert-particle material branch is inactive until
@@ -100,7 +107,7 @@ def configure(solver, *, fraction: float, allocated: bool,
     if allocated:
         set_leaf_readback(
             setup.boundary_conditions.mass_flow_inlet["liquidinlet"].phase["phase-2"].momentum.mass_flow_rate.value,
-            LIQUID_FEED * (1 - fraction), "allocated Eulerian liquid feed")
+            LIQUID_FEED * speed / REFERENCE_SPEED * (1 - fraction), "allocated Eulerian liquid feed")
     dpm = setup.models.discrete_phase
     set_leaf_readback(dpm.general_settings.interaction.enabled, allocated, "continuous-phase interaction")
     if allocated:
@@ -121,7 +128,7 @@ def configure(solver, *, fraction: float, allocated: bool,
     set_leaf_readback(bc.pressure_outlet["steamoutlet"].phase["mixture"].discrete_phase.bc_type,
                       "escape", "outlet fate")
     injections = dpm.injections
-    total = LIQUID_FEED * fraction
+    total = LIQUID_FEED * speed / REFERENCE_SPEED * fraction
     share_sum = sum(float(item[3]) for item in FINE_MIST_BINS)
     for name, _interval, diameter_um, share_pct, _old_flow in FINE_MIST_BINS:
         injection = setup.models.discrete_phase.injections[name]
@@ -146,7 +153,7 @@ def configure(solver, *, fraction: float, allocated: bool,
         injection = setup.models.discrete_phase.injections[name]
         set_state_readback(injection.initial_values.velocity,
                            {"use_face_normal_direction": False,
-                            "x_velocity": STEAM_VELOCITY_M_S,
+                            "x_velocity": STEAM_VELOCITY_M_S * speed / REFERENCE_SPEED,
                             "y_velocity": 0.0, "z_velocity": 0.0},
                            f"{name} initial velocity")
         injection = setup.models.discrete_phase.injections[name]
@@ -159,7 +166,8 @@ def configure(solver, *, fraction: float, allocated: bool,
         set_leaf_readback(injection.physical_models.turbulent_dispersion.enabled, False,
                           f"{name} turbulent dispersion")
     return {"material": material, "target_dpm_kg_s": total,
-            "bin_share_sum_pct": share_sum, "configured": inspect(solver, fraction=fraction, allocated=allocated)}
+            "bin_share_sum_pct": share_sum, "configured": inspect(solver, fraction=fraction,
+                                                                      allocated=allocated, speed=speed)}
 
 
 def main() -> None:
@@ -183,6 +191,7 @@ def main() -> None:
     require(parent["status"] == "COMPLETE" and assessment["developed_for_diagnostic_dpm"],
             "Parent carrier has not passed its declared development gate")
     require(parent["family"] == args.family, "Parent family mismatch")
+    speed = float(parent["speed_m_s"])
     for kind in ("case", "data"):
         path = Path(parent["checkpoints"][-1][kind])
         require(path.is_file(), f"Parent final {kind} missing")
@@ -190,13 +199,15 @@ def main() -> None:
                 f"Parent final {kind} hash changed")
     source_base = Path(parent["paths"]["final"]) / "final"
     interval_label = f"-upd{args.source_interval}" if args.mode == "allocated" and args.source_interval != 1 else ""
-    label = (f"{args.family}-{args.mode}-{int(args.fraction*1000):03d}permil-26p81"
+    label = (f"{args.family}-{args.mode}-{int(args.fraction*1000):03d}permil-{str(speed).replace('.', 'p')}"
              f"{interval_label}-{datetime.now(timezone.utc):%Y%m%dT%H%M%SZ}")
     child = OUTPUT_ROOT / ("F3" if args.mode == "allocated" else args.family) / label
     require(not any(path.exists() for path in pair(child)), "Refusing to overwrite DPM child")
     receipt_path = ROOT / "output" / "phase8-dpm" / label / "build.json"
     receipt = {"status": "BUILDING", "family": args.family, "mode": args.mode,
-               "fraction": args.fraction, "parent_manifest": str(args.parent_manifest),
+               "fraction": args.fraction, "speed_m_s": speed,
+               "injection_velocity_rule": "reference 27.118 m/s times nominal-speed/reference-speed ratio",
+               "parent_manifest": str(args.parent_manifest),
                "source_interval": args.source_interval,
                "parent_assessment": str(args.assessment), "child_base": str(child),
                "parent_case_sha256": parent["checkpoints"][-1]["case_sha256"]}
@@ -215,11 +226,12 @@ def main() -> None:
         dump(receipt_path, receipt)
         receipt["configuration"] = configure(solver, fraction=args.fraction,
                                               allocated=args.mode == "allocated",
-                                              source_interval=args.source_interval)
+                                              source_interval=args.source_interval,
+                                              speed=speed)
         receipt["child_pair"] = save_pair(solver, child)
         load_pair(solver, child)
         receipt["reopened"] = inspect(solver, fraction=args.fraction,
-                                       allocated=args.mode == "allocated")
+                                       allocated=args.mode == "allocated", speed=speed)
         if args.mode == "allocated":
             interaction = receipt["reopened"]["interaction"]
             require(interaction["iteration_interval"] == args.source_interval and
