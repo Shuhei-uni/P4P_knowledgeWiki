@@ -19,6 +19,7 @@ def main() -> None:
     if receipt["status"] != "CASE_DATA_VERIFIED" or receipt.get("tracking_status") != "COMPLETE":
         raise RuntimeError("Seven-bin DPM build or tracking is not complete")
     family = receipt["family"]
+    speed = float(receipt.get("speed_m_s", 26.81))
     if family not in ("F1", "F2") or receipt["mode"] != "diagnostic":
         raise RuntimeError("This fate summary requires a one-way F1/F2 diagnostic child")
     flows = receipt["reopened"]["dpm_flows_kg_s"]
@@ -42,7 +43,8 @@ def main() -> None:
     total_weight = sum(row["diagnostic_weight_kg_s"] for row in rows)
     weighted = {k: sum(row["diagnostic_weight_kg_s"] * row[f"{k}_fraction"] for row in rows) / total_weight
                 for k in ("escaped", "trapped", "incomplete")}
-    summary = {"build_receipt": str(args.build_receipt), "family": family, "bins": rows,
+    summary = {"build_receipt": str(args.build_receipt), "family": family,
+               "speed_m_s": speed, "bins": rows,
                "total_tracks": sum(row["tracked"] for row in rows),
                "total_diagnostic_weight_kg_s": total_weight,
                "weighted_fate_fraction": weighted,
@@ -61,9 +63,11 @@ def main() -> None:
     ax.set_ylim(0, 1.02)
     ax.grid(axis="y", alpha=0.25)
     ax.legend(loc="upper right")
-    ax.set_title(f"{family} diagnostic DPM fates at 26.81 m/s; 613 tracks per bin")
+    counts = {row["tracked"] for row in rows}
+    count_label = f"; {counts.pop()} tracks per bin" if len(counts) == 1 else ""
+    ax.set_title(f"{family} diagnostic DPM fates at {speed:.2f} m/s{count_label}")
     fig.tight_layout()
-    figure = args.output / f"{family.lower()}-diagnostic-dpm-fates-26p81.png"
+    figure = args.output / f"{family.lower()}-diagnostic-dpm-fates-{str(speed).replace('.', 'p')}.png"
     fig.savefig(figure, dpi=170)
     plt.close(fig)
     summary["figure"] = str(figure)
