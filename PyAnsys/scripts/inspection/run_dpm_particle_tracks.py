@@ -524,6 +524,7 @@ def run_dpm_particle_track_check(
     inspect_only: bool = False,
     keep_going: bool = False,
     run_label: str = "active-session",
+    zone_summaries: bool = False,
 ) -> dict[str, Any]:
     """Run the current dynamic DPM check on an existing solver session."""
     payload: dict[str, Any] = {
@@ -584,6 +585,9 @@ def run_dpm_particle_track_check(
     if not inspect_only:
         print_header("Configure Summary Particle Tracks")
         payload["report_controls"] = configure_particle_track_summary(solver)
+        if zone_summaries:
+            execute_tui(solver, "/report/dpm-zone-summaries-per-injection? yes")
+            payload["report_controls"]["per_injection_zone_summaries"] = True
 
         print_header("Track Selected Injections")
         for item in selected:

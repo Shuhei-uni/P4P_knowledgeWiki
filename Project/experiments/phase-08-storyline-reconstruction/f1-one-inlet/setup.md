@@ -22,9 +22,35 @@ Build from the verified Phase 7.2A E0 `60,964`-cell case on the 60k geometry wit
 | Carrier | Steady Mixture with the documented common RNG k-epsilon/material/gravity/outlet/numerical stack; EWF off, roughness zero |
 | DPM | Inject only after the carrier development gate; diagnostic one-way tracking with interaction with continuous phase off; use the seven-bin 09cV3 PSD, common wall fates, and tracking controls as F2 |
 
+With the verified combined face area and fixed phase densities, scale both reference mass commands by `speed / 26.81`. The selected design targets are:
+
+| Nominal speed (m/s) | Vapor feed (kg/s) | Liquid feed (kg/s) |
+| ---: | ---: | ---: |
+| 20.11 | 60.53471824 | 87.71494927 |
+| 23.46 | 70.61882098 | 102.32683788 |
+| 26.81 | 80.70292372 | 116.93872650 |
+| 29.48 | 88.74010411 | 128.58461981 |
+| 32.14 | 96.74718271 | 140.18689555 |
+
+For F1, partition each phase target between both faces by verified area; for F2, put the entire liquid target on `liquidinlet` and vapor target on `steaminlet`. Read back the phase commands and nominal versus zone-specific superficial speeds at every point.
+
 All five cases use the [common report contract](../report-contract.md). Freeze the carrier settings and DPM protocol across speeds except for the imposed flow. The chosen PSD is the project-designed [09cV3 seven-bin fine-mist distribution](../../phase-03-dpm-carryover-and-coupling/purnanto-09cV3-fine-mist-psd/setup.md#3-controlled-change-seven-injection-fine-mist-psd), an assumed engineering prior rather than a measured inlet distribution. F1/F2 tracking is **diagnostic**: retain the full Eulerian liquid feed, disable DPM feedback, and do not add nominal parcel mass to the physical inlet mass balance. Fluent may require nonzero injection parcel weights for mass-weighted fate reporting; label those weights as diagnostic, not additional physical feed. Set their common scale before execution and preserve it at every speed.
 
+### Selected Purnanto-parity child (2026-09-29)
+
+The selected F1 26.81 m/s start pair is `C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase8\PurnantoParity\F1\F1-purnanto-parity-26p81.cas.h5` and its matching `.dat.h5`, built from the retained initialized F1 base. Live Fluent 2025 R2 readback after save/reopen verified SIMPLE, segregated pseudo-time off, second-order `k`, a common `0.724 m` inlet turbulence hydraulic diameter on both faces, `2.11%` inlet turbulence intensity, and `0.724 m` / `2.1525%` outlet backflow turbulence inputs. The `26.81 m/s` design feed, 60,964-cell mesh, mixture/RNG physics, zero roughness, closed bottom, inactive absorber, and no DPM injections remain. See the machine receipt under `PyAnsys/output/phase8_purnanto_parity_pilots_20260928T110152Z.json` and its builder. The original 2026-09-26 pair remains a separate Coupled/Global-Time-Step baseline.
+
+The two physical inlet faces remain separate mesh zones, so this child is a Purnanto-style approximation on the Phase 8 geometry. Assigning `0.724 m` to each face deliberately reproduces the historical single-inlet turbulence input; it is not a measurement of the thin strip's own hydraulic diameter. Fluent's [2025 R2 User's Guide, Figure 8.38](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_bcs_sec_bound_cond.html) shows the mass-flow-inlet panel and describes the phase/boundary inputs used here. The `0.0411 N/m` reference surface-tension value remains inactive in this Mixture carrier.
+
+After the SIMPLE parity pilot failed its carrier gate, a separately named matched numerical-recovery child was built at `C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase8\NumericalRecovery\F1\F1-26p81-coupled-gts.cas.h5` with its paired `.dat.h5`. The [build receipt](../../../../PyAnsys/output/phase8_numerical_recovery_f1_20260928T131400Z.json) verifies the same Coupled/Global Time Step/first-order-`k` methods, corrected inlet/outlet turbulence inputs, mixed feeds, fresh Hybrid initialization, and save/reopen identity. Direct readback comparison with the F2 recovery receipt confirmed equal numerical methods and turbulence settings. This branch is a recovery comparison, not a recreation of Purnanto's SIMPLE result. Assess its carrier with the same last-500 operational thresholds declared in [F2](../f2-split-inlet/setup.md) before DPM activation.
+
+The matched F1/F2 discovery pilot uses the 26.81 m/s children for 2,000 native steady iterations: report cadence 10, an initial 50-iteration instrumentation smoke, a local checkpoint at 1,000, and final paired case/data at 2,000. Compare the full trajectories and last 500 iterations. Continue to a predeclared deeper horizon if inventory or boundary balance is still evolving; the pilot alone cannot establish a stationary separator.
+
 Use the same `steaminlet` face as the DPM release surface in F1 and F2, even though both F1 inlet faces carry the mixed continuous-phase condition. This keeps the physical release footprint fixed across the topology comparison; verify that the face is accessible for injection in both setups.
+
+For the seven-bin one-way diagnostic, set the sum of Fluent injection parcel weights to 5% of the actual 26.81 m/s liquid feed (`5.846936325 kg/s` at this reference point), distributed by the recorded 09cV3 bin shares; scale with liquid feed at the other four speeds. This matches the F3 5% point's nominal droplet representation while keeping the entire liquid feed in the F1/F2 Eulerian inlets. The parcel weights have no carrier feedback or additional physical inlet status. Save and reopen the injection state, and verify the same release location, velocity rule, tracking controls, and wall fates in F1/F2 before comparing fates.
+
+The reference-speed injection builder starts with the recorded 09cV2/09cV3 axial `x` release velocity of `27.118 m/s`, a requested 100 release streams per bin, spherical drag, no stochastic dispersion or rotation, 50,000 maximum tracking steps, and step-length factor 5. Fluent's surface-injection tracking may realize a different number of trajectories; record the actual count. These are inherited diagnostic controls, not a claim that the current steam-face carrier speed is exactly `27.118 m/s`; its command-derived superficial speed is about `26.807 m/s`. Hold the injection controls identical across F1/F2 and record their live readback.
 
 ## Run sequence and evidence
 

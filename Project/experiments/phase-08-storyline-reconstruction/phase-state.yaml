@@ -1,0 +1,36 @@
+phase: 08-storyline-reconstruction
+status: ACTIVE
+scope: Project/experiments/phase-08-storyline-reconstruction/CONTEXT.md
+reference_speed_m_s: 26.81
+mesh_cells: 60964
+selected_numerical_branch: coupled-global-time-step-recovery
+claim_limit: Not Purnanto SIMPLE numerical parity; closed-bottom and outlet liquid routing limit separator claims.
+families:
+  F1:
+    status: COUPLED_26P81_OPERATIONAL_CARRIER_GATE_PASS
+    child_receipt: PyAnsys/output/phase8_numerical_recovery_f1_20260928T131400Z.json
+    final_run: PyAnsys/output/phase8-carrier/F1-26p81-coupled-gts-extension-to10000-20260928T135803Z/manifest.json
+    gate: PyAnsys/output/phase8-analysis/26p81-f1-coupled-n10000/assessment.json
+    diagnostic_dpm: PyAnsys/output/phase8-dpm/F1-diagnostic-050permil-26p81-20260928T143528Z/build.json
+    dpm_tracking_status: COMPLETE_WITH_77P30PCT_DIAGNOSTIC_WEIGHT_INCOMPLETE
+  F2:
+    status: COUPLED_26P81_OPERATIONAL_CARRIER_GATE_PASS
+    final_run: PyAnsys/output/phase8-carrier/F2-26p81-coupled-gts-extension-to10000-20260928T123834Z/manifest.json
+    gate: PyAnsys/output/phase8-analysis/26p81-f2-coupled-n10000/assessment.json
+    diagnostic_dpm: PyAnsys/output/phase8-dpm/F2-diagnostic-050permil-26p81-20260928T133307Z/build.json
+    dpm_tracking_status: COMPLETE_WITH_80P76PCT_DIAGNOSTIC_WEIGHT_INCOMPLETE
+    dpm_step_probe: PyAnsys/output/phase8-dpm/F2-26p81-dpm-maxsteps-200000-20260928T143334Z/probe.json
+  F3:
+    status: EXTENDING_5PCT_ALLOCATED_DPM_UPD100_TO_NATIVE15000
+    verified_child: PyAnsys/output/phase8-dpm/F2-allocated-050permil-26p81-upd100-20260928T144555Z/build.json
+    pilot_run: PyAnsys/output/phase8-carrier/F3-26p81-5pct-coupled-upd100-20260928T144733Z/manifest.json
+    pilot_assessment: PyAnsys/output/phase8-analysis/26p81-f3-5pct-upd100-n11000/assessment.json
+    current_run: PyAnsys/output/phase8-carrier/F3-26p81-5pct-coupled-upd100-extension-to15000-20260928T151004Z/manifest.json
+    interrupted_upd1_pilot: PyAnsys/output/phase8-carrier/F3-26p81-5pct-coupled-20260928T144022Z/manifest.json
+    report_correction: Pilot used Volume Integral for per-cell DPM Mass Source and is excluded from kg/s accounting. N11000 to N15000 continuation uses Volume Sum.
+  F4:
+    status: PROVISIONAL_E27_5PCT_BUILDER_READY_WAITING_FOR_F3_PILOT
+    builder: PyAnsys/scripts/setup/build_phase8_f4_provisional_ewf.py
+    claim_limit: Phase 7.2A EWF treatment remains unfinalized; E2.7 is only an exploratory switch basis.
+matched_26p81_comparison: PyAnsys/output/phase8-analysis/26p81-f1-f2-coupled-n10000/summary.json
+next_required_action: Finish and assess the F3 5% update-100 continuation through native N15000; preserve unresolved particle fates and verify corrected source report.
