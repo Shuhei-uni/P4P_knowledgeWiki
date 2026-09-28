@@ -104,7 +104,7 @@ compared by magnitude. `±` is the sample standard deviation over the tail-500
 window, not an uncertainty interval.
 
 | Case | `k_s` (m) | `C_s` | Phase-2 outlet (kg/s) | Magnitude change vs R0 | Total liquid mass (kg) | Mass slope (kg/iteration) | Lower-zone liquid mass (kg) | Mean absorber command error (kg/s) |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | `R0` | `0` | `0.5` | `-24.3715 ± 0.0219` | `0.00%` | `296.022` | `+3.52e-4` | `0.0957` | `-0.603` |
 | `R1` | `5e-5` | `0.5` | `-29.5412 ± 0.0338` | `+21.21%` | `320.652` | `-1.78e-4` | `0.0971` | `-2.382` |
 | `R2` | `2e-4` | `0.5` | `-28.0762 ± 0.0314` | `+15.20%` | `312.905` | `+3.54e-5` | `0.1132` | `-1.609` |

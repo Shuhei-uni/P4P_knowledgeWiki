@@ -1,0 +1,68 @@
+# Phase Context — Phase 8 Reproducible Storyline Runs
+
+## Status
+
+**Human-framed direction, 2026-09-25.** Build four linked run families on the existing Phase 7.2A 60k mesh: one-inlet Purnanto-style carrier plus post-development DPM; split two-phase inlet plus post-development DPM; split inlet with two-way DPM and droplet-loading sensitivity; and the same coupled setup with EWF. Sweep inlet flow/speed within each family. The deliverable is a documented, repeatable run and comparison pipeline with common reports. These are new storyline experiments, not exact repetitions of historical runs. Finer meshes with the same geometry are planned later and are out of scope.
+
+## Evidence anchors
+
+- [Phases 1–2](../phase-01-purnanto-baseline-and-inlet-exploration/interpretation.md) moved from a homogeneous inlet to a split two-phase carrier and explored loading. [08b](../phase-02-parity-reset-and-pre-v2-qualification/interpretation.md) had high apparent outlet dryness but open whole-domain balance.
+- [Phases 3–4](../phase-03-dpm-carryover-and-coupling/interpretation.md) explored DPM sensitivity and [EWF](../phase-04-ewf-wall-film-mechanisms/interpretation.md). Incomplete tracks, limited film histories, and the unqualified carrier limited interpretation.
+- [Phases 5–6](../phase-05-full-geometry-v2/interpretation.md) exposed brine-outlet sensitivity and a [pool-control abstraction](../phase-06-full-geometry-with-brine-pool/interpretation.md) that became a coupled problem beyond the immediate separator-flow goal.
+- [Phases 7A–7.1A](../phase-07a-simplified-purnanto-liquid-removal/interpretation.md) selected a lower phase-2 absorber and developed it into a usable virtual outlet. The [7.1A parent](../phase-07-1a-absorber-convergence/interpretation.md) still carried roughly 24.33 kg/s phase-2 liquid through `steamoutlet`.
+- [Phase 7.2A](../phase-07-2a-wall-liquid-routing/interpretation.md) revisits roughness and EWF. Its [monitoring contract](../phase-07-2a-wall-liquid-routing/monitoring-contract.md) informs Phase 8's common definitions.
+
+## Phase contract
+
+### Question and goal
+
+> Across matched inlet-flow levels on the same 60k geometry, how do inlet topology, one-way versus two-way DPM coupling, and EWF alter carrier quality, liquid accounting, droplet fate, and steam-outlet routing?
+
+The central result is a reproducible comparison series. The [common report contract](report-contract.md) defines its measurements and comparison rules.
+
+### In scope
+
+- Family 1: use one inlet carrying both phases in a Purnanto-style homogeneous inlet package on the 60k mesh; sweep inlet flow/speed, develop each carrier first, then inject and track DPM with feedback to the continuous flow off.
+- Family 2: replace only the inlet representation with the split two-phase inlet; repeat the same flow levels, carrier-development rule, and one-way DPM protocol for a direct Family 1/2 contrast.
+- Family 3: retain Family 2's split inlet, enable DPM interaction with the continuous phase, sweep the same flow levels, and vary the fraction of total inlet liquid represented as injected DPM. The fraction escaping with steam is measured, not commanded.
+- Family 4: retain Family 3's matrix and enable EWF. Compare matched speed and DPM points with Family 3, with film transfer and inventory added to the accounting.
+- Families 1–4 retain the simplified closed lower boundary **without the phase-2 absorber**. Liquid may accumulate during steady iteration. Measure boundary-flux imbalance and inventory drift separately; pseudo-time iterations do not define a physical storage rate, and a persistently nonzero boundary imbalance does not establish a converged steady state.
+- After Phase 7.2A is finalized, run its selected final setup **with the absorber** at matching Family 3/4 flow and DPM-fraction points as a later comparison extension. Do not assume the current 7.2A branch is final or copy unfinished settings into Phase 8.
+- Document every case's source setup, new-mesh adaptation, parent/initialization, complete model and boundary settings, solver controls, report definitions, run commands/history, checkpoints, and analysis windows. Each selected `setup.md` carries its runnable contract; raw machine evidence remains in `PyAnsys/`.
+- Use the same report names, definitions, sign conventions, frequency, and postprocessing rules across eligible cases. Record every intentional difference and every inapplicable or unavailable report.
+- Compare phase routing with source-inclusive boundary balance, inventory stationarity, and numerical health. Use physical storage-aware closure only if a transient branch with physical time is run. Interpret outlet dryness or carryover only with those global checks.
+- Build a concise figure-led narrative explaining each change and the evidence that led to the next step.
+
+### Boundaries and claim limits
+
+- Hold the 60k geometry fixed. Later finer, geometrically identical meshes belong to a separate convergence study.
+- Full-geometry brine-outlet and pool-control runs cannot be recreated on this truncated geometry. Their historical evidence explains the return to simplified geometry; they are context, not a fifth Phase 8 family.
+- A one-inlet case on this 60k mesh is Purnanto-style setup comparison, not an exact reproduction of Purnanto's published geometry, mesh, or results. Family 1/2 can be directly compared only when total phase feed, outlet, closed lower boundary, carrier settings, and DPM injections are matched apart from inlet topology.
+- The later absorber comparison changes liquid-removal architecture as well as potentially finalized 7.2A wall treatment. Attribute effects only through matched controls or label the comparison as a combined-package effect.
+- Do not present historical and recreated runs as mesh-identical repeats or use historical values as targets.
+- Do not infer physical separator efficiency from outlet dryness, a residual, or one checkpoint. DPM escape claims require track completion and represented loading; EWF drainage requires transfer and flow evidence.
+
+## Candidate experiment families
+
+| Family | Controlled contrast on the 60k mesh | Decision illuminated |
+| --- | --- | --- |
+| F1 — one inlet | Purnanto-style mixed-phase inlet; common flow/speed sweep; post-development one-way DPM | Reference carrier and droplet response under one-inlet topology. |
+| F2 — split inlet | Same sweep and DPM protocol, changing inlet topology | Effect of explicit liquid/steam inlet separation. |
+| F3 — coupled DPM | F2 plus interaction with continuous phase and declared injected-liquid DPM-fraction variation, holding droplet size distribution fixed | Effect of droplet feedback and inlet mist allocation. |
+| F4 — coupled DPM + EWF | F3 matrix plus EWF | Effect of wall-film transfer and drainage on matched cases. |
+
+**Human-selected axes:** use five nominal inlet speeds—`20.11`, `23.46`, `26.81`, `29.48`, and `32.14 m/s`—at every family, and injected-DPM fractions `2.5%`, `5%`, `7.5%`, `10%`, and `20%` of total inlet liquid in F3/F4. **Keep the same physical inlet opening and pure-phase split location at every speed**; change boundary flow values, not inlet area. On mass-flow inlets, impose phase mass flows corresponding to each target superficial speed on the verified 60k inlet areas and report the realized speed. Keep the 1600 kJ/kg reference phase proportion and material state fixed across the speed sweep unless a separately named comparison changes them. At each DPM fraction, reduce Eulerian liquid by the injected amount so total water feed is unchanged, and keep the droplet-size distribution fixed.
+
+For F1, apply the same mixed-phase condition to the existing two inlet faces as one combined physical inlet, subject to Fluent readback of both face-zone settings and their summed phase flux. For F2, keep the outer liquid and inner steam faces as the pure-phase split. At zero DPM fraction, their historical area ratio is intended to give comparable phase velocities at the reference proportion. At nonzero DPM fractions in F3/F4, liquid moved to steam-side DPM reduces Eulerian flow through the liquid strip, so equal zone velocities are no longer presumed. Report steam-zone, liquid-strip, and overall nominal superficial speeds separately. Later finer meshes should preserve the same physical inlet area and split location, then verify their actual meshed face areas.
+
+F1/F2 retain the full Eulerian liquid feed and use one-way **diagnostic** DPM tracking from the same physical `steaminlet` face, without continuous-phase source feedback. All four families share Shuhei's [09cV3 seven-bin fine-mist PSD](../phase-03-dpm-carryover-and-coupling/purnanto-09cV3-fine-mist-psd/setup.md), an assumed distribution rather than measured inlet truth. F3/F4 instead allocate the stated fraction of inlet liquid to mass-carrying, coupled DPM. Their difference from F2 therefore combines allocation and coupling. A 5% one-way allocated bridge at each speed is optional and does not expand the core four-family matrix. F4's intended EWF mechanisms are phase accretion, DPM deposition, splash, and stripping, with film momentum transport and DPM-to-carrier interaction ON. EWF is scoped to the zone named `wall`; the bottom is excluded. The wall's **Flow Momentum Coupling is OFF**. The remaining EWF numerical switch manifest stays provisional until Phase 7.2A's final setup exists.
+
+**Source qualification:** [Purnanto et al., Table 2 and Figure 20](https://www.researchgate.net/publication/269519626_CFD_MODELLING_OF_TWO-PHASE_FLOW_INSIDE_GEOTHERMAL_STEAM-WATER_SEPARATORS) explicitly identifies `26.81 m/s` for the 1600 kJ/kg spiral case. The five-point set above is a **Phase 8 experimental design inspired by the paper's range**, not the paper's exact plotted speed set. `20.11 m/s` approximates a 25%-lower-flow point relative to `26.81 m/s`; `23.46 m/s` is an intermediate design point. The project has used `32.14 m/s` in an earlier inlet-loading screen; `29.48 m/s` appears in the paper text for a Lazalde-Crabtree case, so neither is asserted to be a reported spiral coordinate. Phase 8 holds the 1600 kJ/kg phase proportion fixed while changing flow, rather than reproducing the paper's enthalpy sweep.
+
+## Decision conditions
+
+Before execution, verify mesh identity, inlet face areas, and F1's combined-face versus F2's split-face readback; calculate the five speed-point mass-flow targets, and fix the F1/F2 one-way DPM mass basis, DPM injection definition, carrier-development gate, and matched horizon. Write each `setup.md`. Build and verify common report definitions before solving. Direct comparison requires complete report definitions, signs, comparable windows, source and DPM accounting, and run provenance. Preserve failures and inapplicable measures explicitly.
+
+The core matrix is 5 F1 + 5 F2 + 25 F3 + 25 F4 = **60 intended cases**. Start with the `26.81 m/s` reference-speed pilot in F1/F2 and a `5%` point in F3. F4 waits for finalized 7.2A EWF settings before its pilot. Expand only after the common report definitions, DPM/EWF readbacks, save/reopen, source-inclusive balance, and inventory-stationarity checks are verified. Pilot evidence may require implementation repair without changing the scientific axes. The common numerical scaffold is now the verified Phase 7.2A E0 steady Coupled/Global Time Step setup on the 60,964-cell mesh partition; F1/F2 base pairs were prepared from it on 2026-09-26. The diagnostic DPM parcel-weight scale and final EWF switch manifest remain setup-critical open details.
+
+**Proposed report thesis for Shuhei to refine:** the same flow sweep reveals what changes when the inlet phases are separated, droplets feed back on the carrier, and wall film is added; common mass, storage, routing, and DPM/film reports determine whether each apparent benefit is credible despite the closed-bottom liquid limitation. The later 7.2A comparison asks what changes once an auditable liquid-removal architecture is introduced.

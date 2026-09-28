@@ -2,6 +2,18 @@
 
 ## Status
 
+**Stage 2 screen complete — 2026-09-27.** The first stage screened roughness and EWF
+primarily as separate mechanisms; E3 was an earlier basic-EWF-plus-R3 interaction
+with no measured film. Stage 2 combined the retained E2.7 phase-accretion EWF
+state with the previously tested R3, R4, and R5 roughness settings. Each child
+started independently from the E2.7 continuation final pair at native 13586
+and completed 3,000 steady iterations. All three reached the exploratory
+`0.3 m` film-thickness cap and had extreme film mass/speed responses; none
+reduced phase-2 `steamoutlet` outflow magnitude against the E2.7 parent. See
+the [Stage 2 result](stage-02-combined-ewf-roughness/results.md) and child
+setups. The older R0-based first-stage
+contract below is retained as evidence of how the component settings arose.
+
 **Human-selected phase direction — 2026-09-22.** Phase 7.2A starts from the
 completed Phase 7.1A R0 Coupled / Global-Time-Step control continuation. That
 run is a strong numerical starting baseline: it completed its continuation,

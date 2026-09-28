@@ -1,0 +1,55 @@
+{
+  "formula": "phase1_in + phase1_out + phase2_in + phase2_out + native_applied_absorber",
+  "units": "kg/s",
+  "interpretation": "Signed boundary-plus-absorber algebraic imbalance. EWF transfer and storage are not included; this is not a complete physical closure rate.",
+  "cases": {
+    "R3": {
+      "report_points": 3001,
+      "mixture_imbalance_first_kg_s": 35.10002318326326,
+      "mixture_imbalance_last_kg_s": -2.803172556998689,
+      "mixture_imbalance_tail500_mean_kg_s": 2.8786160929046254,
+      "mixture_imbalance_tail500_median_kg_s": -2.8788139288211383,
+      "mixture_imbalance_tail500_mean_absolute_kg_s": 7.823738682512716,
+      "mixture_imbalance_tail500_min_kg_s": -3.0632900400132854,
+      "mixture_imbalance_tail500_max_kg_s": 64.99576237967149,
+      "phase2_imbalance_last_kg_s": -3.631777960391176,
+      "continuity_rows": 3001,
+      "continuity_first_iteration": 13586,
+      "continuity_last_iteration": 16586,
+      "continuity_last_scaled_residual": 0.0018751,
+      "continuity_source": "output/phase72a_stage2_e27_roughness/R3-20260926T223230Z/transcript-native-solve.txt"
+    },
+    "R4": {
+      "report_points": 3001,
+      "mixture_imbalance_first_kg_s": 35.10002318326326,
+      "mixture_imbalance_last_kg_s": -3.0836413784113006,
+      "mixture_imbalance_tail500_mean_kg_s": 2.0673565075491425,
+      "mixture_imbalance_tail500_median_kg_s": -2.9369021628319985,
+      "mixture_imbalance_tail500_mean_absolute_kg_s": 7.222928173878936,
+      "mixture_imbalance_tail500_min_kg_s": -3.2924681881659836,
+      "mixture_imbalance_tail500_max_kg_s": 68.48727755625147,
+      "phase2_imbalance_last_kg_s": -3.681715089339747,
+      "continuity_rows": 2475,
+      "continuity_first_iteration": 13586,
+      "continuity_last_iteration": 16060,
+      "continuity_last_scaled_residual": 0.0021567,
+      "continuity_source": "output/phase72a_stage2_e27_roughness/R4-20260926T223500Z/transcript-stream.txt"
+    },
+    "R5": {
+      "report_points": 3001,
+      "mixture_imbalance_first_kg_s": 35.10002318326326,
+      "mixture_imbalance_last_kg_s": -2.1403978443473193,
+      "mixture_imbalance_tail500_mean_kg_s": 1.9817852767350919,
+      "mixture_imbalance_tail500_median_kg_s": -2.183585550552962,
+      "mixture_imbalance_tail500_mean_absolute_kg_s": 5.9183044440531285,
+      "mixture_imbalance_tail500_min_kg_s": -2.411515909561132,
+      "mixture_imbalance_tail500_max_kg_s": 60.97359669341455,
+      "phase2_imbalance_last_kg_s": -2.8790630872537264,
+      "continuity_rows": 3001,
+      "continuity_first_iteration": 13586,
+      "continuity_last_iteration": 16586,
+      "continuity_last_scaled_residual": 0.0020549,
+      "continuity_source": "output/phase72a_stage2_e27_roughness/R5-20260926T223501Z/transcript-native-solve.txt"
+    }
+  }
+}

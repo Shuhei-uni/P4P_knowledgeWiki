@@ -1,0 +1,59 @@
+{
+  "measure": "apparent outlet-based liquid separation efficiency with total-feed denominator",
+  "formula": "100 * (1 + signed_phase2_steamoutlet_mass_flux / (phase1_steaminlet_mass_flux + phase2_liquidinlet_mass_flux))",
+  "equivalent_carryover_fraction": "-signed_phase2_steamoutlet_mass_flux / (phase1_steaminlet_mass_flux + phase2_liquidinlet_mass_flux)",
+  "sign_convention": "Both inlet fluxes are positive; phase-2 steamoutlet outflow is negative.",
+  "claim_limit": "Outlet-based ratio only. Film accumulation, transfer, storage, source-inclusive closure, and physical validity are not resolved; all children reached the exploratory film-thickness cap.",
+  "parent_at_native_13586": {
+    "steam_inlet_kg_s": 80.69,
+    "liquid_inlet_kg_s": 116.92,
+    "total_inlet_kg_s": 197.61,
+    "phase2_steamoutlet_kg_s": -1.734624033250239,
+    "carryover_percent": 0.877801747507838,
+    "apparent_efficiency_percent": 99.12219825249217
+  },
+  "cases": {
+    "R3": {
+      "points": 3001,
+      "first_iteration": 13586,
+      "last_iteration": 16586,
+      "steam_inlet_last_kg_s": 80.69,
+      "liquid_inlet_last_kg_s": 116.92,
+      "total_inlet_last_kg_s": 197.61,
+      "phase2_steamoutlet_last_kg_s": -3.631777960391182,
+      "apparent_efficiency_last_percent": 98.16214869673033,
+      "apparent_efficiency_tail500_mean_percent": 98.16203044282273,
+      "apparent_efficiency_min_percent": 94.99595273179092,
+      "carryover_last_percent": 1.8378513032696633,
+      "carryover_tail500_mean_percent": 1.837969557177282
+    },
+    "R4": {
+      "points": 3001,
+      "first_iteration": 13586,
+      "last_iteration": 16586,
+      "steam_inlet_last_kg_s": 80.69,
+      "liquid_inlet_last_kg_s": 116.92,
+      "total_inlet_last_kg_s": 197.61,
+      "phase2_steamoutlet_last_kg_s": -3.681715089339644,
+      "apparent_efficiency_last_percent": 98.13687814921327,
+      "apparent_efficiency_tail500_mean_percent": 98.1389650079106,
+      "apparent_efficiency_min_percent": 94.64343319497111,
+      "carryover_last_percent": 1.8631218507867233,
+      "carryover_tail500_mean_percent": 1.8610349920894147
+    },
+    "R5": {
+      "points": 3001,
+      "first_iteration": 13586,
+      "last_iteration": 16586,
+      "steam_inlet_last_kg_s": 80.69,
+      "liquid_inlet_last_kg_s": 116.92,
+      "total_inlet_last_kg_s": 197.61,
+      "phase2_steamoutlet_last_kg_s": -2.879063087253733,
+      "apparent_efficiency_last_percent": 98.54305799946677,
+      "apparent_efficiency_tail500_mean_percent": 98.54077126404076,
+      "apparent_efficiency_min_percent": 93.91324662868318,
+      "carryover_last_percent": 1.4569420005332387,
+      "carryover_tail500_mean_percent": 1.459228735959238
+    }
+  }
+}

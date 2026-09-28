@@ -14,6 +14,7 @@ their exact history remains recoverable from Git.
 - [Phase 6 — Full Geometry with Brine Pool](phase-06-full-geometry-with-brine-pool/index.md)
 - [Phase 7 — Simplified Purnanto Liquid-Removal Mechanisms (Shuhei)](phase-07a-simplified-purnanto-liquid-removal/index.md)
 - [Phase 7b — Full-Geometry Steady Liquid Removal (Andy)](phase-07b-full-geometry-liquid-removal/index.md)
+- [Phase 8 — Storyline reconstruction on the new mesh (Shuhei)](phase-08-storyline-reconstruction/index.md)
 - [Legacy reconstruction](legacy/legacy-bangma-reconstruction/historical-run.md)
 - [Historical parallel studies from Andy's checkout](parallel-andy-studies/README.md) — enthalpy/DPM replication, liquid-sink diagnostics and resolved-outlet VOF evidence, with explicit identities and recovery provenance.
 

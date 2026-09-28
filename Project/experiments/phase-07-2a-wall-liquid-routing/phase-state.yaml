@@ -4,8 +4,35 @@ phase_question: >-
   through steamoutlet by changing wall-adjacent routing while preserving
   absorber tracking, source-inclusive closure, liquid-inventory behaviour, and
   credible vapor routing relative to the R0 control?
-state: DISCOVERY_E2_81_COMPLETE_NO_FATAL_FLAGS_RESPONSE_UNQUALIFIED
-planning_state: USER_SELECTED_E2_7_FLOW_MOMENTUM_COUPLING_OFF
+state: STAGE_2_E27_R3_R4_R5_SCREEN_COMPLETE_UNQUALIFIED
+planning_state: USER_SELECTED_E27_CONT5000_PARENT_AND_3000_ITERATION_COMBINED_SCREEN
+
+stage_2_combined_ewf_roughness:
+  contract: Project/experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/index.md
+  result: Project/experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/results.md
+  histories_figure: Project/experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/figures/E2.7-R3-R4-R5-native-histories.png
+  balance_continuity_figure: Project/experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/figures/E2.7-R3-R4-R5-balance-continuity.png
+  outlet_based_efficiency_figure: Project/experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/figures/E2.7-R3-R4-R5-outlet-based-efficiency.png
+  parent_run_manifest: PyAnsys/output/phase72a_ewf_server1_e27_cont5000_20260923T102912Z/run-manifest.json
+  parent_native_iteration: 13586
+  parent_pair_kind: durable_final_pair
+  parent_case_sha256: bc9eeac09adfeca77ebe467c03e6425f3f9bb7069aa5b1eaa9a839ee44f92990
+  parent_data_sha256: 57e8b1a97f9d9db8665eb0ab1a211c08065e1a0befc4570a90b89ab18fe61af5
+  requested_additional_iterations_per_child: 3000
+  expected_terminal_iteration: 16586
+  cases:
+    e27_r3:
+      setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/e27-r3/setup.md
+      run_manifest: PyAnsys/output/phase72a_stage2_e27_roughness/R3-20260926T223230Z/run-manifest.json
+      status: COMPLETE_TO_16586_FILM_CAP_REACHED_UNQUALIFIED
+    e27_r4:
+      setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/e27-r4/setup.md
+      run_manifest: PyAnsys/output/phase72a_stage2_e27_roughness/R4-20260926T223500Z/run-manifest.json
+      status: COMPLETE_TO_16586_RECONCILED_AFTER_CLIENT_DISCONNECT_FILM_CAP_REACHED_UNQUALIFIED
+    e27_r5:
+      setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/e27-r5/setup.md
+      run_manifest: PyAnsys/output/phase72a_stage2_e27_roughness/R5-20260926T223501Z/run-manifest.json
+      status: COMPLETE_TO_16586_FILM_CAP_REACHED_UNQUALIFIED
 
 context:
   path: Project/experiments/phase-07-2a-wall-liquid-routing/CONTEXT.md

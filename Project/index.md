@@ -8,6 +8,18 @@ in `PyAnsys/`.
 
 ## What are we trying to answer now?
 
+**Shuhei — Phase 8 planning:** create four reproducible run families on the
+existing 60k simplified mesh to compare one-inlet and split-inlet carriers,
+one-way and two-way DPM, five Phase 8 inlet-speed points (`20.11`, `23.46`,
+`26.81`, `29.48`, and `32.14 m/s`), injected
+DPM shares of 2.5%, 5%, 7.5%, 10%, and 20% of inlet liquid, and EWF with
+common report definitions. Families 1–4 have no
+absorber; the finalized Phase 7.2A setup will later be rerun at matching
+points for an absorber-equipped comparison. This is a new-mesh storyline
+series, not a quantitative replay of historical results. See the [Phase 8
+context](experiments/phase-08-storyline-reconstruction/CONTEXT.md) and
+[common report contract](experiments/phase-08-storyline-reconstruction/report-contract.md).
+
 The liquid-removal work has two separate planning lanes:
 
 - **Shuhei — Phase 07A:** what practical numerical mechanism can remove
