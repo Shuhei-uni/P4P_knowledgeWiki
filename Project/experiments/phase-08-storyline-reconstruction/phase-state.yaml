@@ -41,6 +41,7 @@ families:
     speed_32p14_current_extension: PyAnsys/output/phase8-carrier/F1-32p14-coupled-gts-extension-to10000-20260929T031916Z/manifest.json
     speed_32p14_n10000_assessment: PyAnsys/output/phase8-analysis/32p14-f1-coupled-n10000/assessment.json
     speed_32p14_current_diagnostic_dpm: PyAnsys/output/phase8-dpm/F1-diagnostic-050permil-32p14-20260929T062233Z/build.json
+    speed_32p14_dpm_fates: PyAnsys/output/phase8-analysis/32p14-f1-diagnostic-dpm/summary.json
     excluded_speed_23p46_simple_start: PyAnsys/output/phase8-carrier/F1-23p46-20260928T194516Z/manifest.json
   F2:
     status: COUPLED_26P81_OPERATIONAL_CARRIER_GATE_PASS
@@ -73,6 +74,7 @@ families:
     speed_32p14_pilot_assessment: PyAnsys/output/phase8-analysis/32p14-f2-coupled-n2000/assessment.json
     speed_32p14_current_extension: PyAnsys/output/phase8-carrier/F2-32p14-coupled-gts-extension-to10000-20260929T043627Z/manifest.json
     speed_32p14_n10000_assessment: PyAnsys/output/phase8-analysis/32p14-f2-coupled-n10000/assessment.json
+    speed_32p14_current_diagnostic_dpm: PyAnsys/output/phase8-dpm/F2-diagnostic-050permil-32p14-20260929T062610Z/build.json
   F3:
     status: N15000_5PCT_ALLOCATED_DPM_UPD100_CARRIER_GATE_FAIL
     verified_child: PyAnsys/output/phase8-dpm/F2-allocated-050permil-26p81-upd100-20260928T144555Z/build.json
@@ -97,4 +99,4 @@ matched_20p11_n10000_comparison: PyAnsys/output/phase8-analysis/20p11-f1-f2-coup
 matched_23p46_n10000_comparison: PyAnsys/output/phase8-analysis/23p46-f1-f2-coupled-n10000/summary.json
 matched_29p48_n10000_comparison: PyAnsys/output/phase8-analysis/29p48-f1-f2-coupled-n10000/summary.json
 matched_32p14_n10000_comparison: PyAnsys/output/phase8-analysis/32p14-f1-f2-coupled-n10000/summary.json
-next_required_action: Inspect the active F1 32.14 m/s diagnostic DPM process before any new Fluent launch. Finish matched F1/F2 fates, then return to F3 pilot recovery.
+next_required_action: Inspect the active F2 32.14 m/s diagnostic DPM process before any new Fluent launch. Finish its fate analysis, then return to F3 pilot recovery.
