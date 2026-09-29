@@ -77,7 +77,7 @@ families:
     speed_32p14_current_diagnostic_dpm: PyAnsys/output/phase8-dpm/F2-diagnostic-050permil-32p14-20260929T062610Z/build.json
     speed_32p14_dpm_fates: PyAnsys/output/phase8-analysis/32p14-f2-diagnostic-dpm/summary.json
   F3:
-    status: 2P5PCT_N15000_CONTINUITY_FAIL_PERFLOW_URF0P1_RECOVERY_RUNNING
+    status: 2P5PCT_N16000_PERFLOW_URF0P1_CONTINUITY_GATE_FAIL
     verified_child: PyAnsys/output/phase8-dpm/F2-allocated-050permil-26p81-upd100-20260928T144555Z/build.json
     pilot_run: PyAnsys/output/phase8-carrier/F3-26p81-5pct-coupled-upd100-20260928T144733Z/manifest.json
     pilot_assessment: PyAnsys/output/phase8-analysis/26p81-f3-5pct-upd100-n11000/assessment.json
@@ -99,7 +99,8 @@ families:
     fraction_2p5_n15000: PyAnsys/output/phase8-carrier/F3-26p81-2p5pct-coupled-upd100-extension-to15000-20260929T132411Z/manifest.json
     fraction_2p5_n15000_assessment: PyAnsys/output/phase8-analysis/26p81-f3-2p5pct-upd100-n15000/assessment.json
     fraction_2p5_blocked_held_source_urf_attempt: PyAnsys/output/phase8-carrier/F3-26p81-2p5pct-coupled-upd100-dpmurf0p1-extension-to16000-20260929T152341Z/manifest.json
-    fraction_2p5_current_perflow_urf_recovery: PyAnsys/output/phase8-carrier/F3-26p81-2p5pct-coupled-upd100-source-every-iteration-dpmurf0p1-extension-to16000-20260929T152528Z/manifest.json
+    fraction_2p5_failed_perflow_urf_recovery: PyAnsys/output/phase8-carrier/F3-26p81-2p5pct-coupled-upd100-source-every-iteration-dpmurf0p1-extension-to16000-20260929T152528Z/manifest.json
+    fraction_2p5_failed_perflow_urf_assessment: PyAnsys/output/phase8-analysis/26p81-f3-2p5pct-upd100-source-every-iter-dpmurf0p1-n16000/assessment.json
     interrupted_upd1_pilot: PyAnsys/output/phase8-carrier/F3-26p81-5pct-coupled-20260928T144022Z/manifest.json
     report_correction: Pilot used Volume Integral for per-cell DPM Mass Source and is excluded from kg/s accounting. N11000 to N15000 continuation uses Volume Sum, readback 0 kg/s.
   F4:
@@ -117,4 +118,4 @@ matched_20p11_n10000_comparison: PyAnsys/output/phase8-analysis/20p11-f1-f2-coup
 matched_23p46_n10000_comparison: PyAnsys/output/phase8-analysis/23p46-f1-f2-coupled-n10000/summary.json
 matched_29p48_n10000_comparison: PyAnsys/output/phase8-analysis/29p48-f1-f2-coupled-n10000/summary.json
 matched_32p14_n10000_comparison: PyAnsys/output/phase8-analysis/32p14-f1-f2-coupled-n10000/summary.json
-next_required_action: Inspect active F3 26.81 m/s 2.5% per-flow-source/DPM-factor-0.1 recovery to N16000 before any new Fluent launch. Assess its saved last-500 window and tracked fates against the N15000 parent, then decide whether this numerical package qualifies the carrier.
+next_required_action: Probe Fluent 2025 R2 DPM source-term linearization availability and readback in the preserved F3 26.81 m/s 2.5% N15000 case. If compatible, run a separately named short numerical recovery; assess the last-500 balance, inventory, residuals and fates before expansion.
