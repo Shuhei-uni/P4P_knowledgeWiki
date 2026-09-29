@@ -13,6 +13,7 @@ sys.path[:0] = [str(ROOT / "src"), str(ROOT / "scripts" / "setup"),
                 str(ROOT / "scripts" / "inspection")]
 
 from ansys.fluent.core import launch_fluent
+from build_09cV2_student_velocity_adaptation import set_leaf_readback
 from pyansys_fluent.dpm_transcript import SessionTranscriptCapture
 from pyansys_fluent.stage4_native import configure_autosave, configure_residual_history
 from build_phase8_dpm_reference import inspect as audit_dpm
@@ -28,6 +29,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("source_manifest", type=Path)
     parser.add_argument("--target-native", type=int, default=15000)
+    parser.add_argument("--source-every-iteration", action="store_true",
+                        help="Enable held DPM source updates each flow iteration while retaining particle retracking interval")
     args = parser.parse_args()
     source = json.loads(args.source_manifest.read_text(encoding="utf-8"))
     require(source["status"] == "COMPLETE" and source["family"] == "F3",
@@ -42,7 +45,8 @@ def main() -> None:
         require(sha256(path) == source["checkpoints"][-1][f"{kind}_sha256"],
                 f"F3 source {kind} hash changed")
     interval = int(source["source_interval"])
-    label = (f"F3-26p81-5pct-coupled-upd{interval}-extension-to{args.target_native}-"
+    source_suffix = "-source-every-iteration" if args.source_every_iteration else ""
+    label = (f"F3-26p81-5pct-coupled-upd{interval}{source_suffix}-extension-to{args.target_native}-"
              f"{datetime.now(timezone.utc):%Y%m%dT%H%M%SZ}")
     local, final = RUN_ROOT / label, FINAL_ROOT / label
     manifest = ROOT / "output" / "phase8-carrier" / label / "manifest.json"
@@ -52,6 +56,8 @@ def main() -> None:
     final.mkdir(parents=True)
     receipt = {"status": "RUNNING", "family": "F3", "variant": "allocated-two-way-dpm",
                "source_interval": interval, "source_manifest": str(args.source_manifest),
+               "numerical_delta": ("DPM held sources updated every flow iteration; particle retracking interval unchanged"
+                                   if args.source_every_iteration else "none"),
                "source_receipt": source["source_receipt"],
                "source_case": str(source_case), "source_data": str(source_data),
                "source_case_sha256": sha256(source_case), "source_data_sha256": sha256(source_data),
@@ -68,9 +74,20 @@ def main() -> None:
         load_pair(solver, Path(str(source_case).removesuffix(".cas.h5")))
         receipt["source_readback"] = audit_dpm(solver, fraction=0.05, allocated=True)
         interaction = receipt["source_readback"]["interaction"]
-        require(interaction["iteration_interval"] == interval and
-                interaction["update_sources_every_iteration"] is (interval == 1),
-                "F3 source cadence mismatch")
+        require(interaction["iteration_interval"] == interval,
+                "F3 particle retracking interval mismatch")
+        before_source_every_iteration = bool(interaction["update_sources_every_iteration"])
+        if args.source_every_iteration:
+            require(interval > 1 and not before_source_every_iteration,
+                    "Source-update recovery requires a prior interval branch with held sources")
+            set_leaf_readback(
+                solver.settings.setup.models.discrete_phase.general_settings.interaction.update_sources_every_iteration,
+                True, "DPM sources updated every flow iteration")
+        receipt["configured_source_readback"] = audit_dpm(solver, fraction=0.05, allocated=True)
+        require(receipt["configured_source_readback"]["interaction"]["iteration_interval"] == interval
+                and receipt["configured_source_readback"]["interaction"]["update_sources_every_iteration"]
+                is (before_source_every_iteration or args.source_every_iteration),
+                "Configured F3 DPM source controls mismatch")
         receipt["autosave_configuration"] = configure_autosave(
             solver, str(local), data_frequency=1000)
         receipt["residual_configuration"] = configure_residual_history(
@@ -106,6 +123,9 @@ def main() -> None:
         receipt["start_pair"] = save_pair(solver, local / f"active{start}")
         load_pair(solver, local / f"active{start}")
         receipt["start_reopen_readback"] = audit_dpm(solver, fraction=0.05, allocated=True)
+        require(receipt["start_reopen_readback"]["interaction"] ==
+                receipt["configured_source_readback"]["interaction"],
+                "F3 DPM interaction settings changed after start-pair reopen")
         check_reports(solver, definitions, paths)
         receipt["initial_report_compute"] = solver.settings.solution.report_definitions.compute(
             report_defs=list(definitions))
@@ -129,6 +149,9 @@ def main() -> None:
             dump(manifest, receipt)
         load_pair(solver, final / "final")
         receipt["final_reopen_readback"] = audit_dpm(solver, fraction=0.05, allocated=True)
+        require(receipt["final_reopen_readback"]["interaction"] ==
+                receipt["configured_source_readback"]["interaction"],
+                "F3 DPM interaction settings changed after final-pair reopen")
         check_reports(solver, definitions, paths)
         try:
             receipt["particle_tracks"] = run_dpm_particle_track_check(
