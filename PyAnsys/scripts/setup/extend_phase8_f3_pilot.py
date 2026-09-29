@@ -36,6 +36,8 @@ def main() -> None:
                         help="Enable held DPM source updates each flow iteration while retaining particle retracking interval")
     parser.add_argument("--dpm-source-urf", type=float,
                         help="Set the Discrete Phase Sources under-relaxation factor")
+    parser.add_argument("--linearize-dpm-sources", action="store_true",
+                        help="Enable DPM source-term linearization as a named numerical recovery")
     args = parser.parse_args()
     require(args.dpm_source_urf is None or 0 < args.dpm_source_urf <= 1,
             "DPM source under-relaxation factor must be within (0, 1]")
@@ -64,9 +66,10 @@ def main() -> None:
                      args.source_every_iteration or prior_interaction.get("update_sources_every_iteration") else "")
     urf_suffix = (f"-dpmurf{str(args.dpm_source_urf).replace('.', 'p')}"
                   if args.dpm_source_urf is not None else "")
+    linear_suffix = "-linearized-sources" if args.linearize_dpm_sources else ""
     speed_label = format(speed, ".15g").replace(".", "p")
     fraction_label = format(100 * fraction, ".15g").replace(".", "p")
-    label = (f"F3-{speed_label}-{fraction_label}pct-coupled-upd{interval}{source_suffix}{urf_suffix}-extension-to{args.target_native}-"
+    label = (f"F3-{speed_label}-{fraction_label}pct-coupled-upd{interval}{source_suffix}{urf_suffix}{linear_suffix}-extension-to{args.target_native}-"
              f"{datetime.now(timezone.utc):%Y%m%dT%H%M%SZ}")
     local, final = RUN_ROOT / label, FINAL_ROOT / label
     manifest = ROOT / "output" / "phase8-carrier" / label / "manifest.json"
@@ -80,6 +83,7 @@ def main() -> None:
                "numerical_delta": {
                    "enable_source_updates_every_flow_iteration": args.source_every_iteration,
                    "set_dpm_source_urf": args.dpm_source_urf,
+                   "linearize_dpm_sources": args.linearize_dpm_sources,
                    "parent_particle_retracking_interval": parent_interval,
                    "particle_retracking_interval": interval,
                },
@@ -138,6 +142,23 @@ def main() -> None:
         require(all(receipt["source_urf_after"][key] == value for key, value in
                     receipt["source_urf_before"].items() if key != keys[0]),
                 "Unrelated F3 under-relaxation factors changed")
+        source_settings = solver.settings.setup.models.discrete_phase.numerics.source_term_settings
+        receipt["source_term_settings_before"] = safe_get_state(
+            source_settings, "F3 DPM source-term settings")
+        if args.linearize_dpm_sources:
+            require(not receipt["source_term_settings_before"]["linearization"]["enabled"],
+                    "F3 parent already has DPM source-term linearization")
+            set_leaf_readback(source_settings.linearization.enabled, True,
+                              "DPM source-term linearization")
+        receipt["source_term_settings_after"] = safe_get_state(
+            source_settings, "configured F3 DPM source-term settings")
+        require(receipt["source_term_settings_after"]["linearization"]["enabled"] is
+                (receipt["source_term_settings_before"]["linearization"]["enabled"]
+                 or args.linearize_dpm_sources),
+                "Configured DPM source-term linearization mismatch")
+        require(all(receipt["source_term_settings_after"][key] == value for key, value in
+                    receipt["source_term_settings_before"].items() if key != "linearization"),
+                "Unrelated DPM source-term settings changed")
         receipt["autosave_configuration"] = configure_autosave(
             solver, str(local), data_frequency=1000)
         receipt["residual_configuration"] = configure_residual_history(
@@ -182,6 +203,12 @@ def main() -> None:
             "reopened F3 pseudo-time explicit relaxation")
         require(receipt["start_reopen_source_urf"] == receipt["source_urf_after"],
                 "F3 source URF changed after start-pair reopen")
+        receipt["start_reopen_source_term_settings"] = safe_get_state(
+            solver.settings.setup.models.discrete_phase.numerics.source_term_settings,
+            "reopened F3 DPM source-term settings")
+        require(receipt["start_reopen_source_term_settings"] ==
+                receipt["source_term_settings_after"],
+                "F3 DPM source-term settings changed after start-pair reopen")
         check_reports(solver, definitions, paths)
         receipt["initial_report_compute"] = solver.settings.solution.report_definitions.compute(
             report_defs=list(definitions))
@@ -214,6 +241,12 @@ def main() -> None:
             "final F3 pseudo-time explicit relaxation")
         require(receipt["final_reopen_source_urf"] == receipt["source_urf_after"],
                 "F3 source URF changed after final-pair reopen")
+        receipt["final_reopen_source_term_settings"] = safe_get_state(
+            solver.settings.setup.models.discrete_phase.numerics.source_term_settings,
+            "reopened final F3 DPM source-term settings")
+        require(receipt["final_reopen_source_term_settings"] ==
+                receipt["source_term_settings_after"],
+                "F3 DPM source-term settings changed after final-pair reopen")
         check_reports(solver, definitions, paths)
         try:
             receipt["particle_tracks"] = run_dpm_particle_track_check(
