@@ -14,6 +14,7 @@ sys.path[:0] = [str(ROOT / "src"), str(ROOT / "scripts" / "setup"),
 
 from ansys.fluent.core import launch_fluent
 from build_09cV2_student_velocity_adaptation import set_leaf_readback
+from pyansys_fluent.common import safe_get_state
 from pyansys_fluent.dpm_transcript import SessionTranscriptCapture
 from pyansys_fluent.stage4_native import configure_autosave, configure_residual_history
 from build_phase8_dpm_reference import inspect as audit_dpm
@@ -31,7 +32,11 @@ def main() -> None:
     parser.add_argument("--target-native", type=int, default=15000)
     parser.add_argument("--source-every-iteration", action="store_true",
                         help="Enable held DPM source updates each flow iteration while retaining particle retracking interval")
+    parser.add_argument("--dpm-source-urf", type=float,
+                        help="Set the Discrete Phase Sources under-relaxation factor")
     args = parser.parse_args()
+    require(args.dpm_source_urf is None or 0 < args.dpm_source_urf <= 1,
+            "DPM source under-relaxation factor must be within (0, 1]")
     source = json.loads(args.source_manifest.read_text(encoding="utf-8"))
     require(source["status"] == "COMPLETE" and source["family"] == "F3",
             "F3 source must be complete")
@@ -45,8 +50,12 @@ def main() -> None:
         require(sha256(path) == source["checkpoints"][-1][f"{kind}_sha256"],
                 f"F3 source {kind} hash changed")
     interval = int(source["source_interval"])
-    source_suffix = "-source-every-iteration" if args.source_every_iteration else ""
-    label = (f"F3-26p81-5pct-coupled-upd{interval}{source_suffix}-extension-to{args.target_native}-"
+    prior_interaction = source.get("final_reopen_readback", source.get("source_readback", {})).get("interaction", {})
+    source_suffix = ("-source-every-iteration" if
+                     args.source_every_iteration or prior_interaction.get("update_sources_every_iteration") else "")
+    urf_suffix = (f"-dpmurf{str(args.dpm_source_urf).replace('.', 'p')}"
+                  if args.dpm_source_urf is not None else "")
+    label = (f"F3-26p81-5pct-coupled-upd{interval}{source_suffix}{urf_suffix}-extension-to{args.target_native}-"
              f"{datetime.now(timezone.utc):%Y%m%dT%H%M%SZ}")
     local, final = RUN_ROOT / label, FINAL_ROOT / label
     manifest = ROOT / "output" / "phase8-carrier" / label / "manifest.json"
@@ -56,8 +65,11 @@ def main() -> None:
     final.mkdir(parents=True)
     receipt = {"status": "RUNNING", "family": "F3", "variant": "allocated-two-way-dpm",
                "source_interval": interval, "source_manifest": str(args.source_manifest),
-               "numerical_delta": ("DPM held sources updated every flow iteration; particle retracking interval unchanged"
-                                   if args.source_every_iteration else "none"),
+               "numerical_delta": {
+                   "enable_source_updates_every_flow_iteration": args.source_every_iteration,
+                   "set_dpm_source_urf": args.dpm_source_urf,
+                   "particle_retracking_interval": interval,
+               },
                "source_receipt": source["source_receipt"],
                "source_case": str(source_case), "source_data": str(source_data),
                "source_case_sha256": sha256(source_case), "source_data_sha256": sha256(source_data),
@@ -88,6 +100,25 @@ def main() -> None:
                 and receipt["configured_source_readback"]["interaction"]["update_sources_every_iteration"]
                 is (before_source_every_iteration or args.source_every_iteration),
                 "Configured F3 DPM source controls mismatch")
+        relaxation = (solver.settings.solution.controls.pseudo_time_explicit_relaxation_factor
+                      .global_dt_pseudo_relax)
+        receipt["source_urf_before"] = safe_get_state(relaxation, "F3 pseudo-time explicit relaxation")
+        keys = [key for key in receipt["source_urf_before"]
+                if "dpm" in key.lower() or "discrete" in key.lower()]
+        require(len(keys) == 1, f"Expected one DPM source URF control, got {keys}")
+        receipt["source_urf_key"] = keys[0]
+        if args.dpm_source_urf is not None:
+            require(receipt["configured_source_readback"]["interaction"]["update_sources_every_iteration"],
+                    "Lower DPM source URF requires per-flow-iteration source updates to apply the full source")
+            relaxation.set_state({keys[0]: args.dpm_source_urf})
+        receipt["source_urf_after"] = safe_get_state(relaxation, "configured F3 pseudo-time explicit relaxation")
+        expected_urf = (args.dpm_source_urf if args.dpm_source_urf is not None
+                        else float(receipt["source_urf_before"][keys[0]]))
+        require(abs(float(receipt["source_urf_after"][keys[0]]) - expected_urf) < 1e-9,
+                "Configured F3 DPM source URF mismatch")
+        require(all(receipt["source_urf_after"][key] == value for key, value in
+                    receipt["source_urf_before"].items() if key != keys[0]),
+                "Unrelated F3 under-relaxation factors changed")
         receipt["autosave_configuration"] = configure_autosave(
             solver, str(local), data_frequency=1000)
         receipt["residual_configuration"] = configure_residual_history(
@@ -126,6 +157,11 @@ def main() -> None:
         require(receipt["start_reopen_readback"]["interaction"] ==
                 receipt["configured_source_readback"]["interaction"],
                 "F3 DPM interaction settings changed after start-pair reopen")
+        receipt["start_reopen_source_urf"] = safe_get_state(
+            solver.settings.solution.controls.pseudo_time_explicit_relaxation_factor.global_dt_pseudo_relax,
+            "reopened F3 pseudo-time explicit relaxation")
+        require(receipt["start_reopen_source_urf"] == receipt["source_urf_after"],
+                "F3 source URF changed after start-pair reopen")
         check_reports(solver, definitions, paths)
         receipt["initial_report_compute"] = solver.settings.solution.report_definitions.compute(
             report_defs=list(definitions))
@@ -152,6 +188,11 @@ def main() -> None:
         require(receipt["final_reopen_readback"]["interaction"] ==
                 receipt["configured_source_readback"]["interaction"],
                 "F3 DPM interaction settings changed after final-pair reopen")
+        receipt["final_reopen_source_urf"] = safe_get_state(
+            solver.settings.solution.controls.pseudo_time_explicit_relaxation_factor.global_dt_pseudo_relax,
+            "final F3 pseudo-time explicit relaxation")
+        require(receipt["final_reopen_source_urf"] == receipt["source_urf_after"],
+                "F3 source URF changed after final-pair reopen")
         check_reports(solver, definitions, paths)
         try:
             receipt["particle_tracks"] = run_dpm_particle_track_check(
