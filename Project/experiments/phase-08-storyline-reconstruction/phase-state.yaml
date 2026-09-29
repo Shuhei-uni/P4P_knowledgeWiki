@@ -87,7 +87,9 @@ families:
     failed_source_update_recovery: PyAnsys/output/phase8-carrier/F3-26p81-5pct-coupled-upd100-source-every-iteration-extension-to21000-20260929T083005Z/manifest.json
     failed_source_update_assessment: PyAnsys/output/phase8-analysis/26p81-f3-5pct-upd100-source-every-iter-n21000/assessment.json
     blocked_urf_control_attempt: PyAnsys/output/phase8-carrier/F3-26p81-5pct-coupled-upd100-source-every-iteration-dpmurf0p05-extension-to21000-20260929T085720Z/manifest.json
-    current_source_urf_recovery: PyAnsys/output/phase8-carrier/F3-26p81-5pct-coupled-upd100-source-every-iteration-dpmurf0p05-extension-to21000-20260929T090014Z/manifest.json
+    failed_source_urf_recovery: PyAnsys/output/phase8-carrier/F3-26p81-5pct-coupled-upd100-source-every-iteration-dpmurf0p05-extension-to21000-20260929T090014Z/manifest.json
+    failed_source_urf_assessment: PyAnsys/output/phase8-analysis/26p81-f3-5pct-upd100-source-every-iter-dpmurf0p05-n21000/assessment.json
+    current_retrack20_recovery: PyAnsys/output/phase8-carrier/F3-26p81-5pct-coupled-upd20-source-every-iteration-extension-to21000-20260929T092747Z/manifest.json
     interrupted_upd1_pilot: PyAnsys/output/phase8-carrier/F3-26p81-5pct-coupled-20260928T144022Z/manifest.json
     report_correction: Pilot used Volume Integral for per-cell DPM Mass Source and is excluded from kg/s accounting. N11000 to N15000 continuation uses Volume Sum, readback 0 kg/s.
   F4:
@@ -105,4 +107,4 @@ matched_20p11_n10000_comparison: PyAnsys/output/phase8-analysis/20p11-f1-f2-coup
 matched_23p46_n10000_comparison: PyAnsys/output/phase8-analysis/23p46-f1-f2-coupled-n10000/summary.json
 matched_29p48_n10000_comparison: PyAnsys/output/phase8-analysis/29p48-f1-f2-coupled-n10000/summary.json
 matched_32p14_n10000_comparison: PyAnsys/output/phase8-analysis/32p14-f1-f2-coupled-n10000/summary.json
-next_required_action: Inspect active F3 N20000-to-N21000 source-URF-0.05 recovery manifest and terminal before any new Fluent launch. Assess the final 500 iterations, preserving its endpoint before any further recovery or F3 matrix expansion.
+next_required_action: Inspect active F3 N20000-to-N21000 retrack-20 recovery manifest and terminal before any new Fluent launch. Assess the final 500 iterations, preserving its endpoint before any further recovery or F3 matrix expansion.

@@ -30,6 +30,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("source_manifest", type=Path)
     parser.add_argument("--target-native", type=int, default=15000)
+    parser.add_argument("--particle-retrack-interval", type=int,
+                        help="Change the DPM particle retracking interval for a named numerical recovery")
     parser.add_argument("--source-every-iteration", action="store_true",
                         help="Enable held DPM source updates each flow iteration while retaining particle retracking interval")
     parser.add_argument("--dpm-source-urf", type=float,
@@ -49,7 +51,10 @@ def main() -> None:
     for kind, path in (("case", source_case), ("data", source_data)):
         require(sha256(path) == source["checkpoints"][-1][f"{kind}_sha256"],
                 f"F3 source {kind} hash changed")
-    interval = int(source["source_interval"])
+    parent_interval = int(source["source_interval"])
+    interval = (args.particle_retrack_interval if args.particle_retrack_interval is not None
+                else parent_interval)
+    require(1 <= interval <= 100, "DPM particle retracking interval must be within 1..100")
     prior_interaction = source.get("final_reopen_readback", source.get("source_readback", {})).get("interaction", {})
     source_suffix = ("-source-every-iteration" if
                      args.source_every_iteration or prior_interaction.get("update_sources_every_iteration") else "")
@@ -68,6 +73,7 @@ def main() -> None:
                "numerical_delta": {
                    "enable_source_updates_every_flow_iteration": args.source_every_iteration,
                    "set_dpm_source_urf": args.dpm_source_urf,
+                   "parent_particle_retracking_interval": parent_interval,
                    "particle_retracking_interval": interval,
                },
                "source_receipt": source["source_receipt"],
@@ -86,9 +92,13 @@ def main() -> None:
         load_pair(solver, Path(str(source_case).removesuffix(".cas.h5")))
         receipt["source_readback"] = audit_dpm(solver, fraction=0.05, allocated=True)
         interaction = receipt["source_readback"]["interaction"]
-        require(interaction["iteration_interval"] == interval,
-                "F3 particle retracking interval mismatch")
+        require(interaction["iteration_interval"] == parent_interval,
+                "F3 parent particle retracking interval mismatch")
         before_source_every_iteration = bool(interaction["update_sources_every_iteration"])
+        if interval != parent_interval:
+            set_leaf_readback(
+                solver.settings.setup.models.discrete_phase.general_settings.interaction.iteration_interval,
+                interval, "DPM particle retracking interval")
         if args.source_every_iteration:
             require(interval > 1 and not before_source_every_iteration,
                     "Source-update recovery requires a prior interval branch with held sources")
