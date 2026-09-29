@@ -102,15 +102,19 @@ def main() -> None:
     source = json.loads(args.child_receipt.read_text(encoding="utf-8"))
     require(source["status"] == "CASE_DATA_VERIFIED" and source["mode"] == "allocated",
             "F3 source must be a verified allocated DPM child")
-    require(source["family"] == "F2" and source["fraction"] == 0.05,
-            "First F3 pilot requires the split 26.81 m/s 5% child")
+    require(source["family"] == "F2" and 0 < float(source["fraction"]) < 1,
+            "F3 pilot requires a verified split-inlet allocated child")
+    fraction = float(source["fraction"])
+    speed = float(source["speed_m_s"])
     source_interval = int(source.get("source_interval", 1))
     source_base = Path(source["child_base"])
     for kind in ("case", "data"):
         source_file = Path(source["child_pair"][kind])
         require(source_file.is_file() and sha256(source_file) == source["child_pair"][f"{kind}_sha256"],
                 f"F3 source {kind} identity changed")
-    label = (f"F3-26p81-5pct-coupled-upd{source_interval}-"
+    speed_label = str(speed).replace(".", "p")
+    fraction_label = format(100 * fraction, ".15g").replace(".", "p")
+    label = (f"F3-{speed_label}-{fraction_label}pct-coupled-upd{source_interval}-"
              f"{datetime.now(timezone.utc):%Y%m%dT%H%M%SZ}")
     local, final = RUN_ROOT / label, FINAL_ROOT / label
     manifest = ROOT / "output" / "phase8-carrier" / label / "manifest.json"
@@ -118,7 +122,7 @@ def main() -> None:
     local.mkdir(parents=True)
     final.mkdir(parents=True)
     receipt = {"status": "RUNNING", "family": "F3", "variant": "allocated-two-way-dpm",
-               "speed_m_s": 26.81, "fraction": 0.05, "source_receipt": str(args.child_receipt),
+               "speed_m_s": speed, "fraction": fraction, "source_receipt": str(args.child_receipt),
                "source_interval": source_interval,
                "source_case_sha256": source["child_pair"]["case_sha256"],
                "source_data_sha256": source["child_pair"]["data_sha256"],
@@ -132,7 +136,8 @@ def main() -> None:
     capture = None
     try:
         load_pair(solver, source_base)
-        receipt["source_readback"] = audit_dpm(solver, fraction=0.05, allocated=True)
+        receipt["source_readback"] = audit_dpm(solver, fraction=fraction, allocated=True,
+                                                speed=speed)
         receipt["autosave_configuration"] = configure_autosave(solver, str(local), data_frequency=1000)
         receipt["removed_inherited_report_definitions"] = reset_phase8_reports(solver)
         definitions, report_paths = configure_reports(solver, local / "monitors")
@@ -148,7 +153,8 @@ def main() -> None:
         capture = SessionTranscriptCapture(solver, stream_path=local / "transcript.txt").start()
         receipt["start_pair"] = save_pair(solver, local / "active000")
         load_pair(solver, local / "active000")
-        receipt["start_reopen_readback"] = audit_dpm(solver, fraction=0.05, allocated=True)
+        receipt["start_reopen_readback"] = audit_dpm(solver, fraction=fraction, allocated=True,
+                                                      speed=speed)
         check_reports(solver, definitions, report_paths)
         receipt["initial_report_compute"] = solver.settings.solution.report_definitions.compute(
             report_defs=list(definitions))
@@ -177,7 +183,8 @@ def main() -> None:
             receipt["last_valid_additional_iterations"] = block * 1000
             dump(manifest, receipt)
         load_pair(solver, final / "final")
-        receipt["final_reopen_readback"] = audit_dpm(solver, fraction=0.05, allocated=True)
+        receipt["final_reopen_readback"] = audit_dpm(solver, fraction=fraction, allocated=True,
+                                                      speed=speed)
         check_reports(solver, definitions, report_paths)
         receipt["achieved_additional_iterations"] = args.iterations
         try:

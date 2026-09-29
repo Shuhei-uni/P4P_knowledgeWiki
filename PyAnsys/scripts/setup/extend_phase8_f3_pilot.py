@@ -42,6 +42,10 @@ def main() -> None:
     source = json.loads(args.source_manifest.read_text(encoding="utf-8"))
     require(source["status"] == "COMPLETE" and source["family"] == "F3",
             "F3 source must be complete")
+    build = json.loads(Path(source["source_receipt"]).read_text(encoding="utf-8"))
+    fraction = float(build["fraction"])
+    speed = float(build["speed_m_s"])
+    require(0 < fraction < 1 and speed > 0, "Invalid F3 parent fraction or speed")
     start = int(source["checkpoints"][-1]["native_iteration"])
     require(args.target_native > start and (args.target_native - start) % 1000 == 0,
             "Extend by whole 1000-iteration blocks")
@@ -60,7 +64,9 @@ def main() -> None:
                      args.source_every_iteration or prior_interaction.get("update_sources_every_iteration") else "")
     urf_suffix = (f"-dpmurf{str(args.dpm_source_urf).replace('.', 'p')}"
                   if args.dpm_source_urf is not None else "")
-    label = (f"F3-26p81-5pct-coupled-upd{interval}{source_suffix}{urf_suffix}-extension-to{args.target_native}-"
+    speed_label = format(speed, ".15g").replace(".", "p")
+    fraction_label = format(100 * fraction, ".15g").replace(".", "p")
+    label = (f"F3-{speed_label}-{fraction_label}pct-coupled-upd{interval}{source_suffix}{urf_suffix}-extension-to{args.target_native}-"
              f"{datetime.now(timezone.utc):%Y%m%dT%H%M%SZ}")
     local, final = RUN_ROOT / label, FINAL_ROOT / label
     manifest = ROOT / "output" / "phase8-carrier" / label / "manifest.json"
@@ -69,6 +75,7 @@ def main() -> None:
     local.mkdir(parents=True)
     final.mkdir(parents=True)
     receipt = {"status": "RUNNING", "family": "F3", "variant": "allocated-two-way-dpm",
+               "fraction": fraction, "speed_m_s": speed,
                "source_interval": interval, "source_manifest": str(args.source_manifest),
                "numerical_delta": {
                    "enable_source_updates_every_flow_iteration": args.source_every_iteration,
@@ -90,7 +97,8 @@ def main() -> None:
     capture = None
     try:
         load_pair(solver, Path(str(source_case).removesuffix(".cas.h5")))
-        receipt["source_readback"] = audit_dpm(solver, fraction=0.05, allocated=True)
+        receipt["source_readback"] = audit_dpm(solver, fraction=fraction, allocated=True,
+                                                speed=speed)
         interaction = receipt["source_readback"]["interaction"]
         require(interaction["iteration_interval"] == parent_interval,
                 "F3 parent particle retracking interval mismatch")
@@ -105,7 +113,8 @@ def main() -> None:
             set_leaf_readback(
                 solver.settings.setup.models.discrete_phase.general_settings.interaction.update_sources_every_iteration,
                 True, "DPM sources updated every flow iteration")
-        receipt["configured_source_readback"] = audit_dpm(solver, fraction=0.05, allocated=True)
+        receipt["configured_source_readback"] = audit_dpm(solver, fraction=fraction,
+                                                            allocated=True, speed=speed)
         require(receipt["configured_source_readback"]["interaction"]["iteration_interval"] == interval
                 and receipt["configured_source_readback"]["interaction"]["update_sources_every_iteration"]
                 is (before_source_every_iteration or args.source_every_iteration),
@@ -163,7 +172,8 @@ def main() -> None:
         capture = SessionTranscriptCapture(solver, stream_path=local / "transcript.txt").start()
         receipt["start_pair"] = save_pair(solver, local / f"active{start}")
         load_pair(solver, local / f"active{start}")
-        receipt["start_reopen_readback"] = audit_dpm(solver, fraction=0.05, allocated=True)
+        receipt["start_reopen_readback"] = audit_dpm(solver, fraction=fraction,
+                                                      allocated=True, speed=speed)
         require(receipt["start_reopen_readback"]["interaction"] ==
                 receipt["configured_source_readback"]["interaction"],
                 "F3 DPM interaction settings changed after start-pair reopen")
@@ -194,7 +204,8 @@ def main() -> None:
             receipt["last_valid_native_iteration"] = endpoint
             dump(manifest, receipt)
         load_pair(solver, final / "final")
-        receipt["final_reopen_readback"] = audit_dpm(solver, fraction=0.05, allocated=True)
+        receipt["final_reopen_readback"] = audit_dpm(solver, fraction=fraction,
+                                                      allocated=True, speed=speed)
         require(receipt["final_reopen_readback"]["interaction"] ==
                 receipt["configured_source_readback"]["interaction"],
                 "F3 DPM interaction settings changed after final-pair reopen")
