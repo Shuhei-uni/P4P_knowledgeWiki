@@ -26,11 +26,14 @@ from run_phase8_parity_carrier import (
 )
 
 
-def normalized_source_settings(state: dict, *, node_averaging: bool) -> dict:
+def normalized_source_settings(state: dict, *, node_averaging: bool,
+                               ignore_urf: bool = False) -> dict:
     """Fluent hides the inactive linearization leaf when node averaging is on."""
     normalized = dict(state)
     if node_averaging and "linearization" not in normalized:
         normalized["linearization"] = {"enabled": False}
+    if ignore_urf:
+        normalized.pop("underrelaxation_factor", None)
     return normalized
 
 
@@ -43,7 +46,7 @@ def main() -> None:
     parser.add_argument("--source-every-iteration", action="store_true",
                         help="Enable held DPM source updates each flow iteration while retaining particle retracking interval")
     parser.add_argument("--dpm-source-urf", type=float,
-                        help="Set the Discrete Phase Sources under-relaxation factor")
+                        help="Set the DPM source under-relaxation factor")
     parser.add_argument("--linearize-dpm-sources", action="store_true",
                         help="Enable DPM source-term linearization as a named numerical recovery")
     parser.add_argument("--average-dpm-sources", action="store_true",
@@ -178,8 +181,11 @@ def main() -> None:
         require(linear_after is (linear_before or args.linearize_dpm_sources),
                 "Configured DPM source-term linearization mismatch")
         require(all(receipt["source_term_settings_after"][key] == value for key, value in
-                    receipt["source_term_settings_before"].items() if key != "linearization"),
+                    receipt["source_term_settings_before"].items()
+                    if key != "linearization" and
+                    (args.dpm_source_urf is None or key != "underrelaxation_factor")),
                 "Unrelated DPM source-term settings changed")
+        receipt["source_model_urf_alias_expected"] = float(receipt["source_urf_after"][keys[0]])
         averaging = solver.settings.setup.models.discrete_phase.numerics.node_based_averaging
         receipt["node_averaging_before"] = safe_get_state(
             averaging, "F3 DPM node averaging")
@@ -244,12 +250,17 @@ def main() -> None:
         receipt["start_reopen_source_term_settings"] = safe_get_state(
             solver.settings.setup.models.discrete_phase.numerics.source_term_settings,
             "reopened F3 DPM source-term settings")
+        require(abs(receipt["start_reopen_source_term_settings"]["underrelaxation_factor"] -
+                    receipt["source_model_urf_alias_expected"]) < 1e-9,
+                "F3 DPM model source URF alias mismatch after start-pair reopen")
         require(normalized_source_settings(
                     receipt["start_reopen_source_term_settings"],
-                    node_averaging=receipt["node_averaging_after"]["enabled"]) ==
+                    node_averaging=receipt["node_averaging_after"]["enabled"],
+                    ignore_urf=args.dpm_source_urf is not None) ==
                 normalized_source_settings(
                     receipt["source_term_settings_after"],
-                    node_averaging=receipt["node_averaging_after"]["enabled"]),
+                    node_averaging=receipt["node_averaging_after"]["enabled"],
+                    ignore_urf=args.dpm_source_urf is not None),
                 "F3 DPM source-term settings changed after start-pair reopen")
         receipt["start_reopen_node_averaging"] = safe_get_state(
             solver.settings.setup.models.discrete_phase.numerics.node_based_averaging,
@@ -291,12 +302,17 @@ def main() -> None:
         receipt["final_reopen_source_term_settings"] = safe_get_state(
             solver.settings.setup.models.discrete_phase.numerics.source_term_settings,
             "reopened final F3 DPM source-term settings")
+        require(abs(receipt["final_reopen_source_term_settings"]["underrelaxation_factor"] -
+                    receipt["source_model_urf_alias_expected"]) < 1e-9,
+                "F3 DPM model source URF alias mismatch after final-pair reopen")
         require(normalized_source_settings(
                     receipt["final_reopen_source_term_settings"],
-                    node_averaging=receipt["node_averaging_after"]["enabled"]) ==
+                    node_averaging=receipt["node_averaging_after"]["enabled"],
+                    ignore_urf=args.dpm_source_urf is not None) ==
                 normalized_source_settings(
                     receipt["source_term_settings_after"],
-                    node_averaging=receipt["node_averaging_after"]["enabled"]),
+                    node_averaging=receipt["node_averaging_after"]["enabled"],
+                    ignore_urf=args.dpm_source_urf is not None),
                 "F3 DPM source-term settings changed after final-pair reopen")
         receipt["final_reopen_node_averaging"] = safe_get_state(
             solver.settings.setup.models.discrete_phase.numerics.node_based_averaging,

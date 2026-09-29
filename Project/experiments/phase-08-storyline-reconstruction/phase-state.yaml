@@ -77,7 +77,7 @@ families:
     speed_32p14_current_diagnostic_dpm: PyAnsys/output/phase8-dpm/F2-diagnostic-050permil-32p14-20260929T062610Z/build.json
     speed_32p14_dpm_fates: PyAnsys/output/phase8-analysis/32p14-f2-diagnostic-dpm/summary.json
   F3:
-    status: 2P5PCT_N16000_AVERAGED_SOURCE_NEAR_GATE_EXTENSION_TO20000_RUNNING
+    status: 2P5PCT_N20000_AVERAGED_SOURCE_CONTINUITY_FAIL_PERFLOW_URF0P2_RECOVERY_RUNNING
     verified_child: PyAnsys/output/phase8-dpm/F2-allocated-050permil-26p81-upd100-20260928T144555Z/build.json
     pilot_run: PyAnsys/output/phase8-carrier/F3-26p81-5pct-coupled-upd100-20260928T144733Z/manifest.json
     pilot_assessment: PyAnsys/output/phase8-analysis/26p81-f3-5pct-upd100-n11000/assessment.json
@@ -108,7 +108,10 @@ families:
     fraction_2p5_averaged_source_n16000: PyAnsys/output/phase8-carrier/F3-26p81-2p5pct-coupled-upd100-averaged-sources-extension-to16000-20260929T172954Z/manifest.json
     fraction_2p5_averaged_source_n16000_assessment: PyAnsys/output/phase8-analysis/26p81-f3-2p5pct-upd100-averaged-sources-n16000/assessment.json
     fraction_2p5_blocked_averaged_source_continuation_attempt: PyAnsys/output/phase8-carrier/F3-26p81-2p5pct-coupled-upd100-extension-to20000-20260929T182601Z/manifest.json
-    fraction_2p5_current_averaged_source_extension: PyAnsys/output/phase8-carrier/F3-26p81-2p5pct-coupled-upd100-averaged-sources-extension-to20000-20260929T182724Z/manifest.json
+    fraction_2p5_averaged_source_n20000: PyAnsys/output/phase8-carrier/F3-26p81-2p5pct-coupled-upd100-averaged-sources-extension-to20000-20260929T182724Z/manifest.json
+    fraction_2p5_averaged_source_n20000_assessment: PyAnsys/output/phase8-analysis/26p81-f3-2p5pct-upd100-averaged-sources-n20000/assessment.json
+    fraction_2p5_blocked_duplicate_urf_control_attempt: PyAnsys/output/phase8-carrier/F3-26p81-2p5pct-coupled-upd100-source-every-iteration-modelurf0p2-averaged-sources-extension-to21000-20260929T203006Z/manifest.json
+    fraction_2p5_current_averaged_perflow_urf0p2_recovery: PyAnsys/output/phase8-carrier/F3-26p81-2p5pct-coupled-upd100-source-every-iteration-dpmurf0p2-averaged-sources-extension-to21000-20260929T203359Z/manifest.json
     interrupted_upd1_pilot: PyAnsys/output/phase8-carrier/F3-26p81-5pct-coupled-20260928T144022Z/manifest.json
     report_correction: Pilot used Volume Integral for per-cell DPM Mass Source and is excluded from kg/s accounting. N11000 to N15000 continuation uses Volume Sum, readback 0 kg/s.
   F4:
@@ -126,4 +129,4 @@ matched_20p11_n10000_comparison: PyAnsys/output/phase8-analysis/20p11-f1-f2-coup
 matched_23p46_n10000_comparison: PyAnsys/output/phase8-analysis/23p46-f1-f2-coupled-n10000/summary.json
 matched_29p48_n10000_comparison: PyAnsys/output/phase8-analysis/29p48-f1-f2-coupled-n10000/summary.json
 matched_32p14_n10000_comparison: PyAnsys/output/phase8-analysis/32p14-f1-f2-coupled-n10000/summary.json
-next_required_action: Inspect active F3 26.81 m/s 2.5% node-averaged-source extension to N20000 before any new Fluent launch. Assess the saved last-500 balance, inventory, residuals and fates; the N16000 screen missed continuity only narrowly.
+next_required_action: Inspect active F3 26.81 m/s 2.5% averaged-source/per-flow-update/URF-0.2 recovery to N21000 before any new Fluent launch. Assess saved last-500 balance, inventory, residuals and fates against averaged-source N20000; the two Fluent URF readback paths have been verified as one saved control.
