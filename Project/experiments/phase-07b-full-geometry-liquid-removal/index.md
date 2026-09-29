@@ -1,6 +1,6 @@
 # Phase 7b — Full-Geometry Steady Liquid Removal
 
-Current frontier: **G1–G6 complete; E7 recovered continuation active, no qualified case.** Andy accepted the bounded finish on28 September. See [current contract](CONTEXT.md), [E7 results](convergence-investigation/coupled-nphase-weaker-sink/results.md) and [machine state](phase-state.yaml) for the sole controller and fresh evidence. No new phase is selected.
+Current frontier: **CLOSED by Andy on29 September2026; no qualified case.** G1–G7 are complete. E8 was stopped by explicit user instruction at nativeN128 before the first conditioning gate; it is partial and does not establish startup failure. See [phase closure](closure.md) for the supported conclusion, evidence and limits. No further Phase7b solve or qualification is authorized; both supervision automations are paused. No new physical phase is selected.
 
 ## Status
 
@@ -90,9 +90,6 @@ validation remain outside this phase's initial claim.
 
 ## Next selected work
 
-G5 is complete. The [E5 comparison](convergence-investigation/coupled-cfl20/results.md)
-and focused documentation lookup select [E6 N-phase equations](convergence-investigation/coupled-nphase/setup.md).
-The [autonomous investigation](convergence-investigation/plan.md) remains active;
-[phase-state](phase-state.yaml) identifies the current build/run and next action.
+None in Phase7b. The [closure record](closure.md) supersedes historical experiment-selection statements below the status banner. Any new scientific phase requires separate framing and selection.
 
 [Supervisor meeting PDF and figure bundle](meeting-report.md) provide a minimal-text presentation of the G1 evidence.

@@ -68,7 +68,7 @@ def validate_inputs(parent_manifest, preservation_receipt, recovered):
         if reasons: required[row['iteration']] = reasons
     assert len({snap['iteration'] for snap in dm['snapshots']}) == len(dm['snapshots'])
     extras = old.get('verified_recovery_snapshot_iterations', [])
-    assert set(extras) <= {505, 687, 1631, 2185} and (not extras or old['experiment_id']=='E7')
+    assert set(extras) <= {505, 687, 1631, 2185, 2505, 3227} and (not extras or old['experiment_id']=='E7')
     for iteration in extras:
         assert iteration <= START
         required[iteration] = ['recovery_semantics_validation']
@@ -133,6 +133,21 @@ def residual_audit(path, expected, end):
     return audit
 
 
+def resolved_native_report_path(state, requested):
+    """Accept only the requested report or its live-reported iteration suffix."""
+    base=PureWindowsPath(requested)
+    actual=PureWindowsPath(state['file_name'])
+    if not actual.is_absolute():
+        assert actual.parent==PureWindowsPath('reports'), actual
+        actual=base.parent/actual.name
+    assert actual.parent==base.parent, (actual,base)
+    index=str(state.get('itr_index',''))
+    allowed={base.name}
+    if index.isdigit(): allowed.add(base.stem+'_'+index+base.suffix)
+    assert actual.name in allowed, (actual,allowed)
+    return actual.as_posix()
+
+
 def read_scalar_snapshot(s, manifest, out, end):
     """Join an immutable checkpoint prefix to Fluent's distinct native segment.
 
@@ -141,6 +156,10 @@ def read_scalar_snapshot(s, manifest, out, end):
     continuity before constructing the combined analysis history. A repeated
     checkpoint row is allowed only if every scalar exactly matches the prefix.
     """
+    if manifest.get('native_report_segment_base'):
+        state=s.settings.solution.monitor.report_files['p7b-screen-history'].get_state()
+        manifest['report']=resolved_native_report_path(state,manifest['native_report_segment_base'])
+        manifest.setdefault('native_report_path_readbacks',[]).append({'iteration':end,'path':manifest['report'],'itr_index':state.get('itr_index')})
     remote = read_text(s, manifest['report'])
     raw = out/f'native-history-segment-{end:05d}.out'
     assert not raw.exists(); raw.write_text(remote)
@@ -170,12 +189,12 @@ def main():
     ap.add_argument('--preservation-receipt', type=Path, required=True)
     ap.add_argument('--recovered-diagnostic-directory', type=Path, required=True)
     ap.add_argument('--run-id', required=True)
-    ap.add_argument('--start-iteration', type=int, choices=[50, 500, 505, 687, 1631, 2185], default=50,
+    ap.add_argument('--start-iteration', type=int, choices=[50, 500, 505, 687, 1631, 2185, 2500, 3227], default=50,
                     help='Exact verified live checkpoint; never a counter offset')
     ap.add_argument('--validate-only', action='store_true', help='Validate local receipts and evidence without connecting')
     a = ap.parse_args()
     START = a.start_iteration
-    TARGETS = ([] if START in {505, 687, 1631, 2185} else [START + 5]) + list(range((START // 500 + 1) * 500, HORIZON + 1, 500))
+    TARGETS = ([] if START in {505, 687, 1631, 2185, 3227} else [START + 5]) + list(range((START // 500 + 1) * 500, HORIZON + 1, 500))
     assert re.fullmatch(r'p7b-[a-z0-9-]+-[0-9]{8}T[0-9]{6}Z', a.run_id)
     old, receipt, dm, speed, flux = validate_inputs(a.parent_manifest, a.preservation_receipt, a.recovered_diagnostic_directory)
     assert a.run_id != old['run_id']
@@ -258,6 +277,21 @@ def main():
             return {'live_iteration':START,'iterating':False,'exact_endpoint_fields':True,'settings_match':True,
                     'scalar':scalar,'residual':residual,'native_flux_prefix_readback':True,'iterations_issued':0}
         r['recovery_verification']=step('verify_live_state_and_prefix',verify,240)
+        if old.get('start_new_native_report_segment'):
+            assert old['experiment_id']=='E7' and START==2500
+            prefix=parent/f'history-{START:05d}.out'
+            assert scalar_audit(prefix,START)['source_lag_max_abs_error_kg_s']<=1e-9
+            destination=ROOT+'/reports/'+a.run_id+'-scalar.out'
+            assert not remote_file_exists(s,destination)
+            report_file=s.settings.solution.monitor.report_files['p7b-screen-history']
+            report_file.file_name=destination
+            actual=resolved_native_report_path(report_file.get_state(),destination)
+            assert not remote_file_exists(s,actual)
+            r['native_scalar_prefix']={**fingerprint(prefix),'end_iteration':START}
+            r['report']=actual
+            r['native_report_segment_base']=destination
+            r['native_report_segment_policy']='Fresh absent destination after exact prefix verification; preserve immutable prefix and raw native segment separately'
+            persist()
         r['remote_flux_readbacks'].append({'iteration':START,'path':flux[-1]['remote_path'],'matches_local':True})
         for folder in ['initial-sections','initial-axial-sections','pre-reopen-initial','pre-reopen-prepared']:
             if (parent/folder).exists(): shutil.copytree(parent/folder,out/folder)
@@ -301,6 +335,8 @@ def main():
             r['recovery_smoke']='Native N1-1631 scalar/all eight residuals, recovered idle endpoint face flux/speed and paired checkpoint verified after host sleep interrupted transport; no replay or scientific change'
         elif START==2185:
             r['recovery_smoke']='Native N1-2185 scalar/all eight residuals, recovered idle endpoint face flux/speed and paired checkpoint verified after network loss; no replay or scientific change'
+        elif START==3227:
+            r['recovery_smoke']='Native N1-3227 scalar/all eight residuals, recovered idle endpoint face flux/speed and unique paired checkpoint verified after sleep-associated transport loss; no replay or scientific change'
         (out/f'smoke-n{START:05d}.json').write_text(json.dumps(r['recovery_verification'],indent=2)+'\n')
         (out/'recovery-verification.json').write_text(json.dumps(r['recovery_verification'],indent=2)+'\n'); persist()
         current=START
@@ -312,6 +348,8 @@ def main():
             if target==START+5 and not any(snap['iteration']==target for snap in diag.snapshots):
                 step(f'verify_n{target}_normalized_inventory_snapshot',lambda:diag.snapshot(target,diag.value('P7bMaximumSpeed'),['recovery_semantics_validation']),180)
                 diag.assert_complete(target)
+                if r['experiment_id']=='E7':
+                    r['verified_recovery_snapshot_iterations']=sorted(set(r.get('verified_recovery_snapshot_iterations',[]))|{target})
             r.update(flux_monitor=m.manifest(),spike_diagnostics=diag.manifest())
             last=json.loads((out/'collector-flux.jsonl').read_text().splitlines()[-1]); assert json.loads(read_text(s,last['remote_path']))==last
             r['remote_flux_readbacks'].append({'iteration':target,'path':last['remote_path'],'matches_local':True})

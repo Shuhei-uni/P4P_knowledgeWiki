@@ -43,7 +43,7 @@ for label,name in cases:
    if reasons:expected.add(row['iteration'])
   actual={x['iteration'] for x in dm['snapshots']};assert len(actual)==len(dm['snapshots'])
   extra=actual-expected
-  allowed_extra = {55} if a.experiment=='E6' else ({505,687,1631,2185} if a.experiment=='E7' else set())
+  allowed_extra = {55} if a.experiment=='E6' else ({505,687,1631,2185,2505,3227} if a.experiment=='E7' else set())
   assert extra <= allowed_extra and expected<=actual
   for item in dm['snapshots']:
    if item['iteration'] in extra:assert item['reasons']==['recovery_semantics_validation']

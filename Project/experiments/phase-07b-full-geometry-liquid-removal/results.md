@@ -1,8 +1,6 @@
 # Phase 7b — G1 five-case discovery review
 
-Current frontier: **G1–G6 complete; E7 incomplete under an external connectivity block**, with no qualified case. See the [28 September evidence conclusions](convergence-investigation/evidence-conclusions-2026-09-28.md) and [investigation results](convergence-investigation/results.md). Machine state owns live progress; the G1 narrative below is historical.
-
-**Latest completed comparison:** [G6](convergence-investigation/coupled-nphase/results.md) finds that all-phase equations did not restore conservation or stationary inventory. [E7](convergence-investigation/coupled-nphase-weaker-sink/results.md) remains partial.
+Current frontier: **CLOSED by Andy on29 September2026; no qualified case.** G1–G7 are complete. E8 was stopped by explicit user instruction at nativeN128 before the first conditioning gate; it is partial and does not establish startup failure. See [phase closure](closure.md) for the supported conclusion, evidence and limits. No further Phase7b solve or qualification is authorized; both supervision automations are paused. No new physical phase is selected.
 
 **Later E2/G2 result:** the approved weaker-sink comparison is complete; see [G2 results](lower-sink-rate/results.md). The session and next-action statements below describe the G1 handoff, not the current state.
 

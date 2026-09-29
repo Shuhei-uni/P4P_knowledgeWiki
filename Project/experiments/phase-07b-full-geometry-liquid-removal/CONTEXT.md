@@ -1,13 +1,13 @@
 # Phase Context — Phase 7b Full-Geometry Steady Liquid Removal
 
-Current frontier: **E7 is externally blocked: the Mac returned to lid-close sleep, its local controller stalled and was retired, and the configured Fluent endpoint is currently unreachable. Last verified paired checkpoint N2500; complete local residual/flux/speed records N2742; live iteration unknown. G1–G6 are complete and no case is qualified.** The [recovery record](convergence-investigation/coupled-nphase-weaker-sink/recovery-n500.md) preserves provenance. No Fluent process was terminated and no uncertain block was replayed. Andy's bounded finish remains the scientific envelope; no new case or physical scope is selected. Supervision is paused under the recorded external-block policy until sustained awake/network access is restored. Machine state owns the exact recovery next step.
+Current frontier: **CLOSED by Andy on29 September2026; no qualified case.** G1–G7 are complete. E8 was stopped by explicit user instruction at nativeN128 before the first conditioning gate; it is partial and does not establish startup failure. See [phase closure](closure.md) for the supported conclusion, evidence and limits. No further Phase7b solve or qualification is authorized; both supervision automations are paused. No new physical phase is selected.
 
 ## Status
 
-- **Planning state:** G1–G6 are complete; no qualified case. E6 reduced some residuals but did not restore conservation. E7 changes only tau0.02→0.10s under unchanged Coupled/N-phase treatment. Live build/parity/smoke status belongs to phase-state.
+- **Planning state:** CLOSED_BY_USER_NO_QUALIFIED_CASE; E8 partial user stop, G1–G7 complete.
 - **Owner:** Andy; separate from Shuhei's Phase 7
-- **Latest human authorization:** 2026-09-28: execute the bounded finish proposed after the 26 September review, inside the existing steady full-geometry envelope.
-- **Experiment-selection authority:** phase-loop within the human-approved convergence objective below
+- **Latest human instruction:** 2026-09-29: “okay stop E8. and conclude Phase 7b”. Stop/preserve and close; supersedes prior continuation authority.
+- **Experiment-selection authority:** closed; no further simulation selected or authorized.
 - **Original G1 decision (completed):** retain the full geometry and investigate a function-based
   liquid-removal zone as an ideal collector in a strictly steady-state model.
   Compare multiple collector thicknesses, with the maximum upper elevation at
@@ -19,13 +19,13 @@ Current frontier: **E7 is externally blocked: the Mac returned to lid-close slee
   Source implementation and instrumentation are verified; none of the tested
   cases establishes a credible steady solution.
 
-## Current authority — accepted bounded finish (28 September 2026)
+## Historical authority — accepted bounded finish (28 September 2026)
 
 Andy accepted the proposed plan and instructed execution. Recover E7 from the latest verified checkpoint and finish its existing absolute N5000 horizon, preserving the interrupted tail and identifying any replay. Complete the source-treatment/linearization audit. If E7 still fails and no concrete implementation defect supersedes the experiment, run at most one isolated, documented Mixture startup contrast with a predeclared discovery cap of 5000. A promising endpoint requires bounded persistence/restart qualification before acceptance. If the bounded work still fails, close the tested Phase 7b route with its limitations rather than continuing an open-ended tuning series.
 
 A future full-geometry EWF/drainage investigation remains a separate scientific phase. The next physical question should be informed by a conserved film-routing audit of Shuhei's Phase 7.2A; this authorization does not add EWF or physical transient pool modelling to Phase 7b. Routine implementation, evidence recovery, source audit, execution and analysis within this bounded finish require no further approval.
 
-## Current authority — autonomous convergence investigation after E3 (22 September 2026)
+## Historical authority — autonomous convergence investigation after E3 (22 September 2026)
 
 Andy requested that, once the current run finishes, the agent audit Shuhei's
 newly pulled work and its apparently improved residuals, check correctness,

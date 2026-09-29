@@ -1,27 +1,75 @@
-# E7 — partial evidence; externally blocked, terminal comparison pending
+# G7 — weaker sink with Coupled/N-phase
 
-The [28 September matched-prefix review](../evidence-conclusions-2026-09-28.md) compares E6 and E7 at N2001–2500, not E7's middle against E6's terminal window. E7 liquid/native-mixture mean absolute closure is40.284/23.722% versus E6's17.840/10.467%; inventory change is7.780% versus5.984%, and continuity maxima0.74490 versus0.47977. E7's collector holds15.992kg versus2.633kg, offsetting its weaker coefficient and producing159.942 versus131.694kg/s mean removal. The partial trajectory therefore provides no matched-window support for improved numerical adequacy; final G7 remains unavailable. Raw matched histories and all-eight-residual/flux/source-lag validation are linked in that review. No scientific or execution authority changes.
+E7 completed absolute N5000 and its recording, regional-budget and native spatial audits. **Weakening the sink from tau 0.02 to 0.10 s did not produce a credible steady solution.** G7 is complete; E7 is numerically inadequate and is not a qualified parent. No E7 extension is selected.
 
-On 28 September the restored endpoint was reachable but had no active case. Native artifacts confirmed an intact N500 pair and no later scheduled or final pair under the interrupted run identity. Recovered native histories reach scalar N680 and all eight residuals N679; the actual retired terminal iteration remains unknown. Both original N500 reload and a unique recovery-pair reopen exactly matched saved physical fields, ordered geometry, source expressions/slots, controls and residual/report policies. The derived N1–500 prefix passes with 499 zero-error source-lag pairs. Original partial evidence remains immutable.
+## Controlled comparison and terminal evidence
 
-The accepted [bounded recovery](recovery-n500.md) retains absolute N5000 and the predeclared cumulative attempted-compute ceiling5500. The N505 continuation suffered a recorder RPC stall atN687; the local client was retired, its owned pause released after an API interrupt, and unchanged idleN687 was preserved. Native scalar and all eight residual histories are complete to687, with686 exact source-lag pairs. Flux687 matches its native file and live face reductions; its missing speed row was recovered from the unchanged native value with scalar/full-cell parity. No replay or scientific change was needed.
+The [setup](setup.md) retains E6's full geometry, full split feed, closed brine wall, Mixture/slip/RNG model, N-phase, segregated VF, Coupled/pseudo-time Off/CFL20, pressure and momentum relaxation0.5, source law and update interval1. Only tau and the consequent source coefficients change. Both start from the common clean N0 physical field.
 
-**E7 remains incomplete under an external block.** The latest N2185 continuation savedN2500 and recorded complete local flux/speed/all-eight-residual histories throughN2742. Another clamshell-sleep cycle interrupted recording; after prolonged staleness, the exact owned local Python client was retired without terminating Fluent. Two read-only API checks found the endpoint unreachable. Live iteration is unknown; the required N4501–5000 G7 window and final fields are unavailable. No final solver-treatment conclusion or new experiment follows.
+The final controller exited successfully at N5000. Native scalar, exact-face flux, speed and all eight residual histories cover N1–5000; 4999 source-lag pairs have zero error. All21 scheduled/recovery whole-cell snapshots pass independently normalized/native inventory parity. Initial/final horizontal and full-height axial fields and the final local-PC case/data pair are preserved. See [run paths](run-paths.md), machine `PyAnsys/output/phase07b-g7/completion-audit.json`, `comparison.json`, `diagnostic-comparison.json`, `regional-budget.json` and `native-spatial/manifest.json`.
 
-A retrospective partial N2001–2500 diagnostic has mean-absolute liquid/vapor/native-mixture closure40.284/0.474/23.722% of measured feed; inventory means N1501–2000 versusN2001–2500 change+7.780%; continuity maximum0.7449. These observations do not meet the necessary numerical criteria in that partial window, but they neither replace the declared final window nor establish final failure or absence of a steady solution. Raw histories and input fingerprints are retained in `PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n2185/sleep-recovery-20260928T0540/partial-numerical-disposition.json`; no new core comparison figure is presented because E7's planned terminal discriminating window is missing. Source lag passes2499 pairs through the last scalar checkpoint; it is not conservation. Primary supervision is paused pending sustained awake/network access; [phase-state](../../phase-state.yaml) owns the exact recovery instructions.
+The original job wrapper's BLOCKED receipt is retained: its sole defect was a missing local copy of historical N2500 smoke evidence. The byte-identical file was recovered from two agreeing preserved parents, and all required-file checks passed in `resume-n3227/terminal-file-reconciliation.json`. Solver and terminal verifier both returned0. This evidence-copy defect is separate from numerical inadequacy.
 
-The initial N500 replay stopped after N505 because Fluent rolled the scalar output to `_501.out`; the expected original filename still ended at N500. This was a recorder-path failure. All five new scalar records and an identical N500 boundary row were recovered, the live N505 endpoint was independently verified and preserved, and complete recording passes with 504 zero-error source-lag pairs. That replacement was subsequently retired at the RPC interruption described above. [Current controller and receipts](run-paths.md).
+## Declared late-window result
 
-The initial build passed exact tau-only delta and both source-free/prepared pair reopens. It stopped before solving because the N0 field comparator expected the historical diagnostic schema, which lacks primary-phase raw volume fraction. Every common physical array and all six section datasets were exactly equal; the two additional primary arrays were exactly one with secondary zero.
+Statistics use N4501–5000. Inventory change compares means N4001–4500 versus N4501–5000, divided by the larger mean. Closure includes the independently measured applied removal source and uses each phase's measured feed; native mixture uses total feed.
 
-The repair accepts only those two additional N0 arrays under explicit N-phase mode, validates those exact values, and retains every original field check. Offline negative checks reject altered primary/secondary fractions, velocity, missing fields and unexpected arrays. Original failure evidence is preserved. This is an instrumentation failure, not a numerical result.
+| Quantity | E6 tau0.02 | E7 tau0.10 |
+| --- | ---: | ---: |
+| Mean absolute liquid closure, % feed | 144.369 | 148.213 |
+| Mean absolute vapor closure, % feed | 1.520 | 1.776 |
+| Signed mean vapor closure, % feed | +1.418 | +1.700 |
+| Mean absolute native mixture closure, % feed | 84.841 | 87.000 |
+| Inventory mean increase, % | 18.451 | 15.195 |
+| Mean total native liquid volume, m³ | 0.475630 | 0.515893 |
+| Mean collector liquid volume, m³ | 0.006259 | 0.030844 |
+| Mean applied removal, kg/s | 275.962 | 272.028 |
+| Liquid carryover, % liquid feed | 8.346 | 15.554 |
+| Vapor outlet recovery, % vapor feed | 98.582 | 98.300 |
+| Outlet vapor mass fraction | 0.890889 | 0.814549 |
+| Late maximum speed, m/s | 82.285 | 81.144 |
 
-A first N0 recovery inspection also stopped without mutation because Fluent reopened the report filename as a relative `reports` path. Read-only API reconciliation confirmed idle N0 and the exact expected report identity. The replacement accepts only that representation or the original absolute path and selects a unique absolute output before solving. That N0 controller verified unchanged live fields/settings, recaptured N0 diagnostics, passed exact original physical/geometry parity and preserved a unique N0 pair. It advanced through the N50 gate toward the unchanged absolute N5000 cap. No reload, initialization, counter offset or physics change is involved. N50 passed: scalar and exact-face flux records, all eight residuals, N0/N50 whole-cell snapshots and normalized-native inventory parity, 49 exact source-lag pairs and the paired N50 checkpoint. Local evidence subsequently reached N52 with no error/fatal markers. The controller subsequently failed during N500→1000 with a transport timeout. The last complete paired checkpoint is N500; flux records reach N679, while all eight residuals and speed diagnostics reach N678. Live progress is unknown. This is not an established numerical failure or a convergence claim. Phase-state owns live status.
+Measured liquid/vapor feed is116.921232/80.689902kg/s. The fivefold weaker coefficient leaves nearly the same removal because the mean collector inventory rises about4.93-fold. E7 has more total inventory and more liquid carryover; its smaller relative inventory growth still greatly exceeds the1% criterion. This supports rejecting this coefficient change as a steady-state remedy at the tested horizon; it does not establish that no steady solution can exist.
 
-Evidence: `PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n0/offline-verification.json`, `recovery-n0/report-path-inspection.json`, and `recovery-n0-retry1/job.yaml`. [Run identities](run-paths.md).
+All eight late residual maxima:
 
-## Retired transport interruption
+| Residual | E6 | E7 |
+| --- | ---: | ---: |
+| continuity | 1.3259 | 1.3222 |
+| x velocity | 0.00010281 | 0.00012179 |
+| y velocity | 0.000080592 | 0.00011675 |
+| z velocity | 0.00011706 | 0.00011949 |
+| k | 0.0095616 | 0.010212 |
+| epsilon | 0.023795 | 0.031379 |
+| vf-phase-1 | 0.00018085 | 0.00018437 |
+| vf-phase-2 | 0.012148 | 0.012194 |
 
-The solve controller exited and released its lock at 06:45 UTC on 24 September. Local evidence stopped near 06:35 UTC. Separate read-only API reconnections at 09:08 and 09:28 UTC both found the configured endpoint unreachable. Neither issued iterations, reloaded a case or terminated Fluent. The earlier running audit detected stale capture before the controller exit; it is not current liveness evidence.
+Only the three momentum curves and VF1 remain below1e-3 throughout the window. Necessary closure, inventory and residual criteria fail. Neither case has an iterated speed event≥500m/s; both peak283.091m/s atN1. Absence of extreme bursts does not establish conservation.
 
-`PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n679/partial-recording-audit.json` verifies the complete N500 scalar/checkpoint prefix, all eight residuals through N678, flux through N679, speed diagnostics through N678, and 499 exact source-lag pairs. Original branch files and hashes are retained. Once access returns, inspect actual iteration/iterating state and preserve the live endpoint before any reload; recover native histories and assess the missing diagnostic prefix. Never silently bridge missing evidence or replay uncertain iterations. G7 remains incomplete; no numerical conclusion is available. That external block is resolved by the 28 September artifact reconciliation and explicit recovery described above. The retired partial attempt is not reused as current liveness evidence.
+## Independent regional budgets and spatial interpretation
+
+The regional audit uses exact native phase face fluxes and the source integral; collector and above-collector budgets sum to the whole-vessel budget within1e-10kg/s at every late iteration. These are steady numerical budgets, not a physical-time storage derivative.
+
+| Signed mean / mean absolute budget, kg/s | E6 | E7 |
+| --- | ---: | ---: |
+| Collector | −6.136 / 21.014 | −10.809 / 64.986 |
+| Above collector | −162.662 / 162.662 | −162.483 / 164.417 |
+| Whole liquid | −168.798 / 168.798 | −173.292 / 173.292 |
+
+Most signed deficit remains above the collector. E7 mean inward delivery/outward escape across the collector interface is425.558/164.339kg/s, versus316.007/46.182kg/s forE6. The native brine-wall phase flux is zero and the mass source is confined to the collector. This spatial ledger does not prove that the source causes the upstream deficit.
+
+Six native figures passed direct visual QA, using shared VF0–1 and speed0–60m/s scales, matched planes and cameras, and unchanged PNGs. The inlet-height horizontal views are deliberately local zooms; E7 has a narrower liquid band and higher local core speed in that particular view. Full-height axial cuts retain boundary liquid bands and lower pockets within a predominantly vapor interior. A plane cannot replace volume-integrated inventory. The raw closure/inventory and residual/speed figures preserve oscillation and drift. Figure identities and settings are in `native-spatial/manifest.json`; QA observations are in `visual-qa.json`.
+
+E7 sampled N2600/2700/2800 maxima are86.829/86.303/86.326m/s, near the upper outlet at y≈6.265m. Its final maximum is76.393m/s at(−0.238654,6.265104,0.068375)m, not in the collector. Both transcripts contain4825 viscosity-limiting messages; maximum limited cells are2810(E6) and3399(E7). Reverse-flow messages occur4998times each; message counts are not unique-iteration counts.
+
+## Raw fraction semantics and limits
+
+The native reported liquid VF is normalized. At E7 N5000, raw alpha1+alpha2 ranges0.923461–1.184119 above the collector and0.970334–1.105978 in it. Raw liquid volume totals0.546833m³, versus independently verified normalized/native0.527307m³. Both raw fractions, raw inventory and phase-sum defects are preserved. Cellwise normalization agrees with native volume within rtol1e-9/atol1e-12m³ at every snapshot; it does **not** repair or establish conservation. Raw SV_MASS_IMBALANCE remains uncalibrated. Exact source-command lag parity does not establish the expression Jacobian or implicitness.
+
+Retained history is originalN1–500, first replayN501–2500 and second replayN2501–5000. N500/N2500 case-data restarts were independently verified; later unchanged-state recorder recoveries atN687/N1631/N2185/N3227 added no replay. Repeated native boundary rows agree exactly and immutable retired tails remain excluded. The cumulative attempted ceiling was6000. No uninterrupted or bitwise-equivalent trajectory is claimed.
+
+## Decision
+
+**Final disposition,29 September2026:** Andy subsequently stopped E8 atN128 and closed Phase7b. The selection below is historical and is superseded by [phase closure](../../closure.md); no further simulation is authorized.
+
+The completed [source audit](../source-treatment-audit.md) found no concrete source assignment/sign/transported-term defect. Together with G7, it supports using the last permitted contrast for the separately documented Mixture startup sequence, not another sink coefficient or horizon. [E8 setup](../mixture-startup/setup.md) freezes VF/slip together during bounded flow conditioning and restores both only if its prospectively declared gate passes. This is the final discovery contrast under the accepted bounded finish; an unsuccessful bounded attempt closes the tested route, while passing indicators require separate persistence/restart qualification.

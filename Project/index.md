@@ -113,27 +113,7 @@ if the macroscopic behaviour becomes worse.
 See the [Phase 7.1A parent record](experiments/phase-07-1a-absorber-convergence/index.md)
 and the [Phase 7.2A baseline handoff](experiments/phase-07-2a-wall-liquid-routing/baseline-control-handoff.md).
 
-For Andy's Phase 7b, **G1–G6 are complete and no case is qualified**.
-The [G1 collector screen](experiments/phase-07b-full-geometry-liquid-removal/results.md),
-[G2 weaker-sink comparison](experiments/phase-07b-full-geometry-liquid-removal/lower-sink-rate/results.md)
-and [G3 diagnostic replication](experiments/phase-07b-full-geometry-liquid-removal/spike-diagnostic/results.md)
-are followed by controlled Coupled, Courant and N-phase contrasts. Coupled
-eliminates the recorded extreme speed bursts, but
-[G6](experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/coupled-nphase/results.md)
-still has late mean absolute liquid/vapor/native-mixture closure errors of
-144.369/1.520/84.841% and inventory change of 18.451%. Regional budgets place
-most liquid deficit above the collector; they do not prove a localized cause.
-
-[E7](experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/coupled-nphase-weaker-sink/setup.md)
-is the selected tau 0.10 s contrast under unchanged Coupled/N-phase settings.
-It passed its build, exact N0 and N50 checks, then lost API access. The accepted
-28 September recovery restored the preserved N500 pair with exact readbacks.
-E7 is now externally blocked after another host-sleep interruption: paired N2500
-and local records throughN2742 are preserved, but the live endpoint is unreachable
-and its iteration unknown. The owned local controller was retired; Fluent was
-not terminated. Supervision is paused pending sustained awake/network access.
-Reconcile [phase-state](experiments/phase-07b-full-geometry-liquid-removal/phase-state.yaml)
-before any action; E7 has no terminal numerical result.
+Andy's **Phase7b is closed by his direction on29 September2026, with no qualified case**. [Phase closure](experiments/phase-07b-full-geometry-liquid-removal/closure.md) records the final evidence and limits. G1–G7 are complete; E7 reachedN5000 with verified histories/spatial evidence but liquid/vapor/native-mixture mean absolute closure errors148.213/1.776/87.000%, inventory increase15.195% and continuitymaximum1.3222. E8 was stopped and preserved atN128 before its first conditioning gate; it is an incomplete startup test, not a failed gate. No further Phase7b run or qualification is authorized, both supervision automations are paused, and no new physical phase is selected. Other owners' phases remain separate.
 
 The [26 September review](experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/phase-review-2026-09-26.md)
 recommended a bounded finish, which Andy accepted on 28 September: complete E7,
@@ -223,11 +203,7 @@ steady state. A standing pool is explicitly not required in Phase 7b.
 
 ## What happens next?
 
-The [phase review](experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/phase-review-2026-09-26.md)
-recommends resolving E7's partial disposition, verifying source treatment and,
-if still justified, at most one further startup contrast under the existing
-question. Failed numerical indicators after that bounded work would support
-closing the tested Phase 7b route without claiming global steady nonexistence.
+Phase7b requires no further simulation. Its [closure](experiments/phase-07b-full-geometry-liquid-removal/closure.md) supports a bounded negative result for the tested route, without claiming that no steady solution exists. A new scientific direction needs its own phase framing and user selection.
 
 For wall-film work, first recover the native evidence, correct the derived
 mixture ledger and verify film discharge and combined conservation within

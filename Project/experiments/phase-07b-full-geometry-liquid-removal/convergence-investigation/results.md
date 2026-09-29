@@ -1,8 +1,8 @@
-# Autonomous convergence investigation — G6 complete, E7 selected
+# Convergence investigation — closed without a qualified case
 
-**28 September evidence conclusion:** the [completed-results and matched partial-E7 review](evidence-conclusions-2026-09-28.md) finds no qualified case. At N2001–2500, E7 has worse liquid/native-mixture closure, inventory drift and continuity than E6 at the same iteration range. This is a retrospective partial diagnostic, not terminal G7. E7 is externally blocked with no active controller; [E7 results](coupled-nphase-weaker-sink/results.md) own its evidence and [phase-state](../phase-state.yaml) owns live status. The accepted bounded finish is unchanged.
+**Closed by Andy on29 September2026.** [G7](coupled-nphase-weaker-sink/results.md) is complete but numerically inadequate; no G1–G7 case qualified. E8 was stopped at nativeN128 before its first conditioning gate, so the startup hypothesis remains untested to its planned horizon. [Phase closure](../closure.md) owns the final conclusion and limits. No further experiment or qualification is authorized. The discussion below records the completed investigation and unresolved alternatives, not a work queue.
 
-**26 September planning review:** E7 is partial under an external connectivity
+**Historical 26 September planning review:** E7 was partial under an external connectivity
 block, with live iteration unknown; it is not a terminal numerical failure.
 The [cross-branch review](phase-review-2026-09-26.md) independently rechecks our
 late budgets and the newly committed EWF histories, records missing raw evidence
@@ -11,7 +11,7 @@ and an upstream mixture-ledger bug, and recommends a bounded finish to Phase
 
 G1–G6 establish no qualified case. [G6](coupled-nphase/results.md) completed the N-phase-only contrast at N5000 with all evidence and six native images verified. Relative to E5, late mean-absolute liquid/vapor/native-mixture closure errors change148.115/2.132/86.795→144.369/1.520/84.841%, inventory change19.333→18.451%, continuitymaximum2.5817→1.3259. Residual improvement did not restore conservation or stationary inventory. E6 final is preserved and was restored after native spatial exports.
 
-The selected next contrast is [E7 weaker sink under unchanged Coupled/N-phase](coupled-nphase-weaker-sink/setup.md): tau0.02→0.10s only, original common clean N0/Hybrid physical fields, absolute5000cap. This probes source-strength sensitivity in the E6 solver context; earlier E2tau.10 used SIMPLE. It changes the removal timescale and cannot establish an implicit-source derivative or validate originaltau. Exact E6 control/source assignment parity, tau-only expressions and N0/N50 gates precede normal execution. Phase-state owns live progress.
+The completed tau contrast is [E7 weaker sink under unchanged Coupled/N-phase](coupled-nphase-weaker-sink/setup.md): tau0.02→0.10s only, original common clean N0/Hybrid physical fields, absolute5000cap. This probes source-strength sensitivity in the E6 solver context; earlier E2tau.10 used SIMPLE. It changes the removal timescale and cannot establish an implicit-source derivative or validate originaltau. Exact E6 control/source assignment parity, tau-only expressions and N0/N50 gates precede normal execution. Phase-state owns live progress.
 
 The source/source-equation interaction remains prominent because E6 native removal averages275.962kg/s versus116.921kg/s liquidfeed while inventory grows. N-phase raw/normalized reporting is now independently verified but its rawphase sumdefects remain visible; normalization is not mass closure. An unchanged long extension has no evidence-based justification. Global pseudo time or startup remains a broader alternative. Fully coupled VF is unavailable with retained Mixture slip under v252 guidance; no drift-model change is selected.
 

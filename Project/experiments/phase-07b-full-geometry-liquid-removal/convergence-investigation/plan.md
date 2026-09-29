@@ -1,5 +1,7 @@
 # Autonomous convergence investigation after E3
 
+**CLOSED — 29 September2026.** Andy instructed stopping E8 and concluding Phase7b. [Closure](../closure.md) supersedes all continuation and experiment-selection provisions below. G1–G7 complete, no qualified case; E8 user-stopped atN128 before first conditioning gate. No further simulation authorized.
+
 ## Authority and objective
 
 On 22 September 2026 Andy asked that, after the current run finishes, the agent
@@ -35,11 +37,15 @@ force. Do not turn Shuhei's separate phase or machine into this campaign.
 
 Andy approved execution of the [26 September review](phase-review-2026-09-26.md) plan with “Sounds good. run it.” This narrows the remaining work to E7 recovery/completion, the source-treatment/linearization audit, and—only if still justified—one isolated Fluent-documented Mixture startup contrast capped at 5000. Record its delta, parent, comparison window, startup/full-feed allocation and stopping conditions before compute. If a concrete implementation defect is found, resolve it explicitly before selecting further treatment; do not add an unbounded series of cases. Passing numerical criteria requires prospectively bounded persistence/restart qualification. Otherwise close the tested route with explicit evidence limits. A separate EWF/drainage phase is not selected by this instruction.
 
-E7 uses the [N500 recovery design](coupled-nphase-weaker-sink/recovery-n500.md): retained N1–500, replay N501–5000, 4500 added steps, at most 5500 cumulative attempted steps including the interrupted block's upper bound. The retired partial tail remains immutable and excluded from the recovered trajectory. The controller must verify restored N500 fields/settings and then N505 recording before ordinary supervision.
+E7 now uses the [N2500 recovery design](coupled-nphase-weaker-sink/recovery-n2500.md), following Andy's “do your recommended” instruction on29 September. Retain original N1–500 and first replay N501–2500, then replay N2501–5000 from the exactly verified N2500 pair:2500 new steps, retained absolute5000, prospective cumulative attempted ceiling6000 including at most500 retired steps in each lost N500–1000/N2500–3000 block. This explicitly supersedes the earlier [N500 recovery](coupled-nphase-weaker-sink/recovery-n500.md) ceiling5500. Retired tails remain immutable and excluded from the new trajectory. Original/recovery pair reopens and N2505 recording passed; phase-state owns current supervision. No further automatic compute-bound expansion is authorized.
 
 The [28 September source audit](source-treatment-audit.md) is complete: no concrete source assignment/sign defect was found, while expression-source implicit derivatives remain unverified.
 
-A focused [startup guidance packet](../../../../PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n1631/network-recovery-20260928T0408/startup-guidance-packet.md) confirms the documented joint Volume Fraction/Slip Velocity freeze and restore sequence; the conditioning count and quantitative gate remain investigator choices. E6 slip relaxation is already0.1. Combined behavior with N-phase, full split feed and expression removal still needs live verification if G7 supports selecting that last contrast. This lookup selects no new run.
+A focused [startup guidance packet](../../../../PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n1631/network-recovery-20260928T0408/startup-guidance-packet.md) confirms the documented joint Volume Fraction/Slip Velocity freeze and restore sequence; the conditioning count and quantitative gate remain investigator choices. E6 slip relaxation is already0.1. Combined behavior with N-phase, full split feed and expression removal requires live verification in the E8 implementation below. The documentation lookup itself did not select a run; completed G7 now supports that final selection.
+
+## Final selected discovery contrast — 29 September 2026
+
+G7 is complete and numerically inadequate; all machine and spatial audits pass. Select [E8 documented Mixture startup](mixture-startup/setup.md), classified NEW against the completed unstaged E6/E7 starts. Preserve E6's final treatment and original clean N0 lineage, freeze Volume Fraction and Slip Velocity together, and restore both only after the prospective conditioning gate. Conditioning stops by1000 and total cap is5000. A conditioning-gate failure closes this bounded attempt without pretending the full-equation endpoint was tested; a passing switch leaves at least4000 full-equation/full-feed iterations. No second discovery contrast, automatic extension or new physical phase follows. E7 is complete and must never be relaunched. The ordered work below records the historical investigation sequence.
 
 ## Ordered work
 
