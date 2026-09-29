@@ -74,12 +74,17 @@ def main() -> None:
                 else parent_interval)
     require(1 <= interval <= 100, "DPM particle retracking interval must be within 1..100")
     prior_interaction = source.get("final_reopen_readback", source.get("source_readback", {})).get("interaction", {})
+    prior_node_averaging = bool(source.get("final_reopen_node_averaging",
+                                            source.get("node_averaging_after", {})).get("enabled", False))
+    prior_linearization = bool(source.get("final_reopen_source_term_settings",
+                                          source.get("source_term_settings_after", {}))
+                               .get("linearization", {}).get("enabled", False))
     source_suffix = ("-source-every-iteration" if
                      args.source_every_iteration or prior_interaction.get("update_sources_every_iteration") else "")
     urf_suffix = (f"-dpmurf{str(args.dpm_source_urf).replace('.', 'p')}"
                   if args.dpm_source_urf is not None else "")
-    linear_suffix = "-linearized-sources" if args.linearize_dpm_sources else ""
-    averaging_suffix = "-averaged-sources" if args.average_dpm_sources else ""
+    linear_suffix = "-linearized-sources" if args.linearize_dpm_sources or prior_linearization else ""
+    averaging_suffix = "-averaged-sources" if args.average_dpm_sources or prior_node_averaging else ""
     speed_label = format(speed, ".15g").replace(".", "p")
     fraction_label = format(100 * fraction, ".15g").replace(".", "p")
     label = (f"F3-{speed_label}-{fraction_label}pct-coupled-upd{interval}{source_suffix}{urf_suffix}{linear_suffix}{averaging_suffix}-extension-to{args.target_native}-"
@@ -166,9 +171,11 @@ def main() -> None:
                               "DPM source-term linearization")
         receipt["source_term_settings_after"] = safe_get_state(
             source_settings, "configured F3 DPM source-term settings")
-        require(receipt["source_term_settings_after"]["linearization"]["enabled"] is
-                (receipt["source_term_settings_before"]["linearization"]["enabled"]
-                 or args.linearize_dpm_sources),
+        linear_before = receipt["source_term_settings_before"].get(
+            "linearization", {}).get("enabled", False)
+        linear_after = receipt["source_term_settings_after"].get(
+            "linearization", {}).get("enabled", False)
+        require(linear_after is (linear_before or args.linearize_dpm_sources),
                 "Configured DPM source-term linearization mismatch")
         require(all(receipt["source_term_settings_after"][key] == value for key, value in
                     receipt["source_term_settings_before"].items() if key != "linearization"),
@@ -179,7 +186,7 @@ def main() -> None:
         if args.average_dpm_sources:
             require(not receipt["node_averaging_before"]["enabled"],
                     "F3 parent already has DPM node averaging")
-            require(not receipt["source_term_settings_after"]["linearization"]["enabled"],
+            require(not linear_after,
                     "DPM source averaging cannot be combined with linearization")
             set_leaf_readback(averaging.enabled, True, "DPM node-based averaging")
         receipt["node_averaging_after"] = safe_get_state(
@@ -240,7 +247,9 @@ def main() -> None:
         require(normalized_source_settings(
                     receipt["start_reopen_source_term_settings"],
                     node_averaging=receipt["node_averaging_after"]["enabled"]) ==
-                receipt["source_term_settings_after"],
+                normalized_source_settings(
+                    receipt["source_term_settings_after"],
+                    node_averaging=receipt["node_averaging_after"]["enabled"]),
                 "F3 DPM source-term settings changed after start-pair reopen")
         receipt["start_reopen_node_averaging"] = safe_get_state(
             solver.settings.setup.models.discrete_phase.numerics.node_based_averaging,
@@ -285,7 +294,9 @@ def main() -> None:
         require(normalized_source_settings(
                     receipt["final_reopen_source_term_settings"],
                     node_averaging=receipt["node_averaging_after"]["enabled"]) ==
-                receipt["source_term_settings_after"],
+                normalized_source_settings(
+                    receipt["source_term_settings_after"],
+                    node_averaging=receipt["node_averaging_after"]["enabled"]),
                 "F3 DPM source-term settings changed after final-pair reopen")
         receipt["final_reopen_node_averaging"] = safe_get_state(
             solver.settings.setup.models.discrete_phase.numerics.node_based_averaging,
