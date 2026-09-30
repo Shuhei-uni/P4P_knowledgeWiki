@@ -24,24 +24,40 @@ from run_dpm_particle_tracks import (
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--child-receipt", type=Path, required=True)
+    source = parser.add_mutually_exclusive_group(required=True)
+    source.add_argument("--child-receipt", type=Path)
+    source.add_argument("--carrier-manifest", type=Path)
     parser.add_argument("--max-steps", type=int, default=200000)
-    parser.add_argument("--bin", action="append", default=["09cv3-finemist-14um"])
+    parser.add_argument("--bin", action="append")
     args = parser.parse_args()
     require(50000 < args.max_steps <= 500000, "Probe cap must be above 50k and at most 500k")
-    child = json.loads(args.child_receipt.read_text(encoding="utf-8"))
-    require(child["status"] == "CASE_DATA_VERIFIED" and child.get("tracking_status") == "COMPLETE",
-            "Reference diagnostic child or its tracking record is incomplete")
-    base = Path(child["child_base"])
+    bins = args.bin or ["09cv3-finemist-14um"]
+    source_path = args.carrier_manifest or args.child_receipt
+    child = json.loads(source_path.read_text(encoding="utf-8"))
+    if args.carrier_manifest:
+        require(child["status"] == "COMPLETE" and child.get("tracking_status") == "COMPLETE" and
+                child.get("family") == "F3", "Expected a completed F3 carrier with seven-bin tracking")
+        endpoint = child["checkpoints"][-1]
+        require(endpoint["native_iteration"] == child["target_native_iteration"],
+                "Carrier final checkpoint does not match requested horizon")
+        base = Path(endpoint["case"].removesuffix(".cas.h5"))
+        expected_hashes = endpoint
+        source_label = f"F3-{child['speed_m_s']:.2f}-n{endpoint['native_iteration']}"
+    else:
+        require(child["status"] == "CASE_DATA_VERIFIED" and child.get("tracking_status") == "COMPLETE",
+                "Reference diagnostic child or its tracking record is incomplete")
+        base = Path(child["child_base"])
+        expected_hashes = child["child_pair"]
+        source_label = "F2-26p81"
     for kind, path in zip(("case", "data"), pair(base)):
         require(path.is_file(), f"Missing child {kind} pair")
-        require(sha256(path) == child["child_pair"][f"{kind}_sha256"], f"Child {kind} hash changed")
-    label = f"F2-26p81-dpm-maxsteps-{args.max_steps}-{datetime.now(timezone.utc):%Y%m%dT%H%M%SZ}"
+        require(sha256(path) == expected_hashes[f"{kind}_sha256"], f"Child {kind} hash changed")
+    label = f"{source_label}-dpm-maxsteps-{args.max_steps}-{datetime.now(timezone.utc):%Y%m%dT%H%M%SZ}"
     output = ROOT / "output" / "phase8-dpm" / label / "probe.json"
-    receipt = {"status": "RUNNING", "source_receipt": str(args.child_receipt),
-               "source_case_sha256": child["child_pair"]["case_sha256"],
-               "source_data_sha256": child["child_pair"]["data_sha256"],
-               "max_steps": args.max_steps, "bins": args.bin, "results": []}
+    receipt = {"status": "RUNNING", "source_receipt": str(source_path),
+               "source_case_sha256": expected_hashes["case_sha256"],
+               "source_data_sha256": expected_hashes["data_sha256"],
+               "max_steps": args.max_steps, "bins": bins, "results": []}
     solver = launch_fluent(product_version="25.2", dimension=3, precision="double", processor_count=4,
                            ui_mode="gui", start_timeout=240, cleanup_on_exit=True, start_transcript=True)
     try:
@@ -58,7 +74,7 @@ def main() -> None:
         execute_tui(solver, "/report/dpm-zone-summaries-per-injection? yes")
         receipt["report_controls"]["per_injection_zone_summaries"] = True
         injection_map = {item["name"]: item for item in discover_live_injections(solver)}
-        for name in args.bin:
+        for name in bins:
             require(name in injection_map, f"Missing requested probe bin: {name}")
             receipt["results"].append(track_one_injection(solver, injection_map[name]))
             dump(output, receipt)
