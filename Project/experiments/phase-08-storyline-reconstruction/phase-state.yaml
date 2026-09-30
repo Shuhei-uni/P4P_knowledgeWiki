@@ -77,7 +77,7 @@ families:
     speed_32p14_current_diagnostic_dpm: PyAnsys/output/phase8-dpm/F2-diagnostic-050permil-32p14-20260929T062610Z/build.json
     speed_32p14_dpm_fates: PyAnsys/output/phase8-analysis/32p14-f2-diagnostic-dpm/summary.json
   F3:
-    status: 26P81_AND_32P14_2P5PCT_CARRIER_PASS_DPM_UNRESOLVED_20P11_AVERAGED_RECOVERY_RUNNING
+    status: 26P81_AND_32P14_2P5PCT_CARRIER_PASS_DPM_UNRESOLVED_20P11_N20000_CONTINUATION_RUNNING
     verified_child: PyAnsys/output/phase8-dpm/F2-allocated-050permil-26p81-upd100-20260928T144555Z/build.json
     pilot_run: PyAnsys/output/phase8-carrier/F3-26p81-5pct-coupled-upd100-20260928T144733Z/manifest.json
     pilot_assessment: PyAnsys/output/phase8-analysis/26p81-f3-5pct-upd100-n11000/assessment.json
@@ -130,6 +130,8 @@ families:
     speed_20p11_fraction_2p5_current_pilot: PyAnsys/output/phase8-carrier/F3-20p11-2p5pct-coupled-upd100-20260930T024531Z/manifest.json
     speed_20p11_fraction_2p5_pilot_assessment: PyAnsys/output/phase8-analysis/20p11-f3-2p5pct-upd100-n11000/assessment.json
     speed_20p11_fraction_2p5_current_averaged_recovery: PyAnsys/output/phase8-carrier/F3-20p11-2p5pct-coupled-upd100-averaged-sources-extension-to15000-20260930T033606Z/manifest.json
+    speed_20p11_fraction_2p5_averaged_n15000_assessment: PyAnsys/output/phase8-analysis/20p11-f3-2p5pct-averaged-sources-n15000/assessment.json
+    speed_20p11_fraction_2p5_current_n20000: PyAnsys/output/phase8-carrier/F3-20p11-2p5pct-coupled-upd100-averaged-sources-extension-to20000-20260930T053945Z/manifest.json
     interrupted_upd1_pilot: PyAnsys/output/phase8-carrier/F3-26p81-5pct-coupled-20260928T144022Z/manifest.json
     report_correction: Pilot used Volume Integral for per-cell DPM Mass Source and is excluded from kg/s accounting. N11000 to N15000 continuation uses Volume Sum, readback 0 kg/s.
   F4:
@@ -147,4 +149,4 @@ matched_20p11_n10000_comparison: PyAnsys/output/phase8-analysis/20p11-f1-f2-coup
 matched_23p46_n10000_comparison: PyAnsys/output/phase8-analysis/23p46-f1-f2-coupled-n10000/summary.json
 matched_29p48_n10000_comparison: PyAnsys/output/phase8-analysis/29p48-f1-f2-coupled-n10000/summary.json
 matched_32p14_n10000_comparison: PyAnsys/output/phase8-analysis/32p14-f1-f2-coupled-n10000/summary.json
-next_required_action: Supervise the active F3 20.11 m/s 2.5% node-averaged-source continuation from N11000 to N15000; do not launch a duplicate. Once its final pair is saved/reopened and all bins tracked, assess the last-500 carrier gate and unresolved fates. The unaveraged N11000 pilot failed continuity only. F4 still lacks a finalized Phase 7.2A EWF switch basis.
+next_required_action: Supervise the active unchanged F3 20.11 m/s 2.5% averaged-source continuation from N15000 to N20000; do not launch a duplicate. Assess N19500-20000 carrier gate and seven-bin fates after final save/reopen. N15000 passed boundary balance but failed inventory drift and continuity. F4 still lacks a finalized Phase 7.2A EWF switch basis.
