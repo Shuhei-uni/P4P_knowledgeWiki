@@ -1,0 +1,155 @@
+service_tier = "default"
+
+
+notify = [ "C:\\Users\\Shuhei Yokkaichi\\AppData\\Local\\OpenAI\\Codex\\runtimes\\cua_node\\b35a688736d56912\\bin\\node_modules\\@oai\\sky\\bin\\windows\\codex-computer-use.exe", "turn-ended" ]
+[agents]
+enabled = true
+max_concurrent_threads_per_session = 20
+
+
+[projects.'C:\Users\Shuhei Yokkaichi']
+trust_level = "trusted"
+
+[projects.'C:\Users\Shuhei Yokkaichi\Developer All Projects\Developer\P4PresearchProject']
+trust_level = "trusted"
+
+[projects.'C:\Users\Shuhei Yokkaichi\Developer All Projects\Developer\7650 Heuristics Assignment']
+trust_level = "trusted"
+
+[projects.'C:\Users\Shuhei Yokkaichi\Developer All Projects\Developer\Modelling-Water-Reserve']
+trust_level = "trusted"
+
+[projects.'C:\Users\Shuhei Yokkaichi\Documents\Personal Wiki']
+trust_level = "trusted"
+
+[projects.'c:\users\shuhei yokkaichi\developer all projects\developer\project-deep-neural-network-python-dnn_team_4']
+trust_level = "trusted"
+
+[projects.'c:\users\shuhei yokkaichi\developer all projects\developer\financesummer']
+trust_level = "trusted"
+
+[projects.'c:\users\shuhei yokkaichi\onedrive\onedrive - the university of auckland\2026 sem 1\740\sph lab 1']
+trust_level = "trusted"
+
+[projects.'c:\users\shuhei yokkaichi\developer all projects\developer\matlab']
+trust_level = "trusted"
+
+[projects.'c:\users\shuhei yokkaichi\documents\cfd\p4p_knowledgewiki']
+trust_level = "trusted"
+
+[projects.'c:\users\shuhei yokkaichi\developer all projects\developer\invoiceextractor']
+trust_level = "trusted"
+
+[projects.'c:\users\shuhei yokkaichi\developer all projects\developer\invoicewiki']
+trust_level = "trusted"
+
+[projects.'c:\users\shuhei yokkaichi\developer all projects\developer\331lab']
+trust_level = "trusted"
+
+[projects.'c:\users\shuhei yokkaichi\documents\chatgpt\331 ode assignment']
+trust_level = "trusted"
+
+[projects.'c:\users\shuhei yokkaichi\developer all projects\developer\331 ode assignment']
+trust_level = "trusted"
+
+[projects.'c:\users\shuhei yokkaichi\developer all projects\developer\403-project']
+trust_level = "trusted"
+
+[projects.'c:\users\shuhei yokkaichi\documents\chatgpt\desktop']
+trust_level = "trusted"
+
+[projects.'c:\users\shuhei yokkaichi\developer all projects\developer\personalwiki']
+trust_level = "trusted"
+
+[projects.'c:\users\shuhei yokkaichi\developer all projects\developer\p4p-autoresearch']
+trust_level = "trusted"
+
+[windows]
+sandbox = "unelevated"
+
+[marketplaces.openai-bundled]
+source_type = "local"
+source = '\\?\C:\Users\Shuhei Yokkaichi\.codex\.tmp\bundled-marketplaces\openai-bundled'
+
+[marketplaces.openai-primary-runtime]
+source_type = "local"
+source = '\\?\C:\Users\Shuhei Yokkaichi\.cache\codex-runtimes\codex-primary-runtime\plugins\openai-primary-runtime'
+
+[features]
+memories = true
+js_repl = false
+
+[memories]
+generate_memories = true
+use_memories = true
+
+[plugins."documents@openai-primary-runtime"]
+enabled = true
+
+[plugins."spreadsheets@openai-primary-runtime"]
+enabled = true
+
+[plugins."presentations@openai-primary-runtime"]
+enabled = true
+
+[plugins."chrome@openai-bundled"]
+enabled = true
+
+[plugins."pdf@openai-primary-runtime"]
+enabled = true
+
+[plugins."template-creator@openai-primary-runtime"]
+enabled = true
+
+[plugins."visualize@openai-bundled"]
+enabled = true
+
+[plugins."browser@openai-bundled"]
+enabled = true
+
+[plugins."codex-app-tools@openai-bundled"]
+enabled = true
+
+[plugins."latex@openai-bundled"]
+enabled = true
+
+[plugins."unified-computer-use@openai-bundled"]
+enabled = true
+
+[plugins."computer-use@openai-bundled"]
+enabled = true
+
+[desktop]
+ambient-suggestions-enabled = false
+conversationDetailMode = "STEPS_COMMANDS"
+followUpQueueMode = "queue"
+show-context-window-usage = true
+enabled-reasoning-efforts = ["low", "medium", "high", "xhigh", "ultra", "persistent", "max"]
+appearanceTheme = "system"
+
+[mcp_servers.node_repl]
+args = []
+command = 'C:\Users\Shuhei Yokkaichi\AppData\Local\OpenAI\Codex\runtimes\cua_node\b35a688736d56912\bin\node_repl.exe'
+env_vars = ["CODEX_WINDOWS_REGISTERED_CORE"]
+startup_timeout_sec = 120
+
+[mcp_servers.node_repl.env]
+NODE_REPL_NATIVE_PIPE_CONNECT_TIMEOUT_MS = "1000"
+NODE_REPL_NODE_MODULE_DIRS = 'C:\Users\Shuhei Yokkaichi\AppData\Local\OpenAI\Codex\runtimes\cua_node\b35a688736d56912\bin\node_modules'
+NODE_REPL_NODE_PATH = 'C:\Users\Shuhei Yokkaichi\AppData\Local\OpenAI\Codex\runtimes\cua_node\b35a688736d56912\bin\node.exe'
+NODE_REPL_TRUSTED_CODE_PATHS = 'C:\Users\Shuhei Yokkaichi\.codex;C:\Users\Shuhei Yokkaichi\AppData\Local\OpenAI\Codex\runtimes\cua_node\b35a688736d56912\bin\node_modules'
+CODEX_HOME = 'C:\Users\Shuhei Yokkaichi\.codex'
+BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
+BROWSER_USE_TINYSKY_ENABLED = "1"
+NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = ""
+NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = ""
+BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
+BROWSER_USE_CODEX_APP_VERSION = "26.924.20706"
+NODE_REPL_TRUSTED_SERVICES = '{"browser":"C:/Users/Shuhei Yokkaichi/.codex/plugins/cache/openai-bundled/browser/26.924.20706/scripts/browser-service.mjs","sky":"@oai/sky/service"}'
+SKY_CUA_NATIVE_PIPE = "1"
+SKY_CUA_NATIVE_PIPE_DIRECTORY = '\\.\pipe\codex-computer-use-29dfc412-2092-44f5-bd99-d73a22457fa0'
+CODEX_CLI_PATH = 'C:\Users\Shuhei Yokkaichi\AppData\Local\OpenAI\Codex\bin\d23520d1e41bfb24\codex.exe'
+NODE_REPL_UNTRUSTED_ENV_ALLOWLIST = "CODEX_WINDOWS_REGISTERED_CORE"
+
+[shell_environment_policy.set]
+NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "8676faca28eddb6424d4b54116fe8305e2da6a0ca4e5271e8758fc3c55c3b8fc"

@@ -188,8 +188,8 @@ def main() -> None:
         require(1 <= args.source_interval <= 100, "Source interval must be 1..100")
     parent = json.loads(args.parent_manifest.read_text(encoding="utf-8"))
     assessment = json.loads(args.assessment.read_text(encoding="utf-8"))
-    require(parent["status"] == "COMPLETE" and assessment["developed_for_diagnostic_dpm"],
-            "Parent carrier has not passed its declared development gate")
+    require(parent["status"] == "COMPLETE" and parent.get("achieved_active_iterations"),
+            "Parent carrier does not have a complete bounded run and saved endpoint")
     require(parent["family"] == args.family, "Parent family mismatch")
     speed = float(parent["speed_m_s"])
     for kind in ("case", "data"):
@@ -206,6 +206,8 @@ def main() -> None:
     receipt_path = ROOT / "output" / "phase8-dpm" / label / "build.json"
     receipt = {"status": "BUILDING", "family": args.family, "mode": args.mode,
                "fraction": args.fraction, "speed_m_s": speed,
+               "carrier_assessment": assessment,
+               "dpm_activation_basis": "Phase 8 storyline clarification: diagnostic one-way DPM may follow any complete bounded carrier endpoint; numerical thresholds remain claim limits, not activation gates.",
                "injection_velocity_rule": "reference 27.118 m/s times nominal-speed/reference-speed ratio",
                "parent_manifest": str(args.parent_manifest),
                "source_interval": args.source_interval,

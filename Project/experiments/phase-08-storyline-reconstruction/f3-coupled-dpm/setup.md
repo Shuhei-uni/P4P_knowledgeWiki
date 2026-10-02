@@ -1,5 +1,9 @@
 # Phase 8 F3 — split inlet with two-way DPM fraction screen
 
+## Current execution purpose
+
+The [2026-09-30 phase clarification](../CONTEXT.md#question-and-goal) governs this setup: reproduce this stage in the simulation history using verified settings and a declared bounded horizon. Balance, inventory, continuity, and track-completeness thresholds below belong to earlier numerical assessment plans; they are diagnostics and claim limits, not current DPM-activation, family-progression, or completion gates. Do not continue or change solver controls solely to cross those thresholds. Preserve prior outcomes and label numerical adaptations separately. The phase remains paused.
+
 ## Question and contrast
 
 At fixed nominal inlet speed and total vapor/liquid feed, how does two-way DPM coupling and allocation of inlet liquid to droplets change carrier behaviour and droplet carryover? Contrast with the matching [F2](../f2-split-inlet/setup.md) one-way point, and separately compare DPM fractions within F3. Historical anchors: [09c two-way coupling](../../phase-03-dpm-carryover-and-coupling/purnanto-09c-two-way-dpm-coupling/setup.md) and [09cV2 allocation](../../phase-03-dpm-carryover-and-coupling/purnanto-09cV2-dpm-partition-control/setup.md).

@@ -1,3 +1,106 @@
+# Phase 8 F2 — split feed results
+
+Splitting the inlet phases changes retained liquid mass and the inlet flow representation, but the Coupled sweep still routes almost all Eulerian liquid to the steam outlet. It supplies the next historical stage rather than demonstrating successful separation.
+
+## Comparison basis
+
+Five nominal speeds on the same 60,964-cell partition, full Eulerian liquid feed, closed bottom, absorber/EWF off, and matched Coupled/Global Time Step/first-order-k numerics. Each speed starts with fresh Hybrid initialization and reaches N10,000. Routing and pressure summaries use N9,500–10,000; inventories are final snapshots. These Coupled cases are numerical adaptations of the SIMPLE recreation.
+
+## Higher speed changes inventory and pressure, with little change in outlet routing
+
+Across 20.11–32.14 m/s, F2's outlet fraction stays within 99.38–99.43%. Its inventory first decreases slightly and then rises to 1,911.1 kg; the pressure difference increases from 45.67 to 102.26 kPa. The inventory response is therefore not monotonic across the whole sweep, although pressure rises at every speed. Compared with F1, the split inlet retains more liquid at all five matched endpoints.
+
+![F2 speed response](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/speed-response.png>)
+
+| Speed (m/s) | Outlet liquid / feed, last-500 mean (%) | Final liquid inventory (kg) | Steam-face–outlet pressure difference (kPa) | Unresolved diagnostic DPM weight (%) |
+| ---: | ---: | ---: | ---: | ---: |
+| 20.11 | 99.384 | 1743.0 | 45.67 | 78.70 |
+| 23.46 | 99.422 | 1719.2 | 58.75 | 74.30 |
+| 26.81 | 99.404 | 1734.5 | 73.39 | 80.76 |
+| 29.48 | 99.425 | 1806.3 | 86.89 | 77.33 |
+| 32.14 | 99.423 | 1911.1 | 102.26 | 79.62 |
+
+![F2 routing and inventory histories](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/routing-inventory-history.png>)
+
+The raw histories distinguish the evolving carrier from its final checkpoint. Inventory is Eulerian liquid mass, not removed liquid. The pressure metric uses the recorded area-weighted `steaminlet` and `steamoutlet` reports; it is not a mass-weighted pressure loss.
+
+## Retained liquid occupies the lower region and outer wall
+
+| Reference snapshot | Vertical liquid distribution | Inlet-plane circulation |
+| --- | --- | --- |
+| F2-26.81-n10000 | ![F2-26.81-n10000 liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-26.81-n10000-liquid.png>) | ![F2-26.81-n10000 inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-26.81-n10000-inlet-vectors.png>) |
+
+The centre cut and inlet slice answer different questions: the first shows vertical liquid distribution; the second retains the offset inlet and shows circumferential flow. Compare speed cases within the same numerical branch and horizon. The SIMPLE snapshots document an earlier stage and are not matched N10,000 speed controls.
+
+Reference-speed gauge pressure:
+
+![F2-26.81-n10000 pressure](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-26.81-n10000-pressure.png>)
+
+*Figure F2.3. Reference-speed F2 carrier at N10,000, with a separate gauge-pressure view above. The centre cut identifies lower-region and wall enrichment; inlet-plane vectors show circumferential circulation. These local views support the inventory interpretation without measuring removal.*
+
+The split-feed centre cut has a deeper liquid-enriched lower region than the mixed-feed reference at 26.81 m/s, consistent with its larger inventory. Both show an outer-wall liquid band and low-volume-fraction central bulk; the inlet slice shows enrichment around the outer circumference and a locally stronger band near the inlet junction. The inlet-plane vectors retain the same circulation direction. Use the inventory report to quantify the difference; a centre-plane colour footprint alone does not measure the 3D liquid mass.
+
+## Diagnostic droplets reveal unresolved transport rather than a complete separation result
+
+F2 retains 74.30–80.76% unresolved injection weight, without a monotonic trend across the speeds. At 26.81 m/s, 80.76% is unresolved, compared with 77.30% in F1. This small cross-family difference does not establish a droplet-separation ranking.
+
+![F2 seven-bin fates at every speed](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/droplet-bin-fates.png>)
+
+![F2 droplet speed response](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/droplet-speed-response.png>)
+
+The left plot uses injection-weighted fate fractions; the right gives the incomplete trajectory fraction in each size bin. Both retain incomplete tracks. Diagnostic parcel weights do not add physical inlet mass to these full-Eulerian-feed carriers. High unresolved fractions prevent converting escaped weight into separator efficiency.
+
+**F2 reference one-way DPM — inlet stream 0:**
+
+| 7.07 µm | 34.64 µm | 89.44 µm |
+| --- | --- | --- |
+| ![F2-26.81-diagnostic stream 0 07](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-26.81-diagnostic-track-07um-stream0.png>) | ![F2-26.81-diagnostic stream 0 35](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-26.81-diagnostic-track-35um-stream0.png>) | ![F2-26.81-diagnostic stream 0 89](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-26.81-diagnostic-track-89um-stream0.png>) |
+
+Each row shows three deterministic illustrative paths, not a statistical sample. Native zone outlines provide vessel/inlet/outlet context; path colour represents diameter on the shared 5–100 µm range. The line endpoint alone is not a fate classification. The saved tracking controls were retained; no carrier iterations or source-case saves were issued. Diameter-resolved fate plots, rather than these selected paths, describe the full tracked ensemble.
+
+## Numerical context
+
+![F2 numerical context](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/numerical-context.png>)
+
+The reported boundary gap and continuity are supporting diagnostics. Reverse outlet flow and viscosity limiting were recorded in these runs; a low residual or bounded inventory does not validate the closed-bottom separator. See the [phase result](../results.md) for the matched F1/F2 comparison.
+
+## What this stage establishes
+
+F2 supplies the split-inlet stage: the internal liquid state differs from F1, but almost all Eulerian liquid still reaches the steam outlet. Separating the inlet phases alone does not establish a satisfactory removal path in the closed-bottom model; F3 adds explicit droplet transport and feedback to investigate another part of that history. The five-speed SIMPLE snapshots preserve an earlier method branch; the quantitative F2 sweep remains the declared Coupled adaptation.
+
+## Supporting spatial atlas
+
+<details>
+<summary>All saved case contours and vectors</summary>
+
+| Saved snapshot | Liquid, vertical cut | Liquid, inlet slice | Vertical vectors | Inlet vectors |
+| --- | --- | --- | --- | --- |
+| F2 20.11 m/s N10000 | ![F2-20.11-n10000 liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-20.11-n10000-liquid.png>) | ![F2-20.11-n10000 inlet-liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-20.11-n10000-inlet-liquid.png>) | ![F2-20.11-n10000 vertical-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-20.11-n10000-vertical-vectors.png>) | ![F2-20.11-n10000 inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-20.11-n10000-inlet-vectors.png>) |
+| F2 23.46 m/s N10000 | ![F2-23.46-n10000 liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-23.46-n10000-liquid.png>) | ![F2-23.46-n10000 inlet-liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-23.46-n10000-inlet-liquid.png>) | ![F2-23.46-n10000 vertical-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-23.46-n10000-vertical-vectors.png>) | ![F2-23.46-n10000 inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-23.46-n10000-inlet-vectors.png>) |
+| F2 26.81 m/s N10000 | ![F2-26.81-n10000 liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-26.81-n10000-liquid.png>) | ![F2-26.81-n10000 inlet-liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-26.81-n10000-inlet-liquid.png>) | ![F2-26.81-n10000 vertical-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-26.81-n10000-vertical-vectors.png>) | ![F2-26.81-n10000 inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-26.81-n10000-inlet-vectors.png>) |
+| F2 29.48 m/s N10000 | ![F2-29.48-n10000 liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-29.48-n10000-liquid.png>) | ![F2-29.48-n10000 inlet-liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-29.48-n10000-inlet-liquid.png>) | ![F2-29.48-n10000 vertical-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-29.48-n10000-vertical-vectors.png>) | ![F2-29.48-n10000 inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-29.48-n10000-inlet-vectors.png>) |
+| F2 32.14 m/s N10000 | ![F2-32.14-n10000 liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-32.14-n10000-liquid.png>) | ![F2-32.14-n10000 inlet-liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-32.14-n10000-inlet-liquid.png>) | ![F2-32.14-n10000 vertical-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-32.14-n10000-vertical-vectors.png>) | ![F2-32.14-n10000 inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-32.14-n10000-inlet-vectors.png>) |
+| F2 SIMPLE original faces N2000 | ![F2-simple-mixed liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-simple-mixed-liquid.png>) | ![F2-simple-mixed inlet-liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-simple-mixed-inlet-liquid.png>) | ![F2-simple-mixed vertical-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-simple-mixed-vertical-vectors.png>) | ![F2-simple-mixed inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-simple-mixed-inlet-vectors.png>) |
+
+Columns show separate native liquid contours and mixture-vector views. Shared planes, scales and source identities are specified below. SIMPLE and continuation snapshots have their own horizons and are not substitutes for matched pilot controls.
+
+</details>
+
+## Figure provenance and claim limits
+
+Spatial images are native Fluent 2025 R2 exports from verified case/data pairs. The vertical cut is `z = 0`; the horizontal cut is `y = 2.065999985 m`, the midpoint of the measured steam-inlet elevation bounds. Vertical axis is `y`. Liquid volume fraction uses `0–1`; mixture velocity colours use `0–100 m/s`. Bulk slice vectors are in-plane, fixed-length, use shared scale `0.1`, and show every available vector (`skip = 0`). They show projected direction; colour represents full mixture speed. Pressure contours use a shared gauge-pressure range `1110–1220 kPa`.
+
+Evidence: [hash-verified case catalog](../../../../PyAnsys/output/phase8-storyline-20260930/catalog.json), [native export receipt](../../../../PyAnsys/output/phase8-storyline-20260930/export-receipt.json), [surface/range receipt](../../../../PyAnsys/output/phase8-storyline-20260930/range-receipt.json) and [plot summary](../../../../PyAnsys/output/phase8-storyline-20260930/summary.json).
+
+Phase 8 reconstructs the simulation storyline. Numerical shortcomings are observations and interpretation limits, not progression gates. Steady native iterations are not physical time; inventory slopes must not be called physical storage rates. No new flow solves were performed for these results.
+
+## Retained detailed execution evidence
+
+<details>
+<summary>Earlier receipts, numerical assessments and setup detail</summary>
+
+Earlier pass/fail terminology below records the previous numerical screening rule. It is superseded as a Phase 8 progression/completion requirement by the [2026-09-30 clarification](../CONTEXT.md).
+
 # F2 26.81 m/s base preparation
 
 F2 was derived from the verified F1 26.81 m/s case/data pair by changing the four phase mass-flow inlet commands only. It was then freshly Hybrid initialized, saved, and reopened on `student`.
@@ -87,3 +190,5 @@ The N10,000 continuation completed, saved local N3,000–N9,000 checkpoints, and
 The [matched F1/F2 trajectory](../../../../PyAnsys/output/phase8-analysis/32p14-f1-f2-coupled-n10000/f1-f2-coupled-32p14-n10000.png) and [summary](../../../../PyAnsys/output/phase8-analysis/32p14-f1-f2-coupled-n10000/summary.json) show endpoint outlet-liquid fractions `99.69%` (F1) and `99.45%` (F2), with domain liquid inventory about `1,630 kg` and `1,911 kg` respectively. Both carriers pass the operational gate, but their outlet routing does not support a separator-efficiency distinction in this closed-bottom geometry.
 
 The [32.14 m/s F2 diagnostic child](../../../../PyAnsys/output/phase8-dpm/F2-diagnostic-050permil-32p14-20260929T062610Z/build.json) saved/reopened seven one-way inert bins from its qualified carrier. All seven native track reports completed at 613 trajectories per bin. The [weighted fate summary](../../../../PyAnsys/output/phase8-analysis/32p14-f2-diagnostic-dpm/summary.json) and [figure](../../../../PyAnsys/output/phase8-analysis/32p14-f2-diagnostic-dpm/f2-diagnostic-dpm-fates-32p14.png) show `1.56%` escaped, `18.81%` trapped, and **`79.62%` incomplete**. Matched F1 retains `82.75%` incomplete; neither escape fraction qualifies as physical carryover efficiency.
+
+</details>

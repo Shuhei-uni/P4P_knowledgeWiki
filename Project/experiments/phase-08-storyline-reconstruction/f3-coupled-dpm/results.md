@@ -1,3 +1,121 @@
+# Phase 8 F3 — allocated two-way droplets
+
+F3 changes both the liquid representation and carrier feedback: a stated part of the total liquid feed is moved from Eulerian liquid to coupled DPM. The matched pilots show transient routing changes and strongly size-dependent unresolved fates. They extend the storyline even when numerical diagnostics are poor.
+
+## Allocating more liquid to DPM changes the bulk response
+
+The speed comparison uses four 2.5% pilots, each from its independent same-speed F2 N10,000 parent, at N10,000–11,000 with 100-iteration retracking and held sources. The 26.81 m/s loading comparison uses the same 2.5% and 5% protocol. 29.48 m/s and the larger selected loading fractions have not been run in this series.
+
+![F3 matched speed pilots](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/pilot-speed-response.png>)
+
+At 26.81 m/s, the 5% pilot loses more Eulerian inventory over the same 1,000 iterations than the 2.5% pilot and ends with a lower Eulerian outlet fraction. Figure F3.2 shows that this difference develops through an oscillatory adjustment after allocation/coupling begins.
+
+![F3 matched loading pilots](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/pilot-loading-response.png>)
+
+| Speed (m/s) | Allocated DPM (%) | N11,000 Eulerian outlet liquid / total liquid feed (%) | Eulerian inventory (kg) | DPM escaped (% of allocated feed) | DPM trapped (%) | DPM unresolved (%) |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 20.11 | 2.5 | 96.126 | 1749.8 | 1.51 | 31.18 | 67.32 |
+| 23.46 | 2.5 | 96.998 | 1715.5 | 1.81 | 20.72 | 77.47 |
+| 26.81 | 2.5 | 96.972 | 1715.8 | 1.73 | 18.96 | 79.31 |
+| 32.14 | 2.5 | 97.935 | 1864.5 | 1.73 | 12.11 | 86.16 |
+| 26.81 | 5 | 94.041 | 1676.3 | 1.88 | 19.13 | 78.98 |
+
+The outlet numerator is Eulerian liquid only, while the denominator is the unchanged total liquid feed, including allocated DPM. A lower value than F2 therefore partly reflects the representation change; it is not the total liquid carryover. At 26.81 m/s the 2.5% and 5% pilots end at 96.97% and 94.04%, respectively, with 79.31% and 78.98% of DPM feed unresolved.
+
+## The broad liquid structure persists through the pilot change
+
+| Reference snapshot | Vertical liquid distribution | Inlet-plane circulation |
+| --- | --- | --- |
+| F3-26.81-2p5-n11000 | ![F3-26.81-2p5-n11000 liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-2p5-n11000-liquid.png>) | ![F3-26.81-2p5-n11000 inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-2p5-n11000-inlet-vectors.png>) |
+
+Compare the N11,000 pilots first. The 2.5% averaged-source snapshots at N20,000, N25,000 and N15,000, and the 5% held-source N20,000 snapshot, are separate numerical adaptations at unequal development horizons.
+
+The reference 2.5% and 5% centre cuts retain the same broad lower-liquid and outer-wall pattern seen in F2; the loading change does not visibly replace that structure at this pilot horizon. The mixture inlet vectors still show circumferential circulation. Quantitative routing and inventory histories resolve differences that are subtle on the shared full-range contours.
+
+## Reference-speed pressure
+
+| 2.5% pilot | 5% pilot |
+| --- | --- |
+| ![F3-26.81-2p5-n11000 pressure](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-2p5-n11000-pressure.png>) | ![F3-26.81-5-n11000 pressure](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-5-n11000-pressure.png>) |
+
+## Intermediate droplets dominate the unresolved tracking problem
+
+The 14, 24 and 35 µm bins remain almost entirely incomplete in the pilot fate plots. At the reference 2.5% point, the 89 µm trajectories are trapped while the smallest bin has both escaped and trapped trajectories. The response therefore depends strongly on diameter, and the completed smallest/largest bins cannot represent the unresolved middle of the distribution.
+
+![F3 pilot droplet fates](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/pilot-droplet-fates.png>)
+
+**F3 26.81 m/s 2.5% N11000 — inlet stream 0:**
+
+| 7.07 µm | 34.64 µm | 89.44 µm |
+| --- | --- | --- |
+| ![F3-26.81-2p5-n11000 stream 0 07](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-2p5-n11000-track-07um-stream0.png>) | ![F3-26.81-2p5-n11000 stream 0 35](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-2p5-n11000-track-35um-stream0.png>) | ![F3-26.81-2p5-n11000 stream 0 89](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-2p5-n11000-track-89um-stream0.png>) |
+
+**F3 26.81 m/s 5% N11000 — inlet stream 0:**
+
+| 7.07 µm | 34.64 µm | 89.44 µm |
+| --- | --- | --- |
+| ![F3-26.81-5-n11000 stream 0 07](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-5-n11000-track-07um-stream0.png>) | ![F3-26.81-5-n11000 stream 0 35](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-5-n11000-track-35um-stream0.png>) | ![F3-26.81-5-n11000 stream 0 89](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-5-n11000-track-89um-stream0.png>) |
+
+Each row shows three deterministic illustrative paths, not a statistical sample. Native zone outlines provide vessel/inlet/outlet context; path colour represents diameter on the shared 5–100 µm range. The line endpoint alone is not a fate classification. The saved tracking controls were retained; no carrier iterations or source-case saves were issued. Diameter-resolved fate plots, rather than these selected paths, describe the full tracked ensemble.
+
+## Numerical adaptation and tracking sensitivity
+
+![F3 source averaging at unequal horizons](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/source-averaging-context.png>)
+
+![F3 low-speed and 5% continuations](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/additional-continuation-context.png>)
+
+The earlier continuation campaign investigated source cadence, relaxation, linearization and averaging. These results document that investigation; they do not redefine Phase 8 as a convergence campaign. The final original and averaged-source segments are shown at their actual coordinates, with intervening segments available in the retained receipts.
+
+![F3 tracking cap sensitivity](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/tracking-cap-sensitivity.png>)
+
+Increasing the tracking cap from 50,000 to 200,000 steps reduced unresolved represented DPM feed from 82.01% to 73.55% at 26.81 m/s and from 83.40% to 78.27% at 32.14 m/s. Each panel holds its carrier fixed; the two carriers have different horizons. The further 500,000-step 24/35 µm reference probe did not change their fate counts. These probes show sensitivity to termination limits, not completed droplet separation.
+
+## Numerical context
+
+![F3 pilot accounting and continuity context](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/numerical-context.png>)
+
+The continuity and boundary-gap histories give context for the pilot response; they do not decide whether this historical stage belongs in Phase 8.
+
+## What this stage establishes
+
+F3 recreates the transition from diagnostic paths to mass-carrying coupled droplets. Both liquid allocation and feedback affect the carrier, while unresolved intermediate-size trajectories remain the main particle-evidence limit. The next historical step, F4, adds a wall-film representation to examine attachment and wall transport; F3 does not establish the missing fates as captured liquid.
+
+## Supporting spatial atlas
+
+<details>
+<summary>All saved case contours and vectors</summary>
+
+| Saved snapshot | Liquid, vertical cut | Liquid, inlet slice | Vertical vectors | Inlet vectors |
+| --- | --- | --- | --- | --- |
+| F3 20.11 m/s 2.5% N11000 | ![F3-20.11-2p5-n11000 liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-20.11-2p5-n11000-liquid.png>) | ![F3-20.11-2p5-n11000 inlet-liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-20.11-2p5-n11000-inlet-liquid.png>) | ![F3-20.11-2p5-n11000 vertical-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-20.11-2p5-n11000-vertical-vectors.png>) | ![F3-20.11-2p5-n11000 inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-20.11-2p5-n11000-inlet-vectors.png>) |
+| F3 23.46 m/s 2.5% N11000 | ![F3-23.46-2p5-n11000 liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-23.46-2p5-n11000-liquid.png>) | ![F3-23.46-2p5-n11000 inlet-liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-23.46-2p5-n11000-inlet-liquid.png>) | ![F3-23.46-2p5-n11000 vertical-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-23.46-2p5-n11000-vertical-vectors.png>) | ![F3-23.46-2p5-n11000 inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-23.46-2p5-n11000-inlet-vectors.png>) |
+| F3 26.81 m/s 2.5% N11000 | ![F3-26.81-2p5-n11000 liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-2p5-n11000-liquid.png>) | ![F3-26.81-2p5-n11000 inlet-liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-2p5-n11000-inlet-liquid.png>) | ![F3-26.81-2p5-n11000 vertical-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-2p5-n11000-vertical-vectors.png>) | ![F3-26.81-2p5-n11000 inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-2p5-n11000-inlet-vectors.png>) |
+| F3 32.14 m/s 2.5% N11000 | ![F3-32.14-2p5-n11000 liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-32.14-2p5-n11000-liquid.png>) | ![F3-32.14-2p5-n11000 inlet-liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-32.14-2p5-n11000-inlet-liquid.png>) | ![F3-32.14-2p5-n11000 vertical-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-32.14-2p5-n11000-vertical-vectors.png>) | ![F3-32.14-2p5-n11000 inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-32.14-2p5-n11000-inlet-vectors.png>) |
+| F3 26.81 m/s 5% N11000 | ![F3-26.81-5-n11000 liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-5-n11000-liquid.png>) | ![F3-26.81-5-n11000 inlet-liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-5-n11000-inlet-liquid.png>) | ![F3-26.81-5-n11000 vertical-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-5-n11000-vertical-vectors.png>) | ![F3-26.81-5-n11000 inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-5-n11000-inlet-vectors.png>) |
+| F3 26.81 m/s 2.5% averaged N25000 | ![F3-26p81-averaged liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26p81-averaged-liquid.png>) | ![F3-26p81-averaged inlet-liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26p81-averaged-inlet-liquid.png>) | ![F3-26p81-averaged vertical-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26p81-averaged-vertical-vectors.png>) | ![F3-26p81-averaged inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26p81-averaged-inlet-vectors.png>) |
+| F3 32.14 m/s 2.5% averaged N15000 | ![F3-32p14-averaged liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-32p14-averaged-liquid.png>) | ![F3-32p14-averaged inlet-liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-32p14-averaged-inlet-liquid.png>) | ![F3-32p14-averaged vertical-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-32p14-averaged-vertical-vectors.png>) | ![F3-32p14-averaged inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-32p14-averaged-inlet-vectors.png>) |
+| F3 20.11 m/s 2.5% averaged N20000 | ![F3-20p11-averaged liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-20p11-averaged-liquid.png>) | ![F3-20p11-averaged inlet-liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-20p11-averaged-inlet-liquid.png>) | ![F3-20p11-averaged vertical-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-20p11-averaged-vertical-vectors.png>) | ![F3-20p11-averaged inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-20p11-averaged-inlet-vectors.png>) |
+| F3 26.81 m/s 5% held sources N20000 | ![F3-26p81-5pct-n20000 liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26p81-5pct-n20000-liquid.png>) | ![F3-26p81-5pct-n20000 inlet-liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26p81-5pct-n20000-inlet-liquid.png>) | ![F3-26p81-5pct-n20000 vertical-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26p81-5pct-n20000-vertical-vectors.png>) | ![F3-26p81-5pct-n20000 inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26p81-5pct-n20000-inlet-vectors.png>) |
+
+Columns show separate native liquid contours and mixture-vector views. Shared planes, scales and source identities are specified below. SIMPLE and continuation snapshots have their own horizons and are not substitutes for matched pilot controls.
+
+</details>
+
+## Figure provenance and claim limits
+
+Spatial images are native Fluent 2025 R2 exports from verified case/data pairs. The vertical cut is `z = 0`; the horizontal cut is `y = 2.065999985 m`, the midpoint of the measured steam-inlet elevation bounds. Vertical axis is `y`. Liquid volume fraction uses `0–1`; mixture velocity colours use `0–100 m/s`. Bulk slice vectors are in-plane, fixed-length, use shared scale `0.1`, and show every available vector (`skip = 0`). They show projected direction; colour represents full mixture speed. Pressure contours use a shared gauge-pressure range `1110–1220 kPa`.
+
+Evidence: [hash-verified case catalog](../../../../PyAnsys/output/phase8-storyline-20260930/catalog.json), [native export receipt](../../../../PyAnsys/output/phase8-storyline-20260930/export-receipt.json), [surface/range receipt](../../../../PyAnsys/output/phase8-storyline-20260930/range-receipt.json) and [plot summary](../../../../PyAnsys/output/phase8-storyline-20260930/summary.json).
+
+Phase 8 reconstructs the simulation storyline. Numerical shortcomings are observations and interpretation limits, not progression gates. Steady native iterations are not physical time; inventory slopes must not be called physical storage rates. No new flow solves were performed for these results.
+
+## Retained detailed execution evidence
+
+<details>
+<summary>Earlier receipts, numerical assessments and setup detail</summary>
+
+Earlier pass/fail terminology below records the previous numerical screening rule. It is superseded as a Phase 8 progression/completion requirement by the [2026-09-30 clarification](../CONTEXT.md).
+
 # F3 allocated two-way DPM, 26.81 m/s and 5%
 
 The [first verified child](../../../../PyAnsys/output/phase8-dpm/F2-allocated-050permil-26p81-20260928T143857Z/build.json) retained the qualified F2 Coupled carrier field, moved `5.846936325 kg/s` of inlet liquid into the seven inert DPM bins, and reduced Eulerian liquid feed to `111.091790175 kg/s`. DPM interaction was on with a source update every carrier iteration. Its [run manifest](../../../../PyAnsys/output/phase8-carrier/F3-26p81-5pct-coupled-20260928T144022Z/manifest.json) records the saved pre-run case/data pair and the interrupted attempt: tracking every update projected about 23 hours per 1,000 carrier iterations. No endpoint from that attempt is used as a result.
@@ -52,3 +170,5 @@ The independent [20.11 m/s, 2.5% child](../../../../PyAnsys/output/phase8-dpm/F2
 The [20.11 m/s averaged-source N15,000 child](../../../../PyAnsys/output/phase8-carrier/F3-20p11-2p5pct-coupled-upd100-averaged-sources-extension-to15000-20260930T033606Z/manifest.json) retained the same 2.5% feed, seven bins, and 100-iteration source cadence, with node averaging verified after save/reopen. It saved local checkpoints and reopened the selected final pair; all bins tracked. Its [N14,500–15,000 assessment](../../../../PyAnsys/output/phase8-analysis/20p11-f3-2p5pct-averaged-sources-n15000/assessment.json) passes mean absolute Eulerian boundary gap (`0.617 kg/s`, `0.423%` of feed) but fails phase-2 inventory slope (`-0.01859 kg/steady iteration`) and continuity (`0.01488–0.02491`). Weighted incomplete DPM fate is `1.6103 kg/s` (**73.43%**) at the baseline 50,000-step cap. The numerically changed child does not qualify this low-speed carrier. An unchanged deeper N20,000 continuation tests whether its last-500 window settles; no speed or carryover claim is made from this result.
 
 The unchanged [20.11 m/s continuation to N20,000](../../../../PyAnsys/output/phase8-carrier/F3-20p11-2p5pct-coupled-upd100-averaged-sources-extension-to20000-20260930T053945Z/manifest.json) retained source averaging and the same feed, saved local checkpoints and a selected shared final pair, reopened the latter, and tracked all seven bins. Its [N19,500–20,000 assessment](../../../../PyAnsys/output/phase8-analysis/20p11-f3-2p5pct-averaged-sources-n20000/assessment.json) passes boundary gap (`0.746 kg/s`, `0.511%` of feed) and inventory slope (`+0.00282 kg/steady iteration`), but continuity peaks at `0.02628`, above both the `<0.02` gate and the N15,000 peak (`0.02491`). Weighted incomplete DPM fate is `1.5518 kg/s` (**70.77%**) at 50,000 steps. This deeper unchanged branch does not qualify the low-speed carrier and offers no improving continuity trend. It remains a preserved diagnostic endpoint; 200,000-step fate comparison is deferred because the carrier gate failed.
+
+</details>

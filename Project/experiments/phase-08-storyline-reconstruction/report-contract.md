@@ -2,6 +2,10 @@
 
 Each selected `setup.md` must list the exact Fluent report-definition name, expression or surface/zone scope, units, sign convention, sampling cadence, and output file for every applicable row. Record `N/A` with a reason for an inapplicable measure; record `unavailable` with failed readback when Fluent cannot provide it. Neither means zero.
 
+## Purpose and completion
+
+Phase 8 reconstructs the historical simulation sequence leading to the current model, as defined in [the phase contract](CONTEXT.md). Mass imbalance, inventory drift, continuity residuals, and incomplete tracks are reported limitations, not phase-completion or matrix-progression gates. A faithfully configured bounded run with preserved evidence can complete a storyline stage even when those diagnostics are poor. Do not prolong or redesign it solely to make the diagnostics pass. Physical efficiency and converged-state claims still require supporting evidence.
+
 ## Reproducibility record
 
 Record the source historical setup revision; new mesh path, hash, cell count, zone list, and Fluent mesh check; Fluent version and machine; case/data parent hashes; initialization or continuation; physics, materials, boundaries, sources, DPM/EWF settings and readback; report-definition manifest; solver controls and run commands; start/end native coordinates; checkpoints and hashes; transcript/events; and script or TUI revision. Link to raw evidence in `PyAnsys/`.

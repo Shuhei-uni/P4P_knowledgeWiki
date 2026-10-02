@@ -8,7 +8,7 @@ in `PyAnsys/`.
 
 ## What are we trying to answer now?
 
-**Shuhei — Phase 8 planning:** create four reproducible run families on the
+**Shuhei — Phase 8 storyline reconstruction:** reproduce the historical simulation steps leading to the current model; closing mass imbalance and reducing continuity are diagnostics, not the phase goal or progression gates. Create four reproducible run families on the
 existing 60k simplified mesh to compare one-inlet and split-inlet carriers,
 one-way and two-way DPM, five Phase 8 inlet-speed points (`20.11`, `23.46`,
 `26.81`, `29.48`, and `32.14 m/s`), injected
@@ -19,6 +19,7 @@ points for an absorber-equipped comparison. This is a new-mesh storyline
 series, not a quantitative replay of historical results. See the [Phase 8
 context](experiments/phase-08-storyline-reconstruction/CONTEXT.md) and
 [common report contract](experiments/phase-08-storyline-reconstruction/report-contract.md).
+The [Phase 8 result](experiments/phase-08-storyline-reconstruction/results.md) brings together family plots, native spatial views and the reconstructed model-development storyline.
 
 The liquid-removal work has two separate planning lanes:
 

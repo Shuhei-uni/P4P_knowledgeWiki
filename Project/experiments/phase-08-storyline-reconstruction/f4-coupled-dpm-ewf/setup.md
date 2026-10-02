@@ -1,5 +1,9 @@
 # Phase 8 F4 — coupled DPM plus Eulerian Wall Film
 
+## Current execution purpose
+
+The [2026-09-30 phase clarification](../CONTEXT.md#question-and-goal) governs this setup: reproduce this stage in the simulation history using verified settings and a declared bounded horizon. Balance, inventory, continuity, and track-completeness thresholds below belong to earlier numerical assessment plans; they are diagnostics and claim limits, not current DPM-activation, family-progression, or completion gates. Do not continue or change solver controls solely to cross those thresholds. Preserve prior outcomes and label numerical adaptations separately. The phase remains paused.
+
 ## Question and contrast
 
 At matched speed and inlet-DPM fraction, does adding EWF to [F3](../f3-coupled-dpm/setup.md) change film formation, droplet fate, phase routing, or liquid storage without an unaccounted transfer? This is a new-mesh mechanism test; historical [Phase 4 EWF](../../phase-04-ewf-wall-film-mechanisms/interpretation.md) and current [Phase 7.2A EWF](../../phase-07-2a-wall-liquid-routing/ewf-family/results.md) constrain interpretation but are not quantitative baselines.
