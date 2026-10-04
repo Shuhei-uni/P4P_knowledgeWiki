@@ -1,0 +1,92 @@
+{
+  "status": "Draft poster communication layer; no simulation or raw evidence edits",
+  "comparison": {
+    "source": "Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/results.md",
+    "basis": "Phase 8 F2, 26.81 m/s, 60,964 cells, split feed, closed bottom, no absorber/EWF, independently initialized branches, N5000 endpoints",
+    "values": {
+      "simple_boundary_error_kg_s": 57.682,
+      "recovery_boundary_error_kg_s": 2.408,
+      "simple_last500_inventory_slope_kg_per_iteration": 1.393,
+      "recovery_last500_inventory_slope_kg_per_iteration": 0.0336,
+      "simple_terminal_continuity": 0.2649,
+      "recovery_terminal_continuity": 0.0149
+    },
+    "limits": "Reported values from Project; linked Phase 8 native analysis bundles absent from checkout. Multiple numerical settings change together."
+  },
+  "inventory": {
+    "source": "PyAnsys/output/phase71a_r0_control_run4/report-histories-batched.json",
+    "sha256": "c401fae2206f4a122fa763ade5706f39e8a926658ef58b1f662434db9aab194a",
+    "series": "v2-total-liquid-mass",
+    "rendering": "All 2,007 raw samples, no smoothing or interpolation",
+    "basis": "Phase 7.1A R0, full loading, smooth wall, absorber on, EWF off; separate configuration from Phase 8",
+    "windows": [
+      {
+        "iterations": [
+          3580,
+          4586
+        ],
+        "points": 1007,
+        "start_kg": 182.51779813379,
+        "end_kg": 293.7032266966645,
+        "change_kg": 111.1854285628745,
+        "ols_slope_kg_per_iteration": 0.08953301825722439
+      },
+      {
+        "iterations": [
+          4586,
+          5586
+        ],
+        "points": 1001,
+        "start_kg": 293.7032266966645,
+        "end_kg": 295.8535672079275,
+        "change_kg": 2.150340511262982,
+        "ols_slope_kg_per_iteration": 0.0018511718143012887
+      },
+      {
+        "iterations": [
+          5086,
+          5586
+        ],
+        "points": 501,
+        "start_kg": 295.6478205785288,
+        "end_kg": 295.8535672079275,
+        "change_kg": 0.20574662939867494,
+        "ols_slope_kg_per_iteration": 0.0004960968163377066
+      }
+    ],
+    "terminal_liquid_error_kg_s": -24.334411802790626,
+    "terminal_native_mixture_error_kg_s": -23.892264598038196,
+    "terminal_liquid_error_pct_feed": 20.812873591165417,
+    "terminal_native_mixture_error_pct_feed": 12.090615150062337,
+    "limits": "Inventory stationarity does not establish source-inclusive closure; kg/iteration is not physical kg/s. Native restart coordinates retained."
+  },
+  "droplet_fates": {
+    "source": "Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/results.md",
+    "basis": "Phase 8 F3, 26.81 m/s, 5% liquid allocated to coupled DPM, N11000; seven-bin assumed fine mist, 50,000-step tracking cap",
+    "escaped_pct": 1.88,
+    "trapped_pct": 19.13,
+    "incomplete_pct": 78.98,
+    "represented_feed_kg_s": 5.846936325,
+    "limits": "Reported injection-weighted fates, not trajectory-count fractions or separator efficiency. Rounded total is 99.99%; bars not renormalised."
+  },
+  "spatial_view": {
+    "source": "Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-26.81-n10000-liquid.png",
+    "basis": "Native Fluent 2025 R2 export, F2 Coupled, 26.81 m/s, N10000, z=0, phase-2 volume fraction 0\u20131",
+    "rendering": "Original field and colour-strip pixels embedded in clipped SVG viewports, with larger vector labels. No recolouring or field alteration; offset inlet outside section.",
+    "sha256": "ee39c923f7d3fadda5274c658aa73d946ba72173f2006602b42dc21523ec56e0",
+    "native_pixel_viewports": {
+      "field": [
+        560,
+        70,
+        690,
+        2240
+      ],
+      "colour_strip": [
+        53,
+        803,
+        65,
+        851
+      ]
+    }
+  }
+}

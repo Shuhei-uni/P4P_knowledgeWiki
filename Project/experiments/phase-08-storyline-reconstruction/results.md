@@ -123,7 +123,7 @@
 | split inlet | was introduced to represent liquid and steam entering different parts of the opening |
 | — | Figure 1 tests whether that representation changes the carrier response across the common speed sweep |
 
-![Figure 1: matched F1 F2 speed response](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/figures/f1-f2-speed-comparison.png>)
+![Figure 1: matched F1 F2 speed response](figures/f1-f2-speed-comparison.png)
 
 *Figure 1. F1 mixed-feed and F2 split-feed Coupled carriers at five nominal speeds, each independently initialized and run to N10,000. Routing and area-weighted steam-face-to-outlet pressure difference use the final-500 window; inventory is the final saved value. The narrow outlet-axis range highlights small differences: every point remains above 99%.*
 
@@ -137,7 +137,7 @@
 
 | F1-26.81-n10000 | F2-26.81-n10000 |
 | --- | --- |
-| ![F1-26.81-n10000 liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f1-one-inlet/figures/F1-26.81-n10000-liquid.png>) | ![F2-26.81-n10000 liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-26.81-n10000-liquid.png>) |
+| ![F1-26.81-n10000 liquid](f1-one-inlet/figures/F1-26.81-n10000-liquid.png) | ![F2-26.81-n10000 liquid](f2-split-inlet/figures/F2-26.81-n10000-liquid.png) |
 
 *Figure 2. Reference-speed vertical liquid-volume-fraction contours, N10,000, `z = 0`, common range 0–1. F2 has a deeper liquid-enriched lower region; both retain outer-wall enrichment and comparatively low liquid volume fraction in much of the central bulk.*
 
@@ -149,7 +149,7 @@
 
 | F1-26.81-n10000 | F2-26.81-n10000 |
 | --- | --- |
-| ![F1-26.81-n10000 inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f1-one-inlet/figures/F1-26.81-n10000-inlet-vectors.png>) | ![F2-26.81-n10000 inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-26.81-n10000-inlet-vectors.png>) |
+| ![F1-26.81-n10000 inlet-vectors](f1-one-inlet/figures/F1-26.81-n10000-inlet-vectors.png) | ![F2-26.81-n10000 inlet-vectors](f2-split-inlet/figures/F2-26.81-n10000-inlet-vectors.png) |
 
 *Figure 3. Native mixture vectors through inlet height at the same two endpoints. In-plane arrows show circumferential circulation; colour is full mixture speed, shared range 0–100 m/s. Common fixed arrow length and scale permit a direction comparison.*
 
@@ -161,7 +161,9 @@
 
 ## Finding 1a — the F1 numerical package changes the matched carrier response
 
-![F1 SIMPLE versus Coupled at matched speeds](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/PyAnsys/output/phase8-analysis/f1-simple-vs-coupled-n10000/f1-simple-vs-coupled-n10000.png>)
+![F1 SIMPLE versus Coupled at matched speeds](f1-one-inlet/figures/f1-simple-vs-coupled-n10000.png)
+
+*Replotted from the rounded values in the table below; original machine-generated plot unavailable in this checkout.*
 
 | Speed (m/s) | Steam-outlet liquid / feed, Coupled → SIMPLE (%) | Final liquid inventory, Coupled → SIMPLE (kg) | Pressure difference, Coupled → SIMPLE (kPa) |
 | ---: | ---: | ---: | ---: |
@@ -201,9 +203,16 @@
 | F1 applies mixed feed to both inlet faces on the 60,964-cell Phase 8 mesh |
 | Although F1 SIMPLE shares the audited 00a SIMPLE, second-order and QUICK method family, it is not a topology- or mesh-identical 08b recreation |
 
+| ![F1-26.81-simple-n10000 liquid](f1-one-inlet/figures/F1-26.81-simple-n10000-liquid.png) | ![F1-26.81-n10000 liquid](f1-one-inlet/figures/F1-26.81-n10000-liquid.png) |
+| ![F1-26.81-simple-n10000 inlet-vectors](f1-one-inlet/figures/F1-26.81-simple-n10000-inlet-vectors.png) | ![F1-26.81-n10000 inlet-vectors](f1-one-inlet/figures/F1-26.81-n10000-inlet-vectors.png) |
+
+Historical [08b setup](../phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/setup.md) and [results](../phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/results.md) document split `liquidinlet`/`steaminlet` mass-flow boundaries on a 7,601,261-cell mesh and a 58.73% whole-mixture imbalance ratio at N5,000. F1 applies mixed feed to both inlet faces on the 60,964-cell Phase 8 mesh. Although F1 SIMPLE shares the audited 00a SIMPLE, second-order and QUICK method family, it is not a topology- or mesh-identical 08b recreation.
+
 ### One-way DPM diagnostics on the SIMPLE carriers
 
-![F1 SIMPLE carrier one-way DPM diagnostic fates](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/PyAnsys/output/phase8-analysis/f1-simple-vs-coupled-n10000/f1-simple-diagnostic-dpm-fates.png>)
+![F1 SIMPLE carrier one-way DPM diagnostic fates](f1-one-inlet/figures/f1-simple-diagnostic-dpm-fates.png)
+
+*Replotted from the rounded values in the table below; original machine-generated plot unavailable in this checkout.*
 
 | Speed (m/s) | Escaped represented weight (%) | Trapped represented weight (%) | Incomplete represented weight (%) |
 | ---: | ---: | ---: | ---: |
@@ -227,7 +236,7 @@
 | Total water feed | is unchanged |
 | — | The reference loading comparison begins from the same-speed F2 N10,000 basis and records the next 1,000 iterations |
 
-![Figure 4: matched F3 loading histories](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/pilot-loading-response.png>)
+![Figure 4: matched F3 loading histories](f3-coupled-dpm/figures/pilot-loading-response.png)
 
 *Figure 4. Reference-speed 2.5% and 5% F3 pilots, N10,000–11,000, with 100-iteration retracking and held sources. The outlet numerator is Eulerian liquid only, divided by total liquid feed including allocated DPM. Inventory is also Eulerian liquid only; these are not total carryover percentages.*
 
@@ -239,7 +248,7 @@
 |  | A lower bulk outlet percentage partly reflects moving liquid out of the Eulerian representation and cannot by itself demonstrate better separation |
 | [F3 report](f3-coupled-dpm/results.md) also | shows that the broad lower-liquid and outer-wall structure persists in the native pilot contours |
 
-![Figure 5: F3 diameter-resolved pilot fates](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/pilot-droplet-fates.png>)
+![Figure 5: F3 diameter-resolved pilot fates](f3-coupled-dpm/figures/pilot-droplet-fates.png)
 
 *Figure 5. Saved seven-bin trajectory-count fates for the four 2.5% speed pilots and the 5% reference pilot at N11,000. Green is trapped, blue escaped and orange incomplete. Per-bin trajectory fractions are distinct from the injection-weighted represented-feed fractions quoted below.*
 
@@ -274,7 +283,7 @@
 | bottom | remains excluded and the absorber remains off |
 | — | Figure 6 compares the same N10,000–11,000 pilot interval with F3 |
 
-![Figure 6: matched F3 F4 mechanism histories](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f4-coupled-dpm-ewf/figures/f3-f4-mechanism-response.png>)
+![Figure 6: matched F3 F4 mechanism histories](f4-coupled-dpm-ewf/figures/f3-f4-mechanism-response.png)
 
 *Figure 6. Reference-speed 5% F3 and provisional F4 pilot histories. F4 shows much lower Eulerian outlet flow and inventory, accompanied by a large open Eulerian boundary gap. This is a film-package response, with incomplete transfer accounting.*
 
@@ -287,11 +296,11 @@
 
 | F3-26.81-5-n11000 | F4-26.81-5-n11000 |
 | --- | --- |
-| ![F3-26.81-5-n11000 liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-5-n11000-liquid.png>) | ![F4-26.81-5-n11000 liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f4-coupled-dpm-ewf/figures/F4-26.81-5-n11000-liquid.png>) |
+| ![F3-26.81-5-n11000 liquid](f3-coupled-dpm/figures/F3-26.81-5-n11000-liquid.png) | ![F4-26.81-5-n11000 liquid](f4-coupled-dpm-ewf/figures/F4-26.81-5-n11000-liquid.png) |
 
 *Figure 7. Matched 5% F3/F4 vertical bulk-liquid contours at N11,000, common range 0–1. F4 retains a liquid-enriched lower region but has a weaker wall-adjacent band above it. This spatial change agrees with the lower reported bulk inventory.*
 
-![Figure 8: F4 film formation histories](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f4-coupled-dpm-ewf/figures/film-response.png>)
+![Figure 8: F4 film formation histories](f4-coupled-dpm-ewf/figures/film-response.png)
 
 *Figure 8. Native F4 film inventory, maximum thickness, cumulative stripped mass and cumulative film outflow over N10,000–11,000. Film inventory continues to rise to 1.321 kg; maximum thickness reaches approximately 0.165 mm. Cumulative quantities are masses, not rates.*
 
@@ -304,7 +313,7 @@
 
 | Wall-film thickness | Wall-film velocity |
 | --- | --- |
-| ![F4-26.81-5-n11000 film-thickness](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f4-coupled-dpm-ewf/figures/F4-26.81-5-n11000-film-thickness.png>) | ![F4-26.81-5-n11000 film-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f4-coupled-dpm-ewf/figures/F4-26.81-5-n11000-film-vectors.png>) |
+| ![F4-26.81-5-n11000 film-thickness](f4-coupled-dpm-ewf/figures/F4-26.81-5-n11000-film-thickness.png) | ![F4-26.81-5-n11000 film-vectors](f4-coupled-dpm-ewf/figures/F4-26.81-5-n11000-film-vectors.png) |
 
 *Figure 9. F4 N11,000 native 3D wall-film views. Thickness uses 0–0.2 mm; film-speed colour uses 0–87 m/s, with vectors assembled from all three recorded film-velocity components. Film concentrates near inlet height and substantial circumferential motion remains visible.*
 
@@ -316,7 +325,7 @@
 
 ## How these findings lead toward the current model
 
-![Figure 10: reference-speed stage comparison](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/figures/reference-storyline-response.png>)
+![Figure 10: reference-speed stage comparison](figures/reference-storyline-response.png)
 
 *Figure 10. Reference-speed stage summary: full-Eulerian F1/F2 at N10,000 and 5%-allocated F3/F4 at N11,000. Outlet and pressure bars use the final-500 mean; inventories use the endpoint. In particular, the F4 mean outlet bar differs from its 21.84% terminal value. This is a modelling-stage comparison with changing representation and horizon.*
 

@@ -17,7 +17,7 @@ def embedded_images(text,base):
         if target.startswith(('https://','http://','data:')):return match.group(0)
         path=(base/target).resolve()
         if not path.is_file():raise RuntimeError(f"Missing embedded figure: {path}")
-        return f"![{match.group(1)}](<{path.as_posix()}>)"
+        return f"![{match.group(1)}]({relative(path,base)})"
     return re.sub(r'!\[([^\]]*)\]\(([^)]+)\)',replace,text)
 
 def main():
@@ -30,7 +30,7 @@ def main():
     def img(path,base,alt):
         p=ROOT/path if isinstance(path,str) else path
         if not p.exists():raise RuntimeError(f"Missing result figure: {p}")
-        return f"![{alt}](<{p.resolve().as_posix()}>)"
+        return f"![{alt}]({relative(p.resolve(),base)})"
     def native(id,kind,base):return img(exports["cases"][id]["images"][kind]["path"],base,id+" "+kind)
     def simple_dpm_section(base):
         path=ROOT/"PyAnsys/output/phase8-analysis/f1-simple-vs-coupled-n10000/f1-simple-diagnostic-dpm-fates.json"
@@ -139,7 +139,7 @@ def main():
             section="## Finding 1a — the F1 numerical package changes the matched carrier response\n\n"+img(ROOT/"PyAnsys"/comp["figure"],PHASE,"F1 SIMPLE versus Coupled at matched speeds")+"\n\n"+table+"\nSIMPLE numerical diagnostics, measured over N9,500–10,000:\n\n"+diagnostics+"\nThe F1 two-face feed, mesh and bounded horizon are matched. SIMPLE uses segregated pseudo-time off and second-order k; the Coupled recovery package uses Global Time Step and first-order k. Changes therefore belong to a package comparison and cannot be attributed to the pressure-coupling algorithm alone. The diagnostic thresholds describe numerical limitations; they are not Phase 8 progression gates.\n\n"
             simple_id="F1-26.81-simple-n10000"
             if simple_id in exports["cases"] and exports["cases"][simple_id].get("status")=="EXPORTED":
-                section+="Reference-speed native liquid contours and inlet vectors at matched N10,000 endpoints:\n\n| SIMPLE package | Coupled recovery package |\n| --- | --- |\n| "+native(simple_id,"liquid",PHASE)+"\n\n"+native(simple_id,"inlet-vectors",PHASE)+" | "+native("F1-26.81-n10000","liquid",PHASE)+"\n\n"+native("F1-26.81-n10000","inlet-vectors",PHASE)+" |\n\n"
+                section+="Reference-speed native liquid contours and inlet vectors at matched N10,000 endpoints:\n\n| SIMPLE package | Coupled recovery package |\n| --- | --- |\n| "+native(simple_id,"liquid",PHASE)+" | "+native("F1-26.81-n10000","liquid",PHASE)+" |\n| "+native(simple_id,"inlet-vectors",PHASE)+" | "+native("F1-26.81-n10000","inlet-vectors",PHASE)+" |\n\n"
             section+="Historical [08b setup](../phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/setup.md) and [results](../phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/results.md) document split `liquidinlet`/`steaminlet` mass-flow boundaries on a 7,601,261-cell mesh and a 58.73% whole-mixture imbalance ratio at N5,000. F1 applies mixed feed to both inlet faces on the 60,964-cell Phase 8 mesh. Although F1 SIMPLE shares the audited 00a SIMPLE, second-order and QUICK method family, it is not a topology- or mesh-identical 08b recreation.\n\n"
             section+=simple_dpm_section(PHASE)
             simple_section=section
@@ -294,7 +294,7 @@ The family reports retain complete spatial atlases and earlier execution receipt
                 text+="\n## SIMPLE versus Coupled: matched outcomes, different numerical packages\n\n"+simple_figure+"\n\n"+table+"\nSIMPLE numerical diagnostics over N9,500–10,000:\n\n"+diagnostics+"\nBoth series use the same two-face F1 topology, five total-feed targets, 60,964-cell mesh and fresh initialized parent, with N10,000 endpoints and N9,500–10,000 response windows. The SIMPLE branch uses segregated pseudo-time off and second-order `k`; the comparison branch uses Coupled/Global Time Step and first-order `k`. This is a numerical-package comparison. It does not isolate the pressure-coupling algorithm from the discretization and time-stepping changes. These diagnostics describe numerical limitations; they are not Phase 8 progression gates.\n\n"
                 simple_id="F1-26.81-simple-n10000"
                 if simple_id in exports["cases"] and exports["cases"][simple_id].get("status")=="EXPORTED":
-                    text+="Reference-speed native liquid contours and inlet vectors at the same N10,000 horizon:\n\n| SIMPLE package | Coupled recovery package |\n| --- | --- |\n| "+native(simple_id,"liquid",base)+"\n\n"+native(simple_id,"inlet-vectors",base)+" | "+native("F1-26.81-n10000","liquid",base)+"\n\n"+native("F1-26.81-n10000","inlet-vectors",base)+" |\n\n"
+                    text+="Reference-speed native liquid contours and inlet vectors at the same N10,000 horizon:\n\n| SIMPLE package | Coupled recovery package |\n| --- | --- |\n| "+native(simple_id,"liquid",base)+" | "+native("F1-26.81-n10000","liquid",base)+" |\n| "+native(simple_id,"inlet-vectors",base)+" | "+native("F1-26.81-n10000","inlet-vectors",base)+" |\n\n"
                 text+="Historical [08b setup](../phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/setup.md) and [results](../phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/results.md) remain separate comparison anchors: the documented run used split `liquidinlet`/`steaminlet` mass-flow boundaries on 7,601,261 cells and its N5,000 carrier report showed a 58.73% mixture imbalance ratio. F1 SIMPLE shares the audited 00a SIMPLE/second-order/QUICK numerical-method family, but F1 applies mixed-phase feed to both inlet faces on 60,964 cells. SIMPLE alone therefore does not make this a topology-, mesh-, or result-identical 08b replication.\n"
                 text+=simple_dpm_section(base)
         write_family(family,text)

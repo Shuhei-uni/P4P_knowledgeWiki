@@ -19,14 +19,14 @@
 | speed comparison | uses four 2.5% pilots, each from its independent same-speed F2 N10,000 parent, at N10,000–11,000 with 100-iteration retracking and held sources |
 | 26.81 m/s loading comparison | uses the same 2.5% and 5% protocol. 29.48 m/s and the larger selected loading fractions have not been run in this series |
 
-![F3 matched speed pilots](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/pilot-speed-response.png>)
+![F3 matched speed pilots](figures/pilot-speed-response.png)
 
 | Item | Allocating more liquid to DPM changes the bulk response |
 | --- | --- |
 | — | At 26.81 m/s, the 5% pilot loses more Eulerian inventory over the same 1,000 iterations than the 2.5% pilot and ends with a lower Eulerian outlet fraction |
 | Figure F3.2 | shows that this difference develops through an oscillatory adjustment after allocation/coupling begins |
 
-![F3 matched loading pilots](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/pilot-loading-response.png>)
+![F3 matched loading pilots](figures/pilot-loading-response.png)
 
 | Speed (m/s) | Allocated DPM (%) | N11,000 Eulerian outlet liquid / total liquid feed (%) | Eulerian inventory (kg) | DPM escaped (% of allocated feed) | DPM trapped (%) | DPM unresolved (%) |
 | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -46,7 +46,7 @@
 
 | Reference snapshot | Vertical liquid distribution | Inlet-plane circulation |
 | --- | --- | --- |
-| F3-26.81-2p5-n11000 | ![F3-26.81-2p5-n11000 liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-2p5-n11000-liquid.png>) | ![F3-26.81-2p5-n11000 inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-2p5-n11000-inlet-vectors.png>) |
+| F3-26.81-2p5-n11000 | ![F3-26.81-2p5-n11000 liquid](figures/F3-26.81-2p5-n11000-liquid.png) | ![F3-26.81-2p5-n11000 inlet-vectors](figures/F3-26.81-2p5-n11000-inlet-vectors.png) |
 
 | Item | The broad liquid structure persists through the pilot change |
 | --- | --- |
@@ -60,7 +60,7 @@
 
 | 2.5% pilot | 5% pilot |
 | --- | --- |
-| ![F3-26.81-2p5-n11000 pressure](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-2p5-n11000-pressure.png>) | ![F3-26.81-5-n11000 pressure](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-5-n11000-pressure.png>) |
+| ![F3-26.81-2p5-n11000 pressure](figures/F3-26.81-2p5-n11000-pressure.png) | ![F3-26.81-5-n11000 pressure](figures/F3-26.81-5-n11000-pressure.png) |
 
 ## Intermediate droplets dominate the unresolved tracking problem
 
@@ -70,7 +70,7 @@
 | At the reference 2.5% point, the 89 µm trajectories | are trapped while the smallest bin has both escaped and trapped trajectories |
 | — | The response therefore depends strongly on diameter, and the completed smallest/largest bins cannot represent the unresolved middle of the distribution |
 
-![F3 pilot droplet fates](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/pilot-droplet-fates.png>)
+![F3 pilot droplet fates](figures/pilot-droplet-fates.png)
 
 | Intermediate droplets dominate the unresolved tracking problem |
 | --- |
@@ -78,7 +78,7 @@
 
 | 7.07 µm | 34.64 µm | 89.44 µm |
 | --- | --- | --- |
-| ![F3-26.81-2p5-n11000 stream 0 07](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-2p5-n11000-track-07um-stream0.png>) | ![F3-26.81-2p5-n11000 stream 0 35](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-2p5-n11000-track-35um-stream0.png>) | ![F3-26.81-2p5-n11000 stream 0 89](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-2p5-n11000-track-89um-stream0.png>) |
+| ![F3-26.81-2p5-n11000 stream 0 07](figures/F3-26.81-2p5-n11000-track-07um-stream0.png) | ![F3-26.81-2p5-n11000 stream 0 35](figures/F3-26.81-2p5-n11000-track-35um-stream0.png) | ![F3-26.81-2p5-n11000 stream 0 89](figures/F3-26.81-2p5-n11000-track-89um-stream0.png) |
 
 | Intermediate droplets dominate the unresolved tracking problem |
 | --- |
@@ -86,7 +86,7 @@
 
 | 7.07 µm | 34.64 µm | 89.44 µm |
 | --- | --- | --- |
-| ![F3-26.81-5-n11000 stream 0 07](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-5-n11000-track-07um-stream0.png>) | ![F3-26.81-5-n11000 stream 0 35](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-5-n11000-track-35um-stream0.png>) | ![F3-26.81-5-n11000 stream 0 89](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-5-n11000-track-89um-stream0.png>) |
+| ![F3-26.81-5-n11000 stream 0 07](figures/F3-26.81-5-n11000-track-07um-stream0.png) | ![F3-26.81-5-n11000 stream 0 35](figures/F3-26.81-5-n11000-track-35um-stream0.png) | ![F3-26.81-5-n11000 stream 0 89](figures/F3-26.81-5-n11000-track-89um-stream0.png) |
 
 | Item | Intermediate droplets dominate the unresolved tracking problem |
 | --- | --- |
@@ -98,9 +98,9 @@
 
 ## Numerical adaptation and tracking sensitivity
 
-![F3 source averaging at unequal horizons](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/source-averaging-context.png>)
+![F3 source averaging at unequal horizons](figures/source-averaging-context.png)
 
-![F3 low-speed and 5% continuations](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/additional-continuation-context.png>)
+![F3 low-speed and 5% continuations](figures/additional-continuation-context.png)
 
 | Item | Numerical adaptation and tracking sensitivity |
 | --- | --- |
@@ -108,7 +108,7 @@
 |  | These results document that investigation; they do not redefine Phase 8 as a convergence campaign |
 | final original and averaged-source segments | are shown at their actual coordinates, with intervening segments available in the retained receipts |
 
-![F3 tracking cap sensitivity](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/tracking-cap-sensitivity.png>)
+![F3 tracking cap sensitivity](figures/tracking-cap-sensitivity.png)
 
 | Numerical adaptation and tracking sensitivity |
 | --- |
@@ -119,7 +119,7 @@
 
 ## Numerical context
 
-![F3 pilot accounting and continuity context](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/numerical-context.png>)
+![F3 pilot accounting and continuity context](figures/numerical-context.png)
 
 | Numerical context |
 | --- |
@@ -139,15 +139,15 @@
 <summary>All saved case contours and vectors</summary>
 | Saved snapshot | Liquid, vertical cut | Liquid, inlet slice | Vertical vectors | Inlet vectors |
 | --- | --- | --- | --- | --- |
-| F3 20.11 m/s 2.5% N11000 | ![F3-20.11-2p5-n11000 liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-20.11-2p5-n11000-liquid.png>) | ![F3-20.11-2p5-n11000 inlet-liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-20.11-2p5-n11000-inlet-liquid.png>) | ![F3-20.11-2p5-n11000 vertical-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-20.11-2p5-n11000-vertical-vectors.png>) | ![F3-20.11-2p5-n11000 inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-20.11-2p5-n11000-inlet-vectors.png>) |
-| F3 23.46 m/s 2.5% N11000 | ![F3-23.46-2p5-n11000 liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-23.46-2p5-n11000-liquid.png>) | ![F3-23.46-2p5-n11000 inlet-liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-23.46-2p5-n11000-inlet-liquid.png>) | ![F3-23.46-2p5-n11000 vertical-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-23.46-2p5-n11000-vertical-vectors.png>) | ![F3-23.46-2p5-n11000 inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-23.46-2p5-n11000-inlet-vectors.png>) |
-| F3 26.81 m/s 2.5% N11000 | ![F3-26.81-2p5-n11000 liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-2p5-n11000-liquid.png>) | ![F3-26.81-2p5-n11000 inlet-liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-2p5-n11000-inlet-liquid.png>) | ![F3-26.81-2p5-n11000 vertical-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-2p5-n11000-vertical-vectors.png>) | ![F3-26.81-2p5-n11000 inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-2p5-n11000-inlet-vectors.png>) |
-| F3 32.14 m/s 2.5% N11000 | ![F3-32.14-2p5-n11000 liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-32.14-2p5-n11000-liquid.png>) | ![F3-32.14-2p5-n11000 inlet-liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-32.14-2p5-n11000-inlet-liquid.png>) | ![F3-32.14-2p5-n11000 vertical-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-32.14-2p5-n11000-vertical-vectors.png>) | ![F3-32.14-2p5-n11000 inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-32.14-2p5-n11000-inlet-vectors.png>) |
-| F3 26.81 m/s 5% N11000 | ![F3-26.81-5-n11000 liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-5-n11000-liquid.png>) | ![F3-26.81-5-n11000 inlet-liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-5-n11000-inlet-liquid.png>) | ![F3-26.81-5-n11000 vertical-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-5-n11000-vertical-vectors.png>) | ![F3-26.81-5-n11000 inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26.81-5-n11000-inlet-vectors.png>) |
-| F3 26.81 m/s 2.5% averaged N25000 | ![F3-26p81-averaged liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26p81-averaged-liquid.png>) | ![F3-26p81-averaged inlet-liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26p81-averaged-inlet-liquid.png>) | ![F3-26p81-averaged vertical-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26p81-averaged-vertical-vectors.png>) | ![F3-26p81-averaged inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26p81-averaged-inlet-vectors.png>) |
-| F3 32.14 m/s 2.5% averaged N15000 | ![F3-32p14-averaged liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-32p14-averaged-liquid.png>) | ![F3-32p14-averaged inlet-liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-32p14-averaged-inlet-liquid.png>) | ![F3-32p14-averaged vertical-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-32p14-averaged-vertical-vectors.png>) | ![F3-32p14-averaged inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-32p14-averaged-inlet-vectors.png>) |
-| F3 20.11 m/s 2.5% averaged N20000 | ![F3-20p11-averaged liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-20p11-averaged-liquid.png>) | ![F3-20p11-averaged inlet-liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-20p11-averaged-inlet-liquid.png>) | ![F3-20p11-averaged vertical-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-20p11-averaged-vertical-vectors.png>) | ![F3-20p11-averaged inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-20p11-averaged-inlet-vectors.png>) |
-| F3 26.81 m/s 5% held sources N20000 | ![F3-26p81-5pct-n20000 liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26p81-5pct-n20000-liquid.png>) | ![F3-26p81-5pct-n20000 inlet-liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26p81-5pct-n20000-inlet-liquid.png>) | ![F3-26p81-5pct-n20000 vertical-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26p81-5pct-n20000-vertical-vectors.png>) | ![F3-26p81-5pct-n20000 inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/figures/F3-26p81-5pct-n20000-inlet-vectors.png>) |
+| F3 20.11 m/s 2.5% N11000 | ![F3-20.11-2p5-n11000 liquid](figures/F3-20.11-2p5-n11000-liquid.png) | ![F3-20.11-2p5-n11000 inlet-liquid](figures/F3-20.11-2p5-n11000-inlet-liquid.png) | ![F3-20.11-2p5-n11000 vertical-vectors](figures/F3-20.11-2p5-n11000-vertical-vectors.png) | ![F3-20.11-2p5-n11000 inlet-vectors](figures/F3-20.11-2p5-n11000-inlet-vectors.png) |
+| F3 23.46 m/s 2.5% N11000 | ![F3-23.46-2p5-n11000 liquid](figures/F3-23.46-2p5-n11000-liquid.png) | ![F3-23.46-2p5-n11000 inlet-liquid](figures/F3-23.46-2p5-n11000-inlet-liquid.png) | ![F3-23.46-2p5-n11000 vertical-vectors](figures/F3-23.46-2p5-n11000-vertical-vectors.png) | ![F3-23.46-2p5-n11000 inlet-vectors](figures/F3-23.46-2p5-n11000-inlet-vectors.png) |
+| F3 26.81 m/s 2.5% N11000 | ![F3-26.81-2p5-n11000 liquid](figures/F3-26.81-2p5-n11000-liquid.png) | ![F3-26.81-2p5-n11000 inlet-liquid](figures/F3-26.81-2p5-n11000-inlet-liquid.png) | ![F3-26.81-2p5-n11000 vertical-vectors](figures/F3-26.81-2p5-n11000-vertical-vectors.png) | ![F3-26.81-2p5-n11000 inlet-vectors](figures/F3-26.81-2p5-n11000-inlet-vectors.png) |
+| F3 32.14 m/s 2.5% N11000 | ![F3-32.14-2p5-n11000 liquid](figures/F3-32.14-2p5-n11000-liquid.png) | ![F3-32.14-2p5-n11000 inlet-liquid](figures/F3-32.14-2p5-n11000-inlet-liquid.png) | ![F3-32.14-2p5-n11000 vertical-vectors](figures/F3-32.14-2p5-n11000-vertical-vectors.png) | ![F3-32.14-2p5-n11000 inlet-vectors](figures/F3-32.14-2p5-n11000-inlet-vectors.png) |
+| F3 26.81 m/s 5% N11000 | ![F3-26.81-5-n11000 liquid](figures/F3-26.81-5-n11000-liquid.png) | ![F3-26.81-5-n11000 inlet-liquid](figures/F3-26.81-5-n11000-inlet-liquid.png) | ![F3-26.81-5-n11000 vertical-vectors](figures/F3-26.81-5-n11000-vertical-vectors.png) | ![F3-26.81-5-n11000 inlet-vectors](figures/F3-26.81-5-n11000-inlet-vectors.png) |
+| F3 26.81 m/s 2.5% averaged N25000 | ![F3-26p81-averaged liquid](figures/F3-26p81-averaged-liquid.png) | ![F3-26p81-averaged inlet-liquid](figures/F3-26p81-averaged-inlet-liquid.png) | ![F3-26p81-averaged vertical-vectors](figures/F3-26p81-averaged-vertical-vectors.png) | ![F3-26p81-averaged inlet-vectors](figures/F3-26p81-averaged-inlet-vectors.png) |
+| F3 32.14 m/s 2.5% averaged N15000 | ![F3-32p14-averaged liquid](figures/F3-32p14-averaged-liquid.png) | ![F3-32p14-averaged inlet-liquid](figures/F3-32p14-averaged-inlet-liquid.png) | ![F3-32p14-averaged vertical-vectors](figures/F3-32p14-averaged-vertical-vectors.png) | ![F3-32p14-averaged inlet-vectors](figures/F3-32p14-averaged-inlet-vectors.png) |
+| F3 20.11 m/s 2.5% averaged N20000 | ![F3-20p11-averaged liquid](figures/F3-20p11-averaged-liquid.png) | ![F3-20p11-averaged inlet-liquid](figures/F3-20p11-averaged-inlet-liquid.png) | ![F3-20p11-averaged vertical-vectors](figures/F3-20p11-averaged-vertical-vectors.png) | ![F3-20p11-averaged inlet-vectors](figures/F3-20p11-averaged-inlet-vectors.png) |
+| F3 26.81 m/s 5% held sources N20000 | ![F3-26p81-5pct-n20000 liquid](figures/F3-26p81-5pct-n20000-liquid.png) | ![F3-26p81-5pct-n20000 inlet-liquid](figures/F3-26p81-5pct-n20000-inlet-liquid.png) | ![F3-26p81-5pct-n20000 vertical-vectors](figures/F3-26p81-5pct-n20000-vertical-vectors.png) | ![F3-26p81-5pct-n20000 inlet-vectors](figures/F3-26p81-5pct-n20000-inlet-vectors.png) |
 
 | Item | Supporting spatial atlas |
 | --- | --- |

@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en-NZ">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A1 research poster: numerical recovery, liquid-inventory stability and physical-model findings for geothermal separator design.">
+  <title>P4P A1 poster — Towards reliable CFD for geothermal separator design</title>
+  <style>
+    :root {
+      --canvas: #FFFFFF; --ink: #17324D; --body-text: #343D46; --secondary: #52616B;
+      --card-surface: #FAFBFC; --card-border: #E2E7EB;
+      --surface: #F3F6F7; --rule: #CBD5DB;
+      --liquid: #007F86; --liquid-surface: #E5F3F2;
+      --steam: #AF541F; --steam-surface: #FBEDE4; --scale: 1;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--surface); color: var(--body-text); font-family: Arial, sans-serif; }
+    a { color: inherit; text-decoration-thickness: .06em; text-underline-offset: .15em; }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
+    .screen-tools { padding: 14px 24px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; border-bottom: 1px solid var(--rule); font-size: 14px; }
+    .screen-tools p { margin: 0; flex: 1; }
+    button { background: white; border: 1px solid var(--secondary); padding: 8px 13px; color: var(--ink); font: inherit; cursor: pointer; }
+    button[aria-pressed="true"] { background: var(--ink); color: white; }
+    .poster-stage { margin: 24px auto; position: relative; }
+    .poster {
+      width: 841mm; height: 594mm; padding: 18mm;
+      background: var(--canvas); font-size: 21pt; line-height: 1.19;
+      display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: 9mm;
+      transform: scale(var(--scale)); transform-origin: top left;
+    }
+    .poster p, .poster figure, .poster h1, .poster h2, .poster h3 { margin: 0; }
+    .poster-header { border-bottom: 1.5pt solid var(--rule); padding-bottom: 8mm; }
+    .heading-row { display: grid; grid-template-columns: 1fr 165mm; gap: 15mm; align-items: start; }
+    .eyebrow { color: var(--secondary); font-size: 18pt; letter-spacing: .045em; margin-bottom: 4mm !important; }
+    h1 { font-size: 62pt; font-weight: 700; line-height: 1.02; letter-spacing: -.025em; }
+    .authors { padding-top: 1mm; font-size: 20pt; line-height: 1.25; }
+    .authors strong { display: block; margin-bottom: 3mm; font-size: 24pt; }
+    .authors .draft-status { display: block; margin-top: 4mm; color: var(--secondary); font-size: 17pt; }
+    .purpose { margin-top: 6mm !important; font-size: 25pt; max-width: 760mm; }
+    .poster-body { display: grid; grid-template-columns: 25fr 39fr 36fr; gap: 12mm; min-height: 0; }
+    .column { min-width: 0; min-height: 0; display: flex; flex-direction: column; }
+    h2 { font-size: 34pt; font-weight: 700; line-height: 1.07; letter-spacing: -.015em; margin-bottom: 4mm !important; }
+    h3 { font-size: 26pt; font-weight: 700; line-height: 1.1; margin-bottom: 2mm !important; }
+    .secondary, figcaption { color: var(--secondary); }
+    .context-intro { margin-bottom: 5mm !important; }
+    .native-figure { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; align-items: center; }
+    .native-figure img { width: 100%; height: 140mm; object-fit: contain; display: block; }
+    figcaption { margin-top: 3mm; font-size: 18pt; line-height: 1.2; }
+    .native-figure figcaption { margin-top: 0; }
+    .native-figure figcaption p + p { margin-top: 4mm; }
+    .native-figure strong { color: var(--ink); }
+    .poster h1, .poster h2, .poster h3, .authors strong,
+    .metric-row strong, .lead, thead th { color: var(--ink); }
+    .section-card {
+      padding: 3mm; margin-inline: -3mm; background: var(--card-surface);
+      border: .75pt solid var(--card-border); border-radius: 2mm;
+      min-width: 0; flex: none;
+    }
+    .section-card + .section-card { margin-top: 3mm; }
+    .result p + p, .context-group p + p { margin-top: 3mm; }
+    .basis { font-size: 17pt; color: var(--secondary); margin-bottom: 2mm !important; }
+    .vector-figure { width: 100%; height: auto; display: block; }
+    .metric-row { display: grid; grid-template-columns: 1fr 1fr; gap: 7mm; margin: 3mm 0 4mm; font-size: 19pt; }
+    .metric-row p { border-top: 1.5pt solid var(--rule); padding-top: 3mm; }
+    .metric-row strong { display: block; font-size: 29pt; line-height: 1.1; margin-bottom: 2mm; }
+    .small { font-size: 18pt; line-height: 1.2; }
+    .lead { font-size: 25pt; font-weight: 700; line-height: 1.15; }
+    .equation { margin: 4mm 0 !important; padding: 4mm; background: var(--surface); font-size: 22pt; text-align: center; }
+    table { width: 100%; border-collapse: collapse; font-size: 19pt; line-height: 1.15; margin: 3mm 0; font-variant-numeric: tabular-nums; }
+    th, td { text-align: left; vertical-align: top; padding: 2mm 1.5mm; border-bottom: 1pt solid var(--rule); }
+    th:first-child, td:first-child { padding-left: 0; }
+    th:last-child, td:last-child { padding-right: 0; }
+    thead th { font-weight: 700; border-bottom: 1.5pt solid var(--secondary); }
+    td:not(:first-child), th:not(:first-child) { text-align: right; }
+    .model-facts { margin: 4mm 0 0; padding: 0; list-style: none; }
+    .model-facts li { padding: 2mm 0; }
+    .model-facts li + li { border-top: 1pt solid var(--rule); }
+    .assessment-list { margin: 3mm 0 0; padding-left: 6mm; }
+    .assessment-list li + li { margin-top: 2mm; }
+    .finding { margin-bottom: 0; }
+    .finding h3 { font-size: 25pt; }
+    .finding .interpretation { margin-top: 3mm; }
+    .droplet-figure { margin-top: 2mm !important; }
+    .column .planned { margin-top: auto; background: var(--surface); }
+    .planned h3 { font-size: 25pt; }
+    .planned .status { margin: 2mm 0 3mm; font-size: 17pt; color: var(--secondary); }
+    .geometry-placeholders { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin: 4mm 0; }
+    .geometry-placeholder { min-height: 15mm; padding: 3mm; border: 1.5pt dashed var(--secondary); display: flex; align-items: center; justify-content: center; text-align: center; color: var(--secondary); font-size: 19pt; }
+    .planned .future-metrics { padding-top: 3mm; border-top: 1.5pt solid var(--rule); font-size: 18pt; }
+    .poster-footer { border-top: 1.5pt solid var(--rule); padding-top: 4mm; display: grid; grid-template-columns: 2.5fr 1fr; gap: 12mm; font-size: 15pt; line-height: 1.2; }
+    .poster-footer strong { display: block; margin-bottom: 2mm; font-size: 17pt; }
+    .poster-footer p + p { margin-top: 2mm; }
+    .poster-footer .contact { border-left: 1.5pt solid var(--rule); padding-left: 6mm; }
+    .review-notes { max-width: 1100px; padding: 20px 24px; margin: 20px auto 40px; background: white; border: 1px solid var(--rule); font-size: 15px; line-height: 1.5; }
+    .review-notes summary { cursor: pointer; font-weight: bold; }
+    .review-notes li { margin: 8px 0; }
+    .review-notes p { margin: 12px 0; }
+    .review-notes h2 { font-size: 18px; margin: 16px 0 8px !important; }
+    .reading-view .poster-stage { width: auto !important; height: auto !important; max-width: 1700px; margin: 24px; }
+    .reading-view .poster { width: auto; height: auto; transform: none; padding: 36px; font-size: 18px; gap: 28px; }
+    .reading-view .poster-header { padding-bottom: 24px; }
+    .reading-view .heading-row { grid-template-columns: 1fr 220px; gap: 24px; }
+    .reading-view h1 { font-size: 52px; }
+    .reading-view h2 { font-size: 29px; margin-bottom: 20px !important; }
+    .reading-view h3, .reading-view .planned h3, .reading-view .finding h3 { font-size: 23px; }
+    .reading-view .metric-row strong { font-size: 26px; }
+    .reading-view .lead, .reading-view .purpose { font-size: 22px; }
+    .reading-view .eyebrow, .reading-view .authors, .reading-view .small, .reading-view figcaption, .reading-view table, .reading-view .basis, .reading-view .planned .status, .reading-view .geometry-placeholder, .reading-view .planned .future-metrics, .reading-view .metric-row { font-size: 16px; }
+    .reading-view .authors strong { font-size: 22px; }
+    .reading-view .authors .draft-status { font-size: 15px; }
+    .reading-view .eyebrow { margin-bottom: 12px !important; }
+    .reading-view .purpose { margin-top: 20px !important; }
+    .reading-view .poster-body { gap: 28px; }
+    .reading-view .native-figure img { height: 330px; }
+    .reading-view .native-figure { gap: 12px; }
+    .reading-view .section-card { padding: 16px; margin-inline: 0; border-radius: 7px; }
+    .reading-view .section-card + .section-card { margin-top: 16px; }
+    .reading-view .column .planned { margin-top: 16px; }
+    .reading-view .geometry-placeholder { min-height: 80px; padding: 12px; }
+    .reading-view .geometry-placeholders { gap: 12px; margin: 16px 0; }
+    .reading-view .equation { font-size: 19px; padding: 12px; }
+    .reading-view .poster-footer { gap: 24px; padding-top: 24px; font-size: 14px; }
+    .reading-view .poster-footer strong { font-size: 16px; }
+    @media (max-width: 1100px) {
+      .screen-tools { padding: 12px; gap: 10px; }
+      .reading-view .poster-stage { margin: 12px; }
+      .reading-view .poster { padding: 24px; }
+      .reading-view .heading-row, .reading-view .poster-body, .reading-view .poster-footer { grid-template-columns: 1fr; }
+      .reading-view h1 { font-size: 38px; }
+      .reading-view .column + .column { margin-top: 30px; }
+      .reading-view .native-figure img { height: 420px; }
+      .reading-view .poster-footer .contact { border-left: 0; padding-left: 0; }
+    }
+    @page { size: 841mm 594mm; margin: 0; }
+    @media print {
+      body { background: white; }
+      .screen-tools, .review-notes { display: none !important; }
+      .poster-stage, .reading-view .poster-stage { width: 841mm !important; height: 594mm !important; margin: 0 !important; max-width: none; }
+      .poster { transform: none !important; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      a { text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="screen-tools" aria-label="Poster preview controls">
+    <p><strong>P4P poster draft</strong> · A1 landscape · 841 × 594 mm · 3 October 2026</p>
+    <button id="reading-toggle" type="button" aria-pressed="false">Reading view</button>
+    <button id="print-button" type="button">Print / save PDF</button>
+    <a href="#review-notes">Evidence &amp; draft notes</a>
+  </nav>
+  <div class="poster-stage">
+    <main class="poster" aria-label="A1 research poster" id="poster">
+      <header class="poster-header">
+        <p class="eyebrow">P4P RESEARCH · WORKING DRAFT</p>
+        <div class="heading-row">
+          <h1>Towards reliable CFD for<br>geothermal separator design</h1>
+          <div class="authors">
+            <strong>Shuhei Yokkaichi</strong>
+            Engineering Science<br>University of Auckland
+            <span class="draft-status">Supervisor names to confirm</span>
+          </div>
+        </div>
+        <p class="purpose">Numerical recovery reduces mass imbalance; liquid transport reveals the questions a future separator design must address.</p>
+      </header>
+      <div class="poster-body">
+        <section class="column context" aria-labelledby="context-heading">
+          <h2 id="context-heading">The design question</h2>
+          <div class="context-overview section-card">
+          <p class="context-intro">How can CFD guide lower liquid carryover? Building on Purnanto et al. [1], we assess outlet predictions alongside conservation and inventory.</p>
+          <figure class="native-figure">
+            <a href="../experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-26.81-n10000-liquid.png" aria-label="Open the original native liquid-volume-fraction figure">
+              <img src="poster-assets/separator-section.svg" alt="Native Fluent centre section of the simplified separator, showing a liquid-enriched lower region and outer-wall enrichment, with volume fraction scale zero to one.">
+            </a>
+            <figcaption>
+              <p><strong>Where the liquid gathers</strong><br>Native centre section, split inlet, 26.81 m/s, N10,000. [2]</p>
+              <p>Liquid enrichment appears near the wall and in the lower vessel. The offset inlet lies outside this plane.</p>
+              <p>Colour shows local volume fraction; domain reports establish retained mass.</p>
+            </figcaption>
+          </figure>
+          </div>
+          <div class="context-group section-card">
+            <h3>Model and comparison basis</h3>
+            <ul class="model-facts">
+              <li><strong>Carrier:</strong> steady Mixture model; RNG k–ε turbulence.</li>
+              <li><strong>Geometry:</strong> common simplified mesh, 60,964 cells; closed bottom.</li>
+              <li><strong>Reference feed:</strong> liquid 116.94 kg/s; vapour 80.70 kg/s.</li>
+              <li><strong>Speed range:</strong> 20.11–32.14 m/s; reference 26.81 m/s.</li>
+              <li><strong>Physics:</strong> coupled droplets; provisional wall film.</li>
+            </ul>
+          </div>
+          <div class="context-group section-card">
+            <h3>What supports a steady comparison?</h3>
+            <p>Mass imbalance and continuing liquid accumulation made early outlet predictions difficult to interpret. We assess three signals together:</p>
+            <ol class="assessment-list">
+              <li>Mixture and phase mass balances.</li>
+              <li>Liquid-inventory drift over a stated window.</li>
+              <li>Residual level, oscillations and solver warnings.</li>
+            </ol>
+            <p class="equation">Δṁ = ṁ<sub>in</sub> − ṁ<sub>out</sub> − ṁ<sub>removed</sub></p>
+            <p class="small secondary">Positive removal is counted once. Steady iterations are not physical time: kg/iteration cannot be used to close a kg/s balance.</p>
+          </div>
+        </section>
+
+        <section class="column evidence" aria-labelledby="evidence-heading">
+          <h2 id="evidence-heading">Numerical progress</h2>
+          <article class="result section-card">
+            <h3>Lower mass imbalance</h3>
+            <p class="basis">F2 split inlet · matched N5,000 · absorber and wall film off</p>
+            <figure>
+              <img class="vector-figure" src="poster-assets/boundary-imbalance.svg" alt="Absolute mixture boundary imbalance at matched 5,000-iteration endpoints falls from 57.682 kg/s in the SIMPLE package to 2.408 kg/s in the recovery package.">
+              <figcaption>Same geometry and feeds; independent initialisation. Recovery combines Coupled, Global Time Step and first-order k: a package comparison. [2]</figcaption>
+            </figure>
+            <div class="metric-row">
+              <p><strong>1.393 → 0.0336</strong>Liquid-inventory slope<br>kg/iteration, last 500</p>
+              <p><strong>0.2649 → 0.0149</strong>Continuity residual<br>at N5,000</p>
+            </div>
+            <p><strong>At N10,000:</strong> mean absolute mixture gap reaches <strong>0.8550 kg/s (0.433% of feed)</strong>; last-500 inventory slope is <strong>0.000101 kg/iteration</strong>.</p>
+            <p class="small secondary">Reverse flow and viscosity limiting persist. This supports a developed diagnostic carrier; external validation remains outstanding. [2]</p>
+          </article>
+          <article class="result section-card">
+            <h3>Much lower liquid-inventory drift</h3>
+            <p class="basis">Phase 7.1A R0 · separate full-loading configuration · virtual outlet on</p>
+            <figure>
+              <img class="vector-figure" src="poster-assets/liquid-inventory.svg" alt="All 2,007 native liquid-inventory samples from iterations 3,580 to 5,586. Liquid mass rises from 182.518 kg and approaches 295.854 kg. The control window starts at 4,586.">
+              <figcaption>With staged liquid-only sink activation and extended Coupled development, successive continuations gain 111.19 kg and 2.15 kg. The final 500 iterations gain only 0.206 kg. [3]</figcaption>
+            </figure>
+            <p class="small">The virtual outlet removes 116.92 kg/s at the endpoint; a physical drain is not resolved.</p>
+          </article>
+          <article class="result section-card">
+            <h3>Stable inventory ≠ mass closure</h3>
+            <table aria-label="Source-inclusive absorber endpoint budgets">
+              <thead><tr><th>R0 endpoint, sink counted once</th><th>Absolute gap</th><th>% feed</th></tr></thead>
+              <tbody>
+                <tr><td>Liquid balance</td><td>24.33 kg/s</td><td>20.8%</td></tr>
+                <tr><td>Native mixture balance</td><td>23.89 kg/s</td><td>12.1%</td></tr>
+              </tbody>
+            </table>
+            <p class="lead">Judge inventory, balances and residuals together.</p>
+            <p class="small secondary">R0 has much flatter inventory, but its source-inclusive budget remains open. A balanced steady solution and validated separator performance remain unestablished. [3]</p>
+          </article>
+        </section>
+
+        <section class="column interpretation" aria-labelledby="interpretation-heading">
+          <h2 id="interpretation-heading">Findings that inform design</h2>
+          <article class="finding section-card">
+            <h3>More retained liquid ≠ less carryover</h3>
+            <p class="basis">Mixed versus split inlet · N10,000 · same geometry · no absorber</p>
+            <table aria-label="Matched reference-speed inlet comparison">
+              <thead><tr><th>26.81 m/s comparison</th><th>Mixed</th><th>Split</th></tr></thead>
+              <tbody>
+                <tr><td>Retained liquid</td><td>1,262.6 kg</td><td>1,734.5 kg</td></tr>
+                <tr><td>Outlet liquid / feed*</td><td>99.67%</td><td>99.40%</td></tr>
+                <tr><td>Pressure difference*</td><td>71.09 kPa</td><td>73.39 kPa</td></tr>
+              </tbody>
+            </table>
+            <p class="small secondary">*Final-500 means; pressure is area-weighted steam-face to outlet.</p>
+            <p class="interpretation">The split inlet retains <strong>37% more liquid</strong>, yet both send over 99% of liquid feed to steam. Retention changes; an effective removal path remains missing. [2]</p>
+          </article>
+          <article class="finding section-card">
+            <h3>Droplet transport depends on diameter</h3>
+            <figure class="droplet-figure">
+              <img class="vector-figure" src="poster-assets/droplet-fates.svg" alt="Injection-weighted F3 droplet-feed outcomes: 1.88% escaped, 19.13% trapped and 78.98% incomplete at the 5% reference pilot, N11,000.">
+            </figure>
+            <p class="small secondary">F3 · 26.81 m/s · N11,000. Seven assumed fine-mist bins with carrier feedback; 5% of liquid feed allocated to droplets. Feed-weighted outcomes. [4]</p>
+            <p class="interpretation">The 14–35 µm bins are almost entirely incomplete; larger droplets show trapping. Unresolved tracks cannot be assigned to capture or escape.</p>
+          </article>
+          <article class="finding section-card">
+            <h3>Wall film changes the liquid accounting</h3>
+            <table aria-label="Matched reference-speed droplet and film pilot response">
+              <thead><tr><th>5% pilots, N11,000</th><th>DPM</th><th>DPM + film</th></tr></thead>
+              <tbody>
+                <tr><td>Bulk liquid at steam outlet</td><td>109.97 kg/s</td><td>25.54 kg/s</td></tr>
+                <tr><td>Bulk liquid inventory</td><td>1,676.3 kg</td><td>771.4 kg</td></tr>
+              </tbody>
+            </table>
+            <p>Film reaches <strong>1.321 kg</strong> and <strong>0.165 mm</strong> maximum thickness near inlet height; inventory still rises and circumferential motion persists. [5]</p>
+            <p class="small secondary interpretation">The mean Eulerian gap is 80.761 kg/s. Incomplete transfer accounting prevents a capture or drainage claim; a combined bulk–droplet–film ledger is needed.</p>
+          </article>
+          <aside class="planned section-card" aria-label="Planned physical separator design study, not yet run">
+            <h3>Planned design exploration</h3>
+            <p class="status">Physical geometry changes · results pending</p>
+            <p>Test collection and drainage changes guided by wall and lower-vessel liquid paths, with matched feeds and numerical controls.</p>
+            <div class="geometry-placeholders" aria-label="Space reserved for future geometry comparisons">
+              <div class="geometry-placeholder">Baseline<br>geometry</div>
+              <div class="geometry-placeholder">Modified<br>geometry</div>
+            </div>
+            <p class="future-metrics">Results reserved: total liquid carryover, liquid removed, pressure difference and mass closure.</p>
+          </aside>
+        </section>
+      </div>
+      <footer class="poster-footer">
+        <div class="secondary">
+          <strong>References &amp; evidence</strong>
+          <p>[1] Purnanto, Zarrouk &amp; Cater (2013). <em>CFD Modelling of Two-Phase Flow Inside Geothermal Steam-Water Separators.</em> IPENZ Transactions 40.</p>
+          <p>[2] <a href="../experiments/phase-08-storyline-reconstruction/results.md">Phase 8 inlet and numerical comparisons</a>; <a href="../experiments/phase-08-storyline-reconstruction/f2-split-inlet/results.md">F2 recovery evidence</a>. [3] <a href="../experiments/phase-07-1a-absorber-convergence/roughness-family/r0-smooth-control/results.md">Phase 7.1A R0</a>, native histories and <a href="../experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/shuhei-audit.md">source-inclusive audit</a>.</p>
+          <p>[4] <a href="../experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/results.md">F3 coupled-droplet pilots</a>. [5] <a href="../experiments/phase-08-storyline-reconstruction/f4-coupled-dpm-ewf/results.md">F4 provisional wall-film pilot</a>. These stages change liquid representation and horizon; they do not rank physical separator designs.</p>
+        </div>
+        <div class="contact secondary">
+          <strong>Contact &amp; acknowledgements</strong>
+          <p>Contact details, supervisors and acknowledgements to confirm.</p>
+          <p>Current contribution: numerical progress and liquid-transport findings that define the next design questions.</p>
+        </div>
+      </footer>
+    </main>
+  </div>
+  <details class="review-notes" id="review-notes">
+    <summary>Evidence, provenance and remaining draft details — excluded from printing</summary>
+    <p>This draft follows <a href="P4P_POSTER_DESIGN.md">P4P_POSTER_DESIGN.md</a> and the supplied “Poster Design Choices” conversation preview. The confirmed A1 landscape size and request for more content supersede the design file's provisional A0 dimensions and text-density assumptions. The title and headings retain engineering navy (#17324D); body text uses neutral charcoal (#343D46). Sections use near-white cards (#FAFBFC), pale borders (#E2E7EB) and 2 mm corner radii, without shadows. These choices implement the user's requested text-colour distinction and subtle section grouping. Arial and scientific phase colours are retained. The printed page is 841 × 594 mm, with 18 mm margins, 21 pt body text, 18 pt captions, 34 pt section headings and a 62 pt title.</p>
+    <p>The poster is organised around results rather than a development chronology. No optimisation results, contact address, official logo or supervisor attribution have been invented. Phase 8 remains a storyline reconstruction; this communication artifact does not change its scientific completion objectives.</p>
+    <h2>Scientific sources and figure limits</h2>
+    <ul>
+      <li><strong>Numerical comparison:</strong> <a href="../experiments/phase-08-storyline-reconstruction/f2-split-inlet/results.md">Phase 8 F2 results</a>, matched SIMPLE and Coupled/Global Time Step branches at N5,000. Same mesh and feeds; independent Hybrid initialisation; several numerical settings change. The comparison uses terminal absolute gaps and residuals at N5,000, with inventory slopes fitted over N4,500–5,000. The N10,000 gap is a final-500 mean; its inventory slope uses the same window. Linked native Phase 8 analysis bundles are absent from this checkout; the poster uses Project's reported values, not invented line histories.</li>
+      <li><strong>Inventory history:</strong> <a href="../../PyAnsys/output/phase71a_r0_control_run4/report-histories-batched.json">Native R0 report histories</a>, <code>v2-total-liquid-mass</code>. All 2,007 samples are plotted without smoothing. Windows are 3,580–4,586, 4,586–5,586 and 5,086–5,586. These are successive continuations, not a controlled single-setting experiment. R0 has full loading, smooth walls, a phase-2-only sink and EWF off; it is a separate configuration from the absorber-free Phase 8 cases.</li>
+      <li><strong>R0 budgets:</strong> source-inclusive endpoint errors are recomputed from aligned phase inlet/outlet reports, native mixture outlet and applied sink, counted once. Liquid and mixture errors use their own feed denominators. An inventory derivative in kg/iteration cannot cancel a kg/s flux. The native mixture report is used rather than silently substituting a sum of phase reports.</li>
+      <li><strong>Spatial view:</strong> original Fluent 2025 R2 F2 PNG, 26.81 m/s, N10,000, centre plane <code>z=0</code>, liquid volume fraction 0–1. SVG viewports isolate the field and native colour strip with larger vector labels; scientific pixels and colour mapping are unchanged. The offset inlet is outside this plane.</li>
+      <li><strong>Inlet comparison:</strong> matched Coupled F1/F2 reference-speed results. Inventories are endpoint values; outlet/feed and area-weighted steam-face-to-outlet pressure differences are final-500 means. This is a boundary-representation comparison, not a physical geometry change or a total-pressure-loss measurement.</li>
+      <li><strong>Droplet figure:</strong> <a href="../experiments/phase-08-storyline-reconstruction/f3-coupled-dpm/results.md">F3 N11,000, 5% reference pilot</a>. Reported injection-weighted escaped/trapped/incomplete shares are 1.88%/19.13%/78.98%, not trajectory-count fractions. Rounded values sum to 99.99%; bar widths are not renormalised. Total liquid feed is unchanged when 5.846936325 kg/s is allocated from Eulerian liquid to DPM. Incomplete feed cannot be assigned to carryover or capture.</li>
+      <li><strong>Wall-film comparison:</strong> matched F3/F4 5% reference pilots at N11,000. Outlet and bulk inventory values are terminal; the 80.761 kg/s gap is a final-500 Eulerian mean, not a demonstrated complete-system leak. Film mass and maximum thickness are endpoint values. The film package is provisional, the lower boundary stays closed, and the combined transfer/fate ledger is incomplete.</li>
+      <li><a href="poster-assets/figure-provenance.json">Figure provenance and exact native window statistics</a> · <a href="poster-assets/build_poster_figures.py">Reproducible figure builder</a>.</li>
+    </ul>
+    <h2>Before final production</h2>
+    <p>Confirm institutional branding, author/supervisor attribution, contact details and acknowledgements. Proof the final-size typography and colours on the intended paper. The native field keeps its raster resolution; the numerical plots, droplet bar, field labels and poster typography are vector graphics. The planned geometry frames remain placeholders until physical designs and matched results exist.</p>
+  </details>
+  <script>
+    (() => {
+      const stage = document.querySelector('.poster-stage');
+      const poster = document.querySelector('.poster');
+      const toggle = document.getElementById('reading-toggle');
+      function fit() {
+        if (document.body.classList.contains('reading-view')) return;
+        const scale = Math.min(1, (window.innerWidth - 32) / poster.offsetWidth);
+        document.documentElement.style.setProperty('--scale', scale);
+        stage.style.width = `${poster.offsetWidth * scale}px`;
+        stage.style.height = `${poster.offsetHeight * scale}px`;
+      }
+      toggle.addEventListener('click', () => {
+        const active = document.body.classList.toggle('reading-view');
+        toggle.setAttribute('aria-pressed', String(active));
+        toggle.textContent = active ? 'Fit poster' : 'Reading view';
+        fit();
+      });
+      document.getElementById('print-button').addEventListener('click', () => {
+        document.body.classList.remove('reading-view');
+        toggle.setAttribute('aria-pressed', 'false');
+        toggle.textContent = 'Reading view';
+        fit();
+        window.print();
+      });
+      window.addEventListener('resize', fit);
+      let restoreReadingAfterPrint = false;
+      window.addEventListener('beforeprint', () => {
+        restoreReadingAfterPrint = document.body.classList.contains('reading-view');
+        document.body.classList.remove('reading-view');
+      });
+      window.addEventListener('afterprint', () => {
+        if (restoreReadingAfterPrint) document.body.classList.add('reading-view');
+        fit();
+      });
+      window.addEventListener('load', fit);
+      fit();
+    })();
+  </script>
+</body>
+</html>

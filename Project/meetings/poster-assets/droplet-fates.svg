@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="160" viewBox="0 0 1000 160" role="img" aria-labelledby="title desc">
+<title id="title">Represented droplet-feed fates at the 5% reference pilot</title>
+<desc id="desc">F3 at 26.81 m/s and N11000: escaped 1.88%, trapped 19.13%, incomplete 78.98%. Percentages are injection-weighted and rounded; incomplete trajectories remain unresolved.</desc>
+<defs><pattern id="escape-hatch" width="12" height="12" patternUnits="userSpaceOnUse"><path d="M-3 3L3-3M0 12L12 0M9 15L15 9" stroke="#52616B" stroke-width="3"/></pattern></defs>
+<rect width="1000" height="160" fill="white"/>
+<rect x="5" y="18" width="18.048" height="45" fill="url(#escape-hatch)" stroke="#17324D" stroke-width="2"/>
+<rect x="23.048" y="18" width="183.648" height="45" fill="#17324D"/>
+<rect x="206.696" y="18" width="758.208" height="45" fill="#F3F6F7" stroke="#52616B" stroke-width="2"/>
+<g font-family="Arial" font-size="29" fill="#17324D">
+<text x="5" y="107" font-weight="bold">1.88%</text><text x="5" y="147">Escaped</text>
+<text x="250" y="107" font-weight="bold">19.13%</text><text x="250" y="147">Trapped</text>
+<text x="555" y="107" font-weight="bold">78.98%</text><text x="555" y="147">Incomplete</text>
+</g></svg>

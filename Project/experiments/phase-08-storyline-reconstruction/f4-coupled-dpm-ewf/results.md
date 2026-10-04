@@ -20,7 +20,7 @@
 |  | F4 adds the provisional E2.7-based film package on `wall` only; the bottom remains excluded and the absorber remains off |
 | Its cap and film numerical controls | are recorded adaptations, not finalized Phase 7.2A settings |
 
-![F3 F4 mechanism response](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f4-coupled-dpm-ewf/figures/f3-f4-mechanism-response.png>)
+![F3 F4 mechanism response](figures/f3-f4-mechanism-response.png)
 
 | Item | The film package produces a large bulk-routing change |
 | --- | --- |
@@ -32,17 +32,17 @@
 
 | Reference snapshot | Vertical liquid distribution | Inlet-plane circulation |
 | --- | --- | --- |
-| F4-26.81-5-n11000 | ![F4-26.81-5-n11000 liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f4-coupled-dpm-ewf/figures/F4-26.81-5-n11000-liquid.png>) | ![F4-26.81-5-n11000 inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f4-coupled-dpm-ewf/figures/F4-26.81-5-n11000-inlet-vectors.png>) |
+| F4-26.81-5-n11000 | ![F4-26.81-5-n11000 liquid](figures/F4-26.81-5-n11000-liquid.png) | ![F4-26.81-5-n11000 inlet-vectors](figures/F4-26.81-5-n11000-inlet-vectors.png) |
 
 | Bulk liquid and flow views |
 | --- |
 | Reference-speed pressure: |
 
-![F4-26.81-5-n11000 pressure](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f4-coupled-dpm-ewf/figures/F4-26.81-5-n11000-pressure.png>)
+![F4-26.81-5-n11000 pressure](figures/F4-26.81-5-n11000-pressure.png)
 
 ## Film forms locally, but drainage is not established
 
-![F4 film histories](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f4-coupled-dpm-ewf/figures/film-response.png>)
+![F4 film histories](figures/film-response.png)
 
 | Item | Film forms locally, but drainage is not established |
 | --- | --- |
@@ -50,11 +50,11 @@
 |  | Cumulative stripped mass reaches 0.1876 kg and cumulative film outflow reaches 0.00546 kg |
 | These | are masses in kg, not rates inferred from carrier iteration |
 
-![F4-26.81-5-n11000 film-thickness](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f4-coupled-dpm-ewf/figures/F4-26.81-5-n11000-film-thickness.png>)
+![F4-26.81-5-n11000 film-thickness](figures/F4-26.81-5-n11000-film-thickness.png)
 
 *Figure F4.3. F4 N11,000 wall-film thickness on the 3D wall, shared range 0–0.2 mm. Film concentrates near inlet height, rather than covering the wall uniformly.*
 
-![F4-26.81-5-n11000 film-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f4-coupled-dpm-ewf/figures/F4-26.81-5-n11000-film-vectors.png>)
+![F4-26.81-5-n11000 film-vectors](figures/F4-26.81-5-n11000-film-vectors.png)
 
 *Figure F4.4. F4 N11,000 native film-velocity vectors on the 3D wall, speed range 0–87 m/s. Circumferential transport is visible; arrows alone do not establish downward liquid removal.*
 
@@ -79,7 +79,7 @@
 
 ## Numerical context
 
-![F3 F4 accounting and continuity context](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f4-coupled-dpm-ewf/figures/numerical-context.png>)
+![F3 F4 accounting and continuity context](figures/numerical-context.png)
 
 | Numerical context |
 | --- |
@@ -100,7 +100,7 @@
 <summary>All saved case contours and vectors</summary>
 | Saved snapshot | Liquid, vertical cut | Liquid, inlet slice | Vertical vectors | Inlet vectors |
 | --- | --- | --- | --- | --- |
-| F4 26.81 m/s 5% provisional EWF N11000 | ![F4-26.81-5-n11000 liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f4-coupled-dpm-ewf/figures/F4-26.81-5-n11000-liquid.png>) | ![F4-26.81-5-n11000 inlet-liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f4-coupled-dpm-ewf/figures/F4-26.81-5-n11000-inlet-liquid.png>) | ![F4-26.81-5-n11000 vertical-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f4-coupled-dpm-ewf/figures/F4-26.81-5-n11000-vertical-vectors.png>) | ![F4-26.81-5-n11000 inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f4-coupled-dpm-ewf/figures/F4-26.81-5-n11000-inlet-vectors.png>) |
+| F4 26.81 m/s 5% provisional EWF N11000 | ![F4-26.81-5-n11000 liquid](figures/F4-26.81-5-n11000-liquid.png) | ![F4-26.81-5-n11000 inlet-liquid](figures/F4-26.81-5-n11000-inlet-liquid.png) | ![F4-26.81-5-n11000 vertical-vectors](figures/F4-26.81-5-n11000-vertical-vectors.png) | ![F4-26.81-5-n11000 inlet-vectors](figures/F4-26.81-5-n11000-inlet-vectors.png) |
 
 | Item | Supporting spatial atlas |
 | --- | --- |
