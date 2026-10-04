@@ -12,12 +12,10 @@
 | Controlled delta | Liquid-only mass/momentum sink using shared law with `G=0.50`; no vapor sink |
 | Active horizon | 500 controller-active iterations; 50-iteration smoke; checkpoints active 50, 250, 500 |
 
-Use the identical E5 region, source formulation, normalization, update interval,
-and bounds; only gain changes. Command
-`clamp(0.50 × 116.92 kg/s × e,0,146.15 kg/s)`.
-
-Require exact region/source proof and all command, realized source, saturation,
-inventory, phase balance, residual, artifact, and F1–F4 evidence. Unaccounted
-mass/momentum or vapor source blocks; unstable/ineffective response rejects.
-No physical outlet or convergence claim is permitted.
-
+| Item | Contract |
+| --- | --- |
+| — | Use the identical E5 region, source formulation, normalization, update interval, and bounds; only gain changes |
+|  | Command `clamp(0.50 × 116.92 kg/s × e,0,146.15 kg/s)` |
+|  | Require exact region/source proof and all command, realized source, saturation, inventory, phase balance, residual, artifact, and F1–F4 evidence |
+|  | Unaccounted mass/momentum or vapor source blocks; unstable/ineffective response rejects |
+| No physical outlet or convergence claim | is permitted |

@@ -1,5 +1,57 @@
 # CFD Wiki Index
 
+Start with the question you are trying to answer. The catalog below is for
+finding a known document; these routes connect explanations, methods and evidence.
+
+## Questions to explore
+
+| Your question | Start here | Follow through to |
+| --- | --- | --- |
+| What physics should my separator model capture? | [Modeling levels](physics-basis/governing-equations-and-modeling-levels.md) | [Flow regime versus CFD representation](concepts/two-phase-flow-regime-vs-cfd-representation.md), then [assumptions and gaps](physics-basis/uncertainties-and-assumption-register.md) |
+| What is known about inlet droplets, and what am I assuming? | [Droplets and re-entrainment](physics-basis/droplets-carryover-and-re-entrainment.md) | [Inlet evidence inventory](synthesis/geothermal-separator-inlet-droplets-and-carryover.md) and [fine-mist cutoff evidence](synthesis/geothermal-fine-mist-size-cutoff-evidence.md); distinguish inlet distributions from capture thresholds |
+| Does liquid hitting a wall really count as separation? | [Droplets and re-entrainment](physics-basis/droplets-carryover-and-re-entrainment.md) | [Efficiency methods](synthesis/fluent-separator-efficiency-methods.md), then [annular-flow three-field precedents](synthesis/annular-flow-three-field-cfd-patterns.md) |
+| How should I calculate and qualify separator efficiency? | [Efficiency methods](synthesis/fluent-separator-efficiency-methods.md) | [Verification and validation workflow](synthesis/separator-cfd-verification-and-validation-workflow.md); check the denominator, represented mass and unresolved tracks |
+| Are my mesh and convergence evidence enough for this claim? | [Verification and validation workflow](synthesis/separator-cfd-verification-and-validation-workflow.md) | [Mesh evidence across papers](synthesis/mesh-quality-and-resolution-patterns.md) and [near-wall inflation](concepts/mesh-inflation-boundary-layer.md) |
+| What can I reuse from Purnanto, Pointon or Chen? | [Separator design and CFD patterns](synthesis/geothermal-separator-design-and-cfd-patterns.md) | [Purnanto](sources/purnanto-2013-cfd-geothermal-separator.md), [Pointon](sources/pointon-2009-geothermal-separator-sizing-cfd-validation.md), [Chen](sources/chen-2025-straight-through-cyclone-water-separator.md); compare geometry, fluids and validation before transferring settings |
+| How do I perform this step in Fluent? | [Fluent guidance](guidance/index.md) | The relevant procedure, then its version-matched manual section; setup sheets hold case values |
+| How do pressure and enthalpy change the inlet phase split? | [Pressure, enthalpy and phase split](physics-basis/operating-pressure-enthalpy-and-phase-split.md) | [Geofluid properties and plant design](synthesis/two-phase-geofluid-property-to-binary-plant-design.md) |
+| Where exactly does a paper report a method or value? | [Paper lookup](../paper_lookup/index.md) | Topic chunk → source extraction → cited original page, figure or table |
+
+## Ask the wiki
+
+You can ask an agent in plain language, for example:
+
+- “Use the CFD wiki to compare DPM wall trapping with EWF. What can each tell me, and what remains uncertain?”
+- “Find the strongest local evidence for a droplet-size sensitivity study. Separate measured distributions, assumptions and capture thresholds.”
+- “What evidence would make a high separator-efficiency result misleading?”
+- “Which existing papers could challenge this model choice? Show the supporting sections and transfer limits.”
+
+For focused local search, run from the repository root:
+
+```powershell
+python CFD_wiki/tools/wiki.py search "wall film carryover"
+python CFD_wiki/tools/wiki.py search "mesh validation" --json
+python CFD_wiki/tools/wiki.py health
+```
+
+Search ranks keyword matches and returns section/line excerpts; read the matched
+page before drawing a conclusion. The health command checks file links, catalog
+coverage, content backlinks and local source availability. Scientific contradictions,
+units and citation quality still require an evidence review.
+
+## Evidence access
+
+Source notes preserve original filenames and citations. The `raw/` and `guide/`
+folders are absent in this checkout as checked on 2026-10-03; `raw/` is Git-ignored.
+Until a cited original is available locally or through its publisher/manual,
+describe the answer as based on the maintained extraction and identify any
+setup-critical detail that still needs primary-source verification.
+
+Reusable answers should improve an existing concept or synthesis page when they
+add evidence or resolve a gap. Applied decisions and run results belong in
+`Project/`; ordinary answers can stay in chat. This lets useful findings accumulate
+without saving a second copy of every conversation.
+
 ## Lookup Dictionaries
 - [paper_lookup/index](../paper_lookup/index.md): first-stop index for chunked CFD/geothermal research-paper lookup files.
 - [research_paper_dictionary_lookup](../research_paper_dictionary_lookup.md): compatibility router for the broad CFD/geothermal lookup dictionary.
@@ -67,6 +119,7 @@
 - [uncertainties-and-assumption-register](physics-basis/uncertainties-and-assumption-register.md): active uncertainty register for separator modeling assumptions.
 
 ## Synthesis
+- [geothermal-fine-mist-size-cutoff-evidence](synthesis/geothermal-fine-mist-size-cutoff-evidence.md): distinguishes fine-mist transport, separator capture thresholds and inherited distribution weights; includes explicitly bounded project-derived calculations.
 - [geothermal-separator-design-and-cfd-patterns](synthesis/geothermal-separator-design-and-cfd-patterns.md): merged design defaults and failure checks for geothermal separators.
 - [geothermal-separator-inlet-droplets-and-carryover](synthesis/geothermal-separator-inlet-droplets-and-carryover.md): external-web and local-wiki inventory of separator-inlet steam/brine/droplet/mineral evidence, reported sizes, calculated loads, and missing measured particle-size data.
 - [fluent-separator-efficiency-methods](synthesis/fluent-separator-efficiency-methods.md): Purnanto-style DPM separator-efficiency reconstruction plus improved Fluent phase-flux, mass-weighted DPM, wall-film, field-validation, and diagnostic pool/sink qualification workflows.

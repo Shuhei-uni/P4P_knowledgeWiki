@@ -2,8 +2,8 @@
 
 ## Status
 
-**NOT RUN — planning draft only.**
-
-No result or convergence claim exists. This packet remains conditional on
-near-wall and flow-separation evidence.
-
+| Item | Status |
+| --- | --- |
+| — | NOT RUN — planning draft only |
+|  | No result or convergence claim exists |
+| This packet | remains conditional on near-wall and flow-separation evidence |

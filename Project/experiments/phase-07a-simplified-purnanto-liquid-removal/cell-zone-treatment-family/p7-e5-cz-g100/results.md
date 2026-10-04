@@ -2,25 +2,16 @@
 
 ## Answer at a glance
 
-`COMPLETE_VERIFIED` as a fresh 500-controller-iteration discovery screen on
-`student`. The run loaded the exact E0 native-500 case/data pair, split the
-existing parent into the approved lower fluid zone, passed source-off
-save/reopen and smoke, enabled the lower-zone-only source contract, completed
-all ten controller updates through native iteration 1,000, saved the final
-paired case/data, reopened it, and verified the terminal zones.
-
-G100 reduced the late inventory drift relative to corrected G025, but it did
-not reverse the global liquid-inventory trend. The late slope was
-`+0.3521 kg/native iteration`; the final inventory was `332.52 kg`, compared
-with `365.36 kg` for G025. G050 currently has the smallest provisional late
-slope (`+0.3256 kg/iteration`), although G050 is a recovered restart-window
-package rather than a fresh full-history run.
-
-One inherited Fluent autosave path warning appeared near native iteration 999:
-the old E0 path under `C:\Users\syok443\...` did not exist. Fluent continued,
-saved the requested final pair, reopened it, and the terminal manifest is
-complete. This is retained as a nonfatal warning, not treated as missing
-terminal evidence.
+| Item | Answer at a glance |
+| --- | --- |
+| — | `COMPLETE_VERIFIED` as a fresh 500-controller-iteration discovery screen on `student` |
+|  | The run loaded the exact E0 native-500 case/data pair, split the existing parent into the approved lower fluid zone, passed source-off save/reopen and smoke, enabled the lower-zone-only source contract, completed all ten controller updates through native iteration 1,000, saved the final paired case/data, reopened it, and verified the terminal zones |
+|  | G100 reduced the late inventory drift relative to corrected G025, but it did not reverse the global liquid-inventory trend |
+| late slope | was `+0.3521 kg/native iteration`; the final inventory was `332.52 kg`, compared with `365.36 kg` for G025 |
+| — | G050 currently has the smallest provisional late slope (`+0.3256 kg/iteration`), although G050 is a recovered restart-window package rather than a fresh full-history run |
+|  | One inherited Fluent autosave path warning appeared near native iteration 999: the old E0 path under `C:\Users\syok443\...` did not exist |
+|  | Fluent continued, saved the requested final pair, reopened it, and the terminal manifest is complete |
+| This | is retained as a nonfatal warning, not treated as missing terminal evidence |
 
 ## Evidence status
 
@@ -56,15 +47,18 @@ terminal evidence.
 | 450 | 950 | 309.299 | 83.729 | -83.729 |
 | 500 | 1,000 | 332.524 | 95.892 | -95.892 |
 
-The final lower-zone phase-2 volumetric source was `-311.032323 kg/m3/s`.
-The final commanded removal was `95.892077 kg/s`, below the `146.15 kg/s`
-clamp; no controller update saturated. Direct phase-1 source readback stayed
-zero. The complete source tree and update-by-update `get_sum` records are in
-the G100 manifest (local generated artifact): `PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G100-student-20260910T045745Z-manifest.json`.
+| Item | Controller and source readback |
+| --- | --- |
+| final lower-zone phase-2 volumetric source | was `-311.032323 kg/m3/s` |
+| final commanded removal | was `95.892077 kg/s`, below the `146.15 kg/s` clamp; no controller update saturated |
+| — | Direct phase-1 source readback stayed zero |
+| complete source tree and update-by-update `get_sum` | records are in the G100 manifest (local generated artifact): `PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G100-student-20260910T045745Z-manifest.json` |
 
 ## Numerical observations
 
-The full report package gives the following finite-screen values:
+| Numerical observations |
+| --- |
+| The full report package gives the following finite-screen values: |
 
 | Diagnostic | Full screen | Late window `751--1,000` | Interpretation |
 | --- | ---: | ---: | --- |
@@ -75,50 +69,39 @@ The full report package gives the following finite-screen values:
 | Boundary mixture-imbalance ratio | — | `0.5887` mean | Boundary-only closure remains open |
 | Bottom vapor loss ratio | — | `0` | No bottom vapor-loss signature |
 
-Late residual means were approximately `7.10e-2` continuity, `1.76e-4`,
-`1.71e-4`, and `1.77e-4` for the three velocity residuals, `1.69e-3` for
-`k`, `3.10e-3` for epsilon, and `7.41e-3` for phase-2 volume fraction. The
-histories remain finite, but they do not establish a converged steady solution
-or a closed physical balance.
-
-The report-facing figures are:
-
-1. [F1 — liquid inventory versus E0](figures/P7-E5-CZ-G100-student-20260910T045745Z/F1-liquid-inventory-vs-E0.png), the direct response figure over native `501--1,000`.
-2. [F2 — phase routing and closure](figures/P7-E5-CZ-G100-student-20260910T045745Z/F2-phase-routing-and-closure.png), showing the small phase-2 liquid outflow and open mixture closure.
-3. [F3 — numerical adequacy](figures/P7-E5-CZ-G100-student-20260910T045745Z/F3-numerical-adequacy.png), showing the residual histories and balance diagnostic.
-4. [F4 — adaptive controller](figures/P7-E5-CZ-G100-student-20260910T045745Z/F4-adaptive-controller.png), showing the command rising to `95.89 kg/s` without saturation.
+| Item | Numerical observations |
+| --- | --- |
+| Late residual means | were approximately `7.10e-2` continuity, `1.76e-4`, `1.71e-4`, and `1.77e-4` for the three velocity residuals, `1.69e-3` for `k`, `3.10e-3` for epsilon, and `7.41e-3` for phase-2 volume fraction |
+| histories | remain finite, but they do not establish a converged steady solution or a closed physical balance |
+| — | The report-facing figures are: |
+|  | [F1 — liquid inventory versus E0](figures/P7-E5-CZ-G100-student-20260910T045745Z/F1-liquid-inventory-vs-E0.png), the direct response figure over native `501--1,000` |
+|  | [F2 — phase routing and closure](figures/P7-E5-CZ-G100-student-20260910T045745Z/F2-phase-routing-and-closure.png), showing the small phase-2 liquid outflow and open mixture closure |
+|  | [F3 — numerical adequacy](figures/P7-E5-CZ-G100-student-20260910T045745Z/F3-numerical-adequacy.png), showing the residual histories and balance diagnostic |
+|  | [F4 — adaptive controller](figures/P7-E5-CZ-G100-student-20260910T045745Z/F4-adaptive-controller.png), showing the command rising to `95.89 kg/s` without saturation |
 
 ## Interpretation and claim boundary
 
-G100 confirms that the native cell-zone source architecture remains operable
-at the higher gain: the mesh split, zone binding, adaptive source updates,
-integrated source audit, and final restart state all survived a full screen.
-The higher gain also reduces the finite-horizon inventory relative to G025,
-but it does not produce a falling total liquid inventory. The command grows
-strongly while the observed phase-2 liquid boundary outflow stays near zero
-relative to the liquid inflow, and the boundary-only mixture closure remains
-open.
-
-The correct claim is therefore “G100 completed a valid artificial cell-zone
-discovery screen with positive inventory drift,” not “G100 drains the vessel” or
-“G100 is qualified.” The three-gain family can be compared for provisional
-ranking, but no member should be promoted to a physical or long-horizon claim
-from this finite evidence.
-
-Patching/resetting the field is excluded from this record. No automatic
-qualification run or unbounded continuation is authorized by this result.
+| Item | Interpretation and claim boundary |
+| --- | --- |
+| G100 confirms that the native cell-zone source architecture | remains operable at the higher gain: the mesh split, zone binding, adaptive source updates, integrated source audit, and final restart state all survived a full screen |
+| — | The higher gain also reduces the finite-horizon inventory relative to G025, but it does not produce a falling total liquid inventory |
+|  | The command grows strongly while the observed phase-2 liquid boundary outflow stays near zero relative to the liquid inflow, and the boundary-only mixture closure remains open |
+| correct claim | is therefore “G100 completed a valid artificial cell-zone discovery screen with positive inventory drift,” not “G100 drains the vessel” or “G100 is qualified.” The three-gain family can be compared for provisional ranking, but no member should be promoted to a physical or long-horizon claim from this finite evidence |
+| Patching/resetting the field | is excluded from this record |
+| No automatic qualification run or unbounded continuation | is authorized by this result |
 
 ## Durable artifacts
 
-- [G100 setup](setup.md)
-- [G100 run paths](run-paths.yaml)
-- G100 manifest (local generated artifact): `PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G100-student-20260910T045745Z-manifest.json`
-- report histories (local generated artifact): `PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G100-student-20260910T045745Z-reports.json`
-- residual history (local generated artifact): `PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G100-student-20260910T045745Z-residuals.json`
-- numerical summary (local generated artifact): `PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G100-student-20260910T045745Z-analysis/summary.json`
-- [corrected E5-CZ runner](../../../../../PyAnsys/scripts/setup/run_p7_e5_cz.py)
-
-The final remote pair is recorded in `run-paths.yaml` and the manifest:
+| Item | Durable artifacts |
+| --- | --- |
+| — | [G100 setup](setup.md) |
+|  | [G100 run paths](run-paths.yaml) |
+| G100 manifest (local generated artifact) | `PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G100-student-20260910T045745Z-manifest.json` |
+| report histories (local generated artifact) | `PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G100-student-20260910T045745Z-reports.json` |
+| residual history (local generated artifact) | `PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G100-student-20260910T045745Z-residuals.json` |
+| numerical summary (local generated artifact) | `PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G100-student-20260910T045745Z-analysis/summary.json` |
+| — | [corrected E5-CZ runner](../../../../../PyAnsys/scripts/setup/run_p7_e5_cz.py) |
+| final remote pair | is recorded in `run-paths.yaml` and the manifest: |
 
 ```text
 C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneTreatment\20260910T045745Z\P7-E5-CZ-G100\P7-E5-CZ-G100-active500.cas.h5
@@ -127,8 +110,8 @@ C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneTreatment\2026091
 
 ## Next action
 
-Compare the completed G025/G050/G100 F1--F4 package under the Phase 07
-lifecycle gate. The evidence currently points to G050 as the most promising
-provisional gain, while all three still show positive inventory drift and open
-closure. A new experiment or long continuation should be selected only after
-that comparison, not inferred from G100 completion alone.
+| Next action |
+| --- |
+| Compare the completed G025/G050/G100 F1--F4 package under the Phase 07 lifecycle gate |
+| The evidence currently points to G050 as the most promising provisional gain, while all three still show positive inventory drift and open closure |
+| A new experiment or long continuation should be selected only after that comparison, not inferred from G100 completion alone |

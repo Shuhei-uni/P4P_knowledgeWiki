@@ -207,13 +207,13 @@ Never present assumptions as paper-reported values.
 
 ## Query Workflow
 When answering questions:
-1. Read `wiki/index.md` first.
+1. Read the question routes in `wiki/index.md` first. For explanation, model comparison, or assumption questions, start with the matching physics/concept or synthesis page and follow its evidence links. Use `python CFD_wiki/tools/wiki.py search "<terms>" --json` from the repository root for section/line pointers when the route is unclear.
 2. If the question asks where to find information in papers, read `paper_lookup/index.md` first, then only the relevant chunk file before opening long source pages or raw PDFs.
 3. If the question is "how to do this in Fluent", read `wiki/guidance/` pages first, then use `guide/` or `wiki/sources/ansys-fluent-users-guide-2025r2.md` only for verification or missing detail.
 4. Then read only relevant source/setup/concept pages.
 5. Prefer synthesis over single-paper answers whenever multiple sources exist, but still point to the paper sections that support the synthesis.
 6. Answer with citations and uncertainty labels.
-7. If the answer is generally useful, save it as a reusable wiki page and update index/log.
+7. When wiki maintenance is authorized and an answer adds source-backed reusable knowledge or resolves a recorded gap, update the smallest existing owning page, its meaningful backlinks, and index/log. Create a page only for a distinct topic with no existing owner. Keep ordinary answers in chat unless the human requests an artifact; keep applied results and decisions in `Project/`.
 
 ## Synthesis Workflow
 When there are at least two relevant papers:
@@ -224,6 +224,11 @@ When there are at least two relevant papers:
 5. Store this in `wiki/synthesis/<topic>.md` and link all contributing pages.
 
 ## Lint Workflow (Wiki Health Check)
+Run `python CFD_wiki/tools/wiki.py health --json` from the repository root for
+file-link, catalog, backlink and source-availability checks. Its output names
+the unsupported link formats; treat these as structural checks, not scientific
+validation. Missing originals remain explicit verification gaps.
+
 Periodically check for:
 - Claims without citations.
 - Setup pages without units.

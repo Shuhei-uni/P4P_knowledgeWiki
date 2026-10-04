@@ -1,9 +1,12 @@
-> **Retired source:** Setups/reports/purnanto-reference/08b/phase-flux-result.md
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
+| Item | Record |
+| --- | --- |
+| Retired source | Setups/reports/purnanto-reference/08b/phase-flux-result.md |
 
 # Setup 08b Phase-Flux Result
 
-This raw numerical extract is linked from the [Setup 08b results report](results.md).
+| Item | Setup 08b Phase-Flux Result |
+| --- | --- |
+| This raw numerical extract | is linked from the [Setup 08b results report](results.md) |
 
 ## Water vapor
 

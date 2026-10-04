@@ -2,28 +2,21 @@
 
 ## Status and phase-loop audit
 
-**Selected by the human for completion of the Phase-06 scientific loop; not yet run.**
-
-Phase 6 contains the short discovery evidence required by the loop: the
-fixed-pressure/reference and `K=10` outlet-vent screens (`P6-S1-R/O`) and the
-five-chunk numerical-surrogate discovery (`P6-S3-C`). Stage 4 is a focused
-hypothesis test, but it stopped after 1,000 iterations while the controller had
-hit its lower pressure bound and the lower-region proxy still rose. Phase-05's
-transient Stage-05 record is setup-only; it is not treated as Phase-06 run
-evidence.
-
-**Stage question.** Once the stronger bounded pressure-feedback surrogate has
-saturated at its lowest allowed pressure, does a substantially longer run show
-the lower-region proxy and phase balance settling, or continuing accumulation?
-
-This tests the Stage-04 short-horizon interpretation. It cannot supply a real
-pool-level measurement or validate plant level-control behaviour.
+| Item | Status and phase-loop audit |
+| --- | --- |
+| — | Selected by the human for completion of the Phase-06 scientific loop; not yet run |
+|  | Phase 6 contains the short discovery evidence required by the loop: the fixed-pressure/reference and `K=10` outlet-vent screens (`P6-S1-R/O`) and the five-chunk numerical-surrogate discovery (`P6-S3-C`) |
+| Stage 4 | is a focused hypothesis test, but it stopped after 1,000 iterations while the controller had hit its lower pressure bound and the lower-region proxy still rose |
+| Phase-05's transient Stage-05 record | is setup-only; it is not treated as Phase-06 run evidence |
+| Stage question. | Once the stronger bounded pressure-feedback surrogate has saturated at its lowest allowed pressure, does a substantially longer run show the lower-region proxy and phase balance settling, or continuing accumulation? |
+| — | This tests the Stage-04 short-horizon interpretation |
+|  | It cannot supply a real pool-level measurement or validate plant level-control behaviour |
 
 ## Hypothesis and discriminating observations
 
-**H6.** The Stage-04 reduction in proxy slope was a long transient toward a
-bounded numerical-surrogate state, rather than persistent accumulation after
-the pressure actuator saturates.
+| Item | Hypothesis and discriminating observations |
+| --- | --- |
+| H6. | The Stage-04 reduction in proxy slope was a long transient toward a bounded numerical-surrogate state, rather than persistent accumulation after the pressure actuator saturates |
 
 | Long-run observation | Consequence |
 |---|---|
@@ -76,25 +69,16 @@ the pressure actuator saturates.
 
 ### Execution amendment before the clean successor attempt
 
-The first report-coordinate-corrected attempt completed its 50-iteration
-smoke (the native report coordinate advanced to 15,050) but its immediately
-following single 100-iteration PyFluent RPC did not return while the server
-subsequently reported quiescent. The scientific setup, the 100-iteration
-feedback cadence, target, pressure bounds, and total horizon are unchanged.
-The clean successor therefore executes each 100-iteration control interval as
-**two verified 50-iteration PyFluent calls**, checks the native report
-coordinate after each call, and then applies the same one pressure update.
-This is an execution-reliability correction only, not a new discovery
-condition or an additional controller degree of freedom.
-
-Implementation must prove the remote session is quiescent, the exact parent
-pair exists and reads as steady Mixture/RNG with a pressure `brineoutlet`, and
-all unique report-file paths are redirected before the smoke run. The child
-must be save/reload verified. A zero Python return code alone is not completion
-proof. The native coordinates in the redirected report histories are the
-authoritative progress coordinate; the inherited Fluent RP iteration value is
-not used as a solve-progress check because it remained fixed at `1556` in the
-Stage-01 reference despite observed report progress.
+| Item | Execution amendment before the clean successor attempt |
+| --- | --- |
+| — | The first report-coordinate-corrected attempt completed its 50-iteration smoke (the native report coordinate advanced to 15,050) but its immediately following single 100-iteration PyFluent RPC did not return while the server subsequently reported quiescent |
+|  | The scientific setup, the 100-iteration feedback cadence, target, pressure bounds, and total horizon are unchanged |
+|  | The clean successor therefore executes each 100-iteration control interval as two verified 50-iteration PyFluent calls, checks the native report coordinate after each call, and then applies the same one pressure update |
+| This | is an execution-reliability correction only, not a new discovery condition or an additional controller degree of freedom |
+| Implementation must prove the remote session | is quiescent, the exact parent pair exists and reads as steady Mixture/RNG with a pressure `brineoutlet`, and all unique report-file paths are redirected before the smoke run |
+| — | The child must be save/reload verified |
+| A zero Python return code alone | is not completion proof |
+| native coordinates in the redirected report histories | are the authoritative progress coordinate; the inherited Fluent RP iteration value is not used as a solve-progress check because it remained fixed at `1556` in the Stage-01 reference despite observed report progress |
 
 ## Core figure plan
 
@@ -107,17 +91,11 @@ Stage-01 reference despite observed report progress.
 
 ## Fleet and bold-probe lane result
 
-The 2026-08-31 preflight found `server-2@10.104.145.174` and
-`server-3@10.104.145.176` reachable, quiescent, Fluent 2025 R2-capable, and
-able to see the F11 pair. Server 2's first two attempts supplied no hypothesis
-evidence; its third completed the smoke but stalled in the first 100-iteration
-call. Server 3 was then found actively owned by another solve at the direct
-Fluent state gate, so the clean mainline successor returns to a newly proven
-quiescent server 2 with the execution amendment above. Bold-probe research
-reviewed the local Purnanto scope, Phase-02 VOF, Phase-05 transient work, and
-the failed mass-flow-outlet family. No bold case is runnable within this Phase-6
-boundary: transient/VOF/controller work changes scope, while another
-mass-flow/pressure/resistance trial is prerequisite-blocked or redundant.
-
-The runtime placement and final paths are in [run-paths.yaml](run-paths.yaml);
-results belong in [results.md](results.md).
+| Item | Fleet and bold-probe lane result |
+| --- | --- |
+| — | The 2026-08-31 preflight found `server-2@10.104.145.174` and `server-3@10.104.145.176` reachable, quiescent, Fluent 2025 R2-capable, and able to see the F11 pair |
+|  | Server 2's first two attempts supplied no hypothesis evidence; its third completed the smoke but stalled in the first 100-iteration call |
+| Server 3 | was then found actively owned by another solve at the direct Fluent state gate, so the clean mainline successor returns to a newly proven quiescent server 2 with the execution amendment above |
+| — | Bold-probe research reviewed the local Purnanto scope, Phase-02 VOF, Phase-05 transient work, and the failed mass-flow-outlet family |
+| No bold case | is runnable within this Phase-6 boundary: transient/VOF/controller work changes scope, while another mass-flow/pressure/resistance trial is prerequisite-blocked or redundant |
+| runtime placement and final paths | are in [run-paths.yaml](run-paths.yaml); results belong in [results.md](results.md) |

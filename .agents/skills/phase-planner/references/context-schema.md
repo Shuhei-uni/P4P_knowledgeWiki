@@ -5,28 +5,25 @@ Use this branch when creating or materially revising an active phase
 
 ## Minimum structure
 
-Use headings that make the current frontier searchable:
+Use searchable headings and compact tables under each heading:
 
 ```md
 # Phase Context — <phase>
 
 ## Status
-<current frontier and one-sentence decision>
+<status / authority / next decision table>
 
 ## Evidence anchors
-<observed Project evidence, reusable reported evidence, inferences,
-assumptions, and genuinely missing facts>
+<source / observation / uncertainty table>
 
 ## Phase contract
-<question; in/out-of-scope; invariants; claim limit; useful evidence standard>
+<item / requirement table: question, scope, invariants, claim limits, evidence standard>
 
 ## Candidate experiment families
-<mechanism, controlled delta, screening question, required evidence,
-rejection/selection signal>
+<family / controlled delta / evidence / selection or rejection signal table>
 
 ## Decision conditions
-<evidence required, interpretation condition, allowed next in-scope route,
-and what the screen does not establish>
+<condition / permitted action / claim limit table>
 ```
 
 Link evidence anchors to their owning Project or CFD-wiki source. Mark direct

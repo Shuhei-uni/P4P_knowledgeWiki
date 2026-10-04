@@ -14,21 +14,14 @@
 
 ## Uncertainty being reduced
 
-The supplied Phase-07 mesh has the intended truncated Purnanto geometry, but
-its discrete mesh differs substantially from the historical 08b mesh and its
-steam-outlet diameter corrects the former Project value from `0.724 m` to
-`0.876 m`. The project does not yet know the new case's natural liquid-
-inventory buildup, phase-mass imbalance, or numerical-history scale.
-
-E0 asks:
-
-> Can an 08b-derived carrier setup, reconciled onto the supplied mesh with a
-> non-draining bottom wall and corrected steam-outlet scale, produce a valid
-> and sufficiently repeatable `2,000`-iteration reference history for later
-> fixed-mesh liquid-removal comparisons?
-
-E0 does not ask whether the wall-bottom model reaches liquid mass closure.
-Continued liquid accumulation may be the reference result.
+| Uncertainty being reduced |
+| --- |
+| The supplied Phase-07 mesh has the intended truncated Purnanto geometry, but its discrete mesh differs substantially from the historical 08b mesh and its steam-outlet diameter corrects the former Project value from `0.724 m` to `0.876 m` |
+| The project does not yet know the new case's natural liquid- inventory buildup, phase-mass imbalance, or numerical-history scale |
+| E0 asks: |
+| Can an 08b-derived carrier setup, reconciled onto the supplied mesh with a non-draining bottom wall and corrected steam-outlet scale, produce a valid and sufficiently repeatable `2,000`-iteration reference history for later fixed-mesh liquid-removal comparisons? |
+| E0 does not ask whether the wall-bottom model reaches liquid mass closure |
+| Continued liquid accumulation may be the reference result |
 
 ## Prior-experiment collision check
 
@@ -39,9 +32,9 @@ Continued liquid accumulation may be the reference result.
 | Phase-05 outlet-characterization work | `PARTIAL REPEAT` by diagnostic theme | Full-geometry outlet cases measured inventory and phase routing; stable anchors over-drained an initialized pool. | Different geometry and initial-condition question; useful for instrumentation lessons, not a substitute for E0. |
 | Phase-06 pool-control work | `PARTIAL REPEAT` by inventory question | Full-geometry steady surrogates did not establish a controlled pool state. | Phase 07 deliberately changes to the simpler truncated geometry and first needs its own fixed-mesh reference. |
 
-Novelty classification: **`PARTIAL REPEAT`**, scientifically nonredundant
-because the new mesh, corrected outlet length scale, exact parent readback,
-and complete trend evidence form the controlled delta.
+| Item | Prior-experiment collision check |
+| --- | --- |
+| Novelty classification | `PARTIAL REPEAT`, scientifically nonredundant because the new mesh, corrected outlet length scale, exact parent readback, and complete trend evidence form the controlled delta |
 
 ## Question-experiment challenge
 
@@ -55,30 +48,29 @@ and complete trend evidence form the controlled delta.
 
 ### Strongest criticisms and dispositions
 
-- **Important — parent ambiguity:** the supplied case has previously been
-  reported as carrying six one-way DPM injections rather than the broader
-  nine-bin payload described in the 08b narrative. E0 concerns the continuous
-  Mixture carrier field. The exact DPM state must be read back, interaction
-  with the continuous phase must remain off, and no DPM update or DPM result
-  may count as E0 evidence. If DPM coupling is active, setup validity fails.
-- **Important — mesh replacement may lose or mis-map settings:** every model,
-  material, phase, boundary, solver, initialization, and report dependency
-  must be reconciled and read back. Filename similarity is insufficient.
-- **Important — initialization can control early inventory behavior:** use the
-  parent-defined initialization method when it survives authoritative
-  readback. If it cannot be proven after mesh reconciliation, return upstream
-  rather than silently select a different method.
-- **Important — 2,000 iterations may not establish a stable slope:** compare
-  adjacent late windows. A stable positive buildup slope is usable; an
-  evolving or noise-dominated slope is inconclusive and may justify only a
-  human-reviewed continuation of unchanged E0.
-- **Minor — historical 08b is not a matched comparator:** use its reported
-  endpoint fluxes only as contextual reasonableness checks, not pass/fail
-  tolerances or proof of parity.
+| Item | Strongest criticisms and dispositions |
+| --- | --- |
+| Important — parent ambiguity | the supplied case has previously been reported as carrying six one-way DPM injections rather than the broader nine-bin payload described in the 08b narrative |
+|  | E0 concerns the continuous Mixture carrier field |
+|  | The exact DPM state must be read back, interaction with the continuous phase must remain off, and no DPM update or DPM result may count as E0 evidence |
+|  | If DPM coupling is active, setup validity fails |
+| Important — mesh replacement may lose or mis-map settings | every model, material, phase, boundary, solver, initialization, and report dependency must be reconciled and read back |
 
-Disposition: **viable for E0 setup preparation under G0**, subject to the hard
-pre-run instrumentation and readback requirements below. This design does not
-by itself satisfy the later G1 contrastive-screen gate or authorize loop entry.
+<details>
+<summary>Supporting detail — Strongest criticisms and dispositions</summary>
+
+| Item | Strongest criticisms and dispositions |
+| --- | --- |
+| Important — mesh replacement may lose or mis-map settings | Filename similarity is insufficient |
+| Important — initialization can control early inventory behavior | use the parent-defined initialization method when it survives authoritative readback |
+|  | If it cannot be proven after mesh reconciliation, return upstream rather than silently select a different method |
+| Important — 2,000 iterations may not establish a stable slope | compare adjacent late windows |
+|  | A stable positive buildup slope is usable; an evolving or noise-dominated slope is inconclusive and may justify only a human-reviewed continuation of unchanged E0 |
+| Minor — historical 08b is not a matched comparator | use its reported endpoint fluxes only as contextual reasonableness checks, not pass/fail tolerances or proof of parity |
+| Disposition | viable for E0 setup preparation under G0, subject to the hard pre-run instrumentation and readback requirements below |
+|  | This design does not by itself satisfy the later G1 contrastive-screen gate or authorize loop entry |
+
+</details>
 
 ## Exact artifacts and controlled delta
 
@@ -100,125 +92,127 @@ by itself satisfy the later G1 contrastive-screen gate or authorize loop entry.
 | SHA-256 | `59b7cf3bcf1cf0266587d4b98f8c6d67bbca007a4381ceb16a05fd8728b37801` |
 | Structural state | 342,609 cells; one fluid zone; `liquidinlet`, `steaminlet`, `steamoutlet`, and planar `bottom` zones verified locally |
 
-The only declared changes from the carrier parent are:
-
-1. replace the old discrete mesh with the exact supplied Phase-07 mesh;
-2. map the split inlets, steam outlet, walls, and cell zone onto the new zones;
-3. retain `bottom` as a stationary, no-slip, non-draining wall;
-4. set and verify the steam-outlet turbulence/backflow hydraulic diameter as
-   `0.875936 m` (`≈0.876 m`) instead of historical `0.724 m`;
-5. add E0's file-backed evidence package; and
-6. initialize and run exactly `2,000` iterations from the prepared E0 state.
-
-No bottom opening, outlet, sink, source, withdrawal function, controller,
-geometry edit, model-form change, or unapproved numerical tuning is permitted.
+| Replacement mesh |
+| --- |
+| The only declared changes from the carrier parent are: |
+| replace the old discrete mesh with the exact supplied Phase-07 mesh; |
+| map the split inlets, steam outlet, walls, and cell zone onto the new zones; |
+| retain `bottom` as a stationary, no-slip, non-draining wall; |
+| set and verify the steam-outlet turbulence/backflow hydraulic diameter as `0.875936 m` (`≈0.876 m`) instead of historical `0.724 m`; |
+| add E0's file-backed evidence package; and |
+| initialize and run exactly `2,000` iterations from the prepared E0 state |
+| No bottom opening, outlet, sink, source, withdrawal function, controller, geometry edit, model-form change, or unapproved numerical tuning is permitted |
 
 ## Frozen comparison context
 
-Subject to authoritative live readback of the parent, E0 preserves:
+| Frozen comparison context |
+| --- |
+| Subject to authoritative live readback of the parent, E0 preserves: |
+| pressure-based steady solver; |
+| Mixture model with two continuous phases; |
+| RNG `k-epsilon`, standard wall treatment, differential viscosity, and swirl-dominated-flow setting; |
+| energy and species off; |
 
-- pressure-based steady solver;
-- Mixture model with two continuous phases;
-- RNG `k-epsilon`, standard wall treatment, differential viscosity, and
-  swirl-dominated-flow setting;
-- energy and species off;
-- parent phase materials and properties;
-- gravity, operating pressure/density method, and reference values;
-- split-inlet target phase flows of `116.92 kg/s` liquid and `80.69 kg/s`
-  vapor, with phase purity and turbulence conditions reconciled to the new
-  inlet zones;
-- steam-outlet pressure and total-pressure backflow specification, except for
-  the declared corrected hydraulic diameter;
-- parent pressure–velocity coupling, discretization schemes, relaxation/
-  pseudo-time controls, and convergence controls;
-- parent-defined initialization method; and
-- one-way/inactive-for-carrier DPM state, with no DPM update included in E0.
+<details>
+<summary>Supporting detail — Frozen comparison context</summary>
 
-Any unplanned mismatch that cannot be repaired without changing this contract
-returns to the human; it is not absorbed as an implementation convenience.
+| Frozen comparison context |
+| --- |
+| parent phase materials and properties; |
+| gravity, operating pressure/density method, and reference values; |
+| split-inlet target phase flows of `116.92 kg/s` liquid and `80.69 kg/s` vapor, with phase purity and turbulence conditions reconciled to the new inlet zones; |
+| steam-outlet pressure and total-pressure backflow specification, except for the declared corrected hydraulic diameter; |
+| parent pressure–velocity coupling, discretization schemes, relaxation/ pseudo-time controls, and convergence controls; |
+| parent-defined initialization method; and |
+| one-way/inactive-for-carrier DPM state, with no DPM update included in E0 |
+| Any unplanned mismatch that cannot be repaired without changing this contract returns to the human; it is not absorbed as an implementation convenience |
+
+</details>
 
 ## Run intent and horizon
 
-- Run mode: attached discovery execution under `scientific-phase-loop` after
-  the required lifecycle and implementation gates pass.
-- Initialization: initialize once from the save/reopen-proven prepared E0 case
-  using the proven parent-defined initialization method.
-- Total horizon: exactly `2,000` solver iterations after initialization. A
-  50-iteration smoke is included in this total, not added on top.
-- Smoke gate: iterations `1–50`; reports and native residual rows must appear,
-  inlet directions must be correct, and no solver divergence or invalid field
-  may occur before continuation.
-- Development interval: iterations `51–999`.
-- Comparison windows: `1,000–1,500` and `1,500–2,000`.
-- Primary late window: final `500` iterations.
-- Checkpoints: prepared case before initialization; initialized case/data;
-  smoke case/data at iteration 50; paired case/data at iterations 500, 1,000,
-  1,500, and 2,000; preserve the final pair and all file-backed histories.
-- Continuation: no automatic extension. If adjacent late-window slopes are
-  materially inconsistent or noise-dominated, report E0 as inconclusive and
-  return for approval of an unchanged continuation, normally 1,000 iterations.
+| Item | Run intent and horizon |
+| --- | --- |
+| Run mode | attached discovery execution under `scientific-phase-loop` after the required lifecycle and implementation gates pass |
+| Initialization | initialize once from the save/reopen-proven prepared E0 case using the proven parent-defined initialization method |
+| Total horizon | exactly `2,000` solver iterations after initialization |
+|  | A 50-iteration smoke is included in this total, not added on top |
+| Smoke gate | iterations `1–50`; reports and native residual rows must appear, inlet directions must be correct, and no solver divergence or invalid field may occur before continuation |
+
+<details>
+<summary>Supporting detail — Run intent and horizon</summary>
+
+| Item | Run intent and horizon |
+| --- | --- |
+| Development interval | iterations `51–999` |
+| Comparison windows | `1,000–1,500` and `1,500–2,000` |
+| Primary late window | final `500` iterations |
+| Checkpoints | prepared case before initialization; initialized case/data; smoke case/data at iteration 50; paired case/data at iterations 500, 1,000, 1,500, and 2,000; preserve the final pair and all file-backed histories |
+| Continuation | no automatic extension |
+|  | If adjacent late-window slopes are materially inconsistent or noise-dominated, report E0 as inconclusive and return for approval of an unchanged continuation, normally 1,000 iterations |
+
+</details>
 
 ## Derived quantities and sign convention
 
-Preserve Fluent's raw reported signs. For comparison plots and tables also
-derive a declared engineering convention:
+| Item | Derived quantities and sign convention |
+| --- | --- |
+| — | Preserve Fluent's raw reported signs |
+|  | For comparison plots and tables also derive a declared engineering convention: |
+| inlet magnitude | is positive into the domain; |
+| outlet magnitude | is positive out of the domain; |
+| liquid net accumulation rate | is liquid inflow minus liquid discharge through `steamoutlet` and `bottom`; |
 
-- inlet magnitude is positive into the domain;
-- outlet magnitude is positive out of the domain;
-- liquid net accumulation rate is liquid inflow minus liquid discharge through
-  `steamoutlet` and `bottom`;
-- vapor net accumulation rate is vapor inflow minus vapor discharge through
-  `steamoutlet` and `bottom`;
-- mixture net accumulation rate is total inflow minus total discharge;
-- normalized mixture imbalance divides the absolute mixture net rate by
-  `197.61 kg/s` nominal mixture inflow;
-- normalized bottom vapor loss divides bottom vapor discharge by `80.69 kg/s`.
+<details>
+<summary>Supporting detail — Derived quantities and sign convention</summary>
 
-For E0, `bottom` is a wall and its phase fluxes should be zero. They are still
-included in the report contract to establish a structurally matched baseline
-for later bottom-boundary candidates.
+| Item | Derived quantities and sign convention |
+| --- | --- |
+| vapor net accumulation rate | is vapor inflow minus vapor discharge through `steamoutlet` and `bottom`; |
+| mixture net accumulation rate | is total inflow minus total discharge; |
+| — | normalized mixture imbalance divides the absolute mixture net rate by `197.61 kg/s` nominal mixture inflow; |
+|  | normalized bottom vapor loss divides bottom vapor discharge by `80.69 kg/s` |
+| For E0, `bottom` | is a wall and its phase fluxes should be zero |
+| They | are still included in the report contract to establish a structurally matched baseline for later bottom-boundary candidates |
+| Inventory | is the domain integral of continuous liquid mass |
+| — | Also retain the continuous-liquid volume integral when Fluent exposes it reliably |
+| Linear least-squares slopes over both declared 500-iteration windows | are derived after the run; raw histories remain primary evidence |
 
-Inventory is the domain integral of continuous liquid mass. Also retain the
-continuous-liquid volume integral when Fluent exposes it reliably. Linear
-least-squares slopes over both declared 500-iteration windows are derived
-after the run; raw histories remain primary evidence.
+</details>
 
 ## Required pre-run instrumentation
 
-The following are hard requirements and may not be reconstructed from a final
-endpoint alone:
+| Item | Required pre-run instrumentation |
+| --- | --- |
+| following | are hard requirements and may not be reconstructed from a final endpoint alone: |
+| — | native-coordinate scaled residual histories for every active solved equation, captured durably from the Fluent transcript or a separately verified file-backed path; |
+|  | total-domain continuous-liquid mass history and, when available, volume; |
+|  | phase-resolved mass-flow histories for liquid and vapor on `liquidinlet`, `steaminlet`, `steamoutlet`, and `bottom`; |
+|  | mixture mass-flow histories on the same four boundaries; |
 
-- native-coordinate scaled residual histories for every active solved
-  equation, captured durably from the Fluent transcript or a separately
-  verified file-backed path;
-- total-domain continuous-liquid mass history and, when available, volume;
-- phase-resolved mass-flow histories for liquid and vapor on `liquidinlet`,
-  `steaminlet`, `steamoutlet`, and `bottom`;
-- mixture mass-flow histories on the same four boundaries;
-- derived liquid, vapor, and mixture net-rate/imbalance histories;
-- steam-outlet liquid carryover and vapor recovery histories;
-- bottom liquid discharge and normalized bottom vapor-loss histories, even
-  though both should be zero for the E0 wall;
-- report-file native iteration coordinates spanning the full 2,000-iteration
-  run, including smoke;
-- solver transcript, setup/readback manifest, checkpoint manifest, and exact
-  final artifact identities.
+<details>
+<summary>Supporting detail — Required pre-run instrumentation</summary>
 
-Missing any inventory, phase-flux, mixture-balance, or residual history makes
-E0 invalid for the discovery gate.
+| Item | Required pre-run instrumentation |
+| --- | --- |
+| — | derived liquid, vapor, and mixture net-rate/imbalance histories; |
+|  | steam-outlet liquid carryover and vapor recovery histories; |
+|  | bottom liquid discharge and normalized bottom vapor-loss histories, even though both should be zero for the E0 wall; |
+|  | report-file native iteration coordinates spanning the full 2,000-iteration run, including smoke; |
+|  | solver transcript, setup/readback manifest, checkpoint manifest, and exact final artifact identities |
+|  | Missing any inventory, phase-flux, mixture-balance, or residual history makes E0 invalid for the discovery gate |
+
+</details>
 
 ## Supporting evidence
 
-- Fluent mesh check and solver-side mesh quality, including cell count, zone
-  map, minimum orthogonal quality, maximum skewness/aspect ratio when exposed,
-  and cell-volume range;
-- pressure and velocity reasonableness at the inlets and steam outlet;
-- final liquid-volume-fraction contour on a declared central plane and/or
-  exterior boundary rendering to show where retained liquid resides;
-- comparison of final flux magnitudes against historical 08b endpoint values,
-  labelled unmatched and contextual only; and
-- readback of DPM interaction/injection state to prove that it does not affect
-  the continuous carrier solve.
+| Supporting evidence |
+| --- |
+| Fluent mesh check and solver-side mesh quality, including cell count, zone map, minimum orthogonal quality, maximum skewness/aspect ratio when exposed, and cell-volume range; |
+| pressure and velocity reasonableness at the inlets and steam outlet; |
+| final liquid-volume-fraction contour on a declared central plane and/or exterior boundary rendering to show where retained liquid resides; |
+| comparison of final flux magnitudes against historical 08b endpoint values, labelled unmatched and contextual only; and |
+| readback of DPM interaction/injection state to prove that it does not affect the continuous carrier solve |
 
 ## Core figure plan
 
@@ -269,22 +263,18 @@ E0 invalid for the discovery gate.
 
 ## Decision outcome after E0
 
-E0 is a usable reference when its setup and execution are valid and its late
-histories define a repeatable enough scale for comparing an approved removal
-treatment. It may have a large positive liquid buildup or mixture imbalance.
-
-E0 is inconclusive when the late inventory/balance histories remain strongly
-evolving or too noisy to define a reference slope. The only permitted
-continuation is a human-reviewed extension of unchanged E0.
-
-E0 is invalid when artifact identity, zone mapping, setup readback,
-save/reopen, smoke, residual capture, inventory capture, or phase-flux capture
-fails. An invalid E0 produces no scientific baseline and permits repair of the
-same approved experiment only.
+| Item | Decision outcome after E0 |
+| --- | --- |
+| E0 | is a usable reference when its setup and execution are valid and its late histories define a repeatable enough scale for comparing an approved removal treatment |
+| — | It may have a large positive liquid buildup or mixture imbalance |
+| E0 | is inconclusive when the late inventory/balance histories remain strongly evolving or too noisy to define a reference slope |
+| only permitted continuation | is a human-reviewed extension of unchanged E0 |
+| E0 | is invalid when artifact identity, zone mapping, setup readback, save/reopen, smoke, residual capture, inventory capture, or phase-flux capture fails |
+| — | An invalid E0 produces no scientific baseline and permits repair of the same approved experiment only |
 
 ## Claim limit
 
-E0 can establish only the numerical reference behavior of the declared
-corrected simplified model. It cannot establish steady mass convergence,
-physical brine drainage, validated outlet behavior, mesh independence,
-plant-level control, or exact parity with the historical 08b case.
+| Claim limit |
+| --- |
+| E0 can establish only the numerical reference behavior of the declared corrected simplified model |
+| It cannot establish steady mass convergence, physical brine drainage, validated outlet behavior, mesh independence, plant-level control, or exact parity with the historical 08b case |

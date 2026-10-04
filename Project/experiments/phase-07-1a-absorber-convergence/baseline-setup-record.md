@@ -14,31 +14,24 @@
 | Run authorization | None. This file does not authorize a new run. |
 | Phase context | [`CONTEXT.md`](CONTEXT.md) |
 
-This record captures the settings actually read from the currently loaded
-Fluent session. It is intentionally separate from a runnable `setup.md`:
-the purpose is to establish what the model is, not to authorize or design the
-first Phase 7.1A experiment.
-
-The live Fluent Settings tree is the primary source for the values below.
-Actual P7-E0 execution/readback records were used to reconcile the parent
-lineage. Older setup prose and reusable helper recipes are treated as
-secondary evidence where they disagree with live readback.
+| Item | Record status |
+| --- | --- |
+| — | This record captures the settings actually read from the currently loaded Fluent session |
+| It | is intentionally separate from a runnable `setup.md`: the purpose is to establish what the model is, not to authorize or design the first Phase 7.1A experiment |
+| live Fluent Settings tree | is the primary source for the values below |
+| Actual P7-E0 execution/readback | records were used to reconcile the parent lineage |
+| Older setup prose and reusable helper recipes | are treated as secondary evidence where they disagree with live readback |
 
 ## Identity and confidence
 
-- **Observed:** the reachable runtime is `student@10.0.0.5:55780` and Fluent
-  reports version 2025 R2.
-- **Missing Info:** the inspected Fluent Settings tree did not expose a
-  definitive loaded case filename. The state is **Inferred** to be from the
-  cold-continuation/recovery lineage because its autosave/report roots identify
-  `CellZoneAbsorberColdContinuation` and
-  `P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000`.
-- The lineage label is not a substitute for an independently proven paired
-  case/data identity. A future runnable setup must load and verify such a
-  pair before mutation.
-- **Observed:** the live general settings, original boundary roles, model
-  states, solution methods, and solution controls match the actual P7-E0
-  execution/reference readback for the fields compared.
+| Item | Identity and confidence |
+| --- | --- |
+| Observed | the reachable runtime is `student@10.0.0.5:55780` and Fluent reports version 2025 R2 |
+| Missing Info | the inspected Fluent Settings tree did not expose a definitive loaded case filename |
+|  | The state is Inferred to be from the cold-continuation/recovery lineage because its autosave/report roots identify `CellZoneAbsorberColdContinuation` and `P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000` |
+| lineage label | is not a substitute for an independently proven paired case/data identity |
+| — | A future runnable setup must load and verify such a pair before mutation |
+| Observed | the live general settings, original boundary roles, model states, solution methods, and solution controls match the actual P7-E0 execution/reference readback for the fields compared |
 
 ## Active solver and operating conditions
 
@@ -59,11 +52,11 @@ secondary evidence where they disagree with live readback.
 | Reference velocity | `1 m/s` |
 | Reference viscosity | `1.7894e-05 Pa·s` |
 
-The `minimum-phase-averaged` operating-density method is an actual live
-setting. Fluent's official multiphase guidance identifies it as the default
-method and says it is generally suitable for most multiphase cases; it must
-nevertheless be held fixed or explicitly declared as a delta in comparisons.
-See [Steps for Using a Multiphase Model](https://ansyshelp.ansys.com/public/views/secured/corp/v251/en/flu_ug/flu_ug_sec_multiphase_setup.html).
+| Item | Active solver and operating conditions |
+| --- | --- |
+| `minimum-phase-averaged` operating-density method | is an actual live setting |
+| — | Fluent's official multiphase guidance identifies it as the default method and says it is generally suitable for most multiphase cases; it must nevertheless be held fixed or explicitly declared as a delta in comparisons |
+|  | See [Steps for Using a Multiphase Model](https://ansyshelp.ansys.com/public/views/secured/corp/v251/en/flu_ug/flu_ug_sec_multiphase_setup.html) |
 
 ## Active multiphase model
 
@@ -81,14 +74,14 @@ See [Steps for Using a Multiphase Model](https://ansyshelp.ansys.com/public/view
 | Mixture/phase equation | Enabled (`mp=true`) |
 | Drift-related equation | Enabled (`drift=true`) |
 
-The Mixture model's phase/slip framework is active. Fluent's documentation
-states that the Mixture model computes secondary-phase slip velocities by
-default. It describes Drift Force as an optional slip/drift treatment whose
-inclusion can noticeably affect convergence. See [Setting Up the Mixture Model](https://ansyshelp.ansys.com/public/Views/Secured/corp/v251/en/flu_ug/flu_ug_sec_mphase_using_steps_mixture.html).
-
-The `drift=true` readback is a solver-equation flag. It is not, by itself,
-proof that an explicit interphase mass-transfer law is active; that question
-is addressed in [Dormant or inactive branches](#dormant-or-inactive-branches).
+| Item | Active multiphase model |
+| --- | --- |
+| Mixture model's phase/slip framework | is active |
+| — | Fluent's documentation states that the Mixture model computes secondary-phase slip velocities by default |
+|  | It describes Drift Force as an optional slip/drift treatment whose inclusion can noticeably affect convergence |
+|  | See [Setting Up the Mixture Model](https://ansyshelp.ansys.com/public/Views/Secured/corp/v251/en/flu_ug/flu_ug_sec_mphase_using_steps_mixture.html) |
+| `drift=true` readback | is a solver-equation flag |
+| It | is not, by itself, proof that an explicit interphase mass-transfer law is active; that question is addressed in [Dormant or inactive branches](#dormant-or-inactive-branches) |
 
 ## Active phase materials
 
@@ -110,8 +103,9 @@ is addressed in [Dormant or inactive branches](#dormant-or-inactive-branches).
 | Density | Constant `881.2108764648438 kg/m³` |
 | Viscosity | Constant `0.0001455440069548786 Pa·s` |
 
-Other materials exist in the material database, but they were not identified
-as the active continuous-phase assignments in this audit.
+| Item | Phase 2 — liquid |
+| --- | --- |
+| Other materials exist in the material database, but they | were not identified as the active continuous-phase assignments in this audit |
 
 ## Active turbulence model
 
@@ -130,11 +124,10 @@ as the active continuous-phase assignments in this audit.
 | Non-Newtonian turbulence | False |
 | User-defined turbulent-viscosity function | None |
 
-This exact turbulence block is the reference that the first Phase 7.1A
-turbulence comparison must preserve except for its one declared closure delta.
-In particular, the numerical order of the (k) equation is recorded in the
-solution-methods section below and must not be silently changed during a
-closure comparison.
+| Item | Active turbulence model |
+| --- | --- |
+| This exact turbulence block | is the reference that the first Phase 7.1A turbulence comparison must preserve except for its one declared closure delta |
+| In particular, the numerical order of the (k) equation | is recorded in the solution-methods section below and must not be silently changed during a closure comparison |
 
 ## Active energy, species, and other physics state
 
@@ -171,27 +164,29 @@ closure comparison.
 | Mixture momentum source fields | Read as `-0.0` in the current cold-start state |
 | Bottom boundary | Remains a stationary, no-slip wall |
 
-The integrated value is verified by the source-density/volume product:
+| Item | Lower absorber |
+| --- | --- |
+| integrated value | is verified by the source-density/volume product: |
 
 ```text
 -379.2377886984495 kg/(m³·s) × 0.3083026098250161 m³
 = -116.92 kg/s
 ```
 
-This is the active liquid-removal mechanism in the current case. It is a
-localized phase-2 cell-zone sink and is not a bottom outlet, porous opening,
-explicit phase-interaction mass-transfer law, DPM sink, or vapor sink.
-
-The lower-zone mixture momentum source reading of `-0.0` is an observed value,
-not a second hidden mechanism. The matched source law uses the lower-zone
-phase-2 velocity basis; in this cold-start lineage that basis is effectively
-zero. Earlier G100 states had nonzero momentum-source values because their
-lower-zone liquid/velocity basis was nonzero.
+| Item | Lower absorber |
+| --- | --- |
+| This | is the active liquid-removal mechanism in the current case |
+| It | is a localized phase-2 cell-zone sink and is not a bottom outlet, porous opening, explicit phase-interaction mass-transfer law, DPM sink, or vapor sink |
+| lower-zone mixture momentum source reading of `-0.0` | is an observed value, not a second hidden mechanism |
+| matched source law | uses the lower-zone phase-2 velocity basis; in this cold-start lineage that basis is effectively zero |
+| — | Earlier G100 states had nonzero momentum-source values because their lower-zone liquid/velocity basis was nonzero |
 
 ### Cell registers
 
-The following registers exist as geometric selections. They are not, by
-themselves, active source regions:
+| Item | Cell registers |
+| --- | --- |
+| — | The following registers exist as geometric selections |
+| They | are not, by themselves, active source regions: |
 
 | Register | Selection | Display colour |
 | --- | --- | --- |
@@ -255,10 +250,11 @@ themselves, active source regions:
 | Warped-face gradient correction | False |
 | NB-gradient boundary treatment | `modified-boundary-treatment` |
 
-Fluent's official guidance describes enhanced compressible numerics as a
-stability-oriented option for compressible multiphase calculations. It is
-active in this baseline and must not be silently disabled in a comparison.
-See [Steps for Using a Multiphase Model](https://ansyshelp.ansys.com/public/views/secured/corp/v251/en/flu_ug/flu_ug_sec_multiphase_setup.html).
+| Item | Multiphase numerical options |
+| --- | --- |
+| — | Fluent's official guidance describes enhanced compressible numerics as a stability-oriented option for compressible multiphase calculations |
+| It | is active in this baseline and must not be silently disabled in a comparison |
+| — | See [Steps for Using a Multiphase Model](https://ansyshelp.ansys.com/public/views/secured/corp/v251/en/flu_ug/flu_ug_sec_multiphase_setup.html) |
 
 ## Active solution controls
 
@@ -349,21 +345,22 @@ See [Steps for Using a Multiphase Model](https://ansyshelp.ansys.com/public/view
 | Profile update interval | `1` |
 | Data sampling | Disabled |
 
-The stored VOF smoothing options are configuration values. They are not proof
-that a patch or field-reset operation was executed in this audit. Patching or
-resetting remains outside the autonomous Phase 7.1A route.
+| Item | Initialization and runtime controls |
+| --- | --- |
+| stored VOF smoothing options | are configuration values |
+| They | are not proof that a patch or field-reset operation was executed in this audit |
+| Patching or resetting | remains outside the autonomous Phase 7.1A route |
 
 ### Autosave/readback state
 
-- Case autosave frequency: each time.
-- Data autosave frequency: every `100` iterations.
-- Retain most recent: `6` pairs.
-- Current remote autosave root read from the loaded branch:
-
-  `C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneAbsorberColdContinuation\20260910T211158Z\P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000\checkpoint-%i`
-
-This root is runtime evidence, not a substitute for a durable `run-paths.yaml`
-or a proven case/data identity.
+| Item | Autosave/readback state |
+| --- | --- |
+| Case autosave frequency | each time |
+| Data autosave frequency | every `100` iterations |
+| Retain most recent | `6` pairs |
+| — | Current remote autosave root read from the loaded branch: |
+|  | `C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneAbsorberColdContinuation\20260910T211158Z\P7-E5-CZ-ABSORB-COLD-RAMP11692-CONT5000\checkpoint-%i` |
+| This root | is runtime evidence, not a substitute for a durable `run-paths.yaml` or a proven case/data identity |
 
 ## Active residual and reporting settings
 
@@ -377,25 +374,22 @@ or a proven case/data identity.
 | Epsilon | `1e-3` |
 | Phase-2 volume fraction | `1e-3` |
 
-Additional residual-monitor settings:
-
-- Scaled residuals: enabled.
-- Local scaling: disabled.
-- Criteria type: absolute.
-- Residual print: enabled.
-- Residual plot: enabled.
-- Native monitor save/display count readback: `4100`.
-- Seven physical equation groups are checked: continuity, three momentum
-  components, (k), epsilon, and phase-2 volume fraction.
-
-The current monitor tree contains approximately 99 curve styles/objects,
-which appears to be inherited monitor configuration. That count must not be
-interpreted as 99 independently active physical equations.
+| Item | Active residual and reporting settings |
+| --- | --- |
+| — | Additional residual-monitor settings: |
+| Scaled residuals | enabled |
+| Local scaling | disabled |
+| Criteria type | absolute |
+| Native monitor save/display count readback | `4100` |
+| Seven physical equation groups are checked | continuity, three momentum components, (k), epsilon, and phase-2 volume fraction |
+| — | The current monitor tree contains approximately 99 curve styles/objects, which appears to be inherited monitor configuration |
+|  | That count must not be interpreted as 99 independently active physical equations |
 
 ## Dormant or inactive branches
 
-These items were present as Settings paths or objects but were not proven to
-be active contributors to the current carrier solution.
+| Item | Dormant or inactive branches |
+| --- | --- |
+| These items | were present as Settings paths or objects but were not proven to be active contributors to the current carrier solution |
 
 | Branch | Readback | Classification |
 | --- | --- | --- |
@@ -416,10 +410,11 @@ be active contributors to the current carrier solution.
 | Boiling/phase-change branches | No active energy or phase-change model proven | Not active/proven |
 | Surface-tension branch | No active surface-tension mechanism proven in this readback | Not active/proven |
 
-Fluent documents `DEFINE_LINEARIZED_MASS_TRANSFER` as a user-defined
-interphase mass-transfer mechanism coupled to the flow equations. That is a
-different mechanism from the current lower-zone phase-2 source. See the
-[Fluent Customization Manual](https://ansyshelp.ansys.com/public/Views/Secured/corp/v251/en/pdf/Ansys_Fluent_UDF_Manual.pdf).
+| Item | Dormant or inactive branches |
+| --- | --- |
+| — | Fluent documents `DEFINE_LINEARIZED_MASS_TRANSFER` as a user-defined interphase mass-transfer mechanism coupled to the flow equations |
+| That | is a different mechanism from the current lower-zone phase-2 source |
+| — | See the [Fluent Customization Manual](https://ansyshelp.ansys.com/public/Views/Secured/corp/v251/en/pdf/Ansys_Fluent_UDF_Manual.pdf) |
 
 ## Parent and documentation reconciliation
 
@@ -432,40 +427,40 @@ different mechanism from the current lower-zone phase-2 source. See the
 | `setup_carrier.py` helper | Requests `mixture-averaged` operating density and second-order (k) | Implementation intention; not the current live-state authority |
 | Older setup prose | Does not enumerate every exact leaf setting | Insufficient by itself for reconstruction |
 
-The two most consequential drift points are:
-
-1. The live/actual E0 state uses `minimum-phase-averaged`, while the helper
-   recipe requests `mixture-averaged`.
-2. The live/actual E0 state uses first-order (k), while the helper recipe
-   requests second-order (k).
-
-Neither difference should be silently corrected before the first Phase 7.1A
-comparison. If either is changed, it must be the declared controlled delta of
-its own setup.
+| Item | Parent and documentation reconciliation |
+| --- | --- |
+| — | The two most consequential drift points are: |
+| live/actual E0 state | uses `minimum-phase-averaged`, while the helper recipe requests `mixture-averaged` |
+|  | uses first-order (k), while the helper recipe requests second-order (k) |
+| — | Neither difference should be silently corrected before the first Phase 7.1A comparison |
+| If either | is changed, it must be the declared controlled delta of its own setup |
 
 ## Baseline lock for future setup design
 
-Until a new setup explicitly declares otherwise, the following are frozen:
+| Item | Baseline lock for future setup design |
+| --- | --- |
+| Until a new setup explicitly declares otherwise, the following | are frozen: |
+| — | pressure-based steady solver; |
+|  | Mixture, implicit/dispersed two-phase model; |
+|  | phase 1 vapor and phase 2 liquid material assignments; |
+|  | RNG (k)-epsilon, including differential viscosity and swirl options; |
 
-- pressure-based steady solver;
-- Mixture, implicit/dispersed two-phase model;
-- phase 1 vapor and phase 2 liquid material assignments;
-- RNG (k)-epsilon, including differential viscosity and swirl options;
-- standard wall functions;
-- energy and species off;
-- gravity and operating conditions;
-- lower `p7-e5-lower-y010` phase-2-only absorber at integrated
-  `116.92 kg/s`;
-- zero direct phase-1 source and no parent-zone source;
-- bottom as a stationary no-slip wall;
-- current inlet and steam-outlet boundary roles and phase routing;
-- SIMPLE, Green-Gauss node-based gradients, PRESTO!, second-order momentum,
-  first-order (k), second-order epsilon, and QUICK phase fraction;
-- current URFs, equation limits, AMG controls, enhanced compressible
-  numerics, and residual criteria; and
-- DPM continuous-phase interaction off with the current trace injection state.
+<details>
+<summary>Supporting detail — Baseline lock for future setup design</summary>
 
-The first Phase 7.1A turbulence setup may change only the selected turbulence
-closure after its exact alternative and paired parent case/data identity have
-been verified. This baseline record does not itself approve that setup.
+| Item | Baseline lock for future setup design |
+| --- | --- |
+| — | standard wall functions; |
+|  | energy and species off; |
+|  | gravity and operating conditions; |
+|  | lower `p7-e5-lower-y010` phase-2-only absorber at integrated `116.92 kg/s`; |
+|  | zero direct phase-1 source and no parent-zone source; |
+|  | bottom as a stationary no-slip wall; |
+|  | current inlet and steam-outlet boundary roles and phase routing; |
+|  | SIMPLE, Green-Gauss node-based gradients, PRESTO!, second-order momentum, first-order (k), second-order epsilon, and QUICK phase fraction; |
+|  | current URFs, equation limits, AMG controls, enhanced compressible numerics, and residual criteria; and |
+|  | DPM continuous-phase interaction off with the current trace injection state |
+|  | The first Phase 7.1A turbulence setup may change only the selected turbulence closure after its exact alternative and paired parent case/data identity have been verified |
+|  | This baseline record does not itself approve that setup |
 
+</details>

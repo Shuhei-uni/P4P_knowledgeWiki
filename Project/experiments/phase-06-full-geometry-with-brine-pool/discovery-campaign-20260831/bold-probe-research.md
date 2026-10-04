@@ -2,12 +2,11 @@
 
 ## Current scientific tension
 
-The full-geometry steady Mixture/RNG reference and bounded pressure-feedback
-surrogate retain positive liquid accumulation. Nearby pressure and gain
-changes can show sensitivity, but they cannot distinguish whether the limiting
-mechanism is the outlet surrogate or the Mixture model's treatment of a dense
-bottom pool. A model-form probe is therefore relevant while the phase remains
-steady and surrogate-only.
+| Item | Current scientific tension |
+| --- | --- |
+| — | The full-geometry steady Mixture/RNG reference and bounded pressure-feedback surrogate retain positive liquid accumulation |
+|  | Nearby pressure and gain changes can show sensitivity, but they cannot distinguish whether the limiting mechanism is the outlet surrogate or the Mixture model's treatment of a dense bottom pool |
+| A model-form probe | is therefore relevant while the phase remains steady and surrogate-only |
 
 ## Researched candidates
 
@@ -18,30 +17,26 @@ steady and surrogate-only.
 
 ## D06/D06R outcomes and replacement selection
 
-The original D06 child proved that this Fluent 2025 R2 case can switch to
-Eulerian, preserve phase/material mapping, and survive paired save/reopen. It
-then stalled during the first 50-iteration smoke without one report coordinate,
-so it is a non-counting blocked attempt rather than a negative model-form
-result.
+| Item | D06/D06R outcomes and replacement selection |
+| --- | --- |
+| — | The original D06 child proved that this Fluent 2025 R2 case can switch to Eulerian, preserve phase/material mapping, and survive paired save/reopen |
+|  | It then stalled during the first 50-iteration smoke without one report coordinate, so it is a non-counting blocked attempt rather than a negative model-form result |
+|  | `P6-D06R-EC` then proved the Coupled model/coupling/report-path recipe, but its first smoke exposed a formulation-specific invalid inherited total-pressure report |
+|  | It blocked before a countable screen |
+| This means the Eulerian lane | is unavailable under the current predeclared package; do not remove that report silently after the result |
 
-`P6-D06R-EC` then proved the Coupled model/coupling/report-path recipe, but
-its first smoke exposed a formulation-specific invalid inherited
-total-pressure report. It blocked before a countable screen. This means the
-Eulerian lane is unavailable under the current predeclared package; do not
-remove that report silently after the result.
+<details>
+<summary>Supporting detail — D06/D06R outcomes and replacement selection</summary>
 
-The selected replacement candidate is `P6-D06C-PR`: a Mixture/RNG prescribed
-continuation path through the D01/D02 pressure bracket. It is `NEW` relative
-to the mass-error feedback screens because it is open-loop and tests
-initialization/path sensitivity rather than a gain or target. It leaves the
-model, all 30 valid reports, core figures, and steady numerical-surrogate
-boundary unchanged. See [`d06-repair-research.md`](d06-repair-research.md).
+| Item | D06/D06R outcomes and replacement selection |
+| --- | --- |
+| The selected replacement candidate is `P6-D06C-PR` | a Mixture/RNG prescribed continuation path through the D01/D02 pressure bracket |
+|  | It is `NEW` relative to the mass-error feedback screens because it is open-loop and tests initialization/path sensitivity rather than a gain or target |
+|  | It leaves the model, all 30 valid reports, core figures, and steady numerical-surrogate boundary unchanged |
+|  | See [`d06-repair-research.md`](d06-repair-research.md) |
+| This selection | is conditional on a new fresh `DISCOVERY_DESIGN` review |
+| — | If the prescribed path cannot produce its full evidence contract, record it as unavailable and repair the campaign again; do not infer a physical conclusion from numerical failure |
+|  | Literature/project guidance motivates this question only |
+|  | The Phase-06 simulation must decide whether the model-form difference matters for this geometry and proxy |
 
-This selection is conditional on a new fresh `DISCOVERY_DESIGN` review. If
-the prescribed path cannot produce its full evidence contract, record it as
-unavailable and repair the campaign again; do not infer a physical conclusion
-from numerical failure.
-
-Literature/project guidance motivates this question only. The Phase-06
-simulation must decide whether the model-form difference matters for this
-geometry and proxy.
+</details>

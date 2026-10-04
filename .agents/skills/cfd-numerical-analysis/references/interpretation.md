@@ -46,15 +46,19 @@ knowledge says why it may make sense or what else may explain it.
 
 ## Write `results.md`
 
-Put the scientific answer before artifact detail:
+Follow the [experiment presentation contract](../../../../Project/experiments/README.md#presentation).
+Use tables and figures; put the scientific answer before artifact detail:
 
-1. question, bounded answer, and evidence status;
-2. core visual evidence with a caption, direct observation, and limitation;
-3. numerical adequacy required to trust that observation;
-4. interpretation, alternatives, and claim boundary; and
-5. next in-scope action plus compact links to raw histories, manifests, and
+1. question, bounded answer, and evidence-status table;
+2. core visual evidence with a short source/window caption and at most two
+   short interpretation sentences;
+3. numerical-adequacy table;
+4. alternatives, uncertainty, and claim-limit table; and
+5. next-action table plus compact links to raw histories, manifests, and
    checkpoints.
 
+Do not narrate table rows or repeat plotted values in prose. Keep one fact or
+decision per table row; do not hide long paragraphs inside cells.
 Embed selected core figures where the reader needs them. Keep raw extracts and
 debug plots available but outside the main argument. A no-plot outcome needs a
 short explanation of why no valid core visualization exists and the strongest

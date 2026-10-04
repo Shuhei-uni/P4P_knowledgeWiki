@@ -11,12 +11,9 @@
 | Controlled delta | Proven E3 bottom actuator controlled by shared law with `G=1.00` |
 | Active horizon | 500 controller-active iterations; 50-iteration smoke; checkpoints active 50, 250, 500 |
 
-Use `command=clamp(1.00 × 116.92 kg/s × e,0,146.15 kg/s)` with the same
-proven E0 normalization, 50-iteration update interval, actuator, bounds, and
-all E0/E4 invariants.
-
-Require every controller/phase/inventory/balance/residual/artifact history and
-F1–F4. Invalid normalization/capability blocks; high-gain cycling, saturation,
-vapor-dominated removal, or failure rejects the setting. No plant or
-convergence claim is permitted.
-
+| Item | Contract |
+| --- | --- |
+| — | Use `command=clamp(1.00 × 116.92 kg/s × e,0,146.15 kg/s)` with the same proven E0 normalization, 50-iteration update interval, actuator, bounds, and all E0/E4 invariants |
+|  | Require every controller/phase/inventory/balance/residual/artifact history and F1–F4 |
+|  | Invalid normalization/capability blocks; high-gain cycling, saturation, vapor-dominated removal, or failure rejects the setting |
+| No plant or convergence claim | is permitted |

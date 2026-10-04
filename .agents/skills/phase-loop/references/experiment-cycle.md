@@ -26,14 +26,15 @@ proof.
 
 ## Analyse and interpret
 
-Use `cfd-numerical-analysis` for evidence. Then write `results.md` around the
-experiment question:
+Use `cfd-numerical-analysis` for evidence. Follow the
+[experiment presentation contract](../../../../Project/experiments/README.md#presentation).
+Write `results.md` with tables and figures around the experiment question:
 
-1. answer at a glance;
+1. answer/status table;
 2. core figures/tables;
-3. numerical adequacy;
-4. observations;
-5. interpretation and claim limits;
-6. next action.
+3. numerical adequacy table;
+4. short figure interpretation where needed;
+5. claim-limit and uncertainty table;
+6. next-action table.
 
 Do not change the evidence standard after seeing the result.

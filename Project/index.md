@@ -8,18 +8,18 @@ in `PyAnsys/`.
 
 ## What are we trying to answer now?
 
-**Shuhei — Phase 8 storyline reconstruction:** reproduce the historical simulation steps leading to the current model; closing mass imbalance and reducing continuity are diagnostics, not the phase goal or progression gates. Create four reproducible run families on the
+**Shuhei — Phase 8 storyline reconstruction:** reproduce the historical simulation steps leading to the current model; closing mass imbalance and reducing continuity are diagnostics, not the phase goal or progression gates. Create five reproducible run families on the
 existing 60k simplified mesh to compare one-inlet and split-inlet carriers,
 one-way and two-way DPM, five Phase 8 inlet-speed points (`20.11`, `23.46`,
 `26.81`, `29.48`, and `32.14 m/s`), injected
 DPM shares of 2.5%, 5%, 7.5%, 10%, and 20% of inlet liquid, and EWF with
-common report definitions. Families 1–4 have no
+common report definitions. F0 separates the existing mixed-inlet SIMPLE series from Coupled F1. Families 0–4 have no
 absorber; the finalized Phase 7.2A setup will later be rerun at matching
 points for an absorber-equipped comparison. This is a new-mesh storyline
 series, not a quantitative replay of historical results. See the [Phase 8
 context](experiments/phase-08-storyline-reconstruction/CONTEXT.md) and
 [common report contract](experiments/phase-08-storyline-reconstruction/report-contract.md).
-The [Phase 8 result](experiments/phase-08-storyline-reconstruction/results.md) brings together family plots, native spatial views and the reconstructed model-development storyline.
+The [Phase 8 result](experiments/phase-08-storyline-reconstruction/results.md) brings together family plots, native spatial views and the reconstructed model-development storyline. The bounded Server 1 batch is verified complete: five matched F3/F4 points each at N16000, with a uniform final-500 comparison. Phase 8 is paused at that boundary.
 
 The liquid-removal work has two separate planning lanes:
 

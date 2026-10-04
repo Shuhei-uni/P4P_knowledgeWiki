@@ -11,8 +11,8 @@
 | Controlled delta | `bottom` becomes outlet vent at `1.120 MPa` gauge, constant `K=3`, function of normal velocity |
 | Horizon | 500 iterations including 50-iteration smoke; checkpoints 50, 250, 500 |
 
-Preserve the same E2 formulation and all E0 invariants; only `K` differs from
-K000/K007. Require exact readback, pressure drop/normal velocity, bottom phase
-flux, vapor loss, inventory, balance, residual, failure, and artifact evidence
-and F1–F3. No physical drainage or convergence claim is permitted.
-
+| Item | Contract |
+| --- | --- |
+| — | Preserve the same E2 formulation and all E0 invariants; only `K` differs from K000/K007 |
+|  | Require exact readback, pressure drop/normal velocity, bottom phase flux, vapor loss, inventory, balance, residual, failure, and artifact evidence and F1–F3 |
+| No physical drainage or convergence claim | is permitted |

@@ -1,70 +1,63 @@
 # Phase 06 — Full Geometry with Brine Pool
 
-
-> [Phase-level interpretation](interpretation.md) — concise hypothesis → experiments → evidence → decision narrative.
-This is a new top-level Project experiment phase. It follows the `03A`
-full-geometry fixed-pressure work and is not another Stage-5 pressure or
-turbulence variation.
+| Item | Phase 06 — Full Geometry with Brine Pool |
+| --- | --- |
+| — | [Phase-level interpretation](interpretation.md) — concise hypothesis → experiments → evidence → decision narrative |
+| This | is a new top-level Project experiment phase |
+| It follows the `03A` full-geometry fixed-pressure work and | is not another Stage-5 pressure or turbulence variation |
 
 ## Fixed phase-level question
 
-> **Can a full-geometry CFD model reproduce a physically credible, controlled
-> bottom brine-pool operating condition for the separator, rather than merely
-> a response to a fixed brine-outlet pressure?**
-
-This is the fixed question for Phase 6. It deliberately does not presume the
-answer is Mixture, Eulerian, steady, transient, a particular valve law, or a
-particular controller. Those are possible means of answering the question and
-must be tested or justified by later stage-level questions.
-
-For this phase, a controlled operating condition means: a meaningful pool-level
-observable at the real measurement location; a specified level target/band;
-brine-outlet behaviour physically connected to that target; phase-resolved
-conservation consistent with the level behaviour; and numerically credible
-equation and output histories.
+| Item | Fixed phase-level question |
+| --- | --- |
+| — | Can a full-geometry CFD model reproduce a physically credible, controlled bottom brine-pool operating condition for the separator, rather than merely a response to a fixed brine-outlet pressure? |
+| This | is the fixed question for Phase 6 |
+| It deliberately does not presume the answer | is Mixture, Eulerian, steady, transient, a particular valve law, or a particular controller |
+| Those | are possible means of answering the question and must be tested or justified by later stage-level questions |
+| For this phase, a controlled operating condition means | a meaningful pool-level observable at the real measurement location; a specified level target/band; brine-outlet behaviour physically connected to that target; phase-resolved conservation consistent with the level behaviour; and numerically credible equation and output histories |
 
 ## How later stages use this question
 
-Each later stage must answer a narrower question that reduces uncertainty
-about the fixed Phase-6 question. It may ask, for example, what the real
-control mechanism is, how to measure pool level in the mesh, whether a
-controlled quasi-steady outlet can reach the target, or whether a literal
-time-dependent controller/model is required. A stage must not silently replace
-the phase question with a convenient pressure, turbulence, or numerical sweep.
+| How later stages use this question |
+| --- |
+| Each later stage must answer a narrower question that reduces uncertainty about the fixed Phase-6 question |
+| It may ask, for example, what the real control mechanism is, how to measure pool level in the mesh, whether a controlled quasi-steady outlet can reach the target, or whether a literal time-dependent controller/model is required |
+| A stage must not silently replace the phase question with a convenient pressure, turbulence, or numerical sweep |
+| [setup and phase contract](setup.md) |
+| [results and current evidence](results.md) |
 
-- [setup and phase contract](setup.md)
-- [results and current evidence](results.md)
-- [human-directed conclusion as of 2026-09-08](conclusion.md)
-- [Stage 01 — level observable and outlet-response discovery](stage-01-level-observable-and-outlet-response/setup.md)
-- [Stage 02 — level mapping and control-data gate](stage-02-level-mapping-and-control-data-gate/setup.md)
-- [Stage 03 — simplified level-control surrogate](stage-03-simplified-level-control-surrogate/setup.md)
-- [Stage 04 — stronger-feedback hypothesis](stage-04-stronger-feedback-hypothesis/setup.md)
-- [Stage 05 — premature conclusion retained as diagnostic interpretation](stage-05-phase-conclusion/results.md)
-- [Stage 06 — long-horizon surrogate hypothesis](stage-06-long-horizon-surrogate-hypothesis/setup.md)
-- [Stage 06 — long-horizon surrogate partial evidence](stage-06-long-horizon-surrogate-hypothesis/results.md)
-- [mandatory lifecycle gate state](phase-state.yaml)
+<details>
+<summary>Supporting detail — How later stages use this question</summary>
+
+| How later stages use this question |
+| --- |
+| [human-directed conclusion as of 2026-09-08](conclusion.md) |
+| [Stage 01 — level observable and outlet-response discovery](stage-01-level-observable-and-outlet-response/setup.md) |
+| [Stage 02 — level mapping and control-data gate](stage-02-level-mapping-and-control-data-gate/setup.md) |
+| [Stage 03 — simplified level-control surrogate](stage-03-simplified-level-control-surrogate/setup.md) |
+| [Stage 04 — stronger-feedback hypothesis](stage-04-stronger-feedback-hypothesis/setup.md) |
+| [Stage 05 — premature conclusion retained as diagnostic interpretation](stage-05-phase-conclusion/results.md) |
+| [Stage 06 — long-horizon surrogate hypothesis](stage-06-long-horizon-surrogate-hypothesis/setup.md) |
+| [Stage 06 — long-horizon surrogate partial evidence](stage-06-long-horizon-surrogate-hypothesis/results.md) |
+| [mandatory lifecycle gate state](phase-state.yaml) |
+
+</details>
 
 ## Current phase outcome
 
-**Concluded for now by human direction on 2026-09-08.** The full separator
-geometry is too complex to remain the immediate model-development platform.
-The project will return to a simplified Purnanto geometry truncated at the
-elevation of the real separator's brine-pool surface. Phase 07 will explore
-pragmatic numerical mechanisms for removing liquid from the bottom of that
-simplified domain.
-
-This is a change in project direction, not a claim that the physical separator
-is uncontrollable or that full-geometry CFD can never work. The blocked
-lifecycle state in `phase-state.yaml` is retained as the pre-decision record;
-its next action is no longer the active project direction. See the
-[Phase-06 conclusion](conclusion.md) and
-[Phase-07 direction](../phase-07a-simplified-purnanto-liquid-removal/index.md).
+| Item | Current phase outcome |
+| --- | --- |
+| Concluded for now by human direction on 2026-09-08. | The full separator geometry is too complex to remain the immediate model-development platform |
+|  | The project will return to a simplified Purnanto geometry truncated at the elevation of the real separator's brine-pool surface |
+|  | Phase 07 will explore pragmatic numerical mechanisms for removing liquid from the bottom of that simplified domain |
+| This | is a change in project direction, not a claim that the physical separator is uncontrollable or that full-geometry CFD can never work |
+| blocked lifecycle state in `phase-state.yaml` | is retained as the pre-decision record; its next action is no longer the active project direction |
+| — | See the [Phase-06 conclusion](conclusion.md) and [Phase-07 direction](../phase-07a-simplified-purnanto-liquid-removal/index.md) |
 
 ## Relationship to the prior work
 
-03A Stage 5 established that a fixed brine-outlet pressure plus the practical
-steady `k-epsilon` variants does not produce a mass-closed, stationary-liquid
-inventory state in the F11-derived model. That result is retained. This phase
-asks the separate boundary-condition question exposed by that evidence: a real
-separator controls liquid holdup through its brine outlet, whereas the tested
-cases fixed an outlet pressure without representing that feedback mechanism.
+| Item | Relationship to the prior work |
+| --- | --- |
+| — | 03A Stage 5 established that a fixed brine-outlet pressure plus the practical steady `k-epsilon` variants does not produce a mass-closed, stationary-liquid inventory state in the F11-derived model |
+| That result | is retained |
+| — | This phase asks the separate boundary-condition question exposed by that evidence: a real separator controls liquid holdup through its brine outlet, whereas the tested cases fixed an outlet pressure without representing that feedback mechanism |

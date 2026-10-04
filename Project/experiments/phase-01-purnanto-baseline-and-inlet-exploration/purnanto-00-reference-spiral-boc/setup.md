@@ -1,5 +1,6 @@
-> **Retired source:** Setups/past/archived/00-baseline-spiral-boc-reference.md
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
+| Item | Record |
+| --- | --- |
+| Retired source | Setups/past/archived/00-baseline-spiral-boc-reference.md |
 
 ## Setup metadata
 
@@ -15,11 +16,12 @@
 
 ## A. Geometry, mesh, and modelling scope
 
-Technical companion:
-
-- [00 technical extraction](technical-extraction.md)
-
-Use the technical companion when you need the exact Fluent export and a drift log against this narrative baseline. If the two disagree, treat the technical companion as the replay authority and record the mismatch explicitly.
+| A. Geometry, mesh, and modelling scope |
+| --- |
+| Technical companion: |
+| [00 technical extraction](technical-extraction.md) |
+| Use the technical companion when you need the exact Fluent export and a drift log against this narrative baseline |
+| If the two disagree, treat the technical companion as the replay authority and record the mismatch explicitly |
 
 | Section | Item | Set this to | Where | Status / notes | Source |
 |---|---|---:|---|---|---|
@@ -235,12 +237,17 @@ Use the technical companion when you need the exact Fluent export and a drift lo
 
 ### N3. Recommended order for your next tests
 
-1. Reproduce the paper-style `Mixture` baseline cleanly.
-2. Do a local-mesh refinement study without changing the multiphase model.
-3. Improve inlet representation while keeping `Mixture`.
-4. Only then run a `Mixture` versus `Eulerian` comparison on the stabilized case.
+| N3. Recommended order for your next tests |
+| --- |
+| Reproduce the paper-style `Mixture` baseline cleanly |
+| Do a local-mesh refinement study without changing the multiphase model |
+| Improve inlet representation while keeping `Mixture` |
+| Only then run a `Mixture` versus `Eulerian` comparison on the stabilized case |
 
 ### N4. Working conclusion
 
-- **Reported from paper**: `Mixture` was selected as the most appropriate model for the separator case, even though the paper acknowledges that `Eulerian` is generally more accurate.
-- **Project recommendation**: do **not** treat `Eulerian` as the first accuracy upgrade. First remove bigger error sources: incomplete baseline parity, weak local mesh resolution, and oversimplified inlet structure.
+| Item | N4. Working conclusion |
+| --- | --- |
+| Reported from paper | `Mixture` was selected as the most appropriate model for the separator case, even though the paper acknowledges that `Eulerian` is generally more accurate |
+| Project recommendation | do not treat `Eulerian` as the first accuracy upgrade |
+|  | First remove bigger error sources: incomplete baseline parity, weak local mesh resolution, and oversimplified inlet structure |

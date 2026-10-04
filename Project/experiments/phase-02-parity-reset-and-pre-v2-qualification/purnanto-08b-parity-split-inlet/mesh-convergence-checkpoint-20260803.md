@@ -1,32 +1,50 @@
-> **Retired source:** Setups/reports/purnanto-reference/08b/mesh-convergence-checkpoint-20260803.md
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
+| Item | Record |
+| --- | --- |
+| Retired source | Setups/reports/purnanto-reference/08b/mesh-convergence-checkpoint-20260803.md |
 
 # Setup 08b Mesh-Convergence Checkpoint — 2026-08-03
 
 ## Setup and evidence links
 
-- Setup definition: [08b — Purnanto parity split-inlet rebuild](setup.md)
-- Existing setup result: [08b results](results.md)
-- Related mesh-study definition: [Setup 12 — removed mesh-convergence plan; Phase 2 index](../index.md)
-- Quantitative source: STUDY_HANDOFF_REPORT_20260803.md (historical external report path: `/Users/shuheiyokkaichi/Downloads/STUDY_HANDOFF_REPORT_20260803.md`; not migrated)
-- Study ID: `split_inlet_mesh_convergence_20260801`
-- Snapshot: `2026-08-03`, approximately `13:10 NZST`
+| Item | Setup and evidence links |
+| --- | --- |
+| Setup definition | [08b — Purnanto parity split-inlet rebuild](setup.md) |
+| Existing setup result | [08b results](results.md) |
+| Related mesh-study definition | [Setup 12 — removed mesh-convergence plan; Phase 2 index](../index.md) |
+| Quantitative source | STUDY_HANDOFF_REPORT_20260803.md (historical external report path: `/Users/shuheiyokkaichi/Downloads/STUDY_HANDOFF_REPORT_20260803.md`; not migrated) |
+| Study ID | `split_inlet_mesh_convergence_20260801` |
 
-**Evidence-use label:** `diagnostic / unresolved` checkpoint. This report records the current mesh-convergence evidence and interpretation; it does not establish mesh independence or select a production mesh.
+<details>
+<summary>Supporting detail — Setup and evidence links</summary>
 
-The checkpoint is based on the handoff report listed above. The referenced machine-readable evidence directory, `PyAnsys/output/split_inlet_mesh_convergence_20260801`, is not present in this checkout, so the tables below should be reconciled against the per-mesh manifests and CSV histories before publication-quality claims are made.
+| Item | Setup and evidence links |
+| --- | --- |
+| Snapshot | `2026-08-03`, approximately `13:10 NZST` |
+| Evidence-use label | `diagnostic / unresolved` checkpoint |
+|  | This report records the current mesh-convergence evidence and interpretation; it does not establish mesh independence or select a production mesh |
+| checkpoint | is based on the handoff report listed above |
+| referenced machine-readable evidence directory, `PyAnsys/output/split_inlet_mesh_convergence_20260801`, | is not present in this checkout, so the tables below should be reconciled against the per-mesh manifests and CSV histories before publication-quality claims are made |
+
+</details>
 
 ## 1. Study scope
 
-This is a carrier-field mesh-resolution comparison for the split-inlet geothermal-separator case associated with setup `08b`. The completed runs used the same geometry roles, phase model, boundary conditions, materials, numerical methods, initialization procedure, processor count, and monitor definitions. Mesh resolution was the intended controlled change.
-
-The study excludes DPM tracking and Eulerian Wall Film. The mesh-selection quantities are therefore carrier-field outputs: pressure drop, outlet and domain velocity, vorticity, vapor outlet flow, residuals, and monitor stability.
-
-All formal meshes were run to a nominal `3000` iterations, but equal iteration count is not treated as equal convergence. Each mesh must be independently iteration-stable before endpoint differences can be interpreted as spatial discretization effects.
+| Item | Study scope |
+| --- | --- |
+| This | is a carrier-field mesh-resolution comparison for the split-inlet geothermal-separator case associated with setup `08b` |
+| completed runs | used the same geometry roles, phase model, boundary conditions, materials, numerical methods, initialization procedure, processor count, and monitor definitions |
+| Mesh resolution | was the intended controlled change |
+| — | The study excludes DPM tracking and Eulerian Wall Film |
+| mesh-selection quantities | are therefore carrier-field outputs: pressure drop, outlet and domain velocity, vorticity, vapor outlet flow, residuals, and monitor stability |
+| All formal meshes | were run to a nominal `3000` iterations, but equal iteration count is not treated as equal convergence |
+| — | Each mesh must be independently iteration-stable before endpoint differences can be interpreted as spatial discretization effects |
 
 ## 2. Mesh ladder and run maturity
 
-The mesh labels are historical names. Actual cell counts and characteristic sizes are the values used for this comparison.
+| Item | Mesh ladder and run maturity |
+| --- | --- |
+| mesh labels | are historical names |
+| Actual cell counts and characteristic sizes | are the values used for this comparison |
 
 | Mesh | Actual cells | Characteristic size, `h` [m] | Recorded state | Evidence classification |
 |---|---:|---:|---|---|
@@ -38,11 +56,17 @@ The mesh labels are historical names. Actual cell counts and characteristic size
 | `mesh-2000k` | 11,959,759 | 0.0123739 | 3000 iterations | completed; unresolved |
 | `mesh-2300k` | 13,370,267 | 0.0119225 | 1250 recorded; later observed near 1382 | running at snapshot; not classified |
 
-Mesh checks and quality were reported as acceptable across the ladder. The final refinement ratios are close to one (`r ≈ 1.034–1.038`), which provides fine-grid comparisons but makes observed-order and GCI estimates sensitive to numerical noise and incomplete iteration convergence.
+| Item | Mesh ladder and run maturity |
+| --- | --- |
+| Mesh checks and quality | were reported as acceptable across the ladder |
+| final refinement ratios | are close to one (`r ≈ 1.034–1.038`), which provides fine-grid comparisons but makes observed-order and GCI estimates sensitive to numerical noise and incomplete iteration convergence |
 
 ## 3. Completed endpoint results
 
-Fluent reports outflow with a negative sign. The vapor-flow interpretation below uses the outlet-flow magnitude.
+| Item | Completed endpoint results |
+| --- | --- |
+| — | Fluent reports outflow with a negative sign |
+| vapor-flow interpretation below | uses the outlet-flow magnitude |
 
 | Mesh | Pressure drop [kPa] | Vapor at steam outlet [kg/s] | Liquid at steam outlet [kg/s] | Outlet velocity [m/s] | Domain velocity [m/s] | Domain vorticity [1/s] |
 |---|---:|---:|---:|---:|---:|---:|
@@ -55,15 +79,31 @@ Fluent reports outflow with a negative sign. The vapor-flow interpretation below
 
 ### Observed endpoint trends
 
-- Vapor outlet flow is exceptionally stable at approximately `81.45 kg/s`, with less than approximately `0.06%` variation across the completed meshes. This is useful evidence of vapor-throughput robustness, but it is not sufficient by itself because the value is strongly constrained by the imposed vapor inlet flow.
-- Pressure drop decreases from `31.05 kPa` on the coarsest completed mesh to approximately `24.0 kPa` on the fine meshes. This is a substantial apparent mesh effect, although the runs are not iteration-independent.
-- Domain-averaged velocity decreases from `32.86 m/s` to `26.49 m/s` with refinement. Outlet velocity is not monotonic: it falls through `1600k`, rises at `1900k`, and falls again at `2000k`.
-- Vorticity rises from `68.88 1/s` to `86.89 1/s` and appears to approach a fine-grid level near `86–87 1/s`, but its within-run stability is not uniformly sufficient.
-- Liquid outlet flow becomes very small after the `300k` case. Relative percentage comparisons are ill-conditioned near zero and should not be used as a primary mesh metric.
+| Item | Observed endpoint trends |
+| --- | --- |
+| Vapor outlet flow | is exceptionally stable at approximately `81.45 kg/s`, with less than approximately `0.06%` variation across the completed meshes |
+| This | is useful evidence of vapor-throughput robustness, but it is not sufficient by itself because the value is strongly constrained by the imposed vapor inlet flow |
+| — | Pressure drop decreases from `31.05 kPa` on the coarsest completed mesh to approximately `24.0 kPa` on the fine meshes |
+| This | is a substantial apparent mesh effect, although the runs are not iteration-independent |
+| — | Domain-averaged velocity decreases from `32.86 m/s` to `26.49 m/s` with refinement |
+
+<details>
+<summary>Supporting detail — Observed endpoint trends</summary>
+
+| Item | Observed endpoint trends |
+| --- | --- |
+| Outlet velocity | is not monotonic: it falls through `1600k`, rises at `1900k`, and falls again at `2000k` |
+| — | Vorticity rises from `68.88 1/s` to `86.89 1/s` and appears to approach a fine-grid level near `86–87 1/s`, but its within-run stability is not uniformly sufficient |
+|  | Liquid outlet flow becomes very small after the `300k` case |
+| Relative percentage comparisons | are ill-conditioned near zero and should not be used as a primary mesh metric |
+
+</details>
 
 ## 4. Iteration-independence evidence
 
-The final-500 drift is calculated from the saved `2500`, `2750`, and `3000` monitor points as `(maximum - minimum) / absolute(mean)`.
+| Item | Iteration-independence evidence |
+| --- | --- |
+| final-500 drift | is calculated from the saved `2500`, `2750`, and `3000` monitor points as `(maximum - minimum) / absolute(mean)` |
 
 | Mesh | Pressure-drop drift [%] | Vapor-flow drift [%] | Outlet-velocity drift [%] | Domain-velocity drift [%] | Vorticity drift [%] |
 |---|---:|---:|---:|---:|---:|
@@ -74,11 +114,26 @@ The final-500 drift is calculated from the saved `2500`, `2750`, and `3000` moni
 | `1900k` | 2.693 | 0.0136 | 3.766 | 9.195 | 0.472 |
 | `2000k` | 2.456 | 0.0193 | 0.496 | 9.174 | 1.834 |
 
-The proposed starting criteria were no more than `0.5%` drift for primary monitors and no more than `1%` for velocity/vorticity diagnostics. Vapor flow passes comfortably. Pressure drop fails on every completed mesh. Domain velocity fails on every mesh except that the coarse case is near the secondary threshold, and outlet velocity is generally above the proposed threshold. Vorticity is close to acceptable on some meshes but is not uniformly stable.
+| Item | Iteration-independence evidence |
+| --- | --- |
+| proposed starting criteria | were no more than `0.5%` drift for primary monitors and no more than `1%` for velocity/vorticity diagnostics |
+| — | Vapor flow passes comfortably |
+|  | Pressure drop fails on every completed mesh |
+|  | Domain velocity fails on every mesh except that the coarse case is near the secondary threshold, and outlet velocity is generally above the proposed threshold |
+| Vorticity | is close to acceptable on some meshes but is not uniformly stable |
 
-The domain-velocity drift is particularly important: it grows from approximately `0.8%` on `300k` to approximately `9.2%` on `1900k` and `2000k`. This supports the interpretation that the finer meshes are less iteration-mature at the common `3000`-iteration endpoint.
+<details>
+<summary>Supporting detail — Iteration-independence evidence</summary>
 
-The pressure result is also still moving. The final-500 pressure drift remains approximately `2.5–2.7%` on the two finest completed meshes. The apparent `1900k`-to-`2000k` endpoint difference is only `0.51%`, but it is smaller than the within-run pressure drift, so it cannot yet be treated as pressure mesh independence.
+| Item | Iteration-independence evidence |
+| --- | --- |
+| The domain-velocity drift is particularly important | it grows from approximately `0.8%` on `300k` to approximately `9.2%` on `1900k` and `2000k` |
+|  | This supports the interpretation that the finer meshes are less iteration-mature at the common `3000`-iteration endpoint |
+| pressure result | is also still moving |
+| final-500 pressure drift | remains approximately `2.5–2.7%` on the two finest completed meshes |
+| apparent `1900k`-to-`2000k` endpoint difference | is only `0.51%`, but it is smaller than the within-run pressure drift, so it cannot yet be treated as pressure mesh independence |
+
+</details>
 
 ## 5. Residual state
 
@@ -91,20 +146,35 @@ The pressure result is also still moving. The final-500 pressure drift remains a
 | `1900k` | 0.24951 | 2.02e-5 | 3.48e-4 | 9.49e-4 | 7.75e-4 |
 | `2000k` | 0.23673 | 1.97e-5 | 3.06e-4 | 8.06e-4 | 6.69e-4 |
 
-Momentum, turbulence, and volume-fraction residuals are relatively low, but continuity remains high and generally plateaued or oscillatory. The fields are numerically bounded rather than explosively divergent; they are not conventionally converged steady solutions.
+| Item | Residual state |
+| --- | --- |
+| Momentum, turbulence, and volume-fraction residuals | are relatively low, but continuity remains high and generally plateaued or oscillatory |
+| fields | are numerically bounded rather than explosively divergent; they are not conventionally converged steady solutions |
 
 ## 6. Interpretation
 
-The result is promising in one specific sense: the apparent decrease in fine-mesh pressure drop and domain velocity is confounded by incomplete iteration convergence. The finer meshes show larger monitor drift at the common `3000`-iteration endpoint, so the comparison is not yet a clean separation of:
+| Item | Interpretation |
+| --- | --- |
+| The result is promising in one specific sense | the apparent decrease in fine-mesh pressure drop and domain velocity is confounded by incomplete iteration convergence |
+|  | The finer meshes show larger monitor drift at the common `3000`-iteration endpoint, so the comparison is not yet a clean separation of: |
+| — | iterative convergence error; and |
+|  | spatial discretization error |
+| It | is plausible that additional iterations would move the fine-mesh pressure and velocity values toward a plateau and reduce some of the apparent mesh-to-mesh differences |
 
-1. iterative convergence error; and
-2. spatial discretization error.
+<details>
+<summary>Supporting detail — Interpretation</summary>
 
-It is plausible that additional iterations would move the fine-mesh pressure and velocity values toward a plateau and reduce some of the apparent mesh-to-mesh differences. That hypothesis is supported by the continuing pressure change and the increasing fine-mesh domain-velocity drift, but it is not yet demonstrated. Finer meshes often require more iterations, but this must be established from monitor histories rather than assumed from cell count alone.
+| Item | Interpretation |
+| --- | --- |
+| That hypothesis | is supported by the continuing pressure change and the increasing fine-mesh domain-velocity drift, but it is not yet demonstrated |
+| Finer meshes often | require more iterations, but this must be established from monitor histories rather than assumed from cell count alone |
+| The opposite conclusion also remains possible | if pressure and velocity continue drifting without reaching a stable window, the closed-bottom geometry may not possess a physically meaningful steady state under continuous liquid injection |
+|  | In that case the calculation should be described as a quasi-steady or accumulating-state diagnostic, and the cross-mesh comparison needs a declared common state definition rather than a steady-convergence claim |
+| `bottom` zone | is intentionally a wall, while `steamoutlet` is the only outlet |
+| resulting near-total liquid imbalance | is therefore a known geometry limitation |
+| Steam-outlet liquid flow and carrier quality may be | retained as trend metrics, but they are not validated full-separator efficiency measures in this study |
 
-The opposite conclusion also remains possible: if pressure and velocity continue drifting without reaching a stable window, the closed-bottom geometry may not possess a physically meaningful steady state under continuous liquid injection. In that case the calculation should be described as a quasi-steady or accumulating-state diagnostic, and the cross-mesh comparison needs a declared common state definition rather than a steady-convergence claim.
-
-The `bottom` zone is intentionally a wall, while `steamoutlet` is the only outlet. The resulting near-total liquid imbalance is therefore a known geometry limitation. Steam-outlet liquid flow and carrier quality may be retained as trend metrics, but they are not validated full-separator efficiency measures in this study.
+</details>
 
 ## 7. Current claim gate
 
@@ -122,33 +192,38 @@ The `bottom` zone is intentionally a wall, while `steamoutlet` is the only outle
 
 ## 8. Checkpoint conclusion
 
-`Needs follow-up` — retain this as a useful diagnostic mesh-convergence checkpoint for setup `08b`. The completed results indicate that the vapor-throughput quantity is robust, while pressure and velocity-field quantities remain iteration-dependent. The most useful next evidence is a continuation of the fine meshes beyond `3000` iterations, with preserved checkpoints and the same monitor definitions, followed by a common stable-window or otherwise explicitly defined state comparison.
-
-If the fine meshes plateau, re-evaluate mesh sensitivity using the matured outputs. If they do not plateau, document the calculation as a closed-bottom quasi-steady/accumulating-state limitation rather than claiming steady mesh convergence.
+| Item | Checkpoint conclusion |
+| --- | --- |
+| — | `Needs follow-up` — retain this as a useful diagnostic mesh-convergence checkpoint for setup `08b` |
+| completed results indicate that the vapor-throughput quantity | is robust, while pressure and velocity-field quantities remain iteration-dependent |
+| most useful next evidence | is a continuation of the fine meshes beyond `3000` iterations, with preserved checkpoints and the same monitor definitions, followed by a common stable-window or otherwise explicitly defined state comparison |
+| — | If the fine meshes plateau, re-evaluate mesh sensitivity using the matured outputs |
+|  | If they do not plateau, document the calculation as a closed-bottom quasi-steady/accumulating-state limitation rather than claiming steady mesh convergence |
 
 ## Later evidence from Andy's 07a study
 
-The preserved
-[Andy 07a study record](https://github.com/Shuhei-uni/P4P_knowledgeWiki/blob/archive/andy-local-20260908/Setup%20report/07a-split-inlet-carrier-mesh-convergence.md)
-reports the later closure of study `split_inlet_mesh_convergence_20260801`.
-Its first six mesh endpoint and drift values match the table above; it adds
-the seventh completed mesh and a 900k continuation. This addendum preserves
-those later observations without rewriting the dated 3 August checkpoint.
-Andy names the carrier parent `07` and this study `07a`; this migrated record
-uses the `08b` parity folder. The numbering difference is provenance, not
-proof that every case called `07a` or `08b` is interchangeable.
+| Item | Later evidence from Andy's 07a study |
+| --- | --- |
+| — | The preserved [Andy 07a study record](https://github.com/Shuhei-uni/P4P_knowledgeWiki/blob/archive/andy-local-20260908/Setup%20report/07a-split-inlet-carrier-mesh-convergence.md) reports the later closure of study `split_inlet_mesh_convergence_20260801` |
+|  | Its first six mesh endpoint and drift values match the table above; it adds the seventh completed mesh and a 900k continuation |
+|  | This addendum preserves those later observations without rewriting the dated 3 August checkpoint |
+|  | Andy names the carrier parent `07` and this study `07a`; this migrated record uses the `08b` parity folder |
+| numbering difference | is provenance, not proof that every case called `07a` or `08b` is interchangeable |
 
-**Observed in the preserved notes, closure dated 5 August 2026:** all seven
-formal meshes reached the nominal 3,000-iteration endpoint. The 2300k-labelled
-mesh gave pressure drop 23.7092 kPa and steam-outlet vapour magnitude
-81.4465 kg/s; pressure final-500 drift was 2.660% and domain-velocity drift
-9.133%. Its classification remained unresolved.
+<details>
+<summary>Supporting detail — Later evidence from Andy's 07a study</summary>
 
-The independently preserved 900k diagnostic continuation reached iteration
-6,000. Over iterations 5,500–6,000, pressure drift was 4.612%, vapour outlet
-flow drift 0.0217%, outlet-velocity drift 1.485%, domain-velocity drift 1.700%
-and vorticity drift 1.825%. Only vapour flow passed. The source's liquid-volume
-audit recorded the following inventory/pressure evolution:
+| Item | Later evidence from Andy's 07a study |
+| --- | --- |
+| Observed in the preserved notes, closure dated 5 August 2026 | all seven formal meshes reached the nominal 3,000-iteration endpoint |
+|  | The 2300k-labelled mesh gave pressure drop 23.7092 kPa and steam-outlet vapour magnitude 81.4465 kg/s; pressure final-500 drift was 2.660% and domain-velocity drift 9.133% |
+|  | Its classification remained unresolved |
+| — | The independently preserved 900k diagnostic continuation reached iteration 6,000 |
+| Over iterations 5,500–6,000, pressure drift | was 4.612%, vapour outlet flow drift 0.0217%, outlet-velocity drift 1.485%, domain-velocity drift 1.700% and vorticity drift 1.825% |
+| — | Only vapour flow passed |
+| source's liquid-volume audit | recorded the following inventory/pressure evolution: |
+
+</details>
 
 | Iteration | Liquid inventory (kg) | Pressure drop (kPa) |
 |---:|---:|---:|
@@ -157,16 +232,11 @@ audit recorded the following inventory/pressure evolution:
 | 5,500 | 152.103 | 33.591 |
 | 6,000 | 171.030 | 34.049 |
 
-The 64.37% inventory increase shows that pressure was still being compared
-across changing phase distributions. Iterative independence and mesh
-independence remained unresolved; Richardson/GCI and production-mesh
-selection were not accepted. The earlier suggestion to continue these steady
-meshes is therefore historical, not the latest disposition for Andy's study.
-The source retained carrier carryover/quality as trend-only and moved to
-[separate liquid-removal diagnostics](../../parallel-andy-studies/closed-bottom-liquid-sinks.md).
-
-These values were transcribed from the retained study note, which points to
-`PyAnsys/output/split_inlet_mesh_convergence_20260801/STUDY_DIAGNOSTIC_CLOSURE_20260805.md`
-and its audit artifacts. Their exact original written provenance is on the
-recovery branch; this migration did not recalculate or independently qualify
-the solver results.
+| Item | Later evidence from Andy's 07a study |
+| --- | --- |
+| 64.37% inventory increase | shows that pressure was still being compared across changing phase distributions |
+| — | Iterative independence and mesh independence remained unresolved; Richardson/GCI and production-mesh selection were not accepted |
+| earlier suggestion to continue these steady meshes | is therefore historical, not the latest disposition for Andy's study |
+| source | retained carrier carryover/quality as trend-only and moved to [separate liquid-removal diagnostics](../../parallel-andy-studies/closed-bottom-liquid-sinks.md) |
+| These values | were transcribed from the retained study note, which points to `PyAnsys/output/split_inlet_mesh_convergence_20260801/STUDY_DIAGNOSTIC_CLOSURE_20260805.md` and its audit artifacts |
+| Their exact original written provenance | is on the recovery branch; this migration did not recalculate or independently qualify the solver results |

@@ -2,28 +2,26 @@
 
 ## Answer at a glance
 
-**Status: BLOCKED_VERIFIED — solver divergence/floating-point failure during
-the block ending at active iteration 450.**
+| Item | Answer at a glance |
+| --- | --- |
+| **Status | BLOCKED_VERIFIED — solver divergence/floating-point failure during the block ending at active iteration 450 |
+| first high-cap launch | was blocked before solving because a historical parent report file was unavailable |
+| That preflight artifact | is retained for execution provenance but is not a scientific child result |
+| — | The corrected rerun then recovered the live parent inventory directly and executed the actual high-cap screen |
+| corrected rerun | used the same parent, topology, gain, feedback law, source formulation, and 50-iteration cadence as the two matched children |
 
-The first high-cap launch was blocked before solving because a historical parent
-report file was unavailable. That preflight artifact is retained for execution
-provenance but is not a scientific child result. The corrected rerun then
-recovered the live parent inventory directly and executed the actual high-cap
-screen.
+<details>
+<summary>Supporting detail — Answer at a glance</summary>
 
-The corrected rerun used the same parent, topology, gain, feedback law, source
-formulation, and 50-iteration cadence as the two matched children. It produced
-valid setup, source, and controller evidence through the active-400 readback,
-but the Fluent solver reported AMG divergence and a floating-point exception
-while solving the block ending at active 450. It therefore did not reach the
-declared 500-iteration horizon. Report samples after the loss of numerical
-validity are retained as failure evidence only and are excluded from physical
-interpretation.
+| Item | Answer at a glance |
+| --- | --- |
+| — | It produced valid setup, source, and controller evidence through the active-400 readback, but the Fluent solver reported AMG divergence and a floating-point exception while solving the block ending at active 450 |
+|  | It therefore did not reach the declared 500-iteration horizon |
+| Report samples after the loss of numerical validity | are retained as failure evidence only and are excluded from physical interpretation |
+| At active 400 the controller command | was `316.37 kg/s`, below the very large `584.60 kg/s` cap |
+| — | Thus, increasing the cap beyond `292.30 kg/s` did not even reach the cap before the same late solver failure; it did not improve the early lower-inventory response |
 
-At active 400 the controller command was `316.37 kg/s`, below the very large
-`584.60 kg/s` cap. Thus, increasing the cap beyond `292.30 kg/s` did not even
-reach the cap before the same late solver failure; it did not improve the early
-lower-inventory response.
+</details>
 
 ## Evidence package
 
@@ -48,52 +46,50 @@ lower-inventory response.
 
 ![F3 phase routing and numerical adequacy](figures/20260910T113103Z/F3-phase-routing-and-numerical-adequacy.png)
 
-The figures show that the higher cap changes the command ceiling but does not
-create a stable late-time trajectory. Their post-divergence tails are failure
-diagnostics, not flow results.
+| Item | Required figures |
+| --- | --- |
+| — | The figures show that the higher cap changes the command ceiling but does not create a stable late-time trajectory |
+| Their post-divergence tails | are failure diagnostics, not flow results |
 
 ## Interpretation and claim limits
 
 ### Observed before divergence
 
-- The lower-zone phase-2 volumetric absorber and matched mixture-momentum
-  source were configured as declared.
-- The direct phase-1 mass source remained disabled at every recorded update.
-- The command stayed below the high cap, reaching `316.37 kg/s` at active 400;
-  therefore the `584.60 kg/s` limit was not the active restriction at the last
-  valid controller readback.
-- The lower inventory was not driven to the numerical target of `29.9167 kg`
-  in the valid interval.
+| Item | Observed before divergence |
+| --- | --- |
+| lower-zone phase-2 volumetric absorber and matched mixture-momentum source | were configured as declared |
+| direct phase-1 mass source remained disabled at every | recorded update |
+| — | The command stayed below the high cap, reaching `316.37 kg/s` at active 400; therefore the `584.60 kg/s` limit was not the active restriction at the last valid controller readback |
+| lower inventory | was not driven to the numerical target of `29.9167 kg` in the valid interval |
 
 ### Failure interpretation
 
-This child does not support the idea that simply raising the absorber cap will
-solve the liquid-removal problem. The high cap did not prevent the same late
-solver failure seen for the medium cap, and its early controller trajectory was
-effectively the same until the commands became larger. The evidence points to
-the coupled controller/source/momentum response and carrier-flow stability as
-the next issue to investigate, rather than to insufficient cap magnitude alone.
-
-The intended no-outlet abstraction remains intact. The bottom boundary was not
-changed into an outlet, and the zero bottom phase flux is not the blocker. The
-blocker is numerical loss of validity under the evolving volumetric sink and
-matched momentum source.
+| Item | Failure interpretation |
+| --- | --- |
+| — | This child does not support the idea that simply raising the absorber cap will solve the liquid-removal problem |
+|  | The high cap did not prevent the same late solver failure seen for the medium cap, and its early controller trajectory was effectively the same until the commands became larger |
+|  | The evidence points to the coupled controller/source/momentum response and carrier-flow stability as the next issue to investigate, rather than to insufficient cap magnitude alone |
+| intended no-outlet abstraction | remains intact |
+| bottom boundary | was not changed into an outlet, and the zero bottom phase flux is not the blocker |
+| blocker | is numerical loss of validity under the evolving volumetric sink and matched momentum source |
 
 ## Run and analysis records
 
-- Setup contract: [setup.md](setup.md)
-- Run paths and recovery state: [run-paths.yaml](run-paths.yaml)
-- Excluded preflight manifest: `PyAnsys/output/phase07_cz_absorb/P7-E5-CZ-ABSORB-G200-CAP58460-student-20260910T112941Z-manifest.json`
-- Scientific rerun manifest: `PyAnsys/output/phase07_cz_absorb/P7-E5-CZ-ABSORB-G200-CAP58460-student-20260910T113103Z-manifest.json`
-- Report histories: `PyAnsys/output/phase07_cz_absorb/P7-E5-CZ-ABSORB-G200-CAP58460-student-20260910T113103Z-reports.json`
-- Residual transcript: `PyAnsys/output/phase07_cz_absorb/P7-E5-CZ-ABSORB-G200-CAP58460-student-20260910T113103Z-residuals-transcript.txt`
-- Analysis summary: [analysis/20260910T113103Z.json](analysis/20260910T113103Z.json)
-- Remote output root: `C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneAbsorber\20260910T113103Z\P7-E5-CZ-ABSORB-G200-CAP58460`
+| Item | Run and analysis records |
+| --- | --- |
+| Setup contract | [setup.md](setup.md) |
+| Run paths and recovery state | [run-paths.yaml](run-paths.yaml) |
+| Excluded preflight manifest | `PyAnsys/output/phase07_cz_absorb/P7-E5-CZ-ABSORB-G200-CAP58460-student-20260910T112941Z-manifest.json` |
+| Scientific rerun manifest | `PyAnsys/output/phase07_cz_absorb/P7-E5-CZ-ABSORB-G200-CAP58460-student-20260910T113103Z-manifest.json` |
+| Report histories | `PyAnsys/output/phase07_cz_absorb/P7-E5-CZ-ABSORB-G200-CAP58460-student-20260910T113103Z-reports.json` |
+| Residual transcript | `PyAnsys/output/phase07_cz_absorb/P7-E5-CZ-ABSORB-G200-CAP58460-student-20260910T113103Z-residuals-transcript.txt` |
+| Analysis summary | [analysis/20260910T113103Z.json](analysis/20260910T113103Z.json) |
+| Remote output root | `C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneAbsorber\20260910T113103Z\P7-E5-CZ-ABSORB-G200-CAP58460` |
 
 ## Decision
 
-Classify the corrected rerun as a **verified numerical blocker**. Do not resume
-it from the divergent endpoint and do not interpret the post-failure report
-tail as a liquid-removal result. Any future attempt would require a separately
-approved stabilization change; a still larger cap is not justified by this
-evidence alone.
+| Item | Decision |
+| --- | --- |
+| — | Classify the corrected rerun as a verified numerical blocker |
+|  | Do not resume it from the divergent endpoint and do not interpret the post-failure report tail as a liquid-removal result |
+| Any future attempt would | require a separately approved stabilization change; a still larger cap is not justified by this evidence alone |

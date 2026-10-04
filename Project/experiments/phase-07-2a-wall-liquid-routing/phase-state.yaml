@@ -4,8 +4,250 @@ phase_question: >-
   through steamoutlet by changing wall-adjacent routing while preserving
   absorber tracking, source-inclusive closure, liquid-inventory behaviour, and
   credible vapor routing relative to the R0 control?
-state: STAGE_2_E27_R3_R4_R5_SCREEN_COMPLETE_UNQUALIFIED
-planning_state: USER_SELECTED_E27_CONT5000_PARENT_AND_3000_ITERATION_COMBINED_SCREEN
+state: LOCAL_CONTACT_ABSORBER_DISCOVERY
+planning_state: USER_AUTHORIZED_INDEPENDENT_ALL_LIQUID_CONTACT_CAPTURE
+local_contact_absorber_1us_20000:
+  authority: human_2026_10_04_run_using_direct_fluent_use
+  status: LOCAL_REPLAY_RUNNING_NATIVE_START_CONFIRMED
+  workflow: direct-fluent-use
+  host: HOME-DESKTOP-SH
+  processor_count: 4
+  manifest: PyAnsys/output/phase72a-contact-absorber-local-20000/20261004T081120Z/run-manifest.json
+  parent_native_iteration: 17586
+  recovery_replay_updates: 6000
+  requested_extension_updates: 10000
+  expected_native_end: 33586
+  expected_total_restart_updates: 20000
+  film_timestep_s: 0.000001
+  scientific_settings_changed: false
+  prepared_reopen: PASS_EXACT_FIELDS_AND_SETTINGS
+  startup_native_iteration_observed: 17670
+  managed_session: 43470
+  local_fluent_root_pid: 42052
+  checkpoint_interval: 1000
+  automation_id: check-local-film-continuation-once
+  automation_status: ACTIVE_ONE_FUTURE_CHECK
+  monitor_policy: no_continuous_queries
+  lineage_limit: independent_local_replay_from_N17586_not_remote_N23586_field_file
+contact_absorber_1us_20000:
+  authority: human_2026_10_03_submit_simple_tui_add10000_leave_running
+  status: ACTIVE_ACCESS_RECOVERY_BLOCKED
+  server_id: '1'
+  manifest: PyAnsys/output/phase72a-contact-absorber-1us-20000/20261003T085130Z/run-manifest.json
+  parent_native_iteration: 23586
+  requested_additional_iterations: 10000
+  expected_native_end: 33586
+  total_restart_updates: 20000
+  film_timestep_s: 0.000001
+  controlled_delta: iterations_only
+  tui_command: /solve/iterate 10000
+  submission_attempts: 1
+  asynchronous_submission_acknowledged: true
+  run_started_confirmed: false
+  managed_session: 76044
+  previous_managed_session_handle_accessible: false
+  active_recovery: NATIVE_INTERRUPT_RPC_TIMEOUT
+  interrupt_acknowledged: false
+  windows_remote_process_access: ACCESS_DENIED
+  server3_alternative_access: TCP_TIMEOUT
+  latest_read_only_query: FRESH_AUTHENTICATED_RPC_DEADLINE_EXCEEDED
+  latest_checked_utc: '2026-10-03T22:04:05.459647+00:00'
+  monitor_policy: one_check_in_four_hours_no_constant_monitoring
+  automation_id: check-server-1-film-continuation-once
+  automation_status: PAUSED
+  check_result: READ_ONLY_ITERATION_QUERY_DEADLINE_EXCEEDED_TRANSCRIPT_EMPTY
+  last_verified_native_iteration: 23586
+  current_native_iteration: null
+  repeat_checks_scheduled: false
+  check_due_utc: '2026-10-03T12:54:00Z'
+  solver_terminated: false
+contact_absorber_1us_10000:
+  authority: human_2026_10_03_use_server1_add6000
+  manifest: PyAnsys/output/phase72a-contact-absorber-1us-10000/20261003T070351Z/run-manifest.json
+  server_id: '1'
+  workflow: pyansys-workflow
+  status: SOLVE_COMPLETE_FINAL_SERVICE_VERIFICATION_BLOCKED
+  scientific_status: BOUNDED_FILM_NOT_STATIONARY_WITHIN_10000_UPDATES
+  actual_additional_iterations: 6000
+  completed_native_iteration: 23586
+  final_max_film_thickness_m: 0.0002911412448156625
+  final_film_mass_kg: 6.013528435958118
+  final_1000_film_mass_gain_kg: 0.016186413800447
+  peak_solved_film_cfl: 0.02052618563175201
+  full_restart_film_ledger_error_percent: 0.016724702391140763
+  final_reopen_status: NATIVE_READS_RETURNED_REPORTS_MATCH_FULL_SETTINGS_RPC_STALLED
+  shared_final_transfer: PENDING_REMOTE_RPC_RECOVERY
+  original_native_start: 13586
+  parent_native_iteration: 17586
+  requested_additional_iterations: 6000
+  expected_native_end: 23586
+  total_restart_updates: 10000
+  film_timestep_s: 0.000001
+  added_film_time_s: 0.006
+  total_film_time_s: 0.01
+  controlled_delta: continuation_iterations_and_host_only
+  checkpoint_interval: 1000
+  keep_remote_session_open: true
+contact_absorber_e27_timestep_match:
+  authority: human_2026_10_03_match_e27_timestep
+  manifest: PyAnsys/output/phase72a-contact-absorber-e27-timestep/20261003T050619Z/run-manifest.json
+  parent_native_iteration: 13586
+  requested_additional_iterations: 4000
+  expected_native_end: 17586
+  film_timestep_s: 0.00001
+  controlled_delta: fixed_film_timestep_only
+  selected_bulk_tau_s: 0.00001
+  explicit_volume_fraction_relaxation: 0.1
+  early_checkpoint_after_iterations: 100
+  checkpoint_interval: 1000
+  workflow: direct-fluent-use
+  status: COMPLETE_VERIFIED_4000_SCIENTIFICALLY_REJECTED
+  scientific_status: REJECTED_FILM_RUNAWAY_AT_MATCHED_E27_TIMESTEP
+  actual_additional_iterations: 4000
+  completed_native_iteration: 17586
+  first_cfl_above_one_native_iteration: 13773
+  first_1m_cap_native_iteration: 13776
+  peak_native_film_cfl: 84168112.0
+  final_film_mass_kg: 6305.27433792263
+  final_max_film_thickness_m: 1.0
+  film_side_ledger_error_percent: 1647565.1278429108
+  owned_local_session_closed: true
+  endpoint_reopen: PyAnsys/output/phase72a-contact-absorber-e27-timestep/20261003T050619Z/reopen-comparison.json
+  prepared_endpoint_reopen: PyAnsys/output/phase72a-contact-absorber-e27-timestep/20261003T050619Z/prepared-reopen-comparison.json
+contact_absorber_e27_restart:
+  authority: human_2026_10_03_original_e27_restart
+  manifest: PyAnsys/output/phase72a-contact-absorber-e27-restart/20261003T032636Z/run-manifest.json
+  parent_native_iteration: 13586
+  original_parent: E2_7_before_roughness_cap_growth
+  requested_additional_iterations: 4000
+  expected_native_end: 17586
+  checkpoint_interval: 1000
+  selected_bulk_tau_s: 0.00001
+  film_timestep_s: 0.000001
+  explicit_volume_fraction_relaxation: 0.1
+  workflow: direct-fluent-use
+  status: COMPLETE_VERIFIED_ORIGINAL_E27_RESTART_4000_NOT_STEADY_QUALIFIED
+  parent_field_array_verification: PyAnsys/output/phase72a-contact-absorber-e27-restart/20261003T032636Z/original-field-array-verification.json
+  prepared_endpoint_reopen: PyAnsys/output/phase72a-contact-absorber-e27-restart/20261003T032636Z/prepared-reopen-comparison.json
+  actual_additional_iterations: 4000
+  completed_native_iteration: 17586
+  endpoint_reopen: PyAnsys/output/phase72a-contact-absorber-e27-restart/20261003T032636Z/reopen-comparison.json
+  final_collector_inventory_kg: 0.0006094426461400708
+  final_collector_max_liquid_fraction: 0.0002605453410681017
+  final_max_film_thickness_m: 0.000298108090646565
+  final_film_inventory_kg: 5.915017249325699
+  film_side_ledger_error_percent: 0.007668040516832637
+  owned_local_session_closed: true
+contact_absorber_continuation:
+  authority: human_2026_10_03_add_4000
+  manifest: PyAnsys/output/phase72a-contact-absorber-continuation/20261003T001729Z/run-manifest.json
+  parent_native_iteration: 14686
+  requested_additional_iterations: 4000
+  expected_native_end: 18686
+  checkpoint_interval: 1000
+  controlled_delta: additional_iterations_only
+  workflow: direct-fluent-use
+  status: COMPLETE_VERIFIED_4000_NOT_STEADY_QUALIFIED
+  completed_native_iteration: 18686
+  actual_additional_iterations: 4000
+  endpoint_reopen: PyAnsys/output/phase72a-contact-absorber-continuation/20261003T001729Z/reopen-comparison.json
+  final_collector_inventory_kg: 0.0006579119649502777
+  final_collector_max_liquid_fraction: 0.0002284462043739256
+  final_max_film_thickness_m: 0.0002944301231764257
+  final_film_inventory_kg: 5.933508783009493
+  film_side_ledger_error_percent: 0.007631653252510764
+  owned_local_session_closed: true
+contact_absorber_trial:
+  authority: human_2026_10_03_latest_contact_capture
+  setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/ewf-absorber/setup.md
+  manifest: PyAnsys/output/phase72a-contact-absorber/20261002T222617Z/run-manifest.json
+  parent_native_iteration: 13586
+  bulk_tau_screen_s: [0.001, 0.0001, 0.00001, 0.000001]
+  shared_throughput_limit: false
+  exact_geometric_y_0p1_plane: false
+  region: existing_lower_cell_centroid_selection
+  corrected_library: libcontactv2
+  film_timestep_s: 0.000001
+  explicit_volume_fraction_relaxation: 0.1
+  native_qualifier_start: 13686
+  native_qualifier_end: 14686
+  qualification_iterations: 1000
+  selected_bulk_tau_s: 0.00001
+  final_collector_inventory_kg: 0.0006563208995402095
+  final_collector_max_liquid_fraction: 0.000226539443795069
+  final_max_film_thickness_m: 0.000308063899865374
+  film_side_ledger_error_percent: 0.007505
+  status: COMPLETE_BOUNDED_CONTACT_PROTOTYPE_NOT_STEADY_QUALIFIED
+  endpoint_reopen: PyAnsys/output/phase72a-contact-absorber/20261002T222617Z/reopen-comparison.json
+  owned_local_session_closed: true
+execution_override:
+  authority: human_2026_10_03_latest
+  scope: all_fluent_execution_from_now_until_human_changes_it
+  workflow: direct-fluent-use
+  server1_access: prohibited
+  selected_case: R3_plus_E2_7_new_absorber
+  requested_iterations: 3000
+  native_start: 13586
+  expected_native_end: 16586
+  matched_old_absorber_cap_m: 1.0
+  manifest: PyAnsys/output/phase72a-r3-ewf-absorber-direct/20261002T205621Z/run-manifest.json
+  status: COMPLETE_VERIFIED
+  completed_native_iteration: 16586
+  owned_local_session_closed: true
+  comparison: PyAnsys/output/phase72a-r3-ewf-absorber-direct/20261002T205621Z/comparison-summary.json
+ewf_absorber_extension:
+  authority: human_2026_10_03
+  setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/ewf-absorber/setup.md
+  parent_native_iteration: 13586
+  lower_film_wall: 'wall:004'
+  command_policy: shared_bulk_plus_film_inventory_weighted
+  cap_test_status: R3_R4_COMPLETE_VERIFIED_TO_N16586
+  implementation_status: SOURCE_OPERATION_AND_R3_R4_REOPEN_VERIFIED
+  build_manifest: PyAnsys/output/phase72a-ewf-absorber/smooth-build-20261003T1040/run-manifest.json
+  source_proof: PyAnsys/output/phase72a-ewf-absorber/smooth-source-proof-20261003T1040/source-proof-qualified.json
+  stage2_artifacts: PyAnsys/output/phase72a-ewf-absorber/stage2-prepared-20261003T1040/prepared-stage2.json
+  source_proof_removed_kg: 0.004816772920730114
+  source_proof_max_fraction_per_observed_update: 0.010000002310872223
+  source_proof_clock: native_transcript_one_1e_5_second_film_step_per_flow_iteration
+  server1_loaded_case: R3_with_shared_bulk_EWF_absorber
+  server1_native_iteration: 13586
+  server3_status: FLUENT_ENDPOINT_UNREACHABLE_AFTER_PRESERVED_ENDPOINT_AND_BUILD_FAILURE
+  fleet_preparation_receipt_is_historical: true
+  scientific_screen_status: LOCAL_R3_3000_COMPLETE_CAP_CENSORED_UNQUALIFIED
+stage_2_followup:
+  authority_date: 2026-10-03
+  execution_policy_superseded_by: execution_override
+  owned_servers: ['1', '3']
+  direct_fluent_use: false
+  selected_first: matched_R3_R4_cap_0p3_to_1m
+  film_removal_preference:
+    authority: human_2026_10_03
+    preferred_paths: [film_edge_drainage, shear_stripping, edge_separation]
+    hard_thickness_limit: last_resort_only
+    next_design: audit_drainage_then_separate_release_contrasts_in_authorized_dpm_work
+    required_accounting: accretion_storage_edge_outflow_released_mass_and_destination
+    claim_limit: no_physical_release_claim_from_unphysical_cap_seeking_film
+  parent_native_iteration: 13586
+  iterations_per_child: 3000
+  checkpoint_interval: 1000
+  supervision_manifest: PyAnsys/output/phase72a-stage2-cap1m/no-r5-job_manifest.json
+  supervision_job: PyAnsys/output/phase72a-stage2-cap1m/no-r5-supervision-job.yaml
+  original_supervisor_outcome: BLOCKED_AFTER_4H_TIMEOUT
+  original_chat_handoff: FAILED_THREAD_STORE_ACTIVE_WRITER_CONFLICT
+  live_reconciled_native_iteration: 14586
+  completed_native_iterations_per_started_child: 1000
+  first_block_film_snapshot:
+    R3: {maximum_thickness_m: 1.0, mass_kg: 7016.987688687403, average_speed_m_s: 14124.40780718204}
+    R4: {maximum_thickness_m: 1.0, mass_kg: 6725.86759340367, average_speed_m_s: 11193.75832760552}
+    claim_limit: BOTH_NEW_CAP_CENSORED_WITH_EXTREME_REPORTED_FILM_SPEEDS
+  queued_cap_case: null
+  cancelled_cap_cases: [R5]
+  cap_case_selection: [R3, R4]
+  followup_roughness_cases: [R3, R4]
+  speeds_m_s: [20.11, 23.46, 26.81, 29.48, 32.14]
+  dpm_liquid_fractions: [0.025, 0.05, 0.075, 0.10, 0.20]
+  pending_sequence: [carrier_speed_sweep, one_way_dpm, two_way_dpm, dpm_sensitivities]
+  contract: Project/experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/index.md
 
 stage_2_combined_ewf_roughness:
   contract: Project/experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/index.md
@@ -249,11 +491,60 @@ gates:
       - matched phase-resolved outlet carryover comparison
       - mechanism-specific wall/film transfer evidence
 
-active_jobs: []
+active_jobs:
+  - case: R3_E2_7_contact_absorber_local_1us_20000
+    status: LOCAL_REPLAY_RUNNING_NATIVE_START_CONFIRMED
+    host: HOME-DESKTOP-SH
+    manifest: PyAnsys/output/phase72a-contact-absorber-local-20000/20261004T081120Z/run-manifest.json
+    managed_session: 43470
+unreconciled_remote_jobs:
+  - case: R3_E2_7_contact_absorber_1us_20000
+    status: ACTIVE_ACCESS_RECOVERY_BLOCKED
+    server_id: '1'
+    manifest: PyAnsys/output/phase72a-contact-absorber-1us-20000/20261003T085130Z/run-manifest.json
+    managed_session: 76044
+completed_direct_jobs:
+  - case: R3_E2_7_contact_absorber_dt10us_4000
+    workflow: direct-fluent-use
+    manifest: PyAnsys/output/phase72a-contact-absorber-e27-timestep/20261003T050619Z/run-manifest.json
+    native_endpoint: 17586
+    scientific_status: REJECTED_FILM_RUNAWAY_AT_MATCHED_E27_TIMESTEP
+    owned_local_session_closed: true
+  - case: R3_E2_7_contact_absorber_original_e27_restart_4000
+    workflow: direct-fluent-use
+    manifest: PyAnsys/output/phase72a-contact-absorber-e27-restart/20261003T032636Z/run-manifest.json
+    native_endpoint: 17586
+    scientific_status: BOUNDED_FILM_NEAR_DRY_COLLECTOR_STEADY_CONVERGENCE_UNQUALIFIED
+    owned_local_session_closed: true
+  - case: R3_E2_7_contact_absorber_continuation_4000
+    workflow: direct-fluent-use
+    manifest: PyAnsys/output/phase72a-contact-absorber-continuation/20261003T001729Z/run-manifest.json
+    native_endpoint: 18686
+    scientific_status: BOUNDED_FILM_NEAR_DRY_COLLECTOR_STEADY_CONVERGENCE_UNQUALIFIED
+    owned_local_session_closed: true
+  - case: R3_E2_7_contact_absorber_discovery
+    workflow: direct-fluent-use
+    manifest: PyAnsys/output/phase72a-contact-absorber/20261002T222617Z/run-manifest.json
+    native_endpoint: 14686
+    scientific_status: BOUNDED_NEAR_INSTANT_CAPTURE_BULK_STEADY_BALANCE_UNQUALIFIED
+    owned_local_session_closed: true
+  - case: R3_E2_7_new_absorber_local
+    workflow: direct-fluent-use
+    manifest: PyAnsys/output/phase72a-r3-ewf-absorber-direct/20261002T205621Z/run-manifest.json
+completed_cap_jobs:
+  - case: R3-cap1m
+    server_id: '1'
+    manifest: PyAnsys/output/phase72a-stage2-cap1m/R3-recovery2-20261003/run-manifest.json
+  - case: R4-cap1m
+    server_id: '3'
+    manifest: PyAnsys/output/phase72a-stage2-cap1m/R4-recovery-20261003/run-manifest.json
 next_required_action: >-
-  Repair the exploratory E4 build to use the native EWF Boundary Condition
-  film mass/momentum flux fields, set the bulk phase-2 absorber command/source
-  to zero for the direct-film inlet, enable pressure-gradient driving, then
-  save/reopen and verify before a bounded exploratory solve. E2.7 through
-  native 13586 remains complete and unqualified with its copied-start-pair
-  identity limitation.
+  Leave the confirmed local direct-Fluent replay/extension running. The
+  worker sends 6000 replay updates from N17586, saves local N23586, then
+  sends the requested 10000-update extension to N33586. Native autosave
+  owns 1000-update checkpoints. At the single four-hour check, inspect saved
+  evidence once, verify/analyze the final pair if complete, or leave the
+  run active if unfinished. Do not submit extra iterations or continuously
+  poll. Keep this local 4-rank lineage separate from Server 1's inaccessible
+  18-rank N23586 fields and unverified pending command. Server 1 remains
+  untouched. R5 remains cancelled.

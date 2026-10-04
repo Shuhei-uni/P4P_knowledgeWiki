@@ -17,7 +17,7 @@ Produce the decisive evidence first. Use supporting branches only when relevant:
   contour, vector scene, plane, or spatial comparison; source identity,
   post-processing, export, visual QA, and provenance.
 - [interpretation](references/interpretation.md) — when translating planned
-  evidence into a hypothesis judgement, bounded claim, and `results.md` story.
+  evidence into a hypothesis judgement, bounded claim, and table/figure-led `results.md`.
 
 ## Analysis order
 

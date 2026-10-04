@@ -2,19 +2,16 @@
 
 ## Answer at a glance
 
-`P71A-BASELINE-V2-VIRTUAL-OUTLET` is ready on `student`. Fluent is currently
-loaded with the canonical freshly hybrid-initialized prepared pair, not the
-one-iteration smoke pair.
-
-The named 60k source mesh produced `60,964` fluid cells after load. The existing
-Phase-7 `y <= 0.10 m` selection became a `715`-cell zone named
-`p71a-v2-virtual-outlet`; the remaining parent contains `60,249` cells. The
-bottom is a wall, and the only pressure outlet is `steamoutlet`.
-
-The v1 lower-inventory/uniform absorber is absent. V2 instead contains a
-phase-2-only, inlet-throughput feed-forward sink weighted by local phase-2
-volume fraction, together with matching phase-2-velocity momentum removal and
-shared k/epsilon removal. Save/reopen readback and a one-iteration smoke passed.
+| Item | Answer at a glance |
+| --- | --- |
+| `P71A-BASELINE-V2-VIRTUAL-OUTLET` | is ready on `student` |
+| Fluent | is currently loaded with the canonical freshly hybrid-initialized prepared pair, not the one-iteration smoke pair |
+| — | The named 60k source mesh produced `60,964` fluid cells after load |
+|  | The existing Phase-7 `y <= 0.10 m` selection became a `715`-cell zone named `p71a-v2-virtual-outlet`; the remaining parent contains `60,249` cells |
+| bottom | is a wall, and the only pressure outlet is `steamoutlet` |
+| v1 lower-inventory/uniform absorber | is absent |
+| — | V2 instead contains a phase-2-only, inlet-throughput feed-forward sink weighted by local phase-2 volume fraction, together with matching phase-2-velocity momentum removal and shared k/epsilon removal |
+|  | Save/reopen readback and a one-iteration smoke passed |
 
 ## Artifact identity
 
@@ -28,47 +25,47 @@ shared k/epsilon removal. Save/reopen readback and a one-iteration smoke passed.
 | V1 recovery case SHA-256 | `23c047de914699b4b702c88985a8089a062080aa16dedcec213f6f70625cee92` |
 | V1 recovery data SHA-256 | `28749c65d93d8feb05293892cca57e27b36ca4d6638273a7af055914874b00dc` |
 
-The complete server paths are in [run-paths.yaml](run-paths.yaml), and the
-full machine readback is in [build-manifest.json](build-manifest.json).
+| Item | Artifact identity |
+| --- | --- |
+| complete server paths | are in [run-paths.yaml](run-paths.yaml), and the full machine readback is in [build-manifest.json](build-manifest.json) |
 
 ## Verified setup
 
-- Fluent 2025 R2, pressure-based steady solver, absolute velocity formulation.
-- Mixture model with `phase-1` vapor and `phase-2` liquid; RNG k-epsilon.
-- Fresh Hybrid Initialization, 10 passes, no patched liquid pool.
-- Mass-flow inlets: `liquidinlet` and `steaminlet`; pressure outlet:
-  `steamoutlet`; bottom remains a wall.
-- Prepared inlet-derived liquid command: `111.22015 kg/s`, exactly matching
-  the inherited v1 liquid-inlet setting captured for this build.
-- Source update interval: one iteration.
-- Parent-zone mixture, vapor, and liquid sources: disabled.
-- Virtual-outlet vapor source: disabled.
-- Virtual-outlet phase-2 mass source: `P71V2Sink`.
-- Virtual-outlet mixture sources: `P71V2SinkX`, `P71V2SinkY`,
-  `P71V2SinkZ`, `P71V2SinkK`, and `P71V2SinkEpsilon`.
-- Named-expression definitions and complete source state were identical after
-  reopening the prepared pair and after reloading it following smoke.
+| Item | Verified setup |
+| --- | --- |
+| — | Fluent 2025 R2, pressure-based steady solver, absolute velocity formulation |
+|  | Mixture model with `phase-1` vapor and `phase-2` liquid; RNG k-epsilon |
+|  | Fresh Hybrid Initialization, 10 passes, no patched liquid pool |
+| Mass-flow inlets | `liquidinlet` and `steaminlet`; pressure outlet: `steamoutlet`; bottom remains a wall |
+| Prepared inlet-derived liquid command | `111.22015 kg/s`, exactly matching the inherited v1 liquid-inlet setting captured for this build |
+
+<details>
+<summary>Supporting detail — Verified setup</summary>
+
+| Item | Verified setup |
+| --- | --- |
+| Source update interval | one iteration |
+| Parent-zone mixture, vapor, and liquid sources | disabled |
+| Virtual-outlet phase-2 mass source | `P71V2Sink` |
+| Virtual-outlet mixture sources | `P71V2SinkX`, `P71V2SinkY`, `P71V2SinkZ`, `P71V2SinkK`, and `P71V2SinkEpsilon` |
+| Named-expression definitions and complete source state | were identical after reopening the prepared pair and after reloading it following smoke |
+
+</details>
 
 ## Smoke observation and claim limit
 
-The freshly initialized lower zone contained zero liquid. After one iteration,
-its liquid volume was only `3.02e-23 m3`, so the realized sink was effectively
-zero (`3.36e-15 kg/s`) while the command remained `111.22015 kg/s`. This is the
-expected starvation behavior of an alpha-weighted outlet starting from an
-all-vapor lower zone; it is not evidence that the outlet can yet realize the
-command under developed liquid loading.
-
-Accordingly, this result establishes only that the requested v2 baseline
-exists, persists, reopens, and can advance one iteration without a setup or
-source-evaluation failure. It does not establish throughput tracking,
-convergence, bounded inventory, mass closure, separation performance, or a
-physical brine-outlet analogue.
+| Item | Smoke observation and claim limit |
+| --- | --- |
+| — | The freshly initialized lower zone contained zero liquid |
+| After one iteration, its liquid volume | was only `3.02e-23 m3`, so the realized sink was effectively zero (`3.36e-15 kg/s`) while the command remained `111.22015 kg/s` |
+| This | is the expected starvation behavior of an alpha-weighted outlet starting from an all-vapor lower zone; it is not evidence that the outlet can yet realize the command under developed liquid loading |
+| — | Accordingly, this result establishes only that the requested v2 baseline exists, persists, reopens, and can advance one iteration without a setup or source-evaluation failure |
+|  | It does not establish throughput tracking, convergence, bounded inventory, mass closure, separation performance, or a physical brine-outlet analogue |
 
 ## Next action
 
-Use this exact prepared pair for the first v2 liquid-development discovery run.
-That run must directly compare command, native applied phase-2 source, and
-liquid-inlet throughput while recording lower-zone liquid availability, whole-
-separator liquid inventory, phase-resolved boundary fluxes, phase-1 source
-audit, source-inclusive closure, and residuals. The lower-zone volume is a
-starvation diagnostic, not the success metric.
+| Item | Next action |
+| --- | --- |
+| — | Use this exact prepared pair for the first v2 liquid-development discovery run |
+|  | That run must directly compare command, native applied phase-2 source, and liquid-inlet throughput while recording lower-zone liquid availability, whole- separator liquid inventory, phase-resolved boundary fluxes, phase-1 source audit, source-inclusive closure, and residuals |
+| lower-zone volume | is a starvation diagnostic, not the success metric |

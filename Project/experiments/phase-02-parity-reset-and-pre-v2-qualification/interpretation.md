@@ -2,13 +2,17 @@
 
 ## Why this phase existed
 
-Phase 2 was a parity reset. After the exploratory inlet work, the project needed one reproducible Purnanto-based carrier setup that could be used as the parent for later DPM and wall-film work.
-
-The aim was to keep the Purnanto geometry, mesh, and main model settings as close as practical to the reference lineage while making the selected two-phase split inlet the main controlled change.
+| Item | Why this phase existed |
+| --- | --- |
+| Phase 2 | was a parity reset |
+| — | After the exploratory inlet work, the project needed one reproducible Purnanto-based carrier setup that could be used as the parent for later DPM and wall-film work |
+| aim | was to keep the Purnanto geometry, mesh, and main model settings as close as practical to the reference lineage while making the selected two-phase split inlet the main controlled change |
 
 ## Main hypothesis
 
-If the Purnanto setup can be rebuilt with a controlled two-phase split inlet, it can serve as a consistent baseline for later particle and wall-mechanism studies.
+| Main hypothesis |
+| --- |
+| If the Purnanto setup can be rebuilt with a controlled two-phase split inlet, it can serve as a consistent baseline for later particle and wall-mechanism studies |
 
 ## What was run
 
@@ -22,34 +26,45 @@ If the Purnanto setup can be rebuilt with a controlled two-phase split inlet, it
 
 ## Representative evidence
 
-The saved 08b result at 5000 iterations reported:
+| Item | Representative evidence |
+| --- | --- |
+| — | The saved 08b result at 5000 iterations reported: |
+| liquid inlet | 116.92 kg/s; |
+| vapor inlet | 80.69 kg/s; |
+| liquid through steamoutlet | 0.0821 kg/s; |
+| vapor through steamoutlet | 81.464 kg/s; |
 
-- liquid inlet: 116.92 kg/s;
-- vapor inlet: 80.69 kg/s;
-- liquid through steamoutlet: 0.0821 kg/s;
-- vapor through steamoutlet: 81.464 kg/s;
-- steam-outlet dryness: 99.899%;
-- whole-domain mixture imbalance ratio: 0.587.
+<details>
+<summary>Supporting detail — Representative evidence</summary>
 
-The apparently excellent steam-outlet dryness therefore could not be treated as a full separator efficiency result. The domain was not mass closed because the simplified geometry still lacked a credible continuous-liquid removal path.
+| Item | Representative evidence |
+| --- | --- |
+| steam-outlet dryness | 99.899%; |
+| whole-domain mixture imbalance ratio | 0.587 |
+| — | The apparently excellent steam-outlet dryness therefore could not be treated as a full separator efficiency result |
+| domain | was not mass closed because the simplified geometry still lacked a credible continuous-liquid removal path |
+| The active DPM sample was also dominated by incomplete trajectories | 13012 / 13020 tracks were incomplete |
+| 08c comparison | retained the same split-inlet topology and varied loading, but the available cases had different horizons and no closed phase balance, so it remained a preliminary response study |
 
-The active DPM sample was also dominated by incomplete trajectories: 13012 / 13020 tracks were incomplete.
-
-The 08c comparison retained the same split-inlet topology and varied loading, but the available cases had different horizons and no closed phase balance, so it remained a preliminary response study.
+</details>
 
 ## Interpretation
 
-08b matters because it became the project's clean two-phase parity baseline, not because it was a fully validated separator solution.
-
-The important modelling distinction established here was: hold the Purnanto-like carrier model broadly fixed, then build later complexity on top of one repeatable two-phase inlet state.
-
-The phase also exposed a problem that would persist for several later phases: very clean steam-outlet numbers can be misleading when the overall liquid inventory and whole-domain mass balance are still open.
+| Item | Interpretation |
+| --- | --- |
+| — | 08b matters because it became the project's clean two-phase parity baseline, not because it was a fully validated separator solution |
+| The important modelling distinction established here was | hold the Purnanto-like carrier model broadly fixed, then build later complexity on top of one repeatable two-phase inlet state |
+| — | The phase also exposed a problem that would persist for several later phases: very clean steam-outlet numbers can be misleading when the overall liquid inventory and whole-domain mass balance are still open |
 
 ## Why this led to Phase 3
 
-Once a reproducible two-phase carrier existed, the project could follow the Purnanto-style methodology of developing the carrier field first and then injecting droplets to study carryover.
+| Why this led to Phase 3 |
+| --- |
+| Once a reproducible two-phase carrier existed, the project could follow the Purnanto-style methodology of developing the carrier field first and then injecting droplets to study carryover |
 
 ## Evidence gaps / TODO
 
-- TODO: add a compact Phase-2 figure comparing 08b and the two 08c loading cases if the original plot can be recovered.
-- TODO: the exact reason the historical one-inlet recreation was retained is weakly documented; keep it out of the final narrative unless needed for provenance.
+| Item | Evidence gaps / TODO |
+| --- | --- |
+| TODO | add a compact Phase-2 figure comparing 08b and the two 08c loading cases if the original plot can be recovered |
+|  | the exact reason the historical one-inlet recreation was retained is weakly documented; keep it out of the final narrative unless needed for provenance |

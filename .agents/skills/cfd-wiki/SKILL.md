@@ -1,6 +1,6 @@
 ---
 name: cfd-wiki
-description: "Route reusable CFD knowledge: locate or extract paper evidence, answer or author generic Fluent guidance, or update CFD_wiki sources, setups, concepts, entities, and synthesis. Use when the task concerns transferable CFD method or evidence rather than a selected Project experiment or PyAnsys automation."
+description: "Use the CFD wiki for model rationale, literature comparisons, assumptions, reusable Fluent guidance, source ingest and wiki health. Retrieve existing knowledge before researching transferable CFD questions externally."
 ---
 
 # CFD Wiki
@@ -31,9 +31,11 @@ Classify the request before opening source material:
 
 | Request concerns | Take this branch |
 | --- | --- |
+| Explaining physics, comparing models/papers, or challenging a reusable assumption | **Knowledge Q&A** |
 | Where a paper reports a method, model, parameter, validation result, or limitation | **Evidence lookup** |
 | How to carry out a reusable action in Fluent, or how to improve generic Fluent guidance | **Fluent guidance** |
 | Adding, correcting, connecting, or synthesising transferable CFD knowledge | **Wiki update** |
+| Discoverability, broken links, source availability, or stale/contradictory knowledge | **Wiki health** |
 | A selected experiment's decision, result, setup lineage, or a runnable PyAnsys change | Route to `Project/` or `PyAnsys/`; use this skill only if a separate reusable lesson is needed |
 
 ## Evidence lookup
@@ -46,6 +48,42 @@ For a paper, model, mesh, validation, separator, annular-flow, DPM, EWF, steam-p
 4. State source-backed facts with their page/section citation, and label every non-verbatim conclusion `Reported`, `Inferred`, `Assumed`, `Missing Info`, or `Not Applicable`, as applicable.
 
 Completion criterion: the answer identifies the supporting source location and clearly distinguishes source evidence from inference or an unresolved gap.
+
+## Knowledge Q&A
+
+1. Use the question routes in `CFD_wiki/wiki/index.md`. Search unfamiliar wording
+   with `python CFD_wiki/tools/wiki.py search "<question terms>" --json` from the
+   repository root, or use `rg` for exact terms.
+2. Read the closest physics/concept or synthesis page and its supporting source
+   records. When comparing studies, name differences in geometry, fluid system,
+   models and validation that constrain transfer.
+3. Follow source-page pointers for critical values or a disputed claim. If the
+   original is unavailable, state that the maintained extraction is the evidence
+   used and preserve the unresolved verification gap.
+4. Answer the question first, then provide evidence locations, material
+   disagreements, missing information and the implication for the user's question.
+   Keep reported findings, inference and assumptions distinguishable.
+5. Apply the local guide's query writeback rule if the answer adds reusable
+   knowledge; otherwise keep the answer in chat.
+
+Completion criterion: the answer uses relevant existing knowledge, names its
+evidence and transfer limits, and identifies what remains unanswered. A search
+excerpt alone is not evidence review.
+
+## Wiki health
+
+1. Run `python CFD_wiki/tools/wiki.py health --json`. Inspect broken file links,
+   uncatalogued pages, absent content backlinks and unavailable source references.
+2. Repair navigation against actual files. Add backlinks only where the relation
+   is useful. Original source availability is a separate gap from broken wiki links.
+3. For scientific health, choose a concrete topic or conflicting claim, compare
+   its maintained pages and inspect the primary evidence. Follow the local guide's
+   lint rules; structural checks cannot certify citation quality or scientific truth.
+4. Correct the owning page, related links and catalog/log, then rerun the checks.
+
+Completion criterion: repaired items are verified; unresolved source-access or
+scientific gaps are reported explicitly. Health checks never fill missing facts
+with unsupported values.
 
 ## Fluent guidance
 

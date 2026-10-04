@@ -9,7 +9,9 @@ Own the scientific loop from the next useful experiment to the strongest
 evidence-backed phase statement.
 
 Read the active `CONTEXT.md`, `phase-state.yaml`, and only the setup/result
-records relevant to the current frontier. Then use:
+records relevant to the current frontier. For experiment Markdown, follow the
+[presentation contract](../../../Project/experiments/README.md#presentation).
+Then use:
 
 - [lifecycle](references/lifecycle.md) for the few hard scientific gates;
 - [experiment cycle](references/experiment-cycle.md) for design → run → analysis;

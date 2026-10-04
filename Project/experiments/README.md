@@ -1,5 +1,24 @@
 # Project experiments
 
+## Presentation
+
+| Record | Main content |
+| --- | --- |
+| `CONTEXT.md` | Tables for current status, question, authority, scope, evidence, candidate contrasts, and decision conditions. |
+| `setup.md` | Tables for exact parent, controlled changes, fixed settings, run plan, required evidence, and claim limits. |
+| `results.md` | A short answer/status table, selected figures, comparison tables, limitations, and next action. |
+| Index, interpretation, and other records | Navigation or comparison tables; figures where useful. |
+
+| Writing rule | Requirement |
+| --- | --- |
+| Prose | Omit introductions, narrative recaps, and sentences that repeat a table or figure. Do not move whole paragraphs into table cells. |
+| Rows | One fact, setting, comparison, or decision per row. Use short phrases, clear units, and meaningful column labels. |
+| Figures | Embed existing valid figures beside the relevant comparison. Keep a short caption for source/window and at most two short interpretation sentences. Do not repeat plotted values in prose. |
+| Scientific meaning | Retain provenance, exact parent identity, formulas/sign conventions, authority, uncertainty, and claim limits in tables or captions. Separate observation from interpretation. |
+| Evidence gaps | State the missing evidence and its effect in a table. Do not invent a figure or a stronger conclusion. |
+| Chronology | Keep the current decision visible. Use Git and linked machine artifacts for detailed history. |
+| Raw evidence | Leave every `raw/` directory unchanged. |
+
 The retained Project experiment record is grouped by scientific phase. The
 phase folders contain executed evidence, including failed, rejected,
 non-converged, partial, and inconclusive runs. Setup-only plans and scaffolds

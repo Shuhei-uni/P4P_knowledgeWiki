@@ -2,8 +2,8 @@
 
 ## Status
 
-**NOT RUN — planning draft only.**
-
-No result or convergence claim exists. This branch remains conditional on the
-earlier turbulence comparison and production-option evidence.
-
+| Item | Status |
+| --- | --- |
+| — | NOT RUN — planning draft only |
+|  | No result or convergence claim exists |
+| This branch | remains conditional on the earlier turbulence comparison and production-option evidence |

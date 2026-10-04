@@ -8,6 +8,11 @@ description: "Produce concise evidence-grounded technical reports from Project r
 Treat the report as a communication layer over `Project/`, not a second
 experiment log.
 
+When the requested output is an experiment record, follow the
+[experiment presentation contract](../../../Project/experiments/README.md#presentation):
+tables and figures with short figure interpretations. The report structure below
+applies to separately requested technical reports.
+
 If the user already gave scope, audience, and output format, proceed. Ask only
 for a materially missing choice that would change the report.
 

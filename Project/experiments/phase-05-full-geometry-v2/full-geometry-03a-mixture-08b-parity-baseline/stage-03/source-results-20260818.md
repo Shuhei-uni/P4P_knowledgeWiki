@@ -1,31 +1,29 @@
-> **Retired source:** Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/03a-stage3-results-20260818.md
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
+| Item | Record |
+| --- | --- |
+| Retired source | Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/03a-stage3-results-20260818.md |
 
 # 03A Stage 3 — F08/F10/F12 execution results
 
 ## Decision
 
-**Do not proceed with the Stage-3 queue on the basis of this run.** The saved
-F08 residual history shows frequent, large spikes in both turbulence transport
-residuals, `k` and `epsilon`. This is numerical instability evidence, not a
-successful staged convergence result.
-
-Later stages were **not run**. In particular, F08 did not progress through the
-40%, 80%, or 100% loading stages or the final-condition run. F10 and F12 did
-not complete their first carrier stage.
-
-This report records the user-directed stop decision and the available execution
-evidence. It does not promote any branch to a Stage-3 parent or final result.
+| Item | Decision |
+| --- | --- |
+| — | Do not proceed with the Stage-3 queue on the basis of this run |
+| saved F08 residual history | shows frequent, large spikes in both turbulence transport residuals, `k` and `epsilon` |
+| This | is numerical instability evidence, not a successful staged convergence result |
+| Later stages | were not run |
+| — | In particular, F08 did not progress through the 40%, 80%, or 100% loading stages or the final-condition run |
+|  | F10 and F12 did not complete their first carrier stage |
+| This report | records the user-directed stop decision and the available execution evidence |
+| — | It does not promote any branch to a Stage-3 parent or final result |
 
 ## Second fixed-block attempt — 2026-08-19
 
-A new attempt was started from the released immutable P0, independently for
-F08, F10, and F12. The revised controller used explicit native Fluent journals
-with `3000` iterations for each carrier/loading state and no reinitialization at
-transitions.
-
-The attempt reached the following confirmed states before the Fluent transport
-stream disappeared:
+| Item | Second fixed-block attempt — 2026-08-19 |
+| --- | --- |
+| A new attempt | was started from the released immutable P0, independently for F08, F10, and F12 |
+| revised controller | used explicit native Fluent journals with `3000` iterations for each carrier/loading state and no reinitialization at transitions |
+| — | The attempt reached the following confirmed states before the Fluent transport stream disappeared: |
 
 | Branch/state | Confirmed result |
 |---|---|
@@ -35,17 +33,18 @@ stream disappeared:
 | F10 | Not reached. |
 | F12 | Not reached. |
 
-The controller then lost access to Fluent server 1. Repeated reconnect attempts
-timed out at `10.104.145.170:54122`. This is classified as
-`TRANSPORT_BLOCKED`, not as an FPE or other hard numerical failure. The
-uncertain F08 20% block must not be silently repeated; recovery requires
-reconnecting to the same Fluent process and checking its actual iteration and
-latest autosave/checkpoint first.
+| Item | Second fixed-block attempt — 2026-08-19 |
+| --- | --- |
+| — | The controller then lost access to Fluent server 1 |
+|  | Repeated reconnect attempts timed out at `10.104.145.170:54122` |
+| This | is classified as `TRANSPORT_BLOCKED`, not as an FPE or other hard numerical failure |
+| — | The uncertain F08 20% block must not be silently repeated; recovery requires reconnecting to the same Fluent process and checking its actual iteration and latest autosave/checkpoint first |
 
 ## Setup and execution scope
 
-The queue retained its scientific case identities and branch-specific momentum
-under-relaxation values:
+| Item | Setup and execution scope |
+| --- | --- |
+| queue | retained its scientific case identities and branch-specific momentum under-relaxation values: |
 
 | Branch | Schedule/state | Momentum URF | Actual execution result |
 |---|---|---:|---|
@@ -53,33 +52,28 @@ under-relaxation values:
 | F10 | Schedule-D, independent carrier-first startup | `0.5` | P0/preinit and Hybrid Initialization artifacts were saved; the carrier-stage journal failed with Fluent error `#f` before a valid stage checkpoint and residual export were saved. |
 | F12 | Schedule-D, independent carrier-first startup | `0.3` | P0/preinit and Hybrid Initialization artifacts were saved; the carrier-stage journal failed with Fluent error `#f` before a valid stage checkpoint and residual export were saved. |
 
-The Fluent server/session was execution transport only; it was not used as a
-scientific case identity. The overnight run used the user-authorized fixed
-iteration journal override, so the adaptive `stage3-gate-v1` decision history
-was not completed for this run.
+| Item | Setup and execution scope |
+| --- | --- |
+| Fluent server/session | was execution transport only; it was not used as a scientific case identity |
+| overnight run | used the user-authorized fixed iteration journal override, so the adaptive `stage3-gate-v1` decision history was not completed for this run |
 
 ## Historical residual evidence
 
-The earlier combined display was retired because it mixed branch evidence and
-did not preserve the native iteration progression. The evidence is retained in
-this historical report; the evidence-qualified replacement is the
-[F08 sampled-residual figure](figures/03a-stage3/iteration-led/server1/F08/01-scaled-residuals-vs-iteration.png).
-
-The figure overlays the seven residual curves available in the saved F08
-export: continuity, the three momentum residuals, `k`, `epsilon`, and the
-phase-2 volume-fraction residual. The available history covers plotted samples
-from approximately iterations `3939–4898`.
-
-There are no F10 or F12 residual curves to add. Their carrier-stage journals
-failed before residual exports were written; the missing histories must not be
-interpreted as zero residuals or successful starts.
+| Item | Historical residual evidence |
+| --- | --- |
+| earlier combined display | was retired because it mixed branch evidence and did not preserve the native iteration progression |
+| evidence | is retained in this historical report; the evidence-qualified replacement is the [F08 sampled-residual figure](figures/03a-stage3/iteration-led/server1/F08/01-scaled-residuals-vs-iteration.png) |
+| — | The figure overlays the seven residual curves available in the saved F08 export: continuity, the three momentum residuals, `k`, `epsilon`, and the phase-2 volume-fraction residual |
+|  | The available history covers plotted samples from approximately iterations `3939–4898` |
+| There | are no F10 or F12 residual curves to add |
+| Their carrier-stage journals failed before residual exports | were written; the missing histories must not be interpreted as zero residuals or successful starts |
 
 ## Residual evidence
 
-The following statistics are calculated from the plotted samples in the first
-and final approximately 250-iteration portions of the saved F08 window. They
-are evidence for the stop decision, not a replacement for the exact adaptive
-gate history arrays.
+| Item | Residual evidence |
+| --- | --- |
+| following statistics | are calculated from the plotted samples in the first and final approximately 250-iteration portions of the saved F08 window |
+| They | are evidence for the stop decision, not a replacement for the exact adaptive gate history arrays |
 
 | Residual | First-window median | Final-window median | First-window P95 | Final-window P95 |
 |---|---:|---:|---:|---:|
@@ -91,12 +85,11 @@ gate history arrays.
 | `epsilon` | `1.41451e-2` | `7.10922e-2` | `2.36833e-1` | `1.24913` |
 | `vf-phase-2` | `3.13724e-3` | `1.52164e-3` | `3.18836e-3` | `1.79461e-3` |
 
-The momentum and volume-fraction residuals generally decrease, but that does
-not offset the turbulence behaviour. The `k` P95 increases by approximately
-`416%`, while the `epsilon` median increases by approximately `403%` and its
-P95 increases by approximately `427%`. The combined plot also shows repeated
-individual spikes, especially in `epsilon`, throughout the later part of the
-saved window.
+| Item | Residual evidence |
+| --- | --- |
+| — | The momentum and volume-fraction residuals generally decrease, but that does not offset the turbulence behaviour |
+|  | The `k` P95 increases by approximately `416%`, while the `epsilon` median increases by approximately `403%` and its P95 increases by approximately `427%` |
+| combined plot also | shows repeated individual spikes, especially in `epsilon`, throughout the later part of the saved window |
 
 ## Result classification
 
@@ -111,11 +104,11 @@ DECISION: DO NOT PROCEED
 
 ## Source artifacts
 
-- Overnight execution manifest (historical machine artifact path: `../../../../PyAnsys/output/03a_stage3/overnight/20260818T103253Z/overnight-events.jsonl`; not migrated)
-- Second fixed-block attempt manifest (historical machine artifact path: `../../../../PyAnsys/output/03a_stage3/overnight/20260819T061715Z/overnight-events.jsonl`; not migrated)
-- Combined residual data (historical machine artifact path: `../../../../PyAnsys/output/03a_stage3/residual-figures/03A-stage3-F08-F10-F12-scaled-residuals.json`; not migrated)
-- [Current iteration-led F08 evidence](figures/03a-stage3/iteration-led/server1/F08/01-scaled-residuals-vs-iteration.png)
-- [Stage-3 convergence sweep](setup-source.md)
-- Stage-3 shared parent and seed specification: the historical machine
-  specification is recoverable from Git history; this migrated record retains
-  the resulting setup and evidence context.
+| Item | Source artifacts |
+| --- | --- |
+| Overnight execution manifest (historical machine artifact path | `../../../../PyAnsys/output/03a_stage3/overnight/20260818T103253Z/overnight-events.jsonl`; not migrated) |
+| Second fixed-block attempt manifest (historical machine artifact path | `../../../../PyAnsys/output/03a_stage3/overnight/20260819T061715Z/overnight-events.jsonl`; not migrated) |
+| Combined residual data (historical machine artifact path | `../../../../PyAnsys/output/03a_stage3/residual-figures/03A-stage3-F08-F10-F12-scaled-residuals.json`; not migrated) |
+| — | [Current iteration-led F08 evidence](figures/03a-stage3/iteration-led/server1/F08/01-scaled-residuals-vs-iteration.png) |
+|  | [Stage-3 convergence sweep](setup-source.md) |
+| Stage-3 shared parent and seed specification | the historical machine specification is recoverable from Git history; this migrated record retains the resulting setup and evidence context |

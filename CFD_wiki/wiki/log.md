@@ -478,3 +478,16 @@
 - Assumptions: no source Jacobian, conserved run, physical drainage, or generic
   numerical cure inferred. A UDF degassing example is an analogy, not a verified
   expression-source implementation.
+
+## [2026-10-03] refactor | question-led-wiki-reuse
+
+- Updated `wiki/index.md`, `AGENTS.md`, the fine-mist/inlet evidence synthesis
+  pair and the efficiency/V&V synthesis pair. Added `tools/wiki.py` for read-only
+  ranked search and structural health checks. Updated the owning `cfd-wiki`
+  skill, invocation map and phase-loop experiment-design reference.
+- Reason: expose existing knowledge through everyday CFD questions, restore the
+  missing fine-mist catalog entry, connect related evidence in both directions
+  and make relevant wiki evidence part of experiment rationale.
+- Assumptions: no scientific values changed or reverified. The local `raw/` and
+  `guide/` folders are absent; source-extraction answers retain that verification
+  limitation. Structural health does not certify scientific consistency.

@@ -1,14 +1,39 @@
 # Phase 8 baseline lineage audit — 26.81 m/s F1 and F2
 
-**Audit date:** 2026-09-26. **Scope:** saved, freshly initialized Phase 8 F1/F2 case/data pairs and their recorded ancestry. This is a setup and comparison-readiness audit, not an assessment of a solved Phase 8 flow field. The live Fluent session had F2 loaded for a read-only state extraction; F1 is supported by its save/reopen receipt and the F2 builder's non-inlet state equality check. No case was edited during this audit.
+| Item | Phase 8 baseline lineage audit — 26.81 m/s F1 and F2 |
+| --- | --- |
+| Audit date | 2026-09-26 |
+|  | Scope: saved, freshly initialized Phase 8 F1/F2 case/data pairs and their recorded ancestry |
+|  | This is a setup and comparison-readiness audit, not an assessment of a solved Phase 8 flow field |
+|  | The live Fluent session had F2 loaded for a read-only state extraction; F1 is supported by its save/reopen receipt and the F2 builder's non-inlet state equality check |
+|  | No case was edited during this audit |
 
 ## Executive assessment
 
-1. **The F1/F2 controlled setup delta is real and narrow:** both use the same 60,964-cell Phase 7.2A partition, total phase feed, materials, closed bottom, inactive absorber, models and numerics. F1 puts both phases on both inlet faces in area proportion; F2 puts all liquid on `liquidinlet` and all vapor on `steaminlet`. Both save/reopen checks passed. This is a good *new* inlet-topology experiment once reports and carrier runs exist.
-2. **F1 is not the audited Purnanto single-face case.** It retains two geometrically separate faces, their distinct hydraulic diameters, the 60k Phase 7.2A partition and the later Coupled/Global Time Step scaffold. Historical Purnanto and 08b outcomes cannot be treated as mesh- or solver-matched comparators.
-3. **Neither base is a result:** no Phase 8 carrier iterations, Phase 8 reports, or seven-bin DPM injections are present. Fresh Hybrid data are initial conditions. The current files support setup comparison, not separation, mass-closure, or particle claims.
-4. **No active surface-tension model or value was lost during the F1/F2 split.** The live F2 Mixture state has no active `phase_interaction` or `liquid_surface_tension` branch; F1's earlier live audit found the same. `0.0411 N/m` belongs to the published/reference property record, not to the current solver settings. The Phase 7.1A baseline also did not prove an active surface-tension mechanism.
-5. **The report contract had a unit error, now corrected:** these are steady calculations with pseudo-time iteration. Inventory slope per iteration is a useful stationarity signal, but cannot be converted to physical `kg/s` storage or used in a physical dynamic closure equation. Physical storage rates require a transient calculation with known physical time steps.
+| Item | Executive assessment |
+| --- | --- |
+| The F1/F2 controlled setup delta is real and narrow | both use the same 60,964-cell Phase 7.2A partition, total phase feed, materials, closed bottom, inactive absorber, models and numerics |
+|  | F1 puts both phases on both inlet faces in area proportion; F2 puts all liquid on `liquidinlet` and all vapor on `steaminlet` |
+|  | Both save/reopen checks passed |
+|  | This is a good *new* inlet-topology experiment once reports and carrier runs exist |
+| F1 is not the audited Purnanto single-face case. | It retains two geometrically separate faces, their distinct hydraulic diameters, the 60k Phase 7.2A partition and the later Coupled/Global Time Step scaffold |
+
+<details>
+<summary>Supporting detail — Executive assessment</summary>
+
+| Item | Executive assessment |
+| --- | --- |
+| F1 is not the audited Purnanto single-face case. | Historical Purnanto and 08b outcomes cannot be treated as mesh- or solver-matched comparators |
+| Neither base is a result | no Phase 8 carrier iterations, Phase 8 reports, or seven-bin DPM injections are present |
+|  | Fresh Hybrid data are initial conditions |
+|  | The current files support setup comparison, not separation, mass-closure, or particle claims |
+| No active surface-tension model or value was lost during the F1/F2 split. | The live F2 Mixture state has no active `phase_interaction` or `liquid_surface_tension` branch; F1's earlier live audit found the same. `0.0411 N/m` belongs to the published/reference property record, not to the current solver settings |
+|  | The Phase 7.1A baseline also did not prove an active surface-tension mechanism |
+| The report contract had a unit error, now corrected | these are steady calculations with pseudo-time iteration |
+|  | Inventory slope per iteration is a useful stationarity signal, but cannot be converted to physical `kg/s` storage or used in a physical dynamic closure equation |
+|  | Physical storage rates require a transient calculation with known physical time steps |
+
+</details>
 
 ## Artifact identity and evidence levels
 
@@ -19,7 +44,11 @@
 | F2 | `F2-split-26p81-base.cas.h5` SHA-256 `a38ab50038551124b5e22ec501f94dbc03ca306cde0c601225c7d6967b4d63d5`; data SHA-256 `a3acc8e538f8b33937c65831d82f93d0f29074e039b99725308ea55d5d01e4e3`. |
 | Machine | `student`, Fluent 2025 R2 Student Edition. Mesh check passed; each pair reopened. [F1 receipt](../../../PyAnsys/output/phase8_f1_base_20260926.json), [F2 receipt](../../../PyAnsys/output/phase8_f2_base_20260926.json), [builders](../../../PyAnsys/scripts/setup/build_phase8_f1_from_p72a_e0.py) and [F2 builder](../../../PyAnsys/scripts/setup/build_phase8_f2_from_f1.py). |
 
-The source 08b case in the Phase 8 folder was not successfully imported: its 7.6-million-cell mesh exceeded Student Edition's cell limit. The F1 lineage is **Phase 7.2A E0 → F1 → F2**, not **08b → replacement mesh → F1**. Historical 08b settings below are comparisons from the repository record, not live readbacks of that inaccessible source file.
+| Item | Artifact identity and evidence levels |
+| --- | --- |
+| source 08b case in the Phase 8 folder | was not successfully imported: its 7.6-million-cell mesh exceeded Student Edition's cell limit |
+| F1 lineage | is Phase 7.2A E0 → F1 → F2, not 08b → replacement mesh → F1 |
+| Historical 08b settings below | are comparisons from the repository record, not live readbacks of that inaccessible source file |
 
 ## What changed across the recorded lineage
 
@@ -35,7 +64,10 @@ The source 08b case in the Phase 8 folder was not successfully imported: its 7.6
 
 ## Current saved setup: numerical and physical inventory
 
-The following F2 values were read from the live Fluent 2025 R2 settings tree on 2026-09-26; F1 shares the non-inlet state according to the F2 builder's equality test. The two case receipts directly verify the inlet commands and core model flags.
+| Item | Current saved setup: numerical and physical inventory |
+| --- | --- |
+| following F2 values | were read from the live Fluent 2025 R2 settings tree on 2026-09-26; F1 shares the non-inlet state according to the F2 builder's equality test |
+| — | The two case receipts directly verify the inlet commands and core model flags |
 
 | Setting | F1 and F2 saved state | Historical comparison / interpretation |
 | --- | --- | --- |
@@ -53,36 +85,99 @@ The following F2 values were read from the live Fluent 2025 R2 settings tree on 
 
 ### Inlet arithmetic and the exact F1/F2 contrast
 
-The read-back inlet areas are `0.0048899165 m²` (`liquidinlet`) and `0.51928608 m²` (`steaminlet`), totaling `0.5241759965 m²`; the liquid strip is **0.93288%** of the combined area. The reference mass-flow ratio 80.69:116.92 was scaled by **1.00016017** to give `26.81 m/s` from the saved densities and actual area: `80.70292372 kg/s` vapor and `116.93872650 kg/s` liquid. Therefore these are slightly different commanded flows from the historic 80.69/116.92 values, by `+0.012924` and `+0.018727 kg/s`, respectively.
+| Item | Inlet arithmetic and the exact F1/F2 contrast |
+| --- | --- |
+| read-back inlet areas | are `0.0048899165 m²` (`liquidinlet`) and `0.51928608 m²` (`steaminlet`), totaling `0.5241759965 m²`; the liquid strip is 0.93288% of the combined area |
+| reference mass-flow ratio 80.69:116.92 | was scaled by 1.00016017 to give `26.81 m/s` from the saved densities and actual area: `80.70292372 kg/s` vapor and `116.93872650 kg/s` liquid |
+| Therefore these | are slightly different commanded flows from the historic 80.69/116.92 values, by `+0.012924` and `+0.018727 kg/s`, respectively |
 
 | Face | F1 vapor / liquid command (kg/s) | F2 vapor / liquid command (kg/s) | Nominal face superficial speed from commands |
 | --- | ---: | ---: | ---: |
 | `liquidinlet` | `0.75285889 / 1.09089430` | `0 / 116.93872650` | F1 `26.81 m/s`; F2 `27.13795 m/s` liquid. |
 | `steaminlet` | `79.95006483 / 115.84783220` | `80.70292372 / 0` | F1 `26.81 m/s`; F2 `26.80691 m/s` vapor. |
 
-These are **command-derived superficial speeds**, not a measured developed-flow velocity field. F1's feed has the same phase fraction on each face, but its separate face geometry and turbulence diameters mean it is an approximation to one mixed physical inlet. F2's face speeds differ by about 1.23%; the common `26.81 m/s` label denotes the total volumetric feed divided by total inlet area, not identical speed on each split face. The F1/F2 builders establish that the four phase commands are the only saved Fluent-setting difference in F2, aside from each child's fresh initialized field; they do not establish equivalent developed solutions.
+| Item | Inlet arithmetic and the exact F1/F2 contrast |
+| --- | --- |
+| These | are command-derived superficial speeds, not a measured developed-flow velocity field |
+| — | F1's feed has the same phase fraction on each face, but its separate face geometry and turbulence diameters mean it is an approximation to one mixed physical inlet |
+|  | F2's face speeds differ by about 1.23%; the common `26.81 m/s` label denotes the total volumetric feed divided by total inlet area, not identical speed on each split face |
+| F1/F2 builders establish that the four phase commands | are the only saved Fluent-setting difference in F2, aside from each child's fresh initialized field; they do not establish equivalent developed solutions |
 
 ## Surface-tension provenance
 
-The [00a live setup audit](../phase-01-purnanto-baseline-and-inlet-exploration/purnanto-00a-live-setup-audit/setup.md) records the saved Mixture model but does not identify an active surface-tension setting. The [7.1A baseline record](../phase-07-1a-absorber-convergence/baseline-setup-record.md) explicitly says no active surface-tension branch was proven. The F1/F2 live audits find none. Thus the missing `0.0411 N/m` is a **lineage-wide unresolved model/property distinction**, not evidence that F1 dropped an active Purnanto case setting. A different historical full-geometry [03A stage-3 source setup](../phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/stage-03/setup-source.md) mentions `0.04041 N/m`; its model branch and actual activation should be verified before importing that value here. For later EWF, surface tension is a separate film-model property/switch and needs its own readback when F4 is defined. Do not assume one coefficient automatically activates a force in the current Mixture carrier.
+| Item | Surface-tension provenance |
+| --- | --- |
+| [00a live setup audit](../phase-01-purnanto-baseline-and-inlet-exploration/purnanto-00a-live-setup-audit/setup.md) | records the saved Mixture model but does not identify an active surface-tension setting |
+| [7.1A baseline record](../phase-07-1a-absorber-convergence/baseline-setup-record.md) explicitly says no active surface-tension branch | was proven |
+| — | The F1/F2 live audits find none |
+| Thus the missing `0.0411 N/m` | is a lineage-wide unresolved model/property distinction, not evidence that F1 dropped an active Purnanto case setting |
+| — | A different historical full-geometry [03A stage-3 source setup](../phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/stage-03/setup-source.md) mentions `0.04041 N/m`; its model branch and actual activation should be verified before importing that value here |
+| For later EWF, surface tension | is a separate film-model property/switch and needs its own readback when F4 is defined |
+| — | Do not assume one coefficient automatically activates a force in the current Mixture carrier |
 
 ## Comparison validity and measurement limits
 
-- **F1 versus F2 is the nearest valid comparison:** common saved topology, feeds, material properties, outlet, walls and numerical stack; differing inlet phase placement. It is a controlled *boundary representation* comparison. The unequal hydraulic diameters between inlet zones are present in both families, but they make F1's “one uniform inlet” description approximate. Preserve per-face reports to see whether that matters.
-- **F1/F2 versus 00a/08b is lineage context:** geometry/mesh resolution, cell partition, solver and some boundary turbulence inputs differ. Historical 08b `0.0821 kg/s` steam-outlet liquid is not a performance benchmark for the current initialized cases; 7.2A's ~24 kg/s is from a developed **absorber-on** state, not the closed-bottom Phase 8 bases.
-- **F1/F2 DPM cannot yet be compared:** no injections. With one-way diagnostic particles, nonzero Fluent injection weights remain a tracking representation; their absolute escaped mass cannot be added to the physical feed or directly compared with F3/F4's mass-carrying injection. Fate *fractions* require a common release footprint, PSD, tracking controls, wall fates and explicit incomplete fraction. The current `steaminlet` release face occupies ~99.07% of combined inlet area; this is a deliberate common footprint but not whole-inlet sampling in F1.
-- **Closed bottom demands a steady-state gate:** at a converged steady state with no source, total physical inlet mass must leave by the named outlet. The historical 08b imbalance was not an acceptable steady separator state. In a *steady* pseudo-time calculation, `dM/d(iteration)` can diagnose field drift but is **not** physical `dM/dt` in kg/s. The report contract should publish source-inclusive boundary imbalance in kg/s and separately plot inventory versus native iteration. A physical storage-aware balance, `inflow - outflow + sources - dM/dt`, is meaningful only for physical transient time or another explicitly justified time interpretation.
-- **F3/F4 allocation can be clean only with complete ledger:** `Eulerian liquid + injected DPM = fixed total liquid` at each speed/fraction; DPM-to-carrier transfer, particle fates and film exchanges must be counted once each. F3 differs from F2 in *both* mass allocation and coupling, so it does not isolate coupling alone. The optional 5% one-way allocated bridge is the control that can separate those effects if that scientific question becomes important.
+| Item | Comparison validity and measurement limits |
+| --- | --- |
+| F1 versus F2 is the nearest valid comparison | common saved topology, feeds, material properties, outlet, walls and numerical stack; differing inlet phase placement |
+|  | It is a controlled *boundary representation* comparison |
+|  | The unequal hydraulic diameters between inlet zones are present in both families, but they make F1's “one uniform inlet” description approximate |
+|  | Preserve per-face reports to see whether that matters |
+| F1/F2 versus 00a/08b is lineage context | geometry/mesh resolution, cell partition, solver and some boundary turbulence inputs differ |
+
+<details>
+<summary>Supporting detail — Comparison validity and measurement limits</summary>
+
+| Item | Comparison validity and measurement limits |
+| --- | --- |
+| F1/F2 versus 00a/08b is lineage context | Historical 08b `0.0821 kg/s` steam-outlet liquid is not a performance benchmark for the current initialized cases; 7.2A's ~24 kg/s is from a developed absorber-on state, not the closed-bottom Phase 8 bases |
+| F1/F2 DPM cannot yet be compared | no injections |
+|  | With one-way diagnostic particles, nonzero Fluent injection weights remain a tracking representation; their absolute escaped mass cannot be added to the physical feed or directly compared with F3/F4's mass-carrying injection |
+|  | Fate *fractions* require a common release footprint, PSD, tracking controls, wall fates and explicit incomplete fraction |
+|  | The current `steaminlet` release face occupies ~99.07% of combined inlet area; this is a deliberate common footprint but not whole-inlet sampling in F1 |
+| Closed bottom demands a steady-state gate | at a converged steady state with no source, total physical inlet mass must leave by the named outlet |
+|  | The historical 08b imbalance was not an acceptable steady separator state |
+|  | In a *steady* pseudo-time calculation, `dM/d(iteration)` can diagnose field drift but is not physical `dM/dt` in kg/s |
+|  | The report contract should publish source-inclusive boundary imbalance in kg/s and separately plot inventory versus native iteration |
+|  | A physical storage-aware balance, `inflow - outflow + sources - dM/dt`, is meaningful only for physical transient time or another explicitly justified time interpretation |
+| F3/F4 allocation can be clean only with complete ledger | `Eulerian liquid + injected DPM = fixed total liquid` at each speed/fraction; DPM-to-carrier transfer, particle fates and film exchanges must be counted once each |
+|  | F3 differs from F2 in *both* mass allocation and coupling, so it does not isolate coupling alone |
+|  | The optional 5% one-way allocated bridge is the control that can separate those effects if that scientific question becomes important |
+
+</details>
 
 ## Prioritized work before promoting these bases to run parents
 
-1. **Implement the corrected Phase 8 report definitions:** distinguish steady iteration drift from physical storage rate; install named Fluent report definitions with exact zone scopes, units, signs, cadence and file outputs. Include phase-resolved boundary flux, domain and lower-zone inventory, residuals and numerical events. Preserve the actual initialized pairs before any child changes.
-2. **Choose and record F1's inlet turbulence interpretation:** retain the two face-specific hydraulic diameters as the exact saved design, or create a clearly named F1 child that assigns one common mixed-inlet turbulence scale. This is a scientific design choice because it changes the meaning of “one inlet.” Either way, record both face-zone BCs rather than stating they are identical.
-3. **Pilot carrier development and acceptance on both families at 26.81 m/s:** use the same declared initialization and iteration/report protocol, with outlet flux balance, inventory stationarity, residual/event evidence and per-face realized flow. Do not accept a dry outlet alone. Then propagate verified controls to the other four speeds.
-4. **Build the DPM package only after carrier qualification:** create/read back the 09cV3 seven bins; verify particle material density versus the `881.2109 kg/m³` carrier-liquid material, injection release footprint, diagnostic parcel-weight convention, forces, wall fates and tracking completion. Name any departures from the 09cV3 prior.
-5. **Keep surface-tension status explicit:** retain “reference property `0.0411 N/m`; no active bulk Mixture force” in each manifest. If a different carrier model is scientifically selected, make it a separately named experiment and re-establish the F1/F2 control. For F4, wait for the finalized 7.2A film settings and verify the distinct EWF material coefficient and activation.
-6. **Verify mesh identity at the level needed for claims:** record the Phase 8 case mesh hash and face/zone inventory; if claiming the raw 60k mesh is identical, compare cell/face topology or mesh coordinates to `Separator-purnanto-60k.msh.h5`. The current evidence proves common F1/F2 partition, not raw-mesh identity.
+| Item | Prioritized work before promoting these bases to run parents |
+| --- | --- |
+| Implement the corrected Phase 8 report definitions | distinguish steady iteration drift from physical storage rate; install named Fluent report definitions with exact zone scopes, units, signs, cadence and file outputs |
+|  | Include phase-resolved boundary flux, domain and lower-zone inventory, residuals and numerical events |
+|  | Preserve the actual initialized pairs before any child changes |
+| Choose and record F1's inlet turbulence interpretation | retain the two face-specific hydraulic diameters as the exact saved design, or create a clearly named F1 child that assigns one common mixed-inlet turbulence scale |
+|  | This is a scientific design choice because it changes the meaning of “one inlet.” Either way, record both face-zone BCs rather than stating they are identical |
+
+<details>
+<summary>Supporting detail — Prioritized work before promoting these bases to run parents</summary>
+
+| Item | Prioritized work before promoting these bases to run parents |
+| --- | --- |
+| Pilot carrier development and acceptance on both families at 26.81 m/s | use the same declared initialization and iteration/report protocol, with outlet flux balance, inventory stationarity, residual/event evidence and per-face realized flow |
+|  | Do not accept a dry outlet alone |
+|  | Then propagate verified controls to the other four speeds |
+| Build the DPM package only after carrier qualification | create/read back the 09cV3 seven bins; verify particle material density versus the `881.2109 kg/m³` carrier-liquid material, injection release footprint, diagnostic parcel-weight convention, forces, wall fates and tracking completion |
+|  | Name any departures from the 09cV3 prior |
+| Keep surface-tension status explicit | retain “reference property `0.0411 N/m`; no active bulk Mixture force” in each manifest |
+|  | If a different carrier model is scientifically selected, make it a separately named experiment and re-establish the F1/F2 control |
+|  | For F4, wait for the finalized 7.2A film settings and verify the distinct EWF material coefficient and activation |
+| Verify mesh identity at the level needed for claims | record the Phase 8 case mesh hash and face/zone inventory; if claiming the raw 60k mesh is identical, compare cell/face topology or mesh coordinates to `Separator-purnanto-60k.msh.h5` |
+|  | The current evidence proves common F1/F2 partition, not raw-mesh identity |
+
+</details>
 
 ## Source and machine trail
 
-Primary local records: [Phase 8 contract](CONTEXT.md), [F1 setup/result](f1-one-inlet/setup.md), [F2 setup/result](f2-split-inlet/setup.md), [common report contract](report-contract.md), [00a audit](../phase-01-purnanto-baseline-and-inlet-exploration/purnanto-00a-live-setup-audit/setup.md), [08b setup/results](../phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/results.md), [09cV3 setup](../phase-03-dpm-carryover-and-coupling/purnanto-09cV3-fine-mist-psd/setup.md), [7.1A baseline](../phase-07-1a-absorber-convergence/baseline-setup-record.md), [7.2A context](../phase-07-2a-wall-liquid-routing/CONTEXT.md). Machine receipts and exact builder paths are listed above. Claims labelled “live readback” came from the currently loaded F2 settings tree; all historical result numbers are attributed to their respective records, not remeasured in Phase 8.
+| Item | Source and machine trail |
+| --- | --- |
+| Primary local records | [Phase 8 contract](CONTEXT.md), [F1 setup/result](f1-one-inlet/setup.md), [F2 setup/result](f2-split-inlet/setup.md), [common report contract](report-contract.md), [00a audit](../phase-01-purnanto-baseline-and-inlet-exploration/purnanto-00a-live-setup-audit/setup.md), [08b setup/results](../phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/results.md), [09cV3 setup](../phase-03-dpm-carryover-and-coupling/purnanto-09cV3-fine-mist-psd/setup.md), [7.1A baseline](../phase-07-1a-absorber-convergence/baseline-setup-record.md), [7.2A context](../phase-07-2a-wall-liquid-routing/CONTEXT.md) |
+|  | Machine receipts and exact builder paths are listed above |
+|  | Claims labelled “live readback” came from the currently loaded F2 settings tree; all historical result numbers are attributed to their respective records, not remeasured in Phase 8 |

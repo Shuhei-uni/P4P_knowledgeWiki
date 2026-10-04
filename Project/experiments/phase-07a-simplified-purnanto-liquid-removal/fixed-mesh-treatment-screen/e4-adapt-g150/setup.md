@@ -14,12 +14,10 @@
 
 ## Selection rationale and limits
 
-G=1.00 completed without saturation and ended with a positive inventory slope,
-while its final command remained below the 146.15 kg/s cap. The context rule
-therefore permits one higher-gain branch at G=1.50.
-
-Record every 50-iteration inventory/error/command/readback update, phase split,
-balance, residual, and artifact. High-gain cycling, saturation, numerical
-failure, or vapor-dominated routing rejects the branch. No adaptive-control,
-plant, or convergence claim is permitted.
-
+| Item | Selection rationale and limits |
+| --- | --- |
+| — | G=1.00 completed without saturation and ended with a positive inventory slope, while its final command remained below the 146.15 kg/s cap |
+|  | The context rule therefore permits one higher-gain branch at G=1.50 |
+|  | Record every 50-iteration inventory/error/command/readback update, phase split, balance, residual, and artifact |
+|  | High-gain cycling, saturation, numerical failure, or vapor-dominated routing rejects the branch |
+| No adaptive-control, plant, or convergence claim | is permitted |

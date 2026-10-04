@@ -1,27 +1,80 @@
 # E7 run paths
 
-**Completed E7:** `p7b-s40-t100-coupled-cfl20-nphase-live3227-resume-20260929T003603Z`, controller exited0 at02:46:30UTC on29 September. AbsoluteN5000, final segment1773 from3227. Job: `PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n2500-20260929/resume-n3227/job.yaml`. Terminal recording and historical-file-copy reconciliation are in that directory. G7 complete: `PyAnsys/output/phase07b-g7/completion-audit.json`. Final pair: `C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s40-t100-coupled-cfl20-nphase-live3227-resume-20260929T003603Z-final.cas.h5/.dat.h5`. Native comparison export restored this E7 final with no additional iterations. Never relaunch this or any retired E7 job.
+| Item | E7 run paths |
+| --- | --- |
+| Completed E7 | `p7b-s40-t100-coupled-cfl20-nphase-live3227-resume-20260929T003603Z`, controller exited0 at02:46:30UTC on29 September |
+|  | AbsoluteN5000, final segment1773 from3227 |
+|  | Job: `PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n2500-20260929/resume-n3227/job.yaml` |
+|  | Terminal recording and historical-file-copy reconciliation are in that directory |
+|  | G7 complete: `PyAnsys/output/phase07b-g7/completion-audit.json` |
 
-Retired N2500 replay: `p7b-s40-t100-coupled-cfl20-nphase-replay2500-20260928T220714Z`, PID74969. It savedN3000 and recorded residual/flux/speed throughN3226 before sleep-associated network loss. The controller exited; Fluent was not terminated. Initial read-only API reconciliation timed out, then a bounded retry connected atN3227. Report identity/settings confirmed ownership; interrupt and unregister/release of its sole pause1 returned idle3227 without advancement. A unique pair, exact geometry/settings and whole-cell snapshot were preserved. Native scalar/all-eight-residual histories cover1–3227; missing flux/speed3227 were recovered from unchanged fields with native persistence/readback, independent face reduction and scalar/full-cell parity. Original records remain immutable.
+<details>
+<summary>Supporting detail — E7 run paths</summary>
 
-Recovery evidence: `PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n2500-20260929/network-recovery-20260928T2320/`, including `preserve-n3227/receipt.json`, `preservation-n3227.json`, `n3227-prefix-audit.json` and `offline-verification.json`. Unique preserved pair: `C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s40-t100-coupled-cfl20-nphase-rpc-preserved-n03227-20260929T003603Z.cas.h5/.dat.h5`. Never relaunch the retired parent job.
+| Item | E7 run paths |
+| --- | --- |
+| Completed E7 | Final pair: `C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s40-t100-coupled-cfl20-nphase-live3227-resume-20260929T003603Z-final.cas.h5/.dat.h5` |
+|  | Native comparison export restored this E7 final with no additional iterations |
+|  | Never relaunch this or any retired E7 job |
+| Retired N2500 replay | `p7b-s40-t100-coupled-cfl20-nphase-replay2500-20260928T220714Z`, PID74969 |
+|  | It savedN3000 and recorded residual/flux/speed throughN3226 before sleep-associated network loss |
+|  | The controller exited; Fluent was not terminated |
+|  | Initial read-only API reconciliation timed out, then a bounded retry connected atN3227 |
+|  | Report identity/settings confirmed ownership; interrupt and unregister/release of its sole pause1 returned idle3227 without advancement |
+|  | A unique pair, exact geometry/settings and whole-cell snapshot were preserved |
+|  | Native scalar/all-eight-residual histories cover1–3227; missing flux/speed3227 were recovered from unchanged fields with native persistence/readback, independent face reduction and scalar/full-cell parity |
+|  | Original records remain immutable |
+| Recovery evidence | `PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n2500-20260929/network-recovery-20260928T2320/`, including `preserve-n3227/receipt.json`, `preservation-n3227.json`, `n3227-prefix-audit.json` and `offline-verification.json` |
+|  | Unique preserved pair: `C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s40-t100-coupled-cfl20-nphase-rpc-preserved-n03227-20260929T003603Z.cas.h5/.dat.h5` |
+|  | Never relaunch the retired parent job |
+| configured new session at `10.104.145.174:63084` | was empty when connectivity returned |
+| — | The original N2500 pair and a uniquely saved recovery pair both reopened with exact physical fields, ordered geometry, source assignments, controls and residual/report policies |
+| recovery pair | is `C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s40-t100-coupled-cfl20-nphase-replay2500-20260928T220714Z-recovery-n02500.cas.h5/.dat.h5` |
+| — | Receipts, immutable-prefix audit, recorder guard tests and terminal analysis plan are in `PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n2500-20260929/`. [Recovery design and compute bound](recovery-n2500.md) |
+| Retained trajectory | original N1–500, first replay N501–2500, then new replay N2501–5000 |
+|  | New steps2500; retained cap5000; prospectively declared cumulative attempted-compute ceiling6000 |
+|  | The retired native scalar tail reaches2743, residual/flux/speed2742; the unknown old endpoint is bounded by its issued N3000 target |
+|  | Those tails remain separate and are not spliced into the new continuation |
+|  | Report recording preserves a hash-checked N1–2500 prefix plus the raw native continuation segment; repeated boundary rows must match exactly |
+| Retired N2185 continuation | `p7b-s40-t100-coupled-cfl20-nphase-network-resume-20260928T042000Z`, PID51147 |
+|  | SavedN2500 before a clamshell-sleep transport loss |
+|  | Only the owned local Python client was retired; Fluent was not terminated |
+|  | Prior pause5 belonged to the retired session and was not released on the new session |
+|  | Historical interruption evidence: `PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n2185/sleep-recovery-20260928T0540/` |
+|  | The current checkpoint restoration supersedes that external block |
+| Retired N1631 continuation | `p7b-s40-t100-coupled-cfl20-nphase-awake-resume-20260928T032000Z`, PID47098 |
+|  | SavedN2000 and recorded through2184 before network/address loss; callback cleanup failed while the network was unreachable |
+|  | After Andy restored access, API reconciliation foundN2185 |
+|  | An interrupt and release of owned pause4 preserved idle2185 |
+|  | Evidence: `PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n1631/network-recovery-20260928T0408/` |
+|  | Never relaunch that retired job |
+| Retired N687 continuation | `p7b-s40-t100-coupled-cfl20-nphase-rpc-resume-20260928T014500Z`, PID40876 |
+|  | Saved N1000/N1500 and recorded through1630 before a transport timeout associated with clamshell sleep |
+|  | Its owned pending pause ID3 was released after an API end-of-iteration interrupt; unchanged idle1631 was recovered |
+|  | Evidence under `PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n687/transport-recovery-20260928T0305/` |
+|  | Never relaunch this retired job |
+| Retired N505 continuation | `p7b-s40-t100-coupled-cfl20-nphase-replay-resume-20260928T005800Z`, PID36509 |
+|  | Local Python client was retired after a recorder RPC stall; the sole owned pause was released through the API after an end-of-iteration interrupt |
+|  | Fluent was never terminated and no additional iteration was issued |
+|  | Raw partial histories and separate reconciliation receipts are preserved |
+|  | Never relaunch that job |
+| Retired first N500 replay | `p7b-s40-t100-coupled-cfl20-nphase-replay-20260928T010000Z`; job `PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/job.yaml` |
+|  | It stopped at the expected-path scalar check after N505, with no numerical failure |
+|  | Never relaunch it |
+|  | Its partial files and diagnostic proof are preserved |
+| Retired interrupted N0 recovery | `p7b-s40-t100-coupled-cfl20-nphase-resume-20260924T054531Z` |
+|  | Job `PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n0-retry1/job.yaml`; manifest `PyAnsys/output/p7b-s40-t100-coupled-cfl20-nphase-resume-20260924T054531Z/manifest.json` |
+|  | Reuses unchanged verified live N0, without reload or initialization |
+|  | Unique local-PC checkpoint/report paths use this recovery prefix |
+|  | Its controller exited after a transport failure; live solver progress is unknown |
+|  | It has now been reconciled as a retired partial attempt; never relaunch it |
+| Original build | `p7b-s40-t100-coupled-cfl20-nphase-20260924T053024Z`; job `PyAnsys/output/phase07b-convergence-investigation/e7/job.yaml` |
+|  | Preserved implementation failure at the diagnostic schema comparator before any solve |
+|  | Initial/prepared paired reopens passed |
+|  | Retired first N0 recovery `p7b-s40-t100-coupled-cfl20-nphase-resume-20260924T054356Z` stopped at report-path representation assertion without solve or mutation; read-only API confirmed idle N0 |
+|  | Never relaunch either job |
+| Fresh scientific parent | is original clean N0 |
+| E6 final | is the comparison control and was preserved before replacement |
+| — | Phase-state owns the active controller/disposition |
 
-The configured new session at `10.104.145.174:63084` was empty when connectivity returned. The original N2500 pair and a uniquely saved recovery pair both reopened with exact physical fields, ordered geometry, source assignments, controls and residual/report policies. The recovery pair is `C:/Users/qtra338/P4P/experiments/phase-07b-full-geometry-liquid-removal/case-data/p7b-s40-t100-coupled-cfl20-nphase-replay2500-20260928T220714Z-recovery-n02500.cas.h5/.dat.h5`. Receipts, immutable-prefix audit, recorder guard tests and terminal analysis plan are in `PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n2500-20260929/`. [Recovery design and compute bound](recovery-n2500.md).
-
-Retained trajectory: original N1–500, first replay N501–2500, then new replay N2501–5000. New steps2500; retained cap5000; prospectively declared cumulative attempted-compute ceiling6000. The retired native scalar tail reaches2743, residual/flux/speed2742; the unknown old endpoint is bounded by its issued N3000 target. Those tails remain separate and are not spliced into the new continuation. Report recording preserves a hash-checked N1–2500 prefix plus the raw native continuation segment; repeated boundary rows must match exactly.
-
-Retired N2185 continuation: `p7b-s40-t100-coupled-cfl20-nphase-network-resume-20260928T042000Z`, PID51147. SavedN2500 before a clamshell-sleep transport loss. Only the owned local Python client was retired; Fluent was not terminated. Prior pause5 belonged to the retired session and was not released on the new session. Historical interruption evidence: `PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n2185/sleep-recovery-20260928T0540/`. The current checkpoint restoration supersedes that external block.
-
-Retired N1631 continuation: `p7b-s40-t100-coupled-cfl20-nphase-awake-resume-20260928T032000Z`, PID47098. SavedN2000 and recorded through2184 before network/address loss; callback cleanup failed while the network was unreachable. After Andy restored access, API reconciliation foundN2185. An interrupt and release of owned pause4 preserved idle2185. Evidence: `PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n1631/network-recovery-20260928T0408/`. Never relaunch that retired job.
-
-Retired N687 continuation: `p7b-s40-t100-coupled-cfl20-nphase-rpc-resume-20260928T014500Z`, PID40876. Saved N1000/N1500 and recorded through1630 before a transport timeout associated with clamshell sleep. Its owned pending pause ID3 was released after an API end-of-iteration interrupt; unchanged idle1631 was recovered. Evidence under `PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/resume-n687/transport-recovery-20260928T0305/`. Never relaunch this retired job.
-
-Retired N505 continuation: `p7b-s40-t100-coupled-cfl20-nphase-replay-resume-20260928T005800Z`, PID36509. Local Python client was retired after a recorder RPC stall; the sole owned pause was released through the API after an end-of-iteration interrupt. Fluent was never terminated and no additional iteration was issued. Raw partial histories and separate reconciliation receipts are preserved. Never relaunch that job.
-
-Retired first N500 replay: `p7b-s40-t100-coupled-cfl20-nphase-replay-20260928T010000Z`; job `PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n500-20260928/job.yaml`. It stopped at the expected-path scalar check after N505, with no numerical failure. Never relaunch it. Its partial files and diagnostic proof are preserved.
-
-Retired interrupted N0 recovery: `p7b-s40-t100-coupled-cfl20-nphase-resume-20260924T054531Z`. Job `PyAnsys/output/phase07b-convergence-investigation/e7/recovery-n0-retry1/job.yaml`; manifest `PyAnsys/output/p7b-s40-t100-coupled-cfl20-nphase-resume-20260924T054531Z/manifest.json`. Reuses unchanged verified live N0, without reload or initialization. Unique local-PC checkpoint/report paths use this recovery prefix. Its controller exited after a transport failure; live solver progress is unknown. It has now been reconciled as a retired partial attempt; never relaunch it.
-
-Original build: `p7b-s40-t100-coupled-cfl20-nphase-20260924T053024Z`; job `PyAnsys/output/phase07b-convergence-investigation/e7/job.yaml`. Preserved implementation failure at the diagnostic schema comparator before any solve. Initial/prepared paired reopens passed. Retired first N0 recovery `p7b-s40-t100-coupled-cfl20-nphase-resume-20260924T054356Z` stopped at report-path representation assertion without solve or mutation; read-only API confirmed idle N0. Never relaunch either job.
-
-Fresh scientific parent is original clean N0. E6 final is the comparison control and was preserved before replacement. Phase-state owns the active controller/disposition.
+</details>

@@ -1,13 +1,16 @@
-> **Retired source:** Setups/reports/purnanto-reference/08b/results.md
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
+| Item | Record |
+| --- | --- |
+| Retired source | Setups/reports/purnanto-reference/08b/results.md |
 
 # Results Report — Setup 08b
 
 ## Setup link
 
-- Setup definition: [08b-purnanto-parity-split-inlet-rebuild.md](setup.md)
-- Additional raw phase result: [phase-flux-result.md](phase-flux-result.md)
-- Evidence basis: saved `5000`-iteration carrier field, phase flux, and active DPM sample
+| Item | Setup link |
+| --- | --- |
+| Setup definition | [08b-purnanto-parity-split-inlet-rebuild.md](setup.md) |
+| Additional raw phase result | [phase-flux-result.md](phase-flux-result.md) |
+| Evidence basis | saved `5000`-iteration carrier field, phase flux, and active DPM sample |
 
 ## 1. Flux-based result
 
@@ -21,11 +24,16 @@
 | Steam-outlet dryness | `99.89928175%` |
 | Whole-domain mixture imbalance ratio | `0.5873372754` |
 
-The efficiency is explicitly scoped to steam-line liquid carryover. The large whole-domain imbalance prevents treating it as full separator mass-balance validation.
+| Item | Flux-based result |
+| --- | --- |
+| efficiency | is explicitly scoped to steam-line liquid carryover |
+| — | The large whole-domain imbalance prevents treating it as full separator mass-balance validation |
 
 ## 2. DPM injection trajectory/fate result
 
-The active six-bin sample recorded:
+| DPM injection trajectory/fate result |
+| --- |
+| The active six-bin sample recorded: |
 
 | Quantity | Value |
 |---|---:|
@@ -35,12 +43,20 @@ The active six-bin sample recorded:
 | Incomplete | `13012` |
 | Escaped represented mass flow | `7.005e-04 kg/s` |
 
-The one-injection-at-a-time sample identified the completed escapes only in the `5.63 um` injection: `8 escaped`, `2162 incomplete`, and `0 trapped` out of `2170` tracks. The remaining sampled bins were fully incomplete.
+| Item | DPM injection trajectory/fate result |
+| --- | --- |
+| — | The one-injection-at-a-time sample identified the completed escapes only in the `5.63 um` injection: `8 escaped`, `2162 incomplete`, and `0 trapped` out of `2170` tracks |
+| remaining sampled bins | were fully incomplete |
 
 ## 3. Interpretation and limitations
 
-This is a split-inlet and steam-carryover screening result, not report-quality DPM efficiency evidence. The DPM result is dominated by incomplete trajectories, and the current active sample omits three larger recovered injection bins.
+| Item | Interpretation and limitations |
+| --- | --- |
+| This | is a split-inlet and steam-carryover screening result, not report-quality DPM efficiency evidence |
+| DPM result | is dominated by incomplete trajectories, and the current active sample omits three larger recovered injection bins |
 
 ## 4. Conclusion
 
-`Needs follow-up` — retain as the past reported parity-reset result and numerical parent evidence for later DPM branches.
+| Conclusion |
+| --- |
+| `Needs follow-up` — retain as the past reported parity-reset result and numerical parent evidence for later DPM branches |

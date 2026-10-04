@@ -1,13 +1,16 @@
-> **Retired source:** Setups/reports/purnanto-reference/09b/results.md
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
+| Item | Record |
+| --- | --- |
+| Retired source | Setups/reports/purnanto-reference/09b/results.md |
 
 # Results Report — Setup 09b
 
 ## Setup link
 
-- Setup definition: [09b-rsm-dpm-split-inlet-accuracy.md](setup.md)
-- Comparison parent: [09a/results.md](../purnanto-09a-dpm-deterministic-carryover/results.md)
-- Evidence basis: stochastic DPM fate tables
+| Item | Setup link |
+| --- | --- |
+| Setup definition | [09b-rsm-dpm-split-inlet-accuracy.md](setup.md) |
+| Comparison parent | [09a/results.md](../purnanto-09a-dpm-deterministic-carryover/results.md) |
+| Evidence basis | stochastic DPM fate tables |
 
 ## 1. DPM trajectory/fate results
 
@@ -23,11 +26,15 @@
 
 ## 2. Findings
 
-- Stochastic dispersion materially changes completed escape counts for the fine-droplet cases.
-- Random eddy lifetime reduces escape for both tested fine-droplet cases.
-- The `10 um` point escapes more than the `5.63 um` point in both stochastic settings.
-- The result is dominated by incomplete trajectories and should not be presented as a final physical grade-efficiency curve.
+| Item | Findings |
+| --- | --- |
+| — | Stochastic dispersion materially changes completed escape counts for the fine-droplet cases |
+|  | Random eddy lifetime reduces escape for both tested fine-droplet cases |
+|  | The `10 um` point escapes more than the `5.63 um` point in both stochastic settings |
+| result | is dominated by incomplete trajectories and should not be presented as a final physical grade-efficiency curve |
 
 ## 3. Conclusion
 
-`Needs follow-up` — retain as a stochastic DPM sensitivity report and carry dispersion and unresolved-fate uncertainty into later interpretation.
+| Conclusion |
+| --- |
+| `Needs follow-up` — retain as a stochastic DPM sensitivity report and carry dispersion and unresolved-fate uncertainty into later interpretation |

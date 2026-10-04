@@ -1,14 +1,33 @@
-> **Retired source:** Setups/reports/purnanto-reference/010V2d/results.md
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
+| Item | Record |
+| --- | --- |
+| Retired source | Setups/reports/purnanto-reference/010V2d/results.md |
 
 # Setup 010V2d — Combined EWF-interaction post-simulation results
 
 ## 1. Setup link and evidence
 
-- **Setup:** [010V2d — Combined EWF Interaction Confirmation](setup.md); comparison scope: the accepted isolated [010V2a splash](../purnanto-010V2a-ewf-splash/setup.md), [010V2b edge-separation](../purnanto-010V2b-ewf-edge-separation/setup.md), and [010V2c stripping](../purnanto-010V2c-ewf-particle-stripping/setup.md) branches.
-- **Evidence class:** `partial diagnostic`. Analysis used the case/data already loaded in Fluent and did not load, solve, or intentionally change case physics. The live session did not expose case/data filenames, so checkpoint identity remains unrecoverable from the generated artifacts.
-- **Session:** server ID `3`, Ansys Fluent `2024 R2`; captured 2026-07-22 UTC.
-- **Raw evidence:** EWF/DPM audit (historical machine artifact path: `../../../PyAnsys/output/ewf_dpm_diagnostics/010V2d-server3-20260722-audit`; not migrated), EWF final-state snapshot (historical machine artifact path: `../../../PyAnsys/output/ewf_dpm_diagnostics/010V2d-server3-20260722-snapshot`; not migrated), completed DPM sweep (historical machine artifact path: `../../../PyAnsys/output/ewf_dpm_diagnostics/010V2d-server3-20260722-dpm`; not migrated), carrier flux check (historical machine artifact path: `../../../PyAnsys/output/post_simulation_analysis/010V2d-server3-20260722-flux-check.json`; not migrated), and residual history (historical machine artifact path: `../../../PyAnsys/output/post_simulation_analysis/010V2d-server3-20260722-residual-check.json`; not migrated) (plot (historical machine artifact path: `../../../PyAnsys/output/post_simulation_analysis/010V2d-server3-20260722-residual-check.png`; not migrated)).
+| Item | Setup link and evidence |
+| --- | --- |
+| Setup | [010V2d — Combined EWF Interaction Confirmation](setup.md); comparison scope: the accepted isolated [010V2a splash](../purnanto-010V2a-ewf-splash/setup.md), [010V2b edge-separation](../purnanto-010V2b-ewf-edge-separation/setup.md), and [010V2c stripping](../purnanto-010V2c-ewf-particle-stripping/setup.md) branches |
+| Evidence class | `partial diagnostic` |
+|  | Analysis used the case/data already loaded in Fluent and did not load, solve, or intentionally change case physics |
+|  | The live session did not expose case/data filenames, so checkpoint identity remains unrecoverable from the generated artifacts |
+| Session | server ID `3`, Ansys Fluent `2024 R2`; captured 2026-07-22 UTC |
+
+<details>
+<summary>Supporting detail — Setup link and evidence</summary>
+
+| Item | Setup link and evidence |
+| --- | --- |
+| Raw evidence | EWF/DPM audit (historical machine artifact path: `../../../PyAnsys/output/ewf_dpm_diagnostics/010V2d-server3-20260722-audit` |
+|  | not migrated), EWF final-state snapshot (historical machine artifact path: `../../../PyAnsys/output/ewf_dpm_diagnostics/010V2d-server3-20260722-snapshot` |
+|  | not migrated), completed DPM sweep (historical machine artifact path: `../../../PyAnsys/output/ewf_dpm_diagnostics/010V2d-server3-20260722-dpm` |
+|  | not migrated), carrier flux check (historical machine artifact path: `../../../PyAnsys/output/post_simulation_analysis/010V2d-server3-20260722-flux-check.json` |
+|  | not migrated), and residual history (historical machine artifact path: `../../../PyAnsys/output/post_simulation_analysis/010V2d-server3-20260722-residual-check.json` |
+|  | not migrated) (plot (historical machine artifact path: `../../../PyAnsys/output/post_simulation_analysis/010V2d-server3-20260722-residual-check.png` |
+|  | not migrated)) |
+
+</details>
 
 ## 2. Analysis applicability
 
@@ -22,17 +41,30 @@
 | Edge separation | active at wall / partially measured | `wall` permits film-boundary separation; the 348.88 µm transcript prints a separation event count, but no represented separated mass. |
 | Particle stripping | active(user-confirmation)     | The top-level EWF readback is unavailable and no `Film Stripped Mass` result is established. |
 
-The audit also confirms global DPM interaction `Off`, unsteady tracking `Off`, and maximum DPM steps `10000`, matching the intended inherited controls. The model adapter cannot read `models.eulerian_wall_film`; this limitation is not evidence that any unavailable root-level mechanism is disabled.
+| Item | Analysis applicability |
+| --- | --- |
+| — | The audit also confirms global DPM interaction `Off`, unsteady tracking `Off`, and maximum DPM steps `10000`, matching the intended inherited controls |
+| model adapter cannot read `models.eulerian_wall_film`; this limitation | is not evidence that any unavailable root-level mechanism is disabled |
 
 ## 3. Carrier-field and numerical state
 
-The residual export spans iterations 4–1520. Its final scaled values are continuity `1.827e-3`, x/y/z velocity `3.197e-5` / `3.037e-5` / `3.533e-5`, k `4.295e-2`, epsilon `1.181e-1`, and phase-2 volume fraction `1.372e-3`. No acceptance threshold or monitor flatness criterion was supplied; these records do not establish convergence.
-
-The phase-flux extractor identified `liquidinlet`, `steaminlet`, and `steamoutlet`; its phase mapping is phase-1 vapor and phase-2 liquid. It reports 111.074 kg/s liquid inlet and 80.690 kg/s vapor inlet, while the selected steam outlet carries 81.421242 kg/s vapor and 0 kg/s liquid. The resulting selected-surface imbalance is 110.342758 kg/s (57.54% of the 191.764 kg/s inlet total). This is a scope/closure limitation, not a full separator result; the apparent phase efficiency and steam-outlet dryness of 1.0 are not interpretable as separator performance.
+| Item | Carrier-field and numerical state |
+| --- | --- |
+| — | The residual export spans iterations 4–1520 |
+| Its final scaled values | are continuity `1.827e-3`, x/y/z velocity `3.197e-5` / `3.037e-5` / `3.533e-5`, k `4.295e-2`, epsilon `1.181e-1`, and phase-2 volume fraction `1.372e-3` |
+| No acceptance threshold or monitor flatness criterion | was supplied; these records do not establish convergence |
+| — | The phase-flux extractor identified `liquidinlet`, `steaminlet`, and `steamoutlet`; its phase mapping is phase-1 vapor and phase-2 liquid |
+|  | It reports 111.074 kg/s liquid inlet and 80.690 kg/s vapor inlet, while the selected steam outlet carries 81.421242 kg/s vapor and 0 kg/s liquid |
+| resulting selected-surface imbalance | is 110.342758 kg/s (57.54% of the 191.764 kg/s inlet total) |
+| This | is a scope/closure limitation, not a full separator result; the apparent phase efficiency and steam-outlet dryness of 1.0 are not interpretable as separator performance |
 
 ## 4. DPM results
 
-Every injection produced a `number tracked` line, a Mass Transfer Summary with parsed rows, a raw transcript, and a quiet completion interval of about 1 s. Flows below are terminal fate flows in kg/s. EWF event counters are separate interaction diagnostics and are not added again to mass closure.
+| Item | DPM results |
+| --- | --- |
+| — | Every injection produced a `number tracked` line, a Mass Transfer Summary with parsed rows, a raw transcript, and a quiet completion interval of about 1 s |
+| Flows below | are terminal fate flows in kg/s |
+| EWF event counters | are separate interaction diagnostics and are not added again to mass closure |
 
 | Diameter (µm) | Injection | Net flow | Escaped | Trapped | Incomplete | Final absorbed | EWF absorbed events | Splash events | Closure residual |
 |---:|---|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -43,11 +75,19 @@ Every injection produced a `number tracked` line, a Mass Transfer Summary with p
 | 168.81 | `water-liquid-at-psep-168um` | 0.390100 | 0.189700 | 4.495e-3 | 0 | 0.196000 | 1090 | not printed | -9.500e-5 |
 | 348.88 | `water-liquid-at-psep-348um` | 4.693000 | 1.004000 | 8.838e-2 | 0 | 3.601000 | 1706 | 20 | -3.800e-4 |
 
-Escaped particles terminate at `steamoutlet`; trapped particles terminate at `bottom`. The largest relative terminal-flow residual is 2.44e-4 (168.81 µm), consistent with printed report precision. The 348.88 µm transcript separately reports `separated = 120`; this is an event/parcel count, not represented mass, and is not a second terminal mass sink. It also reports 1706 EWF absorbed events but 1701 final absorbed particles, so both counters are retained rather than reconciled artificially.
+| Item | DPM results |
+| --- | --- |
+| — | Escaped particles terminate at `steamoutlet`; trapped particles terminate at `bottom` |
+| largest relative terminal-flow residual | is 2.44e-4 (168.81 µm), consistent with printed report precision |
+| 348.88 µm transcript separately reports `separated = 120`; this | is an event/parcel count, not represented mass, and is not a second terminal mass sink |
+| — | It also reports 1706 EWF absorbed events but 1701 final absorbed particles, so both counters are retained rather than reconciled artificially |
 
 ## 5. EWF final-state results
 
-Confirmed final-state film-wall scope: `wall`. These are single-checkpoint measurements, not time-integrated terms.
+| Item | EWF final-state results |
+| --- | --- |
+| Confirmed final-state film-wall scope | `wall` |
+|  | These are single-checkpoint measurements, not time-integrated terms |
 
 | Quantity | Reduction / scope | Value | Unit | Interpretation limit |
 |---|---|---:|---|---|
@@ -65,23 +105,60 @@ Confirmed final-state film-wall scope: `wall`. These are single-checkpoint measu
 
 ## 6. EWF history and bookkeeping
 
-**Status: bookkeeping-only.** A single final data state cannot close the film balance. Missing terms are the initial inventory, time-integrated DPM-to-film source, film inflow/outflow, stripping/separation where active, and an explicit residual over a defined interval. Do not combine the 0.0566845 kg inventory directly with a kg/s boundary flux.
+| Item | EWF history and bookkeeping |
+| --- | --- |
+| Status: bookkeeping-only. | A single final data state cannot close the film balance |
+|  | Missing terms are the initial inventory, time-integrated DPM-to-film source, film inflow/outflow, stripping/separation where active, and an explicit residual over a defined interval |
+|  | Do not combine the 0.0566845 kg inventory directly with a kg/s boundary flux |
 
 ## 7. Interpretation, limitations, and next action
 
-- **Measured:** a finite film inventory and low final film CFL are present on `wall`; all six DPM injections have completed fate records. DPM behavior shifts from steam-outlet escape at the fine end to final absorption at larger diameters. The largest class has direct splash and separation event evidence.
-- **Derived:** terminal mass-flow rows close within printed precision. The component-derived area-weighted film speed is 0.0533223 m/s.
-- **Unresolved:** carrier selected-surface closure, case/data filenames, represented splash/separation mass, `Film DPM Mass Source`, `Film Stripped Mass`, time-integrated EWF closure, and top-level EWF mechanism readback. None is treated as zero.
+| Item | Interpretation, limitations, and next action |
+| --- | --- |
+| Measured | a finite film inventory and low final film CFL are present on `wall`; all six DPM injections have completed fate records |
+|  | DPM behavior shifts from steam-outlet escape at the fine end to final absorption at larger diameters |
+|  | The largest class has direct splash and separation event evidence |
+| Derived | terminal mass-flow rows close within printed precision |
+|  | The component-derived area-weighted film speed is 0.0533223 m/s |
 
-**Conclusion — needs follow-up.** Retain `010V2d` as an active diagnostic branch. Before a defined continuation interval, create EWF history files for inventory, DPM source, outflow, CFL, stripping, and separation; then repeat the snapshot with compatible Fluent field tokens and complete carrier outlet coverage. The current result does not support a separator-performance or fully reconciled combined-mechanism claim.
+<details>
+<summary>Supporting detail — Interpretation, limitations, and next action</summary>
+
+| Item | Interpretation, limitations, and next action |
+| --- | --- |
+| Unresolved | carrier selected-surface closure, case/data filenames, represented splash/separation mass, `Film DPM Mass Source`, `Film Stripped Mass`, time-integrated EWF closure, and top-level EWF mechanism readback |
+|  | None is treated as zero |
+| Conclusion — needs follow-up. | Retain `010V2d` as an active diagnostic branch |
+|  | Before a defined continuation interval, create EWF history files for inventory, DPM source, outflow, CFL, stripping, and separation; then repeat the snapshot with compatible Fluent field tokens and complete carrier outlet coverage |
+|  | The current result does not support a separator-performance or fully reconciled combined-mechanism claim |
+
+</details>
 
 ## 8. Results at 5,000 iterations
 
 ### 8.1 Evidence and applicability
 
-- **Checkpoint:** the case/data already loaded on Fluent server ID `1`; Ansys Fluent `2024 R2`; captured 2026-07-23 UTC after the user-confirmed 5,000th iteration. The live session did not expose case/data filenames, so their identity remains unrecoverable from these artifacts.
-- **Evidence class:** `partial diagnostic`. The analysis did not load a case/data pair, run iterations, or intentionally change physics. Snapshot mode reused only the namespaced `ewfdiag-*` report definitions.
-- **Raw evidence:** audit (historical machine artifact path: `../../../PyAnsys/output/ewf_dpm_diagnostics/010V2d-server1-20260723-5000-audit`; not migrated), EWF final-state snapshot (historical machine artifact path: `../../../PyAnsys/output/ewf_dpm_diagnostics/010V2d-server1-20260723-5000-snapshot`; not migrated), completed six-injection DPM sweep (historical machine artifact path: `../../../PyAnsys/output/ewf_dpm_diagnostics/010V2d-server1-20260723-5000-dpm`; not migrated), carrier flux check (historical machine artifact path: `../../../PyAnsys/output/post_simulation_analysis/010V2d-server1-20260723-5000-flux-check.json`; not migrated), and residual history (historical machine artifact path: `../../../PyAnsys/output/post_simulation_analysis/010V2d-server1-20260723-5000-residual-check.json`; not migrated) (plot (historical machine artifact path: `../../../PyAnsys/output/post_simulation_analysis/010V2d-server1-20260723-5000-residual-check.png`; not migrated)).
+| Item | 1 Evidence and applicability |
+| --- | --- |
+| Checkpoint | the case/data already loaded on Fluent server ID `1`; Ansys Fluent `2024 R2`; captured 2026-07-23 UTC after the user-confirmed 5,000th iteration |
+|  | The live session did not expose case/data filenames, so their identity remains unrecoverable from these artifacts |
+| Evidence class | `partial diagnostic` |
+|  | The analysis did not load a case/data pair, run iterations, or intentionally change physics |
+|  | Snapshot mode reused only the namespaced `ewfdiag-*` report definitions |
+
+<details>
+<summary>Supporting detail — 1 Evidence and applicability</summary>
+
+| Item | 1 Evidence and applicability |
+| --- | --- |
+| Raw evidence | audit (historical machine artifact path: `../../../PyAnsys/output/ewf_dpm_diagnostics/010V2d-server1-20260723-5000-audit` |
+|  | not migrated), EWF final-state snapshot (historical machine artifact path: `../../../PyAnsys/output/ewf_dpm_diagnostics/010V2d-server1-20260723-5000-snapshot` |
+|  | not migrated), completed six-injection DPM sweep (historical machine artifact path: `../../../PyAnsys/output/ewf_dpm_diagnostics/010V2d-server1-20260723-5000-dpm` |
+|  | not migrated), carrier flux check (historical machine artifact path: `../../../PyAnsys/output/post_simulation_analysis/010V2d-server1-20260723-5000-flux-check.json` |
+|  | not migrated), and residual history (historical machine artifact path: `../../../PyAnsys/output/post_simulation_analysis/010V2d-server1-20260723-5000-residual-check.json` |
+|  | not migrated) (plot (historical machine artifact path: `../../../PyAnsys/output/post_simulation_analysis/010V2d-server1-20260723-5000-residual-check.png` |
+
+</details>
 
 | Analysis | Status | Evidence / reason |
 |---|---|---|
@@ -92,17 +169,31 @@ Confirmed final-state film-wall scope: `wall`. These are single-checkpoint measu
 | Splash and separation | active at `wall` / measured | The wall readback has Stanton–Rutland splash and film-boundary separation enabled; DPM transcripts contain splash events for 112.54 µm and above, and separation events for 348.88 µm. |
 | Particle stripping | partially measured | The 348.88 µm DPM transcript reports 11 stripped events. The unavailable top-level EWF readback prevents a root-level mechanism assertion or an extracted stripped mass. |
 
-The audit also reads global DPM interaction `Off`, unsteady tracking `Off`, and maximum DPM steps `10000`. These match the intended inherited controls. The unavailable `models.eulerian_wall_film` Settings-API path is an adapter limitation, not evidence that EWF is disabled.
+| Item | 1 Evidence and applicability |
+| --- | --- |
+| — | The audit also reads global DPM interaction `Off`, unsteady tracking `Off`, and maximum DPM steps `10000` |
+|  | These match the intended inherited controls |
+| unavailable `models.eulerian_wall_film` Settings-API path | is an adapter limitation, not evidence that EWF is disabled |
 
 ### 8.2 Carrier-field and numerical state at iteration 5,000
 
-The residual history contains 1,000 retained points, ending at iteration 5000. Final scaled residuals are continuity `8.209e-3`, x/y/z velocity `1.123e-4` / `1.157e-4` / `1.275e-4`, k `1.133e-1`, epsilon `2.358e-1`, and phase-2 volume fraction `1.401e-3`. No acceptance threshold or monitor-flatness criterion was supplied; this evidence does **not** establish convergence.
-
-The phase mapping remains the live-extractor fallback of phase-1 = vapor and phase-2 = liquid. The selected surfaces report 111.074 kg/s liquid inlet and 80.690 kg/s vapor inlet; `steamoutlet` carries 81.422408 kg/s vapor and 0 kg/s liquid. The selected-surface imbalance is 110.341592 kg/s (57.54% of the 191.764 kg/s inlet total). Therefore, the apparent steam-outlet dryness and phase efficiency of 1.0 remain scoped diagnostics, not separator-performance results.
+| Item | 2 Carrier-field and numerical state at iteration 5,000 |
+| --- | --- |
+| residual history contains 1,000 | retained points, ending at iteration 5000 |
+| Final scaled residuals | are continuity `8.209e-3`, x/y/z velocity `1.123e-4` / `1.157e-4` / `1.275e-4`, k `1.133e-1`, epsilon `2.358e-1`, and phase-2 volume fraction `1.401e-3` |
+| No acceptance threshold or monitor-flatness criterion | was supplied; this evidence does not establish convergence |
+| phase mapping | remains the live-extractor fallback of phase-1 = vapor and phase-2 = liquid |
+| — | The selected surfaces report 111.074 kg/s liquid inlet and 80.690 kg/s vapor inlet; `steamoutlet` carries 81.422408 kg/s vapor and 0 kg/s liquid |
+| selected-surface imbalance | is 110.341592 kg/s (57.54% of the 191.764 kg/s inlet total) |
+| — | Therefore, the apparent steam-outlet dryness and phase efficiency of 1.0 remain scoped diagnostics, not separator-performance results |
 
 ### 8.3 DPM results at iteration 5,000
 
-Each row has a complete `number tracked` line, mass-transfer section, parsed mass-transfer rows, a quiet interval of at least 1.0 s, and an individual raw transcript. Flows are terminal fate flows in kg/s. EWF event counters are separate interaction diagnostics and are not added a second time to terminal mass closure.
+| Item | 3 DPM results at iteration 5,000 |
+| --- | --- |
+| — | Each row has a complete `number tracked` line, mass-transfer section, parsed mass-transfer rows, a quiet interval of at least 1.0 s, and an individual raw transcript |
+| Flows | are terminal fate flows in kg/s |
+| EWF event counters | are separate interaction diagnostics and are not added a second time to terminal mass closure |
 
 | Diameter (µm) | Injection | Net flow | Escaped | Trapped | Incomplete | Final absorbed | EWF absorbed events | Splash events | Other events | Closure residual |
 |---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -113,11 +204,19 @@ Each row has a complete `number tracked` line, mass-transfer section, parsed mas
 | 168.81 | `water-liquid-at-psep-168um` | 0.395200 | 0.136900 | 1.205e-2 | 0 | 0.246300 | 1427 | 152 | — | -5.000e-5 |
 | 348.88 | `water-liquid-at-psep-348um` | 4.781000 | 0.316600 | 0.154100 | 4.269e-11 | 4.310000 | 2194 | 256 | stripped 11; separated 179 | 3.000e-4 |
 
-Escaped particles terminate at `steamoutlet`, and trapped particles at `bottom`. The largest relative closure residual is `3.68e-4` (28.14 µm), consistent with the printed mass-flow precision. The highest diameter class has 2,194 EWF absorbed events but 2,130 final absorbed particles; those different counters are retained separately. Its 256 splash, 11 stripping, and 179 separation events are not extra terminal mass sinks because their represented parcels can subsequently reach a final fate.
+| Item | 3 DPM results at iteration 5,000 |
+| --- | --- |
+| — | Escaped particles terminate at `steamoutlet`, and trapped particles at `bottom` |
+| largest relative closure residual | is `3.68e-4` (28.14 µm), consistent with the printed mass-flow precision |
+| — | The highest diameter class has 2,194 EWF absorbed events but 2,130 final absorbed particles; those different counters are retained separately |
+| Its 256 splash, 11 stripping, and 179 separation events | are not extra terminal mass sinks because their represented parcels can subsequently reach a final fate |
 
 ### 8.4 EWF final-state results at iteration 5,000
 
-Confirmed final-state film-wall scope: `wall`. Values below are one-checkpoint measurements, not time-integrated terms.
+| Item | 4 EWF final-state results at iteration 5,000 |
+| --- | --- |
+| Confirmed final-state film-wall scope | `wall` |
+|  | Values below are one-checkpoint measurements, not time-integrated terms |
 
 | Quantity | Reduction / scope | Value | Unit | Interpretation limit |
 |---|---|---:|---|---|
@@ -135,21 +234,51 @@ Confirmed final-state film-wall scope: `wall`. Values below are one-checkpoint m
 
 ### 8.5 EWF bookkeeping, interpretation, and limitation at iteration 5,000
 
-**Status: bookkeeping-only.** The final data state cannot close the EWF balance. Missing terms are initial inventory, time-integrated DPM-to-film source, film inflow/outflow, stripping and separation where active, and an explicit residual over a defined interval. The 0.20221152 kg inventory must not be combined directly with the kg/s boundary flux.
+| Item | 5 EWF bookkeeping, interpretation, and limitation at iteration 5,000 |
+| --- | --- |
+| Status: bookkeeping-only. | The final data state cannot close the EWF balance |
+|  | Missing terms are initial inventory, time-integrated DPM-to-film source, film inflow/outflow, stripping and separation where active, and an explicit residual over a defined interval |
+|  | The 0.20221152 kg inventory must not be combined directly with the kg/s boundary flux |
+| Measured | the 5,000-iteration state has a finite wall-film inventory, low final CFL, and complete DPM fate records for all six injections |
+|  | DPM behavior remains increasingly absorption-dominated as diameter increases; splash begins to be printed at 112.54 µm, while the 348.88 µm class also has stripping and separation events |
 
-- **Measured:** the 5,000-iteration state has a finite wall-film inventory, low final CFL, and complete DPM fate records for all six injections. DPM behavior remains increasingly absorption-dominated as diameter increases; splash begins to be printed at 112.54 µm, while the 348.88 µm class also has stripping and separation events.
-- **Derived:** all six terminal fate-flow rows close within printed precision. The component-derived area-weighted film speed is 0.13310442 m/s.
-- **Unresolved:** full carrier outlet coverage, case/data filenames, represented splash/separation/stripping mass, Film DPM Mass Source, time-integrated EWF closure, and root-level EWF mechanism readback. None is treated as zero.
+<details>
+<summary>Supporting detail — 5 EWF bookkeeping, interpretation, and limitation at iteration 5,000</summary>
 
-**Conclusion — diagnostic only.** The additional iterations changed the final-state film inventory and DPM-fate distribution materially, but higher final residuals and the open selected-surface carrier balance prevent a convergence or separator-performance conclusion.
+| Item | 5 EWF bookkeeping, interpretation, and limitation at iteration 5,000 |
+| --- | --- |
+| Derived | all six terminal fate-flow rows close within printed precision |
+|  | The component-derived area-weighted film speed is 0.13310442 m/s |
+| Unresolved | full carrier outlet coverage, case/data filenames, represented splash/separation/stripping mass, Film DPM Mass Source, time-integrated EWF closure, and root-level EWF mechanism readback |
+| Conclusion — diagnostic only. | The additional iterations changed the final-state film inventory and DPM-fate distribution materially, but higher final residuals and the open selected-surface carrier balance prevent a convergence or separator-performance conclusion |
+
+</details>
 
 ## 9. Results at 10,000 iterations
 
 ### 9.1 Evidence and applicability
 
-- **Checkpoint:** the case/data already loaded on Fluent server ID `1`; Ansys Fluent `2024 R2`; captured 2026-07-24 UTC after the user-confirmed 10,000th iteration. The live session did not expose case/data filenames, so their identity remains unrecoverable from the generated artifacts.
-- **Evidence class:** `partial diagnostic`. Analysis did not load a case/data pair, run iterations, or intentionally change physics. Snapshot mode reused only the namespaced `ewfdiag-*` report definitions.
-- **Raw evidence:** audit (historical machine artifact path: `../../../PyAnsys/output/ewf_dpm_diagnostics/010V2d-server1-20260724-10000-audit`; not migrated), EWF final-state snapshot (historical machine artifact path: `../../../PyAnsys/output/ewf_dpm_diagnostics/010V2d-server1-20260724-10000-snapshot`; not migrated), completed six-injection DPM sweep (historical machine artifact path: `../../../PyAnsys/output/ewf_dpm_diagnostics/010V2d-server1-20260724-10000-dpm`; not migrated), carrier flux check (historical machine artifact path: `../../../PyAnsys/output/post_simulation_analysis/010V2d-server1-20260724-10000-flux-check.json`; not migrated), and residual history (historical machine artifact path: `../../../PyAnsys/output/post_simulation_analysis/010V2d-server1-20260724-10000-residual-check.json`; not migrated) (plot (historical machine artifact path: `../../../PyAnsys/output/post_simulation_analysis/010V2d-server1-20260724-10000-residual-check.png`; not migrated)).
+| Item | 1 Evidence and applicability |
+| --- | --- |
+| Checkpoint | the case/data already loaded on Fluent server ID `1`; Ansys Fluent `2024 R2`; captured 2026-07-24 UTC after the user-confirmed 10,000th iteration |
+|  | The live session did not expose case/data filenames, so their identity remains unrecoverable from the generated artifacts |
+| Evidence class | `partial diagnostic` |
+|  | Analysis did not load a case/data pair, run iterations, or intentionally change physics |
+|  | Snapshot mode reused only the namespaced `ewfdiag-*` report definitions |
+
+<details>
+<summary>Supporting detail — 1 Evidence and applicability</summary>
+
+| Item | 1 Evidence and applicability |
+| --- | --- |
+| Raw evidence | audit (historical machine artifact path: `../../../PyAnsys/output/ewf_dpm_diagnostics/010V2d-server1-20260724-10000-audit` |
+|  | not migrated), EWF final-state snapshot (historical machine artifact path: `../../../PyAnsys/output/ewf_dpm_diagnostics/010V2d-server1-20260724-10000-snapshot` |
+|  | not migrated), completed six-injection DPM sweep (historical machine artifact path: `../../../PyAnsys/output/ewf_dpm_diagnostics/010V2d-server1-20260724-10000-dpm` |
+|  | not migrated), carrier flux check (historical machine artifact path: `../../../PyAnsys/output/post_simulation_analysis/010V2d-server1-20260724-10000-flux-check.json` |
+|  | not migrated), and residual history (historical machine artifact path: `../../../PyAnsys/output/post_simulation_analysis/010V2d-server1-20260724-10000-residual-check.json` |
+|  | not migrated) (plot (historical machine artifact path: `../../../PyAnsys/output/post_simulation_analysis/010V2d-server1-20260724-10000-residual-check.png` |
+
+</details>
 
 | Analysis | Status | Evidence / reason |
 |---|---|---|
@@ -160,17 +289,28 @@ Confirmed final-state film-wall scope: `wall`. Values below are one-checkpoint m
 | Splash and separation | active at `wall` / measured | The wall readback has Stanton–Rutland splash and film-boundary separation enabled. DPM transcripts print splash from 56.27 µm upward and separation for 348.88 µm. |
 | Particle stripping | partially measured | The 348.88 µm DPM transcript reports 1,722 stripped events. Root-level EWF readback and stripped mass extraction remain unavailable. |
 
-The audit again reads global DPM interaction `Off`, unsteady tracking `Off`, and maximum DPM steps `10000`, matching the inherited controls. The unavailable `models.eulerian_wall_film` Settings-API path is an adapter limitation, not evidence that EWF is disabled.
+| Item | 1 Evidence and applicability |
+| --- | --- |
+| — | The audit again reads global DPM interaction `Off`, unsteady tracking `Off`, and maximum DPM steps `10000`, matching the inherited controls |
+| unavailable `models.eulerian_wall_film` Settings-API path | is an adapter limitation, not evidence that EWF is disabled |
 
 ### 9.2 Carrier-field and numerical state at iteration 10,000
 
-The residual export has 1,000 retained points over iterations 5012–10000. Final scaled residuals are continuity `2.315e-2`, x/y/z velocity `1.761e-4` / `1.829e-4` / `1.976e-4`, k `8.363e-3`, epsilon `1.485e-2`, and phase-2 volume fraction `1.345e-3`. No acceptance threshold or monitor-flatness criterion was supplied; these records do **not** establish convergence.
-
-The phase mapping remains the live-extractor fallback of phase-1 = vapor and phase-2 = liquid. The selected surfaces report 111.074 kg/s liquid inlet and 80.690 kg/s vapor inlet; `steamoutlet` carries 81.415962 kg/s vapor and effectively zero liquid. The selected-surface imbalance is 110.348038 kg/s (57.54% of the 191.764 kg/s inlet total). The apparent steam-outlet dryness and phase efficiency of 1.0 remain scoped diagnostics, not separator-performance results.
+| Item | 2 Carrier-field and numerical state at iteration 10,000 |
+| --- | --- |
+| residual export has 1,000 | retained points over iterations 5012–10000 |
+| Final scaled residuals | are continuity `2.315e-2`, x/y/z velocity `1.761e-4` / `1.829e-4` / `1.976e-4`, k `8.363e-3`, epsilon `1.485e-2`, and phase-2 volume fraction `1.345e-3` |
+| No acceptance threshold or monitor-flatness criterion | was supplied; these records do not establish convergence |
+| phase mapping | remains the live-extractor fallback of phase-1 = vapor and phase-2 = liquid |
+| — | The selected surfaces report 111.074 kg/s liquid inlet and 80.690 kg/s vapor inlet; `steamoutlet` carries 81.415962 kg/s vapor and effectively zero liquid |
+| selected-surface imbalance | is 110.348038 kg/s (57.54% of the 191.764 kg/s inlet total) |
+| apparent steam-outlet dryness and phase efficiency of 1.0 | remain scoped diagnostics, not separator-performance results |
 
 ### 9.3 DPM results at iteration 10,000
 
-Each row has a complete `number tracked` line, mass-transfer section, parsed mass-transfer rows, a quiet interval of about 1.0 s, and an individual raw transcript. Flows are terminal fate flows in kg/s. EWF event counters are separate interaction diagnostics and are not added a second time to terminal mass closure.
+| 3 DPM results at iteration 10,000 |
+| --- |
+| Each row has a complete `number tracked` line, mass-transfer section, parsed mass-transfer rows, a quiet interval of about 1.0 s, and an individual raw transcript |
 
 | Diameter (µm) | Injection | Net flow | Escaped | Trapped | Incomplete | Final absorbed | EWF absorbed events | Splash events | Other events | Closure residual |
 |---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -181,11 +321,18 @@ Each row has a complete `number tracked` line, mass-transfer section, parsed mas
 | 168.81 | `water-liquid-at-psep-168um` | 0.416200 | 5.691e-2 | 9.708e-3 | 0 | 0.349500 | 2896 | 976 | — | 8.200e-5 |
 | 348.88 | `water-liquid-at-psep-348um` | 6.095000 | 0.188100 | 0.101300 | 7.278e-4 | 5.805000 | 6676 | 3724 | stripped 1722; separated 228 | -1.278e-4 |
 
-Escaped particles terminate at `steamoutlet`, and trapped particles at `bottom`. The largest relative closure residual is `1.97e-4` (168.81 µm), within the printed mass-flow precision. The 348.88 µm transcript has 6,676 EWF absorbed events but 5,745 final absorbed particles; these are distinct counters and are retained separately. Its splash, stripping, and separation counts are not extra terminal mass sinks because generated parcels can subsequently reach a final fate.
+| Item | 3 DPM results at iteration 10,000 |
+| --- | --- |
+| — | Escaped particles terminate at `steamoutlet`, and trapped particles at `bottom` |
+| largest relative closure residual | is `1.97e-4` (168.81 µm), within the printed mass-flow precision |
+| — | The 348.88 µm transcript has 6,676 EWF absorbed events but 5,745 final absorbed particles; these are distinct counters and are retained separately |
+| Its splash, stripping, and separation counts | are not extra terminal mass sinks because generated parcels can subsequently reach a final fate |
 
 ### 9.4 EWF final-state results at iteration 10,000
 
-Confirmed final-state film-wall scope: `wall`. Values below are one-checkpoint measurements, not time-integrated terms.
+| Item | 4 EWF final-state results at iteration 10,000 |
+| --- | --- |
+| Confirmed final-state film-wall scope | `wall` |
 
 | Quantity | Reduction / scope | Value | Unit | Interpretation limit |
 |---|---|---:|---|---|
@@ -203,17 +350,23 @@ Confirmed final-state film-wall scope: `wall`. Values below are one-checkpoint m
 
 ### 9.5 EWF bookkeeping, interpretation, and limitation at iteration 10,000
 
-**Status: bookkeeping-only.** The final data state cannot close the EWF balance. Missing terms are initial inventory, time-integrated DPM-to-film source, film inflow/outflow, stripping and separation where active, and an explicit residual over a defined interval. The 0.28838471 kg inventory must not be combined directly with the kg/s boundary flux.
-
-- **Measured:** the wall-film inventory, thickness, and component-derived speed are larger than at 5,000 iterations. DPM final absorption has increased and steam-outlet escape decreased across every reported size class. The 348.88 µm class has markedly more splash and stripping events.
-- **Derived:** all six terminal fate-flow rows close within printed precision. The component-derived area-weighted film speed is 0.18341724 m/s.
-- **Unresolved:** full carrier outlet coverage, case/data filenames, represented splash/separation/stripping mass, Film DPM Mass Source, time-integrated EWF closure, and root-level EWF mechanism readback. None is treated as zero.
-
-**Conclusion — diagnostic only.** The final-state inventory continues to grow, while the maximum film CFL is now above 1 and the selected-surface carrier balance remains open. Do not use this checkpoint to claim convergence, EWF mass closure, or separator performance.
+| Item | 5 EWF bookkeeping, interpretation, and limitation at iteration 10,000 |
+| --- | --- |
+| Status: bookkeeping-only. | The 0.28838471 kg inventory must not be combined directly with the kg/s boundary flux |
+| Measured | the wall-film inventory, thickness, and component-derived speed are larger than at 5,000 iterations |
+|  | DPM final absorption has increased and steam-outlet escape decreased across every reported size class |
+|  | The 348.88 µm class has markedly more splash and stripping events |
+| Derived | The component-derived area-weighted film speed is 0.18341724 m/s |
+| Conclusion — diagnostic only. | The final-state inventory continues to grow, while the maximum film CFL is now above 1 and the selected-surface carrier balance remains open |
+|  | Do not use this checkpoint to claim convergence, EWF mass closure, or separator performance |
 
 ## 10. Comparison: previous checkpoint vs. 5,000 vs. 10,000 iterations
 
-The initial record above is the 2026-07-22 server-3 checkpoint whose residual export ended at iteration 1520. The latter two checkpoints were captured from server 1. This is a same-setup diagnostic comparison, but it is not a formal controlled convergence study: the live sessions expose no case/data filenames, DPM track summaries are recomputed at each checkpoint, and final-state-only EWF values do not supply a time-integrated balance.
+| Item | Comparison: previous checkpoint vs. 5,000 vs. 10,000 iterations |
+| --- | --- |
+| initial record above | is the 2026-07-22 server-3 checkpoint whose residual export ended at iteration 1520 |
+| latter two checkpoints | were captured from server 1 |
+| This | is a same-setup diagnostic comparison, but it is not a formal controlled convergence study: the live sessions expose no case/data filenames, DPM track summaries are recomputed at each checkpoint, and final-state-only EWF values do not supply a time-integrated balance |
 
 | Carrier / numerical indicator | Previous (through 1520) | At 5000 | At 10000 | 5000 → 10000 |
 |---|---:|---:|---:|---:|
@@ -224,7 +377,10 @@ The initial record above is the 2026-07-22 server-3 checkpoint whose residual ex
 | steam-outlet vapor flow | 81.421242 kg/s | 81.422408 kg/s | 81.415962 kg/s | -0.006446 kg/s |
 | selected-surface imbalance | 110.342758 kg/s | 110.341592 kg/s | 110.348038 kg/s | +0.006446 kg/s; still 57.54% of inlet |
 
-Selected-surface fluxes remain effectively unchanged at the printed scale, while continuity and all velocity residuals increased further between 5,000 and 10,000 iterations. k and epsilon decreased during that same interval. Without a supplied residual acceptance criterion or a demonstrated flatness window, this mixed behavior does not establish numerical convergence.
+| Item | Comparison: previous checkpoint vs. 5,000 vs. 10,000 iterations |
+| --- | --- |
+| Selected-surface fluxes | remain effectively unchanged at the printed scale, while continuity and all velocity residuals increased further between 5,000 and 10,000 iterations. k and epsilon decreased during that same interval |
+| — | Without a supplied residual acceptance criterion or a demonstrated flatness window, this mixed behavior does not establish numerical convergence |
 
 | EWF final-state quantity on `wall` | Previous | At 5000 | At 10000 | 5000 → 10000 |
 |---|---:|---:|---:|---:|
@@ -235,7 +391,11 @@ Selected-surface fluxes remain effectively unchanged at the printed scale, while
 | Derived area-weighted film speed | 5.33223e-2 m/s | 1.3310442e-1 m/s | 1.8341724e-1 m/s | +37.8% |
 | Boundary-film-flow net | 0 kg/s | 0 kg/s | 0 kg/s | unchanged at printed precision |
 
-The film inventory and thickness continue to grow at 10,000 iterations. Unlike the preceding checkpoints, the maximum Film CFL is now 3.03, so it should be examined before treating the later film state as numerically reliable. All three snapshots remain final-state observations only; none establishes accumulation rate or closure.
+| Item | Comparison: previous checkpoint vs. 5,000 vs. 10,000 iterations |
+| --- | --- |
+| — | The film inventory and thickness continue to grow at 10,000 iterations |
+| Unlike the preceding checkpoints, the maximum Film CFL | is now 3.03, so it should be examined before treating the later film state as numerically reliable |
+| All three snapshots | remain final-state observations only; none establishes accumulation rate or closure |
 
 | Diameter (µm) | Final absorbed: previous → 5000 → 10000 (kg/s) | Escaped: previous → 5000 → 10000 (kg/s) | Interaction-event change at 10000 | Comparison note |
 |---:|---:|---:|---|---|
@@ -246,4 +406,9 @@ The film inventory and thickness continue to grow at 10,000 iterations. Unlike t
 | 168.81 | 0.196000 → 0.246300 → 0.349500 | 0.189700 → 0.136900 → 5.691e-2 | absorbed 1427 → 2896; splash 152 → 976 | Greater final absorption, sharply lower escape. |
 | 348.88 | 3.601000 → 4.310000 → 5.805000 | 1.004000 → 0.316600 → 0.188100 | absorbed 1706 → 6676; splash 256 → 3724; stripping 11 → 1722; separation 179 → 228 | Coarsest class is increasingly absorption-dominated; secondary-interaction activity rises strongly. |
 
-**Comparison interpretation:** from 5,000 to 10,000 iterations, every tracked diameter class has greater final absorption and lower steam-outlet escape. The most pronounced changes occur in the 28.14–348.88 µm classes. Event counts are interaction diagnostics, not additional mass sinks, and changed summary net flows or track counts must not be interpreted as a physical source without a controlled re-run and history-based mass balance. The elevated 10,000-iteration Film CFL and unresolved carrier/EWF closures remain the limiting evidence gaps.
+| Item | Comparison: previous checkpoint vs. 5,000 vs. 10,000 iterations |
+| --- | --- |
+| Comparison interpretation | from 5,000 to 10,000 iterations, every tracked diameter class has greater final absorption and lower steam-outlet escape |
+|  | The most pronounced changes occur in the 28.14–348.88 µm classes |
+|  | Event counts are interaction diagnostics, not additional mass sinks, and changed summary net flows or track counts must not be interpreted as a physical source without a controlled re-run and history-based mass balance |
+|  | The elevated 10,000-iteration Film CFL and unresolved carrier/EWF closures remain the limiting evidence gaps |

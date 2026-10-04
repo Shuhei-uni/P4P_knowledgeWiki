@@ -1,20 +1,25 @@
-> **Retired source:** Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/03a-08b-stage2-N1-results.md
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
+| Item | Record |
+| --- | --- |
+| Retired source | Setups/reports/full-geometry/mixture/steady-liquid-outlet/03a/03a-08b-stage2-N1-results.md |
 
 # 03A Stage 2 — N1 results
 
 ## Screening role
 
-N1 tests whether the Stage-1 turbulence instability can be damped by reducing only the turbulence-equation under-relaxation factors:
+| Screening role |
+| --- |
+| N1 tests whether the Stage-1 turbulence instability can be damped by reducing only the turbulence-equation under-relaxation factors: |
 
 ```text
 k URF       = 0.8 → 0.5
 epsilon URF = 0.8 → 0.5
 ```
 
-The remaining audited numerical stack was retained, including RNG `k-epsilon`, second-order momentum, second-order `k`, second-order `epsilon`, QUICK volume fraction, PRESTO! pressure, and the Stage-1 physical setup.
-
-This branch was continued independently from the immutable Stage-1 iteration-1,000 case/data pair. It was not reinitialized and no liquid patch was applied.
+| Item | Screening role |
+| --- | --- |
+| remaining audited numerical stack | was retained, including RNG `k-epsilon`, second-order momentum, second-order `k`, second-order `epsilon`, QUICK volume fraction, PRESTO! pressure, and the Stage-1 physical setup |
+| This branch | was continued independently from the immutable Stage-1 iteration-1,000 case/data pair |
+| It | was not reinitialized and no liquid patch was applied |
 
 ## Execution and evidence
 
@@ -23,22 +28,29 @@ This branch was continued independently from the immutable Stage-1 iteration-1,0
 | Initial screen | +300, ending at Fluent iteration 1300 | Case/data pair present | `RUN_COMPLETED_ENDPOINT_VERIFIED` | initial journal (historical machine artifact path: `../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/03A-S2-N1-from-i1000-plus300-20260817T125355Z.jou`; not migrated), initial residual history (historical machine artifact path: `../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/post_simulation_analysis/N1-initial-screen-residual-check.json`; not migrated) |
 | Extension | +700, ending at Fluent iteration 2000 | Case/data pair present | `RUN_COMPLETED_ENDPOINT_VERIFIED` | extension journal (historical machine artifact path: `../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/03A-S2-N1-from-initial-screen-plus700-20260817T132736Z.jou`; not migrated), extension summary (historical machine artifact path: `../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N1/N1-summary.json`; not migrated) |
 
-The extension endpoint is the paired remote case/data stem:
+| Item | Execution and evidence |
+| --- | --- |
+| extension endpoint | is the paired remote case/data stem: |
 
 ```text
 03A-S2-N1-from-initial-screen-plus700-20260817T132736Z.cas.h5
 03A-S2-N1-from-initial-screen-plus700-20260817T132736Z.dat.h5
 ```
 
-No Fluent numerical exception or transport failure was recorded for the N1 extension.
+| Item | Execution and evidence |
+| --- | --- |
+| No Fluent numerical exception or transport failure | was recorded for the N1 extension |
 
 ## Scaled residual history
 
 ![N1 full recorded scaled residual history](figures/branches/N1/N1-full-scaled-residuals.png)
 
-[Open the N1 full scaled-residual figure](figures/branches/N1/N1-full-scaled-residuals.png)
-
-The plot uses the direct Fluent scaled-residual monitor values. The histories were stitched using the recorded native iteration coordinates. Retained monitor points from earlier phases were not treated as new iterations, and no missing intervals were interpolated.
+| Item | Scaled residual history |
+| --- | --- |
+| — | [Open the N1 full scaled-residual figure](figures/branches/N1/N1-full-scaled-residuals.png) |
+| plot | uses the direct Fluent scaled-residual monitor values |
+| histories | were stitched using the recorded native iteration coordinates |
+| Retained monitor points from earlier phases | were not treated as new iterations, and no missing intervals were interpolated |
 
 ### Final 100-iteration statistics at the +700 endpoint
 
@@ -52,11 +64,17 @@ The plot uses the direct Fluent scaled-residual monitor values. The histories we
 | epsilon | 9.0165e-2 | 1.0647e-1 | 1.9110e+0 | 1.3876e-2 | 6.7422e+2 |
 | vf-phase-2 | 1.1220e-2 | 1.0831e-2 | 1.2993e-2 | 7.9172e-3 | 1.3249e-2 |
 
-The final continuation does not show a bounded improvement in the principal stability indicators. Continuity rises from approximately `0.1816` at the beginning of the +700 window to `0.3766` at its endpoint, while the final-window median is approximately twice the Stage-1 endpoint value of `0.1604`. The turbulence residuals remain intermittent, with a large `epsilon` excursion still present in the continuation history.
+| Item | Final 100-iteration statistics at the +700 endpoint |
+| --- | --- |
+| — | The final continuation does not show a bounded improvement in the principal stability indicators |
+|  | Continuity rises from approximately `0.1816` at the beginning of the +700 window to `0.3766` at its endpoint, while the final-window median is approximately twice the Stage-1 endpoint value of `0.1604` |
+| turbulence residuals | remain intermittent, with a large `epsilon` excursion still present in the continuation history |
 
 ## Flux and conservation evidence
 
-The following values use the same diagnostic all-discovered-pressure-outlet balance definition used by the Stage-1 workflow.
+| Flux and conservation evidence |
+| --- |
+| The following values use the same diagnostic all-discovered-pressure-outlet balance definition used by the Stage-1 workflow |
 
 | State | Liquid to steam outlet (kg/s) | Vapour to steam outlet (kg/s) | Total liquid outlet (kg/s) | Total vapour outlet (kg/s) | Mass imbalance (kg/s) | Mass imbalance |
 |---|---:|---:|---:|---:|---:|---:|
@@ -64,7 +82,9 @@ The following values use the same diagnostic all-discovered-pressure-outlet bala
 | N1 after +300 | 0.9789 | 44.9079 | 78.8248 | 81.7275 | 37.9339 | 19.11% |
 | N1 after +700 | 4.1123 | 46.8978 | 167.0988 | 81.3223 | 49.9348 | 25.16% |
 
-At the +700 endpoint, the reported carrier metrics are:
+| Flux and conservation evidence |
+| --- |
+| At the +700 endpoint, the reported carrier metrics are: |
 
 ```text
 liquid inlet       = 116.8468 kg/s
@@ -77,13 +97,19 @@ eta_phase          =   0.9648
 x_out              =   0.9194
 ```
 
-The mass imbalance increases during the N1 continuation rather than moving below the Stage-1 reference. The phase-routing indicators also change materially: liquid flow to the steam outlet increases from `0.1425 kg/s` at Stage 1 to `4.1123 kg/s` at the N1 +700 endpoint, while the diagnostic outlet vapour quality decreases from `0.9968` to `0.9194`.
-
-The endpoint flux evidence is in N1 extension flux-check.json (historical machine artifact path: `../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/post_simulation_analysis/N1-extension-700-flux-check.json`; not migrated).
+| Item | Flux and conservation evidence |
+| --- | --- |
+| — | The mass imbalance increases during the N1 continuation rather than moving below the Stage-1 reference |
+|  | The phase-routing indicators also change materially: liquid flow to the steam outlet increases from `0.1425 kg/s` at Stage 1 to `4.1123 kg/s` at the N1 +700 endpoint, while the diagnostic outlet vapour quality decreases from `0.9968` to `0.9194` |
+| endpoint flux evidence | is in N1 extension flux-check.json (historical machine artifact path: `../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/post_simulation_analysis/N1-extension-700-flux-check.json`; not migrated) |
 
 ## Liquid inventory evidence
 
-The N1 monitor-history artifact contains residual history, but the flux and inventory monitor sets have zero recorded points. Therefore this branch has no reliable temporal liquid-inventory history to plot. The N1 result is assessed using endpoint fluxes and conservation diagnostics only; no inventory trend is inferred.
+| Item | Liquid inventory evidence |
+| --- | --- |
+| — | The N1 monitor-history artifact contains residual history, but the flux and inventory monitor sets have zero recorded points |
+|  | Therefore this branch has no reliable temporal liquid-inventory history to plot |
+| N1 result | is assessed using endpoint fluxes and conservation diagnostics only; no inventory trend is inferred |
 
 ## Screening assessment
 
@@ -96,17 +122,21 @@ The N1 monitor-history artifact contains residual history, but the flux and inve
 
 ### Classification
 
-`N1 — REJECT for the canonical-return screen; retain as a documented damping attempt.`
-
-This classification is a Stage-2 screening result, not a claim that the N1 endpoint is numerically invalid in every sense. It means that, relative to the Stage-1 parent and the other planned stabilization routes, the N1 +700 continuation does not presently demonstrate the bounded residual and improved-conservation behaviour required to justify a canonical-return run.
+| Item | Classification |
+| --- | --- |
+| — | `N1 — REJECT for the canonical-return screen; retain as a documented damping attempt.` |
+| This classification | is a Stage-2 screening result, not a claim that the N1 endpoint is numerically invalid in every sense |
+| — | It means that, relative to the Stage-1 parent and the other planned stabilization routes, the N1 +700 continuation does not presently demonstrate the bounded residual and improved-conservation behaviour required to justify a canonical-return run |
 
 ## Source artifacts
 
-- N1 branch summary JSON (historical machine artifact path: `../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N1/N1-summary.json`; not migrated)
-- [N1 full scaled-residual figure](figures/branches/N1/N1-full-scaled-residuals.png)
-- N1 initial residual history (historical machine artifact path: `../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/post_simulation_analysis/N1-initial-screen-residual-check.json`; not migrated)
-- N1 extension residual history (historical machine artifact path: `../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/post_simulation_analysis/N1-extension-700-residual-check.json`; not migrated)
-- N1 extension monitor history (historical machine artifact path: `../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/post_simulation_analysis/N1-extension-700-monitor-history.json`; not migrated)
-- N1 extension flux evidence (historical machine artifact path: `../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/post_simulation_analysis/N1-extension-700-flux-check.json`; not migrated)
-- Stage-1 reference residual history (historical machine artifact path: `../../../../PyAnsys/output/post_simulation_analysis/03a_08b_parity_full_geometry_iter1000_20260817T110345Z-residual-check.json`; not migrated)
-- Stage-1 reference flux evidence (historical machine artifact path: `../../../../PyAnsys/output/post_simulation_analysis/03a_08b_parity_full_geometry_iter1000_20260817T110345Z-flux-check.json`; not migrated)
+| Item | Source artifacts |
+| --- | --- |
+| N1 branch summary JSON (historical machine artifact path | `../../../../PyAnsys/output/03a_stage2/20260817T132736Z/report/N1/N1-summary.json`; not migrated) |
+| — | [N1 full scaled-residual figure](figures/branches/N1/N1-full-scaled-residuals.png) |
+| N1 initial residual history (historical machine artifact path | `../../../../PyAnsys/output/03a_stage2/20260817T125355Z/run/post_simulation_analysis/N1-initial-screen-residual-check.json`; not migrated) |
+| N1 extension residual history (historical machine artifact path | `../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/post_simulation_analysis/N1-extension-700-residual-check.json`; not migrated) |
+| N1 extension monitor history (historical machine artifact path | `../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/post_simulation_analysis/N1-extension-700-monitor-history.json`; not migrated) |
+| N1 extension flux evidence (historical machine artifact path | `../../../../PyAnsys/output/03a_stage2/20260817T132736Z/extension-700/post_simulation_analysis/N1-extension-700-flux-check.json`; not migrated) |
+| Stage-1 reference residual history (historical machine artifact path | `../../../../PyAnsys/output/post_simulation_analysis/03a_08b_parity_full_geometry_iter1000_20260817T110345Z-residual-check.json`; not migrated) |
+| Stage-1 reference flux evidence (historical machine artifact path | `../../../../PyAnsys/output/post_simulation_analysis/03a_08b_parity_full_geometry_iter1000_20260817T110345Z-flux-check.json`; not migrated) |

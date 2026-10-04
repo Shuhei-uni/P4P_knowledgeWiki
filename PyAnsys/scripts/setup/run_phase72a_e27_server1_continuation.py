@@ -79,11 +79,11 @@ def native_iteration(solver: Any) -> int:
     return int(round(value))
 
 
-def validate_e27(solver: Any) -> dict[str, Any]:
+def validate_e27(solver: Any, *, max_thickness: float = 0.3) -> dict[str, Any]:
     params = solver.rp_vars().get("wall-film/model-parameters")
     expected = {
         "secondary-phase-mode": 1,
-        "thickness-limit": 0.3,
+        "thickness-limit": max_thickness,
         "ewf-adaptive?": False,
         "courant-number": 0.05,
         "timestep-max": 1e-5,

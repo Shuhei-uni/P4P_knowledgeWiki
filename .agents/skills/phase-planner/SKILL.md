@@ -34,6 +34,10 @@ is the phase question and its autonomy envelope.
 Keep the active phase `CONTEXT.md` compact and current. It should make these
 things obvious:
 
+Use the [experiment presentation contract](../../../Project/experiments/README.md#presentation):
+tables for the phase contract and decisions, figures when useful, no narrative
+recap or paragraphs that repeat a table.
+
 - question / goal;
 - why it matters now;
 - strongest current evidence;

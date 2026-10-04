@@ -2,8 +2,8 @@
 
 ## Status
 
-**NOT RUN — planning draft only.**
-
-No result or convergence claim exists. This packet must preserve the distinction
-between turbulence closure and Mixture slip/turbulence coupling.
-
+| Status |
+| --- |
+| NOT RUN — planning draft only |
+| No result or convergence claim exists |
+| This packet must preserve the distinction between turbulence closure and Mixture slip/turbulence coupling |

@@ -1,7 +1,8 @@
 # P71A-T0-RNG-REFERENCE setup draft
 
-> **Status — DEFFERED (2026-09-22):** Deferred after the Server-3 approach
-> was paused; retain this setup as planning provenance only.
+| Item | P71A-T0-RNG-REFERENCE setup draft |
+| --- | --- |
+| Status — DEFFERED (2026-09-22) | Deferred after the Server-3 approach was paused; retain this setup as planning provenance only |
 
 | Field | Value |
 | --- | --- |
@@ -18,26 +19,19 @@
 
 ## Question
 
-What is the reproducible residual, turbulence-limiting, phase-routing, and
-absorber-balance behaviour of the exact active baseline against which later
-turbulence settings will be compared?
+| Item | Question |
+| --- | --- |
+| What | is the reproducible residual, turbulence-limiting, phase-routing, and absorber-balance behaviour of the exact active baseline against which later turbulence settings will be compared? |
 
 ## Reference state and run intent
 
-Use the active settings in the baseline record without normalization or
-cleanup. Preserve RNG k-epsilon, RNG differential viscosity on, RNG swirl
-modification on, standard wall functions, first-order k, second-order epsilon,
-and all current numerical controls.
-
-Planned discovery horizon: 500 native iterations after smoke, with any
-extension declared only after the discovery gate. Use the verified parent state
-without reinitialization, patching, resetting, remeshing, resplitting, or
-restart-field alteration. Do not apply a second initialization to the evolved
-active-1000 parent.
-
-The closure path and readback sequence are defined in
-[closure-path-readback.md](../closure-path-readback.md).
-
-Required evidence and figures are defined in the
-[turbulence-family README](../README.md). This control establishes
-comparability; it does not qualify the absorber or prove steady convergence.
+| Item | Reference state and run intent |
+| --- | --- |
+| — | Use the active settings in the baseline record without normalization or cleanup |
+|  | Preserve RNG k-epsilon, RNG differential viscosity on, RNG swirl modification on, standard wall functions, first-order k, second-order epsilon, and all current numerical controls |
+| Planned discovery horizon | 500 native iterations after smoke, with any extension declared only after the discovery gate |
+|  | Use the verified parent state without reinitialization, patching, resetting, remeshing, resplitting, or restart-field alteration |
+|  | Do not apply a second initialization to the evolved active-1000 parent |
+| closure path and readback sequence | are defined in [closure-path-readback.md](../closure-path-readback.md) |
+| Required evidence and figures | are defined in the [turbulence-family README](../README.md) |
+| — | This control establishes comparability; it does not qualify the absorber or prove steady convergence |

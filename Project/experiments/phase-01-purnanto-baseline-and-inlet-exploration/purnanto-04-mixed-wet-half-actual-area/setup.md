@@ -1,5 +1,6 @@
-> **Retired source:** Setups/past/reported/04-mixed-wet-half-actual-area.md
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
+| Item | Record |
+| --- | --- |
+| Retired source | Setups/past/reported/04-mixed-wet-half-actual-area.md |
 
 # Mixed Wet-Half Actual-Area Simulation Report
 
@@ -17,20 +18,26 @@
 
 ## 1. Purpose
 
-Start a report-facing record for the mixed wet-half velocity-inlet simulation using the actual inlet area measured from the current geometry.
+| Item | Purpose |
+| --- | --- |
+| — | Start a report-facing record for the mixed wet-half velocity-inlet simulation using the actual inlet area measured from the current geometry |
+| This report currently | records the inlet mass-flow calculation |
+| Later sections | are placeholders for mass flux, separator efficiency, contour interpretation, velocity-field interpretation, and other useful post-processing values |
+| — | Geometry naming note: |
+| this actual-area branch | uses the `purnanto` geometry label; |
 
-This report currently records the inlet mass-flow calculation. Later sections are placeholders for mass flux, separator efficiency, contour interpretation, velocity-field interpretation, and other useful post-processing values.
+<details>
+<summary>Supporting detail — Purpose</summary>
 
-Geometry naming note:
+| Item | Purpose |
+| --- | --- |
+| inlet boundary style | is a separate choice from geometry naming, so this remains `purnanto` even though it is a split-inlet branch |
+| — | Correction note: |
+| Earlier calculation | used the reported spiral-inlet velocity `26.81 m/s` directly with the measured actual inlet area, which gives `195.36 kg/s` |
+| — | For the report-facing Purnanto `1600 kJ/kg` setup, use Purnanto's target total inlet mass flow `197.61 kg/s` and calculate the required velocity from the actual inlet area |
+| corrected actual-area velocity | is `27.12 m/s` |
 
-- this actual-area branch uses the `purnanto` geometry label;
-- inlet boundary style is a separate choice from geometry naming, so this remains `purnanto` even though it is a split-inlet branch.
-
-Correction note:
-
-- Earlier calculation used the reported spiral-inlet velocity `26.81 m/s` directly with the measured actual inlet area, which gives `195.36 kg/s`.
-- For the report-facing Purnanto `1600 kJ/kg` setup, use Purnanto's target total inlet mass flow `197.61 kg/s` and calculate the required velocity from the actual inlet area.
-- The corrected actual-area velocity is `27.12 m/s`.
+</details>
 
 ## 2. Setup Identity
 
@@ -51,36 +58,39 @@ Correction note:
 | Purnanto `1600 kJ/kg` target steam flow | `80.69 kg/s` |
 | Purnanto `1600 kJ/kg` target total flow | `197.61 kg/s` |
 
-Evidence labels:
-
-- `Reported`: baseline Purnanto operating values reused through the parent setup report.
-- `User-reported`: actual inlet-half area measured from the current geometry.
-- `Calculated`: mass-flow values computed from velocity, density, volume fraction, and area.
-
-Parent setup reference:
-
-- `03-mixed-wet-half-velocity-inlet.md`
+| Item | Setup Identity |
+| --- | --- |
+| — | Evidence labels: |
+| `Reported` | baseline Purnanto operating values reused through the parent setup report |
+| `User-reported` | actual inlet-half area measured from the current geometry |
+| `Calculated` | mass-flow values computed from velocity, density, volume fraction, and area |
+| — | Parent setup reference: |
+|  | `03-mixed-wet-half-velocity-inlet.md` |
 
 ## 3. Inlet Mass-Flow Calculation
 
-Assumption:
-
-- `2.6209e5 mm2` is the area of each split inlet half, not the combined area of both halves (`User-reported`, interpreted from geometry context).
-
-Area conversion:
+| Item | Inlet Mass-Flow Calculation |
+| --- | --- |
+| — | Assumption: |
+| `2.6209e5 mm2` | is the area of each split inlet half, not the combined area of both halves (`User-reported`, interpreted from geometry context) |
+| — | Area conversion: |
 
 ```text
 A_half = 2.6209e5 mm2 * 1e-6
 A_half = 0.26209 m2
 ```
 
-Mass-flow formula:
+| Inlet Mass-Flow Calculation |
+| --- |
+| Mass-flow formula: |
 
 ```text
 m_dot_phase = alpha_phase * rho_phase * V * A
 ```
 
-Velocity required to preserve Purnanto's `1600 kJ/kg` target mass flow:
+| Inlet Mass-Flow Calculation |
+| --- |
+| Velocity required to preserve Purnanto's `1600 kJ/kg` target mass flow: |
 
 ```text
 Q_liquid = 116.92 / 881.77 = 0.13260 m3/s
@@ -95,7 +105,9 @@ V = 27.12 m/s
 
 ### Wet Outer Inlet
 
-Inputs:
+| Wet Outer Inlet |
+| --- |
+| Inputs: |
 
 ```text
 A_wet = 0.26209 m2
@@ -106,7 +118,9 @@ rho_liquid = 881.77 kg/m3
 rho_steam = 5.73 kg/m3
 ```
 
-Calculated wet-inlet phase mass flow:
+| Wet Outer Inlet |
+| --- |
+| Calculated wet-inlet phase mass flow: |
 
 ```text
 liquid through wet outer inlet = 116.92 kg/s
@@ -116,8 +130,6 @@ total through wet outer inlet  = 156.89 kg/s
 
 ### Steam Inner Inlet
 
-Inputs:
-
 ```text
 A_steam = 0.26209 m2
 V_steam = 27.12 m/s
@@ -126,7 +138,9 @@ alpha_steam = 1.0
 rho_steam = 5.73 kg/m3
 ```
 
-Calculated steam-inlet phase mass flow:
+| Steam Inner Inlet |
+| --- |
+| Calculated steam-inlet phase mass flow: |
 
 ```text
 liquid through steam inner inlet = 0.00 kg/s
@@ -142,7 +156,9 @@ total steam inlet  = 80.69 kg/s
 total inlet flow   = 197.61 kg/s
 ```
 
-Steam quality by inlet mass:
+| Total Inlet Mass Flow |
+| --- |
+| Steam quality by inlet mass: |
 
 ```text
 x = m_dot_steam / (m_dot_liquid + m_dot_steam)
@@ -150,17 +166,18 @@ x = 80.69 / 197.61
 x = 0.4083
 ```
 
-This now matches the original Purnanto `1600 kJ/kg` target mass flow while using the measured actual inlet-half area.
+| Total Inlet Mass Flow |
+| --- |
+| This now matches the original Purnanto `1600 kJ/kg` target mass flow while using the measured actual inlet-half area |
 
 ## 3A. Pure Liquid / Pure Steam Equal-Velocity Split
 
-Purpose:
-
-- Replace the mixed wet-half inlet with a sharper inlet where one side is pure liquid and the other side is pure steam.
-- Preserve Purnanto's `1600 kJ/kg` liquid and steam mass-flow targets.
-- Keep one common inlet velocity across both inlet zones.
-
-Inputs:
+| A. Pure Liquid / Pure Steam Equal-Velocity Split |
+| --- |
+| Purpose: |
+| Replace the mixed wet-half inlet with a sharper inlet where one side is pure liquid and the other side is pure steam |
+| Preserve Purnanto's `1600 kJ/kg` liquid and steam mass-flow targets |
+| Keep one common inlet velocity across both inlet zones |
 
 ```text
 W = 0.724 m
@@ -173,7 +190,9 @@ rho_liquid   = 881.77 kg/m3
 rho_steam    = 5.73 kg/m3
 ```
 
-Volumetric flows:
+| A. Pure Liquid / Pure Steam Equal-Velocity Split |
+| --- |
+| Volumetric flows: |
 
 ```text
 Q_liquid = 116.92 / 881.77 = 0.1325969 m3/s
@@ -181,7 +200,9 @@ Q_steam  = 80.69 / 5.73    = 14.0820244 m3/s
 Q_total  = 14.2146214 m3/s
 ```
 
-Common inlet velocity:
+| A. Pure Liquid / Pure Steam Equal-Velocity Split |
+| --- |
+| Common inlet velocity: |
 
 ```text
 V = Q_total / A_total
@@ -189,7 +210,9 @@ V = 14.2146214 / 0.524176
 V = 27.1180 m/s
 ```
 
-Required areas:
+| A. Pure Liquid / Pure Steam Equal-Velocity Split |
+| --- |
+| Required areas: |
 
 ```text
 A_liquid = Q_liquid / V = 0.0048896 m2
@@ -199,19 +222,21 @@ A_liquid / A_total = 0.009328 = 0.9328 %
 A_steam  / A_total = 0.990672 = 99.0672 %
 ```
 
-Split location along `x` if the inlet height remains `0.724 m`:
+| Item | A. Pure Liquid / Pure Steam Equal-Velocity Split |
+| --- | --- |
+| Split location along `x` if the inlet height | remains `0.724 m`: |
 
 ```text
 x_liquid_width = A_liquid / 0.724 = 0.0067536 m
 x_steam_width  = A_steam  / 0.724 = 0.7172464 m
 ```
 
-Implementation note:
-
-- Put the split line `0.00675 m` from the liquid-side edge, or equivalently `0.71725 m` from the steam-side edge.
-- This should be mapped to the actual inlet orientation as outer-wall liquid versus inner/core steam; do not rely only on screen-left/screen-right naming.
-
-Mass-flow check:
+| A. Pure Liquid / Pure Steam Equal-Velocity Split |
+| --- |
+| Implementation note: |
+| Put the split line `0.00675 m` from the liquid-side edge, or equivalently `0.71725 m` from the steam-side edge |
+| This should be mapped to the actual inlet orientation as outer-wall liquid versus inner/core steam; do not rely only on screen-left/screen-right naming |
+| Mass-flow check: |
 
 ```text
 liquid = 881.77 * 27.1180 * 0.0048896 = 116.92 kg/s
@@ -221,9 +246,10 @@ total  = 197.61 kg/s
 
 ## 4. Mass Flux
 
-To be expanded after post-processing.
-
-Initial calculated inlet mass flux values:
+| Mass Flux |
+| --- |
+| To be expanded after post-processing |
+| Initial calculated inlet mass flux values: |
 
 | Quantity | Value |
 |---|---:|
@@ -233,19 +259,24 @@ Initial calculated inlet mass flux values:
 | Steam inner inlet mass flux | `155.39 kg/m2-s` |
 | Combined inlet average mass flux | `376.99 kg/m2-s` |
 
-Notes to add later:
-
-- compare the combined inlet mass flux against any analytical or literature sanity band available for the separator;
-- report whether local high-velocity or high-liquid-loading regions correlate with liquid carryover;
-- keep this as an inlet-loading metric, not a separator-efficiency metric by itself.
+| Mass Flux |
+| --- |
+| Notes to add later: |
+| compare the combined inlet mass flux against any analytical or literature sanity band available for the separator; |
+| report whether local high-velocity or high-liquid-loading regions correlate with liquid carryover; |
+| keep this as an inlet-loading metric, not a separator-efficiency metric by itself |
 
 ## 5. Separator Efficiency
 
-Flux report from the current simulation:
+| Separator Efficiency |
+| --- |
+| Flux report from the current simulation: |
 
 ### Steam Phase Flux
 
-Reported order: liquid inlet, outlet, steam inlet, net result.
+| Item | Steam Phase Flux |
+| --- | --- |
+| Reported order | liquid inlet, outlet, steam inlet, net result |
 
 ```text
 steam through liquid/wet inlet =  39.97615638734752 kg/s
@@ -254,7 +285,9 @@ steam through steam inlet      =  40.73612962156758 kg/s
 steam net result               =  -0.7400929 kg/s
 ```
 
-Steam balance:
+| Steam Phase Flux |
+| --- |
+| Steam balance: |
 
 ```text
 steam in  = 39.97615638734752 + 40.73612962156758
@@ -265,8 +298,6 @@ steam net = -0.74009285596856 kg/s
 
 ### Liquid Phase Flux
 
-Reported order: liquid inlet, outlet, steam inlet, net result.
-
 ```text
 liquid through liquid/wet inlet = 115.5160537753228 kg/s
 liquid through outlet           =  -2.498616005104147 kg/s
@@ -274,7 +305,9 @@ liquid through steam inlet      =  -0 kg/s
 liquid net result               = 113.0174 kg/s
 ```
 
-Liquid balance:
+| Liquid Phase Flux |
+| --- |
+| Liquid balance: |
 
 ```text
 liquid in  = 115.5160537753228 kg/s
@@ -284,7 +317,9 @@ liquid net = 113.01743777021865 kg/s
 
 ### Calculated Efficiency
 
-Using liquid outlet flow as separated liquid:
+| Calculated Efficiency |
+| --- |
+| Using liquid outlet flow as separated liquid: |
 
 ```text
 liquid separation efficiency = liquid outlet / liquid inlet
@@ -293,7 +328,9 @@ liquid separation efficiency = 0.02163
 liquid separation efficiency = 2.16 %
 ```
 
-Liquid still retained or not removed at this report state:
+| Item | Calculated Efficiency |
+| --- | --- |
+| Liquid still | retained or not removed at this report state: |
 
 ```text
 unremoved liquid fraction = liquid net / liquid inlet
@@ -301,7 +338,9 @@ unremoved liquid fraction = 113.0174 / 115.5160537753228
 unremoved liquid fraction = 97.84 %
 ```
 
-Outlet steam dryness, using the reported outlet steam and liquid flux magnitudes:
+| Calculated Efficiency |
+| --- |
+| Outlet steam dryness, using the reported outlet steam and liquid flux magnitudes: |
 
 ```text
 outlet steam dryness = steam outlet / (steam outlet + liquid outlet)
@@ -310,7 +349,9 @@ outlet steam dryness = 0.97024
 outlet steam dryness = 97.02 %
 ```
 
-Suggested reporting structure:
+| Calculated Efficiency |
+| --- |
+| Suggested reporting structure: |
 
 ```text
 liquid separation efficiency = liquid leaving brine outlet / total liquid inlet
@@ -318,13 +359,17 @@ steam purity or steam outlet dryness = steam mass at steam outlet / total mass a
 liquid carryover = liquid leaving steam outlet / total liquid inlet
 ```
 
-Use only after the outlet mass-flow reports are stable enough to support quantitative interpretation.
+| Item | Calculated Efficiency |
+| --- | --- |
+| Use only after the outlet mass-flow reports | are stable enough to support quantitative interpretation |
 
 ## 6. DPM Particle Injection Notes
 
 ### Purnanto-Style Particle Mass-Flow Finding
 
-The nine candidate droplet injection mass-flow values sum to the Purnanto `1600 kJ/kg` liquid mass-flow condition:
+| Purnanto-Style Particle Mass-Flow Finding |
+| --- |
+| The nine candidate droplet injection mass-flow values sum to the Purnanto `1600 kJ/kg` liquid mass-flow condition: |
 
 ```text
 5.846 + 13.708474 + 15.722479 + 15.224784 + 7.52414
@@ -332,9 +377,10 @@ The nine candidate droplet injection mass-flow values sum to the Purnanto `1600 
 = 116.92 kg/s
 ```
 
-This matches the reported liquid inlet mass flow for the original `1600 kJ/kg` case, so these values should be treated as droplet-size mass-flow weights rather than arbitrary injection amounts.
-
-Particle injection values used:
+| Purnanto-Style Particle Mass-Flow Finding |
+| --- |
+| This matches the reported liquid inlet mass flow for the original `1600 kJ/kg` case, so these values should be treated as droplet-size mass-flow weights rather than arbitrary injection amounts |
+| Particle injection values used: |
 
 | Injection | Droplet diameter `m` | Purnanto mass-flow weight `kg/s` |
 |---:|---:|---:|
@@ -349,40 +395,43 @@ Particle injection values used:
 | `9` | `1.25E-03` | `4.085872` |
 |  | **Total** | **`116.92`** |
 
-Decision for this run:
-
-- Use the original Purnanto mass-flow weights rather than actual-area-scaled values.
-- Rationale: the difference between the current actual-area liquid inlet (`115.516 kg/s`) and Purnanto's original liquid inlet (`116.92 kg/s`) is small, so using the source-paper values is acceptable for a Purnanto-matching DPM comparison.
-
-For this actual-area run, the liquid inlet from the flux report is:
+| Item | Purnanto-Style Particle Mass-Flow Finding |
+| --- | --- |
+| — | Decision for this run: |
+|  | Use the original Purnanto mass-flow weights rather than actual-area-scaled values |
+| Rationale | the difference between the current actual-area liquid inlet (`115.516 kg/s`) and Purnanto's original liquid inlet (`116.92 kg/s`) is small, so using the source-paper values is acceptable for a Purnanto-matching DPM comparison |
+| — | For this actual-area run, the liquid inlet from the flux report is: |
 
 ```text
 liquid inlet = 115.5160537753228 kg/s
 ```
 
-So strict actual-area scaling would multiply each Purnanto droplet-bin mass flow by:
+| Purnanto-Style Particle Mass-Flow Finding |
+| --- |
+| So strict actual-area scaling would multiply each Purnanto droplet-bin mass flow by: |
 
 ```text
 115.5160537753228 / 116.92 = 0.98799
 ```
 
-Practical interpretation:
-
-- use the original mass-flow values for strict Purnanto `1600 kJ/kg` comparison;
-- use the scaled values for consistency with the current actual-area run;
-- do not increase physical injected mass flow just to reduce incomplete tracks.
+| Purnanto-Style Particle Mass-Flow Finding |
+| --- |
+| Practical interpretation: |
+| use the original mass-flow values for strict Purnanto `1600 kJ/kg` comparison; |
+| use the scaled values for consistency with the current actual-area run; |
+| do not increase physical injected mass flow just to reduce incomplete tracks |
 
 ### DPM Step Sensitivity Check
 
-Test condition:
-
-- Injection tested: injection 1 / particle size 1.
-- Initial setup: random initial setup.
-- Particle streams: `100`.
-- Stochastic tracking: enabled.
-- Eddy interaction/effect: enabled.
-- Number of tries: `5`.
-- Effective total stochastic tracks: `500`.
+| Item | DPM Step Sensitivity Check |
+| --- | --- |
+| — | Test condition: |
+| Injection tested | injection 1 / particle size 1 |
+| Initial setup | random initial setup |
+| Particle streams | `100` |
+| Stochastic tracking | enabled |
+| Number of tries | `5` |
+| Effective total stochastic tracks | `500` |
 
 | Max steps | Step factor | DPM iteration interval | Trapped | Incomplete | Escaped |
 |---:|---:|---:|---:|---:|---:|
@@ -392,14 +441,14 @@ Test condition:
 | `50,000` | `1` | `1` | `157` | `343` | `0` |
 | `500,000` | `2` | `2` | `159` | `341` | `0` |
 
-Interpretation:
-
-- Increasing max steps from `50,000` to `500,000` did not reduce incomplete tracks for this tested particle case.
-- Reducing step factor and DPM iteration interval produced only negligible changes in trapped/incomplete counts.
-- The incomplete-track problem is therefore unlikely to be solved by simply increasing max tracking steps for this setup.
-- This is consistent with Purnanto's reported issue that incomplete particles remained difficult even after increasing Euler step limits.
-
-Provisional future DPM setting:
+| Item | DPM Step Sensitivity Check |
+| --- | --- |
+| — | Interpretation: |
+|  | Increasing max steps from `50,000` to `500,000` did not reduce incomplete tracks for this tested particle case |
+|  | Reducing step factor and DPM iteration interval produced only negligible changes in trapped/incomplete counts |
+| incomplete-track problem | is therefore unlikely to be solved by simply increasing max tracking steps for this setup |
+| This | is consistent with Purnanto's reported issue that incomplete particles remained difficult even after increasing Euler step limits |
+| — | Provisional future DPM setting: |
 
 ```text
 max steps = 50,000
@@ -410,15 +459,18 @@ tries = 5
 effective stochastic tracks = 500 per injection
 ```
 
-Evidence-use label:
-
-`DPM diagnostic only`.
-
-This setting is selected as a practical baseline for future testing until a better tracking method is found. It should not yet be treated as final separator-efficiency evidence because incomplete tracks remain dominant.
+| Item | DPM Step Sensitivity Check |
+| --- | --- |
+| — | Evidence-use label: |
+|  | `DPM diagnostic only` |
+| This setting | is selected as a practical baseline for future testing until a better tracking method is found |
+| — | It should not yet be treated as final separator-efficiency evidence because incomplete tracks remain dominant |
 
 ### DPM Stream-Count Sensitivity Check
 
-Fixed settings:
+| DPM Stream-Count Sensitivity Check |
+| --- |
+| Fixed settings: |
 
 ```text
 max steps = 50,000
@@ -429,7 +481,9 @@ stochastic tracking tries = 5
 random eddy lifetime = on
 ```
 
-Stream-count tests:
+| DPM Stream-Count Sensitivity Check |
+| --- |
+| Stream-count tests: |
 
 | Particle streams | Effective total tracks | Trapped | Incomplete | Escaped |
 |---:|---:|---:|---:|---:|
@@ -438,7 +492,9 @@ Stream-count tests:
 | `500` | `2500` | `824` | `1676` | `0` |
 | `1000` | `5000` | `1711` | `3289` | `0` |
 
-Percentage summary:
+| DPM Stream-Count Sensitivity Check |
+| --- |
+| Percentage summary: |
 
 | Total tracks | Trapped | Incomplete |
 |---:|---:|---:|
@@ -447,52 +503,51 @@ Percentage summary:
 | `2500` | `33.0 %` | `67.0 %` |
 | `5000` | `34.2 %` | `65.8 %` |
 
-Interpretation:
-
-- Increasing total stochastic tracks from `500` to `5000` did not remove the incomplete-track problem.
-- The trapped fraction stayed in a narrow band of approximately `31.6-34.2 %`.
-- The incomplete fraction stayed dominant at approximately `65.8-68.4 %`.
-- The higher stream counts improve sampling resolution, but they do not change the underlying trajectory-completion issue.
+| DPM Stream-Count Sensitivity Check |
+| --- |
+| Increasing total stochastic tracks from `500` to `5000` did not remove the incomplete-track problem |
+| The trapped fraction stayed in a narrow band of approximately `31.6-34.2 %` |
+| The incomplete fraction stayed dominant at approximately `65.8-68.4 %` |
+| The higher stream counts improve sampling resolution, but they do not change the underlying trajectory-completion issue |
 
 ## 7. Key Visual Findings
 
-Pending contour and vector review.
-
-Add findings under these headings:
+| Key Visual Findings |
+| --- |
+| Pending contour and vector review |
+| Add findings under these headings: |
 
 ### Liquid Volume Fraction Contours
 
-- pending
+| Liquid Volume Fraction Contours |
+| --- |
+| pending |
 
 ### Steam Volume Fraction Contours
 
-- pending
-
 ### Velocity Magnitude and Vectors
-
-- pending
 
 ### Pressure Field
 
-- pending
-
 ### Streamlines or Pathlines
-
-- pending
 
 ## 8. Useful Values To Add Later
 
-- residual state at selected iteration count;
-- global mass imbalance;
-- phase mass flow at each outlet;
-- pressure drop between inlet and outlets;
-- maximum and average velocity near inlet, vessel wall, core, steam outlet, and brine outlet;
-- liquid volume fraction near the steam outlet intake;
-- water inventory stability if an initialized water pool is used;
-- convergence label and evidence-use label.
+| Item | Useful Values To Add Later |
+| --- | --- |
+| — | residual state at selected iteration count; |
+|  | global mass imbalance; |
+|  | phase mass flow at each outlet; |
+|  | pressure drop between inlet and outlets; |
+|  | maximum and average velocity near inlet, vessel wall, core, steam outlet, and brine outlet; |
+|  | liquid volume fraction near the steam outlet intake; |
+| water inventory stability if an initialized water pool | is used; |
+| — | convergence label and evidence-use label |
 
 ## 9. Current Evidence-Use Label
 
-`Setup calculation only`.
-
-The inlet mass-flow values are usable as boundary-condition documentation. Separator efficiency and performance claims are not yet filled because outlet fluxes, residual history, and visual post-processing evidence still need to be added.
+| Item | Current Evidence-Use Label |
+| --- | --- |
+| — | `Setup calculation only` |
+| inlet mass-flow values | are usable as boundary-condition documentation |
+| Separator efficiency and performance claims | are not yet filled because outlet fluxes, residual history, and visual post-processing evidence still need to be added |

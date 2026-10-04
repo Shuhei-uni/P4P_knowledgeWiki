@@ -12,15 +12,12 @@
 | Controlled delta | Liquid-only mass/momentum sink using shared adaptive law with `G=0.25`; no vapor sink |
 | Active horizon | 500 controller-active iterations; 50-iteration smoke; checkpoints active 50, 250, 500 |
 
-Require positive E0 `ΔMref`. Command
-`clamp(0.25 × 116.92 kg/s × e,0,146.15 kg/s)` every 50 iterations. Distribute
-realized removal by local continuous-liquid mass and remove associated liquid
-momentum consistently.
-
-Before solve, prove fixed cell IDs/count/volume, activation liquid mass,
-integrated mass/momentum source readback, and zero direct vapor source. Record
-every command, realized source, saturation, inventory, phase balances,
-residuals, artifacts, and F1–F4. Any unaccounted source/region drift blocks;
-instability or ineffective/saturated response rejects. This deliberately
-artificial sink supports no physical outlet or convergence claim.
-
+| Contract |
+| --- |
+| Require positive E0 `ΔMref` |
+| Command `clamp(0.25 × 116.92 kg/s × e,0,146.15 kg/s)` every 50 iterations |
+| Distribute realized removal by local continuous-liquid mass and remove associated liquid momentum consistently |
+| Before solve, prove fixed cell IDs/count/volume, activation liquid mass, integrated mass/momentum source readback, and zero direct vapor source |
+| Record every command, realized source, saturation, inventory, phase balances, residuals, artifacts, and F1–F4 |
+| Any unaccounted source/region drift blocks; instability or ineffective/saturated response rejects |
+| This deliberately artificial sink supports no physical outlet or convergence claim |

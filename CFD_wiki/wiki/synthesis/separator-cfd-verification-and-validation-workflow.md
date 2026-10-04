@@ -14,7 +14,7 @@ This page separates:
 - [chen-2025-straight-through-cyclone-water-separator](../sources/chen-2025-straight-through-cyclone-water-separator.md)
 - [mondal-sharma-2024-air-water-annular-flow-cfd](../sources/mondal-sharma-2024-air-water-annular-flow-cfd.md)
 - [mesh-quality-and-resolution-patterns](mesh-quality-and-resolution-patterns.md)
-- [fluent-separator-efficiency-methods](fluent-separator-efficiency-methods.md)
+- Extended by: [fluent-separator-efficiency-methods](fluent-separator-efficiency-methods.md), which supplies efficiency definitions, represented-mass accounting and unresolved-track brackets for this verification ladder.
 - [uncertainties-and-assumption-register](../physics-basis/uncertainties-and-assumption-register.md)
 
 ## Cross-Paper Pattern

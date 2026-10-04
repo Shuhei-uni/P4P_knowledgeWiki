@@ -12,16 +12,12 @@
 | Controlled delta | Change only `bottom` from wall to pressure outlet at `1.120 MPa` gauge |
 | Horizon | 500 iterations including 50-iteration smoke; checkpoints 50, 250, 500 |
 
-Use a liquid-dominant bottom backflow phase state and parent-consistent outlet
-turbulence form. Preserve every E0 mesh, model, material, inlet, steam-outlet,
-numerical, initialization, DPM-isolation, report, and residual invariant. This
-is the pressure-equal passive anchor.
-
-Required evidence is the complete shared package plus immediate/post-reopen
-bottom boundary readback, bottom phase fluxes, normalized vapor loss, liquid
-inventory, phase/mixture balances, and native residuals. F1–F3 in the shared
-design are predeclared core figures. Missing setup proof or histories makes the
-case invalid; vapor-dominated drainage, worse buildup, or numerical failure is
-a rejection signal. The result cannot establish physical drainage or steady
-convergence.
-
+| Item | Contract |
+| --- | --- |
+| — | Use a liquid-dominant bottom backflow phase state and parent-consistent outlet turbulence form |
+|  | Preserve every E0 mesh, model, material, inlet, steam-outlet, numerical, initialization, DPM-isolation, report, and residual invariant |
+| This | is the pressure-equal passive anchor |
+| Required evidence | is the complete shared package plus immediate/post-reopen bottom boundary readback, bottom phase fluxes, normalized vapor loss, liquid inventory, phase/mixture balances, and native residuals |
+| F1–F3 in the shared design | are predeclared core figures |
+| — | Missing setup proof or histories makes the case invalid; vapor-dominated drainage, worse buildup, or numerical failure is a rejection signal |
+|  | The result cannot establish physical drainage or steady convergence |

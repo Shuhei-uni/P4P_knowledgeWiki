@@ -1,17 +1,22 @@
-> **Retired source:** Setups/reports/purnanto-reference/07/results.md
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
+| Item | Record |
+| --- | --- |
+| Retired source | Setups/reports/purnanto-reference/07/results.md |
 
 # Results Report — Setup 07
 
 ## Setup link
 
-- Setup definition: [07-pure-phase-split-actual-area.md](setup.md)
-- Technical extraction: [technical-extraction.md](technical-extraction.md)
-- Evidence basis: professional-mesh phase fluxes and DPM sweep
+| Item | Setup link |
+| --- | --- |
+| Setup definition | [07-pure-phase-split-actual-area.md](setup.md) |
+| Technical extraction | [technical-extraction.md](technical-extraction.md) |
+| Evidence basis | professional-mesh phase fluxes and DPM sweep |
 
 ## 1. Flux-based carryover result
 
-The professional-mesh report recorded:
+| Flux-based carryover result |
+| --- |
+| The professional-mesh report recorded: |
 
 | Quantity | Value |
 |---|---:|
@@ -21,7 +26,10 @@ The professional-mesh report recorded:
 | Implied steam-line liquid-removal efficiency | `99.96865%` |
 | Steam-outlet dryness | `99.95757%` |
 
-This is a scoped steam-line carryover metric. It is not a full-vessel brine-drainage or liquid-inventory closure claim.
+| Item | Flux-based carryover result |
+| --- | --- |
+| This | is a scoped steam-line carryover metric |
+| It | is not a full-vessel brine-drainage or liquid-inventory closure claim |
 
 ## 2. DPM injection trajectory/fate results
 
@@ -33,12 +41,21 @@ This is a scoped steam-line carryover metric. It is not a full-vessel brine-drai
 | `41 um` | `200` | `0` | `72` | `128` | `100%`* |
 | `100 um` | `200` | `0` | `86` | `114` | `100%`* |
 
-`*` The source report treats incomplete particles as effectively trapped for this scoped project metric. Keep that assumption visible whenever quoting these values.
+| DPM injection trajectory/fate results |
+| --- |
+| `*` The source report treats incomplete particles as effectively trapped for this scoped project metric |
+| Keep that assumption visible whenever quoting these values |
 
 ## 3. Sensitivity findings
 
-At `5 um`, deterministic, DRW, and rotation cases gave scoped efficiencies of `67.6%`, `71.2%`, and `65.3%`, respectively. The qualitative conclusion was unchanged, but incomplete tracks remained substantial.
+| Item | Sensitivity findings |
+| --- | --- |
+| — | At `5 um`, deterministic, DRW, and rotation cases gave scoped efficiencies of `67.6%`, `71.2%`, and `65.3%`, respectively |
+| qualitative conclusion | was unchanged, but incomplete tracks remained substantial |
 
 ## 4. Conclusion
 
-`Needs follow-up` — this is a numerically reported steam-carryover and DPM diagnostic branch. Do not promote it to full separator validation without stronger residual, balance, and trajectory-completion evidence.
+| Item | Conclusion |
+| --- | --- |
+| `Needs follow-up` — this | is a numerically reported steam-carryover and DPM diagnostic branch |
+| — | Do not promote it to full separator validation without stronger residual, balance, and trajectory-completion evidence |

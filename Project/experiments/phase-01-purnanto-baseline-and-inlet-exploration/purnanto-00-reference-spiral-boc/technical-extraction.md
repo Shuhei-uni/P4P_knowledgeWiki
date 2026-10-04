@@ -1,20 +1,19 @@
-> **Retired source:** Setups/reports/purnanto-reference/00/technical-extraction.md
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
+| Item | Record |
+| --- | --- |
+| Retired source | Setups/reports/purnanto-reference/00/technical-extraction.md |
 
 # Technical Setup Report: Baseline Purnanto 1680J Live Extract
 
 ## 1. Purpose
 
-This companion report records the actual Fluent export for the baseline Purnanto 1680J case:
-
-- archive: PyAnsys/cases/actual_setup_archives/purnanto-enthalpy1680-live-extract/live/settings_root_tree.json (historical machine artifact path: `../../../PyAnsys/cases/actual_setup_archives/purnanto-enthalpy1680-live-extract/live/settings_root_tree.json`; not migrated)
-- narrative companion: [00-baseline-spiral-boc-reference.md](setup.md)
-
-Use this file when you need the machine-extracted replay state, not the paper-style narrative reconstruction.
-
-Rule for this branch:
-
-- if this report and the narrative report disagree, treat the extracted Fluent state as the replay authority and record the narrative value as the intended interpretation.
+| Item | Purpose |
+| --- | --- |
+| This companion report | records the actual Fluent export for the baseline Purnanto 1680J case: |
+| archive | PyAnsys/cases/actual_setup_archives/purnanto-enthalpy1680-live-extract/live/settings_root_tree.json (historical machine artifact path: `../../../PyAnsys/cases/actual_setup_archives/purnanto-enthalpy1680-live-extract/live/settings_root_tree.json`; not migrated) |
+| narrative companion | [00-baseline-spiral-boc-reference.md](setup.md) |
+| — | Use this file when you need the machine-extracted replay state, not the paper-style narrative reconstruction |
+|  | Rule for this branch: |
+|  | if this report and the narrative report disagree, treat the extracted Fluent state as the replay authority and record the narrative value as the intended interpretation |
 
 ## 2. Setup Identity
 
@@ -30,7 +29,10 @@ Rule for this branch:
 
 ## 3. Geometry And Mesh
 
-The settings tree does not serialize the full CAD geometry dimensions or the actual mesh cell count. It does, however, expose the mesh-control state and the topology needed for replay.
+| Geometry And Mesh |
+| --- |
+| The settings tree does not serialize the full CAD geometry dimensions or the actual mesh cell count |
+| It does, however, expose the mesh-control state and the topology needed for replay |
 
 | Topic | Extracted Fluent state | Narrative report | Status | Notes |
 |---|---|---|---|---|
@@ -42,7 +44,9 @@ The settings tree does not serialize the full CAD geometry dimensions or the act
 | Polyhedra options | preserve boundary layer `decide-at-runtime` | not discussed | `additional detail` |  |
 | Periodic shadow zones | shown | not discussed | `additional detail` |  |
 
-Reference values carried by the archive:
+| Geometry And Mesh |
+| --- |
+| Reference values carried by the archive: |
 
 | Field | Extracted value |
 |---|---:|
@@ -93,7 +97,9 @@ Reference values carried by the archive:
 
 ### 5.1 Inlet
 
-The archive stores a single mass-flow inlet named `inlet`.
+| 1 Inlet |
+| --- |
+| The archive stores a single mass-flow inlet named `inlet` |
 
 | Field | Extracted Fluent state | Narrative report | Status | Notes |
 |---|---|---|---|---|
@@ -166,7 +172,9 @@ The archive stores a single mass-flow inlet named `inlet`.
 
 ## 7. DPM State
 
-The archive includes a discrete-phase model branch even though the narrative report does not treat DPM as part of the baseline setup.
+| Item | DPM State |
+| --- | --- |
+| archive | includes a discrete-phase model branch even though the narrative report does not treat DPM as part of the baseline setup |
 
 | Topic | Extracted Fluent state | Narrative report | Status | Notes |
 |---|---|---|---|---|
@@ -187,7 +195,9 @@ The archive includes a discrete-phase model branch even though the narrative rep
 
 ## 9. Working Conclusion
 
-- The live 1680J archive matches the main solver, model, and numerics stack from the narrative baseline report.
-- The most important mismatch is the inlet phase split.
-- The archive also preserves exact material constants, reference values, and a dormant DPM branch that the narrative report does not spell out.
-- For future replay work, trust this technical companion for actual Fluent settings and use the narrative report for the wider project story.
+| Item | Working Conclusion |
+| --- | --- |
+| — | The live 1680J archive matches the main solver, model, and numerics stack from the narrative baseline report |
+| most important mismatch | is the inlet phase split |
+| — | The archive also preserves exact material constants, reference values, and a dormant DPM branch that the narrative report does not spell out |
+|  | For future replay work, trust this technical companion for actual Fluent settings and use the narrative report for the wider project story |

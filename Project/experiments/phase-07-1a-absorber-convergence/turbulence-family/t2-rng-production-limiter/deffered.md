@@ -1,7 +1,8 @@
 # P71A-T2-RNG-PRODUCTION-LIMITER setup draft
 
-> **Status — DEFFERED (2026-09-22):** Deferred after the Server-3 approach
-> was paused; retain this setup as planning provenance only.
+| Item | P71A-T2-RNG-PRODUCTION-LIMITER setup draft |
+| --- | --- |
+| Status — DEFFERED (2026-09-22) | Deferred after the Server-3 approach was paused; retain this setup as planning provenance only |
 
 | Field | Value |
 | --- | --- |
@@ -16,21 +17,21 @@
 
 ## Question
 
-Is excessive modeled turbulence production contributing to k/epsilon residual
-growth and turbulent-viscosity limiting in the absorber branch?
+| Question |
+| --- |
+| Is excessive modeled turbulence production contributing to k/epsilon residual growth and turbulent-viscosity limiting in the absorber branch? |
 
 ## Controlled change
 
-Keep RNG k-epsilon, its current differential-viscosity and swirl options,
-standard wall functions, and all non-turbulence settings unchanged. Enable only
-the production limiter and read it back.
-
-The limiter is a turbulence-model change, not permission to loosen the
-turbulent-viscosity ratio limit or residual criteria. Planned horizon: 500
-native iterations after smoke, using the verified T0 parent and the shared
-evidence/core-figure contract in the [family README](../README.md).
+| Item | Controlled change |
+| --- | --- |
+| — | Keep RNG k-epsilon, its current differential-viscosity and swirl options, standard wall functions, and all non-turbulence settings unchanged |
+|  | Enable only the production limiter and read it back |
+| limiter | is a turbulence-model change, not permission to loosen the turbulent-viscosity ratio limit or residual criteria |
+| — | Planned horizon: 500 native iterations after smoke, using the verified T0 parent and the shared evidence/core-figure contract in the [family README](../README.md) |
 
 ## Decision boundary
 
-Treat this branch as useful only if it reduces instability without hiding a
-phase imbalance or changing the absorber interpretation.
+| Decision boundary |
+| --- |
+| Treat this branch as useful only if it reduces instability without hiding a phase imbalance or changing the absorber interpretation |

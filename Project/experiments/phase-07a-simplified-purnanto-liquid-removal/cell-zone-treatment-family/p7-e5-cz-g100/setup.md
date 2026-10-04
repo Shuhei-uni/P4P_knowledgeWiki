@@ -16,7 +16,9 @@
 
 ## Source law
 
-Use the shared law from `design.md`:
+| Source law |
+| --- |
+| Use the shared law from `design.md`: |
 
 ```text
 e       = max(0, (Mcurrent - M*) / ΔMref)
@@ -25,26 +27,19 @@ S_mass  = -u / V_lower
 S_mom,k = S_mass × U_phase2,k,lower
 ```
 
-Apply one negative constant phase-2 mass source in the lower zone only. Keep
-phase-1 mass, energy, turbulence, and parent-zone sources disabled/`none`.
-Apply the corresponding x/y/z mixture momentum sources using the explicitly
-reported lower-zone phase-2 velocity basis. Read back signs, values, units,
-active zone, and integrated user sources at every controller update.
+| Source law |
+| --- |
+| Apply one negative constant phase-2 mass source in the lower zone only |
+| Keep phase-1 mass, energy, turbulence, and parent-zone sources disabled/`none` |
+| Apply the corresponding x/y/z mixture momentum sources using the explicitly reported lower-zone phase-2 velocity basis |
+| Read back signs, values, units, active zone, and integrated user sources at every controller update |
 
 ## Required evidence
 
-Before solve, prove the exact E0-500 parent, register, split invariants,
-lower-zone cell count/volume, source-tree binding, zero direct phase-1 mass
-source, mixture momentum-source basis, save/reopen, and smoke. During the
-screen, retain native residuals, full transcript, controller commands,
-realized phase-2 removal, integrated source terms, total/lower-zone liquid
-inventory, phase-resolved balances, bottom vapor loss, warnings, and
-checkpoint/final case-data identities.
-
-Core figures are F1 inventory response, F2 command-versus-realized phase-2
-source/removal, and F3 phase/mixture/user-source balances with residual and
-vapor-loss support, as defined in [`design.md`](../design.md).
-
-This setup is an artificial zone-scoped source discovery test. It does not
-support a physical outlet, local-cell mass-weighted UDF, or steady-convergence
-claim.
+| Item | Required evidence |
+| --- | --- |
+| — | Before solve, prove the exact E0-500 parent, register, split invariants, lower-zone cell count/volume, source-tree binding, zero direct phase-1 mass source, mixture momentum-source basis, save/reopen, and smoke |
+|  | During the screen, retain native residuals, full transcript, controller commands, realized phase-2 removal, integrated source terms, total/lower-zone liquid inventory, phase-resolved balances, bottom vapor loss, warnings, and checkpoint/final case-data identities |
+| Core figures | are F1 inventory response, F2 command-versus-realized phase-2 source/removal, and F3 phase/mixture/user-source balances with residual and vapor-loss support, as defined in [`design.md`](../design.md) |
+| This setup | is an artificial zone-scoped source discovery test |
+| — | It does not support a physical outlet, local-cell mass-weighted UDF, or steady-convergence claim |

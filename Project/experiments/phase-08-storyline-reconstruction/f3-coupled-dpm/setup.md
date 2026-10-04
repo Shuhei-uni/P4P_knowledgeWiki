@@ -1,59 +1,171 @@
 # Phase 8 F3 — split inlet with two-way DPM fraction screen
 
+## Authorized matched Server 1 batch
+
+| Item | Authorized matched Server 1 batch |
+| --- | --- |
+| — | The [3 October direction](../CONTEXT.md#status) selects five matching F3/F4 speed/loading points, the unchanged Coupled/Global Time Step package, unaveraged DPM sources, source interval 100, held sources, source relaxation 0.5 and 50,000 tracking steps |
+|  | Preserve the developed N10,000 carrier basis and run to N16,000 with 6,000 mechanism-active iterations; summaries use N15,500–16,000 |
+|  | Only EWF differs between matched F3/F4 points |
+|  | The [batch specification](../../../../PyAnsys/output/phase8-server1-matched-20261003/batch-spec.json) owns exact immutable parents |
+| This scoped batch | is complete and verified; the phase is paused at N16000 |
+
 ## Current execution purpose
 
-The [2026-09-30 phase clarification](../CONTEXT.md#question-and-goal) governs this setup: reproduce this stage in the simulation history using verified settings and a declared bounded horizon. Balance, inventory, continuity, and track-completeness thresholds below belong to earlier numerical assessment plans; they are diagnostics and claim limits, not current DPM-activation, family-progression, or completion gates. Do not continue or change solver controls solely to cross those thresholds. Preserve prior outcomes and label numerical adaptations separately. The phase remains paused.
+| Item | Current execution purpose |
+| --- | --- |
+| The [2026-09-30 phase clarification](../CONTEXT.md#question-and-goal) governs this setup | reproduce this stage in the simulation history using verified settings and a declared bounded horizon |
+|  | Balance, inventory, continuity, and track-completeness thresholds below belong to earlier numerical assessment plans; they are diagnostics and claim limits, not current DPM-activation, family-progression, or completion gates |
+|  | Do not continue or change solver controls solely to cross those thresholds |
+|  | Preserve prior outcomes and label numerical adaptations separately |
+|  | The phase remains paused |
 
 ## Question and contrast
 
-At fixed nominal inlet speed and total vapor/liquid feed, how does two-way DPM coupling and allocation of inlet liquid to droplets change carrier behaviour and droplet carryover? Contrast with the matching [F2](../f2-split-inlet/setup.md) one-way point, and separately compare DPM fractions within F3. Historical anchors: [09c two-way coupling](../../phase-03-dpm-carryover-and-coupling/purnanto-09c-two-way-dpm-coupling/setup.md) and [09cV2 allocation](../../phase-03-dpm-carryover-and-coupling/purnanto-09cV2-dpm-partition-control/setup.md).
+| Question and contrast |
+| --- |
+| At fixed nominal inlet speed and total vapor/liquid feed, how does two-way DPM coupling and allocation of inlet liquid to droplets change carrier behaviour and droplet carryover? |
+| Contrast with the matching [F2](../f2-split-inlet/setup.md) one-way point, and separately compare DPM fractions within F3 |
+| Historical anchors: [09c two-way coupling](../../phase-03-dpm-carryover-and-coupling/purnanto-09c-two-way-dpm-coupling/setup.md) and [09cV2 allocation](../../phase-03-dpm-carryover-and-coupling/purnanto-09cV2-dpm-partition-control/setup.md) |
 
 ## Matrix and parent
 
-Use all five Phase 8 speeds (`20.11`, `23.46`, `26.81`, `29.48`, `32.14 m/s`) crossed with injected-DPM fractions (`2.5%`, `5%`, `7.5%`, `10%`, `20%`): **25 intended cases**. Start each child independently from its same-speed verified F2 DPM-off carrier pair; do not serially carry fields from one fraction to another. Keep the physical inlet areas, phase-feed proportion, total liquid feed, outlet and closed bottom, mesh, materials, turbulence, solver settings, zero roughness, and EWF-off state fixed. Activate interaction with continuous phase and verify DPM source-update settings/readback before solving.
-
-For each case, set `m_DPM = f_DPM × total liquid feed` and `m_Eulerian_liquid = (1 − f_DPM) × total liquid feed`; retain vapor feed. Use the project-designed [09cV3 seven-bin fine-mist PSD](../../phase-03-dpm-carryover-and-coupling/purnanto-09cV3-fine-mist-psd/setup.md#3-controlled-change-seven-injection-fine-mist-psd) at fixed relative weights; preserve injection direction/footprint, wall fates, and tracking controls across fractions. The nominal speed label refers to the pre-allocation total feed/volumetric basis; the Eulerian liquid-strip speed will fall as `f_DPM` rises and must be reported separately. DPM feedback can exchange mass/momentum/energy with the carrier; report applied source terms and avoid counting transfers twice in whole-system closure.
+| Matrix and parent |
+| --- |
+| Use all five Phase 8 speeds (`20.11`, `23.46`, `26.81`, `29.48`, `32.14 m/s`) crossed with injected-DPM fractions (`2.5%`, `5%`, `7.5%`, `10%`, `20%`): 25 intended cases |
+| Start each child independently from its same-speed verified F2 DPM-off carrier pair; do not serially carry fields from one fraction to another |
+| Keep the physical inlet areas, phase-feed proportion, total liquid feed, outlet and closed bottom, mesh, materials, turbulence, solver settings, zero roughness, and EWF-off state fixed |
+| Activate interaction with continuous phase and verify DPM source-update settings/readback before solving |
+| For each case, set `m_DPM = f_DPM × total liquid feed` and `m_Eulerian_liquid = (1 − f_DPM) × total liquid feed`; retain vapor feed |
+| Use the project-designed [09cV3 seven-bin fine-mist PSD](../../phase-03-dpm-carryover-and-coupling/purnanto-09cV3-fine-mist-psd/setup.md#3-controlled-change-seven-injection-fine-mist-psd) at fixed relative weights; preserve injection direction/footprint, wall fates, and tracking controls across fractions |
+| The nominal speed label refers to the pre-allocation total feed/volumetric basis; the Eulerian liquid-strip speed will fall as `f_DPM` rises and must be reported separately |
+| DPM feedback can exchange mass/momentum/energy with the carrier; report applied source terms and avoid counting transfers twice in whole-system closure |
 
 ### Reference-speed 5% pilot selection (2026-09-29)
 
-Use the [F2 N=10,000 qualified carrier](../f2-split-inlet/results.md#n10000-carrier-gate) as the DPM-off parent, preserving its Coupled/Global Time Step numerical package. At the actual `116.93872650 kg/s` liquid feed, allocate exactly `5.846936325 kg/s` to seven inert-droplet injections and retain `111.091790175 kg/s` Eulerian phase-2 flow through `liquidinlet`; vapor remains `80.70292372 kg/s` through `steaminlet`. The historical rounded `111.074 kg/s` command belongs to the earlier `116.92 kg/s` feed and is not reused. Use the F2 diagnostic child as the matched injection-control prior: material density `881.210876 kg/m³`, `steaminlet` surface, axial `27.118 m/s` release, same bin shares, wall fates and tracking controls. Enable continuous-phase interaction and verify all controls and the complementary mass ledger after save/reopen. The first source-update-every-iteration attempt projected about 23 hours per 1,000-iteration block after two native iterations and was stopped with its saved pre-run pair intact. The recovery pilot uses a **100-flow-iteration DPM source update interval**, verified after save/reopen; this is an explicit numerical change to carry into matched F4 cases, not a change in injected mass or droplet bins. Run a bounded 1,000-iteration two-way pilot from the developed carrier field; assess source-inclusive accounting and track completeness before expanding fractions.
+| Item | Reference-speed 5% pilot selection (2026-09-29) |
+| --- | --- |
+| — | Use the [F2 N=10,000 qualified carrier](../f2-split-inlet/results.md#n10000-carrier-gate) as the DPM-off parent, preserving its Coupled/Global Time Step numerical package |
+|  | At the actual `116.93872650 kg/s` liquid feed, allocate exactly `5.846936325 kg/s` to seven inert-droplet injections and retain `111.091790175 kg/s` Eulerian phase-2 flow through `liquidinlet`; vapor remains `80.70292372 kg/s` through `steaminlet` |
+|  | The historical rounded `111.074 kg/s` command belongs to the earlier `116.92 kg/s` feed and is not reused |
+|  | Use the F2 diagnostic child as the matched injection-control prior: material density `881.210876 kg/m³`, `steaminlet` surface, axial `27.118 m/s` release, same bin shares, wall fates and tracking controls |
+|  | Enable continuous-phase interaction and verify all controls and the complementary mass ledger after save/reopen |
+|  | The first source-update-every-iteration attempt projected about 23 hours per 1,000-iteration block after two native iterations and was stopped with its saved pre-run pair intact |
+| recovery pilot | uses a 100-flow-iteration DPM source update interval, verified after save/reopen; this is an explicit numerical change to carry into matched F4 cases, not a change in injected mass or droplet bins |
+| — | Run a bounded 1,000-iteration two-way pilot from the developed carrier field; assess source-inclusive accounting and track completeness before expanding fractions |
 
 ### Adaptive 2.5% discovery point (2026-09-30)
 
-The completed 5% reference pilot and its source cadence/relaxation variants failed the operational carrier gate. Test the already selected lower matrix fraction independently from the same qualified F2 N10,000 parent. Allocate `2.9234681625 kg/s` to the unchanged seven-bin DPM package, retain `114.0152583375 kg/s` Eulerian liquid and `80.70292372 kg/s` vapor, and use the original 100-iteration retracking interval with held sources. The only scientific delta from the 5% child is the allocated droplet fraction and complementary Eulerian liquid feed. Save/reopen and run a bounded 1,000-iteration pilot; judge the final 500 against the same Eulerian balance, inventory-drift, continuity, solver-event, and unresolved-fate evidence before deciding whether longer development is useful.
+| Item | Adaptive 2.5% discovery point (2026-09-30) |
+| --- | --- |
+| — | The completed 5% reference pilot and its source cadence/relaxation variants failed the operational carrier gate |
+|  | Test the already selected lower matrix fraction independently from the same qualified F2 N10,000 parent |
+|  | Allocate `2.9234681625 kg/s` to the unchanged seven-bin DPM package, retain `114.0152583375 kg/s` Eulerian liquid and `80.70292372 kg/s` vapor, and use the original 100-iteration retracking interval with held sources |
+| only scientific delta from the 5% child | is the allocated droplet fraction and complementary Eulerian liquid feed |
+| — | Save/reopen and run a bounded 1,000-iteration pilot; judge the final 500 against the same Eulerian balance, inventory-drift, continuity, solver-event, and unresolved-fate evidence before deciding whether longer development is useful |
 
 ### Averaged-source continuation to N25,000 (2026-09-30)
 
-The 2.5% averaged-source branch at N20,000 passes the boundary-balance and liquid-inventory operational checks but has a last-500 continuity maximum of 0.02032, just above the declared 0.02 limit. Continue the saved/reopened N20,000 pair without changing feed, injection bins, source averaging, DPM source cadence, or solver controls. Run one 5,000-iteration block to N25,000 with local 1,000-iteration checkpoints and a selected shared final pair. Assess N24,500–25,000 against the same gate and track all seven bins. Treat incomplete tracks as unresolved even if the Eulerian carrier gate passes. Stop numerical continuation if this deeper unchanged branch still fails the carrier gate without a clear improving trend; then diagnose particle termination separately.
+| Averaged-source continuation to N25,000 (2026-09-30) |
+| --- |
+| The 2.5% averaged-source branch at N20,000 passes the boundary-balance and liquid-inventory operational checks but has a last-500 continuity maximum of 0.02032, just above the declared 0.02 limit |
+| Continue the saved/reopened N20,000 pair without changing feed, injection bins, source averaging, DPM source cadence, or solver controls |
+| Run one 5,000-iteration block to N25,000 with local 1,000-iteration checkpoints and a selected shared final pair |
+| Assess N24,500–25,000 against the same gate and track all seven bins |
+| Treat incomplete tracks as unresolved even if the Eulerian carrier gate passes |
+| Stop numerical continuation if this deeper unchanged branch still fails the carrier gate without a clear improving trend; then diagnose particle termination separately |
 
 ## Run sequence and evidence
 
-The first qualified 2.5% carrier at N25,000 leaves 82.01% of represented DPM feed with incomplete tracks. As a read-only postprocessing diagnostic, reopen that verified final pair in a separate Fluent session, increase the DPM maximum tracking steps from 50,000 to 200,000 without solving or saving a replacement case, and retrack the 14 and 49 µm bins. Compare escaped, trapped, and incomplete counts and per-zone mass with the saved 50,000-step baseline. A material reduction in incomplete trajectories would motivate a controlled all-bin tracking protocol; little change would support a recirculation or geometry-limited interpretation and retain unresolved fate in the claim limit.
-
-The all-bin 200,000-step probe materially resolved some larger-droplet tracks but left the 14, 24, and 35 µm incomplete counts unchanged while increasing their residence times roughly fourfold. Reopen the same verified N25,000 pair and test 500,000 maximum steps on the 24 and 35 µm bins only, without flow iterations or replacement case save. If their fates remain materially unchanged and residence times scale with the cap, treat further step-cap increases as low-value for this carrier and keep these trajectories unresolved; do not relabel them as trapped.
+| Item | Run sequence and evidence |
+| --- | --- |
+| — | The first qualified 2.5% carrier at N25,000 leaves 82.01% of represented DPM feed with incomplete tracks |
+|  | As a read-only postprocessing diagnostic, reopen that verified final pair in a separate Fluent session, increase the DPM maximum tracking steps from 50,000 to 200,000 without solving or saving a replacement case, and retrack the 14 and 49 µm bins |
+|  | Compare escaped, trapped, and incomplete counts and per-zone mass with the saved 50,000-step baseline |
+|  | A material reduction in incomplete trajectories would motivate a controlled all-bin tracking protocol; little change would support a recirculation or geometry-limited interpretation and retain unresolved fate in the claim limit |
+|  | The all-bin 200,000-step probe materially resolved some larger-droplet tracks but left the 14, 24, and 35 µm incomplete counts unchanged while increasing their residence times roughly fourfold |
+|  | Reopen the same verified N25,000 pair and test 500,000 maximum steps on the 24 and 35 µm bins only, without flow iterations or replacement case save |
+| If their fates | remain materially unchanged and residence times scale with the cap, treat further step-cap increases as low-value for this carrier and keep these trajectories unresolved; do not relabel them as trapped |
 
 ### 32.14 m/s, 2.5% speed contrast (2026-09-30)
 
-The reference-speed 2.5% F3 averaged-source carrier has passed its operational window, while fine-mist fate remains unresolved. Test the highest selected speed as a separate F3 discovery point to ask whether the carrier can develop and whether faster throughflow materially changes the unresolved fraction. Build independently from the qualified same-speed F2 N10,000 carrier, retain the 2.5% allocation and seven-bin PSD with its speed-scaled inlet release velocity, and use the same 100-iteration DPM retracking/held-source cadence. Verify the complementary Eulerian/DPM mass ledger and saved/reopened child pair. Run a bounded 1,000-iteration pilot to N11,000 with common reports, then judge its last 500 iterations against the same boundary-gap, inventory, continuity, and solver-event gate. Track all bins and report unresolved fates explicitly. If the initial carrier misses only numerical health while remaining recoverable, test node-averaged source continuation as a separately named numerical child before drawing a speed comparison.
+| Item | 14 m/s, 2.5% speed contrast (2026-09-30) |
+| --- | --- |
+| — | The reference-speed 2.5% F3 averaged-source carrier has passed its operational window, while fine-mist fate remains unresolved |
+|  | Test the highest selected speed as a separate F3 discovery point to ask whether the carrier can develop and whether faster throughflow materially changes the unresolved fraction |
+|  | Build independently from the qualified same-speed F2 N10,000 carrier, retain the 2.5% allocation and seven-bin PSD with its speed-scaled inlet release velocity, and use the same 100-iteration DPM retracking/held-source cadence |
+|  | Verify the complementary Eulerian/DPM mass ledger and saved/reopened child pair |
+|  | Run a bounded 1,000-iteration pilot to N11,000 with common reports, then judge its last 500 iterations against the same boundary-gap, inventory, continuity, and solver-event gate |
 
-If the 32.14 m/s carrier passes, reopen its verified final pair in a separate postprocessing session and retrack all seven bins at the same 200,000-step cap used at the 26.81 m/s point. Preserve the carrier case/data, verify the step-cap readback, and compare feed-weighted escaped/trapped/incomplete fractions. A speed-effect claim requires matched cap and visible unresolved fractions; neither 50,000-step endpoint alone qualifies carryover.
+<details>
+<summary>Supporting detail — 14 m/s, 2.5% speed contrast (2026-09-30)</summary>
+
+| Item | 14 m/s, 2.5% speed contrast (2026-09-30) |
+| --- | --- |
+| — | Track all bins and report unresolved fates explicitly |
+|  | If the initial carrier misses only numerical health while remaining recoverable, test node-averaged source continuation as a separately named numerical child before drawing a speed comparison |
+|  | If the 32.14 m/s carrier passes, reopen its verified final pair in a separate postprocessing session and retrack all seven bins at the same 200,000-step cap used at the 26.81 m/s point |
+|  | Preserve the carrier case/data, verify the step-cap readback, and compare feed-weighted escaped/trapped/incomplete fractions |
+| A speed-effect claim | requires matched cap and visible unresolved fractions; neither 50,000-step endpoint alone qualifies carryover |
+
+</details>
 
 ### 20.11 m/s, 2.5% low-speed endpoint (2026-09-30)
 
-Both 26.81 and 32.14 m/s 2.5% averaged-source F3 carriers have passed the operational window, but matched 200,000-step tracking leaves most fine mist unresolved. Test the other selected speed endpoint independently from its qualified F2 N10,000 carrier. Keep the same fraction, seven-bin relative PSD, source retracking cadence, and speed-scaled release rule; verify the complementary mass ledger and saved/reopened child. Run a bounded N11,000 pilot and assess its last 500 iterations before any speed comparison. If only numerical health fails, use a separately named node-averaged-source continuation as at the other two speeds. Track all bins with unresolved fate explicit; use 200,000-step postprocessing only after a carrier window passes.
+| Item | 11 m/s, 2.5% low-speed endpoint (2026-09-30) |
+| --- | --- |
+| — | Both 26.81 and 32.14 m/s 2.5% averaged-source F3 carriers have passed the operational window, but matched 200,000-step tracking leaves most fine mist unresolved |
+|  | Test the other selected speed endpoint independently from its qualified F2 N10,000 carrier |
+|  | Keep the same fraction, seven-bin relative PSD, source retracking cadence, and speed-scaled release rule; verify the complementary mass ledger and saved/reopened child |
+|  | Run a bounded N11,000 pilot and assess its last 500 iterations before any speed comparison |
+|  | If only numerical health fails, use a separately named node-averaged-source continuation as at the other two speeds |
 
-The 20.11 m/s averaged-source N15,000 child still misses inventory and continuity gates despite passing boundary balance. Continue that preserved child without numerical or scientific changes to N20,000 in one 5,000-iteration block, with local 1,000-iteration checkpoints and a selected shared final pair. Assess N19,500–20,000 and all seven bins. If drift and continuity remain outside the gate without an improving trend, avoid treating this low-speed point as qualified and retain it as a diagnostic limit to the intended sweep.
+<details>
+<summary>Supporting detail — 11 m/s, 2.5% low-speed endpoint (2026-09-30)</summary>
+
+| Item | 11 m/s, 2.5% low-speed endpoint (2026-09-30) |
+| --- | --- |
+| — | Track all bins with unresolved fate explicit; use 200,000-step postprocessing only after a carrier window passes |
+|  | The 20.11 m/s averaged-source N15,000 child still misses inventory and continuity gates despite passing boundary balance |
+|  | Continue that preserved child without numerical or scientific changes to N20,000 in one 5,000-iteration block, with local 1,000-iteration checkpoints and a selected shared final pair |
+|  | Assess N19,500–20,000 and all seven bins |
+| If drift and continuity | remain outside the gate without an improving trend, avoid treating this low-speed point as qualified and retain it as a diagnostic limit to the intended sweep |
+
+</details>
 
 ### 23.46 m/s, 2.5% intermediate point (2026-09-30)
 
-The 20.11 m/s averaged-source endpoint failed continuity at N20,000 without improvement, while the reference and high-speed endpoints passed at different development horizons. Test the first intermediate matrix speed independently from its qualified F2 N10,000 parent, keeping the 2.5% allocation, seven-bin PSD, speed-scaled injection release, and 100-iteration held-source cadence. Verify the complementary mass ledger and child case/data after save/reopen. Run N10,000–11,000 as a bounded pilot, assess its last 500 iterations, and track all seven bins. If the carrier misses numerical health, a separately named node-averaged-source continuation may test the same recovery used at the other speeds. Do not infer carryover from incomplete trajectories; reserve matched 200,000-step fate comparison for a carrier that passes its gate.
+| Item | 46 m/s, 2.5% intermediate point (2026-09-30) |
+| --- | --- |
+| — | The 20.11 m/s averaged-source endpoint failed continuity at N20,000 without improvement, while the reference and high-speed endpoints passed at different development horizons |
+|  | Test the first intermediate matrix speed independently from its qualified F2 N10,000 parent, keeping the 2.5% allocation, seven-bin PSD, speed-scaled injection release, and 100-iteration held-source cadence |
+|  | Verify the complementary mass ledger and child case/data after save/reopen |
+|  | Run N10,000–11,000 as a bounded pilot, assess its last 500 iterations, and track all seven bins |
+|  | If the carrier misses numerical health, a separately named node-averaged-source continuation may test the same recovery used at the other speeds |
 
-Build each child from its F2 checkpoint, apply the allocation and coupling delta, verify phase inlet mass and DPM represented mass, install the [common reports](../report-contract.md) plus DPM source/fate histories, then save/reopen and smoke before the declared coupled continuation. Use declared blocks and Fluent-local checkpoints; preserve failure coordinates, report completeness, and checkpoint identity. Analyse only matching native offsets from activation, not the inherited F2 warm-up.
+<details>
+<summary>Supporting detail — 46 m/s, 2.5% intermediate point (2026-09-30)</summary>
 
-For the native whole-domain `DPM Mass Source` field, use **Volume Sum** over both fluid zones: Fluent defines this field as a per-cell mass-flow rate, and its [official spray tutorial](https://ansyshelp.ansys.com/public/Views/Secured/corp/v242/en/flu_tg/x1-28900018.html) uses Volume Report → Sum. The first update-100 pilot accidentally used Volume Integral; its monitor has the wrong dimensions and must be excluded from source-inclusive kg/s accounting. The runner is corrected for subsequent cases/continuations.
+| Item | 46 m/s, 2.5% intermediate point (2026-09-30) |
+| --- | --- |
+| — | Do not infer carryover from incomplete trajectories; reserve matched 200,000-step fate comparison for a carrier that passes its gate |
+|  | Build each child from its F2 checkpoint, apply the allocation and coupling delta, verify phase inlet mass and DPM represented mass, install the [common reports](../report-contract.md) plus DPM source/fate histories, then save/reopen and smoke before the declared coupled continuation |
+|  | Use declared blocks and Fluent-local checkpoints; preserve failure coordinates, report completeness, and checkpoint identity |
+|  | Analyse only matching native offsets from activation, not the inherited F2 warm-up |
+|  | For the native whole-domain `DPM Mass Source` field, use Volume Sum over both fluid zones: Fluent defines this field as a per-cell mass-flow rate, and its [official spray tutorial](https://ansyshelp.ansys.com/public/Views/Secured/corp/v242/en/flu_tg/x1-28900018.html) uses Volume Report → Sum |
+| first update-100 pilot accidentally | used Volume Integral; its monitor has the wrong dimensions and must be excluded from source-inclusive kg/s accounting |
+| runner | is corrected for subsequent cases/continuations |
+| Core figures | F3-A DPM escaped/trapped/incomplete mass fraction against injected fraction at each speed; F3-B phase-resolved outlet routing, liquid inventory/storage, and whole-system source-inclusive closure against fraction; F3-C F2 diagnostic versus F3 allocated-coupled 5% comparison, explicitly labelled as a combined allocation-and-coupling change |
+|  | Show raw trajectories behind window summaries |
 
-Core figures: **F3-A** DPM escaped/trapped/incomplete mass fraction against injected fraction at each speed; **F3-B** phase-resolved outlet routing, liquid inventory/storage, and whole-system source-inclusive closure against fraction; **F3-C** F2 diagnostic versus F3 allocated-coupled 5% comparison, explicitly labelled as a combined allocation-and-coupling change. Show raw trajectories behind window summaries.
+</details>
 
 ## Decision and claim limit
 
-The fraction sweep identifies sensitivity to an assumed inlet droplet allocation. It does not identify the real geothermal mist fraction or prove separator efficiency. F2 retains full Eulerian feed with diagnostic one-way tracking, while F3 reallocates liquid and couples DPM; the F2/F3 difference is a **combined package effect**, not an isolated coupling effect. A 5% one-way allocated bridge at each speed is an optional add-on if later evidence makes coupling attribution important. Record incomplete trajectories as unresolved rather than trapped.
+| Item | Decision and claim limit |
+| --- | --- |
+| — | The fraction sweep identifies sensitivity to an assumed inlet droplet allocation |
+|  | It does not identify the real geothermal mist fraction or prove separator efficiency |
+| F2 | retains full Eulerian feed with diagnostic one-way tracking, while F3 reallocates liquid and couples DPM; the F2/F3 difference is a combined package effect, not an isolated coupling effect |
+| A 5% one-way allocated bridge at each speed | is an optional add-on if later evidence makes coupling attribution important |
+| — | Record incomplete trajectories as unresolved rather than trapped |

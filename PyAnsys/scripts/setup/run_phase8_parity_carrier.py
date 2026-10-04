@@ -119,7 +119,8 @@ def set_speed(solver: Any, family: str, speed: float) -> dict[str, Any]:
 
 
 def configure_reports(solver: Any, monitor_root: Path,
-                      boundaries: tuple[str, ...] = BOUNDARIES) -> tuple[dict[str, dict[str, Any]], dict[str, str]]:
+                      boundaries: tuple[str, ...] = BOUNDARIES, *,
+                      create_local_directory: bool = True) -> tuple[dict[str, dict[str, Any]], dict[str, str]]:
     definitions: dict[str, dict[str, Any]] = {}
     reports = solver.settings.solution.report_definitions
     flux = reports.flux
@@ -191,7 +192,8 @@ def configure_reports(solver: Any, monitor_root: Path,
         require(state.get("report_type") == "surface-areaavg" and state.get("field") == pressure_field and state.get("surface_names") == [boundary], f"Pressure definition failed: {name}: {state}")
         definitions[name] = {"kind": "surface-areaavg", "phase": "mixture", "field": pressure_field, "surface": boundary, "units": "Pa", "state": state}
 
-    monitor_root.mkdir(parents=True, exist_ok=True)
+    if create_local_directory:
+        monitor_root.mkdir(parents=True, exist_ok=True)
     report_files = solver.settings.solution.monitor.report_files
     inherited = list(report_files.get_object_names())
     if inherited:

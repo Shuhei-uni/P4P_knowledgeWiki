@@ -1,7 +1,8 @@
 phase: 08-storyline-reconstruction
-status: PAUSED_BY_USER
+status: PAUSED_AT_AUTHORIZED_N16000_BOUNDARY
 objective: Reconstruct the historical simulation storyline leading to the current model.
-progression_rule: Bounded-run evidence and setup fidelity; numerical thresholds are diagnostics, not progression gates.
+progression_rule: Bounded-run evidence and setup fidelity; numerical thresholds are diagnostics, not progression
+  gates.
 scope: Project/experiments/phase-08-storyline-reconstruction/CONTEXT.md
 reference_speed_m_s: 26.81
 mesh_cells: 60964
@@ -11,37 +12,10 @@ native_figure_receipt: PyAnsys/output/phase8-storyline-20260930/export-receipt.j
 figure_range_receipt: PyAnsys/output/phase8-storyline-20260930/range-receipt.json
 plot_summary: PyAnsys/output/phase8-storyline-20260930/summary.json
 figure_verification: PyAnsys/output/phase8-storyline-20260930/verification.json
-postprocessing_scope: Saved evidence only; no new carrier iterations or source case/data saves.
+postprocessing_scope: Completed saved-evidence N15500-16000 comparison; no further solve authorized.
 selected_numerical_branch: coupled-global-time-step-recovery
-claim_limit: Not Purnanto SIMPLE numerical parity; closed-bottom and outlet liquid routing limit separator claims.
-f1_simple_reconstruction:
-  status: FIVE_SPEED_N10000_CARRIER_AND_ONE_WAY_DPM_DIAGNOSTICS_COMPLETE
-  method_package: SIMPLE, segregated pseudo-time off, second-order k; fresh Hybrid initialization from verified F1 source at each speed.
-  comparison_window: [9500, 10000]
-  comparison_summary: PyAnsys/output/phase8-analysis/f1-simple-vs-coupled-n10000/summary.json
-  weighted_dpm_summary: PyAnsys/output/phase8-analysis/f1-simple-vs-coupled-n10000/f1-simple-diagnostic-dpm-fates.json
-  speeds:
-    20.11:
-      carrier: PyAnsys/output/phase8-carrier/F1-20p11-20260930T110412Z/manifest.json
-      assessment: PyAnsys/output/phase8-analysis/20p11-f1-simple-n10000/assessment.json
-      dpm: PyAnsys/output/phase8-dpm/F1-diagnostic-050permil-20p11-20260930T150944Z/build.json
-    23.46:
-      carrier: PyAnsys/output/phase8-carrier/F1-23p46-20260930T115334Z/manifest.json
-      assessment: PyAnsys/output/phase8-analysis/23p46-f1-simple-n10000/assessment.json
-      dpm: PyAnsys/output/phase8-dpm/F1-diagnostic-050permil-23p46-20260930T151549Z/build.json
-    26.81:
-      carrier: PyAnsys/output/phase8-carrier/F1-26p81-20260930T124257Z/manifest.json
-      assessment: PyAnsys/output/phase8-analysis/26p81-f1-simple-n10000/assessment.json
-      dpm: PyAnsys/output/phase8-dpm/F1-diagnostic-050permil-26p81-20260930T152153Z/build.json
-    29.48:
-      carrier: PyAnsys/output/phase8-carrier/F1-29p48-20260930T133143Z/manifest.json
-      assessment: PyAnsys/output/phase8-analysis/29p48-f1-simple-n10000/assessment.json
-      dpm: PyAnsys/output/phase8-dpm/F1-diagnostic-050permil-29p48-20260930T152728Z/build.json
-    32.14:
-      carrier: PyAnsys/output/phase8-carrier/F1-32p14-20260930T142022Z/manifest.json
-      assessment: PyAnsys/output/phase8-analysis/32p14-f1-simple-n10000/assessment.json
-      dpm: PyAnsys/output/phase8-dpm/F1-diagnostic-050permil-32p14-20260930T153305Z/build.json
-  claim_limit: All five SIMPLE assessments fail mixture-gap, inventory-slope, and continuity diagnostics; DPM outcomes remain conditional on those poor carriers and are not separation-efficiency claims.
+claim_limit: Not Purnanto SIMPLE numerical parity; closed-bottom and outlet liquid routing limit separator
+  claims.
 families:
   F1:
     status: FIVE_SPEED_COUPLED_N10000_RECREATED_WITH_DIAGNOSTIC_DPM
@@ -50,9 +24,6 @@ families:
     gate: PyAnsys/output/phase8-analysis/26p81-f1-coupled-n10000/assessment.json
     diagnostic_dpm: PyAnsys/output/phase8-dpm/F1-diagnostic-050permil-26p81-20260928T143528Z/build.json
     dpm_tracking_status: COMPLETE_WITH_77P30PCT_DIAGNOSTIC_WEIGHT_INCOMPLETE
-    separate_single_face_parity: PyAnsys/output/phase8-single-face/F1-single-face-parity-26p81-20260928T162910Z/build.json
-    single_face_pilot: PyAnsys/output/phase8-single-face/F1-single-face-SIMPLE-26p81-20260928T165448Z/manifest.json
-    single_face_assessment: PyAnsys/output/phase8-analysis/26p81-f1-single-face-simple-n2000/assessment.json
     speed_20p11_pilot: PyAnsys/output/phase8-carrier/F1-20p11-coupled-gts-20260928T170440Z/manifest.json
     speed_20p11_assessment: PyAnsys/output/phase8-analysis/20p11-f1-coupled-n2000/assessment.json
     speed_20p11_n5000: PyAnsys/output/phase8-carrier/F1-20p11-coupled-gts-extension-to5000-20260928T173433Z/manifest.json
@@ -79,7 +50,6 @@ families:
     speed_32p14_n10000_assessment: PyAnsys/output/phase8-analysis/32p14-f1-coupled-n10000/assessment.json
     speed_32p14_current_diagnostic_dpm: PyAnsys/output/phase8-dpm/F1-diagnostic-050permil-32p14-20260929T062233Z/build.json
     speed_32p14_dpm_fates: PyAnsys/output/phase8-analysis/32p14-f1-diagnostic-dpm/summary.json
-    excluded_speed_23p46_simple_start: PyAnsys/output/phase8-carrier/F1-23p46-20260928T194516Z/manifest.json
   F2:
     status: FIVE_SPEED_COUPLED_N10000_RECREATED_WITH_DIAGNOSTIC_DPM
     final_run: PyAnsys/output/phase8-carrier/F2-26p81-coupled-gts-extension-to10000-20260928T123834Z/manifest.json
@@ -114,11 +84,10 @@ families:
     speed_32p14_current_diagnostic_dpm: PyAnsys/output/phase8-dpm/F2-diagnostic-050permil-32p14-20260929T062610Z/build.json
     speed_32p14_dpm_fates: PyAnsys/output/phase8-analysis/32p14-f2-diagnostic-dpm/summary.json
   F3:
-    status: FOUR_2P5PCT_AND_ONE_5PCT_PILOTS_RECREATED_WITH_CONTINUATION_EVIDENCE
+    status: FIVE_MATCHED_POINTS_N16000_VERIFIED
     verified_child: PyAnsys/output/phase8-dpm/F2-allocated-050permil-26p81-upd100-20260928T144555Z/build.json
     pilot_run: PyAnsys/output/phase8-carrier/F3-26p81-5pct-coupled-upd100-20260928T144733Z/manifest.json
     pilot_assessment: PyAnsys/output/phase8-analysis/26p81-f3-5pct-upd100-n11000/assessment.json
-    final_run: PyAnsys/output/phase8-carrier/F3-26p81-5pct-coupled-upd100-extension-to20000-20260929T063006Z/manifest.json
     final_assessment: PyAnsys/output/phase8-analysis/26p81-f3-5pct-upd100-n20000/assessment.json
     previous_extension_to15000: PyAnsys/output/phase8-carrier/F3-26p81-5pct-coupled-upd100-extension-to15000-20260928T151004Z/manifest.json
     failed_source_update_recovery: PyAnsys/output/phase8-carrier/F3-26p81-5pct-coupled-upd100-source-every-iteration-extension-to21000-20260929T083005Z/manifest.json
@@ -173,9 +142,21 @@ families:
     speed_23p46_fraction_2p5_verified_child: PyAnsys/output/phase8-dpm/F2-allocated-025permil-23p46-upd100-20260930T074326Z/build.json
     speed_23p46_fraction_2p5_current_pilot: PyAnsys/output/phase8-carrier/F3-23p46-2p5pct-coupled-upd100-20260930T074551Z/manifest.json
     interrupted_upd1_pilot: PyAnsys/output/phase8-carrier/F3-26p81-5pct-coupled-20260928T144022Z/manifest.json
-    report_correction: Pilot used Volume Integral for per-cell DPM Mass Source and is excluded from kg/s accounting. N11000 to N15000 continuation uses Volume Sum, readback 0 kg/s.
+    report_correction: Pilot used Volume Integral for per-cell DPM Mass Source and is excluded from kg/s
+      accounting. N11000 to N15000 continuation uses Volume Sum, readback 0 kg/s.
+    selected_endpoints:
+      F3-20.11-2.5pct-N16000: PyAnsys/output/phase8-server1-matched-20261003/F3-20.11-2.5pct-N16000/manifest.json
+      F3-23.46-2.5pct-N16000: PyAnsys/output/phase8-server1-matched-20261003/F3-23.46-2.5pct-N16000/manifest.json
+      F3-26.81-2.5pct-N16000: PyAnsys/output/phase8-server1-matched-20261003/F3-26.81-2.5pct-N16000/manifest.json
+      F3-32.14-2.5pct-N16000: PyAnsys/output/phase8-server1-matched-20261003/F3-32.14-2.5pct-N16000/manifest.json
+      F3-26.81-5pct-N16000: PyAnsys/output/phase8-server1-matched-20261003/F3-26.81-5pct-N16000/manifest.json
+    comparison_window:
+    - 15500
+    - 16000
+    previous_final_run: PyAnsys/output/phase8-carrier/F3-26p81-5pct-coupled-upd100-extension-to20000-20260929T063006Z/manifest.json
+    final_run: PyAnsys/output/phase8-server1-matched-20261003/F3-26.81-5pct-N16000/manifest.json
   F4:
-    status: PROVISIONAL_E27_5PCT_N11000_RECREATED_WITH_OPEN_ACCOUNTING
+    status: FIVE_MATCHED_POINTS_N16000_VERIFIED
     builder: PyAnsys/scripts/setup/build_phase8_f4_provisional_ewf.py
     verified_child: PyAnsys/output/phase8-ewf/F4-26p81-5pct-E27-provisional-20260928T163502Z/build.json
     pilot_run: PyAnsys/output/phase8-ewf/F4-26p81-5pct-E27-provisional-20260928T163918Z/manifest.json
@@ -183,10 +164,83 @@ families:
     rejected_lwf_boundary_attempt: PyAnsys/output/phase8-ewf/F4-26p81-5pct-E27-provisional-20260928T163022Z/build.json
     rejected_global_only_splash_child: PyAnsys/output/phase8-ewf/F4-26p81-5pct-E27-provisional-20260928T163224Z/build.json
     claim_limit: Phase 7.2A EWF treatment remains unfinalized; E2.7 is only an exploratory switch basis.
+    selected_endpoints:
+      F4-20.11-2.5pct-N16000: PyAnsys/output/phase8-server1-matched-20261003/F4-20.11-2.5pct-N16000/manifest.json
+      F4-23.46-2.5pct-N16000: PyAnsys/output/phase8-server1-matched-20261003/F4-23.46-2.5pct-N16000/manifest.json
+      F4-26.81-2.5pct-N16000: PyAnsys/output/phase8-server1-matched-20261003/F4-26.81-2.5pct-N16000/manifest.json
+      F4-32.14-2.5pct-N16000: PyAnsys/output/phase8-server1-matched-20261003/F4-32.14-2.5pct-N16000/manifest.json
+      F4-26.81-5pct-N16000: PyAnsys/output/phase8-server1-matched-20261003/F4-26.81-5pct-N16000/manifest.json
+    comparison_window:
+    - 15500
+    - 16000
+    final_run: PyAnsys/output/phase8-server1-matched-20261003/F4-26.81-5pct-N16000/manifest.json
+  F0:
+    status: FIVE_SPEED_N10000_CARRIER_AND_ONE_WAY_DPM_DIAGNOSTICS_COMPLETE
+    method_package: SIMPLE, segregated pseudo-time off, second-order k; fresh Hybrid initialization from
+      verified F1 source at each speed.
+    comparison_window:
+    - 9500
+    - 10000
+    comparison_summary: PyAnsys/output/phase8-analysis/f1-simple-vs-coupled-n10000/summary.json
+    weighted_dpm_summary: PyAnsys/output/phase8-analysis/f1-simple-vs-coupled-n10000/f1-simple-diagnostic-dpm-fates.json
+    speeds:
+      20.11:
+        carrier: PyAnsys/output/phase8-carrier/F1-20p11-20260930T110412Z/manifest.json
+        assessment: PyAnsys/output/phase8-analysis/20p11-f1-simple-n10000/assessment.json
+        dpm: PyAnsys/output/phase8-dpm/F1-diagnostic-050permil-20p11-20260930T150944Z/build.json
+      23.46:
+        carrier: PyAnsys/output/phase8-carrier/F1-23p46-20260930T115334Z/manifest.json
+        assessment: PyAnsys/output/phase8-analysis/23p46-f1-simple-n10000/assessment.json
+        dpm: PyAnsys/output/phase8-dpm/F1-diagnostic-050permil-23p46-20260930T151549Z/build.json
+      26.81:
+        carrier: PyAnsys/output/phase8-carrier/F1-26p81-20260930T124257Z/manifest.json
+        assessment: PyAnsys/output/phase8-analysis/26p81-f1-simple-n10000/assessment.json
+        dpm: PyAnsys/output/phase8-dpm/F1-diagnostic-050permil-26p81-20260930T152153Z/build.json
+      29.48:
+        carrier: PyAnsys/output/phase8-carrier/F1-29p48-20260930T133143Z/manifest.json
+        assessment: PyAnsys/output/phase8-analysis/29p48-f1-simple-n10000/assessment.json
+        dpm: PyAnsys/output/phase8-dpm/F1-diagnostic-050permil-29p48-20260930T152728Z/build.json
+      32.14:
+        carrier: PyAnsys/output/phase8-carrier/F1-32p14-20260930T142022Z/manifest.json
+        assessment: PyAnsys/output/phase8-analysis/32p14-f1-simple-n10000/assessment.json
+        dpm: PyAnsys/output/phase8-dpm/F1-diagnostic-050permil-32p14-20260930T153305Z/build.json
+    claim_limit: All five SIMPLE assessments fail mixture-gap, inventory-slope, and continuity diagnostics;
+      DPM outcomes remain conditional on those poor carriers and are not separation-efficiency claims.
+    setup: Project/experiments/phase-08-storyline-reconstruction/f0-simple/setup.md
+    original_artifact_family: F1
+    separate_single_face_parity: PyAnsys/output/phase8-single-face/F1-single-face-parity-26p81-20260928T162910Z/build.json
+    single_face_pilot: PyAnsys/output/phase8-single-face/F1-single-face-SIMPLE-26p81-20260928T165448Z/manifest.json
+    single_face_assessment: PyAnsys/output/phase8-analysis/26p81-f1-single-face-simple-n2000/assessment.json
+    excluded_speed_23p46_simple_start: PyAnsys/output/phase8-carrier/F1-23p46-20260928T194516Z/manifest.json
 matched_26p81_comparison: PyAnsys/output/phase8-analysis/26p81-f1-f2-coupled-n10000/summary.json
 matched_20p11_n5000_comparison: PyAnsys/output/phase8-analysis/20p11-f1-f2-coupled-n5000/summary.json
 matched_20p11_n10000_comparison: PyAnsys/output/phase8-analysis/20p11-f1-f2-coupled-n10000/summary.json
 matched_23p46_n10000_comparison: PyAnsys/output/phase8-analysis/23p46-f1-f2-coupled-n10000/summary.json
 matched_29p48_n10000_comparison: PyAnsys/output/phase8-analysis/29p48-f1-f2-coupled-n10000/summary.json
 matched_32p14_n10000_comparison: PyAnsys/output/phase8-analysis/32p14-f1-f2-coupled-n10000/summary.json
-next_required_action: Experimental loop paused at user request. Plotting and results synthesis are authorized postprocessing; further carrier runs await resume. The F3 23.46 m/s 2.5% N11000 pilot is included in the saved-evidence comparison; no new gate assessment is needed for storyline inclusion.
+next_required_action: None within this batch. Remain paused; further iterations or matrix expansion need
+  a new human scope.
+authorized_batch:
+  authority: human_2026_10_03_current_chat
+  server_id: '1'
+  local_direct_fluent: false
+  spec: PyAnsys/output/phase8-server1-matched-20261003/batch-spec.json
+  manifest: PyAnsys/output/phase8-server1-matched-20261003/batch-manifest.json
+  f3_points: 5
+  f4_points: 5
+  target_native_iteration: 16000
+  mechanism_active_iterations: 6000
+  comparison_window:
+  - 15500
+  - 16000
+  status: VERIFIED_COMPLETE
+  stop_after_batch: true
+  job_manifest: PyAnsys/output/phase8-server1-matched-20261003/job-manifest.json
+  batch_manifest: PyAnsys/output/phase8-server1-matched-20261003/batch-manifest.json
+  analysis: PyAnsys/output/phase8-server1-matched-20261003/matched-analysis.json
+  comparison_csv: PyAnsys/output/phase8-server1-matched-20261003/matched-comparison.csv
+  added_iterations: 42000
+  final_pair_hashes_verified: 10
+  core_coverage:
+    represented_points: 25
+    intended_points: 65

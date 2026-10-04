@@ -1,7 +1,8 @@
 # P71A-T1-REALIZABLE-KEPSILON setup draft
 
-> **Status — DEFFERED (2026-09-22):** Deferred after the Server-3 approach
-> was paused; retain this setup as planning provenance only.
+| Item | P71A-T1-REALIZABLE-KEPSILON setup draft |
+| --- | --- |
+| Status — DEFFERED (2026-09-22) | Deferred after the Server-3 approach was paused; retain this setup as planning provenance only |
 
 | Field | Value |
 | --- | --- |
@@ -19,28 +20,35 @@
 
 ## Question
 
-Does realizable k-epsilon produce a more bounded turbulence field in the
-separator while preserving bottom-only absorber and vapor-only outlet routing?
+| Question |
+| --- |
+| Does realizable k-epsilon produce a more bounded turbulence field in the separator while preserving bottom-only absorber and vapor-only outlet routing? |
 
 ## Controlled change
 
-Change only the viscous closure to realizable k-epsilon. Read back the
-closure-specific options rather than assuming RNG differential-viscosity or
-swirl controls transfer. Preserve baseline wall treatment, numerical schemes,
-first-order k treatment, URFs, absorber, boundaries, and DPM isolation wherever
-applicable.
+| Item | Controlled change |
+| --- | --- |
+| — | Change only the viscous closure to realizable k-epsilon |
+|  | Read back the closure-specific options rather than assuming RNG differential-viscosity or swirl controls transfer |
+|  | Preserve baseline wall treatment, numerical schemes, first-order k treatment, URFs, absorber, boundaries, and DPM isolation wherever applicable |
+|  | Load the active-1000 parent as-is |
+|  | Do not reinitialize, patch, reset, remesh, resplit, or alter the restart field |
 
-Load the active-1000 parent as-is. Do not reinitialize, patch, reset, remesh,
-resplit, or alter the restart field. The requested realizable closure must be
-read back before any iteration.
+<details>
+<summary>Supporting detail — Controlled change</summary>
 
-Planned discovery horizon: 500 native iterations after smoke. Use the same
-verified parent as T0 and the shared evidence/core-figure contract in the
-[family README](../README.md). The common closure path is in
-[closure-path-readback.md](../closure-path-readback.md).
+| Item | Controlled change |
+| --- | --- |
+| — | The requested realizable closure must be read back before any iteration |
+| Planned discovery horizon | 500 native iterations after smoke |
+|  | Use the same verified parent as T0 and the shared evidence/core-figure contract in the [family README](../README.md) |
+|  | The common closure path is in [closure-path-readback.md](../closure-path-readback.md) |
+
+</details>
 
 ## Decision boundary
 
-Compare coupled evidence, not only k/epsilon residuals. A candidate that
-improves turbulence residuals while worsening phase closure or absorber
-delivery is not a successful branch.
+| Decision boundary |
+| --- |
+| Compare coupled evidence, not only k/epsilon residuals |
+| A candidate that improves turbulence residuals while worsening phase closure or absorber delivery is not a successful branch |

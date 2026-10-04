@@ -2,34 +2,28 @@
 
 ## Answer at a glance
 
-The v2 inlet-development case completed its recorded `2,000` steady Fluent
-iterations on `student` from the exact prepared v2 baseline pair. The same
-live case was then continued by the user to native iteration `4,002`. The
-liquid and steam
-inlets were scheduled together from `0.25` of the prior experiment's base
-targets toward `116.92 kg/s` liquid and `80.69 kg/s` steam over the requested
-horizon, with updates every 10 iterations. Native report histories and the
-original residual transcript each contain `2,000` points; the active
-continuation Report Files now contain `2,003` points from iterations `2,000`
-through `4,002`.
+| Item | Answer at a glance |
+| --- | --- |
+| v2 inlet-development case completed its | recorded `2,000` steady Fluent iterations on `student` from the exact prepared v2 baseline pair |
+| same live case | was then continued by the user to native iteration `4,002` |
+| liquid and steam inlets | were scheduled together from `0.25` of the prior experiment's base targets toward `116.92 kg/s` liquid and `80.69 kg/s` steam over the requested horizon, with updates every 10 iterations |
+| — | Native report histories and the original residual transcript each contain `2,000` points; the active continuation Report Files now contain `2,003` points from iterations `2,000` through `4,002` |
+|  | The absorber does begin to realize its inlet-derived command once liquid has developed in the lower zone |
 
-The absorber does begin to realize its inlet-derived command once liquid has
-developed in the lower zone. By the late part of the run, the native applied
-phase-2 source agrees with the named removal to machine precision and follows
-the command. The whole-separator liquid inventory nevertheless grows strongly
-through the horizon, while the lower-zone inventory remains only about
-`0.10 kg`. The continuation to native iteration `4,002` increases the
-lower-zone inventory to `2.497 kg` and the total inventory to `318.661 kg`.
-This is useful liquid-development evidence, not a steady or bounded-inventory
-result.
+<details>
+<summary>Supporting detail — Answer at a glance</summary>
 
-One native monitor initialization artifact is retained explicitly: report
-iteration `1` contains the inherited parent liquid command (`111.22015 kg/s`)
-before the child schedule is reflected in the report cache. From iteration `2`
-the inlet history is on the declared ramp, beginning at `29.23 kg/s`; the
-control readback confirms that the child schedule was reapplied after the
-prepared pair was reopened. The artifact is visible in the raw histories and
-is not removed from the evidence.
+| Item | Answer at a glance |
+| --- | --- |
+| — | By the late part of the run, the native applied phase-2 source agrees with the named removal to machine precision and follows the command |
+|  | The whole-separator liquid inventory nevertheless grows strongly through the horizon, while the lower-zone inventory remains only about `0.10 kg` |
+|  | The continuation to native iteration `4,002` increases the lower-zone inventory to `2.497 kg` and the total inventory to `318.661 kg` |
+| This | is useful liquid-development evidence, not a steady or bounded-inventory result |
+| One native monitor initialization artifact is retained explicitly | report iteration `1` contains the inherited parent liquid command (`111.22015 kg/s`) before the child schedule is reflected in the report cache |
+|  | From iteration `2` the inlet history is on the declared ramp, beginning at `29.23 kg/s`; the control readback confirms that the child schedule was reapplied after the prepared pair was reopened |
+|  | The artifact is visible in the raw histories and is not removed from the evidence |
+
+</details>
 
 ## Controlled case
 
@@ -46,21 +40,19 @@ is not removed from the evidence.
 | Boundary controls | `steamoutlet` is the only pressure outlet; bottom boundaries remain walls; no direct phase-1 source |
 | Checkpoints | paired case/data at active `0`, `500`, `1,000`, `1,500`, and `2,000` |
 
-The base targets are the recorded targets from the prior inlet-loading
-experiment. They are deliberately different from the v2 prepared parent's
-inherited `111.22015 kg/s` liquid and `76.7563625 kg/s` steam settings; the
-child schedule reaches the prior experiment's base targets at the end of the
-ramp.
+| Item | Controlled case |
+| --- | --- |
+| base targets | are the recorded targets from the prior inlet-loading experiment |
+| They | are deliberately different from the v2 prepared parent's inherited `111.22015 kg/s` liquid and `76.7563625 kg/s` steam settings; the child schedule reaches the prior experiment's base targets at the end of the ramp |
 
 ## Native observations
 
-The flux signs in the native reports are outward-positive at the outlet below;
-the stored Fluent values are negative for an outward outlet flux. The terminal
-command shown in the report is one control block behind the final scheduled
-boundary target because the schedule is updated after each 10-iteration solve
-block. The final boundary schedule itself is `116.92 kg/s` liquid and
-`80.69 kg/s` steam. The new native continuation report files reach iteration
-`4,002` and record those final inlet values directly.
+| Item | Native observations |
+| --- | --- |
+| flux signs in the native reports | are outward-positive at the outlet below; the stored Fluent values are negative for an outward outlet flux |
+| terminal command shown in the report | is one control block behind the final scheduled boundary target because the schedule is updated after each 10-iteration solve block |
+| final boundary schedule itself | is `116.92 kg/s` liquid and `80.69 kg/s` steam |
+| — | The new native continuation report files reach iteration `4,002` and record those final inlet values directly |
 
 | Monitor | Iteration 1 | Iteration 2 | Iteration 2,000 | Iteration 4,002 | Interpretation |
 | --- | ---: | ---: | ---: | ---: | --- |
@@ -79,35 +71,34 @@ block. The final boundary schedule itself is `116.92 kg/s` liquid and
 
 ### Native continuation readback at iteration 4,002
 
-The new column is based on the live `student` session and the active Fluent
-Report File objects, not on an extrapolation of the earlier 2,000-point local
-history. Fluent's active continuation report files contain `2,003` native
-points from iterations `2,000` through `4,002`; their generated names end in
-`_2001.out`. The final native report points are preserved in
-[live-4002-readback.json](live-4002-readback.json). The live named-expression
-readback independently reports `P71V2Iteration = 4002`,
-`P71V2Command = 116.92 kg/s`, `P71V2Removal = 116.92 kg/s`, and
-`P71V2AvailableVolume = 2.833945e-3 m3`.
+| Item | Native continuation readback at iteration 4,002 |
+| --- | --- |
+| new column | is based on the live `student` session and the active Fluent Report File objects, not on an extrapolation of the earlier 2,000-point local history |
+| — | Fluent's active continuation report files contain `2,003` native points from iterations `2,000` through `4,002`; their generated names end in `_2001.out` |
+| final native report points | are preserved in [live-4002-readback.json](live-4002-readback.json) |
+| — | The live named-expression readback independently reports `P71V2Iteration = 4002`, `P71V2Command = 116.92 kg/s`, `P71V2Removal = 116.92 kg/s`, and `P71V2AvailableVolume = 2.833945e-3 m3` |
+|  | For the outlet rows, the table displays outward-positive mass flow |
 
-For the outlet rows, the table displays outward-positive mass flow. The raw
-Fluent native values at iteration `4,002` are `-80.497349 kg/s` for phase 1,
-`-22.116498 kg/s` for phase 2, and `-102.623831 kg/s` for the mixture. The
-phase-2 liquid-inlet native report is `+116.92 kg/s`; the absorber source is
-`-116.92 kg/s`.
+<details>
+<summary>Supporting detail — Native continuation readback at iteration 4,002</summary>
 
-After approximately the first few hundred iterations, the native applied
-removal and named-expression removal track the command to numerical precision;
-from native iteration `501` onward their maximum absolute difference is about
-`3e-13 kg/s`. This demonstrates that the v2 source law is being applied when
-liquid is available. It does not demonstrate that the commanded removal is a
-physically validated absorber capacity.
+| Item | Native continuation readback at iteration 4,002 |
+| --- | --- |
+| raw Fluent native values at iteration `4,002` | are `-80.497349 kg/s` for phase 1, `-22.116498 kg/s` for phase 2, and `-102.623831 kg/s` for the mixture |
+| phase-2 liquid-inlet native report | is `+116.92 kg/s`; the absorber source is `-116.92 kg/s` |
+| — | After approximately the first few hundred iterations, the native applied removal and named-expression removal track the command to numerical precision; from native iteration `501` onward their maximum absolute difference is about `3e-13 kg/s` |
+| This demonstrates that the v2 source law | is being applied when liquid is available |
+| It does not demonstrate that the commanded removal | is a physically validated absorber capacity |
+
+</details>
 
 ## Numerical adequacy and limitations
 
-The original 2,000-iteration run completed without a fatal solver diagnostic
-and all recorded residual values were finite. The live residual monitor was
-then read at native iteration `4,002`; it contains `1,902` points from
-iterations `4` through `4,002`. Its endpoint values are:
+| Item | Numerical adequacy and limitations |
+| --- | --- |
+| — | The original 2,000-iteration run completed without a fatal solver diagnostic and all recorded residual values were finite |
+| live residual monitor | was then read at native iteration `4,002`; it contains `1,902` points from iterations `4` through `4,002` |
+| — | Its endpoint values are: |
 
 | Residual | Iteration 2,000 | Iteration 4,002 | Numerical-adequacy reading |
 | --- | ---: | ---: | --- |
@@ -119,59 +110,60 @@ iterations `4` through `4,002`. Its endpoint values are:
 | epsilon | `1.4913e-3` | `2.1760e-3` | Finite, but increased |
 | phase-2 volume fraction | `1.7241e-3` | `2.5992e-3` | Finite, but increased |
 
-**Numerical adequacy at iteration 4,002: finite but not qualified.** All seven
-residuals remain finite, but all are higher than at iteration `2,000`, with
-continuity increasing from `9.62e-3` to `1.73e-2`. The continuation therefore
-does not provide evidence of residual improvement or steady convergence.
+| Item | Numerical adequacy and limitations |
+| --- | --- |
+| Numerical adequacy at iteration 4,002: finite but not qualified. | All seven residuals remain finite, but all are higher than at iteration `2,000`, with continuity increasing from `9.62e-3` to `1.73e-2` |
+|  | The continuation therefore does not provide evidence of residual improvement or steady convergence |
+| — | The transcript reports roughly `245–263` reversed-flow faces at the pressure outlet through the late portion of the run |
+|  | The residuals and outlet warnings, together with the continuously increasing inventory, mean this is a finite- horizon discovery trajectory |
+|  | It must not be called converged, steady, bounded, or physically validated on the evidence above |
 
-The transcript reports roughly `245–263` reversed-flow faces at the pressure
-outlet through the late portion of the run. The residuals and outlet warnings,
-together with the continuously increasing inventory, mean this is a finite-
-horizon discovery trajectory. It must not be called converged, steady,
-bounded, or physically validated on the evidence above. The live continuation
-readback adds native observations and a residual-monitor endpoint comparison
-through iteration `4,002`. It still cannot be used to claim that the extended
-case became numerically adequate.
+<details>
+<summary>Supporting detail — Numerical adequacy and limitations</summary>
 
-The principal scientific reading is therefore: the gentler inlet ramp develops
-liquid into the v2 domain and eventually gives the virtual outlet enough local
-liquid to realize its feed-forward sink. Continuing to iteration `4,002`
-increases lower-zone liquid from `0.102785 kg` to `2.497303 kg`, but total
-liquid inventory also increases from `183.595 kg` to `318.661 kg`, while the
-phase-2 outlet contribution increases from `9.156 kg/s` to `22.116 kg/s`.
-The extension therefore confirms ongoing liquid development and altered phase
-routing, not a stable operating point. The next decision should use native
-phase-resolved fluxes, source-inclusive balances, late-window inventory slope,
-and outlet reverse-flow behaviour rather than residual magnitude alone.
+| Item | Numerical adequacy and limitations |
+| --- | --- |
+| — | The live continuation readback adds native observations and a residual-monitor endpoint comparison through iteration `4,002` |
+| It still cannot be | used to claim that the extended case became numerically adequate |
+| The principal scientific reading is therefore | the gentler inlet ramp develops liquid into the v2 domain and eventually gives the virtual outlet enough local liquid to realize its feed-forward sink |
+|  | Continuing to iteration `4,002` increases lower-zone liquid from `0.102785 kg` to `2.497303 kg`, but total liquid inventory also increases from `183.595 kg` to `318.661 kg`, while the phase-2 outlet contribution increases from `9.156 kg/s` to `22.116 kg/s` |
+|  | The extension therefore confirms ongoing liquid development and altered phase routing, not a stable operating point |
+|  | The next decision should use native phase-resolved fluxes, source-inclusive balances, late-window inventory slope, and outlet reverse-flow behaviour rather than residual magnitude alone |
+
+</details>
 
 ## Evidence and artifacts
 
-- [Deferred setup contract](deffered.md)
-- [Run-path map](run-paths.yaml)
-- [Run manifest](../../../../PyAnsys/output/phase71a_v2_inlet_loading/20260922T031500Z/run-manifest.json)
-- [Native report histories](../../../../PyAnsys/output/phase71a_v2_inlet_loading/20260922T031500Z/report-histories.json)
-- [Residual history](../../../../PyAnsys/output/phase71a_v2_inlet_loading/20260922T031500Z/residuals.json)
-- [Solver transcript](../../../../PyAnsys/output/phase71a_v2_inlet_loading/20260922T031500Z/transcript.txt)
-- [Inlet-loading summary figure](../../../../PyAnsys/output/phase71a_v2_inlet_loading/20260922T031500Z/v2-inlet-loading-summary.png)
-- [Live iteration-4,002 readback](live-4002-readback.json)
+| Item | Evidence and artifacts |
+| --- | --- |
+| — | [Deferred setup contract](deffered.md) |
+|  | [Run-path map](run-paths.yaml) |
+|  | [Run manifest](../../../../PyAnsys/output/phase71a_v2_inlet_loading/20260922T031500Z/run-manifest.json) |
+|  | [Native report histories](../../../../PyAnsys/output/phase71a_v2_inlet_loading/20260922T031500Z/report-histories.json) |
+|  | [Residual history](../../../../PyAnsys/output/phase71a_v2_inlet_loading/20260922T031500Z/residuals.json) |
 
-The authoritative local evidence directory is
-`PyAnsys/output/phase71a_v2_inlet_loading/20260922T031500Z`. The final paired
-case/data artifacts remain on the Fluent host at the OneDrive final root
-recorded in `run-manifest.json`:
+<details>
+<summary>Supporting detail — Evidence and artifacts</summary>
+
+| Item | Evidence and artifacts |
+| --- | --- |
+| — | [Solver transcript](../../../../PyAnsys/output/phase71a_v2_inlet_loading/20260922T031500Z/transcript.txt) |
+|  | [Inlet-loading summary figure](../../../../PyAnsys/output/phase71a_v2_inlet_loading/20260922T031500Z/v2-inlet-loading-summary.png) |
+|  | [Live iteration-4,002 readback](live-4002-readback.json) |
+| authoritative local evidence directory | is `PyAnsys/output/phase71a_v2_inlet_loading/20260922T031500Z` |
+| final paired case/data artifacts | remain on the Fluent host at the OneDrive final root recorded in `run-manifest.json`: |
+
+</details>
 
 ```text
 C:\Users\Shuhei Yokkaichi\OneDrive\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\Phase71A\V2InletLoading\finals\P71A-V2-INLET-LOADING-RAMP\20260922T031500Z\P71A-V2-INLET-LOADING-RAMP-active2000.cas.h5
 C:\Users\Shuhei Yokkaichi\OneDrive\OneDrive - The University of Auckland\P4P-Fluent-Artifacts\Phase71A\V2InletLoading\finals\P71A-V2-INLET-LOADING-RAMP\20260922T031500Z\P71A-V2-INLET-LOADING-RAMP-active2000.dat.h5
 ```
 
-Final SHA-256 identities:
-
-- case: `6c802f8b36c95292f47a925d429bdb92c8bf66cc87cfddb7b36ffc78be5f5d43`
-- data: `12f165d67efd6756d9dd0ff69609a577e2bf0a89215450f1fd834d979cf58fca`
-
-The earlier `20260922T024000Z` attempt is superseded and is not used for the
-scientific result because its initial post-reopen control block was not
-verified cleanly. The `20260922T031500Z` run is the authoritative evidence
-package, with the single iteration-1 native monitor-cache artifact documented
-above.
+| Item | Evidence and artifacts |
+| --- | --- |
+| — | Final SHA-256 identities: |
+| case | `6c802f8b36c95292f47a925d429bdb92c8bf66cc87cfddb7b36ffc78be5f5d43` |
+| data | `12f165d67efd6756d9dd0ff69609a577e2bf0a89215450f1fd834d979cf58fca` |
+| earlier `20260922T024000Z` attempt | is superseded and is not used for the scientific result because its initial post-reopen control block was not verified cleanly |
+| `20260922T031500Z` run | is the authoritative evidence package, with the single iteration-1 native monitor-cache artifact documented above |

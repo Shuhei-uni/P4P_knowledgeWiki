@@ -25,7 +25,7 @@ These may be invoked explicitly or reached naturally from active work:
 
 - `pyansys-workflow`
 - `cfd-numerical-analysis`
-- `cfd-wiki`
+- `cfd-wiki` — existing CFD knowledge Q&A, model/evidence comparisons, Fluent guidance, ingest and wiki health.
 - `report-writing`
 - `writing-for-agents`
 

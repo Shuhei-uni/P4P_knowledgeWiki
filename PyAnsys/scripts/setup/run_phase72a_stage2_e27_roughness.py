@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run one Phase 7.2A Stage 2 E2.7 plus roughness child on Server 3."""
+"""Run a Phase 7.2A Stage 2 child, including a matched film-cap sensitivity."""
 from __future__ import annotations
 
 import argparse
@@ -55,7 +55,9 @@ def configure_coverage(solver):
     report.report_type = "surface-integral"
     report.field = "film-coverage"
     report.surface_names = ["wall"]
-    report.phase = "mixture"
+    # The 2025 R2 surface report phase is read-only; new film reports already
+    # use the mixture domain. Verify it rather than emitting a setter error.
+    require(report.phase() == "mixture", "film coverage report is not on the mixture domain")
     report.per_selection = False
     report.average_over = 1
     report.create_report_file = False
@@ -101,37 +103,50 @@ def main():
     parser.add_argument("--case", choices=CASES, required=True)
     parser.add_argument("--stamp", required=True)
     parser.add_argument("--output-root", type=Path, required=True)
+    parser.add_argument("--server-id", choices=["1", "3"], default="3")
+    parser.add_argument("--max-film-thickness", type=float, choices=[0.3, 1.0], default=0.3)
     args = parser.parse_args()
+    cancelled = ROOT / "output/phase72a-stage2-cap1m/cancelled-cases.json"
+    if args.max_film_thickness == 1.0 and cancelled.exists() and args.case in json.loads(cancelled.read_text()):
+        parser.error(f"{args.case} cap sensitivity was cancelled by the human")
     out = args.output_root.resolve()
     out.mkdir(parents=True, exist_ok=False)
     manifest_path = out / "run-manifest.json"
     case = args.case
-    prefix = f"P72A-STAGE2-E27-{case}"
-    work = WORK_BASE / case / args.stamp
-    durable = DURABLE_BASE / case / args.stamp
+    label = case if args.max_film_thickness == 0.3 else f"{case}-cap1m"
+    prefix = f"P72A-STAGE2-E27-{label}"
+    work = WORK_BASE / label / args.stamp
+    durable = DURABLE_BASE / label / args.stamp
     monitor = work / "monitors"
     scratch = work / "scratch"
-    manifest = {"status": "PREFLIGHT", "case": case, "server_id": "3", "parent_case": str(SOURCE_CASE), "parent_data": str(SOURCE_DATA), "parent_hashes_expected": SOURCE_HASHES, "controlled_delta": {"roughness_height_m": CASES[case], "roughness_constant": 0.5}, "requested_iterations": HORIZON, "expected_terminal_iteration": START + HORIZON, "work_root": str(work), "durable_root": str(durable), "solve_command": f"/solve/iterate {HORIZON}"}
+    manifest = {"status": "PREFLIGHT", "case": case, "server_id": args.server_id, "parent_case": str(SOURCE_CASE), "parent_data": str(SOURCE_DATA), "parent_hashes_expected": SOURCE_HASHES, "controlled_delta": {"roughness_height_m": CASES[case], "roughness_constant": 0.5, "maximum_film_thickness_m": args.max_film_thickness}, "requested_iterations": HORIZON, "expected_terminal_iteration": START + HORIZON, "work_root": str(work), "durable_root": str(durable), "solve_command": "settings.solution.run_calculation.iterate(iter_count=1000), three blocks"}
     dump(manifest_path, manifest)
     try:
-        solver = connect("3", start_transcript=True, tcp_timeout_seconds=5)
+        solver = connect(args.server_id, start_transcript=False, tcp_timeout_seconds=5)
         require("2025 R2" in str(solver.get_fluent_version()), "unexpected Fluent version")
         for path in (work, durable, monitor, scratch):
             ensure_remote_directory(solver, str(path))
         hashes = {"case": remote_file_sha256(solver, str(SOURCE_CASE), str(scratch / "parent-case.sha256.txt")), "data": remote_file_sha256(solver, str(SOURCE_DATA), str(scratch / "parent-data.sha256.txt"))}
         require(hashes == SOURCE_HASHES, f"parent hash mismatch: {hashes}")
         manifest["parent_hashes_observed"] = hashes
+        if solver.settings.setup.named_expressions.is_active() and "P71V2Iteration" in solver.settings.setup.named_expressions.get_object_names():
+            manifest["preserved_previous_endpoint"] = pair_save(solver, work / "previous-endpoint.cas.h5", scratch, scratch_tag="previous-endpoint")
+            dump(manifest_path, manifest)
         solver.settings.file.read_case(file_name=str(SOURCE_CASE))
         solver.settings.file.read_data(file_name=str(SOURCE_DATA))
         require(native_iteration(solver) == START, "parent native iteration mismatch")
         manifest["parent_e27_readback"] = validate_e27(solver)
         manifest["parent_coverage"] = configure_coverage(solver)
         manifest["roughness_readback"] = apply_roughness(solver, case, CASES[case], 0.5)
-        manifest["post_delta_e27_readback"] = validate_e27(solver)
+        before_parameters = solver.rp_vars("wall-film/model-parameters")
+        changed_parameters = [(key, args.max_film_thickness if key == "thickness-limit" else value) for key, value in before_parameters]
+        solver.rp_vars("wall-film/model-parameters", changed_parameters)
+        require(dict(solver.rp_vars("wall-film/model-parameters")) == dict(changed_parameters), "film parameter readback differs outside the cap delta")
+        manifest["post_delta_e27_readback"] = validate_e27(solver, max_thickness=args.max_film_thickness)
         paths = redirect_reports(solver, monitor, prefix)
         manifest["report_paths"] = paths
         manifest["residual_configuration"] = configure_residual_history(solver, HORIZON + 1)
-        manifest["autosave_configuration"] = configure_autosave(solver, str(work), data_frequency=250)
+        manifest["autosave_configuration"] = configure_autosave(solver, str(work), data_frequency=1000)
         manifest["start_pair_local"] = pair_save(solver, work / f"{prefix}-start-N{START}.cas.h5", scratch, scratch_tag="local-start")
         manifest["start_pair_durable"] = pair_save(solver, durable / f"{prefix}-start-N{START}.cas.h5", scratch, scratch_tag="durable-start")
         solver.settings.file.read_case(file_name=manifest["start_pair_local"]["case"])
@@ -145,7 +160,7 @@ def main():
             solver.settings.file.read_data(file_name=str(SOURCE_DATA))
             manifest["reopen_data_clock_recovery"] = "reloaded_hash_verified_parent_data_after_prepared_case_reopen"
         require(native_iteration(solver) == START, "prepared case plus verified parent data iteration mismatch")
-        manifest["reopen_e27_readback"] = validate_e27(solver)
+        manifest["reopen_e27_readback"] = validate_e27(solver, max_thickness=args.max_film_thickness)
         manifest["reopen_roughness_readback"] = apply_roughness(solver, case, CASES[case], 0.5)
         coverage_state = solver.settings.solution.report_definitions.surface[COVERAGE].get_state()
         require(coverage_state["field"] == "film-coverage" and coverage_state["report_type"] == "surface-integral" and coverage_state["surface_names"] == ["wall"], "coverage report not preserved on reopen")
@@ -158,10 +173,17 @@ def main():
         capture = SessionTranscriptCapture(solver, stream_path=out / "transcript-stream.txt", echo=False)
         capture.start()
         marker = capture.mark()
-        manifest["status"] = "RUNNING_FLUENT_NATIVE_TUI"
+        manifest["status"] = "RUNNING_SETTINGS_API"
         manifest["solve_started_utc"] = datetime.now(timezone.utc).isoformat()
         dump(manifest_path, manifest)
-        solver.execute_tui(f"/solve/iterate {HORIZON}\n")
+        manifest["completed_blocks"] = []
+        for block in range(1, HORIZON // 1000 + 1):
+            solver.settings.solution.run_calculation.iterate(iter_count=1000)
+            observed = native_iteration(solver)
+            require(observed == START + 1000 * block, f"block {block} stopped at {observed}")
+            checkpoint = pair_save(solver, work / f"{prefix}-block{block}-N{observed}.cas.h5", scratch, scratch_tag=f"block{block}")
+            manifest["completed_blocks"].append(checkpoint)
+            dump(manifest_path, manifest)
         capture.wait_until_quiet(quiet_seconds=2.0, timeout_seconds=30.0)
         transcript = capture.text_since(marker)
         capture.close()
@@ -174,6 +196,12 @@ def main():
             raise RuntimeError(f"solve stopped at native {terminal}, expected {START + HORIZON}")
         manifest["final_pair_local"] = pair_save(solver, work / f"{prefix}-final-N{terminal}.cas.h5", scratch, scratch_tag="local-final")
         manifest["final_pair_durable"] = pair_save(solver, durable / f"{prefix}-final-N{terminal}.cas.h5", scratch, scratch_tag="durable-final")
+        solver.settings.file.read_case(file_name=manifest["final_pair_local"]["case"])
+        solver.settings.file.read_data(file_name=manifest["final_pair_local"]["data"])
+        manifest["final_reopen_native_iteration"] = native_iteration(solver)
+        require(manifest["final_reopen_native_iteration"] in {terminal, terminal - 1}, "final pair iteration mismatch")
+        manifest["final_reopen_e27_readback"] = validate_e27(solver, max_thickness=args.max_film_thickness)
+        manifest["final_reopen_roughness_readback"] = apply_roughness(solver, case, CASES[case], 0.5)
         histories = {}
         for name, path in paths.items():
             require(remote_file_exists(solver, path), f"missing native report file: {path}")

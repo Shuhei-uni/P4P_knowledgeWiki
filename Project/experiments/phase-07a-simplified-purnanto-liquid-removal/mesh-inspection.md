@@ -2,12 +2,11 @@
 
 ## Status
 
-**Observed, local read-only HDF5 inspection completed on 2026-09-08.** The
-supplied Fluent mesh was inspected without loading or modifying a Fluent
-session. The inspection establishes artifact identity, stored mesh counts,
-zone topology, coordinate bounds, boundary areas, and connectivity checks. It
-does not establish solver-side mesh quality or flow-behaviour parity with setup
-`08b`.
+| Item | Status |
+| --- | --- |
+| Observed, local read-only HDF5 inspection completed on 2026-09-08. | The supplied Fluent mesh was inspected without loading or modifying a Fluent session |
+|  | The inspection establishes artifact identity, stored mesh counts, zone topology, coordinate bounds, boundary areas, and connectivity checks |
+|  | It does not establish solver-side mesh quality or flow-behaviour parity with setup `08b` |
 
 ## Artifact identity
 
@@ -22,10 +21,10 @@ does not establish solver-side mesh quality or flow-behaviour parity with setup
 | Stored version | `25.2` |
 | Units | `m` |
 
-The generated machine-readable inspection is
-`PyAnsys/output/phase07_mesh_inspection/Separator-purnanto342k-inspection-20260908.json` (local generated artifact): `PyAnsys/output/phase07_mesh_inspection/Separator-purnanto342k-inspection-20260908.json`.
-The reusable read-only extractor is
-[`PyAnsys/scripts/inspection/inspect_fluent_mesh_h5.py`](../../../PyAnsys/scripts/inspection/inspect_fluent_mesh_h5.py).
+| Item | Artifact identity |
+| --- | --- |
+| The generated machine-readable inspection is `PyAnsys/output/phase07_mesh_inspection/Separator-purnanto342k-inspection-20260908.json` (local generated artifact) | `PyAnsys/output/phase07_mesh_inspection/Separator-purnanto342k-inspection-20260908.json` |
+|  | The reusable read-only extractor is [`PyAnsys/scripts/inspection/inspect_fluent_mesh_h5.py`](../../../PyAnsys/scripts/inspection/inspect_fluent_mesh_h5.py) |
 
 ## Stored mesh structure
 
@@ -41,10 +40,10 @@ The reusable read-only extractor is
 | Type-4 cells | `87,978` (`25.68%`) |
 | Type-7 cells | `254,631` (`74.32%`) |
 
-The Fluent cell-type codes and stored meshing state identify type 4 as
-hexahedral and type 7 as polyhedral, consistent with a poly-hexcore mesh.
-
-Global coordinate bounds are:
+| Stored mesh structure |
+| --- |
+| The Fluent cell-type codes and stored meshing state identify type 4 as hexahedral and type 7 as polyhedral, consistent with a poly-hexcore mesh |
+| Global coordinate bounds are: |
 
 | Axis | Minimum [m] | Maximum [m] | Span [m] |
 | --- | ---: | ---: | ---: |
@@ -63,17 +62,18 @@ Global coordinate bounds are:
 | `steaminlet` | velocity inlet | `1,017` | `0.519286085` | planar at `x=-2.067034 m`; `0.724 m` high and `0.717246 m` wide |
 | `steamoutlet` | pressure outlet | `15,403` | `0.602608` | near `y=6.261 m`; spans about `0.876 m` in `x/z` |
 
-Every external-zone face has one non-zero adjacent cell and one zero exterior
-neighbour in the stored connectivity. The vector sum of all oriented external
-face areas closes to approximately `1.9×10⁻¹⁶` of total boundary area, which is
-a strong structural consistency check on the extracted face connectivity.
+| Boundary zones |
+| --- |
+| Every external-zone face has one non-zero adjacent cell and one zero exterior neighbour in the stored connectivity |
+| The vector sum of all oriented external face areas closes to approximately `1.9×10⁻¹⁶` of total boundary area, which is a strong structural consistency check on the extracted face connectivity |
 
 ## Comparison with the recorded 08b/Purnanto definition
 
 ### Inlet geometry
 
-**Observed agreement.** The new inlet split closely reproduces the recorded
-setup-07/08b design:
+| Item | Inlet geometry |
+| --- | --- |
+| Observed agreement. | The new inlet split closely reproduces the recorded setup-07/08b design: |
 
 | Quantity | Recorded target [m²] | New mesh [m²] | Relative difference |
 | --- | ---: | ---: | ---: |
@@ -81,39 +81,37 @@ setup-07/08b design:
 | Steam inlet | `0.5192864` | `0.519286085` | `-0.000061%` |
 | Combined inlet | `0.5241760` | `0.524176010` | approximately zero |
 
-The narrow liquid strip is therefore consistent with the documented 08b/07
-equal-velocity, density-weighted area split; it is not evidence of an
-accidental missing inlet surface.
+| Item | Inlet geometry |
+| --- | --- |
+| narrow liquid strip | is therefore consistent with the documented 08b/07 equal-velocity, density-weighted area split; it is not evidence of an accidental missing inlet surface |
 
 ### Mesh resolution and topology
 
-**Observed difference against reported metadata.** The setup-08b record gives
-`7,601,261` cells and `1,309,312` nodes for its inherited mesh. The supplied
-mesh has `342,609` cells and `1,077,053` nodes. This is approximately `22.2×`
-fewer cells and `17.7%` fewer nodes, with a stored poly-hexcore cell mixture.
-The different element topology means cell count alone is not a resolution
-metric, but the new mesh is not the same discrete mesh as recorded for 08b.
+| Item | Mesh resolution and topology |
+| --- | --- |
+| Observed difference against reported metadata. | The setup-08b record gives `7,601,261` cells and `1,309,312` nodes for its inherited mesh |
+|  | The supplied mesh has `342,609` cells and `1,077,053` nodes |
+|  | This is approximately `22.2×` fewer cells and `17.7%` fewer nodes, with a stored poly-hexcore cell mixture |
+|  | The different element topology means cell count alone is not a resolution metric, but the new mesh is not the same discrete mesh as recorded for 08b |
 
 ### Bottom cutoff
 
-**Human-reported intent, structurally supported.** The new `bottom` zone is a
-distinct planar wall at `y≈0`. Its area is `3.164981 m²`. This establishes a
-clean zone that can later receive an approved outlet treatment without a CAD
-change. The local structural inspection cannot prove that `y=0` corresponds
-to the physical plant pool elevation; that mapping remains human-reported.
+| Item | Bottom cutoff |
+| --- | --- |
+| Human-reported intent, structurally supported. | The new `bottom` zone is a distinct planar wall at `y≈0` |
+|  | Its area is `3.164981 m²` |
+|  | This establishes a clean zone that can later receive an approved outlet treatment without a CAD change |
+|  | The local structural inspection cannot prove that `y=0` corresponds to the physical plant pool elevation; that mapping remains human-reported |
 
 ### Bottom radial-band survey for E6
 
-**Observed, local read-only HDF5 analysis on 2026-09-15.** The bottom-face
-centroid area-weighted centre is approximately `(x,z) =
-(0.000036,-0.000011) m`. The face-centroid radial coordinate is measured as
-`r = sqrt((x-xc)^2 + (z-zc)^2)`. The smallest observed radius is `0.377616 m`
-and the largest is `1.044660 m`, so the bottom is an annular, square-like
-cutoff rather than a filled circular disk.
-
-The following catalogue is a selection survey, not a Fluent face-zone split.
-It records the existing face rows that the E6 disposable capability test should
-attempt to name and preserve:
+| Item | Bottom radial-band survey for E6 |
+| --- | --- |
+| Observed, local read-only HDF5 analysis on 2026-09-15. | The bottom-face centroid area-weighted centre is approximately `(x,z) = (0.000036,-0.000011) m` |
+|  | The face-centroid radial coordinate is measured as `r = sqrt((x-xc)^2 + (z-zc)^2)` |
+|  | The smallest observed radius is `0.377616 m` and the largest is `1.044660 m`, so the bottom is an annular, square-like cutoff rather than a filled circular disk |
+| following catalogue | is a selection survey, not a Fluent face-zone split |
+| It | records the existing face rows that the E6 disposable capability test should attempt to name and preserve: |
 
 | Target band | Radial interval [m] | Faces | Area [m²] |
 | --- | ---: | ---: | ---: |
@@ -124,68 +122,51 @@ attempt to name and preserve:
 | `R05-outer` | `r ≥ 0.99` | `67` | `0.276031` |
 | **Total** | — | **432** | **3.164981** |
 
-The proposed first pressure-outlet candidate is `R05-outer`, the outermost
-resolved face row. It is a mesh-supported pseudo-ring, not an exact circular
-annulus: the outer row has a nominal radial width of roughly `0.055 m` from
-the maximum observed radius, but its centroid radii have a gap between about
-`0.990` and `1.041 m`. Actual Fluent post-split counts, areas, adjacency, and
-save/reopen topology remain authoritative.
+| Item | Bottom radial-band survey for E6 |
+| --- | --- |
+| proposed first pressure-outlet candidate | is `R05-outer`, the outermost resolved face row |
+| It | is a mesh-supported pseudo-ring, not an exact circular annulus: the outer row has a nominal radial width of roughly `0.055 m` from the maximum observed radius, but its centroid radii have a gap between about `0.990` and `1.041 m` |
+| Actual Fluent post-split counts, areas, adjacency, and save/reopen topology | remain authoritative |
 
 ### Corrected steam-outlet diameter
 
-**Observed and human-confirmed.** The new mesh's `steamoutlet` area is
-`0.602608 m²`, giving an area-equivalent circular diameter of `0.875936 m`
-(`≈0.876 m`). The human confirmed on 2026-09-08 that this outlet geometry is
-intended and that the former Project value of `0.724 m` was incorrect. The
-active Purnanto geometry record has therefore been corrected to `0.876 m`.
-
-The separate `0.724 m` dimension remains the square-inlet side length. It must
-not be reused as the steam-outlet turbulence/backflow hydraulic diameter for
-the Phase-07 setup. Historical cases that actually stored `0.724 m` retain
-that value as executed evidence, but E0 must apply and verify the corrected
-outlet scale.
+| Item | Corrected steam-outlet diameter |
+| --- | --- |
+| Observed and human-confirmed. | The new mesh's `steamoutlet` area is `0.602608 m²`, giving an area-equivalent circular diameter of `0.875936 m` (`≈0.876 m`) |
+|  | The human confirmed on 2026-09-08 that this outlet geometry is intended and that the former Project value of `0.724 m` was incorrect |
+|  | The active Purnanto geometry record has therefore been corrected to `0.876 m` |
+| separate `0.724 m` dimension | remains the square-inlet side length |
+| — | It must not be reused as the steam-outlet turbulence/backflow hydraulic diameter for the Phase-07 setup |
+|  | Historical cases that actually stored `0.724 m` retain that value as executed evidence, but E0 must apply and verify the corrected outlet scale |
 
 ## Live Fluent fleet observation
 
-**Observed on 2026-09-08.** Servers 1 and 3 were reachable through gRPC and
-quiescent over a three-second activity window in Fluent 2025 R2. Both retained
-Phase-06 full-geometry states: server 1 held a Mixture/RNG case and server 3 an
-Eulerian/RNG case. Servers 2, 4, and the student endpoint did not answer the
-bounded TCP probe. No live session was overwritten and no solver command was
-issued.
+| Item | Live Fluent fleet observation |
+| --- | --- |
+| Observed on 2026-09-08. | Servers 1 and 3 were reachable through gRPC and quiescent over a three-second activity window in Fluent 2025 R2 |
+|  | Both retained Phase-06 full-geometry states: server 1 held a Mixture/RNG case and server 3 an Eulerian/RNG case |
+|  | Servers 2, 4, and the student endpoint did not answer the bounded TCP probe |
+|  | No live session was overwritten and no solver command was issued |
 
 ## What “behave identically to 08b” can mean
 
-**Human expectation.** The supplied geometry should reproduce the relevant
-setup-08b behaviour after applying the intentional bottom cutoff and the
-corrected steam-outlet scale.
-
-**Current evidence limit.** Structural inspection supports inlet-area parity,
-but the bottom cutoff, different discrete mesh, and corrected outlet
-turbulence/backflow length scale prevent treating the case as bit-for-bit
-identical. Setup reconciliation and behavioural parity must be checked
-separately:
-
-1. **Setup parity:** reconcile and read back 08b materials, phases, models,
-   inlet conditions, steam outlet, numerics, initialization, and reports on the
-   new mesh, with the steam-outlet hydraulic diameter corrected to
-   `0.875936 m` (`≈0.876 m`).
-2. **Reference behaviour:** with `bottom` retained as a wall, run a matched E0
-   reference and compare inlet realization, steam routing, liquid-inventory
-   buildup, phase/mixture balance, and residual behaviour against the strongest
-   available 08b evidence.
-
-Even a close E0 comparison would support a bounded numerical-parity statement,
-not exact identity between two different meshes.
+| Item | What “behave identically to 08b” can mean |
+| --- | --- |
+| Human expectation. | The supplied geometry should reproduce the relevant setup-08b behaviour after applying the intentional bottom cutoff and the corrected steam-outlet scale |
+| Current evidence limit. | Structural inspection supports inlet-area parity, but the bottom cutoff, different discrete mesh, and corrected outlet turbulence/backflow length scale prevent treating the case as bit-for-bit identical |
+|  | Setup reconciliation and behavioural parity must be checked separately: |
+| Setup parity | reconcile and read back 08b materials, phases, models, inlet conditions, steam outlet, numerics, initialization, and reports on the new mesh, with the steam-outlet hydraulic diameter corrected to `0.875936 m` (`≈0.876 m`) |
+| Reference behaviour | with `bottom` retained as a wall, run a matched E0 reference and compare inlet realization, steam routing, liquid-inventory buildup, phase/mixture balance, and residual behaviour against the strongest available 08b evidence |
+| — | Even a close E0 comparison would support a bounded numerical-parity statement, not exact identity between two different meshes |
 
 ## Remaining live-inspection requirements
 
-- resolve and verify the server-side OneDrive path to the exact mesh;
-- locate and prove the 08b case/setup artifact, or return to the human for it;
-- obtain authority to preserve/replace one current Fluent session;
-- load the mesh and run Fluent's authoritative mesh check;
-- extract solver-side minimum orthogonal quality, maximum skewness/aspect
-  ratio where available, cell-volume range, zone areas, and topology readback;
-- reconcile Fluent readback against the local HDF5 inspection; and
-- read back and save/reopen-prove the corrected steam-outlet
-  turbulence/backflow hydraulic diameter before using E0 as a reference.
+| Remaining live-inspection requirements |
+| --- |
+| resolve and verify the server-side OneDrive path to the exact mesh; |
+| locate and prove the 08b case/setup artifact, or return to the human for it; |
+| obtain authority to preserve/replace one current Fluent session; |
+| load the mesh and run Fluent's authoritative mesh check; |
+| extract solver-side minimum orthogonal quality, maximum skewness/aspect ratio where available, cell-volume range, zone areas, and topology readback; |
+| reconcile Fluent readback against the local HDF5 inspection; and |
+| read back and save/reopen-prove the corrected steam-outlet turbulence/backflow hydraulic diameter before using E0 as a reference |

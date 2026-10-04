@@ -20,6 +20,15 @@ A failed or partial predecessor is still evidence. State the exact delta and why
 the retained evidence cannot already answer the new question. Prefer the closest
 contrast or evidence repair over an unrelated new case.
 
+When a candidate changes the physics representation, inlet assumptions, wall
+behavior or efficiency definition, use `cfd-wiki` to check the closest question
+route in `CFD_wiki/wiki/index.md` before freezing the setup. Carry the relevant
+evidence pointer and transfer limit into the existing setup rationale, or state
+that no applicable evidence was found. Reuse verified findings while preserving
+case-specific uncertainty; consult version-matched Fluent evidence for capability
+questions. Continue routine runs from their recorded rationale unless new
+evidence or a changed assumption makes another lookup useful.
+
 ## Design the smallest discriminating strategy
 
 Discovery is a contrastive screen: choose the fewest cases that separate the
@@ -71,6 +80,10 @@ question, not a generic residual dashboard.
 ## Compile the setup packet
 
 `setup.md` is the server-neutral scientific handoff. It should carry:
+
+Follow the [experiment presentation contract](../../../../Project/experiments/README.md#presentation).
+Use short setting/value and comparison tables. Do not repeat their contents in
+prose or put whole paragraphs into cells.
 
 - phase/context path and exact parent/reference identity;
 - intentional delta, frozen invariants, and initialization intent;

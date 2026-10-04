@@ -2,8 +2,8 @@
 
 ## Status
 
-**NOT RUN — planning draft only.**
-
-No result or convergence claim exists. Wall-distance evidence is a prerequisite
-for interpreting this packet.
-
+| Item | Status |
+| --- | --- |
+| — | NOT RUN — planning draft only |
+|  | No result or convergence claim exists |
+| Wall-distance evidence | is a prerequisite for interpreting this packet |

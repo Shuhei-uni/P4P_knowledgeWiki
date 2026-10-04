@@ -1,15 +1,20 @@
-> **Retired source:** Setups/reports/purnanto-reference/09cV3/dpm-mass-allocation-quick-report.md
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
+| Item | Record |
+| --- | --- |
+| Retired source | Setups/reports/purnanto-reference/09cV3/dpm-mass-allocation-quick-report.md |
 
 # 09cV3 DPM-Mass Allocation — Quick Results Report
 
-Setup: [09cV3 — Fine-Mist 5% DPM PSD Rerun](setup.md)
+| Item | cV3 DPM-Mass Allocation — Quick Results Report |
+| --- | --- |
+| Setup | [09cV3 — Fine-Mist 5% DPM PSD Rerun](setup.md) |
 
 ## Quick-report plan
 
-1. State the DPM allocation point and completed iteration count.
-2. Compare the carrier liquid-removal percentage.
-3. Compare DPM mass reaching `steamoutlet` and DPM mass trapped at `bottom`.
+| Quick-report plan |
+| --- |
+| State the DPM allocation point and completed iteration count |
+| Compare the carrier liquid-removal percentage |
+| Compare DPM mass reaching `steamoutlet` and DPM mass trapped at `bottom` |
 
 ## 1. Comparison points
 
@@ -22,7 +27,9 @@ Setup: [09cV3 — Fine-Mist 5% DPM PSD Rerun](setup.md)
 
 ## 2. Carrier liquid-removal result
 
-Carrier liquid-removal percentage = `(1 − |Eulerian liquid at steamoutlet| / Eulerian liquid at liquidinlet) × 100`.
+| Carrier liquid-removal result |
+| --- |
+| Carrier liquid-removal percentage = `(1 − \|Eulerian liquid at steamoutlet\| / Eulerian liquid at liquidinlet) × 100` |
 
 | DPM allocation | Eulerian liquid at `steamoutlet`, kg/s | Carrier liquid-removal, % |
 |---:|---:|---:|
@@ -33,12 +40,14 @@ Carrier liquid-removal percentage = `(1 − |Eulerian liquid at steamoutlet| / E
 
 ## 3. DPM mass-fate result
 
-DPM steam-outlet fraction = `(DPM mass escaped at steamoutlet / DPM mass injected) × 100`.
+| DPM mass-fate result |
+| --- |
+| DPM steam-outlet fraction = `(DPM mass escaped at steamoutlet / DPM mass injected) × 100` |
 
 | DPM allocation | DPM mass escaped at `steamoutlet`, kg/s | DPM steam-outlet fraction, % | DPM mass trapped at `bottom`, kg/s | DPM bottom-trapped fraction, % |
 |---:|---:|---:|---:|---:|
 | `2%` | `0.0015080` | `0.064489%` | `0.532370` | `22.766421%` |
-| | `5%` | `0.0018850` | `0.032244%` | — | — |
+| `5%` | `0.0018850` | `0.032244%` | — | — |
 | `10%` | `0.0075420` | `0.064506%` | `1.908670` | `16.324581%` |
 
 ## Evidence

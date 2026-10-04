@@ -1,7 +1,8 @@
 # P71A-T1-STANDARD-KEPSILON setup draft
 
-> **Status — DEFFERED (2026-09-22):** Deferred after the Server-3 approach
-> was paused; retain this setup as planning provenance only.
+| Item | P71A-T1-STANDARD-KEPSILON setup draft |
+| --- | --- |
+| Status — DEFFERED (2026-09-22) | Deferred after the Server-3 approach was paused; retain this setup as planning provenance only |
 
 | Field | Value |
 | --- | --- |
@@ -19,29 +20,36 @@
 
 ## Question
 
-Does standard k-epsilon reduce turbulence residual growth or
-turbulent-viscosity limiting while preserving absorber delivery, phase routing,
-and phase-resolved mass accounting?
+| Question |
+| --- |
+| Does standard k-epsilon reduce turbulence residual growth or turbulent-viscosity limiting while preserving absorber delivery, phase routing, and phase-resolved mass accounting? |
 
 ## Controlled change
 
-Change only the viscous closure to standard k-epsilon. Read back all
-closure-specific options after the change. Do not force RNG-only differential
-viscosity or swirl controls onto the standard model. Preserve the baseline wall
-treatment, numerical schemes, first-order k treatment, URFs, absorber,
-boundaries, and DPM isolation wherever applicable.
+| Item | Controlled change |
+| --- | --- |
+| — | Change only the viscous closure to standard k-epsilon |
+|  | Read back all closure-specific options after the change |
+|  | Do not force RNG-only differential viscosity or swirl controls onto the standard model |
+|  | Preserve the baseline wall treatment, numerical schemes, first-order k treatment, URFs, absorber, boundaries, and DPM isolation wherever applicable |
+|  | Load the active-1000 parent as-is |
 
-Load the active-1000 parent as-is. Do not reinitialize, patch, reset, remesh,
-resplit, or alter the restart field. The requested standard closure must be
-read back before any iteration.
+<details>
+<summary>Supporting detail — Controlled change</summary>
 
-Planned discovery horizon: 500 native iterations after smoke. Use the same
-verified parent as T0 and the shared evidence/core-figure contract in the
-[family README](../README.md). The common closure path is in
-[closure-path-readback.md](../closure-path-readback.md).
+| Item | Controlled change |
+| --- | --- |
+| — | Do not reinitialize, patch, reset, remesh, resplit, or alter the restart field |
+|  | The requested standard closure must be read back before any iteration |
+| Planned discovery horizon | 500 native iterations after smoke |
+|  | Use the same verified parent as T0 and the shared evidence/core-figure contract in the [family README](../README.md) |
+|  | The common closure path is in [closure-path-readback.md](../closure-path-readback.md) |
+
+</details>
 
 ## Decision boundary
 
-A lower turbulence residual alone is insufficient. The branch is informative
-only if phase/source evidence remains credible and no upper-zone or vapor
-removal artifact is introduced.
+| Item | Decision boundary |
+| --- | --- |
+| A lower turbulence residual alone | is insufficient |
+| branch | is informative only if phase/source evidence remains credible and no upper-zone or vapor removal artifact is introduced |

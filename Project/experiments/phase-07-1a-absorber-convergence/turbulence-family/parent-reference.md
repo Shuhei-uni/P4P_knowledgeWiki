@@ -2,8 +2,9 @@
 
 ## Selected parent
 
-The first three queued turbulence packets will use the same complete paired
-absorber state:
+| Selected parent |
+| --- |
+| The first three queued turbulence packets will use the same complete paired absorber state: |
 
 | Field | Value |
 | --- | --- |
@@ -19,47 +20,45 @@ absorber state:
 
 ## Parent evidence
 
-The prior execution record reports:
+| Item | Parent evidence |
+| --- | --- |
+| — | The prior execution record reports: |
+| the exact E0-style initialized case/data pair | was loaded before the absorber treatment; |
+| the existing mesh | was split into the 3,794-cell p7-e5-lower-y010 zone; |
+| the lower phase-2 absorber and matched momentum-source tree | were read back; |
+| — | the bottom remained a wall; |
 
-- the exact E0-style initialized case/data pair was loaded before the
-  absorber treatment;
-- the existing mesh was split into the 3,794-cell
-  p7-e5-lower-y010 zone;
-- the lower phase-2 absorber and matched momentum-source tree were read back;
-- the bottom remained a wall;
-- direct phase-1 source and parent-zone sources remained off;
-- the source ramp reached 116.92 kg/s;
-- the final active-1000 pair was saved and reopened successfully.
+<details>
+<summary>Supporting detail — Parent evidence</summary>
 
-The active-1000 state is intentionally selected rather than the later
-continuation endpoint. The active-5000 continuation did not reach its declared
-horizon and is not a valid parent for this family.
+| Item | Parent evidence |
+| --- | --- |
+| — | direct phase-1 source and parent-zone sources remained off; |
+|  | the source ramp reached 116.92 kg/s; |
+| the final active-1000 pair | was saved and reopened successfully |
+| active-1000 state | is intentionally selected rather than the later continuation endpoint |
+| active-5000 continuation did not reach its declared horizon and | is not a valid parent for this family |
+| — | The child implementation must load this active-1000 pair without reinitialization, patching, resetting, remeshing, resplitting, or restart-field alteration |
+| only child delta before the first solve | is the declared turbulence setting |
 
-The child implementation must load this active-1000 pair without
-reinitialization, patching, resetting, remeshing, resplitting, or restart-field
-alteration. The only child delta before the first solve is the declared
-turbulence setting.
+</details>
 
 ## Parent identity limitation
 
-The paired parent is proven by the prior execution manifest and run-path
-record, and the files are available under the student runtime path. The
-The current student session confirmed both active-1000 files exist at the
-recorded paths using a read-only Fluent file-existence probe on 2026-09-11.
-This is a presence check, not a checksum. Before mutation, fleet orchestration
-must still load both files, read back the full parent state, save, and reopen
-the prepared child.
-
-The same read-only probe also confirmed the E0 initialized case/data pair
-exists at the recorded OneDrive path on student.
-
-The E0 initialized OneDrive pair used to create the absorber parent is also
-available locally and has these hashes:
+| Item | Parent identity limitation |
+| --- | --- |
+| paired parent | is proven by the prior execution manifest and run-path record, and the files are available under the student runtime path |
+| — | The The current student session confirmed both active-1000 files exist at the recorded paths using a read-only Fluent file-existence probe on 2026-09-11 |
+| This | is a presence check, not a checksum |
+| — | Before mutation, fleet orchestration must still load both files, read back the full parent state, save, and reopen the prepared child |
+|  | The same read-only probe also confirmed the E0 initialized case/data pair exists at the recorded OneDrive path on student |
+| E0 initialized OneDrive pair | used to create the absorber parent is also available locally and has these hashes: |
 
 | Artifact | Size | SHA-256 |
 | --- | ---: | --- |
 | initialized.cas.h5 | 40,873,688 bytes | 4f894a9df391584953e42810421fa09d2aa251e7f6d73b3e600dd400a4cce3da |
 | initialized.dat.h5 | 93,083,127 bytes | 6b6ccb6b0192ca98993eb3708f5a452a751b1d40bdfcc12a85499e9cefa98702 |
 
-Those E0 files are provenance support, not substitutes for the selected
-active-1000 absorber parent.
+| Item | Parent identity limitation |
+| --- | --- |
+| Those E0 files | are provenance support, not substitutes for the selected active-1000 absorber parent |

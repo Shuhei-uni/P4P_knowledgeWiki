@@ -1,21 +1,20 @@
-> **Retired source:** Setups/reports/purnanto-reference/07/technical-extraction.md
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
+| Item | Record |
+| --- | --- |
+| Retired source | Setups/reports/purnanto-reference/07/technical-extraction.md |
 
 # Technical Setup Report: Setup 07 Live Export
 
 ## 1. Purpose
 
-This companion report records the actual Fluent export for setup 07.
-
-- archive: [PyAnsys/cases/actual_setup_archives/07-pure-phase-split-actual-area-live-fff-1-2/settings_snapshot.json](../../../../PyAnsys/cases/actual_setup_archives/07-pure-phase-split-actual-area-live-fff-1-2/settings_snapshot.json)
-- narrative companion: [07-pure-phase-split-actual-area.md](setup.md)
-- drift note: [PyAnsys intended-vs-actual.md](../../../../PyAnsys/cases/actual_setup_archives/07-pure-phase-split-actual-area-live-fff-1-2/intended-vs-actual.md)
-
-Use this file when you need the machine-extracted setup state, not just the intended branch definition.
-
-Rule for this branch:
-
-- if the live export and the narrative report disagree, treat the live export as the replay authority and record the narrative value as the intended branch description.
+| Item | Purpose |
+| --- | --- |
+| This companion report | records the actual Fluent export for setup 07 |
+| archive | [PyAnsys/cases/actual_setup_archives/07-pure-phase-split-actual-area-live-fff-1-2/settings_snapshot.json](../../../../PyAnsys/cases/actual_setup_archives/07-pure-phase-split-actual-area-live-fff-1-2/settings_snapshot.json) |
+| narrative companion | [07-pure-phase-split-actual-area.md](setup.md) |
+| drift note | [PyAnsys intended-vs-actual.md](../../../../PyAnsys/cases/actual_setup_archives/07-pure-phase-split-actual-area-live-fff-1-2/intended-vs-actual.md) |
+| — | Use this file when you need the machine-extracted setup state, not just the intended branch definition |
+|  | Rule for this branch: |
+|  | if the live export and the narrative report disagree, treat the live export as the replay authority and record the narrative value as the intended branch description |
 
 ## 2. Setup Identity
 
@@ -31,7 +30,9 @@ Rule for this branch:
 
 ## 3. Geometry And Mesh
 
-The settings snapshot does not serialize geometry or mesh cell counts, but the setup report defines the actual split geometry used for the inlet branch.
+| Geometry And Mesh |
+| --- |
+| The settings snapshot does not serialize geometry or mesh cell counts, but the setup report defines the actual split geometry used for the inlet branch |
 
 | Topic | Extracted Fluent state | Narrative report | Status | Notes |
 |---|---|---|---|---|
@@ -42,7 +43,9 @@ The settings snapshot does not serialize geometry or mesh cell counts, but the s
 | Liquid-side width | not serialized here | `0.006754 m` | `narrative geometry context` |  |
 | Steam-side width | not serialized here | `0.717246 m` | `narrative geometry context` |  |
 
-The archive confirms the boundary names and roles, but not the CAD split dimensions themselves.
+| Geometry And Mesh |
+| --- |
+| The archive confirms the boundary names and roles, but not the CAD split dimensions themselves |
 
 ## 4. Fluent Setup
 
@@ -80,7 +83,9 @@ The archive confirms the boundary names and roles, but not the CAD split dimensi
 
 ### 5.1 Inlets
 
-Both inlet zones use the same normal-velocity magnitude, but the turbulence field differs between the two zones in the live export.
+| 1 Inlets |
+| --- |
+| Both inlet zones use the same normal-velocity magnitude, but the turbulence field differs between the two zones in the live export |
 
 | Boundary | Extracted Fluent state | Narrative report | Status | Notes |
 |---|---|---|---|---|
@@ -151,7 +156,9 @@ Both inlet zones use the same normal-velocity magnitude, but the turbulence fiel
 
 ## 7. DPM State
 
-The live export already contains an active discrete-phase branch.
+| DPM State |
+| --- |
+| The live export already contains an active discrete-phase branch |
 
 | Topic | Extracted Fluent state | Narrative report | Status | Notes |
 |---|---|---|---|---|
@@ -176,7 +183,9 @@ The live export already contains an active discrete-phase branch.
 
 ## 9. Working Conclusion
 
-- The live setup 07 archive matches the intended branch role for geometry, phase split, and boundary topology.
-- The most important differences are solver coupling, discretization order, and the turbulence field on the steam inlet.
-- The archive also contains an active DPM layer, so this is not a pure continuous-field-only snapshot.
-- For future replay work, use this technical companion as the machine authority and keep the narrative report as the intended branch description.
+| Item | Working Conclusion |
+| --- | --- |
+| — | The live setup 07 archive matches the intended branch role for geometry, phase split, and boundary topology |
+| most important differences | are solver coupling, discretization order, and the turbulence field on the steam inlet |
+| archive also contains an active DPM layer, so this | is not a pure continuous-field-only snapshot |
+| — | For future replay work, use this technical companion as the machine authority and keep the narrative report as the intended branch description |

@@ -2,23 +2,15 @@
 
 ## Answer at a glance
 
-**Status: BLOCKED_VERIFIED — solver divergence/floating-point failure during
-the block ending at active iteration 450.**
-
-This child used the exact same parent, mesh split, gain, feedback law, source
-formulation, and 50-iteration controller cadence as the low-cap child. It
-provided valid setup, source, and controller evidence through the active-400
-readback, but it did not complete the declared 500-iteration horizon. The
-Fluent solver then reported AMG divergence and a floating-point exception while
-the block ending at active 450 was being solved. The histories contain samples
-after the solution had lost numerical validity; those samples are retained as
-failure evidence and are excluded from physical or controller-performance
-interpretation.
-
-The higher cap reached saturation at the active-400 controller update
-(`292.30 kg/s`) before the solver failure. This is evidence of a numerical
-stability boundary for this source/controller combination, not evidence that
-the absorber successfully removed the accumulated liquid.
+| Item | Answer at a glance |
+| --- | --- |
+| **Status | BLOCKED_VERIFIED — solver divergence/floating-point failure during the block ending at active iteration 450 |
+| This child | used the exact same parent, mesh split, gain, feedback law, source formulation, and 50-iteration controller cadence as the low-cap child |
+| — | It provided valid setup, source, and controller evidence through the active-400 readback, but it did not complete the declared 500-iteration horizon |
+|  | The Fluent solver then reported AMG divergence and a floating-point exception while the block ending at active 450 was being solved |
+|  | The histories contain samples after the solution had lost numerical validity; those samples are retained as failure evidence and are excluded from physical or controller-performance interpretation |
+|  | The higher cap reached saturation at the active-400 controller update (`292.30 kg/s`) before the solver failure |
+| This | is evidence of a numerical stability boundary for this source/controller combination, not evidence that the absorber successfully removed the accumulated liquid |
 
 ## Evidence package
 
@@ -42,51 +34,48 @@ the absorber successfully removed the accumulated liquid.
 
 ![F3 phase routing and numerical adequacy](figures/20260910T110936Z/F3-phase-routing-and-numerical-adequacy.png)
 
-The figures are useful for locating the rebound and the onset of numerical
-failure. They must not be read as evidence of a physical late-time liquid
-trend after the solver diverged.
+| Item | Required figures |
+| --- | --- |
+| figures | are useful for locating the rebound and the onset of numerical failure |
+| — | They must not be read as evidence of a physical late-time liquid trend after the solver diverged |
 
 ## Interpretation and claim limits
 
 ### Observed before divergence
 
-- The local phase-2 absorber was configured in the lower cell zone only.
-- The direct phase-1 mass source remained disabled at every recorded
-  controller update.
-- The controller command was below the cap through active 350 and reached the
-  `292.30 kg/s` cap at active 400 as the lower inventory rebounded.
-- The lower liquid inventory was not driven to the numerical target of
-  `29.9167 kg` in the valid interval.
+| Item | Observed before divergence |
+| --- | --- |
+| local phase-2 absorber | was configured in the lower cell zone only |
+| direct phase-1 mass source remained disabled at every | recorded controller update |
+| controller command | was below the cap through active 350 and reached the `292.30 kg/s` cap at active 400 as the lower inventory rebounded |
+| lower liquid inventory | was not driven to the numerical target of `29.9167 kg` in the valid interval |
 
 ### Failure interpretation
 
-Increasing the cap from `146.15` to `292.30 kg/s` did not produce a clean,
-completed absorber screen. It allowed a larger command, but the coupled
-phase/momentum source and carrier solution encountered a numerical failure
-before the declared horizon. The failure does not prove that the abstraction
-is mathematically impossible, but it does reject this unmodified cap setting
-as a candidate for automatic continuation.
-
-The intended no-outlet abstraction remains intact: the bottom boundary was not
-changed into an outlet, and the zero bottom phase flux is not itself the
-blocker. The blocker is solver stability under the evolving volumetric sink
-and matched momentum source.
+| Item | Failure interpretation |
+| --- | --- |
+| — | Increasing the cap from `146.15` to `292.30 kg/s` did not produce a clean, completed absorber screen |
+|  | It allowed a larger command, but the coupled phase/momentum source and carrier solution encountered a numerical failure before the declared horizon |
+| failure does not prove that the abstraction | is mathematically impossible, but it does reject this unmodified cap setting as a candidate for automatic continuation |
+| The intended no-outlet abstraction remains intact | the bottom boundary was not changed into an outlet, and the zero bottom phase flux is not itself the blocker |
+|  | The blocker is solver stability under the evolving volumetric sink and matched momentum source |
 
 ## Run and analysis records
 
-- Setup contract: [setup.md](setup.md)
-- Run paths and recovery state: [run-paths.yaml](run-paths.yaml)
-- Terminal manifest: `PyAnsys/output/phase07_cz_absorb/P7-E5-CZ-ABSORB-G200-CAP29230-student-20260910T110936Z-manifest.json`
-- Report histories: `PyAnsys/output/phase07_cz_absorb/P7-E5-CZ-ABSORB-G200-CAP29230-student-20260910T110936Z-reports.json`
-- Residual transcript: `PyAnsys/output/phase07_cz_absorb/P7-E5-CZ-ABSORB-G200-CAP29230-student-20260910T110936Z-residuals-transcript.txt`
-- Analysis summary: [analysis/20260910T110936Z.json](analysis/20260910T110936Z.json)
-- Remote output root: `C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneAbsorber\20260910T110936Z\P7-E5-CZ-ABSORB-G200-CAP29230`
+| Item | Run and analysis records |
+| --- | --- |
+| Setup contract | [setup.md](setup.md) |
+| Run paths and recovery state | [run-paths.yaml](run-paths.yaml) |
+| Terminal manifest | `PyAnsys/output/phase07_cz_absorb/P7-E5-CZ-ABSORB-G200-CAP29230-student-20260910T110936Z-manifest.json` |
+| Report histories | `PyAnsys/output/phase07_cz_absorb/P7-E5-CZ-ABSORB-G200-CAP29230-student-20260910T110936Z-reports.json` |
+| Residual transcript | `PyAnsys/output/phase07_cz_absorb/P7-E5-CZ-ABSORB-G200-CAP29230-student-20260910T110936Z-residuals-transcript.txt` |
+| Analysis summary | [analysis/20260910T110936Z.json](analysis/20260910T110936Z.json) |
+| Remote output root | `C:\Users\Shuhei Yokkaichi\Documents\FluentRuns\Phase07\CellZoneAbsorber\20260910T110936Z\P7-E5-CZ-ABSORB-G200-CAP29230` |
 
 ## Decision
 
-Classify this child as a **verified numerical blocker**. Do not resume it from
-the divergent endpoint and do not interpret the post-failure report tail as a
-liquid-removal result. Any future attempt would require a separately approved
-stabilization change, such as a gentler controller/source ramp or an explicitly
-reviewed momentum-coupling treatment; this family record does not authorize
-that change automatically.
+| Item | Decision |
+| --- | --- |
+| — | Classify this child as a verified numerical blocker |
+|  | Do not resume it from the divergent endpoint and do not interpret the post-failure report tail as a liquid-removal result |
+| Any future attempt would | require a separately approved stabilization change, such as a gentler controller/source ramp or an explicitly reviewed momentum-coupling treatment; this family record does not authorize that change automatically |

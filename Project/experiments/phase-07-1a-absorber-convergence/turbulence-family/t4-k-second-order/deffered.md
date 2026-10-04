@@ -1,7 +1,8 @@
 # P71A-T4-K-SECOND-ORDER setup draft
 
-> **Status — DEFFERED (2026-09-22):** Deferred after the Server-3 approach
-> was paused; retain this setup as planning provenance only.
+| Item | P71A-T4-K-SECOND-ORDER setup draft |
+| --- | --- |
+| Status — DEFFERED (2026-09-22) | Deferred after the Server-3 approach was paused; retain this setup as planning provenance only |
 
 | Field | Value |
 | --- | --- |
@@ -16,22 +17,22 @@
 
 ## Question
 
-Is first-order k acting as a necessary stabilizer, or is it contributing to
-the turbulence-field and phase-routing behaviour observed in the baseline?
+| Item | Question |
+| --- | --- |
+| Is first-order k acting as a necessary stabilizer, or | is it contributing to the turbulence-field and phase-routing behaviour observed in the baseline? |
 
 ## Controlled change
 
-Change only the k discretization. Preserve RNG closure, wall treatment, epsilon
-discretization, phase-fraction scheme, pressure coupling, URFs, absorber,
-boundaries, and DPM state.
-
-The reusable helper's second-order k request is not evidence that second-order
-k is the correct baseline; it is the deliberate delta for this packet. Planned
-horizon: 500 native iterations after smoke, using the verified T0 parent and
-the shared contract in the [family README](../README.md).
+| Item | Controlled change |
+| --- | --- |
+| — | Change only the k discretization |
+|  | Preserve RNG closure, wall treatment, epsilon discretization, phase-fraction scheme, pressure coupling, URFs, absorber, boundaries, and DPM state |
+| reusable helper's second-order k request | is not evidence that second-order k is the correct baseline; it is the deliberate delta for this packet |
+| — | Planned horizon: 500 native iterations after smoke, using the verified T0 parent and the shared contract in the [family README](../README.md) |
 
 ## Decision boundary
 
-Only coupled improvement in turbulence stability, continuity, and phase/source
-evidence is informative. A first-order endpoint remains a numerical result,
-not final physical qualification.
+| Item | Decision boundary |
+| --- | --- |
+| — | Only coupled improvement in turbulence stability, continuity, and phase/source evidence is informative |
+| A first-order endpoint | remains a numerical result, not final physical qualification |

@@ -1,5 +1,6 @@
-> **Retired source:** Setups/past/archived/02b-vof-split-inlet-transient.md
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
+| Item | Record |
+| --- | --- |
+| Retired source | Setups/past/archived/02b-vof-split-inlet-transient.md |
 
 # VOF Split-Inlet Setup Report (Fluent 2024 R1)
 
@@ -15,13 +16,14 @@
 | Outcome | rejected |
 | Linked report | none |
 
-This report mirrors the structure of [00-baseline-spiral-boc-reference.md](../purnanto-00-reference-spiral-boc/setup.md), but captures your current run configuration:
-
-- Fluent `2024 R1`
-- `VOF` (instead of Mixture)
-- Two-zone split inlet (`water` half + `steam` half)
-- `Transient`
-- No patching step for now
+| Setup metadata |
+| --- |
+| This report mirrors the structure of [00-baseline-spiral-boc-reference.md](../purnanto-00-reference-spiral-boc/setup.md), but captures your current run configuration: |
+| Fluent `2024 R1` |
+| `VOF` (instead of Mixture) |
+| Two-zone split inlet (`water` half + `steam` half) |
+| `Transient` |
+| No patching step for now |
 
 ## A. Geometry, mesh, and modelling scope
 
@@ -158,16 +160,20 @@ This report mirrors the structure of [00-baseline-spiral-boc-reference.md](../pu
 
 ## M. Immediate next checks after this run
 
-1. Plot water volume fraction on inlet plane and 1-3 inlet diameters downstream.
-2. Check vectors near inlet for artificial lateral scatter.
-3. Check outlet backflow warnings and phase composition.
-4. If interface smears too fast, test:
-   - smaller timestep first,
-   - then (if needed) Explicit VOF formulation to see whether additional interface schemes appear.
+| M. Immediate next checks after this run |
+| --- |
+| Plot water volume fraction on inlet plane and 1-3 inlet diameters downstream |
+| Check vectors near inlet for artificial lateral scatter |
+| Check outlet backflow warnings and phase composition |
+| If interface smears too fast, test: |
+| smaller timestep first, |
+| then (if needed) Explicit VOF formulation to see whether additional interface schemes appear |
 
 ## N. Run outcome and decision (2026-05-05)
 
-- Outcome: this VOF run produced a **very weird / non-physical result** and is considered invalid for current use.
-- Interpretation: observed behavior is not acceptable for expected separator physics.
-- Decision: stop this VOF branch for now and return to the **Mixture** setup as the next run path.
-- Action for next report revision: document the Mixture retry settings and compare directly against this failed VOF attempt.
+| Item | N. Run outcome and decision (2026-05-05) |
+| --- | --- |
+| Outcome | this VOF run produced a very weird / non-physical result and is considered invalid for current use |
+| Interpretation | observed behavior is not acceptable for expected separator physics |
+| Decision | stop this VOF branch for now and return to the Mixture setup as the next run path |
+| Action for next report revision | document the Mixture retry settings and compare directly against this failed VOF attempt |

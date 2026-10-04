@@ -11,12 +11,10 @@
 | Controlled delta | Proven E3 bottom actuator controlled by shared law with `G=0.50` |
 | Active horizon | 500 controller-active iterations; 50-iteration smoke; checkpoints active 50, 250, 500 |
 
-Use the exact E4 law and invariants in the shared design, with only gain changed:
-`command=clamp(0.50 × 116.92 kg/s × e,0,146.15 kg/s)`. Require positive E0
-normalization and proven phase-specific actuator capability.
-
-Record every command/response, saturation, bottom liquid/vapor flow, inventory,
-balances, residuals, artifacts, and F1–F4. Invalid prerequisites block;
-vapor-dominated response, cycling, ineffective saturation, or numerical failure
-rejects. No plant or convergence claim is permitted.
-
+| Item | Contract |
+| --- | --- |
+| — | Use the exact E4 law and invariants in the shared design, with only gain changed: `command=clamp(0.50 × 116.92 kg/s × e,0,146.15 kg/s)` |
+|  | Require positive E0 normalization and proven phase-specific actuator capability |
+|  | Record every command/response, saturation, bottom liquid/vapor flow, inventory, balances, residuals, artifacts, and F1–F4 |
+|  | Invalid prerequisites block; vapor-dominated response, cycling, ineffective saturation, or numerical failure rejects |
+| No plant or convergence claim | is permitted |

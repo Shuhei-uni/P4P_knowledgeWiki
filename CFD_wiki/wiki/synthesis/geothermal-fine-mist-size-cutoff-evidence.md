@@ -237,7 +237,7 @@ with `100-150 um` retained as a separate coarse-tail sensitivity.
 
 ## Related project evidence
 
-- [Geothermal separator inlet droplets and carryover inventory](geothermal-separator-inlet-droplets-and-carryover.md)
+- Extends: [Geothermal separator inlet droplets and carryover inventory](geothermal-separator-inlet-droplets-and-carryover.md), by screening transport/cutoff assumptions while preserving its measured-PSD gap.
 - [Droplets, carryover, and re-entrainment](../physics-basis/droplets-carryover-and-re-entrainment.md)
 - [Purnanto source extraction](../sources/purnanto-2013-cfd-geothermal-separator.md)
 - [Project fine-mist DPM decision](../../../Project/experiments/phase-03-dpm-carryover-and-coupling/purnanto-09cV3-fine-mist-psd/fine-mist-interpretation.md)

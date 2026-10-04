@@ -13,15 +13,12 @@
 
 ## Selection rationale and limits
 
-K=7 completed its declared screen but left the upper-edge response unresolved:
-inventory remains positively drifting, closure is non-small, and vapor loss remains
-material. The K=10 branch is therefore the one named E2 fourth rule. A prior
-full-geometry K=10 failure is collision context only; this case tests the
-current truncated mesh and must not inherit its result.
-
-Preserve every E0/E2 invariant and the same report/residual instrumentation.
-Require F1 inventory versus E0, F2 phase routing/closure, and F3 numerical
-adequacy. A solver failure is a bounded branch outcome, not a completed
-comparison. No physical drainage, convergence, or plant-control claim is
-permitted.
-
+| Item | Selection rationale and limits |
+| --- | --- |
+| — | K=7 completed its declared screen but left the upper-edge response unresolved: inventory remains positively drifting, closure is non-small, and vapor loss remains material |
+| K=10 branch | is therefore the one named E2 fourth rule |
+| A prior full-geometry K=10 failure | is collision context only; this case tests the current truncated mesh and must not inherit its result |
+| — | Preserve every E0/E2 invariant and the same report/residual instrumentation |
+|  | Require F1 inventory versus E0, F2 phase routing/closure, and F3 numerical adequacy |
+| A solver failure | is a bounded branch outcome, not a completed comparison |
+| No physical drainage, convergence, or plant-control claim | is permitted |

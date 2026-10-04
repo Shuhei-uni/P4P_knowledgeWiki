@@ -12,13 +12,11 @@
 | Controlled delta | Change only `bottom` from wall to pressure outlet at `1.160 MPa` gauge |
 | Horizon | 500 iterations including 50-iteration smoke; checkpoints 50, 250, 500 |
 
-Use the same liquid-dominant backflow and outlet turbulence state as every E1
-child. Preserve all E0 invariants and differ from P1120/P1200 only by bottom
-gauge pressure.
-
-Require the shared evidence package plus pressure readback, bottom phase flux,
-normalized vapor loss, liquid inventory, balances, and native residuals. Use
-F1–F3. Missing setup/history evidence is invalid; vapor-dominated improvement,
-backflow-driven artifacts, worse buildup, or failure rejects this setting. No
-physical drainage or convergence claim is permitted.
-
+| Item | Contract |
+| --- | --- |
+| — | Use the same liquid-dominant backflow and outlet turbulence state as every E1 child |
+|  | Preserve all E0 invariants and differ from P1120/P1200 only by bottom gauge pressure |
+|  | Require the shared evidence package plus pressure readback, bottom phase flux, normalized vapor loss, liquid inventory, balances, and native residuals |
+|  | Use F1–F3 |
+| Missing setup/history evidence | is invalid; vapor-dominated improvement, backflow-driven artifacts, worse buildup, or failure rejects this setting |
+| No physical drainage or convergence claim | is permitted |

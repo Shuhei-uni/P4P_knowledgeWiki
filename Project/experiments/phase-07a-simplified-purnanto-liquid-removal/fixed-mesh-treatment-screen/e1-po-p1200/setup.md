@@ -11,12 +11,10 @@
 | Controlled delta | Change only `bottom` from wall to pressure outlet at `1.200 MPa` gauge |
 | Horizon | 500 iterations including 50-iteration smoke; checkpoints 50, 250, 500 |
 
-Preserve the identical E1 backflow/turbulence state and every E0 invariant.
-This is the approved upper initial pressure and prior full-geometry failure-edge
-context; that history does not predict this case.
-
-Require the shared setup/readback, phase flux, vapor loss, inventory, balance,
-residual, failure, and artifact evidence and F1–F3. A pre-500 failure remains a
-valid failure diagnostic only when last-valid evidence is preserved; it is not
-an equivalent endpoint. No physical drainage or convergence claim is allowed.
-
+| Item | Contract |
+| --- | --- |
+| — | Preserve the identical E1 backflow/turbulence state and every E0 invariant |
+| This | is the approved upper initial pressure and prior full-geometry failure-edge context; that history does not predict this case |
+| — | Require the shared setup/readback, phase flux, vapor loss, inventory, balance, residual, failure, and artifact evidence and F1–F3 |
+| A pre-500 failure | remains a valid failure diagnostic only when last-valid evidence is preserved; it is not an equivalent endpoint |
+| No physical drainage or convergence claim | is allowed |

@@ -2,28 +2,28 @@
 
 ## Hypothesis
 
-If the Stage-03 outer controller is limited by gain and update horizon rather
-than by the wrong control direction, a stronger bounded pressure response over
-ten steady chunks will reduce liquid-inventory drift toward the 200 kg
-numerical target without worsening liquid balance relative to Stage 03.
+| Item | Hypothesis |
+| --- | --- |
+| If the Stage-03 outer controller | is limited by gain and update horizon rather than by the wrong control direction, a stronger bounded pressure response over ten steady chunks will reduce liquid-inventory drift toward the 200 kg numerical target without worsening liquid balance relative to Stage 03 |
 
 ## Exact delta
 
-From the same F11 paired parent, retain all Stage-03 settings except:
-
-- ten chunks of 100 steady iterations rather than five; and
-- gain `2,000 Pa/kg` with capped pressure step `5,000 Pa`, instead of
-  `500 Pa/kg` and `2,000 Pa`.
-
-Pressure remains bounded 1.115–1.1375 MPa gauge. The target remains the
-assumed 200 kg `y≤0.10 m` phase-2 liquid-mass proxy.
+| Item | Exact delta |
+| --- | --- |
+| — | From the same F11 paired parent, retain all Stage-03 settings except: |
+|  | ten chunks of 100 steady iterations rather than five; and |
+|  | gain `2,000 Pa/kg` with capped pressure step `5,000 Pa`, instead of `500 Pa/kg` and `2,000 Pa` |
+| Pressure | remains bounded 1.115–1.1375 MPa gauge |
+| target | remains the assumed 200 kg `y≤0.10 m` phase-2 liquid-mass proxy |
 
 ## Required evidence
 
-- chunk-by-chunk proxy and read-back pressure history;
-- phase-2 liquid inlet, brine, and steam-outlet flows;
-- full and relative mass imbalance; and
-- paired final case/data and file-backed histories.
+| Required evidence |
+| --- |
+| chunk-by-chunk proxy and read-back pressure history; |
+| phase-2 liquid inlet, brine, and steam-outlet flows; |
+| full and relative mass imbalance; and |
+| paired final case/data and file-backed histories |
 
 ## Core figures
 
@@ -35,5 +35,7 @@ assumed 200 kg `y≤0.10 m` phase-2 liquid-mass proxy.
 
 ## Claim limit
 
-This tests only the declared numerical surrogate. It does not validate plant
-level control or identify a plant controller gain.
+| Claim limit |
+| --- |
+| This tests only the declared numerical surrogate |
+| It does not validate plant level control or identify a plant controller gain |

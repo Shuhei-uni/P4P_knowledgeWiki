@@ -1,5 +1,6 @@
-> **Retired source:** Setups/past/reported/10a-splash-ewf-deposition.md
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
+| Item | Record |
+| --- | --- |
+| Retired source | Setups/past/reported/10a-splash-ewf-deposition.md |
 
 # Setup 10a-splash — Eulerian Wall Film With Particle Splashing
 
@@ -19,13 +20,18 @@
 
 ## 1. Purpose
 
-Test whether the injected liquid DPM payload deposits on designated separator walls, forms/drains an Eulerian wall film, and produces secondary splashed DPM parcels under the current separator conditions.
-
-This is a splash-sensitive diagnostic. It is not yet a validated wall-film or re-entrainment model. It currently represents the saved run labelled `10a`; a separate no-splash `10a` control has not yet been completed.
+| Item | Purpose |
+| --- | --- |
+| — | Test whether the injected liquid DPM payload deposits on designated separator walls, forms/drains an Eulerian wall film, and produces secondary splashed DPM parcels under the current separator conditions |
+| This | is a splash-sensitive diagnostic |
+| It | is not yet a validated wall-film or re-entrainment model |
+| — | It currently represents the saved run labelled `10a`; a separate no-splash `10a` control has not yet been completed |
 
 ## 2. Parent-to-child change record
 
-The following table is the controlling comparison between the active `09c` definition and this initialized child.
+| Item | Parent-to-child change record |
+| --- | --- |
+| following table | is the controlling comparison between the active `09c` definition and this initialized child |
 
 | Area | `09c` parent | `10a-splash` child | Change meaning |
 |---|---|---|---|
@@ -52,21 +58,30 @@ The following table is the controlling comparison between the active `09c` defin
 
 ## 3. Settings intentionally retained from `09c`
 
-Unless the Fluent readback shows otherwise, retain:
+| Item | Settings intentionally retained from `09c` |
+| --- | --- |
+| Unless the Fluent readback | shows otherwise, retain: |
+| — | geometry and mesh; |
+|  | split inlet boundaries and mass-flow definitions; |
+|  | outlet boundaries and backflow values; |
+|  | `Mixture` multiphase model and phase definitions; |
 
-- geometry and mesh;
-- split inlet boundaries and mass-flow definitions;
-- outlet boundaries and backflow values;
-- `Mixture` multiphase model and phase definitions;
-- `RNG k-epsilon` turbulence model;
-- Energy `Off`;
-- gravity and operating pressure;
-- six active surface injections on `steaminlet`;
-- the six-injection represented loading of `29.22 kg/s`;
-- injection diameters, particle material, drag, tracking limits, particle count, and injection velocities;
-- ordinary DPM wall fates outside the designated EWF walls.
+<details>
+<summary>Supporting detail — Settings intentionally retained from `09c`</summary>
 
-The `09c` parent reference had `wall = reflect`, `bottom = trap`, and inlet/outlet escape fates. Any change to those fates must be recorded as a separate child change.
+| Item | Settings intentionally retained from `09c` |
+| --- | --- |
+| — | `RNG k-epsilon` turbulence model; |
+|  | Energy `Off`; |
+|  | gravity and operating pressure; |
+|  | six active surface injections on `steaminlet`; |
+|  | the six-injection represented loading of `29.22 kg/s`; |
+|  | injection diameters, particle material, drag, tracking limits, particle count, and injection velocities; |
+|  | ordinary DPM wall fates outside the designated EWF walls |
+|  | The `09c` parent reference had `wall = reflect`, `bottom = trap`, and inlet/outlet escape fates |
+| Any change to those fates must be | recorded as a separate child change |
+
+</details>
 
 ## 4. Initialization and run status
 
@@ -85,32 +100,44 @@ The `09c` parent reference had `wall = reflect`, `bottom = trap`, and inlet/outl
 
 ## 5. Readback status and remaining checks
 
-The case audit has confirmed the wall-film, zero-film, flow-momentum, impingement, and splash settings listed above. Retain the following checks when the case is revisited:
-
-1. Confirm `EWF DPM Coupling = On` and `DPM Interaction with Continuous Phase = Off`.
-2. Confirm film-wall edges do not create unintended film outlets.
-3. Preserve the case/data checkpoint and the audit output with the report.
+| Item | Readback status and remaining checks |
+| --- | --- |
+| — | The case audit has confirmed the wall-film, zero-film, flow-momentum, impingement, and splash settings listed above |
+| Retain the following checks when the case | is revisited: |
+| — | Confirm `EWF DPM Coupling = On` and `DPM Interaction with Continuous Phase = Off` |
+|  | Confirm film-wall edges do not create unintended film outlets |
+|  | Preserve the case/data checkpoint and the audit output with the report |
 
 ## 6. Required result record
 
-Report separately:
+| Required result record |
+| --- |
+| Report separately: |
+| film mass and film thickness by wall zone; |
+| film velocity and drainage direction; |
+| DPM mass transferred into the film; |
+| splashed DPM parcel count and represented mass; |
 
-- film mass and film thickness by wall zone;
-- film velocity and drainage direction;
-- DPM mass transferred into the film;
-- splashed DPM parcel count and represented mass;
-- escaped, trapped, incomplete, and splashed DPM fates;
-- steam-outlet liquid phase flux;
-- `Film Outflow Mass`, `Film DPM Mass Source`, `Film Stripped Mass`, and `Film Separated Mass`;
-- maximum film thickness and any material removal caused by the `0.005 m` cap;
-- residual and mass-balance behavior.
+<details>
+<summary>Supporting detail — Required result record</summary>
+
+| Required result record |
+| --- |
+| escaped, trapped, incomplete, and splashed DPM fates; |
+| steam-outlet liquid phase flux; |
+| `Film Outflow Mass`, `Film DPM Mass Source`, `Film Stripped Mass`, and `Film Separated Mass`; |
+| maximum film thickness and any material removal caused by the `0.005 m` cap; |
+| residual and mass-balance behavior |
+
+</details>
 
 ## 7. Interpretation gate
 
-Promote this beyond diagnostic status only if:
-
-- the film-wall zones and coupling settings are read back from the saved case;
-- the DPM-to-film and splash mass balance closes sufficiently for the run;
-- film inventory is bounded or its growth has a defensible physical interpretation;
-- splashed mass is distinguishable from direct DPM escape and film outflow;
-- the result is compared against a corrected no-splash `10a` reference or a clearly stated `09c`/base carrier baseline; no clean no-splash `10a` result currently exists.
+| Item | Interpretation gate |
+| --- | --- |
+| — | Promote this beyond diagnostic status only if: |
+| the film-wall zones and coupling settings | are read back from the saved case; |
+| — | the DPM-to-film and splash mass balance closes sufficiently for the run; |
+| film inventory | is bounded or its growth has a defensible physical interpretation; |
+| splashed mass | is distinguishable from direct DPM escape and film outflow; |
+| the result | is compared against a corrected no-splash `10a` reference or a clearly stated `09c`/base carrier baseline; no clean no-splash `10a` result currently exists |

@@ -1,7 +1,9 @@
 # D06 repair research — steady Eulerian numerical architecture
 
-Status: research brief only. It does not authorize a replacement case or a
-solver mutation.
+| Item | D06 repair research — steady Eulerian numerical architecture |
+| --- | --- |
+| Status | research brief only |
+|  | It does not authorize a replacement case or a solver mutation |
 
 ## Current tension
 
@@ -15,44 +17,30 @@ Is the bold lane uninformative because Eulerian is irrelevant here, or because
 the inherited steady numerical architecture is not suitable for Eulerian?
 ```
 
-The blocked D06 attempt is not evidence either way: it executed no counted
-smoke/discovery coordinate and produced no final pair. The phase remains
-strictly steady and surrogate-only; this brief does not introduce a physical
-controller, a plant target, or a transient qualification route.
+| Item | Current tension |
+| --- | --- |
+| The blocked D06 attempt is not evidence either way | it executed no counted smoke/discovery coordinate and produced no final pair |
+|  | The phase remains strictly steady and surrogate-only; this brief does not introduce a physical controller, a plant target, or a transient qualification route |
 
 ## Research evidence
 
-- The Phase-01 reference recommends Eulerian only as a controlled second-stage
-  sensitivity from a trusted Mixture baseline because it needs tighter
-  numerical/convergence control ([reference setup](../../phase-01-purnanto-baseline-and-inlet-exploration/purnanto-00-reference-spiral-boc/setup.md)).
-- The official Fluent multiphase stability guidance recommends the Multiphase
-  Coupled solver for **steady Eulerian** solutions, a good starting field, and
-  a reduced Courant number when complex/higher-order behaviour causes
-  difficulty; it warns that overly low volume-fraction relaxation can delay
-  the solution. [Ansys Fluent stability and convergence guidance](https://ansyshelp.ansys.com/public/Views/Secured/corp/v242/en/flu_th/flu_th_sec_multiphase_stab_conv.html)
-- The current Fluent User's Guide distinguishes steady Eulerian controls with
-  pseudo time enabled versus disabled, and identifies their different
-  relaxation/Courant controls. [Fluent multiphase solution strategies](https://ansyshelp.ansys.com/public/Views/Secured/corp/v251/en/flu_ug/flu_ug_sec_multiphase_solution.html)
-
-Research makes a solver-architecture repair plausible; it does **not** show
-that Eulerian is a more physical separator model or that the repair will work
-for this geometry.
+| Research evidence |
+| --- |
+| The Phase-01 reference recommends Eulerian only as a controlled second-stage sensitivity from a trusted Mixture baseline because it needs tighter numerical/convergence control ([reference setup](../../phase-01-purnanto-baseline-and-inlet-exploration/purnanto-00-reference-spiral-boc/setup.md)) |
+| The official Fluent multiphase stability guidance recommends the Multiphase Coupled solver for steady Eulerian solutions, a good starting field, and a reduced Courant number when complex/higher-order behaviour causes difficulty; it warns that overly low volume-fraction relaxation can delay the solution. [Ansys Fluent stability and convergence guidance](https://ansyshelp.ansys.com/public/Views/Secured/corp/v242/en/flu_th/flu_th_sec_multiphase_stab_conv.html) |
+| The current Fluent User's Guide distinguishes steady Eulerian controls with pseudo time enabled versus disabled, and identifies their different relaxation/Courant controls. [Fluent multiphase solution strategies](https://ansyshelp.ansys.com/public/Views/Secured/corp/v251/en/flu_ug/flu_ug_sec_multiphase_solution.html) |
+| Research makes a solver-architecture repair plausible; it does not show that Eulerian is a more physical separator model or that the repair will work for this geometry |
 
 ## D06R outcome
 
-`P6-D06R-EC` replaced the original stalled D06 numerical architecture with
-the verified Eulerian `Coupled` scheme. Its smoke call advanced only one
-printed coordinate before Fluent declared the solution converged, and the
-inherited brine-entry total-pressure report was invalid for Eulerian and did
-not write a history. The run correctly blocked before a countable screen. This
-is a formulation-specific instrumentation incompatibility, not evidence that
-Eulerian is physically irrelevant.
-
-Because the campaign's report package was declared before compute, D06R cannot
-be made countable by silently omitting that report afterward. A third Eulerian
-attempt with a revised package would change both numerical architecture and
-instrumentation and is deferred; it is no longer the smallest interpretable
-sixth lane.
+| Item | D06R outcome |
+| --- | --- |
+| — | `P6-D06R-EC` replaced the original stalled D06 numerical architecture with the verified Eulerian `Coupled` scheme |
+|  | Its smoke call advanced only one printed coordinate before Fluent declared the solution converged, and the inherited brine-entry total-pressure report was invalid for Eulerian and did not write a history |
+|  | The run correctly blocked before a countable screen |
+| This | is a formulation-specific instrumentation incompatibility, not evidence that Eulerian is physically irrelevant |
+| Because the campaign's report package | was declared before compute, D06R cannot be made countable by silently omitting that report afterward |
+| — | A third Eulerian attempt with a revised package would change both numerical architecture and instrumentation and is deferred; it is no longer the smallest interpretable sixth lane |
 
 ## Serious replacement candidate
 
@@ -72,23 +60,18 @@ sixth lane.
 
 ## Rejected/deferred alternatives
 
-- **Eulerian D06/D06R**: two failed pre-horizon attempts now establish an
-  implementation/instrumentation limitation for the inherited 30-report
-  package. Do not weaken it post hoc; defer an Eulerian-specific report
-  redesign to a later discovery extension only if still needed.
-- **Steady VOF**: prior history makes this a high-risk partial repeat with an
-  interface/steady confounder; it is not an appropriate fast repair.
-- **Another feedback gain**: a nearby parameter sweep is redundant with D04
-  and D05 and cannot answer the model-form/numerical-architecture tension.
-- **Transient Eulerian or physical controller design**: outside the human-set
-  steady numerical-surrogate boundary.
+| Item | Rejected/deferred alternatives |
+| --- | --- |
+| Eulerian D06/D06R | two failed pre-horizon attempts now establish an implementation/instrumentation limitation for the inherited 30-report package |
+|  | Do not weaken it post hoc; defer an Eulerian-specific report redesign to a later discovery extension only if still needed |
+| Steady VOF | prior history makes this a high-risk partial repeat with an interface/steady confounder; it is not an appropriate fast repair |
+| Another feedback gain | a nearby parameter sweep is redundant with D04 and D05 and cannot answer the model-form/numerical-architecture tension |
+| Transient Eulerian or physical controller design | outside the human-set steady numerical-surrogate boundary |
 
 ## Required next gates
 
-1. Resolve the exact Fluent 2025 R2 configuration mechanics in a disposable
-   child, with pre-save and fresh-reopen readbacks.
-2. Update the six-case design to replace unavailable D06 with D06R only if the
-   capability recipe is verified; otherwise select another nonredundant
-   researched candidate.
-3. Obtain a fresh independent `DISCOVERY_DESIGN` transition review before any
-   D06R mutation or solve.
+| Required next gates |
+| --- |
+| Resolve the exact Fluent 2025 R2 configuration mechanics in a disposable child, with pre-save and fresh-reopen readbacks |
+| Update the six-case design to replace unavailable D06 with D06R only if the capability recipe is verified; otherwise select another nonredundant researched candidate |
+| Obtain a fresh independent `DISCOVERY_DESIGN` transition review before any D06R mutation or solve |

@@ -58,6 +58,12 @@ At `Psep = 11.2 bara` and total flow `197.61 kg/s`, Purnanto reports the followi
 - Include NCGs such as CO2 and H2S in thermodynamic/property or plant-process modelling when field data exists, but do not invent a separator-inlet NCG fraction for the Purnanto baseline.
 
 ## Open Gaps
+The [fine-mist cutoff evidence](geothermal-fine-mist-size-cutoff-evidence.md)
+extends this inventory with transport and breakup screening and a distinction
+between inherited injection weights and an inlet population. Its project-derived
+size ranges retain their stated operating-condition limits; they do not replace
+the missing measured inlet PSD.
+
 - Measured droplet size distribution at a conventional geothermal well/separator inlet.
 - Droplet number concentration or DPM parcel-to-real-mass mapping for Purnanto's nine Harwell-derived injections.
 - Mineral-particle or corrosion-product particle size and mass loading before a conventional separator.

@@ -1,5 +1,6 @@
-> **Retired source:** Setups/past/archived/08-purnanto-one-inlet-massflow-recreation.md
-> **Migration note:** Historical wording, evidence status, and uncertainty labels are preserved; this Project copy is not a reinterpretation. Machine-generated artifacts remain with their original external owners; the retired written source is recoverable from Git history.
+| Item | Record |
+| --- | --- |
+| Retired source | Setups/past/archived/08-purnanto-one-inlet-massflow-recreation.md |
 
 # Purnanto One-Inlet Mass-Flow Recreation
 
@@ -17,28 +18,33 @@
 
 ## 1. Purpose
 
-Define the current-project branch that most directly recreates the Purnanto separator setup style:
+| Item | Purpose |
+| --- | --- |
+| — | Define the current-project branch that most directly recreates the Purnanto separator setup style: |
+|  | one inlet boundary only; |
+|  | both steam and water enter through that same inlet; |
+|  | inlet boundary type stays `Mass-Flow Inlet`; |
+| outlet | remains a steam-side `Pressure Outlet`; |
 
-- one inlet boundary only;
-- both steam and water enter through that same inlet;
-- inlet boundary type stays `Mass-Flow Inlet`;
-- outlet remains a steam-side `Pressure Outlet`;
-- no pure-liquid / pure-steam face split at the inlet.
+<details>
+<summary>Supporting detail — Purpose</summary>
 
-This report is the concrete setup-instance definition for rebuilding the paper-style inlet package on the current project geometry/mesh. It should be used when the goal is direct Purnanto-style setup parity, not the later split-inlet diagnostics.
+| Item | Purpose |
+| --- | --- |
+| — | no pure-liquid / pure-steam face split at the inlet |
+| This report | is the concrete setup-instance definition for rebuilding the paper-style inlet package on the current project geometry/mesh |
+| It should be | used when the goal is direct Purnanto-style setup parity, not the later split-inlet diagnostics |
+| — | Geometry naming note: |
+| this branch | uses the `purnantov2` geometry label even though its inlet package is the direct one-inlet Purnanto-style recreation; |
+| geometry naming and inlet boundary-condition style | are separate, so a one-inlet uniform/two-phase recreation can still sit on `purnantov2` geometry; |
+| — | use `purnanto` for setups `04` to `07`, and `purnantov2` for setup `08` and later branches unless a later note explicitly overrides that; |
+|  | see `../../technical/purnanto-spiral-inlet-geometry.md` for the current project naming rule |
+|  | Primary reusable evidence: |
+|  | [geothermal-boc-separator-fluent-2013-baseline](../../../../CFD_wiki/wiki/setups/geothermal-boc-separator-fluent-2013-baseline.md) |
+|  | [purnanto-2013-cfd-geothermal-separator](../../../../CFD_wiki/wiki/sources/purnanto-2013-cfd-geothermal-separator.md) |
+|  | [00a-purnanto-setup-5000-live-audit.md](../../phase-01-purnanto-baseline-and-inlet-exploration/purnanto-00a-live-setup-audit/setup.md) |
 
-Geometry naming note:
-
-- this branch uses the `purnantov2` geometry label even though its inlet package is the direct one-inlet Purnanto-style recreation;
-- geometry naming and inlet boundary-condition style are separate, so a one-inlet uniform/two-phase recreation can still sit on `purnantov2` geometry;
-- use `purnanto` for setups `04` to `07`, and `purnantov2` for setup `08` and later branches unless a later note explicitly overrides that;
-- see `../../technical/purnanto-spiral-inlet-geometry.md` for the current project naming rule.
-
-Primary reusable evidence:
-
-- [geothermal-boc-separator-fluent-2013-baseline](../../../../CFD_wiki/wiki/setups/geothermal-boc-separator-fluent-2013-baseline.md)
-- [purnanto-2013-cfd-geothermal-separator](../../../../CFD_wiki/wiki/sources/purnanto-2013-cfd-geothermal-separator.md)
-- [00a-purnanto-setup-5000-live-audit.md](../../phase-01-purnanto-baseline-and-inlet-exploration/purnanto-00a-live-setup-audit/setup.md)
+</details>
 
 ## 2. Setup Identity
 
@@ -57,22 +63,24 @@ Primary reusable evidence:
 | Gravity | on, downward in `y` |
 | Evidence-use label | direct paper-style recreation branch |
 
-Evidence labels used in this report:
-
-- `Reported`: directly stated in the paper-linked CFD wiki pages.
-- `Observed`: taken from the live Purnanto Fluent audit.
-- `Assumed`: required because the current-project branch is being rebuilt on local geometry/mesh rather than loaded from the original paper case file.
+| Item | Setup Identity |
+| --- | --- |
+| Evidence labels | used in this report: |
+| `Reported` | directly stated in the paper-linked CFD wiki pages |
+| `Observed` | taken from the live Purnanto Fluent audit |
+| `Assumed` | required because the current-project branch is being rebuilt on local geometry/mesh rather than loaded from the original paper case file |
 
 ## 3. Why This Branch Exists
 
-The recent project lineage drifted toward:
-
-- split inlets;
-- velocity-inlet reinterpretations;
-- no-brine-outlet diagnostics;
-- pure-liquid / pure-steam comparison branches.
-
-Those branches are still useful as comparisons, but they are not the closest recreation of the Purnanto setup. For direct parity, the setup needs to return to the simpler paper-style inlet logic:
+| Item | Why This Branch Exists |
+| --- | --- |
+| — | The recent project lineage drifted toward: |
+|  | split inlets; |
+|  | velocity-inlet reinterpretations; |
+|  | no-brine-outlet diagnostics; |
+|  | pure-liquid / pure-steam comparison branches |
+| Those branches | are still useful as comparisons, but they are not the closest recreation of the Purnanto setup |
+| — | For direct parity, the setup needs to return to the simpler paper-style inlet logic: |
 
 ```text
 one inlet
@@ -85,7 +93,9 @@ pressure outlet handles discharge
 
 ### Inlet
 
-Use one inlet boundary named `inlet` or the current-project equivalent.
+| Inlet |
+| --- |
+| Use one inlet boundary named `inlet` or the current-project equivalent |
 
 | Field | Value |
 |---|---:|
@@ -98,12 +108,13 @@ Use one inlet boundary named `inlet` or the current-project equivalent.
 | Vapor mass flow | `80.69 kg/s` |
 | Liquid mass flow | `116.92 kg/s` |
 
-Interpretation:
-
-- both phases are imposed through the same boundary;
-- this is not a uniform liquid-volume-fraction velocity inlet;
-- this is not a pure-phase split across two zones;
-- this is the closest current-project reproduction of the live audited Purnanto case.
+| Item | Inlet |
+| --- | --- |
+| — | Interpretation: |
+| both phases | are imposed through the same boundary; |
+| this | is not a uniform liquid-volume-fraction velocity inlet; |
+|  | is not a pure-phase split across two zones; |
+|  | is the closest current-project reproduction of the live audited Purnanto case |
 
 ### Steam Outlet
 
@@ -124,13 +135,16 @@ Interpretation:
 | vessel wall | stationary no-slip wall |
 | lower boundary / bottom | wall in the same spirit as the live Purnanto audit |
 
-Practical note:
-
-- do not introduce a separate active brine outlet in this branch unless the aim changes away from direct Purnanto-style recreation.
+| Walls / Lower Boundary |
+| --- |
+| Practical note: |
+| do not introduce a separate active brine outlet in this branch unless the aim changes away from direct Purnanto-style recreation |
 
 ## 5. Models and Numerics to Keep
 
-Use the paper-style solver stack from the reusable CFD baseline and the live audit:
+| Models and Numerics to Keep |
+| --- |
+| Use the paper-style solver stack from the reusable CFD baseline and the live audit: |
 
 | Panel | Setting | Value |
 |---|---|---|
@@ -150,7 +164,9 @@ Use the paper-style solver stack from the reusable CFD baseline and the live aud
 | Solution Methods | `epsilon` | `Second Order Upwind` |
 | Initialization | Method | `Hybrid Initialization` |
 
-Observed under-relaxation factors from the live audit that should be kept unless a later troubleshooting branch is created:
+| Models and Numerics to Keep |
+| --- |
+| Observed under-relaxation factors from the live audit that should be kept unless a later troubleshooting branch is created: |
 
 | Variable | Value |
 |---|---:|
@@ -166,30 +182,36 @@ Observed under-relaxation factors from the live audit that should be kept unless
 
 ## 6. What Not To Change In This Branch
 
-Do not do these if the goal is direct Purnanto-style recreation:
-
-- do not split the inlet into liquid-side and steam-side faces;
-- do not replace the one inlet with a full-area `Velocity Inlet`;
-- do not convert it into a pure-liquid / pure-steam branch;
-- do not introduce a water-pool initialization as part of the baseline definition;
-- do not add DPM injections yet unless the continuous/multiphase field first behaves acceptably.
+| Item | What Not To Change In This Branch |
+| --- | --- |
+| Do not do these if the goal | is direct Purnanto-style recreation: |
+| — | do not split the inlet into liquid-side and steam-side faces; |
+|  | do not replace the one inlet with a full-area `Velocity Inlet`; |
+|  | do not convert it into a pure-liquid / pure-steam branch; |
+|  | do not introduce a water-pool initialization as part of the baseline definition; |
+|  | do not add DPM injections yet unless the continuous/multiphase field first behaves acceptably |
 
 ## 7. First-Run Checks
 
-Before long iterations, verify:
-
-1. Fluent shows exactly one inlet boundary carrying both phase mass flows.
-2. The inlet phase mass-flow report reproduces approximately `80.69 kg/s` vapor and `116.92 kg/s` liquid.
-3. The outlet remains the only pressure outlet used for the baseline recreation path.
-4. Gravity and `Mixture` model are active.
-5. The case is initialized with `Hybrid Initialization`.
+| Item | First-Run Checks |
+| --- | --- |
+| — | Before long iterations, verify: |
+| Fluent | shows exactly one inlet boundary carrying both phase mass flows |
+| — | The inlet phase mass-flow report reproduces approximately `80.69 kg/s` vapor and `116.92 kg/s` liquid |
+| outlet | remains the only pressure outlet used for the baseline recreation path |
+| Gravity and `Mixture` model | are active |
+| case | is initialized with `Hybrid Initialization` |
 
 ## 8. Interpretation Rule
 
-Treat this branch as:
+| Interpretation Rule |
+| --- |
+| Treat this branch as: |
 
 ```text
 direct Purnanto-style recreation branch
 ```
 
-Use later split-inlet or velocity-inlet reports only as controlled alternatives after this one-inlet mass-flow branch has been rebuilt and checked.
+| Interpretation Rule |
+| --- |
+| Use later split-inlet or velocity-inlet reports only as controlled alternatives after this one-inlet mass-flow branch has been rebuilt and checked |

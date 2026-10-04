@@ -11,6 +11,7 @@ below. Short-window mass closure did not persist in the longer tests; those
 records do not establish constant-level operation or a plant boundary condition.
 
 ## Sources Covered
+- Extends: [separator verification and validation workflow](separator-cfd-verification-and-validation-workflow.md), with efficiency definitions, represented-mass accounting and unresolved-track brackets. Use that workflow to qualify the resulting claim.
 - [purnanto-2013-cfd-geothermal-separator](../sources/purnanto-2013-cfd-geothermal-separator.md)
 - [chen-2025-straight-through-cyclone-water-separator](../sources/chen-2025-straight-through-cyclone-water-separator.md)
 - [geothermal-boc-separator-fluent-2013-baseline](../setups/geothermal-boc-separator-fluent-2013-baseline.md)
