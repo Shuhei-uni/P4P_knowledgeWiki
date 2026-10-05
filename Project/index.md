@@ -50,9 +50,9 @@ steam-outlet diameter is `0.876 m`, correcting the former Project value of
 
 | Current Phase 7.2A lane | Scope and authority | Record |
 | --- | --- | --- |
-| Stage 2 adaptive-film development | N45606 preserved; Server 1 reassigned to the Stage 3 early-EWF test | [Phase contract](experiments/phase-07-2a-wall-liquid-routing/CONTEXT.md) |
+| Stage 2 adaptive-film development | Server 3; verified N45606 transfer; aggressive-step probes and inner-film repair | [Continuation setup](experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/aggressive-server3/setup.md) |
 | Stage 3 early Coupled/EWF startup | Server 1; exact A bulk fields; R3/contact model; 500 low-feed updates before the original ramp | [Startup setup](experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/setup.md) |
-| Stage 3 shortened reconstruction | Server 3; existing-mesh screen complete; carrier scalars close, developed-film reproduction not established | [Stage 3 setup](experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/setup.md), [results](experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/results.md) |
+| Stage 3 shortened reconstruction | Server 3; N8000 adaptive continuation complete; carrier scalars close; film 14.09% of reference; continuity remains high | [Stage 3 setup](experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/setup.md), [results](experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/results.md) |
 
 **Phase 7.2A was created by the human on 2026-09-22.** Its starting baseline
 is the verified terminal Phase 7.1A R0 Coupled / Global-Time-Step continuation,

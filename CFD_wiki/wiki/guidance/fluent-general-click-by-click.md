@@ -115,6 +115,111 @@ evidence against cap removal, not a complete thin-film validity test.
 [UG §30.4](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_ewf_sec_eqns.html),
 [Theory §17.1](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_th/flu_th_ewf_intro.html).
 
+## Adaptive EWF stepping: apply and verify (2025 R2)
+
+**Why this matters:** film development depends on elapsed film time. More flow
+iterations can advance very little film time when the accepted film step is
+small. Use the native film clock to assess progress.
+
+### Documented controls and scope
+
+**Reported, documentation:** open Models → Eulerian Wall Film → Solution
+Method and Control. For steady bulk flow, select Adaptive Time Stepping and
+set Max Courant Number, Initial Time Step, Increase Factor and Decrease Factor.
+Both factors must exceed 1. Transient bulk flow uses adaptive film substeps
+within each flow timestep; its controls must be interpreted in that mode.
+[UG §30.4](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_ewf_sec_eqns.html).
+
+**Reported, documentation:** with steady bulk flow, the adaptive rule uses
+the maximum film Courant number, C, and the selected target, Ctarget:
+
+| Observed film Courant | Next-step action |
+| --- | --- |
+| C < Ctarget / 2 | Multiply film step by Increase Factor |
+| C > Ctarget | Divide film step by Decrease Factor |
+| Between these thresholds | No change from these triggers |
+
+[Theory §17.4.3.1](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_th/flu_th_ewf_sec_sol_alg.html).
+The documented steady-film description assumes frozen bulk flow; record
+whether the actual run keeps updating bulk equations. Film time must not be
+used as a physical clock for steady bulk inventory changes.
+
+### Reusable procedure
+
+**Inferred procedure, supported by the documented controls and verified run:**
+
+1. Preserve the current case/data pair. Record Fluent version, native iteration,
+   film elapsed time, inventory and drainage. Continue existing film fields;
+   do not initialize them again to change numerical controls.
+2. Inspect the active film walls, material, accretion, film equation coupling,
+   flow feedback and bulk time mode. Keep these fixed for a timestep contrast.
+3. Set the adaptive controls in the panel above. Choose numerical values for
+   the current case; the [tested control set](../../../Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/setup.md#authorized-adaptive-continuation)
+   is an example, not a general default or proven stable limit.
+4. Read back every changed control. Save and reopen the prepared pair; verify
+   unchanged solution fields, iteration and film clock. When using PyFluent,
+   inspect the live version-matched control names before setting them.
+5. Enable file-backed reports for film inventory, thickness, maximum Courant,
+   mass sources and cumulative edge outflow. Capture printed film time and
+   accepted step alongside native iteration coordinates.
+6. Run a short instrumentation check as part of the selected horizon. Confirm
+   that accepted steps respond to Courant and that time advances. A true
+   adaptive flag alone does not establish effective adaptive stepping.
+7. Continue in large batches with local paired checkpoints. At each checkpoint,
+   verify native horizon, accepted-step history, film time, finite fields,
+   thickness, source accounting and the film mass ledger. Use case-specific
+   recovery limits; elapsed time or successful completion alone does not prove
+   a stable or accurate solution.
+8. Compare inventory, drainage and routing at stated film times. Check timestep
+   sensitivity before using an accelerated run for quantitative conclusions.
+   Report wall-clock cost separately from film-time advancement per update.
+
+### Verified implementation pattern and diagnostics
+
+**Reported, project implementation:** Fluent 2025 R2 exposed these native
+keys in the [verified continuation runner](../../../PyAnsys/scripts/setup/continue_phase72a_stage3_adaptive.py).
+The runner is a case-specific example; reuse its inspection, preservation and
+readback pattern, not its paths, parent identity or iteration targets.
+
+| Native object / key | Reusable purpose |
+| --- | --- |
+| `wall-film/model-parameters` → `ewf-adaptive?` | Read and set adaptive mode |
+| `adapt-init-dt` | Initial-step setting; check actual first step on continuation |
+| `courant-number` | Adaptive target, not the bulk-flow Courant control |
+| `adapt-tstp-inc`, `adapt-tstp-dec` | Step growth and reduction factors |
+| `timestep-max` | Do not assume the name means an adaptive ceiling |
+| `wall-film/solution-state` → `film_elapsed_time`, `film_timestep` | Native clock and current step; reconcile with saved data and transcript |
+| `max_timestep_count` | Check step-count increment against the verified horizon; do not assume one step per update in another mode |
+
+| Failure signal | Quick diagnostic / repair | Evidence status |
+| --- | --- | --- |
+| Adaptive flag true, accepted step unchanged | Check Courant against both thresholds; verify applied settings after save/reopen; inspect actual printed steps | **Reported:** initial Stage 3 screen showed this mismatch; exact cause remains **Missing Info** |
+| Configured initial step differs from first continued step | Inspect retained native solution-state; do not reset film fields merely to force an initial setting | **Reported:** continuation retained its inherited first step, then adapted |
+| Live clock disagrees with completed transcript | Preserve paired endpoint, refresh from saved data, then reconcile exact clock, step count and rounded transcript; never rerun completed updates to repair a clock read | **Reported:** this repaired the continuation's clock check |
+| Accepted step exceeds `timestep-max` | Record both setting and actual step; a separate adaptive upper bound remains **Missing Info** | **Reported:** accepted step exceeded this setting in the tested continuation |
+| Film thickens rapidly, clips, or ledger deteriorates | Preserve the latest valid pair; reduce aggressiveness and inspect numerical/source controls before continuing | **Reported:** earlier fixed-step increase produced film runaway; no transferable stable limit established |
+
+### Transfer evidence and limits
+
+This lesson **reuses** the [Stage 3 N6000–N8000 result](../../../Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/results.md#more-aggressive-adaptive-continuation--n6000n8000)
+and **extends** the [Fluent documentation source](../sources/ansys-fluent-users-guide-2025r2.md).
+
+| Reusable finding | Evidence / limit |
+| --- | --- |
+| Effective adaptive stepping can advance film time faster while preserving film-side accounting | **Reported:** verified Stage 3 continuation; exact controls, steps, clock and ledger remain in the linked Project result and [machine summary](../../../PyAnsys/output/phase72a-stage3-server3/20261005/adaptive-aggressive-N6000-N8000/analysis-summary.json) |
+| Faster film advancement does not establish lower bulk residuals, stationary film, or whole-separator closure | **Reported:** carrier values remained close while continuity stayed high and film kept filling |
+| Test conditions matter | **Reported:** approximately 60k mesh, steady Coupled Mixture carrier, corrected contact absorber, R3 roughness, film momentum feedback off and diagnostic one-way DPM; exact setup remains in Project |
+| Transfer to other cases | **Inferred:** reuse the method and evidence checks; re-establish accepted steps and accuracy for different meshes, loading, materials, sources, wall topology or coupling |
+| Confidence | High for the documented rule and observed continuation; unverified for stability or accuracy of the same numerical values in other cases |
+| Missing Info | Independent effect of each changed adaptive control; cause of earlier unchanged steps; verified separate adaptive ceiling; timestep-insensitive developed-film result |
+| Minimal sensitivity check | Preserve one parent and compare conservative and candidate controls at matched film time with film distribution, inventories, sources, drainage and ledger evidence |
+
+For an accretion-fed film with no other enabled transfers, use
+`ΔMfilm + ΔMedge-outflow − Σ(accretion rate × accepted film-time increment)`.
+Use kg for mass and kg/s for rates. If DPM, stripping, separation, phase change
+or user film sources are active, include every applicable term. **Inferred:**
+small film-only ledger error does not establish combined bulk/film conservation.
+
 ## 1) Start Fluent
 1. Open `Ansys Fluent Launcher`.
 2. Set:

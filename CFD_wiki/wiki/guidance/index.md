@@ -10,6 +10,7 @@ Use this directory first when a question is about:
 
 ## Files
 - [fluent-general-click-by-click](fluent-general-click-by-click.md): primary Fluent GUI navigation, including v252 Mixture startup and EWF accretion/conservation checks.
+- [Adaptive EWF stepping: apply and verify](fluent-general-click-by-click.md#adaptive-ewf-stepping-apply-and-verify-2025-r2): documented Courant rule, continuation controls, accepted-step and native-clock verification, film ledger, and linked tested example.
 - [workbench-meshdat-semi-automated-improvement](workbench-meshdat-semi-automated-improvement.md): conservative `.meshdat` plus baseline-mesh workflow for Workbench control edits with PyFluent audit and export validation.
 
 ## Usage Rule

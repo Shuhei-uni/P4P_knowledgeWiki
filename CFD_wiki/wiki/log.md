@@ -491,3 +491,22 @@
 - Assumptions: no scientific values changed or reverified. The local `raw/` and
   `guide/` folders are absent; source-extraction answers retain that verification
   limitation. Structural health does not certify scientific consistency.
+
+## [2026-10-05] query | reusable-adaptive-ewf-stepping
+
+- Files updated: `wiki/guidance/fluent-general-click-by-click.md`,
+  `wiki/guidance/index.md`, `wiki/index.md`,
+  `wiki/sources/ansys-fluent-users-guide-2025r2.md`, and `wiki/log.md`.
+  Added a meaningful backlink from the owning Stage 3 Project result.
+- Reason: preserve the reusable EWF stepping method from the verified
+  Server 3 N6000–N8000 continuation, including actual-step/clock checks,
+  saved-endpoint reconciliation and film-only mass accounting.
+- Primary-source verification: Fluent 2025 R2 User's Guide §30.4 and
+  Theory Guide §17.4.3.1, checked online on 2026-10-05.
+- Assumptions removed: an adaptive flag proves step growth; timestep-max
+  names a verified adaptive ceiling; a configured initial step must replace
+  the inherited first continuation step.
+- Transfer limits: numerical values remain a case-specific tested example,
+  not universal defaults; earlier ineffective-adaptive cause remains unknown;
+  no bulk convergence, stationary-film, full-separator closure or wall-clock
+  speedup inferred from faster film-time advancement.

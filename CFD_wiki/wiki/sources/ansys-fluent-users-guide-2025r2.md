@@ -11,6 +11,12 @@ boundary topology and inventory-versus-flux reporting. Theory and Customization
 Manual evidence is linked explicitly there; no case-specific validation or
 automatic expression-source derivative is inferred.
 
+The [adaptive EWF stepping procedure](../guidance/fluent-general-click-by-click.md#adaptive-ewf-stepping-apply-and-verify-2025-r2)
+extends this source with [UG §30.4 controls](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_ewf_sec_eqns.html)
+and the [Theory §17.4.3.1 adaptive rule](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_th/flu_th_ewf_sec_sol_alg.html),
+verified online on 2026-10-05. Project-observed clock/readback repairs and
+accepted-step behaviour are labelled separately from vendor documentation.
+
 ## A. Study Scope
 - Problem statement and objective:
   - `Reported`: official software documentation describing Fluent capabilities and operating procedures for meshing, solution setup, execution, and postprocessing.

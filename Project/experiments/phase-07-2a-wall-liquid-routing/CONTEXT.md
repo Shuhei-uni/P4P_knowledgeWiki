@@ -1,5 +1,22 @@
 # Phase Context — Phase 7.2A Wall-Liquid Routing and Steam-Outflow Carryover
 
+## Stage 2 continuation on Server 3 — 5 October 2026
+
+| Item | Current contract |
+| --- | --- |
+| Human direction | Continue verified N45606; increase adaptive EWF stepping to seek accretion–drainage convergence |
+| Authority | Full ownership of Server 3 for this continuation; supersedes its Stage 3 placement |
+| Parent / model | Developed Stage 2 R3 + E2.7 with corrected contact absorber; exact N45606 fields |
+| Preservation | Save/reopen Stage 3 N8000 before replacement |
+| First numerical delta | Courant target 0.15; accepted 6.415943 µs; incomplete inner-film convergence |
+| Selected numerical recovery | Allow 30 film subiterations; test target 0.08 after N45806; preserve the aggressive-probe evidence |
+| Evidence | Actual accepted steps, film clock, all EWF inner residuals, inventories, accretion/drainage and film ledger |
+| Run plan | 100-update probe; 1,000-update batches; bounded 0.2 s corrected-restart film horizon |
+| Recovery | Preserve unstable endpoints; repair numerics within this authority |
+| Contract | [Server 3 aggressive continuation](stage-02-combined-ewf-roughness/aggressive-server3/setup.md) |
+| Other lane | Stage 3 Server 1 startup remains separate |
+| R5 | Cancelled |
+
 ## Stage 3 early Coupled/EWF startup — 5 October 2026
 
 | Item | Current contract |
@@ -12,7 +29,7 @@
 | Film | Dry start at A; fixed 1 µs throughout; current E2.7 coupling and wall scope |
 | Preserved previous work | Save current Server 1 N45606 before replacement; Server 3 branch remains separate |
 | Comparison | Ramp progress and equal inlet loading; raw carrier excursions, bulk + film storage, carryover and inner-film convergence |
-| Status | Prepared child reopened; all 17 checked A bulk arrays match exactly; detached run launched |
+| Status | Prepared child reopened; 17 A bulk arrays match exactly; N1600 smoke passed; low-feed hold running |
 | Exact contract | [Early EWF setup](stage-03-shortened-reconstruction/early-ewf-startup/setup.md) |
 | Machine evidence | [Run manifest](../../../PyAnsys/output/phase72a-stage3-early-ewf-server1/20261005/run-manifest.json) |
 | Claim limit | Combined finite startup recipe; no isolated timing, steady-film or whole-separator qualification |
@@ -39,7 +56,8 @@
 | Exact run contract | [Stage 3 setup](stage-03-shortened-reconstruction/setup.md) |
 | Evidence/status | [Stage 3 results](stage-03-shortened-reconstruction/results.md) |
 | Stage 3 screen outcome | N6000 screen complete; carrier snapshot screen passes; developed-film reproduction fails |
-| Authorized continuation | Human requests 2000 more updates on Server 3 with slightly more aggressive adaptive EWF controls; exact numerical contrast in Stage 3 setup |
+| Authorized continuation | N6000–N8000 complete; accepted step 3.713 µs; film time 10.416 ms; ledger error 0.000907%; Server 3 saved/reopened and idle |
+| Current interpretation | Carrier snapshot close; film inventory 14.09% of developed reference; continuity 0.089159; no further solve selected |
 
 ## Current authority and adaptive test — 5 October 2026
 

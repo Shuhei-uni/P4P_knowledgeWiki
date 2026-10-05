@@ -14,6 +14,7 @@ finding a known document; these routes connect explanations, methods and evidenc
 | Are my mesh and convergence evidence enough for this claim? | [Verification and validation workflow](synthesis/separator-cfd-verification-and-validation-workflow.md) | [Mesh evidence across papers](synthesis/mesh-quality-and-resolution-patterns.md) and [near-wall inflation](concepts/mesh-inflation-boundary-layer.md) |
 | What can I reuse from Purnanto, Pointon or Chen? | [Separator design and CFD patterns](synthesis/geothermal-separator-design-and-cfd-patterns.md) | [Purnanto](sources/purnanto-2013-cfd-geothermal-separator.md), [Pointon](sources/pointon-2009-geothermal-separator-sizing-cfd-validation.md), [Chen](sources/chen-2025-straight-through-cyclone-water-separator.md); compare geometry, fluids and validation before transferring settings |
 | How do I perform this step in Fluent? | [Fluent guidance](guidance/index.md) | The relevant procedure, then its version-matched manual section; setup sheets hold case values |
+| How can I advance EWF film time faster without losing trustworthy evidence? | [Adaptive EWF stepping](guidance/fluent-general-click-by-click.md#adaptive-ewf-stepping-apply-and-verify-2025-r2) | Accepted steps, native clock and film ledger; linked tested settings remain case-specific |
 | How do pressure and enthalpy change the inlet phase split? | [Pressure, enthalpy and phase split](physics-basis/operating-pressure-enthalpy-and-phase-split.md) | [Geofluid properties and plant design](synthesis/two-phase-geofluid-property-to-binary-plant-design.md) |
 | Where exactly does a paper report a method or value? | [Paper lookup](../paper_lookup/index.md) | Topic chunk → source extraction → cited original page, figure or table |
 
@@ -92,7 +93,7 @@ without saving a second copy of every conversation.
 
 ## Guidance
 - [guidance/index](guidance/index.md): entry point for reusable click-by-click Fluent guidance pages.
-- [fluent-general-click-by-click](guidance/fluent-general-click-by-click.md): GUI navigation including Mixture startup/source checks, Coupled versus pseudo time, and EWF accretion, feedback, drain topology and inventory/flux accounting.
+- [fluent-general-click-by-click](guidance/fluent-general-click-by-click.md): GUI navigation including Mixture startup/source checks, Coupled versus pseudo time, and EWF accretion, feedback, drain topology, adaptive stepping and film-time/accounting verification.
 - [workbench-meshdat-semi-automated-improvement](guidance/workbench-meshdat-semi-automated-improvement.md): conservative `.meshdat` mesh-improvement workflow with PyFluent baseline/export validation and Workbench operator trial steps.
 - External guide reference: `../guide/Ansys_Fluent_Users_Guide.pdf` is the local Fluent manual PDF used to verify and extend click-by-click guidance.
 

@@ -2,32 +2,57 @@
 
 | Question / decision | Result |
 | --- | --- |
-| Did the prescribed run finish? | Yes: bulk N0–N3000; fixed and adaptive film N3000–N6000; both final paired endpoints reopened |
+| Did the prescribed run finish? | Yes: initial screens N0–N6000 plus authorized adaptive continuation N6000–N8000; final pairs reopened |
 | Did the carrier scalars reproduce the reference? | Final-500 pressure, vapor outlet, liquid carryover and bulk inventory meet declared snapshot tolerances |
-| Did the developed film reproduce? | No: only 3 ms elapsed; inventory is 4.18% of the developed reference |
-| Did adaptive stepping accelerate film time? | No observed acceleration: printed steps remain 1 µs; both arms reach 3 ms |
-| Is the separator steady or fully balanced? | Not qualified: film fills, bulk inventory still falls, source fluctuates and whole-separator accounting remains open |
+| Did the developed film reproduce? | No: latest N8000 film time 10.416 ms; inventory 14.09% of the developed reference |
+| Did adaptive stepping accelerate film time? | Initial screens: no; new continuation: accepted step grows to 3.713 µs, adding 7.416 ms in 2000 updates |
+| Is the separator steady or fully balanced? | Not qualified: film fills at about 82 kg/s; source oscillates; continuity remains high; whole-separator accounting remains open |
 | Can this recipe be used for mesh convergence now? | No; retain it as a tested carrier-startup candidate, not a qualified reconstruction |
-| Next compute decision | Analyse these completed screens first; no further solve or mesh case submitted |
+| Next compute decision | Requested N8000 continuation complete and analysed; no further solve selected |
 | Run contract | [Setup and predeclared tolerances](setup.md) |
 | Machine evidence | [Audited summary](../../../../PyAnsys/output/phase72a-stage3-server3/20261005/analysis-summary.json) |
 | Reference | Corrected R3/contact N33586, independent four-rank replay; developed but not stationary |
-| Current endpoint | Server 3 adaptive N6000, 18 compute ranks; saved locally; verified idle before postprocessing |
+| Current endpoint | Server 3 adaptive N8000, 18 compute ranks; locally saved, reopened and verified idle |
 
-## Authorized adaptive continuation — current status
+## More aggressive adaptive continuation — N6000–N8000
 
-| Item | Recorded state |
+| Question / decision | Result |
 | --- | --- |
-| Selected contrast | Slightly more aggressive adaptive controls; 2000 updates from N6000 |
-| Execution | N7000 saved/reopened; final N7000–N8000 batch selected |
-| Native film step in first 20 updates | 1.00 → 3.71 µs |
-| Added film time in first 20 updates | 0.064737 ms |
-| Peak film Courant | 0.085013 |
-| Film ledger error | 0.000136% |
-| Control effectiveness | Actual step grows; timestep-max 2 µs is not an observed adaptive ceiling |
-| Instrumentation repair | Refresh native film clock from saved data before checking transcript endpoint; no repeated updates |
-| Machine evidence | [Continuation manifest](../../../../PyAnsys/output/phase72a-stage3-server3/20261005/adaptive-aggressive-N6000-N8000/run-manifest.json) |
-| Limits | Preliminary smoke evidence; final N8000 result pending |
+| Requested horizon | All 2000 additional updates complete; N8000 saved/reopened; Server 3 idle |
+| Reusable method | This result supports the [adaptive EWF stepping procedure](../../../../CFD_wiki/wiki/guidance/fluent-general-click-by-click.md#adaptive-ewf-stepping-apply-and-verify-2025-r2); transfer numerical values only after case-specific checks |
+| Selected controls | Adaptive initial step 2 µs; Courant 0.15; increase 1.3; decrease 2.0; timestep-max setting 2 µs |
+| Effective accepted step | Started at inherited 1 µs; grew to exact native 3.71293 µs; then held |
+| Adaptive ceiling | Accepted step exceeds timestep-max setting; no separate adaptive ceiling verified |
+| Film time advancement | Added 7.416338 ms, 3.708 times the 2 ms from 2000 fixed 1 µs updates; not a wall-clock speedup claim |
+| Peak / final film Courant | 0.085951 / 0.076787; below 0.15 target |
+| Film ledger | ΔM + ΔD − ∫A dt; overall absolute error 0.000907% of integrated accretion |
+| Film gain / drainage | 0.609851 kg stored / 0.000010178 kg edge outflow; accretion 0.609855 kg |
+| Film development | Final inventory 14.09% of 6.150172 kg reference; final-block storage 82.175 kg/s; remains filling |
+| Carrier screen | Final-500 pressure, vapor, liquid outlet and bulk inventory differ from reference by <0.18% |
+| Numerical convergence | Final-window continuity 0.089159; no reduction from N6000 mean 0.0888 |
+| Contact source | Final-500 removal 62.413 ± 5.227 kg/s; source oscillation remains |
+| Recorded block cost | 24.49 min for 980 + 1000 updates with readback, checkpoints, reopen and evidence collection; first 20, preparation and clock-repair costs excluded |
+| Instrumentation repair | Refresh film solution-state after paired save/reopen before endpoint-clock check; no repeated solve updates |
+| Evidence coverage | 31 report files; each has parent N6000 and all 2000 updates; all native film clocks reconciled |
+| Residual gap | N7000/N8000 terminal rows absent; 1998 residual rows; final-window continuity uses 499 available rows |
+| Invariants | Mesh, feed, roughness, absorber, bulk methods/controls, film walls/coupling and DPM unchanged |
+| Qualification | Useful adaptive numerical contrast; developed-film reproduction and whole-separator conservation remain unqualified |
+| Machine evidence | [Audited summary](../../../../PyAnsys/output/phase72a-stage3-server3/20261005/adaptive-aggressive-N6000-N8000/analysis-summary.json), [run manifest](../../../../PyAnsys/output/phase72a-stage3-server3/20261005/adaptive-aggressive-N6000-N8000/run-manifest.json) |
+
+| Quantity | Adaptive N6000 | Adaptive N8000 |
+| --- | ---: | ---: |
+| Native film time since dry start (ms) | 3.000 | 10.416 |
+| Film inventory, endpoint (kg) | 0.256942 | 0.866793 |
+| Maximum film thickness, endpoint (mm) | 0.086163 | 0.207456 |
+| Pressure drop, final-500 mean (kPa) | 22.3896 | 22.5513 |
+| Vapor outlet, final-500 mean (kg/s) | 80.2660 | 80.2693 |
+| Liquid carryover, final-500 mean (kg/s) | 3.6999 | 3.6705 |
+| Bulk liquid inventory, final-500 mean (kg) | 63.6362 | 62.8989 |
+| Scaled continuity, late mean | 0.0888 | 0.089159 |
+
+![Accepted adaptive film steps, film growth, continuity and liquid carryover](figures/adaptive-aggressive-N6000-N8000.png)
+
+Native N6001–N8000 reports and transcript clocks; exact saved endpoint reconciles rounded film time. Carrier comparison uses the developed N33586 snapshot. Film growth is sustained, while continuity remains at its earlier level.
 
 ## Carrier reconstruction
 
