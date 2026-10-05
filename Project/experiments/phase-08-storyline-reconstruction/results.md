@@ -197,13 +197,15 @@
 | --- | --- |
 | ![F1-26.81-simple-n10000 liquid](f1-one-inlet/figures/F1-26.81-simple-n10000-liquid.png) <br>  <br> ![F1-26.81-simple-n10000 inlet-vectors](f1-one-inlet/figures/F1-26.81-simple-n10000-inlet-vectors.png) | ![F1-26.81-n10000 liquid](f1-one-inlet/figures/F1-26.81-n10000-liquid.png) <br>  <br> ![F1-26.81-n10000 inlet-vectors](f1-one-inlet/figures/F1-26.81-n10000-inlet-vectors.png) |
 
-| Finding 1a — the F1 numerical package changes the matched carrier response |
-| --- |
-| Historical [08b setup](../phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/setup.md) and [results](../phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/results.md) document split `liquidinlet`/`steaminlet` mass-flow boundaries on a 7,601,261-cell mesh and a 58.73% whole-mixture imbalance ratio at N5,000 |
-| F1 applies mixed feed to both inlet faces on the 60,964-cell Phase 8 mesh |
-| Although F1 SIMPLE shares the audited 00a SIMPLE, second-order and QUICK method family, it is not a topology- or mesh-identical 08b recreation |
+| Comparison item | Evidence and limit |
+| --- | --- |
+| Historical 08b | [Setup](../phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/setup.md) and [results](../phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/results.md) document split `liquidinlet`/`steaminlet` mass-flow boundaries on a 7,601,261-cell mesh, with a 58.73% whole-mixture imbalance ratio at N5,000. |
+| Phase 8 F1 | Applies mixed feed to both inlet faces on the 60,964-cell Phase 8 mesh. |
+| Comparability | F1 SIMPLE shares the audited 00a SIMPLE, second-order and QUICK method family, but it is not a topology- or mesh-identical 08b recreation. |
 
-| ![F1-26.81-simple-n10000 liquid](f1-one-inlet/figures/F1-26.81-simple-n10000-liquid.png) | ![F1-26.81-n10000 liquid](f1-one-inlet/figures/F1-26.81-n10000-liquid.png) |
+| SIMPLE package                                                                                         | Coupled recovery package                                                                 |
+| ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- |
+| ![F1-26.81-simple-n10000 liquid](f1-one-inlet/figures/F1-26.81-simple-n10000-liquid.png)               | ![F1-26.81-n10000 liquid](f1-one-inlet/figures/F1-26.81-n10000-liquid.png)               |
 | ![F1-26.81-simple-n10000 inlet-vectors](f1-one-inlet/figures/F1-26.81-simple-n10000-inlet-vectors.png) | ![F1-26.81-n10000 inlet-vectors](f1-one-inlet/figures/F1-26.81-n10000-inlet-vectors.png) |
 
 Historical [08b setup](../phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/setup.md) and [results](../phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/results.md) document split `liquidinlet`/`steaminlet` mass-flow boundaries on a 7,601,261-cell mesh and a 58.73% whole-mixture imbalance ratio at N5,000. F1 applies mixed feed to both inlet faces on the 60,964-cell Phase 8 mesh. Although F1 SIMPLE shares the audited 00a SIMPLE, second-order and QUICK method family, it is not a topology- or mesh-identical 08b recreation.
