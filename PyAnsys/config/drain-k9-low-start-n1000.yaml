@@ -1,0 +1,32 @@
+job:
+  id: drain-k9-low-start-n1000
+  mode: utility
+runner:
+  cwd: /Users/andy/Desktop/P4P/P4P_shared
+  command:
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/.venv/bin/python
+  - PyAnsys/scripts/setup/run_drain_resistance.py
+  - --build
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/full-geometry-drain-resistance/drain-k9-h0p1-scale0p1-20260930T064024Z/manifest.json
+  - --mode
+  - flow
+  - --iterations
+  - '1000'
+  - --expected-start
+  - '0'
+  - --receipt
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/full-geometry-drain-resistance/low-start-n1000-receipt.json
+completion:
+  required_files:
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/full-geometry-drain-resistance/low-start-n1000-receipt.json
+  verifier_command:
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/.venv/bin/python
+  - PyAnsys/scripts/orchestration/verify_drain_resistance_job.py
+  - --receipt
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/full-geometry-drain-resistance/low-start-n1000-receipt.json
+  - --start
+  - '0'
+  - --iterations
+  - '1000'
+codex:
+  enabled: false

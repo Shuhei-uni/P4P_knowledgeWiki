@@ -1,0 +1,4 @@
+interface:
+  display_name: "Configure Run Monitor"
+  short_description: "Set up Sol monitoring and Astra decision handoffs"
+  default_prompt: "Use $configure-run-monitor to set up or update monitoring for the agreed run. Ask which monitor chat to use if I have not selected one, and reuse an existing schedule where possible."

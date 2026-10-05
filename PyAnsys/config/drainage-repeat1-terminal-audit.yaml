@@ -1,0 +1,15 @@
+job:
+  id: drainage-repeat1-terminal-audit
+  mode: utility
+runner:
+  cwd: /Users/andy/Desktop/P4P/P4P_shared
+  command:
+  - /usr/bin/caffeinate
+  - -i
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/.venv/bin/python
+  - PyAnsys/scripts/orchestration/finish_drainage_repeat.py
+completion:
+  required_files:
+  - PyAnsys/output/drainage-benchmark-repeat1/completion-verification.json
+codex:
+  enabled: false

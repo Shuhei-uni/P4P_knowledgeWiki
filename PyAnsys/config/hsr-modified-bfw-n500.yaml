@@ -1,0 +1,32 @@
+job:
+  id: hsr-modified-bfw-n500
+  mode: utility
+runner:
+  cwd: /Users/andy/Desktop/P4P/P4P_shared
+  command:
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/.venv/bin/python
+  - PyAnsys/scripts/setup/run_hsr_modified_bfw.py
+  - --build
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/hydrostatic-startup-recovery/modified-bfw-k9-20261001T235050Z/manifest.json
+  - --mode
+  - rest
+  - --iterations
+  - '500'
+  - --expected-start
+  - '0'
+  - --receipt
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/hydrostatic-startup-recovery/modified-bfw-n500-receipt.json
+completion:
+  required_files:
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/hydrostatic-startup-recovery/modified-bfw-n500-receipt.json
+  verifier_command:
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/.venv/bin/python
+  - PyAnsys/scripts/orchestration/verify_hsr_job.py
+  - --receipt
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/hydrostatic-startup-recovery/modified-bfw-n500-receipt.json
+  - --start
+  - '0'
+  - --iterations
+  - '500'
+codex:
+  enabled: false

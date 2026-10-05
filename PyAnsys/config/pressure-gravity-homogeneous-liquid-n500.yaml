@@ -1,0 +1,32 @@
+job:
+  id: pressure-gravity-homogeneous-liquid-n500
+  mode: utility
+runner:
+  cwd: /Users/andy/Desktop/P4P/P4P_shared
+  command:
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/.venv/bin/python
+  - PyAnsys/scripts/setup/run_homogeneous_liquid.py
+  - --build
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/pressure-gravity-initialization/homogeneous-liquid-20261002T153622Z/manifest.json
+  - --mode
+  - rest
+  - --iterations
+  - '500'
+  - --expected-start
+  - '0'
+  - --receipt
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/pressure-gravity-initialization/homogeneous-liquid-n500-receipt.json
+completion:
+  required_files:
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/pressure-gravity-initialization/homogeneous-liquid-n500-receipt.json
+  verifier_command:
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/.venv/bin/python
+  - PyAnsys/scripts/orchestration/verify_homogeneous_liquid_job.py
+  - --receipt
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/pressure-gravity-initialization/homogeneous-liquid-n500-receipt.json
+  - --start
+  - '0'
+  - --iterations
+  - '500'
+codex:
+  enabled: false

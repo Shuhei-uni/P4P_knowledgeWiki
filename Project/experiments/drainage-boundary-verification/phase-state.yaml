@@ -1,0 +1,41 @@
+owner: Andy
+status: CORRECTED_REPEAT_VERIFIED
+authorized_by_human: '2026-09-30'
+phase_number: null
+server: 1
+solver_hours_cap: 2
+total_iterations_cap: 4000
+completed_iterations: 4000
+execution_deadline_utc: '2026-09-30T05:36:00.845913+00:00'
+separator_runs_authorized: false
+qualified: false
+campaign: ../../../PyAnsys/output/drainage-benchmark-repeat1/campaign.json
+terminal_analytical_checks_passed: true
+execution_guard_contract_passed: true
+solver_iterating: false
+restored_separator_native_iteration: 2000
+elapsed_wall_hours_including_restore: 0.07408643111111111
+current_action: Terminal review complete; monitoring paused. Full separator follow-on
+  requires scope agreement.
+evidence: ../../../PyAnsys/output/drainage-benchmark/analysis.json
+prior_iterations: 2000
+repeat_iteration_cap: 2000
+repeat_completed_iterations: 2000
+last_connection_check_utc: '2026-09-30T06:27:39.471246+00:00'
+repeat_preparation: ../../../PyAnsys/scripts/setup/run_drainage_benchmark_repeat.py
+last_verified_state: All four benchmark pairs preserved; separator N2000 restored
+  and independently verified idle
+last_guard_native_iteration: 500
+interrupt_proof_passed: true
+completion_job: ../../../PyAnsys/output/run-handoff/drainage-repeat1-resume-540-r2/job_manifest.json
+pause_verified_utc: '2026-09-30T02:08:12.619204+00:00'
+pause_receipt: ../../../PyAnsys/output/drainage-benchmark-repeat1/user-pause-receipt.json
+completion_worker_running: false
+server1_lock_free: true
+repeat_active_elapsed_seconds_before_resume: 1945.35214
+resume_authorized_utc: '2026-09-30T04:08:26.198121+00:00'
+repeat_verification: ../../../PyAnsys/output/drainage-benchmark-repeat1/completion-verification.json
+monitoring_status: PAUSED
+terminal_live_receipt: ../../../PyAnsys/output/drainage-benchmark-repeat1/monitoring-terminal-reconciliation.json
+terminal_verified_utc: '2026-09-30T04:42:39.792168+00:00'
+latest_monitor_receipt: ../../../PyAnsys/output/drainage-benchmark-repeat1/monitoring-latest.json

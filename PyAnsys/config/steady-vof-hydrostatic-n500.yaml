@@ -1,0 +1,32 @@
+job:
+  id: steady-vof-hydrostatic-n500
+  mode: utility
+runner:
+  cwd: /Users/andy/Desktop/P4P/P4P_shared
+  command:
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/.venv/bin/python
+  - PyAnsys/scripts/setup/run_steady_vof_hydrostatic.py
+  - --build
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/steady-vof-hydrostatic/hydrostatic-k9-simple-20261001T005408Z/manifest.json
+  - --mode
+  - rest
+  - --iterations
+  - '500'
+  - --expected-start
+  - '0'
+  - --receipt
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/steady-vof-hydrostatic/n500-receipt.json
+completion:
+  required_files:
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/steady-vof-hydrostatic/n500-receipt.json
+  verifier_command:
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/.venv/bin/python
+  - PyAnsys/scripts/orchestration/verify_hydrostatic_job.py
+  - --receipt
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/steady-vof-hydrostatic/n500-receipt.json
+  - --start
+  - '0'
+  - --iterations
+  - '500'
+codex:
+  enabled: false

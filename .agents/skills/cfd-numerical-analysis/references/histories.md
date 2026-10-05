@@ -4,6 +4,26 @@ Prefer native solver/report coordinates and raw values.
 
 ## Residuals
 
+Use Andy's residual colour scheme (supplied legend, 29 September 2026) for
+future plots and regenerations. These hex values are sampled from the solid
+line centres in the supplied image:
+
+| Equation | Colour | Hex |
+| --- | --- | --- |
+| continuity | turquoise | `#46D2BA` |
+| x-velocity | lavender | `#A199D9` |
+| y-velocity | red | `#FA1900` |
+| z-velocity | blue | `#2C8ED2` |
+| k | orange | `#FC8500` |
+| epsilon | lime green | `#8BDD00` |
+| vf-phase-2 | pink | `#FB9DCD` |
+
+Map colours by equation name, independent of column order or missing equations.
+For an additional equation such as `vf-phase-1`, choose a distinct colour and
+label it explicitly; the supplied legend does not specify its colour. When
+overlaying cases for the same equation, distinguish cases with line styles or
+separate panels while retaining the equation colour.
+
 Stitch restarted/staged histories on their real iteration/time coordinates.
 Show the raw history. Add rolling/statistical summaries only when they clarify a
 trend; label the transformation.

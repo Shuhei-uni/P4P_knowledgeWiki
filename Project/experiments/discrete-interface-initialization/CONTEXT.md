@@ -1,0 +1,9 @@
+# Discrete interface initialization — Andy
+
+Status: CLOSED_UNQUALIFIED after one guarded iteration. No further solves selected; see results.md. The contract below records completed authority.
+
+Human authorized the next discrete-interface/body-force investigation with “okay do next” on 2 October 2026. This is a new unnumbered bounded diagnostic; hydrostatic-startup-recovery remains closed. Question: does a native geometrically reconstructed liquid fill suppress the violent first-iteration response seen with binary centroid fill? Hypothesis: the binary interface contributes materially to the startup imbalance. Reconstruction alone may still leave pressure/density discretely inconsistent.
+
+One fresh zero-feed, steady implicit VOF comparison on the same full mesh. Fixed horizontal level .10 m, original open K9 brine vent and steam pressure outlet, native analytic pressure patch, Modified BFW, SIMPLE, no pseudo-time, URFs .3. Change only geometric volume-fraction initialization; no volumetric smoothing, altered runtime advection, geometry, physical transient, head/relaxation sweep, full feed, Shuhei sessions or numbered phase. Existing initial-condition mass can change with geometric representation; normalize to the new measured initial mass, never retune height to match mass.
+
+Budget: at most 500 solved iterations including retries, two controller-hours, fixed three-hour execution deadline in state. One guarded contrast, no automatic extension. Preserve all prior endpoints; configuration parent is a fresh N0, never an unconverged solution parent. One owned server1 writer. Routine build/evidence repair is allowed, scientific guard stops are terminal. After terminal assessment record the narrow conclusion and pause the existing monitor. Scope changes require new human authority. Phase7b and Phase9 stay closed.

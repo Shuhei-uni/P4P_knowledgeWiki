@@ -1,0 +1,46 @@
+owner: Andy
+status: CLOSED_UNQUALIFIED
+phase_number: null
+server: 1
+authorized_date_local: '2026-10-02'
+total_iterations_cap: 3000
+solver_hours_cap: 6
+max_static_contrasts: 3
+completed_iterations: 3
+execution_deadline_utc: '2026-10-02T07:44:24.680777+00:00'
+qualified: false
+monitor_schedule_id: andy-cfd-monitor-sol-6-1-high
+current_action: Three guarded mechanism failures reviewed; campaign closed unqualified.
+  No fourth contrast or continuation selected.
+autonomous_followons: true
+solver_wall_seconds: 171.1871122080047
+monitor_status: PAUSED
+solver_iterating: false
+audit_script: PyAnsys/scripts/inspection/audit_hydrostatic_startup.py
+connectivity_receipt: PyAnsys/output/hydrostatic-startup-audit/connectivity.json
+offline_audit: PyAnsys/output/hydrostatic-startup-audit/offline-audit.json
+selected_candidate: Brine-only stationary zero-shear wall diagnostic, retain steam
+  pressure outlet
+last_monitor_check_utc: '2026-10-01T20:10:32.872633+00:00'
+last_monitor_receipt: ../../../PyAnsys/output/hydrostatic-startup-audit/monitoring-latest.json
+last_connection_check_utc: '2026-10-01T23:39:45.211849+00:00'
+last_verified_native_iteration: 1
+live_audit: PyAnsys/output/hydrostatic-startup-audit/live-audit.json
+prior_execution_deadline_utc: '2026-10-01T21:59:36.900235+00:00'
+renewed_by_human: 2026-10-02 great execute the plan
+build_manifest: /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/hydrostatic-startup-recovery/sealed-brine-mbfw-20261001T235847Z/manifest.json
+job_id: hsr-sealed-brine-n500
+job_manifest: PyAnsys/output/run-handoff/hsr-sealed-brine-n500/job_manifest.json
+receipt: /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/hydrostatic-startup-recovery/sealed-brine-n500-receipt.json
+lock: PyAnsys/output/phase09-preflight/server1.lock
+live_run_manifest: /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/hydrostatic-startup-recovery/sealed-brine-mbfw-20261001T235847Z/sealed-brine-mbfw-20261001T235847Z-rest-n00000-20261002T000127Z/run.json
+controller_pid: 6564
+unsuccessful_contrasts: 3
+reviewed_run_manifests:
+- /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/hydrostatic-startup-recovery/native-pressure-k9-20261001T234620Z/native-pressure-k9-20261001T234620Z-rest-n00000-20261001T234853Z/run.json
+- /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/hydrostatic-startup-recovery/modified-bfw-k9-20261001T235050Z/modified-bfw-k9-20261001T235050Z-rest-n00000-20261001T235314Z/run.json
+remaining_authorized_iterations: 0
+unspent_iteration_ceiling: 2997
+closure: closure.md
+comparison_receipt: PyAnsys/output/hydrostatic-startup-recovery/campaign-comparison.json
+terminal_live_receipt: PyAnsys/output/hydrostatic-startup-recovery/terminal-live-proof.json

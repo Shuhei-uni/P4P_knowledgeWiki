@@ -1,0 +1,59 @@
+phase: phase-09-steady-vof-pool
+owner: Andy
+status: CLOSED_UNQUALIFIED_AFTER_EXTENSION
+selected_by_human: 2026-09-29
+question: Steady implicit VOF pool balance and initial-condition independence
+selected_experiment: two-initial-levels-fixed-hydrostatic-reservoir
+qualified: false
+completed_iterations: 4102
+requested_iterations_first_diagnostic: 50
+first_diagnostic: STOPPED_N2_INITIAL_FLUX_DEFECT
+budget:
+  solver_wall_hours: 48
+  total_iterations: 12000
+  discovery_per_start: 4000
+physical_transient_authorized: false
+phase07b_reopened: false
+shuhei_sessions_authorized: false
+execution_evidence: ../../../PyAnsys/output/phase09-preflight/
+current_build: ../../../PyAnsys/output/phase09/h0p3-scale0p1-20260929T133340Z/manifest.json
+current_action: Bounded extension complete and unqualified; no further solves selected
+continuation_job: ../../../PyAnsys/config/phase09/phase09-high-pool-n1764-to-2000-recovery.yaml
+continuation_job_manifest: ../../../PyAnsys/output/run-handoff/phase09-high-pool-n1764-to-2000-recovery/job_manifest.json
+live_run_manifest: /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/phase09/h0p3-scale0p1-20260929T133340Z/h0p3-scale0p1-20260929T133340Z-flow-n01764-20260929T232100Z/run.json
+last_verified_native_iteration: 2000
+completed_iterations_note: 3102 prior solves + 764 interrupted/recovered + 236 recovery
+  continuation; no overlap double-counted.
+solver_iterating: false
+completion_handoff: UTILITY_VERIFIER_AND_RESUMED_HEARTBEAT
+execution_deadline_utc: '2026-09-30T01:30:59.167535+00:00'
+supervision_automation_id: phase-9-overnight-scientific-supervision
+numerical_contrast: automatic_pseudo_time_0.3_to_0.1
+numerical_contrast_iteration_cap: 2000
+numerical_contrast_used: true
+last_verified_at_utc: '2026-09-30T00:04:04.605589+00:00'
+numerical_contrast_iterations_spent: 2000
+numerical_contrast_remaining_iterations: 0
+current_screen_receipt_directory: ../../../PyAnsys/output/phase09-preflight/high-pool-screen/
+closure: closure.md
+eligible_qualified_parent: false
+recorded_controller_wall_hours: 9.201883676076108
+supervision_status: PAUSED_AFTER_TERMINAL_REVIEW
+previous_execution_deadline_utc: '2026-09-29T18:30:00Z'
+user_extension:
+  authorized_local_date: '2026-09-30'
+  instruction: you can resume running it now.
+  start_iteration: 1000
+  target_iteration: 2000
+  iteration_cap: 1000
+  settings_changed: false
+  parent_run: /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/phase09/h0p3-scale0p1-20260929T133340Z/h0p3-scale0p1-20260929T133340Z-flow-n00050-20260929T134558Z/run.json
+  reason: Test continued drift versus settling beyond previous N1000 screen; additional
+    numerical settling time only
+previous_autonomous_supervision_until_local: 2026-09-30 07:30 Pacific/Auckland
+supervision_completion: Review bounded N1000-to-N2000 extension or deadline-stopped
+  endpoint, report and pause heartbeat
+supervision_evidence: ../../../PyAnsys/output/phase09-preflight/user-extension-n2000/latest-supervision.json
+active_extension_observed_iterations: 1000
+current_receipt: ../../../PyAnsys/output/phase09-preflight/user-extension-n2000/recovery-receipt.json
+extension_analysis: ../../../PyAnsys/output/phase09-preflight/user-extension-n2000/extension-review.json

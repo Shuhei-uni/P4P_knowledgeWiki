@@ -18,6 +18,7 @@ Use one owning workflow skill and let it follow its internal references:
 
 - `phase-planner` — human phase framing/reframing;
 - `phase-loop` — experiment selection, execution, recovery, analysis, and phase closure;
+- `configure-run-monitor` — scheduled-monitor configuration and planner handoff;
 - `pyansys-workflow` — Fluent implementation/execution;
 - `cfd-numerical-analysis` — CFD evidence and figures;
 - `cfd-wiki` — reusable research/method knowledge;

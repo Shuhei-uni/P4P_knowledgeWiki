@@ -1,0 +1,13 @@
+job:
+  id: drainage-repeat1-resume-540-r2
+  mode: utility
+runner:
+  cwd: /Users/andy/Desktop/P4P/P4P_shared
+  command:
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/.venv/bin/python
+  - PyAnsys/scripts/orchestration/run_drainage_resume_and_audit.py
+completion:
+  required_files:
+  - PyAnsys/output/drainage-benchmark-repeat1/completion-verification.json
+codex:
+  enabled: false

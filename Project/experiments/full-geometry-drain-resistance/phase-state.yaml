@@ -1,0 +1,51 @@
+owner: Andy
+status: CLOSED_UNQUALIFIED
+phase_number: null
+server: 1
+authorized_by_human: 2026-09-30 Run what you recommend
+total_iterations_cap: 6000
+solver_hours_cap: 14
+completed_iterations: 2000
+execution_deadline_utc: '2026-09-30T20:39:32.213079+00:00'
+selected_height_m: 0.3
+selected_block_iterations: 1000
+expected_start: 0
+K: 9
+downstream_head_m: 0.1
+pseudo_time_scale: 0.1
+qualified: false
+output_root: ../../../PyAnsys/output/full-geometry-drain-resistance
+monitor_schedule_id: andy-cfd-monitor-sol-6-1-high
+current_action: No further solves selected. Both starts failed stop criteria; endpoints
+  preserved.
+build_manifest: /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/full-geometry-drain-resistance/drain-k9-h0p3-scale0p1-20260930T092319Z/manifest.json
+run_receipt: /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/full-geometry-drain-resistance/high-start-n1000-receipt.json
+job_id: drain-k9-high-start-n1000
+job_manifest: /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/run-handoff/drain-k9-high-start-n1000/job_manifest.json
+controller_identity_source: run_receipt -> run_manifest -> controller_pid
+lock: PyAnsys/output/phase09-preflight/server1.lock
+live_run_manifest: /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/full-geometry-drain-resistance/drain-k9-h0p3-scale0p1-20260930T092319Z/drain-k9-h0p3-scale0p1-20260930T092319Z-flow-n00000-20260930T092609Z/run.json
+controller_pid: 24331
+monitoring_status: PAUSED
+monitor_model_verification: Intended GPT-6.1 Sol high; tool does not expose dedicated
+  chat runtime model/effort
+last_native_iteration: 1000
+solver_iterating: false
+last_monitor_check_utc: '2026-09-30T11:57:52.184665+00:00'
+latest_monitor_receipt: ../../../PyAnsys/output/full-geometry-drain-resistance/monitoring-latest.json
+last_callback_iteration: 1000
+solver_wall_seconds: 16273.657218333003
+terminal_audit: /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/full-geometry-drain-resistance/drain-k9-h0p3-scale0p1-20260930T092319Z/drain-k9-h0p3-scale0p1-20260930T092319Z-flow-n00000-20260930T092609Z/monitor-terminal-audit.json
+remaining_iterations: 4000
+remaining_solver_hours: 9.479539661574165
+terminal_planner_handoff: ../../../PyAnsys/output/full-geometry-drain-resistance/high-start-n1000-handoff.json
+previous_low_run_manifest: /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/full-geometry-drain-resistance/drain-k9-h0p1-scale0p1-20260930T064024Z/drain-k9-h0p1-scale0p1-20260930T064024Z-flow-n00000-20260930T064324Z/run.json
+monitoring_rearm_reason: Existing campaign monitoring rearmed for newly selected independent
+  high start after operational pause at prior handoff
+closed_at_utc: '2026-09-30T12:01:25.906683+00:00'
+closure_reason: Both fresh starts meet predeclared depletion/imbalance/routing stopping
+  predicate
+closure: closure.md
+remaining_authorized_iterations: 0
+unused_iteration_ceiling: 4000
+unused_solver_hour_ceiling: 9.479539661574165

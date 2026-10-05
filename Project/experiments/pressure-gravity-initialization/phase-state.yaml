@@ -1,0 +1,41 @@
+owner: Andy
+status: CLOSED_UNQUALIFIED_FAILURE_LIMIT
+phase_number: null
+server: 1
+authorized_date_local: '2026-10-03'
+authority: Explicit human autonomous successive experiment execution, summary on return
+total_iterations_cap: 4000
+solver_hours_cap: 8
+max_unsuccessful_contrasts: 6
+completed_iterations: 85
+solver_wall_seconds: 1286.9714899589599
+execution_deadline_utc: '2026-10-03T00:48:58.290713+00:00'
+qualified: false
+monitor_schedule_id: andy-cfd-monitor-sol-6-1-high
+monitor_status: PAUSED
+lock: PyAnsys/output/phase09-preflight/server1.lock
+current_action: Closed at six-failure limit; review closure and proposed benchmark
+  scope on human return
+autonomous_followons: false
+audit_receipt: PyAnsys/output/pressure-gravity-audit/audit.json
+selected_candidate: homogeneous-liquid body-force update factor1
+job_id: pressure-gravity-homogeneous-bodyforce-one-n500
+job_manifest: PyAnsys/output/run-handoff/pressure-gravity-homogeneous-bodyforce-one-n500/job_manifest.json
+receipt: /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/pressure-gravity-initialization/homogeneous-bodyforce-one-n500-receipt.json
+build_manifest: /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/pressure-gravity-initialization/homogeneous-bodyforce-one-20261002T154555Z/manifest.json
+live_run_manifest: /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/pressure-gravity-initialization/homogeneous-bodyforce-one-20261002T154555Z/homogeneous-bodyforce-one-20261002T154555Z-rest-n00000-20261002T155003Z/run.json
+controller_pid: null
+worker_pid: null
+solver_iterating: false
+last_monitor_check_utc: '2026-10-02T15:54:37.231725+00:00'
+last_monitor_receipt: /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/pressure-gravity-initialization/campaign-final-live-review.json
+unsuccessful_contrasts: 6
+stop_reason: max_unsuccessful_contrasts_reached
+terminal_handoff_receipt: /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/pressure-gravity-initialization/homogeneous-bodyforce-n500-handoff.json
+monitor_paused_reason: Campaign terminal review complete at six-unsuccessful-contrast
+  limit
+campaign_elapsed_wall_seconds: 11306.204871
+controller_activity_conservative_upper_bound_seconds: 11306.204871
+closed_at_utc: '2026-10-02T15:57:24.495584+00:00'
+closure: Project/experiments/pressure-gravity-initialization/closure.md
+next_run: null

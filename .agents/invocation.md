@@ -19,6 +19,7 @@ Use `disable-model-invocation: true` and
 These may be invoked explicitly or reached naturally from active work:
 
 - `phase-loop` — owns the complete scientific experiment loop;
+- `configure-run-monitor` — sets up or updates the monitor chat, schedule and planner handoff for an agreed run; configuration only, not solver supervision;
 - `workflow-surgeon` — repairs the agent workflow when a real defect appears.
 
 ## Model-invoked workflows

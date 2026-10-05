@@ -1,0 +1,32 @@
+job:
+  id: pressure-gravity-zero-gauge-n40
+  mode: utility
+runner:
+  cwd: /Users/andy/Desktop/P4P/P4P_shared
+  command:
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/.venv/bin/python
+  - PyAnsys/scripts/setup/run_zero_gauge_rest.py
+  - --build
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/pressure-gravity-initialization/zero-gauge-rest-20261002T145829Z/manifest.json
+  - --mode
+  - rest
+  - --iterations
+  - '40'
+  - --expected-start
+  - '0'
+  - --receipt
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/pressure-gravity-initialization/zero-gauge-n40-receipt.json
+completion:
+  required_files:
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/pressure-gravity-initialization/zero-gauge-n40-receipt.json
+  verifier_command:
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/.venv/bin/python
+  - PyAnsys/scripts/orchestration/verify_zero_gauge_job.py
+  - --receipt
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/pressure-gravity-initialization/zero-gauge-n40-receipt.json
+  - --start
+  - '0'
+  - --iterations
+  - '40'
+codex:
+  enabled: false

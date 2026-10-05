@@ -1,0 +1,36 @@
+job:
+  id: phase09-high-pool-n1764-to-2000-recovery
+  mode: utility
+runner:
+  cwd: /Users/andy/Desktop/P4P/P4P_shared
+  command:
+  - /usr/bin/caffeinate
+  - -i
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/.venv/bin/python
+  - PyAnsys/scripts/setup/run_phase09_pool.py
+  - --build
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/phase09/h0p3-scale0p1-20260929T133340Z/manifest.json
+  - --mode
+  - flow
+  - --iterations
+  - '236'
+  - --expected-start
+  - '1764'
+  - --parent-run
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/phase09/h0p3-scale0p1-20260929T133340Z/h0p3-scale0p1-20260929T133340Z-flow-n01000-20260929T213109Z/run.json
+  - --receipt
+  - PyAnsys/output/phase09-preflight/user-extension-n2000/recovery-receipt.json
+completion:
+  required_files:
+  - PyAnsys/output/phase09-preflight/user-extension-n2000/recovery-receipt.json
+  verifier_command:
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/.venv/bin/python
+  - PyAnsys/scripts/orchestration/verify_phase09_job.py
+  - --receipt
+  - PyAnsys/output/phase09-preflight/user-extension-n2000/recovery-receipt.json
+  - --start
+  - '1764'
+  - --iterations
+  - '236'
+codex:
+  enabled: false

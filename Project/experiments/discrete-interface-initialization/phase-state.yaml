@@ -1,0 +1,31 @@
+owner: Andy
+status: CLOSED_UNQUALIFIED
+phase_number: null
+server: 1
+authorized_date_local: '2026-10-02'
+authority: Human okay do next after discrete-interface initialization recommendation;
+  prior autonomous next-step instruction persists
+total_iterations_cap: 500
+solver_hours_cap: 2
+completed_iterations: 1
+solver_wall_seconds: 56.91878325000289
+execution_deadline_utc: '2026-10-02T06:07:23.772658+00:00'
+qualified: false
+monitor_schedule_id: andy-cfd-monitor-sol-6-1-high
+monitor_status: PAUSED
+lock: PyAnsys/output/phase09-preflight/server1.lock
+current_action: Geometric filling alone did not cure startup; bounded diagnostic closed,
+  no further solves selected
+job_id: interface-reconstructed-n500
+job_manifest: PyAnsys/output/run-handoff/interface-reconstructed-n500/job_manifest.json
+receipt: /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/discrete-interface-initialization/n500-receipt.json
+build_manifest: /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/discrete-interface-initialization/reconstructed-interface-20261002T030740Z/manifest.json
+live_run_manifest: /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/discrete-interface-initialization/reconstructed-interface-20261002T030740Z/reconstructed-interface-20261002T030740Z-rest-n00000-20261002T031024Z/run.json
+controller_pid: 18516
+solver_iterating: false
+last_verified_native_iteration: 1
+remaining_authorized_iterations: 0
+unspent_iteration_ceiling: 499
+closure: closure.md
+comparison_receipt: /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/discrete-interface-initialization/comparison.json
+terminal_live_receipt: /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/discrete-interface-initialization/terminal-live-proof.json

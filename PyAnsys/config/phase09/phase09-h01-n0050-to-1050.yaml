@@ -1,0 +1,56 @@
+job:
+  id: phase09-h01-n0050-to-1050
+  mode: hypothesis-test
+runner:
+  cwd: /Users/andy/Desktop/P4P/P4P_shared
+  command:
+  - /usr/bin/caffeinate
+  - -i
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/.venv/bin/python
+  - PyAnsys/scripts/setup/run_phase09_pool.py
+  - --build
+  - PyAnsys/output/phase09/h0p1-20260929T062514Z/manifest.json
+  - --mode
+  - flow
+  - --iterations
+  - '1000'
+  - --expected-start
+  - '50'
+  - --parent-run
+  - PyAnsys/output/phase09/h0p1-20260929T062514Z/h0p1-20260929T062514Z-flow-n00000-20260929T065443Z/run.json
+  - --receipt
+  - PyAnsys/output/run-handoff/phase09-h01-n0050-to-1050/run-receipt.json
+completion:
+  required_files:
+  - PyAnsys/output/run-handoff/phase09-h01-n0050-to-1050/run-receipt.json
+  verifier_command:
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/.venv/bin/python
+  - PyAnsys/scripts/orchestration/verify_phase09_job.py
+  - --receipt
+  - PyAnsys/output/run-handoff/phase09-h01-n0050-to-1050/run-receipt.json
+  - --start
+  - '50'
+  - --iterations
+  - '1000'
+codex:
+  enabled: true
+  session_id: 01a0eb5f-d271-7540-864b-54affe582c92
+  executable: /Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex
+  cwd: /Users/andy/Desktop/P4P/P4P_shared
+  prompt: 'The authorized Phase 9 steady implicit VOF full-feed block has reached
+    its terminal audit. Read AGENTS.md, Project/index.md, Project/experiments/phase-09-steady-vof-pool/CONTEXT.md,
+    setup.md, results.md and phase-state.yaml, then the job manifest and its exact
+    run receipt. First check whether Andy issued a newer pause or scope change; do
+    not resume against a later pause. Otherwise continue the authorized phase-loop:
+    verify native horizon, paired endpoint, conservation/inventory/routing/residual
+    histories and spatial evidence; update Project; select the next in-scope bounded
+    action. This block is not qualified merely because execution completed. Budget
+    12000 total iterations/48 solver wall-hours including all rest diagnostics/retries,
+    discovery ceiling4000 per initial level, two independent heights .10/.30m with
+    fixed downstream .10m head. Physical transient is unauthorized. Phase7b remains
+    closed, both old automations remain paused, and Shuhei sessions must never be
+    used. Server1 alone is Andy Phase9. Preserve current endpoints before replacement;
+    use fresh Phase9 starts, never Phase7b solution fields as qualified parents. One
+    smaller pseudo-time contrast is allowed but not spent. Current scientific criteria
+    are fixed in setup.md. For long batches use the existing run-control completion
+    handoff to this same exact thread; no new recurring automation is needed.'

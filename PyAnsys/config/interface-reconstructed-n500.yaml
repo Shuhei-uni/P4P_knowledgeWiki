@@ -1,0 +1,32 @@
+job:
+  id: interface-reconstructed-n500
+  mode: utility
+runner:
+  cwd: /Users/andy/Desktop/P4P/P4P_shared
+  command:
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/.venv/bin/python
+  - PyAnsys/scripts/setup/run_reconstructed_interface.py
+  - --build
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/discrete-interface-initialization/reconstructed-interface-20261002T030740Z/manifest.json
+  - --mode
+  - rest
+  - --iterations
+  - '500'
+  - --expected-start
+  - '0'
+  - --receipt
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/discrete-interface-initialization/n500-receipt.json
+completion:
+  required_files:
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/discrete-interface-initialization/n500-receipt.json
+  verifier_command:
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/.venv/bin/python
+  - PyAnsys/scripts/orchestration/verify_interface_job.py
+  - --receipt
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/discrete-interface-initialization/n500-receipt.json
+  - --start
+  - '0'
+  - --iterations
+  - '500'
+codex:
+  enabled: false

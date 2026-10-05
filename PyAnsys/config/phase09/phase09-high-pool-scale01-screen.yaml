@@ -1,0 +1,28 @@
+job:
+  id: phase09-high-pool-scale01-screen
+  mode: utility
+runner:
+  cwd: /Users/andy/Desktop/P4P/P4P_shared
+  command:
+  - /usr/bin/caffeinate
+  - -i
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/.venv/bin/python
+  - PyAnsys/scripts/orchestration/run_phase09_recovery_screen.py
+  - --build
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/phase09/h0p3-scale0p1-20260929T133340Z/manifest.json
+  - --receipt-dir
+  - PyAnsys/output/phase09-preflight/high-pool-screen
+completion:
+  required_files:
+  - PyAnsys/output/phase09-preflight/high-pool-screen/continuation-receipt.json
+  verifier_command:
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/.venv/bin/python
+  - PyAnsys/scripts/orchestration/verify_phase09_job.py
+  - --receipt
+  - PyAnsys/output/phase09-preflight/high-pool-screen/continuation-receipt.json
+  - --start
+  - '50'
+  - --iterations
+  - '950'
+codex:
+  enabled: false

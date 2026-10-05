@@ -1,0 +1,24 @@
+job:
+  id: phase09-scale01-recovery-screen
+  mode: utility
+runner:
+  cwd: /Users/andy/Desktop/P4P/P4P_shared
+  command:
+  - /usr/bin/caffeinate
+  - -i
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/.venv/bin/python
+  - PyAnsys/scripts/orchestration/run_phase09_recovery_screen.py
+completion:
+  required_files:
+  - PyAnsys/output/phase09-preflight/recovery-screen/continuation-receipt.json
+  verifier_command:
+  - /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/.venv/bin/python
+  - PyAnsys/scripts/orchestration/verify_phase09_job.py
+  - --receipt
+  - PyAnsys/output/phase09-preflight/recovery-screen/continuation-receipt.json
+  - --start
+  - '50'
+  - --iterations
+  - '950'
+codex:
+  enabled: false

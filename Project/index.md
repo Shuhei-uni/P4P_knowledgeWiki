@@ -8,6 +8,22 @@ in `PyAnsys/`.
 
 ## What are we trying to answer now?
 
+**Andy — pressure/gravity initialization campaign closed unqualified:** seven contrasts used85 new iterations; six hit their startup guards. A zero-gravity pressure-datum control preserved rest, but gravity-on and homogeneous-liquid controls did not. All endpoints preserved, server1 idle; no further calculations selected. These startup tests do not establish that an eventual steady solution is impossible. [Closure and next-scope recommendation](experiments/pressure-gravity-initialization/closure.md).
+
+**Andy — discrete interface initialization closed unqualified:** native geometric filling produced3382 fractional cells but did not suppress N1 motion (30.93 versus30.89m/s); inventory departure worsened. Guarded endpoint and complete evidence preserved; solver idle, monitor paused. No further solves selected. [Results](experiments/discrete-interface-initialization/results.md).
+
+**Andy — hydrostatic startup audit/recovery closed unqualified:** native pressure patching, Modified BFW and brine-boundary sealing each hit the N1 speed guard. Strong motion persists with sealed brine and zero liquid boundary flow; drain forcing alone does not explain it. All endpoints preserved; no more solves selected. [Closure](experiments/hydrostatic-startup-recovery/closure.md).
+
+**Andy — zero-feed hydrostatic verification stopped at N1:** from verified zero velocity/flow, maximum speed reached10.94m/s and triggered the predefined guard. Endpoint preserved; no further solves selected. This exposes a hydrostatic startup problem without identifying its cause. [Results](experiments/steady-vof-hydrostatic/results.md).
+
+**Andy — steady VOF solver-method diagnostic closed unqualified:** N1000 completed. Late liquid/mixture imbalance improved about60%, but liquid inventory fell32.9% and the combined improvement and absolute acceptance gates failed. No further solves selected. [Closure and next verification recommendation](experiments/steady-vof-solver-method/closure.md).
+
+**Andy — full-geometry fixed K9 drain-resistance investigation closed unqualified:** both fresh pool starts completed N1000 and repeated inventory loss with major conservation, routing and residual failures. No further solves selected; both endpoints preserved. Spend2000 iterations/4.5205 controller-hours. [Closure](experiments/full-geometry-drain-resistance/closure.md).
+
+**Andy — drainage-boundary corrected repeat complete:** all four synthetic single-liquid controls passed analytical, conservation, residual, stability and per-iteration guard checks. Exactly 2000 repeat / 4000 combined diagnostic iterations used. Saved separator N2000 restored and verified idle; monitoring paused. This verifies the simple outlet-resistance implementation, not full-separator drainage or physical validity. [Results and limits](experiments/drainage-boundary-verification/results.md).
+
+**Andy — Phase 9 closed unqualified after the N2000 extension:** the unchanged high-pool continuation lost another 15.6% of liquid inventory; conservation, routing and convergence still fail. Final evidence is preserved, Fluent is idle and no further solves are selected. See the [extension review](experiments/phase-09-steady-vof-pool/results.md). Downstream head and drain resistance remain unvalidated assumptions for a future scope decision. Phase 7b remains closed.
+
 **Shuhei — Phase 8 storyline reconstruction:** reproduce the historical simulation steps leading to the current model; closing mass imbalance and reducing continuity are diagnostics, not the phase goal or progression gates. Create five reproducible run families on the
 existing 60k simplified mesh to compare one-inlet and split-inlet carriers,
 one-way and two-way DPM, five Phase 8 inlet-speed points (`20.11`, `23.46`,
@@ -122,14 +138,14 @@ if the macroscopic behaviour becomes worse.
 See the [Phase 7.1A parent record](experiments/phase-07-1a-absorber-convergence/index.md)
 and the [Phase 7.2A baseline handoff](experiments/phase-07-2a-wall-liquid-routing/baseline-control-handoff.md).
 
-Andy's **Phase7b is closed by his direction on29 September2026, with no qualified case**. [Phase closure](experiments/phase-07b-full-geometry-liquid-removal/closure.md) records the final evidence and limits. G1–G7 are complete; E7 reachedN5000 with verified histories/spatial evidence but liquid/vapor/native-mixture mean absolute closure errors148.213/1.776/87.000%, inventory increase15.195% and continuitymaximum1.3222. E8 was stopped and preserved atN128 before its first conditioning gate; it is an incomplete startup test, not a failed gate. No further Phase7b run or qualification is authorized, both supervision automations are paused, and no new physical phase is selected. Other owners' phases remain separate.
+Andy's **Phase7b is closed by his direction on29 September2026, with no qualified case**. [Phase closure](experiments/phase-07b-full-geometry-liquid-removal/closure.md) records the final evidence and limits. G1–G7 are complete; E7 reachedN5000 with verified histories/spatial evidence but liquid/vapor/native-mixture mean absolute closure errors148.213/1.776/87.000%, inventory increase15.195% and continuitymaximum1.3222. E8 was stopped and preserved atN128 before its first conditioning gate; it is an incomplete startup test, not a failed gate. No further Phase7b run or qualification is authorized, both supervision automations are paused, and the new Phase 9 has its own authority. Other owners' phases remain separate.
 
 The [26 September review](experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/phase-review-2026-09-26.md)
 recommended a bounded finish, which Andy accepted on 28 September: complete E7,
 audit source treatment, then at most one justified documented startup contrast
 if needed, followed by bounded qualification or closure of the tested route.
 The [current contract](experiments/phase-07b-full-geometry-liquid-removal/CONTEXT.md)
-owns that execution envelope; no new physical phase is selected. Full feed, steady Mixture/RNG, Energy/DPM/EWF
+records that now-closed execution envelope. Full feed, steady Mixture/RNG, Energy/DPM/EWF
 off, the full geometry and closed physical brine wall remain the model.
 A standing pool is not required. The ideal collector is a numerical removal
 mechanism, not a physical drainage model.
@@ -197,9 +213,9 @@ steady state. A standing pool is explicitly not required in Phase 7b.
 
 ## What remains unresolved?
 
-- Whether completing E7 and one isolated startup treatment can establish
-  source-inclusive phase/native-mixture closure and stationary inventory in
-  the full-geometry ideal-collector model.
+- Whether the selected steady VOF pool model can achieve phase/native-mixture
+  closure, stationary inventory and independence of initial pool level. Phase
+  7b did not establish these properties in its tested ideal-collector route.
 - The expression sink's implicit derivative and the cause of the large
   above-collector phase deficit; exact recording and normalized fractions do
   not settle these questions.
@@ -212,7 +228,7 @@ steady state. A standing pool is explicitly not required in Phase 7b.
 
 ## What happens next?
 
-Phase7b requires no further simulation. Its [closure](experiments/phase-07b-full-geometry-liquid-removal/closure.md) supports a bounded negative result for the tested route, without claiming that no steady solution exists. A new scientific direction needs its own phase framing and user selection.
+Phase7b requires no further simulation. Its [closure](experiments/phase-07b-full-geometry-liquid-removal/closure.md) supports a bounded negative result for the tested route, without claiming that no steady solution exists. Andy has now selected Phase 9, with its own scientific contract and compute budget.
 
 For wall-film work, first recover the native evidence, correct the derived
 mixture ledger and verify film discharge and combined conservation within

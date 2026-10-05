@@ -1,0 +1,40 @@
+owner: Andy
+status: CLOSED_UNQUALIFIED
+server: 1
+phase_number: null
+authorized_by_human: 2026-10-01 Decide what to run next and monitor
+total_iterations_cap: 1000
+solver_hours_cap: 6
+completed_iterations: 1000
+execution_deadline_utc: '2026-09-30T21:57:11.731614+00:00'
+selected_height_m: 0.1
+selected_block_iterations: 1000
+expected_start: 0
+K: 9
+downstream_head_m: 0.1
+flow_scheme: SIMPLE
+pseudo_time: 'Off'
+standard_urf: 0.3
+qualified: false
+monitor_schedule_id: andy-cfd-monitor-sol-6-1-high
+current_action: Bounded mixed-response diagnostic closed; no solves selected. Proposed
+  next question is hydrostatic two-phase verification, requiring a new contract.
+job_id: steady-vof-simple-low-n1000
+job_manifest: PyAnsys/output/run-handoff/steady-vof-simple-low-n1000/job_manifest.json
+build_manifest: /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/steady-vof-solver-method/simple-k9-h0p1-urf0p3-20260930T155922Z/manifest.json
+receipt: /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/steady-vof-solver-method/low-start-n1000-receipt.json
+lock: PyAnsys/output/phase09-preflight/server1.lock
+live_run_manifest: /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/steady-vof-solver-method/simple-k9-h0p1-urf0p3-20260930T155922Z/simple-k9-h0p1-urf0p3-20260930T155922Z-flow-n00000-20260930T160344Z/run.json
+controller_pid: 47660
+last_verified_native_iteration: 1000
+solver_iterating: false
+instrumentation_smoke_passed: true
+last_completed_callback: 1000
+monitor_status: PAUSED
+last_monitor_check_utc: '2026-09-30T18:08:11.826039+00:00'
+latest_monitor_receipt: ../../../PyAnsys/output/steady-vof-solver-method/monitoring-latest.json
+solver_wall_seconds: 6239.36257125
+remaining_iterations: 0
+remaining_controller_hours: 4.2668437302083335
+terminal_audit: /Users/andy/Desktop/P4P/P4P_shared/PyAnsys/output/steady-vof-solver-method/simple-k9-h0p1-urf0p3-20260930T155922Z/simple-k9-h0p1-urf0p3-20260930T155922Z-flow-n00000-20260930T160344Z/monitor-terminal-audit.json
+terminal_planner_handoff: ../../../PyAnsys/output/steady-vof-solver-method/terminal-handoff.json
