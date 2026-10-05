@@ -54,6 +54,8 @@ narrowest evidence repair. Do not invent a figure.
 
 ## Draft
 
+In `P4P_knowledgeWiki` documents, use document-relative paths for internal links and images so they work in Obsidian.
+
 Write around the evidence rather than chronology. Omit failed attempts unless
 they changed the scientific direction or explain an important limitation.
 
