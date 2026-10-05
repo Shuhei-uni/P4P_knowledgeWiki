@@ -1,17 +1,39 @@
 phase_id: phase-07-2a-wall-liquid-routing
+stage3_early_ewf_startup:
+  authority: human_2026_10_05_full_server1_stage3_early_ewf
+  server_id: '1'
+  status: RUNNING
+  setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/setup.md
+  manifest: PyAnsys/output/phase72a-stage3-early-ewf-server1/20261005/run-manifest.json
+  native_parent: 1580
+  native_target: 5080
+  low_feed_hold_updates: 500
+  loading_ramp_updates: 2000
+  target_feed_hold_updates: 1000
+  film_step_s: 0.000001
+  bulk_initialization: FORBIDDEN_USE_EXACT_A_FIELDS
+  scientific_model: R3_CORRECTED_CONTACT_E27
+  previous_server1_endpoint: 45606
+  server3_branch: SEPARATE_PRESERVE
+  prepared_reopen: PASS
+  exact_A_bulk_array_count: 17
+  exact_A_bulk_arrays: PASS
+  worker_pid: 89932
+  job_manifest: PyAnsys/output/phase72a-stage3-early-ewf-server1/20261005/job-manifest.json
+  run_submitted: true
 stage3_reconstruction:
   authority: human_2026_10_05_full_server3_ownership_stage3
-  status: N1000_PRESERVED_IDLE_FLAG_RECOVERED_BULK_CONTINUATION_RUNNING
+  status: ADAPTIVE_AGGRESSIVE_CONTINUATION_RUNNING
   server_id: '3'
   setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/setup.md
   results: Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/results.md
   manifest: PyAnsys/output/phase72a-stage3-server3/20261005/run-manifest.json
-  job_manifest: PyAnsys/output/phase72a-stage3-server3/20261005/service-recovery-job-manifest.json
-  job_id: phase72a-stage3-reconstruction-server3-verified-service-recovery-20261005
-  worker_pid: 78423
+  job_manifest: PyAnsys/output/phase72a-stage3-server3/20261005/user-resume-job-manifest.json
+  job_id: phase72a-stage3-server3-user-resume-film-20261005
+  worker_pid: 81527
   compute_ranks: 18
   verified_native_start: 0
-  last_verified_native_iteration: 1000
+  last_verified_native_iteration: 6000
   preparation_reopen: PASS
   smoke_updates: 20
   smoke_report_rows: 20
@@ -34,6 +56,33 @@ stage3_reconstruction:
   solver_modified: true
   run_submitted: true
   mesh_family_status: DEFERRED_UNTIL_SUPPORTED_EXISTING_MESH_REPRODUCTION
+  analysis_summary: PyAnsys/output/phase72a-stage3-server3/20261005/analysis-summary.json
+  native_figure_manifest: PyAnsys/output/phase72a-stage3-server3/20261005/native-figure-manifest.json
+  fixed_and_adaptive_final_reopen: PASS
+  added_film_time_each_arm_s: 0.003
+  adaptive_clock_gap_range: [4392, 4404]
+  adaptive_speedup: NOT_OBSERVED
+  film_reproduction: FAILED_PREDECLARED_SCREEN
+  carrier_snapshot_screen: PASS_FINAL_500
+  whole_separator_accounting: NOT_QUALIFIED
+  next_solve_selected: true
+  native_figures_visual_qa: PASS
+  spatial_postprocessing_restore: ADAPTIVE_N6000_FIELDS_MATCH
+  aggressive_continuation:
+    authority: human_2026_10_05_adaptive_2000_full_server3
+    status: RUNNING
+    last_verified_native_iteration: 7000
+    parent_native_iteration: 6000
+    target_native_iteration: 8000
+    requested_updates: 2000
+    initial_film_step_s: 0.000002
+    courant_target: 0.15
+    increase_factor: 1.3
+    decrease_factor: 2.0
+    timestep_max_setting_s: 0.000002
+    native_adaptive_ceiling: NOT_VERIFIED
+    manifest: PyAnsys/output/phase72a-stage3-server3/20261005/adaptive-aggressive-N6000-N8000/run-manifest.json
+
 phase_question: >-
   Can wall roughness or Eulerian Wall Film reduce phase-2 liquid carryover
   through steamoutlet by changing wall-adjacent routing while preserving
@@ -43,21 +92,22 @@ state: ADAPTIVE_FILM_DISCOVERY
 planning_state: USER_AUTHORIZED_INDEPENDENT_ALL_LIQUID_CONTACT_CAPTURE
 adaptive_film_continuation:
   authority: human_2026_10_05_full_server1_ownership
-  status: VERIFIED_FIRST_BATCH_LONGER_STAGE_RUNNING
+  status: RECOVERED_N45606_ANALYSED_NOT_STEADY
   server_id: '1'
   selected_parent_native_iteration: 33586
   source_pair_hash_verification: PASS_ON_MAC_ONEDRIVE
   source_libraries_hash_verification: PASS
   destination_server1_files: HASH_VERIFIED_LOCAL_COPY
-  last_verified_native_iteration: 34606
+  last_verified_native_iteration: 45606
   current_live_native_iteration: null
+  live_session_reassigned: STAGE3_EARLY_EWF_STARTUP
   final_reopen: PASS_FIELDS_AND_SETTINGS
-  added_adaptive_film_time_s: 0.001761
-  total_added_film_time_from_E27_s: 0.021761
-  final_film_inventory_kg: 6.170980013137841
-  final_maximum_thickness_m: 0.0003045338089577854
-  film_ledger_error_percent: 0.0021710422514752948
-  last_1000_inventory_growth_kg_s: 11.815374930397274
+  added_adaptive_film_time_s: 0.0207690160000768
+  total_added_film_time_from_E27_s: 0.040769016000076805
+  final_film_inventory_kg: 6.360049592042239
+  final_maximum_thickness_m: 0.0003072099643759429
+  film_ledger_error_percent: 0.004798812829795331
+  last_1000_inventory_growth_kg_s: 8.201686701145942
   stationary_film: false
   longer_stage_target_total_added_film_time_s: 0.05
   longer_stage_job: PyAnsys/output/phase72a-adaptive-server1/20261005/stage-50ms-job.yaml
@@ -74,6 +124,15 @@ adaptive_film_continuation:
   accepted_timestep_instrumentation: NATIVE_FILM_TIME_AND_TIMESTEP_TRANSCRIPT
   staged_total_film_horizons_s: [0.05, 0.1, 0.2]
   prior_server1_restrictions_superseded: true
+  analysis: PyAnsys/output/phase72a-adaptive-server1/20261005/recovered-N45606/analysis-summary.json
+  controller_failure: GRPC_STREAM_TIMEOUT_AFTER_NATIVE_BATCH_COMPLETED
+  requested_50ms_horizon_reached: false
+  completion_return: CLI_ACTIVE_WRITER_CONFLICT
+  report_count: 29
+  report_points_each: 12021
+  reconstructed_transcript_tail_updates: 233
+  recovered_pair: PyAnsys/output/phase72a-adaptive-server1/20261005/recovered-N45606/endpoint.json
+
 local_contact_absorber_1us_20000:
   authority: human_2026_10_04_run_using_direct_fluent_use
   status: LOCAL_REPLAY_RUNNING_NATIVE_START_CONFIRMED

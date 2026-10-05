@@ -1,4 +1,8 @@
-"""Reduce the Stage 3 startup screens without promoting them to stationarity."""
+"""Audit Stage 3 native histories, bounded clock gaps, and finite startup results.
+
+Spatial figures are separate native Fluent exports. This script plots histories
+only; it does not reconstruct or composite spatial fields.
+"""
 from pathlib import Path
 import json
 import re
@@ -7,199 +11,357 @@ import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from matplotlib.collections import PolyCollection
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT / 'src'), str(ROOT / 'scripts/setup')]
-from run_phase72a_adaptive_film import film_records
+from run_phase72a_adaptive_film import FILM, ROW
 OUT = ROOT / 'output/phase72a-stage3-server3/20261005'
 PROJECT = ROOT.parent / 'Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction'
 FIG = PROJECT / 'figures'
+COLORS = {'fixed': '#0072b2', 'adaptive': '#d55e00'}
+plt.rcParams.update({'font.size': 10, 'axes.spines.top': False, 'axes.spines.right': False})
 
 
 def load(name):
     return json.loads((OUT / name).read_text())
 
 
-def array(histories, name):
-    record = histories[name]
-    return np.asarray(record['iterations']), np.asarray(record['values'])
+def hist(label):
+    h = load(f'{label}-histories.json')
+    expected = np.arange(1, 3001) if label == 'bulk' else np.arange(3000, 6001)
+    for name, record in h.items():
+        if not np.array_equal(record['iterations'], expected):
+            raise RuntimeError(f'Incomplete/duplicate history: {label} {name}')
+        if not np.isfinite(record['values']).all():
+            raise RuntimeError(f'Nonfinite history: {label} {name}')
+    return h
 
 
-def film(arm):
-    h = load(f'{arm}-histories.json')
-    clocks = film_records((OUT / f'{arm}-film-transcript.txt').read_text())
+def values(h, name):
+    return np.asarray(h[name]['values'], dtype=float)
+
+
+def mean_window(v, count=500):
+    a = np.asarray(v)[-count:]
+    return {'mean': float(a.mean()), 'std': float(a.std()), 'min': float(a.min()),
+            'max': float(a.max()), 'window': count,
+            'change_first_to_last': float(a[-1] - a[0]),
+            'slope_per_iteration': float(np.polyfit(np.arange(count), a, 1)[0])}
+
+
+def metric_arrays(h):
+    return {'liquid_carryover_kg_s': -values(h, 'v2-flux-phase2-steamoutlet'),
+            'vapor_outlet_kg_s': -values(h, 'v2-flux-phase1-steamoutlet'),
+            'bulk_inventory_kg': values(h, 'v2-total-liquid-mass'),
+            'pressure_drop_Pa': values(h, 'p72s3-pressure-inlet') - values(h, 'p72s3-pressure-outlet'),
+            'contact_removal_kg_s': -values(h, 'v2-applied-absorber')}
+
+
+def validate_report_semantics(label, h, endpoint):
+    fields = endpoint['readback']['fields']
+    for name in ['v2-flux-phase2-liquidinlet', 'v2-flux-phase2-steamoutlet']:
+        without = fields[name + '(without-sources)'][0]
+        source = fields['v2-applied-absorber'][0]
+        if not np.isclose(fields[name][0] - source, without, atol=1e-7, rtol=1e-8):
+            raise RuntimeError('Computed source-inclusive report decomposition changed')
+        if not np.isclose(values(h, name)[-1], without, atol=1e-7, rtol=1e-8):
+            raise RuntimeError(f'{label}: report-file boundary semantics changed')
+    for name in ['v2-applied-absorber', 'p72-contact-removal', 'v2-total-liquid-mass', 'p72a-e2.7-ewf-film-mass-total']:
+        if not np.isclose(values(h, name)[-1], fields[name][0], atol=1e-7, rtol=1e-8):
+            raise RuntimeError(f'{label}: final history does not match saved fields')
+    err = values(h, 'p72-contact-removal') + values(h, 'v2-applied-absorber')
+    if np.max(np.abs(err)) > 1e-7:
+        raise RuntimeError('Applied contact removal does not match independent source expression')
+    return {'report_file_fluxes': 'Boundary-only; confirmed against without-sources saved endpoint values',
+            'compute_fluxes': 'Include the user mass source in each computed phase-2 report',
+            'boundary_flux_history_source_subtraction': 'NONE; subtracting source again would double count',
+            'contact_source_max_expression_error_kg_s': float(np.max(np.abs(err)))}
+
+
+def parse_segment(filename, endpoint):
+    clocks, residuals, pending = {}, {}, None
+    text = (OUT / filename).read_text()
+    for line in text.splitlines():
+        match = FILM.search(line)
+        if match:
+            if pending is not None:
+                raise RuntimeError(f'Unmapped nonterminal native film line: {filename}')
+            pending = [float(v) for v in match.groups()]
+        elif ROW.match(line):
+            n = int(ROW.match(line)[1])
+            try:
+                row = [float(v) for v in line.split()[1:8]]
+                if len(row) == 7:
+                    residuals[n] = row
+            except ValueError:
+                pass
+            if pending is not None:
+                if n in clocks and clocks[n] != pending:
+                    raise RuntimeError('Conflicting native clock duplicate')
+                clocks[n] = pending
+                pending = None
+    reconciliation = None
+    if pending is not None:
+        # The final printed film clock is followed by endpoint reports and paired
+        # save, while the final residual row is absent. The paired endpoint proves
+        # the native coordinate. Retain this explicit mapping and residual gap.
+        if max(clocks, default=0) != endpoint - 1 or 'Writing to' not in text:
+            raise RuntimeError('Terminal clock cannot be reconciled to a saved endpoint')
+        clocks[endpoint] = pending
+        reconciliation = {'native_iteration': endpoint, 'film_clock_s': pending[0],
+                          'basis': 'Last printed film line + paired saved/reopened native endpoint; terminal residual row absent'}
+    return clocks, residuals, reconciliation, text
+
+
+def film_arm(arm, manifest, h):
+    segments = manifest.get('adaptive_transcript_segments', [f'{arm}-film-transcript.txt']) if arm == 'adaptive' else [f'{arm}-film-transcript.txt']
+    clocks, residuals, reconciliations, text = {}, {}, [], ''
+    for filename in segments:
+        endpoint = 4404 if filename == 'adaptive-film-transcript.txt' else 6000
+        c, r, rec, raw = parse_segment(filename, endpoint)
+        if set(clocks).intersection(c):
+            raise RuntimeError('Unexpected overlapping immutable transcript segments')
+        clocks.update(c); residuals.update(r); text += raw
+        if rec:
+            reconciliations.append(rec)
     ids = np.array(sorted(clocks))
-    if len(ids) != 3000 or not np.all(np.diff(ids) == 1):
-        raise RuntimeError(f'{arm}: film clock does not cover all 3000 requested updates')
-    t = np.array([clocks[int(i)][0] for i in ids])
-    printed_step = np.array([clocks[int(i)][1] for i in ids])
-    initial = t[0] - printed_step[0]
-    dt = np.diff(np.r_[initial, t])
-    if np.any(dt <= 0):
+    if ids[0] != 3001 or ids[-1] != 6000:
+        raise RuntimeError('Native film endpoints missing')
+    initial = clocks[3001][0] - clocks[3001][1]
+    t = np.array([clocks[int(i)][0] - initial for i in ids])
+    if np.any(np.diff(t) <= 0):
         raise RuntimeError('Non-increasing native film clock')
-    def values(name):
-        x, y = array(h, name)
-        mapping = dict(zip(x, y))
-        if not set(ids).issubset(mapping) or ids[0] - 1 not in mapping:
-            raise RuntimeError(f'Missing film history {name}')
-        return np.r_[mapping[ids[0] - 1], [mapping[i] for i in ids]]
-    mass = values('p72a-e2.7-ewf-film-mass-total')
-    drain = values('p72a-e2.7-ewf-outflow-mass-total')
-    acc = values('p72a-e2.7-ewf-secondary-phase-mass-total')
-    integrated = np.r_[0, np.cumsum(acc[1:] * dt)]
-    gain = mass - mass[0]
-    discharged = drain - drain[0]
-    ledger = gain + discharged - integrated
-    time = np.r_[0, t - initial]
-    info = {'film_elapsed_s': float(time[-1]), 'native_updates': len(ids),
-            'initial_native_clock_s': float(initial), 'native_end': int(ids[-1]),
-            'film_mass_start_kg': float(mass[0]), 'film_mass_end_kg': float(mass[-1]),
-            'inventory_gain_kg': float(gain[-1]), 'drained_mass_kg': float(discharged[-1]),
-            'integrated_accretion_kg': float(integrated[-1]),
-            'film_ledger_error_percent': float(100 * abs(ledger[-1]) / max(abs(integrated[-1]), 1e-30)),
-            'accepted_step_min_s': float(dt.min()), 'accepted_step_max_s': float(dt.max()),
-            'peak_film_cfl': float(max(v[2] for v in clocks.values())),
-            'time_basis': 'Native film clock differences; first step uses native printed initial step'}
-    return h, time, mass, discharged, integrated, printed_step, ids, info
+    mass = values(h, 'p72a-e2.7-ewf-film-mass-total')
+    drain = values(h, 'p72a-e2.7-ewf-outflow-mass-total')
+    acc = values(h, 'p72a-e2.7-ewf-secondary-phase-mass-total')
+    lower, upper, known_time, known_mass, known_drain = [0.], [0.], [0.], [mass[0]], [0.]
+    previous_n, previous_t = 3000, 0.
+    gaps = []
+    for n, time_value in zip(ids, t):
+        width = time_value - previous_t
+        if n == previous_n + 1:
+            lo = hi = acc[n - 3000] * width
+        else:
+            rates = acc[previous_n - 3000 + 1:n - 3000 + 1]
+            lo, hi = float(rates.min() * width), float(rates.max() * width)
+            gaps.append({'missing_start': int(previous_n + 1), 'missing_end': int(n - 1),
+                         'bounded_interval_s': float(width), 'rate_min_kg_s': float(rates.min()),
+                         'rate_max_kg_s': float(rates.max()),
+                         'integrated_accretion_lower_kg': lo, 'integrated_accretion_upper_kg': hi})
+        lower.append(lower[-1] + lo); upper.append(upper[-1] + hi)
+        known_time.append(time_value); known_mass.append(mass[n - 3000]); known_drain.append(drain[n - 3000] - drain[0])
+        previous_n, previous_t = n, time_value
+    storage_plus_drain = mass[-1] - mass[0] + drain[-1] - drain[0]
+    ledger_lo = storage_plus_drain - upper[-1]
+    ledger_hi = storage_plus_drain - lower[-1]
+    worst = 100 * max(abs(ledger_lo), abs(ledger_hi)) / max(lower[-1], 1e-30)
+    windows = []
+    for begin, end in [(3000, 4000), (4000, 5000), (5000, 6000)]:
+        t0 = 0 if begin == 3000 else clocks[begin][0] - initial
+        t1 = clocks[end][0] - initial
+        dmass = mass[end - 3000] - mass[begin - 3000]
+        ddrain = drain[end - 3000] - drain[begin - 3000]
+        windows.append({'native_start': begin, 'native_end': end, 'film_time_s': t1 - t0,
+                        'inventory_growth_kg_s': float(dmass / (t1 - t0)),
+                        'drainage_kg_s': float(ddrain / (t1 - t0)),
+                        'accretion_mean_kg_s': float(np.mean(acc[begin - 3000 + 1:end - 3000 + 1]))})
+    missing = sorted(set(range(3001, 6001)) - set(clocks))
+    info = {'native_updates': 3000, 'native_end': 6000, 'film_elapsed_s': float(t[-1]),
+            'initial_native_clock_s': float(initial), 'observed_clock_records': len(ids),
+            'missing_clock_updates': missing, 'clock_gap_bounds': gaps,
+            'terminal_clock_reconciliations': reconciliations,
+            'printed_step_min_s': min(v[1] for v in clocks.values()),
+            'printed_step_max_s': max(v[1] for v in clocks.values()),
+            'observed_peak_film_cfl': max(v[2] for v in clocks.values()),
+            'film_mass_end_kg': float(mass[-1]), 'drained_mass_kg': float(drain[-1] - drain[0]),
+            'integrated_accretion_lower_kg': lower[-1], 'integrated_accretion_upper_kg': upper[-1],
+            'film_ledger_residual_lower_kg': ledger_lo, 'film_ledger_residual_upper_kg': ledger_hi,
+            'film_ledger_worst_bound_percent': float(worst), 'film_ledger_1_percent_screen_pass': bool(worst <= 1),
+            'windows': windows,
+            'warnings': {'reverse_flow_messages': text.count('Reversed flow'),
+                         'viscosity_limit_messages': text.count('turbulent viscosity limited'),
+                         'fatal_messages': len(re.findall(r'floating point exception|divergence detected|Error at host', text, flags=re.I))},
+            'residual_last_500': {name: mean_window([row[k] for n, row in sorted(residuals.items()) if n >= 5500], min(500, len([n for n in residuals if n >= 5500]))) for k, name in enumerate(['continuity', 'x_velocity', 'y_velocity', 'z_velocity', 'k', 'epsilon', 'phase2_vof'])}}
+    return {'info': info, 'clocks': clocks, 'residuals': residuals,
+            'time': np.asarray(known_time), 'mass': np.asarray(known_mass), 'drain': np.asarray(known_drain),
+            'acc_lower': np.asarray(lower), 'acc_upper': np.asarray(upper)}
+
+
+def style(ax, ylabel=None):
+    if ylabel:
+        ax.set_ylabel(ylabel)
+    ax.grid(alpha=.2)
+
+
+def savefig(fig, filename):
+    fig.tight_layout(); fig.savefig(FIG / filename, dpi=180, bbox_inches='tight'); plt.close(fig)
+
+
+def figures(bulk, histories, arms, refs):
+    x = np.asarray(bulk['v2-total-liquid-mass']['iterations'])
+    b = metric_arrays(bulk)
+    fig, axs = plt.subplots(3, 1, figsize=(10, 9), sharex=True)
+    axs[0].plot(x, values(bulk, 'v2-flux-phase2-liquidinlet'), label='Liquid feed', lw=1.3)
+    axs[0].plot(x, b['contact_removal_kg_s'], label='Contact removal', lw=.7, alpha=.8)
+    axs[0].plot(x, b['liquid_carryover_kg_s'], label='Liquid outlet', lw=1)
+    axs[0].legend(); axs[0].set_title('Carrier startup with film equations off')
+    axs[1].plot(x, b['bulk_inventory_kg']); axs[1].axhline(refs['bulk_inventory_kg'], color='k', ls='--', label='Developed reference snapshot'); axs[1].legend()
+    axs[2].plot(x, b['pressure_drop_Pa'] / 1000); axs[2].axhline(refs['pressure_drop_Pa'] / 1000, color='k', ls='--')
+    for a, unit in zip(axs, ['kg/s', 'Bulk liquid (kg)', 'Pressure drop (kPa)']):
+        style(a, unit)
+        for n in [1500, 2500]: a.axvline(n, color='.6', ls=':', lw=.8)
+    axs[-1].set_xlabel('Native iteration; low feed to 1500, ramp to 2500, target hold to 3000')
+    savefig(fig, 'bulk-startup.png')
+    fig, axs = plt.subplots(3, 1, figsize=(10, 9), sharex=True)
+    for arm, a in arms.items():
+        c = COLORS[arm]; axs[0].plot(a['time'] * 1000, a['mass'], label=arm, color=c, ls='--' if arm == 'adaptive' else '-')
+        axs[1].plot(a['time'] * 1000, (a['acc_lower'] + a['acc_upper']) / 2, color=c, label=arm + ' accretion')
+        axs[1].plot(a['time'] * 1000, a['drain'], color=c, ls=':', label=arm + ' drainage')
+        ledger_l = a['mass'] - a['mass'][0] + a['drain'] - a['acc_upper']
+        ledger_u = a['mass'] - a['mass'][0] + a['drain'] - a['acc_lower']
+        axs[2].plot(a['time'] * 1000, (ledger_l + ledger_u) / 2 * 1e6, color=c, label=arm)
+        axs[2].fill_between(a['time'] * 1000, ledger_l * 1e6, ledger_u * 1e6, color=c, alpha=.2)
+    axs[0].set_title('Only 3 ms of film development: fixed and adaptive traces overlap')
+    axs[0].text(.04, .85, f"Reference film inventory: {refs['film_mass_kg']:.3f} kg (outside startup scale)", transform=axs[0].transAxes)
+    for a, unit in zip(axs, ['Film inventory (kg)', 'Integrated mass (kg)', 'Ledger residual (mg)']): style(a, unit); a.legend(fontsize=9)
+    axs[-1].set_xlabel('Elapsed native film time (ms); adaptive ledger band bounds 13 missing clocks')
+    savefig(fig, 'film-matched-time.png')
+    fig, axs = plt.subplots(1, 2, figsize=(11, 4))
+    for arm, a in arms.items():
+        ns = np.arange(3001, 6001)
+        step = np.array([a['clocks'].get(int(n), [np.nan] * 3)[1] * 1e6 for n in ns])
+        cfl = np.array([a['clocks'].get(int(n), [np.nan] * 3)[2] for n in ns])
+        axs[0].plot(ns - 3000, step, label=arm, color=COLORS[arm], ls='--' if arm == 'adaptive' else '-')
+        axs[1].plot(ns - 3000, cfl, label=arm, color=COLORS[arm], ls='--' if arm == 'adaptive' else '-')
+    axs[0].set_ylim(.95, 1.05); axs[0].set_title('Printed native steps stayed at 1 µs')
+    axs[1].axhline(.1, color='k', ls=':', label='Adaptive target 0.1'); axs[1].set_title('Film Courant number remained below target')
+    for a, unit in zip(axs, ['Printed step (µs)', 'Maximum film Courant number']): style(a, unit); a.set_xlabel('Film updates'); a.legend(fontsize=9)
+    savefig(fig, 'accepted-film-steps.png')
+    fig, axs = plt.subplots(2, 2, figsize=(11, 7), sharex=True)
+    specs = [('liquid_carryover_kg_s', 'Liquid outlet (kg/s)', 1), ('bulk_inventory_kg', 'Bulk inventory (kg)', 1),
+             ('vapor_outlet_kg_s', 'Vapor outlet (kg/s)', 1), ('pressure_drop_Pa', 'Pressure drop (kPa)', .001)]
+    for ax, (key, unit, factor) in zip(axs.flat, specs):
+        for arm, h in histories.items():
+            v = metric_arrays(h)[key]; xx = np.asarray(h['v2-total-liquid-mass']['iterations'])
+            mask = xx >= 5000
+            ax.plot(xx[mask], v[mask] * factor, color=COLORS[arm], alpha=.4, lw=.7)
+            roll = np.convolve(v, np.ones(100) / 100, mode='valid')
+            roll_x = xx[99:]; roll_mask = roll_x >= 5000
+            ax.plot(roll_x[roll_mask], roll[roll_mask] * factor, color=COLORS[arm], label=arm + ' 100-update mean', lw=1.4)
+        ax.axhline(refs[key] * factor, color='k', ls='--', label='Reference snapshot')
+        style(ax, unit); ax.set_xlim(5000, 6000); ax.legend(fontsize=8)
+    for a in axs[-1]: a.set_xlabel('Native iteration (film enabled at 3000)')
+    savefig(fig, 'carrier-final-window.png')
+    fig, axs = plt.subplots(3, 1, figsize=(10, 9), sharex=True)
+    for arm, h in histories.items():
+        ns = np.asarray(h['v2-total-liquid-mass']['iterations'])
+        mask = ns >= 5000
+        feed = values(h, 'v2-flux-phase2-liquidinlet'); carry = -values(h, 'v2-flux-phase2-steamoutlet')
+        sink = -values(h, 'v2-applied-absorber'); acc = values(h, 'p72a-e2.7-ewf-secondary-phase-mass-total')
+        axs[0].plot(ns[mask], sink[mask], color=COLORS[arm], lw=.8, alpha=.7, label=arm)
+        axs[1].plot(ns[mask], (feed - carry - sink)[mask], color=COLORS[arm], lw=.8, label=arm + ' bulk boundary + contact residual')
+        axs[1].plot(ns[mask], acc[mask], color=COLORS[arm], ls='--', lw=1, label=arm + ' film accretion')
+        r = arms[arm]['residuals']; xx = np.asarray([n for n in sorted(r) if n >= 5000])
+        axs[2].semilogy(xx, [r[int(n)][0] for n in xx], color=COLORS[arm], alpha=.7, lw=.8, label=arm + ' continuity')
+        axs[2].semilogy(xx, [r[int(n)][6] for n in xx], color=COLORS[arm], ls='--', alpha=.7, lw=.8, label=arm + ' phase-2 fraction')
+    axs[0].set_title('Contact source fluctuates despite similar carrier scalar means')
+    for a, unit in zip(axs, ['Contact removal (kg/s)', 'Rates (kg/s)', 'Scaled residual']): style(a, unit); a.legend(fontsize=8); a.set_xlim(5000, 6000)
+    axs[-1].set_xlabel('Native iteration; no interpolation of missing residual rows')
+    savefig(fig, 'numerical-accounting.png')
+    fig, axs = plt.subplots(1, 2, figsize=(11, 4))
+    for arm, h in histories.items():
+        ns = np.asarray(h['p72a-e2.7-ewf-thickness-max']['iterations'])
+        axs[0].plot(ns - 3000, values(h, 'p72a-e2.7-ewf-thickness-max') * 1e3, color=COLORS[arm], label=arm + ' maximum')
+        axs[0].plot(ns - 3000, values(h, 'p72a-e2.7-ewf-thickness-awavg') * 1e3, color=COLORS[arm], ls='--', label=arm + ' area mean')
+        ratios = [values(h, 'p72a-e2.7-ewf-film-mass-total')[-1] / refs['film_mass_kg'],
+                  values(h, 'p72a-e2.7-ewf-thickness-max')[-1] / refs['film_max_m'],
+                  values(h, 'p72a-e2.7-ewf-thickness-awavg')[-1] / refs['film_mean_m']]
+        pos = np.arange(3) + (-.16 if arm == 'fixed' else .16)
+        axs[1].bar(pos, np.asarray(ratios) * 100, width=.32, color=COLORS[arm], label=arm)
+    axs[0].set(xlabel='Film updates', ylabel='Film thickness (mm)', title='Peak thickness falls while total film inventory grows')
+    axs[1].axhspan(90, 110, color='#009e73', alpha=.15, label='±10% reference screen band')
+    axs[1].set_xticks(range(3), ['Inventory', 'Maximum thickness', 'Mean thickness']); axs[1].set_ylim(0, 115)
+    axs[1].set(ylabel='Percentage of reference snapshot', title='Film reproduction screen fails')
+    for a in axs: style(a); a.legend(fontsize=8)
+    savefig(fig, 'film-reproduction.png')
 
 
 def main():
     FIG.mkdir(parents=True, exist_ok=True)
-    manifest = load('run-manifest.json')
-    if manifest['status'] != 'STARTUP_SCREENS_COMPLETE_ANALYSIS_REQUIRED':
-        raise RuntimeError('Both verified screens are required before final analysis')
-    reference = load('reference-state.json')['readback']['fields']
-    reference_extra = load('reference-extra-reports.json')
-    ref_dp = reference_extra['p72s3-pressure-inlet'][0] - reference_extra['p72s3-pressure-outlet'][0]
-    bulk = load('bulk-histories.json')
-    fig, ax = plt.subplots(3, 1, figsize=(10, 9), sharex=True)
-    for name in ['v2-flux-phase2-liquidinlet', 'v2-flux-phase1-steaminlet', 'p72-contact-removal']:
-        x, y = array(bulk, name)
-        ax[0].plot(x, y, label=name.replace('v2-flux-', '').replace('p72-contact-', 'contact '), lw=.9)
-    x, y = array(bulk, 'v2-total-liquid-mass')
-    ax[1].plot(x, y, lw=.9)
-    ax[1].axhline(reference['v2-total-liquid-mass'][0], ls='--', color='k', label='Developed reference snapshot')
-    x, pi = array(bulk, 'p72s3-pressure-inlet'); xo, po = array(bulk, 'p72s3-pressure-outlet')
-    if not np.array_equal(x, xo):
-        raise RuntimeError('Pressure histories have different coordinates')
-    ax[2].plot(x, (pi - po) / 1000, lw=.9)
-    ax[2].axhline(ref_dp / 1000, ls='--', color='k')
-    for a, title, unit in zip(ax, ['Feed/source development; native source-inclusive liquid flux', 'Bulk liquid inventory', 'Area-mean inlet minus outlet pressure'], ['kg/s', 'kg', 'kPa']):
-        a.set_title(title); a.set_ylabel(unit); a.grid(alpha=.2)
-    ax[0].legend(fontsize=8); ax[1].legend(fontsize=8); ax[2].set_xlabel('Native bulk iteration')
-    fig.tight_layout(); fig.savefig(FIG / 'bulk-startup.png', dpi=180); plt.close(fig)
-    arms = {arm: film(arm) for arm in ['fixed', 'adaptive']}
-    fig, ax = plt.subplots(3, 1, figsize=(10, 9), sharex=True)
-    summary = {'status': 'SCREEN_COMPLETE_REPRODUCTION_NOT_YET_QUALIFIED', 'reference_basis': 'N33586 developed snapshot; no stationary reference window', 'arms': {}}
-    common_time = min(arms['fixed'][1][-1], arms['adaptive'][1][-1])
-    for arm, (h, time, mass, drain, acc, steps, ids, info) in arms.items():
-        ax[0].plot(time, mass, label=arm, lw=1)
-        ax[1].plot(time, drain, label=f'{arm} drainage', lw=1)
-        ax[1].plot(time, acc, label=f'{arm} accretion', lw=1, ls='--')
-        ax[2].plot(time, mass - mass[0] + drain - acc, label=arm, lw=1)
-        info['film_mass_at_common_time_kg'] = float(np.interp(common_time, time, mass))
-        info['common_time_s'] = float(common_time)
-        final = load(f'{arm}-endpoint-N{ids[-1]}.json')['state']['readback']['fields']
-        # Compare final window to the exact preserved snapshot. Native flux
-        # subreports at the endpoint check the user-source subtraction first.
-        source = final['v2-applied-absorber'][0]
-        for report in ['v2-flux-phase2-liquidinlet', 'v2-flux-phase2-steamoutlet']:
-            if not np.isclose(final[report][0] - source, final[report + '(without-sources)'][0], rtol=1e-8, atol=1e-7):
-                raise RuntimeError('Native mass-flow subreports do not support source subtraction')
-        _, native_out = array(h, 'v2-flux-phase2-steamoutlet')
-        _, user_source = array(h, 'v2-applied-absorber')
-        carry = -(native_out - user_source)
-        _, vapor = array(h, 'v2-flux-phase1-steamoutlet')
-        _, inventory = array(h, 'v2-total-liquid-mass')
-        _, p_in = array(h, 'p72s3-pressure-inlet'); _, p_out = array(h, 'p72s3-pressure-outlet')
-        comparisons = {}
-        for name, vals, ref, tolerance in [
-                ('liquid_carryover_kg_s', carry, -reference['v2-flux-phase2-steamoutlet(without-sources)'][0], 10),
-                ('vapor_outlet_kg_s', -vapor, -reference['v2-flux-phase1-steamoutlet'][0], 5),
-                ('bulk_inventory_kg', inventory, reference['v2-total-liquid-mass'][0], 10),
-                ('pressure_drop_Pa', p_in - p_out, ref_dp, 5)]:
-            mean = float(np.mean(vals[-500:])); error = float(100 * (mean - ref) / abs(ref)) if ref else None
-            comparisons[name] = {'final_500_mean': mean, 'reference_snapshot': ref, 'difference_percent': error,
-                                 'screen_tolerance_percent': tolerance, 'scalar_screen_pass': error is not None and abs(error) <= tolerance}
-        info['comparisons'] = comparisons
-        info['wall_seconds'] = sum(b['wall_seconds'] for b in manifest['blocks'] if b.get('arm') == arm)
+    m = load('run-manifest.json')
+    if m['status'] != 'STARTUP_SCREENS_COMPLETE_ANALYSIS_REQUIRED' or m.get('final_reopen') != 'PASS':
+        raise RuntimeError('Both completed saved/reopened startup screens are required')
+    refstate = load('reference-state.json'); ref = refstate['readback']['fields']; extra = load('reference-extra-reports.json')
+    refs = {'liquid_carryover_kg_s': -ref['v2-flux-phase2-steamoutlet(without-sources)'][0],
+            'vapor_outlet_kg_s': -ref['v2-flux-phase1-steamoutlet'][0],
+            'bulk_inventory_kg': ref['v2-total-liquid-mass'][0],
+            'pressure_drop_Pa': extra['p72s3-pressure-inlet'][0] - extra['p72s3-pressure-outlet'][0],
+            'contact_removal_kg_s': ref['p72-contact-removal'][0],
+            'film_mass_kg': ref['p72a-e2.7-ewf-film-mass-total'][0],
+            'film_max_m': ref['p72a-e2.7-ewf-thickness-max'][0],
+            'film_mean_m': extra['p72a-e2.7-ewf-thickness-awavg'][0]}
+    bulk = hist('bulk'); histories = {arm: hist(arm) for arm in ['fixed', 'adaptive']}
+    semantics = {'bulk': validate_report_semantics('bulk', bulk, load('bulk-endpoint.json'))}
+    arms = {}
+    summary = {'status': 'TESTED_RECIPE_CARRIER_SCREEN_PASSES_FILM_REPRODUCTION_FAILS',
+               'reference': refs, 'reference_native_iteration': 33586,
+               'reference_stationarity': 'NOT_QUALIFIED', 'arms': {},
+               'bulk_final_500': {k: mean_window(v) for k, v in metric_arrays(bulk).items()}}
+    for arm, h in histories.items():
+        endpoint = load(f'{arm}-endpoint-N6000.json')
+        require = load(f'{arm}-final-reopen.json')
+        if require['readback'] != endpoint['state']['readback']:
+            raise RuntimeError('Saved endpoint did not reopen exactly')
+        semantics[arm] = validate_report_semantics(arm, h, endpoint['state'])
+        a = film_arm(arm, m, h); arms[arm] = a; info = a['info']
+        info['comparisons'] = {}
+        for key, v in metric_arrays(h).items():
+            tol = 5 if key in ['vapor_outlet_kg_s', 'pressure_drop_Pa'] else 10
+            windows = {str(w): mean_window(v, w) for w in [250, 500, 1000]}
+            mean = windows['500']['mean']; error = 100 * (mean - refs[key]) / abs(refs[key])
+            info['comparisons'][key] = {'final_500_mean': mean, 'reference_snapshot': refs[key],
+                                        'difference_percent': error, 'screen_tolerance_percent': tol,
+                                        'scalar_screen_pass': abs(error) <= tol, 'windows': windows}
+        for key, name in [('film_mass_kg', 'p72a-e2.7-ewf-film-mass-total'), ('film_max_m', 'p72a-e2.7-ewf-thickness-max'), ('film_mean_m', 'p72a-e2.7-ewf-thickness-awavg')]:
+            v = values(h, name); info['comparisons'][key] = {'endpoint': float(v[-1]), 'final_500_mean': float(v[-500:].mean()),
+                                                            'reference_snapshot': refs[key], 'endpoint_difference_percent': float(100 * (v[-1] - refs[key]) / refs[key]),
+                                                            'screen_tolerance_percent': 10, 'scalar_screen_pass': bool(abs(100 * (v[-500:].mean() - refs[key]) / refs[key]) <= 10)}
+        bulk_net = values(h, 'v2-flux-phase2-liquidinlet') + values(h, 'v2-flux-phase2-steamoutlet') + values(h, 'v2-applied-absorber')
+        info['bulk_accounting'] = {'boundary_plus_contact_final_500_kg_s': mean_window(bulk_net),
+                                   'conditional_minus_film_accretion_final_500_kg_s': mean_window(bulk_net - values(h, 'p72a-e2.7-ewf-secondary-phase-mass-total')),
+                                   'interpretation': 'Boundary + user-source residual excludes EWF transfers; conditional subtraction is not a verified whole-separator balance; steady pseudo-time inventory slope is not physical dM/dt'}
+        thickness = values(h, 'p72a-e2.7-ewf-thickness-max')
+        info['peak_thickness_m'] = float(thickness.max())
+        info['peak_thickness_native_iteration'] = int(h['p72a-e2.7-ewf-thickness-max']['iterations'][int(thickness.argmax())])
+        info['documented_block_wall_seconds'] = sum(b['wall_seconds'] for b in m['blocks'] if b.get('arm') == arm)
+        info['wall_cost_complete'] = arm == 'fixed'
+        info['unrecorded_solve_updates_for_cost'] = 404 if arm == 'adaptive' else 0
         summary['arms'][arm] = info
-    for a, title, unit in zip(ax, ['Film development from the same dry-film parent', 'Cumulative drainage and integrated accretion', 'Film ledger: storage + drainage − accretion'], ['kg', 'kg', 'kg']):
-        a.set_title(title); a.set_ylabel(unit); a.grid(alpha=.2); a.legend(fontsize=8)
-    ax[0].axhline(reference['p72a-e2.7-ewf-film-mass-total'][0], color='k', ls=':', label='Developed reference')
-    ax[-1].set_xlabel('Elapsed native film time (s)')
-    fig.tight_layout(); fig.savefig(FIG / 'film-matched-time.png', dpi=180); plt.close(fig)
-    fig, ax = plt.subplots(1, 2, figsize=(11, 4))
-    for arm, (_, time, _, _, _, steps, ids, info) in arms.items():
-        ax[0].plot(time[1:], steps * 1e6, label=arm)
-        ax[1].plot(np.arange(1, len(ids) + 1), time[1:], label=arm)
-    ax[0].set(xlabel='Elapsed film time (s)', ylabel='Printed accepted step (µs)')
-    ax[1].set(xlabel='Film updates', ylabel='Elapsed film time (s)')
-    for a in ax: a.legend(); a.grid(alpha=.2)
-    fig.tight_layout(); fig.savefig(FIG / 'accepted-film-steps.png', dpi=180); plt.close(fig)
-    cases = ['reference', 'fixed', 'adaptive']
-    data = {case: np.load(OUT / f'{case}-p72s3-xy-z0.npz') for case in cases}
-    fig, ax = plt.subplots(2, 3, figsize=(12, 10))
-    for row, field in enumerate(['phase-2-vof', 'velocity-magnitude']):
-        vmax = max(float(d[field].max()) for d in data.values())
-        for col, case in enumerate(cases):
-            d = data[case]; split = np.cumsum(d['face_sizes'])[:-1]
-            faces = np.split(d['connectivity'], split)
-            polygons = [d['vertices'][face, :2] for face in faces]
-            p = PolyCollection(polygons, array=d[field], cmap='viridis', clim=(0, vmax), edgecolors='none')
-            ax[row, col].add_collection(p); ax[row, col].autoscale_view(); ax[row, col].set_aspect('equal')
-            ax[row, col].set_title(f'{case}: {field}'); ax[row, col].set_xlabel('x (m)'); ax[row, col].set_ylabel('y (m)')
-            fig.colorbar(p, ax=ax[row, col], shrink=.65)
-    fig.tight_layout(); fig.savefig(FIG / 'matched-spatial-fields.png', dpi=180); plt.close(fig)
-    summary['bulk_wall_seconds'] = manifest['bulk_wall_seconds'] + manifest.get('smoke', {}).get('wall_seconds', 0)
-    summary['claim_limits'] = ['3000 film updates per arm are startup screens', 'Developed reference is not stationary',
-                              'No mesh-family extension selected', 'No physical validation', 'Matched-time endpoint values are interpolated from native histories']
+    summary['history_semantics'] = semantics
+    summary['bulk_wall_seconds_including_smoke'] = m['bulk_wall_seconds'] + m['smoke']['wall_seconds']
+    summary['fixed_recipe_measured_wall_seconds'] = summary['bulk_wall_seconds_including_smoke'] + summary['arms']['fixed']['documented_block_wall_seconds']
+    summary['film_endpoint_fixed_adaptive_difference_percent'] = 100 * (summary['arms']['adaptive']['film_mass_end_kg'] - summary['arms']['fixed']['film_mass_end_kg']) / summary['arms']['fixed']['film_mass_end_kg']
+    summary['claim_limits'] = ['Finite 3 ms film startup; developing reference', 'No steady whole-separator qualification',
+                              'No adaptive speedup observed', '13 adaptive clock records missing; ledger bounded without step interpolation',
+                              'No new DPM fate audit', 'Adaptive measured cost excludes pre-stop N4000–N4404 solve duration',
+                              'No paired-film 0.2–0.5 s extension or mesh family selected']
+    # Spatial summaries use sampled native fields only for numerical diagnostics;
+    # all deliverable spatial images come from native Fluent graphics exports.
+    spatial = {}
+    for case in ['bulk', 'fixed', 'adaptive']:
+        refplane = np.load(OUT / 'reference-p72s3-xy-z0.npz'); plane = np.load(OUT / f'{case}-p72s3-xy-z0.npz')
+        if not np.array_equal(plane['centroids'], refplane['centroids']):
+            raise RuntimeError('Spatial sample coordinates differ; no facetwise comparison permitted')
+        spatial[case] = {}
+        for field in ['phase-2-vof', 'velocity-magnitude']:
+            diff = plane[field] - refplane[field]
+            spatial[case][field] = {'unweighted_facet_rms_difference': float(np.sqrt(np.mean(diff ** 2))),
+                                    'unweighted_facet_max_absolute_difference': float(np.max(np.abs(diff))),
+                                    'basis': 'Same native Z=0 facet samples; not volume/area weighted or a physical validation tolerance'}
+    summary['spatial_diagnostics'] = spatial
+    figures(bulk, histories, arms, refs)
     (OUT / 'analysis-summary.json').write_text(json.dumps(summary, indent=2) + '\n')
-    rows = []
-    for arm, info in summary['arms'].items():
-        rows.append(f"| {arm} | {info['film_elapsed_s']:.6g} | {info['wall_seconds']/60:.2f} | {info['film_mass_end_kg']:.6g} | {info['film_ledger_error_percent']:.4g} |")
-    text = '\n'.join([
-        '# Stage 3 — Shortened reconstruction result', '',
-        '| Item | Result |', '| --- | --- |',
-        '| Execution | 3000 bulk startup updates; 3000 fixed and 3000 adaptive film updates; paired endpoints reopened |',
-        '| Reproduction | Scalar startup comparison completed; stationarity and full reproduction remain unqualified |',
-        f"| Bulk startup cost | {summary['bulk_wall_seconds']/60:.2f} min; timing includes the smoke verification cost |",
-        '| Reference | Preserved corrected R3/contact N33586; developed, not steady-qualified |',
-        '| Controls and decision rules | [Setup](setup.md) |',
-        '| Machine evidence | [Analysis summary](../../../../PyAnsys/output/phase72a-stage3-server3/20261005/analysis-summary.json) |', '',
-        '![Bulk startup](figures/bulk-startup.png)', '',
-        'Native report histories; the dotted reference is a preserved snapshot.', '',
-        '| Film arm | Native film time (s) | Solve cost (min) | Final film mass (kg) | Film ledger error (%) |',
-        '| --- | ---: | ---: | ---: | ---: |', *rows, '',
-        '![Matched elapsed film time](figures/film-matched-time.png)', '',
-        'Inventories and transfers use native film clocks. Fixed/adaptive agreement must be judged within their common time interval.', '',
-        '![Accepted film steps](figures/accepted-film-steps.png)', '',
-        '![Same-plane spatial comparison](figures/matched-spatial-fields.png)', '',
-        'Native facet values on Z=0; each field uses one shared scale across all three cases.', '',
-        '| Claim limit | Consequence |', '| --- | --- |',
-        '| Drifting developed reference | A startup comparison cannot prove a steady state |',
-        '| 3000-update film screens | No automatic long-horizon or mesh-convergence claim |',
-        '| Source-inclusive native reports | Subtract the verified user-source contribution once per boundary report |',
-        '| Full separator closure and DPM fate audit | Complete before a strong reproduction claim |',
-        '| Next action | Review scalar tolerances, accounting, distributions and film drift; select the smallest in-scope continuation |', ''])
-    (PROJECT / 'results.md').write_text(text)
-    # Update only this chat's Stage 3 machine-state node. Preserve all other
-    # phase lanes exactly, including concurrent Server 1 work.
-    state_path = PROJECT.parent / 'phase-state.yaml'
-    state_text = state_path.read_text()
-    match = re.search(r'(?ms)^stage3_reconstruction:\n.*?(?=^[^\s#]|\Z)', state_text)
-    if not match:
-        raise RuntimeError('Stage 3 machine-state node missing')
-    block = match.group(0)
-    for key, value in {'status': 'STARTUP_SCREENS_COMPLETE_REPRODUCTION_UNQUALIFIED',
-                       'last_verified_native_iteration': str(summary['arms']['adaptive']['native_end'])}.items():
-        block = re.sub(rf'(?m)^  {key}:.*$', f'  {key}: {value}', block)
-    block += ('  analysis_summary: PyAnsys/output/phase72a-stage3-server3/20261005/analysis-summary.json\n'
-              '  film_time_basis: VERIFIED_NATIVE_CLOCKS\n'
-              '  fixed_and_adaptive_final_reopen: PASS\n')
-    state_path.write_text(state_text[:match.start()] + block + state_text[match.end():])
-    print('STAGE3_ANALYSIS_COMPLETE', json.dumps(summary['arms']), flush=True)
+    print(json.dumps({'status': summary['status'], 'film': {k: v['info'] for k, v in arms.items()}, 'fixed_recipe_minutes': summary['fixed_recipe_measured_wall_seconds'] / 60}, indent=2))
 
 
 if __name__ == '__main__':

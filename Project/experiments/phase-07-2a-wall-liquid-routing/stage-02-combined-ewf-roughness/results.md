@@ -1,5 +1,84 @@
 # Phase 7.2A Stage 2 — E2.7 plus R3/R4/R5 roughness results
 
+| Whole-case history | Evidence and coverage |
+| --- | --- |
+| [Field lineage through N45606](case-history-N45606.md) | Residuals, bulk/combined liquid inventory, phase-2 steamoutlet flux, film mass and accretion/drainage; setting markers and replay branches |
+| Uploaded history recovered | All 29 native reports in each missing segment match their JSON histories; requested inventories, outlet flux and all seven carrier residuals now cover N1–N45606 without gaps |
+| Additional carrier residual recovery | Saved data supplies exact recent residual suffixes, including final N45374–N45606; film/event transcript tail remains missing |
+| Recovered film residual limit | Local fixed-1 µs replay has 1,268 updates with at least one final film residual above 1; smooth inventory and small ledger error alone do not qualify the baseline. See [full residual checks](case-history-N45606.md#ewf-residuals) |
+
+## Adaptive film recovered at N45606
+
+| Question | Evidence-backed answer |
+| --- | --- |
+| Has the film reached steady state? | No; final-window storage remains 8.2017 kg/s |
+| Does adaptive stepping increase the film step? | Yes; 1 → 1.728 µs, then held at this setting |
+| Why did the controller stop? | gRPC stream timeout; Fluent completed the native batch at N45606 |
+| Requested 50 ms corrected-restart horizon | Not reached; current added time is 40.7690 ms |
+| Parent lineage | Independent local four-rank N33586 endpoint, continued on Server 1 |
+| Exact window | N33586–N45606; 12,020 adaptive updates |
+| Native coverage | All 29 reports have 12,021 contiguous coordinates |
+| Adaptive film elapsed time | 20.769016 ms; native endpoint clock confirms this time |
+| Native clocks | 0.1000000000000217 → 0.1207690160000985 s |
+| Film inventory | 6.150172 → 6.360050 kg; +0.209877 kg (+3.4125%) |
+| Maximum film thickness | 0.299323 → 0.307210 mm; peak 0.312074 mm |
+| Full film ledger error | 0.004799% |
+| Peak / final film CFL | 0.026604 / 0.025431; target 0.05 |
+| Bulk liquid inventory | 62.90584 → 62.89699 kg; oscillatory |
+| Final liquid carryover | 3.67244 kg/s; final-1,000 mean 3.67343 kg/s |
+| Final pair | Saved and hashed on local disk; reopened fields and settings match |
+| Shared copy | N45606 case/data downloaded on this Mac from OneDrive; both hashes match Server 1 originals |
+
+![Film inventory, thickness, accretion, drainage and storage growth through N45606](../../../../PyAnsys/output/phase72a-adaptive-server1/20261005/recovered-N45606/adaptive-film-histories.png)
+
+All native reports are complete. Drainage uses a trailing 100-update window; storage uses a trailing 1,000-update window. Film inventory still increases while maximum thickness falls from its peak.
+
+| 1,000-update window | Film time (ms) | Accretion (kg/s) | Drainage (kg/s) | Storage (kg/s) | Drainage deficit (%) |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| N33606–N34606 | 1.728 | 82.160 | 70.346 | 11.815 | 14.380 |
+| N36606–N37606 | 1.728 | 82.158 | 70.845 | 11.314 | 13.770 |
+| N40606–N41606 | 1.728 | 82.157 | 72.807 | 9.356 | 11.381 |
+| N44606–N45606 | 1.728 | 82.152 | 73.956 | 8.202 | 9.977 |
+
+![Accepted film timestep and film CFL through N45606](../../../../PyAnsys/output/phase72a-adaptive-server1/20261005/recovered-N45606/adaptive-step-cfl.png)
+
+The last 233 updates lack the client transcript. Their accepted steps are recovered from complete native CFL reports and the verified adaptive controls; native endpoint time, step and count confirm the reconstruction.
+
+| Timestep observation | Interpretation |
+| --- | --- |
+| Adaptive step holds at 1.728 µs | Final CFL 0.025431 remains above the 0.025 increase threshold |
+| Courant target 0.05 | Native adaptation increases the step only below half this target; [Fluent 2025 R2 algorithm](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_th/flu_th_ewf_sec_sol_alg.html) |
+| Storage falls 11.815 → 8.202 kg/s | Drainage improves, but no near-zero storage window is established |
+| Final accretion 82.152 vs drainage 73.956 kg/s | About 9.977% remains stored; no film steady-state claim |
+| Thickness peaked and then fell | Local thickness alone does not establish stationary global film inventory |
+
+![Bulk liquid inventory and boundary liquid carryover through N45606](../../../../PyAnsys/output/phase72a-adaptive-server1/20261005/recovered-N45606/carrier-histories.png)
+
+Raw histories and trailing 1,000-update means. Outlet carryover uses the boundary-only report; positive values show outward liquid mass flow. This figure does not qualify full separator conservation.
+
+| Evidence limit | Effect |
+| --- | --- |
+| Final 233 updates lack client film/event transcript | Carrier residuals now recovered from saved data in the [lineage analysis](case-history-N45606.md#carrier-residuals); no complete film-tail residual or no-event claim |
+| Exact endpoint clock reconstruction error | 8.03e-14 s; accepted-step reconstruction agrees with all captured clocks within display rounding |
+| Film accretion native label is kg | Analysis retains the previously verified rate meaning in kg/s |
+| Film-only ledger | Bulk and whole-separator conservation remain unqualified |
+| Positive storage in every 1,000-update window | Steady film remains unqualified |
+| Controller return hook | Automatic CLI return failed because the desktop chat had an active writer |
+
+| Next scientific action | Purpose |
+| --- | --- |
+| Continue from preserved N45606 toward 50 ms total corrected-restart film time | Test whether storage continues to decrease |
+| If a faster numerical contrast is needed, test adaptive Courant 0.1 from a preserved parent | Allow a larger step while checking CFL, storage and film ledger; this contrast is not yet tested in Stage 2 |
+| Use actual film clock and native accepted steps | Do not infer elapsed time from a maximum-step setting |
+
+| Artifact | Owner |
+| --- | --- |
+| Analysis and all windows | [Summary](../../../../PyAnsys/output/phase72a-adaptive-server1/20261005/recovered-N45606/analysis-summary.json), [window CSV](../../../../PyAnsys/output/phase72a-adaptive-server1/20261005/recovered-N45606/window-summary.csv) |
+| Recovered reports and time provenance | [Film history CSV](../../../../PyAnsys/output/phase72a-adaptive-server1/20261005/recovered-N45606/film-history.csv) |
+| Final pair identity | [Endpoint](../../../../PyAnsys/output/phase72a-adaptive-server1/20261005/recovered-N45606/endpoint.json), [reopen](../../../../PyAnsys/output/phase72a-adaptive-server1/20261005/recovered-N45606/reopen.json), [shared copy](../../../../PyAnsys/output/phase72a-adaptive-server1/20261005/recovered-N45606/shared-endpoint.json) |
+| Exportable figures | [Film PDF](../../../../PyAnsys/output/phase72a-adaptive-server1/20261005/recovered-N45606/adaptive-film-histories.pdf), [step/CFL PDF](../../../../PyAnsys/output/phase72a-adaptive-server1/20261005/recovered-N45606/adaptive-step-cfl.pdf), [carrier PDF](../../../../PyAnsys/output/phase72a-adaptive-server1/20261005/recovered-N45606/carrier-histories.pdf) |
+
+
 ## Adaptive film: first verified Server 1 test
 
 | Question | Evidence-backed answer |

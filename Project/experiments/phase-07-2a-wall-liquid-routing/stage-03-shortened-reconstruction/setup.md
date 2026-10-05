@@ -65,3 +65,19 @@
 | Runner | [Server 3 reconstruction runner](../../../../PyAnsys/scripts/setup/run_phase72a_stage3_server3.py) |
 | Artifact and progress map | [Run manifest](../../../../PyAnsys/output/phase72a-stage3-server3/20261005/run-manifest.json) |
 | Deliverable | Tested recipe, measured cost, evidence and claim limits |
+
+## Authorized adaptive continuation
+
+| Item | Selected contrast |
+| --- | --- |
+| Human authority | 5 October 2026: slightly more aggressive adaptive stepping; 2000 more updates; full Server 3 authority |
+| Parent | Verified adaptive N6000, native film clock 0.003 s; preserve paired parent before mutation |
+| Controlled numerical changes | Adaptive initial step 2 µs; Courant target 0.15; increase factor 1.3; reduction factor 2.0; native timestep-max setting 2 µs |
+| Maximum-step interpretation | Native timestep-max is not a verified adaptive ceiling |
+| Fixed science | Existing mesh, full feed, Coupled bulk controls, R3, corrected contact absorber, EWF walls/coupling and DPM |
+| Horizon | N6000–N8000; 20-update instrumentation check included, then 980 and 1000 updates |
+| Evidence | Native accepted steps and elapsed time; per-update film and carrier reports; residuals; film ledger |
+| Recovery checks | Nonfinite reports, peak film Courant >1, maximum thickness >3 mm, or film ledger error >1%; preserve endpoint and recover |
+| Checkpoints | Unique local Server 3 parent, prepared child, N6020, N7000 and N8000 pairs; final reopen |
+| Machine owner | [Continuation runner](../../../../PyAnsys/scripts/setup/continue_phase72a_stage3_adaptive.py), [manifest](../../../../PyAnsys/output/phase72a-stage3-server3/20261005/adaptive-aggressive-N6000-N8000/run-manifest.json) |
+| Claim limits | Startup numerical contrast; no steady-film or full-separator closure claim |

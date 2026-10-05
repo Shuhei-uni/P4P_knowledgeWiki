@@ -437,9 +437,87 @@ def run(s, resume=False):
     print('STAGE3_SCREENS_COMPLETE', flush=True)
 
 
+def resume_film(s):
+    """Continue the user-paused adaptive arm without resetting its fields/history."""
+    manifest = json.loads((OUT / 'run-manifest.json').read_text())
+    receipt = json.loads((OUT / 'user-stop-receipt.json').read_text())
+    n = native_iteration(s)
+    if manifest['status'] != 'PAUSED_BY_USER' or n != receipt['native_iteration']:
+        raise RuntimeError('Resume requires the exact preserved user-stop endpoint')
+    expected = json.loads((OUT / 'adaptive-endpoint-N4000.json').read_text())['state']
+    current = state(s)
+    if current['methods'] != expected['methods'] or any(
+            current['readback'][key] != value for key, value in expected['readback'].items() if key != 'fields'):
+        raise RuntimeError('Adaptive model settings changed while paused')
+    if not current['film_model']['ewf-adaptive?'] or not 4000 <= n < 6000:
+        raise RuntimeError('This continuation requires the existing adaptive startup arm')
+    stamp = datetime.now(timezone.utc).strftime('%H%M%S%f')
+    for kind in ['case', 'data']:
+        digest = remote_file_sha256(s, receipt['pair'][kind],
+                                   str(WORK / 'scratch' / f'user-resume-{stamp}-{kind}.sha256.txt'))
+        if digest != receipt['pair'][kind + '_sha256']:
+            raise RuntimeError('User-stop checkpoint hash differs')
+    paths = {}
+    for name in s.settings.solution.monitor.report_files.get_object_names():
+        obj = s.settings.solution.monitor.report_files[name]
+        definitions = obj.report_defs()
+        path = obj.file_name()
+        if len(definitions) != 1 or not remote_file_exists(s, path) or not obj.active():
+            raise RuntimeError('Existing adaptive history instrumentation is incomplete')
+        paths[definitions[0]] = path
+    transcript = f'adaptive-film-resume-N{n}-{stamp}.txt'
+    dump(OUT / f'user-resume-N{n}-{stamp}.json', {
+        'native_start': n, 'live_state': current, 'parent_pair': receipt['pair'],
+        'controlled_delta': 'Remaining updates only; no initialization or timestep change',
+        'transcript': transcript, 'report_paths': paths})
+    manifest.setdefault('adaptive_transcript_segments', ['adaptive-film-transcript.txt']).append(transcript)
+    manifest['user_resume_native_start'] = n
+    manifest['user_resume_authority'] = 'human_2026_10_05_nevermind_continue'
+    s.transcript.start(file_name=str(OUT / transcript), write_to_stdout=False)
+    print('USER_RESUME_VERIFIED', n, 'remaining', 6000 - n, flush=True)
+    clock = time.monotonic()
+    for target in [5000, 6000]:
+        begin = native_iteration(s)
+        if begin >= target:
+            continue
+        steps = target - begin
+        manifest.update(status='RUNNING_FILM_ADAPTIVE', active_target=target,
+                        command=f'/solve/iterate {steps}')
+        dump(OUT / 'run-manifest.json', manifest)
+        print('SUBMIT_FILM_RESUME', begin, steps, flush=True)
+        t = time.monotonic()
+        iterate(s, steps)
+        current = state(s)
+        pair = save(s, f'adaptive-film-N{target}')
+        record = {'arm': 'adaptive', 'block': (target - 3000) // 1000,
+                  'native_start': begin, 'native_end': target, 'updates_this_submission': steps,
+                  'wall_seconds': time.monotonic() - t, 'pair': pair, 'state': current,
+                  'cost_basis': 'This resumed submission plus endpoint readback/checkpoint only'}
+        dump(OUT / f'adaptive-endpoint-N{target}.json', record)
+        manifest['blocks'].append({key: value for key, value in record.items() if key != 'state'})
+        manifest.update(latest_pair=pair, verified_native_end=target,
+                        last_verified_native_iteration=target)
+        dump(OUT / 'run-manifest.json', manifest)
+        fields = current['readback']['fields']
+        if not all(math.isfinite(value[0]) for value in fields.values()) or fields['p72a-e2.7-ewf-thickness-max'][0] > .003:
+            raise RuntimeError('Film recovery limit exceeded; checkpoint preserved')
+        print('FILM_BLOCK_COMPLETE', 'adaptive', target, fields['p72a-e2.7-ewf-film-mass-total'], flush=True)
+    s.transcript.stop()
+    collect(s, paths, 'adaptive')
+    spatial(s, 'adaptive')
+    s.settings.file.read_case(file_name=pair['case'])
+    s.settings.file.read_data(file_name=pair['data'])
+    require_match(readback(s), current['readback'])
+    dump(OUT / 'adaptive-final-reopen.json', state(s))
+    manifest.update(status='STARTUP_SCREENS_COMPLETE_ANALYSIS_REQUIRED', final_reopen='PASS',
+                    resumed_wall_seconds=time.monotonic() - clock, solver_left_open=True)
+    dump(OUT / 'run-manifest.json', manifest)
+    print('STAGE3_SCREENS_COMPLETE', flush=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('operation', choices=['prepare', 'diagnostics', 'smoke', 'run', 'resume-bulk'])
+    parser.add_argument('operation', choices=['prepare', 'diagnostics', 'smoke', 'run', 'resume-bulk', 'resume-film'])
     parser.add_argument('--recover-preparation', action='store_true')
     args = parser.parse_args()
     OUT.mkdir(parents=True, exist_ok=True)
@@ -469,6 +547,8 @@ def main():
             diagnostics(s)
         elif args.operation == 'smoke':
             smoke(s)
+        elif args.operation == 'resume-film':
+            resume_film(s)
         else:
             run(s, resume=args.operation == 'resume-bulk')
     except Exception:

@@ -1,5 +1,22 @@
 # Phase Context — Phase 7.2A Wall-Liquid Routing and Steam-Outflow Carryover
 
+## Stage 3 early Coupled/EWF startup — 5 October 2026
+
+| Item | Current contract |
+| --- | --- |
+| Human question | Reduce the inlet-loading spike by enabling Coupled and EWF at historical A, then holding low feed for 500 updates |
+| Selected model | R3 roughness and corrected contact absorber from A |
+| Placement / authority | Server 1; full ownership explicitly granted for this Stage 3 run |
+| Exact parent | Hash-verified historical A case/data at N1580; retain original bulk fields |
+| Startup | 500 updates at 25% feed; original 2000-update ramp; 1000-update full-feed persistence hold |
+| Film | Dry start at A; fixed 1 µs throughout; current E2.7 coupling and wall scope |
+| Preserved previous work | Save current Server 1 N45606 before replacement; Server 3 branch remains separate |
+| Comparison | Ramp progress and equal inlet loading; raw carrier excursions, bulk + film storage, carryover and inner-film convergence |
+| Status | Prepared child reopened; all 17 checked A bulk arrays match exactly; detached run launched |
+| Exact contract | [Early EWF setup](stage-03-shortened-reconstruction/early-ewf-startup/setup.md) |
+| Machine evidence | [Run manifest](../../../PyAnsys/output/phase72a-stage3-early-ewf-server1/20261005/run-manifest.json) |
+| Claim limit | Combined finite startup recipe; no isolated timing, steady-film or whole-separator qualification |
+
 ## Stage 3 reconstruction authority — 5 October 2026
 
 | Item | Current contract |
@@ -21,6 +38,8 @@
 | Later mesh family | Conditional on existing-mesh reproduction evidence; preserve physical collector extent and wall treatment |
 | Exact run contract | [Stage 3 setup](stage-03-shortened-reconstruction/setup.md) |
 | Evidence/status | [Stage 3 results](stage-03-shortened-reconstruction/results.md) |
+| Stage 3 screen outcome | N6000 screen complete; carrier snapshot screen passes; developed-film reproduction fails |
+| Authorized continuation | Human requests 2000 more updates on Server 3 with slightly more aggressive adaptive EWF controls; exact numerical contrast in Stage 3 setup |
 
 ## Current authority and adaptive test — 5 October 2026
 
@@ -33,14 +52,14 @@
 | Shared source files | Case, data and contact-library archive downloaded on this Mac; all hashes match source manifest |
 | Server 1 | Full connection helper attached to fresh Fluent 2025 R2 session; N33586 loaded |
 | Destination files | Case/data/library hashes verified on Server 1; copied to local FluentRuns disk |
-| Execution | First adaptive test complete and reopened at N34606; longer 50 ms stage running |
-| Next action | Run and analyse native adaptive batches; preserve paired local endpoints |
+| Execution | Recovered and analysed N45606; controller stopped after gRPC timeout; requested 50 ms horizon incomplete |
+| Next action | Preserve N45606 as reference; Server 1 now owns the Stage 3 early-EWF startup test |
 | Controlled delta | Adaptive EWF stepping; keep roughness, absorber, DPM and bulk controls fixed |
 | Adaptive controls | Initial step 1 µs; increase factor 1.2; decrease factor 2; Courant target 0.05 |
 | Maximum-step limit | No separate native upper bound verified; do not call timestep-max an adaptive ceiling |
-| First test | 1,020 updates; accepted step 1.728 µs; peak CFL 0.0266013; film ledger error 0.002171% |
-| Film stationarity | Not reached; last 1,000-update storage 11.8154 kg/s; drainage deficit 14.3796% |
-| Film clock | Native parent clock 0.100000 s; original-E2.7 restart added time remains 0.020000 s |
+| Current evidence | 12,020 updates; accepted step 1.728 µs; peak CFL 0.026604; film ledger error 0.004799% |
+| Film stationarity | Not reached; last 1,000-update storage 8.2017 kg/s; drainage deficit 9.9767% |
+| Film clock | Native endpoint 0.120769016 s; total corrected-restart added time 0.040769016 s |
 | Continuation | Large TUI batches; local checkpoints; staged cumulative film horizons 0.05, 0.1 and 0.2 s when stable |
 | Required time evidence | Actual accepted film steps and their sum; never iteration count times upper bound |
 | Steady-film evidence | Sustained near-zero inventory growth and accretion–drainage agreement, with film ledger closure |
