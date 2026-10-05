@@ -1,5 +1,19 @@
 # Phase Context — Phase 7.2A Wall-Liquid Routing and Steam-Outflow Carryover
 
+## Local re-entrainment speed sensitivity — 6 October 2026
+
+| Item | Current contract |
+| --- | --- |
+| Human direction | Three local cases at 20.11, 26.81 and 32.14 m/s; same Stage 3 startup and film-development method |
+| Current authority | Human stopped the campaign on 6 October 2026; current 26.81 m/s endpoint saved at N6080 / 4.000 ms EWF time; Fluent closed and monitoring paused; no continuation authorized |
+| Selected features | Particle Splashing, Edge Separation and Particle Stripping on; Source Smoothing retains inherited off |
+| Horizon | Each case reaches approximately 250 ms actual EWF time from dry activation |
+| Invariants | 60,964-cell mesh; R3/contact absorber; materials; film wall scope; other physical settings |
+| Local authority | `direct-fluent-use`, HOME-DESKTOP-SH, Fluent 2025 R2 Student, four ranks; no remote-server changes |
+| Settings proof | Official v252 guide and Figures 30.1 / 30.9; explicit TUI responses, native readback and save/reopen |
+| Claim limit | Bounded speed sensitivity; frozen bulk development remains labelled; steady film is not a stop gate |
+| Exact contract | [Setup](stage-03-shortened-reconstruction/early-ewf-startup/reentrainment-speed-sensitivity/setup.md) |
+
 ## Supplied vertical-slit mesh repeat on Server 3 — 5 October 2026
 
 | Item | Current contract |

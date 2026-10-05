@@ -1,4 +1,28 @@
 phase_id: phase-07-2a-wall-liquid-routing
+local_reentrainment_speed_sensitivity:
+  authority: human_2026_10_06_three_local_speeds_reentrainment_250ms
+  status: STOPPED_BY_HUMAN_SAVED
+  execution: direct-fluent-use
+  speeds_m_s: [20.11, 26.81, 32.14]
+  target_film_time_s: 0.250
+  setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/reentrainment-speed-sensitivity/setup.md
+  runtime: C:/Users/Shuhei Yokkaichi/Documents/CFD/FluentDirectUse/Stage3-Reentrainment-20261006
+  remote_server_access: false
+  model_tui_readback: PASS_EXACT_FOUR_PARAMETER_DELTA
+  wall_tui_readback: PASS_SPLASH_AND_BOUNDARY_SEPARATION
+  prepared_reopen: PASS
+  historical_bulk_array_check: PASS_17_EXACT_ARRAYS
+  latest_verified_native_iteration: 6080
+  latest_verified_film_time_s: 0.004000
+  human_stop_manifest: PyAnsys/output/phase72a-reentrainment-speeds/20261006/human-stop.json
+  startup_sampled_ledger_gap_percent: 3.2658238293
+  ledger_claim_limit: native_DPM_source_timing_not_fully_reconciled
+  active_manifest: PyAnsys/output/phase72a-reentrainment-speeds/20261006/26p81-retry1/run-manifest.json
+  campaign_manifest: PyAnsys/output/phase72a-reentrainment-speeds/20261006/campaign-manifest.json
+  completion_job_manifest: PyAnsys/output/phase72a-reentrainment-speeds/20261006/completion-job.json
+  completion_job_limit: legacy_CLI_wake_failed_active_writer_conflict
+  active_watch: PAUSED_BY_HUMAN
+  recovery_controller_session: 44683
 stage3_slit154k_server3:
   authority: human_2026_10_05_full_server3_supplied_vertical_slit_repeat
   server_id: '3'
