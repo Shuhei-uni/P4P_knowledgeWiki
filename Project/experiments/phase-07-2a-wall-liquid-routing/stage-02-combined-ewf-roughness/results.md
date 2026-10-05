@@ -1,5 +1,47 @@
 # Phase 7.2A Stage 2 — E2.7 plus R3/R4/R5 roughness results
 
+## Adaptive film: first verified Server 1 test
+
+| Question | Evidence-backed answer |
+| --- | --- |
+| Can adaptive stepping increase the film step? | Yes in this 1,020-update test: 1.00 → 1.728 µs; native display rounds to 1.73 µs |
+| Film stationarity | Not reached; storage remains positive |
+| Exact window | N33586–N34606; 20 smoke + 1,000 batch updates |
+| Parent lineage | Independent local four-rank N33586 endpoint, continued on Server 1 |
+| Source availability | OneDrive case/data/library hashes verified on Server 1 |
+| UDF recovery | Restored missing relative library folder from the verified archive; loaded DLL hash matches |
+| Prepared and final pair | Both saved/reopened; fields and settings match |
+| Controlled changes | Adaptive ON; initial step 1 µs; increase factor 1.2; decrease factor 2 |
+| Courant target | Unchanged at 0.05; no native maximum-step bound claimed |
+| Measured adaptive elapsed time | 1.761 ms; cumulative native film clock difference |
+| Total added time from corrected E2.7 restart | 21.761 ms |
+| Parent and end native film clocks | 0.100000 → 0.101761 s; includes earlier model history |
+| Maximum thickness | 0.299323 → 0.304534 mm |
+| Film inventory | 6.150172 → 6.170980 kg |
+| Last 1,000-update inventory gain | 20.417 g in 1.728 ms; 11.8154 kg/s |
+| Last 1,000-update drainage deficit | 14.3796% below integrated accretion |
+| Full adaptive film ledger error | 0.002171% |
+| Peak solved film CFL | 0.0266013 |
+| Native coverage | All 29 report histories cover N33586–N34606; all 1,020 updates have native film clocks |
+| Next selected horizon | At least 50 ms total added time from corrected E2.7 restart, in 1,000-update batches |
+| Claim limit | Stable numerical adaptive stepping in this short window; no steady film, full separator closure or physical validation claim |
+
+![Film inventory, thickness, accretion and drainage against measured film time](../../../../PyAnsys/output/phase72a-adaptive-server1/20261005/adaptive-film-histories.png)
+
+Native reports; drainage rate uses a 100-update cumulative-outflow difference. Accretion is a rate in kg/s despite the native film-mass label.
+
+![Accepted film timestep and solved maximum film CFL](../../../../PyAnsys/output/phase72a-adaptive-server1/20261005/adaptive-step-cfl.png)
+
+Native accepted-step display is rounded. Elapsed time and film balance use differences in the more precise cumulative film clock.
+
+| Evidence | Owner |
+| --- | --- |
+| Run and paired endpoints | [Adaptive manifest](../../../../PyAnsys/output/phase72a-adaptive-server1/20261005/run-manifest.json) |
+| Final reopen | [N34606 readback](../../../../PyAnsys/output/phase72a-adaptive-server1/20261005/reopen-N34606.json) |
+| Histories | [Reports](../../../../PyAnsys/output/phase72a-adaptive-server1/20261005/report-histories.json), [native clocks](../../../../PyAnsys/output/phase72a-adaptive-server1/20261005/film-clock-history.json) |
+| Longer-stage completion and wake-up | [Job specification](../../../../PyAnsys/output/phase72a-adaptive-server1/20261005/stage-50ms-job.yaml) |
+
+
 ## Contact absorber: local continuation to N33586
 
 | Question | Result |

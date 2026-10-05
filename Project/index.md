@@ -48,6 +48,11 @@ steam-outlet diameter is `0.876 m`, correcting the former Project value of
 
 ## Active/latest experiment
 
+| Current Phase 7.2A lane | Scope and authority | Record |
+| --- | --- | --- |
+| Stage 2 adaptive-film development | Separate Server 1 continuation of corrected R3/contact N33586 | [Phase contract](experiments/phase-07-2a-wall-liquid-routing/CONTEXT.md) |
+| Stage 3 shortened reconstruction | Server 3 owned by the human's 5 October handoff; same model and existing mesh; reset startup plus fixed/adaptive film screens | [Stage 3 setup](experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/setup.md), [results](experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/results.md) |
+
 **Phase 7.2A was created by the human on 2026-09-22.** Its starting baseline
 is the verified terminal Phase 7.1A R0 Coupled / Global-Time-Step continuation,
 not the earlier prepared v2 pair. The baseline is the full-loading smooth-wall,

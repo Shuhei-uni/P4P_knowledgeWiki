@@ -169,3 +169,35 @@ after endpoint verification. R5 remains cancelled.
 |  | Version-matched source controls and variables are described in [Fluent 2025 R2 §30.5](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_ewf_sec_bound.html) and [supported expression variables §5.5](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_expressions_Appendix_fieldvars.html) |
 
 </details>
+
+
+## Adaptive film continuation — 5 October 2026
+
+| Item | Selected setting or requirement |
+| --- | --- |
+| Classification | New adaptive EWF test; prior fixed 10 µs runaway does not answer it |
+| Authority | Human grants full ownership of Server 1 to reach steady film |
+| Parent | Local independent four-rank N33586 pair; hashes in adaptive run manifest |
+| Initialization | Continue saved fields; no reinitialization |
+| Controls changed | Adaptive ON; initial step 1e-6 s; increase factor 1.2; decrease factor 2 |
+| Courant target | Retain 0.05 |
+| Upper timestep bound | No separate native upper bound verified; `timestep-max` is not assumed to bound adaptive steps |
+| Frozen settings | R3 roughness, contact UDF and bulk tau 1e-5 s, DPM, bulk controls, 1 m diagnostic cap |
+| UDF recovery | Restore exact shared library to the case's relative library location; DLL hash equality verified |
+| Prepared child | Saved/reopened readback matches all seven state groups |
+| Smoke | 20 native updates, N33586–N33606; timestep grew 1 to 1.728 µs; CFL about 0.02654 |
+| Discovery batch | 1,000 native updates; TUI command; compare inventory and ledger before extending |
+| Checkpoints | Paired local checkpoints every 1,000 updates; explicit hashed block endpoints |
+| Time | Native film clock differences; rounded printed timestep retained for audit |
+| Parent native clock | 0.100000 s; this includes history before the corrected original-E2.7 restart |
+| Time since corrected restart | 0.020000 s at N33586; add measured adaptive elapsed time |
+| Horizon | Extend toward total corrected-restart film time 0.05, 0.1 and 0.2 s if stable |
+| Stability recovery | Preserve and review if thickness exceeds 3 mm, film mass exceeds 12.3 kg, or solved CFL exceeds 1 |
+| Film balance review | Review if film-ledger error exceeds 1%; this is a numerical evidence guard, not physical validation |
+| Steady-film condition | Sustained near-zero storage and drainage–accretion agreement; thickness alone is insufficient |
+| Core evidence | Inventory, thickness, accretion and drainage against measured film time; accepted step/CFL history; film ledger table |
+| Flux convention | Use outlet report without User Mass Source; source-inclusive report net is not boundary carryover |
+| Claim limit | Film numerical stationarity only; no full separator or physical validation claim |
+| Version source | [Fluent 2025 R2 EWF controls](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_ewf_sec_eqns.html) |
+| Implementation | [Adaptive runner](../../../../../PyAnsys/scripts/setup/run_phase72a_adaptive_film.py) |
+| Machine evidence | [Manifest](../../../../../PyAnsys/output/phase72a-adaptive-server1/20261005/run-manifest.json) |

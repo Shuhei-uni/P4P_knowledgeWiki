@@ -1,0 +1,153 @@
+{
+  "draft_date": "2026-10-05",
+  "scope": "Independent poster-section presentation drafts; no new scientific figures",
+  "figures": [
+    {
+      "id": "I1",
+      "status": "existing",
+      "asset": "Project/experiments/phase-08-storyline-reconstruction/f1-one-inlet/figures/F1-26.81-n10000-inlet-liquid.png",
+      "owning_record": "Project/experiments/phase-08-storyline-reconstruction/results.md",
+      "caption": "F1: mixed feed on both inlet faces. This is a controlled reconstruction, not the original published simulation."
+    },
+    {
+      "id": "I2",
+      "status": "existing",
+      "asset": "Project/experiments/phase-08-storyline-reconstruction/f2-split-inlet/figures/F2-26.81-n10000-inlet-liquid.png",
+      "owning_record": "Project/experiments/phase-08-storyline-reconstruction/results.md",
+      "caption": "F2: liquid enters on the outer side and steam on the inner side. The stronger wall-adjacent liquid band shows a distribution response."
+    },
+    {
+      "id": "I-M1",
+      "status": "missing",
+      "requested_figure": "Inlet boundary close-up",
+      "request": "Show the actual two inlet faces and identify the wall-side liquid strip and the steam region.",
+      "export_detail": "Same mesh orientation as these contours; label imposed phase fractions, areas and feed or velocity basis."
+    },
+    {
+      "id": "I3",
+      "status": "existing",
+      "asset": "Project/experiments/phase-08-storyline-reconstruction/figures/f1-f2-speed-comparison.png",
+      "owning_record": "Project/experiments/phase-08-storyline-reconstruction/results.md",
+      "caption": "Five independent F1/F2 endpoints at N10000. Inventory is a terminal mass; outlet and pressure metrics use the final-500 window. The outlet axis is deliberately narrow."
+    },
+    {
+      "id": "M-M1",
+      "status": "missing",
+      "requested_figure": "Original mesh \u00b7 wall close-up",
+      "request": "Insert a real view of the original mesh that Shuhei already has. Show the outer-wall cells and nearby core.",
+      "export_detail": "Record the mesh file and cell count. Use the same physical patch and section as the current mesh."
+    },
+    {
+      "id": "M-M2",
+      "status": "missing",
+      "requested_figure": "Current result mesh \u00b7 same wall patch",
+      "request": "Insert the corresponding real view of the mesh used by the displayed results. Show wall-layer cells clearly.",
+      "export_detail": "Use the 60,964-cell result mesh if comparing these Phase 7.1A/7.2A and Phase 8 runs; do not substitute the separate 342k mesh."
+    },
+    {
+      "id": "C1",
+      "status": "existing",
+      "asset": "Project/meetings/2026-09-14/figures/P07A-geometry-absorber-map-2400x1600.png",
+      "owning_record": "Project/experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/results.md",
+      "caption": "Existing Phase 7 region schematic. It locates the nominal lower 0\u20130.10 m band; it is not a current contact-model field or an exact collector-interface rendering."
+    },
+    {
+      "id": "C-M1",
+      "status": "missing",
+      "requested_figure": "Contact collector \u00b7 liquid-fraction detail",
+      "request": "Recover the native corrected-contact contour, or export the same documented field from its preserved case/data pair.",
+      "export_detail": "Requested existing figure: contact-phase2-vof-xy-z0-N14686-detail.png. z=0; original fixed fraction range 0\u20130.01; mark the actual stepped collector boundary."
+    },
+    {
+      "id": "C-M2",
+      "status": "missing",
+      "requested_figure": "Collector inventory and local removal",
+      "request": "Recover the corrected-contact history showing collector liquid inventory and evaluated local removal over the same window.",
+      "export_detail": "Use the corrected N14686 trial or a separately identified continuation. Label inventory in g or kg and removal in kg/s. Do not replace this with the old inlet-throughput absorber plot."
+    },
+    {
+      "id": "C2",
+      "status": "existing",
+      "asset": "PyAnsys/output/phase72a-adaptive-server1/20261005/adaptive-film-histories.png",
+      "owning_record": "Project/experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/results.md",
+      "caption": "Separate corrected R3/contact continuation, N33586\u201334606. Film time is measured. Drainage combines all native edges; it is not all collector delivery. Bulk and whole-separator closure are not established."
+    },
+    {
+      "id": "R-M1",
+      "status": "missing",
+      "requested_figure": "Smooth-wall liquid distribution",
+      "request": "Supply a vertical liquid-fraction contour and liquid-velocity direction from the R0 control.",
+      "export_detail": "Use the same z=0 cut, native coordinate, shared range and camera as the roughness case. Sample liquid velocity in adjacent cells, not the no-slip wall surface."
+    },
+    {
+      "id": "R-M2",
+      "status": "missing",
+      "requested_figure": "Rough-wall liquid distribution",
+      "request": "Supply the same field view for a named roughness case. R5 or R7 can show the lower outlet response.",
+      "export_detail": "Pair the view with its own outlet and inventory history. Use signed vertical velocity to support any upward/downward transport statement."
+    },
+    {
+      "id": "R1",
+      "status": "existing",
+      "asset": "PyAnsys/output/phase72a_family_r/analysis-20260923T054600Z-cs-sensitivity-v2/01-phase2-steamoutlet-carryover.png",
+      "owning_record": "Project/experiments/phase-07-2a-wall-liquid-routing/roughness-family/results.md",
+      "caption": "R0\u2013R11, common N5586 parent and 3,000-iteration child runs. Negative mass flux means outflow. Shading marks the final-500 window."
+    },
+    {
+      "id": "R2",
+      "status": "existing",
+      "asset": "PyAnsys/output/phase72a_family_r/analysis-20260923T054600Z-cs-sensitivity-v2/02-liquid-inventories.png",
+      "owning_record": "Project/experiments/phase-07-2a-wall-liquid-routing/roughness-family/results.md",
+      "caption": "Same cases and child windows. R5 and R7 lose about 161.7 and 187.1 kg from their common starting inventory. The low outlet rate does not establish better drainage."
+    },
+    {
+      "id": "E1",
+      "status": "existing",
+      "asset": "Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/figures/E0-phase2-vof-xy-z0-final8586.png",
+      "owning_record": "Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/results.md",
+      "caption": "Smooth-wall historical E0 control. A narrow bulk-liquid band is visible near the wall."
+    },
+    {
+      "id": "E2",
+      "status": "existing",
+      "asset": "Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/figures/E2.7-phase2-vof-xy-z0-final8586.png",
+      "owning_record": "Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/results.md",
+      "caption": "E2.7 has a much weaker bulk-liquid wall band on the same 0\u20131 range. This is bulk fraction, not film thickness or velocity."
+    },
+    {
+      "id": "E3",
+      "status": "existing",
+      "asset": "Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/figures/e-family-phase2-steamoutlet-flux.png",
+      "owning_record": "Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/results.md",
+      "caption": "E0/E1/E3/E2.7 historical model response from N5586 to N8586. Negative flux means outflow. \u201cSuccessful\u201d in the original image title describes completed execution, not validated separator performance."
+    },
+    {
+      "id": "E4",
+      "status": "existing",
+      "asset": "Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/figures/E2.7-CONT5000-requested-histories.png",
+      "owning_record": "Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/results.md",
+      "caption": "Later E2.7 continuation, N8586\u201313586. Bulk inventory stays near 63 kg and outlet flow near 1.734 kg/s, while film mass grows 3.111\u21925.842 kg and average film speed grows 46.34\u219282.41 m/s. Different window from the contours above."
+    },
+    {
+      "id": "E-M1",
+      "status": "missing",
+      "requested_figure": "Film thickness and vertical transport \u00b7 same case",
+      "request": "Obtain film thickness and signed vertical film velocity from the selected E2.7 or corrected-contact endpoint.",
+      "export_detail": "Record run, native coordinate, wall surface and shared comparison range. A bulk liquid-fraction contour does not show film thickness; speed magnitude alone does not show upward motion."
+    },
+    {
+      "id": "E5",
+      "status": "existing",
+      "asset": "Project/experiments/phase-08-storyline-reconstruction/f4-coupled-dpm-ewf/figures/F4-26.81-5-n11000-film-thickness.png",
+      "owning_record": "Project/experiments/phase-08-storyline-reconstruction/results.md",
+      "caption": "F4, 26.81 m/s, 5% DPM allocation, N11000. Film thickness 0\u20130.2 mm. Closed bottom and no absorber."
+    },
+    {
+      "id": "E6",
+      "status": "existing",
+      "asset": "Project/experiments/phase-08-storyline-reconstruction/f4-coupled-dpm-ewf/figures/F4-26.81-5-n11000-film-vectors.png",
+      "owning_record": "Project/experiments/phase-08-storyline-reconstruction/results.md",
+      "caption": "Same F4 endpoint; film speed colour 0\u201387 m/s. This is not the E2.7 or contact-model endpoint used above."
+    }
+  ]
+}

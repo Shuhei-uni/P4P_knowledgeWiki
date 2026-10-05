@@ -1,6 +1,58 @@
 # Phase Context — Phase 7.2A Wall-Liquid Routing and Steam-Outflow Carryover
 
-## Status
+## Stage 3 reconstruction authority — 5 October 2026
+
+| Item | Current contract |
+| --- | --- |
+| Human goal | Test a shorter startup that reproduces the current model; prepare for later mesh convergence |
+| Authority | Full ownership of Server 3 for Stage 3 |
+| Relation to Stage 2 | Separate reconstruction lane; Server 1 adaptive-film continuation remains separate |
+| Scientific scope | Existing approximately 60k mesh and exact current physical model |
+| Reference selected for verification | Corrected R3/contact N33586; independent local four-rank developed endpoint |
+| Reference limit | Film remains developing; no stationary-film or full-separator qualification |
+| Startup | Coupled and R3 from start; 1500 updates at 25% feed, ten 100-update loading steps, 500 updates at target with film equations off |
+| Target feed | Verified reference mass flows: liquid 116.92 kg/s; vapor 80.69 kg/s |
+| Low feed assumption | 25% of each target, from the parent startup precedent |
+| Film screen | Initialize EWF after 3000 bulk updates; fixed 1 µs and adaptive arms from the same dry-film parent |
+| Adaptive candidate | Initial 1 µs; Courant target 0.1; increase 1.2; decrease 2.0 |
+| Comparison | Actual elapsed film time; predeclared scalar tolerances plus accounting and spatial evidence |
+| Checkpoints | Paired local saves every 1000 updates; final saved endpoint reopen |
+| Deliverable | Tested reconstruction recipe, measured cost and claim limits |
+| Later mesh family | Conditional on existing-mesh reproduction evidence; preserve physical collector extent and wall treatment |
+| Exact run contract | [Stage 3 setup](stage-03-shortened-reconstruction/setup.md) |
+| Evidence/status | [Stage 3 results](stage-03-shortened-reconstruction/results.md) |
+
+## Current authority and adaptive test — 5 October 2026
+
+| Item | Current contract |
+| --- | --- |
+| Goal | Reach steady film; test adaptive EWF steps to advance film time faster |
+| Authority | Full ownership of Server 1; supersedes earlier Server 1 restrictions |
+| Selected model | Stage 2 R3 + E2.7 with corrected contact absorber |
+| Parent | Independent local four-rank N33586 endpoint; retain its lineage |
+| Shared source files | Case, data and contact-library archive downloaded on this Mac; all hashes match source manifest |
+| Server 1 | Full connection helper attached to fresh Fluent 2025 R2 session; N33586 loaded |
+| Destination files | Case/data/library hashes verified on Server 1; copied to local FluentRuns disk |
+| Execution | First adaptive test complete and reopened at N34606; longer 50 ms stage running |
+| Next action | Run and analyse native adaptive batches; preserve paired local endpoints |
+| Controlled delta | Adaptive EWF stepping; keep roughness, absorber, DPM and bulk controls fixed |
+| Adaptive controls | Initial step 1 µs; increase factor 1.2; decrease factor 2; Courant target 0.05 |
+| Maximum-step limit | No separate native upper bound verified; do not call timestep-max an adaptive ceiling |
+| First test | 1,020 updates; accepted step 1.728 µs; peak CFL 0.0266013; film ledger error 0.002171% |
+| Film stationarity | Not reached; last 1,000-update storage 11.8154 kg/s; drainage deficit 14.3796% |
+| Film clock | Native parent clock 0.100000 s; original-E2.7 restart added time remains 0.020000 s |
+| Continuation | Large TUI batches; local checkpoints; staged cumulative film horizons 0.05, 0.1 and 0.2 s when stable |
+| Required time evidence | Actual accepted film steps and their sum; never iteration count times upper bound |
+| Steady-film evidence | Sustained near-zero inventory growth and accretion–drainage agreement, with film ledger closure |
+| Diagnostic cap | Retain 1 m; no cap-based steady-state claim |
+| R5 | Cancelled |
+| Initial access receipt | [Preflight](../../../PyAnsys/output/phase72a-adaptive-preflight/20261004T225805Z/preflight.json) |
+| Current run evidence | [Adaptive manifest](../../../PyAnsys/output/phase72a-adaptive-server1/20261005/run-manifest.json) |
+| Completion and return to this chat | [50 ms stage job](../../../PyAnsys/output/phase72a-adaptive-server1/20261005/stage-50ms-job-manifest.json) |
+
+## Previous fixed-step continuation
+
+
 
 | Current local continuation | Verified setting or state |
 | --- | --- |

@@ -1,11 +1,79 @@
 phase_id: phase-07-2a-wall-liquid-routing
+stage3_reconstruction:
+  authority: human_2026_10_05_full_server3_ownership_stage3
+  status: N1000_PRESERVED_IDLE_FLAG_RECOVERED_BULK_CONTINUATION_RUNNING
+  server_id: '3'
+  setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/setup.md
+  results: Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/results.md
+  manifest: PyAnsys/output/phase72a-stage3-server3/20261005/run-manifest.json
+  job_manifest: PyAnsys/output/phase72a-stage3-server3/20261005/service-recovery-job-manifest.json
+  job_id: phase72a-stage3-reconstruction-server3-verified-service-recovery-20261005
+  worker_pid: 78423
+  compute_ranks: 18
+  verified_native_start: 0
+  last_verified_native_iteration: 1000
+  preparation_reopen: PASS
+  smoke_updates: 20
+  smoke_report_rows: 20
+  smoke_endpoint_reopen: PASS
+  completion_handoff: CLI_RETURN_FAILED_DESKTOP_CHAT_ACTIVE_WRITER
+  recovery: NATIVE_IDLE_FLAG_CLEARED_AT_VERIFIED_N1000_NO_INITIALIZATION
+  batch_submission: ABSOLUTE_NATIVE_COMMAND_WITH_EXACT_HORIZON_IDLE_BARRIER
+  attach_recovery: VERIFIED_252_FACTORY_AVOIDS_STALLED_VERSION_DISCOVERY_RPC
+  reference_native_iteration: 33586
+  reference_lineage: independent_four_rank_local_replay_from_original_E27
+  reference_stationarity: NOT_QUALIFIED
+  target_liquid_feed_kg_s: 116.92
+  target_vapor_feed_kg_s: 80.69
+  low_loading_fraction: 0.25
+  low_loading_basis: parent_startup_precedent_and_declared_stage3_assumption
+  bulk_startup_updates: 3000
+  fixed_film_screen_updates: 3000
+  adaptive_film_screen_updates: 3000
+  film_comparison_basis: MATCHED_NATIVE_ELAPSED_FILM_TIME
+  solver_modified: true
+  run_submitted: true
+  mesh_family_status: DEFERRED_UNTIL_SUPPORTED_EXISTING_MESH_REPRODUCTION
 phase_question: >-
   Can wall roughness or Eulerian Wall Film reduce phase-2 liquid carryover
   through steamoutlet by changing wall-adjacent routing while preserving
   absorber tracking, source-inclusive closure, liquid-inventory behaviour, and
   credible vapor routing relative to the R0 control?
-state: LOCAL_CONTACT_ABSORBER_DISCOVERY
+state: ADAPTIVE_FILM_DISCOVERY
 planning_state: USER_AUTHORIZED_INDEPENDENT_ALL_LIQUID_CONTACT_CAPTURE
+adaptive_film_continuation:
+  authority: human_2026_10_05_full_server1_ownership
+  status: VERIFIED_FIRST_BATCH_LONGER_STAGE_RUNNING
+  server_id: '1'
+  selected_parent_native_iteration: 33586
+  source_pair_hash_verification: PASS_ON_MAC_ONEDRIVE
+  source_libraries_hash_verification: PASS
+  destination_server1_files: HASH_VERIFIED_LOCAL_COPY
+  last_verified_native_iteration: 34606
+  current_live_native_iteration: null
+  final_reopen: PASS_FIELDS_AND_SETTINGS
+  added_adaptive_film_time_s: 0.001761
+  total_added_film_time_from_E27_s: 0.021761
+  final_film_inventory_kg: 6.170980013137841
+  final_maximum_thickness_m: 0.0003045338089577854
+  film_ledger_error_percent: 0.0021710422514752948
+  last_1000_inventory_growth_kg_s: 11.815374930397274
+  stationary_film: false
+  longer_stage_target_total_added_film_time_s: 0.05
+  longer_stage_job: PyAnsys/output/phase72a-adaptive-server1/20261005/stage-50ms-job.yaml
+  longer_stage_job_manifest: PyAnsys/output/phase72a-adaptive-server1/20261005/stage-50ms-job-manifest.json
+  run_submitted: true
+  solver_modified: true
+  preflight_receipt: PyAnsys/output/phase72a-adaptive-preflight/20261004T225805Z/preflight.json
+  initial_film_timestep_s: 0.000001
+  increase_factor: 1.2
+  decrease_factor: 2.0
+  native_maximum_step_bound: NOT_VERIFIED
+  run_manifest: PyAnsys/output/phase72a-adaptive-server1/20261005/run-manifest.json
+  proposed_courant_target: 0.05
+  accepted_timestep_instrumentation: NATIVE_FILM_TIME_AND_TIMESTEP_TRANSCRIPT
+  staged_total_film_horizons_s: [0.05, 0.1, 0.2]
+  prior_server1_restrictions_superseded: true
 local_contact_absorber_1us_20000:
   authority: human_2026_10_04_run_using_direct_fluent_use
   status: LOCAL_REPLAY_RUNNING_NATIVE_START_CONFIRMED
