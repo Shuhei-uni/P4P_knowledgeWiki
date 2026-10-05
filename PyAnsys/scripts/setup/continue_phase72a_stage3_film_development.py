@@ -39,6 +39,15 @@ def film(s):
     return dict(s.rp_vars('wall-film/solution-state'))
 
 
+def exceeds_screened_step(met, qualified_step):
+    # Fluent prints accepted steps with two decimal places in scientific
+    # notation. Compare printed values at that precision, and also check the
+    # full-precision accepted step recovered from the saved native state.
+    printed_limit = float(f'{qualified_step:.2e}')
+    return (met['printed_step_max_s'] > printed_limit*(1+1e-6)
+            or met['final_accepted_step_s'] > qualified_step*(1+1e-6))
+
+
 def save(s, label):
     return pair_save(s, WORK / f'{label}.cas.h5', WORK / 'scratch', scratch_tag=label)
 
@@ -284,6 +293,31 @@ def film_fields(s, label):
     return values, str(target)
 
 
+def spatial_stationarity(m, folder):
+    """Assess field persistence across three consecutive saved long windows."""
+    tail = [b for b in m['blocks'] if b.get('output') == str(folder)][-3:]
+    if len(tail) != 3 or any(b['updates'] != 1000 or not b.get('facet_fields') for b in tail):
+        return {'pass': False, 'coverage': 'THREE_CONSECUTIVE_1000_UPDATE_FIELD_SNAPSHOTS_REQUIRED'}
+    changes = []
+    for left, right in zip(tail, tail[1:]):
+        if left['native_end'] != right['native_start']:
+            raise RuntimeError('Spatial stationarity windows are not consecutive')
+        a, b = np.load(left['facet_fields']), np.load(right['facet_fields'])
+        if not np.allclose(a['centroids'], b['centroids'], atol=1e-12, rtol=0):
+            raise RuntimeError('Spatial stationarity facet correspondence differs')
+        mass = a['film-mass']
+        av = np.stack([a[f'film-{x}-velocity'] for x in ['x','y','z']], axis=1)
+        bv = np.stack([b[f'film-{x}-velocity'] for x in ['x','y','z']], axis=1)
+        q = {'native_start': left['native_end'], 'native_end': right['native_end'],
+             'mass_distribution_L1_percent': float(100*np.sum(np.abs(b['film-mass']-mass))/np.sum(mass)),
+             'mass_weighted_velocity_difference_percent': float(100*np.sum(mass*np.linalg.norm(bv-av,axis=1))/max(np.sum(mass*np.linalg.norm(av,axis=1)),1e-30)),
+             'maximum_thickness_difference_percent': float(100*abs(np.max(b['film-thickness'])-np.max(a['film-thickness']))/np.max(a['film-thickness']))}
+        q['pass'] = bool(q['mass_distribution_L1_percent'] <= 1 and q['mass_weighted_velocity_difference_percent'] <= 2 and q['maximum_thickness_difference_percent'] <= 2)
+        changes.append(q)
+    return {'pass': all(q['pass'] for q in changes), 'coverage': 'COMPLETE', 'changes': changes,
+            'limits_percent': {'mass_distribution_L1': 1, 'mass_weighted_velocity': 2, 'maximum_thickness': 2}}
+
+
 def sensitivity(s, m):
     """Same exact fields/forcing; compare 0.5 and 5 µs at 0.5 ms added film time."""
     arms = {}
@@ -444,7 +478,7 @@ def relax_alternative(s, m, qualified_step, start_probe=True):
         met.update(facet_fields=path, field_coverage='FINITE_NONNEGATIVE_THICKNESS', initial_pair=previous_pair,
                    numerical_qualification='EARLY_MATCHED_TIME_SCREEN_ONLY_INNER_RESIDUALS_UNAVAILABLE')
         adequate = met['within_recovery_bounds'] and met['film_ledger_error_percent'] <= .1
-        larger = met['printed_step_max_s'] > qualified_step * (1 + 1e-6)
+        larger = exceeds_screened_step(met, qualified_step)
         if not adequate or larger:
             m.update(status='NEXT_STEP_SENSITIVITY_REQUIRED' if adequate else 'NUMERICAL_RECOVERY_REQUIRED',
                      numerical_recovery_parent=previous_pair, active_target=None,
@@ -597,6 +631,108 @@ def reconcile_timeout(s, m):
     print('RECONCILED_TIMEOUT_NO_REPEAT_SOLVE', json.dumps(met), flush=True)
 
 
+def reconcile_boundary(s, m):
+    """Finish evidence from a reopened batch stopped before its next solve."""
+    start, end = m['verified_native_end'], m['active_target']
+    e = json.loads((OUT / f'completed-N{end}.json').read_text())
+    if native_iteration(s) != end or not s.settings.solution.run_calculation.iterate.is_active():
+        raise RuntimeError('Preserved idle batch boundary required')
+    current = state(s)
+    require_match(current['readback'], e['state']['readback'])
+    if film(s) != e['film']:
+        raise RuntimeError('Boundary film state differs from reopened receipt')
+    for kind in ['case', 'data']:
+        digest = remote_file_sha256(s, e['pair'][kind], str(WORK / 'scratch' / f'boundary-{kind}-{uuid.uuid4().hex}.sha256'))
+        if digest != e['pair'][kind + '_sha256']:
+            raise RuntimeError('Boundary pair hash differs')
+    met = collect(s, m, start, end, e['initial_film'], e['film'], e['initial_fields'], OUT / f'batch-N{start}-N{end}.trn')
+    met.update(output=str(OUT), controls=dict(e['controls']), pair=e['pair'], wall_seconds=None,
+               film_ms_per_wall_minute=None, execution_repeated=False,
+               boundary_review='CLIENT_STOPPED_AFTER_PAIRED_REOPEN_BEFORE_NEXT_SOLVE')
+    arrays, path = film_fields(s, f'film-fields-N{end}')
+    if not math.isclose(float(np.sum(arrays['film-mass'], dtype=float)), met['film_mass_kg'], rel_tol=2e-6, abs_tol=1e-9):
+        raise RuntimeError('Boundary facet mass/report differs')
+    met.update(facet_fields=path, field_coverage='FINITE_NONNEGATIVE_THICKNESS')
+    dump(OUT / f'endpoint-N{end}.json', {'pair': e['pair'], 'state': current, 'film': e['film'], 'metrics': met, 'reopen': 'PASS'})
+    m['blocks'].append(met)
+    adequate = met['within_recovery_bounds'] and met['film_ledger_error_percent'] <= .1
+    m.update(status='MID_FILM_STEP_SCREEN_READY' if adequate else 'NUMERICAL_RECOVERY_REQUIRED',
+             verified_native_end=end, latest_pair=e['pair'], latest_metrics=met, active_target=None,
+             idle=True, reason='Preserved batch boundary for larger-step qualification; zero repeated solve')
+    dump(MANIFEST, m)
+    print('BOUNDARY_RECONCILED_NO_SOLVE', json.dumps(met), flush=True)
+
+
+def mid_film_sensitivity(s, m, recover=False):
+    """Compare mature film stepping at equal time before faster development."""
+    source = m['mid_film_source'] if recover else {'pair': dict(m['latest_pair']), 'endpoint': str(OUT / f"endpoint-N{m['verified_native_end']}.json")}
+    if not recover:
+        m['mid_film_source'] = source
+        m['mid_film_previous_screen'] = dict(m['alternative_sensitivity'])
+    dump(MANIFEST, m)
+    parent = source['pair']['native_iteration']
+    arms = dict(m['mid_film_arms']) if recover else {}
+    plan = [('candidate20', 20e-6, 125), ('candidate12p5', 12.5e-6, 200)] if recover else [('reference', 2.5e-6, 1000), ('candidate25', 25e-6, 100), ('candidate50', 50e-6, 50)]
+    for label, dt, steps in plan:
+        restore_branch(s, m, source, f'mid-film-{label}-N{parent}')
+        controls(s, m, {'ewf-adaptive?': False, 'timestep-max': dt})
+        met = block(s, m, steps)
+        arrays, path = film_fields(s, 'matched-mid-film-fields')
+        arms[label] = {'metrics': met, 'fields': path, 'pair': dict(m['latest_pair']),
+                       'endpoint': str(OUT / f"endpoint-N{met['native_end']}.json")}
+        m['mid_film_arms'] = arms
+        dump(MANIFEST, m)
+        if label == 'reference':
+            if not met['within_recovery_bounds'] or met['film_ledger_error_percent'] > .1:
+                m.update(status='MID_FILM_REFERENCE_RECOVERY_REQUIRED', active_target=None)
+                dump(MANIFEST, m)
+                return
+            continue
+        a = np.load(arms['reference']['fields'])
+        if not np.allclose(a['centroids'], arrays['centroids'], atol=1e-12, rtol=0):
+            raise RuntimeError('Mid-film sensitivity facet order differs')
+        ref = arms['reference']['metrics']
+        if not math.isclose(ref['film_time_s'], met['film_time_s'], abs_tol=1e-12):
+            raise RuntimeError('Mid-film sensitivity horizons differ')
+        mass = a['film-mass']
+        av = np.stack([a[f'film-{x}-velocity'] for x in ['x', 'y', 'z']], axis=1)
+        bv = np.stack([arrays[f'film-{x}-velocity'] for x in ['x', 'y', 'z']], axis=1)
+        q = {'reference_step_s': 2.5e-6, 'qualified_fixed_step_s': dt, 'film_time_s': met['film_time_s'],
+             'added_film_time_s': met['added_film_time_s'], 'source_native_iteration': parent,
+             'mass_distribution_L1_percent': float(100*np.sum(np.abs(arrays['film-mass']-mass))/np.sum(mass)),
+             'mass_weighted_velocity_difference_percent': float(100*np.sum(mass*np.linalg.norm(bv-av,axis=1))/max(np.sum(mass*np.linalg.norm(av,axis=1)),1e-30)),
+             'maximum_thickness_difference_percent': float(100*abs(np.max(arrays['film-thickness'])-np.max(a['film-thickness']))/np.max(a['film-thickness'])),
+             'drainage_difference_over_accretion_percent': float(100*abs(met['drainage_kg_s']-ref['drainage_kg_s'])/max(abs(ref['accretion_kg_s']),1e-30)),
+             'equations': f'FROZEN_IDENTICAL_N{parent}_BULK_FIELDS', 'inner_residuals': 'UNAVAILABLE_NOT_COUNTED_AS_PASS'}
+        q['pass'] = bool(q['mass_distribution_L1_percent'] <= 1 and q['mass_weighted_velocity_difference_percent'] <= 2
+                       and q['maximum_thickness_difference_percent'] <= 2 and q['drainage_difference_over_accretion_percent'] <= 1
+                       and met['within_recovery_bounds'] and met['film_ledger_error_percent'] <= .1)
+        m.setdefault('mid_film_comparisons', []).append(q)
+        step_label = f'{dt*1e6:g}'.replace('.', 'p')
+        dump(ROOT_OUT / f'mid-film-sensitivity-{step_label}us.json', {'comparison': q, 'source': source, 'arms': arms})
+        print('MID_FILM_SENSITIVITY', json.dumps(q), flush=True)
+        if q['pass']:
+            m.update(mid_film_selected_arm=label, alternative_sensitivity=q)
+        dump(MANIFEST, m)
+        if q['pass'] and recover:
+            break
+        if not q['pass'] and not recover:
+            break
+    if not m.get('mid_film_selected_arm'):
+        m.update(status='MID_FILM_STEP_RECOVERY_REQUIRED', active_target=None)
+        dump(MANIFEST, m)
+        return
+    chosen = arms[m['mid_film_selected_arm']]
+    restore_branch(s, m, chosen, f'adaptive-mid-film-N{parent}')
+    dt = m['alternative_sensitivity']['qualified_fixed_step_s']
+    target = min(.5 if recover else .75, max(.1, 1.1*chosen['metrics']['peak_film_cfl']))
+    controls(s, m, {'ewf-adaptive?': True, 'courant-number': target, 'adapt-init-dt': dt,
+                    'adapt-tstp-inc': 1.15, 'adapt-tstp-dec': 2})
+    m['mid_film_adaptive_target'] = target
+    dump(MANIFEST, m)
+    relax_alternative(s, m, dt)
+
+
 def restore_branch(s, m, source, name):
     """Restore a verified developed pair, with unchanged fields and no solve."""
     global OUT, WORK
@@ -621,6 +757,7 @@ def restore_branch(s, m, source, name):
     m['report_paths'] = instrument(s, WORK / 'monitors')
     m.update(active_output=str(OUT), active_work=str(WORK), report_native_start=pair['native_iteration'],
              verified_native_end=pair['native_iteration'], latest_pair=pair,
+             latest_metrics=dict(endpoint['metrics']),
              controlled_delta=dict(endpoint['metrics']['controls']), active_target=None,
              status='DEVELOPED_BRANCH_PREPARING')
     dump(MANIFEST, m)
@@ -710,7 +847,7 @@ def full_bulk_development(s, m):
         adequate = met['within_recovery_bounds'] and met['film_ledger_error_percent'] <= .1
         # Adaptive reduction is accepted; growth beyond the developed-state
         # tested step requires another comparison, irrespective of timestep-max.
-        larger = met['printed_step_max_s'] > q['candidate_step_s'] * (1 + 1e-6)
+        larger = exceeds_screened_step(met, q['candidate_step_s'])
         if not adequate or larger:
             m.update(status='FULL_BULK_STEP_SENSITIVITY_REQUIRED' if adequate else 'FULL_BULK_NUMERICAL_RECOVERY_REQUIRED',
                      numerical_recovery_parent=previous_pair, active_target=None,
@@ -785,7 +922,7 @@ def develop(s, m):
 def main():
     global OUT, WORK
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('operation', choices=['prepare', 'probe', 'adaptive-probe', 'batch', 'repair-half', 'repair-segregated', 'repair-implicit', 'develop', 'reconcile-alternative', 'probe-relative', 'probe-frozen', 'sensitivity', 'grow-sensitivity', 'resume-grow-sensitivity', 'reconcile-sensitivity', 'develop-alternative', 'recover-adaptive', 'developed-sensitivity', 'full-bulk-development', 'reconcile-timeout', 'continue-alternative'])
+    parser.add_argument('operation', choices=['prepare', 'probe', 'adaptive-probe', 'batch', 'repair-half', 'repair-segregated', 'repair-implicit', 'develop', 'reconcile-alternative', 'probe-relative', 'probe-frozen', 'sensitivity', 'grow-sensitivity', 'resume-grow-sensitivity', 'reconcile-sensitivity', 'develop-alternative', 'recover-adaptive', 'developed-sensitivity', 'full-bulk-development', 'reconcile-timeout', 'continue-alternative', 'reconcile-boundary', 'mid-film-sensitivity', 'mid-film-recovery'])
     parser.add_argument('--candidate-step-us', type=int, choices=[10, 20, 50], default=10)
     args = parser.parse_args()
     OUT.mkdir(parents=True, exist_ok=True)
@@ -801,6 +938,19 @@ def main():
         OUT, WORK = Path(m.get('active_output', str(ROOT_OUT))), PureWindowsPath(m.get('active_work', str(ROOT_WORK)))
         if args.operation == 'reconcile-timeout':
             reconcile_timeout(s, m)
+            return
+        if args.operation == 'reconcile-boundary':
+            reconcile_boundary(s, m)
+            return
+        if args.operation == 'mid-film-sensitivity':
+            if m['status'] != 'MID_FILM_STEP_SCREEN_READY':
+                raise RuntimeError('Preserved passing boundary required before mid-film test')
+            mid_film_sensitivity(s, m)
+            return
+        if args.operation == 'mid-film-recovery':
+            if m['status'] != 'MID_FILM_STEP_RECOVERY_REQUIRED':
+                raise RuntimeError('Preserved rejected mid-film arm required')
+            mid_film_sensitivity(s, m, recover=True)
             return
         if args.operation == 'continue-alternative':
             if m['status'] not in ['RECONCILED_CONNECTION_TIMEOUT', 'BLOCK_COMPLETE']:

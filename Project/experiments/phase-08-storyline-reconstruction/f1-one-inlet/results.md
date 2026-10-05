@@ -44,9 +44,9 @@
 
 ## Retained liquid occupies the lower region and outer wall
 
-| Reference snapshot | Vertical liquid distribution | Inlet-plane circulation |
-| --- | --- | --- |
-| F1-26.81-n10000 | ![F1-26.81-n10000 liquid](figures/F1-26.81-n10000-liquid.png) | ![F1-26.81-n10000 inlet-vectors](figures/F1-26.81-n10000-inlet-vectors.png) |
+| Reference snapshot | Vertical liquid distribution                                  | Inlet-plane circulation                                                     |
+| ------------------ | ------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| F1-26.81-n10000    | ![F1-26.81-n10000 liquid](figures/F1-26.81-n10000-liquid.png) | ![F1-26.81-n10000 inlet-vectors](figures/F1-26.81-n10000-inlet-vectors.png) |
 
 | Item | Retained liquid occupies the lower region and outer wall |
 | --- | --- |

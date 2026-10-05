@@ -775,14 +775,14 @@ next_required_action: >-
 stage3_server1_film_development:
   authority: human_2026_10_05_fastest_numerically_adequate_steady_film
   server_id: "1"
-  status: RUNNING
+  status: LOWER_TARGET_RECOVERY_RUNNING
   parent_native_iteration: 5080
   setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/film-development/setup.md
   manifest: PyAnsys/output/phase72a-stage3-film-development-server1/20261005/run-manifest.json
   bulk_and_film_initialization: FORBIDDEN
   parent_preserved_reopened: PASS
-  last_verified_native_iteration: 11390
-  active_native_target: 12390
+  last_verified_native_iteration: 22615
+  active_native_target: 22715
   allowed_film_subiterations: 30
   stationary_film: false
   server3: SEPARATE_DO_NOT_TOUCH
@@ -799,7 +799,7 @@ stage3_server1_film_development:
   candidate_requires_field_and_ledger_screen: true
   matched_time_50us_screen: PASS
   matched_time_50us_weighted_velocity_difference_percent: 0.36921313
-  screened_maximum_step_s: 0.00005
+  screened_maximum_step_s: 2e-05
   adaptive_courant_target: 0.2
   adaptive_growth: 1.15
   adaptive_reduction: 2.0
@@ -813,9 +813,18 @@ stage3_server1_film_development:
   recovery_probe_launched: true
   resume_requires_explicit_human_request: false
   resume_authority: explicit_human_resume_2026_10_05
-  latest_film_time_s: 0.06019226250414562
-  latest_film_mass_kg: 3.483715295930308
-  latest_peak_film_courant: 0.1140387
-  latest_film_ledger_error_percent: 0.013697960080373557
+  latest_film_time_s: 0.2411162267606407
+  latest_film_mass_kg: 6.374295873654162
+  latest_peak_film_courant: 0.3101497
+  latest_film_ledger_error_percent: 0.01343701818949071
   recovered_connection_batch: "10390-11390"
   connection_recovery_repeated_updates: 0
+  mid_film_requalification_parent: 13390
+  mid_film_reference_step_s: 0.0000025
+  mid_film_candidates_step_s: [0.000025, 0.00005]
+  mid_film_matched_added_time_s: 0.0025
+  mid_film_25us_screen: FAIL_LEDGER_0_1339_PERCENT
+  mid_film_20us_screen: PASS
+  mid_film_rejected_endpoint: 23615
+  mid_film_rejected_peak_courant: 1.227057
+  current_recovery_parent: 22615

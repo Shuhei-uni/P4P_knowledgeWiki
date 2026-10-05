@@ -18,6 +18,7 @@
 | First repair | Retain fixed 1 µs; allow 30 film subiterations; 100-update probe |
 | First adaptive candidate | Courant target 0.05; growth 1.3; reduction 2; initial-step setting 1 µs; retain film fields and clock |
 | Step evidence | Printed accepted steps plus saved native film clock; do not treat timestep-max as an adaptive ceiling |
+| Printed-step precision | Native step messages use two decimal places in scientific notation; compare their maxima at that precision and separately check the saved full-precision final step; report precision must not create a false step-growth event |
 | Growth policy | Qualify a short probe, then a 1000-update batch before raising the target |
 | Candidate targets | 0.05 → 0.075 → 0.10 → 0.15 → 0.20; only while inner-solve and accounting evidence remain adequate |
 | Recovery | Preserve poor endpoints; return to a verified parent; allow 60 or 100 inner iterations or reduce the step/target |
@@ -34,8 +35,12 @@
 | Screened adaptive continuation | Start from the best passing matched-time pair; temporarily retain its frozen bulk fields; target 1.3 times its tested peak Courant, bounded to 0.1–0.5; growth 1.3, reduction 2; 100-update probe then 1000-update batches |
 | Adaptive step growth outside screen | Preserve endpoint and previous qualified pair; stop for another matched-time contrast if any accepted step exceeds the tested step; native timestep-max is not an adaptive ceiling |
 | Courant-spike recovery | Preserve rejected N8190; resume exact passing N7190 after live pause-state verification; fixed 5 µs ×100 first, then adaptive target 0.2, growth 1.15, reduction 2; inspect a 100-update probe and 1000-update development batches |
+| Mid-development speed qualification | Preserved N13390 fields at 75.662 ms; fixed 2.5 µs ×1000 reference, then 25 µs ×100 and, if passing, 50 µs ×50 from the same pair; each adds 2.5 ms; original field/ledger/Courant criteria and drainage difference ≤1% of accretion |
+| Qualified mid-development continuation | Restore the largest passing candidate pair; adaptive target 1.1 × its tested peak Courant, bounded to 0.1–0.75; growth 1.15, reduction 2; 100-update probe and 1000-update batches; preserve/review if actual accepted steps exceed the newly screened range |
+| Mid-development ledger recovery | The 25 µs ledger fails at 0.1339%; errors recur through the window. Reuse the preserved 2.5 µs reference and identical N13390 source; test 20 µs ×125, then 12.5 µs ×200 if needed; each adds 2.5 ms; retain the 0.1% ledger criterion; cap the recovery adaptive target at 0.5 |
 | Alternative stationary screen | Three consecutive 1000-update windows with drainage deficit and absolute storage/accretion ≤1%, ledger ≤0.1%, finite positive facet fields; provisional while inner residuals are unavailable and bulk remains frozen |
 | Full goal qualification | After frozen-film stationarity, repeat a developed-film timestep comparison, restore all bulk equations and verify sustained film stationarity with updating bulk flow; do not close the goal at the frozen screen |
+| Final field persistence | Inspect the final three consecutive full-bulk 1000-update snapshots; adjacent mass-distribution L1 change ≤1%, film-mass-weighted velocity change ≤2%, and maximum thickness change ≤2%; inventory/rate agreement alone does not establish a stationary spatial film |
 | Compute measure | Film milliseconds per wall minute; subiteration cost counts against any speed gain |
 | Native batch size | 100 for a numerical contrast; approximately 1000 for development and sustained checks |
 | Film-time review points | 10, 50, 100, 200 and 500 ms since the dry A start |

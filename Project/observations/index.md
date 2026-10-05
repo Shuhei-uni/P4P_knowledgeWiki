@@ -1,8 +1,7 @@
 # Cross-experiment observations
 
-These six records preserve historical interpretations that compare more than
-one experiment. They retain the original evidence boundary, negative or
-inconclusive status, and uncertainty labels; they are not a project-wide
+These records preserve interpretations that compare more than
+one experiment. They retain each evidence boundary and uncertainty label; they are not a project-wide
 findings, decision, history, or progress database.
 
 - [01 — 08b/08c inlet-loading family](01-08b-08c-inlet-loading.md)
@@ -11,6 +10,7 @@ findings, decision, history, or progress database.
 - [04 — 010V2 EWF mechanism comparison](04-010v2-ewf-mechanism-comparison.md)
 - [05 — 010V2d/010V2d-2 global DPM interaction with EWF](05-010v2d-global-dpm-interaction.md)
 - [06 — 010V2 iteration-continuation checkpoints](06-010v2-iteration-continuation.md)
+- [07 — Wall-liquid interaction: roughness, E0/E2.7 and F3/F4](07-wall-liquid-interaction.md)
 
 The former source observation pages are recoverable from Git history. The
 Project copies retain the source/evidence boundary; machine-readable

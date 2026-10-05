@@ -13,6 +13,26 @@ OUT = ROOT / 'output/phase72a-stage3-film-development-server1/20261005'
 DEST = ROOT.parent / 'Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/film-development'
 
 
+def write_results(lines):
+    """Refresh numerical results while retaining authored figures and findings."""
+    path = DEST / 'results.md'
+    retained = []
+    if path.exists():
+        previous = path.read_text()
+        for label in ['selected case history', 'wall thickness views', 'transfer findings']:
+            start = f'<!-- BEGIN retained {label} -->'
+            end = f'<!-- END retained {label} -->'
+            if start in previous or end in previous:
+                if previous.count(start) != 1 or previous.count(end) != 1:
+                    raise RuntimeError(f'{label} markers are incomplete or duplicated')
+                first, last = previous.index(start), previous.index(end)
+                if last < first:
+                    raise RuntimeError(f'{label} markers are out of order')
+                retained.append(previous[first:last + len(end)])
+    generated = '\n'.join(lines).rstrip()
+    path.write_text('\n\n'.join([generated, *retained]) + '\n')
+
+
 def analyze():
     m = json.loads((OUT / 'run-manifest.json').read_text())
     blocks = m['blocks']
@@ -26,6 +46,9 @@ def analyze():
     fig2, health = plt.subplots(2, 1, figsize=(10, 7), sharex=True, constrained_layout=True)
     active = [p for p in branches if p.name.startswith('adaptive-') or p.name == 'full-bulk-development']
     plotted = active or [p for p in branches if p.name.startswith('matched-time-conservative') or p == list(branches)[-1]]
+    if m.get('mid_film_selected_arm'):
+        selected = m['mid_film_arms'][m['mid_film_selected_arm']]
+        plotted = [*plotted, Path(selected['metrics']['output'])]
     for folder, bb in branches.items():
         if folder not in plotted:
             continue
@@ -35,6 +58,13 @@ def analyze():
         if folder.name == 'adaptive-development' and m.get('adaptive_recoveries'):
             cutoff = m['adaptive_recoveries'][0]['restart']['pair']['native_iteration']
             bb = [b for b in bb if b['native_end'] <= cutoff]
+        if m.get('mid_film_source') and folder == Path(m['mid_film_source']['endpoint']).parent:
+            cutoff = m['mid_film_source']['pair']['native_iteration']
+            bb = [b for b in bb if b['native_end'] <= cutoff]
+        for recovery in m.get('adaptive_recoveries', []):
+            if folder == Path(recovery['restart']['endpoint']).parent:
+                cutoff = recovery['restart']['pair']['native_iteration']
+                bb = [b for b in bb if b['native_end'] <= cutoff]
         if not bb:
             continue
         label = folder.name if folder != OUT else 'Coupled film, 1 µs, 30 subiterations'
@@ -78,6 +108,9 @@ def analyze():
              '| Branch limit | Initial probes share N5080; adaptive recovery restarts passing N7190. Exclude rejected N8190 from selected field lineage; do not add sibling film times |',
              '| Fixed science | Full feed, R3, corrected absorber, bulk Coupled, film equations/forces/sources/boundaries and flow feedback |',
              f"| Bulk advancement | {'Original bulk equations restored; full-model film checks underway' if m.get('bulk_equations_restored') else 'Temporarily frozen during matched-time checks and relaxation; restoration required before goal closure'} |",
+             '| Applying the findings | [Findings to apply to another case](#findings-to-apply-to-another-case): observed gains, reusable procedure and transfer limits |',
+             '| Spatial film development | [Wall-film thickness on the separator](#wall-film-thickness-on-the-separator): shared-scale saved-snapshot comparison |',
+             '| Complete selected history | [Four-panel selected case history](#four-panel-selected-case-history): inventory, signed outlet flux, film mass, accretion and drainage |',
              '', '| Branch / native interval | Film step (µs) | Added time (ms) | Final film (kg) | Inner pass (%) | Final residual >1 (updates) | Ledger error (%) | Film ms / wall min |',
              '| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |']
     for b in blocks:
@@ -97,15 +130,39 @@ def analyze():
                   '| Numerical change | Fixed 5 µs ×100; then adaptive Courant 0.2, growth 1.15, reduction 2 |',
                   '| Figure lineage | Original passing branch through N7190, followed by the selected recovery; rejected continuation is excluded |']
     q = m.get('alternative_sensitivity')
+    if m.get('mid_film_comparisons'):
+        lines += ['', '| Mid-development matched-time arm | Mass L1 (%) | Velocity difference (%) | Thickness difference (%) | Drainage difference / accretion (%) | Ledger (%) | Peak Courant | Screen |',
+                  '| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |']
+        for comparison in m['mid_film_comparisons']:
+            step = comparison['qualified_fixed_step_s']
+            arm = next(v for v in m['mid_film_arms'].values() if abs(v['metrics']['final_accepted_step_s']-step) < 1e-12)
+            met = arm['metrics']
+            lines.append(f"| {step*1e6:g} µs versus 2.5 µs; identical N{comparison['source_native_iteration']} fields; +2.5 ms | {comparison['mass_distribution_L1_percent']:.6g} | {comparison['mass_weighted_velocity_difference_percent']:.6g} | {comparison['maximum_thickness_difference_percent']:.6g} | {comparison['drainage_difference_over_accretion_percent']:.6g} | {met['film_ledger_error_percent']:.6g} | {met['peak_film_cfl']:.6g} | {'PASS' if comparison['pass'] else 'FAIL'} |")
+        lines += ['', '| Mid-development decision | Evidence |', '| --- | --- |',
+                  '| 25 µs rejected | 0.1339% ledger error exceeds 0.1%; field agreement alone does not qualify the step |',
+                  '| Smaller candidates | 20 µs, then 12.5 µs if needed; reuse the preserved reference and same 2.5 ms horizon |']
     if q:
         lines += ['', '| Matched film-time comparison | Observation |', '| --- | --- |',
-                  f"| Native film time | {q['film_time_s']*1000:.6g} ms; identical frozen N5080 bulk fields |",
+                  f"| Native film time | {q['film_time_s']*1000:.6g} ms; {q['equations']} |",
                   f"| Reference / candidate step | {q['reference_step_s']*1e6:.6g} / {q['qualified_fixed_step_s']*1e6:.6g} µs |",
                   f"| Mass-distribution L1 difference | {q['mass_distribution_L1_percent']:.6g}% |",
                   f"| Film-mass-weighted velocity difference | {q['mass_weighted_velocity_difference_percent']:.6g}% |",
                   f"| Maximum thickness difference | {q['maximum_thickness_difference_percent']:.6g}% |",
                   f"| Predeclared local screen | {'PASS' if q['pass'] else 'FAIL'}; applies to this state and time range |",
                   '| Inner-solve limit | No inner residuals available from the alternative solver; no tolerance-pass claim |']
+    parent = json.loads((OUT / 'parent-state.json').read_text())
+    parent_bulk = parent['state']['readback']['fields']['v2-total-liquid-mass'][0]
+    parent_film = parent['state']['readback']['fields']['p72a-e2.7-ewf-film-mass-total'][0]
+    endpoint = json.loads((Path(b['output']) / f"endpoint-N{b['native_end']}.json").read_text())
+    bulk = endpoint['state']['readback']['fields']['v2-total-liquid-mass'][0]
+    lines += ['', '| Total liquid inventory | Bulk phase-2 liquid (kg) | EWF film (kg) | Sum (kg) |',
+              '| --- | ---: | ---: | ---: |',
+              f'| Startup endpoint N5080 | {parent_bulk:.6f} | {parent_film:.6f} | {parent_bulk+parent_film:.6f} |',
+              f"| Latest saved state N{b['native_end']} | {bulk:.6f} | {b['film_mass_kg']:.6f} | {bulk+b['film_mass_kg']:.6f} |",
+              '', '| Inventory interpretation | Limit |', '| --- | --- |',
+              '| Definition | Bulk Eulerian phase-2 liquid plus EWF film; diagnostic DPM particles are excluded |',
+              '| Frozen development | Bulk inventory is held by the disabled bulk equations; its constant value is not proof of bulk stationarity. Film accumulation increases the sum. Restore all bulk equations to judge full-model inventory and conservation. |',
+              '| Physical rate | The film storage rate uses actual film time. Do not assign a physical bulk storage rate from steady pseudo-time updates. |']
     lines += ['', '| Latest complete window | Rate / interpretation |', '| --- | --- |',
               f"| Accretion / drainage / storage | {b['accretion_kg_s']:.6f} / {b['drainage_kg_s']:.6f} / {b['storage_kg_s']:.6f} kg/s |",
               f"| Drainage deficit | {b['drainage_deficit_percent']:.6f}% |",
@@ -121,7 +178,7 @@ def analyze():
               '| Intent / criteria | [Setup](setup.md) |',
               '| Native reports, transcripts, residuals, clocks and paired checkpoints | [Manifest](../../../../../../PyAnsys/output/phase72a-stage3-film-development-server1/20261005/run-manifest.json) |',
               '| Reproducible figures | [Analysis script](../../../../../../PyAnsys/scripts/analysis/analyze_phase72a_stage3_film_development.py) |', '']
-    (DEST / 'results.md').write_text('\n'.join(lines))
+    write_results(lines)
     (OUT / 'analysis-summary.json').write_text(json.dumps({'status': m['status'], 'blocks': blocks, 'figures': [str(DEST / 'film-development.png'), str(DEST / 'film-solver-health.png')], 'visual_qa': 'PENDING'}, indent=2))
     print('ANALYSIS_COMPLETE', len(blocks), flush=True)
 
