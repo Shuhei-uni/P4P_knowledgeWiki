@@ -1,0 +1,44 @@
+job:
+  id: phase72a-stage3-slit154k-server3-20261005
+  mode: hypothesis-test
+  manifest: PyAnsys/output/phase72a-stage3-slit154k-server3/20261005/job-manifest.json
+  worker_log: PyAnsys/output/phase72a-stage3-slit154k-server3/20261005/worker.log
+
+runner:
+  command:
+    - PyAnsys/.venv/bin/python
+    - PyAnsys/scripts/setup/run_phase72a_stage3_slit154k.py
+    - run
+  cwd: .
+  log: PyAnsys/output/phase72a-stage3-slit154k-server3/20261005/run-runner.log
+
+completion:
+  required_files:
+    - path: PyAnsys/output/phase72a-stage3-slit154k-server3/20261005/final-histories.json
+      min_size_bytes: 1000
+    - path: PyAnsys/output/phase72a-stage3-slit154k-server3/20261005/final-reopen.json
+      min_size_bytes: 1000
+  verifier_command:
+    - PyAnsys/.venv/bin/python
+    - PyAnsys/scripts/analysis/analyze_phase72a_stage3_slit154k.py
+  verifier_cwd: .
+  verifier_log: PyAnsys/output/phase72a-stage3-slit154k-server3/20261005/analysis-runner.log
+
+codex:
+  executable: codex
+  cwd: .
+  trigger_on: [COMPLETE, BLOCKED]
+  log: PyAnsys/output/phase72a-stage3-slit154k-server3/20261005/codex-handoff.log
+  prompt: >-
+    The requested Server 3 vertical-slit 154k repeat of the early-EWF startup has
+    reached a terminal state. Read its run and job manifests under
+    PyAnsys/output/phase72a-stage3-slit154k-server3/20261005 and its canonical
+    Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/slit154k
+    setup/results. If complete, audit the final N5080 pair, all 31 native reports,
+    exact ramp schedule, film clock and inner-film adequacy, inspect the generated
+    figures, update compact phase-state and report the evidence to the human.
+    The supplied geometry and mesh change together; do not call it mesh convergence.
+    If blocked, preserve the latest valid pair, diagnose the specific failure and
+    recover within the exact user-selected recipe when equivalent. Do not silently
+    change the film timestep, initialization or startup schedule. Do not blindly
+    rerun and do not submit any further horizon after the requested 3500 updates.

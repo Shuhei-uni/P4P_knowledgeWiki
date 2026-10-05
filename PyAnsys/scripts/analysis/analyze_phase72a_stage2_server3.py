@@ -36,6 +36,29 @@ def main():
     clock0=m['parent_film_clock_s']
     t=np.array([clocks[n][0] for n in ids])
     dt=np.diff(np.r_[clock0,t])
+    # Remove clock-print quantization only when the native controller rule
+    # reconstructs every printed clock and every saved endpoint independently.
+    prepared=json.loads((OUT/'prepared-reopen.json').read_text())
+    controls=dict(prepared['state']['film_model'])
+    repairs={r['native_iteration']:r['delta'] for r in m.get('numerical_repairs',[])}
+    step=prepared['film']['film_timestep']
+    exact_steps=[];exact_clocks=[];clock=clock0
+    for n in ids:
+        controls.update(repairs.get(n-1,{}))
+        if not controls['ewf-adaptive?']:
+            step=controls['timestep-max']
+        exact_steps.append(step);clock+=step;exact_clocks.append(clock)
+        cfl=h['p72a-e2.7-ewf-courant-max'][n]
+        if controls['ewf-adaptive?'] and cfl<controls['courant-number']/2:
+            step*=controls['adapt-tstp-inc']
+        elif controls['ewf-adaptive?'] and cfl>controls['courant-number']:
+            step/=controls['adapt-tstp-dec']
+    exact_map=dict(zip(ids,exact_clocks))
+    exact_verified=np.max(np.abs(np.array(exact_clocks)-t))<=5.1e-8 and all(abs(exact_map[b['native_end']]-b['native_film_clock_s'])<1e-10 for b in m['blocks'])
+    rate_time_basis='Rounded native clock differences; individual rates include print quantization'
+    if exact_verified:
+        t=np.array(exact_clocks);dt=np.array(exact_steps)
+        rate_time_basis='Adaptive-law steps verified against every printed clock and saved native endpoint; no clock-print quantization in rates'
     mass=np.array([h['p72a-e2.7-ewf-film-mass-total'][n] for n in ids])
     drain=np.array([h['p72a-e2.7-ewf-outflow-mass-total'][n] for n in ids])
     acc=np.array([h['p72a-e2.7-ewf-secondary-phase-mass-total'][n] for n in ids])
@@ -77,7 +100,13 @@ def main():
     fig.savefig(OUT/'film-convergence.png',dpi=160)
     fig.savefig(RECORD/'film-convergence.png',dpi=160)
     plt.close(fig)
-    latest=m['blocks'][-1]
+    latest=dict(m['blocks'][-1])
+    if exact_verified:
+        mask=np.array([latest['native_start']<n<=latest['native_end'] for n in ids])
+        latest['accretion_kg_s']=float(np.sum(acc[mask]*dt[mask]))/latest['added_film_time_s']
+        latest['drainage_deficit_percent']=100*(latest['accretion_kg_s']-latest['drainage_kg_s'])/latest['accretion_kg_s']
+        latest['film_ledger_error_percent']=100*abs(latest['storage_kg_s']+latest['drainage_kg_s']-latest['accretion_kg_s'])/latest['accretion_kg_s']
+        latest['rate_time_basis']=rate_time_basis
     elapsed=m['blocks'][-1]['native_film_clock_s']-clock0
     gain=mass[-1]-parent['p72a-e2.7-ewf-film-mass-total'][0]
     lost=drain[-1]-parent['p72a-e2.7-ewf-outflow-mass-total'][0]
@@ -86,6 +115,7 @@ def main():
              'overall_storage_kg_s':gain/elapsed,'overall_ledger_error_percent':100*abs(gain+lost-integrated)/integrated,
              'latest':latest,'native_report_count':len(h),'film_residual_updates':len(inner),
              'stationarity':'UNQUALIFIED; apply sustained-window screen and numerical adequacy',
+             'rate_time_basis':rate_time_basis,'exact_step_reconstruction_verified':bool(exact_verified),
              'time_precision':'Endpoint exact; intermediate printed clocks rounded to approximately 0.05 microseconds'}
     (OUT/'analysis-summary.json').write_text(json.dumps(summary,indent=2)+'\n')
     rows=[('Status',m['status']),('Verified native endpoint',f'N{ids[-1]}'),('Additional updates',str(len(ids))),
@@ -99,7 +129,7 @@ def main():
           ('Saved-endpoint reopen',m.get('final_reopen','MISSING')),('Steady film','Not qualified by this record')]
     text='# Stage 2 — Server 3 aggressive continuation result\n\n| Measure | Verified evidence |\n| --- | --- |\n'
     text+=''.join(f'| {k} | {v} |\n' for k,v in rows)
-    text+='\n![Film continuation histories](film-convergence.png)\n\nNative reports and final EWF subiteration residuals; rates use successive cumulative mass and film-clock differences. Intermediate clocks are rounded.\n\n'
+    text+='\n![Film continuation histories](film-convergence.png)\n\nNative reports and final EWF subiteration residuals. '+rate_time_basis+'.\n\n'
     text+='| Evidence / limit | Record |\n| --- | --- |\n'
     text+='| Controlled delta and parent | [Setup](setup.md) |\n'
     text+='| Machine state and paired endpoint hashes | [Run manifest](../../../../../PyAnsys/output/phase72a-stage2-server3/20261005/run-manifest.json) |\n'

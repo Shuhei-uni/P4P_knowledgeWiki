@@ -8,17 +8,73 @@
         "type": "tabs",
         "children": [
           {
+            "id": "e09f1fe2acfb2d20",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/slit154k/results.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "results"
+            }
+          },
+          {
+            "id": "594945fc398a7a84",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Project/experiments/phase-08-storyline-reconstruction/results.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "results"
+            }
+          },
+          {
             "id": "314ad225678df662",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Project/experiments/phase-07b-full-geometry-liquid-removal/shuhei-transfer-review.md",
-                "mode": "preview",
+                "file": "Project/experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/case-history-N45606.md",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "shuhei-transfer-review"
+              "title": "case-history-N45606"
+            }
+          },
+          {
+            "id": "76f7bc0c11dedd45",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Project/experiments/phase-07-2a-wall-liquid-routing/roughness-family/results.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "results"
+            }
+          },
+          {
+            "id": "12bb532c6e6ec91b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/results.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "results"
             }
           }
         ]
@@ -99,7 +155,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Project/experiments/phase-07b-full-geometry-liquid-removal/shuhei-transfer-review.md",
+                "file": "Project/experiments/phase-08-storyline-reconstruction/results.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +174,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Project/experiments/phase-07b-full-geometry-liquid-removal/shuhei-transfer-review.md",
+                "file": "Project/experiments/phase-08-storyline-reconstruction/results.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -161,7 +217,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Project/experiments/phase-07b-full-geometry-liquid-removal/shuhei-transfer-review.md",
+                "file": "Project/experiments/phase-08-storyline-reconstruction/results.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -188,45 +244,52 @@
       "bases:Create new base": false
     }
   },
-  "active": "dfbf2f0d5c3490a1",
+  "active": "e09f1fe2acfb2d20",
   "lastOpenFiles": [
-    "PyAnsys/output/phase72a-stage2-server3/20261005/moderate-restart/loaded-parent.json",
-    "PyAnsys/output/phase72a-stage2-server3/20261005/moderate-restart/parent-load.txt",
-    "PyAnsys/output/phase72a-stage2-server3/20261005/moderate-restart/job.yaml",
-    "Project/experiments/phase-07b-full-geometry-liquid-removal/results.md",
-    "PyAnsys/output/phase72a-stage2-server3/20261005/moderate-restart/run-manifest.json",
-    "PyAnsys/output/phase72a-stage2-server3/20261005/moderate-restart",
-    "Project/experiments/phase-07b-full-geometry-liquid-removal/CONTEXT.md",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/slit154k/setup.md",
+    "Project/experiments/phase-08-storyline-reconstruction/results.md",
+    "PyAnsys/output/phase72a-stage3-film-development-server1/20261005/adaptive-recovery-from-N7190/film-inner-N12390-N13390.json",
+    "PyAnsys/output/phase72a-stage3-film-development-server1/20261005/adaptive-recovery-from-N7190/carrier-N12390-N13390.json",
+    "PyAnsys/output/phase72a-stage3-film-development-server1/20261005/adaptive-recovery-from-N7190/clocks-N12390-N13390.json",
+    "PyAnsys/output/phase72a-stage3-film-development-server1/20261005/adaptive-recovery-from-N7190/batch-N12390-N13390.trn",
+    "PyAnsys/output/phase72a-stage3-film-development-server1/20261005/adaptive-recovery-from-N7190/completed-N13390.json",
+    "PyAnsys/output/phase72a-stage3-film-development-server1/20261005/adaptive-recovery-from-N7190/batch-N12390-N13390.txt",
+    "PyAnsys/output/phase72a-stage3-film-development-server1/20261005/adaptive-recovery-from-N7190/film-fields-N12390.json",
+    "PyAnsys/output/phase72a-stage3-film-development-server1/20261005/adaptive-recovery-from-N7190/film-fields-N12390.npz",
+    "PyAnsys/output/phase72a-stage3-film-development-server1/20261005/adaptive-recovery-from-N7190/endpoint-N12390.json",
+    "PyAnsys/output/phase72a-stage3-film-development-server1/20261005/adaptive-recovery-from-N7190/film-inner-N11390-N12390.json",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/slit154k/figures/film-development.png",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/slit154k/figures/startup-comparison.png",
+    "Project/experiments/phase-08-storyline-reconstruction/figures/historical-08b-bulk-outlet-comparison.png",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/results.md",
     "Project/experiments/phase-07-2a-wall-liquid-routing/roughness-family/results.md",
-    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/results.md",
-    "PyAnsys/output/phase72a-stage2-server3/20261005/endpoint-N45906.json",
-    "PyAnsys/output/phase72a-stage2-server3/20261005/film-residuals-N45806-N45906.json",
-    "PyAnsys/output/phase72a-stage2-server3/20261005/carrier-residuals-N45806-N45906.json",
-    "PyAnsys/output/phase72a-stage2-server3/20261005/clocks-N45806-N45906.json",
-    "PyAnsys/output/phase72a-stage2-server3/20261005/native-N45806-N45906.trn",
-    "PyAnsys/output/phase72a-stage2-server3/20261005/batch-N45806-N45906.txt",
-    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/aggressive-server3/results.md",
-    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/aggressive-server3/film-convergence.png",
-    "PyAnsys/output/phase72a-stage2-server3/20261005/film-convergence.png",
-    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/aggressive-server3/setup.md",
-    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/results.md",
-    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/figures/adaptive-aggressive-N6000-N8000.png",
-    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/setup.md",
-    "PyAnsys/output/phase72a-lineage-N45606/20261005/corrected-film-development.png",
-    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/figures/native-preview-reference-N33586-film-thickness.png",
     "Project/experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/case-history-N45606.md",
-    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/figures/native-adaptive-N6000-film-thickness.png",
-    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/figures/native-adaptive-N6000-velocity-magnitude.png",
-    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/figures/native-adaptive-N6000-phase-2-vof.png",
-    "PyAnsys/output/phase72a-lineage-N45606/20261005/separate-server1-branch.png",
-    "PyAnsys/output/phase72a-lineage-N45606/20261005/early-development-detail.png",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/results.md",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/baseline-control-handoff.md",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/monitoring-contract.md",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/results.md",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/slit154k/results.md",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/film-development/results.md",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/film-development/film-solver-health.png",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/film-development/film-development.png",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/film-development/setup.md",
+    "Project/experiments/phase-07b-full-geometry-liquid-removal/shuhei-transfer-review.md",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/figures/film-development.png",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/figures/startup-carrier-residuals.png",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/figures/ramp-comparison.png",
+    "PyAnsys/output/phase72a-stage2-server3/20261005/moderate-restart/plain-plots/03-film-solver-errors.png",
+    "PyAnsys/output/phase72a-stage2-server3/20261005/moderate-restart/plain-plots/02-film-balance.png",
+    "Project/experiments/phase-07b-full-geometry-liquid-removal/results.md",
+    "Project/experiments/phase-07b-full-geometry-liquid-removal/CONTEXT.md",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/aggressive-server3/results.md",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/aggressive-server3/setup.md",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/setup.md",
     "Project/experiments/phase-07-1a-absorber-convergence/solver-improvement-family/n1-coupled-global-pseudo-time/results.md",
     "Project/experiments/phase-07-1a-absorber-convergence/baseline-v2-virtual-liquid-outlet/results.md",
     "Project/experiments/phase-07-1a-absorber-convergence/interpretation.md",
     "Project/experiments/phase-07-1a-absorber-convergence/lifecycle-gate-review-20260911.md",
     "Project/experiments/phase-07-1a-absorber-convergence/liquid-development-and-dynamic-ring-family.md",
     "Project/experiments/phase-07-1a-absorber-convergence/CONTEXT.md",
-    "Project/experiments/phase-07-1a-absorber-convergence/index.md",
-    "Project/experiments/phase-07-1a-absorber-convergence/baseline-setup-record.md"
+    "Project/experiments/phase-07-1a-absorber-convergence/index.md"
   ]
 }

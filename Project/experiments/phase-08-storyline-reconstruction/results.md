@@ -195,7 +195,7 @@
 
 | SIMPLE package | Coupled recovery package |
 | --- | --- |
-| ![F1-26.81-simple-n10000 liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f1-one-inlet/figures/F1-26.81-simple-n10000-liquid.png>) <br>  <br> ![F1-26.81-simple-n10000 inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f1-one-inlet/figures/F1-26.81-simple-n10000-inlet-vectors.png>) | ![F1-26.81-n10000 liquid](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f1-one-inlet/figures/F1-26.81-n10000-liquid.png>) <br>  <br> ![F1-26.81-n10000 inlet-vectors](<C:/Users/Shuhei Yokkaichi/Documents/CFD/P4P_knowledgeWiki/Project/experiments/phase-08-storyline-reconstruction/f1-one-inlet/figures/F1-26.81-n10000-inlet-vectors.png>) |
+| ![F1-26.81-simple-n10000 liquid](f1-one-inlet/figures/F1-26.81-simple-n10000-liquid.png) <br>  <br> ![F1-26.81-simple-n10000 inlet-vectors](f1-one-inlet/figures/F1-26.81-simple-n10000-inlet-vectors.png) | ![F1-26.81-n10000 liquid](f1-one-inlet/figures/F1-26.81-n10000-liquid.png) <br>  <br> ![F1-26.81-n10000 inlet-vectors](f1-one-inlet/figures/F1-26.81-n10000-inlet-vectors.png) |
 
 | Finding 1a — the F1 numerical package changes the matched carrier response |
 | --- |
@@ -364,15 +364,15 @@ Historical [08b setup](../phase-02-parity-reset-and-pre-v2-qualification/purnant
 | F4 | remains explicitly provisional E2.7 EWF |
 | — | A later follow-up separately authorized one supplementary F1 single-face SIMPLE continuation from its untouched N2,000 source |
 
-| Setting | Native source → endpoint | Exact-setting total interval | Outcome |
-| --- | ---: | ---: | --- |
-| F3 20.11 m/s, 2.5%, unaveraged DPM | N11,000 → N13,000 | N10,000–N13,000 = 3,000 | Minimum reached |
-| F3 23.46 m/s, 2.5%, unaveraged DPM | N11,000 → N13,000 | N10,000–N13,000 = 3,000 | Minimum reached |
-| F3 32.14 m/s, 2.5%, unaveraged DPM | N11,000 → N13,000 | N10,000–N13,000 = 3,000 | Minimum reached |
-| F4 26.81 m/s, 5%, provisional E2.7 EWF | N11,000 → N13,000 | N10,000–N13,000 = 3,000 | Minimum reached; provisional |
-| Supplementary F1 single-face SIMPLE, 26.81 m/s | N2,000 → N3,000 | 3,000 (source manifest 2,000 + continuation 1,000) | Minimum reached; not a core-matrix point |
-| F3 26.81 m/s, 2.5% | Existing N10,000 → N15,000 | 5,000 | Existing evidence retained |
-| F3 26.81 m/s, 5% | Existing N10,000 → N20,000 | 10,000 | Existing evidence retained |
+| Setting                                        |   Native source → endpoint |                       Exact-setting total interval | Outcome                                  |
+| ---------------------------------------------- | -------------------------: | -------------------------------------------------: | ---------------------------------------- |
+| F3 20.11 m/s, 2.5%, unaveraged DPM             |          N11,000 → N13,000 |                            N10,000–N13,000 = 3,000 | Minimum reached                          |
+| F3 23.46 m/s, 2.5%, unaveraged DPM             |          N11,000 → N13,000 |                            N10,000–N13,000 = 3,000 | Minimum reached                          |
+| F3 32.14 m/s, 2.5%, unaveraged DPM             |          N11,000 → N13,000 |                            N10,000–N13,000 = 3,000 | Minimum reached                          |
+| F4 26.81 m/s, 5%, provisional E2.7 EWF         |          N11,000 → N13,000 |                            N10,000–N13,000 = 3,000 | Minimum reached; provisional             |
+| Supplementary F1 single-face SIMPLE, 26.81 m/s |            N2,000 → N3,000 | 3,000 (source manifest 2,000 + continuation 1,000) | Minimum reached; not a core-matrix point |
+| F3 26.81 m/s, 2.5%                             | Existing N10,000 → N15,000 |                                              5,000 | Existing evidence retained               |
+| F3 26.81 m/s, 5%                               | Existing N10,000 → N20,000 |                                             10,000 | Existing evidence retained               |
 
 | Item | Audited direct Fluent continuations - 2026-10-02 |
 | --- | --- |

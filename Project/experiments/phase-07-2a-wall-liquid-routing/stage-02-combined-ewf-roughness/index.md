@@ -1,5 +1,13 @@
 # Phase 7.2A Stage 2 — E2.7 EWF plus R3–R5 roughness
 
+| Current continuation — 5 October 2026 | Record |
+| --- | --- |
+| Server 3; full ownership | Continue original N45606 toward steady film |
+| Selected numerical route | Moderate adaptive target 0.06 and up to 30 film subiterations after larger-step probes |
+| Setup / results | [Continuation setup](aggressive-server3/setup.md), [current evidence](aggressive-server3/results.md) |
+| Parent identity | [N45606 full history](case-history-N45606.md) |
+| R5 | Cancelled |
+
 | Item | Phase 7.2A Stage 2 — E2.7 EWF plus R3–R5 roughness |
 | --- | --- |
 | three requested runs | are complete to native 16586 |

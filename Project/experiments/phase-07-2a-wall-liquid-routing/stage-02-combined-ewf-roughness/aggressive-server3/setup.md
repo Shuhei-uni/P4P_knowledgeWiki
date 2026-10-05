@@ -42,7 +42,7 @@
 | Preparation | Verify transferred case/data hashes, settings, inventory, boundary fluxes and film clock; save/reopen prepared child |
 | First probe | 100 updates; includes native film subiteration residuals |
 | Continuation | 1,000-update native TUI batches |
-| Bounded horizon | Up to 0.2 s total film time added since corrected restart; maximum 60,000 new updates after the step repair |
+| Bounded horizon | Up to 0.2 s total film time added since corrected restart; maximum 80,000 updates for the moderate restart |
 | Review points | Batch endpoints; inspect passage through 0.05 and 0.1 s before 0.2 s |
 | Checkpoints | Local FluentRuns disk; retain paired native autosaves and explicit batch endpoints |
 | Transcript | Native server transcript plus client transcript for every batch |
@@ -62,6 +62,11 @@
 | Target 0.15, 10 subiterations; N45606–N45706 | Accepted 6.415943 µs; 30/100 final film residuals above 1; no update met the 1e-5 stop value |
 | First repair at N45706 | Increase allowed film subiterations to 30; preserve fields and timestep controls |
 | Target 0.15, 30 subiterations; N45706–N45806 | No final residual above 1, but no update met the 1e-5 stop value; maximum final h residual 0.545342 |
-| Second repair at N45806 | Target 0.08; retain 30 allowed inner iterations; paired reopen passed |
+| Target 0.08, 30 subiterations; N45806–N45906 | Accepted 3.207972 µs; 69/100 updates met the stop value; 29/100 had a final residual above 1 |
+| Excluded branch | Preserve N45906; not selected for long compute or as a field parent |
+| Selected moderate restart | Return directly to verified original N45606; target 0.06, growth 1.3, reduction 2, initial setting 2 µs, 30 allowed subiterations |
+| Moderate 100-update probe | Accepted 2.2464 µs; all 100 film solves met 1e-5; endpoint reopened exactly |
+| First 1,000-update batch | Running N45706–N46706; later inner-film bursts observed; sustained qualification pending |
+| Moderate restart evidence | [Separate manifest](../../../../../PyAnsys/output/phase72a-stage2-server3/20261005/moderate-restart/run-manifest.json) |
 | Control meaning | [Fluent 2025 R2 §30.4](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_ewf_sec_eqns.html) documents implicit-film subiterations and stop value |
 | Interpretation | Faster accepted steps require an inner-solve check; smooth inventory alone does not qualify the aggressive route |

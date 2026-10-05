@@ -50,8 +50,10 @@ steam-outlet diameter is `0.876 m`, correcting the former Project value of
 
 | Current Phase 7.2A lane | Scope and authority | Record |
 | --- | --- | --- |
+| Stage 3 vertical-slit supplied-mesh repeat | Server 3 owned by this repeat; native transfer from prepared A; 154,063 cells; same early-EWF startup schedule | [Setup](experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/slit154k/setup.md), [status](experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/slit154k/results.md) |
 | Stage 2 adaptive-film development | Server 3; verified N45606 transfer; aggressive-step probes and inner-film repair | [Continuation setup](experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/aggressive-server3/setup.md) |
-| Stage 3 early Coupled/EWF startup | Server 1; exact A bulk fields; R3/contact model; 500 low-feed updates before the original ramp | [Startup setup](experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/setup.md) |
+| Stage 3 accelerated film development | Resumed by the human; verified N7190 restart (38.404 ms, 2.738 kg); lower-target adaptive recovery underway; steady film pending | [Continuation results](experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/film-development/results.md) |
+| Stage 3 early Coupled/EWF startup | Server 1 N5080 complete; lower ramp continuity/storage/carryover; activation spike and late inner-film failures remain | [Startup result](experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/results.md) |
 | Stage 3 shortened reconstruction | Server 3; N8000 adaptive continuation complete; carrier scalars close; film 14.09% of reference; continuity remains high | [Stage 3 setup](experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/setup.md), [results](experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/results.md) |
 
 **Phase 7.2A was created by the human on 2026-09-22.** Its starting baseline

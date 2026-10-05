@@ -1,25 +1,78 @@
 phase_id: phase-07-2a-wall-liquid-routing
+stage3_slit154k_server3:
+  authority: human_2026_10_05_full_server3_supplied_vertical_slit_repeat
+  server_id: '3'
+  status: COMPLETE_NATIVE_RECOVERED_RESIDUAL_GAP
+  setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/slit154k/setup.md
+  results: Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/slit154k/results.md
+  manifest: PyAnsys/output/phase72a-stage3-slit154k-server3/20261005/run-manifest.json
+  prepared_reopen: PASS
+  smoke_reopen: PASS
+  last_verified_native_iteration: 5080
+  smoke_report_count: 31
+  job_manifest: PyAnsys/output/phase72a-stage3-slit154k-server3/20261005/resume-job-manifest.json
+  native_start: 1580
+  native_target: 5080
+  mapped_initial_bulk_liquid_kg: 31.43603815109843
+  mesh_cells: 154063
+  lower_collector_cells: 837
+  requested_updates: 3500
+  low_hold_updates: 500
+  ramp_updates: 2000
+  target_hold_updates: 1000
+  film_step_s: 1.0e-06
+  initialization: NATIVE_INTERPOLATED_A_NO_BULK_REINITIALIZATION
+  previous_server3_endpoint_preserved: 46806
+  geometry_and_mesh_change_together: true
+  remaining_updates_at_resume: 1530
+  resume_reopen: PASS
+  pause_checkpoint_native_iteration: 3550
+  final_reopen: PASS
+  native_report_count: 31
+  further_iterations_after_timeout: 0
+  full_feed_residual_transcript: PARTIAL_CONNECTION_TIMEOUT
+  analysis_summary: PyAnsys/output/phase72a-stage3-slit154k-server3/20261005/analysis-summary.json
+  missing_streamed_updates: 437
+
 stage2_server3_aggressive:
   authority: human_2026_10_05_full_server3_continue_N45606_aggressive_ewf
   server_id: '3'
-  status: PREPARING
+  status: SUPERSEDED_SERVER3_PRESERVED_N46806
+  human_target: STEADY_FILM_CONFIRMED_STORAGE_RATE_TO_ZERO
   parent_native_iteration: 45606
   setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/aggressive-server3/setup.md
-  manifest: PyAnsys/output/phase72a-stage2-server3/20261005/run-manifest.json
-  courant_target: 0.15
+  manifest: PyAnsys/output/phase72a-stage2-server3/20261005/moderate-restart/run-manifest.json
+  excluded_probe_manifest: PyAnsys/output/phase72a-stage2-server3/20261005/run-manifest.json
+  excluded_probe_endpoint: 45906
+  excluded_probe_is_parent: false
+  courant_target: 0.06
   growth_factor: 1.3
   decrease_factor: 2.0
-  initial_step_setting_s: 0.000002
-  inherited_step_s: 0.000001728
+  initial_step_setting_s: 2.0e-06
+  allowed_film_subiterations: 30
   corrected_restart_film_horizon_s: 0.2
+  max_additional_updates: 80000
   initialization: FORBIDDEN_CONTINUE_EXACT_FIELDS
   checkpoint_location: LOCAL_FLUENTRUNS
-  stage3_N8000: PRESERVE_BEFORE_REPLACEMENT
+  stage3_N8000: PRESERVED_REOPEN_PASS
   R5: CANCELLED
+  last_verified_native_iteration: 46706
+  accepted_film_step_s: 2.2464e-06
+  probe_film_tolerance_pass_percent: 100
+  probe_updates: 100
+  worker_pid: 95314
+  active_native_target: 46706
+  inner_film_bursts_in_long_batch: OBSERVED_WINDOW_ADEQUACY_PENDING
+  job_manifest: PyAnsys/output/phase72a-stage2-server3/20261005/moderate-restart/job-manifest.json
+  reference_recovery_step_s: 1.728e-06
+  reference_recovery_adaptive: false
+  recovery_probe_target: 46806
+  recovery_job_manifest: PyAnsys/output/phase72a-stage2-server3/20261005/moderate-restart/reference-recovery-job-manifest.json
+  moderate_long_window_final_residual_above_1_percent: 33.4
 stage3_early_ewf_startup:
   authority: human_2026_10_05_full_server1_stage3_early_ewf
   server_id: '1'
-  status: RUNNING
+  status: COMPLETE_ANALYSED_STARTUP_IMPROVES_FILM_INNER_LIMIT
   setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/setup.md
   manifest: PyAnsys/output/phase72a-stage3-early-ewf-server1/20261005/run-manifest.json
   native_parent: 1580
@@ -35,13 +88,24 @@ stage3_early_ewf_startup:
   prepared_reopen: PASS
   exact_A_bulk_array_count: 17
   exact_A_bulk_arrays: PASS
-  last_verified_native_iteration: 1600
+  last_verified_native_iteration: 5080
   smoke_updates: 20
   smoke_report_coverage: PASS
   results: Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/results.md
   worker_pid: 89932
   job_manifest: PyAnsys/output/phase72a-stage3-early-ewf-server1/20261005/job-manifest.json
   run_submitted: false
+  analysis_summary: PyAnsys/output/phase72a-stage3-early-ewf-server1/20261005/analysis-summary.json
+  final_reopen: PASS
+  live_idle: true
+  actual_film_time_s: 0.0035
+  film_inner_failed_updates: 15
+  ramp_film_inner_failed_updates: 0
+  loading_continuity_peak_reduction_percent: 70.14508329
+  stationary_film: false
+  further_solve_selected: false
+  completion_return: CLI_FAILED_ACTIVE_WRITER_RECOVERED_DESKTOP
+
 stage3_reconstruction:
   authority: human_2026_10_05_full_server3_ownership_stage3
   status: ADAPTIVE_AGGRESSIVE_N8000_COMPLETE_ANALYSED
@@ -707,3 +771,51 @@ next_required_action: >-
   poll. Keep this local 4-rank lineage separate from Server 1's inaccessible
   18-rank N23586 fields and unverified pending command. Server 1 remains
   untouched. R5 remains cancelled.
+
+stage3_server1_film_development:
+  authority: human_2026_10_05_fastest_numerically_adequate_steady_film
+  server_id: "1"
+  status: RUNNING
+  parent_native_iteration: 5080
+  setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/film-development/setup.md
+  manifest: PyAnsys/output/phase72a-stage3-film-development-server1/20261005/run-manifest.json
+  bulk_and_film_initialization: FORBIDDEN
+  parent_preserved_reopened: PASS
+  last_verified_native_iteration: 11390
+  active_native_target: 12390
+  allowed_film_subiterations: 30
+  stationary_film: false
+  server3: SEPARATE_DO_NOT_TOUCH
+  excluded_30_subiteration_probe_failed_updates: 36
+  excluded_half_step_probe_failed_updates: 35
+  excluded_sequential_film_probe_failed_updates: 45
+  alternative_inner_residuals: UNAVAILABLE_NOT_COUNTED_AS_PASS
+  matched_time_10us_screen: PASS
+  matched_time_mass_distribution_difference_percent: 0.00107894
+  matched_time_weighted_velocity_difference_percent: 0.07229576
+  matched_time_maximum_thickness_difference_percent: 0.04267894
+  frozen_bulk_diagnostic_failed_updates: 36
+  next_candidate_fixed_step_s: 0.00005
+  candidate_requires_field_and_ledger_screen: true
+  matched_time_50us_screen: PASS
+  matched_time_50us_weighted_velocity_difference_percent: 0.36921313
+  screened_maximum_step_s: 0.00005
+  adaptive_courant_target: 0.2
+  adaptive_growth: 1.15
+  adaptive_reduction: 2.0
+  bulk_equations_temporarily_frozen: true
+  full_bulk_restore_and_developed_step_check: REQUIRED_BEFORE_GOAL_CLOSURE
+  pause_requested: false
+  last_passing_film_time_s: 0.03840375000000042
+  last_passing_film_mass_kg: 2.737597279630835
+  excluded_adaptive_endpoint: 8190
+  excluded_adaptive_peak_courant: 2.007516
+  recovery_probe_launched: true
+  resume_requires_explicit_human_request: false
+  resume_authority: explicit_human_resume_2026_10_05
+  latest_film_time_s: 0.06019226250414562
+  latest_film_mass_kg: 3.483715295930308
+  latest_peak_film_courant: 0.1140387
+  latest_film_ledger_error_percent: 0.013697960080373557
+  recovered_connection_batch: "10390-11390"
+  connection_recovery_repeated_updates: 0

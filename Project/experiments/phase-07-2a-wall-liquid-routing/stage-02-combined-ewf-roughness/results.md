@@ -1,5 +1,14 @@
 # Phase 7.2A Stage 2 — E2.7 plus R3/R4/R5 roughness results
 
+| Current Server 3 continuation | Record / limit |
+| --- | --- |
+| Human target | Steady film; retained mass can be nonzero, but its rate of change should approach zero |
+| Exact parent | N45606; preserve the independent local four-rank replay lineage |
+| Larger-step probes | 6.415943 and 3.207972 µs produced incomplete inner-film solves; preserved at N45906 and excluded as continuation parents |
+| Selected moderate restart | Original N45606 fields; target 0.06, growth 1.3, up to 30 inner iterations |
+| Contract / current evidence | [Setup](aggressive-server3/setup.md), [continuation results](aggressive-server3/results.md) |
+| Historical record | N45606 result and full lineage remain below |
+
 | Whole-case history | Evidence and coverage |
 | --- | --- |
 | [Field lineage through N45606](case-history-N45606.md) | Residuals, bulk/combined liquid inventory, phase-2 steamoutlet flux, film mass and accretion/drainage; setting markers and replay branches |
@@ -131,7 +140,9 @@ Native accepted-step display is rounded. Elapsed time and film balance use diffe
 | Plotted window | N17586–N33586; 16,000 updates = 16 ms. |
 | Run identity | Separate local four-rank replay from verified N17586; not the Server 1 N23586 field continuation. |
 
-![Local film inventory, thickness, native phase accretion rate and phase-2 steamoutlet flux through N33586](../../../../PyAnsys/output/phase72a-contact-absorber-local-20000/20261004T081120Z/film-four-histories.png)
+| Figure | Status | Original image path |
+| --- | --- | --- |
+| Local film inventory, thickness, native phase accretion rate and phase-2 steamoutlet flux through N33586 | Image file is absent from this checkout. | `../../../../PyAnsys/output/phase72a-contact-absorber-local-20000/20261004T081120Z/film-four-histories.png` |
 
 Raw native histories at fixed 1 µs film timestep. The dashed line marks the local N23586 replay endpoint, followed by the 10,000-update extension.
 
@@ -168,7 +179,9 @@ settings and fixed 1e-6 s EWF step. Combined with the earlier original-E2.7
 restart, this gives 10,000 updates and **0.01 s added film time**. Film remains
 thin, but a steady film has not been reached.
 
-![Full 10000-update film thickness, inventory and accretion/drainage history](../../../../PyAnsys/output/phase72a-contact-absorber-1us-10000/20261003T070351Z/film-time-10000.png)
+| Figure | Status | Original image path |
+| --- | --- | --- |
+| Full 10000-update film thickness, inventory and accretion/drainage history | Image file is absent from this checkout. | `../../../../PyAnsys/output/phase72a-contact-absorber-1us-10000/20261003T070351Z/film-time-10000.png` |
 
 | Endpoint | Restart updates | Maximum film thickness (mm) | Film inventory (kg) |
 | --- | ---: | ---: | ---: |
@@ -231,12 +244,12 @@ and [residual verification](../../../../PyAnsys/output/phase72a-contact-absorber
 |  | The [figure statistics](figures/E2.7-R3-R4-R5-summary.json) and [phase-2 outlet CSV](figures/E2.7-R3-R4-R5-phase2-outlet.csv) accompany the plot |
 |  | The [R3](../../../../PyAnsys/output/phase72a_stage2_e27_roughness/R3-20260926T223230Z/run-manifest.json), [R4](../../../../PyAnsys/output/phase72a_stage2_e27_roughness/R4-20260926T223500Z/run-manifest.json), and [R5](../../../../PyAnsys/output/phase72a_stage2_e27_roughness/R5-20260926T223501Z/run-manifest.json) manifests own the machine evidence and final-pair hashes |
 
-| Case | `k_s` (m) | First native iteration at `0.3 m` film-thickness cap | Final phase-2 `steamoutlet` flux (kg/s) | Tail-500 outlet mean (kg/s) | Final film mass (kg) | Final average film speed (m/s) | Final native wetted area (m²) | Final bulk liquid inventory (kg) |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| E2.7 parent | `0` | not reached by N13586 | `-1.735` | — | `5.842` | `82.41` | `50.338` | `62.989` |
-| E2.7+R3 | `5e-4` | `13723` | `-3.632` | `-3.632` | `2900.8` | `287775` | `48.581` | `62.781` |
-| E2.7+R4 | `1e-3` | `13685` | `-3.682` | `-3.678` | `2985.2` | `75098` | `49.484` | `61.672` |
-| E2.7+R5 | `2e-3` | `13665` | `-2.879` | `-2.884` | `2734.7` | `25088` | `48.389` | `62.545` |
+| Case        | `k_s` (m) | First native iteration at `0.3 m` film-thickness cap | Final phase-2 `steamoutlet` flux (kg/s) | Tail-500 outlet mean (kg/s) | Final film mass (kg) | Final average film speed (m/s) | Final native wetted area (m²) | Final bulk liquid inventory (kg) |
+| ----------- | --------: | ---------------------------------------------------: | --------------------------------------: | --------------------------: | -------------------: | -----------------------------: | ----------------------------: | -------------------------------: |
+| E2.7 parent |       `0` |                                not reached by N13586 |                                `-1.735` |                           — |              `5.842` |                        `82.41` |                      `50.338` |                         `62.989` |
+| E2.7+R3     |    `5e-4` |                                              `13723` |                                `-3.632` |                    `-3.632` |             `2900.8` |                       `287775` |                      `48.581` |                         `62.781` |
+| E2.7+R4     |    `1e-3` |                                              `13685` |                                `-3.682` |                    `-3.678` |             `2985.2` |                        `75098` |                      `49.484` |                         `61.672` |
+| E2.7+R5     |    `2e-3` |                                              `13665` |                                `-2.879` |                    `-2.884` |             `2734.7` |                        `25088` |                      `48.389` |                         `62.545` |
 
 | Item | Phase 7.2A Stage 2 — E2.7 plus R3/R4/R5 roughness results |
 | --- | --- |
@@ -510,7 +523,9 @@ and [residual verification](../../../../PyAnsys/output/phase72a-contact-absorber
 
 </details>
 
-![Corrected contact-absorber numerical screen](../../../../PyAnsys/output/phase72a-contact-absorber/20261002T222617Z/contact-absorber-qualification.png)
+| Figure | Status | Original image path |
+| --- | --- | --- |
+| Corrected contact-absorber numerical screen | Image file is absent from this checkout. | `../../../../PyAnsys/output/phase72a-contact-absorber/20261002T222617Z/contact-absorber-qualification.png` |
 
 | Item | All-liquid contact absorber trial |
 | --- | --- |
@@ -564,7 +579,9 @@ and [residual verification](../../../../PyAnsys/output/phase72a-contact-absorber
 
 </details>
 
-![Contact absorber 4000 iteration continuation](../../../../PyAnsys/output/phase72a-contact-absorber-continuation/20261003T001729Z/contact-absorber-qualification.png)
+| Figure | Status | Original image path |
+| --- | --- | --- |
+| Contact absorber 4000 iteration continuation | Image file is absent from this checkout. | `../../../../PyAnsys/output/phase72a-contact-absorber-continuation/20261003T001729Z/contact-absorber-qualification.png` |
 
 ## Contact absorber restart from original E2.7
 
@@ -622,7 +639,9 @@ and [residual verification](../../../../PyAnsys/output/phase72a-contact-absorber
 
 </details>
 
-![Contact absorber from original E2.7](../../../../PyAnsys/output/phase72a-contact-absorber-e27-restart/20261003T032636Z/contact-absorber-qualification.png)
+| Figure | Status | Original image path |
+| --- | --- | --- |
+| Contact absorber from original E2.7 | Image file is absent from this checkout. | `../../../../PyAnsys/output/phase72a-contact-absorber-e27-restart/20261003T032636Z/contact-absorber-qualification.png` |
 
 ## Contact absorber with E2.7 timestep
 
@@ -679,4 +698,6 @@ and [residual verification](../../../../PyAnsys/output/phase72a-contact-absorber
 
 </details>
 
-![Contact absorber with E2.7 timestep](../../../../PyAnsys/output/phase72a-contact-absorber-e27-timestep/20261003T050619Z/contact-absorber-qualification.png)
+| Figure | Status | Original image path |
+| --- | --- | --- |
+| Contact absorber with E2.7 timestep | Image file is absent from this checkout. | `../../../../PyAnsys/output/phase72a-contact-absorber-e27-timestep/20261003T050619Z/contact-absorber-qualification.png` |

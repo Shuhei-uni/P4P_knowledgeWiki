@@ -1,4 +1,4 @@
 interface:
   display_name: "PyAnsys Workflow"
-  short_description: "Inspect, build, run, or recover Fluent work."
+  short_description: "Run Fluent work or transfer a case to a new mesh."
   default_prompt: "Use $pyansys-workflow for the Fluent/PyFluent implementation required by the active experiment."

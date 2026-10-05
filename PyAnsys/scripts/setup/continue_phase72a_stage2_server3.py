@@ -23,7 +23,7 @@ from run_phase72a_e27_server1_continuation import native_iteration, pair_save, d
 from run_phase72a_adaptive_film import history, FILM, ROW
 from pyansys_fluent.common import remote_chdir
 from pyansys_fluent.remote_text import read_text
-from pyansys_fluent.stage4_native import ensure_remote_directory, remote_file_sha256, configure_autosave
+from pyansys_fluent.stage4_native import ensure_remote_directory, remote_file_sha256, configure_autosave, remote_free_bytes
 
 OUT = ROOT / 'output/phase72a-stage2-server3/20261005'
 WORK = PureWindowsPath(r'C:\Users\syok443\Documents\FluentRuns\Phase72A\ContactAbsorber\server3-aggressive-20261005')
@@ -294,6 +294,11 @@ def run(s, operation):
         dump(MANIFEST,m)
         analyse()
         return
+    disk=remote_free_bytes(s,str(WORK/'scratch'/f"free-before-long-run-{datetime.now(timezone.utc).strftime('%H%M%S%f')}.txt"))
+    m['long_run_disk_preflight']={'free_bytes':disk,'minimum_bytes':12*1024**3,'basis':'80k-update upper budget; paired local autosaves and batch endpoints plus margin'}
+    dump(MANIFEST,m)
+    if disk<12*1024**3:
+        raise RuntimeError('Insufficient disk for full checkpoint budget; preserve endpoints and replan retention in scope')
     while m['verified_native_end']-45606 < m['max_additional_updates']:
         met = block(s,m,1000)
         # Preserve the aggressive contrast, then require numerical repair for
@@ -323,7 +328,13 @@ def repair(s, operation):
     assert native_iteration(s)==m['verified_native_end']
     before=state(s)
     clock=film(s)
-    delta={'sub-iter-nums':30} if operation=='repair-inner' else {'courant-number':.08}
+    if operation=='repair-inner':
+        delta={'sub-iter-nums':30}
+    elif operation=='repair-reference':
+        delta={'ewf-adaptive?':False,'timestep-max':1.728e-6}
+        assert m['status']=='INNER_FILM_RECOVERY_REQUIRED'
+    else:
+        delta={'courant-number':.08}
     if operation=='repair-inner':
         assert before['film_model']['sub-iter-nums']==10
     elif operation=='repair-step':
@@ -339,11 +350,15 @@ def repair(s, operation):
     s.settings.file.read_case(file_name=pair['case'])
     s.settings.file.read_data(file_name=pair['data'])
     require_match(state(s)['readback'],after['readback'])
-    assert film(s)==clock
+    reopened_clock=film(s)
+    if operation=='repair-reference':
+        assert all(reopened_clock[k]==v for k,v in clock.items() if k not in ['film_timestep','film_cfl_max'])
+    else:
+        assert reopened_clock==clock
     m['controlled_delta']=dict(DELTA)
     if operation=='repair-step':
         m['max_additional_updates']=60000
-    m.setdefault('numerical_repairs',[]).append({'native_iteration':m['verified_native_end'],'delta':delta,'pair':pair,'reopen':'PASS','reason':'Severe final inner-film residuals in aggressive probe'})
+    m.setdefault('numerical_repairs',[]).append({'native_iteration':m['verified_native_end'],'delta':delta,'pair':pair,'reopen':'PASS','reason':'Severe final inner-film residuals; original accepted step is a controlled numerical recovery, not a qualified improvement'})
     m.update(status='PREPARED_VERIFIED',latest_pair=pair)
     dump(MANIFEST,m)
     print('NUMERICAL_REPAIR_VERIFIED',json.dumps(delta),flush=True)
@@ -352,7 +367,7 @@ def repair(s, operation):
 def main():
     global OUT,WORK,MANIFEST,VARIANT
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('operation',choices=['prepare','smoke','probe','repair-inner','repair-step','run'])
+    parser.add_argument('operation',choices=['prepare','smoke','probe','repair-inner','repair-step','repair-reference','run'])
     parser.add_argument('--variant',choices=['aggressive','moderate'],default='aggressive')
     args=parser.parse_args()
     VARIANT=args.variant
@@ -365,7 +380,7 @@ def main():
     try:
         if args.operation=='prepare':
             return prepare(s)
-        if args.operation in ['repair-inner','repair-step']:
+        if args.operation in ['repair-inner','repair-step','repair-reference']:
             return repair(s,args.operation)
         return run(s,args.operation)
     except Exception:

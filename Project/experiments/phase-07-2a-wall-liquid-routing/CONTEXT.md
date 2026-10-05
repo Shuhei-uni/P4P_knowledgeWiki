@@ -1,5 +1,21 @@
 # Phase Context — Phase 7.2A Wall-Liquid Routing and Steam-Outflow Carryover
 
+## Supplied vertical-slit mesh repeat on Server 3 — 5 October 2026
+
+| Item | Current contract |
+| --- | --- |
+| Human direction | Repeat the completed Stage 3 early-EWF startup on `Separator-vertical-slit-154k.msh.h5`; use Fluent native settings transfer |
+| Session authority | Full ownership and replacement of Server 3 explicitly granted; supersedes its Stage 2 continuation placement |
+| Reference | Exact prepared A case/data at N1580 from completed Server 1 early-EWF startup |
+| Selected delta | Supplied 154,063-cell vertical-slit geometry and mesh; required collector partition and boundary correspondence |
+| Settings | Native Replace Mesh; separate native injection transfer; readback and paired save/reopen before solve |
+| Startup | Same 500-update low-feed hold, 2,000-update ramp and 1,000-update target hold; fixed 1 µs film step |
+| Previous endpoint | Server 3 N46806 preserved locally before replacement |
+| Status owner | [Supplied-mesh setup](stage-03-shortened-reconstruction/early-ewf-startup/slit154k/setup.md) and [results](stage-03-shortened-reconstruction/early-ewf-startup/slit154k/results.md) |
+| Machine state | [Run manifest](../../../PyAnsys/output/phase72a-stage3-slit154k-server3/20261005/run-manifest.json) |
+| Comparison limit | Geometry and mesh change together; mapped A fields differ from exact historical A arrays; no mesh-convergence claim |
+| Server 1 | Its separate film-development lane remains under its own authority |
+
 ## Stage 2 continuation on Server 3 — 5 October 2026
 
 | Item | Current contract |
@@ -9,7 +25,8 @@
 | Parent / model | Developed Stage 2 R3 + E2.7 with corrected contact absorber; exact N45606 fields |
 | Preservation | Save/reopen Stage 3 N8000 before replacement |
 | First numerical delta | Courant target 0.15; accepted 6.415943 µs; incomplete inner-film convergence |
-| Selected numerical recovery | Allow 30 film subiterations; test target 0.08 after N45806; preserve the aggressive-probe evidence |
+| Selected numerical recovery | Larger-step probes preserved at N45906; restart exact original N45606 with target 0.06 and 30 allowed film subiterations |
+| Confirmed human target | Steady film: retained film mass may be nonzero; inventory growth should approach zero |
 | Evidence | Actual accepted steps, film clock, all EWF inner residuals, inventories, accretion/drainage and film ledger |
 | Run plan | 100-update probe; 1,000-update batches; bounded 0.2 s corrected-restart film horizon |
 | Recovery | Preserve unstable endpoints; repair numerics within this authority |
@@ -29,7 +46,12 @@
 | Film | Dry start at A; fixed 1 µs throughout; current E2.7 coupling and wall scope |
 | Preserved previous work | Save current Server 1 N45606 before replacement; Server 3 branch remains separate |
 | Comparison | Ramp progress and equal inlet loading; raw carrier excursions, bulk + film storage, carryover and inner-film convergence |
-| Status | Prepared child reopened; 17 A bulk arrays match exactly; N1600 smoke passed; low-feed hold running |
+| Status | Startup N5080 complete and reopened; 31 reports and all 3500 new residual/film records verified; live Server 1 now belongs to film development |
+| Startup result | Ramp continuity peak 70.15% lower; combined inventory peak 70.43% lower; carryover peak 75.78% lower |
+| Numerical limit | Activation spike remains; 15 final inner-film failures at N5025–N5076; film remains developing |
+| Result | [Early EWF results](stage-03-shortened-reconstruction/early-ewf-startup/results.md) |
+| Further compute | Human selected accelerated, numerically adequate film development; [continuation contract](stage-03-shortened-reconstruction/early-ewf-startup/film-development/setup.md) |
+| Film-development status | Lower-target adaptive recovery continues from verified N11390 (60.192 ms, 3.484 kg). A client timeout interrupted receipt of N10390–N11390; the native batch completed and was recovered with zero repeated updates. Target 0.2 / growth 1.15 / reduction 2; N8190 remains the rejected higher-target branch. Alternative inner residuals remain unavailable; full-bulk restoration and developed-film timestep qualification remain required. [Continuation results](stage-03-shortened-reconstruction/early-ewf-startup/film-development/results.md) |
 | Exact contract | [Early EWF setup](stage-03-shortened-reconstruction/early-ewf-startup/setup.md) |
 | Machine evidence | [Run manifest](../../../PyAnsys/output/phase72a-stage3-early-ewf-server1/20261005/run-manifest.json) |
 | Claim limit | Combined finite startup recipe; no isolated timing, steady-film or whole-separator qualification |

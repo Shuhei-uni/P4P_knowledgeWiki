@@ -1,6 +1,6 @@
 ---
 name: pyansys-workflow
-description: "Inspect, build, run, recover, or extract evidence from Fluent/PyFluent for the active experiment."
+description: "Inspect, build, run, recover, or extract Fluent/PyFluent evidence; transfer an existing case to a new mesh with native Replace Mesh."
 ---
 
 # PyAnsys Workflow
@@ -12,6 +12,8 @@ Use the branch that matches the task:
 
 - [inspection and build](references/inspection-build.md) — discover live state,
   apply the controlled delta, read back, save/reopen, smoke-test;
+- [replace mesh](references/replace-mesh.md) — reuse an existing case setup on a
+  supplied mesh, including native interpolation when continuing saved data;
 - [run control](references/run-control.md) — execute, checkpoint, supervise, and
   prove completion;
 - [fleet and artifacts](references/fleet-and-artifacts.md) — choose/reconcile

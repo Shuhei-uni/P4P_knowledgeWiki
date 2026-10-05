@@ -27,6 +27,11 @@ so pair it with state readback, artifact verification, and smoke evidence.
 
 ## Build a verifiable child
 
+When the requested delta is a new mesh with the same existing setup, follow
+[Replace Mesh](replace-mesh.md) before changing topology or loading the target
+mesh. It owns native transfer, zone correspondence, and interpolation checks;
+the steps below still define the complete child-case verification.
+
 1. Prove the exact parent case/data and active Fluent session.
 2. Inspect the live Settings/API tree before writing a mutation you are not sure
    about.
