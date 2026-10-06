@@ -13,6 +13,13 @@ When the requested output is an experiment record, follow the
 tables and figures with short figure interpretations. The report structure below
 applies to separately requested technical reports.
 
+For requests centred on academic argument, which findings to emphasise, report
+flow, or language, use [STEM Research Writing](../stem-research-writing/SKILL.md).
+When this workflow owns report production, consult specific references from
+that skill as needed, including its
+[questions and suggestions](../stem-research-writing/references/questions-and-suggestions.md)
+when author choices remain open.
+
 If the user already gave scope, audience, and output format, proceed. Ask only
 for a materially missing choice that would change the report.
 
