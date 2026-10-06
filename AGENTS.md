@@ -21,7 +21,8 @@ Use one owning workflow skill and let it follow its internal references:
 - `pyansys-workflow` — Fluent implementation/execution;
 - `cfd-numerical-analysis` — CFD evidence and figures;
 - `cfd-wiki` — reusable research/method knowledge;
-- `report-writing` — technical report production;
+- `report-writing` — assemble Project evidence and figures into technical reports;
+- `stem-research-writing` — academic argument, findings to emphasise, report flow, and scientific prose;
 - `workflow-surgeon` — repair the agent workflow itself;
 - `writing-for-agents` — edit agent instructions;
 - `wait-what` and `direct-fluent-use` — explicit human controls.

@@ -1,0 +1,14 @@
+interface:
+  display_name: STEM Research Writing
+  short_description: Clear scientific prose, findings, and report flow
+  default_prompt: Use $stem-research-writing to improve my STEM research report, keeping
+    its claims accurate and its English clear.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

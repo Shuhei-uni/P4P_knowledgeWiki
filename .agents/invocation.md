@@ -28,10 +28,14 @@ These may be invoked explicitly or reached naturally from active work:
   an existing setup on a new mesh.
 - `cfd-numerical-analysis`
 - `cfd-wiki` — existing CFD knowledge Q&A, model/evidence comparisons, Fluent guidance, ingest and wiki health.
-- `report-writing`
+- `report-writing` — assemble Project records and figures into a technical report.
+- `stem-research-writing` — academic argument, findings to emphasise, report flow, grammar, and word choice.
 - `writing-for-agents`
 
 These descriptions should name the trigger clearly and stay short.
+
+For mixed writing requests, choose the owning workflow from the main task.
+Consult only the needed references from the other writing skill.
 
 ## Structure rule
 
