@@ -216,7 +216,7 @@ def main() -> int:
     require(all(path.is_file() for path in pair(F1_PARENT)), "Verified Phase 8 F1 parent pair is incomplete")
     require(not OUT.exists(), f"Refusing to overwrite receipt: {OUT}")
     solver = launch_fluent(product_version="25.2", dimension=3, precision="double", processor_count=4,
-                           ui_mode="gui", start_timeout=240, cleanup_on_exit=True, start_transcript=True)
+                           ui_mode="gui", start_timeout=240, cleanup_on_exit=False, start_transcript=True)
     receipt: dict[str, Any] = {"status": "BUILDING", "fluent_version": str(solver.get_fluent_version()),
                                "student_limit": "one million cells; source mesh is the 60,964-cell Phase 8 partition",
                                "families": {}}
@@ -232,7 +232,6 @@ def main() -> int:
         OUT.parent.mkdir(parents=True, exist_ok=True)
         OUT.write_text(json.dumps(receipt, indent=2, default=str) + "\n", encoding="utf-8")
     print(json.dumps(receipt, indent=2, default=str), flush=True)
-    solver.exit()
     return 0
 
 

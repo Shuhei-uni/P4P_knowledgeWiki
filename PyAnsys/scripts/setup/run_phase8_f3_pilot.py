@@ -132,7 +132,7 @@ def main() -> None:
                "claim_limit": "Pilot only; DPM sources and incomplete tracks require separate accounting."}
     dump(manifest, receipt)
     solver = launch_fluent(product_version="25.2", dimension=3, precision="double", processor_count=4,
-                           ui_mode="gui", start_timeout=240, cleanup_on_exit=True, start_transcript=True)
+                           ui_mode="gui", start_timeout=240, cleanup_on_exit=False, start_transcript=True)
     capture = None
     try:
         load_pair(solver, source_base)
@@ -206,8 +206,6 @@ def main() -> None:
         dump(manifest, receipt)
         if capture is not None:
             capture.close()
-        if receipt["status"] == "COMPLETE":
-            solver.exit()
     print(json.dumps({"status": receipt["status"], "manifest": str(manifest)}, indent=2))
 
 

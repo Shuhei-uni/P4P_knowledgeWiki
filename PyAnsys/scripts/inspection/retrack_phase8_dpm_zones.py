@@ -38,7 +38,7 @@ def main() -> None:
     dump(output, receipt)
     solver = launch_fluent(product_version="25.2", dimension=3, precision="double",
                            processor_count=4, ui_mode="gui", start_timeout=240,
-                           cleanup_on_exit=True, start_transcript=True)
+                           cleanup_on_exit=False, start_transcript=True)
     try:
         load_pair(solver, base)
         receipt["particle_tracks"] = run_dpm_particle_track_check(
@@ -53,7 +53,6 @@ def main() -> None:
         raise
     finally:
         dump(output, receipt)
-        solver.exit()
     print(json.dumps({"status": receipt["status"], "receipt": str(output)}, indent=2))
 
 

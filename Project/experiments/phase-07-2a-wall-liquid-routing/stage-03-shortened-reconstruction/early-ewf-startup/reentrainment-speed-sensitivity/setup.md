@@ -58,7 +58,7 @@
 | --- | --- |
 | Startup | [Existing setup](../setup.md) |
 | Film development | [Setup](../film-development/setup.md), [results](../film-development/results.md) |
-| Inlet-speed inspiration | [Phase 8 context](../../../../phase-08-storyline-reconstruction/CONTEXT.md) |
+| Inlet-speed inspiration | [Phase 8 context](../../../../phase-08-storyline-reconstruction/stage-01-60k-storyline/CONTEXT.md) |
 | Re-entrainment rationale | [CFD wiki](../../../../../../CFD_wiki/wiki/physics-basis/droplets-carryover-and-re-entrainment.md) |
 | Official model options and Figure 30.1 | [Fluent 2025 R2](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_ewf_sec_options.html) |
 | Official wall options and Figure 30.9 | [Fluent 2025 R2](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_ewf_sec_bound.html) |

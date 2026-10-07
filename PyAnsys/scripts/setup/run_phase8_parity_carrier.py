@@ -245,7 +245,7 @@ def run_point(family: str, speed: float, horizon: int) -> dict[str, Any]:
     capture = None
     try:
         solver = launch_fluent(product_version="25.2", dimension=3, precision="double", processor_count=4,
-                               ui_mode="gui", start_timeout=240, cleanup_on_exit=True, start_transcript=True)
+                               ui_mode="gui", start_timeout=240, cleanup_on_exit=False, start_transcript=True)
         receipt["fluent_version"] = str(solver.get_fluent_version())
         require("2025 R2" in receipt["fluent_version"], "Unexpected Fluent release")
         load_pair(solver, source)
@@ -311,8 +311,6 @@ def run_point(family: str, speed: float, horizon: int) -> dict[str, Any]:
     finally:
         if capture is not None:
             capture.close()
-        if solver is not None and receipt["status"] == "COMPLETE":
-            solver.exit()
 
 
 def main() -> int:

@@ -82,8 +82,12 @@ def analyze():
         t = np.array([clocks[i][0] for i in ix]) * 1000
         axes[0].plot(t, [mass[i] for i in ix], label=label)
         centers = [(b['film_time_s'] - .5 * b['added_film_time_s']) * 1000 for b in bb]
-        for metric, style in [('accretion_kg_s', 'o-'), ('drainage_kg_s', 's--'), ('storage_kg_s', 'x:')]:
-            axes[1].plot(centers, [b[metric] for b in bb], style, label=f'{label}: {metric.split("_")[0]}')
+        for metric, style, color in [('accretion_kg_s', 'o-', '#1f77b4'),
+                                     ('drainage_kg_s', 's--', '#d17a19'),
+                                     ('storage_kg_s', 'x:', '#2ca02c')]:
+            name = metric.split('_')[0]
+            legend_label = name.capitalize() if name.capitalize() not in axes[1].get_legend_handles_labels()[1] else '_nolegend_'
+            axes[1].plot(centers, [b[metric] for b in bb], style, color=color, label=legend_label)
         health[0].plot(t, [clocks[i][1] * 1e6 for i in ix], label=label)
         health[1].plot(t, [clocks[i][2] for i in ix], label=label)
     axes[0].set(ylabel='Film inventory (kg)', title='Film development on the selected branch')
@@ -105,7 +109,7 @@ def analyze():
              f"| Server / parent | Server 1; preserved early-start N5080; 3.5 ms, 0.164512 kg |",
              f"| Controller | `{m['status']}`; verified N{m['verified_native_end']}; active target {m.get('active_target')} |",
              f"| Current restart / film | N{m['latest_pair']['native_iteration']}; {m['latest_metrics']['film_time_s']*1000:.6f} ms; {m['latest_metrics']['film_mass_kg']:.6f} kg |",
-             '| Branch limit | Initial probes share N5080; adaptive recovery restarts passing N7190. Exclude rejected N8190 from selected field lineage; do not add sibling film times |',
+             '| Branch limit | Initial probes share N5080; selected recoveries restart passing N7190 and N22615. Rejected N8190 and N23615 continuations are excluded from the selected field history; do not add sibling film times |',
              '| Fixed science | Full feed, R3, corrected absorber, bulk Coupled, film equations/forces/sources/boundaries and flow feedback |',
              f"| Bulk advancement | {'Original bulk equations restored; full-model film checks underway' if m.get('bulk_equations_restored') else 'Temporarily frozen during matched-time checks and relaxation; restoration required before goal closure'} |",
              '| Applying the findings | [Findings to apply to another case](#findings-to-apply-to-another-case): observed gains, reusable procedure and transfer limits |',
@@ -178,6 +182,12 @@ def analyze():
               '| Intent / criteria | [Setup](setup.md) |',
               '| Native reports, transcripts, residuals, clocks and paired checkpoints | [Manifest](../../../../../../PyAnsys/output/phase72a-stage3-film-development-server1/20261005/run-manifest.json) |',
               '| Reproducible figures | [Analysis script](../../../../../../PyAnsys/scripts/analysis/analyze_phase72a_stage3_film_development.py) |', '']
+    if m.get('transfer_receipt'):
+        receipt = json.loads(Path(m['transfer_receipt']).read_text())
+        row = (f"| Transfer status | N{receipt['native_iteration']} pair saved/reopened; "
+               f"`{receipt['status']}`; Server 1 idle; student server not yet loaded. "
+               f"[Transfer verification](../../../../../../PyAnsys/output/phase72a-stage3-film-development-server1/20261005/{Path(m['transfer_receipt']).name}) |")
+        lines.insert(6, row)
     write_results(lines)
     (OUT / 'analysis-summary.json').write_text(json.dumps({'status': m['status'], 'blocks': blocks, 'figures': [str(DEST / 'film-development.png'), str(DEST / 'film-solver-health.png')], 'visual_qa': 'PENDING'}, indent=2))
     print('ANALYSIS_COMPLETE', len(blocks), flush=True)

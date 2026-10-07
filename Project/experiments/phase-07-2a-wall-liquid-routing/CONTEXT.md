@@ -1,5 +1,39 @@
 # Phase Context — Phase 7.2A Wall-Liquid Routing and Steam-Outflow Carryover
 
+## Stage 4 — EWF settings and wall parameters
+
+| Item | Current contract |
+| --- | --- |
+| Human direction — 7 October 2026 | Record the commercial-steel result as Stage 4; use the Stage 3 startup method for the next Stage 4 cases |
+| Stage 3 position | Human is satisfied with Stage 3 as the method/reference stage; preserve its evidence and existing claim limits |
+| Stage 4 goal | Assess changed EWF settings and wall parameters using the same low-feed activation and inlet-ramp pattern |
+| Startup sequence | Low inlet loading → Coupled + EWF activation → low-feed hold → inlet ramp → short full-feed hold → freeze bulk equations → EWF-only development |
+| Method references | [Early-EWF startup](stage-03-shortened-reconstruction/early-ewf-startup/setup.md); [film-development](stage-03-shortened-reconstruction/early-ewf-startup/film-development/setup.md) |
+| Configurable scope | EWF settings and wall parameters may differ substantially from Stage 3; record selected values and controlled changes per case |
+| EWF-only direction — 7 October 2026 | After the short full-loading hold, retain bulk/film fields and film clock; freeze bulk equation advancement and advance EWF alone |
+| Frozen-flow interpretation | Bulk inventory/outlet flux are held-field diagnostics; continuity has no new solved rows; film inventory and accretion/drainage continue to evolve |
+| Film claim boundary | A steady film under frozen bulk forcing does not establish a stationary fully coupled separator |
+| User-nominated reference | [Solve EWF Transiently](chatgpt-conversation://6ac5733b-48a4-83ec-9e11-23e6902b1d24); conversation not retrieved in this session; exact settings not imported |
+| Other model basis | Retain Stage 3 geometry/mesh and model basis unless the human changes the scope |
+| Selected continuation | Human-selected current N29815 commercial-steel parent; all settings in [selected setup](stage-04-ewf-wall-parameters/realism-continuation/setup.md); 2000 bulk-and-film iterations, then +50 ms EWF-only, target 15 microseconds |
+| Completed first Stage 4 evidence | Commercial steel 0.045 mm continuation; N25815 → N29815; 4000 updates; 4 ms added film time |
+| Completed retry — 7 October 2026 | Human selected Flow Momentum Coupling OFF; other selected settings ON; exact N29815 restart; 4000 bulk updates verified to N33815; +50 ms EWF-only verified to N37149; film still filling; [retry result](stage-04-ewf-wall-parameters/realism-continuation/feedback-off/results.md) |
+| Selected-mechanism continuation status | All initial target flags read back and reopened; feedback-ON probes FPE at N29827 and N29829; control recovered; feedback-OFF requested horizon complete; [results](stage-04-ewf-wall-parameters/realism-continuation/results.md) |
+| Continuation result | Outlet-flux magnitude falls 19.72%; bulk mass rises 1.20%; EWF mass rises 1.42% |
+| Final-500 film rates / continuity | Accretion 92.329 kg/s; drainage 68.247 kg/s; storage 24.087 kg/s; continuity mean 1.846e-3 |
+| Completed setting sensitivity — 7 October 2026 | Stripping OFF reduces rapid source/storage variation by 97.24% / 99.13% but fails the longer check. Surface Tension OFF, Spreading OFF, EWF Coupled Solution OFF and Curvature Smoothing ON do not repair that route at 15 microseconds. Stripping-ON / coupled-ON control restored and +50 ms verified to N40483; peak Courant 0.07315; bulk frozen; source cycle remains and film inventory grows. [Results](stage-04-ewf-wall-parameters/setting-sensitivity/results.md). |
+| Current human film limit — 7 October 2026 | Set native Maximum Thickness to 0.3 m; any recorded maximum ≥0.3 m makes the run **UNREALISTIC**. Preserve paired endpoint; stop further batches. Applied at unchanged N40483 / 0.3731843386354754 s; [configuration and drainage audit](stage-04-ewf-wall-parameters/setting-sensitivity/film-limit.md). |
+| Parent absorber scope | N40483 contact sink removes bulk phase-2 liquid in the lower collector; no direct EWF sink. EWF disabled on lower `wall:004` and `bottom`; no new film outflow over the accepted 50 ms. |
+| Selected direct film drain — 7 October 2026 | Human requests drainage during EWF-only solving. Extend film to the existing lower `wall:004`; local thickness-proportional mass sink and matching film momentum sink; τ=1.5 ms; 15 microseconds; bulk frozen. [Exact design / proof plan](stage-04-ewf-wall-parameters/ewf-only-drain/setup.md). |
+| Direct-drain status | Native source proof and matched 15 ms OFF/ON screens passed. Direct sink removed 0.508790 kg; lower film 70.32% lower; total film 0.189694 kg lower. ON final N41483 / 0.3881843386354626 s; bulk frozen; film still growing. [Result](stage-04-ewf-wall-parameters/ewf-only-drain/results.md). |
+| Selected long EWF run — 7 October 2026 | Human requests a very long native TUI run that continues after laptop closure. Continue drain-ON N41483 with full selected film physics, Flow Momentum Coupling OFF and bulk frozen; +200,000 updates at 15 microseconds (+3 s); paired local autosaves and native all-sample guards. [Design / decision tests](stage-04-ewf-wall-parameters/ewf-only-drain/long-development/setup.md). |
+| Long-run status | Native TUI submitted; film output observed; client exited. Target N241483 / approximately 3.388184 s; completion and stationarity pending. [Status](stage-04-ewf-wall-parameters/ewf-only-drain/long-development/results.md). |
+| Required diagnostics | Bulk liquid inventory; phase-2 steamoutlet boundary flux; EWF liquid inventory; film accretion/drainage rates; continuity |
+| Evidence standard | Native histories with actual iteration/film time, report/source definitions, accepted-step and film-ledger checks, explicit parent and paired restart proof |
+| Claim limits | Existing result combines lower roughness, restored bulk equations and changed film step; film remains filling; no isolated roughness-benefit claim |
+| Compute / session boundary | Owned Server 1; exact saved N40483 parent. Production upper/bulk data must remain intact. New-storage allocation followed by exact parent-data restore; initialization confined to disposable source-proof fixture. Preserve local pairs and other stages' sessions. |
+| Owning records | [Stage 4 index](stage-04-ewf-wall-parameters/index.md); [startup design](stage-04-ewf-wall-parameters/setup.md); [results](stage-04-ewf-wall-parameters/results.md) |
+
 ## Local re-entrainment speed sensitivity — 6 October 2026
 
 | Item | Current contract |
@@ -13,6 +47,23 @@
 | Settings proof | Official v252 guide and Figures 30.1 / 30.9; explicit TUI responses, native readback and save/reopen |
 | Claim limit | Bounded speed sensitivity; frozen bulk development remains labelled; steady film is not a stop gate |
 | Exact contract | [Setup](stage-03-shortened-reconstruction/early-ewf-startup/reentrainment-speed-sensitivity/setup.md) |
+
+## Vertical-slit film development on Server 3 — 6 October 2026
+
+| Item | Current contract |
+| --- | --- |
+| Human direction | Develop the wall film as far as numerical evidence supports; continuously supervise the run |
+| Authority | Overwrite Server 3; supersedes the historical N10000 case found idle on 6 October |
+| Preserved previous endpoint | Historical N10000 case/data saved and hashed on local FluentRuns disk before replacement |
+| Selected parent | Verified 154k vertical-slit N5080 startup pair, 3.5 ms film clock; no bulk or film initialization |
+| Fixed science | Parent mesh, full inlet loading, R3 roughness, corrected contact absorber, phase accretion, wall scope and DPM |
+| Initial result | Full-bulk 1 µs ×100 probe passes: 100% inner-film residual tolerance, CFL 0.002945, film ledger error 0.000012% |
+| Next numerical contrast | Original implicit solver, 0.5 µs ×1000 versus 5 µs ×100 at identical frozen N5080 bulk fields |
+| Qualification | Actual native film time, complete inner residuals, film accounting, facet mass/thickness/velocity, paired local saves and reopen |
+| Full-model requirement | Restore all original bulk equations before any steady-film claim |
+| Contract owner | [Vertical-slit film-development setup](stage-03-shortened-reconstruction/early-ewf-startup/slit154k/film-development/setup.md) |
+| Machine state | [Continuation manifest](../../../PyAnsys/output/phase72a-stage3-slit154k-film-development-server3/20261006/run-manifest.json) |
+| Other server | Server 1 remains separate; its film-development results are method evidence, not this mesh's qualification |
 
 ## Supplied vertical-slit mesh repeat on Server 3 — 5 October 2026
 
@@ -65,7 +116,7 @@
 | Numerical limit | Activation spike remains; 15 final inner-film failures at N5025–N5076; film remains developing |
 | Result | [Early EWF results](stage-03-shortened-reconstruction/early-ewf-startup/results.md) |
 | Further compute | Human selected accelerated, numerically adequate film development; [continuation contract](stage-03-shortened-reconstruction/early-ewf-startup/film-development/setup.md) |
-| Film-development status | Lower-target recovery from passing N22615 (241.116 ms, 6.374 kg film). The N23615 continuation was preserved and rejected: peak film Courant 1.227057 exceeds 1 and actual step exceeded the 20 µs screened range. Fixed 5 µs ×100 recovery probe, then adaptive target 0.2 / growth 1.15 / reduction 2. Bulk remains frozen at 61.055 kg; combined liquid at N22615 was 67.429 kg and still increasing. Alternative inner residuals are unavailable; developed-film timestep checks and full-bulk restoration remain required. [Continuation results](stage-03-shortened-reconstruction/early-ewf-startup/film-development/results.md) |
+| Film-development status | Human instruction on 6 October 2026: keep Server 1 running; reference, lowest and highest Phase 8 nominal inlet speeds to 500 ms film time; continuous monitoring. Reference resumes N25815; low/high repeat the same prepared-A startup with scaled feeds, then develop film under their own frozen bulk fields. Student-server transfer is superseded; preserved OneDrive pair remains available. [Campaign setup](stage-03-shortened-reconstruction/early-ewf-startup/inlet-speed-500ms/setup.md), [results](stage-03-shortened-reconstruction/early-ewf-startup/inlet-speed-500ms/results.md). |
 | Exact contract | [Early EWF setup](stage-03-shortened-reconstruction/early-ewf-startup/setup.md) |
 | Machine evidence | [Run manifest](../../../PyAnsys/output/phase72a-stage3-early-ewf-server1/20261005/run-manifest.json) |
 | Claim limit | Combined finite startup recipe; no isolated timing, steady-film or whole-separator qualification |

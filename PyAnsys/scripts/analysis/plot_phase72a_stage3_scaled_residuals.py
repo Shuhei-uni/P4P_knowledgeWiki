@@ -42,13 +42,13 @@ def main():
     fig, ax = plt.subplots(figsize=(12, 5.8), layout='constrained')
     for j, name in enumerate(NAMES):
         ax.semilogy(x, y[:, j], lw=.8, label=name)
-    for n, label in [(1580, 'A: Coupled + EWF'), (2080, 'B: inlet ramp'), (4080, 'C: full feed')]:
+    for n, label in [(1580, 'A: Coupled\n+ EWF'), (2080, 'B: inlet ramp'), (4080, 'C: full feed')]:
         ax.axvline(n, color='0.5', ls='--', lw=.7)
         ax.text(n + 30, .98, label, transform=ax.get_xaxis_transform(), va='top', fontsize=9)
     ax.set(xlim=(0, 5080), xlabel='Native carrier iteration', ylabel='Scaled residual (log scale)',
            title='Stage 3 — scaled carrier residuals, N1–N5080')
     ax.grid(alpha=.2)
-    ax.legend(loc='lower left', ncol=4, fontsize=9)
+    ax.legend(loc='upper center', bbox_to_anchor=(.62, 1), ncol=2, fontsize=9)
     fig.text(.5, -.025, 'Bulk equations frozen after N5080; no later carrier residuals plotted. Raw values; no smoothing.',
              ha='center', fontsize=9)
     slug = 'selected-scaled-residuals-N5080'

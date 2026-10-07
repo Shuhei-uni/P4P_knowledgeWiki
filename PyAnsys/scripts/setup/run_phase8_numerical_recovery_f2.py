@@ -68,7 +68,7 @@ def main(family: str, speed: float) -> dict:
     capture = None
     try:
         solver = launch_fluent(product_version="25.2", dimension=3, precision="double", processor_count=4,
-                               ui_mode="gui", start_timeout=240, cleanup_on_exit=True, start_transcript=True)
+                               ui_mode="gui", start_timeout=240, cleanup_on_exit=False, start_transcript=True)
         load_pair(solver, source)
         receipt["reference_source_readback"] = audit(solver)
         apply_speed(solver, family, speed)
@@ -120,8 +120,6 @@ def main(family: str, speed: float) -> dict:
     finally:
         if capture is not None:
             capture.close()
-        if solver is not None and receipt["status"] == "COMPLETE":
-            solver.exit()
 
 
 if __name__ == "__main__":

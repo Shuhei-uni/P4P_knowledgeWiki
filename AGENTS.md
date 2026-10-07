@@ -20,9 +20,11 @@ Use one owning workflow skill and let it follow its internal references:
 - `phase-loop` — experiment selection, execution, recovery, analysis, and phase closure;
 - `configure-run-monitor` — scheduled-monitor configuration and planner handoff;
 - `pyansys-workflow` — Fluent implementation/execution;
+	- When setting up EWF, make sure the correct absorber is set and that absorber is able to actually drain the EWF liquid not just the bulk liquid. Furthermore, the way the absorber behaves when we're only solving for EWF is also important the absorber will still need to act as a drain even if the bulk flow is frozen.
 - `cfd-numerical-analysis` — CFD evidence and figures;
 - `cfd-wiki` — reusable research/method knowledge;
-- `report-writing` — technical report production;
+- `report-writing` — assemble Project evidence and figures into technical reports;
+- `stem-research-writing` — academic argument, findings to emphasise, report flow, and scientific prose;
 - `workflow-surgeon` — repair the agent workflow itself;
 - `writing-for-agents` — edit agent instructions;
 - `wait-what` and `direct-fluent-use` — explicit human controls.
@@ -33,6 +35,8 @@ skill only when it needs a genuinely distinct invocation boundary.
 
 Fluent runs:
 When running simulations try to run in large batches, rather than iter(10) do around 1000 (Prefer using TUI run commands for cases where its just setup and then run) and when saving checkpoint save it on fluent local machine rather than onedrive. Onedrive is for start or final case/data pair that we'd like to share across computers not a place to store everything.
+
+And understand when to use small iteration commands to a single large chunks. We want to do solve/iterate 10 when we want to keep an eye on run a closely, but the most efficient way to run is to run solve/iteration 1000 or higher, every interruption to send to iterate 10 times is wasting a large amount of time that could be spent solving. 
 
 ## Autonomy
 

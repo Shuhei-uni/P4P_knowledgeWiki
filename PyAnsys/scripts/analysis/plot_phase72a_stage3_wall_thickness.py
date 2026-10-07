@@ -50,7 +50,6 @@ def main():
     lo, hi = vertices.min(axis=0), vertices.max(axis=0)
     limits = [(lo[i], hi[i]) for i in [0, 2, 1]]
     widths = np.array([b-a for a, b in limits])
-    norm = Normalize(0, .30)
     cmap = plt.get_cmap('viridis')
     sources = []
     values = []
@@ -61,7 +60,6 @@ def main():
         thickness = a['film-thickness'].astype(float)
         assert len(thickness) == len(polygons) and np.isfinite(thickness).all() and np.all(thickness >= 0)
         assert np.isclose(a['film-mass'].sum(), block['film_mass_kg'], rtol=2e-6)
-        assert thickness.max()*1000 <= norm.vmax, 'Shared range clips a source snapshot'
         values.append(thickness*1000)
         sources.append({'native_iteration': block['native_end'], 'film_time_ms': block['film_time_s']*1000,
                         'film_mass_kg': block['film_mass_kg'], 'snapshot_max_thickness_mm': thickness.max()*1000,
@@ -70,6 +68,9 @@ def main():
                         'area_at_least_0p1mm_percent': 100*areas[thickness >= 1e-4].sum()/areas.sum(),
                         'field_file': str(path), 'field_sha256': digest(path),
                         'pair': block['pair'], 'centroid_match': 'PASS', 'facet_mass_report_match': 'PASS'})
+    upper = max(.30, np.ceil(max(v.max() for v in values)/.05)*.05)
+    norm = Normalize(0, upper)
+    ticks = np.arange(0, upper + .025, .05)
     DEST.mkdir(parents=True, exist_ok=True)
     plt.rcParams.update({'font.size': 11, 'axes.titlesize': 13})
 
@@ -103,7 +104,7 @@ def main():
     for ax, data, source in zip(axes, values, sources):
         draw(ax, data, source, -135)
     fig.subplots_adjust(left=.01, right=.91, top=.86, bottom=.12, wspace=.02)
-    bar = fig.colorbar(mapper, cax=fig.add_axes([.93, .24, .014, .49]), ticks=np.arange(0, .301, .05))
+    bar = fig.colorbar(mapper, cax=fig.add_axes([.93, .24, .014, .49]), ticks=ticks)
     bar.set_label('Wall-film thickness (mm)', labelpad=12)
     fig.suptitle('Wall-film development on the separator', fontsize=20, y=.96)
     fig.text(.5, .025, 'Same wall faces, camera and colour scale. Actual Fluent facet values; no spatial smoothing.\n'
@@ -118,7 +119,7 @@ def main():
     for ax, angle in zip(axes, [-135, 45]):
         draw(ax, values[-1], sources[-1], angle)
     fig.subplots_adjust(left=.02, right=.90, top=.86, bottom=.12, wspace=.04)
-    bar = fig.colorbar(mapper, cax=fig.add_axes([.92, .25, .018, .48]), ticks=np.arange(0, .301, .05))
+    bar = fig.colorbar(mapper, cax=fig.add_axes([.92, .25, .018, .48]), ticks=ticks)
     bar.set_label('Wall-film thickness (mm)', labelpad=12)
     fig.suptitle('Latest saved wall film — opposite views', fontsize=20, y=.96)
     fig.text(.5, .025, f"Same N{latest['native_end']} snapshot from opposite sides. Maximum facet thickness "
@@ -129,7 +130,7 @@ def main():
     fig.savefig(current, dpi=180)
     plt.close(fig)
     record = {'status': 'FIGURES_CREATED_VISUAL_QA_PENDING', 'field': 'film-thickness', 'units': 'mm',
-              'surface': 'wall', 'range_mm': [0, .30], 'colormap': 'viridis', 'node_interpolation': False,
+              'surface': 'wall', 'range_mm': [0, float(upper)], 'colormap': 'viridis', 'node_interpolation': False,
               'renderer': 'Matplotlib Poly3DCollection of native Fluent wall faces; not a Fluent graphics export',
               'geometry_file': str(geometry_path), 'geometry_sha256': digest(geometry_path),
               'geometry_readback': json.loads((folder/'geometry-readback.json').read_text()),

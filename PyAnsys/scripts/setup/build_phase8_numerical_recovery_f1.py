@@ -52,7 +52,7 @@ def main():
                "source_physical_pair": [str(p) for p in pair(F1_CHILD)],
                "controlled_delta": "Restore Phase 7.2A coupled/global-time-step numerical stack while retaining common 0.724 m inlet/backflow turbulence scale and mixed feed"}
     solver = launch_fluent(product_version="25.2", dimension=3, precision="double", processor_count=4,
-                           ui_mode="gui", start_timeout=240, cleanup_on_exit=True, start_transcript=True)
+                           ui_mode="gui", start_timeout=240, cleanup_on_exit=False, start_transcript=True)
     try:
         load_pair(solver, F1_PARENT)
         source = inspect(solver)
@@ -84,8 +84,6 @@ def main():
         raise
     finally:
         dump(RECEIPT, receipt)
-        if receipt["status"] == "CASE_DATA_VERIFIED":
-            solver.exit()
     print(json.dumps({"status": receipt["status"], "receipt": str(RECEIPT), "child_pair": receipt["child_pair"]}, indent=2), flush=True)
 
 
