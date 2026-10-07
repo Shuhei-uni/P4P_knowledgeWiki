@@ -59,7 +59,7 @@ def main() -> None:
                "source_data_sha256": expected_hashes["data_sha256"],
                "max_steps": args.max_steps, "bins": bins, "results": []}
     solver = launch_fluent(product_version="25.2", dimension=3, precision="double", processor_count=4,
-                           ui_mode="gui", start_timeout=240, cleanup_on_exit=True, start_transcript=True)
+                           ui_mode="gui", start_timeout=240, cleanup_on_exit=False, start_transcript=True)
     try:
         load_pair(solver, base)
         tracking = solver.settings.setup.models.discrete_phase.tracking
@@ -85,7 +85,6 @@ def main() -> None:
         raise
     finally:
         dump(output, receipt)
-        solver.exit()
     print(json.dumps({"status": receipt["status"], "probe": str(output),
                       "counts": {r["name"]: r["counts"] for r in receipt["results"]}}, indent=2))
 

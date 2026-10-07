@@ -6,6 +6,150 @@ server3_current_authority:
   previous_live_endpoint: 5180
   preservation: PyAnsys/output/phase9-mesh-convergence/20261007/server3-preservation.json
   note: Historical Stage 3 records below retain their evidence; they do not authorize further Server 3 runs.
+stage4_long_native_ewf_server1:
+  authority: human_20261007_long_native_TUI_laptop_independent
+  status: RUNNING_NATIVE_HISTORY_CONFIRMED
+  server_id: '1'
+  parent_native_iteration: 41483
+  parent_native_film_clock_s: 0.3881843386354626
+  target_native_iteration: 241483
+  submitted_updates: 200000
+  added_target_film_time_s: 3.0
+  target_native_film_time_s: 3.3881843386354626
+  fixed_film_step_s: 0.000015
+  native_block_updates: 1000
+  native_execution_started: true
+  latest_native_iteration_observed: 50152
+  latest_observation_utc: 2026-10-07T07:57:46.432613+00:00
+  latest_completed_updates_observed: 8669
+  latest_native_guard_completed_updates: 8000
+  latest_observed_peak_thickness_m: 0.002700959797948599
+  latest_observed_peak_courant: 0.1424277275800705
+  latest_inspection: PyAnsys/output/phase72a-stage4-ewf-long-native/20261007/inspection/latest-status.json
+  inspection_main_rpc_timeouts: true
+  inspection_direct_cortex_read: PASS
+  submission_client_exited: true
+  requires_laptop_connection: false
+  execution_owner: FLUENT_NATIVE_SCHEME_TUI
+  bulk_equations_frozen: true
+  flow_momentum_coupling: false
+  selected_film_mechanisms: ALL_ORIGINAL_TARGETS_ON_EXCEPT_FLOW_MOMENTUM_COUPLING
+  drain_enabled: 1
+  drain_capture_time_s: 0.0015
+  maximum_film_thickness_m: 0.3
+  unrealistic_if_any_native_maximum_thickness_gte_m: 0.3
+  reject_if_any_native_courant_gte: 1.0
+  native_guard_scope: ALL_RECORDED_SAMPLES_SINCE_START
+  native_guard_interval_updates: 1000
+  paired_autosave_interval_iterations: 5000
+  retained_autosave_sets: 12
+  prepared_native_reopen: PASS
+  native_guard_proof: PASS
+  final_completion: PENDING_VERIFICATION
+  steady_film: PENDING_ANALYSIS
+  status_owner: PyAnsys/output/phase72a-stage4-ewf-long-native/20261007/run-manifest.json
+  setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/ewf-only-drain/long-development/setup.md
+  results: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/ewf-only-drain/long-development/results.md
+
+stage4_direct_ewf_drain_server1:
+  record_scope: COMPLETED_DRAIN_PROOF_AND_PARENT_OF_LONG_NATIVE_RUN
+  authority: human_20261007_design_drain_for_ewf_only
+  status: DRAIN_COMPLETE_NATIVE_VERIFIED_ANALYSED
+  server_id: '1'
+  active_branch: 'on'
+  parent_native_iteration: 40483
+  parent_native_film_clock_s: 0.3731843386354754
+  current_native_iteration: 41483
+  current_native_film_clock_s: 0.3881843386354626
+  new_solver_updates_in_current_lineage: 1000
+  added_film_time_s: 0.01499999999998719
+  lower_collector_wall: wall:004
+  lower_collector_ewf_enabled: true
+  direct_ewf_sink_source_switch: 1
+  trial_capture_time_s: 0.0015
+  fixed_film_step_s: 1.5e-05
+  bulk_equations_frozen: true
+  flow_momentum_coupling: false
+  maximum_film_thickness_m: 0.3
+  unrealistic_if_any_native_maximum_thickness_gte_m: 0.3
+  peak_on_film_thickness_m: 0.00205489550717175
+  peak_on_courant: 0.04983767
+  threshold_reached: false
+  source_operator_native_proof: PASS
+  matched_production_screen_s_each: 0.015
+  direct_removed_on_kg: 0.5087897346418866
+  direct_sink_final_kg_s: 37.09989511476982
+  lower_film_inventory_on_kg: 0.05564984267215473
+  lower_film_inventory_reduction_percent: 70.32329873665589
+  paired_final_reopen: PASS
+  final_verification: PASS
+  steady_film: false
+  physical_validation: false
+  solver_left_open: true
+  setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/ewf-only-drain/setup.md
+  results: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/ewf-only-drain/results.md
+  status_owner: PyAnsys/output/phase72a-stage4-ewf-drain/20261007/run-manifest.json
+  verification: PyAnsys/output/phase72a-stage4-ewf-drain/20261007/verification.json
+  analysis: PyAnsys/output/phase72a-stage4-ewf-drain/20261007/analysis-summary.json
+
+stage4_film_limit_server1:
+  record_scope: PARENT_CONFIGURATION_BEFORE_DIRECT_DRAIN
+  authority: human_20261007_film_limit_0_3_unrealistic_if_reached
+  status: CONFIGURED_REOPEN_VERIFIED
+  server_id: '1'
+  parent_native_iteration: 40483
+  current_native_iteration: 40483
+  native_film_clock_s: 0.3731843386354754
+  new_solver_updates: 0
+  maximum_film_thickness_m: 0.3
+  unrealistic_if_native_maximum_thickness_gte_m: 0.3
+  thickness_guard_scope: ALL_NATIVE_SAMPLES_IN_EACH_BATCH
+  threshold_response: PRESERVE_PAIR_MARK_UNREALISTIC_STOP_FURTHER_BATCHES
+  current_maximum_film_thickness_m: 0.001542619080282748
+  accepted_50ms_peak_film_thickness_m: 0.001866234582848847
+  threshold_reached: false
+  bulk_equations_frozen: true
+  ready_film_step_s: 0.000015
+  flow_momentum_coupling: false
+  direct_ewf_absorber_drain: false
+  lower_collector_ewf_enabled: false
+  paired_reopen: PASS
+  steady_film: false
+  physical_validation: false
+  status_owner: PyAnsys/output/phase72a-stage4-film-limit/20261007/run-manifest.json
+  verification: PyAnsys/output/phase72a-stage4-film-limit/20261007/verification.json
+  results: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/setting-sensitivity/film-limit.md
+
+stage4_setting_sensitivity_server1:
+  authority: human_20261007_targeted_setting_sensitivity
+  status: COMPLETE_NATIVE_VERIFIED_ANALYSED
+  server_id: '1'
+  parent_native_iteration: 37149
+  parent_film_time_s: 0.3231843386354754
+  bulk_equations_frozen: true
+  flow_momentum_coupling: false
+  first_contrast: PARTICLE_STRIPPING_ON_VS_OFF
+  matched_screen_added_film_time_s: 0.015
+  fixed_film_step_s: 0.000015
+  initialization: FORBIDDEN
+  selected_branch: stripping-on
+  particle_stripping: true
+  ewf_coupled_solution: true
+  curvature_smoothing: false
+  rapid_source_cycle_remains: true
+  tested_OFF_children_supported_for_continuation: false
+  final_native_iteration: 40483
+  final_film_time_s: 0.3731843386354754
+  added_film_time_verified_s: 0.050
+  paired_reopen: PASS
+  steady_film: false
+  physical_validation: false
+  status_owner: PyAnsys/output/phase72a-stage4-sensitivity/20261007/run-manifest.json
+  setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/setting-sensitivity/setup.md
+  research: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/setting-sensitivity/research.md
+  results: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/setting-sensitivity/results.md
+  verification: PyAnsys/output/phase72a-stage4-sensitivity/20261007/verification.json
+
 stage4_feedback_off_retry_server1:
   status: COMPLETE_NATIVE_VERIFIED_ANALYSED
   bulk_updates_verified: 4000

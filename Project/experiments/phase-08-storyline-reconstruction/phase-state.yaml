@@ -1,21 +1,82 @@
 phase: phase-08-storyline-reconstruction
 active_stage: 2
-status: WAITING_FOR_SERVER2_CONNECTION
+status: 08B_NEW997K_FRESH_TUI10000_OFF_ENDPOINT_UNREACHABLE
 stage1: stage-01-60k-storyline/phase-state.yaml
 stage2:
-  family: F2-SIMPLE
+  family: 08b-native-reference
   cells: 997604
   nominal_speed_m_s: 26.81
-  requested_total_iterations: 5000
-  low_feed_iterations: 500
-  ramp_iterations: 1500
-  full_feed_hold_iterations: 3000
-  full_feed_start: 2000
-  target_iteration: 5000
-  status: WAITING_FOR_CONNECTION
+  requested_total_iterations: 10000
   server_id: '2'
-  verified_iterations: 0
-  solve_issued: false
+  active_trial: 08b-native997k/fresh-tui10000-off
+  status: FLUENT_ENDPOINT_UNREACHABLE_RUN_OUTCOME_UNCONFIRMED
+  solve_issued: true
+  previous_trials:
+    full_feed_off:
+      failed_iteration: 717
+      failed_endpoint_preserved: true
+      record: stage-02-fine-mesh-simple/full-feed3000/results.md
+    ramp_off:
+      status: FAILED_AT_N1422
+      checkpoint: 1000
+      executed_updates: 1422
+      record: stage-02-fine-mesh-simple/results.md
+    absorber_from_start:
+      status: FLUENT_PROCESS_SHUTDOWN
+      exact_failure_iteration: unavailable
+      last_saved_reopened_iteration: 600
+      recovered_report_histories: 18
+      record: stage-02-fine-mesh-simple/absorber3000/results.md
+    slow_enable3000:
+      status: CORTEX_FATAL_SHUTDOWN_BEFORE_ACTIVATION
+      last_printed_native_iteration: 350
+      last_saved_reopened_iteration: 300
+      recovered_reports: 17
+      record: stage-02-fine-mesh-simple/slow-enable3000/results.md
+    step_enable2200:
+      status: FLOATING_POINT_FAILURE
+      failed_iteration: 518
+      absorber_enabled: true
+      feed_multiplier: 0.25
+      activation_iteration: 200
+      failed_endpoint_preserved: true
+      record: stage-02-fine-mesh-simple/step-enable2200/results.md
+    08b_transferred_off2000:
+      status: DIVERGENCE_THEN_SOLVER_SIGSEGV
+      last_printed_iteration: 10022
+      additional_updates_observed: 22
+      last_usable_iteration: 10000
+      reports_recovered: 17
+      record: stage-02-fine-mesh-simple/08b-native997k/run2000-off/results.md
+  verified_iterations: 5
+  last_saved_reopened_iteration: 0
+  source_folder: P4P-Fluent-Artifacts/08b
+  record: stage-02-fine-mesh-simple/08b-native997k/fresh-tui10000-off/results.md
+  live_iteration: null
+  new_solve_iterations: 5
+  source_native_iteration: 10000
+  receipt: ../../../PyAnsys/output/phase8-stage2/20261007/08b-native997k/fresh-tui10000-off/host-launch.json
+  verification: ../../../PyAnsys/output/phase8-stage2/20261007/08b-native997k/fresh-tui10000-off/launch-native-progress.json
+  ready_pair:
+    case: C:\Users\syok443\Documents\FluentRuns\Phase8\Stage2\20261007\08b-native997k\fresh-tui10000-off\prepared-fresh-N0-off.cas.h5
+    data: C:\Users\syok443\Documents\FluentRuns\Phase8\Stage2\20261007\08b-native997k\fresh-tui10000-off\prepared-fresh-N0-off.dat.h5
+    case_sha256: 1b18590196f7168e78a3fad8c1a84321b0a4350cc373fd8a7f1a50ccc4a60a30
+    data_sha256: 8037ca755bab6a98cf3fff2f179a4c80f3134b6df8b67a88e44a60d73595c29d
+    native_iteration: 0
+  start_iteration: 0
+  target_iteration: 10000
+  absorber_enabled: false
+  session_reachable: false
+  checkpoint_cadence: 1000
+  execution_mode: Native journal on Server2; laptop independent
+  last_observed_native_iteration: 5
+  execution_host: SERVER2_WINDOWS
+  laptop_required: false
+  native_transcript: C:\Users\syok443\Documents\FluentRuns\Phase8\Stage2\20261007\08b-native997k\fresh-tui10000-off\raw\native-run.trn
+  status_check_utc: 20261007T074724Z
+  status_check_receipt: ../../../PyAnsys/output/phase8-stage2/20261007/08b-native997k/fresh-tui10000-off/connection-check-20261007T074724Z.json
+  windows_host_reachable: true
 F0_status: DEFERRED_PENDING_SINGLE_INLET_MESH
-next_required_action: Restore configured Server 2 connection; resume preparation with
-  no duplicate solve
+next_required_action: Recover native transcript, host manifests and checkpoints from
+  Server 2 once Fluent access is available; reconcile the previous run before any
+  new solve.

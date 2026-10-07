@@ -73,10 +73,6 @@ def resume(manifest: Path, server_info: Path) -> dict:
     finally:
         if capture is not None:
             capture.close()
-        if receipt["status"] == "COMPLETE":
-            # Reconnect with ownership only after the final pair is verified.
-            owner = connect_to_fluent(server_info_file_name=str(server_info), cleanup_on_exit=True, start_transcript=False)
-            owner.exit()
 
 
 if __name__ == "__main__":

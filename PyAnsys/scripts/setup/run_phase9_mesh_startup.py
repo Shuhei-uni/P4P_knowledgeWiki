@@ -12,6 +12,7 @@ import sys
 import time
 import re
 import traceback
+from contextlib import contextmanager
 from datetime import datetime, timezone
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -33,6 +34,23 @@ MESH_FOLDER = SHARED/'2026 Sem 1/700/P4PCFD/CAD PurnantoV2'
 WALL_PARTS = ['wall', 'vessel-wall-wall-separator-purnanto',
               'inlet-wall-1-wall-separator-purnanto', 'inlet-wall-2-wall-separator-purnanto']
 HOST_PYTHON = PureWindowsPath(r'C:\Users\syok443\Documents\FluentRuns\Phase72A\Stage3\slit154k-film-development-20261006\controller-venv\Scripts\python.exe')
+
+
+def attach():
+    """Bound the v252 client's initial version query; preserve its session."""
+    from ansys.fluent.core._grpc_services.scheme_interpreter_service_v0 import SchemeInterpreterService
+    from ansys.api.fluent.v0 import scheme_eval_pb2
+    original=SchemeInterpreterService.string_eval
+    def initial_version(self,expression):
+        if expression=='(cx-version)':
+            return self._stub.StringEval(scheme_eval_pb2.StringEvalRequest(input=expression),
+                                         metadata=self._metadata,timeout=5).output
+        return original(self,expression)
+    SchemeInterpreterService.string_eval=initial_version
+    try:
+        return previous.attach()
+    finally:
+        SchemeInterpreterService.string_eval=original
 
 
 def source_receipt():
@@ -105,11 +123,40 @@ def audit_existing(s,label=None):
 
 
 def save(s, folder, label):
+    require_idle(s)
     ensure_remote_directory(s, str(folder/'scratch'))
     return pair_save(s, folder/(label+'.cas.h5'), folder/'scratch', scratch_tag=label)
 
 
+def require_idle(s):
+    # Never replace a loaded case or change its feed during an active solve.
+    if (s.settings.setup.cell_zone_conditions.is_active() and
+        not s.settings.solution.run_calculation.iterate.is_active()):
+        raise RuntimeError('Owned Server 3 is busy; no mutation submitted')
+
+
+def set_loading(s, multiplier):
+    require_idle(s)
+    return base.loading(s, multiplier)
+
+
+def read_feed(s, multiplier):
+    bc=s.settings.setup.boundary_conditions.mass_flow_inlet
+    result={'multiplier':multiplier}
+    for zone,phase,target,key in [('liquidinlet','phase-2',116.92,'liquid_kg_s'),
+                                   ('steaminlet','phase-1',80.69,'vapor_kg_s')]:
+        value=bc[zone].phase[phase].momentum.mass_flow_rate.get_state()['value']
+        if not math.isfinite(value) or not math.isclose(value,target*multiplier,rel_tol=1e-10):
+            raise RuntimeError('Final inlet loading differs from full feed')
+        result[key]=value
+    return result
+
+
 def load(s, pair):
+    require_idle(s)
+    # Check both members before replacing the current case.
+    for key in ['case','data']:
+        if not remote_file_exists(s,pair[key]):raise FileNotFoundError(pair[key])
     print('PAIR_LOAD_CHDIR',str(WORK),flush=True)
     remote_chdir(s, str(WORK))
     print('PAIR_LOAD_CASE',pair['case'],flush=True)
@@ -118,6 +165,8 @@ def load(s, pair):
     s.settings.setup.user_defined.load(udf_library_name='libcontactv2')
     print('PAIR_LOAD_DATA',pair['data'],flush=True)
     s.settings.file.read_data(file_name=pair['data'])
+    if 'native_iteration' in pair and native_iteration(s)!=pair['native_iteration']:
+        raise RuntimeError('Loaded pair native iteration differs from saved receipt')
     print('PAIR_LOAD_COMPLETE',flush=True)
 
 
@@ -126,6 +175,24 @@ def assert_bulk_active(s):
     if state != {'drift': True, 'flow': True, 'ke': True, 'mp': True}:
         raise RuntimeError('All four reference bulk equations must remain active')
     return state
+
+
+def require_setup_same(actual, expected):
+    """Keep exact setup equality except native rounding of ramp inlet flows."""
+    normalized=copy.deepcopy(actual);rounding=[]
+    for zone,phase in [('liquidinlet','phase-2'),('steaminlet','phase-1')]:
+        path=['boundary_conditions','mass_flow_inlet',zone,'phase',phase,
+              'momentum','mass_flow_rate','value']
+        a=normalized;e=expected
+        for key in path[:-1]:a=a[key];e=e[key]
+        av=a[path[-1]];ev=e[path[-1]]
+        if av!=ev and isinstance(av,(int,float)) and isinstance(ev,(int,float)):
+            if math.isfinite(av) and math.isfinite(ev) and math.isclose(av,ev,rel_tol=1e-12,abs_tol=1e-12):
+                rounding.append({'path':'/'.join(path),'before':ev,'after':av})
+                a[path[-1]]=ev
+    if normalized!=expected:
+        raise RuntimeError('Solved child setup changed beyond inlet-flow serialization rounding')
+    return {'status':'PASS','inlet_flow_rounding':rounding,'all_other_setup_values':'EXACT'}
 
 
 def apply_selected_settings(s,selected):
@@ -176,7 +243,7 @@ def prepare_source(s):
     before=base.state(s)
     selected=json.loads((OUT/'raw/provisional-stage4-selection.json').read_text())
     model=apply_selected_settings(s,selected)
-    base.loading(s,.25)
+    set_loading(s,.25)
     s.settings.file.auto_save.data_frequency=0
     base.add_pressure_reports(s)
     paths=base.instrument(s,WORK/'source-monitors')
@@ -201,6 +268,23 @@ def prepare_source(s):
     return record
 
 
+@contextmanager
+def client_capture(s,path):
+    """Capture one setup step without closing the campaign's live stream."""
+    if path.exists():raise FileExistsError(path)
+    path.touch(exist_ok=False)
+    def append(text):
+        with path.open('a',encoding='utf-8') as stream:stream.write(text)
+    already_streaming=s.transcript.is_streaming
+    callback=s.transcript.register_callback(append,keep_new_lines=True)
+    try:
+        if not already_streaming:s.transcript.start(write_to_stdout=False)
+        yield
+    finally:
+        s.transcript.unregister_callback(callback)
+        if not already_streaming:s.transcript.stop()
+
+
 def inspect_target(s,label):
     folder=WORK/label;ensure_remote_directory(s,str(folder))
     source=prepare_source(s)
@@ -210,16 +294,16 @@ def inspect_target(s,label):
     digest=remote_file_sha256(s,str(mesh),str(folder/'input.sha256'))
     if digest!=expected['sha256']:raise RuntimeError('Mesh has not synced unchanged to Server 3')
     remote_chdir(s,str(folder))
-    s.transcript.start(file_name=str(OUT/(label+'-target-inspection.txt')),write_to_stdout=False)
-    s.settings.file.read_mesh(file_name=str(mesh))
-    s.settings.mesh.check();s.settings.mesh.size_info();s.tui.mesh.modify_zones.list_zones()
-    record={'label':label,'mesh':str(mesh),'sha256':digest,'cells':expected['cells'],
-            'boundary_conditions':s.settings.setup.boundary_conditions.get_state(),
-            'cell_zones':s.settings.setup.cell_zone_conditions.get_state(),
-            'scale_args':s.settings.mesh.scale.argument_names,
-            'scale_help':s.settings.mesh.scale.__doc__,
-            'merge_args':s.settings.mesh.modify_zones.merge_zones.argument_names}
-    s.transcript.stop();dump(OUT/(label+'-target.json'),record)
+    with client_capture(s,OUT/(label+'-target-inspection-'+str(time.time_ns())+'.txt')):
+        s.settings.file.read_mesh(file_name=str(mesh))
+        s.settings.mesh.check();s.settings.mesh.size_info();s.tui.mesh.modify_zones.list_zones()
+        record={'label':label,'mesh':str(mesh),'sha256':digest,'cells':expected['cells'],
+                'boundary_conditions':s.settings.setup.boundary_conditions.get_state(),
+                'cell_zones':s.settings.setup.cell_zone_conditions.get_state(),
+                'scale_args':s.settings.mesh.scale.argument_names,
+                'scale_help':s.settings.mesh.scale.__doc__,
+                'merge_args':s.settings.mesh.modify_zones.merge_zones.argument_names}
+    dump(OUT/(label+'-target.json'),record)
     print('TARGET_INSPECTED',label,flush=True)
 
 
@@ -240,67 +324,67 @@ def map_target(s,label,resume=False):
     """Prove physical scale and collector topology before native replacement."""
     from run_p7_e5_cz import create_lower_register
     folder=WORK/label
-    s.transcript.start(file_name=str(OUT/(label+'-map.txt')),write_to_stdout=False)
-    target_cff=folder/'split-target.cas.h5'
-    if resume:
-        s.settings.file.read_case(file_name=str(target_cff))
-        scale=1; height=6.261; parts=['wall']; selection={'recovered_from':str(target_cff)}
-    else:
-        # Use native vertex coordinates, not the raw file's units flag.
-        from ansys.fluent.core.fields.field_data_interfaces import SurfaceFieldDataRequest, SurfaceDataType
-        import numpy as np
-        geometry=s.fields.field_data.get_field_data(SurfaceFieldDataRequest(
-            surfaces=['steamoutlet'],data_types=[SurfaceDataType.Vertices]))
-        vertices=np.asarray(geometry['steamoutlet'].vertices)
-        height=float(vertices[:,1].mean())
-        if abs(height-6.261)<.01:scale=1.0
-        elif abs(height-6261)<10:scale=.001
-        else:raise RuntimeError(f'Unexpected native outlet height: {height}')
-        if scale!=1:s.settings.mesh.scale(x_scale=scale,y_scale=scale,z_scale=scale)
-        walls=s.settings.setup.boundary_conditions.wall
-        parts=[n for n in WALL_PARTS if n in walls.get_object_names()]
-        if 'wall' not in parts:raise RuntimeError('Original physical wall role missing')
-        if len(parts)>1:
-            reference=walls['wall'].get_state()
-            for name in parts:
-                item=copy.deepcopy(reference);item['name']=name;walls[name].set_state(item)
-            s.settings.mesh.modify_zones.merge_zones(zone_names=parts)
-            survivors=[n for n in parts if n in walls.get_object_names()]
-            if len(survivors)!=1:raise RuntimeError('Physical wall union merge failed')
-            if survivors[0]!='wall':s.settings.mesh.modify_zones.zone_name(zone_name=survivors[0],new_name='wall')
-        register,selection=create_lower_register(s)
-        s.settings.mesh.modify_zones.sep_cell_zone_mark(cell_zone_name='separator-purnanto',register=register,move_faces=True)
-        generated=[n for n in s.settings.setup.cell_zone_conditions.fluid.get_object_names() if n!='separator-purnanto']
-        if len(generated)!=1:raise RuntimeError('Expected one lower collector cell zone')
-        s.settings.mesh.modify_zones.zone_name(zone_name=generated[0],new_name='p71a-v2-virtual-outlet')
-        s.settings.file.write_case(file_name=str(target_cff))
-    topo=remote_audit(s,target_cff,folder)
-    zones={z['name']:z['id'] for z in topo['cell_zones']}
-    lower,upper=zones['p71a-v2-virtual-outlet'],zones['separator-purnanto']
-    cross=[z for z in topo['face_zones'] if {z.get('c0'),z.get('c1')}=={lower,upper}]
-    if len(cross)!=2:raise RuntimeError('Expected two verified collector entry face zones; inspect topology')
-    source=json.loads(source_receipt().read_text())['state']
-    entries=source['readback']['entry_faces']
-    clean=lambda item:{k:v for k,v in item.items() if k!='name'}
-    if clean(list(entries.values())[0])!=clean(list(entries.values())[1]):
-        raise RuntimeError('Reference entry conditions differ; individual geometric correspondence needed')
-    renames={}
-    for z in topo['face_zones']:
-        if z.get('c0')==lower and not z.get('c1'):
-            if z['name'].startswith('wall') and z['name']!='bottom':renames[z['name']]='wall:004'
-            elif z['name'].startswith('separator-purnanto:1'):renames[z['name']]='separator-purnanto:1:001'
-        if z.get('c0')==lower and z.get('c1')==lower:
-            renames[z['name']]='interior--separator-purnanto:013'
-    # Both entry boundaries have identical physical conditions; their union
-    # and lower/upper adjacency are the invariant, not their generated suffix.
-    for z,name in zip(sorted(cross,key=lambda item:item['name']),sorted(entries)):
-        renames[z['name']]=name
-    for old,new in renames.items():
-        if old!=new:s.settings.mesh.modify_zones.zone_name(zone_name=old,new_name=new)
-    s.settings.mesh.check();s.settings.mesh.size_info()
-    legacy=folder/'mapped-target.cas'
-    s.settings.file.cff_files=False;s.settings.file.write_case(file_name=str(legacy));s.settings.file.cff_files=True
-    s.transcript.stop()
+    with client_capture(s,OUT/(label+'-map-'+str(time.time_ns())+'.txt')):
+        target_cff=folder/'split-target.cas.h5'
+        if resume:
+            s.settings.file.read_case(file_name=str(target_cff))
+            scale=1; height=6.261; parts=['wall']; selection={'recovered_from':str(target_cff)}
+        else:
+            # Use native vertex coordinates, not the raw file's units flag.
+            from ansys.fluent.core.fields.field_data_interfaces import SurfaceFieldDataRequest, SurfaceDataType
+            import numpy as np
+            geometry=s.fields.field_data.get_field_data(SurfaceFieldDataRequest(
+                surfaces=['steamoutlet'],data_types=[SurfaceDataType.Vertices]))
+            vertices=np.asarray(geometry['steamoutlet'].vertices)
+            height=float(vertices[:,1].mean())
+            if abs(height-6.261)<.01:scale=1.0
+            elif abs(height-6261)<10:scale=.001
+            else:raise RuntimeError(f'Unexpected native outlet height: {height}')
+            if scale!=1:s.settings.mesh.scale(x_scale=scale,y_scale=scale,z_scale=scale)
+            walls=s.settings.setup.boundary_conditions.wall
+            parts=[n for n in WALL_PARTS if n in walls.get_object_names()]
+            if 'wall' not in parts:raise RuntimeError('Original physical wall role missing')
+            if len(parts)>1:
+                reference=walls['wall'].get_state()
+                for name in parts:
+                    item=copy.deepcopy(reference);item['name']=name;walls[name].set_state(item)
+                s.settings.mesh.modify_zones.merge_zones(zone_names=parts)
+                survivors=[n for n in parts if n in walls.get_object_names()]
+                if len(survivors)!=1:raise RuntimeError('Physical wall union merge failed')
+                if survivors[0]!='wall':s.settings.mesh.modify_zones.zone_name(zone_name=survivors[0],new_name='wall')
+            register,selection=create_lower_register(s)
+            s.settings.mesh.modify_zones.sep_cell_zone_mark(cell_zone_name='separator-purnanto',register=register,move_faces=True)
+            generated=[n for n in s.settings.setup.cell_zone_conditions.fluid.get_object_names() if n!='separator-purnanto']
+            if len(generated)!=1:raise RuntimeError('Expected one lower collector cell zone')
+            s.settings.mesh.modify_zones.zone_name(zone_name=generated[0],new_name='p71a-v2-virtual-outlet')
+            s.settings.file.write_case(file_name=str(target_cff))
+        topo=remote_audit(s,target_cff,folder)
+        zones={z['name']:z['id'] for z in topo['cell_zones']}
+        lower,upper=zones['p71a-v2-virtual-outlet'],zones['separator-purnanto']
+        cross=[z for z in topo['face_zones'] if {z.get('c0'),z.get('c1')}=={lower,upper}]
+        if len(cross)!=2:raise RuntimeError('Expected two verified collector entry face zones; inspect topology')
+        source=json.loads(source_receipt().read_text())['state']
+        entries=source['readback']['entry_faces']
+        clean=lambda item:{k:v for k,v in item.items() if k!='name'}
+        if clean(list(entries.values())[0])!=clean(list(entries.values())[1]):
+            raise RuntimeError('Reference entry conditions differ; individual geometric correspondence needed')
+        renames={}
+        for z in topo['face_zones']:
+            if z.get('c0')==lower and not z.get('c1'):
+                if z['name'].startswith('wall') and z['name']!='bottom':renames[z['name']]='wall:004'
+                elif z['name'].startswith('separator-purnanto:1'):renames[z['name']]='separator-purnanto:1:001'
+            if z.get('c0')==lower and z.get('c1')==lower:
+                renames[z['name']]='interior--separator-purnanto:013'
+        # Both entry boundaries have identical physical conditions; their union
+        # and lower/upper adjacency are the invariant, not their generated suffix.
+        for z,name in zip(sorted(cross,key=lambda item:item['name']),sorted(entries)):
+            renames[z['name']]=name
+        for old,new in renames.items():
+            if old!=new:s.settings.mesh.modify_zones.zone_name(zone_name=old,new_name=new)
+        s.settings.mesh.check();s.settings.mesh.size_info()
+        legacy=folder/'mapped-target.cas'
+        s.settings.file.cff_files=False;s.settings.file.write_case(file_name=str(legacy));s.settings.file.cff_files=True
+
     record={'status':'TARGET_MAPPED','scale_applied':scale,'native_outlet_height_before':height,
             'wall_union':parts,'collector_register':selection,'topology':topo,'renames':renames,
             'entry_mapping_basis':'Identical reference conditions; same physical lower/upper interface union',
@@ -332,26 +416,26 @@ def prepare_child(s,label):
         injection_backup=folder/'source.inj'
         s.tui.file.write_injections(str(injection_backup),*injection_names,'()')
         s.scheme.eval("(rpsetvar 'dynamesh/replace-mesh/partition-per-zone? #t)")
-        s.transcript.start(file_name=str(OUT/(label+'-transfer.txt')),write_to_stdout=False)
-        s.settings.mesh.replace(file_name=mapped['native_replacement_input'],zones=False)
-        injections=s.settings.setup.models.discrete_phase.injections
-        if set(injections.get_object_names())!=set(injection_names):
-            if injections.get_object_names():raise RuntimeError('Unexpected partial injection transfer')
-            s.settings.file.read_injections(file_name=str(injection_backup))
-        for _ in range(7):
-            extras=set(injections.get_object_names())-set(injection_names)
-            if not extras:break
-            if not all(name.startswith('imported-inj-') for name in extras):
-                raise RuntimeError('Unexpected diagnostic injection after native import')
-            injections.delete(name_list=sorted(extras))
-        if set(injections.get_object_names())!=set(injection_names):raise RuntimeError('DPM injection names differ')
-        s.transcript.stop()
+        with client_capture(s,OUT/(label+'-transfer-'+str(time.time_ns())+'.txt')):
+            s.settings.mesh.replace(file_name=mapped['native_replacement_input'],zones=False)
+            injections=s.settings.setup.models.discrete_phase.injections
+            if set(injections.get_object_names())!=set(injection_names):
+                if injections.get_object_names():raise RuntimeError('Unexpected partial injection transfer')
+                s.settings.file.read_injections(file_name=str(injection_backup))
+            for _ in range(7):
+                extras=set(injections.get_object_names())-set(injection_names)
+                if not extras:break
+                if not all(name.startswith('imported-inj-') for name in extras):
+                    raise RuntimeError('Unexpected diagnostic injection after native import')
+                injections.delete(name_list=sorted(extras))
+            if set(injections.get_object_names())!=set(injection_names):raise RuntimeError('DPM injection names differ')
+
         print('NATIVE_TRANSFER_INJECTIONS_VERIFIED',label,flush=True)
         transfer_fields=base.state(s)['readback']['fields']
         selected=json.loads((OUT/'raw/provisional-stage4-selection.json').read_text())
         apply_selected_settings(s,selected)
         apply_approved_bulk(s)
-        base.loading(s,.25)
+        set_loading(s,.25)
         require_match({'fields':base.state(s)['readback']['fields']},{'fields':transfer_fields})
         mapped['transfer_settings_basis']='Verified original non-stripping/non-separating E2.7 A; Stage 4 settings applied after interpolation'
     assert_bulk_active(s)
@@ -412,6 +496,29 @@ def histories(s,paths,names):
     return {name:history(read_text(s,paths[name])) for name in names}
 
 
+def hold_limits():
+    return {'pressure_drop_range_percent_mean':5.0,
+            'bulk_mass_range_percent_mean':10.0,
+            'liquid_flux_range_percent_full_inlet':5.0}
+
+
+def assess_hold_screen(screen):
+    limits=hold_limits()
+    result=copy.deepcopy(screen)
+    result.update(limits=limits,pass_rule='ALL_THREE_WITHIN_LIMITS')
+    result['pass']=all(math.isfinite(result.get(key,float('nan'))) and
+                       0<=result[key]<=limit for key,limit in limits.items())
+    return result
+
+
+def refresh_hold_screens(m):
+    m['hold_screens']=[assess_hold_screen(screen) for screen in m.get('hold_screens',[])]
+    count=0
+    for screen in m['hold_screens']:
+        count=count+1 if screen['pass'] else 0
+    m.update(stable_windows=count,hold_limits=hold_limits())
+
+
 def hold_screen(s,m):
     import numpy as np
     names=['p72s3-pressure-inlet','p72s3-pressure-outlet',
@@ -427,31 +534,64 @@ def hold_screen(s,m):
     prange=100*float(np.ptp(pressure))/max(abs(float(pressure.mean())),1e-12)
     mrange=100*float(np.ptp(mass))/max(abs(float(mass.mean())),1e-12)
     lrange=100*float(np.ptp(liquid))/116.92
-    return {'pass':prange<=.5 and mrange<=1 and lrange<=1,'window':[start,end],
+    return assess_hold_screen({'window':[start,end],
             'pressure_drop_range_percent_mean':prange,'bulk_mass_range_percent_mean':mrange,
             'liquid_flux_range_percent_full_inlet':lrange,'pressure_drop_mean_pa':float(pressure.mean()),
-            'bulk_mass_mean_kg':float(mass.mean()),'signed_liquid_outlet_mean_kg_s':float(liquid.mean())}
+            'bulk_mass_mean_kg':float(mass.mean()),'signed_liquid_outlet_mean_kg_s':float(liquid.mean())})
+
+
+@contextmanager
+def native_batch_transcript(s,path):
+    """One start/stop pair; close on a failed solve without masking its error."""
+    start=s.settings.file.start_transcript
+    # Only recover an inherited transcript when starting a new one is disabled.
+    # Do not stop again after a normally closed preceding batch.
+    if not start.is_active():
+        stop=s.settings.file.stop_transcript
+        if not stop.is_active():
+            raise RuntimeError('Native transcript start unavailable; reconcile session state')
+        stop()
+    start(file_name=str(path))
+    try:
+        yield
+    except BaseException:
+        try:s.settings.file.stop_transcript()
+        except Exception as exc:
+            print('TRANSCRIPT_CLOSE_AFTER_FAILURE',type(exc).__name__,flush=True)
+        raise
+    else:
+        s.settings.file.stop_transcript()
 
 
 def batch(s,m,steps,label,checkpoint=True):
     from run_phase72a_adaptive_film import FILM
+    if not isinstance(steps,int) or isinstance(steps,bool) or steps<=0:
+        raise ValueError('A batch needs a positive integer update count')
+    require_idle(s)
     folder=WORK/m['label'];start=native_iteration(s);end=start+steps
     if start!=m['verified_native_end']:raise RuntimeError('Live iteration differs from verified campaign endpoint')
     assert_bulk_active(s)
     dt=dict(s.rp_vars('wall-film/model-parameters'))['timestep-max']
+    if not math.isfinite(dt) or dt<=0:raise RuntimeError('Invalid fixed film step')
     # Cortex's solution-state archive is refreshed by native save/reopen.
     # Use accepted transcript time between checkpoints.
     before_time=m['blocks'][-1]['film_end_s'] if m['blocks'] else film(s)['film_elapsed_time']
-    remote=folder/(f'{label}-N{start}-N{end}.trn')
-    s.tui.file.start_transcript(str(remote))
-    m.update(status='RUNNING',active_stage=label,active_target=end,active_transcript=str(remote))
-    dump(OUT/(m['label']+'-run.json'),m)
-    print('BATCH',m['label'],label,start,end,flush=True);t0=time.monotonic()
-    base.iterate(s,steps)
-    after=film(s);s.tui.file.stop_transcript()
+    remote=folder/(f'{label}-N{start}-N{end}-{time.time_ns()}.trn')
+    with native_batch_transcript(s,remote):
+        m.update(status='RUNNING',active_stage=label,active_target=end,active_transcript=str(remote))
+        dump(OUT/(m['label']+'-run.json'),m)
+        print('BATCH',m['label'],label,start,end,flush=True);t0=time.monotonic()
+        base.iterate(s,steps)
     text=read_text(s,str(remote));(OUT/(m['label']+'-'+remote.name)).write_text(text)
     rows=[tuple(map(float,match.groups())) for match in FILM.finditer(text)]
     if len(rows)!=steps:raise RuntimeError('Native film-time evidence incomplete')
+    if (any(not all(math.isfinite(value) for value in row) for row in rows)
+        or any(row[2]<0 or row[2]>1 for row in rows)
+        or re.search(r'floating point exception|fatal error|Divergence detected',text,re.I)):
+        raise RuntimeError('Numerical recovery required; verified endpoint not advanced')
+    if any(not math.isclose(row[0],before_time+(i+1)*dt,abs_tol=1e-10,rel_tol=1e-6)
+           for i,row in enumerate(rows)):
+        raise RuntimeError('Native film clock is not consecutive')
     accepted_end=rows[-1][0]
     if (not all(math.isclose(row[1],dt,rel_tol=1e-7) for row in rows)
         or not math.isclose(accepted_end-before_time,steps*dt,abs_tol=1e-10,rel_tol=1e-6)):
@@ -463,20 +603,27 @@ def batch(s,m,steps,label,checkpoint=True):
         before_state=base.state(s)
         if not all(math.isfinite(v[0]) for v in before_state['readback']['fields'].values()):
             raise RuntimeError('Nonfinite fields; preserve and recover')
-        pair=save(s,folder,f'{label}-N{end}');load(s,pair)
+        pair=save(s,folder,f'{label}-N{end}-{time.time_ns()}')
+        proof_path=OUT/(m['label']+'-checkpoint-'+str(end)+'-'+str(time.time_ns())+'.json')
+        proof={'status':'SAVED_REOPEN_PENDING','pair':pair,'block':record,'before':before_state}
+        dump(proof_path,proof)
+        load(s,pair)
         require_bulk_audit(s)
-        after_state=base.state(s);require_match(after_state['readback'],before_state['readback'])
-        if before_state['setup']!=after_state['setup'] or before_state['methods']!=after_state['methods']:
-            raise RuntimeError('Solved child setup changed on reopen')
+        after_state=base.state(s);proof.update(status='REOPEN_CHECKS_PENDING',after=after_state)
+        dump(proof_path,proof)
+        require_match(after_state['readback'],before_state['readback'])
+        proof['setup_check']=require_setup_same(after_state['setup'],before_state['setup'])
+        if before_state['methods']!=after_state['methods']:
+            raise RuntimeError('Solved child methods changed on reopen')
         if not math.isclose(film(s)['film_elapsed_time'],accepted_end,abs_tol=1e-12):
             raise RuntimeError('Film clock changed on reopen')
         record['pair']=pair;m['latest_pair']=pair
         record['fields']=after_state['readback']['fields']
+        proof.update(status='REOPEN_VERIFIED',film=film(s));dump(proof_path,proof)
+        record['checkpoint_proof']=str(proof_path)
     m['blocks'].append(record);m.update(status='CHECKPOINT_VERIFIED' if checkpoint else 'RAMP_PROGRESS_VERIFIED',
                                      verified_native_end=end,active_target=None)
     dump(OUT/(m['label']+'-run.json'),m)
-    if record['peak_film_courant']>1 or re.search(r'floating point exception|fatal error|Divergence detected',text,re.I):
-        raise RuntimeError('Numerical recovery required; endpoint retained')
     return record
 
 
@@ -484,7 +631,7 @@ def run_child(s,label,smoke_only=False):
     audit_path=OUT/'08b-settings-audit-approved.json'
     if not audit_path.exists() or json.loads(audit_path.read_text()).get('status')!='APPLIED_REOPEN_VERIFIED':
         raise RuntimeError('Complete the human-requested 08b settings audit before Phase 9 solves')
-    record=prepare_child(s,label);path=OUT/(label+'-run.json')
+    path=OUT/(label+'-run.json')
     if path.exists():
         m=json.loads(path.read_text())
         if m['status'].startswith('FULL_FEED_PREPARED'):return m
@@ -502,6 +649,7 @@ def run_child(s,label,smoke_only=False):
             dump(path,m)
         require_bulk_audit(s)
     else:
+        record=prepare_child(s,label)
         load(s,record['pair'])
         require_bulk_audit(s)
         cells=next(m['cells'] for m in json.loads((OUT/'mesh-input-audit.json').read_text())['meshes'] if m['label']==label)
@@ -517,33 +665,42 @@ def run_child(s,label,smoke_only=False):
     autosave.case_frequency='each-time';autosave.root_name=str(WORK/label/'auto-%i')
     autosave.retain_most_recent_files=False;autosave.data_frequency=500
     if m['verified_native_end']==1580:
-        base.loading(s,.25);batch(s,m,20,'low-feed-smoke')
+        set_loading(s,.25);batch(s,m,20,'low-feed-smoke')
         proof=histories(s,m['report_paths'],list(m['report_paths']))
         if any(not set(range(1581,1601)).issubset(v) for v in proof.values()):
             raise RuntimeError('Smoke instrumentation coverage incomplete')
         m['instrumentation_smoke']='PASS';dump(path,m)
     if smoke_only:return m
     if m['verified_native_end']<m['low_hold_end']:
-        base.loading(s,.25);batch(s,m,m['low_hold_end']-m['verified_native_end'],'low-feed-hold')
+        set_loading(s,.25);batch(s,m,m['low_hold_end']-m['verified_native_end'],'low-feed-hold')
     while m['verified_native_end']<m['ramp_end']:
         progress=m['verified_native_end']-m['low_hold_end']
-        base.loading(s,.25+.75*progress/2000)
+        set_loading(s,.25+.75*progress/2000)
         batch(s,m,10,'ramp',checkpoint=(progress+10)%500==0)
-    base.loading(s,1.0)
+    set_loading(s,1.0)
     m.setdefault('full_hold_start',m['ramp_end']);m.setdefault('stable_windows',0)
+    if (m['verified_native_end']-m['full_hold_start']>=1000 and
+        (not m.get('hold_screens') or m['hold_screens'][-1]['window'][-1]!=m['verified_native_end'])):
+        m.setdefault('hold_screens',[]).append(hold_screen(s,m))
+    refresh_hold_screens(m);dump(path,m)
     while m['verified_native_end']-m['full_hold_start']<m['full_hold_budget']:
+        if m['verified_native_end']-m['full_hold_start']>=m['minimum_full_hold'] and m['stable_windows']>=2:break
         batch(s,m,1000,'full-feed-hold')
         screen=hold_screen(s,m);m.setdefault('hold_screens',[]).append(screen)
         m['stable_windows']=m['stable_windows']+1 if screen['pass'] else 0
         dump(path,m)
         if m['verified_native_end']-m['full_hold_start']>=m['minimum_full_hold'] and m['stable_windows']>=2:break
     h=histories(s,m['report_paths'],list(m['report_paths']))
+    # A recovered report file can retain later failed updates. Keep the final
+    # exported histories within the preserved endpoint; native files stay intact.
+    h={name:{iteration:value for iteration,value in values.items()
+             if iteration<=m['verified_native_end']} for name,values in h.items()}
     ids=set(range(1581,m['verified_native_end']+1))
     if any(not ids.issubset(v) for v in h.values()):raise RuntimeError('Final monitor coverage incomplete')
     dump(OUT/(label+'-histories.json'),h)
     m.update(status='FULL_FEED_PREPARED_STABILITY_SCREEN_PASS' if m['stable_windows']>=2 else 'FULL_FEED_PREPARED_NONSTATIONARY_BUDGET',
              final_pair=m['latest_pair'],final_film=film(s),final_equations=assert_bulk_active(s),
-             final_feed=base.loading(s,1.0),final_report_coverage='PASS',completed_utc=datetime.now(timezone.utc).isoformat())
+             final_feed=read_feed(s,1.0),final_report_coverage='PASS',completed_utc=datetime.now(timezone.utc).isoformat())
     dump(path,m);return m
 
 
@@ -552,6 +709,12 @@ def campaign(s):
     m=json.loads(path.read_text()) if path.exists() else {'status':'STARTED','server_id':'3',
        'authority':'human_20261007_phase9_full_server3_only','mesh_order':['60k','342k','680k','997k','2_6M'],
        'endpoint_boundary':'FULL_FEED_HOLD_BULK_ACTIVE','completed':[]}
+    m.update(requires_explicit_resume=False,supervision_paused_by_human=False)
+    if m.get('error'):
+        prior={'error':m.pop('error'),'active_mesh':m.get('active_mesh')}
+        for key in ['failure_pair','preservation_error']:
+            if key in m:prior[key]=m.pop(key)
+        m.setdefault('previous_failures',[]).append(prior)
     for label in m['mesh_order']:
         if label in m['completed']:continue
         m.update(status='RUNNING',active_mesh=label);dump(path,m)
@@ -560,7 +723,7 @@ def campaign(s):
             m['completed'].append(label);m.setdefault('results',{})[label]=result['status'];dump(path,m)
         except Exception:
             m.update(status='RECOVERY_REQUIRED',error=traceback.format_exc())
-            try:m['failure_pair']=save(s,WORK/label,f'failure-N{native_iteration(s)}')
+            try:m['failure_pair']=save(s,WORK/label,f'failure-N{native_iteration(s)}-{time.time_ns()}')
             except Exception:m['preservation_error']=traceback.format_exc()
             dump(path,m);raise
     m.update(status='COMPLETE_PREPARATION_ONLY',active_mesh=None);dump(path,m)
@@ -571,8 +734,21 @@ def main():
     parser.add_argument('action',choices=['source','inspect','map','finish-map','prepare','smoke','run','campaign'])
     parser.add_argument('--label',choices=['60k','342k','680k','997k','2_6M'])
     parser.add_argument('--live-transcript',help='Optional client-side live transcript for campaign monitoring')
+    parser.add_argument('--controller-receipt',help='Optional desktop launch receipt to update when the campaign ends')
     args=parser.parse_args()
-    s=previous.attach()
+    # A client-only diagnostic signal never interrupts or exits Fluent.
+    if sys.platform!='win32':
+        import faulthandler
+        import signal
+        faulthandler.register(signal.SIGUSR1,all_threads=True)
+    # The desktop controller holds this lock for its entire lifetime.
+    # A second controller fails before attaching or issuing any Fluent call.
+    if sys.platform!='win32':
+        import fcntl
+        controller_lock=(OUT/'controller.lock').open('a+')
+        try:fcntl.flock(controller_lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        except BlockingIOError:raise RuntimeError('Another Phase 9 controller owns the call stream')
+    s=attach()
     # An empty restarted solver has no active iterate command. Distinguish
     # that state from a loaded session whose calculation is running.
     has_mesh=s.settings.setup.cell_zone_conditions.is_active()
@@ -587,7 +763,19 @@ def main():
     elif args.action=='prepare':prepare_child(s,args.label)
     elif args.action=='smoke':run_child(s,args.label,smoke_only=True)
     elif args.action=='run':run_child(s,args.label)
-    elif args.action=='campaign':campaign(s)
+    elif args.action=='campaign':
+        try:
+            campaign(s)
+        finally:
+            if args.controller_receipt:
+                receipt_path=Path(args.controller_receipt)
+                receipt=json.loads(receipt_path.read_text())
+                manifest_path=OUT/'campaign-manifest.json'
+                manifest=json.loads(manifest_path.read_text())
+                receipt.update(status=manifest['status'],active_mesh=manifest.get('active_mesh'),
+                               campaign_manifest=str(manifest_path),
+                               ended_utc=datetime.now(timezone.utc).isoformat())
+                dump(receipt_path,receipt)
 
 
 if __name__=='__main__':main()

@@ -106,7 +106,7 @@ def main() -> None:
     dump(manifest, run)
     solver = launch_fluent(product_version="25.2", dimension=3, precision="double",
                            processor_count=4, ui_mode="gui", start_timeout=240,
-                           cleanup_on_exit=True, start_transcript=True)
+                           cleanup_on_exit=False, start_transcript=True)
     capture = None
     try:
         load_pair(solver, source)
@@ -162,8 +162,6 @@ def main() -> None:
         dump(manifest, run)
         if capture is not None:
             capture.close()
-        if run["status"] == "COMPLETE":
-            solver.exit()
     print(json.dumps({"status": run["status"], "manifest": str(manifest)}, indent=2))
 
 

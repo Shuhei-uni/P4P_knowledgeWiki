@@ -55,5 +55,5 @@ if __name__=='__main__':
   else:prepare()
  except Exception:
   if run.MANIFEST.exists():
-   m=json.loads(run.MANIFEST.read_text());m.update(status='RECOVERY_REQUIRED',error=traceback.format_exc());run.dump(run.MANIFEST,m)
+   m=json.loads(run.MANIFEST.read_text());m.update(status='UNREALISTIC' if m.get('run_classification')=='UNREALISTIC' else 'RECOVERY_REQUIRED',error=traceback.format_exc());run.dump(run.MANIFEST,m)
   raise

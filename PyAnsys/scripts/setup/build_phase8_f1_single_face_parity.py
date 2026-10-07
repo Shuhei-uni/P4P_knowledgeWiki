@@ -82,7 +82,7 @@ def main() -> None:
     dump(output, result)
     solver = launch_fluent(product_version="25.2", dimension=3, precision="double",
                            processor_count=4, ui_mode="gui", start_timeout=240,
-                           cleanup_on_exit=True, start_transcript=True)
+                           cleanup_on_exit=False, start_transcript=True)
     try:
         load_pair(solver, source_base)
         inlet = solver.settings.setup.boundary_conditions.mass_flow_inlet
@@ -119,8 +119,6 @@ def main() -> None:
         raise
     finally:
         dump(output, result)
-        if result["status"] == "CASE_DATA_VERIFIED":
-            solver.exit()
     print(json.dumps({"status": result["status"], "receipt": str(output)}, indent=2))
 
 

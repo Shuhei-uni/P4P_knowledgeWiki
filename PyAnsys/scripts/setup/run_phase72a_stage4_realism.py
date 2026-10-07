@@ -14,10 +14,13 @@ from run_phase72a_local_film_replay import require_match
 from run_phase72a_adaptive_film import FILM,history
 from pyansys_fluent.stage4_native import ensure_remote_directory
 from pyansys_fluent.remote_text import read_text
+from pyansys_fluent.film_thickness_guard import assess_thickness
 OUT=ROOT/'output/phase72a-stage4-realism/20261007'
 WORK=PureWindowsPath(r'C:\Users\syok443\Documents\FluentRuns\Phase72A\Stage4\realism-20261007\verified-run')
 MANIFEST=OUT/'run-manifest.json'
 FLOW_MOMENTUM_COUPLING=True
+# Human instruction, 7 October 2026: reaching 0.3 m makes a Stage 4 run unrealistic.
+UNREALISTIC_FILM_THICKNESS_M=.3
 TARGETS={'solve-wallfilm?':True,'solve-momentum?':True,'mom-equation?':True,
  'mom-gravity?':True,'mom-aero-drive?':True,'mom-pressure?':True,'mom-spreading?':True,
  'surface-tension?':True,'dpm-collection?':True,'dpm-splashing?':True,
@@ -105,6 +108,8 @@ def prepare(s):
  dump(MANIFEST,m);print('PREPARED_VERIFIED',flush=True);return m
 
 def batch(s,m,count,label,dt,frozen,completed=False):
+ if m.get('run_classification')=='UNREALISTIC':
+  raise RuntimeError('UNREALISTIC run cannot continue from its rejected endpoint')
  if completed:
   start=m['verified_native_end']
   checkpoint=json.loads((OUT/f"bulk-film-N{start}.json").read_text())
@@ -140,11 +145,22 @@ def batch(s,m,count,label,dt,frozen,completed=False):
  'sampled_film_ledger_residual_kg':ledger,'sampled_ledger_error_percent':100*abs(ledger)/max(sum(abs(v) for v in sums.values()),1e-30),
  'inner_residual_rows':len(re.findall(r'sub-iteration:',text)),'pair':pair,'transcript':str(path),
  'max_thickness_m':after['p72a-e2.7-ewf-thickness-max'][0]}
+ thickness=assess_thickness(
+  {i:histories['p72a-e2.7-ewf-thickness-max'][i] for i in range(start+1,end+1)},
+  min(params(s)['thickness-limit'],m.get('unrealistic_film_thickness_limit_m',UNREALISTIC_FILM_THICKNESS_M)))
+ met['thickness_assessment']=thickness
+ if thickness['first_crossing_native_iteration'] is not None:
+  thickness['first_crossing_film_time_s']=initial['film_elapsed_time']+(thickness['first_crossing_native_iteration']-start)*dt
  reopened=reopen(s,pair);met['reopen']='PASS'
  dump(OUT/f'{label}-N{end}.json',{'metrics':met,'fields':after,'film':final,'audit':reopened})
  m['blocks'].append(met);m.update(status='CHECKPOINT_VERIFIED',latest_pair=pair,verified_native_end=end,verified_film_time_s=final['film_elapsed_time'],active_target=None)
  dump(MANIFEST,m);print('VERIFIED_BATCH',json.dumps(met),flush=True)
- if re.search(r'floating point exception|received signal|fatal error|Divergence detected',text,re.I) or met['peak_courant']>1 or met['max_thickness_m']>=1:
+ if thickness['classification']=='UNREALISTIC':
+  m.update(status='UNREALISTIC',run_classification='UNREALISTIC',unrealistic_thickness_assessment=thickness,
+   unrealistic_film_thickness_limit_m=thickness['limit_m'],rejected_endpoint_pair=pair)
+  dump(MANIFEST,m)
+  raise RuntimeError('UNREALISTIC: film thickness limit reached; paired endpoint preserved; continuation stopped')
+ if re.search(r'floating point exception|received signal|fatal error|Divergence detected',text,re.I) or met['peak_courant']>1:
   raise RuntimeError('Numerical recovery needed; endpoint preserved')
  if frozen:
   frozenfields=m['frozen_fields']
@@ -186,5 +202,5 @@ if __name__=='__main__':
  try:main()
  except Exception:
   if MANIFEST.exists():
-   m=json.loads(MANIFEST.read_text());m.update(status='RECOVERY_REQUIRED',error=traceback.format_exc());dump(MANIFEST,m)
+   m=json.loads(MANIFEST.read_text());m.update(status='UNREALISTIC' if m.get('run_classification')=='UNREALISTIC' else 'RECOVERY_REQUIRED',error=traceback.format_exc());dump(MANIFEST,m)
   raise

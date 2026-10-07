@@ -13,72 +13,15 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Project/meetings/2026-10-06-wall-liquid-response-meeting-report.md",
-                "mode": "source",
+                "file": "Project/Final research report/draft/02-model-and-methods.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-10-06-wall-liquid-response-meeting-report"
-            }
-          },
-          {
-            "id": "594945fc398a7a84",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Project/experiments/phase-08-storyline-reconstruction/results.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "results"
-            }
-          },
-          {
-            "id": "76f7bc0c11dedd45",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Project/Final research report/draft/05-references-and-appendices.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "05-references-and-appendices"
-            }
-          },
-          {
-            "id": "12bb532c6e6ec91b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Project/experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/case-history-N45606.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "case-history-N45606"
-            }
-          },
-          {
-            "id": "c4c39e04197e1eec",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/results.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "results"
+              "title": "02-model-and-methods"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -245,53 +188,53 @@
       "bases:Create new base": false
     }
   },
-  "active": "dfbf2f0d5c3490a1",
+  "active": "e09f1fe2acfb2d20",
   "lastOpenFiles": [
-    "PyAnsys/output/phase9-mesh-convergence/20261007/60k-ramp-N2080-N2090.trn",
-    "PyAnsys/output/phase8-stage2/20261007/offline-verification.json",
-    "PyAnsys/output/phase8-stage2/20261007/execution-state.json",
-    "PyAnsys/output/phase9-mesh-convergence/20261007/60k-low-feed-hold-N1600-N2080.trn",
-    "PyAnsys/output/phase8-stage2/20261007/source-topology.json",
-    "PyAnsys/output/phase8-stage2/20261007/inspect-source-error.json",
-    "PyAnsys/scripts/setup/__pycache__/run_phase8_parity_carrier.cpython-312.pyc",
-    "PyAnsys/scripts/setup/__pycache__/build_phase8_purnanto_parity_pilots.cpython-312.pyc",
-    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/realism-continuation/feedback-off/results.md",
-    "PyAnsys/scripts/setup/__pycache__/run_phase8_stage2_f2_simple.cpython-312.pyc",
-    "PyAnsys/scripts/setup/run_phase8_stage2_f2_simple.py",
-    "PyAnsys/output/phase72a-stage4-realism/20261007/feedback-off/figure-manifest.json",
-    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/realism-continuation/feedback-off/figures/film-response.png",
-    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/realism-continuation/feedback-off/figures/bulk-response.png",
+    "PyAnsys/output/phase9-mesh-convergence/20261007/342k-ramp-N3990-N4000-1791360163773179000.trn",
+    "PyAnsys/output/phase9-mesh-convergence/20261007/342k-ramp-N3980-N3990-1791360129898940000.trn",
+    "PyAnsys/output/phase9-mesh-convergence/20261007/342k-ramp-N3970-N3980-1791360094068413000.trn",
+    "PyAnsys/output/phase9-mesh-convergence/20261007/342k-ramp-N3960-N3970-1791360059800865000.trn",
+    "PyAnsys/output/phase9-mesh-convergence/20261007/342k-ramp-N3950-N3960-1791360023812373000.trn",
+    "PyAnsys/output/phase9-mesh-convergence/20261007/342k-ramp-N3940-N3950-1791359988454495000.trn",
+    "PyAnsys/output/phase9-mesh-convergence/20261007/342k-ramp-N3930-N3940-1791359952678960000.trn",
+    "PyAnsys/output/phase72a-stage4-ewf-long-native/20261007/inspection/latest-status.json",
+    "PyAnsys/output/phase9-mesh-convergence/20261007/342k-ramp-N3920-N3930-1791359918805558000.trn",
+    "PyAnsys/output/phase9-mesh-convergence/20261007/342k-ramp-N3910-N3920-1791359883101680000.trn",
+    "PyAnsys/output/phase9-mesh-convergence/20261007/342k-ramp-N3900-N3910-1791359849618551000.trn",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/ewf-only-drain/long-development/setup.md",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/ewf-only-drain/long-development/results.md",
+    "Project/experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/08b-native997k/fresh-tui10000-off/setup.md",
+    "Project/experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/08b-native997k/fresh-tui10000-off/results.md",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/ewf-only-drain/figures/drain-comparison.png",
+    "Project/experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/08b-native997k/run2000-off/figures/startup-divergence.png",
+    "Project/experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/08b-native997k/run2000-off/setup.md",
+    "Project/experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/08b-native997k/run2000-off/results.md",
+    "Project/meetings/2026-10-06-wall-liquid-response-meeting-report.md",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/ewf-only-drain/results.md",
+    "Project/experiments/phase-07b-full-geometry-liquid-removal/lower-sink-rate/spatial-comparison.md",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/ewf-only-drain/figures/source-proof.png",
     "Project/experiments/phase-08-storyline-reconstruction/results.md",
-    "Project/experiments/phase-08-storyline-reconstruction/index.md",
-    "Project/experiments/phase-08-storyline-reconstruction/CONTEXT.md",
-    "Project/experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/setup.md",
-    "Project/experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/results.md",
-    "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f4-coupled-dpm-ewf/figures/F4-26.81-5-n11000-inlet-vectors.png",
-    "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f4-coupled-dpm-ewf/figures/numerical-context.png",
-    "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f4-coupled-dpm-ewf/figures/film-response.png",
-    "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f4-coupled-dpm-ewf/figures/f3-f4-mechanism-response.png",
-    "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f4-coupled-dpm-ewf/figures/F4-26.81-5-n11000-vertical-vectors.png",
-    "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f4-coupled-dpm-ewf/figures/F4-26.81-5-n11000-pressure.png",
-    "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f4-coupled-dpm-ewf/figures/F4-26.81-5-n11000-liquid.png",
-    "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f4-coupled-dpm-ewf/figures/F4-26.81-5-n11000-inlet-liquid.png",
-    "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f4-coupled-dpm-ewf/setup.md",
-    "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f4-coupled-dpm-ewf/results.md",
-    "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/baseline-lineage-audit.md",
-    "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/index.md",
-    "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/results.md",
-    "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f1-one-inlet/setup.md",
-    "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f1-one-inlet/results.md",
     "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/CONTEXT.md",
-    "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f3-coupled-dpm/setup.md",
-    "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f3-coupled-dpm/results.md",
-    "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f2-split-inlet/setup.md",
-    "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f2-split-inlet/results.md",
-    "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/report-contract.md",
-    "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f0-simple/setup.md",
-    "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f0-simple/results.md",
-    "Project/Final research report/draft/05-references-and-appendices.md",
-    "Project/Final research report/draft/04-discussion-conclusions-and-future-work.md",
-    "Project/Final research report/draft/03-results.md",
-    "Project/Final research report/draft/02-model-and-methods.md"
+    "Project/Final research report/draft/02-model-and-methods.md",
+    "Project/experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/08b-native997k/setup.md",
+    "Project/experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/08b-native997k/results.md",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/ewf-only-drain/figures/drain-location.png",
+    "AGENTS.md",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/ewf-only-drain/setup.md",
+    "Project/experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/step-enable2200/setup.md",
+    "Project/experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/step-enable2200/results.md",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/setting-sensitivity/film-limit.md",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/realism-continuation/results.md",
+    "Project/experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/slow-enable3000/results.md",
+    "Project/Final research report/figures/separator-operation.svg",
+    "Project/Final research report/figures/separator-operation.png",
+    "Project/Final research report/draft/01-introduction-and-literature-review.md",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/setting-sensitivity/figures/selected-continuation.png",
+    "Project/Final research report/figures/literature/zarrouk-purnanto-2015-figure-12-breakdown.png",
+    "Project/Final research report/figures/literature/rizaldy-2016-figure-9-entrainment.png",
+    "Project/Final research report/figures/literature/rizaldy-2016-figure-5-operation.png",
+    "Project/experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/slow-enable3000/setup.md",
+    "Project/Final research report/literature-figure-shortlist.md",
+    "Project/Final research report/figures/literature-candidates/design-overview/candidate-review.md"
   ]
 }

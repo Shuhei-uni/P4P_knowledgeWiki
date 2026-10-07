@@ -214,7 +214,7 @@ def main() -> None:
                "parent_assessment": str(args.assessment), "child_base": str(child),
                "parent_case_sha256": parent["checkpoints"][-1]["case_sha256"]}
     solver = launch_fluent(product_version="25.2", dimension=3, precision="double", processor_count=4,
-                           ui_mode="gui", start_timeout=240, cleanup_on_exit=True, start_transcript=True)
+                           ui_mode="gui", start_timeout=240, cleanup_on_exit=False, start_transcript=True)
     try:
         load_pair(solver, source_base)
         receipt["parent_methods"] = safe_get_state(solver.settings.solution.methods, "parent methods")
@@ -260,8 +260,6 @@ def main() -> None:
         raise
     finally:
         dump(receipt_path, receipt)
-        if receipt["status"] == "CASE_DATA_VERIFIED":
-            solver.exit()
     print(json.dumps({"status": receipt["status"], "receipt": str(receipt_path)}, indent=2))
 
 

@@ -25,6 +25,15 @@
 | 60k reuse proof | Same physical boundary face counts, scaled areas, enclosed volume and 60,964 cells; [native input comparison](../../../PyAnsys/output/phase9-mesh-convergence/20261007/60k-physical-reuse-proof.json) |
 | Initialization | No bulk reinitialization; no film reset after startup begins |
 | Checkpoints | Server-local FluentRuns/Phase9 disk; source, prepared children, hold/ramp checkpoints, full-feed endpoints |
+
+| Solve stage | Native command size | Reason for this boundary |
+| --- | --- | --- |
+| Initial instrumentation smoke | 20 updates once per mesh | Prove report coverage and accepted film time before the longer holds |
+| Fixed low-feed hold | Entire remaining low-feed allowance in one command | No inlet change or intermediate decision is required |
+| Feed ramp | 10 updates between inlet changes | Preserve the traced 2000-update ramp and its feed schedule; paired checkpoints every 500 updates |
+| Fixed full-feed hold | `/solve/iterate 1000` per block | One uninterrupted solve between the 1000-update stability decisions and paired checkpoints |
+| Observation | Separate watcher reads the live transcript every 30 s | Observation does not split the solve into short commands |
+| Storage | Native autosaves every 500 updates; paired verification at scheduled boundaries | All native checkpoints and transcripts stay on the Fluent machine; OneDrive is reserved for shared start/final pairs |
 | OneDrive | Immutable supplied inputs; selected final pairs only |
 
 | Mesh label | Actual fluid cells | File nodes | Low-feed hold updates | Ramp updates | Minimum full-feed hold updates |
@@ -40,7 +49,7 @@
 | Minimum hold scaling | Base hold multiplied by cube root of cell-count ratio; round upward to 500/1000 updates |
 | Purpose | Initial scheduling allowance; not a mathematical convergence law |
 | Full-feed extension | Additional 1000-update batches if bulk monitors still drift |
-| Stability screen | Two consecutive final-1000 windows: pressure-drop range <= 0.5% of mean; bulk inventory range <= 1%; outlet-liquid range <= 1% of full liquid inlet flow |
+| Stability screen | Human revised limits, 7 October 2026: two consecutive final-1000 windows with pressure-drop range <= 5% of mean; bulk inventory range <= 10% of mean; outlet-liquid range <= 5% of full liquid inlet flow |
 | Earliest stability acceptance | 2000 full-feed updates; larger mesh minima still apply |
 | Interpretation | Preparation maturity screen; does not establish full conservation or film stationarity |
 | Bounded preparation budget | At most 20,000 full-feed updates per mesh; preserve a nonstationary endpoint if the budget is exhausted |
