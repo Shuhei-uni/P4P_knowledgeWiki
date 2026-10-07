@@ -1,0 +1,35 @@
+{
+  "status": "STAGED_NOT_DEPLOYED",
+  "protected_pids": [
+    32626,
+    32628,
+    39233,
+    39582
+  ],
+  "files": [
+    {
+      "path": "PyAnsys/scripts/setup/run_phase9_mesh_startup.py",
+      "base_sha256": "90a6cdfbfd48ba5192972fdc1cbffec50b9566a27bbcf5b626f6875b88ee3137",
+      "staged_sha256": "b4ad1641338fd96abc40d66b4a2b1bb0c551103c2d9edbed8bcf6b9894511924",
+      "staged_path": "files/PyAnsys/scripts/setup/run_phase9_mesh_startup.py"
+    },
+    {
+      "path": "PyAnsys/scripts/setup/run_phase9_server4_2_6M.py",
+      "base_sha256": "e0d59cade9baec9b16f983c0166df01f8f8d938e86cfe80d9d4355e48e3e9a46",
+      "staged_sha256": "fede37ecbf2d06b8dfef3df1667d9b39286a0cfa59171a56b5a556960c2ceba8",
+      "staged_path": "files/PyAnsys/scripts/setup/run_phase9_server4_2_6M.py"
+    },
+    {
+      "path": "PyAnsys/scripts/orchestration/watch_phase9_campaign.py",
+      "base_sha256": "3bf80ed5efc25bf6d64739d035ab301095fe1dd770f8b6327414b91ed6209fbd",
+      "staged_sha256": "1e00d755073087d96e5ef9b36f8bea0de013c7af635f8e3ff464cd6e957b6f04",
+      "staged_path": "files/PyAnsys/scripts/orchestration/watch_phase9_campaign.py"
+    },
+    {
+      "path": "PyAnsys/scripts/orchestration/watch_phase9_server4.py",
+      "base_sha256": "0947db96df46b0e342c9f737cc07386a12b5134cc1540801b4b71ea3f2a33ba4",
+      "staged_sha256": "8bc5d372af4e90e470fe12420af6e9c67d61c9be915f487c6f8d1b6196b20399",
+      "staged_path": "files/PyAnsys/scripts/orchestration/watch_phase9_server4.py"
+    }
+  ]
+}

@@ -25,6 +25,10 @@ for a materially missing choice that would change the report.
 
 ## Build the evidence spine
 
+Read the relevant supplied rubric and report guidance before substantive
+drafting. Reuse unchanged guidance already read; confirm each section's purpose
+before placing methods, observations or interpretation in it.
+
 Start at `Project/index.md`, then read only the selected phases/campaigns and
 their current `CONTEXT.md`, `setup.md`, `results.md`, and relevant figure
 artifacts.

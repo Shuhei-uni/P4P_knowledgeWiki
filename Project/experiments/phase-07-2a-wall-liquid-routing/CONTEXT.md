@@ -4,9 +4,12 @@
 
 | Item | Current contract |
 | --- | --- |
+| Human priority — 8 October 2026 | Retain EWF and Phase Accretion; develop a repeatable wall-film method for mesh convergence. Accept measured simplification to reduce development cost. Full ownership of Server 1. |
+| Preferred candidate | Analytical film velocity. Assess it as a final model and, if required, as preparation before full momentum. Preserve mass accounting, wall transport and bulk-response checks. |
+| Direction review | [Accuracy / development-cost assessment](stage-04-ewf-wall-parameters/method-review.md); candidate comparisons and qualification conditions; no new solves submitted during this assessment |
 | Human direction — 7 October 2026 | Record the commercial-steel result as Stage 4; use the Stage 3 startup method for the next Stage 4 cases |
 | Stage 3 position | Human is satisfied with Stage 3 as the method/reference stage; preserve its evidence and existing claim limits |
-| Stage 4 goal | Assess changed EWF settings and wall parameters using the same low-feed activation and inlet-ramp pattern |
+| Stage 4 goal | Select wall-film physics and a development method with acceptable numerical error, physical assumptions and cost for repeated mesh runs; retain the Stage 3 startup basis |
 | Startup sequence | Low inlet loading → Coupled + EWF activation → low-feed hold → inlet ramp → short full-feed hold → freeze bulk equations → EWF-only development |
 | Method references | [Early-EWF startup](stage-03-shortened-reconstruction/early-ewf-startup/setup.md); [film-development](stage-03-shortened-reconstruction/early-ewf-startup/film-development/setup.md) |
 | Configurable scope | EWF settings and wall parameters may differ substantially from Stage 3; record selected values and controlled changes per case |
@@ -27,7 +30,8 @@
 | Selected direct film drain — 7 October 2026 | Human requests drainage during EWF-only solving. Extend film to the existing lower `wall:004`; local thickness-proportional mass sink and matching film momentum sink; τ=1.5 ms; 15 microseconds; bulk frozen. [Exact design / proof plan](stage-04-ewf-wall-parameters/ewf-only-drain/setup.md). |
 | Direct-drain status | Native source proof and matched 15 ms OFF/ON screens passed. Direct sink removed 0.508790 kg; lower film 70.32% lower; total film 0.189694 kg lower. ON final N41483 / 0.3881843386354626 s; bulk frozen; film still growing. [Result](stage-04-ewf-wall-parameters/ewf-only-drain/results.md). |
 | Selected long EWF run — 7 October 2026 | Human requests a very long native TUI run that continues after laptop closure. Continue drain-ON N41483 with full selected film physics, Flow Momentum Coupling OFF and bulk frozen; +200,000 updates at 15 microseconds (+3 s); paired local autosaves and native all-sample guards. [Design / decision tests](stage-04-ewf-wall-parameters/ewf-only-drain/long-development/setup.md). |
-| Long-run status | Native TUI submitted; film output observed; client exited. Target N241483 / approximately 3.388184 s; completion and stationarity pending. [Status](stage-04-ewf-wall-parameters/ewf-only-drain/long-development/results.md). |
+| Long-run status | Native Courant guard stopped at N68483: +27,000 / 200,000 updates; +405 ms verified. Direct drain removed 15.156844 kg; film gained 27.577737 kg, mainly upper wall. First Courant crossing N67648; peak 4.066397. Full report histories and rejected pair recovered; no steady-film qualification. [Analysis](stage-04-ewf-wall-parameters/ewf-only-drain/long-development/results.md). |
+| Long-run reporting scope — 8 October 2026 | Server 1 restarted; 36 necessary files read directly and hash verified; rejected N68483 pair reopened. No new solves. Film ledger error 1.648272%; inner residuals not recorded in saved transcript. |
 | Required diagnostics | Bulk liquid inventory; phase-2 steamoutlet boundary flux; EWF liquid inventory; film accretion/drainage rates; continuity |
 | Evidence standard | Native histories with actual iteration/film time, report/source definitions, accepted-step and film-ledger checks, explicit parent and paired restart proof |
 | Claim limits | Existing result combines lower roughness, restored bulk equations and changed film step; film remains filling; no isolated roughness-benefit claim |

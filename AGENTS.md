@@ -20,7 +20,7 @@ Use one owning workflow skill and let it follow its internal references:
 - `phase-loop` — experiment selection, execution, recovery, analysis, and phase closure;
 - `configure-run-monitor` — scheduled-monitor configuration and planner handoff;
 - `pyansys-workflow` — Fluent implementation/execution;
-	- When setting up EWF, make sure the correct absorber is set and that absorber is able to actually drain the EWF liquid not just the bulk liquid. Furthermore, the way the absorber behaves when we're only solving for EWF is also important the absorber will still need to act as a drain even if the bulk flow is frozen.
+	- New EWF setups must prove the intended drainage path, including direct film removal with frozen bulk when that mode is required; see its inspection/build reference.
 - `cfd-numerical-analysis` — CFD evidence and figures;
 - `cfd-wiki` — reusable research/method knowledge;
 - `report-writing` — assemble Project evidence and figures into technical reports;
@@ -33,10 +33,12 @@ A sub-step is not a reason to create another `SKILL.md`. Put branch-specific
 procedure/reference material inside the owning workflow folder. Create a new
 skill only when it needs a genuinely distinct invocation boundary.
 
-Fluent runs:
-When running simulations try to run in large batches, rather than iter(10) do around 1000 (Prefer using TUI run commands for cases where its just setup and then run) and when saving checkpoint save it on fluent local machine rather than onedrive. Onedrive is for start or final case/data pair that we'd like to share across computers not a place to store everything.
-
-And understand when to use small iteration commands to a single large chunks. We want to do solve/iterate 10 when we want to keep an eye on run a closely, but the most efficient way to run is to run solve/iteration 1000 or higher, every interruption to send to iterate 10 times is wasting a large amount of time that could be spent solving. 
+Fluent runs: use 1000 or more iterations while inputs stay fixed, bounded by the
+next required experiment decision. Use short commands for one smoke check or
+scheduled input changes. Observe live output without splitting a fixed solve.
+Save checkpoints and transcripts on the Fluent computer's local disk; use
+OneDrive for shared starting files and selected final pairs. Follow the
+`pyansys-workflow` run-control reference for detached execution and supervision.
 
 ## Autonomy
 
@@ -65,6 +67,12 @@ uncertainty; it is not ceremony.
 - Treat every `raw/` directory as immutable source/generated evidence.
 - Carry case-specific names, values, parents, and assumptions only from verified
   records for that case.
+
+For file lookup, use `rg --files` to locate an owner, `rg -n` to find the relevant
+section, then read only that section or selected JSON fields. Keep combined
+parallel output within the tool budget. Reuse unchanged material already read;
+refresh mutable state when it can change the decision. If output is truncated,
+narrow the query instead of printing the same large result again.
 
 ### Writing/Reponding
 For Markdown under `Project/experiments/`, use tables and figures as the main

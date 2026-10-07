@@ -12,7 +12,6 @@ import sys
 import time
 import re
 import traceback
-from contextlib import contextmanager
 from datetime import datetime, timezone
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -25,6 +24,7 @@ from run_phase72a_reentrainment_speeds import MODEL_ARGS
 from pyansys_fluent.common import remote_chdir, remote_file_exists
 from pyansys_fluent.stage4_native import ensure_remote_directory, remote_file_sha256
 from pyansys_fluent.remote_text import read_text, write_ascii_text_new
+from pyansys_fluent.execution_contract import native_transcript, require_state_same
 
 OUT = ROOT/'output/phase9-mesh-convergence/20261007'
 WORK = PureWindowsPath(r'C:\Users\syok443\Documents\FluentRuns\Phase9\20261007')
@@ -178,21 +178,13 @@ def assert_bulk_active(s):
 
 
 def require_setup_same(actual, expected):
-    """Keep exact setup equality except native rounding of ramp inlet flows."""
-    normalized=copy.deepcopy(actual);rounding=[]
-    for zone,phase in [('liquidinlet','phase-2'),('steaminlet','phase-1')]:
-        path=['boundary_conditions','mass_flow_inlet',zone,'phase',phase,
-              'momentum','mass_flow_rate','value']
-        a=normalized;e=expected
-        for key in path[:-1]:a=a[key];e=e[key]
-        av=a[path[-1]];ev=e[path[-1]]
-        if av!=ev and isinstance(av,(int,float)) and isinstance(ev,(int,float)):
-            if math.isfinite(av) and math.isfinite(ev) and math.isclose(av,ev,rel_tol=1e-12,abs_tol=1e-12):
-                rounding.append({'path':'/'.join(path),'before':ev,'after':av})
-                a[path[-1]]=ev
-    if normalized!=expected:
-        raise RuntimeError('Solved child setup changed beyond inlet-flow serialization rounding')
-    return {'status':'PASS','inlet_flow_rounding':rounding,'all_other_setup_values':'EXACT'}
+    paths = [tuple(['boundary_conditions', 'mass_flow_inlet', zone, 'phase', phase,
+                    'momentum', 'mass_flow_rate', 'value'])
+             for zone, phase in [('liquidinlet', 'phase-2'), ('steaminlet', 'phase-1')]]
+    result = require_state_same(actual, expected, numeric_paths=paths)
+    return {'status': 'PASS', 'inlet_flow_rounding': [
+        {'path': '/'.join(item['path']), 'before': item['before'], 'after': item['after']}
+        for item in result['normalization']], 'all_other_setup_values': 'EXACT'}
 
 
 def apply_selected_settings(s,selected):
@@ -540,27 +532,8 @@ def hold_screen(s,m):
             'bulk_mass_mean_kg':float(mass.mean()),'signed_liquid_outlet_mean_kg_s':float(liquid.mean())})
 
 
-@contextmanager
-def native_batch_transcript(s,path):
-    """One start/stop pair; close on a failed solve without masking its error."""
-    start=s.settings.file.start_transcript
-    # Only recover an inherited transcript when starting a new one is disabled.
-    # Do not stop again after a normally closed preceding batch.
-    if not start.is_active():
-        stop=s.settings.file.stop_transcript
-        if not stop.is_active():
-            raise RuntimeError('Native transcript start unavailable; reconcile session state')
-        stop()
-    start(file_name=str(path))
-    try:
-        yield
-    except BaseException:
-        try:s.settings.file.stop_transcript()
-        except Exception as exc:
-            print('TRANSCRIPT_CLOSE_AFTER_FAILURE',type(exc).__name__,flush=True)
-        raise
-    else:
-        s.settings.file.stop_transcript()
+def native_batch_transcript(s, path):
+    return native_transcript(s.settings.file, path)
 
 
 def batch(s,m,steps,label,checkpoint=True):
@@ -709,16 +682,6 @@ def campaign(s):
     m=json.loads(path.read_text()) if path.exists() else {'status':'STARTED','server_id':'3',
        'authority':'human_20261007_phase9_full_server3_only','mesh_order':['60k','342k','680k','997k','2_6M'],
        'endpoint_boundary':'FULL_FEED_HOLD_BULK_ACTIVE','completed':[]}
-    assignment_path=OUT/'server-assignment.json'
-    if assignment_path.exists():
-        assignment=json.loads(assignment_path.read_text())
-        allowed=assignment['server3']['mesh_order']
-        if not allowed or any(label not in ['60k','342k','680k','997k'] for label in allowed):
-            raise RuntimeError('Invalid Server 3 mesh allocation; Server 4 owns 2_6M')
-        if m.get('active_mesh') and m['active_mesh'] not in allowed:
-            raise RuntimeError('Active mesh is outside Server 3 allocation; reconcile ownership')
-        m['mesh_order']=list(allowed)
-        m['allocation_authority']=assignment['authority']
     m.update(requires_explicit_resume=False,supervision_paused_by_human=False)
     if m.get('error'):
         prior={'error':m.pop('error'),'active_mesh':m.get('active_mesh')}

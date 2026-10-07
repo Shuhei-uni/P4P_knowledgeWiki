@@ -1,0 +1,212 @@
+--- a/PyAnsys/scripts/setup/run_phase9_mesh_startup.py
++++ b/PyAnsys/scripts/setup/run_phase9_mesh_startup.py
+@@ -12,7 +12,6 @@
+ import time
+ import re
+ import traceback
+-from contextlib import contextmanager
+ from datetime import datetime, timezone
+ 
+ ROOT = Path(__file__).resolve().parents[2]
+@@ -25,6 +24,7 @@
+ from pyansys_fluent.common import remote_chdir, remote_file_exists
+ from pyansys_fluent.stage4_native import ensure_remote_directory, remote_file_sha256
+ from pyansys_fluent.remote_text import read_text, write_ascii_text_new
++from pyansys_fluent.execution_contract import native_transcript, require_state_same
+ 
+ OUT = ROOT/'output/phase9-mesh-convergence/20261007'
+ WORK = PureWindowsPath(r'C:\Users\syok443\Documents\FluentRuns\Phase9\20261007')
+@@ -178,21 +178,13 @@
+ 
+ 
+ def require_setup_same(actual, expected):
+-    """Keep exact setup equality except native rounding of ramp inlet flows."""
+-    normalized=copy.deepcopy(actual);rounding=[]
+-    for zone,phase in [('liquidinlet','phase-2'),('steaminlet','phase-1')]:
+-        path=['boundary_conditions','mass_flow_inlet',zone,'phase',phase,
+-              'momentum','mass_flow_rate','value']
+-        a=normalized;e=expected
+-        for key in path[:-1]:a=a[key];e=e[key]
+-        av=a[path[-1]];ev=e[path[-1]]
+-        if av!=ev and isinstance(av,(int,float)) and isinstance(ev,(int,float)):
+-            if math.isfinite(av) and math.isfinite(ev) and math.isclose(av,ev,rel_tol=1e-12,abs_tol=1e-12):
+-                rounding.append({'path':'/'.join(path),'before':ev,'after':av})
+-                a[path[-1]]=ev
+-    if normalized!=expected:
+-        raise RuntimeError('Solved child setup changed beyond inlet-flow serialization rounding')
+-    return {'status':'PASS','inlet_flow_rounding':rounding,'all_other_setup_values':'EXACT'}
++    paths = [tuple(['boundary_conditions', 'mass_flow_inlet', zone, 'phase', phase,
++                    'momentum', 'mass_flow_rate', 'value'])
++             for zone, phase in [('liquidinlet', 'phase-2'), ('steaminlet', 'phase-1')]]
++    result = require_state_same(actual, expected, numeric_paths=paths)
++    return {'status': 'PASS', 'inlet_flow_rounding': [
++        {'path': '/'.join(item['path']), 'before': item['before'], 'after': item['after']}
++        for item in result['normalization']], 'all_other_setup_values': 'EXACT'}
+ 
+ 
+ def apply_selected_settings(s,selected):
+@@ -540,27 +532,8 @@
+             'bulk_mass_mean_kg':float(mass.mean()),'signed_liquid_outlet_mean_kg_s':float(liquid.mean())})
+ 
+ 
+-@contextmanager
+-def native_batch_transcript(s,path):
+-    """One start/stop pair; close on a failed solve without masking its error."""
+-    start=s.settings.file.start_transcript
+-    # Only recover an inherited transcript when starting a new one is disabled.
+-    # Do not stop again after a normally closed preceding batch.
+-    if not start.is_active():
+-        stop=s.settings.file.stop_transcript
+-        if not stop.is_active():
+-            raise RuntimeError('Native transcript start unavailable; reconcile session state')
+-        stop()
+-    start(file_name=str(path))
+-    try:
+-        yield
+-    except BaseException:
+-        try:s.settings.file.stop_transcript()
+-        except Exception as exc:
+-            print('TRANSCRIPT_CLOSE_AFTER_FAILURE',type(exc).__name__,flush=True)
+-        raise
+-    else:
+-        s.settings.file.stop_transcript()
++def native_batch_transcript(s, path):
++    return native_transcript(s.settings.file, path)
+ 
+ 
+ def batch(s,m,steps,label,checkpoint=True):
+--- a/PyAnsys/scripts/setup/run_phase9_server4_2_6M.py
++++ b/PyAnsys/scripts/setup/run_phase9_server4_2_6M.py
+@@ -12,7 +12,6 @@
+ import time
+ import re
+ import traceback
+-from contextlib import contextmanager
+ from datetime import datetime, timezone
+ 
+ ROOT = Path(__file__).resolve().parents[2]
+@@ -25,6 +24,7 @@
+ from pyansys_fluent.common import remote_chdir, remote_file_exists
+ from pyansys_fluent.stage4_native import ensure_remote_directory, remote_file_sha256
+ from pyansys_fluent.remote_text import read_text, write_ascii_text_new
++from pyansys_fluent.execution_contract import native_transcript, require_state_same
+ 
+ OUT = ROOT/'output/phase9-mesh-convergence-server4/20261007'
+ WORK = SHARED = PARENT = MESH_FOLDER = None
+@@ -175,21 +175,13 @@
+ 
+ 
+ def require_setup_same(actual, expected):
+-    """Keep exact setup equality except native rounding of ramp inlet flows."""
+-    normalized=copy.deepcopy(actual);rounding=[]
+-    for zone,phase in [('liquidinlet','phase-2'),('steaminlet','phase-1')]:
+-        path=['boundary_conditions','mass_flow_inlet',zone,'phase',phase,
+-              'momentum','mass_flow_rate','value']
+-        a=normalized;e=expected
+-        for key in path[:-1]:a=a[key];e=e[key]
+-        av=a[path[-1]];ev=e[path[-1]]
+-        if av!=ev and isinstance(av,(int,float)) and isinstance(ev,(int,float)):
+-            if math.isfinite(av) and math.isfinite(ev) and math.isclose(av,ev,rel_tol=1e-12,abs_tol=1e-12):
+-                rounding.append({'path':'/'.join(path),'before':ev,'after':av})
+-                a[path[-1]]=ev
+-    if normalized!=expected:
+-        raise RuntimeError('Solved child setup changed beyond inlet-flow serialization rounding')
+-    return {'status':'PASS','inlet_flow_rounding':rounding,'all_other_setup_values':'EXACT'}
++    paths = [tuple(['boundary_conditions', 'mass_flow_inlet', zone, 'phase', phase,
++                    'momentum', 'mass_flow_rate', 'value'])
++             for zone, phase in [('liquidinlet', 'phase-2'), ('steaminlet', 'phase-1')]]
++    result = require_state_same(actual, expected, numeric_paths=paths)
++    return {'status': 'PASS', 'inlet_flow_rounding': [
++        {'path': '/'.join(item['path']), 'before': item['before'], 'after': item['after']}
++        for item in result['normalization']], 'all_other_setup_values': 'EXACT'}
+ 
+ 
+ def apply_selected_settings(s,selected):
+@@ -539,27 +531,8 @@
+             'bulk_mass_mean_kg':float(mass.mean()),'signed_liquid_outlet_mean_kg_s':float(liquid.mean())})
+ 
+ 
+-@contextmanager
+-def native_batch_transcript(s,path):
+-    """One start/stop pair; close on a failed solve without masking its error."""
+-    start=s.settings.file.start_transcript
+-    # Only recover an inherited transcript when starting a new one is disabled.
+-    # Do not stop again after a normally closed preceding batch.
+-    if not start.is_active():
+-        stop=s.settings.file.stop_transcript
+-        if not stop.is_active():
+-            raise RuntimeError('Native transcript start unavailable; reconcile session state')
+-        stop()
+-    start(file_name=str(path))
+-    try:
+-        yield
+-    except BaseException:
+-        try:s.settings.file.stop_transcript()
+-        except Exception as exc:
+-            print('TRANSCRIPT_CLOSE_AFTER_FAILURE',type(exc).__name__,flush=True)
+-        raise
+-    else:
+-        s.settings.file.stop_transcript()
++def native_batch_transcript(s, path):
++    return native_transcript(s.settings.file, path)
+ 
+ 
+ def batch(s,m,steps,label,checkpoint=True):
+--- a/PyAnsys/scripts/orchestration/watch_phase9_campaign.py
++++ b/PyAnsys/scripts/orchestration/watch_phase9_campaign.py
+@@ -18,6 +18,7 @@
+ REPO = Path(__file__).resolve().parents[3]
+ OUT = REPO / 'PyAnsys/output/phase9-mesh-convergence/20261007'
+ sys.path.insert(0, str(REPO / 'PyAnsys/src'))
++from pyansys_fluent.execution_contract import should_check_health
+ 
+ 
+ def write(path, value):
+@@ -185,14 +186,17 @@
+     handled = previous.get('handled_event_keys', [])
+     wake_record = previous.get('wake')
+     health_at = 0
++    previous_health_event = None
+     last_health = None
+     last_wake_attempt = 0
+     guard = subprocess.Popen(['caffeinate', '-i', '-w', str(os.getpid())])
+     while True:
+         state = snapshot(args.stall_seconds)
+-        if time.monotonic() - health_at >= 300 or state['event']:
++        health_event = (state['controller_pid'], state['event'], state['active_mesh'], state['verified_native_end']) if state['event'] else None
++        if should_check_health(time.monotonic(), health_at, health_event, previous_health_event):
+             last_health = health()
+             health_at = time.monotonic()
++        previous_health_event = health_event
+         state.update(server_health=last_health, interval_seconds=args.interval,
+                      stall_review_seconds=args.stall_seconds, awake_guard_pid=guard.pid,
+                      originating_thread=args.thread_id)
+--- a/PyAnsys/scripts/orchestration/watch_phase9_server4.py
++++ b/PyAnsys/scripts/orchestration/watch_phase9_server4.py
+@@ -18,6 +18,7 @@
+ REPO = Path(__file__).resolve().parents[3]
+ OUT = REPO / 'PyAnsys/output/phase9-mesh-convergence-server4/20261007'
+ sys.path.insert(0, str(REPO / 'PyAnsys/src'))
++from pyansys_fluent.execution_contract import should_check_health
+ 
+ 
+ def write(path, value):
+@@ -193,14 +194,17 @@
+     handled = previous.get('handled_event_keys', [])
+     wake_record = previous.get('wake')
+     health_at = 0
++    previous_health_event = None
+     last_health = None
+     last_wake_attempt = 0
+     guard = subprocess.Popen(['caffeinate', '-i', '-w', str(os.getpid())])
+     while True:
+         state = snapshot(args.stall_seconds)
+-        if time.monotonic() - health_at >= 300 or state['event']:
++        health_event = (state['controller_pid'], state['event'], state['active_mesh'], state['verified_native_end']) if state['event'] else None
++        if should_check_health(time.monotonic(), health_at, health_event, previous_health_event):
+             last_health = health()
+             health_at = time.monotonic()
++        previous_health_event = health_event
+         state.update(server_health=last_health, interval_seconds=args.interval,
+                      stall_review_seconds=args.stall_seconds, awake_guard_pid=guard.pid,
+                      originating_thread=args.thread_id)

@@ -1,0 +1,13 @@
+server_id: "4"
+mesh: "2_6M"
+status: "RAMP_RUNNING"
+verified_native_end: 3590
+latest_paired_iteration: 3580
+active_target: 3600
+film_elapsed_time_s: 0.000201
+low_feed_hold_complete: true
+report_count: 34
+controller_pid: 61248
+requires_mac_and_network: true
+all_bulk_equations_active: true
+never_exit_or_restart_fluent: true

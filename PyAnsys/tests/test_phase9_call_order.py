@@ -124,4 +124,16 @@ class Ordering(unittest.TestCase):
             self.assertEqual(r.read_feed(s,1)['liquid_kg_s'],116.92)
             setter.assert_not_called()
 
+    def test_server3_campaign_excludes_server4_mesh(self):
+        with tempfile.TemporaryDirectory() as tmp,patch.object(r,'OUT',Path(tmp)),patch.object(r,'run_child') as run:
+            r.dump(Path(tmp)/'campaign-manifest.json',{'status':'RUNNING','active_mesh':'997k',
+                'mesh_order':['60k','342k','680k','997k','2_6M'],'completed':['60k','342k','680k','997k']})
+            r.dump(Path(tmp)/'server-assignment.json',{'authority':'human_split',
+                'server3':{'mesh_order':['60k','342k','680k','997k']}})
+            r.campaign(self.solver());run.assert_not_called()
+            import json
+            result=json.loads((Path(tmp)/'campaign-manifest.json').read_text())
+            self.assertNotIn('2_6M',result['mesh_order'])
+            self.assertEqual(result['status'],'COMPLETE_PREPARATION_ONLY')
+
 if __name__=='__main__':unittest.main(verbosity=2)

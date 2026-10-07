@@ -3,7 +3,7 @@
 | Question | Current result |
 | --- | --- |
 | Phase started | Human envelope recorded; input audit complete |
-| Meshes solved under Phase 9 | 60k full-feed preparation complete; human selected saved N8080 final. 342k paused at verified N3800 during ramp; restored pair and reviewed controller resumed. Other three meshes pending. |
+| Meshes solved under Phase 9 | 60k prepared; selected final N8080. 342k preparation passed at N8580. 680k restored at verified N7080 after laptop pause; full-feed holds continue. 997k follows on Server 3; 2.6M belongs to Server 4. |
 | Common template | Provisional Stage 4 settings; low-feed A bulk fields unchanged; dry film; save/reopen passed |
 | 342k collector mapping | Native cell split and entry/wall topology verified; legacy replacement input saved |
 | Transfer failure | Native Replace Mesh crashed Fluent with SIGSEGV; scientific experiment untested |
@@ -14,7 +14,7 @@
 | Coordinate scale | 342k file uses metre-sized coordinates; other four use millimetre-sized coordinates |
 | Wall identity | Fine meshes split original wall into vessel/inlet components; physical mapping required |
 | Native mesh scale/quality | 342k: metre extents and native mesh check passed; other meshes pending |
-| Current action | Resume 342k from N3800; ramp to N4580, then use 1000-update full-feed blocks. 680k, 997k and 2.6M follow. |
+| Current action | Continue 680k full-feed holds from N7080, then prepare/run 997k. Server 3 excludes the 2.6M mesh. |
 | Approved retained controls | Two smoothing passes, current reference values and current DPM tracking controls; no separate tracking pass |
 | Bulk correction proof | Corrected common source and 342k saved/reopened with surface tension ON at exact 08b coefficient, compressibility flag ON and drag-modification flag ON |
 | Legacy interaction | Human approved stored `none` as an inactive Mixture legacy exception |
@@ -120,3 +120,12 @@
 | Scoped repair | Five-second deadline only during initial version query; verified Fluent 2025 R2; no model changes |
 | Native progress | Ramp resumed beyond N2580; live transcript and run manifest confirm completed new updates |
 | Session control | Only stalled owned desktop Python clients replaced; no Fluent process exited or restarted |
+
+| Laptop-pause recovery | Verified outcome |
+| --- | --- |
+| Submitted horizon | 680k N6080→N7080 completed; no repeated iterations |
+| Old controller | Keepalive timeout after laptop pause; preserved paired N7080 endpoint before ending |
+| Recovery checks | 1000 complete finite film rows, fixed step and clock, Courant/error checks, pair hashes, fields/setup/methods/bulk contract and saved/reopened film clock passed |
+| Recovered screen | N6081–N7080: pressure range 10.77045% (fail), bulk mass range 6.90075% (pass), liquid-flux range/full feed 0.012364% (pass) |
+| Fleet allocation | Fresh Server 3 controller reads authoritative allocation: 60k, 342k, 680k, 997k. Separate chat owns 2.6M on Server 4. |
+| Evidence | [N7080 recovery](../../../PyAnsys/output/phase9-mesh-convergence/20261007/resume-recovery-20261008.json); [Server 3 scope](../../../PyAnsys/output/phase9-mesh-convergence/20261007/server3-scope-applied.json) |

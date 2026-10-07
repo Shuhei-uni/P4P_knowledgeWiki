@@ -1,6 +1,6 @@
 """Phase 9: prepare consistent mesh children and stop at full-load bulk holds.
 
-Attach only to the explicitly owned Server 3. Never freeze bulk equations.
+Attach only to the explicitly owned Server 4. Never freeze bulk equations.
 Inputs remain immutable; all checkpoints and reports use server-local disk.
 """
 from pathlib import Path, PureWindowsPath
@@ -26,14 +26,11 @@ from pyansys_fluent.common import remote_chdir, remote_file_exists
 from pyansys_fluent.stage4_native import ensure_remote_directory, remote_file_sha256
 from pyansys_fluent.remote_text import read_text, write_ascii_text_new
 
-OUT = ROOT/'output/phase9-mesh-convergence/20261007'
-WORK = PureWindowsPath(r'C:\Users\syok443\Documents\FluentRuns\Phase9\20261007')
-SHARED = PureWindowsPath(r'C:\Users\syok443\OneDrive - The University of Auckland')
-PARENT = SHARED/'P4P-Fluent-Artifacts/Phase72A/Stage3/early-ewf-startup/prepared-A-N1580/prepared-A-N1580'
-MESH_FOLDER = SHARED/'2026 Sem 1/700/P4PCFD/CAD PurnantoV2'
+OUT = ROOT/'output/phase9-mesh-convergence-server4/20261007'
+WORK = SHARED = PARENT = MESH_FOLDER = None
 WALL_PARTS = ['wall', 'vessel-wall-wall-separator-purnanto',
               'inlet-wall-1-wall-separator-purnanto', 'inlet-wall-2-wall-separator-purnanto']
-HOST_PYTHON = PureWindowsPath(r'C:\Users\syok443\Documents\FluentRuns\Phase72A\Stage3\slit154k-film-development-20261006\controller-venv\Scripts\python.exe')
+HOST_PYTHON = None
 
 
 def attach():
@@ -48,7 +45,7 @@ def attach():
         return original(self,expression)
     SchemeInterpreterService.string_eval=initial_version
     try:
-        return previous.attach()
+        return attach_server4()
     finally:
         SchemeInterpreterService.string_eval=original
 
@@ -132,7 +129,7 @@ def require_idle(s):
     # Never replace a loaded case or change its feed during an active solve.
     if (s.settings.setup.cell_zone_conditions.is_active() and
         not s.settings.solution.run_calculation.iterate.is_active()):
-        raise RuntimeError('Owned Server 3 is busy; no mutation submitted')
+        raise RuntimeError('Owned Server 4 is busy; no mutation submitted')
 
 
 def set_loading(s, multiplier):
@@ -224,8 +221,8 @@ def prepare_source(s):
     if path.exists():
         record=json.loads(path.read_text());load(s,record['pair']);assert_bulk_active(s)
         return record
-    if not (OUT/'server3-preservation.json').exists():
-        raise RuntimeError('Preserve the previous Server 3 pair before replacement')
+    if not (OUT/'server4-preservation.json').exists():
+        raise RuntimeError('Preserve the previous Server 4 pair before replacement')
     for folder in [WORK, WORK/'scratch', WORK/'source-monitors']:
         ensure_remote_directory(s,str(folder))
     for kind,ext in [('case','cas.h5'),('data','dat.h5')]:
@@ -240,6 +237,8 @@ def prepare_source(s):
     s.settings.file.read_case(file_name=str(PARENT)+'.cas.h5')
     s.settings.setup.user_defined.load(udf_library_name='libcontactv2')
     s.settings.file.read_data(file_name=str(PARENT)+'.dat.h5')
+    if native_iteration(s)!=1580:raise RuntimeError('Original A parent is not N1580')
+    if film(s)['film_elapsed_time']!=0:raise RuntimeError('Original A film is not dry')
     before=base.state(s)
     selected=json.loads((OUT/'raw/provisional-stage4-selection.json').read_text())
     model=apply_selected_settings(s,selected)
@@ -292,7 +291,7 @@ def inspect_target(s,label):
     if not remote_file_exists(s,str(mesh)):raise FileNotFoundError(str(mesh))
     expected=next(m for m in json.loads((OUT/'mesh-input-audit.json').read_text())['meshes'] if m['label']==label)
     digest=remote_file_sha256(s,str(mesh),str(folder/'input.sha256'))
-    if digest!=expected['sha256']:raise RuntimeError('Mesh has not synced unchanged to Server 3')
+    if digest!=expected['sha256']:raise RuntimeError('Mesh has not synced unchanged to Server 4')
     remote_chdir(s,str(folder))
     with client_capture(s,OUT/(label+'-target-inspection-'+str(time.time_ns())+'.txt')):
         s.settings.file.read_mesh(file_name=str(mesh))
@@ -310,7 +309,7 @@ def inspect_target(s,label):
 def remote_audit(s, mesh, folder):
     script=WORK/'inspect_phase9_mesh_inputs.py'
     if not remote_file_exists(s,str(script)):
-        write_ascii_text_new(s,str(script),(ROOT/'scripts/inspection/inspect_phase9_mesh_inputs.py').read_text())
+        write_ascii_text_new(s,str(script),('import sys\nsys.path.insert(0, '+repr(str(WORK/'audit-deps'))+')\n'+(ROOT/'scripts/inspection/inspect_phase9_mesh_inputs.py').read_text()))
     audit_tag=str(time.time_ns())
     result=folder/('native-topology-'+audit_tag+'.json');log=folder/('native-topology-'+audit_tag+'.log')
     command="$phase9AuditLog=(& '"+str(HOST_PYTHON)+"' '"+str(script)+"' --single-mesh '"+str(mesh)+"' --output '"+str(result)+"' 2>&1 | Out-String); [IO.File]::WriteAllText('"+str(log)+"',$phase9AuditLog,[Text.Encoding]::ASCII)"
@@ -407,7 +406,7 @@ def prepare_child(s,label):
             mapped=json.loads((OUT/(label+'-mapped.json')).read_text())
         else:
             inspect_target(s,label);mapped=map_target(s,label)
-        transfer_parent={'case':str(PARENT)+'.cas.h5','data':str(PARENT)+'.dat.h5'}
+        transfer_parent={'case':str(PARENT)+'.cas.h5','data':str(PARENT)+'.dat.h5','native_iteration':1580}
         load(s,transfer_parent)
         transfer_parameters=dict(s.rp_vars('wall-film/model-parameters'))
         if transfer_parameters['film-stripping?'] or transfer_parameters['film-separation?']:
@@ -706,19 +705,10 @@ def run_child(s,label,smoke_only=False):
 
 def campaign(s):
     path=OUT/'campaign-manifest.json'
-    m=json.loads(path.read_text()) if path.exists() else {'status':'STARTED','server_id':'3',
-       'authority':'human_20261007_phase9_full_server3_only','mesh_order':['60k','342k','680k','997k','2_6M'],
+    m=json.loads(path.read_text()) if path.exists() else {'status':'STARTED','server_id':'4',
+       'authority':'human_20261007_phase9_server4_2_6M_only','mesh_order':['2_6M'],
        'endpoint_boundary':'FULL_FEED_HOLD_BULK_ACTIVE','completed':[]}
-    assignment_path=OUT/'server-assignment.json'
-    if assignment_path.exists():
-        assignment=json.loads(assignment_path.read_text())
-        allowed=assignment['server3']['mesh_order']
-        if not allowed or any(label not in ['60k','342k','680k','997k'] for label in allowed):
-            raise RuntimeError('Invalid Server 3 mesh allocation; Server 4 owns 2_6M')
-        if m.get('active_mesh') and m['active_mesh'] not in allowed:
-            raise RuntimeError('Active mesh is outside Server 3 allocation; reconcile ownership')
-        m['mesh_order']=list(allowed)
-        m['allocation_authority']=assignment['authority']
+    if m['server_id']!='4' or m['mesh_order']!=['2_6M']:raise RuntimeError('Server 4 scope violation')
     m.update(requires_explicit_resume=False,supervision_paused_by_human=False)
     if m.get('error'):
         prior={'error':m.pop('error'),'active_mesh':m.get('active_mesh')}
@@ -739,10 +729,63 @@ def campaign(s):
     m.update(status='COMPLETE_PREPARATION_ONLY',active_mesh=None);dump(path,m)
 
 
+def attach_server4():
+    """Use v252 transport compatibility only; never call imported attach helpers."""
+    import functools
+    import ansys.fluent.core._grpc_services as low
+    import ansys.fluent.core.services as high
+    from ansys.fluent.core.utils.fluent_version import FluentVersion
+    from ansys.fluent.core import config
+    from pyansys_fluent.connection import connect
+    low._server_supports_v1=lambda channel:False
+    high.create_service_factory=functools.partial(high.create_service_factory,product_version=FluentVersion.v252)
+    config.check_health=False
+    s=connect('4',start_transcript=False,tcp_timeout_seconds=5)
+    if '2025 R2' not in str(s.get_fluent_version()):raise RuntimeError('Server 4 requires Fluent 2025 R2')
+    return s
+
+
+def configure_host(s):
+    """Discover Server 4 paths and preserve a valuable idle endpoint first."""
+    global WORK,SHARED,PARENT,MESH_FOLDER,HOST_PYTHON
+    require_idle(s)
+    profile=s.scheme.eval('(getenv "USERPROFILE")')
+    shared=s.scheme.eval('(getenv "OneDriveCommercial")')
+    if not profile or not shared:raise RuntimeError('Server 4 Windows profile/OneDrive path unavailable')
+    WORK=PureWindowsPath(profile)/'Documents/FluentRuns/Phase9-Server4/20261007'
+    SHARED=PureWindowsPath(shared)
+    PARENT=SHARED/'P4P-Fluent-Artifacts/Phase72A/Stage3/early-ewf-startup/prepared-A-N1580/prepared-A-N1580'
+    MESH_FOLDER=SHARED/'2026 Sem 1/700/P4PCFD/CAD PurnantoV2'
+    base.SOURCE=SHARED/'P4P-Fluent-Artifacts/Phase72A/ContactAbsorber/local20000/20261004T081120Z'
+    ensure_remote_directory(s,str(WORK/'scratch'))
+    preservation=OUT/'server4-preservation.json'
+    if not preservation.exists():
+        if s.settings.setup.cell_zone_conditions.is_active():
+            setup=s.settings.setup.get_state();methods=s.settings.solution.methods.get_state()
+            try:coordinate=native_iteration(s)
+            except Exception:coordinate=None
+            prefix=WORK/('preserved-idle-'+str(time.time_ns()))
+            case=str(prefix)+'.cas.h5';data=str(prefix)+'.dat.h5'
+            s.settings.file.write_case(file_name=case);s.settings.file.write_data(file_name=data)
+            pair={'case':case,'data':data,'native_iteration':coordinate}
+            for key in ['case','data']:
+                if not remote_file_exists(s,pair[key]):raise RuntimeError('Preservation pair incomplete')
+                pair[key+'_sha256']=remote_file_sha256(s,pair[key],str(WORK/'scratch'/(key+'-preserved.sha256')))
+            dump(preservation,{'status':'PAIRED_IDLE_ENDPOINT_PRESERVED','pair':pair,'setup':setup,'methods':methods})
+        else:dump(preservation,{'status':'EMPTY_IDLE_SESSION_NO_ENDPOINT'})
+    # Audit script needs h5py/numpy on the Windows host. Discover a working interpreter.
+    result=WORK/'scratch'/('python-discovery-'+str(time.time_ns())+'.txt')
+    code="$ErrorActionPreference='Stop'; $candidates=@(); $candidates+=@(Get-Command python.exe -ErrorAction SilentlyContinue | ForEach-Object {$_.Source}); $candidates+=@(Get-ChildItem -LiteralPath '"+str(PureWindowsPath(profile)/'Documents/FluentRuns')+"' -Filter python.exe -Recurse -ErrorAction SilentlyContinue | ForEach-Object {$_.FullName}); $candidates+=@(Get-ChildItem -LiteralPath 'C:\\Program Files\\ANSYS Inc\\v252' -Filter python.exe -Recurse -ErrorAction SilentlyContinue | ForEach-Object {$_.FullName}); foreach($candidate in ($candidates | Select-Object -Unique)){ & $candidate -c 'import sys;sys.path.insert(0,"+repr(str(WORK/'audit-deps')).replace("'","''")+");import h5py,numpy' 2>$null; if($LASTEXITCODE -eq 0){[IO.File]::WriteAllText('"+str(result)+"',$candidate,[Text.Encoding]::ASCII); break}}"
+    base.powershell(s,code)
+    if not remote_file_exists(s,str(result)):raise RuntimeError('No Server 4 Python with h5py/numpy; host audit dependency unresolved')
+    HOST_PYTHON=PureWindowsPath(read_text(s,str(result)).strip())
+    dump(OUT/'server4-paths.json',{'server_id':'4','work':str(WORK),'shared':str(SHARED),'parent':str(PARENT),'mesh_folder':str(MESH_FOLDER),'host_python':str(HOST_PYTHON)})
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('action',choices=['source','inspect','map','finish-map','prepare','smoke','run','campaign'])
-    parser.add_argument('--label',choices=['60k','342k','680k','997k','2_6M'])
+    parser.add_argument('--label',choices=['2_6M'],default='2_6M')
     parser.add_argument('--live-transcript',help='Optional client-side live transcript for campaign monitoring')
     parser.add_argument('--controller-receipt',help='Optional desktop launch receipt to update when the campaign ends')
     args=parser.parse_args()
@@ -759,11 +802,12 @@ def main():
         try:fcntl.flock(controller_lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
         except BlockingIOError:raise RuntimeError('Another Phase 9 controller owns the call stream')
     s=attach()
+    configure_host(s)
     # An empty restarted solver has no active iterate command. Distinguish
     # that state from a loaded session whose calculation is running.
     has_mesh=s.settings.setup.cell_zone_conditions.is_active()
     if has_mesh and not s.settings.solution.run_calculation.iterate.is_active():
-        raise RuntimeError('Owned Server 3 is busy')
+        raise RuntimeError('Owned Server 4 is busy')
     if args.live_transcript:
         s.transcript.start(file_name=args.live_transcript,write_to_stdout=False)
     if args.action=='source':prepare_source(s)
@@ -775,6 +819,8 @@ def main():
     elif args.action=='run':run_child(s,args.label)
     elif args.action=='campaign':
         try:
+            prepare_source(s)
+            audit_existing(s)
             campaign(s)
         finally:
             if args.controller_receipt:

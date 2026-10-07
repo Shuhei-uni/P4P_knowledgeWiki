@@ -9,10 +9,10 @@
 | Endpoint boundary | Bulk equations remain active; save paired full-feed endpoints |
 | Deferred work | Bulk freeze, EWF-only continuation, final EWF settings and final mesh-convergence qualification |
 | Session control | Human instruction: never exit Fluent; human controls restarts. No agent exit/termination commands. Further model-switch compatibility probes are excluded from this preparation route. Server 3 restarted; preserved Mixture pair restored. |
-| Fleet | Server 3 only; full ownership granted in this chat |
+| Fleet | This chat owns Server 3 for 60k, 342k, 680k and 997k. A separate human-created chat owns Server 4 for 2.6M only. See the machine server-assignment record. |
 | Continuous supervision | Human instruction, 7 October: monitor controller and Server 3 without waiting for manual idle reports. Read local evidence every 30 s; finite health check every 5 min. Trigger the originating chat for a stopped controller, 3 min without transcript/log progress, or preparation completion. A timeout alone does not prove a failed or idle solver. |
 | Notifications | Quiet during normal progress; notify on a meaningful change, completion, failure, or required human input. Mechanical recovery stays within the existing envelope and never exits or restarts Fluent. |
-| Current human control | Human restored the Server 3 connection and authorized the reviewed Python controller to resume. N3800 pair hashes, fields, setup, methods, bulk contract and film clock verified before launch. Continuous supervision is active again. The cancelled native journal handover remains excluded. |
+| Current human control | Human resumed after laptop pause, 8 October. Completed 680k N6080→N7080 horizon recovered after old-client keepalive timeout; paired N7080 save/reopen verified. Fresh Server 3 controller resumes N7080 and excludes 2.6M; supervision active. No Fluent exit/restart or repeated completed solve. |
 | Monitoring dependency | macOS launch agent restarts the watcher if it exits. Mac and network must remain available; an awake guard runs while the watcher runs. |
 | Previous endpoint | Preserve before replacement; never terminate Server 1 or its campaign |
 | Input owner | Supplied mesh files in CAD PurnantoV2; keep unchanged |

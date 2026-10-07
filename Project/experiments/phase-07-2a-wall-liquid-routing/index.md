@@ -10,7 +10,8 @@
 | --- | --- |
 | [Stage 4](stage-04-ewf-wall-parameters/index.md) | Human-selected next stage; retain Stage 3 low-feed Coupled/EWF activation and ramp method; new EWF/wall settings remain open |
 | [Completed commercial-steel result](stage-04-ewf-wall-parameters/commercial-steel/results.md) | First Stage 4 result; N29815; inventories/routing/rates/continuity plotted |
-| [Direct EWF drain](stage-04-ewf-wall-parameters/ewf-only-drain/results.md) | Source proof and matched 15 ms screens passed; direct sink 0.508790 kg; ON current N41483; bulk frozen; film still growing |
+| [Direct EWF drain](stage-04-ewf-wall-parameters/ewf-only-drain/results.md) | Source proof and matched 15 ms screens passed; direct sink 0.508790 kg; verified ON parent N41483; bulk frozen; film still growing |
+| [Long EWF development](stage-04-ewf-wall-parameters/ewf-only-drain/long-development/results.md) | Recovered N68483 / +405 ms; direct drain active with frozen bulk; film mass 38.560598 kg; Courant guard rejected; ledger error 1.648272%; no steady-film qualification |
 
 ## Status
 

@@ -1,0 +1,30 @@
+{
+  "classification": "analytical_illustration_not_separator_prediction",
+  "source": "PyAnsys/output/phase72a-stage4-realism/20261007/run-manifest.json",
+  "source_sha256": "928aa67b169094d6c3cfe801395ad3a2c59030b467975a68d8a3c2a8c47350e6",
+  "density_kg_m3": 881.2108764648438,
+  "viscosity_Pa_s": 0.0001455440069548786,
+  "gravity_m_s2": 9.81,
+  "equation": "u_mean_gravity = rho*g*h^2/(3*mu)",
+  "assumptions": [
+    "vertical wall",
+    "gravity only",
+    "analytical equilibrium closure"
+  ],
+  "points": [
+    {
+      "thickness_mm": 0.25,
+      "velocity_m_s": 1.2374090602942935
+    },
+    {
+      "thickness_mm": 1,
+      "velocity_m_s": 19.798544964708697
+    },
+    {
+      "thickness_mm": 2,
+      "velocity_m_s": 79.19417985883479
+    }
+  ],
+  "theory_source": "https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_th/flu_th_ewf_sec_film_vel.html",
+  "figure_sha256": "354a2026268fde373a99a50546507058b5cf64d7fd6a9412a07ddc30beea6c4a"
+}

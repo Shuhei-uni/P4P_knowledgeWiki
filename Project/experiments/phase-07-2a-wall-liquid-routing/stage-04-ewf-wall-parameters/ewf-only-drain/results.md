@@ -7,7 +7,8 @@
 | Lower collector | Existing `wall:004`, 34 faces; new EWF storage initially dry |
 | Removed quantity | Local film liquid mass plus matching mean-film momentum |
 | Trial coefficient | Capture time 1.5 ms; 1% nominal local source depletion per 15 microsecond update |
-| Current Server 1 | Drain ON; N41483 / 0.3881843386354626 s; all bulk equation groups frozen; 15 microseconds; paired final verification PASS |
+| Verified drain-ON parent | N41483 / 0.3881843386354626 s; all bulk equation groups frozen; 15 microseconds; paired final verification PASS |
+| Later Server 1 continuation | [Recovered long-run analysis](long-development/results.md); N68483 / +405 ms; direct drain active; upper film still accumulates; Courant guard rejection; paired reopen PASS |
 | Original fields | N40483 / 0.3731843386354754 s preserved; all 3,463 geometry-matched upper film mass/thickness/XYZ velocity values exact |
 | Film limit | 0.3 m; any native sample reaching it marks the run **UNREALISTIC** |
 | Claim limit | Numerical collector; no pool hydraulics, whole-separator closure or steady-film claim |

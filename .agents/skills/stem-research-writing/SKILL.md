@@ -17,6 +17,12 @@ When project evidence is needed, start at [Project/index.md](../../../Project/in
 
 Identify the requested operation, report section, audience, brief or rubric, length, language convention, and available evidence from the conversation and supplied files. Respect explicit instructions and the existing report's requirements. Preserve technical facts; flag contradictions rather than smoothing them away.
 
+Before substantive drafting or restructuring, read the relevant supplied rubric
+and report guidance, including the section's purpose. Locate them in the report
+folder once if needed; reuse unchanged guidance already read. Separate methods,
+observations and interpretation before editing. If guidance is unavailable,
+record that limit and proceed within the established scope.
+
 For a grammar-only edit, keep the argument and structure intact. For drafting, critique, or substantive revision, work from evidence and report logic toward paragraphs, sentences, and words. Use precise specialist terms with plain surrounding language. Preserve the author's voice; use New Zealand English for a new report if no other convention is supplied.
 
 Read only the references needed for the task. Start with one to three and load further files when a concrete issue requires them. For a long report, work section by section. Do not load the entire folder automatically.

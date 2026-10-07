@@ -37,3 +37,10 @@ unpreserved Fluent process.
 Prefer existing proven scripts/helpers over near-duplicate automation. Keep
 machine evidence compact and deterministic. Do not move project interpretation
 or literature narrative into this tree.
+
+During maintenance, preserve active controller/watcher files and their imported
+dependencies. Prepare runtime edits as a hash-guarded staged patch; deploy only
+after owned processes are idle and the endpoint is reconciled. The
+[2026-10-08 staged update](workflow_updates/20261008/README.md) follows this rule.
+New runners can use `pyansys_fluent.execution_contract` for explicit comparison,
+transcript ownership, runtime/object preflight, and film-drain probe checks.

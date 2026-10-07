@@ -16,6 +16,14 @@ copying campaign-specific assumptions. Useful starting points are
 `PyAnsys/scripts/inspection/inspect_fluent_session.py` and the connection
 helpers under `PyAnsys/scripts/connection/`.
 
+Before a new build, verify one explicit interpreter and its required modules on
+the execution host; record its executable, version and extra dependency paths.
+Reuse that receipt for the same host/environment and revalidate the selected
+interpreter at the next launch. A missing module is a preflight failure, not a
+reason to rerun setup or repeat broad interpreter searches. Use the existing
+transfer implementation before writing another repair for lost injections.
+Check object inventories for missing/duplicate names before state dictionaries.
+
 When the configured MCP inspection path is available, capture the narrow exact
 paths before and after a change rather than a broad tree dump. Use
 `inspect_fluent_session.py --paths <path> --output-json <receipt>` for the
@@ -41,7 +49,24 @@ the steps below still define the complete child-case verification.
 4. Read back every critical delta and invariant.
 5. Resolve file-backed reports/monitors/checkpoints to explicit destinations.
 6. Save the child, reopen it from disk, reacquire, and repeat the critical audit.
-7. Run the smallest useful smoke test and prove required instrumentation writes.
+7. Run the smallest useful smoke test, count it in the experiment horizon, and
+   prove required instrumentation and the functional path the experiment needs.
+
+For a new EWF drainage setup or a change to the drain/solve mode, identify the
+film collector, direct film sink/outflow, and independent removal reports. When
+bulk will be frozen, use a bounded frozen-bulk probe to prove accepted film-time
+advancement, positive integrated direct removal, preserved bulk fields, and the
+film ledger within the declared probe tolerance. A nonzero bulk sink evaluated
+from held fields is insufficient. Reuse matching verified probe evidence;
+repeat it only when the drain, relevant setup, or solve mode changes. Record an
+intentional no-drain sensitivity explicitly rather than claiming drainage.
+
+For comparisons, keep object names, hooks and flags exact. Apply numeric
+tolerances only at declared paths, and normalize Windows paths only for declared
+file fields using the verified server working directory. Record all accepted
+normalizations. `pyansys_fluent.execution_contract` supplies offline checks;
+`PyAnsys/tools/workflow_evidence.py drain-proof` checks an extracted probe receipt.
+These checks do not establish steady film or whole-separator mass closure.
 
 Return a compact build receipt: parent, changes, readback, artifact paths,
 smoke/instrumentation result, unresolved uncertainty.

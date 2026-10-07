@@ -1,4 +1,17 @@
 phase_id: phase-07-2a-wall-liquid-routing
+stage4_method_review_server1:
+  authority: human_20261008_full_server1_ownership
+  status: ASSESSMENT_COMPLETE_NO_NEW_SOLVES
+  preferred_candidate: analytical_film_velocity
+  mandatory_models: [eulerian_wall_film, phase_accretion]
+  review: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/method-review.md
+  inspection: PyAnsys/output/phase72a-stage4-method-review/20261008/server1-readback.json
+  live_film_clock_s: 0.7931843386351183
+  live_film_update_counter: 66903
+  live_film_step_s: 0.000015
+  live_method: full_momentum_equation
+  bulk_and_idle_rechecked: false
+  new_solve_calls: 0
 server3_current_authority:
   owner: phase-09-mesh-convergence
   authority: human_20261007_phase9_full_server3_only
@@ -8,7 +21,7 @@ server3_current_authority:
   note: Historical Stage 3 records below retain their evidence; they do not authorize further Server 3 runs.
 stage4_long_native_ewf_server1:
   authority: human_20261007_long_native_TUI_laptop_independent
-  status: RUNNING_NATIVE_HISTORY_CONFIRMED
+  status: STOPPED_NUMERICAL_GUARD_RECOVERED_ANALYSED
   server_id: '1'
   parent_native_iteration: 41483
   parent_native_film_clock_s: 0.3881843386354626
@@ -16,17 +29,17 @@ stage4_long_native_ewf_server1:
   submitted_updates: 200000
   added_target_film_time_s: 3.0
   target_native_film_time_s: 3.3881843386354626
-  fixed_film_step_s: 0.000015
+  fixed_film_step_s: 1.5e-05
   native_block_updates: 1000
   native_execution_started: true
-  latest_native_iteration_observed: 50152
-  latest_observation_utc: 2026-10-07T07:57:46.432613+00:00
-  latest_completed_updates_observed: 8669
-  latest_native_guard_completed_updates: 8000
-  latest_observed_peak_thickness_m: 0.002700959797948599
-  latest_observed_peak_courant: 0.1424277275800705
-  latest_inspection: PyAnsys/output/phase72a-stage4-ewf-long-native/20261007/inspection/latest-status.json
-  inspection_main_rpc_timeouts: true
+  latest_native_iteration_observed: 68483
+  latest_observation_utc: '2026-10-07T21:05:06.435649+00:00'
+  latest_completed_updates_observed: 27000
+  latest_native_guard_completed_updates: 27000
+  latest_observed_peak_thickness_m: 0.004443778190761805
+  latest_observed_peak_courant: 4.066396713256836
+  latest_inspection: PyAnsys/output/phase72a-stage4-ewf-long-native/20261007/inspection/reopen-N68483.json
+  inspection_main_rpc_timeouts: false
   inspection_direct_cortex_read: PASS
   submission_client_exited: true
   requires_laptop_connection: false
@@ -45,11 +58,42 @@ stage4_long_native_ewf_server1:
   retained_autosave_sets: 12
   prepared_native_reopen: PASS
   native_guard_proof: PASS
-  final_completion: PENDING_VERIFICATION
-  steady_film: PENDING_ANALYSIS
+  native_stop_classification: NUMERICAL_REJECTED
+  final_completion: NOT_REACHED_NATIVE_COURANT_GUARD_STOP
+  full_horizon_reached: false
+  completed_horizon_percent: 13.5
+  native_guard_history_samples: 27001
+  native_guard_histories_consecutive: true
+  thickness_limit_reached: false
+  unrealistic_marker_present: false
+  expected_final_pair_present: false
+  rejected_pair_presence_at_native_probe: true
+  rejected_pair_hash_reopen_verification: PASS
+  terminal_native_clock_verification: PASS_PRINTED_STEPS_NATIVE_CLOCK_COUNTER_REOPEN
+  steady_film: NOT_ESTABLISHED
+  report_scope: RECOVERED_FILM_REPORTS_TRANSCRIPT_AND_REOPENED_ENDPOINT
+  available_evidence_report_complete: true
+  full_history_analysis_complete: false
+  raw_recovery: PASS_DIRECT_NATIVE_FILE_READ_HASH_VERIFIED
+  reporting_authority: human_20261008_server1_restart_and_direct_file_retrieval
+  new_solve_calls_during_inspection: 0
+  analysis: PyAnsys/output/phase72a-stage4-ewf-long-native/20261007/analysis-summary.json
   status_owner: PyAnsys/output/phase72a-stage4-ewf-long-native/20261007/run-manifest.json
   setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/ewf-only-drain/long-development/setup.md
   results: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/ewf-only-drain/long-development/results.md
+  endpoint_native_film_clock_s: 0.7931843386351183
+  added_native_film_time_s: 0.4049999999996557
+  required_film_report_analysis_complete: true
+  inner_residual_history: NOT_RECORDED_IN_SAVED_TRANSCRIPT
+  current_loaded_native_iteration: 68483
+  first_courant_crossing_iteration: 67648
+  first_courant_crossing_added_time_s: 0.3924749999997805
+  final_film_inventory_kg: 38.56059846200812
+  direct_drain_removed_kg: 15.156843864221393
+  pre_guard_last_15ms_storage_kg_s: 37.354018746383595
+  full_run_film_ledger_error_percent: 1.6482717879398598
+  bulk_reports_unchanged: true
+  verification: PyAnsys/output/phase72a-stage4-ewf-long-native/20261007/inspection/reopen-N68483.json
 
 stage4_direct_ewf_drain_server1:
   record_scope: COMPLETED_DRAIN_PROOF_AND_PARENT_OF_LONG_NATIVE_RUN
