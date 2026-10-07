@@ -4,9 +4,10 @@
 | --- | --- |
 | Goal | Fastest numerically adequate film development; stationary film remains unreached |
 | Server / parent | Server 1; preserved early-start N5080; 3.5 ms, 0.164512 kg |
-| Controller | `RUNNING`; verified N22615; active target 22715 |
-| Current restart / film | N22615; 241.116227 ms; 6.374296 kg |
-| Branch limit | Initial probes share N5080; adaptive recovery restarts passing N7190. Exclude rejected N8190 from selected field lineage; do not add sibling film times |
+| Transfer status | N25815 pair saved/reopened; `VERIFIED_TRANSFER_READY`; Server 1 idle; student server not yet loaded. [Transfer verification](../../../../../../PyAnsys/output/phase72a-stage3-film-development-server1/20261005/transfer-final-N25815.json) |
+| Controller | `TRANSFER_READY`; verified N25815; active target None |
+| Current restart / film | N25815; 265.184339 ms; 6.688276 kg |
+| Branch limit | Initial probes share N5080; selected recoveries restart passing N7190 and N22615. Rejected N8190 and N23615 continuations are excluded from the selected field history; do not add sibling film times |
 | Fixed science | Full feed, R3, corrected absorber, bulk Coupled, film equations/forces/sources/boundaries and flow feedback |
 | Bulk advancement | Temporarily frozen during matched-time checks and relaxation; restoration required before goal closure |
 | Applying the findings | [Findings to apply to another case](#findings-to-apply-to-another-case): observed gains, reusable procedure and transfer limits |
@@ -51,6 +52,11 @@
 | adaptive-mid-film-N13390; N20615–N21615 | 17.5–17.5 | 17.4901 | 6.141923 | Unavailable | Unavailable | 0.013656 | 2.498 |
 | adaptive-mid-film-N13390; N21615–N22615 | 17.5–17.5 | 17.4901 | 6.374296 | Unavailable | Unavailable | 0.013437 | 2.49 |
 | adaptive-mid-film-N13390; N22615–N23615 | 8.75–20.6 | 19.0496 | 6.623635 | Unavailable | Unavailable | 0.0323762 | 2.709 |
+| adaptive-recovery-from-N22615; N22615–N22715 | 5–5 | 0.5 | 6.380885 | Unavailable | Unavailable | 0.0173277 | 0.3222 |
+| adaptive-recovery-from-N22615; N22715–N22815 | 5–7.6 | 0.754987 | 6.390830 | Unavailable | Unavailable | 0.0138061 | 0.4784 |
+| adaptive-recovery-from-N22615; N22815–N23815 | 7.6–7.6 | 7.60437 | 6.490627 | Unavailable | Unavailable | 0.0118966 | 1.101 |
+| adaptive-recovery-from-N22615; N23815–N24815 | 7.6–7.6 | 7.60438 | 6.589768 | Unavailable | Unavailable | 0.0116446 | 1.102 |
+| adaptive-recovery-from-N22615; N24815–N25815 | 7.6–7.6 | 7.60438 | 6.688276 | Unavailable | Unavailable | 0.0127071 | Not recovered |
 
 | Adaptive recovery | Evidence / selected change |
 | --- | --- |
@@ -82,7 +88,7 @@
 | Total liquid inventory | Bulk phase-2 liquid (kg) | EWF film (kg) | Sum (kg) |
 | --- | ---: | ---: | ---: |
 | Startup endpoint N5080 | 61.054883 | 0.164512 | 61.219395 |
-| Latest saved state N22615 | 61.054883 | 6.374296 | 67.429178 |
+| Latest saved state N25815 | 61.054883 | 6.688276 | 67.743158 |
 
 | Inventory interpretation | Limit |
 | --- | --- |
@@ -92,9 +98,9 @@
 
 | Latest complete window | Rate / interpretation |
 | --- | --- |
-| Accretion / drainage / storage | 81.121253 / 67.846150 / 13.286003 kg/s |
-| Drainage deficit | 16.364519% |
-| Peak film Courant / maximum thickness | 0.31015 / 0.321969 mm |
+| Accretion / drainage / storage | 81.120965 / 68.177178 / 12.954095 kg/s |
+| Drainage deficit | 15.956155% |
+| Peak film Courant / maximum thickness | 0.109029 / 0.30372 mm |
 | Observation | Inventory is still increasing; film ledger agreement does not establish inner-solve convergence |
 | Stationary screen | Three consecutive 1000-update windows with drainage deficit and absolute storage/accretion ≤1%; ledger ≤0.1%; finite fields with nonnegative film thickness; inspect histories |
 | Numerical criterion | Original solver: ≥99% inner pass and zero final residual >1. Alternative: matched-time facet-field agreement; inner residuals unavailable; repeat on developed film |
@@ -116,9 +122,9 @@
 
 ## Four-panel selected case history
 
-![Complete selected Stage 3 case history through N23815](figures/selected-case-history-N23815.png)
+![Complete selected Stage 3 case history through N25815](figures/selected-case-history-N25815.png)
 
-*Selected field path, N1–N23815, with no missing native coordinates. The layout reproduces the supplied N45606 history figure using this Stage 3 case's data and setting-change markers. Diamonds show preserved restart states.*
+*Selected field path, N1–N25815, with no missing native coordinates. The layout reproduces the supplied N45606 history figure using this Stage 3 case's data and setting-change markers. Diamonds show preserved restart states.*
 
 | Marker | Native iteration | Change in this selected path |
 | --- | ---: | --- |
@@ -135,15 +141,28 @@
 | Parent history | Original low-feed N1–N1580 native inventory and outlet reports; EWF off before A |
 | Selected startup | N1580–N5080 early Coupled/EWF startup; final parent hashes match the film-development parent pair |
 | Selected continuation | Passing N7190 and N22615 restart fields; selected 50 µs and 20 µs arms; sibling tests and rejected N8190/N23615 continuations excluded |
-| Coverage | All 23815 native coordinates; five required reports checked against native `.out` files in each continuation segment; inventory, cumulative drainage and outlet-flux joins pass |
+| Coverage | All 25815 native coordinates; five required reports checked against native `.out` files in each continuation segment; inventory, cumulative drainage and outlet-flux joins pass |
 | Inventory definition | Bulk Eulerian phase-2 liquid, and its sum with EWF wall-film mass; diagnostic DPM excluded |
 | Outlet sign | Native signed phase-2 `steamoutlet` flux; negative values mean outward liquid flow |
 | Drainage calculation | Per-update cumulative film outflow difference divided by film-time increment. Constant-step batches use verified full-precision steps; variable batches retain the printed native-clock resolution, with saved endpoint anchors. No rate smoothing. |
-| N23815 endpoint | 249.975589 ms film time; bulk 61.054883 kg; film 6.490627 kg; combined 67.545509 kg; signed liquid outlet flux −3.429962 kg/s |
+| N25815 endpoint | 265.184339 ms film time; bulk 61.054883 kg; film 6.688276 kg; combined 67.743158 kg; signed liquid outlet flux −3.429962 kg/s |
 | Flat bulk curves after D | Bulk equations are disabled; constant bulk mass and outlet flux do not establish bulk convergence or whole-model stationarity |
 | Film development | Film inventory continues to rise; drainage is below accretion. Elapsed film time differs from the native iteration coordinate. |
 | Claim limit | Saved field development only; full-bulk restoration, developed-film timestep qualification and sustained stationarity remain required |
-| Export / evidence | [PDF](figures/selected-case-history-N23815.pdf), [CSV](../../../../../../PyAnsys/output/phase72a-stage3-film-development-server1/20261005/selected-history/selected-case-history-N23815.csv), [manifest](../../../../../../PyAnsys/output/phase72a-stage3-film-development-server1/20261005/selected-history/selected-case-history-N23815-manifest.json), [reproduction script](../../../../../../PyAnsys/scripts/analysis/plot_phase72a_stage3_selected_history.py) |
+| Export / evidence | [PDF](figures/selected-case-history-N25815.pdf), [CSV](../../../../../../PyAnsys/output/phase72a-stage3-film-development-server1/20261005/selected-history/selected-case-history-N25815.csv), [manifest](../../../../../../PyAnsys/output/phase72a-stage3-film-development-server1/20261005/selected-history/selected-case-history-N25815-manifest.json), [reproduction script](../../../../../../PyAnsys/scripts/analysis/plot_phase72a_stage3_selected_history.py) |
+
+### Scaled residuals
+
+![Seven scaled carrier residuals for the selected startup](figures/selected-scaled-residuals-N5080.png)
+
+*One plot of all seven native scaled carrier residuals, N1–N5080, with no gaps or smoothing. The retained low-feed parent supplies N1–N1580; the selected early Coupled/EWF startup supplies N1581–N5080. Bulk equations were frozen after N5080, so later film-development updates have no carrier residuals plotted. EWF inner residuals are separate and are not included.*
+
+| Evidence | Record |
+| --- | --- |
+| Data checks | All 3501 startup residual rows match the native transcript; the N1580 parent join passes; all 5080 plotted rows are finite and positive |
+| Scaling | Native Fluent scaling retained; no renormalisation or convergence claim |
+| Last carrier solve, N5080 | Continuity 1.863×10⁻³; phase-2 volume fraction 3.3869×10⁻³ |
+| Files | [PDF](figures/selected-scaled-residuals-N5080.pdf), [CSV](../../../../../../PyAnsys/output/phase72a-stage3-film-development-server1/20261005/selected-history/selected-scaled-residuals-N5080.csv), [manifest](../../../../../../PyAnsys/output/phase72a-stage3-film-development-server1/20261005/selected-history/selected-scaled-residuals-N5080-manifest.json), [script](../../../../../../PyAnsys/scripts/analysis/plot_phase72a_stage3_scaled_residuals.py) |
 
 <!-- END retained selected case history -->
 
@@ -151,31 +170,31 @@
 
 ## Wall-film thickness on the separator
 
-![Wall-film thickness at three development times](figures/wall-film-thickness-development-N18615.png)
+![Wall-film thickness at three development times](figures/wall-film-thickness-development-N25815.png)
 
-*Actual EWF wall-face values at N5190, N13390 and N18615; shared camera and linear colour range 0–0.30 mm. Film time starts at the dry-film activation at A. Python rendering of native Fluent geometry and facet fields; no spatial interpolation.*
+*Actual EWF wall-face values at N5190, N13390 and N25815; shared camera and linear colour range 0–0.30 mm. Film time starts at the dry-film activation at A. Python rendering of native Fluent geometry and facet fields; no spatial interpolation.*
 
 | Saved state | Film time (ms) | Film mass (kg) | Maximum facet thickness (mm) | Wall area with thickness ≥1 µm (%) | Wall area with thickness ≥0.1 mm (%) |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | Early development, N5190 | 5.904 | 0.360 | 0.124 | 45.90 | 0.80 |
 | Before step requalification, N13390 | 75.662 | 3.864 | 0.253 | 84.56 | 40.34 |
-| Latest snapshot used in this figure, N18615 | 171.156 | 5.419 | 0.253 | 92.54 | 52.40 |
+| Latest snapshot used in this figure, N25815 | 265.184 | 6.688 | 0.291 | 94.44 | 61.98 |
 
-![N18615 wall-film thickness from opposite sides](figures/wall-film-thickness-opposite-views-N18615.png)
+![N25815 wall-film thickness from opposite sides](figures/wall-film-thickness-opposite-views-N25815.png)
 
-*Opposite views of the same N18615 snapshot, using the same thickness scale. These views expose wall areas hidden in the comparison camera.*
+*Opposite views of the same N25815 snapshot, using the same thickness scale. These views expose wall areas hidden in the comparison camera.*
 
 | Observation or qualification | Evidence / limit |
 | --- | --- |
-| Visual development | The lower and middle separator wall has a broader region of appreciable film at N18615. The upper wall remains much thinner. |
-| Peak thickness versus retained mass | Maximum facet thickness is about 0.253 mm at both N13390 and N18615, while inventory rises from 3.864 to 5.419 kg. Film development includes changes across the wall; the maximum alone misses this growth. |
+| Visual development | The lower and middle separator wall has a broader region of appreciable film at N25815. The upper wall remains much thinner. |
+| Peak thickness versus retained mass | Maximum facet thickness rises from 0.253 mm at N13390 to 0.291 mm at N25815, while inventory rises from 3.864 to 6.688 kg. Wall area above 0.1 mm increases from 40.34% to 61.98%; the maximum alone does not describe the growth. |
 | Coverage definition | Area-weighted wall facets with thickness ≥1 µm or ≥0.1 mm; these are declared display metrics, not Fluent's default wetted-area definition. Polygon areas come from the native wall geometry. |
 | Surface and units | Film-enabled boundary `wall`, 3463 facets, 53.437 m²; height is Fluent Y in metres; thickness is converted from metres to millimetres. |
 | Source verification | Each saved snapshot matches the captured wall centroids and face ordering; summed facet mass matches its report. Paired checkpoint identities and file hashes are recorded in the figure manifest. |
 | Rendering | Matplotlib colours the actual Fluent wall polygons with their saved face thickness. No node interpolation or smoothing. Visible polygon structure reflects the discrete facet values. |
 | Calculation state | Temporarily frozen bulk flow. The film is still developing; these contours do not establish steady film, timestep independence or physical validation. |
-| Run impact | Read-only geometry extraction during the existing continuation; zero additional solve commands and no case replacement. |
-| Reproduction / provenance | [Plot script](../../../../../../PyAnsys/scripts/analysis/plot_phase72a_stage3_wall_thickness.py), [figure manifest](../../../../../../PyAnsys/output/phase72a-stage3-film-development-server1/20261005/wall-thickness-views/figure-manifest-N18615.json) |
+| Run impact | Existing verified geometry reused; N25815 facet fields extracted from the idle reopened transfer endpoint; zero additional solve commands. |
+| Reproduction / provenance | [Plot script](../../../../../../PyAnsys/scripts/analysis/plot_phase72a_stage3_wall_thickness.py), [figure manifest](../../../../../../PyAnsys/output/phase72a-stage3-film-development-server1/20261005/wall-thickness-views/figure-manifest-N25815.json) |
 
 <!-- END retained wall thickness views -->
 

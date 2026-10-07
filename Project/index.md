@@ -8,18 +8,9 @@ in `PyAnsys/`.
 
 ## What are we trying to answer now?
 
-**Shuhei — Phase 8 storyline reconstruction:** reproduce the historical simulation steps leading to the current model; closing mass imbalance and reducing continuity are diagnostics, not the phase goal or progression gates. Create five reproducible run families on the
-existing 60k simplified mesh to compare one-inlet and split-inlet carriers,
-one-way and two-way DPM, five Phase 8 inlet-speed points (`20.11`, `23.46`,
-`26.81`, `29.48`, and `32.14 m/s`), injected
-DPM shares of 2.5%, 5%, 7.5%, 10%, and 20% of inlet liquid, and EWF with
-common report definitions. F0 separates the existing mixed-inlet SIMPLE series from Coupled F1. Families 0–4 have no
-absorber; the finalized Phase 7.2A setup will later be rerun at matching
-points for an absorber-equipped comparison. This is a new-mesh storyline
-series, not a quantitative replay of historical results. See the [Phase 8
-context](experiments/phase-08-storyline-reconstruction/CONTEXT.md) and
-[common report contract](experiments/phase-08-storyline-reconstruction/report-contract.md).
-The [Phase 8 result](experiments/phase-08-storyline-reconstruction/results.md) brings together family plots, native spatial views and the reconstructed model-development storyline. The bounded Server 1 batch is verified complete: five matched F3/F4 points each at N16000, with a uniform final-500 comparison. Phase 8 is paused at that boundary.
+**Shuhei — Phase 9 mesh convergence preparation:** prepare the supplied 60k, 342k, 680k, 997k and 2.6M meshes through the Stage 4 startup method to a full-feed hold, using Server 3 only. Keep bulk equations active. Final EWF settings, bulk freeze and EWF-only continuation are deferred. See the [Phase 9 context](experiments/phase-09-mesh-convergence/CONTEXT.md) and [setup](experiments/phase-09-mesh-convergence/setup.md).
+
+**Shuhei — Phase 8 Stage 2:** run F2–SIMPLE on the supplied 997,604-cell split-inlet mesh at nominal 26.81 m/s. Use 5,000 total iterations: low feed and ramp in the first 2,000, then 3,000 at full feed. F0 waits for Shuhei's genuine single-inlet mesh. All previous Phase 8 F0–F4 records are [Stage 1](experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/index.md). See the [active context](experiments/phase-08-storyline-reconstruction/CONTEXT.md), [Stage 2 setup](experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/setup.md), and [current results](experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/results.md).
 
 The liquid-removal work has two separate planning lanes:
 
@@ -50,9 +41,11 @@ steam-outlet diameter is `0.876 m`, correcting the former Project value of
 
 | Current Phase 7.2A lane | Scope and authority | Record |
 | --- | --- | --- |
+| Phase 9 mesh convergence preparation | Server 3 only; 342k child verified; thorough 08b settings audit required before solves | [Phase 9](experiments/phase-09-mesh-convergence/index.md) |
+| Stage 4 EWF / wall parameters | Selected EWF-mechanism continuation from Server 1 N29815; feedback-OFF retry complete: 4000 bulk-and-film updates to N33815, then +50 ms EWF-only to N37149; 15 microseconds viable; film still filling; feedback-ON probes failed | [Stage 4](experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/index.md) |
 | Stage 3 vertical-slit supplied-mesh repeat | Server 3 owned by this repeat; native transfer from prepared A; 154,063 cells; same early-EWF startup schedule | [Setup](experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/slit154k/setup.md), [status](experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/slit154k/results.md) |
 | Stage 2 adaptive-film development | Server 3; verified N45606 transfer; aggressive-step probes and inner-film repair | [Continuation setup](experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/aggressive-server3/setup.md) |
-| Stage 3 accelerated film development | Server 1; passing N22615 (241.116 ms, 6.374 kg film); N23615 rejected for Courant 1.227; lower-target recovery running; combined inventory still growing | [Continuation results](experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/film-development/results.md) |
+| Stage 3 accelerated film development | Server 1 running a continuously monitored three-speed campaign: 26.81, 20.11 and 32.14 m/s, each to 500 ms film time; independent new-speed startups; frozen film-development bulk fields | [Campaign results](experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/inlet-speed-500ms/results.md) |
 | Stage 3 early Coupled/EWF startup | Server 1 N5080 complete; lower ramp continuity/storage/carryover; activation spike and late inner-film failures remain | [Startup result](experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/results.md) |
 | Stage 3 shortened reconstruction | Server 3; N8000 adaptive continuation complete; carrier scalars close; film 14.09% of reference; continuity remains high | [Stage 3 setup](experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/setup.md), [results](experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/results.md) |
 

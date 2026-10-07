@@ -17,7 +17,7 @@ E_SOURCES = {
     "E0": ROOT / "PyAnsys/output/phase72a_ewf_family_e_student_20260922T115500Z/E0/report-histories.json",
     "E2.7": ROOT / "PyAnsys/output/phase72a_ewf_student_e27_run_20260923T071523Z/E2.7/report-histories.json",
 }
-F_SOURCE = ROOT / "Project/experiments/phase-08-storyline-reconstruction/results.md"
+F_SOURCE = ROOT / "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/results.md"
 
 
 def save(fig, name):

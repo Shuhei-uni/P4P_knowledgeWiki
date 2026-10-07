@@ -1,0 +1,40 @@
+phase_id: phase-09-mesh-convergence
+status: RUNNING_FULL_FEED_PREPARATION
+authority: human_20261007_phase9_full_server3_only
+server_id: '3'
+setup: Project/experiments/phase-09-mesh-convergence/setup.md
+machine_root: PyAnsys/output/phase9-mesh-convergence/20261007
+mesh_cells: [60964, 342609, 679970, 997604, 2596657]
+stop_boundary: FULL_FEED_HOLD_BULK_ACTIVE
+bulk_freeze_authorized: false
+ewf_only_continuation_authorized: false
+ewf_settings_final: false
+mesh_convergence_established: false
+source_template: SOURCE_REOPEN_VERIFIED
+mapped_meshes: [342k]
+prepared_mesh_children: [60k, 342k]
+phase9_solve_calls: 2
+external_block: null
+retry: Native transfer from original E2.7 A, then apply provisional Stage 4 settings
+retry_verified: true
+settings_reference: P4P-Fluent-Artifacts/08b/TwoPhaseInletV2(Purnanto).cas.h5
+settings_audit_required_before_solve: true
+unknown_setting_differences_require_human_input: true
+never_exit_fluent: true
+model_switch_probes_allowed: false
+legacy_simonin_restoration: HUMAN_APPROVED_NONE_EXCEPTION
+active_bulk_corrections: common_source_and_342k_saved_reopened_verified
+full_runs_started: true
+restart_recovery: N1600_reopen_verified_bulk_contract_and_film_time_preserved
+legacy_exception_question: approved_keep_none_proceed
+settings_audit_status: APPLIED_REOPEN_VERIFIED
+low_feed_smoke: PASS_N1600_34_REPORTS
+host_deployment: VERIFIED_367_FILES
+host_launch: prior_worker_ended_before_full_run_solve
+host_active_phase9_workers: 0
+next_controller_route: desktop_connection_with_live_client_transcript
+desktop_controller_receipt: PyAnsys/output/phase9-mesh-convergence/20261007/desktop-controller.json
+desktop_must_remain_running: true
+active_mesh: 60k
+active_stage: low-feed-hold
+active_batch_target: 2080

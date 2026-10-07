@@ -18,8 +18,9 @@ Use the branch that matches the task:
   prove completion;
 - [fleet and artifacts](references/fleet-and-artifacts.md) — choose/reconcile
   live endpoints, case-data transfers, output paths, and durable checkpoints;
-- [manual fallback](references/manual-fallback.md) — resolve uncertain Fluent
-  configuration from the version-matched manual and live tree;
+- [manual fallback](references/manual-fallback.md) — use version-matched Fluent
+  guides and their screenshots to build and verify TUI commands for nested
+  settings, unclear activation order, or unresolved configuration;
 - [special operations](references/special-operations.md) — pool patching and
   other narrow case operations.
 
@@ -48,10 +49,12 @@ was wrong.
 
 ## Fallbacks
 
-A TUI or journal route does **not** require a human approval round-trip merely
-because it is TUI. Use it only when the Settings/API path is unavailable or
-insufficient, the exact Fluent version/case prerequisites are understood, and
-the result can be verified by readback plus save/reopen.
+For nested settings or unclear activation order, follow the manual fallback
+branch and prefer its guide-and-screenshot-based TUI recipe. Use Settings/API
+for straightforward changes and for readback. A TUI or journal route does
+**not** require a human approval round-trip merely because it is TUI; establish
+the exact Fluent version/case prerequisites and verify by readback plus
+save/reopen.
 
 Never guess a configuration from another Fluent version just to keep the run
 moving.

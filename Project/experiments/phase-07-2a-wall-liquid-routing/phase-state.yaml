@@ -1,4 +1,51 @@
 phase_id: phase-07-2a-wall-liquid-routing
+server3_current_authority:
+  owner: phase-09-mesh-convergence
+  authority: human_20261007_phase9_full_server3_only
+  context: Project/experiments/phase-09-mesh-convergence/CONTEXT.md
+  previous_live_endpoint: 5180
+  preservation: PyAnsys/output/phase9-mesh-convergence/20261007/server3-preservation.json
+  note: Historical Stage 3 records below retain their evidence; they do not authorize further Server 3 runs.
+stage4_feedback_off_retry_server1:
+  status: COMPLETE_NATIVE_VERIFIED_ANALYSED
+  bulk_updates_verified: 4000
+  final_native_iteration: 37149
+  final_film_time_s: 0.3231843386354754
+  film_only_added_verified_s: 0.050
+  prepared_film_step_s: 0.000015
+  bulk_equations_frozen: true
+  paired_reopen: PASS
+  steady_film: false
+  results: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/realism-continuation/feedback-off/results.md
+  authority: human_20261007_flow_momentum_coupling_OFF_retry
+  server_id: '1'
+  status_owner: PyAnsys/output/phase72a-stage4-realism/20261007/feedback-off/run-manifest.json
+  setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/realism-continuation/feedback-off/setup.md
+  parent_native_iteration: 29815
+  bulk_additional_iterations: 4000
+  bulk_target_iteration: 33815
+  extension_authority: human_20261007_do_2000_more_bulk_update
+  film_only_added_time_s: 0.050
+  flow_momentum_coupling: false
+  initialization: FORBIDDEN
+
+stage4_realism_continuation_server1:
+  authority: human_2026_10_07_selected_settings_plus50ms
+  status: FEEDBACK_ON_RECOVERY_FPE_RECONCILED
+  settings_reopen: PASS_ALL_SELECTED_TARGETS
+  selected_bulk_iterations_verified: 0
+  film_only_completed: false
+  server_id: '1'
+  status_owner: PyAnsys/output/phase72a-stage4-realism/20261007/run-manifest.json
+  setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/realism-continuation/setup.md
+  parent_native_iteration: 29815
+  parent_film_time_s: 0.2691843386355824
+  bulk_additional_iterations: 2000
+  film_only_added_time_s: 0.050
+  film_only_target_step_s: 0.000015
+  initialization: FORBIDDEN
+  physical_validation: false
+
 local_reentrainment_speed_sensitivity:
   authority: human_2026_10_06_three_local_speeds_reentrainment_250ms
   status: STOPPED_BY_HUMAN_SAVED
@@ -23,6 +70,24 @@ local_reentrainment_speed_sensitivity:
   completion_job_limit: legacy_CLI_wake_failed_active_writer_conflict
   active_watch: PAUSED_BY_HUMAN
   recovery_controller_session: 44683
+
+stage3_slit154k_film_development_server3:
+  authority: human_20261006_overwrite_server3_develop_wall_film_continuously
+  server_id: '3'
+  status_owner: PyAnsys/output/phase72a-stage3-slit154k-film-development-server3/20261006/run-manifest.json
+  live_supervision: PyAnsys/output/phase72a-stage3-slit154k-film-development-server3/20261006/live-supervision.json
+  setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/slit154k/film-development/setup.md
+  results: Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/slit154k/film-development/results.md
+  parent_native_iteration: 5080
+  parent_film_time_s: 0.0035
+  previous_server3_endpoint_preserved: 10000
+  initialization: FORBIDDEN_CONTINUE_EXACT_FIELDS
+  first_full_bulk_probe: PASS_100_UPDATES_1US
+  first_probe_native_end: 5180
+  first_probe_inner_pass_percent: 100
+  first_probe_film_ledger_error_percent: 0.000011555076065672765
+  steady_film: false
+
 stage3_slit154k_server3:
   authority: human_2026_10_05_full_server3_supplied_vertical_slit_repeat
   server_id: '3'
@@ -799,14 +864,14 @@ next_required_action: >-
 stage3_server1_film_development:
   authority: human_2026_10_05_fastest_numerically_adequate_steady_film
   server_id: "1"
-  status: LOWER_TARGET_RECOVERY_RUNNING
+  status: REFERENCE_500MS_PRESERVED_STEADY_MODEL_UNQUALIFIED
   parent_native_iteration: 5080
   setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/film-development/setup.md
   manifest: PyAnsys/output/phase72a-stage3-film-development-server1/20261005/run-manifest.json
   bulk_and_film_initialization: FORBIDDEN
   parent_preserved_reopened: PASS
-  last_verified_native_iteration: 22615
-  active_native_target: 22715
+  last_verified_native_iteration: 48205
+  active_native_target: null
   allowed_film_subiterations: 30
   stationary_film: false
   server3: SEPARATE_DO_NOT_TOUCH
@@ -830,17 +895,17 @@ stage3_server1_film_development:
   bulk_equations_temporarily_frozen: true
   full_bulk_restore_and_developed_step_check: REQUIRED_BEFORE_GOAL_CLOSURE
   pause_requested: false
-  last_passing_film_time_s: 0.03840375000000042
-  last_passing_film_mass_kg: 2.737597279630835
+  last_passing_film_time_s: 0.5
+  last_passing_film_mass_kg: 9.544399018862931
   excluded_adaptive_endpoint: 8190
   excluded_adaptive_peak_courant: 2.007516
   recovery_probe_launched: true
   resume_requires_explicit_human_request: false
   resume_authority: explicit_human_resume_2026_10_05
-  latest_film_time_s: 0.2411162267606407
-  latest_film_mass_kg: 6.374295873654162
-  latest_peak_film_courant: 0.3101497
-  latest_film_ledger_error_percent: 0.01343701818949071
+  latest_film_time_s: 0.5
+  latest_film_mass_kg: 9.544399018862931
+  latest_peak_film_courant: 0.05405957
+  latest_film_ledger_error_percent: 0.007873026049407057
   recovered_connection_batch: "10390-11390"
   connection_recovery_repeated_updates: 0
   mid_film_requalification_parent: 13390
@@ -852,3 +917,83 @@ stage3_server1_film_development:
   mid_film_rejected_endpoint: 23615
   mid_film_rejected_peak_courant: 1.227057
   current_recovery_parent: 22615
+  live_idle: false
+  transfer_receipt: PyAnsys/output/phase72a-stage3-film-development-server1/20261005/transfer-final-N25815.json
+  transfer_onedrive_hashes: VERIFIED_SERVER_AND_MAC
+  student_server_loaded: false
+
+stage3_server1_inlet_speed_500ms:
+  authority: human_2026_10_06_three_inlet_speeds_500ms_continuous_monitoring
+  server_id: "1"
+  status: PAUSED_NATIVE_ENDPOINT_RECONCILIATION_PENDING
+  setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/inlet-speed-500ms/setup.md
+  results: Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/inlet-speed-500ms/results.md
+  manifest: PyAnsys/output/phase72a-stage3-speed-sensitivity-server1/20261006/run-manifest.json
+  monitor: PyAnsys/output/phase72a-stage3-speed-sensitivity-server1/20261006/monitor-state.json
+  nominal_speeds_m_s: [26.81, 20.11, 32.14]
+  film_horizon_s: 0.5
+  independent_speed_startups: true
+  bulk_equations_frozen_after_startup: true
+  steady_film_claim: false
+  server3: SEPARATE_DO_NOT_TOUCH
+  controller_pid: 21834
+  reference_endpoint: 48205
+  reference_film_time_s: 0.5
+  reference_onedrive_hashes: VERIFIED_SERVER_AND_MAC
+  low_startup_endpoint: 5080
+  low_startup_film_time_s: 0.0035
+  low_20us_matched_time_screen: PASS
+  low_clock_recovery_repeated_updates: 0
+
+  pause_requested: true
+  controller_running: false
+  server_idle: null
+  low_verified_endpoint: 18205
+  low_verified_film_time_s: 0.1354511757000215
+  low_submitted_target: 19205
+  pause_receipt: PyAnsys/output/phase72a-stage3-speed-sensitivity-server1/20261006/pause-receipt.json
+  pause_limit: Server 1 unreachable; native submitted batch status unverified; reconcile before resume
+
+commercial_steel_continuation:
+  authority: human_2026_10_07_additional_3000_native_iterations
+  server_id: '1'
+  parent_native_iteration: 25815
+  target_native_iteration: 29815
+  roughness_height_m: 0.000045
+  roughness_constant: 0.5
+  bulk_equations_restored: true
+  fixed_film_step_s: 0.000001
+  initialization: FORBIDDEN
+  status_owner: PyAnsys/output/phase72a-commercial-steel/20261006/run-manifest.json
+  setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/commercial-steel/setup.md
+  steady_film: false
+  status: COMPLETE_NATIVE_VERIFIED_ANALYSED
+  last_observed_native_iteration: 29815
+  completed_updates: 4000
+  remaining_updates: 0
+  live_idle: true
+  resume_requires_explicit_human_request: false
+  execution: FLUENT_SERVER_OWNED_JOURNAL
+  requires_laptop_connection: false
+  submitted_updates: 3000
+  final_completion: N29815_PAIR_HASH_AND_HISTORY_VERIFIED
+  analysis_summary: PyAnsys/output/phase72a-commercial-steel/20261006/analysis-summary.json
+
+stage4_ewf_wall_parameters:
+  authority: human_2026_10_07_stage4_framing
+  status: SELECTED_CONTINUATION_COMPLETE_STARTUP_METHOD_RETAINED
+  stage3_human_assessment: SATISFIED_METHOD_REFERENCE
+  context: Project/experiments/phase-07-2a-wall-liquid-routing/CONTEXT.md
+  setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/setup.md
+  results: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/results.md
+  first_completed_result: COMMERCIAL_STEEL_N29815
+  startup_parent: null
+  next_case_settings_selected: true
+  new_solve_submitted: true
+  latest_completed_result: FEEDBACK_OFF_N37149
+  selected_continuation_parent: 29815
+  post_full_feed_mode: EWF_ONLY_FROZEN_BULK
+  freeze_preserves_bulk_and_film_fields: true
+  freeze_preserves_film_clock: true
+  reference_conversation: 6ac5733b-48a4-83ec-9e11-23e6902b1d24
+  reference_content_retrieved: false

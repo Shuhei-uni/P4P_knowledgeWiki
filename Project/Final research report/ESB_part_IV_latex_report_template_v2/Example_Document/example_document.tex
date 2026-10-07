@@ -1,0 +1,750 @@
+\documentclass[12pt]{article}
+% The preamble.sty file contains all the packages/options the report uses. it also has defined some custom commands (with a ESB prefix) to make using this template simple.
+\usepackage{ESB_preamble} 
+
+
+%%% Document Variables %%%
+\newcommand{\ESBassessment}{Research Project Report}
+\newcommand{\ESBtitle}{*project title*}
+\newcommand{\ESBauthor}{*author*}
+\newcommand{\ESBcoworker}{*co-worker*} % comment out this line if no coworker, if multiple separate names with \\
+\newcommand{\ESBsupervisors}{*supervisor1* \\ *supervisor2*} % separate names with \\
+\newcommand{\ESBdate}{*report date*} % e.g., October 2001
+\newcommand{\ESBstudentid}{*123456789 abcd123*} % or upi or both
+
+\addbibresource{Example_Document/example_references.bib} % Uncomment and edit if using different .bib file name.
+% \addbibresource{references.bib} % Uncomment and edit if using different .bib file name.
+
+
+% If you need to add your own packages/options, add them to preamble.sty or below (but before \begin{document}).
+
+
+
+
+
+
+
+%%% --- %%%
+
+
+\begin{document}
+\pagenumbering{roman} % front matter roman numerals 
+
+
+
+%%% Title Page %%%
+% The title_page.tex file has the commands to create the title page, it shouldn't need to be changed.
+\input{ESB_titlepage.tex} 
+%%% --- %%%
+
+
+
+%%% Abstract %%%
+\ESBfrontsection{Abstract} % Add numberless section and TOC entry
+Abstract text.
+\clearpage
+%%% --- %%%
+
+
+
+%%% Declaration %%%
+% Replace the unsigned version with a new signed pdf.
+\includepdf[pagecommand={
+    \addcontentsline{toc}{section}{Declaration}
+    \thispagestyle{ESBpagestyle}
+    }]{Declaration/Unsigned_Declaration_Print.pdf} 
+\clearpage
+%%% --- %%%
+
+
+
+%%% Table of Contents %%%
+\tableofcontents
+\listoffigures
+\listoftables
+\clearpage
+%%% --- %%%
+
+
+
+%%% Glossary of Terminology %%%
+\ESBfrontsection{Glossary of Terminology} % Add numberless section and TOC entry
+
+% Add all terminiology e.g., \ESBaddterminology{$g$}{Gravity}
+\ESBaddterminology{Term/Symbol}{Definition} 
+\ESBaddterminology{$g$}{Gravity}
+
+
+\ESBprintglossary % Prints glossary
+\clearpage
+%%% --- %%%
+
+
+
+%%% Abbreviations %%%
+\ESBfrontsection{Abbreviations} % Add numberless section and TOC entry
+
+% Add all abbreviations e.g., \ESBaddabbreviation{NZ}{New Zealand}
+\ESBaddabbreviation{Symbol}{Name}
+\ESBaddabbreviation{NZ}{New Zealand}
+
+\ESBprintabbreviations % Prints abbreviations
+\clearpage
+%%% --- %%%
+
+
+
+%%% Body %%%
+\pagenumbering{arabic} % front matter arabic numerals
+
+
+
+
+\section{The .tex File}
+A LaTeX file has a .tex file extension.
+At the top, it needs the \verb|\documentclass{article}| command to say what type of document it is.
+The \verb|article| class is fine for everything ESB.
+
+Underneath are lines of package imports and options for the document. 
+The actual formatted text of the document is within the \verb|begin{document} \end{document}| environment.
+
+Case for commands is important. 
+Whitespace is not important except when used for new paragraphs.
+The \textbackslash is the escape character for commands (i.e., functions). 
+The \verb|{}| are the inputs to the commands.
+The \verb|[]| are used as options for stuff (can also have key=value pairs).
+The \verb|%| is for comments ``Ctrl + /''.
+
+The .tex file structure is similar to a program written in Python or C.
+Just like coding, you can get errors when compiling a LaTeX document.
+Usually, if you are not doing very peculiar or advanced things, errors are easy to debug and are probably due to a missing bracket, etc.
+Overleaf can be very helpful with errors.
+Orange warnings should be fixed before finishing the entire document.
+Blue warnings are not major issues.
+Overleaf and other IDEs/text/editors have many similar shortcuts, such as comment ``Ctrl + /'',  context menu ``Ctrl + space'', and auto-complete ``tab''.
+
+
+
+\section{Sections}
+Create document sections with the section, subsection, and subsubsection commands:
+
+\section{Section Title}
+filler text.
+\subsection{Subsection Title}
+filler text.
+\subsubsection{Subsubsection Title}
+filler text.
+
+If you want a numberless section, add a star * after the section commands:
+
+\section*{Numberless Section Title}
+filler text.
+\subsection*{Numberless Subsection Title}
+filler text.
+
+Finer control over sections, i.e., style, numbering, or spacing, is done with the ``titlesec'' package.
+
+\clearpage
+
+
+
+\section{Text}
+Some normal font text.\\
+\textbf{Some bold text.} Note: ``Ctrl + B'' works too.\\
+\textit{Some italic text.} Note: Ctrl + I works too.\\
+The double backslash \textbackslash\textbackslash~is a line break, i.e., basically latex's \textbackslash n, it is usually unnecessary when writing text.
+
+Empty lines mean to start a new paragraph.
+
+Sentences on each line are a preference, not required though.
+But useful cause it makes moving lines to different places easier with ``Alt + arrows'' with the cursor on one or more lines.
+
+A handy tip in overleaf (with different key combos in other IDEs) is duplicating lines with the cursor on one or more lines and pressing ``Alt + shift + arrow keys'' (a quicker copy and paste). 
+Useful if you like saving a commented temporary version of something you want to edit or for writing solutions.
+
+The 12pt font size is default and is specified as a document class option.
+\href{https://www.overleaf.com/learn/latex/Font_sizes%2C_families%2C_and_styles#Reference_guide}{Other common font sizes (click here) should you need them.}
+
+
+Note that the \verb.\verb||. command used in this document displays whatever is inside the two symbols (here it is .) as monospaced verbatim (i.e., no commands).
+
+Use \verb|\clearpage| (or \verb|\newpage|) for new page.
+\clearpage
+
+
+
+\section{Math}
+Inline math text is created by enclosing the math with \$ characters.
+For example, \verb|$x = 4$| renders as $x = 4$.
+Group terms with the curly braces \{ and \}.
+
+To ensure the math is nicely spaced in text and on the same line, you can also surround the inside with curly braces \{ and \} directly after the \$.
+Also, add non-breaking spaces \textasciitilde symbol to prevent the math from being "isolated" to the start or end of a line.
+For example, \$x~=~4\$ renders as~${x = 4}$.
+You can have text in math with the \verb|\text{}| command, for example: $x_\text{start}$.
+
+A numbered equation with the align environment:
+\begin{align}
+    y = mx + c
+\end{align}
+An unnumbered equation:
+\begin{align*}
+    y = ax^2 + bx + c
+\end{align*}
+We can also align equations with the alignment character \& (while specifying new lines), 
+\begin{align*}
+    x &= \frac{\pm\sqrt{b^2-4ac}}{2a}\\
+    x &= 5 + 10\\
+    x &= 15
+\end{align*}
+A mixture of some common math symbols:
+\begin{align*}
+    0 &< x \leq 1\\
+    y_{23} &= \{[(c_3 \times \beta)]\}\\
+    c \div 5 + 1/z &= (\frac{c}{5}) + \left(\frac{c}{5}\right) + z^{-1} \\
+    \int_a^b \chi^2 dx &= \sin^2{(\theta)} + C\\
+    \frac{dz}{dt} &= \frac{\partial f}{\partial x}\frac{dx}{dt} + ...\\
+    \sum_{i=1}^n a_i &= \prod_{j\in \alpha}j
+\end{align*}
+Set notation is available too, $i\in I \cup \cap \subset \subseteq$.
+Matrices too etc., anything ``math'' is available. 
+For list of math symbols etc see the \autoref{appendix:other_symbols}, or just search online for a specific one. 
+
+There are many other math environments, look them up if these basic ones here don't suit your needs. 
+
+You can probably find an AI to transform an image (like your handwriting) of an equation to LaTeX.
+But obviously, getting AI to solve the said equation \textbf{is against academic integrity}.
+\clearpage
+
+
+
+\section{Lists}
+The enumerate environment is a numbered list.
+\begin{enumerate}
+    \item 
+    \item 
+    \item 
+\end{enumerate}
+
+The itemize environment is a bullet list.
+\begin{itemize}
+    \item 
+    \item 
+    \item 
+\end{itemize}
+
+Note these can be nested too:
+\begin{enumerate}
+    \item Some
+        \begin{itemize}
+            \item filler
+            \item text
+        \end{itemize}
+    \item to 
+        \begin{itemize}
+            \item fill
+        \end{itemize}
+    \item space.
+\end{enumerate}
+
+Spacing, numbering, and bullet shape, etc., can be adjusted with the enumitem package.
+
+
+
+\section{Files}
+A latex document can have multiple files.
+The \verb|\input{}| command takes a file path (overleaf can auto-complete (press ``tab'')) and basically copy and pastes the contents of the file into where the input command was called.
+
+Useful for large documents.
+Also useful to move the stuff before \verb|\begin{document}| to a separate file to make it look cleaner.
+
+Other slightly different file related commands include: \verb|\include{}|, and \verb|\import{}| (requires package).
+
+\clearpage
+
+
+
+\section{Figures}
+\label{sec:figure}
+To add an image to the document, you must first upload an image to Overleaf.
+Then auto-complete (with ``tab'') a \verb|\begin{figure}| environment.
+Or you could click and drag the image file into the text and Overleaf will prompt you.
+
+Figure width should be adjusted to your liking (see examples, \autoref{fig:f1} and \autoref{fig:f2}).
+
+\begin{figure}
+    \centering
+    % 20% width of the text line.
+    \includegraphics[width=0.2\linewidth]{fingerprint.png}
+    \caption{Fingerprint 1}
+    \label{fig:f1}
+\end{figure}
+
+\begin{figure}
+    \centering
+    % Selects the biggest width/height for a given image and keeps the aspect ratio.
+    \includegraphics[width=2cm, height=2cm, keepaspectratio]{fingerprint.png}
+    \caption{Fingerprint 2}
+    \label{fig:f2}
+\end{figure}
+
+Latex tries to figure out the best place for the image itself, but you can have more control, with the positional parameters:
+\begin{itemize}
+    \item \textbf{h: here.} 
+    \item t: top of the page. 
+    \item b: bottom of the page. 
+    \item !: try to force this position.
+\end{itemize}
+For example, a figure placed right here, otherwise at the bottom or top:
+\begin{figure}[!hbt]
+    \centering
+    \includegraphics[width=1.25cm]{fingerprint.png}
+    \caption{Fingerprint 3}
+    \label{fig:f3}
+\end{figure}
+
+All figures should have a descriptive caption and be referenced in the text like so \autoref{fig:f3}.
+Latex will automatically determine the numbering, and if figures have unique labels, then latex will also automatically reference the correct figure numbers in the text.
+More description on cross-referencing is found in \autoref{sec:cross-referencing}.
+\clearpage
+
+
+
+\subsection{Subfigures}
+You might also find the need for subfigures, i.e., multiple figures inside a single figure.
+
+Use the \verb|\usepackage{subfig}|.
+
+For example a 1x3 subfigure:
+\begin{figure}[!htb]
+    \centering
+    \begin{subfigure}[t]{0.3\linewidth}
+        \centering
+        \includegraphics[width=3cm]{fingerprint.png}
+        \caption{F1}
+        \label{fig:3finger_f1}
+    \end{subfigure}
+    \hfill % horizontal space fill
+    \begin{subfigure}[t]{0.3\linewidth}
+        \centering
+        \includegraphics[width=3cm]{fingerprint.png}
+        \caption{F2}
+        \label{fig:3finger_f2}
+    \end{subfigure}
+    \hfill % horizontal space fill
+    \begin{subfigure}[t]{0.3\linewidth}
+        \centering
+        \includegraphics[width=3cm]{fingerprint.png}
+        \caption{F3}
+        \label{fig:3finger_f3}
+    \end{subfigure}
+    \caption{3 Fingers}
+    \label{fig:3finger}
+\end{figure}
+
+For example a 2x2 subfigure:
+\begin{figure}[!htb]
+    \centering
+    \begin{subfigure}[t]{0.45\linewidth}
+        \centering
+        \includegraphics[width=.6\linewidth]{fingerprint.png}
+        \caption{F1}
+        \label{fig:4finger_f1}
+    \end{subfigure}
+    \hfill % horizontal space fill
+    \begin{subfigure}[t]{0.45\linewidth}
+        \centering
+        \includegraphics[width=.6\linewidth]{fingerprint.png}
+        \caption{F2}
+        \label{fig:4finger_f2}
+    \end{subfigure}
+    \vspace{\baselineskip} % vertical space    
+    \begin{subfigure}[t]{0.45\linewidth}
+        \centering
+        \includegraphics[width=.6\linewidth]{fingerprint.png}
+        \caption{F3}
+        \label{fig:4finger_f3}
+    \end{subfigure}
+    \hfill % horizontal space fill
+    \begin{subfigure}[t]{0.45\linewidth}
+        \centering
+        \includegraphics[width=.6\linewidth]{fingerprint.png}
+        \caption{F4}
+        \label{fig:4finger_f4}
+    \end{subfigure}
+    \caption{4 Fingers}
+    \label{fig:4finger}
+\end{figure}
+
+Google or AI would easily help you create the latex code for any $m$-by-$n$ subfigure combo.
+\clearpage
+
+
+
+\subsection{Wrapped figures}
+For people who fit the "I need as much space as possible", 
+use the \verb|\usepackage{wrapfig}| to wrap text around a figure.
+
+See the following example, where you need to specify what side of the page with R and L and how big of a space latex should leave for the image (while also specifying the size of the image in this space).
+You can also specify how many lines the vertical space should have in [].
+
+% draw line
+\vspace{\baselineskip}
+\hrule
+
+% BANKS - Best Friends % - filler text
+When I needed a shoulder, you'd call me, call me
+They get a little older, you'd call me, call me, yeah
+I've been walking solo lately, lately, uh
+I see all your photos, you dress the same, but you're not
+
+\begin{wrapfigure}[8]{L}{0.25\textwidth}
+    \centering
+    \includegraphics[width=.6\linewidth]{fingerprint.png}
+    \caption{Left Finger}
+    \label{fig:leftfinger}
+\end{wrapfigure}
+
+Tell me to mean what I say
+You're not my friend anymore
+Don't even mean what you say
+While you're standing there begging me for more
+There were exceptions within
+You told me you did it just to fit in, yeah
+But you never fit in anyway
+
+That's why you were my friend
+That's why we were best friends
+You were my best friend
+We never fit in
+And that's why you were my friend
+That's why we were best friends
+You were my best friend
+We never fit in
+
+Once, I sent you flowers to say sorry
+You said you were feeling like I just wasn't listening
+Said I was "lucky for forgiveness"
+I didn't feel like you had something to forgive
+And now I'm standing alone with no one to stand with
+You might also like
+
+\begin{wrapfigure}{R}{0.33\textwidth}
+    \centering
+    \includegraphics[width=.8\linewidth]{fingerprint.png}
+    \caption{Right Finger}
+    \label{fig:rightfinger}
+\end{wrapfigure}
+
+Tell me to mean what I say
+You're not my friend anymore
+Don't even mean what you say
+While you're standing there begging me for more
+There were exceptions within
+You told me you did it just to fit in, yeah
+But you never fit in anyway
+
+That's why you were my friend
+That's why we were best friends
+You were my best friend
+We never fit in
+And that's why you were my friend
+That's why we were best friends
+You were my best friend
+We never fit in
+
+And I got nothing to gain, it's on me
+And I got no one to blame, it's on me
+And you don't even mean what you said, it's on me
+And you don't even mean what you said, it's on me
+And I got nothing to gain, it's on me
+And I got no one to blame, it's on me
+And you don't even mean what you said, it's on me
+And you don't even mean what you said, it's on me
+\clearpage
+
+
+
+\section{Tables}
+To make a table, you can auto-complete a \verb|\begin{table}| environment.
+You need to manually move the caption and label to the top if you want it at the top.
+
+Note that a tabular environment is like the grid, and the table environment is the whole thing, including caption label.
+
+There \textbf{MUST} be an alignment character for each column.
+Column alignment characters:
+\begin{itemize}
+    \item c: centre
+    \item l: left
+    \item r: right
+\end{itemize}
+| pipe characters for vertical lines, can have multiple, and \verb|\hrule| for horizontal lines.
+Alignment character \& for new columns and new rows with \verb|\\|.
+e.g., see code for this table:
+
+\begin{table}[!hbt]
+    \centering
+    \caption{Small table}
+    \label{tab:small_table}
+    \begin{tabular}{l||r|r}
+        P2 & Yes & No\\
+        \hline
+        P2 & 113.5 & 22\\
+        P3 & 142.0 & 5 \\
+        P4 & 53.0 & 159
+    \end{tabular}
+\end{table}
+
+Latex tries to figure out the best place for the table itself, but you can have more control, with the positional parameters:
+\begin{itemize}
+    \item h: here. 
+    \item t: top of the page. 
+    \item b: bottom of the page. 
+    \item !: try to force this position.
+\end{itemize}
+
+\textcolor{red}{There are easier ways than manually typing out an entire table's data...}
+\begin{itemize}
+    \item Use an online latex table generator like:
+    \href{https://www.tablesgenerator.com/}{https://www.tablesgenerator.com/}
+    where you can copy and paste an Excel table into it and format the table after the data is pasted in.
+    \item Latex can also read data directly from an uploaded .csv file into a table. Search it up if you want to know how.
+    \item Python also has latex converters, and panda's dataframe has a to\_latex method.
+\end{itemize}
+% https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_latex.html
+\clearpage
+
+
+
+\section{Cross-Referencing}
+\label{sec:cross-referencing}
+
+All figures and tables should have a descriptive caption and be referenced in the text like so \autoref{fig:f3}.
+Latex will automatically determine the numbering of everything, and if they have unique labels, then it will also automatically reference the correct figure numbers in the text.
+
+You can label and reference figures/tables/equations/sections (and even custom stuff).
+Put the \verb|\label{}| command with the following prefixes and a \textbf{unique} name afterwards:
+\begin{itemize}
+    \item \textbf{fig:} for figures
+    \item \textbf{tab:} for tables
+    \item \textbf{sec:} for sections, subsections etc.
+    \item \textbf{eq:} for equations
+    \item \textbf{appendix:} for appendix sections
+\end{itemize}
+The label command should be right after the figure or table caption or the section and right after the equation.
+See the entire document for labelling examples.
+
+With the label (i.e., the stuff inside the curly brackets \{\},
+you can use \verb|\autoref{}| to cross reference, and Overleaf should already know the existing labels by name.
+
+For example, we can reference our figures like so \autoref{fig:4finger}, and even subfigures too, \autoref{fig:4finger_f2}.
+Tables as well, like this table \autoref{tab:small_table}
+See \autoref{sec:cross-referencing} on cross-sectioning or \autoref{appendix:A} for the ``stuff''. 
+\begin{align}
+    y = mx + c \label{eq:linear}
+\end{align}
+Equations can also be referenced as \eqref{eq:linear} or \autoref{eq:linear}.
+
+\textbf{All cross-referenced things are clickable links (the word and number), and you will be linked to that thing. Try it out on any of the references above.}
+\clearpage
+
+
+
+\section{Referencing Literature}
+Quite easy to reference literature with Latex.
+
+Firstly, potential references need to be stored in .bib file.
+Many websites that help you create references can also create them in the bibtex format we need.
+For example \href{https://zbib.org/}{https://zbib.org/} where you can download bibtex (in the copy to clipboard submenu)\footnote{a lot of the other websites that look the same seem very sus}.
+
+However, you should be using a reference manager like \href{https://www.zotero.org/}{Zotero}, which can also easily create a .bib file (select, rightclick, export), and with their browser extension, easily add things to your literature collection.
+Other examples include: Mendeley and EndNote.
+
+The cite commands you should use are:
+\begin{itemize}
+    \item \verb|\textcite{}|, for a inline text citation. e.g., \textcite{bertsimas_exact_2024}.
+    \item \verb|\parencite{}|, for a text citation with brackets. e.g., \parencite{bertsimas_exact_2024}.
+    \item \verb|\citeauthor{}|, for only the papers authors. e.g., \citeauthor{bertsimas_exact_2024}.
+\end{itemize}
+These citation commands, also support multiple citations by separating with a comma, e.g., \parencite{bertsimas_exact_2024, moore_unofficial_2022, liu_using_2022}.
+
+The \verb|\printbibliography| on the next page automatically prints only the references used in the document.
+
+Depends, but, if the bibliography has extra things, it is probably easier for you to edit the fields in your reference manager than adjusting the latex code to not print it.
+
+\clearpage
+
+
+
+
+%%% Acknowledgments %%%
+\ESBfrontsection{Acknowledgments} % Add numberless section and TOC entry
+Thanks ESB!
+\clearpage
+%%% --- %%%
+
+
+
+%%% References %%%
+\printbibliography[
+    heading=bibintoc, % Put reference section into table of contents.
+    title={\centering References}, % Title of the bibliography.
+    ]
+\clearpage
+%%% --- %%%
+
+
+
+%%% Appendicies %%%
+\ESBappendix % Start the appendices
+
+
+\section{Examples of Other Stuff}
+\label{appendix:A}
+Other interesting and might be useful.
+They may require adding the necessary packages to the top of the document - double-check if its already in the preamble.
+
+\subsection{Other Symbols}
+\label{appendix:other_symbols}
+\begin{itemize}
+    \item \href{https://www.cmor-faculty.rice.edu/~heinken/latex/symbols.pdf}{Click to download a 4-page PDF of common latex symbols.}
+
+    \item \href{https://www3.nd.edu/~nmark/UsefulFacts/LaTeX_symbols.pdf}{Click to download a 22-page PDF of the different latex symbols available.}
+    \item \href{https://sites.math.washington.edu/~reu/docs/latex_symbols.pdf}{Click to download a 111-page PDF of the different latex symbols available.}
+    \item \href{https://tug.ctan.org/info/symbols/comprehensive/symbols-a4.pdf}{Click to download a 481-page PDF of the different latex symbols available.}
+\end{itemize}
+
+
+\subsection{SI Units}
+Use the siunitx package for formatted numbers, quantities, units, etc.
+For example:
+\begin{itemize}
+    \item Angles, \ang{50}
+    \item Numbers, \num{2000000}, \num{2e10}
+    \item Quantities \qty{9.81}{\metre\per\second}, \qty{44}{\joule\per\mole\per\kelvin}
+\end{itemize}
+\href{http://mirrors.ctan.org/macros/latex/contrib/siunitx/siunitx.pdf}{Lists of numbers/quantities are also supported, for more info, look at the documentation, click here!}
+
+
+\subsection{Showing Code}
+The listings package is a great way to display code (or text) in a nicely formatted style outside of latex's style influence.
+It can also be referenced and labelled similarly to a figure.
+
+For example with the \verb|\begin{lstlisting}| environment:
+
+\begin{lstlisting}
+import numpy
+
+arr = numpy.array([1, 2, 3, 4, 5])
+
+print(arr)
+\end{lstlisting}
+
+We can also tell it what language it is so it does some code highlighting.
+
+\begin{lstlisting}[language=Python]
+import numpy
+
+arr = numpy.array([1, 2, 3, 4, 5])
+
+print(arr)
+\end{lstlisting}
+
+You can also import from a file with the \verb|\lstinputlisting{}| command.
+
+To give it a caption, provide a caption to the caption option like so:
+
+\begin{lstlisting}[language=Python, caption=Python example, frame=single, numbers=left,]
+import numpy
+
+arr = numpy.array([1, 2, 3, 4, 5])
+
+print(arr)
+\end{lstlisting}
+
+It also supports colours, line numbering, etc. 
+For more customisation, search for some examples of latex lstlisting for the language you want.
+
+\subsection{Algorithms}
+The algorithm2e package creates nicely formatted algorithms.
+You might use an algorithm to describe an important function you wrote or as pseudocode for methodology.
+
+For example:
+\begin{algorithm}
+\caption{Latex or Word}
+\label{alg:LoW}
+\KwIn{Knowledge}
+\For{$x \in n^\text{assignments}$}{
+    $L \gets 100$\;
+    $W \gets \texttt{rand}(0,100)$\;
+    \uIf{$L \geq W$}{\nllabel{line:comparison}
+        \Return{Use Latex} \nllabel{line:latex}
+    }
+    \Else{
+        continue\;
+    }
+}
+\end{algorithm}
+A cross-referencing example: \autoref{alg:LoW} returns \autoref{line:latex} if \autoref{line:comparison} is true.
+
+
+\subsection{Drawings}
+Latex can draw things with the tikz package, for example, flow chart diagrams, graph networks, etc.
+
+tikz draws things very mathematically/programmatically, i.e., by defining what you draw with coordinates. 
+
+Creating things from scratch with tikz is not recommended, try and ``adapt'' something that already exists, i.e., google/AI etc.
+
+There are applications (and online ones too) that can convert their own ``drawings'' into tikz.
+For example, \href{https://www.mathcha.io/}{https://www.mathcha.io/} lets you draw stuff with a graphical interface and lets you generate the tikz version, which you can copy paste.
+
+\textbf{For experts only!}\\
+\textbf{Note: Tikz can be very slow and easily cause compile issues.}
+
+\subsubsection{Line Plots}
+One can use latex to plot graphs directly with the pgfplots package.
+However, this is \textbf{not recommended}. 
+Just make the graph in python (or equivalent) and save it as a pdf that you upload and show as a figure (\autoref{sec:figure}).
+
+\subsubsection{Electrical diagrams}
+The circuitikz package (which uses tikz) creates electrical stuff.
+
+Use \href{https://tikzmaker.com/}{https://tikzmaker.com/} to create electrical circuits with an online GUI and then copy paste the tikz code.
+
+
+
+
+\subsection{To do lists}
+The todonotes package creates ``bubbles'' on the side of the text, like visible comments.
+Useful for those who like to do lists as it also creates a collated todolist of all the comments throughout the document.
+
+(Overleaf has a inbuilt comment feature too.)
+% \usepackage{todonotes}
+% \todo{complete this section!}
+
+
+\subsection{Animation}
+PDFs can have animations with the animate package, which is technically just a series of images.
+It can only be seem with JavaScript enabled viewers like Adobe's suite.
+
+\clearpage
+
+
+
+\section{Other Helpful Resources}
+\label{appendix:B}
+
+The overleaf documentation is extremely helpful, it is a lot more detailed than this document.
+
+Other templates.
+
+You can always internet search for things.
+
+AI can be helpful, especially to point you in the right direction, but it can also give you code that doesn't work.
+Be careful and remember academic integrity.
+
+%%% --- %%%
+
+
+
+\end{document}

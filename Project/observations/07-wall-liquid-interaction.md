@@ -51,7 +51,7 @@
 | Comparison boundary | Compare bars within a pair. Do not combine these fractions with the absorber-equipped Phase 7.2A fluxes as one efficiency ranking. |
 | Conservation limit | Recorded F4 mean absolute Eulerian boundary gaps are 4.82–55.48% of Eulerian feed. Film-transfer accounting and terminal DPM fates are incomplete. |
 | Source availability | The current Project summary is present. Its linked N16000 raw batch/analysis files are absent from this checkout; this figure is a summary-table replot, not a fresh raw-run audit. |
-| Owning result | [Phase 8 matched comparison](../experiments/phase-08-storyline-reconstruction/results.md#current-family-organization-and-matched-n16000-comparison). |
+| Owning result | [Phase 8 matched comparison](../experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/results.md#current-family-organization-and-matched-n16000-comparison). |
 
 ## Reproduction and source identity
 

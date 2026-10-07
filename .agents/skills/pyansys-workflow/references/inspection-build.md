@@ -34,7 +34,8 @@ the steps below still define the complete child-case verification.
 
 1. Prove the exact parent case/data and active Fluent session.
 2. Inspect the live Settings/API tree before writing a mutation you are not sure
-   about.
+   about. For nested settings or unclear activation order, follow
+   [manual fallback](manual-fallback.md) before constructing the mutation.
 3. Apply changes in dependency order and reacquire downstream objects after
    topology/model changes.
 4. Read back every critical delta and invariant.

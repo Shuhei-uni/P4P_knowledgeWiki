@@ -4,6 +4,13 @@
 | --- |
 | [Phase-level interpretation](interpretation.md) — concise hypothesis → experiments → evidence → decision narrative |
 
+## Stage 4 — EWF settings and wall parameters
+
+| Record | Current status |
+| --- | --- |
+| [Stage 4](stage-04-ewf-wall-parameters/index.md) | Human-selected next stage; retain Stage 3 low-feed Coupled/EWF activation and ramp method; new EWF/wall settings remain open |
+| [Completed commercial-steel result](stage-04-ewf-wall-parameters/commercial-steel/results.md) | First Stage 4 result; N29815; inventories/routing/rates/continuity plotted |
+
 ## Status
 
 | Item | Status |

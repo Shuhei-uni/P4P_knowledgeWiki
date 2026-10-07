@@ -1,0 +1,216 @@
+\documentclass[12pt]{article}
+% The preamble.sty file contains all the packages/options the report uses. it also has defined some custom commands (with a ESB prefix) to make using this template simple.
+\usepackage{ESB_preamble} 
+
+
+%%% Document Variables %%%
+\newcommand{\ESBassessment}{Research Project Report}
+\newcommand{\ESBtitle}{*project title*}
+\newcommand{\ESBauthor}{*author*}
+\newcommand{\ESBcoworker}{*co-worker*} % comment out this line if no coworker, if multiple separate names with \\
+\newcommand{\ESBsupervisors}{*supervisor1* \\ *supervisor2*} % separate names with \\
+\newcommand{\ESBdate}{*report date*} % e.g., October 2001
+\newcommand{\ESBstudentid}{*123456789 abcd123*} % or upi or both
+
+% \addbibresource{references.bib} % Uncomment and edit if using different .bib file name.
+
+
+% If you need to add your own packages/options, add them to preamble.sty or below (but before \begin{document}).
+
+
+
+
+
+
+
+%%% --- %%%
+
+\begin{document}
+\pagenumbering{roman} % front matter roman numerals 
+
+
+
+%%% Title Page %%%
+% The title_page.tex file has the commands to create the title page using the values from above, it should not need to be changed.
+\input{ESB_titlepage.tex} 
+%%% --- %%%
+
+
+
+%%% Abstract %%%
+\ESBfrontsection{Abstract} % Add numberless section and TOC entry
+Abstract goes here.
+\clearpage
+%%% --- %%%
+
+
+
+%%% Declaration %%%
+% Replace the unsigned version with a new signed pdf.
+\includepdf[pagecommand={\addcontentsline{toc}{section}{Declaration}\thispagestyle{ESBpagestyle}}]{Declaration/Unsigned_Declaration_printedition.pdf} 
+\clearpage
+%%% --- %%%
+
+
+
+%%% Table of Contents %%%
+\tableofcontents
+\listoffigures
+\listoftables
+\clearpage
+%%% --- %%%
+
+
+
+%%% Glossary of Terminology %%%
+\ESBfrontsection{Glossary of Terminology} % Add numberless section and TOC entry
+
+% Add all terminiology e.g., \ESBaddterminology{$g$}{Gravity}
+\ESBaddterminology{Term/Symbol}{Definition} 
+\ESBaddterminology{$g$}{Gravity}
+
+
+\ESBprintglossary % Prints glossary
+\clearpage
+%%% --- %%%
+
+
+
+%%% Abbreviations %%%
+\ESBfrontsection{Abbreviations} % Add numberless section and TOC entry
+
+% Add all abbreviations e.g., \ESBaddabbreviation{NZ}{New Zealand}
+\ESBaddabbreviation{Symbol}{Name}
+\ESBaddabbreviation{NZ}{New Zealand}
+
+
+\ESBprintabbreviations % Prints abbreviations
+\clearpage
+%%% --- %%%
+
+
+
+%%% Body %%%
+\pagenumbering{arabic} % front matter arabic numerals
+
+
+
+\section{Introduction}
+\label{sec:introduction}
+
+Please have a look at the example\_document.tex in the example document folder for descriptions and examples of everything you'd probably need.
+
+
+
+\section{Literature Review}
+\label{sec:literature_review}
+
+[ Literature Review Text ]
+
+
+
+
+
+
+
+\section{*** appropriate middle sections ***}
+\label{sec:1}
+
+[ Text ]
+
+
+
+\section{*** appropriate middle sections ***}
+\label{sec:2}
+
+[ Text ]
+
+
+
+\section{*** appropriate middle sections ***}
+\label{sec:3}
+
+[ Text ]
+
+
+
+\section{Discussion}
+\label{sec:discussion}
+
+[ Discussion Text ]
+
+
+
+
+
+
+
+
+
+\section{Conclusions}
+\label{sec:conclusions}
+
+[ Conclusions Text ]
+
+
+
+
+
+
+
+
+\section{Future Work}
+\label{sec:future_work}
+
+[ Future Work Text ]
+
+
+
+
+
+
+\clearpage
+%%% --- %%%
+
+
+
+%%% Acknowledgments %%%
+\ESBfrontsection{Acknowledgments} % Add numberless section and TOC entry
+Thanks ESB!
+\clearpage
+%%% --- %%%
+
+
+
+%%% References %%%
+\printbibliography[
+    heading=bibintoc, % Put reference section into table of contents.
+    title={\centering References}, % Title of the bibliography.
+    ]
+\clearpage
+%%% --- %%%
+
+
+
+%%% Appendicies %%%
+\ESBappendix % Start the appendices
+
+\section{[Appendix A Title]}
+\label{appendix:name1}
+
+\clearpage
+
+
+
+
+\section{[Appendix B Title]}
+\label{appendix:name2}
+
+\clearpage
+
+
+
+
+%%% --- %%%
+
+\end{document}
