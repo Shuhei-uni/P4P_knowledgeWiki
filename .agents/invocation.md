@@ -31,6 +31,7 @@ These may be invoked explicitly or reached naturally from active work:
 - `cfd-wiki` — existing CFD knowledge Q&A, model/evidence comparisons, Fluent guidance, ingest and wiki health.
 - `report-writing` — assemble Project records and figures into a technical report.
 - `stem-research-writing` — academic argument, findings to emphasise, report flow, grammar, and word choice.
+- `handoff` — prepare a paste-ready brief when continuing work in another chat.
 - `writing-for-agents`
 
 These descriptions should name the trigger clearly and stay short.

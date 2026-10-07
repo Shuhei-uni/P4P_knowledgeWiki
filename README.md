@@ -47,6 +47,7 @@ Most skills are internal specialists and should be called by the scientific work
   creates and tests short discovery cases before earning each long hypothesis
   run through the same hard evidence gates.
 - `$workflow-surgeon` — use when the agent workflow itself is frustrating, repeatedly behaves badly, has a missing responsibility, stale rule, poor handoff, or bad default. It diagnoses the root cause with fresh reviewers and prefers the smallest surgical change over redesigning the skill system. It may also self-invoke when frustrated user feedback clearly points to an identifiable workflow failure.
+- `$handoff` — use when you want a concise, paste-ready brief to continue the work in another chat.
 - `$show-me-your-work` — optional audit/handoff tool when you specifically want a concise reconstruction of what an autonomous sequence did and where the supporting evidence lives.
 
 Typical scientific flow:
