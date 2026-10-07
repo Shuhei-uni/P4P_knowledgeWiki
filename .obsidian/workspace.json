@@ -247,6 +247,7 @@
   },
   "active": "dfbf2f0d5c3490a1",
   "lastOpenFiles": [
+    "PyAnsys/output/phase9-mesh-convergence/20261007/60k-ramp-N2080-N2090.trn",
     "PyAnsys/output/phase8-stage2/20261007/offline-verification.json",
     "PyAnsys/output/phase8-stage2/20261007/execution-state.json",
     "PyAnsys/output/phase9-mesh-convergence/20261007/60k-low-feed-hold-N1600-N2080.trn",
@@ -258,7 +259,6 @@
     "PyAnsys/scripts/setup/__pycache__/run_phase8_stage2_f2_simple.cpython-312.pyc",
     "PyAnsys/scripts/setup/run_phase8_stage2_f2_simple.py",
     "PyAnsys/output/phase72a-stage4-realism/20261007/feedback-off/figure-manifest.json",
-    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/realism-continuation/feedback-off/figures/film-response.pdf",
     "Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/realism-continuation/feedback-off/figures/film-response.png",
     "Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/realism-continuation/feedback-off/figures/bulk-response.png",
     "Project/experiments/phase-08-storyline-reconstruction/results.md",
