@@ -190,6 +190,7 @@
   },
   "active": "e09f1fe2acfb2d20",
   "lastOpenFiles": [
+    "PyAnsys/output/phase9-mesh-convergence/20261007/342k-ramp-N4000-N4010-1791360212713134000.trn",
     "PyAnsys/output/phase9-mesh-convergence/20261007/342k-ramp-N3990-N4000-1791360163773179000.trn",
     "PyAnsys/output/phase9-mesh-convergence/20261007/342k-ramp-N3980-N3990-1791360129898940000.trn",
     "PyAnsys/output/phase9-mesh-convergence/20261007/342k-ramp-N3970-N3980-1791360094068413000.trn",
@@ -200,7 +201,6 @@
     "PyAnsys/output/phase72a-stage4-ewf-long-native/20261007/inspection/latest-status.json",
     "PyAnsys/output/phase9-mesh-convergence/20261007/342k-ramp-N3920-N3930-1791359918805558000.trn",
     "PyAnsys/output/phase9-mesh-convergence/20261007/342k-ramp-N3910-N3920-1791359883101680000.trn",
-    "PyAnsys/output/phase9-mesh-convergence/20261007/342k-ramp-N3900-N3910-1791359849618551000.trn",
     "Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/ewf-only-drain/long-development/setup.md",
     "Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/ewf-only-drain/long-development/results.md",
     "Project/experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/08b-native997k/fresh-tui10000-off/setup.md",
