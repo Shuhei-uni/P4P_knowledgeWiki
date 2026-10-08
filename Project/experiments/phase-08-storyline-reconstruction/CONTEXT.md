@@ -1,6 +1,18 @@
 # Phase 8 — Stage 2 fine-mesh SIMPLE reconstruction
 
-## Status
+## Latest local result — 8 October 2026
+
+| Item | Current local result |
+| --- | --- |
+| Selected evidence | [680k N4000 result report](stage-02-fine-mesh-simple/direct-student-680k/n4000/results.md): saved and reopened endpoint; inventory, outlet flux, distribution and residuals |
+| Interpretation | Finite diagnostic field, not converged; inventory and balance errors remain large |
+| Other mesh | [997k N3000 analysis](stage-02-fine-mesh-simple/direct-student-997k/n3000/results.md): completed repeat, rising inventory and very small liquid outlet flow; matched N3000 comparison remains non-converged |
+| Continuation | Original continuation failed after printed N4211; unchanged retry stopped by Shuhei; N6000 not reached |
+| Current authority | Local 342,609-cell run completed N3000 with paired reopen and checked plots; owned Fluent and controller closed. No further solves selected; no server access. 680k/997k retries remain stopped. |
+| 342k result | [N3000 report and three-mesh plots](stage-02-fine-mesh-simple/direct-student-342k/n3000/results.md): 453.612 kg liquid inventory, 2.207997 kg/s net liquid outlet flow; large imbalance and residuals preclude convergence claims. |
+| Earlier evidence | The Server 2 records below remain historical; their unconfirmed run outcome has not been recovered by this local work |
+
+## Earlier Server 2 status
 
 | Item | Current contract |
 | --- | --- |
