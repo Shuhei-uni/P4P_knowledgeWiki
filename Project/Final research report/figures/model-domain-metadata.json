@@ -1,0 +1,1075 @@
+{
+  "status": "READ_ONLY_OFFLINE_SAVED_CASE_EVIDENCE",
+  "extracted_on_client_date": "2026-10-08",
+  "method": "Read HDF5 saved cases; exact phase-domain and interaction-domain Scheme expressions; no Fluent session contact. Units in developed solved-case coordinates supported by native wall-geometry metre coordinate equality and saved source expressions. Geometry rendered from saved native face connectivity.",
+  "records": [
+    {
+      "label": "R0",
+      "case_file": "/Users/shuheiyokkaichi/Library/CloudStorage/OneDrive-TheUniversityofAuckland/P4P-Fluent-Artifacts/Phase71A/FamilyR/finals/P71A-R0-SMOOTH-CONTROL-COUPLED-GLOBAL-TIME-PLUS1000/20260922T162500Z/P71A-R0-SMOOTH-CONTROL-COUPLED-GLOBAL-TIME-PLUS1000-full-loading-plus1000.cas.h5",
+      "case_sha256": "4fd493972839929f1f0922ad42679456d1f4aea294da86e4b13d6b7c32f754fc",
+      "source_dataset": "settings/Rampant Variables, domains",
+      "phase_identity": "phase-2 / water-liquid-at-psep",
+      "diameter_raw_clause": "(diameter (constant . 1e-05))",
+      "diameter_raw_atom": "1e-05",
+      "diameter_m": 1e-05,
+      "diameter_um": 10.0,
+      "slip_raw_clause": "(slip-velocity (phase-2 phase-1 (manninen-et-al . #f)))",
+      "drag_raw_clause": "(drag (phase-2 phase-1 (schiller-naumann . #f) (none . #f)))",
+      "other_interaction_raw_clauses": {
+        "virtual-mass?": "(virtual-mass? . #f)",
+        "vmass-implicit?": "(vmass-implicit? . #f)",
+        "lift": "(lift (phase-2 phase-1 (none . #f)))",
+        "wall-lubrication": "(wall-lubrication (phase-2 phase-1 (none . #f)))",
+        "turbulent-dispersion": "(turbulent-dispersion (phase-2 phase-1 (none . #f)))",
+        "turbulence-interaction": "(turbulence-interaction (phase-2 phase-1 (none . #f)))",
+        "cavitation?": "(cavitation? . #f)",
+        "sfc-modeling?": "(sfc-modeling? . #f)",
+        "interphase-discr?": "(interphase-discr? . #f)",
+        "interphase-visc-disp?": "(interphase-visc-disp? . #f)"
+      },
+      "mass_transfer_raw_clause": "(mass-transfer)",
+      "ke_rough_wall_treatment_r14_raw_clause": "(ke-rough-wall-treatment-r14? #t)",
+      "model_roughness_colebrook_raw_clause": "(model/roughness-colebrook? #t)",
+      "mesh": {
+        "cells": 60964,
+        "nodes": 226982,
+        "faces": 328287,
+        "coordinates_float64_bytes_sha256": "e05c518fefb565738125a971de2de342e94cf76526816f4ec0295f3bb34a23dc",
+        "coordinate_min_m": [
+          -2.067034423828125,
+          -8.836228115490599e-15,
+          -1.46989306640625
+        ],
+        "coordinate_max_m": [
+          1.064854887604808,
+          6.989979508226313,
+          1.0646893765476235
+        ],
+        "faces_connectivity_sha256": "addf43200f20a99856db1a5640ab265359924bfaac97610505cd5cd3ebf23c48",
+        "faces_node_counts_sha256": "9f9356ccea52d05f32cdb6f46b6056c313e2b9f3618a7003d21e90dc72d5174b",
+        "cell_type_counts": {
+          "4": 4596,
+          "7": 56368
+        },
+        "boundary_zones": [
+          {
+            "name": "separator-purnanto:1",
+            "face_count": 1180,
+            "area_m2": 12.757731315557375,
+            "coordinate_min_m": [
+              -0.357377127075492,
+              0.03211144963375016,
+              -0.3584735127272348
+            ],
+            "coordinate_max_m": [
+              0.3585783384693342,
+              5.761,
+              0.3589466246492822
+            ],
+            "area_weighted_vertex_mean_centroid_m": [
+              -1.9554932499674303e-06,
+              2.90528823816668,
+              -7.05442594808149e-05
+            ]
+          },
+          {
+            "name": "separator-purnanto:1:001",
+            "face_count": 20,
+            "area_m2": 0.10894083701677176,
+            "coordinate_min_m": [
+              -0.3569517992447196,
+              -8.836228115490599e-15,
+              -0.3584735127272348
+            ],
+            "coordinate_max_m": [
+              0.3580685440406738,
+              0.06509060684211031,
+              0.3580792297669148
+            ],
+            "area_weighted_vertex_mean_centroid_m": [
+              -0.00029550793776920997,
+              0.025874580371734245,
+              -0.000568109749253779
+            ]
+          },
+          {
+            "name": "wall",
+            "face_count": 3463,
+            "area_m2": 53.436952299276584,
+            "coordinate_min_m": [
+              -2.067034423828125,
+              0.054863848518717534,
+              -1.46989306640625
+            ],
+            "coordinate_max_m": [
+              1.064854887604808,
+              6.989979508226313,
+              1.0646893765476235
+            ],
+            "area_weighted_vertex_mean_centroid_m": [
+              -0.10294064703678792,
+              3.560360766079153,
+              -0.10329742727751486
+            ]
+          },
+          {
+            "name": "wall:004",
+            "face_count": 34,
+            "area_m2": 0.5716588775411128,
+            "coordinate_min_m": [
+              -1.062569342868624,
+              1.578516738823867e-11,
+              -1.0610943485232212
+            ],
+            "coordinate_max_m": [
+              1.0596900492736845,
+              0.11835141644904891,
+              1.0628062912513678
+            ],
+            "area_weighted_vertex_mean_centroid_m": [
+              0.007528703296930872,
+              0.045755762800303613,
+              -0.0013433910259857008
+            ]
+          },
+          {
+            "name": "bottom",
+            "face_count": 172,
+            "area_m2": 3.117876714911343,
+            "coordinate_min_m": [
+              -1.058468652658619,
+              -8.836228115490599e-15,
+              -1.0594993529807848
+            ],
+            "coordinate_max_m": [
+              1.0535373456468955,
+              1.5805535993637165e-11,
+              1.061451269811066
+            ],
+            "area_weighted_vertex_mean_centroid_m": [
+              -0.002796660087591402,
+              1.490242186209307e-11,
+              0.0005618251571298736
+            ]
+          },
+          {
+            "name": "liquidinlet",
+            "face_count": 453,
+            "area_m2": 0.004889916503906466,
+            "coordinate_min_m": [
+              -2.067034423828125,
+              1.704,
+              -1.46989306640625
+            ],
+            "coordinate_max_m": [
+              -2.067034423828125,
+              2.428,
+              -1.4631390380859375
+            ],
+            "area_weighted_vertex_mean_centroid_m": [
+              -2.0670344238281264,
+              2.0660011251601547,
+              -1.4665153033409504
+            ]
+          },
+          {
+            "name": "steaminlet",
+            "face_count": 613,
+            "area_m2": 0.5192860834960935,
+            "coordinate_min_m": [
+              -2.067034423828125,
+              1.704,
+              -1.4631390380859375
+            ],
+            "coordinate_max_m": [
+              -2.067034423828125,
+              2.428,
+              -0.74589306640625
+            ],
+            "area_weighted_vertex_mean_centroid_m": [
+              -2.0670344238281273,
+              2.0660433885698755,
+              -1.1054214178339163
+            ]
+          },
+          {
+            "name": "steamoutlet",
+            "face_count": 839,
+            "area_m2": 0.6011491639620374,
+            "coordinate_min_m": [
+              -0.43746584397075716,
+              6.261,
+              -0.43763289221071733
+            ],
+            "coordinate_max_m": [
+              0.4365507470290877,
+              6.261,
+              0.43761526345130064
+            ],
+            "area_weighted_vertex_mean_centroid_m": [
+              -0.00010037304924625644,
+              6.261000000000003,
+              -3.345937581392869e-05
+            ]
+          }
+        ],
+        "collector_zone": {
+          "name": "p71a-v2-virtual-outlet",
+          "cell_ids": [
+            60250,
+            60964
+          ],
+          "cell_count": 715,
+          "boundary_face_count": 832,
+          "coordinate_min_m": [
+            -1.062569342868624,
+            -8.836228115490599e-15,
+            -1.0610943485232212
+          ],
+          "coordinate_max_m": [
+            1.0596900492736845,
+            0.18476736330714236,
+            1.0628062912513678
+          ]
+        }
+      },
+      "saved_numerical_controls_raw_clauses": {
+        "pseudo-time-step-sel": "(pseudo-time-step-sel \"constant\")",
+        "pseudo-time-step-expr": "(pseudo-time-step-expr \"1\")",
+        "pseudo-time-step": "(pseudo-time-step 1.)",
+        "pseudo/autotime-step-option": "(pseudo/autotime-step-option 1)",
+        "pseudo/autotime-lscale-userspec": "(pseudo/autotime-lscale-userspec 1.)",
+        "pseudo/autotime-lscale-option": "(pseudo/autotime-lscale-option 1)",
+        "pseudo-time-method/coupled-pbns/dt-method": "(pseudo-time-method/coupled-pbns/dt-method 1)",
+        "pseudo-time-method/coupled-pbns/user-defined-settings?": "(pseudo-time-method/coupled-pbns/user-defined-settings? #t)",
+        "pressure/pseudo-time-scale-factor": "(pressure/pseudo-time-scale-factor 1.)",
+        "mom/pseudo-time-scale-factor": "(mom/pseudo-time-scale-factor 1.)",
+        "k/pseudo-time-scale-factor": "(k/pseudo-time-scale-factor 1.)",
+        "epsilon/pseudo-time-scale-factor": "(epsilon/pseudo-time-scale-factor 1.)",
+        "mp/pseudo-time-scale-factor": "(mp/pseudo-time-scale-factor 1.)",
+        "residuals/settings": "(residuals/settings ((continuity #t 0. #f 0.001 0.001 1e-05 0.0001 0. 0.05) (x-velocity #t 0. #f 0.001 0.001 1e-05 0.0001 0. 0.05) (y-velocity #t 0. #f 0.001 0.001 1e-05 0.0001 0. 0.05) (z-velocity #t 0. #f 0.001 0.001 1e-05 0.0001 0. 0.05) (k #t 0. #f 0.001 0.001 1e-05 0.0001 0. 0.05) (epsilon #t 0. #f 0.001 0.001 1e-05 0.0001 0. 0.05) (vf-phase-2 #t 0. #f 0.001 0.001 1e-05 0.0001 0. 0.05)))",
+        "residuals/convergence-criterion-type": "(residuals/convergence-criterion-type 0)",
+        "residuals/scale?": "(residuals/scale? #t)",
+        "residuals/normalize?": "(residuals/normalize? #f)",
+        "monitor/convergence-def-list": "(monitor/convergence-def-list (((check-nth 1) (logic #f))))",
+        "monitor/convergencesets": "(monitor/convergencesets ((frequency . 1) (condition . #f) (conv-reports) (check-for . #f)))",
+        "numerics/flexible/suspend-convergence-check?": "(numerics/flexible/suspend-convergence-check? #t)"
+      },
+      "wall_resolution": {
+        "data_file": "/Users/shuheiyokkaichi/Library/CloudStorage/OneDrive-TheUniversityofAuckland/P4P-Fluent-Artifacts/Phase71A/FamilyR/finals/P71A-R0-SMOOTH-CONTROL-COUPLED-GLOBAL-TIME-PLUS1000/20260922T162500Z/P71A-R0-SMOOTH-CONTROL-COUPLED-GLOBAL-TIME-PLUS1000-full-loading-plus1000.dat.h5",
+        "data_sha256": "b2261fac8626b2e338c3a9c80c334c8a910d1bfb536f782ef9234623f00e1a72",
+        "paired_hash_receipt": "Project/index.md",
+        "storage_domain": "results/1/phase-1 has phaseId1, which maps to the saved-case geom-domain mixture with domain ID1. The stored y+ fields concern the shared bulk-flow wall treatment.",
+        "fields": {
+          "SV_WALL_YPLUS": {
+            "source_dataset": "results/1/phase-1/faces/SV_WALL_YPLUS",
+            "units": "dimensionless",
+            "all_wall_faces": {
+              "min": 167.6372374400911,
+              "area_weighted_mean": 27049.787990400328,
+              "area_weighted_p05": 2277.486783906338,
+              "area_weighted_p50": 31643.689629714405,
+              "area_weighted_p95": 53714.0093904906,
+              "max": 60904.92687991523,
+              "wall_area_m2": 69.9931600443032
+            },
+            "per_zone": {
+              "separator-purnanto:1": {
+                "min": 988.4137442496666,
+                "area_weighted_mean": 2926.905244889294,
+                "area_weighted_p05": 1872.3949622699893,
+                "area_weighted_p50": 3001.591340220927,
+                "area_weighted_p95": 3851.2504184984473,
+                "max": 4065.525902162024,
+                "wall_area_m2": 12.757731315557375,
+                "face_count": 1180,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 0.0,
+                "area_fraction_above_300": 1.0
+              },
+              "separator-purnanto:1:001": {
+                "min": 844.1374387551302,
+                "area_weighted_mean": 2003.0014870501514,
+                "area_weighted_p05": 844.1374387551302,
+                "area_weighted_p50": 1908.3276466290065,
+                "area_weighted_p95": 2944.922007700899,
+                "max": 3007.8281529126625,
+                "wall_area_m2": 0.10894083701677176,
+                "face_count": 20,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 0.0,
+                "area_fraction_above_300": 1.0
+              },
+              "wall": {
+                "min": 167.6372374400911,
+                "area_weighted_mean": 34334.64106265815,
+                "area_weighted_p05": 3357.2412877647075,
+                "area_weighted_p50": 36930.00352580006,
+                "area_weighted_p95": 54657.492106584636,
+                "max": 60904.92687991523,
+                "wall_area_m2": 53.436952299276584,
+                "face_count": 3463,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 1.663773695689427e-05,
+                "area_fraction_above_300": 0.9999833622630432
+              },
+              "wall:004": {
+                "min": 3662.943209462203,
+                "area_weighted_mean": 3857.174977941391,
+                "area_weighted_p05": 3664.7687620995202,
+                "area_weighted_p50": 3875.9514820123973,
+                "area_weighted_p95": 4029.1768092790767,
+                "max": 4064.48077418409,
+                "wall_area_m2": 0.5716588775411128,
+                "face_count": 34,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 0.0,
+                "area_fraction_above_300": 1.0
+              },
+              "bottom": {
+                "min": 2889.3964649844306,
+                "area_weighted_mean": 6029.005422602398,
+                "area_weighted_p05": 4683.223841493868,
+                "area_weighted_p50": 6240.338656188006,
+                "area_weighted_p95": 6742.07891362061,
+                "max": 6992.05666389164,
+                "wall_area_m2": 3.117876714911343,
+                "face_count": 172,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 0.0,
+                "area_fraction_above_300": 1.0
+              }
+            }
+          },
+          "SV_WALL_YPLUS_UTAU": {
+            "source_dataset": "results/1/phase-1/faces/SV_WALL_YPLUS_UTAU",
+            "units": "dimensionless",
+            "all_wall_faces": {
+              "min": 284.45308667494334,
+              "area_weighted_mean": 23194.352730524635,
+              "area_weighted_p05": 2105.796696792632,
+              "area_weighted_p50": 27250.691570073206,
+              "area_weighted_p95": 46339.00231984742,
+              "max": 59434.16747571267,
+              "wall_area_m2": 69.9931600443032
+            },
+            "per_zone": {
+              "separator-purnanto:1": {
+                "min": 411.250437380002,
+                "area_weighted_mean": 2702.439527920362,
+                "area_weighted_p05": 1537.0290374419553,
+                "area_weighted_p50": 2783.4349057094105,
+                "area_weighted_p95": 3738.0020455345607,
+                "max": 4293.0612281609665,
+                "wall_area_m2": 12.757731315557375,
+                "face_count": 1180,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 0.0,
+                "area_fraction_above_300": 1.0
+              },
+              "separator-purnanto:1:001": {
+                "min": 460.7409224931595,
+                "area_weighted_mean": 1900.814081070514,
+                "area_weighted_p05": 460.7409224931595,
+                "area_weighted_p50": 1796.78998694986,
+                "area_weighted_p95": 3216.797635195183,
+                "max": 3219.0039972245913,
+                "wall_area_m2": 0.10894083701677176,
+                "face_count": 20,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 0.0,
+                "area_fraction_above_300": 1.0
+              },
+              "wall": {
+                "min": 284.45308667494334,
+                "area_weighted_mean": 29331.952118594734,
+                "area_weighted_p05": 3657.3510651547076,
+                "area_weighted_p50": 32176.500431489552,
+                "area_weighted_p95": 47915.815555091925,
+                "max": 59434.16747571267,
+                "wall_area_m2": 53.436952299276584,
+                "face_count": 3463,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 8.176355077833028e-07,
+                "area_fraction_above_300": 0.9999991823644924
+              },
+              "wall:004": {
+                "min": 3612.5238168699443,
+                "area_weighted_mean": 3858.5722220972543,
+                "area_weighted_p05": 3613.940382061541,
+                "area_weighted_p50": 3812.117909245205,
+                "area_weighted_p95": 4131.323008352251,
+                "max": 4167.401357238203,
+                "wall_area_m2": 0.5716588775411128,
+                "face_count": 34,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 0.0,
+                "area_fraction_above_300": 1.0
+              },
+              "bottom": {
+                "min": 872.967564559879,
+                "area_weighted_mean": 6140.735378632414,
+                "area_weighted_p05": 4875.6993491520925,
+                "area_weighted_p50": 6380.834045752979,
+                "area_weighted_p95": 7017.726622054493,
+                "max": 7326.4739056572425,
+                "wall_area_m2": 3.117876714911343,
+                "face_count": 172,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 0.0,
+                "area_fraction_above_300": 1.0
+              }
+            }
+          }
+        },
+        "wall_adjacent_nearest_wall_distance": {
+          "source_dataset": "results/1/phase-1/cells/SV_WALL_DIST",
+          "units": "m",
+          "meaning": "Stored nearest-wall distance for the cell adjacent to each wall face, indexed using the native mesh c0 connectivity. This is not the meshing first-layer thickness or layer count.",
+          "per_zone": {
+            "separator-purnanto:1": {
+              "min": 0.004599436469875245,
+              "area_weighted_mean": 0.007997009665592225,
+              "area_weighted_p05": 0.005486947710697534,
+              "area_weighted_p50": 0.008230057565406816,
+              "area_weighted_p95": 0.008316050192806476,
+              "max": 0.008493025320861223,
+              "wall_area_m2": 12.757731315557375
+            },
+            "separator-purnanto:1:001": {
+              "min": 0.004055695105766148,
+              "area_weighted_mean": 0.00419652228194171,
+              "area_weighted_p05": 0.004055759200990704,
+              "area_weighted_p50": 0.004188421733020332,
+              "area_weighted_p95": 0.00430470808543428,
+              "max": 0.004319507349766586,
+              "wall_area_m2": 0.10894083701677176
+            },
+            "wall": {
+              "min": 0.0002824068069458008,
+              "area_weighted_mean": 0.013008928072273619,
+              "area_weighted_p05": 0.006761283321020199,
+              "area_weighted_p50": 0.014388407374104198,
+              "area_weighted_p95": 0.01589561437422377,
+              "max": 0.01682504998063012,
+              "wall_area_m2": 53.436952299276584
+            },
+            "wall:004": {
+              "min": 0.009413330733653944,
+              "area_weighted_mean": 0.010674400676164408,
+              "area_weighted_p05": 0.009425861195614128,
+              "area_weighted_p50": 0.01090037320901852,
+              "area_weighted_p95": 0.011474115933476877,
+              "max": 0.011578299361819522,
+              "wall_area_m2": 0.5716588775411128
+            },
+            "bottom": {
+              "min": 0.00956515771241623,
+              "area_weighted_mean": 0.012451062523877203,
+              "area_weighted_p05": 0.009941384263322034,
+              "area_weighted_p50": 0.01249051957314771,
+              "area_weighted_p95": 0.01497267475518462,
+              "max": 0.015634419351313652,
+              "wall_area_m2": 3.117876714911343
+            }
+          }
+        }
+      }
+    },
+    {
+      "label": "contact_N45606",
+      "case_file": "/Users/shuheiyokkaichi/Library/CloudStorage/OneDrive-TheUniversityofAuckland/P4P-Fluent-Artifacts/Phase72A/ContactAbsorber/adaptive-20261005/N45606/adaptive-recovered-N45606.cas.h5",
+      "case_sha256": "ac2aca5c033ad58bb2b55348dc67fd28e9603e45b3579c15460f2142c0533721",
+      "source_dataset": "settings/Rampant Variables, domains",
+      "phase_identity": "phase-2 / water-liquid-at-psep",
+      "diameter_raw_clause": "(diameter (constant . 1e-05))",
+      "diameter_raw_atom": "1e-05",
+      "diameter_m": 1e-05,
+      "diameter_um": 10.0,
+      "slip_raw_clause": "(slip-velocity (phase-2 phase-1 (manninen-et-al . #f)))",
+      "drag_raw_clause": "(drag (phase-2 phase-1 (schiller-naumann . #f) (none . #f)))",
+      "other_interaction_raw_clauses": {
+        "virtual-mass?": "(virtual-mass? . #f)",
+        "vmass-implicit?": "(vmass-implicit? . #f)",
+        "lift": "(lift (phase-2 phase-1 (none . #f)))",
+        "wall-lubrication": "(wall-lubrication (phase-2 phase-1 (none . #f)))",
+        "turbulent-dispersion": "(turbulent-dispersion (phase-2 phase-1 (none . #f)))",
+        "turbulence-interaction": "(turbulence-interaction (phase-2 phase-1 (none . #f)))",
+        "cavitation?": "(cavitation? . #f)",
+        "sfc-modeling?": "(sfc-modeling? . #f)",
+        "interphase-discr?": "(interphase-discr? . #f)",
+        "interphase-visc-disp?": "(interphase-visc-disp? . #f)"
+      },
+      "mass_transfer_raw_clause": "(mass-transfer)",
+      "ke_rough_wall_treatment_r14_raw_clause": "(ke-rough-wall-treatment-r14? #t)",
+      "model_roughness_colebrook_raw_clause": "(model/roughness-colebrook? #t)",
+      "mesh": {
+        "cells": 60964,
+        "nodes": 226982,
+        "faces": 328287,
+        "coordinates_float64_bytes_sha256": "e05c518fefb565738125a971de2de342e94cf76526816f4ec0295f3bb34a23dc",
+        "coordinate_min_m": [
+          -2.067034423828125,
+          -8.836228115490599e-15,
+          -1.46989306640625
+        ],
+        "coordinate_max_m": [
+          1.064854887604808,
+          6.989979508226313,
+          1.0646893765476235
+        ],
+        "faces_connectivity_sha256": "addf43200f20a99856db1a5640ab265359924bfaac97610505cd5cd3ebf23c48",
+        "faces_node_counts_sha256": "9f9356ccea52d05f32cdb6f46b6056c313e2b9f3618a7003d21e90dc72d5174b"
+      },
+      "saved_numerical_controls_raw_clauses": {
+        "pseudo-time-step-sel": "(pseudo-time-step-sel \"constant\")",
+        "pseudo-time-step-expr": "(pseudo-time-step-expr \"1\")",
+        "pseudo-time-step": "(pseudo-time-step 1.)",
+        "pseudo/autotime-step-option": "(pseudo/autotime-step-option 1)",
+        "pseudo/autotime-lscale-userspec": "(pseudo/autotime-lscale-userspec 1.)",
+        "pseudo/autotime-lscale-option": "(pseudo/autotime-lscale-option 1)",
+        "pseudo-time-method/coupled-pbns/dt-method": "(pseudo-time-method/coupled-pbns/dt-method 1)",
+        "pseudo-time-method/coupled-pbns/user-defined-settings?": "(pseudo-time-method/coupled-pbns/user-defined-settings? #t)",
+        "pressure/pseudo-time-scale-factor": "(pressure/pseudo-time-scale-factor 1.)",
+        "mom/pseudo-time-scale-factor": "(mom/pseudo-time-scale-factor 1.)",
+        "k/pseudo-time-scale-factor": "(k/pseudo-time-scale-factor 1.)",
+        "epsilon/pseudo-time-scale-factor": "(epsilon/pseudo-time-scale-factor 1.)",
+        "mp/pseudo-time-scale-factor": "(mp/pseudo-time-scale-factor 1.)",
+        "residuals/settings": "(residuals/settings ((continuity #t 0. #f 0.001 0.001 1e-05 0.0001 0. 0.05) (x-velocity #t 0. #f 0.001 0.001 1e-05 0.0001 0. 0.05) (y-velocity #t 0. #f 0.001 0.001 1e-05 0.0001 0. 0.05) (z-velocity #t 0. #f 0.001 0.001 1e-05 0.0001 0. 0.05) (k #t 0. #f 0.001 0.001 1e-05 0.0001 0. 0.05) (epsilon #t 0. #f 0.001 0.001 1e-05 0.0001 0. 0.05) (vf-phase-2 #t 0. #f 0.001 0.001 1e-05 0.0001 0. 0.05)))",
+        "residuals/convergence-criterion-type": "(residuals/convergence-criterion-type 0)",
+        "residuals/scale?": "(residuals/scale? #t)",
+        "residuals/normalize?": "(residuals/normalize? #f)",
+        "monitor/convergence-def-list": "(monitor/convergence-def-list (((check-nth 1) (logic #f))))",
+        "monitor/convergencesets": "(monitor/convergencesets ((frequency . 1) (condition . #f) (conv-reports) (check-for . #f)))",
+        "numerics/flexible/suspend-convergence-check?": "(numerics/flexible/suspend-convergence-check? #t)"
+      },
+      "wall_resolution": {
+        "data_file": "/Users/shuheiyokkaichi/Library/CloudStorage/OneDrive-TheUniversityofAuckland/P4P-Fluent-Artifacts/Phase72A/ContactAbsorber/adaptive-20261005/N45606/adaptive-recovered-N45606.dat.h5",
+        "data_sha256": "d9e90521a5e276e9a774f1fafc20cd0f4e5a75d47c7610af68d58a6da5f2b429",
+        "paired_hash_receipt": "PyAnsys/output/phase72a-adaptive-server1/20261005/recovered-N45606/shared-endpoint.json",
+        "storage_domain": "results/1/phase-1 has phaseId1, which maps to the saved-case geom-domain mixture with domain ID1. The stored y+ fields concern the shared bulk-flow wall treatment.",
+        "fields": {
+          "SV_WALL_YPLUS": {
+            "source_dataset": "results/1/phase-1/faces/SV_WALL_YPLUS",
+            "units": "dimensionless",
+            "all_wall_faces": {
+              "min": 399.02784568212826,
+              "area_weighted_mean": 16521.923988884806,
+              "area_weighted_p05": 2804.008866599823,
+              "area_weighted_p50": 11790.505406653227,
+              "area_weighted_p95": 51782.587407616345,
+              "max": 99786.77777387886,
+              "wall_area_m2": 69.9931600443032
+            },
+            "per_zone": {
+              "separator-purnanto:1": {
+                "min": 1656.4316919477956,
+                "area_weighted_mean": 3588.5202382236203,
+                "area_weighted_p05": 2235.104450211284,
+                "area_weighted_p50": 3684.4853056399306,
+                "area_weighted_p95": 4840.75632917589,
+                "max": 5678.090331621921,
+                "wall_area_m2": 12.757731315557375,
+                "face_count": 1180,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 0.0,
+                "area_fraction_above_300": 1.0
+              },
+              "separator-purnanto:1:001": {
+                "min": 1336.080682705806,
+                "area_weighted_mean": 2727.3441292989073,
+                "area_weighted_p05": 1336.080682705806,
+                "area_weighted_p50": 2710.654212129815,
+                "area_weighted_p95": 4224.625796500527,
+                "max": 4338.806137784067,
+                "wall_area_m2": 0.10894083701677176,
+                "face_count": 20,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 0.0,
+                "area_fraction_above_300": 1.0
+              },
+              "wall": {
+                "min": 399.02784568212826,
+                "area_weighted_mean": 20427.865400969018,
+                "area_weighted_p05": 5341.730819550127,
+                "area_weighted_p50": 14834.979197723555,
+                "area_weighted_p95": 57472.17528726877,
+                "max": 99786.77777387886,
+                "wall_area_m2": 53.436952299276584,
+                "face_count": 3463,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 0.0,
+                "area_fraction_above_300": 1.0
+              },
+              "wall:004": {
+                "min": 4131.201088339073,
+                "area_weighted_mean": 4483.104266615633,
+                "area_weighted_p05": 4147.141685560542,
+                "area_weighted_p50": 4527.792671995039,
+                "area_weighted_p95": 4676.110871739938,
+                "max": 4750.455019574072,
+                "wall_area_m2": 0.5716588775411128,
+                "face_count": 34,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 0.0,
+                "area_fraction_above_300": 1.0
+              },
+              "bottom": {
+                "min": 2880.7646353761847,
+                "area_weighted_mean": 5188.626729178937,
+                "area_weighted_p05": 3986.1847418029383,
+                "area_weighted_p50": 5153.8264363526405,
+                "area_weighted_p95": 6506.183766133418,
+                "max": 6827.293055549899,
+                "wall_area_m2": 3.117876714911343,
+                "face_count": 172,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 0.0,
+                "area_fraction_above_300": 1.0
+              }
+            }
+          },
+          "SV_WALL_YPLUS_UTAU": {
+            "source_dataset": "results/1/phase-1/faces/SV_WALL_YPLUS_UTAU",
+            "units": "dimensionless",
+            "all_wall_faces": {
+              "min": 286.26483866608277,
+              "area_weighted_mean": 15424.80045500358,
+              "area_weighted_p05": 2736.648410572814,
+              "area_weighted_p50": 11293.356702459889,
+              "area_weighted_p95": 46600.03973819519,
+              "max": 95670.18604410707,
+              "wall_area_m2": 69.9931600443032
+            },
+            "per_zone": {
+              "separator-purnanto:1": {
+                "min": 286.26483866608277,
+                "area_weighted_mean": 3590.676384886216,
+                "area_weighted_p05": 1647.6449043043594,
+                "area_weighted_p50": 3762.029099172458,
+                "area_weighted_p95": 5096.363643695091,
+                "max": 6083.683324331958,
+                "wall_area_m2": 12.757731315557375,
+                "face_count": 1180,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 0.0008595110240602504,
+                "area_fraction_above_300": 0.9991404889759399
+              },
+              "separator-purnanto:1:001": {
+                "min": 1149.3387229082396,
+                "area_weighted_mean": 3033.196141867504,
+                "area_weighted_p05": 1149.3387229082396,
+                "area_weighted_p50": 2786.8303445626884,
+                "area_weighted_p95": 4893.243348734003,
+                "max": 4926.022895431245,
+                "wall_area_m2": 0.10894083701677176,
+                "face_count": 20,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 0.0,
+                "area_fraction_above_300": 1.0
+              },
+              "wall": {
+                "min": 700.9749656228397,
+                "area_weighted_mean": 19023.870306563815,
+                "area_weighted_p05": 5657.384175586473,
+                "area_weighted_p50": 14053.797771960952,
+                "area_weighted_p95": 52778.981620787956,
+                "max": 95670.18604410707,
+                "wall_area_m2": 53.436952299276584,
+                "face_count": 3463,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 0.0,
+                "area_fraction_above_300": 1.0
+              },
+              "wall:004": {
+                "min": 3750.1266658429595,
+                "area_weighted_mean": 4033.414329561911,
+                "area_weighted_p05": 3753.8214791383257,
+                "area_weighted_p50": 4003.482122827114,
+                "area_weighted_p95": 4251.805678820852,
+                "max": 4300.255981644329,
+                "wall_area_m2": 0.5716588775411128,
+                "face_count": 34,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 0.0,
+                "area_fraction_above_300": 1.0
+              },
+              "bottom": {
+                "min": 1466.2286312096578,
+                "area_weighted_mean": 4685.18082028302,
+                "area_weighted_p05": 3882.024074520068,
+                "area_weighted_p50": 4778.206482351931,
+                "area_weighted_p95": 5323.254860852079,
+                "max": 5469.0313336772815,
+                "wall_area_m2": 3.117876714911343,
+                "face_count": 172,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 0.0,
+                "area_fraction_above_300": 1.0
+              }
+            }
+          }
+        },
+        "wall_adjacent_nearest_wall_distance": {
+          "source_dataset": "results/1/phase-1/cells/SV_WALL_DIST",
+          "units": "m",
+          "meaning": "Stored nearest-wall distance for the cell adjacent to each wall face, indexed using the native mesh c0 connectivity. This is not the meshing first-layer thickness or layer count.",
+          "per_zone": {
+            "separator-purnanto:1": {
+              "min": 0.004599436469875245,
+              "area_weighted_mean": 0.007997009665592225,
+              "area_weighted_p05": 0.005486947710697534,
+              "area_weighted_p50": 0.008230057565406816,
+              "area_weighted_p95": 0.008316050192806476,
+              "max": 0.008493025320861223,
+              "wall_area_m2": 12.757731315557375
+            },
+            "separator-purnanto:1:001": {
+              "min": 0.004055695105766148,
+              "area_weighted_mean": 0.00419652228194171,
+              "area_weighted_p05": 0.004055759200990704,
+              "area_weighted_p50": 0.004188421733020332,
+              "area_weighted_p95": 0.00430470808543428,
+              "max": 0.004319507349766586,
+              "wall_area_m2": 0.10894083701677176
+            },
+            "wall": {
+              "min": 0.0002824068069458008,
+              "area_weighted_mean": 0.013008928072273619,
+              "area_weighted_p05": 0.006761283321020199,
+              "area_weighted_p50": 0.014388407374104198,
+              "area_weighted_p95": 0.01589561437422377,
+              "max": 0.01682504998063012,
+              "wall_area_m2": 53.436952299276584
+            },
+            "wall:004": {
+              "min": 0.009413330733653944,
+              "area_weighted_mean": 0.010674400676164408,
+              "area_weighted_p05": 0.009425861195614128,
+              "area_weighted_p50": 0.01090037320901852,
+              "area_weighted_p95": 0.011474115933476877,
+              "max": 0.011578299361819522,
+              "wall_area_m2": 0.5716588775411128
+            },
+            "bottom": {
+              "min": 0.00956515771241623,
+              "area_weighted_mean": 0.012451062523877203,
+              "area_weighted_p05": 0.009941384263322034,
+              "area_weighted_p50": 0.01249051957314771,
+              "area_weighted_p95": 0.01497267475518462,
+              "max": 0.015634419351313652,
+              "wall_area_m2": 3.117876714911343
+            }
+          }
+        }
+      }
+    },
+    {
+      "label": "early_contact_N5080",
+      "case_file": "/Users/shuheiyokkaichi/Library/CloudStorage/OneDrive-TheUniversityofAuckland/P4P-Fluent-Artifacts/Phase72A/Stage3/early-ewf-startup/final-N5080/final-N5080.cas.h5",
+      "case_sha256": "e6aaed696398faa0968bb1dd287f22006c99d71762030fd3a4ceea04fbed7af4",
+      "source_dataset": "settings/Rampant Variables, domains",
+      "phase_identity": "phase-2 / water-liquid-at-psep",
+      "diameter_raw_clause": "(diameter (constant . 1e-05))",
+      "diameter_raw_atom": "1e-05",
+      "diameter_m": 1e-05,
+      "diameter_um": 10.0,
+      "slip_raw_clause": "(slip-velocity (phase-2 phase-1 (manninen-et-al . #f)))",
+      "drag_raw_clause": "(drag (phase-2 phase-1 (schiller-naumann . #f) (none . #f)))",
+      "other_interaction_raw_clauses": {
+        "virtual-mass?": "(virtual-mass? . #f)",
+        "vmass-implicit?": "(vmass-implicit? . #f)",
+        "lift": "(lift (phase-2 phase-1 (none . #f)))",
+        "wall-lubrication": "(wall-lubrication (phase-2 phase-1 (none . #f)))",
+        "turbulent-dispersion": "(turbulent-dispersion (phase-2 phase-1 (none . #f)))",
+        "turbulence-interaction": "(turbulence-interaction (phase-2 phase-1 (none . #f)))",
+        "cavitation?": "(cavitation? . #f)",
+        "sfc-modeling?": "(sfc-modeling? . #f)",
+        "interphase-discr?": "(interphase-discr? . #f)",
+        "interphase-visc-disp?": "(interphase-visc-disp? . #f)"
+      },
+      "mass_transfer_raw_clause": "(mass-transfer)",
+      "ke_rough_wall_treatment_r14_raw_clause": "(ke-rough-wall-treatment-r14? #t)",
+      "model_roughness_colebrook_raw_clause": "(model/roughness-colebrook? #t)",
+      "mesh": {
+        "cells": 60964,
+        "nodes": 226982,
+        "faces": 328287,
+        "coordinates_float64_bytes_sha256": "e05c518fefb565738125a971de2de342e94cf76526816f4ec0295f3bb34a23dc",
+        "coordinate_min_m": [
+          -2.067034423828125,
+          -8.836228115490599e-15,
+          -1.46989306640625
+        ],
+        "coordinate_max_m": [
+          1.064854887604808,
+          6.989979508226313,
+          1.0646893765476235
+        ],
+        "faces_connectivity_sha256": "addf43200f20a99856db1a5640ab265359924bfaac97610505cd5cd3ebf23c48",
+        "faces_node_counts_sha256": "9f9356ccea52d05f32cdb6f46b6056c313e2b9f3618a7003d21e90dc72d5174b"
+      },
+      "saved_numerical_controls_raw_clauses": {
+        "pseudo-time-step-sel": "(pseudo-time-step-sel \"constant\")",
+        "pseudo-time-step-expr": "(pseudo-time-step-expr \"1\")",
+        "pseudo-time-step": "(pseudo-time-step 1.)",
+        "pseudo/autotime-step-option": "(pseudo/autotime-step-option 1)",
+        "pseudo/autotime-lscale-userspec": "(pseudo/autotime-lscale-userspec 1.)",
+        "pseudo/autotime-lscale-option": "(pseudo/autotime-lscale-option 1)",
+        "pseudo-time-method/coupled-pbns/dt-method": "(pseudo-time-method/coupled-pbns/dt-method 1)",
+        "pseudo-time-method/coupled-pbns/user-defined-settings?": "(pseudo-time-method/coupled-pbns/user-defined-settings? #t)",
+        "pressure/pseudo-time-scale-factor": "(pressure/pseudo-time-scale-factor 1.)",
+        "mom/pseudo-time-scale-factor": "(mom/pseudo-time-scale-factor 1.)",
+        "k/pseudo-time-scale-factor": "(k/pseudo-time-scale-factor 1.)",
+        "epsilon/pseudo-time-scale-factor": "(epsilon/pseudo-time-scale-factor 1.)",
+        "mp/pseudo-time-scale-factor": "(mp/pseudo-time-scale-factor 1.)",
+        "residuals/settings": "(residuals/settings ((continuity #t 0. #f 0.001 0.001 1e-05 0.0001 0. 0.05) (x-velocity #t 0. #f 0.001 0.001 1e-05 0.0001 0. 0.05) (y-velocity #t 0. #f 0.001 0.001 1e-05 0.0001 0. 0.05) (z-velocity #t 0. #f 0.001 0.001 1e-05 0.0001 0. 0.05) (k #t 0. #f 0.001 0.001 1e-05 0.0001 0. 0.05) (epsilon #t 0. #f 0.001 0.001 1e-05 0.0001 0. 0.05) (vf-phase-2 #t 0. #f 0.001 0.001 1e-05 0.0001 0. 0.05)))",
+        "residuals/convergence-criterion-type": "(residuals/convergence-criterion-type 0)",
+        "residuals/scale?": "(residuals/scale? #t)",
+        "residuals/normalize?": "(residuals/normalize? #f)",
+        "monitor/convergence-def-list": "(monitor/convergence-def-list (((check-nth 1) (logic #f))))",
+        "monitor/convergencesets": "(monitor/convergencesets ((frequency . 1) (condition . #f) (conv-reports) (check-for . #f)))",
+        "numerics/flexible/suspend-convergence-check?": "(numerics/flexible/suspend-convergence-check? #t)"
+      },
+      "wall_resolution": {
+        "data_file": "/Users/shuheiyokkaichi/Library/CloudStorage/OneDrive-TheUniversityofAuckland/P4P-Fluent-Artifacts/Phase72A/Stage3/early-ewf-startup/final-N5080/final-N5080.dat.h5",
+        "data_sha256": "a12b23308d71c44ca6899bb8ed6000f0713f25594938a54e86bf80300af7bf00",
+        "paired_hash_receipt": "PyAnsys/output/phase72a-stage3-early-ewf-server1/20261005/final-reopen.json",
+        "storage_domain": "results/1/phase-1 has phaseId1, which maps to the saved-case geom-domain mixture with domain ID1. The stored y+ fields concern the shared bulk-flow wall treatment.",
+        "fields": {
+          "SV_WALL_YPLUS": {
+            "source_dataset": "results/1/phase-1/faces/SV_WALL_YPLUS",
+            "units": "dimensionless",
+            "all_wall_faces": {
+              "min": 399.0278402326006,
+              "area_weighted_mean": 16309.682975961552,
+              "area_weighted_p05": 2825.66288832478,
+              "area_weighted_p50": 11586.850931548335,
+              "area_weighted_p95": 51854.29742305884,
+              "max": 99786.81646722586,
+              "wall_area_m2": 69.9931600443032
+            },
+            "per_zone": {
+              "separator-purnanto:1": {
+                "min": 1689.0174471812397,
+                "area_weighted_mean": 3623.186841713868,
+                "area_weighted_p05": 2259.041391880258,
+                "area_weighted_p50": 3728.7600014495874,
+                "area_weighted_p95": 4878.892622276812,
+                "max": 5725.584850479226,
+                "wall_area_m2": 12.757731315557375,
+                "face_count": 1180,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 0.0,
+                "area_fraction_above_300": 1.0
+              },
+              "separator-purnanto:1:001": {
+                "min": 1361.3883363104333,
+                "area_weighted_mean": 2750.260920459882,
+                "area_weighted_p05": 1361.3941545359369,
+                "area_weighted_p50": 2808.598293440393,
+                "area_weighted_p95": 4211.078093303936,
+                "max": 4326.4499228135,
+                "wall_area_m2": 0.10894083701677176,
+                "face_count": 20,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 0.0,
+                "area_fraction_above_300": 1.0
+              },
+              "wall": {
+                "min": 399.0278402326006,
+                "area_weighted_mean": 20140.2029749667,
+                "area_weighted_p05": 5342.602649252294,
+                "area_weighted_p50": 14459.411831803289,
+                "area_weighted_p95": 57587.79795393835,
+                "max": 99786.81646722586,
+                "wall_area_m2": 53.436952299276584,
+                "face_count": 3463,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 0.0,
+                "area_fraction_above_300": 1.0
+              },
+              "wall:004": {
+                "min": 4153.950406926547,
+                "area_weighted_mean": 4492.71288706055,
+                "area_weighted_p05": 4171.649152799776,
+                "area_weighted_p50": 4520.340777733015,
+                "area_weighted_p95": 4685.150290516741,
+                "max": 4694.966065371879,
+                "wall_area_m2": 0.5716588775411128,
+                "face_count": 34,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 0.0,
+                "area_fraction_above_300": 1.0
+              },
+              "bottom": {
+                "min": 2914.2614418351586,
+                "area_weighted_mean": 5209.835877770738,
+                "area_weighted_p05": 4039.147332925538,
+                "area_weighted_p50": 5162.116107996687,
+                "area_weighted_p95": 6537.449218523693,
+                "max": 6847.927913674515,
+                "wall_area_m2": 3.117876714911343,
+                "face_count": 172,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 0.0,
+                "area_fraction_above_300": 1.0
+              }
+            }
+          },
+          "SV_WALL_YPLUS_UTAU": {
+            "source_dataset": "results/1/phase-1/faces/SV_WALL_YPLUS_UTAU",
+            "units": "dimensionless",
+            "all_wall_faces": {
+              "min": 333.0076774055269,
+              "area_weighted_mean": 15228.957841610081,
+              "area_weighted_p05": 2741.3310168099483,
+              "area_weighted_p50": 11187.55175833602,
+              "area_weighted_p95": 46715.78963645531,
+              "max": 95670.26465105482,
+              "wall_area_m2": 69.9931600443032
+            },
+            "per_zone": {
+              "separator-purnanto:1": {
+                "min": 333.0076774055269,
+                "area_weighted_mean": 3625.422898562475,
+                "area_weighted_p05": 1671.7200379702172,
+                "area_weighted_p50": 3817.4108092076535,
+                "area_weighted_p95": 5124.155213201714,
+                "max": 6133.944582863169,
+                "wall_area_m2": 12.757731315557375,
+                "face_count": 1180,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 0.0,
+                "area_fraction_above_300": 1.0
+              },
+              "separator-purnanto:1:001": {
+                "min": 1180.938514174446,
+                "area_weighted_mean": 3064.414861641345,
+                "area_weighted_p05": 1180.938514174446,
+                "area_weighted_p50": 2839.8651257248525,
+                "area_weighted_p95": 4913.984759489002,
+                "max": 4933.053826628864,
+                "wall_area_m2": 0.10894083701677176,
+                "face_count": 20,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 0.0,
+                "area_fraction_above_300": 1.0
+              },
+              "wall": {
+                "min": 700.9749595557379,
+                "area_weighted_mean": 18757.906294754786,
+                "area_weighted_p05": 5665.644945757694,
+                "area_weighted_p50": 13685.743045714587,
+                "area_weighted_p95": 52798.144044036715,
+                "max": 95670.26465105482,
+                "wall_area_m2": 53.436952299276584,
+                "face_count": 3463,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 0.0,
+                "area_fraction_above_300": 1.0
+              },
+              "wall:004": {
+                "min": 3767.3763927030477,
+                "area_weighted_mean": 4041.384597185317,
+                "area_weighted_p05": 3790.8120956587386,
+                "area_weighted_p50": 4026.670307617807,
+                "area_weighted_p95": 4231.800235538138,
+                "max": 4250.430296314815,
+                "wall_area_m2": 0.5716588775411128,
+                "face_count": 34,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 0.0,
+                "area_fraction_above_300": 1.0
+              },
+              "bottom": {
+                "min": 1529.6287006569423,
+                "area_weighted_mean": 4702.31391474502,
+                "area_weighted_p05": 3862.5367283439596,
+                "area_weighted_p50": 4782.923762884719,
+                "area_weighted_p95": 5338.5701458763015,
+                "max": 5477.095404397053,
+                "wall_area_m2": 3.117876714911343,
+                "face_count": 172,
+                "area_fraction_below_30": 0.0,
+                "area_fraction_30_to_300": 0.0,
+                "area_fraction_above_300": 1.0
+              }
+            }
+          }
+        },
+        "wall_adjacent_nearest_wall_distance": {
+          "source_dataset": "results/1/phase-1/cells/SV_WALL_DIST",
+          "units": "m",
+          "meaning": "Stored nearest-wall distance for the cell adjacent to each wall face, indexed using the native mesh c0 connectivity. This is not the meshing first-layer thickness or layer count.",
+          "per_zone": {
+            "separator-purnanto:1": {
+              "min": 0.004599436469875245,
+              "area_weighted_mean": 0.007997009665592225,
+              "area_weighted_p05": 0.005486947710697534,
+              "area_weighted_p50": 0.008230057565406816,
+              "area_weighted_p95": 0.008316050192806476,
+              "max": 0.008493025320861223,
+              "wall_area_m2": 12.757731315557375
+            },
+            "separator-purnanto:1:001": {
+              "min": 0.004055695105766148,
+              "area_weighted_mean": 0.00419652228194171,
+              "area_weighted_p05": 0.004055759200990704,
+              "area_weighted_p50": 0.004188421733020332,
+              "area_weighted_p95": 0.00430470808543428,
+              "max": 0.004319507349766586,
+              "wall_area_m2": 0.10894083701677176
+            },
+            "wall": {
+              "min": 0.0002824068069458008,
+              "area_weighted_mean": 0.013008928072273619,
+              "area_weighted_p05": 0.006761283321020199,
+              "area_weighted_p50": 0.014388407374104198,
+              "area_weighted_p95": 0.01589561437422377,
+              "max": 0.01682504998063012,
+              "wall_area_m2": 53.436952299276584
+            },
+            "wall:004": {
+              "min": 0.009413330733653944,
+              "area_weighted_mean": 0.010674400676164408,
+              "area_weighted_p05": 0.009425861195614128,
+              "area_weighted_p50": 0.01090037320901852,
+              "area_weighted_p95": 0.011474115933476877,
+              "max": 0.011578299361819522,
+              "wall_area_m2": 0.5716588775411128
+            },
+            "bottom": {
+              "min": 0.00956515771241623,
+              "area_weighted_mean": 0.012451062523877203,
+              "area_weighted_p05": 0.009941384263322034,
+              "area_weighted_p50": 0.01249051957314771,
+              "area_weighted_p95": 0.01497267475518462,
+              "max": 0.015634419351313652,
+              "wall_area_m2": 3.117876714911343
+            }
+          }
+        }
+      }
+    }
+  ],
+  "matched_geometry_check": {
+    "three_selected_coordinate_arrays_identical": true,
+    "coordinate_hash": "e05c518fefb565738125a971de2de342e94cf76526816f4ec0295f3bb34a23dc",
+    "three_selected_face_node_counts_identical": true,
+    "three_selected_face_connectivity_arrays_identical": true,
+    "all_7450_native_wall_geometry_vertices_match_saved_coordinates_at_float32_precision": true,
+    "native_wall_geometry_source": "PyAnsys/output/phase72a-stage3-film-development-server1/20261005/wall-thickness-views/wall-geometry.npz",
+    "native_wall_geometry_sha256": "21f26d4baaf36e9a4a30f4c09e7d532148ff9710bdfc06aee1eb4e89f8ed9959"
+  },
+  "limitations": [
+    "Boundary surfaces and source-region face topology are reproduced; no physical pool or omitted discharge geometry is added.",
+    "Coordinate extrema describe discrete mesh surfaces, not an exact CAD nominal vessel diameter.",
+    "Reference yplus=300 is a settings reference value, not a computed wall-resolution measurement.",
+    "Stored rough-wall flag is recorded without interpreting it as a version-specific wall-shift proof.",
+    "Native wall-resolution fields have been extracted from hash-matched paired data; their reported distributions do not qualify the mesh or rough-wall assumptions.",
+    "Solver-side orthogonal quality, skewness, meshing first-layer thickness and actual layer count remain unverified.",
+    "The native SV_WALL_YPLUS and SV_WALL_YPLUS_UTAU fields are recorded separately; do not substitute one definition for the other."
+  ],
+  "wall_resolution_reduction_method": "Face weights are geometric polygon areas from native saved-case vertices, computed as the norm of the Newell area vector; summary means are weighted by those areas. Per-wall min/max use all faces in the named zone. Nearest-wall distance is sampled in the adjacent c0 cell for each wall face."
+}

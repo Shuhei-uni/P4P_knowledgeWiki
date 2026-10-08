@@ -1,6 +1,6 @@
 # Part 2 — Model and methods
 
-*Working draft. This section defines the computational model and the procedures used to assess it. Marked spaces identify the remaining model and method details to verify.*
+*Working draft. This section defines the model and procedures through the frozen-bulk film-development investigation. Remaining evidence gaps are identified where they affect reproducibility. Later wall-film parameter investigations are outside the selected report evidence.*
 
 ## 3. Model and methods
 
@@ -12,7 +12,11 @@ A numerical collector was defined in the lower fluid region to represent liquid 
 
 The study assessed the model's numerical development and its predicted liquid routes. It used a steady bulk-flow formulation, with a separate evolving wall-film model where enabled. Numerical startup therefore described the development of the solution through iterations; it did not represent the physical startup time of the separator.
 
-[GEOMETRY DETAIL TO COMPLETE: insert a labelled view of the actual computational domain, showing the spiral passage, phase inlet faces, steam outlet, bottom wall and collector. Add verified vessel and inlet dimensions, the coordinate origin and the location of the truncation.]
+![Actual saved computational domain and split inlet with collector and boundary labels](../figures/model-domain-overview.png)
+
+*Methods Figure M1 (provisional number). Computational domain and pure-phase inlet partition reconstructed from the selected 60,964-cell saved mesh. The collector contains 715 cells and extends to approximately $y=0.185$ m, although its selection used cell centroids $y\leq0.10$ m. The bottom remains a wall; the omitted pool and discharge are not represented. Face colours identify boundaries and the source region, not solution fields. The full-feed parent, combined contact endpoint and shortened-startup endpoint share identical node coordinates and face connectivity.*
+
+Coordinates use the saved mesh system, with vertical $y$ and the bottom at approximately $y=0$. The inlet plane was $x=-2.067$ m, with lower and upper edges at $y=1.704$ and 2.428 m. The steam-outlet plane was $y=6.261$ m, while the top of the discrete mesh was $y=6.990$ m. The complete mesh extended over $x=-2.067$–1.065 m and $z=-1.470$–1.065 m, including the inlet passage. These are measured saved-mesh landmarks, not nominal CAD dimensions. Appendix A.1 retains exact coordinate bounds and the paired-case identity checks.
 
 <!-- Evidence: [Model scope](../../model.md); [collector and wall-zone specification](../../experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/ewf-absorber/setup.md). -->
 
@@ -24,21 +28,24 @@ The calculations used Ansys Fluent 2025 R2 with a pressure-based solver and abso
 
 $$
 \alpha_V+\alpha_L=1,\qquad
-\rho_m=\alpha_V\rho_V+\alpha_L\rho_L.
+\rho_m=\alpha_V\rho_V+\alpha_L\rho_L,\qquad
+\boldsymbol u_m=\frac{\alpha_V\rho_V\boldsymbol u_V+\alpha_L\rho_L\boldsymbol u_L}{\rho_m}.
 $$
 
-The Mixture formulation represents bulk phase transport with a local-equilibrium approximation for slip between the phases. It was retained from the inherited separator model so that collection and wall treatments could be assessed within the same bulk formulation. It does not resolve individual droplets or the thickness of a thin wall film in the volume mesh. ([Ansys, Inc., 2025b](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_th/flu_th_sec_drift_oview.html))
+Here, $\boldsymbol u_m$ is the mass-averaged mixture velocity. The phase drift velocity is $\boldsymbol u_{\mathrm{dr},i}=\boldsymbol u_i-\boldsymbol u_m$, and slip is $\boldsymbol u_L-\boldsymbol u_V$. Mixture continuity and momentum describe the shared bulk flow; the secondary-phase transport equation and algebraic slip relation describe liquid distribution and relative motion. RNG $k$–$\varepsilon$ supplies the turbulent stresses. The energy equation was not solved. ([Ansys, Inc., 2025b, §§14.4.3–4 and 14.4.6–7](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_th/flu_th_sec_multiphase_mixture.html))
 
-RNG $k$–$\varepsilon$ supplied the turbulence closure, with its differential-viscosity and swirl-dominated-flow options enabled in the verified v2 model. Standard wall functions supplied the near-wall treatment. This closure was retained in the wall-treatment comparisons. Gravity acted in the negative $y$ direction at 9.81 m/s². Density and viscosity were fixed at the values in Table 2. The energy equation was disabled, so flashing, condensation and temperature-dependent properties were outside the model.
+The three saved states identified in Appendix A.1 used the Manninen algebraic-slip formulation, Schiller–Naumann drag and a constant secondary-phase diameter of **10 µm**. Virtual mass, lift and wall lubrication were disabled, with no additional interphase turbulent-dispersion or turbulence-interaction model. Bulk surface tension and cavitation were disabled, and no bulk interphase mass-transfer model was assigned. EWF phase accretion, where active, was a separate transfer at the wall. These settings were recovered from the hash-matched saved cases, rather than inferred from the diagnostic particle distribution.
 
-*Table 2. Fixed material properties verified for the v2 absorber model.*
+The algebraic relation assumes that relative motion approaches local equilibrium over a short spatial length scale. Retaining the inherited formulation allowed collection and wall treatments to be compared within one bulk model. It did not establish the accuracy of that approximation for the segregated liquid near the vessel wall. The 10 µm parameter controls continuum-phase slip; it is not a resolved droplet population or a wall-film thickness. Individual diagnostic droplets and the surface film were represented separately where enabled. ([Ansys, Inc., 2025b, §14.4.6](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_th/flu_th_sec_drift_theory_relvel.html))
+
+RNG $k$–$\varepsilon$ supplied the turbulence closure, with its differential-viscosity and swirl-dominated-flow options enabled in the verified throughput-controlled absorber model. Standard wall functions supplied the near-wall treatment. This closure was retained in the wall-treatment comparisons. Gravity acted in the negative $y$ direction at 9.81 m/s². Density and viscosity were fixed at the values in Table 2. The energy equation was disabled, so flashing, condensation and temperature-dependent properties were outside the model.
+
+*Table 2. Fixed material properties verified for the throughput-controlled absorber model.*
 
 | Phase | Density (kg/m³) | Dynamic viscosity (Pa·s) |
 | --- | ---: | ---: |
 | Vapour | 5.79743 | $1.52062\times10^{-5}$ |
 | Liquid water | 881.211 | $1.45544\times10^{-4}$ |
-
-[MODEL DETAIL TO COMPLETE: carry the selected cases' interphase drag law, representative phase diameter and other active slip-model settings into Appendix A. State any changes between case families explicitly.]
 
 <!-- Evidence: [Saved/reopened model and material settings](../../experiments/phase-07-1a-absorber-convergence/baseline-v2-virtual-liquid-outlet/build-manifest.json). -->
 
@@ -46,11 +53,13 @@ RNG $k$–$\varepsilon$ supplied the turbulence closure, with its differential-v
 
 Wall roughness and Eulerian Wall Film (EWF) represented different parts of the wall interaction. Roughness changed the wall-function treatment through equivalent sand-grain height $k_s$ and roughness constant $C_s$. The tested values were sensitivity inputs; they were not measurements of the separator surface. ([Ansys, Inc., 2025f](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_th/x1-5720008.164.html))
 
+In Fluent 2025 R2, the default rough-wall formulation for RNG $k$–$\varepsilon$ with standard wall functions uses a virtual wall shift. The saved rough-wall flag was consistent with this treatment, but the effective role of an additional Colebrook flag remains unverified (Appendix A.10). The virtual-wall formulation removes the older restriction between roughness height and wall-adjacent cell distance. It does not establish adequate wall resolution or the suitability of an equilibrium wall function for the rotating flow. Actual wall-resolution evidence must therefore be assessed separately. ([Ansys, Inc., 2025f, §4.18.5](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_th/x1-5720008.164.html))
+
 EWF added surface equations for film mass and momentum on selected walls. Phase accretion transferred liquid from the bulk phase into the film. Film transport and edge outflow were then recorded separately from bulk-liquid transport. Coupling between the film equations and momentum feedback to the bulk flow were distinct settings. ([Ansys, Inc., 2025c](https://ansyshelp.ansys.com/public/views/secured/corp/v252/en/flu_ug/flu_ug_models_wallfilm.html); [2025e](https://ansyshelp.ansys.com/public/views/secured/corp/v252/en/flu_ug/flu_ug_ewf_sec_overview.html))
 
-The initial EWF screen enabled phase accretion and coupled film equations with bulk-flow momentum feedback disabled. Later configurations combined EWF, roughness and the contact collector. Appendix A identifies the configurations, controls and parent records.
+The reported EWF cases solved film mass and momentum with gravity, external-flow shear and wall-viscous resistance. Film pressure-gradient, spreading and surface-tension terms were disabled. Phase accretion was enabled, while film energy, phase change, DPM collection/splash, stripping, edge-separation and EWF–VOF transition models were disabled. Bulk-flow momentum feedback was off. Native outflow at the lower edge of the active film wall remained a drainage route; this was distinct from the disabled droplet edge-separation model. ([Ansys, Inc., 2025c, §§30.3–4](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_ewf_sec_options.html))
 
-[WALL-MODEL DETAIL TO ADD: describe the final selected pressure, spreading and surface-tension forces; momentum feedback; droplet collection/splash; stripping; and edge-separation settings. Use the selected Stage 4 configuration and state which mechanisms were active in each reported comparison.]
+The initial accretion-enabled film screen used coupled film equations. Later film-development tests included an alternative implicit numerical algorithm, identified separately from the physical model in Appendix A.9. The model/control matrix in Table 4 identifies the selected case changes; Appendix A.9 records the switches, algorithm variants and numerical bounds.
 
 One-way particle tracking, where used, was a separate diagnostic on a prescribed carrier field. It retained the full Eulerian liquid feed. Particle weights therefore did not represent additional physical liquid entering the separator and were excluded from the feed balance.
 
@@ -67,22 +76,14 @@ h=(1-x_V)h_{L,\mathrm{sat}}+x_Vh_{V,\mathrm{sat}},\qquad
 x_V=\frac{h-h_{L,\mathrm{sat}}}{h_{V,\mathrm{sat}}-h_{L,\mathrm{sat}}},
 $$
 
-where $x_V$ is vapour mass quality, and the saturation properties are evaluated at the declared absolute pressure. This expression applies within the two-phase interval, $h_{L,\mathrm{sat}}\leq h\leq h_{V,\mathrm{sat}}$. A consistent water-property formulation is needed when calculating a different operating condition. The International Association for the Properties of Water and Steam (IAPWS) provides the industrial formulation IF97 for this purpose. The numerical example here uses the published enthalpy values. ([IAPWS, 2012](https://iapws.org/technical-guidance/release/IF97-Rev))
-
-Substitution gives
-
-$$
-x_V=\frac{1600-784.66}{2781.46-784.66}=0.408323.
-$$
-
-The phase mass flows follow from
+where $x_V$ is vapour mass quality and saturation properties refer to absolute pressure. The relation applies within the two-phase enthalpy interval. This example uses the paper's enthalpies; other operating conditions require a consistent property basis such as IAPWS-IF97. ([IAPWS, 2012](https://iapws.org/technical-guidance/release/IF97-Rev)) The phase flows are
 
 $$
 \dot m_V=x_V\dot m_{\mathrm{tot}},\qquad
 \dot m_L=(1-x_V)\dot m_{\mathrm{tot}}.
 $$
 
-For $\dot m_{\mathrm{tot}}=197.61$ kg/s, these give 80.6888 kg/s vapour and 116.9212 kg/s liquid. The historical boundary commands used the published rounded values, **80.69 kg/s vapour and 116.92 kg/s liquid**. These commands, rather than unrounded recalculations, define the reproduced case.
+The calculation gives $x_V=0.408323$. The historical boundary commands retained the published rounded values, **80.69 kg/s vapour and 116.92 kg/s liquid**; these define the reproduced case. Appendix A.7 gives the worked calculation.
 
 Enthalpy determined the phase allocation before the CFD calculation. The energy equation was disabled, so Fluent did not use this enthalpy to calculate flashing or update the phase split inside the separator. Reduced-feed startup multiplied both phase commands by the same factor and retained their mass ratio.
 
@@ -100,25 +101,14 @@ flowchart LR
 
 #### 3.3.2. Volumetric flow, inlet split and velocity
 
-Mass quality and volume fraction describe different quantities. For the original area calculation, the reference phase densities were 881.77 kg/m³ for liquid and 5.73 kg/m³ for vapour. The phase volumetric flows were
+Mass quality and volume fraction describe different quantities. The original split-area design used densities of 881.77 kg/m³ for liquid and 5.73 kg/m³ for vapour. For the 0.724 m by 0.724 m inlet, $A=0.524176$ m², a common normal velocity gave
 
 $$
-Q_L=\frac{\dot m_L}{\rho_L},\qquad
-Q_V=\frac{\dot m_V}{\rho_V}.
+Q_i=\frac{\dot m_i}{\rho_i},\qquad
+U=\frac{Q_L+Q_V}{A},\qquad A_i=\frac{Q_i}{U}.
 $$
 
-Using the rounded phase commands gives $Q_L=0.132597$ m³/s and $Q_V=14.082024$ m³/s. Thus, vapour carried approximately 40.83% of the mass but 99.07% of the volumetric flow under these reference properties.
-
-The inlet cross-section used for the split design was 0.724 m by 0.724 m, with total area $A=0.524176$ m². For a common normal velocity $U$, the required areas satisfy
-
-$$
-U=\frac{Q_L+Q_V}{A},\qquad
-A_L=\frac{Q_L}{U},\qquad A_V=\frac{Q_V}{U}.
-$$
-
-This calculation gives $U=27.1180$ m/s, $A_L=0.0048896$ m² and $A_V=0.5192864$ m². With the full 0.724 m inlet height, the corresponding widths are 0.006754 m for liquid and 0.717246 m for vapour. Liquid was assigned to the outer strip adjacent to the vessel wall. The split location therefore followed volumetric flow, with approximately 0.933% of the inlet area assigned to liquid. Its phase placement was an idealised model input.
-
-For a uniformly mixed inlet with a common phase-normal velocity, the corresponding liquid volume fraction would be
+Vapour supplied about 40.83% of the mass and 99.07% of the reference volumetric flow. The design therefore assigned approximately 0.933% of inlet area to a 6.754 mm liquid strip beside the vessel wall (Methods Figure M1), with calculated $U=27.1180$ m/s. This pure-phase placement was an idealised input. Under the same common-velocity assumption, a uniform mixed inlet would instead have
 
 $$
 \alpha_{L,\mathrm{uniform}}
@@ -127,15 +117,13 @@ $$
 =0.009328.
 $$
 
-This conversion explains why the liquid mass fraction cannot be entered directly as a liquid volume fraction. It also states the common-velocity assumption behind the original area design.
-
-The later Fluent calculations retained the split geometry but used the material values in Table 2 and phase mass-flow boundaries. The supplied mesh's inlet areas were approximately 0.00488992 and 0.51928608 m². With those areas and the saved densities, the calculated mean normal phase velocities at full feed were 27.1336 m/s for liquid and 26.8026 m/s for vapour:
+The liquid mass fraction was therefore not a liquid-volume-fraction boundary value. Later calculations retained the split geometry and prescribed mass flows using Table 2's material values. Mean normal phase velocities followed
 
 $$
 U_{i,n}=\frac{\dot m_i}{\rho_i A_i}.
 $$
 
-Their combined volumetric-flow speed was approximately 26.8057 m/s. These are calculations from the saved inputs; both faces were not prescribed the original 27.1180 m/s. Appendix A.7 retains the inputs and arithmetic for the area design and later mass-flow implementation. The coarse reconstruction's nominal speed and slightly adjusted feed commands are specified separately in Appendix A.2.
+At full feed these were approximately 27.134 m/s for liquid and 26.803 m/s for vapour, with combined volumetric-flow speed 26.806 m/s. Appendix A.7 retains both property bases, areas and arithmetic. Reconstruction commands are specified separately in Appendix A.2.
 
 <!-- Evidence: [Original area derivation and phase-property basis](../../experiments/phase-02-parity-reset-and-pre-v2-qualification/purnanto-08c-inlet-loading-sensitivity/inlet-regimes-interpretation.md); [supplied inlet areas](../../../PyAnsys/output/phase9-mesh-convergence/20261007/mesh-input-audit.json); [saved full-feed commands](../../../PyAnsys/output/phase71a_r0_control_run4/checkpoint-plus1000-batched-readback.json). -->
 
@@ -164,21 +152,13 @@ where $P_w$ is the perimeter used for this geometric calculation. Applying the e
 
 The steam outlet was a pressure boundary. Its full-feed control specified normal, vapour-only backflow, with 2.11% turbulence intensity and 0.875936 m hydraulic diameter. Physical walls were stationary and no-slip. Their roughness and film assignments are specified separately from the bulk boundary type in Appendix A.8.
 
-For mixed-inlet F1, both physical inlet faces carried both phases, with each phase's total flow distributed by face area:
-
-$$
-\dot m_{i,b}=\dot m_i\frac{A_b}{A_L+A_V}.
-$$
-
-Split-inlet F2 used pure-phase commands on the same faces. F1 retained two physical inlet faces and their individual turbulence diameters, despite carrying the same phase mixture on each. Their total phase feeds and other comparison settings are retained in Appendix A.2. The speed series scaled throughput at fixed phase ratio; it was distinct from an enthalpy sweep, which changes the thermodynamic phase ratio.
-
-[BOUNDARY DETAIL TO COMPLETE: check the boundary readbacks for the other selected case families and state any departures from this control.]
+The mixed-inlet and split-inlet Coupled reconstructions changed phase placement on the same physical inlet faces. Appendix A.2 gives the area-distributed commands and retained turbulence diameters. Their speed series scaled throughput at fixed phase ratio; an enthalpy sweep would change that ratio.
 
 <!-- Evidence: [Executed inlet schedule](../../experiments/phase-07-1a-absorber-convergence/roughness-family/r0-smooth-control/provenance.md); [full-feed control readback](../../../PyAnsys/output/phase71a_r0_control_run4/checkpoint-plus1000-batched-readback.json); [reconstruction boundary audit](../../experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/baseline-lineage-audit.md). -->
 
 #### 3.3.4. Contact-based absorber
 
-The final contact absorber removed bulk liquid from 715 lower fluid cells selected by centroid position, $y\leq0.10$ m. The collector boundary followed the selected cell faces. It mimicked collection at a brine-pool surface by removing liquid without a direct vapour mass sink. The early startup used an earlier throughput-controlled absorber; Appendix A distinguishes that law from the contact treatment used later.
+The final contact absorber removed bulk liquid from 715 lower fluid cells selected by centroid position, $y\leq0.10$ m. The collector boundary followed the selected cell faces, whose node extent reached $y\simeq0.185$ m; it was not an exact plane at 0.10 m. It represented collection at the omitted pool by removing liquid without a direct vapour mass sink. The early startup used an earlier throughput-controlled absorber; Appendix A distinguishes that law from the contact treatment used later.
 
 For non-negative liquid fraction, the contact source was
 
@@ -211,25 +191,21 @@ The volumetric source acted only on bulk liquid. Film left through native edge o
 
 ### 3.4. Mesh and spatial discretisation
 
-The main development calculations used the supplied 60,964-cell mesh. Its hexahedral and polyhedral cells included layers following the vessel and inlet walls. The collector partition retained 715 lower cells. The inlet section below shows the placement of resolution near the walls.
-
-![Section through the supplied mesh at the inlet, showing wall-following layers and larger interior cells](<../../meetings/Poster/poster-sections/poster mesh assets/mesh60k-inlet-section.png>)
-
-*Provisional methods figure. Native inlet-centre section of the supplied mesh. Final numbering will be assigned with the complete report figure set.*
-
-Wall-following layers placed cells across the wall-normal gradients relevant to liquid transport and wall functions. Fluent's guidance identifies cell resolution, alignment and discretisation as factors in numerical diffusion. These provide a basis for the mesh choice; the rotating flow still requires a numerical-resolution assessment. ([Ansys, Inc., 2025g, §7.1.3](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_GridTypes.html))
+The solved mesh contained 60,964 cells (4596 hexahedral; 56,368 polyhedral), 226,982 nodes and 328,287 faces. The three saved states in Appendix A.10 had identical coordinates and connectivity, including the 715-cell collector. Figure A3 documents the wall-following structure. Resolution, alignment and discretisation affect numerical diffusion; visible topology alone does not establish accuracy. ([Ansys, Inc., 2025g, §7.1.3](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_GridTypes.html))
 
 The full-feed control used Green–Gauss node-based gradients, PRESTO! pressure, second-order upwind momentum and $\varepsilon$, first-order upwind $k$, and QUICK volume fraction. Spatial schemes were recorded per case because the numerical packages differed between the main development and reconstruction calculations. Appendix A.6 retains the verified control settings. The historical tetrahedral comparison is defined separately in Section 3.6 and Appendix A.2.
 
-[MESH DETAIL TO COMPLETE: verify the selected solved meshes' scale, quality, first-layer height, layer count and wall $y^+$. Add the completed matched mesh-study protocol when available. The raw input audit alone does not establish the quality or accuracy of a solved case.]
+Saved endpoint data provided actual native wall-resolution fields. On the main `wall` zone, `SV_WALL_YPLUS` had area-weighted means of approximately $3.43\times10^4$, $2.04\times10^4$ and $2.01\times10^4$ for the full-feed parent/control, combined contact endpoint and shortened-startup endpoint, respectively. The separate `SV_WALL_YPLUS_UTAU` field had lower, but still high, means of $2.93\times10^4$, $1.90\times10^4$ and $1.88\times10^4$. These are distinct stored shared-flow fields, not the reference setting of 300. Appendix A.10 gives their per-state ranges, area weighting and paired-data identity.
+
+The high values make near-wall resolution a measured limitation to assess with the wall-function assumptions and a matched refinement study. They do not, by themselves, show that the wall function is invalid. The native nearest-wall distance in cells adjacent to the main wall had an area-weighted mean of 13.009 mm; it was not a meshing first-layer thickness. Orthogonal quality, skewness, exact layer count and first-layer height remain unverified. No completed matched mesh-refinement assessment is reported.
 
 <!-- Evidence: [Raw mesh input audit](../../../PyAnsys/output/phase9-mesh-convergence/20261007/mesh-input-audit.json); [native section views](../../meetings/Poster/poster-sections/mesh-and-volume-fraction-comparison.md); [partitioned control setup](../../experiments/phase-07-1a-absorber-convergence/roughness-family/r0-smooth-control/setup.md). -->
 
 ### 3.5. Numerical solution procedure
 
-The historical startup used Hybrid Initialisation with ten passes and no patched liquid pool. The smooth-wall, EWF-off model was first developed at 25% feed with the earlier v2 absorber. After reading the prepared pair, both inlet commands were set to the reduced-feed values in Table 3 before solving. The prepared artifact's inherited inlet values did not define this startup condition.
+The historical startup used Hybrid Initialisation with ten passes and no patched pool. The smooth-wall, EWF-off model used the throughput-controlled absorber. After loading the prepared pair, both inlets were explicitly set to Table 3's 25% feed values before solving.
 
-An intended ramp was delayed by a command-writing failure, leaving an actual reduced-feed hold to N1580. The corrected procedure then increased both inlet commands over 2000 updates. If $r$ denotes completed ramp updates, the loading factor was
+An intended ramp was delayed by a command-writing failure, leaving an actual reduced-feed hold to iteration 1580. The corrected procedure then increased both inlet commands over 2000 updates. If $r$ denotes completed ramp updates, the loading factor was
 
 $$
 f(r)=0.25+0.75\frac{r}{2000},\qquad
@@ -237,19 +213,23 @@ f(r)=0.25+0.75\frac{r}{2000},\qquad
 \dot m_V(r)=80.69f(r).
 $$
 
-The first ten-update block used $r=0$. Boundary values were then written and read back for $r=10,20,\ldots,1990$, with the full-feed commands written at $r=2000$. Each block held its prescribed feed constant. This rule defined the discrete ramp rather than a continuously changing inlet within an iteration. A startup at 25% feed is distinct from the reference paper's case with total flow decreased by 25%, which retains 75% of full flow.
+Each ten-update block held one feed command: $r=0$ for the first block, then $r=10,20,\ldots,1990$, followed by full feed at $r=2000$. Commands were written and read back before solving. Here, 25% feed means one quarter of full flow, rather than the paper's 25% flow reduction.
 
-At full feed, the continuation changed SIMPLE to Coupled and enabled Global Time Step. A warm-up was followed by a separate 1000-update control. This final control supplied the common parent for the wall-treatment screens. Appendix A.5 retains the actual iteration coordinates, loading schedule and reporting windows.
+At full feed, SIMPLE changed to Coupled with Global Time Step. After warm-up, a separate 1000-update control supplied the saved parent at iteration 5586. Appendix A.5 gives native coordinates and reporting windows.
 
-SIMPLE updates momentum and pressure correction sequentially; the pressure-based Coupled method solves their corrections together. Fluent's steady-solution guidance provides a basis for testing Coupled as a continuation method, with fewer iterations potentially offset by greater work per iteration. The selected Mixture configuration retained a separately solved volume fraction. Coupled with Volume Fractions is unavailable when Mixture slip is enabled. ([Ansys, Inc., 2025h, §37.3.1](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_sec_uns_solve_pvel_1.html); [2025i, §27.8.1](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_sec_multiphase_solution.html))
+Here, a **developed parent** is a saved full-feed solution selected for further experiments after examining residual, inventory, outlet and source histories. The full-feed parent/control supplied reproducible common fields; its unresolved convergence and balances remained limits on the later screens.
 
-Coupling and pseudo-time changed together in the historical continuation. The procedure therefore assessed a numerical package. Source application, mass balance and monitored outputs were examined independently of the solver choice. Pseudo-time and steady iteration count were not interpreted as physical elapsed time.
+Coupled solves pressure and momentum corrections together, while the selected Mixture volume fraction remained separately solved. Coupled with Volume Fractions is unavailable with Mixture slip. ([Ansys, Inc., 2025h, §37.3.1](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_sec_uns_solve_pvel_1.html); [2025i, §27.8.1](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_sec_multiphase_solution.html))
 
-The revised startup introduced dry EWF with accretion, specified roughness, the contact absorber and Coupled flow before the ramp. It reused the saved reduced-feed bulk fields without Hybrid reinitialisation, then held 25% feed for 500 updates, ramped for 2000 with the same command rule, and held full feed for 1000. The film alone was initialised dry at activation. It used a fixed 1 µs step and ten subiterations. Film equations were coupled, while bulk-flow momentum feedback was disabled.
+Coupling and pseudo-time changed together, so their response belongs to a numerical package. Neither pseudo-time nor steady iteration count represented physical elapsed time.
 
-Subsequent film calculations recorded accepted film steps and the native film clock. Frozen-bulk arms disabled the bulk flow, turbulence, volume-fraction and relative-motion equations while retaining film transport and native edge drainage. Thus, the film evolved on the prescribed carrier field. Source and model assignments were checked after loading starting data and after save/reopen. Appendices A.5 and A.8 identify the procedure and paired starting states; Appendix A.6 records the full-feed control.
+The shortened startup reused iteration-1580 bulk fields without reinitialisation, introducing contact collection, the 0.5 mm rough-wall treatment, Coupled flow and a film initialised dry once. It held 25% feed for 500 updates, used the same 2000-update ramp, then held full feed for 1000. Table 4 and Appendix A.9 give film controls.
 
-[NUMERICAL DETAIL TO COMPLETE: extend the verified control table in Appendix A.6 to the other selected cases, including residual settings, remaining pseudo-time controls and film limits. Report any control changes within a continuation.]
+Later frozen-bulk arms disabled flow, turbulence, volume-fraction and relative-motion advancement while retaining film transport and edge drainage. An alternative implicit beta algorithm did not expose the original $h/u/v$ inner residuals; these updates were not tolerance passes. Matched-time facet fields and film accounting supplied a separate local screen (Appendix A.9).
+
+Fluent's steady EWF procedure assumes a converged carrier field that remains unchanged and receives negligible film feedback. Here, bulk freezing was a numerical development procedure; bulk convergence had not been established. The film therefore evolved under prescribed forcing. Restoring the bulk equations and checking the intended combined model remained necessary for a stationary separator claim. ([Ansys, Inc., 2025j, §17.4.3](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_th/flu_th_ewf_sec_sol_alg.html))
+
+Assignments were checked after data loading and save/reopen. Appendices A.5–A.10 give paired parents and controls, including raw residual/global-step entries whose active mapping remains unverified.
 
 ### 3.6. Comparison design
 
@@ -261,7 +241,7 @@ flowchart TD
     B --> C[Saved full-feed parent]
     C --> D[Separate roughness and wall-film screens]
     D --> E[Combined wall and collection treatment]
-    B --> F[Revised startup with contact collection and wall film]
+    B --> F[Shortened startup with contact collection and wall film]
     F --> G[Film development and local film-step checks]
     A --> H[Separate absorber-off inlet and numerical reconstructions]
     E --> I[Residual, flux, source and inventory assessment]
@@ -269,41 +249,54 @@ flowchart TD
     H --> I
 ```
 
-The roughness screen started each R-family case from the same full-feed parent with EWF disabled. It tested heights from smooth walls to 8 mm at $C_s=0.5$, with additional constant changes at 0.5 and 2 mm. Each child advanced 3000 updates. The E0/E2.7 comparison used the same developed parent and smooth walls, comparing EWF off with the accretion-enabled film package. The later combined continuation retained the E2.7 fields while adding roughness, contact collection and revised film controls. Appendix A.5 specifies the separate protocols and averaging windows.
+*Table 4. Model and control changes for the principal reported comparisons. All used the 60,964-cell domain; a retained setting refers to the recorded parent, not a software default.*
 
-The revised startup reused the same reduced-feed fields as the historical path. Its combined settings tested an alternative startup recipe. Film-step checks restarted from identical saved fields and compared equal elapsed film time. Longer frozen-bulk calculations examined film development under fixed carrier conditions; bulk quantities were fixed inputs during these arms.
+| Calculation | Parent and bulk procedure | Collection and wall model | Film numerical procedure | Comparison scope |
+| --- | --- | --- | --- | --- |
+| Original startup and full-feed control | Hybrid →25% hold →ramp →Coupled control at iteration 5586 | Throughput-controlled absorber; smooth walls; EWF off | — | Executed startup package |
+| Wall-roughness screen | Independent full-feed-parent children; 3000 updates | Throughput-controlled absorber; EWF off; vary $k_s$ and $C_s$ | — | Wall-input sensitivity; final 500 updates |
+| Film-disabled continuation and accretion-enabled film case | Independent smooth-wall children of the full-feed parent | EWF off versus accretion on; throughput-controlled absorber; feedback off | Original coupled film algorithm; fixed 10 µs | Film package; matched iterations 8087–8586 |
+| Combined contact continuation | Original accretion-enabled fields, iterations 13586 →45606; bulk active | Contact $\tau=10$ µs; 0.5 mm rough-wall treatment; lower film-edge drainage | Original algorithm; 1 µs, then adaptive | Combined change and development |
+| Shortened startup | Iteration-1580 fields →500 hold +2000 ramp +1000 full feed | Contact collection and 0.5 mm roughness; dry film activated once; feedback off | Original coupled algorithm; fixed 1 µs | Recipe at matched loading progress |
+| Frozen-bulk film development | Shortened-startup endpoint at iteration 5080; bulk held; selected restarts | Shortened-startup physics retained | Alternative implicit beta; local step checks, then adaptive | Film under prescribed forcing |
 
-The provisional reconstruction series addressed inlet and numerical choices with the absorber disabled. F1 and F2 used the same coarse mesh, total feed and Coupled package, changing mixed phase placement over both inlet faces to split pure-phase placement. Each speed case used fresh Hybrid Initialisation, a 10,000-update horizon and the final reporting window specified in Appendix A.2. These comparisons have no completed mesh-resolution assessment.
+Roughness heights ranged from 0 to 8 mm at $C_s=0.5$, with $C_s=0.75$ and 1.0 also tested at 0.5 and 2 mm. The 0.5 mm rough-wall treatment used $C_s=0.5$. Appendix A.5 gives protocols/windows; Appendix A.9 gives exact film algorithms, subiterations, bounds and adaptive controls.
 
-Historical 08b and F0 were compared through native mesh views and saved liquid contours at N10,000. Corresponding sections and common contour ranges were used. Their inlet representation and preparation also differed, so this historical contrast could not isolate mesh effects. F0/F1 likewise changed coupling, pseudo-time and the $k$ scheme together. Appendix A.2 defines these provisional comparisons; their observations and possible explanations appear in Sections 4.9 and 5.6.
+Film-step checks restarted identical saved fields and compared equal accepted film time. Longer frozen-bulk calculations held carrier quantities as inputs.
+
+The absorber-off mixed-inlet and split-inlet Coupled reconstructions changed phase placement at the same mesh, feed and numerical package. Each speed case used fresh Hybrid Initialisation and 10,000 updates; Appendix A.2 gives windows. Mesh-resolution assessment remains incomplete.
+
+The historical tetrahedral-mesh reference and mixed-inlet SIMPLE reconstruction used corresponding mesh/contour sections at iteration 10,000 but differed in mesh, inlet representation and preparation. The mixed-inlet SIMPLE and Coupled reconstructions changed coupling, pseudo-time and the $k$ scheme together. Neither comparison isolated a single cause. Appendix A.2 defines these provisional comparisons; Sections 4.9 and 5.6 give observations and possible explanations.
 
 ### 3.7. Data reduction and numerical assessment
 
-Each reported value retained its case, active equations and observation window. Endpoint values, window means and residual minima were identified separately. The fixed run horizons bounded the available observations; reaching a horizon was not a convergence criterion. Table 4 defines the assessment procedures, and Table 5 defines the principal quantities.
+Each reported value retained its case, active equations and observation window. Endpoint values, window means and residual minima were identified separately. The fixed run horizons bounded the observations; reaching a horizon was not a convergence criterion. Table 5 defines the assessment procedures, and Table 6 defines the principal quantities.
 
-*Table 4. Procedures used to assess implementation and numerical credibility.*
+*Table 5. Procedures used to assess implementation and numerical credibility.*
 
 | Assessment | Procedure |
 | --- | --- |
 | Implementation | Check model and source assignments, units and saved/reopened settings; compare evaluated removal with native applied-source reports |
-| Stability and iterative convergence | Examine solver events and residual histories together with late-window trends in inventory, outlet flow and removal |
+| Stability and iterative convergence | Examine solver events, residuals and late inventory/outlet/source trends; apply recorded inner-film criteria only where available |
 | Conservation | Reconcile signed boundary fluxes, applied sources and relevant transfer/storage terms, counting each once |
-| Numerical resolution | Compare film-step changes at equal accepted elapsed time; a completed matched mesh-refinement assessment remains outstanding |
-| Physical validation | Requires matched operating conditions and measurements of carryover, discharged liquid and pressure loss; this remains an outstanding assessment |
+| Local film-step screen | Compare identical-parent fields at equal accepted film time against Appendix A.9's field/ledger/Courant criteria |
+| Stationary-film screen | Check three consecutive 1000-update windows and spatial persistence; restore bulk for full-model assessment (Appendix A.9) |
+| Spatial resolution | A completed matched mesh-refinement assessment remains outstanding |
+| Physical validation | Matched field measurements and uncertainty assessment remain outstanding |
 
-Residuals retained their native scaling. A residual magnitude or minimum was not treated as a percentage mass imbalance, and restart-related normalisation changes were checked before comparing histories. Residuals and quantities of interest were examined together, consistent with [NASA's iterative-convergence guidance (2021a)](https://www.grc.nasa.gov/www/wind/valid/tutorial/iterconv.html).
+Native residual scaling and restart normalisation were checked before comparison. Residuals were examined with quantities of interest; they were not percentage mass imbalances. ([NASA, 2021a](https://www.grc.nasa.gov/www/wind/valid/tutorial/iterconv.html))
 
-*Table 5. Quantities used in the model assessment.*
+*Table 6. Quantities used in the model assessment.*
 
 | Quantity | Definition and use |
 | --- | --- |
 | Bulk and collector liquid mass | $\int\rho_L\alpha_L\,\mathrm dV$ over the stated volume, kg; identifies storage and collector occupancy |
 | Steam-outlet phase flows | Outward vapour and bulk-liquid rates, kg/s; identifies the represented outlet routes |
 | Applied absorber removal | Native integrated phase-2 source, kg/s; checked separately from evaluated $M_c/\tau$ |
-| Source-inclusive remainder | Signed boundary fluxes plus applied sources, kg/s; checks the stated mass account |
+| Boundary-plus-source remainder | Signed boundary fluxes plus applied sources, kg/s; partial if relevant film transfers/storage are omitted |
 | Film mass and accretion | Native film inventory, kg, and bulk-to-film transfer rate, kg/s |
 | Film drainage and storage | Edge outflow and inventory change over accepted film time; distinguishes discharge from continued filling |
-| Pressure difference | Pressure measure, averaging method and sampling surfaces must be specified; static pressure difference and total-pressure loss retain separate definitions |
+| Pressure difference | Future performance measure: sampling surfaces and averaging remain undefined; no qualified pressure-loss result is reported |
 
 Fluent boundary fluxes were positive into the domain. Outward bulk-liquid flow through the steam outlet was therefore reported as $-\dot m_{2,\mathrm{steamoutlet}}$. For an EWF-off case with no other liquid transfers, the signed liquid remainder was
 
@@ -311,12 +304,23 @@ $$
 R_L=\sum_b\dot m_{L,b}+\dot m_{L,\mathrm{source,applied}},
 $$
 
-where the boundary sum included all liquid inflows and outflows with their native signs, and the integrated applied source retained its native negative sign for removal. The native mixture account was evaluated separately from the sum of the phase accounts. Evaluated and applied removal were alternative descriptions of the same source and were not added together.
+The sum included all liquid boundaries; the applied source retained its negative removal sign. Native mixture and phase-summed accounts were assessed separately. Evaluated and applied removal described the same source and were counted once.
 
-For EWF-enabled cases, bulk-to-film accretion was an internal transfer in the combined liquid account. Film collection at the lower edge was distinguished from outflow at other edges. Film storage and drainage rates used the accepted film-time increment, with the ledger comparing inventory change against integrated film sources and outflows. A bulk-inventory change per steady iteration could not supply a physical storage rate in kg/s.
+With updating bulk equations, accretion leaves bulk and enters film, cancelling only in compatible combined accounts. Boundary-plus-absorber remainders that omit it remain partial diagnostics.
 
-Wall-screen averages used the final 500 updates of each 3000-update child. Later film averages used the native clock; the 500 ms reference arm used its final 10 ms with interval-overlap weighting. Appendix A.5 retains all reporting windows. Carryover ratios used the realised liquid feed and identified the active liquid representations. Retained liquid was treated as storage, and diagnostic particle weights were excluded from physical throughput.
+For the accretion-fed film, $A_i$ was the accretion rate during accepted increment $\Delta t_i$, $\Delta D_f$ cumulative film outflow and $\Delta M_f$ inventory change. The film-only remainder was
 
-[ANALYSIS DETAIL TO COMPLETE: define the selected pressure sampling surfaces and averaging, and add the final numerical acceptance criteria for any qualified performance comparison. Keep fixed-horizon exploratory findings labelled by their actual scope.]
+$$
+E_f=\Delta M_f+\Delta D_f-\sum_i A_i\Delta t_i,\qquad
+e_f=100\frac{|E_f|}{\left|\sum_i A_i\Delta t_i\right|}.
+$$
 
-Appendices A and B provide the settings, parent identities, source assignments and extraction records needed to trace these procedures. New mesh, inlet or wall calculations will be added when their completed procedures and reporting definitions are selected.
+Lower-edge drainage was distinguished from other edge outflow. Appendix A.9 gives integration and rate definitions; extra active film inputs/losses would require extra terms.
+
+With bulk frozen, accretion was prescribed film input without advancing reciprocal bulk loss/replenishment. Constant bulk inventory/outlet rates were imposed, and film-ledger agreement could not establish coupled conservation or bulk stationarity. Steady-iteration inventory change did not supply a physical bulk-storage rate.
+
+Wall screens used final-500 arithmetic means; the 500 ms film arm used its final 10 ms with interval-overlap weighting (Appendices A.5 and A.9). The bulk-liquid outlet ratio was $100(-\dot m_{L,\mathrm{steamoutlet}})/\dot m_{L,\mathrm{in,realised}}$, describing routing rather than qualified efficiency. Retained liquid was storage; diagnostic particle weights were excluded from throughput.
+
+Local step selection required mass-distribution difference $\leq1\%$, velocity/thickness differences $\leq2\%$, ledger error $\leq0.1\%$ and recovery bounds; the mid-development check added drainage difference $\leq1\%$ of reference accretion. Appendix A.9 defines norms and parents. A local pass did not establish global timestep independence or validation.
+
+Appendices A and B provide the settings, parent identities, source assignments and extraction records needed to trace these procedures. Appendix A.11 maps the descriptive case names to archived identifiers. Remaining numerical-resolution and physical-validation limits accompany the reported findings and their interpretation.

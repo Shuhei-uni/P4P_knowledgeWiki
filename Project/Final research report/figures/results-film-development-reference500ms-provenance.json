@@ -1,0 +1,37 @@
+{
+  "figure": "results-film-development-reference500ms",
+  "source": "PyAnsys/output/phase72a-stage3-speed-sensitivity-server1/20261006/selected-film-history-reference.csv",
+  "source_sha256": "571d17968802be2520ea99f449c6598157c70432372d890c282fb9b330616e92",
+  "source_summary": "PyAnsys/output/phase72a-stage3-speed-sensitivity-server1/20261006/analysis-summary.json",
+  "source_summary_sha256": "34344d2c78f1f9d8ad592f1d99032dd0168bde051b8363fca519f0234d9a1e71",
+  "scope": "Stage 3 nominal 26.81 m/s reference arm; selected frozen-bulk path from N5080 to N48205",
+  "native_range": [
+    5080,
+    48205
+  ],
+  "selected_points": 43126,
+  "film_time_s": [
+    0.0034999999999999996,
+    0.5
+  ],
+  "units": {
+    "film_time_ms": "1000 * film_time_s",
+    "film_mass": "kg",
+    "rates": "kg/s"
+  },
+  "processing": "All selected CSV points plotted without smoothing, subsampling or spatial interpolation. Film drainage uses the preverified CSV native cumulative-outflow rate. Grey shading marks 490-500 ms. Markers identify N5190, N13390, N25815 and the 500 ms endpoint.",
+  "checks": {
+    "all_clocks_strictly_increasing": true,
+    "native_coordinates_contiguous": true,
+    "bulk_inventory_constant_kg": 61.05488260946753,
+    "endpoint_film_mass_kg": 9.544399018862931,
+    "final_10ms_accretion_kg_s": 81.12137742644737,
+    "final_10ms_drainage_kg_s": 69.59977698974535,
+    "final_10ms_storage_kg_s_from_verified_summary": 11.527971400484478
+  },
+  "claim_limit": "Prescribed-flow film development. Film inventory is still increasing; no new bulk convergence, full-model closure, timestep independence or physical validation claim.",
+  "software": {
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.6"
+  }
+}

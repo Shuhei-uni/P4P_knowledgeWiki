@@ -1,0 +1,30 @@
+{
+  "figure_sha256": "0b2e0c646e8fb747ca38e43271603aeb2aa38be580bc28349109f7e2c0055305",
+  "analysis_summary_sha256": "14f7ea7b563db6116d57f876adeda45e1e408005c9c846ed16326dae39b274d2",
+  "source_manifest_sha256": {
+    "core17": "3aed4b06f337ad73270a6ff243091cce182a437b5cc2cddad275f09cb192494f",
+    "full60": "0ba5d26932530d9c61c374a822e0d2d605dba46d08ad0754f2152ba0e0c5030b"
+  },
+  "source_windows": {
+    "core17": [
+      41503,
+      42503
+    ],
+    "full60": [
+      41503,
+      42503
+    ]
+  },
+  "quantities": {
+    "x": "Accepted added film time, ms",
+    "left": "Total film mass, kg",
+    "right": "Maximum film speed, m/s"
+  },
+  "time_origin": "Native film clock at N41503; no invented bulk histories",
+  "field_alignment": "Unique native face centres; identical mesh geometry",
+  "timing": "Native Simulation wall-clock time; save/reopen/retrieval excluded",
+  "claim_limit": [
+    "Reported-rate film ledger does not independently reconcile DPM event deposition",
+    "Sparse arm has endpoint bulk checks, not continuous bulk histories"
+  ]
+}

@@ -2,7 +2,8 @@
 
 | Item | Status / record |
 | --- | --- |
-| Current priority — 8 October 2026 | EWF and Phase Accretion mandatory; analytical film velocity is the preferred candidate for accurate, practical mesh-run preparation. [Method assessment](method-review.md); no new solves submitted. |
+| Current priority — 8 October 2026 | EWF and Phase Accretion mandatory; analytical film velocity is the preferred candidate for accurate, practical mesh-run preparation. Human approves execution. [Selected test](analytical-film/setup.md); [method assessment](method-review.md). |
+| Execution state | [Native +50 ms continuation](core-development/results.md) submitted N43483 → N48483, full film momentum, 10 µs and original 20-step DPM cadence; target pending. [Report-cost screen](report-cost/results.md) selected 17 reports: 29.52% less solve time and exact common-history/film-field agreement. [Cadence diagnostic](dpm-cadence/results.md) complete; tracking interval change did not repair the ledger. Accounting and inner convergence remain unqualified; analytical long runs held. |
 | Human direction | 7 October 2026: retain Stage 3 as the startup-method reference; explore changed EWF settings and wall parameters |
 | Stage 3 | Human is satisfied with the stage; retain its evidence and method; no new steady-film qualification claim |
 | Completed first Stage 4 result | [Commercial steel roughness continuation](commercial-steel/results.md); N25815 → N29815 |

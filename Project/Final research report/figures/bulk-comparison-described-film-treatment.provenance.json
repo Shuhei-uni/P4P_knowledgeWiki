@@ -1,0 +1,86 @@
+{
+  "field": "phase-2-vof",
+  "plane": "X\u2013Y at Z = 0 m",
+  "display_range": [
+    0,
+    1
+  ],
+  "camera": "matching orthographic native export, confirmed by export visual QA",
+  "assembly": "Scientific figure assembled from unchanged native source-image artists in Matplotlib viewports. Complete field regions and one native shared-scale colour bar are shown; internal contour-object names, software logos and unused margins are outside the viewports. No source pixels, field values or native camera settings are edited.",
+  "native_image_resolution": [
+    2400,
+    1800
+  ],
+  "sources": [
+    {
+      "display_label": "Film-disabled continuation",
+      "source_image": "Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/figures/E0-phase2-vof-xy-z0-final8586.png",
+      "source_sha256": "9886e27aee57f8ac34fb8d58e0c1b20ed6acc0ab3434dd0d1281461bb17199a5",
+      "export_manifest": "PyAnsys/output/phase72a_e0_native_vof_contour_20260923/export-manifest.json",
+      "checkpoint": "completed final native 8586",
+      "case": "C:\\Users\\Shuhei Yokkaichi\\Documents\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase72A\\FamilyE\\E0\\20260922T115500Z\\P72A-E0-full-loading-plus3000.cas.h5",
+      "data": "C:\\Users\\Shuhei Yokkaichi\\Documents\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase72A\\FamilyE\\E0\\20260922T115500Z\\P72A-E0-full-loading-plus3000.dat.h5",
+      "native_coloured_field_pixel_bounds": [
+        1006,
+        1393,
+        264,
+        1535
+      ]
+    },
+    {
+      "display_label": "Accretion-enabled film case",
+      "source_image": "Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/figures/E2.7-phase2-vof-xy-z0-final8586.png",
+      "source_sha256": "2a80e013cc006a48eb6d60bda51a5892457340504d96f2ab8ecfa6e273c2cd41",
+      "export_manifest": "PyAnsys/output/phase72a_e27_native_vof_contour_20260923/export-manifest.json",
+      "checkpoint": "completed final native 8586",
+      "case": "C:\\Users\\Shuhei Yokkaichi\\Documents\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase72A\\FamilyE\\E2.7\\20260923T071523Z\\P72A-E2.7-full-loading-plus3000.cas.h5",
+      "data": "C:\\Users\\Shuhei Yokkaichi\\Documents\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase72A\\FamilyE\\E2.7\\20260923T071523Z\\P72A-E2.7-full-loading-plus3000.dat.h5",
+      "native_coloured_field_pixel_bounds": [
+        1006,
+        1393,
+        264,
+        1535
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "path": "Project/Final research report/figures/bulk-comparison-described-film-treatment.png",
+      "sha256": "0611dd629f948ae9a7d56bc555b5703528ed5ef6c32419995254c52e03081488"
+    },
+    {
+      "path": "Project/Final research report/figures/bulk-comparison-described-film-treatment.pdf",
+      "sha256": "61732c452e26c25c4b6c5526d417694773beb4c962efc153e2c361cbbb8bac2e"
+    }
+  ],
+  "claim_limits": [
+    "Volume fraction concerns bulk liquid only, not film thickness.",
+    "Single centre section at iteration8586; no whole-volume inventory, efficiency, conservation or steady-film claim.",
+    "The accretion-enabled case changes the wall-film model package; momentum feedback to the bulk flow is off."
+  ],
+  "source_image_viewport_bounds_pixels": {
+    "field_view_both_panels": {
+      "x": [
+        960,
+        1440
+      ],
+      "y": [
+        220,
+        1555
+      ]
+    },
+    "native_colour_bar_view_from_first_panel": {
+      "x": [
+        10,
+        300
+      ],
+      "y": [
+        530,
+        1280
+      ]
+    },
+    "source_coordinate_origin": "upper left",
+    "plotting_interpolation": "none"
+  },
+  "visual_qa": "PASS: complete native coloured fields and full 0\u20131 legend visible; internal contour labels and source logos excluded by recorded viewports. Source PNGs unchanged."
+}

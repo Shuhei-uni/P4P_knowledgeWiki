@@ -1,0 +1,70 @@
+{
+  "figure": "results-described-startup",
+  "processing": "Numerical replot with descriptive labels. No source PNG pixels edited; no source data changed; all selected points drawn without smoothing.",
+  "checks": {
+    "historical_native_range": [
+      1581,
+      4580
+    ],
+    "shortened_native_range": [
+      2081,
+      5080
+    ],
+    "matched_points": 3000,
+    "activation_hold_excluded": true,
+    "ramp_peak_metrics_against_native_summary": "PASS",
+    "residual_log_scales_retained": true
+  },
+  "plot_text": [
+    "Continuity residual",
+    "Historical startup: film disabled; Coupled after ramp",
+    "Shortened startup: early wall and contact treatment",
+    "Scaled liquid-fraction residual\n(normalisation differs)",
+    "Bulk + film liquid (kg)",
+    "Updates since ramp start: 1\u20132000 ramp; 2001\u20133000 full-feed hold",
+    "Outward liquid (kg/s)",
+    "Startup comparison at matched inlet loading\nAll saved iterations; liquid-fraction residual scales differ"
+  ],
+  "sources": {
+    "historical_liquid": {
+      "path": "PyAnsys/output/phase72a-lineage-N45606/20261005/selected-lineage-histories.csv",
+      "sha256": "fd2dc3dd83f8a0ce55770295ff14402717de1786d316a6d078e71de156c25f26"
+    },
+    "historical_residuals": {
+      "path": "PyAnsys/output/phase72a-lineage-N45606/20261005/carrier-residuals.csv",
+      "sha256": "2f056c646cb59fb037f11e4780ec6faddb74fb78a88c23a4c55aa6a8613b8149"
+    },
+    "historical_loading": {
+      "path": "PyAnsys/output/phase72a-lineage-N45606/20261005/recovered-r0-reports/P71A-R0-SMOOTH-CONTROL-v2-command.out",
+      "sha256": "935de146afbf79ffad40173383da00c3ce863abe5bab64476951eafdf079aa88"
+    },
+    "roughness_summary": {
+      "path": "PyAnsys/output/phase72a_family_r/analysis-20260923T054600Z-cs-sensitivity-v2/tail-summary.csv",
+      "sha256": "869db8e0b06e411c773cf02b82e313c15541f73a5afab6c5094da39c0ef44be0"
+    },
+    "film_disabled": {
+      "path": "PyAnsys/output/phase72a_ewf_family_e_student_20260922T115500Z/E0/report-histories.json",
+      "sha256": "86a155717acb9d2386d8114254818455b1dfc23609b2714f0981803bbaa36360"
+    },
+    "accretion_enabled": {
+      "path": "PyAnsys/output/phase72a_ewf_student_e27_run_20260923T071523Z/E2.7/report-histories.json",
+      "sha256": "1adc9d9d20fa5f1912f38d5b6a292a787e693ee5be69599d2c1a753518f6be63"
+    },
+    "shortened_liquid": {
+      "path": "PyAnsys/output/phase72a-stage3-early-ewf-server1/20261005/final-histories.json",
+      "sha256": "9882b96f527d1c5337990759a14eb31f51f3ff600e298855ea75170886307524"
+    },
+    "shortened_residuals": {
+      "path": "PyAnsys/output/phase72a-stage3-early-ewf-server1/20261005/carrier-residuals.json",
+      "sha256": "ef9c462d3eab58e25a278b1c8fd1f1f0e4013bf55a09a4df8f5f661da5e68b49"
+    },
+    "startup_metrics": {
+      "path": "PyAnsys/output/phase72a-stage3-early-ewf-server1/20261005/analysis-summary.json",
+      "sha256": "a0e5b2faa71429e68fa2fc1e3ef87c9992158e77f1319b4acfdf5e35163caf52"
+    }
+  },
+  "software": {
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.6"
+  }
+}

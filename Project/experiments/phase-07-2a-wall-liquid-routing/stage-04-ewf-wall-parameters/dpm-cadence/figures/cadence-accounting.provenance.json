@@ -1,0 +1,20 @@
+{
+  "figure_sha256": "27b6f39c19959e2cbb3194e73902fb0a429bc64a97b623a2c9a2256bdf4ad7a4",
+  "analysis_summary_sha256": "6226b5262e95254c8baf86667a44468c54dab42f0cba9f9295780a053fa8d55b",
+  "source_manifest_sha256": {
+    "dpm20": "3aed4b06f337ad73270a6ff243091cce182a437b5cc2cddad275f09cb192494f",
+    "dpm40": "2c65b133292db9f5858a1ceb3421465ff4fcc96dbe62270eece0625e9991baec"
+  },
+  "source_window": [
+    41503,
+    42503
+  ],
+  "film_step_s": 1e-05,
+  "ledger": "Delta film + cumulative loss stocks + left-step direct drain - right-step reported phase/DPM source rates",
+  "quantities": {
+    "x": "Accepted added film time, ms",
+    "left": "Cumulative uncorrected ledger residual, g",
+    "right": "Film mass gain, kg"
+  },
+  "claim_limit": "No event-mass conservation proof; no ledger correction applied"
+}

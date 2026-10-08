@@ -1,0 +1,107 @@
+{
+  "status": "VERIFIED_FIGURES",
+  "field": "film-thickness",
+  "units": "mm",
+  "surface": "wall",
+  "range_mm": [
+    0,
+    0.3
+  ],
+  "colormap": "viridis",
+  "node_interpolation": false,
+  "renderer": "Matplotlib Poly3DCollection of original native Fluent wall faces and facet fields; no source-pixel editing",
+  "original_source_manifest": "PyAnsys/output/phase72a-stage3-film-development-server1/20261005/wall-thickness-views/figure-manifest-N25815.json",
+  "geometry_file": "PyAnsys/output/phase72a-stage3-film-development-server1/20261005/wall-thickness-views/wall-geometry.npz",
+  "geometry_sha256": "21f26d4baaf36e9a4a30f4c09e7d532148ff9710bdfc06aee1eb4e89f8ed9959",
+  "facet_count": 3463,
+  "sources": [
+    {
+      "native_iteration": 5190,
+      "film_time_ms": 5.903750000000146,
+      "film_mass_kg": 0.3595073319371169,
+      "snapshot_max_thickness_mm": 0.12422780855558813,
+      "wall_area_m2": 53.43695248023792,
+      "area_at_least_1um_percent": 45.899736520898095,
+      "area_at_least_0p1mm_percent": 0.802177663077516,
+      "field_file": "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/output/phase72a-stage3-film-development-server1/20261005/adaptive-development/film-fields-N5190.npz",
+      "field_sha256": "074bbbb6727c0057c6927e496700a1c68088985ba6ad436b9ea3b8e2e29a8ba3",
+      "pair": {
+        "case": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase72A\\Stage3\\film-development-20261005\\adaptive-development\\checkpoint-N5190.cas.h5",
+        "data": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase72A\\Stage3\\film-development-20261005\\adaptive-development\\checkpoint-N5190.dat.h5",
+        "native_iteration": 5190,
+        "case_sha256": "b66dee862ea4cc9308adb766771a03b2a32b01d7f3450ff7964fb91b81812495",
+        "data_sha256": "c8781145629d8ee3281ab87348a21397ab603a98189b2091c84ef6d677cefb90"
+      },
+      "centroid_match": "PASS",
+      "facet_mass_report_match": "PASS",
+      "display_label": "5.90 ms"
+    },
+    {
+      "native_iteration": 13390,
+      "film_time_ms": 75.66157951072138,
+      "film_mass_kg": 3.863539554500332,
+      "snapshot_max_thickness_mm": 0.2527216565795243,
+      "wall_area_m2": 53.43695248023792,
+      "area_at_least_1um_percent": 84.56018631455535,
+      "area_at_least_0p1mm_percent": 40.33567642680747,
+      "field_file": "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/output/phase72a-stage3-film-development-server1/20261005/adaptive-recovery-from-N7190/film-fields-N13390.npz",
+      "field_sha256": "3c3b5783c7ab8cf18e89e2c8fa3fb78105430c268efc616147c6bcfbda807e40",
+      "pair": {
+        "case": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase72A\\Stage3\\film-development-20261005\\adaptive-recovery-from-N7190\\checkpoint-N13390.cas.h5",
+        "data": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase72A\\Stage3\\film-development-20261005\\adaptive-recovery-from-N7190\\checkpoint-N13390.dat.h5",
+        "native_iteration": 13390,
+        "case_sha256": "cf32462710b34d9abdb636bbc95ecf3ea17fbd699f8836cabd20fb9dfff8b751",
+        "data_sha256": "f26ebeffe99583ee5da5c829892a86ab9322987b835275e67efc03823f30504d"
+      },
+      "centroid_match": "PASS",
+      "facet_mass_report_match": "PASS",
+      "display_label": "75.66 ms"
+    },
+    {
+      "native_iteration": 25815,
+      "film_time_ms": 265.1843386356894,
+      "film_mass_kg": 6.688275530493504,
+      "snapshot_max_thickness_mm": 0.29053573962301016,
+      "wall_area_m2": 53.43695248023792,
+      "area_at_least_1um_percent": 94.43822558778086,
+      "area_at_least_0p1mm_percent": 61.97926871890854,
+      "field_file": "/Users/shuheiyokkaichi/Developer/P4P_knowledgeWiki/PyAnsys/output/phase72a-stage3-film-development-server1/20261005/adaptive-recovery-from-N22615/film-fields-N25815.npz",
+      "field_sha256": "2ea930d17a9ce8c3dfb06a1b8f569e734dae53641a22619836e5db62d4e3d336",
+      "pair": {
+        "case": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase72A\\Stage3\\film-development-20261005\\adaptive-recovery-from-N22615\\transfer-final-N25815.cas.h5",
+        "data": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase72A\\Stage3\\film-development-20261005\\adaptive-recovery-from-N22615\\transfer-final-N25815.dat.h5",
+        "native_iteration": 25815,
+        "case_sha256": "ed46a6f0ce4ee6076e1f5bd0673f081418b43cbfed7529cfc92ef539c71cf26a",
+        "data_sha256": "48efe32e059f33f2716469f9a0e92f4f4b4c2781d8905136e28a1fefd79ee6d1"
+      },
+      "centroid_match": "PASS",
+      "facet_mass_report_match": "PASS",
+      "display_label": "265.18 ms"
+    }
+  ],
+  "camera": {
+    "projection": "orthographic",
+    "elevation_deg": 12,
+    "comparison_azimuth_deg": -135,
+    "opposite_azimuth_deg": 45,
+    "display_axis_mapping": [
+      "X",
+      "Z",
+      "Y"
+    ],
+    "coordinate_units": "m"
+  },
+  "figures": [
+    {
+      "path": "Project/Final research report/figures/wall-film-described-development.png",
+      "sha256": "31bedb37bf7d5529252c1bb9b98aefc45f562f46611943f886ec6c77dbc63eb7"
+    },
+    {
+      "path": "Project/Final research report/figures/wall-film-described-development.pdf",
+      "sha256": "0ce27679c91348920ef8b930996d34355d119614cf29660627f9ebb74b0acf79"
+    }
+  ],
+  "display_labels": "Accepted film times and film masses; original iteration identifiers retained only in provenance",
+  "claim_limit": "Finite saved film development; frozen bulk; no steady-film or whole-separator qualification.",
+  "visual_qa": "PASS: times and masses visible without coded case labels; original orthographic camera, shared linear 0\u20130.30 mm range and original facets preserved."
+}

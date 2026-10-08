@@ -58,11 +58,11 @@ Lists of figures and tables will use the final selected displays and numbering.
 | RNG | Renormalisation group; used here in the RNG k–ε turbulence model |
 | SIMPLE | Semi-Implicit Method for Pressure-Linked Equations |
 | Bulk liquid | Liquid represented by the Eulerian secondary phase; excludes EWF inventory and discrete droplets |
-| Phase 1 / phase 2 | The vapour / bulk-liquid phases in the selected Fluent carrier models |
+| Vapour / bulk liquid | The primary vapour and secondary bulk-liquid phases in the selected Fluent carrier models |
 | Accretion | Transfer of represented bulk liquid into the wall film |
 | Incomplete trajectory | A tracked droplet with no completed terminal fate under the stated tracking controls |
 | Absorber / virtual collector | A numerical liquid-removal treatment inside the truncated model; the two terms refer to the same model role |
-| Native iteration, N | Fluent's recorded solver-update coordinate; it is not physical carrier-flow time |
+| Native iteration | Fluent's recorded solver-update coordinate; it is not physical carrier-flow time |
 | Film time | Time accumulated from the accepted EWF steps |
 | Source term | A rate added to a transport equation; a negative mass source removes mass |
 | Implicit source linearisation | Use of source derivatives within an equation solve to represent source dependence on the solved variable |

@@ -1,4 +1,118 @@
 phase_id: phase-07-2a-wall-liquid-routing
+current_server1_state_owner: stage4_core_development_server1
+stage4_core_development_server1:
+  authority: human_20261008_keep_running_server1
+  status: NATIVE_5000_UPDATE_CONTINUATION_SUBMITTED
+  server_id: '1'
+  status_owner: PyAnsys/output/phase72a-stage4-core-development/20261008/core17/run-manifest.json
+  setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/core-development/setup.md
+  results: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/core-development/results.md
+  server_idle: false
+  parent_native_iteration: 43483
+  parent_film_clock_s: 0.4081843386354826
+  verified_native_iteration: 43483
+  target_native_iteration: 48483
+  target_film_clock_s: 0.4581843386354826
+  submitted_updates: 5000
+  target_added_film_time_s: 0.05
+  film_step_s: 0.00001
+  film_steps_per_dpm_step: 20
+  active_report_count: 17
+  mandatory_models: [eulerian_wall_film, phase_accretion]
+  film_momentum_method: full_momentum_equation
+  bulk_equations: FROZEN
+  flow_momentum_coupling: false
+  physics_change: NONE
+  initialization: FORBIDDEN
+  parent_film_fields_exact_after_reopen: true
+  native_guard_interval_updates: 1000
+  native_autosave_interval_updates: 5000
+  paired_endpoint_save: HORIZON_OR_GUARD_REJECTION
+  latest_live_query_status: UNRESOLVED_DEADLINE_EXCEEDED_12_SECONDS
+  latest_live_query_utc: '2026-10-08T01:43:01.628337+00:00'
+  monitoring: PASSIVE_TRANSCRIPT_ONLY_DURING_SOLVE
+  execution: FLUENT_NATIVE_SCHEME_TUI
+  requires_laptop_for_solve: false
+  classification: DIAGNOSTIC_DEVELOPMENT_ACCURACY_UNQUALIFIED
+  ledger_correction_applied: false
+  analytical_long_extension: HELD
+  preserved_sibling: PyAnsys/output/phase72a-stage4-dpm-cadence/20261008/dpm40/run-manifest.json
+  historical_state_note: Earlier Server 1 sections are completed-run snapshots, not the current live state.
+stage4_dpm_cadence_server1:
+  authority: human_20261008_keep_running
+  status: COMPLETE_INVERSE_CADENCE_HYPOTHESIS_REJECTED
+  server_id: '1'
+  status_owner: PyAnsys/output/phase72a-stage4-dpm-cadence/20261008/dpm40/run-manifest.json
+  setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/dpm-cadence/setup.md
+  results: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/dpm-cadence/results.md
+  parent_native_iteration: 41503
+  target_native_iteration: 42503
+  updates: 1000
+  film_step_s: 0.00001
+  parent_film_steps_per_dpm_step: 20
+  child_film_steps_per_dpm_step: 40
+  active_report_count: 17
+  mandatory_models: [eulerian_wall_film, phase_accretion]
+  initialization: FORBIDDEN
+  ledger_correction_applied: false
+  new_solve_submitted: true
+  server_idle: true
+  verified_native_iteration: 42503
+  verified_added_film_time_s: 0.01
+  original_ledger_error_percent: 1.6290087608238704
+  selected_film_steps_per_dpm_step: 20
+  analytical_long_extension: HELD
+stage4_report_cost_server1:
+  authority: human_20261008_keep_running
+  setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/report-cost/setup.md
+  results: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/report-cost/results.md
+  status_owner: PyAnsys/output/phase72a-stage4-report-cost/20261008/full60/run-manifest.json
+  status: COMPLETE_CORE17_SELECTED_EXACT_FIELD_AGREEMENT
+  server_idle: true
+  verified_core17_native_iteration: 42503
+  verified_core17_added_film_time_s: 0.01
+  parent_native_iteration: 41503
+  parent_film_clock_s: 0.3883843386354628
+  target_native_iteration: 42503
+  updates_per_arm: 1000
+  fixed_film_step_s: 0.00001
+  selected_active_report_count: 17
+  measured_time_reduction_percent: 29.515853728566064
+  common_history_and_field_max_difference: 0
+  physics_change: NONE
+  initialization: FORBIDDEN
+  preserved_endpoint_native_iteration: 43483
+  monitoring: PASSIVE_TRANSCRIPT_ONLY_DURING_SOLVE
+stage4_analytical_film_server1:
+  authority: human_20261008_start_approved_analytical_method
+  status_owner: PyAnsys/output/phase72a-stage4-analytical/20261008/momentum10/run-manifest.json
+  setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/analytical-film/setup.md
+  parent_native_iteration: 41483
+  parent_film_clock_s: 0.3881843386354626
+  initialization: FORBIDDEN
+  execution: FLUENT_NATIVE_SCHEME_TUI
+  status: CONTROL20MS_CHECKPOINT_VERIFIED_ANALYTICAL_UNQUALIFIED
+  results: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/analytical-film/results.md
+  observed_smoke_added_film_time_s: 0.0002
+  observed_film_clock_s: 0.3883843386354628
+  observed_native_film_counter: 39923
+  saved_smoke_pair_verification: ALL_THREE_HASHED_REOPEN_VERIFIED
+  current_method: full_momentum_equation
+  server_idle: true
+  active_target_native_iteration: null
+  verified_control_native_iteration: 43483
+  verified_control_updates: 2000
+  verified_control_added_film_time_s: 0.02
+  verified_control_film_clock_s: 0.4081843386354826
+  verified_control_ledger_error_percent: 1.5903597465596937
+  monitoring_policy: PASSIVE_TRANSCRIPT_DURING_NATIVE_SOLVE_NO_SCHEME_QUERIES
+  fixed_film_step_s: 0.00001
+  target_total_added_film_time_s: 0.02
+  target_film_clock_s: 0.4081843386354626
+  server_calls: RECOVERY_COMPLETE_IDLE_PAIRED_CHECKPOINT_N43483
+  crash_review: PyAnsys/output/phase72a-stage4-analytical/20261008/inspection/closure-cause-review.json
+  analytical_long_extension: HELD_FOR_VELOCITY_AND_DPM_ACCOUNTING_DIAGNOSIS
+  duplicate_solve: FORBIDDEN_UNTIL_NATIVE_SUBMISSION_RECONCILED
 stage4_method_review_server1:
   authority: human_20261008_full_server1_ownership
   status: ASSESSMENT_COMPLETE_NO_NEW_SOLVES

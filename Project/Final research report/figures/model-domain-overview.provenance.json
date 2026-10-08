@@ -1,0 +1,41 @@
+{
+  "source_metadata": "model-domain-metadata.json",
+  "rendering": "Matplotlib native saved-case face polygons; no schematic replacement of the vessel geometry. Coordinate order x,z,y puts the verified vertical y-axis upright. Face colours identify zones; they are not solution fields.",
+  "source_case_sha256": "4fd493972839929f1f0922ad42679456d1f4aea294da86e4b13d6b7c32f754fc",
+  "matching_three_case_geometry": true,
+  "collector_rendering": "Boundary faces of actual 715-cell region identified from c0/c1 cell adjacency; cell-node upper extent differs from centroid selection threshold.",
+  "landmarks": [
+    [
+      "Steam-outlet plane",
+      "y = 6.261 m"
+    ],
+    [
+      "Top of discrete mesh",
+      "y = 6.990 m"
+    ],
+    [
+      "Inlet lower / upper edges",
+      "y = 1.704 / 2.428 m"
+    ],
+    [
+      "Total inlet area",
+      "0.524176 m\u00b2"
+    ],
+    [
+      "Collector node span",
+      "y \u2248 0\u20130.185 m"
+    ],
+    [
+      "Bottom wall",
+      "y \u2248 0 m"
+    ]
+  ],
+  "inlet_area_m2": 0.524176,
+  "inlet_liquid_strip_width_m": 0.006754028320312466,
+  "inlet_vapour_strip_width_m": 0.7172459716796875,
+  "claim_limits": [
+    "Not a physical pool-surface elevation or manufactured-CAD drawing.",
+    "The actual mesh source region is shown; no liquid storage or predicted free surface is depicted.",
+    "Geometry matching does not prove model, source-law or solution-field equivalence between cases."
+  ]
+}

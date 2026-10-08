@@ -1,38 +1,40 @@
 # Part 3 — Results
 
-*Working draft. The early startup and absorber history lead the results. Figures are existing project outputs; no new simulation or scientific figure was produced for this revision.*
+<!-- Revision scope, 8 October 2026: main results through the shortened-startup and frozen-bulk film-development investigations. The later wall-parameter investigation is deferred at the author's request. Section 4.9 retains the existing provisional reconstruction evidence. Internal evidence links are revision notes; final pagination and the numbering of the provisional Methods figures remain to be checked. -->
 
 ## 4. Results
 
-### 4.1. Low-feed startup establishes the first useful development state
+The results describe development of the bulk-flow field, roughness and initial wall-film comparisons from the same full-feed parent at iteration 5586, and subsequent wall-film development. The main calculations used the 60,964-cell mesh and full-feed commands of 116.92 kg/s liquid and 80.69 kg/s vapour. Steam-outlet liquid flow is reported as a positive outward magnitude unless a signed balance is stated. Iteration numbers identify the native solver coordinate. Appendix A.11 maps the descriptive case names to the original evidence identifiers. Elapsed film time refers to the accepted EWF clock; it does not represent physical elapsed time for the steady bulk flow.
 
-The early startup produced a low-continuity state with nearly stationary bulk-liquid inventory before full loading. With the v2 absorber active and both inlets at 25% feed, scaled continuity reached $3.2056\times10^{-4}$ at N1556. During the final 500 updates of the hold, bulk inventory changed from 31.451 to 31.357 kg. The end-of-hold steam-outlet liquid flow was 0.0684 kg/s outward. These results identify a useful developed field from which to increase the inlet load.
+### 4.1. Reduced-feed development and inlet ramp
 
-![Early residuals, inventory and inlet loading in the selected case history](../../../PyAnsys/output/phase72a-lineage-N45606/20261005/early-development-detail.png)
+At 25% feed with the throughput-controlled absorber active, the bulk-liquid inventory approached a nearly constant value before inlet loading increased (Figure 5). Scaled continuity reached a minimum of $3.2056\times10^{-4}$ at iteration 1556. Over the final 500 updates of the hold, iterations 1080–1580, inventory decreased from 31.4518 to 31.3571 kg, a change of 0.30%. Outward bulk-liquid flow through the steam outlet was 0.0684 kg/s at iteration 1580.
 
-*Figure 5. Early history leading to the developed parent. A: end of the 25% feed hold and start of the verified 2000-update ramp at N1580. B: full feed and change to Coupled with Global Time Step at N3580. C: wall-film activation from the developed R0 state at N5586. The axis is native steady iteration, not physical carrier-flow time. The inlet panel omits the inherited N1 report-cache value; the raw record retains it. Source: [selected N45606 history](../../experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/case-history-N45606.md).*
+The reduced-feed hold continued because the intended inlet changes had not been applied to Fluent. The corrected procedure then wrote and checked both inlet commands during the 2000-update ramp. Full feed was reached at iteration 3580. Continuity and liquid inventory increased during loading: the ramp's maximum continuity was $1.1166\times10^{-2}$, and its endpoint bulk inventory was 182.5178 kg (Table 7).
 
-The hold was unintended: the first driver calculated changing inlet targets but did not apply them to Fluent. The actual low-feed fields were retained, and the corrected ramp then wrote and checked the inlet boundaries before every solve block. This distinction matters because the low-continuity state belongs to the actual reduced-feed calculation, not to the ramp that the first driver had intended to execute.
+![Residuals, bulk-liquid inventory and actual inlet loading during early development](../figures/results-described-early-development.png)
 
-*Table 6. Early numerical development on the selected lineage. Residual extrema and endpoint inventories are labelled separately; the rows are different loading stages, not isolated comparisons.*
+*Figure 5. Early numerical development with the throughput-controlled absorber. The panels show scaled carrier residuals, bulk-liquid inventory and reported liquid-inlet loading. A marks the end of the 25% feed hold and start of the corrected ramp at iteration 1580. B marks full feed and the change to Coupled with Global Time Step at iteration 3580. C marks later EWF activation from the full-feed parent at iteration 5586. The horizontal axis is native iteration. The inherited iteration 1 inlet-report cache value is omitted from the inlet panel.*
 
-| Stage | Scaled continuity observation | Bulk-liquid endpoint (kg) | Endpoint outward liquid flow (kg/s) |
+*Table 7. Successive stages of carrier development. Residual minima, the ramp maximum and endpoint values are identified separately. These stages differ in inlet loading and numerical controls.*
+
+| Development step | Scaled continuity observation | Endpoint bulk liquid (kg) | Endpoint outward steam-outlet liquid (kg/s) |
 | --- | --- | ---: | ---: |
-| 25% feed hold to N1580 | Minimum $3.2056\times10^{-4}$ at N1556 | 31.3571 | 0.0684 |
-| Ramp to full feed at N3580 | Ramp maximum $1.1166\times10^{-2}$ | 182.5178 | 8.9952 |
-| Developed control to N5586 | Minimum $2.0735\times10^{-3}$ at N4770; endpoint $2.7841\times10^{-3}$ | 295.8536 | 24.3344 |
+| 25% feed hold to iteration 1580 | Minimum $3.2056\times10^{-4}$ at iteration 1556 | 31.3571 | 0.0684 |
+| Ramp to full feed at iteration 3580 | Ramp maximum $1.1166\times10^{-2}$ | 182.5178 | 8.9952 |
+| Full-feed control to iteration 5586 | Minimum $2.0735\times10^{-3}$ at iteration 4770; endpoint $2.7841\times10^{-3}$ | 295.8536 | 24.3344 |
 
-The absorber and startup sequence addressed the main practical barrier in model development: obtaining a sustained carrier calculation with controlled liquid development. The earlier absorber supplied a verified numerical removal route. Reduced inlet loading gave the carrier a less abrupt development path. The history supports this combined explanation, while the separate effects of feed reduction, absorber implementation and later solver controls remain unisolated. The recorded continuity and inventory values are checked against the [recovered carrier residuals](../../../PyAnsys/output/phase72a-lineage-N45606/20261005/carrier-residuals.csv) and [selected native histories](../../../PyAnsys/output/phase72a-lineage-N45606/20261005/selected-lineage-histories.csv).
+The low-feed calculation therefore supplied the saved fields used for the verified ramp. Its small late inventory change and low continuity residual did not establish a source-inclusive mass balance; aligned inlet, outlet and applied-source evidence was checked separately for the full-feed parent.
 
-### 4.2. The full-feed continuation supplies the parent for further experiments
+<!-- Evidence: [selected case history](../../experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/case-history-N45606.md), [carrier residuals](../../../PyAnsys/output/phase72a-lineage-N45606/20261005/carrier-residuals.csv) and [liquid histories](../../../PyAnsys/output/phase72a-lineage-N45606/20261005/selected-lineage-histories.csv). -->
 
-The corrected ramp reached the recorded full feed, followed by Coupled flow with Global Time Step. Continuity rose during loading, then fell to about $2\times10^{-3}$ in the developed control. Bulk inventory approached 296 kg, and the preserved N5586 state became the common parent for the wall experiments. This was the project's main turning point: the startup and absorber development supplied a usable field from which additional model behaviour could be compared.
+### 4.2. Full-feed control and mass balance
 
-The Phase 7.1A handoff selected this state on its combined continuity, inventory and source-inclusive balance behaviour. Native source application also remained reliable: at N5586, the liquid command and applied removal magnitude were both 116.92 kg/s, with command error of about $4.3\times10^{-14}$ kg/s. The continuation completed without a fatal solver event. These observations support the use of the endpoint for further development. ([Phase 7.1A selection basis](../../experiments/phase-07-1a-absorber-convergence/CONTEXT.md); [R0 continuation](../../experiments/phase-07-1a-absorber-convergence/roughness-family/r0-smooth-control/results.md); [baseline handoff](../../experiments/phase-07-2a-wall-liquid-routing/baseline-control-handoff.md))
+After the change to Coupled with Global Time Step, continuity fell from its ramp peak and bulk inventory approached 296 kg. The preserved smooth-wall, film-disabled full-feed control at iteration 5586 supplied the initial fields for the roughness and wall-film comparisons. The continuation completed without a fatal solver event, although residual oscillations, outlet reverse flow and turbulence-limiting messages remained.
 
-A material balance error remained at this historical full-feed endpoint. The earlier absorber removed the commanded liquid inlet rate while another 24.3344 kg/s of bulk liquid left through the steam outlet. Counting the source once gives the endpoint remainders in Table 7. These values describe the R0 parent, before the final contact absorber was introduced.
+At iteration 5586, the commanded liquid removal and native applied removal magnitude were both 116.92 kg/s. Their reported difference was approximately $4.3\times10^{-14}$ kg/s. This confirmed source application at the endpoint. The liquid budget nevertheless remained open: the absorber removed the liquid inlet rate while a further 24.3344 kg/s left through the steam outlet.
 
-*Table 7. Source-inclusive R0 balance at N5586, calculated from the aligned native report-history values. Flux is positive into the domain; applied removal is negative. Each source is counted once.*
+*Table 8. Source-inclusive mass-balance remainders at iteration 5586. Boundary fluxes are positive into the domain and the applied absorber source is negative. Each source is counted once. Percentages use the liquid, vapour and total feeds of 116.92, 80.69 and 197.61 kg/s, respectively.*
 
 | Budget | Signed boundary-plus-source remainder (kg/s) | Remainder / relevant feed (%) |
 | --- | ---: | ---: |
@@ -40,111 +42,180 @@ A material balance error remained at this historical full-feed endpoint. The ear
 | Vapour | +0.4391 | +0.5441 |
 | Native mixture | −23.8923 | −12.0906 |
 
-The native mixture and phase-summed outlet reports differ by about 0.0031 kg/s; that discrepancy is retained rather than forced to close. The balance calculation assumes pure-phase inlets, a closed lower wall and no other mass transfer in the EWF-off parent. The low-feed residual and inventory histories alone do not establish an early source-inclusive balance. The complete quantitative full-feed check uses the [native run4 histories](../../../PyAnsys/output/phase71a_r0_control_run4/report-histories-batched.json), with the model boundary and accounting interpretation described in the [R0 audit](../../experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/shuhei-audit.md).
+The native mixture outlet and summed phase outlets differed by 0.0031 kg/s. This difference was retained in the separate accounts. The calculation used pure-phase inlets, a closed lower wall and the EWF-off parent, with no other mass transfer included. Correct absorber application thus coexisted with a material liquid-balance error. The full-feed parent provided a common development state for subsequent comparisons, with that error retained as a limit on its use.
 
+<!-- Evidence: [full-feed control continuation](../../experiments/phase-07-1a-absorber-convergence/roughness-family/r0-smooth-control/results.md), [baseline handoff](../../experiments/phase-07-2a-wall-liquid-routing/baseline-control-handoff.md), [aligned native full-feed control histories](../../../PyAnsys/output/phase71a_r0_control_run4/report-histories-batched.json) and [full-feed control accounting audit](../../experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/shuhei-audit.md). -->
 
+### 4.3. Roughness response from the common parent
 
-Persistent outlet reverse flow, turbulence limiting and oscillatory residuals also remained. The development advance was therefore a common, sustained parent with improved numerical behaviour. It did not complete mass closure or physical validation. This remaining limit motivated the next experiments on liquid routing.
+The roughness screen gave a non-monotonic steam-outlet liquid response (Figure 6). At $C_s=0.5$, increasing $k_s$ from zero to 0.05 mm raised mean outward liquid flow from 24.3715 to 29.5412 kg/s, an increase of 21.21%. Larger tested heights lowered the flow. The 8 mm rough-wall case gave 13.6253 kg/s, 44.09% below the smooth-wall continuation. These means use the same final-500 window, iterations 8087–8586, after 3000 updates from iteration 5586.
 
-### 4.3. The developed parent enables a roughness sensitivity study
+![Effect of roughness height and constant on bulk-liquid steam-outlet flow](../figures/results-described-roughness.png)
 
-The common N5586 state allowed roughness to be changed while retaining the same starting fields, absorber and EWF-off model. The height screen gave a non-monotonic outlet response. At $C_s=0.5$, small increases in roughness raised bulk-liquid outlet flow above the smooth-wall value; larger tested heights lowered it. Mean outward flow changed from 24.3715 kg/s for R0 to 13.6253 kg/s for R7 at 8 mm, a 44.09% reduction over N8087–N8586.
+*Figure 6. Outward bulk-liquid steam-outlet flow in the EWF-off roughness screen. Left: height sweep at $C_s=0.5$. Right: constant changes at $k_s=0.5$ and 2 mm. All cases start from the same full-feed fields at iteration 5586; plotted values are means over iterations 8087–8586. The dashed line is the smooth-wall continuation. Lines connect tested settings and do not represent fitted response models.*
 
-![Roughness sensitivity of bulk-liquid outlet flow](../../observations/figures/wall-liquid-interaction/01-roughness-steamoutlet.png)
+Outlet standard deviations over that window were 0.0219 kg/s for the smooth-wall continuation and 0.0331 kg/s for the 8 mm rough-wall case. These describe variation between saved iterations, rather than uncertainty in physical performance. The 8 mm rough-wall case's endpoint bulk inventory was 108.744 kg, a loss of 187.109 kg from the common starting value of 295.854 kg. Thus, its lower outlet flow occurred in a substantially depleted liquid state.
 
-*Figure 6. Roughness height and constant versus outward bulk-liquid steam-outlet flow. All cases start from the same developed N5586 parent with EWF off. Means use N8087–N8586. Lines connect tested settings and are not fitted response models. Source: [roughness comparison](../../observations/07-wall-liquid-interaction.md).*
+Increasing $C_s$ lowered mean outlet flow at both tested fixed heights. However, the 1 mm rough-wall case at $C_s=0.5$ and the 0.5 mm rough-wall case at $C_s=1.0$ had oscillatory outlet histories, and source-inclusive balances remained open across the screen. The results establish sensitivity to the prescribed wall treatment; they do not establish that the lower outlet rates correspond to improved separation or drainage.
 
-The lower outlet flow coincided with large inventory losses in the rougher cases. R7 lost about 187 kg from the common initial bulk inventory of 295.85 kg. Increasing $C_s$ also lowered the recorded outlet magnitude at the tested fixed heights, with inventory losses and oscillatory cases retained in the source record. These results show that wall treatment affects the represented liquid state. Inventory depletion and open source-inclusive balances prevent interpreting the lower outlet alone as improved separation. ([R-family results](../../experiments/phase-07-2a-wall-liquid-routing/roughness-family/results.md))
+<!-- Evidence: [roughness-screen results and sample standard deviations](../../experiments/phase-07-2a-wall-liquid-routing/roughness-family/results.md#matched-tail-comparison) and [comparison figure and provenance](../../observations/07-wall-liquid-interaction.md). The source's later statement identifying the lowest outlet conflicts with its table; the table values are used here. -->
 
-### 4.4. Film accretion produces a large change in liquid routing
+### 4.4. Accretion-enabled wall-film response
 
-The smooth-wall E0/E2.7 screen extended the model from the same developed parent. With the accretion-enabled film package, mean bulk-liquid outlet flow fell from 24.369 to 1.735 kg/s, a 92.88% reduction over N8087–N8586. Bulk-liquid inventory also fell from about 296 kg to about 63 kg while film formed.
+The accretion-enabled EWF package reduced mean bulk-liquid steam-outlet flow from 24.369 kg/s in the film-disabled continuation to 1.735 kg/s in the accretion-enabled film case, a reduction of 92.88% over iterations 8087–8586 (Figure 7). Both cases began from the developed full-feed fields saved at iteration 5586 and retained smooth walls and the throughput-controlled absorber. The accretion-enabled case included phase accretion and coupled film equations, with film-to-flow momentum feedback disabled.
 
-![EWF-off and accretion-enabled outlet histories](../../observations/figures/wall-liquid-interaction/02-ewf-off-vs-e27.png)
+![Bulk-liquid steam-outlet histories with EWF off and the accretion-enabled package](../figures/results-described-film-outlet.png)
 
-*Figure 7. E0 and E2.7 outward bulk-liquid steam-outlet flow, native N5586–N8586. All saved points are shown without smoothing; shading marks N8087–N8586. Both cases retain smooth walls and the common collector-equipped parent. Source: [E0/E2.7 comparison](../../observations/07-wall-liquid-interaction.md).*
+*Figure 7. Outward bulk-liquid steam-outlet flow for the film-disabled continuation and accretion-enabled film case over iterations 5586–8586. All 3001 saved points are shown without smoothing; shading identifies the final 500 updates. The film-disabled continuation has EWF off. The accretion-enabled case uses phase accretion, coupled film equations and a fixed 10 µs film step, with bulk-flow momentum feedback off.*
 
-This response shows why wall-film transport became a major direction after the carrier startup had improved. The added representation changed both the inventory and the bulk-liquid outlet. The tested package included phase accretion and coupled film equations, with film-to-flow momentum feedback off. Its incomplete bulk/film/source/drain account and developing inventories limit the inference about physical removal. The result supports further study of wall-film behaviour from the established parent.
+Bulk-liquid inventory fell from 295.8536 kg at the parent to 63.0234 kg at the accretion-enabled endpoint. Film held 3.1112 kg, giving a combined retained inventory of 66.1346 kg (Table 9). The fall in bulk inventory therefore greatly exceeded the mass stored in the film. The lower outlet flow accompanied changes in both liquid representations, while the combined bulk, film, absorber and drainage account remained incomplete. The comparison reports the response to the enabled film package; it does not isolate one film setting or yield a qualified separation efficiency.
 
-### 4.5. The combined lineage extends the model built from that parent
+The matched bulk-liquid sections provide a spatial check on this response (Figure 8). Both sections were mostly at low liquid volume fraction. A narrow wall-adjacent region of higher fraction was less visible in the accretion-enabled case on the common scale. These cuts show a change in the resolved bulk-liquid field; they cannot account for the whole-volume inventory or identify film thickness.
 
-The selected history to N45606 connects the early startup to the later added complexity. E2.7 was first continued from its original fields. The restart at N13586 then added 0.5 mm roughness, the corrected contact absorber and a smaller film step. Subsequent replay and adaptive continuation preserved that field lineage (Figure 8).
+![Matched bulk-liquid volume-fraction sections for the film-disabled continuation and accretion-enabled film case](../figures/bulk-comparison-described-film-treatment.png)
 
-![Bulk and film history from the original startup to N45606](../../../PyAnsys/output/phase72a-lineage-N45606/20261005/entire-liquid-film-history.png)
+*Figure 8. Bulk-liquid volume fraction at iteration 8586 for the film-disabled continuation and accretion-enabled film case, each after 3000 updates from the same fields at iteration 5586. The native X–Y centre sections use Z = 0 m, the same orthographic camera and a fixed 0–1 scale. The film-disabled continuation has EWF off; the accretion-enabled case has phase accretion and coupled film equations on, with bulk-flow momentum feedback off. The panels show bulk liquid, not wall-film thickness or drainage. Their different inventories and open mass accounts remain limits on interpretation.*
 
-*Figure 8. Selected N1–N45606 liquid history. A: corrected inlet ramp; B: full feed and Coupled continuation; C: film accretion; D: unchanged-model transfer and continuation; E: roughness, corrected contact absorber and smaller film step; F: unchanged-control local replay; G: adaptive film stepping. The outlet trace uses Fluent's negative outward sign. The horizontal axis is native iteration, not one constant physical timestep. Source: [complete case history](../../experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/case-history-N45606.md).*
+<!-- Evidence: [film-disabled and accretion-enabled comparison](../../observations/07-wall-liquid-interaction.md), [wall-film-screen results and native sections](../../experiments/phase-07-2a-wall-liquid-routing/ewf-family/results.md#native-phase-2-volume-fraction-contours--2026-09-23), [paired contour provenance](../figures/bulk-comparison-described-film-treatment.provenance.json) and [selected endpoint histories](../../../PyAnsys/output/phase72a-lineage-N45606/20261005/selected-lineage-histories.csv). The film-disabled continuation's mean is from its separate comparison run and is not substituted for the roughness screen's smooth-wall mean. -->
 
-*Table 8. Selected endpoints on the combined field lineage. Outlet values are individual endpoints, not wall-screen means.*
+### 4.5. Contact collection and combined model development
 
-| Model state | Bulk liquid (kg) | Film (kg) | Bulk + film (kg) | Outward bulk-liquid outlet (kg/s) |
+The final contact absorber was assessed through short removal-time screens and a separate combined continuation. After 100 updates from the same iteration 13586 parent, reducing the prescribed depletion time from 10 to 1 µs lowered collector inventory from 0.496 to 0.159 g. Evaluated endpoint removal increased from 49.59 to 158.81 kg/s, with greater source variability at 1 µs. These were developing endpoint values. The full three-value comparison and subsequent bounded 10 µs screen are retained in Appendix A.4.
+
+The combined continuation returned to the original accretion-enabled film fields saved at iteration 13586 and introduced 0.5 mm roughness, the contact absorber at a 10 µs depletion time, and a 1 µs film step. The selected history continued through replay and adaptive film stepping to iteration 45606. Appendix A.9 retains the full history and its restart branches. Because these controls changed together, differences from the original accretion-enabled film state cannot be assigned to roughness, absorber replacement or film stepping individually.
+
+*Table 9. Selected endpoints on the combined field history. Outlet values are individual endpoints, rather than final-window means.*
+
+| Model state | Bulk liquid (kg) | Film (kg) | Bulk + film (kg) | Outward bulk-liquid steam-outlet flow (kg/s) |
 | --- | ---: | ---: | ---: | ---: |
-| Developed R0, N5586 | 295.8536 | 0 | 295.8536 | 24.3344 |
-| Accretion-enabled E2.7, N8586 | 63.0234 | 3.1112 | 66.1346 | 1.7365 |
-| Corrected contact restart, N17586 | 62.9581 | 5.9150 | 68.8732 | 3.6794 |
-| Selected adaptive endpoint, N45606 | 62.8970 | 6.3600 | 69.2570 | 3.6724 |
+| Full-feed parent, iteration 5586 | 295.8536 | 0 | 295.8536 | 24.3344 |
+| Accretion-enabled film case, iteration 8586 | 63.0234 | 3.1112 | 66.1346 | 1.7365 |
+| Corrected contact continuation, iteration 17586 | 62.9581 | 5.9150 | 68.8732 | 3.6794 |
+| Selected adaptive endpoint, iteration 45606 | 62.8970 | 6.3600 | 69.2570 | 3.6724 |
 
-Separate corrected contact screens also showed why the largest removal coefficient was not selected automatically. After 100 updates, reducing the removal time from 10 to 1 µs lowered collector inventory from 0.496 to 0.159 g, while endpoint bulk removal rose from 49.59 to 158.81 kg/s and source variability increased. These were developing endpoints, not settled throughputs or a mesh-accuracy comparison. The 10 µs branch was selected for a longer bounded screen. Appendix A.4 retains all three tested values and keeps this short branch distinct from the selected N45606 field lineage. ([Contact-strength screen](../../experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/results.md#all-liquid-contact-absorber-trial))
+Bulk inventory remained close to 63 kg between iterations 17586 and 45606, while film mass increased. At iteration 45606, the native film clock was 120.769 ms. Over the corrected-restart interval iterations 13586–45606, integrated accretion was 3.3498 kg, drainage was 2.8324 kg, and film inventory increased by 0.5176 kg. The film-only ledger error was 0.00637% of integrated accretion.
 
-At N45606, the native film clock reached 0.120769 s. The complete corrected-restart record showed film mass rising from 5.8425 to 6.3600 kg. Over that interval, integrated accretion was 3.3498 kg and drainage was 2.8324 kg, with a film-only ledger error of 0.00637%. In the final 1000 adaptive updates, drainage remained about 9.98% below accretion. The model therefore represented both drainage and continued film storage.
+During the final 1000 adaptive updates, mean accretion, drainage and storage were 82.1518, 73.9558 and 8.2017 kg/s, respectively. Drainage remained 9.98% below accretion. This record therefore contains drainage alongside continued film filling. Repeated inner-film residual failures and the missing final 233 subiteration records limit the interpretation of the smooth inventory histories; their extent is reported in Section 4.8.
 
-Film-solver quality remained uneven. Only 24.46% of the original 10 µs film updates met all recorded final inner-residual tolerances. The corrected 1 µs restart improved that fraction to 95.17%, but later replay still contained substantial failure bursts. The final 233 adaptive updates lacked film-subiteration records. These limits qualify the smooth mass histories and prevent a developed steady-film claim. Because several controls changed at the contact restart, the endpoint differences cannot isolate the effect of roughness or absorber replacement. ([Film ledger, residual checks and lineage limits](../../experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/case-history-N45606.md))
+<!-- Evidence: [contact-strength screens](../../experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/results.md#all-liquid-contact-absorber-trial), [complete selected case history](../../experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/case-history-N45606.md) and [corrected film ledger](../../../PyAnsys/output/phase72a-lineage-N45606/20261005/corrected-film-development-summary.json). The short strength-screen branch is distinct from the original-field continuation retained in Appendix A.9. -->
 
-### 4.6. A revised startup carries the added treatments through a gentler ramp
+### 4.6. Shortened startup with early wall-film activation
 
-The later startup study returned to the same saved low-feed bulk fields. It enabled Coupled flow, dry EWF, roughness and the corrected contact treatment before loading. This tested whether the development approach could be adapted to the more complex model. The comparison used matched ramp progress and independently checked inlet commands.
+The shortened startup reused the same saved reduced-feed bulk fields as the historical path. Coupled flow, dry EWF with accretion, 0.5 mm roughness and contact collection were introduced before loading. The 500-update activation hold was followed by a verified 2000-update ramp and a 1000-update full-feed hold.
 
-![Historical and revised startup at matched ramp progress](../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/figures/ramp-comparison.png)
+At matched ramp progress, the shortened recipe had lower peaks in continuity, combined liquid inventory and bulk-liquid outlet flow (Figure 9; Table 10). Peak continuity fell by 70.15%, while the inventory and outlet peaks fell by 70.43% and 75.78%, respectively. Continuity had the same residual normalisation in the two calculations. The other residual normalisations differed, so their scaled magnitudes were not treated as direct measures of relative improvement.
 
-*Figure 9. Historical and revised startup during the 2000-update ramp and following 1000-update full-feed hold. The shaded region is the hold. Continuity uses a common normalisation; other residual normalisations differ. The earlier activation hold is outside this ramp comparison. Source: [revised-startup results](../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/results.md).*
+![Historical and shortened startup at matched inlet-ramp progress](../figures/results-described-startup.png)
 
-*Table 9. Peak values during the matched inlet ramp. Reductions are relative to the historical ramp.*
+*Figure 9. Historical and shortened startup over the 2000-update inlet ramp and following 1000-update full-feed hold. The horizontal axis aligns loading progress: historical iterations 1581–4580 and shortened iterations 2081–5080. Shading marks the full-feed hold. The earlier activation hold is outside this comparison. The historical case remains EWF off throughout this interval; the shortened-startup case has the combined wall and contact treatment active.*
 
-| Measure | Historical startup | Revised startup | Reduction (%) |
+*Table 10. Peak values during the matched inlet ramp. Reductions are relative to the historical ramp. The combined settings assess a startup recipe rather than an isolated activation-timing change.*
+
+| Measure | Historical startup | Shortened startup | Reduction (%) |
 | --- | ---: | ---: | ---: |
 | Scaled continuity | 0.011166 | 0.0033336 | 70.15 |
-| Bulk plus film inventory (kg) | 182.518 | 53.9715 | 70.43 |
+| Bulk + film inventory (kg) | 182.518 | 53.9715 | 70.43 |
 | Outward bulk-liquid steam-outlet flow (kg/s) | 8.99517 | 2.17887 | 75.78 |
 
-The revised recipe lowered the ramp excursions, but its complete history included a separate low-feed activation spike with peak continuity 0.10593. The result concerns the ramp, not elimination of all startup disturbance. Since the settings changed together, the reduction cannot be assigned to early film activation alone.
+The preceding low-feed activation hold contained a continuity peak of 0.10593, larger than the historical ramp peak. Lower ramp excursions therefore did not mean that all startup disturbance was avoided. At the shortened-startup endpoint iteration 5080, bulk liquid was 61.0549 kg and film was 0.1645 kg. Bulk inventory still increased by 2.2644 kg over the final 500 updates.
 
-At N5080, bulk liquid was 61.0549 kg and film mass was 0.1645 kg. Bulk inventory still rose by 2.2644 kg during the final 500 updates. All 2000 ramp updates met the recorded inner-film tolerance, but 15 later updates failed during the full-feed hold. The recipe supplied a preserved startup endpoint with lower ramp peaks; whole-run convergence and developed-film reproduction remained open. ([Complete startup evidence](../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/results.md))
+The contact source was applied as evaluated, but the final hold still had an incomplete liquid account (Table 11). Mean liquid inflow plus signed steam-outlet flow and the applied contact source gave +50.6048 kg/s before EWF transfer was included. Mean accretion was 80.7365 kg/s, nearly all of which remained in the film at this early stage. The quoted boundary/contact remainder excludes that transfer and is not a whole-separator imbalance. It cannot be compared directly with the film-disabled full-feed control remainder in Table 8. Bulk storage also had no physical rate because the carrier equations used steady pseudo-time.
 
-### 4.7. Subsequent film development shows transport with continued storage
+*Table 11. Shortened-startup liquid-account terms over the final 500 full-feed updates, iterations 4581–5080. Bulk equations remained active. Boundary flux and the applied source retain their native signs; film input, edge outflow and storage are positive magnitudes. Film rates use the same 0.5 ms interval of accepted film time. These terms do not form a completed combined separator ledger.*
 
-The selected frozen-bulk continuation advanced film time from 3.5 ms at N5080 to 265.18 ms at N25815. Film mass grew from 0.1645 to 6.6883 kg. Bulk mass remained fixed at 61.0549 kg because its equations were frozen, so combined bulk-plus-film inventory rose from 61.2194 to 67.7432 kg.
+| Quantity | Reported rate (kg/s) |
+| --- | ---: |
+| Signed liquid-inlet flow | +116.9200 |
+| Signed steam-outlet liquid flow | −3.3012 |
+| Native applied contact source | −63.0140 |
+| Boundary plus contact source, before EWF transfer | +50.6048 |
+| Film input by accretion | 80.7365 |
+| Total film edge outflow | 0.000227 |
+| Film storage, $\Delta M_f/\Delta t_f$ | 80.7364 |
 
-![Selected startup and film-development history](../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/film-development/figures/selected-case-history-N25815.png)
+All 2000 ramp updates met the recorded inner-film tolerance. However, 15 updates at iterations 5025–5076 failed during the full-feed hold, representing 15% of its final 100 updates. Each reached the ten-subiteration limit. The largest final thickness and two momentum residuals were 1315.134, 9150.082 and 59.84849, respectively, against a tolerance of $10^{-5}$. These were large residual failures. The saved and reopened endpoint supplied finite fields for film development; bulk stationarity and complete-run convergence remained unqualified.
 
-*Figure 10. Selected field history through N25815. A: combined model activation; B: ramp start; C: full feed; D: frozen bulk; E–G: selected step checks and recovery restarts. Native iteration is not physical carrier-flow time. The outlet panel retains Fluent's negative outward sign. Its flat trace after D follows from prescribed bulk fields. Rejected continuations are excluded. Source: [film-development result](../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/film-development/results.md).*
+<!-- Evidence: [shortened-startup results](../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/results.md), [audited metrics, native source checks and normalisation](../../../PyAnsys/output/phase72a-stage3-early-ewf-server1/20261005/analysis-summary.json) and [native final histories for Table 11](../../../PyAnsys/output/phase72a-stage3-early-ewf-server1/20261005/final-histories.json). -->
 
-The latest complete window in the N25815 record reported accretion of 81.121 kg/s, drainage of 68.177 kg/s and storage of 12.954 kg/s. Drainage was 15.96% below accretion, so the film was still filling. Saved wall views showed its spatial development: the film spread and thickened over the lower and middle wall, with a thinner upper region (Figure 11).
+### 4.7. Film development under frozen bulk fields
 
-![Wall-film thickness at three saved film times](../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/film-development/figures/wall-film-thickness-development-N25815.png)
+After iteration 5080, the selected film continuation advanced the native film clock from 3.5 to 265.184 ms. Film mass increased from 0.1645 to 6.6883 kg. The reference-speed continuation then reached 500 ms with 9.5444 kg of film (Figure 10). Bulk inventory remained at 61.0549 kg and outward bulk-liquid outlet flow at 3.4300 kg/s because the bulk equations were frozen. The resulting increase in combined inventory came from additional film storage.
 
-*Figure 11. Saved wall-film thickness at approximately 5.90, 75.66 and 265.18 ms, with the same camera and 0–0.30 mm colour scale. Source: [selected spatial film comparison](../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/film-development/results.md).*
+![Film inventory, accretion and drainage against accepted film time through 500 ms](../figures/results-film-development-reference500ms.png)
 
-A local matched-time check from identical N13390 fields accepted 20 µs against a 2.5 µs reference over a further 2.5 ms of film time. The reported film-mass distribution difference was 0.00285%, with a 0.0474% film-ledger error. This supports that step for the checked state and interval. The alternative implicit solver did not expose inner residuals, leaving inner-solve adequacy as a separate limit. ([Matched-step assessment](../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/film-development/results.md))
+*Figure 10. Selected reference-speed film development under frozen bulk fields, from 3.5 to 500 ms since dry-film activation. The panels show native film inventory and accretion and drainage rates against accepted film time. All selected records are shown without smoothing. Markers identify the three snapshots in Figure 11 and the 500 ms endpoint; shading marks the final 10 ms reporting window. Accretion is prescribed input from the held bulk field. The selected restart path is used; rejected sibling histories are excluded. Detailed recovery chronology is retained in Appendix A.9.*
 
-The later reference-speed arm reached 500 ms under frozen bulk fields, recording 9.5444 kg of film. In its final 10 ms, accretion was 81.1214 kg/s, drainage 69.5998 kg/s and storage 11.5280 kg/s. The drainage deficit remained 14.20%. This extended the observed film development without establishing stationary film. The lower-speed arm was incomplete and the higher-speed arm pending in the selected record; no completed three-speed comparison is reported. ([500 ms campaign result](../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/inlet-speed-500ms/results.md))
+During frozen-bulk development, accretion supplied the film while the carrier liquid field was held fixed. There was no newly solved reciprocal bulk depletion. The film ledger therefore assessed this prescribed-flow surface calculation alone. Adding its growing mass to the fixed bulk inventory described stored fields, not conservation of a fully advancing separator model.
 
-### 4.8. Further coupling remains a numerical development task
+The saved wall-film fields showed increasing coverage and thickness over the lower and middle vessel wall, while the upper region remained thinner (Figure 11). Between the 75.66 and 265.18 ms snapshots, film mass rose from 3.864 to 6.688 kg and the wall area with film thickness of at least 0.10 mm increased from 40.34% to 61.98%. Maximum facet thickness increased from 0.253 to 0.291 mm. The growth therefore involved a wider region of appreciable film, as well as an increase in the local maximum.
 
-The selected Stage 4 probe added film forces, film–DPM interactions, splash, edge separation, stripping and wall momentum feedback together from a preserved parent. The initial probe and its conservative recovery stopped with floating-point exceptions. They supplied no usable physical-mechanism comparison. The failure belongs to the combined tested configuration, and cannot identify one mechanism as the cause. The selected feedback-OFF retry requires its own completed, verified window before inclusion. ([Stage 4 failure record](../../experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/realism-continuation/results.md))
+![Native wall-film thickness at three saved film times](../figures/wall-film-described-development.png)
+
+*Figure 11. Wall-film thickness at accepted film times of 5.90, 75.66 and 265.18 ms since dry-film activation, saved at iterations 5190, 13390 and 25815, respectively. All panels use the same orthographic camera and linear 0–0.30 mm colour scale. The views are rendered from native Fluent wall geometry and facet fields without spatial interpolation. Bulk fields were held fixed; these snapshots show film development at different times.*
+
+At the nominal reference speed of 26.81 m/s, accretion continued to exceed drainage at both selected reporting times (Table 12). In the final 10 ms of the 500 ms arm, film storage was 11.528 kg/s and the drainage deficit was 14.20%. Extending film time thus retained a positive filling rate. The selected history had not met the film-development stationarity screen of drainage deficit and absolute storage/accretion at or below 1% over three consecutive 1000-update windows.
+
+*Table 12. Film inventory and late-window rates under frozen bulk fields. Inventory is the endpoint value. Rates at 265.184 ms use the latest complete 1000-update window; rates at 500 ms use the final 10 ms with interval-overlap weighting. Storage is calculated from film-inventory change over accepted film time; small ledger remainders are retained.*
+
+| Film time (ms) | Film mass (kg) | Mean accretion (kg/s) | Mean drainage (kg/s) | Mean storage (kg/s) | Drainage deficit (%) |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 265.184 | 6.6883 | 81.121 | 68.177 | 12.954 | 15.96 |
+| 500.000 | 9.5444 | 81.121 | 69.600 | 11.528 | 14.20 |
+
+Only the reference-speed arm had a verified 500 ms endpoint in the selected campaign record. The 20.11 m/s arm was incomplete at 135.451 ms and the 32.14 m/s arm was pending. A completed three-speed comparison is therefore not reported. Constant bulk quantities during these film runs are prescribed-field diagnostics, rather than evidence of a newly converged bulk solution.
+
+<!-- Evidence: [selected film-development results, spatial metrics and reporting windows](../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/film-development/results.md), [500 ms campaign results](../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/inlet-speed-500ms/results.md), [selected reference-speed CSV](../../../PyAnsys/output/phase72a-stage3-speed-sensitivity-server1/20261006/selected-film-history-reference.csv) and [Figure 10 provenance](../figures/results-film-development-reference500ms-provenance.json). -->
+
+### 4.8. Numerical assessment of the selected development path
+
+Implementation checks confirmed the intended bulk source application. In the shortened startup, independently evaluated contact removal agreed with the negative native applied source at all 3500 solved updates. The source check excluded the inherited, unsolved parent cache row. These results establish application of the specified numerical removal law; the full-feed control balance error in Table 8 remains a separate conservation result.
+
+Film accounting and inner-solve behaviour also gave different assessments. The corrected contact history had a film-only ledger error of 0.00637%, but its final inner residuals did not meet the recorded tolerance at every update (Table 13). The local replay contained repeated large residual bursts. Records were unavailable for the final 233 adaptive updates, so those updates were not counted as tolerance passes.
+
+*Table 13. Inner-film residual checks over the available combined-history records. A pass requires the final film-thickness and both film-momentum residuals to be at or below $10^{-5}$. Percentages use only the available updates in each segment; they are not steady-state criteria.*
+
+| Segment | Available film updates | Updates meeting all final tolerances | Reported pass fraction (%) |
+| --- | ---: | ---: | ---: |
+| Original accretion-enabled film case, fixed 10 µs | 8000 | 1957 | 24.46 |
+| Corrected contact restart, fixed 1 µs | 4000 | 3807 | 95.17 |
+| Selected local replay, fixed 1 µs | 16,000 | 14,717 | 91.98 |
+| Adaptive continuation with subiteration records | 11,787 | 10,526 | 89.30 |
+
+A local film-step comparison restarted from identical fields saved at iteration 13390 at 75.662 ms and advanced each arm by 2.5 ms of accepted film time. Bulk fields were held fixed and the alternative implicit film algorithm was used in all arms. The 20 µs candidate met the declared local screen against the 2.5 µs reference, whereas the 25 µs candidate exceeded the 0.1% ledger limit (Table 14). Both candidates closely matched the reference fields. Appendix A.9 defines the algorithms, normalisations, finite-field restrictions and recovery limits used in this screen.
+
+*Table 14. Local film-step assessment from the same fields saved at iteration 13390 to 78.162 ms. Field differences are relative to the 2.5 µs reference. Ledger errors use integrated film input. Thresholds were declared for this local screen; they are not universal CFD acceptance limits.*
+
+| Assessment quantity | Local limit | 20 µs candidate | 25 µs candidate |
+| --- | ---: | ---: | ---: |
+| Mass-distribution L1 difference (%) | ≤1 | 0.00285 | 0.00757 |
+| Film-mass-weighted velocity difference (%) | ≤2 | 0.00207 | 0.00343 |
+| Difference in maximum thickness (%) | ≤2 | 0.000115 | 0.000150 |
+| Drainage difference / accretion (%) | ≤1 | 0.00283 | 0.00364 |
+| Candidate film-ledger error (%) | ≤0.1 | 0.04743 | 0.13391 |
+| Reference film-ledger error (%) | ≤0.1 | 0.00958 | 0.00958 |
+| Peak film Courant number | ≤1 recovery bound | 0.96675 | 0.63710 |
+| Local screen | All field, ledger and recovery checks met | Pass | Fail: ledger |
+
+The mass L1 measure summed absolute per-face mass differences and divided by total reference film mass. The reference inventory grew from 3.8635 to 3.9176 kg, so most of that mass was present at restart. The small percentage therefore did not quantify relative error in the newly accumulated mass. The comparison demonstrated local agreement with a conservative reference over 2.5 ms; it did not establish timestep independence for later developed film or the 500 ms endpoint.
+
+The alternative implicit film solver did not expose inner residuals in these later tests. Its updates therefore have no recorded tolerance-pass assessment. The selected evidence contains implementation checks, a local film-step comparison and continuing film storage, but no completed matched mesh-convergence assessment or comparison against field measurements. Qualified separation-efficiency and pressure-loss predictions are not reported.
+
+<!-- Evidence: [combined-history residual checks](../../experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/case-history-N45606.md#ewf-residuals), [shortened-startup source audit](../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/results.md#film-evidence-and-numerical-limits), [matched-time film-step assessment](../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/film-development/results.md), [local screen criteria](../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/film-development/setup.md), [20 µs comparison JSON](../../../PyAnsys/output/phase72a-stage3-film-development-server1/20261005/mid-film-sensitivity-20us.json) and [25 µs comparison JSON](../../../PyAnsys/output/phase72a-stage3-film-development-server1/20261005/mid-film-sensitivity-25us.json). -->
 
 ### 4.9. Separate reconstruction results remain provisional
 
-The F0–F4 series reconstructed numerical, inlet, droplet and film changes on a common coarse mesh, with the absorber disabled. The following F0–F2 observations are retained provisionally while revised cases are assessed. They are separate from the main absorber-development results. The comparison procedures are defined in Section 3.6 and Appendix A.2.
+The absorber-off reconstruction calculations provide a separate comparison of inlet placement and numerical settings. Table 15 retains the existing observations for the three inlet/solver reconstruction cases at nominal 26.81 m/s. All three used 60,964 cells and the same total feed. The mixed-inlet SIMPLE and mixed-inlet Coupled reconstructions changed the numerical package. The mixed-inlet and split-inlet Coupled reconstructions changed phase placement while retaining that package. Their procedures are defined in Section 3.6 and Appendix A.2.
 
-At N10,000, the reference-speed F0 centre cut shows a broad liquid-rich wall region, while the historical 08b cut is mostly at low liquid fraction with thinner wall enrichment. The views use a common 0–1 contour range. The comparison includes different meshes and inlet representations; 08b uses split feed and F0 mixed feed. No aligned N10,000 inventory and balance comparison for 08b is presented here. ([Saved native views](../../meetings/Poster/poster-sections/mesh-and-volume-fraction-comparison.md))
-
-*Provisional reconstruction values at nominal 26.81 m/s. Inventory is the N10,000 endpoint; outlet/feed is the N9,500–10,000 mean. All three cases use 60,964 cells and no absorber.*
+*Table 15. Provisional reference-speed reconstruction results with no absorber. Inventory is the endpoint at iteration 10,000; outlet/feed is the reported mean over iterations 9500–10,000. Ratios describe outward Eulerian liquid flow relative to supplied liquid, rather than qualified separation efficiency.*
 
 | Case | Inlet and numerical package | Bulk-liquid inventory (kg) | Outward steam-outlet liquid / liquid feed (%) |
 | --- | --- | ---: | ---: |
-| F0 | Mixed; SIMPLE, pseudo-time off, second-order $k$ | 6576.7 | 360.424 |
-| F1 | Mixed; Coupled/Global Time Step, first-order $k$ | 1262.6 | 99.671 |
-| F2 | Split; Coupled/Global Time Step, first-order $k$ | 1734.5 | 99.404 |
+| Mixed-inlet SIMPLE reconstruction | Mixed; SIMPLE, pseudo-time off, second-order $k$ | 6576.7 | 360.424 |
+| Mixed-inlet Coupled reconstruction | Mixed; Coupled/Global Time Step, first-order $k$ | 1262.6 | 99.671 |
+| Split-inlet Coupled reconstruction | Split; Coupled/Global Time Step, first-order $k$ | 1734.5 | 99.404 |
 
-F0's reported outlet ratio exceeds 100%, with a mean absolute mixture boundary gap of 153.14% of total feed over the final window. F1 and F2 retain different liquid inventories, while both report outlet liquid close to the supplied liquid rate. These values require their numerical context and do not establish separation efficiency. ([F0/F1 results](../../experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f0-simple/results.md); [F2 results](../../experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f2-split-inlet/results.md))
+The mixed-inlet SIMPLE reconstruction reported outlet liquid well above the supplied liquid rate, together with a mean absolute mixture boundary gap of 153.14% of total feed over the final window. The mixed-inlet and split-inlet Coupled reconstructions retained different inventories, while both outlet ratios were close to 100%. The numerical-package comparison does not isolate pressure–velocity coupling from pseudo-time and discretisation changes.
 
-[RESULTS TO UPDATE: select the matched field figure and replace or retain these values after assessing the new SIMPLE and mesh comparisons. Preserve the completed reporting windows and numerical limitations. Detailed F3/F4 comparisons remain deferred.]
+At iteration 10,000, the saved mixed-inlet SIMPLE reconstruction centre cut showed a broad liquid-rich wall region, whereas the historical tetrahedral-mesh reference cut was mostly at low liquid fraction with thinner wall enrichment. These views used a common 0–1 contour range, but the mesh, inlet representation and preparation differed. No aligned inventory and balance comparison for the historical reference is presented here. The contours therefore document different saved liquid states without establishing a mesh effect or greater physical accuracy. Detailed droplet-coupling and wall-film reconstruction comparisons remain outside the selected results.
+
+<!-- Evidence: [mixed-inlet numerical-package results](../../experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f0-simple/results.md), [split-inlet Coupled reconstruction results](../../experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f2-split-inlet/results.md) and [saved native mesh and liquid views](../../meetings/Poster/poster-sections/mesh-and-volume-fraction-comparison.md). Reassess these provisional values when the revised SIMPLE and mesh comparisons are complete; no new reconstruction or mesh qualification is claimed in this revision. -->
