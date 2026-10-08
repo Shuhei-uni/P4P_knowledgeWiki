@@ -1,8 +1,33 @@
 phase_id: phase-07-2a-wall-liquid-routing
-current_server1_state_owner: stage4_replacement_parent_server1
+current_server1_state_owner: stage4_staged_finalisation_server1
+stage4_staged_finalisation_server1:
+  authority: human_20261008_implement_and_run_original_N8000_60k_laptop_active
+  status: EXTERNAL_GUI_OR_SESSION_ACCESS_BLOCK
+  server_id: '1'
+  native_cells: 60964
+  status_owner: PyAnsys/output/phase72a-stage4-staged/20261008/run-manifest.json
+  setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/staged-finalisation/setup.md
+  results: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/staged-finalisation/results.md
+  launch: PyAnsys/output/phase72a-stage4-staged/20261008/launch.json
+  parent_native_iteration: 8000
+  parent_identity: ORIGINAL_auto-8000-1-08000_case_data_hash_verified
+  preserved_previous_native_iteration: 17000
+  requires_laptop_for_transitions: true
+  requires_laptop_for_supervision: true
+  first_screen_added_film_time_s: 0.050
+  runner_pid: 5640
+  watcher_pid: 5754
+  verified_native_end: 9020
+  verified_film_clock_s: 0.0007439999999998785
+  active_target: 10020
+  observed_unverified_native_iteration: 9195
+  runner_alive: false
+  watcher_alive: false
+  recovery_owner: PyAnsys/output/phase72a-stage4-staged/20261008/session-access-recovery.json
+  next_decision: RESTORE_SESSION_ACCESS_AND_PRESERVE_LIVE_PARTIAL_FIELDS_BEFORE_CONTINUATION
 stage4_replacement_parent_server1:
   authority: human_20261008_resume_in_scope_native_bulk_continuation
-  status: RUNNING_NATIVE_TUI
+  status: COMPLETE_CHECKPOINT_VERIFIED_PRESERVED_BEFORE_STAGED_N8000_RESTART
   server_id: '1'
   status_owner: PyAnsys/output/phase72a-stage4-replacement/20261008/run-manifest.json
   setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/replacement-parent/bulk-hold-N13000-N17000/setup.md
@@ -20,18 +45,18 @@ stage4_replacement_parent_server1:
   direct_film_drain_tau_s: 0.0015
   preservation: Previous N48483 pair retained and server hashes verified
   decision: KEEP_BULK_ACTIVE_LATE_COLLECTOR_AND_OUTLET_TRENDS
-  verified_native_end: 13000
-  verified_film_clock_s: 0.005642000000000347
+  verified_native_end: 17000
+  verified_film_clock_s: 0.009641999999999292
   first_response_added_film_time_s: 0.001
   expected_extension_film_time_s: 0.004
-  server_idle: false
-  active_target: 17000
+  server_idle: true
+  active_target: null
   new_bulk_solve_submitted: true
   first_response_updates_verified: 1000
-  extension_updates_verified: 0
+  extension_updates_verified: 4000
   direct_film_drain_functional_proof: FROZEN_BULK_DIRECT_FILM_REMOVAL_VERIFIED
   diagnostic_updates: 220
-  live_session_state: NATIVE_TUI_RUNNING
+  live_session_state: PRESERVED_HISTORY_STAGED_RUN_NOW_OWNS_SERVER1
   observed_native_iteration: 13001
   completed_hold_result: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/replacement-parent/bulk-hold-4000/results.md
   cumulative_bulk_updates_verified: 5000
@@ -40,6 +65,24 @@ stage4_replacement_parent_server1:
   requires_laptop_for_solve: false
   external_block: null
   observation_owner: PyAnsys/output/phase72a-stage4-replacement/20261008/continuation-startup-monitor.json
+  next_decision: NONE_PRESERVED_PRIOR_ENDPOINT
+  speed_review: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/replacement-parent/film-speed-review.md
+stage4_staged_finalisation_plan:
+  authority: human_20261008_staged_method_planning_and_50ms_first_screen
+  status: EXECUTING_60K_OTHER_MESHES_PLANNED
+  setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/staged-finalisation/setup.md
+  first_screen_added_film_time_s: 0.050
+  film_time_origin: RESTORED_PRODUCTION_STATE_AFTER_COMPLETE_CONFIGURATION_PROOF
+  stages: [stable_bulk_parent, complete_settings_and_drain_proof, active_bulk_film_adjustment, frozen_bulk_film_development, active_bulk_final_check, paired_endpoint_verification]
+  proposed_bulk_gate_windows: 3
+  proposed_bulk_gate_window_updates: 1000
+  timestep_policy: CONTINUOUS_1_2_5_10US_LADDER_WITH_CONDITIONAL_OPERATING_GATES_NO_COMPARISON_RESTART
+  larger_mesh_step_s: null
+  final_bulk_equations: ACTIVE
+  final_label: DEVELOPED_FILM_CHECKPOINT_AT_DECLARED_AGE
+  mesh_speed_cause: UNPROVEN_HYPOTHESIS
+  new_production_solve_submitted: true
+  existing_journal_state_owner: stage4_replacement_parent_server1
 stage4_core_development_server1:
   authority: human_20261008_keep_running_server1
   status: COMPLETE_CHECKPOINT_VERIFIED_ACCURACY_UNQUALIFIED

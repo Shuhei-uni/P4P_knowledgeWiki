@@ -24,7 +24,8 @@ These may be invoked explicitly or reached naturally from active work:
 
 ## Model-invoked workflows
 
-- `pyansys-workflow` — Fluent implementation/execution, including native
+- `pyansys-workflow` — Fluent implementation/execution, command-order and timing
+  review before execution, and prompt code repair after errors; includes native
   [Replace Mesh](skills/pyansys-workflow/references/replace-mesh.md) when reusing
   an existing setup on a new mesh.
 - `cfd-numerical-analysis`

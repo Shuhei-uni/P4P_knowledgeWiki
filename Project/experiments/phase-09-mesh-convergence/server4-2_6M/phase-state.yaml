@@ -1,10 +1,10 @@
 server_id: "4"
 mesh: "2_6M"
-status: "N4750_VERIFIED_RAMP_RESUMING"
+status: "RAMP_RUNNING"
 verified_native_end: 4750
 latest_paired_iteration: 4750
-film_elapsed_time_s: 0.000317
-controller_pid: 98747
+active_target: 4760
+controller_pid: 99123
 all_bulk_equations_active: true
 requires_mac_and_network: true
 never_exit_or_restart_fluent: true

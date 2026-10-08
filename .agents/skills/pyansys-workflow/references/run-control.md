@@ -22,9 +22,12 @@ new native readers on a tiny known file with a finite bound in a recoverable
 child. Prefer a simple journal for a fixed horizon; add native decision logic
 only when the experiment requires it.
 
-During maintenance of an active run, stage runtime changes without editing its
-controller, watcher, imported dependencies or machine records. Deploy after
-reconciling the idle session and latest endpoint. The hash-guarded
+When an active run exposes a code error, prepare and verify the fix promptly in
+staged working code. Keep the running controller, watcher, imported dependencies
+and machine records stable while their state is reconciled. Deploy the reviewed
+fix once the controller and Fluent session are confirmed idle and the latest
+valid endpoint is preserved; verify the host uses the patched code before
+relaunch. The hash-guarded
 [staged update](../../../../PyAnsys/workflow_updates/20261008/README.md) is an
 offline implementation for subsequent launches, not an instruction to restart
 current work.

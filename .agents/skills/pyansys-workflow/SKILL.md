@@ -32,6 +32,37 @@ Prefer live Settings/API inspection over remembered paths. Reacquire objects
 after upstream model/topology changes. A successful setter call is not proof:
 read back the state that matters.
 
+## Review code before execution
+
+Before a build, launch, continuation, or retry, review the actual code/journal
+that will run on the Fluent host. Reuse review evidence for unchanged code and
+prerequisites; review each changed path and its affected callers again.
+
+1. Trace the executed path step by step: entry point, helpers, command delivery
+   to Fluent, state changes, solve, checkpoint, and completion. Include controller
+   and watcher interactions when used.
+2. For each Fluent command, verify version support, arguments, units, names,
+   required starting state, and expected readback. Check dependency order from
+   case loading and model activation through initialization or continuation,
+   instrumentation, solving, and saving.
+3. Check timing: blocking versus asynchronous calls, completion acknowledgements,
+   timeouts, polling, scheduled input changes, and checkpoint timing. Wait for
+   verified completion before a dependent command; use state evidence rather
+   than an arbitrary sleep. Keep one command owner per session so controllers,
+   watchers, and retries cannot send conflicting mutations during a solve.
+4. Check error paths: preserve the original exception/transcript, detect failed
+   commands and missing outputs, and prevent dependent work after a failed step.
+   Before replaying a command, establish whether it already took effect.
+5. Use the smallest relevant offline check and one bounded live smoke check for
+   new or changed Fluent behavior. Follow the selected branch's verification
+   rules; account for smoke iterations in the requested horizon.
+
+Complete the review only when each executed command has verified prerequisites,
+order, timing, and a way to check its result. Put a concise review outcome,
+code identity, and unresolved execution risks in the existing build/run receipt.
+
+## Execution evidence and repair
+
 For every child case preserve:
 
 - exact parent identity;
@@ -42,10 +73,21 @@ For every child case preserve:
 - smoke-test / instrumentation evidence;
 - terminal run evidence.
 
-Configuration or coding errors are recoverable implementation failures. Inspect,
-research, repair, restart/recreate a recoverable child/session when authorized,
-and try again. Do not mark the scientific candidate failed because setup code
-was wrong.
+On a detected configuration or coding error, begin repair promptly: capture the
+failed command, error, and current Fluent state; identify the cause; patch the
+working implementation in `PyAnsys/`; then review and verify the affected path
+before retrying. Apply the verified patch on the execution host as well. A fix
+is complete only when the failed operation and its dependent steps succeed with
+the required readback/artifacts. Preserve original evidence, including `raw/`.
+
+Follow [run control](references/run-control.md) for safe deployment when a
+controller/session is still active. Reconcile its progress and preserve the
+latest valid endpoint before restart/recreate under the phase authority. A
+timeout alone does not justify replaying a solve. If the same error recurs,
+inspect new evidence and revise the fix or use another verified route; avoid
+unchanged retries. Continue in-scope recovery without routine human approval;
+record a durable external block when required resources remain unavailable.
+Do not mark the scientific candidate failed because setup code was wrong.
 
 ## Fallbacks
 
