@@ -1,0 +1,46 @@
+{
+  "run_manifest": "PyAnsys/output/phase72a-stage4-core-development/20261008/core17/run-manifest.json",
+  "block_manifest": "PyAnsys/output/phase72a-stage4-core-development/20261008/core17/run-N43483-N48483/run-manifest.json",
+  "paired_endpoint": {
+    "case": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase72A\\Stage4\\core-development-20261008\\core17\\run-N43483-N48483\\final-N48483.cas.h5",
+    "data": "C:\\Users\\syok443\\Documents\\FluentRuns\\Phase72A\\Stage4\\core-development-20261008\\core17\\run-N43483-N48483\\final-N48483.dat.h5",
+    "native_iteration": 48483,
+    "case_sha256": "6da9e3b3f304d317e6ed59bae1fd942149b6a806b90c2a27212ae22a8cf5f135",
+    "data_sha256": "32d95e35a0218d426ace8fce513c5bfbdc6d3b6ec45d6362a6482fb7c67adc63"
+  },
+  "source_sha256": {
+    "p72d-lower-stripped.out": "1408dd16a1f0828de5ed8604fbc8202df551d017c982e923e7ffa786027c54fb",
+    "p72d-total-mass.out": "a526be6fc4721f4c5a9fbb40d83aa13268390d1111aad17076a2e45f0a69fe97",
+    "p72a-e2.7-ewf-velocity-mag-max.out": "bc4f8f65c9d7e7010bc416ac66091570af587f095423c9eab75844bb7b15bdad",
+    "solve.trn": "ee1c19d02cad9d1c8eea905ccddffa7ae2bc4132140d5ee335f5c5bf6269385a",
+    "p72d-upper-mass.out": "e7b24de7a3737a90f7af7319acce4acee0dfaf0d255e23af039ec6f0818636c6",
+    "p72d-lower-dpm.out": "c45d8d4a5d4e412e904e993e8d51efd7dd766773dfcc7c8995fdde1ed13ed449",
+    "p72d-total-secondary.out": "71dc7af7d27a02081ef4bf51c58ddf4620c66c90ab17e2ce2d40a17d1f3d8e74",
+    "p72d-lower-secondary.out": "e217e3d13ac68b49b99276aa0bcbfeaedd30d51dc6af7a08a11d7488975e0ded",
+    "native-status.scm": "3058e41012e55da9d22f5190da4fa50cd3462d72f42e53901bc746d244f3aad0",
+    "p72d-lower-mass.out": "0de6820886742038f4570b058a7592563b40214947c5201a016356373132fa94",
+    "p72d-drain-rate.out": "897fd6ecd2b7161ce03b9d30213fda74b07a559ea0b91f2f891fa5227e094334",
+    "p72d-lower-outflow.out": "2cd7ebc3b0ed7a8b7a8c3c9d4573da39cd8bbe820db2c72b9d92cb8a6c7b7da6",
+    "p72d-total-stripped.out": "a600800daa234349ce09fac22002cc3671fd27e3e7662835dac64cdf43269394",
+    "p72d-total-separated.out": "92b10f4d79b4f83746779bfae7e619ce0a6d9775b2c3ba4fa3e930a3dc0acb96",
+    "p72d-lower-separated.out": "9ef4382c4ddbc6c14a86e8dc9f794ba18d9862e62caf0803ac901ab711f18ecc",
+    "p72d-total-dpm.out": "58dfda15cf729faef2438f2297805092ce4fea47fd6efba00f9df7818aaaf532",
+    "p72d-total-thickness.out": "91f99a2b2b9b114ef278520f8e2a1443ab681ce09de2dd9d66bf5af2965b226c",
+    "p72d-total-courant.out": "798516e3387599a3fc3bc554c0c21e7dbab8990cd50ad668dbe26a497ebbb1dd",
+    "p72d-total-outflow.out": "b4f7b4e07897fc902cd133c4a81feafb8de2355958e3e6b741ce64d5dc347cc4"
+  },
+  "analysis_owner": "PyAnsys/scripts/analysis/analyze_phase72a_stage4_analytical.py::block",
+  "analysis_owner_sha256": "065fb65c9b823150848e6889f879bc10422fff1dc0fd311e10362493bf460b11",
+  "units": {
+    "x": "ms of added accepted film time",
+    "mass": "kg",
+    "speed": "m/s"
+  },
+  "processing": "Raw per-update native signals; no smoothing; baseline from exact initial report readback",
+  "window": {
+    "native_start": 43483,
+    "native_end": 48483,
+    "updates": 5000,
+    "duration_s": 0.05
+  }
+}

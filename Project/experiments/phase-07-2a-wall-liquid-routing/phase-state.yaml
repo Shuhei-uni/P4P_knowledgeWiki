@@ -1,16 +1,66 @@
 phase_id: phase-07-2a-wall-liquid-routing
-current_server1_state_owner: stage4_core_development_server1
+current_server1_state_owner: stage4_replacement_parent_server1
+stage4_replacement_parent_server1:
+  authority: human_20261008_resume_in_scope_native_bulk_continuation
+  status: RUNNING_NATIVE_TUI
+  server_id: '1'
+  status_owner: PyAnsys/output/phase72a-stage4-replacement/20261008/run-manifest.json
+  setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/replacement-parent/bulk-hold-N13000-N17000/setup.md
+  results: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/replacement-parent/bulk-hold-N13000-N17000/results.md
+  parent_native_iteration: 13000
+  original_supplied_parent_iteration: 8000
+  parent_film_clock_s: 0.005642000000000347
+  requested_bulk_updates: 4000
+  target_native_iteration: 17000
+  mandatory_models: [eulerian_wall_film, phase_accretion]
+  film_momentum_method: full_momentum_equation
+  film_step_s: 0.000001
+  bulk_equations: ACTIVE
+  flow_momentum_coupling: false
+  direct_film_drain_tau_s: 0.0015
+  preservation: Previous N48483 pair retained and server hashes verified
+  decision: KEEP_BULK_ACTIVE_LATE_COLLECTOR_AND_OUTLET_TRENDS
+  verified_native_end: 13000
+  verified_film_clock_s: 0.005642000000000347
+  first_response_added_film_time_s: 0.001
+  expected_extension_film_time_s: 0.004
+  server_idle: false
+  active_target: 17000
+  new_bulk_solve_submitted: true
+  first_response_updates_verified: 1000
+  extension_updates_verified: 0
+  direct_film_drain_functional_proof: FROZEN_BULK_DIRECT_FILM_REMOVAL_VERIFIED
+  diagnostic_updates: 220
+  live_session_state: NATIVE_TUI_RUNNING
+  observed_native_iteration: 13001
+  completed_hold_result: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/replacement-parent/bulk-hold-4000/results.md
+  cumulative_bulk_updates_verified: 5000
+  verified_four_thousand_hold_updates: 4000
+  native_autosave_interval_updates: 1000
+  requires_laptop_for_solve: false
+  external_block: null
+  observation_owner: PyAnsys/output/phase72a-stage4-replacement/20261008/continuation-startup-monitor.json
 stage4_core_development_server1:
   authority: human_20261008_keep_running_server1
-  status: NATIVE_5000_UPDATE_CONTINUATION_SUBMITTED
+  status: COMPLETE_CHECKPOINT_VERIFIED_ACCURACY_UNQUALIFIED
   server_id: '1'
   status_owner: PyAnsys/output/phase72a-stage4-core-development/20261008/core17/run-manifest.json
   setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/core-development/setup.md
   results: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/core-development/results.md
-  server_idle: false
+  server_idle: true
   parent_native_iteration: 43483
   parent_film_clock_s: 0.4081843386354826
-  verified_native_iteration: 43483
+  verified_native_iteration: 48483
+  verified_film_clock_s: 0.4581843386355326
+  verified_updates: 5000
+  verified_added_film_time_s: 0.05
+  original_ledger_error_percent: 1.080888372472455
+  film_storage_increase_kg: 3.857414989606081
+  direct_film_drain_kg: 1.861219857901919
+  peak_courant: 0.04249930381774902
+  peak_thickness_m: 0.002256095409393311
+  peak_reported_film_speed_m_s: 649.0739135742188
+  solve_wall_time_s: 2181.4089
   target_native_iteration: 48483
   target_film_clock_s: 0.4581843386354826
   submitted_updates: 5000
@@ -28,8 +78,8 @@ stage4_core_development_server1:
   native_guard_interval_updates: 1000
   native_autosave_interval_updates: 5000
   paired_endpoint_save: HORIZON_OR_GUARD_REJECTION
-  latest_live_query_status: UNRESOLVED_DEADLINE_EXCEEDED_12_SECONDS
-  latest_live_query_utc: '2026-10-08T01:43:01.628337+00:00'
+  latest_live_query_status: IDLE_CONFIRMED
+  latest_live_query_utc: '2026-10-08T02:20:02.829381+00:00'
   monitoring: PASSIVE_TRANSCRIPT_ONLY_DURING_SOLVE
   execution: FLUENT_NATIVE_SCHEME_TUI
   requires_laptop_for_solve: false

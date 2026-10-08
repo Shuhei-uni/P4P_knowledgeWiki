@@ -35,8 +35,8 @@ host_active_phase9_workers: 0
 next_controller_route: desktop_connection_with_live_client_transcript
 desktop_controller_receipt: PyAnsys/output/phase9-mesh-convergence/20261007/desktop-controller.json
 desktop_must_remain_running: true
-active_mesh: 680k
-active_stage: full-feed-hold
+active_mesh: 997k
+active_stage: ramp
 human_pause_iteration: 3800
 human_pause_record: PyAnsys/output/phase9-mesh-convergence/20261007/human-pause.json
 resume_requires_explicit_human_instruction: false
@@ -65,7 +65,7 @@ hold_limit_authority: human_20261007_loosen_pass_limits
 hold_limit_controller_update: PyAnsys/output/phase9-mesh-convergence/20261007/pending-controller-update.json
 latest_recovery: preserve_failed_N9519_restore_verified_N9080
 latest_recovery_evidence: PyAnsys/output/phase9-mesh-convergence/20261007/60k-N9519-failure-recovery.json
-completed_preparation_meshes: [60k, 342k]
+completed_preparation_meshes: [60k, 342k, 680k]
 accepted_60k_endpoint: N8080
 accepted_60k_selection: human_selected_existing_saved_N8080_pair
 native_transcript_script_fix: one_start_stop_pair_with_failure_cleanup
@@ -82,3 +82,5 @@ native_handover_experiment: CANCELLED
 server3_mesh_order: [60k, 342k, 680k, 997k]
 server4_mesh_order: [2_6M]
 laptop_resume_recovery: PyAnsys/output/phase9-mesh-convergence/20261007/resume-recovery-20261008.json
+
+latest_997k_pause_resume: PyAnsys/output/phase9-mesh-convergence/20261007/resume-recovery-997k-20261008.json

@@ -551,7 +551,14 @@ def native_batch_transcript(s,path):
         if not stop.is_active():
             raise RuntimeError('Native transcript start unavailable; reconcile session state')
         stop()
-    start(file_name=str(path))
+    try:
+        start(file_name=str(path))
+    except RuntimeError as exc:
+        # v252 can leave start.is_active() true while a transcript is open.
+        # This exact native response proves an inherited open transcript.
+        if 'A transcript has already been started.' not in str(exc):raise
+        s.settings.file.stop_transcript()
+        start(file_name=str(path))
     try:
         yield
     except BaseException:

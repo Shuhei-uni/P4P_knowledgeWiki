@@ -136,4 +136,11 @@ class Ordering(unittest.TestCase):
             self.assertNotIn('2_6M',result['mesh_order'])
             self.assertEqual(result['status'],'COMPLETE_PREPARATION_ONLY')
 
+    def test_inherited_transcript_recovered_when_active_flag_is_stale(self):
+        s=self.solver();s.settings.file.start_transcript.is_active.return_value=True
+        s.settings.file.start_transcript.side_effect=[RuntimeError('A transcript has already been started. Error Object: #f'),None]
+        with r.native_batch_transcript(s,'new.trn'):pass
+        self.assertEqual(s.settings.file.start_transcript.call_count,2)
+        self.assertEqual(s.settings.file.stop_transcript.call_count,2)
+
 if __name__=='__main__':unittest.main(verbosity=2)

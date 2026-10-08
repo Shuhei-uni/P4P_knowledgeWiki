@@ -12,7 +12,7 @@
 | Fleet | This chat owns Server 3 for 60k, 342k, 680k and 997k. A separate human-created chat owns Server 4 for 2.6M only. See the machine server-assignment record. |
 | Continuous supervision | Human instruction, 7 October: monitor controller and Server 3 without waiting for manual idle reports. Read local evidence every 30 s; finite health check every 5 min. Trigger the originating chat for a stopped controller, 3 min without transcript/log progress, or preparation completion. A timeout alone does not prove a failed or idle solver. |
 | Notifications | Quiet during normal progress; notify on a meaningful change, completion, failure, or required human input. Mechanical recovery stays within the existing envelope and never exits or restarts Fluent. |
-| Current human control | Human resumed after laptop pause, 8 October. Completed 680k N6080→N7080 horizon recovered after old-client keepalive timeout; paired N7080 save/reopen verified. Fresh Server 3 controller resumes N7080 and excludes 2.6M; supervision active. No Fluent exit/restart or repeated completed solve. |
+| Current human control | Human resumed the 997k ramp after laptop pause. Saved N3620 pair reopened and verified before a fresh controller launch; completed N3610→N3620 segment not repeated. Server 3 remains allocated through 997k; supervision active; no Fluent exit/restart. |
 | Monitoring dependency | macOS launch agent restarts the watcher if it exits. Mac and network must remain available; an awake guard runs while the watcher runs. |
 | Previous endpoint | Preserve before replacement; never terminate Server 1 or its campaign |
 | Input owner | Supplied mesh files in CAD PurnantoV2; keep unchanged |

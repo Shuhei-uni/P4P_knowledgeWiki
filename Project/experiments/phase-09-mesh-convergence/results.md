@@ -3,7 +3,7 @@
 | Question | Current result |
 | --- | --- |
 | Phase started | Human envelope recorded; input audit complete |
-| Meshes solved under Phase 9 | 60k prepared; selected final N8080. 342k preparation passed at N8580. 680k restored at verified N7080 after laptop pause; full-feed holds continue. 997k follows on Server 3; 2.6M belongs to Server 4. |
+| Meshes solved under Phase 9 | 60k selected final N8080; 342k passed at N8580; 680k passed at N9080. 997k ramp resumed from saved/reopened N3620 after laptop pause. 2.6M belongs to the separate Server 4 chat. |
 | Common template | Provisional Stage 4 settings; low-feed A bulk fields unchanged; dry film; save/reopen passed |
 | 342k collector mapping | Native cell split and entry/wall topology verified; legacy replacement input saved |
 | Transfer failure | Native Replace Mesh crashed Fluent with SIGSEGV; scientific experiment untested |
@@ -14,7 +14,7 @@
 | Coordinate scale | 342k file uses metre-sized coordinates; other four use millimetre-sized coordinates |
 | Wall identity | Fine meshes split original wall into vessel/inlet components; physical mapping required |
 | Native mesh scale/quality | 342k: metre extents and native mesh check passed; other meshes pending |
-| Current action | Continue 680k full-feed holds from N7080, then prepare/run 997k. Server 3 excludes the 2.6M mesh. |
+| Current action | Continue 997k inlet ramp to N5080, then full-feed holds. Latest pause/resume pair N3620 verified; completed ramp updates not repeated. See [resume proof](../../../PyAnsys/output/phase9-mesh-convergence/20261007/resume-recovery-997k-20261008.json). |
 | Approved retained controls | Two smoothing passes, current reference values and current DPM tracking controls; no separate tracking pass |
 | Bulk correction proof | Corrected common source and 342k saved/reopened with surface tension ON at exact 08b coefficient, compressibility flag ON and drag-modification flag ON |
 | Legacy interaction | Human approved stored `none` as an inactive Mixture legacy exception |

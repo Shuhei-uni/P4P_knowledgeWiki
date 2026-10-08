@@ -53,3 +53,11 @@
 | Pair proof | Preserved N3580 case/data hashes match; fields/setup/methods/bulk settings/clock pass reopen |
 | Recovery evidence | [Verified recovery](../../../../PyAnsys/output/phase9-mesh-convergence-server4/20261007/low-hold-recovery-1791405772079458000/recovery-terminal.json) |
 | Continuation | Server 4 controller relaunched from N3580; approved 10-update ramp spacing; watcher active |
+
+| Human pause and resume | Verified outcome |
+| --- | --- |
+| Pause | Native iteration interrupted; local case/data writes returned at N4750; save readback skipped at the user’s request |
+| Resume verification | N4750 idle; last 10 ramp updates complete; all 34 histories finite through N4750; pause pair hashed and reopened; fields/setup/methods/bulk/clock checks PASS |
+| Paired endpoint | N4750; film elapsed time 0.317 ms |
+| Controller | Suspended laptop controller retired; fresh Server 4 controller launched; watcher and awake guard restored |
+| Recovery receipt | [N4750 resume proof](../../../../PyAnsys/output/phase9-mesh-convergence-server4/20261007/pause-recovery-1791438670772294000/recovery-terminal.json) |
