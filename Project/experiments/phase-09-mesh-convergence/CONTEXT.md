@@ -8,6 +8,8 @@
 | Current authorized work | Prepare and run all five meshes through the Stage 4 startup method to a full-feed hold |
 | Endpoint boundary | Bulk equations remain active; save paired full-feed endpoints |
 | Deferred work | Bulk freeze, EWF-only continuation, final EWF settings and final mesh-convergence qualification |
+| EWF planning decision | Shuhei, 9 October 2026: [EWF Plan v1](ewf-plan-v1.md); compare at 200 ms total film age, accept continued growth and treat film mass as an output; stability first, speed second |
+| EWF plan authority | Record the plan only; no new solve or settings change authorized by this writing request; numerical candidates require qualification |
 | Session control | Human instruction: never exit Fluent; human controls restarts. No agent exit/termination commands. Further model-switch compatibility probes are excluded from this preparation route. Server 3 restarted; preserved Mixture pair restored. |
 | Fleet | This chat owns Server 3 for 60k, 342k, 680k and 997k. A separate human-created chat owns Server 4 for 2.6M only. See the machine server-assignment record. |
 | Continuous supervision | Human instruction, 7 October: monitor controller and Server 3 without waiting for manual idle reports. Read local evidence every 30 s; finite health check every 5 min. Trigger the originating chat for a stopped controller, 3 min without transcript/log progress, or preparation completion. A timeout alone does not prove a failed or idle solver. |

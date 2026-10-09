@@ -53,6 +53,12 @@ class PolicyTests(unittest.TestCase):
             self.assertAlmostEqual(d['iters-per-dpm-step']*block.dt, 20e-6)
             self.assertLessEqual(block.dt/.0015, .01)
         with self.assertRaises(ValueError): p.refresh_plan(20e-6)
+        # A separately qualified particle interval changes tracking cadence,
+        # while film/drain refresh remains one update per flow iteration.
+        d = p.refresh_plan(10e-6,200e-6)
+        self.assertEqual(d['iters-per-dpm-step'],20)
+        self.assertEqual(d['sub-time-steps'],1)
+        self.assertEqual(d['film-per-flow-iters'],1)
 
     def test_bulk_gate_requires_three_complete_windows(self):
         self.assertFalse(p.bulk_gate([window(),window()],116.92,1)['pass'])
@@ -88,11 +94,37 @@ class PolicyTests(unittest.TestCase):
         h['p72d-total-thickness'][8001] = .3
         self.assertIn('THICKNESS_LIMIT',p.assess_block(text,h,initial,8000,1000,1e-6,0)['failures'])
 
+    def test_verified_net_source_basis_retains_original_and_detects_storage_error(self):
+        text,h,initial = evidence()
+        # Separation has already reduced the supplied net source. Adding its
+        # release counter again is rejected under the default gross basis.
+        h['p72d-total-separated'][9000] = 2e-5
+        self.assertIn('FILM_LEDGER_OPERATING_LIMIT',
+                      p.assess_block(text,h,initial,8000,1000,1e-6,0)['failures'])
+        a = p.assess_block(text,h,initial,8000,1000,1e-6,0,
+                           ledger_basis='verified-v252-net-secondary')
+        self.assertTrue(a['pass'])
+        self.assertAlmostEqual(a['original_ledger_residual_kg'],2e-5)
+        h['p72d-total-mass'][9000] += 2e-5
+        self.assertIn('FILM_LEDGER_OPERATING_LIMIT',p.assess_block(
+            text,h,initial,8000,1000,1e-6,0,
+            ledger_basis='verified-v252-net-secondary')['failures'])
+
     def test_recorded_inner_failure_not_hidden_by_low_courant(self):
         text,h,initial = evidence()
         text = text.replace('Film time =','sub-iteration: 30 residual - h: 0.01; u: 0.01; v: 0.01\nFilm time =')
         a = p.assess_block(text,h,initial,8000,1000,1e-6,0)
         self.assertIn('ACHIEVED_INNER_RESIDUAL_LIMIT',a['failures'])
+
+    def test_strict_candidate_requires_every_inner_step(self):
+        text,h,initial = evidence()
+        text = text.replace('Film time =','sub-iteration: 4 residual - h: 1e-8; u: 1e-8; v: 1e-8\nFilm time =')
+        text = text.replace('h: 1e-8; u: 1e-8','h: 160; u: 120',1)
+        self.assertTrue(p.assess_block(text,h,initial,8000,1000,1e-6,0)['pass'])
+        a = p.assess_block(text,h,initial,8000,1000,1e-6,0,require_all_inner=True)
+        self.assertIn('ALL_INNER_STEPS_REQUIRED',a['failures'])
+        self.assertEqual(a['inner_steps_passed'],999)
+        self.assertEqual(a['inner_convergence'],'FAILED_OR_MISSING_REQUIRED_STEP')
 
     def test_horizon_and_missing_history_rejected(self):
         text,h,initial = evidence()
@@ -124,6 +156,26 @@ class NativeBoundaryTests(unittest.TestCase):
         owner.s = Mock()
         with self.assertRaises(RuntimeError):owner.idle()
         owner.s.settings.solution.run_calculation.iterating.assert_not_called()
+
+    def test_finite_age_with_failed_bulk_gate_does_not_require_freeze(self):
+        import run_phase72a_direct_development as direct
+        owner = direct.DirectDevelopment.__new__(direct.DirectDevelopment)
+        owner.production = True
+        owner.dt = 10e-6
+        owner.m = {'target_film_clock_s': .300}
+        owner.spec = {'liquid_feed_kg_s':116.92}
+        owner.pressure_floor = 1.
+        owner.s = Mock()
+        owner.clock = Mock(side_effect=[.299,.309])
+        owner.batch = Mock(return_value={'assessment':window()})
+        owner.save = Mock()
+        owner.flush = lambda **kw: owner.m.update(kw)
+        with patch.object(direct.r.base,'native_iteration',return_value=50000):
+            owner.stabilize('C_TEST')
+        self.assertTrue(owner.m['finite_cutoff_reached_active_bulk'])
+        self.assertFalse(owner.m['bulk_stability_qualified'])
+        owner.batch.assert_called_once_with(1000,'C_TEST')
+        owner.s.settings.solution.controls.equations.set_state.assert_not_called()
 
     def test_batch_has_no_settings_or_scheme_reads_while_native_pending(self):
         with tempfile.TemporaryDirectory() as tmp:

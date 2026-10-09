@@ -139,7 +139,7 @@ class Runner:
 
     def apply_step(self, dt, fixture=False):
         self.idle()
-        changes = policy.refresh_plan(dt)
+        changes = policy.refresh_plan(dt, self.spec.get('physical_dpm_interval_s', 20e-6))
         r.setparams(self.s, changes)
         self.s.settings.solution.run_calculation.profile_update_interval = 1
         if self.production or fixture:
@@ -258,7 +258,9 @@ class Runner:
             report = r.read_text(self.s, p)
             (local / (n+'.out')).write_text(report)
             histories[n] = policy.history(report)
-        assessment = policy.assess_block(raw, histories, initial, start, count, self.dt, initial_clock, film)
+        assessment = policy.assess_block(raw, histories, initial, start, count, self.dt, initial_clock, film,
+                                         ledger_basis=self.spec.get('film_ledger_basis', 'gross-reported-sources'),
+                                         require_all_inner=self.spec.get('require_all_inner_steps',False))
         actual_clock = self.clock()
         if not math.isclose(actual_clock-initial_clock, count*self.dt, abs_tol=1e-10):
             raise RuntimeError('Native terminal film clock differs')
@@ -363,7 +365,7 @@ class Runner:
         self.idle()
         p = dict(self.s.rp_vars('wall-film/model-parameters'))
         expected = dict(self.spec['production_parameters'])
-        expected.update(policy.refresh_plan(self.dt))
+        expected.update(policy.refresh_plan(self.dt, self.spec.get('physical_dpm_interval_s', 20e-6)))
         if p != expected:
             raise RuntimeError('Full production film parameter readback differs')
         if self.s.settings.setup.cell_zone_conditions.fluid.get_state() != self.spec['original_cell_zones']:
@@ -460,16 +462,20 @@ class Runner:
         self.stabilize('A_BULK_BASELINE')
         self.configure()
         self.stabilize('C_ACTIVE_ADJUSTMENT')
+        self.develop_and_finalize()
+
+    def develop_and_finalize(self):
+        """Continue a configured, bulk-qualified child through D/E/F."""
         self.save('before-freeze-N'+str(r.base.native_iteration(self.s)))
         self.set_bulk(False)
         self.flush(stage='D_CONTINUOUS_LADDER')
         candidates = []
         previous = None
         for step in policy.LADDER:
-            self.save('before-'+str(round(step.dt*1e6))+'us-N'+str(r.base.native_iteration(self.s)))
+            self.save('before-'+f'{step.dt*1e6:g}'+'us-N'+str(r.base.native_iteration(self.s)))
             self.apply_step(step.dt)
             self.audit()
-            block = self.batch(step.count, 'ladder-'+str(round(step.dt*1e6))+'us', allow_step_rejection=True)
+            block = self.batch(step.count, 'ladder-'+f'{step.dt*1e6:g}'+'us', allow_step_rejection=True)
             a = block['assessment']
             if previous is None:
                 self.flush(frozen_production_drain_proof={'positive_direct_removal': a['direct_removal_kg'] > 0,
@@ -541,6 +547,8 @@ class Runner:
         rows = []
         for path in self.m['blocks']:
             b = json.loads(Path(path).read_text())
+            if path in self.m.get('discarded_block_paths', []) or not b['assessment']['pass']:
+                continue
             if 'fixture' in Path(path).parent.name or not any(n.startswith('p72d-') for n in b['assessment']['histories']):
                 continue
             a = b['assessment']

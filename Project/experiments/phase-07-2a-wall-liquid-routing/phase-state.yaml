@@ -1,4 +1,31 @@
 phase_id: phase-07-2a-wall-liquid-routing
+stage4_direct_development_local:
+  authority: human_20261009_stop_and_report_tests
+  status: PAUSED_BY_USER
+  host: HOME-DESKTOP-SH
+  native_cells: 60964
+  parent_native_iteration: 8000
+  startup_verified_native_iteration: 8020
+  verified_native_iteration: 36020
+  failure_evidence: PyAnsys/output/phase72a-stage4-direct/20261008/failed-baseline-recovery.json
+  target_added_production_film_time_s: 0.300
+  production_origin_film_clock_s: 0.0008439999999998268
+  target_film_clock_s: 0.30084399999999983
+  drain_source_refresh_proof: PASS_ALL_FOUR_REFRESH_STEPS
+  accepted_added_production_film_time_s: 0.035
+  paused_native_iteration: 37020
+  preserved_trial_added_film_time_s: 0.0375
+  pause_receipt: PyAnsys/output/phase72a-stage4-direct/20261008/pause-receipt.json
+  next_run_authorized: false
+  preserved_unqualified_child_native_iteration: 37020
+  film_ledger_basis: verified-v252-net-secondary
+  film_ledger_basis_proof: PyAnsys/output/phase72a-stage4-direct/20261008/net-source-accounting-proof-1791490040170489300.json
+  status_owner: PyAnsys/output/phase72a-stage4-direct/20261008/run-manifest.json
+  setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/staged-finalisation/setup.md
+  results: Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/staged-finalisation/results.md
+  remote_server1_mutated: false
+  claim: INCOMPLETE_35MS_ACCEPTED_STEADY_STATE_UNQUALIFIED
+  next_decision: AWAIT_HUMAN_RESUME
 current_server1_state_owner: stage4_staged_finalisation_server1
 stage4_staged_finalisation_server1:
   authority: human_20261008_implement_and_run_original_N8000_60k_laptop_active

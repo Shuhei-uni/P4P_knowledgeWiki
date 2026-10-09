@@ -121,7 +121,10 @@ def bulk_gate(windows, liquid_feed, pressure_floor):
     return {"pass": all(v["pass"] for v in checks.values()), "checks": checks}
 
 
-def assess_block(text, histories, initial, start, count, dt, initial_clock, film=True):
+def assess_block(text, histories, initial, start, count, dt, initial_clock, film=True,
+                 ledger_basis="gross-reported-sources", require_all_inner=False):
+    if ledger_basis not in {"gross-reported-sources", "verified-v252-net-secondary"}:
+        raise ValueError("Unknown film ledger basis")
     ids = list(range(start+1, start+count+1))
     for name, h in histories.items():
         if not set(ids).issubset(h) or not all(math.isfinite(h[i]) for i in ids):
@@ -151,11 +154,21 @@ def assess_block(text, histories, initial, start, count, dt, initial_clock, film
         supply = {n: sum(h[n])*dt for n in ["p72d-total-secondary", "p72d-total-dpm"]}
         drain = sum(h["p72d-drain-rate"])*dt
         ledger = departure + drain - sum(supply.values())
+        original_ledger = ledger
+        separated = histories["p72d-total-separated"][ids[-1]]-initial["p72d-total-separated"]
+        # Case-specific native source probes must establish this overlap before
+        # the caller selects it. Keep the original calculation in the receipt.
+        # This is a net-source consistency check, not whole-system closure.
+        if ledger_basis == "verified-v252-net-secondary":
+            ledger -= separated
         denominator = sum(abs(v) for v in supply.values())
         fraction = abs(ledger)/max(denominator, 1e-12)
         if fraction > .01 and abs(ledger) > 1e-10: failures.append("FILM_LEDGER_OPERATING_LIMIT")
         result.update(direct_removal_kg=drain, integrated_sources_kg=supply,
                       ledger_residual_kg=ledger, ledger_fraction=fraction,
+                      ledger_basis=ledger_basis,
+                      original_ledger_residual_kg=original_ledger,
+                      separated_mass_increment_kg=separated,
                       peak_thickness_m=max(h["p72d-total-thickness"]),
                       peak_speed_m_s=max(h["p72r-film-speed-max"]))
     inner = list(INNER.finditer(text))
@@ -174,9 +187,15 @@ def assess_block(text, histories, initial, start, count, dt, initial_clock, film
     good = sum(all(math.isfinite(x) and 0 <= x <= 1e-5 for x in row) for row in achieved)
     if achieved and good < .99*len(achieved):
         failures.append('ACHIEVED_INNER_RESIDUAL_LIMIT')
+    if require_all_inner and (len(achieved) != count or good != count):
+        failures.append('ALL_INNER_STEPS_REQUIRED')
     result['inner_steps_observed'] = len(achieved)
     result['inner_steps_passed'] = good
-    result["inner_convergence"] = 'PASS_RECORDED_STEPS' if len(achieved)==count and good >= .99*count else 'UNAVAILABLE_OR_INCOMPLETE_CLAIM_LIMIT'
+    result['all_inner_steps_required'] = require_all_inner
+    if require_all_inner:
+        result['inner_convergence'] = 'PASS_ALL_RECORDED_STEPS' if len(achieved)==count and good==count else 'FAILED_OR_MISSING_REQUIRED_STEP'
+    else:
+        result["inner_convergence"] = 'PASS_RECORDED_STEPS' if len(achieved)==count and good >= .99*count else 'UNAVAILABLE_OR_INCOMPLETE_CLAIM_LIMIT'
     result["failures"] = failures
     result["pass"] = not failures
     return result
