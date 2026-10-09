@@ -18,6 +18,25 @@
 | Existing preparation | [Phase 9 setup](setup.md) continues to own mesh transfer, startup and full-feed preparation |
 | Claim | Mesh sensitivity of a developing film under a declared preparation procedure; no steady-film or mesh-independence claim from reaching 200 ms |
 
+## What we want to learn
+
+| Agreed learning question | Evidence that answers it |
+| --- | --- |
+| How quickly does each mesh develop film, and does liquid reach the lower collector? | Total and lower-collector film mass versus actual film age; growth/storage rate through 200 ms |
+| Where does the collected liquid go? | Verified film budget separating storage, direct drainage, native outflow and stripping/edge release; distinguish internal returns from external removal |
+| How does the bulk respond to the EWF changes and the developed film? | Pressure drop, phase-2 liquid carryover and bulk liquid inventory during the initial adjustment and final reactivation |
+| Do the meshes predict the same film location and thickness pattern? | Matched wall-thickness views and film mass versus physical height at 200 ms; identify upper-wall accumulation and collector delivery |
+| Which outputs change materially with mesh refinement at this practical horizon? | Film mass, pressure drop, phase-2 liquid carryover and drainage versus cell count; include release/storage and final-window variation |
+
+| Metric / interpretation | Explicit definition |
+| --- | --- |
+| Carryover in this plan | **Eulerian phase-2 liquid mass flux through `steamoutlet`**, from the boundary-only report `v2-flux-phase2-steamoutlet` |
+| Plot sign and unit | **Phase-2 liquid carryover (kg/s) = - `v2-flux-phase2-steamoutlet`** under the verified native sign convention; outward flow is plotted positive. Preserve signed data; do not use absolute values or hide reverse flow |
+| Excluded from this metric | Bulk collector sources, source-inclusive outlet aliases and separately tracked DPM liquid escape |
+| Particle contribution | Report DPM escape separately if available; do not label phase-2 carryover alone as total liquid carryover across all representations |
+| Frozen-bulk interval | Held outlet flux and bulk inventory are not evolving predictions of film feedback; interpret the solved active-bulk segments |
+| Intended conclusion | A useful developing-film mesh comparison at 200 ms, with continued film growth accepted; not proof of steady film or validated separator efficiency |
+
 ## Starting state and fixed basis
 
 | Item | Requirement |
@@ -177,11 +196,74 @@ flowchart LR
 | Mesh interpretation | Compare film mass/distribution, drain/release and bulk outputs; document wall discretization, timestep and preparation differences |
 | Claim boundary | Ongoing storage is an accepted Phase 9 limitation; time-step, startup and bulk-relaxation effects must remain visible alongside mesh effects |
 
+## Reports and recording frequency
+
+| Reporting decision | Plan v1 |
+| --- | --- |
+| Basis | Select reports from the required plots and numerical checks; record locally during uninterrupted TUI solves |
+| Proven cost result | Earlier 60-to-17 report-file comparison reduced whole-command time by 29.5%, with identical common histories and endpoint fields; all retained files still used frequency 1 |
+| New proposal | 11 film quantities during frozen growth; add 7 bulk quantities while bulk equations are active. Mixed recording frequencies below are a new configuration, not a measured additional speedup |
+| Frequency unit | Native iterations, with one verified film update per iteration; raw instantaneous values, no Fluent running average |
+| Clock | Retain native iteration, accepted film-time/step transcript and segment start/end clock. Reconstruct report times from verified accepted steps, not sample index or rounded nominal time |
+| Effective cost | Disable unused report-file/plot consumers and duplicate monitors; changing file frequency alone may not stop other consumers from evaluating a definition |
+| Dependencies | Preserve report definitions used by sources, controllers or guards; do not delete them to reduce logging |
+
+| Film quantity | Canonical report / definition | Record every | Purpose |
+| --- | --- | ---: | --- |
+| Total film mass, kg | `p72d-total-mass` | 10 iterations | Growth, storage and endpoint ledger |
+| Lower collector film mass, kg | `p72d-lower-mass` | 10 iterations | Delivery to drain; upper mass = total minus lower after proving disjoint, complete wall scopes |
+| Native signed secondary-phase source, kg/s | `p72d-total-secondary` | 1 iteration | Integrate actual native source; preserve its verified net-source meaning |
+| DPM film source, kg/s | `p72d-total-dpm` | 1 iteration | Integrate collection/particle source without aliasing tracking events |
+| Direct film drain rate, kg/s | `p72d-drain-rate` | 1 iteration | Integrate external film removal; distinct from native outflow |
+| Cumulative native film outflow, kg | `p72d-total-outflow` | 10 iterations | Interval differences give native outflow rate |
+| Cumulative stripped mass, kg | `p72d-total-stripped` | 10 iterations | Interval differences give stripping rate |
+| Cumulative separated mass, kg | `p72d-total-separated` | 10 iterations | Interval differences give edge-release rate and source-overlap audit |
+| Maximum film Courant | `p72d-total-courant` | 1 iteration | Detect short numerical excursions |
+| Maximum film thickness, m | `p72d-total-thickness` | 1 iteration | Thickness growth and cap detection; verify this is a maximum reduction |
+| Maximum film speed, m/s | `p72r-film-speed-max` | 1 iteration | Detect bursts; reuse the equivalent legacy `p72a-e2.7-ewf-velocity-mag-max` definition only after scope verification, never both |
+
+| Bulk quantity | Canonical report | Bulk active | Bulk frozen |
+| --- | --- | ---: | --- |
+| Liquid inventory, kg | `v2-total-liquid-mass` | Every iteration | Transition/endpoints only |
+| Vapor inventory, kg | `v2-total-vapor-mass` | Every iteration | Transition/endpoints only |
+| Boundary-only liquid steam-outlet flux, kg/s | `v2-flux-phase2-steamoutlet` | Every iteration | Transition/endpoints only |
+| Boundary-only vapor steam-outlet flux, kg/s | `v2-flux-phase1-steamoutlet` | Every iteration | Transition/endpoints only |
+| Inlet pressure, Pa | `p72s3-pressure-inlet` | Every iteration | Transition/endpoints only |
+| Outlet pressure, Pa | `p72s3-pressure-outlet` | Every iteration | Transition/endpoints only |
+| Applied bulk collector mass source, kg/s | `v2-applied-absorber` | Every iteration | Transition/endpoints only |
+
+| Definition / sampling detail | Requirement |
+| --- | --- |
+| Counts | Six film quantities at frequency 1; five at frequency 10; seven extra bulk quantities at frequency 1 only during active-bulk stages |
+| Film stock resolution | Ten iterations = 0.025 ms at 2.5 µs or 0.050 ms at 5 µs; adequate proposed history spacing for development plots, not instantaneous release-wave resolution |
+| Source integration | Retain every native source/drain rate and actual accepted step; do not integrate every-tenth instantaneous rate through the known rapid transfer cycles |
+| Cumulative transfers | Differences preserve interval mass after continuity/restart verification; they do not recover within-interval peaks. Capture exact block-start/end stocks even when the count is not divisible by ten |
+| Source convention | Preserve separate source and release histories. Apply the existing verified net-secondary overlap correction only after confirming it for the configured case; do not count separation twice or label the net source as gross accretion |
+| Derived bulk values | Compute pressure drop from the two pressure reports; positive outward liquid flux from the verified native sign; positive collector removal from the applied source sign |
+| Bulk report scope | Verify the existing pressure reductions and physical boundary scopes across meshes; a source-inclusive flux alias is not a boundary outlet report |
+| Lower-region bulk detail | Lower liquid inventory and independent collector-expression checks at saved transitions/endpoints; no continuous duplicate collector-rate or contact-inventory writer unless a discrepancy requires diagnosis |
+| Inlet settings | Record verified liquid/vapor feed, outlet conditions and materials at stage boundaries; no repeated histories for unchanged commanded values |
+| Writers | Group same-frequency quantities in native report files where supported; disable interactive report plots and per-report console printing. Grouping reduces writers but does not itself prove reduced calculation cost |
+| Initial verification | Before the first solve, check definitions/scopes and consumers without advancing Fluent; use the already scheduled first >=1,000-iteration block to verify row cadence, exact endpoint stocks and full source/guard coverage |
+| Parser requirement | Adapt assessment to sparse stock histories and exact endpoints before execution; the current staged checker expects dense histories. Missing samples must not be silently interpolated or treated as zero |
+| Fallback | If grouped/sparse capture cannot preserve the needed checks, retain frequency 1 for affected quantities; no extra short benchmark campaign |
+
+| Residual / field evidence | Recording rule |
+| --- | --- |
+| EWF inner residuals | Keep the first and final h/u/v residuals for every film update in the local native transcript; set inner reporting interval to the 100-subiteration cap only after verifying final early-convergence rows still appear |
+| Native reporting basis | Fluent documents first and last subiteration reporting regardless of interval; this reduces intermediate text, not the solve count or tolerance. [Fluent 2025 R2 controls](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_ewf_sec_eqns.html) |
+| Bulk residuals | All seven solved bulk residuals each active iteration in the native transcript; no duplicate report definitions; no invented residual rows while frozen |
+| Film scalar guards | Keep Courant, thickness and speed at every iteration; native failure text and achieved inner convergence remain visible during long commands |
+| Spatial snapshots | Preserve full fields at the start, pre-freeze, 195 ms and 200 ms; retain the existing autosave nearest 100 ms for a development view and label its actual age |
+| Field-derived quantities | Compute mass-weighted film speed, wall coverage and height distribution offline from selected snapshots, not from expensive per-iteration facet exports |
+| Particle fate | Retain native tracking messages and endpoint fate/source summaries for stripped/separated particles; no extra tracking pass or live particle visualization for plotting |
+| Restart integrity | Retain native source histories across reopens; instantaneous source caches can reset. Segment cumulative counters at verified joins rather than difference across a reset |
+
 ## Cost and evidence basis
 
 | Item | Selection or observation | Source |
 | --- | --- | --- |
-| Reporting cost | Use the tested 17 essential per-update reports during frozen development; restore required bulk histories during active stages | [Report-cost result](../phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/report-cost/results.md) |
+| Reporting cost | Historical 17-report result supports reducing report count; selected 11-film/7-active-bulk schedule above is a further, unbenchmarked proposal | [Report-cost result](../phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/report-cost/results.md) |
 | Reporting delivery | Keep essential local histories and achieved inner residuals; avoid redundant reports, interactive plots and repeated remote report requests during native solves | Human command/overhead direction; report-frequency reduction remains separate from the tested report-count reduction |
 | Runtime measure | Accepted film milliseconds per wall minute, including qualification/recovery and final bulk cost | [Film-development method](../phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/film-development/results.md) |
 | 6 kg is not equilibrium | N45606 retained 6.36 kg with positive storage and repeated inner residual failures | [Case history](../phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/case-history-N45606.md) |
@@ -191,9 +273,22 @@ flowchart LR
 | Drain capability | Direct film removal proved with frozen bulk; upper-wall delivery remains a separate issue | [Direct drain](../phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/ewf-only-drain/results.md) |
 | Frozen-flow limit | Fluent assumes converged bulk flow and negligible film influence for its steady frozen-flow formulation; this plan uses freezing as preparation followed by bulk reactivation | [Fluent 2025 R2 theory](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_th/flu_th_ewf_sec_sol_alg.html) |
 
-| Required figure | Axes / content |
+## Planned plots
+
+| Main figure | Plot design | Data / interpretation |
+| --- | --- | --- |
+| 1. Film development | Two panels: total film mass and lower collector film mass versus film age, 0–200 ms; five mesh curves | Show raw frequency-10 histories; mark each freeze point and common reactivation at 195 ms; no 6 kg target line |
+| 2. Film mass budget | One small panel per mesh: signed native secondary/DPM supply, direct drain, native outflow, release and storage versus film age | Plot interval-mean rates using common 0.5 ms bins from full-rate integrals and cumulative-stock differences; preserve raw histories and distinguish net source from gross accretion |
+| 3. Bulk response | Pressure drop, phase-2 liquid carryover and bulk liquid inventory versus native iteration, with initial/final active stages distinguished | Carryover = negative boundary-only phase-2 steamoutlet flux, kg/s. Plot every active-iteration value; shade the frozen interval or omit it with explicit stage separation |
+| 4. Final film distribution | Same-camera, same-scale film-thickness views for all five meshes at 200 ms; companion film mass versus physical height | Derive from saved wall facets; expose upper-wall accumulation and collector delivery. Use actual geometry/area weighting, no invented field interpolation |
+| 5. Mesh sensitivity at the selected horizon | Panels versus actual cell count: 200 ms film mass, final-window pressure drop, phase-2 liquid carryover and total external film drainage; table includes release and storage | Use a common 199–200 ms time window for rates/bulk outputs; show ranges as temporal variation, not confidence intervals. Include endpoint values; no formal convergence-order claim |
+
+| Supporting output | Rule |
 | --- | --- |
-| Development | Film mass versus actual film age for each mesh; mark bulk freeze/reactivation |
-| Film budget | Input, direct drain, release and storage rates versus film age; use the verified source convention |
-| Numerical health | Accepted step, Courant, achieved film residuals and mass-weighted/maximum speed |
-| Common-age comparison | Shared-scale wall thickness at 200 ms; compact table of film mass, drainage, release and active-bulk outputs |
+| Numerical-health plot | Courant, maximum speed, maximum thickness, achieved final inner residuals and accepted timestep; make per-mesh diagnostics available without putting all traces in the main comparison |
+| Bulk residual plot | Native seven-equation histories for active stages only; supporting numerical evidence, not a substitute for output checks |
+| Development spatial view | Use the autosave nearest 100 ms and final 200 ms for the pilot mesh if it explains a transport problem; no extra solve stops for images |
+| Common-rate window | Final 199–200 ms gives 200 active iterations at 5 µs or 400 at 2.5 µs; distinct from the final 1,000-update operational screen |
+| Budget/bin boundaries | Use exact recorded stocks at aligned boundaries; if a requested bin edge lacks a sample, use and label the nearest shared recorded interval rather than fabricate a stock value |
+| Styling | Simple Matplotlib figures; fixed mesh colours across plots, physical units and actual film age; raw traces retained, any averaging explicitly labelled |
+| Output scope | Generate the five main figures and a compact endpoint table; add supporting plots only where they explain an issue |
