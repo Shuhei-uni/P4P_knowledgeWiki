@@ -72,13 +72,13 @@ flowchart LR
 | --- | --- | --- |
 | 1. Pilot | Use the saved 60k endpoint to qualify one method before replicating it | Exact parent, effective settings, fields and clock |
 | 2. Build check | Compare actual parent settings with the candidate packet; apply only required changes in a preserved child; verify drainage and refresh | Reuse applicable proven drain evidence; if a new fixture is needed, use at least 1,000 native updates, then restore exact production fields and active bulk equations |
-| 3. Bulk-active adjustment | Retain all intended bulk equations and the inherited conservative 0.1 µs film step; use one 2,000–5,000-iteration command from the per-mesh schedule below | Assess its final two 1,000-update windows after completion; no short smoke solve, simultaneous timestep increase or bulk freeze |
-| 4. Freeze readiness | Require two consecutive final-1,000 bulk windows to pass the existing Phase 9 preparation screen, plus film numerical/accounting checks | Pressure-drop range <=5% of mean; bulk inventory range <=10% of mean; outlet-liquid range <=5% of full liquid feed; no new instability or persistent switch-induced deterioration |
+| 3. Bulk-active adjustment | Human-reduced allowance: retain all intended bulk equations and the inherited conservative 0.1 µs film step; use one 1,000–2,500-iteration command from the per-mesh schedule below | Assess its final 1,000-update window after completion; no short smoke solve, simultaneous timestep increase or bulk freeze |
+| 4. Freeze readiness | Use the final 1,000-update window of the shortened adjustment, plus film numerical/accounting checks; do not automatically restore the former counts to obtain two windows | Retain pressure-drop range <=5% of mean, bulk inventory range <=10% of mean and outlet-liquid range <=5% of full liquid feed; this shortened transition screen is not the original two-window preparation proof |
 | 5. Frozen transition and step qualification | Preserve the adjusted pair; freeze bulk at 0.1 µs; run `/solve/iterate 1000`, then 1,000 updates at 2.5 µs; for a 5 µs production candidate, run a further 1,000 at 5 µs | Both faster-step checks count toward frozen growth in the budget below; check actual steps, inner residuals, source cadence and corrected ledger |
 | 5a. Resolve known gap | Check the remaining sequential-solver source discrepancy before long development | Latest 5/2.5 µs source gaps were 1.318%/1.168%; neither passed the existing 1% screen; no promotion on a low Courant number alone |
 | 5b. Main growth | Continue frozen-bulk development with the qualified step; prefer 5,000–10,000 iterations per native command where no earlier experiment decision is required | Upper/lower film growth, transport, sources, release and numerical health; preserve required checks without routine stop/relaunch cycles |
 | 6. Developing-film check | Review saved evidence at about 50, 100 and 150 ms without routine solver stops; use the next planned command boundary for any required correction | Check growth, upper/lower transport, source consistency and numerical health; no full timestep-refinement campaign by default |
-| 7. Bulk reactivation | Restore all intended bulk equations at 190 ms; retain the selected film step and run the final 10 ms in one native command | Nominally 2,000 active iterations at 5 µs or 4,000 at 2.5 µs; bulk response, outlet routing, pressure drop and accounting |
+| 7. Bulk reactivation | Halved final allowance: restore all intended bulk equations at 195 ms; retain the selected film step and run the final 5 ms in one native command | Nominally 1,000 active iterations at 5 µs or 2,000 at 2.5 µs; inspect bulk response, outlet routing, pressure drop and accounting |
 | 8. Endpoint | Save and verify the paired state at total native film age 200 ms | Common-age fields, final histories, actual equation flags and source accounting |
 | 9. Other meshes | Confirm the method on the finest wall mesh before broad replication; qualify each mesh's timestep | Same physics and comparison procedure; mesh-specific numerical controls recorded |
 
@@ -89,37 +89,37 @@ flowchart LR
 | Count scope | **New iterations after each verified full-feed preparation endpoint**; do not repeat completed transfer, low-feed hold, ramp or full-feed preparation |
 | Update mapping | One accepted film step per native iteration; verify before using this arithmetic |
 | Bulk-active adjustment | 0.1 µs; per-mesh counts below are practical allowances, not a convergence law |
-| Common final stage | Bulk active from 190 to 200 ms on every mesh; no timestep increase at reactivation |
+| Common final stage | Bulk active from 195 to 200 ms on every mesh; reactivation moves 5 ms later to halve active iterations while preserving the 200 ms endpoint and selected timesteps |
 | Nominal step selection | Budget 5 µs for 60k/342k and 2.5 µs for 680k/997k/2.6M; these are cost/stability planning assumptions, not measured mesh-specific limits |
 | Wall-mesh decision | Actual wall spacing, forcing and passing numerical checks decide the usable step; total cell count does not set it |
 | Exact counts | Read each parent's actual film age and deduct it from the remaining 200 ms; table values are rounded and assume a near-zero parent age |
 | Included checks | Frozen-growth counts include the 1,000-update 2.5 µs check and, where selected, the 1,000-update 5 µs check |
 | Extra-work allowance | Up to 10,000 additional iterations per mesh for a necessary drain fixture, bulk adjustment, one focused numerical/source repair, a diagnostic comparison or clock alignment; do not spend this allowance automatically |
 
-| Mesh | Bulk-active adjustment | Frozen check at 0.1 µs | Nominal growth step | Frozen growth to 190 ms, including step checks | Bulk active, 190–200 ms | Nominal new total | Budget with contingency |
+| Mesh | Bulk-active adjustment | Frozen check at 0.1 µs | Nominal growth step | Frozen growth to 195 ms, including step checks | Bulk active, 195–200 ms | Nominal new total | Budget with contingency |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| 60k | 2,000 | 1,000 | 5 µs | about 38,400 | 2,000 | about **44,000** | **54,000** |
-| 342k | 3,000 | 1,000 | 5 µs | about 38,400 | 2,000 | about **45,000** | **55,000** |
-| 680k | 3,000 | 1,000 | 2.5 µs | about 75,800 | 4,000 | about **84,000** | **94,000** |
-| 997k | 4,000 | 1,000 | 2.5 µs | about 75,800 | 4,000 | about **85,000** | **95,000** |
-| 2.6M | 5,000 | 1,000 | 2.5 µs | about 75,800 | 4,000 | about **86,000** | **96,000** |
-| Total | 17,000 | 5,000 | — | about 304,200 | 16,000 | about **344,000** | **394,000** |
+| 60k | 1,000 | 1,000 | 5 µs | about 39,460 | 1,000 | about **43,000** | **53,000** |
+| 342k | 1,500 | 1,000 | 5 µs | about 39,450 | 1,000 | about **43,000** | **53,000** |
+| 680k | 1,500 | 1,000 | 2.5 µs | about 77,900 | 2,000 | about **83,000** | **93,000** |
+| 997k | 2,000 | 1,000 | 2.5 µs | about 77,880 | 2,000 | about **83,000** | **93,000** |
+| 2.6M | 2,500 | 1,000 | 2.5 µs | about 77,860 | 2,000 | about **84,000** | **94,000** |
+| Total | 8,500 | 5,000 | — | about 312,550 | 8,000 | about **336,000** | **386,000** |
 
 | Native command stage | Planned command size / decision |
 | --- | --- |
-| Active adjustment | One `/solve/iterate 2000`, `3000`, `4000` or `5000`, according to mesh |
+| Active adjustment | One `/solve/iterate 1000`, `1500`, `2000` or `2500`, according to mesh |
 | Freeze check | One `/solve/iterate 1000` at unchanged 0.1 µs |
 | Step checks | One `/solve/iterate 1000` per selected new step; changing a step and freezing bulk remain separate operations |
 | First longer growth block | `/solve/iterate 5000` at the selected step |
-| Remaining frozen growth | Prefer `/solve/iterate 10000`; combine the remainder into a final command of at least 1,000 iterations, ending at 190 ms |
-| Reactivation check | One `/solve/iterate 2000` at 5 µs or `/solve/iterate 4000` at 2.5 µs; inspect the final two 1,000-update windows afterward |
+| Remaining frozen growth | Prefer `/solve/iterate 10000`; combine the remainder into a final command of at least 1,000 iterations, ending at 195 ms |
+| Reactivation check | One `/solve/iterate 1000` at 5 µs or `/solve/iterate 2000` at 2.5 µs; use the final 1,000-update window for the common shortened bulk screen |
 | Cost expectation | Roughly 10–15 solve submissions per mesh without recovery; actual command count depends on clock alignment and step selection |
 | Native storage | Autosave locally during long commands; no remote stop/relaunch for each 1,000-update analysis window |
 
 | Budget contingency | Bounded response |
 | --- | --- |
-| 5 µs fails on 60k or 342k | Use a passing 2.5 µs route; nominal total becomes about 83,000/84,000, before the same 10,000-iteration contingency; preserve the common 190–200 ms final stage |
-| Both smaller meshes need 2.5 µs | Revised rounded campaign allowance: about 422,000 nominal or 472,000 including contingency |
+| 5 µs fails on 60k or 342k | Use a passing 2.5 µs route; nominal total becomes about 82,000/83,000, before the same 10,000-iteration contingency; preserve the common 195–200 ms final stage |
+| Both smaller meshes need 2.5 µs | Revised rounded campaign allowance: about 415,000 nominal or 465,000 including contingency |
 | 2.5 µs is unstable | Spend the remaining bounded repair allowance on one evidence-led numerical/source correction; preserve an unresolved endpoint if it does not work |
 | A slower route is required | At 1 µs, 200 ms alone needs about 200,000 film updates per mesh; this is outside the selected practical schedule and requires a budget/scope decision before long compute |
 | A larger mesh safely supports 5 µs | It can reduce its growth work by roughly 40,000 updates; treat this as optional savings after evidence, not a reason for repeated speed trials |
@@ -140,7 +140,7 @@ flowchart LR
 | Failed readiness | Recover the numerical/source problem or preserve an unqualified endpoint; do not freeze a failing state simply to meet the time target |
 | Film stationarity before freeze | Not required; growing film remains an accepted limitation, separate from numerical and bulk-preparation checks |
 | Clock during adjustment | All accepted production film advancement during bulk-active adjustment and the freeze check counts toward 200 ms |
-| Final active-bulk allowance | Reserve 190–200 ms on every mesh; do not consume this interval with frozen development |
+| Final active-bulk allowance | Reserve 195–200 ms on every mesh; do not consume this interval with frozen development |
 | Unequal startup ages | Include actual startup age; record each freeze age and preparation difference; equal final age alone does not remove startup-history effects |
 | Pilot budget | Reserve enough film age for qualification and final bulk response; do not plan frozen development all the way to 200 ms |
 | Branch accounting | Count only accepted continuation age; exclude discarded sibling tests and disposable fixtures |
@@ -162,7 +162,7 @@ flowchart LR
 | --- | --- |
 | Film growth | Allowed at 200 ms; report storage rate and its trend |
 | Practical completion | Reach 200 ms with usable numerical evidence and final bulk-active outputs; no automatic extra iterations for film stationarity, residual perfection or a prescribed film mass |
-| Final bulk screen | Use the existing Phase 9 5% pressure / 10% inventory / 5%-of-inlet liquid-outlet range screen on the last two 1,000-update windows; report any remaining drift at the fixed horizon |
+| Final bulk screen | Use the existing Phase 9 5% pressure / 10% inventory / 5%-of-inlet liquid-outlet range thresholds on the final 1,000-update window; this shortened check does not establish the original two-window qualification; report remaining drift at 200 ms |
 | Accuracy scope | No mandatory timestep-refinement study on every mesh, higher-order scheme campaign or formal convergence-order fit; different selected timesteps remain a mesh-comparison limitation |
 | Numerical fields | Finite mass, thickness and velocity; nonnegative thickness; no clipping or unresolved extreme-speed bursts |
 | Film Courant | Initial operating ceiling 0.1; preserve/reduce step above it; reject at 1 or above. These are campaign guards, not universal stability guarantees |
