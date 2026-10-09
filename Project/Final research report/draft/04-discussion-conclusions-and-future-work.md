@@ -6,23 +6,27 @@
 
 ### 5.1. Startup and absorber development were the main turning point
 
-The principal contribution was a way to develop the separator calculation far enough to conduct further experiments. Continuity and mass imbalance had been major barriers. The early history brought together liquid removal, reduced inlet loading and a verified path to full feed. The resulting state became a common parent for roughness and wall-film studies. That practical change explains why startup and absorber implementation deserve the main emphasis in the report.
+Startup and absorber development were the main contribution because they provided common fields from which further experiments could proceed. The earlier investigations explain why this became the focus. Inlet, droplet and initial wall-film changes produced distinct model responses, but incomplete tracks, open balances and unsettled carrier fields prevented reliable separation-performance comparisons. Adding local mechanisms had not resolved the problem of removing the continuous liquid.
 
-The low-feed hold provides direct evidence of the advance. Continuity reached about $3.21\times10^{-4}$, while bulk inventory settled near 31.36 kg before the ramp. The subsequent loading and Coupled continuation produced a preserved full-feed field with much calmer continuity than during the ramp. The project selected that state for its combined residual, inventory and source behaviour. The advance was useful even though a material balance error remained.
+The full-geometry outlet and pool-control studies then showed that lower-boundary modelling was a substantial problem in its own right. Changing outlet conditions could cause excessive liquid discharge or numerical failure. Extending the tested pool-control calculation did not establish its target state. The return to the truncated geometry was therefore a deliberate reduction in scope: retain the upper separator flow and represent lower liquid collection separately. It did not show that full-geometry simulation or physical pool control was impossible.
 
-Using the same developed fields for later cases made their behaviour easier to interpret. Changes in roughness and film treatment could be compared from a known parent, rather than being mixed with unrelated startup histories. This increased confidence in the roughness and initial wall-film comparisons from the same starting fields. It did not establish the physical accuracy of the parent or eliminate the need for further numerical checks.
+The simplified-geometry screens identified a dedicated lower-region liquid sink as a useful treatment to retain. It preserved a closed lower boundary and allowed liquid removal without a direct vapour sink. Early inventory-feedback and source-cap settings still showed drift or divergence. The next question was therefore how to develop the source law and carrier field together. This connects the broad exploratory work to the staged startup reported in detail.
+
+<!-- Evidence: [Inlet exploration](../../experiments/phase-01-purnanto-baseline-and-inlet-exploration/interpretation.md), [DPM findings and limits](../../experiments/phase-03-dpm-carryover-and-coupling/interpretation.md), [initial EWF findings and liquid-removal problem](../../experiments/phase-04-ewf-wall-film-mechanisms/interpretation.md), [full-geometry outlet screen](../../experiments/phase-05-full-geometry-v2/interpretation.md), [extended pool-control study](../../experiments/phase-06-full-geometry-with-brine-pool/interpretation.md), [recorded scope decision](../../experiments/phase-06-full-geometry-with-brine-pool/conclusion.md) and [retained absorber treatment](../../experiments/phase-07a-simplified-purnanto-liquid-removal/interpretation.md). These are Shuhei's predecessor investigations; the separate later full-geometry and VOF work is outside this account. -->
+
+The low-feed hold provides direct evidence of the advance. Continuity reached about $3.21\times10^{-4}$, while bulk inventory settled near 31.36 kg before the ramp. The subsequent loading and Coupled continuation produced a preserved full-feed field with much calmer continuity than during the ramp. The project selected that state for its combined residual, inventory and source behaviour, although a material balance error remained.
+
+Shared starting fields made the later roughness and initial wall-film comparisons easier to interpret by reducing differences in startup history. The developed parent was a useful numerical reference, with further numerical checks and physical assessment still required.
 
 ### 5.2. Why the absorber and reduced feed belong in the explanation
 
-The early absorber addressed a missing liquid-removal path in the truncated model. Its verified operation formed part of the development sequence that produced a sustained carrier parent. That historical role remains central, while the detailed implementation account focuses on the final contact absorber.
+The early throughput-controlled absorber and the final contact absorber served different stages of the investigation. The early treatment supplied a missing liquid-removal path during the low-feed development and verified ramp. That improvement preceded the final contact law, so it cannot be used as evidence of the final law's performance.
 
 Reduced feed addressed the startup state. On the same inlet areas, lower mass-flow commands reduced the initial loading while the liquid field developed. A plausible explanation is that this gave liquid more opportunity to reach the collector before the full inlet forcing was imposed. The nearly stationary low-feed inventory and low continuity support the usefulness of that condition. The exact mechanism and the separate contribution of the absorber were not isolated by the sequential history.
 
-The corrected ramp also contributed to the usable development path. Actual boundary writes and readbacks connected the intended schedule to the calculation, while preserving the developed fields. Coupled flow with Global Time Step was introduced after full loading. The evidence therefore supports the complete sequence: a verified absorber, reduced-feed field development, a checked ramp and a full-feed solver continuation. A claim that one setting alone caused the improvement would exceed the available comparison.
+Boundary writes and readbacks verified the ramp while preserving the developed fields. Coupled flow with Global Time Step was introduced after full loading. The improvement therefore belongs to the complete sequence of absorber operation, reduced feed, checked ramp and solver continuation. The comparison does not isolate one setting as its cause.
 
-In the final contact absorber, the depletion time $\tau$ set the removal strength. Correct phase assignment, signed liquid-velocity momentum removal and the supplied source derivatives were material implementation choices. Separate film and droplet routes extended collection to the other liquid representations. These choices applied the intended treatment consistently and supported its solution; stability still had to be judged from the run evidence.
-
-The early low-feed improvement preceded the final contact absorber. It supports the startup history, while the later source, film and particle checks support the final implementation. Keeping their case identities separate prevents the final treatment from receiving credit for an earlier result.
+In the final contact absorber, the depletion time $\tau$ set the removal strength. Correct phase assignment, signed liquid-velocity momentum removal and the supplied source derivatives were material implementation choices. Separate film and droplet routes extended collection to the other liquid representations. Later source, film and particle checks support this implementation; its stability still had to be judged from the run evidence.
 
 ### 5.3. The enabled experiments reveal strong wall–liquid sensitivity
 
@@ -52,9 +56,9 @@ The longer film calculations showed formation and transport under prescribed car
 
 ### 5.5. Contribution to the original research objective
 
-The original objective included internal flow, separation efficiency and pressure drop. The completed development work supplied an enabling model and quantified selected liquid-routing and film responses. Its strongest contribution is the startup and absorber approach, followed by evidence of the wall behaviour that could be studied from it (Table 16).
+The original objective included internal flow, separation efficiency and pressure drop. The completed development work supplied an enabling model and quantified selected liquid-routing and film responses. Its strongest contribution is the startup and absorber approach, followed by evidence of the wall behaviour that could be studied from it (Table 17).
 
-*Table 16. Answers to the report questions and the remaining performance requirements.*
+*Table 17. Answers to the report questions and the remaining performance requirements.*
 
 | Question or objective | Answer from the selected evidence | Remaining requirement |
 | --- | --- | --- |

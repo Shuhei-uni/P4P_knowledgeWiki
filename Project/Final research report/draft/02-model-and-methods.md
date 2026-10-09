@@ -233,21 +233,11 @@ Assignments were checked after data loading and save/reopen. Appendices A.5–A.
 
 ### 3.6. Comparison design
 
-The comparisons addressed startup, wall transport and the numerical basis for interpreting liquid routes. Common-parent screens changed specified wall inputs while retaining the same saved bulk fields and the other recorded controls. Startup and combined continuations assessed procedures in which several settings changed together. The main study structure was:
+The investigation combined exploratory model development with later comparisons from shared saved fields. Early inlet, droplet, wall-film and liquid-removal studies examined which assumptions and treatments required further work. Some were unmatched diagnostics or incomplete runs, and some early inlet variants arose during setup correction. They are therefore not treated as one fully controlled parameter sweep. The Results overview groups these investigations by their question and contribution to the study; Appendix A.11 retains their case identities and evidence limits.
 
-```mermaid
-flowchart TD
-    A[Defined bulk model and boundary conditions] --> B[Reduced-feed development and verified ramp]
-    B --> C[Saved full-feed parent]
-    C --> D[Separate roughness and wall-film screens]
-    D --> E[Combined wall and collection treatment]
-    B --> F[Shortened startup with contact collection and wall film]
-    F --> G[Film development and local film-step checks]
-    A --> H[Separate absorber-off inlet and numerical reconstructions]
-    E --> I[Residual, flux, source and inventory assessment]
-    G --> I
-    H --> I
-```
+Later comparisons addressed startup, wall transport and the numerical basis for interpreting liquid routes. Common-parent screens changed specified wall inputs while retaining the same saved bulk fields and the other recorded controls. Startup and combined continuations assessed procedures in which several settings changed together. Table 4 defines these principal comparisons. A numerical failure or an incomplete calculation was retained as evidence about the tested conditions, without implying that the physical mechanism could not operate.
+
+<!-- Evidence: [Early exploratory inlet work](../../experiments/phase-01-purnanto-baseline-and-inlet-exploration/interpretation.md), [droplet-study limits](../../experiments/phase-03-dpm-carryover-and-coupling/interpretation.md), [initial film investigation](../../experiments/phase-04-ewf-wall-film-mechanisms/interpretation.md) and [simplified-geometry collection studies](../../experiments/phase-07a-simplified-purnanto-liquid-removal/interpretation.md). -->
 
 *Table 4. Model and control changes for the principal reported comparisons. All used the 60,964-cell domain; a retained setting refers to the recorded parent, not a software default.*
 
