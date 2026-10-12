@@ -7,13 +7,13 @@
 | Functional drain test | Matched seeded-film OFF/ON frozen-bulk test passed; directremoval3.99389454e-6kg versus matchedfilm loss3.99416087e-6kg, error0.0066684%; productionparent restored |
 | Selected recovery checkpoint | Explicit N80580 / 42.35 ms; historical Courant peak 4.292395 remains recorded as an exceedance. Adoption does not make that historical block pass |
 | Rejected selected step — earlier policy | Earlier 1 µs qualification from N60580 exceeded Courant 0.8 (peak 1.294363). Stronger-parent 1 µs test from N50580 stayed below 0.8 (peak 0.1086999) but failed the former inner gate. Inner-only rejection is superseded by the human revision; both saved pairs remain preserved |
-| Current recovery | Human12October: from42.35ms. Preserve the interrupted 1 µs partial endpoint, reopen saved N80580 /42.35ms and continue at2.5 µs to100ms. Numerical diagnostics only; no automatic rollback. After laptop return, native idle confirmed at N71313. Partial pair saved, hashed and reopened at18.083ms; selected N80580/42.35ms pair hashes and reopened native clock verified. Host controller running from N80580/42.35ms. Native transcript prefix confirms13 film updates at2.5 µs,42.3525–42.3825ms; prefix Courant0.05881872–0.05879154. First10000-update target N90580/67.35ms;100ms completion remains pending |
-| Scientific horizon |100ms totalfilm age; final95–100ms bulkactive; then angle213232cellcase after endpoint verification/preservation |
+| Current recovery | Superseded: human paused this case and selected saved N84000 /50.9ms. Later interrupted N90695 /67.6375ms preserved; retained pair hashes and reopened50.9ms clock verified. No further solve or automatic angle launch |
+| Scientific horizon | Keep saved50.9ms; previous100ms horizon and final95–100ms bulk-active stage cancelled. Angle continuation on hold |
 | Numerical evidence throughN9580 | Initialfourstages4500updates all met1e-5; peakCourant0.0003484,0.0001899,0.0066032,0.0356443 |
 | Later accepted growth |0.1 µs qualification1000/1000 inner stops; five10000-update blocks reach16.35ms. Innerpass rates99.85%,95.08%,91.87%,100%,96.51%; growth acceptance did not enforce99%qualification gate |
 | Production ledger | Corrected recoveryqualification4.84659% andfirstgrowth4.45531% errors remain diagnostic; rejected1 µsblock net ledger17.77577%. Independentfunctionaldrainproof does not establishproductionmassclosure |
 | Supervision | Read-only desktopwatcher queues completion/failure. No solve replay from timeouts; Fluentpreserved; currentstate belongs tohostmanifest/nativeevidence |
-| Claim limit | Changed geometry/mesh; no mesh-independence, steady-film or physical-validation claim;100ms and angle completion remain pending |
+| Claim limit | Changed geometry/mesh; no mesh-independence, steady-film or physical-validation claim;100ms and angle continuation cancelled by human |
 
 
 | Control | Verified child |
@@ -196,3 +196,12 @@
 | Native startup | [Prefix receipt](../../../../PyAnsys/output/phase9-server6-slit154k/20261010/from4235-2p5us-native-startup.json):13 film rows,42.3525–42.3825ms, fixed2.5 µs; first/last prefix Courant0.05881872/0.05879154 |
 | Preserved partial | [Save/hash/reopen receipt](../../../../PyAnsys/output/phase9-server6-slit154k/20261010/from4235-partial-preservation.json): N71313 /18.083ms; prior interrupt reconciled, no duplicate interrupt or solve replay |
 | Limit | Prefix proves startup, not latest live clock or a completed block.100ms completion and final95–100ms bulk-active stage remain pending |
+
+
+| Human-selected retained endpoint | Verified evidence / limit |
+| --- | --- |
+| Saved and reopened pair | N84000 /50.9ms, fixed2.5 µs; [receipt and hashes](../../../../PyAnsys/output/phase9-server6-slit154k/20261010/retained-50p9ms.json) |
+| Preservation | Interrupted later N90695 /67.6375ms pair and all prior source pairs retained |
+| Shared copy | Selected case/data copied to unique OneDrive Server6 folder; both SHA-256 values match source. Cloud upload independently unverified |
+| State | Paused, Fluent open and idle; watcher stopped; zero new solve calls;100ms and angle continuation cancelled |
+| Claim limit | Retention is an artifact decision; no convergence, numerical acceptance, steady-film or physical-validation claim |

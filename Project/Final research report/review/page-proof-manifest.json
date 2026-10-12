@@ -1,0 +1,281 @@
+{
+  "purpose": "Review proof of Introduction through Conclusions; not a submission PDF",
+  "pages": 25,
+  "limit_pages": 25,
+  "within_limit": true,
+  "phase9_reserved_pages": [
+    19,
+    20,
+    21,
+    22
+  ],
+  "font": "Times New Roman",
+  "body_font_pt": 12,
+  "body_line_stretch": 1.15,
+  "main_figure_numbers": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "image_assets": 16,
+  "caption_font_pt": 11,
+  "geometry_mm": {
+    "top": 20,
+    "bottom": 20,
+    "left": 25,
+    "right": 25
+  },
+  "paragraph_gap_pt": 4,
+  "subsection_extra_gap_pt": {
+    "before": 0,
+    "after": 0
+  },
+  "template_difference": "Compact 4 pt paragraph gaps and heading gaps; body font, body line spacing and page margins retained",
+  "scientific_text_cuts": [],
+  "layout_changes": [
+    "Remove redundant Part headings",
+    "Use the explicit numbered captions rather than image alt text",
+    "Group the two published Figure 3 panels vertically at 10 cm width",
+    "Assign table column widths",
+    "Allow numbered figures to float while retaining their source order",
+    "Reserve four whole Phase 9 pages"
+  ],
+  "image_widths_cm": {
+    "rizaldy-2016-figure-5-operation.png": 7.0,
+    "zarrouk-purnanto-2015-figure-12-breakdown.png": 10.0,
+    "pointon-2009-figure-5-inlets.png": 10.0,
+    "pointon-2009-figure-7-velocity.png": 10.0,
+    "rizaldy-2016-figure-9-entrainment.png": 10.0,
+    "model-domain-overview.png": 13.0,
+    "results-described-early-development.png": 12.0,
+    "results-described-startup.png": 12.0,
+    "results-film-development-reference500ms.png": 14.0
+  },
+  "table_column_fractions": {
+    "Study / context": [
+      0.26,
+      0.22,
+      0.23,
+      0.29
+    ],
+    "Phase": [
+      0.27,
+      0.31,
+      0.42
+    ],
+    "Boundary": [
+      0.22,
+      0.28,
+      0.25,
+      0.25
+    ],
+    "Comparison": [
+      0.25,
+      0.27,
+      0.29,
+      0.19
+    ],
+    "Quantity|Mixed feed": [
+      0.56,
+      0.21,
+      0.23
+    ],
+    "Cells": [
+      0.19,
+      0.37,
+      0.44
+    ],
+    "Measure": [
+      0.43,
+      0.2,
+      0.2,
+      0.17
+    ],
+    "Film time (ms)": [
+      0.17,
+      0.16,
+      0.16,
+      0.16,
+      0.16,
+      0.19
+    ],
+    "Quantity|Drain OFF": [
+      0.56,
+      0.22,
+      0.22
+    ],
+    "Fluid cells": [
+      0.14,
+      0.16,
+      0.17,
+      0.16,
+      0.2,
+      0.17
+    ],
+    "Research question": [
+      0.22,
+      0.42,
+      0.36
+    ]
+  },
+  "source_hashes": {
+    "Project/Final research report/draft/01-introduction-and-literature-review.md": "4e9f88b046bfc593bbd19712b8ba1fb50f783313aa1cc5e788669f1230a8e982",
+    "Project/Final research report/draft/02-model-and-methods.md": "45481d59fc0bdd80d92ed161a4efa67376e87bbee9cad1fc179e0961be10c6a7",
+    "Project/Final research report/draft/03-results.md": "d25f35102c66a9922a97d2e8a8eb2fb18bb17c821110b88d68e49be48bd4da84",
+    "Project/Final research report/draft/04-discussion-conclusions-and-future-work.md": "d08f2ff710934b1ad32c2c83e5e75c3c9b439344c382ed10530dba4dbee7970b"
+  },
+  "image_hashes": {
+    "Project/Final research report/figures/literature/rizaldy-2016-figure-5-operation.png": "1f4aa414bd8bbc5c5e3538a08a4c5614fe7a9bd46ffa9723696ae48cf066a255",
+    "Project/Final research report/figures/literature/zarrouk-purnanto-2015-figure-12-breakdown.png": "f2e96ff1395f57ac1b0a3070ce1470d0170983cc74b9331582c1b6e42686b06a",
+    "Project/Final research report/figures/literature/pointon-2009-figure-5-inlets.png": "21e1dd54c4cfcfc261970d7af1384673507d2e385c8a222f81fe9d51e4afa0f1",
+    "Project/Final research report/figures/literature/pointon-2009-figure-7-velocity.png": "eb1a3ce6a4c2bf49f3d7aed8f946c9887c7b658ea33b1e36ab61ea5a5d49efe5",
+    "Project/Final research report/figures/literature/rizaldy-2016-figure-9-entrainment.png": "4e0c073c39ad36ab03973c41b2958d553614504465dc1f9cfa333f113d9053ed",
+    "Project/Final research report/figures/model-domain-overview.png": "d390eac1db054d6d97afedba2c4cea67831a28ffef5dddef41a89f758718d6a7",
+    "Project/Final research report/figures/results-mesh-spatial-comparison.png": "fa8151112956af2bf86bc20aab24f27368048e805b59d39afaae477c57cf752f",
+    "Project/Final research report/figures/results-inlet-spatial-comparison.png": "0e38ac4e542465e643494a3bbe5624987c253e9ed0947fd92651574a72513087",
+    "Project/experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/direct-student-342k/n3000/figures/matched-mesh-checkpoints.png": "aa8563daacd95581214e2dec66d7a776eb772cfec90a7e90dacdf9fd3e300e2b",
+    "Project/Final research report/figures/results-described-early-development.png": "2c9430e356c6e2ea68ff876915d1332615db191c5bc5fcea2b609f6d36240020",
+    "Project/Final research report/figures/results-described-roughness.png": "34e91f94be00d584a7be53a07fce4667329319099ce83a64541f1c7638ac3145",
+    "Project/Final research report/figures/results-described-film-outlet.png": "3c219fb603194589945ff4b47e597e7e5438e39bb9e88c37c4d36872673a71eb",
+    "Project/Final research report/figures/bulk-comparison-described-film-treatment.png": "0611dd629f948ae9a7d56bc555b5703528ed5ef6c32419995254c52e03081488",
+    "Project/Final research report/figures/results-described-startup.png": "f79572d631f536ebaf19f900cfe3b57365986a00d8490977214b336b82284db3",
+    "Project/Final research report/figures/results-film-development-reference500ms.png": "ae0eac414c961a4a23f64f7ccb6f53b268f2896c13f9fecef0f4ecfdadd44339",
+    "Project/Final research report/figures/wall-film-described-development.png": "31bedb37bf7d5529252c1bb9b98aefc45f562f46611943f886ec6c77dbc63eb7"
+  },
+  "page_map": [
+    {
+      "page": 1,
+      "titles": [
+        "1. Introduction"
+      ]
+    },
+    {
+      "page": 2,
+      "titles": [
+        "2. Literature review"
+      ]
+    },
+    {
+      "page": 3,
+      "titles": []
+    },
+    {
+      "page": 4,
+      "titles": []
+    },
+    {
+      "page": 5,
+      "titles": []
+    },
+    {
+      "page": 6,
+      "titles": [
+        "3. Model and methods"
+      ]
+    },
+    {
+      "page": 7,
+      "titles": []
+    },
+    {
+      "page": 8,
+      "titles": []
+    },
+    {
+      "page": 9,
+      "titles": []
+    },
+    {
+      "page": 10,
+      "titles": [
+        "4. Results"
+      ]
+    },
+    {
+      "page": 11,
+      "titles": []
+    },
+    {
+      "page": 12,
+      "titles": []
+    },
+    {
+      "page": 13,
+      "titles": []
+    },
+    {
+      "page": 14,
+      "titles": []
+    },
+    {
+      "page": 15,
+      "titles": []
+    },
+    {
+      "page": 16,
+      "titles": []
+    },
+    {
+      "page": 17,
+      "titles": []
+    },
+    {
+      "page": 18,
+      "titles": []
+    },
+    {
+      "page": 19,
+      "titles": [
+        "Phase 9 layout reservation: 1 of 4"
+      ]
+    },
+    {
+      "page": 20,
+      "titles": [
+        "Phase 9 layout reservation: 2 of 4"
+      ]
+    },
+    {
+      "page": 21,
+      "titles": [
+        "Phase 9 layout reservation: 3 of 4"
+      ]
+    },
+    {
+      "page": 22,
+      "titles": [
+        "Phase 9 layout reservation: 4 of 4"
+      ]
+    },
+    {
+      "page": 23,
+      "titles": [
+        "5. Discussion"
+      ]
+    },
+    {
+      "page": 24,
+      "titles": []
+    },
+    {
+      "page": 25,
+      "titles": [
+        "6. Conclusions and future work"
+      ]
+    }
+  ],
+  "reproduce": "PyAnsys/.venv/bin/python PyAnsys/scripts/analysis/export_final_report_page_proof.py",
+  "layout_warnings": []
+}

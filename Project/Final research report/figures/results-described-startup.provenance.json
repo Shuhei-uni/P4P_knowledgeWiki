@@ -1,6 +1,10 @@
 {
   "figure": "results-described-startup",
-  "processing": "Numerical replot with descriptive labels. No source PNG pixels edited; no source data changed; all selected points drawn without smoothing.",
+  "processing": "Numerical replot from the unchanged selected source arrays; every selected point drawn without smoothing, interpolation or subsampling.",
+  "script": {
+    "path": "PyAnsys/scripts/analysis/repair_final_report_history_figures.py",
+    "sha256": "265aa8dc5676b6d4c2c92e9332568ede8991bb643156429c78d4fddd692e2d82"
+  },
   "checks": {
     "historical_native_range": [
       1581,
@@ -10,20 +14,193 @@
       2081,
       5080
     ],
-    "matched_points": 3000,
+    "matched_points_per_case": 3000,
     "activation_hold_excluded": true,
-    "ramp_peak_metrics_against_native_summary": "PASS",
-    "residual_log_scales_retained": true
+    "ramp_end_update": 2000,
+    "continuity_normalisation_factor": 386.0459609770594,
+    "continuity_normalisation_common_to_both_cases": true,
+    "liquid_fraction_residual_excluded": "Different native normalisation; excluded from the comparison.",
+    "ramp_and_final_500_metrics_against_native_summary": "PASS",
+    "verified_metrics": {
+      "ramp": {
+        "historical": {
+          "continuity": {
+            "peak": 0.011166,
+            "p95": 0.0093913,
+            "mean": 0.006265016515,
+            "end": 0.0093745
+          },
+          "bulk_plus_film_kg": {
+            "peak": 182.51779813379,
+            "p95": 166.8982563713874,
+            "mean": 82.12435509810274,
+            "end": 182.51779813379
+          },
+          "outward_liquid_kg_s": {
+            "peak": 8.99517215353574,
+            "p95": 7.94595599915199,
+            "mean": 2.0455649394435618,
+            "end": 8.99517215353574
+          }
+        },
+        "early_ewf": {
+          "continuity": {
+            "peak": 0.0033336,
+            "p95": 0.00311895,
+            "mean": 0.0025970949699999995,
+            "end": 0.0030764
+          },
+          "bulk_plus_film_kg": {
+            "peak": 53.97152535495701,
+            "p95": 52.838801695677226,
+            "mean": 42.19030710934949,
+            "end": 53.97152535495701
+          },
+          "outward_liquid_kg_s": {
+            "peak": 2.178869042058909,
+            "p95": 1.8059319303195438,
+            "mean": 0.44612880828614865,
+            "end": 2.178869042058909
+          }
+        }
+      },
+      "final_500_of_matched_1000_target_hold": {
+        "historical": {
+          "continuity": {
+            "peak": 0.0047504,
+            "p95": 0.003924904999999999,
+            "mean": 0.0031255721999999997,
+            "end": 0.0032898
+          },
+          "bulk_plus_film_kg": {
+            "peak": 293.9205499116795,
+            "p95": 293.54458368641565,
+            "mean": 289.20331694438084,
+            "end": 293.9010078967182
+          },
+          "outward_liquid_kg_s": {
+            "peak": 24.04383469438082,
+            "p95": 23.993524841549632,
+            "mean": 23.36146997342762,
+            "end": 24.04383469438082
+          }
+        },
+        "early_ewf": {
+          "continuity": {
+            "peak": 0.0022543,
+            "p95": 0.0020978349999999997,
+            "mean": 0.0019746972,
+            "end": 0.001863
+          },
+          "bulk_plus_film_kg": {
+            "peak": 61.219394766645024,
+            "p95": 61.14145114469143,
+            "mean": 60.2252061669554,
+            "end": 61.219394766645024
+          },
+          "outward_liquid_kg_s": {
+            "peak": 3.434648119488847,
+            "p95": 3.4231998297233845,
+            "mean": 3.301153274052291,
+            "end": 3.429961885581568
+          }
+        }
+      }
+    },
+    "outlet_sign": "Native signed steamoutlet flux; negative is outward. Summary checks use outward magnitudes.",
+    "array_sha256": {
+      "historical": {
+        "native_iteration": "5ead64da2d1f4b21cff8ff05116a57b2a3d41d92b07d068709972c83e2244f3d",
+        "continuity": "9eb5376755926d2cb32149e56af3f75d5739b688a393c1a9856b5210a38a0ffa",
+        "bulk_plus_film_kg": "90bdbf6892608b52057cd392a69efe1661e485743d451e5f705430263570e351",
+        "signed_outlet_kg_s": "dee3c24b783e593b70a9aed96cfaf7d63a70d055c82d2ac3a21647f7feca57dc"
+      },
+      "early_ewf": {
+        "native_iteration": "1238335f7c66a64f1d25e23d2737d1b2954613086cb7d9854d3117154037b6c6",
+        "continuity": "244a062ba7ece5be2da5fc7c45b587c57268446129f136e203a1955e861228dd",
+        "bulk_plus_film_kg": "a5c1a102e21066bd4259f90b4172d7b40d03cfc002e07e61a33b16afd6b6b23a",
+        "signed_outlet_kg_s": "68894f003f124d88b9129f367bca865cb0b9fb7c708cebf1fe90801299e3abc0"
+      }
+    }
   },
   "plot_text": [
-    "Continuity residual",
-    "Historical startup: film disabled; Coupled after ramp",
-    "Shortened startup: early wall and contact treatment",
-    "Scaled liquid-fraction residual\n(normalisation differs)",
-    "Bulk + film liquid (kg)",
-    "Updates since ramp start: 1\u20132000 ramp; 2001\u20133000 full-feed hold",
-    "Outward liquid (kg/s)",
-    "Startup comparison at matched inlet loading\nAll saved iterations; liquid-fraction residual scales differ"
+    "(a)",
+    "0",
+    "0",
+    "500",
+    "500",
+    "1000",
+    "1000",
+    "1500",
+    "1500",
+    "2000",
+    "2000",
+    "2500",
+    "2500",
+    "3000",
+    "3000",
+    "Continuity residual\n(common scale)",
+    "$\\mathdefault{10^{-5}}$",
+    "$\\mathdefault{10^{-5}}$",
+    "$\\mathdefault{10^{-4}}$",
+    "$\\mathdefault{10^{-4}}$",
+    "$\\mathdefault{10^{-3}}$",
+    "$\\mathdefault{10^{-3}}$",
+    "$\\mathdefault{10^{-2}}$",
+    "$\\mathdefault{10^{-2}}$",
+    "$\\mathdefault{10^{-1}}$",
+    "$\\mathdefault{10^{-1}}$",
+    "$\\mathdefault{10^{0}}$",
+    "$\\mathdefault{10^{0}}$",
+    "(b)",
+    "0",
+    "0",
+    "500",
+    "500",
+    "1000",
+    "1000",
+    "1500",
+    "1500",
+    "2000",
+    "2000",
+    "2500",
+    "2500",
+    "3000",
+    "3000",
+    "Bulk + film\nliquid inventory (kg)",
+    "100",
+    "100",
+    "200",
+    "200",
+    "300",
+    "300",
+    "(c)",
+    "Negative = outward",
+    "Updates since inlet ramp start\n1–2000: ramp; 2001–3000: full-feed hold",
+    "0",
+    "0",
+    "500",
+    "500",
+    "1000",
+    "1000",
+    "1500",
+    "1500",
+    "2000",
+    "2000",
+    "2500",
+    "2500",
+    "3000",
+    "3000",
+    "Signed liquid flux\nat steam outlet (kg/s)",
+    "−20",
+    "−20",
+    "−10",
+    "−10",
+    "0",
+    "0",
+    "Startup comparison at matched inlet loading",
+    "Historical startup",
+    "Shortened startup"
   ],
   "sources": {
     "historical_liquid": {
@@ -33,22 +210,6 @@
     "historical_residuals": {
       "path": "PyAnsys/output/phase72a-lineage-N45606/20261005/carrier-residuals.csv",
       "sha256": "2f056c646cb59fb037f11e4780ec6faddb74fb78a88c23a4c55aa6a8613b8149"
-    },
-    "historical_loading": {
-      "path": "PyAnsys/output/phase72a-lineage-N45606/20261005/recovered-r0-reports/P71A-R0-SMOOTH-CONTROL-v2-command.out",
-      "sha256": "935de146afbf79ffad40173383da00c3ce863abe5bab64476951eafdf079aa88"
-    },
-    "roughness_summary": {
-      "path": "PyAnsys/output/phase72a_family_r/analysis-20260923T054600Z-cs-sensitivity-v2/tail-summary.csv",
-      "sha256": "869db8e0b06e411c773cf02b82e313c15541f73a5afab6c5094da39c0ef44be0"
-    },
-    "film_disabled": {
-      "path": "PyAnsys/output/phase72a_ewf_family_e_student_20260922T115500Z/E0/report-histories.json",
-      "sha256": "86a155717acb9d2386d8114254818455b1dfc23609b2714f0981803bbaa36360"
-    },
-    "accretion_enabled": {
-      "path": "PyAnsys/output/phase72a_ewf_student_e27_run_20260923T071523Z/E2.7/report-histories.json",
-      "sha256": "1adc9d9d20fa5f1912f38d5b6a292a787e693ee5be69599d2c1a753518f6be63"
     },
     "shortened_liquid": {
       "path": "PyAnsys/output/phase72a-stage3-early-ewf-server1/20261005/final-histories.json",
@@ -62,6 +223,14 @@
       "path": "PyAnsys/output/phase72a-stage3-early-ewf-server1/20261005/analysis-summary.json",
       "sha256": "a0e5b2faa71429e68fa2fc1e3ef87c9992158e77f1319b4acfdf5e35163caf52"
     }
+  },
+  "output": {
+    "sha256": "f79572d631f536ebaf19f900cfe3b57365986a00d8490977214b336b82284db3",
+    "dpi": 300,
+    "size_inches": [
+      6.8,
+      6.4
+    ]
   },
   "software": {
     "matplotlib": "3.10.9",

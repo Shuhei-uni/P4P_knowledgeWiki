@@ -1,7 +1,7 @@
 phase: phase-09-mesh-convergence
 lane: server6-slit154k
 server_id: '6'
-status: running_from4235_2p5us_native_startup_observed
+status: paused_by_human_retained50p9ms_reopen_verified
 authority_date: '2026-10-10'
 mesh_cells: 154063
 latest_recorded_native_iteration: 5290
@@ -18,26 +18,26 @@ production_verified_completed_updates: 0
 production_startup_observed_native_iteration: 5183
 production_startup_observed_film_time_s: 0.0035104
 production_startup_observation_scope: transcript_prefix
-last_verified_production_checkpoint_native_iteration: 80580
-last_verified_production_checkpoint_film_time_s: 0.04235
+last_verified_production_checkpoint_native_iteration: 84000
+last_verified_production_checkpoint_film_time_s: 0.0509
 evidence: PyAnsys/output/phase9-server6-slit154k/20261010/checkpoint-availability.json
 prepared_child_verified: true
-target_film_time_s: 0.1
-nominal_new_updates: 23060
-nominal_final_native_iteration: 103640
+target_film_time_s: 0.0509
+nominal_new_updates: 0
+nominal_final_native_iteration: 84000
 functional_drain_proof: PASS
 functional_drain_ledger_error_percent: 0.006668383504972156
-host_controller_status: RUNNING
-cached_host_controller_status: RUNNING
-active_stage: from4235-2p5us-growth-1
-active_stage_target_native_iteration: 90580
-run_state_evidence: PyAnsys/output/phase9-server6-slit154k/20261010/from4235-2p5us-snapshot.json
+host_controller_status: PAUSED_BY_HUMAN
+cached_host_controller_status: PAUSED_BY_HUMAN
+active_stage: null
+active_stage_target_native_iteration: null
+run_state_evidence: PyAnsys/output/phase9-server6-slit154k/20261010/retained-50p9ms.json
 startup_evidence: PyAnsys/output/phase9-server6-slit154k/20261010/from4235-2p5us-native-startup.json
 network_reconciliation_evidence: PyAnsys/output/phase9-server6-slit154k/20261010/network-reconciliation.json
 connection_return_wake_enabled: true
 solve_replayed_after_timeout: false
-last_observed_active_film_s: 0.0423825
-last_observed_film_courant: 0.05879154
+last_observed_active_film_s: 0.0509
+last_observed_film_courant: 0.05902753296155766
 lower_step_recovery_code_review: PASS
 lower_step_recovery_deployed: true
 recovery_pending_evidence: PyAnsys/output/phase9-server6-slit154k/20261010/pending-lower-step-reconciliation.json
@@ -52,7 +52,7 @@ recovery_native_startup_observed: true
 recovery_startup_film_s: 0.0423825
 recovery_startup_evidence: PyAnsys/output/phase9-server6-slit154k/20261010/from4235-2p5us-native-startup.json
 final_bulk_start_film_s: 0.095
-next_case: server6-angle213k
+next_case: null
 next_case_target_film_s: 0.1
 target100_transition_deployed: true
 target100_transition_status: SUPERSEDED_BY_FROM4235_CONTINUE100
@@ -121,9 +121,14 @@ from4235_handoff_evidence: PyAnsys/output/phase9-server6-slit154k/20261010/from4
 from4235_partial_preservation_evidence: PyAnsys/output/phase9-server6-slit154k/20261010/from4235-partial-preservation.json
 from4235_native_resume_confirmed: true
 
-laptop_watcher_active: true
+laptop_watcher_active: false
 laptop_pending_handoff_active: false
 laptop_closure_evidence: PyAnsys/output/phase9-server6-slit154k/20261010/laptop-closure-stop.json
 fluent_stop_sent_for_laptop_closure: false
 
-last_observed_active_film_scope: transcript_prefix_startup_only
+last_observed_active_film_scope: retained_pair_reopen_idle
+
+human_selected_retained_native_iteration: 84000
+human_selected_retained_film_s: 0.0509
+automatic_angle_transition: false
+retained_endpoint_evidence: PyAnsys/output/phase9-server6-slit154k/20261010/retained-50p9ms.json

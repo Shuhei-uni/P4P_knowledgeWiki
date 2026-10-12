@@ -1,0 +1,29 @@
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{booktabs,array}
+\setstretch{1.15}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt plus 1pt}
+\usepackage{titlesec}
+\titleformat{\section}{\large\bfseries}{}{0pt}{}
+\titleformat{\subsection}{\normalsize\bfseries}{}{0pt}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{}{0pt}{}
+\titlespacing*{\section}{0pt}{0.25\baselineskip}{0.2\baselineskip}
+\titlespacing*{\subsection}{0pt}{0pt}{0pt}
+\titlespacing*{\subsubsection}{0pt}{0pt}{0pt}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf,width=0.95\linewidth,justification=centering,skip=3pt}
+\usepackage{enumitem}
+\setlist{nosep,topsep=2pt}
+\setlength{\textfloatsep}{8pt plus 2pt minus 2pt}
+\setlength{\floatsep}{6pt plus 2pt minus 2pt}
+\setlength{\intextsep}{6pt plus 2pt minus 2pt}
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.75}
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{3}
+\setcounter{totalnumber}{5}
+\newcommand{\proofslot}[2]{\par\noindent\fbox{\parbox[c][#1][c]{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{\centering #2}}\par}
+\newcommand{\proofpage}[1]{\noindent\textbf{Phase 9 layout reservation: #1 of 4}\par\medskip}

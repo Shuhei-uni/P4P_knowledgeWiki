@@ -10,7 +10,7 @@
 | Report type | Part IV Research Project Report |
 | Supervisors | Sadiq Zarrouk and Maedeh Amirpour |
 | Co-worker | Andy Tran |
-| Draft date | 11 October 2026 |
+| Draft date | 12 October 2026 |
 | Student identification | To be entered by the author |
 | Submission date | To be entered by the author |
 
@@ -18,13 +18,15 @@
 
 ## Abstract
 
-Geothermal separators must move liquid away from steam and provide a route for its collection and discharge. This study developed an existing computational fluid dynamics model of a vertical steam–water separator, focusing on how liquid moves between the bulk flow, vessel wall and collector. The simplified geometry omitted the lower brine-discharge path. A polyhedral–hexahedral mesh, explicit inlet phase placement, numerical liquid collection and staged startup supported successive investigations of wall roughness and Eulerian Wall Film.
+Geothermal separators must move liquid away from steam, collect it and provide a discharge route. This study developed an existing computational fluid dynamics model of a vertical steam–water separator by following liquid through the bulk flow, vessel wall and collector. The simplified geometry omitted the lower brine discharge. Mesh development, separate steam and liquid inlet regions, a numerical collector and staged startup enabled studies of wall roughness and Eulerian Wall Film.
 
-The revised mesh provided wall-following refinement and showed changed wall-liquid fields. With the same mesh and numerical package, wall-side inlet placement increased retained liquid by 37.4% relative to mixed feed. Absorber-free calculations exposed the collection problem through increasing lower-vessel liquid inventory or discharge of almost the entire liquid feed through the steam outlet. A liquid-selective collector and reduced-feed startup then supplied common fields for wall-treatment comparisons. A later combined startup reduced the ramp continuity peak by 70.15%. Wall treatment strongly changed the calculated liquid state: the selected accretion-enabled film package reduced mean bulk-liquid steam-outlet flow from 24.369 to 1.735 kg/s, alongside substantial inventory changes.
+The revised mesh provided wall-following refinement and showed changed liquid distributions. With mesh, feed and numerical controls held fixed, placing inlet liquid beside the wall increased retained mass by 37.4%. Without a collector, liquid accumulated in the lower vessel or almost entirely left through the steam outlet. Collection and reduced-feed startup then supplied common fields for wall comparisons. The later combined startup reduced the peak continuity residual during loading by 70.15%. The selected film treatment reduced mean bulk-liquid steam-outlet flow from 24.369 to 1.735 kg/s, alongside a large inventory change.
 
-Under prescribed bulk forcing, film spread and thickened over the lower and middle wall. At 500 ms, film input and drainage were 81.12 and 69.60 kg/s, with continued storage of 11.53 kg/s. Later configurations added stripping, splashing and edge separation. A matched direct-film-drain test reduced lower-wall film inventory by 70.32%, while a longer continuation showed continuing upper-wall accumulation despite active removal below.
+With bulk flow fields held fixed, film spread and thickened over the lower and middle wall. At 500 ms, input and drainage averaged 81.12 and 69.60 kg/s over the final 10 ms, with storage of 11.53 kg/s. Later configurations added droplet release and impact mechanisms. A matched direct film-drain test reduced lower-wall film inventory by 70.32%. A longer continuation showed that upper-wall liquid could still accumulate while the lower drain operated.
 
-The study establishes a collection and startup method and shows why wall capture, film release and drainage must be considered together. These findings guide further model development and proposed features that direct wall liquid towards collection. Open combined balances, developing fields and incomplete resolution and physical assessment limit the results to model-development evidence; validated efficiency and pressure-loss predictions remain future work.
+The study connects inlet and wall assumptions to liquid destinations and supplies checked collection and startup procedures. Wall capture, release and drainage must be assessed together when judging design changes. Developing fields, incomplete mass balances and unresolved numerical sensitivity limit the findings to model development. Physical validation is still needed before predicting separation efficiency or pressure loss.
+
+> **Draft completion note.** Section 4.13 reserves the final Phase 9 mesh results. Update this abstract with their main finding when those results are selected; no outcome is assumed here.
 
 ## Declaration
 
@@ -86,6 +88,8 @@ Page references will be generated during document layout.
 | 13 | Shortened-startup ramp comparison |
 | 14 | Selected film development through 500 ms |
 | 15 | Film-thickness views |
+| 16 | Phase 9 liquid and film fields across mesh resolutions — reserved |
+| 17 | Phase 9 collection, outlet flow and storage versus mesh resolution — reserved |
 | A1 | Complete contact chronology |
 | A2 | Shortened-startup and film chronology to iteration 25815 |
 | A3 | Native inlet mesh section |
@@ -97,28 +101,21 @@ Page references will be generated during document layout.
 
 | Table | Subject |
 | --- | --- |
-| 1 | Context and evidence for transferring liquid-transport and collection methods to the present separator model |
-| 2 | Fixed material properties verified for the throughput-controlled absorber model |
-| 3 | Boundary conditions for the main startup and wall-treatment lineage |
-| 4 | Model and control changes for the principal reported comparisons |
-| 5 | Procedures used to assess implementation and numerical credibility |
-| 6 | Quantities used in the model assessment |
-| 7 | Matched inlet-placement results at nominal 26.81 m/s |
-| 8 | Developing absorber-free fields under the same reduced-relaxation SIMPLE package at iteration 3000 |
-| 9 | Successive stages of carrier development |
-| 10 | Source-inclusive mass-balance remainders at iteration 5586 |
-| 11 | Selected endpoints on the combined field history |
-| 12 | Peak values during the matched inlet ramp |
-| 13 | Shortened-startup liquid-account terms over the final 500 full-feed updates, iterations 4581–5080 |
-| 14 | Film inventory and late-window rates under frozen bulk fields |
-| 15 | Direct lower-wall film drainage over 15 ms from identical fields |
-| 16 | Answers to the research questions and the next evidence needed |
+| 1 | Selected literature and implications for the separator model |
+| 2 | Fixed material properties |
+| 3 | Main boundary conditions |
+| 4 | Matched inlet-placement results |
+| 5 | Developing absorber-free fields at iteration 3000 |
+| 6 | Peaks during the matched inlet ramp |
+| 7 | Film inventory and late-window rates under frozen bulk fields |
+| 8 | Matched direct lower-wall film-drain test |
+| 9 | Phase 9 final mesh comparison — reserved |
 
-Appendix tables retain the detailed settings, checks and evidence registers.
+Appendix tables retain comparison designs, detailed settings, criteria, histories, balance results and the supported research answers.
 
 ## Acknowledgements
 
-I thank Sadiq Zarrouk and Maedeh Amirpour for their supervision of this project, and Andy Tran for his collaboration as my project partner.
+I thank Sadiq Zarrouk and Maedeh Amirpour for their supervision and feedback as the modelling questions developed. Discussions with Sadiq also helped shape the wall-liquid design concepts. I thank Andy Tran for his collaboration as my project partner.
 
 ## Glossary of terms and abbreviations
 
@@ -129,6 +126,8 @@ I thank Sadiq Zarrouk and Maedeh Amirpour for their supervision of this project,
 | Carrier | The Eulerian vapour and bulk-liquid flow fields through which discrete droplets are tracked |
 | DPM | Discrete Phase Model; the Lagrangian representation of droplets |
 | EWF | Eulerian Wall Film; the wall-based representation of liquid-film transport |
+| IAPWS | International Association for the Properties of Water and Steam |
+| IF97 | IAPWS industrial formulation for equilibrium water and steam properties |
 | PyFluent | Python interface used to configure and command Ansys Fluent |
 | Agent harness | Recorded workflow linking research questions, agent instructions, solver execution and analysis |
 | RNG | Renormalisation group; used here in the RNG k–ε turbulence model |

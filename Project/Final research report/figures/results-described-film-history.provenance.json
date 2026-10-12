@@ -1,12 +1,16 @@
 {
   "figure": "results-described-film-history",
-  "processing": "Numerical replot with descriptive labels. No source PNG pixels edited; no source data changed; all selected points drawn without smoothing.",
+  "processing": "Numerical replot from the unchanged selected source arrays; every selected point drawn without smoothing, interpolation or subsampling.",
+  "script": {
+    "path": "PyAnsys/scripts/analysis/repair_final_report_history_figures.py",
+    "sha256": "265aa8dc5676b6d4c2c92e9332568ede8991bb643156429c78d4fddd692e2d82"
+  },
   "checks": {
     "native_range": [
       1,
       25815
     ],
-    "plotted_points": 25815,
+    "plotted_points_per_series": 25815,
     "event_markers": [
       [
         1580,
@@ -36,7 +40,7 @@
       [
         13390,
         "F",
-        "20 \u00b5s local step screen"
+        "20 µs local step screen"
       ],
       [
         22615,
@@ -49,11 +53,31 @@
       13390,
       22615
     ],
-    "outlet_sign": "Native signed flux; negative is outward",
+    "outlet_sign": "Native signed steamoutlet flux; negative is outward",
+    "drainage_rate_definition": "Source CSV rate from cumulative outflow change / accepted film time",
+    "bulk_plus_film_identity": "PASS at every selected row",
+    "verified_endpoint": {
+      "bulk_liquid_kg": 61.05488260946753,
+      "bulk_plus_ewf_kg": 67.74315813996104,
+      "phase2_steamoutlet_signed_kg_s": -3.429961885581568,
+      "film_kg": 6.688275530493504,
+      "accretion_kg_s": 81.12137742644737,
+      "drainage_kg_s": 68.21860582890211
+    },
     "original_csv_arrays_retained": true,
-    "excluded_siblings_and_rejected_recoveries_unchanged": true
+    "excluded_siblings_and_rejected_recoveries_unchanged": true,
+    "array_sha256": {
+      "native_iteration": "734decd49ecb8d2e74dbc0b65c615baa0b9cbfb51cdc3c5eaa292e21928ade03",
+      "bulk_liquid_kg": "4ebeb44c25aad18f5435e3717dc87e30a3f8d9d20580af6d6004ba50f8f6da1a",
+      "bulk_plus_ewf_kg": "edc696143ea2d145a988fefd053b30c2a60fb4faa337952cd5d437542d145b6e",
+      "phase2_steamoutlet_signed_kg_s": "7e9d1c30ec70a4df2f240f52800d71d8c58761b01b85cba356d9441944ed6439",
+      "film_kg": "8d8d10da8f4c11e56898f64e0c466e00b80be1906bee42c88823a1be193e6501",
+      "accretion_kg_s": "28feeaa4553ddec545461e5ad5f213fc378c1c38454f246e3b292636bb7bc566",
+      "drainage_kg_s": "f479aba52b3de6b887a0ac2f12a27a76f6a6ae9d32bcb1f9d698d7964b17658f"
+    }
   },
   "plot_text": [
+    "(a)",
     "A",
     "B",
     "C",
@@ -61,82 +85,112 @@
     "E",
     "F",
     "G",
-    "Native solver iteration (bulk fields frozen after D)",
+    "0",
+    "0",
+    "5000",
+    "5000",
+    "10000",
+    "10000",
+    "15000",
+    "15000",
+    "20000",
+    "20000",
+    "25000",
+    "25000",
     "Liquid inventory (kg)",
-    "Bulk-liquid inventory",
-    "Bulk + film inventory",
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "Native solver iteration (bulk fields frozen after D)",
-    "Signed liquid outlet\nflow (kg/s)",
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "Native solver iteration (bulk fields frozen after D)",
+    "0",
+    "0",
+    "20",
+    "20",
+    "40",
+    "40",
+    "60",
+    "60",
+    "Bulk liquid",
+    "Bulk + film",
+    "(b)",
+    "Negative = outward",
+    "0",
+    "0",
+    "5000",
+    "5000",
+    "10000",
+    "10000",
+    "15000",
+    "15000",
+    "20000",
+    "20000",
+    "25000",
+    "25000",
+    "Signed liquid flux\nat steam outlet (kg/s)",
+    "−3",
+    "−3",
+    "−2",
+    "−2",
+    "−1",
+    "−1",
+    "0",
+    "0",
+    "(c)",
+    "0",
+    "0",
+    "5000",
+    "5000",
+    "10000",
+    "10000",
+    "15000",
+    "15000",
+    "20000",
+    "20000",
+    "25000",
+    "25000",
     "Film inventory (kg)",
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "Native solver iteration (bulk fields frozen after D)",
+    "0",
+    "0",
+    "2",
+    "2",
+    "4",
+    "4",
+    "6",
+    "6",
+    "(d)",
+    "Native solver iteration\nBulk fields frozen after D; diamonds mark selected restarts",
+    "0",
+    "0",
+    "5000",
+    "5000",
+    "10000",
+    "10000",
+    "15000",
+    "15000",
+    "20000",
+    "20000",
+    "25000",
+    "25000",
     "Film rate (kg/s)",
+    "0",
+    "0",
+    "40",
+    "40",
+    "80",
+    "80",
     "Accretion",
-    "Drainage: cumulative outflow change / accepted film time",
-    "Selected frozen-bulk film-development history\nA: combined model activation; B: inlet ramp; C: full feed; D: bulk freeze and faster film stepping\nE: lower-target recovery; F: 20 \u00b5s local step screen; G: smaller-step recovery"
+    "Drainage",
+    "Selected startup and frozen-bulk film history"
   ],
   "sources": {
-    "historical_liquid": {
-      "path": "PyAnsys/output/phase72a-lineage-N45606/20261005/selected-lineage-histories.csv",
-      "sha256": "fd2dc3dd83f8a0ce55770295ff14402717de1786d316a6d078e71de156c25f26"
-    },
-    "historical_residuals": {
-      "path": "PyAnsys/output/phase72a-lineage-N45606/20261005/carrier-residuals.csv",
-      "sha256": "2f056c646cb59fb037f11e4780ec6faddb74fb78a88c23a4c55aa6a8613b8149"
-    },
-    "historical_loading": {
-      "path": "PyAnsys/output/phase72a-lineage-N45606/20261005/recovered-r0-reports/P71A-R0-SMOOTH-CONTROL-v2-command.out",
-      "sha256": "935de146afbf79ffad40173383da00c3ce863abe5bab64476951eafdf079aa88"
-    },
-    "roughness_summary": {
-      "path": "PyAnsys/output/phase72a_family_r/analysis-20260923T054600Z-cs-sensitivity-v2/tail-summary.csv",
-      "sha256": "869db8e0b06e411c773cf02b82e313c15541f73a5afab6c5094da39c0ef44be0"
-    },
-    "film_disabled": {
-      "path": "PyAnsys/output/phase72a_ewf_family_e_student_20260922T115500Z/E0/report-histories.json",
-      "sha256": "86a155717acb9d2386d8114254818455b1dfc23609b2714f0981803bbaa36360"
-    },
-    "accretion_enabled": {
-      "path": "PyAnsys/output/phase72a_ewf_student_e27_run_20260923T071523Z/E2.7/report-histories.json",
-      "sha256": "1adc9d9d20fa5f1912f38d5b6a292a787e693ee5be69599d2c1a753518f6be63"
-    },
-    "shortened_liquid": {
-      "path": "PyAnsys/output/phase72a-stage3-early-ewf-server1/20261005/final-histories.json",
-      "sha256": "9882b96f527d1c5337990759a14eb31f51f3ff600e298855ea75170886307524"
-    },
-    "shortened_residuals": {
-      "path": "PyAnsys/output/phase72a-stage3-early-ewf-server1/20261005/carrier-residuals.json",
-      "sha256": "ef9c462d3eab58e25a278b1c8fd1f1f0e4013bf55a09a4df8f5f661da5e68b49"
-    },
-    "startup_metrics": {
-      "path": "PyAnsys/output/phase72a-stage3-early-ewf-server1/20261005/analysis-summary.json",
-      "sha256": "a0e5b2faa71429e68fa2fc1e3ef87c9992158e77f1319b4acfdf5e35163caf52"
-    },
     "selected_film_history": {
       "path": "PyAnsys/output/phase72a-stage3-film-development-server1/20261005/selected-history/selected-case-history-N25815.csv",
       "sha256": "961c587832364b8d4e8d831fa5b295959b8dc5f4f1661d8e074e7819373e2afd"
     }
+  },
+  "output": {
+    "sha256": "4f8993c0251a62bc8ea84a5824c554b0f29a67084948a03955c947ee0ea1f6c5",
+    "dpi": 300,
+    "size_inches": [
+      6.8,
+      7.8
+    ]
   },
   "software": {
     "matplotlib": "3.10.9",
