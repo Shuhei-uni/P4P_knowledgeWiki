@@ -38,6 +38,7 @@ their exact history remains recoverable from Git.
 
 - [Phase 8 — Stage 1 storyline and Stage 2 fine-mesh SIMPLE (Shuhei)](phase-08-storyline-reconstruction/stage-01-60k-storyline/index.md)
 - [Phase 9 — Mesh convergence preparation (Shuhei)](phase-09-mesh-convergence/index.md)
+- [Phase 10 — Single-inlet mesh convergence (Andy)](phase-10-single-inlet-mesh-convergence/index.md)
 - [Legacy reconstruction](legacy/legacy-bangma-reconstruction/historical-run.md)
 - [Historical parallel studies from Andy's checkout](parallel-andy-studies/README.md) — enthalpy/DPM replication, liquid-sink diagnostics and resolved-outlet VOF evidence, with explicit identities and recovery provenance.
 

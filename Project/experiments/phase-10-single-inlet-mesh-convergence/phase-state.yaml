@@ -1,0 +1,241 @@
+phase_id: phase-10-single-inlet-mesh-convergence
+owner: Andy
+created_on: '2026-10-08'
+status: PAUSED_BY_USER_BF01_NOT_STARTED
+last_verified_execution_status: RUNNING
+monitor_checked_at: '2026-10-12T01:11:01.970596+00:00'
+monitor_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/latest-monitor-check.json
+monitor_access_status: ACCESS_LOST_AFTER_VERIFIED_BASELINE_STOP_USER_PAUSED
+configured_connection_port: 60569
+recorded_phase_tcp_status: TIMEOUT
+configured_endpoint_receipt_status: DEADLINE_EXCEEDED
+recorded_endpoint_receipt_status: DEADLINE_EXCEEDED
+recorded_endpoint_receipt_error_class: DEADLINE_EXCEEDED
+current_execution_verified: false
+independent_controller_process_verified: false
+solver_failure_established_by_monitor: true
+monitor_notification_key: phase-10:M07:USER_STOP_N718:BF01_NOT_STARTED:USER_PAUSE
+context: CONTEXT.md
+setup: setup.md
+results: results.md
+paths: run-paths.yaml
+mesh_family_complete: true
+delivery_verified: true
+mesh_cells:
+- 357145
+- 487746
+- 681844
+- 946967
+- 1430497
+- 2209748
+- 5479605
+solver_parent_selected: true
+solver_run_selected: true
+solver_session_assigned: true
+phase_solve_iterations: 22302
+mesh_convergence_established: false
+original_style_family_identity_verified: false
+original_style_family_metrics_status: CELL_COUNTS_OQ_AR_RECOVERED_REMAINING_METRICS_PENDING
+available_seven_mesh_metrics_recorded: true
+comparison_goal: TET_POLY_OUTPUT_AGREEMENT_AND_RUNTIME
+historical_study_id: split_inlet_mesh_convergence_20260801
+historical_study_logged: true
+historical_reference_qualified: false
+timing_evidence_available: false
+speedup_verified: false
+current_family_node_counts_verified: true
+historical_exact_node_counts_recovered:
+- 900k
+next_action: WAIT_FOR_HUMAN_RESUME_THEN_RECONCILE_SESSION_AND_EXECUTE_M04_BF01
+execution_requested: true
+exact_settings_required: true
+reference_case_inspected: true
+reference_candidate_sha256: 5c6fb39a5148a5f39b601d46ed6fa048a0769aed80a9859f18863dee7f02de4b
+proposed_iterations_per_mesh: 5000
+historical_formal_iterations_per_mesh: 3000
+reference_policy: RECOVERED_ORIGINAL_CARRIER
+reference_path_requested: false
+iterations_per_mesh: 5000
+iteration_budget: 35000
+common_reference_verified: true
+common_reference_sha256: 99d7c34410c76bcba6d2add51753986ec288ede9de78a90508acbc076c4806de
+pilot_first_process_exited_before_build: true
+pilot_revised_dispatch_unconfirmed: false
+solver_api_tcp_port_open: true
+solver_api_health_status: NOT_PROBED_NATIVE_RECEIPTS_PASS
+verified_phase_solve_iterations: 20409
+pilot_possible_iterations_maximum: 5
+full_batch_launched: true
+session_port: 60569
+pilot_revised_process_exited_before_build: true
+pilot_new_dispatch_unconfirmed: true
+pilot_62915_process_exited_before_build: true
+pilot_62174_dispatch_unconfirmed: true
+launch_retry_pid: null
+launch_retry_maximum_hours: 4
+launch_retry_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/launch-retry-status.json
+human_confirmation_required: false
+launch_retry_active: false
+pilot_62174_exited_before_build: true
+pilot_64452_first_preparation_solved_updates: 0
+monitor_configuration_status: MANUAL_SCHEDULE_ACTIVE_THIS_CHAT_VERIFIED
+latest_startup_error: MPI_UNABLE_TO_ALLOCATE_SHARED_MEMORY
+latest_startup_error_source: USER_CONSOLE_LOG
+latest_startup_error_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/mpi-startup-error-20261008.json
+current_windows_user: qtra338
+study_files_windows_user: syok443
+study_file_access_status: NEW_ACCOUNT_MESHES_AND_ORIGINAL_CASE_READABLE_OLD_PILOT_ACCESS_DENIED
+current_access_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/windows-access-52660.json
+paused_by_user: true
+resume_requires_user_instruction: false
+current_account_mesh_hashes_verified: true
+original_case_file_recovered: true
+original_case_settings_audited: true
+current_account_discovery_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/account-discovery-paused-52660.json
+current_account_runtime_verified: true
+current_account_runtime_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/account-runtime-proof-20261009.json
+original_carrier_build_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/original-carrier-common-build-20261009.json
+processor_count: 16
+current_account_pilot_verified: true
+current_account_pilot_pid: 7372
+pilot_smoke_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/M01-smoke-verified-20261009.json
+current_solver_mesh_nodes: 9874749
+batch_preflight_stall_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/batch-preflight-stall-20261009.json
+controller_pid: 2572
+batch_start_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/current-launch.json
+current_level: M07
+verified_current_checkpoint: 718
+phase_solve_iterations_source: NATIVE_M01_M06_FAILURE_COUNTS_PLUS_M07_USER_STOP_N718_PLUS_M05_LOST_UPDATE_BOUNDS
+observed_current_iteration: 718
+observed_iteration_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/latest-monitor-transcript.json
+verified_current_checkpoint_status: M07_N718_PAIR_RECORDED_WITH_HASHES_NATIVE_CONTROLLER
+failed_mesh_levels:
+- M01
+- M02
+- M03
+- M04
+- M05
+- M06
+M01_actual_iterations: 1756
+M01_last_verified_checkpoint: 1000
+M01_status: NUMERICAL_FAILURE_UNQUALIFIED
+recovery_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/saved-resume-verification-20261010.json
+remaining_selected_levels: []
+maximum_additional_iterations: 1000
+maximum_current_attempt_series_iterations: 28919
+current_level_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/latest-native-receipts.json
+last_native_controller_pid: 24688
+solver_failure_established_by_source_chat: true
+previous_controller_process_status: EXITED_NO_WORKERS
+M02_actual_iterations: 4488
+M02_last_verified_checkpoint: 4000
+M02_status: NUMERICAL_FAILURE_UNQUALIFIED
+M03_actual_iterations: 2769
+M03_last_verified_checkpoint: 2000
+M03_failed_partial_checkpoint: 2769
+M03_status: NUMERICAL_FAILURE_UNQUALIFIED
+monitor_schedule_id: phase-10
+monitor_thread_id: 01a1181a-f519-7ca2-ad1d-188685e101d4
+monitor_schedule_status: ACTIVE
+monitor_cadence: RRULE:FREQ=MINUTELY;INTERVAL=30
+source_connection_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/connection-recovery-60569-20261010.json
+current_level_preparation_observed: true
+latest_source_probe_status: PASS
+latest_source_probe_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/latest-native-receipts.json
+previous_controller_process_verified: true
+buffered_mesh_check_level_verified: false
+current_solver_mesh_nodes_verified: true
+M04_status: NUMERICAL_FAILURE_UNQUALIFIED
+human_stop_intent_clarification_pending: false
+M04_error_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/divergence-diagnosis-20261011/raw/M04/solve-to-N4000.trn
+latest_source_checked_at: '2026-10-12T00:57:18.012836+00:00'
+restart_authority: USER_20261009_RESTART_REQUEST
+requested_monitor_thread_id: 01a1181a-f519-7ca2-ad1d-188685e101d4
+monitor_rebind_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/monitor-rebind-request-20261009.json
+monitor_creation_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/monitor-create-request-20261009.json
+technical_recovery_authorized: true
+restart_when_needed_authorized: true
+advance_selected_cases_authorized: true
+monitor_configuration_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/monitor-active-readback-20261009.json
+M04_actual_iterations_lower_bound: 3082
+M04_last_verified_checkpoint: 3000
+monitor_external_block_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/monitor-external-block.json
+windows_observation_required: false
+windows_observation_question_pending: false
+consecutive_receipt_timeout_checks: 0
+monitor_repeat_notification_suppressed: true
+monitor_check_status: USER_PAUSED
+consecutive_receipt_failure_checks: 0
+user_confirmed_fluent_restart: true
+M04_actual_iterations: 3911
+network_access_restored: true
+M05_interrupted_iteration_lower_bound: 310
+M05_interrupted_iteration_upper_bound: 1000
+lost_updates_lower_bound: 305
+lost_updates_upper_bound: 995
+controller_launcher_pid: 32204
+M05_status: NUMERICAL_FAILURE_UNQUALIFIED
+phase_solve_iterations_upper_bound_at_last_observation: 22992
+monitor_external_block_resolved: false
+active_resume_runtime_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/saved-resume-runtime-transcript-20261010.json
+divergence_diagnosis: divergence-diagnosis-20261011.md
+divergence_causal_status: SHARED_ACCUMULATION_AND_OVERFLOW_VERIFIED_UNIQUE_TRIGGER_UNPROVEN
+post_series_diagnostic:
+  id: BF01
+  status: PREPARED_NOT_DEPLOYED_USER_PAUSED
+  user_authorized_on_nz: '2026-10-11'
+  setup_section: setup.md#selected-follow-up--bf01-implicit-body-force-test
+  job_spec: PyAnsys/output/phase10-single-inlet-mesh-convergence/bodyforce-BF01-job-spec.json
+  parent_level: M04
+  parent_iteration: 3000
+  final_iteration: 4000
+  additional_update_cap_including_smoke_and_retries: 1000
+  selected_delta: IMPLICIT_BODY_FORCE_ON
+  deployed: false
+  solved_updates: 0
+  requires_baseline_terminal_and_controller_exit: true
+  requires_native_budget_reconciliation: true
+  baseline_failed_classifications_preserved: true
+  maximum_campaign_updates_including_diagnostic: 29919
+  schedule_pause_deferred_until_diagnostic_terminal_review: true
+  schedule_prompt_update_verified: false
+  human_skipped_M07: true
+  code_review: PyAnsys/output/phase10-single-inlet-mesh-convergence/bodyforce-BF01-code-review.json
+current_runtime_status: BASELINE_STOPPED_BF01_NOT_STARTED_USER_PAUSED
+last_successful_monitor_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/last-verified-monitor-check.json
+last_successful_monitor_checked_at: '2026-10-12T00:59:04.826590+00:00'
+last_inconclusive_probe_does_not_authorize_restart: true
+latest_human_windows_observation:
+  received_utc: '2026-10-11T02:17:31.255794+00:00'
+  source: human_reply_in_this_chat
+  text: the error is cleared
+  limit: Does not identify current API endpoint, active iteration counter or controller
+    exit.
+  followup: Current port 60569 with advancing iterations or idle responsiveness, or
+    new endpoint credentials if restarted.
+  followup_question_pending: false
+  resolved_by: Human restored VPN; authenticated native reads confirm controller progression.
+M05_actual_iterations: 4180
+M05_last_verified_checkpoint: 4000
+M05_error_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/vpn-restored-20261011/M05-solve-to-N5000.trn
+M06_status: NUMERICAL_FAILURE_UNQUALIFIED
+latest_user_connectivity_observation:
+  source: human_reply_in_this_chat
+  text: the VPN is connected, try again and check if Fluent is running
+  vpn_reconnection_confirmed_by_user: true
+  verification: Authenticated native reads and advancing live iterations
+candidate_current_checkpoint: 3000
+candidate_current_checkpoint_pair_hashes_verified: true
+vpn_reconnect_pending: false
+M06_actual_iterations: 4175
+M06_last_verified_checkpoint: 4000
+M06_error_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/vpn-restored-20261012/M06-failure-check.json
+M07_status: USER_SKIPPED_UNQUALIFIED
+M07_actual_iterations: 718
+M07_last_verified_checkpoint: 718
+skipped_mesh_levels:
+- M07
+user_pause_authority: pause for now. I will get back to you.
+user_pause_recorded_at: '2026-10-12T01:11:01.970596+00:00'
+monitor_schedule_pause_status: REQUESTED_UNVERIFIED_AUTOMATION_UPDATE_UNAVAILABLE
+schedule_pause_native_verified: false

@@ -8,6 +8,8 @@ in `PyAnsys/`.
 
 ## What are we trying to answer now?
 
+**Andy — Phase 10 single-inlet mesh convergence:** Human-paused. M01–M06 remain failed. M07 was user-stopped at N718 and its paired endpoint/hashes are recorded. The selected M04 [BF01 test](experiments/phase-10-single-inlet-mesh-convergence/setup.md#selected-follow-up--bf01-implicit-body-force-test) is prepared but not deployed; zero ON updates. Access was lost after the verified stop, so process exit and native parent hashes still need verification on resume. Baseline spend is 22302–22992 of the 35000 cap. No convergence or speedup claim. The schedule pause is unverified because automation_update is unavailable; the recorded human pause blocks solver work. See [phase state](experiments/phase-10-single-inlet-mesh-convergence/phase-state.yaml) and [results](experiments/phase-10-single-inlet-mesh-convergence/results.md).
+
 **Andy — pressure/gravity initialization campaign closed unqualified:** seven contrasts used85 new iterations; six hit their startup guards. A zero-gravity pressure-datum control preserved rest, but gravity-on and homogeneous-liquid controls did not. All endpoints preserved, server1 idle; no further calculations selected. These startup tests do not establish that an eventual steady solution is impossible. [Closure and next-scope recommendation](experiments/pressure-gravity-initialization/closure.md).
 
 **Andy — discrete interface initialization closed unqualified:** native geometric filling produced3382 fractional cells but did not suppress N1 motion (30.93 versus30.89m/s); inventory departure worsened. Guarded endpoint and complete evidence preserved; solver idle, monitor paused. No further solves selected. [Results](experiments/discrete-interface-initialization/results.md).
