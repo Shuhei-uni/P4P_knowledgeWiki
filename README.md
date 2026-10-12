@@ -10,7 +10,7 @@ findings to choose the next experiment.
 
 ## A growing, connected knowledge base
 
-[![Watch the knowledge base expansion video](assets/readme/knowledge-base-expansion-preview.jpg)](assets/readme/knowledge-base-expansion.mp4)
+[![Animated knowledge graph expansion — click to watch the full video](assets/readme/knowledge-base-expansion.gif)](assets/readme/knowledge-base-expansion.mp4)
 
 **[Watch the knowledge base expansion video — 17 seconds](assets/readme/knowledge-base-expansion.mp4)** · [Original MOV](KnowledgeBaseExpansion.mov)
 
