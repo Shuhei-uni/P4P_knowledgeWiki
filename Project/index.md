@@ -8,19 +8,21 @@ in `PyAnsys/`.
 
 ## What are we trying to answer now?
 
-**Andy — pressure/gravity initialization campaign closed unqualified:** seven contrasts used85 new iterations; six hit their startup guards. A zero-gravity pressure-datum control preserved rest, but gravity-on and homogeneous-liquid controls did not. All endpoints preserved, server1 idle; no further calculations selected. These startup tests do not establish that an eventual steady solution is impossible. [Closure and next-scope recommendation](experiments/pressure-gravity-initialization/closure.md).
+**Shuhei — Server 1 / 680k EWF continuation:** apply EWF Plan v1 to the selected 679,970-cell N9080 parent and run this mesh only. Preserve the inherited 0.750 ms film age; target 200 ms with the final 5 ms bulk active. [Owned lane and current evidence](experiments/phase-09-mesh-convergence/server1-680k/CONTEXT.md).
 
-**Andy — discrete interface initialization closed unqualified:** native geometric filling produced3382 fractional cells but did not suppress N1 motion (30.93 versus30.89m/s); inventory departure worsened. Guarded endpoint and complete evidence preserved; solver idle, monitor paused. No further solves selected. [Results](experiments/discrete-interface-initialization/results.md).
+**Andy — pressure/gravity initialization campaign closed unqualified:** seven contrasts used85 new iterations; six hit their startup guards. A zero-gravity pressure-datum control preserved rest, but gravity-on and homogeneous-liquid controls did not. All endpoints preserved, server1 idle; no further calculations selected. These startup tests do not establish that an eventual steady solution is impossible. [Closure and next-scope recommendation](experiments/phase-09-steady-vof-pool/follow-on-diagnostics/pressure-gravity-initialization/closure.md).
 
-**Andy — hydrostatic startup audit/recovery closed unqualified:** native pressure patching, Modified BFW and brine-boundary sealing each hit the N1 speed guard. Strong motion persists with sealed brine and zero liquid boundary flow; drain forcing alone does not explain it. All endpoints preserved; no more solves selected. [Closure](experiments/hydrostatic-startup-recovery/closure.md).
+**Andy — discrete interface initialization closed unqualified:** native geometric filling produced3382 fractional cells but did not suppress N1 motion (30.93 versus30.89m/s); inventory departure worsened. Guarded endpoint and complete evidence preserved; solver idle, monitor paused. No further solves selected. [Results](experiments/phase-09-steady-vof-pool/follow-on-diagnostics/discrete-interface-initialization/results.md).
 
-**Andy — zero-feed hydrostatic verification stopped at N1:** from verified zero velocity/flow, maximum speed reached10.94m/s and triggered the predefined guard. Endpoint preserved; no further solves selected. This exposes a hydrostatic startup problem without identifying its cause. [Results](experiments/steady-vof-hydrostatic/results.md).
+**Andy — hydrostatic startup audit/recovery closed unqualified:** native pressure patching, Modified BFW and brine-boundary sealing each hit the N1 speed guard. Strong motion persists with sealed brine and zero liquid boundary flow; drain forcing alone does not explain it. All endpoints preserved; no more solves selected. [Closure](experiments/phase-09-steady-vof-pool/follow-on-diagnostics/hydrostatic-startup-recovery/closure.md).
 
-**Andy — steady VOF solver-method diagnostic closed unqualified:** N1000 completed. Late liquid/mixture imbalance improved about60%, but liquid inventory fell32.9% and the combined improvement and absolute acceptance gates failed. No further solves selected. [Closure and next verification recommendation](experiments/steady-vof-solver-method/closure.md).
+**Andy — zero-feed hydrostatic verification stopped at N1:** from verified zero velocity/flow, maximum speed reached10.94m/s and triggered the predefined guard. Endpoint preserved; no further solves selected. This exposes a hydrostatic startup problem without identifying its cause. [Results](experiments/phase-09-steady-vof-pool/follow-on-diagnostics/steady-vof-hydrostatic/results.md).
 
-**Andy — full-geometry fixed K9 drain-resistance investigation closed unqualified:** both fresh pool starts completed N1000 and repeated inventory loss with major conservation, routing and residual failures. No further solves selected; both endpoints preserved. Spend2000 iterations/4.5205 controller-hours. [Closure](experiments/full-geometry-drain-resistance/closure.md).
+**Andy — steady VOF solver-method diagnostic closed unqualified:** N1000 completed. Late liquid/mixture imbalance improved about60%, but liquid inventory fell32.9% and the combined improvement and absolute acceptance gates failed. No further solves selected. [Closure and next verification recommendation](experiments/phase-09-steady-vof-pool/follow-on-diagnostics/steady-vof-solver-method/closure.md).
 
-**Andy — drainage-boundary corrected repeat complete:** all four synthetic single-liquid controls passed analytical, conservation, residual, stability and per-iteration guard checks. Exactly 2000 repeat / 4000 combined diagnostic iterations used. Saved separator N2000 restored and verified idle; monitoring paused. This verifies the simple outlet-resistance implementation, not full-separator drainage or physical validity. [Results and limits](experiments/drainage-boundary-verification/results.md).
+**Andy — full-geometry fixed K9 drain-resistance investigation closed unqualified:** both fresh pool starts completed N1000 and repeated inventory loss with major conservation, routing and residual failures. No further solves selected; both endpoints preserved. Spend2000 iterations/4.5205 controller-hours. [Closure](experiments/phase-09-steady-vof-pool/follow-on-diagnostics/full-geometry-drain-resistance/closure.md).
+
+**Andy — drainage-boundary corrected repeat complete:** all four synthetic single-liquid controls passed analytical, conservation, residual, stability and per-iteration guard checks. Exactly 2000 repeat / 4000 combined diagnostic iterations used. Saved separator N2000 restored and verified idle; monitoring paused. This verifies the simple outlet-resistance implementation, not full-separator drainage or physical validity. [Results and limits](experiments/phase-09-steady-vof-pool/follow-on-diagnostics/drainage-boundary-verification/results.md).
 
 **Andy — Phase 9 closed unqualified after the N2000 extension:** the unchanged high-pool continuation lost another 15.6% of liquid inventory; conservation, routing and convergence still fail. Final evidence is preserved, Fluent is idle and no further solves are selected. See the [extension review](experiments/phase-09-steady-vof-pool/results.md). Downstream head and drain resistance remain unvalidated assumptions for a future scope decision. Phase 7b remains closed.
 
@@ -172,8 +174,8 @@ records are:
 - [Andy's Phase 7b direction and boundaries](experiments/phase-07b-full-geometry-liquid-removal/index.md)
 - [Andy's Phase 7b planning context](experiments/phase-07b-full-geometry-liquid-removal/CONTEXT.md)
 - [Phase-06 human-directed conclusion](experiments/phase-06-full-geometry-with-brine-pool/conclusion.md)
-- [Historical liquid-sink evidence and accounting corrections](experiments/parallel-andy-studies/closed-bottom-liquid-sinks.md)
-- [Historical resolved-outlet and transient VOF evidence](experiments/parallel-andy-studies/resolved-brine-outlet.md)
+- [Historical liquid-sink evidence and accounting corrections](experiments/phase-07b-full-geometry-liquid-removal/historical-andy-studies/closed-bottom-liquid-sinks.md)
+- [Historical resolved-outlet and transient VOF evidence](experiments/phase-09-steady-vof-pool/historical-andy-studies/resolved-brine-outlet.md)
 
 The predecessor evidence remains available through these records:
 

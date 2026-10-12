@@ -5,7 +5,7 @@ Reusable methods for estimating geothermal steam-water separator efficiency in A
 
 ## Historical drainage-method evidence
 
-The [preserved Andy resolved-outlet studies](../../../Project/experiments/parallel-andy-studies/resolved-brine-outlet.md)
+The [preserved Andy resolved-outlet studies](../../../Project/experiments/phase-09-steady-vof-pool/historical-andy-studies/resolved-brine-outlet.md)
 contain the case-specific observations behind the drainage qualification patterns
 below. Short-window mass closure did not persist in the longer tests; those
 records do not establish constant-level operation or a plant boundary condition.

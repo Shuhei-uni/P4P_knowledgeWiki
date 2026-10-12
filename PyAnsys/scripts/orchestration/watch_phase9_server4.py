@@ -90,12 +90,14 @@ def snapshot(stall_seconds=180):
     log, log_age = tail(receipt.get('log'))
     ages = [age for age in [live_age, log_age] if age is not None]
     activity_age = min(ages) if ages else None
-    running = alive(receipt.get('pid'), 'run_phase9_server4_2_6M.py campaign')
+    running = alive(receipt.get('pid'), 'run_phase9_server4_2_6M.py campaign') or alive(receipt.get('pid'), 'run_phase9_server4_ewf.py')
     rows = re.findall(r'^\s*(\d+)\s+[\d.+eE-]+\s+[\d.+eE-]+', live, re.M)
     batches = re.findall(r'^BATCH (\S+) (\S+) (\d+) (\d+)', log, re.M)
     complete = campaign.get('status') == 'COMPLETE_PREPARATION_ONLY'
     if complete:
         event = 'PREPARATION_COMPLETE'
+    elif campaign.get('status') == 'EWF_ADJUSTMENT_COMPLETE':
+        event = 'EWF_ADJUSTMENT_COMPLETE'
     elif not running:
         event = 'CONTROLLER_STOPPED'
     elif activity_age is None or activity_age > stall_seconds:
@@ -132,20 +134,17 @@ def wake(event, thread, executable):
     write(path, event)
     prompt = (
         'This chat owns ONLY Server 4 and mesh 2_6M. Never query or control Server 3. '
-        'If the event is CONNECTION_READY_INSPECT_BEFORE_LAUNCH, authentication is restored but live state is not yet inspected. Read the Server 4 handoff, inspect the live session before acting, review and verify the new runner then prepare/launch it. '
-        'The user authorized continuous Phase 9 supervision. This is an automatic '
-        f'event from the watcher: {event["event"]}. Read {path} and current machine '
-        'evidence. Use phase-loop to inspect Server 4 and finish ordinary recovery '
-        'or verify completion without waiting for the human. Server 4 only. NEVER '
-        'exit, terminate, or restart Fluent. Do not submit a duplicate solve or '
-        'replace an active session. Reconcile controller PID, native iteration, '
-        'active horizon, saved case/data and film clock before any continuation. '
-        'The authorized endpoint is the 2_6M full-feed hold, all bulk equations '
-        'active, provisional Stage 4 EWF; no bulk freeze or EWF-only continuation. '
-        'Keep the approved 08b contract and human exceptions. Checkpoints on '
-        'Windows local disk. Keep the watcher active. Notify the user only for '
-        'meaningful changes, completion, failure, or required human input. If '
-        'Fluent is still calculating or saving, continue observation quietly.'
+        'Automatic supervision event: '+event['event']+'. Read '+str(path)+' and current machine evidence. '
+        'The user authorised the simplified Phase 9 EWF settings and iteration schedule, including bulk freeze and restoration. '
+        'Read Project/experiments/phase-09-mesh-convergence/ewf-plan-v1.md and server4-2_6M/CONTEXT.md. '
+        'Use phase-loop for ordinary recovery and continuation. Never exit, terminate or restart Fluent. '
+        'If calculating or saving, observe quietly; never submit duplicate solves or replace an active case. '
+        'Reconcile PID, actual native endpoint, transcript, saved pair and film clock before continuation. '
+        'After the verified 2500-update adjustment N8580 to N11080, the next planned stage is 1000 frozen-bulk updates '
+        'at 0.1 microsecond, followed by 77580 frozen updates at 2.5 microseconds including the first 1000-update block, '
+        'then restore all bulk equations for 2000 updates from 195 to 200 ms. The direct film drain stays enabled. '
+        'Respect explicit user pause records. Keep local Windows saves/transcripts and supervision active. '
+        'Notify only for meaningful changes, failures, completion or required input. No steady-film or convergence claim.'
     )
     log_path = path.with_suffix('.codex.log')
     # Queue on the existing daemon-owned chat. A separate exec/resume writer

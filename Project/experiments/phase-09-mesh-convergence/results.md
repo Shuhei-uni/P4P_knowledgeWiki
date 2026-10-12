@@ -1,9 +1,54 @@
 # Phase 9 — Current evidence
 
+| Server 5 timestep recovery | Evidence / action |
+| --- | --- |
+| Historical activation-repair parent | Frozen transition N11080, 0.950 ms film age |
+| Implementation error | RP max step set to 2.5 us; active film solver retained 0.1 us for the next 1000 updates |
+| Preserved attempt | N12080 case/data and native transcript retained; actual film age 1.050 ms; not promoted |
+| Repair | Save/reopen at numerical changes; restored N11080 / 0.950 ms; resumed native output proves actual 2.5 us |
+| Evidence | [Live inspection](../../../PyAnsys/output/phase9-ewf-server5/20261009/N12080-clock-recovery-inspection.json); [recovery record](../../../PyAnsys/output/phase9-ewf-server5/20261009/clock-activation-recovery.json) |
+
+
+| Current Server 5 work | State |
+| --- | --- |
+| Authority | Human revoked this chat's Server 3 authority; Server 5 only |
+| Parent | 342k N8580 shared initial bulk pair copied/hash-verified; UDF archive hash-verified |
+| EWF settings | Agreed settings reapplied; local child saved/reopened; original main-wall film and bulk fields preserved |
+| Run | 2.5 µs attempt completed N59080 / 160.950 ms, but peak film Courant 1.497401 exceeded the 0.8 limit. Attempt preserved; restored healthy N49080 / 135.950 ms and started 1,000 updates at 0.1 µs toward N50080 / 136.050 ms. |
+| Schedule | At 0.1 µs, 640,500 updates remain from restored N49080: 590,500 frozen to 195 ms and 50,000 bulk-active to 200 ms. Expected final N689580; no completion or steady-state claim. [Recovery evidence](../../../PyAnsys/output/phase9-ewf-server5/20261009/courant-0p1us-continuation-verification.json). |
+| Evidence | [Setup receipt](../../../PyAnsys/output/phase9-ewf-server5/20261009/342k-ewf-settings-current.json); [run manifest](../../../PyAnsys/output/phase9-ewf-server5/20261009/run-manifest.json) |
+
+
+| Selected-endpoint analysis | Current finding |
+| --- | --- |
+| [Five-mesh comparison and plots](initial-bulk-comparison.md) | Uses selected 60k N8080, 342k N8580, 680k N9080, 997k N8080 and 2.6M N8580 |
+| Numerical limit | Bulk inventory rises in every final-2000 comparison window; early film growth continues |
+| Routing definition | Boundary-only outlet liquid flux; collector removal shown separately |
+
+| Current 342k setup | Result |
+| --- | --- |
+| EWF settings | Applied, saved and reopened; [machine receipt](../../../PyAnsys/output/phase9-mesh-convergence/20261007/342k-ewf-settings-current.json) |
+| Starting state | N8580, 0.700 ms film age; original main-wall film fields preserved |
+| Changes | Sequential film solution; smoothing ON; film surface tension 0.04041 N/m; lower EWF wall and 1.5 ms direct mass/momentum drain; source refresh each film update; particle cadence 20 us |
+| Bulk | Full feed and all four equation groups active; bulk Coupled unchanged |
+| Execution | No solve submitted; next planned stage 1500 iterations at 0.1 us; nominal new schedule 42810 iterations to 200 ms |
+
+
+| Selected initial bulk-development endpoint | Native iteration | Export | Claim limit |
+| --- | ---: | --- | --- |
+| 60k | 8080 | OneDrive pair; hashes match local source | Selected preparation endpoint |
+| 342k | 8580 | OneDrive pair; hashes match local source | Selected preparation endpoint |
+| 680k | 9080 | OneDrive pair; hashes match local source | Selected preparation endpoint |
+| 997k | 8080 | Reopened source and replacement OneDrive pair; hashes match | Human-selected final checkpoint; N9103 archived; not steady |
+| 2.6M | 8580 | Server 4 owner saved/reopened pair and verified OneDrive hashes | Human-selected initial bulk endpoint; original 4000-update minimum not reached |
+
+Human selection, 9 October 2026: these are final **initial bulk-development** states. 997k was reselected to N8080 and its OneDrive pair replaced; N9103 remains archived. This selection does not establish steady state, film equilibrium or mesh convergence. [Export manifest](../../../PyAnsys/output/phase9-mesh-convergence/20261007/initial-bulk-final-selection.json) records exact shared paths and SHA256 hashes; [replacement proof](../../../PyAnsys/output/phase9-mesh-convergence/20261007/997k-final-selection-N8080.json) verifies the copied pair.
+
+
 | Question | Current result |
 | --- | --- |
 | Phase started | Human envelope recorded; input audit complete |
-| Meshes solved under Phase 9 | 60k selected final N8080; 342k passed at N8580; 680k passed at N9080. 997k ramp resumed from saved/reopened N3620 after laptop pause. 2.6M belongs to the separate Server 4 chat. |
+| Meshes solved under Phase 9 | Server 3 preparation complete: selected 60k N8080, 342k N8580, 680k N9080 and 997k N8080; all have two consecutive passing hold windows. 2.6M completion belongs to the separate Server 4 chat. |
 | Common template | Provisional Stage 4 settings; low-feed A bulk fields unchanged; dry film; save/reopen passed |
 | 342k collector mapping | Native cell split and entry/wall topology verified; legacy replacement input saved |
 | Transfer failure | Native Replace Mesh crashed Fluent with SIGSEGV; scientific experiment untested |
@@ -14,7 +59,7 @@
 | Coordinate scale | 342k file uses metre-sized coordinates; other four use millimetre-sized coordinates |
 | Wall identity | Fine meshes split original wall into vessel/inlet components; physical mapping required |
 | Native mesh scale/quality | 342k: metre extents and native mesh check passed; other meshes pending |
-| Current action | Continue 997k inlet ramp to N5080, then full-feed holds. Latest pause/resume pair N3620 verified; completed ramp updates not repeated. See [resume proof](../../../PyAnsys/output/phase9-mesh-convergence/20261007/resume-recovery-997k-20261008.json). |
+| Current action | 342k EWF run started on Server 5; Server 3 authority revoked. Initial bulk exports remain preserved. |
 | Approved retained controls | Two smoothing passes, current reference values and current DPM tracking controls; no separate tracking pass |
 | Bulk correction proof | Corrected common source and 342k saved/reopened with surface tension ON at exact 08b coefficient, compressibility flag ON and drag-modification flag ON |
 | Legacy interaction | Human approved stored `none` as an inactive Mixture legacy exception |
@@ -129,3 +174,12 @@
 | Recovered screen | N6081–N7080: pressure range 10.77045% (fail), bulk mass range 6.90075% (pass), liquid-flux range/full feed 0.012364% (pass) |
 | Fleet allocation | Fresh Server 3 controller reads authoritative allocation: 60k, 342k, 680k, 997k. Separate chat owns 2.6M on Server 4. |
 | Evidence | [N7080 recovery](../../../PyAnsys/output/phase9-mesh-convergence/20261007/resume-recovery-20261008.json); [Server 3 scope](../../../PyAnsys/output/phase9-mesh-convergence/20261007/server3-scope-applied.json) |
+
+| Server 3 final endpoint | Native iteration | Last-window pressure range (%) | Last-window bulk mass range (%) | Last-window outlet-liquid range/full feed (%) | Final film clock (ms) |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| [60k](../../../PyAnsys/output/phase9-mesh-convergence/20261007/60k-run.json) | 8080 | 3.8839 | 6.3765 | 0.003703 | 0.650 |
+| [342k](../../../PyAnsys/output/phase9-mesh-convergence/20261007/342k-run.json) | 8580 | 0.6131 | 5.8863 | 0.001498 | 0.700 |
+| [680k](../../../PyAnsys/output/phase9-mesh-convergence/20261007/680k-run.json) | 9080 | 0.4424 | 6.2283 | 0.002694 | 0.750 |
+| [997k](../../../PyAnsys/output/phase9-mesh-convergence/20261007/997k-run.json) | 8080 | 3.0967 | 8.2461 | 0.002912 | 0.650 |
+
+All four preparation pairs are present on the Windows local disk and match their recorded SHA-256 hashes. Each export contains all 34 report histories through its accepted endpoint. The original completion verification inspected 997k N8080 with full feed, all four bulk equations active and the approved bulk settings; it is historical session evidence. Each case has two consecutive passing 1000-update windows. Film ages differ; these preparation endpoints do not establish final EWF stationarity or mesh independence. See [completion verification](../../../PyAnsys/output/phase9-mesh-convergence/20261007/server3-completion-verification.json).

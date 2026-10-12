@@ -8,7 +8,7 @@ from pyansys_fluent.connection import connect
 from pyansys_fluent.common import remote_file_exists
 from pyansys_fluent.remote_text import read_text
 from ansys.fluent.core.streaming_services.events_streaming import SolverEvent
-BASE=Path(__file__).resolve().parents[2];out=BASE/'output/drainage-benchmark-repeat1';state=BASE.parent/'Project/experiments/drainage-boundary-verification/phase-state.yaml'
+BASE=Path(__file__).resolve().parents[2];out=BASE/'output/drainage-benchmark-repeat1';state=BASE.parent/'Project/experiments/phase-09-steady-vof-pool/follow-on-diagnostics/drainage-boundary-verification/phase-state.yaml'
 def guard_reason(metrics, expired):
  if expired:return 'deadline'
  if not all(np.isfinite(x) for x in metrics.values()):return 'nonfinite_metrics'

@@ -237,6 +237,6 @@
 | 64.37% inventory increase | shows that pressure was still being compared across changing phase distributions |
 | — | Iterative independence and mesh independence remained unresolved; Richardson/GCI and production-mesh selection were not accepted |
 | earlier suggestion to continue these steady meshes | is therefore historical, not the latest disposition for Andy's study |
-| source | retained carrier carryover/quality as trend-only and moved to [separate liquid-removal diagnostics](../../parallel-andy-studies/closed-bottom-liquid-sinks.md) |
+| source | retained carrier carryover/quality as trend-only and moved to [separate liquid-removal diagnostics](../../phase-07b-full-geometry-liquid-removal/historical-andy-studies/closed-bottom-liquid-sinks.md) |
 | These values | were transcribed from the retained study note, which points to `PyAnsys/output/split_inlet_mesh_convergence_20260801/STUDY_DIAGNOSTIC_CLOSURE_20260805.md` and its audit artifacts |
 | Their exact original written provenance | is on the recovery branch; this migration did not recalculate or independently qualify the solver results |

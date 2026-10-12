@@ -27,7 +27,7 @@ def fields(s,out,n):
 def main():
  p=argparse.ArgumentParser();p.add_argument('--build',type=Path,required=True);p.add_argument('--mode',choices=['rest','flow'],required=True);p.add_argument('--iterations',type=int,required=True);p.add_argument('--expected-start',type=int,default=0);p.add_argument('--receipt',type=Path);p.add_argument('--parent-run',type=Path);args=p.parse_args()
  assert 0<args.iterations<=500
- phase_state=yaml.safe_load((BASE.parent/'Project/experiments/pressure-gravity-initialization/phase-state.yaml').read_text())
+ phase_state=yaml.safe_load((BASE.parent/'Project/experiments/phase-09-steady-vof-pool/follow-on-diagnostics/pressure-gravity-initialization/phase-state.yaml').read_text())
  assert phase_state.get('unsuccessful_contrasts',0)<phase_state['max_unsuccessful_contrasts']
  deadline_value=phase_state.get('execution_deadline_utc')
  deadline=datetime.fromisoformat(str(deadline_value).replace('Z','+00:00')) if deadline_value else None

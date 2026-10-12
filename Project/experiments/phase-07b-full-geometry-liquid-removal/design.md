@@ -24,7 +24,7 @@
 
 | Item | Question and prior-evidence collision check |
 | --- | --- |
-| Sources | [sink evidence](../parallel-andy-studies/closed-bottom-liquid-sinks.md), [resolved-outlet evidence](../parallel-andy-studies/resolved-brine-outlet.md), [02c](../phase-02-parity-reset-and-pre-v2-qualification/full-geometry-02c-mixture-pressure-sensitivity/setup.md) |
+| Sources | [sink evidence](historical-andy-studies/closed-bottom-liquid-sinks.md), [resolved-outlet evidence](../phase-09-steady-vof-pool/historical-andy-studies/resolved-brine-outlet.md), [02c](../phase-02-parity-reset-and-pre-v2-qualification/full-geometry-02c-mixture-pressure-sensitivity/setup.md) |
 |  | Existing data do not answer the five-height full-geometry comparison |
 |  | Failed historical cases remain evidence, not automatic repeat runs or saved parents |
 
@@ -109,7 +109,7 @@
 |  | The present value is about 41.5 times stronger than `0.1 s` and 8.3 times stronger than `0.02 s` at equal liquid inventory; it is about 17% weaker than `0.002 s` |
 |  | This comparison does not transfer results between meshes |
 |  | The human has asked about the choice; it must not be presented as an optimized or separately human-selected coefficient |
-|  | See the [historical records](../parallel-andy-studies/closed-bottom-liquid-sinks.md) |
+|  | See the [historical records](historical-andy-studies/closed-bottom-liquid-sinks.md) |
 | Still required | verify the exact live Python/native-expression source API, phase-velocity semantics, expression update frequency and source linearization; read back and save/reopen the source configuration |
 |  | No main screen may use an unverified substitute or silently omit momentum/turbulence removal |
 |  | No claim of instantaneous or coefficient-independent perfect collection is permitted from this single-strength screen |

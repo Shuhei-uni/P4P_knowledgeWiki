@@ -1,13 +1,13 @@
 phase_id: phase-09-mesh-convergence
-status: RUNNING
-authority: human_20261007_phase9_full_server3_only
-server_id: '3'
+status: SERVER5_EWF_RECOVERY_RUNNING
+authority: human_20261009_server5_full_authority_apply_then_run
+server_id: '5'
 setup: Project/experiments/phase-09-mesh-convergence/setup.md
-machine_root: PyAnsys/output/phase9-mesh-convergence/20261007
+machine_root: PyAnsys/output/phase9-ewf-server5/20261009
 mesh_cells: [60964, 342609, 679970, 997604, 2596657]
 stop_boundary: FULL_FEED_HOLD_BULK_ACTIVE
-bulk_freeze_authorized: false
-ewf_only_continuation_authorized: false
+bulk_freeze_authorized: true
+ewf_only_continuation_authorized: true
 ewf_settings_final: false
 mesh_convergence_established: false
 source_template: SOURCE_REOPEN_VERIFIED
@@ -33,23 +33,23 @@ host_deployment: VERIFIED_367_FILES
 host_launch: prior_worker_ended_before_full_run_solve
 host_active_phase9_workers: 0
 next_controller_route: desktop_connection_with_live_client_transcript
-desktop_controller_receipt: PyAnsys/output/phase9-mesh-convergence/20261007/desktop-controller.json
+desktop_controller_receipt: PyAnsys/output/phase9-ewf-server5/20261009/desktop-controller.json
 desktop_must_remain_running: true
-active_mesh: 997k
-active_stage: ramp
+active_mesh: 342k
+active_stage: courant-recovery-frozen-1
 human_pause_iteration: 3800
 human_pause_record: PyAnsys/output/phase9-mesh-convergence/20261007/human-pause.json
 resume_requires_explicit_human_instruction: false
 supervision_paused_by_human: false
-active_batch_target: null
+active_batch_target: 50080
 preserved_recovery_iteration: 2580
 recovery_cause: inlet_flow_serialization_rounding_strict_setup_comparison
 recovery_verification: N2580_native_pair_fields_methods_bulk_contract_film_time_PASS
 connection_recovery: bounded_bootstrap_version_query_5s_verified
 continuous_supervision_authorized: true
-supervision_owner: PyAnsys/scripts/orchestration/watch_phase9_campaign.py
-supervision_state: PyAnsys/output/phase9-mesh-convergence/20261007/continuous-supervision.json
-supervision_service: org.p4p.phase9.supervision
+supervision_owner: PyAnsys/scripts/orchestration/watch_phase9_server5_ewf.py
+supervision_state: PyAnsys/output/phase9-ewf-server5/20261009/continuous-supervision.json
+supervision_service: org.p4p.phase9.server5.supervision
 supervision_poll_seconds: 30
 supervision_health_seconds: 300
 supervision_stall_review_seconds: 180
@@ -65,7 +65,7 @@ hold_limit_authority: human_20261007_loosen_pass_limits
 hold_limit_controller_update: PyAnsys/output/phase9-mesh-convergence/20261007/pending-controller-update.json
 latest_recovery: preserve_failed_N9519_restore_verified_N9080
 latest_recovery_evidence: PyAnsys/output/phase9-mesh-convergence/20261007/60k-N9519-failure-recovery.json
-completed_preparation_meshes: [60k, 342k, 680k]
+completed_preparation_meshes: [60k, 342k, 680k, 997k]
 accepted_60k_endpoint: N8080
 accepted_60k_selection: human_selected_existing_saved_N8080_pair
 native_transcript_script_fix: one_start_stop_pair_with_failure_cleanup
@@ -84,3 +84,67 @@ server4_mesh_order: [2_6M]
 laptop_resume_recovery: PyAnsys/output/phase9-mesh-convergence/20261007/resume-recovery-20261008.json
 
 latest_997k_pause_resume: PyAnsys/output/phase9-mesh-convergence/20261007/resume-recovery-997k-20261008.json
+
+server3_completion_verification: PyAnsys/output/phase9-mesh-convergence/20261007/server3-completion-verification.json
+server3_historical_997k_manual_stop_native_iteration: 9103
+server4_completion_owned_by_separate_chat: true
+
+extra_997k_authority: human_request_2000_more_iterations_checkpoint_at_1000
+extra_997k_start_native: 8080
+extra_997k_checkpoint_native: 9080
+extra_997k_target_native: 10080
+extra_997k_manifest: PyAnsys/output/phase9-mesh-convergence/20261007/997k-extra2000/1791507047505279000/run-manifest.json
+extra_997k_execution: SINGLE_NATIVE_TUI_JOURNAL
+
+extra_997k_client_stopped_by_human: true
+extra_997k_last_streamed_native_before_disconnect: 8095
+supervision_stopped_by_human: false
+extra_997k_completion_verification_pending: true
+
+selected_997k_initial_bulk_endpoint: N8080
+selected_997k_endpoint_is_steady: false
+selected_initial_bulk_export: PyAnsys/output/phase9-mesh-convergence/20261007/initial-bulk-final-selection.json
+server3_selected_initial_bulk_pairs_shared: [60k, 342k, 680k, 997k]
+server4_selected_final_export: OWNER_VERIFIED_N8580_ONEDRIVE_COPY_HASHES
+
+all_five_selected_initial_bulk_pairs_saved: true
+selected_997k_shared_reopen: SOURCE_REOPEN_VERIFIED_COPY_HASH_MATCH
+selected_997k_film_age_s: 0.00065
+selected_997k_final_authority: human_select_N8080_final_20261009
+selected_997k_replacement_receipt: PyAnsys/output/phase9-mesh-convergence/20261007/997k-final-selection-N8080.json
+superseded_997k_endpoint: N9103
+
+server3_focus_mesh: 342k
+342k_ewf_settings_receipt: PyAnsys/output/phase9-mesh-convergence/20261007/342k-ewf-settings-current.json
+342k_ewf_prepared_native_iteration: 8580
+342k_ewf_prepared_film_age_s: 0.0007
+342k_ewf_settings_no_solve_submitted: true
+342k_ewf_nominal_new_iterations: 42810
+342k_ewf_next_stage_iterations: 1500
+
+server3_authority_revoked_for_this_chat: true
+server5_machine_root: PyAnsys/output/phase9-ewf-server5/20261009
+server5_focus_mesh: 342k
+server5_setup_and_run_authorized: true
+
+server5_settings_receipt: PyAnsys/output/phase9-ewf-server5/20261009/342k-ewf-settings-current.json
+server5_run_manifest: PyAnsys/output/phase9-ewf-server5/20261009/run-manifest.json
+server5_controller_pid: 32807
+server5_schedule_nominal_iterations: 42810
+server5_schedule_target_film_s: 0.2
+
+server1_680k_lane_state: Project/experiments/phase-09-mesh-convergence/server1-680k/phase-state.yaml
+
+server5_last_verified_native: 49080
+server5_last_verified_film_s: 0.1359500000000045
+server5_recovery: 2p5us_Courant_failure_restore_N49080_continue_0p1us
+server5_wrong_step_N12080_preserved_not_promoted: true
+
+server5_human_pause_record: PyAnsys/output/phase9-ewf-server5/20261009/human-pause.json
+server5_resume_requires_reconciliation: true
+server5_future_command_dispatch_stopped_by_human: false
+
+server5_laptop_resume: observe_accepted_growth10000b_then_verify_and_continue_schedule
+
+server5_film_courant_operating_limit: 0.8
+server5_courant_recovery_request: PyAnsys/output/phase9-ewf-server5/20261009/courant-recovery-request.json

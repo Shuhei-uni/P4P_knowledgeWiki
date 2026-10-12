@@ -1,6 +1,6 @@
 # Proposed direction after Phase 9 — drainage-boundary verification
 
-Status: Andy authorized the initial bounded hydraulic diagnostic on 30 September 2026 ("Sounds good. do that"). Its execution contract is [here](experiments/drainage-boundary-verification/CONTEXT.md). No numbered separator phase or new full-geometry run is selected. Phase 9 is closed unqualified; Phase 7b and all previous endpoints retain their dispositions.
+Status: Andy authorized the initial bounded hydraulic diagnostic on 30 September 2026 ("Sounds good. do that"). Its execution contract is [here](experiments/phase-09-steady-vof-pool/follow-on-diagnostics/drainage-boundary-verification/CONTEXT.md). No numbered separator phase or new full-geometry run is selected. Phase 9 is closed unqualified; Phase 7b and all previous endpoints retain their dispositions.
 
 ## Recommendation
 
@@ -40,7 +40,7 @@ After this gate, frame the full-geometry candidate with one fixed loss law and t
 
 - [Live geometry and outlet-state audit](../PyAnsys/output/phase09-preflight/downstream-boundary-audit.json)
 - [Phase 9 extension evidence](experiments/phase-09-steady-vof-pool/results.md)
-- [Historical unresolved drain conditions](experiments/parallel-andy-studies/resolved-brine-outlet.md)
+- [Historical unresolved drain conditions](experiments/phase-09-steady-vof-pool/historical-andy-studies/resolved-brine-outlet.md)
 - [Fluent 2025 R2 operating conditions](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_bcs_sec_operating.html)
 - [Fluent 2025 R2 boundary conditions, outlet vents and porous jumps](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_bcs_sec_bound_cond.html)
 - [Fluent 2025 R2 multiphase boundary compatibility](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_sec_multiphase_setup.html)
@@ -48,7 +48,7 @@ After this gate, frame the full-geometry candidate with one fixed loss law and t
 
 ## Concrete full-geometry follow-on for discussion (not launched)
 
-Readiness update (30 September 2026): the corrected four-control repeat passed terminal analytical, conservation, residual, stability and per-iteration guard checks, with exactly 2000 repeat / 4000 combined diagnostic iterations. The benchmark prerequisite is complete. This verifies only the single-liquid slip-duct implementation, not multiphase separator drainage. The full-geometry follow-on below remains a proposal awaiting scientific-scope agreement; see [diagnostic results](experiments/drainage-boundary-verification/results.md).
+Readiness update (30 September 2026): the corrected four-control repeat passed terminal analytical, conservation, residual, stability and per-iteration guard checks, with exactly 2000 repeat / 4000 combined diagnostic iterations. The benchmark prerequisite is complete. This verifies only the single-liquid slip-duct implementation, not multiphase separator drainage. The full-geometry follow-on below remains a proposal awaiting scientific-scope agreement; see [diagnostic results](experiments/phase-09-steady-vof-pool/follow-on-diagnostics/drainage-boundary-verification/results.md).
 
 If the four hydraulic controls pass, the next mechanism test would retain Phase 9's geometry, full feed, materials, gravity, steady implicit VOF, fixed reservoir h_d=+0.10 m and scale=0.1, and change only the brine boundary to a passive outlet vent with fixed K=9. K=9 is an explicit idealized resistance, not a fitted valve coefficient or a proven suitable setting. A uniform-liquid estimate at the intended brine throughput gives added loss about 1.76 kPa; actual mixed/reversing flow is governed by Fluent's documented mixture boundary treatment and need not follow that estimate. No one-way valve or phase-selective outlet is implied.
 

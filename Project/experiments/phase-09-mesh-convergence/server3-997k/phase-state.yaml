@@ -1,0 +1,15 @@
+server_id: '3'
+mesh_cells: 997604
+status: human_pause_native_journal_handed_over
+parent_native_iteration: 8080
+parent_film_age_s: 0.00065
+target_film_age_s: 0.2
+nominal_final_iteration: 50900
+server6_supervision_paused: true
+fluent_exit_authorized: false
+watcher_enabled: false
+automatic_dispatch_enabled: false
+last_verified_native_iteration: 27580
+last_verified_film_age_s: 0.08340000000001277
+active_native_target: 37580
+film_courant_operating_limit: 0.8

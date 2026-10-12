@@ -26,7 +26,7 @@ incomplete particles as separated; that is an explicit assumption, not an
 observed particle fate or a validation result. The other options expose the
 sensitivity without changing the original implementation. Read the
 [current method guidance](../../../../CFD_wiki/wiki/synthesis/fluent-separator-efficiency-methods.md)
-and [historical enthalpy experiments](../../../../Project/experiments/parallel-andy-studies/enthalpy-dpm-replication.md)
+and [historical enthalpy experiments](../../../../Project/experiments/phase-03-dpm-carryover-and-coupling/historical-andy-studies/enthalpy-dpm-replication.md)
 before interpreting project outputs.
 
 Use the repository's `PyAnsys/.venv/bin/python` for calculations needing

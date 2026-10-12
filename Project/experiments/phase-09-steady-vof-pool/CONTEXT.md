@@ -23,7 +23,7 @@ Shuhei's phases and Fluent sessions are outside this phase's authority.
 
 **Verified project evidence:** [Phase 7b closure](../phase-07b-full-geometry-liquid-removal/closure.md)
 found no qualified steady ideal-collector case. E8 is incomplete at N128,
-not a failed startup test. [Historical resolved-outlet studies](../parallel-andy-studies/resolved-brine-outlet.md)
+not a failed startup test. [Historical resolved-outlet studies](historical-andy-studies/resolved-brine-outlet.md)
 show excessive initial drainage, a very short bounded hydrostatic-rest test,
 and later failure of low-feed long holds despite small residuals. They did not
 test this steady implicit VOF comparison. [Phase 6](../phase-06-full-geometry-with-brine-pool/conclusion.md)

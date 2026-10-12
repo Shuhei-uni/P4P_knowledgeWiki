@@ -32,3 +32,7 @@
 | --- | --- |
 | fine-mist branches | include non-canonical checkpoints and incomplete continuations |
 | — | Their evidence cannot be combined with the later EWF family without a matched, sufficiently settled carrier and explicit mass closure |
+
+| Historical related study | Record and boundary |
+| --- | --- |
+| Andy’s enthalpy/DPM replication | [Results and provenance](historical-andy-studies/enthalpy-dpm-replication.md); distinct historical parents and case IDs |

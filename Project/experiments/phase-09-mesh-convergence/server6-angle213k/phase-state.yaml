@@ -1,0 +1,17 @@
+phase: phase-09-mesh-convergence
+lane: server6-angle213k
+server_id: '6'
+status: queued_after_vertical100ms
+authority_date: '2026-10-11'
+mesh_cells: 213232
+mesh_sha256: 9b68ea200ed4e8bf53785834e380b6b26490b36e4d7271b1b375478f7f410df9
+mesh_available_on_onedrive: true
+existing_angle_checkpoint_pair_found: false
+target_film_time_s: 0.1
+final_bulk_start_film_time_s: 0.095
+start_gate: verified_vertical100ms_endpoint_preserved_and_server6_idle
+production_started: false
+
+numerical_acceptance_policy: courant_only
+inner_convergence_acceptance_gate: false
+production_ledger_acceptance_gate: false

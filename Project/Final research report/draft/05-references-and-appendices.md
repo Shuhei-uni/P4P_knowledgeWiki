@@ -24,6 +24,8 @@ Ansys, Inc. (2025i). *Solution strategies for multiphase modeling* (§27.8, part
 
 Ansys, Inc. (2025j). *Numerical schemes and solution algorithm for Eulerian wall films* (§17.4). In *Ansys Fluent theory guide* (Release 2025 R2). [Temporal schemes](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_th/flu_th_ewf_sec_time_diff.html). [Spatial schemes](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_th/flu_th_ewf_sec_space_diff.html). [Steady and transient solution algorithm](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_th/flu_th_ewf_sec_sol_alg.html). [Coupled film solution](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_th/flu_th_ewf_sec_time_coupl.html).
 
+Ansys, Inc. (2025k). *Film sub-models* (§17.2.1). In *Ansys Fluent theory guide* (Release 2025 R2). [Version-matched source](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_th/flu_th_ewf_sec_film_submodels.html).
+
 International Association for the Properties of Water and Steam. (2012). *Revised release on the IAPWS industrial formulation 1997 for the thermodynamic properties of water and steam* (R7-97[2012]). [Official release](https://iapws.org/technical-guidance/release/IF97-Rev).
 
 National Aeronautics and Space Administration. (2021a, February 10). *Examining iterative convergence*. NPARC Alliance CFD verification and validation tutorial. [Source page](https://www.grc.nasa.gov/www/wind/valid/tutorial/iterconv.html).
@@ -52,7 +54,7 @@ The design-overview year follows the DOI's volume-publication metadata, January 
 
 | Setting group | Draft basis | Remaining detail / owning record |
 | --- | --- | --- |
-| Geometry and mesh | Exact selected saved mesh: 60,964 cells, 226,982 nodes and 328,287 faces; identical geometry/connectivity in the full-feed parent, combined contact endpoint and shortened-startup endpoint; 715 collector cells selected by centroid $y\leq0.10$ m | Methods Figure M1 and Appendix A.10 give native boundaries, dimensions and source-region extent. The separate 342,609-cell inspection and later input meshes retain their own identities |
+| Geometry and mesh | Exact selected saved mesh: 60,964 cells, 226,982 nodes and 328,287 faces; identical geometry/connectivity in the full-feed parent, combined contact endpoint and shortened-startup endpoint; 715 collector cells selected by centroid $y\leq0.10$ m | Figure 5 and Appendix A.10 give native boundaries, dimensions and source-region extent. The separate 342,609-cell inspection and later input meshes retain their own identities |
 | Wall resolution and quality | Native shared-flow `SV_WALL_YPLUS`, `SV_WALL_YPLUS_UTAU` and adjacent-cell `SV_WALL_DIST` recovered from three hash-matched data pairs | Appendix A.10 gives per-wall area-weighted statistics. Exact meshing layer count/first-layer height and solver-side orthogonal quality/skewness remain unverified; no completed matched refinement study |
 | Feed | Enthalpy and phase-flow derivation in Section 3.3.1 and Appendix A.7; hold: 29.23/20.1725 kg/s liquid/vapour; full feed: 116.92/80.69 kg/s | Retain actual boundary readbacks beside the discrete ramp rule; [startup provenance](../../experiments/phase-07-1a-absorber-convergence/roughness-family/r0-smooth-control/provenance.md) |
 | Materials and walls | Verified density and viscosity values for the throughput-controlled absorber model in Section 3.2; smooth-wall parent | Retain full-precision [material settings](../../experiments/phase-07-1a-absorber-convergence/baseline-v2-virtual-liquid-outlet/build-manifest.json) and the selected cases' wall-treatment readbacks |
@@ -70,13 +72,9 @@ The design-overview year follows the DOI's volume-publication metadata, January 
 
 ### A.2. Provisional reconstruction comparisons
 
-The separate reconstruction series covered numerical packages, mixed and split inlets, one-way droplet diagnostics and a provisional film treatment. It used the common 60,964-cell simplified mesh with the absorber disabled. Section 3.6 defines the comparison design; Section 4.9 reports provisional observations; Section 5.6 considers possible explanations. The historical tetrahedral-mesh reference used 7,601,261 cells and split feed, while the mixed-inlet SIMPLE reconstruction used the supplied mesh and mixed feed. The contrast does not isolate mesh effects. Saved fields at iteration 10,000 were compared at corresponding section locations with common liquid-volume-fraction ranges. ([Mixed-inlet SIMPLE settings and limits](../../experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f0-simple/results.md); [native comparison views](../../meetings/Poster/poster-sections/mesh-and-volume-fraction-comparison.md))
+The separate reconstruction series covered numerical packages, mixed and split inlets, one-way droplet diagnostics and a provisional film treatment. It used the common 60,964-cell simplified mesh with the absorber disabled. Section 3.6 defines the comparison design; Sections 4.1–4.3 present mesh, inlet and collection findings; Section 5.1 considers possible explanations. The historical tetrahedral-mesh reference used 7,601,261 cells and split feed, while the mixed-inlet SIMPLE reconstruction used the supplied mesh and mixed feed. The contrast does not isolate mesh effects. Saved fields at iteration 10,000 were compared at corresponding section locations with common liquid-volume-fraction ranges. ([Mixed-inlet SIMPLE settings and limits](../../experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f0-simple/results.md); [native comparison views](../../meetings/Poster/poster-sections/mesh-and-volume-fraction-comparison.md))
 
-| Historical tetrahedral-mesh reference | Supplied 60,964-cell mesh |
-| --- | --- |
-| ![Historical tetrahedral mesh at the inlet-centre section](<../../meetings/Poster/poster-sections/poster mesh assets/08b-tetrahedral-mesh-inlet-section.png>) | ![Supplied mesh with wall-following layers](<../../meetings/Poster/poster-sections/poster mesh assets/mesh60k-inlet-section.png>) |
-
-*Supplementary mesh views. Native inlet-centre cuts at a common field of view document the two structures. Their appearance does not establish solution accuracy.*
+Figure 6 presents the historical and revised mesh structures alongside their saved liquid fields.
 
 The mixed-inlet and split-inlet Coupled reconstructions shared the coarse mesh, materials, total phase feed, outlet, smooth walls and EWF-off carrier. The mixed-feed case distributed both phases over the two physical inlet faces by area; the split-feed case assigned liquid to the outer strip and vapour to the steam face. Both used Coupled, Global Time Step and first-order $k$. The mixed-inlet SIMPLE reconstruction used pseudo-time off and second-order $k$. Comparing the two mixed-inlet cases therefore changed a numerical package. ([Mixed-inlet SIMPLE definition](../../experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f0-simple/setup.md); [mixed/split-inlet audit](../../experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/baseline-lineage-audit.md))
 
@@ -84,9 +82,15 @@ For phase $i$ on mixed-inlet face $b$, $\dot m_{i,b}=\dot m_i A_b/(A_L+A_V)$. Bo
 
 Each reconstruction speed used fresh Hybrid Initialisation and a 10,000-update horizon, with iterations 9,500–10,000 as the reporting window. Nominal speeds were 20.11, 23.46, 26.81, 29.48 and 32.14 m/s. At 26.81 m/s, the commands were 116.93872650 kg/s liquid and 80.70292372 kg/s vapour. These are distinct from the historical startup values in Table 3. The nominal speed used combined inlet area, rather than the velocity on each split phase face. No completed resolution study is reported for the mixed-inlet and split-inlet Coupled reconstructions.
 
-Detailed droplet and provisional-film reconstruction comparisons and performance conclusions remain deferred. The new SIMPLE comparison and mesh work must be assessed before strengthening their claims. The native inlet mesh close-up is retained in Appendix A.10; the main domain overview retains its provisional figure label until final main-text numbering.
+Detailed droplet and provisional-film reconstruction comparisons remain outside the selected results. The native inlet mesh close-up is retained in Appendix A.10. Section 4.3 presents the completed finer-mesh diagnostic checkpoints, without treating them as a converged refinement study.
 
-The [reconstruction results](../../experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/results.md) and [report contract](../../experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/report-contract.md) retain the methods, values and source routes. The [fine-mist distribution specification](../../experiments/phase-03-dpm-carryover-and-coupling/purnanto-09cV3-fine-mist-psd/setup.md) remains an assumed design input. No detailed reconstruction table or figure is used to support the present conclusions.
+The [reconstruction results](../../experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/results.md) and [report contract](../../experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/report-contract.md) retain the methods, values and source routes. The [fine-mist distribution specification](../../experiments/phase-03-dpm-carryover-and-coupling/purnanto-09cV3-fine-mist-psd/setup.md) remains an assumed design input. Table 7 presents the matched mixed/split-inlet comparison; Table 8 presents the finer split-inlet diagnostics. The coarse numerical-package difference is recorded below.
+
+The coarse mixed-inlet SIMPLE endpoint retained 6576.7 kg and discharged 360.424% of its liquid feed over the reported late window, with mean absolute mixture boundary gap 153.14% of total feed. The mixed-inlet Coupled last-500 assessment instead reported a 0.2378% gap. Coupling, pseudo-time and the $k$ scheme changed together; this remains a numerical-package comparison. These diagnostics support the routing interpretation without turning the coarse SIMPLE field into a physical accumulation rate. ([SIMPLE comparison](../../experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f0-simple/results.md); [Coupled assessment](../../experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f1-one-inlet/results.md))
+
+The finer diagnostics used 342,609, 679,970 and 997,604 cells, pure split feed of 116.92/80.69 kg/s liquid/vapour, fresh Hybrid Initialisation, SIMPLE with pseudo-time off, Green–Gauss node-based gradients, PRESTO! pressure, second-order momentum/$k$/$\varepsilon$ and QUICK volume fraction. Relaxation factors were pressure 0.2, momentum 0.4, $k$ and $\varepsilon$ 0.5, volume fraction 0.2 and drift velocity 0.1. Absorber, EWF and DPM feedback were off, and the bottom was closed. Geometry volumes differed slightly between meshes. The [matched 3000-update results](../../experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/direct-student-342k/n3000/results.md) and [679,970-cell continuation](../../experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/direct-student-680k/n4000/results.md) retain paired checkpoint verification and numerical failures.
+
+The separate archived-08b transfer onto 997,604 cells was successfully saved and reopened, then its continuation failed after the last printed iteration 10022. Its inventory fell slightly during those updates, unlike the accumulating 679,970-cell sequence. It is not used as evidence that accumulation caused the crash. ([Transfer and continuation record](../../experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/08b-native997k/run2000-off/results.md))
 
 ### A.3. Final contact source assignments and independent reporting
 
@@ -253,15 +257,15 @@ The [roughness assignment code](../../../PyAnsys/scripts/setup/run_phase72a_fami
 
 The historical startup checkpoint at iteration 1580 supplied the shortened-startup parent. Its case hash was `232e72ff86c657b2d90bff56f6e9cb84336e30905e365fa89d7c699ef653bf57` and its data hash was `ff64317d4e6e77661d7faf13d26d4c04ac3d5db2ea78eed461762a3b3531c187`. Prepared bulk arrays were checked against that saved state. A fresh Hybrid Initialisation would not reproduce this comparison's initial field.
 
-Reproducing a saved-field continuation requires the paired case/data inputs identified above; a run description and endpoint iteration number alone do not specify its starting fields. Remaining geometry, solved-mesh/wall-resolution and bulk numerical-control facts are identified in Appendix A.1. The reported scope ends at frozen-bulk film development; later wall-film parameter configurations are not required to reproduce these results.
+Reproducing a saved-field continuation requires the paired case/data inputs identified above; a run description and endpoint iteration number alone do not specify its starting fields. Remaining geometry, solved-mesh/wall-resolution and bulk numerical-control facts are identified in Appendix A.1. Appendix A.12 defines the selected later release and direct-drain cases, with their distinct parents and assignments.
 
 ### A.9. Film mechanisms, algorithms and assessment criteria
 
 #### A.9.1. Active film model
 
-*Table A9. Physical model switches recovered from the accretion-enabled film build/reopen receipt and the shortened-startup prepared/reopened state. These settings distinguish the represented film routes from proposed mechanisms.*
+*Table A9. Physical model switches recovered from the accretion-enabled film build/reopen receipt and the shortened-startup prepared/reopened state. These settings define the early cases; the later release and direct-drain configurations are specified in Appendix A.12.*
 
-| Setting | Recorded state in the reported EWF configurations |
+| Setting | Recorded state in the early EWF configurations through the 500 ms reference |
 | --- | --- |
 | Film material | `water-liquid-at-psep`, the same fixed liquid material as the bulk secondary phase |
 | Film equations | Film mass and momentum active; energy and scalar equations disabled |
@@ -301,7 +305,7 @@ In fixed-step mode, the stored Courant input did not select or cap the step. In 
 
 ![Selected shortened-startup and frozen-bulk film-development history](../figures/results-described-film-history.png)
 
-*Figure A2. Selected shortened-startup and film-development lineage through iteration 25815, retained to show field preservation and recoveries. The flat bulk inventory and outlet traces after the bulk freeze are imposed by the held carrier fields. Rejected siblings are excluded. Main Figure 11 presents film inventory and rates against accepted film time through 500 ms.*
+*Figure A2. Selected shortened-startup and film-development lineage through iteration 25815, retained to show field preservation and recoveries. The flat bulk inventory and outlet traces after the bulk freeze are imposed by the held carrier fields. Rejected siblings are excluded. Main Figure 14 presents film inventory and rates against accepted film time through 500 ms.*
 
 #### A.9.3. Metric definitions and decision scope
 
@@ -338,11 +342,45 @@ These criteria were documented in the [executed film-development setup](../../ex
 
 Uniform iteration-window means were arithmetic means over the stated native updates. Reported reconstruction mean absolute boundary gaps used $100\,\overline{|R_{\mathrm{boundary}}|}/\dot m_{\mathrm{tot,in}}$, with the phase-summed or native mixture definition identified. The 500 ms film rates used the common 490–500 ms interval: partial accepted increments were weighted by their overlap with that interval. Bulk-liquid outlet ratios used realised liquid feed, and diagnostic particle weights remained outside physical throughput. A small film-ledger error, verified source attachment or exact evaluated/applied-source agreement did not establish whole-separator closure.
 
+#### A.9.4. Detailed film-solver and local-step results
+
+In the shortened startup, all 2000 ramp updates met the recorded inner-film tolerance. During the full-feed hold, 15 updates at iterations 5025–5076 failed, representing 15% of the final 100 updates. Each reached the ten-subiteration limit. Maximum final thickness and two momentum residuals were 1315.134, 9150.082 and 59.84849, respectively, against $10^{-5}$. The 20.11 m/s film arm remained incomplete at 135.451 ms and the 32.14 m/s arm was pending in the selected 500 ms campaign record.
+
+Film accounting and inner-solve behaviour also gave different assessments. The corrected contact history had a film-only ledger error of 0.00637%, but its final inner residuals did not meet the recorded tolerance at every update (Table A12). The local replay contained repeated large residual bursts. Records were unavailable for the final 233 adaptive updates, so those updates were not counted as tolerance passes.
+
+*Table A12. Inner-film residual checks over the available combined-history records. A pass requires the final film-thickness and both film-momentum residuals to be at or below $10^{-5}$. Percentages use only the available updates in each segment; they are not steady-state criteria.*
+
+| Segment | Available film updates | Updates meeting all final tolerances | Reported pass fraction (%) |
+| --- | ---: | ---: | ---: |
+| Original accretion-enabled film case, fixed 10 µs | 8000 | 1957 | 24.46 |
+| Corrected contact restart, fixed 1 µs | 4000 | 3807 | 95.17 |
+| Selected local replay, fixed 1 µs | 16,000 | 14,717 | 91.98 |
+| Adaptive continuation with subiteration records | 11,787 | 10,526 | 89.30 |
+
+A local film-step comparison restarted from identical fields saved at iteration 13390 at 75.662 ms and advanced each arm by 2.5 ms of accepted film time. Bulk fields were held fixed and the alternative implicit film algorithm was used in all arms. The 20 µs candidate met the declared local screen against the 2.5 µs reference, whereas the 25 µs candidate exceeded the 0.1% ledger limit (Table A13). Both candidates closely matched the reference fields. Appendix A.9 defines the algorithms, normalisations, finite-field restrictions and recovery limits used in this screen.
+
+*Table A13. Local film-step assessment from the same fields saved at iteration 13390 to 78.162 ms. Field differences are relative to the 2.5 µs reference. Ledger errors use integrated film input. Thresholds were declared for this local screen; they are not universal CFD acceptance limits.*
+
+| Assessment quantity | Local limit | 20 µs candidate | 25 µs candidate |
+| --- | ---: | ---: | ---: |
+| Mass-distribution L1 difference (%) | ≤1 | 0.00285 | 0.00757 |
+| Film-mass-weighted velocity difference (%) | ≤2 | 0.00207 | 0.00343 |
+| Difference in maximum thickness (%) | ≤2 | 0.000115 | 0.000150 |
+| Drainage difference / accretion (%) | ≤1 | 0.00283 | 0.00364 |
+| Candidate film-ledger error (%) | ≤0.1 | 0.04743 | 0.13391 |
+| Reference film-ledger error (%) | ≤0.1 | 0.00958 | 0.00958 |
+| Peak film Courant number | ≤1 recovery bound | 0.96675 | 0.63710 |
+| Local screen | All field, ledger and recovery checks met | Pass | Fail: ledger |
+
+The mass L1 measure summed absolute per-face mass differences and divided by total reference film mass. The reference inventory grew from 3.8635 to 3.9176 kg, so most of that mass was present at restart. The small percentage therefore did not quantify relative error in the newly accumulated mass. The comparison demonstrated local agreement with a conservative reference over 2.5 ms; it did not establish timestep independence for later developed film or the 500 ms endpoint.
+
+The alternative implicit film solver did not expose inner residuals in these later tests. Its updates therefore have no recorded tolerance-pass assessment. The selected evidence contains implementation checks, a local film-step comparison and continuing film storage, but no completed matched mesh-convergence assessment or comparison against field measurements. Qualified separation-efficiency and pressure-loss predictions are not reported.
+
 ### A.10. Saved mesh and wall-resolution evidence
 
 The geometry and model metadata were extracted from the selected saved case files without modifying their inputs or contacting a Fluent session. Node coordinates, face-node counts and face connectivity were identical in the full-feed parent/control at iteration 5586, combined contact endpoint at iteration 45606 and shortened-startup endpoint at iteration 5080. Native wall-view vertices independently matched those coordinates at their stored float32 precision. The [metadata](../figures/model-domain-metadata.json) retains full case/data paths, SHA-256 identities, HDF5 dataset routes, polygon statistics, raw model entries and extraction limits. The [domain-figure provenance](../figures/model-domain-overview.provenance.json) identifies the rendered face geometry.
 
-*Table A12. Measured landmarks and composition of the selected solved mesh. Coordinate extrema describe discrete mesh geometry, not nominal CAD dimensions.*
+*Table A14. Measured landmarks and composition of the selected solved mesh. Coordinate extrema describe discrete mesh geometry, not nominal CAD dimensions.*
 
 | Quantity | Saved-mesh value |
 | --- | --- |
@@ -358,11 +396,11 @@ The geometry and model metadata were extracted from the selected saved case file
 
 ![Native section of the selected mesh at the inlet](<../../meetings/Poster/poster-sections/poster mesh assets/mesh60k-inlet-section.png>)
 
-*Figure A3. Native inlet-centre section of the selected mesh. Wall-following cells and larger interior cells document the topology. They do not supply a measured layer count, first-layer height or numerical-accuracy result. Methods Figure M1 defines the whole solved domain.*
+*Figure A3. Native inlet-centre section of the selected mesh. Wall-following cells and larger interior cells document the topology. They do not supply a measured layer count, first-layer height or numerical-accuracy result. Figure 5 defines the whole solved domain.*
 
 The wall fields were recovered from the paired data files under `results/1/phase-1`. The stored `phaseId=1` maps to the saved case's shared `mixture` domain; this namespace does not make the values a vapour-only wall result. `SV_WALL_YPLUS` and `SV_WALL_YPLUS_UTAU` were retained as distinct native fields. They were not interchanged or replaced by the stored `reference-yplus=300` setting.
 
-*Table A13. Stored native wall-resolution fields on the main `wall` zone: 3463 faces and 53.436952 m². Each row describes a saved endpoint, not an iteration-window mean. The mean is $\sum_jA_jq_j/\sum_jA_j$, using native face-polygon areas.*
+*Table A15. Stored native wall-resolution fields on the main `wall` zone: 3463 faces and 53.436952 m². Each row describes a saved endpoint, not an iteration-window mean. The mean is $\sum_jA_jq_j/\sum_jA_j$, using native face-polygon areas.*
 
 | State | Native field | Minimum | Area-weighted mean | Maximum |
 | --- | --- | ---: | ---: | ---: |
@@ -373,11 +411,11 @@ The wall fields were recovered from the paired data files under `results/1/phase
 | Shortened-startup endpoint, iteration 5080 | `SV_WALL_YPLUS` | 399.03 | 20,140.20 | 99,786.82 |
 | Shortened-startup endpoint, iteration 5080 | `SV_WALL_YPLUS_UTAU` | 700.97 | 18,757.91 | 95,670.26 |
 
-The metadata also retains area-weighted percentiles and statistics for every physical wall zone. Across all 4869 physical wall faces, total area was 69.993160 m²; area-weighted `SV_WALL_YPLUS` means were 27,049.79, 16,521.92 and 16,309.68 for the three states in Table A13. High stored wall-resolution values identify a limitation to assess against wall-function assumptions and mesh sensitivity. No universal acceptance band or automatic invalidity conclusion was applied.
+The metadata also retains area-weighted percentiles and statistics for every physical wall zone. Across all 4869 physical wall faces, total area was 69.993160 m²; area-weighted `SV_WALL_YPLUS` means were 27,049.79, 16,521.92 and 16,309.68 for the three states in Table A15. High stored wall-resolution values identify a limitation to assess against wall-function assumptions and mesh sensitivity. No universal acceptance band or automatic invalidity conclusion was applied.
 
 Native cell `SV_WALL_DIST`, indexed through each wall face's adjacent cell, provided a nearest-wall distance. For the main wall it ranged from 0.282407 to 16.825055 mm, with area-weighted mean 13.008929 mm, and was unchanged across the three cases. This is not a meshing first-layer height or layer count. Those construction details, solver-side orthogonal quality and skewness, and a completed matched refinement assessment remain open.
 
-*Table A14. SHA-256 identities for the exact pairs used in the model, geometry and stored-wall-field extraction. Full locations and owning receipts are in the linked metadata.*
+*Table A16. SHA-256 identities for the exact pairs used in the model, geometry and stored-wall-field extraction. Full locations and owning receipts are in the linked metadata.*
 
 | State | Case SHA-256 | Data SHA-256 |
 | --- | --- | --- |
@@ -391,7 +429,7 @@ Raw steady residual entries and global pseudo-time fields were also preserved. F
 
 ### A.11. Descriptive case names and archive traceability
 
-*Table A15. Reader-facing descriptions mapped to retained archive identifiers and iteration records. Here, N denotes native solver iteration, not elapsed physical time. The terminal control and smooth-wall continuation share an archive label but are separate calculations.*
+*Table A17. Reader-facing descriptions mapped to retained archive identifiers and iteration records. Here, N denotes native solver iteration, not elapsed physical time. The terminal control and smooth-wall continuation share an archive label but are separate calculations.*
 
 | Reader-facing description | Archived case or investigation identifier | Saved records and reporting window |
 | --- | --- | --- |
@@ -412,14 +450,16 @@ Raw steady residual entries and global pseudo-time fields were also preserved. F
 | Mixed-inlet Coupled reconstruction | F1 | Absorber off; Coupled/Global Time Step, first-order $k$; fields at N10,000 |
 | Split-inlet Coupled reconstruction | F2 | Absorber off; Coupled/Global Time Step, first-order $k$; fields at N10,000 |
 | Deferred droplet and provisional-film reconstructions | F3/F4; Phase 8, Stage 1 | Detailed comparisons and performance conclusions remain deferred |
-| Later wall-film parameter investigation | Phase 7.2A, Stage 4 | Outside the selected report results |
-| Mesh-refinement preparation | Phase 9 | Input and transfer preparation; no completed convergence comparison |
+| Later release-mechanism continuation | Phase 7.2A, Stage 4, feedback OFF | N29815→N33815 bulk active; then 50 ms frozen-bulk film to N37149; Section 4.11 and Appendix A.12 |
+| Direct lower-film drain | Phase 7.2A, Stage 4, EWF-only drain | Matched OFF/ON N40483→N41483 over 15 ms; ON continued to rejected N68483 after +405 ms |
+| Finer absorber-free diagnostics | Phase 8, Stage 2, direct Student runs | 342k/680k/997k saved N3000; 680k saved N4000 and later failed after printed N4211 |
+| Mesh-refinement campaign | Phase 9 | Ongoing work; no completed convergence comparison selected for this report |
 
 #### Earlier inlet, droplet and wall-film investigations
 
-Tables A16–A18 group Shuhei's development work by the question tested. They supplement the selected-case mapping in Table A15. A completed calculation reached its recorded horizon; this does not establish convergence or physical validity. Numerical failures, incomplete comparisons and capability blocks are retained because they explain the subsequent decisions. Counts refer to the stated comparison only: checkpoints, solver iterations, particle tracks and prepared but unrun cases are not added as separate simulations. The early work included exploratory learning and setup corrections, rather than one preplanned campaign.
+Tables A18–A20 group Shuhei's development work by the question tested. They supplement the selected-case mapping in Table A17. A completed calculation reached its recorded horizon; this does not establish convergence or physical validity. Numerical failures, incomplete comparisons and capability blocks are retained because they explain the subsequent decisions. Counts refer to the stated comparison only: checkpoints, solver iterations, particle tracks and prepared but unrun cases are not added as separate simulations. The early work included exploratory learning and setup corrections, rather than one preplanned campaign.
 
-*Table A16. Earlier inlet and liquid-representation studies. These records establish the development path; unmatched horizons, incomplete tracks and open carrier balances limit their use as performance comparisons.*
+*Table A18. Earlier inlet and liquid-representation studies. These records establish the development path; unmatched horizons, incomplete tracks and open carrier balances limit their use as performance comparisons.*
 
 | Investigation and evidence | Variants and recorded extent | Outcome and limit | Development decision |
 | --- | --- | --- | --- |
@@ -431,7 +471,7 @@ Tables A16–A18 group Shuhei's development work by the question tested. They su
 
 #### Full-geometry drainage and pool-control investigations
 
-*Table A17. Earlier full-geometry work in the 02c → Full Geometry V2 → F11/Phase-6 development line. The studies below are distinct from the co-worker's parallel resolved-outlet and later full-geometry campaigns.*
+*Table A19. Earlier full-geometry work in the 02c → Full Geometry V2 → F11/Phase-6 development line. The studies below are distinct from the co-worker's parallel resolved-outlet and later full-geometry campaigns.*
 
 | Investigation and evidence | Variants and recorded extent | Outcome and limit | Development decision |
 | --- | --- | --- | --- |
@@ -448,7 +488,7 @@ Tables A16–A18 group Shuhei's development work by the question tested. They su
 
 #### Simplified collector, startup and wall-development investigations
 
-*Table A18. Development studies leading to the selected absorber, startup and reference-speed film continuation. The early collector used a 342,609-cell model; the later common-parent wall screen used 60,964 cells. Numerical recovery attempts and continuations retain their own parents and are not pooled as independent physical comparisons.*
+*Table A20. Development studies leading to the selected absorber, startup and reference-speed film continuation. The early collector used a 342,609-cell model; the later common-parent wall screen used 60,964 cells. Numerical recovery attempts and continuations retain their own parents and are not pooled as independent physical comparisons.*
 
 | Investigation and evidence | Variants and recorded extent | Outcome and limit | Development decision |
 | --- | --- | --- | --- |
@@ -460,14 +500,76 @@ Tables A16–A18 group Shuhei's development work by the question tested. They su
 | [Roughness screen](../../experiments/phase-07-2a-wall-liquid-routing/roughness-family/results.md), R0–R11 | 12 independent 3000-update cases from N5586: 0–8 mm at $C_s=0.5$, plus $C_s=0.75/1.0$ at 0.5 and 2 mm | **Conditional response.** The 0.05 mm case increased outlet-liquid magnitude by 21.21%; the 8 mm case reduced it by 44.09% but lost 187.109 kg of bulk-liquid inventory over the run | Retain roughness sensitivity; do not label the lowest outlet value an optimum or a material-accurate improvement |
 | [Film activation and recovery](../../experiments/phase-07-2a-wall-liquid-routing/ewf-family/results.md), E0–E3 and E2.1–E2.7 | Dry-film controls; accretion activation; thickness cap, sub-iterations, fixed/adaptive step and film-coupling changes | **Seven named accretion configurations failed before a usable continuation.** E2 and E2.1–E2.6 failed numerically; E2.7 completed with accretion and coupled film equations on, wall flow-momentum feedback off. E1/E3 remained dry with accretion off | Retain E2.7 for development. Dry controls and failed solver settings did not establish that film capture was physically absent |
 | [Contact-strength and combined continuation](../../experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/results.md), Stage 2 | Short common-parent contact-strength screens, followed by the selected roughness/contact/EWF lineage; exact strengths and windows in Appendices A.3–A.5 | **Enabled further development.** Stronger removal and later film controls changed the model package; short endpoints did not qualify drainage or isolate each mechanism | Preserve the selected chronology and source accounting; distinguish a combined recipe from a single-setting comparison |
-| [Shortened startup](../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/results.md) and [film development](../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/film-development/results.md), Stage 3 | Early Coupled/EWF activation; matched 20/25 µs step checks against a 2.5 µs reference; rejected steps and preserved recoveries; selected [reference-speed continuation to 500 ms](../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/inlet-speed-500ms/results.md) | **Selected report endpoint, still developing.** Startup improved, but the activation spike remained. Later film development used frozen bulk fields and continued to store liquid | Separate startup improvement, local film-step evidence and film drainage; retain the incomplete drainage result at the selected cutoff |
+| [Shortened startup](../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/results.md) and [film development](../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/film-development/results.md), Stage 3 | Early Coupled/EWF activation; matched 20/25 µs step checks against a 2.5 µs reference; rejected steps and preserved recoveries; selected [reference-speed continuation to 500 ms](../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/inlet-speed-500ms/results.md) | **Early film-development reference, still developing.** Startup improved, but the activation spike remained. Later film development used frozen bulk fields and continued to store liquid | Separate startup improvement, local film-step evidence and film drainage; retain the incomplete drainage result at the selected cutoff |
 | [Absorber-free reconstruction](../../experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/index.md), F0–F4 | Mixed/split inlets, SIMPLE/Coupled packages, droplet and provisional-film families on the supplied mesh; selected F0–F2 scope in Appendix A.2 | **Provisional reconstruction.** Changed mesh, inlet and numerical packages prevent direct attribution to one change; detailed F3/F4 results remain deferred | Use as supporting model-development context, not a quantitative replay of the earlier cases |
 
 ![Global liquid inventory in the earlier gain-1.0 cell-zone collector screen and its reference](../../experiments/phase-07a-simplified-purnanto-liquid-removal/cell-zone-treatment-family/p7-e5-cz-g100/figures/P7-E5-CZ-G100-student-20260910T045745Z/F1-liquid-inventory-vs-E0.png)
 
 *Figure A5. Global liquid inventory in the earlier 342,609-cell collector screen. The gain-1.0 child starts from the reference at native iteration 500 and advances through 1000. Shading marks 750–1000; the reported late slope uses samples 751–1000. At iteration 1000 its liquid inventory is 332.524 kg and its late slope is +0.35206 kg/iteration ([result and reductions](../../experiments/phase-07a-simplified-purnanto-liquid-removal/cell-zone-treatment-family/p7-e5-cz-g100/results.md)). Liquid therefore continued to accumulate despite the local phase-selective source. The reference continues to iteration 2000; comparisons with the child use their common 501–1000 window. The later 60,964-cell startup and wall studies have a different parent.*
 
-The register ends with the selected reference-speed 500 ms film result. Later wall-parameter work and mesh preparation retain their archive mappings in Table A15, but are not added to the experimental conclusions here. The local campaign counts are not summed into a project-wide total because they mix independent settings, repeat screens and recovery attempts.
+The early-family register ends with the 500 ms reference film study. The later release and direct-drain cases are mapped in Table A17 and detailed in Appendix A.12; the finer absorber-free cases are defined in Appendix A.2. Campaign counts are not summed into a project-wide total because they mix independent settings, repeat screens and recovery attempts.
+
+### A.12. Later film-release and direct-drain comparisons
+
+*Table A21. Selected later film configurations. These retain the 60,964-cell bulk mesh but differ from the early frozen-bulk reference in carrier fields and active film terms.*
+
+| Comparison | Parent, controls and purpose |
+| --- | --- |
+| Added mechanisms, feedback OFF | Original selected-settings N29815 at 269.184 ms; commercial-steel roughness; gravity, shear, wall viscosity, pressure gradient, spreading, surface tension, momentum advection, phase accretion, DPM collection, splashing, stripping and edge separation active. Film-to-bulk momentum feedback OFF; global DPM continuous-phase feedback OFF. Alternative implicit film algorithm |
+| Bulk-active preparation | N29815→N33815, 4000 updates at 1 µs film step, no reinitialisation. Bulk liquid increased from 61.7862 to 162.2990 kg; outward liquid at the steam outlet increased from 2.7536 to 9.1154 kg/s |
+| Frozen-bulk release study | N33815→N37149, +50 ms: 3333 steps at 15 µs and a final 5 µs step. Thirty maximum film subiterations; achieved inner residuals unavailable. Final approximately 5 ms rates in Section 4.11; cumulative stripping and separation fields differenced over accepted film time |
+| Direct-drain production comparison | Same N40483 fields at 373.184 ms; add initially dry film storage on lower `wall:004`, 34 faces, and preserve all upper fields. Independent OFF/ON children each add 1000 updates / 15 ms to N41483. Upper physics retained; local lower splash and edge separation OFF; bulk frozen |
+| Long drain-ON continuation | N41483→N68483 at fixed 15 µs; 27,000 updates / 405 ms. First Courant ≥1 at N67648 (+392.475 ms); 835 further updates occurred before the block returned. Entire endpoint classified as numerically rejected |
+
+The exact force, interaction, roughness and coefficient assignments are retained in the [selected-mechanism setup](../../experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/realism-continuation/setup.md), [feedback-OFF setup](../../experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/realism-continuation/feedback-off/setup.md) and [saved native readback](../../../PyAnsys/output/phase72a-stage4-realism/20261007/feedback-off/run-manifest.json). Feedback-ON probes failed after printed N29827 and N29829; their failure did not establish that physical film feedback could be omitted without changing the prediction.
+
+For the lower film, the local mass and momentum sources were
+
+$$
+s_m=-K_d\rho_L\max(h_f,0),\qquad
+\boldsymbol s_p=s_m\boldsymbol u_f,
+$$
+
+with $s_m$ in kg/(m²·s), $\boldsymbol s_p$ in N/m², film thickness $h_f$ and mean-film velocity $\boldsymbol u_f$. The coefficient was
+
+$$
+K_d=\min\left(1/\tau_f,\;0.01/\Delta t_{\mathrm{refresh}}\right)
+=666.667\;\mathrm{s}^{-1},
+$$
+
+using $\tau_f=1.5$ ms and $\Delta t_{\mathrm{refresh}}=15$ µs. Profile Update Interval was one solver iteration, and native checks established one accepted film step per iteration in this test. This was an assumed local capture law, independent of inlet throughput and bulk inventory.
+
+An isolated check used identical 50.3752 g seeded lower films, with bulk equations and film forcing/collection disabled. Over 1.5 ms, drain ON removed 31.9363 g, while drain OFF changed by only 0.0000783 g. The per-step source/mass-loss difference was at most 0.000135%. Native film outflow excluded this user sink, so the direct removal was integrated and reported separately. Original upper fields and clock were restored before the production comparison. ([Direct-drain proof and comparison](../../experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/ewf-only-drain/results.md))
+
+In the 15 ms production comparison, sampled film-ledger remainders were 0.2553% and 0.2414% of integrated input for drain OFF and ON. The removed 0.5088 kg did not equal the difference in endpoint inventories because native outflow and other film transfers also changed. The 70.32% result refers specifically to lower-wall film mass, rather than total film or separator efficiency.
+
+The long continuation recorded total film growth from 10.9829 to 38.5606 kg and direct removal of 15.1568 kg. Those complete-interval totals include the rejected tail. Before the first guard crossing, storage remained positive: 49.47 kg/s over the preceding 75 ms and 37.35 kg/s over the preceding 15 ms. Thus continued upper-film accumulation did not depend on the rejected tail. The full-interval sampled ledger discrepancy was 1.648%, above its 1% criterion; achieved inner-film residuals were unavailable. ([Recovered long-run evidence](../../experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/ewf-only-drain/long-development/results.md))
+
+Film source reports can contain signed net transfers. Accounting therefore followed the recorded definitions and checked ledger for each case, counting each transfer once. Stripped and edge-separated liquid left the film representation, whereas the direct sink removed liquid from the modelled system. The selected reports do not isolate a complete splash budget or a whole-separator droplet balance.
+
+### A.13. Wider development history and the full-geometry detour
+
+*Table A22. Experiment families and their contribution to model development. Counts refer to the named comparisons, not the whole project. The early full-geometry work precedes the simplified collector studies; the separate co-worker investigations are outside this account.*
+
+| Investigation family | Range investigated | Finding and consequence |
+| --- | --- | --- |
+| Inlet and carrier basis | Mixed and split phase placement, inlet area, loading and initial liquid distribution | A repeatable split-inlet basis emerged; the overall liquid balance remained open. |
+| Droplet transport | Size and loading, deterministic/stochastic tracking, eddy lifetime and two-way feedback | Reported fates depended on assumptions; incomplete tracks limited performance interpretation. |
+| Early film mechanisms | Five main deposition, splash, edge-separation, stripping and combined configurations | Finite films and mechanism signals were observed; missing transfers and open carrier balances prevented a performance ranking. |
+| Full-geometry drainage and control | Four outlet formulations, transient pressure/startup tests and lower-liquid feedback | Drainage and control remained unqualified; the immediate scope returned to simplified liquid removal. |
+| Simplified liquid removal | Pressure, resistance, prescribed/adaptive withdrawal and phase-selective sources | Conventional treatments retained routing or inventory problems; the lower-region liquid source was retained for redesign. |
+| Absorber and startup | Source laws, reduced feed, checked loading and numerical continuation | A common developed parent became available, with material balance limits. |
+| Wall roughness | Twelve cases: 0–8 mm height and selected roughness-constant changes | Outlet response was non-monotonic; inventory loss limited the interpretation of lower carryover. |
+| Film solution and development | Accretion and startup; film advanced to 500 ms; later release mechanisms and direct drainage | Film spread and drained while still growing. A direct lower-wall sink worked, while upper-wall storage remained. |
+| Separate reconstruction | Mixed/split inlets, numerical packages and three finer meshes without an absorber | Liquid accumulated near the wall and base; other cases discharged nearly all liquid through the steam outlet. Both responses exposed the importance of a collection route. |
+
+The earlier drainage studies explain the change in modelling scope. Sixteen steady outlet-condition cases were attempted across four formulations; six reached 500 iterations and ten ended with floating-point exceptions. The completed cases still had large liquid-balance errors (Appendix Figure A4). A subsequent 10,000-update pressure-feedback trial did not establish a controlled lower-liquid mass near the assumed target (Figure A6). These findings supported the return to a truncated geometry with a separate numerical collector. The earlier lower-cell-zone sink reduced accumulation relative to its reference but did not establish a stationary inventory (Appendix Figure A5), leading to further source-law and startup development.
+
+![Lower-region liquid mass and prescribed brine pressure during the long pool-control trial](../../experiments/phase-06-full-geometry-with-brine-pool/stage-06-long-horizon-surrogate-hypothesis/figures/P6-S6-H-server2-20260831T004750Z/f1_proxy_and_pressure.png)
+
+*Figure A6. Lower-region liquid mass and bounded brine-pressure action during the 10,000-update pressure-control trial and its 50-update smoke check. Liquid mass in the region y ≤ 0.10 m rose from 187.79 to 284.83 kg, while pressure remained at its lower bound of 1.115 MPa gauge for 98 of 100 control endpoints. The dashed 200 kg target is a numerical assumption, not a measured plant level. The horizontal axis is native iteration. Residual histories were unavailable; this result limits the tested feedback model and does not establish that physical level control is impossible.*
+
+<!-- Evidence: [early inlet development](../../experiments/phase-01-purnanto-baseline-and-inlet-exploration/interpretation.md), [DPM comparisons](../../experiments/phase-03-dpm-carryover-and-coupling/interpretation.md), [five early EWF configurations](../../observations/04-010v2-ewf-mechanism-comparison.md), [original outlet screen](../../experiments/phase-05-full-geometry-v2/full-geometry-02e-mixture-outlet-characterization/stage-01/results.md), [targeted outlet screen](../../experiments/phase-05-full-geometry-v2/full-geometry-02e-mixture-outlet-characterization/stage-02/results.md), [long pool-control result and figure](../../experiments/phase-06-full-geometry-with-brine-pool/stage-06-long-horizon-surrogate-hypothesis/results.md), [scope decision](../../experiments/phase-06-full-geometry-with-brine-pool/conclusion.md) and [simplified collection interpretation](../../experiments/phase-07a-simplified-purnanto-liquid-removal/interpretation.md). Appendix A.11 supplies the remaining family records and separates executed cases from incomplete or unrun plans. -->
 
 ## Appendix B. Evidence routes and source limits
 
@@ -485,16 +587,17 @@ The register ends with the selected reference-speed 500 ms film result. Later wa
 | Shortened startup | [Early-start result](../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/results.md) | Ramp peaks, separate activation spike and late inner-film failures |
 | Selected film at iteration 25815 | [Film-development result](../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/film-development/results.md) | Selected lineage, frozen equations, local step check and developing inventory |
 | Longer reference-speed film | [500 ms campaign result](../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/inlet-speed-500ms/results.md) | Completed reference arm and final-10-ms window; other arms retain their incomplete status |
-| Further coupled mechanisms | [Feedback-ON failure record](../../experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/realism-continuation/results.md) | Archive route only; the later wall-parameter investigation is outside the selected report results |
-| Mesh-study status | [Mesh-refinement preparation results](../../experiments/phase-09-mesh-convergence/results.md) | Input and transfer preparation only; no completed convergence comparison used |
+| Film-release mechanisms and drainage | [Feedback-OFF result](../../experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/realism-continuation/feedback-off/results.md), [direct drain](../../experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/ewf-only-drain/results.md) and [long continuation](../../experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/ewf-only-drain/long-development/results.md) | Mechanism signals, matched drain comparison, continued upper storage and rejected tail; Appendix A.12 |
+| Finer absorber-free accumulation | [Matched checkpoints](../../experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/direct-student-342k/n3000/results.md) and [680k continuation](../../experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/direct-student-680k/n4000/results.md) | Developing spatial/inventory results; no mesh-independence claim |
+| Mesh-study status | [Mesh-refinement preparation results](../../experiments/phase-09-mesh-convergence/results.md) | Current campaign record; no completed convergence comparison selected |
 
 The early numerical values are checked against the [carrier residual CSV](../../../PyAnsys/output/phase72a-lineage-N45606/20261005/carrier-residuals.csv) and [selected liquid-history CSV](../../../PyAnsys/output/phase72a-lineage-N45606/20261005/selected-lineage-histories.csv). The [lineage manifest](../../../PyAnsys/output/phase72a-lineage-N45606/20261005/lineage-manifest.json) records sources, coverage, joins and normalisation limits. This revision checks the central scalar values and their provenance; it does not replace the owning analyses with a new full-run audit.
 
-The roughness record's statement that the 2 mm case at $C_s=1.0$ gives the lowest outlet conflicts with its table, where the 8 mm rough-wall case is lower. The draft uses the table values and makes no optimum claim. Reconstruction coverage totals and rounded endpoint tables remain outside the main argument pending reassessment.
+The roughness record's statement that the 2 mm case at $C_s=1.0$ gives the lowest outlet conflicts with its table, where the 8 mm rough-wall case is lower. The draft uses the table values and makes no optimum claim. The selected reconstruction endpoints support the routing comparison in Section 4.3; unreconciled campaign coverage totals are not used.
 
 ## Appendix C. Figure register
 
-*Table C1. Figures used in the draft. Figures 1–4 reproduce literature panels with source credits. Existing evidence images retain their owning locations. New report figures derived from saved mesh, native fields or histories are identified below, with separate provenance.*
+*Table C1. Figures used in the draft. Figures 1–4 reproduce literature panels with source credits. Native mesh and flow images retain their source records and case identities.*
 
 | Figure | Subject | Evidence and caption requirement |
 | --- | --- | --- |
@@ -502,23 +605,28 @@ The roughness record's statement that the 2 mm case at $C_s=1.0$ gives the lowes
 | 2 | Empirical wetness and inlet velocity | Zarrouk and Purnanto (2015), original fig. 12; data credited to Bangma (1960) and Lazalde-Crabtree (1984); different separator sizes; no threshold assigned to the current geometry |
 | 3 | Inlet geometries and tangential-velocity fields | Pointon et al. (2009), original figs. 5 and 7; paired geometry/CFD panels; earlier-study conditions; retained legend and mean annotations |
 | 4 | Wall-film droplet entrainment | Rizaldy et al. (2016), original fig. 9; conceptual mechanisms; original caption's Ishii and Grolmes (1975) credit retained |
-| 5 | Long pool-control trial and scope decision | Existing [regional-mass and pressure figure](../../experiments/phase-06-full-geometry-with-brine-pool/stage-06-long-horizon-surrogate-hypothesis/figures/P6-S6-H-server2-20260831T004750Z/f1_proxy_and_pressure.png) from the [owning result](../../experiments/phase-06-full-geometry-with-brine-pool/stage-06-long-horizon-surrogate-hypothesis/results.md); assumed 200 kg target, native iteration, bounded gauge-pressure action and unavailable residual histories stated |
-| 6 | Early startup and carrier development | New [report figure](../figures/results-described-early-development.png) with [provenance](../figures/results-described-early-development.provenance.json); actual 25% hold, verified ramp and Coupled continuation; iteration distinct from physical time |
-| 7 | Roughness response | New [report figure](../figures/results-described-roughness.png) with [provenance](../figures/results-described-roughness.provenance.json); common developed parent; iterations 8087–8586 means; connected settings are not fitted curves |
-| 8 | Film-disabled/accretion-enabled outlet histories | New [report figure](../figures/results-described-film-outlet.png) with [provenance](../figures/results-described-film-outlet.provenance.json); all native points; positive outward flow; package and inventory limits |
-| 9 | Film-disabled/accretion-enabled bulk-liquid spatial comparison | New [report figure](../figures/bulk-comparison-described-film-treatment.png) derived from native iteration-8586 fields; [provenance](../figures/bulk-comparison-described-film-treatment.provenance.json); same $z=0$ plane and 0–1 scale; developing-field comparison |
-| 10 | Shortened-startup ramp comparison | New [report figure](../figures/results-described-startup.png) with [provenance](../figures/results-described-startup.provenance.json); matched loading progress; activation window excluded; common continuity normalisation |
-| 11 | Selected film development through 500 ms | New [report figure](../figures/results-film-development-reference500ms.png) derived from selected native histories; [provenance](../figures/results-film-development-reference500ms-provenance.json); accepted film clock, frozen-bulk forcing, excluded siblings and final-10-ms window |
-| 12 | Film-thickness views | New [report figure](../figures/wall-film-described-development.png) with [provenance](../figures/wall-film-described-development.provenance.json); shared camera and 0–0.30 mm scale; stated saved film times |
-| M1 (provisional) | Actual solved domain and split inlet | New [report figure](../figures/model-domain-overview.png) from saved face polygons; [provenance](../figures/model-domain-overview.provenance.json); source-region extent distinguished from centroid selection |
+| 5 | Actual solved domain and split inlet | New [report figure](../figures/model-domain-overview.png) from saved face polygons; [provenance](../figures/model-domain-overview.provenance.json); source-region extent distinguished from centroid selection |
+| 6 | Mesh structure and wall-liquid fields | Native [historical and revised mesh/contour exports](../../meetings/Poster/poster-sections/mesh-and-volume-fraction-comparison.md); 7.6M tetrahedral split-feed reference and 60k mixed-feed SIMPLE reconstruction; same mesh/field identity within each column; historical comparison does not isolate mesh |
+| 7 | Effect of inlet phase placement on liquid distribution | Native [inlet-height exports](../../meetings/Poster/poster-sections/mesh-and-volume-fraction-comparison.md) and [split-feed vertical field](../../experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f2-split-inlet/results.md); matched 60k Coupled mixed/split feed at N10000, 0–1 scale |
+| 8 | Liquid inventory and outlet flow on three finer meshes | Existing [matched-checkpoint figure](../../experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/direct-student-342k/n3000/figures/matched-mesh-checkpoints.png) from the [owning result](../../experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/direct-student-342k/n3000/results.md); same SIMPLE package, split feed and developing iteration states |
+| 9 | Early startup and carrier development | New [report figure](../figures/results-described-early-development.png) with [provenance](../figures/results-described-early-development.provenance.json); actual 25% hold, verified ramp and Coupled continuation; iteration distinct from physical time |
+| 10 | Roughness response | New [report figure](../figures/results-described-roughness.png) with [provenance](../figures/results-described-roughness.provenance.json); common developed parent; iterations 8087–8586 means; connected settings are not fitted curves |
+| 11 | Film-disabled/accretion-enabled outlet histories | New [report figure](../figures/results-described-film-outlet.png) with [provenance](../figures/results-described-film-outlet.provenance.json); all native points; positive outward flow; package and inventory limits |
+| 12 | Film-disabled/accretion-enabled bulk-liquid spatial comparison | New [report figure](../figures/bulk-comparison-described-film-treatment.png) derived from native iteration-8586 fields; [provenance](../figures/bulk-comparison-described-film-treatment.provenance.json); same $z=0$ plane and 0–1 scale; developing-field comparison |
+| 13 | Shortened-startup ramp comparison | New [report figure](../figures/results-described-startup.png) with [provenance](../figures/results-described-startup.provenance.json); matched loading progress; activation window excluded; common continuity normalisation |
+| 14 | Selected film development through 500 ms | New [report figure](../figures/results-film-development-reference500ms.png) derived from selected native histories; [provenance](../figures/results-film-development-reference500ms-provenance.json); accepted film clock, frozen-bulk forcing, excluded siblings and final-10-ms window |
+| 15 | Film-thickness views | New [report figure](../figures/wall-film-described-development.png) with [provenance](../figures/wall-film-described-development.provenance.json); shared camera and 0–0.30 mm scale; stated saved film times |
 | A1 | Complete contact chronology | New [report figure](../figures/results-described-combined-history.png) with [provenance](../figures/results-described-combined-history.provenance.json); full selected lineage to iteration 45606; native iteration and film time kept distinct |
 | A2 | Shortened-startup and film chronology to iteration 25815 | New [report figure](../figures/results-described-film-history.png) with [provenance](../figures/results-described-film-history.provenance.json); held bulk fields, preserved restarts and excluded rejected siblings |
 | A3 | Native inlet mesh section | Mesh topology only; measured stored wall-resolution fields retained separately |
 | A4 | Original twelve-case full-geometry outlet screen | Existing regional-inventory figure; 231,376 cells; four formulation panels; volume derived from liquid mass; unequal failed-run horizons and missing EF-P1 history stated |
 | A5 | Earlier cell-zone absorber and reference | Existing global-inventory figure; 342,609 cells; gain-1.0 child to native 1000; longer reference is context; matched range and positive late drift stated |
+| A6 | Long pool-control trial and scope decision | Existing [regional-mass and pressure figure](../../experiments/phase-06-full-geometry-with-brine-pool/stage-06-long-horizon-surrogate-hypothesis/figures/P6-S6-H-server2-20260831T004750Z/f1_proxy_and_pressure.png) from the [owning result](../../experiments/phase-06-full-geometry-with-brine-pool/stage-06-long-horizon-surrogate-hypothesis/results.md); assumed 200 kg target, native iteration, bounded gauge-pressure action and unavailable residual histories stated |
 
-The literature figures establish physical routes, performance behaviour and earlier modelling context. Methods Figure M1 documents the actual domain, with its final main-text number provisional. The input diagram in Section 3.3.1 connects pressure and enthalpy to phase feed. Table 4 defines selected cases, Table 5 separates assessment questions, Table 6 defines quantities and Table 7 connects the wider investigation to its development decisions. Appendices A.3–A.10 retain source implementation, procedures, worked inputs, zones, starting states, film algorithms/criteria and recovered mesh/wall evidence; Appendix A.11 maps the reader descriptions to archived identifiers and groups the wider experiment record in Tables A16–A18. Main Figure 5 supports the change in modelling scope, and Figures 6–12 support the selected startup and wall findings. Figures A1–A2 retain longer native-iteration chronologies, Figure A3 documents mesh topology, and Figures A4–A5 show earlier outlet and collector limitations; deferred reconstruction result figures are excluded.
+Figures 1–4 establish the physical and literature context, and Figure 5 defines the solved domain. Figures 6–8 lead the Results with mesh, inlet placement and accumulation; Figures 9–15 support the startup and wall-film findings. Appendix figures retain mesh detail, longer histories and the full-geometry detour. Appendix A.13 preserves the wider experiment overview; the main Results follows the poster's physical themes.
 
 ## Appendix D. Author contribution
 
-[TO COMPLETE: state Shuhei's contribution to geometry, absorber implementation, startup development, simulations, analysis and writing. Identify any co-worker results used as context and attribute them. Complete this statement from the author's account and the project records.]
+Shuhei Yokkaichi led the model-development investigation presented in this report: framing the liquid-routing questions, selecting and interpreting the inlet, collection, startup and wall-film comparisons, and developing the connected research argument. The work builds on the published separator model of Purnanto et al. (2013) and the inherited project model, rather than claiming the starting geometry or bulk formulation as new. Andy Tran was the project co-worker; his separate later full-geometry and VOF campaigns are not presented as Shuhei's experimental results.
+
+Codex, an OpenAI generative-AI coding and writing assistant, supported literature retrieval, Fluent/PyFluent implementation, execution and recovery workflows, data analysis, figures and report drafting. Fluent performed the numerical calculations. Shuhei directed the scientific scope and supplied the physical interpretation; linked setup, result and machine records identify the implementation and evidence used. The author must review the final report and declaration before submission.

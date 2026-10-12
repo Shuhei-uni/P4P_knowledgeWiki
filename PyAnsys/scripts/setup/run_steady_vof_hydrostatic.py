@@ -27,7 +27,7 @@ def fields(s,out,n):
 def main():
  p=argparse.ArgumentParser();p.add_argument('--build',type=Path,required=True);p.add_argument('--mode',choices=['rest','flow'],required=True);p.add_argument('--iterations',type=int,required=True);p.add_argument('--expected-start',type=int,default=0);p.add_argument('--receipt',type=Path);p.add_argument('--parent-run',type=Path);args=p.parse_args()
  assert 0<args.iterations<=500
- phase_state=yaml.safe_load((BASE.parent/'Project/experiments/steady-vof-hydrostatic/phase-state.yaml').read_text())
+ phase_state=yaml.safe_load((BASE.parent/'Project/experiments/phase-09-steady-vof-pool/follow-on-diagnostics/steady-vof-hydrostatic/phase-state.yaml').read_text())
  deadline_value=phase_state.get('execution_deadline_utc')
  deadline=datetime.fromisoformat(str(deadline_value).replace('Z','+00:00')) if deadline_value else None
  if deadline:assert deadline.tzinfo is not None and datetime.now(timezone.utc)<deadline,'Human execution deadline has expired'

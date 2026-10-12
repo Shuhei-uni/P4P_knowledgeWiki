@@ -1,6 +1,6 @@
 # Part 1 — Introduction and literature review
 
-<!-- Drafting note: model development is the main contribution, with startup and absorber development enabling the later wall experiments. Internal evidence links below are source notes for revision. -->
+<!-- Research framing: credible liquid transport and collection, developed through mesh/inlet assessment, absorber and startup procedures, and wall-film studies. Internal evidence links are traceability notes. -->
 
 ## 1. Introduction
 
@@ -10,7 +10,7 @@ Geothermal steam–water separators remove liquid from the two-phase fluid produ
 
 Computational fluid dynamics (CFD) can examine internal flow and the effects of changes to separator design or operating conditions. Its use in design requires a justified representation of liquid transport and collection, assessed numerical behaviour, and comparison with measurements of the intended performance quantities.
 
-This study develops an existing Fluent model of a vertical bottom-outlet cyclone separator with a spiral inlet. High continuity residuals and unresolved mass imbalances limited further development of the model. The work therefore focused on numerical liquid removal and staged startup to establish a flow field from which additional wall–liquid behaviour could be studied.
+This study develops an existing Fluent model of a vertical bottom-outlet cyclone separator with a spiral inlet. Its central problem is the representation of the liquid path: liquid must move away from steam, travel along the wall and reach a collection route. The work examined mesh and inlet assumptions, introduced numerical liquid removal, and developed staged startup procedures that enabled more detailed wall–liquid studies.
 
 <!-- Evidence: [Study scope](../../scope.md); [absorber-development context](../../experiments/phase-07-1a-absorber-convergence/CONTEXT.md). -->
 
@@ -24,7 +24,7 @@ A virtual collector, termed an absorber, was introduced to remove liquid numeric
 
 <!-- Evidence: [Verified early absorber](../../experiments/phase-07-1a-absorber-convergence/baseline-v2-virtual-liquid-outlet/results.md); [selected case history](../../experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/case-history-N45606.md). -->
 
-In this report, a *developed flow field* means a saved full-feed starting state, or parent, that enabled repeatable wall-treatment screens over specified finite iteration windows. This is an operational model-development criterion. The parent retained a material liquid-balance error, and its iterative convergence and conservation remained unqualified. Residuals, liquid inventory, removal rates and mass balance are assessed separately to establish the limits of the comparisons.
+In this report, a *developed flow field* means a saved full-feed starting state, or parent, used for repeatable wall-treatment comparisons. Residuals, liquid inventory and removal rates establish what that state can support. The parent retained a material liquid-balance error, so it supplied a common development basis rather than a validated separator solution.
 
 <!-- Evidence: [R0 control](../../experiments/phase-07-1a-absorber-convergence/roughness-family/r0-smooth-control/results.md); [source-inclusive R0 accounting assessment](../../experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/shuhei-audit.md). -->
 
@@ -32,25 +32,26 @@ In this report, a *developed flow field* means a saved full-feed starting state,
 
 The aim of this research is to develop and assess an existing Fluent CFD model of a geothermal steam–water separator. The purpose is to improve understanding of internal steam and liquid transport and establish a basis for predicting separation efficiency and pressure drop.
 
-The completed study focuses on liquid-removal, startup and wall-interaction treatments. Predicting separation efficiency and pressure drop is the longer-term purpose of this development. The present calculations assess the prerequisites for that use and the further evidence needed for comparison with field measurements.
+The completed study focuses on mesh representation, inlet phase placement, liquid collection, startup and wall interaction. Predicting separation efficiency and pressure drop is the longer-term purpose of this development. The present calculations assess the prerequisites for that use and the further evidence needed for comparison with field measurements.
 
-The aim is pursued through three research questions:
+The aim is pursued through four research questions:
 
-1. How can numerical liquid removal and staged startup establish a developed flow field for further separator-model studies?
-2. How do wall roughness and wall-film modelling affect predicted liquid transport, retained inventory and liquid carryover at the steam outlet?
-3. What numerical and liquid-accounting evidence supports these predictions, and what further evidence is required for field comparison and separator-performance assessment?
+1. How do mesh representation and inlet phase placement affect predicted wall-liquid distribution and retention?
+2. How can liquid collection and staged startup address the missing brine-discharge path and establish fields for further separator-model studies?
+3. How do wall roughness and wall-film modelling affect liquid transport, storage, release and collection?
+4. What numerical and liquid-accounting evidence supports these predictions, and what further evidence is required for field comparison and separator-performance assessment?
 
 ### 1.4. Scope and contribution
 
-The study primarily uses the simplified separator geometry with an added numerical collector. It examines startup from reduced feed, continuation at full feed, and the effects of wall roughness and wall-film modelling. The initial roughness and EWF screens start from the same saved full-feed parent. Later calculations examine earlier wall-treatment activation and film development, each with its recorded starting state. Full-geometry calculations provide context; their different outlet boundaries require separate mass accounts.
+The study primarily uses the simplified separator geometry. Mesh and inlet comparisons examine how liquid is distributed near the wall and retained in the vessel. Absorber-free and full-geometry calculations establish the need for a collection treatment. The study then examines reduced-feed startup and wall roughness and film modelling, with the initial roughness and EWF screens starting from the same saved full-feed parent. Later calculations examine earlier film activation, film development to 500 ms, added release mechanisms and direct film drainage.
 
 <!-- Evidence: [Study overview](../../index.md); [selected case history](../../experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/case-history-N45606.md). -->
 
-The main contribution is a documented method for developing and extending the simplified separator calculation through numerical liquid removal and staged startup. The sequence supplied the parent for the initial wall-treatment screens, although it did not isolate the contribution of each change. Earlier absorbers form part of the startup history; the final contact absorber receives the detailed implementation account.
+The main contribution is a connected account of how mesh, inlet and wall treatments affect liquid transport, supported by practical collection and startup methods. The connected experiments distinguish liquid retained in the vessel, transferred to film, released from the wall and removed at a collector. Earlier absorbers form part of the startup history; the final contact absorber and later direct film drain receive the implementation account.
 
 The results support assessment of model development and predicted liquid behaviour. Mesh convergence, complete liquid accounting and comparison with field measurements remain necessary before separation efficiency and pressure-drop predictions can be validated. Selection of an optimum separation pressure or separator location is outside the scope of the calculations presented here.
 
-Additional coarse-mesh reconstruction calculations are described in Appendix A.2. Their numerical and accounting limitations require further assessment before they can support performance conclusions.
+The reconstruction comparisons are used to interpret model behaviour, with their case definitions in Appendix A.2. They do not provide a completed mesh-convergence study.
 
 Section 3 defines the model, numerical procedures and comparison design. Section 4 presents the development and wall-treatment results. Sections 5 and 6 interpret their contribution and limits, then identify the conclusions and further work.
 
@@ -179,6 +180,6 @@ Physical validation requires measurements of the intended outputs under suitable
 
 The literature links separator predictions to droplet feed, collection rules and wall-film exchange. The project-specific problem is to develop the inherited simplified model so that these effects can be studied with explicit numerical and liquid accounts.
 
-Three linked uncertainties define that work: how numerical removal affects a domain without a brine-discharge path; how startup supplies a full-feed parent for repeatable comparisons; and how wall treatments change liquid destinations. A reduction in outlet liquid flow must be assessed alongside removal and storage.
+The development sequence asks how to represent collection in a domain without a brine-discharge path; how to develop repeatable full-feed fields; and how wall treatments change liquid destinations. Mesh and inlet choices affect the transport leading into this sequence. Film formation, release and drainage determine what happens after liquid reaches the wall.
 
-These uncertainties lead to the research questions in Section 1.3. Absorber and startup development provide the central contribution; roughness and EWF studies test the extensions they enabled. The numerical and liquid-accounting evidence defines the limits of those findings and the remaining requirements for performance prediction.
+These questions lead to the research direction in Section 1.3. Collection and startup development enable the wall studies, which in turn identify transport processes and possible design changes to investigate. Numerical assessment and liquid accounting establish how far those findings can support separator-performance prediction.

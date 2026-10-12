@@ -1,6 +1,6 @@
 # Part 2 — Model and methods
 
-*Working draft. This section defines the model and procedures through the frozen-bulk film-development investigation. Remaining evidence gaps are identified where they affect reproducibility. Later wall-film parameter investigations are outside the selected report evidence.*
+<!-- Revision scope: model development, film development to 500 ms, selected later film-release and direct-drain tests, and absorber-free mesh diagnostics. Unverified settings are identified where they affect reproducibility. -->
 
 ## 3. Model and methods
 
@@ -10,11 +10,13 @@ The computational domain represented the upper separation region of a vertical b
 
 A numerical collector was defined in the lower fluid region to represent liquid collection at a brine-pool surface. This treatment allowed liquid to leave the simplified model without introducing a steam outlet at its base. It did not resolve the pool surface, pool depth or downstream discharge. Calculations with the collector disabled examined transport within the same truncated domain.
 
+This boundary choice was central to the investigation. Without collection, a stationary, mass-conserving solution would have to discharge the incoming liquid through the steam outlet. The absorber-free cases therefore tested the consequences of the truncated domain and its liquid transport; they did not represent a separator with a functioning brine outlet.
+
 The study assessed the model's numerical development and its predicted liquid routes. It used a steady bulk-flow formulation, with a separate evolving wall-film model where enabled. Numerical startup therefore described the development of the solution through iterations; it did not represent the physical startup time of the separator.
 
 ![Actual saved computational domain and split inlet with collector and boundary labels](../figures/model-domain-overview.png)
 
-*Methods Figure M1 (provisional number). Computational domain and pure-phase inlet partition reconstructed from the selected 60,964-cell saved mesh. The collector contains 715 cells and extends to approximately $y=0.185$ m, although its selection used cell centroids $y\leq0.10$ m. The bottom remains a wall; the omitted pool and discharge are not represented. Face colours identify boundaries and the source region, not solution fields. The full-feed parent, combined contact endpoint and shortened-startup endpoint share identical node coordinates and face connectivity.*
+*Figure 5. Computational domain and pure-phase inlet partition reconstructed from the selected 60,964-cell saved mesh. The collector contains 715 cells and extends to approximately $y=0.185$ m, although its selection used cell centroids $y\leq0.10$ m. The bottom remains a wall; the omitted pool and discharge are not represented. Face colours identify boundaries and the source region, not solution fields. The full-feed parent, combined contact endpoint and shortened-startup endpoint share identical node coordinates and face connectivity.*
 
 Coordinates use the saved mesh system, with vertical $y$ and the bottom at approximately $y=0$. The inlet plane was $x=-2.067$ m, with lower and upper edges at $y=1.704$ and 2.428 m. The steam-outlet plane was $y=6.261$ m, while the top of the discrete mesh was $y=6.990$ m. The complete mesh extended over $x=-2.067$–1.065 m and $z=-1.470$–1.065 m, including the inlet passage. These are measured saved-mesh landmarks, not nominal CAD dimensions. Appendix A.1 retains exact coordinate bounds and the paired-case identity checks.
 
@@ -57,7 +59,9 @@ In Fluent 2025 R2, the default rough-wall formulation for RNG $k$–$\varepsilon
 
 EWF added surface equations for film mass and momentum on selected walls. Phase accretion transferred liquid from the bulk phase into the film. Film transport and edge outflow were then recorded separately from bulk-liquid transport. Coupling between the film equations and momentum feedback to the bulk flow were distinct settings. ([Ansys, Inc., 2025c](https://ansyshelp.ansys.com/public/views/secured/corp/v252/en/flu_ug/flu_ug_models_wallfilm.html); [2025e](https://ansyshelp.ansys.com/public/views/secured/corp/v252/en/flu_ug/flu_ug_ewf_sec_overview.html))
 
-The reported EWF cases solved film mass and momentum with gravity, external-flow shear and wall-viscous resistance. Film pressure-gradient, spreading and surface-tension terms were disabled. Phase accretion was enabled, while film energy, phase change, DPM collection/splash, stripping, edge-separation and EWF–VOF transition models were disabled. Bulk-flow momentum feedback was off. Native outflow at the lower edge of the active film wall remained a drainage route; this was distinct from the disabled droplet edge-separation model. ([Ansys, Inc., 2025c, §§30.3–4](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_ewf_sec_options.html))
+The early EWF cases, including the reference development to 500 ms, solved film mass and momentum with gravity, external-flow shear and wall-viscous resistance. Film pressure-gradient, spreading and surface-tension terms were disabled. Phase accretion was enabled, while film energy, phase change, DPM collection/splash, stripping, edge-separation and EWF–VOF transition models were disabled. Bulk-flow momentum feedback was off. Native outflow at the lower edge of the active film wall remained a drainage route; this was distinct from the disabled droplet edge-separation model. ([Ansys, Inc., 2025c, §§30.3–4](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_ewf_sec_options.html))
+
+Selected later tests added pressure-gradient, spreading and surface-tension forces, droplet collection, splashing, stripping and edge separation. Stripping transfers film liquid to droplets under gas forcing; splashing produces secondary droplets when droplets strike the film; edge separation releases liquid at wall edges. These processes extend the represented liquid routes but do not themselves establish greater predictive accuracy. The later cases retained film-to-bulk momentum feedback off and used different developed bulk fields, so they were not a single-switch comparison with the early film run. Appendix A.12 defines their settings and parents. ([Ansys, Inc., 2025k, §17.2.1](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_th/flu_th_ewf_sec_film_submodels.html))
 
 The initial accretion-enabled film screen used coupled film equations. Later film-development tests included an alternative implicit numerical algorithm, identified separately from the physical model in Appendix A.9. The model/control matrix in Table 4 identifies the selected case changes; Appendix A.9 records the switches, algorithm variants and numerical bounds.
 
@@ -108,7 +112,7 @@ Q_i=\frac{\dot m_i}{\rho_i},\qquad
 U=\frac{Q_L+Q_V}{A},\qquad A_i=\frac{Q_i}{U}.
 $$
 
-Vapour supplied about 40.83% of the mass and 99.07% of the reference volumetric flow. The design therefore assigned approximately 0.933% of inlet area to a 6.754 mm liquid strip beside the vessel wall (Methods Figure M1), with calculated $U=27.1180$ m/s. This pure-phase placement was an idealised input. Under the same common-velocity assumption, a uniform mixed inlet would instead have
+Vapour supplied about 40.83% of the mass and 99.07% of the reference volumetric flow. The design therefore assigned approximately 0.933% of inlet area to a 6.754 mm liquid strip beside the vessel wall (Figure 5), with calculated $U=27.1180$ m/s. This pure-phase placement was an idealised input. Under the same common-velocity assumption, a uniform mixed inlet would instead have
 
 $$
 \alpha_{L,\mathrm{uniform}}
@@ -124,6 +128,8 @@ U_{i,n}=\frac{\dot m_i}{\rho_i A_i}.
 $$
 
 At full feed these were approximately 27.134 m/s for liquid and 26.803 m/s for vapour, with combined volumetric-flow speed 26.806 m/s. Appendix A.7 retains both property bases, areas and arithmetic. Reconstruction commands are specified separately in Appendix A.2.
+
+The wall-side strip tests an inlet already rich in liquid near the outer wall. Pointon et al. (2009) describe liquid films in upstream piping as one possible source of separator liquid, which gives a physical basis for investigating this arrangement. Complete phase segregation and the strip width were imposed modelling assumptions, rather than measured inlet profiles. This arrangement connects the inlet study to wall transport and film formation. ([Pointon et al., 2009](https://publications.mygeoenergynow.org/grc/1028587.pdf))
 
 <!-- Evidence: [Original area derivation and phase-property basis](../../experiments/phase-02-parity-reset-and-pre-v2-qualification/purnanto-08c-inlet-loading-sensitivity/inlet-regimes-interpretation.md); [supplied inlet areas](../../../PyAnsys/output/phase9-mesh-convergence/20261007/mesh-input-audit.json); [saved full-feed commands](../../../PyAnsys/output/phase71a_r0_control_run4/checkpoint-plus1000-batched-readback.json). -->
 
@@ -183,21 +189,23 @@ $$
 S_k=S_Lk,\qquad S_\varepsilon=S_L\varepsilon.
 $$
 
-These terms were included to remove the transported quantities associated with the extracted liquid. A mass source does not automatically supply the required momentum and other transport sources in Fluent. ([Ansys, Inc., 2025a](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_bcs_sec_cell_zones.html))
+The physical idealisation was one-way capture: liquid entering the collector transferred its mass and momentum to the omitted brine pool. Associated transport sources prevented extracted mass from leaving its transported momentum and turbulence quantities behind in the model. Pool motion, pressure response and liquid return were omitted. A mass source does not automatically supply the required momentum and other transport sources in Fluent. ([Ansys, Inc., 2025a](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_bcs_sec_cell_zones.html))
 
 The mass and momentum functions supplied local source derivatives for implicit treatment. Appendix A.3 gives the exact assignments, derivative approximations and independent applied-source reports. The depletion time controls source strength; it is separate from the film timestep and was assessed through the removal-time screen in Appendix A.4.
 
 The volumetric source acted only on bulk liquid. Film left through native edge outflow at the lower edge of the active EWF wall; the lower wall segment was outside EWF. Diagnostic droplets used native escape at collector-entry faces and lower walls. Bulk removal, collector film drainage and particle escape therefore remained separate collection routes.
 
+A later direct-film-drain test extended EWF onto the lower wall segment and removed local film mass with its mean-film momentum. Its assumed capture time was 1.5 ms, distinct from the 10 µs bulk-contact depletion time. A source-only check and matched 15 ms drain-OFF/ON runs tested removal with all bulk equations frozen. The sink acted on film storage and was reported separately from native film edge outflow; the bulk absorber could not provide this direct surface removal. Appendix A.12 gives the source law and comparison procedure.
+
 ### 3.4. Mesh and spatial discretisation
+
+Fluent Meshing was used to construct a polyhedral–hexahedral mesh with controlled refinement near the vessel wall. The practical aim was a repeatable meshing process for model development. The physical aim was to resolve concentrated wall liquid and its circumferential and downward transport. Wall-following layers provide normal refinement and follow the vessel surface; the hexahedral core does not align with every direction of the swirling flow. Reduced numerical diffusion was a hypothesis to assess, since mesh alignment, local resolution and discretisation all affect transport error. ([Ansys, Inc., 2025g, §7.1.3.3](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_GridTypes.html))
 
 The solved mesh contained 60,964 cells (4596 hexahedral; 56,368 polyhedral), 226,982 nodes and 328,287 faces. The three saved states in Appendix A.10 had identical coordinates and connectivity, including the 715-cell collector. Figure A3 documents the wall-following structure. Resolution, alignment and discretisation affect numerical diffusion; visible topology alone does not establish accuracy. ([Ansys, Inc., 2025g, §7.1.3](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_GridTypes.html))
 
 The full-feed control used Green–Gauss node-based gradients, PRESTO! pressure, second-order upwind momentum and $\varepsilon$, first-order upwind $k$, and QUICK volume fraction. Spatial schemes were recorded per case because the numerical packages differed between the main development and reconstruction calculations. Appendix A.6 retains the verified control settings. The historical tetrahedral comparison is defined separately in Section 3.6 and Appendix A.2.
 
-Saved endpoint data provided actual native wall-resolution fields. On the main `wall` zone, `SV_WALL_YPLUS` had area-weighted means of approximately $3.43\times10^4$, $2.04\times10^4$ and $2.01\times10^4$ for the full-feed parent/control, combined contact endpoint and shortened-startup endpoint, respectively. The separate `SV_WALL_YPLUS_UTAU` field had lower, but still high, means of $2.93\times10^4$, $1.90\times10^4$ and $1.88\times10^4$. These are distinct stored shared-flow fields, not the reference setting of 300. Appendix A.10 gives their per-state ranges, area weighting and paired-data identity.
-
-The high values make near-wall resolution a measured limitation to assess with the wall-function assumptions and a matched refinement study. They do not, by themselves, show that the wall function is invalid. The native nearest-wall distance in cells adjacent to the main wall had an area-weighted mean of 13.009 mm; it was not a meshing first-layer thickness. Orthogonal quality, skewness, exact layer count and first-layer height remain unverified. No completed matched mesh-refinement assessment is reported.
+Native wall fields provided a direct resolution check. Area-weighted mean $y^+$ on the main wall was approximately $2.0\times10^4$–$3.4\times10^4$ across the three saved states, showing that wall-following topology did not by itself provide fine near-wall resolution. Appendix A.10 gives the distinct stored $y^+$ fields, wall-distance statistics and case identities. Exact layer count, first-layer height, orthogonal quality and skewness remain unverified; the matched refinement assessment is incomplete.
 
 <!-- Evidence: [Raw mesh input audit](../../../PyAnsys/output/phase9-mesh-convergence/20261007/mesh-input-audit.json); [native section views](../../meetings/Poster/poster-sections/mesh-and-volume-fraction-comparison.md); [partitioned control setup](../../experiments/phase-07-1a-absorber-convergence/roughness-family/r0-smooth-control/setup.md). -->
 
@@ -233,7 +241,7 @@ Assignments were checked after data loading and save/reopen. Appendices A.5–A.
 
 ### 3.6. Comparison design
 
-The investigation combined exploratory model development with later comparisons from shared saved fields. Early inlet, droplet, wall-film and liquid-removal studies examined which assumptions and treatments required further work. Some were unmatched diagnostics or incomplete runs, and some early inlet variants arose during setup correction. They are therefore not treated as one fully controlled parameter sweep. The Results overview groups these investigations by their question and contribution to the study; Appendix A.11 retains their case identities and evidence limits.
+The investigation combined exploratory model development with later comparisons from shared saved fields. Early inlet, droplet, wall-film and liquid-removal studies examined which assumptions and treatments required further work. Some were unmatched diagnostics or incomplete runs, and some early inlet variants arose during setup correction. They are therefore not treated as one fully controlled parameter sweep. Results leads with the mesh, inlet, collection and wall findings. Appendix A.13 groups the wider investigations by their question and contribution; Appendix A.11 retains case identities.
 
 Later comparisons addressed startup, wall transport and the numerical basis for interpreting liquid routes. Common-parent screens changed specified wall inputs while retaining the same saved bulk fields and the other recorded controls. Startup and combined continuations assessed procedures in which several settings changed together. Table 4 defines these principal comparisons. A numerical failure or an incomplete calculation was retained as evidence about the tested conditions, without implying that the physical mechanism could not operate.
 
@@ -256,7 +264,9 @@ Film-step checks restarted identical saved fields and compared equal accepted fi
 
 The absorber-off mixed-inlet and split-inlet Coupled reconstructions changed phase placement at the same mesh, feed and numerical package. Each speed case used fresh Hybrid Initialisation and 10,000 updates; Appendix A.2 gives windows. Mesh-resolution assessment remains incomplete.
 
-The historical tetrahedral-mesh reference and mixed-inlet SIMPLE reconstruction used corresponding mesh/contour sections at iteration 10,000 but differed in mesh, inlet representation and preparation. The mixed-inlet SIMPLE and Coupled reconstructions changed coupling, pseudo-time and the $k$ scheme together. Neither comparison isolated a single cause. Appendix A.2 defines these provisional comparisons; Sections 4.9 and 5.6 give observations and possible explanations.
+The historical tetrahedral-mesh reference and mixed-inlet SIMPLE reconstruction used corresponding mesh/contour sections at iteration 10,000 but differed in mesh, inlet representation and preparation. The mixed-inlet SIMPLE and Coupled reconstructions changed coupling, pseudo-time and the $k$ scheme together. Neither comparison isolated a single cause. Appendix A.2 defines these provisional comparisons; Sections 4.1–4.3 and 5.1–5.3 give the observations and their interpretation.
+
+Subsequent absorber-free diagnostics used 342,609-, 679,970- and 997,604-cell meshes with pure split feed, fresh Hybrid Initialisation and the same reduced-relaxation SIMPLE package. Saved fields at iteration 3000 supplied a common iteration comparison; the 679,970-cell case continued to a verified iteration-4000 checkpoint before a later numerical failure. These were developing steady calculations, not a converged mesh study. The selected later film-release and drain tests answered separate questions about added liquid routes and local collection, with their changed settings and numerical limits retained in Appendix A.12.
 
 ### 3.7. Data reduction and numerical assessment
 
@@ -314,3 +324,9 @@ Wall screens used final-500 arithmetic means; the 500 ms film arm used its final
 Local step selection required mass-distribution difference $\leq1\%$, velocity/thickness differences $\leq2\%$, ledger error $\leq0.1\%$ and recovery bounds; the mid-development check added drainage difference $\leq1\%$ of reference accretion. Appendix A.9 defines norms and parents. A local pass did not establish global timestep independence or validation.
 
 Appendices A and B provide the settings, parent identities, source assignments and extraction records needed to trace these procedures. Appendix A.11 maps the descriptive case names to archived identifiers. Remaining numerical-resolution and physical-validation limits accompany the reported findings and their interpretation.
+
+### 3.8. Experiment workflow and use of automation
+
+The investigation followed an iterative workflow: identify a physical or numerical question, define a bounded comparison, implement and check it, run Fluent, then use the result to select the next question. Literature, the CFD knowledge wiki and earlier experiment records supplied the rationale. The researcher set the scientific scope and interpreted the findings. Agent-assisted work used task-specific instructions, termed skills, to support setup, execution, analysis and documentation.
+
+Python scripts and PyFluent issued configuration and run commands to Fluent, which performed the numerical solution. Recorded settings, native reports, transcripts and saved case/data pairs provided checks on what had actually run. Setup and result records retained the question, parent fields, changed settings and outcome. This workflow supported repeatable comparisons and recovery from failed calculations; it was not an independent validation method. Earlier calculations used different automation routes, so the current harness is not assumed to describe every historical run.

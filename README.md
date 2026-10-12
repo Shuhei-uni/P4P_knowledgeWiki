@@ -1,135 +1,154 @@
 # P4P Knowledge Wiki
 
-For shared development, start with [Working together](CONTRIBUTING.md).
-Use `main` as the agreed source of truth, make changes on task branches, and
-merge through pull requests. The [local data and recovery guide](LOCAL_DATA.md)
-maps the reconciled workspaces.
+**A connected research workspace for rapid CFD experimentation.**
 
-This repository is the compact working knowledge base for the P4P geothermal
-separator CFD project. It has four active systems with clear ownership:
+This repository brings together the knowledge, experiment records, Fluent
+automation, and agent workflows used in the P4P geothermal separator project.
+It supports the full experiment cycle: discuss a hypothesis, define a controlled
+test, build and verify the case, run Fluent, analyse the evidence, and use the
+findings to choose the next experiment.
 
-- `CFD_wiki/` — reusable CFD literature, source lookup, Fluent guidance, and
-  cross-paper method synthesis.
-- `Project/` — current project-specific scientific truth, selected experiments,
-  evidence interpretation, and claim limits.
-- `PyAnsys/` — executable Fluent automation, inspection, Python-supervised
-  execution support, and machine-readable evidence checks.
-- `.agents/skills/` — focused repository-local workflows for the active CFD, Fluent,
-  evidence, and project-loop tasks.
+## A growing, connected knowledge base
 
-The former project source vault is not part of the current checkout. The old
-written project wiki, numbered setup/report tree, meeting-report folder, and
-fixed subagent prompts were retired after their useful content was distilled
-into `Project/`, `CFD_wiki/`, and `PyAnsys/`; Git history is their recovery path.
+[![Watch the knowledge base expansion video](assets/readme/knowledge-base-expansion-preview.jpg)](assets/readme/knowledge-base-expansion.mp4)
 
-Start with:
+**[Watch the knowledge base expansion video — 17 seconds](assets/readme/knowledge-base-expansion.mp4)** · [Original MOV](KnowledgeBaseExpansion.mov)
 
-- [`AGENTS.md`](AGENTS.md) for repository routing and safety rules.
-- [`Project/index.md`](Project/index.md) for current project truth and the
-  selected-experiment contract.
-- [`CFD_wiki/wiki/index.md`](CFD_wiki/wiki/index.md) for reusable CFD
-  knowledge and paper navigation.
-- [`PyAnsys/README.md`](PyAnsys/README.md) for implementation and Fluent
-  execution/handoff workflow.
-- [`.agents/skills/`](.agents/skills/) for the focused task-scoped repository
-  workflows.
+The video shows the linked knowledge graph expanding. These connections help
+navigate between related knowledge and supporting records. The graph provides
+an overview; the linked sources and experiment evidence support the decisions.
 
-## Human-invoked skills to remember
+The value is in how these parts connect. Each experiment can reuse the literature,
+verified implementation, and lessons from earlier work. The human sets the
+scientific direction; the agent carries out the experiment cycle within that
+recorded scope. This helps the project move quickly while keeping each result
+traceable to its setup and source evidence.
 
-Most skills are internal specialists and should be called by the scientific workflow when needed. The main skills the human should deliberately invoke are:
+[Experiment workflow](#experiment-workflow) · [Skills](#the-skills-behind-the-workflow) · [Knowledge base video](#a-growing-connected-knowledge-base) · [Start here](#start-here)
 
-- `$phase-planner` — use for a scientific catch-up before a phase, after the autonomous loop stops, or whenever you want to reconstruct where the project stands, think aloud about the next direction, and approve phase/experiment candidates.
-- `$phase-loop` — use once an ordered queue of selected `setup.md` records is
-  defined. It executes that queue faithfully, verifies that every planned run
-  and evidence gate actually completed, and does not invent cases.
-- `$auto-loop` — use for a bounded autonomous exploration window inside a fixed
-  phase. It asks for a compact family/horizon/direction/stop-time profile, then
-  creates and tests short discovery cases before earning each long hypothesis
-  run through the same hard evidence gates.
-- `$workflow-surgeon` — use when the agent workflow itself is frustrating, repeatedly behaves badly, has a missing responsibility, stale rule, poor handoff, or bad default. It diagnoses the root cause with fresh reviewers and prefers the smallest surgical change over redesigning the skill system. It may also self-invoke when frustrated user feedback clearly points to an identifiable workflow failure.
-- `$handoff` — use when you want a concise, paste-ready brief to continue the work in another chat.
-- `$show-me-your-work` — optional audit/handoff tool when you specifically want a concise reconstruction of what an autonomous sequence did and where the supporting evidence lives.
+## Experiment workflow
 
-Typical scientific flow:
+![Experiment workflow: human and agent discussion draws on the knowledge base, then connects a recorded setup to Fluent case creation, remote execution, analysis, and feedback.](assets/readme/experiment-workflow.png)
 
-```text
-$phase-planner
-    ↓
-human think-aloud / $phase-grill
-    ↓
-CONTEXT.md phase scope, approved candidates, and decision gates
-    ↓
-design-experiment → create-setup → defined setup queue
-    ↓
-$phase-loop executes the defined paths
-    ↓
-return to human / pre-authorized $auto-loop
-    ↓
-$phase-planner
-```
+*The project workflow overview. The current skill names and record names are
+listed below; the image's “Auto Loop” is now part of `phase-loop`, and results
+are stored in `results.md`.*
 
-Workflow maintenance is separate from the scientific loop:
+| Step | What happens | Workflow and record |
+| --- | --- | --- |
+| **1. Frame the question** | Human and agent review current evidence, discuss a hypothesis, and agree the question, allowed changes, compute boundary, and required evidence. | `phase-planner` → phase `CONTEXT.md` |
+| **2. Design the test** | Select the next useful experiment. Define its parent, controlled change, fixed settings, comparison, and evidence before compute. | `phase-loop` → experiment `setup.md` |
+| **3. Build and verify** | Inspect the Fluent session, apply settings in dependency order, read back critical values, save and reopen the case, and perform a bounded smoke check. | `pyansys-workflow` → code and build evidence in `PyAnsys/` |
+| **4. Run and preserve** | Place work on an available owned Fluent session. Run to the declared horizon, keep local checkpoints and transcripts, and verify completion artifacts. | `pyansys-workflow` → run receipts, histories, and paired case/data files |
+| **5. Analyse and decide** | Produce the figures and tables that answer the question. Check numerical adequacy, phase routing, balances, or film behaviour as required. Separate observation from interpretation. | `cfd-numerical-analysis` + `phase-loop` → `results.md` and `phase-state.yaml` |
+| **6. Reuse and continue** | Choose the next in-scope test, repair a recoverable failure, or close the phase with a supported conclusion. Add transferable lessons to the knowledge base with links to their evidence. | `phase-loop` + `cfd-wiki` → next experiment or phase closure |
 
-```text
-human encounters workflow friction
-    ↓
-$workflow-surgeon
-    ↓
-diagnose root cause
-    ↓
-smallest justified skill / handoff / rule edit
-```
+The knowledge base supports the whole cycle. Literature and Fluent guidance help
+frame a test and implement it. Previous experiment records help select useful
+contrasts and avoid repeating work. New findings stay in their experiment record;
+reusable methods and lessons can feed back into the wiki.
 
-The human normally does not need to invoke experiment-design, setup, Fluent execution, numerical-analysis, interpretation, next-action, or closure skills individually; the loop should call them as required.
+## Why this supports rapid experimentation
 
-Inside either loop, execution depends on experiment mode:
+- **Knowledge is ready to reuse.** Linked literature, model assumptions, Fluent
+  guidance, and previous results reduce repeated source searches and setup work.
+- **Scientific intent survives between sessions.** `CONTEXT.md` holds the phase
+  scope and `setup.md` holds the runnable intent. A continuation can recover the
+  question, parent, and required evidence from durable records.
+- **Case creation is repeatable.** Python/PyFluent scripts apply controlled
+  changes and verify the resulting state. Proven code and version-matched
+  guidance provide a starting point for the next case.
+- **Compute can run across multiple computers.** The fleet workflow checks
+  session availability, parent identity, and ownership before placing work.
+  Each Fluent session has one command owner. Checkpoints and transcripts stay
+  on the Fluent host; OneDrive carries shared starting files and selected final
+  case/data pairs.
+- **Long runs have a defined completion path.** Detached execution, run receipts,
+  checkpoint recovery, and optional scheduled monitoring support work beyond
+  the active chat. Analysis starts from verified terminal evidence.
+- **Results guide the next test.** The same loop owns experiment selection,
+  execution, analysis, and ordinary recovery inside the agreed scope. The human
+  returns when the scientific direction or a human-owned decision must change.
 
-- **Discovery:** short screening runs stay attached to the active scientific agent so results can immediately evaluate their declared gate; Auto Loop may create another bounded screen only after this evidence is verified.
-- **Hypothesis test:** long runs use the background self-waking Python worker. It persists `COMPLETE`/`BLOCKED` evidence and resumes the exact originating Codex thread automatically; the human should not need to send a prompt just to restart progress after the solve finishes.
+These mechanisms reduce repeated work between experiments. The repository does
+not provide a measured speed-up factor. A completed solve also needs sufficient
+numerical and physical evidence before it can support a scientific claim.
 
-TUI-driven or Fluent-journal execution requires explicit human approval for that run.
+## The skills behind the workflow
 
-## Historical execution proof
+The skills are focused workflows with references for specific operations. Two
+skills provide the main scientific entry points: **`phase-planner` sets the
+scope with the human, and `phase-loop` advances the experiments within it.**
+The loop uses the specialist skills when their evidence or implementation is
+needed.
 
-The historical 03A-Q01 S4-01 qualification loaded
-the verified 33,000-iteration parent and issued exactly one Fluent-native
-`/solve/iterate 50` command. The Project packet records the endpoint,
-transcript, residual history, physical histories, hashes, and limitations. This
-is historical execution evidence, not the default execution mechanism for new
-autonomous-loop runs.
+| Skill | Role in the research workflow |
+| --- | --- |
+| [`phase-planner`](.agents/skills/phase-planner/SKILL.md) | Human-invoked phase framing. Reviews the frontier and records the question, scope, assumptions, evidence needs, and compute boundary in `CONTEXT.md`. |
+| [`phase-loop`](.agents/skills/phase-loop/SKILL.md) | Owns experiment design, selection, execution, analysis, recovery, continuation, and evidence-backed closure inside the recorded phase scope. |
+| [`pyansys-workflow`](.agents/skills/pyansys-workflow/SKILL.md) | Implements the recorded test in Fluent. Covers inspection/build, native Replace Mesh, code and command review, readback, save/reopen checks, run control, fleet placement, and recovery. |
+| [`cfd-numerical-analysis`](.agents/skills/cfd-numerical-analysis/SKILL.md) | Produces the smallest useful set of histories, native Fluent views, plots, and tables. Checks model-specific evidence and returns observations with clear limits. |
+| [`cfd-wiki`](.agents/skills/cfd-wiki/SKILL.md) | Retrieves reusable CFD knowledge, paper evidence, and Fluent guidance. Maintains source links, uncertainty labels, and transferable lessons. |
+| [`configure-run-monitor`](.agents/skills/configure-run-monitor/SKILL.md) | Configures a selected monitoring chat and schedule for an agreed run. Records the run boundaries and authorised handoff; solver execution remains with the run workflow. |
+| [`report-writing`](.agents/skills/report-writing/SKILL.md) | Assembles Project evidence and figures into a concise technical report with traceable claims. |
+| [`stem-research-writing`](.agents/skills/stem-research-writing/SKILL.md) | Develops the academic argument, finding emphasis, report flow, scientific language, and evidence-calibrated conclusions. |
+| [`handoff`](.agents/skills/handoff/SKILL.md) | Prepares a brief for another chat: why the work was done, what was completed, what the results mean, and what remains uncertain. |
+| [`workflow-surgeon`](.agents/skills/workflow-surgeon/SKILL.md) | Repairs concrete workflow friction through the smallest justified change to instructions, ownership, or handoff. |
+| [`writing-for-agents`](.agents/skills/writing-for-agents/SKILL.md) | Supports clear agent instructions and skills with distinct responsibilities and references loaded when needed. |
+| [`wait-what`](.agents/skills/wait-what/SKILL.md) | Human-invoked request to explain the current position again in simpler project language. |
+| [`direct-fluent-use`](.agents/skills/direct-fluent-use/SKILL.md) | Human-invoked start/close control for the pinned local Fluent 2025 R2 Student session on its designated Windows host. |
 
-- [`03A-Q01 setup`](https://github.com/Shuhei-uni/P4P_knowledgeWiki/blob/7345fadef6bc41a5120e6df0648d98f1dfe02aad/Project/experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/q01-s4-01-50-iteration-qualification/setup.md)
-- [`03A-Q01 results`](https://github.com/Shuhei-uni/P4P_knowledgeWiki/blob/7345fadef6bc41a5120e6df0648d98f1dfe02aad/Project/experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/q01-s4-01-50-iteration-qualification/results.md)
-- [`03A tracer index`](Project/experiments/phase-05-full-geometry-v2/full-geometry-03a-mixture-08b-parity-baseline/index.md)
-- [`Q01 runner`](PyAnsys/scripts/setup/run_03a_q01_s4_01_50.py)
+See the [skill invocation policy](.agents/invocation.md) for the active invocation
+map. Branch procedures live under their owning skill, so the agent can load the
+specific guidance needed for the current task.
 
-## Source and generated files
+## Where everything lives
 
-The original project source inputs were removed from this checkout at the
-user's request; their exact committed versions remain recoverable from Git
-history. Other source material remains local and intentionally outside normal
-GitHub storage, including the CFD paper PDFs under `CFD_wiki/raw/`, the Fluent
-manual under `CFD_wiki/guide/`, the local `PyAnsys/.venv/`, and generated run
-output. The maintained extracted pages identify the source paths and
-uncertainty labels needed for later rechecks.
+Each part has one owner. The other parts link to it, so a finding or procedure
+can be updated at its source.
 
-## Rebuild and verification habits
+| Location | What it owns | Entry point |
+| --- | --- | --- |
+| `Project/` | Project questions, phase scope, selected experiments, results, interpretation, and claim limits | [Project index](Project/index.md) |
+| `CFD_wiki/` | Reusable literature, CFD methods, source lookup, and generic Fluent guidance | [Knowledge index](CFD_wiki/wiki/index.md) |
+| `PyAnsys/` | Executable Fluent/PyFluent implementation, inspection, run control, and machine evidence | [Implementation guide](PyAnsys/README.md) |
+| `.agents/skills/` | Workflows that connect planning, knowledge, implementation, evidence, and communication | [Invocation map](.agents/invocation.md) |
 
-1. Read `AGENTS.md` and then the local guide for any subsystem you will change.
-2. Begin project work at `Project/index.md`; follow only the relevant current
-   experiment packet and evidence record.
-3. Use `CFD_wiki/paper_lookup/index.md` before reading a long source paper.
-4. For Fluent automation, read the relevant focused skill and
-   `PyAnsys/knowledge/fluent-settings/native_run_and_autosave.md`.
-5. Preserve execution mode: keep discovery attached; for hypothesis tests use
-   the self-waking run-and-handoff worker with deterministic terminal evidence
-   and the exact originating Codex thread. Never use `--last` for multi-job
-   handoff.
-6. When improving the agent workflow, prefer `$workflow-surgeon` so changes are
-   root-cause-driven and surgical rather than broad rewrites.
-7. Run the repository’s targeted tests and stale-path check after cross-system
-   edits.
+The experiment records connect these owners:
 
-Do not commit raw papers, the large Fluent manual, local environments, Python
-cache files, or generated run output unless the storage strategy is deliberately
-changed.
+| Record | Purpose |
+| --- | --- |
+| `CONTEXT.md` | Current phase question, scope, evidence requirements, and authority |
+| `setup.md` | Runnable scientific intent, parent, controlled changes, and planned evidence |
+| `results.md` | Observations, figures/tables, interpretation, and claim limits |
+| `phase-state.yaml` | Compact machine state for continuation and recovery |
+
+## Start here
+
+- **Understand the project:** open [Project/index.md](Project/index.md), then the
+  relevant phase context and results.
+- **Plan the next phase:** invoke `$phase-planner` to discuss the question and
+  record its scope. Invoke `$phase-loop` when ready to advance that scope.
+- **Find a method or source:** use the [CFD knowledge index](CFD_wiki/wiki/index.md)
+  and [paper lookup](CFD_wiki/paper_lookup/index.md).
+- **Work on implementation:** read the [PyAnsys guide](PyAnsys/README.md) and the
+  current [PyAnsys workflow](.agents/skills/pyansys-workflow/SKILL.md), including
+  its [run-control reference](.agents/skills/pyansys-workflow/references/run-control.md).
+- **Contribute:** read [AGENTS.md](AGENTS.md) for repository ownership and safety
+  rules. Use task branches and pull requests, with `main` as the shared source
+  of truth.
+
+## Source files and reproducibility
+
+The repository stores maintained knowledge, scientific records, and executable
+workflows. Fluent, its licence, compute hosts, connection configuration, and
+large local source/artifact files are separate runtime requirements.
+
+Raw paper PDFs, the large Fluent manual, local environments, credentials, and
+generated run output stay outside normal Git storage. Maintained pages point to
+their sources. Preserve `raw/` evidence unchanged, and keep exact case parents,
+controlled changes, readback, checkpoints, and terminal evidence linked to the
+owning experiment.
+
+Retired workflows and removed source material remain recoverable through Git
+history. Use the current phase records and active skill map for new work.

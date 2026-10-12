@@ -61,10 +61,10 @@
 
 | Item | Evidence and first uncertainty |
 | --- | --- |
-| — | The [historical closed-bottom sink studies](../parallel-andy-studies/closed-bottom-liquid-sinks.md) removed liquid but did not establish a stable, balanced carrier solution |
+| — | The [historical closed-bottom sink studies](historical-andy-studies/closed-bottom-liquid-sinks.md) removed liquid but did not establish a stable, balanced carrier solution |
 |  | Available liquid in the small removal band limited one stronger-sink case |
 |  | These results make liquid transport into the proposed zone an explicit uncertainty, alongside the removal rate and its effects on the surrounding flow |
-| [resolved-outlet studies](../parallel-andy-studies/resolved-brine-outlet.md) | include the transient VOF work that did not sustain balance even at very low feed |
+| [resolved-outlet studies](../phase-09-steady-vof-pool/historical-andy-studies/resolved-brine-outlet.md) | include the transient VOF work that did not sustain balance even at very low feed |
 | — | The separate [Phase-06 steady pressure-feedback test](../phase-06-full-geometry-with-brine-pool/stage-06-long-horizon-surrogate-hypothesis/results.md) also failed to establish its controlled numerical pool state |
 | These | are distinct meshes and model lineages; their settings and endpoints cannot be interchanged |
 
@@ -87,3 +87,8 @@
 |  | The [closure record](closure.md) supersedes historical experiment-selection statements below the status banner |
 | Any new scientific phase | requires separate framing and selection |
 | — | [Supervisor meeting PDF and figure bundle](meeting-report.md) provide a minimal-text presentation of the G1 evidence |
+
+| Historical related study | Record and boundary |
+| --- | --- |
+| Andy’s closed-bottom liquid sinks | [Evidence and accounting corrections](historical-andy-studies/closed-bottom-liquid-sinks.md); distinct historical cases |
+| Recovered studies across phases | [Source and identity overview](historical-andy-studies/README.md) |

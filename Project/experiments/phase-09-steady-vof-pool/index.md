@@ -12,3 +12,9 @@ existing brine outlet under a declared hydrostatic downstream condition.
 - [Results and claim limits](results.md)
 
 Phase 7b remains closed. Shuhei's work and sessions remain separate.
+
+| Related evidence | Record and boundary |
+| --- | --- |
+| Later drainage and hydrostatic-startup diagnostics | [Diagnostic index](follow-on-diagnostics/index.md); separate original contracts and closures |
+| Historical resolved brine-outlet studies | [Evidence and provenance](historical-andy-studies/resolved-brine-outlet.md); includes transient VOF, distinct from the steady Phase 9 experiment |
+| Grouping limit | Storage by topic does not reopen the closed phase or change historical case identity |

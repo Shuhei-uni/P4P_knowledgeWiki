@@ -298,11 +298,11 @@
 
 | Item | Evidence anchors |
 | --- | --- |
-| Observed in preserved notes | the earlier [closed-bottom sink studies](../parallel-andy-studies/closed-bottom-liquid-sinks.md) already tested steady liquid-only sinks |
+| Observed in preserved notes | the earlier [closed-bottom sink studies](historical-andy-studies/closed-bottom-liquid-sinks.md) already tested steady liquid-only sinks |
 |  | None established an accepted stability window |
 |  | The completed first 07f matrix case retained 54.5553% corrected liquid imbalance; in 07e, available liquid in the band limited removal despite the minimum removal time scale |
 |  | These used a different, closed-bottom mesh and do not determine the proposed full-geometry result |
-|  | the separate [resolved brine-outlet studies](../parallel-andy-studies/resolved-brine-outlet.md) moved from Mixture to transient VOF |
+|  | the separate [resolved brine-outlet studies](../phase-09-steady-vof-pool/historical-andy-studies/resolved-brine-outlet.md) moved from Mixture to transient VOF |
 
 <details>
 <summary>Supporting detail — Evidence anchors</summary>

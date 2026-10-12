@@ -77,17 +77,19 @@ def health():
 
 def snapshot(stall_seconds=180):
     receipt = read(OUT / 'desktop-controller.json')
-    campaign = read(OUT / 'campaign-manifest.json')
+    preparation = read(OUT / 'campaign-manifest.json')
+    continuation = receipt.get('continuation_manifest')
+    campaign = read(Path(continuation)) if continuation else preparation
     mesh = campaign.get('active_mesh')
-    child = read(OUT / f'{mesh}-run.json') if mesh else {}
+    child = campaign if continuation else (read(OUT / f'{mesh}-run.json') if mesh else {})
     live, live_age = tail(receipt.get('live_transcript'))
     log, log_age = tail(receipt.get('log'))
     ages = [age for age in [live_age, log_age] if age is not None]
     activity_age = min(ages) if ages else None
-    running = alive(receipt.get('pid'), 'run_phase9_mesh_startup.py campaign')
+    running = alive(receipt.get('pid'), receipt.get('controller_process_match', 'run_phase9_mesh_startup.py campaign'))
     rows = re.findall(r'^\s*(\d+)\s+[\d.+eE-]+\s+[\d.+eE-]+', live, re.M)
     batches = re.findall(r'^BATCH (\S+) (\S+) (\d+) (\d+)', log, re.M)
-    complete = campaign.get('status') == 'COMPLETE_PREPARATION_ONLY'
+    complete = campaign.get('status') in {'COMPLETE_PREPARATION_ONLY', 'COMPLETE_NATIVE_CONTINUATION'}
     if complete:
         event = 'PREPARATION_COMPLETE'
     elif not running:
@@ -99,7 +101,8 @@ def snapshot(stall_seconds=180):
     return {'observed_utc': datetime.now(timezone.utc).isoformat(),
             'watcher_pid': os.getpid(), 'controller_pid': receipt.get('pid'),
             'controller_alive': running, 'campaign_status': campaign.get('status'),
-            'completed_meshes': campaign.get('completed', []), 'active_mesh': mesh,
+            'completed_meshes': preparation.get('completed', []), 'active_mesh': mesh,
+            'continuation_manifest': continuation,
             'child_status': child.get('status'),
             'verified_native_end': child.get('verified_native_end'),
             'latest_pair_iteration': child.get('latest_pair', {}).get('native_iteration'),
@@ -139,6 +142,11 @@ def wake(event, thread, executable):
         'meaningful changes, completion, failure, or required human input. If '
         'Fluent is still calculating or saving, continue observation quietly.'
     )
+    if event.get('continuation_manifest'):
+        prompt += (' The current human-authorized task is the 997k native continuation '
+                   'from N8080 to N10080, with local paired checkpoints at N9080 and N10080. '
+                   f'Read its manifest {event["continuation_manifest"]}. Preserve the '
+                   'original preparation endpoints. Do not extend past N10080.')
     log_path = path.with_suffix('.codex.log')
     # Queue on the existing daemon-owned chat. A separate exec/resume writer
     # conflicts with the desktop writer even when this chat is not calculating.

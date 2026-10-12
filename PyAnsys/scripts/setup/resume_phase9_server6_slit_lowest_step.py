@@ -1,0 +1,92 @@
+"""Deploy the reviewed resume path to idle Server 6 and relaunch its terminal job."""
+import hashlib,json,time
+from pathlib import Path,PureWindowsPath
+from phase9_server6_slit_common import attach,run,OUT,ROOT
+from deploy_phase9_server6_slit_ewf import quote
+from pyansys_fluent.connection import resolve_connection_kwargs
+from pyansys_fluent.remote_text import write_ascii_text_new
+
+def main():
+ functional=json.loads((OUT/'matched-drain-probe.json').read_text());assert functional['status']=='PASS'
+ launch=json.loads((OUT/'host-launch.json').read_text());repo=PureWindowsPath(launch['host_repo']);hostout=PureWindowsPath(launch['host_output'])
+ s=attach();run.require_idle(s);assert not s.settings.solution.run_calculation.iterating()
+ native=json.loads(run.read_text(s,launch['run_manifest']));job=json.loads(run.read_text(s,str(hostout/'job-manifest.json')))
+ failure=json.loads((OUT/'failed-2p5us-proof.json').read_text())
+ transition=json.loads(run.read_text(s,str(hostout/'target100-transition.json')))
+ assert failure['status']=='NUMERICAL_INNER_STOP_FAILURE_ENDPOINT_PRESERVED'
+ assert transition['status']=='BLOCKED' and job['status']=='BLOCKED'
+ assert native['status']=='RUNNING' and native['active_stage']=='recovery-2p5us-proof'
+ assert run.native_iteration(s)==10580 and abs(run.film(s)['film_elapsed_time']-.01375)<1e-12
+ tag=str(time.time_ns());probe=run.WORK/('resume-process-'+tag+'.json')
+ code="$ErrorActionPreference='Stop'; $p=@(Get-CimInstance Win32_Process | Where-Object {$_.Name -eq 'python.exe' -and $_.CommandLine -like '*Phase9-Server6-slit154k*' -and ($_.CommandLine -like '*run_phase9_server6_slit_ewf*' -or $_.CommandLine -like '*run_and_handoff*')}); [IO.File]::WriteAllText("+quote(probe)+",(@{controller_count=$p.Count;process_ids=@($p.ProcessId)}|ConvertTo-Json),[Text.Encoding]::ASCII)"
+ run.base.powershell(s,code);process=json.loads(run.read_text(s,str(probe)));assert process['controller_count']==0
+ # Both failed native commands have finished; preserve manifests and hashed endpoint before rollback.
+ run.dump(OUT/('failed-held-2p5us-manifest-'+tag+'.json'),native)
+ backup=hostout/('run-manifest-before-lowest-step-'+tag+'.json')
+ run.base.powershell(s,"$ErrorActionPreference='Stop'; Copy-Item -LiteralPath "+quote(launch['run_manifest'])+' -Destination '+quote(backup))
+ for key in ['case','data']:
+  assert run.remote_file_sha256(s,failure['pair'][key],str(run.WORK/(f'failed-proof-{key}-{tag}.sha256.txt')))==failure['pair'][key+'_sha256']
+ healthy=native['blocks'][3]
+ assert healthy['stage']=='step-5us' and healthy['peak_courant']<=.1 and healthy['pair']['native_iteration']==9580
+ parent=healthy['pair']
+ for key in ['case','data']:
+  assert run.remote_file_sha256(s,parent[key],str(run.WORK/(f'recovery-parent-{key}-{tag}.sha256.txt')))==parent[key+'_sha256']
+ run.load(s,parent)
+ assert run.native_iteration(s)==9580 and abs(run.film(s)['film_elapsed_time']-.01125)<1e-12
+ assert not any(s.settings.solution.controls.equations.get_state().values())
+ run.require_bulk_audit(s);run.read_feed(s,1.0)
+ accepted=native['schedule'][:4]
+ remaining=[('recovery-0p1us-proof',1000,1e-7,False)]
+ remaining += [(f'target100-lowest-growth-{i}',10000,1e-7,False) for i in range(1,84)]
+ remaining += [('target100-lowest-to-95ms',6500,1e-7,False)]
+ remaining += [(f'target100-lowest-bulk-{i}',10000,1e-7,True) for i in range(1,6)]
+ assert abs(.01125+sum(x[1]*x[2] for x in remaining if not x[3])-.095)<1e-12
+ assert abs(sum(x[1]*x[2] for x in remaining if x[3])-.005)<1e-12
+ assert 9580+sum(x[1] for x in remaining)==897080
+ schedule=accepted+remaining
+ plan={'status':'RECONCILED_AND_REOPENED','server_id':'6','parent_pair':parent,'parent_film_s':.01125,'schedule':schedule,'failed_attempt':str(backup),'recovery_step_s':1e-7,'target_film_s':.1,'final_bulk_start_s':.095,'review':'Both failed endpoints preserved. 2.5us proof inner stops 948/1000 below 990; Courant 0.04158824. Terminal job and transition, idle native N10580/13.75ms and absent owned runner reconciled. Hash verified healthy N9580 reopened. Reduce only step/cadence to recorded 0.1us; proof then long fixed blocks; final95-100ms bulk active; no replay.'}
+ write_ascii_text_new(s,str(hostout/'target100-lowest-step-plan.json'),json.dumps(plan,indent=2)+'\n');run.dump(OUT/'target100-lowest-step-plan.json',plan)
+ native.update(status='RECOVERY_READY',blocks=native['blocks'][:4],schedule=schedule,latest_pair=parent,verified_native_end=9580,accepted_film_s=.01125,active_target=None,active_stage=None,error=None,native_target_final=897080,target_film_s=.1,resume_plan_file='target100-lowest-step-plan.json',recovery_plan=plan)
+ writepath=run.WORK/('reconciled-manifest-'+tag+'.json');write_ascii_text_new(s,str(writepath),json.dumps(native,indent=2)+'\n')
+ run.base.powershell(s,"$ErrorActionPreference='Stop'; Copy-Item -LiteralPath "+quote(writepath)+' -Destination '+quote(launch['run_manifest'])+' -Force')
+ runner=ROOT/'scripts/setup/run_phase9_server6_slit_ewf.py';target=repo/'PyAnsys/scripts/setup'/runner.name;staged=run.WORK/('reviewed-resume-'+tag+'.py')
+ text=runner.read_text();write_ascii_text_new(s,str(staged),text)
+ run.base.powershell(s,"$ErrorActionPreference='Stop'; Copy-Item -LiteralPath "+quote(target)+' -Destination '+quote(str(target)+'.before-'+tag)+"; Copy-Item -LiteralPath "+quote(staged)+' -Destination '+quote(target)+' -Force')
+ digest=run.remote_file_sha256(s,str(target),str(run.WORK/('resume-code-'+tag+'.sha256.txt')));assert run.read_text(s,str(target))==text
+ staged_digest=run.remote_file_sha256(s,str(staged),str(run.WORK/('resume-staged-'+tag+'.sha256.txt')));assert digest==staged_digest
+ if run.remote_file_exists(s,str(hostout/'matched-drain-probe.json')):
+  assert json.loads(run.read_text(s,str(hostout/'matched-drain-probe.json')))==functional
+ else:write_ascii_text_new(s,str(hostout/'matched-drain-probe.json'),json.dumps(functional,indent=2)+'\n')
+ # Verify the exact deployed runner import in the existing host runtime.
+ import_probe=run.WORK/('resume-import-'+tag+'.json')
+ import_code="import sys;sys.path[:0]=["+repr(str(repo/'PyAnsys/scripts/setup'))+"];import run_phase9_server6_slit_ewf;print('DEPLOYED_RESUME_IMPORT_PASS')"
+ ps="$ErrorActionPreference='Stop'; $t=(& "+quote(launch['host_python'])+" -E -c "+quote(import_code)+" 2>&1 | Out-String); $rc=$LASTEXITCODE; [IO.File]::WriteAllText("+quote(import_probe)+",(@{return_code=$rc;output=$t}|ConvertTo-Json),[Text.Encoding]::ASCII)"
+ run.base.powershell(s,ps);import_result=json.loads(run.read_text(s,str(import_probe)));assert import_result['return_code']==0 and 'DEPLOYED_RESUME_IMPORT_PASS' in import_result['output']
+ verifier=ROOT/'scripts/inspection/verify_phase9_server6_slit_ewf.py'
+ verifier_target=repo/'PyAnsys/scripts/inspection'/verifier.name
+ verifier_stage=run.WORK/('reviewed-verifier-'+tag+'.py')
+ write_ascii_text_new(s,str(verifier_stage),verifier.read_text())
+ run.base.powershell(s,"$ErrorActionPreference='Stop'; Copy-Item -LiteralPath "+quote(verifier_target)+' -Destination '+quote(str(verifier_target)+'.before-'+tag)+"; Copy-Item -LiteralPath "+quote(verifier_stage)+' -Destination '+quote(verifier_target)+' -Force')
+ assert run.read_text(s,str(verifier_target))==verifier.read_text()
+ oldspec=json.loads(run.read_text(s,launch['job_spec']));spec=oldspec.copy();spec['runner']=dict(oldspec['runner']);spec['runner']['command']=[arg for arg in spec['runner']['command'] if arg!='--resume']+['--resume'];spec['runner']['log']=str(hostout/('resume-runner-'+tag+'.log'))
+ specpath=repo/('phase9-server6-resume-'+tag+'.json');write_ascii_text_new(s,str(specpath),json.dumps(spec,indent=2)+'\n')
+ transition_backup=hostout/('target100-transition-blocked-'+tag+'.json')
+ run.base.powershell(s,"$ErrorActionPreference='Stop'; Copy-Item -LiteralPath "+quote(hostout/'target100-transition.json')+' -Destination '+quote(transition_backup))
+ transition.update(status='RESOLVED_BY_LOWEST_STEP_RECOVERY',recovery_plan='target100-lowest-step-plan.json',blocked_evidence=str(transition_backup))
+ transition_stage=run.WORK/('transition-resolved-'+tag+'.json');write_ascii_text_new(s,str(transition_stage),json.dumps(transition,indent=2)+'\n')
+ run.base.powershell(s,"$ErrorActionPreference='Stop'; Copy-Item -LiteralPath "+quote(transition_stage)+' -Destination '+quote(hostout/'target100-transition.json')+' -Force')
+ details=resolve_connection_kwargs('6',start_transcript=False);script=run.WORK/('private-resume-'+tag+'.ps1');pid=run.WORK/('resume-pid-'+tag+'.json')
+ values={'FLUENT_SERVER_INFO_FILE6':'','FLUENT_IP6':details['ip'],'FLUENT_PORT6':details['port'],'FLUENT_PASSWORD6':details['password'],'FLUENT_ALLOW_REMOTE_HOST6':str(details['allow_remote_host']).lower(),'FLUENT_INSECURE_MODE6':str(details['insecure_mode']).lower()}
+ content="$ErrorActionPreference='Stop'\n"
+ for k,v in values.items():content+='$env:'+k+' = '+quote(v)+'\n'
+ content+='$p=Start-Process -FilePath '+quote(launch['host_python'])+" -ArgumentList '-E','-u',"+quote(repo/'PyAnsys/scripts/orchestration/run_and_handoff.py')+",'--job',"+quote(specpath)+",'--worker','--force' -WindowStyle Hidden -RedirectStandardOutput "+quote(run.WORK/('resume-worker-'+tag+'.stdout.log'))+' -RedirectStandardError '+quote(run.WORK/('resume-worker-'+tag+'.stderr.log'))+' -PassThru\n'
+ content+='[IO.File]::WriteAllText('+quote(pid)+",(@{worker_pid=$p.Id}|ConvertTo-Json),[Text.Encoding]::ASCII)\nRemove-Item -LiteralPath $PSCommandPath -Force\n"
+ write_ascii_text_new(s,str(script),content)
+ run.base.powershell(s,"$ErrorActionPreference='Stop'; $me=[Security.Principal.WindowsIdentity]::GetCurrent().Name; & icacls.exe "+quote(script)+" /inheritance:r /grant:r ($me + ':(F)') 'SYSTEM:(F)' | Out-Null")
+ result=run.WORK/('resume-launch-'+tag+'.json');command='powershell.exe -NoProfile -ExecutionPolicy Bypass -File "'+str(script)+'"'
+ run.base.powershell(s,"$ErrorActionPreference='Stop'; $r=Invoke-CimMethod -ClassName Win32_Process -MethodName Create -Arguments @{CommandLine="+quote(command)+';CurrentDirectory='+quote(run.WORK)+"}; [IO.File]::WriteAllText("+quote(result)+",($r|Select-Object ProcessId,ReturnValue|ConvertTo-Json),[Text.Encoding]::ASCII)")
+ receipt=json.loads(run.read_text(s,str(result)));assert receipt['ReturnValue']==0
+ launch.update(job_spec=str(specpath),runner_log=spec['runner']['log'],resume_launcher=receipt,resume_code_sha256=digest);run.dump(OUT/'host-launch.json',launch)
+ run.dump(OUT/'lowest-step-launch.json',{'status':'DISPATCHED','native_origin':9580,'film_origin_s':.01125,'nominal_final_native':897080,'step_s':1e-7,'process_reconciliation':process,'code_sha256':digest,'host_runner':str(target),'review':plan['review'],'launcher':receipt})
+ print('SERVER6_SLIT_LOWER_STEP_RESUME_DISPATCHED',flush=True)
+if __name__=='__main__':main()
