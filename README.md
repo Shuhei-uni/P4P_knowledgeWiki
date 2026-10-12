@@ -12,7 +12,7 @@ findings to choose the next experiment.
 
 [![Animated knowledge graph expansion — click to watch the full video](assets/readme/knowledge-base-expansion.gif)](assets/readme/knowledge-base-expansion.mp4)
 
-**[Watch the knowledge base expansion video — 17 seconds](assets/readme/knowledge-base-expansion.mp4)** · [Original MOV](KnowledgeBaseExpansion.mov)
+**[Watch the knowledge base expansion video — 17 seconds](assets/readme/knowledge-base-expansion.mp4)**
 
 The video shows the linked knowledge graph expanding. These connections help
 navigate between related knowledge and supporting records. The graph provides
