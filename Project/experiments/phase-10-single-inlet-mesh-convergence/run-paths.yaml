@@ -1,0 +1,79 @@
+phase_id: phase-10-single-inlet-mesh-convergence
+windows_mesh_folder: C:/Users/qtra338/P4P/experiments/phase 10
+windows_working_folder: C:/Users/qtra338/Documents/FluentRuns/Phase10/20261009/recovery-20261010-14d9f41f
+windows_originals_folder: C:/Users/syok443/P4P-mesh-audit-20261008/originals
+mesh_parent: Separator-purnanto-single-733k.msh.h5
+cad: separator-purnanto(single-homo).agdb
+mesh_evidence_root: PyAnsys/output/mesh-audits/2026-10-08-purnanto-remesh/single-family
+delivery_receipt: PyAnsys/output/mesh-audits/2026-10-08-purnanto-remesh/single-family/delivery.json
+mesh_copy_manifest: PyAnsys/output/mesh-audits/2026-10-08-purnanto-remesh/single-family/final-copy-manifest.json
+mesh_quality_csv: PyAnsys/output/mesh-audits/2026-10-08-purnanto-remesh/single-family/mesh-quality-summary.csv
+family_summary_json: PyAnsys/output/mesh-audits/2026-10-08-purnanto-remesh/single-family/family-summary.json
+family_node_counts_json: PyAnsys/output/mesh-audits/2026-10-08-purnanto-remesh/single-family/family-node-counts.json
+phase2_mesh_statistics_json: PyAnsys/output/mesh-audits/2026-10-08-purnanto-remesh/single-family/phase2-mesh-statistics.json
+supplied_quality_files_verified_on: '2026-10-08'
+old_mesh_audit_root: PyAnsys/output/mesh-audits/2026-10-08-purnanto-remesh
+old_mesh_source_manifest: PyAnsys/output/mesh-audits/2026-10-08-purnanto-remesh/source-manifest.json
+historical_tet_study_record: Project/experiments/phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/mesh-convergence-checkpoint-20260803.md
+historical_tet_machine_root: PyAnsys/output/split_inlet_mesh_convergence_20260801
+historical_tet_machine_root_present_in_this_checkout: false
+old_new_quality_csv: PyAnsys/output/mesh-audits/2026-10-08-purnanto-remesh/single-family/old-new-quality-comparison.csv
+reserved_solver_evidence_root: PyAnsys/output/phase10-single-inlet-mesh-convergence
+solver_checkpoint_folder: C:/Users/qtra338/Documents/FluentRuns/Phase10/20261009/recovery-20261010-14d9f41f
+solver_parent_case: C:/Users/qtra338/Documents/FluentRuns/Phase10/20261009/inputs/purnanto-original-carrier-common.cas.h5
+solver_parent_data: null
+other_mesh_data_reference:
+  host_id: local
+  thread_id: 019ff5ec-f35b-7d32-80b7-4d0b1430c61d
+  read_status: NOT_READ_THREAD_TOOL_UNAVAILABLE
+  repository_record: Project/experiments/phase-09-mesh-convergence/results.md
+  linked_machine_root: PyAnsys/output/phase9-mesh-convergence/20261007
+  linked_machine_root_present_in_this_checkout: false
+meshes:
+  M01: Separator-purnanto-single-357k.msh.h5
+  M02: Separator-purnanto-single-488k.msh.h5
+  M03: Separator-purnanto-single-682k.msh.h5
+  M04: Separator-purnanto-single-947k.msh.h5
+  M05: Separator-purnanto-single-1430k.msh.h5
+  M06: Separator-purnanto-single-2210k.msh.h5
+  M07: Separator-purnanto-single-5480k.msh.h5
+reference_candidate_case: C:/Users/syok443/Documents/FluentRuns/Phase10/20261008/inputs/08b-reference.cas.h5
+reference_readback: PyAnsys/output/phase10-single-inlet-mesh-convergence/reference-setup.json
+session_port: 60569
+server_controller: C:/Users/qtra338/Documents/FluentRuns/Phase10/20261009/recovery-20261010-14d9f41f/controller/run_phase10_mesh_family-resume-14d9f41f.py
+server_batch_manifest: C:/Users/qtra338/Documents/FluentRuns/Phase10/20261009/recovery-20261010-14d9f41f/batch-manifest.json
+server_pilot_manifest: C:/Users/qtra338/Documents/FluentRuns/Phase10/20261009/recovery-20261010-14d9f41f/resume-startup.json
+solver_recovery_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/recovery-64452.json
+solver_recovery_status: PyAnsys/output/phase10-single-inlet-mesh-convergence/recovery-status-62174.json
+deployment_script: PyAnsys/scripts/setup/deploy_phase10_mesh_family.py
+launch_retry_script: PyAnsys/scripts/setup/watch_phase10_launch.py
+launch_retry_process_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/launch-retry-process.json
+launch_retry_status_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/launch-retry-status.json
+solver_startup_coordinate_diagnostic: PyAnsys/output/phase10-single-inlet-mesh-convergence/iteration-start-diagnostic.json
+solver_failed_preparation_archive: PyAnsys/output/phase10-single-inlet-mesh-convergence/M01-counter-recovery.json
+current_account_mesh_folder: C:/Users/qtra338/P4P/experiments/phase 10
+recovered_original_case: C:/Users/qtra338/P4P/experiments/phase-01/wb/Separator_CFD_Punanto/Spiral
+  Inlet (Purnanto)_files/dp0/FFF-2/Fluent/4800-iterations-300412-1.cas.h5
+current_account_historical_study_root: C:/Users/qtra338/P4P/experiments/phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/andy-07a-mesh-study/split_inlet_mesh_convergence_20260801
+current_account_discovery_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/account-discovery-paused-52660.json
+previous_account_checkpoint_folder: C:/Users/syok443/Documents/FluentRuns/Phase10/20261008
+previous_account_pilot_access: ACCESS_DENIED
+original_case_audit: PyAnsys/output/phase10-single-inlet-mesh-convergence/original-case-audit-52660.json
+original_carrier_common_build: PyAnsys/output/phase10-single-inlet-mesh-convergence/original-carrier-common-build-20261009.json
+account_runtime_proof: PyAnsys/output/phase10-single-inlet-mesh-convergence/account-runtime-proof-20261009.json
+unused_vertex_proof: PyAnsys/output/phase10-single-inlet-mesh-convergence/M01-unused-vertex-proof-20261009.json
+batch_job_spec: PyAnsys/output/phase10-single-inlet-mesh-convergence/batch-job-spec-20261009.json
+session_ip: 10.104.145.174
+phase_connection_config: PyAnsys/output/phase10-single-inlet-mesh-convergence/run-config.json
+phase_native_probe: PyAnsys/scripts/setup/probe_phase10_native_receipts.py
+latest_native_probe: PyAnsys/output/phase10-single-inlet-mesh-convergence/latest-native-receipts.json
+connection_environment_variable: PHASE10_API_PASSWORD
+monitor_access_recovery: PyAnsys/output/phase10-single-inlet-mesh-convergence/monitor-connection-recovery-20261009.json
+server_controller_config: C:/Users/qtra338/Documents/FluentRuns/Phase10/20261009/recovery-20261010-14d9f41f/run-config.json
+latest_monitor_check: PyAnsys/output/phase10-single-inlet-mesh-convergence/latest-monitor-check.json
+latest_monitor_transcript: PyAnsys/output/phase10-single-inlet-mesh-convergence/latest-monitor-transcript.json
+previous_windows_working_folder: C:/Users/qtra338/Documents/FluentRuns/Phase10/20261009
+post_series_diagnostic_spec: PyAnsys/output/phase10-single-inlet-mesh-convergence/bodyforce-BF01-job-spec.json
+post_series_diagnostic_local_root_reserved: PyAnsys/output/phase10-single-inlet-mesh-convergence/bodyforce-BF01
+post_series_diagnostic_native_root_pattern: C:/Users/qtra338/Documents/FluentRuns/Phase10/20261009/bodyforce-BF01-<run-id>
+post_series_diagnostic_native_root_created: false

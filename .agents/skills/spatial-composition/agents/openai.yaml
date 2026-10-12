@@ -1,0 +1,6 @@
+interface:
+  display_name: Spatial Composition
+  short_description: Visual hierarchy, depth, and editable layered design
+  default_prompt: Use $spatial-composition to improve this layout's depth and visual hierarchy, preserve its content, and verify the rendered composition.
+policy:
+  allow_implicit_invocation: true
