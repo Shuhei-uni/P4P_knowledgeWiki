@@ -36,7 +36,7 @@ def dump(name, value):
     temporary.replace(destination)
     if name == 'run-manifest.json':
         import yaml
-        path = REPO / 'Project/experiments/phase-10-proposed-design/phase-state.yaml'
+        path = REPO / 'Project/experiments/phase-10-proposed-design/angled-slit213k/phase-state.yaml'
         state = yaml.safe_load(path.read_text())
         state['status'] = value['status']
         state['observed_film_age_s'] = value.get('observed_film_age_s')
@@ -707,7 +707,7 @@ def plot_final(s, m, fields):
     fig.tight_layout()
     fig.savefig(directory / 'film-thickness-100ms.png', dpi=160)
     plt.close(fig)
-    path = REPO / 'Project/experiments/phase-10-proposed-design/results.md'
+    path = REPO / 'Project/experiments/phase-10-proposed-design/angled-slit213k/results.md'
     text = path.read_text()
     text = text.replace('| Current run | Bulk low-feed hold launched | Ramp, full-feed preparation and 100 ms film endpoint pending |',
         '| Current run | 100 ms final pair saved/reopened; Fluent left open | Frozen-bulk development; steady film and whole-separator closure unqualified |')

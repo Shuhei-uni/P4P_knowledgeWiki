@@ -42,7 +42,7 @@ their exact history remains recoverable from Git.
 | 9 — Shuhei | [Mesh convergence](phase-09-mesh-convergence/index.md) |
 | 9 — Andy | [Steady VOF pool; historical outlet studies and follow-on diagnostics](phase-09-steady-vof-pool/index.md) |
 | 10 — Andy | [Single-inlet mesh convergence](phase-10-single-inlet-mesh-convergence/index.md) |
-| 10 — Shuhei | [Proposed angled-slit design](phase-10-proposed-design/CONTEXT.md) |
+| 10 — Shuhei | [Proposed vertical and angled slit designs](phase-10-proposed-design/index.md) |
 
 | Archive | Record |
 | --- | --- |

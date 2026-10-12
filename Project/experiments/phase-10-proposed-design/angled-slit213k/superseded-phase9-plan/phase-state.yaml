@@ -1,7 +1,10 @@
-phase: phase-09-mesh-convergence
+phase: phase-10-proposed-design
+original_phase: phase-09-mesh-convergence
 lane: server6-angle213k
 server_id: '6'
-status: queued_after_vertical100ms
+status: superseded_not_executed
+execution_authorized: false
+current_contract: Project/experiments/phase-10-proposed-design/angled-slit213k/CONTEXT.md
 authority_date: '2026-10-11'
 mesh_cells: 213232
 mesh_sha256: 9b68ea200ed4e8bf53785834e380b6b26490b36e4d7271b1b375478f7f410df9

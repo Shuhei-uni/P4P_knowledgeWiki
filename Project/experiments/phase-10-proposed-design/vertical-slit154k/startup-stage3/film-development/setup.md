@@ -8,7 +8,7 @@
 | Exact parent | [Completed vertical-slit startup](../results.md), N5080; native film time 3.5 ms |
 | Parent case SHA256 | `9cde787ac71219f1d54dde53c1b57d41afacb75595b085b7b29e2630c980cb60` |
 | Parent data SHA256 | `22535f056edba6ea75a96b63db0b1bb7c665fc8516647372571dbc42d595ffab` |
-| Reference method | [Original film-development setup](../../film-development/setup.md) and [results](../../film-development/results.md); numerical settings require qualification on this mesh |
+| Reference method | [Original film-development setup](../../../../phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/film-development/setup.md) and [results](../../../../phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/film-development/results.md); numerical settings require qualification on this mesh |
 | Fixed physical model | Parent R3 roughness, contact absorber, phase accretion, wall scope, DPM, full inlet loading and bulk methods |
 | Initial controlled delta | Increase allowed film subiterations from 10 to 30; retain 1 µs step and all bulk equations |
 | First numerical probe | 100 native updates; save/reopen, complete native clocks and inner residuals, mass ledger, facet fields |
@@ -23,4 +23,4 @@
 | Review horizons | 10, 50, 100, 200 and 500 ms of actual film time; these are evidence reviews, not proof of stationarity |
 | Steady-film criterion | Three consecutive 1,000-update full-bulk windows: drainage deficit and storage/accretion ≤1%, film ledger ≤0.1%, persistent facet mass and velocity |
 | Claim limits | Film development alone does not establish whole-separator conservation, mesh convergence, or improved separation |
-| Machine owner | [Continuation runner](../../../../../../../PyAnsys/scripts/setup/continue_phase72a_slit154k_film.py) |
+| Machine owner | [Continuation runner](../../../../../../PyAnsys/scripts/setup/continue_phase72a_slit154k_film.py) |

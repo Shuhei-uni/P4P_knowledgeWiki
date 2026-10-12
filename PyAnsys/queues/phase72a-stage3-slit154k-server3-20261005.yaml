@@ -33,7 +33,7 @@ codex:
     The requested Server 3 vertical-slit 154k repeat of the early-EWF startup has
     reached a terminal state. Read its run and job manifests under
     PyAnsys/output/phase72a-stage3-slit154k-server3/20261005 and its canonical
-    Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/slit154k
+    Project/experiments/phase-10-proposed-design/vertical-slit154k/startup-stage3
     setup/results. If complete, audit the final N5080 pair, all 31 native reports,
     exact ramp schedule, film clock and inner-film adequacy, inspect the generated
     figures, update compact phase-state and report the evidence to the human.

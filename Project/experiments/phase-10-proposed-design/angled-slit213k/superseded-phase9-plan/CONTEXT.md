@@ -1,5 +1,11 @@
 # Server 6 — angle slit / 213k
 
+| Archive status | Value |
+| --- | --- |
+| Status | Superseded; this queued Phase 9 plan was not executed |
+| Authority | Historical 11 October plan only; no active run authority |
+| Current case | [Phase 10 angle contract](../CONTEXT.md); completed 50 ms under basic Stage 3 settings |
+
 | Contract | Selected scope |
 | --- | --- |
 | Authority | Shuhei, 11 October 2026: finish the vertical slit at 100 ms wall-film time, then start the angle slit with the same procedure |

@@ -1,4 +1,11 @@
-# Vertical slit / N5080 — Phase 9 continuation
+# Phase 10 — Vertical slit setup
+
+| Record ownership | Value |
+| --- | --- |
+| Phase | Phase 10 proposed design; human reassignment, 12 October 2026 |
+| Phase navigation | [Both proposed designs](../index.md) |
+| Current endpoint | N84000 / 50.9 ms retained; no further continuation |
+| Historical method | Phase 9 continuation settings; earlier schedules below are superseded |
 
 | Parent | Selected identity |
 | --- | --- |
@@ -14,7 +21,7 @@
 
 | Setting group | Selected target |
 | --- | --- |
-| Common settings owner | [EWF Plan v1](../ewf-plan-v1.md) |
+| Common settings owner | [EWF Plan v1](../../phase-09-mesh-convergence/ewf-plan-v1.md) |
 | Bulk physics | Mixture / RNG / Coupled; audit nested interaction settings against the Phase 9 approved contract |
 | Feed | Liquid 116.92 kg/s; vapor 80.69 kg/s |
 | Bulk collector | Retain verified contact-absorber mass, momentum and turbulence hooks |

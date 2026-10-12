@@ -14,7 +14,7 @@ sys.path.insert(0,str(ROOT/'scripts/analysis'))
 from plot_phase72a_endpoint_lineage import ROW,SUB,NAMES,out_file
 OUT=ROOT/'output/phase72a-stage3-slit154k-server3/20261005'
 REF=ROOT/'output/phase72a-stage3-early-ewf-server1/20261005'
-PROJECT=ROOT.parent/'Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/slit154k'
+PROJECT=ROOT.parent/'Project/experiments/phase-10-proposed-design/vertical-slit154k/startup-stage3'
 FILM=re.compile(r'Film time = ([\deE.+-]+) with timestep = ([\deE.+-]+), \(max_cfl: ([\deE.+-]+)\)')
 
 

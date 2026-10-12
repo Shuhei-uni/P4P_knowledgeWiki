@@ -498,8 +498,8 @@ stage3_slit154k_film_development_server3:
   server_id: '3'
   status_owner: PyAnsys/output/phase72a-stage3-slit154k-film-development-server3/20261006/run-manifest.json
   live_supervision: PyAnsys/output/phase72a-stage3-slit154k-film-development-server3/20261006/live-supervision.json
-  setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/slit154k/film-development/setup.md
-  results: Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/slit154k/film-development/results.md
+  setup: Project/experiments/phase-10-proposed-design/vertical-slit154k/startup-stage3/film-development/setup.md
+  results: Project/experiments/phase-10-proposed-design/vertical-slit154k/startup-stage3/film-development/results.md
   parent_native_iteration: 5080
   parent_film_time_s: 0.0035
   previous_server3_endpoint_preserved: 10000
@@ -514,8 +514,8 @@ stage3_slit154k_server3:
   authority: human_2026_10_05_full_server3_supplied_vertical_slit_repeat
   server_id: '3'
   status: COMPLETE_NATIVE_RECOVERED_RESIDUAL_GAP
-  setup: Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/slit154k/setup.md
-  results: Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/slit154k/results.md
+  setup: Project/experiments/phase-10-proposed-design/vertical-slit154k/startup-stage3/setup.md
+  results: Project/experiments/phase-10-proposed-design/vertical-slit154k/startup-stage3/results.md
   manifest: PyAnsys/output/phase72a-stage3-slit154k-server3/20261005/run-manifest.json
   prepared_reopen: PASS
   smoke_reopen: PASS

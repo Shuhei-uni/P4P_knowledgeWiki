@@ -17,9 +17,9 @@
 | Storage / drainage deficit | 75.990820 kg/s / 99.983219% |
 | Maximum thickness in window | 0.157085 mm |
 | Steady-film screen | False; whole-separator qualification remains separate |
-| Evidence | [Manifest](../../../../../../../PyAnsys/output/phase72a-stage3-slit154k-film-development-server3/20261006/run-manifest.json); [live supervision](../../../../../../../PyAnsys/output/phase72a-stage3-slit154k-film-development-server3/20261006/live-supervision.json); [setup](setup.md) |
+| Evidence | [Manifest](../../../../../../PyAnsys/output/phase72a-stage3-slit154k-film-development-server3/20261006/run-manifest.json); [live supervision](../../../../../../PyAnsys/output/phase72a-stage3-slit154k-film-development-server3/20261006/live-supervision.json); [setup](setup.md) |
 
-![Wall film thickness](../../../../../../../PyAnsys/output/phase72a-stage3-slit154k-film-development-server3/20261006/wall-film-thickness.png)
+![Wall film thickness](../../../../../../PyAnsys/output/phase72a-stage3-slit154k-film-development-server3/20261006/wall-film-thickness.png)
 
 Native wall-facet values; angular projection can overlap non-cylindrical wall faces.
 
@@ -29,4 +29,4 @@ Native wall-facet values; angular projection can overlap non-cylindrical wall fa
 | Server-side imports | Controller and watchdog import passed |
 | Host launch | Control requests time out; controller start and watchdog coverage are unverified |
 | Required recovery | Release the owned Windows launcher, retain Fluent, then inspect host logs and process receipt before resuming |
-| Machine record | [Host handoff status](../../../../../../../PyAnsys/output/phase72a-stage3-slit154k-film-development-server3/20261006/host-handoff-status.json) |
+| Machine record | [Host handoff status](../../../../../../PyAnsys/output/phase72a-stage3-slit154k-film-development-server3/20261006/host-handoff-status.json) |

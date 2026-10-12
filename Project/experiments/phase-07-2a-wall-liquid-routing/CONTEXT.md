@@ -73,7 +73,7 @@
 | Next numerical contrast | Original implicit solver, 0.5 µs ×1000 versus 5 µs ×100 at identical frozen N5080 bulk fields |
 | Qualification | Actual native film time, complete inner residuals, film accounting, facet mass/thickness/velocity, paired local saves and reopen |
 | Full-model requirement | Restore all original bulk equations before any steady-film claim |
-| Contract owner | [Vertical-slit film-development setup](stage-03-shortened-reconstruction/early-ewf-startup/slit154k/film-development/setup.md) |
+| Contract owner | [Vertical-slit film-development setup](../phase-10-proposed-design/vertical-slit154k/startup-stage3/film-development/setup.md) |
 | Machine state | [Continuation manifest](../../../PyAnsys/output/phase72a-stage3-slit154k-film-development-server3/20261006/run-manifest.json) |
 | Other server | Server 1 remains separate; its film-development results are method evidence, not this mesh's qualification |
 
@@ -88,7 +88,7 @@
 | Settings | Native Replace Mesh; separate native injection transfer; readback and paired save/reopen before solve |
 | Startup | Same 500-update low-feed hold, 2,000-update ramp and 1,000-update target hold; fixed 1 µs film step |
 | Previous endpoint | Server 3 N46806 preserved locally before replacement |
-| Status owner | [Supplied-mesh setup](stage-03-shortened-reconstruction/early-ewf-startup/slit154k/setup.md) and [results](stage-03-shortened-reconstruction/early-ewf-startup/slit154k/results.md) |
+| Status owner | [Supplied-mesh setup](../phase-10-proposed-design/vertical-slit154k/startup-stage3/setup.md) and [results](../phase-10-proposed-design/vertical-slit154k/startup-stage3/results.md) |
 | Machine state | [Run manifest](../../../PyAnsys/output/phase72a-stage3-slit154k-server3/20261005/run-manifest.json) |
 | Comparison limit | Geometry and mesh change together; mapped A fields differ from exact historical A arrays; no mesh-convergence claim |
 | Server 1 | Its separate film-development lane remains under its own authority |

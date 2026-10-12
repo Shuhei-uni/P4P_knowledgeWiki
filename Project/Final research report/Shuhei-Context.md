@@ -197,8 +197,8 @@ The design concepts in the supplied poster follow from the wall-film investigati
 
 | Proposed feature | Confirmed geometry / record | Intended physical action | Connection to the model learning |
 | --- | --- | --- | --- |
-| Vertical film blocker | `Separator-vertical-slit-154k.msh.h5`; [154k vertical-slit result](../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/slit154k/results.md) | Intercept circulating wall liquid before it meets incoming steam. | Test whether interrupting that encounter reduces disturbance and renewed release. |
-| Angled film ramp | `Separator-angle-slit-213k.msh.h5`; [213k angle-slit record](../experiments/phase-09-mesh-convergence/server6-angle213k/results.md) | Guide wall liquid towards the lower collection region. | Address transport to the collector, as well as initial film formation. |
+| Vertical film blocker | `Separator-vertical-slit-154k.msh.h5`; [154k vertical-slit result](../experiments/phase-10-proposed-design/vertical-slit154k/results.md) | Intercept circulating wall liquid before it meets incoming steam. | Test whether interrupting that encounter reduces disturbance and renewed release. |
+| Angled film ramp | `Separator-angle-slit-213k.msh.h5`; [213k angle-slit record](../experiments/phase-10-proposed-design/angled-slit213k/results.md) | Guide wall liquid towards the lower collection region. | Address transport to the collector, as well as initial film formation. |
 | External collection channel | Future-work proposal in the meeting | Collect wall liquid through a shell opening and route it down an external drain. | Provide a proposed route out of the main swirling region. |
 
 Shuhei confirmed on 12 October 2026 that the poster's vertical blocker is the **154k vertical-slit geometry**, and its angled ramp is the **213k angle-slit geometry**. These names therefore refer to the same two design concepts as the linked experiment records.
@@ -207,7 +207,7 @@ These are design hypotheses adopted in Shuhei's working poster and developed thr
 
 Their purpose is more specific than a general promise to increase efficiency. Each changes a liquid route suggested by the preceding studies. The assessment should therefore follow collected liquid, steam-outlet liquid, film storage and pressure drop. A lower film inventory alone could mean either improved drainage or more release into steam, so the destination matters.
 
-The linked records establish different stages of testing for the confirmed concepts. The 154k vertical-blocker result records a completed startup with a supplied geometry and a changed mesh; it does not establish a developed, steady film or an isolated feature effect. The 213k angled-ramp record documents an audit without a native load or solve. The geometry mapping connects these records to the poster concepts; it does not establish a design benefit. The external collection route remains a future-work proposal in the meeting.
+The Phase 10 records retain the vertical blocker at N84000 / 50.9 ms and the angled ramp at N33492 / 50.000 ms. Both pairs have save/reopen evidence. The vertical case uses enhanced EWF; the angle case uses basic EWF. Roughness, mesh size and preparation also differ. These endpoints support a design comparison with those differences stated, but they do not yet establish a steady film or an isolated design benefit. The external collection route remains a future-work proposal in the meeting.
 
 ## 11. What the report and later comparisons need to carry forward
 

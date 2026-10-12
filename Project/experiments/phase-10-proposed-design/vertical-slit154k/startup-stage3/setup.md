@@ -4,8 +4,8 @@
 | --- | --- |
 | Human instruction | Repeat the completed early-EWF startup on the supplied vertical-slit mesh |
 | Session authority | Full ownership of Server 3; replacement explicitly authorized on 5 October 2026 |
-| Reference | [Completed 60k startup](../setup.md), N1580–N5080 |
-| Source of exact settings | Hash-verified prepared A case/data; [reference runner](../../../../../../PyAnsys/scripts/setup/run_phase72a_stage3_early_ewf.py) |
+| Reference | [Completed 60k startup](../../../phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/setup.md), N1580–N5080 |
+| Source of exact settings | Hash-verified prepared A case/data; [reference runner](../../../../../PyAnsys/scripts/setup/run_phase72a_stage3_early_ewf.py) |
 | Chat access | Linked chat tool unavailable; human supplied its final answer and local record links; reference recovered from repository evidence |
 | Previous Server 3 work | Preserved N46806 pair before replacement; no further continuation of that lane selected here |
 | Requested physical change | Supplied vertical-slit geometry and mesh; 154,063 cells |
@@ -57,7 +57,7 @@
 
 | Owner | Evidence |
 | --- | --- |
-| Native implementation | [Runner](../../../../../../PyAnsys/scripts/setup/run_phase72a_stage3_slit154k.py) |
-| Machine state / exact paths | [Run manifest](../../../../../../PyAnsys/output/phase72a-stage3-slit154k-server3/20261005/run-manifest.json) |
+| Native implementation | [Runner](../../../../../PyAnsys/scripts/setup/run_phase72a_stage3_slit154k.py) |
+| Machine state / exact paths | [Run manifest](../../../../../PyAnsys/output/phase72a-stage3-slit154k-server3/20261005/run-manifest.json) |
 | Results | [Current status](results.md) |
 | Native transfer mechanics | [Fluent 2025 R2 manual, section 7.12.12](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_GridModify.html) |

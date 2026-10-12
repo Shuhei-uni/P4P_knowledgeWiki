@@ -1,4 +1,5 @@
-phase: phase-09-mesh-convergence
+phase: phase-10-proposed-design
+original_phase: phase-09-mesh-convergence
 lane: server6-slit154k
 server_id: '6'
 status: paused_by_human_retained50p9ms_reopen_verified
@@ -132,3 +133,7 @@ human_selected_retained_native_iteration: 84000
 human_selected_retained_film_s: 0.0509
 automatic_angle_transition: false
 retained_endpoint_evidence: PyAnsys/output/phase9-server6-slit154k/20261010/retained-50p9ms.json
+
+live_session_after_human_restart: unverified_not_attached
+spatial_export_stopped_by_human: true
+spatial_export_transfer_evidence: PyAnsys/output/phase10-proposed-design/20261012/slit154k-50p9ms-reference/onedrive-transfer.json

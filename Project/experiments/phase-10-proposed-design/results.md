@@ -1,29 +1,32 @@
-# Phase 10 — Proposed design results
+# Phase 10 — Proposed design evidence
 
-| Check | Verified observation | Limit |
+| Design | Verified retained evidence | Interpretation limit |
 | --- | --- | --- |
-| Supplied mesh | 213,232 cells; 741,601 file nodes | Fluent reads 715,755 active nodes; file nodes include additional node zones |
-| Native mesh | Positive cell volumes; 213,232 cells; physical extents checked in metres | No mesh-convergence claim |
-| Lower collector | 1,825 cells; two lower/upper entry interfaces proved from saved topology | Same centroid-selection rule; not a fitted plane |
-| Prior session | Paired case/data preserved before replacement | Separate Phase 9 result; not continued |
-| Parent | Local dry-film A pair matches recorded case/data hashes | Bulk fields transferred by native interpolation |
-| Transfer recovery | Per-zone source repartition crashed; fresh-session native transfer without that repartition succeeded | Across-zone interpolation may occur |
-| Bulk liquid inventory | Parent 31.357136 kg; mapped/reopened child 31.963552 kg | Interpolation changed inventory by about 1.93%; not global conservation proof |
-| New slit wall | Complete reference non-film rough-wall condition | Film domain remains the traced parent wall scope |
-| Basic EWF | Film momentum on; film pressure, surface tension, stripping and edge separation off | Stage 4 enhanced EWF settings not substituted |
-| Roughness | Inherited Stage 3 R3: 0.5 mm; coefficient 0.5 | Different from later Phase 9 Stage 4 roughness |
-| Child persistence | Paired reopen verified; dry-film clock retained | First reopen refreshed face fluxes; second pair reproduced required readback |
-| Smoke | N1580 → N1600; 20 updates; 31 report histories | Counted once |
-| Smoke film | 20 µs; peak Courant 8.622832e-6 | Small startup probe only |
-| Clock recovery | Data save synchronized host film state with printed native clock | No repeated solve |
-| Current run | Human paused at the furthest preserved endpoint: 23.705 ms, N30862; case/data reopened and clock verified | Continuation is not authorized; 100 ms not reached |
-| Paused pair transfer | Both files copied to OneDrive: `P4P-Fluent-Artifacts/Phase10/proposed-design-213k/paused-23p705ms-N30862`; sizes and SHA-256 match local originals | Local OneDrive folder copy verified; cloud sync not independently confirmed |
-| History recovery | All 31 native report histories recovered from Fluent-renamed files after reopen; 1 µs block counted once | Controller had stopped on stale file routes; no numerical failure found |
-| 1 µs block | Film-ledger error 0.00142%; maximum thickness 0.23944 mm at 18 ms | Faster timestep is human-selected; no matched-time accuracy claim |
+| Vertical blocker | N84000 / 50.9 ms; paired save/reopen and OneDrive transfer recorded in [case results](vertical-slit154k/results.md) | Frozen-bulk enhanced EWF; steady film and design benefit not established |
+| Angled ramp | N33492 / 50.000 ms; paired save/reopen and OneDrive hashes verified in [case results](angled-slit213k/results.md) | Frozen-bulk basic EWF; steady film and design benefit not established |
+| Design comparison | Both proposed geometries now share this phase owner | Mesh and control differences prevent attribution to geometry alone |
 
-| Record | Owner |
+| Vertical endpoint metric | Value | Definition / limit |
+| --- | --- | --- |
+| Bulk liquid inventory | 123.196 kg | Frozen bulk field |
+| Bulk vapour inventory | 130.328 kg | Frozen bulk field |
+| Wall-film inventory | 3.675 kg | Separate EWF inventory |
+| Steam-outlet liquid flux | 12.648 kg/s | Phase-resolved outward flux without sources; 10.82% of liquid feed |
+| Steam-outlet vapour flux | 80.387 kg/s | Phase-resolved outward flux without sources |
+| Numerical absorber removal | 79.129 kg/s | Volumetric source; not physical bottom boundary drainage |
+| Physical bottom boundary flux | 0 kg/s | Without sources |
+| Inlet minus outlet static pressure | 21.679 kPa | Difference of area-mean static pressures |
+| Angled endpoint bulk metrics | Not yet extracted | No quantitative improvement comparison selected |
+
+*Source: [vertical native bulk metrics](../../../PyAnsys/output/phase10-proposed-design/20261012/slit154k-50p9ms-reference/bulk-flow-metrics.json). These quantities do not form a full mass ledger or establish separation efficiency.*
+
+| Spatial evidence | Location | Limit |
+| --- | --- | --- |
+| Vertical inlet liquid fraction, turbulence, velocity and slit vectors | [Native PNG exports](vertical-slit154k/figures/slit154k-50p9ms/) | Final visual QA and derived graphics-case save/reopen were interrupted; all export candidates retained |
+| Historical matched-ramp startup comparison | [Vertical startup results and figures](vertical-slit154k/startup-stage3/results.md) | Geometry and resolution changed together; early startup only |
+| Angle spatial and bulk comparison | Matching fields still needed | Available endpoint proves completion, not improved liquid routing |
+
+| Next analysis | Purpose |
 | --- | --- |
-| [Run manifest](../../../PyAnsys/output/phase10-proposed-design/20261011/run-manifest.json) | Live execution progress |
-| [Prepared reopen](../../../PyAnsys/output/phase10-proposed-design/20261011/prepared-reopen.json) | Transferred settings, fields and pair |
-| [Smoke evidence](../../../PyAnsys/output/phase10-proposed-design/20261011/startup-smoke-metrics.json) | Exact completed smoke horizon |
-| [Setup](setup.md) | Intended run and evidence |
+| Compare common views and liquid destinations with settings differences visible | Establish observed changes before testing a feature-specific interpretation |
+| Distinguish physical collection from numerical removal and liquid carryover | Avoid interpreting reduced storage as improved separation |

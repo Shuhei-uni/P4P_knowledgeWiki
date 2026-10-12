@@ -1,21 +1,28 @@
-# Server 6 — vertical slit / 154k
+# Phase 10 — Vertical slit contract
+
+| Record ownership | Value |
+| --- | --- |
+| Phase | Phase 10 proposed design; human reassignment, 12 October 2026 |
+| Phase navigation | [Both proposed designs](../index.md) |
+| Current endpoint | N84000 / 50.9 ms retained; no further continuation |
+| Historical method | Phase 9 continuation settings; earlier schedules below are superseded |
 
 | Contract | Current scope |
 | --- | --- |
 | Authority | Shuhei, 10 October 2026: own Server 6; use the accessible OneDrive N5080 vertical slit checkpoint; change necessary settings to match Phase 9 and run; 11 October revision: stop at 100 ms, then run angle slit with the same procedure |
 | Checkpoint condition | Report back if the checkpoint pair is not on OneDrive |
 | Geometry and mesh | Vertical slit; 154,063 cells; historical Phase 7.2A Stage 3 branch |
-| Latest recorded checkpoint | N5290; 7.75 ms film age; saved and reopened on Server 3 local disk |
+| Historical later startup checkpoint | N5290; 7.75 ms film age; saved and reopened on Server 3 local disk |
 | Available shared checkpoint | N5080; 3.5 ms film age; both OneDrive files match archived SHA-256 hashes |
-| Current status | Human, 12 October: pause this case and keep the saved 50.9 ms / N84000 pair. Stop automatic continuation and angle transition; preserve all endpoints and Fluent |
+| Current status | Human, 12 October: pause this case and keep the saved 50.9 ms / N84000 pair. Stop this continuation and its automatic transition; preserve all endpoints and Fluent |
 | Selected run parent | Human selected available N5080 on OneDrive; 3.5 ms film age; later N5290 deferred |
-| Run basis | [EWF Plan v1](../ewf-plan-v1.md); adapt counts to the selected parent's film clock |
+| Run basis | [EWF Plan v1](../../phase-09-mesh-convergence/ewf-plan-v1.md); adapt counts to the selected parent's film clock |
 | Audit requirement | Read back selected parent settings; map the lower film collector; verify direct drainage with frozen bulk; save/reopen the prepared child |
 | Session safety | Server 6 only; preserve valuable loaded endpoint before replacement; leave Fluent open |
 | Claim limit | Geometry differs from the mesh-convergence family; this run cannot isolate mesh sensitivity |
-| Revised horizon | Retain 50.9 ms; the previous 100 ms target and final bulk-active stage are cancelled. Angle case is on hold |
+| Revised horizon | Retain 50.9 ms; the previous 100 ms target and final bulk-active stage are cancelled. The angle case later completed separately; see [angle contract](../angled-slit213k/CONTEXT.md) |
 | Evidence | [Results](results.md) |
-| Selected setup | [Phase 9 settings and run counts](setup.md) |
+| Selected setup | [Inherited Phase 9 settings and retained endpoint](setup.md) |
 
 
 | Retained endpoint revision — human, 12 October 2026 | Selected value |

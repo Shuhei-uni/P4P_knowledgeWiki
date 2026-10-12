@@ -145,6 +145,6 @@ names, geometry selections, source hooks, and numerical values from the current
 case contract rather than copying this campaign's values.
 
 - [Slit154k native runner](../../../../PyAnsys/scripts/setup/run_phase72a_stage3_slit154k.py)
-- [Transfer contract](../../../../Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/slit154k/setup.md)
+- [Transfer contract](../../../../Project/experiments/phase-10-proposed-design/vertical-slit154k/startup-stage3/setup.md)
 - [Machine transfer and smoke receipt](../../../../PyAnsys/output/phase72a-stage3-slit154k-server3/20261005/run-manifest.json)
 - [Prepared pair reopen readback](../../../../PyAnsys/output/phase72a-stage3-slit154k-server3/20261005/prepared-reopen.json)

@@ -18,7 +18,6 @@
 
 | Server 6 lane | Record |
 | --- | --- |
-| Human-selected vertical slit / 154k: revised 100 ms target; then angle slit with the same procedure | [Context](server6-slit154k/CONTEXT.md), [setup](server6-slit154k/setup.md), [results](server6-slit154k/results.md) |
-| Angle slit / 213k queued after verified vertical 100 ms endpoint; OneDrive mesh audited | [Context](server6-angle213k/CONTEXT.md), [setup](server6-angle213k/setup.md), [results](server6-angle213k/results.md) |
+| Proposed vertical and angled slit designs moved to Phase 10; retained 50.9 ms and 50.000 ms endpoints | [Phase 10 design records](../phase-10-proposed-design/index.md) |
 | Human transferred this chat’s 997k EWF run to Server 3; settings saved and reopened | [Context](server3-997k/CONTEXT.md), [setup](server3-997k/setup.md), [results](server3-997k/results.md) |
 | Human-authorized 997k-only EWF run; native bulk-active adjustment started | [Context](server6-997k/CONTEXT.md), [setup](server6-997k/setup.md), [results](server6-997k/results.md) |

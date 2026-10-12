@@ -1,5 +1,11 @@
 # Angle slit — selected Phase 9 procedure
 
+| Archive status | Value |
+| --- | --- |
+| Status | Superseded; this queued Phase 9 plan was not executed |
+| Authority | Historical 11 October plan only; no active run authority |
+| Current case | [Phase 10 angle contract](../CONTEXT.md); completed 50 ms under basic Stage 3 settings |
+
 | Input / gate | Requirement |
 | --- | --- |
 | Mesh | `Separator-angle-slit-213k.msh.h5`; SHA-256 `9b68ea200ed4e8bf53785834e380b6b26490b36e4d7271b1b375478f7f410df9` |
@@ -14,7 +20,7 @@
 | --- | --- |
 | Build | Native mesh check; inlet, solid-wall, interface and collector mapping; UDF identity; replace mesh; recover injection definitions if needed; preserve interpolated bulk lineage; save/reopen |
 | Bulk startup | Reproduce verified vertical slit startup, including scheduled inlet ramp and full-feed hold; record exact film age and native coordinate |
-| Phase 9 settings | Approved Mixture/RNG/Coupled bulk contract; full feed 116.92 kg/s liquid and 80.69 kg/s vapor; corresponding walls 0.045 mm / Cs 0.5, physical bottom smooth; film controls as in [vertical setup](../server6-slit154k/setup.md) |
+| Phase 9 settings | Approved Mixture/RNG/Coupled bulk contract; full feed 116.92 kg/s liquid and 80.69 kg/s vapor; corresponding walls 0.045 mm / Cs 0.5, physical bottom smooth; film controls as in [vertical setup](../../vertical-slit154k/setup.md) |
 | Film preparation | Preserve original film fields and bulk state; allocate mapped lower collector dry; full film forces and particle mechanisms; direct mass and XYZ drain with 1.5 ms capture time and 1% limiter; no flow momentum feedback |
 | Drain proof | Matched seeded-film OFF/ON test with frozen bulk; verify native removal and ≤1% matched ledger error; restore production pair and exclude probe time |
 | Film development | Active-bulk adjustment, separate bulk freeze, initial0.1 µs startup and qualification, then selected1 µs fixed development with Courant operating ceiling0.8 under the11 October human revision; retain independent inner-stop checks; fixed commands ≥1000 updates except scheduled input changes; native clocks, inner stops, Courant and finite fields required |

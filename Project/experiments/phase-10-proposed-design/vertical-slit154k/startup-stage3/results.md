@@ -28,5 +28,5 @@
 
 | Evidence | Link |
 | --- | --- |
-| Full metrics | [Analysis summary](../../../../../../PyAnsys/output/phase72a-stage3-slit154k-server3/20261005/analysis-summary.json) |
-| Native paths and hashes | [Manifest](../../../../../../PyAnsys/output/phase72a-stage3-slit154k-server3/20261005/run-manifest.json) |
+| Full metrics | [Analysis summary](../../../../../PyAnsys/output/phase72a-stage3-slit154k-server3/20261005/analysis-summary.json) |
+| Native paths and hashes | [Manifest](../../../../../PyAnsys/output/phase72a-stage3-slit154k-server3/20261005/run-manifest.json) |

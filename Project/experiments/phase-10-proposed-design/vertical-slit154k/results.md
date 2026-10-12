@@ -1,4 +1,11 @@
-# Vertical slit — Phase 9 settings and run
+# Phase 10 — Vertical slit results
+
+| Record ownership | Value |
+| --- | --- |
+| Phase | Phase 10 proposed design; human reassignment, 12 October 2026 |
+| Phase navigation | [Both proposed designs](../index.md) |
+| Current endpoint | N84000 / 50.9 ms retained; no further continuation |
+| Historical method | Phase 9 continuation settings; earlier schedules below are superseded |
 
 | Current evidence | Verified state / limit |
 | --- | --- |
@@ -43,7 +50,7 @@
 | Native production startup | [Startup observation](../../../../PyAnsys/output/phase9-server6-slit154k/20261010/native-startup-observation.json) |
 | Live supervision | [Current state](../../../../PyAnsys/output/phase9-server6-slit154k/20261010/continuous-supervision.json) |
 | Host controller | [Launch receipt](../../../../PyAnsys/output/phase9-server6-slit154k/20261010/host-launch.json) |
-| Historical startup | [Phase 7.2A slit result](../../phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/slit154k/results.md) |
+| Historical startup | [Phase 7.2A slit result](startup-stage3/results.md) |
 
 | Artifact limit | Effect |
 | --- | --- |
@@ -205,3 +212,10 @@
 | Shared copy | Selected case/data copied to unique OneDrive Server6 folder; both SHA-256 values match source. Cloud upload independently unverified |
 | State | Paused, Fluent open and idle; watcher stopped; zero new solve calls;100ms and angle continuation cancelled |
 | Claim limit | Retention is an artifact decision; no convergence, numerical acceptance, steady-film or physical-validation claim |
+
+| Phase 10 spatial reference | Evidence / limit |
+| --- | --- |
+| Export source | Retained N84000 / 50.9 ms; selected pair and five initial native PNGs copied to OneDrive Phase10/proposed-design/vertical-slit-reference-50p9ms with matching hashes |
+| Bulk-flow measurements | [Native metrics](../../../../PyAnsys/output/phase10-proposed-design/20261012/slit154k-50p9ms-reference/bulk-flow-metrics.json); [phase comparison table](../results.md) |
+| Graphics | [All native export candidates](figures/slit154k-50p9ms/): top-down liquid fraction, turbulent kinetic energy and velocity; vertical slit velocity vectors |
+| Export limit | Final visual QA and derived graphics-case save/reopen interrupted by connection loss; human stopped further graphics work |

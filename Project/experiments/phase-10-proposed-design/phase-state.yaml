@@ -1,18 +1,24 @@
 phase_id: phase-10-proposed-design
-status: PAUSED_HUMAN_FURTHEST_ENDPOINT_REOPEN_VERIFIED
-authority: human_20261011_direct_fluent_proposed_design_basic_ewf_100ms
-setup: Project/experiments/phase-10-proposed-design/setup.md
-machine_root: PyAnsys/output/phase10-proposed-design/20261011
-session: direct_fluent_use_local_student_252_four_ranks
-mesh_cells_file: 213232
-native_mesh_verified: true
-parent_hashes_verified: true
-target_total_film_age_s: 0.1
-observed_film_age_s: 0.02370500000000604
-solve_calls: 1
-frozen_bulk_drain_proof: PASS_DIRECT_NATIVE_EWF_OUTFLOW_WITH_IDENTICAL_BULK_FIELDS
-final_pair_verified: false
-mesh_convergence_established: false
+status: retained_design_endpoints_comparison_pending
+authority_date: '2026-10-12'
+question: effect_of_vertical_blocker_and_angled_ramp_on_liquid_routing
+new_solver_work_authorized_by_reclassification: false
+geometry_only_effect_established: false
 steady_film_established: false
-observed_native_iteration: 30862
-active_target: null
+cases:
+  vertical_slit154k:
+    state: Project/experiments/phase-10-proposed-design/vertical-slit154k/phase-state.yaml
+    native_iteration: 84000
+    film_time_s: 0.0509
+    status: retained_paused
+  angled_slit213k:
+    state: Project/experiments/phase-10-proposed-design/angled-slit213k/phase-state.yaml
+    native_iteration: 33492
+    film_time_s: 0.05
+    status: complete_saved_reopened
+comparison_limits:
+  - mesh_resolution_differs
+  - roughness_and_film_physics_differ
+  - timestep_and_preparation_differ
+  - angle_endpoint_bulk_and_spatial_metrics_not_extracted
+relocation_evidence: PyAnsys/output/phase10-proposed-design/20261012/record-reclassification/relocation-manifest.json
