@@ -6,12 +6,13 @@
 | --- | --- |
 | Owner | Andy |
 | Authority | Human, 8 October 2026: same Purnanto 2013 setup; verify that poly reproduces the earlier tet results with less computational cost |
-| Current work | Human resumed on 9 October 2026; recovered original case audited; native carrier reference saved/reopened |
+| Current work | Selected tet1600 benchmark complete; [cost/output results](replication1600-tet-results.md). No further solve selected |
 | Preparation | Meshes, recipes, CAD, quality table and plot delivered with copy verification |
-| Execution | PAUSED by human. M01–M06 numerically failed; M07 user-stopped at N718 with paired endpoint/hashes recorded. Native batch terminal; OS process exit not verified |
-| Access recovery | Access lost after verified M07 stop; TCP timed out. No BF01 deployment or new writer. Human pause overrides recovery |
-| Next work | Wait for human resume, then verify session/controller and execute selected M04 BF01. Prepared code; zero ON updates |
-| Follow-up authority | Human, 11 October 2026 NZ: try implicit body force on after the final mesh finishes; separate numerical contrast, original series unchanged |
+| Execution | TetN1500 and DPM verified; controller8676 exited; owned Fluent idle. All five M04 cases remain complete. BF01 and M01–M06 remain failed; M07 skipped |
+| Access / ownership | At the terminal verification, tet controller8676 had exited and owned Fluent was idle; no active writer was verified. See the [terminal proof](../../../PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-tet-benchmark/verified-terminal.json) |
+| Next evidence recommendation | Keep the single current tet1600 benchmark and check direct fluid volumes/source geometry before further solves. The observed2.0513 carrier-time ratio applies only to this fixed-N1500 case; [coverage and recommendation](replication1600-tet-results.md#comparison-coverage-and-report-claims) |
+| Follow-up authority | No additional solve selected. The earlier implicit-body-force test is closed and unqualified; more enthalpy repeats remain a recommendation, not a run selection |
+| Schedule | Pause monitor manually if still enabled because automation_update is unavailable; actual schedule state/pause remains unverified |
 | Other studies | Existing phase records and session authority remain with their owners |
 
 ## Evidence anchors
@@ -29,6 +30,18 @@
 | [Final anchor audit](../../../PyAnsys/output/mesh-audits/2026-10-08-purnanto-remesh/single-family/final-loaded-anchor.json) | 682k mesh has two cells with size change >=300; maximum 881.63 | Locations and effect on the solution remain untested |
 | [Historical tet-lineage study](historical-reference.md) | Earlier seven-level study is logged in Phase 2; 1.69–13.37M actual cells; pressure/velocity remained iteration-dependent | Exact nodes recovered for 900k only; skewness, size change and timing pending; tet evidence is from the historical parent |
 | Human explanation | Both studies target the same Purnanto 2013 setup; Shuhei switched to poly for speed | Same setup is the intended invariant; performance gain remains a hypothesis to measure |
+
+## Human clarification — replication purpose
+
+| Item | Current direction |
+| --- | --- |
+| End goal | Repeat Purnanto 2013 on the new mesh and assess output agreement plus measurable improvement |
+| Immediate work | Saved OFF fields at N1000 and N2000 compared; [result](predivergence-mesh-sensitivity.md); zero new solver updates |
+| Further body-force diagnosis | Not selected following the human change of direction |
+| Historical residual expectation | Human, 13 October 2026 NZ: continuity nonconvergence is expected. Exact-protocol replication remains the goal; continuity alone is not a stop or rejection gate |
+| Selected next run | Provisional M04 carrier complete at N1500; [results](replication1600-carrier-results.md); exact Case 4 DPM complete; [particle results](replication1600-dpm-results.md); conditional enthalpies require review |
+| Next-scope advice | [Replication proposal](replication-next-scope.md); M04 replication selected, awaiting exact historical settings parity |
+| Claim boundary | Pre-divergence agreement is diagnostic mesh sensitivity; paper agreement alone does not prove improved physical accuracy |
 
 ## Phase contract
 
@@ -57,7 +70,7 @@
 | --- | --- | --- | --- | --- |
 | Local mesh qualification | Inspect cells at quality extremes, especially the 682k size-change pair | Delivered mesh identity | Location, wall-layer/transition context and repair decision | Next preparation item |
 | Single-inlet refinement series | Seven recorded mesh levels | Recovered original carrier case; fixed N5000 horizon | Convergence and conservation checks; selected scalar/spatial outputs versus refinement | M07 user-skipped at N718; M01–M06 numerically failed |
-| BF01 body-force diagnostic | Implicit body force on | Preserved M04 N3000 fields; 1000 additional updates; all other settings fixed | Residual/speed comparison; conservation and inventory; strict save/reopen proof | Human-selected M04; prepared but not deployed; human-paused |
+| BF01 body-force diagnostic | Implicit body force on | Preserved M04 N3000 fields; 1000 additional updates; all other settings fixed | Residual/speed comparison; conservation and inventory; strict save/reopen proof | Failed at N3567; terminal evidence verified; no further solve selected |
 | Tet/poly comparison | Mesh type and independently documented refinement | Same audited Purnanto setup and operating point | Output differences within selected tolerances; time to comparable qualified results | Human-selected question; references/timing to qualify |
 
 ## Decision conditions
@@ -71,3 +84,11 @@
 | Poly matches qualified tet outputs at lower elapsed cost | Report measured speedup and output differences | Scoped to the hardware, setup and accuracy criteria tested |
 | Historical tet endpoints remain unqualified | Recover comparable evidence or use a declared common-state diagnostic | Do not claim accuracy equivalence from the old N3000 endpoints alone |
 | Trend is non-monotonic or dominated by startup/film time | Report the ambiguity and separate those effects | Do not force an extrapolated order or uncertainty estimate |
+
+## Selected full-flow enthalpy repeats
+
+| Item | Current selection |
+| --- | --- |
+| Human direction, 13 October 2026 NZ | Run M04 at 1440, 1520, 1680 and 1760 kJ/kg; incomplete particles assumed separated in efficiency |
+| Execution contract | [Enthalpy sweep](replication-enthalpy-sweep.md): fresh N1500 carrier and nine source injections per case, 100000 tracking steps |
+| State | All five selected enthalpies complete at N1500 plus DPM; native pairs, settings, reports and histories verified. Final writer exited and Fluent idle. [Results](replication-enthalpy-results.md) |

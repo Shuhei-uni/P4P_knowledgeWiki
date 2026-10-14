@@ -56,3 +56,41 @@ def write_ascii_text_new(solver: Any, path: str, text: str) -> None:
     solver.scheme.eval(expression)
     if read_text(solver, path) != text:
         raise RuntimeError(f"Fluent ASCII text round-trip mismatch: {path}")
+
+
+def read_text_bounded(solver: Any, path: str, limit: int = 4000000) -> str:
+    """Read a known artifact with a finite bound and one string-valued RPC."""
+    if not 0 < limit <= 4000000:
+        raise ValueError("Invalid remote text bound")
+    quoted = quote_scheme_string(path.replace("\\", "/"))
+    expression = (
+        f'(let ((p (open-input-file "{quoted}"))) '
+        f"(let loop ((chars '()) (left {limit})) (let ((c (read-char p))) "
+        "(cond ((eof-object? c) (close-input-port p) (list->string (reverse chars))) "
+        '((= left 0) (close-input-port p) (error "remote text bound")) '
+        "(else (loop (cons c chars) (- left 1)))))))"
+    )
+    result = solver.scheme.eval(expression)
+    if not isinstance(result, str):
+        raise RuntimeError(f"Fluent returned non-text content for {path!r}")
+    return result
+
+
+def write_ascii_text_new_labeled(solver: Any, path: str, text: str) -> None:
+    """Combine the overwrite guard and ASCII write with a string acknowledgement.
+
+    The Phase10 v0 bridge has intermittent deadlines on separate existence
+    queries; this route was verified on the same endpoint without loosening
+    the guard or skipping the exact content readback.
+    """
+    quoted = quote_scheme_string(path.replace("\\", "/"))
+    write = ascii_write_expression(path, text)
+    expression = (f'(if (file-exists? "{quoted}") "REFUSED_EXISTING" '
+                  f'(begin {write} "ASCII_WRITTEN"))')
+    result = solver.scheme.eval(expression)
+    if result == "REFUSED_EXISTING":
+        raise FileExistsError(f"Refusing to overwrite remote file: {path}")
+    if result != "ASCII_WRITTEN":
+        raise RuntimeError(f"Unexpected ASCII write acknowledgement: {result!r}")
+    if read_text_bounded(solver, path) != text:
+        raise RuntimeError(f"Fluent ASCII text round-trip mismatch: {path}")

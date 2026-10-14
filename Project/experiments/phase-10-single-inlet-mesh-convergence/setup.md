@@ -2,7 +2,7 @@
 
 | Item | Status |
 | --- | --- |
-| Runnable contract | Human skipped M07 after 718 updates; paired endpoint saved. M01–M06 remain failed. Prepare BF01 on preserved M04 N3000 with only implicit body force ON |
+| Runnable contract | Human-authorized provisional M04 carrier-first stage for full-flow spiral Case 4, N1500 cap; recovered source audited; exact Case 4 DPM setup saved/reopened. Baseline and BF01 failures remain preserved |
 | Human-selected comparison | Same Purnanto 2013 setup; tet versus poly-hexcore output agreement and computational cost |
 | Historical reference | [Seven-level study](historical-reference.md); existing endpoints are diagnostic, not a qualified steady reference |
 | Mesh parent | Preserved `Separator-purnanto-single-733k.msh.h5`, 733,979 cells |
@@ -94,16 +94,16 @@ Source: [read-only saved-file header counts](../../../PyAnsys/output/mesh-audits
 | Deployment | Detached Windows `Win32_Process.Create`; fifteen-second delay before callback; sixty-second startup connection limit; credentials remain in memory |
 | Live inspection | Passive receipt reads only; no Scheme system/PowerShell/CIM query while a controller is active; OS process state requires an independent verified route |
 | Relaunch guard | Reconcile previous controller, saved pilot pair and actual solved count; no duplicate controller; smoke proof required before batch |
-| Current state | M07 stopped at N718 by human instruction; native controller saved the paired endpoint and reports terminal incomplete-horizon status. Verify process exit before BF01 |
+| Current state | BF01 failed at N3567; ON flags and N3005 hashes verified; controller 24124 exited; owned Fluent idle. No further solve selected |
 | Monitor request | Human-created task `Phase 10` was verified ACTIVE every 30 minutes in this chat. Prepared prompt now includes BF01; saved schedule prompt update is unverified because `automation_update` is unavailable. [Prior readback](../../../PyAnsys/output/phase10-single-inlet-mesh-convergence/monitor-active-readback-20261009.json) |
 | Retrieval limit | Current remote file route uses Fluent Scheme; loss of API access blocks receipt retrieval, not proof that remote files are absent |
-| Current access block | Access lost after verified M07 N718 stop; TCP timed out. Human paused all solver work. Resume requires controller exit and parent/session proof |
+| Current access block | Resolved. Human resumed 12 October NZ; authenticated native receipts and live BF01 progress verified |
 
 ## Selected follow-up — BF01 implicit body-force test
 
 | Item | Contract |
 | --- | --- |
-| Status | PREPARED_NOT_DEPLOYED_USER_PAUSED; zero ON updates |
+| Status | NUMERICAL_FAILURE_UNQUALIFIED; terminal at N3567 after 567 new updates; ON N3005 retained; no retry selected |
 | Human authority | 11 October 2026, NZ: try body force ON after the series. Updated 12 October NZ: skip M07 and test ON using a coarser mesh; selected M04 contract retained |
 | Question | Does implicit body-force treatment suppress the recorded M04 overflow when restarted from the same finite N3000 fields? |
 | Paper provenance | [Purnanto 2013](https://www.researchgate.net/publication/269519626_CFD_MODELLING_OF_TWO-PHASE_FLOW_INSIDE_GEOTHERMAL_STEAM-WATER_SEPARATORS), p.5 §3.1 and p.6 §3.3: gravity and numerical methods reported; implicit body-force switch not specified |
@@ -128,3 +128,43 @@ Source: [read-only saved-file header counts](../../../PyAnsys/output/mesh-audits
 | Failure policy | Preserve numerical failure and actual spend; technical recovery may resume only a verified ON pair within the remaining BF01 cap; no automatic changed-input retry |
 | Claim limit | Numerical diagnostic only; N4000 survival does not qualify M04, prove mesh independence, or establish tet/poly accuracy or speedup |
 | Completion | Verify paired endpoint, settings, histories and spend; analyse the contrast; then pause monitoring after terminal review; no further solve selected |
+
+## Selected 1600 kJ/kg follow-up — R1600
+
+| Item | Selection |
+| --- | --- |
+| Human request | Repeat the full-flow 1600 kJ/kg case with exact historical settings and DPM injections |
+| Human clarification, 13 October 2026 NZ | Continuity residual nonconvergence is expected for the historical replication. Do not use continuity alone to stop or reject the N1500 protocol; retain its values and the independent inventory/flux observations |
+| Mesh | M04, 946,967 cells; explicitly selected by human |
+| Source | Human-selected spiral Case 4, `spiral_enthalpy_sweep_20260725`; [binary/settings recovery](replication1600-source-recovery.md). Baseline selection in the original handoff is superseded |
+| Injections | Nine direct spiral Case 4 objects; `liquid-water`; 26.865069 m/s face-normal; Stokes-Cunningham drag; 116.92 kg/s total |
+| Settings parity | Recovered parent carrier/global/material controls and geometric boundary-role mapping verified; direct Case 4 injections applied; exact July binary/full-export provenance unverified |
+| Carrier-first authority | Human requested starting available replication work now; historical spiral file search deferred until tomorrow |
+| Carrier stage | Provisional fresh Hybrid M04 OFF run using recovered Purnanto settings; verified Case 4 inlet conditions; cap 1500 new updates, including one smoke, then blocks of 1000 and 499 |
+| DPM stage | Exact nine spiral definitions applied; recovered material and global controls verified; one fresh tracking update complete at N1500; aggregate/nine reports mass-audited; tracked pair saved/reopened |
+| Launch status | N1500 carrier complete and source-audited; post-DPM pair saved/reopened and loaded; Fluent idle; particle mass accounting verified; carrier unqualified |
+
+| Conditional enthalpy follow-ups | Contract |
+| --- | --- |
+| Human monitor authority | After R1600 review and source-setting resolution, useful full-flow M04 cases at 1440, 1520, 1680 and 1760 kJ/kg may proceed |
+| Per case | Exact own historical inlet/injection definitions, common verified parent physics/numerics, fresh initialization, 1500-update allocation including retries |
+| Limits | No reduced-flow Case 1; no sweep after repeated numerical failure; no DPM with unverified particle properties/global controls |
+| Combined no-retry budget | Prior upper bound 23559 plus five 1500 allocations = 31059 of 35000 |
+
+## Selected full-flow enthalpy repeats
+
+| Item | Current selection |
+| --- | --- |
+| Human direction, 13 October 2026 NZ | Run M04 at 1440, 1520, 1680 and 1760 kJ/kg; incomplete particles assumed separated in efficiency |
+| Execution contract | [Enthalpy sweep](replication-enthalpy-sweep.md): fresh N1500 carrier and nine source injections per case, 100000 tracking steps |
+| State | All five selected enthalpies complete at N1500 plus DPM; native pairs, settings, reports and histories verified. Final writer exited and Fluent idle. [Results](replication-enthalpy-results.md) |
+
+## Selected matched tet benchmark
+
+| Item | Current selection |
+| --- | --- |
+| Human direction | Run the tet mesh on the current PC and Fluent for the proposed matched1600 comparison |
+| Contract | [Tet benchmark](replication1600-tet-benchmark.md): fresh Hybrid N0;1500 carrier updates including smoke; one DPM update at100000 steps; exact M04 Case4 physics and injections |
+| Budget |1500 allocated updates; prior upper bound31059; terminal upper bound32559 of35000 |
+| Claim | Fixed-horizon cost/output comparison; no convergence or improved-accuracy claim |
+| Completion |TetN1500 plus one DPM update verified; no further solve selected; [benchmark results](replication1600-tet-results.md) |

@@ -1,20 +1,20 @@
 phase_id: phase-10-single-inlet-mesh-convergence
 owner: Andy
 created_on: '2026-10-08'
-status: PAUSED_BY_USER_BF01_NOT_STARTED
-last_verified_execution_status: RUNNING
-monitor_checked_at: '2026-10-12T01:11:01.970596+00:00'
-monitor_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/latest-monitor-check.json
-monitor_access_status: ACCESS_LOST_AFTER_VERIFIED_BASELINE_STOP_USER_PAUSED
+status: TET_BENCHMARK_COMPLETE_UNQUALIFIED
+last_verified_execution_status: TET_N1500_DPM_VERIFIED_WRITER_EXITED_OWNED_SOLVER_IDLE
+monitor_checked_at: '2026-10-13T14:50:30.445396+00:00'
+monitor_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-tet-benchmark/verified-terminal.json
+monitor_access_status: RESTORED_NATIVE_RECEIPTS_AND_LIVE_PROGRESS
 configured_connection_port: 60569
-recorded_phase_tcp_status: TIMEOUT
-configured_endpoint_receipt_status: DEADLINE_EXCEEDED
-recorded_endpoint_receipt_status: DEADLINE_EXCEEDED
-recorded_endpoint_receipt_error_class: DEADLINE_EXCEEDED
-current_execution_verified: false
-independent_controller_process_verified: false
-solver_failure_established_by_monitor: true
-monitor_notification_key: phase-10:M07:USER_STOP_N718:BF01_NOT_STARTED:USER_PAUSE
+recorded_phase_tcp_status: AUTHENTICATED_API_SERVING
+configured_endpoint_receipt_status: PASS
+recorded_endpoint_receipt_status: PASS
+recorded_endpoint_receipt_error_class: null
+current_execution_verified: true
+independent_controller_process_verified: true
+solver_failure_established_by_monitor: false
+monitor_notification_key: phase-10:replication-enthalpy-M04:d04a64bb:ALL_FIVE_TERMINAL_VERIFIED
 context: CONTEXT.md
 setup: setup.md
 results: results.md
@@ -32,7 +32,7 @@ mesh_cells:
 solver_parent_selected: true
 solver_run_selected: true
 solver_session_assigned: true
-phase_solve_iterations: 22302
+phase_solve_iterations: 30369
 mesh_convergence_established: false
 original_style_family_identity_verified: false
 original_style_family_metrics_status: CELL_COUNTS_OQ_AR_RECOVERED_REMAINING_METRICS_PENDING
@@ -46,7 +46,7 @@ speedup_verified: false
 current_family_node_counts_verified: true
 historical_exact_node_counts_recovered:
 - 900k
-next_action: WAIT_FOR_HUMAN_RESUME_THEN_RECONCILE_SESSION_AND_EXECUTE_M04_BF01
+next_action: SELECTED_BENCHMARK_COMPLETE_REVIEW_GEOMETRY_LIMIT_NO_FURTHER_SOLVE_SELECTED
 execution_requested: true
 exact_settings_required: true
 reference_case_inspected: true
@@ -62,7 +62,7 @@ common_reference_sha256: 99d7c34410c76bcba6d2add51753986ec288ede9de78a90508acbc0
 pilot_first_process_exited_before_build: true
 pilot_revised_dispatch_unconfirmed: false
 solver_api_tcp_port_open: true
-solver_api_health_status: NOT_PROBED_NATIVE_RECEIPTS_PASS
+solver_api_health_status: SERVING
 verified_phase_solve_iterations: 20409
 pilot_possible_iterations_maximum: 5
 full_batch_launched: true
@@ -86,7 +86,7 @@ current_windows_user: qtra338
 study_files_windows_user: syok443
 study_file_access_status: NEW_ACCOUNT_MESHES_AND_ORIGINAL_CASE_READABLE_OLD_PILOT_ACCESS_DENIED
 current_access_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/windows-access-52660.json
-paused_by_user: true
+paused_by_user: false
 resume_requires_user_instruction: false
 current_account_mesh_hashes_verified: true
 original_case_file_recovered: true
@@ -99,16 +99,16 @@ processor_count: 16
 current_account_pilot_verified: true
 current_account_pilot_pid: 7372
 pilot_smoke_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/M01-smoke-verified-20261009.json
-current_solver_mesh_nodes: 9874749
+current_solver_mesh_nodes: 2385385
 batch_preflight_stall_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/batch-preflight-stall-20261009.json
-controller_pid: 2572
+controller_pid: 24124
 batch_start_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/current-launch.json
-current_level: M07
-verified_current_checkpoint: 718
-phase_solve_iterations_source: NATIVE_M01_M06_FAILURE_COUNTS_PLUS_M07_USER_STOP_N718_PLUS_M05_LOST_UPDATE_BOUNDS
-observed_current_iteration: 718
+current_level: M04
+verified_current_checkpoint: 3005
+phase_solve_iterations_source: RECONCILED_BASELINE_M01_M06_PLUS_M07_N718_LOST_M05_BOUNDS_PLUS_BF01_PRINTED_MINUS_N3000
+observed_current_iteration: 3567
 observed_iteration_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/latest-monitor-transcript.json
-verified_current_checkpoint_status: M07_N718_PAIR_RECORDED_WITH_HASHES_NATIVE_CONTROLLER
+verified_current_checkpoint_status: BF01_ON_N3005_PAIR_HASHED_AND_STRICT_REOPEN_VERIFIED
 failed_mesh_levels:
 - M01
 - M02
@@ -121,7 +121,7 @@ M01_last_verified_checkpoint: 1000
 M01_status: NUMERICAL_FAILURE_UNQUALIFIED
 recovery_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/saved-resume-verification-20261010.json
 remaining_selected_levels: []
-maximum_additional_iterations: 1000
+maximum_additional_iterations: 0
 maximum_current_attempt_series_iterations: 28919
 current_level_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/latest-native-receipts.json
 last_native_controller_pid: 24688
@@ -136,7 +136,7 @@ M03_failed_partial_checkpoint: 2769
 M03_status: NUMERICAL_FAILURE_UNQUALIFIED
 monitor_schedule_id: phase-10
 monitor_thread_id: 01a1181a-f519-7ca2-ad1d-188685e101d4
-monitor_schedule_status: ACTIVE
+monitor_schedule_status: UNKNOWN_AUTOMATION_TOOL_UNAVAILABLE
 monitor_cadence: RRULE:FREQ=MINUTELY;INTERVAL=30
 source_connection_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/connection-recovery-60569-20261010.json
 current_level_preparation_observed: true
@@ -163,8 +163,8 @@ monitor_external_block_receipt: PyAnsys/output/phase10-single-inlet-mesh-converg
 windows_observation_required: false
 windows_observation_question_pending: false
 consecutive_receipt_timeout_checks: 0
-monitor_repeat_notification_suppressed: true
-monitor_check_status: USER_PAUSED
+monitor_repeat_notification_suppressed: false
+monitor_check_status: PASS_TERMINAL_FAILURE_EVIDENCE
 consecutive_receipt_failure_checks: 0
 user_confirmed_fluent_restart: true
 M04_actual_iterations: 3911
@@ -175,14 +175,15 @@ lost_updates_lower_bound: 305
 lost_updates_upper_bound: 995
 controller_launcher_pid: 32204
 M05_status: NUMERICAL_FAILURE_UNQUALIFIED
-phase_solve_iterations_upper_bound_at_last_observation: 22992
-monitor_external_block_resolved: false
+phase_solve_iterations_upper_bound_at_last_observation: 23559
+monitor_external_block_resolved: true
 active_resume_runtime_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/saved-resume-runtime-transcript-20261010.json
 divergence_diagnosis: divergence-diagnosis-20261011.md
-divergence_causal_status: SHARED_ACCUMULATION_AND_OVERFLOW_VERIFIED_UNIQUE_TRIGGER_UNPROVEN
+divergence_causal_status: SHARED_RETAINED_LIQUID_AND_LOCAL_TURBULENCE_INSTABILITY; RESTART_CONFOUND_VERIFIED;
+  UNIQUE_CAUSE_UNPROVEN
 post_series_diagnostic:
   id: BF01
-  status: PREPARED_NOT_DEPLOYED_USER_PAUSED
+  status: NUMERICAL_FAILURE_UNQUALIFIED_TERMINAL_EVIDENCE_VERIFIED
   user_authorized_on_nz: '2026-10-11'
   setup_section: setup.md#selected-follow-up--bf01-implicit-body-force-test
   job_spec: PyAnsys/output/phase10-single-inlet-mesh-convergence/bodyforce-BF01-job-spec.json
@@ -191,28 +192,44 @@ post_series_diagnostic:
   final_iteration: 4000
   additional_update_cap_including_smoke_and_retries: 1000
   selected_delta: IMPLICIT_BODY_FORCE_ON
-  deployed: false
-  solved_updates: 0
+  deployed: true
+  solved_updates: 567
   requires_baseline_terminal_and_controller_exit: true
   requires_native_budget_reconciliation: true
   baseline_failed_classifications_preserved: true
-  maximum_campaign_updates_including_diagnostic: 29919
+  maximum_campaign_updates_including_diagnostic: 23992
   schedule_pause_deferred_until_diagnostic_terminal_review: true
   schedule_prompt_update_verified: false
   human_skipped_M07: true
   code_review: PyAnsys/output/phase10-single-inlet-mesh-convergence/bodyforce-BF01-code-review.json
-current_runtime_status: BASELINE_STOPPED_BF01_NOT_STARTED_USER_PAUSED
+  native_manifest_solved_updates_at_last_receipt: 567
+  observed_iteration: 3567
+  saved_iteration: 3005
+  native_root: C:/Users/qtra338/Documents/FluentRuns/Phase10/20261009/bodyforce-BF01-c17183e6
+  controller_pid: 24124
+  remaining_update_cap_at_observation: 433
+  remaining_update_cap_unused: 433
+  horizon_reached: false
+  controller_exited: true
+  final_500_available: false
+  terminal_evidence: PyAnsys/output/phase10-single-inlet-mesh-convergence/bodyforce-BF01-terminal-verification.json
+  analysis: bf01-results.md
+  interpretation_status: ASTRA_PLANNER_REVIEW_PENDING
+  diagnosis: bf01-diagnosis.md
+  restart_boundary_reconstruction_verified: true
+  zero_update_OFF_inspection_updates: 0
+  active_loaded_iteration_after_inspection: 3005
+current_runtime_status: TET_COMPLETE_WRITER_EXITED_OWNED_SOLVER_IDLE
 last_successful_monitor_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/last-verified-monitor-check.json
-last_successful_monitor_checked_at: '2026-10-12T00:59:04.826590+00:00'
+last_successful_monitor_checked_at: '2026-10-12T06:59:03.760966+00:00'
 last_inconclusive_probe_does_not_authorize_restart: true
 latest_human_windows_observation:
   received_utc: '2026-10-11T02:17:31.255794+00:00'
   source: human_reply_in_this_chat
   text: the error is cleared
-  limit: Does not identify current API endpoint, active iteration counter or controller
-    exit.
-  followup: Current port 60569 with advancing iterations or idle responsiveness, or
-    new endpoint credentials if restarted.
+  limit: Does not identify current API endpoint, active iteration counter or controller exit.
+  followup: Current port 60569 with advancing iterations or idle responsiveness, or new endpoint credentials
+    if restarted.
   followup_question_pending: false
   resolved_by: Human restored VPN; authenticated native reads confirm controller progression.
 M05_actual_iterations: 4180
@@ -239,3 +256,236 @@ user_pause_authority: pause for now. I will get back to you.
 user_pause_recorded_at: '2026-10-12T01:11:01.970596+00:00'
 monitor_schedule_pause_status: REQUESTED_UNVERIFIED_AUTOMATION_UPDATE_UNAVAILABLE
 schedule_pause_native_verified: false
+user_resume_authority: "then run the tet mesh again on the current PC and fluent."
+user_resume_recorded_at: '2026-10-12T01:47:49.832737+00:00'
+active_experiment: R1600_TET_BENCHMARK
+baseline_controller_exit_verified: true
+controller_exit_verified: true
+owned_solver_idle_verified: true
+BF01_diagnosis: bf01-diagnosis.md
+loaded_session_iteration: 3005
+loaded_session_pair: BF01_ON_N3005_VERIFIED_RESTORED_AFTER_ZERO_UPDATE_INSPECTION
+zero_update_diagnosis_added_updates: 0
+next_control_proposal_selected: false
+predivergence_mesh_analysis:
+  status: PRE_DIVERGENCE_MESH_SENSITIVITY_COMPLETE
+  user_authority: Compare pre-divergence flow fields; clarify new-mesh Purnanto replication and improvement
+    goal
+  raw_root: PyAnsys/output/phase10-single-inlet-mesh-convergence/predivergence-mesh-sensitivity
+  iterations:
+  - 1000
+  - 2000
+  new_solved_updates: 0
+  convergence_claim_allowed: false
+  snapshot_count: 11
+  result: predivergence-mesh-sensitivity.md
+  summary: PyAnsys/output/phase10-single-inlet-mesh-convergence/predivergence-mesh-sensitivity/summary.json
+  owned_endpoint_restore_verified: true
+further_bodyforce_investigation_selected: false
+human_clarified_goal: Enable Purnanto 2013 replication with new mesh; assess similar outputs and measurable
+  improvement
+attempt_solver_timing_available: true
+time_to_qualified_output_available: false
+selected_replication1600:
+  id: R1600-M04
+  status: DPM_COMPLETE_MASS_ACCOUNTING_VERIFIED_CARRIER_UNQUALIFIED
+  mesh: M04
+  cells: 946967
+  case: 1600 kJ/kg full-flow spiral inlet Case 4
+  settings_authority: Exact spiral Case 4 readbacks and certified parent; no baseline-family substitution
+  job_spec: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-M04/job-spec.json
+  launched: true
+  new_solved_updates: 1500
+  source_recovery_record: replication1600-source-recovery.md
+  historical_family_clarification_pending: false
+  referenced_chat: 019f8c25-1060-7b61-890e-51cc25fa56fd
+  referenced_chat_live_read: false
+  referenced_chat_read_tool_available: false
+  historical_family: SPIRAL_CASE4_20260725
+  source_handoff: replication1600-source-handoff.md
+  source_handoff_verified: true
+  source_handoff_selection_superseded: true
+  exact_spiral_injections_verified: true
+  spiral_reference_coverage: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-M04/spiral-reference/settings-coverage.json
+  full_historical_settings_parity_verified: false
+  accepted_source_binary_verified: true
+replication1600_carrier_first_authorized: true
+replication1600_DPM_tracking_deferred: false
+replication1600_carrier_controller_pid: 34176
+replication1600_carrier_completed_iteration: 1500
+replication1600_carrier_active_target: null
+replication1600_carrier_final_target: 1500
+replication1600_carrier_smoke_verified: true
+replication1600_conditional_followups:
+  enthalpies_kJ_kg: [1440, 1520, 1680, 1760]
+  mesh: M04
+  horizon_and_retry_allocation_per_case: 1500
+  requires_R1600_review_and_source_settings_parity: true
+  reduced_flow_case_1_selected: false
+  evidence_index: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication-enthalpy-candidates/candidate-index.json
+replication1600_carrier_controller_exited: true
+replication1600_carrier_idle_verified: true
+replication1600_carrier_qualified: false
+replication1600_campaign_spend: [24369, 25059]
+replication1600_carrier_results: replication1600-carrier-results.md
+replication1600_recovered_parent_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-M04/spiral-recovered-parent/recovery.json
+replication1600_recovered_parent_sha256: b59ffb1a287699e1fd5839294f74258f706d7729e86166e0f17343bf212185e1
+replication1600_parent_injection_fingerprint_matches: true
+replication1600_parent_live_audit_pending: false
+replication1600_parent_live_audit: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-M04/spiral-recovered-parent/live-audit-receipt.json
+replication1600_settings_comparison: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-M04/spiral-recovered-parent/settings-comparison.json
+replication1600_recovered_parent_carrier_matches_M04: true
+replication1600_recorded_parent_subset_matches: true
+replication1600_DPM_preparation_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-M04/spiral-recovered-parent/DPM-preparation-receipt.json
+replication1600_DPM_ready_native_manifest: C:/Users/qtra338/Documents/FluentRuns/Phase10/20261009/replication1600-M04-9717fb9b/DPM-ready-5a9cc9bc/manifest.json
+replication1600_reconstructed_settings_verified: true
+replication1600_DPM_tracking_issued: true
+replication1600_DPM_launch: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-M04/DPM-launch.json
+replication1600_DPM_native_root: C:/Users/qtra338/Documents/FluentRuns/Phase10/20261009/replication1600-M04-9717fb9b/DPM-run-08b272ca
+replication1600_DPM_completed_updates: 1
+replication1600_DPM_controller_pid: 35508
+replication1600_DPM_controller_exited: true
+replication1600_DPM_mass_accounting_verified: true
+replication1600_DPM_results: replication1600-dpm-results.md
+replication1600_DPM_summary: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-M04/DPM-evidence/summary.json
+replication1600_conditional_followups_selected_now: true
+replication1600_DPM_limit_selected: 100000
+replication1600_DPM_limit_launch: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-M04/DPM-limit100000-launch.json
+replication1600_DPM_limit_test: replication1600-dpm-limit-test.md
+replication1600_DPM_campaign_completed_updates: 2
+replication1600_DPM_limit_completed_updates: 1
+replication1600_DPM_limit_controller_pid: 36316
+replication1600_DPM_limit_controller_exited: true
+replication1600_DPM_limit_mass_accounting_verified: true
+replication1600_DPM_limit_summary: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-M04/DPM-limit100000-evidence/summary.json
+replication1600_DPM_limit1000000_launched: false
+
+replication_enthalpy_sweep:
+  status: ALL_FIVE_COMPLETE_EVIDENCE_VERIFIED_UNQUALIFIED
+  authority: Human explicitly selected other enthalpies on 13 October 2026 NZ
+  queue_kJ_kg: [1440, 1520, 1680, 1760]
+  carrier_updates_per_case: 1500
+  DPM_tracking_max_num_steps: 100000
+  incomplete_efficiency_assumption: ASSUMED_SEPARATED_BY_HUMAN_DIRECTION
+  campaign_spend_before: [24369, 25059]
+  allocated_carrier_updates: 6000
+  campaign_spend_after_no_retries: [30369, 31059]
+  contract: replication-enthalpy-sweep.md
+  job_spec: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication-enthalpy-M04/job-spec.json
+  launch: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication-enthalpy-M04/sweep-launch.json
+  native_work: C:/Users/qtra338/Documents/FluentRuns/Phase10/20261009/replication-enthalpy-M04-d04a64bb
+  controller_pid: 40060
+  current_enthalpy_kJ_kg: null
+  last_verified_carrier_iteration: 1500
+  requested_carrier_target: null
+  verified_new_carrier_updates: 6000
+  campaign_spend_at_last_saved_endpoint: [30369, 31059]
+  campaign_upper_bound_including_dispatched_block: 31059
+  native_smoke_verified: true
+  independent_file_access_without_Fluent: false
+  latest_status_check: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication-enthalpy-M04/latest-monitor-check.json
+  latest_status_checked_utc: '2026-10-13T01:24:37.563536+00:00'
+  current_controller_activity_verified: false
+  current_failure_established: false
+  access_block: null
+  required_manual_action: null
+  human_observation: Still solving or tracking
+  human_observation_recorded_utc: '2026-10-13T01:43:34.735248+00:00'
+  exact_current_case_and_iteration_verified: true
+  verified_completed_enthalpies_kJ_kg: [1440, 1520, 1600, 1680, 1760]
+  completed_sweep_carrier_updates: 6000
+  completed_sweep_DPM_updates: 4
+  campaign_spend_after_verified_cases: [30369, 31059]
+  H1680_report_format_repaired: true
+  H1680_repair_extra_carrier_updates: 0
+  H1680_repair_extra_DPM_updates: 0
+  old_controller_exited_independently_verified: true
+  results_record: replication-enthalpy-results.md
+  remaining_queue_kJ_kg: []
+  remaining_launch: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication-enthalpy-M04/remainder-launch.json
+  current_native_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication-enthalpy-M04/remaining-startup-verification.json
+  current_native_preparation_verified: true
+  latest_native_probe_status: PASS
+  H1760_native_smoke_verified: true
+  H1760_saved_iteration: 1500
+  H1760_requested_target: null
+  latest_verified_native_check_utc: '2026-10-13T02:57:27.850521+00:00'
+  terminal_verification: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication-enthalpy-M04/verified-series-terminal.json
+  current_controller_exited_verified: true
+  current_solver_idle_verified: true
+  all_selected_cases_processed: true
+  schedule_pause_status: UNVERIFIED_AUTOMATION_UPDATE_UNAVAILABLE
+  schedule_manual_action: Pause Phase10 automation if still enabled; native schedule state unavailable
+phase_solve_iterations_upper_bound: 32559
+tet_benchmark:
+  status: COMPLETE_EVIDENCE_VERIFIED_UNQUALIFIED
+  authority: Human selected the proposed matched1600 tet run on the current PC and Fluent
+  contract: replication1600-tet-benchmark.md
+  level: TET
+  cells: 2964593
+  enthalpy_kJ_kg: 1600
+  controller_pid: 8676
+  native_work: C:/Users/qtra338/Documents/FluentRuns/Phase10/20261009/replication1600-tet-b888ff6e
+  last_verified_saved_iteration: 1500
+  final_iteration: 1500
+  requested_target: null
+  final_target: 1500
+  selected_carrier_update_cap_including_smoke_and_retries: 1500
+  selected_DPM_updates: 1
+  tracking_max_num_steps: 100000
+  DPM_completed_updates: 1
+  campaign_spend_before: [30369, 31059]
+  campaign_spend_at_saved_checkpoint: [31869, 32559]
+  campaign_upper_bound_including_current_block: 32559
+  campaign_spend_after_no_retries: [31869, 32559]
+  fresh_Hybrid: true
+  verified_N0_pair_reused_without_reinitialization: true
+  preparation_repairs_solved_updates: 0
+  native_smoke_verified: true
+  native_pair_hashes_and_reopen_verified: true
+  settings_authority: Exact M04 Case4 carrier physics and nine spiral injections
+  code_review: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-tet-benchmark/code-review.json
+  job_spec: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-tet-benchmark/job-spec.json
+  launch: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-tet-benchmark/launch.json
+  startup: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-tet-benchmark/startup-verification.json
+  geometry_diagnostic: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-tet-benchmark/initial-volume-comparison.json
+  inferred_fluid_volume_m3: {TET: 27.961010388662253, M04: 22.79299721357656}
+  direct_geometry_audit_pending: true
+  mesh_only_cost_advantage_claim_allowed: false
+  numerical_qualification_claim_allowed: false
+  independent_access_without_Fluent: false
+  schedule_update_status: UNVERIFIED_AUTOMATION_UPDATE_UNAVAILABLE
+  controller_exited_verified: true
+  owned_solver_idle_verified: true
+  paired_checkpoints_verified: [0, 1, 1001, 1500]
+  final_pair_and_nine_DPM_reports_verified: true
+  retrieved_files_rehashed: 37
+  native_case_data_hashes_reverified: 10
+  campaign_DPM_updates: 7
+  carrier_seconds: 5170.331665900012
+  DPM_seconds: 423.6259961000178
+  assumed_capture_efficiency_percent: 99.88043106397538
+  tet_to_M04_carrier_time_ratio: 2.0513128805286684
+  tet_to_M04_DPM_time_ratio: 1.7742932298750258
+  terminal_verification: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-tet-benchmark/verified-terminal.json
+  native_terminal_publication_readback_verified: true
+  results_record: replication1600-tet-results.md
+  further_solve_selected: false
+  results_review:
+    documented_date_NZ: '2026-10-14'
+    human_request: Document results and the discussion of whether more tet enthalpy repeats are needed
+    current_M04_enthalpies_kJ_kg: [1440, 1520, 1600, 1680, 1760]
+    fresh_tet_enthalpies_kJ_kg: [1600]
+    historical_tet_only_enthalpies_kJ_kg: [1440, 1520, 1680, 1760]
+    runtime_claim_scope: SINGLE_ENTHALPY_FIXED_N1500_COST_OBSERVATION
+    time_to_convergence_established: false
+    across_enthalpy_tet_runtime_trend_established: false
+    recommendation: Keep single current tet benchmark; confirm direct fluid volumes and source geometry before more solves
+    additional_tet_runs_selected: false
+    campaign_remaining_updates: [2441, 3131]
+    guaranteed_additional_N1500_cases_within_cap: 1
+    four_additional_N1500_cases_within_cap: false
+    budget_increase_selected: false
+    machine_record: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-tet-benchmark/results-review.json
+  interpretation_owner: DESIGNATED_ASTRA_PLANNER
+  required_schedule_action: Pause Phase10 automation manually if still enabled; scheduling tool is unavailable

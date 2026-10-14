@@ -4,11 +4,19 @@
 | --- | --- |
 | Is the mesh family prepared? | Yes; seven meshes delivered and verified |
 | Are all quality metrics better than the old meshes? | No; gains and regressions depend on the metric and level |
-| Has a solver comparison been run? | M01–M06 failed; M07 human-skipped at N718 with paired endpoint recorded. Study paused and unqualified |
+| Has a solver comparison been run? | M01–M06 failed; M07 human-skipped at N718 with paired endpoint recorded. Baseline series unqualified; BF01 also failed at N3567 |
 | Why do the levels diverge? | [Failure diagnosis](divergence-diagnosis-20261011.md): all four accumulate liquid and fail phase balance before velocity/residual overflow; gravity treatment is a specific numerical suspect, not a proven unique cause |
 | Is mesh independence established? | No |
 | Was the previous study logged? | Yes; [Phase 2 seven-level reference](historical-reference.md) |
 | Does poly reproduce tet outputs faster? | Not tested; historical reference needs qualification and timing evidence |
+
+## Saved-field comparison after the failed series
+
+| Evidence | Bounded result |
+| --- | --- |
+| [Pre-divergence field comparison](predivergence-mesh-sensitivity.md) | N1000 M01–M06 and N2000 M02–M06; spatial vector differences persist and iteration changes are comparable or larger |
+| [Replication next-scope proposal](replication-next-scope.md) | One accepted carrier point, targeted refinement and paper/cost comparison; no new solve selected |
+| Solver impact | Zero new updates; exact ON N3005 state restored and idle |
 
 ## Mesh-metric record and family identity
 
@@ -54,9 +62,9 @@ Source: saved/reopened Fluent 2025 R2 audits; the grey series is each new mesh b
 | --- | --- |
 | [Divergence diagnosis](divergence-diagnosis-20261011.md) | Complete available M01–M04 residual transcripts and phase histories copied read-only; numerical overflow verified |
 | Shared liquid balance | Last diagnostic samples have 43–70% liquid flux deficit; no liquid drain or other removal exists in this setup |
-| Current baseline | Human skipped M07; the owned controller stopped at N718 and saved a paired endpoint. [Stop proof](../../../PyAnsys/output/phase10-single-inlet-mesh-convergence/M07-user-skip-verification-20261012.json). M01–M06 remain failed |
+| Current baseline | M01–M06 failed; M07 user-skipped at N718; paired endpoints retained. Baseline writer exited and endpoint hashes verified before BF01 |
 | M05 diagnosis snapshot | Copied transcript reaches N1643; plotted report sample N1630 has 85.71% liquid flux deficit; figures remain the preserved diagnosis snapshot |
-| BF01 follow-up | Human selected coarse M04 N3000–N4000 with implicit body force ON. Runner/deployer prepared and offline checked; human paused before native deployment. Zero ON updates |
+| BF01 follow-up | ON N3000 restart failed at N3567 with k AMG divergence/FPE; 567 new updates, last verified ON N3005 pair. Writer exited and Fluent idle. [Evidence and comparison](bf01-results.md); [cause/restart audit](bf01-diagnosis.md) |
 | Scientific limit | Common setup/numerical instability is the leading explanation; first unstable cell and a controlled contrast remain missing |
 
 ![Shared liquid accumulation](../../../PyAnsys/output/phase10-single-inlet-mesh-convergence/divergence-diagnosis-20261011/liquid-balance.png)
@@ -81,11 +89,46 @@ Native ten-iteration samples before the descriptive overflow cutoff; M05 is part
 | Preserved checkpoints | M01 N1000, M02 N4000, M03 N2000 and M04 N3000 retained; M05 original N5 pair hash-verified, then resumed to a saved/reopened N10 pair with exact common settings | [Recovery proof](../../../PyAnsys/output/phase10-single-inlet-mesh-convergence/saved-resume-verification-20261010.json); saved finite fields do not establish convergence |
 | Numerical failures | Native exceptions at M01 N1756, M02 N4488, M03 N2769, M04 N3911, M05 N4180 and M06 N4175; last full pairs retained | [M06 manifest and transcript review](../../../PyAnsys/output/phase10-single-inlet-mesh-convergence/vpn-restored-20261012/M06-failure-check.json); all six remain unqualified |
 | M03 failed partial pair | Old controller saved N2769 despite a native floating-point exception and finite sampled reports | Retained as failed evidence; use N2000 as the last verified full checkpoint; repaired controller now detects native exceptions before saving a new pair |
-| Remaining continuation | Original baseline queue stopped: M01–M06 failed; M07 user-skipped at N718 | No restart of M07 authorized; BF01 remains selected but human-paused |
+| Remaining continuation | None selected: BF01 terminal numerical failure; no unchanged numerical retry | Consequential interpretation awaits designated Astra review |
 | M04 preparation interruption | Earlier GUI Cancel interrupted replacement-case writing before any solve updates. User requested restart; interrupted folder archived after verifying no old worker and preserved checkpoint hashes | [Recovery proof](../../../PyAnsys/output/phase10-single-inlet-mesh-convergence/M04-interrupted-recovery-7d9b7eed.json); incomplete original replacement file retained as failure evidence |
 | Monitor connection | Port 60569 authenticated; native receipts and transcript stream retrieved. Bounded reader now checks live health/stream if a Scheme receipt times out during a long solve | [Latest check](../../../PyAnsys/output/phase10-single-inlet-mesh-convergence/latest-monitor-check.json); printed progress remains separate from saved checkpoints |
-| Budget | Failed M01–M06 spent 21279 updates; M07 stopped at N718. Interrupted M05 adds 305–995 lost updates: baseline spend 22302–22992 | BF01 has spent zero; its 1000-update cap would give campaign upper bound 23992, below 35000 |
+| Budget | Baseline spend 22302–22992 plus BF01 567 gives 22869–23559. BF01 unused allowance 433; no further solve selected | 35000 campaign cap retained; retries do not reset budgets |
 | Convergence-study limit | M01–M06 numerically failed; M07 is a skipped N718 partial run | No seven-level comparison, mesh independence or tet/poly speedup claim |
 | Batch preflight recovery | Waiting local client cancelled; API recovered; compact receipt and bounded reader passed live verification | [Recovery](../../../PyAnsys/output/phase10-single-inlet-mesh-convergence/batch-preflight-stall-20261009.json); native checkpoints and Fluent preserved |
 | Qualification / refinement outputs / wall resolution / timing | Not available | No endpoint qualification, independence, GCI or tet/poly speedup claim |
 | Codex monitor | New human-created `Phase 10` heartbeat verified ACTIVE at 30-minute intervals, attached to this chat; prompt matches exactly and there is one matching saved Phase 10 task | [Readback](../../../PyAnsys/output/phase10-single-inlet-mesh-convergence/monitor-active-readback-20261009.json); configuration verified, first scheduled execution not observed in this check; actual chat model unverified |
+
+## R1600 provisional carrier stage
+
+| Item | Verified result | Limit |
+| --- | --- | --- |
+| [Carrier results](replication1600-carrier-results.md) | N1500 completed; all four pairs rehashed/reopened; controller exited and Fluent idle | Carrier unqualified; DPM has not been tracked |
+| Final window | Liquid inventory +90.895%; mean absolute liquid/mixture flux errors 91.120/53.562%; N1500 continuity 0.23252 | No convergence, mesh independence or exact-replication claim |
+| Source gap | Exact nine spiral injection definitions preserved; original material/global controls unresolved | DPM and other enthalpies await source settings |
+| Budget | 1500 new updates; campaign spend 24369–25059 of 35000 | All retries count; no budget reset |
+
+| R1600 DPM observation | Evidence / limit |
+| --- | --- |
+| One-way Case 4 tracking complete | Nine exact injections on M04 N1500; zero new carrier updates; all particle mass accounted within printed precision |
+| Final fate mass flows | Escape 0.01775 kg/s; bottom trap 97.16 kg/s; incomplete 19.74 kg/s |
+| [Comparison and receipts](replication1600-dpm-results.md) | Historical escape 0.01655 kg/s; incomplete 3.907 kg/s; carrier remains unqualified and no validation/improvement claim follows |
+
+| R1600 maximum-step sensitivity | Verified observation |
+| --- | --- |
+| 100000-step update | Same N1500 carrier and 11079 parcels; zero new carrier updates; one extra DPM update |
+| Incomplete mass | 19.74 → 19.71 kg/s; only 0.152% reduction of unresolved mass |
+| Escaped mass | 0.01775 → 0.03812 kg/s; smallest injection only; observed escape depends on tracking cap |
+| [Elapsed time / limits](replication1600-dpm-limit-test.md) | Remaining incomplete mean time 9.592 → 101.9 s; persistent internal paths; exact location/cause remains unverified |
+
+## Selected full-flow enthalpy repeats
+
+| Item | Current selection |
+| --- | --- |
+| Human direction, 13 October 2026 NZ | Run M04 at 1440, 1520, 1680 and 1760 kJ/kg; incomplete particles assumed separated in efficiency |
+| Execution contract | [Enthalpy sweep](replication-enthalpy-sweep.md): fresh N1500 carrier and nine source injections per case, 100000 tracking steps |
+| State | All five selected enthalpies complete at N1500 plus DPM; native pairs, settings, reports and histories verified. Final writer exited and Fluent idle. [Results](replication-enthalpy-results.md) |
+
+| Selected enthalpy result | Current evidence |
+| --- | --- |
+| M04 1440, 1520 and 1680 | Completed N1500 and DPM. [Partial efficiency comparison](replication-enthalpy-results.md);1680 single-fate report parsing repaired without a repeated solve/track |
+| M04 1760 | Remaining case; replacement controller deployment in progress after original controller absence and pair verification |

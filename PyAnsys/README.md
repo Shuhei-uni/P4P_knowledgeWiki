@@ -10,6 +10,7 @@ The operating rule is simple: Fluent is a dependency-ordered state machine, and 
 2. Read the applicable focused skill under `../.agents/skills/`.
 3. Read [the current run supervision and recovery policy](knowledge/fluent-settings/native_run_and_autosave.md).
 4. Use the proven source module or script, then inspect critical live values and identity before changing anything.
+5. For historical Purnanto enthalpy/DPM replication, use the [current reference wrapper](docs/PURNANTO_ENTHALPY_DPM_REFERENCE.md), which links the preserved runbook and current source handoff.
 
 ## Canonical workflow
 

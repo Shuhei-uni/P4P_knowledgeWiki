@@ -52,8 +52,8 @@ launch_retry_status_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergenc
 solver_startup_coordinate_diagnostic: PyAnsys/output/phase10-single-inlet-mesh-convergence/iteration-start-diagnostic.json
 solver_failed_preparation_archive: PyAnsys/output/phase10-single-inlet-mesh-convergence/M01-counter-recovery.json
 current_account_mesh_folder: C:/Users/qtra338/P4P/experiments/phase 10
-recovered_original_case: C:/Users/qtra338/P4P/experiments/phase-01/wb/Separator_CFD_Punanto/Spiral
-  Inlet (Purnanto)_files/dp0/FFF-2/Fluent/4800-iterations-300412-1.cas.h5
+recovered_original_case: C:/Users/qtra338/P4P/experiments/phase-01/wb/Separator_CFD_Punanto/Spiral Inlet
+  (Purnanto)_files/dp0/FFF-2/Fluent/4800-iterations-300412-1.cas.h5
 current_account_historical_study_root: C:/Users/qtra338/P4P/experiments/phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/andy-07a-mesh-study/split_inlet_mesh_convergence_20260801
 current_account_discovery_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/account-discovery-paused-52660.json
 previous_account_checkpoint_folder: C:/Users/syok443/Documents/FluentRuns/Phase10/20261008
@@ -76,4 +76,48 @@ previous_windows_working_folder: C:/Users/qtra338/Documents/FluentRuns/Phase10/2
 post_series_diagnostic_spec: PyAnsys/output/phase10-single-inlet-mesh-convergence/bodyforce-BF01-job-spec.json
 post_series_diagnostic_local_root_reserved: PyAnsys/output/phase10-single-inlet-mesh-convergence/bodyforce-BF01
 post_series_diagnostic_native_root_pattern: C:/Users/qtra338/Documents/FluentRuns/Phase10/20261009/bodyforce-BF01-<run-id>
-post_series_diagnostic_native_root_created: false
+post_series_diagnostic_native_root_created: true
+post_series_diagnostic_native_root: C:/Users/qtra338/Documents/FluentRuns/Phase10/20261009/bodyforce-BF01-c17183e6
+post_series_diagnostic_runner: PyAnsys/scripts/setup/run_phase10_bodyforce_bf01.py
+post_series_diagnostic_deployer: PyAnsys/scripts/setup/deploy_phase10_bf01.py
+post_series_diagnostic_launch: PyAnsys/output/phase10-single-inlet-mesh-convergence/bodyforce-BF01-launch.json
+post_series_diagnostic_start_verification: PyAnsys/output/phase10-single-inlet-mesh-convergence/bodyforce-BF01-start-verification.json
+predivergence_field_analysis_root: PyAnsys/output/phase10-single-inlet-mesh-convergence/predivergence-mesh-sensitivity
+predivergence_field_extractor: PyAnsys/scripts/inspection/extract_phase10_predivergence_fields.py
+predivergence_field_analysis: PyAnsys/scripts/analysis/analyze_phase10_predivergence_fields.py
+replication1600_spiral_reference: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-M04/spiral-reference
+replication1600_carrier_runner: PyAnsys/scripts/setup/run_phase10_replication1600_carrier.py
+replication1600_carrier_launch: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-M04/carrier-launch.json
+replication1600_carrier_native_root: C:/Users/qtra338/Documents/FluentRuns/Phase10/20261009/replication1600-M04-9717fb9b
+replication1600_settings_audit: Project/experiments/phase-10-single-inlet-mesh-convergence/replication1600-settings-audit.md
+replication1600_DPM_preparation_runner: PyAnsys/scripts/setup/prepare_phase10_replication1600_dpm.py
+replication1600_DPM_preparation_receipt: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-M04/spiral-recovered-parent/DPM-preparation-receipt.json
+replication1600_DPM_native_runner: PyAnsys/scripts/setup/run_phase10_replication1600_dpm.py
+replication1600_DPM_deployer: PyAnsys/scripts/setup/deploy_phase10_replication1600_dpm.py
+replication1600_DPM_launch: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-M04/DPM-launch.json
+replication1600_DPM_results: Project/experiments/phase-10-single-inlet-mesh-convergence/replication1600-dpm-results.md
+replication1600_DPM_evidence: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-M04/DPM-evidence
+replication1600_DPM_limit_test: Project/experiments/phase-10-single-inlet-mesh-convergence/replication1600-dpm-limit-test.md
+replication1600_DPM_limit100000_evidence: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-M04/DPM-limit100000-evidence
+
+replication_enthalpy_contract: Project/experiments/phase-10-single-inlet-mesh-convergence/replication-enthalpy-sweep.md
+replication_enthalpy_runner: PyAnsys/scripts/setup/run_phase10_replication_enthalpies.py
+replication_enthalpy_deployer: PyAnsys/scripts/setup/deploy_phase10_replication_enthalpies.py
+replication_enthalpy_launch: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication-enthalpy-M04/sweep-launch.json
+replication_enthalpy_native_root: C:/Users/qtra338/Documents/FluentRuns/Phase10/20261009/replication-enthalpy-M04-d04a64bb
+replication_enthalpy_fetcher: PyAnsys/scripts/inspection/fetch_phase10_replication_enthalpies.py
+replication_enthalpy_analyzer: PyAnsys/scripts/analysis/analyze_phase10_replication_enthalpies.py
+replication_enthalpy_original_native_root: C:/Users/qtra338/Documents/FluentRuns/Phase10/20261009/replication-enthalpy-M04-86f85b3d
+replication_enthalpy_remaining_launch: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication-enthalpy-M04/remainder-launch.json
+replication_enthalpy_results: Project/experiments/phase-10-single-inlet-mesh-convergence/replication-enthalpy-results.md
+tet_benchmark_contract: Project/experiments/phase-10-single-inlet-mesh-convergence/replication1600-tet-benchmark.md
+tet_benchmark_deployer: PyAnsys/scripts/setup/deploy_phase10_replication_tet_benchmark.py
+tet_benchmark_runner: PyAnsys/scripts/setup/run_phase10_replication_tet_benchmark.py
+tet_benchmark_evidence: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-tet-benchmark
+tet_benchmark_launch: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-tet-benchmark/launch.json
+tet_benchmark_native_root: C:/Users/qtra338/Documents/FluentRuns/Phase10/20261009/replication1600-tet-b888ff6e
+tet_benchmark_analyzer: PyAnsys/scripts/analysis/analyze_phase10_replication_tet_benchmark.py
+tet_benchmark_fetch_command: PyAnsys/scripts/inspection/fetch_phase10_replication_enthalpies.py --tet-benchmark
+tet_benchmark_startup: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-tet-benchmark/startup-verification.json
+tet_benchmark_terminal: PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-tet-benchmark/verified-terminal.json
+tet_benchmark_results: Project/experiments/phase-10-single-inlet-mesh-convergence/replication1600-tet-results.md

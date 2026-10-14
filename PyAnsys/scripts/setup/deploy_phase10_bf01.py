@@ -12,6 +12,7 @@ import os
 from pathlib import Path
 import sys
 import uuid
+import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT / 'src'), str(ROOT / 'scripts/meshing')]
@@ -50,8 +51,11 @@ def main():
     out = passive.OUT
     cfg = json.loads((out / 'run-config.json').read_text())
     spec = json.loads((out / 'bodyforce-BF01-job-spec.json').read_text())
+    state = yaml.safe_load((ROOT.parent / 'Project/experiments/phase-10-single-inlet-mesh-convergence/phase-state.yaml').read_text())
+    assert not state['paused_by_user'] and not spec.get('paused_by_user'), 'Human pause blocks deployment'
     assert spec['dispatch'].get('human_skipped_M07'), 'User skip must be recorded first'
     assert not spec['deployed']
+    assert not (out/'bodyforce-BF01-launch.json').exists(), 'Existing deployment requires reconciliation'
     b = Bridge(cfg)
     try:
         batch = passive.read_receipt(b.stub, cfg['work']+'/batch-manifest.json', b.metadata)
@@ -60,10 +64,23 @@ def main():
         assert level['status']=='STOPPED_REQUIRES_REVIEW'
         assert level['error']=='Native run stopped before the requested horizon'
         assert level['completed_iterations']==level['checkpoints'][-1]['iteration']
+        # A stale terminal manifest is insufficient: require a responsive live
+        # report at the stopped endpoint before any OS command through Fluent.
+        from ansys.api.fluent.v0 import settings_pb2, settings_pb2_grpc
+        request = settings_pb2.ExecuteCommandRequest()
+        request.path_info.root = 'fluent'
+        request.path_info.path = 'solution/report-definitions'
+        request.command = 'compute'
+        request.args.value_map.m['report-defs'].value_list.lst.add().string = 'p10-iteration'
+        response = settings_pb2_grpc.SettingsStub(b.channel).ExecuteCommand(
+            request, metadata=b.metadata, timeout=15)
+        value = response.reply.value_list.lst[0].value_map.m['p10-iteration'].value_list.lst[0].real
+        assert value == level['completed_iterations'], 'Live solver differs from stopped baseline'
         rid = uuid.uuid4().hex[:8]
         work = 'C:/Users/qtra338/Documents/FluentRuns/Phase10/20261009/bodyforce-BF01-'+rid
         preflight_script = cfg['work']+'/BF01-preflight-'+rid+'.ps1'
         preflight_path = cfg['work']+'/BF01-preflight-'+rid+'.json'
+        runtime_path = cfg['work']+'/BF01-runtime-'+rid+'.json'
         parent = spec['parent']['pair']
         saved = level['checkpoints'][-1]['pair']
         code = "$ErrorActionPreference='Stop'\n"
@@ -76,14 +93,22 @@ def main():
                 code += 'if($h -ne '+psquote(pair[kind+'_sha256'])+'){throw "Checkpoint hash mismatch"}\n'
                 code += '$files+=@{label='+psquote(label)+';kind='+psquote(kind)+';sha256=$h}\n'
         code += 'if(-not (Test-Path -LiteralPath '+psquote(cfg['host_python'])+')){throw "Host Python missing"}\n'
-        code += '@{old_controller_absent=($null -eq $old);workers=@($workers | Select-Object ProcessId,Name);files=$files;baseline_terminal=$true;M07_saved_iteration='+str(level['completed_iterations'])+'} | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath '+psquote(preflight_path)+' -Encoding Ascii\n'
+        runtime_code = ('import sys,json,h5py,numpy,ansys.fluent.core as pf; '
+                        'import ansys.fluent.core._grpc_services,ansys.api.fluent.v0; '
+                        'print(json.dumps(dict(executable=sys.executable,python=sys.version,'
+                        'pyfluent=pf.__version__,h5py=h5py.__version__,numpy=numpy.__version__)))')
+        code += '& '+psquote(cfg['host_python'])+' -c '+psquote(runtime_code)+' | Set-Content -LiteralPath '+psquote(runtime_path)+' -Encoding Ascii\n'
+        code += 'if($LASTEXITCODE -ne 0){throw "Host runtime imports failed"}\n'
+        code += '$runtime=Get-Content -LiteralPath '+psquote(runtime_path)+' -Raw | ConvertFrom-Json\n'
+        code += '@{old_controller_absent=($null -eq $old);workers=@($workers | Select-Object ProcessId,Name);files=$files;runtime=$runtime;baseline_terminal=$true;live_stopped_iteration='+str(value)+';M07_saved_iteration='+str(level['completed_iterations'])+'} | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath '+psquote(preflight_path)+' -Encoding Ascii\n'
         code += 'if($old -or $workers.Count){throw "Existing writer remains"}\n'
         code += 'New-Item -ItemType Directory -Path '+psquote(work) +' -ErrorAction Stop | Out-Null\n'
         write_ascii_text_new(b, preflight_script, code)
         b.shell_file(preflight_script)
         proof = json.loads(read_text(b, preflight_path))
-        (out/'BF01-preflight-'+rid+'.json').write_text(json.dumps(proof, indent=2)+'\n')
+        (out/('BF01-preflight-'+rid+'.json')).write_text(json.dumps(proof, indent=2)+'\n')
         assert proof['old_controller_absent'] and not proof['workers']
+        assert proof['runtime']['pyfluent'] == '0.42.0'
         # Reuse the reviewed and unchanged core/runtime route from the old writer.
         old = json.loads((out/'current-launch.json').read_text())
         wrapper = read_text(b, old['script'])
