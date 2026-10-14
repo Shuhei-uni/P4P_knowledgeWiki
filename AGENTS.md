@@ -12,34 +12,7 @@ Route truth to one owner:
 For project science start at `Project/index.md`, then read only the active
 phase material needed for the current decision.
 
-## File management
-
-After pulling changes, inspect `git status --short` and the repository root.
-Check newly added paths against the owner table before creating more files.
-
-- Store phase-specific proposals, observations, technical notes and scientific
-  figures under `Project/experiments/<phase>/`. Keep shared model guidance and
-  cross-phase comparisons in the shared Project folders.
-- Store Shuhei's report in `Project/Final research report/Shuhei Report/`,
-  Andy's report in `Project/Final research report/andy-draft/`, and poster
-  sections and assets in `Project/Poster/`. Keep shared report guidance beside
-  the two report folders. Store shared meeting material in `Project/meetings/`
-  and its retained exports/review images in `Project/meetings/output/`.
-- Put executable utilities in the appropriate `PyAnsys/scripts/` category,
-  reusable Python modules in `PyAnsys/src/`, implementation documentation in
-  `PyAnsys/docs/`, and historical implementation notes in `PyAnsys/docs/historical/`.
-  Machine-generated evidence stays under `PyAnsys/output/` or its existing
-  recorded machine owner.
-- Use an operating-system temporary directory for disposable scratch files.
-  Retain useful review images beside their report or meeting output. The root
-  contains the owner directories, repository configuration and README support
-  assets; create task output inside its owner instead of a new root work folder.
-- When moving files, update links, imports, generator destinations, tests and
-  agent references. Remove empty source folders. Preserve every `raw/` directory
-  and follow the existing active-controller safety rules.
-- Before committing, review `git diff --name-status` and the staged diff.
-  Include both sides of each move and only changes authorized for that commit.
-  Check affected links and the smallest relevant runtime/test path.
+When creating, moving, deleting or committing files, follow [FILE-MANAGEMENT.md](FILE-MANAGEMENT.md).
 
 ## Workflow map
 
