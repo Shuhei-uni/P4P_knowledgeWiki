@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 import sys
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 from pyansys_fluent.execution_contract import probe_runtime, verify_drain_probe
 from pyansys_fluent.workflow_evidence import campaign_status, json_pointer, markdown_section, read_json, tail_file
 

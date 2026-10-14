@@ -22,3 +22,7 @@
 | — | [Speaker notes and interpretation](meeting-speaker-notes.md) provide a page-by-page narrative and likely supervisor questions |
 
 </details>
+
+| Review asset | Location |
+| --- | --- |
+| Retained PDF page previews and contact sheets | [Meeting review images](../../meetings/output/phase07b-review/) |

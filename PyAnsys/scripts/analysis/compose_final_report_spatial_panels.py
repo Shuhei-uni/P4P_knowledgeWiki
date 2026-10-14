@@ -23,7 +23,7 @@ from PIL import Image
 
 
 ROOT = Path(__file__).resolve().parents[3]
-ASSETS = ROOT / "Project/meetings/Poster/poster-sections/poster mesh assets"
+ASSETS = ROOT / "Project/Poster/poster-sections/poster mesh assets"
 REPORT = ROOT / "Project/Final research report/Shuhei Report/figures"
 INLET_CROP = (210, 100, 2190, 1700)
 CENTRE_CROP = (540, 75, 1260, 2320)
@@ -162,7 +162,7 @@ def save(fig: plt.Figure, stem: str, panels: list[Panel], caption_basis: list[Pa
 def main() -> None:
     REPORT.mkdir(parents=True, exist_ok=True)
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 10})
-    comparison = ROOT / "Project/meetings/Poster/poster-sections/mesh-and-volume-fraction-comparison.md"
+    comparison = ROOT / "Project/Poster/poster-sections/mesh-and-volume-fraction-comparison.md"
     inlet_results = ROOT / "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline"
     mesh_panels = [
         Panel(ASSETS / "08b-tetrahedral-mesh-inlet-section.png", INLET_CROP,

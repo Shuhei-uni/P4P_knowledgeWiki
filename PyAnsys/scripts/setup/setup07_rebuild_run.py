@@ -4,7 +4,7 @@
 This compatibility entry point deliberately does not initialize, iterate, or
 write client-side checkpoints. After the case is written, start the calculation
 from Fluent with native autosave configured; see
-``knowledge/fluent-settings/native_run_and_autosave.md``.
+``docs/native_run_and_autosave.md``.
 """
 
 from __future__ import annotations

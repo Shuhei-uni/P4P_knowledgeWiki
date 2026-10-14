@@ -316,7 +316,7 @@ At iteration 10,000, the historical tetrahedral field showed thin wall-side liqu
 
 *Figure 6. Mesh sections (a–b) and bulk-liquid fraction (c–d) at each geometry's inlet midpoint. Left: historical split-feed tetrahedral case, 7,601,261 cells. Right: mixed-feed SIMPLE reconstruction, 60,964 cells. Both liquid fields are saved at iteration 10,000 on a common 0–1 scale. Each column uses one case mesh.*
 
-<!-- Evidence: [native mesh and liquid-field comparison, source pairs and export manifests](../../../meetings/Poster/poster-sections/mesh-and-volume-fraction-comparison.md); solved 60k topology and wall-resolution evidence in Appendix A.10. The separate 342k mesh illustration used elsewhere is not substituted for the 60k contour's mesh here. -->
+<!-- Evidence: [native mesh and liquid-field comparison, source pairs and export manifests](../../../Poster/poster-sections/mesh-and-volume-fraction-comparison.md); solved 60k topology and wall-resolution evidence in Appendix A.10. The separate 342k mesh illustration used elsewhere is not substituted for the 60k contour's mesh here. -->
 
 ### 4.2. Two-phase inlet and wall-side liquid placement
 
@@ -335,7 +335,7 @@ Both cases used the same 60,964-cell mesh, total phase feed, Coupled settings, i
 | Bulk-liquid inventory (kg) | 1262.6 | 1734.5 |
 | Outward steam-outlet liquid / liquid feed (%) | 99.671 | 99.404 |
 
-<!-- Evidence: [matched inlet setup and numerical basis](../../../experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/baseline-lineage-audit.md), [mixed-feed results](../../../experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f1-one-inlet/results.md), [split-feed inventory and spatial findings](../../../experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f2-split-inlet/results.md), and [native inlet-plane exports](../../../meetings/Poster/poster-sections/mesh-and-volume-fraction-comparison.md). Percentage inventory change is calculated from the rounded published endpoint values. -->
+<!-- Evidence: [matched inlet setup and numerical basis](../../../experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/baseline-lineage-audit.md), [mixed-feed results](../../../experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f1-one-inlet/results.md), [split-feed inventory and spatial findings](../../../experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f2-split-inlet/results.md), and [native inlet-plane exports](../../../Poster/poster-sections/mesh-and-volume-fraction-comparison.md). Percentage inventory change is calculated from the rounded published endpoint values. -->
 
 ### 4.3. Liquid accumulation and the need for collection
 

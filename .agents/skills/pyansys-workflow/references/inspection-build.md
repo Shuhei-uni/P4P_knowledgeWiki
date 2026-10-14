@@ -65,7 +65,7 @@ For comparisons, keep object names, hooks and flags exact. Apply numeric
 tolerances only at declared paths, and normalize Windows paths only for declared
 file fields using the verified server working directory. Record all accepted
 normalizations. `pyansys_fluent.execution_contract` supplies offline checks;
-`PyAnsys/tools/workflow_evidence.py drain-proof` checks an extracted probe receipt.
+`PyAnsys/scripts/inspection/workflow_evidence.py drain-proof` checks an extracted probe receipt.
 These checks do not establish steady film or whole-separator mass closure.
 
 Return a compact build receipt: parent, changes, readback, artifact paths,

@@ -5,7 +5,7 @@
   "generator_sha256": "70818a868ad19258cb3c6e8d4f745530977d8fa5585334c1ba1e3ba5627f3583",
   "panels": [
     {
-      "path": "Project/meetings/Poster/poster-sections/poster mesh assets/F1-26.81-N10000-inlet-liquid-volume-fraction-range-0-1.png",
+      "path": "Project/Poster/poster-sections/poster mesh assets/F1-26.81-N10000-inlet-liquid-volume-fraction-range-0-1.png",
       "sha256": "d90ddce9f109832dcf50f92003f93c52ace89da27540890d4e01fd40748751de",
       "crop_pixels_left_top_right_bottom": [
         210,
@@ -20,7 +20,7 @@
       "saved_iteration": 10000
     },
     {
-      "path": "Project/meetings/Poster/poster-sections/poster mesh assets/F2-26.81-N10000-inlet-liquid-volume-fraction-range-0-1.png",
+      "path": "Project/Poster/poster-sections/poster mesh assets/F2-26.81-N10000-inlet-liquid-volume-fraction-range-0-1.png",
       "sha256": "cfc79574dcae041954828092e4d720ff161dbd6d3851ea052e92a794dceb60f3",
       "crop_pixels_left_top_right_bottom": [
         210,
@@ -35,7 +35,7 @@
       "saved_iteration": 10000
     },
     {
-      "path": "Project/meetings/Poster/poster-sections/poster mesh assets/F1-26.81-N10000-side-liquid-volume-fraction.png",
+      "path": "Project/Poster/poster-sections/poster mesh assets/F1-26.81-N10000-side-liquid-volume-fraction.png",
       "sha256": "3f06a37c690d0a04f78846531298a729eb65af6c63f075651905defa14b99849",
       "crop_pixels_left_top_right_bottom": [
         540,
@@ -74,21 +74,21 @@
     "allowed_RGB_channel_difference": 3,
     "checks": [
       {
-        "source": "Project/meetings/Poster/poster-sections/poster mesh assets/F1-26.81-N10000-inlet-liquid-volume-fraction-range-0-1.png",
+        "source": "Project/Poster/poster-sections/poster mesh assets/F1-26.81-N10000-inlet-liquid-volume-fraction-range-0-1.png",
         "maximum_sampled_RGB_channel_difference": 0
       },
       {
-        "source": "Project/meetings/Poster/poster-sections/poster mesh assets/F2-26.81-N10000-inlet-liquid-volume-fraction-range-0-1.png",
+        "source": "Project/Poster/poster-sections/poster mesh assets/F2-26.81-N10000-inlet-liquid-volume-fraction-range-0-1.png",
         "maximum_sampled_RGB_channel_difference": 0
       },
       {
-        "source": "Project/meetings/Poster/poster-sections/poster mesh assets/F1-26.81-N10000-side-liquid-volume-fraction.png",
+        "source": "Project/Poster/poster-sections/poster mesh assets/F1-26.81-N10000-side-liquid-volume-fraction.png",
         "maximum_sampled_RGB_channel_difference": 1
       }
     ]
   },
   "legend": {
-    "source": "Project/meetings/Poster/poster-sections/poster mesh assets/F1-26.81-N10000-inlet-liquid-volume-fraction-range-0-1.png",
+    "source": "Project/Poster/poster-sections/poster mesh assets/F1-26.81-N10000-inlet-liquid-volume-fraction-range-0-1.png",
     "source_sha256": "d90ddce9f109832dcf50f92003f93c52ace89da27540890d4e01fd40748751de",
     "crop_pixels_left_top_right_bottom": [
       60,
@@ -100,7 +100,7 @@
   },
   "range_and_case_evidence": [
     {
-      "path": "Project/meetings/Poster/poster-sections/mesh-and-volume-fraction-comparison.md",
+      "path": "Project/Poster/poster-sections/mesh-and-volume-fraction-comparison.md",
       "sha256": "98bae8d9d40a335e110793ce6b504a5e11b9f05d3ec44e637f940599aaa4fd19"
     },
     {

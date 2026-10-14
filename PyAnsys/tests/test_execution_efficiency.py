@@ -157,7 +157,7 @@ class Evidence(unittest.TestCase):
     def test_cli_returns_valid_small_json_when_selection_exceeds_budget(self):
         with tempfile.TemporaryDirectory() as tmp:
             p = Path(tmp) / "large.json"; p.write_text(json.dumps({"large": "x" * 10000}))
-            result = subprocess.run([sys.executable, str(ROOT / "PyAnsys/tools/workflow_evidence.py"),
+            result = subprocess.run([sys.executable, str(ROOT / "PyAnsys/scripts/inspection/workflow_evidence.py"),
                                      "--max-chars", "300", "json", str(p), "--pointer", "/large"],
                                     capture_output=True, text=True, check=False)
             self.assertEqual(result.returncode, 2)

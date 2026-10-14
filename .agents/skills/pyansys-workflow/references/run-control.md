@@ -41,7 +41,7 @@ a stopped solver. Wake the agent on a new failure/stall, checkpoint decision,
 completion, or explicit status request; routine progress stays in the watcher.
 Deduplicate repeated events and bound health checks even while a failure persists.
 
-`python3 PyAnsys/tools/workflow_evidence.py status <output-root>` reads local
+`python3 PyAnsys/scripts/inspection/workflow_evidence.py status <output-root>` reads local
 receipts without importing a controller or connecting to Fluent. Add
 `--controller-name <runner-filename>` to verify the recorded local PID. Its
 observed stream position is separate from the saved/verified endpoint.

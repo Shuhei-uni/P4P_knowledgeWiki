@@ -102,7 +102,7 @@ scripts/list_models.py
 scripts/inspection/export_residuals.py
 scripts/inspection/monitor_native_run.py
 scripts/export_report_definitions.py
-knowledge/fluent-settings/native_run_and_autosave.md
+docs/native_run_and_autosave.md
 ```
 
 ## Notes

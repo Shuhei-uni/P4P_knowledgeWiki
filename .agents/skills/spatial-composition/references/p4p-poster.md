@@ -6,12 +6,12 @@ poster dimensions or the approved palette.
 
 ## Locate the current owners
 
-Start with the user-selected artifact and inspect the relevant files under
-`Project/meetings/Poster/`. Existing entry points include:
+Start with the user-selected artifact under `Project/Poster/`.
+The editable poster is the PowerPoint file in that folder. Supporting section
+text and mesh figures are under `Project/Poster/poster-sections/`.
 
-- [Poster design definition](../../../../Project/meetings/Poster/P4P_POSTER_DESIGN.md): visual decisions and earlier constraints.
-- [Poster findings plan](../../../../Project/meetings/Poster/P4P_POSTER_FINDINGS_PLAN.md): content framing; consult only when it affects placement or required content.
-- [Existing HTML draft](../../../../Project/meetings/Poster/P4P_POSTER_DRAFT.html) and [section drafts](../../../../Project/meetings/Poster/poster-sections/README.md): current construction and asset routes.
+- [Mesh and liquid-field comparison](../../../../Project/Poster/poster-sections/mesh-and-volume-fraction-comparison.md): supporting evidence and its claim limits.
+- [Poster mesh assets](<../../../../Project/Poster/poster-sections/poster mesh assets/>): existing field images for the section comparison.
 
 Read the latest explicit brief before applying an old design rule. The earlier
 design definition describes a flat, quiet treatment. The later visual-redesign

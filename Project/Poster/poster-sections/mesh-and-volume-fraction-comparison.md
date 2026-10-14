@@ -50,15 +50,15 @@ The existing vertical centre-cut figures use the same 0–1 colour range and N10
 
 F0 shows broad liquid-rich regions along the outer walls. F1 has narrower wall enrichment and a liquid-rich lower region. The 08b centre cut is mostly at low liquid fraction, with thin wall enrichment. These are observations from one saved state; the inlet, mesh, and numerical-package differences prevent attributing the changes to mesh alone.
 
-Sources: [08b field-export manifest](../../../PyAnsys/output/08b-mesh-20261005/field-export-manifest.json) and [Phase 8 native-view export receipt](../../../PyAnsys/output/phase8-storyline-20260930/export-receipt.json). The F0 side-view source retains its historical filename `F1-26.81-simple-n10000-liquid.png` in the [F0 results](../../experiments/phase-08-storyline-reconstruction/f0-simple/results.md); the Coupled view is recorded in the [F1 results](../../experiments/phase-08-storyline-reconstruction/f1-one-inlet/results.md).
+Sources: [08b field-export manifest](../../PyAnsys/output/08b-mesh-20261005/field-export-manifest.json) and [Phase 8 native-view export receipt](../../PyAnsys/output/phase8-storyline-20260930/export-receipt.json). The F0 side-view source retains its historical filename `F1-26.81-simple-n10000-liquid.png` in the [F0 results](../../meetings/experiments/phase-08-storyline-reconstruction/f0-simple/results.md); the Coupled view is recorded in the [F1 results](../../meetings/experiments/phase-08-storyline-reconstruction/f1-one-inlet/results.md).
 
 ## Sources
 
 The mesh and top-down views are native Fluent exports from Server 3. Source pairs, camera settings, colour ranges, and figure hashes are recorded in these export manifests:
 
-- [08b-mesh-20261005](<../../../PyAnsys/output/08b-mesh-20261005/export-manifest.json>)
-- [mesh60k-inlet-20261005](<../../../PyAnsys/output/mesh60k-inlet-20261005/export-manifest.json>)
-- [mesh342k-inlet-20261005](<../../../PyAnsys/output/mesh342k-inlet-20261005/export-manifest.json>)
-- [08b-inlet-vof-20261005](<../../../PyAnsys/output/08b-inlet-vof-20261005/export-manifest.json>)
-- [f0-inlet-vof-20261005](<../../../PyAnsys/output/f0-inlet-vof-20261005/export-manifest.json>)
-- [f124-inlet-vof-20261005](<../../../PyAnsys/output/f124-inlet-vof-20261005/export-manifest.json>)
+- [08b-mesh-20261005](<../../PyAnsys/output/08b-mesh-20261005/export-manifest.json>)
+- [mesh60k-inlet-20261005](<../../PyAnsys/output/mesh60k-inlet-20261005/export-manifest.json>)
+- [mesh342k-inlet-20261005](<../../PyAnsys/output/mesh342k-inlet-20261005/export-manifest.json>)
+- [08b-inlet-vof-20261005](<../../PyAnsys/output/08b-inlet-vof-20261005/export-manifest.json>)
+- [f0-inlet-vof-20261005](<../../PyAnsys/output/f0-inlet-vof-20261005/export-manifest.json>)
+- [f124-inlet-vof-20261005](<../../PyAnsys/output/f124-inlet-vof-20261005/export-manifest.json>)

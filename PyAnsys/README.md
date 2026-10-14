@@ -8,7 +8,7 @@ The operating rule is simple: Fluent is a dependency-ordered state machine, and 
 
 1. Read the selected Project setup and results packet.
 2. Read the applicable focused skill under `../.agents/skills/`.
-3. Read [the current run supervision and recovery policy](knowledge/fluent-settings/native_run_and_autosave.md).
+3. Read [the current run supervision and recovery policy](docs/native_run_and_autosave.md).
 4. Use the proven source module or script, then inspect critical live values and identity before changing anything.
 5. For historical Purnanto enthalpy/DPM replication, use the [current reference wrapper](docs/PURNANTO_ENTHALPY_DPM_REFERENCE.md), which links the preserved runbook and current source handoff.
 
@@ -111,7 +111,7 @@ The generated job manifest is execution evidence only. Canonical scientific path
 - `scripts/setup/` — thin experiment-specific setup and Python/PyFluent runner orchestration.
 - `scripts/orchestration/` — background hypothesis execution and event-driven Codex handoff.
 - `server-profiles/` — non-secret per-server remote directory knowledge.
-- `knowledge/fluent-settings/native_run_and_autosave.md` — current execution, autosave, recovery, verification, and handoff policy.
+- `docs/native_run_and_autosave.md` — current execution, autosave, recovery, verification, and handoff policy.
 - `cases/actual_setup_archives/` — small unique live-case exports retained for exact setup reconciliation; Project records own their interpretation.
 - `output/` — generated extracts and diagnostics, never the scientific authority.
 

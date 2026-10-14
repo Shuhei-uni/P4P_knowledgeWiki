@@ -35,11 +35,11 @@ reads local process identities. It never connects to Fluent or installs the patc
 ## Use the evidence tool
 
 ```sh
-python3 PyAnsys/tools/workflow_evidence.py status PyAnsys/output/phase9-mesh-convergence/20261007 --controller-name run_phase9_mesh_startup.py
-python3 PyAnsys/tools/workflow_evidence.py json path/to/receipt.json --pointer /status --pointer /verified_native_end
-python3 PyAnsys/tools/workflow_evidence.py section path/to/setup.md --heading 'Run schedule'
-python3 PyAnsys/tools/workflow_evidence.py runtime --python PyAnsys/.venv/bin/python --module numpy --module h5py
-python3 PyAnsys/tools/workflow_evidence.py drain-proof path/to/probe.json --setup-identity VERIFIED_SETUP_ID --frozen-bulk
+python3 PyAnsys/scripts/inspection/workflow_evidence.py status PyAnsys/output/phase9-mesh-convergence/20261007 --controller-name run_phase9_mesh_startup.py
+python3 PyAnsys/scripts/inspection/workflow_evidence.py json path/to/receipt.json --pointer /status --pointer /verified_native_end
+python3 PyAnsys/scripts/inspection/workflow_evidence.py section path/to/setup.md --heading 'Run schedule'
+python3 PyAnsys/scripts/inspection/workflow_evidence.py runtime --python PyAnsys/.venv/bin/python --module numpy --module h5py
+python3 PyAnsys/scripts/inspection/workflow_evidence.py drain-proof path/to/probe.json --setup-identity VERIFIED_SETUP_ID --frozen-bulk
 ```
 
 `runtime` checks the computer where it executes. A Mac receipt does not qualify
