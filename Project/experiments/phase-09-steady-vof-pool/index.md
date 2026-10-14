@@ -18,3 +18,10 @@ Phase 7b remains closed. Shuhei's work and sessions remain separate.
 | Later drainage and hydrostatic-startup diagnostics | [Diagnostic index](follow-on-diagnostics/index.md); separate original contracts and closures |
 | Historical resolved brine-outlet studies | [Evidence and provenance](historical-andy-studies/resolved-brine-outlet.md); includes transient VOF, distinct from the steady Phase 9 experiment |
 | Grouping limit | Storage by topic does not reopen the closed phase or change historical case identity |
+
+## Proposal records
+
+| Record | Location |
+| --- | --- |
+| Selected phase and follow-on planning summary | [Next phase proposal](proposals/next-phase-proposal.md) |
+| Drainage-boundary diagnostic and proposed separator follow-on | [Drainage-boundary proposal](proposals/drainage-boundary-next-phase-proposal.md) |

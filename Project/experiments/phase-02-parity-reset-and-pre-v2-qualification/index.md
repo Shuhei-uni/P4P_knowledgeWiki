@@ -31,3 +31,9 @@
 | Item | Remaining uncertainty |
 | --- | --- |
 | purnantov2-08 smoke record | is retained because its historical notes report 10- and 500-iteration Fluent diagnostics, but its relationship to the later parity lineage is limited and should not be treated as a production case |
+
+## Supporting records
+
+| Record | Location |
+| --- | --- |
+| 01 08b 08c inlet loading | [01-08b-08c-inlet-loading.md](observations/01-08b-08c-inlet-loading.md) |

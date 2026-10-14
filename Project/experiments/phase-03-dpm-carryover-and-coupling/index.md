@@ -36,3 +36,10 @@
 | Historical related study | Record and boundary |
 | --- | --- |
 | Andy’s enthalpy/DPM replication | [Results and provenance](historical-andy-studies/enthalpy-dpm-replication.md); distinct historical parents and case IDs |
+
+## Supporting records
+
+| Record | Location |
+| --- | --- |
+| 02 09a 09b dpm dispersion | [02-09a-09b-dpm-dispersion.md](observations/02-09a-09b-dpm-dispersion.md) |
+| 03 08b 09c global dpm interaction | [03-08b-09c-global-dpm-interaction.md](observations/03-08b-09c-global-dpm-interaction.md) |

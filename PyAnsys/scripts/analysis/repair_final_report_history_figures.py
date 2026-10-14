@@ -24,7 +24,7 @@ import numpy as np
 
 
 ROOT = Path(__file__).resolve().parents[3]
-DEFAULT_OUT = ROOT / "Project/Final research report/figures"
+DEFAULT_OUT = ROOT / "Project/Final research report/Shuhei Report/figures"
 SOURCE_SPECS = {
     "historical_liquid": (
         "PyAnsys/output/phase72a-lineage-N45606/20261005/selected-lineage-histories.csv",

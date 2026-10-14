@@ -45,7 +45,7 @@
 
 | Observation | Evidence | Limit |
 | --- | --- | --- |
-| One inlet and unchanged supplied CAD across seven levels | [Family audit](../../technical/single-inlet-mesh-family-20261008.md) | Simplified parent domain; exact paper-CAD parity not established |
+| One inlet and unchanged supplied CAD across seven levels | [Family audit](technical/single-inlet-mesh-family-20261008.md) | Simplified parent domain; exact paper-CAD parity not established |
 | Positive cell volumes; zero free/multi boundary faces | [Native summary](../../../PyAnsys/output/mesh-audits/2026-10-08-purnanto-remesh/single-family/family-summary.json) | Topology checks do not prove solution accuracy |
 | Min OQ 0.203–0.240; max skewness below 0.80 | [Quality CSV](../../../PyAnsys/output/mesh-audits/2026-10-08-purnanto-remesh/single-family/mesh-quality-summary.csv) | OQ target 0.3 unmet |
 | M03 size-change maximum 881.63, with two cells >=300 | [Anchor audit](../../../PyAnsys/output/mesh-audits/2026-10-08-purnanto-remesh/single-family/final-loaded-anchor.json) | Local positions and solution impact untested |

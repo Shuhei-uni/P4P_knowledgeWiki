@@ -20,7 +20,7 @@ import subprocess
 
 
 REPO = Path(__file__).resolve().parents[3]
-REPORT = REPO / "Project/Final research report"
+REPORT = REPO / "Project/Final research report/Shuhei Report"
 SOURCES = [
     REPORT / "draft/01-introduction-and-literature-review.md",
     REPORT / "draft/02-model-and-methods.md",

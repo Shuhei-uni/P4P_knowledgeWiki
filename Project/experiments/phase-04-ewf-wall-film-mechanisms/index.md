@@ -35,3 +35,11 @@
 | --- | --- |
 | — | Interval EWF histories, generated-particle ledgers, complete carrier balance, and matched mechanism controls remain unavailable |
 | preliminary `10a` record | is explicitly splash-enabled and must not be used as a clean control |
+
+## Supporting records
+
+| Record | Location |
+| --- | --- |
+| 04 010v2 ewf mechanism comparison | [04-010v2-ewf-mechanism-comparison.md](observations/04-010v2-ewf-mechanism-comparison.md) |
+| 05 010v2d global dpm interaction | [05-010v2d-global-dpm-interaction.md](observations/05-010v2d-global-dpm-interaction.md) |
+| 06 010v2 iteration continuation | [06-010v2-iteration-continuation.md](observations/06-010v2-iteration-continuation.md) |

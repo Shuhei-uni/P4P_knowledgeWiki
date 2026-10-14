@@ -84,3 +84,9 @@
 | Default Linear Pressure-Strain RSM continuation | [Context](rsm-default-60k/CONTEXT.md), [setup](rsm-default-60k/setup.md), [results](rsm-default-60k/results.md) |
 | RNG swirl constant 0.07 versus 0.1 | [Results](rng-swirl-60k/results.md) |
 | Parent provenance | Selected Phase 9 RNG N8080 pair; exact parent and evidence remain in each study |
+
+## Supporting records
+
+| Record | Location |
+| --- | --- |
+| 2026 10 06 wall liquid response meeting report | [2026-10-06-wall-liquid-response-meeting-report.md](meetings/2026-10-06-wall-liquid-response-meeting-report.md) |

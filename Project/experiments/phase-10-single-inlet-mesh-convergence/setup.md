@@ -6,7 +6,7 @@
 | Human-selected comparison | Same Purnanto 2013 setup; tet versus poly-hexcore output agreement and computational cost |
 | Historical reference | [Seven-level study](historical-reference.md); existing endpoints are diagnostic, not a qualified steady reference |
 | Mesh parent | Preserved `Separator-purnanto-single-733k.msh.h5`, 733,979 cells |
-| CAD parent | `separator-purnanto(single-homo).agdb`; unchanged hash in the [mesh-family audit](../../technical/single-inlet-mesh-family-20261008.md) |
+| CAD parent | `separator-purnanto(single-homo).agdb`; unchanged hash in the [mesh-family audit](technical/single-inlet-mesh-family-20261008.md) |
 | Mesh delivery and run locations | [Path register](run-paths.yaml) |
 
 ## Selected reference and run envelope
@@ -65,7 +65,7 @@ Source: [read-only saved-file header counts](../../../PyAnsys/output/mesh-audits
 | Volume mesh | Poly-hexcore; maximum cell length scaled by level |
 | Wall layers | 12 requested; growth 1.15; same wall scopes; local stair-stepping warning retained |
 | Quality improvement | OQ target 0.3; feature ignoring disabled; iteration limit 25 except recovered M05 at 26 |
-| Actual geometry differences | Recorded volume/area differences in the [audit](../../technical/single-inlet-mesh-family-20261008.md); preserve them in interpretation |
+| Actual geometry differences | Recorded volume/area differences in the [audit](technical/single-inlet-mesh-family-20261008.md); preserve them in interpretation |
 
 ## Comparison outputs
 

@@ -123,3 +123,10 @@
 | They | are not eligible parents for the active Phase 7.2A comparison |
 
 </details>
+
+## Supporting records
+
+| Record | Location |
+| --- | --- |
+| phase 7.1a meeting report | [phase-7.1a-meeting-report.md](meetings/2026-09-22/phase-7.1a-meeting-report.md) |
+| phase 7.1a meeting report | [phase-7.1a-meeting-report.html](meetings/2026-09-22/phase-7.1a-meeting-report.html) |

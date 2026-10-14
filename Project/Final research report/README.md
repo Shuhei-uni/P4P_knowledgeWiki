@@ -1,20 +1,22 @@
 # Final research report — Markdown draft
 
+Shuhei’s report files are in [Shuhei Report](<Shuhei Report/>). Shared guidance, the supplied template and Andy’s draft remain in this folder.
+
 The report examines **how liquid moves through the separator and reaches a collection route**. Its main contribution connects mesh and inlet choices to liquid retention, collection and wall-film behaviour, supported by practical absorber and startup development. Mesh and inlet assumptions, absorber-free accumulation, wall roughness, film growth, release and drainage form a connected research argument.
 
-The 12 October 2026 revision uses [Shuhei's interpretation](Shuhei-Context.md), the meeting records and selected experiments to explain the model choices. It has been reviewed sentence by sentence, paragraph by paragraph and figure by figure. Experiment records remain the source of settings and results. Mesh and the two-phase inlet lead the Results, followed by accumulation, collection, startup and wall behaviour. Repeated explanation was cut, and detailed calculations and checks moved to the appendices. The [revision review](revision-review.md) records coverage and assessment guidance.
+The 12 October 2026 revision uses [Shuhei's interpretation](<Shuhei Report/Shuhei-Context.md>), the meeting records and selected experiments to explain the model choices. It has been reviewed sentence by sentence, paragraph by paragraph and figure by figure. Experiment records remain the source of settings and results. Mesh and the two-phase inlet lead the Results, followed by accumulation, collection, startup and wall behaviour. Repeated explanation was cut, and detailed calculations and checks moved to the appendices. The [revision review](<Shuhei Report/revision-review.md>) records coverage and assessment guidance.
 
 ## Reading order
 
 | Part | File | Purpose |
 | --- | --- | --- |
-| Front matter | [Title, abstract, declaration, contents and glossary](draft/00-front-matter.md) | State the research problem, key results and author information |
-| 1 | [Introduction and literature review](draft/01-introduction-and-literature-review.md) | Establish liquid transport, collection and film release as the physical basis for the questions |
-| 2 | [Model and methods](draft/02-model-and-methods.md) | Explain model choices, collection assumptions, procedures and the agent-assisted experiment workflow |
-| 3 | [Results](draft/03-results.md) | Lead with mesh and inlet findings, then connect accumulation, collection, startup and wall-film behaviour |
-| 4 | [Discussion, conclusions and future work](draft/04-discussion-conclusions-and-future-work.md) | Connect the findings and identify the next useful model and design comparisons |
-| Supporting material | [References and appendices](draft/05-references-and-appendices.md) | Retain implementation, case identities, detailed numerical checks, figure provenance and contribution statement |
-| Complete draft | [Combined Markdown report](draft/draft-v1.md) | The six parts assembled in the same order, with working internal links |
+| Front matter | [Title, abstract, declaration, contents and glossary](<Shuhei Report/draft/00-front-matter.md>) | State the research problem, key results and author information |
+| 1 | [Introduction and literature review](<Shuhei Report/draft/01-introduction-and-literature-review.md>) | Establish liquid transport, collection and film release as the physical basis for the questions |
+| 2 | [Model and methods](<Shuhei Report/draft/02-model-and-methods.md>) | Explain model choices, collection assumptions, procedures and the agent-assisted experiment workflow |
+| 3 | [Results](<Shuhei Report/draft/03-results.md>) | Lead with mesh and inlet findings, then connect accumulation, collection, startup and wall-film behaviour |
+| 4 | [Discussion, conclusions and future work](<Shuhei Report/draft/04-discussion-conclusions-and-future-work.md>) | Connect the findings and identify the next useful model and design comparisons |
+| Supporting material | [References and appendices](<Shuhei Report/draft/05-references-and-appendices.md>) | Retain implementation, case identities, detailed numerical checks, figure provenance and contribution statement |
+| Complete draft | [Combined Markdown report](<Shuhei Report/draft/draft-v1.md>) | The six parts assembled in the same order, with working internal links |
 
 ## Evidence selected for this draft
 
@@ -34,7 +36,7 @@ Section 4.13 reserves **four body pages for Phase 9**: the comparison basis, mat
 
 The draft follows the [report guidance](<Rough Guidance.md>), [structuring guidance](<Structuring your report.pdf>) and [2026 assessment rubric](<2026 P4P Final Report Rubric Students-1.pdf>). The scientific prose uses New Zealand English; author–date citations link to primary literature and version-matched documentation. The supplied ESB template defines the declaration and title-page fields.
 
-The required body limit is **25 pages from Introduction to Conclusions**, in **12 pt Times New Roman**. The [body page proof](review/body-page-proof.pdf) is **25 pages**, including four whole Phase 9 pages at **19–22**. It uses 1.15 line spacing and the template margins, with compact paragraph and heading gaps. All 15 current main figures remain. The [rendering record](review/README.md) and [manifest](review/page-proof-manifest.json) give the exact settings and source hashes. This is a layout review, not the final submission PDF. Front matter, references and appendices follow the supplied inclusion rules.
+The required body limit is **25 pages from Introduction to Conclusions**, in **12 pt Times New Roman**. The [body page proof](<Shuhei Report/review/body-page-proof.pdf>) is **25 pages**, including four whole Phase 9 pages at **19–22**. It uses 1.15 line spacing and the template margins, with compact paragraph and heading gaps. All 15 current main figures remain. The [rendering record](<Shuhei Report/review/README.md>) and [manifest](<Shuhei Report/review/page-proof-manifest.json>) give the exact settings and source hashes. This is a layout review, not the final submission PDF. Front matter, references and appendices follow the supplied inclusion rules.
 
 The remaining author-only fields are student identification, submission date, final assembled word count and declaration signature. The declaration is explicitly unsigned. Supervisor and co-worker names follow the supplied poster; the acknowledgements and contribution/AI-use statements are drafted for the author's final review.
 

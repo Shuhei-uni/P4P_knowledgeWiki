@@ -63,7 +63,7 @@ m_continuum liquid = (1 − f_droplet) × 116.920 kg/s
 | Current diagnostic | `5%` | `5.846` | `111.074` | Existing reference point; not yet converged |
 | Upper sensitivity | `10%` | `11.692` | `105.228` | Planned upper/extreme sensitivity point |
 
-For this first sweep, keep the mesh, geometry, solver settings, injection material and surface, DPM controls, and droplet-size distribution fixed. Change only the tracked-droplet total and the complementary continuum-liquid flow. The current `5%` case has approximately `57.55%` carrier imbalance and continuity of approximately `2.86e-1`, so it should be treated as a diagnostic rather than a converged physical baseline. The earlier unpartitioned additional-load case is not a physically comparable sweep point. ([partitioned droplet-loading setup](../experiments/phase-03-dpm-carryover-and-coupling/purnanto-09cV2-dpm-partition-control/setup.md), [diagnostic results](../experiments/phase-03-dpm-carryover-and-coupling/purnanto-09cV2-dpm-partition-control/results.md), [global-interaction comparison](../observations/03-08b-09c-global-dpm-interaction.md))
+For this first sweep, keep the mesh, geometry, solver settings, injection material and surface, DPM controls, and droplet-size distribution fixed. Change only the tracked-droplet total and the complementary continuum-liquid flow. The current `5%` case has approximately `57.55%` carrier imbalance and continuity of approximately `2.86e-1`, so it should be treated as a diagnostic rather than a converged physical baseline. The earlier unpartitioned additional-load case is not a physically comparable sweep point. ([partitioned droplet-loading setup](../experiments/phase-03-dpm-carryover-and-coupling/purnanto-09cV2-dpm-partition-control/setup.md), [diagnostic results](../experiments/phase-03-dpm-carryover-and-coupling/purnanto-09cV2-dpm-partition-control/results.md), [global-interaction comparison](../experiments/phase-03-dpm-carryover-and-coupling/observations/03-08b-09c-global-dpm-interaction.md))
 
 ## 3. Droplet-size and mass-distribution basis
 
@@ -103,7 +103,7 @@ The available continuation results show a substantial iteration dependence:
 | `5,000` | `0.2022` | `0.457` | `5.07e-3` |
 | `10,000` | `0.2884` | `0.614` | `3.03` |
 
-Between these snapshots, film inventory increases by `42.6%` and maximum thickness by `34.2%`; continuity also worsens. There is therefore no defensible stopping iteration yet. The next run should record film inventory, maximum and area-average thickness, film CFL, DPM-to-film source, film outflow, and residuals at fixed intervals. Use a CFL guard of less than `1` and select a stable interval—or explicitly report an accumulating/quasi-steady state—rather than stopping on iteration count alone. ([wall-film continuation results](../experiments/phase-04-ewf-wall-film-mechanisms/purnanto-010V2d-ewf-combined-mechanisms/results.md), [iteration-continuation observation](../observations/06-010v2-iteration-continuation.md))
+Between these snapshots, film inventory increases by `42.6%` and maximum thickness by `34.2%`; continuity also worsens. There is therefore no defensible stopping iteration yet. The next run should record film inventory, maximum and area-average thickness, film CFL, DPM-to-film source, film outflow, and residuals at fixed intervals. Use a CFL guard of less than `1` and select a stable interval—or explicitly report an accumulating/quasi-steady state—rather than stopping on iteration count alone. ([wall-film continuation results](../experiments/phase-04-ewf-wall-film-mechanisms/purnanto-010V2d-ewf-combined-mechanisms/results.md), [iteration-continuation observation](../experiments/phase-04-ewf-wall-film-mechanisms/observations/06-010v2-iteration-continuation.md))
 
 > **Figure placeholder — wall-film thickness contour**
 >
@@ -135,7 +135,7 @@ The following project record IDs are retained only so the analysis can be reprod
 - [Fine-mist size-cutoff evidence](../../CFD_wiki/wiki/synthesis/geothermal-fine-mist-size-cutoff-evidence.md)
 - [Wall-film continuation results](../experiments/phase-04-ewf-wall-film-mechanisms/purnanto-010V2d-ewf-combined-mechanisms/results.md)
 - [Global-DPM wall-film results](../experiments/phase-04-ewf-wall-film-mechanisms/purnanto-010V2d-2-ewf-global-dpm/results.md)
-- [Wall-film iteration-continuation observation](../observations/06-010v2-iteration-continuation.md)
+- [Wall-film iteration-continuation observation](../experiments/phase-04-ewf-wall-film-mechanisms/observations/06-010v2-iteration-continuation.md)
 
 ## Appendix B — Fluent settings for the relevant cases
 
@@ -237,11 +237,11 @@ The associated mesh result should therefore be read as: **a pressure-based, two-
 | Maximum film CFL | `5.0655e-3` | Final-state numerical diagnostic only. |
 | Selected-surface carrier imbalance | Approximately `57.54%` | The flux scope is incomplete, so this is not a full-domain mass balance. |
 
-The `10,000`-iteration continuation reached approximately `0.2884 kg` film inventory, `0.614 mm` maximum thickness, and CFL `3.03`, while continuity also worsened. That is why 010V2d does not yet provide a defensible iteration-based stopping point for the wall film. ([iteration-continuation observation](../observations/06-010v2-iteration-continuation.md))
+The `10,000`-iteration continuation reached approximately `0.2884 kg` film inventory, `0.614 mm` maximum thickness, and CFL `3.03`, while continuity also worsened. That is why 010V2d does not yet provide a defensible iteration-based stopping point for the wall film. ([iteration-continuation observation](../experiments/phase-04-ewf-wall-film-mechanisms/observations/06-010v2-iteration-continuation.md))
 
 ### B.3 010V2d-2 — same combined wall film with global DPM interaction on
 
-**010V2d-2** is intended to inherit the accepted 010V2d state and change one physics switch: `DPM Interaction with Continuous Phase = On`. The branch also retains source updates every flow iteration with a DPM iteration interval of `1`. This is the relevant coupling sensitivity, but the available checkpoints are not a strict same-iteration restart pair. ([010V2d-2 setup definition](../experiments/phase-04-ewf-wall-film-mechanisms/purnanto-010V2d-2-ewf-global-dpm/setup.md), [010V2d-2 results](../experiments/phase-04-ewf-wall-film-mechanisms/purnanto-010V2d-2-ewf-global-dpm/results.md), [global-interaction comparison](../observations/05-010v2d-global-dpm-interaction.md))
+**010V2d-2** is intended to inherit the accepted 010V2d state and change one physics switch: `DPM Interaction with Continuous Phase = On`. The branch also retains source updates every flow iteration with a DPM iteration interval of `1`. This is the relevant coupling sensitivity, but the available checkpoints are not a strict same-iteration restart pair. ([010V2d-2 setup definition](../experiments/phase-04-ewf-wall-film-mechanisms/purnanto-010V2d-2-ewf-global-dpm/setup.md), [010V2d-2 results](../experiments/phase-04-ewf-wall-film-mechanisms/purnanto-010V2d-2-ewf-global-dpm/results.md), [global-interaction comparison](../experiments/phase-04-ewf-wall-film-mechanisms/observations/05-010v2d-global-dpm-interaction.md))
 
 #### Controlled settings
 

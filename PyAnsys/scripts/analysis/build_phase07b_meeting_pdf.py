@@ -10,7 +10,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import Paragraph,Table,TableStyle
 from reportlab.lib.styles import ParagraphStyle
 ROOT=Path(__file__).resolve().parents[3];E=ROOT/'PyAnsys/output/phase07b-meeting-20260922';F=E/'figures';G=ROOT/'PyAnsys/output/phase07b-g1'
-OUT=ROOT/'output/pdf';OUT.mkdir(parents=True,exist_ok=True);PDF=OUT/'phase-7b-supervisor-meeting-2026-09-22.pdf'
+OUT=ROOT/'Project/meetings/output/pdf';OUT.mkdir(parents=True,exist_ok=True);PDF=OUT/'phase-7b-supervisor-meeting-2026-09-22.pdf'
 fonts=Path('/System/Library/Fonts/Supplemental')
 for name,file in [('Arial','Arial.ttf'),('ArialBold','Arial Bold.ttf'),('ArialItalic','Arial Italic.ttf')]:pdfmetrics.registerFont(TTFont(name,str(fonts/file)))
 W,H=landscape(A3);M=44;c=canvas.Canvas(str(PDF),pagesize=(W,H));c.setTitle('Phase 7b - Full-geometry liquid removal | Supervisor meeting');c.setAuthor('Andy | P4P');c.setSubject('G1 discovery screen: geometry, collector masks, liquid fractions, mass balance and residuals')

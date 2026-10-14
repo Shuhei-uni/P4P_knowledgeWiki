@@ -25,8 +25,8 @@
 | [Paths](run-paths.yaml) | Mesh delivery, native audits and reserved run-output location |
 | [Mesh-quality CSV](../../../PyAnsys/output/mesh-audits/2026-10-08-purnanto-remesh/single-family/mesh-quality-summary.csv) | Verified metrics for all seven new single-inlet meshes |
 | [Family JSON](../../../PyAnsys/output/mesh-audits/2026-10-08-purnanto-remesh/single-family/family-summary.json) | Exact mesh identities, counts, geometry differences and quality evidence |
-| [Mesh-family audit](../../technical/single-inlet-mesh-family-20261008.md) | Quality, geometry, naming and copy verification |
-| [Old/new comparison](../../technical/old-new-mesh-quality-20261008.md) | Original-mesh audits and the limits of the quality comparison |
+| [Mesh-family audit](technical/single-inlet-mesh-family-20261008.md) | Quality, geometry, naming and copy verification |
+| [Old/new comparison](technical/old-new-mesh-quality-20261008.md) | Original-mesh audits and the limits of the quality comparison |
 | [Historical study reference](historical-reference.md) | Earlier seven-level tet-lineage study, endpoints and missing quality/timing evidence |
 
 | Related phase | Relationship |
@@ -54,3 +54,10 @@
 | --- | --- |
 | All five M04 enthalpies complete | [Enthalpy results](replication-enthalpy-results.md) |
 | Fresh tet repeat at1600 only | [Current benchmark and claim limits](replication1600-tet-results.md) |
+
+## Supporting records
+
+| Record | Location |
+| --- | --- |
+| single inlet mesh family 20261008 | [single-inlet-mesh-family-20261008.md](technical/single-inlet-mesh-family-20261008.md) |
+| old new mesh quality 20261008 | [old-new-mesh-quality-20261008.md](technical/old-new-mesh-quality-20261008.md) |

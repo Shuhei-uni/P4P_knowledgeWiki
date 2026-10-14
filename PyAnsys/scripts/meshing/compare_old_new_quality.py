@@ -74,11 +74,11 @@ def main():
         '| --- | --- | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: |\n']
     for r in old+new:
         report.append(f"| {r['family']} | `{r['file']}` | {r['cells']:,} | {r['inlet_layout']} | {r['min_oq']:.4f} | {r['mean_oq']:.4f} | {r['max_skewness']:.4f} | {r['mean_skewness']:.4f} | {r['max_aspect_ratio']:.2f} | {r['max_size_change']:.2f} |\n")
-    report.append('\n![Old and new mesh metrics](../../PyAnsys/output/mesh-audits/2026-10-08-purnanto-remesh/single-family/old-new-quality-comparison.png)\n\n')
+    report.append('\n![Old and new mesh metrics](../../../../PyAnsys/output/mesh-audits/2026-10-08-purnanto-remesh/single-family/old-new-quality-comparison.png)\n\n')
     report.append('Near 680k cells, the new mesh improves mean OQ but worsens minimum OQ, maximum skewness, aspect ratio and size change versus the old split-inlet 680k file. Versus the single-inlet 733k parent, the new 682k improves minimum OQ and maximum skewness, but worsens mean OQ, mean skewness, maximum aspect ratio and maximum size change.\n\n')
     report.append('The earlier seven-of-seven improvement statement refers to each new mesh before and after its recorded improvement pass. It does not mean seven-of-seven improvement over the old meshes. All old and new receipts record zero free/multiply connected boundary faces and positive minimum cell volume. Dimensionless quality metrics are compared here; original files contain mixed raw coordinate scales, so dimensional volume metrics are excluded.\n\n')
-    report.append('Evidence: [source manifest](../../PyAnsys/output/mesh-audits/2026-10-08-purnanto-remesh/source-manifest.json), [comparison CSV with exact audit paths](../../PyAnsys/output/mesh-audits/2026-10-08-purnanto-remesh/single-family/old-new-quality-comparison.csv), [new-family summary](../../PyAnsys/output/mesh-audits/2026-10-08-purnanto-remesh/single-family/family-summary.json).\n')
-    path=ROOT.parent/'Project/technical/old-new-mesh-quality-20261008.md'
+    report.append('Evidence: [source manifest](../../../../PyAnsys/output/mesh-audits/2026-10-08-purnanto-remesh/source-manifest.json), [comparison CSV with exact audit paths](../../../../PyAnsys/output/mesh-audits/2026-10-08-purnanto-remesh/single-family/old-new-quality-comparison.csv), [new-family summary](../../../../PyAnsys/output/mesh-audits/2026-10-08-purnanto-remesh/single-family/family-summary.json).\n')
+    path=ROOT.parent/'Project/experiments/phase-10-single-inlet-mesh-convergence/technical/old-new-mesh-quality-20261008.md'
     path.write_text(''.join(report))
     print(path)
     for r in old:print(r['file'],r['cells'],r['min_oq'],r['max_skewness'],r['max_aspect_ratio'],r['max_size_change'])

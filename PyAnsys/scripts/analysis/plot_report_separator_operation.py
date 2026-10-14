@@ -17,7 +17,7 @@ from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
 
 def main() -> None:
     root = Path(__file__).resolve().parents[3]
-    output = root / "Project" / "Final research report" / "figures"
+    output = root / "Project" / "Final research report" / "Shuhei Report" / "figures"
     output.mkdir(parents=True, exist_ok=True)
 
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 12})

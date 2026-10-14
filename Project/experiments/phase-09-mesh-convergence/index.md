@@ -21,3 +21,9 @@
 | Proposed vertical and angled slit designs moved to Phase 10; retained 50.9 ms and 50.000 ms endpoints | [Phase 10 design records](../phase-10-proposed-design/index.md) |
 | Human transferred this chat’s 997k EWF run to Server 3; settings saved and reopened | [Context](server3-997k/CONTEXT.md), [setup](server3-997k/setup.md), [results](server3-997k/results.md) |
 | Human-authorized 997k-only EWF run; native bulk-active adjustment started | [Context](server6-997k/CONTEXT.md), [setup](server6-997k/setup.md), [results](server6-997k/results.md) |
+
+## Supporting records
+
+| Record | Location |
+| --- | --- |
+| phase9 997k offline swirl | [phase9-997k-offline-swirl.md](technical/phase9-997k-offline-swirl.md) |

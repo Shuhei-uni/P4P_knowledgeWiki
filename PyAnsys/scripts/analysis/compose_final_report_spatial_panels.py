@@ -24,7 +24,7 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[3]
 ASSETS = ROOT / "Project/meetings/Poster/poster-sections/poster mesh assets"
-REPORT = ROOT / "Project/Final research report/figures"
+REPORT = ROOT / "Project/Final research report/Shuhei Report/figures"
 INLET_CROP = (210, 100, 2190, 1700)
 CENTRE_CROP = (540, 75, 1260, 2320)
 LEGEND_SOURCE = ASSETS / "F1-26.81-N10000-inlet-liquid-volume-fraction-range-0-1.png"
