@@ -9,7 +9,7 @@
 | Film forces | Full momentum, gravity, gas shear, wall viscosity, advection, pressure, spreading and surface tension |
 | Film surface tension | 0.04041 N/m; bulk retains approved native value |
 | Film smoothing | ON; level 2, factor 0.5 |
-| Film Courant operating limit | 0.8; human direction, 11 October 2026. Verify peak reported Courant before accepting a block for continuation. |
+| Numerical operating limit checks | Disabled; human direction, 12 October 2026. Run to 200 ms unless an actual error occurs. Courant is diagnostic only. |
 | Lower film wall | `wall:004`; initially dry; direct mass and X/Y/Z momentum drain; 1.5 ms capture time |
 | Feedback | Flow Momentum Coupling OFF; existing bulk collector retained |
 | Source refresh | Every update; profile interval 1; drain span matches fixed film step; 1% depletion limiter |

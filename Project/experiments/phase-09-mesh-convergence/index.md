@@ -19,8 +19,12 @@
 | Server 6 lane | Record |
 | --- | --- |
 | Proposed vertical and angled slit designs moved to Phase 10; retained 50.9 ms and 50.000 ms endpoints | [Phase 10 design records](../phase-10-proposed-design/index.md) |
-| Human transferred this chat’s 997k EWF run to Server 3; settings saved and reopened | [Context](server3-997k/CONTEXT.md), [setup](server3-997k/setup.md), [results](server3-997k/results.md) |
+| Server 3 / 997k EWF complete: verified N50900 / 200 ms; final pair reopened; Fluent preserved | [Context](server3-997k/CONTEXT.md), [setup](server3-997k/setup.md), [results](server3-997k/results.md) |
 | Human-authorized 997k-only EWF run; native bulk-active adjustment started | [Context](server6-997k/CONTEXT.md), [setup](server6-997k/setup.md), [results](server6-997k/results.md) |
+| Server 6 — 60k fixed 10 µs | [Setup](server6-60k-10us/setup.md); [current run evidence](server6-60k-10us/results.md); bulk-active 10 µs attempt failed; healthy smoke restored idle |
+| Server 6 — 60k fixed 5 µs | [Setup](server6-60k-5us/setup.md); [run evidence](server6-60k-5us/results.md); 5 µs attempt failed; N8082 smoke restored idle |
+| Server 6 — 60k EWF Plan v1 | [Setup](server6-60k-planv1/setup.md); [results](server6-60k-planv1/results.md); COMPLETE N50899 / 200 ms; pair reopened/shared; solver idle |
+| Server 6 — 223k closed-bottom startup | [Setup](server6-223k/setup.md); [results](server6-223k/results.md); exact template match and N1600 smoke pair verified; host startup RUNNING |
 
 ## Supporting records
 

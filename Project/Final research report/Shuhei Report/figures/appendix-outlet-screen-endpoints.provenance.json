@@ -1,0 +1,188 @@
+{
+  "figure": "appendix-outlet-screen-endpoints",
+  "script": {
+    "path": "PyAnsys/scripts/analysis/plot_final_report_earlier_liquid_studies.py",
+    "sha256": "c1e4a77eac0fc3f0b938a7d4738e045428380e4a30ff4e23eac2357db2a1a1b1"
+  },
+  "sources": [
+    {
+      "path": "Project/experiments/phase-05-full-geometry-v2/full-geometry-02e-mixture-outlet-characterization/stage-01/results.md",
+      "sha256": "bf5902eec8a034f1a8d637f25f53f5d27628b1b3469168abf4dd5c45b4bf9c6b"
+    },
+    {
+      "path": "PyAnsys/scripts/inspection/analyze_02e_stage1_histories.py",
+      "sha256": "4f33f21a277b8aa064b973a6a4e882e5f7eda083599ebac841db0239046f4bbd"
+    }
+  ],
+  "checks": {
+    "completed": 4,
+    "failed": 8,
+    "endpoint_records": [
+      {
+        "archive_identifier": "PO-P1",
+        "physical_control": "1.160 MPa",
+        "status": "COMPLETE_500",
+        "iterations_reached": 500
+      },
+      {
+        "archive_identifier": "PO-P2",
+        "physical_control": "1.200 MPa",
+        "status": "FAILED_FPE",
+        "iterations_reached": 335
+      },
+      {
+        "archive_identifier": "PO-P3",
+        "physical_control": "1.240 MPa",
+        "status": "FAILED_FPE",
+        "iterations_reached": 226
+      },
+      {
+        "archive_identifier": "OV-P1",
+        "physical_control": "K=0",
+        "status": "COMPLETE_500",
+        "iterations_reached": 500
+      },
+      {
+        "archive_identifier": "OV-P2",
+        "physical_control": "K=10",
+        "status": "FAILED_FPE",
+        "iterations_reached": 448
+      },
+      {
+        "archive_identifier": "OV-P3",
+        "physical_control": "K=100",
+        "status": "FAILED_FPE",
+        "iterations_reached": 457
+      },
+      {
+        "archive_identifier": "MF-P1",
+        "physical_control": "58.4235 kg/s",
+        "status": "FAILED_FPE",
+        "iterations_reached": 33
+      },
+      {
+        "archive_identifier": "MF-P2",
+        "physical_control": "116.847 kg/s",
+        "status": "FAILED_FPE",
+        "iterations_reached": 9
+      },
+      {
+        "archive_identifier": "MF-P3",
+        "physical_control": "233.694 kg/s",
+        "status": "FAILED_FPE",
+        "iterations_reached": 254
+      },
+      {
+        "archive_identifier": "EF-P1",
+        "physical_control": "-50 kPa",
+        "status": "FAILED_FPE",
+        "iterations_reached": 254
+      },
+      {
+        "archive_identifier": "EF-P2",
+        "physical_control": "0 kPa",
+        "status": "COMPLETE_500",
+        "iterations_reached": 500
+      },
+      {
+        "archive_identifier": "EF-P3",
+        "physical_control": "+50 kPa",
+        "status": "COMPLETE_500",
+        "iterations_reached": 500
+      }
+    ],
+    "comparison": "Replacement endpoint/status display; unavailable regional-inventory curves are not reconstructed.",
+    "claim_limit": "Completion describes the recorded horizon, not convergence or physical validity."
+  },
+  "array_sha256": {
+    "iterations_reached": "0b88c41e2659e913b20915675c53e0eca73630e9a2432e5e153181ebe85a14bd"
+  },
+  "plot_text": [
+    "500",
+    "335",
+    "226",
+    "0",
+    "0",
+    "250",
+    "250",
+    "500",
+    "500",
+    "1.160 MPa",
+    "1.160 MPa",
+    "1.200 MPa",
+    "1.200 MPa",
+    "1.240 MPa",
+    "1.240 MPa",
+    "Pressure outlet (gauge pressure)",
+    "500",
+    "448",
+    "457",
+    "0",
+    "0",
+    "250",
+    "250",
+    "500",
+    "500",
+    "K=0",
+    "K=0",
+    "K=10",
+    "K=10",
+    "K=100",
+    "K=100",
+    "Outlet vent (loss coefficient K)",
+    "33",
+    "9",
+    "254",
+    "0",
+    "0",
+    "250",
+    "250",
+    "500",
+    "500",
+    "58.4235 kg/s",
+    "58.4235 kg/s",
+    "116.847 kg/s",
+    "116.847 kg/s",
+    "233.694 kg/s",
+    "233.694 kg/s",
+    "Mass-flow outlet (prescribed flow)",
+    "254",
+    "500",
+    "500",
+    "0",
+    "0",
+    "250",
+    "250",
+    "500",
+    "500",
+    "-50 kPa",
+    "-50 kPa",
+    "0 kPa",
+    "0 kPa",
+    "+50 kPa",
+    "+50 kPa",
+    "Exhaust fan (pressure change)",
+    "Iterations reached (unequal horizons)",
+    "Completed 500 iterations (4)",
+    "Numerical failure (8)"
+  ],
+  "output": {
+    "png": {
+      "filename": "appendix-outlet-screen-endpoints.png",
+      "sha256": "906419be9deba142f745060e028a18ef5c42830771a46ec6017bace722f4e4e0"
+    },
+    "pdf": {
+      "filename": "appendix-outlet-screen-endpoints.pdf",
+      "sha256": "bd51a378af43f2943b67156a3d1ba86e9bf50bf746916a2b13da92521dc4bd5c"
+    }
+  },
+  "size_inches": [
+    6.299212598425196,
+    3.937007874015748
+  ],
+  "processing": "Presentation from recorded data only. All curve points retained without smoothing, interpolation or resampling. Original evidence is unchanged.",
+  "software": {
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.6"
+  }
+}

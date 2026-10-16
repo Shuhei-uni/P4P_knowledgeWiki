@@ -6,8 +6,6 @@ from pyansys_fluent import ewf_local_drain as drain
 from pyansys_fluent.ewf_staged import refresh_plan
 from pyansys_fluent.common import quote_scheme_string
 
-COURANT_LIMIT=0.8
-
 STAGES=[('bulk-adjustment',1500,1e-7,True),('frozen-transition',1000,1e-7,False),
  ('step-2p5us',1000,2.5e-6,False),('step-5us',1000,5e-6,False),
  ('growth-5000',5000,5e-6,False),('growth-10000-a',10000,5e-6,False),
@@ -84,14 +82,14 @@ def main():
    if len(rows)!=count or any(not math.isclose(float(row[1]),dt,abs_tol=1e-12) for row in rows):raise RuntimeError('Handed-over accepted-step evidence incomplete')
    if re.search(r'floating point exception|fatal error|Divergence detected',text,re.I):raise RuntimeError('Native handover failure requires recovery')
    peak_courant=max(float(row[2]) for row in rows)
-   run.dump(OUT/('handover-courant-'+stamp+'.json'),{'peak_courant':peak_courant,'limit':COURANT_LIMIT,'pair':pair})
-   if not all(math.isfinite(float(x)) for row in rows for x in row) or peak_courant>COURANT_LIMIT:raise RuntimeError('Film Courant exceeds 0.8 operating limit; preserve endpoint and review lower-step recovery before continuation')
+   run.dump(OUT/('handover-courant-'+stamp+'.json'),{'peak_courant':peak_courant,'operating_limit_enabled':False,'pair':pair})
+   if not all(math.isfinite(float(x)) for row in rows for x in row):raise RuntimeError('Nonfinite native film output requires error recovery')
    before=run.base.state(s);run.load(s,pair);after=run.base.state(s)
    persistent={k:v for k,v in before['readback']['fields'].items() if 'secondary-phase-mass' not in k}
    run.require_match({**after['readback'],'fields':{k:after['readback']['fields'][k] for k in persistent}},{**before['readback'],'fields':persistent});run.require_setup_same(after['setup'],before['setup'])
    if after['methods']!=before['methods'] or not math.isclose(run.film(s)['film_elapsed_time'],film_end,abs_tol=1e-12):raise RuntimeError('Handed-over saved state differs')
    drain.audit(s,True);run.read_feed(s,1.0)
-   m['blocks'].append({'peak_courant':peak_courant,'courant_limit':COURANT_LIMIT,'stage':stage,'count':count,'step_s':dt,'bulk_active':m['bulk_active'],'film_start_s':clock,'film_end_s':film_end,'pair':pair,'completed_while_mac_disconnected':True})
+   m['blocks'].append({'peak_courant':peak_courant,'operating_limit_enabled':False,'stage':stage,'count':count,'step_s':dt,'bulk_active':m['bulk_active'],'film_start_s':clock,'film_end_s':film_end,'pair':pair,'completed_while_mac_disconnected':True})
    m.update(verified_native_end=target,latest_pair=pair,accepted_film_s=film_end,active_target=None,status='LAPTOP_HANDOVER_RECONCILED')
    run.dump(manifest,m);run.dump(OUT/'laptop-resume-verification.json',{'status':'PASS','native_iteration':target,'film_s':film_end,'pair':pair,'accepted_updates':count,'saved_reopen_fields_setup_methods_preserved':True})
    stages=STAGES[len(m['blocks']):]
@@ -166,9 +164,8 @@ def main():
    if len(rows)!=count or any(not all(math.isfinite(float(x)) for x in row) or not math.isclose(float(row[1]),dt,rel_tol=1e-7) for row in rows):raise RuntimeError('Native accepted-step evidence differs')
    if re.search(r'floating point exception|fatal error|Divergence detected',transcript,re.I):raise RuntimeError('Native failure text requires recovery')
    peak_courant=max(float(row[2]) for row in rows)
-   run.dump(OUT/(label+'-courant.json'),{'peak_courant':peak_courant,'limit':COURANT_LIMIT,'pair':pair})
-   if peak_courant>COURANT_LIMIT:raise RuntimeError('Film Courant exceeds 0.8 operating limit; preserve endpoint and review lower-step recovery before continuation')
-   m['blocks'].append({'peak_courant':peak_courant,'courant_limit':COURANT_LIMIT,'stage':stage,'count':count,'step_s':dt,'bulk_active':bulk_active,'film_start_s':clock,'film_end_s':film_end,'pair':pair})
+   run.dump(OUT/(label+'-courant.json'),{'peak_courant':peak_courant,'operating_limit_enabled':False,'pair':pair})
+   m['blocks'].append({'peak_courant':peak_courant,'operating_limit_enabled':False,'stage':stage,'count':count,'step_s':dt,'bulk_active':bulk_active,'film_start_s':clock,'film_end_s':film_end,'pair':pair})
    m.update(verified_native_end=end,latest_pair=pair,accepted_film_s=film_end,active_target=None);run.dump(manifest,m)
   if not math.isclose(m['accepted_film_s'],.2,abs_tol=1e-10):raise RuntimeError('Final film age differs from 200 ms')
   run.assert_bulk_active(s);run.read_feed(s,1.0)

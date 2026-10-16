@@ -59,3 +59,32 @@
 | Session | Fluent left open; watcher stopped; no update beyond50ms or newcase |
 | Evidence | [Completion and OneDrive hashes](../../../../PyAnsys/output/phase10-proposed-design/20261012/angle213k-to50ms/completion-reconciliation.json) |
 | Claim limit | Finite filmdevelopment; no steadyfilm, meshconvergence, timestepaccuracy or physicalvalidation claim |
+
+| 150 ms continuation — 13 October 2026 | Current evidence |
+| --- | --- |
+| Authority | Another 100 ms at fixed 10 µs; same angle settings; preserve 50 ms pair |
+| Parent | N33492 / 50.000 ms; Mac OneDrive hashes rechecked before preparation |
+| Host reconciliation | Vertical 150 ms and angle 50 ms host jobs complete; native vertical N44661 / 150 ms idle; no lane controller |
+| Target | N43492 / 150.000 ms; one 10,000-update native command |
+| Status | Complete: N43492 / 150.000 ms; 10,000 fixed 10 µs updates; native endpoint, paired reopen and OneDrive hashes verified |
+| Evidence | [Preflight and preparation](../../../../PyAnsys/output/phase10-proposed-design/20261013/angle213k-to150ms/) |
+
+| Native 150 ms continuation startup | Verified evidence |
+| --- | --- |
+| Prepared persistence | N33492 / 50 ms; original model parameters, all boundary conditions, methods and frozen bulk retained after paired reopen; fixed step 10 µs |
+| Preservation | Original angle 50 ms and vertical 150 ms shared case/data hashes rechecked; separate local preservation pairs also saved |
+| Host run | RUNNING; one native 10,000-update journal targets N43492 / 150 ms |
+| Transcript prefix | 64 native film rows, 50.010–50.640 ms; all steps 10 µs; prefix proves startup, not latest clock or completion |
+| Evidence | [Native startup](../../../../PyAnsys/output/phase10-proposed-design/20261013/angle213k-to150ms/native-startup.json), [launch validation](../../../../PyAnsys/output/phase10-proposed-design/20261013/angle213k-to150ms/launch-validation.json) |
+| Numerical policy | No thresholds; Courant and inner diagnostics recorded |
+
+| 150 ms endpoint — 13 October 2026 | Verified evidence |
+| --- | --- |
+| Native endpoint | N43492 / 150.000 ms after final paired reopen |
+| New updates | 10,000 at fixed 10 µs from N33492 / 50 ms; all 10,000 native film rows recovered |
+| Settings persistence | Original angle boundary conditions, solution methods and EWF parameters retained; only requested fixed 10 µs step restored; bulk remains frozen |
+| Peak Courant | 0.2201395; diagnostic only, no numerical stop threshold |
+| Final sharing | Unique OneDrive final-150ms-N43492 case/data; both Mac files match Server 6 SHA-256 values |
+| Preservation | Original angled 50 ms and vertical 150 ms shared pairs still present; all four hashes rechecked |
+| Session | Fluent open and idle; watcher stopped; no solve replay or updates beyond 150 ms |
+| Evidence | [Native completion and file hashes](../../../../PyAnsys/output/phase10-proposed-design/20261013/angle213k-to150ms/completion-reconciliation.json) |

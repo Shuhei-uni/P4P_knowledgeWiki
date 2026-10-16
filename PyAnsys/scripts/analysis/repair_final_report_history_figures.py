@@ -167,6 +167,7 @@ def startup_arrays() -> tuple[dict, dict]:
         "shortened_native_range": [2081, 5080],
         "matched_points_per_case": 3000,
         "activation_hold_excluded": True,
+        "excluded_activation_continuity_peak": summary["activation_hold"]["continuity"]["peak"],
         "ramp_end_update": 2000,
         "continuity_normalisation_factor": 386.0459609770594,
         "continuity_normalisation_common_to_both_cases": True,
@@ -244,8 +245,8 @@ def provenance(fig, stem: str, checks: dict, sources: dict, out: Path) -> None:
 
 
 def draw_startup(arrays: dict, checks: dict, sources: dict, out: Path) -> None:
-    fig, axes = plt.subplots(3, 1, figsize=(6.8, 6.4), sharex=True)
-    fig.subplots_adjust(left=0.19, right=0.955, top=0.88, bottom=0.11, hspace=0.16)
+    fig, axes = plt.subplots(1, 3, figsize=(16 / 2.54, 8.3 / 2.54), sharex=True)
+    fig.subplots_adjust(left=0.13, right=0.96, top=0.67, bottom=0.25, wspace=0.70)
     x = np.arange(1, 3001)
     for case, color, label in (("historical", ORANGE, "Historical startup"), ("early_ewf", BLUE, "Shortened startup")):
         series = arrays[case]
@@ -255,23 +256,30 @@ def draw_startup(arrays: dict, checks: dict, sources: dict, out: Path) -> None:
     for panel, ax in zip("abc", axes):
         ax.axvspan(2000, 3000, color="#F5F5F5", zorder=0)
         ax.axvline(2000, color="#777777", linestyle="--", linewidth=0.8)
-        ax.text(0.02, 0.94, f"({panel})", transform=ax.transAxes, va="top", fontsize=10, bbox={"facecolor": "white", "edgecolor": "none", "pad": 1})
+        ax.text(0.03, 0.94, f"({panel})", transform=ax.transAxes, va="top", fontsize=9, bbox={"facecolor": "white", "edgecolor": "none", "pad": 1})
         ax.set_xlim(0, 3000)
-    axes[0].set_ylabel("Continuity residual\n(common scale)")
+        ax.set_xticks([0, 1000, 2000, 3000])
+    axes[0].set_ylabel("Continuity residual\n(common scale)", fontsize=9)
     axes[0].set_ylim(3e-4, 1.5e-2)
-    axes[1].set_ylabel("Bulk + film\nliquid inventory (kg)")
+    axes[1].set_ylabel("Bulk + film mass (kg)", fontsize=9)
     axes[1].set_ylim(16, 310)
     axes[1].set_yticks([100, 200, 300])
-    axes[2].set_ylabel("Signed liquid flux\nat steam outlet (kg/s)")
+    axes[2].set_ylabel("Signed outlet liquid (kg/s)", fontsize=9)
     axes[2].set_ylim(-25.5, 0.8)
     axes[2].set_yticks([-20, -10, 0])
-    axes[2].text(0.02, 0.06, "Negative = outward", transform=axes[2].transAxes, fontsize=9.5)
-    axes[2].set_xticks(np.arange(0, 3001, 500))
-    axes[2].set_xlabel("Updates since inlet ramp start\n1–2000: ramp; 2001–3000: full-feed hold")
-    fig.suptitle("Startup comparison at matched inlet loading", fontsize=12, y=0.975)
+    axes[2].text(0.5, 1.05, "Negative = outward", transform=axes[2].transAxes, ha="center", fontsize=8.5)
+    fig.supxlabel("Updates since inlet ramp start\n1–2000: ramp; 2001–3000: full-feed hold", fontsize=9, y=0.03)
     handles, labels = axes[0].get_legend_handles_labels()
-    fig.legend(handles, labels, loc="upper center", bbox_to_anchor=(0.56, 0.95), ncol=2, frameon=False, fontsize=10)
+    fig.legend(handles, labels, loc="upper center", bbox_to_anchor=(0.53, 0.98), ncol=2, frameon=False, fontsize=9)
+    fig.text(0.53, 0.82, "Ramp peaks: continuity −70.15%; inventory −70.43%; outlet liquid −75.78%",
+             ha="center", fontsize=7.5)
+    fig.text(0.53, 0.75,
+             f"Earlier activation hold excluded: continuity peak {checks['excluded_activation_continuity_peak']:.5f}",
+             ha="center", fontsize=7.5, color="#555555")
     style_axes(axes)
+    for ax in axes:
+        ax.tick_params(labelsize=8.5)
+    fig.savefig(out / "results-described-startup.pdf", facecolor="white")
     keys = ("historical_liquid", "historical_residuals", "shortened_liquid", "shortened_residuals", "startup_metrics")
     provenance(fig, "results-described-startup", checks, {key: sources[key] for key in keys}, out)
 

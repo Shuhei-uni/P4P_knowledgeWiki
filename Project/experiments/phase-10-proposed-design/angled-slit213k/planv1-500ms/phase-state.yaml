@@ -1,0 +1,13 @@
+phase_id: phase-10-proposed-design
+case_id: angled-slit213k
+server_id: '5'
+status: QUEUED_AFTER_VERTICAL_500MS
+parent_native_iteration: 43492
+parent_film_s: 0.15
+target_film_s: 0.5
+nominal_final_native_iteration: 185892
+initial_step_s: 1.0e-07
+main_step_s: 2.5e-06
+numerical_limits: null
+machine_root: PyAnsys/output/phase10-proposed-design/20261015/server5-planv1-to500ms/angled-slit213k
+source150ms_pair_preserved: true

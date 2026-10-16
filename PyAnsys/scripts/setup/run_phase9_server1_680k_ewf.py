@@ -19,16 +19,21 @@ STAGES=[('bulk-adjustment',1500,1e-7,True),('frozen-transition',1000,1e-7,False)
 def recovery_schedule(blocks,clock,dt):
  prefix=[(b['stage'],b['count'],b['step_s'],b['bulk_active']) for b in blocks]
  count=round((.195-clock)/dt)
- if count<1 or not math.isclose(clock+count*dt,.195,abs_tol=1e-12):raise RuntimeError('Frozen recovery horizon is not integral')
+ if count<0 or not math.isclose(clock+count*dt,.195,abs_tol=1e-12):raise RuntimeError('Frozen recovery horizon is not integral')
  batches=[]
- if not blocks or blocks[-1]['step_s']!=dt or blocks[-1]['bulk_active']:
+ if count and (not blocks or blocks[-1]['step_s']!=dt or blocks[-1]['bulk_active']):
   first=min(1000,count);batches.append(('lower-step-check',first,dt,False));count-=first
- index=1
+ index=1+max([int(b['stage'].rsplit('-',1)[1]) for b in blocks if b['stage'].startswith('lower-step-growth-')]+[0])
  while count:
   n=min(10000,count);batches.append((f'lower-step-growth-{index:02}',n,dt,False));count-=n;index+=1
  final=round(.005/dt)
  if not math.isclose(final*dt,.005,abs_tol=1e-12):raise RuntimeError('Bulk-active recovery horizon is not integral')
  return prefix+batches+[('bulk-reactivation-to-200ms',final,dt,True)]
+
+def ramp_schedule(blocks,clock,first_count=10000):
+ first={'stage':'human-step-2p5us','count':first_count,'step_s':2.5e-6,'bulk_active':False}
+ if clock+first_count*2.5e-6>.195:raise RuntimeError('2.5us section exceeds frozen horizon')
+ return recovery_schedule(blocks+[first],clock+first_count*2.5e-6,5e-6)
 
 def render_journal(folder,label,count):
  path=lambda n:str(folder/n).replace('\\','/')
@@ -44,8 +49,10 @@ def main():
  parser=argparse.ArgumentParser()
  parser.add_argument('--resume',action='store_true')
  parser.add_argument('--ledger-diagnostic-only',action='store_true')
+ parser.add_argument('--no-limit-checks',action='store_true',help='Record numerical acceptance limits without stopping; retain execution-error checks')
  parser.add_argument('--recovery-step',type=float,choices=[1e-7,1e-6,2.5e-6])
  parser.add_argument('--bounded-count',type=int)
+ parser.add_argument('--ramp-to-5us',action='store_true',help='Next 10000 updates at 2.5us, then retain 5us to200ms')
  args=parser.parse_args()
  if args.bounded_count is not None and (args.bounded_count<1000 or args.recovery_step is None):raise RuntimeError('Bounded run requires a fixed step and at least 1000 updates')
  with exclusive_writer_lock(OUT/'controller.lock'):
@@ -65,14 +72,14 @@ def main():
     if (block['stage'],block['count'],block['step_s'],block['bulk_active'])!=expected:raise RuntimeError('Completed schedule prefix differs')
    if m['verified_native_end']!=9080+sum(b['count'] for b in m['blocks']):raise RuntimeError('Recorded native coordinate differs')
    if run.native_iteration(s)!=m['verified_native_end'] or not math.isclose(run.film(s)['film_elapsed_time'],m['accepted_film_s'],abs_tol=1e-12):raise RuntimeError('Live resume coordinate differs')
-   if any(s.settings.solution.controls.equations.get_state().values()):raise RuntimeError('Resume bulk must be frozen')
+   if any(bool(v)!=m['blocks'][-1]['bulk_active'] for v in s.settings.solution.controls.equations.get_state().values()):raise RuntimeError('Resume bulk equation state differs')
    run.require_bulk_audit(s);run.read_feed(s,1.0);drain.audit(s,True)
    for key in ['case','data']:
     digest=run.remote_file_sha256(s,m['latest_pair'][key],str(folder/'scratch'/('resume-'+key+'-'+stamp+'.sha256.txt')))
     if digest!=m['latest_pair'][key+'_sha256']:raise RuntimeError('Resume checkpoint hash differs')
    if not args.ledger_diagnostic_only:raise RuntimeError('Resume requires the recorded human ledger policy')
-   previous=m['blocks'][-1]['drain_proof']
-   if previous['verification']['status']!='PASS' and not allow_ledger_warning(previous,True):raise RuntimeError('Resume requires verified drainage or the authorized ledger-only warning')
+   previous=m['blocks'][-1].get('drain_proof',{'verification':{'status':'PASS','failures':[]}})
+   if previous['verification']['status']!='PASS' and not args.no_limit_checks and not allow_ledger_warning(previous,True):raise RuntimeError('Resume requires verified drainage or the authorized ledger-only warning')
    (OUT/('run-manifest-before-resume-'+stamp+'.json')).write_text(manifest.read_text())
    if previous['verification']['status']!='PASS':previous['continuation']='LEDGER_WARNING_AUTHORIZED'
    names=list(m['blocks'][-1]['initial'])
@@ -85,7 +92,10 @@ def main():
    if args.bounded_count is not None:
     schedule=schedule[:completed]+[(f"fixed-{args.recovery_step:g}s-{args.bounded_count}-N{m['verified_native_end']+args.bounded_count}",args.bounded_count,args.recovery_step,False)]
     m.update(schedule=schedule,native_target_final=m['verified_native_end']+args.bounded_count,target_film_s=m['accepted_film_s']+args.bounded_count*args.recovery_step,bounded_run=True)
-   elif args.recovery_step is not None:
+   elif args.ramp_to_5us:
+    schedule=ramp_schedule(m['blocks'],m['accepted_film_s'])
+    m.update(schedule=schedule,native_target_final=9080+sum(x[1] for x in schedule),recovery_step_s=5e-6,target_film_s=.2,bounded_run=False,remaining_commands_automatic=True,step_authority='human: next section2.5us then5us; 20261013')
+   elif args.recovery_step is not None and not math.isclose(m['accepted_film_s'],.2,abs_tol=1e-12):
     schedule=recovery_schedule(m['blocks'],m['accepted_film_s'],args.recovery_step)
     m.update(schedule=schedule,native_target_final=9080+sum(x[1] for x in schedule),recovery_step_s=args.recovery_step,target_film_s=.2,bounded_run=False,remaining_commands_automatic=True)
   else:
@@ -110,7 +120,9 @@ def main():
     'native_target_final':51880,'execution_host':'SERVER1_WINDOWS','laptop_required':False,
     'never_exit_fluent':True,'drain_proof_limit_percent':1.0,
     'review':'Exclusive host lock; exact reopened parent/readback; native fixed journal commands; local paired autosave; transcript clocks and finite fields; frozen drainage proof before faster steps; final save/reopen.'}
-  m['film_courant_limit']=FILM_COURANT_LIMIT
+  m['no_limit_checks']=args.no_limit_checks
+  m['film_courant_limit']=None if args.no_limit_checks else FILM_COURANT_LIMIT
+  if args.no_limit_checks:m['limit_check_authority']='human: remove all limit checks; run to final film time unless error; 20261012'
   m['ledger_diagnostic_only']=args.ledger_diagnostic_only
   if args.ledger_diagnostic_only:m['continuation_authority']='human: just keep running; 20261009; ledger discrepancy recorded without stopping'
   run.dump(manifest,m)
@@ -152,7 +164,7 @@ def main():
     for key in ['case','data']:pair[key+'_sha256']=run.remote_file_sha256(s,pair[key],str(folder/'scratch'/f'{stage}-{key}-{stamp}.sha256.txt'))
     after=compute(s,names)
     if any(not math.isfinite(v[0]) for v in after.values()):raise RuntimeError('Nonfinite endpoint reports')
-    block={'stage':stage,'count':count,'step_s':dt,'bulk_active':bulk_active,'film_start_s':clock,'film_end_s':film_end,'pair':pair,'initial':initial,'after':after,'peak_courant':max(row[2] for row in rows),'courant_limit':FILM_COURANT_LIMIT}
+    block={'stage':stage,'count':count,'step_s':dt,'bulk_active':bulk_active,'film_start_s':clock,'film_end_s':film_end,'pair':pair,'initial':initial,'after':after,'peak_courant':max(row[2] for row in rows),'courant_limit':None if args.no_limit_checks else FILM_COURANT_LIMIT}
     m['blocks'].append(block);m.update(verified_native_end=end,latest_pair=pair,accepted_film_s=film_end,active_target=None);run.dump(manifest,m)
     if not bulk_active:
      bulk_after=run.base.state(s)['readback']['fields']
@@ -170,10 +182,10 @@ def main():
      proof['verification']=verify_drain_probe(proof,setup_identity='server1-680k-plan-v1',frozen_bulk=True)
      block['drain_proof']=proof;run.dump(OUT/(stage+'-drain-proof.json'),proof);run.dump(manifest,m)
      if proof['verification']['status']!='PASS':
-      if not allow_ledger_warning(proof,args.ledger_diagnostic_only):raise RuntimeError('Frozen drain proof requires repair before next step')
-      proof['continuation']='LEDGER_WARNING_AUTHORIZED'
+      if not args.no_limit_checks and not allow_ledger_warning(proof,args.ledger_diagnostic_only):raise RuntimeError('Frozen drain proof requires repair before next step')
+      proof['continuation']='NUMERICAL_LIMITS_DIAGNOSTIC_ONLY' if args.no_limit_checks else 'LEDGER_WARNING_AUTHORIZED'
       run.dump(manifest,m);print('LEDGER WARNING',stage,proof['ledger_error_percent'],flush=True)
-    if block['peak_courant']>FILM_COURANT_LIMIT:raise RuntimeError('Film Courant exceeds operating ceiling; review step before continuation')
+    if not args.no_limit_checks and block['peak_courant']>FILM_COURANT_LIMIT:raise RuntimeError('Film Courant exceeds operating ceiling; review step before continuation')
    if not math.isclose(m['accepted_film_s'],m['target_film_s'],abs_tol=1e-10):raise RuntimeError('Final film target differs')
    before=run.base.state(s);run.load(s,m['latest_pair']);after=run.base.state(s)
    run.require_match(after['readback'],before['readback']);run.require_setup_same(after['setup'],before['setup'])

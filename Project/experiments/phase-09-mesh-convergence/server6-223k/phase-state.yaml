@@ -1,0 +1,15 @@
+phase: phase-09-mesh-convergence
+lane: server6-223k
+status: running_native_progress_confirmed
+server_id: "6"
+mesh_cells: 223546
+parent_transfer_completed: true
+settings_match: PASS
+smoke: PASS
+verified_checkpoint_iteration: 1600
+observed_native_iteration: 1654
+active_stage: low-feed-hold
+active_target: 2580
+feed_fraction: 0.25
+laptop_required: false
+evidence: PyAnsys/output/phase9-server6-223k/20261015/startup-proof.json

@@ -1,0 +1,58 @@
+{
+  "figure": "results-direct-film-drain",
+  "source": {
+    "path": "PyAnsys/output/phase72a-stage4-ewf-drain/20261007/analysis-summary.json",
+    "sha256": "a2174bb73598520d881c700117f20ceb284c8982b6f91f04efb45bef97b05e03"
+  },
+  "script": {
+    "path": "PyAnsys/scripts/analysis/plot_final_report_direct_drain.py",
+    "sha256": "9bd4ad839f49ef2f44422657771d5e56c86cc532bdc2ea9aae937b14000c80d0"
+  },
+  "scope": "Matched N40483\u2013N41483, 1000 updates, 15 ms; expanded film domain; frozen bulk",
+  "processing": "Bars use exact analysed endpoints and cumulative masses. No smoothing, interpolation, resampling or additional solver updates. Direct sink uses preceding-rate integration and is added once to native outflow.",
+  "values": {
+    "initial_total_film_kg": 9.752614046083597,
+    "lower_final_kg_off_on": [
+      0.1875203115680919,
+      0.05564984267215473
+    ],
+    "total_final_kg_off_on": [
+      11.17255551966931,
+      10.98286134706485
+    ],
+    "native_outflow_kg_off_on": [
+      0.5302321115698714,
+      0.21110824873776046
+    ],
+    "direct_sink_kg_off_on": [
+      0.0,
+      0.5087897346418866
+    ],
+    "external_removal_kg_off_on": [
+      0.5302321115698714,
+      0.719897983379647
+    ],
+    "external_removal_net_gain_kg": 0.18966587180977568,
+    "lower_film_reduction_percent": 70.3232987366559,
+    "direct_sink_quadrature_span_kg": 0.0005564984267215634
+  },
+  "conditions_verified": true,
+  "claim_limit": "Numerical local-drain comparison under fixed bulk forcing; no stationary film, whole-separator closure or physical validation claim.",
+  "output": {
+    "png": {
+      "filename": "results-direct-film-drain.png",
+      "sha256": "87cb6111c64e4d96db8701cfe878e8c82a1a3d53681050df28bbee1c3d6525ff"
+    },
+    "pdf": {
+      "filename": "results-direct-film-drain.pdf",
+      "sha256": "9520376feebb726ce77b69f8337e478a1ce973a2d7aab1fc6a5af2772ce06361"
+    }
+  },
+  "size_cm": [
+    16,
+    7.5
+  ],
+  "software": {
+    "matplotlib": "3.10.9"
+  }
+}

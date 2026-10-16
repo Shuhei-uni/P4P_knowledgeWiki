@@ -47,7 +47,7 @@ failed_attempt_film_s: 0.03625
 failed_attempt_peak_courant: 21.5847
 failed_attempt_inner_passed: 2055
 failed_attempt_inner_observed: 5000
-planned_recovery_step_s: 0.0000025
+planned_recovery_step_s: 2.5e-06
 planned_recovery_final_native_iteration: 103640
 recovery_native_startup_observed: true
 recovery_startup_film_s: 0.0423825
@@ -66,7 +66,7 @@ failed_2p5us_peak_courant: 0.04158824
 lowest_step_recovery_evidence: PyAnsys/output/phase9-server6-slit154k/20261010/lowest-step-launch.json
 history_path_repair_evidence: PyAnsys/output/phase9-server6-slit154k/20261010/history-repair-launch.json
 production_ledger_status: UNRESOLVED_DIAGNOSTIC
-selected_film_step_s: 0.0000025
+selected_film_step_s: 2.5e-06
 selected_courant_ceiling: 0.8
 human_1us_controls_applied: true
 human_1us_transition_evidence: PyAnsys/output/phase9-server6-slit154k/20261010/human-1us-transition-deployed.json
@@ -82,7 +82,7 @@ failed_1us_inner_passed: 786
 failed_1us_inner_observed: 1000
 failed_1us_evidence: PyAnsys/output/phase9-server6-slit154k/20261010/failed-1us-qualification.json
 known_spike_recovery_qualification_end_s: 0.01675
-active_recovery_film_step_s: 0.0000025
+active_recovery_film_step_s: 2.5e-06
 recovery_from1us_launch_evidence: PyAnsys/output/phase9-server6-slit154k/20261010/recovery-from1us-0p1-launch.json
 failed_lower_qualification_inner_passed: 752
 failed_lower_qualification_peak_courant: 0.01114965
@@ -97,7 +97,6 @@ failed_strict_parent_1us_inner_passed: 954
 failed_strict_parent_1us_inner_observed: 1000
 failed_strict_parent_1us_peak_courant: 0.1086999
 failed_strict_parent_1us_evidence: PyAnsys/output/phase9-server6-slit154k/20261010/strict-parent-failed-1us-reconciliation.json
-
 numerical_acceptance_policy: diagnostics_only
 inner_convergence_acceptance_gate: false
 production_ledger_acceptance_gate: false
@@ -116,24 +115,22 @@ hash_output_repair_evidence: PyAnsys/output/phase9-server6-slit154k/20261010/n80
 courant_acceptance_gate: false
 automatic_numerical_rollback: false
 continue100_policy_evidence: PyAnsys/output/phase9-server6-slit154k/20261010/from4235-code-review.json
-
 from4235_handoff_supervisor_pid: 21903
 from4235_handoff_evidence: PyAnsys/output/phase9-server6-slit154k/20261010/from4235-handoff-supervision.json
 from4235_partial_preservation_evidence: PyAnsys/output/phase9-server6-slit154k/20261010/from4235-partial-preservation.json
 from4235_native_resume_confirmed: true
-
 laptop_watcher_active: false
 laptop_pending_handoff_active: false
 laptop_closure_evidence: PyAnsys/output/phase9-server6-slit154k/20261010/laptop-closure-stop.json
 fluent_stop_sent_for_laptop_closure: false
-
 last_observed_active_film_scope: retained_pair_reopen_idle
-
 human_selected_retained_native_iteration: 84000
 human_selected_retained_film_s: 0.0509
 automatic_angle_transition: false
 retained_endpoint_evidence: PyAnsys/output/phase9-server6-slit154k/20261010/retained-50p9ms.json
-
 live_session_after_human_restart: unverified_not_attached
 spatial_export_stopped_by_human: true
 spatial_export_transfer_evidence: PyAnsys/output/phase10-proposed-design/20261012/slit154k-50p9ms-reference/onedrive-transfer.json
+active_followup_state: Project/experiments/phase-10-proposed-design/vertical-slit154k/basic-ewf-10us/phase-state.yaml
+status_scope: original_enhanced_ewf_endpoint_retained; active followup in separate
+  branch

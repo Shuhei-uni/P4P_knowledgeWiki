@@ -1,0 +1,55 @@
+phase_id: phase-10-proposed-design
+case: vertical-slit154k
+branch: basic-ewf-10us
+server_id: 6
+status: COMPLETE_150MS_REOPEN_AND_ONEDRIVE_HASH_VERIFIED
+parent_native_iteration: 31000
+parent_film_time_s: 0.013392
+reference_angle_parent_native_iteration: 30862
+reference_angle_parent_film_time_s: 0.023705
+main_step_s: 1.0e-05
+final_step_s: 1.0e-05
+target_film_time_s: 0.15
+planned_final_native_iteration: 44661
+numerical_thresholds: null
+historical_enhanced_endpoint_preserved: true
+machine_root: PyAnsys/output/phase10-proposed-design/20261013/vertical-basic-ewf-to150ms
+prepared_pair_reopen_verified: true
+full_ewf_and_wall_readback_match: true
+solver_left_open: true
+laptop_required_for_solver: false
+last_verified_native_iteration: 44661
+last_verified_film_time_s: 0.1500000000000096
+startup_prefix_last_film_time_s: 0.0554
+startup_prefix_scope: bounded_transcript_prefix_not_latest_clock_or_final_endpoint
+direct_native_outflow_smoke_verified: true
+frozen_bulk_inventory_smoke_verified: true
+observed_film_time_s: 0.1500000000000096
+completed_new_updates: 3661
+final_pair_reopen_verified: true
+onedrive_pair_hashes_verified: true
+active_target: null
+completion_evidence: PyAnsys/output/phase10-proposed-design/20261013/vertical-basic-ewf-to150ms/completion-reconciliation.json
+retained_50ms:
+  native_iteration: 34661
+  film_s: 0.05
+  completion_evidence: PyAnsys/output/phase10-proposed-design/20261012/vertical-basic-ewf-10us/completion-reconciliation.json
+  paired_reopen_and_onedrive_hashes_verified: true
+continuation_parent_native_iteration: 34661
+continuation_parent_film_s: 0.05
+continuation_updates: 10000
+new_continuation_solve_submitted: true
+preparation_pid: 91537
+preparation_waiter_pid: 91913
+pending_control_evidence: PyAnsys/output/phase10-proposed-design/20261013/vertical-basic-ewf-to150ms/pending-control-state.json
+native_readback_status: final_native_endpoint_verified
+auto_dispatch_only_after_prepared_reopen_verified: true
+host_continuation_dispatched: true
+native_continuation_startup_verified: true
+host_controller_last_observed_status: COMPLETE
+dispatch_evidence: PyAnsys/output/phase10-proposed-design/20261013/vertical-basic-ewf-to150ms/dispatch-reconciliation.json
+preparation_waiter_complete: true
+startup_evidence: PyAnsys/output/phase10-proposed-design/20261013/vertical-basic-ewf-to150ms/native-startup.json
+continuation_completed_updates: 10000
+total_basic_branch_completed_updates: 13661
+watcher_stopped_on_completion: true

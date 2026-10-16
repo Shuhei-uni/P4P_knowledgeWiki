@@ -1,12 +1,12 @@
 # Main-body page proof
 
-[body-page-proof.pdf](body-page-proof.pdf) contains **25 pages**, counted from Introduction through Conclusions. Front matter, references and appendices are excluded. Exactly four whole pages are reserved for Phase 9: **19, 20, 21, 22**. This proof meets the 25-page body limit.
+[body-page-proof.pdf](body-page-proof.pdf) contains **25 pages**, counted from Introduction through Conclusions. Front matter, references and appendices are excluded. One page is reserved for the final mesh comparison: **20**. This proof meets the 30-page body limit.
 
 The proof uses A4, 12 pt Times New Roman body text, 1.15 body line spacing, 20 mm top/bottom margins and 25 mm side margins. Captions use the template's small type (approximately 11 pt). Paragraph gaps are 4 pt, with compact heading gaps. Those gaps differ from the supplied template; the body type, line spacing and margins are retained.
 
-All current main-body text and scientific images are included. The recipe removes redundant Part headings and uses each explicit numbered caption once. It places the two published Figure 3 panels vertically at 10 cm width and assigns table widths. Figure pixels and scientific data are unchanged. Short tables stay together rather than splitting across pages.
+All current main-body text and scientific images are included. The recipe removes redundant Part headings and uses each explicit numbered caption once. It places the two published Figure 4 panels vertically at 10 cm width and assigns table widths. Figure pixels and scientific data are unchanged. Short tables stay together rather than splitting across pages.
 
-This is a **review proof**, not the submission PDF. Phase 9 boxes contain no invented results. Replacing them with final evidence can change pagination. In-text references to excluded appendices remain in the body for the review.
+This is a **review proof**, not the submission PDF. The mesh-comparison slot contains no invented results. Replacing them with final evidence can change pagination. In-text references to excluded appendices remain in the body for the review.
 
 Reproduce from the repository root:
 

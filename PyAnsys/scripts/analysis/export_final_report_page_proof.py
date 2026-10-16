@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Render a review proof of the report body, with four reserved Phase 9 pages.
+"""Render a review proof with one reserved page for final-model mesh sensitivity.
 
 This is a layout check, not the submission document. Scientific text and image
 pixels come from the current Markdown and source assets. Only presentation is
 transformed: redundant Part headings and automatic alt-text captions are removed,
-table widths are assigned, and the requested Phase 9 space is made explicit.
+table widths are assigned, and the mesh-comparison allowance is made explicit.
 Requires pandoc, tectonic, pdfinfo and pdftotext on PATH; no Fluent session.
 """
 
@@ -30,6 +30,7 @@ SOURCES = [
 
 # Widths in centimetres. Wide multipanel fields stay at the full 16 cm text width.
 IMAGE_WIDTHS = {
+    "report-liquid-destinations-overview.png": 16.0,
     "rizaldy-2016-figure-5-operation.png": 7.0,
     "zarrouk-purnanto-2015-figure-12-breakdown.png": 10.0,
     "pointon-2009-figure-5-inlets.png": 10.0,
@@ -37,8 +38,12 @@ IMAGE_WIDTHS = {
     "rizaldy-2016-figure-9-entrainment.png": 10.0,
     "model-domain-overview.png": 13.0,
     "results-described-early-development.png": 12.0,
-    "results-described-startup.png": 12.0,
-    "results-film-development-reference500ms.png": 14.0,
+    "results-described-startup.png": 16.0,
+    "results-film-development-reference500ms.png": 16.0,
+    "results-described-roughness.png": 14.0,
+    "results-described-film-outlet.png": 14.0,
+    "bulk-comparison-described-film-treatment.png": 14.0,
+    "results-direct-film-drain.png": 14.0,
 }
 TABLE_WIDTHS = {
     "Study / context": [0.26, 0.22, 0.23, 0.29],
@@ -82,7 +87,7 @@ HEADER = r"""\usepackage{setspace}
 \setcounter{bottomnumber}{3}
 \setcounter{totalnumber}{5}
 \newcommand{\proofslot}[2]{\par\noindent\fbox{\parbox[c][#1][c]{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{\centering #2}}\par}
-\newcommand{\proofpage}[1]{\noindent\textbf{Phase 9 layout reservation: #1 of 4}\par\medskip}
+\newcommand{\proofpage}{\noindent\textbf{Mesh-sensitivity results: one-page allowance}\par\medskip}
 """
 
 
@@ -171,39 +176,20 @@ def table_tex(block: dict, number: int, api_version: list[int]) -> str:
             + "\n\\toprule\n" + "\n".join(rows) + "\n\\bottomrule\n\\end{tabular}}")
 
 
-def phase9_pages(blocks: list[dict], api_version: list[int]) -> list[dict]:
-    """Keep every placeholder sentence and spread its four jobs over four pages."""
-    groups: list[list[dict]] = [[], [], [], []]
-    current = 0
+def mesh_comparison_page(blocks: list[dict]) -> list[dict]:
+    """Keep the concise pending comparison and one figure slot on one page."""
+    reserved = [raw("\\clearpage\n\\proofpage")]
+    figure_slots = 0
     for block in blocks:
-        text = plain(block)
-        if block["t"] == "Header":
-            text = plain(block["c"][2])
-            if text.startswith("4.13.2."):
-                current = 1
-            elif text.startswith("4.13.3."):
-                current = 2
-        if re.match(r"Table \d+\.", text) or block["t"] == "Table" or text.startswith("Finding to complete:"):
-            current = 3
-        if block["t"] == "Table":
-            block = raw(table_tex(block, 10, api_version))
         if block["t"] == "RawBlock" and block["c"][0] == "html":
             continue
-        groups[current].append(block)
-
-    reserved = []
-    for index, group in enumerate(groups):
-        reserved.append(raw("\\clearpage\n" + rf"\proofpage{{{index + 1}}}"))
-        reserved.extend(group)
-        if index == 0:
-            reserved.append(raw(r"\proofslot{11.0cm}{Reserved comparison basis and final-model diagram.\\No result is assumed.}"))
-        elif index == 1:
-            reserved.append(raw(r"\proofslot{17.0cm}{Figure 16: reserved matched liquid fields across the five meshes.\\No synthetic contours.}"))
-        elif index == 2:
-            reserved.append(raw(r"\proofslot{16.5cm}{Figure 17: reserved histories and response to mesh refinement.\\No synthetic curves.}"))
-        else:
-            reserved.append(raw(r"\proofslot{10.0cm}{Reserved evidence-based finding and its limits.\\Mesh independence remains unresolved.}"))
-        reserved.append(raw(r"\vfill\noindent\textit{Review layout only. Replace this reserved page with verified Phase 9 evidence.}"))
+        reserved.append(block)
+        if block["t"] == "BlockQuote" and plain(block).startswith("Figure 18 reserved"):
+            reserved.append(raw(r"\proofslot{9.0cm}{Figure 18: final-model mesh sensitivity.\\Matched liquid fields with a compact storage/removal comparison.\\Results pending.}"))
+            figure_slots += 1
+    if figure_slots != 1:
+        raise ValueError("Expected one pending Figure 18 in the mesh-comparison section")
+    reserved.append(raw(r"\vfill\noindent\textit{Review layout only. Replace this allowance with the verified mesh comparison and its finding.}"))
     reserved.append(raw(r"\clearpage"))
     return reserved
 
@@ -228,9 +214,9 @@ def transform(blocks: list[dict], source: Path, api_version: list[int], images: 
                 for item in tail:
                     if item["t"] == "Header":
                         item["c"][0] = max(1, item["c"][0] - 1)
-                converted.extend(phase9_pages(tail, api_version))
+                converted.extend(mesh_comparison_page(tail))
                 break
-        # The two published Pointon panels constitute one numbered Figure 3.
+        # The two published Pointon panels constitute one numbered Figure 4.
         if block["t"] == "Para" and plain(block).startswith("(a) Inlet configurations."):
             panel_a, panel_b = walk_images(blocks[index + 1])[0], walk_images(blocks[index + 3])[0]
             tex_a, path_a = image_tex(panel_a, source)
@@ -297,8 +283,8 @@ def main() -> None:
     ast = {"pandoc-api-version": api_version, "meta": {}, "blocks": combined}
     figure_numbers = sorted(int(match) for block in combined if block["t"] == "RawBlock"
                             for match in re.findall(r"\\caption\*\{Figure (\d+)\.", block["c"][1]))
-    if figure_numbers != list(range(1, 16)):
-        raise RuntimeError(f"Expected every current main Figure 1–15 once; found {figure_numbers}")
+    if figure_numbers != list(range(1, 18)):
+        raise RuntimeError(f"Expected every current main Figure 1–17 once; found {figure_numbers}")
     (out / "body-input.md").write_text("\n\n".join(source_inputs))
     (out / "body-proof-ast.json").write_text(json.dumps(ast, indent=2))
     (out / "layout-header.tex").write_text(HEADER)
@@ -324,15 +310,15 @@ def main() -> None:
             continue
         titles = [line.strip() for line in content.splitlines()
                   if re.match(r"\s*[1-6]\.\s+(Introduction|Literature review|Model and methods|Results|Discussion|Conclusions)", line)
-                  or "Phase 9 layout reservation:" in line]
+                  or "Mesh-sensitivity results:" in line]
         page_map.append({"page": number, "titles": titles})
     manifest = {
         "purpose": "Review proof of Introduction through Conclusions; not a submission PDF",
         "pages": pages,
-        "limit_pages": 25,
-        "within_limit": pages <= 25,
-        "phase9_reserved_pages": [item["page"] for item in page_map
-                                  if any("Phase 9 layout reservation:" in title for title in item["titles"])],
+        "limit_pages": 30,
+        "within_limit": pages <= 30,
+        "mesh_comparison_reserved_pages": [item["page"] for item in page_map
+                                           if any("Mesh-sensitivity results:" in title for title in item["titles"])],
         "font": "Times New Roman",
         "body_font_pt": 12,
         "body_line_stretch": 1.15,
@@ -345,8 +331,8 @@ def main() -> None:
         "template_difference": "Compact 4 pt paragraph gaps and heading gaps; body font, body line spacing and page margins retained",
         "scientific_text_cuts": [],
         "layout_changes": ["Remove redundant Part headings", "Use the explicit numbered captions rather than image alt text",
-                           "Group the two published Figure 3 panels vertically at 10 cm width", "Assign table column widths",
-                           "Allow numbered figures to float while retaining their source order", "Reserve four whole Phase 9 pages"],
+                           "Group the two published Figure 4 panels vertically at 10 cm width", "Assign table column widths",
+                           "Allow numbered figures to float while retaining their source order", "Reserve one page for the final mesh comparison"],
         "image_widths_cm": IMAGE_WIDTHS,
         "table_column_fractions": TABLE_WIDTHS,
         "source_hashes": {str(path.relative_to(REPO)): hashlib.sha256(path.read_bytes()).hexdigest() for path in SOURCES},
@@ -354,9 +340,12 @@ def main() -> None:
         "page_map": page_map,
         "reproduce": "PyAnsys/.venv/bin/python PyAnsys/scripts/analysis/export_final_report_page_proof.py",
     }
-    phase_pages = ", ".join(str(page) for page in manifest["phase9_reserved_pages"])
-    if len(manifest["phase9_reserved_pages"]) != 4:
-        raise RuntimeError("The rendered proof must contain exactly four Phase 9 reserved pages")
+    mesh_pages = ", ".join(str(page) for page in manifest["mesh_comparison_reserved_pages"])
+    if len(manifest["mesh_comparison_reserved_pages"]) != 1:
+        raise RuntimeError("The rendered proof must contain exactly one mesh-comparison reserved page")
+    reserved_page = manifest["mesh_comparison_reserved_pages"][0]
+    if "5. Discussion" not in page_texts[reserved_page]:
+        raise RuntimeError("The mesh-comparison allowance spilled beyond its single reserved page")
     log = (out / "body-page-proof.log").read_text()
     warnings = [line.strip() for line in log.splitlines()
                 if "Overfull" in line or "Missing character:" in line]
@@ -366,18 +355,18 @@ def main() -> None:
         "# Main-body page proof\n\n"
         f"[body-page-proof.pdf](body-page-proof.pdf) contains **{pages} pages**, counted from "
         "Introduction through Conclusions. Front matter, references and appendices are excluded. "
-        f"Exactly four whole pages are reserved for Phase 9: **{phase_pages}**. "
-        + ("This proof meets the 25-page body limit.\n\n" if pages <= 25
-           else f"This proof exceeds the 25-page body limit by **{pages - 25} pages**.\n\n")
+        f"One page is reserved for the final mesh comparison: **{mesh_pages}**. "
+        + ("This proof meets the 30-page body limit.\n\n" if pages <= 30
+           else f"This proof exceeds the 30-page body limit by **{pages - 30} pages**.\n\n")
         + "The proof uses A4, 12 pt Times New Roman body text, 1.15 body line spacing, "
         "20 mm top/bottom margins and 25 mm side margins. Captions use the template's small "
         "type (approximately 11 pt). Paragraph gaps are 4 pt, with compact heading gaps. "
         "Those gaps differ from the supplied template; the body type, line spacing and margins are retained.\n\n"
         "All current main-body text and scientific images are included. The recipe removes "
         "redundant Part headings and uses each explicit numbered caption once. It places the two "
-        "published Figure 3 panels vertically at 10 cm width and assigns table widths. Figure pixels and "
+        "published Figure 4 panels vertically at 10 cm width and assigns table widths. Figure pixels and "
         "scientific data are unchanged. Short tables stay together rather than splitting across pages.\n\n"
-        "This is a **review proof**, not the submission PDF. Phase 9 boxes contain no invented "
+        "This is a **review proof**, not the submission PDF. The mesh-comparison slot contains no invented "
         "results. Replacing them with final evidence can change pagination. In-text references "
         "to excluded appendices remain in the body for the review.\n\n"
         "Reproduce from the repository root:\n\n"
@@ -391,7 +380,7 @@ def main() -> None:
     if warnings:
         raise RuntimeError("Inspect the proof: " + "; ".join(warnings))
     print(json.dumps({"pdf": str(pdf), "pages": pages,
-                      "phase9_reserved_pages": manifest["phase9_reserved_pages"], "within_limit": pages <= 25}, indent=2))
+                      "mesh_comparison_reserved_pages": manifest["mesh_comparison_reserved_pages"], "within_limit": pages <= 30}, indent=2))
 
 
 if __name__ == "__main__":

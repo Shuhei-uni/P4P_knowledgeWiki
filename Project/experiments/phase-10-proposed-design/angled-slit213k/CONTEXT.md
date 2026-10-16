@@ -1,5 +1,19 @@
 # Phase 10 — Angled slit contract
 
+| Current authority — 15 October 2026 | Selected scope |
+| --- | --- |
+| Server | Server 5 only; previous Server 6 ownership is historical |
+| New continuation | [Plan v1 from 150 to 500 ms](planv1-500ms/setup.md) |
+| Source | Preserve the completed 150 ms basic-EWF pair and all earlier endpoints |
+
+| Latest authority — 13 October 2026 | Current scope |
+| --- | --- |
+| Selected continuation | Angle N33492 / 50 ms → N43492 / 150 ms; 10,000 updates at 10 µs |
+| Settings | Same loaded angle settings and frozen bulk; only fixed timestep restored to 10 µs |
+| Preservation | Angle 50 ms pair kept; vertical 150 ms pair preserved before angle load |
+| Execution | Prepare, save/reopen, then one fixed command; no thresholds; leave Fluent open |
+| Current evidence | [Setup](setup.md), [results](results.md), [state](phase-state.yaml) |
+
 | Record ownership | Value |
 | --- | --- |
 | Phase | Phase 10 proposed design; human reassignment, 12 October 2026 |
@@ -42,3 +56,9 @@
 | Film numerics | Fixed 10 µs for 2629 updates to49.995ms; one final5 µs update to exactly50ms |
 | Current state | Complete: N33492 /50.000ms; finalpair saved/reopened and both OneDrivecopies SHA-256 verified; Fluent left open; watcher stopped |
 | Numerical decision | No Courant, residual, thickness, ledger or qualification acceptance gates; record diagnostics only |
+
+| Latest endpoint | Verified state |
+| --- | --- |
+| Angle continuation | Complete: N43492 / 150 ms at 10 µs; native save/reopen and OneDrive hashes verified |
+| Earlier pair | N33492 / 50 ms retained; hashes rechecked |
+| Session | Fluent open and idle; watcher stopped; no further solve selected |

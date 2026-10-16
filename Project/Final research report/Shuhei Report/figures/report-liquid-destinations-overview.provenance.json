@@ -1,0 +1,117 @@
+{
+  "type": "Conceptual map; no measured rates, geometry or mass-balance closure implied.",
+  "basis": [
+    "draft/02-model-and-methods.md §§3.2–3.3",
+    "draft/03-results.md §§4.7,4.10–4.11",
+    "draft/04-discussion-conclusions-and-future-work.md §§5.3–5.6"
+  ],
+  "nodes": {
+    "inlet": {
+      "x": 1.7,
+      "y": 6.2,
+      "label": "Inlet liquid",
+      "role": "inlet"
+    },
+    "bulk": {
+      "x": 5.5,
+      "y": 6.2,
+      "label": "Bulk liquid\nstorage and\ntransport",
+      "role": "bulk"
+    },
+    "film": {
+      "x": 9.3,
+      "y": 6.2,
+      "label": "Wall film\nstorage and\ntransport",
+      "role": "film"
+    },
+    "droplets": {
+      "x": 13.1,
+      "y": 6.2,
+      "label": "Released droplets\ntracked\nseparately",
+      "role": "droplets"
+    },
+    "outlet": {
+      "x": 17.5,
+      "y": 6.2,
+      "label": "Liquid leaving\nwith steam",
+      "role": "outlet"
+    },
+    "collector": {
+      "x": 5.5,
+      "y": 2.4,
+      "label": "Bulk collector\nnumerical\nmass sink",
+      "role": "removal"
+    },
+    "native": {
+      "x": 9.3,
+      "y": 2.4,
+      "label": "Native film\noutflow at\nfilm-domain edge",
+      "role": "removal"
+    },
+    "direct": {
+      "x": 13.1,
+      "y": 2.4,
+      "label": "Direct film drain\nnumerical\nmass sink",
+      "role": "removal"
+    }
+  },
+  "internal_transfers": [
+    "bulk → film: accretion",
+    "film → droplets: stripping / edge separation",
+    "droplets → film: droplet collection"
+  ],
+  "external_routes": [
+    "bulk → steam outlet",
+    "droplets → steam outlet: possible escape, fate unresolved",
+    "bulk → numerical collector",
+    "film → native edge outflow",
+    "film → numerical direct drain"
+  ],
+  "claim_limit": "Separate configurations; droplet fate requires tracking. Native film-edge outflow is distinct from the direct sink and physical brine discharge. Frozen-bulk film development is not full-model conservation.",
+  "connected_diagram_tool": "Whimsical generation attempted; account object limit blocked content creation. Local SVG/PDF/Python fallback.",
+  "figure": "report-liquid-destinations-overview",
+  "output": {
+    "png": {
+      "filename": "report-liquid-destinations-overview.png",
+      "sha256": "523276bcdbd574bae9a3bb5d6c137fb4b4fba2f0165225908da9002ed4571f69"
+    },
+    "pdf": {
+      "filename": "report-liquid-destinations-overview.pdf",
+      "sha256": "57ef048007d577e1ad7661efa2c4280e86e41860258e0f665a60b0fe8702fccf"
+    },
+    "svg": {
+      "filename": "report-liquid-destinations-overview.svg",
+      "sha256": "c4a0696937cab6f0ea05b4668c981e40018d87666a74d4c82af8319353b8e3db"
+    }
+  },
+  "script": {
+    "path": "PyAnsys/scripts/analysis/plot_final_report_argument_figures.py",
+    "sha256": "eb76a44c154efa26012d11ad94094666694aacb50a0b75d21cfb399ed774cf18"
+  },
+  "software": {
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.6"
+  },
+  "plot_text": [
+    "Inlet liquid",
+    "Bulk liquid\nstorage and\ntransport",
+    "Wall film\nstorage and\ntransport",
+    "Released droplets\ntracked\nseparately",
+    "Liquid leaving\nwith steam",
+    "Bulk collector\nnumerical\nmass sink",
+    "Native film\noutflow at\nfilm-domain edge",
+    "Direct film drain\nnumerical\nmass sink",
+    "feed",
+    "accretion",
+    "Bulk liquid leaving with steam",
+    "stripping / edge separation",
+    "droplet collection",
+    "possible\nescape",
+    "contact\ncapture",
+    "edge\noutflow",
+    "local removal",
+    "Internal transfer changes the liquid representation; removal takes liquid out of the model.",
+    "Routes tested in separate configurations • Frozen bulk does not advance reciprocal depletion",
+    "Wall capture is one stage of collection"
+  ]
+}

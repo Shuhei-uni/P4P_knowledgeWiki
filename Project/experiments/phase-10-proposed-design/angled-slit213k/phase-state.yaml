@@ -1,36 +1,55 @@
 phase_id: phase-10-proposed-design
-status: COMPLETE_50MS_REOPEN_AND_ONEDRIVE_HASH_VERIFIED
+status: COMPLETE_150MS_REOPEN_AND_ONEDRIVE_HASH_VERIFIED
 authority: human_20261012_paused_angle_pair_10us_50ms_no_thresholds
 setup: Project/experiments/phase-10-proposed-design/angled-slit213k/setup.md
-machine_root: PyAnsys/output/phase10-proposed-design/20261012/angle213k-to50ms
+machine_root: PyAnsys/output/phase10-proposed-design/20261013/angle213k-to150ms
 session: server6_existing_restarted_fluent252_attach_only
 mesh_cells_file: 213232
 native_mesh_verified: true
 parent_hashes_verified: true
-target_total_film_age_s: 0.05
-observed_film_age_s: 0.05000000000001147
+target_total_film_age_s: 0.15
+observed_film_age_s: 0.1500000000000161
 solve_calls: 1
 frozen_bulk_drain_proof: PASS_DIRECT_NATIVE_EWF_OUTFLOW_WITH_IDENTICAL_BULK_FIELDS
 final_pair_verified: true
 mesh_convergence_established: false
 steady_film_established: false
-observed_native_iteration: 33492
+observed_native_iteration: 43492
 active_target: null
-
-main_ewf_step_s: 0.00001
-final_endpoint_step_s: 0.000005
+main_ewf_step_s: 1.0e-05
+final_endpoint_step_s: 1.0e-05
 planned_new_updates: 2630
-planned_final_native_iteration: 33492
+planned_final_native_iteration: 43492
 numerical_acceptance_thresholds: null
 startup_prefix_film_s: 0.025965
-startup_prefix_scope: startup_only_not_latest_endpoint
+startup_prefix_scope: bounded_transcript_prefix_not_latest_clock_or_final_endpoint
 server_id: 6
-startup_evidence: PyAnsys/output/phase10-proposed-design/20261012/angle213k-to50ms/native-startup.json
-
+startup_evidence: PyAnsys/output/phase10-proposed-design/20261013/angle213k-to150ms/native-startup.json
 completed_new_updates: 2630
 new_native_solve_calls: 2
-final_loaded_ewf_step_s: 0.000005
+final_loaded_ewf_step_s: 1.0e-05
 final_pair_onedrive_hashes_verified: true
 solver_left_open: true
 watcher_stopped_on_completion: true
-completion_evidence: PyAnsys/output/phase10-proposed-design/20261012/angle213k-to50ms/completion-reconciliation.json
+completion_evidence: PyAnsys/output/phase10-proposed-design/20261013/angle213k-to150ms/completion-reconciliation.json
+retained_50ms:
+  native_iteration: 33492
+  film_s: 0.05
+  completion_evidence: PyAnsys/output/phase10-proposed-design/20261012/angle213k-to50ms/completion-reconciliation.json
+  paired_reopen_and_onedrive_hashes_verified: true
+continuation_parent_native_iteration: 33492
+continuation_parent_film_s: 0.05
+continuation_updates: 10000
+new_continuation_solve_submitted: true
+prepared_pair_reopen_verified: true
+all_original_boundaries_methods_unchanged: true
+full_ewf_parameter_match_except_restored10us_step: true
+host_continuation_dispatched: true
+continuation_completed_updates: 10000
+startup_prefix_last_film_time_s: 0.05064
+last_verified_native_iteration: 43492
+last_verified_film_time_s: 0.1500000000000161
+total_updates_since_paused23p705ms: 12630
+continuation_new_native_solve_calls: 1
+final_pair_reopen_verified: true
+onedrive_pair_hashes_verified: true

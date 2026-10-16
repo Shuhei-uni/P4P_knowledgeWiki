@@ -1,5 +1,7 @@
 
-The final research report should have a maximum of 25 pages with Times New Roman font size 12 pt. The number of pages should be counted from introduction to conclusion section. 
+The final research report should have a maximum of 30 pages with Times New Roman font size 12 pt. The number of pages should be counted from introduction to conclusion section. 
+
+The 30-page limit follows the author’s updated instruction on 14 October 2026 and supersedes the earlier 25-page limit.
 
 Report must be made up of the following sections:
 
@@ -25,5 +27,6 @@ Each report (digital file) will be submitted to Turnitin to check it against all
 
 Students should make sure that the .pdf file submitted can be read by Turnitin and that it is editable. Students are encouraged to submit their final research report to Turnitin before they actually submit it on Canvas to make sure the similarity score of the research report is low. For more instructions on report writing see
 
+- https://www.sophielwang.com/blog/paper-writing (highly recommend)
 - [Writing Effectively - Report writing](https://learningessentials.auckland.ac.nz/writing-effectively/assignment-types/report/)
 - [Write@Uni](https://flexiblelearning.auckland.ac.nz/writeatuni/)

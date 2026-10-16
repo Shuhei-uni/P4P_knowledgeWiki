@@ -1,6 +1,11 @@
 {
-  "figure": "results-described-roughness",
-  "processing": "Numerical replot with descriptive labels. No source PNG pixels edited; no source data changed; all selected points drawn without smoothing.",
+  "processing": "Unchanged twelve-case CSV means; lines connect settings and are not fitted curves. Inventory annotation uses whole-run change, separately from the tail-500 outlet mean.",
+  "sources": {
+    "roughness_summary": {
+      "path": "PyAnsys/output/phase72a_family_r/analysis-20260923T054600Z-cs-sensitivity-v2/tail-summary.csv",
+      "sha256": "869db8e0b06e411c773cf02b82e313c15541f73a5afab6c5094da39c0ef44be0"
+    }
+  },
   "checks": {
     "height_sweep_mm": [
       0.0,
@@ -22,72 +27,113 @@
       15.017068988241844,
       13.625255667306952
     ],
-    "height_constant": 0.5,
-    "fixed_height_sweeps_mm": [
-      0.5,
-      2.0
-    ],
     "mean_window": [
       8087,
       8586
     ],
-    "outward_flux_sign": "negative of native signed flux",
-    "y_limits_kg_s": [
-      0,
-      33
-    ]
+    "whole_run_R7_inventory_loss_kg": 187.10913983241068
   },
-  "plot_text": [
-    "Roughness height, k\u209b (mm)",
-    "Outward bulk-liquid flow (kg/s)",
-    "Height sweep at C\u209b = 0.5",
-    "Roughness constant, C\u209b",
-    "Constant sweep at fixed height",
-    "0.5 mm roughness",
-    "2 mm roughness",
-    "Smooth-wall continuation",
-    "Wall roughness and steam-outlet liquid flow\nFilm disabled; means over iterations 8087\u20138586"
-  ],
-  "sources": {
-    "historical_liquid": {
-      "path": "PyAnsys/output/phase72a-lineage-N45606/20261005/selected-lineage-histories.csv",
-      "sha256": "fd2dc3dd83f8a0ce55770295ff14402717de1786d316a6d078e71de156c25f26"
+  "claim_limit": "Outlet reduction with depletion does not establish increased collection or an optimum roughness.",
+  "figure": "results-described-roughness",
+  "output": {
+    "png": {
+      "filename": "results-described-roughness.png",
+      "sha256": "09519c4edd23cb67435ba56830bd1bdf25714399f7a2f665da0b060ef7c60c37"
     },
-    "historical_residuals": {
-      "path": "PyAnsys/output/phase72a-lineage-N45606/20261005/carrier-residuals.csv",
-      "sha256": "2f056c646cb59fb037f11e4780ec6faddb74fb78a88c23a4c55aa6a8613b8149"
+    "pdf": {
+      "filename": "results-described-roughness.pdf",
+      "sha256": "0e5a343d7653df01180c53d2c9f9131ec8e9f068a5e33c580398177a23965ae5"
     },
-    "historical_loading": {
-      "path": "PyAnsys/output/phase72a-lineage-N45606/20261005/recovered-r0-reports/P71A-R0-SMOOTH-CONTROL-v2-command.out",
-      "sha256": "935de146afbf79ffad40173383da00c3ce863abe5bab64476951eafdf079aa88"
-    },
-    "roughness_summary": {
-      "path": "PyAnsys/output/phase72a_family_r/analysis-20260923T054600Z-cs-sensitivity-v2/tail-summary.csv",
-      "sha256": "869db8e0b06e411c773cf02b82e313c15541f73a5afab6c5094da39c0ef44be0"
-    },
-    "film_disabled": {
-      "path": "PyAnsys/output/phase72a_ewf_family_e_student_20260922T115500Z/E0/report-histories.json",
-      "sha256": "86a155717acb9d2386d8114254818455b1dfc23609b2714f0981803bbaa36360"
-    },
-    "accretion_enabled": {
-      "path": "PyAnsys/output/phase72a_ewf_student_e27_run_20260923T071523Z/E2.7/report-histories.json",
-      "sha256": "1adc9d9d20fa5f1912f38d5b6a292a787e693ee5be69599d2c1a753518f6be63"
-    },
-    "shortened_liquid": {
-      "path": "PyAnsys/output/phase72a-stage3-early-ewf-server1/20261005/final-histories.json",
-      "sha256": "9882b96f527d1c5337990759a14eb31f51f3ff600e298855ea75170886307524"
-    },
-    "shortened_residuals": {
-      "path": "PyAnsys/output/phase72a-stage3-early-ewf-server1/20261005/carrier-residuals.json",
-      "sha256": "ef9c462d3eab58e25a278b1c8fd1f1f0e4013bf55a09a4df8f5f661da5e68b49"
-    },
-    "startup_metrics": {
-      "path": "PyAnsys/output/phase72a-stage3-early-ewf-server1/20261005/analysis-summary.json",
-      "sha256": "a0e5b2faa71429e68fa2fc1e3ef87c9992158e77f1319b4acfdf5e35163caf52"
+    "svg": {
+      "filename": "results-described-roughness.svg",
+      "sha256": "ff258ada893a4a7d0e23693898706979f2996918f2dc7a33cc9ee31f5de68b07"
     }
+  },
+  "script": {
+    "path": "PyAnsys/scripts/analysis/plot_final_report_argument_figures.py",
+    "sha256": "eb76a44c154efa26012d11ad94094666694aacb50a0b75d21cfb399ed774cf18"
   },
   "software": {
     "matplotlib": "3.10.9",
     "numpy": "2.4.6"
-  }
+  },
+  "plot_text": [
+    "Small roughness raises outlet flow",
+    "8 mm: outlet −44.09%\nBulk inventory loss: 187.109 kg",
+    "Roughness height, kₛ (mm)",
+    "−2",
+    "−2",
+    "0",
+    "0",
+    "2",
+    "2",
+    "4",
+    "4",
+    "6",
+    "6",
+    "8",
+    "8",
+    "10",
+    "10",
+    "Outward bulk-liquid flow (kg/s)",
+    "0",
+    "0",
+    "5",
+    "5",
+    "10",
+    "10",
+    "15",
+    "15",
+    "20",
+    "20",
+    "25",
+    "25",
+    "30",
+    "30",
+    "35",
+    "35",
+    "40",
+    "40",
+    "(a) Height sweep at Cₛ = 0.5",
+    "Roughness constant, Cₛ",
+    "0.4",
+    "0.4",
+    "0.5",
+    "0.5",
+    "0.6",
+    "0.6",
+    "0.7",
+    "0.7",
+    "0.8",
+    "0.8",
+    "0.9",
+    "0.9",
+    "1.0",
+    "1.0",
+    "1.1",
+    "1.1",
+    "0",
+    "0",
+    "5",
+    "5",
+    "10",
+    "10",
+    "15",
+    "15",
+    "20",
+    "20",
+    "25",
+    "25",
+    "30",
+    "30",
+    "35",
+    "35",
+    "40",
+    "40",
+    "(b) Constant sweep at fixed height",
+    "0.5 mm roughness",
+    "2 mm roughness",
+    "Smooth-wall continuation",
+    "Roughness response is non-monotonic\nFilm disabled; means over iterations 8087–8586"
+  ]
 }

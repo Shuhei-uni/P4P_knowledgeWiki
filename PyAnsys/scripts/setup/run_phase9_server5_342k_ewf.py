@@ -1,11 +1,12 @@
 """Run the agreed 342k settings/count schedule on Server 5 only."""
 import argparse,fcntl,json,math,re,time,traceback
+from decimal import Decimal
 from pathlib import Path
 from phase9_server5_common import run,attach,OUT
 from pyansys_fluent import ewf_local_drain as drain
 from pyansys_fluent.ewf_staged import refresh_plan
 from pyansys_fluent.common import quote_scheme_string
-from phase9_server5_live_stream import start_live_stream
+from phase9_server5_live_stream import start_live_stream, native_journal_idle, wait_for_native_journal
 
 STAGES=[('bulk-adjustment',1500,1e-7,True),('frozen-transition',1000,1e-7,False),
  ('step-2p5us',1000,2.5e-6,False),('step-5us',1000,5e-6,False),
@@ -13,19 +14,27 @@ STAGES=[('bulk-adjustment',1500,1e-7,True),('frozen-transition',1000,1e-7,False)
  ('growth-10000-b',10000,5e-6,False),('growth-10000-c',10000,5e-6,False),
  ('growth-to-195ms',2310,5e-6,False),('bulk-reactivation-to-200ms',1000,5e-6,True)]
 
-FILM_COURANT_LIMIT=0.8
+FILM_COURANT_LIMIT=None
+
+def microseconds_to_seconds(value):
+ return float(Decimal(str(value))*Decimal('0.000001'))
+
+def controls_match(actual,expected):
+ return all(k in actual and (math.isclose(actual[k],v,rel_tol=1e-12,abs_tol=1e-18) if isinstance(v,float) else actual[k]==v) for k,v in expected.items())
 
 def verify_film_updates(text,count,dt):
  rows=re.findall(r'Film time = ([\d.eE+-]+) with timestep = ([\d.eE+-]+), \(max_cfl: ([\d.eE+-]+)\)',text)
  if len(rows)!=count or any(not math.isclose(float(row[1]),dt,abs_tol=1e-12) for row in rows):
   raise RuntimeError('Accepted film-step evidence incomplete')
  maximum=max(float(row[2]) for row in rows)
- if any(not math.isfinite(float(row[2])) for row in rows) or maximum>FILM_COURANT_LIMIT:
-  raise RuntimeError(f'Film Courant limit exceeded: {maximum} > {FILM_COURANT_LIMIT}; preserve attempt and reconcile lower-step recovery')
  return maximum
 
 def recovery_stages(clock,dt):
  # First prove 1,000 updates at the lower level, then use long fixed-input blocks.
+ if clock>=.195-1e-10:
+  remaining=round((.2-clock)/dt)
+  if remaining<0 or not math.isclose(clock+remaining*dt,.2,abs_tol=1e-10):raise RuntimeError('Recovery clock does not align with final endpoint')
+  return [('bulk-reactivation-to-200ms',remaining,dt,True)] if remaining else []
  remaining=round((.195-clock)/dt)
  if remaining<=0 or not math.isclose(clock+remaining*dt,.195,abs_tol=1e-10):
   raise RuntimeError('Recovery clock does not align with frozen endpoint')
@@ -54,32 +63,55 @@ def activate_controls(s,delta,folder,label):
  run.require_match({'fields':after['readback']['fields']},{'fields':before['readback']['fields']})
  if after['methods']!=before['methods']:raise RuntimeError('Activation changed bulk methods')
  if not math.isclose(run.film(s)['film_elapsed_time'],clock,abs_tol=1e-12):raise RuntimeError('Activation changed film clock')
- if not all(dict(s.rp_vars('wall-film/model-parameters'))[k]==v for k,v in delta.items()):raise RuntimeError('Activated controls differ')
+ if not controls_match(dict(s.rp_vars('wall-film/model-parameters')),delta):raise RuntimeError('Activated controls differ')
  return pair
 
 def main():
- parser=argparse.ArgumentParser();parser.add_argument('--resume',action='store_true');parser.add_argument('--recover-courant',action='store_true');args=parser.parse_args()
+ parser=argparse.ArgumentParser();parser.add_argument('--resume',action='store_true');parser.add_argument('--recover-courant',action='store_true');parser.add_argument('--recover-final-error',action='store_true');parser.add_argument('--continue-at-one-us',action='store_true');parser.add_argument('--next-step-us',type=float);args=parser.parse_args()
+ if args.recover_final_error and not args.resume:raise RuntimeError('Final-stage error recovery requires resume mode')
+ if args.next_step_us is not None and (not args.resume or not math.isfinite(args.next_step_us) or args.next_step_us<=0):raise RuntimeError('A new fixed step requires resume and a positive finite value in microseconds')
+ if args.continue_at_one_us and not args.resume:raise RuntimeError('Updated timestep schedule requires resume mode')
  if args.recover_courant and not args.resume:raise RuntimeError('Courant recovery requires explicit resume mode')
  lock=(OUT/'controller.lock').open('a+');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
  manifest=OUT/'run-manifest.json'
  if manifest.exists() and not args.resume:raise RuntimeError('Existing run requires reconciliation')
  prepared=json.loads((OUT/'342k-ewf-settings-current.json').read_text())
  s=attach();stamp=str(time.time_ns());folder=run.WORK/'342k';live=OUT/('live-'+stamp+'.txt')
- observing_handover=args.resume and not args.recover_courant and json.loads(manifest.read_text()).get('status')=='NATIVE_COMMAND_HANDED_OVER_CLIENT_STOPPED'
+ observing_handover=args.resume and not args.recover_courant and not args.recover_final_error and json.loads(manifest.read_text()).get('status')=='NATIVE_COMMAND_HANDED_OVER_CLIENT_STOPPED'
  if observing_handover:
   # Capture before inspecting busy state, so completion cannot fall into a stream gap.
   start_live_stream(live)
   rp=OUT/'desktop-controller.json';receipt=json.loads(rp.read_text());receipt.update(live_transcript=str(live),status='OBSERVING_ACCEPTED_NATIVE_COMMAND');run.dump(rp,receipt)
-  if not s.settings.solution.run_calculation.iterate.is_active():
+  if native_journal_idle() is not True:
    print('WAITING_FOR_ACCEPTED_NATIVE_JOURNAL_NO_SOLVE_SUBMITTED',flush=True)
-   while True:
-    text=live.read_text()[-131072:] if live.exists() else ''
-    if '/file/stop-transcript' in text and 'Transcript closed.' in text:break
-    time.sleep(15)
+   wait_for_native_journal(live)
+   print('ACCEPTED_NATIVE_JOURNAL_IDLE_RECONCILE_ENDPOINT',flush=True)
  run.require_idle(s)
  if args.resume:
   m=json.loads(manifest.read_text())
-  if args.recover_courant:
+  if args.recover_final_error:
+   if m['status']!='RECOVERY_REQUIRED' or m['active_stage']!='bulk-reactivation-to-200ms' or not math.isclose(m['accepted_film_s'],.195,abs_tol=1e-10):raise RuntimeError('Unexpected final-stage recovery starting state')
+   run.dump(OUT/('original-final-error-'+stamp+'.json'),m)
+   failed=run.save(s,folder,'preserved-final-bulk-error-'+stamp);failed_clock=run.film(s)
+   text=run.read_text(s,m['active_journal'][:-4]+'.trn');(OUT/('preserved-final-bulk-error-'+stamp+'.trn')).write_text(text)
+   if not re.search(r'floating point exception',text,re.I):raise RuntimeError('Final-stage numerical recovery requires native FPE evidence')
+   if s.settings.file.stop_transcript.is_active():s.settings.file.stop_transcript()
+   if s.settings.file.stop_transcript.is_active() or not s.settings.file.start_transcript.is_active():raise RuntimeError('Failed native transcript remains open')
+   healthy=m['last_activation_pair']
+   if healthy['native_iteration']!=m['verified_native_end']:raise RuntimeError('Bulk-active recovery pair coordinate differs')
+   for key in ['case','data']:
+    digest=run.remote_file_sha256(s,healthy[key],str(folder/'scratch'/f'final-healthy-{key}-{stamp}.sha256.txt'))
+    if digest!=healthy[key+'_sha256']:raise RuntimeError('Bulk-active recovery pair hash differs')
+   run.load(s,healthy)
+   if run.native_iteration(s)!=m['verified_native_end'] or not math.isclose(run.film(s)['film_elapsed_time'],.195,abs_tol=1e-10):raise RuntimeError('Restored final-stage coordinate differs')
+   run.assert_bulk_active(s);run.require_bulk_audit(s);run.read_feed(s,1.0);drain.audit(s,True)
+   stages=recovery_stages(.195,1e-6)
+   m.setdefault('recoveries',[]).append({'reason':'Native FPE during final bulk-active stage; retry at 1us','failed_pair':failed,'failed_clock':failed_clock,'restored_bulk_active_pair':healthy,'new_step_s':1e-6})
+   m.update(latest_pair=healthy,schedule=[(b['stage'],b['count'],b['step_s'],b['bulk_active']) for b in m['blocks']]+stages,native_target_final=m['verified_native_end']+5000,status='FINAL_BULK_RECOVERY_RESTORED',active_target=None)
+   m.pop('error',None);run.dump(manifest,m)
+   run.dump(OUT/'final-bulk-error-recovery.json',{'status':'RESTORED_195MS_BULK_ACTIVE','failed_pair':failed,'failed_clock':failed_clock,'restored_pair':healthy,'step_s':1e-6,'iterations':5000,'native_target_final':m['native_target_final'],'numerical_limits_enabled':False})
+   print('FINAL_BULK_ERROR_RECOVERY_PARENT_VERIFIED',m['verified_native_end'],.195,1e-6,flush=True)
+  elif args.recover_courant:
    if m['status'] not in {'NATIVE_COMMAND_HANDED_OVER_CLIENT_STOPPED','RECOVERY_REQUIRED'}:raise RuntimeError('Unexpected Courant recovery starting state')
    run.dump(OUT/('original-courant-attempt-'+stamp+'.json'),m)
    request=json.loads((OUT/'courant-recovery-request.json').read_text())
@@ -165,6 +197,14 @@ def main():
      'start_film_s':run.film(s)['film_elapsed_time'],'verified_native_end':8580,'latest_pair':prepared['pair'],'schedule':STAGES,
      'blocks':[],'target_film_s':.2,'native_target_final':51390,'never_exit_fluent':True,'requires_desktop_running':True}
   stages=STAGES
+ selected_step=(microseconds_to_seconds(args.next_step_us) if args.next_step_us is not None else 1e-6 if args.continue_at_one_us else m.get('pending_human_step_s'))
+ if selected_step is not None:
+  step_label=f'{selected_step*1e6:g}'.replace('.','p')+'us'
+  stages=[(label.replace('courant-recovery','fixed-'+step_label),count,dt,active) for label,count,dt,active in recovery_stages(m['accepted_film_s'],selected_step)]
+  m.update(schedule=[(b['stage'],b['count'],b['step_s'],b['bulk_active']) for b in m['blocks']]+stages,native_target_final=m['verified_native_end']+sum(x[1] for x in stages),film_courant_operating_limit=None,numerical_limit_checks_enabled=False,human_selected_step_s=selected_step)
+  m.pop('pending_human_step_s',None)
+  run.dump(manifest,m)
+  print('HUMAN_UPDATED_FIXED_STEP_SCHEDULE',m['verified_native_end'],m['accepted_film_s'],selected_step,m['native_target_final'],flush=True)
  monitor_folder=folder/'monitors'/stamp
  run.base.powershell(s,"New-Item -ItemType Directory -Force -Path '"+str(monitor_folder)+"' | Out-Null")
  paths=run.base.instrument(s,monitor_folder)
@@ -182,7 +222,7 @@ def main():
     s.settings.solution.controls.equations.set_state({key:bulk_active for key in equations})
     if any(bool(v)!=bulk_active for v in s.settings.solution.controls.equations.get_state().values()):raise RuntimeError('Equation setter readback differs')
    params=dict(s.rp_vars('wall-film/model-parameters'));delta=refresh_plan(dt)
-   changed=bulk_changed or any(params[k]!=v for k,v in delta.items()) or m.pop('force_first_activation_after_control_repair',False)
+   changed=bulk_changed or not controls_match(params,delta) or m.pop('force_first_activation_after_control_repair',False)
    s.settings.setup.named_expressions['P72dRefreshSpan'].definition=f'{dt:.17g}[s]'
    if changed:
     print('ACTIVATE_CONTROLS_SAVE_REOPEN',stage,dt,flush=True)

@@ -1,0 +1,15 @@
+status: COMPLETE_VERIFIED
+server_id: 6
+mesh_cells: 60964
+parent_native_iteration: 8082
+parent_film_time_s: 0.000665
+final_native_iteration: 50899
+final_film_time_s: 0.2
+production_updates: 42817
+bulk_active: true
+solver_idle: true
+final_pair_reopened: true
+shared_copy_hashes_match: true
+cloud_upload_independently_verified: false
+continuation_selected: false
+evidence: PyAnsys/output/phase9-server6-60k-planv1/20261014/host-run-manifest.json

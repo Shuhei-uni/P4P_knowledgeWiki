@@ -1,5 +1,21 @@
 # Phase 10 — Angled slit setup
 
+| Current continuation — 13 October 2026 | Selected value |
+| --- | --- |
+| Authority | Human: angled slit another 100 ms at 10 µs, reaching 150 ms; same settings; preserve 50 ms pair |
+| Parent | Hash-verified N33492 / 50.000 ms paired endpoint |
+| Target | N43492 / 150.000 ms; 10,000 new fixed 10 µs updates |
+| Controlled delta | Restore fixed EWF step from final 5 µs endpoint update to 10 µs; no other physics change |
+| Invariants | Original angle model parameters, all boundary conditions and solution methods; bulk remains frozen |
+| Preservation | Existing angle 50 ms OneDrive pair kept; loaded vertical 150 ms endpoint saved before replacement |
+| Preparation | Load selected angle pair, preserve a separate 50 ms pair, set 10 µs, save/hash/reopen and read back |
+| Numerical thresholds | None; diagnostic histories retained |
+| Run control | One native 10,000-update command; local autosaves every 1000 updates; final paired reopen and unique OneDrive pair |
+| Session | Server 6 only; leave Fluent open; no updates beyond 150 ms or another case |
+| Evidence | [Angle 150 ms continuation](../../../../PyAnsys/output/phase10-proposed-design/20261013/angle213k-to150ms/) |
+
+## Earlier preparation and 50 ms run
+
 | Record ownership | Value |
 | --- | --- |
 | Phase | Phase 10 proposed design; human reassignment, 12 October 2026 |

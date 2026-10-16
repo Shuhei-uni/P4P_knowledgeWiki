@@ -1,0 +1,121 @@
+{
+  "figure": "appendix-pool-control-history",
+  "script": {
+    "path": "PyAnsys/scripts/analysis/plot_final_report_earlier_liquid_studies.py",
+    "sha256": "c1e4a77eac0fc3f0b938a7d4738e045428380e4a30ff4e23eac2357db2a1a1b1"
+  },
+  "sources": [
+    {
+      "path": "Project/experiments/phase-06-full-geometry-with-brine-pool/stage-06-long-horizon-surrogate-hypothesis/figures/P6-S6-H-server2-20260831T004750Z/raw/report_histories_20260831_145202.json",
+      "sha256": "a92e62c424a53d434570e512f1f4a9bfd33e7f4f56c5a5950af0d5f753ac25b6"
+    },
+    {
+      "path": "PyAnsys/output/phase06_stage06/P6-S6-H-server2-20260831T004750Z.runner.json",
+      "sha256": "2b29734f98473baf26cd0c6bf087f929f3c0934eda657326ef355c4f088a7811"
+    },
+    {
+      "path": "PyAnsys/scripts/analysis/analyze_p6_s6_long_hypothesis.py",
+      "sha256": "07e471910764af53fddb0267c83ee3b2716b333468ad27396733317a492f240a"
+    }
+  ],
+  "checks": {
+    "source_curve_array_equality": true,
+    "mass_points": 10051,
+    "pressure_points": 101,
+    "pressure_drawstyle": "steps-post",
+    "assumed_target_kg": 200,
+    "first_mass_kg": 187.7928814004864,
+    "final_mass_kg": 284.8335783200515,
+    "claim_limit": "Numerical liquid-mass target; unequal physical and numerical meanings retained; no physical level-control or convergence claim."
+  },
+  "array_sha256": {
+    "mass_iteration": "b95983ba31271e2487072af98695aa51abc1107d43f212ba102e422ac16aba66",
+    "lower_mass_kg": "3e732d843fcb8c65e7813a7963ce97573f853d64783b02a6ba48eb7468440031",
+    "pressure_iteration": "ef4fa28c5230687c9bcefaf6d3af34d274ad29dcebe561527dc7f64c5becd42f",
+    "pressure_mpa_gauge": "7126b81e4b93904cbaec2b8e086e1e957c3f0cdfe4d906821200553ddae96ca7"
+  },
+  "plot_text": [
+    "14000",
+    "14000",
+    "16000",
+    "16000",
+    "18000",
+    "18000",
+    "20000",
+    "20000",
+    "22000",
+    "22000",
+    "24000",
+    "24000",
+    "26000",
+    "26000",
+    "Lower-region liquid mass [kg]",
+    "180",
+    "180",
+    "200",
+    "200",
+    "220",
+    "220",
+    "240",
+    "240",
+    "260",
+    "260",
+    "280",
+    "280",
+    "300",
+    "300",
+    "Lower-region liquid inventory and bounded pressure control",
+    "Liquid mass at y \u2264 0.10 m",
+    "Assumed target (200 kg)",
+    "Native Fluent iteration",
+    "14000",
+    "14000",
+    "16000",
+    "16000",
+    "18000",
+    "18000",
+    "20000",
+    "20000",
+    "22000",
+    "22000",
+    "24000",
+    "24000",
+    "26000",
+    "26000",
+    "Brine pressure [MPa gauge]",
+    "1.114",
+    "1.114",
+    "1.116",
+    "1.116",
+    "1.118",
+    "1.118",
+    "1.120",
+    "1.120",
+    "1.122",
+    "1.122",
+    "1.124",
+    "1.124",
+    "1.126",
+    "1.126",
+    "Reported brine pressure"
+  ],
+  "output": {
+    "png": {
+      "filename": "appendix-pool-control-history.png",
+      "sha256": "e89a33397b3b3c34418de0418418a82a5796c3887bede9c359390383857dce31"
+    },
+    "pdf": {
+      "filename": "appendix-pool-control-history.pdf",
+      "sha256": "694a0549f2771c517d7297f108c9014a3ffea518d66f7b48971e5e37b2432647"
+    }
+  },
+  "size_inches": [
+    9.0,
+    6.8
+  ],
+  "processing": "Presentation from recorded data only. All curve points retained without smoothing, interpolation or resampling. Original evidence is unchanged.",
+  "software": {
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.6"
+  }
+}

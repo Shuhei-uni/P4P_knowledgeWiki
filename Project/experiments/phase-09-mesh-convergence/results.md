@@ -11,11 +11,12 @@
 
 | Current Server 5 work | State |
 | --- | --- |
+| Selected-pair OneDrive export | Complete: all four selected case/data files copied into `Phase9/Server5/342k/selected-ewf-pre-and-195ms-20261015` under university `P4P-Fluent-Artifacts`. SHA256 verified on Server 5 and independently on this Mac after OneDrive sync. [Cross-computer verification](../../../PyAnsys/output/phase9-ewf-server5/20261009/onedrive-cross-computer-verification.json). |
 | Authority | Human revoked this chat's Server 3 authority; Server 5 only |
 | Parent | 342k N8580 shared initial bulk pair copied/hash-verified; UDF archive hash-verified |
 | EWF settings | Agreed settings reapplied; local child saved/reopened; original main-wall film and bulk fields preserved |
-| Run | 2.5 µs attempt completed N59080 / 160.950 ms, but peak film Courant 1.497401 exceeded the 0.8 limit. Attempt preserved; restored healthy N49080 / 135.950 ms and started 1,000 updates at 0.1 µs toward N50080 / 136.050 ms. |
-| Schedule | At 0.1 µs, 640,500 updates remain from restored N49080: 590,500 frozen to 195 ms and 50,000 bulk-active to 200 ms. Expected final N689580; no completion or steady-state claim. [Recovery evidence](../../../PyAnsys/output/phase9-ewf-server5/20261009/courant-0p1us-continuation-verification.json). |
+| Run | Human selected EWF development complete at N111460 / 195 ms with bulk frozen. Pre-run prepared N8580 / 0.700 ms and final frozen N111460 / 195 ms case/data pairs are saved, hash-verified and explicitly selected. Current bulk-active command is left running only as supplementary work; no continuation or error recovery selected. |
+| Schedule | Selected endpoint 195 ms, bulk frozen; completion does not establish steady state or physical validation. Shared plan now requires both pre-EWF and final 195 ms pairs for every mesh. [Exact selected pairs](../../../PyAnsys/output/phase9-ewf-server5/20261009/selected-ewf-final-pairs.json). |
 | Evidence | [Setup receipt](../../../PyAnsys/output/phase9-ewf-server5/20261009/342k-ewf-settings-current.json); [run manifest](../../../PyAnsys/output/phase9-ewf-server5/20261009/run-manifest.json) |
 
 

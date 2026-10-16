@@ -1,13 +1,10 @@
 {
   "purpose": "Review proof of Introduction through Conclusions; not a submission PDF",
   "pages": 25,
-  "limit_pages": 25,
+  "limit_pages": 30,
   "within_limit": true,
-  "phase9_reserved_pages": [
-    19,
-    20,
-    21,
-    22
+  "mesh_comparison_reserved_pages": [
+    20
   ],
   "font": "Times New Roman",
   "body_font_pt": 12,
@@ -27,9 +24,11 @@
     12,
     13,
     14,
-    15
+    15,
+    16,
+    17
   ],
-  "image_assets": 16,
+  "image_assets": 18,
   "caption_font_pt": 11,
   "geometry_mm": {
     "top": 20,
@@ -47,12 +46,13 @@
   "layout_changes": [
     "Remove redundant Part headings",
     "Use the explicit numbered captions rather than image alt text",
-    "Group the two published Figure 3 panels vertically at 10 cm width",
+    "Group the two published Figure 4 panels vertically at 10 cm width",
     "Assign table column widths",
     "Allow numbered figures to float while retaining their source order",
-    "Reserve four whole Phase 9 pages"
+    "Reserve one page for the final mesh comparison"
   ],
   "image_widths_cm": {
+    "report-liquid-destinations-overview.png": 16.0,
     "rizaldy-2016-figure-5-operation.png": 7.0,
     "zarrouk-purnanto-2015-figure-12-breakdown.png": 10.0,
     "pointon-2009-figure-5-inlets.png": 10.0,
@@ -60,8 +60,12 @@
     "rizaldy-2016-figure-9-entrainment.png": 10.0,
     "model-domain-overview.png": 13.0,
     "results-described-early-development.png": 12.0,
-    "results-described-startup.png": 12.0,
-    "results-film-development-reference500ms.png": 14.0
+    "results-described-startup.png": 16.0,
+    "results-film-development-reference500ms.png": 16.0,
+    "results-described-roughness.png": 14.0,
+    "results-described-film-outlet.png": 14.0,
+    "bulk-comparison-described-film-treatment.png": 14.0,
+    "results-direct-film-drain.png": 14.0
   },
   "table_column_fractions": {
     "Study / context": [
@@ -131,12 +135,13 @@
     ]
   },
   "source_hashes": {
-    "Project/Final research report/Shuhei Report/draft/01-introduction-and-literature-review.md": "4e9f88b046bfc593bbd19712b8ba1fb50f783313aa1cc5e788669f1230a8e982",
-    "Project/Final research report/Shuhei Report/draft/02-model-and-methods.md": "45481d59fc0bdd80d92ed161a4efa67376e87bbee9cad1fc179e0961be10c6a7",
-    "Project/Final research report/Shuhei Report/draft/03-results.md": "d25f35102c66a9922a97d2e8a8eb2fb18bb17c821110b88d68e49be48bd4da84",
-    "Project/Final research report/Shuhei Report/draft/04-discussion-conclusions-and-future-work.md": "d08f2ff710934b1ad32c2c83e5e75c3c9b439344c382ed10530dba4dbee7970b"
+    "Project/Final research report/Shuhei Report/draft/01-introduction-and-literature-review.md": "c886aadee4223b5c84d6aeaa88dfcc7406125e78d7f06a7d288f186bf6b217b5",
+    "Project/Final research report/Shuhei Report/draft/02-model-and-methods.md": "7ccee986df642310d6b12e6f45f79e7b2410b6956fc800008b0222a46cdf259e",
+    "Project/Final research report/Shuhei Report/draft/03-results.md": "6792108f4e9fc1b268bda5fd060c175138b28d2dae6ed14d6a8b0590ad2c399e",
+    "Project/Final research report/Shuhei Report/draft/04-discussion-conclusions-and-future-work.md": "a1f7f9e5b8844edf7c9cdd1bc26367b2797abc733e75458bd405c1f2df947a60"
   },
   "image_hashes": {
+    "Project/Final research report/Shuhei Report/figures/report-liquid-destinations-overview.png": "523276bcdbd574bae9a3bb5d6c137fb4b4fba2f0165225908da9002ed4571f69",
     "Project/Final research report/Shuhei Report/figures/literature/rizaldy-2016-figure-5-operation.png": "1f4aa414bd8bbc5c5e3538a08a4c5614fe7a9bd46ffa9723696ae48cf066a255",
     "Project/Final research report/Shuhei Report/figures/literature/zarrouk-purnanto-2015-figure-12-breakdown.png": "f2e96ff1395f57ac1b0a3070ce1470d0170983cc74b9331582c1b6e42686b06a",
     "Project/Final research report/Shuhei Report/figures/literature/pointon-2009-figure-5-inlets.png": "21e1dd54c4cfcfc261970d7af1384673507d2e385c8a222f81fe9d51e4afa0f1",
@@ -147,12 +152,13 @@
     "Project/Final research report/Shuhei Report/figures/results-inlet-spatial-comparison.png": "0e38ac4e542465e643494a3bbe5624987c253e9ed0947fd92651574a72513087",
     "Project/experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/direct-student-342k/n3000/figures/matched-mesh-checkpoints.png": "aa8563daacd95581214e2dec66d7a776eb772cfec90a7e90dacdf9fd3e300e2b",
     "Project/Final research report/Shuhei Report/figures/results-described-early-development.png": "2c9430e356c6e2ea68ff876915d1332615db191c5bc5fcea2b609f6d36240020",
-    "Project/Final research report/Shuhei Report/figures/results-described-roughness.png": "34e91f94be00d584a7be53a07fce4667329319099ce83a64541f1c7638ac3145",
+    "Project/Final research report/Shuhei Report/figures/results-described-roughness.png": "09519c4edd23cb67435ba56830bd1bdf25714399f7a2f665da0b060ef7c60c37",
     "Project/Final research report/Shuhei Report/figures/results-described-film-outlet.png": "3c219fb603194589945ff4b47e597e7e5438e39bb9e88c37c4d36872673a71eb",
     "Project/Final research report/Shuhei Report/figures/bulk-comparison-described-film-treatment.png": "0611dd629f948ae9a7d56bc555b5703528ed5ef6c32419995254c52e03081488",
-    "Project/Final research report/Shuhei Report/figures/results-described-startup.png": "f79572d631f536ebaf19f900cfe3b57365986a00d8490977214b336b82284db3",
-    "Project/Final research report/Shuhei Report/figures/results-film-development-reference500ms.png": "ae0eac414c961a4a23f64f7ccb6f53b268f2896c13f9fecef0f4ecfdadd44339",
-    "Project/Final research report/Shuhei Report/figures/wall-film-described-development.png": "31bedb37bf7d5529252c1bb9b98aefc45f562f46611943f886ec6c77dbc63eb7"
+    "Project/Final research report/Shuhei Report/figures/results-described-startup.png": "8573aec272b4773a518e133cbdd4703fa6447be13a49748be0a7edeecbea6500",
+    "Project/Final research report/Shuhei Report/figures/results-film-development-reference500ms.png": "1fa82b0e8bc7ee1bdc97ab8ffca393bf3c68931ae40bf8b1e67fc3bcfaa88ca9",
+    "Project/Final research report/Shuhei Report/figures/wall-film-described-development.png": "31bedb37bf7d5529252c1bb9b98aefc45f562f46611943f886ec6c77dbc63eb7",
+    "Project/Final research report/Shuhei Report/figures/results-direct-film-drain.png": "87cb6111c64e4d96db8701cfe878e8c82a1a3d53681050df28bbee1c3d6525ff"
   },
   "page_map": [
     {
@@ -199,13 +205,13 @@
     },
     {
       "page": 10,
-      "titles": [
-        "4. Results"
-      ]
+      "titles": []
     },
     {
       "page": 11,
-      "titles": []
+      "titles": [
+        "4. Results"
+      ]
     },
     {
       "page": 12,
@@ -237,43 +243,37 @@
     },
     {
       "page": 19,
-      "titles": [
-        "Phase 9 layout reservation: 1 of 4"
-      ]
+      "titles": []
     },
     {
       "page": 20,
       "titles": [
-        "Phase 9 layout reservation: 2 of 4"
+        "Mesh-sensitivity results: one-page allowance"
       ]
     },
     {
       "page": 21,
       "titles": [
-        "Phase 9 layout reservation: 3 of 4"
-      ]
-    },
-    {
-      "page": 22,
-      "titles": [
-        "Phase 9 layout reservation: 4 of 4"
-      ]
-    },
-    {
-      "page": 23,
-      "titles": [
         "5. Discussion"
       ]
     },
     {
-      "page": 24,
+      "page": 22,
       "titles": []
     },
     {
-      "page": 25,
+      "page": 23,
+      "titles": []
+    },
+    {
+      "page": 24,
       "titles": [
         "6. Conclusions and future work"
       ]
+    },
+    {
+      "page": 25,
+      "titles": []
     }
   ],
   "reproduce": "PyAnsys/.venv/bin/python PyAnsys/scripts/analysis/export_final_report_page_proof.py",

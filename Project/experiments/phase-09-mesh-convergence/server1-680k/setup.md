@@ -10,37 +10,43 @@
 | Lower film storage | Enable EWF on mapped lower collector wall `wall:004`; allocate dry storage and restore saved production data; preserve main-wall film facets |
 | Direct drain | Lower-film mass sink with matching XYZ momentum removal; 1.5 ms capture time; 1% source-depletion limiter; existing bulk collector retained |
 | Update cadence | One film update per native iteration; profile refresh each update; particle update every 20 µs of film time |
-| Film stepping | Fixed 0.1 → 2.5 → 5 µs; human-selected continuation from N18580 at 1 µs for 3,000 updates; adaptive stepping OFF; native EWF `solution-options` callback applies each changed fixed step; drain refresh span follows each step |
+| Film stepping | Current section retains 1 µs. Human-selected next section: 10,000 updates at 2.5 µs, then retain 5 µs to 200 ms. Adaptive stepping OFF; native EWF `solution-options` callback applies each changed fixed step; drain refresh span follows the step. |
 | Unchanged thresholds | Small film 1e-8 m; maximum thickness 1 m |
 | Checkpoint storage | Server-local paired autosave every 1,000 updates; native transcript and paired endpoint for each stage |
-| Gates | Verify accepted film clock and finite reports; prove positive frozen-bulk direct drainage and unchanged bulk fields before faster development. Record net-secondary film-source consistency against 1%; retain gross alternative. Human instruction “just keep running” permits continuation when only this ledger check fails. The 1% direct-source depletion limiter remains active. Current selected Courant ceiling 0.8 (human, 11 October 2026); retain earlier block checks at their recorded limit. All other execution checks remain active. |
+| Gates | Numerical acceptance limits are disabled by human instruction, 12 October 2026. Record Courant, film-balance discrepancy and direct-removal diagnostics without stopping. Stop on solver/command errors, nonfinite values, missing checkpoints or inconsistent native time/settings. Retain the physical drain model and solver settings. |
 
 
 | Current continuation | Selected value |
 | --- | --- |
-| Authority | Human, 11 October 2026: complete EWF Plan v1 and keep running until 200 ms. This supersedes the earlier single-next-block boundary. |
-| Starting pair | Verified N27580 / 42.5 ms; paired case/data saved, hashed and reopened. Earlier completed stages remain in the machine manifest and results record. |
-| Fixed film step | Retain the proven 1 µs step; adaptive stepping OFF. Drain refresh span 1 µs; DPM every 20 updates to retain 20 µs physical cadence. |
-| Final target | N185080 / 200 ms; all bulk equations active for the final 195–200 ms. |
+| Authority | Human: next run at 2.5 µs, then step up to 5 µs; numerical acceptance limits disabled. A verified frozen-bulk endpoint at 195 ms is sufficient; the bulk-active extension to 200 ms is a bonus. |
+| Preserved current section | N67580 / 82.5 ms → N77580 / 92.5 ms; 10,000 updates at 1 µs. Do not interrupt its native journal. |
+| Next section | 10,000 updates at 2.5 µs → N87580 / 117.5 ms. |
+| Later step | Retain 5 µs through the frozen interval to 195 ms and the bulk-active interval to 200 ms. |
+| Physical update cadence | DPM every 8 updates at 2.5 µs, then every 4 at 5 µs; both retain 20 µs. Drain refresh span follows the selected film step. |
+| Sufficient completion | N103080 / 195 ms with bulk equations frozen; preserve the verified paired checkpoint and diagnostics. |
+| Bonus endpoint | N104080 / 200 ms; all bulk equations active for 195–200 ms. This is a sensitivity stage, not a requirement for completion at 195 ms. |
 
 | Remaining section | Bulk equations | Film step | Updates | Endpoint |
 | --- | --- | ---: | ---: | --- |
-| Verified origin | Frozen | 1 µs | 0 | N27580 / 42.5 ms |
-| Main development; 15 native commands | Frozen | 1 µs | 15 × 10,000 | N177580 / 192.5 ms |
-| Finish frozen interval | Frozen | 1 µs | 2,500 | N180080 / 195 ms |
-| Final bulk reactivation | All active | 1 µs | 5,000 | N185080 / 200 ms |
-| **Remaining total** | — | — | **157,500** | **200 ms** |
+| Finish current accepted command | Frozen | 1 µs | Current 10,000-update section | N77580 / 92.5 ms |
+| Next section | Frozen | 2.5 µs | 10,000 | N87580 / 117.5 ms |
+| Apply 5 µs step | Frozen | 5 µs | 1,000 | N88580 / 122.5 ms |
+| Main development | Frozen | 5 µs | 10,000 | N98580 / 172.5 ms |
+| Finish frozen interval | Frozen | 5 µs | 4,500 | N103080 / 195 ms |
+| Optional bulk-reactivation bonus | All active | 5 µs | 1,000 | N104080 / 200 ms |
+| **Required total after current section** | — | — | **25,500** | **195 ms** |
+| **Total including bonus** | — | — | **26,500** | **200 ms** |
 
 | Execution control | Requirement |
 | --- | --- |
-| Automatic delivery | One server-local controller sends all 17 remaining native journals in order. Each journal has one solve command and an endpoint save. The controller checks the saved endpoint before sending the next command. |
-| Ownership | Existing solver-writer lock prevents duplicate controllers. Prior single-command queue has completed; it submits no further command. |
-| Numerical checks | Peak film Courant ≤0.8; exact native count and film clock; finite reports; no fatal event. Frozen stages retain the bulk-field and direct-drain checks. |
-| Ledger policy | Keep discrepancies visible against the 1% reference. A ledger-only failure remains diagnostic under the existing human instruction; other checks remain active. |
+| Automatic handoff | Server-local file monitor waits for the current journal to finish and its paired endpoint to be hashed in the run manifest. It then stops only the exact Python command owner, reconciles the saved endpoint while Fluent is idle, and starts the reviewed ramp controller. |
+| Ownership | Keep the active command untouched. The boundary monitor holds a handle to the exact controller process; the replacement holds the existing exclusive solver-writer lock. Supersede the old file-only fallback to prevent conflicting continuation. |
+| Numerical diagnostics | Courant and film-balance discrepancies are recorded without acceptance stops. Native solver/command errors, nonfinite values, inconsistent native time/settings, or missing/corrupt files remain errors. |
 | Checkpoints | Server-local paired autosaves every 1,000 updates; paired endpoints and transcripts for each section. |
-| Final proof | N185080 / 200 ms, all bulk equations active, paired hashes, save/reopen and field/setup comparison, plus selected shared-pair hashes. |
-| Completion | Mark complete only after the final endpoint verifier passes. No Codex wake-up is needed between passing sections. |
-| Review | [Exact remaining schedule and execution review](../../../../PyAnsys/output/phase9-ewf-server1-680k/20261009/continue-to-200ms-review.json) |
+| Boundary proof | Exact N77580 / 92.5 ms, current-pair hashes, native transcript, frozen bulk preservation against the preceding pair, and paired reopen. Do not replay the completed solve. |
+| Completion evidence | Exact N103080 / 195 ms, bulk equations frozen, saved paired checkpoint and hashes, native iteration/film-clock evidence and recorded diagnostics. This establishes the selected development endpoint, not steady film or whole-separator closure. |
+| Bonus evidence | If completed: exact N104080 / 200 ms, all bulk equations active, paired hashes, save/reopen and selected shared-pair hashes. Preserve the 195 ms endpoint separately; an error in the bonus does not invalidate that healthy endpoint. Leave Fluent open. |
+| Queue receipt | `PyAnsys/output/phase9-ewf-server1-680k/20261009/step-ramp-continuation-launch.json` |
 
 | Machine implementation | Owner |
 | --- | --- |

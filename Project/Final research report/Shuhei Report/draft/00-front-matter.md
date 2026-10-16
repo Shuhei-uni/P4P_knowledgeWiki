@@ -10,7 +10,7 @@
 | Report type | Part IV Research Project Report |
 | Supervisors | Sadiq Zarrouk and Maedeh Amirpour |
 | Co-worker | Andy Tran |
-| Draft date | 12 October 2026 |
+| Draft date | 14 October 2026 |
 | Student identification | To be entered by the author |
 | Submission date | To be entered by the author |
 
@@ -18,15 +18,15 @@
 
 ## Abstract
 
-Geothermal separators must move liquid away from steam, collect it and provide a discharge route. This study developed an existing computational fluid dynamics model of a vertical steam–water separator by following liquid through the bulk flow, vessel wall and collector. The simplified geometry omitted the lower brine discharge. Mesh development, separate steam and liquid inlet regions, a numerical collector and staged startup enabled studies of wall roughness and Eulerian Wall Film.
+Liquid reaching a separator wall is only one stage of separation: it must also leave through a collection route without returning to the steam. This study developed an inherited computational fluid dynamics model of a vertical geothermal steam–water separator by following liquid delivery, storage, release and removal. The simplified domain omitted brine discharge. Mesh and inlet comparisons, a numerical collector and staged startup enabled studies of roughness and Eulerian Wall Film.
 
-The revised mesh provided wall-following refinement and showed changed liquid distributions. With mesh, feed and numerical controls held fixed, placing inlet liquid beside the wall increased retained mass by 37.4%. Without a collector, liquid accumulated in the lower vessel or almost entirely left through the steam outlet. Collection and reduced-feed startup then supplied common fields for wall comparisons. The later combined startup reduced the peak continuity residual during loading by 70.15%. The selected film treatment reduced mean bulk-liquid steam-outlet flow from 24.369 to 1.735 kg/s, alongside a large inventory change.
+Mesh development changed the predicted wall-liquid fields. In a matched comparison with mesh, feed and numerical controls held fixed, wall-side inlet placement increased retained mass by 37.4%. Without a collector, liquid accumulated in the lower vessel or almost entirely left through the steam outlet. A liquid-selective collector represented transfer to the omitted pool, and revised startup reduced loading disturbances. Wall treatment strongly changed outlet liquid flow and inventory, but incomplete liquid accounts prevented an efficiency interpretation.
 
-With bulk flow fields held fixed, film spread and thickened over the lower and middle wall. At 500 ms, input and drainage averaged 81.12 and 69.60 kg/s over the final 10 ms, with storage of 11.53 kg/s. Later configurations added droplet release and impact mechanisms. A matched direct film-drain test reduced lower-wall film inventory by 70.32%. A longer continuation showed that upper-wall liquid could still accumulate while the lower drain operated.
+With bulk fields held fixed, film spread and thickened over the lower and middle wall. At 500 ms, input and drainage averaged 81.12 and 69.60 kg/s over the final 10 ms, while storage remained 11.53 kg/s. Later configurations added droplet release and impact mechanisms. A matched direct-drain test reduced lower-wall film by 70.32%. However, its 0.5088 kg removal partly replaced native film outflow, giving only 0.1897 kg of additional external removal. A longer continuation showed that upper-wall film could still accumulate while lower drainage operated.
 
-The study connects inlet and wall assumptions to liquid destinations and supplies checked collection and startup procedures. Wall capture, release and drainage must be assessed together when judging design changes. Developing fields, incomplete mass balances and unresolved numerical sensitivity limit the findings to model development. Physical validation is still needed before predicting separation efficiency or pressure loss.
+The study establishes model sensitivity and checked collection and startup procedures. Its central finding is that outlet liquid flow and wall capture must be assessed with storage, release and external removal. Developing fields, incomplete mass balances and unresolved numerical sensitivity limit the findings to model development. Physical validation is still needed before predicting separation efficiency or pressure loss.
 
-> **Draft completion note.** Section 4.13 reserves the final Phase 9 mesh results. Update this abstract with their main finding when those results are selected; no outcome is assumed here.
+<!-- Draft completion: update this abstract with the final mesh-sensitivity finding from Section 4.13 when results are selected. No outcome is assumed here. -->
 
 ## Declaration
 
@@ -73,23 +73,24 @@ Page references will be generated during document layout.
 
 | Figure | Subject |
 | --- | --- |
-| 1 | Separator operation and liquid routes |
-| 2 | Empirical wetness and inlet velocity |
-| 3 | Inlet geometries and tangential-velocity fields |
-| 4 | Wall-film droplet entrainment |
-| 5 | Actual solved domain and split inlet |
-| 6 | Mesh structure and wall-liquid fields |
-| 7 | Effect of inlet phase placement on liquid distribution |
-| 8 | Liquid inventory and outlet flow on three finer meshes |
-| 9 | Early startup and carrier development |
-| 10 | Roughness response |
-| 11 | Film-disabled/accretion-enabled outlet histories |
-| 12 | Film-disabled/accretion-enabled bulk-liquid spatial comparison |
-| 13 | Shortened-startup ramp comparison |
-| 14 | Selected film development through 500 ms |
-| 15 | Film-thickness views |
-| 16 | Phase 9 liquid and film fields across mesh resolutions — reserved |
-| 17 | Phase 9 collection, outlet flow and storage versus mesh resolution — reserved |
+| 1 | Liquid destinations and the report’s central question |
+| 2 | Separator operation and liquid routes |
+| 3 | Empirical wetness and inlet velocity |
+| 4 | Inlet geometries and tangential-velocity fields |
+| 5 | Wall-film droplet entrainment |
+| 6 | Actual solved domain and split inlet |
+| 7 | Mesh structure and wall-liquid fields |
+| 8 | Effect of inlet phase placement on liquid distribution |
+| 9 | Liquid inventory and outlet flow on three finer meshes |
+| 10 | Early startup and carrier development |
+| 11 | Roughness response |
+| 12 | Film-disabled/accretion-enabled outlet histories |
+| 13 | Film-disabled/accretion-enabled bulk-liquid spatial comparison |
+| 14 | Shortened-startup ramp comparison |
+| 15 | Selected film development through 500 ms |
+| 16 | Film-thickness views |
+| 17 | Direct lower-wall drainage and the change in total film removal |
+| 18 | Final-model mesh sensitivity: liquid fields, storage and removal — reserved |
 | A1 | Complete contact chronology |
 | A2 | Shortened-startup and film chronology to iteration 25815 |
 | A3 | Native inlet mesh section |
@@ -101,15 +102,8 @@ Page references will be generated during document layout.
 
 | Table | Subject |
 | --- | --- |
-| 1 | Selected literature and implications for the separator model |
-| 2 | Fixed material properties |
-| 3 | Main boundary conditions |
-| 4 | Matched inlet-placement results |
-| 5 | Developing absorber-free fields at iteration 3000 |
-| 6 | Peaks during the matched inlet ramp |
-| 7 | Film inventory and late-window rates under frozen bulk fields |
-| 8 | Matched direct lower-wall film-drain test |
-| 9 | Phase 9 final mesh comparison — reserved |
+| 1 | Fixed material properties |
+| 2 | Main boundary conditions |
 
 Appendix tables retain comparison designs, detailed settings, criteria, histories, balance results and the supported research answers.
 

@@ -1,0 +1,113 @@
+{
+  "figure": "appendix-collector-inventory-comparison",
+  "script": {
+    "path": "PyAnsys/scripts/analysis/plot_final_report_earlier_liquid_studies.py",
+    "sha256": "c1e4a77eac0fc3f0b938a7d4738e045428380e4a30ff4e23eac2357db2a1a1b1"
+  },
+  "sources": [
+    {
+      "path": "PyAnsys/output/phase07_cell_zone/P7-E5-CZ-G100-student-20260910T045745Z-reports.json",
+      "sha256": "b16f0ddcfda8d4f3f9f434053ba13ea5b070ff67f2a21bbc238df5cbbb5b6773"
+    },
+    {
+      "path": "PyAnsys/output/phase07_e0_ref/P7-E0-REF-server1-20260908T170000Z-report-histories.json",
+      "sha256": "e883ca73c0789a4bb45e28eae4540b2d25fcf17b5ff64d89248a99a20cd9c142"
+    },
+    {
+      "path": "PyAnsys/scripts/analysis/analyze_p7_treatment_screen.py",
+      "sha256": "127c0b70bcd03daaa29939fcc9cb28f9bdd42b07c36a85156092acf6b08195b5"
+    }
+  ],
+  "checks": {
+    "source_curve_array_equality": true,
+    "child_points": 500,
+    "reference_points": 2000,
+    "child_window": [
+      501,
+      1000
+    ],
+    "late_statistical_window": [
+      751,
+      1000
+    ],
+    "shading_coordinates": [
+      751.0,
+      1000.0
+    ],
+    "child_final_mass_kg": 332.5241907618081,
+    "claim_limit": "Different run horizons; collector mass still increases; no convergence or efficiency claim."
+  },
+  "array_sha256": {
+    "child_iteration": "8bdb29296bdbb81efc21b05c307f9b2cf8a4ddb220faf443a05b78625adf5ef7",
+    "child_mass_kg": "e06f2a2cbc66e1d042e12353e0cc2500ddd6e3433f321c874b6a06c03638b5e8",
+    "reference_iteration": "77608827c9c2199cdd4dd32b03cd38a829da40340e969cfe2bcc7e881968e91d",
+    "reference_mass_kg": "f158d323612217d2ae85e0009484561f27063273f16e9f7397d38b60f54bd231"
+  },
+  "plot_text": [
+    "Native solver iteration",
+    "\u2212250",
+    "\u2212250",
+    "0",
+    "0",
+    "250",
+    "250",
+    "500",
+    "500",
+    "750",
+    "750",
+    "1000",
+    "1000",
+    "1250",
+    "1250",
+    "1500",
+    "1500",
+    "1750",
+    "1750",
+    "2000",
+    "2000",
+    "2250",
+    "2250",
+    "Continuous-liquid mass [kg]",
+    "\u2212200",
+    "\u2212200",
+    "0",
+    "0",
+    "200",
+    "200",
+    "400",
+    "400",
+    "600",
+    "600",
+    "800",
+    "800",
+    "1000",
+    "1000",
+    "1200",
+    "1200",
+    "1400",
+    "1400",
+    "Lower-zone collection and bulk liquid inventory",
+    "Closed-bottom reference",
+    "Lower-zone collector (gain 1.0)",
+    "Late window: 751\u20131000"
+  ],
+  "output": {
+    "png": {
+      "filename": "appendix-collector-inventory-comparison.png",
+      "sha256": "723abcce4702d895a90a130585663ee13195fd8e06c2e66e37de836c315ae5fd"
+    },
+    "pdf": {
+      "filename": "appendix-collector-inventory-comparison.pdf",
+      "sha256": "5a980976f2a2468b3afae6512a58916e8fc836c6f8a2c84453636addf32e88fb"
+    }
+  },
+  "size_inches": [
+    10.0,
+    5.8
+  ],
+  "processing": "Presentation from recorded data only. All curve points retained without smoothing, interpolation or resampling. Original evidence is unchanged.",
+  "software": {
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.6"
+  }
+}

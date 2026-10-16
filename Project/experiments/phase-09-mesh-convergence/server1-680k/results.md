@@ -10,13 +10,21 @@
 | Initial schedule validation | Original 5 µs schedule totalled 42,800 updates to N51880. Resumed bounded command adds 3,000 updates at 1 µs from N21580 to N24580 / 39.5 ms; exact time/count arithmetic, one-command journal, DPM cadence and Python compilation passed. [Current command review](../../../../PyAnsys/output/phase9-ewf-server1-680k/20261009/resume-N21580-courant0p8-review.json) |
 | Controller runtime | Isolated Server 1 Python 3.12.10 environment; explicit interpreter with `-E`; required modules and exact deployed runner import verified |
 | Connection recovery | Prior pre-solve controller preserved and archived; N9080 / idle verified; only owned Python controller processes stopped. Verified v252 service route used; Fluent process retained |
-| Run status | **RUNNING toward 200 ms:** native `/solve/iterate 10000` confirmed from verified N27580 /42.5 ms. All17 remaining sections automatic; final targetN185080 /200 ms, with bulk active from195 ms. [Live-start and schedule receipt](../../../../PyAnsys/output/phase9-ewf-server1-680k/20261009/continue-to-200ms-status.json) |
-| Controller guard | Current Courant ceiling 0.8, selected by human on 11 October 2026 because the shared plan contained no ceiling. Deployed only after the previous command and controller finished; historical blocks retain their recorded limits. [Deployment receipt](../../../../PyAnsys/output/phase9-ewf-server1-680k/20261009/courant-limit-0p8-deployment.json) |
+| Run status | **COMPLETE_VERIFIED: N104080 / 200 ms.** Both native controller and server-side supervisor report verified completion. Final 1,000 updates at 5 µs advanced from 195 to 200 ms with all bulk equations active. [Completion evidence](../../../../PyAnsys/output/phase9-ewf-server1-680k/20261009/status-latest.json) |
+| Controller guard | Numerical acceptance limits were disabled by human instruction. Preserve all numerical warnings. Final bulk-active window peak film Courant **4.918978**; reopened endpoint Courant **0.5113200**. Completion is an execution result, not a convergence qualification. |
 | Execution location | Controller and checkpoint/transcript writes run on Server 1; laptop not required for the native schedule |
-| Next decision | Complete the resumed 3,000-update command to N24580 and inspect its saved evidence. Keep the discrepancy and numerical warnings visible; no mass-closure claim follows from continuation |
-| Verification boundary | N10580, N11580, N12580, recovered N13580, N18580, and N21580 stage pairs saved and hashed. N18580 is retained with an explicit numerical warning. Total-film ledger and the 200 ms target remain unqualified |
-| Evidence retrieval limit | Host files persist independently; Fluent Scheme retrieval verified while endpoint is responsive. Independent file retrieval after Fluent endpoint loss is not verified |
+| Next decision | No further native commands queued. Preserve the completed endpoint and leave Fluent open. Numerical/physical interpretation remains separate from execution completion. |
+| Verification boundary | Exact 200 ms / N104080 endpoint saved, hashed and reopened; reopened film clock 0.2000000000001696 s, retained 5 µs step, and all bulk equations active. Final reopen record references the same paired endpoint as the completed manifest. |
+| Evidence retrieval limit | Final pair copied into the Server 1 computer's OneDrive folder; both local-copy SHA-256 values match the selected server-local pair. Independent cloud upload is not verified. Final manifest and supervisor records retrieved through Fluent Scheme; transcript watcher is reconnecting. |
 | Scientific limit | No steady-film, whole-system mass closure, mesh-independence or separator-performance claim |
+
+| Saved comparison pair | Film age | Native coordinate | Bulk equations | Provenance |
+| --- | ---: | ---: | --- | --- |
+| Freeze onset | 0.900 ms | N10580 | All off | Reconstructed from the exact original 0.900 ms pair by switching only the bulk equation flags off; no iterations. Field reports unchanged; saved pair reopened. |
+| End of frozen interval | 195 ms | N103080 | All off | Original endpoint before bulk reactivation; selected copy is byte-identical to the recorded pair and was reopened. |
+| Completed run | 200 ms | N104080 | All active | Current 200 ms state restored after export; fields, setup, methods and film controls match the pre-export state. |
+
+Both selected comparison pairs are beside the final pair in the Server 1 OneDrive folder. Case and data SHA-256 values match their server-local sources. Exact paths and verification: [selected checkpoint record](../../../../PyAnsys/output/phase9-ewf-server1-680k/20261009/selected-pairs-export-latest.json).
 
 | Completed stage | New updates | Native endpoint | Total film age | Peak film Courant |
 | --- | ---: | ---: | ---: | ---: |

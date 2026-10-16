@@ -1,10 +1,17 @@
 # Phase 10 — Vertical slit contract
 
+| Current authority — 15 October 2026 | Selected scope |
+| --- | --- |
+| Server | Server 5 only; previous Server 6 ownership is historical |
+| New continuation | [Plan v1 from 150 to 500 ms](planv1-500ms/setup.md) |
+| Source | Preserve the completed 150 ms basic-EWF pair and all earlier endpoints |
+
 | Record ownership | Value |
 | --- | --- |
 | Phase | Phase 10 proposed design; human reassignment, 12 October 2026 |
 | Phase navigation | [Both proposed designs](../index.md) |
-| Current endpoint | N84000 / 50.9 ms retained; no further continuation |
+| Preserved earlier endpoint | Enhanced-EWF N84000 / 50.9 ms retained |
+| New selected continuation | [Basic angled-EWF settings at 10 µs](basic-ewf-10us/setup.md), completed from N31000 / 13.392 ms to N34661 / 50.000 ms |
 | Historical method | Phase 9 continuation settings; earlier schedules below are superseded |
 
 | Contract | Current scope |
@@ -34,3 +41,9 @@
 | Supervision | Watcher stopped; no automatic recovery or angle launch |
 | Evidence | [Retained endpoint receipt](../../../../PyAnsys/output/phase9-server6-slit154k/20261010/retained-50p9ms.json) |
 | Claim limit | Retention does not establish convergence, numerical acceptance, steady film or physical validation |
+
+| Latest continuation endpoint | Verified value |
+| --- | --- |
+| Basic EWF latest pair | N44661 / 150.000 ms; 10,000 additional fixed 10 µs updates |
+| Retained common-age reference | N34661 / 50.000 ms remains saved on OneDrive |
+| Run status | Complete; Fluent open and idle; watcher stopped; no further run selected |

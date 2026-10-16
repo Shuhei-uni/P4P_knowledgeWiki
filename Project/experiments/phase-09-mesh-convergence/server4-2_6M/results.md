@@ -47,3 +47,11 @@
 | Controller recovery | Removed invalid requirement for bulk residual rows during frozen solves. Native N12080 and all 1000 film-clock rows verified; pair saved/hashed/reopened; no repeat solve |
 | Current command | N12080→N13080, 1000 frozen updates at fixed 2.5 µs; first accepted film age 1.0525 ms, Courant 0.03484939 |
 | Evidence | [Recovery and resumed solve](../../../../PyAnsys/output/phase9-mesh-convergence-server4/20261007/frozen-stage-recovery-current.json) |
+
+| N35000 recovery and 5 µs continuation | Evidence / limit |
+| --- | --- |
+| Recovered endpoint | Native N35000, film 58.350 ms; local paired save/hash/reopen verifies retained fields, setup, methods, bulk state and film clock |
+| Historical limitation | Old native transcript contains 408 of the 10,000 manual-handoff film rows; original controller assertion and transcript retained. Endpoint preservation does not certify the missing history or numerical health. |
+| Current continuation | 5 µs, maximum 50 subiterations, DPM cadence 4, direct drain refresh span 5 µs, bulk frozen, no Courant ceiling; one 10,000-update command N35000–N45000 accepted with first film row 58.355 ms |
+| Remaining schedule | Frozen through N62330 / 195 ms; restore all bulk equations for 1000 updates to N63330 / 200 ms |
+| Machine evidence | [Recovery receipt](../../../../PyAnsys/output/phase9-mesh-convergence-server4/20261007/recovery-N35000-current.json) |

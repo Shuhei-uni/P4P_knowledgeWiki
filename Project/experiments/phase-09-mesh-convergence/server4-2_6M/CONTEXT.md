@@ -49,3 +49,23 @@
 | Server 4 limit update | Value |
 | --- | --- |
 | Film Courant setting and accepted maximum | 0.8, user direction 11 October 2026; apply while idle and verify persistence before continuation |
+
+| Server 4 Courant update | Selection |
+| --- | --- |
+| Current authority | User removes the Courant limit, 13 October 2026; supersedes the earlier 0.8 ceiling |
+| Execution | No Courant maximum gates in the active Server 4 runner; keep finite-value checks and record peak Courant. Fixed film timestep remains 2.5 µs; adaptive stepping remains off. |
+
+| Server 4 next-step authority | Selection |
+| --- | --- |
+| Human direction, 14 October 2026 | Use fixed 5 µs for the next newly submitted command and remaining development. Leave the accepted 2.5 µs command unchanged. Supersedes the previous fixed 2.5 µs continuation. |
+| Associated settings | Adaptive stepping OFF; direct drain refresh span 5 µs; DPM cadence 4 iterations (20 µs); maximum film subiterations 50; no Courant acceptance ceiling |
+| Stage endpoints | Recalculate native counts from the verified film clock; frozen bulk to 195 ms, then 1000 bulk-active updates at 5 µs to 200 ms |
+| If current command finishes at N35000 / 58.350 ms | Remaining frozen updates 27,330 to N62330; final bulk-active updates 1000 to N63330 |
+
+| Server 4 next-step update, 15 October 2026 | Selection |
+| --- | --- |
+| Latest human direction | Next newly submitted command uses fixed 10 µs. Current N35000–N45000 command stays at 5 µs. Supersedes prior 5 µs continuation. |
+| Associated settings | Adaptive stepping OFF; DPM cadence 2 iterations (20 µs); direct drain refresh span 10 µs; max film subiterations 50; no Courant acceptance ceiling |
+| Frozen stage after verified N45000 / 108.350 ms | 8665 updates at 10 µs to N53665 / 195 ms |
+| Final all-bulk-active stage | 500 updates at 10 µs to N54165 / 200 ms; shorter command is bounded by the required stage endpoint |
+| Delivery | Current controller completes its accepted command and checkpoint; successor waits for that proof before attaching or changing Fluent. |

@@ -1,24 +1,38 @@
 phase_id: phase-10-proposed-design
-status: retained_design_endpoints_comparison_pending
-authority_date: '2026-10-12'
+status: server5_planv1_vertical_evidence_unreachable_angle_queued
+authority_date: '2026-10-15'
 question: effect_of_vertical_blocker_and_angled_ramp_on_liquid_routing
 new_solver_work_authorized_by_reclassification: false
 geometry_only_effect_established: false
 steady_film_established: false
 cases:
   vertical_slit154k:
-    state: Project/experiments/phase-10-proposed-design/vertical-slit154k/phase-state.yaml
-    native_iteration: 84000
-    film_time_s: 0.0509
-    status: retained_paused
+    state: Project/experiments/phase-10-proposed-design/vertical-slit154k/basic-ewf-10us/phase-state.yaml
+    native_iteration: 44661
+    film_time_s: 0.15
+    status: planv1_500ms_evidence_unreachable
+    active_branch_state: Project/experiments/phase-10-proposed-design/vertical-slit154k/planv1-500ms/phase-state.yaml
+    preserved_enhanced_native_iteration: 84000
+    preserved_enhanced_film_time_s: 0.0509
+    active_target_film_s: 0.5
+    retained_50ms_iteration: 34661
+    continuation_solve_submitted: true
+    host_continuation_dispatched: true
   angled_slit213k:
     state: Project/experiments/phase-10-proposed-design/angled-slit213k/phase-state.yaml
-    native_iteration: 33492
-    film_time_s: 0.05
-    status: complete_saved_reopened
+    native_iteration: 43492
+    film_time_s: 0.15
+    status: queued_after_vertical500
+    active_target_film_s: 0.5
+    continuation_solve_submitted: true
+    retained_50ms_iteration: 33492
+    active_branch_state: Project/experiments/phase-10-proposed-design/angled-slit213k/planv1-500ms/phase-state.yaml
 comparison_limits:
-  - mesh_resolution_differs
-  - roughness_and_film_physics_differ
-  - timestep_and_preparation_differ
-  - angle_endpoint_bulk_and_spatial_metrics_not_extracted
+- mesh_resolution_differs
+- initial_bulk_and_film_history_differ
+- earlier_preparation_film_age_and_history_differ
+- matched_endpoint_bulk_and_spatial_metrics_not_extracted
 relocation_evidence: PyAnsys/output/phase10-proposed-design/20261012/record-reclassification/relocation-manifest.json
+followup_run_authorized: true
+owned_server_id: '5'
+active_campaign: Project/experiments/phase-10-proposed-design/server5-planv1-500ms.md

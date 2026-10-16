@@ -219,12 +219,17 @@ def main():
     last_wake_attempt = 0
     guard = subprocess.Popen(['/usr/bin/caffeinate', '-i', '-w', str(os.getpid())], close_fds=False)
     threading.Thread(target=capture_passive, daemon=True).start()
+    startup_at = time.monotonic()
     while True:
         if read(OUT / 'human-pause.json').get('status') in {'HUMAN_REQUESTED_PAUSE', 'PAUSED_BY_HUMAN'}:
             write(OUT / 'continuous-supervision.json', {'status': 'PAUSED_BY_HUMAN', 'watcher_pid': os.getpid(), 'automatic_recovery_enabled': False, 'never_exit_fluent': True})
             guard.terminate()
             return
         state = snapshot(args.stall_seconds)
+        # Old laptop-pause files do not prove a stall before the fresh stream attaches.
+        if state['event'] == 'PROGRESS_STALLED_REVIEW_REQUIRED' and time.monotonic() - startup_at < 60:
+            state['event'] = None
+            state['startup_stream_grace_seconds'] = 60
         if time.monotonic() - health_at >= 300 or state['event']:
             last_health = health()
             health_at = time.monotonic()

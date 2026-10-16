@@ -1,0 +1,16 @@
+status: NUMERICAL_FAILURE_HEALTHY_CHECKPOINT_RESTORED
+server_id: 6
+mesh_cells: 60964
+parent_native_iteration: 8080
+parent_film_time_s: 0.00065
+timestep_s: 0.00001
+bulk_active: true
+target_film_time_s: 0.2
+target_native_iteration: 28015
+verified_smoke_iteration: 8081
+verified_smoke_film_time_s: 0.00066
+evidence: PyAnsys/output/phase9-server6-60k-10us/20261013/host-run-manifest.json
+failed_native_iteration: 8128
+last_printed_failed_film_time_s: 0.00113
+solver_idle: true
+continuation_selected: false

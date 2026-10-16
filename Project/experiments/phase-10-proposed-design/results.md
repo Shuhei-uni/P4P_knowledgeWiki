@@ -2,11 +2,14 @@
 
 | Design | Verified retained evidence | Interpretation limit |
 | --- | --- | --- |
-| Vertical blocker | N84000 / 50.9 ms; paired save/reopen and OneDrive transfer recorded in [case results](vertical-slit154k/results.md) | Frozen-bulk enhanced EWF; steady film and design benefit not established |
+| Vertical blocker — matched basic EWF | N34661 / 50.000 ms; native save/reopen and OneDrive hashes in [follow-up results](vertical-slit154k/basic-ewf-10us/results.md) | Frozen bulk; earlier enhanced-film history and parent film age differ |
+| Vertical blocker — extended basic EWF | N44661 / 150.000 ms; 10,000 additional fixed 10 µs updates; [completion](vertical-slit154k/basic-ewf-10us/results.md) | Frozen bulk; common-age 50 ms pair remains preserved for comparison |
+| Vertical blocker — preserved enhanced EWF | N84000 / 50.9 ms; [earlier case results](vertical-slit154k/results.md) | Earlier reference; not the matched basic-EWF endpoint |
 | Angled ramp | N33492 / 50.000 ms; paired save/reopen and OneDrive hashes verified in [case results](angled-slit213k/results.md) | Frozen-bulk basic EWF; steady film and design benefit not established |
-| Design comparison | Both proposed geometries now share this phase owner | Mesh and control differences prevent attribution to geometry alone |
+| Angled ramp — extended basic EWF | N43492 / 150.000 ms; 10,000 additional fixed 10 µs updates; [completion](angled-slit213k/results.md) | Original angle settings and frozen bulk retained; 50 ms pair preserved |
+| Design comparison | Both proposed geometries now share this phase owner | Mesh and initial field/history differences prevent attribution to geometry alone |
 
-| Vertical endpoint metric | Value | Definition / limit |
+| Earlier vertical enhanced-EWF endpoint metric | Value | Definition / limit |
 | --- | --- | --- |
 | Bulk liquid inventory | 123.196 kg | Frozen bulk field |
 | Bulk vapour inventory | 130.328 kg | Frozen bulk field |

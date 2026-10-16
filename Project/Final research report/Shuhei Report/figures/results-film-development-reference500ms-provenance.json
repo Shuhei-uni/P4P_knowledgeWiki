@@ -19,7 +19,7 @@
     "film_mass": "kg",
     "rates": "kg/s"
   },
-  "processing": "All selected CSV points plotted without smoothing, subsampling or spatial interpolation. Film drainage uses the preverified CSV native cumulative-outflow rate. Grey shading marks 490-500 ms. Markers identify N5190, N13390, N25815 and the 500 ms endpoint.",
+  "processing": "All selected CSV points plotted without smoothing, subsampling or spatial interpolation. Film drainage uses the preverified CSV native cumulative-outflow rate. Grey shading marks 490-500 ms. Markers identify N5190, N13390, N25815 and the 500 ms endpoint. An arrow marks the late mean input/drainage gap; text reports the independently checked final-window storage rate under frozen bulk forcing.",
   "checks": {
     "all_clocks_strictly_increasing": true,
     "native_coordinates_contiguous": true,
@@ -33,5 +33,56 @@
   "software": {
     "matplotlib": "3.10.9",
     "numpy": "2.4.6"
+  },
+  "script": {
+    "path": "PyAnsys/scripts/analysis/plot_final_report_film_history.py",
+    "sha256": "677403b03d6dd00065f788ea9c8af824170f8b241e7b51ed2f662b526a5e9a53"
+  },
+  "array_sha256": {
+    "native_iteration": "fd0e724b1ce41ef3e3343e2f29566a2f0a8b3ee24955b3325464cc055482b315",
+    "film_time_s": "5c8ba3af32471f606c6920ccabd9d1b2d84ec128b55dc78db3527e635a2e1c09",
+    "film_kg": "108b0bbe7d1600df5d240f13f6f81f210d7b9bd583d2c3abc1a72faf9141b28a",
+    "accretion_kg_s": "57a98b9484ceac0f5408bb7b475cc79924107117f263c8737f7655bae3df475c",
+    "drainage_kg_s": "27778daf1fa34a92dad1ed84197d5fde6bf1a6ac9ec9f9a8fba246fa726d059b",
+    "bulk_liquid_kg": "90ed6560a359d3edea0a4daccb49e5093265f57dd991d50c03653181ac115fe8"
+  },
+  "markers": [
+    {
+      "native_iteration": 5190,
+      "film_time_ms": 5.903750000000146,
+      "film_mass_kg": 0.3595073319371169
+    },
+    {
+      "native_iteration": 13390,
+      "film_time_ms": 75.66157951072138,
+      "film_mass_kg": 3.863539554500332
+    },
+    {
+      "native_iteration": 25815,
+      "film_time_ms": 265.1843386356894,
+      "film_mass_kg": 6.688275530493504
+    },
+    {
+      "native_iteration": 48205,
+      "film_time_ms": 500.0,
+      "film_mass_kg": 9.544399018862931
+    }
+  ],
+  "layout": {
+    "panels": "two side by side",
+    "size_cm": [
+      16,
+      6.5
+    ]
+  },
+  "output": {
+    "png": {
+      "filename": "results-film-development-reference500ms.png",
+      "sha256": "1fa82b0e8bc7ee1bdc97ab8ffca393bf3c68931ae40bf8b1e67fc3bcfaa88ca9"
+    },
+    "pdf": {
+      "filename": "results-film-development-reference500ms.pdf",
+      "sha256": "517fd1b5bbb51382a406994bf18682f01a3cd2663afcbae3cb0d7a0762bb082d"
+    }
   }
 }
