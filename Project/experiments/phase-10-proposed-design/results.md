@@ -33,3 +33,45 @@
 | --- | --- |
 | Compare common views and liquid destinations with settings differences visible | Establish observed changes before testing a feature-specific interpretation |
 | Distinguish physical collection from numerical removal and liquid carryover | Avoid interpreting reduced storage as improved separation |
+
+[Three-case inlet-region comparison: 58.050 ms baseline and near-50 ms designs, with matched top-down views and claim limits](inlet-comparison-50ms.md).
+
+## Paused endpoint: bulk fields and flow
+
+| Source / scope | Verified basis |
+| --- | --- |
+| Pair | Preserved human-pause N30862 pair; 23.705 ms film clock; SHA-256 and reopen verified |
+| State | Bulk flow and turbulence held during frozen-film development; solve remains paused |
+| Top-down view | X–Z cut at mean liquid-inlet height, Y = 2.066011 m; viewed along −Y |
+| Inlet-facing view | Central Y–Z cut at X = 0 m; viewed along +X, normal to the inlet faces; this is an internal cut, not the inlet boundary |
+| Scalars | Phase-2 liquid volume fraction, range 0–1; mixture turbulent kinetic energy, shared range 0–100 m²/s² |
+| Vectors | Top-down cut; all vectors, projected in plane, fixed arrow length; colour indicates 3D mixture speed, 0–40 m/s |
+| Machine evidence | [Native bulk reports and figure provenance](../../../PyAnsys/output/phase10-proposed-design/20261011/paused-bulk-export.json); [vector settings](../../../PyAnsys/output/phase10-proposed-design/20261011/paused-top-vectors.json) |
+
+| Bulk quantity | Value | Reduction |
+| --- | ---: | --- |
+| Domain volume | 22.7619 m³ | Both fluid cell zones |
+| Mixture inventory | 209.174 kg | Volume integral |
+| Liquid inventory | 77.7250 kg | Phase-2 mass |
+| Liquid volume | 0.0882025 m³ | Integrated liquid volume fraction |
+| Mean liquid volume fraction | 0.3875% | Volume weighted |
+| Mean / maximum speed | 26.7346 / 83.3367 m/s | Volume weighted / cell maximum |
+| Mean / maximum turbulent kinetic energy | 9.19793 / 98.0509 m²/s² | Volume weighted / cell maximum |
+| Mean turbulence dissipation | 263.065 m²/s³ | Volume weighted |
+| Inlet-to-steam-outlet pressure drop | 22.0283 kPa | Difference of area-weighted static-pressure reports |
+
+| Mass flow term | Magnitude | Accounting basis |
+| --- | ---: | --- |
+| Liquid feed | 116.920 kg/s | Boundary flux, excludes cell sources |
+| Vapour feed | 80.6900 kg/s | Boundary flux |
+| Liquid through steam outlet | 1.35071 kg/s | Boundary flux, excludes cell sources |
+| Vapour through steam outlet | 80.5096 kg/s | Boundary flux |
+| Collector liquid-removal source | 127.085 kg/s | Volumetric absorber source; separate from boundary outflow |
+| Bulk balance residual | −11.3354 kg/s | Inflow minus steam-outlet boundary flow minus removal source |
+
+The held bulk balance does not close. These spatial fields and fluxes describe the saved finite state; they do not establish a converged steady separator. Bulk liquid volume fraction is distinct from EWF film thickness. Colour ranges are fixed across the two scalar views.
+
+| View | Liquid volume fraction | Turbulent kinetic energy | Velocity vectors |
+| --- | --- | --- | --- |
+| Top-down at inlet height | [Native contour](figures/paused-23p705ms/top-down-inlet-height-liquid-volume-fraction.png) | [Native contour](figures/paused-23p705ms/top-down-inlet-height-turbulent-kinetic-energy.png) | [Native vectors](figures/paused-23p705ms/top-down-inlet-height-velocity-vectors.png) |
+| Inlet-facing central cut | [Native contour](figures/paused-23p705ms/inlet-facing-central-liquid-volume-fraction.png) | [Native contour](figures/paused-23p705ms/inlet-facing-central-turbulent-kinetic-energy.png) | — |
