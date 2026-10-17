@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Project/Final research report/Shuhei Report/draft/02-03-model-development-methods-and-results.md",
+                "file": "Project/Final research report/Shuhei Report/draft/04-discussion-conclusions-and-future-work.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "02-03-model-development-methods-and-results"
+              "title": "04-discussion-conclusions-and-future-work"
             }
           },
           {
@@ -202,12 +202,14 @@
   },
   "active": "a9de90bdac58e6d5",
   "lastOpenFiles": [
-    "Project/Final research report/Shuhei Report/draft/02-model-and-methods.md",
-    "Project/Final research report/Shuhei Report/draft/03-results.md",
     "Project/Final research report/Shuhei Report/draft/02-03-model-development-methods-and-results.md",
+    "Project/Final research report/Shuhei Report/draft/04-discussion-conclusions-and-future-work.md",
+    "Project/Final research report/Shuhei Report/draft/01-introduction-and-literature-review.md",
+    "Project/Final research report/Shuhei Report/draft/00-front-matter.md",
+    "Project/Final research report/Shuhei Report/draft/03-results.md",
+    "Project/Final research report/Shuhei Report/draft/02-model-and-methods.md",
     "Project/Final research report/Rough Guidance.md",
     "Project/Final research report/2026 P4P Final Report Rubric Students-1.pdf",
-    "Project/Final research report/Shuhei Report/draft/01-introduction-and-literature-review.md",
     "Project/Final research report/Shuhei Report/main.pdf",
     "Project/Final research report/Shuhei Report/main.lot",
     "Project/Final research report/Shuhei Report/main.aux",
@@ -220,7 +222,6 @@
     "Project/Final research report/Shuhei Report/figures/methods-coarse-film-time-reference.png",
     "Project/Final research report/Shuhei Report/main.tex",
     "Project/Final research report/Shuhei Report/ESB_titlepage.tex",
-    "Project/Final research report/Shuhei Report/draft/04-discussion-conclusions-and-future-work.md",
     "Project/Final research report/Shuhei Report/draft/draft-v1.md",
     "Project/experiments/phase-10-proposed-design/angled-slit213k/planv1-500ms/setup.md",
     "Project/experiments/phase-10-proposed-design/angled-slit213k/planv1-500ms/results.md",
@@ -239,7 +240,6 @@
     "CFD_wiki/wiki/synthesis/mesh-quality-and-resolution-patterns.md",
     "CFD_wiki/wiki/synthesis/geothermal-separator-design-and-cfd-patterns.md",
     "CFD_wiki/wiki/synthesis/fluent-separator-efficiency-methods.md",
-    "CFD_wiki/wiki/synthesis/annular-flow-three-field-cfd-patterns.md",
     "tmp/pdfs/phase07b-meeting/contact-0.png",
     "Project/Poster/poster-sections/poster mesh assets/mesh60k-inlet-section.png",
     "Project/Poster/poster-sections/poster mesh assets/mesh342k-inlet-section.png",

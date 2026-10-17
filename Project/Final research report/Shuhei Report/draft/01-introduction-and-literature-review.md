@@ -30,7 +30,7 @@ Together, these limitations leave the liquid path incomplete between wall captur
 
 ### 1.3. Research aim and questions
 
-The aim is to develop the inherited separator CFD model and assess whether it gives a numerically consistent and physically credible account of liquid transport and collection. The investigation addresses three questions:
+The aim is to develop the inherited separator CFD model and assess whether it gives a numerically consistent and physically credible account of liquid transport and collection. The investigation addresses four questions:
 
 1. How do mesh representation and inlet phase placement affect the predicted liquid distribution, retention near the wall and drainage?
 
@@ -38,11 +38,13 @@ The aim is to develop the inherited separator CFD model and assess whether it gi
 
 3. How do wall roughness and wall-film modelling affect liquid transport, storage, release and collection?
 
+4. How can CFD inform separator design optimisation to improve separation performance?
+
 Model credibility requires both numerical consistency and agreement with physical behaviour. Continuity residuals and liquid mass balances assess numerical consistency, while liquid inventories, discharge paths and predicted liquid-removal efficiency must also be physically reasonable. Efficiency comparisons must use the same definition of liquid removal and comparable operating conditions; outlet steam quality alone is a different measure. Agreement with measured separator performance provides a stronger test of physical credibility than a plausible efficiency value alone. The present work assesses progress against these criteria, while incomplete liquid accounting and the absence of a matched field comparison limit the conclusions.
 
 ### 1.4. Scope and contribution
 
-To address these questions, the study follows the liquid path through the simplified separator model. Mesh and inlet comparisons assess how liquid reaches and remains near the wall. Collector development addresses the missing discharge route, supported by startup procedures that allow the model to reach the intended feed conditions. Wall-roughness and wall-film studies then examine how captured liquid is stored, transported, released or drained. Downstream equipment, mineral chemistry and optimum operating pressure are outside the simulated scope.
+To address these questions, the study follows the liquid path through the simplified separator model. Mesh and inlet comparisons assess how liquid reaches and remains near the wall. Collector development addresses the missing discharge route, supported by startup procedures that allow the model to reach the intended feed conditions. Wall-roughness and wall-film studies then examine how captured liquid is stored, transported, released or drained. This understanding informs two inlet-region design proposals: a vertical film blocker and an angled film ramp. Preliminary velocity-vector observations provide a partial answer to the design question by showing local flow changes consistent with the intended mechanisms; improved film drainage or separation efficiency has not been established. Downstream equipment, mineral chemistry and optimum operating pressure are outside the simulated scope.
 
 <!-- Evidence: [Study overview](../../../index.md); [selected case history](../../../experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/case-history-N45606.md). -->
 
@@ -114,12 +116,28 @@ Pointon et al. (2009) used Fluent's Discrete Phase Model (DPM) to compare inlet 
 
 <!-- Figure source: [primary Pointon paper](../../../../CFD_wiki/raw/1028587.pdf), PDF pages 5–6 / printed pages 946–947; [geometry source page](../figures/literature-candidates/pointon/page-5.png); [velocity source page](../figures/literature-candidates/pointon/page-6.png). Both published panels, the velocity legend and mean annotations are unchanged. The report adds the (a)/(b) labels outside the images. -->
 
-Purnanto et al. (2013) compared three BOC configurations using a steady Mixture model and a DPM outlet-quality calculation. Differences in vessel proportions prevented the effect of inlet shape from being isolated. Counting droplets with incomplete tracks as separated improved empirical agreement, but the authors described this assumption as non-rigorous. The inherited modelling basis therefore requires explicit treatment of unresolved droplet fate ([Purnanto et al., 2013](https://www.researchgate.net/publication/269519626_CFD_MODELLING_OF_TWO-PHASE_FLOW_INSIDE_GEOTHERMAL_STEAM-WATER_SEPARATORS)).
-
-Both studies used renormalisation-group (RNG) k–ε turbulence modelling. Pointon preferred RNG with a swirl modification because it had lower computational requirements than Reynolds stress modelling. This rationale offers a starting point, not a detailed turbulence-model comparison. Turbulence-model accuracy in the present swirling and near-wall flow remains to be assessed ([Pointon et al., 2009](https://publications.mygeoenergynow.org/grc/1028587.pdf); [Purnanto et al., 2013](https://www.researchgate.net/publication/269519626_CFD_MODELLING_OF_TWO-PHASE_FLOW_INSIDE_GEOTHERMAL_STEAM-WATER_SEPARATORS)).
+Pointon et al. (2009) and Purnanto et al. (2013) both used renormalisation-group (RNG) k–ε turbulence modelling. Pointon preferred RNG with a swirl modification because it had lower computational requirements than Reynolds stress modelling. This rationale offers a starting point, not a detailed turbulence-model comparison. Turbulence-model accuracy in the present swirling and near-wall flow remains to be assessed ([Pointon et al., 2009](https://publications.mygeoenergynow.org/grc/1028587.pdf); [Purnanto et al., 2013](https://www.researchgate.net/publication/269519626_CFD_MODELLING_OF_TWO-PHASE_FLOW_INSIDE_GEOTHERMAL_STEAM-WATER_SEPARATORS)).
 
 Appendix B.2 compares the methods and assumptions carried into this study.
 
+
+#### 2.3.1. Purnanto's modelling approach and its limits
+
+Purnanto et al. compared three separator designs using steady, isothermal Mixture modelling, RNG $k$–$\varepsilon$ turbulence and SIMPLE coupling. Walls were smooth; upstream pre-separation and brine discharge were excluded, with constant pool level assumed ([Purnanto et al., 2013, §§2.2–3.3, pp. 3–6](https://www.researchgate.net/publication/269519626_CFD_MODELLING_OF_TWO-PHASE_FLOW_INSIDE_GEOTHERMAL_STEAM-WATER_SEPARATORS)).
+
+After the flow solution, DPM tracked nine Harwell-derived droplet sizes, uniformly distributed across the inlet. Equal injection counts represented unequal mass flows. Bottom-reaching droplets counted as separated; outlet quality was steam mass divided by total outlet mass. The paper's earlier escaped/injected count definition instead describes penetration ([Purnanto et al., 2013, §§2.5 and 4.3, pp. 4, 8](https://www.researchgate.net/publication/269519626_CFD_MODELLING_OF_TWO-PHASE_FLOW_INSIDE_GEOTHERMAL_STEAM-WATER_SEPARATORS)). The count-based quantity can be written as:
+
+$$
+P_N=\frac{N_{\mathrm{escaped}}}{N_{\mathrm{injected}}}.
+$$
+
+Here, $N_{\mathrm{escaped}}$ and $N_{\mathrm{injected}}$ are particle counts. This ratio differs from outlet steam quality, defined in Section 2.2, and from the fraction of inlet liquid collected. Droplet mass weighting is therefore essential when interpreting the reported performance.
+
+Incomplete tracks persisted even when the step limit rose from $10^5$ to $10^6$. Counting them as separated improved empirical agreement, but the authors acknowledged that assumption was not rigorous. Exact injection weights were unreported, and mesh refinement and experimental calibration remained necessary ([Purnanto et al., 2013, pp. 8–9](https://www.researchgate.net/publication/269519626_CFD_MODELLING_OF_TWO-PHASE_FLOW_INSIDE_GEOTHERMAL_STEAM-WATER_SEPARATORS)).
+
+Differences in vessel proportions also prevented an isolated comparison of inlet shape. For the present study, a further limitation is the distinction between assigning droplets a destination and resolving liquid transport after wall capture. The approach did not provide a separate evolving wall-film account through which storage, drainage and return to the steam could be assessed. These limitations motivate explicit collection and wall-film treatments, while the Mixture and turbulence formulations provide a starting point for model development.
+
+<!-- Primary-source audit: the maintained CFD wiki source page guided retrieval, but CFD_wiki/raw was absent in this checkout. The author-uploaded ten-page 2013 IPENZ paper was read directly online, separately from the 2012 workshop version. The count equation expresses the prose definition, not a numbered equation copied from the paper. The count ratio in §2.5 must not be silently called collection efficiency. The omission of an evolving wall-film account is a scope assessment; no claim is made that Purnanto measured zero film or that the present work solved incomplete particle tracking. -->
 
 ### 2.4. Wall–liquid transport and carryover
 
