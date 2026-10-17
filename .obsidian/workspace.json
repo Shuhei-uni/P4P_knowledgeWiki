@@ -11,14 +11,12 @@
             "id": "a9de90bdac58e6d5",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "pdf",
               "state": {
-                "file": "Project/Final research report/Shuhei Report/draft/draft-v1.md",
-                "mode": "preview",
-                "source": false
+                "file": "Project/Final research report/Shuhei Report/main.pdf"
               },
-              "icon": "lucide-file",
-              "title": "draft-v1"
+              "icon": "lucide-file-text",
+              "title": "main"
             }
           }
         ]
@@ -190,25 +188,31 @@
   },
   "active": "a9de90bdac58e6d5",
   "lastOpenFiles": [
+    "Project/Final research report/Shuhei Report/main.lot",
+    "Project/Final research report/Shuhei Report/main.aux",
+    "Project/Final research report/Shuhei Report/main.toc",
+    "Project/Final research report/Shuhei Report/main.lof",
+    "Project/Final research report/Shuhei Report/main.log",
+    "Project/Final research report/Shuhei Report/figures/methods-experiment-workflow.png",
+    "Project/Final research report/Shuhei Report/literature-figure-shortlist.md",
+    "Project/Final research report/Shuhei Report/main.pdf",
+    "Project/Final research report/Rough Guidance.md",
+    "Project/Final research report/Shuhei Report/figures/methods-coarse-film-time-reference.provenance.json",
+    "Project/Final research report/Shuhei Report/figures/methods-coarse-film-time-reference.png",
+    "Project/Final research report/Shuhei Report/draft/03-results.md",
+    "Project/Final research report/Shuhei Report/main.tex",
+    "Project/Final research report/Shuhei Report/draft/02-model-and-methods.md",
+    "Project/Final research report/Shuhei Report/ESB_titlepage.tex",
+    "Project/Final research report/Shuhei Report/ESB_preamble.sty",
+    "Project/Final research report/Shuhei Report/draft/04-discussion-conclusions-and-future-work.md",
+    "Project/Final research report/Shuhei Report/draft/draft-v1.md",
     "PyAnsys/output/phase9-ewf-server1-680k/20261009/selected-pairs-job-latest.json",
-    "PyAnsys/output/phase9-ewf-server1-680k/20261009/selected-pairs-export-latest.json",
-    "PyAnsys/output/phase9-ewf-server1-680k/20261009/selected-pairs-export-launch.json",
-    "PyAnsys/scripts/setup/__pycache__/deploy_phase9_server1_selected_pairs.cpython-312.pyc",
-    "PyAnsys/scripts/setup/deploy_phase9_server1_selected_pairs.py",
-    "PyAnsys/scripts/setup/__pycache__/save_phase9_server1_selected_pairs.cpython-312.pyc",
-    "PyAnsys/scripts/setup/save_phase9_server1_selected_pairs.py",
-    "PyAnsys/output/phase10-proposed-design/20261015/server5-planv1-to500ms/extended-native-access-retry.json",
-    "PyAnsys/output/phase9-ewf-server6-997k/20261016/env-endpoint-check-1792121449975856000.json",
-    "PyAnsys/output/phase10-proposed-design/20261015/server5-planv1-to500ms/direct-channel-route-check.json",
-    "PyAnsys/output/phase10-proposed-design/20261015/server5-planv1-to500ms/independent-native-services-probe.json",
     "Project/experiments/phase-10-proposed-design/angled-slit213k/planv1-500ms/setup.md",
     "Project/experiments/phase-10-proposed-design/angled-slit213k/planv1-500ms/results.md",
     "Project/experiments/phase-10-proposed-design/vertical-slit154k/planv1-500ms/results.md",
     "Project/experiments/phase-10-proposed-design/vertical-slit154k/planv1-500ms/setup.md",
     "Project/experiments/phase-10-proposed-design/server5-planv1-500ms.md",
     "Project/Final research report/Shuhei Report/draft/05-references-and-appendices.md",
-    "Project/Final research report/Shuhei Report/draft/03-results.md",
-    "Project/Final research report/Shuhei Report/draft/02-model-and-methods.md",
     "Project/experiments/phase-09-mesh-convergence/server6-997k/nonzero-film-initialisation.md",
     "Project/Final research report/Shuhei Report/draft/01-introduction-and-literature-review.md",
     "CFD_wiki/AGENTS.md",
@@ -222,10 +226,6 @@
     "CFD_wiki/wiki/synthesis/geothermal-separator-design-and-cfd-patterns.md",
     "CFD_wiki/wiki/synthesis/fluent-separator-efficiency-methods.md",
     "CFD_wiki/wiki/synthesis/annular-flow-three-field-cfd-patterns.md",
-    "CFD_wiki/wiki/sources/user-cyclone-solidworks-flow-particle-study-report.md",
-    "CFD_wiki/wiki/sources/mubarok-2020-cfd-geothermal-flow-meters.md",
-    "CFD_wiki/wiki/sources/zarrouk-purnanto-2014-geothermal-separator-design-overview.md",
-    "CFD_wiki/wiki/sources/rivas-cruz-2015-geothermal-separator-state-of-art-review.md",
     "tmp/pdfs/phase07b-meeting/contact-0.png",
     "Project/Poster/poster-sections/poster mesh assets/mesh60k-inlet-section.png",
     "Project/Poster/poster-sections/poster mesh assets/mesh342k-inlet-section.png",
@@ -233,8 +233,6 @@
     "Project/Poster/poster-sections/poster mesh assets/F4-26.81-2.5pct-N16000-inlet-liquid-volume-fraction-range-0-0.5.png",
     "Project/Poster/poster-sections/poster mesh assets/F2-26.81-N10000-inlet-liquid-volume-fraction-range-0-1.png",
     "Project/Poster/poster-sections/poster mesh assets/F2-26.81-N10000-inlet-liquid-volume-fraction-range-0-0.5.png",
-    "Project/Poster/poster-sections/poster mesh assets/F1-26.81-N10000-side-liquid-volume-fraction.png",
-    "Project/Poster/poster-sections/poster mesh assets/F1-26.81-N10000-inlet-liquid-volume-fraction-range-0-0.5.png",
-    "Project/Poster/poster-sections/poster mesh assets/F1-26.81-N10000-inlet-liquid-volume-fraction-range-0-1.png"
+    "Project/Poster/poster-sections/poster mesh assets/F1-26.81-N10000-side-liquid-volume-fraction.png"
   ]
 }

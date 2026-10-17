@@ -1,0 +1,181 @@
+{
+  "generator": "PyAnsys\\scripts\\analysis\\plot_phase9_selected_results.py",
+  "generator_sha256": "09ee75126361975f0a9ef27755df05392a4b885cb4d927e90a1ffbc2e1125e4b",
+  "sources": [
+    {
+      "mesh": "60k",
+      "stage": "start",
+      "iteration": 9582,
+      "case": "C:\\Users\\Shuhei Yokkaichi\\OneDrive\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase9\\Server6\\60k\\selected-checkpoints-20261015-1792009041828561000\\bulk-frozen-N9582-0p815ms.cas.h5",
+      "data": "C:\\Users\\Shuhei Yokkaichi\\OneDrive\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase9\\Server6\\60k\\selected-checkpoints-20261015-1792009041828561000\\bulk-frozen-N9582-0p815ms.dat.h5",
+      "case_identity": {
+        "bytes": 9224553,
+        "sha256": "5698dcac0205d090af7fbde21768b8cdc6d4c9c81918f5a5e3b1a84a0cf9899f",
+        "reference_hash_available": true,
+        "reference_match": true
+      },
+      "data_identity": {
+        "bytes": 35638638,
+        "sha256": "fe5fc2597a0b81f50d175a1634acab5116e6e6f5c6699088b7b642e0bf9da04f",
+        "reference_hash_available": true,
+        "reference_match": true
+      }
+    },
+    {
+      "mesh": "60k",
+      "stage": "195ms",
+      "iteration": 49899,
+      "case": "C:\\Users\\Shuhei Yokkaichi\\OneDrive\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase9\\Server6\\60k\\selected-checkpoints-20261015-1792009041828561000\\195ms-N49899-bulk-frozen.cas.h5",
+      "data": "C:\\Users\\Shuhei Yokkaichi\\OneDrive\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase9\\Server6\\60k\\selected-checkpoints-20261015-1792009041828561000\\195ms-N49899-bulk-frozen.dat.h5",
+      "case_identity": {
+        "bytes": 9240637,
+        "sha256": "4df593b17c0d870254d66b1149fb2ff402cc7a963d6b8003cee26d34f6c53917",
+        "reference_hash_available": true,
+        "reference_match": true
+      },
+      "data_identity": {
+        "bytes": 35271555,
+        "sha256": "7d2f07436f175b63caaca275d2af6eb8d990684a686293dfb7a1a4dd4d81586a",
+        "reference_hash_available": true,
+        "reference_match": true
+      }
+    },
+    {
+      "mesh": "342k",
+      "stage": "start",
+      "iteration": 8580,
+      "case": "C:\\Users\\Shuhei Yokkaichi\\OneDrive\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase9\\Server5\\342k\\selected-ewf-pre-and-195ms-20261015\\342k-pre-ewf-N8580.cas.h5",
+      "data": "C:\\Users\\Shuhei Yokkaichi\\OneDrive\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase9\\Server5\\342k\\selected-ewf-pre-and-195ms-20261015\\342k-pre-ewf-N8580.dat.h5",
+      "case_identity": {
+        "bytes": 37326966,
+        "sha256": "3a050776f47cce6b780cad1d77dcbba429191cda2e1c132540aa3b67eff0875d",
+        "reference_hash_available": true,
+        "reference_match": true
+      },
+      "data_identity": {
+        "bytes": 181340667,
+        "sha256": "dbadcebf62115486d6c39c75cf73b0cedcdb4911c1d544df593a3a701a8e2c6f",
+        "reference_hash_available": true,
+        "reference_match": true
+      }
+    },
+    {
+      "mesh": "342k",
+      "stage": "195ms",
+      "iteration": 111460,
+      "case": "C:\\Users\\Shuhei Yokkaichi\\OneDrive\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase9\\Server5\\342k\\selected-ewf-pre-and-195ms-20261015\\342k-ewf-final-195ms-N111460-bulk-frozen.cas.h5",
+      "data": "C:\\Users\\Shuhei Yokkaichi\\OneDrive\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase9\\Server5\\342k\\selected-ewf-pre-and-195ms-20261015\\342k-ewf-final-195ms-N111460-bulk-frozen.dat.h5",
+      "case_identity": {
+        "bytes": 37366268,
+        "sha256": "7c6d3bcd12807640ef82957da271f2052c60a08424e5629c1866a9ec894e2d00",
+        "reference_hash_available": true,
+        "reference_match": true
+      },
+      "data_identity": {
+        "bytes": 181167054,
+        "sha256": "75089bb3ae8782e358866058aa10d742abd25f80a4a76dc98c9983fb02261722",
+        "reference_hash_available": true,
+        "reference_match": true
+      }
+    },
+    {
+      "mesh": "680k",
+      "stage": "start",
+      "iteration": 10580,
+      "case": "C:\\Users\\Shuhei Yokkaichi\\OneDrive\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase9\\Server1\\680k\\ewf-200ms-N104080-1791914228488238200\\bulk-freeze-0p9ms-N10580-1792123771278456000.cas.h5",
+      "data": "C:\\Users\\Shuhei Yokkaichi\\OneDrive\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase9\\Server1\\680k\\ewf-200ms-N104080-1791914228488238200\\bulk-freeze-0p9ms-N10580-1792123771278456000.dat.h5",
+      "case_identity": {
+        "bytes": 60537018,
+        "sha256": "aa7a1d3c9270b712aa0fb39b25114d9ebc51a9fdb98f0877ba9dacd1f9dd343a",
+        "reference_hash_available": true,
+        "reference_match": true
+      },
+      "data_identity": {
+        "bytes": 317492296,
+        "sha256": "bd1b5b020674c0ad6eb65cc33171402f38c2fcd7f6a33272da01805a9d46a178",
+        "reference_hash_available": true,
+        "reference_match": true
+      }
+    },
+    {
+      "mesh": "680k",
+      "stage": "195ms",
+      "iteration": 103080,
+      "case": "C:\\Users\\Shuhei Yokkaichi\\OneDrive\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase9\\Server1\\680k\\ewf-200ms-N104080-1791914228488238200\\frozen-195ms-N103080-1792123771278456000.cas.h5",
+      "data": "C:\\Users\\Shuhei Yokkaichi\\OneDrive\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase9\\Server1\\680k\\ewf-200ms-N104080-1791914228488238200\\frozen-195ms-N103080-1792123771278456000.dat.h5",
+      "case_identity": {
+        "bytes": 60572761,
+        "sha256": "40267a5e1446d28848c11891d79b5d3ac97cfb32a2f7e21f8b9239839d03362c",
+        "reference_hash_available": true,
+        "reference_match": true
+      },
+      "data_identity": {
+        "bytes": 317438287,
+        "sha256": "735be76ebd881f1d62b856f45700268aa0fab6ee40d74ed4abcaec283fa158d8",
+        "reference_hash_available": true,
+        "reference_match": true
+      }
+    },
+    {
+      "mesh": "997k",
+      "stage": "start",
+      "iteration": 9580,
+      "case": "C:\\Users\\Shuhei Yokkaichi\\OneDrive\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase9\\ewf-server3-997k\\20261015\\final-N50900-1792031980254796000\\997k-ewf-end-bulk-N9580.cas.h5",
+      "data": "C:\\Users\\Shuhei Yokkaichi\\OneDrive\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase9\\ewf-server3-997k\\20261015\\final-N50900-1792031980254796000\\997k-ewf-end-bulk-N9580.dat.h5",
+      "case_identity": {
+        "bytes": 113468894,
+        "sha256": "cf297396c9dfc1b7797abafd863a1af0952c92f9cc99f6c1ffa37aae4771d14e",
+        "reference_hash_available": false,
+        "reference_match": null
+      },
+      "data_identity": {
+        "bytes": 493418718,
+        "sha256": "408553de6c65d3a47bbe6d47b3fb566aabd92b03ed81cd0f97e8e910e0817523",
+        "reference_hash_available": false,
+        "reference_match": null
+      }
+    },
+    {
+      "mesh": "997k",
+      "stage": "195ms",
+      "iteration": 49900,
+      "case": "C:\\Users\\Shuhei Yokkaichi\\OneDrive\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase9\\ewf-server3-997k\\20261015\\final-N50900-1792031980254796000\\997k-ewf-195ms-N49900.cas.h5",
+      "data": "C:\\Users\\Shuhei Yokkaichi\\OneDrive\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase9\\ewf-server3-997k\\20261015\\final-N50900-1792031980254796000\\997k-ewf-195ms-N49900.dat.h5",
+      "case_identity": {
+        "bytes": 113484909,
+        "sha256": "283debd39557d7a2f16604511584f09b20c1a7c06ccc1c611255cf0b8fd1a944",
+        "reference_hash_available": false,
+        "reference_match": null
+      },
+      "data_identity": {
+        "bytes": 493495115,
+        "sha256": "ee07e7086c77ea9726b38600210e5fe62069cdd7774b6df713b9a0a137fe080c",
+        "reference_hash_available": false,
+        "reference_match": null
+      }
+    },
+    {
+      "mesh": "2.6M",
+      "stage": "start",
+      "iteration": 8580,
+      "case": "C:\\Users\\Shuhei Yokkaichi\\OneDrive\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase9\\Server4\\2_6M\\final-initial-bulk-N8580-1791516489726781000\\final-initial-bulk-N8580-1791516489726781000.cas.h5",
+      "data": "C:\\Users\\Shuhei Yokkaichi\\OneDrive\\OneDrive - The University of Auckland\\P4P-Fluent-Artifacts\\Phase9\\Server4\\2_6M\\final-initial-bulk-N8580-1791516489726781000\\final-initial-bulk-N8580-1791516489726781000.dat.h5",
+      "case_identity": {
+        "bytes": 211500120,
+        "sha256": "eaf9c133f6beb90de8021d1009888bb2d9a1e89f8822a19edd226a6ce7ef6a67",
+        "reference_hash_available": true,
+        "reference_match": true
+      },
+      "data_identity": {
+        "bytes": 1168416980,
+        "sha256": "c9a6cd8be2cc48905620b4c70fbb60a84d91fefe88db183e40c411bd394c44c1",
+        "reference_hash_available": true,
+        "reference_match": true
+      }
+    }
+  ],
+  "note": "Discrete saved states, not time histories. The 2.6M starting state uses provisional EWF settings; its 195 ms pair is missing. Film mass reconstructed from saved face area and thickness; density verified against Fluent upper-wall film-mass report. No inventory slopes are inferred.",
+  "case_loads": 0,
+  "solve_calls": 0,
+  "png_sha256": "97f885f64d0a860f95d225002b38ca6666d62b10cce00e921d9016d2904801a1"
+}

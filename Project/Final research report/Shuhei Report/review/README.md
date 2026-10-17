@@ -1,5 +1,7 @@
 # Main-body page proof
 
+**17 October 2026 revision:** The draft now includes the Phase 9 narrative and Figures 19–20, plus the poster film-rate plot as Figure 7 in Methods. This retained proof predates that addition; its 25-page count does not verify the revised draft. Regenerate the proof before assessing the current page count.
+
 [body-page-proof.pdf](body-page-proof.pdf) contains **25 pages**, counted from Introduction through Conclusions. Front matter, references and appendices are excluded. One page is reserved for the final mesh comparison: **20**. This proof meets the 30-page body limit.
 
 The proof uses A4, 12 pt Times New Roman body text, 1.15 body line spacing, 20 mm top/bottom margins and 25 mm side margins. Captions use the template's small type (approximately 11 pt). Paragraph gaps are 4 pt, with compact heading gaps. Those gaps differ from the supplied template; the body type, line spacing and margins are retained.

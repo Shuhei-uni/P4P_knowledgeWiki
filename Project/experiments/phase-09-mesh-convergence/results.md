@@ -1,5 +1,67 @@
 # Phase 9 — Current evidence
 
+## Selected starting and 195 ms states — 17 October 2026
+
+| Check | Observation / limit |
+| --- | --- |
+| Sources | Nine selected OneDrive case/data pairs read offline; 18 files SHA256 hashed |
+| Reference hashes | Fourteen source files match shared manifest hashes; four 997k files have fresh hashes but no independent shared hash manifest |
+| Paired comparisons | 60k, 342k, 680k and 997k have starting and 195 ms states |
+| 2.6M | Initial-bulk state only; provisional EWF settings; no 195 ms pair available |
+| Starting states | 60k 0.815 ms; 342k 0.700 ms; 680k 0.900 ms; 997k 0.800 ms; 2.6M 0.700 ms |
+| Bulk state | All 195 ms states frozen; 342k starting pair precedes its bulk-active adjustment |
+| Solver interaction | No Fluent case loads, setters, iterations, restarts or exits |
+| Interpretation | Film storage and lower-wall drainage differ between meshes; mesh independence and total efficiency remain unestablished |
+
+| History / quantity | Evidence recovered | Missing / effect |
+| --- | --- | --- |
+| Bulk residuals | Embedded continuity and phase-fraction arrays in all nine data files | Older samples decimated; frozen-stage repetitions do not demonstrate convergence |
+| Flux and inventory | Current endpoint report values; boundary flux checked from saved face fields | No continuous selected-run histories in shared files; no late-window means or slopes |
+| Film inventory | Upper and lower film reconstructed from saved thickness and face areas | No continuous film-mass history |
+| Film drain | Saved named-expression endpoint rate; checked against cached native drain reports where present | No source/drain histories for cumulative removal or film-ledger closure |
+| Film stripping / edge separation | Saved cumulative-counter differences | Internal transfers; receiving phase and outlet fate not verified |
+| Film subiteration residuals | Not recovered | Native selected-run transcripts needed |
+| DPM outlet mass / fates | No saved DPM summary in selected files | Total carryover and efficiency cannot be assembled |
+| Remote recovery | Servers 1/3/4 TCP unreachable; 5/6 not configured locally | Server-local report files and transcripts not yet inspected |
+| Other local histories | Earlier 60k pilot exists; excluded as a different run | Used only to check HDF5 residual normalization against native printed residuals |
+
+| Mesh | Starting N / age (ms) | Starting bulk / film (kg) | 195 ms N | 195 ms bulk / film (kg) | 195 ms bulk carryover (kg/s) | 195 ms film sink (kg/s) |
+| --- | --- | --- | --- | --- | ---: | ---: |
+| 60k | 9582 / 0.815 | 50.835 / 0.018686 | 49899 | 50.835 / 7.489776 | 0.548691 | 22.716049 |
+| 342k | 8580 / 0.700 | 45.102 / 0.006688 | 111460 | 48.831 / 2.820786 | 0.495744 | 7.167794 |
+| 680k | 10580 / 0.900 | 49.178 / 0.008494 | 103080 | 49.178 / 2.950425 | 0.496423 | 6.777898 |
+| 997k | 9580 / 0.800 | 54.456 / 0.003822 | 49900 | 54.456 / 2.056433 | 0.477213 | 4.586771 |
+| 2.6M | 8580 / 0.700 | 46.379 / 0.003545 | Unavailable | Unavailable | Unavailable | Unavailable |
+
+![Selected mesh response](figures/selected-mesh-response.png)
+
+*Saved endpoint values; no history interpolation or averaging. Film drain is the stored source expression evaluated on saved lower-wall fields. The 2.6M point is a provisional initial-bulk reference.*
+
+![Selected film-thickness maps](figures/selected-film-thickness.png)
+
+*Offline face-constant polygons on the cylindrical wall; common 0–0.30 mm scale, thicker regions saturated. White arrows show binned film-velocity direction normalized to a 0.3 m path length, not speed. The lower collector and inlet extension are excluded. Starting ages differ.*
+
+![Selected bulk residuals](figures/selected-bulk-residuals.png)
+
+*Saved samples from the starting pairs, after N1580. Native iteration and stored normalization retained; earlier points decimated. Frozen 195 ms repetitions excluded. Residual magnitudes alone do not qualify the comparison.*
+
+![Film-release counter differences](figures/selected-film-release.png)
+
+*Cumulative stripping and edge-separation counter changes from each selected start to 195 ms. These are internal transfers, not external collection or outlet carryover; the 342k interval includes bulk-active adjustment.*
+
+| Additional output / action | Location / requirement |
+| --- | --- |
+| Separate liquid-routing plot | [Figure](figures/selected-liquid-routing.png); [PDF](figures/selected-liquid-routing.pdf) |
+| Separate inventory plot | [Figure](figures/selected-liquid-inventory.png); [PDF](figures/selected-liquid-inventory.pdf) |
+| Report-facing summary | [PDF](figures/selected-mesh-response.pdf); [provenance](figures/selected-mesh-response.provenance.json) |
+| Exact endpoint values | [CSV](../../../PyAnsys/output/phase9-selected-results/20261017/endpoint-results.csv) |
+| History audit / source paths | [Audit](../../../PyAnsys/output/phase9-selected-results/20261017/history-audit.json); each adjacent mesh/state record retains report-file paths and residual CSVs |
+| Extraction / plot generators | [Extractor](../../../PyAnsys/scripts/analysis/gather_phase9_selected_results.py); [Matplotlib plots](../../../PyAnsys/scripts/analysis/plot_phase9_selected_results.py) |
+| Narrow recovery | Retrieve the selected-run native report files and film transcripts from their owning hosts; preserve gaps and restarts |
+| Deferred figures | Inventory histories, interval film ledger, film inner-residual history and total efficiency; insufficient evidence |
+
+## Earlier execution and preparation evidence
+
 | Server 5 timestep recovery | Evidence / action |
 | --- | --- |
 | Historical activation-repair parent | Frozen transition N11080, 0.950 ms film age |

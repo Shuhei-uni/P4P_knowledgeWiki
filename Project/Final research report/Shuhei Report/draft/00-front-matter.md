@@ -11,8 +11,8 @@
 | Supervisors | Sadiq Zarrouk and Maedeh Amirpour |
 | Co-worker | Andy Tran |
 | Draft date | 14 October 2026 |
-| Student identification | To be entered by the author |
-| Submission date | To be entered by the author |
+| Student identification | 302558861; UPI: syok443 |
+| Submission date | 18 October 2026 |
 
 <!-- Names follow the supplied working poster. The supplied ESB title-page template includes supervisors and co-worker; this takes precedence here over the generic structuring handout's different cover-page advice. -->
 
@@ -24,9 +24,9 @@ Mesh development changed the predicted wall-liquid fields. In a matched comparis
 
 With bulk fields held fixed, film spread and thickened over the lower and middle wall. At 500 ms, input and drainage averaged 81.12 and 69.60 kg/s over the final 10 ms, while storage remained 11.53 kg/s. Later configurations added droplet release and impact mechanisms. A matched direct-drain test reduced lower-wall film by 70.32%. However, its 0.5088 kg removal partly replaced native film outflow, giving only 0.1897 kg of additional external removal. A longer continuation showed that upper-wall film could still accumulate while lower drainage operated.
 
-The study establishes model sensitivity and checked collection and startup procedures. Its central finding is that outlet liquid flow and wall capture must be assessed with storage, release and external removal. Developing fields, incomplete mass balances and unresolved numerical sensitivity limit the findings to model development. Physical validation is still needed before predicting separation efficiency or pressure loss.
+At a common film age of 195 ms, finer-mesh states showed less extensive appreciable film thickness and lower film drainage. The coarse-informed observation time did not establish equivalent film development or mesh independence.
 
-<!-- Draft completion: update this abstract with the final mesh-sensitivity finding from Section 4.13 when results are selected. No outcome is assumed here. -->
+The study establishes model sensitivity and checked collection and startup procedures. Its central finding is that outlet liquid flow and wall capture must be assessed with storage, release and external removal. Developing fields, incomplete mass balances and unresolved numerical sensitivity limit the findings to model development. Physical validation is still needed before predicting separation efficiency or pressure loss.
 
 ## Declaration
 
@@ -79,18 +79,21 @@ Page references will be generated during document layout.
 | 4 | Inlet geometries and tangential-velocity fields |
 | 5 | Wall-film droplet entrainment |
 | 6 | Actual solved domain and split inlet |
-| 7 | Mesh structure and wall-liquid fields |
-| 8 | Effect of inlet phase placement on liquid distribution |
-| 9 | Liquid inventory and outlet flow on three finer meshes |
-| 10 | Early startup and carrier development |
-| 11 | Roughness response |
-| 12 | Film-disabled/accretion-enabled outlet histories |
-| 13 | Film-disabled/accretion-enabled bulk-liquid spatial comparison |
-| 14 | Shortened-startup ramp comparison |
-| 15 | Selected film development through 500 ms |
-| 16 | Film-thickness views |
-| 17 | Direct lower-wall drainage and the change in total film removal |
-| 18 | Final-model mesh sensitivity: liquid fields, storage and removal — reserved |
+| 7 | Earlier coarse-mesh film rates informing the observation-time choice |
+| 8 | Mesh structure and wall-liquid fields |
+| 9 | Effect of inlet phase placement on liquid distribution |
+| 10 | Liquid inventory and outlet flow on three finer meshes |
+| 11 | Early startup and carrier development |
+| 12 | Roughness response |
+| 13 | Film-disabled/accretion-enabled outlet histories |
+| 14 | Film-disabled/accretion-enabled bulk-liquid spatial comparison |
+| 15 | Shortened-startup ramp comparison |
+| 16 | Selected film development through 500 ms |
+| 17 | Film-thickness views |
+| 18 | Direct lower-wall drainage and the change in total film removal |
+| 19 | Wall-film distribution across mesh resolutions at the selected starts and 195 ms |
+| 20 | Mesh dependence of saved liquid inventories and removal rates |
+| 21 | Proposed inlet-region wall features and preliminary mixture-flow patterns |
 | A1 | Complete contact chronology |
 | A2 | Shortened-startup and film chronology to iteration 25815 |
 | A3 | Native inlet mesh section |

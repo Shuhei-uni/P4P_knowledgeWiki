@@ -1,0 +1,11 @@
+{
+  "source_pptx": "Project/Poster/A1 Landscape \u2014 Geothermal Separator Poster \u2014 Working Draft.pptx",
+  "source_pptx_sha256": "9936f350315b2fbfd27291e2411296b93cd93b1959bd0b5671483aaa2933736b",
+  "embedded_media": "ppt/media/image18.png",
+  "image_sha256": "9481953d2cd55ffd1f751c60126d1bd9289b501f2d52e89b5339fb54c2d857f1",
+  "processing": "Byte-identical extraction; no pixel changes.",
+  "original_generator": "PyAnsys/scripts/analysis/build_wall_film_poster_card.py",
+  "data": "PyAnsys/output/phase72a-stage3-speed-sensitivity-server1/20261006/selected-film-history-reference.csv",
+  "scope": "Earlier Stage 3 nominal-speed 60k frozen-bulk reference; different film configuration from Phase 9. Dotted line is 265.1843386356894 ms.",
+  "selection_rationale": "Author supplied approximately 200 ms rationale in report discussion on 17 October 2026; not a formal plateau test."
+}
