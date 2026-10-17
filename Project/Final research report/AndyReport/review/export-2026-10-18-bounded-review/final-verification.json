@@ -1,0 +1,27 @@
+{
+  "agent": "/root/final_export_verifier",
+  "fork_turns": "none",
+  "status": "PASS",
+  "scope": "Final export verification, not a substantive report revision cycle",
+  "pdf_sha256": "7abfc2d74bcc1cb28fcf05cdd391c4aaaf01cbad4e3c02fdb4dcbafff61b4912",
+  "material_unresolved_export_issues": [],
+  "checks": {
+    "canonical_markdown_fidelity": "No material omission or mismatch; introduction wording and objectives retained",
+    "title_and_date": "Official title and canonical Revised 17 October 2026 date match",
+    "body_pages": 30,
+    "total_pages": 53,
+    "physical_body_pages": [
+      12,
+      41
+    ],
+    "required_sections": "All present",
+    "font": "Embedded Times New Roman body at LaTeX12pt; separate expected heading, caption and math settings",
+    "extractable_text": "Every page",
+    "figures": "All nine, with captions and source/creator credits",
+    "visual": "All-page contact sheets and selected full-size pages show no material clipping/overlap; no glyph outside page"
+  },
+  "cosmetic_remainder": "PDF page53 has one appendix continuation line",
+  "author_work": "Existing author-completion placeholders remain; DPM follow-up deferred",
+  "context_exposure": "Automatic repository instructions and memory summary were supplied; neither used as scientific evidence. PDF skill read. File discovery exposed previous-review filenames only; no previous-review contents, other-agent reviews, project records or memory files read.",
+  "no_edits_compile_research_or_subagents": true
+}

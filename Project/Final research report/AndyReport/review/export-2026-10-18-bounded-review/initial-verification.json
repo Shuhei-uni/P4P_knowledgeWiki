@@ -1,0 +1,28 @@
+{
+  "agent": "/root/latex_pdf_export_verifier",
+  "fork_turns": "none",
+  "review_scope": "Export only; no new substantive review cycle",
+  "pdf_sha256_reviewed": "211c8929ecf18cd6a8560bd628429e1cc2351e23b837f9cdd9a64a3cdddc354b",
+  "findings": [
+    {
+      "location": "draft/01-introduction-and-literature-review.md:17 and review/latex/sections/01-introduction.tex",
+      "issue": "Export omitted unexpected and retained a comma absent in canonical Markdown",
+      "disposition": "Accepted; TeX aligned exactly with existing Markdown"
+    },
+    {
+      "location": "draft/00-front-matter.md:13 and review/latex/ESB_report_template.tex:9",
+      "issue": "Title-page date differed from authoritative Markdown",
+      "disposition": "Accepted; exported date aligned exactly with existing Markdown"
+    }
+  ],
+  "passed_checks": [
+    "30 body pages; 53 total",
+    "Official title and embedded Times New Roman12pt body",
+    "Text extractable",
+    "Nine figures and all credits; seven body tables and nine appendix tables",
+    "No material visual clipping or overlap"
+  ],
+  "optional_layout_note": "One continuation line remains on final appendix page53",
+  "context_exposure": "Automatic repository instructions and memory summary; verifier reported not consulting memory files, previous reviews or project evidence and not using them as evidence",
+  "edits_by_reviewer": false
+}

@@ -141,7 +141,7 @@ The later steady pool study used implicit VOF with a shared velocity and the sam
 
 [Figure to add: annotated full-geometry domain with inlets, steam outlet, brine face and the Phase 7b collector region. Show the closed-collector and open-drain treatments separately.]
 
-Evidence: [collector reference setup](../../experiments/phase-07b-full-geometry-liquid-removal/s040-collector/setup.md); [steady VOF setup](../../experiments/phase-09-steady-vof-pool/setup.md).
+Evidence: [collector reference setup](<../../../../experiments/phase-07b-full-geometry-liquid-removal/s040-collector/setup.md>); [steady VOF setup](<../../../../experiments/phase-09-steady-vof-pool/setup.md>).
 
 ### 3.3 Numerical collector
 
@@ -155,7 +155,7 @@ where \(\chi\) identifies the collector cells, \(\rho_L\) is liquid density, \(\
 
 The initial screen changed collector thickness. Subsequent comparisons examined removal strength and numerical treatment. The final controlled comparison retained the preceding Coupled/N-phase configuration and changed \(\tau\) from 0.02 to 0.10 s. Both cases began from the same clean initial physical fields. The assigned expression source and native applied source were checked separately; exact source tracking did not establish the internal source Jacobian or conservation.
 
-Evidence: [source definition](../../experiments/phase-07b-full-geometry-liquid-removal/s040-collector/setup.md); [controlled weaker-sink comparison](../../experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/coupled-nphase-weaker-sink/results.md).
+Evidence: [source definition](<../../../../experiments/phase-07b-full-geometry-liquid-removal/s040-collector/setup.md>); [controlled weaker-sink comparison](<../../../../experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/coupled-nphase-weaker-sink/results.md>).
 
 ### 3.4 Numerical procedures and evidence collection
 
@@ -205,7 +205,7 @@ All twelve calculations passed the recorded 0.2% per-injection fate-mass toleran
 
 The recorded provisional quality values ranged from 99.6718% to 99.8507% in the baseline family and 99.9668% to 99.9795% in the spiral family. Their definition used inlet steam flow and confirmed escaped liquid. They were not independently verified outlet-steam-quality measurements. Differences between the families also included inlet area, velocity and derived droplet inputs, so they could not establish an isolated geometry effect.
 
-These calculations supplied a reproducible operating matrix and a discrepancy record. The unresolved carrier and particle behaviour prevented the apparent agreement near 100% from establishing physical validation. [Replication record](../../experiments/parallel-andy-studies/enthalpy-dpm-replication.md).
+These calculations supplied a reproducible operating matrix and a discrepancy record. The unresolved carrier and particle behaviour prevented the apparent agreement near 100% from establishing physical validation. [Replication record](<../../../../experiments/phase-03-dpm-carryover-and-coupling/historical-andy-studies/enthalpy-dpm-replication.md>).
 
 ### 4.2 Historical mesh comparisons retained significant iterative drift
 
@@ -213,11 +213,11 @@ All seven historical meshes eventually reached their nominal 3000-iteration endp
 
 The pressure-drop difference between the historical 1900k- and 2000k-labelled cases was approximately 0.51%, while their final-window pressure drift was approximately 2.69% and 2.46%, respectively. The apparent cross-mesh agreement was therefore smaller than the continuing change within either calculation.
 
-An independent continuation of the 900k-labelled case reached 6000 iterations. Between iterations 4000 and 6000, liquid inventory increased from 104.054 to 171.030 kg and pressure drop increased from 31.029 to 34.049 kPa. Pressure drift over the final 500 iterations remained 4.612%. The pressure comparison was still affected by a changing liquid distribution, so neither a production mesh nor a Richardson/GCI result was accepted. [Historical mesh assessment and later closure](../../experiments/phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/mesh-convergence-checkpoint-20260803.md).
+An independent continuation of the 900k-labelled case reached 6000 iterations. Between iterations 4000 and 6000, liquid inventory increased from 104.054 to 171.030 kg and pressure drop increased from 31.029 to 34.049 kPa. Pressure drift over the final 500 iterations remained 4.612%. The pressure comparison was still affected by a changing liquid distribution, so neither a production mesh nor a Richardson/GCI result was accepted. [Historical mesh assessment and later closure](<../../../../experiments/phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/mesh-convergence-checkpoint-20260803.md>).
 
 ### 4.3 Numerical liquid removal did not establish steady conservation
 
-Early closed-bottom sink tests increased removal by changing the source region and its strength, but did not establish an accepted stability window. A source-accounting audit also corrected a double count: the phase report's Net already included the liquid source. After correction, the first two reported liquid imbalances were 91.19% and 80.77%. This affected the interpretation of earlier apparent improvements and established the need to distinguish boundary-only reports from source-inclusive reports. [Historical sink diagnostics](../../experiments/parallel-andy-studies/closed-bottom-liquid-sinks.md).
+Early closed-bottom sink tests increased removal by changing the source region and its strength, but did not establish an accepted stability window. A source-accounting audit also corrected a double count: the phase report's Net already included the liquid source. After correction, the first two reported liquid imbalances were 91.19% and 80.77%. This affected the interpretation of earlier apparent improvements and established the need to distinguish boundary-only reports from source-inclusive reports. [Historical sink diagnostics](<../../../../experiments/phase-07b-full-geometry-liquid-removal/historical-andy-studies/closed-bottom-liquid-sinks.md>).
 
 The later full-geometry Phase 7b campaign tested collector thickness, removal strength and numerical controls. Four of the five initial thickness cases reached 5000 iterations without satisfying the combined assessment; the thickest case diverged before that horizon. Later numerical changes altered residuals and extreme velocity events but did not establish balanced stationary collection.
 
@@ -238,17 +238,17 @@ The mean collector inventory rose by approximately 4.93 times when the depletion
 
 The source checks and independently reduced inventories supported the recorded observations. Regional accounts placed most of the late signed liquid deficit above the collector, but did not isolate a source, transport, mesh or startup mechanism as its cause. The correct application of the specified removal law therefore did not resolve the broader flow inconsistency.
 
-Phase 7b closed without a qualified steady solution. A subsequent conditioning experiment was stopped at iteration 128, before its first planned gate and before restoration of the full equations. It was an incomplete test, not evidence that the proposed conditioning method failed. [Phase closure](../../experiments/phase-07b-full-geometry-liquid-removal/closure.md).
+Phase 7b closed without a qualified steady solution. A subsequent conditioning experiment was stopped at iteration 128, before its first planned gate and before restoration of the full equations. It was an incomplete test, not evidence that the proposed conditioning method failed. [Phase closure](<../../../../experiments/phase-07b-full-geometry-liquid-removal/closure.md>).
 
 ### 4.4 Brief resolved drainage did not persist in longer tests
 
 The historical resolved-outlet studies removed the volumetric sink and introduced a physical brine boundary. Clean transient VOF tests achieved a short drainage window at 0.05% of nominal feed. During that ten-step window, the brine face remained liquid-filled and the reported total imbalance was approximately −9.11 × 10⁻⁸ kg/s.
 
-Longer tests changed the conclusion. At the same fixed pressure, the subsequent hold failed its liquid-balance requirement. A separate 70-step test with one pressure adjustment retained low continuity, liquid coverage at the drain and no wrong-phase leakage, but its final-ten maximum liquid imbalance was 0.01155 kg/s against a 0.005 kg/s limit. The short success therefore did not establish sustained drainage. [Resolved-outlet history](../../experiments/parallel-andy-studies/resolved-brine-outlet.md).
+Longer tests changed the conclusion. At the same fixed pressure, the subsequent hold failed its liquid-balance requirement. A separate 70-step test with one pressure adjustment retained low continuity, liquid coverage at the drain and no wrong-phase leakage, but its final-ten maximum liquid imbalance was 0.01155 kg/s against a 0.005 kg/s limit. The short success therefore did not establish sustained drainage. [Resolved-outlet history](<../../../../experiments/phase-09-steady-vof-pool/historical-andy-studies/resolved-brine-outlet.md>).
 
 The later steady VOF study tested two initial pool levels at unchanged downstream head. Both lost liquid and failed the required conservation and stationarity conditions. Greater initial submergence reduced final vapour leakage through the drain at iteration 1000, but increased the liquid imbalance. Loss of the liquid seal alone was therefore insufficient to explain all the observed inadequacy.
 
-![Two initial pool levels under the same numerical treatment](../../../PyAnsys/output/phase09/comparison/two-start-comparison.png)
+![Two initial pool levels under the same numerical treatment](<../../../../../PyAnsys/output/phase09/comparison/two-start-comparison.png>)
 
 *Figure 2. Recorded steady VOF comparison from two initial pool levels. The fields develop over solver iterations, not physical elapsed time. Neither case establishes a stationary operating pool. Source: the phase's audited two-start comparison.*
 
@@ -265,7 +265,7 @@ An unchanged continuation of the higher-pool case from iteration 1000 to 2000 al
 | Whole-domain half-window mean change (%) | −8.281 | Magnitude ≤0.25 |
 | Final continuity residual | 0.35136 | ≤0.001 throughout window |
 
-The final 200 iterations lost a further 118.949 kg of liquid. Spatial comparison also showed continuing phase redistribution. Additional unchanged iteration had not resolved the principal problem, and the campaign closed unqualified. The result concerns the tested steady formulation and assumed downstream boundary; it does not rule out a steady physical separator state. [Extension results](../../experiments/phase-09-steady-vof-pool/results.md).
+The final 200 iterations lost a further 118.949 kg of liquid. Spatial comparison also showed continuing phase redistribution. Additional unchanged iteration had not resolved the principal problem, and the campaign closed unqualified. The result concerns the tested steady formulation and assumed downstream boundary; it does not rule out a steady physical separator state. [Extension results](<../../../../experiments/phase-09-steady-vof-pool/results.md>).
 
 ### 4.5 Initialization controls narrowed the pressure–gravity question
 
@@ -287,7 +287,7 @@ Changing to the equivalent zero-gauge representation removed the inventory drift
 
 Homogeneous liquid also lost rest, showing that an interface was not necessary for this startup disturbance. Its nearly unchanged liquid inventory did not establish conservation because substantial boundary fluxes remained. These tests narrowed the diagnostic question to a gravity-on initialization and numerical-response problem without isolating one internal cause.
 
-The campaign tested preservation of rest from the first iteration. It did not test eventual convergence after an initial disturbance. Its endpoints cannot support drainage, operating performance or a general conclusion that steady simulation is impossible. [Pressure–gravity closure](../../experiments/pressure-gravity-initialization/closure.md).
+The campaign tested preservation of rest from the first iteration. It did not test eventual convergence after an initial disturbance. Its endpoints cannot support drainage, operating performance or a general conclusion that steady simulation is impossible. [Pressure–gravity closure](<../../../../experiments/phase-09-steady-vof-pool/follow-on-diagnostics/pressure-gravity-initialization/closure.md>).
 
 ### 4.6 Current mesh preparation has not established mesh independence
 
@@ -295,11 +295,11 @@ The current single-inlet family contains seven meshes from 357,145 to 5,479,605 
 
 At the recorded 11 October cutoff, M01–M05 had failed numerically before the intended 5000-iteration horizon. M06–M07 and the selected body-force follow-up had not supplied a completed qualified comparison. The detailed M01–M04 diagnosis found liquid accumulation and large liquid-flux deficits before velocity and residual overflow. The shared behaviour supported investigation of common setup and numerical factors; it did not eliminate local mesh effects.
 
-![Liquid inventory and outlet-flow histories from the mesh-family diagnosis](../../../PyAnsys/output/phase10-single-inlet-mesh-convergence/divergence-diagnosis-20261011/liquid-balance.png)
+![Liquid inventory and outlet-flow histories from the mesh-family diagnosis](<../../../../../PyAnsys/output/phase10-single-inlet-mesh-convergence/divergence-diagnosis-20261011/liquid-balance.png>)
 
 *Figure 3. Preserved diagnostic snapshot of the new mesh family. M01–M04 cover the selected pre-overflow samples; M05 is partial in this figure and subsequently failed. These traces show numerical development rather than converged mesh outputs. Source: the 11 October divergence diagnosis.*
 
-The family therefore supports a mesh-preparation and failure-assessment result at this stage. It does not support mesh independence, a GCI estimate or an accuracy or timing advantage over the historical meshes. [Current results](../../experiments/phase-10-single-inlet-mesh-convergence/results.md).
+The family therefore supports a mesh-preparation and failure-assessment result at this stage. It does not support mesh independence, a GCI estimate or an accuracy or timing advantage over the historical meshes. [Current results](<../../../../experiments/phase-10-single-inlet-mesh-convergence/results.md>).
 
 ## 5. Discussion
 
@@ -329,7 +329,7 @@ The mesh results make a related point. Changes between grids cannot be assigned 
 
 Shuhei Yokkaichi's separate investigation used a simplified domain and developed numerical liquid collection with a reduced-feed hold, checked inlet ramp and subsequent solver continuation. The resulting full-feed parent enabled common-starting-field roughness and wall-film comparisons. His draft treats this as a model-development contribution while retaining a terminal liquid-balance remainder of approximately 20.81% of liquid feed.
 
-The wall-film comparison reduced mean bulk-liquid steam-outlet flow from 24.369 to 1.735 kg/s, but also changed retained inventory and added another liquid store. A later film calculation reached 500 ms under frozen bulk fields with 9.5444 kg of film. Final-window accretion, drainage and storage were approximately 81.121, 69.600 and 11.528 kg/s, respectively. The film therefore drained while continuing to accumulate liquid. [Shuhei's report results](<../Shuhei Report/draft/02-03-model-development-methods-and-results.md>); [owning film-development record](../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/inlet-speed-500ms/results.md).
+The wall-film comparison reduced mean bulk-liquid steam-outlet flow from 24.369 to 1.735 kg/s, but also changed retained inventory and added another liquid store. A later film calculation reached 500 ms under frozen bulk fields with 9.5444 kg of film. Final-window accretion, drainage and storage were approximately 81.121, 69.600 and 11.528 kg/s, respectively. The film therefore drained while continuing to accumulate liquid. [Shuhei's report results](<../../../Shuhei Report/draft/03-results.md>); [owning film-development record](<../../../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/inlet-speed-500ms/results.md>).
 
 These results extend the project evidence on represented liquid routes. They do not form a controlled comparison with the full-geometry campaigns in this report. Differences in geometry, source law, startup, active equations and mesh prevent attribution of the outcomes to one approach. Together, the branches identify the need to assess collection, internal transfer and retained inventory alongside outlet flow.
 
@@ -379,16 +379,16 @@ These internal links retain the route from draft claims to the owning project re
 
 | Draft section | Owning record | Main use |
 | --- | --- | --- |
-| 1 and 5 | [Project scope](../../scope.md); [V&V limits](../../vnv.md) | Research purpose and overall claim boundary |
-| 3 and 4.1 | [Replication](../../experiments/parallel-andy-studies/enthalpy-dpm-replication.md) | Operating matrix, particle accounts and limitations |
-| 4.2 | [Historical mesh study](../../experiments/phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/mesh-convergence-checkpoint-20260803.md) | Dated checkpoint plus later seven-mesh closure and continuation |
-| 4.3 | [Historical sinks](../../experiments/parallel-andy-studies/closed-bottom-liquid-sinks.md) | Corrected source accounting and failed stability windows |
-| 3 and 4.3 | [Phase 7b closure](../../experiments/phase-07b-full-geometry-liquid-removal/closure.md); [E7 comparison](../../experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/coupled-nphase-weaker-sink/results.md) | Selected quantitative comparison and partial-test disposition |
-| 4.4 | [Historical resolved outlet](../../experiments/parallel-andy-studies/resolved-brine-outlet.md) | Brief transient success and later nonacceptance |
-| 3 and 4.4 | [Steady VOF setup](../../experiments/phase-09-steady-vof-pool/setup.md); [results](../../experiments/phase-09-steady-vof-pool/results.md); [closure](../../experiments/phase-09-steady-vof-pool/closure.md) | Two-start assessment and authoritative N2000 extension results |
-| 4.5 | [Pressure–gravity closure](../../experiments/pressure-gravity-initialization/closure.md) | Seven diagnostic outcomes and limits |
-| 4.6 | [Mesh results](../../experiments/phase-10-single-inlet-mesh-convergence/results.md); [failure diagnosis](../../experiments/phase-10-single-inlet-mesh-convergence/divergence-diagnosis-20261011.md) | Dated preparation and failure snapshot |
-| 5.4 | [Shuhei's draft](<../Shuhei Report/draft/02-03-model-development-methods-and-results.md>); [film campaign](../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/inlet-speed-500ms/results.md) | Attributed comparison context |
+| 1 and 5 | [Project scope](<../../../../scope.md>); [V&V limits](<../../../../vnv.md>) | Research purpose and overall claim boundary |
+| 3 and 4.1 | [Replication](<../../../../experiments/phase-03-dpm-carryover-and-coupling/historical-andy-studies/enthalpy-dpm-replication.md>) | Operating matrix, particle accounts and limitations |
+| 4.2 | [Historical mesh study](<../../../../experiments/phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/mesh-convergence-checkpoint-20260803.md>) | Dated checkpoint plus later seven-mesh closure and continuation |
+| 4.3 | [Historical sinks](<../../../../experiments/phase-07b-full-geometry-liquid-removal/historical-andy-studies/closed-bottom-liquid-sinks.md>) | Corrected source accounting and failed stability windows |
+| 3 and 4.3 | [Phase 7b closure](<../../../../experiments/phase-07b-full-geometry-liquid-removal/closure.md>); [E7 comparison](<../../../../experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/coupled-nphase-weaker-sink/results.md>) | Selected quantitative comparison and partial-test disposition |
+| 4.4 | [Historical resolved outlet](<../../../../experiments/phase-09-steady-vof-pool/historical-andy-studies/resolved-brine-outlet.md>) | Brief transient success and later nonacceptance |
+| 3 and 4.4 | [Steady VOF setup](<../../../../experiments/phase-09-steady-vof-pool/setup.md>); [results](<../../../../experiments/phase-09-steady-vof-pool/results.md>); [closure](<../../../../experiments/phase-09-steady-vof-pool/closure.md>) | Two-start assessment and authoritative N2000 extension results |
+| 4.5 | [Pressure–gravity closure](<../../../../experiments/phase-09-steady-vof-pool/follow-on-diagnostics/pressure-gravity-initialization/closure.md>) | Seven diagnostic outcomes and limits |
+| 4.6 | [Mesh results](<../../../../experiments/phase-10-single-inlet-mesh-convergence/results.md>); [failure diagnosis](<../../../../experiments/phase-10-single-inlet-mesh-convergence/divergence-diagnosis-20261011.md>) | Dated preparation and failure snapshot |
+| 5.4 | [Shuhei's draft](<../../../Shuhei Report/draft/03-results.md>); [film campaign](<../../../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/inlet-speed-500ms/results.md>) | Attributed comparison context |
 
 Historical migration records preserve reported observations from the original notes. Their linked remote or archived machine artifacts have not all been re-audited for this draft. These source limits must remain attached to any quantitative comparison developed from them.
 

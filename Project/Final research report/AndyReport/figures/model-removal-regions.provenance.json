@@ -1,0 +1,21 @@
+{
+  "creator": "Original schematic prepared for AndyReport with Codex",
+  "type": "Conceptual model-region diagram, not CFD output or CAD",
+  "script": "../../../../PyAnsys/scripts/analysis/draw_andy_report_model_regions.py",
+  "sha256": "ecda36041058a73b3ad161f57e50fb86fae5ee1cc6f58c50700f372af18643f5",
+  "source_records": [
+    "Project/technical/purnanto-spiral-inlet-geometry.md",
+    "Project/experiments/phase-07b-full-geometry-liquid-removal/geometry-proof.md",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/ewf-only-drain/setup.md",
+    "Project/experiments/phase-07b-full-geometry-liquid-removal/geometry-proof.md",
+    "Project/experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/coupled-nphase-weaker-sink/setup.md",
+    "Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/ewf-only-drain/setup.md",
+    "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/baseline-lineage-audit.md"
+  ],
+  "limitations": [
+    "Not to scale; inlet strip exaggerated",
+    "Steam passage and scroll not drawn",
+    "Does not establish CAD parity",
+    "Alternative treatments not all active together"
+  ]
+}

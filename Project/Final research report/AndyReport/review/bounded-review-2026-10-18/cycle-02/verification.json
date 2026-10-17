@@ -1,0 +1,27 @@
+{
+  "verifier": "bounded_c2_verifier",
+  "snapshot": "verification-snapshot",
+  "response_form": "Recorded summary of verifier response",
+  "targeted_checks": {
+    "matched operating points": "adequately specified",
+    "injection inputs": "adequately specified in Appendix E",
+    "scope and metric distinction": "adequately clarified outside protected literature",
+    "reference identity": "adequately reconciled",
+    "spatial definitions and coupling": "adequately explained",
+    "comparison controls and qualifications": "retained; no clear internal scientific contradiction",
+    "figures": "nine figures and citations coherent"
+  },
+  "new_regressions": "None identified; one existing explanation gap identified for the final cycle",
+  "issues": [
+    {
+      "id": "C2-V1-1",
+      "location": "Section 5.1 and Appendix B",
+      "passage": "31.029 to 34.049 kPa; 4.612% pressure drift",
+      "criticism": "Pressure type, surfaces, averaging weights and drift denominator not defined.",
+      "confidence": "High omission; moderate importance",
+      "smallest_correction": "Define pressure metric, multiple-inlet treatment, sampling and drift formula.",
+      "decision": "Accepted for cycle 3 evidence check and revision; not a demonstrated scientific error."
+    }
+  ],
+  "exposure": "Automatic repository instructions and project-related memory summary; verifier reports consulting only the snapshot."
+}

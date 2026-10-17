@@ -1,0 +1,76 @@
+--- before/00-front-matter.md
++++ cycle-03/00-front-matter.md
+@@ -44,7 +44,7 @@
+ 
+ **Prior report material.** The literature review is reproduced from the author’s earlier project report, as requested. Its source and unchanged-text copy are retained in the drafting records.
+ 
+-**Word count:** approximately 11,700 words from Introduction through Conclusions, including headings, captions and tables.
++**Word count:** approximately 11,900 words from Introduction through Conclusions, including headings, captions and tables.
+ 
+ **Signature and date:** to be completed by the author.
+ 
+--- before/02-model-and-methods.md
++++ cycle-03/02-model-and-methods.md
+@@ -59,7 +59,7 @@
+ 
+ For the single-inlet comparison, the separator geometry represented by the original tetrahedral mesh was remeshed using poly-hexcore. The selected comparison mesh contained 946,967 cells, compared with 2,964,593 cells in the recovered spiral tetrahedral mesh. It was a chosen reconstruction candidate, not a mesh selected through demonstrated solution independence. The comparison assessed whether it could reproduce the tetrahedral-reference outputs at lower computational cost. Their geometry was intended to match, but the recorded volume discrepancy prevents assuming identical fluid domains. Appendix D records the mesh-construction limits and the role of uncalibrated model parameters.
+ 
+-Cell count and node count describe different aspects of a mesh. Nodes define its geometry, while cells define the finite-volume control volumes. Fluent stores the main flow variables at cell centres (Ansys, 2025), so node count is not a direct count of those unknowns. Cells share nodes differently in tetrahedral and poly-hexcore meshes; neither equal node counts nor equal cell counts establish equal spatial resolution or accuracy. The comparison therefore reports cell count and measured runtime separately, with numerical sensitivity assessed separately.
++Cell count and node count describe different aspects of a mesh. Nodes define its geometry, while cells define the finite-volume control volumes. Fluent stores the main flow variables at cell centres (Ansys, 2025a), so node count is not a direct count of those unknowns. Cells share nodes differently in tetrahedral and poly-hexcore meshes; neither equal node counts nor equal cell counts establish equal spatial resolution or accuracy. The comparison therefore reports cell count and measured runtime separately, with numerical sensitivity assessed separately.
+ 
+ 
+ 
+@@ -78,6 +78,8 @@
+ ### 3.5. Wall-film development and direct drainage
+ 
+ EWF introduced a separate wall-liquid inventory with film mass and momentum equations. DPM deposition and bulk-phase accretion provided different routes into that inventory. Splash, stripping and edge separation could release liquid, so their event counters, represented particle masses and film source terms required separate treatment. Roughness screens preceded combined roughness/film studies; the later selected roughness was 0.045 mm with roughness constant 0.5.
++
++In the phase-accretion model, Eulerian liquid impinging on an enabled film wall feeds the film. The collection rate depends on liquid volume fraction, density, wall-normal phase velocity and face area; the secondary phase and film must use the same material. Fluent represents captured mass and momentum as removal from the bulk phase and addition to the film (Ansys, 2025b, §17.2.1.5). This transfer rule does not itself demonstrate numerical closure. In the 500 ms reference study, DPM collection was disabled, so the reported accretion came from the Eulerian liquid. During its frozen-bulk film advance, the fixed bulk field continued to supply film forcing without an evolving bulk inventory. Those film-source rates therefore could not establish whole-system conservation.
+ 
+ Film calculations included both active-bulk intervals and intervals with flow, turbulence, volume fraction and relative motion frozen. Freezing retained a fixed forcing field for film development; it did not establish that the carrier had converged. Film age means the accumulated time advanced by the film equations. It was recorded with the accepted timestep and the equations being updated. Where inner-film residuals were available, they were checked at each timestep; meeting that tolerance did not establish steady film inventory. Local film-balance checks with updating bulk flow were distinguished from checks made with bulk flow held fixed. The later mesh comparison selected frozen-bulk states at 195 ms; available bulk-active extensions were assessed separately.
+ 
+@@ -151,7 +153,7 @@
+ 
+ ### 4.3. Convergence, comparison windows and uncertainty
+ 
+-Assessment combined residuals, conservation, storage and routing. Appendix B gives the numerical criteria and windows for the principal tests; these were study tolerances, not estimates of physical uncertainty. Reaching an iteration count or film age was a separate execution outcome. Some later EWF runs continued after numerical acceptance limits ceased to control continuation, so completion did not mean those limits had been met. Table 3 summarises the interpretation checks.
++Assessment combined residuals, conservation, storage and routing. Appendix B gives the numerical criteria and windows for the principal tests; these were study tolerances, not estimates of physical uncertainty. It also defines the pressure averaging surfaces and weights, which differed between model families, and the historical pressure-drift calculation. Reaching an iteration count or film age was a separate execution outcome. Some later EWF runs continued after numerical acceptance limits ceased to control continuation, so completion did not mean those limits had been met. Table 3 summarises the interpretation checks.
+ 
+ | **Check** | **Assessment** | **Interpretation limit** |
+ |:---|:---|:---|
+--- before/05-references-and-appendices.md
++++ cycle-03/05-references-and-appendices.md
+@@ -2,7 +2,9 @@
+ 
+ ## References
+ 
+-Ansys. (2025). *Ansys Fluent Theory Guide*, Release 2025 R1, §23.3.1, Spatial discretization. [Source](https://ansyshelp.ansys.com/public/Views/Secured/corp/v251/en/flu_th/flu_th_SolveDiscretization_spatial.html).
++Ansys. (2025a). *Ansys Fluent Theory Guide*, Release 2025 R1, §23.3.1, Spatial discretization. [Source](https://ansyshelp.ansys.com/public/Views/Secured/corp/v251/en/flu_th/flu_th_SolveDiscretization_spatial.html).
++
++Ansys. (2025b). *Ansys Fluent Theory Guide*, Release 2025 R2, §17.2.1.5, Secondary phase accretion. [Source](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_th/flu_th_ewf_sec_film_submodels.html).
+ 
+ Bangma, P. (1961). The Development and Performance of a Steam-Water Separator for Use on Geothermal Bores. *Proceedings of the U.N. Conference on New Sources of Energy Rome, Vol. 3*.
+ 
+@@ -99,6 +101,22 @@
+ 
+ For the 1500-iteration carrier reconstruction, residuals were checked over iterations 1001–1500; boundary reports sampled iterations 1010–1500 every ten iterations. Inventory change used endpoints 1000 and 1500, divided by the iteration-1000 inventory. The prescribed horizon was completed despite failed numerical qualification, as documented in the carrier assessment.
+ 
++### Pressure differences and historical drift
++
++The separator studies used static-pressure differences, with the surface definitions in Table B.3. These differ from the total-to-static driving pressure in the single-liquid duct test. No pressure-loss comparison across these model families is inferred from differently weighted quantities.
++
++| **Study** | **Reported pressure difference** |
++|:---|:---|
++| Historical split-inlet mesh study, Section 5.1 | Fluent's combined mass-weighted static pressure over the liquid and vapour inlet faces, minus mass-weighted static pressure over the steam outlet. The combined inlet value is not an arithmetic average of the two face means. |
++| Later mixed/split inlet study | Area-weighted static pressure over the vapour inlet face, minus area-weighted static pressure over the steam outlet. The liquid strip is excluded from this pressure measure, even in the mixed-feed case. |
++| Later single-inlet mesh and reconstruction studies | Area-weighted static pressure over the single inlet, minus area-weighted static pressure over the steam outlet. |
++
++*Table B.3. Pressure surfaces and averaging conventions retained from each study.*
++
++For the historical mesh study, sampled pressure-drop values $q_i$ gave percentage drift as $100(\max q_i-\min q_i)/(\frac{1}{n}\sum_i|q_i|)$. The initial final-500-iteration assessment sampled iterations 2500, 2750 and 3000. The continuation used 5500, 5750 and 6000: 33.5908, 35.1713 and 34.0494 kPa, respectively. These give the reported 4.612% drift. It is a sampled range, including the intermediate peak, rather than the change between the first and last samples; it does not bound unsampled fluctuations.
++
++Sources: historical mesh study and continuation, later mixed/split comparison and single-inlet definitions. The historical metric was checked against its recovered extraction code and monitor history; the pressure weights above are retained rather than retrospectively made uniform.
++
+ ## Appendix C. Unresolved evidence and final-report checks
+ 
+ | **Item** | **Treatment in this draft** | **Evidence needed for a stronger statement** |

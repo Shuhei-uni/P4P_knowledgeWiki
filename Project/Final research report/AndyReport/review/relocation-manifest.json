@@ -1,0 +1,306 @@
+{
+  "date_nz": "2026-10-16",
+  "old_external_root": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2",
+  "old_repo_root": "Project/Final research report/andy-draft",
+  "new_repo_root": "Project/Final research report/AndyReport",
+  "files": [
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/.DS_Store",
+      "destination": "Project/Final research report/AndyReport/review/latex/.DS_Store",
+      "source_sha256": "10024688c109bdc28cd356d5f4f18a7fe533995da8f2bfbeb9b79a3e4c0dfe88",
+      "destination_sha256": "10024688c109bdc28cd356d5f4f18a7fe533995da8f2bfbeb9b79a3e4c0dfe88"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/DRAFT-README.md",
+      "destination": "Project/Final research report/AndyReport/review/imported-draft-readme.md",
+      "source_sha256": "22492ffc2d25e64dd7135fb9dd301689bde7c929e48dcd9645423f6f30c33132",
+      "destination_sha256": "d83716fa3e7525d5ca1eb1000debb07eca388ca56c341b5636f1784e54fa79fa"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/Declaration/ESB_declaration_online.tex",
+      "destination": "Project/Final research report/AndyReport/review/latex/Declaration/ESB_declaration_online.tex",
+      "source_sha256": "0053dbef1ebc0b411ff9c574dc917b62c106906579fe37817e7e691c375a0123",
+      "destination_sha256": "0053dbef1ebc0b411ff9c574dc917b62c106906579fe37817e7e691c375a0123"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/Declaration/ESB_declaration_printedition.tex",
+      "destination": "Project/Final research report/AndyReport/review/latex/Declaration/ESB_declaration_printedition.tex",
+      "source_sha256": "df410941fe7d9541f6c6271b1aded3701090f71d99eaacaae458ff39d9035153",
+      "destination_sha256": "df410941fe7d9541f6c6271b1aded3701090f71d99eaacaae458ff39d9035153"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/Declaration/Unsigned_declaration_printedition.pdf",
+      "destination": "Project/Final research report/AndyReport/review/latex/Declaration/Unsigned_declaration_printedition.pdf",
+      "source_sha256": "669a8f2aeb4dd8daebe312e28789742aba28e0148ce2c11cc7a03a7d1f3907cf",
+      "destination_sha256": "669a8f2aeb4dd8daebe312e28789742aba28e0148ce2c11cc7a03a7d1f3907cf"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/ESB_preamble.sty",
+      "destination": "Project/Final research report/AndyReport/review/latex/ESB_preamble.sty",
+      "source_sha256": "2a580263c955da4745e2676b7058897eeb39a13b51d43c2ce3e64f1d1e210f1b",
+      "destination_sha256": "2a580263c955da4745e2676b7058897eeb39a13b51d43c2ce3e64f1d1e210f1b"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/ESB_report_template.aux",
+      "destination": "Project/Final research report/AndyReport/review/latex/ESB_report_template.aux",
+      "source_sha256": "88c33f8c9db1c3c4c1983863d9f9ebaca8ab95cb4d5b781503d826e624707e30",
+      "destination_sha256": "88c33f8c9db1c3c4c1983863d9f9ebaca8ab95cb4d5b781503d826e624707e30"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/ESB_report_template.lof",
+      "destination": "Project/Final research report/AndyReport/review/latex/ESB_report_template.lof",
+      "source_sha256": "3500474cb867f455fba2200fd055bc8afa81fe75b57c08c4d81db980102fd67d",
+      "destination_sha256": "3500474cb867f455fba2200fd055bc8afa81fe75b57c08c4d81db980102fd67d"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/ESB_report_template.log",
+      "destination": "Project/Final research report/AndyReport/review/latex/ESB_report_template.log",
+      "source_sha256": "d2b3dd3c8747fc9b76b05b2905c5b7871437bbb6d6e66650fe6d186dd27036a7",
+      "destination_sha256": "cf68115b90b94c98feb5c144e4102e334594a30d6f5f8677d61fc119dfdd33a0"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/ESB_report_template.lot",
+      "destination": "Project/Final research report/AndyReport/review/latex/ESB_report_template.lot",
+      "source_sha256": "7031f3ffb43b225f0a4967fd031b5e0a02b5ec09f16326f8a4a8bec6d8f11ec4",
+      "destination_sha256": "7031f3ffb43b225f0a4967fd031b5e0a02b5ec09f16326f8a4a8bec6d8f11ec4"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/ESB_report_template.pdf",
+      "destination": "Project/Final research report/AndyReport/review/latex/ESB_report_template.pdf",
+      "source_sha256": "35562f6de17d35e3021781060dc6b5827ae814c936690fbfcd6c7f6f20881d3c",
+      "destination_sha256": "17f7f9b1b549aedf5336ba8e18d1b3cdfac3d11a1ddf2bdf5db6a7eec98f65c6"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/ESB_report_template.synctex.gz",
+      "destination": "Project/Final research report/AndyReport/review/latex/ESB_report_template.synctex.gz",
+      "source_sha256": "5c6e13372ad571ad19726aebc9a899dd8fddacd3e0bd0a81c0a9a86fcb48faf1",
+      "destination_sha256": "5c6e13372ad571ad19726aebc9a899dd8fddacd3e0bd0a81c0a9a86fcb48faf1"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/ESB_report_template.tex",
+      "destination": "Project/Final research report/AndyReport/review/latex/ESB_report_template.tex",
+      "source_sha256": "c8dc39fd057422f07addfb83ec8f771991be1e55230da20c47559b8354c32a31",
+      "destination_sha256": "c8dc39fd057422f07addfb83ec8f771991be1e55230da20c47559b8354c32a31"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/ESB_report_template.toc",
+      "destination": "Project/Final research report/AndyReport/review/latex/ESB_report_template.toc",
+      "source_sha256": "14ba1a7d1b73406e4b7163966700df84e09c5d903937dd84c43f2a6796aaba9f",
+      "destination_sha256": "14ba1a7d1b73406e4b7163966700df84e09c5d903937dd84c43f2a6796aaba9f"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/ESB_titlepage.tex",
+      "destination": "Project/Final research report/AndyReport/review/latex/ESB_titlepage.tex",
+      "source_sha256": "446ace96a2e06aadc1cbeed5c7713b6fbbbd53c34e9e11241d32b073f6756e5d",
+      "destination_sha256": "446ace96a2e06aadc1cbeed5c7713b6fbbbd53c34e9e11241d32b073f6756e5d"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/Example_Document/example_document.tex",
+      "destination": "Project/Final research report/AndyReport/review/latex/Example_Document/example_document.tex",
+      "source_sha256": "e9ec9ddfc42d1a9d3c94d7b4318c0d99df617600c182a102e107abef5febf9d5",
+      "destination_sha256": "e9ec9ddfc42d1a9d3c94d7b4318c0d99df617600c182a102e107abef5febf9d5"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/Example_Document/example_references.bib",
+      "destination": "Project/Final research report/AndyReport/review/latex/Example_Document/example_references.bib",
+      "source_sha256": "00e6f51e16c3bf829727b822c68776e93ddcf28f78187ba1904bc1549de47393",
+      "destination_sha256": "00e6f51e16c3bf829727b822c68776e93ddcf28f78187ba1904bc1549de47393"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/Example_Document/fingerprint.png",
+      "destination": "Project/Final research report/AndyReport/review/latex/Example_Document/fingerprint.png",
+      "source_sha256": "6637001ea163fedab3607fbe22fbdc4033f9470e259ec384eb530d19a899a214",
+      "destination_sha256": "6637001ea163fedab3607fbe22fbdc4033f9470e259ec384eb530d19a899a214"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/drafting-notes/comparison-and-next-pass.md",
+      "destination": "Project/Final research report/AndyReport/revision-review.md",
+      "source_sha256": "bdb7a2077515cce95e0b8df0635522e82a3b42012a02962fa55c1ba0c8245650",
+      "destination_sha256": "b0e7f42e6eacb0de992ed8c08694208a1ff4ffb3ee097355653a1c3a6bf77572"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/drafting-notes/evidence-links.json",
+      "destination": "Project/Final research report/AndyReport/review/evidence-links.json",
+      "source_sha256": "0c751a5aad47f7133f250033713d9cef3e6e0e63125873fc92a3aedcdb77a204",
+      "destination_sha256": "0c751a5aad47f7133f250033713d9cef3e6e0e63125873fc92a3aedcdb77a204"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/drafting-notes/layout-check-2026-10-15.json",
+      "destination": "Project/Final research report/AndyReport/review/layout-check-2026-10-15.json",
+      "source_sha256": "d14ebb5ef50f805453d119132793fbfbf46c0d82162f51b4cf257f21d458e1d3",
+      "destination_sha256": "d14ebb5ef50f805453d119132793fbfbf46c0d82162f51b4cf257f21d458e1d3"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/drafting-notes/literature-copy.json",
+      "destination": "Project/Final research report/AndyReport/review/literature-copy.json",
+      "source_sha256": "89745a6bdf89af1cb4d17cf4fcad1b1e4922d81332ca1c492996b98aee5a6093",
+      "destination_sha256": "068c4d7065c4b6588891eebe61018cb45fe6e800cdac312350faac55bc113647"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/drafting-notes/template-before-20261015/ESB_preamble.sty",
+      "destination": "Project/Final research report/AndyReport/review/template-before-20261015/ESB_preamble.sty",
+      "source_sha256": "0adc89508bb63c5c8f65f3f60b8aa7e1021dbb41cc9d0da72ff1974b8b8b5fc4",
+      "destination_sha256": "0adc89508bb63c5c8f65f3f60b8aa7e1021dbb41cc9d0da72ff1974b8b8b5fc4"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/drafting-notes/template-before-20261015/ESB_report_template.tex",
+      "destination": "Project/Final research report/AndyReport/review/template-before-20261015/ESB_report_template.tex",
+      "source_sha256": "fc5d857683ab62366431e7ab441a33152d02212b590104a1c9b8efc639eb3b9b",
+      "destination_sha256": "fc5d857683ab62366431e7ab441a33152d02212b590104a1c9b8efc639eb3b9b"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/drafting-notes/template-before-20261015/ESB_titlepage.tex",
+      "destination": "Project/Final research report/AndyReport/review/template-before-20261015/ESB_titlepage.tex",
+      "source_sha256": "61ab003beeab3b4881cbed9653fd147bd445b9a7f7eaa397d8fc6e395c283e33",
+      "destination_sha256": "61ab003beeab3b4881cbed9653fd147bd445b9a7f7eaa397d8fc6e395c283e33"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/drafting-notes/template-before-20261015/hashes.json",
+      "destination": "Project/Final research report/AndyReport/review/template-before-20261015/hashes.json",
+      "source_sha256": "e2dc6b05d2323b35b217047c382cb5d8e33a764586ae5854729644bc21fe04f3",
+      "destination_sha256": "e2dc6b05d2323b35b217047c382cb5d8e33a764586ae5854729644bc21fe04f3"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/figures/field-refinement.png",
+      "destination": "Project/Final research report/AndyReport/figures/field-refinement.png",
+      "source_sha256": "27d8ccab21ad47423fd4aaa6a1c12358712568cda9e66f281284acd79879c9d1",
+      "destination_sha256": "27d8ccab21ad47423fd4aaa6a1c12358712568cda9e66f281284acd79879c9d1"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/figures/literature-1.jpeg",
+      "destination": "Project/Final research report/AndyReport/figures/literature/literature-1.jpeg",
+      "source_sha256": "d4d9096cc565691e09351981ee8d06a3c8df74089738201cd3dce73cf627bd7c",
+      "destination_sha256": "d4d9096cc565691e09351981ee8d06a3c8df74089738201cd3dce73cf627bd7c"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/figures/literature-2.jpg",
+      "destination": "Project/Final research report/AndyReport/figures/literature/literature-2.jpg",
+      "source_sha256": "80740b1b8b2c3e5c09817c394845247356e44ec14750b7c37aee143057ac5d5e",
+      "destination_sha256": "80740b1b8b2c3e5c09817c394845247356e44ec14750b7c37aee143057ac5d5e"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/figures/literature-3.jpeg",
+      "destination": "Project/Final research report/AndyReport/figures/literature/literature-3.jpeg",
+      "source_sha256": "d28510eed8d6fc25e950239ec0b9f29fce9e2ee9b531960ba869872a2ea9154b",
+      "destination_sha256": "d28510eed8d6fc25e950239ec0b9f29fce9e2ee9b531960ba869872a2ea9154b"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/figures/two-start-comparison.png",
+      "destination": "Project/Final research report/AndyReport/figures/two-start-comparison.png",
+      "source_sha256": "940497d8f87d2a47486c9266479aee6c09a40f419bb9a0c9fd48c6ab62c44112",
+      "destination_sha256": "940497d8f87d2a47486c9266479aee6c09a40f419bb9a0c9fd48c6ab62c44112"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/references.bib",
+      "destination": "Project/Final research report/AndyReport/review/latex/references.bib",
+      "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "destination_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/sections/00-abstract.tex",
+      "destination": "Project/Final research report/AndyReport/review/latex/sections/00-abstract.tex",
+      "source_sha256": "3ac38b14edf109a09013ba8f8aa6e9fcef0bd78c729c03ef3b364a595b239f9e",
+      "destination_sha256": "3ac38b14edf109a09013ba8f8aa6e9fcef0bd78c729c03ef3b364a595b239f9e"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/sections/00-declaration.tex",
+      "destination": "Project/Final research report/AndyReport/review/latex/sections/00-declaration.tex",
+      "source_sha256": "920ba1688ad58bd1718fda3462ee3a63d9cf6c7cc38bf79769055c60cc7fd892",
+      "destination_sha256": "920ba1688ad58bd1718fda3462ee3a63d9cf6c7cc38bf79769055c60cc7fd892"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/sections/00-glossary.tex",
+      "destination": "Project/Final research report/AndyReport/review/latex/sections/00-glossary.tex",
+      "source_sha256": "63565532442272730f964253b514b8aa39109d2e32d440e37d2e7f7c7958942c",
+      "destination_sha256": "63565532442272730f964253b514b8aa39109d2e32d440e37d2e7f7c7958942c"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/sections/01-introduction.tex",
+      "destination": "Project/Final research report/AndyReport/review/latex/sections/01-introduction.tex",
+      "source_sha256": "280ba158214f567a0560a59ba5ab60328dc8ed9881bb47db12bb16275849bf7e",
+      "destination_sha256": "280ba158214f567a0560a59ba5ab60328dc8ed9881bb47db12bb16275849bf7e"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/sections/02-literature-review.tex",
+      "destination": "Project/Final research report/AndyReport/review/latex/sections/02-literature-review.tex",
+      "source_sha256": "9fb0b84647285948f23664ded170d6bf9174abfb5be8f3bfb8fbc9a2fc892f84",
+      "destination_sha256": "002c755386acef7641b659faae4e81463152388fbb7ca44964506ba54fe2a6bc"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/sections/03-model-and-methods.tex",
+      "destination": "Project/Final research report/AndyReport/review/latex/sections/03-model-and-methods.tex",
+      "source_sha256": "6c970b42d92da2310c000ede995050ff3b95f2790af6a2503e12ce171d7d7308",
+      "destination_sha256": "d753aa3f67a37b12c5e44b90dcbe34fe5d3e6d56199d5a1b76f0e08b8dc5be46"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/sections/04-verification-and-validation.tex",
+      "destination": "Project/Final research report/AndyReport/review/latex/sections/04-verification-and-validation.tex",
+      "source_sha256": "6217a8c08586535ce2471643e6ad6c2b481b8a2350f3d94577b8069e793c6e8a",
+      "destination_sha256": "6217a8c08586535ce2471643e6ad6c2b481b8a2350f3d94577b8069e793c6e8a"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/sections/05-results.tex",
+      "destination": "Project/Final research report/AndyReport/review/latex/sections/05-results.tex",
+      "source_sha256": "c8815a7517731aeb2e58169d76ab6c9c65509a56550434607eb3fd921b5faae6",
+      "destination_sha256": "6f502c5d2845ad8123ef58988adaf0e84f455c32a22df9a2cb08b36671791011"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/sections/06-discussion.tex",
+      "destination": "Project/Final research report/AndyReport/review/latex/sections/06-discussion.tex",
+      "source_sha256": "dbba804e43fe0df55ed8ef2b90a0598c3e4b7d6a1a10b7b31b6e5b547bb62dcd",
+      "destination_sha256": "770be7926eeb767e9cc9f2f18693bc163677ba24d9c4e2df1d3b06c3ab3951e0"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/sections/07-conclusions.tex",
+      "destination": "Project/Final research report/AndyReport/review/latex/sections/07-conclusions.tex",
+      "source_sha256": "4ff4ef5bbfa284fc97c64437299eb01e5ea50f12ad142354d70d8a39f5a2a5b1",
+      "destination_sha256": "4ff4ef5bbfa284fc97c64437299eb01e5ea50f12ad142354d70d8a39f5a2a5b1"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/sections/08-references.tex",
+      "destination": "Project/Final research report/AndyReport/review/latex/sections/08-references.tex",
+      "source_sha256": "3e50cd1497c35ca9a5d9f856698561d5966edeaef80e4a5719e04031955f7a2b",
+      "destination_sha256": "3e50cd1497c35ca9a5d9f856698561d5966edeaef80e4a5719e04031955f7a2b"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/sections/09-appendices.tex",
+      "destination": "Project/Final research report/AndyReport/review/latex/sections/09-appendices.tex",
+      "source_sha256": "5d1912e04d715bf53b303b6151e83b8e0ede148f752f393e0d918f1861268039",
+      "destination_sha256": "a9ab7f4af8416697c551e4d8b35e3644a33876a36178e6a6922bdee4c36abc2f"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/source-drafts/first-draft-2026-10-11.docx",
+      "destination": "Project/Final research report/AndyReport/review/previous-draft/first-draft.docx",
+      "source_sha256": "7c360f36c743df3232f8cd582ea5cb2f242da040a7853aee8e46ff20bbf2e4b0",
+      "destination_sha256": "7c360f36c743df3232f8cd582ea5cb2f242da040a7853aee8e46ff20bbf2e4b0"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/source-drafts/first-draft-2026-10-11.md",
+      "destination": "Project/Final research report/AndyReport/review/previous-draft/first-draft.md",
+      "source_sha256": "d6bf8f0171725dca40da0ee4342b2b88b7c01f021a3200235069460d521af3bc",
+      "destination_sha256": "d11c8cf8fc1573913242b68e1c5500c7a7a44bf8a0d45b232879ba5be863d639"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/P4P_shared/Project/Final research report/andy-draft/first-draft.docx",
+      "destination": "Project/Final research report/AndyReport/review/previous-draft/first-draft.docx",
+      "source_sha256": "7c360f36c743df3232f8cd582ea5cb2f242da040a7853aee8e46ff20bbf2e4b0",
+      "destination_sha256": "7c360f36c743df3232f8cd582ea5cb2f242da040a7853aee8e46ff20bbf2e4b0"
+    },
+    {
+      "source": "/Users/andy/Desktop/P4P/P4P_shared/Project/Final research report/andy-draft/first-draft.md",
+      "destination": "Project/Final research report/AndyReport/review/previous-draft/first-draft.md",
+      "source_sha256": "d6bf8f0171725dca40da0ee4342b2b88b7c01f021a3200235069460d521af3bc",
+      "destination_sha256": "d11c8cf8fc1573913242b68e1c5500c7a7a44bf8a0d45b232879ba5be863d639"
+    }
+  ],
+  "status": "move complete; all original source file hashes checked before removal",
+  "verification": {
+    "tables_checked": 10,
+    "verbatim_literature_paragraphs": 27,
+    "literature_figures_byte_identical": 3,
+    "working_markdown_links": "all resolve",
+    "combined_draft": "equals six numbered parts in order",
+    "relocated_latex": "compiled; extracted PDF text unchanged across all 33 pages",
+    "body_pages": 22
+  }
+}

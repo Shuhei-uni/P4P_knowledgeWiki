@@ -1,0 +1,38 @@
+{
+  "verifier": "bounded_c3_verifier",
+  "fork_turns": "none",
+  "snapshot": "verification-snapshot",
+  "response_form": "Recorded summary and material issue from final fresh verifier",
+  "targeted_checks": {
+    "bulk-phase accretion": "Adequate: collection trigger, rate inputs, matching material and mass/momentum exchange described.",
+    "active/frozen-bulk interpretation": "Adequate: fixed forcing without evolving bulk inventory; film age, local checks and whole-system closure distinguished.",
+    "pressure definitions": "Adequate for reported results: surfaces/weights and separator static vs duct total-to-static difference defined.",
+    "historical drift": "Adequate: samples and formula reproduce 4.61184%, consistent with reported 4.612%.",
+    "spatial/source definitions": "Adequate for claims, with explicit unresolved CAD/design dimensions.",
+    "particle coupling": "Adequate: one-way diagnostic weights, interacting allocation, inert zero mass feedback and momentum interaction distinguished.",
+    "comparison controls": "Adequate, with limits for startup, clocks, fields, geometry, workload and tracking.",
+    "historical injection inputs": "Adequate; interacting-pair inputs remain underreported.",
+    "whole-report consistency": "No material contradiction in the main conclusions; all nine figures inspected without material figure/text contradiction."
+  },
+  "material_issues": [
+    {
+      "id": "C3-V1-1",
+      "location": "Methods Section 3.6; Results Section 5.7; Appendix E",
+      "passage": "The matched interacting-DPM cases with and without EWF used 2.5% of inlet liquid as droplets at nominal speeds of 20.11, 23.46, 26.81 and 32.14 m/s, plus a 5% case at 26.81 m/s.",
+      "criticism": "The interacting-DPM pairs do not specify their particle-size distribution and release prescription. Appendix E describes a separate historical nine-group reconstruction, so it cannot be assumed to supply these inputs.",
+      "why_it_matters": "Size affects momentum exchange and wall interception; omission limits interpretation and reproduction of the EWF comparison. It is not evidence of incorrect or unmatched simulations.",
+      "confidence": "High that reporting is missing; moderate priority relative to main findings",
+      "smallest_correction": "Supply interacting-case particle sizes, release prescription and controls held fixed in each pair, after checking the paired saved settings.",
+      "decision": "accepted as unresolved reporting omission; three-cycle limit reached",
+      "evidence_check": {
+        "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f3-coupled-dpm/setup.md:40\u201351": "Specifies a distinct project-designed seven-bin fine-mist distribution and steaminlet release, not the Appendix E nine-group historical distribution.",
+        "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f4-coupled-dpm-ewf/setup.md:37": "Records intent to hold PSD, injection footprint and DPM controls matched; does not substitute for checking all completed paired readbacks."
+      },
+      "action": "No new report edit after final verification and no fourth cycle. Retained bounded comparison claims; flag the missing reporting detail for the next authorised revision. Root confirmed this is an existing omission rather than a regression caused by the final pressure/accretion edits."
+    }
+  ],
+  "new_material_regressions_identified": [],
+  "optional_style": "None required. Declaration and acknowledgements remain visibly unfinished.",
+  "exposure": "Automatic repository instructions, skill catalogue and project-related memory synopsis. Verifier reports no use as evidence, no outside access, no other reviews, no editing and no subagents. Fresh-conversation but not fully blind.",
+  "disposition": "Targeted revisions retained; one existing methods-reporting omission explicitly unresolved. Stop after cycle 3."
+}

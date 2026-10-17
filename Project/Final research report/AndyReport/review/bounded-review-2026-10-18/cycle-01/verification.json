@@ -1,0 +1,21 @@
+{
+  "verifier": "bounded_c1_verifier",
+  "snapshot": "verification-snapshot",
+  "targeted_checks": {
+    "spatial definitions": "adequately explained with explicit CAD and design limits",
+    "contact collector": "adequately explained and consistent with direct-drain rationale",
+    "DPM coupling": "adequately explained; mass and momentum exchanges distinguished",
+    "37 percent retention comparison": "adequately controlled in report for endpoint claim; convergence and physical claims excluded"
+  },
+  "new_regressions": "None identified",
+  "unresolved": [
+    {
+      "location": "Protected Section 2 citations and figure credits vs bibliography",
+      "issue": "Zarrouk and Purnanto cited as 2014 but listed as 2015",
+      "confidence": "High internal mismatch",
+      "action": "Carry into next review cycle; establish actual publication identity before any correction. Protected opening remains unchanged."
+    }
+  ],
+  "exposure": "Automatic repository instructions and project-related memory synopsis. Verifier reports no use/access outside supplied snapshot.",
+  "scope": "Latest report content and all nine figures; not underlying raw evidence or PDF layout."
+}

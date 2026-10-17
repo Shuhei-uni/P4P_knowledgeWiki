@@ -1,0 +1,60 @@
+{
+  "date": "2026-10-18",
+  "maximum_cycles": 3,
+  "reviewers_per_cycle": 2,
+  "fork_turns": "none",
+  "sole_editor": "main agent",
+  "authoritative_files": "draft/00 through draft/05 numbered Markdown; assembled draft/draft-v1.md",
+  "protected": [
+    "draft/01-introduction-and-literature-review.md",
+    "all review/latex files",
+    "figure assets and attribution",
+    "project evidence"
+  ],
+  "export_instruction": "Markdown only until a separate explicit export request",
+  "stop_rule": "Stop by cycle 3, or earlier when no material supported change remains. Retain original wording when stylistic benefit is unclear.",
+  "review_input": "Same read-only snapshot for both reviewers in each cycle: six numbered report files with HTML comments removed and local evidence-link destinations disabled, unchanged figure assets, bibliography, confirmed assignment requirements. No previous reviews, project summaries or change descriptions supplied.",
+  "cycles": [
+    {
+      "number": 1,
+      "reviewers": [
+        "bounded_c1_reader",
+        "bounded_c1_examiner"
+      ],
+      "snapshot": "cycle-01/snapshot",
+      "hash_manifest": "cycle-01/snapshot-sha256.json",
+      "exposure": "Both reviewers disclosed automatic project-related memory summaries and repository instructions; no additional sources consulted.",
+      "verifier": "bounded_c1_verifier",
+      "verification_result": "Four targeted explanations adequate; no material regression found. Existing bibliography-year conflict remains."
+    },
+    {
+      "number": 2,
+      "reviewers": [
+        "bounded_c2_reader",
+        "bounded_c2_examiner"
+      ],
+      "snapshot": "cycle-02/snapshot",
+      "hash_manifest": "cycle-02/snapshot-sha256.json",
+      "exposure": "Both reviewers disclosed automatic repository instructions and project-related memory summaries; no outside sources accessed or used.",
+      "verifier": "bounded_c2_verifier",
+      "verification_result": "Targeted repairs adequate; no material regression; pressure definition omission carried to cycle 3."
+    },
+    {
+      "number": 3,
+      "reviewers": [
+        "bounded_c3_reader",
+        "bounded_c3_examiner"
+      ],
+      "snapshot": "cycle-03/snapshot",
+      "hash_manifest": "cycle-03/snapshot-sha256.json",
+      "exposure": "Both reviewers disclosed automatic project-related memory/phase context and repository instructions. No outside files consulted or background used, according to their disclosures.",
+      "schedule": "Same fixed state as cycle 2 verification; reviews can proceed in parallel, with no editing until all three responses are complete.",
+      "verifier": "bounded_c3_verifier",
+      "verification_result": "Both final targeted explanations adequate; no material contradiction or failed change identified. One existing interacting-DPM input-reporting omission remains unresolved."
+    }
+  ],
+  "verification": "Fresh fork_turns=none verifier after each revision, including final revision; verification does not consume an additional review\u2013revision cycle.",
+  "status": "Complete: three review\u2013revision cycles and three fresh verification passes; no fourth cycle.",
+  "final_unresolved_issue": "C3-V1-1: distinct seven-bin interacting-DPM inputs not fully stated in report.",
+  "pdf_preservation_observation": "No export performed. Existing PDF gained four annotations; extracted text and page-content streams match the preserved original. Retained annotated file; see pdf-change-observation.json."
+}

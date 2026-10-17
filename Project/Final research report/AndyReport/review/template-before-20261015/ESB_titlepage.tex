@@ -1,0 +1,56 @@
+\begin{titlepage}
+    \centering % Center everything in the title page
+
+    % Assessment Name
+    {\large \ESBassessment}
+    
+    \vspace{1cm} % Vertical Space
+
+    \rule{\textwidth}{2pt} % Horizontal Line
+
+    \vspace{0.5cm}
+    
+    % Title
+    {\huge\textbf{\ESBtitle}}
+    
+    \vspace{1cm} % Vertical Space
+
+    % Author
+    {\Large \textbf{\ESBauthor}}   
+    
+    \rule{\textwidth}{2pt} % Horizontal Line
+
+    \vspace{1cm} % Vertical Space
+    
+    % Coworker(s)
+    \ifdef\ESBcoworker{
+        \begin{table}[!h]
+            \centering
+            \large
+            \begin{tabular}{r@{}l}
+                \textbf{Co-worker:} &
+                \begin{tabular}[t]{l@{}} \ESBcoworker \end{tabular}
+            \end{tabular}
+        \end{table}
+    }
+
+    % Supervisor(s)
+    \begin{table}[!h]
+        \centering
+        \large
+        \begin{tabular}{r@{}l}
+            \textbf{Supervisors:} & 
+            \begin{tabular}[t]{l@{}} \ESBsupervisors \end{tabular}
+        \end{tabular}
+    \end{table}
+
+    \vfill % Vertical Space
+    
+    % Date
+    {\large \ESBdate}
+    
+    \vspace{1cm} % Vertical Space
+    
+    % Department Name
+    {\large Department of Engineering Science and Biomedical Engineering\\ The University of Auckland}
+\end{titlepage}

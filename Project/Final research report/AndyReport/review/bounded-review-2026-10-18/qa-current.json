@@ -1,0 +1,51 @@
+{
+  "original_archive_verified": true,
+  "original_files_archived": 78,
+  "protected_files_checked": 43,
+  "protected_hashes_unchanged": false,
+  "protected_hashes_unchanged_except_pdf": true,
+  "protected_pdf_exception": "PDF gained four annotations without a write/export by this loop. Text and content streams remain identical; original backup and current annotated PDF are retained. See pdf-change-observation.json.",
+  "assembled_draft_matches": true,
+  "official_title_preserved": true,
+  "figure_sequence": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9"
+  ],
+  "local_link_occurrences_checked": 82,
+  "local_links_resolve": true,
+  "all_fixed_snapshots_unchanged": true,
+  "fixed_snapshots_verified": 6,
+  "snapshot_files_verified": 95,
+  "latest_canonical_report_matches_final_verifier_snapshot": true,
+  "canonical_report_sha256": {
+    "draft/00-front-matter.md": "8295bcda549014182c5ed09e50a99073c669868165e1fe8edb004694a396d854",
+    "draft/01-introduction-and-literature-review.md": "b18573b1628e6b59cf126d0c6b643bf987941e88a7ebdb2453ed9ce57e345a0b",
+    "draft/02-model-and-methods.md": "6d49d3752e8c107d87b7ad38547a6fa37676662486f4c1e4641d81341d8a18ba",
+    "draft/03-results.md": "c9f56d16175bd7ff86e932c1c4a1e31836c0d1a4f7dff8e624acc56890039654",
+    "draft/04-discussion-conclusions-and-future-work.md": "b4842375b863fab2c821a78c9e7b50dd8b50a73642656b682d4dc55b9d53f34e",
+    "draft/05-references-and-appendices.md": "f6e681227c60785be26e00e25109348e874d33f2b3a6105ef6a276cec23556d9",
+    "draft/draft-v1.md": "6d810a1d4e4350d97642b95d55724bb0fe33956fb58c5ce47ef375db572542a2"
+  },
+  "body_words": 11865,
+  "word_count_by_part": {
+    "01-introduction-and-literature-review.md": 2788,
+    "02-model-and-methods.md": 3500,
+    "03-results.md": 3963,
+    "04-discussion-conclusions-and-future-work.md": 1614
+  },
+  "historical_pressure_values_checked_against_csv": [
+    33590.799999999814,
+    35171.30000000005,
+    34049.39999999991
+  ],
+  "current_annotated_pdf_sha256": "c782b1043b1f89c6f800024fcd0dec3a00f0789a0417052b14d97a0859a8e115",
+  "current_body_pages": "Not exported or compiled; prior PDF has 29 body pages, 47 total, and 11172 body words. Current Markdown page count is unknown.",
+  "no_CFD_experiments": "No solver calls or new CFD runs; all science sources read only."
+}

@@ -1,0 +1,329 @@
+{
+  "sources": [
+    {
+      "path": "PyAnsys/output/phase10-single-inlet-mesh-convergence/predivergence-mesh-sensitivity/summary.json",
+      "sha256": "c873c74875af373e7b81dc777ecb0b4024545493de8ee103f2e814b7c0458e3d"
+    },
+    {
+      "path": "PyAnsys/output/phase10-single-inlet-mesh-convergence/predivergence-mesh-sensitivity/field-comparison.csv",
+      "sha256": "b1d67b90aea785d368de5de26885884ed7379b828aa7e1707ccccca2fc0a471d"
+    },
+    {
+      "path": "PyAnsys/output/phase10-single-inlet-mesh-convergence/predivergence-mesh-sensitivity/scalar-comparison.csv",
+      "sha256": "998eada47d037a9101c1e15333238ce63ca2f917ea311cf3c6d59a24abafbb1f"
+    }
+  ],
+  "original_figure": {
+    "path": "PyAnsys/output/phase10-single-inlet-mesh-convergence/predivergence-mesh-sensitivity/field-refinement.png",
+    "sha256": "27d8ccab21ad47423fd4aaa6a1c12358712568cda9e66f281284acd79879c9d1"
+  },
+  "original_generator": {
+    "path": "PyAnsys/scripts/analysis/analyze_phase10_predivergence_fields.py",
+    "sha256": "185e33c11b0e14940d1a90f54d71c949eec080b762418a27139c1b80c1575bb8"
+  },
+  "label_mapping": {
+    "M06": "2.21-million-cell mesh",
+    "N1000": "iteration 1,000",
+    "N2000": "iteration 2,000"
+  },
+  "series": [
+    {
+      "label": "Across meshes at iteration 1,000",
+      "cells_millions": [
+        0.357145,
+        0.487746,
+        0.681844,
+        0.946967,
+        1.430497
+      ],
+      "difference_percent": [
+        25.358341352204963,
+        24.34252659173328,
+        19.187512371470888,
+        16.78206759524345,
+        16.79220183449836
+      ]
+    },
+    {
+      "label": "Across meshes at iteration 2,000",
+      "cells_millions": [
+        0.487746,
+        0.681844,
+        0.946967,
+        1.430497
+      ],
+      "difference_percent": [
+        23.402326440718554,
+        19.0283872544895,
+        16.405200306942945,
+        12.432568684719238
+      ]
+    },
+    {
+      "label": "Same mesh: iterations 1,000 to 2,000",
+      "cells_millions": [
+        0.487746,
+        0.681844,
+        0.946967,
+        1.430497,
+        2.209748
+      ],
+      "difference_percent": [
+        26.89941705842475,
+        17.602409535749704,
+        18.759212202454098,
+        20.82982234392172,
+        21.5282596266338
+      ]
+    }
+  ],
+  "numeric_verification": "Every saved comparison field equals the source CSV; plotted x/y arrays use the same rows and formulas as the original generator, without recalculating or modifying field comparisons.",
+  "common_projection": {
+    "method": "Native cell-centroid assignment; volume-weighted bin means; RMS over jointly occupied bins weighted by min bin volume",
+    "bounds_m": [
+      [
+        -2.101,
+        -0.001,
+        -1.501
+      ],
+      [
+        1.101,
+        7.001,
+        1.101
+      ]
+    ],
+    "shape": [
+      20,
+      70,
+      20
+    ],
+    "check_shape": [
+      10,
+      35,
+      10
+    ],
+    "pressure_policy": "Remove volume-weighted mean on common bins before pressure RMS comparison"
+  },
+  "source_fields": [
+    {
+      "local": "PyAnsys/output/phase10-single-inlet-mesh-convergence/predivergence-mesh-sensitivity/raw/M01-N1000-native.npz",
+      "sha256": "3888d80329e196935d4036a5ecca21cd52ea82e8f5d09a389c242c7aed95a1aa",
+      "source_pair": {
+        "case": "C:\\Users\\qtra338\\Documents\\FluentRuns\\Phase10\\20261009\\M01\\checkpoint-N1000.cas.h5",
+        "data": "C:\\Users\\qtra338\\Documents\\FluentRuns\\Phase10\\20261009\\M01\\checkpoint-N1000.dat.h5",
+        "case_sha256": "677b015695384480a99a8fcec18a519de682aa79a31c25e4dc2a8a332abef002",
+        "data_sha256": "d21fda8eb7312eb6fe53e21174a9c4977e47606f1040f958b1b1e23373244fa5",
+        "counts": {
+          "cells": 357145,
+          "nodes": 959963
+        }
+      }
+    },
+    {
+      "local": "PyAnsys/output/phase10-single-inlet-mesh-convergence/predivergence-mesh-sensitivity/raw/M02-N1000-native.npz",
+      "sha256": "453ea47964ca156c48f48b8bb1fd2f8b43049412673277356ac9dbe81ded8301",
+      "source_pair": {
+        "case": "C:\\Users\\qtra338\\Documents\\FluentRuns\\Phase10\\20261009\\M02\\checkpoint-N1000.cas.h5",
+        "data": "C:\\Users\\qtra338\\Documents\\FluentRuns\\Phase10\\20261009\\M02\\checkpoint-N1000.dat.h5",
+        "case_sha256": "0749190c60f69821621a4762ea982d9b1067d1927b7ebd2a35104948ac0a08d4",
+        "data_sha256": "ce6fdcb0569bbc1142534a1d86b8e80ace84ebb548fbe3b0451d2c4fe5ff5540",
+        "counts": {
+          "cells": 487746,
+          "nodes": 1240354
+        }
+      }
+    },
+    {
+      "local": "PyAnsys/output/phase10-single-inlet-mesh-convergence/predivergence-mesh-sensitivity/raw/M03-N1000-native.npz",
+      "sha256": "4a256f2bbfb7676877d1782f176264ee1fac52372465ba8ee2345c4c140aeb70",
+      "source_pair": {
+        "case": "C:\\Users\\qtra338\\Documents\\FluentRuns\\Phase10\\20261009\\M03\\checkpoint-N1000.cas.h5",
+        "data": "C:\\Users\\qtra338\\Documents\\FluentRuns\\Phase10\\20261009\\M03\\checkpoint-N1000.dat.h5",
+        "case_sha256": "8256543111f3fe6ccce2e0829e1b480769e1c3b5b3dd33e864da51bd453e010d",
+        "data_sha256": "aa87d5b3bdf38c7080e49c3b46a2bb21a221ce3446237b72a1fcff00588afa90",
+        "counts": {
+          "cells": 681844,
+          "nodes": 1771489
+        }
+      }
+    },
+    {
+      "local": "PyAnsys/output/phase10-single-inlet-mesh-convergence/predivergence-mesh-sensitivity/raw/M04-N1000-native.npz",
+      "sha256": "04f053159ef5a020b35d8cddfbfea4f393e271d044a69c8c59591b74fbc4d910",
+      "source_pair": {
+        "case": "C:\\Users\\qtra338\\Documents\\FluentRuns\\Phase10\\20261009\\M04\\checkpoint-N1000.cas.h5",
+        "data": "C:\\Users\\qtra338\\Documents\\FluentRuns\\Phase10\\20261009\\M04\\checkpoint-N1000.dat.h5",
+        "case_sha256": "de2e3775ab952f5b34d98a1f2a6e8d03fc37c5d065198e189e2bb8946478dd1a",
+        "data_sha256": "834b8c8ba2b50440f735a9120303b2057a1eb60ffc43970120a85c4487124518",
+        "counts": {
+          "cells": 946967,
+          "nodes": 2385385
+        }
+      }
+    },
+    {
+      "local": "PyAnsys/output/phase10-single-inlet-mesh-convergence/predivergence-mesh-sensitivity/raw/M05-N1000-native.npz",
+      "sha256": "1559c8f9520ccd7742b29623a27094fe2eec9781cb2cfb48c3d5c46ff7195e23",
+      "source_pair": {
+        "case": "C:\\Users\\qtra338\\Documents\\FluentRuns\\Phase10\\20261009\\recovery-20261010-14d9f41f\\M05\\checkpoint-N1000.cas.h5",
+        "data": "C:\\Users\\qtra338\\Documents\\FluentRuns\\Phase10\\20261009\\recovery-20261010-14d9f41f\\M05\\checkpoint-N1000.dat.h5",
+        "case_sha256": "e98321a7b3d10eaca40eb0eb5b6703b7d80e3aed8d14ec1e3dd07bca117dc3b5",
+        "data_sha256": "d942241bd2d12958efb17d34e0a1e73a8041fecd18ec2e32a17cd5dfe59a24c0",
+        "counts": {
+          "cells": 1430497,
+          "nodes": 3564816
+        }
+      }
+    },
+    {
+      "local": "PyAnsys/output/phase10-single-inlet-mesh-convergence/predivergence-mesh-sensitivity/raw/M06-N1000-native.npz",
+      "sha256": "c60bd0d4b900ad9f2ea3ab6b8ae94432e030313c7acbc86c6babefb2d534c793",
+      "source_pair": {
+        "case": "C:\\Users\\qtra338\\Documents\\FluentRuns\\Phase10\\20261009\\recovery-20261010-14d9f41f\\M06\\checkpoint-N1000.cas.h5",
+        "data": "C:\\Users\\qtra338\\Documents\\FluentRuns\\Phase10\\20261009\\recovery-20261010-14d9f41f\\M06\\checkpoint-N1000.dat.h5",
+        "case_sha256": "e991e293c6781ce051d263b197b094b9dc8d6bf4c9d649f21458b585ba01cf1c",
+        "data_sha256": "e391e164efba558f906c3d32a4079efc4dc68cd85ca5721ab8e7a0331d7e392f",
+        "counts": {
+          "cells": 2209748,
+          "nodes": 5439526
+        }
+      }
+    },
+    {
+      "local": "PyAnsys/output/phase10-single-inlet-mesh-convergence/predivergence-mesh-sensitivity/raw/M02-N2000-native.npz",
+      "sha256": "b0c0daca69a415f8415a497bedc718e552cc98c6c145369d845dc151b20223dd",
+      "source_pair": {
+        "case": "C:\\Users\\qtra338\\Documents\\FluentRuns\\Phase10\\20261009\\M02\\checkpoint-N2000.cas.h5",
+        "data": "C:\\Users\\qtra338\\Documents\\FluentRuns\\Phase10\\20261009\\M02\\checkpoint-N2000.dat.h5",
+        "case_sha256": "7c299280c6f1bd681b5a2d885dbd24823e4b888be9b85e80a744f70a256aa57d",
+        "data_sha256": "f205387505ccd047d277b546fb32c5833e33dc4da80bda402f135e60dddef697",
+        "counts": {
+          "cells": 487746,
+          "nodes": 1240354
+        }
+      }
+    },
+    {
+      "local": "PyAnsys/output/phase10-single-inlet-mesh-convergence/predivergence-mesh-sensitivity/raw/M03-N2000-native.npz",
+      "sha256": "b4984ae2e444eb62394da40904d53f1b5da021c934c1dd7a76b3b916d2da96fe",
+      "source_pair": {
+        "case": "C:\\Users\\qtra338\\Documents\\FluentRuns\\Phase10\\20261009\\M03\\checkpoint-N2000.cas.h5",
+        "data": "C:\\Users\\qtra338\\Documents\\FluentRuns\\Phase10\\20261009\\M03\\checkpoint-N2000.dat.h5",
+        "case_sha256": "92f2d11ef49e46235ccd71f919e274c981debdfbe603fae691416532cc9a9005",
+        "data_sha256": "9ef94b4ce9ede4e3b283e7c317053eff55c937d34967b052caa0a47a81602f91",
+        "counts": {
+          "cells": 681844,
+          "nodes": 1771489
+        }
+      }
+    },
+    {
+      "local": "PyAnsys/output/phase10-single-inlet-mesh-convergence/predivergence-mesh-sensitivity/raw/M04-N2000-native.npz",
+      "sha256": "d766c0739133f89a584f5439ccfb5a5b8676fa073445be0151b3d037383efd6e",
+      "source_pair": {
+        "case": "C:\\Users\\qtra338\\Documents\\FluentRuns\\Phase10\\20261009\\M04\\checkpoint-N2000.cas.h5",
+        "data": "C:\\Users\\qtra338\\Documents\\FluentRuns\\Phase10\\20261009\\M04\\checkpoint-N2000.dat.h5",
+        "case_sha256": "7f37248f8aa53bd777224f01626bfc644d972b233179047210b2549f77c77f94",
+        "data_sha256": "09e58f42442f3e1d478d5a20d7eec613d9e6a0c2161d2317f895f815c66a204a",
+        "counts": {
+          "cells": 946967,
+          "nodes": 2385385
+        }
+      }
+    },
+    {
+      "local": "PyAnsys/output/phase10-single-inlet-mesh-convergence/predivergence-mesh-sensitivity/raw/M05-N2000-native.npz",
+      "sha256": "31b60b2f9200c9a08beda99b007d2f795f7ae37fd6111353d42dc57c38607412",
+      "source_pair": {
+        "case": "C:\\Users\\qtra338\\Documents\\FluentRuns\\Phase10\\20261009\\recovery-20261010-14d9f41f\\M05\\checkpoint-N2000.cas.h5",
+        "data": "C:\\Users\\qtra338\\Documents\\FluentRuns\\Phase10\\20261009\\recovery-20261010-14d9f41f\\M05\\checkpoint-N2000.dat.h5",
+        "case_sha256": "9245710458a8811d091119f83cca012b39ab304dffc2dfa70ea5585f3b40f9a1",
+        "data_sha256": "651b5e8108d8504223d021a82a6ec8c3bf758f5b776f701616914a7ab797745e",
+        "counts": {
+          "cells": 1430497,
+          "nodes": 3564816
+        }
+      }
+    },
+    {
+      "local": "PyAnsys/output/phase10-single-inlet-mesh-convergence/predivergence-mesh-sensitivity/raw/M06-N2000-native.npz",
+      "sha256": "5887bd3d7b36bdd0337d04d27e4650d7191cedc8f9c1e6d2b932d6036d2bcfbe",
+      "source_pair": {
+        "case": "C:\\Users\\qtra338\\Documents\\FluentRuns\\Phase10\\20261009\\recovery-20261010-14d9f41f\\M06\\checkpoint-N2000.cas.h5",
+        "data": "C:\\Users\\qtra338\\Documents\\FluentRuns\\Phase10\\20261009\\recovery-20261010-14d9f41f\\M06\\checkpoint-N2000.dat.h5",
+        "case_sha256": "c649f64fa636a4a589f8897b6f002ec189d12c9335690421c96643e58405b1b6",
+        "data_sha256": "7bf33a91eb0031e846581ff3de5ec5d8c937fb943913662db4acd6fad1237373",
+        "counts": {
+          "cells": 2209748,
+          "nodes": 5439526
+        }
+      }
+    }
+  ],
+  "claim_limit": "Unconverged saved fields; reference is not an exact solution; differences are diagnostic and not discretisation-error estimates.",
+  "figure": "field-refinement",
+  "date": "2026-10-17",
+  "script": {
+    "path": "PyAnsys/scripts/analysis/plot_andy_report_descriptive_labels.py",
+    "sha256": "a121f0e2eea35067c8f38e2e90a90315103924035c3373b014b393b8ccdae810"
+  },
+  "output": {
+    "png": {
+      "filename": "field-refinement.png",
+      "sha256": "f1a25b90fe15b653a427647c6943183a8d744267fefee38b5c66634ce91abd51"
+    }
+  },
+  "plot_text": [
+    "Cells (millions)",
+    "0.25",
+    "0.25",
+    "0.50",
+    "0.50",
+    "0.75",
+    "0.75",
+    "1.00",
+    "1.00",
+    "1.25",
+    "1.25",
+    "1.50",
+    "1.50",
+    "1.75",
+    "1.75",
+    "2.00",
+    "2.00",
+    "2.25",
+    "2.25",
+    "2.50",
+    "2.50",
+    "Velocity-vector RMS difference (%)",
+    "10",
+    "10",
+    "12",
+    "12",
+    "14",
+    "14",
+    "16",
+    "16",
+    "18",
+    "18",
+    "20",
+    "20",
+    "22",
+    "22",
+    "24",
+    "24",
+    "26",
+    "26",
+    "28",
+    "28",
+    "Spatially averaged velocity-field comparison\nAcross-mesh reference: 2.21-million-cell mesh at the same iteration",
+    "Across meshes at iteration 1,000",
+    "Across meshes at iteration 2,000",
+    "Same mesh: iterations 1,000 to 2,000"
+  ],
+  "processing": "Regenerated with Matplotlib from the exact saved numeric evidence. No image pixels edited, smoothing, resampling, or new solver updates.",
+  "software": {
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.6"
+  }
+}

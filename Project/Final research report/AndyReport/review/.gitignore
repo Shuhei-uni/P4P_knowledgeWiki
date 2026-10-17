@@ -1,0 +1,6 @@
+latex/*.aux
+latex/*.toc
+latex/*.lof
+latex/*.lot
+latex/*.log
+latex/*.synctex.gz

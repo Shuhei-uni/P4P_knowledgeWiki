@@ -1,0 +1,43 @@
+{
+  "checked_date_nz": "2026-10-15",
+  "root_document": "/Users/andy/Desktop/P4P/Final Report/ESB_part_IV_latex_report_template_v2/ESB_report_template.tex",
+  "compiler": "tectonic; built-in editor compile tool unavailable",
+  "total_pdf_pages": 33,
+  "introduction_through_conclusions_pages": 22,
+  "body_limit_pages": 25,
+  "body_font": "Times New Roman, 12 pt",
+  "line_spacing": 1.15,
+  "margins_cm": {
+    "top": 2,
+    "bottom": 2,
+    "left": 2.5,
+    "right": 2.5
+  },
+  "pdf_fonts": [
+    "/AKHCZK+NimbusRomNo9L-ReguItal",
+    "/BZIVMZ+TimesNewRomanPS-BoldMT",
+    "/CAFSZL+CMR10",
+    "/DDIEWW+CMSY10",
+    "/FKPJSN+CMEX10",
+    "/IHAIZV+TimesNewRomanPSMT",
+    "/IXFAWU+TimesNewRomanPS-ItalicMT",
+    "/TQTHRL+StandardSymL",
+    "/VDVGTR+NimbusRomNo9L-Regu",
+    "/YEUUOC+CMMI10"
+  ],
+  "encrypted": false,
+  "all_pages_have_extractable_text": true,
+  "errors_or_layout_overflows": [],
+  "copied_literature_paragraphs": 27,
+  "literature_paragraph_mismatches": [],
+  "literature_source_unchanged": true,
+  "figure_bytes_preserved": true,
+  "visual_checks": [
+    "literature figure and caption",
+    "material/boundary tables",
+    "collector comparison table"
+  ],
+  "report_status": "working draft; outstanding figures, exact settings appendix, bibliography and author-confirmed front matter recorded in comparison-and-next-pass.md",
+  "relocated_root_document": "Project/Final research report/AndyReport/review/latex/ESB_report_template.tex",
+  "relocation_verified_date_nz": "2026-10-16"
+}

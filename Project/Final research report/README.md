@@ -1,6 +1,17 @@
-# Final research report — Markdown draft
+# Final research reports
 
-Shuhei’s report files are in [Shuhei Report](<Shuhei Report/>). Shared guidance, the supplied template and Andy’s draft remain in this folder.
+| Author | Working report | Complete draft |
+| --- | --- | --- |
+| Andy | [AndyReport](AndyReport/README.md) | [Combined Markdown draft](AndyReport/draft/draft-v1.md) |
+| Shuhei | [Shuhei Report](<Shuhei Report/>) | [Combined Markdown draft](<Shuhei Report/draft/draft-v1.md>) |
+
+Both reports use `draft/`, `figures/` and `review/`. AndyReport replaces `andy-draft/` and the external Final Report drafting location. Shared guidance and the supplied template remain here.
+
+## Shared report guidance
+
+- [Part 4 Projects Handbook — revision 02 March 2026](<P4P Projects Handbook 2026.md>): full user-supplied text, including report requirements, learning outcomes, assessment and submission guidance. Its 30-page limit differs from the 25-page limit in [Rough Guidance](<Rough Guidance.md>); the discrepancy is recorded in the handbook transcription.
+
+## Shuhei's report
 
 The report examines **how liquid moves through the separator and reaches a collection route**. Its main contribution connects mesh and inlet choices to liquid retention, collection and wall-film behaviour, supported by practical absorber and startup development. Mesh and inlet assumptions, absorber-free accumulation, wall roughness, film growth, release and drainage form a connected research argument.
 

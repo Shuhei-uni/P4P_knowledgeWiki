@@ -1,0 +1,60 @@
+{
+  "checked_date": "2026-10-18",
+  "export": "Authorised official-title and latest-Markdown export",
+  "pdf_path": "Project/Final research report/AndyReport/review/latex/ESB_report_template.pdf",
+  "pdf_sha256": "6a9a9f6dabf010b0bcc2018a4ce077d9dc08e05086f3e6358b38f8d84a9d0e48",
+  "compiler": "Tectonic; existing document compiled with cached resources",
+  "body_pages": 29,
+  "maximum_body_pages": 30,
+  "total_pages": 47,
+  "page_count_basis": {
+    "introduction_physical_page": 11,
+    "introduction_printed_page": 1,
+    "conclusions_last_physical_page": 39,
+    "conclusions_last_printed_page": 29,
+    "references_first_physical_page": 40
+  },
+  "font": "Times New Roman, 12 pt body; supplied template caption styling",
+  "layout": "Unchanged A4 template margins (top/bottom 2 cm, left/right 2.5 cm) and 1.15 spacing",
+  "body_words": 11172,
+  "protected_unchanged": {
+    "draft/01-introduction-and-literature-review.md": true,
+    "review/latex/sections/01-introduction.tex": true,
+    "review/latex/sections/02-literature-review.tex": true
+  },
+  "source_sha256": {
+    "draft/00-front-matter.md": "e86bffed2f1f7c4a99990bb5b84e03f96eaf205ebf986eb019333d376717d2fd",
+    "draft/01-introduction-and-literature-review.md": "b18573b1628e6b59cf126d0c6b643bf987941e88a7ebdb2453ed9ce57e345a0b",
+    "draft/02-model-and-methods.md": "2e191ca920cbbec67243a78173c536b228c5a1f3ca03d3edbd1dab38c6d2c755",
+    "draft/03-results.md": "e3989eadd286a1dc37b9b1e6a44b22c62100ea6479999e12a06d577a0bf80830",
+    "draft/04-discussion-conclusions-and-future-work.md": "f2b82558f6aa7ac396fd7c8ceeb1da6fd48080d4c07d8a045c0218b357a77707",
+    "draft/05-references-and-appendices.md": "aefe177b0e56c941da818f456dba1055ab543d82ed7f77483c0fb0bd4ddc0c27"
+  },
+  "figure_sha256": {
+    "figures/results-direct-film-drain.png": "04f2cc067aa7d1305cd9128d6bf039b815414d05b856ae0cc72f39b116a867d7",
+    "figures/two-start-comparison.png": "9d36eca2c7edd6f5b8b799d5e1f021059aa05dc7b20c9384858eddb15dd911e5",
+    "figures/field-refinement.png": "f1a25b90fe15b653a427647c6943183a8d744267fefee38b5c66634ce91abd51"
+  },
+  "compiler_checks": {
+    "errors": false,
+    "overfull_boxes": false,
+    "missing_glyphs": false,
+    "undefined_references": false
+  },
+  "nonblocking_compiler_notices": [
+    "Absolute local Times New Roman font paths reduce build portability",
+    "Inherited literature JPEGs contain inconsistent EXIF/JFIF resolution metadata",
+    "Caption hypcap option ignored for existing minipage table"
+  ],
+  "visual_review": "All 47 pages inspected as contact sheets; official cover inspected at larger size. Figure placement was made flexible in the exporter to avoid a final page containing only two lines. No text, font size, figure dimensions, margins or line spacing changed; no cropping or overfull boxes.",
+  "independent_export_audit": "Exact official title and early Fluent 2025 R2 sentence verified; 29 body pages and 47 total independently confirmed; updated Figures 6\u20138 match source RGB pixels exactly.",
+  "pdf_text_extractable": true,
+  "markdown_latex_sync": "sync-report.py --check passed with no differing files or warnings after the placement update.",
+  "remaining_author_work": [
+    "Acknowledgements and unsigned declaration/AI disclosure",
+    "Bibliography publication details and later authorised literature wording/year review"
+  ],
+  "official_title": "Geothermal steam-water separator design CFD modelling and optimising",
+  "latex_main_sha256": "3b652d7b7cfe958312333a2f383ce921aa6dc3a6778b5a87c39ac6b373ef7e32",
+  "exporter_sha256": "00fa32b8b8f8be9c69b66d622ab74ef509c084ec25b418d68fd3827e8a0fa78a"
+}

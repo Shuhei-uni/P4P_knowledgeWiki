@@ -1,0 +1,15 @@
+{
+  "checked": "2026-10-18",
+  "local_source": "/Users/andy/Desktop/P4P/Literature/Zarrouk and Purnanto (2014), Geothermal Steam-Water Separators - Design Overview.pdf",
+  "local_sha256": "fb43a2f4682c591b443deaa45ba4a3494fb8179c56f0ab650f6535f1b5d15d4e",
+  "local_first_page": "Geothermics 53 (2014) 236\u2013254; title and authors match report bibliography; DOI 10.1016/j.geothermics.2014.05.009",
+  "publisher_source": "https://www.sciencedirect.com/science/article/abs/pii/S0375650514000637",
+  "publisher_metadata": {
+    "date": "January 2015",
+    "volume": "53",
+    "pages": "236\u2013254",
+    "doi": "10.1016/j.geothermics.2014.05.009"
+  },
+  "access_note": "Direct open returned 403; publisher page content was available through the web search result. Other-domain results were not relied upon.",
+  "inference": "Same article. The copied literature uses the year printed on the supplied PDF; bibliography uses current publisher issue year. A bibliography identity note can resolve traceability without editing the protected opening."
+}

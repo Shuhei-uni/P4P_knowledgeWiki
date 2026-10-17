@@ -7,7 +7,7 @@ Use the existing owner folder before creating another directory.
 | --- | --- |
 | Phase-specific records and scientific figures | `Project/experiments/<phase>/` |
 | Shared project guidance and cross-phase comparisons | Shared folders in `Project/` |
-| Shuhei / Andy report files | `Project/Final research report/Shuhei Report/` / `andy-draft/` |
+| Shuhei / Andy report files | `Project/Final research report/Shuhei Report/` / `AndyReport/` |
 | Poster sections and assets | `Project/Poster/` |
 | Shared meeting material / retained exports and previews | `Project/meetings/` / `Project/meetings/output/` |
 | Executable utilities / reusable Python modules | `PyAnsys/scripts/<category>/` / `PyAnsys/src/` |

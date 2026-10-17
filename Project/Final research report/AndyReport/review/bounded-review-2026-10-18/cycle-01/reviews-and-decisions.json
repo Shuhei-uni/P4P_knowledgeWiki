@@ -1,0 +1,109 @@
+{
+  "reviewers": [
+    "bounded_c1_reader",
+    "bounded_c1_examiner"
+  ],
+  "issues": [
+    {
+      "id": "C1-R1-1",
+      "role": "Engineering reader",
+      "location": "Sections 3.1\u20133.3, 3.5, 5.8",
+      "passage": "liquid along the outer inlet wall; a lower film-wall segment; a vertical blocker and an angled ramp",
+      "criticism": "Report does not spatially show its own configurations.",
+      "confidence": "High",
+      "smallest_correction": "One annotated domain schematic, with design inset if those results remain.",
+      "decision": "accepted in part; remaining geometry definition unresolved",
+      "evidence": [
+        "Project/technical/purnanto-spiral-inlet-geometry.md",
+        "Project/experiments/phase-07b-full-geometry-liquid-removal/geometry-proof.md",
+        "Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/ewf-only-drain/setup.md"
+      ],
+      "action": "Added original conceptual Figure 5 and Table D.2. Explicitly excluded exact CAD parity and unspecified blocker/ramp shapes; retained their limited endpoint account. No invented design geometry."
+    },
+    {
+      "id": "C1-R1-2",
+      "role": "Engineering reader",
+      "location": "Section 3.4; Sections 5.4\u20135.5",
+      "passage": "Later contact-based collectors also differed from direct film removal",
+      "criticism": "Contact condition, affected liquid store and relation to previous source laws not explained.",
+      "confidence": "High",
+      "smallest_correction": "Define region, store and removal rule at first use.",
+      "decision": "accepted",
+      "evidence": [
+        "Project/experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/ewf-absorber/setup.md:73\u201398",
+        "Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/setup.md"
+      ],
+      "action": "Defined lower 715-cell zone, finite-rate depletion, selected tau, phase and momentum targeting, and separate film store."
+    },
+    {
+      "id": "C1-R1-3",
+      "role": "Engineering reader",
+      "location": "Sections 3.6 and 5.7",
+      "passage": "five coupled-DPM cases; reported DPM mass feedback was zero",
+      "criticism": "Particle momentum interaction versus mass transfer and pressure\u2013velocity Coupled setting unclear.",
+      "confidence": "Medium",
+      "smallest_correction": "Define particle\u2013bulk exchanges and explain zero mass feedback.",
+      "decision": "accepted",
+      "evidence": [
+        "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/report-contract.md:99\u2013105",
+        "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f3-coupled-dpm/results.md:199\u2013226",
+        "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/baseline-lineage-audit.md"
+      ],
+      "action": "Explained enabled momentum feedback, inert/no-evaporation particles and energy off. Zero mass transfer does not mean no momentum interaction or whole-system closure."
+    },
+    {
+      "id": "C1-R2-1",
+      "role": "CFD examiner",
+      "location": "Sections 3.1, 3.3\u20133.5; Appendix C",
+      "passage": "withdrawal within selected cells; a lower film-wall segment",
+      "criticism": "Spatial extents and dimensions absent; insufficient reporting rather than demonstrated implementation error.",
+      "confidence": "High",
+      "smallest_correction": "Annotated schematic and compact dimensions/extent table.",
+      "decision": "accepted in part; remaining geometry definition unresolved",
+      "evidence": [
+        "Project/experiments/phase-07b-full-geometry-liquid-removal/geometry-proof.md",
+        "Project/experiments/phase-07b-full-geometry-liquid-removal/convergence-investigation/coupled-nphase-weaker-sink/setup.md",
+        "Project/experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/ewf-only-drain/setup.md",
+        "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/baseline-lineage-audit.md"
+      ],
+      "action": "Same Figure 5/Table D.2 repair as R1-1. Nominal dimensions explicitly do not prove as-built parity. Source-family coordinate differences retained."
+    },
+    {
+      "id": "C1-R2-2",
+      "role": "CFD examiner",
+      "location": "Sections 5.7 and 6.1",
+      "passage": "the same mesh and numerical settings for both inlet representations; This establishes sensitivity to the prescribed distribution",
+      "criticism": "Matching phase feeds and initialisation controls not explicit.",
+      "confidence": "High information absent; moderate interpretation affected",
+      "smallest_correction": "State phase feeds, inlet allocation and initial fields; narrow attribution if needed.",
+      "decision": "accepted",
+      "evidence": [
+        "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/baseline-lineage-audit.md:91\u2013109",
+        "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f2-split-inlet/setup.md",
+        "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/results.md:123\u2013142",
+        "PyAnsys/scripts/setup/build_phase8_f1_from_p72a_e0.py",
+        "PyAnsys/scripts/setup/build_phase8_f2_from_f1.py"
+      ],
+      "action": "Added matching phase feeds, area allocation, face speeds and independent fresh Hybrid procedure. Did not assert identical initial fields. Qualified Discussion as endpoint configuration response under same startup procedure."
+    },
+    {
+      "id": "C1-R2-3",
+      "role": "CFD examiner",
+      "location": "Section 2.2",
+      "passage": "design efficiencies of 99.995%, at a steam flow of 100 t/h there is still approximately 5 kg/h of liquid carryover",
+      "criticism": "Example conflates outlet dryness and incoming-liquid capture efficiency under later report definitions.",
+      "confidence": "High",
+      "smallest_correction": "Verify original metric, then identify dryness or supply incoming liquid feed.",
+      "decision": "unresolved; protected author text",
+      "evidence": [
+        "Project/Final research report/AndyReport/draft/01-introduction-and-literature-review.md:49",
+        "Project/Final research report/AndyReport/draft/03-results.md:11",
+        "/Users/andy/Desktop/P4P/Literature/Rizaldy et al. (2016), Liquid Carryover in Geothermal Steam-Water Separators.pdf, page 2"
+      ],
+      "action": "Leave protected literature unchanged. Retain an unresolved request for a metric-definition bridge and original-basis check when that section is unlocked. Do not silently substitute dryness for the source\u2019s term.",
+      "source_check": "The original paper uses the same separator-efficiency wording and attributes the numerical example to Morris and Robinson (2015). It does not establish that the report may silently relabel its metric as dryness. The reviewer correctly identifies the inconsistency with this report\u2019s later liquid-capture definition; it is inherited source terminology, not a demonstrated copying error."
+    }
+  ],
+  "optional_style": "None requested; original prose retained outside identifiable repairs.",
+  "isolation_disclosure": "Both reviewers received automatic repository instructions and project-related memory summaries. They report no use of that background, no outside-file access, no external research, and no other-review access. These were fresh-context but not fully blind reviews."
+}

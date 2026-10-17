@@ -1,0 +1,37 @@
+{
+  "checked_date": "2026-10-16",
+  "pdf_path": "Project/Final research report/AndyReport/review/latex/ESB_report_template.pdf",
+  "pdf_sha256": "90f077d8c256540c8c65735083990966015ce7a9bd4aeec94cea54276d8ec683",
+  "compiler": "Tectonic; existing document compiled with cached resources",
+  "body_pages": 28,
+  "maximum_body_pages": 30,
+  "total_pages": 42,
+  "font": "Times New Roman, 12 pt body; supplied template caption styling",
+  "body_words": 10279,
+  "protected_unchanged": {
+    "draft/01-introduction-and-literature-review.md": true,
+    "review/latex/sections/01-introduction.tex": true,
+    "review/latex/sections/02-literature-review.tex": true
+  },
+  "source_sha256": {
+    "draft/00-front-matter.md": "2928cb1d1958546096de613ad9cd3dc27a74c87d8cdd131d25f1d3443b049dbd",
+    "draft/01-introduction-and-literature-review.md": "b18573b1628e6b59cf126d0c6b643bf987941e88a7ebdb2453ed9ce57e345a0b",
+    "draft/02-model-and-methods.md": "379f332c39aacb719ce79c0b041f0cb25a4580a6f03e50fad6cd771007b7518e",
+    "draft/03-results.md": "4b12d489b08d778cea9cc6accaf9413f79c743d2d591455766c4959f5342039d",
+    "draft/04-discussion-conclusions-and-future-work.md": "3dc3c92265cab9a1cc905f446e5112e40ee45a0d41fc908b5406ead3cf916095",
+    "draft/05-references-and-appendices.md": "8660bd6d6a3921574bddce2a6db5e2dc14883cf421dfe6332229746418a10f29"
+  },
+  "compiler_checks": {
+    "overfull_boxes": false,
+    "missing_glyphs": false,
+    "undefined_references": false
+  },
+  "visual_review": "All pages inspected as contact sheets; revised glossary, ramp figure/mass table and reference page inspected at larger size. Short R0 table kept on one page; no cropped content found.",
+  "pdf_text_extractable": true,
+  "local_links_checked": 55,
+  "broken_local_links": 0,
+  "remaining_author_work": [
+    "Acknowledgements and unsigned declaration/AI disclosure",
+    "Bibliography publication details and later authorised literature wording/year review"
+  ]
+}

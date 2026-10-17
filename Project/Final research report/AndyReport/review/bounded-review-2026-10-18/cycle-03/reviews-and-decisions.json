@@ -1,0 +1,73 @@
+{
+  "reviewers": [
+    "bounded_c3_reader",
+    "bounded_c3_examiner"
+  ],
+  "response_form": "Recorded summaries of reviewer responses",
+  "reader_material_issues": 1,
+  "examiner_material_issues": 0,
+  "issues": [
+    {
+      "id": "C3-R1-1",
+      "role": "Engineering reader",
+      "location": "Section 3.5; Section 5.5",
+      "passage": "DPM deposition and bulk-phase accretion provided different routes into that inventory; accretion 81.121 kg/s",
+      "criticism": "Bulk-to-film transfer trigger, relevant inputs and bulk-side treatment under active/frozen flow insufficiently explained.",
+      "confidence": "Medium-high",
+      "smallest_correction": "Short methods explanation, with unrecovered settings kept explicit rather than assumed.",
+      "decision": "accepted",
+      "evidence": [
+        "Project/experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/inlet-speed-500ms/setup.md:29\u201333",
+        "Project/experiments/phase-07-2a-wall-liquid-routing/ewf-family/e2.7/setup.md",
+        "https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_th/flu_th_ewf_sec_film_submodels.html, Section 17.2.1.5"
+      ],
+      "action": "Defined secondary-phase impingement and rate inputs; distinguished native transfer rule from demonstrated numerical closure. Identified DPM collection off in 500 ms study and fixed-bulk forcing without bulk-inventory evolution. Added version-matched primary reference. No unrecovered settings invented."
+    },
+    {
+      "id": "C2-V1-1",
+      "role": "Cycle 2 verifier follow-up",
+      "location": "Section 5.1; Section 4.3 and Appendix B",
+      "passage": "31.029 to 34.049 kPa; 4.612% pressure drift",
+      "criticism": "Pressure type, averaging surfaces and weights, multiple-inlet treatment and drift definition absent.",
+      "confidence": "High omission; moderate importance",
+      "smallest_correction": "Define metrics and drift sample/normalisation basis.",
+      "decision": "accepted",
+      "evidence": [
+        "Project/experiments/phase-02-parity-reset-and-pre-v2-qualification/purnanto-08b-parity-split-inlet/mesh-convergence-checkpoint-20260803.md",
+        "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/scripts/setup/run_split_inlet_mesh_convergence.py:609\u2013634",
+        "/Users/andy/Desktop/P4P/P4P_knowledgeWiki/PyAnsys/output/split_inlet_mesh_convergence_20260801/mesh_900k/extension_4000_6000_iteration_diagnostic3/mesh-900k_extension_physical_monitor_history.csv",
+        "PyAnsys/src/pyansys_fluent/mesh_convergence.py:131\u2013139",
+        "PyAnsys/scripts/setup/run_phase8_parity_carrier.py:175\u2013190",
+        "PyAnsys/scripts/analysis/analyze_phase8_f1_simple_comparison.py:79",
+        "PyAnsys/scripts/setup/run_phase10_mesh_family.py:184\u2013193",
+        "Project/experiments/phase-10-single-inlet-mesh-convergence/setup.md:74"
+      ],
+      "action": "Added Appendix B pressure-definition table and historical range/mean-absolute normalisation with exact three samples; body points to definitions. Preserved distinct mass- and area-weighted family metrics, no retrospective uniformity or new scientific result.",
+      "numerical_check": {
+        "iterations": [
+          5500,
+          5750,
+          6000
+        ],
+        "pressure_drop_Pa": [
+          33590.799999999814,
+          35171.30000000005,
+          34049.39999999991
+        ],
+        "range_divided_by_mean_absolute_percent": 4.61183816985523,
+        "matches_reported_4_612_percent": true,
+        "history_sha256": "ee14e232bbbd74b9cbbfe1dea76ffc706d6d26fa8f3bb6faffefc590aef7cb57"
+      }
+    }
+  ],
+  "examiner_assessment": "No material scientific issue or optional stylistic request; main claims bounded by evidence described in report. Incomplete full settings/CAD limits acknowledged.",
+  "optional_style": "None; no stylistic rewrite made.",
+  "isolation_disclosure": "Both reviewers disclosed automatic repository instructions and project-related memory/phase context. They report reading only the supplied snapshot, without using the background or consulting project records.",
+  "body_words": 11865,
+  "word_count_by_part": {
+    "01-introduction-and-literature-review.md": 2788,
+    "02-model-and-methods.md": 3500,
+    "03-results.md": 3963,
+    "04-discussion-conclusions-and-future-work.md": 1614
+  }
+}

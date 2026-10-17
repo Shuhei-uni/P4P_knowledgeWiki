@@ -1,0 +1,123 @@
+{
+  "source": {
+    "path": "Project/Final research report/Shuhei Report/figures/results-direct-film-drain.provenance.json",
+    "sha256": "41f38eed9930d45b00061d43b2fb9671b4617dab426b4f904399ab0f3fa5b63a"
+  },
+  "original_figure": {
+    "path": "Project/Final research report/Shuhei Report/figures/results-direct-film-drain.png",
+    "sha256": "87cb6111c64e4d96db8701cfe878e8c82a1a3d53681050df28bbee1c3d6525ff"
+  },
+  "original_provenance": {
+    "path": "Project/Final research report/Shuhei Report/figures/results-direct-film-drain.provenance.json",
+    "sha256": "41f38eed9930d45b00061d43b2fb9671b4617dab426b4f904399ab0f3fa5b63a"
+  },
+  "scope": "Matched N40483\u2013N41483, 1000 updates, 15 ms; expanded film domain; frozen bulk",
+  "values": {
+    "initial_total_film_kg": 9.752614046083597,
+    "lower_final_kg_off_on": [
+      0.1875203115680919,
+      0.05564984267215473
+    ],
+    "total_final_kg_off_on": [
+      11.17255551966931,
+      10.98286134706485
+    ],
+    "native_outflow_kg_off_on": [
+      0.5302321115698714,
+      0.21110824873776046
+    ],
+    "direct_sink_kg_off_on": [
+      0.0,
+      0.5087897346418866
+    ],
+    "external_removal_kg_off_on": [
+      0.5302321115698714,
+      0.719897983379647
+    ],
+    "external_removal_net_gain_kg": 0.18966587180977568,
+    "lower_film_reduction_percent": 70.3232987366559,
+    "direct_sink_quadrature_span_kg": 0.0005564984267215634
+  },
+  "conditions_verified_in_original_provenance": true,
+  "numeric_values_equal_to_original": true,
+  "upstream_analysis_record": {
+    "path": "PyAnsys/output/phase72a-stage4-ewf-drain/20261007/analysis-summary.json",
+    "sha256": "a2174bb73598520d881c700117f20ceb284c8982b6f91f04efb45bef97b05e03"
+  },
+  "upstream_record_available_in_checkout": false,
+  "verification_scope": "Full-precision values reproduced from original figure provenance; original image hash checked. Upstream analysis summary is absent locally, so no fresh native-evidence verification is claimed.",
+  "label_mapping": {
+    "Native outflow": "Existing film-edge outflow",
+    "Direct sink": "Direct film drain",
+    "Drain OFF": "Drain disabled",
+    "Drain ON": "Drain enabled"
+  },
+  "credit": "Adapted from Yokkaichi (2026, Figure 17); figure supplied by Shuhei Yokkaichi. Labels clarified; numerical values unchanged.",
+  "claim_limit": "Numerical local-drain comparison under fixed bulk forcing; no stationary film, whole-separator closure or physical validation claim.",
+  "figure": "results-direct-film-drain",
+  "date": "2026-10-17",
+  "script": {
+    "path": "PyAnsys/scripts/analysis/plot_andy_report_descriptive_labels.py",
+    "sha256": "a121f0e2eea35067c8f38e2e90a90315103924035c3373b014b393b8ccdae810"
+  },
+  "output": {
+    "png": {
+      "filename": "results-direct-film-drain.png",
+      "sha256": "04f2cc067aa7d1305cd9128d6bf039b815414d05b856ae0cc72f39b116a867d7"
+    }
+  },
+  "plot_text": [
+    "0.18752",
+    "0.05565",
+    "70.32% less lower-wall film",
+    "Drain disabled",
+    "Drain disabled",
+    "Drain enabled",
+    "Drain enabled",
+    "Film mass (kg)",
+    "0.00",
+    "0.00",
+    "0.05",
+    "0.05",
+    "0.10",
+    "0.10",
+    "0.15",
+    "0.15",
+    "0.20",
+    "0.20",
+    "0.25",
+    "0.25",
+    "(a) Lower-wall film after 15 ms",
+    "0.5302",
+    "0.5302",
+    "0.7199",
+    "0.2111",
+    "0.5088",
+    "Net gain: +0.1897 kg",
+    "Drain disabled",
+    "Drain disabled",
+    "Drain enabled",
+    "Drain enabled",
+    "Removed liquid (kg)",
+    "0.0",
+    "0.0",
+    "0.2",
+    "0.2",
+    "0.4",
+    "0.4",
+    "0.6",
+    "0.6",
+    "0.8",
+    "0.8",
+    "1.0",
+    "1.0",
+    "(b) External removal over 15 ms",
+    "Existing film-edge outflow",
+    "Direct film drain"
+  ],
+  "processing": "Regenerated with Matplotlib from the exact saved numeric evidence. No image pixels edited, smoothing, resampling, or new solver updates.",
+  "software": {
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.6"
+  }
+}

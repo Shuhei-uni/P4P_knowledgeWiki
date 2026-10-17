@@ -1,0 +1,41 @@
+\section{Discussion}
+
+\subsection{Progress towards a credible inlet-condition model}
+
+The investigation established modelling capabilities needed to examine inlet effects: separate liquid and vapour inlet regions, controlled loading procedures, numerical collection, resolved drainage and wall-film transport. It also showed why these capabilities require joint assessment. A calculation can remove liquid, produce lower residuals or reproduce an earlier output while its retained mass and outlet flows remain inconsistent with steady operation.
+
+The inlet comparisons support the original physical motivation. The imposed stratified arrangement changed liquid retention, with about 37\% more retained liquid in the split-inlet reconstruction than in the mixed-inlet reference at the matched 10,000-iteration endpoints. This establishes a difference between the prescribed inlet configurations under the same startup procedure and matched phase feeds; it is not a comparison of converged operating states. It does not validate that distribution as a developed upstream pipe-flow regime, or establish its effect on physical separation efficiency. The completed regime investigation was limited to the imposed outer-wall liquid arrangement.
+
+The mesh study made liquid accounting a central issue because pressure drop and inventory continued changing with iteration. The omitted brine path in the inherited model provided a clear reason to investigate removal. Subsequent studies showed that supplying that path was necessary for the intended separation process but insufficient to obtain a reliable operating solution. The resulting contribution is a set of tested model components and a clearer assessment of the conditions under which inlet and geometry comparisons become meaningful.
+
+\subsection{Lower residuals and correct source application are distinct achievements}
+
+Staged preparation and Coupled/Global Time Step treatment supplied a calmer common starting field for wall-treatment comparisons. Because preparation and solver treatment changed together, the improvement cannot be assigned to ramping alone. The throughput sink already removed the whole liquid feed, so additional steam-outlet liquid made excess removal unavoidable in its steady account. Correct command delivery could not resolve that design restriction. The distinct full-domain depletion collector removed liquid according to local content; weakening it mainly increased retained liquid without correcting balance. Its failure therefore requires a separate explanation.
+
+These results separate command response from conservation. Sources must be counted once, and reports identified as boundary-only or source-inclusive. The same rule applies to film release already included in a net source; denominators must also match the stated phase or mixture account.
+
+Conservation must then be assessed alongside routing. The small bulk-boundary gaps in selected particle cases coexisted with nearly all water leaving through the steam outlet. Balance, inventory, residuals and destination must therefore be assessed together.
+
+\subsection{Wall-film modelling improved the representation of liquid transport}
+
+Wall treatments altered both outlet flow and retained mass. The matched direct drain reduced the small lower-wall store by 70.32\%, but total film by only 1.70\% relative to the undrained case. Some direct removal replaced existing edge outflow. The test verified a removal mechanism without demonstrating control of the whole liquid inventory.
+
+Selected active-bulk windows passed local film-balance and inner-iteration checks. This establishes that film calculations could meet those local criteria while the bulk equations updated; it does not establish complete separator conservation or a stationary operating state.
+
+Frozen-bulk runs isolated film transport under fixed forcing. At 500 ms, drainage remained below accretion and the difference entered storage. Such growth can be conservative, but is not steady. Fixed bulk inventory cannot establish coupled stationarity, and film time is not elapsed fully coupled separator time. Even bulk-active stages of the later enhanced model omitted reciprocal film--bulk momentum coupling. Later mesh and design endpoints extended the evidence without establishing final conservation, mesh independence or a design benefit.
+
+\subsection{Component verification helped narrow the drainage problem}
+
+The corrected single-liquid duct benchmark reproduced the analytical response for four pressure/resistance combinations and passed the final-100 residual, balance and stability criteria. Speed and finite-value guards passed over all 500 iterations. This verifies the forward-flow resistance law for that simple problem; it does not determine a real separator's resistance or downstream head. Applying the treatment to the full domain did not establish a conservative stationary pool.
+
+Transient checks over microseconds to milliseconds nevertheless showed that conservative discharge could be represented. In one, brine outflow greatly exceeded feed while the storage-aware balance remained small: the pool supplied the difference. Low-feed tests achieved clean drainage briefly but failed longer holds. These outcomes establish short transient accounting, not sustained operating control. Inventory change over steady solver iterations cannot serve as a physical storage term. Conversely, failure to find a steady solution does not establish physical unsteadiness; numerical treatment, model assumptions and boundary conditions remain competing explanations.
+
+The numerical controls narrowed possible explanations. A changed set of solver settings reduced late liquid imbalance by about 60\% while increasing inventory loss from 4.15\% to 32.91\%. Separate startup tests showed motion without operating feed, with the brine boundary sealed in a two-phase case, and in homogeneous liquid with open hydrostatic outlets. A pressure-datum change removed one zero-gravity drift but did not cure gravity-on motion. These observations justify further pressure--gravity and initialisation tests; they do not identify one cause for every failure or prove that an eventual steady solution is impossible.
+
+\subsection{Reproduced outputs require matched definitions and numerical states}
+
+Agreement in mean quantities concealed unresolved numerical development: similar mean speeds accompanied spatial field differences, and within-run changes matched or exceeded cross-mesh differences. These comparisons cannot isolate discretisation error.
+
+Agreement with the project's July efficiency estimates was similarly conditional. Counting incomplete particles as separated produced estimates within 0.019 percentage points, despite substantial unresolved mass and tracking-sensitive escaped mass. Particle-fate distributions therefore carry more information than near-100\% efficiencies alone.
+
+Runtime measurements describe only the tested cases: fluid volumes and particle counts differed, preventing isolated mesh-type, equal-work tracking or equal-accuracy cost claims. The historical comparison also changed Fluent version and lacked the original tracking cap. Across the study, unmatched preparation and active equations limit causal comparisons. Controlled tests and measured sensitivities remain useful for model development, but do not establish physical separation performance, an optimum geometry or a validated operating range.

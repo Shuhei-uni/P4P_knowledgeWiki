@@ -1,0 +1,144 @@
+\ProvidesPackage{ESB_preamble}
+% Author: Michael Zhang Mar 2025
+% Last Modified: Mar 2025
+
+%%% Spacing %%%
+\usepackage[a4paper,
+            top=2cm,
+            bottom=2cm,
+            left=2.5cm,
+            right=2.5cm,
+            ]{geometry} % Page dimensions
+
+\setlength{\parindent}{0pt} % Paragraph indentation
+\setlength{\parskip}{1.25\medskipamount} % Spacing between paragraphs
+
+\usepackage{setspace} % Line Spacing
+\setstretch{1.15} % 1.15 Line Spacing
+
+\usepackage{enumitem} % Numbered and Bulleted Lists
+\setlist{nosep, itemsep=0.75\baselineskip, rightmargin=0em} % List formatting
+
+\usepackage{titlesec} % Allows section title formatting.
+\titlespacing*{\section}{0em}{0em plus 0.1\baselineskip minus 0.1\baselineskip}{0.25\baselineskip plus 0.05\baselineskip minus .05\baselineskip} % Section spacing
+\titlespacing*{\subsection}{0em}{0em plus 0.1\baselineskip minus 0.1\baselineskip}{-0.25\baselineskip plus 0.1\baselineskip minus 0.1\baselineskip} % Subsection spacing
+\titlespacing*{\subsubsection}{0em}{0em plus 0.1\baselineskip minus 0.1\baselineskip}{-0.5\baselineskip plus 0.1\baselineskip minus 0.1\baselineskip} % Subsubsection spacing
+
+\usepackage{tocloft} % Allows table of contents formatting
+\renewcommand\cftsecafterpnum{\vskip.5\baselineskip} % Spacing between entries
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}} % Add dots between entry and page number
+\renewcommand{\contentsname}{\parbox{\linewidth}{\centering Table of Contents}} % Centre ToC title
+\renewcommand{\listfigurename}{\parbox{\linewidth}{\centering List of Figures}} % Centre LoF title
+\renewcommand{\listtablename}{\parbox{\linewidth}{\centering List of Tables}} % Centre LoT title
+\tocloftpagestyle{ESBpagestyle} % Use ESBpagestyle for the ToC pages
+
+
+
+%%% Font %%%
+\usepackage[T1]{fontenc} 
+\usepackage{mathptmx} % Times New Roman
+\usepackage{xcolor} % Allows for custom colours
+\usepackage{amsmath} % Equations
+
+% Other exisitng fonts can be found (if allowed):
+% https://tug.org/FontCatalogue/sansseriffonts.html
+% https://tug.org/FontCatalogue/seriffonts.html
+
+
+%%% Figures and Tables %%%
+\usepackage{graphicx} % Inserting Figures
+\usepackage[font=small, labelfont=bf]{caption} % Captioning 
+\captionsetup{width=0.9\linewidth, justification=centering} % Caption formatting
+\usepackage{subcaption} % Inserting Subfigures
+\usepackage{wrapfig} % Inserting Figures with text wrapping
+\usepackage{pdfpages} % Inserting PDF pages as entire document pages
+
+
+%%% Tables %%%
+\usepackage{multirow} % Table cell merging
+\usepackage{multicol} % Table cell merging
+\usepackage{longtable} % Tables that split across pages
+
+
+%%% Header and Footer %%%
+\usepackage{fancyhdr} % Custom header and footers
+
+\fancypagestyle{ESBpagestyle}{% Creates the 'mainbody' page style
+    \fancyhf{} % Clears the header/footer styles
+    \fancyhead[L]{\footnotesize \ESBassessment}
+    \fancyhead[R]{\footnotesize \ESBstudentid}
+    \renewcommand{\headrulewidth}{0pt} % Removes the header line
+    \fancyfoot[C]{\footnotesize\thepage} % Page Numbering in footer
+}
+\pagestyle{ESBpagestyle} % Use this style throughout
+
+
+%%% Referencing %%%
+\usepackage[hidelinks]{hyperref} % Cross-referencing
+\renewcommand{\sectionautorefname}{Section} % Make capital letter
+\renewcommand{\subsectionautorefname}{Section} % Default is section
+\renewcommand{\subsubsectionautorefname}{Section}
+
+\usepackage[style=apa]{biblatex} % Referencing with APA7th
+\addbibresource{references.bib} % File name of .bib file, change if required
+  
+\usepackage{bookmark} % Extra PDF bookmark commands
+\pdfstringdefDisableCommands{% Removes the error for \centering References title.
+  \def\centering{}% 
+}
+
+
+%%% Other useful packages %%%
+\usepackage{siunitx} % Consistent unit and number formatting.
+\usepackage{listings} % Printing code nicely formatted
+
+\usepackage[linesnumbered, algoruled]{algorithm2e} % Algorithms
+\renewcommand*{\algorithmautorefname}{Algorithm} % Adjusting the crossrefering algorithm prefix.
+\renewcommand{\AlgoLineautorefname}{Line} % Adjusting the algorithm lines prefix.
+
+
+
+%%% Custom ESB Commands %%%
+\usepackage{etoolbox}
+\usepackage{appendix}
+
+% Glossary commands
+\newcommand{\glossarytablerows}{} % Initialise rows
+\newcommand{\ESBaddterminology}[2]{
+    % Append rows to \glossarytablerows
+    \gappto{\glossarytablerows}{#1 & #2 \tabularnewline}%
+}
+\newcommand{\ESBprintglossary}{
+    % Print the glossary
+    \begin{longtable}[c]{>{\raggedright}p{0.2\linewidth}>{\raggedright}p{0.7\linewidth}}
+        \glossarytablerows % Add collected rows here
+    \end{longtable}
+}
+
+% Glossary commands
+\newcommand{\abbreviationtablerows}{} % Initialize empty
+\newcommand{\ESBaddabbreviation}[2]{
+    % Append rows to \abbreviationtablerows
+    \gappto{\abbreviationtablerows}{#1 & #2 \tabularnewline}%
+}
+\newcommand{\ESBprintabbreviations}{
+    % Print the abbreviations
+    \begin{longtable}[c]{>{\raggedright}p{0.2\linewidth}>{\raggedright}p{0.7\linewidth}}
+        \abbreviationtablerows % Add collected rows here
+    \end{longtable}
+}
+
+
+\newcommand{\ESBappendix}{
+    \appendix % Start and format the appendix
+    \addappheadtotoc % Add Appendices to table of contents
+
+    % Reset Numberings for things
+    \counterwithin{figure}{section} 
+    \counterwithin{table}{section}
+    \counterwithin{lstlisting}{section}
+    \counterwithin{equation}{section}
+}
+
+
+\newcommand{\ESBfrontsection}[1]{\section*{\centering  #1}\addcontentsline{toc}{section}{#1}} % Formatted front matter sections.

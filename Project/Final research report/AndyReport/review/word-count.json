@@ -1,0 +1,18 @@
+{
+  "introduction_prose": 528,
+  "introduction_with_caption": 568,
+  "body_including_headings_captions_tables": 11865,
+  "section_file_counts": {
+    "01-introduction-and-literature-review.md": 2788,
+    "02-model-and-methods.md": 3500,
+    "03-results.md": 3963,
+    "04-discussion-conclusions-and-future-work.md": 1614
+  },
+  "body_pages": 30,
+  "total_pages": 53,
+  "method": "Pandoc Markdown AST; word tokens in text, headings, captions and tables using Unicode word groups with internal hyphens/apostrophes. Excludes image alt text, URLs, equations, raw HTML, front matter, references and appendices. Approximate editorial count.",
+  "count_note": "Image alternative text is excluded explicitly, including implicit-figure captions; earlier approximate counts are not directly comparable. Protected opening text is unchanged. Page counts require compilation and visual review; synchronisation retains the previous recorded page counts.",
+  "compiled_date": "2026-10-18",
+  "compiled_pdf_sha256": "7abfc2d74bcc1cb28fcf05cdd391c4aaaf01cbad4e3c02fdb4dcbafff61b4912",
+  "latest_layout_check": "layout-check-2026-10-18-bounded-review.json"
+}

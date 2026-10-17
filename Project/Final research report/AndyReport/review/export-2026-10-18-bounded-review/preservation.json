@@ -1,0 +1,219 @@
+{
+  "files": {
+    "draft/00-front-matter.md": {
+      "sha256": "8295bcda549014182c5ed09e50a99073c669868165e1fe8edb004694a396d854",
+      "bytes": 7465
+    },
+    "draft/01-introduction-and-literature-review.md": {
+      "sha256": "b18573b1628e6b59cf126d0c6b643bf987941e88a7ebdb2453ed9ce57e345a0b",
+      "bytes": 20485
+    },
+    "draft/02-model-and-methods.md": {
+      "sha256": "6d49d3752e8c107d87b7ad38547a6fa37676662486f4c1e4641d81341d8a18ba",
+      "bytes": 30020
+    },
+    "draft/03-results.md": {
+      "sha256": "c9f56d16175bd7ff86e932c1c4a1e31836c0d1a4f7dff8e624acc56890039654",
+      "bytes": 30978
+    },
+    "draft/04-discussion-conclusions-and-future-work.md": {
+      "sha256": "b4842375b863fab2c821a78c9e7b50dd8b50a73642656b682d4dc55b9d53f34e",
+      "bytes": 13382
+    },
+    "draft/05-references-and-appendices.md": {
+      "sha256": "f6e681227c60785be26e00e25109348e874d33f2b3a6105ef6a276cec23556d9",
+      "bytes": 32491
+    },
+    "draft/draft-v1.md": {
+      "sha256": "6d810a1d4e4350d97642b95d55724bb0fe33956fb58c5ce47ef375db572542a2",
+      "bytes": 134825
+    },
+    "figures/field-refinement.png": {
+      "sha256": "f1a25b90fe15b653a427647c6943183a8d744267fefee38b5c66634ce91abd51",
+      "bytes": 161982
+    },
+    "figures/field-refinement.provenance.json": {
+      "sha256": "940a811446c9c16fc1bedb9033c8820bac3a55ea6b04505657512d9edf503933",
+      "bytes": 12959
+    },
+    "figures/literature/literature-1.jpeg": {
+      "sha256": "d4d9096cc565691e09351981ee8d06a3c8df74089738201cd3dce73cf627bd7c",
+      "bytes": 112164
+    },
+    "figures/literature/literature-2.jpg": {
+      "sha256": "80740b1b8b2c3e5c09817c394845247356e44ec14750b7c37aee143057ac5d5e",
+      "bytes": 213233
+    },
+    "figures/literature/literature-3.jpeg": {
+      "sha256": "d28510eed8d6fc25e950239ec0b9f29fce9e2ee9b531960ba869872a2ea9154b",
+      "bytes": 165879
+    },
+    "figures/literature/purnanto-2013-model-scope.png": {
+      "sha256": "eafe005fa4de5faef01f2a397fa1cfa19a33ad990be040020084e7e1cf01d480",
+      "bytes": 49330
+    },
+    "figures/model-removal-regions.png": {
+      "sha256": "ecda36041058a73b3ad161f57e50fb86fae5ee1cc6f58c50700f372af18643f5",
+      "bytes": 155526
+    },
+    "figures/model-removal-regions.provenance.json": {
+      "sha256": "a38ae887e5bc65ea2e777ab543e1c4420795387fe3be3d6828490bfb167baa4b",
+      "bytes": 1223
+    },
+    "figures/results-described-early-development.png": {
+      "sha256": "2c9430e356c6e2ea68ff876915d1332615db191c5bc5fcea2b609f6d36240020",
+      "bytes": 353943
+    },
+    "figures/results-described-early-development.provenance.json": {
+      "sha256": "6e1dc3c1ea0a9c3c54eb5aaa17942e5d556b881575769aa6878dccd12e7f2af2",
+      "bytes": 3094
+    },
+    "figures/results-direct-film-drain.png": {
+      "sha256": "04f2cc067aa7d1305cd9128d6bf039b815414d05b856ae0cc72f39b116a867d7",
+      "bytes": 101626
+    },
+    "figures/results-direct-film-drain.provenance.json": {
+      "sha256": "6363ca85df90f695d4f9b40676765d8e0c3ac1cca88f53effb0acf842c9260d2",
+      "bytes": 3923
+    },
+    "figures/two-start-comparison.png": {
+      "sha256": "9d36eca2c7edd6f5b8b799d5e1f021059aa05dc7b20c9384858eddb15dd911e5",
+      "bytes": 312898
+    },
+    "figures/two-start-comparison.provenance.json": {
+      "sha256": "719cca8ad4ccb0d92899b273a1d49f4d87898a937cc330a341fdd87d417fb297",
+      "bytes": 177649
+    },
+    "review/latex/.DS_Store": {
+      "sha256": "10024688c109bdc28cd356d5f4f18a7fe533995da8f2bfbeb9b79a3e4c0dfe88",
+      "bytes": 6148
+    },
+    "review/latex/Declaration/ESB_declaration_online.tex": {
+      "sha256": "0053dbef1ebc0b411ff9c574dc917b62c106906579fe37817e7e691c375a0123",
+      "bytes": 2000
+    },
+    "review/latex/Declaration/ESB_declaration_printedition.tex": {
+      "sha256": "df410941fe7d9541f6c6271b1aded3701090f71d99eaacaae458ff39d9035153",
+      "bytes": 1736
+    },
+    "review/latex/Declaration/Unsigned_declaration_printedition.pdf": {
+      "sha256": "669a8f2aeb4dd8daebe312e28789742aba28e0148ce2c11cc7a03a7d1f3907cf",
+      "bytes": 27374
+    },
+    "review/latex/ESB_preamble.sty": {
+      "sha256": "2a580263c955da4745e2676b7058897eeb39a13b51d43c2ce3e64f1d1e210f1b",
+      "bytes": 5609
+    },
+    "review/latex/ESB_report_template.aux": {
+      "sha256": "70da1456dadd57570514697375dea6201eb2ec6210f4a54f8dea2b2afbd7b9b2",
+      "bytes": 22548
+    },
+    "review/latex/ESB_report_template.lof": {
+      "sha256": "034e58a2e1c7c42c3a82cc321b64eb5acb25b5f3c91ece1d27ff8a6da387e7d7",
+      "bytes": 3223
+    },
+    "review/latex/ESB_report_template.log": {
+      "sha256": "408a3a25404b098e04e970b0218ef0ebfb24d2e864636a72e5ed221aaaa17633",
+      "bytes": 30655
+    },
+    "review/latex/ESB_report_template.lot": {
+      "sha256": "c382ce6cd887a67c016675b45888ce8b2aa0e9aac4d2dda60b4899fe50ce779d",
+      "bytes": 3707
+    },
+    "review/latex/ESB_report_template.pdf": {
+      "sha256": "c782b1043b1f89c6f800024fcd0dec3a00f0789a0417052b14d97a0859a8e115",
+      "bytes": 1777378
+    },
+    "review/latex/ESB_report_template.synctex.gz": {
+      "sha256": "b61d3d405baff7fe69fce4584b424cb4e936167ac26fba0ce7d2cff13f348e20",
+      "bytes": 205777
+    },
+    "review/latex/ESB_report_template.tex": {
+      "sha256": "3b652d7b7cfe958312333a2f383ce921aa6dc3a6778b5a87c39ac6b373ef7e32",
+      "bytes": 1656
+    },
+    "review/latex/ESB_report_template.toc": {
+      "sha256": "d339926878dcf4a3692d0ca01170a26189310ccf0791e7f31d50572184796113",
+      "bytes": 4913
+    },
+    "review/latex/ESB_titlepage.tex": {
+      "sha256": "446ace96a2e06aadc1cbeed5c7713b6fbbbd53c34e9e11241d32b073f6756e5d",
+      "bytes": 1373
+    },
+    "review/latex/Example_Document/example_document.tex": {
+      "sha256": "e9ec9ddfc42d1a9d3c94d7b4318c0d99df617600c182a102e107abef5febf9d5",
+      "bytes": 25741
+    },
+    "review/latex/Example_Document/example_references.bib": {
+      "sha256": "00e6f51e16c3bf829727b822c68776e93ddcf28f78187ba1904bc1549de47393",
+      "bytes": 3699
+    },
+    "review/latex/Example_Document/fingerprint.png": {
+      "sha256": "6637001ea163fedab3607fbe22fbdc4033f9470e259ec384eb530d19a899a214",
+      "bytes": 408049
+    },
+    "review/latex/references.bib": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "review/latex/sections/00-abstract.tex": {
+      "sha256": "c9e0fab48840c203231f99a1d3097a57dfb83356c9c647f5999a1a3dbbb16aba",
+      "bytes": 2746
+    },
+    "review/latex/sections/00-declaration.tex": {
+      "sha256": "51226b430d46801193fefac82d34a05e2dcb08cfcb714b9fd3a84e36d8e634f8",
+      "bytes": 1854
+    },
+    "review/latex/sections/00-glossary.tex": {
+      "sha256": "00b33a2e9a9fc2eb07a3cd6c9db251df93a2164caef9e698aef9c56c5bf515d7",
+      "bytes": 2846
+    },
+    "review/latex/sections/01-introduction.tex": {
+      "sha256": "47756b69dfc3f4c18c722ccd24ffd6c18224a3355945d04840d77e9123b1c679",
+      "bytes": 4278
+    },
+    "review/latex/sections/02-literature-review.tex": {
+      "sha256": "30d3cd7cd2ebef860ec06af43354a9328ff692146f50c42eae36dbb4a56eea6c",
+      "bytes": 16104
+    },
+    "review/latex/sections/03-model-and-methods.tex": {
+      "sha256": "bca3d3e0d1f333476e17902fda6ff016e309689899fa5c0ff1e661000483b590",
+      "bytes": 15563
+    },
+    "review/latex/sections/04-verification-and-validation.tex": {
+      "sha256": "06d5855cb492d8647f1311d778f5b506b46f282bebb346e9b4cadb62267a9bc7",
+      "bytes": 7613
+    },
+    "review/latex/sections/05-results.tex": {
+      "sha256": "f9df9d7e8581590fe7f3ea9412c3f94b8cf3b9da58bbbff1ef8f1e050799746a",
+      "bytes": 28686
+    },
+    "review/latex/sections/06-discussion.tex": {
+      "sha256": "46664fb0cbf9e86b4a6b046370f43badaa09f9b71bc30e1711dbd75bdfb765a6",
+      "bytes": 7326
+    },
+    "review/latex/sections/07-conclusions.tex": {
+      "sha256": "64b69b38f62b6c03fd553b66953ac53374576dace494ea2509d2a7002ddf4046",
+      "bytes": 4825
+    },
+    "review/latex/sections/08-references.tex": {
+      "sha256": "31795db6473cc6c719b714525fed8b5b270c50873e4a976bd130b4c828ff8518",
+      "bytes": 3041
+    },
+    "review/latex/sections/09-appendices.tex": {
+      "sha256": "68cfde2a668e930a588f7ab55106f1499544b63a94b52c0f0e9805a4ca0af140",
+      "bytes": 22282
+    },
+    "review/sync-report.py": {
+      "sha256": "00fa32b8b8f8be9c69b66d622ab74ef509c084ec25b418d68fd3827e8a0fa78a",
+      "bytes": 16195
+    },
+    "review/word-count.json": {
+      "sha256": "9e89ca549316360ff80d28fa5628b3a80730f2068e78b4947314207329d376ba",
+      "bytes": 1126
+    }
+  },
+  "archive_sha256": "6ae9cb4ac54971ffbef08afc547db43cfda95411dc70dd1af6c9331c5a7bb943",
+  "annotation_backup": "previous-annotated-report.pdf",
+  "instruction": "Export current Markdown; defer the DPM input question; preserve protected opening and scientific content."
+}

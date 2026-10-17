@@ -1,0 +1,57 @@
+{
+  "checked_date": "2026-10-17",
+  "export": "Authorised export after descriptive figure labels and adversarial review",
+  "pdf_path": "Project/Final research report/AndyReport/review/latex/ESB_report_template.pdf",
+  "pdf_sha256": "bb2aea91712bdb11528dae1245ca85a34811e2227200772765e2ff876d6400b8",
+  "compiler": "Tectonic; existing document compiled with cached resources",
+  "body_pages": 28,
+  "maximum_body_pages": 30,
+  "total_pages": 46,
+  "page_count_basis": {
+    "introduction_physical_page": 11,
+    "introduction_printed_page": 1,
+    "conclusions_last_physical_page": 38,
+    "conclusions_last_printed_page": 28,
+    "references_first_physical_page": 39
+  },
+  "font": "Times New Roman, 12 pt body; supplied template caption styling",
+  "layout": "Unchanged A4 template margins (top/bottom 2 cm, left/right 2.5 cm) and 1.15 spacing",
+  "body_words": 11152,
+  "protected_unchanged": {
+    "draft/01-introduction-and-literature-review.md": true,
+    "review/latex/sections/01-introduction.tex": true,
+    "review/latex/sections/02-literature-review.tex": true
+  },
+  "source_sha256": {
+    "draft/00-front-matter.md": "7b18acc08cc0ec01e911b0bf23cc789c877a901811e2b1344141aef8ba3a999b",
+    "draft/01-introduction-and-literature-review.md": "b18573b1628e6b59cf126d0c6b643bf987941e88a7ebdb2453ed9ce57e345a0b",
+    "draft/02-model-and-methods.md": "9f35cf681ac9b77b2ddc831cb5139869b818040338d4cfc14e3373fd088dfdf7",
+    "draft/03-results.md": "e3989eadd286a1dc37b9b1e6a44b22c62100ea6479999e12a06d577a0bf80830",
+    "draft/04-discussion-conclusions-and-future-work.md": "f2b82558f6aa7ac396fd7c8ceeb1da6fd48080d4c07d8a045c0218b357a77707",
+    "draft/05-references-and-appendices.md": "aefe177b0e56c941da818f456dba1055ab543d82ed7f77483c0fb0bd4ddc0c27"
+  },
+  "figure_sha256": {
+    "figures/results-direct-film-drain.png": "04f2cc067aa7d1305cd9128d6bf039b815414d05b856ae0cc72f39b116a867d7",
+    "figures/two-start-comparison.png": "9d36eca2c7edd6f5b8b799d5e1f021059aa05dc7b20c9384858eddb15dd911e5",
+    "figures/field-refinement.png": "f1a25b90fe15b653a427647c6943183a8d744267fefee38b5c66634ce91abd51"
+  },
+  "compiler_checks": {
+    "errors": false,
+    "overfull_boxes": false,
+    "missing_glyphs": false,
+    "undefined_references": false
+  },
+  "nonblocking_compiler_notices": [
+    "Absolute local Times New Roman font paths reduce build portability",
+    "Inherited literature JPEGs contain inconsistent EXIF/JFIF resolution metadata",
+    "Caption hypcap option ignored for existing minipage table"
+  ],
+  "visual_review": "All 46 pages inspected as contact sheets. Figures 6\u20138 and new Appendix B.2/D.1 tables inspected at larger size. Tables continue with repeated headings; no cropped content or overfull boxes.",
+  "independent_export_audit": "28 body pages and 46 total verified independently; revised claims and Appendix B.2/D.1 present; all three updated embedded images match source RGB pixels exactly; Times New Roman fonts embedded.",
+  "pdf_text_extractable": true,
+  "markdown_latex_sync": "sync-report.py --check passed with no differing files or warnings",
+  "remaining_author_work": [
+    "Acknowledgements and unsigned declaration/AI disclosure",
+    "Bibliography publication details and later authorised literature wording/year review"
+  ]
+}

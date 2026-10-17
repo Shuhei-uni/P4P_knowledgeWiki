@@ -1,0 +1,39 @@
+{
+  "checked_date": "2026-10-17",
+  "pdf_path": "Project/Final research report/AndyReport/review/latex/ESB_report_template.pdf",
+  "pdf_sha256": "9313802dbdc1ea8e6f84bf6297c2a0327903fac9020188017014f12522334fcc",
+  "compiler": "Tectonic; existing document compiled with cached resources",
+  "body_pages": 28,
+  "maximum_body_pages": 30,
+  "total_pages": 44,
+  "font": "Times New Roman, 12 pt body; supplied template caption styling",
+  "body_words": 10880,
+  "protected_unchanged": {
+    "draft/01-introduction-and-literature-review.md": true,
+    "review/latex/sections/01-introduction.tex": true,
+    "review/latex/sections/02-literature-review.tex": true
+  },
+  "source_sha256": {
+    "draft/00-front-matter.md": "59309c326c64acb3f2637d57925dcb5363c435cd3325dc6a9629fdd115c25fa2",
+    "draft/01-introduction-and-literature-review.md": "b18573b1628e6b59cf126d0c6b643bf987941e88a7ebdb2453ed9ce57e345a0b",
+    "draft/02-model-and-methods.md": "f14d06278b90bd1f35ae5d8d7e8b1a4145077f6590831a6798bcc0396566bef7",
+    "draft/03-results.md": "a29fbdf2ab0c870059d16472f3b2f4a4bea641d64a8f92a33e0ac91179ca40f6",
+    "draft/04-discussion-conclusions-and-future-work.md": "1305bd46932ee85b4fdd099bad882ef43cf7d0d64d770e268082aa5b26940f75",
+    "draft/05-references-and-appendices.md": "ce8d9c5b3a134a0218f2904ce9ef071e77c0670d4e85710b1f9e62f141303a5c"
+  },
+  "compiler_checks": {
+    "errors": false,
+    "overfull_boxes": false,
+    "missing_glyphs": false,
+    "undefined_references": false
+  },
+  "visual_review": "All 44 pages reviewed as contact sheets; glossary symbols, Table 5 and Figure 8 inspected at larger size. Symbols moved together to the second glossary page to avoid a lone table row. No cropped content or overfull boxes. Body font, margins and 1.15 spacing unchanged.",
+  "pdf_text_extractable": true,
+  "local_links_checked": 55,
+  "broken_local_links": 0,
+  "remaining_author_work": [
+    "Acknowledgements and unsigned declaration/AI disclosure",
+    "Bibliography publication details and later authorised literature wording/year review"
+  ],
+  "markdown_latex_sync": "sync-report.py --check passed with no differences before page-count metadata refresh"
+}

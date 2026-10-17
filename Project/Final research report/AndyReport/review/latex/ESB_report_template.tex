@@ -1,0 +1,52 @@
+\documentclass[12pt]{article}
+\usepackage{ESB_preamble}
+\usepackage{array,booktabs,float,amssymb}
+\newcommand{\ESBassessment}{Part IV Research Project Report}
+\newcommand{\ESBtitle}{Geothermal steam-water separator design CFD modelling and optimising}
+\newcommand{\ESBauthor}{Andy Tran}
+\newcommand{\ESBcoworker}{Shuhei Yokkaichi}
+\newcommand{\ESBsupervisors}{Sadiq Zarrouk \\ Maedeh Amirpour}
+\newcommand{\ESBdate}{Revised 17 October 2026}
+\newcommand{\ESBstudentid}{qtra338}
+\setlength{\emergencystretch}{2em}
+\setlength{\headheight}{15pt}
+\setlength{\LTpre}{.2\baselineskip}
+\setlength{\LTpost}{.2\baselineskip}
+\begin{document}
+\pagenumbering{roman}
+\hypersetup{pageanchor=false}
+\input{ESB_titlepage.tex}
+\hypersetup{pageanchor=true}
+\ESBfrontsection{Abstract}
+\input{sections/00-abstract.tex}
+\clearpage
+\ESBfrontsection{Declaration}
+\input{sections/00-declaration.tex}
+\clearpage
+\tableofcontents
+\clearpage
+\listoffigures
+\listoftables
+\clearpage
+\ESBfrontsection{Acknowledgements}
+[Author to complete acknowledgements of supervisors, collaborator and other support.]
+\clearpage
+\ESBfrontsection{Glossary of terms and symbols}
+\input{sections/00-glossary.tex}
+\clearpage
+\pagenumbering{arabic}
+\input{sections/01-introduction.tex}
+\input{sections/02-literature-review.tex}
+\input{sections/03-model-and-methods.tex}
+\input{sections/04-verification-and-validation.tex}
+\input{sections/05-results.tex}
+\input{sections/06-discussion.tex}
+\input{sections/07-conclusions.tex}
+\label{page:body-end}
+\clearpage
+\ESBfrontsection{References}
+\input{sections/08-references.tex}
+\clearpage
+\ESBappendix
+\input{sections/09-appendices.tex}
+\end{document}

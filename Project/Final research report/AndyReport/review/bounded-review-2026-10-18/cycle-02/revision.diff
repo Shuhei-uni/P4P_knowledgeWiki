@@ -1,0 +1,96 @@
+--- before/00-front-matter.md
++++ cycle-02/00-front-matter.md
+@@ -44,7 +44,7 @@
+ 
+ **Prior report material.** The literature review is reproduced from the author’s earlier project report, as requested. Its source and unchanged-text copy are retained in the drafting records.
+ 
+-**Word count:** approximately 11,600 words from Introduction through Conclusions, including headings, captions and tables.
++**Word count:** approximately 11,700 words from Introduction through Conclusions, including headings, captions and tables.
+ 
+ **Signature and date:** to be completed by the author.
+ 
+--- before/02-model-and-methods.md
++++ cycle-02/02-model-and-methods.md
+@@ -1,6 +1,8 @@
+ # Part 2 — Model, methods and numerical assessment
+ 
+ ## 3. Model and methods
++
++The work reported below addresses model development and numerical assessment within the broader validation gap identified in the literature review. Physical validation was not completed. Performance measures also need distinct definitions: outlet dryness describes steam-outlet composition, whereas liquid-capture efficiency uses incoming liquid as its basis. In the Section 2.2 example, 100 t/h of steam with 5 kg/h of liquid implies approximately 99.995% outlet dryness; those two flows alone do not establish the fraction of incoming liquid captured. The published term “separator efficiency” in that example is therefore not used as an interchangeable measure of liquid capture here.
+ 
+ Ansys Fluent was used for the CFD calculations. The later single-inlet reconstruction and same-computer tetrahedral repeat used Fluent 2025 R2.
+ 
+@@ -91,9 +93,9 @@
+ 
+ ### 3.6. Droplet tracking and operating-condition comparisons
+ 
+-One-way DPM tracked droplets without feedback to the carrier. Interacting DPM calculations instead allocated part of the total liquid feed to particles and reduced Eulerian liquid feed correspondingly. Diagnostic one-way particle weights were not added as extra physical inlet mass. In the interacting cases, the continuous-phase interaction setting enabled particle momentum feedback to the bulk equations. The droplets were inert, with no evaporation; energy was not solved. A zero DPM mass source was therefore compatible with momentum interaction and did not mean that interaction was disabled. This particle–bulk coupling is distinct from the pressure–velocity solver setting named Coupled. The reconstructed inlet/carrier/DPM/EWF comparisons included five matched operating points, rather than the entire proposed parameter matrix.
++One-way DPM tracked droplets without feedback to the carrier. Interacting DPM calculations instead allocated part of the total liquid feed to particles and reduced Eulerian liquid feed correspondingly. Diagnostic one-way particle weights were not added as extra physical inlet mass. In the interacting cases, the continuous-phase interaction setting enabled particle momentum feedback to the bulk equations. The droplets were inert, with no evaporation; energy was not solved. A zero DPM mass source was therefore compatible with momentum interaction and did not mean that interaction was disabled. This particle–bulk coupling is distinct from the pressure–velocity solver setting named Coupled. The matched interacting-DPM cases with and without EWF used 2.5% of inlet liquid as droplets at nominal speeds of 20.11, 23.46, 26.81 and 32.14 m/s, plus a 5% case at 26.81 m/s. These five pairs varied speed and allocated droplet loading at the 1600 kJ/kg phase proportion; they were distinct from the five-enthalpy historical reconstruction below. They did not cover the entire proposed parameter matrix.
+ 
+-Historical enthalpy reconstruction used nine droplet-size groups from the recorded Harwell-derived distribution after 1,500 carrier iterations. Each group represented a prescribed diameter and mass-flow weight. Each of two historical inlet families contained five full-flow enthalpies, 1440–1760 kJ/kg, and a reduced-flow 1600 kJ/kg condition. The poly-hexcore reconstruction repeated the five full-flow conditions from fresh initial fields. Here, enthalpy identified prescribed phase feeds, injection speeds and droplet distributions; energy and phase change were not solved. Recovered liquid and vapour densities remained fixed at 881.2109 and 5.7974 kg/m$^{3}$, distinct from Table 2. The 1,500-iteration horizon deliberately reproduced the historical procedure for an output-sensitivity comparison; it was not a convergence criterion.
++Historical enthalpy reconstruction used nine droplet-size groups from the recorded Harwell-derived distribution after 1,500 carrier iterations. Each group represented a prescribed diameter and mass-flow weight. Each of two historical inlet families contained five full-flow enthalpies, 1440–1760 kJ/kg, and a reduced-flow 1600 kJ/kg condition. The poly-hexcore reconstruction repeated the five full-flow conditions from fresh initial fields. Here, enthalpy identified prescribed phase feeds, injection speeds and droplet distributions; energy and phase change were not solved. Recovered liquid and vapour densities remained fixed at 881.2109 and 5.7974 kg/m$^{3}$, distinct from Table 2. The 1,500-iteration horizon deliberately reproduced the historical procedure for an output-sensitivity comparison; it was not a convergence criterion. Appendix E specifies the nine-group diameters, weights, release surface and velocity prescription.
+ 
+ One-way tracking retained step-length factor 5, pressure and virtual-mass forces. The inlet and steam outlet were escape boundaries, the bottom trapped particles, and vessel walls reflected them with normal/tangential restitution coefficients 0.3/0.8. Aggregate escaped mass could therefore include inlet escape and was not necessarily steam-outlet carryover.
+ 
+--- before/05-references-and-appendices.md
++++ cycle-02/05-references-and-appendices.md
+@@ -30,7 +30,7 @@
+ 
+ Yokkaichi, S. (2026). *Development of a geothermal separator CFD model: liquid transport, collection and wall-film behaviour* [Unpublished draft Part IV Research Project Report, 14 October 2026]. The University of Auckland.
+ 
+-Zarrouk, S. J., & Purnanto, M. H. (2015). Geothermal steam–water separators: Design overview. *Geothermics, 53*, 236–254. [Publisher record](https://www.sciencedirect.com/science/article/abs/pii/S0375650514000637). [DOI](https://doi.org/10.1016/j.geothermics.2014.05.009).
++Zarrouk, S. J., & Purnanto, M. H. (2015). Geothermal steam–water separators: Design overview. *Geothermics, 53*, 236–254. [Publisher record](https://www.sciencedirect.com/science/article/abs/pii/S0375650514000637). [DOI](https://doi.org/10.1016/j.geothermics.2014.05.009). The supplied PDF prints 2014, which is retained in the reproduced literature citations and figure credits; the publisher lists the same article in the January 2015 issue. Both dates here identify this DOI.
+ 
+ 
+ ## Appendix A. Project evidence register
+@@ -108,11 +108,11 @@
+ | Final EWF mesh comparison | Selected 195 ms development and supplementary bulk-active stages are distinguished. Final whole-separator closure is unverified. | Matched endpoint fields and complete bulk, film, particle, source and inventory accounts. |
+ | Proposed-design continuation | Verified 150 ms basic-EWF endpoints are reported; later 500 ms completion is not claimed. | Verified terminal results from the later continuation, with matched preparation and settings. |
+ | Historical reconstruction | Incomplete-as-separated convention; unrecovered July binary/tracking cap; Fluent 2024 R2 versus 2025 R2. | Matched settings, boundary-specific escape rates and resolved fates before exact-replication or physical-efficiency claims. |
+-| Bibliography | Missing entries were restored from the submitted first-report PDF. Its incomplete publication details and the design-overview year conflict remain visible. | Check original publication records; retain secondary-source wording for Pointon et al. and Arifien and Zarrouk unless their originals are consulted. |
++| Bibliography | Missing entries were restored from the submitted first-report PDF. Some publication details remain incomplete; the design-overview date difference is explained in its reference entry. | Complete the remaining publication details; retain secondary-source wording for Pointon et al. and Arifien and Zarrouk unless their originals are consulted. |
+ 
+ *Table C.1. Evidence gaps that affect the strength of the final claims.*
+ 
+-Case-specific numerical controls, boundary definitions, mesh statistics and all nine droplet injections remain in the linked records. The reconstruction settings audit provides the traceable injection and model settings for the later DPM comparison. Missing settings are not assumed to be software defaults. Reused figures require creator/source credit in their captions, even where the surrounding scientific account presents the work as one project.
++Case-specific numerical controls, boundary definitions and mesh statistics remain in the linked records. Appendix E reproduces the principal nine-group injection inputs used in the historical-output comparison. The reconstruction settings audit provides the traceable injection and model settings for the later DPM comparison. Missing settings are not assumed to be software defaults. Reused figures require creator/source credit in their captions, even where the surrounding scientific account presents the work as one project.
+ 
+ ## Appendix D. Model assumptions and their purposes
+ 
+@@ -143,3 +143,36 @@
+ *Table D.2. Reference dimensions and recorded extents used to interpret the central comparisons. Sources: reference geometry, truncated-mesh inspection, contact collector, direct film drain, full-mesh mapping, matched collector setup and inlet parity audit.* 
+ 
+ The available spatial checks do not establish complete CAD parity across all families. Dimensioned as-built views of the proposed blocker and ramp are not supplied here; those cases support only the reported development endpoints, not a reproducible geometric design comparison.
++
++
++## Appendix E. Particle inputs for the historical enthalpy reconstruction
++
++Each group was an inert, uniform-diameter surface injection over the mixed inlet boundary, in the stationary global frame. Release positions were not randomised. The prescribed velocity was normal to each inlet face, with the same magnitude for all nine groups at a given enthalpy (Table E.2). Turbulent dispersion was disabled. The recorded Stokes–Cunningham drag law with Cunningham factor 1.0 was retained to reproduce the historical settings; its applicability over this diameter range was not established by the reported evidence. These inputs define the numerical reconstruction, not a measured inlet droplet population or a qualified drag model for performance prediction.
++
++| **Group** | **Mass weight (%)** | **1440** | **1520** | **1600** | **1680** | **1760** |
++|---:|---:|---:|---:|---:|---:|---:|
++| 1 | 0.1625 | 7.149 | 6.2979 | 5.6214 | 5.0712 | 4.616 |
++| 2 | 0.6675 | 35.745 | 31.489 | 28.107 | 25.356 | 23.08 |
++| 3 | 0.8300 | 71.49 | 62.979 | 56.214 | 50.712 | 46.16 |
++| 4 | 1.6700 | 142.98 | 125.96 | 112.43 | 101.42 | 92.32 |
++| 5 | 1.6700 | 214.47 | 188.94 | 168.64 | 152.14 | 138.48 |
++| 6 | 20.0000 | 443.23 | 390.47 | 348.52 | 314.42 | 286.19 |
++| 7 | 25.0000 | 714.89 | 629.79 | 562.14 | 507.12 | 461.6 |
++| 8 | 25.0000 | 1072.3 | 944.68 | 843.2 | 760.68 | 692.4 |
++| 9 | 25.0000 | 2073.2 | 1826.4 | 1630.2 | 1470.7 | 1338.6 |
++
++*Table E.1. Diameters in µm for each enthalpy column (kJ/kg), rounded to five significant figures. Group weights are percentages of represented injected liquid mass and sum to 100%; they are not parcel-count fractions. The recorded six-decimal mass-flow inputs produce only rounding-level differences in the first two weights at 1760 kJ/kg.*
++
++| **Enthalpy (kJ/kg)** | **Face-normal injection speed (m/s)** | **Total represented particle flow (kg/s)** |
++|---:|---:|---:|
++| 1440 | 21.591272 | 132.76 |
++| 1520 | 24.228170 | 124.84 |
++| 1600 | 26.865069 | 116.92 |
++| 1680 | 29.501968 | 109.00 |
++| 1760 | 32.135537 | 101.09 |
++
++*Table E.2. Prescribed particle speed and represented mass-flow basis. Multiply a Table E.1 mass fraction by the corresponding total here to recover each group's mass-flow weight, subject to the stated rounding.*
++
++The carrier retained the full Eulerian phase feeds listed in Table D.1. Because this reconstruction used one-way diagnostic tracking, the particle weights in Table E.2 were not added as an extra physical liquid feed. Enthalpy changed the prescribed phase feeds, particle diameters and injection speed; it did not activate energy or phase-change calculations. Particle boundary fates and tracking controls are stated in Section 3.6. The exact July case binary and original tracking cap remain unrecovered, so these recovered inputs do not establish byte-identical historical replication.
++
++Sources: recovered settings audit, enthalpy reconstruction protocol, exact 1600 kJ/kg injection readbacks and case-specific reconstruction inputs. The completed result records verify that the saved injection readbacks matched those inputs.

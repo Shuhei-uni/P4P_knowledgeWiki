@@ -1,0 +1,76 @@
+{
+  "date": "2026-10-17",
+  "scope": "Post-export Markdown and figure adversarial review; no simulation, LaTeX or PDF update",
+  "review_passes": [
+    "Independent mass/film and mesh/particle source audits, plus process-rationale review",
+    "Corrections checked against records and figure numeric provenance",
+    "Final marker/process read and consistency checks"
+  ],
+  "body_words": 11152,
+  "section_words": {
+    "01-introduction-and-literature-review.md": 2788,
+    "02-model-and-methods.md": 2909,
+    "03-results.md": 3861,
+    "04-discussion-conclusions-and-future-work.md": 1594
+  },
+  "assembled_markdown_matches": true,
+  "protected_files_unchanged": 31,
+  "unchanged_literature_and_figure5_assets": [
+    "Project/Final research report/AndyReport/figures/results-described-early-development.png",
+    "Project/Final research report/AndyReport/figures/results-described-early-development.provenance.json",
+    "Project/Final research report/AndyReport/figures/literature/literature-1.jpeg",
+    "Project/Final research report/AndyReport/figures/literature/literature-2.jpg",
+    "Project/Final research report/AndyReport/figures/literature/purnanto-2013-model-scope.png",
+    "Project/Final research report/AndyReport/figures/literature/literature-3.jpeg"
+  ],
+  "figures": [
+    {
+      "figure": "results-direct-film-drain",
+      "png_sha256": "04f2cc067aa7d1305cd9128d6bf039b815414d05b856ae0cc72f39b116a867d7",
+      "source_hashes_checked": 4,
+      "visual_review": "Labels, units, legend, clipping, and caption checked",
+      "verification": "Full-precision values reproduced from original figure provenance; original image hash checked. Upstream analysis summary is absent locally, so no fresh native-evidence verification is claimed."
+    },
+    {
+      "figure": "two-start-comparison",
+      "png_sha256": "9d36eca2c7edd6f5b8b799d5e1f021059aa05dc7b20c9384858eddb15dd911e5",
+      "source_hashes_checked": 12,
+      "visual_review": "Labels, units, legend, clipping, and caption checked",
+      "verification": "Source hashes match original comparison; identical stitching and numeric formulas; all 1000 points per curve retained; endpoint values equal original audited summary."
+    },
+    {
+      "figure": "field-refinement",
+      "png_sha256": "f1a25b90fe15b653a427647c6943183a8d744267fefee38b5c66634ce91abd51",
+      "source_hashes_checked": 6,
+      "visual_review": "Labels, units, legend, clipping, and caption checked",
+      "verification": "Every saved comparison field equals the source CSV; plotted x/y arrays use the same rows and formulas as the original generator, without recalculating or modifying field comparisons."
+    }
+  ],
+  "all_local_links_exist": true,
+  "local_link_occurrences_checked": 186,
+  "source_hashes": {
+    "draft/00-front-matter.md": "7b18acc08cc0ec01e911b0bf23cc789c877a901811e2b1344141aef8ba3a999b",
+    "draft/01-introduction-and-literature-review.md": "b18573b1628e6b59cf126d0c6b643bf987941e88a7ebdb2453ed9ce57e345a0b",
+    "draft/02-model-and-methods.md": "9f35cf681ac9b77b2ddc831cb5139869b818040338d4cfc14e3373fd088dfdf7",
+    "draft/03-results.md": "e3989eadd286a1dc37b9b1e6a44b22c62100ea6479999e12a06d577a0bf80830",
+    "draft/04-discussion-conclusions-and-future-work.md": "f2b82558f6aa7ac396fd7c8ceeb1da6fd48080d4c07d8a045c0218b357a77707",
+    "draft/05-references-and-appendices.md": "aefe177b0e56c941da818f456dba1055ab543d82ed7f77483c0fb0bd4ddc0c27",
+    "draft/draft-v1.md": "b3245b43f794376893366ba8ec2abc0a6eb5e62e6173d6dbb9c1daae424a9980",
+    "review/project-findings-and-report-claims.md": "af1ee60ba5e8dd514538a4c82b50e1a4494da3bec05a895df988a25739f6fca7"
+  },
+  "last_export": {
+    "body_pages": 28,
+    "total_pages": 44,
+    "applies_to": "PDF before this review; current Markdown page count not measured",
+    "sha256": "9313802dbdc1ea8e6f84bf6297c2a0327903fac9020188017014f12522334fcc"
+  },
+  "remaining_limits": [
+    "No qualified, stationary, mesh-independent and physically validated whole-separator state",
+    "Tet/poly-hexcore fluid-domain discrepancy and unequal tracking workloads",
+    "Incomplete particle fates and aggregate rather than boundary-specific escape",
+    "Final complete bulk-film-particle accounting unverified",
+    "Protected literature contains prospective physical-validation wording and unresolved reference details",
+    "Figure 6 faithfully replotted from partner provenance; upstream numeric analysis summary absent locally",
+    "No rerun of CFD or new recovery of remote binary evidence"
+  ]
+}

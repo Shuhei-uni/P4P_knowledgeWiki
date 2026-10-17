@@ -1,0 +1,92 @@
+{
+  "reviewers": [
+    "bounded_c2_reader",
+    "bounded_c2_examiner"
+  ],
+  "issues": [
+    {
+      "id": "C2-R1-1",
+      "role": "Engineering reader",
+      "location": "Sections 3.6, 5.7",
+      "passage": "included five matched operating points; five coupled-DPM cases",
+      "criticism": "Operating points unidentified and potentially confused with enthalpy sweep.",
+      "confidence": "High",
+      "smallest_correction": "Name points and distinguish sweeps.",
+      "decision": "accepted",
+      "evidence": [
+        "Project/experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/results.md:46\u201352"
+      ],
+      "action": "Specified four 2.5% points at 20.11, 23.46, 26.81 and 32.14 m/s and the 26.81 m/s 5% point. Distinguished these from enthalpy reconstruction."
+    },
+    {
+      "id": "C2-R1-2",
+      "role": "Engineering reader",
+      "location": "Protected Section 2.3",
+      "passage": "direct validation against field measurements, the gap this project addresses",
+      "criticism": "Broader validation scope than completed numerical work.",
+      "confidence": "Medium",
+      "smallest_correction": "Align transition with completed model-development scope.",
+      "decision": "accepted via adjacent clarification; protected phrase retained",
+      "evidence": [
+        "Project/Final research report/AndyReport/draft/02-model-and-methods.md, Section 4.4",
+        "Project/Final research report/AndyReport/draft/04-discussion-conclusions-and-future-work.md, Section 7.1"
+      ],
+      "action": "Added transition at Methods opening identifying completed numerical/model-development scope and lack of physical validation. No edit to protected opening."
+    },
+    {
+      "id": "C2-R2-1",
+      "role": "CFD examiner",
+      "location": "Protected Section 2.2",
+      "passage": "99.995% efficiency, 100 t/h steam, 5 kg/h carryover",
+      "criticism": "Output composition does not specify incoming-liquid capture fraction.",
+      "confidence": "High",
+      "smallest_correction": "Clarify basis outside protected text if necessary.",
+      "decision": "accepted via adjacent clarification; source wording retained",
+      "evidence": [
+        "/Users/andy/Desktop/P4P/Literature/Rizaldy et al. (2016), Liquid Carryover in Geothermal Steam-Water Separators.pdf, page 2",
+        "cycle-01/reviews-and-decisions.json, C1-R2-3"
+      ],
+      "action": "Methods opening now states the implied outlet dryness and why incoming-liquid capture cannot be inferred. No silent relabelling of original source and no protected-text edit."
+    },
+    {
+      "id": "C2-R2-2",
+      "role": "CFD examiner",
+      "location": "Section 3.6 and Appendix C",
+      "passage": "nine droplet-size groups; all nine droplet injections remain in linked records",
+      "criticism": "Diameters, weights and release rules absent from report.",
+      "confidence": "High omission; moderate interpretive effect",
+      "smallest_correction": "Compact appendix with injection inputs and unrecovered inputs explicit.",
+      "decision": "accepted",
+      "evidence": [
+        "Project/experiments/phase-10-single-inlet-mesh-convergence/replication1600-settings-audit.md",
+        "Project/experiments/phase-10-single-inlet-mesh-convergence/replication-enthalpy-sweep.md",
+        "PyAnsys/output/phase10-single-inlet-mesh-convergence/replication1600-M04/spiral-reference/exact-injection-readbacks.json",
+        "PyAnsys/output/phase10-single-inlet-mesh-convergence/replication-enthalpy-M04/job-spec.json"
+      ],
+      "action": "Added Appendix E: all 45 diameters, group mass weights, speeds, represented mass rates, surface/frame, no randomisation/dispersion, inherited drag, one-way interpretation and historical provenance limits. Verified totals and weights without new simulation."
+    },
+    {
+      "id": "C1-V1-1",
+      "role": "Cycle 1 verifier follow-up",
+      "location": "Protected literature citations vs bibliography",
+      "passage": "Zarrouk and Purnanto (2014) vs 2015",
+      "criticism": "Same-article reference identity unclear.",
+      "confidence": "High",
+      "smallest_correction": "Identify publication and reconcile reference traceability.",
+      "decision": "accepted",
+      "evidence": [
+        "citation-identity-check.json"
+      ],
+      "action": "Added bibliography note: supplied PDF prints 2014; same DOI appears in publisher January 2015 issue. Kept copied citations intact; updated Appendix C to reflect resolved identity."
+    }
+  ],
+  "optional_style": "No optional preferences retained as material issues.",
+  "isolation_disclosure": "Both reviewers disclosed automatic repository instructions and project-related memory summaries, with no outside sources accessed or used.",
+  "body_words": 11727,
+  "word_count_by_part": {
+    "01-introduction-and-literature-review.md": 2788,
+    "02-model-and-methods.md": 3362,
+    "03-results.md": 3963,
+    "04-discussion-conclusions-and-future-work.md": 1614
+  }
+}

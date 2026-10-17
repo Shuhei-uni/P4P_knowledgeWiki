@@ -1,0 +1,29 @@
+\section{Conclusions and future work}
+
+\subsection{Conclusions against the project objectives}
+
+The project advanced the numerical model needed to investigate inlet conditions, while establishing important limits on the resulting performance estimates. The four original objectives were addressed to different degrees:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Reproduce the existing model and establish a validated baseline.} Model settings, inlet loading and particle calculations were reconstructed, and conditional historical-output agreement was obtained. Mesh and iteration studies exposed continuing inventory, pressure and particle-fate dependence. A traceable comparison baseline was developed, but a numerically adequate and independently validated operating baseline was not established.
+\item
+  \textbf{Implement realistic two-phase inlet conditions across flow regimes.} Separate liquid and vapour regions implemented an imposed stratified inlet with liquid on the outer-wall side. Comparisons demonstrated an effect on retention and routing. The work did not extend to a validated range of annular, slug and other inlet regimes; the implemented distribution remains a prescribed approximation.
+\item
+  \textbf{Assess inlet effects on internal flow, pressure and separation across operating conditions.} Loading, enthalpy and inlet-representation studies produced field, pressure, inventory and outlet comparisons. Wall-film modelling added explicit transport and removal routes, with useful local accounting passes. Continuing numerical development and unresolved particle fates prevented these observations from establishing physical separation-efficiency or pressure-loss predictions.
+\item
+  \textbf{Identify influential parameters and inform optimisation.} The studies identified sensitivity to startup, solver treatment, collection strength, wall treatment, outlet resistance and tracking horizon. Controlled drainage and analytical resistance tests verified useful components. The evidence informs further model development, but does not establish a universal parameter ranking or an optimum separator design.
+\end{enumerate}
+
+The main scientific contribution is the connection between these capabilities and their required checks. Residual reduction, correct source application, conservative local transport and functional drainage were each achieved. They did not consistently coincide with stationary operating inventories, complete liquid routing and demonstrated spatial independence. A future performance claim must assess those requirements together.
+
+\subsection{Priorities for future work}
+
+The first priority is to assess the developed film cases through a complete liquid mass balance. Bulk, particle and film inventories must use compatible transfer definitions, counting each internal transfer once and identifying all external removal. Compare matched film ages and assess bulk-active extensions separately. Establish whether removal approaches inflow without inventory drift, then test sensitivity to reciprocal film--bulk momentum coupling. If physical transient behaviour is required, all stores must evolve on a compatible physical clock; frozen-bulk film time cannot supply that evidence.
+
+For resolved drainage, retain the verified resistance law while testing compatible hydrostatic initialisation in a simple geometry. Separate first-iteration rest preservation from eventual convergence. Then constrain downstream head and resistance independently of a desired numerical balance, and assess their effect in the separator. This connects component verification to the unresolved full-domain response without assuming that one pressure adjustment will fix it.
+
+Particle work should locate incomplete trajectories, separate inlet escape from steam-outlet escape, and test tracking sensitivity before assigning physical fates. Mesh-cost comparisons also require matched parcel workloads and tracking settings.
+
+Before mesh and runtime comparisons, resolve the geometry discrepancy. The tetrahedral and poly-hexcore cases were intended to represent the same fluid domain, so their inferred volume difference requires a direct comparison of region volumes, bounds, inlet and outlet dimensions, and included lower-vessel volume. This is a prerequisite for isolating any effect of mesh construction on output or runtime. Once a sufficiently settled, conservative reference exists, repeat matched mesh and applicable timestep comparisons using pressure, routing and field quantities. Broader inlet-regime and geometry comparisons can then address the original optimisation objective. Finally, physical validation should compare compatible measurements of carryover, brine discharge and pressure loss, with uncertainty reported for both measurements and predictions.

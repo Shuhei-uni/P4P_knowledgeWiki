@@ -1,0 +1,18 @@
+{
+  "source": "/Users/andy/Desktop/P4P/Literature/Purnanto et al. (2013), CFD Modelling of Two-Phase Flow inside Geothermal Steam-Water Separators.pdf",
+  "source_sha256": "9f9151f9430a16e2aa49063a8cfd29191b5dae873602025e6cfbcab0de2933ca",
+  "page": 5,
+  "source_figure": 7,
+  "report_figure": 1,
+  "asset": "../figures/literature/purnanto-2013-model-scope.png",
+  "asset_sha256": "eafe005fa4de5faef01f2a397fa1cfa19a33ad990be040020084e7e1cf01d480",
+  "extraction": "Page rendered at 432 dpi; cropped to diagram, excluding original caption. Diagram unaltered.",
+  "crop_points_top_left": [
+    315,
+    278,
+    505,
+    457
+  ],
+  "caption": "Computational scope of the Purnanto et al. (2013) separator model. The domain ends at the assumed water level, leaving the lower vessel and brine outlet outside the model. Reproduced from Purnanto et al. (2013, p. 5, Figure 7).",
+  "literature_change": "Figure references and captions renumbered 1/2/3 to 2/3/4. All other literature text unchanged."
+}
