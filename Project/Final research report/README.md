@@ -12,8 +12,7 @@ The 14 October 2026 revision makes the central insight explicit: wall capture is
 | --- | --- | --- |
 | Front matter | [Title, abstract, declaration, contents and glossary](<Shuhei Report/draft/00-front-matter.md>) | State the research problem, key results and author information |
 | 1 | [Introduction and literature review](<Shuhei Report/draft/01-introduction-and-literature-review.md>) | Establish liquid transport, collection and film release as the physical basis for the questions |
-| 2 | [Model and methods](<Shuhei Report/draft/02-model-and-methods.md>) | Explain model choices, collection assumptions, procedures and the agent-assisted experiment workflow |
-| 3 | [Results](<Shuhei Report/draft/03-results.md>) | Lead with mesh and inlet findings, then connect accumulation, collection, startup and wall-film behaviour |
+| 2–3 | [Model basis, development methods and results](<Shuhei Report/draft/02-03-model-development-methods-and-results.md>) | Establish the inherited model, then introduce each development method beside its findings and the next question |
 | 4 | [Discussion, conclusions and future work](<Shuhei Report/draft/04-discussion-conclusions-and-future-work.md>) | Connect the findings and identify the next useful model and design comparisons |
 | Supporting material | [References and appendices](<Shuhei Report/draft/05-references-and-appendices.md>) | Retain implementation, case identities, detailed numerical checks, figure provenance and contribution statement |
 | Complete draft | [Combined Markdown report](<Shuhei Report/draft/draft-v1.md>) | The six parts assembled in the same order, with working internal links |

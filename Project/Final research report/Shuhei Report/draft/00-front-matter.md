@@ -57,8 +57,8 @@ I hereby declare that:
 | --- | --- |
 | 1. Introduction | [Part 1](01-introduction-and-literature-review.md#1-introduction) |
 | 2. Literature review | [Part 1](01-introduction-and-literature-review.md#2-literature-review) |
-| 3. Model and methods | [Part 2](02-model-and-methods.md#3-model-and-methods) |
-| 4. Results | [Part 3](03-results.md#4-results) |
+| 3. Inherited model and operating basis | [Combined draft](02-03-model-development-methods-and-results.md#3-inherited-model-and-operating-basis) |
+| 4. Model development and results | [Combined draft](02-03-model-development-methods-and-results.md#4-model-development-and-results) |
 | 5. Discussion | [Part 4](04-discussion-conclusions-and-future-work.md#5-discussion) |
 | 6. Conclusions and future work | [Part 4](04-discussion-conclusions-and-future-work.md#6-conclusions-and-future-work) |
 | References | [References](05-references-and-appendices.md#references) |

@@ -5,6 +5,8 @@
 ## References
 
 
+Ansys, Inc. (2020). *Ansys Fluent Mosaic technology automatically combines disparate meshes with polyhedral elements for fast, accurate flow resolution* [White paper]. <https://www.ansys.com/content/dam/resource-center/white-paper/ansys-fluent-mosaic-technology-wp.pdf>
+
 Ansys, Inc. (2025a). Cell zone conditions (§8.2.7, Defining mass, momentum, energy, and other sources). In *Ansys Fluent user's guide* (Release 2025 R2). <https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_bcs_sec_cell_zones.html#flu_ug_sec_bc_source>
 
 Ansys, Inc. (2025b). Film sub-models (§17.2.1). In *Ansys Fluent theory guide* (Release 2025 R2). <https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_th/flu_th_ewf_sec_film_submodels.html>
@@ -26,6 +28,8 @@ Ansys, Inc. (2025i). Pressure-based solver settings (§37.3, particularly §37.3
 Ansys, Inc. (2025j). Solution strategies for multiphase modeling (§27.8, particularly §§27.8.1.2–1.3 and 27.8.1.7). In *Ansys Fluent user's guide* (Release 2025 R2). <https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_sec_multiphase_solution.html>
 
 Ansys, Inc. (2025k). Wall roughness effects in turbulent wall-bounded flows (§4.18.5). In *Ansys Fluent theory guide* (Release 2025 R2). <https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_th/x1-5720008.164.html>
+
+Ansys, Inc. (2025l). Swirling and rotating flows (§10.3, particularly §§10.3.1.2 and 10.3.4.2.2). In *Ansys Fluent user's guide* (Release 2025 R2). <https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_uns_sec_models_swirl.html>
 
 International Association for the Properties of Water and Steam. (2012). *Revised release on the IAPWS industrial formulation 1997 for the thermodynamic properties of water and steam* (R7-97[2012]). <https://iapws.org/technical-guidance/release/IF97-Rev>
 

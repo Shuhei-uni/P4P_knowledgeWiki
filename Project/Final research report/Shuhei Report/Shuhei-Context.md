@@ -73,7 +73,7 @@ Shuhei recalls no equivalent inventory failure in the earlier tetrahedral refere
 
 Two distinctions keep this explanation tied to the right experiments. The archived 08b settings and fields were successfully transferred to the 997k mesh and save/reopen verified. Its continuation then diverged and crashed after the last printed N10022, while liquid inventory fell slightly. That is a separate failure sequence from the 680k accumulation above, and interpolation had changed the starting distribution. The local Stage 2 cases used a related SIMPLE setup with changed controls, rather than an exact historical replay. Also, the 60k report states still have very high recorded wall y+ and incomplete mesh-quality/layer evidence. Practical improvement and a credible mesh hypothesis remain worth explaining while quantitative accuracy is unresolved.
 
-Evidence: [native mesh and liquid-section comparison](../../Poster/poster-sections/mesh-and-volume-fraction-comparison.md); [Fluent Meshing structure inspection](../../experiments/phase-07a-simplified-purnanto-liquid-removal/mesh-inspection.md); [680k accumulation and later failure](../../experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/direct-student-680k/n4000/results.md); [matched Stage 2 mesh endpoints](../../experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/direct-student-342k/n3000/results.md); [separate exact-08b transfer](../../experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/08b-native997k/run2000-off/results.md). Numerical basis: [Fluent mesh guidance, §7.1.3.3](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_GridTypes.html); [Methods §3.4](draft/02-model-and-methods.md).
+Evidence: [native mesh and liquid-section comparison](../../Poster/poster-sections/mesh-and-volume-fraction-comparison.md); [Fluent Meshing structure inspection](../../experiments/phase-07a-simplified-purnanto-liquid-removal/mesh-inspection.md); [680k accumulation and later failure](../../experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/direct-student-680k/n4000/results.md); [matched Stage 2 mesh endpoints](../../experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/direct-student-342k/n3000/results.md); [separate exact-08b transfer](../../experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/08b-native997k/run2000-off/results.md). Numerical basis: [Fluent mesh guidance, §7.1.3.3](https://ansyshelp.ansys.com/public/Views/Secured/corp/v252/en/flu_ug/flu_ug_GridTypes.html); [Mesh development §4.1](draft/02-03-model-development-methods-and-results.md).
 
 ## 3. SIMPLE and Coupled: numerical closure must be interpreted through the available outlets
 
@@ -85,7 +85,7 @@ The later SIMPLE wall/base accumulation gives a different clue: stronger exclusi
 
 Once an explicit collector was introduced, Coupled became useful within the startup and continuation method. These positions are consistent: Shuhei rejects accepting a numerically settled but physically unsuitable liquid route, while retaining a solver that helps develop a model with the intended collection route represented.
 
-Evidence: [Stage 1 reconstruction findings](../../experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/results.md); [mixed-inlet Coupled account](../../experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f1-one-inlet/results.md); [997k SIMPLE spatial and outlet result](../../experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/direct-student-997k/n3000/results.md); [report Results §§4.2 and 4.9](draft/03-results.md).
+Evidence: [Stage 1 reconstruction findings](../../experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/results.md); [mixed-inlet Coupled account](../../experiments/phase-08-storyline-reconstruction/stage-01-60k-storyline/f1-one-inlet/results.md); [997k SIMPLE spatial and outlet result](../../experiments/phase-08-storyline-reconstruction/stage-02-fine-mesh-simple/direct-student-997k/n3000/results.md); [report Results §§4.2 and 4.9](draft/02-03-model-development-methods-and-results.md).
 
 ## 4. Two-phase inlet: make the assumed liquid arrangement explicit
 
@@ -99,7 +99,7 @@ There are two separate calculations behind the split. Purnanto's reference **197
 
 Thus the small liquid area does not mean little liquid mass. Liquid carries most of the mass but occupies little volume because its density is much greater. The enthalpy fixes the mass split before the CFD solve; it is not a flashing calculation within the energy-disabled model. Later material values slightly change the phase velocities on the retained geometry, so the original design velocity and later nominal 26.81 m/s label have different bases.
 
-Evidence: [inlet development interpretation](../../experiments/phase-01-purnanto-baseline-and-inlet-exploration/interpretation.md); [original split-area derivation](../../experiments/phase-02-parity-reset-and-pre-v2-qualification/purnanto-08c-inlet-loading-sensitivity/inlet-regimes-interpretation.md); [Methods §§3.3.1–3.3.3](draft/02-model-and-methods.md); [split-inlet assumptions](../../../CFD_wiki/wiki/setups/geothermal-boc-separator-two-zone-split-inlet.md).
+Evidence: [inlet development interpretation](../../experiments/phase-01-purnanto-baseline-and-inlet-exploration/interpretation.md); [original split-area derivation](../../experiments/phase-02-parity-reset-and-pre-v2-qualification/purnanto-08c-inlet-loading-sensitivity/inlet-regimes-interpretation.md); [Operating basis §3.3 and inlet development §4.2](draft/02-03-model-development-methods-and-results.md); [split-inlet assumptions](../../../CFD_wiki/wiki/setups/geothermal-boc-separator-two-zone-split-inlet.md).
 
 ### Earlier droplet studies: make clear which liquid each result represents
 
@@ -125,7 +125,7 @@ The different liquid representations require their own collection routes. Bulk l
 
 The poster's continuity reduction is supporting evidence that the development procedure became more manageable. It does not isolate absorber causality because startup and numerical controls also changed, and it is not a percentage mass-balance error. The main contribution is an explicit, inspectable liquid-removal model that enabled the wall studies.
 
-Evidence: [full-geometry scope decision](../../experiments/phase-06-full-geometry-with-brine-pool/conclusion.md); [simplified liquid-removal interpretation](../../experiments/phase-07a-simplified-purnanto-liquid-removal/interpretation.md); [R0 source-inclusive account in Results §4.2](draft/03-results.md); [contact law and collection routes in Methods §3.3.4](draft/02-model-and-methods.md); [later direct-film-drain proof](../../experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/ewf-only-drain/results.md).
+Evidence: [full-geometry scope decision](../../experiments/phase-06-full-geometry-with-brine-pool/conclusion.md); [simplified liquid-removal interpretation](../../experiments/phase-07a-simplified-purnanto-liquid-removal/interpretation.md); [R0 source-inclusive account in §4.5](draft/02-03-model-development-methods-and-results.md); [collection rationale and contact law in §§4.3 and 4.8](draft/02-03-model-development-methods-and-results.md); [later direct-film-drain proof](../../experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/ewf-only-drain/results.md).
 
 ## 6. Startup: learning how to introduce the model and its loading
 
@@ -137,7 +137,7 @@ The shorter method also supported later comparisons. In [5 October, 14:22–16:1
 
 At matched ramp progress, that revised package reduced peak continuity and retained liquid by about 70%, and peak outlet liquid by about 76%. These are useful results of the combined recipe. They do not isolate one setting, and the activation spike and later film-solver failures remain part of the account. The connection to the next stage is that a repeatable saved starting state made comparisons and longer film development possible.
 
-Evidence: [Phase 7.1A interpretation](../../experiments/phase-07-1a-absorber-convergence/interpretation.md); [shortened-startup results](../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/results.md); [report Results §§4.1 and 4.6](draft/03-results.md).
+Evidence: [Phase 7.1A interpretation](../../experiments/phase-07-1a-absorber-convergence/interpretation.md); [shortened-startup results](../../experiments/phase-07-2a-wall-liquid-routing/stage-03-shortened-reconstruction/early-ewf-startup/results.md); [report Results §§4.1 and 4.6](draft/02-03-model-development-methods-and-results.md).
 
 ## 7. Wall–liquid interaction: why wall treatment becomes a central research question
 
@@ -149,7 +149,7 @@ The intended learning is the sensitivity and the need to follow the liquid. The 
 
 The [5 October roughness discussion, 22:53–24:30](../../meetings/otter/2026-10-05-separator-liquid-film-and-roughness-analysis.md) prompted a distinction between a broad sensitivity screen and a material-based reference. Its roughness units are inconsistent; they do not replace the verified **8 mm** screen value. The later [commercial-steel continuation](../../experiments/phase-07-2a-wall-liquid-routing/stage-04-ewf-wall-parameters/commercial-steel/results.md) tested **0.045 mm**, but also restored bulk solves and changed the film step. It supplies a subsequent development step, rather than an isolated roughness result or measured vessel-surface property.
 
-Evidence: [roughness screen](../../experiments/phase-07-2a-wall-liquid-routing/roughness-family/results.md); [matched wall-treatment observations](../../observations/07-wall-liquid-interaction.md); [report Results §§4.3–4.4](draft/03-results.md).
+Evidence: [roughness screen](../../experiments/phase-07-2a-wall-liquid-routing/roughness-family/results.md); [matched wall-treatment observations](../../observations/07-wall-liquid-interaction.md); [report Results §§4.3–4.4](draft/02-03-model-development-methods-and-results.md).
 
 ## 8. Wall film: connect learning from development, release and drainage runs
 
@@ -189,7 +189,7 @@ The contribution of the harness is the ability to carry out and compare a growin
 
 The meetings also explain why that structure became useful. Setup corrections, missing inherited files, uncertain reporting definitions and failed pool treatments made it difficult to choose the next change. In [6 May, 07:52](../../meetings/otter/2026-05-06-wk-8.md), and [17 August, 20:03–20:22](../../meetings/otter/2026-08-17-fluid-dynamics-modeling-meeting.md), the supervisors treated resolving and recording such problems as research progress. The later harness made the questions, comparisons and evidence easier to retain. The report should include failed routes where they explain a decision, rather than reproduce every trial.
 
-Evidence: [current harness card](../../Poster/Fluent_Agent_Harness_Card.html); [workflow ownership](../../../.agents/invocation.md); [comparison design in Methods §3.6](draft/02-model-and-methods.md).
+Evidence: [current harness card](../../Poster/Fluent_Agent_Harness_Card.html); [workflow ownership](../../../.agents/invocation.md); [comparison design in §§4.6 and 4.9](draft/02-03-model-development-methods-and-results.md).
 
 ## 10. Design proposals: act on the wall-liquid path revealed by the studies
 
@@ -226,4 +226,4 @@ Three explanations remain especially useful to test: whether the old mesh smeare
 
 The current [report scope](../README.md) selects the Stage 3 development and a concise account of later release-mechanism and direct-film-drain tests. This document connects those results to the earlier learning without treating every meeting proposal or later campaign as a selected report result. The account concerns Shuhei's development path; Andy's separate later campaigns are not evidence for it. His early replication and shared discussions explain part of the development setting, but their results must remain attributed to their owners.
 
-Reviewed report sources: [01 — Introduction and literature review](draft/01-introduction-and-literature-review.md), [02 — Model and methods](draft/02-model-and-methods.md), [03 — Results](draft/03-results.md), [report scope and revision plan](../README.md), and [Phase 9 question](../../experiments/phase-09-mesh-convergence/CONTEXT.md). Author framing also comes directly from the poster-development chat and the supplied **A1 Landscape — Geothermal Separator Poster — Working Draft (1).png**. The historical extension uses all 16 records in the [Otter meeting index](../../meetings/otter/index.md), including their transcripts. This file records interpretation as of 12 October 2026; future numerical results remain in their experiment owners.
+Reviewed report sources: [01 — Introduction and literature review](draft/01-introduction-and-literature-review.md), [02 — Model and methods](draft/02-03-model-development-methods-and-results.md), [03 — Results](draft/02-03-model-development-methods-and-results.md), [report scope and revision plan](../README.md), and [Phase 9 question](../../experiments/phase-09-mesh-convergence/CONTEXT.md). Author framing also comes directly from the poster-development chat and the supplied **A1 Landscape — Geothermal Separator Poster — Working Draft (1).png**. The historical extension uses all 16 records in the [Otter meeting index](../../meetings/otter/index.md), including their transcripts. This file records interpretation as of 12 October 2026; future numerical results remain in their experiment owners.

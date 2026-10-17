@@ -23,8 +23,7 @@ REPO = Path(__file__).resolve().parents[3]
 REPORT = REPO / "Project/Final research report/Shuhei Report"
 SOURCES = [
     REPORT / "draft/01-introduction-and-literature-review.md",
-    REPORT / "draft/02-model-and-methods.md",
-    REPORT / "draft/03-results.md",
+    REPORT / "draft/02-03-model-development-methods-and-results.md",
     REPORT / "draft/04-discussion-conclusions-and-future-work.md",
 ]
 

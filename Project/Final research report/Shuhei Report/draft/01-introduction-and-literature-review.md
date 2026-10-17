@@ -8,19 +8,21 @@
 
 Geothermal steam–water separators supply dry steam to turbines. Liquid carryover can cause erosion and transport minerals that form deposits. Separator design must therefore consider separation efficiency, pressure drop and operating pressure ([Zarrouk & Purnanto, 2015](https://doi.org/10.1016/j.geothermics.2014.05.009)).
 
-This study develops an inherited computational fluid dynamics (CFD) model of a vertical bottom-outlet cyclone with a spiral inlet. The study follows the liquid path from phase placement at the inlet through wall transport and collection.
+This study develops an inherited computational fluid dynamics (CFD) model of a vertical bottom-outlet cyclone with a spiral inlet, tracing the liquid path from phase placement at the inlet through wall transport and collection. It examines how the cyclone’s geometry and flow behavior influence liquid separation and discharge.
 
 <!-- Evidence: [Study scope](../../../scope.md); [inlet-development interpretation](../../../experiments/phase-01-purnanto-baseline-and-inlet-exploration/interpretation.md); [author's development context and meeting sources](../Shuhei-Context.md#how-the-project-understanding-developed); [absorber-development context](../../../experiments/phase-07-1a-absorber-convergence/CONTEXT.md). -->
 
 ### 1.2. Problem in the inherited model
 
-The simplified geometry omits the lower brine-discharge path. A closed bottom leaves the liquid without an intended exit; opening the whole lower boundary can also allow steam to escape through it. The model needs a liquid-collection treatment that preserves the steam route.
+In a working separator, the spiral inlet sets the incoming steam–water mixture into rotation. Liquid moves towards the vessel wall, where it can form a film and drain towards the brine pool below. The collected brine leaves through a discharge pipe, while steam leaves through a separate internal pipe (Figure 2). Some wall liquid can also return to the steam as droplets. Predicting separation therefore requires an account of what happens to liquid after it reaches the wall, as well as how it leaves the vessel.
 
-Liquid reaching the wall is only one stage of separation. A lower liquid flow through the steam outlet can accompany greater collection, continued storage or transfer into a wall film. The model must therefore track liquid destinations alongside outlet flow to assess what each change achieves.
+The inherited CFD geometry omits the brine pool and discharge pipe, leaving a closed lower wall. Liquid can reach the base, but cannot drain out through it. With liquid continuously entering and no collection treatment, liquid must accumulate within the model or leave through the steam outlet. Simply opening the lower boundary does not ensure separate liquid discharge, because steam can also escape through it. The simplified geometry therefore lacks a route that removes collected liquid while retaining the intended steam path.
+
+A second limitation concerns liquid at the vessel wall. The inherited formulation represents steam and liquid through a bulk Mixture field, without a separate model of an evolving wall film. Purnanto et al. (2013) also tracked injected droplets using the Discrete Phase Model (DPM) to estimate outlet steam quality. These trajectories describe droplet motion through the calculated flow, but do not establish how deposited liquid forms a film, travels along the wall, accumulates or is released back into the steam. Ordinary wall boundary conditions affect the bulk flow, but do not by themselves resolve these film processes.
+
+Together, these limitations leave the liquid path incomplete between wall capture and final discharge. A low liquid flow through the steam outlet may reflect storage on the wall or at the base rather than sustained collection. Droplet trajectories alone also cannot show whether liquid reaching a wall remains there, drains away or later returns to the steam. The model must distinguish liquid transport, storage, release and removal before its outlet predictions can support an assessment of separator performance.
 
 <!-- Evidence: [Model boundary](../../../model.md). -->
-
-A virtual collector, called an absorber, and reduced-feed startup enabled roughness and Eulerian Wall Film (EWF) studies after unsuccessful full-geometry drainage trials.
 
 <!-- Evidence: [Verified early absorber](../../../experiments/phase-07-1a-absorber-convergence/baseline-v2-virtual-liquid-outlet/results.md); [selected case history](../../../experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/case-history-N45606.md); [full-geometry scope decision](../../../experiments/phase-06-full-geometry-with-brine-pool/conclusion.md); historical lower-boundary dilemma in [29 April, 04:04–06:36](../../../meetings/otter/2026-04-29-wk-7-steam-liquid-separator-analysis.md). -->
 
@@ -28,22 +30,23 @@ A virtual collector, called an absorber, and reduced-feed startup enabled roughn
 
 ### 1.3. Research aim and questions
 
-The aim is to develop and assess the separator model's liquid-transport and collection paths. The longer-term purpose is to predict separation efficiency and pressure drop. The present work addresses four questions:
+The aim is to develop the inherited separator CFD model and assess whether it gives a numerically consistent and physically credible account of liquid transport and collection. The investigation addresses three questions:
 
-1. How do mesh representation and inlet phase placement affect liquid distribution and retention near the wall?
-2. How can numerical collection and staged startup provide starting fields for wall studies?
+1. How do mesh representation and inlet phase placement affect the predicted liquid distribution, retention near the wall and drainage?
+
+2. Can the inherited model be developed into a credible CFD model of the separator?
+
 3. How do wall roughness and wall-film modelling affect liquid transport, storage, release and collection?
-4. What numerical and liquid-accounting evidence supports these predictions, and what remains necessary for field validation?
+
+Model credibility requires both numerical consistency and agreement with physical behaviour. Continuity residuals and liquid mass balances assess numerical consistency, while liquid inventories, discharge paths and predicted liquid-removal efficiency must also be physically reasonable. Efficiency comparisons must use the same definition of liquid removal and comparable operating conditions; outlet steam quality alone is a different measure. Agreement with measured separator performance provides a stronger test of physical credibility than a plausible efficiency value alone. The present work assesses progress against these criteria, while incomplete liquid accounting and the absence of a matched field comparison limit the conclusions.
 
 ### 1.4. Scope and contribution
 
-The study focuses on the simplified primary separator model. Mesh and inlet comparisons lead into collector development and studies of startup and wall treatment. Later cases examine film development up to 500 ms, release mechanisms and direct drainage. Downstream equipment, mineral chemistry and optimum operating pressure are outside the simulated scope.
+To address these questions, the study follows the liquid path through the simplified separator model. Mesh and inlet comparisons assess how liquid reaches and remains near the wall. Collector development addresses the missing discharge route, supported by startup procedures that allow the model to reach the intended feed conditions. Wall-roughness and wall-film studies then examine how captured liquid is stored, transported, released or drained. Downstream equipment, mineral chemistry and optimum operating pressure are outside the simulated scope.
 
 <!-- Evidence: [Study overview](../../../index.md); [selected case history](../../../experiments/phase-07-2a-wall-liquid-routing/stage-02-combined-ewf-roughness/case-history-N45606.md). -->
 
-The contribution combines checked collection and startup procedures with evidence of how model choices affect liquid delivery, storage and removal. The comparisons assess model development rather than validated separator performance; refinement of the combined model remains incomplete. Appendix A.2 defines the controlled reconstructions.
-
-Figure 1 maps the liquid destinations examined across separate configurations. Transfer to film or droplets changes the representation of liquid within the vessel; collector and drain treatments remove liquid from the model. Released droplets must be tracked separately to establish their destinations. During frozen-bulk film tests, reciprocal depletion of the bulk liquid is not advanced.
+Figure 1 brings these investigations together by distinguishing liquid transfer within the vessel from removal out of the model. Liquid entering a wall film can remain in storage, drain away or return to the steam as droplets. The routes shown were examined in separate configurations; they do not represent one fully coupled, validated model.
 
 ![Conceptual overview of bulk liquid, wall-film storage, released droplets and external removal routes](../figures/report-liquid-destinations-overview.png)
 
@@ -51,7 +54,7 @@ Figure 1 maps the liquid destinations examined across separate configurations. T
 
 <!-- Overview basis: Sections 3.2–3.3, 4.7, 4.10–4.11 and 5.3–5.6; [editable figure and source record](../figures/report-liquid-destinations-overview.provenance.json). No arrow represents a measured rate or proven final droplet fate. -->
 
-Section 3 describes the model and comparisons. Section 4 asks how liquid reaches the wall, where it can go and what wall treatment changes. Sections 5–6 connect these findings to collection and the evidence needed for performance prediction.
+The contribution is a set of checked collection and startup procedures, together with comparisons that show how model choices affect liquid delivery, storage and removal. These provide a basis for further model development, while incomplete liquid accounting and combined-model refinement limit performance prediction. The following literature review examines the prior methods and assumptions that inform this approach.
 
 ## 2. Literature review
 

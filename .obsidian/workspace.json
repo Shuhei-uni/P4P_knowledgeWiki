@@ -11,12 +11,26 @@
             "id": "a9de90bdac58e6d5",
             "type": "leaf",
             "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Project/Final research report/Shuhei Report/draft/02-03-model-development-methods-and-results.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "02-03-model-development-methods-and-results"
+            }
+          },
+          {
+            "id": "dfccf2aefa0ddd02",
+            "type": "leaf",
+            "state": {
               "type": "pdf",
               "state": {
-                "file": "Project/Final research report/Shuhei Report/main.pdf"
+                "file": "Project/Final research report/2026 P4P Final Report Rubric Students-1.pdf"
               },
               "icon": "lucide-file-text",
-              "title": "main"
+              "title": "2026 P4P Final Report Rubric Students-1"
             }
           }
         ]
@@ -188,6 +202,12 @@
   },
   "active": "a9de90bdac58e6d5",
   "lastOpenFiles": [
+    "Project/Final research report/Rough Guidance.md",
+    "Project/Final research report/Shuhei Report/draft/02-03-model-development-methods-and-results.md",
+    "Project/Final research report/Shuhei Report/draft/02-model-and-methods.md",
+    "Project/Final research report/2026 P4P Final Report Rubric Students-1.pdf",
+    "Project/Final research report/Shuhei Report/draft/01-introduction-and-literature-review.md",
+    "Project/Final research report/Shuhei Report/main.pdf",
     "Project/Final research report/Shuhei Report/main.lot",
     "Project/Final research report/Shuhei Report/main.aux",
     "Project/Final research report/Shuhei Report/main.toc",
@@ -195,18 +215,13 @@
     "Project/Final research report/Shuhei Report/main.log",
     "Project/Final research report/Shuhei Report/figures/methods-experiment-workflow.png",
     "Project/Final research report/Shuhei Report/literature-figure-shortlist.md",
-    "Project/Final research report/Shuhei Report/main.pdf",
-    "Project/Final research report/Rough Guidance.md",
     "Project/Final research report/Shuhei Report/figures/methods-coarse-film-time-reference.provenance.json",
     "Project/Final research report/Shuhei Report/figures/methods-coarse-film-time-reference.png",
     "Project/Final research report/Shuhei Report/draft/03-results.md",
     "Project/Final research report/Shuhei Report/main.tex",
-    "Project/Final research report/Shuhei Report/draft/02-model-and-methods.md",
     "Project/Final research report/Shuhei Report/ESB_titlepage.tex",
-    "Project/Final research report/Shuhei Report/ESB_preamble.sty",
     "Project/Final research report/Shuhei Report/draft/04-discussion-conclusions-and-future-work.md",
     "Project/Final research report/Shuhei Report/draft/draft-v1.md",
-    "PyAnsys/output/phase9-ewf-server1-680k/20261009/selected-pairs-job-latest.json",
     "Project/experiments/phase-10-proposed-design/angled-slit213k/planv1-500ms/setup.md",
     "Project/experiments/phase-10-proposed-design/angled-slit213k/planv1-500ms/results.md",
     "Project/experiments/phase-10-proposed-design/vertical-slit154k/planv1-500ms/results.md",
@@ -214,7 +229,6 @@
     "Project/experiments/phase-10-proposed-design/server5-planv1-500ms.md",
     "Project/Final research report/Shuhei Report/draft/05-references-and-appendices.md",
     "Project/experiments/phase-09-mesh-convergence/server6-997k/nonzero-film-initialisation.md",
-    "Project/Final research report/Shuhei Report/draft/01-introduction-and-literature-review.md",
     "CFD_wiki/AGENTS.md",
     "CFD_wiki/geothermal_research_paper_dictionary (1).md",
     "CFD_wiki/research_paper_dictionary_lookup.md",
