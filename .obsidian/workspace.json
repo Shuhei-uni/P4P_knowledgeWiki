@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Project/Final research report/Shuhei Report/draft/04-discussion-conclusions-and-future-work.md",
+                "file": "Project/Final research report/Shuhei Report/draft/01-introduction-and-literature-review.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "04-discussion-conclusions-and-future-work"
+              "title": "01-introduction-and-literature-review"
             }
           },
           {
@@ -205,12 +205,15 @@
     "Project/Final research report/Shuhei Report/draft/02-03-model-development-methods-and-results.md",
     "Project/Final research report/Shuhei Report/draft/04-discussion-conclusions-and-future-work.md",
     "Project/Final research report/Shuhei Report/draft/01-introduction-and-literature-review.md",
+    "Project/Final research report/Shuhei Report/figures/literature/single-flash-plant-2017.gif",
+    "Project/Final research report/Shuhei Report/figures/literature/eia-geothermal-plant-types.jpg",
+    "Project/Final research report/Shuhei Report/main.pdf",
     "Project/Final research report/Shuhei Report/draft/00-front-matter.md",
+    "Project/Final research report/Shuhei Report/draft/05-references-and-appendices.md",
     "Project/Final research report/Shuhei Report/draft/03-results.md",
     "Project/Final research report/Shuhei Report/draft/02-model-and-methods.md",
     "Project/Final research report/Rough Guidance.md",
     "Project/Final research report/2026 P4P Final Report Rubric Students-1.pdf",
-    "Project/Final research report/Shuhei Report/main.pdf",
     "Project/Final research report/Shuhei Report/main.lot",
     "Project/Final research report/Shuhei Report/main.aux",
     "Project/Final research report/Shuhei Report/main.toc",
@@ -228,7 +231,6 @@
     "Project/experiments/phase-10-proposed-design/vertical-slit154k/planv1-500ms/results.md",
     "Project/experiments/phase-10-proposed-design/vertical-slit154k/planv1-500ms/setup.md",
     "Project/experiments/phase-10-proposed-design/server5-planv1-500ms.md",
-    "Project/Final research report/Shuhei Report/draft/05-references-and-appendices.md",
     "Project/experiments/phase-09-mesh-convergence/server6-997k/nonzero-film-initialisation.md",
     "CFD_wiki/AGENTS.md",
     "CFD_wiki/geothermal_research_paper_dictionary (1).md",
@@ -239,14 +241,11 @@
     "CFD_wiki/wiki/synthesis/separator-cfd-verification-and-validation-workflow.md",
     "CFD_wiki/wiki/synthesis/mesh-quality-and-resolution-patterns.md",
     "CFD_wiki/wiki/synthesis/geothermal-separator-design-and-cfd-patterns.md",
-    "CFD_wiki/wiki/synthesis/fluent-separator-efficiency-methods.md",
     "tmp/pdfs/phase07b-meeting/contact-0.png",
     "Project/Poster/poster-sections/poster mesh assets/mesh60k-inlet-section.png",
     "Project/Poster/poster-sections/poster mesh assets/mesh342k-inlet-section.png",
     "Project/Poster/poster-sections/poster mesh assets/F4-26.81-2.5pct-N16000-inlet-liquid-volume-fraction-range-0-1.png",
     "Project/Poster/poster-sections/poster mesh assets/F4-26.81-2.5pct-N16000-inlet-liquid-volume-fraction-range-0-0.5.png",
-    "Project/Poster/poster-sections/poster mesh assets/F2-26.81-N10000-inlet-liquid-volume-fraction-range-0-1.png",
-    "Project/Poster/poster-sections/poster mesh assets/F2-26.81-N10000-inlet-liquid-volume-fraction-range-0-0.5.png",
-    "Project/Poster/poster-sections/poster mesh assets/F1-26.81-N10000-side-liquid-volume-fraction.png"
+    "Project/Poster/poster-sections/poster mesh assets/F2-26.81-N10000-inlet-liquid-volume-fraction-range-0-1.png"
   ]
 }
